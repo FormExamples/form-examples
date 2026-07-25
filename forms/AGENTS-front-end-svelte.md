@@ -4,11 +4,11 @@ Conventions for every form's **consolidated** `front-end-with-svelte/`
 subproject — a single SvelteKit app that serves both the input form (wizard)
 and the dashboard from **RESTful, resource-oriented routes**, sharing one
 scoring engine (`src/lib/engine/`) and UI component set
-(`src/lib/components/ui/`). This consolidated single-app layout is the **gold
-standard**. Legacy forms may still have split `front-end-form-with-svelte/` +
-`front-end-dashboard-with-svelte/` directories, or the older flat
-`+page.svelte` (wizard) / `dashboard/+page.svelte` layout; migrate them to the
-RESTful routes below when touched.
+(`src/lib/components/ui/`). This consolidated single-app layout with RESTful,
+slug-nested routes is the **only** layout in the monorepo — the legacy split
+`front-end-form-with-svelte/` + `front-end-dashboard-with-svelte/` directories
+and the older flat `+page.svelte` (wizard) / `dashboard/+page.svelte` layout no
+longer exist anywhere; every form was migrated to the routes below.
 
 ## Routing (RESTful, gold standard)
 
@@ -397,9 +397,10 @@ The canonical consolidated reference is:
   at `src/routes/cardiology-response/cardiology-responses/[id]/+page.svelte`, one shared scoring
   engine and UI component set.
 
-Legacy split references (`front-end-form-with-svelte/` +
-`front-end-dashboard-with-svelte/`) remain in older forms such as
-`forms/pre-operative-assessment-by-clinician/` until consolidated.
+The legacy split layout (`front-end-form-with-svelte/` +
+`front-end-dashboard-with-svelte/`) no longer exists anywhere in the
+monorepo — every form, including `forms/pre-operative-assessment-by-clinician/`,
+is on the consolidated RESTful-route layout.
 `bin/lily-svelte-refactor` propagates the Lily class contract across forms.
 
 ## 10. Upstream pin and drift detection

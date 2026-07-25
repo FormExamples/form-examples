@@ -101,10 +101,12 @@ divergence.
 | `README.md` → `index.md`                        | author (symlink)    | no         |
 | `AGENTS.md`                                     | author              | no         |
 | `CLAUDE.md`                                     | author              | no         |
-| `spec/index.md`                                 | author              | no         |
+| `spec/index.md`                                 | author              | no (scaffolded once by `bin/generate-spec.py`) |
 | `plan.md`                                       | author              | no         |
 | `tasks.md`                                      | author              | no         |
+| `CHANGELOG.md`                                  | author (scaffolded by `bin/generate-changelog-and-examples.py`) | partial |
 | `doc/`                                          | author              | no         |
+| `examples/`                                     | author (scaffolded by `bin/generate-changelog-and-examples.py`) | partial |
 | `sql/`                                          | author              | no (source of truth) |
 | `xml/`                                          | `bin/xml-representations/generate-xml-representations.py` | **yes** |
 | `fhir/r5/`                                      | `bin/fhir-r5/generate-fhir-r5-representations.py` | **yes** |
@@ -195,14 +197,31 @@ stylesheet can serve both stacks.
 
 ## 9. Verification
 
-System-level acceptance:
+System-level acceptance (see [`AGENTS.md`](AGENTS.md) `## Verify` for the
+authoritative, up-to-date gate list):
 
 ```sh
 bin/test                              # validates every form's structure
-bin/lily-html-refactor --check --all  # Lily HTML contract drift
-bin/lily-sync --check                 # Lily HTML spec-snapshot drift
-bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift
-bin/generate-spec.py --check          # per-form spec.md drift
+bin/test-sql-apply                    # SQL apply gate: every form's migrations on a fresh scratch DB
+bin/es-modules-refactor --check --all # ES-modules front-end drift detector
+bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
+bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
+bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
+bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
+bin/svelte-locale-select-refactor --check      # Svelte LocaleSelect drift detector
+bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector
+bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector
+bin/svelte-helpers-chooser-rename --check      # Svelte *-select/share-button -> *-chooser rename drift detector
+bin/html-helpers-chooser-rename --check        # HTML text-size-select/share-button -> *-chooser rename drift detector
+bin/generate-llms-txt.py --check      # per-form llms.txt drift detector
+bin/generate-spec.py --check          # per-form spec/ presence check (specs are hand-maintained)
+bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
+bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
+bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
+bin/generate-forms-tsv.py --check     # forms.tsv drift detector
+bin/generate-tools-doc.py --check     # docs/tools.md drift detector
+bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
+bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```
 
 Per-form acceptance:
@@ -233,11 +252,17 @@ cargo build && cargo test && cargo clippy  # Loco/Rust
    ```
 
 4. **Update front-ends and backend** to satisfy the new spec.
-5. **Update `forms/<slug>/tasks.md`** to reflect the work done.
-6. **Verify** with `bin/test-form <slug>` and `bin/test`.
+5. **Regenerate `CHANGELOG.md` and `examples/`** with
+   `bin/generate-changelog-and-examples.py <slug>` and `llms.txt` with
+   `bin/generate-llms-txt.py <slug>`.
+6. **Update `forms/<slug>/tasks.md`** to reflect the work done.
+7. **Verify** with `bin/test-form <slug>` and `bin/test`.
 
 ## 11. Where to look next
 
+- Guides (architecture, data model, generator pipeline, scoring engines,
+  Lily, back end, verification, i18n, tools reference) and tutorials:
+  [`docs/index.md`](docs/index.md), [`docs/tutorials/`](docs/tutorials).
 - Per-stack documentation: [`AGENTS/`](AGENTS/) (one `.md` per stack).
 - Lily Design System HTML contract: [`forms/AGENTS-front-end-html.md`](forms/AGENTS-front-end-html.md).
 - Lily Design System Svelte contract: [`forms/AGENTS-front-end-svelte.md`](forms/AGENTS-front-end-svelte.md).

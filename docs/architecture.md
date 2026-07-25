@@ -6,7 +6,7 @@ is the map you read first.
 
 ## The thesis: one shared design across many domains
 
-The repo is a monorepo of **286 medical forms** (`forms/<slug>/`, counted by
+The repo is a monorepo of **347 medical forms** (`forms/<slug>/`, counted by
 [`forms.tsv`](../forms.tsv)). Each form is a different clinical domain — an
 Apgar score, a stroke assessment, a cardiology referral — but every form is
 built from the **same shape**. Learn one form and you can navigate all of them:

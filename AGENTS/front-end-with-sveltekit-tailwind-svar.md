@@ -122,7 +122,8 @@ per Lily class:
   ampersands, or parentheses in filename).
 - UI components in `src/lib/components/ui/`.
 - Pure scoring engine — no side effects, no network calls, no `$effect`.
-- LocalStorage persistence key: `<slug>.front-end-form-with-svelte.v1`.
+- LocalStorage persistence key: `<slug>.front-end-with-svelte.v1` (consolidated
+  layout; the legacy split layout used `<slug>.front-end-form-with-svelte.v1`).
 
 ## Commands
 

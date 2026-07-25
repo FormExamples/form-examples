@@ -60,11 +60,11 @@ cat forms/lily-svelte-version.md
 
 Lily is headless, so a theme is just the set of design tokens the app resolves
 the Lily classes to. In the Svelte apps the theme lives with the component set
-and the `ThemeSelect` control:
+and the `ThemeChooser` control:
 
 ```sh
 ls forms/cardiology-request/front-end-with-svelte/src/lib/config/themes.ts
-ls forms/cardiology-request/front-end-with-svelte/src/lib/components/ui/ThemeSelect.svelte
+ls forms/cardiology-request/front-end-with-svelte/src/lib/components/ui/ThemeChooser.svelte
 ```
 
 To re-theme, you change the token values — never the Lily class names, because

@@ -2,11 +2,13 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-46 tools.
+59 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
 - [`bin/create-form`](#create-form)
+- [`bin/es-modules-decomment`](#es-modules-decomment)
+- [`bin/es-modules-refactor`](#es-modules-refactor)
 - [`bin/fill-full-stack-stubs.py`](#fill-full-stack-stubspy)
 - [`bin/forms-as-kebab-case`](#forms-as-kebab-case)
 - [`bin/forms-as-pascal-case`](#forms-as-pascal-case)
@@ -18,16 +20,27 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/generate-llms-txt.py`](#generate-llms-txtpy)
 - [`bin/generate-spec.py`](#generate-specpy)
 - [`bin/generate-tools-doc.py`](#generate-tools-docpy)
+- [`bin/html-helpers-chooser-rename`](#html-helpers-chooser-rename)
+- [`bin/html-share-button-refactor`](#html-share-button-refactor)
+- [`bin/html-text-size-select-refactor`](#html-text-size-select-refactor)
+- [`bin/html-theme-locale-select-refactor`](#html-theme-locale-select-refactor)
 - [`bin/lily-html-refactor`](#lily-html-refactor)
 - [`bin/lily-svelte-refactor`](#lily-svelte-refactor)
 - [`bin/lily-svelte-status`](#lily-svelte-status)
 - [`bin/lily-svelte-sync`](#lily-svelte-sync)
+- [`bin/lily-svelte-theme-locale-select-refactor`](#lily-svelte-theme-locale-select-refactor)
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/loco-config-refactor`](#loco-config-refactor)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/normalize`](#normalize)
+- [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
 - [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
+- [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
+- [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
+- [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
+- [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
+- [`bin/svelte-text-size-select-refactor`](#svelte-text-size-select-refactor)
 - [`bin/sync-from-skel-to-forms`](#sync-from-skel-to-forms)
 - [`bin/test`](#test)
 - [`bin/test-e2e`](#test-e2e)
@@ -69,6 +82,62 @@ consolidate-html <slug> : merge legacy split HTML front-ends
 <h2 id="create-form"><code>bin/create-form</code></h2>
 
 _No header documentation._
+
+<h2 id="es-modules-decomment"><code>bin/es-modules-decomment</code></h2>
+
+```text
+One-shot cleanup (already applied): remove the now-stale IIFE / namespace /
+classic-script comments left behind by the ES-module conversion (see
+spec/es-modules.md) — "Wrapped in an IIFE; published via window.X", the
+"Sibling files loaded as plain <script> tags …" preambles, and the "loaded as
+a classic <script> … opened directly via file://" namespace-guard blocks.
+
+Operates only on `//` line-comment blocks; JSDoc, code, and clean comment
+paragraphs are left byte-identical (every changed line is a comment or blank).
+Minimal diff: deletes fully-stale paragraphs and single lines, truncates
+trailing stale sentences, and collapses orphaned blank lines. Idempotent — a
+re-run over the already-cleaned tree changes nothing.
+
+Usage: bin/es-modules-decomment [--apply] [file ...]   (default: dry-run)
+```
+
+<h2 id="es-modules-refactor"><code>bin/es-modules-refactor</code></h2>
+
+```text
+bin/es-modules-refactor — convert a form's `front-end-with-html/`
+JavaScript from the classic `window.<Namespace>` global-sharing pattern to
+native ES modules (`import` / `export` + `<script type="module">`).
+
+See spec/es-modules.md for the decision, the source pattern, and the target
+pattern. In short, each `js/*.js` file used to be an IIFE that published its
+public symbols onto a per-surface `window.<Namespace>` object and consumed its
+dependencies back off it, with the dependency graph encoded in the order of
+classic `<script>` tags in the HTML. This tool:
+
+  * drops the IIFE wrapper and `'use strict'` (modules are strict + scoped);
+  * removes the namespace plumbing (`window.NS = window.NS || {}`,
+    `const NS = window.NS`, publish lines, destructure-consume lines);
+  * emits a trailing `export { … }` for each file's published symbols;
+  * emits top-of-file `import { … } from './file.js'` for each consumed
+    symbol, resolved through a per-form symbol -> file map;
+  * rewrites `index.html` / `dashboard.html` to load a single module entry
+    point (plus any standalone utility such as `table-export.js`);
+  * preserves genuine `window.*` assignments that are not namespace plumbing
+    (e.g. an entry exposing `window.gradeObjective` for the smoke test).
+
+The transform is conservative: if a form uses a namespace idiom the tool does
+not recognise, it ABORTS that whole form (leaves every file untouched) and
+reports it, so a form is never left half-converted.
+
+Usage:
+  bin/es-modules-refactor <slug>...        # named forms
+  bin/es-modules-refactor --all            # every form under forms/
+  bin/es-modules-refactor --dry-run <slug> # show what would change
+  bin/es-modules-refactor --check --all    # CI drift check (non-zero on drift)
+
+Idempotent: a form already on ES modules (no namespace plumbing left) is a
+no-op. --check implies --dry-run and exits non-zero if any form would change.
+```
 
 <h2 id="fill-full-stack-stubspy"><code>bin/fill-full-stack-stubs.py</code></h2>
 
@@ -225,6 +294,164 @@ Usage:
   bin/generate-tools-doc.py --check  # exit non-zero if docs/tools.md is stale
 ```
 
+<h2 id="html-helpers-chooser-rename"><code>bin/html-helpers-chooser-rename</code></h2>
+
+```text
+bin/html-helpers-chooser-rename -- rename the two HTML-side controls that
+mirror the Lily Svelte helpers' naming: text-size-select -> text-size-chooser,
+share-button -> share-chooser (dropping the old "-trigger" class in favour of
+"-button", matching the upstream ShareChooser rename).
+
+#theme-select / #locale-select are deliberately left untouched: those HTML
+controls reuse the *catalog* Lily `.theme-select` / `.theme-select-option`
+classes (a different, unrelated component family that the upstream helpers
+rename explicitly did NOT touch), not the renamed helpers package.
+
+What changes per form (front-end-with-html/):
+  - index.html, dashboard.html -> every `text-size-select` / `share-button`
+    substring (ids, classes, aria-controls, comments) renamed
+  - css/style.css, css/dashboard.css -> same substring rename
+  - js/text-size-select.js -> renamed to js/text-size-chooser.js (content
+    substring-renamed too)
+  - js/share-button.js -> renamed to js/share-chooser.js (content
+    substring-renamed too)
+
+Usage:
+  bin/html-helpers-chooser-rename --check   # CI drift check (no writes)
+  bin/html-helpers-chooser-rename --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="html-share-button-refactor"><code>bin/html-share-button-refactor</code></h2>
+
+```text
+bin/html-share-button-refactor -- add a fourth header control, a share
+button, to every form's front-end-with-html/ (index.html + dashboard.html),
+alongside locale-select, theme-select, and text-size-select.
+
+Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-share-button
+(see bin/svelte-share-button-refactor for the Svelte-side rollout and its
+rationale for offering copy-link only, no social-network targets), adapted to
+this repo's vanilla-JS HTML convention: a button that tries the native Web
+Share API first, falling back to a small one-item list ("Copy link").
+
+What changes per form (front-end-with-html/):
+  - js/share-button.js -> new vanilla-JS module (vendored contract; no
+    app-specific logic beyond the page's own title, read from <title>)
+  - css/style.css, css/dashboard.css -> appends the `.share-button` baseline
+    CSS once (same class hooks/visual language as the Svelte component, so
+    both stacks look identical)
+  - index.html, dashboard.html -> inserts a `.share-button` control right
+    after the existing #text-size-select </select>, and a
+    `<script type="module" src="js/share-button.js">` tag alongside the
+    existing theme-select.js / locale-select.js / text-size-select.js tags
+
+Usage:
+  bin/html-share-button-refactor --check   # CI drift check (no writes)
+  bin/html-share-button-refactor --apply   # write changes
+
+Only touches forms whose header already has #text-size-select (the standard
+shape produced by bin/html-text-size-select-refactor). Forms without one are
+skipped and reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="html-text-size-select-refactor"><code>bin/html-text-size-select-refactor</code></h2>
+
+```text
+bin/html-text-size-select-refactor -- add a third header control, text-size-select,
+to every form's front-end-with-html/ (index.html + dashboard.html), alongside the
+existing locale-select and theme-select.
+
+Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-select
+(see bin/svelte-text-size-select-refactor for the Svelte-side rollout), adapted to
+this repo's HTML convention: a native <select class="theme-select"> (reusing the
+existing Lily theme-select styling, matching #locale-select/#theme-select), setting
+`data-text-size` on <html> and persisting to localStorage.
+
+What changes per form (front-end-with-html/):
+  - js/text-size-select.js -> new vanilla-JS module (vendored contract; slug-
+    namespaced localStorage key, mirrors js/theme-select.js / js/locale-select.js)
+  - css/style.css, css/dashboard.css -> appends the `[data-text-size="..."]`
+    font-size mapping once (no new select styling needed -- .theme-select /
+    .theme-select-option are reused verbatim)
+  - index.html, dashboard.html -> inserts a `#text-size-select` <label>+<select>
+    right after the existing #theme-select </select>, and a
+    `<script type="module" src="js/text-size-select.js">` tag alongside the
+    existing theme-select.js / locale-select.js tags
+
+Usage:
+  bin/html-text-size-select-refactor --check   # CI drift check (no writes)
+  bin/html-text-size-select-refactor --apply   # write changes
+
+Only touches forms whose header has a `#theme-select` control (the standard
+shape produced by bin/html-theme-locale-select-refactor). Forms without one
+(the bespoke THEME_COLLISION_SLUGS pages, locale-select only) are skipped and
+reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="html-theme-locale-select-refactor"><code>bin/html-theme-locale-select-refactor</code></h2>
+
+```text
+bin/html-theme-locale-select-refactor — build multi-theme CSS
+infrastructure and add theme-select + locale-select controls to every
+form's `front-end-with-html/` header (index.html + dashboard.html).
+
+front-end-with-html/ previously shipped a single self-contained
+css/style.css (own hardcoded design tokens) with no theme-switching at
+all. This tool:
+
+  1. Vendors the full Lily theme CSS catalogue (~45 standalone theme
+     stylesheets, each inlining all Lily component CSS) from the pinned
+     Lily checkout into css/themes/<name>.css.
+  2. Aliases each form's own css/style.css and css/dashboard.css design
+     tokens (--color-bg, --color-primary, etc.) onto the swappable
+     theme's tokens (--color-base-100/200/300/content, --color-primary,
+     --color-error, --color-warning, --color-success) — the same
+     mapping front-end-with-svelte's app.css already uses — so switching
+     #theme-select re-skins the whole page, not just the new controls.
+     --color-primary-dark has no Lily equivalent and stays static.
+  3. Inserts a swappable <link id="theme-stylesheet"> plus a small
+     blocking inline FOUC-prevention script into <head>.
+  4. Inserts a `.page-header-controls` block (locale-select then
+     theme-select, before any existing header content) and two new
+     `js/theme-select.js` / `js/locale-select.js` ES modules.
+
+Both controls reuse the `theme-select`/`theme-select-option` Lily
+classes (matching the front-end-with-svelte LocaleSelect convention —
+see bin/svelte-locale-select-refactor). Presentation-only: locale-select
+sets <html lang> and persists the choice; no message catalogue is wired
+up — see docs/i18n.md for the deferred full-i18n rollout.
+
+Usage:
+  bin/html-theme-locale-select-refactor --check   # CI drift check (no writes)
+  bin/html-theme-locale-select-refactor --apply   # write changes
+  bin/html-theme-locale-select-refactor --lily-dir PATH --apply
+
+Skips forms with no css/style.css (a handful of stub forms with no
+front-end-with-html styling at all yet).
+
+Permanently excludes THEME_COLLISION_SLUGS (see below): bespoke pages
+whose own CSS defines classes that collide with real Lily component
+names (`.card`, `.container`, `.panel`, `.progress`, `.select`, …) with
+different HTML structure. Loading the swappable Lily theme there doesn't
+just no-op — the theme's rules for those class names apply to the page's
+unrelated elements (e.g. `--lily-text` leaking onto a `.card` that never
+declared its own text colour), which can make body text unreadable.
+These forms keep only the locale-select control, hand-styled locally, and
+never get the swappable `#theme-stylesheet` link. Do not "fix" this by
+re-running the tool on them — the exclusion is load-bearing, verified by
+rendering in a browser (see forms/*/CLAUDE.md history around
+bin/html-theme-locale-select-refactor's addition).
+
+Idempotent: re-running on an already-refactored form makes no further
+changes.
+```
+
 <h2 id="lily-html-refactor"><code>bin/lily-html-refactor</code></h2>
 
 ```text
@@ -340,6 +567,47 @@ Usage:
 Idempotent: re-running with no upstream change is a no-op.
 ```
 
+<h2 id="lily-svelte-theme-locale-select-refactor"><code>bin/lily-svelte-theme-locale-select-refactor</code></h2>
+
+```text
+bin/lily-svelte-theme-locale-select-refactor -- migrate every form's
+Svelte ThemeSelect/LocaleSelect from the old native-<select> pattern to the
+new headless button+listbox pattern (lily-design-system-svelte-helpers'
+lily-design-system-svelte-theme-select / -locale-select, vendored as a
+contract -- see forms/AGENTS-front-end-svelte.md and
+forms/lily-svelte-helpers-version.md).
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/ThemeSelect.svelte   -> rewritten (button + listbox)
+  - src/lib/components/ui/LocaleSelect.svelte  -> rewritten (button + listbox)
+  - src/lib/components/ui/ThemeSelectOption.svelte  -> deleted (no longer used)
+  - src/lib/components/ui/LocaleSelectOption.svelte -> deleted (no longer used)
+  - src/routes/<slug>/+layout.svelte -> ThemeSelect/LocaleSelect now manage
+    their own <link>/data-theme/lang/dir/localStorage; the manual $state +
+    $derived + $effect + <link> boilerplate is removed, and the components
+    are called with themes/themesUrl/themeLabels (resp. locales/localeLabels)
+    instead of iterating *Option children.
+  - src/app.css -> baseline CSS for .lily-theme-select-*/.lily-locale-select-*
+    appended once (headless: no default styling). Prefixed `lily-` because
+    the vendored theme catalogue (static/themes/*.css) already claims the
+    bare `.theme-select` / `.theme-select-button` / `.theme-select-option`
+    class names for an unrelated picker-chip / native-select look -- reusing
+    them verbatim (the literal upstream class hooks) visually breaks the
+    control.
+
+Usage:
+  bin/lily-svelte-theme-locale-select-refactor --check   # CI drift check (no writes)
+  bin/lily-svelte-theme-locale-select-refactor --apply   # write changes
+
+Only touches forms whose +layout.svelte matches the standard shape produced
+by the earlier bin/svelte-locale-select-refactor rollout. Forms with a
+bespoke locale integration (currently just
+medical-language-speaking-assessment-for-cymraeg, which drives LocaleSelect
+from a shared i18n store) are skipped and reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
 <h2 id="lily-sync"><code>bin/lily-sync</code></h2>
 
 ```text
@@ -449,6 +717,58 @@ Idempotent. Safe to re-run.
 
 _No header documentation._
 
+<h2 id="page-header-layout-refactor"><code>bin/page-header-layout-refactor</code></h2>
+
+```text
+bin/page-header-layout-refactor -- re-layout each HTML front-end's
+page header so the title sits on the left and the nav link(s) + locale/theme
+select controls sit on the right, instead of the controls row stacked above
+the title.
+
+What changes per form (front-end-with-html/):
+  index.html, dashboard.html:
+    Before:
+      <div class="page-header-inner">
+      <div class="page-header-controls no-print">
+        ...locale-select / theme-select...
+      </div>
+        <h1>Title</h1>
+        <p class="subtitle">Description</p>
+        <p class="subtitle"><a href="...">Nav link -></a></p>   [optional]
+
+    After:
+      <div class="page-header-inner">
+        <div class="page-header-bar">
+          <div class="page-header-title">
+            <h1>Title</h1>
+            <p class="subtitle">Description</p>
+          </div>
+          <div class="page-header-controls no-print">
+            <p class="subtitle page-header-link"><a href="...">Nav link -></a></p>   [optional]
+            ...locale-select / theme-select...
+          </div>
+        </div>
+
+    Whatever follows (progress/step-list on index.html; nothing on
+    dashboard.html) is left untouched.
+
+  css/style.css, css/dashboard.css:
+    Appends a `.page-header-bar` / `.page-header-title` / `.page-header-link`
+    rule block once, if not already present.
+
+Only touches forms whose header matches the standard shape (exactly one
+<h1>, exactly one plain <p class="subtitle">, at most one link
+<p class="subtitle"><a ...>). Forms with a bespoke header (no
+`<header class="page-header">`, e.g. the privacy-notice / tracker pages
+predating the wizard template) are skipped and reported for hand migration.
+
+Usage:
+  bin/page-header-layout-refactor --check   # CI drift check (no writes)
+  bin/page-header-layout-refactor --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
 <h2 id="route-loco-layout"><code>bin/route-loco-layout</code></h2>
 
 ```text
@@ -467,6 +787,183 @@ route-svelte-layout <slug> : nest a form's SvelteKit routes under
  front-end-with-svelte/src/routes/<form-kebab-case>/  and prefix internal
  absolute route links (href / goto / redirect, plus the "/" home link) with
  /<slug>. /api/ fetch paths are left untouched. Idempotent (skips if routed).
+```
+
+<h2 id="svelte-helpers-chooser-rename"><code>bin/svelte-helpers-chooser-rename</code></h2>
+
+```text
+bin/svelte-helpers-chooser-rename -- rename the four Lily Svelte helper
+controls from their old *-select / share-button names to their new
+*-chooser names, matching the upstream rename
+(lily-design-system-svelte-helpers commit "Rename the helpers from
+*-select / *-button to *-chooser").
+
+  ThemeSelect.svelte     -> ThemeChooser.svelte     (.theme-chooser*, no more lily- prefix)
+  LocaleSelect.svelte    -> LocaleChooser.svelte    (.locale-chooser*, no more lily- prefix)
+  TextSizeSelect.svelte  -> TextSizeChooser.svelte  (.text-size-chooser*)
+  ShareButton.svelte     -> ShareChooser.svelte     (.share-chooser*; share-button-trigger
+                                                      -> share-chooser-button, dropping the
+                                                      old share-button naming exception)
+
+Reads the fresh component source directly from the pinned upstream checkout
+(~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-helpers/)
+at --apply time, the same way bin/lily-svelte-sync does for the unrelated
+svelte-headless family, converting its 4-space indent to this repo's tab
+convention.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/{Old}.svelte  -> deleted
+  - src/lib/components/ui/{New}Chooser.svelte -> new (fresh vendored copy)
+  - src/app.css -> renames the old class family to the new one (regex,
+    in place -- keeps whatever else is around it)
+  - src/routes/<slug>/+layout.svelte -> renames the import + component tag
+    (props are unchanged -- none of them said "select" literally)
+
+Usage:
+  bin/svelte-helpers-chooser-rename --check   # CI drift check (no writes)
+  bin/svelte-helpers-chooser-rename --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-locale-select-refactor"><code>bin/svelte-locale-select-refactor</code></h2>
+
+```text
+bin/svelte-locale-select-refactor — add a hand-authored LocaleSelect
+control (Lily headless mirror, before ThemeSelect) to every form's
+`front-end-with-svelte/` root layout.
+
+Lily is consumed as a contract, not a runtime dependency (see
+forms/AGENTS-front-end-svelte.md §2), so this mirrors the ThemeSelect
+convention exactly: a local LocaleSelect.svelte/LocaleSelectOption.svelte
+pair reusing the `theme-select`/`theme-select-option` Lily classes, plus a
+`src/lib/config/locales.ts` with a fixed four-locale catalogue (en-GB,
+en-US, cy-GB, de-DE). Presentation-only: it sets `<html lang>` and
+persists the choice, matching the front-end-with-svelte theme mirror
+effect. No message catalogue is wired up — see docs/i18n.md for the
+deferred full-i18n rollout.
+
+Usage:
+  bin/svelte-locale-select-refactor --check   # CI drift check (no writes)
+  bin/svelte-locale-select-refactor --apply   # write changes
+
+Skips forms whose root layout has no ThemeSelect anchor yet (the
+`*-test-result` family predates the Lily theming rollout) and forms that
+already have a LocaleSelect (the medical-language-speaking-assessment-
+for-cymraeg i18n pilot, which ships its own translated LocaleSelect).
+
+Idempotent: re-running on an already-refactored form makes no further
+changes.
+```
+
+<h2 id="svelte-share-button-refactor"><code>bin/svelte-share-button-refactor</code></h2>
+
+```text
+bin/svelte-share-button-refactor -- add a fourth header control,
+ShareButton, to every form's Svelte front-end, alongside
+LocaleSelect/ThemeSelect/TextSizeSelect.
+
+Mirrors lily-design-system-svelte-helpers/lily-design-system-svelte-share-button:
+a single-glyph icon button (U+21AA RIGHTWARDS ARROW WITH HOOK, "↪") that opens
+the native OS share sheet where available, and otherwise a small list —
+here, just "Copy link" to the clipboard.
+
+Editorial choice for this monorepo: `targets` stays empty. This package
+ships no social-network URLs on purpose (see its own docs: "which networks
+belong in your product is an editorial and privacy decision"), and a
+341-form medical/clinical monorepo covering everything from patient-data
+wizards to public calculators has no single defensible answer, so
+copy-link is the only destination offered everywhere.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/ShareButton.svelte -> new (vendored contract
+    copy of lily-design-system-svelte-share-button; no app-specific logic)
+  - src/app.css -> appends the `.share-button` baseline CSS once
+  - src/routes/<slug>/+layout.svelte -> imports ShareButton, renders
+    <ShareButton .../> immediately after <TextSizeSelect .../> in the
+    header controls row
+
+Usage:
+  bin/svelte-share-button-refactor --check   # CI drift check (no writes)
+  bin/svelte-share-button-refactor --apply   # write changes
+
+Only touches forms whose +layout.svelte ends its <TextSizeSelect> invocation
+with the standard `storageKey={TEXT_SIZE_STORAGE_KEY}` / `/>` shape produced
+by bin/svelte-text-size-select-refactor. Forms without it are skipped and
+reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-test-result-theming-backport"><code>bin/svelte-test-result-theming-backport</code></h2>
+
+```text
+bin/svelte-test-result-theming-backport — backport the gold-standard
+Lily theme system to the `*-test-result` family's `front-end-with-svelte/`,
+which predates the theming rollout (plain hardcoded Tailwind tokens, no
+`static/themes/`, no `ThemeSelect`).
+
+One-shot, narrowly scoped migration for exactly the 37 forms whose root
+layout still has the legacy `bg-gray-50` nav shell (verified byte-identical
+across all 37 before writing this). For each form:
+
+  1. Replaces app.css's `@theme` + first `:root` block (hardcoded hex
+     tokens) with the gold-standard oklch Lily token set + alias block —
+     the same mapping used everywhere else in the repo (see
+     bin/html-theme-locale-select-refactor). The rest of app.css (component
+     CSS) is untouched.
+  2. Vendors `static/themes/*.css` from the pinned Lily checkout.
+  3. Adds `ThemeSelect.svelte` / `ThemeSelectOption.svelte` (byte-identical
+     to every other form) and `src/lib/config/themes.ts`.
+  4. Re-skins the nav shell (`bg-gray-50` → `bg-base-200 text-base-content`,
+     etc.) and adds the theme state/effect + swappable `<link>` + a
+     `ThemeSelect` control — bringing the layout to the exact gold-standard
+     shape so `bin/svelte-locale-select-refactor` picks it up afterwards.
+
+Usage:
+  bin/svelte-test-result-theming-backport --check   # CI drift check (no writes)
+  bin/svelte-test-result-theming-backport --apply   # write changes
+  bin/svelte-test-result-theming-backport --lily-dir PATH --apply
+
+Idempotent: re-running on an already-migrated form makes no further changes.
+Run `bin/svelte-locale-select-refactor --apply` afterwards to add LocaleSelect.
+```
+
+<h2 id="svelte-text-size-select-refactor"><code>bin/svelte-text-size-select-refactor</code></h2>
+
+```text
+bin/svelte-text-size-select-refactor -- add the Lily
+lily-design-system-svelte-text-size-select headless control (a third
+header switcher, alongside LocaleSelect/ThemeSelect) to every form's
+Svelte front-end.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/TextSizeSelect.svelte  -> new (vendored contract
+    copy of lily-design-system-svelte-text-size-select; no app-specific
+    logic, byte-identical across forms)
+  - src/lib/config/text-sizes.ts -> new (TEXT_SIZE_OPTIONS, DEFAULT_TEXT_SIZE,
+    TEXT_SIZE_STORAGE_KEY, storage key namespaced per form slug)
+  - src/app.css -> appends the `:root[data-text-size="..."]` font-size
+    mapping and `.text-size-select` baseline CSS once (headless: no default
+    styling otherwise; no `lily-` prefix needed since the vendored theme
+    catalogue in static/themes/*.css does not define this class, unlike
+    theme-select/locale-select)
+  - src/routes/<slug>/+layout.svelte -> imports TextSizeSelect + the new
+    config, derives textSizeValues/textSizeLabels alongside the existing
+    themeValues/localeValues, and renders <TextSizeSelect .../> immediately
+    after <ThemeSelect .../> in the header controls row
+
+Usage:
+  bin/svelte-text-size-select-refactor --check   # CI drift check (no writes)
+  bin/svelte-text-size-select-refactor --apply   # write changes
+
+Only touches forms whose +layout.svelte ends its <ThemeSelect> invocation
+with the standard `storageKey={THEME_STORAGE_KEY}` / `/>` shape produced by
+the theme/locale-select rollout. Forms with a bespoke header (currently
+medical-language-speaking-assessment-for-cymraeg, which drives LocaleSelect
+from its own i18n store) are skipped and reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
 ```
 
 <h2 id="sync-from-skel-to-forms"><code>bin/sync-from-skel-to-forms</code></h2>

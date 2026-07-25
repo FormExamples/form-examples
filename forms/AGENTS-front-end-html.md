@@ -5,9 +5,10 @@ subproject — a single directory whose `index.html` is the single-page wizard
 and `dashboard.html` is the vetting dashboard, sharing one `css/` and `js/`
 (the scoring engine lives in `js/{types,rules,grader,flags}.js`; the wizard
 app in `js/form-app.js`, the dashboard app in `js/dashboard-app.js`). This
-consolidated single-directory layout is the **gold standard**. Legacy forms may
-still have split `front-end-form-with-html/` + `front-end-dashboard-with-html/`
-directories; consolidate them into `front-end-with-html/` when touched.
+consolidated single-directory layout is the **only** layout in the monorepo —
+all 347 forms were migrated from the legacy split
+`front-end-form-with-html/` + `front-end-dashboard-with-html/` layout by
+`bin/consolidate-front-end-html`; the split layout no longer exists anywhere.
 
 Companion docs: [`plan.md`](plan.md), [`tasks.md`](tasks.md).
 
@@ -29,7 +30,7 @@ Most components ship **zero JavaScript** (e.g., `text-input`, `step-list`,
 `step-list-item`, `field`, `button`, `error-summary`). A few interactive
 components (e.g., `dialog`, `tab-bar`) embed vanilla JS for keyboard
 behavior; when we need that behavior, we copy the JS into the form's
-`js/app.js` rather than loading the `.html` file at runtime.
+`js/form-app.js` rather than loading the `.html` file at runtime.
 
 **Consequence: there is nothing to install.** Our forms conform to Lily's
 class/attribute contract; we do not link to, bundle, or vendor Lily files
@@ -48,11 +49,11 @@ at runtime. This is consistent with the project-wide no-build constraint.
 - **Lily checkout location is `~/git/lilydesignsystem/lily-design-system/lily-design-system-html-headless/`.**
   Generators look there; if absent they fail with a clear error.
 - **Pinned commit recorded in [`lily-version.md`](lily-version.md).**
-  Currently `7a51013` (pinned 2026-05-24). Re-running `bin/lily-sync`
-  (a doc-snapshotting helper, not a runtime sync; planned, not yet
-  implemented) will refresh the pinned hash and copy the spec comments
-  into `doc/lily-spec/` for quick reference without needing the external
-  checkout.
+  See that file for the current pinned hash and pin date. Re-running
+  `bin/lily-sync` (a doc-snapshotting helper, not a runtime sync) refreshes
+  the pinned hash and copies the spec comments into `lily-spec/` for quick
+  reference without needing the external checkout; `bin/lily-sync --check`
+  is the drift detector.
 
 ## 3. Class vocabulary (Lily contract)
 
@@ -173,7 +174,6 @@ Filters above the table reuse `.text-input`, `.select`, and `.button`.
   the same `margin-left`/`margin-right: 4rem` on that selector, with any
   competing `max-width` removed.
 - `.skip-link` — top-of-page skip target
-- `.skip-link` — top-of-page skip target
 - `.empty-message` — empty-state copy inside a region
 
 ## 3a. Theming (Lily themes, gold standard)
@@ -282,7 +282,7 @@ Every `front-end-with-html/index.html` (the wizard) follows this skeleton:
       <progress class="progress" max="100" value="0"
                 aria-label="Form completion"></progress>
       <ol class="step-list" aria-label="{{Form Title}} steps"
-          data-current="0"><!-- step-list-items injected by app.js --></ol>
+          data-current="0"><!-- step-list-items injected by form-app.js --></ol>
     </div>
   </header>
 
@@ -291,7 +291,7 @@ Every `front-end-with-html/index.html` (the wizard) follows this skeleton:
           onsubmit="return false;" aria-label="{{Form Title}}">
       <div class="error-summary" role="alert" aria-label="Errors"
            hidden><!-- populated on validation failure --></div>
-      <div id="form-sections"><!-- fieldsets injected by app.js --></div>
+      <div id="form-sections"><!-- fieldsets injected by form-app.js --></div>
       <div class="button-group">
         <button class="button" type="button" id="prev"
                 data-variant="secondary">Previous</button>
@@ -313,7 +313,7 @@ Every `front-end-with-html/index.html` (the wizard) follows this skeleton:
 
   <!-- One module entry point; it imports types.js, the rules/grader/
        flagged-issues modules, etc. through its own import graph. -->
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/form-app.js"></script>
 </body>
 </html>
 ```
@@ -333,7 +333,7 @@ children, full width, per the page-width model in §3.
 ## 5. JavaScript conventions
 
 - Native **ES modules**: `<script type="module">` + `import` / `export`.
-  The HTML loads a single module entry point (`js/app.js` for the wizard,
+  The HTML loads a single module entry point (`js/form-app.js` for the wizard,
   `js/dashboard-app.js` for the dashboard); every other module is reached
   through that entry's import graph. No bundler. See
   [`spec/es-modules.md`](../spec/es-modules.md) for the full contract (and
@@ -345,8 +345,8 @@ children, full width, per the page-width model in §3.
   assignment for an inline handler or the smoke test is still fine.
 - Dependency order is expressed by the `import` graph, not `<script>` order:
   `types.js` → form-specific `*-rules.js` → `*-grader.js` →
-  `flagged-issues.js` → `app.js`.
-- `app.js` is responsible for:
+  `flagged-issues.js` → `form-app.js`.
+- `form-app.js` is responsible for:
   1. building `emptyAssessment()` and hydrating from localStorage,
   2. rendering each step as a `<fieldset class="fieldset">` containing
      Lily-shaped `.field` blocks,
@@ -368,7 +368,7 @@ Key pattern, unchanged from current convention:
 {form-slug}.front-end-with-html.v1
 ```
 
-Values are JSON-serialized form state. On load, app.js merges the stored
+Values are JSON-serialized form state. On load, form-app.js merges the stored
 value over a fresh `emptyAssessment()` so that adding new fields in
 future versions does not orphan existing drafts.
 
@@ -412,9 +412,10 @@ The canonical consolidated reference is:
 - `forms/cardiology-request/front-end-with-html/` — `index.html` wizard +
   `dashboard.html`, shared `css/` and `js/`, four-axis engine.
 
-Legacy split references (`front-end-form-with-html/` +
-`front-end-dashboard-with-html/`) remain in older forms such as
-`forms/pre-operative-assessment-by-clinician/` until consolidated.
+The legacy split layout (`front-end-form-with-html/` +
+`front-end-dashboard-with-html/`) no longer exists anywhere in the
+monorepo — every form, including `forms/pre-operative-assessment-by-clinician/`,
+is on the consolidated layout.
 
 ## 10. CI drift check
 

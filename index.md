@@ -8,7 +8,7 @@ engine, and generates a clinical report with flagged issues.
 
 ## Contents
 
-- **286** form project directories under `forms/<slug>/`.
+- **347** form project directories under `forms/<slug>/`.
 - PostgreSQL SQL migrations in Liquibase SQL format (source of truth for data shape).
 - XML + DTD representations per SQL entity (generated).
 - FHIR HL7 R5 JSON resources per SQL entity (generated).
@@ -25,7 +25,7 @@ or run `bin/forms-as-kebab-case`.
 ## Spec-driven development
 
 - [`spec.md`](spec.md) — system spec (this monorepo)
-- [`forms/<slug>/spec.md`](forms/AGENTS.md) — per-form domain spec
+- [`forms/<slug>/spec/index.md`](forms/AGENTS.md) — per-form domain spec
 
 Update the spec before changing code. See `spec.md` §10 for the workflow.
 
@@ -99,19 +99,19 @@ forms/<slug>/
   README.md -> index.md                            # Symlink for GitHub rendering
   AGENTS.md                                        # Agent instructions for this form
   CLAUDE.md                                        # Claude Code project instructions
-  spec.md                                          # Living domain spec
+  spec/                                             # Living domain spec directory (index.md + README symlink)
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
+  CHANGELOG.md                                     # Keep-a-Changelog 1.1.0 + SemVer per form
   doc/                                             # Documentation and references
+  examples/                                        # Filled-form JSON fixtures + FHIR R5 Bundle samples
   sql/                                  # PostgreSQL Liquibase migrations (source of truth)
-  xml-representations/                             # XML + DTD per SQL entity (generated)
-  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
+  xml/                                              # XML + DTD per SQL entity (generated)
+  fhir/r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
   protobuf/                                        # Protocol Buffers .proto schemas (generated)
   openapi/                                         # OpenAPI 3.1 .yaml specifications (generated)
-  front-end-form-with-html/                        # Patient questionnaire (HTML + Lily)
-  front-end-form-with-svelte/                      # Patient questionnaire (SvelteKit)
-  front-end-dashboard-with-html/                   # Dashboard (HTML)
-  front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
+  front-end-with-html/                             # Questionnaire + dashboard (HTML + Lily; index.html + dashboard.html)
+  front-end-with-svelte/                           # Questionnaire + dashboard (SvelteKit + Lily); RESTful routes
   back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco)
   back-end-with-loco-setup                         # Scaffold generator (executable script; generated)
 ```
@@ -173,8 +173,17 @@ See the per-stack agent docs:
 - `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — Loco setup script per form
 - `bin/lily-html-refactor` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
 - `bin/lily-sync` — snapshot Lily HTML component specs and pin the upstream commit
+- `bin/lily-svelte-refactor` — mechanical Lily Svelte class swaps; `--check` is the CI drift detector
 - `bin/lily-svelte-sync` — snapshot Lily Svelte component sources and pin the upstream commit
-- `bin/generate-spec.py` — generate per-form `spec.md` from `index.md`
+- `bin/es-modules-refactor` — convert HTML front-end JS to native ES modules; `--check` is the CI drift detector
+- `bin/loco-config-refactor` — Loco background-queue + observability conventions; `--check` is the CI drift detector
+- `bin/generate-spec.py` — scaffold per-form `spec/index.md` from `index.md`
+- `bin/generate-llms-txt.py` — generate per-form `llms.txt`; `--check` is the CI drift detector
+- `bin/generate-changelog-and-examples.py` — scaffold per-form `CHANGELOG.md` + `examples/`; `--check` is the CI drift detector
+- `bin/test-sql-apply` — apply every form's SQL migrations on a fresh scratch database
+- `bin/test-tools` — smoke-test every Lily-system tool's `--check`/`--counts`/`--help` modes
+
+See [`AGENTS.md`](AGENTS.md) `## Tools` and [`docs/tools.md`](docs/tools.md) for the full reference.
 
 ## Compliance
 
@@ -247,10 +256,21 @@ assets/i18n/de-DE/main.ftl
 
 ## Verify
 
+See [`AGENTS.md`](AGENTS.md) `## Verify` for the authoritative, up-to-date gate
+list. Core gates:
+
 ```sh
 bin/test                              # validate every form's structure
+bin/test-sql-apply                    # SQL apply gate on a fresh scratch DB
+bin/es-modules-refactor --check --all # ES-modules front-end drift detector
 bin/lily-html-refactor --check --all  # Lily HTML contract drift
 bin/lily-sync --check                 # Lily HTML spec-snapshot drift
+bin/lily-svelte-refactor --check --all # Lily Svelte contract drift
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift
-bin/generate-spec.py --check          # Per-form spec.md drift
+bin/generate-spec.py --check          # Per-form spec/ presence check
+bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift
+bin/generate-llms-txt.py --check      # Per-form llms.txt drift
+bin/loco-config-refactor --check --all # Loco queue + observability conventions
+bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
+bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```

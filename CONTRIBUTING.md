@@ -1,6 +1,6 @@
 # Contributing
 
-This is a spec-driven monorepo of 286 medical / administrative forms. Each form
+This is a spec-driven monorepo of 347 medical / administrative forms. Each form
 carries a full stack — SQL schema, generated representations (XML, FHIR R5,
 Protocol Buffers, OpenAPI), two front-ends (HTML and SvelteKit), and a Rust
 back-end (axum + Loco). The uniformity is the point: one shared design proven

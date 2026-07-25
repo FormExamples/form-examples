@@ -31,9 +31,13 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/test` — run all form validation tests
 - `bin/test-form <slug>` — test a single form by slug
 - `bin/test-sql-apply [<slug>…]` — apply every form's numbered SQL migrations in order to a fresh scratch Postgres database; the executable gate for `sql/` correctness
+- `bin/test-examples-conformance [<slug>…]` — check each form's `examples/assessment.json` against its `sql/` schema (every key names a real table/column; catches drift after a schema change)
+- `bin/test-e2e [--html] [--svelte] [--all|<slug>…]` — Playwright smoke + axe-core accessibility sweep over form front-ends
 - `bin/test-tools` — smoke-test every Lily-system tool's `--check` / `--counts` / `--help` modes
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
+- `bin/generate-forms-tsv.py [--check]` — generate `forms.tsv`, the case-conversion lookup table read by `bin/forms-as-kebab-case` and friends
+- `bin/generate-tools-doc.py [--check]` — generate `docs/tools.md` from every `bin/` tool's self-documenting header
 
 ### SQL
 
@@ -200,4 +204,8 @@ bin/generate-spec.py --check          # Per-form spec/ presence check (specs are
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
+bin/generate-forms-tsv.py --check     # forms.tsv drift detector
+bin/generate-tools-doc.py --check     # docs/tools.md drift detector
+bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
+bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```

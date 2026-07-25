@@ -21,7 +21,7 @@ Core: **Form**, **Fieldset**, **Field**, **Button**, **ErrorSummary**, **Panel**
 Inputs: **TextInput**, **NumberInput**, **DateInput**, **Select**,
 **TextAreaInput**, **RadioGroup** / **RadioInput**, **CheckboxGroup** /
 **CheckboxInput**, with **Hint** for help text. Feedback: **Alert**, **Badge**.
-Theming: **ThemeSelect**.
+Theming: **ThemeChooser**.
 
 Because the form must be a single continuous wizard (root
 [`AGENTS.md`](../AGENTS.md) "User interface"), these components render one
@@ -44,9 +44,9 @@ prefix. The refactor tools encode the exact contract; representative swaps:
 
 So a conformant HTML form uses classes like `form`, `fieldset`, `button`,
 `button-group`, `panel`, `alert`, `error-summary`, `progress`, `text-area-input`,
-and `select`. The reference HTML form is
-`forms/pre-operative-assessment-by-clinician`; the reference Svelte form is
-`forms/cardiology-request`.
+and `select`. The canonical consolidated reference is `forms/cardiology-request`
+for both stacks (see [`forms/AGENTS-front-end-html.md`](../forms/AGENTS-front-end-html.md)
+§9 and [`forms/AGENTS-front-end-svelte.md`](../forms/AGENTS-front-end-svelte.md) §9).
 
 ## Tooling
 
