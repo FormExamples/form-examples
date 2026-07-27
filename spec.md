@@ -218,6 +218,7 @@ bin/generate-spec.py --check          # per-form spec/ presence check (specs are
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
+bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance

@@ -1,0 +1,63 @@
+# cargo-deny policy for this Loco crate's dependency graph.
+# Identical across every form's back-end-with-loco/ crate — do not hand-tune
+# per crate; regenerate via bin/generate-loco-deny-config.py if the policy
+# changes.
+# Run: cargo deny --all-features check
+# Reference: https://embarkstudios.github.io/cargo-deny/
+
+[advisories]
+ignore = [
+    # quick-xml's unbounded-allocation and quadratic-runtime DoS advisories
+    # are only reachable by parsing attacker-controlled XML with an
+    # NsReader; this crate never parses untrusted XML. Pinned transitively
+    # via opendal -> loco-rs 0.16 and not fixable locally (0.38 -> 0.41 is a
+    # semver-incompatible bump opendal doesn't allow yet) -- revisit when
+    # loco-rs bumps its opendal pin.
+    { id = "RUSTSEC-2026-0195", reason = "transitive via loco-rs 0.16's opendal pin; not locally fixable; this crate does not parse untrusted XML" },
+    { id = "RUSTSEC-2026-0194", reason = "transitive via loco-rs 0.16's opendal pin; not locally fixable; this crate does not parse untrusted XML" },
+    # fxhash (via scraper, a loco-rs dep used for HTML templating helpers)
+    # and proc-macro-error2 (a build-time proc-macro dependency, not a
+    # runtime dependency) are both marked unmaintained upstream with no
+    # safe upgrade available yet -- transitive-only, not directly
+    # depended on by this crate.
+    { id = "RUSTSEC-2025-0057", reason = "unmaintained, no safe upgrade available; transitive via loco-rs's scraper dependency, not used directly" },
+    { id = "RUSTSEC-2026-0173", reason = "unmaintained, no safe upgrade available; transitive build-time proc-macro dependency, not used directly" },
+]
+
+[licenses]
+# Every permissive license actually present across the corpus's dependency
+# graph. Crates dual/triple-licensed under an SPDX OR expression (e.g.
+# self_cell's "Apache-2.0 OR GPL-2.0-only", r-efi's "MIT OR Apache-2.0 OR
+# LGPL-2.1-or-later") are satisfied via the permissive branch already listed
+# here — no copyleft license needs to be (or is) allowed.
+allow = [
+    "0BSD",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSL-1.0",
+    "CC0-1.0",
+    "CDLA-Permissive-2.0",
+    "ISC",
+    "MIT",
+    "MPL-2.0",
+    "Unicode-3.0",
+    "Unlicense",
+    "Zlib",
+]
+confidence-threshold = 0.8
+
+[licenses.private]
+# This crate and its migration/ sub-crate are `publish = false`; skip
+# license checking on unpublished workspace members.
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "allow"
+
+[sources]
+unknown-registry = "warn"
+unknown-git = "warn"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

@@ -48,6 +48,13 @@ Two more scaffold per-form derived docs from `index.md`/SQL:
 - `bin/generate-changelog-and-examples.py` — per-form `CHANGELOG.md` and
   `examples/` (a filled-form JSON fixture + a FHIR R5 Bundle).
 
+One more scaffolds the Loco crate's supply-chain policy:
+
+- `bin/generate-loco-deny-config.py` — per-crate `back-end-with-loco/deny.toml`
+  (cargo-deny license/advisory/bans/sources policy). Every crate shares the
+  same `loco-rs` pin, so the policy is byte-identical across the corpus; see
+  [Back end](back-end.md).
+
 ## Idempotence and the `--check` drift gates
 
 Every generator supports a `--check` mode. It regenerates into memory (or a temp
@@ -71,6 +78,7 @@ python3 bin/fhir-r5/generate-fhir-r5-representations.py
 python3 bin/protobuf/generate-protobuf-representations.py
 python3 bin/openapi/generate-openapi-representations.py
 python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+python3 bin/generate-loco-deny-config.py
 python3 bin/generate-changelog-and-examples.py
 ```
 
@@ -82,6 +90,7 @@ python3 bin/fhir-r5/generate-fhir-r5-representations.py --check
 python3 bin/protobuf/generate-protobuf-representations.py --check
 python3 bin/openapi/generate-openapi-representations.py --check
 python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check
+python3 bin/generate-loco-deny-config.py --check
 python3 bin/generate-changelog-and-examples.py --check
 python3 bin/generate-llms-txt.py --check
 ```

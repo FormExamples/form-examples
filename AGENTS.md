@@ -48,6 +48,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 ### Loco back-end refactor
 
 - `bin/loco-config-refactor [--check] [--dry-run] [--all|<slug>]` — mechanical Loco crate refactor for the canonical background-queue (Postgres only; drops `bg_sqlt` / `bg_redis`) and observability (OpenTelemetry + Prometheus `/metrics`) conventions; `--check` is the CI drift detector
+- `bin/generate-loco-deny-config.py [--check] [<slug>…]` — write each Loco crate's `deny.toml` (cargo-deny advisories/licenses/bans/sources policy); `--check` is the CI drift detector. Run `cargo deny --all-features check` from inside a crate to execute the policy
 
 ### Generators (SQL → derived representations)
 
@@ -204,8 +205,15 @@ bin/generate-spec.py --check          # Per-form spec/ presence check (specs are
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
+bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
+```
+
+Per-crate (each `forms/<slug>/back-end-with-loco/`, run in CI as part of the sharded Rust job):
+
+```sh
+cargo deny --all-features check       # supply-chain policy: advisories, licenses, bans, sources
 ```

@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-59 tools.
+60 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -18,6 +18,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/generate-changelog-and-examples.py`](#generate-changelog-and-examplespy)
 - [`bin/generate-forms-tsv.py`](#generate-forms-tsvpy)
 - [`bin/generate-llms-txt.py`](#generate-llms-txtpy)
+- [`bin/generate-loco-deny-config.py`](#generate-loco-deny-configpy)
 - [`bin/generate-spec.py`](#generate-specpy)
 - [`bin/generate-tools-doc.py`](#generate-tools-docpy)
 - [`bin/html-helpers-chooser-rename`](#html-helpers-chooser-rename)
@@ -246,6 +247,29 @@ Usage:
   bin/generate-llms-txt.py            # generate for every form
   bin/generate-llms-txt.py <slug> ... # generate only the named forms
   bin/generate-llms-txt.py --check    # exit non-zero if any llms.txt would change
+```
+
+<h2 id="generate-loco-deny-configpy"><code>bin/generate-loco-deny-config.py</code></h2>
+
+```text
+bin/generate-loco-deny-config.py — Write forms/<slug>/back-end-with-loco/deny.toml.
+
+Every Loco crate shares the same `loco-rs` 0.16 dependency pin and
+therefore (near enough) the same dependency graph, so one canonical
+cargo-deny policy — advisories/licenses/bans/sources — applies to all of
+them verbatim. This script writes that byte-identical policy into every
+form's `back-end-with-loco/deny.toml`.
+
+Generated artefact: do not hand-edit. Idempotent — re-running with no
+upstream change is a no-op (same bytes). If a crate's dependency graph
+ever needs a crate-specific exception, add it here with a per-crate
+comment explaining why, rather than hand-editing the file in place (the
+next `--check`-clean regeneration would silently drop it).
+
+Usage:
+  bin/generate-loco-deny-config.py            # generate for every form
+  bin/generate-loco-deny-config.py <slug> ... # generate only the named forms
+  bin/generate-loco-deny-config.py --check    # exit non-zero if any deny.toml would change
 ```
 
 <h2 id="generate-specpy"><code>bin/generate-spec.py</code></h2>

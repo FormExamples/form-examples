@@ -35,9 +35,9 @@ The workflow is **spec → code → regenerate → verify**, never the reverse:
 ## Generated artefacts — never hand-edit
 
 `forms.tsv`, `docs/tools.md`, each form's `sql/schema.sql`, `xml/`, `fhir/r5/`,
-`protobuf/`, `openapi/`, `back-end-with-loco-setup`, `llms.txt`,
-`examples/assessment.json`, and `examples/fhir-bundle.json` are all generated.
-After a schema change, regenerate:
+`protobuf/`, `openapi/`, `back-end-with-loco-setup`, `back-end-with-loco/deny.toml`,
+`llms.txt`, `examples/assessment.json`, and `examples/fhir-bundle.json` are all
+generated. After a schema change, regenerate:
 
 ```sh
 python3 bin/generate-forms-tsv.py
@@ -48,6 +48,7 @@ python3 bin/fhir-r5/generate-fhir-r5-representations.py
 python3 bin/protobuf/generate-protobuf-representations.py
 python3 bin/openapi/generate-openapi-representations.py
 python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+python3 bin/generate-loco-deny-config.py
 python3 bin/generate-llms-txt.py
 python3 bin/generate-changelog-and-examples.py
 ```
@@ -69,8 +70,13 @@ bin/lily-svelte-refactor --check --all # Lily Svelte class contract
 bin/lily-sync --check                  # Lily HTML snapshot
 bin/lily-svelte-sync --check           # Lily Svelte snapshot
 bin/loco-config-refactor --check --all # Loco queue + observability conventions
+bin/generate-loco-deny-config.py --check # Loco deny.toml drift
 bin/test-e2e --html                    # Playwright smoke + axe-core a11y (HTML)
 ```
+
+Per crate, `cargo deny --all-features check` (run in CI as part of the
+sharded Rust job) verifies the supply-chain policy: licenses, security
+advisories, banned crates, and trusted sources.
 
 The SQL apply gate and the Loco tests need a Postgres reachable via `PGHOST` /
 `PGPORT` / `PGUSER` (default `localhost:5432`, user `loco`). A throwaway local

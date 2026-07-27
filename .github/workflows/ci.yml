@@ -253,13 +253,16 @@ jobs:
           components: clippy
       - name: Install psql client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny
       - uses: Swatinem/rust-cache@v2
         with:
           shared-key: loco-shard-${{ matrix.shard }}
           workspaces: forms/*/back-end-with-loco
       # Plain cargo (no --locked): lock hygiene is not maintained across all
-      # 286 crates, matching the repo's own bin/test-loco-project.
-      - name: check / clippy / test each crate in this shard
+      # 347 crates, matching the repo's own bin/test-loco-project.
+      - name: check / clippy / deny / test each crate in this shard
         run: |
           fail=0
           for slug in $(bin/forms-shard ${{ matrix.shard }} 8); do
@@ -274,6 +277,7 @@ jobs:
                  cargo check --all-targets \
               && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
                  cargo clippy --all-targets -- -D warnings \
+              && cargo deny --all-features check \
               && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
                  cargo test ) || { echo "::error::$slug failed"; fail=1; }
             dropdb --if-exists "$db" 2>/dev/null || true

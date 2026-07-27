@@ -177,6 +177,7 @@ See the per-stack agent docs:
 - `bin/lily-svelte-sync` — snapshot Lily Svelte component sources and pin the upstream commit
 - `bin/es-modules-refactor` — convert HTML front-end JS to native ES modules; `--check` is the CI drift detector
 - `bin/loco-config-refactor` — Loco background-queue + observability conventions; `--check` is the CI drift detector
+- `bin/generate-loco-deny-config.py` — write each Loco crate's cargo-deny `deny.toml` policy; `--check` is the CI drift detector
 - `bin/generate-spec.py` — scaffold per-form `spec/index.md` from `index.md`
 - `bin/generate-llms-txt.py` — generate per-form `llms.txt`; `--check` is the CI drift detector
 - `bin/generate-changelog-and-examples.py` — scaffold per-form `CHANGELOG.md` + `examples/`; `--check` is the CI drift detector
@@ -271,6 +272,7 @@ bin/generate-spec.py --check          # Per-form spec/ presence check
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift
 bin/generate-llms-txt.py --check      # Per-form llms.txt drift
 bin/loco-config-refactor --check --all # Loco queue + observability conventions
+bin/generate-loco-deny-config.py --check # Loco deny.toml drift
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```
