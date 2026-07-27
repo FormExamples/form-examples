@@ -23,7 +23,7 @@
       overall notes, sign-off date
 - [x] `config/steps.ts` — 6 `StepDef` entries
 - [x] `[id]/+page.svelte` — 6-step wizard, `{#each stepComponents as
-      StepComponent, i (i)}` auto-wrapped step rendering, Lily
+    StepComponent, i (i)}` auto-wrapped step rendering, Lily
       Progress/StepList/ErrorSummary, localStorage-backed store
       (`indicators.svelte.ts`)
 - [x] `hospital-performance-indicator-reports/` dashboard (SVAR DataGrid)
@@ -41,8 +41,8 @@
       wrong routes, wrong `package.json` name, wrong root redirect) —
       removed and rebuilt from scratch against this form's own spec/SQL
 - [x] `npx svelte-kit sync && npx svelte-check` — 0 errors, 4 pre-existing
-      a11y warnings in the vendored Lily chooser components (LocaleChooser,
-      ShareChooser, TextSizeChooser, ThemeChooser), identical to every other
+      a11y warnings in the vendored Lily picker components (LocalePicker,
+      SharePicker, TextSizePicker, ThemePicker), identical to every other
       form in the monorepo
 - [x] `npx vitest run` — 3/3 tests passing
 - [x] Playwright smoke test of `/hospital-performance-indicators/hospital-performance-indicator-reports/new`:

@@ -2,12 +2,12 @@
 	import '../../app.css';
 	import { base } from '$app/paths';
 	import { page } from '$app/state';
-	import ThemeChooser from '$lib/components/ui/ThemeChooser.svelte';
+	import ThemePicker from '$lib/components/ui/ThemePicker.svelte';
 	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';
-	import LocaleChooser from '$lib/components/ui/LocaleChooser.svelte';
+	import LocalePicker from '$lib/components/ui/LocalePicker.svelte';
 	import { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';
-	import TextSizeChooser from '$lib/components/ui/TextSizeChooser.svelte';
-	import ShareChooser from '$lib/components/ui/ShareChooser.svelte';
+	import TextSizePicker from '$lib/components/ui/TextSizePicker.svelte';
+	import SharePicker from '$lib/components/ui/SharePicker.svelte';
 	import { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from '$lib/config/text-sizes';
 	import AccessibilityControls from '$lib/components/ui/AccessibilityControls.svelte';
 	let { children } = $props();
@@ -17,7 +17,7 @@
 			? 'rounded-md px-3 py-2 text-sm font-semibold text-primary bg-primary/10'
 			: 'rounded-md px-3 py-2 text-sm font-medium text-base-content/70 hover:bg-base-200';
 
-	// ThemeChooser/LocaleChooser manage <link>/data-theme/lang/dir + localStorage themselves.
+	// ThemePicker/LocalePicker manage <link>/data-theme/lang/dir + localStorage themselves.
 	const themeValues = THEME_OPTIONS.map((o) => o.value);
 	const themeLabels = Object.fromEntries(THEME_OPTIONS.map((o) => [o.value, o.label]));
 	const localeValues = LOCALE_OPTIONS.map((o) => o.value);
@@ -44,7 +44,7 @@
 					href="/neurodiversity-adjustment-response/neurodiversity-adjustment-responses"
 					class={navClass('/neurodiversity-adjustment-responses')}>Responses</a
 				>
-				<LocaleChooser
+				<LocalePicker
 					label="Language"
 					class="ml-2"
 					locales={localeValues}
@@ -52,7 +52,7 @@
 					defaultValue={DEFAULT_LOCALE}
 					storageKey={LOCALE_STORAGE_KEY}
 				/>
-				<ThemeChooser
+				<ThemePicker
 					label="Theme"
 					class="ml-2"
 					themesUrl={`${base}/themes/`}
@@ -61,7 +61,7 @@
 					defaultValue={DEFAULT_THEME}
 					storageKey={THEME_STORAGE_KEY}
 				/>
-				<TextSizeChooser
+				<TextSizePicker
 					label="Text size"
 					class="ml-2"
 					sizes={textSizeValues}
@@ -69,7 +69,7 @@
 					defaultValue={DEFAULT_TEXT_SIZE}
 					storageKey={TEXT_SIZE_STORAGE_KEY}
 				/>
-				<ShareChooser
+				<SharePicker
 					label="Share this page"
 					class="ml-2"
 					copyLabel="Copy link"

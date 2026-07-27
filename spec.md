@@ -213,8 +213,8 @@ bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/svelte-locale-select-refactor --check      # Svelte LocaleSelect drift detector
 bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector
 bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector
-bin/svelte-helpers-chooser-rename --check      # Svelte *-select/share-button -> *-chooser rename drift detector
-bin/html-helpers-chooser-rename --check        # HTML text-size-select/share-button -> *-chooser rename drift detector
+bin/svelte-helpers-picker-rename --check      # Svelte *-chooser -> *-picker rename drift detector
+bin/html-helpers-picker-rename --check        # HTML text-size-chooser/share-chooser -> *-picker rename drift detector
 bin/generate-llms-txt.py --check      # per-form llms.txt drift detector
 bin/generate-spec.py --check          # per-form spec/ presence check (specs are hand-maintained)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector

@@ -28,7 +28,7 @@ src/
   routes/
     +server.ts                              # root redirect to /hospital-daily-monitoring-checklist/
     hospital-daily-monitoring-checklist/
-      +layout.svelte                        # nav, theme/locale/text-size/share choosers
+      +layout.svelte                        # nav, theme/locale/text-size/share pickers
       +page.svelte                          # welcome page
       hospital-daily-monitoring-checklists/
         +page.svelte                        # dashboard (SVAR DataGrid)

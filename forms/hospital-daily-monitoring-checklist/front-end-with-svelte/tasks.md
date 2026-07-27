@@ -36,8 +36,8 @@
 - [x] Welcome page (`/hospital-daily-monitoring-checklist/`) with links to
       the wizard and dashboard, and a detailed explanation
 - [x] `npx svelte-kit sync && npx svelte-check` — 0 errors, 4 pre-existing
-      a11y warnings in the vendored Lily chooser components (LocaleChooser,
-      ShareChooser, TextSizeChooser, ThemeChooser), identical to every other
+      a11y warnings in the vendored Lily picker components (LocalePicker,
+      SharePicker, TextSizePicker, ThemePicker), identical to every other
       form in the monorepo
 - [x] `npx vitest run` — 4/4 tests passing
 - [x] Playwright smoke test of `/hospital-daily-monitoring-checklist/hospital-daily-monitoring-checklists/new`:

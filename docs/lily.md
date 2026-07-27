@@ -2,7 +2,7 @@
 
 Every front-end — HTML and Svelte — conforms to the **Lily Design System
 headless** contract. "Headless" and "as a specification" are the key words: Lily
-is consumed at *authoring time* as a set of component class names and markup
+is consumed at _authoring time_ as a set of component class names and markup
 shapes. There is **no runtime dependency, bundle, or vendored library** in the
 forms. A form is Lily-conformant when its markup uses Lily's canonical class
 names and structure.
@@ -21,7 +21,7 @@ Core: **Form**, **Fieldset**, **Field**, **Button**, **ErrorSummary**, **Panel**
 Inputs: **TextInput**, **NumberInput**, **DateInput**, **Select**,
 **TextAreaInput**, **RadioGroup** / **RadioInput**, **CheckboxGroup** /
 **CheckboxInput**, with **Hint** for help text. Feedback: **Alert**, **Badge**.
-Theming: **ThemeChooser**.
+Theming: **ThemePicker**.
 
 Because the form must be a single continuous wizard (root
 [`AGENTS.md`](../AGENTS.md) "User interface"), these components render one
@@ -32,15 +32,15 @@ scrollable page with a Progress indicator, not multiple pages.
 Lily uses **semantic class names with data-attribute variants**, not a `lily-`
 prefix. The refactor tools encode the exact contract; representative swaps:
 
-| Legacy | Lily |
-|--------|------|
+| Legacy                    | Lily                                    |
+| ------------------------- | --------------------------------------- |
 | `class="btn btn-primary"` | `class="button" data-variant="primary"` |
-| `class="btn"` | `class="button"` |
-| `class="textarea"` | `class="text-area-input"` |
-| `class="select-input"` | `class="select"` |
-| `class="form-actions"` | `class="button-group"` |
-| `class="report-region"` | `class="panel"` |
-| `class="status-banner"` | `class="alert" data-type="warning"` |
+| `class="btn"`             | `class="button"`                        |
+| `class="textarea"`        | `class="text-area-input"`               |
+| `class="select-input"`    | `class="select"`                        |
+| `class="form-actions"`    | `class="button-group"`                  |
+| `class="report-region"`   | `class="panel"`                         |
+| `class="status-banner"`   | `class="alert" data-type="warning"`     |
 
 So a conformant HTML form uses classes like `form`, `fieldset`, `button`,
 `button-group`, `panel`, `alert`, `error-summary`, `progress`, `text-area-input`,

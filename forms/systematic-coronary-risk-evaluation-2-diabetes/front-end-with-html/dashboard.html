@@ -1,239 +1,486 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SCORE2-Diabetes — clinician dashboard</title>
-  <meta name="description" content="SCORE2-Diabetes clinician dashboard: review patient cardiovascular risk assessments with risk category, HbA1c, systolic BP, established-CVD flag, flag count, and review status.">
-  <link rel="stylesheet" href="css/dashboard.css">
-  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem('systematic-coronary-risk-evaluation-2-diabetes.theme.v1');
-        var link = document.getElementById('theme-stylesheet');
-        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
-      } catch (e) {}
-    })();
-  </script>
-</head>
-<body>
-  <a class="skip-link visually-hidden" href="#patients-table">Skip to patients table</a>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>SCORE2-Diabetes — clinician dashboard</title>
+        <meta
+            name="description"
+            content="SCORE2-Diabetes clinician dashboard: review patient cardiovascular risk assessments with risk category, HbA1c, systolic BP, established-CVD flag, flag count, and review status."
+        />
+        <link rel="stylesheet" href="css/dashboard.css" />
+        <link
+            rel="stylesheet"
+            id="theme-stylesheet"
+            href="css/themes/light.css"
+        />
+        <script>
+            (function () {
+                try {
+                    var saved = localStorage.getItem(
+                        "systematic-coronary-risk-evaluation-2-diabetes.theme.v1",
+                    );
+                    var link = document.getElementById("theme-stylesheet");
+                    if (saved && link)
+                        link.setAttribute(
+                            "href",
+                            "css/themes/" + saved + ".css",
+                        );
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link visually-hidden" href="#patients-table"
+            >Skip to patients table</a
+        >
 
-  <header class="page-header">
-    <div class="page-header-inner">
-      <div class="page-header-bar">
-        <div class="page-header-title">
-          <h1>SCORE2-Diabetes — Clinician Dashboard</h1>
-          <p class="subtitle">
-        Patient cardiovascular risk assessments with SCORE2-Diabetes
-        risk category, HbA1c, systolic blood pressure, established-CVD
-        flag, safety-flag count, and review status.
-      </p>
-        </div>
-        <div class="page-header-controls no-print">
-                <label class="visually-hidden" for="locale-select">Language</label>
-      <select class="theme-select" id="locale-select" aria-label="Language">
-      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
-      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
-      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
-      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
-      </select>
-      <label class="visually-hidden" for="theme-select">Theme</label>
-      <select class="theme-select" id="theme-select" aria-label="Theme">
-      <option class="theme-select-option" value="abyss">Abyss</option>
-      <option class="theme-select-option" value="acid">Acid</option>
-      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
-      <option class="theme-select-option" value="aqua">Aqua</option>
-      <option class="theme-select-option" value="autumn">Autumn</option>
-      <option class="theme-select-option" value="black">Black</option>
-      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
-      <option class="theme-select-option" value="business">Business</option>
-      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
-      <option class="theme-select-option" value="cmyk">Cmyk</option>
-      <option class="theme-select-option" value="coffee">Coffee</option>
-      <option class="theme-select-option" value="corporate">Corporate</option>
-      <option class="theme-select-option" value="cupcake">Cupcake</option>
-      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
-      <option class="theme-select-option" value="dark">Dark</option>
-      <option class="theme-select-option" value="dim">Dim</option>
-      <option class="theme-select-option" value="dracula">Dracula</option>
-      <option class="theme-select-option" value="emerald">Emerald</option>
-      <option class="theme-select-option" value="fantasy">Fantasy</option>
-      <option class="theme-select-option" value="forest">Forest</option>
-      <option class="theme-select-option" value="garden">Garden</option>
-      <option class="theme-select-option" value="halloween">Halloween</option>
-      <option class="theme-select-option" value="lemonade">Lemonade</option>
-      <option class="theme-select-option" value="light" selected>Light</option>
-      <option class="theme-select-option" value="lofi">Lofi</option>
-      <option class="theme-select-option" value="luxury">Luxury</option>
-      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
-      <option class="theme-select-option" value="night">Night</option>
-      <option class="theme-select-option" value="nord">Nord</option>
-      <option class="theme-select-option" value="pastel">Pastel</option>
-      <option class="theme-select-option" value="retro">Retro</option>
-      <option class="theme-select-option" value="silk">Silk</option>
-      <option class="theme-select-option" value="sunset">Sunset</option>
-      <option class="theme-select-option" value="synthwave">Synthwave</option>
-      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
-      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
-      <option class="theme-select-option" value="valentine">Valentine</option>
-      <option class="theme-select-option" value="winter">Winter</option>
-      <option class="theme-select-option" value="wireframe">Wireframe</option>
-      </select>
-      <label class="visually-hidden" for="text-size-chooser">Text size</label>
-      <select class="theme-select" id="text-size-chooser" aria-label="Text size">
-      <option class="theme-select-option" value="small">Small</option>
-      <option class="theme-select-option" value="medium" selected>Medium</option>
-      <option class="theme-select-option" value="large">Large</option>
-      <option class="theme-select-option" value="x-large">X Large</option>
-      </select>
-      <div class="share-chooser">
-      <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
-      <span class="share-chooser-icon" aria-hidden="true">↪</span>
-      </button>
-      <ul class="share-chooser-list" id="share-chooser-list" hidden>
-      <li class="share-chooser-list-item">
-      <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
-      </li>
-      </ul>
-      <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
-      </div>
-        </div>
-      </div>
-    </div>
-  </header>
+        <header class="page-header">
+            <div class="page-header-inner">
+                <div class="page-header-bar">
+                    <div class="page-header-title">
+                        <h1>SCORE2-Diabetes — Clinician Dashboard</h1>
+                        <p class="subtitle">
+                            Patient cardiovascular risk assessments with
+                            SCORE2-Diabetes risk category, HbA1c, systolic blood
+                            pressure, established-CVD flag, safety-flag count,
+                            and review status.
+                        </p>
+                    </div>
+                    <div class="page-header-controls no-print">
+                        <label class="visually-hidden" for="locale-select"
+                            >Language</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="locale-select"
+                            aria-label="Language"
+                        >
+                            <option
+                                class="theme-select-option"
+                                value="en-GB"
+                                selected
+                                lang="en-GB"
+                            >
+                                English (UK)
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="en-US"
+                                lang="en-US"
+                            >
+                                English (US)
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="cy-GB"
+                                lang="cy-GB"
+                            >
+                                Cymraeg
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="de-DE"
+                                lang="de-DE"
+                            >
+                                Deutsch
+                            </option>
+                        </select>
+                        <label class="visually-hidden" for="theme-select"
+                            >Theme</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="theme-select"
+                            aria-label="Theme"
+                        >
+                            <option class="theme-select-option" value="abyss">
+                                Abyss
+                            </option>
+                            <option class="theme-select-option" value="acid">
+                                Acid
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="adobe-spectrum"
+                            >
+                                Adobe Spectrum
+                            </option>
+                            <option class="theme-select-option" value="aqua">
+                                Aqua
+                            </option>
+                            <option class="theme-select-option" value="autumn">
+                                Autumn
+                            </option>
+                            <option class="theme-select-option" value="black">
+                                Black
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="bumblebee"
+                            >
+                                Bumblebee
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="business"
+                            >
+                                Business
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="caramellatte"
+                            >
+                                Caramellatte
+                            </option>
+                            <option class="theme-select-option" value="cmyk">
+                                Cmyk
+                            </option>
+                            <option class="theme-select-option" value="coffee">
+                                Coffee
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="corporate"
+                            >
+                                Corporate
+                            </option>
+                            <option class="theme-select-option" value="cupcake">
+                                Cupcake
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="cyberpunk"
+                            >
+                                Cyberpunk
+                            </option>
+                            <option class="theme-select-option" value="dark">
+                                Dark
+                            </option>
+                            <option class="theme-select-option" value="dim">
+                                Dim
+                            </option>
+                            <option class="theme-select-option" value="dracula">
+                                Dracula
+                            </option>
+                            <option class="theme-select-option" value="emerald">
+                                Emerald
+                            </option>
+                            <option class="theme-select-option" value="fantasy">
+                                Fantasy
+                            </option>
+                            <option class="theme-select-option" value="forest">
+                                Forest
+                            </option>
+                            <option class="theme-select-option" value="garden">
+                                Garden
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="halloween"
+                            >
+                                Halloween
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="lemonade"
+                            >
+                                Lemonade
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="light"
+                                selected
+                            >
+                                Light
+                            </option>
+                            <option class="theme-select-option" value="lofi">
+                                Lofi
+                            </option>
+                            <option class="theme-select-option" value="luxury">
+                                Luxury
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="mozilla-protocol"
+                            >
+                                Mozilla Protocol
+                            </option>
+                            <option class="theme-select-option" value="night">
+                                Night
+                            </option>
+                            <option class="theme-select-option" value="nord">
+                                Nord
+                            </option>
+                            <option class="theme-select-option" value="pastel">
+                                Pastel
+                            </option>
+                            <option class="theme-select-option" value="retro">
+                                Retro
+                            </option>
+                            <option class="theme-select-option" value="silk">
+                                Silk
+                            </option>
+                            <option class="theme-select-option" value="sunset">
+                                Sunset
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="synthwave"
+                            >
+                                Synthwave
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-government-digital-service"
+                            >
+                                UK · Government Digital Service
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-england-for-patients"
+                            >
+                                UK · NHS England — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-england-for-practitioners"
+                            >
+                                UK · NHS England — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-scotland-for-patients"
+                            >
+                                UK · NHS Scotland — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-scotland-for-practitioners"
+                            >
+                                UK · NHS Scotland — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-wales-for-patients"
+                            >
+                                UK · NHS Wales — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-wales-for-practitioners"
+                            >
+                                UK · NHS Wales — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-states-web-design-system"
+                            >
+                                US · Web Design System
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="valentine"
+                            >
+                                Valentine
+                            </option>
+                            <option class="theme-select-option" value="winter">
+                                Winter
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="wireframe"
+                            >
+                                Wireframe
+                            </option>
+                        </select>
+                        <label class="visually-hidden" for="text-size-picker"
+                            >Text size</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="text-size-picker"
+                            aria-label="Text size"
+                        >
+                            <option class="theme-select-option" value="small">
+                                Small
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+                            <option class="theme-select-option" value="large">
+                                Large
+                            </option>
+                            <option class="theme-select-option" value="x-large">
+                                X Large
+                            </option>
+                        </select>
+                        <div class="share-picker">
+                            <button
+                                type="button"
+                                class="share-picker-button"
+                                id="share-picker"
+                                aria-label="Share this page"
+                                aria-expanded="false"
+                                aria-controls="share-picker-list"
+                            >
+                                <span
+                                    class="share-picker-icon"
+                                    aria-hidden="true"
+                                    >↪</span
+                                >
+                            </button>
+                            <ul
+                                class="share-picker-list"
+                                id="share-picker-list"
+                                hidden
+                            >
+                                <li class="share-picker-list-item">
+                                    <button
+                                        type="button"
+                                        class="share-picker-copy"
+                                        id="share-picker-copy"
+                                    >
+                                        Copy link
+                                    </button>
+                                </li>
+                            </ul>
+                            <p
+                                class="share-picker-status"
+                                id="share-picker-status"
+                                aria-live="polite"
+                            ></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-  <main>
-    <!-- Status banner: shown when backend fetch fails and we fall back -->
-    <div
-      id="status-banner"
-      class="alert"
-      data-type="warning"
-      role="status"
-      aria-live="polite"
-      hidden
-    ></div>
+        <main>
+            <!-- Status banner: shown when backend fetch fails and we fall back -->
+            <div
+                id="status-banner"
+                class="alert"
+                data-type="warning"
+                role="status"
+                aria-live="polite"
+                hidden
+            ></div>
 
-    <!-- Filter bar -->
-    <section
-      class="filter-bar"
-      aria-labelledby="filter-bar-heading"
-    >
-      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+            <!-- Filter bar -->
+            <section class="filter-bar" aria-labelledby="filter-bar-heading">
+                <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
-      <div class="filter-grid">
-        <div class="filter-field filter-field-search field">
-          <label class="label" for="filter-search">Search</label>
-          <input
-            id="filter-search"
-            type="search"
-            class="search-input"
-            placeholder="NHS number or patient name..."
-            autocomplete="off"
-          >
-        </div>
+                <div class="filter-grid">
+                    <div class="filter-field filter-field-search field">
+                        <label class="label" for="filter-search">Search</label>
+                        <input
+                            id="filter-search"
+                            type="search"
+                            class="search-input"
+                            placeholder="NHS number or patient name..."
+                            autocomplete="off"
+                        />
+                    </div>
 
-        <div class="filter-field field">
-          <label class="label" for="filter-risk">Risk Category</label>
-          <select id="filter-risk" class="select">
-            <option value="">All risk levels</option>
-            <option value="low">Low</option>
-            <option value="moderate">Moderate</option>
-            <option value="high">High</option>
-            <option value="veryHigh">Very High</option>
-          </select>
-        </div>
+                    <div class="filter-field field">
+                        <label class="label" for="filter-risk"
+                            >Risk Category</label
+                        >
+                        <select id="filter-risk" class="select">
+                            <option value="">All risk levels</option>
+                            <option value="low">Low</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="high">High</option>
+                            <option value="veryHigh">Very High</option>
+                        </select>
+                    </div>
 
-        <div class="filter-field field">
-          <label class="label" for="filter-status">Status</label>
-          <select id="filter-status" class="select">
-            <option value="">All statuses</option>
-            <option value="pending">Pending</option>
-            <option value="reviewed">Reviewed</option>
-            <option value="urgent">Urgent</option>
-          </select>
-        </div>
+                    <div class="filter-field field">
+                        <label class="label" for="filter-status">Status</label>
+                        <select id="filter-status" class="select">
+                            <option value="">All statuses</option>
+                            <option value="pending">Pending</option>
+                            <option value="reviewed">Reviewed</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
 
-        <div class="filter-field field">
-          <label class="label" for="filter-cvd">CVD History</label>
-          <select id="filter-cvd" class="select">
-            <option value="">All CVD status</option>
-            <option value="true">Has CVD</option>
-            <option value="false">No CVD</option>
-          </select>
-        </div>
+                    <div class="filter-field field">
+                        <label class="label" for="filter-cvd"
+                            >CVD History</label
+                        >
+                        <select id="filter-cvd" class="select">
+                            <option value="">All CVD status</option>
+                            <option value="true">Has CVD</option>
+                            <option value="false">No CVD</option>
+                        </select>
+                    </div>
 
-        <div class="filter-field filter-field-actions">
-          <button
-            type="button"
-            id="filter-clear-btn"
-            class="button"
-            data-variant="secondary"
-            hidden
-          >
-            Clear filters
-          </button>
-        </div>
-      </div>
+                    <div class="filter-field filter-field-actions">
+                        <button
+                            type="button"
+                            id="filter-clear-btn"
+                            class="button"
+                            data-variant="secondary"
+                            hidden
+                        >
+                            Clear filters
+                        </button>
+                    </div>
+                </div>
 
-      <div class="filter-summary">
-        <span id="filter-count">Loading patients...</span>
-      </div>
-    </section>
+                <div class="filter-summary">
+                    <span id="filter-count">Loading patients...</span>
+                </div>
+            </section>
 
-    <!-- Patients table -->
-    <section
-      class="table-card"
-      aria-labelledby="patients-table-heading"
-    >
-      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+            <!-- Patients table -->
+            <section
+                class="table-card"
+                aria-labelledby="patients-table-heading"
+            >
+                <h2 id="patients-table-heading" class="visually-hidden">
+                    Patients
+                </h2>
 
-      <div class="table-scroll">
-        <table id="patients-table" class="data-table">
-          <thead class="data-table-head">
-            <tr id="patients-table-head" class="data-table-row">
-              <!-- Sortable column headers built by app.js -->
-            </tr>
-          </thead>
-          <tbody id="patients-table-body" class="data-table-body">
-            <!-- Data rows built by app.js -->
-          </tbody>
-        </table>
-      </div>
+                <div class="table-scroll">
+                    <table id="patients-table" class="data-table">
+                        <thead class="data-table-head">
+                            <tr id="patients-table-head" class="data-table-row">
+                                <!-- Sortable column headers built by app.js -->
+                            </tr>
+                        </thead>
+                        <tbody id="patients-table-body" class="data-table-body">
+                            <!-- Data rows built by app.js -->
+                        </tbody>
+                    </table>
+                </div>
 
-      <p
-        id="patients-empty-message"
-        class="empty-message"
-        hidden
-      >
-        No patients match the current filters.
-      </p>
-    </section>
+                <p id="patients-empty-message" class="empty-message" hidden>
+                    No patients match the current filters.
+                </p>
+            </section>
+        </main>
 
-  </main>
+        <footer class="page-footer">
+            <p>
+                SCORE2-Diabetes (ESC 2023) predicts 10-year risk of fatal and
+                non-fatal cardiovascular disease in adults with type 2 diabetes
+                without prior CVD, aged 40-69. This dashboard is a
+                clinical-review tool and is not a diagnosis.
+            </p>
+        </footer>
 
-    <footer class="page-footer">
-      <p>
-        SCORE2-Diabetes (ESC 2023) predicts 10-year risk of fatal and
-        non-fatal cardiovascular disease in adults with type 2 diabetes
-        without prior CVD, aged 40-69. This dashboard is a clinical-review
-        tool and is not a diagnosis.
-      </p>
-    </footer>
-
-
-  <script type="module" src="js/dashboard-app.js"></script>
-  <script type="module" src="js/theme-select.js"></script>
-  <script type="module" src="js/text-size-chooser.js"></script>
-  <script type="module" src="js/share-chooser.js"></script>
-  <script type="module" src="js/locale-select.js"></script>
-  <script type="module" src="js/table-export.js"></script>
-</body>
+        <script type="module" src="js/dashboard-app.js"></script>
+        <script type="module" src="js/theme-select.js"></script>
+        <script type="module" src="js/text-size-picker.js"></script>
+        <script type="module" src="js/share-picker.js"></script>
+        <script type="module" src="js/locale-select.js"></script>
+        <script type="module" src="js/table-export.js"></script>
+    </body>
 </html>

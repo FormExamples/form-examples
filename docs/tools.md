@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-60 tools.
+62 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -22,6 +22,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/generate-spec.py`](#generate-specpy)
 - [`bin/generate-tools-doc.py`](#generate-tools-docpy)
 - [`bin/html-helpers-chooser-rename`](#html-helpers-chooser-rename)
+- [`bin/html-helpers-picker-rename`](#html-helpers-picker-rename)
 - [`bin/html-share-button-refactor`](#html-share-button-refactor)
 - [`bin/html-text-size-select-refactor`](#html-text-size-select-refactor)
 - [`bin/html-theme-locale-select-refactor`](#html-theme-locale-select-refactor)
@@ -38,6 +39,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
+- [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
 - [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
@@ -343,6 +345,36 @@ What changes per form (front-end-with-html/):
 Usage:
   bin/html-helpers-chooser-rename --check   # CI drift check (no writes)
   bin/html-helpers-chooser-rename --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="html-helpers-picker-rename"><code>bin/html-helpers-picker-rename</code></h2>
+
+```text
+bin/html-helpers-picker-rename -- rename the two HTML-side controls that
+mirror the Lily Svelte helpers' naming: text-size-chooser -> text-size-picker,
+share-chooser -> share-picker, matching the upstream rename
+(lily-design-system commit "Rename *-chooser to *-picker to harmonize with
+Adobe").
+
+#theme-select / #locale-select are untouched: those HTML controls reuse the
+*catalog* Lily `.theme-select` / `.theme-select-option` classes (a different,
+unrelated component family the upstream helpers rename never touched), not
+the renamed helpers package.
+
+What changes per form (front-end-with-html/):
+  - index.html, dashboard.html -> every `text-size-chooser` / `share-chooser`
+    substring (ids, classes, aria-controls, script src, comments) renamed
+  - css/style.css, css/dashboard.css -> same substring rename
+  - js/text-size-chooser.js -> renamed to js/text-size-picker.js (content
+    substring-renamed too)
+  - js/share-chooser.js -> renamed to js/share-picker.js (content
+    substring-renamed too)
+
+Usage:
+  bin/html-helpers-picker-rename --check   # CI drift check (no writes)
+  bin/html-helpers-picker-rename --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
 ```
@@ -667,6 +699,7 @@ background-queue and observability conventions documented in
   - SQLite-backed (`bg_sqlt`) and Redis-backed (`bg_redis`) queues removed
   - OpenTelemetry OTLP exporter dependencies
   - Prometheus `/metrics` dependency (`axum-prometheus`)
+  - `Cargo.lock` tracked in git (see `spec/cargo-lock-tracking.md`)
 
 Edits per Loco crate (a crate is any dir containing a `Cargo.toml` whose
 contents reference `loco-rs`):
@@ -683,6 +716,10 @@ contents reference `loco-rs`):
     - Insert/replace a `queue:` block with `kind: Postgres`, reusing the
       same Postgres URI as the existing `database.uri` and setting
       `dangerously_flush` and `num_workers` per environment.
+
+  .gitignore:
+    - Flip a bare `Cargo.lock` ignore line to `!Cargo.lock` so the
+      lockfile is tracked (binary crate — reproducible builds).
 
 The tool is idempotent: re-running on an already-refactored crate
 makes no further changes.
@@ -846,6 +883,40 @@ What changes per form (front-end-with-svelte/):
 Usage:
   bin/svelte-helpers-chooser-rename --check   # CI drift check (no writes)
   bin/svelte-helpers-chooser-rename --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-helpers-picker-rename"><code>bin/svelte-helpers-picker-rename</code></h2>
+
+```text
+bin/svelte-helpers-picker-rename -- rename the four Lily Svelte helper
+controls from their current *-chooser names to their new *-picker names,
+matching the upstream rename (lily-design-system-svelte-helpers commit
+"Rename *-chooser to *-picker to harmonize with Adobe").
+
+  ThemeChooser.svelte    -> ThemePicker.svelte    (.theme-chooser*    -> .theme-picker*)
+  LocaleChooser.svelte   -> LocalePicker.svelte   (.locale-chooser*   -> .locale-picker*)
+  TextSizeChooser.svelte -> TextSizePicker.svelte (.text-size-chooser* -> .text-size-picker*)
+  ShareChooser.svelte    -> SharePicker.svelte    (.share-chooser*    -> .share-picker*)
+
+Reads the fresh component source directly from the pinned upstream checkout
+(~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-helpers/)
+at --apply time, the same way bin/lily-svelte-sync does for the unrelated
+svelte-headless family, converting its 4-space indent to this repo's tab
+convention.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/{Old}.svelte  -> deleted
+  - src/lib/components/ui/{New}.svelte  -> new (fresh vendored copy)
+  - src/app.css -> renames the old class family to the new one (regex,
+    in place -- keeps whatever else is around it)
+  - src/routes/<slug>/+layout.svelte -> renames the import + component tag
+    (props are unchanged -- none of them said "chooser" literally)
+
+Usage:
+  bin/svelte-helpers-picker-rename --check   # CI drift check (no writes)
+  bin/svelte-helpers-picker-rename --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
 ```

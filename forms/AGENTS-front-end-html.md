@@ -202,38 +202,38 @@ theme system** as `front-end-with-svelte/` — do not hand-roll theme CSS.
   equivalent and stays a static gold-standard value. This mirrors
   `front-end-with-svelte`'s `app.css` mapping exactly, so switching
   `#theme-select` re-skins the whole page.
-- **Controls.** `#locale-select`, `#theme-select`, then `#text-size-chooser`,
+- **Controls.** `#locale-select`, `#theme-select`, then `#text-size-picker`,
   all native `<select class="theme-select">` with
   `<option class="theme-select-option">` children (reusing the Lily
   `theme-select` *catalog* styling — a different, unrelated component family
-  from the helpers below, deliberately untouched by their `*-chooser`
+  from the helpers below, deliberately untouched by their `*-picker`
   rename), matching the `front-end-with-svelte`
-  `LocaleChooser`/`ThemeChooser`/`TextSizeChooser` convention, inside the
+  `LocalePicker`/`ThemePicker`/`TextSizePicker` convention, inside the
   `.page-header-controls` column — the right-hand side of `.page-header-bar`,
   beside `.page-header-title` on the left (see §4). Vanilla ES modules
-  `js/theme-select.js` / `js/locale-select.js` / `js/text-size-chooser.js`
+  `js/theme-select.js` / `js/locale-select.js` / `js/text-size-picker.js`
   wire them up: theme-select swaps the `#theme-stylesheet` `href` and
   persists to localStorage; locale-select sets `<html lang>` and persists to
-  localStorage; text-size-chooser sets `<html data-text-size>` (mapped to
+  localStorage; text-size-picker sets `<html data-text-size>` (mapped to
   `font-size` via `[data-text-size="…"]` rules in
   `css/style.css`/`css/dashboard.css`, WCAG 2.2 1.4.4/1.4.12) and persists to
   localStorage. Presentation only — no message catalogue is wired up; see
   [`../docs/i18n.md`](../docs/i18n.md).
-- **`.share-chooser`** is the fourth control, right after
-  `#text-size-chooser`: a `<button id="share-chooser">` (glyph ↪) that tries
+- **`.share-picker`** is the fourth control, right after
+  `#text-size-picker`: a `<button id="share-picker">` (glyph ↪) that tries
   the native Web Share API first (`navigator.share`), falling back to a
   one-item popup list ("Copy link" → clipboard), mirroring the
-  `front-end-with-svelte` `ShareChooser` convention — no social-network
-  targets, by design. Wired by `js/share-chooser.js`.
+  `front-end-with-svelte` `SharePicker` convention — no social-network
+  targets, by design. Wired by `js/share-picker.js`.
 - **Tool.** `bin/html-theme-locale-select-refactor --check|--apply` is the
   drift detector / generator for locale-select/theme-select (the untouched
   catalog controls).
   `bin/html-text-size-select-refactor --check|--apply` is the drift detector /
-  generator for text-size-chooser (name predates the chooser rename).
+  generator for text-size-picker (name predates the picker rename).
   `bin/html-share-button-refactor --check|--apply` is the drift detector /
-  generator for share-chooser (name predates the chooser rename).
-  `bin/html-helpers-chooser-rename --check|--apply` is the *-select/
-  share-button → *-chooser rename against `lily-design-system-svelte-helpers`;
+  generator for share-picker (name predates the picker rename).
+  `bin/html-helpers-picker-rename --check|--apply` is the *-select/
+  share-button → *-picker rename against `lily-design-system-svelte-helpers`;
   pin recorded in
   [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md).
   `bin/page-header-layout-refactor --check|--apply` is the drift detector /

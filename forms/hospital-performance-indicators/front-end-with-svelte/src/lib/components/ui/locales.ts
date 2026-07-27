@@ -1,4 +1,4 @@
-// Auto-generated companion data for LocaleChooser.
+// Auto-generated companion data for LocalePicker.
 //
 // `defaultLocaleLabels` is a code → English-name map derived from
 // `locales.tsv` (436 entries).

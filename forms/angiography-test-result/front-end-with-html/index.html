@@ -1,208 +1,480 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Angiography Test Result — structured vascular-imaging report</title>
-  <meta name="description" content="Structured angiography result (report) for the reporting clinician: examination details, clinical history, narrative and structured vascular findings, measurements, impression, and sign-off, graded on four axes (classification, severity, completeness, follow-up urgency) with an automatic critical-result alert.">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem('angiography-test-result.theme.v1');
-        var link = document.getElementById('theme-stylesheet');
-        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
-      } catch (e) {}
-    })();
-  </script>
-</head>
-<body>
-  <a class="skip-link visually-hidden" href="#form-sections">Skip to report form</a>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>
+            Angiography Test Result — structured vascular-imaging report
+        </title>
+        <meta
+            name="description"
+            content="Structured angiography result (report) for the reporting clinician: examination details, clinical history, narrative and structured vascular findings, measurements, impression, and sign-off, graded on four axes (classification, severity, completeness, follow-up urgency) with an automatic critical-result alert."
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            id="theme-stylesheet"
+            href="css/themes/light.css"
+        />
+        <script>
+            (function () {
+                try {
+                    var saved = localStorage.getItem(
+                        "angiography-test-result.theme.v1",
+                    );
+                    var link = document.getElementById("theme-stylesheet");
+                    if (saved && link)
+                        link.setAttribute(
+                            "href",
+                            "css/themes/" + saved + ".css",
+                        );
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link visually-hidden" href="#form-sections"
+            >Skip to report form</a
+        >
 
-  <header class="page-header">
-    <div class="page-header-inner">
-      <div class="page-header-bar">
-        <div class="page-header-title">
-          <h1>Angiography Test Result</h1>
-          <p class="subtitle">Structured vascular-imaging report with a four-axis interpretation grade: classification, severity, completeness, and follow-up urgency.</p>
-        </div>
-        <div class="page-header-controls no-print">
-          <p class="subtitle page-header-link"><a href="dashboard.html">View the clinician dashboard →</a></p>
-                <label class="visually-hidden" for="locale-select">Language</label>
-      <select class="theme-select" id="locale-select" aria-label="Language">
-      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
-      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
-      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
-      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
-      </select>
-      <label class="visually-hidden" for="theme-select">Theme</label>
-      <select class="theme-select" id="theme-select" aria-label="Theme">
-      <option class="theme-select-option" value="abyss">Abyss</option>
-      <option class="theme-select-option" value="acid">Acid</option>
-      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
-      <option class="theme-select-option" value="aqua">Aqua</option>
-      <option class="theme-select-option" value="autumn">Autumn</option>
-      <option class="theme-select-option" value="black">Black</option>
-      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
-      <option class="theme-select-option" value="business">Business</option>
-      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
-      <option class="theme-select-option" value="cmyk">Cmyk</option>
-      <option class="theme-select-option" value="coffee">Coffee</option>
-      <option class="theme-select-option" value="corporate">Corporate</option>
-      <option class="theme-select-option" value="cupcake">Cupcake</option>
-      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
-      <option class="theme-select-option" value="dark">Dark</option>
-      <option class="theme-select-option" value="dim">Dim</option>
-      <option class="theme-select-option" value="dracula">Dracula</option>
-      <option class="theme-select-option" value="emerald">Emerald</option>
-      <option class="theme-select-option" value="fantasy">Fantasy</option>
-      <option class="theme-select-option" value="forest">Forest</option>
-      <option class="theme-select-option" value="garden">Garden</option>
-      <option class="theme-select-option" value="halloween">Halloween</option>
-      <option class="theme-select-option" value="lemonade">Lemonade</option>
-      <option class="theme-select-option" value="light" selected>Light</option>
-      <option class="theme-select-option" value="lofi">Lofi</option>
-      <option class="theme-select-option" value="luxury">Luxury</option>
-      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
-      <option class="theme-select-option" value="night">Night</option>
-      <option class="theme-select-option" value="nord">Nord</option>
-      <option class="theme-select-option" value="pastel">Pastel</option>
-      <option class="theme-select-option" value="retro">Retro</option>
-      <option class="theme-select-option" value="silk">Silk</option>
-      <option class="theme-select-option" value="sunset">Sunset</option>
-      <option class="theme-select-option" value="synthwave">Synthwave</option>
-      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
-      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
-      <option class="theme-select-option" value="valentine">Valentine</option>
-      <option class="theme-select-option" value="winter">Winter</option>
-      <option class="theme-select-option" value="wireframe">Wireframe</option>
-      </select>
-      <label class="visually-hidden" for="text-size-chooser">Text size</label>
-      <select class="theme-select" id="text-size-chooser" aria-label="Text size">
-      <option class="theme-select-option" value="small">Small</option>
-      <option class="theme-select-option" value="medium" selected>Medium</option>
-      <option class="theme-select-option" value="large">Large</option>
-      <option class="theme-select-option" value="x-large">X Large</option>
-      </select>
-      <div class="share-chooser">
-      <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
-      <span class="share-chooser-icon" aria-hidden="true">↪</span>
-      </button>
-      <ul class="share-chooser-list" id="share-chooser-list" hidden>
-      <li class="share-chooser-list-item">
-      <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
-      </li>
-      </ul>
-      <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
-      </div>
-        </div>
-      </div>
-      <progress
-        id="progress"
-        class="progress"
-        max="100"
-        value="0"
-        aria-label="Form completion"
-      ></progress>
-      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+        <header class="page-header">
+            <div class="page-header-inner">
+                <div class="page-header-bar">
+                    <div class="page-header-title">
+                        <h1>Angiography Test Result</h1>
+                        <p class="subtitle">
+                            Structured vascular-imaging report with a four-axis
+                            interpretation grade: classification, severity,
+                            completeness, and follow-up urgency.
+                        </p>
+                    </div>
+                    <div class="page-header-controls no-print">
+                        <p class="subtitle page-header-link">
+                            <a href="dashboard.html"
+                                >View the clinician dashboard →</a
+                            >
+                        </p>
+                        <label class="visually-hidden" for="locale-select"
+                            >Language</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="locale-select"
+                            aria-label="Language"
+                        >
+                            <option
+                                class="theme-select-option"
+                                value="en-GB"
+                                selected
+                                lang="en-GB"
+                            >
+                                English (UK)
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="en-US"
+                                lang="en-US"
+                            >
+                                English (US)
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="cy-GB"
+                                lang="cy-GB"
+                            >
+                                Cymraeg
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="de-DE"
+                                lang="de-DE"
+                            >
+                                Deutsch
+                            </option>
+                        </select>
+                        <label class="visually-hidden" for="theme-select"
+                            >Theme</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="theme-select"
+                            aria-label="Theme"
+                        >
+                            <option class="theme-select-option" value="abyss">
+                                Abyss
+                            </option>
+                            <option class="theme-select-option" value="acid">
+                                Acid
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="adobe-spectrum"
+                            >
+                                Adobe Spectrum
+                            </option>
+                            <option class="theme-select-option" value="aqua">
+                                Aqua
+                            </option>
+                            <option class="theme-select-option" value="autumn">
+                                Autumn
+                            </option>
+                            <option class="theme-select-option" value="black">
+                                Black
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="bumblebee"
+                            >
+                                Bumblebee
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="business"
+                            >
+                                Business
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="caramellatte"
+                            >
+                                Caramellatte
+                            </option>
+                            <option class="theme-select-option" value="cmyk">
+                                Cmyk
+                            </option>
+                            <option class="theme-select-option" value="coffee">
+                                Coffee
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="corporate"
+                            >
+                                Corporate
+                            </option>
+                            <option class="theme-select-option" value="cupcake">
+                                Cupcake
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="cyberpunk"
+                            >
+                                Cyberpunk
+                            </option>
+                            <option class="theme-select-option" value="dark">
+                                Dark
+                            </option>
+                            <option class="theme-select-option" value="dim">
+                                Dim
+                            </option>
+                            <option class="theme-select-option" value="dracula">
+                                Dracula
+                            </option>
+                            <option class="theme-select-option" value="emerald">
+                                Emerald
+                            </option>
+                            <option class="theme-select-option" value="fantasy">
+                                Fantasy
+                            </option>
+                            <option class="theme-select-option" value="forest">
+                                Forest
+                            </option>
+                            <option class="theme-select-option" value="garden">
+                                Garden
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="halloween"
+                            >
+                                Halloween
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="lemonade"
+                            >
+                                Lemonade
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="light"
+                                selected
+                            >
+                                Light
+                            </option>
+                            <option class="theme-select-option" value="lofi">
+                                Lofi
+                            </option>
+                            <option class="theme-select-option" value="luxury">
+                                Luxury
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="mozilla-protocol"
+                            >
+                                Mozilla Protocol
+                            </option>
+                            <option class="theme-select-option" value="night">
+                                Night
+                            </option>
+                            <option class="theme-select-option" value="nord">
+                                Nord
+                            </option>
+                            <option class="theme-select-option" value="pastel">
+                                Pastel
+                            </option>
+                            <option class="theme-select-option" value="retro">
+                                Retro
+                            </option>
+                            <option class="theme-select-option" value="silk">
+                                Silk
+                            </option>
+                            <option class="theme-select-option" value="sunset">
+                                Sunset
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="synthwave"
+                            >
+                                Synthwave
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-government-digital-service"
+                            >
+                                UK · Government Digital Service
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-england-for-patients"
+                            >
+                                UK · NHS England — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-england-for-practitioners"
+                            >
+                                UK · NHS England — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-scotland-for-patients"
+                            >
+                                UK · NHS Scotland — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-scotland-for-practitioners"
+                            >
+                                UK · NHS Scotland — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-wales-for-patients"
+                            >
+                                UK · NHS Wales — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-wales-for-practitioners"
+                            >
+                                UK · NHS Wales — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-states-web-design-system"
+                            >
+                                US · Web Design System
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="valentine"
+                            >
+                                Valentine
+                            </option>
+                            <option class="theme-select-option" value="winter">
+                                Winter
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="wireframe"
+                            >
+                                Wireframe
+                            </option>
+                        </select>
+                        <label class="visually-hidden" for="text-size-picker"
+                            >Text size</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="text-size-picker"
+                            aria-label="Text size"
+                        >
+                            <option class="theme-select-option" value="small">
+                                Small
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+                            <option class="theme-select-option" value="large">
+                                Large
+                            </option>
+                            <option class="theme-select-option" value="x-large">
+                                X Large
+                            </option>
+                        </select>
+                        <div class="share-picker">
+                            <button
+                                type="button"
+                                class="share-picker-button"
+                                id="share-picker"
+                                aria-label="Share this page"
+                                aria-expanded="false"
+                                aria-controls="share-picker-list"
+                            >
+                                <span
+                                    class="share-picker-icon"
+                                    aria-hidden="true"
+                                    >↪</span
+                                >
+                            </button>
+                            <ul
+                                class="share-picker-list"
+                                id="share-picker-list"
+                                hidden
+                            >
+                                <li class="share-picker-list-item">
+                                    <button
+                                        type="button"
+                                        class="share-picker-copy"
+                                        id="share-picker-copy"
+                                    >
+                                        Copy link
+                                    </button>
+                                </li>
+                            </ul>
+                            <p
+                                class="share-picker-status"
+                                id="share-picker-status"
+                                aria-live="polite"
+                            ></p>
+                        </div>
+                    </div>
+                </div>
+                <progress
+                    id="progress"
+                    class="progress"
+                    max="100"
+                    value="0"
+                    aria-label="Form completion"
+                ></progress>
+                <p id="progress-text" class="subtitle" aria-live="polite">
+                    0 fields answered (0%)
+                </p>
 
-      <ol
-        id="step-list"
-        class="step-list"
-        aria-label="Angiography report steps"
-        data-current="0"
-      ><!-- step-list-items injected by js/form-app.js --></ol>
-    </div>
-  </header>
+                <ol
+                    id="step-list"
+                    class="step-list"
+                    aria-label="Angiography report steps"
+                    data-current="0"
+                >
+                    <!-- step-list-items injected by js/form-app.js -->
+                </ol>
+            </div>
+        </header>
 
-  <main>
-    <div class="intro">
-      <p>
-        Complete the seven report sections below after a vascular angiographic
-        examination has been performed. The wizard is one continuous page: the
-        reporting clinician scrolls through the sections in order, and a live
-        four-axis interpretation grade updates in the final section as the
-        report is edited. Answers are saved automatically in your browser as
-        you go.
-      </p>
-      <p>
-        A critical structured finding — active extravasation, dissection,
-        occlusion, or a near-occlusive stenosis — auto-escalates the follow-up
-        urgency to a critical alert: communicate the result directly to the
-        referrer and record the conversation before sign-off, in line with RCR
-        standards for the interpretation and reporting of imaging
-        investigations.
-      </p>
-    </div>
+        <main>
+            <div class="intro">
+                <p>
+                    Complete the seven report sections below after a vascular
+                    angiographic examination has been performed. The wizard is
+                    one continuous page: the reporting clinician scrolls through
+                    the sections in order, and a live four-axis interpretation
+                    grade updates in the final section as the report is edited.
+                    Answers are saved automatically in your browser as you go.
+                </p>
+                <p>
+                    A critical structured finding — active extravasation,
+                    dissection, occlusion, or a near-occlusive stenosis —
+                    auto-escalates the follow-up urgency to a critical alert:
+                    communicate the result directly to the referrer and record
+                    the conversation before sign-off, in line with RCR standards
+                    for the interpretation and reporting of imaging
+                    investigations.
+                </p>
+            </div>
 
-    <form
-      id="result-form"
-      class="form"
-      autocomplete="off"
-      novalidate
-      onsubmit="return false;"
-      aria-label="Angiography test result"
-    >
-      <div
-        id="error-summary"
-        class="error-summary"
-        role="alert"
-        aria-label="Validation errors"
-        hidden
-      ></div>
+            <form
+                id="result-form"
+                class="form"
+                autocomplete="off"
+                novalidate
+                onsubmit="return false;"
+                aria-label="Angiography test result"
+            >
+                <div
+                    id="error-summary"
+                    class="error-summary"
+                    role="alert"
+                    aria-label="Validation errors"
+                    hidden
+                ></div>
 
-      <div id="form-sections">
-        <!-- Steps rendered by js/form-app.js: -->
-        <!-- 1 Report Identification, 2 Examination Details, -->
-        <!-- 3 Clinical History, 4 Findings, 5 Measurements, -->
-        <!-- 6 Impression, 7 Interpretation & Sign-off -->
-      </div>
+                <div id="form-sections">
+                    <!-- Steps rendered by js/form-app.js: -->
+                    <!-- 1 Report Identification, 2 Examination Details, -->
+                    <!-- 3 Clinical History, 4 Findings, 5 Measurements, -->
+                    <!-- 6 Impression, 7 Interpretation & Sign-off -->
+                </div>
 
-      <div class="button-group">
-        <button type="button" id="submit-btn" class="button" data-variant="primary">
-          Submit and view report
-        </button>
-        <button type="button" id="reset-btn" class="button" data-variant="secondary">
-          Start over
-        </button>
-      </div>
-    </form>
+                <div class="button-group">
+                    <button
+                        type="button"
+                        id="submit-btn"
+                        class="button"
+                        data-variant="primary"
+                    >
+                        Submit and view report
+                    </button>
+                    <button
+                        type="button"
+                        id="reset-btn"
+                        class="button"
+                        data-variant="secondary"
+                    >
+                        Start over
+                    </button>
+                </div>
+            </form>
 
-    <section
-      id="report"
-      class="panel"
-      role="region"
-      aria-live="polite"
-      aria-label="Interpretation report"
-    >
-      <p class="empty-message">Submit the form to see the report.</p>
-    </section>
+            <section
+                id="report"
+                class="panel"
+                role="region"
+                aria-live="polite"
+                aria-label="Interpretation report"
+            >
+                <p class="empty-message">Submit the form to see the report.</p>
+            </section>
+        </main>
 
-  </main>
+        <footer class="page-footer">
+            <p>
+                This structured angiography report is aligned with the Royal
+                College of Radiologists (RCR) standards for the interpretation
+                and reporting of imaging investigations, NASCET / ECST
+                arterial-stenosis grading conventions, and IR(ME)R 2017. The
+                four-axis grade is a reporting aid, not a diagnosis; interpret
+                and escalate in line with local policy and clinical judgement.
+            </p>
+        </footer>
 
-    <footer class="page-footer">
-      <p>
-        This structured angiography report is aligned with the Royal College of
-        Radiologists (RCR) standards for the interpretation and reporting of
-        imaging investigations, NASCET / ECST arterial-stenosis grading
-        conventions, and IR(ME)R 2017. The four-axis grade is a reporting aid,
-        not a diagnosis; interpret and escalate in line with local policy and
-        clinical judgement.
-      </p>
-    </footer>
-
-
-  <script type="module" src="js/form-app.js"></script>
-  <script type="module" src="js/theme-select.js"></script>
-  <script type="module" src="js/text-size-chooser.js"></script>
-  <script type="module" src="js/share-chooser.js"></script>
-  <script type="module" src="js/locale-select.js"></script>
-</body>
+        <script type="module" src="js/form-app.js"></script>
+        <script type="module" src="js/theme-select.js"></script>
+        <script type="module" src="js/text-size-picker.js"></script>
+        <script type="module" src="js/share-picker.js"></script>
+        <script type="module" src="js/locale-select.js"></script>
+    </body>
 </html>

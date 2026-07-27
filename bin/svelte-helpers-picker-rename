@@ -1,0 +1,244 @@
+#!/usr/bin/env python3
+"""bin/svelte-helpers-picker-rename -- rename the four Lily Svelte helper
+controls from their current *-chooser names to their new *-picker names,
+matching the upstream rename (lily-design-system-svelte-helpers commit
+"Rename *-chooser to *-picker to harmonize with Adobe").
+
+  ThemeChooser.svelte    -> ThemePicker.svelte    (.theme-chooser*    -> .theme-picker*)
+  LocaleChooser.svelte   -> LocalePicker.svelte   (.locale-chooser*   -> .locale-picker*)
+  TextSizeChooser.svelte -> TextSizePicker.svelte (.text-size-chooser* -> .text-size-picker*)
+  ShareChooser.svelte    -> SharePicker.svelte    (.share-chooser*    -> .share-picker*)
+
+Reads the fresh component source directly from the pinned upstream checkout
+(~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-helpers/)
+at --apply time, the same way bin/lily-svelte-sync does for the unrelated
+svelte-headless family, converting its 4-space indent to this repo's tab
+convention.
+
+What changes per form (front-end-with-svelte/):
+  - src/lib/components/ui/{Old}.svelte  -> deleted
+  - src/lib/components/ui/{New}.svelte  -> new (fresh vendored copy)
+  - src/app.css -> renames the old class family to the new one (regex,
+    in place -- keeps whatever else is around it)
+  - src/routes/<slug>/+layout.svelte -> renames the import + component tag
+    (props are unchanged -- none of them said "chooser" literally)
+
+Usage:
+  bin/svelte-helpers-picker-rename --check   # CI drift check (no writes)
+  bin/svelte-helpers-picker-rename --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+LILY_HELPERS_DIR = Path(
+    "~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-helpers"
+).expanduser()
+
+# (old component filename, new component filename, old class prefix, new class prefix,
+#  upstream package dir, upstream component filename)
+CONTROLS = [
+    (
+        "ThemeChooser.svelte",
+        "ThemePicker.svelte",
+        "theme-chooser",
+        "theme-picker",
+        "lily-design-system-svelte-theme-picker",
+        "ThemePicker.svelte",
+    ),
+    (
+        "LocaleChooser.svelte",
+        "LocalePicker.svelte",
+        "locale-chooser",
+        "locale-picker",
+        "lily-design-system-svelte-locale-picker",
+        "LocalePicker.svelte",
+    ),
+    (
+        "TextSizeChooser.svelte",
+        "TextSizePicker.svelte",
+        "text-size-chooser",
+        "text-size-picker",
+        "lily-design-system-svelte-text-size-picker",
+        "TextSizePicker.svelte",
+    ),
+    (
+        "ShareChooser.svelte",
+        "SharePicker.svelte",
+        "share-chooser",
+        "share-picker",
+        "lily-design-system-svelte-share-picker",
+        "SharePicker.svelte",
+    ),
+]
+
+
+def four_space_to_tab(text: str) -> str:
+    def convert_line(line: str) -> str:
+        stripped = line.lstrip(" ")
+        n = len(line) - len(stripped)
+        return "\t" * (n // 4) + " " * (n % 4) + stripped
+
+    return "\n".join(convert_line(line) for line in text.split("\n"))
+
+
+def vendored_component_source(pkg_dir: str, filename: str) -> str:
+    path = LILY_HELPERS_DIR / pkg_dir / filename
+    return four_space_to_tab(path.read_text(encoding="utf-8"))
+
+
+def process_locales_companion(ui_dir: Path, source: str, check: bool) -> str:
+    path = ui_dir / "locales.ts"
+    if path.exists() and path.read_text(encoding="utf-8") == source:
+        return "skip-already-done"
+    if not check:
+        path.write_text(source, encoding="utf-8")
+    return "changed"
+
+
+def process_component(
+    ui_dir: Path, old_name: str, new_name: str, source: str, check: bool
+) -> str:
+    old_path = ui_dir / old_name
+    new_path = ui_dir / new_name
+    if new_path.exists() and not old_path.exists():
+        if new_path.read_text(encoding="utf-8") == source:
+            return "skip-already-done"
+        if not check:
+            new_path.write_text(source, encoding="utf-8")
+        return "changed"
+    if not old_path.exists() and not new_path.exists():
+        return "skip-missing"
+
+    if not check:
+        new_path.write_text(source, encoding="utf-8")
+        if old_path.exists() and old_path != new_path:
+            old_path.unlink()
+    return "changed"
+
+
+def process_css(path: Path, old_prefix: str, new_prefix: str, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    if (
+        f".{new_prefix} " in text
+        or f".{new_prefix}," in text
+        or f".{new_prefix}{{" in text
+    ):
+        if f".{old_prefix}" not in text:
+            return "skip-already-done"
+    if f".{old_prefix}" not in text:
+        return "skip-not-present"
+
+    new_text = re.sub(rf"\b{re.escape(old_prefix)}\b", new_prefix, text)
+    if new_text == text:
+        return "skip-not-present"
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def process_layout(path: Path, old_name: str, new_name: str, check: bool) -> str:
+    text = path.read_text(encoding="utf-8")
+    old_tag = old_name.removesuffix(".svelte")
+    new_tag = new_name.removesuffix(".svelte")
+    if f"{new_tag}.svelte" in text:
+        if f"{old_tag}.svelte" not in text and f"<{old_tag}" not in text:
+            return "skip-already-done"
+    if f"{old_tag}.svelte" not in text and f"<{old_tag}" not in text:
+        return "skip-not-present"
+
+    new_text = text.replace(f"{old_name}", f"{new_name}")
+    new_text = re.sub(rf"<{old_tag}\b", f"<{new_tag}", new_text)
+    new_text = re.sub(rf"</{old_tag}>", f"</{new_tag}>", new_text)
+    new_text = re.sub(rf"\bimport {old_tag} from\b", f"import {new_tag} from", new_text)
+    if new_text == text:
+        return "skip-not-present"
+    if not check:
+        path.write_text(new_text, encoding="utf-8")
+    return "changed"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    sources = {}
+    for old_name, new_name, old_prefix, new_prefix, pkg_dir, upstream_file in CONTROLS:
+        sources[old_name] = vendored_component_source(pkg_dir, upstream_file)
+    locales_companion_source = four_space_to_tab(
+        (
+            LILY_HELPERS_DIR / "lily-design-system-svelte-locale-picker" / "locales.ts"
+        ).read_text(encoding="utf-8")
+    )
+
+    counts: dict[str, int] = {}
+
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        svelte_dir = form_dir / "front-end-with-svelte"
+        if not svelte_dir.is_dir():
+            continue
+
+        ui_dir = svelte_dir / "src/lib/components/ui"
+        css_path = svelte_dir / "src/app.css"
+
+        for (
+            old_name,
+            new_name,
+            old_prefix,
+            new_prefix,
+            pkg_dir,
+            upstream_file,
+        ) in CONTROLS:
+            if ui_dir.is_dir():
+                r = process_component(
+                    ui_dir, old_name, new_name, sources[old_name], check
+                )
+                counts[f"component-{new_prefix}-{r}"] = (
+                    counts.get(f"component-{new_prefix}-{r}", 0) + 1
+                )
+
+            if css_path.is_file():
+                r = process_css(css_path, old_prefix, new_prefix, check)
+                counts[f"css-{new_prefix}-{r}"] = (
+                    counts.get(f"css-{new_prefix}-{r}", 0) + 1
+                )
+
+            for layout_path in svelte_dir.glob("src/routes/*/+layout.svelte"):
+                r = process_layout(layout_path, old_name, new_name, check)
+                counts[f"layout-{new_prefix}-{r}"] = (
+                    counts.get(f"layout-{new_prefix}-{r}", 0) + 1
+                )
+
+        if ui_dir.is_dir():
+            r = process_locales_companion(ui_dir, locales_companion_source, check)
+            counts[f"locales-companion-{r}"] = (
+                counts.get(f"locales-companion-{r}", 0) + 1
+            )
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+
+    if check:
+        drift = sum(v for k, v in counts.items() if k.endswith("-changed"))
+        return 1 if drift else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

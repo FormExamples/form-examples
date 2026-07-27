@@ -1,209 +1,483 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ward Round Note — daily inpatient review</title>
-  <meta name="description" content="Daily inpatient ward round note: documents one bedside review across ten components (header, overnight events, problems, examination and NEWS2, investigations, VTE, medication, plan, escalation, discharge), grades the entry complete, partial, or incomplete with a completeness percentage, and raises safety flags.">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem('ward-round-note.theme.v1');
-        var link = document.getElementById('theme-stylesheet');
-        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
-      } catch (e) {}
-    })();
-  </script>
-</head>
-<body>
-  <a class="skip-link visually-hidden" href="#form-sections">Skip to note</a>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Ward Round Note — daily inpatient review</title>
+        <meta
+            name="description"
+            content="Daily inpatient ward round note: documents one bedside review across ten components (header, overnight events, problems, examination and NEWS2, investigations, VTE, medication, plan, escalation, discharge), grades the entry complete, partial, or incomplete with a completeness percentage, and raises safety flags."
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            id="theme-stylesheet"
+            href="css/themes/light.css"
+        />
+        <script>
+            (function () {
+                try {
+                    var saved = localStorage.getItem(
+                        "ward-round-note.theme.v1",
+                    );
+                    var link = document.getElementById("theme-stylesheet");
+                    if (saved && link)
+                        link.setAttribute(
+                            "href",
+                            "css/themes/" + saved + ".css",
+                        );
+                } catch (e) {}
+            })();
+        </script>
+    </head>
+    <body>
+        <a class="skip-link visually-hidden" href="#form-sections"
+            >Skip to note</a
+        >
 
-  <header class="page-header">
-    <div class="page-header-inner">
-      <div class="page-header-bar">
-        <div class="page-header-title">
-          <h1>Ward Round Note</h1>
-          <p class="subtitle">Daily inpatient review documented at the bedside, graded for documentation completeness.</p>
-        </div>
-        <div class="page-header-controls no-print">
-          <p class="subtitle page-header-link"><a href="dashboard.html">View the clinician dashboard →</a></p>
-                <label class="visually-hidden" for="locale-select">Language</label>
-      <select class="theme-select" id="locale-select" aria-label="Language">
-      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
-      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
-      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
-      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
-      </select>
-      <label class="visually-hidden" for="theme-select">Theme</label>
-      <select class="theme-select" id="theme-select" aria-label="Theme">
-      <option class="theme-select-option" value="abyss">Abyss</option>
-      <option class="theme-select-option" value="acid">Acid</option>
-      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
-      <option class="theme-select-option" value="aqua">Aqua</option>
-      <option class="theme-select-option" value="autumn">Autumn</option>
-      <option class="theme-select-option" value="black">Black</option>
-      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
-      <option class="theme-select-option" value="business">Business</option>
-      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
-      <option class="theme-select-option" value="cmyk">Cmyk</option>
-      <option class="theme-select-option" value="coffee">Coffee</option>
-      <option class="theme-select-option" value="corporate">Corporate</option>
-      <option class="theme-select-option" value="cupcake">Cupcake</option>
-      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
-      <option class="theme-select-option" value="dark">Dark</option>
-      <option class="theme-select-option" value="dim">Dim</option>
-      <option class="theme-select-option" value="dracula">Dracula</option>
-      <option class="theme-select-option" value="emerald">Emerald</option>
-      <option class="theme-select-option" value="fantasy">Fantasy</option>
-      <option class="theme-select-option" value="forest">Forest</option>
-      <option class="theme-select-option" value="garden">Garden</option>
-      <option class="theme-select-option" value="halloween">Halloween</option>
-      <option class="theme-select-option" value="lemonade">Lemonade</option>
-      <option class="theme-select-option" value="light" selected>Light</option>
-      <option class="theme-select-option" value="lofi">Lofi</option>
-      <option class="theme-select-option" value="luxury">Luxury</option>
-      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
-      <option class="theme-select-option" value="night">Night</option>
-      <option class="theme-select-option" value="nord">Nord</option>
-      <option class="theme-select-option" value="pastel">Pastel</option>
-      <option class="theme-select-option" value="retro">Retro</option>
-      <option class="theme-select-option" value="silk">Silk</option>
-      <option class="theme-select-option" value="sunset">Sunset</option>
-      <option class="theme-select-option" value="synthwave">Synthwave</option>
-      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
-      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
-      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
-      <option class="theme-select-option" value="valentine">Valentine</option>
-      <option class="theme-select-option" value="winter">Winter</option>
-      <option class="theme-select-option" value="wireframe">Wireframe</option>
-      </select>
-      <label class="visually-hidden" for="text-size-chooser">Text size</label>
-      <select class="theme-select" id="text-size-chooser" aria-label="Text size">
-      <option class="theme-select-option" value="small">Small</option>
-      <option class="theme-select-option" value="medium" selected>Medium</option>
-      <option class="theme-select-option" value="large">Large</option>
-      <option class="theme-select-option" value="x-large">X Large</option>
-      </select>
-      <div class="share-chooser">
-      <button type="button" class="share-chooser-button" id="share-chooser" aria-label="Share this page" aria-expanded="false" aria-controls="share-chooser-list">
-      <span class="share-chooser-icon" aria-hidden="true">↪</span>
-      </button>
-      <ul class="share-chooser-list" id="share-chooser-list" hidden>
-      <li class="share-chooser-list-item">
-      <button type="button" class="share-chooser-copy" id="share-chooser-copy">Copy link</button>
-      </li>
-      </ul>
-      <p class="share-chooser-status" id="share-chooser-status" aria-live="polite"></p>
-      </div>
-        </div>
-      </div>
-      <progress
-        id="progress"
-        class="progress"
-        max="100"
-        value="0"
-        aria-label="Form completion"
-      ></progress>
-      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+        <header class="page-header">
+            <div class="page-header-inner">
+                <div class="page-header-bar">
+                    <div class="page-header-title">
+                        <h1>Ward Round Note</h1>
+                        <p class="subtitle">
+                            Daily inpatient review documented at the bedside,
+                            graded for documentation completeness.
+                        </p>
+                    </div>
+                    <div class="page-header-controls no-print">
+                        <p class="subtitle page-header-link">
+                            <a href="dashboard.html"
+                                >View the clinician dashboard →</a
+                            >
+                        </p>
+                        <label class="visually-hidden" for="locale-select"
+                            >Language</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="locale-select"
+                            aria-label="Language"
+                        >
+                            <option
+                                class="theme-select-option"
+                                value="en-GB"
+                                selected
+                                lang="en-GB"
+                            >
+                                English (UK)
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="en-US"
+                                lang="en-US"
+                            >
+                                English (US)
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="cy-GB"
+                                lang="cy-GB"
+                            >
+                                Cymraeg
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="de-DE"
+                                lang="de-DE"
+                            >
+                                Deutsch
+                            </option>
+                        </select>
+                        <label class="visually-hidden" for="theme-select"
+                            >Theme</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="theme-select"
+                            aria-label="Theme"
+                        >
+                            <option class="theme-select-option" value="abyss">
+                                Abyss
+                            </option>
+                            <option class="theme-select-option" value="acid">
+                                Acid
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="adobe-spectrum"
+                            >
+                                Adobe Spectrum
+                            </option>
+                            <option class="theme-select-option" value="aqua">
+                                Aqua
+                            </option>
+                            <option class="theme-select-option" value="autumn">
+                                Autumn
+                            </option>
+                            <option class="theme-select-option" value="black">
+                                Black
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="bumblebee"
+                            >
+                                Bumblebee
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="business"
+                            >
+                                Business
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="caramellatte"
+                            >
+                                Caramellatte
+                            </option>
+                            <option class="theme-select-option" value="cmyk">
+                                Cmyk
+                            </option>
+                            <option class="theme-select-option" value="coffee">
+                                Coffee
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="corporate"
+                            >
+                                Corporate
+                            </option>
+                            <option class="theme-select-option" value="cupcake">
+                                Cupcake
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="cyberpunk"
+                            >
+                                Cyberpunk
+                            </option>
+                            <option class="theme-select-option" value="dark">
+                                Dark
+                            </option>
+                            <option class="theme-select-option" value="dim">
+                                Dim
+                            </option>
+                            <option class="theme-select-option" value="dracula">
+                                Dracula
+                            </option>
+                            <option class="theme-select-option" value="emerald">
+                                Emerald
+                            </option>
+                            <option class="theme-select-option" value="fantasy">
+                                Fantasy
+                            </option>
+                            <option class="theme-select-option" value="forest">
+                                Forest
+                            </option>
+                            <option class="theme-select-option" value="garden">
+                                Garden
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="halloween"
+                            >
+                                Halloween
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="lemonade"
+                            >
+                                Lemonade
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="light"
+                                selected
+                            >
+                                Light
+                            </option>
+                            <option class="theme-select-option" value="lofi">
+                                Lofi
+                            </option>
+                            <option class="theme-select-option" value="luxury">
+                                Luxury
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="mozilla-protocol"
+                            >
+                                Mozilla Protocol
+                            </option>
+                            <option class="theme-select-option" value="night">
+                                Night
+                            </option>
+                            <option class="theme-select-option" value="nord">
+                                Nord
+                            </option>
+                            <option class="theme-select-option" value="pastel">
+                                Pastel
+                            </option>
+                            <option class="theme-select-option" value="retro">
+                                Retro
+                            </option>
+                            <option class="theme-select-option" value="silk">
+                                Silk
+                            </option>
+                            <option class="theme-select-option" value="sunset">
+                                Sunset
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="synthwave"
+                            >
+                                Synthwave
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-government-digital-service"
+                            >
+                                UK · Government Digital Service
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-england-for-patients"
+                            >
+                                UK · NHS England — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-england-for-practitioners"
+                            >
+                                UK · NHS England — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-scotland-for-patients"
+                            >
+                                UK · NHS Scotland — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-scotland-for-practitioners"
+                            >
+                                UK · NHS Scotland — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-wales-for-patients"
+                            >
+                                UK · NHS Wales — Patients
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-kingdom-national-health-service-wales-for-practitioners"
+                            >
+                                UK · NHS Wales — Practitioners
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="united-states-web-design-system"
+                            >
+                                US · Web Design System
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="valentine"
+                            >
+                                Valentine
+                            </option>
+                            <option class="theme-select-option" value="winter">
+                                Winter
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="wireframe"
+                            >
+                                Wireframe
+                            </option>
+                        </select>
+                        <label class="visually-hidden" for="text-size-picker"
+                            >Text size</label
+                        >
+                        <select
+                            class="theme-select"
+                            id="text-size-picker"
+                            aria-label="Text size"
+                        >
+                            <option class="theme-select-option" value="small">
+                                Small
+                            </option>
+                            <option
+                                class="theme-select-option"
+                                value="medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+                            <option class="theme-select-option" value="large">
+                                Large
+                            </option>
+                            <option class="theme-select-option" value="x-large">
+                                X Large
+                            </option>
+                        </select>
+                        <div class="share-picker">
+                            <button
+                                type="button"
+                                class="share-picker-button"
+                                id="share-picker"
+                                aria-label="Share this page"
+                                aria-expanded="false"
+                                aria-controls="share-picker-list"
+                            >
+                                <span
+                                    class="share-picker-icon"
+                                    aria-hidden="true"
+                                    >↪</span
+                                >
+                            </button>
+                            <ul
+                                class="share-picker-list"
+                                id="share-picker-list"
+                                hidden
+                            >
+                                <li class="share-picker-list-item">
+                                    <button
+                                        type="button"
+                                        class="share-picker-copy"
+                                        id="share-picker-copy"
+                                    >
+                                        Copy link
+                                    </button>
+                                </li>
+                            </ul>
+                            <p
+                                class="share-picker-status"
+                                id="share-picker-status"
+                                aria-live="polite"
+                            ></p>
+                        </div>
+                    </div>
+                </div>
+                <progress
+                    id="progress"
+                    class="progress"
+                    max="100"
+                    value="0"
+                    aria-label="Form completion"
+                ></progress>
+                <p id="progress-text" class="subtitle" aria-live="polite">
+                    0 fields answered (0%)
+                </p>
 
-      <ol
-        id="step-list"
-        class="step-list"
-        aria-label="Ward round note steps"
-        data-current="0"
-      ><!-- step-list-items injected by js/form-app.js --></ol>
-    </div>
-  </header>
+                <ol
+                    id="step-list"
+                    class="step-list"
+                    aria-label="Ward round note steps"
+                    data-current="0"
+                >
+                    <!-- step-list-items injected by js/form-app.js -->
+                </ol>
+            </div>
+        </header>
 
-  <main>
-    <div class="intro">
-      <p>
-        Record a single daily ward round review — the review header, patient
-        identification, and the ten review components (overnight events, current
-        problems and progress, examination and NEWS2, investigations, VTE
-        assessment, medication changes, plan and jobs, escalation, and estimated
-        discharge). Answers are saved automatically in your browser as you go.
-      </p>
-      <p>
-        This is a <strong>documentation and completeness</strong> instrument, not
-        a numeric clinical score. It grades the entry Complete, Partial, or
-        Incomplete, computes a completeness percentage over the eight required
-        components, and raises safety flags (for example: a deteriorating NEWS2
-        needing escalation, a VTE assessment not done, or no plan documented). An
-        explicit negative — "no changes", "none outstanding" — counts as
-        documented. A Complete grade means the entry is well documented so another
-        clinician can safely continue care between shifts; it does not mean the
-        clinical care was correct.
-      </p>
-    </div>
+        <main>
+            <div class="intro">
+                <p>
+                    Record a single daily ward round review — the review header,
+                    patient identification, and the ten review components
+                    (overnight events, current problems and progress,
+                    examination and NEWS2, investigations, VTE assessment,
+                    medication changes, plan and jobs, escalation, and estimated
+                    discharge). Answers are saved automatically in your browser
+                    as you go.
+                </p>
+                <p>
+                    This is a
+                    <strong>documentation and completeness</strong> instrument,
+                    not a numeric clinical score. It grades the entry Complete,
+                    Partial, or Incomplete, computes a completeness percentage
+                    over the eight required components, and raises safety flags
+                    (for example: a deteriorating NEWS2 needing escalation, a
+                    VTE assessment not done, or no plan documented). An explicit
+                    negative — "no changes", "none outstanding" — counts as
+                    documented. A Complete grade means the entry is well
+                    documented so another clinician can safely continue care
+                    between shifts; it does not mean the clinical care was
+                    correct.
+                </p>
+            </div>
 
-    <form
-      id="assessment-form"
-      class="form"
-      autocomplete="off"
-      novalidate
-      onsubmit="return false;"
-      aria-label="Ward round note"
-    >
-      <div
-        id="error-summary"
-        class="error-summary"
-        role="alert"
-        aria-label="Validation errors"
-        hidden
-      ></div>
+            <form
+                id="assessment-form"
+                class="form"
+                autocomplete="off"
+                novalidate
+                onsubmit="return false;"
+                aria-label="Ward round note"
+            >
+                <div
+                    id="error-summary"
+                    class="error-summary"
+                    role="alert"
+                    aria-label="Validation errors"
+                    hidden
+                ></div>
 
-      <div id="form-sections">
-        <!-- Steps rendered by js/form-app.js: -->
-        <!-- 1 Header, 2 Patient, 3 Overnight, 4 Problems, 5 Examination, -->
-        <!-- 6 Investigations, 7 VTE, 8 Medication, 9 Plan, 10 Escalation, 11 Summary -->
-      </div>
+                <div id="form-sections">
+                    <!-- Steps rendered by js/form-app.js: -->
+                    <!-- 1 Header, 2 Patient, 3 Overnight, 4 Problems, 5 Examination, -->
+                    <!-- 6 Investigations, 7 VTE, 8 Medication, 9 Plan, 10 Escalation, 11 Summary -->
+                </div>
 
-      <div class="button-group">
-        <button type="button" id="submit-btn" class="button" data-variant="primary">
-          Submit and view report
-        </button>
-        <button type="button" id="reset-btn" class="button" data-variant="secondary">
-          Start over
-        </button>
-      </div>
-    </form>
+                <div class="button-group">
+                    <button
+                        type="button"
+                        id="submit-btn"
+                        class="button"
+                        data-variant="primary"
+                    >
+                        Submit and view report
+                    </button>
+                    <button
+                        type="button"
+                        id="reset-btn"
+                        class="button"
+                        data-variant="secondary"
+                    >
+                        Start over
+                    </button>
+                </div>
+            </form>
 
-    <section
-      id="report"
-      class="panel"
-      role="region"
-      aria-live="polite"
-      aria-label="Completeness report"
-    >
-      <p class="empty-message">Submit the form to see the report.</p>
-    </section>
+            <section
+                id="report"
+                class="panel"
+                role="region"
+                aria-live="polite"
+                aria-label="Completeness report"
+            >
+                <p class="empty-message">Submit the form to see the report.</p>
+            </section>
+        </main>
 
-  </main>
+        <footer class="page-footer">
+            <p>
+                The ward round note is a contemporaneous daily record supporting
+                continuity of care between shifts and good medical
+                record-keeping (GMC Good Medical Practice; AoMRC record
+                standards; NEWS2; NICE NG89 VTE). This tool grades the
+                completeness of the written record and prompts escalation and
+                safety-netting; it is not a diagnosis, a risk score, or a
+                substitute for clinical judgement.
+            </p>
+        </footer>
 
-    <footer class="page-footer">
-      <p>
-        The ward round note is a contemporaneous daily record supporting
-        continuity of care between shifts and good medical record-keeping (GMC
-        Good Medical Practice; AoMRC record standards; NEWS2; NICE NG89 VTE). This
-        tool grades the completeness of the written record and prompts escalation
-        and safety-netting; it is not a diagnosis, a risk score, or a substitute
-        for clinical judgement.
-      </p>
-    </footer>
-
-
-  <script type="module" src="js/form-app.js"></script>
-  <script type="module" src="js/theme-select.js"></script>
-  <script type="module" src="js/text-size-chooser.js"></script>
-  <script type="module" src="js/share-chooser.js"></script>
-  <script type="module" src="js/locale-select.js"></script>
-</body>
+        <script type="module" src="js/form-app.js"></script>
+        <script type="module" src="js/theme-select.js"></script>
+        <script type="module" src="js/text-size-picker.js"></script>
+        <script type="module" src="js/share-picker.js"></script>
+        <script type="module" src="js/locale-select.js"></script>
+    </body>
 </html>

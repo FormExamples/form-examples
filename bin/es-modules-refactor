@@ -52,8 +52,8 @@ STANDALONE = {
     "table-export.js",
     "theme-select.js",
     "locale-select.js",
-    "text-size-chooser.js",
-    "share-chooser.js",
+    "text-size-picker.js",
+    "share-picker.js",
 }
 
 

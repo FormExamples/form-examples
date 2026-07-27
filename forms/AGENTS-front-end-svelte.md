@@ -19,13 +19,13 @@ the app is served at `/<slug>/`. Within it, the URL space is the form's
 e.g. `cardiology-requests`, `medical-operation-notes`). Collections use a
 plural base directory; individual items use a dynamic `[id]` route parameter:
 
-| Route file | URL | Purpose |
-| --- | --- | --- |
-| `src/routes/<slug>/<plural>/+page.svelte` | `/<slug>/<plural>/` | **Dashboard** — the collection list |
-| `src/routes/<slug>/<plural>/[id]/+page.svelte` | `/<slug>/<plural>/[id]` | **Input form** — the single-page wizard for one item (`[id] = new` to create) |
-| `src/routes/<slug>/<plural>/[id]/report/+page.svelte` | `/<slug>/<plural>/[id]/report` | Report view for one item (PDF via `report/pdf/+server.ts`) |
-| `src/routes/<slug>/+page.svelte` | `/<slug>/` | **Welcome page** — one-sentence summary, links to every route choice, then a detailed user-friendly explanation of the form and its specification |
-| `src/routes/+server.ts` | `/` | **Root redirect** — a bare `GET` handler that 307-redirects to `/<slug>/`, so visiting the dev server (or a deployed root) at `/` lands on the welcome page instead of 404ing |
+| Route file                                            | URL                            | Purpose                                                                                                                                                                       |
+| ----------------------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/routes/<slug>/<plural>/+page.svelte`             | `/<slug>/<plural>/`            | **Dashboard** — the collection list                                                                                                                                           |
+| `src/routes/<slug>/<plural>/[id]/+page.svelte`        | `/<slug>/<plural>/[id]`        | **Input form** — the single-page wizard for one item (`[id] = new` to create)                                                                                                 |
+| `src/routes/<slug>/<plural>/[id]/report/+page.svelte` | `/<slug>/<plural>/[id]/report` | Report view for one item (PDF via `report/pdf/+server.ts`)                                                                                                                    |
+| `src/routes/<slug>/+page.svelte`                      | `/<slug>/`                     | **Welcome page** — one-sentence summary, links to every route choice, then a detailed user-friendly explanation of the form and its specification                             |
+| `src/routes/+server.ts`                               | `/`                            | **Root redirect** — a bare `GET` handler that 307-redirects to `/<slug>/`, so visiting the dev server (or a deployed root) at `/` lands on the welcome page instead of 404ing |
 
 So for the `cardiology-request` form (slug), everything lives under
 `src/routes/cardiology-request/`: `/cardiology-request/cardiology-requests/` is
@@ -37,10 +37,10 @@ layout, with one exception: `src/routes/+server.ts` at the true root, whose
 only job is redirecting `/` to `/<slug>/`:
 
 ```ts
-import { redirect } from '@sveltejs/kit';
+import { redirect } from "@sveltejs/kit";
 
 export function GET() {
-	redirect(307, '/<slug>/');
+  redirect(307, "/<slug>/");
 }
 ```
 
@@ -79,63 +79,63 @@ system** — do not hand-roll theme CSS.
   `static/themes/<name>.css` (light, dark, dim, dracula, nord, the NHS
   England/Scotland/Wales patient & practitioner themes, GDS, USWDS, …). Each is
   a standalone file; **exactly one loads at a time** via a swappable
-  `<link data-lily-theme-chooser>` that the `ThemeChooser` component injects and
+  `<link data-lily-theme-picker>` that the `ThemePicker` component injects and
   swaps itself (they cannot be `@import`-ed together — each includes a bare
   `:where(:root)` block and they would collide).
 - **The default theme is the Lily light theme.** The `@theme` block in
-  `app.css` carries the Lily *light* token values, so the baseline render is
+  `app.css` carries the Lily _light_ token values, so the baseline render is
   Lily light before any stylesheet loads; the persisted default selection is
   `light` (`src/lib/config/themes.ts` `DEFAULT_THEME`). There is no "system"
   option (it would 404 on a missing stylesheet).
-- **Prebuilt control.** Switch themes with the Lily `ThemeChooser` component
+- **Prebuilt control.** Switch themes with the Lily `ThemePicker` component
   (`src/lib/components/ui/`), mirroring
-  `lily-design-system-svelte-helpers/lily-design-system-svelte-theme-chooser`:
+  `lily-design-system-svelte-helpers/lily-design-system-svelte-theme-picker`:
   a single-glyph icon button (◑) that opens a headless listbox. Called with
   `themesUrl`/`themes`/`themeLabels`/`defaultValue`/`storageKey` props and
   manages its own `<link>` swap, `data-theme` attribute, and localStorage
   persistence internally.
-- **LocaleChooser sits before ThemeChooser** in the header nav, the headless
-  sibling of `ThemeChooser` (single-glyph 🌐 icon button + listbox, `locales`/
+- **LocalePicker sits before ThemePicker** in the header nav, the headless
+  sibling of `ThemePicker` (single-glyph 🌐 icon button + listbox, `locales`/
   `localeLabels`/`defaultValue`/`storageKey` props), reflected onto
   `<html lang>`/`<html dir>` and persisted to `src/lib/config/locales.ts`'s
   `LOCALE_STORAGE_KEY`. Fixed four-locale catalogue (`en-GB`, `en-US`,
   `cy-GB`, `de-DE`); presentation only — no message catalogue is wired up,
   see [`../docs/i18n.md`](../docs/i18n.md). Vendors a companion
   `src/lib/components/ui/locales.ts` (upstream's `defaultLocaleLabels`/RTL
-  data) alongside `LocaleChooser.svelte`. Both controls share
-  `.theme-chooser`/`.locale-chooser` baseline CSS appended once to `app.css`
+  data) alongside `LocalePicker.svelte`. Both controls share
+  `.theme-picker`/`.locale-picker` baseline CSS appended once to `app.css`
   (headless: no default styling otherwise; no `lily-` prefix needed — the
-  chooser rename dissolved the class-name collision with the unrelated
+  picker rename dissolved the class-name collision with the unrelated
   `lily-design-system-svelte-headless` catalog components that made the
   prefix necessary in the first place). Tools:
   `bin/svelte-locale-select-refactor --check` (a locale control present in
-  every layout) and `bin/svelte-helpers-chooser-rename --check|--apply`
+  every layout) and `bin/svelte-helpers-picker-rename --check|--apply`
   (button+listbox contract + naming drift against
   `lily-design-system-svelte-helpers`; pin recorded in
   [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md)).
-- **`TextSizeChooser` sits after `ThemeChooser`** in the header nav: the same
+- **`TextSizePicker` sits after `ThemePicker`** in the header nav: the same
   headless button+listbox shape (single-glyph "A" icon, `sizes`/`sizeLabels`/
   `defaultValue`/`storageKey` props), mirroring
-  `lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-chooser`.
+  `lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-picker`.
   Sets `data-text-size` on `<html>` (mapped to `font-size` via
   `:root[data-text-size="…"]` rules in `app.css`; WCAG 2.2 1.4.4/1.4.12), and
   persists to `src/lib/config/text-sizes.ts`'s `TEXT_SIZE_STORAGE_KEY`. Fixed
   four-size catalogue (`small`/`medium`/`large`/`x-large`).
-- **`ShareChooser` sits after `TextSizeChooser`** in the header nav: the same
+- **`SharePicker` sits after `TextSizePicker`** in the header nav: the same
   headless button shape (single-glyph "↪" icon), mirroring
-  `lily-design-system-svelte-helpers/lily-design-system-svelte-share-chooser`.
+  `lily-design-system-svelte-helpers/lily-design-system-svelte-share-picker`.
   Opens the native OS share sheet where available
   (`navigator.share`/`strategy="auto"`), otherwise a small list — here, just
   a "Copy link" item, since this package ships no social-network URLs by
   design and a 341-form medical/clinical monorepo has no single defensible
   answer for which networks belong. `targets` stays `[]` everywhere. Tool
   for both of the above (naming rollout + rename):
-  `bin/svelte-helpers-chooser-rename --check|--apply`.
+  `bin/svelte-helpers-picker-rename --check|--apply`.
 - **Header layout: title left, nav + controls right.** The header `<nav>`'s
   inner row is `flex items-center justify-between`: the brand/title `<a>` is
   the first child, and a second `flex items-center gap-1` wrapper holding the
-  nav links, `LocaleChooser`, `ThemeChooser`, `TextSizeChooser`, then
-  `ShareChooser` is the second child — so the row splits into a left title
+  nav links, `LocalePicker`, `ThemePicker`, `TextSizePicker`, then
+  `SharePicker` is the second child — so the row splits into a left title
   and a right-aligned link/control cluster.
 - **Page-width model: `body` is edge-to-edge; `<main>` carries the gutter.**
   `body { margin: 0; }` (an unlayered rule in `app.css` so it outranks
@@ -151,7 +151,7 @@ system** — do not hand-roll theme CSS.
   the Lily palette in `@theme` (`--color-base-100/200/300`, `--color-base-content`,
   `--color-primary`, `--color-error`, …) so Tailwind emits `bg-base-100`,
   `text-base-content`, `text-error`, etc. All chrome and pages use these token
-  utilities (no `bg-white` / `text-gray-*`). Lily's theme files are *unlayered*,
+  utilities (no `bg-white` / `text-gray-*`). Lily's theme files are _unlayered_,
   so they override Tailwind's layered `@theme` defaults at runtime — every theme
   re-skins the whole app, including headings.
 
@@ -215,67 +215,67 @@ catalogue — every form picks the components it needs):
 
 ### Form structure
 
-| Concept            | Component name        | Emits                                                |
-|--------------------|-----------------------|------------------------------------------------------|
-| Form root          | `Form.svelte`         | `<form class="form">`                                |
-| Grouped fields     | `Fieldset.svelte`     | `<fieldset class="fieldset"><legend class="fieldset-legend">…</legend>…</fieldset>` |
-| Single field       | `Field.svelte`        | `<div class="field"><label class="label">…</label><slot/><span class="error-message"/></div>` |
-| Hint               | `Hint.svelte`         | `<span class="hint">`                                |
-| Page-level errors  | `ErrorSummary.svelte` | `<div class="error-summary" role="alert">`           |
+| Concept           | Component name        | Emits                                                                                         |
+| ----------------- | --------------------- | --------------------------------------------------------------------------------------------- |
+| Form root         | `Form.svelte`         | `<form class="form">`                                                                         |
+| Grouped fields    | `Fieldset.svelte`     | `<fieldset class="fieldset"><legend class="fieldset-legend">…</legend>…</fieldset>`           |
+| Single field      | `Field.svelte`        | `<div class="field"><label class="label">…</label><slot/><span class="error-message"/></div>` |
+| Hint              | `Hint.svelte`         | `<span class="hint">`                                                                         |
+| Page-level errors | `ErrorSummary.svelte` | `<div class="error-summary" role="alert">`                                                    |
 
 ### Inputs
 
-| Concept            | Component name        | Emits                                                |
-|--------------------|-----------------------|------------------------------------------------------|
-| Single-line text   | `TextInput.svelte`    | `<input class="text-input" type="text">`             |
-| Multi-line text   | `TextAreaInput.svelte` | `<textarea class="text-area-input">`                 |
-| Email              | `EmailInput.svelte`   | `<input class="email-input" type="email">`           |
-| Number             | `NumberInput.svelte`  | `<input class="number-input" type="number">`         |
-| Date               | `DateInput.svelte`    | `<input class="date-input" type="date">`             |
-| Time               | `TimeInput.svelte`    | `<input class="time-input" type="time">`             |
-| Tel                | `TelInput.svelte`     | `<input class="tel-input" type="tel">`               |
-| URL                | `UrlInput.svelte`     | `<input class="url-input" type="url">`               |
-| File               | `FileInput.svelte`    | `<input class="file-input" type="file">`             |
-| Range              | `RangeInput.svelte`   | `<input class="range-input" type="range">`           |
-| Single checkbox    | `CheckboxInput.svelte`| `<input class="checkbox-input" type="checkbox">`     |
-| Single radio       | `RadioInput.svelte`   | `<input class="radio-input" type="radio">`           |
-| Select             | `Select.svelte`       | `<select class="select">…<option/>…</select>`        |
-| Checkbox group     | `CheckboxGroup.svelte`| `<fieldset role="group" class="checkbox-group">`     |
-| Radio group        | `RadioGroup.svelte`   | `<fieldset role="radiogroup" class="radio-group">`   |
+| Concept          | Component name         | Emits                                              |
+| ---------------- | ---------------------- | -------------------------------------------------- |
+| Single-line text | `TextInput.svelte`     | `<input class="text-input" type="text">`           |
+| Multi-line text  | `TextAreaInput.svelte` | `<textarea class="text-area-input">`               |
+| Email            | `EmailInput.svelte`    | `<input class="email-input" type="email">`         |
+| Number           | `NumberInput.svelte`   | `<input class="number-input" type="number">`       |
+| Date             | `DateInput.svelte`     | `<input class="date-input" type="date">`           |
+| Time             | `TimeInput.svelte`     | `<input class="time-input" type="time">`           |
+| Tel              | `TelInput.svelte`      | `<input class="tel-input" type="tel">`             |
+| URL              | `UrlInput.svelte`      | `<input class="url-input" type="url">`             |
+| File             | `FileInput.svelte`     | `<input class="file-input" type="file">`           |
+| Range            | `RangeInput.svelte`    | `<input class="range-input" type="range">`         |
+| Single checkbox  | `CheckboxInput.svelte` | `<input class="checkbox-input" type="checkbox">`   |
+| Single radio     | `RadioInput.svelte`    | `<input class="radio-input" type="radio">`         |
+| Select           | `Select.svelte`        | `<select class="select">…<option/>…</select>`      |
+| Checkbox group   | `CheckboxGroup.svelte` | `<fieldset role="group" class="checkbox-group">`   |
+| Radio group      | `RadioGroup.svelte`    | `<fieldset role="radiogroup" class="radio-group">` |
 
 ### Buttons
 
-| Concept            | Component name        | Emits                                                |
-|--------------------|-----------------------|------------------------------------------------------|
-| Generic button     | `Button.svelte`       | `<button class="button">` (variant via `data-variant`) |
-| Submit             | `SubmitInput.svelte`  | `<input class="submit-input" type="submit">`         |
-| Reset              | `ResetInput.svelte`   | `<input class="reset-input" type="reset">`           |
+| Concept        | Component name       | Emits                                                  |
+| -------------- | -------------------- | ------------------------------------------------------ |
+| Generic button | `Button.svelte`      | `<button class="button">` (variant via `data-variant`) |
+| Submit         | `SubmitInput.svelte` | `<input class="submit-input" type="submit">`           |
+| Reset          | `ResetInput.svelte`  | `<input class="reset-input" type="reset">`             |
 
 ### Wizard / progress
 
-| Concept            | Component name        | Emits                                                |
-|--------------------|-----------------------|------------------------------------------------------|
-| Step list          | `StepList.svelte`     | `<ol class="step-list">…<li/>…</ol>`                 |
-| Step list item     | `StepListItem.svelte` | `<li class="step-list-item" data-status="…">…</li>`  |
-| Progress bar       | `Progress.svelte`     | `<progress class="progress">`                        |
+| Concept        | Component name        | Emits                                               |
+| -------------- | --------------------- | --------------------------------------------------- |
+| Step list      | `StepList.svelte`     | `<ol class="step-list">…<li/>…</ol>`                |
+| Step list item | `StepListItem.svelte` | `<li class="step-list-item" data-status="…">…</li>` |
+| Progress bar   | `Progress.svelte`     | `<progress class="progress">`                       |
 
 ### Dashboard
 
-| Concept            | Component name        | Emits                                                |
-|--------------------|-----------------------|------------------------------------------------------|
-| Data table         | `DataTable.svelte`    | `<table class="data-table">`                         |
-| Table head         | (slot of DataTable)   | `<thead class="data-table-head">`                    |
-| Table body         | (slot of DataTable)   | `<tbody class="data-table-body">`                    |
-| Row                | `DataTableRow.svelte` | `<tr class="data-table-row">`                        |
-| Header cell        | `DataTableTh.svelte`  | `<th class="data-table-th">`                         |
-| Data cell          | `DataTableTd.svelte`  | `<td class="data-table-td">`                         |
+| Concept     | Component name        | Emits                             |
+| ----------- | --------------------- | --------------------------------- |
+| Data table  | `DataTable.svelte`    | `<table class="data-table">`      |
+| Table head  | (slot of DataTable)   | `<thead class="data-table-head">` |
+| Table body  | (slot of DataTable)   | `<tbody class="data-table-body">` |
+| Row         | `DataTableRow.svelte` | `<tr class="data-table-row">`     |
+| Header cell | `DataTableTh.svelte`  | `<th class="data-table-th">`      |
+| Data cell   | `DataTableTd.svelte`  | `<td class="data-table-td">`      |
 
 ### Status messages
 
-| Concept            | Component name        | Emits                                                |
-|--------------------|-----------------------|------------------------------------------------------|
-| Alert              | `Alert.svelte`        | `<div class="alert" data-type="info|success|warning|error" role="alert">` |
-| Panel (report)     | `Panel.svelte`        | `<section class="panel" role="region" aria-live="polite">` |
+| Concept        | Component name | Emits                                                      |
+| -------------- | -------------- | ---------------------------------------------------------- |
+| Alert          | `Alert.svelte` | `<div class="alert" data-type="info                        | success | warning | error" role="alert">` |
+| Panel (report) | `Panel.svelte` | `<section class="panel" role="region" aria-live="polite">` |
 
 ## 4. Prop conventions
 
