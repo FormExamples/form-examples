@@ -357,6 +357,21 @@ This runs in CI as part of the sharded Rust job, per crate, alongside
 `cargo check` / `cargo clippy` / `cargo test` (see
 [Verification](../docs/verification.md)).
 
+## Cargo.lock is tracked
+
+Every crate's `Cargo.lock` is committed — it's a binary crate (the Loco
+app + management CLI), not a published library, so the standard "commit
+the lockfile for binaries" guidance applies. This also makes the
+supply-chain policy above reproducible: an untracked lockfile would let
+CI resolve different transitive versions than a contributor's machine,
+making an advisory or license finding appear or vanish with no code
+change. `.gitignore` must carry `!Cargo.lock` (or no `Cargo.lock` rule at
+all), never a bare `Cargo.lock` ignore line. See
+[`../spec/cargo-lock-tracking.md`](../spec/cargo-lock-tracking.md).
+`bin/loco-config-refactor [--all|<slug>] [--check]` fixes `.gitignore`
+mechanically alongside its background-queue and observability conventions
+(above).
+
 ## Verify
 
 ```sh

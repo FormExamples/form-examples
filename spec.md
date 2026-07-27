@@ -163,6 +163,8 @@ divergence.
 - Database name pattern: `<slug_snake>_development`, `<slug_snake>_test`,
   `<slug_snake>_production`. Connection string for production lives in
   `DATABASE_URL`.
+- `Cargo.lock` is tracked in git (binary crate); see
+  [`spec/cargo-lock-tracking.md`](spec/cargo-lock-tracking.md).
 
 ## 7. Compliance
 

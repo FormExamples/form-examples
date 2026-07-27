@@ -8,6 +8,7 @@ background-queue and observability conventions documented in
   - SQLite-backed (`bg_sqlt`) and Redis-backed (`bg_redis`) queues removed
   - OpenTelemetry OTLP exporter dependencies
   - Prometheus `/metrics` dependency (`axum-prometheus`)
+  - `Cargo.lock` tracked in git (see `spec/cargo-lock-tracking.md`)
 
 Edits per Loco crate (a crate is any dir containing a `Cargo.toml` whose
 contents reference `loco-rs`):
@@ -24,6 +25,10 @@ contents reference `loco-rs`):
     - Insert/replace a `queue:` block with `kind: Postgres`, reusing the
       same Postgres URI as the existing `database.uri` and setting
       `dangerously_flush` and `num_workers` per environment.
+
+  .gitignore:
+    - Flip a bare `Cargo.lock` ignore line to `!Cargo.lock` so the
+      lockfile is tracked (binary crate — reproducible builds).
 
 The tool is idempotent: re-running on an already-refactored crate
 makes no further changes.
@@ -388,6 +393,27 @@ def edit_yaml(path: Path) -> tuple[str, list[str]]:
 
 
 # ---------------------------------------------------------------------------
+# .gitignore editing
+# ---------------------------------------------------------------------------
+
+# A bare `Cargo.lock` ignore line, not already negated. Binary crates
+# (Loco apps) track their lockfile for reproducible builds; see
+# spec/cargo-lock-tracking.md.
+GITIGNORE_BARE_CARGO_LOCK_RE = re.compile(r"^Cargo\.lock[ \t]*$", re.MULTILINE)
+GITIGNORE_NEGATED_CARGO_LOCK_RE = re.compile(r"^!Cargo\.lock[ \t]*$", re.MULTILINE)
+
+
+def edit_gitignore(path: Path) -> tuple[str, list[str]]:
+    text = path.read_text(encoding="utf-8")
+    if GITIGNORE_NEGATED_CARGO_LOCK_RE.search(text):
+        return text, []
+    if not GITIGNORE_BARE_CARGO_LOCK_RE.search(text):
+        return text, []
+    new_text = GITIGNORE_BARE_CARGO_LOCK_RE.sub("!Cargo.lock", text, count=1)
+    return new_text, ["Cargo.lock → tracked (flipped to !Cargo.lock)"]
+
+
+# ---------------------------------------------------------------------------
 # Per-crate orchestration
 # ---------------------------------------------------------------------------
 
@@ -419,6 +445,16 @@ def process_crate(
                     log.append(f"  {yaml_path.relative_to(crate_root)}: {n}")
                 if not (dry_run or check):
                     yaml_path.write_text(new_text, encoding="utf-8")
+
+    gitignore = crate_root / ".gitignore"
+    if gitignore.is_file():
+        new_text, notes = edit_gitignore(gitignore)
+        if new_text != gitignore.read_text(encoding="utf-8"):
+            changed = True
+            for n in notes:
+                log.append(f"  .gitignore: {n}")
+            if not (dry_run or check):
+                gitignore.write_text(new_text, encoding="utf-8")
 
     return changed, log
 
