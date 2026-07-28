@@ -9,7 +9,13 @@ all. This tool:
 
   1. Vendors the full Lily theme CSS catalogue (~45 standalone theme
      stylesheets, each inlining all Lily component CSS) from the pinned
-     Lily checkout into css/themes/<name>.css.
+     Lily checkout into css/themes/<name>.css. Re-synced on every run
+     regardless of whether steps 2-4 below have anything left to do for a
+     given form (copy_theme_css has its own idempotent size-compare skip)
+     -- otherwise, once a form is fully patched by steps 2-4, this step
+     would never run again and the vendored catalogue would go stale
+     forever. See bin/svelte-theme-css-sync for the equivalent on the
+     front-end-with-svelte side, which has no steps 2-4 to piggyback on.
   2. Aliases each form's own css/style.css and css/dashboard.css design
      tokens (--color-bg, --color-primary, etc.) onto the swappable
      theme's tokens (--color-base-100/200/300/content, --color-primary,
@@ -374,16 +380,19 @@ def patch_html(path: Path, slug: str, stylesheet_href: str):
     return "changed", text
 
 
-def copy_theme_css(css_dir: Path, lily_themes_dir: Path, check: bool) -> None:
+def copy_theme_css(css_dir: Path, lily_themes_dir: Path, check: bool) -> str:
     themes_dir = css_dir / "themes"
     if not check:
         themes_dir.mkdir(parents=True, exist_ok=True)
+    changed = False
     for src in lily_themes_dir.glob("*.css"):
         dest = themes_dir / src.name
         if dest.exists() and dest.stat().st_size == src.stat().st_size:
             continue
+        changed = True
         if not check:
             shutil.copy2(src, dest)
+    return "changed" if changed else "already-done"
 
 
 def process_form(form_dir: Path, lily_themes_dir: Path, check: bool):
@@ -424,8 +433,17 @@ def process_form(form_dir: Path, lily_themes_dir: Path, check: bool):
             dashboard_html.write_text(new_dash, encoding="utf-8")
 
     any_changed = any(v == "changed" for v in results.values())
+
+    # The theme CSS catalogue is re-synced from the pinned Lily checkout on
+    # every run, independent of whether the header-control patch itself
+    # needed to change anything -- copy_theme_css has its own idempotent
+    # size-compare skip, so this is always safe to attempt. Kept out of
+    # any_changed above: a stale theme catalogue must not itself trigger
+    # rewriting theme-select.js/locale-select.js, which are one-shot
+    # insertion templates, not files this re-sync should touch.
+    results["theme-css"] = copy_theme_css(html_dir / "css", lily_themes_dir, check)
+
     if any_changed and not check:
-        copy_theme_css(html_dir / "css", lily_themes_dir, check)
         (html_dir / "js").mkdir(parents=True, exist_ok=True)
         (html_dir / "js" / "theme-select.js").write_text(
             THEME_SELECT_JS_TEMPLATE.format(slug=slug), encoding="utf-8"

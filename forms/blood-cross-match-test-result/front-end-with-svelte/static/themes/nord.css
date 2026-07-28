@@ -2047,20 +2047,29 @@
         color: var(--lily-text);
     }
 
-    /* theme-select and locale-select ship as an icon button that opens a
-       listbox, so they are styled as a popup rather than a form field.
-       The :has() guard scopes these to the *-helpers packages: the
-       catalog theme-select component shares the class hook but is a
-       native <select> and keeps the form-field rules above. */
+    /* The four *-picker helpers are an icon button that opens a popup,
+       so they are styled as a popup rather than a form field. No :has()
+       guard is needed any more: before the July 2026 rename these shared
+       the `.theme-select` hook with the catalog theme-select component
+       and had to be told apart. Distinct names, no collision. */
     :where(
-        .theme-select:has(> .theme-select-button),
-        .locale-select:has(> .locale-select-button)
+        .theme-picker,
+        .locale-picker,
+        .text-size-picker,
+        .share-picker,
+        .date-time-picker
     ) {
         position: relative;
         display: inline-block;
     }
 
-    :where(.theme-select-button, .locale-select-button) {
+    :where(
+        .theme-picker-button,
+        .locale-picker-button,
+        .text-size-picker-button,
+        .share-picker-button,
+        .date-time-picker-button
+    ) {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -2078,13 +2087,108 @@
 
     /* The glyph is decorative (aria-hidden); the button's aria-label
        carries the accessible name. Sized up a little so a single
-       character reads as an affordance. */
-    :where(.theme-select-icon, .locale-select-icon) {
-        font-size: 1.25em;
+       character reads as an affordance.
+
+       The two glyphs do NOT have the same ink-to-em ratio, so a single
+       font-size makes them look mismatched. Measured against the
+       components' own resolved fonts: U+25D1 (half circle) inks 0.842
+       of its em box, U+1F310 (globe) inks 0.996 — the globe reads
+       1.183x larger at equal font-size. Each icon therefore carries its
+       own optical correction so the two buttons look the same size.
+
+       The ratio depends on the consumer's font stack, so the factor is
+       a custom property rather than a baked-in number: override
+       --lily-picker-icon-scale if your stack resolves these glyphs to
+       different faces than the reference measurement. */
+    :where(
+        .theme-picker-icon,
+        .locale-picker-icon,
+        .text-size-picker-icon,
+        .share-picker-icon,
+        .date-time-picker-icon
+    ) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(1.25em * var(--lily-picker-icon-scale, 1));
         line-height: 1;
     }
 
-    :where(.theme-select-list, .locale-select-list) {
+    /* U+25D1 is the reference: no correction. */
+    :where(.theme-picker-icon) {
+        --lily-picker-icon-scale: 1;
+    }
+
+    /* U+1F310 inks 1.183x the reference, so scale it by 1/1.183. */
+    :where(.locale-picker-icon) {
+        --lily-picker-icon-scale: 0.845;
+    }
+
+    /* U+0041 "A" is a cap-height letter, so it inks only 0.673 of its em
+       box against U+25D1's 0.842 — it needs scaling UP, not down. */
+    :where(.text-size-picker-icon) {
+        --lily-picker-icon-scale: 1.25;
+    }
+
+    /* U+27A4 "➤" inks 0.613 of its em box against U+25D1's 0.777, so it
+       scales up by 0.777/0.613. (It replaced U+21AA "↪", which inked
+       0.633 and took 1.331.) */
+    :where(.share-picker-icon) {
+        --lily-picker-icon-scale: 1.268;
+    }
+
+    /* U+1F4C5 calendar takes the SAME correction as U+1F310 globe, and
+       that is an identity rather than a coincidence: a colour-emoji font
+       paints every one of its glyphs into one identical em square. On the
+       reference stack, globe, calendar, rocket and heart all measure an
+       ink box of 1.015 x 1.015 with an advance of 1.000 — indistinguishable.
+       So any emoji helper icon carries the globe's factor, and any new one
+       should too, without re-measuring.
+
+       (Measuring also confirms the U+FE0E text-presentation selector is
+       ignored here: the bare and VS-15 forms are metrically identical. It
+       stays in the source as a hint to the platforms that do honour it.) */
+    :where(.date-time-picker-icon) {
+        --lily-picker-icon-scale: 0.845;
+    }
+
+    /* The share list holds real links and a button rather than options,
+       so its items get the same padding without the option selectors. */
+    :where(.share-picker-list) > :where(.share-picker-list-item) {
+        list-style: none;
+    }
+
+    :where(.share-picker-target, .share-picker-copy) {
+        display: block;
+        width: 100%;
+        padding: var(--lily-space-xs) var(--lily-space-sm);
+        font: inherit;
+        text-align: start;
+        color: var(--lily-text);
+        background: none;
+        border: 0;
+        border-radius: var(--lily-radius-sm);
+        cursor: pointer;
+    }
+
+    :where(.share-picker-target:hover, .share-picker-copy:hover) {
+        background-color: var(--lily-surface-alt);
+    }
+
+    /* Copy feedback. Never display:none this — that silences the live
+       region for screen-reader users. */
+    :where(.share-picker-status) {
+        margin-block-start: var(--lily-space-xs);
+        font-size: 0.875em;
+        color: var(--lily-text-muted);
+    }
+
+    :where(
+        .theme-picker-list,
+        .locale-picker-list,
+        .text-size-picker-list,
+        .share-picker-list
+    ) {
         position: absolute;
         z-index: 10;
         inset-inline-start: 0;
@@ -2103,12 +2207,21 @@
 
     /* Explicit, because the rules above would otherwise beat the UA
        stylesheet's [hidden] { display: none }. */
-    :where(.theme-select-list, .locale-select-list)[hidden] {
+    :where(
+        .theme-picker-list,
+        .locale-picker-list,
+        .text-size-picker-list,
+        .share-picker-list
+    )[hidden] {
         display: none;
     }
 
-    :where(.theme-select-list, .locale-select-list)
-        > :where(.theme-select-option, .locale-select-option) {
+    :where(.theme-picker-list, .locale-picker-list, .text-size-picker-list)
+        > :where(
+            .theme-picker-option,
+            .locale-picker-option,
+            .text-size-picker-option
+        ) {
         padding: var(--lily-space-xs) var(--lily-space-sm);
         border-radius: var(--lily-radius-sm);
         cursor: pointer;
@@ -2116,7 +2229,8 @@
 
     /* data-active is the keyboard cursor (aria-activedescendant); focus
        stays on the listbox, so this is the only visible cue for it. */
-    :where(.theme-select-list, .locale-select-list) > :where([data-active]) {
+    :where(.theme-picker-list, .locale-picker-list, .text-size-picker-list)
+        > :where([data-active]) {
         background-color: var(--lily-surface-alt);
         outline: var(--lily-focus-ring);
         outline-offset: -2px;
@@ -2124,16 +2238,224 @@
 
     /* aria-selected marks the applied theme/locale, which is not the
        same thing as the keyboard cursor. Both can be visible at once. */
-    :where(.theme-select-list, .locale-select-list)
+    :where(.theme-picker-list, .locale-picker-list, .text-size-picker-list)
         > :where([aria-selected="true"]) {
         font-weight: 600;
         background-color: var(--lily-surface-sunken);
     }
 
     /* Locale options inherit the select colours, same as theme options. */
-    :where(.locale-select-option) {
+    :where(.locale-picker-option) {
         background-color: var(--lily-surface);
         color: var(--lily-text);
+    }
+
+    /* ----------------------------------------------------------------------
+     * date-time-picker
+     *
+     * The one helper that is a form control rather than a page-header
+     * control, so it is the only one with a text field beside its trigger
+     * and a dialog rather than a listbox. The field itself needs no rules
+     * here: `.date-time-picker-input` already matches the generic
+     * [class$="-input"] baseline further up.
+     * -------------------------------------------------------------------- */
+
+    :where(.date-time-picker-field) {
+        display: flex;
+        align-items: center;
+        gap: var(--lily-space-xs);
+    }
+
+    :where(.date-time-picker-dialog) {
+        position: absolute;
+        z-index: 10;
+        inset-inline-start: 0;
+        margin-block-start: var(--lily-space-xs);
+        padding: var(--lily-space-sm);
+        color: var(--lily-text);
+        background-color: var(--lily-surface);
+        border: var(--border) solid var(--lily-border-strong);
+        border-radius: var(--lily-radius-md);
+        box-shadow: var(--lily-shadow-md);
+    }
+
+    /* Explicit, because the rule above would otherwise beat the UA
+       stylesheet's [hidden] { display: none } — the same trap the
+       listbox popups have to step around. */
+    :where(.date-time-picker-dialog)[hidden] {
+        display: none;
+    }
+
+    :where(.date-time-picker-header) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--lily-space-xs);
+        margin-block-end: var(--lily-space-xs);
+    }
+
+    /* The month/year heading is a live region, so it must keep its box
+       even while empty — never display:none it. */
+    :where(.date-time-picker-period) {
+        flex: 1;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    /* The four navigation buttons and the footer/shortcut buttons do not
+       end in `-button`, so the generic button family never reaches them. */
+    :where(
+        .date-time-picker-previous-year,
+        .date-time-picker-previous-month,
+        .date-time-picker-next-month,
+        .date-time-picker-next-year,
+        .date-time-picker-shortcut,
+        .date-time-picker-clear,
+        .date-time-picker-cancel,
+        .date-time-picker-confirm
+    ) {
+        padding: var(--lily-space-xs) var(--lily-space-sm);
+        font: inherit;
+        color: var(--lily-text);
+        background-color: var(--lily-surface);
+        border: var(--border) solid var(--lily-border-strong);
+        border-radius: var(--lily-radius-sm);
+        cursor: pointer;
+    }
+
+    :where(
+        .date-time-picker-previous-year:hover,
+        .date-time-picker-previous-month:hover,
+        .date-time-picker-next-month:hover,
+        .date-time-picker-next-year:hover,
+        .date-time-picker-shortcut:hover,
+        .date-time-picker-clear:hover,
+        .date-time-picker-cancel:hover,
+        .date-time-picker-confirm:hover
+    ) {
+        background-color: var(--lily-surface-alt);
+    }
+
+    /* The commit action is the primary one on the dialog. */
+    :where(.date-time-picker-confirm) {
+        color: var(--color-primary-content);
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+
+    :where(.date-time-picker-calendar) {
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    :where(.date-time-picker-weekday, .date-time-picker-week-heading) {
+        padding: var(--lily-space-xs);
+        font-size: 0.8125em;
+        font-weight: 600;
+        color: var(--lily-text-muted);
+    }
+
+    /* Week numbers are reference data, not navigation: muted, and set in
+       tabular figures so the column does not shimmer as months change. */
+    :where(.date-time-picker-week) {
+        padding-inline-end: var(--lily-space-xs);
+        font-size: 0.8125em;
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+        color: var(--lily-text-muted);
+        text-align: end;
+    }
+
+    :where(.date-time-picker-day) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* 2rem is a compromise: WCAG 2.5.8 (AA) wants 24px, 2.5.5 (AAA)
+           wants 44px, and seven 44px columns do not fit a 320px viewport
+           alongside dialog chrome. Consumers targeting AAA should enlarge
+           these and let the dialog go full-width on small screens. */
+        min-width: 2rem;
+        min-height: 2rem;
+        padding: 0;
+        font: inherit;
+        font-variant-numeric: tabular-nums;
+        color: var(--lily-text);
+        background: none;
+        border: var(--border) solid transparent;
+        border-radius: var(--lily-radius-sm);
+        cursor: pointer;
+    }
+
+    :where(.date-time-picker-day:hover:not(:disabled)) {
+        background-color: var(--lily-surface-alt);
+    }
+
+    /* Adjacent-month days stay legible rather than being hidden: they are
+       real, selectable dates, and blanking them makes the grid harder to
+       scan across a month boundary. */
+    :where(.date-time-picker-day[data-outside]) {
+        color: var(--lily-text-muted);
+    }
+
+    /* Today is marked with a border, the selection with a fill. Two
+       different channels, so a day that is both still reads as both. */
+    :where(.date-time-picker-day[data-today]) {
+        border-color: var(--lily-border-strong);
+        font-weight: 600;
+    }
+
+    :where(.date-time-picker-day[data-selected]) {
+        color: var(--color-primary-content);
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+
+    :where(.date-time-picker-day:disabled) {
+        color: var(--lily-text-muted);
+        cursor: not-allowed;
+        /* Struck through as well as dimmed: "unavailable" must not rest on
+           contrast alone (WCAG 1.4.1). */
+        text-decoration: line-through;
+    }
+
+    :where(.date-time-picker-time) {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--lily-space-xs);
+        margin-block-start: var(--lily-space-sm);
+    }
+
+    :where(.date-time-picker-time-label) {
+        font-size: 0.8125em;
+        color: var(--lily-text-muted);
+    }
+
+    :where(
+        .date-time-picker-hour,
+        .date-time-picker-minute,
+        .date-time-picker-meridiem
+    ) {
+        padding: var(--lily-space-xs);
+        font: inherit;
+        color: var(--lily-text);
+        background-color: var(--lily-surface);
+        border: var(--border) solid var(--lily-border-strong);
+        border-radius: var(--lily-radius-sm);
+    }
+
+    :where(.date-time-picker-shortcuts) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--lily-space-xs);
+        margin-block-start: var(--lily-space-sm);
+    }
+
+    :where(.date-time-picker-footer) {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--lily-space-xs);
+        margin-block-start: var(--lily-space-sm);
     }
 
     /* Combobox / listbox / autosuggest — non-native variant of <select>. */

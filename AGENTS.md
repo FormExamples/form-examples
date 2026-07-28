@@ -66,7 +66,8 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/es-modules-decomment [--apply] [file…]` — one-shot (already applied): strip the stale IIFE/namespace/classic-script comments the ES-module conversion left behind; comment-only, idempotent
 - `bin/lily-html-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--all|<slug>]` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
 - `bin/lily-sync [--check] [--lily-dir PATH]` — snapshot Lily HTML component specs into `forms/lily-spec/` and record the pinned upstream commit in `forms/lily-version.md`
-- `bin/html-theme-locale-select-refactor [--check|--apply] [--lily-dir PATH]` — vendor the Lily multi-theme CSS catalogue into `css/themes/`, alias each form's `css/style.css`/`css/dashboard.css` tokens onto it, and add header theme-select + locale-select controls; `--check` is the CI drift detector
+- `bin/html-theme-locale-select-refactor [--check|--apply] [--lily-dir PATH]` — vendor the Lily multi-theme CSS catalogue into `css/themes/`, alias each form's `css/style.css`/`css/dashboard.css` tokens onto it, and add header theme-select + locale-select controls; re-syncs the theme catalogue from the pinned checkout on every run (independent of whether the header-control patch itself changed anything); `--check` is the CI drift detector
+- `bin/svelte-theme-css-sync [--check|--apply] [--lily-dir PATH]` — re-sync the same 45 reference theme stylesheets into every form's `front-end-with-svelte/static/themes/`; `--check` is the CI drift detector
 - `bin/page-header-layout-refactor [--check|--apply]` — re-layout each HTML front-end's page header so the title sits left and the nav link(s) + select controls sit right (`.page-header-bar` / `.page-header-title`); `--check` is the CI drift detector
 - `bin/html-text-size-select-refactor [--check|--apply]` — one-shot (superseded): originally added the third header control as `#text-size-select`; renamed to `#text-size-chooser` by `bin/html-helpers-chooser-rename`, then to `#text-size-picker` by `bin/html-helpers-picker-rename` below, which is now the canonical drift detector for it. This tool's `--check` still looks for the pre-rename `#text-size-select` id, so it always reports false drift post-rename — do not run it as a CI gate
 - `bin/html-share-button-refactor [--check|--apply]` — one-shot (superseded): originally added the fourth header control as `.share-button`; renamed to `.share-chooser` by `bin/html-helpers-chooser-rename`, then to `.share-picker` by `bin/html-helpers-picker-rename` below, which is now the canonical drift detector for it. This tool's `--check` still looks for the pre-rename `.share-button` markup, so it always reports false drift post-rename — do not run it as a CI gate
@@ -193,7 +194,8 @@ bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/svelte-locale-select-refactor --check      # Svelte LocaleSelect drift detector
-bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector
+bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector (also re-syncs theme CSS)
+bin/svelte-theme-css-sync --check              # Svelte theme CSS re-sync drift detector
 bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector
 bin/svelte-helpers-picker-rename --check      # Svelte *-chooser -> *-picker rename drift detector (supersedes svelte-helpers-chooser-rename / svelte-text-size-select-refactor / svelte-share-button-refactor, below)
 bin/html-helpers-picker-rename --check        # HTML text-size-chooser/share-chooser -> *-picker rename drift detector (supersedes html-helpers-chooser-rename / html-text-size-select-refactor / html-share-button-refactor, below)

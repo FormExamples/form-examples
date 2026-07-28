@@ -28,9 +28,15 @@ class-name collision that the first rename dissolved).
 | Field         | Value                                                                                                                     |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Repository    | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-helpers`)                                        |
-| Pinned commit | `adb748c68`                                                                                                               |
+| Pinned commit | `217902415`                                                                                                               |
 | Helpers       | `lily-design-system-svelte-theme-picker` 0.1.0, `-locale-picker` 0.1.0, `-text-size-picker` 0.1.0, `-share-picker` 0.1.0 |
-| Date pinned   | 2026-07-27                                                                                                                |
+| Date pinned   | 2026-07-28                                                                                                                |
+
+Upstream also added a fifth helper at this pin, `date-time-picker` (all
+seven catalogs), and fixed doc/example gaps in `text-size-picker` — neither
+is consumed by this monorepo yet; this bump is for the reference `themes/`
+stylesheets only (below). Rolling out `date-time-picker` to any form is a
+separate, unstarted decision, not implied by this pin bump.
 
 Every package resets to 0.1.0 at this pin: a renamed package has no history
 under its new name, so upstream reset the version rather than imply releases
@@ -38,6 +44,21 @@ that never existed under the new names.
 
 ## History
 
+- **2026-07-28 — re-synced the vendored reference `themes/*.css`.** The 45
+  reference theme stylesheets in every form's `front-end-with-html/css/themes/`
+  and `front-end-with-svelte/static/themes/` were stale relative to the pin
+  (missing icon-scale corrections and other upstream fixes) because the tool
+  that first vendored them, `bin/html-theme-locale-select-refactor`, only
+  re-copied the theme catalogue when it *also* had a header-control patch to
+  apply — once a form was fully patched, the theme catalogue could never be
+  refreshed again. Fixed by decoupling the theme-CSS copy from that
+  condition (its own size-compare skip already made it idempotent) and by
+  adding `bin/svelte-theme-css-sync`, since the Svelte side never had a
+  re-sync tool at all — its `static/themes/` was a one-shot copy from the
+  now-superseded `bin/lily-svelte-theme-locale-select-refactor` with no
+  ongoing drift detector. Tools: `bin/html-theme-locale-select-refactor
+  --check|--apply` (HTML, now re-syncs on every run); `bin/svelte-theme-css-sync
+  --check|--apply` (Svelte, new).
 - **2026-07-27 — renamed `*-chooser` → `*-picker` ("to harmonize with
   Adobe").** Full depth: package directories, exported symbols, CSS class
   hooks, `data-lily-*` attributes, and `share-chooser-button` →

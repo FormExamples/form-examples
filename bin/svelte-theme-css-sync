@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""bin/svelte-theme-css-sync -- re-sync the 45 Lily reference theme
+stylesheets vendored into every form's front-end-with-svelte/static/themes/
+from the pinned Lily checkout (~/git/lilydesignsystem/lily-design-system/themes/).
+
+front-end-with-svelte/static/themes/ was originally populated once by
+bin/lily-svelte-theme-locale-select-refactor (a one-shot migration, now
+superseded, that never had an ongoing re-sync path). This tool is the
+recurring drift detector/fixer for that vendored copy on its own -- it does
+not touch ThemeChooser.svelte/ThemePicker.svelte or any other part of that
+one-shot migration.
+
+Comparison is by file size only (matching bin/html-theme-locale-select-refactor's
+copy_theme_css), which is enough to detect the kind of drift that matters
+here: Lily adding/removing CSS rules (new helper glyph corrections, changed
+tokens, etc.), not a same-length content edit.
+
+Usage:
+  bin/svelte-theme-css-sync --check   # CI drift check (no writes)
+  bin/svelte-theme-css-sync --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import shutil
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+DEFAULT_LILY_THEMES_DIR = Path(
+    "~/git/lilydesignsystem/lily-design-system/themes"
+).expanduser()
+
+
+def sync_themes(themes_dir: Path, lily_themes_dir: Path, check: bool) -> str:
+    if not check:
+        themes_dir.mkdir(parents=True, exist_ok=True)
+    changed = False
+    for src in lily_themes_dir.glob("*.css"):
+        dest = themes_dir / src.name
+        if dest.exists() and dest.stat().st_size == src.stat().st_size:
+            continue
+        changed = True
+        if not check:
+            shutil.copy2(src, dest)
+    return "changed" if changed else "already-done"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    parser.add_argument("--lily-dir", type=Path, default=DEFAULT_LILY_THEMES_DIR)
+    args = parser.parse_args()
+    check = args.check
+
+    if not check and not args.lily_dir.is_dir():
+        sys.exit(f"Lily themes dir not found: {args.lily_dir}")
+
+    counts: dict[str, int] = {}
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        themes_dir = form_dir / "front-end-with-svelte" / "static" / "themes"
+        if not (form_dir / "front-end-with-svelte").is_dir():
+            continue
+        r = sync_themes(themes_dir, args.lily_dir, check)
+        counts[r] = counts.get(r, 0) + 1
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+
+    if check:
+        return 1 if counts.get("changed", 0) else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

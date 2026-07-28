@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-62 tools.
+63 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -44,6 +44,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
 - [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
 - [`bin/svelte-text-size-select-refactor`](#svelte-text-size-select-refactor)
+- [`bin/svelte-theme-css-sync`](#svelte-theme-css-sync)
 - [`bin/sync-from-skel-to-forms`](#sync-from-skel-to-forms)
 - [`bin/test`](#test)
 - [`bin/test-e2e`](#test-e2e)
@@ -463,7 +464,13 @@ all. This tool:
 
   1. Vendors the full Lily theme CSS catalogue (~45 standalone theme
      stylesheets, each inlining all Lily component CSS) from the pinned
-     Lily checkout into css/themes/<name>.css.
+     Lily checkout into css/themes/<name>.css. Re-synced on every run
+     regardless of whether steps 2-4 below have anything left to do for a
+     given form (copy_theme_css has its own idempotent size-compare skip)
+     -- otherwise, once a form is fully patched by steps 2-4, this step
+     would never run again and the vendored catalogue would go stale
+     forever. See bin/svelte-theme-css-sync for the equivalent on the
+     front-end-with-svelte side, which has no steps 2-4 to piggyback on.
   2. Aliases each form's own css/style.css and css/dashboard.css design
      tokens (--color-bg, --color-primary, etc.) onto the swappable
      theme's tokens (--color-base-100/200/300/content, --color-primary,
@@ -1057,6 +1064,32 @@ with the standard `storageKey={THEME_STORAGE_KEY}` / `/>` shape produced by
 the theme/locale-select rollout. Forms with a bespoke header (currently
 medical-language-speaking-assessment-for-cymraeg, which drives LocaleSelect
 from its own i18n store) are skipped and reported for hand migration.
+
+Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-theme-css-sync"><code>bin/svelte-theme-css-sync</code></h2>
+
+```text
+bin/svelte-theme-css-sync -- re-sync the 45 Lily reference theme
+stylesheets vendored into every form's front-end-with-svelte/static/themes/
+from the pinned Lily checkout (~/git/lilydesignsystem/lily-design-system/themes/).
+
+front-end-with-svelte/static/themes/ was originally populated once by
+bin/lily-svelte-theme-locale-select-refactor (a one-shot migration, now
+superseded, that never had an ongoing re-sync path). This tool is the
+recurring drift detector/fixer for that vendored copy on its own -- it does
+not touch ThemeChooser.svelte/ThemePicker.svelte or any other part of that
+one-shot migration.
+
+Comparison is by file size only (matching bin/html-theme-locale-select-refactor's
+copy_theme_css), which is enough to detect the kind of drift that matters
+here: Lily adding/removing CSS rules (new helper glyph corrections, changed
+tokens, etc.), not a same-length content edit.
+
+Usage:
+  bin/svelte-theme-css-sync --check   # CI drift check (no writes)
+  bin/svelte-theme-css-sync --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
 ```
