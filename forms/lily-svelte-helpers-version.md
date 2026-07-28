@@ -3,13 +3,16 @@
 This monorepo's `front-end-*-with-svelte/` subprojects conform to the
 **Lily Design System Svelte helpers** contract — four single-purpose header
 controls, `ThemePicker` / `LocalePicker` / `TextSizePicker` / `SharePicker`,
-from `lily-design-system-svelte-helpers`. Lily Svelte helpers are consumed as
+from `lily-design-system-svelte-helpers`, plus a fifth, `DateTimePicker`,
+vendored into every form but **not currently used by any form** (see below).
+Lily Svelte helpers are consumed as
 a _specification_ at authoring time — there is no runtime dependency on the
 upstream package. Each form's `src/lib/components/ui/{Name}Picker.svelte` is
 a vendored copy of the upstream component (read live from the pinned
 checkout at apply time — see `bin/svelte-helpers-picker-rename` and,
 historically, `bin/svelte-helpers-chooser-rename` /
-`bin/svelte-text-size-select-refactor` / `bin/svelte-share-button-refactor`).
+`bin/svelte-text-size-select-refactor` / `bin/svelte-share-button-refactor`;
+`DateTimePicker` is vendored by `bin/svelte-date-time-picker-vendor`).
 `LocalePicker` additionally vendors a companion data file,
 `src/lib/components/ui/locales.ts` (`defaultLocaleLabels` / `RTL_LANGUAGE_TAGS`
 / `RTL_SCRIPT_SUBTAGS`, ~436 locale entries), copied verbatim from the
@@ -29,14 +32,22 @@ class-name collision that the first rename dissolved).
 | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Repository    | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-helpers`)                                        |
 | Pinned commit | `217902415`                                                                                                               |
-| Helpers       | `lily-design-system-svelte-theme-picker` 0.1.0, `-locale-picker` 0.1.0, `-text-size-picker` 0.1.0, `-share-picker` 0.1.0 |
+| Helpers       | `lily-design-system-svelte-theme-picker` 0.1.0, `-locale-picker` 0.1.0, `-text-size-picker` 0.1.0, `-share-picker` 0.1.0, `-date-time-picker` 0.1.0 |
 | Date pinned   | 2026-07-28                                                                                                                |
 
-Upstream also added a fifth helper at this pin, `date-time-picker` (all
-seven catalogs), and fixed doc/example gaps in `text-size-picker` — neither
-is consumed by this monorepo yet; this bump is for the reference `themes/`
-stylesheets only (below). Rolling out `date-time-picker` to any form is a
-separate, unstarted decision, not implied by this pin bump.
+`text-size-picker` also got doc/example gap fixes upstream at this pin —
+dev-facing only, nothing to sync into a form.
+
+**`DateTimePicker` is vendor-only.** Its own spec explicitly says a
+hand-rolled calendar dialog has weaker assistive-technology support than
+`<input type="date">`, "which is the right default for many services" —
+and every form already uses exactly that native input via the existing
+`DateInput.svelte` (see `forms/AGENTS-front-end-svelte.md`). Swapping any
+form's date fields for the new dialog is a real accessibility tradeoff,
+not a pure upgrade, so it is a separate, unstarted decision per form —
+`DateTimePicker.svelte` sits vendored and unused until that decision is
+made. Do not wire it into a `+layout.svelte`/route/step "to demonstrate it
+works."
 
 Every package resets to 0.1.0 at this pin: a renamed package has no history
 under its new name, so upstream reset the version rather than imply releases
@@ -44,6 +55,16 @@ that never existed under the new names.
 
 ## History
 
+- **2026-07-28 — vendored the fifth helper, `DateTimePicker`, fleet-wide
+  (unwired).** `bin/svelte-date-time-picker-vendor` copies
+  `DateTimePicker.svelte` into every form's `src/lib/components/ui/`,
+  matching the existing four; `bin/html-date-time-picker-vendor` adds a
+  hand-authored `js/date-time-picker.js` (this repo's vanilla-JS
+  reimplementation, matching `share-picker.js`/`text-size-picker.js`'s
+  style rather than Lily's HTML custom-element package — the same
+  translation the HTML side already does for every helper). Neither tool
+  touches `+layout.svelte`, any route, `index.html`, or `dashboard.html` —
+  see the vendor-only rationale above.
 - **2026-07-28 — re-synced the vendored reference `themes/*.css`.** The 45
   reference theme stylesheets in every form's `front-end-with-html/css/themes/`
   and `front-end-with-svelte/static/themes/` were stale relative to the pin

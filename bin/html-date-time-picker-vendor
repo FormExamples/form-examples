@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""bin/html-date-time-picker-vendor -- add js/date-time-picker.js, the fifth
+Lily helper's hand-authored HTML-side implementation, to every form's
+front-end-with-html/js/.
+
+Unlike the other four HTML helpers (theme-select, locale-select,
+text-size-picker, share-picker), this file is byte-identical across every
+form: date-time-picker needs no per-form storage key (spec: it has no
+persistence at all -- a date is data, not a preference), so there is
+nothing to template per-slug.
+
+Deliberately vendor-only: this does NOT wire date-time-picker.js into any
+index.html/dashboard.html, and does NOT touch the existing .date-input /
+<input type="date"> convention any form currently uses. See
+bin/svelte-date-time-picker-vendor for the Svelte-side equivalent and the
+full rationale (a hand-rolled calendar dialog has weaker
+assistive-technology support than the native date input every form
+already uses -- swapping fields is a separate, unstarted decision).
+
+Usage:
+  bin/html-date-time-picker-vendor --check   # CI drift check (no writes)
+  bin/html-date-time-picker-vendor --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+TEMPLATE_PATH = (
+    REPO_ROOT
+    / "forms"
+    / "abdominal-aortic-aneurysm-screening"
+    / "front-end-with-html"
+    / "js"
+    / "date-time-picker.js"
+)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    args = parser.parse_args()
+    check = args.check
+
+    source = TEMPLATE_PATH.read_text(encoding="utf-8")
+
+    counts: dict[str, int] = {}
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        js_dir = form_dir / "front-end-with-html" / "js"
+        if not js_dir.is_dir():
+            continue
+        dest = js_dir / "date-time-picker.js"
+        if dest.exists() and dest.read_text(encoding="utf-8") == source:
+            r = "already-done"
+        else:
+            r = "changed"
+            if not check:
+                dest.write_text(source, encoding="utf-8")
+        counts[r] = counts.get(r, 0) + 1
+
+    mode_label = "CHECK" if check else "APPLY"
+    print(f"{mode_label} run")
+    for key in sorted(counts):
+        print(f"  {key}: {counts[key]}")
+
+    if check:
+        return 1 if counts.get("changed", 0) else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

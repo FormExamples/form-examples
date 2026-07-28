@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-63 tools.
+65 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -21,6 +21,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/generate-loco-deny-config.py`](#generate-loco-deny-configpy)
 - [`bin/generate-spec.py`](#generate-specpy)
 - [`bin/generate-tools-doc.py`](#generate-tools-docpy)
+- [`bin/html-date-time-picker-vendor`](#html-date-time-picker-vendor)
 - [`bin/html-helpers-chooser-rename`](#html-helpers-chooser-rename)
 - [`bin/html-helpers-picker-rename`](#html-helpers-picker-rename)
 - [`bin/html-share-button-refactor`](#html-share-button-refactor)
@@ -38,6 +39,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
 - [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
+- [`bin/svelte-date-time-picker-vendor`](#svelte-date-time-picker-vendor)
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
@@ -319,6 +321,34 @@ Generated artefact: do not hand-edit. Idempotent.
 Usage:
   bin/generate-tools-doc.py          # write docs/tools.md
   bin/generate-tools-doc.py --check  # exit non-zero if docs/tools.md is stale
+```
+
+<h2 id="html-date-time-picker-vendor"><code>bin/html-date-time-picker-vendor</code></h2>
+
+```text
+bin/html-date-time-picker-vendor -- add js/date-time-picker.js, the fifth
+Lily helper's hand-authored HTML-side implementation, to every form's
+front-end-with-html/js/.
+
+Unlike the other four HTML helpers (theme-select, locale-select,
+text-size-picker, share-picker), this file is byte-identical across every
+form: date-time-picker needs no per-form storage key (spec: it has no
+persistence at all -- a date is data, not a preference), so there is
+nothing to template per-slug.
+
+Deliberately vendor-only: this does NOT wire date-time-picker.js into any
+index.html/dashboard.html, and does NOT touch the existing .date-input /
+<input type="date"> convention any form currently uses. See
+bin/svelte-date-time-picker-vendor for the Svelte-side equivalent and the
+full rationale (a hand-rolled calendar dialog has weaker
+assistive-technology support than the native date input every form
+already uses -- swapping fields is a separate, unstarted decision).
+
+Usage:
+  bin/html-date-time-picker-vendor --check   # CI drift check (no writes)
+  bin/html-date-time-picker-vendor --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
 ```
 
 <h2 id="html-helpers-chooser-rename"><code>bin/html-helpers-chooser-rename</code></h2>
@@ -855,6 +885,34 @@ route-svelte-layout <slug> : nest a form's SvelteKit routes under
  front-end-with-svelte/src/routes/<form-kebab-case>/  and prefix internal
  absolute route links (href / goto / redirect, plus the "/" home link) with
  /<slug>. /api/ fetch paths are left untouched. Idempotent (skips if routed).
+```
+
+<h2 id="svelte-date-time-picker-vendor"><code>bin/svelte-date-time-picker-vendor</code></h2>
+
+```text
+bin/svelte-date-time-picker-vendor -- vendor DateTimePicker.svelte, the
+fifth Lily Svelte helper, into every form's
+front-end-with-svelte/src/lib/components/ui/, matching how the other four
+helpers (ThemePicker, LocalePicker, TextSizePicker, SharePicker) are already
+vendored there.
+
+Deliberately vendor-only: this does NOT wire DateTimePicker into any
++layout.svelte, route, or step component, and does NOT touch any existing
+DateInput.svelte usage. date-time-picker's own spec explicitly documents
+that a hand-rolled calendar dialog has weaker assistive-technology support
+than the native <input type="date"> that DateInput.svelte already wraps
+("the right default for many services") -- swapping every form's date
+fields for the dialog is a real accessibility tradeoff, not a pure
+upgrade, and is a separate, unstarted decision. This tool only makes the
+component available for a form to opt into later, exactly as the Svelte
+canonical's own docs frame it as a form-value control, not a page-header
+control -- there is nothing to place it into by default.
+
+Usage:
+  bin/svelte-date-time-picker-vendor --check   # CI drift check (no writes)
+  bin/svelte-date-time-picker-vendor --apply   # write changes
+
+Idempotent: re-running after a full --apply makes no further changes.
 ```
 
 <h2 id="svelte-helpers-chooser-rename"><code>bin/svelte-helpers-chooser-rename</code></h2>
