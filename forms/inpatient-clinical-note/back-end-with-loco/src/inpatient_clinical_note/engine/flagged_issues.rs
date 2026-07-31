@@ -62,7 +62,10 @@ pub fn detect_flagged_issues(
             "F-DETERIORATING-NO-ESCALATION-001",
             "deteriorating-news2-no-escalation",
             FlagPriority::High,
-            format!("The acuity band is {acuity_band:?}, but no escalation action is recorded on this note."),
+            format!(
+                "The acuity band is {}, but no escalation action is recorded on this note.",
+                acuity_band.as_str()
+            ),
             "Escalate to the senior on call or the critical-care outreach team, and record the action taken.",
         ));
     }
@@ -148,7 +151,10 @@ pub fn detect_flagged_issues(
         && note.senior_review_by.trim().is_empty()
     {
         let description = if escalating {
-            format!("The acuity band is {acuity_band:?}, but no senior reviewer is named.")
+            format!(
+                "The acuity band is {}, but no senior reviewer is named.",
+                acuity_band.as_str()
+            )
         } else {
             "A ceiling-of-care decision is recorded, but no senior reviewer is named.".to_owned()
         };

@@ -35,6 +35,22 @@ supporting list (`GET`), create (`POST`), and `GET` / `PUT` / `PATCH` /
   - `inpatient_clinical_note_grade_rule`
   - `inpatient_clinical_note_grade_flag`
 
+Beyond the per-table CRUD, the note resource carries two grading endpoints:
+
+- `POST /api/inpatient_clinical_notes/{id}/grade` — run both engines over the
+  stored note and persist the result. Returns the grade row and the full engine
+  output, including the fired-rule and flag audit trail.
+- `GET /api/inpatient_clinical_notes/{id}/grade` — the most recent persisted
+  grade, or 404 if the note has never been graded.
+
+Grading is **append-only**: each `POST` inserts a new grade row rather than
+updating the last, so a note's grading history stays auditable. The grade row
+and its rule and flag children are written in one transaction.
+
+Note that the grade row is a SeaORM entity and therefore serialises
+**snake_case**, as every entity controller in this crate does; the engine
+result nested beside it is camelCase.
+
 ## Engine
 
 `src/inpatient_clinical_note/engine/` carries both grading engines, mirroring
@@ -48,8 +64,17 @@ the front-end implementations:
 - `acuity.rs` — the max-band acuity rules.
 - `flagged_issues.rs` — the twelve safety flags.
 
+`src/inpatient_clinical_note/grading.rs` is the bridge from the relational
+schema to those pure functions: it loads a note and its children, projects them
+onto the engine's input shape, and persists the result. No clinical rule lives
+there.
+
 **The required-component set varies by note type** (spec §4.2) — never hard-code
 a single list; call `is_required()` / `extra_required()`.
+
+**Never render an enum with `{:?}` across a boundary.** The `Debug` form is
+`PascalCase`; the database CHECK constraints, both front-end engines, and the
+JSON bodies are all kebab-case. Use `as_str()`.
 
 `AcuityBand` derives `Ord` in ascending severity order, which is what makes the
 max-band algorithm a plain `max()`. Keep the variant order as-is.

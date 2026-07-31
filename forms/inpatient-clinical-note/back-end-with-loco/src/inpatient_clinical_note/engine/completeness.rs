@@ -182,7 +182,7 @@ pub fn grade(note: &InpatientClinicalNote) -> NoteGrade {
             fired_rules.push(FiredRule {
                 id: rule_id(component).to_owned(),
                 engine: "completeness".to_owned(),
-                component: format!("{component:?}"),
+                component: component.as_str().to_owned(),
                 band: None,
                 category: if required {
                     "required-component".to_owned()
@@ -241,7 +241,8 @@ pub fn grade(note: &InpatientClinicalNote) -> NoteGrade {
             format!("All {total_required} required components documented — entry complete (100%)")
         } else {
             format!(
-                "{documented_required} of {total_required} required components documented — entry {status:?} ({completeness_percent}%)"
+                "{documented_required} of {total_required} required components documented — entry {} ({completeness_percent}%)",
+                status.as_str()
             )
         },
     });
@@ -254,7 +255,9 @@ pub fn grade(note: &InpatientClinicalNote) -> NoteGrade {
             band: Some(acuity_band),
             category: "override".to_owned(),
             description: format!(
-                "Author overrode the computed acuity band ({computed_acuity_band:?}) to {acuity_band:?}: {}",
+                "Author overrode the computed acuity band ({}) to {}: {}",
+                computed_acuity_band.as_str(),
+                acuity_band.as_str(),
                 note.author_override_reason.trim()
             ),
         });

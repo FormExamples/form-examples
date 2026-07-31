@@ -29,6 +29,40 @@ pub enum NoteType {
     DischargePlanning,
 }
 
+impl NoteType {
+    /// The wire / database spelling, identical to the `serde` representation.
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::AdmissionClerking => "admission-clerking",
+            Self::Progress => "progress",
+            Self::Consult => "consult",
+            Self::Event => "event",
+            Self::Procedure => "procedure",
+            Self::Handover => "handover",
+            Self::Transfer => "transfer",
+            Self::DischargePlanning => "discharge-planning",
+        }
+    }
+
+    /// Parse the wire / database spelling. Returns `None` for an unset or
+    /// unrecognised value, which the header component then reads as undocumented.
+    #[must_use]
+    pub fn from_wire(s: &str) -> Option<Self> {
+        match s {
+            "admission-clerking" => Some(Self::AdmissionClerking),
+            "progress" => Some(Self::Progress),
+            "consult" => Some(Self::Consult),
+            "event" => Some(Self::Event),
+            "procedure" => Some(Self::Procedure),
+            "handover" => Some(Self::Handover),
+            "transfer" => Some(Self::Transfer),
+            "discharge-planning" => Some(Self::DischargePlanning),
+            _ => None,
+        }
+    }
+}
+
 /// Documentation-completeness status. Never overridable — it is a mechanical
 /// property of the record, not a clinical judgement.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -41,6 +75,18 @@ pub enum CompletenessStatus {
     /// Header, impression, or plan missing, or fewer than half the required set.
     #[default]
     Incomplete,
+}
+
+impl CompletenessStatus {
+    /// The wire / database spelling, identical to the `serde` representation.
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Complete => "complete",
+            Self::Partial => "partial",
+            Self::Incomplete => "incomplete",
+        }
+    }
 }
 
 /// Clinical acuity band, assigned by max-band over the acuity rules.
@@ -56,6 +102,32 @@ pub enum AcuityBand {
     Escalate,
     /// Arrest, critical-care referral, NEWS2 >= 9, or new organ support.
     Critical,
+}
+
+impl AcuityBand {
+    /// The wire / database spelling, identical to the `serde` representation.
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Stable => "stable",
+            Self::Watch => "watch",
+            Self::Escalate => "escalate",
+            Self::Critical => "critical",
+        }
+    }
+
+    /// Parse the wire / database spelling. Returns `None` for an unset or
+    /// unrecognised value, which the acuity engine reads as "no override".
+    #[must_use]
+    pub fn from_wire(s: &str) -> Option<Self> {
+        match s {
+            "stable" => Some(Self::Stable),
+            "watch" => Some(Self::Watch),
+            "escalate" => Some(Self::Escalate),
+            "critical" => Some(Self::Critical),
+            _ => None,
+        }
+    }
 }
 
 /// One of the twelve note components the completeness engine grades.
@@ -89,6 +161,29 @@ pub enum ComponentKey {
 }
 
 impl ComponentKey {
+    /// The wire / database spelling, identical to the `serde` representation and
+    /// to the `component` CHECK constraint on
+    /// `inpatient_clinical_note_grade_rule`. Never use the `Debug` form here —
+    /// it is `PascalCase` and both the schema and the front-end engines are
+    /// kebab-case.
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Header => "header",
+            Self::IntervalHistory => "interval-history",
+            Self::Observations => "observations",
+            Self::Examination => "examination",
+            Self::Investigations => "investigations",
+            Self::Problems => "problems",
+            Self::Medications => "medications",
+            Self::RiskAssessments => "risk-assessments",
+            Self::Impression => "impression",
+            Self::Plan => "plan",
+            Self::Escalation => "escalation",
+            Self::Communication => "communication",
+        }
+    }
+
     /// Human-readable label.
     #[must_use]
     pub const fn label(self) -> &'static str {
@@ -119,6 +214,18 @@ pub enum FlagPriority {
     Medium,
     /// Record-quality issue.
     Low,
+}
+
+impl FlagPriority {
+    /// The wire / database spelling, identical to the `serde` representation.
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::High => "high",
+            Self::Medium => "medium",
+            Self::Low => "low",
+        }
+    }
 }
 
 /// Per-component presence row.

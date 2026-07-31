@@ -13,8 +13,16 @@ file only records changes scoped to the **Inpatient Clinical Note** form.
 ## [Unreleased]
 
 ### Added
-- _Pending — record new fields, new fired-rule categories, new schema columns,
-  new front-end steps, new clinical references, new examples, etc._
+- Server-side grading. `POST /api/inpatient_clinical_notes/{id}/grade` runs both
+  engines over a stored note and persists the result as one
+  `inpatient_clinical_note_grade` row plus its rule and flag children, in a
+  single transaction; `GET` on the same path returns the most recent grading.
+  Grading is append-only, so a note's grading history stays auditable.
+- `grading` module: the projection from the relational schema onto the engine's
+  input shape. Soft-deleted child rows are excluded.
+- `as_str()` on `NoteType`, `CompletenessStatus`, `AcuityBand`, `ComponentKey`,
+  and `FlagPriority`, plus `from_wire()` where a string is parsed back. A test
+  asserts these agree with the `serde` representation for every variant.
 
 ### Changed
 - _Pending — record schema migrations, scoring-engine behaviour changes,
@@ -27,8 +35,14 @@ file only records changes scoped to the **Inpatient Clinical Note** form.
 - _Pending._
 
 ### Fixed
-- _Pending — record corrections to scoring rules, schema fixes, front-end
-  regressions, FHIR mapping fixes._
+- The Rust engine emitted fired-rule `component` values in the Rust `Debug`
+  spelling (`IntervalHistory`) rather than the kebab-case vocabulary
+  (`interval-history`) used by both front-end engines and required by the
+  `component` CHECK constraint on `inpatient_clinical_note_grade_rule`. Any
+  attempt to persist a grade would have been rejected by the database. The same
+  `Debug` spelling leaked into four rule and flag description strings, which
+  therefore read `entry Complete` and `The acuity band is Escalate` where the
+  front-ends read `entry complete` and `the acuity band is escalate`.
 
 ### Security
 - _Pending — record fixes affecting PHI handling, audit logging, or access

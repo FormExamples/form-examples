@@ -197,3 +197,113 @@ fn an_explicit_negative_counts_as_documented() {
         .iter()
         .any(|c| c.label == "Interval history" && c.present));
 }
+
+/// The `as_str()` spellings are what the database columns and both front-end
+/// engines use. They must stay identical to the `serde` representation, which
+/// is what the JSON API emits — a divergence between the two is invisible until
+/// a persisted grade violates a CHECK constraint.
+#[test]
+fn as_str_matches_the_serde_representation() {
+    use inpatient_clinical_note::engine::{ComponentKey, FlagPriority};
+
+    // `serde_json` renders a unit enum variant as a bare JSON string, so the
+    // trimmed output is exactly the wire spelling.
+    macro_rules! assert_wire {
+        ($value:expr) => {{
+            let json = serde_json::to_string(&$value).unwrap();
+            assert_eq!(
+                json.trim_matches('"'),
+                $value.as_str(),
+                "as_str() and serde disagree for {:?}",
+                $value
+            );
+        }};
+    }
+
+    for note_type in [
+        NoteType::AdmissionClerking,
+        NoteType::Progress,
+        NoteType::Consult,
+        NoteType::Event,
+        NoteType::Procedure,
+        NoteType::Handover,
+        NoteType::Transfer,
+        NoteType::DischargePlanning,
+    ] {
+        assert_wire!(note_type);
+        assert_eq!(NoteType::from_wire(note_type.as_str()), Some(note_type));
+    }
+
+    for band in [
+        AcuityBand::Stable,
+        AcuityBand::Watch,
+        AcuityBand::Escalate,
+        AcuityBand::Critical,
+    ] {
+        assert_wire!(band);
+        assert_eq!(AcuityBand::from_wire(band.as_str()), Some(band));
+    }
+
+    for status in [
+        CompletenessStatus::Complete,
+        CompletenessStatus::Partial,
+        CompletenessStatus::Incomplete,
+    ] {
+        assert_wire!(status);
+    }
+
+    for component in [
+        ComponentKey::Header,
+        ComponentKey::IntervalHistory,
+        ComponentKey::Observations,
+        ComponentKey::Examination,
+        ComponentKey::Investigations,
+        ComponentKey::Problems,
+        ComponentKey::Medications,
+        ComponentKey::RiskAssessments,
+        ComponentKey::Impression,
+        ComponentKey::Plan,
+        ComponentKey::Escalation,
+        ComponentKey::Communication,
+    ] {
+        assert_wire!(component);
+    }
+
+    for priority in [FlagPriority::High, FlagPriority::Medium, FlagPriority::Low] {
+        assert_wire!(priority);
+    }
+}
+
+/// Fired rules carry the kebab-case component vocabulary the
+/// `inpatient_clinical_note_grade_rule` CHECK constraint accepts, not the Rust
+/// `Debug` spelling.
+#[test]
+fn fired_rule_components_use_the_schema_vocabulary() {
+    const ALLOWED: &[&str] = &[
+        "header",
+        "interval-history",
+        "observations",
+        "examination",
+        "investigations",
+        "problems",
+        "medications",
+        "risk-assessments",
+        "impression",
+        "plan",
+        "escalation",
+        "communication",
+        "completeness",
+        "acuity",
+        "",
+    ];
+
+    let g = grade(&complete_progress_note());
+    assert!(!g.fired_rules.is_empty());
+    for rule in &g.fired_rules {
+        assert!(
+            ALLOWED.contains(&rule.component.as_str()),
+            "component {:?} is not in the schema vocabulary",
+            rule.component
+        );
+    }
+}

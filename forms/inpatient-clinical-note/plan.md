@@ -44,6 +44,9 @@ Development roadmap and status. See [`index.md`](index.md) for the design and
 - [x] `cargo build` + `cargo clippy --all-targets` clean; `cargo test` 49/49
       against a real Postgres database
 - [x] `cargo deny --all-features check` passes
+- [x] Server-side grading endpoints — `POST`/`GET`
+      `/api/inpatient_clinical_notes/{id}/grade`, persisting the grade with its
+      rule and flag children in one transaction; append-only, 57/57 tests green
 
 ## Phase 5 — Verification
 
@@ -80,7 +83,9 @@ fleet-wide and predate it:
 
 - Amendment chain (`amends_note_id`) — see spec §9.
 - Full 4AT item-level delirium scoring — see spec §9.
-- A server-side grading endpoint that persists `inpatient_clinical_note_grade`
-  rows; the engine is callable but no controller writes them yet.
 - Wiring the vendored `DateTimePicker` in place of the native
-  `datetime-local` input, in line with the rest of the fleet.
+  `datetime-local` input. Note that fleet convention is for this helper to stay
+  vendored-but-unwired in **every** form, so doing it here alone would be the
+  deviation, not the fix.
+- Neither front-end calls the grading endpoints yet; both still grade in the
+  browser. The server is now the authority when asked, but nothing asks it.

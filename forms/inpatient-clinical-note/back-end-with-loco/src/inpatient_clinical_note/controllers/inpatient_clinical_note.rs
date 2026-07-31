@@ -435,6 +435,47 @@ pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Resu
     format::json(load_item(&ctx, id).await?)
 }
 
+/// The body returned by both grading endpoints: the persisted grade row and,
+/// on a fresh grading, the full engine result including the rule and flag
+/// audit trail.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GradeResponse {
+    /// The persisted `inpatient_clinical_note_grade` row.
+    pub grade: crate::models::_entities::inpatient_clinical_note_grades::Model,
+    /// The engine output, present when the grade was just computed.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub result: Option<crate::engine::NoteGrade>,
+}
+
+/// Grade the note identified by `id` and persist the result.
+///
+/// Runs the documentation-completeness and clinical-acuity engines over the
+/// stored note and its children, writing one grade row plus its rule and flag
+/// children. Append-only: each call records a new grading rather than replacing
+/// the last.
+#[debug_handler]
+pub async fn grade(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+    let (grade, result) = crate::grading::grade_and_persist(&ctx.db, id).await?;
+    format::json(GradeResponse {
+        grade,
+        result: Some(result),
+    })
+}
+
+/// Fetch the most recent persisted grade for the note identified by `id`.
+///
+/// Returns 404 when the note has never been graded; `POST` to the same path to
+/// grade it.
+#[debug_handler]
+pub async fn get_grade(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+    let grade = crate::grading::latest_grade(&ctx.db, id).await?;
+    format::json(GradeResponse {
+        grade,
+        result: None,
+    })
+}
+
 /// Build the routes for the inpatient clinical notes resource.
 pub fn routes() -> Routes {
     Routes::new()
@@ -445,4 +486,6 @@ pub fn routes() -> Routes {
         .add("{id}", delete(remove))
         .add("{id}", put(update))
         .add("{id}", patch(update))
+        .add("{id}/grade", post(grade))
+        .add("{id}/grade", get(get_grade))
 }

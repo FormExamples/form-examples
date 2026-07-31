@@ -23,6 +23,11 @@ Task tracking. See [`plan.md`](plan.md) for the phased roadmap.
 - Built the Loco crate: ten migrations, entities, models, and controllers, plus
   both engines in Rust with 16 tests. Whole crate green against Postgres.
 
+- Added server-side grading: `POST`/`GET`
+  `/api/inpatient_clinical_notes/{id}/grade`, the `grading` module that projects
+  the relational record onto the engine's input shape, and persistence of the
+  grade with its rule and flag children in one transaction. 57/57 tests green.
+
 ## Notes
 
 - The completeness status is deliberately **not** overridable; only the acuity
@@ -33,6 +38,18 @@ Task tracking. See [`plan.md`](plan.md) for the phased roadmap.
 - The NEWS2 aggregate is entered-wins-over-derived, and both are always
   reported, so a chart/parameter discrepancy is visible rather than resolved
   silently.
+- Enum spellings crossing a boundary (database column, JSON body, either
+  front-end) go through `as_str()`, never `{:?}`. The `Debug` form is
+  `PascalCase` and everything outside Rust is kebab-case; the two engines and
+  the `CHECK` constraints all assume kebab-case.
+  `as_str_matches_the_serde_representation` guards this.
+- Server-side grading is append-only: each run inserts a new grade row, and
+  readers take the most recent. Grades are never updated in place, so
+  `graded_at` means what it says and the grading history stays auditable.
+- The Loco migration declares the note's 98 string columns `NOT NULL` **without**
+  the `DEFAULT ''` that `sql/` carries, so an unset column inserts as NULL and
+  fails. `blank_note()` in `tests/grading/mod.rs` works around this. Worth
+  reconciling migration and `sql/` fleet-wide.
 
 ## Pre-existing issues surfaced while building this form
 
