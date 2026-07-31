@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE inpatient_clinical_note_grade SYSTEM "inpatient_clinical_note_grade.dtd">
+<inpatient_clinical_note_grade>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<inpatient_clinical_note_id>770e8400-e29b-41d4-a716-446655440002</inpatient_clinical_note_id>
+<status>complete</status>
+<completeness_percent>1</completeness_percent>
+<required_component_count>2</required_component_count>
+<documented_component_count>2</documented_component_count>
+<acuity_band>stable</acuity_band>
+<computed_acuity_band>stable</computed_acuity_band>
+<news2_total>1</news2_total>
+<header_documented>yes</header_documented>
+<interval_history_documented>yes</interval_history_documented>
+<observations_documented>yes</observations_documented>
+<examination_documented>yes</examination_documented>
+<investigations_documented>yes</investigations_documented>
+<problems_documented>yes</problems_documented>
+<medications_documented>yes</medications_documented>
+<risk_assessments_documented>yes</risk_assessments_documented>
+<impression_documented>yes</impression_documented>
+<plan_documented>yes</plan_documented>
+<escalation_documented>yes</escalation_documented>
+<communication_documented>yes</communication_documented>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</inpatient_clinical_note_grade>

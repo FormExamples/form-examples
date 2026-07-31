@@ -1,0 +1,15 @@
+<!ELEMENT inpatient_clinical_note_job (id,created_at,updated_at,deleted_at,inpatient_clinical_note_id,sort_order,job,category,owner,priority,due_at,status,completed_at,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT inpatient_clinical_note_id (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>
+<!ELEMENT job (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT owner (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT due_at (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT completed_at (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

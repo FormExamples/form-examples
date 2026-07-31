@@ -1,0 +1,12 @@
+mod users;
+
+mod patients;
+mod clinicians;
+mod inpatient_clinical_notes;
+mod inpatient_clinical_note_problems;
+mod inpatient_clinical_note_medication_changes;
+mod inpatient_clinical_note_investigations;
+mod inpatient_clinical_note_jobs;
+mod inpatient_clinical_note_grades;
+mod inpatient_clinical_note_grade_rules;
+mod inpatient_clinical_note_grade_flags;

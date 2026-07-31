@@ -1,0 +1,15 @@
+<!ELEMENT inpatient_clinical_note_investigation (id,created_at,updated_at,deleted_at,inpatient_clinical_note_id,sort_order,test_name,category,requested_date,result_date,result_summary,abnormal,actioned,action_taken)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT inpatient_clinical_note_id (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>
+<!ELEMENT test_name (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT requested_date (#PCDATA)>
+<!ELEMENT result_date (#PCDATA)>
+<!ELEMENT result_summary (#PCDATA)>
+<!ELEMENT abnormal (#PCDATA)>
+<!ELEMENT actioned (#PCDATA)>
+<!ELEMENT action_taken (#PCDATA)>

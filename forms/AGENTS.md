@@ -177,6 +177,7 @@ Subprojects:
 - [Hypertension Annual Review](hypertension-review)
 - [Immunology waiting list card](immunology-waiting-list-card)
 - [Infectious diseases waiting list card](infectious-diseases-waiting-list-card)
+- [Inpatient Clinical Note](inpatient-clinical-note)
 - [integumentary assessment](integumentary-assessment)
 - [Internal medicine waiting list card](internal-medicine-waiting-list-card)
 - [International Certificate of Vaccination or Prophylaxis (ICVP)](international-certificate-of-vaccination-or-prophylaxis)

@@ -1,0 +1,514 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: inpatient_clinical_note
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum InpatientClinicalNoteStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+}
+
+enum InpatientClinicalNoteNoteTypeEnum {
+  NOTETYPE_UNSPECIFIED = 0;
+  NOTETYPE_ADMISSION_CLERKING = 1;  // admission-clerking
+  NOTETYPE_PROGRESS = 2;  // progress
+  NOTETYPE_CONSULT = 3;  // consult
+  NOTETYPE_EVENT = 4;  // event
+  NOTETYPE_PROCEDURE = 5;  // procedure
+  NOTETYPE_HANDOVER = 6;  // handover
+  NOTETYPE_TRANSFER = 7;  // transfer
+  NOTETYPE_DISCHARGE_PLANNING = 8;  // discharge-planning
+}
+
+enum InpatientClinicalNoteAuthorGradeEnum {
+  AUTHORGRADE_UNSPECIFIED = 0;
+  AUTHORGRADE_FY1 = 1;  // FY1
+  AUTHORGRADE_FY2 = 2;  // FY2
+  AUTHORGRADE_CT1 = 3;  // CT1
+  AUTHORGRADE_CT2 = 4;  // CT2
+  AUTHORGRADE_CT3 = 5;  // CT3
+  AUTHORGRADE_ST1 = 6;  // ST1
+  AUTHORGRADE_ST2 = 7;  // ST2
+  AUTHORGRADE_ST3 = 8;  // ST3
+  AUTHORGRADE_ST4 = 9;  // ST4
+  AUTHORGRADE_ST5 = 10;  // ST5
+  AUTHORGRADE_ST6 = 11;  // ST6
+  AUTHORGRADE_ST7 = 12;  // ST7
+  AUTHORGRADE_ST8 = 13;  // ST8
+  AUTHORGRADE_SAS = 14;  // SAS
+  AUTHORGRADE_CONSULTANT = 15;  // consultant
+  AUTHORGRADE_ACP = 16;  // acp
+  AUTHORGRADE_PHYSICIAN_ASSOCIATE = 17;  // physician-associate
+  AUTHORGRADE_NURSE = 18;  // nurse
+  AUTHORGRADE_OTHER = 19;  // other
+}
+
+enum InpatientClinicalNoteProcedureConsentEnum {
+  PROCEDURECONSENT_UNSPECIFIED = 0;
+  PROCEDURECONSENT_WRITTEN = 1;  // written
+  PROCEDURECONSENT_VERBAL = 2;  // verbal
+  PROCEDURECONSENT_IMPLIED = 3;  // implied
+  PROCEDURECONSENT_EMERGENCY_NO_CONSENT = 4;  // emergency-no-consent
+  PROCEDURECONSENT_BEST_INTERESTS = 5;  // best-interests
+}
+
+enum InpatientClinicalNoteAdmissionMethodEnum {
+  ADMISSIONMETHOD_UNSPECIFIED = 0;
+  ADMISSIONMETHOD_EMERGENCY_DEPARTMENT = 1;  // emergency-department
+  ADMISSIONMETHOD_GP_REFERRAL = 2;  // gp-referral
+  ADMISSIONMETHOD_ELECTIVE = 3;  // elective
+  ADMISSIONMETHOD_TRANSFER_IN = 4;  // transfer-in
+  ADMISSIONMETHOD_CLINIC = 5;  // clinic
+  ADMISSIONMETHOD_MATERNITY = 6;  // maternity
+  ADMISSIONMETHOD_OTHER = 7;  // other
+}
+
+enum InpatientClinicalNoteNoIntervalEventsEnum {
+  NOINTERVALEVENTS_UNSPECIFIED = 0;
+  NOINTERVALEVENTS_YES = 1;  // yes
+  NOINTERVALEVENTS_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteSleepQualityEnum {
+  SLEEPQUALITY_UNSPECIFIED = 0;
+  SLEEPQUALITY_GOOD = 1;  // good
+  SLEEPQUALITY_FAIR = 2;  // fair
+  SLEEPQUALITY_POOR = 3;  // poor
+  SLEEPQUALITY_NONE = 4;  // none
+}
+
+enum InpatientClinicalNoteOralIntakeEnum {
+  ORALINTAKE_UNSPECIFIED = 0;
+  ORALINTAKE_NORMAL = 1;  // normal
+  ORALINTAKE_REDUCED = 2;  // reduced
+  ORALINTAKE_MINIMAL = 3;  // minimal
+  ORALINTAKE_NIL_BY_MOUTH = 4;  // nil-by-mouth
+}
+
+enum InpatientClinicalNoteMobilityStatusEnum {
+  MOBILITYSTATUS_UNSPECIFIED = 0;
+  MOBILITYSTATUS_INDEPENDENT = 1;  // independent
+  MOBILITYSTATUS_STICK = 2;  // stick
+  MOBILITYSTATUS_FRAME = 3;  // frame
+  MOBILITYSTATUS_ASSISTANCE_OF_ONE = 4;  // assistance-of-one
+  MOBILITYSTATUS_ASSISTANCE_OF_TWO = 5;  // assistance-of-two
+  MOBILITYSTATUS_HOIST = 6;  // hoist
+  MOBILITYSTATUS_BED_BOUND = 7;  // bed-bound
+}
+
+enum InpatientClinicalNoteSpo2ScaleEnum {
+  SPO2SCALE_UNSPECIFIED = 0;
+  SPO2SCALE_SCALE_1 = 1;  // scale-1
+  SPO2SCALE_SCALE_2 = 2;  // scale-2
+}
+
+enum InpatientClinicalNoteOxygenDeliveryEnum {
+  OXYGENDELIVERY_UNSPECIFIED = 0;
+  OXYGENDELIVERY_AIR = 1;  // air
+  OXYGENDELIVERY_NASAL_CANNULA = 2;  // nasal-cannula
+  OXYGENDELIVERY_SIMPLE_MASK = 3;  // simple-mask
+  OXYGENDELIVERY_VENTURI = 4;  // venturi
+  OXYGENDELIVERY_NON_REBREATHE = 5;  // non-rebreathe
+  OXYGENDELIVERY_HIGH_FLOW_NASAL = 6;  // high-flow-nasal
+  OXYGENDELIVERY_NIV = 7;  // niv
+  OXYGENDELIVERY_INVASIVE_VENTILATION = 8;  // invasive-ventilation
+}
+
+enum InpatientClinicalNoteAcvpuEnum {
+  ACVPU_UNSPECIFIED = 0;
+  ACVPU_ALERT = 1;  // alert
+  ACVPU_CONFUSION = 2;  // confusion
+  ACVPU_VOICE = 3;  // voice
+  ACVPU_PAIN = 4;  // pain
+  ACVPU_UNRESPONSIVE = 5;  // unresponsive
+}
+
+enum InpatientClinicalNoteNews2TrendEnum {
+  NEWS2TREND_UNSPECIFIED = 0;
+  NEWS2TREND_IMPROVING = 1;  // improving
+  NEWS2TREND_STABLE = 2;  // stable
+  NEWS2TREND_WORSENING = 3;  // worsening
+  NEWS2TREND_UNKNOWN = 4;  // unknown
+}
+
+enum InpatientClinicalNoteNews2ApplicableEnum {
+  NEWS2APPLICABLE_UNSPECIFIED = 0;
+  NEWS2APPLICABLE_YES = 1;  // yes
+  NEWS2APPLICABLE_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteNoInvestigationsReviewedEnum {
+  NOINVESTIGATIONSREVIEWED_UNSPECIFIED = 0;
+  NOINVESTIGATIONSREVIEWED_YES = 1;  // yes
+  NOINVESTIGATIONSREVIEWED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteNoMedicationChangesEnum {
+  NOMEDICATIONCHANGES_UNSPECIFIED = 0;
+  NOMEDICATIONCHANGES_YES = 1;  // yes
+  NOMEDICATIONCHANGES_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteAllergyCheckedEnum {
+  ALLERGYCHECKED_UNSPECIFIED = 0;
+  ALLERGYCHECKED_YES = 1;  // yes
+  ALLERGYCHECKED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteMedicinesReconciliationStatusEnum {
+  MEDICINESRECONCILIATIONSTATUS_UNSPECIFIED = 0;
+  MEDICINESRECONCILIATIONSTATUS_DONE = 1;  // done
+  MEDICINESRECONCILIATIONSTATUS_PARTIAL = 2;  // partial
+  MEDICINESRECONCILIATIONSTATUS_NOT_DONE = 3;  // not-done
+  MEDICINESRECONCILIATIONSTATUS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum InpatientClinicalNoteAntimicrobialReviewStatusEnum {
+  ANTIMICROBIALREVIEWSTATUS_UNSPECIFIED = 0;
+  ANTIMICROBIALREVIEWSTATUS_NOT_APPLICABLE = 1;  // not-applicable
+  ANTIMICROBIALREVIEWSTATUS_DUE = 2;  // due
+  ANTIMICROBIALREVIEWSTATUS_DONE = 3;  // done
+  ANTIMICROBIALREVIEWSTATUS_OVERDUE = 4;  // overdue
+}
+
+enum InpatientClinicalNoteVteStatusEnum {
+  VTESTATUS_UNSPECIFIED = 0;
+  VTESTATUS_DONE = 1;  // done
+  VTESTATUS_NOT_DONE = 2;  // not-done
+  VTESTATUS_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum InpatientClinicalNoteVteProphylaxisEnum {
+  VTEPROPHYLAXIS_UNSPECIFIED = 0;
+  VTEPROPHYLAXIS_PHARMACOLOGICAL = 1;  // pharmacological
+  VTEPROPHYLAXIS_MECHANICAL = 2;  // mechanical
+  VTEPROPHYLAXIS_BOTH = 3;  // both
+  VTEPROPHYLAXIS_NONE = 4;  // none
+  VTEPROPHYLAXIS_CONTRAINDICATED = 5;  // contraindicated
+}
+
+enum InpatientClinicalNoteFallsRiskEnum {
+  FALLSRISK_UNSPECIFIED = 0;
+  FALLSRISK_LOW = 1;  // low
+  FALLSRISK_MODERATE = 2;  // moderate
+  FALLSRISK_HIGH = 3;  // high
+  FALLSRISK_NOT_ASSESSED = 4;  // not-assessed
+}
+
+enum InpatientClinicalNotePressureUlcerRiskEnum {
+  PRESSUREULCERRISK_UNSPECIFIED = 0;
+  PRESSUREULCERRISK_LOW = 1;  // low
+  PRESSUREULCERRISK_MEDIUM = 2;  // medium
+  PRESSUREULCERRISK_HIGH = 3;  // high
+  PRESSUREULCERRISK_NOT_ASSESSED = 4;  // not-assessed
+}
+
+enum InpatientClinicalNoteSkinIntegrityEnum {
+  SKININTEGRITY_UNSPECIFIED = 0;
+  SKININTEGRITY_INTACT = 1;  // intact
+  SKININTEGRITY_AT_RISK = 2;  // at-risk
+  SKININTEGRITY_DAMAGED = 3;  // damaged
+}
+
+enum InpatientClinicalNotePressureUlcerGradeEnum {
+  PRESSUREULCERGRADE_UNSPECIFIED = 0;
+  PRESSUREULCERGRADE_NONE = 1;  // none
+  PRESSUREULCERGRADE_V_1 = 2;  // 1
+  PRESSUREULCERGRADE_V_2 = 3;  // 2
+  PRESSUREULCERGRADE_V_3 = 4;  // 3
+  PRESSUREULCERGRADE_V_4 = 5;  // 4
+  PRESSUREULCERGRADE_UNSTAGEABLE = 6;  // unstageable
+  PRESSUREULCERGRADE_DEEP_TISSUE_INJURY = 7;  // deep-tissue-injury
+}
+
+enum InpatientClinicalNoteDeliriumScreenEnum {
+  DELIRIUMSCREEN_UNSPECIFIED = 0;
+  DELIRIUMSCREEN_NEGATIVE = 1;  // negative
+  DELIRIUMSCREEN_POSSIBLE_DELIRIUM = 2;  // possible-delirium
+  DELIRIUMSCREEN_PROBABLE_DELIRIUM = 3;  // probable-delirium
+  DELIRIUMSCREEN_COGNITIVE_IMPAIRMENT = 4;  // cognitive-impairment
+  DELIRIUMSCREEN_NOT_ASSESSED = 5;  // not-assessed
+}
+
+enum InpatientClinicalNoteNutritionScreenEnum {
+  NUTRITIONSCREEN_UNSPECIFIED = 0;
+  NUTRITIONSCREEN_LOW_RISK = 1;  // low-risk
+  NUTRITIONSCREEN_MEDIUM_RISK = 2;  // medium-risk
+  NUTRITIONSCREEN_HIGH_RISK = 3;  // high-risk
+  NUTRITIONSCREEN_NOT_ASSESSED = 4;  // not-assessed
+}
+
+enum InpatientClinicalNoteInfectionStatusEnum {
+  INFECTIONSTATUS_UNSPECIFIED = 0;
+  INFECTIONSTATUS_NONE = 1;  // none
+  INFECTIONSTATUS_SUSPECTED = 2;  // suspected
+  INFECTIONSTATUS_CONFIRMED = 3;  // confirmed
+}
+
+enum InpatientClinicalNoteIsolationStatusEnum {
+  ISOLATIONSTATUS_UNSPECIFIED = 0;
+  ISOLATIONSTATUS_NONE = 1;  // none
+  ISOLATIONSTATUS_SOURCE = 2;  // source
+  ISOLATIONSTATUS_PROTECTIVE = 3;  // protective
+  ISOLATIONSTATUS_COHORT = 4;  // cohort
+}
+
+enum InpatientClinicalNoteSafeguardingConcernEnum {
+  SAFEGUARDINGCONCERN_UNSPECIFIED = 0;
+  SAFEGUARDINGCONCERN_YES = 1;  // yes
+  SAFEGUARDINGCONCERN_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteSafeguardingReferralMadeEnum {
+  SAFEGUARDINGREFERRALMADE_UNSPECIFIED = 0;
+  SAFEGUARDINGREFERRALMADE_YES = 1;  // yes
+  SAFEGUARDINGREFERRALMADE_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteResponseToTreatmentEnum {
+  RESPONSETOTREATMENT_UNSPECIFIED = 0;
+  RESPONSETOTREATMENT_IMPROVING = 1;  // improving
+  RESPONSETOTREATMENT_UNCHANGED = 2;  // unchanged
+  RESPONSETOTREATMENT_DETERIORATING = 3;  // deteriorating
+  RESPONSETOTREATMENT_TOO_EARLY = 4;  // too-early
+}
+
+enum InpatientClinicalNoteNewOxygenRequirementEnum {
+  NEWOXYGENREQUIREMENT_UNSPECIFIED = 0;
+  NEWOXYGENREQUIREMENT_YES = 1;  // yes
+  NEWOXYGENREQUIREMENT_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteNewConfusionEnum {
+  NEWCONFUSION_UNSPECIFIED = 0;
+  NEWCONFUSION_YES = 1;  // yes
+  NEWCONFUSION_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteSepsisScreenEnum {
+  SEPSISSCREEN_UNSPECIFIED = 0;
+  SEPSISSCREEN_POSITIVE = 1;  // positive
+  SEPSISSCREEN_NEGATIVE = 2;  // negative
+  SEPSISSCREEN_NOT_DONE = 3;  // not-done
+}
+
+enum InpatientClinicalNoteArrestCallEnum {
+  ARRESTCALL_UNSPECIFIED = 0;
+  ARRESTCALL_NONE = 1;  // none
+  ARRESTCALL_CARDIAC = 2;  // cardiac
+  ARRESTCALL_RESPIRATORY = 3;  // respiratory
+  ARRESTCALL_PERI_ARREST = 4;  // peri-arrest
+}
+
+enum InpatientClinicalNoteCriticalCareReferralEnum {
+  CRITICALCAREREFERRAL_UNSPECIFIED = 0;
+  CRITICALCAREREFERRAL_YES = 1;  // yes
+  CRITICALCAREREFERRAL_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteNewOrganSupportEnum {
+  NEWORGANSUPPORT_UNSPECIFIED = 0;
+  NEWORGANSUPPORT_NONE = 1;  // none
+  NEWORGANSUPPORT_RESPIRATORY = 2;  // respiratory
+  NEWORGANSUPPORT_CARDIOVASCULAR = 3;  // cardiovascular
+  NEWORGANSUPPORT_RENAL = 4;  // renal
+  NEWORGANSUPPORT_NEUROLOGICAL = 5;  // neurological
+  NEWORGANSUPPORT_MULTIPLE = 6;  // multiple
+}
+
+enum InpatientClinicalNoteEscalationStatusEnum {
+  ESCALATIONSTATUS_UNSPECIFIED = 0;
+  ESCALATIONSTATUS_FOR_FULL_ESCALATION = 1;  // for-full-escalation
+  ESCALATIONSTATUS_FOR_WARD_BASED_CARE = 2;  // for-ward-based-care
+  ESCALATIONSTATUS_FOR_HDU = 3;  // for-hdu
+  ESCALATIONSTATUS_FOR_ICU = 4;  // for-icu
+  ESCALATIONSTATUS_PALLIATIVE = 5;  // palliative
+  ESCALATIONSTATUS_UNDER_REVIEW = 6;  // under-review
+}
+
+enum InpatientClinicalNoteCeilingOfCareEnum {
+  CEILINGOFCARE_UNSPECIFIED = 0;
+  CEILINGOFCARE_FULL_ACTIVE_TREATMENT = 1;  // full-active-treatment
+  CEILINGOFCARE_WARD_BASED_CARE = 2;  // ward-based-care
+  CEILINGOFCARE_NON_INVASIVE_VENTILATION = 3;  // non-invasive-ventilation
+  CEILINGOFCARE_ORGAN_SUPPORT = 4;  // organ-support
+  CEILINGOFCARE_SYMPTOM_CONTROL = 5;  // symptom-control
+}
+
+enum InpatientClinicalNoteRespectStatusEnum {
+  RESPECTSTATUS_UNSPECIFIED = 0;
+  RESPECTSTATUS_IN_PLACE = 1;  // in-place
+  RESPECTSTATUS_NOT_IN_PLACE = 2;  // not-in-place
+  RESPECTSTATUS_UNDER_DISCUSSION = 3;  // under-discussion
+  RESPECTSTATUS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum InpatientClinicalNoteDnacprStatusEnum {
+  DNACPRSTATUS_UNSPECIFIED = 0;
+  DNACPRSTATUS_FOR_CPR = 1;  // for-cpr
+  DNACPRSTATUS_DNACPR = 2;  // dnacpr
+  DNACPRSTATUS_UNDER_DISCUSSION = 3;  // under-discussion
+}
+
+enum InpatientClinicalNoteSeniorReviewNeededEnum {
+  SENIORREVIEWNEEDED_UNSPECIFIED = 0;
+  SENIORREVIEWNEEDED_YES = 1;  // yes
+  SENIORREVIEWNEEDED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteConsentStatusEnum {
+  CONSENTSTATUS_UNSPECIFIED = 0;
+  CONSENTSTATUS_CONSENTED = 1;  // consented
+  CONSENTSTATUS_DECLINED = 2;  // declined
+  CONSENTSTATUS_LACKS_CAPACITY = 3;  // lacks-capacity
+  CONSENTSTATUS_BEST_INTERESTS = 4;  // best-interests
+  CONSENTSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum InpatientClinicalNoteCapacityAssessedEnum {
+  CAPACITYASSESSED_UNSPECIFIED = 0;
+  CAPACITYASSESSED_YES = 1;  // yes
+  CAPACITYASSESSED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteAuthorOverrideAcuityEnum {
+  AUTHOROVERRIDEACUITY_UNSPECIFIED = 0;
+  AUTHOROVERRIDEACUITY_STABLE = 1;  // stable
+  AUTHOROVERRIDEACUITY_WATCH = 2;  // watch
+  AUTHOROVERRIDEACUITY_ESCALATE = 3;  // escalate
+  AUTHOROVERRIDEACUITY_CRITICAL = 4;  // critical
+}
+
+message InpatientClinicalNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string author_id = 6;  // UUID — uuid
+  string responsible_consultant_id = 7;  // UUID — uuid
+  InpatientClinicalNoteStatusEnum status = 8;  // VARCHAR(20)
+  InpatientClinicalNoteNoteTypeEnum note_type = 9;  // VARCHAR(30)
+  string hospital_name = 10;  // VARCHAR(255) — max 255 chars
+  string ward_name = 11;  // VARCHAR(100) — max 100 chars
+  string bed_number = 12;  // VARCHAR(20) — max 20 chars
+  string note_at = 13;  // TIMESTAMPTZ — iso 8601
+  string author_name = 14;  // VARCHAR(255) — max 255 chars
+  InpatientClinicalNoteAuthorGradeEnum author_grade = 15;  // VARCHAR(20)
+  string author_registration_number = 16;  // VARCHAR(40) — max 40 chars
+  string parent_specialty = 17;  // VARCHAR(60) — max 60 chars
+  string responsible_consultant_name = 18;  // VARCHAR(255) — max 255 chars
+  string consult_question = 19;  // TEXT
+  string consult_requesting_team = 20;  // VARCHAR(100) — max 100 chars
+  string procedure_performed = 21;  // VARCHAR(255) — max 255 chars
+  string procedure_detail = 22;  // TEXT
+  InpatientClinicalNoteProcedureConsentEnum procedure_consent = 23;  // VARCHAR(30)
+  string procedure_complications = 24;  // TEXT
+  string transfer_from_ward = 25;  // VARCHAR(100) — max 100 chars
+  string transfer_to_ward = 26;  // VARCHAR(100) — max 100 chars
+  string transfer_reason = 27;  // TEXT
+  string admission_at = 28;  // TIMESTAMPTZ — iso 8601
+  string admitting_specialty = 29;  // VARCHAR(60) — max 60 chars
+  InpatientClinicalNoteAdmissionMethodEnum admission_method = 30;  // VARCHAR(30)
+  string admission_reason = 31;  // TEXT
+  string interval_history = 32;  // TEXT
+  InpatientClinicalNoteNoIntervalEventsEnum no_interval_events = 33;  // VARCHAR(5)
+  string overnight_events = 34;  // TEXT
+  string patient_reported_symptoms = 35;  // TEXT
+  string nursing_concerns = 36;  // TEXT
+  int32 pain_score = 37;  // INTEGER
+  InpatientClinicalNoteSleepQualityEnum sleep_quality = 38;  // VARCHAR(20)
+  InpatientClinicalNoteOralIntakeEnum oral_intake = 39;  // VARCHAR(20)
+  string bowels_last_opened = 40;  // DATE — iso 8601 date
+  InpatientClinicalNoteMobilityStatusEnum mobility_status = 41;  // VARCHAR(30)
+  string observed_at = 42;  // TIMESTAMPTZ — iso 8601
+  int32 respiratory_rate = 43;  // INTEGER
+  int32 oxygen_saturation = 44;  // INTEGER
+  InpatientClinicalNoteSpo2ScaleEnum spo2_scale = 45;  // VARCHAR(10)
+  InpatientClinicalNoteOxygenDeliveryEnum oxygen_delivery = 46;  // VARCHAR(30)
+  double oxygen_flow_litres_per_minute = 47;  // NUMERIC(4,1) — numeric(4,1)
+  int32 systolic_blood_pressure = 48;  // INTEGER
+  int32 diastolic_blood_pressure = 49;  // INTEGER
+  int32 pulse_rate = 50;  // INTEGER
+  InpatientClinicalNoteAcvpuEnum acvpu = 51;  // VARCHAR(15)
+  double temperature_celsius = 52;  // NUMERIC(4,1) — numeric(4,1)
+  int32 news2_total = 53;  // INTEGER
+  int32 news2_derived_total = 54;  // INTEGER
+  InpatientClinicalNoteNews2TrendEnum news2_trend = 55;  // VARCHAR(15)
+  InpatientClinicalNoteNews2ApplicableEnum news2_applicable = 56;  // VARCHAR(5)
+  string news2_not_applicable_reason = 57;  // VARCHAR(255) — max 255 chars
+  string examination_general = 58;  // TEXT
+  string examination_cardiovascular = 59;  // TEXT
+  string examination_respiratory = 60;  // TEXT
+  string examination_abdominal = 61;  // TEXT
+  string examination_neurological = 62;  // TEXT
+  string examination_musculoskeletal = 63;  // TEXT
+  string examination_skin_and_wounds = 64;  // TEXT
+  string examination_lines_and_drains = 65;  // TEXT
+  string examination_other = 66;  // TEXT
+  InpatientClinicalNoteNoInvestigationsReviewedEnum no_investigations_reviewed = 67;  // VARCHAR(5)
+  InpatientClinicalNoteNoMedicationChangesEnum no_medication_changes = 68;  // VARCHAR(5)
+  InpatientClinicalNoteAllergyCheckedEnum allergy_checked = 69;  // VARCHAR(5)
+  InpatientClinicalNoteMedicinesReconciliationStatusEnum medicines_reconciliation_status = 70;  // VARCHAR(20)
+  InpatientClinicalNoteAntimicrobialReviewStatusEnum antimicrobial_review_status = 71;  // VARCHAR(20)
+  string antimicrobial_review_at = 72;  // TIMESTAMPTZ — iso 8601
+  InpatientClinicalNoteVteStatusEnum vte_status = 73;  // VARCHAR(20)
+  InpatientClinicalNoteVteProphylaxisEnum vte_prophylaxis = 74;  // VARCHAR(20)
+  string vte_assessed_at = 75;  // TIMESTAMPTZ — iso 8601
+  string vte_notes = 76;  // TEXT
+  InpatientClinicalNoteFallsRiskEnum falls_risk = 77;  // VARCHAR(20)
+  string falls_interventions = 78;  // TEXT
+  InpatientClinicalNotePressureUlcerRiskEnum pressure_ulcer_risk = 79;  // VARCHAR(20)
+  InpatientClinicalNoteSkinIntegrityEnum skin_integrity = 80;  // VARCHAR(20)
+  InpatientClinicalNotePressureUlcerGradeEnum pressure_ulcer_grade = 81;  // VARCHAR(25)
+  string pressure_ulcer_sites = 82;  // VARCHAR(255) — max 255 chars
+  InpatientClinicalNoteDeliriumScreenEnum delirium_screen = 83;  // VARCHAR(25)
+  int32 delirium_4at_score = 84;  // INTEGER
+  string delirium_notes = 85;  // TEXT
+  InpatientClinicalNoteNutritionScreenEnum nutrition_screen = 86;  // VARCHAR(20)
+  int32 must_score = 87;  // INTEGER
+  string nutrition_plan = 88;  // TEXT
+  InpatientClinicalNoteInfectionStatusEnum infection_status = 89;  // VARCHAR(15)
+  InpatientClinicalNoteIsolationStatusEnum isolation_status = 90;  // VARCHAR(15)
+  string organism = 91;  // VARCHAR(255) — max 255 chars
+  string infection_precautions = 92;  // TEXT
+  InpatientClinicalNoteSafeguardingConcernEnum safeguarding_concern = 93;  // VARCHAR(5)
+  string safeguarding_notes = 94;  // TEXT
+  InpatientClinicalNoteSafeguardingReferralMadeEnum safeguarding_referral_made = 95;  // VARCHAR(5)
+  string clinical_impression = 96;  // TEXT
+  string differential_diagnosis = 97;  // TEXT
+  InpatientClinicalNoteResponseToTreatmentEnum response_to_treatment = 98;  // VARCHAR(20)
+  InpatientClinicalNoteNewOxygenRequirementEnum new_oxygen_requirement = 99;  // VARCHAR(5)
+  InpatientClinicalNoteNewConfusionEnum new_confusion = 100;  // VARCHAR(5)
+  InpatientClinicalNoteSepsisScreenEnum sepsis_screen = 101;  // VARCHAR(15)
+  InpatientClinicalNoteArrestCallEnum arrest_call = 102;  // VARCHAR(15)
+  InpatientClinicalNoteCriticalCareReferralEnum critical_care_referral = 103;  // VARCHAR(5)
+  InpatientClinicalNoteNewOrganSupportEnum new_organ_support = 104;  // VARCHAR(30)
+  string plan = 105;  // TEXT
+  InpatientClinicalNoteEscalationStatusEnum escalation_status = 106;  // VARCHAR(30)
+  string escalation_action = 107;  // TEXT
+  InpatientClinicalNoteCeilingOfCareEnum ceiling_of_care = 108;  // VARCHAR(30)
+  InpatientClinicalNoteRespectStatusEnum respect_status = 109;  // VARCHAR(20)
+  InpatientClinicalNoteDnacprStatusEnum dnacpr_status = 110;  // VARCHAR(20)
+  InpatientClinicalNoteSeniorReviewNeededEnum senior_review_needed = 111;  // VARCHAR(5)
+  string senior_review_by = 112;  // VARCHAR(255) — max 255 chars
+  string senior_review_at = 113;  // TIMESTAMPTZ — iso 8601
+  string estimated_discharge_date = 114;  // DATE — iso 8601 date
+  string discharge_planning_notes = 115;  // TEXT
+  string family_communication = 116;  // TEXT
+  string patient_communication = 117;  // TEXT
+  string team_handover = 118;  // TEXT
+  InpatientClinicalNoteConsentStatusEnum consent_status = 119;  // VARCHAR(25)
+  InpatientClinicalNoteCapacityAssessedEnum capacity_assessed = 120;  // VARCHAR(5)
+  string capacity_notes = 121;  // TEXT
+  InpatientClinicalNoteAuthorOverrideAcuityEnum author_override_acuity = 122;  // VARCHAR(15)
+  string author_override_reason = 123;  // TEXT
+  string attestation_text = 124;  // TEXT
+  string electronic_signature = 125;  // TEXT
+  string signed_at = 126;  // TIMESTAMPTZ — iso 8601
+}

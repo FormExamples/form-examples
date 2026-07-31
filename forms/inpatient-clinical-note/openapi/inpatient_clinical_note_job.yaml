@@ -1,0 +1,191 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_job
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteJob
+  version: 1.0.0
+  description: "Outstanding-job rows for an inpatient clinical note: one row per task the entry generates, with owner, priority, due time, and status, so the jobs list can be handed over between shifts."
+paths:
+  /inpatient-clinical-note-jobs:
+    get:
+      summary: List InpatientClinicalNoteJob records
+      operationId: listInpatientClinicalNoteJob
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteJob records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteJob"
+    post:
+      summary: Create a new InpatientClinicalNoteJob
+      operationId: createInpatientClinicalNoteJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteJob"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteJob
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteJob"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-jobs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteJob by id
+      operationId: getInpatientClinicalNoteJob
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteJob
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteJob"
+        "404":
+          description: InpatientClinicalNoteJob not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteJob
+      operationId: updateInpatientClinicalNoteJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteJob"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteJob
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteJob"
+        "404":
+          description: InpatientClinicalNoteJob not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteJob
+      operationId: deleteInpatientClinicalNoteJob
+      responses:
+        "204":
+          description: InpatientClinicalNoteJob deleted
+        "404":
+          description: InpatientClinicalNoteJob not found
+components:
+  schemas:
+    InpatientClinicalNoteJob:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent inpatient clinical note.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the job within the list, ascending.
+        job:
+          type: string
+          maxLength: 500
+          description: The task to be done.
+        category:
+          type: string
+          enum:
+            - investigation
+            - referral
+            - prescribing
+            - procedure
+            - review
+            - communication
+            - discharge-planning
+            - other
+            - ""
+          description: "Job category: investigation, referral, prescribing, procedure, review, communication, discharge-planning, or other."
+        owner:
+          type: string
+          maxLength: 255
+          description: Person or team responsible for the job.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Job priority: low, medium, or high."
+        due_at:
+          type: string
+          format: date-time
+          description: Timestamp the job is due by.
+        status:
+          type: string
+          enum:
+            - outstanding
+            - in-progress
+            - done
+            - cancelled
+            - ""
+          description: "Job status: outstanding, in-progress, done, or cancelled."
+        completed_at:
+          type: string
+          format: date-time
+          description: Timestamp the job was completed.
+        notes:
+          type: string
+          description: Free-text notes on the job.
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_id
+        - sort_order
+        - job
+        - category
+        - owner
+        - priority
+        - status
+        - notes
+      description: "Outstanding-job rows for an inpatient clinical note: one row per task the entry generates, with owner, priority, due time, and status, so the jobs list can be handed over between shifts."

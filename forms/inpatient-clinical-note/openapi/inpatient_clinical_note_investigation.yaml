@@ -1,0 +1,187 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_investigation
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteInvestigation
+  version: 1.0.0
+  description: "Investigations-reviewed rows for an inpatient clinical note: one row per result looked at, with whether it was abnormal, whether it was actioned, and the action taken."
+paths:
+  /inpatient-clinical-note-investigations:
+    get:
+      summary: List InpatientClinicalNoteInvestigation records
+      operationId: listInpatientClinicalNoteInvestigation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteInvestigation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteInvestigation"
+    post:
+      summary: Create a new InpatientClinicalNoteInvestigation
+      operationId: createInpatientClinicalNoteInvestigation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteInvestigation"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteInvestigation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteInvestigation"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-investigations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteInvestigation by id
+      operationId: getInpatientClinicalNoteInvestigation
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteInvestigation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteInvestigation"
+        "404":
+          description: InpatientClinicalNoteInvestigation not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteInvestigation
+      operationId: updateInpatientClinicalNoteInvestigation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteInvestigation"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteInvestigation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteInvestigation"
+        "404":
+          description: InpatientClinicalNoteInvestigation not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteInvestigation
+      operationId: deleteInpatientClinicalNoteInvestigation
+      responses:
+        "204":
+          description: InpatientClinicalNoteInvestigation deleted
+        "404":
+          description: InpatientClinicalNoteInvestigation not found
+components:
+  schemas:
+    InpatientClinicalNoteInvestigation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent inpatient clinical note.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the investigation within the list, ascending.
+        test_name:
+          type: string
+          maxLength: 255
+          description: Name of the test or investigation.
+        category:
+          type: string
+          enum:
+            - haematology
+            - biochemistry
+            - microbiology
+            - imaging
+            - histopathology
+            - physiology
+            - point-of-care
+            - other
+            - ""
+          description: "Investigation category: haematology, biochemistry, microbiology, imaging, histopathology, physiology, point-of-care, or other."
+        requested_date:
+          type: string
+          format: date
+          description: Date the investigation was requested.
+        result_date:
+          type: string
+          format: date
+          description: Date the result became available.
+        result_summary:
+          type: string
+          description: Summary of the result as reviewed by the clinician.
+        abnormal:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the result is abnormal.
+        actioned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the result has been actioned. An abnormal result that is not actioned raises a high-priority safety flag.
+        action_taken:
+          type: string
+          description: The action taken in response to the result.
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_id
+        - sort_order
+        - test_name
+        - category
+        - result_summary
+        - abnormal
+        - actioned
+        - action_taken
+      description: "Investigations-reviewed rows for an inpatient clinical note: one row per result looked at, with whether it was abnormal, whether it was actioned, and the action taken."

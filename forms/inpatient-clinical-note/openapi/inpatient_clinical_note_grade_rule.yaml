@@ -1,0 +1,184 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_grade_rule
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteGradeRule
+  version: 1.0.0
+  description: "Audit trail of every rule that fired during grading, from either the completeness engine or the acuity engine: engine, component, proposed band, category, and description."
+paths:
+  /inpatient-clinical-note-grade-rules:
+    get:
+      summary: List InpatientClinicalNoteGradeRule records
+      operationId: listInpatientClinicalNoteGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteGradeRule"
+    post:
+      summary: Create a new InpatientClinicalNoteGradeRule
+      operationId: createInpatientClinicalNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteGradeRule"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGradeRule"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteGradeRule by id
+      operationId: getInpatientClinicalNoteGradeRule
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGradeRule"
+        "404":
+          description: InpatientClinicalNoteGradeRule not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteGradeRule
+      operationId: updateInpatientClinicalNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteGradeRule"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGradeRule"
+        "404":
+          description: InpatientClinicalNoteGradeRule not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteGradeRule
+      operationId: deleteInpatientClinicalNoteGradeRule
+      responses:
+        "204":
+          description: InpatientClinicalNoteGradeRule deleted
+        "404":
+          description: InpatientClinicalNoteGradeRule not found
+components:
+  schemas:
+    InpatientClinicalNoteGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-PLAN-DOCUMENTED-01, A-NEWS2-HIGH).
+        engine:
+          type: string
+          enum:
+            - completeness
+            - acuity
+            - ""
+          description: "Which engine fired the rule: completeness or acuity."
+        component:
+          type: string
+          enum:
+            - header
+            - interval-history
+            - observations
+            - examination
+            - investigations
+            - problems
+            - medications
+            - risk-assessments
+            - impression
+            - plan
+            - escalation
+            - communication
+            - completeness
+            - acuity
+            - ""
+          description: Note component the rule concerns, or completeness/acuity for whole-engine rules.
+        band:
+          type: string
+          enum:
+            - stable
+            - watch
+            - escalate
+            - critical
+            - ""
+          description: For an acuity rule, the band the rule proposed. The final band is the maximum across all fired acuity rules.
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. required-component, recommended-component, news2, deterioration-marker).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_grade_id
+        - rule_id
+        - engine
+        - component
+        - band
+        - category
+        - description
+      description: "Audit trail of every rule that fired during grading, from either the completeness engine or the acuity engine: engine, component, proposed band, category, and description."

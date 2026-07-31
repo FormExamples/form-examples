@@ -1,0 +1,27 @@
+# Inpatient Clinical Note
+
+> A structured clinical note written about an **admitted patient during a hospital episode**. Unlike a single bedside ward-round entry, one inpatient clinical note can be any of the note types a ward team produces across an admission — admission clerking, daily progress note, specialty consult note, acute event / deterioration note, bedside procedure note, shift handover note, inter-ward transfer note, or discharge-planning note — all keyed to the same admission episode and sharing one data shape.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

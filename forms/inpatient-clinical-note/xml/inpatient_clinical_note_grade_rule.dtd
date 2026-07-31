@@ -1,0 +1,12 @@
+<!ELEMENT inpatient_clinical_note_grade_rule (id,created_at,updated_at,deleted_at,inpatient_clinical_note_grade_id,rule_id,engine,component,band,category,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT inpatient_clinical_note_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT engine (#PCDATA)>
+<!ELEMENT component (#PCDATA)>
+<!ELEMENT band (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

@@ -1,0 +1,52 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: inpatient_clinical_note_grade_rule
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum InpatientClinicalNoteGradeRuleEngineEnum {
+  ENGINE_UNSPECIFIED = 0;
+  ENGINE_COMPLETENESS = 1;  // completeness
+  ENGINE_ACUITY = 2;  // acuity
+}
+
+enum InpatientClinicalNoteGradeRuleComponentEnum {
+  COMPONENT_UNSPECIFIED = 0;
+  COMPONENT_HEADER = 1;  // header
+  COMPONENT_INTERVAL_HISTORY = 2;  // interval-history
+  COMPONENT_OBSERVATIONS = 3;  // observations
+  COMPONENT_EXAMINATION = 4;  // examination
+  COMPONENT_INVESTIGATIONS = 5;  // investigations
+  COMPONENT_PROBLEMS = 6;  // problems
+  COMPONENT_MEDICATIONS = 7;  // medications
+  COMPONENT_RISK_ASSESSMENTS = 8;  // risk-assessments
+  COMPONENT_IMPRESSION = 9;  // impression
+  COMPONENT_PLAN = 10;  // plan
+  COMPONENT_ESCALATION = 11;  // escalation
+  COMPONENT_COMMUNICATION = 12;  // communication
+  COMPONENT_COMPLETENESS = 13;  // completeness
+  COMPONENT_ACUITY = 14;  // acuity
+}
+
+enum InpatientClinicalNoteGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_STABLE = 1;  // stable
+  BAND_WATCH = 2;  // watch
+  BAND_ESCALATE = 3;  // escalate
+  BAND_CRITICAL = 4;  // critical
+}
+
+message InpatientClinicalNoteGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string inpatient_clinical_note_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  InpatientClinicalNoteGradeRuleEngineEnum engine = 7;  // VARCHAR(15)
+  InpatientClinicalNoteGradeRuleComponentEnum component = 8;  // VARCHAR(25)
+  InpatientClinicalNoteGradeRuleBandEnum band = 9;  // VARCHAR(15)
+  string category = 10;  // VARCHAR(50) — max 50 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,14 @@
+<!ELEMENT inpatient_clinical_note_problem (id,created_at,updated_at,deleted_at,inpatient_clinical_note_id,sort_order,problem,category,status,priority,onset_date,snomed_code,progress_commentary)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT inpatient_clinical_note_id (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>
+<!ELEMENT problem (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT onset_date (#PCDATA)>
+<!ELEMENT snomed_code (#PCDATA)>
+<!ELEMENT progress_commentary (#PCDATA)>

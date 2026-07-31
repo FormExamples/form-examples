@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE inpatient_clinical_note_problem SYSTEM "inpatient_clinical_note_problem.dtd">
+<inpatient_clinical_note_problem>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<inpatient_clinical_note_id>770e8400-e29b-41d4-a716-446655440002</inpatient_clinical_note_id>
+<sort_order>0</sort_order>
+<problem></problem>
+<category>presenting</category>
+<status>active</status>
+<priority>low</priority>
+<onset_date>2026-01-15</onset_date>
+<snomed_code>ABC123</snomed_code>
+<progress_commentary>Example text.</progress_commentary>
+</inpatient_clinical_note_problem>

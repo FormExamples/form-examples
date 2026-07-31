@@ -1,0 +1,277 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_grade
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteGrade
+  version: 1.0.0
+  description: "Computed grading result for an inpatient clinical note: documentation-completeness status and percentage over the note-type-specific required-component set, max-band clinical acuity band, NEWS2 aggregate, and per-component presence flags."
+paths:
+  /inpatient-clinical-note-grades:
+    get:
+      summary: List InpatientClinicalNoteGrade records
+      operationId: listInpatientClinicalNoteGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteGrade"
+    post:
+      summary: Create a new InpatientClinicalNoteGrade
+      operationId: createInpatientClinicalNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteGrade"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGrade"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteGrade by id
+      operationId: getInpatientClinicalNoteGrade
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGrade"
+        "404":
+          description: InpatientClinicalNoteGrade not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteGrade
+      operationId: updateInpatientClinicalNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteGrade"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGrade"
+        "404":
+          description: InpatientClinicalNoteGrade not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteGrade
+      operationId: deleteInpatientClinicalNoteGrade
+      responses:
+        "204":
+          description: InpatientClinicalNoteGrade deleted
+        "404":
+          description: InpatientClinicalNoteGrade not found
+components:
+  schemas:
+    InpatientClinicalNoteGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent inpatient clinical note (unique, 1:1).
+        status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - incomplete
+            - ""
+          description: "Completeness status: complete, partial, or incomplete. Never overridable: it is a mechanical property of the record, not a clinical judgement."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: "Completeness percentage (0..100): documented required components / required components x 100, rounded."
+        required_component_count:
+          type: integer
+          format: int32
+          description: Number of components required for this note type. Varies from 9 to 11 by note type.
+        documented_component_count:
+          type: integer
+          format: int32
+          description: Number of required components actually documented.
+        acuity_band:
+          type: string
+          enum:
+            - stable
+            - watch
+            - escalate
+            - critical
+            - ""
+          description: "Final clinical acuity band: stable, watch, escalate, or critical. Equals computed_acuity_band unless the author recorded an override."
+        computed_acuity_band:
+          type: string
+          enum:
+            - stable
+            - watch
+            - escalate
+            - critical
+            - ""
+          description: Acuity band as computed by the max-band engine, retained so that an author override is visible in audit.
+        news2_total:
+          type: integer
+          format: int32
+          description: NEWS2 aggregate the acuity band was computed from, 0..20.
+        header_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the header component is documented (yes/no).
+        interval_history_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the interval-history component is documented (yes/no).
+        observations_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the observations component is documented (yes/no).
+        examination_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the examination component is documented (yes/no).
+        investigations_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the investigations component is documented (yes/no).
+        problems_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the problems component is documented (yes/no).
+        medications_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the medications component is documented (yes/no).
+        risk_assessments_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the risk-assessments component is documented (yes/no).
+        impression_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the impression component is documented (yes/no).
+        plan_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the plan component is documented (yes/no).
+        escalation_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the escalation component is documented (yes/no).
+        communication_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the communication component is documented (yes/no).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_id
+        - status
+        - acuity_band
+        - computed_acuity_band
+        - header_documented
+        - interval_history_documented
+        - observations_documented
+        - examination_documented
+        - investigations_documented
+        - problems_documented
+        - medications_documented
+        - risk_assessments_documented
+        - impression_documented
+        - plan_documented
+        - escalation_documented
+        - communication_documented
+        - graded_at
+      description: "Computed grading result for an inpatient clinical note: documentation-completeness status and percentage over the note-type-specific required-component set, max-band clinical acuity band, NEWS2 aggregate, and per-component presence flags."

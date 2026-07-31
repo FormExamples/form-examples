@@ -1,0 +1,174 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_grade_flag
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteGradeFlag
+  version: 1.0.0
+  description: Safety flags that fire independently of the completeness status and the acuity band, with priority and a suggested action for the clinician or governance team.
+paths:
+  /inpatient-clinical-note-grade-flags:
+    get:
+      summary: List InpatientClinicalNoteGradeFlag records
+      operationId: listInpatientClinicalNoteGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteGradeFlag"
+    post:
+      summary: Create a new InpatientClinicalNoteGradeFlag
+      operationId: createInpatientClinicalNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteGradeFlag"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGradeFlag"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteGradeFlag by id
+      operationId: getInpatientClinicalNoteGradeFlag
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGradeFlag"
+        "404":
+          description: InpatientClinicalNoteGradeFlag not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteGradeFlag
+      operationId: updateInpatientClinicalNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteGradeFlag"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteGradeFlag"
+        "404":
+          description: InpatientClinicalNoteGradeFlag not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteGradeFlag
+      operationId: deleteInpatientClinicalNoteGradeFlag
+      responses:
+        "204":
+          description: InpatientClinicalNoteGradeFlag deleted
+        "404":
+          description: InpatientClinicalNoteGradeFlag not found
+components:
+  schemas:
+    InpatientClinicalNoteGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-VTE-NOT-ASSESSED-001).
+        category:
+          type: string
+          enum:
+            - deteriorating-news2-no-escalation
+            - sepsis-screen-positive-no-action
+            - vte-not-assessed
+            - abnormal-result-not-actioned
+            - no-plan-documented
+            - allergy-not-checked
+            - no-senior-review
+            - ceiling-of-care-undocumented
+            - antimicrobial-review-overdue
+            - no-capacity-assessment
+            - long-stay-no-discharge-plan
+            - incomplete-entry
+            - other
+            - ""
+          description: Flag category, one of the twelve defined in the spec, or other.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"escalate to the senior on call\", \"complete the VTE assessment\")."
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety flags that fire independently of the completeness status and the acuity band, with priority and a suggested action for the clinician or governance team.

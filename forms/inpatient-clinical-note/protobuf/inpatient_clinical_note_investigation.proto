@@ -1,0 +1,47 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: inpatient_clinical_note_investigation
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum InpatientClinicalNoteInvestigationCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HAEMATOLOGY = 1;  // haematology
+  CATEGORY_BIOCHEMISTRY = 2;  // biochemistry
+  CATEGORY_MICROBIOLOGY = 3;  // microbiology
+  CATEGORY_IMAGING = 4;  // imaging
+  CATEGORY_HISTOPATHOLOGY = 5;  // histopathology
+  CATEGORY_PHYSIOLOGY = 6;  // physiology
+  CATEGORY_POINT_OF_CARE = 7;  // point-of-care
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum InpatientClinicalNoteInvestigationAbnormalEnum {
+  ABNORMAL_UNSPECIFIED = 0;
+  ABNORMAL_YES = 1;  // yes
+  ABNORMAL_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteInvestigationActionedEnum {
+  ACTIONED_UNSPECIFIED = 0;
+  ACTIONED_YES = 1;  // yes
+  ACTIONED_NO = 2;  // no
+}
+
+message InpatientClinicalNoteInvestigation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string inpatient_clinical_note_id = 5;  // UUID — uuid
+  int32 sort_order = 6;  // INTEGER
+  string test_name = 7;  // VARCHAR(255) — max 255 chars
+  InpatientClinicalNoteInvestigationCategoryEnum category = 8;  // VARCHAR(30)
+  string requested_date = 9;  // DATE — iso 8601 date
+  string result_date = 10;  // DATE — iso 8601 date
+  string result_summary = 11;  // TEXT
+  InpatientClinicalNoteInvestigationAbnormalEnum abnormal = 12;  // VARCHAR(5)
+  InpatientClinicalNoteInvestigationActionedEnum actioned = 13;  // VARCHAR(5)
+  string action_taken = 14;  // TEXT
+}

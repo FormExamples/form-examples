@@ -1,0 +1,21 @@
+{
+  "resourceType": "ClinicalImpression",
+  "id": "cc0e8400-e29b-41d4-a716-446655440007",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Inpatient Clinical Note grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Status: complete; Completeness Percent: 1; Required Component Count: 2; Documented Component Count: 2; Acuity Band: stable; Computed Acuity Band: stable; News2 Total: 5; Header Documented: yes; Interval History Documented: yes; Observations Documented: yes; Examination Documented: yes; Investigations Documented: yes; Problems Documented: yes; Medications Documented: yes; Risk Assessments Documented: yes; Impression Documented: yes; Plan Documented: yes; Escalation Documented: yes; Communication Documented: yes"
+}

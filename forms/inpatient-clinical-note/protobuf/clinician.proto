@@ -1,0 +1,68 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum ClinicianRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_FOUNDATION_DOCTOR = 1;  // foundation-doctor
+  ROLE_CORE_TRAINEE = 2;  // core-trainee
+  ROLE_SPECIALTY_REGISTRAR = 3;  // specialty-registrar
+  ROLE_CONSULTANT = 4;  // consultant
+  ROLE_ACP = 5;  // acp
+  ROLE_PHYSICIAN_ASSOCIATE = 6;  // physician-associate
+  ROLE_NURSE = 7;  // nurse
+  ROLE_NURSE_PRACTITIONER = 8;  // nurse-practitioner
+  ROLE_PHARMACIST = 9;  // pharmacist
+  ROLE_ALLIED_HEALTH_PROFESSIONAL = 10;  // allied-health-professional
+  ROLE_OTHER = 11;  // other
+}
+
+enum ClinicianGradeEnum {
+  GRADE_UNSPECIFIED = 0;
+  GRADE_FY1 = 1;  // FY1
+  GRADE_FY2 = 2;  // FY2
+  GRADE_CT1 = 3;  // CT1
+  GRADE_CT2 = 4;  // CT2
+  GRADE_CT3 = 5;  // CT3
+  GRADE_ST1 = 6;  // ST1
+  GRADE_ST2 = 7;  // ST2
+  GRADE_ST3 = 8;  // ST3
+  GRADE_ST4 = 9;  // ST4
+  GRADE_ST5 = 10;  // ST5
+  GRADE_ST6 = 11;  // ST6
+  GRADE_ST7 = 12;  // ST7
+  GRADE_ST8 = 13;  // ST8
+  GRADE_SAS = 14;  // SAS
+  GRADE_CONSULTANT = 15;  // consultant
+  GRADE_OTHER = 16;  // other
+}
+
+enum ClinicianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GMC = 1;  // GMC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_HCPC = 3;  // HCPC
+  REGISTRATIONBODY_GPHC = 4;  // GPhC
+  REGISTRATIONBODY_OTHER = 5;  // other
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  ClinicianRoleEnum role = 11;  // VARCHAR(40)
+  ClinicianGradeEnum grade = 12;  // VARCHAR(20)
+  string specialty = 13;  // VARCHAR(60) — max 60 chars
+  ClinicianRegistrationBodyEnum registration_body = 14;  // VARCHAR(20)
+  string registration_number = 15;  // TEXT
+}

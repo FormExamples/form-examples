@@ -1,0 +1,186 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_problem
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteProblem
+  version: 1.0.0
+  description: "Problem-list rows for an inpatient clinical note: one row per active, resolving, resolved, or chronic problem, with category, priority, onset, and progress commentary."
+paths:
+  /inpatient-clinical-note-problems:
+    get:
+      summary: List InpatientClinicalNoteProblem records
+      operationId: listInpatientClinicalNoteProblem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteProblem records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteProblem"
+    post:
+      summary: Create a new InpatientClinicalNoteProblem
+      operationId: createInpatientClinicalNoteProblem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteProblem"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteProblem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteProblem"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-problems/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteProblem by id
+      operationId: getInpatientClinicalNoteProblem
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteProblem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteProblem"
+        "404":
+          description: InpatientClinicalNoteProblem not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteProblem
+      operationId: updateInpatientClinicalNoteProblem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteProblem"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteProblem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteProblem"
+        "404":
+          description: InpatientClinicalNoteProblem not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteProblem
+      operationId: deleteInpatientClinicalNoteProblem
+      responses:
+        "204":
+          description: InpatientClinicalNoteProblem deleted
+        "404":
+          description: InpatientClinicalNoteProblem not found
+components:
+  schemas:
+    InpatientClinicalNoteProblem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent inpatient clinical note.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the problem within the list, ascending.
+        problem:
+          type: string
+          maxLength: 255
+          description: The problem as stated by the clinician.
+        category:
+          type: string
+          enum:
+            - presenting
+            - comorbidity
+            - complication
+            - hospital-acquired
+            - social
+            - psychological
+            - other
+            - ""
+          description: "Problem category: presenting, comorbidity, complication, hospital-acquired, social, psychological, or other."
+        status:
+          type: string
+          enum:
+            - active
+            - resolving
+            - resolved
+            - chronic
+            - ""
+          description: "Problem status: active, resolving, resolved, or chronic."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Clinical priority: low, medium, or high."
+        onset_date:
+          type: string
+          format: date
+          description: Date the problem began, where known.
+        snomed_code:
+          type: string
+          maxLength: 30
+          description: SNOMED CT concept identifier for the problem, where coded.
+        progress_commentary:
+          type: string
+          description: Commentary on how the problem has progressed since the previous note.
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_id
+        - sort_order
+        - problem
+        - category
+        - status
+        - priority
+        - snomed_code
+        - progress_commentary
+      description: "Problem-list rows for an inpatient clinical note: one row per active, resolving, resolved, or chronic problem, with category, priority, onset, and progress commentary."

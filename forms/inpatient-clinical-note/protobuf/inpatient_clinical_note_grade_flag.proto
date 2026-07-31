@@ -1,0 +1,43 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: inpatient_clinical_note_grade_flag
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum InpatientClinicalNoteGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_DETERIORATING_NEWS2_NO_ESCALATION = 1;  // deteriorating-news2-no-escalation
+  CATEGORY_SEPSIS_SCREEN_POSITIVE_NO_ACTION = 2;  // sepsis-screen-positive-no-action
+  CATEGORY_VTE_NOT_ASSESSED = 3;  // vte-not-assessed
+  CATEGORY_ABNORMAL_RESULT_NOT_ACTIONED = 4;  // abnormal-result-not-actioned
+  CATEGORY_NO_PLAN_DOCUMENTED = 5;  // no-plan-documented
+  CATEGORY_ALLERGY_NOT_CHECKED = 6;  // allergy-not-checked
+  CATEGORY_NO_SENIOR_REVIEW = 7;  // no-senior-review
+  CATEGORY_CEILING_OF_CARE_UNDOCUMENTED = 8;  // ceiling-of-care-undocumented
+  CATEGORY_ANTIMICROBIAL_REVIEW_OVERDUE = 9;  // antimicrobial-review-overdue
+  CATEGORY_NO_CAPACITY_ASSESSMENT = 10;  // no-capacity-assessment
+  CATEGORY_LONG_STAY_NO_DISCHARGE_PLAN = 11;  // long-stay-no-discharge-plan
+  CATEGORY_INCOMPLETE_ENTRY = 12;  // incomplete-entry
+  CATEGORY_OTHER = 13;  // other
+}
+
+enum InpatientClinicalNoteGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message InpatientClinicalNoteGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string inpatient_clinical_note_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  InpatientClinicalNoteGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  InpatientClinicalNoteGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

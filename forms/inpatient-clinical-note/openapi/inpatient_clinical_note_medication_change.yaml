@@ -1,0 +1,209 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: inpatient_clinical_note_medication_change
+openapi: 3.1.0
+info:
+  title: Inpatient Clinical Note — InpatientClinicalNoteMedicationChange
+  version: 1.0.0
+  description: "Prescribing-change rows for an inpatient clinical note: one row per drug started, stopped, dose-changed, held, switched, or explicitly continued, with indication, route, and review date."
+paths:
+  /inpatient-clinical-note-medication-changes:
+    get:
+      summary: List InpatientClinicalNoteMedicationChange records
+      operationId: listInpatientClinicalNoteMedicationChange
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InpatientClinicalNoteMedicationChange records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InpatientClinicalNoteMedicationChange"
+    post:
+      summary: Create a new InpatientClinicalNoteMedicationChange
+      operationId: createInpatientClinicalNoteMedicationChange
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteMedicationChange"
+      responses:
+        "201":
+          description: The newly created InpatientClinicalNoteMedicationChange
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteMedicationChange"
+        "400":
+          description: Validation error
+  /inpatient-clinical-note-medication-changes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InpatientClinicalNoteMedicationChange by id
+      operationId: getInpatientClinicalNoteMedicationChange
+      responses:
+        "200":
+          description: The requested InpatientClinicalNoteMedicationChange
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteMedicationChange"
+        "404":
+          description: InpatientClinicalNoteMedicationChange not found
+    patch:
+      summary: Update an existing InpatientClinicalNoteMedicationChange
+      operationId: updateInpatientClinicalNoteMedicationChange
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNoteMedicationChange"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNoteMedicationChange
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNoteMedicationChange"
+        "404":
+          description: InpatientClinicalNoteMedicationChange not found
+    delete:
+      summary: Soft-delete a InpatientClinicalNoteMedicationChange
+      operationId: deleteInpatientClinicalNoteMedicationChange
+      responses:
+        "204":
+          description: InpatientClinicalNoteMedicationChange deleted
+        "404":
+          description: InpatientClinicalNoteMedicationChange not found
+components:
+  schemas:
+    InpatientClinicalNoteMedicationChange:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        inpatient_clinical_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent inpatient clinical note.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the change within the list, ascending.
+        drug_name:
+          type: string
+          maxLength: 255
+          description: Drug name, generic where possible.
+        action:
+          type: string
+          enum:
+            - started
+            - stopped
+            - dose-changed
+            - held
+            - continued
+            - switched
+            - ""
+          description: "Prescribing action: started, stopped, dose-changed, held, continued, or switched."
+        dose:
+          type: string
+          maxLength: 60
+          description: Dose as prescribed.
+        route:
+          type: string
+          enum:
+            - oral
+            - intravenous
+            - intramuscular
+            - subcutaneous
+            - topical
+            - inhaled
+            - rectal
+            - nasogastric
+            - sublingual
+            - other
+            - ""
+          description: "Route of administration: oral, intravenous, intramuscular, subcutaneous, topical, inhaled, rectal, nasogastric, sublingual, or other."
+        frequency:
+          type: string
+          maxLength: 60
+          description: Dosing frequency as prescribed.
+        indication:
+          type: string
+          maxLength: 255
+          description: Indication for the drug. Required by NICE NG15 for every antimicrobial.
+        is_antimicrobial:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the drug is an antimicrobial, which brings it under the NICE NG15 stewardship review requirement.
+        review_date:
+          type: string
+          format: date
+          description: Date the prescription falls due for review.
+        stop_date:
+          type: string
+          format: date
+          description: Planned stop date, where a course length is defined.
+        dmd_code:
+          type: string
+          maxLength: 30
+          description: Dictionary of Medicines and Devices (dm+d) code, where coded.
+        notes:
+          type: string
+          description: Free-text notes on the change, including the reason for it.
+      required:
+        - created_at
+        - updated_at
+        - inpatient_clinical_note_id
+        - sort_order
+        - drug_name
+        - action
+        - dose
+        - route
+        - frequency
+        - indication
+        - is_antimicrobial
+        - dmd_code
+        - notes
+      description: "Prescribing-change rows for an inpatient clinical note: one row per drug started, stopped, dose-changed, held, switched, or explicitly continued, with indication, route, and review date."

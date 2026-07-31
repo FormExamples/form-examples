@@ -1,0 +1,50 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: inpatient_clinical_note_job
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum InpatientClinicalNoteJobCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_INVESTIGATION = 1;  // investigation
+  CATEGORY_REFERRAL = 2;  // referral
+  CATEGORY_PRESCRIBING = 3;  // prescribing
+  CATEGORY_PROCEDURE = 4;  // procedure
+  CATEGORY_REVIEW = 5;  // review
+  CATEGORY_COMMUNICATION = 6;  // communication
+  CATEGORY_DISCHARGE_PLANNING = 7;  // discharge-planning
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum InpatientClinicalNoteJobPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+enum InpatientClinicalNoteJobStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_OUTSTANDING = 1;  // outstanding
+  STATUS_IN_PROGRESS = 2;  // in-progress
+  STATUS_DONE = 3;  // done
+  STATUS_CANCELLED = 4;  // cancelled
+}
+
+message InpatientClinicalNoteJob {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string inpatient_clinical_note_id = 5;  // UUID — uuid
+  int32 sort_order = 6;  // INTEGER
+  string job = 7;  // VARCHAR(500) — max 500 chars
+  InpatientClinicalNoteJobCategoryEnum category = 8;  // VARCHAR(30)
+  string owner = 9;  // VARCHAR(255) — max 255 chars
+  InpatientClinicalNoteJobPriorityEnum priority = 10;  // VARCHAR(10)
+  string due_at = 11;  // TIMESTAMPTZ — iso 8601
+  InpatientClinicalNoteJobStatusEnum status = 12;  // VARCHAR(15)
+  string completed_at = 13;  // TIMESTAMPTZ — iso 8601
+  string notes = 14;  // TEXT
+}

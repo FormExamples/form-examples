@@ -1,0 +1,184 @@
+{
+  "resourceType": "Observation",
+  "id": "aa0e8400-e29b-41d4-a716-446655440005",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:inpatient-clinical-note",
+        "code": "inpatient_clinical_note_investigation",
+        "display": "Inpatient Clinical Note Investigation"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "sort_order",
+            "display": "Sort Order"
+          }
+        ]
+      },
+      "valueInteger": 0
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "test_name",
+            "display": "Test Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "category",
+            "display": "Category"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note:category",
+            "code": "haematology",
+            "display": "Haematology"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "requested_date",
+            "display": "Requested Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "result_date",
+            "display": "Result Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "result_summary",
+            "display": "Result Summary"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "abnormal",
+            "display": "Abnormal"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note:abnormal",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "actioned",
+            "display": "Actioned"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note:actioned",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:inpatient-clinical-note",
+            "code": "action_taken",
+            "display": "Action Taken"
+          }
+        ]
+      },
+      "valueString": ""
+    }
+  ]
+}

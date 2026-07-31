@@ -1,0 +1,129 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: inpatient_clinical_note_grade
+
+syntax = "proto3";
+
+package form_examples.inpatient_clinical_note;
+
+enum InpatientClinicalNoteGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_PARTIAL = 2;  // partial
+  STATUS_INCOMPLETE = 3;  // incomplete
+}
+
+enum InpatientClinicalNoteGradeAcuityBandEnum {
+  ACUITYBAND_UNSPECIFIED = 0;
+  ACUITYBAND_STABLE = 1;  // stable
+  ACUITYBAND_WATCH = 2;  // watch
+  ACUITYBAND_ESCALATE = 3;  // escalate
+  ACUITYBAND_CRITICAL = 4;  // critical
+}
+
+enum InpatientClinicalNoteGradeComputedAcuityBandEnum {
+  COMPUTEDACUITYBAND_UNSPECIFIED = 0;
+  COMPUTEDACUITYBAND_STABLE = 1;  // stable
+  COMPUTEDACUITYBAND_WATCH = 2;  // watch
+  COMPUTEDACUITYBAND_ESCALATE = 3;  // escalate
+  COMPUTEDACUITYBAND_CRITICAL = 4;  // critical
+}
+
+enum InpatientClinicalNoteGradeHeaderDocumentedEnum {
+  HEADERDOCUMENTED_UNSPECIFIED = 0;
+  HEADERDOCUMENTED_YES = 1;  // yes
+  HEADERDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeIntervalHistoryDocumentedEnum {
+  INTERVALHISTORYDOCUMENTED_UNSPECIFIED = 0;
+  INTERVALHISTORYDOCUMENTED_YES = 1;  // yes
+  INTERVALHISTORYDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeObservationsDocumentedEnum {
+  OBSERVATIONSDOCUMENTED_UNSPECIFIED = 0;
+  OBSERVATIONSDOCUMENTED_YES = 1;  // yes
+  OBSERVATIONSDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeExaminationDocumentedEnum {
+  EXAMINATIONDOCUMENTED_UNSPECIFIED = 0;
+  EXAMINATIONDOCUMENTED_YES = 1;  // yes
+  EXAMINATIONDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeInvestigationsDocumentedEnum {
+  INVESTIGATIONSDOCUMENTED_UNSPECIFIED = 0;
+  INVESTIGATIONSDOCUMENTED_YES = 1;  // yes
+  INVESTIGATIONSDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeProblemsDocumentedEnum {
+  PROBLEMSDOCUMENTED_UNSPECIFIED = 0;
+  PROBLEMSDOCUMENTED_YES = 1;  // yes
+  PROBLEMSDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeMedicationsDocumentedEnum {
+  MEDICATIONSDOCUMENTED_UNSPECIFIED = 0;
+  MEDICATIONSDOCUMENTED_YES = 1;  // yes
+  MEDICATIONSDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeRiskAssessmentsDocumentedEnum {
+  RISKASSESSMENTSDOCUMENTED_UNSPECIFIED = 0;
+  RISKASSESSMENTSDOCUMENTED_YES = 1;  // yes
+  RISKASSESSMENTSDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeImpressionDocumentedEnum {
+  IMPRESSIONDOCUMENTED_UNSPECIFIED = 0;
+  IMPRESSIONDOCUMENTED_YES = 1;  // yes
+  IMPRESSIONDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradePlanDocumentedEnum {
+  PLANDOCUMENTED_UNSPECIFIED = 0;
+  PLANDOCUMENTED_YES = 1;  // yes
+  PLANDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeEscalationDocumentedEnum {
+  ESCALATIONDOCUMENTED_UNSPECIFIED = 0;
+  ESCALATIONDOCUMENTED_YES = 1;  // yes
+  ESCALATIONDOCUMENTED_NO = 2;  // no
+}
+
+enum InpatientClinicalNoteGradeCommunicationDocumentedEnum {
+  COMMUNICATIONDOCUMENTED_UNSPECIFIED = 0;
+  COMMUNICATIONDOCUMENTED_YES = 1;  // yes
+  COMMUNICATIONDOCUMENTED_NO = 2;  // no
+}
+
+message InpatientClinicalNoteGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string inpatient_clinical_note_id = 5;  // UUID — uuid
+  InpatientClinicalNoteGradeStatusEnum status = 6;  // VARCHAR(15)
+  int32 completeness_percent = 7;  // INTEGER
+  int32 required_component_count = 8;  // INTEGER
+  int32 documented_component_count = 9;  // INTEGER
+  InpatientClinicalNoteGradeAcuityBandEnum acuity_band = 10;  // VARCHAR(15)
+  InpatientClinicalNoteGradeComputedAcuityBandEnum computed_acuity_band = 11;  // VARCHAR(15)
+  int32 news2_total = 12;  // INTEGER
+  InpatientClinicalNoteGradeHeaderDocumentedEnum header_documented = 13;  // VARCHAR(5)
+  InpatientClinicalNoteGradeIntervalHistoryDocumentedEnum interval_history_documented = 14;  // VARCHAR(5)
+  InpatientClinicalNoteGradeObservationsDocumentedEnum observations_documented = 15;  // VARCHAR(5)
+  InpatientClinicalNoteGradeExaminationDocumentedEnum examination_documented = 16;  // VARCHAR(5)
+  InpatientClinicalNoteGradeInvestigationsDocumentedEnum investigations_documented = 17;  // VARCHAR(5)
+  InpatientClinicalNoteGradeProblemsDocumentedEnum problems_documented = 18;  // VARCHAR(5)
+  InpatientClinicalNoteGradeMedicationsDocumentedEnum medications_documented = 19;  // VARCHAR(5)
+  InpatientClinicalNoteGradeRiskAssessmentsDocumentedEnum risk_assessments_documented = 20;  // VARCHAR(5)
+  InpatientClinicalNoteGradeImpressionDocumentedEnum impression_documented = 21;  // VARCHAR(5)
+  InpatientClinicalNoteGradePlanDocumentedEnum plan_documented = 22;  // VARCHAR(5)
+  InpatientClinicalNoteGradeEscalationDocumentedEnum escalation_documented = 23;  // VARCHAR(5)
+  InpatientClinicalNoteGradeCommunicationDocumentedEnum communication_documented = 24;  // VARCHAR(5)
+  string graded_at = 25;  // TIMESTAMPTZ — iso 8601
+}

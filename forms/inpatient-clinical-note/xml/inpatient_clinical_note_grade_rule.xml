@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE inpatient_clinical_note_grade_rule SYSTEM "inpatient_clinical_note_grade_rule.dtd">
+<inpatient_clinical_note_grade_rule>
+<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<inpatient_clinical_note_grade_id>cc0e8400-e29b-41d4-a716-446655440007</inpatient_clinical_note_grade_id>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<engine>completeness</engine>
+<component>header</component>
+<band>stable</band>
+<category>General</category>
+<description>Example text.</description>
+</inpatient_clinical_note_grade_rule>
