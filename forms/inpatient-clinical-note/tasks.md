@@ -46,10 +46,14 @@ Task tracking. See [`plan.md`](plan.md) for the phased roadmap.
 - Server-side grading is append-only: each run inserts a new grade row, and
   readers take the most recent. Grades are never updated in place, so
   `graded_at` means what it says and the grading history stays auditable.
-- The Loco migration declares the note's 98 string columns `NOT NULL` **without**
-  the `DEFAULT ''` that `sql/` carries, so an unset column inserts as NULL and
-  fails. `blank_note()` in `tests/grading/mod.rs` works around this. Worth
-  reconciling migration and `sql/` fleet-wide.
+- The Loco migration now carries the same column defaults as `sql/`: 160
+  columns across the ten tables, `''` for text, `0` for `sort_order`, plus
+  `status` = `draft` and `spo2_scale` = `scale-1`. Before this the migration
+  declared them `NOT NULL` with no default, so the Loco schema silently
+  disagreed with its own source of truth and any insert that omitted a column
+  failed. `cargo loco generate scaffold` cannot express defaults, so
+  regenerating the crate from `back-end-with-loco-setup` would reintroduce the
+  divergence — re-apply the defaults if that ever happens.
 
 ## Pre-existing issues surfaced while building this form
 

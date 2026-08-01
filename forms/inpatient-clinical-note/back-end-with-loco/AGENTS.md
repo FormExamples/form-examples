@@ -83,6 +83,15 @@ The engine is exercised by `tests/engine/mod.rs`, which mirrors the worked
 examples in `../doc/acuity-rules.md` and the boundaries in `../spec/index.md`.
 When a rule changes here, change it in both front-ends in the same commit.
 
+## Note on column defaults
+
+The migration mirrors the column defaults in [`../sql/`](../sql/) — `''` for
+text, `0` for `sort_order`, `draft` for the note's `status`, `scale-1` for
+`spo2_scale` — via `ColType::StringWithDefault` / `TextWithDefault` /
+`IntegerWithDefault`. `cargo loco generate scaffold` cannot express defaults, so
+regenerating from `../back-end-with-loco-setup` drops them and reintroduces a
+schema that disagrees with `sql/`. Re-apply them if that happens.
+
 ## Note on two FKs to one parent
 
 `inpatient_clinical_notes` references `clinicians` twice — `author_id` and

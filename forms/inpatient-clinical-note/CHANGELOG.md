@@ -35,6 +35,11 @@ file only records changes scoped to the **Inpatient Clinical Note** form.
 - _Pending._
 
 ### Fixed
+- The Loco migration declared its columns `NOT NULL` without the defaults
+  `sql/` specifies, so the back-end schema disagreed with its own source of
+  truth and any insert omitting a column failed with a not-null violation.
+  All 160 defaults are now mirrored: `''` for text columns, `0` for
+  `sort_order`, `draft` for the note's `status`, and `scale-1` for `spo2_scale`.
 - The Rust engine emitted fired-rule `component` values in the Rust `Debug`
   spelling (`IntervalHistory`) rather than the kebab-case vocabulary
   (`interval-history`) used by both front-end engines and required by the

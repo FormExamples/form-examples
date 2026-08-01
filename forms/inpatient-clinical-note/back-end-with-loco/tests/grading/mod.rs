@@ -38,118 +38,7 @@ const ALLOWED_COMPONENTS: &[&str] = &[
     "",
 ];
 
-/// Every non-null string column on `inpatient_clinical_notes`, set to the empty
-/// string.
-///
-/// The Loco migration declares these `NOT NULL` without the `DEFAULT ''` that
-/// `sql/` carries, so an unset column inserts as NULL and the insert fails.
-/// Tests build on this base and override only the fields under test.
-fn blank_note() -> inpatient_clinical_notes::ActiveModel {
-    inpatient_clinical_notes::ActiveModel {
-        status: Set(String::new()),
-        note_type: Set(String::new()),
-        hospital_name: Set(String::new()),
-        ward_name: Set(String::new()),
-        bed_number: Set(String::new()),
-        author_name: Set(String::new()),
-        author_grade: Set(String::new()),
-        author_registration_number: Set(String::new()),
-        parent_specialty: Set(String::new()),
-        responsible_consultant_name: Set(String::new()),
-        consult_question: Set(String::new()),
-        consult_requesting_team: Set(String::new()),
-        procedure_performed: Set(String::new()),
-        procedure_detail: Set(String::new()),
-        procedure_consent: Set(String::new()),
-        procedure_complications: Set(String::new()),
-        transfer_from_ward: Set(String::new()),
-        transfer_to_ward: Set(String::new()),
-        transfer_reason: Set(String::new()),
-        admitting_specialty: Set(String::new()),
-        admission_method: Set(String::new()),
-        admission_reason: Set(String::new()),
-        interval_history: Set(String::new()),
-        no_interval_events: Set(String::new()),
-        overnight_events: Set(String::new()),
-        patient_reported_symptoms: Set(String::new()),
-        nursing_concerns: Set(String::new()),
-        sleep_quality: Set(String::new()),
-        oral_intake: Set(String::new()),
-        mobility_status: Set(String::new()),
-        spo2_scale: Set(String::new()),
-        oxygen_delivery: Set(String::new()),
-        acvpu: Set(String::new()),
-        news2_trend: Set(String::new()),
-        news2_applicable: Set(String::new()),
-        news2_not_applicable_reason: Set(String::new()),
-        examination_general: Set(String::new()),
-        examination_cardiovascular: Set(String::new()),
-        examination_respiratory: Set(String::new()),
-        examination_abdominal: Set(String::new()),
-        examination_neurological: Set(String::new()),
-        examination_musculoskeletal: Set(String::new()),
-        examination_skin_and_wounds: Set(String::new()),
-        examination_lines_and_drains: Set(String::new()),
-        examination_other: Set(String::new()),
-        no_investigations_reviewed: Set(String::new()),
-        no_medication_changes: Set(String::new()),
-        allergy_checked: Set(String::new()),
-        medicines_reconciliation_status: Set(String::new()),
-        antimicrobial_review_status: Set(String::new()),
-        vte_status: Set(String::new()),
-        vte_prophylaxis: Set(String::new()),
-        vte_notes: Set(String::new()),
-        falls_risk: Set(String::new()),
-        falls_interventions: Set(String::new()),
-        pressure_ulcer_risk: Set(String::new()),
-        skin_integrity: Set(String::new()),
-        pressure_ulcer_grade: Set(String::new()),
-        pressure_ulcer_sites: Set(String::new()),
-        delirium_screen: Set(String::new()),
-        delirium_notes: Set(String::new()),
-        nutrition_screen: Set(String::new()),
-        nutrition_plan: Set(String::new()),
-        infection_status: Set(String::new()),
-        isolation_status: Set(String::new()),
-        organism: Set(String::new()),
-        infection_precautions: Set(String::new()),
-        safeguarding_concern: Set(String::new()),
-        safeguarding_notes: Set(String::new()),
-        safeguarding_referral_made: Set(String::new()),
-        clinical_impression: Set(String::new()),
-        differential_diagnosis: Set(String::new()),
-        response_to_treatment: Set(String::new()),
-        new_oxygen_requirement: Set(String::new()),
-        new_confusion: Set(String::new()),
-        sepsis_screen: Set(String::new()),
-        arrest_call: Set(String::new()),
-        critical_care_referral: Set(String::new()),
-        new_organ_support: Set(String::new()),
-        plan: Set(String::new()),
-        escalation_status: Set(String::new()),
-        escalation_action: Set(String::new()),
-        ceiling_of_care: Set(String::new()),
-        respect_status: Set(String::new()),
-        dnacpr_status: Set(String::new()),
-        senior_review_needed: Set(String::new()),
-        senior_review_by: Set(String::new()),
-        discharge_planning_notes: Set(String::new()),
-        family_communication: Set(String::new()),
-        patient_communication: Set(String::new()),
-        team_handover: Set(String::new()),
-        consent_status: Set(String::new()),
-        capacity_assessed: Set(String::new()),
-        capacity_notes: Set(String::new()),
-        author_override_acuity: Set(String::new()),
-        author_override_reason: Set(String::new()),
-        attestation_text: Set(String::new()),
-        electronic_signature: Set(String::new()),
-        ..Default::default()
-    }
-}
-
-/// A clinician with every non-null column populated, for the same reason as
-/// [`blank_note`].
+/// A clinician with realistic registration details.
 fn clinician(name: &str, grade: &str) -> clinicians::ActiveModel {
     clinicians::ActiveModel {
         name: Set(name.to_owned()),
@@ -169,7 +58,6 @@ async fn seed_people(db: &sea_orm::DatabaseConnection) -> (i32, i32, i32) {
         name: Set("Test Patient".to_owned()),
         birth_date: Set(chrono::NaiveDate::from_ymd_opt(1948, 3, 12).unwrap()),
         sex: Set("female".to_owned()),
-        allergies_summary: Set(String::new()),
         ..Default::default()
     }
     .insert(db)
@@ -229,7 +117,7 @@ async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> i32 {
         patient_id: Set(patient_id),
         author_id: Set(author_id),
         responsible_consultant_id: Set(consultant_id),
-        ..blank_note()
+        ..Default::default()
     }
     .insert(db)
     .await
@@ -239,11 +127,7 @@ async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> i32 {
     inpatient_clinical_note_problems::ActiveModel {
         sort_order: Set(1),
         problem: Set("Community-acquired pneumonia".to_owned()),
-        category: Set(String::new()),
         status: Set("active".to_owned()),
-        priority: Set(String::new()),
-        snomed_code: Set(String::new()),
-        progress_commentary: Set(String::new()),
         inpatient_clinical_note_id: Set(note.id),
         ..Default::default()
     }
@@ -361,11 +245,8 @@ async fn soft_deleted_children_are_excluded_from_grading() {
     let investigation = inpatient_clinical_note_investigations::ActiveModel {
         sort_order: Set(1),
         test_name: Set("Chest radiograph".to_owned()),
-        category: Set(String::new()),
-        result_summary: Set(String::new()),
         abnormal: Set("no".to_owned()),
         actioned: Set("yes".to_owned()),
-        action_taken: Set(String::new()),
         inpatient_clinical_note_id: Set(note_id),
         ..Default::default()
     }
