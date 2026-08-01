@@ -31,7 +31,7 @@ pub struct Model {
     pub site_name: String,
     pub practice_ods_code: String,
     #[sea_orm(unique)]
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

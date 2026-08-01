@@ -10,11 +10,11 @@ use crate::models::_entities::grades::{ActiveModel, Entity, Model};
 pub struct Params {
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: i32,
-    pub depression_score: i32,
+    pub depression_score: Option<i32>,
     pub depression_severity: String,
-    pub anxiety_score: i32,
+    pub anxiety_score: Option<i32>,
     pub anxiety_severity: String,
-    pub stress_score: i32,
+    pub stress_score: Option<i32>,
     pub stress_severity: String,
     pub graded_at: DateTimeWithTimeZone,
     }

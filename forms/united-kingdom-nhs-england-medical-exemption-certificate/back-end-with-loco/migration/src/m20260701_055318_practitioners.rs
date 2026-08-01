@@ -25,11 +25,22 @@ impl MigrationTrait for Migration {
             ("postal_address_as_full_text", ColType::TextNull),
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("postcode", ColType::TextNull),
-            ("united_kingdom_nhs_number", ColType::StringUniq),
+            ("united_kingdom_nhs_number", ColType::StringNull),
             ],
             &[
             ]
-        ).await
+        ).await?;
+
+        m.create_index(
+            Index::create()
+                .if_not_exists()
+                .unique()
+                .name("index_practitioners_united_kingdom_nhs_number_unique")
+                .table(Alias::new("practitioners"))
+                .col(Alias::new("united_kingdom_nhs_number"))
+                .to_owned(),
+        )
+        .await
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

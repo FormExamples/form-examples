@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-66 tools.
+67 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -35,6 +35,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/loco-config-refactor`](#loco-config-refactor)
 - [`bin/loco-migration-defaults`](#loco-migration-defaults)
+- [`bin/loco-migration-nullability`](#loco-migration-nullability)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/normalize`](#normalize)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
@@ -820,6 +821,75 @@ Usage:
   bin/loco-migration-defaults --all              # every form's Loco crate
   bin/loco-migration-defaults --dry-run --all    # show what would change
   bin/loco-migration-defaults --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-migration-nullability"><code>bin/loco-migration-nullability</code></h2>
+
+```text
+bin/loco-migration-nullability — restore each form's `sql/` column
+nullability in its `back-end-with-loco/` crate.
+
+`sql/` is the source of truth for every form's schema (see `AGENTS/sql.md`).
+Where it declares a column nullable, the Loco crate must agree — in the
+migration, in the generated entity, and in the controller's `Params` struct,
+all three of which have to move together or the entity starts lying about the
+database.
+
+The dominant case is a **nullable UNIQUE** column, of which
+`united_kingdom_nhs_number` is the archetype:
+
+    sql/        united_kingdom_nhs_number VARCHAR(20) UNIQUE       -- nullable
+    migration   ("united_kingdom_nhs_number", ColType::StringUniq) -- NOT NULL
+    entity      pub united_kingdom_nhs_number: String              -- NOT NULL
+
+Loco has no nullable-unique `ColType`: `StringUniq` is `NOT NULL UNIQUE`. The
+consequence is not cosmetic. A `NOT NULL UNIQUE` text column can hold the empty
+string exactly **once**, so the schema admits at most one patient without an NHS
+number — every subsequent one collides:
+
+    ERROR: duplicate key value violates unique constraint
+    DETAIL: Key (united_kingdom_nhs_number)=() already exists.
+
+`sql/` is right: under a nullable UNIQUE column, NULLs do not collide, so any
+number of patients may lack the identifier while those that have one stay
+unique. Overseas visitors and unidentified emergency admissions are ordinary,
+so this matters clinically.
+
+This tool restores that, per divergent column:
+
+  - migration — `ColType::XUniq` becomes `ColType::XNull`, and the uniqueness
+    is re-expressed as an explicit unique index appended to the same `up()`,
+    following the `m.create_index(Index::create()…)` idiom already used
+    elsewhere in the fleet. A plain `ColType::X` simply becomes `ColType::XNull`.
+  - entity — `pub col: T` becomes `pub col: Option<T>`.
+  - controller — the same field in the resource's `Params` struct.
+
+The opposite direction is handled too: a column `sql/` declares NOT NULL while
+the migration declares it nullable is tightened, and its entity and controller
+field lose the `Option<…>`. Note that Loco's `ColType` cannot express a
+`DEFAULT now()` on a timestamp, so such a column becomes NOT NULL without its
+default and callers must supply a value — a smaller divergence from `sql/` than
+admitting NULL, but not a perfect one.
+
+The tool is idempotent, and anything it cannot rewrite confidently is reported
+rather than guessed at.
+
+Two limits worth knowing:
+
+  - Controllers are located by their `use …_entities::<table>::` import. A
+    consolidated controller that imports differently — as
+    `architecture-decision-record` does — will not be found, and its `Params`
+    struct must be adjusted by hand.
+  - The tool only retypes struct fields. Hand-written logic *around* those
+    fields still has to be reworked, because the meaning of "absent" moves from
+    `None` to the empty string. `architecture-decision-record` needed exactly
+    that in its Markdown renderer.
+
+Usage:
+  bin/loco-migration-nullability <slug>…            # named forms
+  bin/loco-migration-nullability --all              # every form's Loco crate
+  bin/loco-migration-nullability --dry-run --all    # show what would change
+  bin/loco-migration-nullability --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>

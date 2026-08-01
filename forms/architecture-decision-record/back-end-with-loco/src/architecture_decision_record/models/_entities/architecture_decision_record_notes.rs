@@ -15,9 +15,9 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     /// Noted at.
-    pub noted_at: Option<DateTimeWithTimeZone>,
+    pub noted_at: DateTimeWithTimeZone,
     /// Noted by.
-    pub noted_by: Option<String>,
+    pub noted_by: String,
     /// Body.
     #[sea_orm(column_type = "Text")]
     pub body: String,

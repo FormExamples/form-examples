@@ -17,16 +17,16 @@ pub struct Model {
     /// Name.
     pub name: String,
     /// Legal name.
-    pub legal_name: Option<String>,
+    pub legal_name: String,
     /// Industry.
-    pub industry: Option<String>,
+    pub industry: String,
     /// Domain.
-    pub domain: Option<String>,
+    pub domain: String,
     /// Country as iso 3166 1 alpha 2.
     pub country_as_iso_3166_1_alpha_2: Option<String>,
     /// Description.
     #[sea_orm(column_type = "Text", nullable)]
-    pub description: Option<String>,
+    pub description: String,
 }
 
 /// Relation.

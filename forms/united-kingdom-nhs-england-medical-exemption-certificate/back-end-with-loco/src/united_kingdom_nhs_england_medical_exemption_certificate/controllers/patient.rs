@@ -20,7 +20,7 @@ pub struct Params {
     pub postal_address_as_full_text: Option<String>,
     pub country_as_iso_3166_1_alpha_2: Option<String>,
     pub postcode: Option<String>,
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     pub full_time_education: String,
     pub pregnancy_status: String,
     }

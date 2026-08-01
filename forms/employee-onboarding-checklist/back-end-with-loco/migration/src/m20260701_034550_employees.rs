@@ -16,7 +16,7 @@ impl MigrationTrait for Migration {
             ("first_name", ColType::String),
             ("last_name", ColType::String),
             ("date_of_birth", ColType::Date),
-            ("nhs_number", ColType::StringUniq),
+            ("nhs_number", ColType::StringNull),
             ("email", ColType::StringWithDefault(String::new())),
             ("phone", ColType::StringWithDefault(String::new())),
             ("job_title", ColType::StringWithDefault(String::new())),
@@ -25,7 +25,18 @@ impl MigrationTrait for Migration {
             ],
             &[
             ]
-        ).await
+        ).await?;
+
+        m.create_index(
+            Index::create()
+                .if_not_exists()
+                .unique()
+                .name("index_employees_nhs_number_unique")
+                .table(Alias::new("employees"))
+                .col(Alias::new("nhs_number"))
+                .to_owned(),
+        )
+        .await
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

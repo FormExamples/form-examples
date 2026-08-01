@@ -19,7 +19,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub passport_number: String,
     #[sea_orm(unique)]
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     #[sea_orm(column_type = "Text")]
     pub national_health_id: String,
     #[sea_orm(column_type = "Text")]

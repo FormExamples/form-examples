@@ -18,8 +18,8 @@ fn seed_author(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Outpu
         use loco_rs::prelude::*;
         let a = authors::ActiveModel {
             name: Set("Test Architect".to_string()),
-            email: Set(Some("arch@example.com".to_string())),
-            role: Set(Some("architect".to_string())),
+            email: Set("arch@example.com".to_string()),
+            role: Set("architect".to_string()),
             ..Default::default()
         };
         let a = a.insert(&ctx.db).await.expect("seed author");

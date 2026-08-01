@@ -18,7 +18,7 @@ impl MigrationTrait for Migration {
             ("sex_at_birth", ColType::StringWithDefault(String::new())),
             ("nationality_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("passport_number", ColType::TextWithDefault(String::new())),
-            ("united_kingdom_nhs_number", ColType::StringUniq),
+            ("united_kingdom_nhs_number", ColType::StringNull),
             ("national_health_id", ColType::TextWithDefault(String::new())),
             ("email", ColType::TextWithDefault(String::new())),
             ("phone", ColType::TextWithDefault(String::new())),
@@ -33,7 +33,18 @@ impl MigrationTrait for Migration {
             ],
             &[
             ]
-        ).await
+        ).await?;
+
+        m.create_index(
+            Index::create()
+                .if_not_exists()
+                .unique()
+                .name("index_patients_united_kingdom_nhs_number_unique")
+                .table(Alias::new("patients"))
+                .col(Alias::new("united_kingdom_nhs_number"))
+                .to_owned(),
+        )
+        .await
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

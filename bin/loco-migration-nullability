@@ -1,0 +1,344 @@
+#!/usr/bin/env python3
+"""bin/loco-migration-nullability — restore each form's `sql/` column
+nullability in its `back-end-with-loco/` crate.
+
+`sql/` is the source of truth for every form's schema (see `AGENTS/sql.md`).
+Where it declares a column nullable, the Loco crate must agree — in the
+migration, in the generated entity, and in the controller's `Params` struct,
+all three of which have to move together or the entity starts lying about the
+database.
+
+The dominant case is a **nullable UNIQUE** column, of which
+`united_kingdom_nhs_number` is the archetype:
+
+    sql/        united_kingdom_nhs_number VARCHAR(20) UNIQUE       -- nullable
+    migration   ("united_kingdom_nhs_number", ColType::StringUniq) -- NOT NULL
+    entity      pub united_kingdom_nhs_number: String              -- NOT NULL
+
+Loco has no nullable-unique `ColType`: `StringUniq` is `NOT NULL UNIQUE`. The
+consequence is not cosmetic. A `NOT NULL UNIQUE` text column can hold the empty
+string exactly **once**, so the schema admits at most one patient without an NHS
+number — every subsequent one collides:
+
+    ERROR: duplicate key value violates unique constraint
+    DETAIL: Key (united_kingdom_nhs_number)=() already exists.
+
+`sql/` is right: under a nullable UNIQUE column, NULLs do not collide, so any
+number of patients may lack the identifier while those that have one stay
+unique. Overseas visitors and unidentified emergency admissions are ordinary,
+so this matters clinically.
+
+This tool restores that, per divergent column:
+
+  - migration — `ColType::XUniq` becomes `ColType::XNull`, and the uniqueness
+    is re-expressed as an explicit unique index appended to the same `up()`,
+    following the `m.create_index(Index::create()…)` idiom already used
+    elsewhere in the fleet. A plain `ColType::X` simply becomes `ColType::XNull`.
+  - entity — `pub col: T` becomes `pub col: Option<T>`.
+  - controller — the same field in the resource's `Params` struct.
+
+The opposite direction is handled too: a column `sql/` declares NOT NULL while
+the migration declares it nullable is tightened, and its entity and controller
+field lose the `Option<…>`. Note that Loco's `ColType` cannot express a
+`DEFAULT now()` on a timestamp, so such a column becomes NOT NULL without its
+default and callers must supply a value — a smaller divergence from `sql/` than
+admitting NULL, but not a perfect one.
+
+The tool is idempotent, and anything it cannot rewrite confidently is reported
+rather than guessed at.
+
+Two limits worth knowing:
+
+  - Controllers are located by their `use …_entities::<table>::` import. A
+    consolidated controller that imports differently — as
+    `architecture-decision-record` does — will not be found, and its `Params`
+    struct must be adjusted by hand.
+  - The tool only retypes struct fields. Hand-written logic *around* those
+    fields still has to be reworked, because the meaning of "absent" moves from
+    `None` to the empty string. `architecture-decision-record` needed exactly
+    that in its Markdown renderer.
+
+Usage:
+  bin/loco-migration-nullability <slug>…            # named forms
+  bin/loco-migration-nullability --all              # every form's Loco crate
+  bin/loco-migration-nullability --dry-run --all    # show what would change
+  bin/loco-migration-nullability --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+SQL_TABLE = re.compile(r"^CREATE TABLE\s+([a-z_0-9]+)\s*\(", re.M | re.I)
+SQL_COL = re.compile(
+    r"^\s{4}([a-z_0-9]+)\s+([A-Z]+[0-9]*(?:\s+PRECISION)?(?:\([0-9, ]+\))?)([,\s].*|)$",
+    re.M,
+)
+CONSTRAINT = re.compile(r"^\s{4}(CHECK|UNIQUE|PRIMARY|FOREIGN|CONSTRAINT)\b", re.I)
+MIG_TABLE = re.compile(r'create_table\(\s*m\s*,\s*"([a-z_0-9]+)"')
+LOCO_OWNED = {"users"}
+
+# The tail of a loco-style `up()`: the end of create_table's argument list.
+CREATE_TAIL = re.compile(r"\n(\s*)\)\.await(\?;)?\n(\s*)\}", re.M)
+
+IRREGULAR_PLURALS = {"people": "person"}
+
+
+def pair(mig_table: str, sql_tables: dict) -> str | None:
+    """Find the `sql/` table a migration table corresponds to."""
+    suffix = mig_table.rsplit("_", 1)[-1]
+    for candidate in (
+        mig_table,
+        mig_table[:-1] if mig_table.endswith("s") else None,
+        mig_table[:-3] + "y" if mig_table.endswith("ies") else None,
+        mig_table[:-2] + "is" if mig_table.endswith("es") else None,
+        mig_table[:-2] if mig_table.endswith("es") else None,
+        mig_table[: -len(suffix)] + IRREGULAR_PLURALS[suffix]
+        if suffix in IRREGULAR_PLURALS
+        else None,
+    ):
+        if candidate and candidate in sql_tables:
+            return candidate
+    return None
+
+
+def sql_tables(form: pathlib.Path) -> dict[str, dict[str, dict]]:
+    """Map each `sql/` table to its columns' nullability and uniqueness."""
+    out: dict[str, dict[str, dict]] = {}
+    for path in sorted((form / "sql").glob("*.sql")):
+        if path.name == "schema.sql":
+            continue
+        text = path.read_text(errors="replace")
+        marks = [(m.start(), m.group(1).lower()) for m in SQL_TABLE.finditer(text)]
+        for index, (start, name) in enumerate(marks):
+            end = marks[index + 1][0] if index + 1 < len(marks) else len(text)
+            body = text[start:end]
+            if "\n);" in body:
+                body = body[: body.index("\n);")]
+            columns = {}
+            for match in SQL_COL.finditer(body):
+                if CONSTRAINT.match(match.group(0)):
+                    continue
+                rest = match.group(3).upper()
+                columns[match.group(1)] = {
+                    "notnull": "NOT NULL" in rest or "PRIMARY KEY" in rest,
+                    "unique": "UNIQUE" in rest,
+                }
+            out.setdefault(name, {}).update(columns)
+    return out
+
+
+def index_block(table: str, column: str, last: bool) -> str:
+    """Render a unique-index creation in the fleet's existing idiom."""
+    terminator = ".await" if last else ".await?;"
+    return (
+        "\n\n        m.create_index(\n"
+        "            Index::create()\n"
+        "                .if_not_exists()\n"
+        "                .unique()\n"
+        f'                .name("index_{table}_{column}_unique")\n'
+        f'                .table(Alias::new("{table}"))\n'
+        f'                .col(Alias::new("{column}"))\n'
+        "                .to_owned(),\n"
+        "        )\n"
+        f"        {terminator}"
+    )
+
+
+def crate_src(form: pathlib.Path) -> pathlib.Path | None:
+    """The crate's `src/<form_snake_case>/` directory."""
+    candidates = list((form / "back-end-with-loco" / "src").glob("*/models/_entities"))
+    return candidates[0].parent.parent if candidates else None
+
+
+def retype_field(text: str, column: str, wrap: bool) -> tuple[str, bool]:
+    """Wrap (or unwrap) a struct field's type in `Option<…>`."""
+    if wrap:
+        pattern = re.compile(rf"^(\s+pub {re.escape(column)}: )(?!Option<)([^,\n]+),", re.M)
+        replacement = r"\1Option<\2>,"
+    else:
+        pattern = re.compile(rf"^(\s+pub {re.escape(column)}: )Option<([^>]+)>,", re.M)
+        replacement = r"\1\2,"
+    new, count = pattern.subn(replacement, text, count=1)
+    return new, bool(count)
+
+
+def process_form(form: pathlib.Path, apply: bool) -> tuple[int, list[str]]:
+    """Fix one form. Returns (columns changed, notes)."""
+    migration_dir = form / "back-end-with-loco" / "migration" / "src"
+    src = crate_src(form)
+    if not migration_dir.is_dir() or src is None or not (form / "sql").is_dir():
+        return 0, []
+
+    tables = sql_tables(form)
+    changed = 0
+    notes: list[str] = []
+
+    for path in sorted(migration_dir.glob("*.rs")):
+        text = original = path.read_text()
+        pending_indexes: list[tuple[str, str]] = []
+        marks = [(m.start(), m.group(1)) for m in MIG_TABLE.finditer(text)]
+
+        for index in range(len(marks) - 1, -1, -1):
+            start, mig_name = marks[index]
+            end = marks[index + 1][0] if index + 1 < len(marks) else len(text)
+            if mig_name in LOCO_OWNED:
+                continue
+            sql_name = pair(mig_name, tables)
+            if sql_name is None:
+                continue
+            block = text[start:end]
+
+            for column, spec in tables[sql_name].items():
+                found = re.search(
+                    rf'\("{re.escape(column)}",\s*ColType::([A-Za-z]+)(\([^)]*\))?\)', block
+                )
+                if not found:
+                    continue
+                coltype = found.group(1)
+                if coltype == "PkAuto":
+                    continue
+
+                if spec["notnull"]:
+                    # NOT NULL in sql/, nullable in the migration: tighten it.
+                    if not coltype.endswith("Null"):
+                        continue
+                    base = coltype[: -len("Null")]
+                    block = block.replace(
+                        found.group(0), f'("{column}", ColType::{base})'
+                    )
+                    wrap = False
+                else:
+                    # Nullable in sql/, NOT NULL in the migration: relax it.
+                    if coltype.endswith("Null"):
+                        continue
+                    if coltype.endswith("WithDefault"):
+                        notes.append(
+                            f"{path.name}: {sql_name}.{column} is nullable in sql/ but "
+                            f"carries a default in the migration ({coltype}); left alone"
+                        )
+                        continue
+                    if coltype.endswith("Uniq"):
+                        base = coltype[: -len("Uniq")]
+                        pending_indexes.append((mig_name, column))
+                    else:
+                        base = coltype
+                    block = block.replace(
+                        found.group(0), f'("{column}", ColType::{base}Null)'
+                    )
+                    wrap = True
+                changed += 1
+
+                # Entity and controller must move with the migration.
+                entity = src / "models" / "_entities" / f"{mig_name}.rs"
+                if entity.is_file():
+                    body, ok = retype_field(entity.read_text(), column, wrap=wrap)
+                    if ok and apply:
+                        entity.write_text(body)
+                    elif not ok:
+                        notes.append(
+                            f"entity {entity.name}: no field {column!r} to retype"
+                        )
+                else:
+                    notes.append(f"no entity file for table {mig_name!r}")
+
+                for controller in sorted((src / "controllers").glob("*.rs")):
+                    ctext = controller.read_text()
+                    if f"_entities::{mig_name}::" not in ctext:
+                        continue
+                    body, ok = retype_field(ctext, column, wrap=wrap)
+                    if ok and apply:
+                        controller.write_text(body)
+
+            text = text[:start] + block + text[end:]
+
+        if pending_indexes:
+            tail = CREATE_TAIL.search(text)
+            if not tail:
+                notes.append(f"{path.name}: unrecognised up() shape; index not added")
+            else:
+                blocks = "".join(
+                    index_block(table, column, last=(i == len(pending_indexes) - 1))
+                    for i, (table, column) in enumerate(pending_indexes)
+                )
+                text = (
+                    text[: tail.start()]
+                    + f"\n{tail.group(1)}).await?;"
+                    + blocks
+                    + f"\n{tail.group(3)}}}"
+                    + text[tail.end() :]
+                )
+
+        if apply and text != original:
+            path.write_text(text)
+
+    return changed, notes
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Restore sql/ column nullability in each form's Loco crate."
+    )
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--verbose", action="store_true")
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(p for p in FORMS.iterdir() if (p / "sql").is_dir())
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[tuple[str, int]] = []
+    all_notes: list[str] = []
+
+    for form in forms:
+        if not form.is_dir():
+            print(f"no such form: {form.name}", file=sys.stderr)
+            return 2
+        count, notes = process_form(form, apply)
+        all_notes.extend(f"{form.name}: {note}" for note in notes)
+        if count:
+            drifted.append((form.name, count))
+            if args.verbose or not args.all:
+                print(f"{form.name}: {count} column(s)")
+
+    if args.verbose:
+        for note in all_notes:
+            print(f"  note: {note}")
+
+    total = sum(count for _, count in drifted)
+    if args.check:
+        if drifted:
+            print(
+                f"migration nullability stale for {len(drifted)} form(s), "
+                f"{total} column(s) (run: bin/loco-migration-nullability --all)"
+            )
+            for name, count in drifted[:10]:
+                print(f"  {name} ({count})")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"migration nullability matches sql/ ({len(forms)} forms)")
+        return 0
+
+    verb = "would change" if args.dry_run else "changed"
+    print(f"{len(drifted)} form(s), {total} column(s) {verb}")
+    if all_notes and not args.verbose:
+        print(f"({len(all_notes)} note(s); re-run with --verbose to see them)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

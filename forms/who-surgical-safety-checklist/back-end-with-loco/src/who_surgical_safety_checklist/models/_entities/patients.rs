@@ -15,7 +15,7 @@ pub struct Model {
     pub birth_date: Option<Date>,
     pub sex: String,
     #[sea_orm(unique)]
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     pub medical_record_number: Option<String>,
     #[sea_orm(column_type = "Double", nullable)]
     pub weight_as_kg: Option<f64>,

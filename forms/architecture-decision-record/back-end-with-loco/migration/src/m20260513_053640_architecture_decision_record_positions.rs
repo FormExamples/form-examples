@@ -12,13 +12,13 @@ impl MigrationTrait for Migration {
             
             ("id", ColType::PkAuto),
             
-            ("ordinal", ColType::IntegerNull),
+            ("ordinal", ColType::IntegerWithDefault(0)),
             ("name", ColType::String),
-            ("description", ColType::TextNull),
-            ("model_or_diagram_url", ColType::StringNull),
-            ("is_chosen", ColType::BooleanNull),
-            ("pros", ColType::TextNull),
-            ("cons", ColType::TextNull),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("model_or_diagram_url", ColType::StringWithDefault(String::new())),
+            ("is_chosen", ColType::BooleanWithDefault(false)),
+            ("pros", ColType::TextWithDefault(String::new())),
+            ("cons", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("architecture_decision_record", ""),

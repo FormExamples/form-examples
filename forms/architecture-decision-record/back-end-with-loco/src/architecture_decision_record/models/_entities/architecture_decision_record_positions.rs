@@ -15,22 +15,22 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     /// Ordinal.
-    pub ordinal: Option<i32>,
+    pub ordinal: i32,
     /// Name.
     pub name: String,
     /// Description.
     #[sea_orm(column_type = "Text", nullable)]
-    pub description: Option<String>,
+    pub description: String,
     /// Model or diagram URL.
-    pub model_or_diagram_url: Option<String>,
+    pub model_or_diagram_url: String,
     /// Is chosen.
-    pub is_chosen: Option<bool>,
+    pub is_chosen: bool,
     /// Pros.
     #[sea_orm(column_type = "Text", nullable)]
-    pub pros: Option<String>,
+    pub pros: String,
     /// Cons.
     #[sea_orm(column_type = "Text", nullable)]
-    pub cons: Option<String>,
+    pub cons: String,
     /// Architecture decision record ID.
     pub architecture_decision_record_id: i32,
 }

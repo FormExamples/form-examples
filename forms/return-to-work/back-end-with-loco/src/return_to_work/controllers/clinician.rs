@@ -20,7 +20,7 @@ pub struct Params {
     pub registration_number: String,
     pub site_name: String,
     pub practice_ods_code: String,
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     }
 
 impl Params {

@@ -12,8 +12,8 @@ impl MigrationTrait for Migration {
             
             ("id", ColType::PkAuto),
             
-            ("noted_at", ColType::TimestampWithTimeZoneNull),
-            ("noted_by", ColType::StringNull),
+            ("noted_at", ColType::TimestampWithTimeZone),
+            ("noted_by", ColType::StringWithDefault(String::new())),
             ("body", ColType::Text),
             ],
             &[

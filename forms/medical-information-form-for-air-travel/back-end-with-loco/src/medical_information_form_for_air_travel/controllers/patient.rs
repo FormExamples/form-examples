@@ -14,7 +14,7 @@ pub struct Params {
     pub sex_at_birth: String,
     pub nationality_as_iso_3166_1_alpha_2: Option<String>,
     pub passport_number: String,
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     pub national_health_id: String,
     pub email: String,
     pub phone: String,

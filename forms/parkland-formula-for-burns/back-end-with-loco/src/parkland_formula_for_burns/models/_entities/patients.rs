@@ -24,7 +24,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text", nullable)]
     pub postcode: Option<String>,
     #[sea_orm(unique)]
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     pub hospital_mrn: Option<String>,
     #[sea_orm(column_type = "Double", nullable)]
     pub height_as_cm: Option<f64>,

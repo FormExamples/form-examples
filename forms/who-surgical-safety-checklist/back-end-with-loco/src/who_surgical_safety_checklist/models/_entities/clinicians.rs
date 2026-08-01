@@ -26,7 +26,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub employee_number: String,
     #[sea_orm(unique)]
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

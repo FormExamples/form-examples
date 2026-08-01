@@ -16,7 +16,7 @@ pub struct Params {
     pub postal_address_as_full_text: Option<String>,
     pub country_as_iso_3166_1_alpha_2: Option<String>,
     pub postcode: Option<String>,
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     pub sex_at_birth: String,
     pub height_as_cm: Option<f64>,
     pub weight_as_kg: Option<f64>,

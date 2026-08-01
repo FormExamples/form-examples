@@ -27,7 +27,7 @@ pub struct Params {
     /// Postcode.
     pub postcode: Option<String>,
     /// United kingdom NHS number.
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     /// Hospital mrn.
     pub hospital_mrn: Option<String>,
     /// Height as cm.

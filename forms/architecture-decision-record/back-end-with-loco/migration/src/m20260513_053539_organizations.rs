@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("name", ColType::String),
-            ("legal_name", ColType::StringNull),
-            ("industry", ColType::StringNull),
-            ("domain", ColType::StringNull),
+            ("legal_name", ColType::StringWithDefault(String::new())),
+            ("industry", ColType::StringWithDefault(String::new())),
+            ("domain", ColType::StringWithDefault(String::new())),
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
-            ("description", ColType::TextNull),
+            ("description", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

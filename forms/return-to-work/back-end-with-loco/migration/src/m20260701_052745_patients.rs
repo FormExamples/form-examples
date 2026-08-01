@@ -21,7 +21,7 @@ impl MigrationTrait for Migration {
             ("postal_address_as_full_text", ColType::TextNull),
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("postcode", ColType::TextNull),
-            ("united_kingdom_nhs_number", ColType::StringUniq),
+            ("united_kingdom_nhs_number", ColType::StringNull),
             ("job_title", ColType::StringWithDefault(String::new())),
             ("role_description", ColType::TextWithDefault(String::new())),
             ("contracted_hours_per_week", ColType::DoubleNull),
@@ -32,7 +32,18 @@ impl MigrationTrait for Migration {
             ],
             &[
             ]
-        ).await
+        ).await?;
+
+        m.create_index(
+            Index::create()
+                .if_not_exists()
+                .unique()
+                .name("index_patients_united_kingdom_nhs_number_unique")
+                .table(Alias::new("patients"))
+                .col(Alias::new("united_kingdom_nhs_number"))
+                .to_owned(),
+        )
+        .await
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

@@ -17,15 +17,15 @@ pub struct Model {
     /// Name.
     pub name: String,
     /// Email.
-    pub email: Option<String>,
+    pub email: String,
     /// Phone.
-    pub phone: Option<String>,
+    pub phone: String,
     /// Role.
-    pub role: Option<String>,
+    pub role: String,
     /// Organization name.
-    pub organization_name: Option<String>,
+    pub organization_name: String,
     /// Team name.
-    pub team_name: Option<String>,
+    pub team_name: String,
 }
 
 /// Relation.

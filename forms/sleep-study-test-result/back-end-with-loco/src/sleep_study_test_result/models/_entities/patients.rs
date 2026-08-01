@@ -23,7 +23,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text", nullable)]
     pub postcode: Option<String>,
     #[sea_orm(unique)]
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     #[sea_orm(column_type = "Double", nullable)]
     pub neck_circumference_as_cm: Option<f64>,
     #[sea_orm(column_type = "Double", nullable)]

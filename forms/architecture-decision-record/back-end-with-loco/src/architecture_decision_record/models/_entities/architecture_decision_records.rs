@@ -15,7 +15,7 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     /// Slug.
-    pub slug: Option<String>,
+    pub slug: String,
     /// Number.
     pub number: Option<i32>,
     /// Title.
@@ -23,41 +23,41 @@ pub struct Model {
     /// Decision date.
     pub decision_date: Option<Date>,
     /// Status.
-    pub status: Option<String>,
+    pub status: String,
     /// Decision group.
-    pub decision_group: Option<String>,
+    pub decision_group: String,
     /// Issue.
     #[sea_orm(column_type = "Text", nullable)]
-    pub issue: Option<String>,
+    pub issue: String,
     /// Decision.
     #[sea_orm(column_type = "Text", nullable)]
-    pub decision: Option<String>,
+    pub decision: String,
     /// Assumptions.
     #[sea_orm(column_type = "Text", nullable)]
-    pub assumptions: Option<String>,
+    pub assumptions: String,
     /// Constraints.
     #[sea_orm(column_type = "Text", nullable)]
-    pub constraints: Option<String>,
+    pub constraints: String,
     /// Argument.
     #[sea_orm(column_type = "Text", nullable)]
-    pub argument: Option<String>,
+    pub argument: String,
     /// Implications.
     #[sea_orm(column_type = "Text", nullable)]
-    pub implications: Option<String>,
+    pub implications: String,
     /// Related decisions.
     #[sea_orm(column_type = "Text", nullable)]
-    pub related_decisions: Option<String>,
+    pub related_decisions: String,
     /// Related requirements.
     #[sea_orm(column_type = "Text", nullable)]
-    pub related_requirements: Option<String>,
+    pub related_requirements: String,
     /// Related artifacts.
     #[sea_orm(column_type = "Text", nullable)]
-    pub related_artifacts: Option<String>,
+    pub related_artifacts: String,
     /// Related principles.
     #[sea_orm(column_type = "Text", nullable)]
-    pub related_principles: Option<String>,
+    pub related_principles: String,
     /// Signed off by.
-    pub signed_off_by: Option<String>,
+    pub signed_off_by: String,
     /// Signed off at.
     pub signed_off_at: Option<DateTimeWithTimeZone>,
     /// Author ID.

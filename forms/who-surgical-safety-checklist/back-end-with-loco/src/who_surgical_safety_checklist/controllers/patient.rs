@@ -12,7 +12,7 @@ pub struct Params {
     pub name: String,
     pub birth_date: Option<Date>,
     pub sex: String,
-    pub united_kingdom_nhs_number: String,
+    pub united_kingdom_nhs_number: Option<String>,
     pub medical_record_number: Option<String>,
     pub weight_as_kg: Option<f64>,
     }

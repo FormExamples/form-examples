@@ -127,23 +127,23 @@ impl Params {
     fn update(&self, item: &mut ActiveModel) {
         item.author_id = Set(self.author_id);
         item.organization_id = Set(self.organization_id);
-        item.slug = Set(self.slug.clone());
+        item.slug = Set(self.slug.clone().unwrap_or_default());
         item.number = Set(self.number);
         item.title = Set(self.title.clone());
         item.decision_date = Set(self.decision_date);
-        item.status = Set(self.status.clone());
-        item.decision_group = Set(self.decision_group.clone());
-        item.issue = Set(self.issue.clone());
-        item.decision = Set(self.decision.clone());
-        item.assumptions = Set(self.assumptions.clone());
-        item.constraints = Set(self.constraints.clone());
-        item.argument = Set(self.argument.clone());
-        item.implications = Set(self.implications.clone());
-        item.related_decisions = Set(self.related_decisions.clone());
-        item.related_requirements = Set(self.related_requirements.clone());
-        item.related_artifacts = Set(self.related_artifacts.clone());
-        item.related_principles = Set(self.related_principles.clone());
-        item.signed_off_by = Set(self.signed_off_by.clone());
+        item.status = Set(self.status.clone().unwrap_or_default());
+        item.decision_group = Set(self.decision_group.clone().unwrap_or_default());
+        item.issue = Set(self.issue.clone().unwrap_or_default());
+        item.decision = Set(self.decision.clone().unwrap_or_default());
+        item.assumptions = Set(self.assumptions.clone().unwrap_or_default());
+        item.constraints = Set(self.constraints.clone().unwrap_or_default());
+        item.argument = Set(self.argument.clone().unwrap_or_default());
+        item.implications = Set(self.implications.clone().unwrap_or_default());
+        item.related_decisions = Set(self.related_decisions.clone().unwrap_or_default());
+        item.related_requirements = Set(self.related_requirements.clone().unwrap_or_default());
+        item.related_artifacts = Set(self.related_artifacts.clone().unwrap_or_default());
+        item.related_principles = Set(self.related_principles.clone().unwrap_or_default());
+        item.signed_off_by = Set(self.signed_off_by.clone().unwrap_or_default());
         item.signed_off_at = Set(self.signed_off_at);
     }
 }
@@ -178,9 +178,8 @@ async fn add(State(ctx): State<AppContext>, Json(mut params): Json<Params>) -> R
     format::redirect("/architecture_decision_records")
 }
 
-fn bullets(text: &Option<String>) -> String {
-    let raw = text.clone().unwrap_or_default();
-    let lines: Vec<&str> = raw
+fn bullets(text: &str) -> String {
+    let lines: Vec<&str> = text
         .lines()
         .map(str::trim)
         .filter(|l| !l.is_empty())
@@ -237,25 +236,25 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
     md.push_str(&format!("# {}\n\n", heading));
     md.push_str(&format!(
         "- **Status:** {}\n",
-        item.status.clone().unwrap_or_else(|| "pending".to_string())
+        if item.status.is_empty() { "pending" } else { &item.status }
     ));
-    if let Some(g) = item.decision_group.clone().filter(|s| !s.is_empty()) {
-        md.push_str(&format!("- **Group:** {}\n", g));
+    if !item.decision_group.is_empty() {
+        md.push_str(&format!("- **Group:** {}\n", item.decision_group));
     }
     if let Some(d) = item.decision_date {
         md.push_str(&format!("- **Date:** {}\n", d));
     }
     if let Some(a) = &author {
-        let email = a
-            .email
-            .clone()
-            .map(|e| format!(" <{}>", e))
-            .unwrap_or_default();
-        let role = a
-            .role
-            .clone()
-            .map(|r| format!(" ({})", r))
-            .unwrap_or_default();
+        let email = if a.email.is_empty() {
+            String::new()
+        } else {
+            format!(" <{}>", a.email)
+        };
+        let role = if a.role.is_empty() {
+            String::new()
+        } else {
+            format!(" ({})", a.role)
+        };
         md.push_str(&format!("- **Author:** {}{}{}\n", a.name, email, role));
     }
     if let Some(o) = &org {
@@ -263,10 +262,9 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
     }
     md.push('\n');
 
-    let section = |md: &mut String, heading: &str, body: &Option<String>| {
+    let section = |md: &mut String, heading: &str, body: &str| {
         md.push_str(&format!("## {}\n", heading));
-        let b = body.clone().unwrap_or_default();
-        md.push_str(if b.trim().is_empty() { "_TBD_" } else { &b });
+        md.push_str(if body.trim().is_empty() { "_TBD_" } else { body });
         md.push_str("\n\n");
     };
 
@@ -280,30 +278,26 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         md.push_str("_None._\n");
     } else {
         for (i, p) in positions.iter().enumerate() {
-            let chosen = if p.is_chosen.unwrap_or(false) {
+            let chosen = if p.is_chosen {
                 "  ✓ chosen"
             } else {
                 ""
             };
             md.push_str(&format!("### {}. {}{}\n", i + 1, p.name, chosen));
-            if let Some(d) = p.description.clone().filter(|s| !s.is_empty()) {
-                md.push_str(&d);
+            if !p.description.is_empty() {
+                md.push_str(&p.description);
                 md.push('\n');
             }
-            if let Some(u) = p.model_or_diagram_url.clone().filter(|s| !s.is_empty()) {
-                md.push_str(&format!("Model/diagram: <{}>\n", u));
+            if !p.model_or_diagram_url.is_empty() {
+                md.push_str(&format!("Model/diagram: <{}>\n", p.model_or_diagram_url));
             }
-            if let Some(pr) = &p.pros {
-                if !pr.trim().is_empty() {
-                    md.push_str("\n**Pros:**\n");
-                    md.push_str(&bullets(&Some(pr.clone())));
-                }
+            if !p.pros.trim().is_empty() {
+                md.push_str("\n**Pros:**\n");
+                md.push_str(&bullets(&p.pros));
             }
-            if let Some(co) = &p.cons {
-                if !co.trim().is_empty() {
-                    md.push_str("**Cons:**\n");
-                    md.push_str(&bullets(&Some(co.clone())));
-                }
+            if !p.cons.trim().is_empty() {
+                md.push_str("**Cons:**\n");
+                md.push_str(&bullets(&p.cons));
             }
             md.push('\n');
         }
@@ -327,23 +321,24 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         md.push_str("_None._\n");
     } else {
         for n in &notes {
-            let when = n
-                .noted_at
-                .map(|d| d.to_rfc3339())
-                .unwrap_or_else(|| n.created_at.to_rfc3339());
-            let who = n.noted_by.clone().unwrap_or_else(|| "unknown".to_string());
+            let when = n.noted_at.to_rfc3339();
+            let who = if n.noted_by.is_empty() {
+                "unknown"
+            } else {
+                &n.noted_by
+            };
             md.push_str(&format!("- **{}** ({}): {}\n", when, who, n.body));
         }
     }
     md.push('\n');
 
-    if let Some(by) = item.signed_off_by.clone().filter(|s| !s.is_empty()) {
+    if !item.signed_off_by.is_empty() {
         md.push_str("---\n");
         let when = item
             .signed_off_at
             .map(|d| format!(" on {}", d.to_rfc3339()))
             .unwrap_or_default();
-        md.push_str(&format!("Signed off by {}{}.\n", by, when));
+        md.push_str(&format!("Signed off by {}{}.\n", item.signed_off_by, when));
     }
 
     Ok(md)
@@ -387,10 +382,10 @@ async fn api_show_by_slug(
     format::json(AdrViewApi {
         id: id.to_string(),
         number: item.number,
-        slug: item.slug.clone().unwrap_or_default(),
+        slug: item.slug.clone(),
         title: item.title.clone(),
-        status: item.status.clone().unwrap_or_default(),
-        decision_group: item.decision_group.clone().unwrap_or_default(),
+        status: item.status.clone(),
+        decision_group: item.decision_group.clone(),
         decision_date: item
             .decision_date
             .map(|d| d.to_string())
@@ -433,10 +428,10 @@ async fn api_index(State(ctx): State<AppContext>) -> Result<Response> {
         out.push(AdrRowApi {
             id: r.id.to_string(),
             number: r.number,
-            slug: r.slug.clone().unwrap_or_default(),
+            slug: r.slug.clone(),
             title: r.title,
-            status: r.status.unwrap_or_default(),
-            decision_group: r.decision_group.unwrap_or_default(),
+            status: r.status,
+            decision_group: r.decision_group,
             decision_date: r.decision_date.map(|d| d.to_string()).unwrap_or_default(),
             author_name,
         });
