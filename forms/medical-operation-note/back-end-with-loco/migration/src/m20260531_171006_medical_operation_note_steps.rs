@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("step_number", ColType::Integer),
-            ("title", ColType::String),
-            ("description", ColType::Text),
+            ("title", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("medical_operation_note", ""),

@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("clinic_date", ColType::DateNull),
-            ("specialty", ColType::String),
-            ("modality", ColType::String),
-            ("appointment_type", ColType::String),
+            ("specialty", ColType::StringWithDefault(String::new())),
+            ("modality", ColType::StringWithDefault(String::new())),
+            ("appointment_type", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("outpatient_outcome", ""),

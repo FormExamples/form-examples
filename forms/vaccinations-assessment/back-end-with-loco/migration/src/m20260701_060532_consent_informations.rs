@@ -17,9 +17,9 @@ impl MigrationTrait for Migration {
             ("risks_explained", ColType::IntegerNull),
             ("benefits_explained", ColType::IntegerNull),
             ("questions_answered", ColType::IntegerNull),
-            ("consent_given", ColType::String),
+            ("consent_given", ColType::StringWithDefault(String::new())),
             ("consent_date", ColType::DateNull),
-            ("guardian_consent", ColType::String),
+            ("guardian_consent", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("assessment", ""),

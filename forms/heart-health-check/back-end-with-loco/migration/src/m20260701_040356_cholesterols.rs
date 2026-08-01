@@ -16,7 +16,7 @@ impl MigrationTrait for Migration {
             ("total_cholesterol", ColType::DoubleNull),
             ("hdl_cholesterol", ColType::DoubleNull),
             ("total_hdl_ratio", ColType::DoubleNull),
-            ("on_statin", ColType::String),
+            ("on_statin", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("assessment", ""),

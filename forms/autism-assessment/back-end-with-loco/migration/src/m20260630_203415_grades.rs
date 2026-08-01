@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("aq10_score", ColType::Integer),
-            ("threshold_category", ColType::String),
+            ("aq10_score", ColType::IntegerWithDefault(0)),
+            ("threshold_category", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
 
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("depression_score", ColType::Integer),
-            ("depression_severity", ColType::String),
+            ("depression_severity", ColType::StringWithDefault(String::new())),
             ("anxiety_score", ColType::Integer),
-            ("anxiety_severity", ColType::String),
+            ("anxiety_severity", ColType::StringWithDefault(String::new())),
             ("stress_score", ColType::Integer),
-            ("stress_severity", ColType::String),
+            ("stress_severity", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

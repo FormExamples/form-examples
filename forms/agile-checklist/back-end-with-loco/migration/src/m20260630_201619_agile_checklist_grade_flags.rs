@@ -14,12 +14,12 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("flag_id", ColType::String),
-            ("category", ColType::String),
-            ("priority", ColType::String),
-            ("section", ColType::String),
-            ("triggering_items", ColType::String),
-            ("description", ColType::String),
-            ("suggested_action", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("priority", ColType::StringWithDefault("medium".to_string())),
+            ("section", ColType::StringWithDefault(String::new())),
+            ("triggering_items", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
+            ("suggested_action", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("agile_checklist_grade", ""),

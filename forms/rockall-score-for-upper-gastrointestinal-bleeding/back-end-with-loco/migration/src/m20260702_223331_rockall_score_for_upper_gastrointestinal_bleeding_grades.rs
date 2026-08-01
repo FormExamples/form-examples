@@ -20,7 +20,7 @@ impl MigrationTrait for Migration {
             ("diagnosis_points", ColType::IntegerNull),
             ("stigmata_points", ColType::IntegerNull),
             ("full_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
+            ("risk_band", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

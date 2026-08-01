@@ -18,7 +18,7 @@ impl MigrationTrait for Migration {
             ("guilty_point", ColType::IntegerNull),
             ("eye_opener_point", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("interpretation", ColType::String),
+            ("interpretation", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

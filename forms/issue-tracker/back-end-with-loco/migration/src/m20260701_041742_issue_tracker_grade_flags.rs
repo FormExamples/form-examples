@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("flag_id", ColType::String),
-            ("category", ColType::String),
-            ("priority", ColType::String),
-            ("description", ColType::String),
-            ("suggested_action", ColType::String),
+            ("flag_id", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("priority", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
+            ("suggested_action", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("issue_tracker_grade", ""),

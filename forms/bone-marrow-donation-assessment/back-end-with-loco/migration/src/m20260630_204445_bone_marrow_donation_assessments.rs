@@ -12,7 +12,7 @@ impl MigrationTrait for Migration {
             
             ("id", ColType::PkAuto),
             
-            ("status", ColType::String),
+            ("status", ColType::StringWithDefault("draft".to_string())),
             ],
             &[
             ("patient", ""),

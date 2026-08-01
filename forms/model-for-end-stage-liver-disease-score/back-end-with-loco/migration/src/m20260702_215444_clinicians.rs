@@ -19,9 +19,9 @@ impl MigrationTrait for Migration {
             ("postal_address_as_full_text", ColType::TextNull),
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("postcode", ColType::TextNull),
-            ("role", ColType::String),
-            ("registration_body", ColType::String),
-            ("registration_number", ColType::Text),
+            ("role", ColType::StringWithDefault(String::new())),
+            ("registration_body", ColType::StringWithDefault(String::new())),
+            ("registration_number", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

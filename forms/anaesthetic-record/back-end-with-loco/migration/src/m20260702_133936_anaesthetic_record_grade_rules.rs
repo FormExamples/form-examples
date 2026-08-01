@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
-            ("category", ColType::String),
-            ("criticality", ColType::String),
-            ("satisfied", ColType::Boolean),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("criticality", ColType::StringWithDefault(String::new())),
+            ("satisfied", ColType::BooleanWithDefault(false)),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("anaesthetic_record_grade", ""),

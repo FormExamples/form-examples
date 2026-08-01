@@ -15,10 +15,10 @@ impl MigrationTrait for Migration {
             
             ("rule_id", ColType::String),
             ("timepoint_minutes", ColType::IntegerNull),
-            ("sign", ColType::String),
+            ("sign", ColType::StringWithDefault(String::new())),
             ("points", ColType::IntegerNull),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("apgar_score_grade", ""),

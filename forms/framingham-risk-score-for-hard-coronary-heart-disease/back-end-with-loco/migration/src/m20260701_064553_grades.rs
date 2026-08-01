@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("ten_year_risk_percent", ColType::Double),
-            ("risk_category", ColType::String),
+            ("ten_year_risk_percent", ColType::DoubleWithDefault(0.0)),
+            ("risk_category", ColType::StringWithDefault("low".to_string())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

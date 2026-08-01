@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("validity_class", ColType::String),
-            ("underlying_cause", ColType::Text),
-            ("coroner_referral_indicated", ColType::String),
+            ("validity_class", ColType::StringWithDefault(String::new())),
+            ("underlying_cause", ColType::TextWithDefault(String::new())),
+            ("coroner_referral_indicated", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("ten_year_risk_percent", ColType::DoubleNull),
-            ("risk_band", ColType::String),
+            ("risk_band", ColType::StringWithDefault(String::new())),
             ("heart_age", ColType::DoubleNull),
             ("linear_predictor", ColType::DoubleNull),
             ("graded_at", ColType::TimestampWithTimeZone),

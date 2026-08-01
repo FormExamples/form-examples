@@ -15,7 +15,7 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("start_date", ColType::Date),
             ("end_date", ColType::Date),
-            ("single_use", ColType::String),
+            ("single_use", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("release_form", ""),

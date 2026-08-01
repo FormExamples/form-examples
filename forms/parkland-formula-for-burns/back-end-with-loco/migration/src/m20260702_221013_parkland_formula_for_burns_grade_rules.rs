@@ -15,8 +15,8 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
             ("instrument", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("parkland_formula_for_burns_grade", ""),

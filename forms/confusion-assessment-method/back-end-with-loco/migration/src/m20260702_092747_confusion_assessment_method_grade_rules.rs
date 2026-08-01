@@ -16,8 +16,8 @@ impl MigrationTrait for Migration {
             ("rule_id", ColType::String),
             ("feature", ColType::String),
             ("positive", ColType::BooleanNull),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("confusion_assessment_method_grade", ""),

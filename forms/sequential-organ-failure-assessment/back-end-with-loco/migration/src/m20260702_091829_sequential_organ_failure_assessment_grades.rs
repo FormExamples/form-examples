@@ -21,8 +21,8 @@ impl MigrationTrait for Migration {
             ("renal_score", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
             ("delta_sofa", ColType::IntegerNull),
-            ("mortality_band", ColType::String),
-            ("sepsis3", ColType::Boolean),
+            ("mortality_band", ColType::StringWithDefault(String::new())),
+            ("sepsis3", ColType::BooleanWithDefault(false)),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("pain_present", ColType::Text),
+            ("pain_present", ColType::TextWithDefault(String::new())),
             ("pain_score", ColType::IntegerNull),
-            ("pain_location", ColType::Text),
-            ("pain_character", ColType::Text),
-            ("pain_onset", ColType::Text),
-            ("pain_severity_category", ColType::Text),
+            ("pain_location", ColType::TextWithDefault(String::new())),
+            ("pain_character", ColType::TextWithDefault(String::new())),
+            ("pain_onset", ColType::TextWithDefault(String::new())),
+            ("pain_severity_category", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("casualty_card", ""),

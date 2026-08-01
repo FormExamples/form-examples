@@ -13,15 +13,15 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("name", ColType::String),
-            ("legal_name", ColType::String),
-            ("sector", ColType::String),
-            ("size_band", ColType::String),
+            ("name", ColType::StringWithDefault(String::new())),
+            ("legal_name", ColType::StringWithDefault(String::new())),
+            ("sector", ColType::StringWithDefault(String::new())),
+            ("size_band", ColType::StringWithDefault(String::new())),
             ("headcount", ColType::IntegerNull),
-            ("country", ColType::String),
-            ("region", ColType::String),
-            ("website", ColType::Text),
-            ("notes", ColType::Text),
+            ("country", ColType::StringWithDefault(String::new())),
+            ("region", ColType::StringWithDefault(String::new())),
+            ("website", ColType::TextWithDefault(String::new())),
+            ("notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

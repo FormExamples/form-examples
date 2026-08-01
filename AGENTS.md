@@ -48,6 +48,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 ### Loco back-end refactor
 
 - `bin/loco-config-refactor [--check] [--dry-run] [--all|<slug>]` — mechanical Loco crate refactor for the canonical background-queue (Postgres only; drops `bg_sqlt` / `bg_redis`) and observability (OpenTelemetry + Prometheus `/metrics`) conventions; `--check` is the CI drift detector
+- `bin/loco-migration-defaults [--check] [--dry-run] [--verbose] [--all|<slug>…]` — mirror each form's `sql/` column defaults into its `back-end-with-loco/migration/` as `ColType::*WithDefault`. `cargo loco generate scaffold` cannot express defaults, so every generated migration drops them and the back-end schema silently disagrees with `sql/`, its own source of truth; re-run after any re-scaffold. `--check` is the CI drift detector
 - `bin/generate-loco-deny-config.py [--check] [<slug>…]` — write each Loco crate's `deny.toml` (cargo-deny advisories/licenses/bans/sources policy); `--check` is the CI drift detector. Run `cargo deny --all-features check` from inside a crate to execute the policy
 
 ### Generators (SQL → derived representations)
@@ -216,6 +217,7 @@ bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift det
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
+bin/loco-migration-defaults --check --all # Loco migration vs sql/ column-default drift detector
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance

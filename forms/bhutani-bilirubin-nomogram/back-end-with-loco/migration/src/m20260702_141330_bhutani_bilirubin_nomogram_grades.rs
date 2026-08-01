@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("risk_zone", ColType::String),
-            ("percentile_band", ColType::String),
+            ("risk_zone", ColType::StringWithDefault(String::new())),
+            ("percentile_band", ColType::StringWithDefault(String::new())),
             ("phototherapy_threshold_umol_l", ColType::DoubleNull),
             ("exchange_threshold_umol_l", ColType::DoubleNull),
-            ("above_phototherapy_threshold", ColType::String),
-            ("above_exchange_threshold", ColType::String),
+            ("above_phototherapy_threshold", ColType::StringWithDefault(String::new())),
+            ("above_exchange_threshold", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

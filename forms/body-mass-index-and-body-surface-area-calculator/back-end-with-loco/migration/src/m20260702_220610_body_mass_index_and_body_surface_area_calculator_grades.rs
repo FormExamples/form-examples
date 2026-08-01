@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("bmi", ColType::DoubleNull),
-            ("bmi_category", ColType::String),
+            ("bmi_category", ColType::StringWithDefault(String::new())),
             ("bsa_mosteller", ColType::DoubleNull),
             ("bsa_du_bois", ColType::DoubleNull),
             ("graded_at", ColType::TimestampWithTimeZone),

@@ -18,7 +18,7 @@ impl MigrationTrait for Migration {
             ("item3_score", ColType::IntegerNull),
             ("item4_score", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("interpretation", ColType::String),
+            ("interpretation", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

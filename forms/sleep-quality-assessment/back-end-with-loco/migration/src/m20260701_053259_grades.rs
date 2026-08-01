@@ -21,7 +21,7 @@ impl MigrationTrait for Migration {
             ("psqi_component5_sleep_disturbances", ColType::IntegerNull),
             ("psqi_component6_sleep_medication", ColType::IntegerNull),
             ("psqi_component7_daytime_dysfunction", ColType::IntegerNull),
-            ("sleep_quality_category", ColType::String),
+            ("sleep_quality_category", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

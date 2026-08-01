@@ -24,8 +24,8 @@ impl MigrationTrait for Migration {
             ("major_surgery_trauma_points", ColType::IntegerNull),
             ("medication_points", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
-            ("prevention_actions", ColType::Text),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("prevention_actions", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

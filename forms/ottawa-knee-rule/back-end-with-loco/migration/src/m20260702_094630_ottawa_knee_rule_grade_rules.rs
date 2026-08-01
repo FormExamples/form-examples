@@ -15,10 +15,10 @@ impl MigrationTrait for Migration {
 
             ("rule_id", ColType::String),
             ("instrument", ColType::String),
-            ("criterion", ColType::String),
-            ("fired", ColType::Boolean),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("criterion", ColType::StringWithDefault(String::new())),
+            ("fired", ColType::BooleanWithDefault(false)),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("ottawa_knee_rule_grade", ""),

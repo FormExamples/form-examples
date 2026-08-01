@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("wells_score", ColType::IntegerNull),
-            ("two_level_band", ColType::String),
-            ("three_level_band", ColType::String),
-            ("recommended_pathway", ColType::Text),
+            ("two_level_band", ColType::StringWithDefault(String::new())),
+            ("three_level_band", ColType::StringWithDefault(String::new())),
+            ("recommended_pathway", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

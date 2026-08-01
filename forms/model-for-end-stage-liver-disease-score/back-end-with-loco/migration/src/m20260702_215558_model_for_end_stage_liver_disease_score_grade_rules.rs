@@ -16,8 +16,8 @@ impl MigrationTrait for Migration {
             ("rule_id", ColType::String),
             ("component", ColType::String),
             ("contribution", ColType::DoubleNull),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("model_for_end_stage_liver_disease_score_grade", ""),

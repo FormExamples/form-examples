@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("rule_id", ColType::String),
-            ("factor", ColType::String),
-            ("weight_group", ColType::String),
+            ("factor", ColType::StringWithDefault(String::new())),
+            ("weight_group", ColType::StringWithDefault(String::new())),
             ("points", ColType::IntegerNull),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("caprini_venous_thromboembolism_risk_assessment_grade", ""),

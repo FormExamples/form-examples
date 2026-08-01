@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("flag_id", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::Text),
-            ("priority", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("priority", ColType::StringWithDefault("medium".to_string())),
             ],
             &[
             ("grade", ""),

@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("event_type", ColType::String),
+            ("event_type", ColType::StringWithDefault(String::new())),
             ("occurred_at", ColType::TimestampWithTimeZoneNull),
-            ("management", ColType::Text),
+            ("management", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("anaesthetic_record", ""),

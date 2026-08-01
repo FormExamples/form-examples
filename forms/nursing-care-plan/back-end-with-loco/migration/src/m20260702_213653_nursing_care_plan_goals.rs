@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("goal_text", ColType::Text),
+            ("goal_text", ColType::TextWithDefault(String::new())),
             ("target_date", ColType::DateNull),
-            ("met", ColType::String),
+            ("met", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("nursing_care_plan_problem", ""),

@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("grace_score", ColType::IntegerNull),
-            ("in_hospital_risk_band", ColType::String),
-            ("six_month_risk_band", ColType::String),
-            ("overall_band", ColType::String),
-            ("invasive_strategy", ColType::Text),
+            ("in_hospital_risk_band", ColType::StringWithDefault(String::new())),
+            ("six_month_risk_band", ColType::StringWithDefault(String::new())),
+            ("overall_band", ColType::StringWithDefault(String::new())),
+            ("invasive_strategy", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

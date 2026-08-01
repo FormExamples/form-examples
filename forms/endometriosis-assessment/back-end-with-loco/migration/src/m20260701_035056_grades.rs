@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("asrm_stage", ColType::String),
+            ("asrm_stage", ColType::StringWithDefault(String::new())),
             ("asrm_points", ColType::IntegerNull),
             ("ehp30_total_score", ColType::IntegerNull),
-            ("overall_severity", ColType::String),
+            ("overall_severity", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

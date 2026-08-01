@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("okr_objective_id", ColType::Uuid),
-            ("role", ColType::Text),
-            ("name", ColType::Text),
-            ("email", ColType::Text),
-            ("notes", ColType::Text),
+            ("role", ColType::TextWithDefault(String::new())),
+            ("name", ColType::TextWithDefault(String::new())),
+            ("email", ColType::TextWithDefault(String::new())),
+            ("notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

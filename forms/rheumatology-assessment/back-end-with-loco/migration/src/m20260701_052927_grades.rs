@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("das28_score", ColType::DoubleNull),
-            ("das28_method", ColType::String),
-            ("disease_activity_level", ColType::String),
+            ("das28_method", ColType::StringWithDefault(String::new())),
+            ("disease_activity_level", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

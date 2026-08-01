@@ -16,8 +16,8 @@ impl MigrationTrait for Migration {
             ("rule_id", ColType::String),
             ("item_number", ColType::IntegerNull),
             ("points", ColType::IntegerNull),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("zarit_burden_interview_grade", ""),

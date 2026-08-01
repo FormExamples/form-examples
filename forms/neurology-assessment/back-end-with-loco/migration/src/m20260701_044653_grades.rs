@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("nihss_total_score", ColType::Integer),
-            ("nihss_severity", ColType::String),
+            ("nihss_total_score", ColType::IntegerWithDefault(0)),
+            ("nihss_severity", ColType::StringWithDefault(String::new())),
             ("modified_rankin_score", ColType::IntegerNull),
             ("barthel_index", ColType::IntegerNull),
             ("graded_at", ColType::TimestampWithTimeZone),

@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("status", ColType::String),
+            ("status", ColType::StringWithDefault("draft".to_string())),
             ("assessment_date", ColType::DateNull),
-            ("assessment_period", ColType::String),
+            ("assessment_period", ColType::StringWithDefault(String::new())),
             ("t01_problems_to_solve", ColType::String),
             ("t02_decisions_without_manager", ColType::String),
             ("t03_adopt_and_improve_practices", ColType::String),
@@ -73,7 +73,7 @@ impl MigrationTrait for Migration {
             ("p16_agile_beyond_origin", ColType::String),
             ("p17_one_team", ColType::String),
             ("p18_honor_commitments", ColType::String),
-            ("overall_notes", ColType::Text),
+            ("overall_notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("respondent", ""),

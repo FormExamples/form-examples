@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("seizure_control", ColType::String),
-            ("review_status", ColType::String),
+            ("seizure_control", ColType::StringWithDefault(String::new())),
+            ("review_status", ColType::StringWithDefault(String::new())),
             ("completeness_score", ColType::IntegerNull),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],

@@ -15,9 +15,9 @@ impl MigrationTrait for Migration {
 
             ("rule_id", ColType::String),
             ("instrument", ColType::String),
-            ("region", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("region", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("ottawa_ankle_rules_grade", ""),

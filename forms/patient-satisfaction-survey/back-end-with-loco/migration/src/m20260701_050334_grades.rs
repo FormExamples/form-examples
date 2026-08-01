@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("normalized_score", ColType::Double),
-            ("satisfaction_category", ColType::String),
+            ("normalized_score", ColType::DoubleWithDefault(0.0)),
+            ("satisfaction_category", ColType::StringWithDefault(String::new())),
             ("domain_access_score", ColType::DoubleNull),
             ("domain_communication_score", ColType::DoubleNull),
             ("domain_clinical_care_score", ColType::DoubleNull),

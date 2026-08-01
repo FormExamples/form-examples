@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("flag_id", ColType::String),
-            ("category", ColType::String),
-            ("priority", ColType::String),
-            ("description", ColType::String),
-            ("suggested_action", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("priority", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
+            ("suggested_action", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("ultrasound_test_result_grade", ""),

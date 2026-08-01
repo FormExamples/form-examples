@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("mmse_total_score", ColType::Integer),
-            ("cognitive_category", ColType::String),
+            ("mmse_total_score", ColType::IntegerWithDefault(0)),
+            ("cognitive_category", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

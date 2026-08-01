@@ -16,7 +16,7 @@ impl MigrationTrait for Migration {
             ("overall_rating", ColType::IntegerNull),
             ("likely_to_recommend", ColType::IntegerNull),
             ("likely_to_return", ColType::IntegerNull),
-            ("comments", ColType::Text),
+            ("comments", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("encounter_satisfaction", ""),

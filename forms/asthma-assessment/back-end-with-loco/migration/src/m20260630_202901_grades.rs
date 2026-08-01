@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("act_total_score", ColType::IntegerNull),
-            ("control_level", ColType::String),
+            ("control_level", ColType::StringWithDefault("not_well_controlled".to_string())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

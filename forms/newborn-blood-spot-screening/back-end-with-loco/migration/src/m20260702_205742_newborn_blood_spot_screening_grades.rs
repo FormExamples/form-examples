@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("overall_outcome", ColType::String),
-            ("referral_status", ColType::String),
+            ("overall_outcome", ColType::StringWithDefault(String::new())),
+            ("referral_status", ColType::StringWithDefault(String::new())),
             ("sample_adequate", ColType::BooleanNull),
             ("within_window", ColType::BooleanNull),
             ("avoidable_repeat", ColType::BooleanNull),

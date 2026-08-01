@@ -15,7 +15,7 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("anion_gap", ColType::DoubleNull),
             ("corrected_anion_gap", ColType::DoubleNull),
-            ("classification", ColType::String),
+            ("classification", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

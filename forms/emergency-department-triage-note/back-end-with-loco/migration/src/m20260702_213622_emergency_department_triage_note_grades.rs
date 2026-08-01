@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("news2_total", ColType::IntegerNull),
-            ("news2_any_parameter_three", ColType::String),
+            ("news2_any_parameter_three", ColType::StringWithDefault(String::new())),
             ("priority_level", ColType::IntegerNull),
-            ("priority_colour", ColType::String),
-            ("priority_name", ColType::String),
+            ("priority_colour", ColType::StringWithDefault(String::new())),
+            ("priority_name", ColType::StringWithDefault(String::new())),
             ("target_minutes", ColType::IntegerNull),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],

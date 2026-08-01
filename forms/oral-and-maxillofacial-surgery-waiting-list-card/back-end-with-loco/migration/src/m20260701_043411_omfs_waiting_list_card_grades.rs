@@ -13,15 +13,15 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("waiting_time_status", ColType::String),
-            ("clinical_priority", ColType::String),
+            ("waiting_time_status", ColType::StringWithDefault(String::new())),
+            ("clinical_priority", ColType::StringWithDefault(String::new())),
             ("target_wait_weeks", ColType::DoubleNull),
             ("days_waited", ColType::IntegerNull),
             ("weeks_waited", ColType::DoubleNull),
             ("days_to_target", ColType::IntegerNull),
             ("days_to_breach", ColType::IntegerNull),
             ("days_to_appointment", ColType::IntegerNull),
-            ("grader_notes", ColType::Text),
+            ("grader_notes", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

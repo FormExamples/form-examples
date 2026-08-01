@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("record_types", ColType::Text),
-            ("specific_date_range", ColType::String),
+            ("specific_date_range", ColType::StringWithDefault(String::new())),
             ("date_from", ColType::DateNull),
             ("date_to", ColType::DateNull),
-            ("specific_record_details", ColType::Text),
+            ("specific_record_details", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("release_form", ""),

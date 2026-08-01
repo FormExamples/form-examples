@@ -19,9 +19,9 @@ impl MigrationTrait for Migration {
             ("consciousness_score", ColType::IntegerNull),
             ("oxygen_saturation_score", ColType::IntegerNull),
             ("aldrete_total", ColType::IntegerNull),
-            ("discharge_ready", ColType::String),
+            ("discharge_ready", ColType::StringWithDefault(String::new())),
             ("padss_total", ColType::IntegerNull),
-            ("padss_street_fit", ColType::String),
+            ("padss_street_fit", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

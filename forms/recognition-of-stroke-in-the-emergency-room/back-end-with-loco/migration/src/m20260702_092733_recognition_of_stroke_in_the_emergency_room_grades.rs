@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("rosier_score", ColType::IntegerNull),
-            ("stroke_likely", ColType::String),
-            ("glucose_excluded", ColType::String),
+            ("stroke_likely", ColType::StringWithDefault(String::new())),
+            ("glucose_excluded", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("family_cvd_under_60", ColType::String),
-            ("family_cvd_relationship", ColType::String),
-            ("family_diabetes_history", ColType::String),
+            ("family_cvd_under_60", ColType::StringWithDefault(String::new())),
+            ("family_cvd_relationship", ColType::StringWithDefault(String::new())),
+            ("family_diabetes_history", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("assessment", ""),

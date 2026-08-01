@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("status", ColType::String),
-            ("source_count", ColType::Integer),
-            ("unintentional_count", ColType::Integer),
-            ("high_risk_unintentional_count", ColType::Integer),
+            ("status", ColType::StringWithDefault(String::new())),
+            ("source_count", ColType::IntegerWithDefault(0)),
+            ("unintentional_count", ColType::IntegerWithDefault(0)),
+            ("high_risk_unintentional_count", ColType::IntegerWithDefault(0)),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

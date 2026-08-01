@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("visit_date", ColType::DateNull),
-            ("department", ColType::Text),
-            ("provider_name", ColType::Text),
-            ("visit_type", ColType::Text),
-            ("reason_for_visit", ColType::Text),
-            ("first_visit", ColType::Text),
+            ("department", ColType::TextWithDefault(String::new())),
+            ("provider_name", ColType::TextWithDefault(String::new())),
+            ("visit_type", ColType::TextWithDefault(String::new())),
+            ("reason_for_visit", ColType::TextWithDefault(String::new())),
+            ("first_visit", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("encounter_satisfaction", ""),

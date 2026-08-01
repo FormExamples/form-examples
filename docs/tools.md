@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-65 tools.
+66 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -34,6 +34,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-svelte-theme-locale-select-refactor`](#lily-svelte-theme-locale-select-refactor)
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/loco-config-refactor`](#loco-config-refactor)
+- [`bin/loco-migration-defaults`](#loco-migration-defaults)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/normalize`](#normalize)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
@@ -766,6 +767,59 @@ Usage:
   bin/loco-config-refactor --all               # every form's Loco crate
   bin/loco-config-refactor --dry-run <slug>    # show what would change
   bin/loco-config-refactor --check --all       # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-migration-defaults"><code>bin/loco-migration-defaults</code></h2>
+
+```text
+bin/loco-migration-defaults — mirror each form's `sql/` column defaults into
+its `back-end-with-loco/migration/`.
+
+`sql/` is the source of truth for every form's schema (see `AGENTS/sql.md`), and
+it declares most columns `NOT NULL DEFAULT <value>`. The Loco crates are
+bootstrapped by `cargo loco generate scaffold`, whose column DSL has no syntax
+for defaults, so every generated migration declares those same columns `NOT
+NULL` with no default at all. The back-end schema therefore disagrees with the
+schema it is supposed to mirror, and any insert that omits a column fails with a
+not-null violation instead of taking the documented default.
+
+This tool closes that gap by rewriting the plain `ColType` entries to their
+`*WithDefault` counterparts:
+
+    ("status",     ColType::String)   ->  ColType::StringWithDefault("draft".to_string())
+    ("vte_notes",  ColType::Text)     ->  ColType::TextWithDefault(String::new())
+    ("sort_order", ColType::Integer)  ->  ColType::IntegerWithDefault(0)
+
+Only columns that `sql/` declares `NOT NULL DEFAULT <literal>` are touched, and
+only where the migration's own column is a non-null scalar of a matching type.
+Defaults expressed as SQL function calls (`now()`, `gen_random_uuid()`) are
+handled by Loco itself and are ignored here.
+
+Tables are paired between the two representations by name, allowing for the
+singular/plural convention (`CREATE TABLE soap_note` <-> `create_table(m,
+"soap_notes")`). Columns are then matched by name *within* a paired table, so
+that a column name appearing in several tables with different defaults — such as
+`status` — is never crossed over.
+
+Anything the tool cannot confidently rewrite is reported rather than guessed at:
+
+  - a column `sql/` declares NOT NULL but the migration declares nullable
+    (a nullability divergence, which is a separate defect — not fixed here)
+  - a migration `ColType` with no `*WithDefault` counterpart
+  - a table in one representation with no counterpart in the other
+
+The tool is idempotent: a column already carrying a `*WithDefault` is left
+alone, so re-running changes nothing.
+
+Note that `cargo loco generate scaffold` still cannot express defaults, so
+re-scaffolding a crate from its `back-end-with-loco-setup` script reintroduces
+the divergence. Re-run this tool afterwards.
+
+Usage:
+  bin/loco-migration-defaults <slug>…            # named forms
+  bin/loco-migration-defaults --all              # every form's Loco crate
+  bin/loco-migration-defaults --dry-run --all    # show what would change
+  bin/loco-migration-defaults --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>

@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("ordinal", ColType::Integer),
-            ("name", ColType::Text),
-            ("description", ColType::Text),
+            ("ordinal", ColType::IntegerWithDefault(0)),
+            ("name", ColType::TextWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("arc42_documentation", ""),

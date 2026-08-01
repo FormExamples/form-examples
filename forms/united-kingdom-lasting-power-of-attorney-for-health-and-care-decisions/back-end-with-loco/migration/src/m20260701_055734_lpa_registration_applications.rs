@@ -13,13 +13,13 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("applicant_role", ColType::String),
+            ("applicant_role", ColType::StringWithDefault(String::new())),
             ("applicant_signed_at", ColType::TimestampWithTimeZoneNull),
-            ("fee_amount_pounds", ColType::Double),
-            ("fee_remission", ColType::String),
-            ("fee_remission_reason", ColType::String),
+            ("fee_amount_pounds", ColType::DoubleWithDefault(0.0)),
+            ("fee_remission", ColType::StringWithDefault(String::new())),
+            ("fee_remission_reason", ColType::StringWithDefault(String::new())),
             ("submitted_at", ColType::TimestampWithTimeZoneNull),
-            ("submission_channel", ColType::String),
+            ("submission_channel", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("lpa", ""),

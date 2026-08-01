@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("role", ColType::String),
-            ("opcs4_code", ColType::String),
-            ("name", ColType::String),
-            ("description", ColType::Text),
-            ("laterality", ColType::String),
-            ("sequence_index", ColType::Integer),
+            ("role", ColType::StringWithDefault(String::new())),
+            ("opcs4_code", ColType::StringWithDefault(String::new())),
+            ("name", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("laterality", ColType::StringWithDefault(String::new())),
+            ("sequence_index", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("medical_operation_note", ""),

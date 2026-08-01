@@ -13,13 +13,13 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("form_version", ColType::String),
-            ("jurisdiction", ColType::String),
-            ("status", ColType::String),
-            ("opg_reference", ColType::String),
+            ("form_version", ColType::StringWithDefault("LP1H-2024".to_string())),
+            ("jurisdiction", ColType::StringWithDefault(String::new())),
+            ("status", ColType::StringWithDefault("draft".to_string())),
+            ("opg_reference", ColType::StringWithDefault(String::new())),
             ("registered_at", ColType::TimestampWithTimeZoneNull),
             ("effective_from", ColType::TimestampWithTimeZoneNull),
-            ("notes", ColType::Text),
+            ("notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("donor", ""),

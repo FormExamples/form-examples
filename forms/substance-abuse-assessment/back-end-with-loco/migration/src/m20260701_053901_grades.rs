@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("audit_score", ColType::IntegerNull),
-            ("audit_risk_category", ColType::String),
+            ("audit_risk_category", ColType::StringWithDefault(String::new())),
             ("dast_score", ColType::IntegerNull),
-            ("dast_risk_category", ColType::String),
-            ("overall_risk_level", ColType::String),
+            ("dast_risk_category", ColType::StringWithDefault(String::new())),
+            ("overall_risk_level", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

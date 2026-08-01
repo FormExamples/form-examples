@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("decision_rule", ColType::String),
-            ("joint_decision_set", ColType::Text),
+            ("decision_rule", ColType::StringWithDefault(String::new())),
+            ("joint_decision_set", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("lpa", ""),

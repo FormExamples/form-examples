@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("nihss_total_score", ColType::IntegerNull),
-            ("stroke_severity", ColType::String),
+            ("stroke_severity", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

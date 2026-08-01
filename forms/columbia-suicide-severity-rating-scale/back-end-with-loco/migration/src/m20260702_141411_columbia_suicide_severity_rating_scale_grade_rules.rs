@@ -15,9 +15,9 @@ impl MigrationTrait for Migration {
             
             ("rule_id", ColType::String),
             ("dimension", ColType::String),
-            ("tier", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("tier", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("columbia_suicide_severity_rating_scale_grade", ""),

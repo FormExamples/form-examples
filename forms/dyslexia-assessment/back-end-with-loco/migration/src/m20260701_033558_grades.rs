@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("severity_level", ColType::String),
+            ("severity_level", ColType::StringWithDefault(String::new())),
             ("lowest_domain_score", ColType::IntegerNull),
-            ("lowest_domain_name", ColType::String),
-            ("overall_risk_level", ColType::String),
+            ("lowest_domain_name", ColType::StringWithDefault(String::new())),
+            ("overall_risk_level", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

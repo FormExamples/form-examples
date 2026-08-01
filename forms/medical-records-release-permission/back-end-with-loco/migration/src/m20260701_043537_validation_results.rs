@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("completeness_score", ColType::Integer),
-            ("completeness_status", ColType::String),
-            ("validation_status", ColType::String),
+            ("completeness_score", ColType::IntegerWithDefault(0)),
+            ("completeness_status", ColType::StringWithDefault(String::new())),
+            ("validation_status", ColType::StringWithDefault(String::new())),
             ("validated_at", ColType::TimestampWithTimeZoneNull),
             ],
             &[

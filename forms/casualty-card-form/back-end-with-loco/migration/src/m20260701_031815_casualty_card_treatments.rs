@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("oxygen_therapy_device", ColType::Text),
-            ("oxygen_therapy_flow_rate", ColType::Text),
-            ("tetanus_prophylaxis", ColType::Text),
+            ("oxygen_therapy_device", ColType::TextWithDefault(String::new())),
+            ("oxygen_therapy_flow_rate", ColType::TextWithDefault(String::new())),
+            ("tetanus_prophylaxis", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("casualty_card", ""),

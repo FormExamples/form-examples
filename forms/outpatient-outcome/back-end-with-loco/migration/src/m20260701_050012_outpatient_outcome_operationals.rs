@@ -17,7 +17,7 @@ impl MigrationTrait for Migration {
             ("appointment_date", ColType::DateNull),
             ("wait_time_days", ColType::IntegerNull),
             ("service_target_days", ColType::IntegerNull),
-            ("nhs_attendance_outcome", ColType::String),
+            ("nhs_attendance_outcome", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("outpatient_outcome", ""),

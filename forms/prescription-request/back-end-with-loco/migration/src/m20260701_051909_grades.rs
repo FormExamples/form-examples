@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("priority_level", ColType::String),
-            ("rule_count", ColType::Integer),
+            ("priority_level", ColType::StringWithDefault("routine".to_string())),
+            ("rule_count", ColType::IntegerWithDefault(0)),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

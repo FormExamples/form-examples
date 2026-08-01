@@ -22,8 +22,8 @@ impl MigrationTrait for Migration {
             ("hepatic_disease_point", ColType::IntegerNull),
             ("cardiac_failure_point", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
-            ("recommended_management", ColType::Text),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("recommended_management", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

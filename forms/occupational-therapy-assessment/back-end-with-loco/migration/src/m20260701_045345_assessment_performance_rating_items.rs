@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("occupational_issue", ColType::String),
-            ("domain", ColType::String),
+            ("occupational_issue", ColType::StringWithDefault(String::new())),
+            ("domain", ColType::StringWithDefault(String::new())),
             ("importance_score", ColType::IntegerNull),
             ("performance_score", ColType::IntegerNull),
-            ("sort_order", ColType::Integer),
+            ("sort_order", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("assessment_performance_ratings", "performance_ratings_id"),

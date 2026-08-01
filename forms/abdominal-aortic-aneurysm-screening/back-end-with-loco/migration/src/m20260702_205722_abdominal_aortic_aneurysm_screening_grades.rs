@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("category", ColType::String),
-            ("surveillance_band", ColType::String),
-            ("recommended_action", ColType::Text),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("surveillance_band", ColType::StringWithDefault(String::new())),
+            ("recommended_action", ColType::TextWithDefault(String::new())),
             ("growth_cm", ColType::DoubleNull),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],

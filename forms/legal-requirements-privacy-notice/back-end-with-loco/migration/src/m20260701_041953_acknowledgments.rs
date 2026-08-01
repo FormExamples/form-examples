@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("confirmed", ColType::Boolean),
-            ("full_name", ColType::Text),
+            ("confirmed", ColType::BooleanWithDefault(false)),
+            ("full_name", ColType::TextWithDefault(String::new())),
             ("acknowledged_date", ColType::DateNull),
             ],
             &[

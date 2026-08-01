@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("status", ColType::String),
-            ("state_template", ColType::String),
+            ("status", ColType::StringWithDefault("draft".to_string())),
+            ("state_template", ColType::StringWithDefault(String::new())),
             ("revoked_at", ColType::TimestampWithTimeZoneNull),
-            ("revocation_method", ColType::String),
+            ("revocation_method", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("patient", ""),

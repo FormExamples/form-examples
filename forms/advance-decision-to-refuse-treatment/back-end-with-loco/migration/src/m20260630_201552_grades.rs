@@ -13,7 +13,7 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("validity_level", ColType::String),
+            ("validity_level", ColType::StringWithDefault("incomplete".to_string())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

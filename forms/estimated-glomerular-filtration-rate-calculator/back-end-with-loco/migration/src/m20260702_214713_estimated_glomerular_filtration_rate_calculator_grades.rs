@@ -15,8 +15,8 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("serum_creatinine_mg_dl", ColType::DoubleNull),
             ("egfr_ml_min_1_73m2", ColType::DoubleNull),
-            ("g_stage", ColType::String),
-            ("g_stage_label", ColType::String),
+            ("g_stage", ColType::StringWithDefault(String::new())),
+            ("g_stage_label", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

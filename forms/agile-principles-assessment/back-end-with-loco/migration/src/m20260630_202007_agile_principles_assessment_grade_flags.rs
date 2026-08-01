@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("flag_id", ColType::String),
-            ("category", ColType::String),
-            ("priority", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("priority", ColType::StringWithDefault("medium".to_string())),
             ("principle_number", ColType::IntegerNull),
-            ("description", ColType::String),
-            ("suggested_action", ColType::String),
+            ("description", ColType::StringWithDefault(String::new())),
+            ("suggested_action", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("agile_principles_assessment_grade", ""),

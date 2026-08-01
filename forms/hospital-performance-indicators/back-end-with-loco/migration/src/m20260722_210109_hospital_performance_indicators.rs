@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("hospital_name", ColType::String),
+            ("hospital_name", ColType::StringWithDefault(String::new())),
             ("period_month", ColType::IntegerNull),
             ("period_year", ColType::IntegerNull),
-            ("prepared_by_name", ColType::String),
-            ("overall_notes", ColType::Text),
-            ("status", ColType::String),
+            ("prepared_by_name", ColType::StringWithDefault(String::new())),
+            ("overall_notes", ColType::TextWithDefault(String::new())),
+            ("status", ColType::StringWithDefault("draft".to_string())),
             ("signed_at", ColType::TimestampWithTimeZoneNull),
             ],
             &[

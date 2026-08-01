@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("address_line_1", ColType::Text),
-            ("address_line_2", ColType::Text),
-            ("address_line_3", ColType::Text),
-            ("postcode", ColType::Text),
-            ("country_as_iso_3166_1_alpha_2", ColType::Text),
+            ("address_line_1", ColType::TextWithDefault(String::new())),
+            ("address_line_2", ColType::TextWithDefault(String::new())),
+            ("address_line_3", ColType::TextWithDefault(String::new())),
+            ("postcode", ColType::TextWithDefault(String::new())),
+            ("country_as_iso_3166_1_alpha_2", ColType::TextWithDefault("GB".to_string())),
             ],
             &[
             ]

@@ -13,7 +13,7 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("overall_highest_ukmec_category", ColType::Integer),
+            ("overall_highest_ukmec_category", ColType::IntegerWithDefault(1)),
             ("ukmec_cocp", ColType::IntegerNull),
             ("ukmec_pop", ColType::IntegerNull),
             ("ukmec_patch", ColType::IntegerNull),

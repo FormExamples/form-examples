@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("discrepancy_type", ColType::String),
-            ("bpmh_item_ref", ColType::Text),
-            ("inpatient_item_ref", ColType::Text),
-            ("intended_action", ColType::String),
-            ("rationale", ColType::Text),
-            ("intentional", ColType::Boolean),
+            ("discrepancy_type", ColType::StringWithDefault(String::new())),
+            ("bpmh_item_ref", ColType::TextWithDefault(String::new())),
+            ("inpatient_item_ref", ColType::TextWithDefault(String::new())),
+            ("intended_action", ColType::StringWithDefault(String::new())),
+            ("rationale", ColType::TextWithDefault(String::new())),
+            ("intentional", ColType::BooleanWithDefault(false)),
             ],
             &[
             ("medication_reconciliation", ""),

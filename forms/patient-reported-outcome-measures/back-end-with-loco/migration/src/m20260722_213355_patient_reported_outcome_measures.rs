@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("subject_id", ColType::String),
-            ("visit", ColType::String),
+            ("subject_id", ColType::StringWithDefault(String::new())),
+            ("visit", ColType::StringWithDefault(String::new())),
             ("assessment_date", ColType::DateNull),
             ("general_health", ColType::IntegerNull),
             ("health_change_vs_year_ago", ColType::IntegerNull),

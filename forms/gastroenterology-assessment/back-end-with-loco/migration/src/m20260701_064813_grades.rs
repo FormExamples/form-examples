@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("severity_score", ColType::Integer),
-            ("severity_level", ColType::String),
-            ("red_flag_count", ColType::Integer),
-            ("urgent_referral_recommended", ColType::Boolean),
+            ("severity_score", ColType::IntegerWithDefault(0)),
+            ("severity_level", ColType::StringWithDefault("mild".to_string())),
+            ("red_flag_count", ColType::IntegerWithDefault(0)),
+            ("urgent_referral_recommended", ColType::BooleanWithDefault(false)),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

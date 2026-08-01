@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("corrected_calcium_mmol_l", ColType::DoubleNull),
-            ("classification", ColType::String),
+            ("classification", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

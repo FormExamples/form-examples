@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("composite_score", ColType::Double),
-            ("category", ColType::Text),
-            ("answered_count", ColType::Integer),
+            ("category", ColType::TextWithDefault(String::new())),
+            ("answered_count", ColType::IntegerWithDefault(0)),
             ("scored_at", ColType::TimestampWithTimeZone),
             ],
             &[

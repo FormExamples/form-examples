@@ -15,7 +15,7 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("cmai_score", ColType::IntegerNull),
             ("npi_total_score", ColType::IntegerNull),
-            ("overall_severity", ColType::String),
+            ("overall_severity", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

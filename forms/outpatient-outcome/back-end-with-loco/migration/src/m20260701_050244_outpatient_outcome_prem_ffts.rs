@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("fft_response", ColType::String),
-            ("fft_comment", ColType::Text),
+            ("fft_response", ColType::StringWithDefault(String::new())),
+            ("fft_comment", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("outpatient_outcome", ""),

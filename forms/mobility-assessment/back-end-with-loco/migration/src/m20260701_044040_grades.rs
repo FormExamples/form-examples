@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("balance_score", ColType::Integer),
-            ("gait_score", ColType::Integer),
-            ("total_tinetti_score", ColType::Integer),
-            ("fall_risk_category", ColType::String),
+            ("balance_score", ColType::IntegerWithDefault(0)),
+            ("gait_score", ColType::IntegerWithDefault(0)),
+            ("total_tinetti_score", ColType::IntegerWithDefault(0)),
+            ("fall_risk_category", ColType::StringWithDefault(String::new())),
             ("tug_time_seconds", ColType::DoubleNull),
-            ("tug_risk_category", ColType::String),
+            ("tug_risk_category", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

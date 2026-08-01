@@ -23,8 +23,8 @@ impl MigrationTrait for Migration {
             ("drugs_points", ColType::IntegerNull),
             ("alcohol_points", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
-            ("modifiable_factors", ColType::Text),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("modifiable_factors", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

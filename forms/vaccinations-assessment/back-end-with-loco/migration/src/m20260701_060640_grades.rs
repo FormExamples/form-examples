@@ -13,8 +13,8 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
 
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("vaccination_level", ColType::String),
-            ("vaccination_score", ColType::SmallInteger),
+            ("vaccination_level", ColType::StringWithDefault(String::new())),
+            ("vaccination_score", ColType::SmallIntegerWithDefault(0)),
             ("graded_at", ColType::TimestampWithTimeZoneNull),
             ],
             &[

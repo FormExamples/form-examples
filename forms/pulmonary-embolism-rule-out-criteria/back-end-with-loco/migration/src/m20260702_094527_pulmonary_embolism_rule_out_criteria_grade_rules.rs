@@ -15,10 +15,10 @@ impl MigrationTrait for Migration {
 
             ("rule_id", ColType::String),
             ("instrument", ColType::String),
-            ("satisfied", ColType::String),
-            ("outcome", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("satisfied", ColType::StringWithDefault(String::new())),
+            ("outcome", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("pulmonary_embolism_rule_out_criteria_grade", ""),

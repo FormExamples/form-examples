@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("order_position", ColType::Integer),
-            ("replacement_trigger", ColType::Text),
+            ("replacement_trigger", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("lpa", ""),

@@ -17,8 +17,8 @@ impl MigrationTrait for Migration {
             ("mentation_point", ColType::IntegerNull),
             ("systolic_blood_pressure_point", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
-            ("threshold_met", ColType::String),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("threshold_met", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

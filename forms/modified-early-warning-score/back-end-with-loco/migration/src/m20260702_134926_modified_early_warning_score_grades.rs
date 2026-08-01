@@ -19,9 +19,9 @@ impl MigrationTrait for Migration {
             ("respiratory_rate_score", ColType::IntegerNull),
             ("temperature_score", ColType::IntegerNull),
             ("avpu_score", ColType::IntegerNull),
-            ("single_parameter_trigger", ColType::String),
-            ("risk_band", ColType::String),
-            ("monitoring_frequency", ColType::Text),
+            ("single_parameter_trigger", ColType::StringWithDefault(String::new())),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("monitoring_frequency", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("who_severity", ColType::String),
-            ("ncc_merp_category", ColType::String),
-            ("overall_risk_level", ColType::String),
+            ("who_severity", ColType::StringWithDefault(String::new())),
+            ("ncc_merp_category", ColType::StringWithDefault(String::new())),
+            ("overall_risk_level", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
 
-            ("xray_indicated", ColType::String),
-            ("decision", ColType::String),
-            ("recommended_action", ColType::Text),
+            ("xray_indicated", ColType::StringWithDefault(String::new())),
+            ("decision", ColType::StringWithDefault(String::new())),
+            ("recommended_action", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("gss_total", ColType::Integer),
-            ("gss_category", ColType::String),
-            ("phq9_total", ColType::Integer),
-            ("phq9_severity", ColType::String),
-            ("combined_severity", ColType::String),
+            ("gss_total", ColType::IntegerWithDefault(0)),
+            ("gss_category", ColType::StringWithDefault(String::new())),
+            ("phq9_total", ColType::IntegerWithDefault(0)),
+            ("phq9_severity", ColType::StringWithDefault(String::new())),
+            ("combined_severity", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

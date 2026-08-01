@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("ccs_angina_class", ColType::String),
-            ("nyha_class", ColType::String),
-            ("overall_risk_level", ColType::String),
+            ("ccs_angina_class", ColType::StringWithDefault(String::new())),
+            ("nyha_class", ColType::StringWithDefault(String::new())),
+            ("overall_risk_level", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

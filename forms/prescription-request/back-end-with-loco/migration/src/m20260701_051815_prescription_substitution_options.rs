@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("allow_brand_substitution", ColType::String),
-            ("allow_generic_substitution", ColType::String),
-            ("allow_dosage_adjustment", ColType::String),
-            ("substitution_notes", ColType::Text),
+            ("allow_brand_substitution", ColType::StringWithDefault(String::new())),
+            ("allow_generic_substitution", ColType::StringWithDefault(String::new())),
+            ("allow_dosage_adjustment", ColType::StringWithDefault(String::new())),
+            ("substitution_notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("prescription_request", ""),

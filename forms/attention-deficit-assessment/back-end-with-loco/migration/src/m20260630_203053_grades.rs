@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("part_a_darkly_shaded_count", ColType::IntegerNull),
-            ("screening_result", ColType::String),
+            ("screening_result", ColType::StringWithDefault("unlikely".to_string())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

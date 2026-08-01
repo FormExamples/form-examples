@@ -16,9 +16,9 @@ impl MigrationTrait for Migration {
             ("right_pta_db", ColType::DoubleNull),
             ("left_pta_db", ColType::DoubleNull),
             ("better_ear_pta_db", ColType::DoubleNull),
-            ("right_hearing_grade", ColType::String),
-            ("left_hearing_grade", ColType::String),
-            ("overall_hearing_grade", ColType::String),
+            ("right_hearing_grade", ColType::StringWithDefault("normal".to_string())),
+            ("left_hearing_grade", ColType::StringWithDefault("normal".to_string())),
+            ("overall_hearing_grade", ColType::StringWithDefault("normal".to_string())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -14,13 +14,13 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("name", ColType::Text),
-            ("postal_address_as_full_text", ColType::Text),
+            ("postal_address_as_full_text", ColType::TextWithDefault(String::new())),
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("postcode", ColType::TextNull),
             ("phone", ColType::TextNull),
             ("email", ColType::TextNull),
             ("ods_code", ColType::TextNull),
-            ("setting", ColType::Text),
+            ("setting", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

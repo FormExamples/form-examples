@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("order_position", ColType::Integer),
-            ("category", ColType::String),
-            ("statement", ColType::Text),
-            ("lawfulness_assessed", ColType::String),
-            ("contradicts_adrt", ColType::String),
+            ("order_position", ColType::IntegerWithDefault(1)),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("statement", ColType::TextWithDefault(String::new())),
+            ("lawfulness_assessed", ColType::StringWithDefault(String::new())),
+            ("contradicts_adrt", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("lpa", ""),

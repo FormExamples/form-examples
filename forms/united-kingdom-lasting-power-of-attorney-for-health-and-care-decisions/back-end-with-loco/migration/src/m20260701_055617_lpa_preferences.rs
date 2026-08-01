@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("order_position", ColType::Integer),
-            ("category", ColType::String),
-            ("statement", ColType::Text),
+            ("order_position", ColType::IntegerWithDefault(1)),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("statement", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("lpa", ""),

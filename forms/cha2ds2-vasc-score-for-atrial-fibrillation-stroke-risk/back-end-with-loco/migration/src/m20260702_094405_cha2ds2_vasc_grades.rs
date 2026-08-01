@@ -21,9 +21,9 @@ impl MigrationTrait for Migration {
             ("vascular_disease_points", ColType::IntegerNull),
             ("sex_points", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
+            ("risk_band", ColType::StringWithDefault(String::new())),
             ("annual_stroke_risk_percent", ColType::DoubleNull),
-            ("anticoagulation_recommendation", ColType::Text),
+            ("anticoagulation_recommendation", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("handicap_level", ColType::String),
-            ("hhies_total_score", ColType::Integer),
-            ("hearing_aid_candidacy", ColType::String),
-            ("left_ear_recommendation", ColType::String),
-            ("right_ear_recommendation", ColType::String),
+            ("handicap_level", ColType::StringWithDefault("no-handicap".to_string())),
+            ("hhies_total_score", ColType::IntegerWithDefault(0)),
+            ("hearing_aid_candidacy", ColType::StringWithDefault(String::new())),
+            ("left_ear_recommendation", ColType::StringWithDefault(String::new())),
+            ("right_ear_recommendation", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

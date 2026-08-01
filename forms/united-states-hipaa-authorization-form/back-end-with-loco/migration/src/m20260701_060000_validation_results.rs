@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("validity_status", ColType::String),
-            ("completeness_score", ColType::Integer),
-            ("completeness_status", ColType::String),
+            ("validity_status", ColType::StringWithDefault(String::new())),
+            ("completeness_score", ColType::IntegerWithDefault(0)),
+            ("completeness_status", ColType::StringWithDefault(String::new())),
             ("validated_at", ColType::TimestampWithTimeZoneNull),
-            ("validator_version", ColType::String),
+            ("validator_version", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("hipaa_authorization", ""),

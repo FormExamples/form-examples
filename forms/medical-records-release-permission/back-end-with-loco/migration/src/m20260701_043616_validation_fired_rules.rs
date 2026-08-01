@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
-            ("domain", ColType::String),
-            ("description", ColType::Text),
-            ("score", ColType::Integer),
+            ("domain", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("score", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("validation_result", ""),

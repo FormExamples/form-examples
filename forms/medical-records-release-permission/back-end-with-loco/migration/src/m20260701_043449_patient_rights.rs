@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("acknowledged_right_to_revoke", ColType::String),
-            ("acknowledged_no_charge_for_access", ColType::String),
-            ("acknowledged_data_protection", ColType::String),
+            ("acknowledged_right_to_revoke", ColType::StringWithDefault(String::new())),
+            ("acknowledged_no_charge_for_access", ColType::StringWithDefault(String::new())),
+            ("acknowledged_data_protection", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("release_form", ""),

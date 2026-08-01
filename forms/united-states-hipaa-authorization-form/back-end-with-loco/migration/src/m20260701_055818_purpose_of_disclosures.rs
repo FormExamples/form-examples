@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("purposes", ColType::Text),
-            ("primary_purpose", ColType::String),
-            ("other_details", ColType::Text),
+            ("primary_purpose", ColType::StringWithDefault(String::new())),
+            ("other_details", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("hipaa_authorization", ""),

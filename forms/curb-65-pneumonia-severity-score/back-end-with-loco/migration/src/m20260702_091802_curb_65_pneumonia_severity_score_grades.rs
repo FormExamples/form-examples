@@ -19,9 +19,9 @@ impl MigrationTrait for Migration {
             ("blood_pressure_score", ColType::IntegerNull),
             ("age_score", ColType::IntegerNull),
             ("total_score", ColType::IntegerNull),
-            ("score_variant", ColType::String),
-            ("risk_band", ColType::String),
-            ("recommended_setting", ColType::Text),
+            ("score_variant", ColType::StringWithDefault(String::new())),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("recommended_setting", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

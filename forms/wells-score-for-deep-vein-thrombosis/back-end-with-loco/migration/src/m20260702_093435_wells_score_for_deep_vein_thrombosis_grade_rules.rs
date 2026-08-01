@@ -15,10 +15,10 @@ impl MigrationTrait for Migration {
             
             ("rule_id", ColType::String),
             ("instrument", ColType::String),
-            ("points", ColType::Integer),
-            ("band", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("points", ColType::IntegerWithDefault(0)),
+            ("band", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("wells_score_for_deep_vein_thrombosis_grade", ""),

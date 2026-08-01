@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("age", ColType::IntegerNull),
-            ("sex", ColType::String),
-            ("ethnicity", ColType::String),
+            ("sex", ColType::StringWithDefault(String::new())),
+            ("ethnicity", ColType::StringWithDefault(String::new())),
             ("townsend_deprivation", ColType::DoubleNull),
             ],
             &[

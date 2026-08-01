@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("eligibility_status", ColType::String),
-            ("absolute_contraindication_count", ColType::Integer),
-            ("relative_contraindication_count", ColType::Integer),
+            ("eligibility_status", ColType::StringWithDefault(String::new())),
+            ("absolute_contraindication_count", ColType::IntegerWithDefault(0)),
+            ("relative_contraindication_count", ColType::IntegerWithDefault(0)),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

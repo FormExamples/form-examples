@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("asa_class", ColType::String),
-            ("wound_class", ColType::String),
-            ("complexity_score", ColType::String),
-            ("overall_risk_level", ColType::String),
+            ("asa_class", ColType::StringWithDefault(String::new())),
+            ("wound_class", ColType::StringWithDefault(String::new())),
+            ("complexity_score", ColType::StringWithDefault(String::new())),
+            ("overall_risk_level", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

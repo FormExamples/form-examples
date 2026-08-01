@@ -13,13 +13,13 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("kind", ColType::String),
-            ("severity", ColType::String),
-            ("quantitative_limit", ColType::String),
-            ("notes", ColType::String),
+            ("kind", ColType::StringWithDefault(String::new())),
+            ("severity", ColType::StringWithDefault(String::new())),
+            ("quantitative_limit", ColType::StringWithDefault(String::new())),
+            ("notes", ColType::StringWithDefault(String::new())),
             ("start_date", ColType::DateNull),
             ("end_date", ColType::DateNull),
-            ("priority_rank", ColType::Integer),
+            ("priority_rank", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("return_to_work", ""),

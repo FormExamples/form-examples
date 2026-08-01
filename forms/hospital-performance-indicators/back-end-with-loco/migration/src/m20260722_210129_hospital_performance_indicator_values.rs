@@ -15,10 +15,10 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("indicator_code", ColType::String),
             ("category_number", ColType::Integer),
-            ("category_title", ColType::String),
-            ("indicator_text", ColType::Text),
+            ("category_title", ColType::StringWithDefault(String::new())),
+            ("indicator_text", ColType::TextWithDefault(String::new())),
             ("indicator_value", ColType::DoubleNull),
-            ("notes", ColType::Text),
+            ("notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("hospital_performance_indicators", "hospital_performance_indicators_id"),

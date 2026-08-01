@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("name", ColType::Text),
-            ("version", ColType::Text),
-            ("owner", ColType::Text),
-            ("status", ColType::Text),
-            ("description", ColType::Text),
+            ("name", ColType::TextWithDefault(String::new())),
+            ("version", ColType::TextWithDefault(String::new())),
+            ("owner", ColType::TextWithDefault(String::new())),
+            ("status", ColType::TextWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

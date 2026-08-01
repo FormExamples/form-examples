@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("name", ColType::Text),
-            ("email", ColType::Text),
-            ("role", ColType::Text),
+            ("name", ColType::TextWithDefault(String::new())),
+            ("email", ColType::TextWithDefault(String::new())),
+            ("role", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

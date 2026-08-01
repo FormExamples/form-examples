@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("kind", ColType::String),
+            ("kind", ColType::StringWithDefault(String::new())),
             ("expiration_date", ColType::DateNull),
-            ("expiration_event", ColType::Text),
+            ("expiration_event", ColType::TextWithDefault(String::new())),
             ("duration_months", ColType::IntegerNull),
-            ("duration_label", ColType::String),
+            ("duration_label", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("hipaa_authorization", ""),

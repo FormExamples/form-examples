@@ -13,7 +13,7 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("status", ColType::Text),
+            ("status", ColType::TextWithDefault("in_progress".to_string())),
             ],
             &[
             ("patient", ""),

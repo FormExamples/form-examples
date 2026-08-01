@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("recipient_name", ColType::String),
-            ("recipient_organization", ColType::String),
-            ("recipient_address", ColType::Text),
-            ("recipient_phone", ColType::String),
-            ("recipient_email", ColType::String),
-            ("recipient_role", ColType::String),
+            ("recipient_name", ColType::StringWithDefault(String::new())),
+            ("recipient_organization", ColType::StringWithDefault(String::new())),
+            ("recipient_address", ColType::TextWithDefault(String::new())),
+            ("recipient_phone", ColType::StringWithDefault(String::new())),
+            ("recipient_email", ColType::StringWithDefault(String::new())),
+            ("recipient_role", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("release_form", ""),

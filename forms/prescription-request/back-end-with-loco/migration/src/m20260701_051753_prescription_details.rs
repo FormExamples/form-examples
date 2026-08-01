@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("request_date", ColType::Date),
-            ("medication_name", ColType::String),
-            ("dosage", ColType::String),
-            ("frequency", ColType::String),
-            ("route_of_administration", ColType::String),
-            ("treatment_instructions", ColType::Text),
+            ("medication_name", ColType::StringWithDefault(String::new())),
+            ("dosage", ColType::StringWithDefault(String::new())),
+            ("frequency", ColType::StringWithDefault(String::new())),
+            ("route_of_administration", ColType::StringWithDefault(String::new())),
+            ("treatment_instructions", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("prescription_request", ""),

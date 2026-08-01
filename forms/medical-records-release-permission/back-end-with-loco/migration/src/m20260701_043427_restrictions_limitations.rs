@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("exclude_hiv", ColType::String),
-            ("exclude_substance_abuse", ColType::String),
-            ("exclude_mental_health", ColType::String),
-            ("exclude_genetic_info", ColType::String),
-            ("exclude_sti", ColType::String),
-            ("additional_restrictions", ColType::Text),
+            ("exclude_hiv", ColType::StringWithDefault(String::new())),
+            ("exclude_substance_abuse", ColType::StringWithDefault(String::new())),
+            ("exclude_mental_health", ColType::StringWithDefault(String::new())),
+            ("exclude_genetic_info", ColType::StringWithDefault(String::new())),
+            ("exclude_sti", ColType::StringWithDefault(String::new())),
+            ("additional_restrictions", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("release_form", ""),

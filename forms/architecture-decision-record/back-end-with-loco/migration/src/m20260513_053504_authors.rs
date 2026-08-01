@@ -12,7 +12,7 @@ impl MigrationTrait for Migration {
             
             ("id", ColType::PkAuto),
             
-            ("name", ColType::String),
+            ("name", ColType::StringWithDefault(String::new())),
             ("email", ColType::StringNull),
             ("phone", ColType::StringNull),
             ("role", ColType::StringNull),

@@ -15,10 +15,10 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("metric_code", ColType::String),
             ("category_number", ColType::Integer),
-            ("category_title", ColType::String),
-            ("metric_text", ColType::Text),
+            ("category_title", ColType::StringWithDefault(String::new())),
+            ("metric_text", ColType::TextWithDefault(String::new())),
             ("metric_value", ColType::DoubleNull),
-            ("notes", ColType::Text),
+            ("notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("hospital_dashboard_metrics", "hospital_dashboard_metrics_id"),

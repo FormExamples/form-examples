@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::Text),
-            ("control_level", ColType::String),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("control_level", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("grade", ""),

@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("full_name", ColType::String),
-            ("email", ColType::String),
-            ("role", ColType::String),
-            ("team_name", ColType::String),
-            ("organisation_name", ColType::String),
+            ("full_name", ColType::StringWithDefault(String::new())),
+            ("email", ColType::StringWithDefault(String::new())),
+            ("role", ColType::StringWithDefault(String::new())),
+            ("team_name", ColType::StringWithDefault(String::new())),
+            ("organisation_name", ColType::StringWithDefault(String::new())),
             ("years_in_agile", ColType::IntegerNull),
             ],
             &[

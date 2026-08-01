@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("smoking_status", ColType::String),
+            ("smoking_status", ColType::StringWithDefault(String::new())),
             ("cigarettes_per_day", ColType::IntegerNull),
             ("years_since_quit", ColType::IntegerNull),
             ("alcohol_units_per_week", ColType::DoubleNull),
-            ("alcohol_frequency", ColType::String),
+            ("alcohol_frequency", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("assessment", ""),

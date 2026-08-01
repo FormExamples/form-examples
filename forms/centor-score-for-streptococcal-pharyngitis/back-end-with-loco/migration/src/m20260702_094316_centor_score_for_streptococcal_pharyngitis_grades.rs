@@ -16,8 +16,8 @@ impl MigrationTrait for Migration {
             ("centor_score", ColType::IntegerNull),
             ("age_modifier", ColType::IntegerNull),
             ("mcisaac_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
-            ("management", ColType::Text),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("management", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

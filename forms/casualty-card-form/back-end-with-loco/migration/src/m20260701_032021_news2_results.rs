@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("total_score", ColType::Integer),
-            ("clinical_response", ColType::Text),
-            ("has_any_single_score_3", ColType::Boolean),
+            ("clinical_response", ColType::TextWithDefault(String::new())),
+            ("has_any_single_score_3", ColType::BooleanWithDefault(false)),
             ("supplemental_oxygen", ColType::String),
             ("scored_at", ColType::TimestampWithTimeZone),
             ],

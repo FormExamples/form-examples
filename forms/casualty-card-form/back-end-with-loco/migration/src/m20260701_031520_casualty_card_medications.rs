@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("name", ColType::Text),
-            ("dose", ColType::Text),
-            ("frequency", ColType::Text),
-            ("sort_order", ColType::Integer),
+            ("name", ColType::TextWithDefault(String::new())),
+            ("dose", ColType::TextWithDefault(String::new())),
+            ("frequency", ColType::TextWithDefault(String::new())),
+            ("sort_order", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("casualty_card", ""),

@@ -15,9 +15,9 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
             ("instrument", ColType::String),
-            ("band", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::String),
+            ("band", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("child_psych_waiting_list_card_grade", ""),

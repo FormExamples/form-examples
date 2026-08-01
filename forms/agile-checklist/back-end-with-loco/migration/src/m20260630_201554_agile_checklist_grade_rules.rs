@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
-            ("section", ColType::String),
-            ("band", ColType::String),
-            ("description", ColType::String),
+            ("section", ColType::StringWithDefault(String::new())),
+            ("band", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("agile_checklist_grade", ""),

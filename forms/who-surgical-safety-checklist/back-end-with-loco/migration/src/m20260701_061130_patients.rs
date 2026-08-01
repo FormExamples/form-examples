@@ -15,7 +15,7 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("name", ColType::String),
             ("birth_date", ColType::DateNull),
-            ("sex", ColType::String),
+            ("sex", ColType::StringWithDefault(String::new())),
             ("united_kingdom_nhs_number", ColType::StringUniq),
             ("medical_record_number", ColType::StringNull),
             ("weight_as_kg", ColType::DoubleNull),

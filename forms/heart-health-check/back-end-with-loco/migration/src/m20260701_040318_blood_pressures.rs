@@ -16,7 +16,7 @@ impl MigrationTrait for Migration {
             ("systolic_bp", ColType::IntegerNull),
             ("systolic_bp_sd", ColType::DoubleNull),
             ("diastolic_bp", ColType::IntegerNull),
-            ("on_bp_treatment", ColType::String),
+            ("on_bp_treatment", ColType::StringWithDefault(String::new())),
             ("number_of_bp_medications", ColType::IntegerNull),
             ],
             &[

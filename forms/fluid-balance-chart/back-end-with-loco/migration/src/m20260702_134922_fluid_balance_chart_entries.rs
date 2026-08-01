@@ -14,9 +14,9 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("entry_at", ColType::TimestampWithTimeZoneNull),
-            ("direction", ColType::String),
-            ("category", ColType::String),
-            ("description", ColType::Text),
+            ("direction", ColType::StringWithDefault(String::new())),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
             ("volume_ml", ColType::DoubleNull),
             ],
             &[

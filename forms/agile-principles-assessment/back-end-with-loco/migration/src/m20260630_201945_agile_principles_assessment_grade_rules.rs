@@ -15,9 +15,9 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
             ("principle_number", ColType::Integer),
-            ("band", ColType::String),
-            ("principle_slug", ColType::String),
-            ("description", ColType::String),
+            ("band", ColType::StringWithDefault(String::new())),
+            ("principle_slug", ColType::StringWithDefault(String::new())),
+            ("description", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("agile_principles_assessment_grade", ""),

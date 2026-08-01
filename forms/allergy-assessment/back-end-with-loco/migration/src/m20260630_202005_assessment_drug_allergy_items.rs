@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("allergen", ColType::String),
-            ("reaction_type", ColType::String),
-            ("severity", ColType::String),
-            ("timing", ColType::String),
-            ("alternatives_tolerated", ColType::Text),
-            ("sort_order", ColType::Integer),
+            ("allergen", ColType::StringWithDefault(String::new())),
+            ("reaction_type", ColType::StringWithDefault(String::new())),
+            ("severity", ColType::StringWithDefault(String::new())),
+            ("timing", ColType::StringWithDefault(String::new())),
+            ("alternatives_tolerated", ColType::TextWithDefault(String::new())),
+            ("sort_order", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("assessment_drug_allergy", ""),

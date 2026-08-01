@@ -15,7 +15,7 @@ impl MigrationTrait for Migration {
             
             ("total_score", ColType::IntegerNull),
             ("max_score", ColType::IntegerNull),
-            ("burden_band", ColType::String),
+            ("burden_band", ColType::StringWithDefault(String::new())),
             ("short_form_score", ColType::IntegerNull),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],

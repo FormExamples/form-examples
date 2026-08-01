@@ -13,13 +13,13 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("movement", ColType::String),
+            ("movement", ColType::StringWithDefault(String::new())),
             ("active_degrees", ColType::IntegerNull),
             ("passive_degrees", ColType::IntegerNull),
             ("normal_degrees", ColType::IntegerNull),
-            ("end_feel", ColType::String),
-            ("pain_on_movement", ColType::String),
-            ("sort_order", ColType::Integer),
+            ("end_feel", ColType::StringWithDefault(String::new())),
+            ("pain_on_movement", ColType::StringWithDefault(String::new())),
+            ("sort_order", ColType::IntegerWithDefault(0)),
             ],
             &[
             ("assessment_range_of_motion", ""),

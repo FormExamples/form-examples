@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("ideation_level", ColType::IntegerNull),
-            ("any_behaviour", ColType::String),
-            ("recent_behaviour", ColType::String),
-            ("risk_tier", ColType::String),
-            ("positive_features", ColType::Text),
-            ("management_recommendation", ColType::Text),
+            ("any_behaviour", ColType::StringWithDefault(String::new())),
+            ("recent_behaviour", ColType::StringWithDefault(String::new())),
+            ("risk_tier", ColType::StringWithDefault(String::new())),
+            ("positive_features", ColType::TextWithDefault(String::new())),
+            ("management_recommendation", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

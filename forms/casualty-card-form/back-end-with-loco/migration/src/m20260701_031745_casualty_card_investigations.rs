@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("blood_tests", ColType::Text),
-            ("urinalysis", ColType::Text),
-            ("pregnancy_test", ColType::Text),
-            ("ecg_performed", ColType::Text),
-            ("ecg_findings", ColType::Text),
-            ("other_investigations", ColType::Text),
+            ("urinalysis", ColType::TextWithDefault(String::new())),
+            ("pregnancy_test", ColType::TextWithDefault(String::new())),
+            ("ecg_performed", ColType::TextWithDefault(String::new())),
+            ("ecg_findings", ColType::TextWithDefault(String::new())),
+            ("other_investigations", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("casualty_card", ""),

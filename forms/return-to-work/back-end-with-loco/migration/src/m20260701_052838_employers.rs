@@ -14,15 +14,15 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("name", ColType::String),
-            ("industry_sector", ColType::String),
+            ("industry_sector", ColType::StringWithDefault(String::new())),
             ("postal_address_as_full_text", ColType::TextNull),
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("postcode", ColType::TextNull),
-            ("occupational_health_contact_name", ColType::Text),
-            ("occupational_health_contact_email", ColType::Text),
-            ("occupational_health_contact_phone", ColType::Text),
-            ("hr_contact_name", ColType::Text),
-            ("hr_contact_email", ColType::Text),
+            ("occupational_health_contact_name", ColType::TextWithDefault(String::new())),
+            ("occupational_health_contact_email", ColType::TextWithDefault(String::new())),
+            ("occupational_health_contact_phone", ColType::TextWithDefault(String::new())),
+            ("hr_contact_name", ColType::TextWithDefault(String::new())),
+            ("hr_contact_email", ColType::TextWithDefault(String::new())),
             ],
             &[
             ]

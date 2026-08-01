@@ -21,7 +21,7 @@ impl MigrationTrait for Migration {
             ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
             ("postcode", ColType::TextNull),
             ("united_kingdom_nhs_number", ColType::StringUniq),
-            ("sex_at_birth", ColType::String),
+            ("sex_at_birth", ColType::StringWithDefault(String::new())),
             ("height_as_cm", ColType::DoubleNull),
             ("weight_as_kg", ColType::DoubleNull),
             ("body_mass_index", ColType::DoubleNull),

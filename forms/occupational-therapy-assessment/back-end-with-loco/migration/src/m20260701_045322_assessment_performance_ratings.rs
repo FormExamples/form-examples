@@ -17,7 +17,7 @@ impl MigrationTrait for Migration {
             ("self_care_performance_score", ColType::DoubleNull),
             ("productivity_performance_score", ColType::DoubleNull),
             ("leisure_performance_score", ColType::DoubleNull),
-            ("performance_notes", ColType::Text),
+            ("performance_notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("assessment", ""),

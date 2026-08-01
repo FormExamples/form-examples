@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("status", ColType::String),
+            ("status", ColType::StringWithDefault(String::new())),
             ("completeness_percent", ColType::IntegerNull),
-            ("subjective_present", ColType::String),
-            ("objective_present", ColType::String),
-            ("assessment_present", ColType::String),
-            ("plan_present", ColType::String),
+            ("subjective_present", ColType::StringWithDefault(String::new())),
+            ("objective_present", ColType::StringWithDefault(String::new())),
+            ("assessment_present", ColType::StringWithDefault(String::new())),
+            ("plan_present", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

@@ -13,12 +13,12 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("patient_signature_confirmed", ColType::String),
+            ("patient_signature_confirmed", ColType::StringWithDefault(String::new())),
             ("signature_date", ColType::DateNull),
-            ("witness_name", ColType::String),
-            ("witness_signature_confirmed", ColType::String),
+            ("witness_name", ColType::StringWithDefault(String::new())),
+            ("witness_signature_confirmed", ColType::StringWithDefault(String::new())),
             ("witness_date", ColType::DateNull),
-            ("parent_guardian_name", ColType::String),
+            ("parent_guardian_name", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("release_form", ""),

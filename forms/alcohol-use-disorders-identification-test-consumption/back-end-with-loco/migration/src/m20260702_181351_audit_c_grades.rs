@@ -14,8 +14,8 @@ impl MigrationTrait for Migration {
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
             ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::String),
-            ("positive_screen", ColType::String),
+            ("risk_band", ColType::StringWithDefault(String::new())),
+            ("positive_screen", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

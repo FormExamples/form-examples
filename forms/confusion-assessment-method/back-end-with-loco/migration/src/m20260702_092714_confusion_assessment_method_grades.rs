@@ -13,14 +13,14 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("classification", ColType::String),
+            ("classification", ColType::StringWithDefault(String::new())),
             ("delirium_present", ColType::BooleanNull),
             ("feature_1_positive", ColType::BooleanNull),
             ("feature_2_positive", ColType::BooleanNull),
             ("feature_3_positive", ColType::BooleanNull),
             ("feature_4_positive", ColType::BooleanNull),
-            ("positive_features", ColType::Text),
-            ("motoric_subtype", ColType::String),
+            ("positive_features", ColType::TextWithDefault(String::new())),
+            ("motoric_subtype", ColType::StringWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

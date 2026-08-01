@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("relationship", ColType::String),
-            ("representative_name", ColType::String),
-            ("representative_authority_description", ColType::Text),
-            ("representative_authority_proof_attached", ColType::String),
+            ("relationship", ColType::StringWithDefault(String::new())),
+            ("representative_name", ColType::StringWithDefault(String::new())),
+            ("representative_authority_description", ColType::TextWithDefault(String::new())),
+            ("representative_authority_proof_attached", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("hipaa_authorization", ""),

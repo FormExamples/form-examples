@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
 
-            ("classification", ColType::String),
-            ("all_criteria_satisfied", ColType::String),
-            ("applicable", ColType::String),
-            ("recommended_pathway", ColType::Text),
+            ("classification", ColType::StringWithDefault(String::new())),
+            ("all_criteria_satisfied", ColType::StringWithDefault(String::new())),
+            ("applicable", ColType::StringWithDefault(String::new())),
+            ("recommended_pathway", ColType::TextWithDefault(String::new())),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[

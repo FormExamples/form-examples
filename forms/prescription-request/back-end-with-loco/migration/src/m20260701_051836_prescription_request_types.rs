@@ -13,9 +13,9 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("is_new_prescription", ColType::String),
-            ("is_emergency", ColType::String),
-            ("additional_notes", ColType::Text),
+            ("is_new_prescription", ColType::StringWithDefault(String::new())),
+            ("is_emergency", ColType::StringWithDefault(String::new())),
+            ("additional_notes", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("prescription_request", ""),

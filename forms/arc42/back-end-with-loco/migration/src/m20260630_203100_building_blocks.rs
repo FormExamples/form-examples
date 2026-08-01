@@ -13,10 +13,10 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("ordinal", ColType::Integer),
-            ("name", ColType::Text),
-            ("responsibility", ColType::Text),
-            ("interfaces", ColType::Text),
+            ("ordinal", ColType::IntegerWithDefault(0)),
+            ("name", ColType::TextWithDefault(String::new())),
+            ("responsibility", ColType::TextWithDefault(String::new())),
+            ("interfaces", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("arc42_documentation", ""),

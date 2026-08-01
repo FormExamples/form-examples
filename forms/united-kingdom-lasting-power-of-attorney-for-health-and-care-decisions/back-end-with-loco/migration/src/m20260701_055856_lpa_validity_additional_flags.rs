@@ -14,10 +14,10 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("flag_id", ColType::String),
-            ("category", ColType::String),
-            ("priority", ColType::String),
-            ("description", ColType::Text),
-            ("suggested_action", ColType::Text),
+            ("category", ColType::StringWithDefault(String::new())),
+            ("priority", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("suggested_action", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("lpa_validity", ""),

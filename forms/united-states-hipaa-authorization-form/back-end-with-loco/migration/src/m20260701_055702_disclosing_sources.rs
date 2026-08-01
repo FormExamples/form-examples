@@ -13,11 +13,11 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("identification_mode", ColType::String),
-            ("specific_persons_or_organizations", ColType::Text),
-            ("class_description", ColType::Text),
-            ("is_va_facility", ColType::String),
-            ("is_part_2_program", ColType::String),
+            ("identification_mode", ColType::StringWithDefault(String::new())),
+            ("specific_persons_or_organizations", ColType::TextWithDefault(String::new())),
+            ("class_description", ColType::TextWithDefault(String::new())),
+            ("is_va_facility", ColType::StringWithDefault(String::new())),
+            ("is_part_2_program", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("hipaa_authorization", ""),

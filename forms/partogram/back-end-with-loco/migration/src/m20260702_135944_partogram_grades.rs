@@ -13,7 +13,7 @@ impl MigrationTrait for Migration {
             ("id", ColType::PkAuto),
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             
-            ("progress_status", ColType::String),
+            ("progress_status", ColType::StringWithDefault(String::new())),
             ("latest_dilatation_cm", ColType::DoubleNull),
             ("graded_at", ColType::TimestampWithTimeZone),
             ],

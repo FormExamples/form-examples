@@ -14,7 +14,7 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("global_rating_of_change", ColType::IntegerNull),
-            ("self_rated_health", ColType::String),
+            ("self_rated_health", ColType::StringWithDefault(String::new())),
             ],
             &[
             ("outpatient_outcome", ""),

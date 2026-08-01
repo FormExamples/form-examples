@@ -14,11 +14,11 @@ impl MigrationTrait for Migration {
             
             ("deleted_at", ColType::TimestampWithTimeZoneNull),
             ("rule_id", ColType::String),
-            ("severity", ColType::String),
-            ("rule_family", ColType::String),
-            ("source_citation", ColType::String),
-            ("description", ColType::Text),
-            ("suggested_correction", ColType::Text),
+            ("severity", ColType::StringWithDefault(String::new())),
+            ("rule_family", ColType::StringWithDefault(String::new())),
+            ("source_citation", ColType::StringWithDefault(String::new())),
+            ("description", ColType::TextWithDefault(String::new())),
+            ("suggested_correction", ColType::TextWithDefault(String::new())),
             ],
             &[
             ("lpa_validity", ""),

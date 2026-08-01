@@ -1,0 +1,296 @@
+#!/usr/bin/env python3
+"""bin/loco-migration-defaults — mirror each form's `sql/` column defaults into
+its `back-end-with-loco/migration/`.
+
+`sql/` is the source of truth for every form's schema (see `AGENTS/sql.md`), and
+it declares most columns `NOT NULL DEFAULT <value>`. The Loco crates are
+bootstrapped by `cargo loco generate scaffold`, whose column DSL has no syntax
+for defaults, so every generated migration declares those same columns `NOT
+NULL` with no default at all. The back-end schema therefore disagrees with the
+schema it is supposed to mirror, and any insert that omits a column fails with a
+not-null violation instead of taking the documented default.
+
+This tool closes that gap by rewriting the plain `ColType` entries to their
+`*WithDefault` counterparts:
+
+    ("status",     ColType::String)   ->  ColType::StringWithDefault("draft".to_string())
+    ("vte_notes",  ColType::Text)     ->  ColType::TextWithDefault(String::new())
+    ("sort_order", ColType::Integer)  ->  ColType::IntegerWithDefault(0)
+
+Only columns that `sql/` declares `NOT NULL DEFAULT <literal>` are touched, and
+only where the migration's own column is a non-null scalar of a matching type.
+Defaults expressed as SQL function calls (`now()`, `gen_random_uuid()`) are
+handled by Loco itself and are ignored here.
+
+Tables are paired between the two representations by name, allowing for the
+singular/plural convention (`CREATE TABLE soap_note` <-> `create_table(m,
+"soap_notes")`). Columns are then matched by name *within* a paired table, so
+that a column name appearing in several tables with different defaults — such as
+`status` — is never crossed over.
+
+Anything the tool cannot confidently rewrite is reported rather than guessed at:
+
+  - a column `sql/` declares NOT NULL but the migration declares nullable
+    (a nullability divergence, which is a separate defect — not fixed here)
+  - a migration `ColType` with no `*WithDefault` counterpart
+  - a table in one representation with no counterpart in the other
+
+The tool is idempotent: a column already carrying a `*WithDefault` is left
+alone, so re-running changes nothing.
+
+Note that `cargo loco generate scaffold` still cannot express defaults, so
+re-scaffolding a crate from its `back-end-with-loco-setup` script reintroduces
+the divergence. Re-run this tool afterwards.
+
+Usage:
+  bin/loco-migration-defaults <slug>…            # named forms
+  bin/loco-migration-defaults --all              # every form's Loco crate
+  bin/loco-migration-defaults --dry-run --all    # show what would change
+  bin/loco-migration-defaults --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+# A `sql/` column declared NOT NULL with a literal default. Function-call
+# defaults (now(), gen_random_uuid()) deliberately do not match.
+SQL_COLUMN = re.compile(
+    r"^\s{4}([a-z_0-9]+)\s+"
+    r"([A-Z]+(?:\s+[A-Z]+)*(?:\([0-9, ]+\))?)\s+"
+    r"NOT\s+NULL\s+DEFAULT\s+"
+    r"('(?:[^']*)'|-?[0-9]+(?:\.[0-9]+)?|true|false)"
+    r"(?=[\s,)]|$)",
+    re.M | re.I,
+)
+
+SQL_TABLE = re.compile(r"^CREATE TABLE\s+([a-z_0-9]+)\s*\(", re.M | re.I)
+
+# One `("col", ColType::Variant)` entry inside a create_table column list.
+MIG_COLUMN = re.compile(r'\("([a-z_0-9]+)",\s*ColType::([A-Za-z]+)(\([^)]*\))?\)')
+
+MIG_TABLE = re.compile(r'create_table\(\s*m\s*,\s*"([a-z_0-9]+)"')
+
+# Migration ColType -> (WithDefault variant, how to render the literal).
+# Only non-null scalar types are listed; a nullable column is never given a
+# default by this tool.
+RENDERERS: dict[str, tuple[str, str]] = {
+    "String": ("StringWithDefault", "str"),
+    "Text": ("TextWithDefault", "str"),
+    "Integer": ("IntegerWithDefault", "int"),
+    "SmallInteger": ("SmallIntegerWithDefault", "int"),
+    "BigInteger": ("BigIntegerWithDefault", "int"),
+    "Double": ("DoubleWithDefault", "float"),
+    "Float": ("FloatWithDefault", "float"),
+    "Boolean": ("BooleanWithDefault", "bool"),
+}
+
+# Tables Loco owns outright; they have no `sql/` counterpart by design.
+LOCO_OWNED = {"users"}
+
+
+class Skipped(Exception):
+    """A column that cannot be rewritten confidently."""
+
+
+def render(literal: str, kind: str) -> str:
+    """Render a SQL literal as the Rust argument to a `*WithDefault` variant."""
+    if literal.startswith("'"):
+        text = literal[1:-1]
+        if kind != "str":
+            raise Skipped(f"string default {literal!r} on a {kind} column")
+        return "String::new()" if text == "" else f'"{text}".to_string()'
+    if kind == "str":
+        raise Skipped(f"non-string default {literal!r} on a text column")
+    if kind == "bool":
+        if literal.lower() not in ("true", "false"):
+            raise Skipped(f"non-boolean default {literal!r}")
+        return literal.lower()
+    if kind == "int":
+        if "." in literal:
+            raise Skipped(f"fractional default {literal!r} on an integer column")
+        return literal
+    return literal if "." in literal else f"{literal}.0"
+
+
+def sql_defaults(form: pathlib.Path) -> dict[str, dict[str, str]]:
+    """Map each `sql/` table to its columns carrying a literal default."""
+    tables: dict[str, dict[str, str]] = {}
+    for path in sorted((form / "sql").glob("*.sql")):
+        if path.name == "schema.sql":  # the combined file duplicates the rest
+            continue
+        text = path.read_text(errors="replace")
+        # Split the file into per-CREATE-TABLE spans.
+        marks = [(m.start(), m.group(1).lower()) for m in SQL_TABLE.finditer(text)]
+        for index, (start, name) in enumerate(marks):
+            end = marks[index + 1][0] if index + 1 < len(marks) else len(text)
+            body = text[start:end]
+            # Record every table, even one with no defaulted columns, so that
+            # table pairing can tell "no such table" from "nothing to do".
+            columns = {m.group(1): m.group(3) for m in SQL_COLUMN.finditer(body)}
+            tables.setdefault(name, {}).update(columns)
+    return tables
+
+
+IRREGULAR_PLURALS = {"people": "person"}
+
+
+def pair(mig_table: str, sql_tables: dict[str, dict[str, str]]) -> str | None:
+    """Find the `sql/` table a migration table corresponds to.
+
+    Loco pluralises the table name; `sql/` keeps it singular. Most are a plain
+    `-s`, but the fleet also contains `-y`/`-ies`, Greek `-is`/`-es`
+    (`thrombosis` -> `thromboses`, `prophylaxis` -> `prophylaxes`), and the
+    irregular `person` -> `people`.
+    """
+    suffix = mig_table.rsplit("_", 1)[-1]
+    for candidate in (
+        mig_table,
+        mig_table[:-1] if mig_table.endswith("s") else None,
+        mig_table[:-3] + "y" if mig_table.endswith("ies") else None,
+        mig_table[:-2] + "is" if mig_table.endswith("es") else None,
+        mig_table[:-2] if mig_table.endswith("es") else None,
+        mig_table[: -len(suffix)] + IRREGULAR_PLURALS[suffix]
+        if suffix in IRREGULAR_PLURALS
+        else None,
+    ):
+        if candidate and candidate in sql_tables:
+            return candidate
+    return None
+
+
+def process_form(form: pathlib.Path, apply: bool) -> tuple[int, list[str]]:
+    """Rewrite one form's migrations. Returns (columns changed, notes)."""
+    migration_dir = form / "back-end-with-loco" / "migration" / "src"
+    if not migration_dir.is_dir() or not (form / "sql").is_dir():
+        return 0, []
+
+    sql_tables = sql_defaults(form)
+    changed = 0
+    notes: list[str] = []
+
+    for path in sorted(migration_dir.glob("*.rs")):
+        text = original = path.read_text()
+        marks = [(m.start(), m.group(1)) for m in MIG_TABLE.finditer(text)]
+        # Rewrite from the last table backwards so earlier spans stay valid.
+        for index in range(len(marks) - 1, -1, -1):
+            start, mig_name = marks[index]
+            end = marks[index + 1][0] if index + 1 < len(marks) else len(text)
+            if mig_name in LOCO_OWNED:
+                continue
+            sql_name = pair(mig_name, sql_tables)
+            if sql_name is None:
+                notes.append(f"{path.name}: table {mig_name!r} has no sql/ counterpart")
+                continue
+            defaults = sql_tables[sql_name]
+            block = text[start:end]
+
+            def replace(match: re.Match[str]) -> str:
+                nonlocal changed
+                column, coltype, args = match.group(1), match.group(2), match.group(3)
+                if coltype.endswith("WithDefault") or column not in defaults:
+                    return match.group(0)
+                if coltype not in RENDERERS:
+                    if not coltype.endswith("Null"):
+                        notes.append(
+                            f"{path.name}: {sql_name}.{column} is ColType::{coltype}, "
+                            "which has no WithDefault counterpart"
+                        )
+                    else:
+                        notes.append(
+                            f"{path.name}: {sql_name}.{column} is NOT NULL in sql/ but "
+                            f"ColType::{coltype} in the migration (nullability divergence)"
+                        )
+                    return match.group(0)
+                variant, kind = RENDERERS[coltype]
+                try:
+                    value = render(defaults[column], kind)
+                except Skipped as exc:
+                    notes.append(f"{path.name}: {sql_name}.{column}: {exc}")
+                    return match.group(0)
+                changed += 1
+                inner = f"{args[1:-1]}, {value}" if args else value
+                return f'("{column}", ColType::{variant}({inner}))'
+
+            text = text[:start] + MIG_COLUMN.sub(replace, block) + text[end:]
+
+        if apply and text != original:
+            path.write_text(text)
+
+    return changed, notes
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Mirror sql/ column defaults into each form's Loco migration."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    parser.add_argument(
+        "--verbose", action="store_true", help="print every note, not a summary"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(p for p in FORMS.iterdir() if (p / "sql").is_dir())
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[tuple[str, int]] = []
+    all_notes: list[str] = []
+
+    for form in forms:
+        if not form.is_dir():
+            print(f"no such form: {form.name}", file=sys.stderr)
+            return 2
+        count, notes = process_form(form, apply)
+        all_notes.extend(f"{form.name}: {note}" for note in notes)
+        if count:
+            drifted.append((form.name, count))
+            if args.verbose or not args.all:
+                verb = "would gain" if not apply else "gained"
+                print(f"{form.name}: {count} column(s) {verb} a default")
+
+    if args.verbose:
+        for note in all_notes:
+            print(f"  note: {note}")
+
+    total = sum(count for _, count in drifted)
+    if args.check:
+        if drifted:
+            print(
+                f"migration defaults stale for {len(drifted)} form(s), "
+                f"{total} column(s) (run: bin/loco-migration-defaults --all)"
+            )
+            for name, count in drifted[:10]:
+                print(f"  {name} ({count})")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"migration defaults mirror sql/ ({len(forms)} forms)")
+        return 0
+
+    verb = "would gain" if args.dry_run else "gained"
+    print(f"{len(drifted)} form(s), {total} column(s) {verb} a default")
+    if all_notes and not args.verbose:
+        print(f"({len(all_notes)} note(s); re-run with --verbose to see them)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
