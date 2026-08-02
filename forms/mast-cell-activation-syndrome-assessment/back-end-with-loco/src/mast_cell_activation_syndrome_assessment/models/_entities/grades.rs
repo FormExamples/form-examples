@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub total_symptom_score: i32,
     pub dermatological_score: i32,
@@ -21,7 +21,7 @@ pub struct Model {
     pub severity_level: String,
     pub trigger_count: i32,
     pub graded_at: DateTimeWithTimeZone,
-    pub assessment_id: i32,
+    pub assessment_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

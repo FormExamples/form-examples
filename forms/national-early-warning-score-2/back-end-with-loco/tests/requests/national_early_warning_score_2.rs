@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_national_early_warning_score_2s() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/national_early_warning_score_2s/").await;
+        let res = request.get("/api/national_early_warning_score_2s").await;
         assert_eq!(res.status_code(), 200);
 
         // you can assert content like this:

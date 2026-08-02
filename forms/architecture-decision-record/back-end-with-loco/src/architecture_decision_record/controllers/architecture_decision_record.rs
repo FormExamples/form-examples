@@ -23,8 +23,8 @@ use crate::models::_entities::{
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 struct Params {
-    author_id: i32,
-    organization_id: i32,
+    author_id: i64,
+    organization_id: i64,
     slug: Option<String>,
     number: Option<i32>,
     title: String,

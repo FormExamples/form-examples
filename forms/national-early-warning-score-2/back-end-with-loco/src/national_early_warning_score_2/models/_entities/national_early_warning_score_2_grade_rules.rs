@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub rule_id: String,
     pub instrument: String,
@@ -17,7 +17,7 @@ pub struct Model {
     pub points: Option<i32>,
     pub category: String,
     pub description: String,
-    pub national_early_warning_score_2_grade_id: i32,
+    pub national_early_warning_score_2_grade_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

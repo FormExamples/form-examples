@@ -9,14 +9,14 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub total_score: Option<i32>,
     pub risk_band: String,
     #[sea_orm(column_type = "Text")]
     pub prophylaxis_recommendation: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub caprini_venous_thromboembolism_risk_assessment_id: i32,
+    pub caprini_venous_thromboembolism_risk_assessment_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub cut_down_point: Option<i32>,
     pub annoyed_point: Option<i32>,
@@ -18,7 +18,7 @@ pub struct Model {
     pub total_score: Option<i32>,
     pub interpretation: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub cage_alcohol_questionnaire_id: i32,
+    pub cage_alcohol_questionnaire_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

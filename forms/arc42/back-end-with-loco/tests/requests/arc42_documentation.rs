@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_arc42_documentations() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/arc42_documentations/").await;
+        let res = request.get("/api/arc42_documentations").await;
         assert_eq!(res.status_code(), 200);
 
         // you can assert content like this:

@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_curb_65_pneumonia_severity_score_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/curb_65_pneumonia_severity_score_grade_rules/").await;
+        let res = request.get("/api/curb_65_pneumonia_severity_score_grade_rules").await;
         assert_eq!(res.status_code(), 200);
 
         // you can assert content like this:

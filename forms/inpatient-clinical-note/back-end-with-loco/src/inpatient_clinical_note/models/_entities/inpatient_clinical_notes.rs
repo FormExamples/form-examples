@@ -13,7 +13,7 @@ pub struct Model {
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Status.
@@ -291,11 +291,11 @@ pub struct Model {
     /// Signed at.
     pub signed_at: Option<DateTimeWithTimeZone>,
     /// Patient ID.
-    pub patient_id: i32,
+    pub patient_id: i64,
     /// Author ID.
-    pub author_id: i32,
+    pub author_id: i64,
     /// Responsible consultant ID.
-    pub responsible_consultant_id: i32,
+    pub responsible_consultant_id: i64,
 }
 
 /// Relation.

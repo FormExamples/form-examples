@@ -9,12 +9,12 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub fft_response: String,
     #[sea_orm(column_type = "Text")]
     pub fft_comment: String,
-    pub outpatient_outcome_id: i32,
+    pub outpatient_outcome_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

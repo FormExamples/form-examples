@@ -13,7 +13,7 @@ pub struct Model {
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Rule ID.
@@ -27,7 +27,7 @@ pub struct Model {
     /// Description.
     pub description: String,
     /// Medical operation note grade ID.
-    pub medical_operation_note_grade_id: i32,
+    pub medical_operation_note_grade_id: i64,
 }
 
 /// Relation.

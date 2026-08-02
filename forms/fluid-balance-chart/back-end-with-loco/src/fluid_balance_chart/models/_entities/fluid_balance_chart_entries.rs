@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub entry_at: Option<DateTimeWithTimeZone>,
     pub direction: String,
@@ -18,7 +18,7 @@ pub struct Model {
     pub description: String,
     #[sea_orm(column_type = "Double", nullable)]
     pub volume_ml: Option<f64>,
-    pub fluid_balance_chart_id: i32,
+    pub fluid_balance_chart_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

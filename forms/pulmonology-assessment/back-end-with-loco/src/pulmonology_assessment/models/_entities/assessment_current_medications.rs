@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub inhaler_use: String,
     pub inhaler_technique_assessed: String,
@@ -30,7 +30,7 @@ pub struct Model {
     pub medication_adherence: String,
     #[sea_orm(column_type = "Text")]
     pub additional_notes: String,
-    pub assessment_id: i32,
+    pub assessment_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

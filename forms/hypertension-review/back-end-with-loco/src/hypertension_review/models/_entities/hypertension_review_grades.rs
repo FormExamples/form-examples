@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub control_status: String,
     pub hypertension_stage: String,
@@ -21,7 +21,7 @@ pub struct Model {
     pub home_target_systolic: Option<i32>,
     pub home_target_diastolic: Option<i32>,
     pub graded_at: DateTimeWithTimeZone,
-    pub hypertension_review_id: i32,
+    pub hypertension_review_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

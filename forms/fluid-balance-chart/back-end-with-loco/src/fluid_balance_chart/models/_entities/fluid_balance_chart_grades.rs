@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double")]
     pub total_intake_ml: f64,
@@ -27,7 +27,7 @@ pub struct Model {
     pub urine_output_ml_kg_h: Option<f64>,
     pub fluid_status: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub fluid_balance_chart_id: i32,
+    pub fluid_balance_chart_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

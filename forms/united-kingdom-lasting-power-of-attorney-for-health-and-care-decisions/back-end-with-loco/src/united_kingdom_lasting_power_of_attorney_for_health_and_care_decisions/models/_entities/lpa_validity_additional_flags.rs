@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub flag_id: String,
     pub category: String,
@@ -18,7 +18,7 @@ pub struct Model {
     pub description: String,
     #[sea_orm(column_type = "Text")]
     pub suggested_action: String,
-    pub lpa_validity_id: i32,
+    pub lpa_validity_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

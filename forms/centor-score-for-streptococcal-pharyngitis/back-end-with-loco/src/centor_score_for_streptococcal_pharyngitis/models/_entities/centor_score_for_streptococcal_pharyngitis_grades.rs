@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub centor_score: Option<i32>,
     pub age_modifier: Option<i32>,
@@ -18,7 +18,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub management: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub centor_score_for_streptococcal_pharyngitis_id: i32,
+    pub centor_score_for_streptococcal_pharyngitis_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

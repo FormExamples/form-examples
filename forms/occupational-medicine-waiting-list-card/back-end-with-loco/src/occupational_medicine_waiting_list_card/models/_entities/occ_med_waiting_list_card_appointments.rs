@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub appointment_date: Option<Date>,
     pub appointment_time: Option<String>,
@@ -27,7 +27,7 @@ pub struct Model {
     pub travel_notes: String,
     #[sea_orm(column_type = "Text")]
     pub access_notes: String,
-    pub occ_med_waiting_list_card_id: i32,
+    pub occ_med_waiting_list_card_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

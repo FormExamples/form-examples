@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub acknowledged_right_to_revoke: String,
     pub acknowledged_revocation_procedure: String,
@@ -17,7 +17,7 @@ pub struct Model {
     pub acknowledged_redisclosure_warning: String,
     pub acknowledged_right_to_copy: String,
     pub acknowledged_right_to_inspect_disclosed: String,
-    pub hipaa_authorization_id: i32,
+    pub hipaa_authorization_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

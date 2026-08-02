@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub exclude_hiv: String,
     pub exclude_substance_abuse: String,
@@ -18,7 +18,7 @@ pub struct Model {
     pub exclude_sti: String,
     #[sea_orm(column_type = "Text")]
     pub additional_restrictions: String,
-    pub release_form_id: i32,
+    pub release_form_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

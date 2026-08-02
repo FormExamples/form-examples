@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub review_status: String,
     pub anticholinergic_burden_score: i32,
@@ -19,7 +19,7 @@ pub struct Model {
     pub medicine_count: i32,
     pub regular_medicine_count: i32,
     pub graded_at: DateTimeWithTimeZone,
-    pub structured_medication_review_id: i32,
+    pub structured_medication_review_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

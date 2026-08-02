@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub kind: String,
     pub expiration_date: Option<Date>,
@@ -17,7 +17,7 @@ pub struct Model {
     pub expiration_event: String,
     pub duration_months: Option<i32>,
     pub duration_label: String,
-    pub hipaa_authorization_id: i32,
+    pub hipaa_authorization_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

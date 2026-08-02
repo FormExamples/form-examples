@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub egg_allergy: String,
     pub gelatin_allergy: String,
@@ -21,7 +21,7 @@ pub struct Model {
     pub previous_anaphylaxis: String,
     #[sea_orm(column_type = "Text")]
     pub anaphylaxis_details: String,
-    pub assessment_id: i32,
+    pub assessment_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

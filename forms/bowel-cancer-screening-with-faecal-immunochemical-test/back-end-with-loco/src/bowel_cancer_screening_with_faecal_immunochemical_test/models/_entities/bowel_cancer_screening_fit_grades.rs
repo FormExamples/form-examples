@@ -9,14 +9,14 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub result_class: String,
     pub management_action: String,
     pub symptomatic_pathway: bool,
     pub status: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub bowel_cancer_screening_fit_id: i32,
+    pub bowel_cancer_screening_fit_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

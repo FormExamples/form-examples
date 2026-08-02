@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Text")]
     pub blood_tests: String,
@@ -23,7 +23,7 @@ pub struct Model {
     pub ecg_findings: String,
     #[sea_orm(column_type = "Text")]
     pub other_investigations: String,
-    pub casualty_card_id: i32,
+    pub casualty_card_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

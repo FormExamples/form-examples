@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double", nullable)]
     pub serum_creatinine_mg_dl: Option<f64>,
@@ -18,7 +18,7 @@ pub struct Model {
     pub g_stage: String,
     pub g_stage_label: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub estimated_glomerular_filtration_rate_calculator_id: i32,
+    pub estimated_glomerular_filtration_rate_calculator_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double", nullable)]
     pub bilirubin_mg_dl: Option<f64>,
@@ -23,7 +23,7 @@ pub struct Model {
     #[sea_orm(column_type = "Double", nullable)]
     pub estimated_mortality_percent: Option<f64>,
     pub graded_at: DateTimeWithTimeZone,
-    pub model_for_end_stage_liver_disease_score_id: i32,
+    pub model_for_end_stage_liver_disease_score_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

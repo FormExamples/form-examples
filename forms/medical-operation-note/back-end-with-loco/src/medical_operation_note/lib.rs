@@ -28,7 +28,6 @@ pub mod controllers;
 pub mod views;
 pub mod data;
 pub mod engine;
-pub mod initializers;
 pub mod mailers;
 pub mod models;
 pub mod tasks;

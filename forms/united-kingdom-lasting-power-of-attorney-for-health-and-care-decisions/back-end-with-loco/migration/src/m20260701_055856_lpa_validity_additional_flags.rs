@@ -20,7 +20,7 @@ impl MigrationTrait for Migration {
             ("suggested_action", ColType::TextWithDefault(String::new())),
             ],
             &[
-            ("lpa_validity", ""),
+            ("lpa_validities", ""),
             ]
         ).await
     }

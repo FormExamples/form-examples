@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_cha2ds2_vascs() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/cha2ds2_vascs/").await;
+        let res = request.get("/api/cha2ds2_vascs").await;
         assert_eq!(res.status_code(), 200);
 
         // you can assert content like this:

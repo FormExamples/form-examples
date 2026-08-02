@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub eye_score: Option<i32>,
     pub verbal_score: Option<i32>,
@@ -21,7 +21,7 @@ pub struct Model {
     pub pupil_reactivity_score: Option<i32>,
     pub gcs_p: Option<i32>,
     pub graded_at: DateTimeWithTimeZone,
-    pub glasgow_coma_scale_id: i32,
+    pub glasgow_coma_scale_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub signer_role: String,
     pub signer_id: Option<Uuid>,
@@ -22,7 +22,7 @@ pub struct Model {
     pub witness_address: String,
     pub witness_signed_at: Option<DateTimeWithTimeZone>,
     pub witness_is_attorney: String,
-    pub lpa_id: i32,
+    pub lpa_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

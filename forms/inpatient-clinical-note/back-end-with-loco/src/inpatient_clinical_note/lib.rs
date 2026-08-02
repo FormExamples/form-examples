@@ -26,7 +26,6 @@ pub mod views;
 pub mod data;
 pub mod engine;
 pub mod grading;
-pub mod initializers;
 pub mod mailers;
 pub mod models;
 pub mod tasks;

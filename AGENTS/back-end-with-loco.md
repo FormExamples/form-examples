@@ -19,12 +19,12 @@ Slug: back-end-with-loco
 | --------------------------------------------------- | ---------------- | ------------------------------------------------ |
 | [Rust](https://rust-lang.org/)                      | 1.96+ (ed. 2024) | Systems programming language                     |
 | [axum](https://crates.io/crates/axum)               | 0.8              | Web application framework                        |
-| [Loco](https://loco.rs/)                            | 0.16             | Rails-like framework on axum                     |
-| [SeaORM](https://www.sea-ql.org/SeaORM/)            | 1.1              | Object relational mapper                         |
+| [Loco](https://loco.rs/)                            | 1.0.1            | Rails-like framework on axum                     |
+| [SeaORM](https://www.sea-ql.org/SeaORM/)            | 2.0              | Object relational mapper                         |
 | [PostgreSQL](https://www.postgresql.org/)           | 18.3             | Database server                                  |
 | [serde](https://serde.rs/)                          | 1.x              | Serialization with `rename_all = "camelCase"`    |
-| [uuid](https://crates.io/crates/uuid)               | 1.6              | UUIDv4 primary keys                              |
-| [tokio](https://tokio.rs/)                          | 1.45             | Async runtime (rt-multi-thread)                  |
+| [uuid](https://crates.io/crates/uuid)               | 1.24             | UUIDv4 primary keys                              |
+| [tokio](https://tokio.rs/)                          | 1.53             | Async runtime (rt-multi-thread)                  |
 | [chrono](https://crates.io/crates/chrono)           | 0.4              | Timestamps with serde support                    |
 | [Assertables](https://crates.io/crates/assertables) | 9.8              | Assertion testing macros                         |
 | [Criterion](https://crates.io/crates/criterion)     | 0.8.2            | Benchmarks                                       |

@@ -14,7 +14,7 @@ pub struct Model {
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Metric code.
@@ -33,7 +33,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub notes: String,
     /// Hospital dashboard metrics ID.
-    pub hospital_dashboard_metrics_id: i32,
+    pub hospital_dashboard_metrics_id: i64,
 }
 
 /// Relation.

@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub heart_rate: Option<i32>,
     pub systolic_bp: Option<i32>,
@@ -36,7 +36,7 @@ pub struct Model {
     pub capillary_refill_time: String,
     #[sea_orm(column_type = "Double", nullable)]
     pub weight: Option<f64>,
-    pub casualty_card_id: i32,
+    pub casualty_card_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

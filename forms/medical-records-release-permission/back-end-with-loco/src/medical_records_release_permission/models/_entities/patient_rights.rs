@@ -9,12 +9,12 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub acknowledged_right_to_revoke: String,
     pub acknowledged_no_charge_for_access: String,
     pub acknowledged_data_protection: String,
-    pub release_form_id: i32,
+    pub release_form_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

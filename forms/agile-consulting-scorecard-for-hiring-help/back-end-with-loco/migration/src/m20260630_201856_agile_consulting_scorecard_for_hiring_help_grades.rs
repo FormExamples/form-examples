@@ -27,7 +27,7 @@ impl MigrationTrait for Migration {
             ("graded_at", ColType::TimestampWithTimeZone),
             ],
             &[
-            ("agile_consulting_scorecard_for_hiring_help", ""),
+            ("agile_consulting_scorecard_for_hiring_helps", ""),
             ]
         ).await
     }

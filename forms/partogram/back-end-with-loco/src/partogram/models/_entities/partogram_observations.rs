@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub observed_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double", nullable)]
@@ -37,7 +37,7 @@ pub struct Model {
     pub oxytocin_rate: Option<f64>,
     #[sea_orm(column_type = "Text")]
     pub drugs_and_fluids: String,
-    pub partogram_id: i32,
+    pub partogram_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

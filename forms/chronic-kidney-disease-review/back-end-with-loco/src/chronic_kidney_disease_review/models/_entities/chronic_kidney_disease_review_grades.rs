@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub gfr_category: String,
     pub albuminuria_category: String,
@@ -20,7 +20,7 @@ pub struct Model {
     pub blood_pressure_at_target: Option<bool>,
     pub completeness_score: Option<i32>,
     pub graded_at: DateTimeWithTimeZone,
-    pub chronic_kidney_disease_review_id: i32,
+    pub chronic_kidney_disease_review_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

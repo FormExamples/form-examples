@@ -13,7 +13,7 @@ pub struct Model {
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     /// Slug.
     pub slug: String,
     /// Number.
@@ -61,9 +61,9 @@ pub struct Model {
     /// Signed off at.
     pub signed_off_at: Option<DateTimeWithTimeZone>,
     /// Author ID.
-    pub author_id: i32,
+    pub author_id: i64,
     /// Organization ID.
-    pub organization_id: i32,
+    pub organization_id: i64,
 }
 
 /// Relation.

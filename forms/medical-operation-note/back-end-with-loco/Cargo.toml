@@ -10,28 +10,28 @@ default-run = "medical_operation_note-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-loco-rs = { version = "0.16", default-features = false, features = [
-  "auth_jwt",
-  "bg_pg",
+loco-rs = { version = "1.0.1", default-features = false, features = [
+  "auth",
   "cache_inmem",
   "cli",
   "with-db",
+  "worker",
 ] }
 
 [dependencies]
 loco-rs = { workspace = true  }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
-tokio = { version = "1.52", default-features = false, features = [
+tokio = { version = "1.53", default-features = false, features = [
   "rt-multi-thread",
 ] }
 async-trait = { version = "0.1" }
 axum = { version = "0.8" }
 tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
-regex = { version = "1.12" }
+regex = { version = "1.13" }
 migration = { path = "migration" }
-sea-orm = { version = "1.1", features = [
+sea-orm = { version = "2.0", features = [
   "sqlx-sqlite",
   "sqlx-postgres",
   "runtime-tokio-rustls",
@@ -39,7 +39,7 @@ sea-orm = { version = "1.1", features = [
 ] }
 chrono = { version = "0.4" }
 validator = { version = "0.20" }
-uuid = { version = "1.23", features = ["v4"] }
+uuid = { version = "1.24", features = ["v4"] }
 include_dir = { version = "0.7" }
 # view engine i18n
 fluent-templates = { version = "0.13", features = ["tera"] }

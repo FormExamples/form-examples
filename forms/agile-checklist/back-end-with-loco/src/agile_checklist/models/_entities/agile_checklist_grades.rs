@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub answered_count: i32,
     pub teams_yes_count: i32,
@@ -37,7 +37,7 @@ pub struct Model {
     pub coach_notes: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
     pub graded_at: DateTimeWithTimeZone,
-    pub agile_checklist_id: i32,
+    pub agile_checklist_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

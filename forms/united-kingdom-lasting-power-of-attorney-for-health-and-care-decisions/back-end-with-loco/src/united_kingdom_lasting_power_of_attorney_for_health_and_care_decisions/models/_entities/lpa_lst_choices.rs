@@ -9,12 +9,12 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lst_choice: String,
     pub donor_initialled: String,
     pub initialled_at: Option<DateTimeWithTimeZone>,
-    pub lpa_id: i32,
+    pub lpa_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

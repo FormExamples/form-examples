@@ -14,7 +14,7 @@ pub struct Model {
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Sf36 pf.
@@ -69,7 +69,7 @@ pub struct Model {
     #[sea_orm(column_type = "Double", nullable)]
     pub eq5d_vas_score: Option<f64>,
     /// Patient reported outcome measures ID.
-    pub patient_reported_outcome_measures_id: i32,
+    pub patient_reported_outcome_measures_id: i64,
 }
 
 /// Relation.

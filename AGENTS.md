@@ -51,6 +51,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/loco-migration-defaults [--check] [--dry-run] [--verbose] [--all|<slug>…]` — mirror each form's `sql/` column defaults into its `back-end-with-loco/migration/` as `ColType::*WithDefault`. `cargo loco generate scaffold` cannot express defaults, so every generated migration drops them and the back-end schema silently disagrees with `sql/`, its own source of truth; re-run after any re-scaffold. `--check` is the CI drift detector
 - `bin/loco-migration-nullability [--check] [--dry-run] [--verbose] [--all|<slug>…]` — restore each form's `sql/` column nullability across the migration, the entity, and the controller's `Params` (all three must move together). Loco has no nullable-unique `ColType`, so `StringUniq` forced nullable UNIQUE columns such as `united_kingdom_nhs_number` to `NOT NULL UNIQUE` — which admits only **one** row without the identifier, the rest colliding on `''`. Uniqueness is re-expressed as an explicit unique index. `--check` is the CI drift detector
 - `bin/generate-loco-deny-config.py [--check] [<slug>…]` — write each Loco crate's `deny.toml` (cargo-deny advisories/licenses/bans/sources policy); `--check` is the CI drift detector. Run `cargo deny --all-features check` from inside a crate to execute the policy
+- `bin/loco-rs-1-migration [--check] [--dry-run] [--all|<slug>…]` — one-shot loco-rs 0.16 → 1.0.1 major-version migration: `Cargo.toml`/`migration/Cargo.toml` version bumps, the `auth_jwt`/`bg_pg` → `auth`/`worker` feature rename, and every `id`/`*_id` entity, controller `Params`, `Path<i32>`, and hand-written helper moved `i32` → `i64` (loco-rs 1.0's `ColType::PkAuto` now renders `BIGINT`). Applied fleet-wide 2026-08-02; `--check` confirms no crate is still on 0.16
 
 ### Generators (SQL → derived representations)
 
@@ -220,6 +221,7 @@ bin/loco-config-refactor --check --all # Loco background-queue + observability d
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
 bin/loco-migration-defaults --check --all # Loco migration vs sql/ column-default drift detector
 bin/loco-migration-nullability --check --all # Loco migration/entity/controller vs sql/ nullability drift detector
+bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completeness check (one-shot)
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance

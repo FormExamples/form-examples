@@ -10,12 +10,12 @@ default-run = "breast_screening-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-loco-rs = { version = "0.16", default-features = false, features = [
-  "auth_jwt",
-  "bg_pg",
+loco-rs = { version = "1.0.1", default-features = false, features = [
+  "auth",
   "cache_inmem",
   "cli",
   "with-db",
+  "worker",
 ] }
 
 [dependencies]
@@ -31,7 +31,7 @@ tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 regex = { version = "1.11" }
 migration = { path = "migration" }
-sea-orm = { version = "1.1", features = [
+sea-orm = { version = "2.0", features = [
   "sqlx-sqlite",
   "sqlx-postgres",
   "runtime-tokio-rustls",

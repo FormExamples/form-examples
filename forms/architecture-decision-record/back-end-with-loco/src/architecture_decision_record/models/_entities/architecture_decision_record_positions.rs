@@ -13,7 +13,7 @@ pub struct Model {
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     /// Ordinal.
     pub ordinal: i32,
     /// Name.
@@ -32,7 +32,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text", nullable)]
     pub cons: String,
     /// Architecture decision record ID.
-    pub architecture_decision_record_id: i32,
+    pub architecture_decision_record_id: i64,
 }
 
 /// Relation.

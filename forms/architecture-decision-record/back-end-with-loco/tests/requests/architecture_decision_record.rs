@@ -12,7 +12,7 @@ use architecture_decision_record::app::App;
 use loco_rs::testing::prelude::*;
 use serial_test::serial;
 
-fn seed_author(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Output = i32> + '_ {
+fn seed_author(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Output = i64> + '_ {
     async move {
         use architecture_decision_record::models::_entities::authors;
         use loco_rs::prelude::*;
@@ -27,7 +27,7 @@ fn seed_author(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Outpu
     }
 }
 
-fn seed_org(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Output = i32> + '_ {
+fn seed_org(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Output = i64> + '_ {
     async move {
         use architecture_decision_record::models::_entities::organizations;
         use loco_rs::prelude::*;

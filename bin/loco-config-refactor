@@ -4,8 +4,10 @@
 background-queue and observability conventions documented in
 `AGENTS/back-end-with-loco.md`:
 
-  - Postgres-backed background queue (`bg_pg`)
-  - SQLite-backed (`bg_sqlt`) and Redis-backed (`bg_redis`) queues removed
+  - Postgres-backed background queue (`worker`, loco-rs 1.0's backend-
+    agnostic queue feature; the runtime backend is selected by `queue.kind:`
+    in `config/*.yaml`, not by a Cargo feature)
+  - The Redis-backed queue add-on (`worker_redis`) excluded
   - OpenTelemetry OTLP exporter dependencies
   - Prometheus `/metrics` dependency (`axum-prometheus`)
   - `Cargo.lock` tracked in git (see `spec/cargo-lock-tracking.md`)
@@ -16,7 +18,7 @@ contents reference `loco-rs`):
   Cargo.toml:
     - Rewrite the `loco-rs = { ... }` declaration to set
       `default-features = false` and an explicit features list that
-      includes `bg_pg` and excludes `bg_sqlt` / `bg_redis`.
+      includes `worker` and excludes `worker_redis`.
     - Append OTel + Prometheus deps under `[dependencies]` if missing.
 
   config/development.yaml, config/test.yaml, config/production.yaml:
@@ -54,10 +56,11 @@ LOCO_DIR_NAME = "back-end-with-loco"
 
 # --- loco-rs Cargo features -------------------------------------------------
 
-# Canonical feature set. `bg_pg` is required; `bg_sqlt` and `bg_redis` MUST NOT
-# appear (we run the queue on Postgres only).
-LOCO_FEATURES_ALLOWED = ["auth_jwt", "bg_pg", "cache_inmem", "cli", "with-db"]
-LOCO_FEATURES_FORBIDDEN = {"bg_sqlt", "bg_redis"}
+# Canonical feature set. `worker` is required (the queue backend is chosen
+# at runtime via config/*.yaml `queue.kind: Postgres`); `worker_redis` MUST
+# NOT appear (we run the queue on Postgres only).
+LOCO_FEATURES_ALLOWED = ["auth", "cache_inmem", "cli", "with-db", "worker"]
+LOCO_FEATURES_FORBIDDEN = {"worker_redis"}
 
 # --- Observability dependencies --------------------------------------------
 
@@ -241,7 +244,7 @@ def edit_cargo_toml(path: Path) -> tuple[str, list[str]]:
 
     new_text, changed = rewrite_loco_rs(text)
     if changed:
-        notes.append("rewrote loco-rs features (drop bg_sqlt, bg_redis; keep bg_pg)")
+        notes.append("rewrote loco-rs features (drop worker_redis; keep worker)")
 
     new_text, added = add_observability_deps(new_text)
     if added:

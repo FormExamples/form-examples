@@ -53,7 +53,7 @@ fn clinician(name: &str, grade: &str) -> clinicians::ActiveModel {
 
 /// Insert a patient, an author, and a consultant, returning
 /// `(patient_id, author_id, consultant_id)`.
-async fn seed_people(db: &sea_orm::DatabaseConnection) -> (i32, i32, i32) {
+async fn seed_people(db: &sea_orm::DatabaseConnection) -> (i64, i64, i64) {
     let patient = inpatient_clinical_note::models::_entities::patients::ActiveModel {
         name: Set("Test Patient".to_owned()),
         birth_date: Set(chrono::NaiveDate::from_ymd_opt(1948, 3, 12).unwrap()),
@@ -79,7 +79,7 @@ async fn seed_people(db: &sea_orm::DatabaseConnection) -> (i32, i32, i32) {
 
 /// A progress note with every base component documented and normal
 /// observations, so it grades `complete` / `stable`.
-async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> i32 {
+async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> i64 {
     let (patient_id, author_id, consultant_id) = seed_people(db).await;
 
     let note = inpatient_clinical_notes::ActiveModel {

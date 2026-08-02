@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub computed_fitness_band: String,
     pub final_fitness_band: String,
@@ -20,7 +20,7 @@ pub struct Model {
     pub valid_until: Option<Date>,
     pub signed_at: Option<DateTimeWithTimeZone>,
     pub graded_at: DateTimeWithTimeZone,
-    pub medical_information_form_for_air_travel_id: i32,
+    pub medical_information_form_for_air_travel_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

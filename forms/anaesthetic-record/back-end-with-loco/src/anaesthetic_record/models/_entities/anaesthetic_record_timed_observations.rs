@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub observed_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double", nullable)]
@@ -28,7 +28,7 @@ pub struct Model {
     pub agent_percent: Option<f64>,
     #[sea_orm(column_type = "Double", nullable)]
     pub fresh_gas_flow_l: Option<f64>,
-    pub anaesthetic_record_id: i32,
+    pub anaesthetic_record_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double", nullable)]
     pub right_pta_db: Option<f64>,
@@ -21,7 +21,7 @@ pub struct Model {
     pub left_hearing_grade: String,
     pub overall_hearing_grade: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub assessment_id: i32,
+    pub assessment_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
