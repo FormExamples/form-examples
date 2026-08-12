@@ -645,7 +645,20 @@
       "Bash(cd *)",
       "Bash(/tmp/loco_deny_update.sh)",
       "Bash(/tmp/loco_deny_check.sh)",
-      "Bash(bin/loco-config-refactor --all)"
+      "Bash(bin/loco-config-refactor --all)",
+      "WebFetch(domain:www.nhscfsd.co.uk)",
+      "WebFetch(domain:www.england.nhs.uk)",
+      "WebFetch(domain:www.asahq.org)",
+      "WebFetch(domain:www.ncbi.nlm.nih.gov)",
+      "WebFetch(domain:www.cpoc.org.uk)",
+      "WebFetch(domain:rouxgroup.org.uk)",
+      "WebFetch(domain:www.pslhub.org)",
+      "WebFetch(domain:geekymedics.com)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:cpoc.org.uk)",
+      "WebFetch(domain:concentric.health)",
+      "WebFetch(domain:teachmesurgery.com)",
+      "WebFetch(domain:www.rightdecisions.scot.nhs.uk)"
     ]
   },
   "enableAllProjectMcpServers": true,
