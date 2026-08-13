@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE allergy SYSTEM "allergy.dtd">
+<allergy>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<scientific_name>Example</scientific_name>
+<european_union_name>Example</european_union_name>
+<united_states_name>Example</united_states_name>
+<cosmetic_name>Example</cosmetic_name>
+<kind>food</kind>
+<is_regulated_food_allergen>true</is_regulated_food_allergen>
+</allergy>

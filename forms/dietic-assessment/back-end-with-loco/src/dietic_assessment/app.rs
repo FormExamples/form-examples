@@ -1,0 +1,90 @@
+use async_trait::async_trait;
+use loco_rs::{
+    app::{AppContext, Hooks, Initializer},
+    bgworker::{BackgroundWorker, Queue},
+    boot::{create_app, BootResult, StartMode},
+    config::Config,
+    controller::AppRoutes,
+    db::{self, truncate_table},
+    environment::Environment,
+    task::Tasks,
+    Result,
+};
+use migration::Migrator;
+use std::path::Path;
+
+#[allow(unused_imports)]
+use crate::{controllers, models::_entities::users, tasks, workers::downloader::DownloadWorker};
+
+pub struct App;
+#[async_trait]
+impl Hooks for App {
+    fn app_name() -> &'static str {
+        env!("CARGO_CRATE_NAME")
+    }
+
+    fn app_version() -> String {
+        format!(
+            "{} ({})",
+            env!("CARGO_PKG_VERSION"),
+            option_env!("BUILD_SHA")
+                .or(option_env!("GITHUB_SHA"))
+                .unwrap_or("dev")
+        )
+    }
+
+    async fn boot(
+        mode: StartMode,
+        environment: &Environment,
+        config: Config,
+    ) -> Result<BootResult> {
+        create_app::<Self, Migrator>(mode, environment, config).await
+    }
+
+    async fn initializers(_ctx: &AppContext) -> Result<Vec<Box<dyn Initializer>>> {
+        Ok(vec![])
+    }
+
+    fn routes(_ctx: &AppContext) -> AppRoutes {
+        AppRoutes::with_default_routes() // controller routes below
+            .add_route(controllers::dietic_assessment_grade_flag::routes())
+            .add_route(controllers::dietic_assessment_grade_rule::routes())
+            .add_route(controllers::dietic_assessment_grade::routes())
+            .add_route(controllers::dietic_assessment::routes())
+            .add_route(controllers::patient_allergy::routes())
+            .add_route(controllers::allergy::routes())
+            .add_route(controllers::patient_medication::routes())
+            .add_route(controllers::medication::routes())
+            .add_route(controllers::dietitian::routes())
+            .add_route(controllers::patient::routes())
+            .add_route(controllers::auth::routes())
+    }
+    async fn connect_workers(ctx: &AppContext, queue: &Queue) -> Result<()> {
+        queue.register(DownloadWorker::build(ctx)).await?;
+        Ok(())
+    }
+
+    #[allow(unused_variables)]
+    fn register_tasks(tasks: &mut Tasks) {
+        // tasks-inject (do not remove)
+    }
+    async fn truncate(ctx: &AppContext) -> Result<()> {
+        truncate_table(&ctx.db, users::Entity).await?;
+        Ok(())
+    }
+    async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
+        // The fixtures moved to src/<form_snake_case>/fixtures/ when the crate
+        // was put into the canonical route layout, so resolve them from the
+        // manifest directory rather than from the caller-supplied base path.
+        let _ = base;
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!(
+                "{}/src/dietic_assessment/fixtures/users.yaml",
+                env!("CARGO_MANIFEST_DIR")
+            ),
+        )
+        .await?;
+        Ok(())
+    }
+}

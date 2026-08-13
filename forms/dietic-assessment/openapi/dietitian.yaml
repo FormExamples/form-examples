@@ -1,0 +1,203 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: dietitian
+openapi: 3.1.0
+info:
+  title: Dietic Assessment — Dietitian
+  version: 1.0.0
+  description: Dietitian, i.e. the registered practitioner who conducts the dietetic assessment.
+paths:
+  /dietitians:
+    get:
+      summary: List Dietitian records
+      operationId: listDietitian
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Dietitian records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dietitian"
+    post:
+      summary: Create a new Dietitian
+      operationId: createDietitian
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dietitian"
+      responses:
+        "201":
+          description: The newly created Dietitian
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dietitian"
+        "400":
+          description: Validation error
+  /dietitians/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Dietitian by id
+      operationId: getDietitian
+      responses:
+        "200":
+          description: The requested Dietitian
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dietitian"
+        "404":
+          description: Dietitian not found
+    patch:
+      summary: Update an existing Dietitian
+      operationId: updateDietitian
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dietitian"
+      responses:
+        "200":
+          description: The updated Dietitian
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dietitian"
+        "404":
+          description: Dietitian not found
+    delete:
+      summary: Soft-delete a Dietitian
+      operationId: deleteDietitian
+      responses:
+        "204":
+          description: Dietitian deleted
+        "404":
+          description: Dietitian not found
+components:
+  schemas:
+    Dietitian:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        role:
+          type: string
+          enum:
+            - dietitian
+            - specialist-dietitian
+            - dietetic-assistant
+            - assistant-practitioner
+            - dietetic-student
+            - nutrition-nurse
+            - nutritionist
+            - other
+            - ""
+          description: Dietitian role, i.e. the job role the practitioner holds.
+        specialty:
+          type: string
+          enum:
+            - general
+            - acute
+            - community
+            - oncology
+            - renal
+            - diabetes
+            - gastroenterology
+            - paediatrics
+            - critical-care
+            - home-enteral-feeding
+            - bariatric
+            - eating-disorders
+            - inherited-metabolic
+            - other
+            - ""
+          description: Dietetic specialty, i.e. the clinical area the practitioner works in.
+        registration_body:
+          type: string
+          enum:
+            - HCPC
+            - NMC
+            - GMC
+            - AfN
+            - other
+            - ""
+          description: Professional registration body, such as HCPC for a registered dietitian in the United Kingdom.
+        registration_number:
+          type: string
+          description: Professional registration number issued by the registration body.
+        employer:
+          type: string
+          description: Employer, such as the NHS trust, health board, or private practice.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 12
+          description: United Kingdom NHS number, unique per person.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - role
+        - specialty
+        - registration_body
+        - registration_number
+        - employer
+      description: Dietitian, i.e. the registered practitioner who conducts the dietetic assessment.

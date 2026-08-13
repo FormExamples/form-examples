@@ -1,0 +1,1156 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: dietic_assessment
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum DieticAssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum DieticAssessmentSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT_CLINIC = 1;  // outpatient-clinic
+  SETTING_INPATIENT_WARD = 2;  // inpatient-ward
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_HOME_VISIT = 4;  // home-visit
+  SETTING_GENERAL_PRACTICE = 5;  // general-practice
+  SETTING_CARE_HOME = 6;  // care-home
+  SETTING_TELEPHONE = 7;  // telephone
+  SETTING_VIDEO = 8;  // video
+}
+
+enum DieticAssessmentAppointmentTypeEnum {
+  APPOINTMENTTYPE_UNSPECIFIED = 0;
+  APPOINTMENTTYPE_INITIAL = 1;  // initial
+  APPOINTMENTTYPE_REVIEW = 2;  // review
+  APPOINTMENTTYPE_SPECIALIST_PROGRAMME = 3;  // specialist-programme
+  APPOINTMENTTYPE_DISCHARGE = 4;  // discharge
+}
+
+enum DieticAssessmentInterpreterRequiredEnum {
+  INTERPRETERREQUIRED_UNSPECIFIED = 0;
+  INTERPRETERREQUIRED_YES = 1;  // yes
+  INTERPRETERREQUIRED_NO = 2;  // no
+}
+
+enum DieticAssessmentReferralSourceEnum {
+  REFERRALSOURCE_UNSPECIFIED = 0;
+  REFERRALSOURCE_GENERAL_PRACTITIONER = 1;  // general-practitioner
+  REFERRALSOURCE_HOSPITAL_CONSULTANT = 2;  // hospital-consultant
+  REFERRALSOURCE_WARD_TEAM = 3;  // ward-team
+  REFERRALSOURCE_NURSE = 4;  // nurse
+  REFERRALSOURCE_SELF_REFERRAL = 5;  // self-referral
+  REFERRALSOURCE_CARE_HOME = 6;  // care-home
+  REFERRALSOURCE_SOCIAL_CARE = 7;  // social-care
+  REFERRALSOURCE_SPEECH_AND_LANGUAGE_THERAPY = 8;  // speech-and-language-therapy
+  REFERRALSOURCE_OTHER = 9;  // other
+}
+
+enum DieticAssessmentConsentToRecordEnum {
+  CONSENTTORECORD_UNSPECIFIED = 0;
+  CONSENTTORECORD_YES = 1;  // yes
+  CONSENTTORECORD_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionDiabetesEnum {
+  CONDITIONDIABETES_UNSPECIFIED = 0;
+  CONDITIONDIABETES_NONE = 1;  // none
+  CONDITIONDIABETES_TYPE_1 = 2;  // type-1
+  CONDITIONDIABETES_TYPE_2 = 3;  // type-2
+  CONDITIONDIABETES_GESTATIONAL = 4;  // gestational
+  CONDITIONDIABETES_OTHER = 5;  // other
+}
+
+enum DieticAssessmentConditionCoeliacEnum {
+  CONDITIONCOELIAC_UNSPECIFIED = 0;
+  CONDITIONCOELIAC_YES = 1;  // yes
+  CONDITIONCOELIAC_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionInflammatoryBowelDiseaseEnum {
+  CONDITIONINFLAMMATORYBOWELDISEASE_UNSPECIFIED = 0;
+  CONDITIONINFLAMMATORYBOWELDISEASE_YES = 1;  // yes
+  CONDITIONINFLAMMATORYBOWELDISEASE_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionChronicKidneyDiseaseEnum {
+  CONDITIONCHRONICKIDNEYDISEASE_UNSPECIFIED = 0;
+  CONDITIONCHRONICKIDNEYDISEASE_YES = 1;  // yes
+  CONDITIONCHRONICKIDNEYDISEASE_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionLiverDiseaseEnum {
+  CONDITIONLIVERDISEASE_UNSPECIFIED = 0;
+  CONDITIONLIVERDISEASE_YES = 1;  // yes
+  CONDITIONLIVERDISEASE_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionCancerEnum {
+  CONDITIONCANCER_UNSPECIFIED = 0;
+  CONDITIONCANCER_YES = 1;  // yes
+  CONDITIONCANCER_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionCardiovascularDiseaseEnum {
+  CONDITIONCARDIOVASCULARDISEASE_UNSPECIFIED = 0;
+  CONDITIONCARDIOVASCULARDISEASE_YES = 1;  // yes
+  CONDITIONCARDIOVASCULARDISEASE_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionRespiratoryDiseaseEnum {
+  CONDITIONRESPIRATORYDISEASE_UNSPECIFIED = 0;
+  CONDITIONRESPIRATORYDISEASE_YES = 1;  // yes
+  CONDITIONRESPIRATORYDISEASE_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionStrokeEnum {
+  CONDITIONSTROKE_UNSPECIFIED = 0;
+  CONDITIONSTROKE_YES = 1;  // yes
+  CONDITIONSTROKE_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionDementiaEnum {
+  CONDITIONDEMENTIA_UNSPECIFIED = 0;
+  CONDITIONDEMENTIA_YES = 1;  // yes
+  CONDITIONDEMENTIA_NO = 2;  // no
+}
+
+enum DieticAssessmentConditionEatingDisorderEnum {
+  CONDITIONEATINGDISORDER_UNSPECIFIED = 0;
+  CONDITIONEATINGDISORDER_YES = 1;  // yes
+  CONDITIONEATINGDISORDER_NO = 2;  // no
+}
+
+enum DieticAssessmentRecentSurgeryEnum {
+  RECENTSURGERY_UNSPECIFIED = 0;
+  RECENTSURGERY_YES = 1;  // yes
+  RECENTSURGERY_NO = 2;  // no
+}
+
+enum DieticAssessmentGastrointestinalSurgeryEnum {
+  GASTROINTESTINALSURGERY_UNSPECIFIED = 0;
+  GASTROINTESTINALSURGERY_NONE = 1;  // none
+  GASTROINTESTINALSURGERY_BARIATRIC = 2;  // bariatric
+  GASTROINTESTINALSURGERY_BOWEL_RESECTION = 3;  // bowel-resection
+  GASTROINTESTINALSURGERY_GASTRECTOMY = 4;  // gastrectomy
+  GASTROINTESTINALSURGERY_OESOPHAGECTOMY = 5;  // oesophagectomy
+  GASTROINTESTINALSURGERY_WHIPPLE = 6;  // whipple
+  GASTROINTESTINALSURGERY_STOMA_FORMATION = 7;  // stoma-formation
+  GASTROINTESTINALSURGERY_OTHER = 8;  // other
+}
+
+enum DieticAssessmentPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_APPLICABLE = 1;  // not-applicable
+  PREGNANCYSTATUS_NOT_PREGNANT = 2;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 3;  // pregnant
+  PREGNANCYSTATUS_BREASTFEEDING = 4;  // breastfeeding
+  PREGNANCYSTATUS_PREFER_NOT_TO_SAY = 5;  // prefer-not-to-say
+}
+
+enum DieticAssessmentTakesPrescriptionMedicinesEnum {
+  TAKESPRESCRIPTIONMEDICINES_UNSPECIFIED = 0;
+  TAKESPRESCRIPTIONMEDICINES_YES = 1;  // yes
+  TAKESPRESCRIPTIONMEDICINES_NO = 2;  // no
+}
+
+enum DieticAssessmentTakesOverTheCounterMedicinesEnum {
+  TAKESOVERTHECOUNTERMEDICINES_UNSPECIFIED = 0;
+  TAKESOVERTHECOUNTERMEDICINES_YES = 1;  // yes
+  TAKESOVERTHECOUNTERMEDICINES_NO = 2;  // no
+}
+
+enum DieticAssessmentTakesVitaminSupplementsEnum {
+  TAKESVITAMINSUPPLEMENTS_UNSPECIFIED = 0;
+  TAKESVITAMINSUPPLEMENTS_YES = 1;  // yes
+  TAKESVITAMINSUPPLEMENTS_NO = 2;  // no
+}
+
+enum DieticAssessmentTakesMineralSupplementsEnum {
+  TAKESMINERALSUPPLEMENTS_UNSPECIFIED = 0;
+  TAKESMINERALSUPPLEMENTS_YES = 1;  // yes
+  TAKESMINERALSUPPLEMENTS_NO = 2;  // no
+}
+
+enum DieticAssessmentTakesHerbalProductsEnum {
+  TAKESHERBALPRODUCTS_UNSPECIFIED = 0;
+  TAKESHERBALPRODUCTS_YES = 1;  // yes
+  TAKESHERBALPRODUCTS_NO = 2;  // no
+}
+
+enum DieticAssessmentTakesOralNutritionalSupplementsEnum {
+  TAKESORALNUTRITIONALSUPPLEMENTS_UNSPECIFIED = 0;
+  TAKESORALNUTRITIONALSUPPLEMENTS_YES = 1;  // yes
+  TAKESORALNUTRITIONALSUPPLEMENTS_NO = 2;  // no
+}
+
+enum DieticAssessmentEnteralNutritionEnum {
+  ENTERALNUTRITION_UNSPECIFIED = 0;
+  ENTERALNUTRITION_YES = 1;  // yes
+  ENTERALNUTRITION_NO = 2;  // no
+}
+
+enum DieticAssessmentEnteralRouteEnum {
+  ENTERALROUTE_UNSPECIFIED = 0;
+  ENTERALROUTE_NASOGASTRIC = 1;  // nasogastric
+  ENTERALROUTE_NASOJEJUNAL = 2;  // nasojejunal
+  ENTERALROUTE_GASTROSTOMY = 3;  // gastrostomy
+  ENTERALROUTE_JEJUNOSTOMY = 4;  // jejunostomy
+  ENTERALROUTE_OTHER = 5;  // other
+}
+
+enum DieticAssessmentEnteralTubeProblemEnum {
+  ENTERALTUBEPROBLEM_UNSPECIFIED = 0;
+  ENTERALTUBEPROBLEM_YES = 1;  // yes
+  ENTERALTUBEPROBLEM_NO = 2;  // no
+}
+
+enum DieticAssessmentParenteralNutritionEnum {
+  PARENTERALNUTRITION_UNSPECIFIED = 0;
+  PARENTERALNUTRITION_YES = 1;  // yes
+  PARENTERALNUTRITION_NO = 2;  // no
+}
+
+enum DieticAssessmentDrugNutrientInteractionEnum {
+  DRUGNUTRIENTINTERACTION_UNSPECIFIED = 0;
+  DRUGNUTRIENTINTERACTION_YES = 1;  // yes
+  DRUGNUTRIENTINTERACTION_NO = 2;  // no
+}
+
+enum DieticAssessmentMedicationAdherenceEnum {
+  MEDICATIONADHERENCE_UNSPECIFIED = 0;
+  MEDICATIONADHERENCE_FULL = 1;  // full
+  MEDICATIONADHERENCE_PARTIAL = 2;  // partial
+  MEDICATIONADHERENCE_NONE = 3;  // none
+  MEDICATIONADHERENCE_UNKNOWN = 4;  // unknown
+}
+
+enum DieticAssessmentMeasurementMethodEnum {
+  MEASUREMENTMETHOD_UNSPECIFIED = 0;
+  MEASUREMENTMETHOD_MEASURED = 1;  // measured
+  MEASUREMENTMETHOD_SELF_REPORTED = 2;  // self-reported
+  MEASUREMENTMETHOD_ESTIMATED = 3;  // estimated
+  MEASUREMENTMETHOD_DECLINED = 4;  // declined
+}
+
+enum DieticAssessmentWeightLossIsIntentionalEnum {
+  WEIGHTLOSSISINTENTIONAL_UNSPECIFIED = 0;
+  WEIGHTLOSSISINTENTIONAL_YES = 1;  // yes
+  WEIGHTLOSSISINTENTIONAL_NO = 2;  // no
+}
+
+enum DieticAssessmentWeightTrendEnum {
+  WEIGHTTREND_UNSPECIFIED = 0;
+  WEIGHTTREND_LOSING = 1;  // losing
+  WEIGHTTREND_STABLE = 2;  // stable
+  WEIGHTTREND_GAINING = 3;  // gaining
+  WEIGHTTREND_FLUCTUATING = 4;  // fluctuating
+  WEIGHTTREND_UNKNOWN = 5;  // unknown
+}
+
+enum DieticAssessmentClothesOrJewelleryLooserEnum {
+  CLOTHESORJEWELLERYLOOSER_UNSPECIFIED = 0;
+  CLOTHESORJEWELLERYLOOSER_YES = 1;  // yes
+  CLOTHESORJEWELLERYLOOSER_NO = 2;  // no
+}
+
+enum DieticAssessmentOedemaPresentEnum {
+  OEDEMAPRESENT_UNSPECIFIED = 0;
+  OEDEMAPRESENT_YES = 1;  // yes
+  OEDEMAPRESENT_NO = 2;  // no
+}
+
+enum DieticAssessmentAscitesPresentEnum {
+  ASCITESPRESENT_UNSPECIFIED = 0;
+  ASCITESPRESENT_YES = 1;  // yes
+  ASCITESPRESENT_NO = 2;  // no
+}
+
+enum DieticAssessmentAmputationPresentEnum {
+  AMPUTATIONPRESENT_UNSPECIFIED = 0;
+  AMPUTATIONPRESENT_YES = 1;  // yes
+  AMPUTATIONPRESENT_NO = 2;  // no
+}
+
+enum DieticAssessmentSubcutaneousFatLossEnum {
+  SUBCUTANEOUSFATLOSS_UNSPECIFIED = 0;
+  SUBCUTANEOUSFATLOSS_NONE = 1;  // none
+  SUBCUTANEOUSFATLOSS_MILD = 2;  // mild
+  SUBCUTANEOUSFATLOSS_MODERATE = 3;  // moderate
+  SUBCUTANEOUSFATLOSS_SEVERE = 4;  // severe
+}
+
+enum DieticAssessmentMuscleWastingTemplesEnum {
+  MUSCLEWASTINGTEMPLES_UNSPECIFIED = 0;
+  MUSCLEWASTINGTEMPLES_YES = 1;  // yes
+  MUSCLEWASTINGTEMPLES_NO = 2;  // no
+}
+
+enum DieticAssessmentMuscleWastingClaviclesEnum {
+  MUSCLEWASTINGCLAVICLES_UNSPECIFIED = 0;
+  MUSCLEWASTINGCLAVICLES_YES = 1;  // yes
+  MUSCLEWASTINGCLAVICLES_NO = 2;  // no
+}
+
+enum DieticAssessmentMuscleWastingQuadricepsEnum {
+  MUSCLEWASTINGQUADRICEPS_UNSPECIFIED = 0;
+  MUSCLEWASTINGQUADRICEPS_YES = 1;  // yes
+  MUSCLEWASTINGQUADRICEPS_NO = 2;  // no
+}
+
+enum DieticAssessmentMuscleWastingSeverityEnum {
+  MUSCLEWASTINGSEVERITY_UNSPECIFIED = 0;
+  MUSCLEWASTINGSEVERITY_NONE = 1;  // none
+  MUSCLEWASTINGSEVERITY_MILD = 2;  // mild
+  MUSCLEWASTINGSEVERITY_MODERATE = 3;  // moderate
+  MUSCLEWASTINGSEVERITY_SEVERE = 4;  // severe
+}
+
+enum DieticAssessmentPeripheralOedemaSeverityEnum {
+  PERIPHERALOEDEMASEVERITY_UNSPECIFIED = 0;
+  PERIPHERALOEDEMASEVERITY_NONE = 1;  // none
+  PERIPHERALOEDEMASEVERITY_MILD = 2;  // mild
+  PERIPHERALOEDEMASEVERITY_MODERATE = 3;  // moderate
+  PERIPHERALOEDEMASEVERITY_SEVERE = 4;  // severe
+}
+
+enum DieticAssessmentOralHealthEnum {
+  ORALHEALTH_UNSPECIFIED = 0;
+  ORALHEALTH_GOOD = 1;  // good
+  ORALHEALTH_FAIR = 2;  // fair
+  ORALHEALTH_POOR = 3;  // poor
+}
+
+enum DieticAssessmentDentitionEnum {
+  DENTITION_UNSPECIFIED = 0;
+  DENTITION_GOOD = 1;  // good
+  DENTITION_SOME_MISSING = 2;  // some-missing
+  DENTITION_EDENTULOUS = 3;  // edentulous
+  DENTITION_DENTURES_FITTING = 4;  // dentures-fitting
+  DENTITION_DENTURES_LOOSE = 5;  // dentures-loose
+}
+
+enum DieticAssessmentChewingAbilityEnum {
+  CHEWINGABILITY_UNSPECIFIED = 0;
+  CHEWINGABILITY_NORMAL = 1;  // normal
+  CHEWINGABILITY_REDUCED = 2;  // reduced
+  CHEWINGABILITY_UNABLE = 3;  // unable
+}
+
+enum DieticAssessmentTongueAndMucosaEnum {
+  TONGUEANDMUCOSA_UNSPECIFIED = 0;
+  TONGUEANDMUCOSA_NORMAL = 1;  // normal
+  TONGUEANDMUCOSA_GLOSSITIS = 2;  // glossitis
+  TONGUEANDMUCOSA_STOMATITIS = 3;  // stomatitis
+  TONGUEANDMUCOSA_ANGULAR_CHEILITIS = 4;  // angular-cheilitis
+  TONGUEANDMUCOSA_ORAL_THRUSH = 5;  // oral-thrush
+  TONGUEANDMUCOSA_DRY = 6;  // dry
+  TONGUEANDMUCOSA_OTHER = 7;  // other
+}
+
+enum DieticAssessmentSkinConditionEnum {
+  SKINCONDITION_UNSPECIFIED = 0;
+  SKINCONDITION_NORMAL = 1;  // normal
+  SKINCONDITION_DRY = 2;  // dry
+  SKINCONDITION_FLAKY = 3;  // flaky
+  SKINCONDITION_POOR_WOUND_HEALING = 4;  // poor-wound-healing
+  SKINCONDITION_BRUISING = 5;  // bruising
+  SKINCONDITION_OTHER = 6;  // other
+}
+
+enum DieticAssessmentHairConditionEnum {
+  HAIRCONDITION_UNSPECIFIED = 0;
+  HAIRCONDITION_NORMAL = 1;  // normal
+  HAIRCONDITION_THIN = 2;  // thin
+  HAIRCONDITION_BRITTLE = 3;  // brittle
+  HAIRCONDITION_EASILY_PLUCKED = 4;  // easily-plucked
+  HAIRCONDITION_OTHER = 5;  // other
+}
+
+enum DieticAssessmentNailConditionEnum {
+  NAILCONDITION_UNSPECIFIED = 0;
+  NAILCONDITION_NORMAL = 1;  // normal
+  NAILCONDITION_BRITTLE = 2;  // brittle
+  NAILCONDITION_SPOON_SHAPED = 3;  // spoon-shaped
+  NAILCONDITION_RIDGED = 4;  // ridged
+  NAILCONDITION_OTHER = 5;  // other
+}
+
+enum DieticAssessmentPressureUlcerPresentEnum {
+  PRESSUREULCERPRESENT_UNSPECIFIED = 0;
+  PRESSUREULCERPRESENT_YES = 1;  // yes
+  PRESSUREULCERPRESENT_NO = 2;  // no
+}
+
+enum DieticAssessmentPressureUlcerCategoryEnum {
+  PRESSUREULCERCATEGORY_UNSPECIFIED = 0;
+  PRESSUREULCERCATEGORY_V_1 = 1;  // 1
+  PRESSUREULCERCATEGORY_V_2 = 2;  // 2
+  PRESSUREULCERCATEGORY_V_3 = 3;  // 3
+  PRESSUREULCERCATEGORY_V_4 = 4;  // 4
+  PRESSUREULCERCATEGORY_UNSTAGEABLE = 5;  // unstageable
+}
+
+enum DieticAssessmentPortionSizeEnum {
+  PORTIONSIZE_UNSPECIFIED = 0;
+  PORTIONSIZE_SMALL = 1;  // small
+  PORTIONSIZE_MEDIUM = 2;  // medium
+  PORTIONSIZE_LARGE = 3;  // large
+  PORTIONSIZE_VARIES = 4;  // varies
+}
+
+enum DieticAssessmentAppetiteEnum {
+  APPETITE_UNSPECIFIED = 0;
+  APPETITE_GOOD = 1;  // good
+  APPETITE_FAIR = 2;  // fair
+  APPETITE_POOR = 3;  // poor
+  APPETITE_ABSENT = 4;  // absent
+}
+
+enum DieticAssessmentFoodDiaryCompletedEnum {
+  FOODDIARYCOMPLETED_UNSPECIFIED = 0;
+  FOODDIARYCOMPLETED_YES = 1;  // yes
+  FOODDIARYCOMPLETED_NO = 2;  // no
+}
+
+enum DieticAssessmentEatsAloneEnum {
+  EATSALONE_UNSPECIFIED = 0;
+  EATSALONE_YES = 1;  // yes
+  EATSALONE_NO = 2;  // no
+}
+
+enum DieticAssessmentThickenedFluidsEnum {
+  THICKENEDFLUIDS_UNSPECIFIED = 0;
+  THICKENEDFLUIDS_YES = 1;  // yes
+  THICKENEDFLUIDS_NO = 2;  // no
+}
+
+enum DieticAssessmentThickenedFluidsIddsiLevelEnum {
+  THICKENEDFLUIDSIDDSILEVEL_UNSPECIFIED = 0;
+  THICKENEDFLUIDSIDDSILEVEL_V_0 = 1;  // 0
+  THICKENEDFLUIDSIDDSILEVEL_V_1 = 2;  // 1
+  THICKENEDFLUIDSIDDSILEVEL_V_2 = 3;  // 2
+  THICKENEDFLUIDSIDDSILEVEL_V_3 = 4;  // 3
+  THICKENEDFLUIDSIDDSILEVEL_V_4 = 5;  // 4
+}
+
+enum DieticAssessmentHydrationSignsEnum {
+  HYDRATIONSIGNS_UNSPECIFIED = 0;
+  HYDRATIONSIGNS_WELL_HYDRATED = 1;  // well-hydrated
+  HYDRATIONSIGNS_MILD_DEHYDRATION = 2;  // mild-dehydration
+  HYDRATIONSIGNS_MODERATE_DEHYDRATION = 3;  // moderate-dehydration
+  HYDRATIONSIGNS_SEVERE_DEHYDRATION = 4;  // severe-dehydration
+  HYDRATIONSIGNS_FLUID_OVERLOAD = 5;  // fluid-overload
+}
+
+enum DieticAssessmentFluidRestrictionEnum {
+  FLUIDRESTRICTION_UNSPECIFIED = 0;
+  FLUIDRESTRICTION_YES = 1;  // yes
+  FLUIDRESTRICTION_NO = 2;  // no
+}
+
+enum DieticAssessmentHasFoodAllergyEnum {
+  HASFOODALLERGY_UNSPECIFIED = 0;
+  HASFOODALLERGY_YES = 1;  // yes
+  HASFOODALLERGY_NO = 2;  // no
+}
+
+enum DieticAssessmentHasFoodIntoleranceEnum {
+  HASFOODINTOLERANCE_UNSPECIFIED = 0;
+  HASFOODINTOLERANCE_YES = 1;  // yes
+  HASFOODINTOLERANCE_NO = 2;  // no
+}
+
+enum DieticAssessmentAvoidanceReasonEnum {
+  AVOIDANCEREASON_UNSPECIFIED = 0;
+  AVOIDANCEREASON_ALLERGY = 1;  // allergy
+  AVOIDANCEREASON_INTOLERANCE = 2;  // intolerance
+  AVOIDANCEREASON_MEDICAL_ADVICE = 3;  // medical-advice
+  AVOIDANCEREASON_RELIGIOUS = 4;  // religious
+  AVOIDANCEREASON_CULTURAL = 5;  // cultural
+  AVOIDANCEREASON_ETHICAL = 6;  // ethical
+  AVOIDANCEREASON_DISLIKE = 7;  // dislike
+  AVOIDANCEREASON_COST = 8;  // cost
+  AVOIDANCEREASON_OTHER = 9;  // other
+}
+
+enum DieticAssessmentTherapeuticDietEnum {
+  THERAPEUTICDIET_UNSPECIFIED = 0;
+  THERAPEUTICDIET_NONE = 1;  // none
+  THERAPEUTICDIET_GLUTEN_FREE = 2;  // gluten-free
+  THERAPEUTICDIET_LOW_FODMAP = 3;  // low-fodmap
+  THERAPEUTICDIET_RENAL = 4;  // renal
+  THERAPEUTICDIET_DIABETIC = 5;  // diabetic
+  THERAPEUTICDIET_LOW_SODIUM = 6;  // low-sodium
+  THERAPEUTICDIET_LOW_POTASSIUM = 7;  // low-potassium
+  THERAPEUTICDIET_HIGH_ENERGY_HIGH_PROTEIN = 8;  // high-energy-high-protein
+  THERAPEUTICDIET_KETOGENIC = 9;  // ketogenic
+  THERAPEUTICDIET_LOW_RESIDUE = 10;  // low-residue
+  THERAPEUTICDIET_OTHER = 11;  // other
+}
+
+enum DieticAssessmentDietaryPatternEnum {
+  DIETARYPATTERN_UNSPECIFIED = 0;
+  DIETARYPATTERN_OMNIVORE = 1;  // omnivore
+  DIETARYPATTERN_VEGETARIAN = 2;  // vegetarian
+  DIETARYPATTERN_VEGAN = 3;  // vegan
+  DIETARYPATTERN_PESCATARIAN = 4;  // pescatarian
+  DIETARYPATTERN_HALAL = 5;  // halal
+  DIETARYPATTERN_KOSHER = 6;  // kosher
+  DIETARYPATTERN_OTHER = 7;  // other
+}
+
+enum DieticAssessmentTextureModifiedDietEnum {
+  TEXTUREMODIFIEDDIET_UNSPECIFIED = 0;
+  TEXTUREMODIFIEDDIET_YES = 1;  // yes
+  TEXTUREMODIFIEDDIET_NO = 2;  // no
+}
+
+enum DieticAssessmentTextureModifiedIddsiLevelEnum {
+  TEXTUREMODIFIEDIDDSILEVEL_UNSPECIFIED = 0;
+  TEXTUREMODIFIEDIDDSILEVEL_V_3 = 1;  // 3
+  TEXTUREMODIFIEDIDDSILEVEL_V_4 = 2;  // 4
+  TEXTUREMODIFIEDIDDSILEVEL_V_5 = 3;  // 5
+  TEXTUREMODIFIEDIDDSILEVEL_V_6 = 4;  // 6
+  TEXTUREMODIFIEDIDDSILEVEL_V_7 = 5;  // 7
+}
+
+enum DieticAssessmentAppetiteChangeEnum {
+  APPETITECHANGE_UNSPECIFIED = 0;
+  APPETITECHANGE_NONE = 1;  // none
+  APPETITECHANGE_INCREASED = 2;  // increased
+  APPETITECHANGE_DECREASED = 3;  // decreased
+}
+
+enum DieticAssessmentEarlySatietyEnum {
+  EARLYSATIETY_UNSPECIFIED = 0;
+  EARLYSATIETY_YES = 1;  // yes
+  EARLYSATIETY_NO = 2;  // no
+}
+
+enum DieticAssessmentNauseaEnum {
+  NAUSEA_UNSPECIFIED = 0;
+  NAUSEA_YES = 1;  // yes
+  NAUSEA_NO = 2;  // no
+}
+
+enum DieticAssessmentVomitingEnum {
+  VOMITING_UNSPECIFIED = 0;
+  VOMITING_YES = 1;  // yes
+  VOMITING_NO = 2;  // no
+}
+
+enum DieticAssessmentDysphagiaEnum {
+  DYSPHAGIA_UNSPECIFIED = 0;
+  DYSPHAGIA_YES = 1;  // yes
+  DYSPHAGIA_NO = 2;  // no
+}
+
+enum DieticAssessmentDysphagiaScreenOutcomeEnum {
+  DYSPHAGIASCREENOUTCOME_UNSPECIFIED = 0;
+  DYSPHAGIASCREENOUTCOME_PASS = 1;  // pass
+  DYSPHAGIASCREENOUTCOME_FAIL = 2;  // fail
+  DYSPHAGIASCREENOUTCOME_NOT_DONE = 3;  // not-done
+}
+
+enum DieticAssessmentSpeechAndLanguageTherapyEnum {
+  SPEECHANDLANGUAGETHERAPY_UNSPECIFIED = 0;
+  SPEECHANDLANGUAGETHERAPY_YES = 1;  // yes
+  SPEECHANDLANGUAGETHERAPY_NO = 2;  // no
+}
+
+enum DieticAssessmentRefluxEnum {
+  REFLUX_UNSPECIFIED = 0;
+  REFLUX_YES = 1;  // yes
+  REFLUX_NO = 2;  // no
+}
+
+enum DieticAssessmentAbdominalPainEnum {
+  ABDOMINALPAIN_UNSPECIFIED = 0;
+  ABDOMINALPAIN_YES = 1;  // yes
+  ABDOMINALPAIN_NO = 2;  // no
+}
+
+enum DieticAssessmentBloatingEnum {
+  BLOATING_UNSPECIFIED = 0;
+  BLOATING_YES = 1;  // yes
+  BLOATING_NO = 2;  // no
+}
+
+enum DieticAssessmentBristolStoolTypeEnum {
+  BRISTOLSTOOLTYPE_UNSPECIFIED = 0;
+  BRISTOLSTOOLTYPE_V_1 = 1;  // 1
+  BRISTOLSTOOLTYPE_V_2 = 2;  // 2
+  BRISTOLSTOOLTYPE_V_3 = 3;  // 3
+  BRISTOLSTOOLTYPE_V_4 = 4;  // 4
+  BRISTOLSTOOLTYPE_V_5 = 5;  // 5
+  BRISTOLSTOOLTYPE_V_6 = 6;  // 6
+  BRISTOLSTOOLTYPE_V_7 = 7;  // 7
+}
+
+enum DieticAssessmentConstipationEnum {
+  CONSTIPATION_UNSPECIFIED = 0;
+  CONSTIPATION_YES = 1;  // yes
+  CONSTIPATION_NO = 2;  // no
+}
+
+enum DieticAssessmentDiarrhoeaEnum {
+  DIARRHOEA_UNSPECIFIED = 0;
+  DIARRHOEA_YES = 1;  // yes
+  DIARRHOEA_NO = 2;  // no
+}
+
+enum DieticAssessmentStomaPresentEnum {
+  STOMAPRESENT_UNSPECIFIED = 0;
+  STOMAPRESENT_YES = 1;  // yes
+  STOMAPRESENT_NO = 2;  // no
+}
+
+enum DieticAssessmentMalabsorptionSignsEnum {
+  MALABSORPTIONSIGNS_UNSPECIFIED = 0;
+  MALABSORPTIONSIGNS_YES = 1;  // yes
+  MALABSORPTIONSIGNS_NO = 2;  // no
+}
+
+enum DieticAssessmentLivingSituationEnum {
+  LIVINGSITUATION_UNSPECIFIED = 0;
+  LIVINGSITUATION_ALONE = 1;  // alone
+  LIVINGSITUATION_WITH_PARTNER = 2;  // with-partner
+  LIVINGSITUATION_WITH_FAMILY = 3;  // with-family
+  LIVINGSITUATION_SHARED_HOUSE = 4;  // shared-house
+  LIVINGSITUATION_CARE_HOME = 5;  // care-home
+  LIVINGSITUATION_SUPPORTED_LIVING = 6;  // supported-living
+  LIVINGSITUATION_HOMELESS = 7;  // homeless
+  LIVINGSITUATION_OTHER = 8;  // other
+}
+
+enum DieticAssessmentWhoShopsEnum {
+  WHOSHOPS_UNSPECIFIED = 0;
+  WHOSHOPS_PATIENT = 1;  // patient
+  WHOSHOPS_FAMILY = 2;  // family
+  WHOSHOPS_CARER = 3;  // carer
+  WHOSHOPS_DELIVERY = 4;  // delivery
+  WHOSHOPS_OTHER = 5;  // other
+}
+
+enum DieticAssessmentWhoCooksEnum {
+  WHOCOOKS_UNSPECIFIED = 0;
+  WHOCOOKS_PATIENT = 1;  // patient
+  WHOCOOKS_FAMILY = 2;  // family
+  WHOCOOKS_CARER = 3;  // carer
+  WHOCOOKS_MEAL_SERVICE = 4;  // meal-service
+  WHOCOOKS_OTHER = 5;  // other
+}
+
+enum DieticAssessmentCookingSkillsEnum {
+  COOKINGSKILLS_UNSPECIFIED = 0;
+  COOKINGSKILLS_CONFIDENT = 1;  // confident
+  COOKINGSKILLS_BASIC = 2;  // basic
+  COOKINGSKILLS_LIMITED = 3;  // limited
+  COOKINGSKILLS_NONE = 4;  // none
+}
+
+enum DieticAssessmentHasCookerEnum {
+  HASCOOKER_UNSPECIFIED = 0;
+  HASCOOKER_YES = 1;  // yes
+  HASCOOKER_NO = 2;  // no
+}
+
+enum DieticAssessmentHasFridgeEnum {
+  HASFRIDGE_UNSPECIFIED = 0;
+  HASFRIDGE_YES = 1;  // yes
+  HASFRIDGE_NO = 2;  // no
+}
+
+enum DieticAssessmentHasFreezerEnum {
+  HASFREEZER_UNSPECIFIED = 0;
+  HASFREEZER_YES = 1;  // yes
+  HASFREEZER_NO = 2;  // no
+}
+
+enum DieticAssessmentHasMicrowaveEnum {
+  HASMICROWAVE_UNSPECIFIED = 0;
+  HASMICROWAVE_YES = 1;  // yes
+  HASMICROWAVE_NO = 2;  // no
+}
+
+enum DieticAssessmentWorriedFoodWouldRunOutEnum {
+  WORRIEDFOODWOULDRUNOUT_UNSPECIFIED = 0;
+  WORRIEDFOODWOULDRUNOUT_YES = 1;  // yes
+  WORRIEDFOODWOULDRUNOUT_NO = 2;  // no
+}
+
+enum DieticAssessmentSkippedMealsForMoneyEnum {
+  SKIPPEDMEALSFORMONEY_UNSPECIFIED = 0;
+  SKIPPEDMEALSFORMONEY_YES = 1;  // yes
+  SKIPPEDMEALSFORMONEY_NO = 2;  // no
+}
+
+enum DieticAssessmentUsesFoodBankEnum {
+  USESFOODBANK_UNSPECIFIED = 0;
+  USESFOODBANK_YES = 1;  // yes
+  USESFOODBANK_NO = 2;  // no
+}
+
+enum DieticAssessmentAccessToShopsEnum {
+  ACCESSTOSHOPS_UNSPECIFIED = 0;
+  ACCESSTOSHOPS_EASY = 1;  // easy
+  ACCESSTOSHOPS_MODERATE = 2;  // moderate
+  ACCESSTOSHOPS_DIFFICULT = 3;  // difficult
+  ACCESSTOSHOPS_NONE = 4;  // none
+}
+
+enum DieticAssessmentHasTransportEnum {
+  HASTRANSPORT_UNSPECIFIED = 0;
+  HASTRANSPORT_YES = 1;  // yes
+  HASTRANSPORT_NO = 2;  // no
+}
+
+enum DieticAssessmentWorkPatternEnum {
+  WORKPATTERN_UNSPECIFIED = 0;
+  WORKPATTERN_FULL_TIME = 1;  // full-time
+  WORKPATTERN_PART_TIME = 2;  // part-time
+  WORKPATTERN_SHIFT_WORK = 3;  // shift-work
+  WORKPATTERN_NIGHT_SHIFT = 4;  // night-shift
+  WORKPATTERN_UNEMPLOYED = 5;  // unemployed
+  WORKPATTERN_RETIRED = 6;  // retired
+  WORKPATTERN_STUDENT = 7;  // student
+  WORKPATTERN_CARER = 8;  // carer
+  WORKPATTERN_UNABLE_TO_WORK = 9;  // unable-to-work
+}
+
+enum DieticAssessmentMealSupportEnum {
+  MEALSUPPORT_UNSPECIFIED = 0;
+  MEALSUPPORT_NONE = 1;  // none
+  MEALSUPPORT_FAMILY = 2;  // family
+  MEALSUPPORT_CARE_WORKER = 3;  // care-worker
+  MEALSUPPORT_MEALS_ON_WHEELS = 4;  // meals-on-wheels
+  MEALSUPPORT_DAY_CENTRE = 5;  // day-centre
+  MEALSUPPORT_CARE_HOME_CATERING = 6;  // care-home-catering
+  MEALSUPPORT_OTHER = 7;  // other
+}
+
+enum DieticAssessmentSocialSupportEnum {
+  SOCIALSUPPORT_UNSPECIFIED = 0;
+  SOCIALSUPPORT_GOOD = 1;  // good
+  SOCIALSUPPORT_SOME = 2;  // some
+  SOCIALSUPPORT_LIMITED = 3;  // limited
+  SOCIALSUPPORT_NONE = 4;  // none
+}
+
+enum DieticAssessmentActivityLevelEnum {
+  ACTIVITYLEVEL_UNSPECIFIED = 0;
+  ACTIVITYLEVEL_SEDENTARY = 1;  // sedentary
+  ACTIVITYLEVEL_LIGHTLY_ACTIVE = 2;  // lightly-active
+  ACTIVITYLEVEL_MODERATELY_ACTIVE = 3;  // moderately-active
+  ACTIVITYLEVEL_VERY_ACTIVE = 4;  // very-active
+}
+
+enum DieticAssessmentMobilityEnum {
+  MOBILITY_UNSPECIFIED = 0;
+  MOBILITY_INDEPENDENT = 1;  // independent
+  MOBILITY_WALKING_AID = 2;  // walking-aid
+  MOBILITY_WHEELCHAIR = 3;  // wheelchair
+  MOBILITY_BED_BOUND = 4;  // bed-bound
+}
+
+enum DieticAssessmentEatsIndependentlyEnum {
+  EATSINDEPENDENTLY_UNSPECIFIED = 0;
+  EATSINDEPENDENTLY_YES = 1;  // yes
+  EATSINDEPENDENTLY_NO = 2;  // no
+}
+
+enum DieticAssessmentFeedingAssistanceRequiredEnum {
+  FEEDINGASSISTANCEREQUIRED_UNSPECIFIED = 0;
+  FEEDINGASSISTANCEREQUIRED_NONE = 1;  // none
+  FEEDINGASSISTANCEREQUIRED_PROMPTING = 2;  // prompting
+  FEEDINGASSISTANCEREQUIRED_PARTIAL = 3;  // partial
+  FEEDINGASSISTANCEREQUIRED_FULL = 4;  // full
+}
+
+enum DieticAssessmentStageOfChangeEnum {
+  STAGEOFCHANGE_UNSPECIFIED = 0;
+  STAGEOFCHANGE_PRECONTEMPLATION = 1;  // precontemplation
+  STAGEOFCHANGE_CONTEMPLATION = 2;  // contemplation
+  STAGEOFCHANGE_PREPARATION = 3;  // preparation
+  STAGEOFCHANGE_ACTION = 4;  // action
+  STAGEOFCHANGE_MAINTENANCE = 5;  // maintenance
+  STAGEOFCHANGE_RELAPSE = 6;  // relapse
+}
+
+enum DieticAssessmentScoffMakeYourselfSickEnum {
+  SCOFFMAKEYOURSELFSICK_UNSPECIFIED = 0;
+  SCOFFMAKEYOURSELFSICK_YES = 1;  // yes
+  SCOFFMAKEYOURSELFSICK_NO = 2;  // no
+}
+
+enum DieticAssessmentScoffLostControlEnum {
+  SCOFFLOSTCONTROL_UNSPECIFIED = 0;
+  SCOFFLOSTCONTROL_YES = 1;  // yes
+  SCOFFLOSTCONTROL_NO = 2;  // no
+}
+
+enum DieticAssessmentScoffLostOneStoneEnum {
+  SCOFFLOSTONESTONE_UNSPECIFIED = 0;
+  SCOFFLOSTONESTONE_YES = 1;  // yes
+  SCOFFLOSTONESTONE_NO = 2;  // no
+}
+
+enum DieticAssessmentScoffBelieveYourselfFatEnum {
+  SCOFFBELIEVEYOURSELFFAT_UNSPECIFIED = 0;
+  SCOFFBELIEVEYOURSELFFAT_YES = 1;  // yes
+  SCOFFBELIEVEYOURSELFFAT_NO = 2;  // no
+}
+
+enum DieticAssessmentScoffFoodDominatesEnum {
+  SCOFFFOODDOMINATES_UNSPECIFIED = 0;
+  SCOFFFOODDOMINATES_YES = 1;  // yes
+  SCOFFFOODDOMINATES_NO = 2;  // no
+}
+
+enum DieticAssessmentMoodEnum {
+  MOOD_UNSPECIFIED = 0;
+  MOOD_GOOD = 1;  // good
+  MOOD_LOW = 2;  // low
+  MOOD_DEPRESSED = 3;  // depressed
+  MOOD_VARIABLE = 4;  // variable
+}
+
+enum DieticAssessmentAnxietyEnum {
+  ANXIETY_UNSPECIFIED = 0;
+  ANXIETY_NONE = 1;  // none
+  ANXIETY_MILD = 2;  // mild
+  ANXIETY_MODERATE = 3;  // moderate
+  ANXIETY_SEVERE = 4;  // severe
+}
+
+enum DieticAssessmentCognitiveImpairmentEnum {
+  COGNITIVEIMPAIRMENT_UNSPECIFIED = 0;
+  COGNITIVEIMPAIRMENT_NONE = 1;  // none
+  COGNITIVEIMPAIRMENT_MILD = 2;  // mild
+  COGNITIVEIMPAIRMENT_MODERATE = 3;  // moderate
+  COGNITIVEIMPAIRMENT_SEVERE = 4;  // severe
+}
+
+enum DieticAssessmentCapacityConcernEnum {
+  CAPACITYCONCERN_UNSPECIFIED = 0;
+  CAPACITYCONCERN_YES = 1;  // yes
+  CAPACITYCONCERN_NO = 2;  // no
+}
+
+enum DieticAssessmentSafeguardingConcernEnum {
+  SAFEGUARDINGCONCERN_UNSPECIFIED = 0;
+  SAFEGUARDINGCONCERN_YES = 1;  // yes
+  SAFEGUARDINGCONCERN_NO = 2;  // no
+}
+
+enum DieticAssessmentHealthLiteracyEnum {
+  HEALTHLITERACY_UNSPECIFIED = 0;
+  HEALTHLITERACY_HIGH = 1;  // high
+  HEALTHLITERACY_MODERATE = 2;  // moderate
+  HEALTHLITERACY_LOW = 3;  // low
+}
+
+enum DieticAssessmentPreferredLearningStyleEnum {
+  PREFERREDLEARNINGSTYLE_UNSPECIFIED = 0;
+  PREFERREDLEARNINGSTYLE_VERBAL = 1;  // verbal
+  PREFERREDLEARNINGSTYLE_WRITTEN = 2;  // written
+  PREFERREDLEARNINGSTYLE_VISUAL = 3;  // visual
+  PREFERREDLEARNINGSTYLE_DEMONSTRATION = 4;  // demonstration
+  PREFERREDLEARNINGSTYLE_DIGITAL = 5;  // digital
+}
+
+enum DieticAssessmentAcutelyIllEnum {
+  ACUTELYILL_UNSPECIFIED = 0;
+  ACUTELYILL_YES = 1;  // yes
+  ACUTELYILL_NO = 2;  // no
+}
+
+enum DieticAssessmentNoNutritionalIntakeOver5DaysEnum {
+  NONUTRITIONALINTAKEOVER5DAYS_UNSPECIFIED = 0;
+  NONUTRITIONALINTAKEOVER5DAYS_YES = 1;  // yes
+  NONUTRITIONALINTAKEOVER5DAYS_NO = 2;  // no
+}
+
+enum DieticAssessmentRequirementEquationEnum {
+  REQUIREMENTEQUATION_UNSPECIFIED = 0;
+  REQUIREMENTEQUATION_HENRY = 1;  // henry
+  REQUIREMENTEQUATION_SCHOFIELD = 2;  // schofield
+  REQUIREMENTEQUATION_HARRIS_BENEDICT = 3;  // harris-benedict
+  REQUIREMENTEQUATION_MIFFLIN_ST_JEOR = 4;  // mifflin-st-jeor
+  REQUIREMENTEQUATION_KCAL_PER_KG = 5;  // kcal-per-kg
+  REQUIREMENTEQUATION_INDIRECT_CALORIMETRY = 6;  // indirect-calorimetry
+  REQUIREMENTEQUATION_OTHER = 7;  // other
+}
+
+enum DieticAssessmentInterventionTypeEnum {
+  INTERVENTIONTYPE_UNSPECIFIED = 0;
+  INTERVENTIONTYPE_DIETARY_COUNSELLING = 1;  // dietary-counselling
+  INTERVENTIONTYPE_FOOD_FIRST_FORTIFICATION = 2;  // food-first-fortification
+  INTERVENTIONTYPE_ORAL_NUTRITIONAL_SUPPLEMENTS = 3;  // oral-nutritional-supplements
+  INTERVENTIONTYPE_TEXTURE_MODIFICATION = 4;  // texture-modification
+  INTERVENTIONTYPE_ENTERAL_NUTRITION = 5;  // enteral-nutrition
+  INTERVENTIONTYPE_PARENTERAL_NUTRITION = 6;  // parenteral-nutrition
+  INTERVENTIONTYPE_WEIGHT_MANAGEMENT = 7;  // weight-management
+  INTERVENTIONTYPE_NO_INTERVENTION = 8;  // no-intervention
+  INTERVENTIONTYPE_OTHER = 9;  // other
+}
+
+message DieticAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string dietitian_id = 6;  // UUID — uuid
+  DieticAssessmentStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  string assessment_time = 9;  // TIME — iso 8601 time
+  string site_name = 10;  // VARCHAR(255) — max 255 chars
+  string service_name = 11;  // VARCHAR(255) — max 255 chars
+  DieticAssessmentSettingEnum setting = 12;  // VARCHAR(30)
+  DieticAssessmentAppointmentTypeEnum appointment_type = 13;  // VARCHAR(30)
+  int32 planned_duration_minutes = 14;  // INTEGER
+  DieticAssessmentInterpreterRequiredEnum interpreter_required = 15;  // VARCHAR(5)
+  string interpreter_language = 16;  // VARCHAR(100) — max 100 chars
+  DieticAssessmentReferralSourceEnum referral_source = 17;  // VARCHAR(40)
+  string referral_date = 18;  // DATE — iso 8601 date
+  string referral_reason = 19;  // VARCHAR(500) — max 500 chars
+  string primary_condition = 20;  // VARCHAR(255) — max 255 chars
+  DieticAssessmentConsentToRecordEnum consent_to_record = 21;  // VARCHAR(5)
+  string accompanied_by = 22;  // VARCHAR(255) — max 255 chars
+  DieticAssessmentConditionDiabetesEnum condition_diabetes = 23;  // VARCHAR(20)
+  DieticAssessmentConditionCoeliacEnum condition_coeliac = 24;  // VARCHAR(5)
+  DieticAssessmentConditionInflammatoryBowelDiseaseEnum condition_inflammatory_bowel_disease = 25;  // VARCHAR(5)
+  DieticAssessmentConditionChronicKidneyDiseaseEnum condition_chronic_kidney_disease = 26;  // VARCHAR(5)
+  DieticAssessmentConditionLiverDiseaseEnum condition_liver_disease = 27;  // VARCHAR(5)
+  DieticAssessmentConditionCancerEnum condition_cancer = 28;  // VARCHAR(5)
+  DieticAssessmentConditionCardiovascularDiseaseEnum condition_cardiovascular_disease = 29;  // VARCHAR(5)
+  DieticAssessmentConditionRespiratoryDiseaseEnum condition_respiratory_disease = 30;  // VARCHAR(5)
+  DieticAssessmentConditionStrokeEnum condition_stroke = 31;  // VARCHAR(5)
+  DieticAssessmentConditionDementiaEnum condition_dementia = 32;  // VARCHAR(5)
+  DieticAssessmentConditionEatingDisorderEnum condition_eating_disorder = 33;  // VARCHAR(5)
+  string condition_other = 34;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentRecentSurgeryEnum recent_surgery = 35;  // VARCHAR(5)
+  string recent_surgery_type = 36;  // VARCHAR(255) — max 255 chars
+  string recent_surgery_date = 37;  // DATE — iso 8601 date
+  DieticAssessmentGastrointestinalSurgeryEnum gastrointestinal_surgery = 38;  // VARCHAR(40)
+  string current_symptoms = 39;  // TEXT
+  string family_history = 40;  // TEXT
+  DieticAssessmentPregnancyStatusEnum pregnancy_status = 41;  // VARCHAR(20)
+  DieticAssessmentTakesPrescriptionMedicinesEnum takes_prescription_medicines = 42;  // VARCHAR(5)
+  DieticAssessmentTakesOverTheCounterMedicinesEnum takes_over_the_counter_medicines = 43;  // VARCHAR(5)
+  DieticAssessmentTakesVitaminSupplementsEnum takes_vitamin_supplements = 44;  // VARCHAR(5)
+  DieticAssessmentTakesMineralSupplementsEnum takes_mineral_supplements = 45;  // VARCHAR(5)
+  DieticAssessmentTakesHerbalProductsEnum takes_herbal_products = 46;  // VARCHAR(5)
+  DieticAssessmentTakesOralNutritionalSupplementsEnum takes_oral_nutritional_supplements = 47;  // VARCHAR(5)
+  string oral_nutritional_supplement_detail = 48;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentEnteralNutritionEnum enteral_nutrition = 49;  // VARCHAR(5)
+  DieticAssessmentEnteralRouteEnum enteral_route = 50;  // VARCHAR(20)
+  DieticAssessmentEnteralTubeProblemEnum enteral_tube_problem = 51;  // VARCHAR(5)
+  DieticAssessmentParenteralNutritionEnum parenteral_nutrition = 52;  // VARCHAR(5)
+  DieticAssessmentDrugNutrientInteractionEnum drug_nutrient_interaction = 53;  // VARCHAR(5)
+  string drug_nutrient_interaction_detail = 54;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentMedicationAdherenceEnum medication_adherence = 55;  // VARCHAR(10)
+  string medication_notes = 56;  // TEXT
+  DieticAssessmentMeasurementMethodEnum measurement_method = 57;  // VARCHAR(15)
+  double height_as_cm = 58;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_as_kg = 59;  // NUMERIC(5,1) — numeric(5,1)
+  double body_mass_index = 60;  // NUMERIC(4,1) — numeric(4,1)
+  double mid_upper_arm_circumference_as_cm = 61;  // NUMERIC(4,1) — numeric(4,1)
+  double calf_circumference_as_cm = 62;  // NUMERIC(4,1) — numeric(4,1)
+  double waist_as_cm = 63;  // NUMERIC(5,1) — numeric(5,1)
+  double usual_weight_as_kg = 64;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_3_months_ago_as_kg = 65;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_6_months_ago_as_kg = 66;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_loss_percent = 67;  // NUMERIC(4,1) — numeric(4,1)
+  DieticAssessmentWeightLossIsIntentionalEnum weight_loss_is_intentional = 68;  // VARCHAR(5)
+  DieticAssessmentWeightTrendEnum weight_trend = 69;  // VARCHAR(15)
+  DieticAssessmentClothesOrJewelleryLooserEnum clothes_or_jewellery_looser = 70;  // VARCHAR(5)
+  DieticAssessmentOedemaPresentEnum oedema_present = 71;  // VARCHAR(5)
+  double oedema_adjustment_kg = 72;  // NUMERIC(4,1) — numeric(4,1)
+  DieticAssessmentAscitesPresentEnum ascites_present = 73;  // VARCHAR(5)
+  DieticAssessmentAmputationPresentEnum amputation_present = 74;  // VARCHAR(5)
+  double amputation_adjustment_percent = 75;  // NUMERIC(4,1) — numeric(4,1)
+  string anthropometry_notes = 76;  // TEXT
+  string bloods_sample_date = 77;  // DATE — iso 8601 date
+  double albumin_g_per_l = 78;  // NUMERIC(4,1) — numeric(4,1)
+  double c_reactive_protein_mg_per_l = 79;  // NUMERIC(6,1) — numeric(6,1)
+  double haemoglobin_g_per_l = 80;  // NUMERIC(4,1) — numeric(4,1)
+  double ferritin_ug_per_l = 81;  // NUMERIC(7,1) — numeric(7,1)
+  double vitamin_b12_ng_per_l = 82;  // NUMERIC(7,1) — numeric(7,1)
+  double folate_ug_per_l = 83;  // NUMERIC(5,1) — numeric(5,1)
+  double vitamin_d_nmol_per_l = 84;  // NUMERIC(5,1) — numeric(5,1)
+  double hba1c_mmol_per_mol = 85;  // NUMERIC(4,1) — numeric(4,1)
+  double sodium_mmol_per_l = 86;  // NUMERIC(4,1) — numeric(4,1)
+  double potassium_mmol_per_l = 87;  // NUMERIC(3,1) — numeric(3,1)
+  double magnesium_mmol_per_l = 88;  // NUMERIC(3,2) — numeric(3,2)
+  double phosphate_mmol_per_l = 89;  // NUMERIC(3,2) — numeric(3,2)
+  double corrected_calcium_mmol_per_l = 90;  // NUMERIC(3,2) — numeric(3,2)
+  double urea_mmol_per_l = 91;  // NUMERIC(4,1) — numeric(4,1)
+  double creatinine_umol_per_l = 92;  // NUMERIC(6,1) — numeric(6,1)
+  double egfr_ml_per_min = 93;  // NUMERIC(4,1) — numeric(4,1)
+  double alanine_aminotransferase_u_per_l = 94;  // NUMERIC(6,1) — numeric(6,1)
+  double bilirubin_umol_per_l = 95;  // NUMERIC(5,1) — numeric(5,1)
+  double total_cholesterol_mmol_per_l = 96;  // NUMERIC(4,1) — numeric(4,1)
+  double triglycerides_mmol_per_l = 97;  // NUMERIC(4,1) — numeric(4,1)
+  string biochemistry_notes = 98;  // TEXT
+  DieticAssessmentSubcutaneousFatLossEnum subcutaneous_fat_loss = 99;  // VARCHAR(15)
+  DieticAssessmentMuscleWastingTemplesEnum muscle_wasting_temples = 100;  // VARCHAR(5)
+  DieticAssessmentMuscleWastingClaviclesEnum muscle_wasting_clavicles = 101;  // VARCHAR(5)
+  DieticAssessmentMuscleWastingQuadricepsEnum muscle_wasting_quadriceps = 102;  // VARCHAR(5)
+  DieticAssessmentMuscleWastingSeverityEnum muscle_wasting_severity = 103;  // VARCHAR(15)
+  DieticAssessmentPeripheralOedemaSeverityEnum peripheral_oedema_severity = 104;  // VARCHAR(15)
+  DieticAssessmentOralHealthEnum oral_health = 105;  // VARCHAR(15)
+  DieticAssessmentDentitionEnum dentition = 106;  // VARCHAR(20)
+  DieticAssessmentChewingAbilityEnum chewing_ability = 107;  // VARCHAR(15)
+  DieticAssessmentTongueAndMucosaEnum tongue_and_mucosa = 108;  // VARCHAR(30)
+  DieticAssessmentSkinConditionEnum skin_condition = 109;  // VARCHAR(30)
+  DieticAssessmentHairConditionEnum hair_condition = 110;  // VARCHAR(30)
+  DieticAssessmentNailConditionEnum nail_condition = 111;  // VARCHAR(30)
+  DieticAssessmentPressureUlcerPresentEnum pressure_ulcer_present = 112;  // VARCHAR(5)
+  DieticAssessmentPressureUlcerCategoryEnum pressure_ulcer_category = 113;  // VARCHAR(15)
+  double hand_grip_strength_kg = 114;  // NUMERIC(4,1) — numeric(4,1)
+  string physical_exam_notes = 115;  // TEXT
+  int32 meals_per_day = 116;  // INTEGER
+  int32 snacks_per_day = 117;  // INTEGER
+  string recall_breakfast = 118;  // TEXT
+  string recall_mid_morning = 119;  // TEXT
+  string recall_lunch = 120;  // TEXT
+  string recall_afternoon = 121;  // TEXT
+  string recall_dinner = 122;  // TEXT
+  string recall_evening = 123;  // TEXT
+  DieticAssessmentPortionSizeEnum portion_size = 124;  // VARCHAR(15)
+  DieticAssessmentAppetiteEnum appetite = 125;  // VARCHAR(15)
+  int32 appetite_score_0_10 = 126;  // INTEGER
+  int32 proportion_of_usual_intake_percent = 127;  // INTEGER
+  int32 meals_out_per_week = 128;  // INTEGER
+  int32 takeaways_per_week = 129;  // INTEGER
+  DieticAssessmentFoodDiaryCompletedEnum food_diary_completed = 130;  // VARCHAR(5)
+  int32 estimated_energy_intake_kcal = 131;  // INTEGER
+  int32 estimated_protein_intake_g = 132;  // INTEGER
+  DieticAssessmentEatsAloneEnum eats_alone = 133;  // VARCHAR(5)
+  string dietary_recall_notes = 134;  // TEXT
+  int32 fluid_intake_ml_per_day = 135;  // INTEGER
+  string fluid_types = 136;  // VARCHAR(500) — max 500 chars
+  int32 caffeinated_drinks_per_day = 137;  // INTEGER
+  double alcohol_units_per_week = 138;  // NUMERIC(5,1) — numeric(5,1)
+  DieticAssessmentThickenedFluidsEnum thickened_fluids = 139;  // VARCHAR(5)
+  DieticAssessmentThickenedFluidsIddsiLevelEnum thickened_fluids_iddsi_level = 140;  // VARCHAR(5)
+  DieticAssessmentHydrationSignsEnum hydration_signs = 141;  // VARCHAR(30)
+  DieticAssessmentFluidRestrictionEnum fluid_restriction = 142;  // VARCHAR(5)
+  int32 fluid_restriction_ml_per_day = 143;  // INTEGER
+  string hydration_notes = 144;  // TEXT
+  DieticAssessmentHasFoodAllergyEnum has_food_allergy = 145;  // VARCHAR(5)
+  DieticAssessmentHasFoodIntoleranceEnum has_food_intolerance = 146;  // VARCHAR(5)
+  string foods_avoided = 147;  // TEXT
+  DieticAssessmentAvoidanceReasonEnum avoidance_reason = 148;  // VARCHAR(30)
+  string dislikes = 149;  // TEXT
+  DieticAssessmentTherapeuticDietEnum therapeutic_diet = 150;  // VARCHAR(40)
+  DieticAssessmentDietaryPatternEnum dietary_pattern = 151;  // VARCHAR(30)
+  string religious_or_cultural_requirement = 152;  // VARCHAR(500) — max 500 chars
+  string fasting_practice = 153;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentTextureModifiedDietEnum texture_modified_diet = 154;  // VARCHAR(5)
+  DieticAssessmentTextureModifiedIddsiLevelEnum texture_modified_iddsi_level = 155;  // VARCHAR(5)
+  string preferences_notes = 156;  // TEXT
+  DieticAssessmentAppetiteChangeEnum appetite_change = 157;  // VARCHAR(15)
+  DieticAssessmentEarlySatietyEnum early_satiety = 158;  // VARCHAR(5)
+  DieticAssessmentNauseaEnum nausea = 159;  // VARCHAR(5)
+  DieticAssessmentVomitingEnum vomiting = 160;  // VARCHAR(5)
+  DieticAssessmentDysphagiaEnum dysphagia = 161;  // VARCHAR(5)
+  DieticAssessmentDysphagiaScreenOutcomeEnum dysphagia_screen_outcome = 162;  // VARCHAR(20)
+  DieticAssessmentSpeechAndLanguageTherapyEnum speech_and_language_therapy = 163;  // VARCHAR(5)
+  DieticAssessmentRefluxEnum reflux = 164;  // VARCHAR(5)
+  DieticAssessmentAbdominalPainEnum abdominal_pain = 165;  // VARCHAR(5)
+  DieticAssessmentBloatingEnum bloating = 166;  // VARCHAR(5)
+  int32 bowel_frequency_per_week = 167;  // INTEGER
+  DieticAssessmentBristolStoolTypeEnum bristol_stool_type = 168;  // VARCHAR(5)
+  DieticAssessmentConstipationEnum constipation = 169;  // VARCHAR(5)
+  DieticAssessmentDiarrhoeaEnum diarrhoea = 170;  // VARCHAR(5)
+  DieticAssessmentStomaPresentEnum stoma_present = 171;  // VARCHAR(5)
+  int32 stoma_output_ml_per_day = 172;  // INTEGER
+  DieticAssessmentMalabsorptionSignsEnum malabsorption_signs = 173;  // VARCHAR(5)
+  string gastrointestinal_notes = 174;  // TEXT
+  DieticAssessmentLivingSituationEnum living_situation = 175;  // VARCHAR(30)
+  DieticAssessmentWhoShopsEnum who_shops = 176;  // VARCHAR(20)
+  DieticAssessmentWhoCooksEnum who_cooks = 177;  // VARCHAR(20)
+  DieticAssessmentCookingSkillsEnum cooking_skills = 178;  // VARCHAR(15)
+  int32 cooking_confidence_0_10 = 179;  // INTEGER
+  DieticAssessmentHasCookerEnum has_cooker = 180;  // VARCHAR(5)
+  DieticAssessmentHasFridgeEnum has_fridge = 181;  // VARCHAR(5)
+  DieticAssessmentHasFreezerEnum has_freezer = 182;  // VARCHAR(5)
+  DieticAssessmentHasMicrowaveEnum has_microwave = 183;  // VARCHAR(5)
+  double food_budget_per_week = 184;  // NUMERIC(7,2) — numeric(7,2)
+  DieticAssessmentWorriedFoodWouldRunOutEnum worried_food_would_run_out = 185;  // VARCHAR(5)
+  DieticAssessmentSkippedMealsForMoneyEnum skipped_meals_for_money = 186;  // VARCHAR(5)
+  DieticAssessmentUsesFoodBankEnum uses_food_bank = 187;  // VARCHAR(5)
+  DieticAssessmentAccessToShopsEnum access_to_shops = 188;  // VARCHAR(15)
+  DieticAssessmentHasTransportEnum has_transport = 189;  // VARCHAR(5)
+  DieticAssessmentWorkPatternEnum work_pattern = 190;  // VARCHAR(25)
+  DieticAssessmentMealSupportEnum meal_support = 191;  // VARCHAR(30)
+  DieticAssessmentSocialSupportEnum social_support = 192;  // VARCHAR(15)
+  string environment_notes = 193;  // TEXT
+  DieticAssessmentActivityLevelEnum activity_level = 194;  // VARCHAR(20)
+  string exercise_type = 195;  // VARCHAR(255) — max 255 chars
+  int32 exercise_minutes_per_week = 196;  // INTEGER
+  double sedentary_hours_per_day = 197;  // NUMERIC(3,1) — numeric(3,1)
+  DieticAssessmentMobilityEnum mobility = 198;  // VARCHAR(25)
+  int32 falls_in_last_12_months = 199;  // INTEGER
+  int32 sarcf_strength = 200;  // INTEGER
+  int32 sarcf_walking = 201;  // INTEGER
+  int32 sarcf_rising_from_chair = 202;  // INTEGER
+  int32 sarcf_climbing_stairs = 203;  // INTEGER
+  int32 sarcf_falls = 204;  // INTEGER
+  DieticAssessmentEatsIndependentlyEnum eats_independently = 205;  // VARCHAR(5)
+  DieticAssessmentFeedingAssistanceRequiredEnum feeding_assistance_required = 206;  // VARCHAR(20)
+  string function_notes = 207;  // TEXT
+  int32 motivation_0_10 = 208;  // INTEGER
+  DieticAssessmentStageOfChangeEnum stage_of_change = 209;  // VARCHAR(20)
+  int32 self_efficacy_0_10 = 210;  // INTEGER
+  string previous_attempts = 211;  // TEXT
+  string barriers = 212;  // TEXT
+  DieticAssessmentScoffMakeYourselfSickEnum scoff_make_yourself_sick = 213;  // VARCHAR(5)
+  DieticAssessmentScoffLostControlEnum scoff_lost_control = 214;  // VARCHAR(5)
+  DieticAssessmentScoffLostOneStoneEnum scoff_lost_one_stone = 215;  // VARCHAR(5)
+  DieticAssessmentScoffBelieveYourselfFatEnum scoff_believe_yourself_fat = 216;  // VARCHAR(5)
+  DieticAssessmentScoffFoodDominatesEnum scoff_food_dominates = 217;  // VARCHAR(5)
+  DieticAssessmentMoodEnum mood = 218;  // VARCHAR(15)
+  DieticAssessmentAnxietyEnum anxiety = 219;  // VARCHAR(15)
+  DieticAssessmentCognitiveImpairmentEnum cognitive_impairment = 220;  // VARCHAR(15)
+  DieticAssessmentCapacityConcernEnum capacity_concern = 221;  // VARCHAR(5)
+  DieticAssessmentSafeguardingConcernEnum safeguarding_concern = 222;  // VARCHAR(5)
+  DieticAssessmentHealthLiteracyEnum health_literacy = 223;  // VARCHAR(15)
+  DieticAssessmentPreferredLearningStyleEnum preferred_learning_style = 224;  // VARCHAR(20)
+  string patient_goal_in_own_words = 225;  // TEXT
+  DieticAssessmentAcutelyIllEnum acutely_ill = 226;  // VARCHAR(5)
+  DieticAssessmentNoNutritionalIntakeOver5DaysEnum no_nutritional_intake_over_5_days = 227;  // VARCHAR(5)
+  int32 days_of_negligible_intake = 228;  // INTEGER
+  int32 nrs_2002_score = 229;  // INTEGER
+  int32 energy_requirement_kcal = 230;  // INTEGER
+  int32 protein_requirement_g = 231;  // INTEGER
+  int32 fluid_requirement_ml = 232;  // INTEGER
+  DieticAssessmentRequirementEquationEnum requirement_equation = 233;  // VARCHAR(30)
+  string pes_problem = 234;  // VARCHAR(500) — max 500 chars
+  string pes_etiology = 235;  // VARCHAR(500) — max 500 chars
+  string pes_signs_symptoms = 236;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentInterventionTypeEnum intervention_type = 237;  // VARCHAR(40)
+  string prescribed_supplement = 238;  // VARCHAR(255) — max 255 chars
+  string prescribed_supplement_dose = 239;  // VARCHAR(255) — max 255 chars
+  string texture_modification_plan = 240;  // VARCHAR(255) — max 255 chars
+  string goal_1 = 241;  // VARCHAR(500) — max 500 chars
+  string goal_2 = 242;  // VARCHAR(500) — max 500 chars
+  string goal_3 = 243;  // VARCHAR(500) — max 500 chars
+  string education_provided = 244;  // TEXT
+  string resources_given = 245;  // TEXT
+  string monitoring_indicators = 246;  // TEXT
+  int32 review_interval_weeks = 247;  // INTEGER
+  string review_date = 248;  // DATE — iso 8601 date
+  string onward_referral = 249;  // VARCHAR(500) — max 500 chars
+  string additional_notes = 250;  // TEXT
+}

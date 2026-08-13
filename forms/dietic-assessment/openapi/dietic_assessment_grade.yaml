@@ -1,0 +1,271 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: dietic_assessment_grade
+openapi: 3.1.0
+info:
+  title: Dietic Assessment — DieticAssessmentGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for one dietetic assessment. Stores both the engine-computed values and the dietitian-final values with an override reason.
+paths:
+  /dietic-assessment-grades:
+    get:
+      summary: List DieticAssessmentGrade records
+      operationId: listDieticAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DieticAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DieticAssessmentGrade"
+    post:
+      summary: Create a new DieticAssessmentGrade
+      operationId: createDieticAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created DieticAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGrade"
+        "400":
+          description: Validation error
+  /dietic-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DieticAssessmentGrade by id
+      operationId: getDieticAssessmentGrade
+      responses:
+        "200":
+          description: The requested DieticAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGrade"
+        "404":
+          description: DieticAssessmentGrade not found
+    patch:
+      summary: Update an existing DieticAssessmentGrade
+      operationId: updateDieticAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessmentGrade"
+      responses:
+        "200":
+          description: The updated DieticAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGrade"
+        "404":
+          description: DieticAssessmentGrade not found
+    delete:
+      summary: Soft-delete a DieticAssessmentGrade
+      operationId: deleteDieticAssessmentGrade
+      responses:
+        "204":
+          description: DieticAssessmentGrade deleted
+        "404":
+          description: DieticAssessmentGrade not found
+components:
+  schemas:
+    DieticAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        dietic_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the dietic_assessment table, unique because grading is one-to-one with the assessment.
+        must_bmi_score:
+          type: integer
+          format: int32
+          description: MUST step 1 body mass index component, 0 to 2, where body mass index above 20.0 scores 0, 18.5 to 20.0 scores 1, and below 18.5 scores 2.
+        must_weight_loss_score:
+          type: integer
+          format: int32
+          description: MUST step 2 unplanned weight loss component, 0 to 2, where loss below 5 percent scores 0, 5 to 10 percent scores 1, and above 10 percent scores 2.
+        must_acute_disease_score:
+          type: integer
+          format: int32
+          description: MUST step 3 acute disease effect component, 0 or 2, scoring 2 when the patient is acutely ill and there has been or is likely to be no nutritional intake for more than 5 days.
+        must_score:
+          type: integer
+          format: int32
+          description: MUST total score, 0 to 6, being the sum of the three component scores.
+        computed_must_risk:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: MUST risk category computed by the engine, where 0 is low, 1 is medium, and 2 or more is high.
+        final_must_risk:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: MUST risk category signed off by the dietitian, which may equal or differ from the computed value.
+        must_is_estimated:
+          type: boolean
+          description: Whether the MUST score relies on an estimate, such as a mid-upper-arm circumference fallback when weighing was declined, in which case the report states that the score is estimated.
+        glim_phenotypic_criteria:
+          type: string
+          maxLength: 500
+          description: GLIM phenotypic criteria met, as a comma-separated list of criterion identifiers such as weight-loss, low-bmi, reduced-muscle-mass.
+        glim_etiologic_criteria:
+          type: string
+          maxLength: 500
+          description: GLIM etiologic criteria met, as a comma-separated list of criterion identifiers such as reduced-intake, inflammation.
+        glim_diagnosis:
+          type: string
+          enum:
+            - none
+            - moderate
+            - severe
+            - ""
+          description: "GLIM malnutrition diagnosis: none, moderate, or severe, requiring at least one phenotypic criterion and at least one etiologic criterion."
+        nrs_2002_score:
+          type: integer
+          format: int32
+          description: Nutritional Risk Screening 2002 total score, 0 to 7, where 3 or more indicates nutritional risk.
+        sarcf_score:
+          type: integer
+          format: int32
+          description: SARC-F sarcopenia case-finding score, 0 to 10, where 4 or more indicates a risk of sarcopenia.
+        scoff_score:
+          type: integer
+          format: int32
+          description: SCOFF disordered-eating screening score, 0 to 5, where 2 or more warrants further assessment.
+        refeeding_risk:
+          type: string
+          enum:
+            - none
+            - high
+            - highest
+            - ""
+          description: "Refeeding-syndrome risk per NICE CG32: none, high, or highest."
+        energy_requirement_kcal:
+          type: integer
+          format: int32
+          description: Estimated daily energy requirement in kilocalories, as entered by the dietitian using the equation named on the assessment.
+        protein_requirement_g:
+          type: integer
+          format: int32
+          description: Estimated daily protein requirement in grams, as entered by the dietitian.
+        computed_composite_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: "Composite nutrition risk computed by the engine using the max-grade algorithm across every instrument: low, moderate, high, or critical."
+        final_composite_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: Composite nutrition risk signed off by the dietitian, which may equal or differ from the computed value.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the dietitian set a final value differently from the computed value, mandatory when they differ.
+        recommendation:
+          type: string
+          enum:
+            - routine-care
+            - observe-and-rescreen
+            - dietetic-treatment-plan
+            - urgent-referral
+            - discharge
+            - ""
+          description: "Overall recommendation: routine-care, observe-and-rescreen, dietetic-treatment-plan, urgent-referral, or discharge."
+        dietitian_notes:
+          type: string
+          description: Free-text dietitian summary notes.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the registered dietitian who signed the assessment.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the dietitian electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - dietic_assessment_id
+        - computed_must_risk
+        - final_must_risk
+        - must_is_estimated
+        - glim_phenotypic_criteria
+        - glim_etiologic_criteria
+        - glim_diagnosis
+        - refeeding_risk
+        - computed_composite_risk
+        - final_composite_risk
+        - override_reason
+        - recommendation
+        - dietitian_notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off grading result for one dietetic assessment. Stores both the engine-computed values and the dietitian-final values with an override reason.

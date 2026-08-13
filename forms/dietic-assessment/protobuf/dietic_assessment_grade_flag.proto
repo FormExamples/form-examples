@@ -1,0 +1,54 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: dietic_assessment_grade_flag
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum DieticAssessmentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_MALNUTRITION_RISK = 1;  // high-malnutrition-risk
+  CATEGORY_SEVERE_UNDERWEIGHT = 2;  // severe-underweight
+  CATEGORY_SEVERE_WEIGHT_LOSS = 3;  // severe-weight-loss
+  CATEGORY_REFEEDING_SYNDROME_RISK = 4;  // refeeding-syndrome-risk
+  CATEGORY_DYSPHAGIA_ASPIRATION_RISK = 5;  // dysphagia-aspiration-risk
+  CATEGORY_INADEQUATE_ORAL_INTAKE = 6;  // inadequate-oral-intake
+  CATEGORY_MICRONUTRIENT_DEFICIENCY = 7;  // micronutrient-deficiency
+  CATEGORY_ELECTROLYTE_DERANGEMENT = 8;  // electrolyte-derangement
+  CATEGORY_DEHYDRATION_RISK = 9;  // dehydration-risk
+  CATEGORY_FOOD_INSECURITY = 10;  // food-insecurity
+  CATEGORY_DISORDERED_EATING_CONCERN = 11;  // disordered-eating-concern
+  CATEGORY_PRESSURE_ULCER = 12;  // pressure-ulcer
+  CATEGORY_SARCOPENIA_RISK = 13;  // sarcopenia-risk
+  CATEGORY_UNCONTROLLED_DIABETES = 14;  // uncontrolled-diabetes
+  CATEGORY_RENAL_DIETARY_CONFLICT = 15;  // renal-dietary-conflict
+  CATEGORY_DRUG_NUTRIENT_INTERACTION = 16;  // drug-nutrient-interaction
+  CATEGORY_ALLERGY_ANAPHYLAXIS_RISK = 17;  // allergy-anaphylaxis-risk
+  CATEGORY_ENTERAL_TUBE_COMPLICATION = 18;  // enteral-tube-complication
+  CATEGORY_ALCOHOL_EXCESS = 19;  // alcohol-excess
+  CATEGORY_PREGNANCY_LACTATION = 20;  // pregnancy-lactation
+  CATEGORY_PAEDIATRIC = 21;  // paediatric
+  CATEGORY_CAPACITY_CONCERN = 22;  // capacity-concern
+  CATEGORY_SAFEGUARDING = 23;  // safeguarding
+  CATEGORY_OTHER = 24;  // other
+}
+
+enum DieticAssessmentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message DieticAssessmentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string dietic_assessment_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  DieticAssessmentGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  DieticAssessmentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

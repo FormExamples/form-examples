@@ -90,6 +90,7 @@ dexa-bone-density-test-request	dexa_bone_density_test_request	DexaBoneDensityTes
 dexa-bone-density-test-result	dexa_bone_density_test_result	DexaBoneDensityTestResult
 diabetes-assessment	diabetes_assessment	DiabetesAssessment
 diabetic-eye-screening	diabetic_eye_screening	DiabeticEyeScreening
+dietic-assessment	dietic_assessment	DieticAssessment
 dyslexia-assessment	dyslexia_assessment	DyslexiaAssessment
 echocardiogram-test-request	echocardiogram_test_request	EchocardiogramTestRequest
 echocardiogram-test-result	echocardiogram_test_result	EchocardiogramTestResult

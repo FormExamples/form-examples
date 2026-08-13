@@ -1,0 +1,48 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: patient_allergy
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum PatientAllergySeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_MILD = 1;  // mild
+  SEVERITY_MODERATE = 2;  // moderate
+  SEVERITY_SEVERE = 3;  // severe
+  SEVERITY_ANAPHYLAXIS = 4;  // anaphylaxis
+}
+
+enum PatientAllergyKindEnum {
+  KIND_UNSPECIFIED = 0;
+  KIND_ALLERGY = 1;  // allergy
+  KIND_INTOLERANCE = 2;  // intolerance
+  KIND_AVOIDANCE_BY_CHOICE = 3;  // avoidance-by-choice
+  KIND_UNKNOWN = 4;  // unknown
+}
+
+enum PatientAllergyDiagnosisMethodEnum {
+  DIAGNOSISMETHOD_UNSPECIFIED = 0;
+  DIAGNOSISMETHOD_CLINICALLY_DIAGNOSED = 1;  // clinically-diagnosed
+  DIAGNOSISMETHOD_SKIN_PRICK_TEST = 2;  // skin-prick-test
+  DIAGNOSISMETHOD_SPECIFIC_IGE = 3;  // specific-ige
+  DIAGNOSISMETHOD_ORAL_FOOD_CHALLENGE = 4;  // oral-food-challenge
+  DIAGNOSISMETHOD_ELIMINATION_AND_REINTRODUCTION = 5;  // elimination-and-reintroduction
+  DIAGNOSISMETHOD_SELF_REPORTED = 6;  // self-reported
+}
+
+message PatientAllergy {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string allergy_id = 6;  // UUID — uuid
+  string reaction = 7;  // TEXT
+  PatientAllergySeverityEnum severity = 8;  // TEXT
+  PatientAllergyKindEnum kind = 9;  // TEXT
+  PatientAllergyDiagnosisMethodEnum diagnosis_method = 10;  // TEXT
+  string onset_on = 11;  // DATE — iso 8601 date
+  bool adrenaline_auto_injector = 12;  // BOOLEAN
+  string notes = 13;  // TEXT
+}

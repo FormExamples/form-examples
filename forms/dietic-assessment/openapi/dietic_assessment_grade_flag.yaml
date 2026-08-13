@@ -1,0 +1,185 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: dietic_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Dietic Assessment — DieticAssessmentGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the MUST score, with a priority and a suggested action for the dietetic or nutrition-support team.
+paths:
+  /dietic-assessment-grade-flags:
+    get:
+      summary: List DieticAssessmentGradeFlag records
+      operationId: listDieticAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DieticAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DieticAssessmentGradeFlag"
+    post:
+      summary: Create a new DieticAssessmentGradeFlag
+      operationId: createDieticAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created DieticAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /dietic-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DieticAssessmentGradeFlag by id
+      operationId: getDieticAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested DieticAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGradeFlag"
+        "404":
+          description: DieticAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing DieticAssessmentGradeFlag
+      operationId: updateDieticAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated DieticAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGradeFlag"
+        "404":
+          description: DieticAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a DieticAssessmentGradeFlag
+      operationId: deleteDieticAssessmentGradeFlag
+      responses:
+        "204":
+          description: DieticAssessmentGradeFlag deleted
+        "404":
+          description: DieticAssessmentGradeFlag not found
+components:
+  schemas:
+    DieticAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        dietic_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent dietic_assessment_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier, such as F-REFEEDING-SYNDROME-RISK-001.
+        category:
+          type: string
+          enum:
+            - high-malnutrition-risk
+            - severe-underweight
+            - severe-weight-loss
+            - refeeding-syndrome-risk
+            - dysphagia-aspiration-risk
+            - inadequate-oral-intake
+            - micronutrient-deficiency
+            - electrolyte-derangement
+            - dehydration-risk
+            - food-insecurity
+            - disordered-eating-concern
+            - pressure-ulcer
+            - sarcopenia-risk
+            - uncontrolled-diabetes
+            - renal-dietary-conflict
+            - drug-nutrient-interaction
+            - allergy-anaphylaxis-risk
+            - enteral-tube-complication
+            - alcohol-excess
+            - pregnancy-lactation
+            - paediatric
+            - capacity-concern
+            - safeguarding
+            - other
+            - ""
+          description: Flag category, such as refeeding-syndrome-risk or dysphagia-aspiration-risk.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action, such as \"check potassium, phosphate, and magnesium before feeding\"."
+      required:
+        - created_at
+        - updated_at
+        - dietic_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the MUST score, with a priority and a suggested action for the dietetic or nutrition-support team.

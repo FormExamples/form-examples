@@ -1,0 +1,64 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: dietitian
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum DietitianRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_DIETITIAN = 1;  // dietitian
+  ROLE_SPECIALIST_DIETITIAN = 2;  // specialist-dietitian
+  ROLE_DIETETIC_ASSISTANT = 3;  // dietetic-assistant
+  ROLE_ASSISTANT_PRACTITIONER = 4;  // assistant-practitioner
+  ROLE_DIETETIC_STUDENT = 5;  // dietetic-student
+  ROLE_NUTRITION_NURSE = 6;  // nutrition-nurse
+  ROLE_NUTRITIONIST = 7;  // nutritionist
+  ROLE_OTHER = 8;  // other
+}
+
+enum DietitianSpecialtyEnum {
+  SPECIALTY_UNSPECIFIED = 0;
+  SPECIALTY_GENERAL = 1;  // general
+  SPECIALTY_ACUTE = 2;  // acute
+  SPECIALTY_COMMUNITY = 3;  // community
+  SPECIALTY_ONCOLOGY = 4;  // oncology
+  SPECIALTY_RENAL = 5;  // renal
+  SPECIALTY_DIABETES = 6;  // diabetes
+  SPECIALTY_GASTROENTEROLOGY = 7;  // gastroenterology
+  SPECIALTY_PAEDIATRICS = 8;  // paediatrics
+  SPECIALTY_CRITICAL_CARE = 9;  // critical-care
+  SPECIALTY_HOME_ENTERAL_FEEDING = 10;  // home-enteral-feeding
+  SPECIALTY_BARIATRIC = 11;  // bariatric
+  SPECIALTY_EATING_DISORDERS = 12;  // eating-disorders
+  SPECIALTY_INHERITED_METABOLIC = 13;  // inherited-metabolic
+  SPECIALTY_OTHER = 14;  // other
+}
+
+enum DietitianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_HCPC = 1;  // HCPC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_GMC = 3;  // GMC
+  REGISTRATIONBODY_AFN = 4;  // AfN
+  REGISTRATIONBODY_OTHER = 5;  // other
+}
+
+message Dietitian {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  DietitianRoleEnum role = 11;  // TEXT
+  DietitianSpecialtyEnum specialty = 12;  // TEXT
+  DietitianRegistrationBodyEnum registration_body = 13;  // TEXT
+  string registration_number = 14;  // TEXT
+  string employer = 15;  // TEXT
+  string united_kingdom_nhs_number = 16;  // CHAR(12) — max 12 chars
+}

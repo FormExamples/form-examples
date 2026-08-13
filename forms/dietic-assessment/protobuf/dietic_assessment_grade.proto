@@ -1,0 +1,91 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: dietic_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum DieticAssessmentGradeComputedMustRiskEnum {
+  COMPUTEDMUSTRISK_UNSPECIFIED = 0;
+  COMPUTEDMUSTRISK_LOW = 1;  // low
+  COMPUTEDMUSTRISK_MEDIUM = 2;  // medium
+  COMPUTEDMUSTRISK_HIGH = 3;  // high
+}
+
+enum DieticAssessmentGradeFinalMustRiskEnum {
+  FINALMUSTRISK_UNSPECIFIED = 0;
+  FINALMUSTRISK_LOW = 1;  // low
+  FINALMUSTRISK_MEDIUM = 2;  // medium
+  FINALMUSTRISK_HIGH = 3;  // high
+}
+
+enum DieticAssessmentGradeGlimDiagnosisEnum {
+  GLIMDIAGNOSIS_UNSPECIFIED = 0;
+  GLIMDIAGNOSIS_NONE = 1;  // none
+  GLIMDIAGNOSIS_MODERATE = 2;  // moderate
+  GLIMDIAGNOSIS_SEVERE = 3;  // severe
+}
+
+enum DieticAssessmentGradeRefeedingRiskEnum {
+  REFEEDINGRISK_UNSPECIFIED = 0;
+  REFEEDINGRISK_NONE = 1;  // none
+  REFEEDINGRISK_HIGH = 2;  // high
+  REFEEDINGRISK_HIGHEST = 3;  // highest
+}
+
+enum DieticAssessmentGradeComputedCompositeRiskEnum {
+  COMPUTEDCOMPOSITERISK_UNSPECIFIED = 0;
+  COMPUTEDCOMPOSITERISK_LOW = 1;  // low
+  COMPUTEDCOMPOSITERISK_MODERATE = 2;  // moderate
+  COMPUTEDCOMPOSITERISK_HIGH = 3;  // high
+  COMPUTEDCOMPOSITERISK_CRITICAL = 4;  // critical
+}
+
+enum DieticAssessmentGradeFinalCompositeRiskEnum {
+  FINALCOMPOSITERISK_UNSPECIFIED = 0;
+  FINALCOMPOSITERISK_LOW = 1;  // low
+  FINALCOMPOSITERISK_MODERATE = 2;  // moderate
+  FINALCOMPOSITERISK_HIGH = 3;  // high
+  FINALCOMPOSITERISK_CRITICAL = 4;  // critical
+}
+
+enum DieticAssessmentGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ROUTINE_CARE = 1;  // routine-care
+  RECOMMENDATION_OBSERVE_AND_RESCREEN = 2;  // observe-and-rescreen
+  RECOMMENDATION_DIETETIC_TREATMENT_PLAN = 3;  // dietetic-treatment-plan
+  RECOMMENDATION_URGENT_REFERRAL = 4;  // urgent-referral
+  RECOMMENDATION_DISCHARGE = 5;  // discharge
+}
+
+message DieticAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string dietic_assessment_id = 5;  // UUID — uuid
+  int32 must_bmi_score = 6;  // INTEGER
+  int32 must_weight_loss_score = 7;  // INTEGER
+  int32 must_acute_disease_score = 8;  // INTEGER
+  int32 must_score = 9;  // INTEGER
+  DieticAssessmentGradeComputedMustRiskEnum computed_must_risk = 10;  // VARCHAR(10)
+  DieticAssessmentGradeFinalMustRiskEnum final_must_risk = 11;  // VARCHAR(10)
+  bool must_is_estimated = 12;  // BOOLEAN
+  string glim_phenotypic_criteria = 13;  // VARCHAR(500) — max 500 chars
+  string glim_etiologic_criteria = 14;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentGradeGlimDiagnosisEnum glim_diagnosis = 15;  // VARCHAR(10)
+  int32 nrs_2002_score = 16;  // INTEGER
+  int32 sarcf_score = 17;  // INTEGER
+  int32 scoff_score = 18;  // INTEGER
+  DieticAssessmentGradeRefeedingRiskEnum refeeding_risk = 19;  // VARCHAR(10)
+  int32 energy_requirement_kcal = 20;  // INTEGER
+  int32 protein_requirement_g = 21;  // INTEGER
+  DieticAssessmentGradeComputedCompositeRiskEnum computed_composite_risk = 22;  // VARCHAR(10)
+  DieticAssessmentGradeFinalCompositeRiskEnum final_composite_risk = 23;  // VARCHAR(10)
+  string override_reason = 24;  // VARCHAR(500) — max 500 chars
+  DieticAssessmentGradeRecommendationEnum recommendation = 25;  // VARCHAR(25)
+  string dietitian_notes = 26;  // TEXT
+  string signed_by_name = 27;  // VARCHAR(255) — max 255 chars
+  string signed_at = 28;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 29;  // TIMESTAMPTZ — iso 8601
+}

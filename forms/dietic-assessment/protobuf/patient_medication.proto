@@ -1,0 +1,41 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: patient_medication
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum PatientMedicationRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_ORAL = 1;  // oral
+  ROUTE_ENTERAL_TUBE = 2;  // enteral-tube
+  ROUTE_INTRAVENOUS = 3;  // intravenous
+  ROUTE_SUBCUTANEOUS = 4;  // subcutaneous
+  ROUTE_INTRAMUSCULAR = 5;  // intramuscular
+  ROUTE_TOPICAL = 6;  // topical
+  ROUTE_OTHER = 7;  // other
+}
+
+enum PatientMedicationAdherenceEnum {
+  ADHERENCE_UNSPECIFIED = 0;
+  ADHERENCE_FULL = 1;  // full
+  ADHERENCE_PARTIAL = 2;  // partial
+  ADHERENCE_NONE = 3;  // none
+  ADHERENCE_UNKNOWN = 4;  // unknown
+}
+
+message PatientMedication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string medication_id = 6;  // UUID — uuid
+  string dose = 7;  // TEXT
+  string frequency = 8;  // TEXT
+  PatientMedicationRouteEnum route = 9;  // TEXT
+  string started_on = 10;  // DATE — iso 8601 date
+  string prescribed_by = 11;  // TEXT
+  PatientMedicationAdherenceEnum adherence = 12;  // TEXT
+  string notes = 13;  // TEXT
+}

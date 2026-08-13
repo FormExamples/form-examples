@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication
+openapi: 3.1.0
+info:
+  title: Dietic Assessment — Medication
+  version: 1.0.0
+  description: Medication, supplement, or nutrition product that a patient may be taking.
+paths:
+  /medications:
+    get:
+      summary: List Medication records
+      operationId: listMedication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Medication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Medication"
+    post:
+      summary: Create a new Medication
+      operationId: createMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Medication"
+      responses:
+        "201":
+          description: The newly created Medication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medication"
+        "400":
+          description: Validation error
+  /medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Medication by id
+      operationId: getMedication
+      responses:
+        "200":
+          description: The requested Medication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medication"
+        "404":
+          description: Medication not found
+    patch:
+      summary: Update an existing Medication
+      operationId: updateMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Medication"
+      responses:
+        "200":
+          description: The updated Medication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medication"
+        "404":
+          description: Medication not found
+    delete:
+      summary: Soft-delete a Medication
+      operationId: deleteMedication
+      responses:
+        "204":
+          description: Medication deleted
+        "404":
+          description: Medication not found
+components:
+  schemas:
+    Medication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        international_nonproprietary_name:
+          type: string
+          description: International Nonproprietary Name (INN) of the medication, as designated by the WHO.
+        brand_name:
+          type: string
+          description: Brand name as the patient knows the product, such as for reconciling a patient-reported supplement to its ingredient.
+        kind:
+          type: string
+          enum:
+            - prescription
+            - over-the-counter
+            - vitamin
+            - mineral
+            - herbal
+            - complementary
+            - oral-nutritional-supplement
+            - enteral-feed
+            - parenteral-nutrition
+            - other
+            - ""
+          description: Kind of product, such as prescription, over-the-counter, vitamin, mineral, herbal, or oral nutritional supplement.
+        nutrient_interaction:
+          type: string
+          description: Known drug-nutrient interaction, such as for firing the drug-nutrient-interaction safety flag.
+        description:
+          type: string
+          description: Description of the medication, including its uses and properties.
+      required:
+        - created_at
+        - updated_at
+        - international_nonproprietary_name
+        - brand_name
+        - kind
+        - nutrient_interaction
+        - description
+      description: Medication, supplement, or nutrition product that a patient may be taking.

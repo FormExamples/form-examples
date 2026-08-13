@@ -1,0 +1,172 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: dietic_assessment_grade_rule
+openapi: 3.1.0
+info:
+  title: Dietic Assessment — DieticAssessmentGradeRule
+  version: 1.0.0
+  description: Audit trail of every MUST, GLIM, NRS-2002, SARC-F, SCOFF, refeeding, or composite rule that fired for this assessment.
+paths:
+  /dietic-assessment-grade-rules:
+    get:
+      summary: List DieticAssessmentGradeRule records
+      operationId: listDieticAssessmentGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DieticAssessmentGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DieticAssessmentGradeRule"
+    post:
+      summary: Create a new DieticAssessmentGradeRule
+      operationId: createDieticAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessmentGradeRule"
+      responses:
+        "201":
+          description: The newly created DieticAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGradeRule"
+        "400":
+          description: Validation error
+  /dietic-assessment-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DieticAssessmentGradeRule by id
+      operationId: getDieticAssessmentGradeRule
+      responses:
+        "200":
+          description: The requested DieticAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGradeRule"
+        "404":
+          description: DieticAssessmentGradeRule not found
+    patch:
+      summary: Update an existing DieticAssessmentGradeRule
+      operationId: updateDieticAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessmentGradeRule"
+      responses:
+        "200":
+          description: The updated DieticAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessmentGradeRule"
+        "404":
+          description: DieticAssessmentGradeRule not found
+    delete:
+      summary: Soft-delete a DieticAssessmentGradeRule
+      operationId: deleteDieticAssessmentGradeRule
+      responses:
+        "204":
+          description: DieticAssessmentGradeRule deleted
+        "404":
+          description: DieticAssessmentGradeRule not found
+components:
+  schemas:
+    DieticAssessmentGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        dietic_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent dietic_assessment_grade table.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Stable rule identifier, such as R-MUST-BMI-2 or R-GLIM-P-WL.
+        instrument:
+          type: string
+          enum:
+            - must
+            - glim
+            - nrs-2002
+            - sarcf
+            - scoff
+            - refeeding
+            - composite
+          description: "Scoring instrument the rule belongs to: must, glim, nrs-2002, sarcf, scoff, refeeding, or composite."
+        component:
+          type: string
+          maxLength: 50
+          description: Instrument component the rule scores, such as bmi, weight-loss, or acute-disease for MUST.
+        score:
+          type: integer
+          format: int32
+          description: Score contributed by this rule, where the instrument is numeric.
+        band:
+          type: string
+          maxLength: 20
+          description: Risk band contributed by this rule, such as low, moderate, high, or critical.
+        category:
+          type: string
+          maxLength: 50
+          description: Assessment domain the rule belongs to, such as anthropometry, weight history, or acute illness.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - dietic_assessment_grade_id
+        - rule_id
+        - instrument
+        - component
+        - band
+        - category
+        - description
+      description: Audit trail of every MUST, GLIM, NRS-2002, SARC-F, SCOFF, refeeding, or composite rule that fired for this assessment.

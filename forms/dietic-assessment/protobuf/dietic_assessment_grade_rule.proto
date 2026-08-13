@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: dietic_assessment_grade_rule
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum DieticAssessmentGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_MUST = 1;  // must
+  INSTRUMENT_GLIM = 2;  // glim
+  INSTRUMENT_NRS_2002 = 3;  // nrs-2002
+  INSTRUMENT_SARCF = 4;  // sarcf
+  INSTRUMENT_SCOFF = 5;  // scoff
+  INSTRUMENT_REFEEDING = 6;  // refeeding
+  INSTRUMENT_COMPOSITE = 7;  // composite
+}
+
+message DieticAssessmentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string dietic_assessment_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(30) — max 30 chars
+  DieticAssessmentGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  string component = 8;  // VARCHAR(50) — max 50 chars
+  int32 score = 9;  // INTEGER
+  string band = 10;  // VARCHAR(20) — max 20 chars
+  string category = 11;  // VARCHAR(50) — max 50 chars
+  string description = 12;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,179 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: patient_medication
+openapi: 3.1.0
+info:
+  title: Dietic Assessment — PatientMedication
+  version: 1.0.0
+  description: Patient medication, i.e. one medication or supplement that one patient is taking.
+paths:
+  /patient-medications:
+    get:
+      summary: List PatientMedication records
+      operationId: listPatientMedication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PatientMedication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientMedication"
+    post:
+      summary: Create a new PatientMedication
+      operationId: createPatientMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientMedication"
+      responses:
+        "201":
+          description: The newly created PatientMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientMedication"
+        "400":
+          description: Validation error
+  /patient-medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PatientMedication by id
+      operationId: getPatientMedication
+      responses:
+        "200":
+          description: The requested PatientMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientMedication"
+        "404":
+          description: PatientMedication not found
+    patch:
+      summary: Update an existing PatientMedication
+      operationId: updatePatientMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientMedication"
+      responses:
+        "200":
+          description: The updated PatientMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientMedication"
+        "404":
+          description: PatientMedication not found
+    delete:
+      summary: Soft-delete a PatientMedication
+      operationId: deletePatientMedication
+      responses:
+        "204":
+          description: PatientMedication deleted
+        "404":
+          description: PatientMedication not found
+components:
+  schemas:
+    PatientMedication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        medication_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medication table.
+        dose:
+          type: string
+          description: "Dose as the patient takes it, such as \"20 mg\" or \"one 125 ml bottle\"."
+        frequency:
+          type: string
+          description: "Frequency as the patient takes it, such as \"twice daily\" or \"as needed\"."
+        route:
+          type: string
+          enum:
+            - oral
+            - enteral-tube
+            - intravenous
+            - subcutaneous
+            - intramuscular
+            - topical
+            - other
+            - ""
+          description: Route of administration, such as oral or enteral tube.
+        started_on:
+          type: string
+          format: date
+          description: Date the patient started taking this product, where known.
+        prescribed_by:
+          type: string
+          description: "Who prescribed or recommended the product, or \"self\" for a self-selected supplement."
+        adherence:
+          type: string
+          enum:
+            - full
+            - partial
+            - none
+            - unknown
+            - ""
+          description: Reported adherence, such as for reviewing whether a prescribed oral nutritional supplement is actually being taken.
+        notes:
+          type: string
+          description: Free-text notes about this product for this patient.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - medication_id
+        - dose
+        - frequency
+        - route
+        - prescribed_by
+        - adherence
+        - notes
+      description: Patient medication, i.e. one medication or supplement that one patient is taking.

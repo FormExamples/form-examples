@@ -1,0 +1,14 @@
+<!ELEMENT patient_medication (id,created_at,updated_at,deleted_at,patient_id,medication_id,dose,frequency,route,started_on,prescribed_by,adherence,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT medication_id (#PCDATA)>
+<!ELEMENT dose (#PCDATA)>
+<!ELEMENT frequency (#PCDATA)>
+<!ELEMENT route (#PCDATA)>
+<!ELEMENT started_on (#PCDATA)>
+<!ELEMENT prescribed_by (#PCDATA)>
+<!ELEMENT adherence (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

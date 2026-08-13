@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medication
+
+syntax = "proto3";
+
+package form_examples.dietic_assessment;
+
+enum MedicationKindEnum {
+  KIND_UNSPECIFIED = 0;
+  KIND_PRESCRIPTION = 1;  // prescription
+  KIND_OVER_THE_COUNTER = 2;  // over-the-counter
+  KIND_VITAMIN = 3;  // vitamin
+  KIND_MINERAL = 4;  // mineral
+  KIND_HERBAL = 5;  // herbal
+  KIND_COMPLEMENTARY = 6;  // complementary
+  KIND_ORAL_NUTRITIONAL_SUPPLEMENT = 7;  // oral-nutritional-supplement
+  KIND_ENTERAL_FEED = 8;  // enteral-feed
+  KIND_PARENTERAL_NUTRITION = 9;  // parenteral-nutrition
+  KIND_OTHER = 10;  // other
+}
+
+message Medication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string international_nonproprietary_name = 5;  // TEXT
+  string brand_name = 6;  // TEXT
+  MedicationKindEnum kind = 7;  // TEXT
+  string nutrient_interaction = 8;  // TEXT
+  string description = 9;  // TEXT
+}

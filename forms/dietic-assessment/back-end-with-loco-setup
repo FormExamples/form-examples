@@ -1,0 +1,404 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=dietic-assessment
+form_snake_case=dietic_assessment
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    waist_as_cm:double \
+    mid_upper_arm_circumference_as_cm:double \
+    calf_circumference_as_cm:double \
+    preferred_language:text \
+    ethnicity:text \
+    --api
+
+cargo loco generate scaffold dietitian \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    specialty:text! \
+    registration_body:text! \
+    registration_number:text! \
+    employer:text! \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold medication \
+    deleted_at:tstz \
+    international_nonproprietary_name:text! \
+    brand_name:text! \
+    kind:text! \
+    nutrient_interaction:text! \
+    description:text! \
+    --api
+
+cargo loco generate scaffold patient_medication \
+    deleted_at:tstz \
+    patient:references \
+    medication:references \
+    dose:text! \
+    frequency:text! \
+    route:text! \
+    started_on:date \
+    prescribed_by:text! \
+    adherence:text! \
+    notes:text! \
+    --api
+
+cargo loco generate scaffold allergy \
+    deleted_at:tstz \
+    scientific_name:text! \
+    european_union_name:text! \
+    united_states_name:text! \
+    cosmetic_name:text! \
+    kind:text! \
+    is_regulated_food_allergen:bool! \
+    --api
+
+cargo loco generate scaffold patient_allergy \
+    deleted_at:tstz \
+    patient:references \
+    allergy:references \
+    reaction:text! \
+    severity:text! \
+    kind:text! \
+    diagnosis_method:text! \
+    onset_on:date \
+    adrenaline_auto_injector:bool! \
+    notes:text! \
+    --api
+
+cargo loco generate scaffold dietic_assessment \
+    deleted_at:tstz \
+    patient:references \
+    dietitian:references \
+    status:string! \
+    assessment_date:date \
+    assessment_time:string \
+    site_name:string! \
+    service_name:string! \
+    setting:string! \
+    appointment_type:string! \
+    planned_duration_minutes:int \
+    interpreter_required:string! \
+    interpreter_language:string! \
+    referral_source:string! \
+    referral_date:date \
+    referral_reason:string! \
+    primary_condition:string! \
+    consent_to_record:string! \
+    accompanied_by:string! \
+    condition_diabetes:string! \
+    condition_coeliac:string! \
+    condition_inflammatory_bowel_disease:string! \
+    condition_chronic_kidney_disease:string! \
+    condition_liver_disease:string! \
+    condition_cancer:string! \
+    condition_cardiovascular_disease:string! \
+    condition_respiratory_disease:string! \
+    condition_stroke:string! \
+    condition_dementia:string! \
+    condition_eating_disorder:string! \
+    condition_other:string! \
+    recent_surgery:string! \
+    recent_surgery_type:string! \
+    recent_surgery_date:date \
+    gastrointestinal_surgery:string! \
+    current_symptoms:text! \
+    family_history:text! \
+    pregnancy_status:string! \
+    takes_prescription_medicines:string! \
+    takes_over_the_counter_medicines:string! \
+    takes_vitamin_supplements:string! \
+    takes_mineral_supplements:string! \
+    takes_herbal_products:string! \
+    takes_oral_nutritional_supplements:string! \
+    oral_nutritional_supplement_detail:string! \
+    enteral_nutrition:string! \
+    enteral_route:string! \
+    enteral_tube_problem:string! \
+    parenteral_nutrition:string! \
+    drug_nutrient_interaction:string! \
+    drug_nutrient_interaction_detail:string! \
+    medication_adherence:string! \
+    medication_notes:text! \
+    measurement_method:string! \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    mid_upper_arm_circumference_as_cm:double \
+    calf_circumference_as_cm:double \
+    waist_as_cm:double \
+    usual_weight_as_kg:double \
+    weight_3_months_ago_as_kg:double \
+    weight_6_months_ago_as_kg:double \
+    weight_loss_percent:double \
+    weight_loss_is_intentional:string! \
+    weight_trend:string! \
+    clothes_or_jewellery_looser:string! \
+    oedema_present:string! \
+    oedema_adjustment_kg:double \
+    ascites_present:string! \
+    amputation_present:string! \
+    amputation_adjustment_percent:double \
+    anthropometry_notes:text! \
+    bloods_sample_date:date \
+    albumin_g_per_l:double \
+    c_reactive_protein_mg_per_l:double \
+    haemoglobin_g_per_l:double \
+    ferritin_ug_per_l:double \
+    vitamin_b12_ng_per_l:double \
+    folate_ug_per_l:double \
+    vitamin_d_nmol_per_l:double \
+    hba1c_mmol_per_mol:double \
+    sodium_mmol_per_l:double \
+    potassium_mmol_per_l:double \
+    magnesium_mmol_per_l:double \
+    phosphate_mmol_per_l:double \
+    corrected_calcium_mmol_per_l:double \
+    urea_mmol_per_l:double \
+    creatinine_umol_per_l:double \
+    egfr_ml_per_min:double \
+    alanine_aminotransferase_u_per_l:double \
+    bilirubin_umol_per_l:double \
+    total_cholesterol_mmol_per_l:double \
+    triglycerides_mmol_per_l:double \
+    biochemistry_notes:text! \
+    subcutaneous_fat_loss:string! \
+    muscle_wasting_temples:string! \
+    muscle_wasting_clavicles:string! \
+    muscle_wasting_quadriceps:string! \
+    muscle_wasting_severity:string! \
+    peripheral_oedema_severity:string! \
+    oral_health:string! \
+    dentition:string! \
+    chewing_ability:string! \
+    tongue_and_mucosa:string! \
+    skin_condition:string! \
+    hair_condition:string! \
+    nail_condition:string! \
+    pressure_ulcer_present:string! \
+    pressure_ulcer_category:string! \
+    hand_grip_strength_kg:double \
+    physical_exam_notes:text! \
+    meals_per_day:int \
+    snacks_per_day:int \
+    recall_breakfast:text! \
+    recall_mid_morning:text! \
+    recall_lunch:text! \
+    recall_afternoon:text! \
+    recall_dinner:text! \
+    recall_evening:text! \
+    portion_size:string! \
+    appetite:string! \
+    appetite_score_0_10:int \
+    proportion_of_usual_intake_percent:int \
+    meals_out_per_week:int \
+    takeaways_per_week:int \
+    food_diary_completed:string! \
+    estimated_energy_intake_kcal:int \
+    estimated_protein_intake_g:int \
+    eats_alone:string! \
+    dietary_recall_notes:text! \
+    fluid_intake_ml_per_day:int \
+    fluid_types:string! \
+    caffeinated_drinks_per_day:int \
+    alcohol_units_per_week:double \
+    thickened_fluids:string! \
+    thickened_fluids_iddsi_level:string! \
+    hydration_signs:string! \
+    fluid_restriction:string! \
+    fluid_restriction_ml_per_day:int \
+    hydration_notes:text! \
+    has_food_allergy:string! \
+    has_food_intolerance:string! \
+    foods_avoided:text! \
+    avoidance_reason:string! \
+    dislikes:text! \
+    therapeutic_diet:string! \
+    dietary_pattern:string! \
+    religious_or_cultural_requirement:string! \
+    fasting_practice:string! \
+    texture_modified_diet:string! \
+    texture_modified_iddsi_level:string! \
+    preferences_notes:text! \
+    appetite_change:string! \
+    early_satiety:string! \
+    nausea:string! \
+    vomiting:string! \
+    dysphagia:string! \
+    dysphagia_screen_outcome:string! \
+    speech_and_language_therapy:string! \
+    reflux:string! \
+    abdominal_pain:string! \
+    bloating:string! \
+    bowel_frequency_per_week:int \
+    bristol_stool_type:string! \
+    constipation:string! \
+    diarrhoea:string! \
+    stoma_present:string! \
+    stoma_output_ml_per_day:int \
+    malabsorption_signs:string! \
+    gastrointestinal_notes:text! \
+    living_situation:string! \
+    who_shops:string! \
+    who_cooks:string! \
+    cooking_skills:string! \
+    cooking_confidence_0_10:int \
+    has_cooker:string! \
+    has_fridge:string! \
+    has_freezer:string! \
+    has_microwave:string! \
+    food_budget_per_week:double \
+    worried_food_would_run_out:string! \
+    skipped_meals_for_money:string! \
+    uses_food_bank:string! \
+    access_to_shops:string! \
+    has_transport:string! \
+    work_pattern:string! \
+    meal_support:string! \
+    social_support:string! \
+    environment_notes:text! \
+    activity_level:string! \
+    exercise_type:string! \
+    exercise_minutes_per_week:int \
+    sedentary_hours_per_day:double \
+    mobility:string! \
+    falls_in_last_12_months:int \
+    sarcf_strength:int \
+    sarcf_walking:int \
+    sarcf_rising_from_chair:int \
+    sarcf_climbing_stairs:int \
+    sarcf_falls:int \
+    eats_independently:string! \
+    feeding_assistance_required:string! \
+    function_notes:text! \
+    motivation_0_10:int \
+    stage_of_change:string! \
+    self_efficacy_0_10:int \
+    previous_attempts:text! \
+    barriers:text! \
+    scoff_make_yourself_sick:string! \
+    scoff_lost_control:string! \
+    scoff_lost_one_stone:string! \
+    scoff_believe_yourself_fat:string! \
+    scoff_food_dominates:string! \
+    mood:string! \
+    anxiety:string! \
+    cognitive_impairment:string! \
+    capacity_concern:string! \
+    safeguarding_concern:string! \
+    health_literacy:string! \
+    preferred_learning_style:string! \
+    patient_goal_in_own_words:text! \
+    acutely_ill:string! \
+    no_nutritional_intake_over_5_days:string! \
+    days_of_negligible_intake:int \
+    nrs_2002_score:int \
+    energy_requirement_kcal:int \
+    protein_requirement_g:int \
+    fluid_requirement_ml:int \
+    requirement_equation:string! \
+    pes_problem:string! \
+    pes_etiology:string! \
+    pes_signs_symptoms:string! \
+    intervention_type:string! \
+    prescribed_supplement:string! \
+    prescribed_supplement_dose:string! \
+    texture_modification_plan:string! \
+    goal_1:string! \
+    goal_2:string! \
+    goal_3:string! \
+    education_provided:text! \
+    resources_given:text! \
+    monitoring_indicators:text! \
+    review_interval_weeks:int \
+    review_date:date \
+    onward_referral:string! \
+    additional_notes:text! \
+    --api
+
+cargo loco generate scaffold dietic_assessment_grade \
+    deleted_at:tstz \
+    dietic_assessment:references \
+    must_bmi_score:int \
+    must_weight_loss_score:int \
+    must_acute_disease_score:int \
+    must_score:int \
+    computed_must_risk:string! \
+    final_must_risk:string! \
+    must_is_estimated:bool! \
+    glim_phenotypic_criteria:string! \
+    glim_etiologic_criteria:string! \
+    glim_diagnosis:string! \
+    nrs_2002_score:int \
+    sarcf_score:int \
+    scoff_score:int \
+    refeeding_risk:string! \
+    energy_requirement_kcal:int \
+    protein_requirement_g:int \
+    computed_composite_risk:string! \
+    final_composite_risk:string! \
+    override_reason:string! \
+    recommendation:string! \
+    dietitian_notes:text! \
+    signed_by_name:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold dietic_assessment_grade_rule \
+    deleted_at:tstz \
+    dietic_assessment_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    component:string! \
+    score:int \
+    band:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold dietic_assessment_grade_flag \
+    deleted_at:tstz \
+    dietic_assessment_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
