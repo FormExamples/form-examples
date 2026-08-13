@@ -84,6 +84,31 @@
 		return defaultLocaleLabels[locale] ?? locale;
 	}
 
+	/**
+	 * The language's own name for itself — "de" → "Deutsch", "cy" →
+	 * "Cymraeg" — from `Intl.DisplayNames` asked *in that language*.
+	 *
+	 * Endonyms are the right default for a language menu: the user who
+	 * needs it most is the one lost in a UI that is not in their
+	 * language, and they recognise "Cymraeg" where "Welsh" means
+	 * nothing to them. Deterministic (no `navigator` dependency), so
+	 * the server and the client render the same label. Returns "" when
+	 * the runtime has no data — some runtimes echo the tag back instead
+	 * of failing, and an echo is not a name.
+	 */
+	export function localeEndonym(locale: string): string {
+		try {
+			const tag = bcp47LocaleTag(locale);
+			const dn = new Intl.DisplayNames([tag], { type: "language" });
+			const found = dn.of(tag) ?? "";
+			return found && found.toLowerCase() !== tag.toLowerCase()
+				? found
+				: "";
+		} catch {
+			return "";
+		}
+	}
+
 	/** Re-export the built-in label table and RTL sets for convenience. */
 	export { defaultLocaleLabels, RTL_LANGUAGE_TAGS, RTL_SCRIPT_SUBTAGS };
 
@@ -168,18 +193,44 @@
 
 	function labelFor(locale: string): string {
 		if (locale in localeLabels) return localeLabels[locale];
+		// Endonym first: a language menu names each language in itself,
+		// because the user who needs the menu is the one who cannot read
+		// the page's language. The English table and the environment
+		// lookup are fallbacks for runtimes without DisplayNames data.
+		const endonym = localeEndonym(locale);
+		if (endonym) return endonym;
 		if (locale in defaultLocaleLabels) return defaultLocaleLabels[locale];
 		const intl = intlDisplayName(locale);
 		if (intl) return intl;
 		return locale;
 	}
 
-	function tagFor(locale: string): string {
-		return bcp47LocaleTag(locale);
+	/**
+	 * The `lang` attribute for one option — a claim about the language
+	 * of the option's TEXT, made only when the text is the endonym we
+	 * derived ourselves. A consumer label or the English fallback is in
+	 * whatever language the consumer's UI speaks, and claiming otherwise
+	 * sends a screen reader's speech engine to the wrong voice: the
+	 * English word "Arabic" read out by an Arabic synthesizer.
+	 */
+	function optionLang(locale: string): string | undefined {
+		if (locale in localeLabels) return undefined;
+		return localeEndonym(locale) ? bcp47LocaleTag(locale) : undefined;
 	}
+
+	// The code the DOM currently carries. Applying is idempotent: the
+	// effect below can run for reasons other than a locale change, and
+	// re-applying would re-fire `onChange`. A consumer whose onChange
+	// writes reactive state then re-enters this effect, and Svelte stops
+	// updating the component altogether (effect_update_depth_exceeded) —
+	// the listbox freezes mid-open with a stale aria-expanded. Guarding
+	// here also matches the spec: other prop changes are not retroactive.
+	let appliedValue = "";
 
 	function applyLocale(code: string): void {
 		if (typeof document === "undefined" || !code) return;
+		if (code === appliedValue) return;
+		appliedValue = code;
 		const root = target ?? document.documentElement;
 		root.setAttribute("lang", bcp47LocaleTag(code));
 		if (applyDir) {
@@ -205,7 +256,13 @@
 
 	function openList(startIndex?: number): void {
 		const selected = locales.indexOf(value);
-		activeIndex = startIndex ?? (selected >= 0 ? selected : 0);
+		// An empty list has no option to activate; -1 keeps
+		// aria-activedescendant off rather than pointing at an id that
+		// does not exist.
+		activeIndex =
+			locales.length === 0
+				? -1
+				: (startIndex ?? (selected >= 0 ? selected : 0));
 		open = true;
 		// Focus moves to the listbox; the active option is conveyed via
 		// aria-activedescendant, per the APG listbox pattern.
@@ -251,14 +308,24 @@
 	}
 
 	function runTypeahead(char: string): void {
-		typeahead += char.toLowerCase();
+		const lower = char.toLowerCase();
+		// APG listbox typeahead: a single character moves to the NEXT
+		// option starting with it, and repeating that character keeps
+		// cycling. Only a buffer of differing characters refines the
+		// match, and that buffer stays anchored on the active option.
+		const sameCharRun =
+			typeahead === "" || [...typeahead].every((c) => c === lower);
+		typeahead += lower;
 		clearTimeout(typeaheadTimer);
 		typeaheadTimer = setTimeout(() => (typeahead = ""), 500);
-		const from = activeIndex < 0 ? 0 : activeIndex;
-		// Search forward from the active option, wrapping once.
+		const query = sameCharRun ? lower : typeahead;
+		const anchor = activeIndex < 0 ? 0 : activeIndex;
+		const start = sameCharRun ? anchor + 1 : anchor;
+		// Search forward, wrapping once — typeahead wraps even though the
+		// arrows clamp, or options above the cursor would be untypable.
 		for (let n = 0; n < locales.length; n++) {
-			const i = (from + n) % locales.length;
-			if (labelFor(locales[i]).toLowerCase().startsWith(typeahead)) {
+			const i = (start + n) % locales.length;
+			if (labelFor(locales[i]).toLowerCase().startsWith(query)) {
 				activeIndex = i;
 				scrollActiveIntoView();
 				return;
@@ -310,8 +377,24 @@
 				event.preventDefault();
 				closeList();
 				break;
+			case "PageUp":
+				event.preventDefault();
+				moveActive(-10);
+				break;
+			case "PageDown":
+				// ±10, clamped: an APG-optional key for long locale lists.
+				event.preventDefault();
+				moveActive(10);
+				break;
 			case "Tab":
-				// Tab moves on: close without stealing focus back.
+				// Tab moves on — but focus goes to the button FIRST,
+				// without cancelling the key. Hiding the focused list
+				// drops focus to <body>, and the browser then computes
+				// the default Tab move from the top of the document, so
+				// tabbing out of an open picker teleported the user to
+				// the page's first tab stop. From the button, the default
+				// Tab lands exactly where leaving the picker should.
+				buttonEl?.focus?.();
 				closeList(false);
 				break;
 			default:
@@ -421,13 +504,18 @@
 		onkeydown={onListKeydown}
 	>
 		{#each locales as locale, i (locale)}
+			<!-- The option's keyboard interaction lives on the listbox
+				 (aria-activedescendant pattern): the list is the focused
+				 element and its keydown handler operates the options, so a
+				 per-option key handler would be wrong, not missing. -->
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<li
 				class="locale-picker-option"
 				id={optionId(i)}
 				role="option"
 				aria-selected={locale === value}
 				data-active={i === activeIndex ? "" : undefined}
-				lang={tagFor(locale)}
+				lang={optionLang(locale)}
 				onclick={() => choose(i)}
 			>
 				{labelFor(locale)}

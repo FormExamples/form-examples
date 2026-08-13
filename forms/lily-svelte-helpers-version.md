@@ -31,9 +31,9 @@ class-name collision that the first rename dissolved).
 | Field         | Value                                                                                                                     |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Repository    | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-helpers`)                                        |
-| Pinned commit | `217902415`                                                                                                               |
+| Pinned commit | `63e059f3`                                                                                                               |
 | Helpers       | `lily-design-system-svelte-theme-picker` 0.1.0, `-locale-picker` 0.1.0, `-text-size-picker` 0.1.0, `-share-picker` 0.1.0, `-date-time-picker` 0.1.0 |
-| Date pinned   | 2026-07-28                                                                                                                |
+| Date pinned   | 2026-08-13                                                                                                                |
 
 `text-size-picker` also got doc/example gap fixes upstream at this pin —
 dev-facing only, nothing to sync into a form.
@@ -55,6 +55,25 @@ that never existed under the new names.
 
 ## History
 
+- **2026-08-13 — re-synced all five helpers to pick up upstream
+  accessibility fixes; zero `svelte-check` warnings fleet-wide.**
+  `ThemePicker`/`LocalePicker`/`TextSizePicker`/`SharePicker` picked up
+  upstream's 2026-07-30 "accessibility hardening" commit (`d008096`,
+  already past the prior 2026-07-28 pin but never re-synced): each
+  option `<li>`'s `a11y_click_events_have_key_events` warning is now
+  suppressed with a `svelte-ignore` + comment explaining the
+  `aria-activedescendant` listbox pattern (keyboard handling lives on
+  the `<ul>`, not per-option), and `SharePicker`'s `<ul>` similarly
+  suppresses `a11y_no_noninteractive_element_interactions` for the same
+  reason. `DateTimePicker` additionally picked up a same-day fix,
+  `untrack()`ing `initialAnchor`'s one-shot read of `mode`/`value` to
+  silence `state_referenced_locally` without changing behavior (the read
+  was already documented as intentionally non-reactive). No class hooks,
+  layout wiring, or CSS changed — pure component-content resync. Tools:
+  `bin/svelte-helpers-picker-rename --apply` (re-run; still idempotent
+  for the rename it was written for, but also re-copies component
+  content on any upstream diff) and `bin/svelte-date-time-picker-vendor
+  --apply`.
 - **2026-07-28 — vendored the fifth helper, `DateTimePicker`, fleet-wide
   (unwired).** `bin/svelte-date-time-picker-vendor` copies
   `DateTimePicker.svelte` into every form's `src/lib/components/ui/`,

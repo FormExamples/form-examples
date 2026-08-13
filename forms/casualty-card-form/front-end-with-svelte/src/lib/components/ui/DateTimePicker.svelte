@@ -85,6 +85,21 @@
 		week?: string;
 		/** Visible text of the clear button. The button renders only when set. */
 		clear?: string;
+		/**
+		 * Message announced when typed text will not parse or is out of
+		 * range. When set, a `role="status"` live region renders after the
+		 * field and is wired to it via `aria-errormessage` — without it,
+		 * `aria-invalid` flips silently and a screen-reader user who has
+		 * already left the field never hears that their date was refused.
+		 */
+		invalid?: string;
+		/**
+		 * Keyboard help for the dialog, e.g. "Use the arrow keys to choose
+		 * a date". When set, it renders inside the dialog and becomes the
+		 * dialog's `aria-describedby`, so a screen reader speaks it once on
+		 * open — the APG date-picker dialog ships exactly this affordance.
+		 */
+		instructions?: string;
 	};
 
 	/** Arguments passed to a custom `children` snippet (the button glyph). */
@@ -567,6 +582,8 @@
 </script>
 
 <script lang="ts">
+	import { untrack } from "svelte";
+
 	let {
 		class: className = "",
 		label,
@@ -605,6 +622,8 @@
 	const hourId = `${baseId}-hour`;
 	const minuteId = `${baseId}-minute`;
 	const meridiemId = `${baseId}-meridiem`;
+	const statusId = `${baseId}-status`;
+	const instructionsId = `${baseId}-instructions`;
 
 	let open = $state(false);
 	let invalid = $state(false);
@@ -621,6 +640,17 @@
 	let rootEl: HTMLDivElement | undefined = $state();
 	let buttonEl: HTMLButtonElement | undefined = $state();
 	let dialogEl: HTMLDivElement | undefined = $state();
+	let gridEl: HTMLTableElement | undefined = $state();
+
+	/**
+	 * The element that opened the dialog, so close can return focus to it.
+	 *
+	 * The APG rule is "focus returns to the element that invoked the
+	 * dialog" — which is the trigger button on a click, but the *text
+	 * field* when the user pressed Alt+ArrowDown. Always refocusing the
+	 * button strands a keyboard user one Tab stop past where they were.
+	 */
+	let openerEl: HTMLElement | null = null;
 
 	/**
 	 * The pending selection, live only while the dialog is open.
@@ -642,8 +672,15 @@
 	 * differ between a server and a client sitting on opposite sides of
 	 * midnight, which is a hydration mismatch. That one waits for the
 	 * effect.
+	 *
+	 * `untrack`ed on purpose: this is a one-shot read at construction, not
+	 * a subscription. `mode`/`value` changing later should not silently
+	 * re-seed the calendar out from under an open picker — that's what
+	 * makes it "initial".
 	 */
-	const initialAnchor = parseIsoDate(splitValue(value ?? "", mode).date);
+	const initialAnchor = untrack(() =>
+		parseIsoDate(splitValue(value ?? "", mode).date),
+	);
 
 	let viewYear = $state(initialAnchor?.year ?? 1970);
 	let viewMonth = $state(initialAnchor?.month ?? 1);
@@ -765,6 +802,18 @@
 		typed !== null ? typed : (formatValue ?? defaultFormat)(value ?? ""),
 	);
 
+	/**
+	 * `aria-describedby` for the field: the consumer's hint, plus — while
+	 * invalid, with `labels.invalid` supplied — the status region, for the
+	 * assistive technologies that read `aria-describedby` but not the
+	 * newer `aria-errormessage`.
+	 */
+	const fieldDescribedBy = $derived(
+		[describedBy, invalid && labels.invalid ? statusId : undefined]
+			.filter(Boolean)
+			.join(" ") || undefined,
+	);
+
 	/** Accessible name for one day cell, e.g. "Sunday 1 March 2026". */
 	function dayLabel(isoDate: string): string {
 		const parsed = parseIsoDate(isoDate);
@@ -854,6 +903,11 @@
 
 	function openDialog(): void {
 		if (disabled || readonly) return;
+		const active = document.activeElement;
+		openerEl =
+			active instanceof HTMLElement && rootEl?.contains(active)
+				? active
+				: (buttonEl ?? null);
 		today = todayIso();
 		pendingDate = committed.date || nearestSelectable(today);
 		pendingTime = committed.time || defaultTime();
@@ -890,7 +944,10 @@
 	function closeDialog(refocus = true): void {
 		if (!open) return;
 		open = false;
-		if (refocus) queueMicrotask(() => buttonEl?.focus?.());
+		if (refocus) {
+			const target = openerEl ?? buttonEl;
+			queueMicrotask(() => target?.focus?.());
+		}
 	}
 
 	/** Commit the pending selection to `value` and notify. */
@@ -965,11 +1022,16 @@
 		const anchor = formatIsoDate({ year: viewYear, month: viewMonth, day: 1 });
 		const next = parseIsoDate(addMonths(anchor, delta));
 		if (!next) return;
+		// Refocus the cursor only when focus is already in the grid: grid
+		// paging (PageUp/PageDown, or a browser that focused nothing on
+		// click) must carry focus, or it dies with the unrendered cell —
+		// but a header button must keep focus, or its user is yanked into
+		// the grid after one activation and cannot page twice.
+		const hadGridFocus = gridEl?.contains(document.activeElement) === true;
 		viewYear = next.year;
 		viewMonth = next.month;
-		// Carry the cursor into the new month rather than leaving focus on
-		// a cell that is no longer rendered — which would drop focus to
-		// <body> and lose the keyboard user's place entirely.
+		// Carry the cursor into the new month rather than leaving the
+		// roving tabindex on a cell that is no longer rendered.
 		const c = parseIsoDate(cursor);
 		if (c) {
 			cursor = formatIsoDate({
@@ -977,7 +1039,7 @@
 				month: next.month,
 				day: Math.min(c.day, daysInMonth(next.year, next.month)),
 			});
-			queueMicrotask(() => focusCursor());
+			if (hadGridFocus) queueMicrotask(() => focusCursor());
 		}
 	}
 
@@ -1148,6 +1210,16 @@
 			// matching <input type="date"> in every major browser.
 			event.preventDefault();
 			openDialog();
+		} else if (event.key === "Escape" && typed !== null) {
+			// Discard the pending edit and show the committed value again —
+			// the same contract Escape has inside the dialog. Stops
+			// propagating so a surrounding dialog does not also close on
+			// what was, to the user, a text-editing keystroke. When no edit
+			// is pending the key is left alone.
+			event.preventDefault();
+			event.stopPropagation();
+			typed = null;
+			invalid = false;
 		}
 	}
 
@@ -1248,7 +1320,14 @@
 	onclick={(event) => {
 		if (!open) return;
 		const target = event.target as Node | null;
-		if (target && rootEl && !rootEl.contains(target)) closeDialog(false);
+		if (!target) return;
+		// Anything outside the dialog closes it — including the component's
+		// own text field. The dialog says aria-modal="true", and a modal
+		// that stays open while the user edits the field behind it is
+		// telling assistive technology one thing and doing another. The
+		// trigger button is exempt because its own handler already toggles.
+		if (dialogEl?.contains(target) || buttonEl?.contains(target)) return;
+		closeDialog(false);
 	}}
 />
 
@@ -1271,8 +1350,9 @@
 			{disabled}
 			{readonly}
 			{required}
-			aria-describedby={describedBy}
+			aria-describedby={fieldDescribedBy}
 			aria-invalid={invalid ? "true" : undefined}
+			aria-errormessage={invalid && labels.invalid ? statusId : undefined}
 			oninput={onInput}
 			onblur={resolveTyped}
 			onkeydown={onFieldKeydown}
@@ -1299,6 +1379,15 @@
 		</button>
 	</div>
 
+	{#if labels.invalid}
+		<!-- Present in the DOM before it has content: a live region that
+			 appears at the same moment as its message is routinely not
+			 announced at all. Empty while the field is valid. -->
+		<span class="date-time-picker-status" id={statusId} role="status">
+			{invalid ? labels.invalid : ""}
+		</span>
+	{/if}
+
 	<div
 		bind:this={dialogEl}
 		class="date-time-picker-dialog"
@@ -1306,10 +1395,19 @@
 		role="dialog"
 		aria-modal="true"
 		aria-label={label}
+		aria-describedby={labels.instructions ? instructionsId : undefined}
 		tabindex="-1"
 		hidden={!open}
 		onkeydown={onDialogKeydown}
 	>
+		{#if labels.instructions}
+			<!-- Spoken once when the dialog takes focus, via the dialog's
+				 aria-describedby. Visible by default; a consumer who wants
+				 it screen-reader-only hides it with their own CSS. -->
+			<p class="date-time-picker-instructions" id={instructionsId}>
+				{labels.instructions}
+			</p>
+		{/if}
 		{#if usesDate}
 			<div class="date-time-picker-header">
 				<button
@@ -1358,6 +1456,7 @@
 				 handler sits on the table rather than on each of 42 cells. -->
 			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 			<table
+				bind:this={gridEl}
 				class="date-time-picker-calendar"
 				role="grid"
 				aria-labelledby={periodId}
@@ -1400,7 +1499,18 @@
 								{@const parsed = parseIsoDate(isoDate)}
 								{@const isToday = isoDate === today}
 								{@const isSelected = isoDate === pendingDate}
+								{@const isDisabled = dayDisabled(isoDate)}
 								<td role="gridcell" aria-selected={isSelected}>
+									<!-- aria-disabled, not `disabled`: a
+										 vetoed day must stay focusable so
+										 the roving cursor can land on it
+										 and a screen reader can announce
+										 it as unavailable. A `disabled`
+										 button refuses focus, and arrowing
+										 across a blocked week goes silent
+										 while the visible focus stays
+										 behind. Activation is refused in
+										 `selectDay` instead. -->
 									<button
 										type="button"
 										class="date-time-picker-day"
@@ -1410,10 +1520,13 @@
 											: undefined}
 										data-today={isToday ? "" : undefined}
 										data-selected={isSelected ? "" : undefined}
+										data-disabled={isDisabled ? "" : undefined}
 										tabindex={isoDate === cursor ? 0 : -1}
 										aria-label={dayLabel(isoDate)}
 										aria-current={isToday ? "date" : undefined}
-										disabled={dayDisabled(isoDate)}
+										aria-disabled={isDisabled
+											? "true"
+											: undefined}
 										onclick={() => selectDay(isoDate)}
 									>
 										{parsed?.day ?? ""}

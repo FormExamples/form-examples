@@ -106,8 +106,19 @@
 		return sizeName(size);
 	}
 
+	// The size the DOM currently carries. Applying is idempotent: the
+	// effect below can run for reasons other than a size change, and
+	// re-applying would re-fire `onChange`. A consumer whose onChange
+	// writes reactive state then re-enters this effect, and Svelte stops
+	// updating the component altogether (effect_update_depth_exceeded) —
+	// the listbox freezes mid-open with a stale aria-expanded. Guarding
+	// here also matches the spec: other prop changes are not retroactive.
+	let appliedValue = "";
+
 	function applySize(slug: string): void {
 		if (typeof document === "undefined" || !slug) return;
+		if (slug === appliedValue) return;
+		appliedValue = slug;
 		(target ?? document.documentElement).setAttribute("data-text-size", slug);
 		if (storageKey) {
 			try {
@@ -129,7 +140,13 @@
 
 	function openList(startIndex?: number): void {
 		const selected = sizes.indexOf(value);
-		activeIndex = startIndex ?? (selected >= 0 ? selected : 0);
+		// An empty list has no option to activate; -1 keeps
+		// aria-activedescendant off rather than pointing at an id that
+		// does not exist.
+		activeIndex =
+			sizes.length === 0
+				? -1
+				: (startIndex ?? (selected >= 0 ? selected : 0));
 		open = true;
 		// Focus moves to the listbox; the active option is conveyed via
 		// aria-activedescendant, per the APG listbox pattern.
@@ -171,14 +188,24 @@
 	}
 
 	function runTypeahead(char: string): void {
-		typeahead += char.toLowerCase();
+		const lower = char.toLowerCase();
+		// APG listbox typeahead: a single character moves to the NEXT
+		// option starting with it, and repeating that character keeps
+		// cycling. Only a buffer of differing characters refines the
+		// match, and that buffer stays anchored on the active option.
+		const sameCharRun =
+			typeahead === "" || [...typeahead].every((c) => c === lower);
+		typeahead += lower;
 		clearTimeout(typeaheadTimer);
 		typeaheadTimer = setTimeout(() => (typeahead = ""), 500);
-		const from = activeIndex < 0 ? 0 : activeIndex;
-		// Search forward from the active option, wrapping once.
+		const query = sameCharRun ? lower : typeahead;
+		const anchor = activeIndex < 0 ? 0 : activeIndex;
+		const start = sameCharRun ? anchor + 1 : anchor;
+		// Search forward, wrapping once — typeahead wraps even though the
+		// arrows clamp, or options above the cursor would be untypable.
 		for (let n = 0; n < sizes.length; n++) {
-			const i = (from + n) % sizes.length;
-			if (labelFor(sizes[i]).toLowerCase().startsWith(typeahead)) {
+			const i = (start + n) % sizes.length;
+			if (labelFor(sizes[i]).toLowerCase().startsWith(query)) {
 				activeIndex = i;
 				scrollActiveIntoView();
 				return;
@@ -230,8 +257,25 @@
 				event.preventDefault();
 				closeList();
 				break;
+			case "PageUp":
+				event.preventDefault();
+				moveActive(-10);
+				break;
+			case "PageDown":
+				// ±10, clamped: an APG-optional key, matching the
+				// sibling pickers.
+				event.preventDefault();
+				moveActive(10);
+				break;
 			case "Tab":
-				// Tab moves on: close without stealing focus back.
+				// Tab moves on — but focus goes to the button FIRST,
+				// without cancelling the key. Hiding the focused list
+				// drops focus to <body>, and the browser then computes
+				// the default Tab move from the top of the document, so
+				// tabbing out of an open picker teleported the user to
+				// the page's first tab stop. From the button, the default
+				// Tab lands exactly where leaving the picker should.
+				buttonEl?.focus?.();
 				closeList(false);
 				break;
 			default:
@@ -330,6 +374,11 @@
 		onkeydown={onListKeydown}
 	>
 		{#each sizes as size, i (size)}
+			<!-- The option's keyboard interaction lives on the listbox
+				 (aria-activedescendant pattern): the list is the focused
+				 element and its keydown handler operates the options, so a
+				 per-option key handler would be wrong, not missing. -->
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<li
 				class="text-size-picker-option"
 				id={optionId(i)}
