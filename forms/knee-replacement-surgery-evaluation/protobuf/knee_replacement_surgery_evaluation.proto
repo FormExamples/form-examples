@@ -1,0 +1,409 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: knee_replacement_surgery_evaluation
+
+syntax = "proto3";
+
+package form_examples.knee_replacement_surgery_evaluation;
+
+enum KneeReplacementSurgeryEvaluationStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum KneeReplacementSurgeryEvaluationKneeSideEnum {
+  KNEESIDE_UNSPECIFIED = 0;
+  KNEESIDE_LEFT = 1;  // left
+  KNEESIDE_RIGHT = 2;  // right
+  KNEESIDE_BILATERAL = 3;  // bilateral
+}
+
+enum KneeReplacementSurgeryEvaluationNightPainEnum {
+  NIGHTPAIN_UNSPECIFIED = 0;
+  NIGHTPAIN_YES = 1;  // yes
+  NIGHTPAIN_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationPriorKneeSurgeryEnum {
+  PRIORKNEESURGERY_UNSPECIFIED = 0;
+  PRIORKNEESURGERY_YES = 1;  // yes
+  PRIORKNEESURGERY_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationPriorKneeSurgeryTypeEnum {
+  PRIORKNEESURGERYTYPE_UNSPECIFIED = 0;
+  PRIORKNEESURGERYTYPE_ARTHROSCOPY = 1;  // arthroscopy
+  PRIORKNEESURGERYTYPE_LIGAMENT_REPAIR = 2;  // ligament-repair
+  PRIORKNEESURGERYTYPE_PREVIOUS_PARTIAL_REPLACEMENT = 3;  // previous-partial-replacement
+  PRIORKNEESURGERYTYPE_OTHER = 4;  // other
+}
+
+enum KneeReplacementSurgeryEvaluationPriorInjuryEnum {
+  PRIORINJURY_UNSPECIFIED = 0;
+  PRIORINJURY_YES = 1;  // yes
+  PRIORINJURY_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationWalkingDistanceBeforePainEnum {
+  WALKINGDISTANCEBEFOREPAIN_UNSPECIFIED = 0;
+  WALKINGDISTANCEBEFOREPAIN_UNLIMITED = 1;  // unlimited
+  WALKINGDISTANCEBEFOREPAIN_OVER_1KM = 2;  // over-1km
+  WALKINGDISTANCEBEFOREPAIN_V_100M_TO_1KM = 3;  // 100m-to-1km
+  WALKINGDISTANCEBEFOREPAIN_UNDER_100M = 4;  // under-100m
+  WALKINGDISTANCEBEFOREPAIN_HOUSEBOUND = 5;  // housebound
+}
+
+enum KneeReplacementSurgeryEvaluationStairClimbingAbilityEnum {
+  STAIRCLIMBINGABILITY_UNSPECIFIED = 0;
+  STAIRCLIMBINGABILITY_NORMAL = 1;  // normal
+  STAIRCLIMBINGABILITY_WITH_RAIL = 2;  // with-rail
+  STAIRCLIMBINGABILITY_ONE_STEP_AT_A_TIME = 3;  // one-step-at-a-time
+  STAIRCLIMBINGABILITY_UNABLE = 4;  // unable
+}
+
+enum KneeReplacementSurgeryEvaluationStandFromChairUnaidedEnum {
+  STANDFROMCHAIRUNAIDED_UNSPECIFIED = 0;
+  STANDFROMCHAIRUNAIDED_YES = 1;  // yes
+  STANDFROMCHAIRUNAIDED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationWalkingAidEnum {
+  WALKINGAID_UNSPECIFIED = 0;
+  WALKINGAID_NONE = 1;  // none
+  WALKINGAID_STICK = 2;  // stick
+  WALKINGAID_FRAME = 3;  // frame
+  WALKINGAID_WHEELCHAIR = 4;  // wheelchair
+}
+
+enum KneeReplacementSurgeryEvaluationFixedFlexionDeformityPresentEnum {
+  FIXEDFLEXIONDEFORMITYPRESENT_UNSPECIFIED = 0;
+  FIXEDFLEXIONDEFORMITYPRESENT_YES = 1;  // yes
+  FIXEDFLEXIONDEFORMITYPRESENT_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationCoronalDeformityTypeEnum {
+  CORONALDEFORMITYTYPE_UNSPECIFIED = 0;
+  CORONALDEFORMITYTYPE_NONE = 1;  // none
+  CORONALDEFORMITYTYPE_VARUS = 2;  // varus
+  CORONALDEFORMITYTYPE_VALGUS = 3;  // valgus
+}
+
+enum KneeReplacementSurgeryEvaluationCoronalDeformitySeverityEnum {
+  CORONALDEFORMITYSEVERITY_UNSPECIFIED = 0;
+  CORONALDEFORMITYSEVERITY_NONE = 1;  // none
+  CORONALDEFORMITYSEVERITY_MILD = 2;  // mild
+  CORONALDEFORMITYSEVERITY_MODERATE = 3;  // moderate
+  CORONALDEFORMITYSEVERITY_SEVERE = 4;  // severe
+}
+
+enum KneeReplacementSurgeryEvaluationLigamentAclEnum {
+  LIGAMENTACL_UNSPECIFIED = 0;
+  LIGAMENTACL_STABLE = 1;  // stable
+  LIGAMENTACL_LAX = 2;  // lax
+}
+
+enum KneeReplacementSurgeryEvaluationLigamentPclEnum {
+  LIGAMENTPCL_UNSPECIFIED = 0;
+  LIGAMENTPCL_STABLE = 1;  // stable
+  LIGAMENTPCL_LAX = 2;  // lax
+}
+
+enum KneeReplacementSurgeryEvaluationLigamentMclEnum {
+  LIGAMENTMCL_UNSPECIFIED = 0;
+  LIGAMENTMCL_STABLE = 1;  // stable
+  LIGAMENTMCL_LAX = 2;  // lax
+}
+
+enum KneeReplacementSurgeryEvaluationLigamentLclEnum {
+  LIGAMENTLCL_UNSPECIFIED = 0;
+  LIGAMENTLCL_STABLE = 1;  // stable
+  LIGAMENTLCL_LAX = 2;  // lax
+}
+
+enum KneeReplacementSurgeryEvaluationPatellarTrackingEnum {
+  PATELLARTRACKING_UNSPECIFIED = 0;
+  PATELLARTRACKING_NORMAL = 1;  // normal
+  PATELLARTRACKING_MALTRACKING = 2;  // maltracking
+}
+
+enum KneeReplacementSurgeryEvaluationEffusionPresentEnum {
+  EFFUSIONPRESENT_UNSPECIFIED = 0;
+  EFFUSIONPRESENT_YES = 1;  // yes
+  EFFUSIONPRESENT_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationCrepitusPresentEnum {
+  CREPITUSPRESENT_UNSPECIFIED = 0;
+  CREPITUSPRESENT_YES = 1;  // yes
+  CREPITUSPRESENT_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationWeightBearingXrayPerformedEnum {
+  WEIGHTBEARINGXRAYPERFORMED_UNSPECIFIED = 0;
+  WEIGHTBEARINGXRAYPERFORMED_YES = 1;  // yes
+  WEIGHTBEARINGXRAYPERFORMED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationMriPerformedEnum {
+  MRIPERFORMED_UNSPECIFIED = 0;
+  MRIPERFORMED_YES = 1;  // yes
+  MRIPERFORMED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationCtPerformedEnum {
+  CTPERFORMED_UNSPECIFIED = 0;
+  CTPERFORMED_YES = 1;  // yes
+  CTPERFORMED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationCtIndicationEnum {
+  CTINDICATION_UNSPECIFIED = 0;
+  CTINDICATION_ROBOTIC_ASSISTED_PLANNING = 1;  // robotic-assisted-planning
+  CTINDICATION_BONE_LOSS_ASSESSMENT = 2;  // bone-loss-assessment
+  CTINDICATION_OTHER = 3;  // other
+}
+
+enum KneeReplacementSurgeryEvaluationPhysiotherapyTriedEnum {
+  PHYSIOTHERAPYTRIED_UNSPECIFIED = 0;
+  PHYSIOTHERAPYTRIED_YES = 1;  // yes
+  PHYSIOTHERAPYTRIED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationWeightManagementAdviceGivenEnum {
+  WEIGHTMANAGEMENTADVICEGIVEN_UNSPECIFIED = 0;
+  WEIGHTMANAGEMENTADVICEGIVEN_YES = 1;  // yes
+  WEIGHTMANAGEMENTADVICEGIVEN_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationInjectionGivenEnum {
+  INJECTIONGIVEN_UNSPECIFIED = 0;
+  INJECTIONGIVEN_YES = 1;  // yes
+  INJECTIONGIVEN_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationInjectionTypeEnum {
+  INJECTIONTYPE_UNSPECIFIED = 0;
+  INJECTIONTYPE_CORTICOSTEROID = 1;  // corticosteroid
+  INJECTIONTYPE_HYALURONIC_ACID = 2;  // hyaluronic-acid
+  INJECTIONTYPE_BOTH = 3;  // both
+  INJECTIONTYPE_OTHER = 4;  // other
+}
+
+enum KneeReplacementSurgeryEvaluationInjectionResponseEnum {
+  INJECTIONRESPONSE_UNSPECIFIED = 0;
+  INJECTIONRESPONSE_GOOD = 1;  // good
+  INJECTIONRESPONSE_PARTIAL = 2;  // partial
+  INJECTIONRESPONSE_NONE = 3;  // none
+}
+
+enum KneeReplacementSurgeryEvaluationNsaidAnalgesicTrialEnum {
+  NSAIDANALGESICTRIAL_UNSPECIFIED = 0;
+  NSAIDANALGESICTRIAL_YES = 1;  // yes
+  NSAIDANALGESICTRIAL_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationNsaidAnalgesicResponseEnum {
+  NSAIDANALGESICRESPONSE_UNSPECIFIED = 0;
+  NSAIDANALGESICRESPONSE_GOOD = 1;  // good
+  NSAIDANALGESICRESPONSE_PARTIAL = 2;  // partial
+  NSAIDANALGESICRESPONSE_NONE = 3;  // none
+}
+
+enum KneeReplacementSurgeryEvaluationWalkingAidTrialEnum {
+  WALKINGAIDTRIAL_UNSPECIFIED = 0;
+  WALKINGAIDTRIAL_YES = 1;  // yes
+  WALKINGAIDTRIAL_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationConservativeMeasuresExhaustedEnum {
+  CONSERVATIVEMEASURESEXHAUSTED_UNSPECIFIED = 0;
+  CONSERVATIVEMEASURESEXHAUSTED_YES = 1;  // yes
+  CONSERVATIVEMEASURESEXHAUSTED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationDiabetesControlledEnum {
+  DIABETESCONTROLLED_UNSPECIFIED = 0;
+  DIABETESCONTROLLED_NOT_DIABETIC = 1;  // not-diabetic
+  DIABETESCONTROLLED_WELL_CONTROLLED = 2;  // well-controlled
+  DIABETESCONTROLLED_POORLY_CONTROLLED = 3;  // poorly-controlled
+}
+
+enum KneeReplacementSurgeryEvaluationCardiacDiseaseEnum {
+  CARDIACDISEASE_UNSPECIFIED = 0;
+  CARDIACDISEASE_YES = 1;  // yes
+  CARDIACDISEASE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationBleedingDisorderOrAnticoagulantEnum {
+  BLEEDINGDISORDERORANTICOAGULANT_UNSPECIFIED = 0;
+  BLEEDINGDISORDERORANTICOAGULANT_YES = 1;  // yes
+  BLEEDINGDISORDERORANTICOAGULANT_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX_SMOKER = 2;  // ex-smoker
+  SMOKINGSTATUS_CURRENT = 3;  // current
+}
+
+enum KneeReplacementSurgeryEvaluationFbcDoneEnum {
+  FBCDONE_UNSPECIFIED = 0;
+  FBCDONE_YES = 1;  // yes
+  FBCDONE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationRenalFunctionDoneEnum {
+  RENALFUNCTIONDONE_UNSPECIFIED = 0;
+  RENALFUNCTIONDONE_YES = 1;  // yes
+  RENALFUNCTIONDONE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationClottingDoneEnum {
+  CLOTTINGDONE_UNSPECIFIED = 0;
+  CLOTTINGDONE_YES = 1;  // yes
+  CLOTTINGDONE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationEcgDoneEnum {
+  ECGDONE_UNSPECIFIED = 0;
+  ECGDONE_YES = 1;  // yes
+  ECGDONE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationMrsaScreenDoneEnum {
+  MRSASCREENDONE_UNSPECIFIED = 0;
+  MRSASCREENDONE_YES = 1;  // yes
+  MRSASCREENDONE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationUrinalysisDoneEnum {
+  URINALYSISDONE_UNSPECIFIED = 0;
+  URINALYSISDONE_YES = 1;  // yes
+  URINALYSISDONE_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationRisksBenefitsDiscussedEnum {
+  RISKSBENEFITSDISCUSSED_UNSPECIFIED = 0;
+  RISKSBENEFITSDISCUSSED_YES = 1;  // yes
+  RISKSBENEFITSDISCUSSED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationRealisticExpectationsDiscussedEnum {
+  REALISTICEXPECTATIONSDISCUSSED_UNSPECIFIED = 0;
+  REALISTICEXPECTATIONSDISCUSSED_YES = 1;  // yes
+  REALISTICEXPECTATIONSDISCUSSED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationPatientDecisionAidGivenEnum {
+  PATIENTDECISIONAIDGIVEN_UNSPECIFIED = 0;
+  PATIENTDECISIONAIDGIVEN_YES = 1;  // yes
+  PATIENTDECISIONAIDGIVEN_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationInterpreterRequiredEnum {
+  INTERPRETERREQUIRED_UNSPECIFIED = 0;
+  INTERPRETERREQUIRED_YES = 1;  // yes
+  INTERPRETERREQUIRED_NO = 2;  // no
+}
+
+enum KneeReplacementSurgeryEvaluationPlanRecommendationEnum {
+  PLANRECOMMENDATION_UNSPECIFIED = 0;
+  PLANRECOMMENDATION_TOTAL_KNEE_REPLACEMENT = 1;  // total-knee-replacement
+  PLANRECOMMENDATION_PARTIAL_KNEE_REPLACEMENT = 2;  // partial-knee-replacement
+  PLANRECOMMENDATION_CONTINUE_CONSERVATIVE_MANAGEMENT = 3;  // continue-conservative-management
+  PLANRECOMMENDATION_MDT_REVIEW = 4;  // mdt-review
+  PLANRECOMMENDATION_NOT_CURRENTLY_A_CANDIDATE = 5;  // not-currently-a-candidate
+}
+
+message KneeReplacementSurgeryEvaluation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  KneeReplacementSurgeryEvaluationStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  string assessment_date = 9;  // DATE — iso 8601 date
+  string assessment_time = 10;  // TIME — iso 8601 time
+  KneeReplacementSurgeryEvaluationKneeSideEnum knee_side = 11;  // VARCHAR(10)
+  int32 symptom_duration_months = 12;  // INTEGER
+  int32 pain_at_rest_0_to_10 = 13;  // SMALLINT
+  int32 pain_on_activity_0_to_10 = 14;  // SMALLINT
+  KneeReplacementSurgeryEvaluationNightPainEnum night_pain = 15;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationPriorKneeSurgeryEnum prior_knee_surgery = 16;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationPriorKneeSurgeryTypeEnum prior_knee_surgery_type = 17;  // VARCHAR(30)
+  string prior_knee_surgery_date = 18;  // DATE — iso 8601 date
+  KneeReplacementSurgeryEvaluationPriorInjuryEnum prior_injury = 19;  // VARCHAR(5)
+  string prior_injury_detail = 20;  // TEXT
+  int32 oks_pain_severity = 21;  // SMALLINT
+  int32 oks_washing_and_drying = 22;  // SMALLINT
+  int32 oks_transport = 23;  // SMALLINT
+  int32 oks_walking_distance = 24;  // SMALLINT
+  int32 oks_pain_sitting_or_lying = 25;  // SMALLINT
+  int32 oks_limping = 26;  // SMALLINT
+  int32 oks_kneeling = 27;  // SMALLINT
+  int32 oks_night_pain_frequency = 28;  // SMALLINT
+  int32 oks_pain_interfering_with_work = 29;  // SMALLINT
+  int32 oks_giving_way = 30;  // SMALLINT
+  int32 oks_shopping = 31;  // SMALLINT
+  int32 oks_stairs = 32;  // SMALLINT
+  KneeReplacementSurgeryEvaluationWalkingDistanceBeforePainEnum walking_distance_before_pain = 33;  // VARCHAR(20)
+  KneeReplacementSurgeryEvaluationStairClimbingAbilityEnum stair_climbing_ability = 34;  // VARCHAR(20)
+  KneeReplacementSurgeryEvaluationStandFromChairUnaidedEnum stand_from_chair_unaided = 35;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationWalkingAidEnum walking_aid = 36;  // VARCHAR(15)
+  int32 flexion_degrees = 37;  // SMALLINT
+  int32 extension_deficit_degrees = 38;  // SMALLINT
+  KneeReplacementSurgeryEvaluationFixedFlexionDeformityPresentEnum fixed_flexion_deformity_present = 39;  // VARCHAR(5)
+  int32 fixed_flexion_deformity_degrees = 40;  // SMALLINT
+  KneeReplacementSurgeryEvaluationCoronalDeformityTypeEnum coronal_deformity_type = 41;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationCoronalDeformitySeverityEnum coronal_deformity_severity = 42;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationLigamentAclEnum ligament_acl = 43;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationLigamentPclEnum ligament_pcl = 44;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationLigamentMclEnum ligament_mcl = 45;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationLigamentLclEnum ligament_lcl = 46;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationPatellarTrackingEnum patellar_tracking = 47;  // VARCHAR(15)
+  int32 quadriceps_strength_mrc = 48;  // SMALLINT
+  KneeReplacementSurgeryEvaluationEffusionPresentEnum effusion_present = 49;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationCrepitusPresentEnum crepitus_present = 50;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationWeightBearingXrayPerformedEnum weight_bearing_xray_performed = 51;  // VARCHAR(5)
+  int32 kellgren_lawrence_grade_medial = 52;  // SMALLINT
+  int32 kellgren_lawrence_grade_lateral = 53;  // SMALLINT
+  int32 kellgren_lawrence_grade_patellofemoral = 54;  // SMALLINT
+  KneeReplacementSurgeryEvaluationMriPerformedEnum mri_performed = 55;  // VARCHAR(5)
+  string mri_findings = 56;  // TEXT
+  KneeReplacementSurgeryEvaluationCtPerformedEnum ct_performed = 57;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationCtIndicationEnum ct_indication = 58;  // VARCHAR(30)
+  KneeReplacementSurgeryEvaluationPhysiotherapyTriedEnum physiotherapy_tried = 59;  // VARCHAR(5)
+  int32 physiotherapy_duration_weeks = 60;  // INTEGER
+  KneeReplacementSurgeryEvaluationWeightManagementAdviceGivenEnum weight_management_advice_given = 61;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationInjectionGivenEnum injection_given = 62;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationInjectionTypeEnum injection_type = 63;  // VARCHAR(20)
+  int32 injection_count = 64;  // SMALLINT
+  KneeReplacementSurgeryEvaluationInjectionResponseEnum injection_response = 65;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationNsaidAnalgesicTrialEnum nsaid_analgesic_trial = 66;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationNsaidAnalgesicResponseEnum nsaid_analgesic_response = 67;  // VARCHAR(10)
+  KneeReplacementSurgeryEvaluationWalkingAidTrialEnum walking_aid_trial = 68;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationConservativeMeasuresExhaustedEnum conservative_measures_exhausted = 69;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationDiabetesControlledEnum diabetes_controlled = 70;  // VARCHAR(20)
+  KneeReplacementSurgeryEvaluationCardiacDiseaseEnum cardiac_disease = 71;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationBleedingDisorderOrAnticoagulantEnum bleeding_disorder_or_anticoagulant = 72;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationSmokingStatusEnum smoking_status = 73;  // VARCHAR(15)
+  string general_fitness_note = 74;  // TEXT
+  KneeReplacementSurgeryEvaluationFbcDoneEnum fbc_done = 75;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationRenalFunctionDoneEnum renal_function_done = 76;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationClottingDoneEnum clotting_done = 77;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationEcgDoneEnum ecg_done = 78;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationMrsaScreenDoneEnum mrsa_screen_done = 79;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationUrinalysisDoneEnum urinalysis_done = 80;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationRisksBenefitsDiscussedEnum risks_benefits_discussed = 81;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationRealisticExpectationsDiscussedEnum realistic_expectations_discussed = 82;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationPatientDecisionAidGivenEnum patient_decision_aid_given = 83;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationInterpreterRequiredEnum interpreter_required = 84;  // VARCHAR(5)
+  KneeReplacementSurgeryEvaluationPlanRecommendationEnum plan_recommendation = 85;  // VARCHAR(35)
+  string target_list_date = 86;  // DATE — iso 8601 date
+  string responsible_surgeon = 87;  // VARCHAR(255) — max 255 chars
+}

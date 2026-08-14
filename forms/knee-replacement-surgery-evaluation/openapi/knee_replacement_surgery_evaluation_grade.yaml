@@ -1,0 +1,204 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: knee_replacement_surgery_evaluation_grade
+openapi: 3.1.0
+info:
+  title: Knee Replacement Surgery Evaluation — KneeReplacementSurgeryEvaluationGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for one knee replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+paths:
+  /knee-replacement-surgery-evaluation-grades:
+    get:
+      summary: List KneeReplacementSurgeryEvaluationGrade records
+      operationId: listKneeReplacementSurgeryEvaluationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of KneeReplacementSurgeryEvaluationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/KneeReplacementSurgeryEvaluationGrade"
+    post:
+      summary: Create a new KneeReplacementSurgeryEvaluationGrade
+      operationId: createKneeReplacementSurgeryEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KneeReplacementSurgeryEvaluationGrade"
+      responses:
+        "201":
+          description: The newly created KneeReplacementSurgeryEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluationGrade"
+        "400":
+          description: Validation error
+  /knee-replacement-surgery-evaluation-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one KneeReplacementSurgeryEvaluationGrade by id
+      operationId: getKneeReplacementSurgeryEvaluationGrade
+      responses:
+        "200":
+          description: The requested KneeReplacementSurgeryEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluationGrade"
+        "404":
+          description: KneeReplacementSurgeryEvaluationGrade not found
+    patch:
+      summary: Update an existing KneeReplacementSurgeryEvaluationGrade
+      operationId: updateKneeReplacementSurgeryEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KneeReplacementSurgeryEvaluationGrade"
+      responses:
+        "200":
+          description: The updated KneeReplacementSurgeryEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluationGrade"
+        "404":
+          description: KneeReplacementSurgeryEvaluationGrade not found
+    delete:
+      summary: Soft-delete a KneeReplacementSurgeryEvaluationGrade
+      operationId: deleteKneeReplacementSurgeryEvaluationGrade
+      responses:
+        "204":
+          description: KneeReplacementSurgeryEvaluationGrade deleted
+        "404":
+          description: KneeReplacementSurgeryEvaluationGrade not found
+components:
+  schemas:
+    KneeReplacementSurgeryEvaluationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        knee_replacement_surgery_evaluation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the knee_replacement_surgery_evaluation table, unique because grading is one-to-one with the evaluation.
+        oks_total:
+          type: integer
+          format: int32
+          description: Oxford Knee Score total, 0 to 48, being the sum of the twelve item scores. 48 is the best possible outcome.
+        computed_oks_category:
+          type: string
+          enum:
+            - severe
+            - moderate
+            - mild-to-moderate
+            - satisfactory
+            - ""
+          description: "Oxford Knee Score category computed by the engine: severe (0-19), moderate (20-29), mild-to-moderate (30-39), or satisfactory (40-48)."
+        final_oks_category:
+          type: string
+          enum:
+            - severe
+            - moderate
+            - mild-to-moderate
+            - satisfactory
+            - ""
+          description: Oxford Knee Score category signed off by the clinician, which may equal or differ from the computed value.
+        max_kellgren_lawrence_grade:
+          type: integer
+          format: int32
+          description: Highest Kellgren-Lawrence radiographic grade across the medial, lateral, and patellofemoral compartments, 0 to 4.
+        computed_candidacy:
+          type: string
+          enum:
+            - strong-candidate
+            - candidate
+            - continue-conservative
+            - not-indicated
+            - mdt-review
+            - ""
+          description: "Surgical candidacy recommendation computed by the engine: strong-candidate, candidate, continue-conservative, not-indicated, or mdt-review."
+        final_candidacy:
+          type: string
+          enum:
+            - strong-candidate
+            - candidate
+            - continue-conservative
+            - not-indicated
+            - mdt-review
+            - ""
+          description: Surgical candidacy recommendation signed off by the clinician, which may equal or differ from the computed value.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the clinician set a final candidacy differently from the computed value, mandatory when they differ.
+        clinician_notes:
+          type: string
+          description: Free-text clinician summary notes.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the clinician who signed the evaluation.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - knee_replacement_surgery_evaluation_id
+        - computed_oks_category
+        - final_oks_category
+        - computed_candidacy
+        - final_candidacy
+        - override_reason
+        - clinician_notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off grading result for one knee replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.

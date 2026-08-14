@@ -1,0 +1,678 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: knee_replacement_surgery_evaluation
+openapi: 3.1.0
+info:
+  title: Knee Replacement Surgery Evaluation — KneeReplacementSurgeryEvaluation
+  version: 1.0.0
+  description: "Knee replacement surgery evaluation: the payload of the 15-step single-page wizard, covering presenting history, the Oxford Knee Score, physical examination, diagnostic imaging, conservative-treatment audit, general health screen, pre-operative bloods checklist, shared decision-making, and the management plan."
+paths:
+  /knee-replacement-surgery-evaluations:
+    get:
+      summary: List KneeReplacementSurgeryEvaluation records
+      operationId: listKneeReplacementSurgeryEvaluation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of KneeReplacementSurgeryEvaluation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+    post:
+      summary: Create a new KneeReplacementSurgeryEvaluation
+      operationId: createKneeReplacementSurgeryEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+      responses:
+        "201":
+          description: The newly created KneeReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+        "400":
+          description: Validation error
+  /knee-replacement-surgery-evaluations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one KneeReplacementSurgeryEvaluation by id
+      operationId: getKneeReplacementSurgeryEvaluation
+      responses:
+        "200":
+          description: The requested KneeReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+        "404":
+          description: KneeReplacementSurgeryEvaluation not found
+    patch:
+      summary: Update an existing KneeReplacementSurgeryEvaluation
+      operationId: updateKneeReplacementSurgeryEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+      responses:
+        "200":
+          description: The updated KneeReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+        "404":
+          description: KneeReplacementSurgeryEvaluation not found
+    delete:
+      summary: Soft-delete a KneeReplacementSurgeryEvaluation
+      operationId: deleteKneeReplacementSurgeryEvaluation
+      responses:
+        "204":
+          description: KneeReplacementSurgeryEvaluation deleted
+        "404":
+          description: KneeReplacementSurgeryEvaluation not found
+components:
+  schemas:
+    KneeReplacementSurgeryEvaluation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician table.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Evaluation lifecycle status: draft, submitted, reviewed, or urgent."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name where the evaluation took place.
+        assessment_date:
+          type: string
+          format: date
+          description: Date the evaluation was carried out.
+        assessment_time:
+          type: string
+          format: time
+          description: Time the evaluation was carried out.
+        knee_side:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - ""
+          description: "Affected knee: left, right, or bilateral. Bilateral drives the bilateral-symptomatic safety flag."
+        symptom_duration_months:
+          type: integer
+          format: int32
+          description: Duration of knee symptoms in months.
+        pain_at_rest_0_to_10:
+          type: integer
+          format: int32
+          description: Pain severity at rest, 0 (none) to 10 (worst possible).
+        pain_on_activity_0_to_10:
+          type: integer
+          format: int32
+          description: Pain severity on activity, 0 (none) to 10 (worst possible).
+        night_pain:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether pain wakes the patient at night.
+        prior_knee_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had prior surgery to the affected knee.
+        prior_knee_surgery_type:
+          type: string
+          enum:
+            - arthroscopy
+            - ligament-repair
+            - previous-partial-replacement
+            - other
+            - ""
+          description: "Type of prior knee surgery: arthroscopy, ligament repair, previous partial replacement, or other."
+        prior_knee_surgery_date:
+          type: string
+          format: date
+          description: Date of the most recent prior knee surgery.
+        prior_injury:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had a prior injury to the affected knee.
+        prior_injury_detail:
+          type: string
+          description: Free-text description of the prior knee injury.
+        oks_pain_severity:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 1: usual knee pain severity, 0 (worst) to 4 (best)."
+        oks_washing_and_drying:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 2: difficulty washing and drying, 0 (worst) to 4 (best)."
+        oks_transport:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 3: difficulty getting in or out of a car, or using public transport, 0 (worst) to 4 (best)."
+        oks_walking_distance:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 4: walking distance before knee pain becomes severe, 0 (worst) to 4 (best)."
+        oks_pain_sitting_or_lying:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 5: pain sitting or lying, 0 (worst) to 4 (best)."
+        oks_limping:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 6: limping when walking, 0 (worst) to 4 (best)."
+        oks_kneeling:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 7: difficulty kneeling, 0 (worst) to 4 (best)."
+        oks_night_pain_frequency:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 8: night pain frequency, 0 (worst) to 4 (best)."
+        oks_pain_interfering_with_work:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 9: pain interfering with usual work (including housework), 0 (worst) to 4 (best)."
+        oks_giving_way:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 10: feeling the knee might suddenly \"give way\" or let the patient down, 0 (worst) to 4 (best)."
+        oks_shopping:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 11: ability to do the household shopping alone, 0 (worst) to 4 (best)."
+        oks_stairs:
+          type: integer
+          format: int32
+          description: "Oxford Knee Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best)."
+        walking_distance_before_pain:
+          type: string
+          enum:
+            - unlimited
+            - over-1km
+            - 100m-to-1km
+            - under-100m
+            - housebound
+            - ""
+          description: "Walking distance before pain: unlimited, over 1km, 100m to 1km, under 100m, or housebound."
+        stair_climbing_ability:
+          type: string
+          enum:
+            - normal
+            - with-rail
+            - one-step-at-a-time
+            - unable
+            - ""
+          description: "Stair-climbing ability: normal, with a rail, one step at a time, or unable."
+        stand_from_chair_unaided:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient can stand from a chair unaided.
+        walking_aid:
+          type: string
+          enum:
+            - none
+            - stick
+            - frame
+            - wheelchair
+            - ""
+          description: "Walking aid in use: none, stick, frame, or wheelchair."
+        flexion_degrees:
+          type: integer
+          format: int32
+          description: Active knee flexion in degrees, measured on examination.
+        extension_deficit_degrees:
+          type: integer
+          format: int32
+          description: Extension deficit in degrees; 0 indicates full extension.
+        fixed_flexion_deformity_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a fixed flexion deformity is present on examination.
+        fixed_flexion_deformity_degrees:
+          type: integer
+          format: int32
+          description: Fixed flexion deformity in degrees; above 15 degrees fires the fixed-flexion-deformity safety flag because it affects surgical planning.
+        coronal_deformity_type:
+          type: string
+          enum:
+            - none
+            - varus
+            - valgus
+            - ""
+          description: "Coronal-plane deformity type: none, varus (bow-legged), or valgus (knock-kneed)."
+        coronal_deformity_severity:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Coronal-plane deformity severity: none, mild, moderate, or severe."
+        ligament_acl:
+          type: string
+          enum:
+            - stable
+            - lax
+            - ""
+          description: "Anterior cruciate ligament stability on examination: stable or lax."
+        ligament_pcl:
+          type: string
+          enum:
+            - stable
+            - lax
+            - ""
+          description: "Posterior cruciate ligament stability on examination: stable or lax."
+        ligament_mcl:
+          type: string
+          enum:
+            - stable
+            - lax
+            - ""
+          description: "Medial collateral ligament stability on examination: stable or lax."
+        ligament_lcl:
+          type: string
+          enum:
+            - stable
+            - lax
+            - ""
+          description: "Lateral collateral ligament stability on examination: stable or lax."
+        patellar_tracking:
+          type: string
+          enum:
+            - normal
+            - maltracking
+            - ""
+          description: "Patellar tracking on examination: normal or maltracking."
+        quadriceps_strength_mrc:
+          type: integer
+          format: int32
+          description: Quadriceps strength on the Medical Research Council (MRC) 0 to 5 scale.
+        effusion_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a joint effusion is present on examination.
+        crepitus_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether crepitus is present on examination.
+        weight_bearing_xray_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a weight-bearing X-ray of the knee has been performed.
+        kellgren_lawrence_grade_medial:
+          type: integer
+          format: int32
+          description: Kellgren-Lawrence radiographic osteoarthritis grade of the medial compartment, 0 to 4.
+        kellgren_lawrence_grade_lateral:
+          type: integer
+          format: int32
+          description: Kellgren-Lawrence radiographic osteoarthritis grade of the lateral compartment, 0 to 4.
+        kellgren_lawrence_grade_patellofemoral:
+          type: integer
+          format: int32
+          description: Kellgren-Lawrence radiographic osteoarthritis grade of the patellofemoral compartment, 0 to 4.
+        mri_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an MRI scan has been performed.
+        mri_findings:
+          type: string
+          description: Free-text summary of MRI findings.
+        ct_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a CT scan has been performed.
+        ct_indication:
+          type: string
+          enum:
+            - robotic-assisted-planning
+            - bone-loss-assessment
+            - other
+            - ""
+          description: "Indication for the CT scan: robotic-assisted surgical planning, bone-loss assessment, or other."
+        physiotherapy_tried:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether physiotherapy has been tried as a conservative measure.
+        physiotherapy_duration_weeks:
+          type: integer
+          format: int32
+          description: Duration of physiotherapy in weeks.
+        weight_management_advice_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether weight-management advice has been given as a conservative measure.
+        injection_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an intra-articular injection (corticosteroid or hyaluronic acid) has been given.
+        injection_type:
+          type: string
+          enum:
+            - corticosteroid
+            - hyaluronic-acid
+            - both
+            - other
+            - ""
+          description: "Type of intra-articular injection given: corticosteroid, hyaluronic acid, both, or other."
+        injection_count:
+          type: integer
+          format: int32
+          description: Number of intra-articular injections given.
+        injection_response:
+          type: string
+          enum:
+            - good
+            - partial
+            - none
+            - ""
+          description: "Response to the intra-articular injection: good, partial, or none."
+        nsaid_analgesic_trial:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an NSAID or analgesic trial has been undertaken as a conservative measure.
+        nsaid_analgesic_response:
+          type: string
+          enum:
+            - good
+            - partial
+            - none
+            - ""
+          description: "Response to the NSAID or analgesic trial: good, partial, or none."
+        walking_aid_trial:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a walking-aid trial has been undertaken as a conservative measure.
+        conservative_measures_exhausted:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether all appropriate conservative measures have been exhausted. Drives the computed-candidacy recommendation and the conservative-treatment-not-exhausted safety flag.
+        diabetes_controlled:
+          type: string
+          enum:
+            - not-diabetic
+            - well-controlled
+            - poorly-controlled
+            - ""
+          description: "Diabetes control status: not diabetic, well controlled, or poorly controlled."
+        cardiac_disease:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether cardiac disease is present.
+        bleeding_disorder_or_anticoagulant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a bleeding disorder is present or the patient is taking an anticoagulant.
+        smoking_status:
+          type: string
+          enum:
+            - never
+            - ex-smoker
+            - current
+            - ""
+          description: "Smoking status: never, ex-smoker, or current."
+        general_fitness_note:
+          type: string
+          description: Free-text general-fitness note. This is a high-level screen only; it does not grade ASA physical status, which belongs to the ASA-grading pre-operative sibling forms.
+        fbc_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a full blood count (FBC) has been done.
+        renal_function_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether renal function tests have been done.
+        clotting_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether clotting or INR tests have been done.
+        ecg_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an electrocardiogram (ECG) has been done.
+        mrsa_screen_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an MRSA screen has been done.
+        urinalysis_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether urinalysis has been done.
+        risks_benefits_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the risks and benefits of surgery have been discussed with the patient.
+        realistic_expectations_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether realistic expectations of surgical outcome have been discussed with the patient.
+        patient_decision_aid_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a patient decision aid has been given.
+        interpreter_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an interpreter was required for the shared decision-making discussion.
+        plan_recommendation:
+          type: string
+          enum:
+            - total-knee-replacement
+            - partial-knee-replacement
+            - continue-conservative-management
+            - mdt-review
+            - not-currently-a-candidate
+            - ""
+          description: "Clinician recommendation: total knee replacement, partial knee replacement, continue conservative management, MDT review, or not currently a candidate."
+        target_list_date:
+          type: string
+          format: date
+          description: Target date to add the patient to the surgical waiting list, if applicable.
+        responsible_surgeon:
+          type: string
+          maxLength: 255
+          description: Name of the surgeon responsible for the operation, if a surgical recommendation is made.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - knee_side
+        - night_pain
+        - prior_knee_surgery
+        - prior_knee_surgery_type
+        - prior_injury
+        - prior_injury_detail
+        - walking_distance_before_pain
+        - stair_climbing_ability
+        - stand_from_chair_unaided
+        - walking_aid
+        - fixed_flexion_deformity_present
+        - coronal_deformity_type
+        - coronal_deformity_severity
+        - ligament_acl
+        - ligament_pcl
+        - ligament_mcl
+        - ligament_lcl
+        - patellar_tracking
+        - effusion_present
+        - crepitus_present
+        - weight_bearing_xray_performed
+        - mri_performed
+        - mri_findings
+        - ct_performed
+        - ct_indication
+        - physiotherapy_tried
+        - weight_management_advice_given
+        - injection_given
+        - injection_type
+        - injection_response
+        - nsaid_analgesic_trial
+        - nsaid_analgesic_response
+        - walking_aid_trial
+        - conservative_measures_exhausted
+        - diabetes_controlled
+        - cardiac_disease
+        - bleeding_disorder_or_anticoagulant
+        - smoking_status
+        - general_fitness_note
+        - fbc_done
+        - renal_function_done
+        - clotting_done
+        - ecg_done
+        - mrsa_screen_done
+        - urinalysis_done
+        - risks_benefits_discussed
+        - realistic_expectations_discussed
+        - patient_decision_aid_given
+        - interpreter_required
+        - plan_recommendation
+        - responsible_surgeon
+      description: "Knee replacement surgery evaluation: the payload of the 15-step single-page wizard, covering presenting history, the Oxford Knee Score, physical examination, diagnostic imaging, conservative-treatment audit, general health screen, pre-operative bloods checklist, shared decision-making, and the management plan."

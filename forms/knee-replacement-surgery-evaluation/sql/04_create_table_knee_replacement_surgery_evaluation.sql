@@ -1,0 +1,311 @@
+-- Knee replacement surgery evaluation: the payload of the 15-step
+-- single-page wizard.
+--
+-- Column groups follow the wizard steps in order. Unanswered text and enum
+-- columns default to the empty string; unanswered numeric, date, and time
+-- columns are NULL. See ../index.md for the wizard table and
+-- ../spec/index.md for the contract.
+
+CREATE TABLE knee_replacement_surgery_evaluation (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
+
+    -- Step 1: clinician identification
+    site_name VARCHAR(255) NOT NULL DEFAULT '',
+    assessment_date DATE,
+    assessment_time TIME,
+
+    -- Step 3: presenting history
+    knee_side VARCHAR(10) NOT NULL DEFAULT '' CHECK (knee_side IN ('left', 'right', 'bilateral', '')),
+    symptom_duration_months INTEGER CHECK (symptom_duration_months IS NULL OR symptom_duration_months BETWEEN 0 AND 1200),
+    pain_at_rest_0_to_10 SMALLINT CHECK (pain_at_rest_0_to_10 IS NULL OR pain_at_rest_0_to_10 BETWEEN 0 AND 10),
+    pain_on_activity_0_to_10 SMALLINT CHECK (pain_on_activity_0_to_10 IS NULL OR pain_on_activity_0_to_10 BETWEEN 0 AND 10),
+    night_pain VARCHAR(5) NOT NULL DEFAULT '' CHECK (night_pain IN ('yes', 'no', '')),
+    prior_knee_surgery VARCHAR(5) NOT NULL DEFAULT '' CHECK (prior_knee_surgery IN ('yes', 'no', '')),
+    prior_knee_surgery_type VARCHAR(30) NOT NULL DEFAULT '' CHECK (prior_knee_surgery_type IN ('arthroscopy', 'ligament-repair', 'previous-partial-replacement', 'other', '')),
+    prior_knee_surgery_date DATE,
+    prior_injury VARCHAR(5) NOT NULL DEFAULT '' CHECK (prior_injury IN ('yes', 'no', '')),
+    prior_injury_detail TEXT NOT NULL DEFAULT '',
+
+    -- Step 4: Oxford Knee Score (12 items, each 0 worst to 4 best)
+    oks_pain_severity SMALLINT CHECK (oks_pain_severity IS NULL OR oks_pain_severity BETWEEN 0 AND 4),
+    oks_washing_and_drying SMALLINT CHECK (oks_washing_and_drying IS NULL OR oks_washing_and_drying BETWEEN 0 AND 4),
+    oks_transport SMALLINT CHECK (oks_transport IS NULL OR oks_transport BETWEEN 0 AND 4),
+    oks_walking_distance SMALLINT CHECK (oks_walking_distance IS NULL OR oks_walking_distance BETWEEN 0 AND 4),
+    oks_pain_sitting_or_lying SMALLINT CHECK (oks_pain_sitting_or_lying IS NULL OR oks_pain_sitting_or_lying BETWEEN 0 AND 4),
+    oks_limping SMALLINT CHECK (oks_limping IS NULL OR oks_limping BETWEEN 0 AND 4),
+    oks_kneeling SMALLINT CHECK (oks_kneeling IS NULL OR oks_kneeling BETWEEN 0 AND 4),
+    oks_night_pain_frequency SMALLINT CHECK (oks_night_pain_frequency IS NULL OR oks_night_pain_frequency BETWEEN 0 AND 4),
+    oks_pain_interfering_with_work SMALLINT CHECK (oks_pain_interfering_with_work IS NULL OR oks_pain_interfering_with_work BETWEEN 0 AND 4),
+    oks_giving_way SMALLINT CHECK (oks_giving_way IS NULL OR oks_giving_way BETWEEN 0 AND 4),
+    oks_shopping SMALLINT CHECK (oks_shopping IS NULL OR oks_shopping BETWEEN 0 AND 4),
+    oks_stairs SMALLINT CHECK (oks_stairs IS NULL OR oks_stairs BETWEEN 0 AND 4),
+
+    -- Step 5: functional limitations
+    walking_distance_before_pain VARCHAR(20) NOT NULL DEFAULT '' CHECK (walking_distance_before_pain IN ('unlimited', 'over-1km', '100m-to-1km', 'under-100m', 'housebound', '')),
+    stair_climbing_ability VARCHAR(20) NOT NULL DEFAULT '' CHECK (stair_climbing_ability IN ('normal', 'with-rail', 'one-step-at-a-time', 'unable', '')),
+    stand_from_chair_unaided VARCHAR(5) NOT NULL DEFAULT '' CHECK (stand_from_chair_unaided IN ('yes', 'no', '')),
+    walking_aid VARCHAR(15) NOT NULL DEFAULT '' CHECK (walking_aid IN ('none', 'stick', 'frame', 'wheelchair', '')),
+
+    -- Step 6: physical examination — range of motion
+    flexion_degrees SMALLINT CHECK (flexion_degrees IS NULL OR flexion_degrees BETWEEN 0 AND 150),
+    extension_deficit_degrees SMALLINT CHECK (extension_deficit_degrees IS NULL OR extension_deficit_degrees BETWEEN 0 AND 90),
+    fixed_flexion_deformity_present VARCHAR(5) NOT NULL DEFAULT '' CHECK (fixed_flexion_deformity_present IN ('yes', 'no', '')),
+    fixed_flexion_deformity_degrees SMALLINT CHECK (fixed_flexion_deformity_degrees IS NULL OR fixed_flexion_deformity_degrees BETWEEN 0 AND 90),
+
+    -- Step 7: physical examination — stability & alignment
+    coronal_deformity_type VARCHAR(10) NOT NULL DEFAULT '' CHECK (coronal_deformity_type IN ('none', 'varus', 'valgus', '')),
+    coronal_deformity_severity VARCHAR(10) NOT NULL DEFAULT '' CHECK (coronal_deformity_severity IN ('none', 'mild', 'moderate', 'severe', '')),
+    ligament_acl VARCHAR(10) NOT NULL DEFAULT '' CHECK (ligament_acl IN ('stable', 'lax', '')),
+    ligament_pcl VARCHAR(10) NOT NULL DEFAULT '' CHECK (ligament_pcl IN ('stable', 'lax', '')),
+    ligament_mcl VARCHAR(10) NOT NULL DEFAULT '' CHECK (ligament_mcl IN ('stable', 'lax', '')),
+    ligament_lcl VARCHAR(10) NOT NULL DEFAULT '' CHECK (ligament_lcl IN ('stable', 'lax', '')),
+    patellar_tracking VARCHAR(15) NOT NULL DEFAULT '' CHECK (patellar_tracking IN ('normal', 'maltracking', '')),
+
+    -- Step 8: physical examination — muscle strength & effusion
+    quadriceps_strength_mrc SMALLINT CHECK (quadriceps_strength_mrc IS NULL OR quadriceps_strength_mrc BETWEEN 0 AND 5),
+    effusion_present VARCHAR(5) NOT NULL DEFAULT '' CHECK (effusion_present IN ('yes', 'no', '')),
+    crepitus_present VARCHAR(5) NOT NULL DEFAULT '' CHECK (crepitus_present IN ('yes', 'no', '')),
+
+    -- Step 9: diagnostic imaging
+    weight_bearing_xray_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (weight_bearing_xray_performed IN ('yes', 'no', '')),
+    kellgren_lawrence_grade_medial SMALLINT CHECK (kellgren_lawrence_grade_medial IS NULL OR kellgren_lawrence_grade_medial BETWEEN 0 AND 4),
+    kellgren_lawrence_grade_lateral SMALLINT CHECK (kellgren_lawrence_grade_lateral IS NULL OR kellgren_lawrence_grade_lateral BETWEEN 0 AND 4),
+    kellgren_lawrence_grade_patellofemoral SMALLINT CHECK (kellgren_lawrence_grade_patellofemoral IS NULL OR kellgren_lawrence_grade_patellofemoral BETWEEN 0 AND 4),
+    mri_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (mri_performed IN ('yes', 'no', '')),
+    mri_findings TEXT NOT NULL DEFAULT '',
+    ct_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (ct_performed IN ('yes', 'no', '')),
+    ct_indication VARCHAR(30) NOT NULL DEFAULT '' CHECK (ct_indication IN ('robotic-assisted-planning', 'bone-loss-assessment', 'other', '')),
+
+    -- Step 10: conservative treatment audit
+    physiotherapy_tried VARCHAR(5) NOT NULL DEFAULT '' CHECK (physiotherapy_tried IN ('yes', 'no', '')),
+    physiotherapy_duration_weeks INTEGER CHECK (physiotherapy_duration_weeks IS NULL OR physiotherapy_duration_weeks BETWEEN 0 AND 520),
+    weight_management_advice_given VARCHAR(5) NOT NULL DEFAULT '' CHECK (weight_management_advice_given IN ('yes', 'no', '')),
+    injection_given VARCHAR(5) NOT NULL DEFAULT '' CHECK (injection_given IN ('yes', 'no', '')),
+    injection_type VARCHAR(20) NOT NULL DEFAULT '' CHECK (injection_type IN ('corticosteroid', 'hyaluronic-acid', 'both', 'other', '')),
+    injection_count SMALLINT CHECK (injection_count IS NULL OR injection_count BETWEEN 0 AND 20),
+    injection_response VARCHAR(10) NOT NULL DEFAULT '' CHECK (injection_response IN ('good', 'partial', 'none', '')),
+    nsaid_analgesic_trial VARCHAR(5) NOT NULL DEFAULT '' CHECK (nsaid_analgesic_trial IN ('yes', 'no', '')),
+    nsaid_analgesic_response VARCHAR(10) NOT NULL DEFAULT '' CHECK (nsaid_analgesic_response IN ('good', 'partial', 'none', '')),
+    walking_aid_trial VARCHAR(5) NOT NULL DEFAULT '' CHECK (walking_aid_trial IN ('yes', 'no', '')),
+    conservative_measures_exhausted VARCHAR(5) NOT NULL DEFAULT '' CHECK (conservative_measures_exhausted IN ('yes', 'no', '')),
+
+    -- Step 11: general health & surgical fitness screen
+    diabetes_controlled VARCHAR(20) NOT NULL DEFAULT '' CHECK (diabetes_controlled IN ('not-diabetic', 'well-controlled', 'poorly-controlled', '')),
+    cardiac_disease VARCHAR(5) NOT NULL DEFAULT '' CHECK (cardiac_disease IN ('yes', 'no', '')),
+    bleeding_disorder_or_anticoagulant VARCHAR(5) NOT NULL DEFAULT '' CHECK (bleeding_disorder_or_anticoagulant IN ('yes', 'no', '')),
+    smoking_status VARCHAR(15) NOT NULL DEFAULT '' CHECK (smoking_status IN ('never', 'ex-smoker', 'current', '')),
+    general_fitness_note TEXT NOT NULL DEFAULT '',
+
+    -- Step 12: pre-operative baseline bloods/tests (done / not done)
+    fbc_done VARCHAR(5) NOT NULL DEFAULT '' CHECK (fbc_done IN ('yes', 'no', '')),
+    renal_function_done VARCHAR(5) NOT NULL DEFAULT '' CHECK (renal_function_done IN ('yes', 'no', '')),
+    clotting_done VARCHAR(5) NOT NULL DEFAULT '' CHECK (clotting_done IN ('yes', 'no', '')),
+    ecg_done VARCHAR(5) NOT NULL DEFAULT '' CHECK (ecg_done IN ('yes', 'no', '')),
+    mrsa_screen_done VARCHAR(5) NOT NULL DEFAULT '' CHECK (mrsa_screen_done IN ('yes', 'no', '')),
+    urinalysis_done VARCHAR(5) NOT NULL DEFAULT '' CHECK (urinalysis_done IN ('yes', 'no', '')),
+
+    -- Step 13: shared decision-making
+    risks_benefits_discussed VARCHAR(5) NOT NULL DEFAULT '' CHECK (risks_benefits_discussed IN ('yes', 'no', '')),
+    realistic_expectations_discussed VARCHAR(5) NOT NULL DEFAULT '' CHECK (realistic_expectations_discussed IN ('yes', 'no', '')),
+    patient_decision_aid_given VARCHAR(5) NOT NULL DEFAULT '' CHECK (patient_decision_aid_given IN ('yes', 'no', '')),
+    interpreter_required VARCHAR(5) NOT NULL DEFAULT '' CHECK (interpreter_required IN ('yes', 'no', '')),
+
+    -- Step 14: management plan & recommendation
+    plan_recommendation VARCHAR(35) NOT NULL DEFAULT '' CHECK (plan_recommendation IN ('total-knee-replacement', 'partial-knee-replacement', 'continue-conservative-management', 'mdt-review', 'not-currently-a-candidate', '')),
+    target_list_date DATE,
+    responsible_surgeon VARCHAR(255) NOT NULL DEFAULT ''
+);
+
+CREATE TRIGGER trigger_knee_replacement_surgery_evaluation_updated_at
+    BEFORE UPDATE ON knee_replacement_surgery_evaluation
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE knee_replacement_surgery_evaluation IS
+    'Knee replacement surgery evaluation: the payload of the 15-step single-page wizard, covering presenting history, the Oxford Knee Score, physical examination, diagnostic imaging, conservative-treatment audit, general health screen, pre-operative bloods checklist, shared decision-making, and the management plan.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.created_at IS
+    'Timestamp when the record was created.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.updated_at IS
+    'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.deleted_at IS
+    'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.patient_id IS
+    'Foreign key to the patient table.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician_id IS
+    'Foreign key to the clinician table.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.status IS
+    'Evaluation lifecycle status: draft, submitted, reviewed, or urgent.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.site_name IS
+    'Site or clinic name where the evaluation took place.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.assessment_date IS
+    'Date the evaluation was carried out.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.assessment_time IS
+    'Time the evaluation was carried out.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_side IS
+    'Affected knee: left, right, or bilateral. Bilateral drives the bilateral-symptomatic safety flag.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.symptom_duration_months IS
+    'Duration of knee symptoms in months.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.pain_at_rest_0_to_10 IS
+    'Pain severity at rest, 0 (none) to 10 (worst possible).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.pain_on_activity_0_to_10 IS
+    'Pain severity on activity, 0 (none) to 10 (worst possible).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.night_pain IS
+    'Whether pain wakes the patient at night.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_knee_surgery IS
+    'Whether the patient has had prior surgery to the affected knee.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_knee_surgery_type IS
+    'Type of prior knee surgery: arthroscopy, ligament repair, previous partial replacement, or other.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_knee_surgery_date IS
+    'Date of the most recent prior knee surgery.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_injury IS
+    'Whether the patient has had a prior injury to the affected knee.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_injury_detail IS
+    'Free-text description of the prior knee injury.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_pain_severity IS
+    'Oxford Knee Score item 1: usual knee pain severity, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_washing_and_drying IS
+    'Oxford Knee Score item 2: difficulty washing and drying, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_transport IS
+    'Oxford Knee Score item 3: difficulty getting in or out of a car, or using public transport, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_walking_distance IS
+    'Oxford Knee Score item 4: walking distance before knee pain becomes severe, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_pain_sitting_or_lying IS
+    'Oxford Knee Score item 5: pain sitting or lying, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_limping IS
+    'Oxford Knee Score item 6: limping when walking, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_kneeling IS
+    'Oxford Knee Score item 7: difficulty kneeling, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_night_pain_frequency IS
+    'Oxford Knee Score item 8: night pain frequency, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_pain_interfering_with_work IS
+    'Oxford Knee Score item 9: pain interfering with usual work (including housework), 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_giving_way IS
+    'Oxford Knee Score item 10: feeling the knee might suddenly "give way" or let the patient down, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_shopping IS
+    'Oxford Knee Score item 11: ability to do the household shopping alone, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_stairs IS
+    'Oxford Knee Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.walking_distance_before_pain IS
+    'Walking distance before pain: unlimited, over 1km, 100m to 1km, under 100m, or housebound.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.stair_climbing_ability IS
+    'Stair-climbing ability: normal, with a rail, one step at a time, or unable.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.stand_from_chair_unaided IS
+    'Whether the patient can stand from a chair unaided.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.walking_aid IS
+    'Walking aid in use: none, stick, frame, or wheelchair.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.flexion_degrees IS
+    'Active knee flexion in degrees, measured on examination.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.extension_deficit_degrees IS
+    'Extension deficit in degrees; 0 indicates full extension.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.fixed_flexion_deformity_present IS
+    'Whether a fixed flexion deformity is present on examination.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.fixed_flexion_deformity_degrees IS
+    'Fixed flexion deformity in degrees; above 15 degrees fires the fixed-flexion-deformity safety flag because it affects surgical planning.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.coronal_deformity_type IS
+    'Coronal-plane deformity type: none, varus (bow-legged), or valgus (knock-kneed).';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.coronal_deformity_severity IS
+    'Coronal-plane deformity severity: none, mild, moderate, or severe.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_acl IS
+    'Anterior cruciate ligament stability on examination: stable or lax.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_pcl IS
+    'Posterior cruciate ligament stability on examination: stable or lax.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_mcl IS
+    'Medial collateral ligament stability on examination: stable or lax.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_lcl IS
+    'Lateral collateral ligament stability on examination: stable or lax.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.patellar_tracking IS
+    'Patellar tracking on examination: normal or maltracking.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.quadriceps_strength_mrc IS
+    'Quadriceps strength on the Medical Research Council (MRC) 0 to 5 scale.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.effusion_present IS
+    'Whether a joint effusion is present on examination.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.crepitus_present IS
+    'Whether crepitus is present on examination.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.weight_bearing_xray_performed IS
+    'Whether a weight-bearing X-ray of the knee has been performed.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.kellgren_lawrence_grade_medial IS
+    'Kellgren-Lawrence radiographic osteoarthritis grade of the medial compartment, 0 to 4.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.kellgren_lawrence_grade_lateral IS
+    'Kellgren-Lawrence radiographic osteoarthritis grade of the lateral compartment, 0 to 4.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.kellgren_lawrence_grade_patellofemoral IS
+    'Kellgren-Lawrence radiographic osteoarthritis grade of the patellofemoral compartment, 0 to 4.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.mri_performed IS
+    'Whether an MRI scan has been performed.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.mri_findings IS
+    'Free-text summary of MRI findings.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ct_performed IS
+    'Whether a CT scan has been performed.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ct_indication IS
+    'Indication for the CT scan: robotic-assisted surgical planning, bone-loss assessment, or other.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.physiotherapy_tried IS
+    'Whether physiotherapy has been tried as a conservative measure.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.physiotherapy_duration_weeks IS
+    'Duration of physiotherapy in weeks.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.weight_management_advice_given IS
+    'Whether weight-management advice has been given as a conservative measure.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_given IS
+    'Whether an intra-articular injection (corticosteroid or hyaluronic acid) has been given.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_type IS
+    'Type of intra-articular injection given: corticosteroid, hyaluronic acid, both, or other.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_count IS
+    'Number of intra-articular injections given.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_response IS
+    'Response to the intra-articular injection: good, partial, or none.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.nsaid_analgesic_trial IS
+    'Whether an NSAID or analgesic trial has been undertaken as a conservative measure.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.nsaid_analgesic_response IS
+    'Response to the NSAID or analgesic trial: good, partial, or none.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.walking_aid_trial IS
+    'Whether a walking-aid trial has been undertaken as a conservative measure.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.conservative_measures_exhausted IS
+    'Whether all appropriate conservative measures have been exhausted. Drives the computed-candidacy recommendation and the conservative-treatment-not-exhausted safety flag.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.diabetes_controlled IS
+    'Diabetes control status: not diabetic, well controlled, or poorly controlled.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.cardiac_disease IS
+    'Whether cardiac disease is present.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.bleeding_disorder_or_anticoagulant IS
+    'Whether a bleeding disorder is present or the patient is taking an anticoagulant.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.smoking_status IS
+    'Smoking status: never, ex-smoker, or current.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.general_fitness_note IS
+    'Free-text general-fitness note. This is a high-level screen only; it does not grade ASA physical status, which belongs to the ASA-grading pre-operative sibling forms.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.fbc_done IS
+    'Whether a full blood count (FBC) has been done.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.renal_function_done IS
+    'Whether renal function tests have been done.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clotting_done IS
+    'Whether clotting or INR tests have been done.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.ecg_done IS
+    'Whether an electrocardiogram (ECG) has been done.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.mrsa_screen_done IS
+    'Whether an MRSA screen has been done.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.urinalysis_done IS
+    'Whether urinalysis has been done.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.risks_benefits_discussed IS
+    'Whether the risks and benefits of surgery have been discussed with the patient.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.realistic_expectations_discussed IS
+    'Whether realistic expectations of surgical outcome have been discussed with the patient.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.patient_decision_aid_given IS
+    'Whether a patient decision aid has been given.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.interpreter_required IS
+    'Whether an interpreter was required for the shared decision-making discussion.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.plan_recommendation IS
+    'Clinician recommendation: total knee replacement, partial knee replacement, continue conservative management, MDT review, or not currently a candidate.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.target_list_date IS
+    'Target date to add the patient to the surgical waiting list, if applicable.';
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.responsible_surgeon IS
+    'Name of the surgeon responsible for the operation, if a surgical recommendation is made.';
+
+CREATE INDEX knee_replacement_surgery_evaluation_patient_id_index
+    ON knee_replacement_surgery_evaluation (patient_id);
+
+CREATE INDEX knee_replacement_surgery_evaluation_clinician_id_index
+    ON knee_replacement_surgery_evaluation (clinician_id);
