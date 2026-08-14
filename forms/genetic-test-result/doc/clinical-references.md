@@ -38,7 +38,7 @@ and Axis B (severity).
 ### ACGS — UK best-practice guidelines for variant classification
 
 The Association for Clinical Genomic Science (ACGS) publishes the UK
-specialisation of the ACMG/AMP framework, used across NHS Genomic Laboratory
+specialization of the ACMG/AMP framework, used across NHS Genomic Laboratory
 Hubs to achieve accurate and consistent classification. The 2024 edition adds
 recommendations such as: variants should not be classified as likely pathogenic
 on in-silico (PP3_str) and rarity (PM2_mod) evidence alone; a single missense

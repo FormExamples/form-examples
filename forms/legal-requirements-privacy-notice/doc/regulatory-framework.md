@@ -13,7 +13,7 @@ or secondary legislation, and the patient cannot opt out.
   legal obligation to which the controller is subject. Indexed:
   <https://www.legislation.gov.uk/eur/2016/679/contents>
 - **UK GDPR** Article 9(2)(h) — processing for the provision of health or
-  social care, authorised by UK law (DPA 2018 Schedule 1 Part 1 paragraph
+  social care, authorized by UK law (DPA 2018 Schedule 1 Part 1 paragraph
   2). Article 9(2)(i) is the appropriate special-category basis where the
   recipient is the UK Health Security Agency for public-health purposes.
 - **Data Protection Act 2018** (c. 12) —

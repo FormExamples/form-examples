@@ -57,7 +57,7 @@ record satisfies the model by:
   no further patient-facing privacy notice is required.
 - **Provide choice** — the patient may amend or withdraw the statement at
   any time while they retain capacity.
-- **Improve** — anonymised aggregates may inform service planning under
+- **Improve** — anonymized aggregates may inform service planning under
   the separate Research and Planning Privacy Notice.
 
 Code: archived at the National Archives:

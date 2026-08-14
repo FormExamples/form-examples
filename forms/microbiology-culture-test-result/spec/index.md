@@ -14,7 +14,7 @@ it, this form records what the culture **found** and a structured
 **interpretation**. It records the specimen and its condition, the clinical
 history, the Gram-stain and culture results, the organism(s) isolated and colony
 count, antibiotic sensitivities and key resistance markers (MRSA / ESBL / CPE),
-specialised tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative
+specialized tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative
 findings, the impression, and recommended follow-up — then computes a **four-axis
 interpretation grade** (result classification, abnormality severity / structured
 reporting, report completeness, and follow-up urgency) plus a set of

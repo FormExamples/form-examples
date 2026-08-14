@@ -19,7 +19,7 @@ consistent, auditable, and aligned with NICE NG24, BSH, and SHOT guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, identity / sample safety,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet identity-unsafe, or complete yet stat.
 - **Red-flags auto-escalate.** Declared major / massive haemorrhage, instability,
   or active uncontrolled bleeding forces emergency / stat triage regardless of

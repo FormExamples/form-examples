@@ -8,7 +8,7 @@ dashboard, RESTful routes `/sundowner-syndrome-assessments/` (list) and
 `/sundowner-syndrome-assessments/[id]` (wizard), plus `[id]/report` and PDF.
 
 Scoring engine in `src/lib/engine/`: CMAI (29-203) + NPI (0-144) →
-severity band + prioritised flags.
+severity band + prioritized flags.
 
 See parent [`../index.md`](../index.md) for the form specification.
 

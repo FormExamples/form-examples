@@ -76,7 +76,7 @@ mis-routed, key information lost) is reportable to LFPSE:
 ## Out of scope
 
 - Bed-state and capacity matching — performed by the receiving
-  organisation's bed manager.
+  organization's bed manager.
 - Ambulance / patient-transport service tasking — separate workflow.
 - Discharge documentation — separate form
   (`forms/hospital-discharge/`).

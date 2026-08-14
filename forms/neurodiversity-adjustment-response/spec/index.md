@@ -32,7 +32,7 @@ signal, not a determination).
 ## 3. Scoring system
 
 The engine grades each response on **four independent axes**, each anchored to a
-recognised source. Axes are orthogonal: a complete, well-structured response can
+recognized source. Axes are orthogonal: a complete, well-structured response can
 still carry high legal risk.
 
 | Axis | Instrument | Output |

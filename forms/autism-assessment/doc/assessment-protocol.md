@@ -45,7 +45,7 @@ prompts the clinician to record reactions in each modality:
   deep pressure).
 - Gustatory / olfactory (food selectivity, smell avoidance).
 - Proprioceptive / vestibular (seeking spinning, jumping, balance issues).
-- Interoceptive (difficulty recognising hunger, thirst, pain, toilet needs).
+- Interoceptive (difficulty recognizing hunger, thirst, pain, toilet needs).
 
 ## Corroborating history sources
 
@@ -65,7 +65,7 @@ clinician reviews:
   coexisting condition.
 - **Intellectual developmental disorders** (ICD-11 6A00) — particularly
   for the ICD-11 6A02.1 / 6A02.3 subtypes.
-- **Anxiety disorders** (ICD-11 6B00–6B0Z) — generalised anxiety and
+- **Anxiety disorders** (ICD-11 6B00–6B0Z) — generalized anxiety and
   social anxiety are highly prevalent in autistic adults.
 - **Depressive disorders** (ICD-11 6A70–6A7Z).
 - **Obsessive-compulsive disorder** (ICD-11 6B20) — must be distinguished
@@ -73,7 +73,7 @@ clinician reviews:
 - **Eating disorders** — particularly ARFID.
 - **Sleep-wake disorders** (ICD-11 7A00–7B2Z).
 - **Personality disorders** — must be considered cautiously; many
-  presentations attributed to personality disorder are unrecognised
+  presentations attributed to personality disorder are unrecognized
   autism, particularly in women.
 
 ## Outcome recording

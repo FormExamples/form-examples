@@ -34,7 +34,7 @@ prepare and review the data ahead of printing and posting.
 
 ## Eligible conditions
 
-The NHSBSA recognises exactly ten qualifying conditions:
+The NHSBSA recognizes exactly ten qualifying conditions:
 
 1. **A permanent fistula** (for example caecostomy, colostomy, laryngostomy, or
    ileostomy) requiring continuous surgical dressing or an appliance.

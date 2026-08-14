@@ -15,7 +15,7 @@ HR records.
 | --- | --- |
 | Team and company OKRs | UK GDPR Art. 6(1)(f) — legitimate interests |
 | Individual OKRs linked to performance review | UK GDPR Art. 6(1)(b) — contract |
-| Visibility to leadership | per organisation's people policy |
+| Visibility to leadership | per organization's people policy |
 | External investor reporting (aggregate only) | UK GDPR Art. 6(1)(f) — legitimate interests; or Art. 6(1)(c) where SEC / FCA reporting applies |
 
 References:
@@ -28,7 +28,7 @@ References:
 
 ## Visibility model
 
-OKRs are conventionally **transparent** within an organisation
+OKRs are conventionally **transparent** within an organization
 (Doerr 2018). The implementation defaults to org-wide visibility for
 team and company OKRs and to limited visibility for individual OKRs
 (owner + line manager + skip + HR), with explicit override.
@@ -46,9 +46,9 @@ encryption-at-rest.
 ## Retention
 
 - Active cycle: indefinite while active.
-- Past cycles: minimum 6 years for organisational learning and to
+- Past cycles: minimum 6 years for organizational learning and to
   support tax / audit defensibility of any tied compensation; longer
-  per organisational policy.
+  per organizational policy.
 - Individual OKRs follow HR record retention.
 
 ## Equality and accessibility

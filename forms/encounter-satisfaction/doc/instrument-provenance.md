@@ -17,7 +17,7 @@ inspired by two widely used patient-experience instruments:
     Report no. P-7865. <https://www.rand.org/pubs/papers/P7865.html>
 
 - **HCAHPS — Hospital Consumer Assessment of Healthcare Providers and
-  Systems** — the standardised inpatient experience survey administered
+  Systems** — the standardized inpatient experience survey administered
   to discharged patients in the US Medicare programme, maintained by the
   Centers for Medicare & Medicaid Services (CMS) and the Agency for
   Healthcare Research and Quality (AHRQ).

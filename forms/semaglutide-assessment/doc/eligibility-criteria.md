@@ -76,7 +76,7 @@ Per the Wegovy / Ozempic SmPC:
 - Risk of dehydration with persistent GI side effects, particularly with
   RAAS inhibitors.
 
-## Eligibility categorisation (this form)
+## Eligibility categorization (this form)
 
 | Category | Criteria |
 | --- | --- |

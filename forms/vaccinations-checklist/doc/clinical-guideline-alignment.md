@@ -6,7 +6,7 @@
   <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
 - Especially:
   - Chapter 6 — Contraindications.
-  - Chapter 12 — Immunisation of healthcare and laboratory staff.
+  - Chapter 12 — Immunization of healthcare and laboratory staff.
   - Chapter 14a — COVID-19.
   - Chapter 14b — RSV.
   - Chapter 18 — Hepatitis B.
@@ -23,7 +23,7 @@
 
 ## JCVI
 
-- Joint Committee on Vaccination and Immunisation. *Statements*.
+- Joint Committee on Vaccination and Immunization. *Statements*.
   <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunisation>
 
 ## WHO

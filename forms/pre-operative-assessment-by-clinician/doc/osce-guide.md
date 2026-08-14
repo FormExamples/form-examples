@@ -12,7 +12,7 @@ All patients having an operation under general, regional, or anaesthesia-led
 sedation require a pre-operative assessment. Its aims are to:
 
 1. Identify medical comorbidities that affect anaesthetic risk.
-2. Optimise the patient's physiological state before surgery.
+2. Optimize the patient's physiological state before surgery.
 3. Identify patients who need enhanced post-operative care (HDU / ICU).
 4. Support shared decision making and informed consent (Montgomery).
 5. Produce an anaesthesia plan and WHO Safer Surgery Checklist entry.
@@ -122,7 +122,7 @@ Use an objective tool:
 
 - Pallor, jaundice, cyanosis, clubbing, oedema, cachexia.
 - Hydration status.
-- Ability to mobilise, transfer.
+- Ability to mobilize, transfer.
 
 ### 10. Airway
 

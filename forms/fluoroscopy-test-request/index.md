@@ -16,7 +16,7 @@ This form is the contrast-fluoroscopy counterpart to the repository's other
 clinician-driven imaging request forms. It is completed by a radiologist, GP,
 hospital doctor, surgeon, gastroenterologist, or radiographer rather than by
 the patient, and is aligned with the ACR Appropriateness Criteria, RCR iRefer
-referral guidelines, and the Ionising Radiation (Medical Exposure) Regulations
+referral guidelines, and the Ionizing Radiation (Medical Exposure) Regulations
 (IR(ME)R).
 
 ## Scope and intended users
@@ -30,7 +30,7 @@ referral guidelines, and the Ionising Radiation (Medical Exposure) Regulations
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -40,7 +40,7 @@ unsafe, incomplete, or urgent.
 | **C. Request completeness** | Mandatory-field checklist, indication + clinical question weighted highest | 0–100 % complete (+ missing fields) |
 | **D. Triage priority** | Acuity-escalation rules | routine / urgent / emergency (+ target timeframe) |
 
-A safety contraindication (pregnancy with an ionising study, or barium chosen
+A safety contraindication (pregnancy with an ionizing study, or barium chosen
 when perforation is suspected) drives the **safety band** to `contraindicated`
 and typically forces a `query-referrer` / `redirect` recommendation regardless
 of the other axes.
@@ -127,7 +127,7 @@ fluoroscopy-test-request/
   <https://www.jacr.org/article/S1546-1440(19)30147-4/fulltext>
 - RCR iRefer *Making the best use of clinical radiology* referral guidelines.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/irefer/>
-- IR(ME)R — Ionising Radiation (Medical Exposure) Regulations 2017
+- IR(ME)R — Ionizing Radiation (Medical Exposure) Regulations 2017
   (justification of every exposure; pregnancy considerations).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents>
 - Suspected perforation: water-soluble contrast preferred over barium

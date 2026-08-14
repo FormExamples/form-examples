@@ -93,7 +93,7 @@ stable / progressive) and may also be recorded in `reporting_category`.
   <https://www.sciencedirect.com/science/article/pii/S3051292125000065>
 - SNMMI — 18F-FDG PET and PET/CT Patient Preparation (glucose 7–11 mmol/L
   target). <https://tech.snmjournals.org/content/42/1/5>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification and dose audit; administered activity recorded per study).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 

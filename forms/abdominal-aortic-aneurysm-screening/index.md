@@ -8,10 +8,10 @@ a validated engine classifies the aorta into one of four categories — normal,
 small aneurysm, medium aneurysm, or large aneurysm — and sets the corresponding
 **surveillance or referral action**. It checks completeness and raises clinical
 flags (large aneurysm requiring vascular referral, rapid growth, a
-non-visualised aorta requiring re-scan, or a symptomatic patient requiring
+non-visualized aorta requiring re-scan, or a symptomatic patient requiring
 emergency assessment).
 
-An abdominal aortic aneurysm is a localised dilatation of the abdominal aorta.
+An abdominal aortic aneurysm is a localized dilatation of the abdominal aorta.
 Most are asymptomatic until rupture, which is frequently fatal. Ultrasound
 screening of the at-risk population detects aneurysms early so that small ones
 can be watched and large ones repaired electively. In England, men are invited
@@ -61,7 +61,7 @@ inclusive of their lower bound and exclusive of the next (`[3.0, 4.5)`,
 `[4.5, 5.5)`, `[5.5, ∞)`); anything below 3.0 cm is normal. These are the
 thresholds and recall intervals used by the NHS AAA Screening Programme.
 
-An aorta that cannot be adequately visualised is **not** classified as normal:
+An aorta that cannot be adequately visualized is **not** classified as normal:
 the result is recorded as *non-visualised* and a re-scan is arranged.
 
 ## Assessment steps
@@ -73,7 +73,7 @@ Completed in order on a single continuous single-page wizard.
 | 1 | Screening context | screening technician name and role, clinic / site, date and time of scan, ultrasound device identifier |
 | 2 | Patient identification & eligibility | patient identifier, age, sex, eligibility route (routine year-of-65 invitation / self-referral over 65 / other), first scan or surveillance re-scan |
 | 3 | Consent | informed consent given (yes/no), information leaflet provided, any refusal or query recorded |
-| 4 | Ultrasound measurement | aorta adequately visualised (yes/no), maximum aortic diameter (cm), prior maximum diameter and prior scan date (for surveillance patients) |
+| 4 | Ultrasound measurement | aorta adequately visualized (yes/no), maximum aortic diameter (cm), prior maximum diameter and prior scan date (for surveillance patients) |
 | 5 | Clinical observations | patient symptomatic (abdominal/back pain, tenderness), incidental findings, notes |
 | 6 | Result & action | computed category, surveillance/referral band, recommended action, growth since prior scan, flagged issues, free-text result note |
 

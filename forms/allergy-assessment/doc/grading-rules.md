@@ -8,22 +8,22 @@ BSACI clinical guidelines for drug allergy, food allergy and anaphylaxis.
 
 ## Category definitions
 
-### Low — mild localised reaction
+### Low — mild localized reaction
 - Symptoms confined to a single organ system (most commonly skin).
-- Typical phenotypes: localised urticaria, mild rhinoconjunctivitis, contact
+- Typical phenotypes: localized urticaria, mild rhinoconjunctivitis, contact
   dermatitis, oral allergy syndrome confined to the mouth and pharynx.
 - No systemic or respiratory compromise; no history of adrenaline use.
 
 ### Moderate — systemic but non-life-threatening
 - Two or more organ systems involved (e.g. cutaneous + gastrointestinal).
 - No airway compromise, no hypotension, no impaired consciousness.
-- Mapped to **Ring & Messmer grade II** systemic reactions (generalised
+- Mapped to **Ring & Messmer grade II** systemic reactions (generalized
   urticaria, angioedema, mild bronchospasm, vomiting). See Ring J, Behrendt H,
   de Weck A. *History and classification of anaphylaxis*. Chem Immunol Allergy
   2010;95:1-11. PubMed PMID: 20519878.
 
-### High — severe reaction or multi-allergen sensitisation
-- Severe bronchospasm, recurrent generalised urticaria with respiratory
+### High — severe reaction or multi-allergen sensitization
+- Severe bronchospasm, recurrent generalized urticaria with respiratory
   symptoms, or significant gastrointestinal involvement.
 - Multiple allergen categories (drug + food + environmental) with a history of
   repeated reactions.
@@ -41,7 +41,7 @@ BSACI clinical guidelines for drug allergy, food allergy and anaphylaxis.
   prior cardiorespiratory arrest.
 - Mapped to **Ring & Messmer grade IV** (cardiac/respiratory arrest).
 - Auto-flag for emergency adrenaline-auto-injector prescription and a written
-  personalised Anaphylaxis Action Plan per Resuscitation Council UK 2021.
+  personalized Anaphylaxis Action Plan per Resuscitation Council UK 2021.
 
 ## Reference instruments used in scoring
 
@@ -49,7 +49,7 @@ BSACI clinical guidelines for drug allergy, food allergy and anaphylaxis.
 | --- | --- | --- |
 | Anaphylaxis diagnosis | NIAID/FAAN second symposium criteria | Sampson HA et al. *J Allergy Clin Immunol* 2006;117:391-7. PMID: 16461139 |
 | Reaction grading | Ring & Messmer four-grade scale | Ring J & Messmer K. *Lancet* 1977;1:466-9. PMID: 65572 |
-| Drug allergy phenotype | Gell & Coombs hypersensitivity types I-IV | Coombs RRA & Gell PGH (1963), summarised in BSACI drug allergy guideline 2009 |
+| Drug allergy phenotype | Gell & Coombs hypersensitivity types I-IV | Coombs RRA & Gell PGH (1963), summarized in BSACI drug allergy guideline 2009 |
 | Food allergy diagnosis | EAACI Food Allergy and Anaphylaxis Guidelines | Muraro A et al. *Allergy* 2014;69:1008-1025. PMID: 24909706 |
 
 ## Flagged-issue triggers

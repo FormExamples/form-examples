@@ -13,15 +13,15 @@ file only records changes scoped to the **Perioperative Optimization** form.
 ## [Unreleased]
 
 ### Added
-- Initial form: a perioperative optimisation and prehabilitation intake across a 16-step
+- Initial form: a perioperative optimization and prehabilitation intake across a 16-step
   single-page wizard, answering *what is still fixable before surgery, and is there time to
   fix it?* rather than the ASA-grading question its three sibling pre-operative forms answer.
 - **Time-to-surgery gating**, the engine's distinguishing computation: each of the eight
-  optimisation domains carries a lead time — the minimum weeks its intervention needs to work —
-  and every finding is gated against the weeks remaining. A domain that cannot be optimised in
+  optimization domains carries a lead time — the minimum weeks its intervention needs to work —
+  and every finding is gated against the weeks remaining. A domain that cannot be optimized in
   time is graded `insufficient-time`, which forces a `defer-surgery` readiness band and raises
   a non-suppressible flag.
-- Eight optimisation domains with thresholds from NHS England, CPOC, and NICE: anaemia and
+- Eight optimization domains with thresholds from NHS England, CPOC, and NICE: anaemia and
   iron deficiency (4-week intravenous / 8-week oral lead time), glycaemic control (12 weeks),
   smoking (4), alcohol (4), nutrition (3), physical fitness (6), medication (1), and
   cardiorespiratory (4).

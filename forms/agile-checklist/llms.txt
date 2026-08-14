@@ -1,6 +1,6 @@
 # Agile Checklist
 
-> A team / organisation self-assessment that audits **57 concrete behaviours** of an agile way-of-working across three sections — **Teams**, **Stakeholders**, and **Practices** — and produces a composite **agility maturity level** (Ad-hoc / Initial / Developing / Mature / Optimising), a per-section sub-score, weak-section flags, and a coaching action plan.
+> A team / organization self-assessment that audits **57 concrete behaviours** of an agile way-of-working across three sections — **Teams**, **Stakeholders**, and **Practices** — and produces a composite **agility maturity level** (Ad-hoc / Initial / Developing / Mature / Optimizing), a per-section sub-score, weak-section flags, and a coaching action plan.
 
 ## Docs
 

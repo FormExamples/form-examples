@@ -2,13 +2,13 @@
 
 General confidential medical information — vision self-declaration for driving fitness assessment.
 
-The DVLA V1 form is used by drivers in the United Kingdom to declare vision-related medical conditions to the Driver and Vehicle Licensing Agency (DVLA). It collects personal details, healthcare professional information, and a comprehensive vision self-declaration questionnaire covering eyesight standards, monocular vision, visual field problems, glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision, and other vision conditions. The form includes an applicant's authorisation section for medical information disclosure.
+The DVLA V1 form is used by drivers in the United Kingdom to declare vision-related medical conditions to the Driver and Vehicle Licensing Agency (DVLA). It collects personal details, healthcare professional information, and a comprehensive vision self-declaration questionnaire covering eyesight standards, monocular vision, visual field problems, glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision, and other vision conditions. The form includes an applicant's authorization section for medical information disclosure.
 
 ## Source
 
 - **Form**: V1 — General confidential medical information
 - **Agency**: Driver & Vehicle Licensing Agency (DVLA), United Kingdom
-- **Revision**: September 2025 (V1 Rev Sept 25); Authorisation section Rev July 2022
+- **Revision**: September 2025 (V1 Rev Sept 25); Authorization section Rev July 2022
 - **Pages**: 7
 - **URL**: <https://assets.publishing.service.gov.uk/media/695bc852e8f9a8d94d8d1981/v1-online-confidential-medical-information.pdf>
 - **Related forms**: BT1 (Brain tumour), B1 (Head injury), STR1 (Stroke/TIA), CN1 (Myasthenia Gravis)
@@ -140,7 +140,7 @@ Have you had any contact (telephone, video, or face to face) with your healthcar
 - Yes / No
 - a) If Yes, date of contact (DD/MM/YY)
 
-### Applicant's Authorisation (Page 6)
+### Applicant's Authorization (Page 6)
 
 Important information about fitness to drive:
 
@@ -151,8 +151,8 @@ Important information about fitness to drive:
 
 **Declaration** (must NOT be altered):
 
-- Authorises doctor/specialist/healthcare professional to disclose medical information to DVLA on behalf of the Secretary of State for Transport
-- Authorisation may be passed to another registered healthcare professional
+- Authorizes doctor/specialist/healthcare professional to disclose medical information to DVLA on behalf of the Secretary of State for Transport
+- Authorization may be passed to another registered healthcare professional
 - Secretary of State may disclose information to doctors, orthoptists, paramedical staff, and Honorary Medical Advisory panel members
 - Declares details are correct to best of knowledge and belief
 - Acknowledges false declaration is a criminal offence
@@ -162,7 +162,7 @@ Important information about fitness to drive:
 | Name | Text |
 | Signature | Signature |
 | Date | Date |
-| Authorise electronic correspondence (email) | Yes / No |
+| Authorize electronic correspondence (email) | Yes / No |
 | Contact preference (from healthcare professional on behalf of DVLA) | Email / SMS (Text) |
 | Contact preference (from DVLA) | Email / SMS (Text) |
 
@@ -188,7 +188,7 @@ Important information about fitness to drive:
 | 11 | Double Vision | Q9 — diplopia assessment and declaration |
 | 12 | Other Vision Conditions | Q10 — additional vision conditions |
 | 13 | Recent Contact | Q11 — recent healthcare professional contact |
-| 14 | Authorisation | Applicant's authorisation and declaration |
+| 14 | Authorization | Applicant's authorization and declaration |
 
 ## Directory structure
 

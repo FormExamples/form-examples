@@ -1,6 +1,6 @@
 # International Patient Summary
 
-International Patient Summary (IPS) — a standardised, minimal, specialty-agnostic electronic health record extract conforming to ISO 27269 and HL7 FHIR R5, designed to support cross-border and unplanned care by exchanging a patient's core clinical facts.
+International Patient Summary (IPS) — a standardized, minimal, specialty-agnostic electronic health record extract conforming to ISO 27269 and HL7 FHIR R5, designed to support cross-border and unplanned care by exchanging a patient's core clinical facts.
 
 ## Directory structure
 
@@ -15,7 +15,7 @@ International Patient Summary (IPS) — a standardised, minimal, specialty-agnos
 
 - **Instrument**: IPS Completeness Validation (ISO 27269 / HL7 FHIR IPS IG)
 - **Range**: Complete / Partial / Incomplete
-- **Mandatory sections**: problems, medications, allergies, immunisations, procedures, results, patient demographics, authoring clinician
+- **Mandatory sections**: problems, medications, allergies, immunizations, procedures, results, patient demographics, authoring clinician
 - **Engine files**: `types.ts`, `ips-validator.ts`, `validation-rules.ts`, `flagged-issues.ts`, `utils.ts`
 - **Test file**: `ips-validator.test.ts`
 
@@ -25,7 +25,7 @@ International Patient Summary (IPS) — a standardised, minimal, specialty-agnos
 2. Problem List - `Step2ProblemList.svelte`
 3. Medication Summary - `Step3MedicationSummary.svelte`
 4. Allergies & Intolerances - `Step4AllergiesIntolerances.svelte`
-5. Immunisations - `Step5Immunisations.svelte`
+5. Immunizations - `Step5Immunisations.svelte`
 6. Procedures - `Step6Procedures.svelte`
 7. Results & Investigations - `Step7ResultsInvestigations.svelte`
 8. Medical Devices / Implants - `Step8MedicalDevicesImplants.svelte`

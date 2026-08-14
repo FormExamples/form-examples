@@ -19,7 +19,7 @@
 
 ## Out of scope
 
-- Authentication / authorisation (Loco's auth scaffolding can be enabled
+- Authentication / authorization (Loco's auth scaffolding can be enabled
   later).
 - Background jobs for asynchronous PDF rendering.
 - Container/Kubernetes manifests.

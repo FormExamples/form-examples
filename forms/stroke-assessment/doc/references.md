@@ -63,7 +63,7 @@
 
 - Goyal, M., Menon, B. K., van Zwam, W. H., et al. (2016). Endovascular
   thrombectomy after large-vessel ischaemic stroke: a meta-analysis of
-  individual patient data from five randomised trials. *The Lancet*,
+  individual patient data from five randomized trials. *The Lancet*,
   387(10029), 1723–1731.
   DOI: https://doi.org/10.1016/S0140-6736(16)00163-X
   PubMed ID: 26898852

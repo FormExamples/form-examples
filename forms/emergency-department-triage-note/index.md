@@ -13,7 +13,7 @@ It also computes a supporting **NEWS2** aggregate from the vital signs and raise
 red-flag issues (life threat, sepsis, time-critical presentations, incomplete
 triage) that prompt immediate escalation.
 
-The triage category is a prioritisation decision, not a diagnosis. It sets the
+The triage category is a prioritization decision, not a diagnosis. It sets the
 maximum time to first clinical assessment; it does not determine treatment.
 
 ## Scope and intended users
@@ -23,7 +23,7 @@ maximum time to first clinical assessment; it does not determine treatment.
 - **Users:** registered ED triage nurses (and equivalent trained triage
   practitioners) performing initial assessment at first contact.
 - **Patients:** all ages presenting to the ED. Paediatric red-flag
-  discriminators are recognised, but paediatric-specific early-warning scoring
+  discriminators are recognized, but paediatric-specific early-warning scoring
   (e.g. PEWS) is out of scope and must be applied separately.
 - **Not for:** definitive diagnosis, disposition or treatment decisions,
   ambulance pre-alert scoring, or replacing clinician judgement. A lower category
@@ -102,7 +102,7 @@ first-contact triage findings.
 ## Compliance
 
 - **MDCG 2019-11 Rev.1** (EU MDR/IVDR software classification) — clinical
-  decision-support prioritisation tool; the output sets the maximum time to first
+  decision-support prioritization tool; the output sets the maximum time to first
   assessment rather than determining treatment.
 - **UK Medical Devices Regulations 2002.**
 - **ISO/IEC/IEEE 26514:2022** — design and development of information for users.

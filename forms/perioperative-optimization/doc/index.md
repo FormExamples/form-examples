@@ -6,7 +6,7 @@ in the parent [`../index.md`](../index.md).
 
 | File | Contents |
 | --- | --- |
-| [`optimisation-domains.md`](./optimisation-domains.md) | The eight domains: trigger predicates, rule IDs, interventions, lead times, and the clinical justification for each. Also the instrument licensing table. |
+| [`optimisation-domains.md`](./optimization-domains.md) | The eight domains: trigger predicates, rule IDs, interventions, lead times, and the clinical justification for each. Also the instrument licensing table. |
 | [`time-to-surgery-gating.md`](./time-to-surgery-gating.md) | The gating model, why `insufficient-time` is not a warning, four worked examples, and the boundary behaviour |
 | [`medication-hold-rules.md`](./medication-hold-rules.md) | Perioperative medication guidance: SGLT2 inhibitors, GLP-1 agonists, anticoagulants, and the rest |
 | [`safety-case-notes.md`](./safety-case-notes.md) | DCB0129 / DCB0160 placeholders, regulatory classification, and a twelve-entry preliminary hazard list |

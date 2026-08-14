@@ -18,5 +18,5 @@
 ## Out of scope
 
 - Server-side persistence (handled by the Loco backend).
-- Authentication / authorisation.
-- Internationalisation strings beyond English / French / native language.
+- Authentication / authorization.
+- Internationalization strings beyond English / French / native language.

@@ -19,9 +19,9 @@ responsibility.
 
 | ID | Hazard | Mitigation |
 | -- | ------ | ---------- |
-| H1 | Pain severity under-reported by patient (cultural normalisation of period pain) | NRS prompts the patient to compare to childbirth, kidney stones, etc.; absolute thresholds (NRS ≥7) trigger flags regardless of stated coping |
+| H1 | Pain severity under-reported by patient (cultural normalization of period pain) | NRS prompts the patient to compare to childbirth, kidney stones, etc.; absolute thresholds (NRS ≥7) trigger flags regardless of stated coping |
 | H2 | Bowel-endometriosis red flags missed | Dedicated questions for cyclical rectal bleeding, tenesmus, sub-occlusion symptoms; any positive triggers BSGE-centre referral suggestion |
-| H3 | Ureteric obstruction unrecognised | Cyclical haematuria, loin pain, and reduced output questions feed into a "critical" flag |
+| H3 | Ureteric obstruction unrecognized | Cyclical haematuria, loin pain, and reduced output questions feed into a "critical" flag |
 | H4 | Confusion between rASRM stage and severity | Separate fields and clear labelling; severity band is presentational only and never overrides rASRM |
 | H5 | EHP-30 scoring error | Scoring algorithm taken directly from Jones 2001; covered by unit tests |
 | H6 | Fertility concern not raised | Duration-trying and age fields drive a NICE CG156-aligned flag; age ≥36 with > 6 months trying triggers early referral suggestion |

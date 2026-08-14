@@ -20,7 +20,7 @@ disclosing source, identify the recipient, describe the PHI, state the
 purpose, give an expiration, and capture a dated signature alongside the
 patient-rights statements.
 
-This implementation captures that structure once, in a normalised SQL
+This implementation captures that structure once, in a normalized SQL
 schema, and renders it in every interchange format (XML, FHIR, Protobuf,
 TypeSpec) and every UI stack (HTML, SvelteKit, Rust + HTMX) used in the
 monorepo.

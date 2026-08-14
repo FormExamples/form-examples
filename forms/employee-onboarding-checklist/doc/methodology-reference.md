@@ -1,6 +1,6 @@
 # Methodology reference — employee onboarding
 
-The Employee Onboarding Checklist captures the steps an organisation
+The Employee Onboarding Checklist captures the steps an organization
 takes to integrate a new hire from offer-acceptance through the end of
 probation. The structure follows the **CIPD onboarding framework** and
 incorporates the SHRM "Four Cs" model.
@@ -10,7 +10,7 @@ incorporates the SHRM "Four Cs" model.
 The **Chartered Institute of Personnel and Development (CIPD)** is the
 UK professional body for HR and people development. CIPD groups
 onboarding into pre-employment, induction (first week / first month),
-socialisation, and integration phases.
+socialization, and integration phases.
 
 - CIPD — Induction factsheet.
   <https://www.cipd.org/uk/knowledge/factsheets/induction-factsheet/>
@@ -25,7 +25,7 @@ Employees: Maximizing Success"**, identifies four levels of onboarding:
 1. **Compliance** — legal and policy basics (right to work, contract,
    IT acceptable use).
 2. **Clarification** — role expectations and performance criteria.
-3. **Culture** — organisational norms, formal and informal.
+3. **Culture** — organizational norms, formal and informal.
 4. **Connection** — interpersonal relationships and networks.
 
 Reference: Bauer, T. N. (2010). *Onboarding New Employees: Maximizing
@@ -76,6 +76,6 @@ These mirror the horizons used in CIPD induction guidance.
 
 Research shows that structured 30-/60-/90-day check-ins materially
 improve retention. Bauer (2010) reports new hires with formal onboarding
-are 58 % more likely to be with the organisation after three years.
+are 58 % more likely to be with the organization after three years.
 This implementation embeds three check-in records at 30, 60, and 90
 days.

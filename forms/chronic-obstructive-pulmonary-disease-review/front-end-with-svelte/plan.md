@@ -17,7 +17,7 @@ front-end and porting the COPD-review grading engine from the HTML front-end.
 - Engine unit tests (`copd-review-grader.test.ts`) with a local
   `createDefaultAssessment` fixture (no store import) covering each GOLD
   boundary (FEV₁ % 80/79, 50/49, 30/29), each symptom threshold (mMRC 1/2,
-  CAT 9/10), each exacerbation threshold (1/2 moderate, 0/1 hospitalised), every
+  CAT 9/10), each exacerbation threshold (1/2 moderate, 0/1 hospitalized), every
   ABE group, and every completeness grade.
 - Id-keyed Svelte 5 store with `deepAssign` in-place deep-merge, localStorage
   key `chronic-obstructive-pulmonary-disease-review.front-end-with-svelte.<id>.v1`,

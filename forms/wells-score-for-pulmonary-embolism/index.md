@@ -9,7 +9,7 @@ PE is unlikely, or a **CT pulmonary angiogram (CTPA)** when PE is likely.
 The rule was derived and validated by Wells *et al.* (*Thromb Haemost* 2000;
 *Ann Intern Med* 2001) and is embedded in the NICE two-level pathway
 (NG158, *Venous thromboembolic diseases*). It is a risk-stratification aid to
-rationalise imaging and D-dimer testing; it is not a diagnosis of PE and does
+rationalize imaging and D-dimer testing; it is not a diagnosis of PE and does
 not override clinical judgement or the management of a haemodynamically unstable
 patient.
 
@@ -36,7 +36,7 @@ contributes its weighted points; absent criteria contribute 0.
 | 1 | Clinical signs and symptoms of DVT (leg swelling and pain on palpation of the deep veins) | +3 |
 | 2 | PE is the number-one diagnosis, or equally likely | +3 |
 | 3 | Heart rate > 100 beats per minute | +1.5 |
-| 4 | Immobilisation ≥ 3 days, or surgery in the previous 4 weeks | +1.5 |
+| 4 | Immobilization ≥ 3 days, or surgery in the previous 4 weeks | +1.5 |
 | 5 | Previous objectively diagnosed DVT or PE | +1.5 |
 | 6 | Haemoptysis | +1 |
 | 7 | Malignancy (on treatment, treated within the last 6 months, or palliative) | +1 |
@@ -79,7 +79,7 @@ Completed in order on a single continuous single-page wizard.
 | 1 | Assessment context | assessing clinician name and role, date and time of assessment, care setting |
 | 2 | Patient identification | patient identifier, age band, sex |
 | 3 | Haemodynamic status | haemodynamically stable or unstable (unstable → bypass scoring, resuscitate and image immediately) |
-| 4 | Clinical criteria | DVT signs, PE most likely, previous DVT/PE, immobilisation or recent surgery, haemoptysis, malignancy |
+| 4 | Clinical criteria | DVT signs, PE most likely, previous DVT/PE, immobilization or recent surgery, haemoptysis, malignancy |
 | 5 | Observations | measured heart rate (beats/min) → criterion 3 |
 | 6 | Summary and score | computed Wells total, two-level band, three-level band, recommended pathway, fired criteria, flagged issues, free-text clinical note |
 

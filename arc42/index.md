@@ -7,7 +7,7 @@ shared design — schema, validation pattern, accessibility contract, scoring
 engine layout, and generation pipeline — is proven across more than a hundred
 distinct clinical and administrative domains.
 
-Read this alongside the two primary sources of truth it summarises:
+Read this alongside the two primary sources of truth it summarizes:
 
 - Root [`README.md`](../README.md) — the *what*.
 - Root [`spec.md`](../spec.md) — the *system contract* (spec-driven development).

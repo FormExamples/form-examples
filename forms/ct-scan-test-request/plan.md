@@ -20,7 +20,7 @@ IR(ME)R guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, radiation / contrast safety,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet unsafe for contrast, or complete yet
   urgent.
 - **Safety conditions escalate.** Pregnancy with planned exposure, severe

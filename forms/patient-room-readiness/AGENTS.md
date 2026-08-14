@@ -102,7 +102,7 @@ wizard table. The 25 checkpoints are catalogued verbatim in
 
 A single flat table `patient_room_readiness_checklist` (25 boolean
 columns + location + inspector + inspection fields + timestamps) —
-unlike `hospital-daily-monitoring-checklist`'s normalised child table,
+unlike `hospital-daily-monitoring-checklist`'s normalized child table,
 25 fixed checkpoints is small enough for one wide row per submission,
 matching the `agile-checklist` convention.
 

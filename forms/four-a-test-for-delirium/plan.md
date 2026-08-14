@@ -13,7 +13,7 @@ clinical reference notes remain outstanding.
 Delirium is common, serious, and under-detected in acute and peri-operative
 care. The 4AT is a validated, training-free, sub-two-minute bedside screen
 recommended by NICE and SIGN 157 as a first-line delirium test. This form
-digitises the instrument: it captures the four item responses, computes the
+digitizes the instrument: it captures the four item responses, computes the
 0–12 total and interpretation band, and surfaces flagged issues that prompt a
 full clinical delirium assessment.
 

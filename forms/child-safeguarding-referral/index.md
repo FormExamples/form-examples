@@ -19,7 +19,7 @@ and **Working Together to Safeguard Children** (2023).
 
 ## Scope and intended users
 
-- **Setting:** any organisation that works with children — health (GP,
+- **Setting:** any organization that works with children — health (GP,
   emergency department, health visiting, community and hospital paediatrics),
   education (schools, nurseries, colleges), early years, police, housing, the
   voluntary sector, and social care itself.
@@ -41,7 +41,7 @@ Collected in order on a single continuous single-page wizard.
 
 | # | Section | Data captured |
 | --- | --- | --- |
-| 1 | Referrer details | referrer name, role, organisation, contact phone and email, date and time of referral, relationship to the child |
+| 1 | Referrer details | referrer name, role, organization, contact phone and email, date and time of referral, relationship to the child |
 | 2 | Child details | child name, date of birth / age, sex, address, school or setting, NHS / unique reference, ethnicity, first language, any disability or communication need |
 | 3 | Family and household | parents / carers with parental responsibility, other household members, siblings and other children in the household, known professionals already involved (GP, school, social worker) |
 | 4 | The concern | concise description of the concern or allegation, when and how it came to light, whether the child has made a disclosure, and the referrer's own observations |
@@ -90,7 +90,7 @@ Raised independently of status and urgency; each has a priority.
 - **Immediate danger** (high) — immediate-danger answer is *yes*: escalate to
   emergency services / police now.
 - **Disclosure of abuse** (high) — the child has disclosed abuse: preserve the
-  account, avoid leading questions, prioritise.
+  account, avoid leading questions, prioritize.
 - **Sexual abuse category** (high) — sexual abuse selected as a category:
   specialist and possibly police / medical response.
 - **Other children at risk** (high) — siblings or other children in the

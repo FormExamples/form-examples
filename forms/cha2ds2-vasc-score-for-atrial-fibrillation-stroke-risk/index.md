@@ -60,7 +60,7 @@ woman with no other risk factors (score 1 from sex alone) is managed as low risk
 | Total score | Risk band | Estimated annual stroke rate | Recommended action |
 | --- | --- | --- | --- |
 | 0 (male) or 1 (female, sex point only) | Low | ~0.2–1.3 % | No antithrombotic therapy recommended. |
-| 1 (male) | Intermediate | ~1.3 % | Consider oral anticoagulation; individualise on net clinical benefit and patient preference. |
+| 1 (male) | Intermediate | ~1.3 % | Consider oral anticoagulation; individualize on net clinical benefit and patient preference. |
 | ≥ 2 (male) or ≥ 3 (female) | High | ~2.2 % and rising | Oral anticoagulation recommended (DOAC preferred, or warfarin with good time-in-therapeutic-range), unless contraindicated. |
 
 **Estimated annual adjusted stroke rate by total score** (Lip *et al.*, *Chest*

@@ -1,9 +1,9 @@
-# Immunisation compliance scoring rules
+# Immunization compliance scoring rules
 
 ## Instrument
 
-The form classifies a patient's immunisation status against the **UK
-Routine Immunisation Schedule** as published in the *Immunisation against
+The form classifies a patient's immunization status against the **UK
+Routine Immunization Schedule** as published in the *Immunisation against
 infectious disease* handbook ("the **Green Book**") maintained by the UK
 Health Security Agency (UKHSA), formerly Public Health England (PHE).
 
@@ -62,7 +62,7 @@ The form references:
   tuberculosis, hepatitis B, hepatitis C and HIV: new healthcare workers*.
   London: DHSC, 2007.
   <https://www.gov.uk/government/publications/health-clearance-for-tuberculosis-hepatitis-b-hepatitis-c-and-hiv-new-healthcare-workers>
-- UKHSA Green Book Chapter 12 (Immunisation of healthcare and laboratory
+- UKHSA Green Book Chapter 12 (Immunization of healthcare and laboratory
   staff).
 
 ## Contraindications (Step 7)

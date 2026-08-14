@@ -24,7 +24,7 @@ Legend: `[ ]` open · `[~]` in progress · `[x]` done · `[-]` skipped/deferred
   a no-op. Acceptance met.
 - [x] **0.3  Inventory which Lily components every form will need.**
   *Done:* [`doc/lily-components-per-form.md`](doc/lily-components-per-form.md).
-  Union of 25 core components covers ~99% of forms; ~12 specialised
+  Union of 25 core components covers ~99% of forms; ~12 specialized
   components needed for signature capture, country-specific IDs,
   measurements, ratings, NPS, RAG, file upload, calendar ranges.
 - [x] **0.4  Confirm coverage.** *Done:* every required Lily component
@@ -440,7 +440,7 @@ commit per form with `git commit --only forms/<slug>/`.
   `report/+page.svelte` wraps the report in `<Panel>` and uses
   `<Alert data-type>` for the composite-risk callout. `app.css`
   extended with minimal CSS rules for every Lily class name,
-  tokenised through Tailwind 4 `@theme`. `pnpm check`: 0 errors,
+  tokenized through Tailwind 4 `@theme`. `pnpm check`: 0 errors,
   0 warnings. `pnpm test`: 16/16 passing. `pnpm build`: succeeds.
   Engine, store internals, and report content unchanged.
 - [x] **5.5  Add `bin/lily-svelte-refactor`** (mechanical refactor tool).

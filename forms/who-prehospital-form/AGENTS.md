@@ -1,11 +1,11 @@
 # WHO Prehospital Form
 
-World Health Organization standardised prehospital clinical documentation form for emergency medical services (EMS).
+World Health Organization standardized prehospital clinical documentation form for emergency medical services (EMS).
 
 ## Source
 
 - **Form**: WHO Prehospital Form (SCF Prehospital)
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/prehospital-scf.pdf?sfvrsn=53881340_2>
 - **Pages**: 2
 - **Reference**: Use with WHO Reference Card; see who.int/emergencycare

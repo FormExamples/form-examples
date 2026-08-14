@@ -76,7 +76,7 @@ The grading engine produces:
 
 - DASS-21 is a **screening / severity instrument**, not a diagnostic
   instrument. Clinical interview is required for diagnosis of major
-  depressive disorder, generalised anxiety disorder, panic disorder, or
+  depressive disorder, generalized anxiety disorder, panic disorder, or
   adjustment disorder.
 - DASS-21 measures the **past week**; consider PHQ-9 / GAD-7 (past two
   weeks) for stepped-care matching.

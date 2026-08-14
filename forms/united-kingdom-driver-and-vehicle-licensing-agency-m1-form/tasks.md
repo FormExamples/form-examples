@@ -7,7 +7,7 @@
 
 ## Pending
 
-- [ ] Author SQL migrations (patient, form parts, authorisation)
+- [ ] Author SQL migrations (patient, form parts, authorization)
 - [ ] Generate XML representations and DTDs
 - [ ] Generate FHIR R5 JSON resources
 - [ ] Implement patient form frontend with HTML/CSS/JS (6 steps)

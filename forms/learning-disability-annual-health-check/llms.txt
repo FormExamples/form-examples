@@ -1,6 +1,6 @@
 # Learning Disability Annual Health Check
 
-> A UK primary-care **annual health check** for people aged **14 or over** on a GP practice's learning-disability (LD) register. It is a comprehensive, whole-person review that captures reasonable adjustments and communication needs, physical health, health-screening and immunisation uptake, a medication review including **STOMP** (Stopping Over-Medication with Psychotropics), mental health and behaviour, syndrome-specific checks, and carer and social circumstances — and produces a **Health Action Plan** the person can keep.
+> A UK primary-care **annual health check** for people aged **14 or over** on a GP practice's learning-disability (LD) register. It is a comprehensive, whole-person review that captures reasonable adjustments and communication needs, physical health, health-screening and immunization uptake, a medication review including **STOMP** (Stopping Over-Medication with Psychotropics), mental health and behaviour, syndrome-specific checks, and carer and social circumstances — and produces a **Health Action Plan** the person can keep.
 
 ## Docs
 

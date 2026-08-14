@@ -20,11 +20,11 @@ System (Svelte headless) and powered by a pure Svelte 5 classification engine.
 `flagged-issues.ts`. Classification (not an additive score): the maximum
 antero-posterior aortic diameter is classified against fixed NHS AAA Screening
 Programme thresholds — normal (`< 3.0 cm`), small (`3.0-4.4 cm`), medium
-(`4.5-5.4 cm`), large (`>= 5.5 cm`) — with a non-visualised guard when the aorta
+(`4.5-5.4 cm`), large (`>= 5.5 cm`) — with a non-visualized guard when the aorta
 was not adequately measured. Each category maps to a surveillance/referral band
 (discharge / annual / three-monthly / refer-vascular / rescan). Growth since the
 prior scan feeds a rapid-growth flag. Tests in `aaa-grader.test.ts` cover each
-threshold boundary (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the non-visualised guard,
+threshold boundary (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the non-visualized guard,
 every category, and the growth calculation.
 
 ## Stack

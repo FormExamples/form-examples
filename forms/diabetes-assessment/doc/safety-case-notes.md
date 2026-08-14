@@ -25,7 +25,7 @@ influence medication and referral decisions.
 | Hazard | Mitigation |
 | --- | --- |
 | HbA1c units (mmol/mol vs DCCT %) confused | Both accepted at input; engine stores mmol/mol; PDF prints both |
-| Individualised HbA1c target mis-set, leading to spurious "suboptimal" or "controlled" | Step 3 captures clinician-defined target as an input; the form records the reason for relaxation per NG28 |
+| Individualized HbA1c target mis-set, leading to spurious "suboptimal" or "controlled" | Step 3 captures clinician-defined target as an input; the form records the reason for relaxation per NG28 |
 | Severe hypoglycaemia event under-reported | Step 3 dedicated field; Step 8 cross-check |
 | Active diabetic foot problem missed | Step 9 dedicated; NG19 risk-stratification mandatory |
 | ACR / eGFR omitted leading to missed CKD | Step 5 mandatory; absence raises a flag |

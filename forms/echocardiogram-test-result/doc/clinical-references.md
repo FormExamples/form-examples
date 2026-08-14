@@ -72,7 +72,7 @@ Sources:
 ### Valve-disease severity and critical findings
 
 Valvular stenosis and regurgitation are graded none / mild / moderate / severe
-following recognised echocardiographic conventions; severe valve disease, a
+following recognized echocardiographic conventions; severe valve disease, a
 valvular vegetation (suspected infective endocarditis), a large pericardial
 effusion or tamponade physiology, severe LV impairment, and intracardiac
 thrombus are treated as **critical findings** that auto-escalate the follow-up

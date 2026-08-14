@@ -3,7 +3,7 @@
 A UK primary-care **annual health check** for people aged **14 or over** on a
 GP practice's learning-disability (LD) register. It is a comprehensive,
 whole-person review that captures reasonable adjustments and communication
-needs, physical health, health-screening and immunisation uptake, a medication
+needs, physical health, health-screening and immunization uptake, a medication
 review including **STOMP** (Stopping Over-Medication with Psychotropics),
 mental health and behaviour, syndrome-specific checks, and carer and social
 circumstances — and produces a **Health Action Plan** the person can keep.
@@ -40,14 +40,14 @@ annual health check**.
 
 ## Components captured
 
-The check is organised into required components. Each is either **completed**
+The check is organized into required components. Each is either **completed**
 (recorded with a finding and, where relevant, an action) or **not completed**.
 
 | Group | Components |
 | --- | --- |
 | Reasonable adjustments & communication | communication needs (easy-read, Makaton, AAC), reasonable adjustments recorded, hospital/health passport, consent and mental-capacity note |
 | Physical health | weight and BMI, blood pressure, epilepsy review, constipation, dysphagia (swallowing), continence, mobility and falls, dental/oral health, vision, hearing, foot health, skin |
-| Health screening & immunisations | eligible cancer screening (bowel, breast, cervical) uptake, other screening, seasonal and routine immunisations |
+| Health screening & immunizations | eligible cancer screening (bowel, breast, cervical) uptake, other screening, seasonal and routine immunizations |
 | Medication review (incl. STOMP) | full medication reconciliation, psychotropic medicines and their indication/review, STOMP discussion, side-effect review |
 | Mental health & behaviour | mood and mental health, behaviour that challenges and triggers, life events |
 | Syndrome-specific | syndrome-specific health checks relevant to the person's condition (for example Down syndrome thyroid/vision/hearing) |
@@ -87,7 +87,7 @@ required output: `healthActionPlanComplete` must be `true` for an overall
 - **Constipation risk** (medium): constipation recorded, relevant where
   psychotropic or anticholinergic medicines are in use.
 - **Missing screening uptake** (medium): an eligible cancer screen or
-  immunisation is not recorded as up to date or declined with a reason.
+  immunization is not recorded as up to date or declined with a reason.
 - **Reasonable adjustments not recorded** (medium): no reasonable adjustments or
   communication needs captured, contrary to the Accessible Information Standard.
 - **Incomplete check** (low): one or more required components not completed; the
@@ -105,7 +105,7 @@ Action Plan.
 | 2 | Person identification | person identifier, age band (≥ 14), sex, LD-register status, main carer / supporter |
 | 3 | Reasonable adjustments & communication | communication needs, reasonable adjustments, health passport, consent and mental-capacity note |
 | 4 | Physical health | weight/BMI, blood pressure, epilepsy, constipation, dysphagia, continence, mobility/falls, dental, vision, hearing, feet, skin — each with a finding and optional action |
-| 5 | Health screening & immunisations | eligible cancer screens, other screening, immunisations — up to date / declined / not eligible |
+| 5 | Health screening & immunizations | eligible cancer screens, other screening, immunizations — up to date / declined / not eligible |
 | 6 | Medication review incl. STOMP | medication reconciliation, psychotropic medicines with indication and last review, STOMP discussion, side effects |
 | 7 | Mental health & behaviour | mood, behaviour that challenges and triggers, recent life events |
 | 8 | Syndrome-specific checks | condition-specific checks relevant to the person |

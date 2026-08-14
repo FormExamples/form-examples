@@ -1,6 +1,6 @@
 # Recommended Summary Plan for Emergency Care and Treatment (ReSPECT)
 
-A UK personalised **emergency care and treatment plan** created through shared
+A UK personalized **emergency care and treatment plan** created through shared
 decision-making between a person and one or more clinicians. ReSPECT records a
 summary of what matters to the person, agreed clinical recommendations for their
 care in a future emergency in which they may be unable to make or express
@@ -25,12 +25,12 @@ emergency care.
 
 - **Setting:** any care setting — the person's own home, care homes, community
   services, ambulance and pre-hospital services, hospital wards, emergency
-  departments, and hospices. The completed plan is designed to be recognised and
+  departments, and hospices. The completed plan is designed to be recognized and
   honoured wherever the person receives care.
 - **Users:** all clinicians involved in a person's care — general practitioners,
   hospital doctors, specialty and palliative-care teams, senior nurses,
   paramedics, and other registered health and social care professionals
-  authorised locally to complete or endorse a ReSPECT plan.
+  authorized locally to complete or endorse a ReSPECT plan.
 - **Subjects:** any person of any age for whom emergency care and treatment
   recommendations should be agreed in advance, including those approaching the
   end of life, those with long-term conditions, and those at risk of sudden
@@ -51,7 +51,7 @@ the ReSPECT form (national version 3.0).
 | 1 | Personal details | person's name, date of birth, unique identifier (NHS/CHI number), address, key contact details |
 | 2 | Summary of relevant health | brief clinical summary, relevant diagnoses, and any existing documents (advance decision to refuse treatment, lasting power of attorney, organ-donation wishes) |
 | 3 | Personal preferences and what matters | what the person values, their priorities and fears, and their preferences for care (for example, a preference for comfort-focused care versus life-sustaining treatment) |
-| 4 | Clinical recommendations | agreed clinical recommendations, expressed on a balance between prioritising sustaining life and prioritising comfort, with specific realistic interventions that are and are not recommended |
+| 4 | Clinical recommendations | agreed clinical recommendations, expressed on a balance between prioritizing sustaining life and prioritizing comfort, with specific realistic interventions that are and are not recommended |
 | 5 | CPR recommendation | explicit recommendation: CPR should be **attempted** or CPR should **not be attempted** (DNACPR), with the clinical rationale |
 | 6 | Ceilings of treatment | agreed limits, for example whether transfer to hospital or admission to critical care would be appropriate |
 | 7 | Capacity and involvement | whether the person has capacity for this decision; who was involved — the person, a legal proxy (welfare attorney or court-appointed deputy), or consultees where the person lacks capacity; assessment of capacity where relevant |
@@ -66,7 +66,7 @@ ReSPECT produces a **status**, a **completeness percentage**, the list of
 
 | Status | Meaning |
 | --- | --- |
-| **Complete** | Every mandatory content and process rule is satisfied. The plan is internally consistent and ready to be recognised and acted upon. |
+| **Complete** | Every mandatory content and process rule is satisfied. The plan is internally consistent and ready to be recognized and acted upon. |
 | **Incomplete** | One or more mandatory rules are unsatisfied (for example, no CPR recommendation, no clinician signature, or a required capacity assessment is missing). The plan should not be relied upon until completed. |
 
 `completenessPercent` is the proportion of mandatory fields that are present,

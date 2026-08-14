@@ -68,7 +68,7 @@ UKMEC. The relevant NICE documents that intersect with this form are:
 
 ## Migraine with aura
 
-UKMEC categorises migraine with aura as Category 4 for combined hormonal
+UKMEC categorizes migraine with aura as Category 4 for combined hormonal
 contraception. The diagnostic criteria for migraine with aura follow ICHD-3:
 
 - International Classification of Headache Disorders, 3rd edition (ICHD-3):

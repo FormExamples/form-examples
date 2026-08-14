@@ -38,7 +38,7 @@ instrument.
 | Tier | Target | Triggers |
 | --- | --- | --- |
 | Two-week-wait | ≤ 2 weeks | Suspected cancer meeting NICE NG12 referral criteria |
-| Urgent | 24–72 h | Symptomatic suspected malignancy needing prompt characterisation |
+| Urgent | 24–72 h | Symptomatic suspected malignancy needing prompt characterization |
 | Routine | standard turnaround | Monitoring, surveillance, treatment-response checks |
 
 ## Sources

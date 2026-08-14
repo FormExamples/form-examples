@@ -9,7 +9,7 @@ The Pre-Operative Assessment system is a **clinical decision-support tool** inte
 1. **Collect** structured patient health information through a guided questionnaire.
 2. **Calculate** a preliminary ASA (American Society of Anesthesiologists) Physical Status Classification (grades I-IV) using a rule-based algorithm.
 3. **Identify** safety-critical issues (flagged issues) for the reviewing anaesthetist's attention.
-4. **Generate** a structured report (on-screen and PDF) summarising the assessment findings.
+4. **Generate** a structured report (on-screen and PDF) summarizing the assessment findings.
 
 ### Intended Users
 
@@ -32,7 +32,7 @@ The Pre-Operative Assessment system is a **clinical decision-support tool** inte
 - **Replacement of face-to-face clinical assessment.** The system supplements, not replaces, the anaesthetist's clinical evaluation.
 - **Paediatric patients** (< 16 years). The questionnaire content and ASA rules are designed for adult patients.
 - **Intensive care risk scoring.** The system is not an ICU mortality predictor or surgical outcomes calculator.
-- **Triage or prioritisation.** The ASA grade is not intended to be used for surgical scheduling priority.
+- **Triage or prioritization.** The ASA grade is not intended to be used for surgical scheduling priority.
 
 ---
 
@@ -76,7 +76,7 @@ If the system is unavailable, clinical work is not blocked. Paper-based pre-oper
 | HAZ-007 | System unavailable | System crashes or is inaccessible when needed for patient assessment | Server failure, network issues, browser crash |
 | HAZ-008 | PDF report does not match screen | PDF contains different information from the on-screen report | Software bug in PDF generation |
 | HAZ-009 | Clinical rules become outdated | ASA classification guidance or clinical guidelines change, making rules inaccurate | Failure to update system, guideline changes |
-| HAZ-010 | Patient data exposed | Patient health information accessed by unauthorised person | Screen visibility in shared areas, unsecured network, device left logged in |
+| HAZ-010 | Patient data exposed | Patient health information accessed by unauthorized person | Screen visibility in shared areas, unsecured network, device left logged in |
 
 ### Risk Assessment
 
@@ -128,7 +128,7 @@ Risk is assessed using the NHS Clinical Safety risk matrix:
 | M7 | **Clinical review of responses.** Pre-assessment nurses review questionnaire responses with the patient. | HAZ-005 |
 | M8 | **Automated unit tests.** 12 automated tests verify calculation logic and rule behaviour. Regression tests run on every code change. | HAZ-006 |
 | M9 | **Paper-based fallback.** Standard paper pre-assessment forms remain available if the system is unavailable. | HAZ-007 |
-| M10 | **PDF generated from same data model.** The PDF builder reads from the identical data structure used for grading, minimising divergence risk. | HAZ-008 |
+| M10 | **PDF generated from same data model.** The PDF builder reads from the identical data structure used for grading, minimizing divergence risk. | HAZ-008 |
 | M11 | **Annual clinical rule review.** Rules are reviewed annually against current guidelines by a Clinical Safety Officer. | HAZ-009 |
 | M12 | **No persistent data storage.** Patient data exists only in browser memory for the session duration. | HAZ-010 |
 | M13 | **HTTPS enforcement.** All data in transit is encrypted via TLS. | HAZ-010 |

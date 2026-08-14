@@ -9,7 +9,7 @@ Slug: `padua-venous-thromboembolism-risk-assessment`
 
 ## 1. Purpose
 
-A VTE (venous thromboembolism) risk-stratification tool for hospitalised
+A VTE (venous thromboembolism) risk-stratification tool for hospitalized
 **medical** patients. It records eleven weighted risk factors, sums a total
 Padua Prediction Score of **0–20**, and produces a risk band. A score of
 **≥ 4** classifies the patient as **high risk** and prompts consideration of

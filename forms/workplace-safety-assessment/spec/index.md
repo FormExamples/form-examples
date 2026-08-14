@@ -6,7 +6,7 @@ Slug: `workplace-safety-assessment`
 
 ## 1. Purpose
 
-Workplace safety audit form aligned with UK Health and Safety Executive (HSE) standards, covering physical, chemical, biological, ergonomic, and organisational risks to identify hazards and verify control measures in healthcare settings.
+Workplace safety audit form aligned with UK Health and Safety Executive (HSE) standards, covering physical, chemical, biological, ergonomic, and organizational risks to identify hazards and verify control measures in healthcare settings.
 
 Full design description: [`index.md`](../index.md).
 

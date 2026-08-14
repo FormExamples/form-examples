@@ -30,7 +30,7 @@ grade plus structured drivers that justify it.
 
 ## Mallampati Classification
 
-Used to predict difficult intubation by visualising oropharyngeal structures
+Used to predict difficult intubation by visualizing oropharyngeal structures
 with the patient sitting upright, mouth open, tongue protruded.
 
 - Canonical reference: Mallampati SR, Gatt SP, Gugino LD, et al. *A clinical
@@ -47,7 +47,7 @@ Classes:
 | III | Soft palate, base of uvula |
 | IV | Hard palate only |
 
-Class III or IV alone is a recognised flag for anticipated difficult airway,
+Class III or IV alone is a recognized flag for anticipated difficult airway,
 and combined with other markers (limited mouth opening, short thyromental
 distance, BMI ≥ 35, neck circumference > 43 cm) raises the composite risk.
 

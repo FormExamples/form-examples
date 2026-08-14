@@ -8,7 +8,7 @@ following safety considerations apply.
 - **Setting** — assess in a private, quiet room with no risk of
   interruption.
 - **Time** — allow at least 60 minutes; an interrupted trauma history
-  can re-traumatise.
+  can re-traumatize.
 - **Support person** — offer the patient the opportunity to bring a
   trusted person.
 - **Grounding plan** — agree before starting how the patient will signal
@@ -33,8 +33,8 @@ trigger explicit enquiry.
 
 ## Dissociation risk during assessment
 
-Patients with severe PTSD or CPTSD may dissociate (depersonalisation,
-derealisation, flashbacks) when describing the trauma. The clinician
+Patients with severe PTSD or CPTSD may dissociate (depersonalization,
+derealization, flashbacks) when describing the trauma. The clinician
 should:
 
 - Pause and ground the patient (5-4-3-2-1 sensory grounding, orientation
@@ -79,7 +79,7 @@ Active safeguarding considerations include:
   Centres (SARCs) where appropriate; respect timing and consent
   preferences.
 - **Healthcare workers and first responders** — secondary or vicarious
-  traumatisation; occupational-health pathway.
+  traumatization; occupational-health pathway.
 - **Perinatal women** — co-existing perinatal depression / anxiety;
   consider Perinatal Mental Health Team referral.
 

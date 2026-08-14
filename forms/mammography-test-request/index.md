@@ -29,7 +29,7 @@ and referral.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete or urgent.
 
 | Axis | Instrument | Output |
@@ -127,7 +127,7 @@ mammography-test-request/
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.
-- IR(ME)R 2017 — justification of medical exposure to ionising radiation.
+- IR(ME)R 2017 — justification of medical exposure to ionizing radiation.
 
 ## Verify
 

@@ -1,4 +1,4 @@
-# Clinical prioritisation — P1 to P6
+# Clinical prioritization — P1 to P6
 
 The P1–P6 clinical priority codes used by this form originate from
 the Royal College of Surgeons of England *Clinical Guide to Surgical

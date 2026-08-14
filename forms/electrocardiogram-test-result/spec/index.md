@@ -26,7 +26,7 @@ other clinician-driven result forms. It is completed by a cardiologist, cardiac
 physiologist, or other reporting clinician rather than by the patient, and is
 aligned with the AHA/ACCF/HRS *Recommendations for the Standardization and
 Interpretation of the Electrocardiogram*, the *Fourth Universal Definition of
-Myocardial Infarction* (2018) STEMI criteria, and recognised QTc-prolongation
+Myocardial Infarction* (2018) STEMI criteria, and recognized QTc-prolongation
 thresholds.
 
 Full design description: [`index.md`](../index.md).

@@ -15,7 +15,7 @@ albumin-correction formula, and produces a corrected calcium value in mmol/L.
 The corrected value is classified against the adult reference range
 (hypocalcaemia / normal / hypercalcaemia), and severe results are flagged for
 urgent action. It is an interpretation aid, not a diagnostic test and not a
-substitute for a measured ionised calcium.
+substitute for a measured ionized calcium.
 
 Full design description: [`index.md`](../index.md).
 
@@ -25,7 +25,7 @@ In scope: the schema, calculation engine, two consolidated front-ends
 (`front-end-with-html`, `front-end-with-svelte`), the Rust Loco JSON-API crate,
 and the generated representations (XML, FHIR R5, protobuf, OpenAPI). Out of
 scope: hosted deployment, authentication, multi-tenancy, paediatric ranges,
-ionised-calcium measurement.
+ionized-calcium measurement.
 
 ## 3. Data model
 

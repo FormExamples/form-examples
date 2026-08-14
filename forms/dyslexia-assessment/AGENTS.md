@@ -1,6 +1,6 @@
 # Dyslexia Assessment
 
-Specific learning difficulty evaluation using standardised scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.
+Specific learning difficulty evaluation using standardized scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.
 
 ## Directory structure
 
@@ -12,7 +12,7 @@ Specific learning difficulty evaluation using standardised scores for reading, w
 
 ## Scoring system
 
-- **Instrument**: Standardised score assessment battery
+- **Instrument**: Standardized score assessment battery
 - **Range**: Standard scores (mean 100, SD 15)
 - **Categories**:
   - Standard score 85-115: Average (no dyslexia)

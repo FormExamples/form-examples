@@ -19,14 +19,14 @@ the **request** half of the pair with [`cardiology-response`](../cardiology-resp
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, safety / red-flag, completeness,
-  and triage are independent and each citable to a recognised body.
+  and triage are independent and each citable to a recognized body.
 - **Red flags escalate.** Suspected ACS, exertional syncope, or new-onset heart
   failure drive the safety axis and auto-escalate the triage tier.
 - **Pure scoring engine.** Deterministic function with stable rule IDs shared
   across every front-end and the back-end.
 - **Schema is the source of truth.** Everything downstream is generated.
 - **Single-page wizard.** One continuous form, no multi-page navigation.
-- **Consolidated front-ends.** A single `front-end-with-html/` (index.html wizard + dashboard.html) and a single `front-end-with-svelte/`, each combining form + dashboard, harmonised with `cardiology-response`.
+- **Consolidated front-ends.** A single `front-end-with-html/` (index.html wizard + dashboard.html) and a single `front-end-with-svelte/`, each combining form + dashboard, harmonized with `cardiology-response`.
 
 ## Build order
 

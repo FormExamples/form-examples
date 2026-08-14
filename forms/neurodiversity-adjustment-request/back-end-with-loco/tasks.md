@@ -1,6 +1,6 @@
 # back-end-with-loco — tasks
 
-- [x] Materialise the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Materialize the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Per-table relational SeaORM migrations in FK-dependency order (`users`, `workers`, `managers`, `neurodiversity_adjustment_requests`, `neurodiversity_adjustment_request_grades`, `neurodiversity_adjustment_request_grade_rules`, `neurodiversity_adjustment_request_grade_flags`)
 - [x] One `_entities/*` entity + domain model per table, with relations and FKs (request → worker & manager; grade → request 1:1; rule & flag → grade)
 - [x] Four-axis grading engine (rule IDs / flag IDs / bands / thresholds identical to the canonical engine spec): eligibility, impact, completeness, priority + compliance / wellbeing flags

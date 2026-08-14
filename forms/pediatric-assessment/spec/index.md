@@ -6,7 +6,7 @@ Slug: `pediatric-assessment`
 
 ## 1. Purpose
 
-Child development screening covering birth history, growth, developmental milestones, immunisation status, and family environment.
+Child development screening covering birth history, growth, developmental milestones, immunization status, and family environment.
 
 Full design description: [`index.md`](../index.md).
 

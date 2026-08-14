@@ -7,7 +7,7 @@ guideline statements.
 ## Guideline framework
 
 The form is anchored on the WHO *Basic Emergency Care* (BEC) curriculum
-(2018) and harmonised with:
+(2018) and harmonized with:
 
 - **International Liaison Committee on Resuscitation (ILCOR)** — 2020
   and 2022 Consensus on Science with Treatment Recommendations for First
@@ -33,7 +33,7 @@ The form is anchored on the WHO *Basic Emergency Care* (BEC) curriculum
 
 | Intervention | Guideline alignment |
 | --- | --- |
-| Neck immobilisation | WHO BEC trauma module; consistent with NEXUS / Canadian C-spine clinical decision rules for confirmed need |
+| Neck immobilization | WHO BEC trauma module; consistent with NEXUS / Canadian C-spine clinical decision rules for confirmed need |
 | Head-tilt chin-lift | RCUK / AHA / ERC 2021 BLS standard for non-trauma |
 | Jaw thrust | RCUK / AHA / ERC 2021 BLS standard when spinal injury suspected |
 | Choking care | ERC 2021 Foreign Body Airway Obstruction algorithm |
@@ -58,7 +58,7 @@ delegated to prehospital EMS in the WHO BEC framework.
 
 | Intervention | Guideline alignment |
 | --- | --- |
-| Spinal immobilisation | WHO BEC; NEXUS / Canadian C-spine clinical decision rules apply at clinician level |
+| Spinal immobilization | WHO BEC; NEXUS / Canadian C-spine clinical decision rules apply at clinician level |
 | Glucose (oral, for conscious hypoglycaemic patient) | ERC 2021 First Aid: 15-20 g rapid-acting glucose |
 | Seizure care (protect from injury; do not restrain) | ERC 2021 First Aid; NICE NG217 *Epilepsies in children, young people and adults*, 2022 |
 | High-temperature care (active cooling for heat stroke) | ERC 2021 First Aid; AHA First Aid 2020 |
@@ -72,7 +72,7 @@ delegated to prehospital EMS in the WHO BEC framework.
 | Burn care (cool burn 20 min running water) | British Burns Association consensus; ANZBA burns first aid; ILCOR 2020 weak recommendation |
 | Wound care | ERC 2021 First Aid |
 | Drowning care (rescue breaths first; standard CPR if no breathing) | ILCOR / RCUK / ERC 2021 — drowning is an asphyxial arrest |
-| Snakebite care (immobilise limb, pressure bandage for elapid bites; WHO snakebite guidance) | WHO. *Guidelines for the management of snakebites*, 2nd edition. 2016. <https://iris.who.int/handle/10665/249547> |
+| Snakebite care (immobilize limb, pressure bandage for elapid bites; WHO snakebite guidance) | WHO. *Guidelines for the management of snakebites*, 2nd edition. 2016. <https://iris.who.int/handle/10665/249547> |
 
 ## Pregnancy-specific items
 
@@ -91,7 +91,7 @@ Geneva: WHO; 2017. ISBN 978-92-4-156549-3.
 ## Precaution flags
 
 The five precaution checkboxes (highly infectious disease, spinal
-immobilisation, possible fracture, fall risk, altered mental status)
+immobilization, possible fracture, fall risk, altered mental status)
 trigger downstream actions at the receiving facility per the WHO IMAI
 referral framework.
 

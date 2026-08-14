@@ -1,4 +1,4 @@
-# WHO Emergency Unit Standardised Clinical Form: General
+# WHO Emergency Unit Standardized Clinical Form: General
 
 This form implements the WHO standard clinical-encounter form for
 non-trauma adult and paediatric presentations to a hospital emergency

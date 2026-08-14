@@ -1,10 +1,10 @@
 # Vaccinations Assessment
 
-Immunisation-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record. Aligned with the UK Green Book (Immunisation against infectious disease).
+Immunization-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record. Aligned with the UK Green Book (Immunization against infectious disease).
 
 ## Scoring system
 
-- **Instrument**: Immunisation Schedule Compliance (UK Green Book)
+- **Instrument**: Immunization Schedule Compliance (UK Green Book)
 - **Range**: Compliant / Partial / Non-compliant
 - **Categories**:
   - Compliant: All age-appropriate routine vaccinations administered per schedule
@@ -16,7 +16,7 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 | #   | Step                                |
 | --- | ----------------------------------- |
 | 1   | Patient Information                 |
-| 2   | Immunisation History                |
+| 2   | Immunization History                |
 | 3   | Childhood Vaccinations              |
 | 4   | Adult Vaccinations                  |
 | 5   | Travel Vaccinations                 |

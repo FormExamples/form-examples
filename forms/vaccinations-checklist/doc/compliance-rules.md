@@ -2,7 +2,7 @@
 
 ## Scope
 
-This form tracks immunisation status for **healthcare workers** and
+This form tracks immunization status for **healthcare workers** and
 **patients in occupational, travel, or special-circumstance settings**.
 Unlike the routine `vaccinations-assessment` form, it focuses on
 **occupational risk** and **outbreak response** and stratifies the patient
@@ -12,8 +12,8 @@ into risk levels.
 
 | Category | Definition |
 | --- | --- |
-| Fully Immunised | All vaccinations required by the patient's role and circumstances complete and documented |
-| Partially Immunised | One or more vaccinations incomplete or overdue |
+| Fully Immunized | All vaccinations required by the patient's role and circumstances complete and documented |
+| Partially Immunized | One or more vaccinations incomplete or overdue |
 | Non-Compliant | Required vaccinations missing, especially in high-risk roles |
 | Contraindicated | Documented medical exemption with supporting evidence |
 
@@ -21,8 +21,8 @@ into risk levels.
 
 | Level | Definition |
 | --- | --- |
-| Low | Fully immunised; no gaps; low-risk role and setting |
-| Moderate | Partially immunised; non-critical gaps |
+| Low | Fully immunized; no gaps; low-risk role and setting |
+| Moderate | Partially immunized; non-critical gaps |
 | High | Non-compliant in high-risk role (e.g. exposure-prone procedures, paediatric oncology, dialysis) |
 | Critical | Active exposure (e.g. needlestick injury) without documented immunity |
 
@@ -42,7 +42,7 @@ tuberculosis, hepatitis B, hepatitis C and HIV: new healthcare workers*
 - **Laboratory** — additional pathogen-specific vaccines per UKHSA Green
   Book chapter 12.
 
-## UKHSA Green Book Chapter 12 — Immunisation of HCWs
+## UKHSA Green Book Chapter 12 — Immunization of HCWs
 
 Mandatory pre-employment screening:
 

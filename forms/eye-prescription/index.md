@@ -86,7 +86,7 @@ the same scroll target — no multi-page form.
 | 6 | Left eye refraction (OS) | same fields as step 5 |
 | 7 | Addition for near | addition right and left (typically equal; +0.75 to +3.50 D, 0.25 steps); intermediate addition if specified |
 | 8 | Pupillary distance | distance PD total mm, monocular right and left, near PD, segment height for bifocal / varifocal |
-| 9 | Lens recommendation | prescription type (single vision distance / near / intermediate, bifocal, trifocal, varifocal, occupational), lens material (CR-39 / polycarbonate / Trivex / high-index 1.67 / high-index 1.74), coatings (anti-reflective, scratch-resistant, blue-light, photochromic, polarised), tint, UV protection |
+| 9 | Lens recommendation | prescription type (single vision distance / near / intermediate, bifocal, trifocal, varifocal, occupational), lens material (CR-39 / polycarbonate / Trivex / high-index 1.67 / high-index 1.74), coatings (anti-reflective, scratch-resistant, blue-light, photochromic, polarized), tint, UV protection |
 | 10 | Ocular health findings (optional) | slit-lamp findings, fundus findings, intraocular pressure (IOP) per eye, OCT findings, cup-to-disc ratio, refractive classification per eye |
 | 11 | Summary & sign-off | computed refractive classification per eye, anisometropia detection, complexity grade, safety flags, clinician notes, follow-up interval, electronic signature |
 

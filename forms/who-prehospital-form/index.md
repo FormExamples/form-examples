@@ -1,13 +1,13 @@
 # WHO Prehospital Form
 
-World Health Organization standardised prehospital clinical documentation form for emergency medical services.
+World Health Organization standardized prehospital clinical documentation form for emergency medical services.
 
 This two-page form captures comprehensive prehospital assessment data including caller/patient identification, initial vital signs, high risk signs, triage category, ABCDE primary survey with detailed clinical findings and interventions, SAMPLE history, injury details, physical exam, additional interventions, reassessments, presumptive diagnoses, and disposition/handover. Designed for use with the WHO Reference Card.
 
 ## Source
 
 - **Form**: WHO Prehospital Form (SCF Prehospital)
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/prehospital-scf.pdf?sfvrsn=53881340_2>
 - **Pages**: 2
 - **Reference**: See who.int/emergencycare for more information
@@ -103,7 +103,7 @@ This two-page form captures comprehensive prehospital assessment data including 
 - Pulses: Weak / Asymmetric
 - JVD: Yes / No
 - Active bleeding site: (free text)
-- **Interventions**: Bleeding controlled (bandage, tourniquet, direct pressure) + Time; Access: IV site (size) / IO site (size); IVF (ml) — NS / LR / Other; Pelvis stabilized; Femur fracture stabilised
+- **Interventions**: Bleeding controlled (bandage, tourniquet, direct pressure) + Time; Access: IV site (size) / IO site (size); IVF (ml) — NS / LR / Other; Pelvis stabilized; Femur fracture stabilized
 
 #### Primary Survey — D (Disability)
 

@@ -1,6 +1,6 @@
 # Mental Health Assessment
 
-Combined depression and anxiety screening using PHQ-9 (Patient Health Questionnaire-9) and GAD-7 (Generalised Anxiety Disorder-7) with risk assessment.
+Combined depression and anxiety screening using PHQ-9 (Patient Health Questionnaire-9) and GAD-7 (Generalized Anxiety Disorder-7) with risk assessment.
 
 ## Directory structure
 

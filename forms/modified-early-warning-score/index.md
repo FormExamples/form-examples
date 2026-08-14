@@ -10,13 +10,13 @@ monitoring frequency, obtain urgent medical review, and consider critical-care
 outreach.
 
 MEWS is the aggregate-weighted successor to the original Early Warning Score and
-was popularised by Subbe *et al.* (*QJM* 2001) as a predictor of clinical
+was popularized by Subbe *et al.* (*QJM* 2001) as a predictor of clinical
 deterioration, intensive-care admission, and death among acute medical
 admissions.
 
 > **Note — superseded by NEWS2.** In the United Kingdom the Royal College of
 > Physicians' **National Early Warning Score 2 (NEWS2)** is the recommended
-> standardised track-and-trigger system; MEWS predates it and remains in use in
+> standardized track-and-trigger system; MEWS predates it and remains in use in
 > some settings and internationally. Where a national standard applies, prefer
 > NEWS2 — see the sibling form
 > [`national-early-warning-score-2`](../national-early-warning-score-2/index.md).

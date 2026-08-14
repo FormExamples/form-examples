@@ -3,7 +3,7 @@
 UK primary-care annual health check for people aged 14 or over on a practice's
 learning-disability register. Captured via a single continuous single-page
 wizard covering reasonable adjustments and communication, physical health,
-screening and immunisation uptake, a medication review including **STOMP**,
+screening and immunization uptake, a medication review including **STOMP**,
 mental health and behaviour, syndrome-specific checks, and carer and social
 circumstances — and producing a **Health Action Plan**. This is a
 **documentation / completeness** form: the engine grades whether the check was

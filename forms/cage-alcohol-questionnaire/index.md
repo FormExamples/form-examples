@@ -8,7 +8,7 @@ result when the score is **≥ 2**. A positive screen is a prompt for further
 assessment of drinking, not a diagnosis of an alcohol-use disorder.
 
 CAGE was described by Ewing (*JAMA* 1984) and derived from earlier work by Mayfield
-*et al.* It is short, memorisable, and requires no equipment, which makes it well
+*et al.* It is short, memorizable, and requires no equipment, which makes it well
 suited to opportunistic screening in primary and general clinical care. Because
 its questions concern lifetime experience and the consequences of drinking, CAGE
 is more sensitive to established problem drinking and dependence than to earlier
@@ -38,7 +38,7 @@ for a "yes" answer and **0** for "no". Total score 0–4.
 | # | Letter | Question (scores 1 when answered "yes") | Points |
 | --- | --- | --- | --- |
 | 1 | **C** — Cut down | Have you ever felt you should cut down on your drinking? | 0 or 1 |
-| 2 | **A** — Annoyed | Have people annoyed you by criticising your drinking? | 0 or 1 |
+| 2 | **A** — Annoyed | Have people annoyed you by criticizing your drinking? | 0 or 1 |
 | 3 | **G** — Guilty | Have you ever felt bad or guilty about your drinking? | 0 or 1 |
 | 4 | **E** — Eye-opener | Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover (an "eye-opener")? | 0 or 1 |
 

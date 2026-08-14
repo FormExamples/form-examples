@@ -1,6 +1,6 @@
 # Administrator Guide
 
-This guide covers system configuration, rule customisation, audit capabilities, and ongoing maintenance for the Pre-Operative Assessment system.
+This guide covers system configuration, rule customization, audit capabilities, and ongoing maintenance for the Pre-Operative Assessment system.
 
 ## System Overview for Administrators
 
@@ -36,7 +36,7 @@ The build is configured in `vite.config.ts` and `svelte.config.js`. These rarely
 
 ---
 
-## Rule Customisation
+## Rule Customization
 
 ### Understanding the Rule Structure
 
@@ -111,7 +111,7 @@ Or remove the rule from the array and keep it in a comment block for reference.
 | AG | Age / Demographics |
 | SH | Social History |
 
-### Flag Customisation
+### Flag Customization
 
 Flags in `src/lib/engine/flagged-issues.ts` follow a similar pattern but use the `AdditionalFlag` structure:
 
@@ -128,7 +128,7 @@ To add, modify, or remove flags, edit the `detectAdditionalFlags()` function.
 
 ---
 
-## Questionnaire Customisation
+## Questionnaire Customization
 
 ### Adding a Question to an Existing Step
 

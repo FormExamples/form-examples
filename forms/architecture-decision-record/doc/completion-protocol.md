@@ -16,7 +16,7 @@ i.e. its reversal would be expensive. Triggers:
 - Adopting or retiring a standard (e.g. FHIR R5, OpenAPI 3.1).
 
 Do **not** write an ADR for everyday refactoring, code-style choices, or
-local-scope optimisations.
+local-scope optimizations.
 
 ## Naming
 

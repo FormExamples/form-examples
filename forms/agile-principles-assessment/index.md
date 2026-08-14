@@ -1,9 +1,9 @@
 # Agile Principles Assessment
 
-A team / organisation self-assessment that scores adoption of the
+A team / organization self-assessment that scores adoption of the
 **12 principles of the Agile Manifesto** (Beck *et al.*, 2001) and produces a
 composite **agility maturity level** (Ad-hoc / Initial / Developing / Mature /
-Optimising), a list of weak-principle flags, and a coaching action plan.
+Optimizing), a list of weak-principle flags, and a coaching action plan.
 
 The form is a single-page, 14-step wizard. Each principle is scored on a
 1–5 Likert scale (Strongly disagree → Strongly agree) with an optional
@@ -13,12 +13,12 @@ technical-debt risk, lack of retrospective practice).
 
 ## Scope and intended users
 
-- **Setting:** software-development teams, product organisations, transformation
+- **Setting:** software-development teams, product organizations, transformation
   programmes, agile coaches, scrum masters, engineering managers.
 - **Respondents:** individual contributors, team leads, scrum masters, product
   owners, engineering managers, agile coaches, executive sponsors.
 - **Unit of assessment:** a named team, programme, value stream, or whole
-  organisation. One submission per respondent per assessment cycle.
+  organization. One submission per respondent per assessment cycle.
 
 ## Scoring system
 
@@ -31,7 +31,7 @@ technical-debt risk, lack of retrospective practice).
 
 | Maturity     | Mean score | Description |
 | ---          | ---        | --- |
-| Optimising   | ≥ 4.50     | Agility is woven into daily work; team continuously inspects and adapts. |
+| Optimizing   | ≥ 4.50     | Agility is woven into daily work; team continuously inspects and adapts. |
 | Mature       | 3.75–4.49  | High adoption with deliberate refinement; few weak principles. |
 | Developing   | 3.00–3.74  | Practices in place but uneven; several principles are mid-band. |
 | Initial      | 2.00–2.99  | Partial adoption; multiple weak principles; coaching needed. |
@@ -44,7 +44,7 @@ are answered the composite maturity is reported as **insufficient-data**.
 
 | # | Step | Principle (or section) |
 | --- | --- | --- |
-| 1 | Respondent identification | name, role, team, organisation, assessment date |
+| 1 | Respondent identification | name, role, team, organization, assessment date |
 | 2 | Customer satisfaction | early and continuous delivery of valuable software |
 | 3 | Welcome change | changing requirements welcomed, even late |
 | 4 | Deliver frequently | working software delivered in weeks, not months |
@@ -54,8 +54,8 @@ are answered the composite maturity is reported as **insufficient-data**.
 | 8 | Working software | primary measure of progress |
 | 9 | Sustainable development | constant pace indefinitely |
 | 10 | Technical excellence | continuous attention to design and quality |
-| 11 | Simplicity | maximising work not done |
-| 12 | Self-organising teams | best architectures and designs emerge |
+| 11 | Simplicity | maximizing work not done |
+| 12 | Self-organizing teams | best architectures and designs emerge |
 | 13 | Regular reflection | retrospectives drive behaviour change |
 | 14 | Summary & action plan | maturity level, fired rules, flags, top three actions, sign-off |
 
@@ -76,7 +76,7 @@ specific operational concerns. Priority is **high / medium / low**.
 | Burnout risk | P8 (sustainable development) ≤ 2 | high |
 | Technical-debt risk | P9 (technical excellence) ≤ 2 | high |
 | Scope-creep / over-engineering | P10 (simplicity) ≤ 2 | medium |
-| Command-and-control | P11 (self-organising teams) ≤ 2 | high |
+| Command-and-control | P11 (self-organizing teams) ≤ 2 | high |
 | No-retrospective | P12 (regular reflection) ≤ 2 | high |
 | Critical principle gap | any principle = 1 | high |
 | Insufficient data | fewer than 6 principles answered | medium |

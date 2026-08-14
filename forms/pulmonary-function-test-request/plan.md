@@ -20,7 +20,7 @@ NG80 / NG115 guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, safety / contraindication,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet contraindicated, or complete yet urgent.
 - **Safety downgrades.** Any forced-expiration or infection-control
   contraindication downgrades the safety band and can defer the test.

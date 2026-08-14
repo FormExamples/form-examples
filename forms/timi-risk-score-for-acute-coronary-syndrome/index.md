@@ -5,7 +5,7 @@ A bedside risk-stratification tool for adults presenting with unstable angina
 clinical criteria**, awards **1 point** for each criterion that is present,
 sums a total of **0–7**, and maps that total to the **14-day risk of a composite
 adverse event** — all-cause death, new or recurrent myocardial infarction, or
-severe recurrent ischaemia requiring **urgent revascularisation**. A higher
+severe recurrent ischaemia requiring **urgent revascularization**. A higher
 score identifies patients who benefit most from an **early invasive strategy**
 and more intensive antithrombotic therapy.
 
@@ -46,7 +46,7 @@ a STEMI presentation.
 
 **Interpretation.** The total maps to the observed 14-day rate of the composite
 end point (all-cause mortality, new or recurrent MI, or severe recurrent
-ischaemia prompting urgent revascularisation) in the derivation cohorts.
+ischaemia prompting urgent revascularization) in the derivation cohorts.
 
 | Total score | Risk band | 14-day event risk | Recommended action |
 | --- | --- | --- | --- |

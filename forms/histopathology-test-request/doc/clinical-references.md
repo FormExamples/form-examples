@@ -4,7 +4,7 @@ Authoritative guidance underpinning the four-axis grading engine.
 
 ## Appropriateness (RCPath cancer datasets / tissue pathways)
 
-The RCPath *Cancer datasets and tissue pathways* standardise reporting and
+The RCPath *Cancer datasets and tissue pathways* standardize reporting and
 define the range of acceptable practice for handling pathology specimens. Core
 data items are mandated for the Cancer Outcomes and Services Dataset in England.
 The appropriateness axis maps each (indication × specimen type) onto an ordinal
@@ -17,7 +17,7 @@ usually-not-appropriate (1–3).
 | Cancer staging | resection | usually-appropriate |
 | Margin assessment | re-excision | usually-appropriate |
 | Inflammatory disease | endoscopic biopsy | may-be-appropriate |
-| Characterise lesion | skin lesion | may-be-appropriate |
+| Characterize lesion | skin lesion | may-be-appropriate |
 | Transplant monitoring | protocol biopsy | may-be-appropriate |
 
 ## Specimen quality (fixative / labelling / integrity)

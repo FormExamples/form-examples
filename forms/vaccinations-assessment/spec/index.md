@@ -6,7 +6,7 @@ Slug: `vaccinations-assessment`
 
 ## 1. Purpose
 
-Immunisation-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record. Aligned with the UK Green Book (Immunisation against infectious disease).
+Immunization-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record. Aligned with the UK Green Book (Immunization against infectious disease).
 
 Full design description: [`index.md`](../index.md).
 
@@ -16,7 +16,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 ## 3. Scoring system
 
-- **Instrument**: Immunisation Schedule Compliance (UK Green Book)
+- **Instrument**: Immunization Schedule Compliance (UK Green Book)
 - **Range**: Compliant / Partial / Non-compliant
 - **Categories**:
   - Compliant: All age-appropriate routine vaccinations administered per schedule

@@ -76,7 +76,7 @@ Sources:
 
 The practice parameter for the evaluation of distal symmetric polyneuropathy
 underpins the form's `peripheral_neuropathy` structured finding and the
-`pattern` characterisation (demyelinating vs axonal vs mixed) used by the
+`pattern` characterization (demyelinating vs axonal vs mixed) used by the
 severity axis.
 
 - Practice Parameter: Evaluation of distal symmetric polyneuropathy

@@ -40,7 +40,7 @@ self-report noise.
 ### Finished-work risk (high)
 
 `t08` ("Teams rarely wait for work to be completed by others") and `p12`
-("The organisation places a higher value on finished work than it does
+("The organization places a higher value on finished work than it does
 on the number of work items in process") together describe a system
 where work is **started faster than it is finished**. The fix is WIP
 limits at the team or programme level; it is rarely solved by hiring or

@@ -1,11 +1,11 @@
 # WHO Acute Referral Form
 
-World Health Organization standardised acute referral form for inter-facility patient transfers.
+World Health Organization standardized acute referral form for inter-facility patient transfers.
 
 ## Source
 
 - **Form**: Acute Referral Form
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/ect/acute-referral-form.pdf?sfvrsn=c388cbda_3>
 - **Pages**: 1
 

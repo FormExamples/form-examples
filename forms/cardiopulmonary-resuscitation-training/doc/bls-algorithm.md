@@ -3,7 +3,7 @@
 This form verifies adult Basic Life Support (BLS) competency against the
 American Heart Association (AHA) and Resuscitation Council UK (RCUK) /
 European Resuscitation Council (ERC) 2020/2021 guidelines, which are now
-harmonised on the major BLS metrics.
+harmonized on the major BLS metrics.
 
 ## Authoritative sources
 

@@ -50,7 +50,7 @@ See [`index.md`](./index.md) for the full design and the section table, and
   - **GOLD grade** — banded from `fev1PercentPredicted` (≥ 80 → 1, ≥ 50 → 2,
     ≥ 30 → 3, else 4; `null` when unrecorded).
   - **Symptom axis** — `high` when `mMRC ≥ 2` or `CAT ≥ 10`, else `low`.
-  - **Exacerbation axis** — `high` when `≥ 2` moderate or `≥ 1` hospitalised
+  - **Exacerbation axis** — `high` when `≥ 2` moderate or `≥ 1` hospitalized
     exacerbation in 12 months, else `low`.
   - **ABE group** — `E` when exacerbation risk high; else `B` when symptom burden
     high; else `A`; `null` when no symptom/exacerbation data.
@@ -62,7 +62,7 @@ See [`index.md`](./index.md) for the full design and the section table, and
   `review-grader.ts`, `flagged-issues.ts`.
 - **Tests:** `review-grader.test.ts`, `review-rules.test.ts` — cover each GOLD
   boundary (FEV₁ % 80/79, 50/49, 30/29), each symptom threshold (mMRC 1/2,
-  CAT 9/10), each exacerbation threshold (1/2 moderate, 0/1 hospitalised), every
+  CAT 9/10), each exacerbation threshold (1/2 moderate, 0/1 hospitalized), every
   ABE group, and every completeness grade.
 
 ## Flagged issues

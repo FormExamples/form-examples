@@ -66,11 +66,11 @@ While outside this form, the practice's clinical system must log every
 statutory disclosure with at least the following fields:
 
 - Patient identifier (NHS number).
-- Recipient organisation (statutory body).
+- Recipient organization (statutory body).
 - Date of disclosure.
 - Statutory instrument cited.
 - Data items disclosed.
-- Operator identity (the practice user who triggered or authorised the
+- Operator identity (the practice user who triggered or authorized the
   disclosure, even where automated).
 
 This log is the controller's primary evidence that the disclosure was

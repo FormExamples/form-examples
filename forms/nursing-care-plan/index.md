@@ -2,7 +2,7 @@
 
 A structured nursing care plan that documents patient care following the
 **nursing process** — Assessment, Diagnosis, Planning, Implementation,
-Evaluation (**ADPIE**) — and is commonly organised by activities of daily
+Evaluation (**ADPIE**) — and is commonly organized by activities of daily
 living using the **Roper–Logan–Tierney** model of nursing. The plan captures the
 identified nursing problems / needs, the goals set for each, the planned
 interventions, the record of implementation, the evaluation and review, and the
@@ -27,7 +27,7 @@ for the nursing notes and handover.
   under supervision; read by the wider multidisciplinary team at handover and
   review.
 - **Patients:** any patient or resident under nursing care who requires a
-  documented, individualised plan of care.
+  documented, individualized plan of care.
 - **Not for:** medical prescribing, a substitute for the specialist risk-
   assessment tools it references (it records that they were done and their
   outcome, it does not replace them), or numeric clinical scoring.
@@ -43,7 +43,7 @@ row carries its own goals, interventions, and evaluation.
 | Stage | Captured as | Notes |
 | --- | --- | --- |
 | **A**ssessment | problem / need statement, assessment data, referenced risk assessments | what the nurse observed or the patient reported |
-| **D**iagnosis | nursing problem / need (actual or potential), organised by activity of daily living (RLT) | the identified need, not a medical diagnosis |
+| **D**iagnosis | nursing problem / need (actual or potential), organized by activity of daily living (RLT) | the identified need, not a medical diagnosis |
 | **P**lanning | one or more **SMART** goals with a target / review date | Specific, Measurable, Achievable, Relevant, Time-bound |
 | **I**mplementation | one or more planned interventions and the record that they were carried out | the nursing actions |
 | **E**valuation | evaluation note, goal-met status, and next review date | did the intervention meet the goal |

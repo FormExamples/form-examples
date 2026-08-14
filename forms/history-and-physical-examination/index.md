@@ -34,7 +34,7 @@ admission record.
 
 ## Sections and completeness model
 
-The H&P is organised into the conventional clerking sections. Each section is
+The H&P is organized into the conventional clerking sections. Each section is
 either a **required component** (must be documented for a Complete grade) or an
 optional / conditional component.
 

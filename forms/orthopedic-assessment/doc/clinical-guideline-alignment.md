@@ -24,7 +24,7 @@ with BOAST documentation expectations.
   https://www.aaos.org/quality/quality-programs/auc-program/
 
 AAOS publishes evidence-based guidance for shoulder, elbow, wrist and
-hand conditions that contextualises DASH scores.
+hand conditions that contextualizes DASH scores.
 
 ## British Society for Surgery of the Hand (BSSH)
 

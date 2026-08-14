@@ -21,7 +21,7 @@ clinician-driven request forms (e.g. *Pregnancy Ultrasound Test Request*). It is
 completed by a radiologist, GP, hospital doctor, surgeon, oncologist, emergency
 physician, or radiographer rather than by the patient, and is aligned with the
 ACR Appropriateness Criteria, the Royal College of Radiologists (RCR) *iRefer*
-guidance, ESUR contrast-media safety guidelines, and the UK Ionising Radiation
+guidance, ESUR contrast-media safety guidelines, and the UK Ionizing Radiation
 (Medical Exposure) Regulations — IR(ME)R 2017.
 
 Full design description: [`index.md`](../index.md).
@@ -33,7 +33,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe for contrast, incomplete, or urgent.
 
 | Axis | Instrument | Output |

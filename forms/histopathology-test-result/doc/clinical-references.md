@@ -10,7 +10,7 @@ critical-result alerting rules used by this form.
 ### RCPath — Cancer datasets and tissue pathways
 
 The Royal College of Pathologists' (RCPath) *Datasets for histopathological
-reporting on cancers* standardise cancer reporting among pathologists, define the
+reporting on cancers* standardize cancer reporting among pathologists, define the
 range of acceptable practice in handling pathology specimens, and improve the
 quality of cancer diagnosis and treatment. Tissue pathways define best practice
 for handling specimens from patients who do not have cancer.
@@ -24,7 +24,7 @@ Key principles relevant to this form:
   `tnm_pt` / `tnm_pn` / `tnm_pm`, `resection_margins`, and
   `lymphovascular_invasion` fields.
 - **Structured proforma reporting** — the core pathological data items are
-  summarised in a structured proforma, which may be combined with free text. The
+  summarized in a structured proforma, which may be combined with free text. The
   report-completeness axis scores presence of the mandatory sections
   (clinical history, macroscopic, microscopic, diagnosis, impression).
 - **SNOMED coding** — datasets carry SNOMED CT topography / morphology codes in
@@ -43,7 +43,7 @@ Sources:
 ### UICC/AJCC TNM 8th edition — pathological (pTNM) staging
 
 The UICC *TNM Classification of Malignant Tumours, 8th edition* (published 2016)
-is the internationally agreed standard for describing and categorising cancer
+is the internationally agreed standard for describing and categorizing cancer
 stage. It defines separate clinical (cTNM), pathological (pTNM), and
 post-neoadjuvant (ypTNM) classifications. The **pathological pTNM** — the primary
 tumour (`pT`), regional lymph nodes (`pN`), and distant metastasis (`pM`)

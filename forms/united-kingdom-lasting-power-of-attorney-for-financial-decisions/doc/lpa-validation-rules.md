@@ -89,7 +89,7 @@ fired rule.
 | Rule | Predicate | Source | Remediation hint |
 | --- | --- | --- | --- |
 | `SingleAttorneyNoReplacement` | Only one attorney appointed and no replacement attorney listed in section 4. | LP12 Guide part A4 | The LPA will become useless if the single attorney loses capacity or is unable to act. Strongly recommended: add a replacement attorney in section 4. |
-| `OnlyWhenNoCapacitySelected` | Section 5 set to "only when I don't have mental capacity". | LP12 Guide part A5 | This option restricts the LPA to incapacity only and means attorneys cannot help with finances while you still have capacity. Banks and other organisations may also require evidence of incapacity each time. Consider "as soon as the LPA is registered". |
+| `OnlyWhenNoCapacitySelected` | Section 5 set to "only when I don't have mental capacity". | LP12 Guide part A5 | This option restricts the LPA to incapacity only and means attorneys cannot help with finances while you still have capacity. Banks and other organizations may also require evidence of incapacity each time. Consider "as soon as the LPA is registered". |
 
 ### Low-priority flags
 

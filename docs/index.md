@@ -19,7 +19,7 @@ the repo.
   the sync/refactor/status tooling.
 - [Back end](back-end.md) — the Rust + axum + Loco JSON API, one crate per form.
 - [Verification](verification.md) — every gate and what it proves.
-- [Internationalisation](i18n.md) — the message-extraction pattern and the
+- [Internationalization](i18n.md) — the message-extraction pattern and the
   English/Welsh pilot.
 - [Tools reference](tools.md) — generated reference for every `bin/` tool.
 
@@ -34,7 +34,7 @@ Hands-on, runnable walkthroughs live in [`tutorials/`](tutorials/):
 3. [Author a scoring engine](tutorials/03-scoring-engine.md).
 4. [The generator pipeline](tutorials/04-generator-pipeline.md).
 5. [Consume the API](tutorials/05-consume-the-api.md).
-6. [Customise Lily](tutorials/06-lily.md).
+6. [Customize Lily](tutorials/06-lily.md).
 
 Every command in these tutorials points at a real `bin/` tool or `forms/`
 path; `bin/test-tutorials` is a fast static check that fails if any tutorial

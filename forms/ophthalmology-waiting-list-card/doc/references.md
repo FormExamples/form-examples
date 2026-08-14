@@ -13,7 +13,7 @@
 - NHS Constitution.
   <https://www.gov.uk/government/publications/the-nhs-constitution-for-england>
 
-## Clinical prioritisation
+## Clinical prioritization
 
 - Royal College of Surgeons of England. *Clinical Guide to Surgical
   Prioritisation during the Coronavirus Pandemic.*

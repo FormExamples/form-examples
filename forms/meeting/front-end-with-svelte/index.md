@@ -3,7 +3,7 @@
 SvelteKit 2 + Svelte 5 runes + Tailwind CSS 4 + Lily Design System Svelte
 headless. Vitest for the validation engine.
 
-A single-page, ten-step wizard records a meeting (organiser, title, invitation,
+A single-page, ten-step wizard records a meeting (organizer, title, invitation,
 agenda, participants, resources, recurrence, summary, action items / outputs /
 outcomes, sign-off). The shared validation engine checks the record for
 structural problems and produces an overall health verdict with flagged issues.

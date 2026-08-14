@@ -15,7 +15,7 @@ including an automatic **critical-result alert**. The output is a structured
 breast-imaging report.
 
 Mammography is the classic **BI-RADS** use case: the Breast Imaging Reporting and
-Data System gives every mammogram a single standardised final assessment
+Data System gives every mammogram a single standardized final assessment
 category that determines management. This form is completed by a radiologist,
 consultant, or reporting radiographer rather than by the patient, and is aligned
 with the ACR BI-RADS Atlas, the Royal College of Radiologists (RCR) breast
@@ -42,7 +42,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -91,7 +91,7 @@ classification, severity, and flags:
 `mass`, `calcifications`, `architectural_distortion`, `asymmetry`,
 `skin_or_nipple_change`, `lymphadenopathy`, `incidental_finding`.
 
-Key measurement: `largest_lesion_size_mm` (surveillance / categorisation).
+Key measurement: `largest_lesion_size_mm` (surveillance / categorization).
 
 ## Wizard steps
 
@@ -143,7 +143,7 @@ mammography-test-result/
 
 ## Clinical references
 
-- ACR BI-RADS® Atlas — Breast Imaging Reporting and Data System: standardised
+- ACR BI-RADS® Atlas — Breast Imaging Reporting and Data System: standardized
   breast-imaging lexicon and final assessment categories 0–6 plus breast-density
   categories a–d.
   <https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/BI-RADS>
@@ -164,7 +164,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

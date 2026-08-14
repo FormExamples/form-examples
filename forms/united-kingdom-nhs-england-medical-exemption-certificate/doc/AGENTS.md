@@ -24,7 +24,7 @@ Background notes and reference material for the FP92A form.
 - **Practitioners (GPs, hospital teams)** — Primary Care Support England
   (PCSE) portal at <https://pcse.england.nhs.uk/>.
 - **Integrated care boards (ICBs) and Sub-ICB Locations (SICBLs)** —
-  Xerox UK Limited (organisation registration required).
+  Xerox UK Limited (organization registration required).
 
 ## The ten qualifying conditions
 

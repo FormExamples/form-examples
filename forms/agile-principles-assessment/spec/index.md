@@ -6,10 +6,10 @@ Slug: `agile-principles-assessment`
 
 ## 1. Purpose
 
-A team / organisation self-assessment that scores adoption of the
+A team / organization self-assessment that scores adoption of the
 **12 principles of the Agile Manifesto** (Beck *et al.*, 2001) and produces a
 composite **agility maturity level** (Ad-hoc / Initial / Developing / Mature /
-Optimising), a list of weak-principle flags, and a coaching action plan.
+Optimizing), a list of weak-principle flags, and a coaching action plan.
 
 The form is a single-page, 14-step wizard. Each principle is scored on a
 1–5 Likert scale (Strongly disagree → Strongly agree) with an optional
@@ -34,7 +34,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 | Maturity     | Mean score | Description |
 | ---          | ---        | --- |
-| Optimising   | ≥ 4.50     | Agility is woven into daily work; team continuously inspects and adapts. |
+| Optimizing   | ≥ 4.50     | Agility is woven into daily work; team continuously inspects and adapts. |
 | Mature       | 3.75–4.49  | High adoption with deliberate refinement; few weak principles. |
 | Developing   | 3.00–3.74  | Practices in place but uneven; several principles are mid-band. |
 | Initial      | 2.00–2.99  | Partial adoption; multiple weak principles; coaching needed. |

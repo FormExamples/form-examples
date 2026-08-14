@@ -38,7 +38,7 @@ disease.
 
 - UK GDPR / DPA 2018.
 - NHS DSPT compliance.
-- Access restricted to treating team and authorised auditors.
+- Access restricted to treating team and authorized auditors.
 - Audit trail is append-only; corrections are addenda, not edits.
 
 ## Reporting integration

@@ -21,7 +21,7 @@ half of the pair with
 ## Design principles
 
 - **Four orthogonal axes.** Outcome, legal / discrimination risk, completeness,
-  and follow-up urgency are independent and each anchored to a recognised source.
+  and follow-up urgency are independent and each anchored to a recognized source.
 - **Declines escalate risk.** Declining adjustments a worker is likely entitled
   to, without justification or alternatives, drives the legal-risk axis and
   raises the discrimination-risk flag.

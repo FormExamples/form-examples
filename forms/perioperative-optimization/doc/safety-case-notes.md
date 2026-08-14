@@ -9,9 +9,9 @@ records what must be produced and the current position on each point.
 | Standard | Applies to | Status |
 | --- | --- | --- |
 | DCB0129 — Clinical Risk Management in the Manufacture of Health IT Systems | the manufacturer | **not started** — needs a named Clinical Safety Officer, a Clinical Risk Management Plan, a Hazard Log, and a Clinical Safety Case Report |
-| DCB0160 — Clinical Risk Management in the Deployment and Use of Health IT Systems | the deploying organisation | not applicable until deployment |
+| DCB0160 — Clinical Risk Management in the Deployment and Use of Health IT Systems | the deploying organization | not applicable until deployment |
 | DTAC — Digital Technology Assessment Criteria | NHS procurement | not started |
-| DSPT — Data Security and Protection Toolkit | the hosting organisation | not applicable — this form ships no hosting |
+| DSPT — Data Security and Protection Toolkit | the hosting organization | not applicable — this form ships no hosting |
 
 ## Regulatory classification
 
@@ -44,7 +44,7 @@ Mitigating design decisions already in place:
 
 | ID | Hazard | Cause | Effect | Initial mitigation |
 | --- | --- | --- | --- | --- |
-| H-01 | Surgery proceeds believing the patient is optimised when an intervention had no time to work | `insufficient-time` treated as advisory | avoidable postoperative complication | `insufficient-time` forces `defer-surgery`, raises a non-suppressible flag, and step 16 requires an explicit gate decision naming the accepted risk |
+| H-01 | Surgery proceeds believing the patient is optimized when an intervention had no time to work | `insufficient-time` treated as advisory | avoidable postoperative complication | `insufficient-time` forces `defer-surgery`, raises a non-suppressible flag, and step 16 requires an explicit gate decision naming the accepted risk |
 | H-02 | Wrong `weeksToSurgery` from a mistyped date | data-entry error | wrong domain statuses in either direction | both dates are shown alongside the computed weeks in the live panel and on the report; a negative value is displayed rather than hidden |
 | H-03 | Anaemia domain cleared on haemoglobin alone | ferritin and transferrin saturation not entered | iron deficiency missed; transfusion risk stands | the domain triggers on haemoglobin **or** iron studies independently; a missing iron panel does not clear the domain |
 | H-04 | SGLT2 inhibitor not held | plan never agreed | euglycaemic diabetic ketoacidosis, potentially fatal and easily missed on glucose alone | dedicated field, dedicated rule, high-priority flag firing whenever the drug is in use without an agreed plan |
@@ -76,7 +76,7 @@ that a clinic-completed form does not have. Neither is addressed here.
 
 STOP-BANG and the Clinical Frailty Scale are free for non-commercial use but
 require a licence for commercial distribution. See
-[`optimisation-domains.md`](./optimisation-domains.md) §Licensing. Resolve this
+[`optimisation-domains.md`](./optimization-domains.md) §Licensing. Resolve this
 before any commercial deployment.
 
 ## Open questions
@@ -86,7 +86,7 @@ before any commercial deployment.
   `insufficient-time`?
 - Should the anaemia lead time switch automatically to four weeks when the
   intravenous route is available locally, rather than on the recorded route?
-- Does the deploying organisation want `defer-surgery` to be visible to booking
+- Does the deploying organization want `defer-surgery` to be visible to booking
   staff, or only to clinicians? The dashboard currently shows it to anyone with
   access.
 - Is a patient-facing variant needed for the online-portal pattern, with plain

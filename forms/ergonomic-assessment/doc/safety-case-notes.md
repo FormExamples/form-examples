@@ -39,7 +39,7 @@ authority for the action plan.
 | Vulnerable worker not flagged | Step 1 captures age, pregnancy, disability where worker has chosen to disclose; vulnerable-worker flag triggers tailored risk assessment per MHSWR 1999 |
 | Psychosocial risk hidden by physical-only assessment | Step 9 captures HSE Management Standards domains; severe scores trigger occupational-health referral |
 | Worker confidentiality breach | Health data captured under Article 9 GDPR special category; access restricted to occupational-health and the worker |
-| Employer pressure to under-report | Form supports anonymous-mode submission via tokenised link for occupational-health-led services |
+| Employer pressure to under-report | Form supports anonymous-mode submission via tokenized link for occupational-health-led services |
 
 ## Information governance
 
@@ -58,7 +58,7 @@ authority for the action plan.
     administrative controls, PPE)
   - Responsible person
   - Review date
-- Where action requires capital expenditure or organisational change, the
+- Where action requires capital expenditure or organizational change, the
   form signposts to the employer's safety-management system.
 
 ## Worker rights signposting

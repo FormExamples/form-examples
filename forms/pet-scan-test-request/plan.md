@@ -21,7 +21,7 @@ and IR(ME)R justification.
 
 - **Four orthogonal axes.** Appropriateness, preparation safety & radiation
   dose, completeness, and triage are independent and each citable to a
-  recognised body. A request can be appropriate yet unsafe to prepare, or
+  recognized body. A request can be appropriate yet unsafe to prepare, or
   complete yet urgent.
 - **Safety forces the band.** Pregnancy or uncontrolled glucose force the
   caution / contraindicated safety band and a flag regardless of other axes.

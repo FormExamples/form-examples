@@ -29,7 +29,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body or principle. Axes are orthogonal: a highly appropriate request
+recognized body or principle. Axes are orthogonal: a highly appropriate request
 can still be incomplete or carry interpretation risk.
 
 | Axis | Instrument | Output |

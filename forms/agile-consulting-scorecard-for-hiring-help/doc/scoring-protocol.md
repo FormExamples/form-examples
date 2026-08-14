@@ -8,7 +8,7 @@ protocol the engine implements.
 
 The engine consumes an `AgileConsultingScorecardAssessment` object with:
 
-- Organisation metadata (name, sector, size).
+- Organization metadata (name, sector, size).
 - Respondent metadata (name, role, email).
 - Sixteen boolean fields `item01`..`item16`.
 - Optional evidence text per item.

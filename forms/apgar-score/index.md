@@ -7,7 +7,7 @@ tone), and **Respiration** — each scored **0, 1, or 2**, summed to a total of
 **0–10** at each timepoint. The assessment is repeated at **1 minute** and
 **5 minutes** after birth, and again at **10 minutes** (and, where indicated,
 at subsequent 5-minute intervals) whenever the 5-minute score is below 7. The
-score summarises the newborn's transition to extrauterine life and the response
+score summarizes the newborn's transition to extrauterine life and the response
 to any resuscitation given; it is a description of condition and trend, not a
 prediction of long-term outcome.
 
@@ -15,7 +15,7 @@ The score was devised by Dr Virginia Apgar in 1952. The signs are commonly
 remembered by the backronym **APGAR** — **A**ppearance, **P**ulse, **G**rimace,
 **A**ctivity, **R**espiration. A high score is reassuring; a low or falling
 score prompts stimulation, support, or active resuscitation and continued
-scoring until the newborn stabilises.
+scoring until the newborn stabilizes.
 
 ## Scope and intended users
 
@@ -52,7 +52,7 @@ Total score 0–10 at each timepoint.
 
 **Timepoints.** The score is recorded at **1 minute** and **5 minutes** after
 birth. If the **5-minute** score is **below 7**, scoring is repeated every 5
-minutes (at **10 minutes**, and further as needed) until the newborn stabilises
+minutes (at **10 minutes**, and further as needed) until the newborn stabilizes
 or is transferred. The trend across timepoints — improving, static, or falling —
 is as important as any single value.
 

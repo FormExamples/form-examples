@@ -20,7 +20,7 @@ Before approaching the patient, the EMT must:
 4. **Determine the number of patients** — and request additional
    resources (additional ambulances, fire suppression, law enforcement) if
    the scene exceeds the responding crew's capacity.
-5. **Consider spinal stabilisation** if the mechanism suggests possible
+5. **Consider spinal stabilization** if the mechanism suggests possible
    spinal injury (motor-vehicle crash, fall from height, penetrating
    trauma above the clavicles).
 
@@ -36,7 +36,7 @@ systems is acceptable.
 | A | Airway patency — open, threatened, or obstructed | Head-tilt chin-lift, jaw thrust (trauma), OPA / NPA, suction |
 | B | Breathing — rate, depth, effort, sounds, oxygenation | High-flow oxygen via non-rebreather, BVM ventilation, occlusive dressing for open chest wound |
 | C | Circulation — pulse, skin colour/temp/moisture, capillary refill, external bleeding | Bleeding control, position of comfort, fluid (ALS adjunct) |
-| D | Disability — AVPU, gross motor exam, pupils | Manual spinal stabilisation, glucose for hypoglycaemia |
+| D | Disability — AVPU, gross motor exam, pupils | Manual spinal stabilization, glucose for hypoglycaemia |
 | E | Exposure — undress and inspect, then prevent hypothermia | Remove clothing, log roll for back inspection, blanket |
 
 Failure to manage A, B, or C, failure to voice and provide oxygen when
@@ -76,7 +76,7 @@ chief complaint. NREMT expects:
 
 ## Transport decision and reassessment
 
-The candidate must verbalise a transport decision (urgent transport vs
+The candidate must verbalize a transport decision (urgent transport vs
 stay-and-treat) **within 15 minutes** of patient contact. Failure to
 make the transport decision in that window is a critical criterion.
 
@@ -97,13 +97,13 @@ Reassessment frequency:
 
 | Critical criterion | Form step |
 | --- | --- |
-| Failed to take or verbalise PPE precautions | 2 |
+| Failed to take or verbalize PPE precautions | 2 |
 | Failed to determine scene safety before approaching patient | 2 |
 | Failed to voice and provide high-concentration oxygen when indicated | 3 |
 | Failed to assess and manage airway, breathing, or circulation in correct order | 3 |
 | Failed to differentiate urgency of patient transport | 3 / 4 |
 | Did or ordered a dangerous or potentially harmful intervention | 3 / 4 / 5 |
-| Failed to provide manual spinal stabilisation when indicated | 2 / 3 |
+| Failed to provide manual spinal stabilization when indicated | 2 / 3 |
 | Did not call for or initiate transport of patient within 15-minute window | 4 / 5 |
 
 Any one of these triggers an automatic Fail on step 6 regardless of point

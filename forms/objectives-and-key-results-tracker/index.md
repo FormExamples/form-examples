@@ -17,7 +17,7 @@ the *objective itself* as the subject.
   reviews, individual performance objectives, quarterly business reviews.
 - **Users:** OKR owners (DRIs), team leads, department heads, executives,
   OKR coaches, programme managers.
-- **Subjects:** any objective at any organisational level — individual,
+- **Subjects:** any objective at any organizational level — individual,
   team, department, or company.
 
 ## Ten-step single-page wizard
@@ -43,7 +43,7 @@ the *objective itself* as the subject.
 | 2 | confidence_decile | 1–10 | Industry practice (Atlassian, Asana) |
 | 3 | stretch_tier | 1–3 | Google OKR — committed / aspirational / moonshot |
 | 4 | alignment_grade | 1–5 | Enterprise OKR practice (Profit.co, Quantive) |
-| 5 | impact_tier | 1–5 | MoSCoW prioritisation (Clegg & Barker, 1994) |
+| 5 | impact_tier | 1–5 | MoSCoW prioritization (Clegg & Barker, 1994) |
 | 6 | smart_quality | 0–5 | Doran (1981) — SMART criteria count |
 | 7 | pace_deviation_percent | −100..+100 | PMI earned-value analysis (SPI/CPI) |
 

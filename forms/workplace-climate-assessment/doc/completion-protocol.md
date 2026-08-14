@@ -93,7 +93,7 @@ implementation requires:
 
 ## Equality monitoring (optional)
 
-Where the organisation collects protected-characteristic data for
+Where the organization collects protected-characteristic data for
 Equality Act 2010 monitoring, those data join the climate analysis only
 where cohort ≥ 10. Special-category data (race, religion, sexual
 orientation, etc.) is processed under UK GDPR Art. 9(2)(b) — employment

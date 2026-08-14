@@ -34,7 +34,7 @@ Implementers SHOULD follow the WHO patient-identification solution:
 ## Medication safety
 
 The Medication Summary is the highest-risk section in an IPS.
-Conformance to ATC/WHO DDD coding and EDQM Standard Terms minimises
+Conformance to ATC/WHO DDD coding and EDQM Standard Terms minimizes
 ambiguity but does not eliminate it. The form enforces, but the
 receiving system MUST also verify, the following:
 

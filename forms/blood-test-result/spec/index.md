@@ -25,7 +25,7 @@ report.
 This form is the laboratory-medicine result counterpart to the repository's
 other clinician-driven result forms (it mirrors the *CT Scan Test Result* gold
 template). It is completed by a pathologist, reporting biomedical or clinical
-scientist, or authorising clinician rather than by the patient, and is aligned
+scientist, or authorizing clinician rather than by the patient, and is aligned
 with the Royal College of Pathologists (RCPath) best-practice recommendations on
 the communication of critical and unexpected pathology results and with UK
 Pathology Harmony consensus reference ranges.

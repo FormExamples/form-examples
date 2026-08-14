@@ -20,7 +20,7 @@ electrodiagnostic practice parameters.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, procedural risk, completeness, and
-  triage are independent and each citable to a recognised body. A request can be
+  triage are independent and each citable to a recognized body. A request can be
   appropriate yet incomplete, or complete yet procedurally risky.
 - **Suspected MND auto-escalates.** A suspected motor-neurone-disease indication
   forces urgent triage regardless of the other axes.

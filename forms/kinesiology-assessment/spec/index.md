@@ -6,7 +6,7 @@ Slug: `kinesiology-assessment`
 
 ## 1. Purpose
 
-Functional movement screening using the FMS (Functional Movement Screen) with 7 standardised movement tests.
+Functional movement screening using the FMS (Functional Movement Screen) with 7 standardized movement tests.
 
 Full design description: [`index.md`](../index.md).
 

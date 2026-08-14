@@ -20,7 +20,7 @@ other clinician-driven result forms. It is completed by a cardiologist, cardiac
 physiologist, or other reporting clinician rather than by the patient, and is
 aligned with the AHA/ACCF/HRS *Recommendations for the Standardization and
 Interpretation of the Electrocardiogram*, the *Fourth Universal Definition of
-Myocardial Infarction* (2018) STEMI criteria, and recognised QTc-prolongation
+Myocardial Infarction* (2018) STEMI criteria, and recognized QTc-prolongation
 thresholds.
 
 ## Scope and intended users
@@ -43,7 +43,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |

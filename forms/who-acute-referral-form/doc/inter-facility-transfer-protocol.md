@@ -26,7 +26,7 @@ their primary facility) uses the Counter-Referral Form.
 
 The initiating clinician must:
 
-1. **Stabilise** — airway secure, breathing supported, circulation
+1. **Stabilize** — airway secure, breathing supported, circulation
    restored, immediate threats addressed. ABCDE complete.
 2. **Communicate** — telephone or radio contact with the receiving
    facility focal point; agreement to accept the patient. Tick the
@@ -63,7 +63,7 @@ Reference: Intensive Care Society / Faculty of Intensive Care Medicine.
   ground time. Consider altitude effects: at 1500 m FiO2 must rise to
   maintain SpO2. ETT cuff pressure rises with altitude — set to 20-25
   cmH2O at sea level and re-check at altitude.
-- **Fixed-wing** — for long-distance transfers; usually pressurised cabin
+- **Fixed-wing** — for long-distance transfers; usually pressurized cabin
   (8000 ft equivalent).
 - **Sea** — coastal and island contexts; motion sickness; saline-spray
   exposure on equipment.

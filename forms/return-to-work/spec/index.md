@@ -6,7 +6,7 @@ Slug: `return-to-work`
 
 ## 1. Purpose
 
-A clinician-issued medical certificate authorising an employee's return to
+A clinician-issued medical certificate authorizing an employee's return to
 work after illness, injury, or extended absence. The form captures the
 clinician's assessment, the period of validity, the patient's fitness
 status, any workplace adjustments or restrictions, and a phased-return

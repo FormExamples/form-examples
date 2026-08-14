@@ -14,7 +14,7 @@ Pre-operative assessment (POA; US: pre-anesthesia evaluation) is the
 structured clinical process, before the day of surgery, that:
 
 1. Identifies medical comorbidities affecting anaesthetic and surgical risk.
-2. Optimises the patient's physiological state before surgery (anaemia,
+2. Optimizes the patient's physiological state before surgery (anaemia,
    diabetes, blood pressure, fitness, smoking, alcohol, nutrition).
 3. Identifies patients needing enhanced post-operative care (HDU/ICU).
 4. Supports shared decision making and informed consent (UK: the
@@ -26,7 +26,7 @@ structured clinical process, before the day of surgery, that:
 CPOC (Centre for Perioperative Care, June 2021 guideline) frames the
 aspiration for every patient by the day of surgery: shared in the decision;
 fully informed of benefits, risks, and alternatives including doing nothing;
-significant comorbidities identified and optimised; modifiable risk factors
+significant comorbidities identified and optimized; modifiable risk factors
 (smoking, inactivity, alcohol, nutrition, psychological preparedness) being
 actively improved; and under active clinical surveillance while waiting —
 the waiting list treated as a **preparation list** ("waiting well").
@@ -35,15 +35,15 @@ the waiting list treated as a **preparation list** ("waiting well").
 
 | Stage | What happens | Who |
 |---|---|---|
-| 0. GP referral | "Fitness for surgery" referral: key diagnoses, medications, recent results, COVID status, optimisation opportunities. Shared decision making starts at the point surgery is *contemplated*. | GP |
+| 0. GP referral | "Fitness for surgery" referral: key diagnoses, medications, recent results, COVID status, optimization opportunities. Shared decision making starts at the point surgery is *contemplated*. | GP |
 | 1. Surgical clinic / Decision To Treat (DTT) | Indication confirmed; risks discussed (BRAN: Benefits, Risks, Alternatives, do Nothing); patient listed. Screening at DTT: comorbidity, frailty, BMI, functional capacity, procedure severity, risk scoring, polypharmacy. | Surgeon |
 | 2. Screening questionnaire | Patient self-assessment health questionnaire at the earliest possible point, ideally digital (ePOA); basis of triage. NHS England mandates digital pre-assessment offers (from Sept 2024); ~25% of patients need completion help. | Patient + care coordinator |
-| 3. Triage | Desk triage (risk tools summarised: DASI, SORT, CFS) then stream into remote / nurse-led face-to-face / anaesthetist-led high-risk clinic. | POA nurse ± coordinator |
+| 3. Triage | Desk triage (risk tools summarized: DASI, SORT, CFS) then stream into remote / nurse-led face-to-face / anaesthetist-led high-risk clinic. | POA nurse ± coordinator |
 | 4. POA clinic visit | Structured history, examination (airway focus), observations, risk scores, investigations per NICE NG45. Every surgical patient gets formal POA **before** the day of admission. | POA nurse ± anaesthetist |
-| 5. Optimisation / prehabilitation | Anaemia correction, diabetes optimisation, BP management, smoking/alcohol cessation, exercise, nutrition, psychology, surgery school; specialist referrals (cardiology, sleep/CPAP, POPS geriatrics, pain team). | MDT |
+| 5. Optimization / prehabilitation | Anaemia correction, diabetes optimization, BP management, smoking/alcohol cessation, exercise, nutrition, psychology, surgery school; specialist referrals (cardiology, sleep/CPAP, POPS geriatrics, pain team). | MDT |
 | 6. Anaesthetic review & sign-off | High-risk patients reviewed by anaesthetist/perioperative physician; anaesthetic plan, post-op destination, treatment escalation plan documented. | Anaesthetist |
 | 7. Scheduling (TCI date) | Date offered only once POA confirms "fit or ready for surgery". NHS Scotland standard: POA ≥12 weeks before the To-Come-In date; POA validity extended to 6 months where safe. | Scheduler |
-| 8. Pre-admission checks | Confirmation call; fasting and medication instructions (anticoagulant holds, SGLT2i, day-of ACEi/ARB omission); MRSA decolonisation if positive; escort arranged for day cases. | POA team |
+| 8. Pre-admission checks | Confirmation call; fasting and medication instructions (anticoagulant holds, SGLT2i, day-of ACEi/ARB omission); MRSA decolonization if positive; escort arranged for day cases. | POA team |
 | 9. Day-of-surgery admission | Ward/day-unit pre-op checklist: identity, consent confirmation, site marking, fasting, VTE assessment, glycaemic check, pregnancy test, jewellery/prostheses, results check. | Ward nurse |
 | 10. Theatre | WHO Surgical Safety Checklist: team brief → **Sign In** (before induction) → **Time Out** (before incision) → **Sign Out** (before leaving theatre) → debrief. In England embedded in NatSSIPs 2 (2023). | Whole theatre team |
 
@@ -57,7 +57,7 @@ the day of surgery; low-severity/low-invasiveness may be assessed on the day.
 ### 3. Triage: who sees whom
 
 - **No comorbidities, digitally comfortable** → online/virtual consultation
-  + protocolised tests only.
+  + protocolized tests only.
 - **Minimal, stable comorbidity** → telephone/video or nurse-led POA.
 - **Moderate–significant comorbidity** → nurse-led face-to-face POA with
   anaesthetic notes review and anaesthetist review as needed.
@@ -131,7 +131,7 @@ Blood Ordering Schedule (MSBOS), MRSA screening swabs, NT-proBNP/BNP for
 elevated cardiac risk (2024 ACC/AHA), CPET for high-risk major surgery.
 
 **Outputs of the visit:** ASA grade, risk scores, SORT mortality estimate,
-optimisation actions and referrals, anaesthetic alerts and plan, post-op
+optimization actions and referrals, anaesthetic alerts and plan, post-op
 destination and expected length of stay, day-case suitability decision,
 patient information, and the basis for informed consent.
 
@@ -228,12 +228,12 @@ specific calculator are the main US tools.
   suppression risk → usual dose plus hydrocortisone cover at induction
   (25–100 mg IV) and post-op taper.
 - **Oestrogens** (COCP/HRT): stop 4 weeks before major surgery with
-  expected immobilisation (VTE); restart after full mobilisation.
+  expected immobilization (VTE); restart after full mobilization.
 - Continue anticonvulsants, Parkinson's drugs, antipsychotics (timing
   critical); lithium stop 24 h before major surgery; MAOIs need a
   specialist plan; DMARDs/biologics per rheumatology.
 
-### 8. Optimisation targets and thresholds
+### 8. Optimization targets and thresholds
 
 - **Anaemia** (CPOC 2025): Hb < 130 g/L (men) / < 120–130 g/L (women)
   triggers investigation (exclude malignancy) whenever expected blood loss
@@ -241,7 +241,7 @@ specific calculator are the main US tools.
   intolerance, inflammation/functional deficiency, or urgent surgery.
   Avoid elective major surgery with uncorrected significant anaemia.
 - **Diabetes** (CPOC 2023): HbA1c > 69 mmol/mol (8.5%) → refer for
-  optimisation before elective surgery; minimise starvation, first on list.
+  optimization before elective surgery; minimize starvation, first on list.
 - **Hypertension** (AAGBI/BHS 2016): proceed if primary-care BP < 160/100
   documented in the past 12 months; without that, proceed if clinic BP
   < 180/110; defer only at ≥ 180/110 (refer to GP — do not treat-to-cancel
@@ -256,12 +256,12 @@ specific calculator are the main US tools.
   7 weeks proceed unless ongoing symptoms.
 - **Prehabilitation**: aerobic exercise priority, resistance training,
   protein/nutrition, psychological preparation; "surgery school" for all
-  major elective patients (DrEaMing: Drinking, Eating, Mobilising).
+  major elective patients (DrEaMing: Drinking, Eating, Mobilizing).
 
 ### 9. Gates — criteria that postpone or cancel surgery
 
 - Clinic BP ≥ 180/110 (Grade 3 hypertension).
-- HbA1c > 69 mmol/mol awaiting optimisation; day-of CBG grossly out of
+- HbA1c > 69 mmol/mol awaiting optimization; day-of CBG grossly out of
   range or ketosis.
 - Recent MI/ACS/stroke (elective: ≥ 6 months post-elective-PCI, ≥ 12
   months post-ACS; risk elevated up to ~9 months post-stroke).
@@ -387,7 +387,7 @@ flags + anaesthesia plan) → WHO checklist handover → anaesthetic record.
 
 - [ ] GP referral includes diagnoses, medications, recent results, BP
       reading from the last 12 months, HbA1c if diabetic, COVID status,
-      and optimisation opportunities ("fitness for surgery" referral).
+      and optimization opportunities ("fitness for surgery" referral).
 - [ ] Shared decision making started (BRAN: Benefits, Risks, Alternatives,
       do Nothing); capacity considered (MCA 2005).
 - [ ] Surgeon confirms indication; Decision To Treat recorded; patient
@@ -402,7 +402,7 @@ flags + anaesthesia plan) → WHO checklist handover → anaesthetic record.
 
 - [ ] Patient completes the self-assessment health questionnaire (digital
       ePOA where possible; assisted completion offered).
-- [ ] Desk triage summarises DASI, SORT, and Clinical Frailty Scale for
+- [ ] Desk triage summarizes DASI, SORT, and Clinical Frailty Scale for
       the POA practitioner.
 - [ ] Stream assigned: remote / nurse-led face-to-face / anaesthetist-led
       high-risk clinic.
@@ -439,11 +439,11 @@ flags + anaesthesia plan) → WHO checklist handover → anaesthetic record.
 - [ ] Day-case suitability decided (functional status + social criteria,
       not ASA/age/BMI alone).
 
-### Stage D — Optimisation (act on findings)
+### Stage D — Optimization (act on findings)
 
 - [ ] Anaemia: Hb below threshold → investigate cause, start oral iron
       (IV if intolerant/inflammation/urgent).
-- [ ] Diabetes: HbA1c > 69 mmol/mol → refer for optimisation; write the
+- [ ] Diabetes: HbA1c > 69 mmol/mol → refer for optimization; write the
       perioperative diabetes plan; schedule first on list.
 - [ ] BP ≥ 180/110 in clinic (and no compliant primary-care reading) →
       refer to GP; otherwise proceed.
@@ -474,7 +474,7 @@ flags + anaesthesia plan) → WHO checklist handover → anaesthetic record.
       and day 0; GLP-1 hold per agent; ACEi/ARB omit day 0; steroids —
       plan hydrocortisone cover; COCP/HRT stopped 4 weeks before major
       surgery.
-- [ ] MRSA-positive patients complete decolonisation.
+- [ ] MRSA-positive patients complete decolonization.
 - [ ] Day-case escort and 24 h home support confirmed.
 - [ ] Waiting patients re-contacted at least every 3 months; health-change
       re-alert process in place.

@@ -18,7 +18,7 @@
       Run with `pnpm test`.
 - [ ] Playwright e2e for the happy path
 - [x] localStorage autosave under key `adr.form.v1`. The store's
-      `enableAutosave()` registers a `$effect` that serialises
+      `enableAutosave()` registers a `$effect` that serializes
       `store.data` to `localStorage` on every change; on construct it
       reads any saved blob via `loadFromStorage()`, merging into
       `emptyAdrFormData()` so additive schema changes are tolerated.

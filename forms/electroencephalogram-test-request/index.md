@@ -29,7 +29,7 @@ and ILAE practice for the role and limitations of EEG.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete or urgent.
 
 | Axis | Instrument | Output |
@@ -51,7 +51,7 @@ epilepticus** auto-escalates urgency to emergency regardless of the other axes.
 | Routine awake | First-line study to support diagnosis and classify seizure type / syndrome |
 | Sleep-deprived | Increases yield of interictal epileptiform discharges when routine EEG non-diagnostic |
 | Ambulatory 24-hour | Outpatient capture of events / interictal discharges over a longer window |
-| Video-telemetry | Inpatient long-term video-EEG to characterise events and classify the syndrome |
+| Video-telemetry | Inpatient long-term video-EEG to characterize events and classify the syndrome |
 
 | Indication | Notes |
 | --- | --- |
@@ -62,7 +62,7 @@ epilepticus** auto-escalates urgency to emergency regardless of the other axes.
 | First seizure | First unprovoked seizure work-up |
 | Funny turns | Differentiate epileptic from non-epileptic events |
 | Dementia | Selected cognitive / encephalopathic presentations |
-| Pre-surgical evaluation | Localisation for epilepsy surgery work-up |
+| Pre-surgical evaluation | Localization for epilepsy surgery work-up |
 | Medication review | Antiepileptic drug withdrawal / treatment decisions |
 
 ## Wizard steps

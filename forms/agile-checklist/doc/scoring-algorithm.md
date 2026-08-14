@@ -49,7 +49,7 @@ When `overallPercent` is null, `maturity = insufficient-data` and the
 
 | Maturity | `overallPercent` | Description |
 | --- | --- | --- |
-| Optimising | ≥ 90 % | Agile behaviours are pervasive; team continuously inspects and adapts |
+| Optimizing | ≥ 90 % | Agile behaviours are pervasive; team continuously inspects and adapts |
 | Mature | 75 – 89 % | High adoption with deliberate refinement; few weak sections |
 | Developing | 50 – 74 % | Practices in place but uneven; one or two weak sections |
 | Initial | 25 – 49 % | Partial adoption; multiple weak sections; coaching needed |

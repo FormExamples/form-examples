@@ -15,9 +15,9 @@ from clock-start to first definitive treatment for non-urgent referrals.
 A patient still on the list at **52 weeks** is a *long waiter* and is
 subject to mandatory harm-review and patient-contact processes.
 
-## NHS England Clinical Prioritisation
+## NHS England Clinical Prioritization
 
-NHS England's clinical prioritisation framework (introduced during the
+NHS England's clinical prioritization framework (introduced during the
 COVID-19 elective recovery programme and retained for ongoing use) sets
 maximum permitted waits by priority:
 

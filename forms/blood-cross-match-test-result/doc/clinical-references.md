@@ -59,7 +59,7 @@ follow-up urgency.
 
 Serious Hazards of Transfusion (SHOT) annual reports document that
 **ABO-incompatible red cell transfusion** can lead to severe haemolysis and
-death, and is recognised as a **never event**. **Wrong Blood in Tube (WBIT)** —
+death, and is recognized as a **never event**. **Wrong Blood in Tube (WBIT)** —
 where the blood in the tube is not that of the patient identified on the label —
 is a leading cause; near-miss reporting has demonstrated hundreds of WBIT
 instances that could have caused ABO-incompatible transfusion. SHOT identifies

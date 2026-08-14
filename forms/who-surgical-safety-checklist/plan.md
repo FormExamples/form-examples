@@ -57,7 +57,7 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 - [ ] Author `back-end-with-loco-setup` script with the
       `cargo loco generate scaffold` invocations for each table.
 - [ ] Run the setup script to generate the application.
-- [ ] Customise templates with HTMX + Alpine.js for the three-phase wizard.
+- [ ] Customize templates with HTMX + Alpine.js for the three-phase wizard.
 
 ## Phase 9 — Verification
 

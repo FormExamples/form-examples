@@ -1,6 +1,6 @@
 # Endocrinology Assessment
 
-General endocrinology consultation assessment covering the thyroid, adrenal, glucose, reproductive, pituitary, and bone/calcium axes, integrating symptom review, clinical examination, and laboratory findings to characterise endocrine disturbance and guide management.
+General endocrinology consultation assessment covering the thyroid, adrenal, glucose, reproductive, pituitary, and bone/calcium axes, integrating symptom review, clinical examination, and laboratory findings to characterize endocrine disturbance and guide management.
 
 ## Directory structure
 

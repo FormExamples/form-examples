@@ -34,7 +34,7 @@ screening and triggers nutritional-support decisions is **Class IIa**.
 
 ## Out of scope
 
-- The form does **not** compute individualised tube-feed formulas; it
+- The form does **not** compute individualized tube-feed formulas; it
   records the regimen prescribed by the dietitian.
 - The form does **not** diagnose coeliac disease or food allergy; it
   records existing diagnoses and triggers onward referral.

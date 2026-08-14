@@ -30,7 +30,7 @@
 
 - `GET /` — render the 14-step single-page wizard
 - `POST /assessment` — persist a draft
-- `POST /assessment/{id}/submit` — finalise and run grading engine
+- `POST /assessment/{id}/submit` — finalize and run grading engine
 - `GET /assessment/{id}` — render the read-only report
 
 ## Phase 3 — Grading engine (Rust port)

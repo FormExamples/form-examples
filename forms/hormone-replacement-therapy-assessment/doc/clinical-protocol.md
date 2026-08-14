@@ -53,7 +53,7 @@ Operational protocol for the HRT assessment.
 
 ## Onward referrals
 
-- Persistent symptoms despite optimised HRT → menopause specialist /
+- Persistent symptoms despite optimized HRT → menopause specialist /
   British Menopause Society accredited practitioner.
 - Unscheduled bleeding > 6 months on continuous HRT → 2-week-wait
   pathway.

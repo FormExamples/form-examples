@@ -48,8 +48,8 @@ audits **behaviours** (concrete observable practices) rather than
 the people doing the work (Teams), the people sponsoring the work
 (Stakeholders), and the operating practices (Practices) that bind
 them. The two forms are complementary: principles tell you what an
-organisation *aspires to*; the checklist tells you what an
-organisation *does*.
+organization *aspires to*; the checklist tells you what an
+organization *does*.
 
 ## Open questions
 

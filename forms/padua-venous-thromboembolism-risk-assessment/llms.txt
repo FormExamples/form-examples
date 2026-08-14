@@ -1,6 +1,6 @@
 # Padua Venous Thromboembolism Risk Assessment (Padua Prediction Score)
 
-> A bedside risk-stratification tool that estimates the risk of venous thromboembolism (VTE — deep-vein thrombosis and pulmonary embolism) in hospitalised **medical** patients. It records **eleven weighted risk factors**, sums a total of **0–20**, and classifies the patient as **high risk** when the score is **≥ 4** and **low risk** when the score is **< 4**. A high score is a prompt to consider **pharmacological thromboprophylaxis** (in the absence of contraindications such as active bleeding or high bleeding risk); a low score supports withholding routine anticoagulant prophylaxis and using mechanical measures and early mobilisation.
+> A bedside risk-stratification tool that estimates the risk of venous thromboembolism (VTE — deep-vein thrombosis and pulmonary embolism) in hospitalized **medical** patients. It records **eleven weighted risk factors**, sums a total of **0–20**, and classifies the patient as **high risk** when the score is **≥ 4** and **low risk** when the score is **< 4**. A high score is a prompt to consider **pharmacological thromboprophylaxis** (in the absence of contraindications such as active bleeding or high bleeding risk); a low score supports withholding routine anticoagulant prophylaxis and using mechanical measures and early mobilization.
 
 ## Docs
 

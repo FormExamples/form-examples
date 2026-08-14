@@ -41,7 +41,7 @@ temporal pattern of behavioural and psychological symptoms of dementia
 
 - Bellelli, G., Morandi, A., Davis, D. H. J., et al. (2014). Validation
   of the 4AT, a new instrument for rapid delirium screening: a study in
-  234 hospitalised older people. *Age and Ageing*, 43(4), 496–502.
+  234 hospitalized older people. *Age and Ageing*, 43(4), 496–502.
   DOI: https://doi.org/10.1093/ageing/afu021
   PubMed ID: 24590568
 

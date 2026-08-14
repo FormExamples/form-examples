@@ -1,10 +1,10 @@
 # Agile Checklist — Agent Instructions
 
-Self-assessment that audits **57 concrete agile behaviours** organised
+Self-assessment that audits **57 concrete agile behaviours** organized
 in three sections (Teams, Stakeholders, Practices). Each item is
 answered **yes / no / not-applicable**. The engine computes a
 per-section percentage of "yes" answers, a composite maturity level
-(Ad-hoc / Initial / Developing / Mature / Optimising), fired
+(Ad-hoc / Initial / Developing / Mature / Optimizing), fired
 per-section rules, and operational flags (autonomy risk, trust risk,
 discipline risk, finished-work risk, etc.).
 

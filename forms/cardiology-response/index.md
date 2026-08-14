@@ -41,7 +41,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each response on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured response can
+recognized body. Axes are orthogonal: a complete, well-structured response can
 still describe a critical finding.
 
 | Axis | Instrument | Output |

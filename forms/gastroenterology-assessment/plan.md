@@ -14,7 +14,7 @@ The GI Symptom Severity Score evaluates gastrointestinal symptoms across upper G
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - Add backend database migrations and seed data
 - Clinical safety case documentation
 - User acceptance testing with clinical staff

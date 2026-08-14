@@ -1,13 +1,13 @@
 # WHO Counter-Referral Form
 
-World Health Organization standardised counter-referral form for discharging patients back from a referral facility to their primary care facility.
+World Health Organization standardized counter-referral form for discharging patients back from a referral facility to their primary care facility.
 
 This single-page form documents the counter-referral (discharge back) of a patient from a referral facility to the initiating or primary care facility. It follows the SBAR communication framework and captures patient identification, facility details, communication about patient care, follow-up timeframe, situation including treatments initiated during stay (ICU, surgery, hospitalization), background with history and investigation results, assessment with diagnoses and prognosis, and recommendations for follow-up care.
 
 ## Source
 
 - **Form**: Counter-Referral Form
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/ect/counter-referral-form.pdf?sfvrsn=d56d08c9_2>
 - **Pages**: 1
 

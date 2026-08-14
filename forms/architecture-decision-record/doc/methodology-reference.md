@@ -19,7 +19,7 @@ The community-maintained reference is **adr.github.io**:
 <https://adr.github.io/>
 
 It lists multiple template variants, tooling (`adr-tools`, `log4brains`,
-`adr-manager`, etc.), and case studies. The GitHub organisation
+`adr-manager`, etc.), and case studies. The GitHub organization
 "joelparkerhenderson/architecture-decision-record" provides a popular
 template library mirrored at
 <https://github.com/joelparkerhenderson/architecture-decision-record>.
@@ -31,7 +31,7 @@ A Nygard ADR contains:
 1. **Title** — short noun phrase; numbered (e.g. `0001-record-architecture-decisions`).
 2. **Status** — proposed, accepted, deprecated, superseded by [link].
 3. **Context** — the forces in play: technological, political,
-   organisational, business.
+   organizational, business.
 4. **Decision** — the decision and its justification.
 5. **Consequences** — positive, negative, and neutral outcomes.
 
@@ -69,7 +69,7 @@ model.
 
 The arc42 architecture template includes a dedicated section **9.
 Architectural Decisions**. arc42 recommends maintaining the bulk of
-decisions as ADRs and only summarising the most architecturally
+decisions as ADRs and only summarizing the most architecturally
 significant in section 9.
 
 - arc42 home: <https://arc42.org/>

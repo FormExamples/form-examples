@@ -1,6 +1,6 @@
 # Medical Records Release Permission
 
-> Authorisation form for releasing medical records, validated for completeness of patient consent and recipient information.
+> Authorization form for releasing medical records, validated for completeness of patient consent and recipient information.
 
 ## Docs
 

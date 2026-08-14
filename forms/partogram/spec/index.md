@@ -25,7 +25,7 @@ progress / flag engine, two consolidated front-ends (`front-end-with-html`,
 `front-end-with-svelte`), the Rust Loco JSON-API crate, and the generated
 representations (XML, FHIR R5, protobuf, OpenAPI). Out of scope: hosted
 deployment, authentication, multi-tenancy, cardiotocography interpretation,
-antenatal risk scoring, and the individualised WHO Labour Care Guide reference
+antenatal risk scoring, and the individualized WHO Labour Care Guide reference
 ranges (the classic fixed alert / action lines are used).
 
 ## 3. Data model

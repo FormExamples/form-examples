@@ -14,7 +14,7 @@ non-ST-elevation myocardial infarction (NSTEMI). It records seven clinical
 criteria, awards 1 point for each present, and produces a total TIMI score of
 0–7 with a risk band (0–1 low, 2–4 intermediate, 5–7 high). The total maps to
 the 14-day risk of the composite end point: all-cause death, new/recurrent MI,
-or severe recurrent ischaemia requiring urgent revascularisation. It is a
+or severe recurrent ischaemia requiring urgent revascularization. It is a
 prognostic and therapeutic-decision aid, not a diagnostic test. A separate TIMI
 STEMI score exists; this form is the UA/NSTEMI version only.
 
@@ -90,7 +90,7 @@ riskBand  = timiScore <= 1 ? 'low'
           :                  'high'
 ```
 
-**14-day event risk** (composite of death, MI, urgent revascularisation) is
+**14-day event risk** (composite of death, MI, urgent revascularization) is
 looked up from the derivation cohort by score:
 
 | Score | 0 | 1 | 2 | 3 | 4 | 5 | 6–7 |

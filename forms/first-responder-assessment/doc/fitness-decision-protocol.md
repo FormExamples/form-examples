@@ -96,7 +96,7 @@ references used by NHS trusts and adopted in this form:
   ≥10 prompts clinical review. Kroenke K, Spitzer RL, Williams JBW.
   *The PHQ-9: validity of a brief depression severity measure.* J Gen
   Intern Med. 2001;16(9):606-13. PMID: 11556941.
-- **GAD-7** (Generalised Anxiety Disorder 7-item) — anxiety screening;
+- **GAD-7** (Generalized Anxiety Disorder 7-item) — anxiety screening;
   score ≥10 prompts clinical review. Spitzer RL, Kroenke K, Williams JBW,
   Löwe B. Arch Intern Med. 2006;166(10):1092-7. PMID: 16717171.
 - **PCL-5** (PTSD Checklist for DSM-5) — PTSD screening; score ≥33

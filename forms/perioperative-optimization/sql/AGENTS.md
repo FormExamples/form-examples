@@ -11,7 +11,7 @@ column.
 `perioperative_optimization_grade` references
 `perioperative_optimization(id) ON DELETE CASCADE` with a UNIQUE constraint on
 the foreign key to enforce 1:1. Its two children are 1:many:
-`_grade_domain` holds one row per optimisation domain (the primary output of
+`_grade_domain` holds one row per optimization domain (the primary output of
 this form, not a by-product), and `_grade_flag` holds the safety flags.
 
 See root [`AGENTS/sql.md`](../../../AGENTS/sql.md) for the full conventions.

@@ -51,25 +51,25 @@ and [`spec/index.md`](./spec/index.md) for the living domain spec.
   the points are summed into a total, which is read against the in-hospital
   (≤108 / 109–140 / >140) and 6-month (≤88 / 89–118 / >118) mortality bands. The
   overall `riskCategory` is the worse of the two (max-band rule). Serum
-  creatinine is normalised to mg/dL (µmol/L ÷ 88.4) before banding. A missing
+  creatinine is normalized to mg/dL (µmol/L ÷ 88.4) before banding. A missing
   numeric input contributes 0 points and raises a data-completeness flag.
 - **Engine files:** `types.ts`, `utils.ts`, `grace-rules.ts`, `grace-grader.ts`,
   `flagged-issues.ts`.
   - `grace-rules.ts` holds the named per-band point lookup tables (age, heart
     rate, systolic BP, creatinine, Killip, and the three yes/no contributors)
     plus the mortality-band thresholds.
-  - `utils.ts` holds creatinine unit normalisation and band-lookup helpers.
+  - `utils.ts` holds creatinine unit normalization and band-lookup helpers.
 - **Tests:** `grace-grader.test.ts`, `grace-rules.test.ts` — cover each band
   boundary (age, heart rate, systolic BP, creatinine; Killip I–IV; each yes/no
   contributor), the mortality-band boundaries (108/109, 140/141, 88/89,
-  118/119), creatinine unit normalisation, and the max-band rule.
+  118/119), creatinine unit normalization, and the max-band rule.
 
 ## Flagged issues
 
 Computed independently of the total (see spec §5): high-risk category
 (`riskCategory == 'high'`, high), cardiac arrest at admission (high), Killip
 class ≥ II (high), hypotension (`systolicBloodPressure < 90`, high), renal
-impairment (normalised creatinine ≥ 2.0 mg/dL, medium), ST-segment deviation
+impairment (normalized creatinine ≥ 2.0 mg/dL, medium), ST-segment deviation
 (medium), incomplete assessment (any GRACE variable input missing, low).
 
 ## Conventions
@@ -79,7 +79,7 @@ impairment (normalised creatinine ≥ 2.0 mg/dL, medium), ST-segment deviation
 - camelCase property names in TypeScript and front-end Rust serde.
 - snake_case in SQL and Rust internals.
 - Serum creatinine stores both the raw value and the entered unit; scoring
-  normalises to mg/dL.
+  normalizes to mg/dL.
 - Step components named `StepNName.svelte` (1-indexed).
 - UI components in `src/lib/components/ui/`.
 - `serde(rename_all = "camelCase")` on Rust structs shared with the front-end.

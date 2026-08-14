@@ -78,5 +78,5 @@ record include:
 - **RxNorm** (US) / **dm+d** (UK) — medications.
   - RxNorm: <https://www.nlm.nih.gov/research/umls/rxnorm/>
   - dm+d: <https://services.nhsbsa.nhs.uk/dmd-browser/>
-- **CVX** — vaccine codes (US CDC) when capturing immunisation
+- **CVX** — vaccine codes (US CDC) when capturing immunization
   history. <https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp>

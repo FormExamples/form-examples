@@ -25,7 +25,7 @@ the programme-specific schedules in the same Code.
 | Lawful basis cited in notice is amended | Art. 13(1)(c) basis changed |
 | Statutory instrument cited is amended | Art. 13(1)(c) basis changed |
 | Patient registers with the practice | Art. 13 trigger |
-| Practice-customisable `practice_config` block is updated | Art. 13 trigger |
+| Practice-customizable `practice_config` block is updated | Art. 13 trigger |
 
 The dashboard emits `flag_acknowledgment_outdated` when the patient's
 acknowledgment version differs from the current notice version.

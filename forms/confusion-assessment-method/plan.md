@@ -11,7 +11,7 @@ reference notes remain outstanding.
 
 ## Why this form exists
 
-Delirium is common, dangerous, and under-recognised in older and critically ill
+Delirium is common, dangerous, and under-recognized in older and critically ill
 inpatients — especially the quiet **hypoactive** subtype. The Confusion
 Assessment Method gives non-psychiatric clinicians a fast, validated, bedside
 way to detect it. This form captures the four CAM features and applies the
@@ -40,11 +40,11 @@ The classification engine evaluates four present / absent features:
 
 1. Acute onset and fluctuating course.
 2. Inattention.
-3. Disorganised thinking.
+3. Disorganized thinking.
 4. Altered level of consciousness.
 
 and computes `deliriumPresent = 1 AND 2 AND (3 OR 4)`. It returns the
-classification, the positive-feature set, the motoric subtype, and a prioritised
+classification, the positive-feature set, the motoric subtype, and a prioritized
 flagged-issue list. For CAM-ICU, an unrousable patient (RASS −4/−5) short-circuits
 to `unableToAssess`.
 

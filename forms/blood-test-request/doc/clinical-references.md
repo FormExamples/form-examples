@@ -11,7 +11,7 @@ inputs:
 1. **Retesting-interval appropriateness** — was a requested test ordered inside
    its RCPath / ACB *National Minimum Retesting Interval* (MRI)? Repeating a
    stable test inside its MRI is low-value and lowers the score.
-2. **Indication match** — does a recognised clinical indication justify the
+2. **Indication match** — does a recognized clinical indication justify the
    selected panels (e.g. ferritin/iron for anaemia; lipid profile for
    cardiovascular-risk; INR for anticoagulation-monitoring)?
 

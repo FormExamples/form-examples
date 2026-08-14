@@ -1,4 +1,4 @@
-# Optimisation domains
+# Optimization domains
 
 The eight domains, their triggers, their interventions, and their lead times.
 This table is the clinical justification for `DOMAIN_DEFINITIONS` in the engine;
@@ -43,7 +43,7 @@ see `plan.md` §Risks.
 
 | Rule ID | Predicate | Finding |
 | --- | --- | --- |
-| `R-GLYC-1` | `hba1c_mmol_per_mol >= 48` | glycaemia above the optimisation threshold |
+| `R-GLYC-1` | `hba1c_mmol_per_mol >= 48` | glycaemia above the optimization threshold |
 | `R-GLYC-2` | `hba1c_mmol_per_mol >= 69` | above the CPOC deferral threshold (8.5 %) — forces `defer-surgery` and a high-priority flag |
 | `R-GLYC-3` | `hba1c_mmol_per_mol >= 48` and `diabetes_type = none` | previously undiagnosed diabetes — flag and refer |
 
@@ -65,7 +65,7 @@ SGLT2 inhibitors and GLP-1 agonists are in
 **Lead time: 4 weeks.** Shorter periods still help wound healing, but four weeks
 is the point at which respiratory complication rates fall measurably. Stopping
 at any time before surgery is beneficial; the engine never discourages a late
-quit attempt, it only reports that the four-week benefit will not be realised.
+quit attempt, it only reports that the four-week benefit will not be realized.
 
 | Rule ID | Predicate | Finding |
 | --- | --- | --- |
@@ -181,7 +181,7 @@ longer. Four weeks is the planning default.
 
 The 180/110 threshold is the NICE NG45 / perioperative convention for deferring
 elective surgery on blood pressure alone; lower readings are treated as ordinary
-optimisation rather than a gate.
+optimization rather than a gate.
 
 Intervention: specialty referral, antihypertensive review, inhaler technique and
 adherence review, rescue steroids, spirometry, sleep study, echocardiogram.
@@ -192,7 +192,7 @@ adherence review, rescue steroids, spirometry, sleep study, echocardiogram.
 
 **Frailty, cognition, and falls** (step 12) and **psychological readiness and
 social support** (step 14) are assessed, reported, and can raise safety flags,
-but are not optimisation domains: they are rarely reversible in a
+but are not optimization domains: they are rarely reversible in a
 weeks-long window, and treating them as gates would generate `defer-surgery`
 results the team cannot act on. They modify the plan instead — a Clinical
 Frailty Scale of 7 changes what prehabilitation looks like and what shared

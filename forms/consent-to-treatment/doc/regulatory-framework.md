@@ -61,7 +61,7 @@ be likely to attach significance to it."
 - GMC *Treatment and Care Towards the End of Life* —
   <https://www.gmc-uk.org/professional-standards/professional-standards-for-doctors/end-of-life-care>
 
-The 2020 GMC guidance organises consent around seven decision-making
+The 2020 GMC guidance organizes consent around seven decision-making
 principles, all of which are reflected in the form's eight wizard steps.
 
 ## Special category data — UK GDPR

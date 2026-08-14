@@ -18,7 +18,7 @@ conventions.
 | 02 | `02_create_table_hospital_dashboard_metrics.sql` | one row per reporting period: hospital/site, period month/year, prepared-by, sign-off |
 | 03 | `03_create_table_hospital_dashboard_metric_value.sql` | one row per recorded metric (of 67); FK to the parent period |
 
-## Why a normalised child table, not one wide row
+## Why a normalized child table, not one wide row
 
 67 metrics would need well over 130 flat columns (value + notes each)
 on a single submission table. Instead, `hospital_dashboard_metric_value`

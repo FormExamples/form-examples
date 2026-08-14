@@ -28,7 +28,7 @@ For NHS research and planning, the canonical bases are:
 - UK GDPR Article 6(1)(e) — task carried out in the public interest.
 - UK GDPR Article 9(2)(j) — processing necessary for archiving, scientific
   or historical research, or statistical purposes, in accordance with
-  Article 89(1) and authorised by UK law.
+  Article 89(1) and authorized by UK law.
 - UK GDPR Article 9(2)(h) — provision of health care, where the planning
   flow is necessary to commission or audit a service.
 
@@ -38,7 +38,7 @@ government purposes) and 4 (research, statistics etc).
 ## Common-law duty and s.251 support
 
 The common-law duty of confidentiality cannot be discharged by UK GDPR
-alone. For non-anonymised research and planning flows, the controller
+alone. For non-anonymized research and planning flows, the controller
 typically relies on:
 
 - Explicit patient consent under the Common Law (and Article 6(1)(a) /
@@ -62,8 +62,8 @@ beyond their direct care.
 
 Where the patient has opted out, the controller must suppress the
 patient's data from the relevant flow unless an exemption applies (for
-example, statutory disclosure under another instrument, or anonymisation
-to the standard of the ICO anonymisation code).
+example, statutory disclosure under another instrument, or anonymization
+to the standard of the ICO anonymization code).
 
 ## Patient choice in this form
 
@@ -79,14 +79,14 @@ The opt-out preference is propagated to the practice's Type 2 / national
 opt-out register; the form does not itself implement suppression in
 downstream flows.
 
-## Anonymisation
+## Anonymization
 
-Where data can be effectively anonymised to the standard of the ICO
-Anonymisation Code, the resulting dataset falls outside UK GDPR and the
-patient's opt-out is not engaged. The form's dashboard does not anonymise;
+Where data can be effectively anonymized to the standard of the ICO
+Anonymization Code, the resulting dataset falls outside UK GDPR and the
+patient's opt-out is not engaged. The form's dashboard does not anonymize;
 the controller must apply the code separately.
 
-ICO Anonymisation, pseudonymisation and privacy enhancing technologies
+ICO Anonymization, pseudonymization and privacy enhancing technologies
 guidance:
 <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/anonymisation-pseudonymisation-and-privacy-enhancing-technologies/>
 

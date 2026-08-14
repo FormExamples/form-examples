@@ -1,6 +1,6 @@
 # WHO Counter-Referral Form
 
-This form implements the WHO standardised counter-referral form for
+This form implements the WHO standardized counter-referral form for
 discharging patients back from a referral facility to their primary care
 facility (or to the initiating facility that referred them). It is the
 return complement to the WHO Acute Referral Form.
@@ -41,7 +41,7 @@ around **SBAR**:
 
 | SBAR | Form section |
 | --- | --- |
-| **S**ituation | Chief complaint, primary diagnosis, treatments initiated, ICU/surgery/hospitalised flags |
+| **S**ituation | Chief complaint, primary diagnosis, treatments initiated, ICU/surgery/hospitalized flags |
 | **B**ackground | History of present illness, past medical history, significant investigations and events |
 | **A**ssessment | Final diagnoses / problem list, prognosis, goals of care, patient / family informed |
 | **R**ecommendations | Follow-up plan, pending investigations, follow-up arrangements, deterioration instructions |
@@ -80,8 +80,8 @@ Four bands captured for the urgency of primary-care follow-up:
 | Band | Typical conditions |
 | --- | --- |
 | **Urgent** (within 24 hours) | Post-discharge sepsis, recent acute coronary syndrome, recent stroke, decompensated heart failure, anticoagulant initiation, severe asthma exacerbation, post-deliberate self-harm |
-| **2-6 days** | Hospitalisation for moderate exacerbation, post-procedural review, new diabetes diagnosis |
-| **1-2 weeks** | Routine post-hospitalisation review, stable chronic-disease follow-up |
+| **2-6 days** | Hospitalization for moderate exacerbation, post-procedural review, new diabetes diagnosis |
+| **1-2 weeks** | Routine post-hospitalization review, stable chronic-disease follow-up |
 | **>2 weeks** | Long-term review, low-acuity discharges |
 
 ## Status flags
@@ -105,7 +105,7 @@ affect ongoing care:
 The form prompts the referral facility to list any investigation results
 still pending at the time of discharge (e.g. histology, microbiology
 final report) and to specify who will action them. Failing to action
-pending results is a recognised source of avoidable patient harm — see
+pending results is a recognized source of avoidable patient harm — see
 the WHO patient-safety curriculum and the UK General Medical Council
 *Good medical practice* duties.
 

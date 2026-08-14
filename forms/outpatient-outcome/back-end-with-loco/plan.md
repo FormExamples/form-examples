@@ -6,6 +6,6 @@ Empty scaffold with `fn main() {}` and required `templates/base.html.tera`. Impl
 
 ## Future work
 
-- Initialise with `cargo loco new` once the tooling stabilises in this repo
+- Initialize with `cargo loco new` once the tooling stabilizes in this repo
 - Generate entities using the Loco scaffold setup script
 - Implement controllers, views, routes

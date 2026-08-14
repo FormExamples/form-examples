@@ -13,7 +13,7 @@ The British Society of Gastroenterology (BSG), the Association of Coloproctology
 of Great Britain and Ireland (ACPGBI), and the Joint Advisory Group on
 Gastrointestinal Endoscopy (JAG) define the UK key performance indicators (KPIs)
 and quality-assurance standards for colonoscopy. These standards exist to ensure
-high-quality procedures and to minimise the risk of missed pathology and interval
+high-quality procedures and to minimize the risk of missed pathology and interval
 cancers.
 
 Key indicators relevant to this form:

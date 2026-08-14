@@ -1,6 +1,6 @@
 # MEDIF — SvelteKit front-end wizard
 
-SvelteKit 2.x + Svelte 5 runes single-page wizard that digitises the Medical
+SvelteKit 2.x + Svelte 5 runes single-page wizard that digitizes the Medical
 Information Form for Air Travel (MEDIF). Fourteen sections on one continuous
 scrolling page collect the submitting agent, the passenger, trip details,
 the attending physician's clinical evaluation, and the requested in-flight

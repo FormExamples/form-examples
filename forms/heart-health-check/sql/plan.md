@@ -2,7 +2,7 @@
 
 ## Current status
 
-Implemented. 15 migration files creating normalised relational schema with UUID keys, timestamp tracking, CHECK constraints, and comments.
+Implemented. 15 migration files creating normalized relational schema with UUID keys, timestamp tracking, CHECK constraints, and comments.
 
 ## Future enhancements
 

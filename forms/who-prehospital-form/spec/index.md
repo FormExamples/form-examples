@@ -6,7 +6,7 @@ Slug: `who-prehospital-form`
 
 ## 1. Purpose
 
-World Health Organization standardised prehospital clinical documentation form for emergency medical services.
+World Health Organization standardized prehospital clinical documentation form for emergency medical services.
 
 This two-page form captures comprehensive prehospital assessment data including caller/patient identification, initial vital signs, high risk signs, triage category, ABCDE primary survey with detailed clinical findings and interventions, SAMPLE history, injury details, physical exam, additional interventions, reassessments, presumptive diagnoses, and disposition/handover. Designed for use with the WHO Reference Card.
 

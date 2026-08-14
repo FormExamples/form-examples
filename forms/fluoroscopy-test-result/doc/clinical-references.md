@@ -81,7 +81,7 @@ indicated).
 
 ## Dose context
 
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification and dose audit; fluoroscopy screening time recorded per study).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 

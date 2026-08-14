@@ -40,7 +40,7 @@ Sources:
 
 ## Structured reporting and terminology
 
-### SCORE — Standardised Computer-based Organised Reporting of EEG
+### SCORE — Standardized Computer-based Organized Reporting of EEG
 
 Interobserver agreement in EEG interpretation is only moderate, partly because
 findings are commonly reported in free-text format. The SCORE framework lets the

@@ -81,7 +81,7 @@ The form records:
 | Signal | Effect |
 | --- | --- |
 | Acknowledgment checkbox | Satisfies Art. 13 transparency duty |
-| Practice-customisable practice / DPO / research recipient block | Tailors the notice to the local provider |
+| Practice-customizable practice / DPO / research recipient block | Tailors the notice to the local provider |
 | Full name + date | Audit trail |
 
 ## Professional standards

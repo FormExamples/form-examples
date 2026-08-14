@@ -216,7 +216,7 @@ united-kingdom-lasting-power-of-attorney-for-financial-decisions/
 - The Lasting Powers of Attorney, Enduring Powers of Attorney and Public
   Guardian Regulations 2007 (SI 2007/1253), as amended.
 - Mental Capacity Act 2005 Code of Practice (TSO 2007).
-- Powers of Attorney Act 2023, c. 22 (modernisation of registration —
+- Powers of Attorney Act 2023, c. 22 (modernization of registration —
   partially in force).
 - Office of the Public Guardian — *Making and registering your lasting
   power of attorney: a guide* (LP12, August 2025).

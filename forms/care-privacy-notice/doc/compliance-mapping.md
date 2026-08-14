@@ -28,7 +28,7 @@ ICO Article 13 guidance:
 ## Special-category basis (Article 9)
 
 - Art. 9(2)(h) — provision of health or social care.
-- Authorised under UK law by DPA 2018 Schedule 1 Part 1 paragraph 2 —
+- Authorized under UK law by DPA 2018 Schedule 1 Part 1 paragraph 2 —
   <https://www.legislation.gov.uk/ukpga/2018/12/schedule/1>
 - The controller therefore relies on an Appropriate Policy Document (APD)
   per DPA 2018 Schedule 1 paragraphs 38–40. The APD is held separately by
@@ -37,7 +37,7 @@ ICO Article 13 guidance:
 ## Common-law duty of confidentiality
 
 The notice articulates that NHS data is shared **for direct care** under
-the implied authority of the patient as recognised by the NHS
+the implied authority of the patient as recognized by the NHS
 Confidentiality Code of Practice. Sharing for other purposes (research,
 planning, screening) is the subject of separate notices in this monorepo
 (`research-and-planning-privacy-notice`, `screening-program-privacy-notice`)

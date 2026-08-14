@@ -29,13 +29,13 @@ and increased accident and sickness-absence rates:
 2. **Control** — how much say the person has in the way they do their
    work.
 3. **Support** — encouragement, sponsorship, and resources provided by
-   the organisation, line management, and colleagues.
+   the organization, line management, and colleagues.
 4. **Relationships** — promoting positive working to avoid conflict and
    dealing with unacceptable behaviour.
 5. **Role** — whether people understand their role within the
-   organisation and whether the organisation ensures the person does
+   organization and whether the organization ensures the person does
    not have conflicting roles.
-6. **Change** — how organisational change is managed and communicated.
+6. **Change** — how organizational change is managed and communicated.
 
 Authoritative source:
 - HSE — Tackling work-related stress using the Management Standards

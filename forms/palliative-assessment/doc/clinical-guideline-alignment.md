@@ -18,12 +18,12 @@ informed the field set and rule catalogue.
 | CKS | Clinical Knowledge Summaries — Palliative care | https://cks.nice.org.uk/specialities/palliative-care-general-issues |
 
 The form's goals-of-care fields on Step 5 are aligned to the NG142 §
-1.4 recommendations on individualised care planning.
+1.4 recommendations on individualized care planning.
 
 NG31 *Care of dying adults in the last days of life* (2015) replaces the
 Liverpool Care Pathway, which was withdrawn following the 2013
 *More Care, Less Pathway* (Neuberger) review. The fields on Steps 5, 6,
-and 9 reflect the NG31 emphasis on individualised assessment and shared
+and 9 reflect the NG31 emphasis on individualized assessment and shared
 decision-making rather than a single end-of-life "pathway".
 
 ## WHO

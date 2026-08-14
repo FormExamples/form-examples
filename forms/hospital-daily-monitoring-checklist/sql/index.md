@@ -18,7 +18,7 @@ conventions.
 | 02 | `02_create_table_hospital_daily_monitoring_checklist.sql` | one row per inspection round: hospital/site, inspecting officer, sign-off notes |
 | 03 | `03_create_table_hospital_daily_monitoring_checklist_item.sql` | one row per answered checkpoint (of 97); FK to the parent round |
 
-## Why a normalised child table, not one wide row
+## Why a normalized child table, not one wide row
 
 `agile-checklist` (57 items) stores one named column per item on the
 submission table. This form has 97 checkpoints across 22 areas; a flat

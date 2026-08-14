@@ -13,7 +13,7 @@ When adding new reference material:
 - When citing a FHIR resource, link to the R5 page on `hl7.org/fhir/R5/`.
 - When introducing a numeric threshold (e.g. anisometropia 2.00 D), cite
   the source and the rationale.
-- Use British English spelling (colour, optimise, paediatric) throughout.
+- Use British English spelling (colour, optimize, paediatric) throughout.
 
 ## File map
 

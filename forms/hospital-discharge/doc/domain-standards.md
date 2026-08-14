@@ -5,7 +5,7 @@
 The UK **Professional Record Standards Body (PRSB)** publishes the
 *eDischarge Summary Standard*, the canonical record-structure standard
 for NHS inpatient discharge summaries. NHS Digital adopted it as the
-basis for the *Transfer of Care* standardisation programme; it is the
+basis for the *Transfer of Care* standardization programme; it is the
 upstream source for the field set used by this form.
 
 - PRSB *eDischarge summary standard*.
@@ -28,7 +28,7 @@ are:
 - Medications and medical devices
 - Allergies and adverse reactions
 - Plan and requested actions (community / GP follow-up)
-- Information given to patient and authorised representatives
+- Information given to patient and authorized representatives
 - Person completing record
 
 This form's 10 steps map onto these PRSB headings; the *Warning Signs

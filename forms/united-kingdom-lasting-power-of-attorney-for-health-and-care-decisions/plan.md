@@ -60,7 +60,7 @@ Six rule families run in parallel:
   certificate provider signed before all attorneys; witness identity
   excludes attorneys.
 - **Instruction rules** — lawfulness, possibility, no contradiction with
-  a known ADRT, no authorisation of prohibited acts (assisted dying,
+  a known ADRT, no authorization of prohibited acts (assisted dying,
   unlawful restraint).
 - **Registration rules** — applicant identity, fee or remission, people-
   to-notify count ≤ 5, jurisdiction (E&W).

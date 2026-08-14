@@ -19,7 +19,7 @@ Pure function over the request returning:
 radiationDoseBand, completenessPercent, triageTier + targetTimeframe,
 recommendation, firedRules[], flags[] }`. Rule IDs are identical across every
 front-end and the back-end. A safety contraindication (pregnancy with an
-ionising study; barium chosen when perforation is suspected — use water-soluble
+ionizing study; barium chosen when perforation is suspected — use water-soluble
 contrast) forces the safety band to `contraindicated` and a
 `query-referrer` / `redirect` recommendation. Choose the least-alarming band
 only when no rule fires.

@@ -48,7 +48,7 @@ significance (VUS)**, **likely benign**, and **benign** — plus
 **no-variant-detected** for a negative result. The scale is the joint consensus
 recommendation of the American College of Medical Genetics and Genomics (ACMG)
 and the Association for Molecular Pathology (AMP), implemented in the UK with the
-ACGS best-practice specialisations (e.g. REVEL thresholds, CanVIG-UK cancer-gene
+ACGS best-practice specializations (e.g. REVEL thresholds, CanVIG-UK cancer-gene
 specifications). The form stores the overall `variant_classification` and a free
 `reporting_category` ACMG class label, and drives interpretation, severity, and
 flags from it:
@@ -64,7 +64,7 @@ flags from it:
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a pathogenic variant.
 
 | Axis | Instrument | Output |
@@ -152,7 +152,7 @@ genetic-test-result/
   in Medicine*, 2015 (the five-tier P / LP / VUS / LB / B scale).
   <https://pubmed.ncbi.nlm.nih.gov/25741868/>
 - ACGS — Best Practice Guidelines for Variant Classification in Rare Disease 2024
-  (UK specialisation of the ACMG/AMP guidelines).
+  (UK specialization of the ACMG/AMP guidelines).
   <https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2024/08/ACGS-2024_UK-practice-guidelines-for-variant-classification.pdf>
 - CanVIG-UK — Consensus specifications for cancer-susceptibility genes of the
   ACGS best-practice variant-classification guidelines.

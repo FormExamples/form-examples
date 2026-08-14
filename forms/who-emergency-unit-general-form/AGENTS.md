@@ -1,11 +1,11 @@
 # WHO Emergency Unit Form: General
 
-World Health Organization standardised emergency unit clinical documentation form for general (non-trauma) patients.
+World Health Organization standardized emergency unit clinical documentation form for general (non-trauma) patients.
 
 ## Source
 
 - **Form**: WHO Emergency Unit Form: General
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf.pdf?sfvrsn=ebdc8087_1>
 - **Reference Card**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf-ref-card.pdf?sfvrsn=f55fd6d5_1>
 - **Pages**: 2

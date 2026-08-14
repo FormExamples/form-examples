@@ -6,7 +6,7 @@ Slug: `learning-disability-assessment`
 
 ## 1. Purpose
 
-Structured annual health check and adaptive-functioning assessment for people with a learning disability, aligned with the NHS England Annual Health Check and DSM-5-TR / ICD-11 criteria, producing a severity category and a personalised Health Action Plan with reasonable adjustments.
+Structured annual health check and adaptive-functioning assessment for people with a learning disability, aligned with the NHS England Annual Health Check and DSM-5-TR / ICD-11 criteria, producing a severity category and a personalized Health Action Plan with reasonable adjustments.
 
 Full design description: [`index.md`](../index.md).
 

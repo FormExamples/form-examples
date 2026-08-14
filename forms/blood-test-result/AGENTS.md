@@ -16,7 +16,7 @@ faithful to the conventions below.
 A result form records *what the test measured and what it means* — it is **not**
 a referral. The source-of-truth record is `blood_test_result`; the clinician is
 the report **author/signer** (pathologist, reporting biomedical or clinical
-scientist, authorising clinician), not a requester. The engine **interprets the
+scientist, authorizing clinician), not a requester. The engine **interprets the
 measured values** against reference ranges and critical (panic) values rather
 than vetting a request.
 

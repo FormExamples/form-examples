@@ -53,7 +53,7 @@ and [`spec/index.md`](./spec/index.md) for the living domain spec.
 - **Engine files:** `types.ts`, `utils.ts`, `aaa-rules.ts`, `aaa-grader.ts`,
   `flagged-issues.ts`.
 - **Tests:** `aaa-grader.test.ts`, `aaa-rules.test.ts` — cover each threshold
-  boundary (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the non-visualised guard, every
+  boundary (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the non-visualized guard, every
   category, and the growth calculation.
 
 ## Flagged issues
@@ -61,7 +61,7 @@ and [`spec/index.md`](./spec/index.md) for the living domain spec.
 Computed independently of the category (see spec §5): vascular referral
 (`category == 'large'`, high), symptomatic aneurysm (`symptomatic == 'yes'` with
 an aneurysm present, high), rapid growth (`growthCm >= 1.0` over ~12 months,
-high), non-visualised aorta (`aortaVisualised == 'no'` or diameter `null`,
+high), non-visualized aorta (`aortaVisualised == 'no'` or diameter `null`,
 medium), incomplete assessment (required fields missing, low).
 
 ## Conventions

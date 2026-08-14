@@ -49,5 +49,5 @@ escalation triggers (GCS ≤ 8, deterioration, abnormal pupils) fire consistentl
 ## Future enhancements
 
 - Paediatric GCS variant for pre-verbal children.
-- Serial-observation charting to visualise the trend over time.
+- Serial-observation charting to visualize the trend over time.
 - Curated example fixtures for each severity band and the NT / GCS-P cases.

@@ -30,6 +30,6 @@ Note: the `complete` threshold for section 9 requires ≥3 ADRs with status
 
 ## References
 
-- ADR GitHub organisation and MADR format: <https://adr.github.io/>
+- ADR GitHub organization and MADR format: <https://adr.github.io/>
 - Nygard, M. "Documenting Architecture Decisions." *Cognitect Blog*, 2011.
   <https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions>.

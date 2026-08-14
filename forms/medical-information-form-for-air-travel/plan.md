@@ -12,7 +12,7 @@ Association guidance.
 Airlines must determine whether a passenger with a specific health need can
 safely fly and whether in-flight accommodations (supplemental oxygen,
 stretcher, incubator, medical escort, battery-powered device) need to be
-provisioned ahead of departure. The MEDIF is the standardised industry
+provisioned ahead of departure. The MEDIF is the standardized industry
 artefact that captures this clinical evaluation and translates it into an
 airline medical-desk decision. The form is not a medical device in the
 diagnostic sense; it is an information aid that supports the airline's

@@ -7,7 +7,7 @@ qualitative *objectives* (what we want to achieve) with quantitative
 ## Origin
 
 OKRs were developed at Intel by **Andy Grove** in the late 1970s and
-formalised in his 1983 book *High Output Management*. Grove described
+formalized in his 1983 book *High Output Management*. Grove described
 the predecessor "iMBO" (Intel Management by Objectives) system that
 became the modern OKR.
 

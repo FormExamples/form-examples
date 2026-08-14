@@ -1,6 +1,6 @@
 # Perioperative Optimization
 
-> A UK NHS–aligned **perioperative optimisation and prehabilitation** intake: the screening questionnaire a surgical or anaesthetic team uses to identify **reversible** health problems before surgery, decide what can be treated in the time available, and build a personalised prehabilitation plan.
+> A UK NHS–aligned **perioperative optimization and prehabilitation** intake: the screening questionnaire a surgical or anaesthetic team uses to identify **reversible** health problems before surgery, decide what can be treated in the time available, and build a personalized prehabilitation plan.
 
 ## Docs
 

@@ -1,6 +1,6 @@
 # Vaccinations Checklist
 
-> Immunisation status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
+> Immunization status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
 
 ## Docs
 

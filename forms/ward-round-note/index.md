@@ -33,7 +33,7 @@ between shifts.
 
 ## Sections and completeness model
 
-The note is organised into ten components. Each component is either
+The note is organized into ten components. Each component is either
 **documented** (a meaningful entry is present) or **absent**. The engine
 partitions components into **required** (must be present for a complete entry)
 and **recommended** (contribute to a richer record but do not by themselves

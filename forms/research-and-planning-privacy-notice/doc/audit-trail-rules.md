@@ -70,7 +70,7 @@ NHS Data Security and Protection Toolkit:
 
 ## Rights status panel
 
-The dashboard provides a "rights status" per patient summarising:
+The dashboard provides a "rights status" per patient summarizing:
 
 - Acknowledgment status (Complete / Incomplete / Outdated).
 - Opt-out status (opt-out / opt-in / unspecified).

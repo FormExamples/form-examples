@@ -18,7 +18,7 @@
 
 ## JCVI
 
-- Joint Committee on Vaccination and Immunisation. *Statements*.
+- Joint Committee on Vaccination and Immunization. *Statements*.
   <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunisation>
 
 ## WHO

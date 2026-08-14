@@ -61,7 +61,7 @@ through aid; controlled tow to side; casualty exited safely.
 
 The candidate must:
 
-1. Recognise unconscious casualty (no response, abnormal breathing,
+1. Recognize unconscious casualty (no response, abnormal breathing,
    submerged).
 2. Enter safely — slide-in or step-in (never head-first in unknown
    depth).
@@ -83,7 +83,7 @@ after impact.
 
 Demonstrated technique:
 
-1. Maintain manual in-line stabilisation (head splint or vice grip).
+1. Maintain manual in-line stabilization (head splint or vice grip).
 2. Float casualty to spinal board or extraction point.
 3. Roll onto board with at least 3 rescuers if possible.
 4. Secure head blocks and straps in order: chest → pelvis → legs → head.

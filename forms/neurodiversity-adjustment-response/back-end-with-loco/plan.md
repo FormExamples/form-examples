@@ -7,7 +7,7 @@ under `src/engine/`, and JSON controllers under `src/controllers/`. Primary keys
 are UUIDv4 (`gen_random_uuid()`); every domain table carries `created_at` /
 `updated_at` / `deleted_at`.
 
-- [x] Loco crate materialised (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Loco crate materialized (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Relational migrations: `users`, `workers`, `managers`,
       `neurodiversity_adjustment_responses`,
       `neurodiversity_adjustment_response_grades` (1:1 unique FK),

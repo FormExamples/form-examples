@@ -1,6 +1,6 @@
 # WHO Emergency Unit Form: General
 
-> World Health Organization standardised emergency unit clinical documentation form for general (non-trauma) patients.
+> World Health Organization standardized emergency unit clinical documentation form for general (non-trauma) patients.
 
 ## Docs
 

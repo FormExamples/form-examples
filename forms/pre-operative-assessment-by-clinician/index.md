@@ -63,7 +63,7 @@ clinician findings** — not patient self-report.
 | 13 | Medications & allergies | clinician-reconciled medication list, anticoagulant hold plan, steroid cover, confirmed allergies with reactions, alcohol and smoking status |
 | 14 | Functional capacity & frailty | METs estimate, Duke Activity Status Index, Clinical Frailty Scale, ECOG, 6-minute walk test result if available, CPET summary |
 | 15 | Anaesthesia & post-op plan | proposed technique (GA / regional / sedation / MAC / combined), airway plan (supraglottic / ETT / awake FOI), monitoring level, analgesia plan, DVT prophylaxis, post-op disposition (ward / enhanced care / HDU / ICU), anticipated length of stay |
-| 16 | Summary, ASA & sign-off | computed ASA grade + fired rules, composite risk, safety flags, clinician override + reason (optional), overall recommendation (proceed / optimise first / cancel), additional notes, electronic signature |
+| 16 | Summary, ASA & sign-off | computed ASA grade + fired rules, composite risk, safety flags, clinician override + reason (optional), overall recommendation (proceed / optimize first / cancel), additional notes, electronic signature |
 
 ## Safety flags
 

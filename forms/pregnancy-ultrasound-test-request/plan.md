@@ -18,7 +18,7 @@ auditable, and aligned with ISUOG / RCOG / NICE / NHS FASP / ACR guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, gestational-age window fit,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet incomplete, or complete yet urgent.
 - **Red-flags auto-escalate.** Any red flag forces urgent / emergency triage
   regardless of the other axes.

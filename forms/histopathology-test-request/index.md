@@ -30,7 +30,7 @@ and referral*, and RCPath specimen-handling guidance.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete, have a specimen-handling problem, or be urgent.
 
 | Axis | Instrument | Output |
@@ -61,7 +61,7 @@ section **auto-escalates** the triage tier regardless of the other axes.
 | Cancer staging | RCPath cancer dataset resection; usually-appropriate |
 | Inflammatory disease | Tissue pathway |
 | Infection | Tissue pathway (± microbiology) |
-| Characterise lesion | Tissue pathway |
+| Characterize lesion | Tissue pathway |
 | Margin assessment | Excision / re-excision dataset |
 | Transplant monitoring | Protocol biopsy pathway |
 | Other | Free-text clinical question required |
@@ -120,7 +120,7 @@ histopathology-test-request/
 
 ## Clinical references
 
-- RCPath *Cancer datasets and tissue pathways* (standardised reporting; core
+- RCPath *Cancer datasets and tissue pathways* (standardized reporting; core
   data items mandated for the Cancer Outcomes and Services Dataset).
   <https://www.rcpath.org/profession/guidelines/cancer-datasets-and-tissue-pathways.html>
 - RCPath *Dataset for colorectal cancer histopathology reports* (example cancer

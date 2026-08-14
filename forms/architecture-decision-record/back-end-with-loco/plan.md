@@ -20,7 +20,7 @@ pending.
 2. Replace the default starter `User` model and auth routes with the
    `author` model (or remove auth entirely — the ADR form is not
    user-facing in the same way).
-3. Customise generated templates into a single-page 16-section wizard,
+3. Customize generated templates into a single-page 16-section wizard,
    matching the layout used in `../front-end-with-svelte/`.
 4. HTMX-drive the dynamic lists:
    - `hx-post /positions` to add an alternative

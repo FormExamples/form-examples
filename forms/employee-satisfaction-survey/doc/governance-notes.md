@@ -25,7 +25,7 @@ and explains:
 - the minimum cohort size for reporting;
 - how long responses will be retained;
 - how to withdraw consent (which becomes impossible once a response is
-  fully anonymised, in which case withdrawal is a removal from future
+  fully anonymized, in which case withdrawal is a removal from future
   invitation lists only).
 
 References:
@@ -33,12 +33,12 @@ References:
 - UK GDPR. <https://www.legislation.gov.uk/eur/2016/679/contents>
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
-- ICO — Anonymisation code of practice.
+- ICO — Anonymization code of practice.
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/anonymisation/>
 - ICO — Employment practices and data protection.
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
 
-## Anonymisation strategy
+## Anonymization strategy
 
 - Submission identifier is opaque and not linked to user identity at
   rest.

@@ -23,7 +23,7 @@ management of functioning.
 | Hazard | Mitigation |
 | --- | --- |
 | Patient lacks capacity to rate COPM problems | Step 2 captures capacity status; proxy mode allowed and recorded |
-| COPM problems mis-prioritised | Therapist confirms top-5 with client; the form records all elicited problems plus the prioritised top-5 |
+| COPM problems mis-prioritized | Therapist confirms top-5 with client; the form records all elicited problems plus the prioritized top-5 |
 | Cultural misinterpretation of leisure / productivity categories | Step 5 leisure category is open to client's framing; therapist records cultural context where relevant |
 | Safety risk identified during home visit | Step 8 environmental section captures urgent hazards (no working alarms, trip hazards, unsafe heating); urgent items trigger immediate-action prompt |
 | Safeguarding concern (adult or child) | Therapist obligation under the Care Act 2014 to raise a safeguarding alert; the form has a safeguarding-flag field that is also written to the local safeguarding log when set |
@@ -36,7 +36,7 @@ management of functioning.
 - UK GDPR / DPA 2018.
 - NHS DSPT compliance.
 - COPM responses contain sensitive information about daily-living
-  difficulties; access restricted to the treating team and authorised
+  difficulties; access restricted to the treating team and authorized
   carers.
 
 ## Licensing

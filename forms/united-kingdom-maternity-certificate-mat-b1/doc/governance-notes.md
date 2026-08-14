@@ -27,7 +27,7 @@ Under MDCG 2019-11 Rev.1 and UK Medical Devices Regulations 2002:
   retained 25 years.
   <https://transform.england.nhs.uk/information-governance/guidance/records-management-code/>
 - **NHS Data Security and Protection Toolkit (DSPT)** — annual self-
-  assessment for any organisation handling NHS data.
+  assessment for any organization handling NHS data.
   <https://www.dsptoolkit.nhs.uk/>
 
 ## Audit and assurance

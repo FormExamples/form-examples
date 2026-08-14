@@ -27,7 +27,7 @@ health specialist).
    diabetes, ischaemic heart disease, stroke, liver disease, breast cancer,
    gallbladder disease, inflammatory bowel disease, SLE, sickle cell, HIV.
 5. **Cardiovascular risk** — blood pressure, BMI, smoking status, age, family
-   history. Drives the CHC and POI risk categorisation.
+   history. Drives the CHC and POI risk categorization.
 6. **Thromboembolism risk** — personal or family VTE, immobility, recent or
    planned surgery, thrombophilia, known thrombogenic mutations.
 7. **Current medications** — focused on UKMEC-relevant interactions:

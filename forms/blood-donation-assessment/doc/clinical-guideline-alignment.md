@@ -24,7 +24,7 @@
   in UK statutory instruments):
   <https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0098>
 
-## Individualised Risk Assessment (IRA)
+## Individualized Risk Assessment (IRA)
 
 - UK joint statement on IRA implementation (2021):
   <https://www.nhsbt.nhs.uk/news/landmark-changes-to-blood-donation-criteria-come-into-effect/>

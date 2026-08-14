@@ -111,7 +111,7 @@ The grading engine produces:
 
 - SPAQ has known limitations including ceiling effects and reliance on
   retrospective seasonal self-report. The GSS cut-off of 11 has been
-  criticised as over-inclusive in milder presentations.
+  criticized as over-inclusive in milder presentations.
 - The "with seasonal pattern" specifier requires a longitudinal
   history; a single winter screen does not establish the specifier.
 - Geographical latitude affects SAD prevalence and pattern; clinicians

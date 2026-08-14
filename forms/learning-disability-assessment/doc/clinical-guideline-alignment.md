@@ -108,7 +108,7 @@ Code **319 / F70–F79** — Intellectual Developmental Disorder
 DSM-5-TR criteria require:
 
 - Deficits in intellectual functions confirmed by both clinical
-  assessment and individualised, standardised intelligence testing.
+  assessment and individualized, standardized intelligence testing.
 - Deficits in adaptive functioning resulting in failure to meet
   developmental and sociocultural standards for personal independence and
   social responsibility.

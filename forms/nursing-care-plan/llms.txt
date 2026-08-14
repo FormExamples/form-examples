@@ -1,6 +1,6 @@
 # Nursing Care Plan
 
-> A structured nursing care plan that documents patient care following the **nursing process** — Assessment, Diagnosis, Planning, Implementation, Evaluation (**ADPIE**) — and is commonly organised by activities of daily living using the **Roper–Logan–Tierney** model of nursing. The plan captures the identified nursing problems / needs, the goals set for each, the planned interventions, the record of implementation, the evaluation and review, and the risk assessments referenced (falls, pressure ulcer, venous thromboembolism, nutrition / MUST).
+> A structured nursing care plan that documents patient care following the **nursing process** — Assessment, Diagnosis, Planning, Implementation, Evaluation (**ADPIE**) — and is commonly organized by activities of daily living using the **Roper–Logan–Tierney** model of nursing. The plan captures the identified nursing problems / needs, the goals set for each, the planned interventions, the record of implementation, the evaluation and review, and the risk assessments referenced (falls, pressure ulcer, venous thromboembolism, nutrition / MUST).
 
 ## Docs
 

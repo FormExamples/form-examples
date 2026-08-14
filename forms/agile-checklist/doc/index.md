@@ -2,7 +2,7 @@
 
 Background reference notes for the agile-checklist form.
 
-The 57 items in `../seed.md` are organised in three sections covering
+The 57 items in `../seed.md` are organized in three sections covering
 Teams (25 items), Stakeholders (14 items), and Practices (18 items).
 Each item is a concrete observable behaviour rather than a Likert-scaled
 belief.

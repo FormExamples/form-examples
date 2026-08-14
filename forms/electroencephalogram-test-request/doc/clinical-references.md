@@ -22,7 +22,7 @@ Authoritative guidance underpinning the four-axis grading engine.
 | Routine awake | First-line; supports diagnosis and seizure classification |
 | Sleep-deprived | Activation to increase yield of interictal discharges |
 | Ambulatory 24-hour | Outpatient capture over a longer window |
-| Video-telemetry | Inpatient LTVEM to characterise events and classify syndrome |
+| Video-telemetry | Inpatient LTVEM to characterize events and classify syndrome |
 
 ## Appropriateness (NICE NG217 / ILAE)
 

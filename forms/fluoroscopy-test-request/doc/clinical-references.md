@@ -14,14 +14,14 @@ equivalent UK referral guidance.
 
 ## Safety and radiation dose
 
-Every fluoroscopic exposure must be **justified** under IR(ME)R (Ionising
+Every fluoroscopic exposure must be **justified** under IR(ME)R (Ionizing
 Radiation (Medical Exposure) Regulations 2017): the benefit must outweigh the
-detriment of the ionising-radiation dose, and the justification is recorded on
+detriment of the ionizing-radiation dose, and the justification is recorded on
 the request.
 
 | Driver | Effect on safety band |
 | --- | --- |
-| Pregnant / possible pregnancy + ionising study | contraindicated (defer / justify, consider alternative) |
+| Pregnant / possible pregnancy + ionizing study | contraindicated (defer / justify, consider alternative) |
 | Contrast-media allergy | caution (premedication / alternative agent) |
 | Aspiration risk | caution (favour water-soluble contrast) |
 | Suspected perforation + barium requested | contraindicated (redirect to water-soluble contrast) |

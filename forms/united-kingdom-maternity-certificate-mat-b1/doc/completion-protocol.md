@@ -12,7 +12,7 @@
 - A **registered midwife** (NMC register).
 
 Other clinicians (e.g. health visitors, maternity-support workers,
-sonographers) are **not** authorised to issue a MAT B1.
+sonographers) are **not** authorized to issue a MAT B1.
 
 ## What to record
 

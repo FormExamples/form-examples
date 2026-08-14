@@ -31,7 +31,7 @@ Home Office guidance requires the employer to retain right-to-work
 evidence for the **duration of employment plus two years**. The
 implementation stores only the metadata (document type, date checked,
 checker identity, list A/B classification) — not document images. Image
-storage, if any, is delegated to the organisation's identity-document
+storage, if any, is delegated to the organization's identity-document
 store, which has its own retention controls.
 
 - Home Office — Right to work checks: an employer's guide.

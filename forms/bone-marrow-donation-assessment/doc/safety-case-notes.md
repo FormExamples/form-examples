@@ -22,7 +22,7 @@ registry's medical director.
 | H2 | Anaesthetic risk under-detected for marrow harvest | ASA grading and airway questions surfaced; ASA ≥ 3 routes to RCoA-aligned pre-operative pathway |
 | H3 | Donor with positive transmissible-disease marker | Always referred to registry medical director; counselling pathway invoked; data handling per HTA Code E |
 | H4 | Donor consent not informed | Form mandates structured information delivery (process, risks, alternatives, withdrawal) and tests donor understanding with comprehension questions |
-| H5 | Confidentiality of donor-recipient information | Form enforces anonymisation rules — donor receives only need-to-know recipient information per registry policy |
+| H5 | Confidentiality of donor-recipient information | Form enforces anonymization rules — donor receives only need-to-know recipient information per registry policy |
 | H6 | Donor coercion | Form asks "are you donating freely without pressure?" as a non-skippable confirmation |
 | H7 | Sickle trait missed in donor of African ancestry | Sickle screen mandatory at evaluation; positive result routes to specialist review and may direct collection method choice |
 | H8 | Severe G-CSF reaction risk | Form prompts past splenic disease, autoimmune disease, history of severe bone pain |

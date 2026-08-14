@@ -82,9 +82,9 @@ axis to `null` when cylinder is zero, and rejects axis 0.
   `pupillary_distance_left_mm`.
 - Total PD = `pupillary_distance_right_mm + pupillary_distance_left_mm`.
 
-## Quantisation
+## Quantization
 
-All refractive numbers are quantised to **0.25 D** steps. The SQL columns
+All refractive numbers are quantized to **0.25 D** steps. The SQL columns
 are `NUMERIC(5,2)` so the step is preserved exactly without floating-
 point drift. The classification engine accepts unquantised input but the
 front-end snaps to 0.25 D before submission.

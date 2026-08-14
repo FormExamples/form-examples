@@ -21,7 +21,7 @@ medical examiner are surfaced. It classifies the certificate as **Valid**,
 Death certification in England and Wales operates within the statutory
 framework of the Births and Deaths Registration Act 1953, the Coroners and
 Justice Act 2009, and — since the reforms commenced in 2024 — the requirement
-that every death not investigated by a coroner be scrutinised by an NHS medical
+that every death not investigated by a coroner be scrutinized by an NHS medical
 examiner before registration. This form supports that framework; it does not
 replace the coroner's or medical examiner's statutory judgement.
 
@@ -32,7 +32,7 @@ replace the coroner's or medical examiner's statutory judgement.
   registration of a death.
 - **Users:** certifying doctors (the attending practitioner responsible for the
   deceased's care during the last illness) and NHS **medical examiners** (and
-  their officers) who scrutinise certificates before registration.
+  their officers) who scrutinize certificates before registration.
 - **Deaths:** deaths in England and Wales requiring an MCCD for registration.
 - **Not for:** stillbirths (a separate Medical Certificate of Stillbirth
   applies), deaths under active coroner investigation (where no MCCD is issued),
@@ -43,7 +43,7 @@ replace the coroner's or medical examiner's statutory judgement.
 
 ## Sections and validity model
 
-The instrument is organised into the sections of the statutory certificate,
+The instrument is organized into the sections of the statutory certificate,
 completed on a single continuous single-page wizard.
 
 **Deceased and death details.** Name, sex, date of birth, date and place of
@@ -67,7 +67,7 @@ of events. Each line carries an approximate onset-to-death interval.
 contributed to the death but did not form part of the direct Part I sequence.
 
 **Referral and scrutiny.** Whether the death has been referred to the coroner
-and why; whether the case has been discussed with or scrutinised by a medical
+and why; whether the case has been discussed with or scrutinized by a medical
 examiner; certifying-doctor identity, grade, and attendance on the deceased.
 
 **Validity classes.** The engine assigns exactly one:
@@ -91,7 +91,7 @@ non-referred certificate.
 **Flagged issues.** Raised independently of the class, each with a priority:
 
 - **Coroner referral required** (high) — a referral criterion is asserted.
-- **Unacceptable sole cause** (high) — a recognised "mode of death" (cardiac
+- **Unacceptable sole cause** (high) — a recognized "mode of death" (cardiac
   arrest, respiratory arrest, asystole, old age alone, organ failure without a
   stated underlying cause, and similar) is the only cause given.
 - **Missing Part I(a)** (high) — no direct cause of death is recorded.

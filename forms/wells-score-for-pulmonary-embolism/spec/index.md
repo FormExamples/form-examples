@@ -52,7 +52,7 @@ A single logical assessment record. Fields default to `''` (text/enum) or `null`
 | `dvtSigns` | enum yes/no | 1 — clinical signs/symptoms of DVT | +3 |
 | `peMostLikely` | enum yes/no | 2 — PE is #1 diagnosis or equally likely | +3 |
 | `heartRate` | numeric (beats/min) | 3 — heart rate > 100 | +1.5 |
-| `immobilisationSurgery` | enum yes/no | 4 — immobilisation ≥ 3 days or surgery in previous 4 weeks | +1.5 |
+| `immobilisationSurgery` | enum yes/no | 4 — immobilization ≥ 3 days or surgery in previous 4 weeks | +1.5 |
 | `previousDvtPe` | enum yes/no | 5 — previous DVT/PE | +1.5 |
 | `haemoptysis` | enum yes/no | 6 — haemoptysis | +1 |
 | `malignancy` | enum yes/no | 7 — malignancy on treatment / within 6 months / palliative | +1 |

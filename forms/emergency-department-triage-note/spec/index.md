@@ -13,7 +13,7 @@ A first-contact ED triage assessment. It records arrival, presenting complaint,
 brief history, triage vital signs, and a pain score, then **classifies** the
 patient into one of the five Manchester Triage System (MTS) priority levels,
 each with a fixed **target time** to first clinical assessment. It computes a
-supporting NEWS2 aggregate and raises red-flag issues. It is a prioritisation
+supporting NEWS2 aggregate and raises red-flag issues. It is a prioritization
 tool, not a diagnosis or a numeric additive score.
 
 Full design description: [`index.md`](../index.md).
@@ -131,7 +131,7 @@ Emitted independently of the assigned level, each with a priority:
 - **Sepsis / high NEWS2** (high) — `sepsisFeatures`, or `news2Total ≥ 7`, or any
   parameter scoring 3: escalate, start sepsis screen, senior review.
 - **Time-critical presentation** (high) — `chestPainCardiac`, `strokeFeatures`,
-  or `paediatricRedFlag`: prioritise onto the relevant pathway.
+  or `paediatricRedFlag`: prioritize onto the relevant pathway.
 - **Severe pain** (medium) — `painScore ≥ 7`: analgesia and Very-urgent review.
 - **Incomplete triage** (low) — any core vital sign missing: NEWS2 and category
   may understate risk; complete the observations.

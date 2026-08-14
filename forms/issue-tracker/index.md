@@ -56,7 +56,7 @@ catastrophic dimension drives the issue to the top of the queue.
 | 3 | `score_by_magnitude_of_damage` | 1 (minor) – 10 (total destruction) | Richter earthquake scale | Magnitude of physical / system damage |
 | 4 | `score_by_harm_grade` | 0 (no harm) – 4 (fatal) | NHS LFPSE patient-safety grading | Harm to a person caused by the issue |
 | 5 | `score_by_failure_condition` | A (catastrophic) – E (no effect) | FAA / EASA aviation standards | Failure-mode classification |
-| 6 | `score_by_moscow_requirement` | 1 (must) – 4 (won't) | MoSCoW software-requirements method | Requirement prioritisation |
+| 6 | `score_by_moscow_requirement` | 1 (must) – 4 (won't) | MoSCoW software-requirements method | Requirement prioritization |
 | 7 | `score_by_frequency_percent` | 0 % – 100 % | epidemiology / quality | Proportion of usage affected |
 
 Each score is recorded once per issue, in the `issue_tracker_grade` row, with
@@ -148,7 +148,7 @@ issue-tracker/
   failure condition classifications A–E.
 - EASA CS-25 §1309 — equivalent EU airworthiness standards.
 - Clegg, D. & Barker, R. *Case Method Fast-Track: A RAD Approach.*
-  Addison-Wesley, 1994 — origin of MoSCoW prioritisation.
+  Addison-Wesley, 1994 — origin of MoSCoW prioritization.
 - ITIL 4 — *Service Operation*: incident, problem, and change management
   vocabulary.
 - ISO 31000:2018 — *Risk management: Guidelines.*

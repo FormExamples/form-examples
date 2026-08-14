@@ -43,7 +43,7 @@ Sources:
 - Example laboratory clinical decision / alert limits (Royal Berkshire NHS).
   <http://pathology.royalberkshire.nhs.uk/bdecisionlimits.php>
 
-## Reference ranges and harmonisation
+## Reference ranges and harmonization
 
 ### Pathology Harmony — consensus reference ranges
 
@@ -53,11 +53,11 @@ laboratories, causing confusion when results moved between providers. The
 common biochemistry and haematology analytes, reducing inter-laboratory
 variation. The analyte columns and the approximate adult reference ranges
 documented in `sql/04_create_table_blood_test_result.sql` follow these
-harmonised values. Ranges remain indicative: the authoritative range is the one
+harmonized values. Ranges remain indicative: the authoritative range is the one
 issued by the reporting laboratory and may vary by sex, age, assay, and
 specimen type.
 
-Representative harmonised adult reference ranges used in this form:
+Representative harmonized adult reference ranges used in this form:
 
 | Analyte | Column | Units | Approx. adult reference |
 | --- | --- | --- | --- |

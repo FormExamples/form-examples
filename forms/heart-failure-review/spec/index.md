@@ -11,8 +11,8 @@ Slug: `heart-failure-review`
 
 A UK primary-care structured **annual review** for adults with established
 chronic heart failure. It records functional status, fluid balance, monitoring
-bloods, and medication optimisation, then derives an **NYHA functional status**,
-a **medication-optimisation status** (against the four pillars of guideline-
+bloods, and medication optimization, then derives an **NYHA functional status**,
+a **medication-optimization status** (against the four pillars of guideline-
 directed medical therapy), a **review-completeness grade**, and a set of safety
 flags. It is a documentation and status-classification form; it does not
 diagnose heart failure or its subtype.
@@ -98,7 +98,7 @@ A single logical review record. Fields default to `''` (text/enum) or `null`
 | `hba1c` | numeric (mmol/mol) | |
 | `bloodsDate` | date | date monitoring bloods taken |
 
-**Medication optimisation.** For each of the four pillars a repeating group:
+**Medication optimization.** For each of the four pillars a repeating group:
 `status` (prescribed / not-prescribed / contraindicated / not-tolerated),
 `agent` (text), `dose` (text), `atTargetDose` (yes/no), `adherence`
 (good / partial / poor). Pillars: `raasInhibitor` (ACEi/ARB/ARNI),
@@ -128,7 +128,7 @@ functionalStatus = nyhaClass == null      ? 'unknown'
                  :                           'advanced'   // NYHA IV
 ```
 
-**Medication optimisation** — the indicated pillar set depends on
+**Medication optimization** — the indicated pillar set depends on
 `heartFailureType`:
 
 ```
@@ -171,7 +171,7 @@ Emitted independently of the grades, each with a priority:
 
 - **Urgent review** (high) — `nyhaClass >= 3` or `decompensation == 'yes'`:
   symptomatic/advanced heart failure; arrange prompt clinical review.
-- **Optimisation gap** (high when HFrEF and ≥ 2 pillars missing; medium
+- **Optimization gap** (high when HFrEF and ≥ 2 pillars missing; medium
   otherwise) — one or more indicated pillars `not-prescribed` without a
   documented contraindication.
 - **Hyperkalaemia** (high) — `potassium > 5.5`: review RAAS inhibitor / MRA.
@@ -232,7 +232,7 @@ Generated artefacts are never hand-edited; re-run the generators in
 
 - `bin/test-form heart-failure-review` exits cleanly.
 - The classification engine is pure (no side effects, no I/O) and unit-tested,
-  covering each NYHA class (I–IV), each `heartFailureType`, the optimisation
+  covering each NYHA class (I–IV), each `heartFailureType`, the optimization
   status transitions, the potassium/eGFR thresholds, and each completeness band.
 - The HTML front-ends conform to the Lily HTML headless contract
   ([`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md)).

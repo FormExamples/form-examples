@@ -76,7 +76,7 @@ group contributes the points of the highest applicable option within that group.
 
 | Option | Points |
 | --- | --- |
-| Complete / catheterised | 0 |
+| Complete / catheterized | 0 |
 | Incontinent of urine | 1 |
 | Incontinent of faeces | 2 |
 | Doubly incontinent | 3 |

@@ -3,7 +3,7 @@
 ## Completed
 
 - [x] Implement patient form frontend (10 steps)
-- [x] Implement standardised score severity grading engine
+- [x] Implement standardized score severity grading engine
 - [x] Implement flagged issues detection
 - [x] Implement PDF report generation
 - [x] Implement clinician dashboard with SVAR DataGrid

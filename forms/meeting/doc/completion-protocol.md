@@ -11,7 +11,7 @@
 4. **Publish minutes** — within 24 hours.
 5. **Approve minutes** — at the next meeting of the same series (per
    Robert's Rules).
-6. **Archive** — minutes retained per organisational policy and, for
+6. **Archive** — minutes retained per organizational policy and, for
    companies, Companies Act 2006 s.248 (minimum 10 years).
 
 ## Fields
@@ -49,7 +49,7 @@ Each agenda item carries:
 
 The implementation distinguishes:
 
-- **Public** — open to anyone in the organisation.
+- **Public** — open to anyone in the organization.
 - **Internal** — to participants and named distribution list.
 - **Confidential** — to participants only; encrypted at rest with a
   separate key.

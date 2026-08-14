@@ -24,7 +24,7 @@ The point allocation is laid out in:
   Sterility 1997;67(5):817–821.
   PubMed: <https://pubmed.ncbi.nlm.nih.gov/9130884/>
 
-The rASRM score is calculated intra-operatively from direct visualisation;
+The rASRM score is calculated intra-operatively from direct visualization;
 the questionnaire records the score post-operatively and treats it as
 clinician-supplied data.
 

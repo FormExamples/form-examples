@@ -2,13 +2,13 @@
 
 This document maps each clause of the Screening Program Privacy Notice to
 the UK GDPR / DPA 2018 / NHS-Act 2006 / Public-Health instrument that
-authorises the processing.
+authorizes the processing.
 
 ## Article 13 fulfilment matrix
 
 | Art. 13 item | Where satisfied in the notice |
 | --- | --- |
-| 13(1)(a) controller identity & contact | "Practice contact" block (practice-customisable) |
+| 13(1)(a) controller identity & contact | "Practice contact" block (practice-customizable) |
 | 13(1)(a) DPO contact | "Data Protection Officer" block |
 | 13(1)(c) purposes and legal basis | "How we use your information" lists screening recipients with Art. 6(1)(e), Art. 9(2)(h), and Art. 9(2)(i) bases |
 | 13(1)(e) recipients | NHS England, UKHSA, named research bodies |
@@ -27,15 +27,15 @@ authorises the processing.
 | Screening surveillance to UKHSA | 6(1)(c) | 9(2)(i) | statutory under Health Protection (Notification) Regulations 2010 | No |
 | Screening service planning & quality audit | 6(1)(e) | 9(2)(h) | s.251 CAG approval | Yes |
 | Approved screening research | 6(1)(e) | 9(2)(j) | s.251 CAG approval + HRA approval | Yes |
-| Anonymised statistics | outside UK GDPR | n/a | Anonymisation Code | No (not personal data) |
+| Anonymized statistics | outside UK GDPR | n/a | Anonymization Code | No (not personal data) |
 
-## Practice-customisable block
+## Practice-customizable block
 
 The form includes a `practice_config` block so each practice fills in:
 
 - Practice name and contact.
 - DPO contact.
-- Named local research organisations participating in screening cohorts.
+- Named local research organizations participating in screening cohorts.
 - The local CAG approval reference where applicable.
 
 This satisfies the Art. 13(1)(a) / (e) requirements at the local-controller

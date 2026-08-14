@@ -6,7 +6,7 @@ Slug: `who-emergency-first-aid-form`
 
 ## 1. Purpose
 
-World Health Organization standardised emergency first aid documentation form for community first aid responders.
+World Health Organization standardized emergency first aid documentation form for community first aid responders.
 
 This single-page form captures patient identification, situation assessment, medical background, CABCDE systematic assessment with corresponding interventions, recommendations for transport, and community first aid responder details. A copy of the completed form should be sent to the referral facility.
 

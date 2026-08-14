@@ -1,6 +1,6 @@
 # Palliative Assessment
 
-Symptom-focused palliative care assessment using the Edmonton Symptom Assessment System-revised (ESAS-r) alongside performance status, goals-of-care documentation, medication and symptom-control planning, and psychosocial and spiritual review to guide individualised palliative management.
+Symptom-focused palliative care assessment using the Edmonton Symptom Assessment System-revised (ESAS-r) alongside performance status, goals-of-care documentation, medication and symptom-control planning, and psychosocial and spiritual review to guide individualized palliative management.
 
 ## Scoring system
 

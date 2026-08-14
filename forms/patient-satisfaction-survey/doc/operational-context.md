@@ -71,6 +71,6 @@ HCAHPS or CQC scores is misleading without explicit caveats.
   Practice* — patient-experience data is typically retained for the
   shorter of the active improvement cycle or the underlying record
   retention period.
-- Pseudonymisation: identifiable demographic data should be
+- Pseudonymization: identifiable demographic data should be
   separated from response data at the earliest opportunity that
   preserves the analytic linkage.

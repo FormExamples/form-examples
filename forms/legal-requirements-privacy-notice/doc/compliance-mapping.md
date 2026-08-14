@@ -1,13 +1,13 @@
 # Compliance Mapping
 
 This document maps each clause of the Legal Requirements Privacy Notice to
-the statute and ICO guidance that authorises the underlying processing,
+the statute and ICO guidance that authorizes the underlying processing,
 and shows how the form's acknowledgment record evidences the controller's
 UK GDPR Article 13 transparency duty.
 
 ## Statutory mapping per recipient
 
-| Recipient | Authorising instrument | UK GDPR Art. 6 basis | UK GDPR Art. 9 basis |
+| Recipient | Authorizing instrument | UK GDPR Art. 6 basis | UK GDPR Art. 9 basis |
 | --- | --- | --- | --- |
 | NHS England (data flows under Secretary of State Directions) | Health and Social Care Act 2012 s.254 / s.259 | 6(1)(c) legal obligation | 9(2)(h) provision of health care |
 | Care Quality Commission (regulator inspection data) | Health and Social Care Act 2008, s.62–s.65; Care Quality Commission (Registration) Regulations 2009 (SI 2009/3112) | 6(1)(c) legal obligation | 9(2)(h) provision of health care |

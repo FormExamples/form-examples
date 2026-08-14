@@ -29,7 +29,7 @@ intended to provide information for diagnosis or management of disease.
 | Inadequate informed consent for aesthetic surgery | Step 10 enforces two-stage consent with documented cooling-off interval; Montgomery (UKSC 2015) signposted in the consent template |
 | Body dysmorphic disorder missed in aesthetic candidate | Step 6 mandatory screening question; COPS or equivalent score recorded; positive screen blocks straight-to-procedure pathway |
 | Surgical site infection risk under-graded | Step 5 records NHSN wound class; class III/IV triggers NICE NG125 prophylaxis prompt |
-| Anaesthetic risk under-recognised | Step 7 captures ASA / Mallampati / STOP-BANG; high risk triggers anaesthetist review |
+| Anaesthetic risk under-recognized | Step 7 captures ASA / Mallampati / STOP-BANG; high risk triggers anaesthetist review |
 | Photographic consent breach | Step 8 enforces patient-signed photographic consent; storage and retention recorded |
 | Free-flap failure risk overlooked | Step 4 captures smoking status, diabetes, peripheral vascular disease, prior radiation; high-risk combination triggers MDT review prompt |
 | Wrong-site surgery | Step 10 enforces site marking documentation and WHO sign-in references |

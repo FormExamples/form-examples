@@ -12,7 +12,7 @@ Slug: `learning-disability-annual-health-check`
 A UK primary-care annual health check for people aged 14 or over on a practice's
 learning-disability register. It records a comprehensive whole-person review
 (reasonable adjustments and communication, physical health, screening and
-immunisation uptake, medication review including STOMP, mental health and
+immunization uptake, medication review including STOMP, mental health and
 behaviour, syndrome-specific checks, carer and social) and produces a Health
 Action Plan. The engine grades **completeness** of the check, confirms the
 Health Action Plan, and raises clinical **flags**. It does not diagnose or grade

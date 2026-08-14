@@ -40,7 +40,7 @@ are moderate; spine series are moderate–high.
 - ACR Appropriateness Criteria — <https://acsearch.acr.org/list>
 - RCR *iRefer: Making the best use of clinical radiology* —
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/irefer/>
-- The Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R) —
+- The Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R) —
   <https://www.legislation.gov.uk/uksi/2017/1322/made>
 - GOV.UK *Guidance to the IR(ME)R Regulations 2017* —
   <https://www.gov.uk/government/publications/ionising-radiation-medical-exposure-regulations-2017-guidance/guidance-to-the-ionising-radiation-medical-exposure-regulations-2017>

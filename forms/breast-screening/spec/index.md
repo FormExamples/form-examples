@@ -59,7 +59,7 @@ A single logical screening record. Fields default to `''` (text/enum) or `null`
 | `arbitrationOutcome` | enum | normal / recall / technical / not-required |
 | `readingOutcome` | enum | normal-routine-recall / technical-repeat / recall-for-assessment |
 | `assessmentPerformed` | enum (yes/no) | assessment clinic attended |
-| `assessmentModalities` | enum | mammography / ultrasound / biopsy (multi-select serialised) |
+| `assessmentModalities` | enum | mammography / ultrasound / biopsy (multi-select serialized) |
 | `imagingClassification` | numeric (1–5) | breast imaging classification, when assessed |
 
 **Derived (never stored as input).** `eligibilityStatus`, `screeningOutcome`,
@@ -126,7 +126,7 @@ Emitted independently of the outcome, each with a priority:
   confirm eligibility / route to the correct pathway.
 - **Overdue** (low) — `lastScreenedDate` more than ≈ 36 months ago: recall due.
 - **Incomplete record** (low) — any required input missing: outcome cannot be
-  finalised.
+  finalized.
 
 ## 6. Inputs and outputs
 

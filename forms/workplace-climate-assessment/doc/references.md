@@ -44,7 +44,7 @@
 
 ## Information governance
 
-- ICO — Anonymisation code of practice.
+- ICO — Anonymization code of practice.
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/anonymisation/>
 - ICO — Employment practices and data protection.
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>

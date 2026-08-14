@@ -7,7 +7,7 @@ Safety considerations for the endocrinology assessment form.
 To record a structured endocrine consultation covering six axes (thyroid,
 adrenal, glucose, reproductive, pituitary, bone/calcium), surface
 biochemical and symptom abnormalities, and produce a per-axis severity
-categorisation to inform onward management.
+categorization to inform onward management.
 
 ## Intended users
 
@@ -30,7 +30,7 @@ output may influence diagnostic and therapeutic decisions.
 | Adrenal crisis missed | Symptom step flags hyperpigmentation, postural hypotension, hyponatraemia; severe-adrenal flag triggers urgent referral text |
 | Acromegaly diagnosis delay | Pituitary step prompts IGF-1; OGTT-GH suppression test mentioned in onward-care text |
 | Calcium not corrected for albumin | Engine accepts both raw and corrected calcium; conversion factor 0.02 × (40 − albumin) documented |
-| Subclinical thyroid disease over-treated | Categorisation distinguishes Subclinical from Mild; PDF report cites NICE NG145 thresholds |
+| Subclinical thyroid disease over-treated | Categorization distinguishes Subclinical from Mild; PDF report cites NICE NG145 thresholds |
 
 ## Out of scope
 

@@ -40,7 +40,7 @@ flags.
 ### ITIL 4 — incident management
 
 ITIL 4 (the Information Technology Infrastructure Library) defines
-incident management as the practice of minimising the negative impact
+incident management as the practice of minimizing the negative impact
 of incidents by restoring normal service as quickly as possible.
 
 ITIL distinguishes:

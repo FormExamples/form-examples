@@ -1,6 +1,6 @@
 # Kinesiology Assessment
 
-> Functional movement screening using the FMS (Functional Movement Screen) with 7 standardised movement tests.
+> Functional movement screening using the FMS (Functional Movement Screen) with 7 standardized movement tests.
 
 ## Docs
 

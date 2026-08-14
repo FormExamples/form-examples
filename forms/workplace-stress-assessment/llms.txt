@@ -1,6 +1,6 @@
 # Workplace Stress Assessment
 
-> Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organisational domains and identify teams or individuals at elevated risk of work-related ill health.
+> Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organizational domains and identify teams or individuals at elevated risk of work-related ill health.
 
 ## Docs
 

@@ -29,13 +29,13 @@ intended to provide information used in diagnosis or management.
 | Inappropriate use as sole determinant of surgery | Form output is decision support; clinician must record the final treatment plan in step 9; PDF shows both |
 | Wrong-side surgery preparation | Step 2 captures laterality; mismatches with imaging report in step 8 raise a flag |
 | Anticoagulant continuation through surgery | Step 9 records anticoagulant status; flag if surgical plan present |
-| Patient confidentiality on shared PROM links | Patient-facing links are tokenised; access role-restricted |
+| Patient confidentiality on shared PROM links | Patient-facing links are tokenized; access role-restricted |
 
 ## Patient-facing considerations
 
 DASH is typically self-completed. This form supports:
 
-- Direct patient entry via tokenised link
+- Direct patient entry via tokenized link
 - Clinician-assisted entry where the patient lacks the manual dexterity
   or literacy to complete unassisted
 - Each mode is recorded as part of the response metadata for audit

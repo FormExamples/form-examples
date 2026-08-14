@@ -1,14 +1,14 @@
 # Scoring rules
 
-The diabetes assessment categorises the patient as Controlled /
+The diabetes assessment categorizes the patient as Controlled /
 Suboptimal / Poorly Controlled using a transparent rule set anchored on
-NICE NG28 / NG17 individualised targets.
+NICE NG28 / NG17 individualized targets.
 
 ## Inputs
 
 - Diabetes type (1, 2, other).
 - Current HbA1c (mmol/mol).
-- Individualised HbA1c target (mmol/mol).
+- Individualized HbA1c target (mmol/mol).
 - Hypoglycaemia-risk medication flag (sulphonylurea, insulin).
 - Frailty / age-related factors that relax the target.
 - Presence of acute complications (DKA, severe hypoglycaemia in past
@@ -19,7 +19,7 @@ NICE NG28 / NG17 individualised targets.
 - Psychological-distress markers (PHQ-9, PAID-5).
 - Foot risk band per NICE NG19.
 
-## Categorisation
+## Categorization
 
 ### Poorly Controlled (Red)
 
@@ -37,7 +37,7 @@ Any one of:
 
 Any one of (in absence of red criteria):
 
-- HbA1c above individualised target by ≤ 11 mmol/mol.
+- HbA1c above individualized target by ≤ 11 mmol/mol.
 - New or progressive complication (retinopathy progression, neuropathy
   diagnosis, ACR rising).
 - BP not at target (≥ 140/80; ≥ 130/80 if albuminuria) on dual therapy.
@@ -49,13 +49,13 @@ Any one of (in absence of red criteria):
 
 ### Controlled (Green)
 
-- HbA1c at or below individualised target without severe hypoglycaemia.
+- HbA1c at or below individualized target without severe hypoglycaemia.
 - No new or progressive complications.
 - BP and LDL-C at target.
 - Structured education completed; lifestyle factors optimal.
 - Psychological wellbeing acceptable.
 
-## Individualised target reasoning
+## Individualized target reasoning
 
 NICE NG28 §1.6 sets the default HbA1c target as 48 mmol/mol on diet /
 metformin, 53 mmol/mol on agents with hypoglycaemia risk. Targets are
@@ -66,7 +66,7 @@ relaxed when:
 - Limited life expectancy.
 - Significant frailty or cognitive impairment.
 
-The form records the individualised target as a clinician input.
+The form records the individualized target as a clinician input.
 
 ## Flagged issues
 

@@ -9,7 +9,7 @@ onto an **escalation band** with a recommended review timeframe. A high score,
 any single parameter scoring 3, or documented **nurse or parent/carer concern**
 each prompts escalation and senior review.
 
-PEWS is a screening and monitoring aid, **not** a diagnosis. It standardises the
+PEWS is a screening and monitoring aid, **not** a diagnosis. It standardizes the
 recognition of the deteriorating child so that concern is escalated early and
 consistently. This design follows the concept of the UK **national Paediatric
 Early Warning System (PEWS)** chart, which is **age-banded** because a heart or

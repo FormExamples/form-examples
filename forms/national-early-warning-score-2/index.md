@@ -1,14 +1,14 @@
 # National Early Warning Score 2 (NEWS2)
 
 A UK NHS–aligned implementation of the **National Early Warning Score 2
-(NEWS2)**, the standardised track-and-trigger early warning system published by
+(NEWS2)**, the standardized track-and-trigger early warning system published by
 the Royal College of Physicians (RCP) in December 2017. The form records six
 routinely measured physiological parameters at the bedside, scores each against
 the published NEWS2 allocation, aggregates them into a total score of **0 to
 20+**, and returns the resulting **clinical-risk band** together with the RCP's
 recommended monitoring frequency and clinical-response (escalation) actions.
 
-NEWS2 standardises the assessment and response to acute illness, promotes early
+NEWS2 standardizes the assessment and response to acute illness, promotes early
 detection of clinical deterioration and sepsis, and provides a common language
 of acuity across the whole acute care pathway. This form is completed by a
 nurse, healthcare assistant, doctor, paramedic, or other clinician taking a set

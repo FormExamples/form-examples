@@ -14,7 +14,7 @@ The code of conduct notice is a read-and-acknowledge artefact rather than a clin
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - Add backend database migrations and seed data
 - Clinical safety case documentation
 - User acceptance testing with compliance staff

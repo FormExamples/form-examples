@@ -69,7 +69,7 @@ without making them "Unsuitable":
 | Infection | Hepatitis B or C with cleared virus / treatable status |
 | Organ-specific | Marginal organ function within transplantable range |
 
-Source: NHSBT Donor Optimisation Extended Care Bundle and the Eurotransplant /
+Source: NHSBT Donor Optimization Extended Care Bundle and the Eurotransplant /
 US OPTN expanded-criteria donor definitions.
 
 ## Risk banding

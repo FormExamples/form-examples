@@ -93,7 +93,7 @@ statistically significant changes (p<0.05) but do not interpret them.
 - Schaufeli, W. B., & Bakker, A. B. (2003) UWES manual.
   <https://www.wilmarschaufeli.nl/tests/>
 - Reichheld, F. F. (2003) "The One Number You Need to Grow." HBR.
-- ICO — Anonymisation: managing data protection risk code of practice.
+- ICO — Anonymization: managing data protection risk code of practice.
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/anonymisation/>
 - CIPD — Employee engagement.
   <https://www.cipd.org/uk/knowledge/factsheets/engagement-factsheet/>

@@ -15,7 +15,7 @@ living domain spec.
 
 ## Routes (RESTful, gold standard)
 
-Collection resource: **`anion-gap-calculators`** (pluralised slug).
+Collection resource: **`anion-gap-calculators`** (pluralized slug).
 
 | Route file | URL | Purpose |
 | --- | --- | --- |

@@ -24,7 +24,7 @@ Killip class, cardiac arrest, ST-segment deviation, elevated enzymes) maps
 through a weighted, banded lookup; the points are summed into a total, read
 against the in-hospital (&le; 108 / 109&ndash;140 / &gt; 140) and 6-month
 (&le; 88 / 89&ndash;118 / &gt; 118) mortality bands, with the overall risk
-category the worse of the two (max-band rule). Serum creatinine is normalised to
+category the worse of the two (max-band rule). Serum creatinine is normalized to
 mg/dL (µmol/L &divide; 88.4) before banding. Tests in `grace-grader.test.ts`.
 
 ## Stack

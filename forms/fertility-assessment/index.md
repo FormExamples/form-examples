@@ -7,8 +7,8 @@ Fertility (sub-fertility) assessment aligned with NICE CG156, capturing reproduc
 - **Instrument**: NICE CG156 Fertility Assessment
 - **Range**: Low / Moderate / High concern
 - **Categories**:
-  - Low concern: Normal cycles, duration trying < 12 months (< 6 months if female partner ≥ 36), normal ovarian reserve, normal partner factors — advise continued attempts and lifestyle optimisation
-  - Moderate concern: Investigations completed with one or two modifiable factors identified — targeted treatment or optimisation
+  - Low concern: Normal cycles, duration trying < 12 months (< 6 months if female partner ≥ 36), normal ovarian reserve, normal partner factors — advise continued attempts and lifestyle optimization
+  - Moderate concern: Investigations completed with one or two modifiable factors identified — targeted treatment or optimization
   - High concern: Multiple abnormal investigations, known cause (e.g. tubal, severe male factor), or age-related reserve decline — early specialist/ART referral
 
 ## Steps

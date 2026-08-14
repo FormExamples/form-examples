@@ -1,6 +1,6 @@
 # Glossary
 
-Alphabetised reference of terms used in the LP1F form, the LP12 Guide,
+Alphabetized reference of terms used in the LP1F form, the LP12 Guide,
 the LPA validation engine, and the on-screen help.
 
 ## A
@@ -81,7 +81,7 @@ OPG.
 ### Donor
 
 The person making the LPA — the individual whose property and
-financial affairs the attorneys will be authorised to manage. Must be
+financial affairs the attorneys will be authorized to manage. Must be
 ≥ 18 and must have mental capacity at the time of signing (MCA 2005
 s. 9(2)).
 

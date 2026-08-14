@@ -10,7 +10,7 @@ the **screening outcome and next action**, validates completeness, and raises
 safety flags.
 
 Routine screening invites women aged **50–70** on a **3-yearly** recall cycle
-(the age range is being extended to 47–73 in a phased randomised roll-out).
+(the age range is being extended to 47–73 in a phased randomized roll-out).
 Women at higher-than-average risk (for example strong family history or a known
 pathogenic variant) are managed on a **separate higher-risk surveillance
 pathway** and are out of scope for routine-recall classification here. A woman

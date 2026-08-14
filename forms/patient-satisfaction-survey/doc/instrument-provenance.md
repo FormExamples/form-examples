@@ -25,7 +25,7 @@ the *General Satisfaction* subscale.
 
 HCAHPS contributes the *Overall hospital rating* item and the
 *Communication with Doctors / Nurses* domain structure. The
-normalised 0–100 composite score is a CAHPS-style transformation of
+normalized 0–100 composite score is a CAHPS-style transformation of
 the raw Likert mean.
 
 ## NHS Patient Experience instruments
@@ -57,7 +57,7 @@ raw_mean    = mean(answered Likert items)        # 1.0 – 5.0
 normalised  = (raw_mean - 1) / 4 * 100           # 0 – 100
 ```
 
-This is the CAHPS-style linear normalisation. Top-box reporting
+This is the CAHPS-style linear normalization. Top-box reporting
 (HCAHPS publication convention) is not implemented; sites needing
 HCAHPS-compatible publication output should compute top-box
 separately.

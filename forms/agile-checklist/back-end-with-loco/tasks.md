@@ -88,7 +88,7 @@
       correct HEALTHY ADOPTION classification for Aurora plus an
       INSUFFICIENT-DATA row for a principles team with no DB
       counterpart. 0 console errors.
-- [x] JSON `GET /api/checklists` — returns `db.list()` serialised as the
+- [x] JSON `GET /api/checklists` — returns `db.list()` serialized as the
       same camelCase `ChecklistRow` shape the SvelteKit and HTML
       dashboards consume. `tower-http` `cors` feature wired up with a
       permissive `Access-Control-Allow-Origin: *` so the static

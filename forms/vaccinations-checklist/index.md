@@ -1,19 +1,19 @@
 # Vaccinations Checklist
 
-Immunisation status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
+Immunization status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
 
 ## Scoring system
 
 - **Instrument**: Vaccination Compliance Classification
 - **Range**: Compliance levels with risk stratification
 - **Categories**:
-  - Fully Immunised: All recommended vaccinations complete and up to date
-  - Partially Immunised: Some vaccinations incomplete or overdue
+  - Fully Immunized: All recommended vaccinations complete and up to date
+  - Partially Immunized: Some vaccinations incomplete or overdue
   - Non-Compliant: Required vaccinations missing, especially in high-risk roles
   - Contraindicated: Medical exemptions documented with supporting evidence
 - **Risk Levels**:
-  - Low: Fully immunised, no gaps
-  - Moderate: Partially immunised, non-critical gaps
+  - Low: Fully immunized, no gaps
+  - Moderate: Partially immunized, non-critical gaps
   - High: Non-compliant in high-risk occupational role
   - Critical: Active exposure without documented immunity
 
@@ -23,7 +23,7 @@ Immunisation status tracking for healthcare workers and patients covering routin
 | --- | ----------------------------- |
 | 1   | Demographics                  |
 | 2   | Vaccination History           |
-| 3   | Childhood Immunisations       |
+| 3   | Childhood Immunizations       |
 | 4   | Occupational Vaccines         |
 | 5   | Travel Vaccines               |
 | 6   | COVID-19 Vaccination          |

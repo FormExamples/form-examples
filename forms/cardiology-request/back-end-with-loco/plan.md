@@ -7,7 +7,7 @@ SeaORM `_entity` per SQL table, the four-axis vetting engine under
 `src/engine/`, and JSON controllers under `src/controllers/`.
 
 - [x] Setup script generated from `sql/`
-- [x] Loco crate materialised (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Loco crate materialized (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Per-table relational migrations in FK-dependency order: `users`,
       `patients`, `clinicians`, `cardiology_requests`,
       `cardiology_request_grades`, `cardiology_request_grade_rules`,

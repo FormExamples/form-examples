@@ -91,11 +91,11 @@ Have you had any contact (any phone, video or face to face consultation) with yo
   - Consultant: Date (DD/MM/YY)
   - Community psychiatric nurse: Date (DD/MM/YY)
 
-### Applicant's Authorisation
+### Applicant's Authorization
 
 Same structure as other DVLA forms:
 
-- Declaration authorising medical information disclosure
+- Declaration authorizing medical information disclosure
 - Criminal offence warning for false declarations
 - Name, Signature, Date
 - Electronic correspondence consent (email): Yes / No
@@ -116,7 +116,7 @@ Same structure as other DVLA forms:
 | 3 | Diagnosis Confirmation | Q1 — has a mental health condition been diagnosed |
 | 4 | Mental Health Conditions | Q2 — specific conditions diagnosed |
 | 5 | Recent Contact | Q3 — recent healthcare professional contact |
-| 6 | Authorisation | Applicant's authorisation and declaration |
+| 6 | Authorization | Applicant's authorization and declaration |
 
 ## Directory structure
 

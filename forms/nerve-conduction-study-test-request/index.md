@@ -32,7 +32,7 @@ polyneuropathy) and ACR Appropriateness Criteria.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete, procedurally risky, or urgent.
 
 | Axis | Instrument | Output |
@@ -53,11 +53,11 @@ confirmation changes management and access to disease-modifying therapy.
 | Carpal tunnel | Nerve conduction (± confirmatory EMG) | Upper limb | Practice parameter: electrodiagnostic studies in CTS |
 | Peripheral neuropathy | Nerve conduction + EMG | Lower limb / all-limbs | Practice parameter: distal symmetric polyneuropathy |
 | Radiculopathy | EMG (± nerve conduction) | Upper / lower limb | Needle EMG most specific for root level |
-| Suspected motor neurone disease | Nerve conduction + EMG | Generalised | EMG for diffuse denervation; expedite |
-| Myopathy | EMG | Generalised / limb | Needle EMG myopathic units |
-| Plexopathy | Nerve conduction + EMG | Upper / lower limb | Localise plexus vs root vs nerve |
+| Suspected motor neurone disease | Nerve conduction + EMG | Generalized | EMG for diffuse denervation; expedite |
+| Myopathy | EMG | Generalized / limb | Needle EMG myopathic units |
+| Plexopathy | Nerve conduction + EMG | Upper / lower limb | Localize plexus vs root vs nerve |
 | Suspected myasthenia | Repetitive stimulation | Cranial / upper limb | Decrement on repetitive stimulation |
-| Nerve injury | Nerve conduction + EMG | Affected limb | Localise and grade axonal loss |
+| Nerve injury | Nerve conduction + EMG | Affected limb | Localize and grade axonal loss |
 
 ## Wizard steps
 

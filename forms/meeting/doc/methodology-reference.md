@@ -16,7 +16,7 @@ provides standard motion, debate, and minute-taking conventions.
 
 Minutes per Robert's Rules typically contain:
 
-- Name of the organisation.
+- Name of the organization.
 - Kind of meeting (regular, special, adjourned).
 - Date, time, and place.
 - Presence and absence of the regular presiding officer and secretary.

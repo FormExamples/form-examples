@@ -1,7 +1,7 @@
 # Compliance Mapping
 
 This document maps each clause of the Research and Planning Privacy Notice
-to the UK GDPR / DPA 2018 / NHS-Act 2006 instrument that authorises the
+to the UK GDPR / DPA 2018 / NHS-Act 2006 instrument that authorizes the
 processing, and shows how the form's signals (acknowledgment + opt-out)
 are recorded for audit.
 
@@ -17,7 +17,7 @@ are recorded for audit.
 | 13(2)(a) retention | Cross-references NHS Records Management Code |
 | 13(2)(b) rights | Access, rectification, restriction, objection (Art. 21), portability not applicable |
 | 13(2)(d) complaint to ICO | "How to complain" links to ico.org.uk |
-| 13(2)(e) statutory or contractual nature | Optional; non-consent flows rely on s.251 approval or anonymisation |
+| 13(2)(e) statutory or contractual nature | Optional; non-consent flows rely on s.251 approval or anonymization |
 | 13(2)(f) automated decision-making | Stated as not applicable |
 
 ## Per-flow mapping
@@ -28,7 +28,7 @@ are recorded for audit.
 | Service-planning (commissioning, ICB analytics) | 6(1)(e) | 9(2)(h) | s.251 CAG approval | Yes |
 | Approved research (HRA + CAG approval) | 6(1)(e) | 9(2)(j) | s.251 CAG approval | Yes |
 | Consented research | 6(1)(a) | 9(2)(a) | patient consent | Patient consent overrides |
-| Anonymised statistics | Outside UK GDPR | n/a | Anonymisation Code | No (data is not personal) |
+| Anonymized statistics | Outside UK GDPR | n/a | Anonymization Code | No (data is not personal) |
 
 ## Form fields ↔ audit role
 
@@ -41,7 +41,7 @@ are recorded for audit.
 
 ## Rights interaction (research basis)
 
-Article 89 UK GDPR authorises Member State law to derogate from certain
+Article 89 UK GDPR authorizes Member State law to derogate from certain
 data-subject rights where personal data is processed for scientific
 research. DPA 2018 Schedule 2 Part 6 paragraph 27 implements this and
 provides:

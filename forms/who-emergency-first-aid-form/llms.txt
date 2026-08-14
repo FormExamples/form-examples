@@ -1,6 +1,6 @@
 # WHO Emergency First Aid Form
 
-> World Health Organization standardised emergency first aid documentation form for community first aid responders.
+> World Health Organization standardized emergency first aid documentation form for community first aid responders.
 
 ## Docs
 

@@ -27,7 +27,7 @@ symptom against the following structured framework:
 | ---------------------- | ------------------------------------------------- |
 | Onset                  | Sudden / gradual / progressive / stuttering       |
 | Duration               | Resolved / ongoing / fluctuating                  |
-| Distribution           | Focal / multifocal / generalised / bilateral      |
+| Distribution           | Focal / multifocal / generalized / bilateral      |
 | Quality                | Pain (severity, character), weakness, numbness, visual, speech, balance |
 | Severity               | Functional impact                                 |
 | Aggravators / relievers | Posture, exertion, time of day, medications     |

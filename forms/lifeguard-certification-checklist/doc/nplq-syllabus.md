@@ -89,7 +89,7 @@ are met:
 2. **Unconscious casualty rescue** — safe entry, controlled tow, safe
    extraction from deep water.
 3. **Suspected spinal injury management** — correct head splint or
-   vice-grip immobilisation throughout.
+   vice-grip immobilization throughout.
 4. **CPR** — compressions to RCUK depth and rate, with effective
    ventilations.
 5. **AED delivery** — safe shock delivery without rescuer contact.
@@ -108,8 +108,8 @@ research consolidated in HSG179 and ILSF position statements.
 
 ## Drowning sequence (recognition)
 
-Drowning casualties follow a recognisable behaviour pattern documented by
-Pia in 1971 and now standardised by ILSF:
+Drowning casualties follow a recognizable behaviour pattern documented by
+Pia in 1971 and now standardized by ILSF:
 
 1. Surprise — splashing or thrashing.
 2. Instinctive drowning response — vertical body position, head tilted
@@ -118,7 +118,7 @@ Pia in 1971 and now standardised by ILSF:
 4. Submersion — 20-60 seconds from instinctive response to submersion.
 
 Reference: Pia F. *Observations on the drowning of non-swimmers.* Journal
-of Physical Education. 1971;68:99-104. Standardised drowning definition
+of Physical Education. 1971;68:99-104. Standardized drowning definition
 in: van Beeck EF, Branche CM, Szpilman D, Modell JH, Bierens JJ. *A new
 definition of drowning: towards documentation and prevention of a global
 public health problem.* Bull World Health Organ. 2005;83(11):853-6.

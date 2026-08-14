@@ -10,9 +10,9 @@ active phase at 4 cm) and an **action line** drawn four hours to the right of
 it. The engine **computes a labour-progress classification and raises flags**;
 it does not produce a validated numeric score.
 
-The partogram was popularised by Philpott and Castle (1972) and adopted by the
+The partogram was popularized by Philpott and Castle (1972) and adopted by the
 World Health Organization. Its modern successor is the **WHO Labour Care Guide**
-(2020), which replaces the fixed alert / action lines with individualised
+(2020), which replaces the fixed alert / action lines with individualized
 reference ranges ("alert" thresholds) for each observation. This form models the
 classic alert-line / action-line partogram while treating the WHO Labour Care
 Guide as the reference standard for thresholds and intended use.

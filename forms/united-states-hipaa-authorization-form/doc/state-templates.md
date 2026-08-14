@@ -22,7 +22,7 @@ schema must accommodate. The reference templates are:
 | `patient.phone`                                         | "Phone Number (with area code)"         | "Phone"                             | "Phone"                    |
 | `signer.relationship`                                   | "Identify Signer" radio group           | "Relationship to Patient"           | "If signed by representative" |
 | `signer.representative_authority_description`           | "Other authorized representative (explain)" | "Authority"                     | "Description of authority" |
-| `disclosing_source.identification_mode`                 | initials radio group                    | "From whom"                         | "Person(s) authorised to disclose" |
+| `disclosing_source.identification_mode`                 | initials radio group                    | "From whom"                         | "Person(s) authorized to disclose" |
 | `disclosing_source.specific_persons_or_organizations`   | free-text                               | free-text                           | free-text                  |
 | `disclosing_source.class_of_persons`                    | "doctors, hospitals, clinics, nursing homes, …" pre-printed text | similar pre-printed text | "class of persons"     |
 | `authorized_recipient.recipient_name`                   | implicit — "Tennessee Department of Human Services (TDHS) and its authorized agents/contractors" | "PA DHS …" | "Recipient name" |

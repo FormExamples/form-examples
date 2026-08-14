@@ -1,6 +1,6 @@
 # Perioperative medication hold rules
 
-Reference for the `medication` optimisation domain. The form records whether a
+Reference for the `medication` optimization domain. The form records whether a
 hold-and-restart plan has been **agreed**; it does not generate one, and the
 timings below are reproduced for reference only. The prescriber and the
 anaesthetic team own the decision.

@@ -42,7 +42,7 @@ referral or running the MRI safety screen (that belongs to the request form).
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -60,7 +60,7 @@ least-urgent band only when no rule fires.
 
 ### Structured reporting category (Axis B)
 
-MRI uses recognised structured assessment-and-data systems whose category label
+MRI uses recognized structured assessment-and-data systems whose category label
 is stored in `reporting_category` as free text:
 
 - **PI-RADS** (Prostate Imaging Reporting and Data System) — a 1–5 assessment for
@@ -80,7 +80,7 @@ classification, severity, and flags:
 `mass_or_lesion`, `haemorrhage`, `infarct`, `demyelination`, `disc_herniation`,
 `cord_compression`, `infection_inflammation`, `incidental_finding`.
 
-Key measurement: `largest_lesion_size_mm` (surveillance / categorisation).
+Key measurement: `largest_lesion_size_mm` (surveillance / categorization).
 
 ## Wizard steps
 
@@ -131,14 +131,14 @@ mri-scan-test-result/
 ## Clinical references
 
 - RCR — Standards for the interpretation and reporting of imaging investigations
-  (third edition). Emphasises *actionable reporting*, mandatory report sections,
+  (third edition). Emphasizes *actionable reporting*, mandatory report sections,
   and prompt communication of critical / urgent / unexpected findings; applies to
   all who report imaging.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/standards-for-interpretation-and-reporting-of-imaging-investigations-third-edition/>
 - ACR Prostate Imaging Reporting & Data System (PI-RADS) — structured 1–5
   assessment for multiparametric prostate MRI.
   <https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/PI-RADS>
-- ACR Breast Imaging Reporting & Data System (BI-RADS) — standardised breast
+- ACR Breast Imaging Reporting & Data System (BI-RADS) — standardized breast
   imaging terminology and 0–6 assessment, including breast MRI.
   <https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/BI-RADS>
 - ACR Appropriateness Criteria. <https://acsearch.acr.org/list>

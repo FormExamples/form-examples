@@ -32,7 +32,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete, urgent, or low clinical priority.
 
 | Axis | Instrument | Output |
@@ -56,7 +56,7 @@ heart failure) **auto-escalates** the urgency tier regardless of the other axes.
 
 | Indication | Notes |
 | --- | --- |
-| Heart failure | Confirm/characterise; LVEF; prioritised by NT-proBNP (NICE NG106) |
+| Heart failure | Confirm/characterize; LVEF; prioritized by NT-proBNP (NICE NG106) |
 | Murmur / suspected valve disease | Assess severity and ventricular response |
 | Breathlessness | Distinguish cardiac vs non-cardiac cause |
 | Palpitations | Structural substrate assessment |

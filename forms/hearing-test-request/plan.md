@@ -20,7 +20,7 @@ form is designed to surface and escalate.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, urgency, completeness, and
-  clinical priority are independent and each citable to a recognised body. A
+  clinical priority are independent and each citable to a recognized body. A
   request can be appropriate yet incomplete, or complete yet urgent.
 - **Red flags auto-escalate.** Sudden onset, unilateral / asymmetric symptoms,
   or ear discharge force urgent / emergency triage regardless of the other axes.

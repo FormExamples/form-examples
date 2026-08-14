@@ -8,7 +8,7 @@ itself rather than individual job experience.
 
 ## Theoretical grounding
 
-### Schneider's organisational climate
+### Schneider's organizational climate
 
 The construct of *organisational climate* originates with **Benjamin
 Schneider** (1975). Climate is defined as shared perceptions of
@@ -28,7 +28,7 @@ members of a team that the team is safe for interpersonal risk taking"
   work teams. *Administrative Science Quarterly*, 44(2): 350-383.
   doi:10.2307/2666999
 - Seven-item psychological safety scale published in Edmondson 1999;
-  the Google Aristotle Project (2015) refined and popularised the
+  the Google Aristotle Project (2015) refined and popularized the
   construct.
 
 ### Equality, diversity, and inclusion (EDI) climate

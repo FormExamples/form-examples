@@ -99,7 +99,7 @@ Completed in order on a single continuous single-page wizard.
 | --- | --- | --- |
 | 1 | Referrer details | referrer name, role, GMC/registration number, referring practice, practice address, contact details, date of referral |
 | 2 | Patient identification | patient identifier (NHS number), name, date of birth, sex, address, contact details, interpreter / access needs |
-| 3 | Referral destination | referral specialty / service, named clinician or team (optional), receiving organisation |
+| 3 | Referral destination | referral specialty / service, named clinician or team (optional), receiving organization |
 | 4 | Urgency | urgency (routine / urgent / two-week-wait / emergency), urgency reason, suspected-cancer criterion + pathway (if two-week-wait) |
 | 5 | Reason and history | reason for referral, relevant clinical history, presenting problem, symptom duration, red-flag symptoms |
 | 6 | Examination and investigations | examination findings, vital signs, investigation results already available (bloods, imaging), red-flag findings |

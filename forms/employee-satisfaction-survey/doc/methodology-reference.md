@@ -53,7 +53,7 @@ A long-standing satisfaction scale (Weiss, Dawis, England, & Lofquist,
 
 ### Job Diagnostic Survey (JDS)
 
-Hackman & Oldham's instrument operationalising the Job Characteristics
+Hackman & Oldham's instrument operationalizing the Job Characteristics
 Model (skill variety, task identity, task significance, autonomy,
 feedback).
 
@@ -64,7 +64,7 @@ feedback).
 ### eNPS (Employee Net Promoter Score)
 
 Adapted from Reichheld's NPS for customers. Single item: "On a scale
-of 0–10, how likely is it that you would recommend [organisation] as a
+of 0–10, how likely is it that you would recommend [organization] as a
 place to work?" Score = % promoters (9–10) − % detractors (0–6).
 
 - Reichheld, F. F. (2003) "The One Number You Need to Grow." *Harvard

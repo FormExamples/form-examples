@@ -2,7 +2,7 @@
 
 ## Overview
 
-The flagged issues engine monitors casualty card data in real time and raises safety-critical alerts for clinical review. Each flag is categorised by clinical domain and assigned a priority level to guide the urgency of the clinical response.
+The flagged issues engine monitors casualty card data in real time and raises safety-critical alerts for clinical review. Each flag is categorized by clinical domain and assigned a priority level to guide the urgency of the clinical response.
 
 Flags are evaluated whenever relevant form data changes. Multiple flags may be active simultaneously.
 
@@ -116,7 +116,7 @@ Flags are evaluated whenever relevant form data changes. Multiple flags may be a
 | **Category**       | Reproductive                                                       |
 | **Priority**       | Warning                                                            |
 | **Trigger**        | `urinalysis.pregnancyTest` is `positive`                           |
-| **Clinical significance** | A positive pregnancy test alters the clinical pathway. Ionising radiation (X-ray, CT) should be avoided or justified with appropriate shielding. Medication choices must be reviewed for teratogenic risk. Ectopic pregnancy must be excluded in patients presenting with abdominal or pelvic pain. Early obstetric or gynaecology input may be required. |
+| **Clinical significance** | A positive pregnancy test alters the clinical pathway. Ionizing radiation (X-ray, CT) should be avoided or justified with appropriate shielding. Medication choices must be reviewed for teratogenic risk. Ectopic pregnancy must be excluded in patients presenting with abdominal or pelvic pain. Early obstetric or gynaecology input may be required. |
 
 ### 12. Mental Health Act Status
 

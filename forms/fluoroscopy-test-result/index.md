@@ -21,7 +21,7 @@ other clinician-driven result forms. It is completed by a radiologist,
 consultant, or reporting radiographer rather than by the patient, and is aligned
 with the Royal College of Radiologists (RCR) *Standards for the interpretation
 and reporting of imaging investigations*, the ACR practice parameter for the
-performance of esophagrams and upper-GI examinations, and the UK Ionising
+performance of esophagrams and upper-GI examinations, and the UK Ionizing
 Radiation (Medical Exposure) Regulations — IR(ME)R 2017.
 
 ## Scope and intended users
@@ -45,7 +45,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -119,7 +119,7 @@ fluoroscopy-test-result/
 ## Clinical references
 
 - RCR — Standards for the interpretation and reporting of imaging investigations
-  (third edition). Emphasises *actionable reporting* and applies to all who
+  (third edition). Emphasizes *actionable reporting* and applies to all who
   report imaging.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/standards-for-interpretation-and-reporting-of-imaging-investigations-third-edition/>
 - ACR–SPR–SAR Practice Parameter for the Performance of Esophagrams and Upper
@@ -129,7 +129,7 @@ fluoroscopy-test-result/
   (free barium causes mediastinitis / peritonitis). Esophageal perforation:
   comparison of aqueous and barium-containing contrast media, *Radiology*.
   <https://pubs.rsna.org/doi/abs/10.1148/radiology.202.3.9051016>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification and dose audit; screening time recorded per study).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 
@@ -142,7 +142,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

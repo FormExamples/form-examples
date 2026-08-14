@@ -1,7 +1,7 @@
 # National Early Warning Score 2 (NEWS2) — agent instructions
 
 UK NHS–aligned implementation of the **National Early Warning Score 2 (NEWS2)**,
-the Royal College of Physicians' (RCP, 2017) standardised track-and-trigger early
+the Royal College of Physicians' (RCP, 2017) standardized track-and-trigger early
 warning system. A clinician records six physiological parameters via a single
 continuous single-page wizard; the engine scores each parameter 0–3, adds a
 supplemental-oxygen weighting, aggregates to **0–20+**, applies the red-score

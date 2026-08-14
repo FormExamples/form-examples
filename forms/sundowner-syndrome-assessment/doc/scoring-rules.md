@@ -115,7 +115,7 @@ The grading engine produces:
 - `cmaiAggressive`, `cmaiNonAggressive`, `cmaiVerbal` — category sub-scores.
 - `npiTotal`, `npiDomainScores` (12 domains).
 - `caregiverDistress` — sum of NPI distress sub-scores.
-- `sundowningPattern` — temporal characterisation.
+- `sundowningPattern` — temporal characterization.
 - Flagged issues — see safety-case-notes.md.
 
 ## Important limitations

@@ -25,7 +25,7 @@ clinician-driven result forms. It is completed by a neurologist, clinical
 neurophysiologist, or clinical physiologist rather than by the patient, and is
 aligned with the joint IFCN / ILAE minimum recording standards, the ILAE /
 IFCN reporting practice for routine, sleep, ambulatory, and video-EEG, the
-Standardised Computer-based Organised Reporting of EEG (SCORE) framework, and
+Standardized Computer-based Organized Reporting of EEG (SCORE) framework, and
 the ACNS standardized critical-care EEG terminology.
 
 Full design description: [`index.md`](../index.md).

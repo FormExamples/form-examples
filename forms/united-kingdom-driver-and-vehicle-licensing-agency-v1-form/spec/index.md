@@ -8,7 +8,7 @@ Slug: `united-kingdom-driver-and-vehicle-licensing-agency-v1-form`
 
 General confidential medical information — vision self-declaration for driving fitness assessment.
 
-The DVLA V1 form is used by drivers in the United Kingdom to declare vision-related medical conditions to the Driver and Vehicle Licensing Agency (DVLA). It collects personal details, healthcare professional information, and a comprehensive vision self-declaration questionnaire covering eyesight standards, monocular vision, visual field problems, glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision, and other vision conditions. The form includes an applicant's authorisation section for medical information disclosure.
+The DVLA V1 form is used by drivers in the United Kingdom to declare vision-related medical conditions to the Driver and Vehicle Licensing Agency (DVLA). It collects personal details, healthcare professional information, and a comprehensive vision self-declaration questionnaire covering eyesight standards, monocular vision, visual field problems, glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision, and other vision conditions. The form includes an applicant's authorization section for medical information disclosure.
 
 Full design description: [`index.md`](../index.md).
 

@@ -35,7 +35,7 @@ human-rights concern) rather than producing a score.
   holding or place-of-safety power.
 - **Not for:** informal capacity-based decisions under the Mental Capacity Act
   2005, Deprivation of Liberty Safeguards / Liberty Protection Safeguards
-  authorisations, or as a substitute for the statutory forms prescribed by the
+  authorizations, or as a substitute for the statutory forms prescribed by the
   Mental Health (Hospital, Guardianship and Treatment) (England) Regulations —
   this instrument documents and validates the assessment; the statutory forms
   remain the legal record.

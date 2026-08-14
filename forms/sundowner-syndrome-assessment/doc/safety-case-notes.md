@@ -35,7 +35,7 @@ investigate:
 - **Dehydration / electrolyte imbalance** — hyponatraemia, hypercalcaemia,
   uraemia.
 - **Constipation / urinary retention** — frequently overlooked.
-- **Pain** — under-recognised in dementia; consider Abbey Pain Scale.
+- **Pain** — under-recognized in dementia; consider Abbey Pain Scale.
 - **Medication change** — anticholinergic load, opioids, benzodiazepines,
   steroids, antiepileptics, new prescription.
 - **Hypoxia** — pulmonary embolus, COPD exacerbation, anaemia.
@@ -73,7 +73,7 @@ are associated with:
 
 If antipsychotic prescription is essential:
 
-- Risperidone has UK marketing authorisation for short-term (up to 6
+- Risperidone has UK marketing authorization for short-term (up to 6
   weeks) treatment of persistent aggression in Alzheimer's dementia
   unresponsive to non-pharmacological intervention.
 - Use the lowest effective dose.

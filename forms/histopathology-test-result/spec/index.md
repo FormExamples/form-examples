@@ -13,7 +13,7 @@ captures why a specimen should be examined, this form records what the
 examination **found** and a structured **interpretation**. It records the
 examined specimen and its adequacy, the clinical history, the macroscopic and
 microscopic descriptions, the histopathological diagnosis, malignancy and
-tumour characterisation (tumour type, histological grade, pathological TNM
+tumour characterization (tumour type, histological grade, pathological TNM
 stage, resection margins, lymphovascular invasion), ancillary immunohistochemistry
 and SNOMED coding, the impression, and recommended follow-up — then computes a
 **four-axis interpretation grade** (result classification, abnormality severity /

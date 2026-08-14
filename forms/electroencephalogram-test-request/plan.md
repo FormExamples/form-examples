@@ -19,7 +19,7 @@ EEG.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, urgency, completeness, and clinical
-  priority are independent and each citable to a recognised body. A request can
+  priority are independent and each citable to a recognized body. A request can
   be appropriate yet incomplete, or complete yet urgent.
 - **Status epilepticus auto-escalates.** Suspected status epilepticus forces
   emergency triage regardless of the other axes.

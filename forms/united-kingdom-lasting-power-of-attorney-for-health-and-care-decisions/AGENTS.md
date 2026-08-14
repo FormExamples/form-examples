@@ -63,7 +63,7 @@ Every rule has a stable identifier rooted in its statutory source:
   eligibility (LPA Regs 2007 Sch.1 Pt.2)
 - `R-MCA-ORDER` — donor → certificate provider → attorneys sign order
 - `R-MCA-LST-CHOICE` — life-sustaining-treatment Option A / B selected
-- `R-MCA-COP-PROHIBITED` — instructions do not authorise unlawful acts
+- `R-MCA-COP-PROHIBITED` — instructions do not authorize unlawful acts
 - `R-MCA-INSTR-ADRT` — instructions do not contradict an existing ADRT
 
 See [`doc/rule-catalogue.md`](./doc/rule-catalogue.md) for the full table.

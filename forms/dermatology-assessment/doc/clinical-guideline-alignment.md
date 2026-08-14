@@ -1,7 +1,7 @@
 # Clinical Guideline Alignment
 
 The dermatology assessment captures DLQI as the primary quality-of-life
-instrument and a lesion characterisation history. The following
+instrument and a lesion characterization history. The following
 authoritative sources informed which structured fields are collected and
 which red-flag rules are applied.
 
@@ -16,7 +16,7 @@ which red-flag rules are applied.
 | CKS | Clinical Knowledge Summaries — Dermatology topics | https://cks.nice.org.uk/specialities/skin-and-nail-disorders |
 
 The Suspected Cancer NG12 referral criteria for melanoma (weighted
-7-point checklist) and squamous cell carcinoma (non-healing keratinising
+7-point checklist) and squamous cell carcinoma (non-healing keratinizing
 or crusted lesion) drive the lesion red-flag fields.
 
 ## British Association of Dermatologists (BAD)
@@ -64,7 +64,7 @@ or any single concerning feature.
 ## ABCDE rule (clinician aide-mémoire)
 
 The ABCDE rule (Asymmetry, Border, Colour, Diameter > 6 mm, Evolution)
-is a widely taught aide-mémoire popularised by Friedman et al. 1985 and
+is a widely taught aide-mémoire popularized by Friedman et al. 1985 and
 endorsed by AAD. It is not a scoring rule in our engine but is the basis
 of the lesion-feature checkboxes on Step 4.
 

@@ -11,11 +11,11 @@ may-be-appropriate (4–6), usually-not-appropriate (1–3). Mapped per
 | Indication | Typical appropriate modality |
 | --- | --- |
 | Suspected coronary disease (intermediate risk) | Coronary CT angiography |
-| Peripheral arterial disease / claudication for revascularisation | CTA or MRA lower extremity; catheter DSA for intervention |
+| Peripheral arterial disease / claudication for revascularization | CTA or MRA lower extremity; catheter DSA for intervention |
 | Aortic aneurysm assessment / surveillance | CT angiography aorta |
 | Carotid / renal stenosis | MRA or CTA |
 | Suspected pulmonary embolism | CT pulmonary angiography |
-| Acute GI bleeding | CT angiography then catheter DSA for embolisation |
+| Acute GI bleeding | CT angiography then catheter DSA for embolization |
 
 Sources: ACR Appropriateness Criteria — *Lower Extremity Arterial
 Claudication, Imaging Assessment for Revascularization* (2022 update);
@@ -31,7 +31,7 @@ Claudication, Imaging Assessment for Revascularization* (2022 update);
 | eGFR < 30 + iodinated contrast | contraindicated | High post-contrast AKI risk; weigh benefit, hold metformin |
 | Metformin + eGFR < 30 + iodinated contrast | caution / contraindicated | Withhold metformin from contrast administration; recheck eGFR at 48 h |
 | Previous severe contrast reaction | contraindicated | Severe / anaphylactoid history; consider alternative modality or premedication |
-| Pregnant / possible + ionising radiation | caution / contraindicated | IR(ME)R justification; prefer non-ionising MRA / ultrasound |
+| Pregnant / possible + ionizing radiation | caution / contraindicated | IR(ME)R justification; prefer non-ionizing MRA / ultrasound |
 
 ESUR: metformin can continue normally when eGFR > 30 and no AKI; below 30 (or
 intra-arterial with second-pass renal exposure) it is stopped from the time of
@@ -53,4 +53,4 @@ ACR–NKF consensus
 - ACR Appropriateness Criteria; RCR *iRefer*.
 - ESUR Contrast Media Safety Committee Guidelines.
 - ACR–NKF consensus on iodinated contrast and kidney disease.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).

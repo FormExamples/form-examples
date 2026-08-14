@@ -1,7 +1,7 @@
 # OET Speaking sub-test (Medicine profession)
 
 The Occupational English Test (OET) is the English-language proficiency
-test for healthcare professionals recognised by the UK General Medical
+test for healthcare professionals recognized by the UK General Medical
 Council (GMC), the UK Nursing and Midwifery Council (NMC), and equivalent
 regulators in Australia, Ireland, New Zealand, Singapore, and Dubai.
 
@@ -44,7 +44,7 @@ banded 0–6 with the band descriptors published by OET.
 | --- | --- | --- |
 | Relationship-building | 0–3 | Initiating, demonstrating empathy, non-judgemental |
 | Understanding patient's perspective | 0–3 | Eliciting and acknowledging ideas, concerns, expectations |
-| Providing structure | 0–3 | Sequencing, signposting, summarising |
+| Providing structure | 0–3 | Sequencing, signposting, summarizing |
 | Information-gathering | 0–3 | Open / closed questioning, screening, clarifying |
 | Information-giving | 0–3 | Chunking, checking understanding, plain language |
 

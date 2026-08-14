@@ -1,6 +1,6 @@
 # Workplace Stress Assessment
 
-Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organisational domains and identify teams or individuals at elevated risk of work-related ill health.
+Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organizational domains and identify teams or individuals at elevated risk of work-related ill health.
 
 ## Scoring system
 
@@ -11,7 +11,7 @@ Workplace stress assessment using the UK HSE Management Standards Indicator Tool
   - Low Risk: Domain scores ≥ 4.0 — performing at or above HSE 80th percentile benchmark
   - Moderate Risk: Domain scores 3.0-3.9 — performing around HSE 50th percentile
   - High Risk: Domain scores 2.0-2.9 — below HSE 20th percentile; action required
-  - Very High Risk: Domain scores < 2.0 — urgent organisational intervention
+  - Very High Risk: Domain scores < 2.0 — urgent organizational intervention
 
 ## Steps
 
@@ -24,7 +24,7 @@ Workplace stress assessment using the UK HSE Management Standards Indicator Tool
 | 5   | Peer Support              |
 | 6   | Relationships             |
 | 7   | Role Clarity              |
-| 8   | Organisational Change     |
+| 8   | Organizational Change     |
 | 9   | Additional Comments       |
 
 ## Directory structure

@@ -6,7 +6,7 @@ Operational protocol for the PREVENT-based primary-prevention assessment.
 
 - Adults aged 30–79 years.
 - No prior atherosclerotic cardiovascular disease (MI, stroke, peripheral
-  arterial disease, coronary or peripheral revascularisation).
+  arterial disease, coronary or peripheral revascularization).
 - No prior heart failure (a separate HF outcome is *predicted* by PREVENT;
   patients with existing HF require disease-specific management not
   primary-prevention scoring).
@@ -53,13 +53,13 @@ Optional inputs for the extended model:
 
 ## Output interpretation
 
-- 10-year total CVD ≥ 20 % → high; emphasise intensive lifestyle and
+- 10-year total CVD ≥ 20 % → high; emphasize intensive lifestyle and
   high-intensity statin per 2018 Cholesterol Guideline.
 - 10-year total CVD 7.5 – < 20 % → intermediate; shared-decision statin.
 - 10-year total CVD 5 – < 7.5 % → borderline; consider risk-enhancers.
 - 10-year total CVD < 5 % → low; lifestyle and reassessment in 4–6 years.
 - 30-year risk is a communication device for younger adults whose 10-year
-  risk is low; pair with lifestyle counselling and risk-factor optimisation.
+  risk is low; pair with lifestyle counselling and risk-factor optimization.
 
 ## Onward actions
 

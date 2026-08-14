@@ -26,7 +26,7 @@ radiographer, consultant, registrar, or other reporting clinician rather than by
 the patient, and is aligned with the Royal College of Radiologists (RCR)
 *Standards for the interpretation and reporting of imaging investigations*, the
 ACR Appropriateness Criteria, ACR Lung-RADS, the ACR Incidental Findings
-Committee white papers, and the UK Ionising Radiation (Medical Exposure)
+Committee white papers, and the UK Ionizing Radiation (Medical Exposure)
 Regulations — IR(ME)R 2017.
 
 Full design description: [`index.md`](../index.md).

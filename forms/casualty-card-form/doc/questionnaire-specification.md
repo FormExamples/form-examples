@@ -9,7 +9,7 @@ The Casualty Card Form consists of 14 sequential steps. This document specifies 
 - **Field name**: camelCase TypeScript property name.
 - **Type**: TypeScript type used in the data model.
 - **Validation**: Constraints applied before submission.
-- **Default**: Value assigned on form initialisation.
+- **Default**: Value assigned on form initialization.
 - Empty string `''` is the default for unanswered text fields.
 - `null` is the default for unanswered numeric fields.
 - `false` is the default for unanswered boolean fields.

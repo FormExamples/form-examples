@@ -1,6 +1,6 @@
 # Return to Work
 
-> A clinician-issued medical certificate authorising an employee's return to work after illness, injury, or extended absence. The form captures the clinician's assessment, the period of validity, the patient's fitness status, any workplace adjustments or restrictions, and a phased-return plan where applicable. The output is a signed *Statement of Fitness for Work* (aligned with the UK NHS **Med 3 "Fit Note"**), suitable to give to the employee and to share with the employer's occupational-health team.
+> A clinician-issued medical certificate authorizing an employee's return to work after illness, injury, or extended absence. The form captures the clinician's assessment, the period of validity, the patient's fitness status, any workplace adjustments or restrictions, and a phased-return plan where applicable. The output is a signed *Statement of Fitness for Work* (aligned with the UK NHS **Med 3 "Fit Note"**), suitable to give to the employee and to share with the employer's occupational-health team.
 
 ## Docs
 

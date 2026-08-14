@@ -21,17 +21,17 @@ in any of the four quadrants:
   principles low    cargo-cult agile     pre-agile / waterfall
 ```
 
-- **Healthy adoption** (high / high) — the organisation believes in
+- **Healthy adoption** (high / high) — the organization believes in
   agile and acts on it. Coaching focuses on the few weak spots.
-- **Aspirational gap** (high / low) — the organisation *says* it values
+- **Aspirational gap** (high / low) — the organization *says* it values
   agility but the day-to-day reality is different. This is the most
   common failure mode and the most useful one to surface: coaching has
   to translate intent into named behaviours.
-- **Cargo-cult agile** (low / high) — the organisation does the rituals
+- **Cargo-cult agile** (low / high) — the organization does the rituals
   (stand-ups, retrospectives, story points) but doesn't believe in the
   underlying principles. Coaching has to address *why* before adding
   more *what*.
-- **Pre-agile / waterfall** (low / low) — the organisation is not
+- **Pre-agile / waterfall** (low / low) — the organization is not
   pretending. Coaching here can be honest about whether agility is the
   right fit before investing further.
 
@@ -60,7 +60,7 @@ Bands map approximately as follows:
 
 | Maturity | Principles mean | Checklist percent |
 | --- | --- | --- |
-| Optimising | ≥ 4.50 (90% of 5) | ≥ 90 |
+| Optimizing | ≥ 4.50 (90% of 5) | ≥ 90 |
 | Mature | ≥ 3.75 (75% of 5) | ≥ 75 |
 | Developing | ≥ 3.00 (60% of 5) | ≥ 50 |
 | Initial | ≥ 2.00 (40% of 5) | ≥ 25 |
@@ -73,7 +73,7 @@ higher than behaviours, so the bands compensate.
 ## Shared respondent identity
 
 Both forms collect the same respondent fields (name, email, role, team,
-organisation, assessment date, period) using the same role enum. A
+organization, assessment date, period) using the same role enum. A
 future dashboard can join submissions by `(respondent, team, date
 window)` to show principles vs. behaviour for the same observation
 point.

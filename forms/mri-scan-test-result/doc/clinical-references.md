@@ -49,7 +49,7 @@ systems. The category label is the value the form stores in the grade's
 ### ACR PI-RADS (prostate MRI)
 
 The Prostate Imaging Reporting and Data System (PI-RADS), a joint development of
-the ACR, ESUR, and the AdMeTech Foundation, standardises the acquisition,
+the ACR, ESUR, and the AdMeTech Foundation, standardizes the acquisition,
 interpretation, and reporting of multiparametric prostate MRI. Components
 (T2-weighted, diffusion-weighted, and dynamic contrast-enhanced imaging) are
 scored and combined into an assessment category of **1–5**, where 5 is most
@@ -60,8 +60,8 @@ likely to represent clinically significant prostate cancer.
 
 ### ACR BI-RADS (breast MRI)
 
-The Breast Imaging Reporting and Data System (BI-RADS) provides standardised
-breast imaging terminology, report organisation, and a final assessment
+The Breast Imaging Reporting and Data System (BI-RADS) provides standardized
+breast imaging terminology, report organization, and a final assessment
 category (**0–6**) for mammography, ultrasound, and MRI of the breast, conveying
 an approximate risk of malignancy and the recommended management.
 

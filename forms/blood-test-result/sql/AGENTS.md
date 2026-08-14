@@ -7,7 +7,7 @@ These numbered migrations are the schema source of truth. Order:
 1. `00_create_extensions.sql` — `pgcrypto` (UUIDs) + `pg_trgm` (trigram GIN indexes).
 2. `01_create_function_set_updated_at.sql` — shared `updated_at` trigger function.
 3. `02_create_table_patient.sql` — patient demographics.
-4. `03_create_table_clinician.sql` — reporting clinician (pathologist / reporting scientist / authorising clinician).
+4. `03_create_table_clinician.sql` — reporting clinician (pathologist / reporting scientist / authorizing clinician).
 5. `04_create_table_blood_test_result.sql` — main result/report record with quantitative analyte result values.
 6. `05_create_table_blood_test_result_grade.sql` — four-axis interpretation grade.
 7. `06_create_table_blood_test_result_grade_rule.sql` — fired-rule audit trail.

@@ -9,7 +9,7 @@ This form combines two widely used patient-safety classifications:
   January 2009.
   <https://www.who.int/publications/i/item/conceptual-framework-for-the-international-classification-for-patient-safety>
 
-The ICPS provides ten high-level classes for organising patient-safety
+The ICPS provides ten high-level classes for organizing patient-safety
 data:
 
 1. Incident type
@@ -17,7 +17,7 @@ data:
 3. Patient characteristics
 4. Incident characteristics
 5. Contributing factors / hazards
-6. Organisational outcomes
+6. Organizational outcomes
 7. Detection
 8. Mitigating factors
 9. Ameliorating actions
@@ -34,7 +34,7 @@ terms: *None / Mild / Moderate / Severe / Death*. The form labels
 simplicity; this is a documented divergence from the ICPS preferred
 terms.
 
-## NCC MERP Index for Categorising Medication Errors
+## NCC MERP Index for Categorizing Medication Errors
 
 - **National Coordinating Council for Medication Error Reporting and
   Prevention (NCC MERP).** *Index for Categorizing Medication Errors.*
@@ -52,7 +52,7 @@ The NCC MERP nine-band index (A–I) is reproduced exactly in this form:
 | C | An error occurred that reached the patient but did not cause harm |
 | D | An error occurred that reached the patient and required monitoring to confirm no harm and/or required intervention to preclude harm |
 | E | An error occurred that may have contributed to or resulted in temporary harm to the patient and required intervention |
-| F | An error occurred that may have contributed to or resulted in temporary harm and required initial or prolonged hospitalisation |
+| F | An error occurred that may have contributed to or resulted in temporary harm and required initial or prolonged hospitalization |
 | G | An error occurred that may have contributed to or resulted in permanent patient harm |
 | H | An error occurred that required intervention necessary to sustain life |
 | I | An error occurred that may have contributed to or resulted in the patient's death |

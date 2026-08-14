@@ -1,7 +1,7 @@
 # back-end-with-loco — tasks
 
 - [x] Generate `back-end-with-loco-setup` scaffold script
-- [x] Materialise the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Materialize the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Refactor from the single-table JSONB pattern to the relational
       `medical-operation-note` template: per-table migrations + entities
 - [x] Migrations: `users` (Loco default), `patients`, `clinicians`,

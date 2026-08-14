@@ -41,7 +41,7 @@ directly capture these defining features.
 URL: https://dyslexiaida.org
 
 The IDA's research-grounded definition is broadly compatible with the
-BDA / Rose definition and emphasises the phonological deficit and the
+BDA / Rose definition and emphasizes the phonological deficit and the
 neurobiological origin. The IDA *Knowledge and Practice Standards for
 Teachers of Reading* informs the recommendations captured in the Support
 Plan step.

@@ -20,7 +20,7 @@ RCPath cancer datasets / tissue pathways and NICE NG12.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, specimen quality, completeness, and
-  urgency are independent and each citable to a recognised body. A request can
+  urgency are independent and each citable to a recognized body. A request can
   be appropriate yet incomplete, or complete yet a specimen-reject risk.
 - **Red-flags auto-escalate.** A two-week-wait suspected-cancer request or an
   urgent frozen section forces the urgency tier (frozen section → immediate)

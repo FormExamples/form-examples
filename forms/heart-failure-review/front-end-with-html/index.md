@@ -8,6 +8,6 @@ and `js/` (the classification-and-completeness engine in
 
 This is a documentation and status-classification front-end, not a numeric
 score. The engine derives an NYHA functional status, a four-pillar
-medication-optimisation status, a review-completeness grade, and a set of
+medication-optimization status, a review-completeness grade, and a set of
 safety flags. See the form root [`../index.md`](../index.md) and
 [`../spec/index.md`](../spec/index.md) for the domain contract.

@@ -19,7 +19,7 @@ aligned with ACR / RCR iRefer appropriateness and IR(ME)R 2017 justification.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, radiation safety, completeness,
-  and triage are independent and each citable to a recognised body. A request
+  and triage are independent and each citable to a recognized body. A request
   can be appropriate yet incomplete, or complete yet a radiation-safety concern.
 - **Radiation safety never auto-accepts.** Pregnancy / possible pregnancy,
   unjustified exposure, or a repeat recent image forces caution / contraindicated

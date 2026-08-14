@@ -18,7 +18,7 @@ Aligned to DSM-5-TR and ICD-11:
 | Severe    | Substantial support required; limited communication; needs help with most daily activities | 20–34 | 6A00.2 |
 | Profound  | Intensive support across all settings; very limited communication; dependent on others for daily care | < 20 | 6A00.3 |
 
-DSM-5-TR explicitly emphasises that severity is determined by adaptive
+DSM-5-TR explicitly emphasizes that severity is determined by adaptive
 functioning (conceptual, social, practical) — **not by IQ** — because
 adaptive functioning determines the level of supports required.
 
@@ -30,7 +30,7 @@ Captured in the Adaptive Functioning step:
 | ---------- | --------------------------------------------------------------------- |
 | Conceptual | Language, reading, writing, arithmetic, memory, problem-solving       |
 | Social     | Empathy, interpersonal communication, friendships, social judgement, self-regulation |
-| Practical  | Self-care, occupational skills, money management, recreation, organising school/work tasks |
+| Practical  | Self-care, occupational skills, money management, recreation, organizing school/work tasks |
 
 ## NHS England Annual Health Check alignment
 
@@ -47,7 +47,7 @@ the AHC template:
 | Behavioural changes / distress               | Behavioural Concerns & Triggers                 |
 | Mental capacity                              | Mental Capacity & Consent                       |
 | Reasonable adjustments                       | Reasonable Adjustments Required                 |
-| Personalised Health Action Plan              | Health Action Plan                              |
+| Personalized Health Action Plan              | Health Action Plan                              |
 
 ## Output
 

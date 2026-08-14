@@ -19,4 +19,4 @@ conventions.
 
 25 fixed checkpoints is small enough for one wide row per submission
 (matching the `agile-checklist` convention), unlike
-`hospital-daily-monitoring-checklist`'s 97-item normalised child table.
+`hospital-daily-monitoring-checklist`'s 97-item normalized child table.

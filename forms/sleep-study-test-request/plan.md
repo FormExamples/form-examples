@@ -19,7 +19,7 @@ STOP-BANG / DVLA guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, clinical priority, completeness,
-  and triage are independent and each citable to a recognised body. A request
+  and triage are independent and each citable to a recognized body. A request
   can be appropriate yet incomplete, or complete yet urgent.
 - **Vocational driving auto-escalates.** An occupational driver with excessive
   sleepiness, or severe daytime sleepiness, forces urgent triage regardless of

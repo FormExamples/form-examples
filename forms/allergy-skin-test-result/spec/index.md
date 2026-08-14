@@ -13,7 +13,7 @@ captures why testing should be done and whether it is safe, this form records
 what the test **found** and a structured **interpretation**. It records the
 performed test type, the clinical history, the pre-analytic validity controls
 (antihistamine washout and positive histamine control), the allergens tested and
-their measured weal sizes or specific-IgE (sIgE) results, the sensitised
+their measured weal sizes or specific-IgE (sIgE) results, the sensitized
 allergens and a structured reaction summary, the clinical interpretation and
 impression, and recommended follow-up — then computes a **four-axis
 interpretation grade** (result classification, abnormality severity / structured
@@ -27,7 +27,7 @@ template. It is completed by an allergist-immunologist, dermatologist, or nurse
 rather than by the patient, and is aligned with BSACI and EAACI skin-test and
 specific-IgE interpretation guidance — including the ≥3 mm positive-weal
 threshold, the requirement for a valid positive histamine control, and the
-essential distinction between **sensitisation** and **clinically relevant
+essential distinction between **sensitization** and **clinically relevant
 allergy**.
 
 Full design description: [`index.md`](../index.md).

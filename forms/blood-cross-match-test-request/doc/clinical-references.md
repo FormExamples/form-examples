@@ -13,7 +13,7 @@ these thresholds and on the clinical indication.
 | --- | --- | --- |
 | General (no acute coronary syndrome) | 70 g/L | 70–90 g/L |
 | Acute coronary syndrome | 80 g/L | 80–100 g/L |
-| Chronic / transfusion-dependent anaemia | individualised | individualised |
+| Chronic / transfusion-dependent anaemia | individualized | individualized |
 
 Bands: usually-appropriate (7–9), may-be-appropriate (4–6),
 usually-not-appropriate (1–3). A request well above the restrictive threshold

@@ -2,7 +2,7 @@
 
 ## Intended use
 
-A structured immunisation status tracking form for healthcare workers and
+A structured immunization status tracking form for healthcare workers and
 patients in occupational, travel, or special-circumstance settings. It
 applies UKHSA Green Book and DHSC HCW clearance rules and stratifies the
 patient into a risk level.
@@ -24,7 +24,7 @@ nurse.
 
 | Misuse | Mitigation |
 | --- | --- |
-| HCW cleared for EPP without HepB anti-HBs result | Step 9 mandates anti-HBs ≥10 mIU/mL before "Fully Immunised" |
+| HCW cleared for EPP without HepB anti-HBs result | Step 9 mandates anti-HBs ≥10 mIU/mL before "Fully Immunized" |
 | Active needlestick exposure not escalated | Critical-risk flag visible on summary |
 | Pregnancy + live vaccine | Pregnancy declaration in Step 8 blocks live vaccines |
 | Stale schedule (JCVI / Green Book updates) | Schedule JSON timestamped; stale-data flag |

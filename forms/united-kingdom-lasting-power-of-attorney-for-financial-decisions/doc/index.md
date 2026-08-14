@@ -46,7 +46,7 @@ address for the OPG (PO Box 16185, Birmingham B2 2WH).
 
 ### [`glossary.md`](./glossary.md)
 
-Alphabetised glossary of LPA terms used by the form, the validator, and
+Alphabetized glossary of LPA terms used by the form, the validator, and
 the on-screen help: applicant, attorney, best interests, certificate
 provider, continuation sheet, Court of Protection, deputyship, donor,
 enduring power of attorney (EPA), jointly, jointly and severally, LPA,

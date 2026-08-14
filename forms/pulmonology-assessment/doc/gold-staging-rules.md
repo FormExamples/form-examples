@@ -41,9 +41,9 @@ Combines symptom burden and exacerbation history.
 
 | Group | Symptoms | Exacerbation history |
 | --- | --- | --- |
-| A | Low (mMRC 0-1 or CAT < 10) | 0 or 1 moderate, **not** hospitalised |
-| B | High (mMRC ≥ 2 or CAT ≥ 10) | 0 or 1 moderate, **not** hospitalised |
-| E | Any | ≥ 2 moderate **or** ≥ 1 hospitalisation |
+| A | Low (mMRC 0-1 or CAT < 10) | 0 or 1 moderate, **not** hospitalized |
+| B | High (mMRC ≥ 2 or CAT ≥ 10) | 0 or 1 moderate, **not** hospitalized |
+| E | Any | ≥ 2 moderate **or** ≥ 1 hospitalization |
 
 mMRC = modified Medical Research Council Dyspnoea Scale.
 CAT = COPD Assessment Test (Jones PW et al. *Eur Respir J* 2009;34:648-54.
@@ -68,7 +68,7 @@ PMID: 19720809).
 
 Per GOLD, a **moderate exacerbation** is one requiring antibiotics and/or
 oral corticosteroids; a **severe exacerbation** is one requiring
-hospitalisation or A&E visit. The frequent-exacerbator phenotype (≥ 2/year)
+hospitalization or A&E visit. The frequent-exacerbator phenotype (≥ 2/year)
 predicts ≥ 2 in the following year and triggers escalation per Hurst JR et
 al. *N Engl J Med* 2010;363:1128-38. PMID: 20843247.
 

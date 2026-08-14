@@ -79,7 +79,7 @@ only separated groups with `---`, without naming most of them).
 
 ## SQL shape
 
-Normalised **parent + child** tables (not one wide row per submission
+Normalized **parent + child** tables (not one wide row per submission
 — at 67 metrics a flat table would need over 130 columns):
 
 - `hospital_dashboard_metrics` — one row per reporting period:

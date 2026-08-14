@@ -108,8 +108,8 @@ Emitted independently of the numeric result, each with a priority:
 
 - **Statin offer** (high) — `tenYearRiskPercent >= 10`: meets the NICE threshold;
   offer atorvastatin 20 mg plus lifestyle advice after informed discussion.
-- **High risk** (high) — `tenYearRiskPercent >= 20`: prioritise statin and
-  intensive lifestyle optimisation.
+- **High risk** (high) — `tenYearRiskPercent >= 20`: prioritize statin and
+  intensive lifestyle optimization.
 - **Not eligible** (high) — `hasEstablishedCvd == 'yes'` or
   `hasFamilialHypercholesterolaemia == 'yes'` or `age < 25` or `age > 84`: QRISK3
   is not valid; assess by the appropriate pathway instead.

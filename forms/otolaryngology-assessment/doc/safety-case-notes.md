@@ -3,7 +3,7 @@
 ## Intended use
 
 A structured ENT consultation record that captures presenting complaint,
-SNOT-22 score, and standardised examination findings (otoscopy, anterior
+SNOT-22 score, and standardized examination findings (otoscopy, anterior
 rhinoscopy, oropharyngeal exam) to support a clinical impression and ENT
 management plan.
 

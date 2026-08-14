@@ -1,6 +1,6 @@
 # Vaccinations Assessment
 
-Immunisation-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record. Aligned with the UK Green Book (Immunisation against infectious disease).
+Immunization-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record. Aligned with the UK Green Book (Immunization against infectious disease).
 
 ## Directory structure
 
@@ -13,7 +13,7 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 
 ## Scoring system
 
-- **Instrument**: Immunisation Schedule Compliance (UK Green Book)
+- **Instrument**: Immunization Schedule Compliance (UK Green Book)
 - **Range**: Compliant / Partial / Non-compliant
 - **Engine files**: `types.ts`, `vaccinations-grader.ts`, `vaccinations-rules.ts`, `flagged-issues.ts`, `utils.ts`
 - **Test file**: `vaccinations-grader.test.ts`
@@ -21,7 +21,7 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 ## Assessment steps (10 total)
 
 1. Patient Information - `Step1PatientInformation.svelte`
-2. Immunisation History - `Step2ImmunizationHistory.svelte`
+2. Immunization History - `Step2ImmunizationHistory.svelte`
 3. Childhood Vaccinations - `Step3ChildhoodVaccinations.svelte`
 4. Adult Vaccinations - `Step4AdultVaccinations.svelte`
 5. Travel Vaccinations - `Step5TravelVaccinations.svelte`
@@ -67,4 +67,4 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 - MDCG 2019-11 Rev.1 (EU MDR Software Classification)
 - UK Medical Devices Regulations 2002
 - ISO/IEC/IEEE 26514:2022
-- UK Green Book (Immunisation against infectious disease)
+- UK Green Book (Immunization against infectious disease)

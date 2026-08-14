@@ -25,7 +25,7 @@ documentation aid:
    each row has `name`, `description`, `model_or_diagram_url`,
    `is_chosen` (boolean)
 5. `architecture_decision_record_note` — discussion notes captured during
-   socialisation (1:N); each row has `noted_at`, `noted_by`, `body`
+   socialization (1:N); each row has `noted_at`, `noted_by`, `body`
 
 All tables follow the repo conventions: UUIDv4 primary keys, `created_at` and
 `updated_at` timestamps, `deleted_at` for soft delete on root entities,
@@ -57,7 +57,7 @@ deprecated   — no longer relevant; preserved for history
 
 ## Group enum
 
-Tyree & Akerman suggest organising by architectural concern. We use:
+Tyree & Akerman suggest organizing by architectural concern. We use:
 
 ```
 business         — business architecture

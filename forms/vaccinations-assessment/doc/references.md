@@ -14,7 +14,7 @@
 
 ## JCVI
 
-- Joint Committee on Vaccination and Immunisation. *JCVI statements*.
+- Joint Committee on Vaccination and Immunization. *JCVI statements*.
   <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunisation>
 
 ## WHO
@@ -45,7 +45,7 @@
 - NICE NG218 *Vaccine uptake in the general population*.
   <https://www.nice.org.uk/guidance/ng218>
 
-## Healthcare worker immunisation
+## Healthcare worker immunization
 
 - UK Department of Health and Social Care. *Health clearance for
   tuberculosis, hepatitis B, hepatitis C and HIV: new healthcare workers*.

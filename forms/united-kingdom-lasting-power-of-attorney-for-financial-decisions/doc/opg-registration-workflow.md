@@ -177,7 +177,7 @@ LPA if the attorney has behaved improperly (s. 22(4)(b)).
 - A separate "use a lasting power of attorney" service is operated by
   GOV.UK at <https://www.gov.uk/use-lasting-power-of-attorney> where
   the donor / attorney can generate an access code so that banks and
-  other organisations can verify the LPA online.
+  other organizations can verify the LPA online.
 - The OPG retains its case file for **20 years from the death of the
   donor**.
 

@@ -14,7 +14,7 @@ Eye specialists perform several non-invasive tests to evaluate how much the cata
 
 ## Pre-Surgical Measurements (Biometry)
 
-If surgery is indicated, advanced imaging tools are deployed to customise your treatment plan: [2, 6, 20]
+If surgery is indicated, advanced imaging tools are deployed to customize your treatment plan: [2, 6, 20]
 
 - Optical Coherence Tomography (OCT): High-resolution cross-sectional scans mapping the layers of the retina.
 - Corneal Topography: A non-contact test mapping the exact shape and curvature of your cornea.

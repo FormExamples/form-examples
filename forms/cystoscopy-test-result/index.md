@@ -41,7 +41,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -67,7 +67,7 @@ classification, severity, and flags:
 `urethral_stricture`, `trabeculation`, `prostatic_enlargement`,
 `normal_examination`.
 
-Tumour / lesion detail: `tumour_size_mm` (categorisation / surveillance),
+Tumour / lesion detail: `tumour_size_mm` (categorization / surveillance),
 `tumour_appearance` (papillary / solid / flat / not-applicable), and
 `biopsy_taken`. Procedure safety is captured by `complication`
 (none / bleeding / perforation / uti / other).

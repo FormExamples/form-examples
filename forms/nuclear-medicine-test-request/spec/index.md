@@ -22,7 +22,7 @@ This form is the nuclear-medicine counterpart to the repository's other
 clinician-driven imaging request forms. It is completed by a radiologist,
 nuclear-medicine physician, oncologist, cardiologist, GP, or technologist rather
 than by the patient, and is aligned with the ACR Appropriateness Criteria, RCR
-iRefer, ARSAC guidance, the Ionising Radiation (Medical Exposure) Regulations
+iRefer, ARSAC guidance, the Ionizing Radiation (Medical Exposure) Regulations
 IR(ME)R, and EANM / SNMMI procedure guidelines.
 
 Full design description: [`index.md`](../index.md).
@@ -34,7 +34,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe to perform now, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -59,8 +59,8 @@ other axes, and a high-acuity indication auto-escalates the triage tier.
 | Thyroid uptake (I-123 / Tc-99m) | thyroid function | low |
 | Renal DMSA | renal cortical assessment | low |
 | Renal MAG3 | renal function / drainage | low |
-| Gallium / octreotide (Ga-68 / In-111) | tumour or infection localisation | high |
-| White-cell scan | infection localisation | moderate |
+| Gallium / octreotide (Ga-68 / In-111) | tumour or infection localization | high |
+| White-cell scan | infection localization | moderate |
 | Sentinel-node | sentinel-node mapping | low |
 
 ## 4. Inputs and outputs

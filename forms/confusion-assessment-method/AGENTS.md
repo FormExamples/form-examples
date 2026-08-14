@@ -50,7 +50,7 @@ function of four present / absent features.
   deliriumPresent = feature1 AND feature2 AND (feature3 OR feature4)
   ```
   where feature1 = acute onset and fluctuating course, feature2 = inattention,
-  feature3 = disorganised thinking, feature4 = altered level of consciousness.
+  feature3 = disorganized thinking, feature4 = altered level of consciousness.
   `classification = deliriumPresent ? 'present' : 'absent'`. For the CAM-ICU
   variant, an unrousable patient (RASS −4/−5) yields `unableToAssess` and the
   algorithm is not evaluated.
@@ -61,8 +61,8 @@ function of four present / absent features.
     `1 AND 2 AND (3 OR 4)` diagnostic rule; CAM-ICU RASS gating.
   - `cam-grader.ts` — pure `gradeCam(data)` orchestrator returning the output
     shape above.
-  - `flagged-issues.ts` — derives the prioritised flagged-issue list.
-  - `utils.ts` — shared helpers (feature normalisation, tri-state handling,
+  - `flagged-issues.ts` — derives the prioritized flagged-issue list.
+  - `utils.ts` — shared helpers (feature normalization, tri-state handling,
     positive-feature-set construction).
 - **Tests:** `cam-grader.test.ts` (each satisfying and non-satisfying feature
   pattern plus the `unableToAssess` edge case), `cam-rules.test.ts`.

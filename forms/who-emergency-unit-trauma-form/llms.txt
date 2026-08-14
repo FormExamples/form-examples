@@ -1,6 +1,6 @@
 # WHO Emergency Unit Form: Trauma
 
-> World Health Organization standardised emergency unit clinical documentation form for trauma patients.
+> World Health Organization standardized emergency unit clinical documentation form for trauma patients.
 
 ## Docs
 

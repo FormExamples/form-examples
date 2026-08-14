@@ -1,13 +1,13 @@
 # WHO Emergency First Aid Form
 
-World Health Organization standardised emergency first aid documentation form for community first aid responders.
+World Health Organization standardized emergency first aid documentation form for community first aid responders.
 
 This single-page form captures patient identification, situation assessment, medical background, CABCDE systematic assessment with corresponding interventions, recommendations for transport, and community first aid responder details. A copy of the completed form should be sent to the referral facility.
 
 ## Source
 
 - **Form**: Emergency First Aid Form
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/emergency-first-aid-form.pdf?sfvrsn=fd38f178_1>
 - **Pages**: 1
 
@@ -75,7 +75,7 @@ Each CABCDE category has an Assessment column (Normal checkbox or findings) and 
 #### D — Disability
 
 - **Assessment**: (free text) / Normal
-- **Intervention**: Spinal Immobilisation / Glucose Given / Seizure Care / High Temperature Care / Low Temperature Care / None
+- **Intervention**: Spinal Immobilization / Glucose Given / Seizure Care / High Temperature Care / Low Temperature Care / None
 
 #### E — Exposure/Other
 

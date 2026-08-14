@@ -25,7 +25,7 @@ UK *15 Healthcare Essentials*.
 
 ## Diabetes UK 15 Healthcare Essentials
 
-Diabetes UK summarises the annual review as the *15 Healthcare Essentials*:
+Diabetes UK summarizes the annual review as the *15 Healthcare Essentials*:
 
 <https://www.diabetes.org.uk/about-us/our-policies/healthcare-services/15-healthcare-essentials>
 
@@ -66,7 +66,7 @@ Diabetes UK summarises the annual review as the *15 Healthcare Essentials*:
   (6.5 %).
 - Type 2 diabetes, on a drug with hypoglycaemia risk (sulphonylurea or
   insulin): 53 mmol/mol (7.0 %).
-- Individualised: relax target in frail or elderly patients or where
+- Individualized: relax target in frail or elderly patients or where
   intensification harms outweigh benefits.
 - Type 1 diabetes (adults): 48 mmol/mol or lower if achievable without
   problematic hypoglycaemia (NG17 §1.6.6).

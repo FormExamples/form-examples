@@ -1,4 +1,4 @@
-# WHO Prehospital Standardised Clinical Form
+# WHO Prehospital Standardized Clinical Form
 
 This form implements the WHO standard prehospital patient-encounter
 form for emergency medical services (EMS) operating in low-, middle-,
@@ -30,7 +30,7 @@ form for an EMS encounter. It is designed to be:
 - **Mass-casualty-ready** — the "Mass Casualty" checkbox at the head of
   the form allows the same instrument to be used in mass-casualty
   incidents alongside a triage tag.
-- **Inter-operable** — the field set is harmonised with the WHO
+- **Inter-operable** — the field set is harmonized with the WHO
   Emergency Unit General and Trauma forms so the receiving facility can
   transcribe directly without re-collection.
 - **Reference-card driven** — used with the same WHO reference card

@@ -22,7 +22,7 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
    Loco setup generators.
 4. **Classification engine** — `types.ts`, `utils.ts`, `review-rules.ts`,
    `review-grader.ts`, `flagged-issues.ts` with Vitest tests covering each NYHA
-   class, each heart-failure type, optimisation-status transitions, the
+   class, each heart-failure type, optimization-status transitions, the
    potassium/eGFR thresholds, and each completeness band.
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
@@ -37,10 +37,10 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
 - One continuous single-page wizard (nine sections); no multi-page forms.
 - This is a documentation / status-classification form, not a diagnostic
   calculator — it assumes a prior confirmed diagnosis and subtype.
-- The medication-optimisation model is driven by `heartFailureType`: the four
+- The medication-optimization model is driven by `heartFailureType`: the four
   pillars are indicated for HFrEF; the SGLT2 inhibitor is the principal pillar
   for HFmrEF/HFpEF. A pillar marked `contraindicated` / `not-tolerated` counts
-  as addressed so the optimisation grade is not penalised for documented reasons.
+  as addressed so the optimization grade is not penalised for documented reasons.
 - Monitoring bloods (U&E, eGFR, potassium) gate both the safety flags and the
   completeness grade because they underpin safe RAAS-inhibitor and MRA use.
 - Missing numeric inputs never fabricate a positive finding; they raise

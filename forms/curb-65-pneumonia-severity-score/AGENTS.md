@@ -73,7 +73,7 @@ See [`index.md`](./index.md) for the full design and the criterion table.
 
 Fired independently of the numeric band; priority high / medium / low.
 
-- **`high-severity-admit`** (high) — score ≥ 3: hospitalise, manage as severe CAP.
+- **`high-severity-admit`** (high) — score ≥ 3: hospitalize, manage as severe CAP.
 - **`consider-icu`** (high) — score 4–5: assess for intensive-care / HDU admission.
 - **`hypotension`** (high) — systolic < 90 or diastolic ≤ 60 mmHg (shock risk).
 - **`new-confusion`** (high) — new-onset confusion present.

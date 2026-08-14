@@ -35,7 +35,7 @@ respondent's frequency meets or exceeds the item-specific threshold.
 | Item | Wording (short)                                                     | Positive when |
 | ---- | ------------------------------------------------------------------- | ------------- |
 | 1    | Trouble wrapping up the final details of a project                  | Sometimes+    |
-| 2    | Difficulty getting things in order when doing tasks needing organisation | Sometimes+    |
+| 2    | Difficulty getting things in order when doing tasks needing organization | Sometimes+    |
 | 3    | Problems remembering appointments or obligations                    | Sometimes+    |
 | 4    | Avoidance / delay of tasks requiring a lot of thought               | Often+        |
 | 5    | Fidget or squirm with hands or feet when sitting a long time        | Often+        |

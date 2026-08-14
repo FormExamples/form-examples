@@ -18,7 +18,7 @@ problem and rolls it up to a plan status — not a numeric score.
       `nursing-care-plan-rules.ts`, `nursing-care-plan-grader.ts`,
       `flagged-issues.ts`.
 - [x] Model `problems[]` where each problem has `goals[]` + `interventions[]` +
-      inline evaluation; `createDefaultAssessment()` initialises `problems` to
+      inline evaluation; `createDefaultAssessment()` initializes `problems` to
       `[]`; `createDefaultProblem()` / `createDefaultGoal()` /
       `createDefaultIntervention()` build fresh rows with unique ids.
 - [x] Generic `ListEditor.svelte` repeating-row editor: a problem list (step 4)

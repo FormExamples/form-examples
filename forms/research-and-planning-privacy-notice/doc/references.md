@@ -21,7 +21,7 @@
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 - Research provisions:
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-and-research-information/>
-- Anonymisation code:
+- Anonymization code:
   <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/anonymisation-pseudonymisation-and-privacy-enhancing-technologies/>
 
 ## NHS / HRA guidance

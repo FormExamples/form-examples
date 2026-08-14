@@ -28,7 +28,7 @@ ACGS / consent-for-genomic-testing guidance.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: an eligible request can still be incomplete
+recognized body. Axes are orthogonal: an eligible request can still be incomplete
 or lack documented consent.
 
 | Axis | Instrument | Output |

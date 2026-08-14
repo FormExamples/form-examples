@@ -9,7 +9,7 @@ and the critical-result alerting rules used by this form.
 
 ### AASM apnoea-hypopnoea index (AHI) severity
 
-The American Academy of Sleep Medicine (AASM) standardises the scoring of
+The American Academy of Sleep Medicine (AASM) standardizes the scoring of
 respiratory events and the AHI severity thresholds that the form's `osa_severity`
 field and the grade's `reporting_category` label use. For adults and adolescents
 aged 13 and over:

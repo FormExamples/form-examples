@@ -3,7 +3,7 @@
 ## Intended use
 
 A 10-step questionnaire that captures the patient's medical, lifestyle, and
-preference profile, applies UKMEC categorisation per method, and produces a
+preference profile, applies UKMEC categorization per method, and produces a
 shortlist of methods sorted by UKMEC suitability and patient preference.
 
 ## Intended users
@@ -23,7 +23,7 @@ patient device.
 1. **Demographics** — name, date of birth, GP, ethnicity, language. Used for
    record-matching.
 2. **Reproductive history** — gravidity, parity, planned future pregnancies,
-   breastfeeding status. Drives postnatal UKMEC categorisation.
+   breastfeeding status. Drives postnatal UKMEC categorization.
 3. **Menstrual history** — LMP, cycle pattern, dysmenorrhoea, IMB/PCB,
    menorrhagia. Heavy menstrual bleeding triggers a LNG-IUS suggestion in
    line with NICE CKS HMB.
@@ -67,7 +67,7 @@ The engine produces:
 ## Out of scope
 
 - Emergency contraception dosing (see FSRH EC guideline)
-- Sterilisation counselling
+- Sterilization counselling
 - Termination of pregnancy
 - Menopause management (see HRT assessment form)
 - Subfertility evaluation (see fertility-assessment form)

@@ -18,7 +18,7 @@ conventions.
 | 02 | `02_create_table_hospital_performance_indicators.sql` | one row per reporting period: hospital/site, period month/year, prepared-by, sign-off |
 | 03 | `03_create_table_hospital_performance_indicator_value.sql` | one row per recorded indicator (of 50); FK to the parent period |
 
-## Why a normalised child table, not one wide row
+## Why a normalized child table, not one wide row
 
 50 indicators would need over 100 flat columns (value + notes each)
 on a single submission table. Instead,

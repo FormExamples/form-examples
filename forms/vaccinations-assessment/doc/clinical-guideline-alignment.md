@@ -1,21 +1,21 @@
 # Clinical guideline alignment
 
-## UK Green Book and Routine Immunisation Schedule
+## UK Green Book and Routine Immunization Schedule
 
 - UKHSA. *Immunisation against infectious disease* (the Green Book).
   <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
 - UKHSA. *The complete routine immunisation schedule from spring 2024*.
   <https://www.gov.uk/government/publications/the-complete-routine-immunisation-schedule>
 
-The Green Book is the authoritative UK reference for immunisation policy.
+The Green Book is the authoritative UK reference for immunization policy.
 Each chapter covers a specific disease/vaccine; the form's compliance
 engine references chapter numbers when raising flagged issues.
 
 | Green Book chapter | Topic |
 | --- | --- |
 | 6 | Contraindications and special considerations |
-| 11 | Immunisation schedule (catch-up) |
-| 12 | Immunisation of HCW |
+| 11 | Immunization schedule (catch-up) |
+| 12 | Immunization of HCW |
 | 14a | Covid-19 |
 | 14b | RSV (added 2024) |
 | 18 | Hepatitis B |
@@ -26,7 +26,7 @@ engine references chapter numbers when raising flagged issues.
 
 ## JCVI
 
-- Joint Committee on Vaccination and Immunisation. *JCVI statements*.
+- Joint Committee on Vaccination and Immunization. *JCVI statements*.
   <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunisation>
 
 JCVI publishes routine schedule recommendations to UK ministers; the form

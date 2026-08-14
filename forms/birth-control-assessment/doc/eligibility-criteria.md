@@ -60,7 +60,7 @@ clinician.
 
 ## Quick Reference Guide
 
-The FSRH publishes a printable quick reference table summarising every
+The FSRH publishes a printable quick reference table summarizing every
 condition-method category. The form's `mec-grader.ts` engine mirrors the
 structure of that table.
 

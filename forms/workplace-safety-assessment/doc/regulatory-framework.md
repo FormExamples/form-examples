@@ -76,7 +76,7 @@ Reference: HSE risk-management web pages (above) and HSG65 *Managing
 for health and safety*.
 <https://www.hse.gov.uk/pubns/books/hsg65.htm>
 
-This implementation operationalises the five steps as the assessment
+This implementation operationalizes the five steps as the assessment
 record's section structure.
 
 ## RIDDOR thresholds (selection)

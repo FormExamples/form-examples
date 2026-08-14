@@ -62,7 +62,7 @@ The record must be:
 
 - Retained in unmodified form (versioned notice text alongside
   signature).
-- Available to authorised investigators on request.
+- Available to authorized investigators on request.
 - Disclosed to the staff member as the subject of any process.
 
 Where the record is referenced in a Fitness to Practise hearing, GMC
@@ -77,7 +77,7 @@ Read access is restricted to:
 - The staff member's line manager.
 - The HR / People function.
 - The compliance / governance / Caldicott Guardian function.
-- Authorised investigators under a Fitness to Practise or HR process.
+- Authorized investigators under a Fitness to Practise or HR process.
 
 The acknowledgment record is **not** routinely visible to clinical
 colleagues, and is not part of the patient record.

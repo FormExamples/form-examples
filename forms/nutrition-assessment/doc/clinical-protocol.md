@@ -42,7 +42,7 @@ and BAPEN MUST.
 10. **Care Plan & Monitoring.** Goals; review interval (weekly in
     hospital; monthly in care home; annually in community).
 
-## Categorisation
+## Categorization
 
 The engine maps to four severity bands:
 

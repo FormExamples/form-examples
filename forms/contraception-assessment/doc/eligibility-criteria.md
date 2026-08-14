@@ -37,7 +37,7 @@ migraine with aura).
 | 10 | Lactational amenorrhoea method (LAM) | UKMEC 2016 §LAM |
 | 11 | Emergency contraception (separate dosing guideline applies) | UKMEC 2016 §EC |
 
-Methods relying on permanent surgical sterilisation (tubal occlusion,
+Methods relying on permanent surgical sterilization (tubal occlusion,
 vasectomy) are out of scope for the current questionnaire.
 
 ## Selected category 3 / 4 triggers
@@ -76,6 +76,6 @@ The form does not advise on:
 - Bridging contraception during surgical procedures
 - Emergency contraception choice or dosing (UPA vs LNG vs Cu-IUD)
 - Termination of pregnancy pathways
-- Sterilisation counselling
+- Sterilization counselling
 - Contraception in patients aged < 16 (separate Fraser-competence assessment
   required)

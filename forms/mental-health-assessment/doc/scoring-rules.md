@@ -5,7 +5,7 @@ This form implements two complementary self-report screeners:
 - **PHQ-9** — Patient Health Questionnaire-9 (Kroenke, Spitzer & Williams,
   2001). 9-item depression severity measure derived from the DSM-IV
   depression criteria.
-- **GAD-7** — Generalised Anxiety Disorder 7-item scale (Spitzer, Kroenke,
+- **GAD-7** — Generalized Anxiety Disorder 7-item scale (Spitzer, Kroenke,
   Williams & Löwe, 2006).
 
 Both instruments are in the public domain; their use is permitted free of
@@ -74,7 +74,7 @@ Each of the 7 items uses the same 0–3 scale as PHQ-9.
 | 15–21 | Severe   | Specialist mental health input                            |
 
 A score of **10 or more** on GAD-7 is the validated cut-off for further
-evaluation of generalised anxiety disorder (Spitzer et al., 2006).
+evaluation of generalized anxiety disorder (Spitzer et al., 2006).
 
 ## Recommended output
 
@@ -90,7 +90,7 @@ The grading engine produces:
 ## Important limitations
 
 - PHQ-9 and GAD-7 are screeners, not diagnostic instruments. Diagnosis of
-  major depressive disorder or generalised anxiety disorder requires
+  major depressive disorder or generalized anxiety disorder requires
   clinical interview against DSM-5-TR or ICD-11 criteria.
 - A normal PHQ-9 or GAD-7 does not exclude depression or anxiety;
   collateral history and clinical judgement take precedence.

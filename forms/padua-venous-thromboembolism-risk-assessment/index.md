@@ -2,24 +2,24 @@
 
 A bedside risk-stratification tool that estimates the risk of venous
 thromboembolism (VTE — deep-vein thrombosis and pulmonary embolism) in
-hospitalised **medical** patients. It records **eleven weighted risk factors**,
+hospitalized **medical** patients. It records **eleven weighted risk factors**,
 sums a total of **0–20**, and classifies the patient as **high risk** when the
 score is **≥ 4** and **low risk** when the score is **< 4**. A high score is a
 prompt to consider **pharmacological thromboprophylaxis** (in the absence of
 contraindications such as active bleeding or high bleeding risk); a low score
 supports withholding routine anticoagulant prophylaxis and using mechanical
-measures and early mobilisation.
+measures and early mobilization.
 
 The Padua Prediction Score was derived and validated by Barbar *et al.*
 (*Journal of Thrombosis and Haemostasis*, 2010) in a prospective cohort of
-hospitalised medical patients, and is recommended as a VTE risk-assessment model
+hospitalized medical patients, and is recommended as a VTE risk-assessment model
 for medical inpatients by the American College of Chest Physicians (ACCP,
 Antithrombotic Therapy for VTE Disease, 9th ed.).
 
 ## Scope and intended users
 
 - **Setting:** general and acute medical wards, admissions units, and any
-  inpatient setting caring for hospitalised medical patients.
+  inpatient setting caring for hospitalized medical patients.
 - **Users:** doctors, nurses, pharmacists, and other clinicians performing VTE
   risk assessment on admission and at review.
 - **Patients:** adults admitted as **medical** (non-surgical) inpatients.
@@ -51,7 +51,7 @@ scoring its weighted points when present and 0 when absent. Total score 0–20.
 
 | Total score | Risk band | Recommended action |
 | --- | --- | --- |
-| < 4 | Low risk | Routine pharmacological thromboprophylaxis not indicated on risk grounds. Encourage early mobilisation; consider mechanical prophylaxis; re-score if the clinical condition changes. |
+| < 4 | Low risk | Routine pharmacological thromboprophylaxis not indicated on risk grounds. Encourage early mobilization; consider mechanical prophylaxis; re-score if the clinical condition changes. |
 | ≥ 4 | High risk | Consider pharmacological thromboprophylaxis (e.g. low-molecular-weight heparin, unfractionated heparin, or fondaparinux) **after** assessing bleeding risk and contraindications. Use mechanical prophylaxis where pharmacological prophylaxis is contraindicated. |
 
 The threshold for a high-risk classification is **Padua ≥ 4**, associated in the

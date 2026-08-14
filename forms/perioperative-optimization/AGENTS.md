@@ -1,8 +1,8 @@
 # Perioperative Optimization — Agent Instructions
 
-Perioperative optimisation and prehabilitation intake. Collects modifiable
+Perioperative optimization and prehabilitation intake. Collects modifiable
 pre-operative risk across eight domains via a 16-step single-page wizard; grades
-each domain as **optimised / in-progress / action-required / insufficient-time /
+each domain as **optimized / in-progress / action-required / insufficient-time /
 not-applicable** against the time remaining before surgery; computes a composite
 **surgical readiness** band and a set of safety flags; and emits a
 domain-by-domain prehabilitation plan.
@@ -180,7 +180,7 @@ independently and are never filtered by the override.**
 
 ## Clinical grounding
 
-- NHS England perioperative-pathway optimisation guidance.
+- NHS England perioperative-pathway optimization guidance.
 - CPOC *Preoperative Assessment and Optimisation for Adult Surgery* (2021),
   and the CPOC perioperative anaemia and diabetes guidelines.
 - NICE NG45 (routine preoperative tests) and NG180 (perioperative care).

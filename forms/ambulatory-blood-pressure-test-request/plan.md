@@ -18,7 +18,7 @@ consistent, auditable, and aligned with NICE NG136 and BIHS guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, suitability, completeness, and
-  triage are independent and each citable to a recognised body. A request can be
+  triage are independent and each citable to a recognized body. A request can be
   appropriate yet incomplete, or complete yet urgent.
 - **Severe BP auto-escalates.** Clinic BP ≥180/120 mmHg forces urgent / same-day
   triage regardless of the other axes (NICE NG136).

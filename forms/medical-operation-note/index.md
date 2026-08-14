@@ -73,7 +73,7 @@ before the team leaves the theatre.
 | 8 | Materials, implants & prostheses | sutures (type, gauge, count), staples, clips, mesh, screws, plates, prosthetic joints, vascular grafts, lot / serial / batch / expiry numbers, manufacturer, registry submitted |
 | 9 | Drains, packs & specimens | drains placed (type, site, output target, removal plan), packs left in situ (count, removal-by date), urinary catheter, NG tube, specimens sent (label, container, fixative, pathology destination, urgent / routine) |
 | 10 | Safety, counts, EBL & complications | swab count first / final agreed, needle count first / final agreed, instrument count first / final agreed, count discrepancy resolution, estimated blood loss (mL), transfusion given (units PRBC / FFP / platelets / cryo), intra-operative complications (Clavien–Dindo grade, description), never-event flagged |
-| 11 | Post-operative plan | recovery destination (PACU / ward / enhanced care / HDU / ICU / day-case discharge), monitoring frequency, IV fluids, analgesia plan, antibiotics, VTE prophylaxis, diet, mobilisation, wound care, drain removal plan, follow-up plan, special instructions, debrief completed (WHO Sign-Out) |
+| 11 | Post-operative plan | recovery destination (PACU / ward / enhanced care / HDU / ICU / day-case discharge), monitoring frequency, IV fluids, analgesia plan, antibiotics, VTE prophylaxis, diet, mobilization, wound care, drain removal plan, follow-up plan, special instructions, debrief completed (WHO Sign-Out) |
 | 12 | Summary, grade & sign-off | computed composite risk grade + fired rules, ASA carried over, Clavien–Dindo, safety flags, surgeon override + reason (optional), final attestation, electronic signature, dictation timestamp |
 
 ## Safety flags

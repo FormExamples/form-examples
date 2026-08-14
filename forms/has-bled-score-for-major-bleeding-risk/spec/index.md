@@ -102,7 +102,7 @@ Emitted independently of the total, each with a priority:
   major-bleeding risk; not a contraindication to anticoagulation, but review more
   frequently and correct modifiable factors.
 - **Modifiable: uncontrolled hypertension** (medium) — `hypertensionPoint == 1`:
-  optimise blood-pressure control (target SBP ≤ 160 mmHg).
+  optimize blood-pressure control (target SBP ≤ 160 mmHg).
 - **Modifiable: labile INR** (medium) — `labileInrPoint == 1`: improve INR
   stability or consider a DOAC.
 - **Modifiable: antiplatelets/NSAIDs** (medium) — `drugsPoint == 1`: review the

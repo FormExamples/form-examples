@@ -21,7 +21,7 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
    Loco setup generators.
 4. **Classification engine** — `types.ts`, `utils.ts`, `aaa-rules.ts`,
    `aaa-grader.ts`, `flagged-issues.ts` with Vitest tests covering the diameter
-   thresholds (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the non-visualised guard, every
+   thresholds (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the non-visualized guard, every
    category, and the growth calculation.
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
@@ -36,7 +36,7 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
 - Classification is driven entirely by the single `maxAorticDiameterCm` value
   against three fixed thresholds (3.0 / 4.5 / 5.5 cm); bands are lower-bound
   inclusive and upper-bound exclusive.
-- A non-visualised aorta must never fall through to `normal`: guard on
+- A non-visualized aorta must never fall through to `normal`: guard on
   `aortaVisualised == 'no'` or a null diameter and route to a re-scan.
 - Growth (`current − prior` diameter) is computed only for surveillance
   re-scans where both values exist, and feeds the rapid-growth flag.

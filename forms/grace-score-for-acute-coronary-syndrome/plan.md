@@ -20,7 +20,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
    Loco setup generators.
 4. **Scoring engine** — `types.ts`, `utils.ts`, `grace-rules.ts`,
    `grace-grader.ts`, `flagged-issues.ts` with Vitest tests covering band
-   boundaries, mortality-band thresholds, creatinine unit normalisation, and the
+   boundaries, mortality-band thresholds, creatinine unit normalization, and the
    max-band rule.
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list +
@@ -37,7 +37,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
   through a banded point lookup with differing weights (systolic BP is
   inverse — lower pressure adds more points). Encode the bands as named lookup
   tables in `grace-rules.ts`, boundaries covered by tests.
-- Serum creatinine may be entered in mg/dL or µmol/L; normalise to mg/dL
+- Serum creatinine may be entered in mg/dL or µmol/L; normalize to mg/dL
   (µmol/L ÷ 88.4) before banding and store the entered unit alongside the raw
   value.
 - Two mortality horizons (in-hospital, 6-month) have different thresholds; the

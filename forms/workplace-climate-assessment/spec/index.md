@@ -6,7 +6,7 @@ Slug: `workplace-climate-assessment`
 
 ## 1. Purpose
 
-Workplace climate assessment measuring organisational culture, psychological safety, and employee experience using a validated Likert-scale instrument to inform leadership, inclusion, and wellbeing programmes.
+Workplace climate assessment measuring organizational culture, psychological safety, and employee experience using a validated Likert-scale instrument to inform leadership, inclusion, and wellbeing programmes.
 
 Full design description: [`index.md`](../index.md).
 

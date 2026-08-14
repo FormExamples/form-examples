@@ -1,7 +1,7 @@
 # Guideline alignment
 
 Cross-walk between the ten assessment steps and the cardiology guidelines
-that the form is designed to operationalise.
+that the form is designed to operationalize.
 
 | Step | Topic | Primary guideline reference |
 | --- | --- | --- |

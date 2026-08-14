@@ -8,10 +8,10 @@ GRACE engine from the HTML front-end.
 
 - [x] Pure scoring engine ported from the HTML front-end (`src/lib/engine/`) —
       the GRACE weighted regression point model, mortality-band thresholds, and
-      creatinine unit normalisation, preserving the exact lookup logic
+      creatinine unit normalization, preserving the exact lookup logic
 - [x] Vitest tests covering each band-lookup boundary (age, heart rate, systolic
       BP, creatinine), the Killip and yes/no contributors, the mortality-band
-      boundaries (88/89, 108/109, 118/119, 140/141), µmol/L normalisation, the
+      boundaries (88/89, 108/109, 118/119, 140/141), µmol/L normalization, the
       max-band rule, and flagged-issue detection
 - [x] id-keyed Svelte 5 store with in-place `deepAssign` + localStorage
       (`grace-score-for-acute-coronary-syndrome.front-end-with-svelte.<id>.v1`)

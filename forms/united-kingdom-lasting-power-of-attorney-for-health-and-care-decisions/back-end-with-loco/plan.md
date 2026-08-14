@@ -27,8 +27,8 @@ Scaffolded 2026-05-18. The Loco scaffold script lives in the sibling
 10. [ ] `templates/lpa/_validity.html.tera` validity-summary fragment.
 11. [ ] `templates/dashboard.html.tera` case-manager dashboard.
 12. [ ] PDF builder via `genpdf` or `printpdf`.
-13. [ ] FHIR Bundle builder (serialise SeaORM entities as FHIR R5).
-14. [ ] XML builder (serialise via `quick-xml`).
+13. [ ] FHIR Bundle builder (serialize SeaORM entities as FHIR R5).
+14. [ ] XML builder (serialize via `quick-xml`).
 15. [ ] `cargo test` unit tests for the validator rules.
 16. [ ] `cargo build` and `cargo check` clean.
 

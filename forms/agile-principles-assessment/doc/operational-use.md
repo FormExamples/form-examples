@@ -12,7 +12,7 @@ LeSS rhythm.
 - One submission per respondent per assessment cycle.
 
 The unit of assessment is a **named team, programme, value stream, or
-whole organisation**. The form's `respondent` block captures the
+whole organization**. The form's `respondent` block captures the
 respondent identity and the unit they are reporting on.
 
 ## When to run it
@@ -39,9 +39,9 @@ quarterly review rhythm.
    principle is itself a signal worth discussing in the next
    retrospective.
 3. **Coach / Scrum Master**: uses the fired-rules list to seed the next
-   retrospective and to prioritise coaching topics.
+   retrospective and to prioritize coaching topics.
 4. **Sponsor / Executive**: uses the composite maturity trend over time
-   as a leading indicator of organisational change.
+   as a leading indicator of organizational change.
 
 ## Integration with Scrum
 
@@ -117,4 +117,4 @@ treated as form-improvement signals.
   for hiring external coaches; complements this Likert assessment.
 - `employee-satisfaction-survey` — broader team-health survey; can be run
   alongside.
-- `workplace-climate-assessment` — organisation-level culture survey.
+- `workplace-climate-assessment` — organization-level culture survey.

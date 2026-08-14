@@ -20,7 +20,7 @@ consultant, registrar, or other reporting clinician rather than by the patient,
 and is aligned with the Royal College of Radiologists (RCR) *Standards for the
 interpretation and reporting of imaging investigations*, the RCR *Standards for
 the communication of critical, urgent and unexpected significant radiological
-findings*, and the UK Ionising Radiation (Medical Exposure) Regulations 2017
+findings*, and the UK Ionizing Radiation (Medical Exposure) Regulations 2017
 (IR(ME)R).
 
 ## Scope and intended users
@@ -43,7 +43,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -67,7 +67,7 @@ classification, severity, and flags:
 `foreign_body`, `free_air`, `bony_lesion`, `incidental_finding`.
 
 The `reporting_category` free-text label (e.g. normal / abnormal-acute /
-abnormal-chronic) summarises the structured conclusion for Axis B.
+abnormal-chronic) summarizes the structured conclusion for Axis B.
 
 ### Body region and structured findings
 
@@ -130,7 +130,7 @@ x-ray-test-result/
 ## Clinical references
 
 - RCR — Standards for the interpretation and reporting of imaging investigations.
-  Emphasises *actionable reporting* and applies to all who report imaging,
+  Emphasizes *actionable reporting* and applies to all who report imaging,
   including plain radiographs.
   <https://www.rcr.ac.uk/media/wlsf4ufl/ppqi_reporting-standards-guidance.pdf>
 - RCR — Standards for the communication of critical, urgent and unexpected
@@ -139,7 +139,7 @@ x-ray-test-result/
 - RCR — Alerts and notification of imaging reports: recommendations (October
   2022).
   <https://www.rcr.ac.uk/media/44sfqlbi/rcr-publications_alerts-and-notification-of-imaging-reports-recommendations_october-2022.pdf>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification and dose context carried from the request).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 
@@ -152,7 +152,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

@@ -1,7 +1,7 @@
 # Clinical guideline alignment
 
 There is no single national MCAS guideline. The form is aligned with the
-internationally recognised consensus statements and expert review papers
+internationally recognized consensus statements and expert review papers
 listed below.
 
 ## Consensus statements
@@ -64,12 +64,12 @@ form cross-references:
 - BSACI Anaphylaxis Guideline (Ewan et al. 2021) — for the anaphylaxis
   overlap subset.
 
-## Mastocytosis Society / patient organisations
+## Mastocytosis Society / patient organizations
 
 - The Mastocytosis Society Inc (TMS): <https://tmsforacure.org/>
 - UK Mastocytosis Support Group: <https://www.mastocytosis.org.uk/>
 
-These are patient-facing organisations; their educational material is
+These are patient-facing organizations; their educational material is
 referenced by the form's patient information leaflet but not its scoring
 logic.
 

@@ -1,7 +1,7 @@
 # Framework Sources
 
 The Agile Consulting Scorecard is a non-clinical self-assessment of
-organisational readiness to engage external agile coaching help. Unlike
+organizational readiness to engage external agile coaching help. Unlike
 clinical forms in this monorepo, the canonical sources are the Agile
 Manifesto, the Principles Behind the Agile Manifesto, the Scrum Guide,
 and adjacent Lean / Toyota Production System literature. This document
@@ -23,7 +23,7 @@ The four values are:
 4. Responding to change over following a plan.
 
 Each of these maps directly to one of items 1–4 in the scorecard, with
-the checklist item phrased as a binary operational test the organisation
+the checklist item phrased as a binary operational test the organization
 can audit against today.
 
 ## Principles Behind the Agile Manifesto (2001)
@@ -101,7 +101,7 @@ The form is not a medical device. The applicable standards are:
 The scorecard is intentionally framework-agnostic. SAFe (Scaled Agile
 Framework), LeSS (Large-Scale Scrum), and Disciplined Agile / Disciplined
 Agile Delivery each have their own readiness self-assessments; the
-scorecard is not a substitute. Organisations evaluating those specific
+scorecard is not a substitute. Organizations evaluating those specific
 frameworks should consult:
 
 - SAFe — <https://scaledagileframework.com/>
@@ -109,6 +109,6 @@ frameworks should consult:
 - PMI Disciplined Agile — <https://www.pmi.org/disciplined-agile>
 
 The scorecard's value is that it precedes framework selection: an
-organisation that scores Low on the manifesto basics is unlikely to
+organization that scores Low on the manifesto basics is unlikely to
 benefit from any framework-specific transformation, regardless of which
 one is on offer.

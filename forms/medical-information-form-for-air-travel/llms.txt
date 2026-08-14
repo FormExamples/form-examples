@@ -1,6 +1,6 @@
 # Medical Information Form for Air Travel (MEDIF)
 
-> A **Medical Information Form (MEDIF)** is the standardised airline document used to determine whether a passenger with specific health needs is fit to fly and whether in-flight medical support (supplemental oxygen, stretcher, incubator, medical escort, battery-powered medical device) must be arranged in advance. It is completed in two parts: Part 1 by the passenger (or booking agent) and Part 2 by the attending physician, then forwarded to the airline's medical desk for clearance.
+> A **Medical Information Form (MEDIF)** is the standardized airline document used to determine whether a passenger with specific health needs is fit to fly and whether in-flight medical support (supplemental oxygen, stretcher, incubator, medical escort, battery-powered medical device) must be arranged in advance. It is completed in two parts: Part 1 by the passenger (or booking agent) and Part 2 by the attending physician, then forwarded to the airline's medical desk for clearance.
 
 ## Docs
 

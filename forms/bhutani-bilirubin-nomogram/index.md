@@ -58,7 +58,7 @@ The zone predicts **risk of a future significant rise**; it is distinct from the
 
 Both threshold lines rise with postnatal age and are set **lower for lower
 gestational age**. The tool therefore takes **gestational age** as an input and
-selects the appropriate threshold curve. Recognised **risk factors** that lower
+selects the appropriate threshold curve. Recognized **risk factors** that lower
 the effective concern threshold and warrant earlier / closer assessment include:
 
 - gestational age **< 38 weeks**;

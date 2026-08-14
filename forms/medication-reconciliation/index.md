@@ -29,7 +29,7 @@ preventable medication-related harm.
   compile the BPMH), prescribers (doctors, non-medical prescribers), and nurses.
 - **Patients:** any admitted patient taking, or expected to take, regular or
   as-required medicines, including high-risk medicines.
-- **Not for:** primary-care repeat-prescription authorisation, a substitute for
+- **Not for:** primary-care repeat-prescription authorization, a substitute for
   a full clinical medication review, or definitive interaction screening (it
   flags for pharmacist review rather than replacing a decision-support engine).
 

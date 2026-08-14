@@ -70,7 +70,7 @@ coverage. The DSG remains the canonical source for definitive criteria.
 
 ## Recent eligibility changes
 
-The UK introduced an **individualised risk assessment for sexual behaviours
+The UK introduced an **individualized risk assessment for sexual behaviours
 (IRA)** in June 2021, replacing categorical deferrals based on sex of
 partner. The IRA is applied at the donor session per the current DSG:
 

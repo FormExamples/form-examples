@@ -9,7 +9,7 @@ classification, and the critical-result alerting rules used by this form.
 
 ### BI-RADS final assessment categories
 
-The ACR Breast Imaging Reporting and Data System (BI-RADS) standardises
+The ACR Breast Imaging Reporting and Data System (BI-RADS) standardizes
 mammographic reporting through seven final assessment categories (0–6). It is the
 single most important structured score this form records (`bi_rads_category`),
 and it determines management.

@@ -69,7 +69,7 @@ The form references the NICE NG143 traffic-light system (green / amber /
 red) for fever in children under 5. Red and amber features feed into the
 form's "refer" outcome.
 
-### Immunisation status
+### Immunization status
 
 The form checks UK routine schedule completeness against:
 
@@ -95,7 +95,7 @@ Safety). HEEADSSS is described in:
 - Overall recommendation (continue routine review / discuss at next health
   visitor contact / refer)
 - Specific flagged-issues list (e.g. amber NG143 fever feature, missed
-  immunisations, safeguarding indicator)
+  immunizations, safeguarding indicator)
 - Structured PDF for the PCHR
 
 ## Notes

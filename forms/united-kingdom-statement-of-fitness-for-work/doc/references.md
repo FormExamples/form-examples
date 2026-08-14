@@ -24,7 +24,7 @@
   <https://www.legislation.gov.uk/uksi/1985/1604/contents>
 - Social Security (Medical Evidence) and Statutory Sick Pay (Medical
   Evidence) (Amendment) Regulations 2022 (SI 2022/630) — expanded
-  authorised issuers.
+  authorized issuers.
   <https://www.legislation.gov.uk/uksi/2022/630/contents>
 - Employment Rights Act 1996 (c. 18).
   <https://www.legislation.gov.uk/ukpga/1996/18/contents>

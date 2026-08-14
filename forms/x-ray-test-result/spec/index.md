@@ -26,7 +26,7 @@ consultant, registrar, or other reporting clinician rather than by the patient,
 and is aligned with the Royal College of Radiologists (RCR) *Standards for the
 interpretation and reporting of imaging investigations*, the RCR *Standards for
 the communication of critical, urgent and unexpected significant radiological
-findings*, and the UK Ionising Radiation (Medical Exposure) Regulations 2017
+findings*, and the UK Ionizing Radiation (Medical Exposure) Regulations 2017
 (IR(ME)R).
 
 Full design description: [`index.md`](../index.md).

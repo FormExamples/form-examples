@@ -2,7 +2,7 @@
 
 Allergy skin test result (report). A reporting clinician completes a single-page
 wizard recording the performed test's **results** (weal sizes / specific-IgE,
-sensitised allergens) and a structured **interpretation**; the engine computes a
+sensitized allergens) and a structured **interpretation**; the engine computes a
 **four-axis interpretation grade** (result classification, abnormality severity /
 structured reporting, report completeness, follow-up urgency) plus safety flags,
 and produces a structured allergy report.
@@ -36,13 +36,13 @@ identical across every front-end and the back-end.
 - **Axis A — result classification:** normal / abnormal / critical / inconclusive.
 - **Axis B — severity & structured reporting:** abnormalitySeverity
   (none / minor / moderate / major) plus a free `reportingCategory` label
-  (e.g. a sensitisation pattern or component-resolved diagnostics summary).
+  (e.g. a sensitization pattern or component-resolved diagnostics summary).
 - **Axis C — report completeness:** 0–100 % of mandatory report sections
   (history, validity controls, allergens / weal sizes, interpretation, impression).
 - **Axis D — follow-up urgency:** routine / recommended / urgent / critical-alert,
   with a target timeframe and a recommended action.
 
-Clinically relevant **sensitisation** classifies the result as *abnormal*.
+Clinically relevant **sensitization** classifies the result as *abnormal*.
 **Anaphylaxis during the test** classifies it as *critical*, **auto-escalates**
 Axis D to *critical-alert*, and raises the `critical-result-alert` flag
 regardless of the other axes. Choose the least-urgent band only when no rule

@@ -48,7 +48,7 @@ patient-safety events under the **Learn from patient safety events
 
 The *Patient / Carer Acknowledgement* step records the discharge
 recipient (patient or, where capacity is impaired, a carer or
-authorised representative).
+authorized representative).
 
 ## Equality Act 2010 / Accessible Information Standard
 

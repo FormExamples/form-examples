@@ -36,7 +36,7 @@ The form aligns with NICE's position that risk-stratification scales (e.g.
 SAD PERSONS) should **not** be used as standalone decision tools; the
 score is one element of the clinical formulation.
 
-## NICE NG191 — Generalised anxiety disorder and panic disorder in adults
+## NICE NG191 — Generalized anxiety disorder and panic disorder in adults
 
 Source: NICE. Guideline ID: **CG113** (the current adult anxiety
 guideline; published January 2011, updated July 2019).
@@ -82,7 +82,7 @@ URL: https://icd.who.int/browse11/l-m/en
 - **6A71** — Recurrent depressive disorder.
 - **6A72** — Dysthymic disorder.
 - **6A73** — Mixed depressive and anxiety disorder.
-- **6B00** — Generalised anxiety disorder.
+- **6B00** — Generalized anxiety disorder.
 - **6B01** — Panic disorder.
 - **6B04** — Social anxiety disorder.
 

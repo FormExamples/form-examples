@@ -1,6 +1,6 @@
 # WHO Acute Referral Form
 
-This form implements the WHO standardised acute referral form for
+This form implements the WHO standardized acute referral form for
 transferring patients between healthcare facilities — typically from a
 lower-tier facility (rural health centre, district hospital) to a
 higher-tier facility (referral hospital, tertiary centre).

@@ -10,7 +10,7 @@ paralysed limb) and, as a secondary instrument, the pupil-augmented
 **GCS-Pupils (GCS-P)** score.
 
 The scale follows the 2014 Glasgow structured approach (Teasdale *et al.*),
-which standardises the *check → observe → stimulate → rate* sequence, the exact
+which standardizes the *check → observe → stimulate → rate* sequence, the exact
 response descriptors, and the reporting of untestable components. The GCS is the
 most widely used measure of consciousness worldwide and underpins trauma triage,
 neuro-observation charts, and critical-care sedation targets.
@@ -62,12 +62,12 @@ score is the single most important early sign of deterioration.
 | Score | Descriptor | Criterion |
 | --- | --- | --- |
 | 6 | Obeys commands | Performs a two-part request |
-| 5 | Localising | Purposeful movement towards a supraorbital / trapezius stimulus |
-| 4 | Normal flexion | Withdraws, bends arm rapidly, but not localising |
+| 5 | Localizing | Purposeful movement towards a supraorbital / trapezius stimulus |
+| 4 | Normal flexion | Withdraws, bends arm rapidly, but not localizing |
 | 3 | Abnormal flexion | Slow, stereotyped flexion (decorticate posturing) |
 | 2 | Extension | Arm extension to stimulus (decerebrate posturing) |
 | 1 | None | No motor response |
-| NT | Not testable | Local factor prevents testing (e.g. neuromuscular blockade, spinal injury, limb immobilisation) |
+| NT | Not testable | Local factor prevents testing (e.g. neuromuscular blockade, spinal injury, limb immobilization) |
 
 ### Total and severity bands
 

@@ -14,7 +14,7 @@ The ASA grading engine evaluates 42 declarative rules across 11 body systems (ca
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - Enhance backend database migrations and seed data
 - Extend clinical safety case documentation
 - User acceptance testing with clinical staff

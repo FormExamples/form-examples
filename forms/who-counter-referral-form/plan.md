@@ -2,7 +2,7 @@
 
 ## Current status
 
-SvelteKit patient front-end implemented. WHO standardised counter-referral (SBAR) — 7-step wizard, follow-up timeframe (urgent <24h to >2 weeks), status flags (cognitive impairment, carer-dependent, palliative care), conditional informed-explanation, 28 tests.
+SvelteKit patient front-end implemented. WHO standardized counter-referral (SBAR) — 7-step wizard, follow-up timeframe (urgent <24h to >2 weeks), status flags (cognitive impairment, carer-dependent, palliative care), conditional informed-explanation, 28 tests.
 
 Remaining work:
 
@@ -20,5 +20,5 @@ See [AGENTS.md](AGENTS.md) for the form's design spec and step list.
 - Add input validation with Zod schemas
 - Add accessibility audit (axe-core)
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - User acceptance testing with domain stakeholders

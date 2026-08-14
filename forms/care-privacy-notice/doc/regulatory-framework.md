@@ -15,7 +15,7 @@ statute — but it satisfies the practice's transparency obligation.
   <https://www.legislation.gov.uk/eur/2016/679/contents>
 - **Data Protection Act 2018** (c. 12) —
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
-- **Common Law Duty of Confidentiality** — judge-made law summarised by the
+- **Common Law Duty of Confidentiality** — judge-made law summarized by the
   ICO at
   <https://ico.org.uk/media/for-organisations/documents/1546/anonymisation-code.pdf>
   and by the Department of Health (2003 Code of Practice, archived).

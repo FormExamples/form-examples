@@ -43,7 +43,7 @@ decision-making".
 | Patient outside intended age range (<40 or >74) | Eligibility check at step 1; warning before calculation |
 | Statin decision without shared decision-making | Result page advises CG181 §1.3 shared-decision conversation |
 | Type 1 diabetes, CKD, FH not differentiated | Step 5 captures these; results page redirects to NG17 / CG71 pathway |
-| Privacy of postcode → Townsend → deprivation | Townsend field is optional in the demonstrator; production deployment must follow UK GDPR data-minimisation |
+| Privacy of postcode → Townsend → deprivation | Townsend field is optional in the demonstrator; production deployment must follow UK GDPR data-minimization |
 | BMI / SBP outside model validation range | Output flags extreme values (BMI < 18.5 or > 50; SBP < 90 or > 220) |
 
 ## Safe communication

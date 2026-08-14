@@ -1,7 +1,7 @@
 # back-end-with-loco — tasks
 
 - [x] Generate `back-end-with-loco-setup` scaffold script
-- [x] Materialise the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Materialize the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Per-table relational SeaORM migrations in FK-dependency order (`users`, `patients`, `clinicians`, `cardiology_requests`, `cardiology_request_grades`, `cardiology_request_grade_rules`, `cardiology_request_grade_flags`)
 - [x] One `_entities/*` entity + domain model per table, with relations and FKs (request → patient & clinician; grade → request 1:1; rule & flag → grade)
 - [x] Port the four-axis vetting engine (rule IDs / flag IDs / bands / thresholds identical to TS) — preserved unchanged

@@ -5,7 +5,7 @@ Rust axum + Loco JSON API for the X-ray request. Generated scaffold is driven by
 table, in FK-dependency order).
 
 - [ ] Setup script generated from `sql/`
-- [ ] `cargo loco new` crate materialised (requires loco CLI + Postgres)
+- [ ] `cargo loco new` crate materialized (requires loco CLI + Postgres)
 - [ ] Four-axis grading engine port (`src/engine/`)
 - [ ] JSON API: CRUD + submit/grade + dashboard
 - [ ] `cargo test` green (requires local Postgres test database)

@@ -1,6 +1,6 @@
 # WHO Acute Referral Form
 
-> World Health Organization standardised acute referral form for transferring patients between healthcare facilities.
+> World Health Organization standardized acute referral form for transferring patients between healthcare facilities.
 
 ## Docs
 

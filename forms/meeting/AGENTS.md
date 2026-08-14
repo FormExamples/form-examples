@@ -32,7 +32,7 @@ plus a single recurrence row:
 
 | Entity | Cardinality | Purpose |
 | --- | --- | --- |
-| `organizer` | many meetings : 1 organiser | Person who schedules and signs the record |
+| `organizer` | many meetings : 1 organizer | Person who schedules and signs the record |
 | `meeting` | top-level | Invitation metadata + 250-char summary + sign-off |
 | `agenda_item` | 0..n per meeting | Ordered list of agenda topics |
 | `participant` | 0..n per meeting | Named attendees with role + response + attendance |
@@ -67,7 +67,7 @@ validateMeeting(data: Meeting): {
 Examples of fired rules:
 
 - `summary-over-limit` — summary exceeds the 250-character ceiling.
-- `no-organizer` — no organiser identified.
+- `no-organizer` — no organizer identified.
 - `no-participants` — zero participants on a completed meeting.
 - `no-agenda` — completed meeting with no agenda items.
 - `no-outcomes` — completed meeting with no recorded outcomes.
@@ -76,7 +76,7 @@ Examples of fired rules:
 - `action-item-overdue` — open action item past its due date.
 
 Flags are non-blocking — the record is still saved, but the dashboard
-surfaces the issues for the organiser to fix.
+surfaces the issues for the organizer to fix.
 
 ## Recurrence
 
@@ -124,7 +124,7 @@ emitted verbatim into the ICS export. Supported `frequency` values are
 
 - RFC 5545 — iCalendar recurrence syntax.
 - ISO/IEC/IEEE 26514:2022 — Design and development of information for users.
-- UK GDPR — participant personal data minimisation.
+- UK GDPR — participant personal data minimization.
 
 ## Verify
 

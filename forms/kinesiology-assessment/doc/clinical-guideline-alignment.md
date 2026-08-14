@@ -14,7 +14,7 @@ Systems (Cook, Burton et al.).
 URL: https://www.functionalmovement.com
 
 The proprietary FMS Level 1 / Level 2 certification programme defines
-the standardised administration procedure, scoring rules, and corrective
+the standardized administration procedure, scoring rules, and corrective
 exercise progressions. Practitioners administering the FMS for clinical
 or diagnostic purposes should be appropriately certified.
 
@@ -91,4 +91,4 @@ of human movement and is used by qualified academics, sports scientists,
 and licensed health professionals. "Applied kinesiology" (Goodheart et
 al.) is a separate complementary-medicine practice that has not been
 supported by mainstream evidence reviews. This form addresses the
-former: standardised, evidence-graded functional movement assessment.
+former: standardized, evidence-graded functional movement assessment.

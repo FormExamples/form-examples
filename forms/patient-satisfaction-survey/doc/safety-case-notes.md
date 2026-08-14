@@ -36,7 +36,7 @@ Voluntary post-encounter surveys over-represent both extremes
 - Compute response rate (responses ÷ eligible encounters).
 - Apply minimum sample threshold before publication (HCAHPS uses
   n ≥ 100 per quarter).
-- Recognise that this form is *internal improvement* output — not a
+- Recognize that this form is *internal improvement* output — not a
   research-grade survey.
 
 ## Equality Act 2010

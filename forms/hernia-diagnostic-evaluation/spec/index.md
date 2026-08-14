@@ -21,7 +21,7 @@ Your GP or specialist will evaluate your symptoms and examine the affected area 
 If the physical exam is inconclusive, symptoms are atypical, or an occult (hidden) hernia is suspected, imaging tests are deployed: [1, 9]
 
 - Ultrasound Scan: A non-invasive test using sound waves to visualize the soft tissues and muscle wall, often while you strain. It is highly accurate for groin and abdominal wall defects. [2, 14]
-- CT Scan: Utilised primarily in emergency settings or complex cases to evaluate acute pain, bowel obstruction, or internal strangulation. [15]
+- CT Scan: Utilized primarily in emergency settings or complex cases to evaluate acute pain, bowel obstruction, or internal strangulation. [15]
 - MRI Scan: Occasionally used for persistent or obscure athletic groin pain (sports hernias) when standard tests show nothing. [9]
 
 If you tell me where you notice the bulge or pain and how long it has been there, I can provide more specific information about what to expect.

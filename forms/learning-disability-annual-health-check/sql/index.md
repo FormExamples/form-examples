@@ -12,7 +12,7 @@ PostgreSQL migrations for this form (source of truth). See
 
 ## Form-specific tables
 
-- `04_create_table_learning_disability_annual_health_check.sql` — main header: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunisation uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan.
+- `04_create_table_learning_disability_annual_health_check.sql` — main header: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunization uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan.
 - `05_create_table_learning_disability_annual_health_check_grade.sql` — completeness grade: status (complete/incomplete), completeness percentage, Health Action Plan completeness (1:1 UNIQUE FK CASCADE to the header).
 - `06_create_table_learning_disability_annual_health_check_grade_rule.sql` — audit trail of fired completeness rules, one per required component with a completed flag (FK CASCADE to grade).
 - `07_create_table_learning_disability_annual_health_check_grade_flag.sql` — clinical flags with priority and suggested action (FK CASCADE to grade).

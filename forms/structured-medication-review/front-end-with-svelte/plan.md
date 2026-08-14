@@ -16,7 +16,7 @@ a review completeness/status grade — not a numeric score).
       `structured-medication-review-rules.ts`,
       `structured-medication-review-grader.ts`, `flagged-issues.ts`.
 - [x] Model the medicine list as `data.medicines[]` on the store;
-      `createDefaultReview()` initialises it to `[]`.
+      `createDefaultReview()` initializes it to `[]`.
 - [x] Generic `ListEditor.svelte` repeating-row editor (add / remove) for the
       15-field medicine row (indication, adherence, ACB points, high-risk class,
       monitoring, deprescribing, STOPP/START).

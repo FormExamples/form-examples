@@ -6,7 +6,7 @@ Slug: `dermatology-assessment`
 
 ## 1. Purpose
 
-Dermatological quality of life evaluation using the DLQI (Dermatology Life Quality Index) with lesion characterisation.
+Dermatological quality of life evaluation using the DLQI (Dermatology Life Quality Index) with lesion characterization.
 
 Full design description: [`index.md`](../index.md).
 

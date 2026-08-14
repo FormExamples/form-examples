@@ -1,6 +1,6 @@
 # Perioperative Optimization — SvelteKit front-end
 
-SvelteKit 2 + Svelte 5 + TypeScript + Tailwind 4 single-page optimisation
+SvelteKit 2 + Svelte 5 + TypeScript + Tailwind 4 single-page optimization
 intake: sixteen steps that grade eight modifiable-risk domains against the time
 remaining before surgery, producing a surgical readiness band, safety flags, a
 prehabilitation plan, and a signed PDF report.
@@ -63,7 +63,7 @@ the whole assessment turns on, so it is never more than a glance away.
 Submitting is blocked when the computed band is **Defer surgery** and the gate
 decision is `proceed` or `proceed-with-prehabilitation`. The team must choose
 `defer-and-optimise` or record `accept-unoptimised-risk` explicitly. Proceeding
-while believing the patient is optimised is the hazard the form exists to
+while believing the patient is optimized is the hazard the form exists to
 prevent; see `doc/safety-case-notes.md` H-01.
 
 ## State

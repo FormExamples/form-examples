@@ -15,7 +15,7 @@ clinician-driven request forms (e.g. *Pregnancy Ultrasound Test Request*). It is
 completed by a radiologist, GP, hospital doctor, surgeon, oncologist, emergency
 physician, or radiographer rather than by the patient, and is aligned with the
 ACR Appropriateness Criteria, the Royal College of Radiologists (RCR) *iRefer*
-guidance, ESUR contrast-media safety guidelines, and the UK Ionising Radiation
+guidance, ESUR contrast-media safety guidelines, and the UK Ionizing Radiation
 (Medical Exposure) Regulations — IR(ME)R 2017.
 
 ## Scope and intended users
@@ -29,7 +29,7 @@ guidance, ESUR contrast-media safety guidelines, and the UK Ionising Radiation
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe for contrast, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -132,7 +132,7 @@ ct-scan-test-request/
 - ESUR Contrast Media Safety Committee guidelines (iodinated contrast and renal
   function; eGFR < 45 mL/min/1.73m² as the IV CIN risk threshold; metformin
   continued at eGFR ≥ 30 and withheld below). <https://www.esur.org/guidelines/>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification of every medical exposure).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 - ACR Manual on Contrast Media. <https://www.acr.org/Clinical-Resources/Contrast-Manual>
@@ -142,7 +142,7 @@ ct-scan-test-request/
 - MDCG 2019-11 Rev.1 (EU MDR Software Classification) — clinical decision
   support, Class IIa where output drives triage / protocolling.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

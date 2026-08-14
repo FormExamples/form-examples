@@ -45,7 +45,7 @@
 - Bonadonna P, Lombardo C, Zanotti R. *Drug allergy in mastocytosis*.
   Curr Opin Allergy Clin Immunol 2009;9:333-9. PMID: 19641477
 
-## Patient organisations
+## Patient organizations
 
 - The Mastocytosis Society Inc: <https://tmsforacure.org/>
 - UK Mastocytosis Support Group: <https://www.mastocytosis.org.uk/>

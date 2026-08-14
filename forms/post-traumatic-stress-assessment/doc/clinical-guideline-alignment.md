@@ -47,8 +47,8 @@ DSM-5-TR criteria for PTSD:
 - **Criterion G**: clinically significant distress or impairment.
 - **Criterion H**: not attributable to substance or medical condition.
 
-Specifiers: with dissociative symptoms (depersonalisation /
-derealisation); with delayed expression (≥ 6 months after the event).
+Specifiers: with dissociative symptoms (depersonalization /
+derealization); with delayed expression (≥ 6 months after the event).
 
 ## ICD-11
 
@@ -61,7 +61,7 @@ URL: https://icd.who.int/browse11/l-m/en
 
 ICD-11 PTSD criteria are narrower than DSM-5 (three clusters: re-
 experiencing in the present, avoidance, current persistent sense of
-heightened threat). CPTSD adds three "disturbances in self-organisation"
+heightened threat). CPTSD adds three "disturbances in self-organization"
 symptom clusters (affective dysregulation, negative self-concept,
 disturbances in relationships) typically following prolonged or repeated
 trauma. PCL-5 does not measure CPTSD; the International Trauma

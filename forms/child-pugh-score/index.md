@@ -9,7 +9,7 @@ score guides prognosis, transplant assessment, and surgical-risk stratification.
 
 Originally described by Child and Turcotte (1964) for stratifying operative
 mortality in portal-hypertension surgery, and refined by Pugh *et al.* (1973),
-who replaced nutritional status with prothrombin time and formalised the graded
+who replaced nutritional status with prothrombin time and formalized the graded
 scoring used today.
 
 ## Scope and intended users
@@ -41,7 +41,7 @@ scoring used today.
 
 Bilirubin and albumin thresholds are shown in SI units with conventional units
 in parentheses; higher bilirubin and lower albumin score more points. INR is the
-modern standardised measure of prothrombin time; either may be recorded.
+modern standardized measure of prothrombin time; either may be recorded.
 
 **Interpretation.** The total maps to one of three classes:
 

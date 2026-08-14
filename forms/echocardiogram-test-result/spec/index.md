@@ -26,7 +26,7 @@ clinician-driven result forms. It is completed by a cardiologist, cardiac
 physiologist, sonographer, or other reporting clinician rather than by the
 patient, and is aligned with the British Society of Echocardiography (BSE)
 minimum dataset for adult transthoracic echocardiography, the ASE/EACVI
-recommendations for cardiac chamber quantification, and recognised valve-disease
+recommendations for cardiac chamber quantification, and recognized valve-disease
 severity-grading conventions.
 
 Full design description: [`index.md`](../index.md).

@@ -60,7 +60,7 @@ deliriumPresent = feature1 AND feature2 AND (feature3 OR feature4)
 
 - `feature1` = acute onset and fluctuating course is present
 - `feature2` = inattention is present
-- `feature3` = disorganised thinking is present
+- `feature3` = disorganized thinking is present
 - `feature4` = altered level of consciousness is present
 
 Classification: `deliriumPresent ? 'present' : 'absent'`.

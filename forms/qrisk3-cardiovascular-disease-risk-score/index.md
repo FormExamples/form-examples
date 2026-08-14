@@ -59,7 +59,7 @@ number of "points".
 | --- | --- | --- |
 | < 10 % | Low / not raised | Reinforce lifestyle measures; reassess per local policy (typically every 5 years). A low score does not exclude future risk. |
 | ≥ 10 % | Raised | Meets the NICE threshold: offer a statin (**atorvastatin 20 mg**) for primary prevention after informed discussion, plus structured lifestyle advice (smoking, diet, activity, alcohol, weight). |
-| ≥ 20 % | High | Raised band; prioritise statin and intensive lifestyle optimisation, and consider review of modifiable factors and adherence. |
+| ≥ 20 % | High | Raised band; prioritize statin and intensive lifestyle optimization, and consider review of modifiable factors and adherence. |
 
 The decision threshold is **10-year QRISK3 ≥ 10 %** (NICE NG238 / CG181). The
 model also reports a **heart age** — the age of a person of the same sex with the

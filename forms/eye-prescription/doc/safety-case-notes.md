@@ -8,11 +8,11 @@ into an NHS environment.
 ## Standards
 
 - **DCB0129** — *Clinical Risk Management: its Application in the
-  Manufacture of Health IT Systems.* Mandatory for organisations
+  Manufacture of Health IT Systems.* Mandatory for organizations
   manufacturing health IT for use in the NHS.
 - **DCB0160** — *Clinical Risk Management: its Application in the
   Deployment and Use of Health IT Systems.* Mandatory for NHS
-  organisations deploying health IT.
+  organizations deploying health IT.
 
 ## Scope
 
@@ -45,7 +45,7 @@ the primary clinical output driving dispensing.
 - [ ] Appoint Clinical Safety Officer (CSO).
 - [ ] Complete the Clinical Safety Case Report per DCB0129 §3.5.
 - [ ] Author Hazard Log per DCB0129 §3.4 (the table above is the seed).
-- [ ] Identify Clinical Safety Officer at deploying organisation per
+- [ ] Identify Clinical Safety Officer at deploying organization per
       DCB0160.
 - [ ] Complete Clinical Safety Case Report per DCB0160 §3.6.
 - [ ] User acceptance testing with a real GOC-registered optometrist
