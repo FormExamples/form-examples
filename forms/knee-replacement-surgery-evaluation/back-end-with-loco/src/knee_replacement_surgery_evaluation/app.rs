@@ -68,8 +68,18 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
-        db::seed::<users::ActiveModel>(&ctx.db, &base.join("users.yaml").display().to_string())
-            .await?;
+        // The fixtures moved to src/<form_snake_case>/fixtures/ when the crate
+        // was put into the canonical route layout, so resolve them from the
+        // manifest directory rather than from the caller-supplied base path.
+        let _ = base;
+        db::seed::<users::ActiveModel>(
+            &ctx.db,
+            &format!(
+                "{}/src/knee_replacement_surgery_evaluation/fixtures/users.yaml",
+                env!("CARGO_MANIFEST_DIR")
+            ),
+        )
+        .await?;
         Ok(())
     }
 }
