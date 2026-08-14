@@ -15,26 +15,28 @@ front-end-with-html/
   css/dashboard.css           # dashboard styles
   css/themes/*.css            # the vendored Lily theme catalogue (one loaded at a time)
   js/types.js                 # emptyEvaluation() and the display-label tables
-  js/ohs-rules.js              # Oxford Hip Score total and category
+  js/ohs-rules.js              # scoreOhs(), ohsCategoryFromTotal(), and the shared pure utilities
   js/composite-grader.js       # calculateHipEvaluation() — the public entry point
   js/flagged-issues.js         # the safety-flag categories
-  js/form-app.js                # wizard controller (module entry point)
-  js/dashboard-app.js           # dashboard controller (module entry point)
-  js/dashboard-types.js         # JSDoc types for the dashboard rows
-  js/data.js                    # sample rows, used when the back-end is offline
-  js/table-export.js            # shared CSV / TSV export toolbar
-  js/theme-select.js            # header controls
+  js/form-app.js               # wizard controller (module entry point)
+  js/dashboard-app.js          # dashboard controller (module entry point)
+  js/dashboard-types.js        # JSDoc types for the dashboard rows
+  js/data.js                   # sample rows, used when the back-end is offline
+  js/api.js                    # back-end client
+  js/cross-check.mjs           # Node.js harness asserting parity with the TS engine's boundary tests
+  js/table-export.js           # shared CSV / TSV export toolbar
+  js/theme-select.js           # header controls
   js/locale-select.js
   js/text-size-picker.js
   js/share-picker.js
-  js/date-time-picker.js        # vendored Lily helper, not wired into the form
+  js/date-time-picker.js       # vendored Lily helper, not wired into the form
 ```
 
 ## Import graph
 
-`form-app.js` → `composite-grader.js` → { `ohs-rules.js`, `flagged-issues.js`
-} and `types.js`. `dashboard-app.js` → `data.js`. Dependency order is
-expressed by the imports, not by script order.
+`form-app.js` → `composite-grader.js` → { `ohs-rules.js`, `flagged-issues.js` }
+and `types.js`. `dashboard-app.js` → { `api.js`, `data.js` }. Dependency order
+is expressed by the imports, not by script order.
 
 ## Running it
 
@@ -46,6 +48,22 @@ python3 -m http.server --directory forms/hip-replacement-surgery-evaluation/fron
 ```
 
 Then open <http://localhost:8000/index.html>.
+
+The dashboard reads `GET /api/hip_replacement_surgery_evaluations` from the
+Loco back-end at `http://localhost:5150`, and falls back to the sample rows in
+`js/data.js` with a banner when that is unavailable.
+
+## Cross-check
+
+`js/cross-check.mjs` re-runs the same boundary cases as
+`../front-end-with-svelte/src/lib/engine/grader.test.ts` (OHS category
+boundaries at 19/20, 29/30, 39/40; candidacy rule-order boundaries; every
+safety-flag threshold) against this directory's own vanilla-JS engine, so the
+two implementations stay provably identical:
+
+```sh
+node forms/hip-replacement-surgery-evaluation/front-end-with-html/js/cross-check.mjs
+```
 
 ## State
 
