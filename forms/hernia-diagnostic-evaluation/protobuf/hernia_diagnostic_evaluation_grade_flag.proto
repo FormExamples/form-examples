@@ -1,0 +1,40 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hernia_diagnostic_evaluation_grade_flag
+
+syntax = "proto3";
+
+package form_examples.hernia_diagnostic_evaluation;
+
+enum HerniaDiagnosticEvaluationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_STRANGULATION_SUSPECTED = 1;  // strangulation-suspected
+  CATEGORY_INCARCERATION_RISK = 2;  // incarceration-risk
+  CATEGORY_EMERGENCY_SURGICAL_REFERRAL = 3;  // emergency-surgical-referral
+  CATEGORY_ATYPICAL_PRESENTATION = 4;  // atypical-presentation
+  CATEGORY_OCCULT_HERNIA_SUSPECTED = 5;  // occult-hernia-suspected
+  CATEGORY_RECURRENT_HERNIA = 6;  // recurrent-hernia
+  CATEGORY_PAEDIATRIC = 7;  // paediatric
+  CATEGORY_PREGNANCY = 8;  // pregnancy
+  CATEGORY_CAPACITY_CONCERN = 9;  // capacity-concern
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum HerniaDiagnosticEvaluationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message HerniaDiagnosticEvaluationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hernia_diagnostic_evaluation_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  HerniaDiagnosticEvaluationGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  HerniaDiagnosticEvaluationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

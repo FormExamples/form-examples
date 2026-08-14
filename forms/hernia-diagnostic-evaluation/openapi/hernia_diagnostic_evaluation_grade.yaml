@@ -1,0 +1,233 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hernia_diagnostic_evaluation_grade
+openapi: 3.1.0
+info:
+  title: Hernia Diagnostic Evaluation — HerniaDiagnosticEvaluationGrade
+  version: 1.0.0
+  description: Computed and signed-off classification and urgency result for one hernia diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+paths:
+  /hernia-diagnostic-evaluation-grades:
+    get:
+      summary: List HerniaDiagnosticEvaluationGrade records
+      operationId: listHerniaDiagnosticEvaluationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HerniaDiagnosticEvaluationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HerniaDiagnosticEvaluationGrade"
+    post:
+      summary: Create a new HerniaDiagnosticEvaluationGrade
+      operationId: createHerniaDiagnosticEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HerniaDiagnosticEvaluationGrade"
+      responses:
+        "201":
+          description: The newly created HerniaDiagnosticEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HerniaDiagnosticEvaluationGrade"
+        "400":
+          description: Validation error
+  /hernia-diagnostic-evaluation-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HerniaDiagnosticEvaluationGrade by id
+      operationId: getHerniaDiagnosticEvaluationGrade
+      responses:
+        "200":
+          description: The requested HerniaDiagnosticEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HerniaDiagnosticEvaluationGrade"
+        "404":
+          description: HerniaDiagnosticEvaluationGrade not found
+    patch:
+      summary: Update an existing HerniaDiagnosticEvaluationGrade
+      operationId: updateHerniaDiagnosticEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HerniaDiagnosticEvaluationGrade"
+      responses:
+        "200":
+          description: The updated HerniaDiagnosticEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HerniaDiagnosticEvaluationGrade"
+        "404":
+          description: HerniaDiagnosticEvaluationGrade not found
+    delete:
+      summary: Soft-delete a HerniaDiagnosticEvaluationGrade
+      operationId: deleteHerniaDiagnosticEvaluationGrade
+      responses:
+        "204":
+          description: HerniaDiagnosticEvaluationGrade deleted
+        "404":
+          description: HerniaDiagnosticEvaluationGrade not found
+components:
+  schemas:
+    HerniaDiagnosticEvaluationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        hernia_diagnostic_evaluation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the hernia_diagnostic_evaluation table, unique because grading is one-to-one with the evaluation.
+        hernia_type:
+          type: string
+          enum:
+            - inguinal
+            - femoral
+            - umbilical
+            - epigastric
+            - incisional
+            - paraumbilical
+            - spigelian
+            - other
+            - ""
+          description: Hernia type as classified by the engine from the clinical classification step.
+        hernia_subtype:
+          type: string
+          enum:
+            - direct
+            - indirect
+            - pantaloon
+            - uncertain
+            - not-applicable
+            - ""
+          description: European Hernia Society inguinal subtype when the hernia type is inguinal, otherwise not-applicable.
+        ehs_classification:
+          type: string
+          maxLength: 100
+          description: "Human-readable European Hernia Society classification string, such as \"Inguinal, indirect, right, EHS grade 2 (2-4cm)\"."
+        ehs_size_grade:
+          type: string
+          enum:
+            - "1"
+            - "2"
+            - "3"
+            - ""
+          description: "European Hernia Society size grade carried through from the classification step: 1, 2, or 3."
+        reducibility_status:
+          type: string
+          enum:
+            - reducible
+            - irreducible
+            - incarcerated
+            - ""
+          description: Reducibility status carried through from the reducibility assessment step.
+        computed_urgency:
+          type: string
+          enum:
+            - routine
+            - soon
+            - urgent
+            - emergency
+            - ""
+          description: "Urgency band computed by the engine: routine, soon, urgent, or emergency. Emergency is forced by any positive red flag."
+        final_urgency:
+          type: string
+          enum:
+            - routine
+            - soon
+            - urgent
+            - emergency
+            - ""
+          description: Urgency band signed off by the clinician, which may equal or differ from the computed value.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the clinician set a final urgency differently from the computed value, mandatory when they differ.
+        recommendation:
+          type: string
+          enum:
+            - watchful-waiting
+            - elective-repair-referral
+            - urgent-referral
+            - emergency-referral
+            - conservative
+            - ""
+          description: Overall recommendation derived from the final urgency band, mirroring the management_plan options.
+        clinician_notes:
+          type: string
+          description: Free-text clinician summary notes.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the clinician who signed the evaluation.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - hernia_diagnostic_evaluation_id
+        - hernia_type
+        - hernia_subtype
+        - ehs_classification
+        - ehs_size_grade
+        - reducibility_status
+        - computed_urgency
+        - final_urgency
+        - override_reason
+        - recommendation
+        - clinician_notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off classification and urgency result for one hernia diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.

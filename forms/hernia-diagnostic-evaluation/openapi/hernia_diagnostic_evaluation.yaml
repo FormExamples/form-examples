@@ -1,0 +1,733 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hernia_diagnostic_evaluation
+openapi: 3.1.0
+info:
+  title: Hernia Diagnostic Evaluation — HerniaDiagnosticEvaluation
+  version: 1.0.0
+  description: "Hernia diagnostic evaluation: the payload of the 14-step single-page wizard used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia."
+paths:
+  /hernia-diagnostic-evaluations:
+    get:
+      summary: List HerniaDiagnosticEvaluation records
+      operationId: listHerniaDiagnosticEvaluation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HerniaDiagnosticEvaluation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HerniaDiagnosticEvaluation"
+    post:
+      summary: Create a new HerniaDiagnosticEvaluation
+      operationId: createHerniaDiagnosticEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HerniaDiagnosticEvaluation"
+      responses:
+        "201":
+          description: The newly created HerniaDiagnosticEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HerniaDiagnosticEvaluation"
+        "400":
+          description: Validation error
+  /hernia-diagnostic-evaluations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HerniaDiagnosticEvaluation by id
+      operationId: getHerniaDiagnosticEvaluation
+      responses:
+        "200":
+          description: The requested HerniaDiagnosticEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HerniaDiagnosticEvaluation"
+        "404":
+          description: HerniaDiagnosticEvaluation not found
+    patch:
+      summary: Update an existing HerniaDiagnosticEvaluation
+      operationId: updateHerniaDiagnosticEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HerniaDiagnosticEvaluation"
+      responses:
+        "200":
+          description: The updated HerniaDiagnosticEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HerniaDiagnosticEvaluation"
+        "404":
+          description: HerniaDiagnosticEvaluation not found
+    delete:
+      summary: Soft-delete a HerniaDiagnosticEvaluation
+      operationId: deleteHerniaDiagnosticEvaluation
+      responses:
+        "204":
+          description: HerniaDiagnosticEvaluation deleted
+        "404":
+          description: HerniaDiagnosticEvaluation not found
+components:
+  schemas:
+    HerniaDiagnosticEvaluation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician table, i.e. the practitioner conducting the evaluation.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Workflow status of the evaluation: draft, submitted, reviewed, or urgent."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the evaluation was conducted.
+        assessment_time:
+          type: string
+          format: time
+          description: Time the evaluation was conducted.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site where the evaluation was conducted, such as the GP practice, surgical assessment unit, or emergency department.
+        duration_of_bulge:
+          type: string
+          enum:
+            - less-than-1-week
+            - 1-4-weeks
+            - 1-6-months
+            - 6-12-months
+            - more-than-1-year
+            - ""
+          description: How long the bulge has been present, such as for distinguishing an acute from a longstanding hernia.
+        pain_score_0_10:
+          type: integer
+          format: int32
+          description: Pain intensity rated by the patient from 0 for none to 10 for the worst imaginable, contributing to the soon urgency band and the functional impact.
+        pain_onset:
+          type: string
+          enum:
+            - sudden
+            - gradual
+            - ""
+          description: "Onset of the presenting pain: sudden or gradual, because a sudden onset is more suggestive of incarceration or strangulation."
+        aggravated_by_straining:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the bulge or pain is aggravated by straining.
+        aggravated_by_lifting:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the bulge or pain is aggravated by lifting.
+        aggravated_by_coughing:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the bulge or pain is aggravated by coughing.
+        prior_hernia_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a history of a hernia at this or another site.
+        prior_hernia_repair:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had a prior hernia repair, such as for the recurrent-hernia safety flag.
+        prior_hernia_repair_mesh:
+          type: string
+          enum:
+            - mesh
+            - no-mesh
+            - unknown
+            - ""
+          description: Whether the prior hernia repair used mesh, no mesh, or is unknown.
+        prior_hernia_repair_site:
+          type: string
+          maxLength: 255
+          description: Site and approximate date of the prior hernia repair, used to judge whether the current presentation is a recurrence at the same site.
+        history_notes:
+          type: string
+          description: Free-text notes about the presenting complaint and history.
+        risk_chronic_cough:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a chronic cough, a recognised hernia risk factor that raises intra-abdominal pressure.
+        risk_constipation_or_straining:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has chronic constipation or straining at stool.
+        risk_heavy_lifting_occupation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has an occupation involving heavy lifting.
+        risk_obesity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is obese.
+        risk_smoking:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient smokes, which impairs collagen synthesis and wound healing.
+        risk_family_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a family history of hernia.
+        risk_prior_abdominal_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had prior abdominal surgery, relevant to incisional hernia risk.
+        risk_pregnancy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is pregnant, relevant to umbilical and inguinal hernia risk and to management options.
+        risk_connective_tissue_disorder:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a known connective-tissue disorder such as Ehlers-Danlos syndrome.
+        risk_ascites:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has ascites, which raises intra-abdominal pressure and complicates repair.
+        risk_factors_notes:
+          type: string
+          description: Free-text notes about risk factors.
+        inspection_location:
+          type: string
+          enum:
+            - groin
+            - umbilical
+            - epigastric
+            - incisional
+            - femoral
+            - other
+            - ""
+          description: Anatomical location of the bulge on visual inspection.
+        inspection_location_other:
+          type: string
+          maxLength: 255
+          description: Location detail when inspection_location is other.
+        bulge_visible_at_rest:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the bulge is visible with the patient at rest.
+        bulge_enlarges_on_standing_or_straining:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the bulge enlarges on standing or straining, the classic dynamic sign of a hernia.
+        skin_changes:
+          type: string
+          enum:
+            - none
+            - erythema
+            - discolouration
+            - both
+            - ""
+          description: Skin changes over the bulge, such as erythema or discolouration, which are red-flag findings.
+        inspection_notes:
+          type: string
+          description: Free-text notes from the visual inspection.
+        palpable_mass:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a mass is palpable on examination.
+        cough_impulse_positive:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a cough impulse is elicited, i.e. a positive expansile impulse on coughing or Valsalva.
+        tenderness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the mass is tender on palpation, which raises concern for incarceration or strangulation.
+        mass_size_as_cm:
+          type: number
+          format: double
+          description: Size of the palpable mass in cm, contributing to the EHS size grade.
+        palpation_notes:
+          type: string
+          description: Free-text notes from palpation and the cough-impulse test.
+        reducibility_status:
+          type: string
+          enum:
+            - reducible
+            - irreducible
+            - incarcerated
+            - ""
+          description: "Clinician judgement of reducibility: reducible, irreducible, or incarcerated. Drives the computed urgency band."
+        reduces_spontaneously:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the hernia reduces spontaneously, such as on lying flat.
+        reduces_with_manual_pressure:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the hernia reduces with gentle manual pressure.
+        does_not_reduce:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the hernia does not reduce despite manual pressure.
+        reducibility_notes:
+          type: string
+          description: Free-text notes about the reducibility assessment.
+        red_flag_severe_pain:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: severe pain out of proportion to examination findings. Any positive red flag forces the computed urgency to emergency."
+        red_flag_vomiting:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: vomiting, suggestive of bowel obstruction."
+        red_flag_fever:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: fever, suggestive of strangulation or bowel ischaemia."
+        red_flag_absolute_constipation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: absolute constipation with no passage of flatus, suggestive of complete bowel obstruction."
+        red_flag_erythema_or_discolouration:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: erythema or skin discolouration over the hernia, suggestive of strangulation."
+        red_flag_previously_reducible_now_irreducible:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: a previously reducible hernia that is now irreducible, a classic sign of new incarceration."
+        red_flag_tachycardia:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Red flag: tachycardia, a systemic sign of strangulation or sepsis."
+        red_flag_notes:
+          type: string
+          description: Free-text notes about the red-flag screen.
+        hernia_type:
+          type: string
+          enum:
+            - inguinal
+            - femoral
+            - umbilical
+            - epigastric
+            - incisional
+            - paraumbilical
+            - spigelian
+            - other
+            - ""
+          description: "Clinical hernia type: inguinal, femoral, umbilical, epigastric, incisional, paraumbilical, spigelian, or other."
+        hernia_type_other:
+          type: string
+          maxLength: 255
+          description: Hernia type detail when hernia_type is other.
+        inguinal_subtype:
+          type: string
+          enum:
+            - direct
+            - indirect
+            - pantaloon
+            - uncertain
+            - ""
+          description: "European Hernia Society inguinal subtype: direct, indirect, pantaloon, or uncertain. Applies only when hernia_type is inguinal."
+        laterality:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - ""
+          description: "Laterality: left, right, or bilateral."
+        ehs_size_grade:
+          type: string
+          enum:
+            - "1"
+            - "2"
+            - "3"
+            - ""
+          description: "European Hernia Society size grade: 1 for less than 2 cm, 2 for 2 to 4 cm, 3 for more than 4 cm."
+        classification_notes:
+          type: string
+          description: Free-text notes about the clinical classification.
+        ultrasound_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an ultrasound scan was performed.
+        ultrasound_findings:
+          type: string
+          enum:
+            - confirms-hernia
+            - no-hernia
+            - inconclusive
+            - ""
+          description: "Ultrasound findings: confirms the hernia, no hernia seen, or inconclusive."
+        ct_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a CT scan was performed.
+        ct_findings:
+          type: string
+          enum:
+            - confirms-hernia
+            - no-hernia
+            - inconclusive
+            - ""
+          description: "CT findings: confirms the hernia, no hernia seen, or inconclusive."
+        mri_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an MRI scan was performed.
+        mri_findings:
+          type: string
+          enum:
+            - confirms-hernia
+            - no-hernia
+            - inconclusive
+            - ""
+          description: "MRI findings: confirms the hernia, no hernia seen, or inconclusive."
+        imaging_indication:
+          type: string
+          enum:
+            - atypical-presentation
+            - occult-suspicion
+            - inconclusive-exam
+            - pre-op-planning
+            - not-indicated
+            - ""
+          description: "Reason imaging was requested: atypical presentation, occult-hernia suspicion, inconclusive examination, or pre-operative planning."
+        imaging_notes:
+          type: string
+          description: Free-text notes about imaging.
+        differential_lipoma:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether lipoma was considered in the differential diagnosis.
+        differential_lymphadenopathy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether lymphadenopathy was considered in the differential diagnosis.
+        differential_hydrocele:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether hydrocele was considered in the differential diagnosis.
+        differential_undescended_testis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether undescended testis was considered in the differential diagnosis.
+        differential_femoral_aneurysm:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether femoral aneurysm was considered in the differential diagnosis.
+        differential_abscess:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether abscess was considered in the differential diagnosis.
+        differential_other:
+          type: string
+          maxLength: 255
+          description: Any other differential diagnosis considered.
+        differential_notes:
+          type: string
+          description: Free-text notes about the differential diagnosis.
+        pain_interferes_with_work_or_activity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether pain interferes with work or activity.
+        functional_impact_scale_0_10:
+          type: integer
+          format: int32
+          description: Overall functional impact rated from 0 for none to 10 for total, contributing to the soon urgency band.
+        activity_limitation:
+          type: string
+          maxLength: 500
+          description: Free-text description of activities the hernia limits.
+        management_plan:
+          type: string
+          enum:
+            - watchful-waiting
+            - elective-repair-referral
+            - urgent-referral
+            - emergency-referral
+            - conservative
+            - ""
+          description: "Management plan: watchful waiting, elective repair referral, urgent referral, emergency referral, or conservative."
+        conservative_detail:
+          type: string
+          maxLength: 255
+          description: Detail of conservative management, such as a truss or lifestyle advice.
+        referral_made:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a referral was made.
+        referral_target_timeframe:
+          type: string
+          enum:
+            - same-day
+            - immediate
+            - within-2-weeks
+            - within-6-weeks
+            - within-18-weeks
+            - ""
+          description: Target timeframe for the referral to be seen, such as within 2 weeks or immediate.
+        management_notes:
+          type: string
+          description: Free-text notes about the management plan.
+        additional_notes:
+          type: string
+          description: Additional free-text notes for the summary and sign-off.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - duration_of_bulge
+        - pain_onset
+        - aggravated_by_straining
+        - aggravated_by_lifting
+        - aggravated_by_coughing
+        - prior_hernia_history
+        - prior_hernia_repair
+        - prior_hernia_repair_mesh
+        - prior_hernia_repair_site
+        - history_notes
+        - risk_chronic_cough
+        - risk_constipation_or_straining
+        - risk_heavy_lifting_occupation
+        - risk_obesity
+        - risk_smoking
+        - risk_family_history
+        - risk_prior_abdominal_surgery
+        - risk_pregnancy
+        - risk_connective_tissue_disorder
+        - risk_ascites
+        - risk_factors_notes
+        - inspection_location
+        - inspection_location_other
+        - bulge_visible_at_rest
+        - bulge_enlarges_on_standing_or_straining
+        - skin_changes
+        - inspection_notes
+        - palpable_mass
+        - cough_impulse_positive
+        - tenderness
+        - palpation_notes
+        - reducibility_status
+        - reduces_spontaneously
+        - reduces_with_manual_pressure
+        - does_not_reduce
+        - reducibility_notes
+        - red_flag_severe_pain
+        - red_flag_vomiting
+        - red_flag_fever
+        - red_flag_absolute_constipation
+        - red_flag_erythema_or_discolouration
+        - red_flag_previously_reducible_now_irreducible
+        - red_flag_tachycardia
+        - red_flag_notes
+        - hernia_type
+        - hernia_type_other
+        - inguinal_subtype
+        - laterality
+        - ehs_size_grade
+        - classification_notes
+        - ultrasound_performed
+        - ultrasound_findings
+        - ct_performed
+        - ct_findings
+        - mri_performed
+        - mri_findings
+        - imaging_indication
+        - imaging_notes
+        - differential_lipoma
+        - differential_lymphadenopathy
+        - differential_hydrocele
+        - differential_undescended_testis
+        - differential_femoral_aneurysm
+        - differential_abscess
+        - differential_other
+        - differential_notes
+        - pain_interferes_with_work_or_activity
+        - activity_limitation
+        - management_plan
+        - conservative_detail
+        - referral_made
+        - referral_target_timeframe
+        - management_notes
+        - additional_notes
+      description: "Hernia diagnostic evaluation: the payload of the 14-step single-page wizard used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia."

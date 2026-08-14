@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hernia_diagnostic_evaluation_grade SYSTEM "hernia_diagnostic_evaluation_grade.dtd">
+<hernia_diagnostic_evaluation_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hernia_diagnostic_evaluation_id>770e8400-e29b-41d4-a716-446655440002</hernia_diagnostic_evaluation_id>
+<hernia_type>inguinal</hernia_type>
+<hernia_subtype>direct</hernia_subtype>
+<ehs_classification></ehs_classification>
+<ehs_size_grade>1</ehs_size_grade>
+<reducibility_status>reducible</reducibility_status>
+<computed_urgency>routine</computed_urgency>
+<final_urgency>routine</final_urgency>
+<override_reason>Example text.</override_reason>
+<recommendation>watchful-waiting</recommendation>
+<clinician_notes>Example text.</clinician_notes>
+<signed_by_name>Example</signed_by_name>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</hernia_diagnostic_evaluation_grade>

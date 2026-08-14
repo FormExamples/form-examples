@@ -1,0 +1,479 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hernia_diagnostic_evaluation
+
+syntax = "proto3";
+
+package form_examples.hernia_diagnostic_evaluation;
+
+enum HerniaDiagnosticEvaluationStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum HerniaDiagnosticEvaluationDurationOfBulgeEnum {
+  DURATIONOFBULGE_UNSPECIFIED = 0;
+  DURATIONOFBULGE_LESS_THAN_1_WEEK = 1;  // less-than-1-week
+  DURATIONOFBULGE_V_1_4_WEEKS = 2;  // 1-4-weeks
+  DURATIONOFBULGE_V_1_6_MONTHS = 3;  // 1-6-months
+  DURATIONOFBULGE_V_6_12_MONTHS = 4;  // 6-12-months
+  DURATIONOFBULGE_MORE_THAN_1_YEAR = 5;  // more-than-1-year
+}
+
+enum HerniaDiagnosticEvaluationPainOnsetEnum {
+  PAINONSET_UNSPECIFIED = 0;
+  PAINONSET_SUDDEN = 1;  // sudden
+  PAINONSET_GRADUAL = 2;  // gradual
+}
+
+enum HerniaDiagnosticEvaluationAggravatedByStrainingEnum {
+  AGGRAVATEDBYSTRAINING_UNSPECIFIED = 0;
+  AGGRAVATEDBYSTRAINING_YES = 1;  // yes
+  AGGRAVATEDBYSTRAINING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationAggravatedByLiftingEnum {
+  AGGRAVATEDBYLIFTING_UNSPECIFIED = 0;
+  AGGRAVATEDBYLIFTING_YES = 1;  // yes
+  AGGRAVATEDBYLIFTING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationAggravatedByCoughingEnum {
+  AGGRAVATEDBYCOUGHING_UNSPECIFIED = 0;
+  AGGRAVATEDBYCOUGHING_YES = 1;  // yes
+  AGGRAVATEDBYCOUGHING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationPriorHerniaHistoryEnum {
+  PRIORHERNIAHISTORY_UNSPECIFIED = 0;
+  PRIORHERNIAHISTORY_YES = 1;  // yes
+  PRIORHERNIAHISTORY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationPriorHerniaRepairEnum {
+  PRIORHERNIAREPAIR_UNSPECIFIED = 0;
+  PRIORHERNIAREPAIR_YES = 1;  // yes
+  PRIORHERNIAREPAIR_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationPriorHerniaRepairMeshEnum {
+  PRIORHERNIAREPAIRMESH_UNSPECIFIED = 0;
+  PRIORHERNIAREPAIRMESH_MESH = 1;  // mesh
+  PRIORHERNIAREPAIRMESH_NO_MESH = 2;  // no-mesh
+  PRIORHERNIAREPAIRMESH_UNKNOWN = 3;  // unknown
+}
+
+enum HerniaDiagnosticEvaluationRiskChronicCoughEnum {
+  RISKCHRONICCOUGH_UNSPECIFIED = 0;
+  RISKCHRONICCOUGH_YES = 1;  // yes
+  RISKCHRONICCOUGH_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskConstipationOrStrainingEnum {
+  RISKCONSTIPATIONORSTRAINING_UNSPECIFIED = 0;
+  RISKCONSTIPATIONORSTRAINING_YES = 1;  // yes
+  RISKCONSTIPATIONORSTRAINING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskHeavyLiftingOccupationEnum {
+  RISKHEAVYLIFTINGOCCUPATION_UNSPECIFIED = 0;
+  RISKHEAVYLIFTINGOCCUPATION_YES = 1;  // yes
+  RISKHEAVYLIFTINGOCCUPATION_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskObesityEnum {
+  RISKOBESITY_UNSPECIFIED = 0;
+  RISKOBESITY_YES = 1;  // yes
+  RISKOBESITY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskSmokingEnum {
+  RISKSMOKING_UNSPECIFIED = 0;
+  RISKSMOKING_YES = 1;  // yes
+  RISKSMOKING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskFamilyHistoryEnum {
+  RISKFAMILYHISTORY_UNSPECIFIED = 0;
+  RISKFAMILYHISTORY_YES = 1;  // yes
+  RISKFAMILYHISTORY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskPriorAbdominalSurgeryEnum {
+  RISKPRIORABDOMINALSURGERY_UNSPECIFIED = 0;
+  RISKPRIORABDOMINALSURGERY_YES = 1;  // yes
+  RISKPRIORABDOMINALSURGERY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskPregnancyEnum {
+  RISKPREGNANCY_UNSPECIFIED = 0;
+  RISKPREGNANCY_YES = 1;  // yes
+  RISKPREGNANCY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskConnectiveTissueDisorderEnum {
+  RISKCONNECTIVETISSUEDISORDER_UNSPECIFIED = 0;
+  RISKCONNECTIVETISSUEDISORDER_YES = 1;  // yes
+  RISKCONNECTIVETISSUEDISORDER_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRiskAscitesEnum {
+  RISKASCITES_UNSPECIFIED = 0;
+  RISKASCITES_YES = 1;  // yes
+  RISKASCITES_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationInspectionLocationEnum {
+  INSPECTIONLOCATION_UNSPECIFIED = 0;
+  INSPECTIONLOCATION_GROIN = 1;  // groin
+  INSPECTIONLOCATION_UMBILICAL = 2;  // umbilical
+  INSPECTIONLOCATION_EPIGASTRIC = 3;  // epigastric
+  INSPECTIONLOCATION_INCISIONAL = 4;  // incisional
+  INSPECTIONLOCATION_FEMORAL = 5;  // femoral
+  INSPECTIONLOCATION_OTHER = 6;  // other
+}
+
+enum HerniaDiagnosticEvaluationBulgeVisibleAtRestEnum {
+  BULGEVISIBLEATREST_UNSPECIFIED = 0;
+  BULGEVISIBLEATREST_YES = 1;  // yes
+  BULGEVISIBLEATREST_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationBulgeEnlargesOnStandingOrStrainingEnum {
+  BULGEENLARGESONSTANDINGORSTRAINING_UNSPECIFIED = 0;
+  BULGEENLARGESONSTANDINGORSTRAINING_YES = 1;  // yes
+  BULGEENLARGESONSTANDINGORSTRAINING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationSkinChangesEnum {
+  SKINCHANGES_UNSPECIFIED = 0;
+  SKINCHANGES_NONE = 1;  // none
+  SKINCHANGES_ERYTHEMA = 2;  // erythema
+  SKINCHANGES_DISCOLOURATION = 3;  // discolouration
+  SKINCHANGES_BOTH = 4;  // both
+}
+
+enum HerniaDiagnosticEvaluationPalpableMassEnum {
+  PALPABLEMASS_UNSPECIFIED = 0;
+  PALPABLEMASS_YES = 1;  // yes
+  PALPABLEMASS_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationCoughImpulsePositiveEnum {
+  COUGHIMPULSEPOSITIVE_UNSPECIFIED = 0;
+  COUGHIMPULSEPOSITIVE_YES = 1;  // yes
+  COUGHIMPULSEPOSITIVE_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationTendernessEnum {
+  TENDERNESS_UNSPECIFIED = 0;
+  TENDERNESS_YES = 1;  // yes
+  TENDERNESS_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationReducibilityStatusEnum {
+  REDUCIBILITYSTATUS_UNSPECIFIED = 0;
+  REDUCIBILITYSTATUS_REDUCIBLE = 1;  // reducible
+  REDUCIBILITYSTATUS_IRREDUCIBLE = 2;  // irreducible
+  REDUCIBILITYSTATUS_INCARCERATED = 3;  // incarcerated
+}
+
+enum HerniaDiagnosticEvaluationReducesSpontaneouslyEnum {
+  REDUCESSPONTANEOUSLY_UNSPECIFIED = 0;
+  REDUCESSPONTANEOUSLY_YES = 1;  // yes
+  REDUCESSPONTANEOUSLY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationReducesWithManualPressureEnum {
+  REDUCESWITHMANUALPRESSURE_UNSPECIFIED = 0;
+  REDUCESWITHMANUALPRESSURE_YES = 1;  // yes
+  REDUCESWITHMANUALPRESSURE_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationDoesNotReduceEnum {
+  DOESNOTREDUCE_UNSPECIFIED = 0;
+  DOESNOTREDUCE_YES = 1;  // yes
+  DOESNOTREDUCE_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagSeverePainEnum {
+  REDFLAGSEVEREPAIN_UNSPECIFIED = 0;
+  REDFLAGSEVEREPAIN_YES = 1;  // yes
+  REDFLAGSEVEREPAIN_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagVomitingEnum {
+  REDFLAGVOMITING_UNSPECIFIED = 0;
+  REDFLAGVOMITING_YES = 1;  // yes
+  REDFLAGVOMITING_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagFeverEnum {
+  REDFLAGFEVER_UNSPECIFIED = 0;
+  REDFLAGFEVER_YES = 1;  // yes
+  REDFLAGFEVER_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagAbsoluteConstipationEnum {
+  REDFLAGABSOLUTECONSTIPATION_UNSPECIFIED = 0;
+  REDFLAGABSOLUTECONSTIPATION_YES = 1;  // yes
+  REDFLAGABSOLUTECONSTIPATION_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagErythemaOrDiscolourationEnum {
+  REDFLAGERYTHEMAORDISCOLOURATION_UNSPECIFIED = 0;
+  REDFLAGERYTHEMAORDISCOLOURATION_YES = 1;  // yes
+  REDFLAGERYTHEMAORDISCOLOURATION_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagPreviouslyReducibleNowIrreducibleEnum {
+  REDFLAGPREVIOUSLYREDUCIBLENOWIRREDUCIBLE_UNSPECIFIED = 0;
+  REDFLAGPREVIOUSLYREDUCIBLENOWIRREDUCIBLE_YES = 1;  // yes
+  REDFLAGPREVIOUSLYREDUCIBLENOWIRREDUCIBLE_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationRedFlagTachycardiaEnum {
+  REDFLAGTACHYCARDIA_UNSPECIFIED = 0;
+  REDFLAGTACHYCARDIA_YES = 1;  // yes
+  REDFLAGTACHYCARDIA_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationHerniaTypeEnum {
+  HERNIATYPE_UNSPECIFIED = 0;
+  HERNIATYPE_INGUINAL = 1;  // inguinal
+  HERNIATYPE_FEMORAL = 2;  // femoral
+  HERNIATYPE_UMBILICAL = 3;  // umbilical
+  HERNIATYPE_EPIGASTRIC = 4;  // epigastric
+  HERNIATYPE_INCISIONAL = 5;  // incisional
+  HERNIATYPE_PARAUMBILICAL = 6;  // paraumbilical
+  HERNIATYPE_SPIGELIAN = 7;  // spigelian
+  HERNIATYPE_OTHER = 8;  // other
+}
+
+enum HerniaDiagnosticEvaluationInguinalSubtypeEnum {
+  INGUINALSUBTYPE_UNSPECIFIED = 0;
+  INGUINALSUBTYPE_DIRECT = 1;  // direct
+  INGUINALSUBTYPE_INDIRECT = 2;  // indirect
+  INGUINALSUBTYPE_PANTALOON = 3;  // pantaloon
+  INGUINALSUBTYPE_UNCERTAIN = 4;  // uncertain
+}
+
+enum HerniaDiagnosticEvaluationLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+}
+
+enum HerniaDiagnosticEvaluationEhsSizeGradeEnum {
+  EHSSIZEGRADE_UNSPECIFIED = 0;
+  EHSSIZEGRADE_V_1 = 1;  // 1
+  EHSSIZEGRADE_V_2 = 2;  // 2
+  EHSSIZEGRADE_V_3 = 3;  // 3
+}
+
+enum HerniaDiagnosticEvaluationUltrasoundPerformedEnum {
+  ULTRASOUNDPERFORMED_UNSPECIFIED = 0;
+  ULTRASOUNDPERFORMED_YES = 1;  // yes
+  ULTRASOUNDPERFORMED_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationUltrasoundFindingsEnum {
+  ULTRASOUNDFINDINGS_UNSPECIFIED = 0;
+  ULTRASOUNDFINDINGS_CONFIRMS_HERNIA = 1;  // confirms-hernia
+  ULTRASOUNDFINDINGS_NO_HERNIA = 2;  // no-hernia
+  ULTRASOUNDFINDINGS_INCONCLUSIVE = 3;  // inconclusive
+}
+
+enum HerniaDiagnosticEvaluationCtPerformedEnum {
+  CTPERFORMED_UNSPECIFIED = 0;
+  CTPERFORMED_YES = 1;  // yes
+  CTPERFORMED_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationCtFindingsEnum {
+  CTFINDINGS_UNSPECIFIED = 0;
+  CTFINDINGS_CONFIRMS_HERNIA = 1;  // confirms-hernia
+  CTFINDINGS_NO_HERNIA = 2;  // no-hernia
+  CTFINDINGS_INCONCLUSIVE = 3;  // inconclusive
+}
+
+enum HerniaDiagnosticEvaluationMriPerformedEnum {
+  MRIPERFORMED_UNSPECIFIED = 0;
+  MRIPERFORMED_YES = 1;  // yes
+  MRIPERFORMED_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationMriFindingsEnum {
+  MRIFINDINGS_UNSPECIFIED = 0;
+  MRIFINDINGS_CONFIRMS_HERNIA = 1;  // confirms-hernia
+  MRIFINDINGS_NO_HERNIA = 2;  // no-hernia
+  MRIFINDINGS_INCONCLUSIVE = 3;  // inconclusive
+}
+
+enum HerniaDiagnosticEvaluationImagingIndicationEnum {
+  IMAGINGINDICATION_UNSPECIFIED = 0;
+  IMAGINGINDICATION_ATYPICAL_PRESENTATION = 1;  // atypical-presentation
+  IMAGINGINDICATION_OCCULT_SUSPICION = 2;  // occult-suspicion
+  IMAGINGINDICATION_INCONCLUSIVE_EXAM = 3;  // inconclusive-exam
+  IMAGINGINDICATION_PRE_OP_PLANNING = 4;  // pre-op-planning
+  IMAGINGINDICATION_NOT_INDICATED = 5;  // not-indicated
+}
+
+enum HerniaDiagnosticEvaluationDifferentialLipomaEnum {
+  DIFFERENTIALLIPOMA_UNSPECIFIED = 0;
+  DIFFERENTIALLIPOMA_YES = 1;  // yes
+  DIFFERENTIALLIPOMA_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationDifferentialLymphadenopathyEnum {
+  DIFFERENTIALLYMPHADENOPATHY_UNSPECIFIED = 0;
+  DIFFERENTIALLYMPHADENOPATHY_YES = 1;  // yes
+  DIFFERENTIALLYMPHADENOPATHY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationDifferentialHydroceleEnum {
+  DIFFERENTIALHYDROCELE_UNSPECIFIED = 0;
+  DIFFERENTIALHYDROCELE_YES = 1;  // yes
+  DIFFERENTIALHYDROCELE_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationDifferentialUndescendedTestisEnum {
+  DIFFERENTIALUNDESCENDEDTESTIS_UNSPECIFIED = 0;
+  DIFFERENTIALUNDESCENDEDTESTIS_YES = 1;  // yes
+  DIFFERENTIALUNDESCENDEDTESTIS_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationDifferentialFemoralAneurysmEnum {
+  DIFFERENTIALFEMORALANEURYSM_UNSPECIFIED = 0;
+  DIFFERENTIALFEMORALANEURYSM_YES = 1;  // yes
+  DIFFERENTIALFEMORALANEURYSM_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationDifferentialAbscessEnum {
+  DIFFERENTIALABSCESS_UNSPECIFIED = 0;
+  DIFFERENTIALABSCESS_YES = 1;  // yes
+  DIFFERENTIALABSCESS_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationPainInterferesWithWorkOrActivityEnum {
+  PAININTERFERESWITHWORKORACTIVITY_UNSPECIFIED = 0;
+  PAININTERFERESWITHWORKORACTIVITY_YES = 1;  // yes
+  PAININTERFERESWITHWORKORACTIVITY_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationManagementPlanEnum {
+  MANAGEMENTPLAN_UNSPECIFIED = 0;
+  MANAGEMENTPLAN_WATCHFUL_WAITING = 1;  // watchful-waiting
+  MANAGEMENTPLAN_ELECTIVE_REPAIR_REFERRAL = 2;  // elective-repair-referral
+  MANAGEMENTPLAN_URGENT_REFERRAL = 3;  // urgent-referral
+  MANAGEMENTPLAN_EMERGENCY_REFERRAL = 4;  // emergency-referral
+  MANAGEMENTPLAN_CONSERVATIVE = 5;  // conservative
+}
+
+enum HerniaDiagnosticEvaluationReferralMadeEnum {
+  REFERRALMADE_UNSPECIFIED = 0;
+  REFERRALMADE_YES = 1;  // yes
+  REFERRALMADE_NO = 2;  // no
+}
+
+enum HerniaDiagnosticEvaluationReferralTargetTimeframeEnum {
+  REFERRALTARGETTIMEFRAME_UNSPECIFIED = 0;
+  REFERRALTARGETTIMEFRAME_SAME_DAY = 1;  // same-day
+  REFERRALTARGETTIMEFRAME_IMMEDIATE = 2;  // immediate
+  REFERRALTARGETTIMEFRAME_WITHIN_2_WEEKS = 3;  // within-2-weeks
+  REFERRALTARGETTIMEFRAME_WITHIN_6_WEEKS = 4;  // within-6-weeks
+  REFERRALTARGETTIMEFRAME_WITHIN_18_WEEKS = 5;  // within-18-weeks
+}
+
+message HerniaDiagnosticEvaluation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HerniaDiagnosticEvaluationStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  string assessment_time = 9;  // TIME — iso 8601 time
+  string site_name = 10;  // VARCHAR(255) — max 255 chars
+  HerniaDiagnosticEvaluationDurationOfBulgeEnum duration_of_bulge = 11;  // VARCHAR(20)
+  int32 pain_score_0_10 = 12;  // INTEGER
+  HerniaDiagnosticEvaluationPainOnsetEnum pain_onset = 13;  // VARCHAR(10)
+  HerniaDiagnosticEvaluationAggravatedByStrainingEnum aggravated_by_straining = 14;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationAggravatedByLiftingEnum aggravated_by_lifting = 15;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationAggravatedByCoughingEnum aggravated_by_coughing = 16;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationPriorHerniaHistoryEnum prior_hernia_history = 17;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationPriorHerniaRepairEnum prior_hernia_repair = 18;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationPriorHerniaRepairMeshEnum prior_hernia_repair_mesh = 19;  // VARCHAR(10)
+  string prior_hernia_repair_site = 20;  // VARCHAR(255) — max 255 chars
+  string history_notes = 21;  // TEXT
+  HerniaDiagnosticEvaluationRiskChronicCoughEnum risk_chronic_cough = 22;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskConstipationOrStrainingEnum risk_constipation_or_straining = 23;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskHeavyLiftingOccupationEnum risk_heavy_lifting_occupation = 24;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskObesityEnum risk_obesity = 25;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskSmokingEnum risk_smoking = 26;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskFamilyHistoryEnum risk_family_history = 27;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskPriorAbdominalSurgeryEnum risk_prior_abdominal_surgery = 28;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskPregnancyEnum risk_pregnancy = 29;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskConnectiveTissueDisorderEnum risk_connective_tissue_disorder = 30;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRiskAscitesEnum risk_ascites = 31;  // VARCHAR(5)
+  string risk_factors_notes = 32;  // TEXT
+  HerniaDiagnosticEvaluationInspectionLocationEnum inspection_location = 33;  // VARCHAR(20)
+  string inspection_location_other = 34;  // VARCHAR(255) — max 255 chars
+  HerniaDiagnosticEvaluationBulgeVisibleAtRestEnum bulge_visible_at_rest = 35;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationBulgeEnlargesOnStandingOrStrainingEnum bulge_enlarges_on_standing_or_straining = 36;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationSkinChangesEnum skin_changes = 37;  // VARCHAR(20)
+  string inspection_notes = 38;  // TEXT
+  HerniaDiagnosticEvaluationPalpableMassEnum palpable_mass = 39;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationCoughImpulsePositiveEnum cough_impulse_positive = 40;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationTendernessEnum tenderness = 41;  // VARCHAR(5)
+  double mass_size_as_cm = 42;  // NUMERIC(4,1) — numeric(4,1)
+  string palpation_notes = 43;  // TEXT
+  HerniaDiagnosticEvaluationReducibilityStatusEnum reducibility_status = 44;  // VARCHAR(15)
+  HerniaDiagnosticEvaluationReducesSpontaneouslyEnum reduces_spontaneously = 45;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationReducesWithManualPressureEnum reduces_with_manual_pressure = 46;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationDoesNotReduceEnum does_not_reduce = 47;  // VARCHAR(5)
+  string reducibility_notes = 48;  // TEXT
+  HerniaDiagnosticEvaluationRedFlagSeverePainEnum red_flag_severe_pain = 49;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRedFlagVomitingEnum red_flag_vomiting = 50;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRedFlagFeverEnum red_flag_fever = 51;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRedFlagAbsoluteConstipationEnum red_flag_absolute_constipation = 52;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRedFlagErythemaOrDiscolourationEnum red_flag_erythema_or_discolouration = 53;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRedFlagPreviouslyReducibleNowIrreducibleEnum red_flag_previously_reducible_now_irreducible = 54;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationRedFlagTachycardiaEnum red_flag_tachycardia = 55;  // VARCHAR(5)
+  string red_flag_notes = 56;  // TEXT
+  HerniaDiagnosticEvaluationHerniaTypeEnum hernia_type = 57;  // VARCHAR(20)
+  string hernia_type_other = 58;  // VARCHAR(255) — max 255 chars
+  HerniaDiagnosticEvaluationInguinalSubtypeEnum inguinal_subtype = 59;  // VARCHAR(15)
+  HerniaDiagnosticEvaluationLateralityEnum laterality = 60;  // VARCHAR(10)
+  HerniaDiagnosticEvaluationEhsSizeGradeEnum ehs_size_grade = 61;  // VARCHAR(5)
+  string classification_notes = 62;  // TEXT
+  HerniaDiagnosticEvaluationUltrasoundPerformedEnum ultrasound_performed = 63;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationUltrasoundFindingsEnum ultrasound_findings = 64;  // VARCHAR(20)
+  HerniaDiagnosticEvaluationCtPerformedEnum ct_performed = 65;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationCtFindingsEnum ct_findings = 66;  // VARCHAR(20)
+  HerniaDiagnosticEvaluationMriPerformedEnum mri_performed = 67;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationMriFindingsEnum mri_findings = 68;  // VARCHAR(20)
+  HerniaDiagnosticEvaluationImagingIndicationEnum imaging_indication = 69;  // VARCHAR(30)
+  string imaging_notes = 70;  // TEXT
+  HerniaDiagnosticEvaluationDifferentialLipomaEnum differential_lipoma = 71;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationDifferentialLymphadenopathyEnum differential_lymphadenopathy = 72;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationDifferentialHydroceleEnum differential_hydrocele = 73;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationDifferentialUndescendedTestisEnum differential_undescended_testis = 74;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationDifferentialFemoralAneurysmEnum differential_femoral_aneurysm = 75;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationDifferentialAbscessEnum differential_abscess = 76;  // VARCHAR(5)
+  string differential_other = 77;  // VARCHAR(255) — max 255 chars
+  string differential_notes = 78;  // TEXT
+  HerniaDiagnosticEvaluationPainInterferesWithWorkOrActivityEnum pain_interferes_with_work_or_activity = 79;  // VARCHAR(5)
+  int32 functional_impact_scale_0_10 = 80;  // INTEGER
+  string activity_limitation = 81;  // VARCHAR(500) — max 500 chars
+  HerniaDiagnosticEvaluationManagementPlanEnum management_plan = 82;  // VARCHAR(25)
+  string conservative_detail = 83;  // VARCHAR(255) — max 255 chars
+  HerniaDiagnosticEvaluationReferralMadeEnum referral_made = 84;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationReferralTargetTimeframeEnum referral_target_timeframe = 85;  // VARCHAR(20)
+  string management_notes = 86;  // TEXT
+  string additional_notes = 87;  // TEXT
+}

@@ -1,0 +1,166 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=hernia-diagnostic-evaluation
+form_snake_case=hernia_diagnostic_evaluation
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:string! \
+    employer:text! \
+    --api
+
+cargo loco generate scaffold hernia_diagnostic_evaluation \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    status:string! \
+    assessment_date:date \
+    assessment_time:string \
+    site_name:string! \
+    duration_of_bulge:string! \
+    pain_score_0_10:int \
+    pain_onset:string! \
+    aggravated_by_straining:string! \
+    aggravated_by_lifting:string! \
+    aggravated_by_coughing:string! \
+    prior_hernia_history:string! \
+    prior_hernia_repair:string! \
+    prior_hernia_repair_mesh:string! \
+    prior_hernia_repair_site:string! \
+    history_notes:text! \
+    risk_chronic_cough:string! \
+    risk_constipation_or_straining:string! \
+    risk_heavy_lifting_occupation:string! \
+    risk_obesity:string! \
+    risk_smoking:string! \
+    risk_family_history:string! \
+    risk_prior_abdominal_surgery:string! \
+    risk_pregnancy:string! \
+    risk_connective_tissue_disorder:string! \
+    risk_ascites:string! \
+    risk_factors_notes:text! \
+    inspection_location:string! \
+    inspection_location_other:string! \
+    bulge_visible_at_rest:string! \
+    bulge_enlarges_on_standing_or_straining:string! \
+    skin_changes:string! \
+    inspection_notes:text! \
+    palpable_mass:string! \
+    cough_impulse_positive:string! \
+    tenderness:string! \
+    mass_size_as_cm:double \
+    palpation_notes:text! \
+    reducibility_status:string! \
+    reduces_spontaneously:string! \
+    reduces_with_manual_pressure:string! \
+    does_not_reduce:string! \
+    reducibility_notes:text! \
+    red_flag_severe_pain:string! \
+    red_flag_vomiting:string! \
+    red_flag_fever:string! \
+    red_flag_absolute_constipation:string! \
+    red_flag_erythema_or_discolouration:string! \
+    red_flag_previously_reducible_now_irreducible:string! \
+    red_flag_tachycardia:string! \
+    red_flag_notes:text! \
+    hernia_type:string! \
+    hernia_type_other:string! \
+    inguinal_subtype:string! \
+    laterality:string! \
+    ehs_size_grade:string! \
+    classification_notes:text! \
+    ultrasound_performed:string! \
+    ultrasound_findings:string! \
+    ct_performed:string! \
+    ct_findings:string! \
+    mri_performed:string! \
+    mri_findings:string! \
+    imaging_indication:string! \
+    imaging_notes:text! \
+    differential_lipoma:string! \
+    differential_lymphadenopathy:string! \
+    differential_hydrocele:string! \
+    differential_undescended_testis:string! \
+    differential_femoral_aneurysm:string! \
+    differential_abscess:string! \
+    differential_other:string! \
+    differential_notes:text! \
+    pain_interferes_with_work_or_activity:string! \
+    functional_impact_scale_0_10:int \
+    activity_limitation:string! \
+    management_plan:string! \
+    conservative_detail:string! \
+    referral_made:string! \
+    referral_target_timeframe:string! \
+    management_notes:text! \
+    additional_notes:text! \
+    --api
+
+cargo loco generate scaffold hernia_diagnostic_evaluation_grade \
+    deleted_at:tstz \
+    hernia_diagnostic_evaluation:references \
+    hernia_type:string! \
+    hernia_subtype:string! \
+    ehs_classification:string! \
+    ehs_size_grade:string! \
+    reducibility_status:string! \
+    computed_urgency:string! \
+    final_urgency:string! \
+    override_reason:string! \
+    recommendation:string! \
+    clinician_notes:text! \
+    signed_by_name:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold hernia_diagnostic_evaluation_grade_flag \
+    deleted_at:tstz \
+    hernia_diagnostic_evaluation_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

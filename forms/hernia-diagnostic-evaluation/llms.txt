@@ -1,0 +1,27 @@
+# Hernia Diagnostic Evaluation
+
+> A **hernia diagnostic evaluation** is the clinical assessment used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia, performed by a GP, surgical registrar, or general surgeon. Most uncomplicated hernias are identified during a standard physical examination — visual inspection, palpation, cough impulse, and a reducibility check — without needing advanced imaging. This form records that examination, applies the European Hernia Society (EHS) groin-hernia classification and a red-flag urgency screen, and produces a hernia classification plus an urgency band suitable for the clinical record and for a referral letter.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hernia_diagnostic_evaluation SYSTEM "hernia_diagnostic_evaluation.dtd">
+<hernia_diagnostic_evaluation>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<assessment_date>2026-01-15</assessment_date>
+<assessment_time></assessment_time>
+<site_name>Example</site_name>
+<duration_of_bulge>less-than-1-week</duration_of_bulge>
+<pain_score_0_10>5</pain_score_0_10>
+<pain_onset>sudden</pain_onset>
+<aggravated_by_straining>yes</aggravated_by_straining>
+<aggravated_by_lifting>yes</aggravated_by_lifting>
+<aggravated_by_coughing>yes</aggravated_by_coughing>
+<prior_hernia_history>yes</prior_hernia_history>
+<prior_hernia_repair>yes</prior_hernia_repair>
+<prior_hernia_repair_mesh>mesh</prior_hernia_repair_mesh>
+<prior_hernia_repair_site>Example location</prior_hernia_repair_site>
+<history_notes>Example text.</history_notes>
+<risk_chronic_cough>yes</risk_chronic_cough>
+<risk_constipation_or_straining>yes</risk_constipation_or_straining>
+<risk_heavy_lifting_occupation>yes</risk_heavy_lifting_occupation>
+<risk_obesity>yes</risk_obesity>
+<risk_smoking>yes</risk_smoking>
+<risk_family_history>yes</risk_family_history>
+<risk_prior_abdominal_surgery>yes</risk_prior_abdominal_surgery>
+<risk_pregnancy>yes</risk_pregnancy>
+<risk_connective_tissue_disorder>yes</risk_connective_tissue_disorder>
+<risk_ascites>yes</risk_ascites>
+<risk_factors_notes>Example text.</risk_factors_notes>
+<inspection_location>groin</inspection_location>
+<inspection_location_other>Example location</inspection_location_other>
+<bulge_visible_at_rest>yes</bulge_visible_at_rest>
+<bulge_enlarges_on_standing_or_straining>yes</bulge_enlarges_on_standing_or_straining>
+<skin_changes>none</skin_changes>
+<inspection_notes>Example text.</inspection_notes>
+<palpable_mass>yes</palpable_mass>
+<cough_impulse_positive>yes</cough_impulse_positive>
+<tenderness>yes</tenderness>
+<mass_size_as_cm>0.0</mass_size_as_cm>
+<palpation_notes>Example text.</palpation_notes>
+<reducibility_status>reducible</reducibility_status>
+<reduces_spontaneously>yes</reduces_spontaneously>
+<reduces_with_manual_pressure>yes</reduces_with_manual_pressure>
+<does_not_reduce>yes</does_not_reduce>
+<reducibility_notes>Example text.</reducibility_notes>
+<red_flag_severe_pain>yes</red_flag_severe_pain>
+<red_flag_vomiting>yes</red_flag_vomiting>
+<red_flag_fever>yes</red_flag_fever>
+<red_flag_absolute_constipation>yes</red_flag_absolute_constipation>
+<red_flag_erythema_or_discolouration>yes</red_flag_erythema_or_discolouration>
+<red_flag_previously_reducible_now_irreducible>yes</red_flag_previously_reducible_now_irreducible>
+<red_flag_tachycardia>yes</red_flag_tachycardia>
+<red_flag_notes>Example text.</red_flag_notes>
+<hernia_type>inguinal</hernia_type>
+<hernia_type_other>standard</hernia_type_other>
+<inguinal_subtype>direct</inguinal_subtype>
+<laterality>left</laterality>
+<ehs_size_grade>1</ehs_size_grade>
+<classification_notes>Example text.</classification_notes>
+<ultrasound_performed>yes</ultrasound_performed>
+<ultrasound_findings>confirms-hernia</ultrasound_findings>
+<ct_performed>yes</ct_performed>
+<ct_findings>confirms-hernia</ct_findings>
+<mri_performed>yes</mri_performed>
+<mri_findings>confirms-hernia</mri_findings>
+<imaging_indication>atypical-presentation</imaging_indication>
+<imaging_notes>Example text.</imaging_notes>
+<differential_lipoma>yes</differential_lipoma>
+<differential_lymphadenopathy>yes</differential_lymphadenopathy>
+<differential_hydrocele>yes</differential_hydrocele>
+<differential_undescended_testis>yes</differential_undescended_testis>
+<differential_femoral_aneurysm>yes</differential_femoral_aneurysm>
+<differential_abscess>yes</differential_abscess>
+<differential_other></differential_other>
+<differential_notes>Example text.</differential_notes>
+<pain_interferes_with_work_or_activity>yes</pain_interferes_with_work_or_activity>
+<functional_impact_scale_0_10>1</functional_impact_scale_0_10>
+<activity_limitation></activity_limitation>
+<management_plan>watchful-waiting</management_plan>
+<conservative_detail></conservative_detail>
+<referral_made>yes</referral_made>
+<referral_target_timeframe>same-day</referral_target_timeframe>
+<management_notes>Example text.</management_notes>
+<additional_notes>Example text.</additional_notes>
+</hernia_diagnostic_evaluation>

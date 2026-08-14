@@ -1,0 +1,160 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=hip-replacement-surgery-evaluation
+form_snake_case=hip_replacement_surgery_evaluation
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    gmc_number:text! \
+    site_name:text! \
+    employer:text! \
+    --api
+
+cargo loco generate scaffold hip_replacement_surgery_evaluation \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    status:string! \
+    assessment_date:date \
+    assessment_time:string \
+    site_name:string! \
+    affected_side:string! \
+    symptom_duration_months:int \
+    pain_at_rest_0_10:int \
+    pain_on_activity_0_10:int \
+    night_pain:string! \
+    prior_hip_surgery:string! \
+    prior_hip_surgery_detail:text! \
+    prior_injury_or_dysplasia_history:string! \
+    prior_injury_or_dysplasia_detail:text! \
+    ohs_pain_severity:int \
+    ohs_washing_and_drying:int \
+    ohs_transport:int \
+    ohs_dressing_socks:int \
+    ohs_shopping:int \
+    ohs_walking_pain:int \
+    ohs_limping:int \
+    ohs_kneeling:int \
+    ohs_night_pain:int \
+    ohs_work_interference:int \
+    ohs_giving_way:int \
+    ohs_stairs:int \
+    walking_distance_before_pain:string! \
+    shoes_and_socks_difficulty:string! \
+    walking_aid_use:string! \
+    limp_present:string! \
+    antalgic_gait:string! \
+    trendelenburg_sign:string! \
+    leg_length_discrepancy_as_cm:double \
+    flexion_degrees:int \
+    internal_rotation_degrees:int \
+    external_rotation_degrees:int \
+    abduction_degrees:int \
+    adduction_degrees:int \
+    fixed_flexion_deformity_present:string! \
+    hip_abductor_strength_mrc:int \
+    joint_stability:string! \
+    tenderness_site:string! \
+    weight_bearing_xray_performed:string! \
+    kellgren_lawrence_grade:int \
+    joint_space_narrowing:string! \
+    subchondral_sclerosis_or_cysts_present:string! \
+    mri_performed:string! \
+    mri_findings:text! \
+    ct_performed:string! \
+    ct_indication:string! \
+    physiotherapy_tried:string! \
+    physiotherapy_duration_weeks:int \
+    weight_management_advice_given:string! \
+    steroid_injection_given:string! \
+    steroid_injection_count:int \
+    steroid_injection_response:string! \
+    analgesic_trial_given:string! \
+    analgesic_trial_response:string! \
+    walking_aid_trial:string! \
+    conservative_measures_exhausted:string! \
+    diabetes_controlled:string! \
+    cardiac_disease_present:string! \
+    bleeding_disorder_or_anticoagulant_use:string! \
+    smoking_status:string! \
+    general_fitness_note:text! \
+    full_blood_count_done:string! \
+    renal_function_done:string! \
+    clotting_or_inr_done:string! \
+    ecg_done:string! \
+    mrsa_screen_done:string! \
+    urinalysis_done:string! \
+    risks_and_benefits_discussed:string! \
+    realistic_expectations_discussed:string! \
+    patient_decision_aid_given:string! \
+    interpreter_required:string! \
+    interpreter_language:string! \
+    recommendation:string! \
+    target_list_date:date \
+    responsible_surgeon:string! \
+    additional_notes:text! \
+    --api
+
+cargo loco generate scaffold hip_replacement_surgery_evaluation_grade \
+    deleted_at:tstz \
+    hip_replacement_surgery_evaluation:references \
+    ohs_total:int \
+    ohs_category:string! \
+    computed_candidacy:string! \
+    final_candidacy:string! \
+    override_reason:string! \
+    clinician_notes:text! \
+    signed_by_name:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold hip_replacement_surgery_evaluation_grade_flag \
+    deleted_at:tstz \
+    hip_replacement_surgery_evaluation_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

@@ -1,0 +1,87 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hernia_diagnostic_evaluation_grade
+
+syntax = "proto3";
+
+package form_examples.hernia_diagnostic_evaluation;
+
+enum HerniaDiagnosticEvaluationGradeHerniaTypeEnum {
+  HERNIATYPE_UNSPECIFIED = 0;
+  HERNIATYPE_INGUINAL = 1;  // inguinal
+  HERNIATYPE_FEMORAL = 2;  // femoral
+  HERNIATYPE_UMBILICAL = 3;  // umbilical
+  HERNIATYPE_EPIGASTRIC = 4;  // epigastric
+  HERNIATYPE_INCISIONAL = 5;  // incisional
+  HERNIATYPE_PARAUMBILICAL = 6;  // paraumbilical
+  HERNIATYPE_SPIGELIAN = 7;  // spigelian
+  HERNIATYPE_OTHER = 8;  // other
+}
+
+enum HerniaDiagnosticEvaluationGradeHerniaSubtypeEnum {
+  HERNIASUBTYPE_UNSPECIFIED = 0;
+  HERNIASUBTYPE_DIRECT = 1;  // direct
+  HERNIASUBTYPE_INDIRECT = 2;  // indirect
+  HERNIASUBTYPE_PANTALOON = 3;  // pantaloon
+  HERNIASUBTYPE_UNCERTAIN = 4;  // uncertain
+  HERNIASUBTYPE_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum HerniaDiagnosticEvaluationGradeEhsSizeGradeEnum {
+  EHSSIZEGRADE_UNSPECIFIED = 0;
+  EHSSIZEGRADE_V_1 = 1;  // 1
+  EHSSIZEGRADE_V_2 = 2;  // 2
+  EHSSIZEGRADE_V_3 = 3;  // 3
+}
+
+enum HerniaDiagnosticEvaluationGradeReducibilityStatusEnum {
+  REDUCIBILITYSTATUS_UNSPECIFIED = 0;
+  REDUCIBILITYSTATUS_REDUCIBLE = 1;  // reducible
+  REDUCIBILITYSTATUS_IRREDUCIBLE = 2;  // irreducible
+  REDUCIBILITYSTATUS_INCARCERATED = 3;  // incarcerated
+}
+
+enum HerniaDiagnosticEvaluationGradeComputedUrgencyEnum {
+  COMPUTEDURGENCY_UNSPECIFIED = 0;
+  COMPUTEDURGENCY_ROUTINE = 1;  // routine
+  COMPUTEDURGENCY_SOON = 2;  // soon
+  COMPUTEDURGENCY_URGENT = 3;  // urgent
+  COMPUTEDURGENCY_EMERGENCY = 4;  // emergency
+}
+
+enum HerniaDiagnosticEvaluationGradeFinalUrgencyEnum {
+  FINALURGENCY_UNSPECIFIED = 0;
+  FINALURGENCY_ROUTINE = 1;  // routine
+  FINALURGENCY_SOON = 2;  // soon
+  FINALURGENCY_URGENT = 3;  // urgent
+  FINALURGENCY_EMERGENCY = 4;  // emergency
+}
+
+enum HerniaDiagnosticEvaluationGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_WATCHFUL_WAITING = 1;  // watchful-waiting
+  RECOMMENDATION_ELECTIVE_REPAIR_REFERRAL = 2;  // elective-repair-referral
+  RECOMMENDATION_URGENT_REFERRAL = 3;  // urgent-referral
+  RECOMMENDATION_EMERGENCY_REFERRAL = 4;  // emergency-referral
+  RECOMMENDATION_CONSERVATIVE = 5;  // conservative
+}
+
+message HerniaDiagnosticEvaluationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hernia_diagnostic_evaluation_id = 5;  // UUID — uuid
+  HerniaDiagnosticEvaluationGradeHerniaTypeEnum hernia_type = 6;  // VARCHAR(20)
+  HerniaDiagnosticEvaluationGradeHerniaSubtypeEnum hernia_subtype = 7;  // VARCHAR(15)
+  string ehs_classification = 8;  // VARCHAR(100) — max 100 chars
+  HerniaDiagnosticEvaluationGradeEhsSizeGradeEnum ehs_size_grade = 9;  // VARCHAR(5)
+  HerniaDiagnosticEvaluationGradeReducibilityStatusEnum reducibility_status = 10;  // VARCHAR(15)
+  HerniaDiagnosticEvaluationGradeComputedUrgencyEnum computed_urgency = 11;  // VARCHAR(10)
+  HerniaDiagnosticEvaluationGradeFinalUrgencyEnum final_urgency = 12;  // VARCHAR(10)
+  string override_reason = 13;  // VARCHAR(500) — max 500 chars
+  HerniaDiagnosticEvaluationGradeRecommendationEnum recommendation = 14;  // VARCHAR(25)
+  string clinician_notes = 15;  // TEXT
+  string signed_by_name = 16;  // VARCHAR(255) — max 255 chars
+  string signed_at = 17;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 18;  // TIMESTAMPTZ — iso 8601
+}
