@@ -1,0 +1,47 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.perioperative_optimization;
+
+enum ClinicianRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_PREOPERATIVE_ASSESSMENT_NURSE = 1;  // preoperative-assessment-nurse
+  ROLE_PERIOPERATIVE_PHYSICIAN = 2;  // perioperative-physician
+  ROLE_ANAESTHETIST = 3;  // anaesthetist
+  ROLE_SURGEON = 4;  // surgeon
+  ROLE_PREHABILITATION_THERAPIST = 5;  // prehabilitation-therapist
+  ROLE_PHYSIOTHERAPIST = 6;  // physiotherapist
+  ROLE_PHARMACIST = 7;  // pharmacist
+  ROLE_DIETITIAN = 8;  // dietitian
+  ROLE_SPECIALIST_NURSE = 9;  // specialist-nurse
+  ROLE_OTHER = 10;  // other
+}
+
+enum ClinicianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GMC = 1;  // GMC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_HCPC = 3;  // HCPC
+  REGISTRATIONBODY_GPHC = 4;  // GPhC
+  REGISTRATIONBODY_OTHER = 5;  // other
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  ClinicianRoleEnum role = 11;  // TEXT
+  ClinicianRegistrationBodyEnum registration_body = 12;  // TEXT
+  string registration_number = 13;  // TEXT
+  string employer = 14;  // TEXT
+  string united_kingdom_nhs_number = 15;  // CHAR(12) — max 12 chars
+}

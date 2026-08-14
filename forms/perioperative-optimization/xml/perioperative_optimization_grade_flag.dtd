@@ -1,0 +1,12 @@
+<!ELEMENT perioperative_optimization_grade_flag (id,created_at,updated_at,deleted_at,perioperative_optimization_grade_id,flag_id,category,priority,domain,description,suggested_action)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT perioperative_optimization_grade_id (#PCDATA)>
+<!ELEMENT flag_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT domain (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT suggested_action (#PCDATA)>

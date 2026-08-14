@@ -1,0 +1,176 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:perioperative-optimization",
+        "code": "medication",
+        "display": "Medication"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "international_nonproprietary_name",
+            "display": "International Nonproprietary Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "brand_name",
+            "display": "Brand Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "kind",
+            "display": "Kind"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization:kind",
+            "code": "prescription",
+            "display": "Prescription"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "hold_class",
+            "display": "Hold Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization:hold_class",
+            "code": "anticoagulant",
+            "display": "Anticoagulant"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "hold_required",
+            "display": "Hold Required"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "default_hold_start_before_days",
+            "display": "Default Hold Start Before Days"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "default_restart_after_days",
+            "display": "Default Restart After Days"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "perioperative_hold_guidance",
+            "display": "Perioperative Hold Guidance"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "description",
+            "display": "Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

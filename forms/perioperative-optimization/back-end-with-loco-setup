@@ -1,0 +1,372 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=perioperative-optimization
+form_snake_case=perioperative_optimization
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    waist_as_cm:double \
+    mid_upper_arm_circumference_as_cm:double \
+    calf_circumference_as_cm:double \
+    preferred_language:text \
+    ethnicity:text \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    employer:text! \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold medication \
+    deleted_at:tstz \
+    international_nonproprietary_name:text! \
+    brand_name:text! \
+    kind:text! \
+    hold_class:text! \
+    hold_required:bool! \
+    default_hold_start_before_days:int \
+    default_restart_after_days:int \
+    perioperative_hold_guidance:text! \
+    description:text! \
+    --api
+
+cargo loco generate scaffold patient_medication \
+    deleted_at:tstz \
+    patient:references \
+    medication:references \
+    dose:text! \
+    frequency:text! \
+    route:text! \
+    indication:text! \
+    started_on:date \
+    prescribed_by:text! \
+    adherence:text! \
+    hold_required:bool! \
+    hold_start_before_days:int \
+    restart_after_days:int \
+    hold_plan_agreed:bool! \
+    hold_plan_agreed_by:text! \
+    hold_plan_agreed_on:date \
+    notes:text! \
+    --api
+
+cargo loco generate scaffold allergy \
+    deleted_at:tstz \
+    scientific_name:text! \
+    european_union_name:text! \
+    united_states_name:text! \
+    cosmetic_name:text! \
+    kind:text! \
+    is_regulated_food_allergen:bool! \
+    --api
+
+cargo loco generate scaffold patient_allergy \
+    deleted_at:tstz \
+    patient:references \
+    allergy:references \
+    reaction:text! \
+    severity:text! \
+    kind:text! \
+    diagnosis_method:text! \
+    onset_on:date \
+    adrenaline_auto_injector:bool! \
+    notes:text! \
+    --api
+
+cargo loco generate scaffold perioperative_optimization \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    status:string! \
+    assessment_date:date \
+    assessment_time:string \
+    site_name:string! \
+    service_name:string! \
+    pathway_stage:string! \
+    assessment_mode:string! \
+    referral_source:string! \
+    planned_procedure:string! \
+    surgical_specialty:string! \
+    consultant_surgeon:string! \
+    planned_surgery_date:date \
+    urgency:string! \
+    surgical_severity:string! \
+    laterality:string! \
+    anticipated_blood_loss_ml:int \
+    anticipated_length_of_stay_days:int \
+    interpreter_required:string! \
+    interpreter_language:string! \
+    condition_cardiac:string! \
+    condition_respiratory:string! \
+    condition_renal:string! \
+    condition_hepatic:string! \
+    condition_stroke:string! \
+    condition_cancer:string! \
+    condition_rheumatological:string! \
+    condition_thyroid:string! \
+    condition_other:string! \
+    previous_surgery:string! \
+    previous_surgery_detail:string! \
+    previous_anaesthetic_complication:string! \
+    previous_anaesthetic_complication_detail:string! \
+    postoperative_nausea_history:string! \
+    difficult_airway_history:string! \
+    malignant_hyperthermia_history:string! \
+    venous_thromboembolism_history:string! \
+    family_history:text! \
+    pregnancy_status:string! \
+    takes_prescription_medicines:string! \
+    takes_over_the_counter_medicines:string! \
+    takes_herbal_products:string! \
+    takes_anticoagulant:string! \
+    takes_antiplatelet:string! \
+    takes_ace_inhibitor_or_arb:string! \
+    takes_sglt2_inhibitor:string! \
+    takes_glp1_agonist:string! \
+    takes_corticosteroid:string! \
+    takes_immunosuppressant:string! \
+    takes_hormone_therapy:string! \
+    medication_hold_plan_agreed:string! \
+    medication_hold_plan_agreed_by:string! \
+    medication_adherence:string! \
+    medication_notes:text! \
+    has_drug_allergy:string! \
+    drug_allergy_detail:string! \
+    has_food_allergy:string! \
+    food_allergy_detail:string! \
+    has_latex_allergy:string! \
+    has_adhesive_allergy:string! \
+    has_contrast_allergy:string! \
+    allergy_severity:string! \
+    adrenaline_auto_injector:string! \
+    allergy_notes:text! \
+    bloods_sample_date:date \
+    haemoglobin_g_per_l:double \
+    mean_cell_volume_fl:double \
+    ferritin_ug_per_l:double \
+    transferrin_saturation_percent:double \
+    vitamin_b12_ng_per_l:double \
+    folate_ug_per_l:double \
+    c_reactive_protein_mg_per_l:double \
+    creatinine_umol_per_l:double \
+    egfr_ml_per_min:double \
+    anaemia_known_cause:string! \
+    anaemia_treatment_started:string! \
+    anaemia_treatment_route:string! \
+    anaemia_treatment_start_date:date \
+    previous_transfusion:string! \
+    group_and_save_done:string! \
+    anaemia_notes:text! \
+    diabetes_type:string! \
+    diabetes_duration_years:double \
+    hba1c_mmol_per_mol:double \
+    hba1c_sample_date:date \
+    capillary_glucose_mmol_per_l:double \
+    diabetes_treatment:string! \
+    insulin_regimen:string! \
+    hypoglycaemia_awareness:string! \
+    diabetes_team_review:string! \
+    diabetes_team_review_date:date \
+    foot_check_done:string! \
+    glycaemic_notes:text! \
+    smoking_status:string! \
+    cigarettes_per_day:int \
+    pack_years:double \
+    quit_date:date \
+    smoking_cessation_offered:string! \
+    smoking_cessation_accepted:string! \
+    nicotine_replacement:string! \
+    vaping:string! \
+    smoking_notes:text! \
+    alcohol_units_per_week:double \
+    audit_c_frequency:int \
+    audit_c_typical_quantity:int \
+    audit_c_binge_frequency:int \
+    alcohol_dependence_features:string! \
+    alcohol_reduction_plan_agreed:string! \
+    alcohol_services_referral:string! \
+    recreational_drug_use:string! \
+    recreational_drug_detail:string! \
+    alcohol_notes:text! \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    usual_weight_as_kg:double \
+    weight_loss_percent:double \
+    weight_loss_is_intentional:string! \
+    acutely_ill:string! \
+    no_nutritional_intake_over_5_days:string! \
+    appetite:string! \
+    oral_nutritional_supplements:string! \
+    immunonutrition:string! \
+    dietitian_referral:string! \
+    nutrition_notes:text! \
+    usual_activity_level:string! \
+    climbs_flight_of_stairs:string! \
+    metabolic_equivalents:double \
+    duke_activity_status_index:double \
+    six_minute_walk_metres:int \
+    cpet_anaerobic_threshold:double \
+    cpet_peak_vo2:double \
+    grip_strength_kg:double \
+    prehabilitation_offered:string! \
+    prehabilitation_enrolled:string! \
+    prehabilitation_sessions_per_week:int \
+    prehabilitation_start_date:date \
+    fitness_notes:text! \
+    clinical_frailty_scale:int \
+    cognitive_screen_tool:string! \
+    cognitive_screen_score:double \
+    cognitive_impairment:string! \
+    capacity_concern:string! \
+    falls_in_last_12_months:int \
+    mobility_aid:string! \
+    living_situation:string! \
+    care_package:string! \
+    frailty_notes:text! \
+    systolic_bp:int \
+    diastolic_bp:int \
+    heart_rate:int \
+    heart_rhythm:string! \
+    murmur_present:string! \
+    exercise_tolerance:string! \
+    ejection_fraction_percent:int \
+    echo_date:date \
+    asthma_control:string! \
+    copd_control:string! \
+    inhaler_technique_checked:string! \
+    rescue_steroids:string! \
+    spirometry_fev1_percent:double \
+    stop_bang_score:int \
+    sleep_apnoea_diagnosis:string! \
+    cpap_use:string! \
+    oxygen_saturation_percent:double \
+    cardiorespiratory_notes:text! \
+    anxiety_level:string! \
+    depression_screen:string! \
+    understands_procedure:string! \
+    expectations_realistic:string! \
+    shared_decision_making_discussed:string! \
+    has_carer:string! \
+    transport_home_arranged:string! \
+    support_after_discharge:string! \
+    health_literacy:string! \
+    psychological_support_offered:string! \
+    social_notes:text! \
+    plan_anaemia:string! \
+    referral_anaemia:string! \
+    plan_glycaemic_control:string! \
+    referral_glycaemic_control:string! \
+    plan_smoking:string! \
+    referral_smoking:string! \
+    plan_alcohol:string! \
+    referral_alcohol:string! \
+    plan_nutrition:string! \
+    referral_nutrition:string! \
+    plan_physical_fitness:string! \
+    referral_physical_fitness:string! \
+    plan_medication:string! \
+    referral_medication:string! \
+    plan_cardiorespiratory:string! \
+    referral_cardiorespiratory:string! \
+    responsible_clinician:string! \
+    plan_agreed_with_patient:string! \
+    plan_shared_with_patient:string! \
+    next_review_date:date \
+    plan_notes:text! \
+    gate_decision:string! \
+    additional_notes:text! \
+    --api
+
+cargo loco generate scaffold perioperative_optimization_grade \
+    deleted_at:tstz \
+    perioperative_optimization:references \
+    weeks_to_surgery:int \
+    gating_applied:bool! \
+    must_score:int \
+    must_risk:string! \
+    audit_c_score:int \
+    stop_bang_score:int \
+    duke_activity_status_index:double \
+    clinical_frailty_scale:int \
+    domains_optimised:int \
+    domains_in_progress:int \
+    domains_action_required:int \
+    domains_insufficient_time:int \
+    computed_readiness:string! \
+    final_readiness:string! \
+    override_reason:string! \
+    gate_decision:string! \
+    recommended_earliest_surgery_date:date \
+    clinician_notes:text! \
+    signed_by_name:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold perioperative_optimization_grade_domain \
+    deleted_at:tstz \
+    perioperative_optimization_grade:references \
+    domain:string! \
+    status:string! \
+    triggered:bool! \
+    lead_time_weeks:int! \
+    weeks_shortfall:int \
+    rule_id:string! \
+    finding:string! \
+    intervention:string! \
+    intervention_started:bool! \
+    referral_made:bool! \
+    target_value:string! \
+    start_date:date \
+    --api
+
+cargo loco generate scaffold perioperative_optimization_grade_flag \
+    deleted_at:tstz \
+    perioperative_optimization_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    domain:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

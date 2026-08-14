@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE perioperative_optimization_grade_domain SYSTEM "perioperative_optimization_grade_domain.dtd">
+<perioperative_optimization_grade_domain>
+<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<perioperative_optimization_grade_id>cc0e8400-e29b-41d4-a716-446655440007</perioperative_optimization_grade_id>
+<domain>anaemia</domain>
+<status>optimised</status>
+<triggered>true</triggered>
+<lead_time_weeks>1</lead_time_weeks>
+<weeks_shortfall>1</weeks_shortfall>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<finding>Example text.</finding>
+<intervention></intervention>
+<intervention_started>true</intervention_started>
+<referral_made>true</referral_made>
+<target_value></target_value>
+<start_date>2026-01-15</start_date>
+</perioperative_optimization_grade_domain>

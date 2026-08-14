@@ -1,0 +1,243 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: perioperative_optimization_grade
+openapi: 3.1.0
+info:
+  title: Perioperative Optimization — PerioperativeOptimizationGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for one perioperative optimisation assessment, holding the engine-computed and clinician-final surgical readiness bands.
+paths:
+  /perioperative-optimization-grades:
+    get:
+      summary: List PerioperativeOptimizationGrade records
+      operationId: listPerioperativeOptimizationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PerioperativeOptimizationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+    post:
+      summary: Create a new PerioperativeOptimizationGrade
+      operationId: createPerioperativeOptimizationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+      responses:
+        "201":
+          description: The newly created PerioperativeOptimizationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+        "400":
+          description: Validation error
+  /perioperative-optimization-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PerioperativeOptimizationGrade by id
+      operationId: getPerioperativeOptimizationGrade
+      responses:
+        "200":
+          description: The requested PerioperativeOptimizationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+        "404":
+          description: PerioperativeOptimizationGrade not found
+    patch:
+      summary: Update an existing PerioperativeOptimizationGrade
+      operationId: updatePerioperativeOptimizationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+      responses:
+        "200":
+          description: The updated PerioperativeOptimizationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+        "404":
+          description: PerioperativeOptimizationGrade not found
+    delete:
+      summary: Soft-delete a PerioperativeOptimizationGrade
+      operationId: deletePerioperativeOptimizationGrade
+      responses:
+        "204":
+          description: PerioperativeOptimizationGrade deleted
+        "404":
+          description: PerioperativeOptimizationGrade not found
+components:
+  schemas:
+    PerioperativeOptimizationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        perioperative_optimization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the perioperative_optimization table, unique because grading is one-to-one with the assessment.
+        weeks_to_surgery:
+          type: integer
+          format: int32
+          description: Whole weeks between the assessment date and the planned surgery date, the value every domain lead time is gated against. Negative where the surgery date precedes the assessment date; NULL where either date is missing.
+        gating_applied:
+          type: boolean
+          description: Whether time-to-surgery gating could be applied, i.e. whether both dates were present. When false, every triggered domain reports action-required and the report says gating was not applied.
+        must_score:
+          type: integer
+          format: int32
+          description: Malnutrition Universal Screening Tool total, 0 to 6, driving the nutrition domain.
+        must_risk:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "MUST risk category: low for 0, medium for 1, high for 2 or more."
+        audit_c_score:
+          type: integer
+          format: int32
+          description: AUDIT-C alcohol consumption score, 0 to 12, driving the alcohol domain.
+        stop_bang_score:
+          type: integer
+          format: int32
+          description: STOP-BANG obstructive sleep apnoea screening score, 0 to 8, contributing to the cardiorespiratory domain.
+        duke_activity_status_index:
+          type: number
+          format: double
+          description: Duke Activity Status Index, contributing to the physical fitness domain.
+        clinical_frailty_scale:
+          type: integer
+          format: int32
+          description: Clinical Frailty Scale, 1 to 9. Reported and flagged but not gated, because frailty is rarely reversible in the available window.
+        domains_optimised:
+          type: integer
+          format: int32
+          description: Count of the eight domains graded optimised or not-applicable.
+        domains_in_progress:
+          type: integer
+          format: int32
+          description: Count of the eight domains graded in-progress.
+        domains_action_required:
+          type: integer
+          format: int32
+          description: Count of the eight domains graded action-required.
+        domains_insufficient_time:
+          type: integer
+          format: int32
+          description: Count of the eight domains graded insufficient-time. Any value above zero forces a defer-surgery readiness band.
+        computed_readiness:
+          type: string
+          enum:
+            - ready
+            - optimisation-in-progress
+            - optimisation-required
+            - defer-surgery
+            - ""
+          description: Surgical readiness band computed by the engine using the max-grade algorithm across the eight domains.
+        final_readiness:
+          type: string
+          enum:
+            - ready
+            - optimisation-in-progress
+            - optimisation-required
+            - defer-surgery
+            - ""
+          description: Surgical readiness band signed off by the clinician, which may equal or differ from the computed band.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the clinician set a final band differently from the computed band, mandatory when they differ. Safety flags are unaffected by the override.
+        gate_decision:
+          type: string
+          enum:
+            - proceed
+            - proceed-with-prehabilitation
+            - defer-and-optimise
+            - accept-unoptimised-risk
+            - mdt-review
+            - cancel
+            - ""
+          description: "The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimise, accept-unoptimised-risk, mdt-review, or cancel."
+        recommended_earliest_surgery_date:
+          type: string
+          format: date
+          description: Earliest date at which every triggered domain would have had its full lead time, derived from the largest domain shortfall.
+        clinician_notes:
+          type: string
+          description: Free-text clinician summary notes.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the clinician who signed the assessment.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - perioperative_optimization_id
+        - gating_applied
+        - must_risk
+        - computed_readiness
+        - final_readiness
+        - override_reason
+        - gate_decision
+        - clinician_notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off grading result for one perioperative optimisation assessment, holding the engine-computed and clinician-final surgical readiness bands.

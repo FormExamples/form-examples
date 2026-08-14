@@ -1,0 +1,14 @@
+<!ELEMENT patient_allergy (id,created_at,updated_at,deleted_at,patient_id,allergy_id,reaction,severity,kind,diagnosis_method,onset_on,adrenaline_auto_injector,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT allergy_id (#PCDATA)>
+<!ELEMENT reaction (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT diagnosis_method (#PCDATA)>
+<!ELEMENT onset_on (#PCDATA)>
+<!ELEMENT adrenaline_auto_injector (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

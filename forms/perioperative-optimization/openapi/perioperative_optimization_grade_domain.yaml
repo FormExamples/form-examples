@@ -1,0 +1,200 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: perioperative_optimization_grade_domain
+openapi: 3.1.0
+info:
+  title: Perioperative Optimization — PerioperativeOptimizationGradeDomain
+  version: 1.0.0
+  description: Per-domain optimisation result, one row per optimisation domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.
+paths:
+  /perioperative-optimization-grade-domains:
+    get:
+      summary: List PerioperativeOptimizationGradeDomain records
+      operationId: listPerioperativeOptimizationGradeDomain
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PerioperativeOptimizationGradeDomain records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PerioperativeOptimizationGradeDomain"
+    post:
+      summary: Create a new PerioperativeOptimizationGradeDomain
+      operationId: createPerioperativeOptimizationGradeDomain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGradeDomain"
+      responses:
+        "201":
+          description: The newly created PerioperativeOptimizationGradeDomain
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGradeDomain"
+        "400":
+          description: Validation error
+  /perioperative-optimization-grade-domains/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PerioperativeOptimizationGradeDomain by id
+      operationId: getPerioperativeOptimizationGradeDomain
+      responses:
+        "200":
+          description: The requested PerioperativeOptimizationGradeDomain
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGradeDomain"
+        "404":
+          description: PerioperativeOptimizationGradeDomain not found
+    patch:
+      summary: Update an existing PerioperativeOptimizationGradeDomain
+      operationId: updatePerioperativeOptimizationGradeDomain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGradeDomain"
+      responses:
+        "200":
+          description: The updated PerioperativeOptimizationGradeDomain
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGradeDomain"
+        "404":
+          description: PerioperativeOptimizationGradeDomain not found
+    delete:
+      summary: Soft-delete a PerioperativeOptimizationGradeDomain
+      operationId: deletePerioperativeOptimizationGradeDomain
+      responses:
+        "204":
+          description: PerioperativeOptimizationGradeDomain deleted
+        "404":
+          description: PerioperativeOptimizationGradeDomain not found
+components:
+  schemas:
+    PerioperativeOptimizationGradeDomain:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        perioperative_optimization_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent perioperative_optimization_grade table.
+        domain:
+          type: string
+          enum:
+            - anaemia
+            - glycaemic-control
+            - smoking
+            - alcohol
+            - nutrition
+            - physical-fitness
+            - medication
+            - cardiorespiratory
+          description: Which of the eight optimisation domains this row grades.
+        status:
+          type: string
+          enum:
+            - optimised
+            - in-progress
+            - action-required
+            - insufficient-time
+            - not-applicable
+            - ""
+          description: "Domain status after time-to-surgery gating: optimised, in-progress, action-required, insufficient-time, or not-applicable."
+        triggered:
+          type: boolean
+          description: Whether the domain screening threshold was crossed, i.e. whether there is anything to optimise.
+        lead_time_weeks:
+          type: integer
+          format: int32
+          description: Minimum weeks before surgery the intervention needs in order to work, per doc/optimisation-domains.md.
+        weeks_shortfall:
+          type: integer
+          format: int32
+          description: How many weeks short of the lead time this assessment is, i.e. how much later the surgery would have to be for the intervention to work. NULL when there is enough time.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Stable identifier of the rule that triggered the domain, such as R-ANAEMIA-3.
+        finding:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what triggered the domain.
+        intervention:
+          type: string
+          maxLength: 500
+          description: The intervention this domain calls for.
+        intervention_started:
+          type: boolean
+          description: Whether the intervention has already been started, which moves the domain from action-required to in-progress.
+        referral_made:
+          type: boolean
+          description: Whether an onward referral for this domain has been made.
+        target_value:
+          type: string
+          maxLength: 255
+          description: Target value for the domain, such as a haemoglobin or HbA1c figure to reach before surgery.
+        start_date:
+          type: string
+          format: date
+          description: Date the intervention for this domain started, or is planned to start.
+      required:
+        - created_at
+        - updated_at
+        - perioperative_optimization_grade_id
+        - domain
+        - status
+        - triggered
+        - lead_time_weeks
+        - rule_id
+        - finding
+        - intervention
+        - intervention_started
+        - referral_made
+        - target_value
+      description: Per-domain optimisation result, one row per optimisation domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.

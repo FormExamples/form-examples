@@ -1,0 +1,57 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: perioperative_optimization_grade_flag
+
+syntax = "proto3";
+
+package form_examples.perioperative_optimization;
+
+enum PerioperativeOptimizationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SEVERE_ANAEMIA = 1;  // severe-anaemia
+  CATEGORY_IRON_DEFICIENCY_UNTREATED = 2;  // iron-deficiency-untreated
+  CATEGORY_HBA1C_ABOVE_THRESHOLD = 3;  // hba1c-above-threshold
+  CATEGORY_UNDIAGNOSED_DIABETES = 4;  // undiagnosed-diabetes
+  CATEGORY_SGLT2_INHIBITOR_NOT_HELD = 5;  // sglt2-inhibitor-not-held
+  CATEGORY_GLP1_AGONIST_ASPIRATION_RISK = 6;  // glp1-agonist-aspiration-risk
+  CATEGORY_ANTICOAGULATION_PLAN_MISSING = 7;  // anticoagulation-plan-missing
+  CATEGORY_INSUFFICIENT_TIME_TO_OPTIMISE = 8;  // insufficient-time-to-optimise
+  CATEGORY_ACTIVE_SMOKER_MAJOR_SURGERY = 9;  // active-smoker-major-surgery
+  CATEGORY_ALCOHOL_DEPENDENCE_RISK = 10;  // alcohol-dependence-risk
+  CATEGORY_HIGH_MALNUTRITION_RISK = 11;  // high-malnutrition-risk
+  CATEGORY_POOR_FUNCTIONAL_CAPACITY = 12;  // poor-functional-capacity
+  CATEGORY_SEVERE_FRAILTY = 13;  // severe-frailty
+  CATEGORY_UNCONTROLLED_HYPERTENSION = 14;  // uncontrolled-hypertension
+  CATEGORY_CARDIAC_OPTIMISATION_REQUIRED = 15;  // cardiac-optimisation-required
+  CATEGORY_RESPIRATORY_OPTIMISATION_REQUIRED = 16;  // respiratory-optimisation-required
+  CATEGORY_OSA_UNASSESSED = 17;  // osa-unassessed
+  CATEGORY_RENAL_OPTIMISATION_REQUIRED = 18;  // renal-optimisation-required
+  CATEGORY_PRIOR_ANAESTHETIC_COMPLICATION = 19;  // prior-anaesthetic-complication
+  CATEGORY_PSYCHOLOGICAL_SUPPORT_REQUIRED = 20;  // psychological-support-required
+  CATEGORY_SOCIAL_SUPPORT_GAP = 21;  // social-support-gap
+  CATEGORY_CAPACITY_CONCERN = 22;  // capacity-concern
+  CATEGORY_PREGNANCY = 23;  // pregnancy
+  CATEGORY_PAEDIATRIC = 24;  // paediatric
+  CATEGORY_SAFEGUARDING = 25;  // safeguarding
+  CATEGORY_OTHER = 26;  // other
+}
+
+enum PerioperativeOptimizationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PerioperativeOptimizationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string perioperative_optimization_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  PerioperativeOptimizationGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  PerioperativeOptimizationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string domain = 9;  // VARCHAR(30) — max 30 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 11;  // VARCHAR(500) — max 500 chars
+}

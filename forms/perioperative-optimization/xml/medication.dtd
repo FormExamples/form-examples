@@ -1,0 +1,14 @@
+<!ELEMENT medication (id,created_at,updated_at,deleted_at,international_nonproprietary_name,brand_name,kind,hold_class,hold_required,default_hold_start_before_days,default_restart_after_days,perioperative_hold_guidance,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT international_nonproprietary_name (#PCDATA)>
+<!ELEMENT brand_name (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT hold_class (#PCDATA)>
+<!ELEMENT hold_required (#PCDATA)>
+<!ELEMENT default_hold_start_before_days (#PCDATA)>
+<!ELEMENT default_restart_after_days (#PCDATA)>
+<!ELEMENT perioperative_hold_guidance (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

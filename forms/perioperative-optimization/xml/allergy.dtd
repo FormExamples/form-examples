@@ -1,0 +1,11 @@
+<!ELEMENT allergy (id,created_at,updated_at,deleted_at,scientific_name,european_union_name,united_states_name,cosmetic_name,kind,is_regulated_food_allergen)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT scientific_name (#PCDATA)>
+<!ELEMENT european_union_name (#PCDATA)>
+<!ELEMENT united_states_name (#PCDATA)>
+<!ELEMENT cosmetic_name (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT is_regulated_food_allergen (#PCDATA)>

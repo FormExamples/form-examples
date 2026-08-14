@@ -1,0 +1,192 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: perioperative_optimization_grade_flag
+openapi: 3.1.0
+info:
+  title: Perioperative Optimization — PerioperativeOptimizationGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the surgical readiness band, with a priority and a suggested action for the perioperative team.
+paths:
+  /perioperative-optimization-grade-flags:
+    get:
+      summary: List PerioperativeOptimizationGradeFlag records
+      operationId: listPerioperativeOptimizationGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PerioperativeOptimizationGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PerioperativeOptimizationGradeFlag"
+    post:
+      summary: Create a new PerioperativeOptimizationGradeFlag
+      operationId: createPerioperativeOptimizationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGradeFlag"
+      responses:
+        "201":
+          description: The newly created PerioperativeOptimizationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGradeFlag"
+        "400":
+          description: Validation error
+  /perioperative-optimization-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PerioperativeOptimizationGradeFlag by id
+      operationId: getPerioperativeOptimizationGradeFlag
+      responses:
+        "200":
+          description: The requested PerioperativeOptimizationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGradeFlag"
+        "404":
+          description: PerioperativeOptimizationGradeFlag not found
+    patch:
+      summary: Update an existing PerioperativeOptimizationGradeFlag
+      operationId: updatePerioperativeOptimizationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGradeFlag"
+      responses:
+        "200":
+          description: The updated PerioperativeOptimizationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGradeFlag"
+        "404":
+          description: PerioperativeOptimizationGradeFlag not found
+    delete:
+      summary: Soft-delete a PerioperativeOptimizationGradeFlag
+      operationId: deletePerioperativeOptimizationGradeFlag
+      responses:
+        "204":
+          description: PerioperativeOptimizationGradeFlag deleted
+        "404":
+          description: PerioperativeOptimizationGradeFlag not found
+components:
+  schemas:
+    PerioperativeOptimizationGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        perioperative_optimization_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent perioperative_optimization_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier, such as F-SGLT2-INHIBITOR-NOT-HELD-001.
+        category:
+          type: string
+          enum:
+            - severe-anaemia
+            - iron-deficiency-untreated
+            - hba1c-above-threshold
+            - undiagnosed-diabetes
+            - sglt2-inhibitor-not-held
+            - glp1-agonist-aspiration-risk
+            - anticoagulation-plan-missing
+            - insufficient-time-to-optimise
+            - active-smoker-major-surgery
+            - alcohol-dependence-risk
+            - high-malnutrition-risk
+            - poor-functional-capacity
+            - severe-frailty
+            - uncontrolled-hypertension
+            - cardiac-optimisation-required
+            - respiratory-optimisation-required
+            - osa-unassessed
+            - renal-optimisation-required
+            - prior-anaesthetic-complication
+            - psychological-support-required
+            - social-support-gap
+            - capacity-concern
+            - pregnancy
+            - paediatric
+            - safeguarding
+            - other
+            - ""
+          description: Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimise.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, or high."
+        domain:
+          type: string
+          maxLength: 30
+          description: Optimisation domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action, such as \"agree a hold-and-restart plan with the prescriber before admission\"."
+      required:
+        - created_at
+        - updated_at
+        - perioperative_optimization_grade_id
+        - flag_id
+        - category
+        - priority
+        - domain
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the surgical readiness band, with a priority and a suggested action for the perioperative team.

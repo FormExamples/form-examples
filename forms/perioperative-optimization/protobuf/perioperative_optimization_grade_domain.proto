@@ -1,0 +1,47 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: perioperative_optimization_grade_domain
+
+syntax = "proto3";
+
+package form_examples.perioperative_optimization;
+
+enum PerioperativeOptimizationGradeDomainDomainEnum {
+  DOMAIN_UNSPECIFIED = 0;
+  DOMAIN_ANAEMIA = 1;  // anaemia
+  DOMAIN_GLYCAEMIC_CONTROL = 2;  // glycaemic-control
+  DOMAIN_SMOKING = 3;  // smoking
+  DOMAIN_ALCOHOL = 4;  // alcohol
+  DOMAIN_NUTRITION = 5;  // nutrition
+  DOMAIN_PHYSICAL_FITNESS = 6;  // physical-fitness
+  DOMAIN_MEDICATION = 7;  // medication
+  DOMAIN_CARDIORESPIRATORY = 8;  // cardiorespiratory
+}
+
+enum PerioperativeOptimizationGradeDomainStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_OPTIMISED = 1;  // optimised
+  STATUS_IN_PROGRESS = 2;  // in-progress
+  STATUS_ACTION_REQUIRED = 3;  // action-required
+  STATUS_INSUFFICIENT_TIME = 4;  // insufficient-time
+  STATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+message PerioperativeOptimizationGradeDomain {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string perioperative_optimization_grade_id = 5;  // UUID — uuid
+  PerioperativeOptimizationGradeDomainDomainEnum domain = 6;  // VARCHAR(30)
+  PerioperativeOptimizationGradeDomainStatusEnum status = 7;  // VARCHAR(20)
+  bool triggered = 8;  // BOOLEAN
+  int32 lead_time_weeks = 9;  // INTEGER
+  int32 weeks_shortfall = 10;  // INTEGER
+  string rule_id = 11;  // VARCHAR(30) — max 30 chars
+  string finding = 12;  // VARCHAR(500) — max 500 chars
+  string intervention = 13;  // VARCHAR(500) — max 500 chars
+  bool intervention_started = 14;  // BOOLEAN
+  bool referral_made = 15;  // BOOLEAN
+  string target_value = 16;  // VARCHAR(255) — max 255 chars
+  string start_date = 17;  // DATE — iso 8601 date
+}

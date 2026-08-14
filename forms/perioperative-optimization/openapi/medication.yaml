@@ -1,0 +1,186 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medication
+openapi: 3.1.0
+info:
+  title: Perioperative Optimization — Medication
+  version: 1.0.0
+  description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimisation domain.
+paths:
+  /medications:
+    get:
+      summary: List Medication records
+      operationId: listMedication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Medication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Medication"
+    post:
+      summary: Create a new Medication
+      operationId: createMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Medication"
+      responses:
+        "201":
+          description: The newly created Medication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medication"
+        "400":
+          description: Validation error
+  /medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Medication by id
+      operationId: getMedication
+      responses:
+        "200":
+          description: The requested Medication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medication"
+        "404":
+          description: Medication not found
+    patch:
+      summary: Update an existing Medication
+      operationId: updateMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Medication"
+      responses:
+        "200":
+          description: The updated Medication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medication"
+        "404":
+          description: Medication not found
+    delete:
+      summary: Soft-delete a Medication
+      operationId: deleteMedication
+      responses:
+        "204":
+          description: Medication deleted
+        "404":
+          description: Medication not found
+components:
+  schemas:
+    Medication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        international_nonproprietary_name:
+          type: string
+          description: International Nonproprietary Name (INN) of the medication, as designated by the WHO.
+        brand_name:
+          type: string
+          description: Brand name as the patient knows the product, such as for reconciling a patient-reported medicine to its ingredient.
+        kind:
+          type: string
+          enum:
+            - prescription
+            - over-the-counter
+            - herbal
+            - complementary
+            - vitamin
+            - mineral
+            - other
+            - ""
+          description: Kind of product, such as prescription, over-the-counter, or herbal.
+        hold_class:
+          type: string
+          enum:
+            - anticoagulant
+            - antiplatelet
+            - ace-inhibitor-or-arb
+            - sglt2-inhibitor
+            - glp1-agonist
+            - insulin
+            - other-diabetes
+            - corticosteroid
+            - immunosuppressant
+            - hormone-therapy
+            - herbal
+            - psychotropic
+            - none
+            - ""
+          description: Perioperative hold class, such as anticoagulant, sglt2-inhibitor, or glp1-agonist. Drives which prompt the front-end shows and which safety flag can fire.
+        hold_required:
+          type: boolean
+          description: Whether this product normally requires a perioperative hold-and-restart plan.
+        default_hold_start_before_days:
+          type: integer
+          format: int32
+          description: Default number of days before surgery to stop the product, for reference only. The prescriber owns the decision.
+        default_restart_after_days:
+          type: integer
+          format: int32
+          description: Default number of days after surgery to restart the product, for reference only. The prescriber owns the decision.
+        perioperative_hold_guidance:
+          type: string
+          description: Free-text local guidance for holding and restarting this product around surgery.
+        description:
+          type: string
+          description: Description of the medication, including its uses and properties.
+      required:
+        - created_at
+        - updated_at
+        - international_nonproprietary_name
+        - brand_name
+        - kind
+        - hold_class
+        - hold_required
+        - perioperative_hold_guidance
+        - description
+      description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimisation domain.

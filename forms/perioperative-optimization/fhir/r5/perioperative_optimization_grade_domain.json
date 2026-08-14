@@ -1,0 +1,200 @@
+{
+  "resourceType": "Observation",
+  "id": "dd0e8400-e29b-41d4-a716-446655440008",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:perioperative-optimization",
+        "code": "perioperative_optimization_grade_domain",
+        "display": "Perioperative Optimization Grade Domain"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "domain",
+            "display": "Domain"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization:domain",
+            "code": "anaemia",
+            "display": "Anaemia"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization:status",
+            "code": "optimised",
+            "display": "Optimised"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "triggered",
+            "display": "Triggered"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "lead_time_weeks",
+            "display": "Lead Time Weeks"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "weeks_shortfall",
+            "display": "Weeks Shortfall"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "finding",
+            "display": "Finding"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "intervention",
+            "display": "Intervention"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "intervention_started",
+            "display": "Intervention Started"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "referral_made",
+            "display": "Referral Made"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "target_value",
+            "display": "Target Value"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:perioperative-optimization",
+            "code": "start_date",
+            "display": "Start Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    }
+  ]
+}

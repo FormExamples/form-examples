@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE perioperative_optimization_grade SYSTEM "perioperative_optimization_grade.dtd">
+<perioperative_optimization_grade>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<perioperative_optimization_id>bb0e8400-e29b-41d4-a716-446655440006</perioperative_optimization_id>
+<weeks_to_surgery>1</weeks_to_surgery>
+<gating_applied>true</gating_applied>
+<must_score>5</must_score>
+<must_risk>low</must_risk>
+<audit_c_score>5</audit_c_score>
+<stop_bang_score>5</stop_bang_score>
+<duke_activity_status_index>0.0</duke_activity_status_index>
+<clinical_frailty_scale>1</clinical_frailty_scale>
+<domains_optimised>1</domains_optimised>
+<domains_in_progress>1</domains_in_progress>
+<domains_action_required>1</domains_action_required>
+<domains_insufficient_time>1</domains_insufficient_time>
+<computed_readiness>ready</computed_readiness>
+<final_readiness>ready</final_readiness>
+<override_reason>Example text.</override_reason>
+<gate_decision>proceed</gate_decision>
+<recommended_earliest_surgery_date>2026-01-15</recommended_earliest_surgery_date>
+<clinician_notes>Example text.</clinician_notes>
+<signed_by_name>Example</signed_by_name>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</perioperative_optimization_grade>

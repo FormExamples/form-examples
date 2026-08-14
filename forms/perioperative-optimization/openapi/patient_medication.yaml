@@ -1,0 +1,208 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: patient_medication
+openapi: 3.1.0
+info:
+  title: Perioperative Optimization — PatientMedication
+  version: 1.0.0
+  description: Patient medication, i.e. one medicine that one patient takes, with the agreed perioperative hold-and-restart plan.
+paths:
+  /patient-medications:
+    get:
+      summary: List PatientMedication records
+      operationId: listPatientMedication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PatientMedication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientMedication"
+    post:
+      summary: Create a new PatientMedication
+      operationId: createPatientMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientMedication"
+      responses:
+        "201":
+          description: The newly created PatientMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientMedication"
+        "400":
+          description: Validation error
+  /patient-medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PatientMedication by id
+      operationId: getPatientMedication
+      responses:
+        "200":
+          description: The requested PatientMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientMedication"
+        "404":
+          description: PatientMedication not found
+    patch:
+      summary: Update an existing PatientMedication
+      operationId: updatePatientMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientMedication"
+      responses:
+        "200":
+          description: The updated PatientMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientMedication"
+        "404":
+          description: PatientMedication not found
+    delete:
+      summary: Soft-delete a PatientMedication
+      operationId: deletePatientMedication
+      responses:
+        "204":
+          description: PatientMedication deleted
+        "404":
+          description: PatientMedication not found
+components:
+  schemas:
+    PatientMedication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        medication_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medication table.
+        dose:
+          type: string
+          description: "Dose as the patient takes it, such as \"5 mg\"."
+        frequency:
+          type: string
+          description: "Frequency as the patient takes it, such as \"once daily\"."
+        route:
+          type: string
+          enum:
+            - oral
+            - subcutaneous
+            - intravenous
+            - intramuscular
+            - inhaled
+            - topical
+            - transdermal
+            - other
+            - ""
+          description: Route of administration.
+        indication:
+          type: string
+          description: Why the patient takes this medicine, because the indication drives the thrombotic or other risk of stopping it.
+        started_on:
+          type: string
+          format: date
+          description: Date the patient started taking this medicine, where known.
+        prescribed_by:
+          type: string
+          description: Who prescribes the medicine, because the prescriber owns the decision to hold it.
+        adherence:
+          type: string
+          enum:
+            - full
+            - partial
+            - none
+            - unknown
+            - ""
+          description: Reported adherence.
+        hold_required:
+          type: boolean
+          description: Whether this medicine requires a perioperative hold for this patient.
+        hold_start_before_days:
+          type: integer
+          format: int32
+          description: Agreed number of days before surgery to stop this medicine.
+        restart_after_days:
+          type: integer
+          format: int32
+          description: Agreed number of days after surgery to restart this medicine.
+        hold_plan_agreed:
+          type: boolean
+          description: Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimisation domain.
+        hold_plan_agreed_by:
+          type: string
+          description: Who agreed the hold-and-restart plan.
+        hold_plan_agreed_on:
+          type: string
+          format: date
+          description: Date the hold-and-restart plan was agreed.
+        notes:
+          type: string
+          description: Free-text notes about this medicine for this patient.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - medication_id
+        - dose
+        - frequency
+        - route
+        - indication
+        - prescribed_by
+        - adherence
+        - hold_required
+        - hold_plan_agreed
+        - hold_plan_agreed_by
+        - notes
+      description: Patient medication, i.e. one medicine that one patient takes, with the agreed perioperative hold-and-restart plan.

@@ -1,0 +1,28 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: allergy
+
+syntax = "proto3";
+
+package form_examples.perioperative_optimization;
+
+enum AllergyKindEnum {
+  KIND_UNSPECIFIED = 0;
+  KIND_FOOD = 1;  // food
+  KIND_MEDICATION = 2;  // medication
+  KIND_ENVIRONMENTAL = 3;  // environmental
+  KIND_CONTACT = 4;  // contact
+  KIND_OTHER = 5;  // other
+}
+
+message Allergy {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string scientific_name = 5;  // TEXT
+  string european_union_name = 6;  // TEXT
+  string united_states_name = 7;  // TEXT
+  string cosmetic_name = 8;  // TEXT
+  AllergyKindEnum kind = 9;  // TEXT
+  bool is_regulated_food_allergen = 10;  // BOOLEAN
+}

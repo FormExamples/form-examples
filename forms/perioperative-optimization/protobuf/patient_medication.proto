@@ -1,0 +1,49 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: patient_medication
+
+syntax = "proto3";
+
+package form_examples.perioperative_optimization;
+
+enum PatientMedicationRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_ORAL = 1;  // oral
+  ROUTE_SUBCUTANEOUS = 2;  // subcutaneous
+  ROUTE_INTRAVENOUS = 3;  // intravenous
+  ROUTE_INTRAMUSCULAR = 4;  // intramuscular
+  ROUTE_INHALED = 5;  // inhaled
+  ROUTE_TOPICAL = 6;  // topical
+  ROUTE_TRANSDERMAL = 7;  // transdermal
+  ROUTE_OTHER = 8;  // other
+}
+
+enum PatientMedicationAdherenceEnum {
+  ADHERENCE_UNSPECIFIED = 0;
+  ADHERENCE_FULL = 1;  // full
+  ADHERENCE_PARTIAL = 2;  // partial
+  ADHERENCE_NONE = 3;  // none
+  ADHERENCE_UNKNOWN = 4;  // unknown
+}
+
+message PatientMedication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string medication_id = 6;  // UUID — uuid
+  string dose = 7;  // TEXT
+  string frequency = 8;  // TEXT
+  PatientMedicationRouteEnum route = 9;  // TEXT
+  string indication = 10;  // TEXT
+  string started_on = 11;  // DATE — iso 8601 date
+  string prescribed_by = 12;  // TEXT
+  PatientMedicationAdherenceEnum adherence = 13;  // TEXT
+  bool hold_required = 14;  // BOOLEAN
+  int32 hold_start_before_days = 15;  // INTEGER
+  int32 restart_after_days = 16;  // INTEGER
+  bool hold_plan_agreed = 17;  // BOOLEAN
+  string hold_plan_agreed_by = 18;  // TEXT
+  string hold_plan_agreed_on = 19;  // DATE — iso 8601 date
+  string notes = 20;  // TEXT
+}

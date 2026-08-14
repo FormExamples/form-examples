@@ -1,0 +1,1468 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: perioperative_optimization
+openapi: 3.1.0
+info:
+  title: Perioperative Optimization — PerioperativeOptimization
+  version: 1.0.0
+  description: "Perioperative optimisation: the payload of the 16-step single-page wizard, covering the eight optimisation domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
+paths:
+  /perioperative-optimizations:
+    get:
+      summary: List PerioperativeOptimization records
+      operationId: listPerioperativeOptimization
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PerioperativeOptimization records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PerioperativeOptimization"
+    post:
+      summary: Create a new PerioperativeOptimization
+      operationId: createPerioperativeOptimization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimization"
+      responses:
+        "201":
+          description: The newly created PerioperativeOptimization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimization"
+        "400":
+          description: Validation error
+  /perioperative-optimizations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PerioperativeOptimization by id
+      operationId: getPerioperativeOptimization
+      responses:
+        "200":
+          description: The requested PerioperativeOptimization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimization"
+        "404":
+          description: PerioperativeOptimization not found
+    patch:
+      summary: Update an existing PerioperativeOptimization
+      operationId: updatePerioperativeOptimization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimization"
+      responses:
+        "200":
+          description: The updated PerioperativeOptimization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimization"
+        "404":
+          description: PerioperativeOptimization not found
+    delete:
+      summary: Soft-delete a PerioperativeOptimization
+      operationId: deletePerioperativeOptimization
+      responses:
+        "204":
+          description: PerioperativeOptimization deleted
+        "404":
+          description: PerioperativeOptimization not found
+components:
+  schemas:
+    PerioperativeOptimization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician table, i.e. the practitioner conducting the assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Workflow status of the assessment: draft, submitted, reviewed, or urgent."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the assessment was conducted. With planned_surgery_date this is the basis of the time-to-surgery gating that drives every domain status.
+        assessment_time:
+          type: string
+          format: time
+          description: Time the assessment was conducted.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site where the assessment was conducted.
+        service_name:
+          type: string
+          maxLength: 255
+          description: Service conducting the assessment, such as the pre-operative assessment clinic or the prehabilitation service.
+        pathway_stage:
+          type: string
+          enum:
+            - referral
+            - waiting-list
+            - pre-assessment
+            - prehabilitation
+            - pre-admission
+            - review
+            - ""
+          description: Where in the perioperative pathway this assessment sits, from referral through to pre-admission.
+        assessment_mode:
+          type: string
+          enum:
+            - clinic
+            - telephone
+            - video
+            - online-portal
+            - home-visit
+            - ""
+          description: How the assessment was conducted, including online-portal for the patient-completed pattern such as MyPreOp.
+        referral_source:
+          type: string
+          enum:
+            - surgical-team
+            - general-practitioner
+            - anaesthetist
+            - waiting-list-office
+            - self-referral
+            - other
+            - ""
+          description: Who referred the patient into the perioperative optimisation service.
+        planned_procedure:
+          type: string
+          maxLength: 500
+          description: The procedure the patient is listed for.
+        surgical_specialty:
+          type: string
+          maxLength: 100
+          description: Surgical specialty responsible for the procedure.
+        consultant_surgeon:
+          type: string
+          maxLength: 255
+          description: Consultant surgeon responsible for the procedure.
+        planned_surgery_date:
+          type: string
+          format: date
+          description: Planned date of surgery. With assessment_date this determines weeks_to_surgery, which every optimisation domain lead time is gated against. A missing date disables gating and marks every triggered domain action-required.
+        urgency:
+          type: string
+          enum:
+            - elective
+            - scheduled
+            - expedited
+            - urgent
+            - emergency
+            - ""
+          description: "Urgency of the procedure. Emergency surgery is out of scope for this form: there is no lead time to optimise in."
+        surgical_severity:
+          type: string
+          enum:
+            - minor
+            - intermediate
+            - major
+            - major-plus
+            - ""
+          description: Surgical severity band, where major and major-plus raise the priority of an unoptimised smoking domain.
+        laterality:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - midline
+            - na
+            - ""
+          description: Side of the body the procedure is on, where applicable.
+        anticipated_blood_loss_ml:
+          type: integer
+          format: int32
+          description: Anticipated blood loss in ml, which raises the importance of correcting anaemia before surgery.
+        anticipated_length_of_stay_days:
+          type: integer
+          format: int32
+          description: Anticipated length of stay in days.
+        interpreter_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an interpreter is required for the consultation.
+        interpreter_language:
+          type: string
+          maxLength: 100
+          description: Language the interpreter is required for.
+        condition_cardiac:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a cardiac diagnosis.
+        condition_respiratory:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a respiratory diagnosis such as asthma or chronic obstructive pulmonary disease.
+        condition_renal:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a renal diagnosis.
+        condition_hepatic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a liver diagnosis.
+        condition_stroke:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had a stroke or transient ischaemic attack.
+        condition_cancer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a cancer diagnosis, which often constrains how long surgery can be deferred to optimise.
+        condition_rheumatological:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a rheumatological diagnosis, which often means immunosuppressant therapy.
+        condition_thyroid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a thyroid diagnosis.
+        condition_other:
+          type: string
+          maxLength: 500
+          description: Any other active diagnosis relevant to perioperative optimisation.
+        previous_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had previous surgery.
+        previous_surgery_detail:
+          type: string
+          maxLength: 500
+          description: What previous surgery the patient has had.
+        previous_anaesthetic_complication:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had a previous anaesthetic complication.
+        previous_anaesthetic_complication_detail:
+          type: string
+          maxLength: 500
+          description: Description of the previous anaesthetic complication.
+        postoperative_nausea_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a history of postoperative nausea and vomiting.
+        difficult_airway_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a difficult airway has been documented previously.
+        malignant_hyperthermia_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient or their family has a history of malignant hyperthermia.
+        venous_thromboembolism_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a history of deep vein thrombosis or pulmonary embolism.
+        family_history:
+          type: string
+          description: Relevant family history, such as malignant hyperthermia or suxamethonium apnoea.
+        pregnancy_status:
+          type: string
+          enum:
+            - not-applicable
+            - not-pregnant
+            - pregnant
+            - breastfeeding
+            - prefer-not-to-say
+            - ""
+          description: Pregnancy and lactation status. Elective surgery is normally deferred in pregnancy.
+        takes_prescription_medicines:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes prescription medicines.
+        takes_over_the_counter_medicines:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes over-the-counter medicines.
+        takes_herbal_products:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes herbal or complementary products, several of which affect bleeding or interact with anaesthetic agents.
+        takes_anticoagulant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes an anticoagulant. Without an agreed hold-and-restart plan this triggers the medication domain and a high-priority flag.
+        takes_antiplatelet:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes an antiplatelet. Without an agreed hold-and-restart plan this triggers the medication domain and a high-priority flag.
+        takes_ace_inhibitor_or_arb:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes an ACE inhibitor or angiotensin receptor blocker, commonly omitted on the morning of surgery because of refractory intraoperative hypotension.
+        takes_sglt2_inhibitor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes an SGLT2 inhibitor. These can precipitate ketoacidosis with a normal blood glucose, so an unheld SGLT2 inhibitor fires a high-priority flag.
+        takes_glp1_agonist:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes a GLP-1 receptor agonist. These delay gastric emptying, so the patient may have a full stomach despite standard fasting; this fires a high-priority aspiration flag whenever the drug is in use.
+        takes_corticosteroid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes a systemic corticosteroid, which may require perioperative supplementation and must never be stopped abruptly.
+        takes_immunosuppressant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes an immunosuppressant or biologic, which affects wound healing and infection risk.
+        takes_hormone_therapy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient takes hormone therapy or a combined oral contraceptive, which carries a venous thromboembolism risk.
+        medication_hold_plan_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a perioperative hold-and-restart plan has been agreed with the prescriber. This is the medication domain's optimisation criterion.
+        medication_hold_plan_agreed_by:
+          type: string
+          maxLength: 255
+          description: Who agreed the hold-and-restart plan, because the prescriber owns the decision.
+        medication_adherence:
+          type: string
+          enum:
+            - full
+            - partial
+            - none
+            - unknown
+            - ""
+          description: Reported adherence to prescribed medicines.
+        medication_notes:
+          type: string
+          description: Free-text notes from the medication review.
+        has_drug_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a drug allergy.
+        drug_allergy_detail:
+          type: string
+          maxLength: 500
+          description: Which drugs the patient reacts to, and how.
+        has_food_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a food allergy, which constrains oral nutritional supplements and enteral feeds.
+        food_allergy_detail:
+          type: string
+          maxLength: 500
+          description: Which foods the patient reacts to, and how.
+        has_latex_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a latex allergy, which changes theatre preparation.
+        has_adhesive_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient reacts to adhesives or dressings.
+        has_contrast_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient reacts to radiological contrast media.
+        allergy_severity:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - anaphylaxis
+            - ""
+          description: Worst recorded reaction severity, where anaphylaxis changes theatre and recovery preparation.
+        adrenaline_auto_injector:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient carries an adrenaline auto-injector.
+        allergy_notes:
+          type: string
+          description: Free-text notes about allergies and intolerances.
+        bloods_sample_date:
+          type: string
+          format: date
+          description: Date the blood sample was taken, so the report can say how current the results are.
+        haemoglobin_g_per_l:
+          type: number
+          format: double
+          description: Haemoglobin in g per litre. Below 130 in men or 120 in women triggers the anaemia domain; below 80 forces a defer-surgery band and a high-priority flag.
+        mean_cell_volume_fl:
+          type: number
+          format: double
+          description: Mean cell volume in femtolitres, which helps characterise the anaemia.
+        ferritin_ug_per_l:
+          type: number
+          format: double
+          description: Ferritin in micrograms per litre. Below 30 indicates absolute iron deficiency and triggers the anaemia domain.
+        transferrin_saturation_percent:
+          type: number
+          format: double
+          description: Transferrin saturation as a percentage. Below 20 with a ferritin of 30 to 100 indicates functional iron deficiency.
+        vitamin_b12_ng_per_l:
+          type: number
+          format: double
+          description: Vitamin B12 in nanograms per litre, an alternative cause of anaemia.
+        folate_ug_per_l:
+          type: number
+          format: double
+          description: Serum folate in micrograms per litre, an alternative cause of anaemia.
+        c_reactive_protein_mg_per_l:
+          type: number
+          format: double
+          description: C-reactive protein in mg per litre. Inflammation raises ferritin, so a high value changes how the iron studies are read.
+        creatinine_umol_per_l:
+          type: number
+          format: double
+          description: Serum creatinine in micromol per litre.
+        egfr_ml_per_min:
+          type: number
+          format: double
+          description: Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 raises the renal-optimisation flag.
+        anaemia_known_cause:
+          type: string
+          maxLength: 255
+          description: Known or suspected cause of the anaemia. Iron deficiency in an adult may indicate gastrointestinal blood loss and warrants its own pathway.
+        anaemia_treatment_started:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether iron or other anaemia treatment has already started, which moves the anaemia domain from action-required to in-progress.
+        anaemia_treatment_route:
+          type: string
+          enum:
+            - oral
+            - intravenous
+            - none
+            - ""
+          description: Route of iron replacement. Intravenous iron needs a 4-week lead time; oral iron needs 8.
+        anaemia_treatment_start_date:
+          type: string
+          format: date
+          description: Date anaemia treatment started.
+        previous_transfusion:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has been transfused before.
+        group_and_save_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a group and save sample has been taken.
+        anaemia_notes:
+          type: string
+          description: Free-text notes about anaemia and iron status.
+        diabetes_type:
+          type: string
+          enum:
+            - none
+            - type-1
+            - type-2
+            - gestational
+            - other
+            - ""
+          description: Diabetes diagnosis and type. A raised HbA1c with no diagnosis recorded fires the undiagnosed-diabetes flag.
+        diabetes_duration_years:
+          type: number
+          format: double
+          description: How long the patient has had diabetes, in years.
+        hba1c_mmol_per_mol:
+          type: number
+          format: double
+          description: Glycated haemoglobin in mmol per mol. At or above 48 triggers the glycaemic-control domain; at or above 69, the CPOC deferral threshold of 8.5 percent, it forces a defer-surgery band and a high-priority flag.
+        hba1c_sample_date:
+          type: string
+          format: date
+          description: Date the HbA1c sample was taken. HbA1c reflects roughly three months of glycaemia, which is why the domain lead time is 12 weeks.
+        capillary_glucose_mmol_per_l:
+          type: number
+          format: double
+          description: Capillary blood glucose in mmol per litre at the time of assessment.
+        diabetes_treatment:
+          type: string
+          enum:
+            - diet-only
+            - oral-agents
+            - insulin
+            - oral-and-insulin
+            - glp1-agonist
+            - other
+            - ""
+          description: How the patient's diabetes is treated.
+        insulin_regimen:
+          type: string
+          maxLength: 255
+          description: The patient's insulin regimen, which needs a written day-of-surgery plan.
+        hypoglycaemia_awareness:
+          type: string
+          enum:
+            - normal
+            - impaired
+            - absent
+            - ""
+          description: Whether the patient is aware of hypoglycaemia, because impaired or absent awareness changes perioperative monitoring.
+        diabetes_team_review:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the diabetes team has reviewed the patient, which moves the glycaemic-control domain to in-progress.
+        diabetes_team_review_date:
+          type: string
+          format: date
+          description: Date of the diabetes-team review.
+        foot_check_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a diabetic foot check has been done, because pressure injury risk rises during long procedures.
+        glycaemic_notes:
+          type: string
+          description: Free-text notes about glycaemic control.
+        smoking_status:
+          type: string
+          enum:
+            - never
+            - former
+            - current
+            - ""
+          description: Smoking status. Any current smoker triggers the smoking domain, which needs a 4-week lead time for the respiratory benefit.
+        cigarettes_per_day:
+          type: integer
+          format: int32
+          description: Cigarettes smoked per day.
+        pack_years:
+          type: number
+          format: double
+          description: Pack-years of smoking history.
+        quit_date:
+          type: string
+          format: date
+          description: Date the patient stopped smoking, so weeks quit before surgery can be computed.
+        smoking_cessation_offered:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether cessation support was offered.
+        smoking_cessation_accepted:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient accepted cessation support, which moves the smoking domain to in-progress.
+        nicotine_replacement:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether nicotine replacement therapy has been supplied.
+        vaping:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient vapes.
+        smoking_notes:
+          type: string
+          description: Free-text notes about smoking and tobacco.
+        alcohol_units_per_week:
+          type: number
+          format: double
+          description: Alcohol consumption in United Kingdom units per week. Above 14 triggers the alcohol domain.
+        audit_c_frequency:
+          type: integer
+          format: int32
+          description: "AUDIT-C question 1: how often the patient has a drink containing alcohol, scored 0 to 4."
+        audit_c_typical_quantity:
+          type: integer
+          format: int32
+          description: "AUDIT-C question 2: how many standard drinks on a typical drinking day, scored 0 to 4."
+        audit_c_binge_frequency:
+          type: integer
+          format: int32
+          description: "AUDIT-C question 3: how often the patient has six or more drinks on one occasion, scored 0 to 4."
+        alcohol_dependence_features:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether features of alcohol dependence are present, because withdrawal may occur during the hospital stay.
+        alcohol_reduction_plan_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a reduction plan has been agreed, which moves the alcohol domain to in-progress.
+        alcohol_services_referral:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has been referred to alcohol services.
+        recreational_drug_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses recreational drugs, which can interact with anaesthetic agents.
+        recreational_drug_detail:
+          type: string
+          maxLength: 255
+          description: Which recreational drugs the patient uses.
+        alcohol_notes:
+          type: string
+          description: Free-text notes about alcohol and other substances.
+        height_as_cm:
+          type: number
+          format: double
+          description: Height in cm, for the body mass index component of MUST.
+        weight_as_kg:
+          type: number
+          format: double
+          description: Weight in kg, for the body mass index and weight-loss components of MUST.
+        body_mass_index:
+          type: number
+          format: double
+          description: Body mass index in kg per square metre, scored as MUST step 1.
+        usual_weight_as_kg:
+          type: number
+          format: double
+          description: The patient's usual or pre-illness weight in kg, i.e. the baseline for percentage weight loss.
+        weight_loss_percent:
+          type: number
+          format: double
+          description: Percentage unintentional weight loss over the last three to six months, scored as MUST step 2. Above 10 also triggers the nutrition domain on its own.
+        weight_loss_is_intentional:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the weight loss was intentional. Only unplanned loss scores in MUST.
+        acutely_ill:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is acutely ill, i.e. the first half of the MUST step 3 acute disease effect criterion.
+        no_nutritional_intake_over_5_days:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether there has been, or is likely to be, no nutritional intake for more than five days, i.e. the second half of the MUST step 3 criterion.
+        appetite:
+          type: string
+          enum:
+            - good
+            - fair
+            - poor
+            - absent
+            - ""
+          description: The patient's appetite.
+        oral_nutritional_supplements:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether oral nutritional supplements have been started, which moves the nutrition domain to in-progress.
+        immunonutrition:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether immunonutrition has been started, typically for five to seven days before major gastrointestinal surgery.
+        dietitian_referral:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has been referred to a dietitian.
+        nutrition_notes:
+          type: string
+          description: Free-text notes about nutritional screening.
+        usual_activity_level:
+          type: string
+          enum:
+            - sedentary
+            - lightly-active
+            - moderately-active
+            - very-active
+            - ""
+          description: The patient's usual physical activity level.
+        climbs_flight_of_stairs:
+          type: string
+          enum:
+            - yes-easily
+            - yes-with-difficulty
+            - "no"
+            - ""
+          description: Whether the patient can climb a flight of stairs without stopping, the plain-language proxy for four metabolic equivalents that most patients can answer.
+        metabolic_equivalents:
+          type: number
+          format: double
+          description: Estimated metabolic equivalents. Below 4 triggers the physical-fitness domain; 4 METs is the classic threshold below which perioperative risk rises.
+        duke_activity_status_index:
+          type: number
+          format: double
+          description: Duke Activity Status Index. Below 34 triggers the physical-fitness domain.
+        six_minute_walk_metres:
+          type: integer
+          format: int32
+          description: Six-minute walk distance in metres. Below 400 triggers the physical-fitness domain.
+        cpet_anaerobic_threshold:
+          type: number
+          format: double
+          description: Anaerobic threshold in ml per kg per minute on cardiopulmonary exercise testing. Below 11 triggers the physical-fitness domain.
+        cpet_peak_vo2:
+          type: number
+          format: double
+          description: Peak oxygen uptake in ml per kg per minute on cardiopulmonary exercise testing.
+        grip_strength_kg:
+          type: number
+          format: double
+          description: Hand-grip strength in kg by dynamometer.
+        prehabilitation_offered:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a prehabilitation programme was offered.
+        prehabilitation_enrolled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient enrolled in prehabilitation, which moves the physical-fitness domain to in-progress.
+        prehabilitation_sessions_per_week:
+          type: integer
+          format: int32
+          description: Number of prehabilitation sessions per week.
+        prehabilitation_start_date:
+          type: string
+          format: date
+          description: Date the prehabilitation programme started.
+        fitness_notes:
+          type: string
+          description: Free-text notes about functional capacity and physical fitness.
+        clinical_frailty_scale:
+          type: integer
+          format: int32
+          description: Clinical Frailty Scale, 1 to 9. Reported and flagged at 7 or above, but not gated, because frailty is rarely reversible in a weeks-long window.
+        cognitive_screen_tool:
+          type: string
+          enum:
+            - 4at
+            - amt
+            - moca
+            - mmse
+            - none
+            - ""
+          description: Which cognitive screening tool was used.
+        cognitive_screen_score:
+          type: number
+          format: double
+          description: Score from the cognitive screening tool used.
+        cognitive_impairment:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: Degree of cognitive impairment, which affects consent, recall, and postoperative delirium risk.
+        capacity_concern:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether there is a concern about the patient's capacity to consent, which fires the capacity-concern flag.
+        falls_in_last_12_months:
+          type: integer
+          format: int32
+          description: Number of falls in the last 12 months.
+        mobility_aid:
+          type: string
+          enum:
+            - none
+            - stick
+            - frame
+            - crutches
+            - wheelchair
+            - bed-bound
+            - ""
+          description: What mobility aid the patient uses, which shapes what prehabilitation can realistically involve.
+        living_situation:
+          type: string
+          enum:
+            - alone
+            - with-partner
+            - with-family
+            - shared-house
+            - care-home
+            - supported-living
+            - homeless
+            - other
+            - ""
+          description: The patient's living situation, which bears on discharge planning.
+        care_package:
+          type: string
+          enum:
+            - none
+            - informal
+            - daily
+            - twice-daily
+            - live-in
+            - ""
+          description: What care package the patient already receives.
+        frailty_notes:
+          type: string
+          description: Free-text notes about frailty, cognition, and falls.
+        systolic_bp:
+          type: integer
+          format: int32
+          description: Systolic blood pressure in mmHg. At or above 180 triggers the cardiorespiratory domain and fires the uncontrolled-hypertension flag.
+        diastolic_bp:
+          type: integer
+          format: int32
+          description: Diastolic blood pressure in mmHg. At or above 110 triggers the cardiorespiratory domain and fires the uncontrolled-hypertension flag.
+        heart_rate:
+          type: integer
+          format: int32
+          description: Heart rate in beats per minute.
+        heart_rhythm:
+          type: string
+          enum:
+            - sinus
+            - atrial-fibrillation
+            - flutter
+            - heart-block
+            - paced
+            - other
+            - ""
+          description: Cardiac rhythm, such as sinus or atrial fibrillation.
+        murmur_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a murmur is audible, which may warrant an echocardiogram before surgery.
+        exercise_tolerance:
+          type: string
+          enum:
+            - good
+            - moderate
+            - poor
+            - unable
+            - ""
+          description: Clinician-assessed exercise tolerance.
+        ejection_fraction_percent:
+          type: integer
+          format: int32
+          description: Left ventricular ejection fraction as a percentage. Below 40 triggers the cardiorespiratory domain and fires a high-priority flag.
+        echo_date:
+          type: string
+          format: date
+          description: Date of the echocardiogram the ejection fraction came from.
+        asthma_control:
+          type: string
+          enum:
+            - none
+            - controlled
+            - partly-controlled
+            - uncontrolled
+            - ""
+          description: Asthma control. Uncontrolled asthma triggers the cardiorespiratory domain.
+        copd_control:
+          type: string
+          enum:
+            - none
+            - controlled
+            - partly-controlled
+            - uncontrolled
+            - ""
+          description: Chronic obstructive pulmonary disease control. Uncontrolled COPD triggers the cardiorespiratory domain.
+        inhaler_technique_checked:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether inhaler technique has been checked, one of the quickest respiratory optimisations available.
+        rescue_steroids:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has rescue steroids at home.
+        spirometry_fev1_percent:
+          type: number
+          format: double
+          description: Forced expiratory volume in one second as a percentage of predicted.
+        stop_bang_score:
+          type: integer
+          format: int32
+          description: STOP-BANG obstructive sleep apnoea screening score, 0 to 8. A score of 5 or more without a sleep-apnoea diagnosis triggers the cardiorespiratory domain.
+        sleep_apnoea_diagnosis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether obstructive sleep apnoea has been diagnosed.
+        cpap_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses continuous positive airway pressure, which should be brought to hospital.
+        oxygen_saturation_percent:
+          type: number
+          format: double
+          description: Peripheral oxygen saturation as a percentage on room air. Below 92 fires the respiratory-optimisation flag.
+        cardiorespiratory_notes:
+          type: string
+          description: Free-text notes about cardiorespiratory optimisation.
+        anxiety_level:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: The patient's anxiety about the procedure, which affects recovery and adherence to the plan.
+        depression_screen:
+          type: string
+          enum:
+            - negative
+            - positive
+            - not-done
+            - ""
+          description: Outcome of the depression screen.
+        understands_procedure:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient understands what the procedure involves.
+        expectations_realistic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient's expectations of the outcome are realistic.
+        shared_decision_making_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a shared decision-making conversation has taken place, including the option of not having surgery.
+        has_carer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a carer.
+        transport_home_arranged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether transport home after the procedure has been arranged.
+        support_after_discharge:
+          type: string
+          enum:
+            - good
+            - some
+            - limited
+            - none
+            - ""
+          description: What support the patient will have after discharge.
+        health_literacy:
+          type: string
+          enum:
+            - high
+            - moderate
+            - low
+            - ""
+          description: The patient's health literacy, which sets the reading level of the prehabilitation materials.
+        psychological_support_offered:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether psychological support has been offered as part of multimodal prehabilitation.
+        social_notes:
+          type: string
+          description: Free-text notes about psychological readiness and social support.
+        plan_anaemia:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the anaemia domain.
+        referral_anaemia:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the anaemia domain, such as to haematology or an iron-infusion service.
+        plan_glycaemic_control:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the glycaemic-control domain.
+        referral_glycaemic_control:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the glycaemic-control domain, such as to the diabetes team.
+        plan_smoking:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the smoking domain.
+        referral_smoking:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the smoking domain, such as to a stop-smoking service.
+        plan_alcohol:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the alcohol domain.
+        referral_alcohol:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the alcohol domain, such as to alcohol services.
+        plan_nutrition:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the nutrition domain.
+        referral_nutrition:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the nutrition domain, such as to a dietitian.
+        plan_physical_fitness:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the physical-fitness domain.
+        referral_physical_fitness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the physical-fitness domain, such as to a prehabilitation programme.
+        plan_medication:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the medication domain, i.e. the agreed hold-and-restart arrangements.
+        referral_medication:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the medication domain, such as to a pharmacist or the prescribing specialty.
+        plan_cardiorespiratory:
+          type: string
+          maxLength: 500
+          description: Optimisation plan for the cardiorespiratory domain.
+        referral_cardiorespiratory:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an onward referral was made for the cardiorespiratory domain, such as to cardiology, respiratory medicine, or a sleep service.
+        responsible_clinician:
+          type: string
+          maxLength: 255
+          description: Clinician responsible for delivering and reviewing the optimisation plan.
+        plan_agreed_with_patient:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient agreed to the optimisation plan.
+        plan_shared_with_patient:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a copy of the plan was given to the patient.
+        next_review_date:
+          type: string
+          format: date
+          description: Date of the next planned optimisation review.
+        plan_notes:
+          type: string
+          description: Free-text notes about the optimisation plan as a whole.
+        gate_decision:
+          type: string
+          enum:
+            - proceed
+            - proceed-with-prehabilitation
+            - defer-and-optimise
+            - accept-unoptimised-risk
+            - mdt-review
+            - cancel
+            - ""
+          description: "The explicit human decision recorded at sign-off. A computed defer-surgery band never decides on its own: a clinician must choose to proceed, proceed with prehabilitation, defer and optimise, accept the unoptimised risk, refer to MDT, or cancel."
+        additional_notes:
+          type: string
+          description: Any additional notes the clinician records.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - service_name
+        - pathway_stage
+        - assessment_mode
+        - referral_source
+        - planned_procedure
+        - surgical_specialty
+        - consultant_surgeon
+        - urgency
+        - surgical_severity
+        - laterality
+        - interpreter_required
+        - interpreter_language
+        - condition_cardiac
+        - condition_respiratory
+        - condition_renal
+        - condition_hepatic
+        - condition_stroke
+        - condition_cancer
+        - condition_rheumatological
+        - condition_thyroid
+        - condition_other
+        - previous_surgery
+        - previous_surgery_detail
+        - previous_anaesthetic_complication
+        - previous_anaesthetic_complication_detail
+        - postoperative_nausea_history
+        - difficult_airway_history
+        - malignant_hyperthermia_history
+        - venous_thromboembolism_history
+        - family_history
+        - pregnancy_status
+        - takes_prescription_medicines
+        - takes_over_the_counter_medicines
+        - takes_herbal_products
+        - takes_anticoagulant
+        - takes_antiplatelet
+        - takes_ace_inhibitor_or_arb
+        - takes_sglt2_inhibitor
+        - takes_glp1_agonist
+        - takes_corticosteroid
+        - takes_immunosuppressant
+        - takes_hormone_therapy
+        - medication_hold_plan_agreed
+        - medication_hold_plan_agreed_by
+        - medication_adherence
+        - medication_notes
+        - has_drug_allergy
+        - drug_allergy_detail
+        - has_food_allergy
+        - food_allergy_detail
+        - has_latex_allergy
+        - has_adhesive_allergy
+        - has_contrast_allergy
+        - allergy_severity
+        - adrenaline_auto_injector
+        - allergy_notes
+        - anaemia_known_cause
+        - anaemia_treatment_started
+        - anaemia_treatment_route
+        - previous_transfusion
+        - group_and_save_done
+        - anaemia_notes
+        - diabetes_type
+        - diabetes_treatment
+        - insulin_regimen
+        - hypoglycaemia_awareness
+        - diabetes_team_review
+        - foot_check_done
+        - glycaemic_notes
+        - smoking_status
+        - smoking_cessation_offered
+        - smoking_cessation_accepted
+        - nicotine_replacement
+        - vaping
+        - smoking_notes
+        - alcohol_dependence_features
+        - alcohol_reduction_plan_agreed
+        - alcohol_services_referral
+        - recreational_drug_use
+        - recreational_drug_detail
+        - alcohol_notes
+        - weight_loss_is_intentional
+        - acutely_ill
+        - no_nutritional_intake_over_5_days
+        - appetite
+        - oral_nutritional_supplements
+        - immunonutrition
+        - dietitian_referral
+        - nutrition_notes
+        - usual_activity_level
+        - climbs_flight_of_stairs
+        - prehabilitation_offered
+        - prehabilitation_enrolled
+        - fitness_notes
+        - cognitive_screen_tool
+        - cognitive_impairment
+        - capacity_concern
+        - mobility_aid
+        - living_situation
+        - care_package
+        - frailty_notes
+        - heart_rhythm
+        - murmur_present
+        - exercise_tolerance
+        - asthma_control
+        - copd_control
+        - inhaler_technique_checked
+        - rescue_steroids
+        - sleep_apnoea_diagnosis
+        - cpap_use
+        - cardiorespiratory_notes
+        - anxiety_level
+        - depression_screen
+        - understands_procedure
+        - expectations_realistic
+        - shared_decision_making_discussed
+        - has_carer
+        - transport_home_arranged
+        - support_after_discharge
+        - health_literacy
+        - psychological_support_offered
+        - social_notes
+        - plan_anaemia
+        - referral_anaemia
+        - plan_glycaemic_control
+        - referral_glycaemic_control
+        - plan_smoking
+        - referral_smoking
+        - plan_alcohol
+        - referral_alcohol
+        - plan_nutrition
+        - referral_nutrition
+        - plan_physical_fitness
+        - referral_physical_fitness
+        - plan_medication
+        - referral_medication
+        - plan_cardiorespiratory
+        - referral_cardiorespiratory
+        - responsible_clinician
+        - plan_agreed_with_patient
+        - plan_shared_with_patient
+        - plan_notes
+        - gate_decision
+        - additional_notes
+      description: "Perioperative optimisation: the payload of the 16-step single-page wizard, covering the eight optimisation domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
