@@ -1,0 +1,49 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hip_replacement_surgery_evaluation_grade
+
+syntax = "proto3";
+
+package form_examples.hip_replacement_surgery_evaluation;
+
+enum HipReplacementSurgeryEvaluationGradeOhsCategoryEnum {
+  OHSCATEGORY_UNSPECIFIED = 0;
+  OHSCATEGORY_SEVERE = 1;  // severe
+  OHSCATEGORY_MODERATE = 2;  // moderate
+  OHSCATEGORY_MILD_TO_MODERATE = 3;  // mild-to-moderate
+  OHSCATEGORY_SATISFACTORY = 4;  // satisfactory
+}
+
+enum HipReplacementSurgeryEvaluationGradeComputedCandidacyEnum {
+  COMPUTEDCANDIDACY_UNSPECIFIED = 0;
+  COMPUTEDCANDIDACY_STRONG_CANDIDATE = 1;  // strong-candidate
+  COMPUTEDCANDIDACY_CANDIDATE = 2;  // candidate
+  COMPUTEDCANDIDACY_CONTINUE_CONSERVATIVE = 3;  // continue-conservative
+  COMPUTEDCANDIDACY_NOT_INDICATED = 4;  // not-indicated
+  COMPUTEDCANDIDACY_MDT_REVIEW = 5;  // mdt-review
+}
+
+enum HipReplacementSurgeryEvaluationGradeFinalCandidacyEnum {
+  FINALCANDIDACY_UNSPECIFIED = 0;
+  FINALCANDIDACY_STRONG_CANDIDATE = 1;  // strong-candidate
+  FINALCANDIDACY_CANDIDATE = 2;  // candidate
+  FINALCANDIDACY_CONTINUE_CONSERVATIVE = 3;  // continue-conservative
+  FINALCANDIDACY_NOT_INDICATED = 4;  // not-indicated
+  FINALCANDIDACY_MDT_REVIEW = 5;  // mdt-review
+}
+
+message HipReplacementSurgeryEvaluationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hip_replacement_surgery_evaluation_id = 5;  // UUID — uuid
+  int32 ohs_total = 6;  // INTEGER
+  HipReplacementSurgeryEvaluationGradeOhsCategoryEnum ohs_category = 7;  // VARCHAR(20)
+  HipReplacementSurgeryEvaluationGradeComputedCandidacyEnum computed_candidacy = 8;  // VARCHAR(25)
+  HipReplacementSurgeryEvaluationGradeFinalCandidacyEnum final_candidacy = 9;  // VARCHAR(25)
+  string override_reason = 10;  // VARCHAR(500) — max 500 chars
+  string clinician_notes = 11;  // TEXT
+  string signed_by_name = 12;  // VARCHAR(255) — max 255 chars
+  string signed_at = 13;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 14;  // TIMESTAMPTZ — iso 8601
+}

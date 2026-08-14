@@ -1,0 +1,169 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hip_replacement_surgery_evaluation_grade_flag
+openapi: 3.1.0
+info:
+  title: Hip Replacement Surgery Evaluation — HipReplacementSurgeryEvaluationGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the candidacy recommendation, with a priority and a suggested action for the joint-replacement clinic team.
+paths:
+  /hip-replacement-surgery-evaluation-grade-flags:
+    get:
+      summary: List HipReplacementSurgeryEvaluationGradeFlag records
+      operationId: listHipReplacementSurgeryEvaluationGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HipReplacementSurgeryEvaluationGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGradeFlag"
+    post:
+      summary: Create a new HipReplacementSurgeryEvaluationGradeFlag
+      operationId: createHipReplacementSurgeryEvaluationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGradeFlag"
+      responses:
+        "201":
+          description: The newly created HipReplacementSurgeryEvaluationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGradeFlag"
+        "400":
+          description: Validation error
+  /hip-replacement-surgery-evaluation-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HipReplacementSurgeryEvaluationGradeFlag by id
+      operationId: getHipReplacementSurgeryEvaluationGradeFlag
+      responses:
+        "200":
+          description: The requested HipReplacementSurgeryEvaluationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGradeFlag"
+        "404":
+          description: HipReplacementSurgeryEvaluationGradeFlag not found
+    patch:
+      summary: Update an existing HipReplacementSurgeryEvaluationGradeFlag
+      operationId: updateHipReplacementSurgeryEvaluationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGradeFlag"
+      responses:
+        "200":
+          description: The updated HipReplacementSurgeryEvaluationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGradeFlag"
+        "404":
+          description: HipReplacementSurgeryEvaluationGradeFlag not found
+    delete:
+      summary: Soft-delete a HipReplacementSurgeryEvaluationGradeFlag
+      operationId: deleteHipReplacementSurgeryEvaluationGradeFlag
+      responses:
+        "204":
+          description: HipReplacementSurgeryEvaluationGradeFlag deleted
+        "404":
+          description: HipReplacementSurgeryEvaluationGradeFlag not found
+components:
+  schemas:
+    HipReplacementSurgeryEvaluationGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        hip_replacement_surgery_evaluation_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent hip_replacement_surgery_evaluation_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier, such as F-CONSERVATIVE-TREATMENT-NOT-EXHAUSTED-001.
+        category:
+          type: string
+          enum:
+            - conservative-treatment-not-exhausted
+            - high-bmi-surgical-risk
+            - pre-op-bloods-incomplete
+            - leg-length-discrepancy-significant
+            - trendelenburg-positive
+            - bilateral-symptomatic
+            - paediatric
+            - other
+            - ""
+          description: Flag category, such as conservative-treatment-not-exhausted or trendelenburg-positive.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action, such as \"complete pre-operative bloods before listing for surgery\"."
+      required:
+        - created_at
+        - updated_at
+        - hip_replacement_surgery_evaluation_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the candidacy recommendation, with a priority and a suggested action for the joint-replacement clinic team.

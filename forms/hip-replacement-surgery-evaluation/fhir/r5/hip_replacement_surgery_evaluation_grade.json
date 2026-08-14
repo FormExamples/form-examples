@@ -1,0 +1,21 @@
+{
+  "resourceType": "ClinicalImpression",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Hip Replacement Surgery Evaluation grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Ohs Total: 5; Ohs Category: severe; Computed Candidacy: strong-candidate; Final Candidacy: strong-candidate; Override Reason: Example text.; Clinician Notes: Example text.; Signed By Name: Example; Signed At: 2026-04-09T10:00:00+00:00"
+}

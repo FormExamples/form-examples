@@ -1,0 +1,376 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hip_replacement_surgery_evaluation
+
+syntax = "proto3";
+
+package form_examples.hip_replacement_surgery_evaluation;
+
+enum HipReplacementSurgeryEvaluationStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum HipReplacementSurgeryEvaluationAffectedSideEnum {
+  AFFECTEDSIDE_UNSPECIFIED = 0;
+  AFFECTEDSIDE_LEFT = 1;  // left
+  AFFECTEDSIDE_RIGHT = 2;  // right
+  AFFECTEDSIDE_BILATERAL = 3;  // bilateral
+}
+
+enum HipReplacementSurgeryEvaluationNightPainEnum {
+  NIGHTPAIN_UNSPECIFIED = 0;
+  NIGHTPAIN_YES = 1;  // yes
+  NIGHTPAIN_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationPriorHipSurgeryEnum {
+  PRIORHIPSURGERY_UNSPECIFIED = 0;
+  PRIORHIPSURGERY_YES = 1;  // yes
+  PRIORHIPSURGERY_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationPriorInjuryOrDysplasiaHistoryEnum {
+  PRIORINJURYORDYSPLASIAHISTORY_UNSPECIFIED = 0;
+  PRIORINJURYORDYSPLASIAHISTORY_YES = 1;  // yes
+  PRIORINJURYORDYSPLASIAHISTORY_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationWalkingDistanceBeforePainEnum {
+  WALKINGDISTANCEBEFOREPAIN_UNSPECIFIED = 0;
+  WALKINGDISTANCEBEFOREPAIN_UNLIMITED = 1;  // unlimited
+  WALKINGDISTANCEBEFOREPAIN_OVER_1KM = 2;  // over-1km
+  WALKINGDISTANCEBEFOREPAIN_V_100M_TO_1KM = 3;  // 100m-to-1km
+  WALKINGDISTANCEBEFOREPAIN_UNDER_100M = 4;  // under-100m
+  WALKINGDISTANCEBEFOREPAIN_HOUSEBOUND = 5;  // housebound
+}
+
+enum HipReplacementSurgeryEvaluationShoesAndSocksDifficultyEnum {
+  SHOESANDSOCKSDIFFICULTY_UNSPECIFIED = 0;
+  SHOESANDSOCKSDIFFICULTY_NONE = 1;  // none
+  SHOESANDSOCKSDIFFICULTY_SOME = 2;  // some
+  SHOESANDSOCKSDIFFICULTY_SEVERE = 3;  // severe
+  SHOESANDSOCKSDIFFICULTY_UNABLE = 4;  // unable
+}
+
+enum HipReplacementSurgeryEvaluationWalkingAidUseEnum {
+  WALKINGAIDUSE_UNSPECIFIED = 0;
+  WALKINGAIDUSE_NONE = 1;  // none
+  WALKINGAIDUSE_STICK = 2;  // stick
+  WALKINGAIDUSE_FRAME = 3;  // frame
+  WALKINGAIDUSE_WHEELCHAIR = 4;  // wheelchair
+}
+
+enum HipReplacementSurgeryEvaluationLimpPresentEnum {
+  LIMPPRESENT_UNSPECIFIED = 0;
+  LIMPPRESENT_YES = 1;  // yes
+  LIMPPRESENT_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationAntalgicGaitEnum {
+  ANTALGICGAIT_UNSPECIFIED = 0;
+  ANTALGICGAIT_YES = 1;  // yes
+  ANTALGICGAIT_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationTrendelenburgSignEnum {
+  TRENDELENBURGSIGN_UNSPECIFIED = 0;
+  TRENDELENBURGSIGN_YES = 1;  // yes
+  TRENDELENBURGSIGN_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationFixedFlexionDeformityPresentEnum {
+  FIXEDFLEXIONDEFORMITYPRESENT_UNSPECIFIED = 0;
+  FIXEDFLEXIONDEFORMITYPRESENT_YES = 1;  // yes
+  FIXEDFLEXIONDEFORMITYPRESENT_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationJointStabilityEnum {
+  JOINTSTABILITY_UNSPECIFIED = 0;
+  JOINTSTABILITY_STABLE = 1;  // stable
+  JOINTSTABILITY_UNSTABLE = 2;  // unstable
+}
+
+enum HipReplacementSurgeryEvaluationTendernessSiteEnum {
+  TENDERNESSSITE_UNSPECIFIED = 0;
+  TENDERNESSSITE_NONE = 1;  // none
+  TENDERNESSSITE_GROIN = 2;  // groin
+  TENDERNESSSITE_TROCHANTERIC = 3;  // trochanteric
+  TENDERNESSSITE_BUTTOCK = 4;  // buttock
+  TENDERNESSSITE_OTHER = 5;  // other
+}
+
+enum HipReplacementSurgeryEvaluationWeightBearingXrayPerformedEnum {
+  WEIGHTBEARINGXRAYPERFORMED_UNSPECIFIED = 0;
+  WEIGHTBEARINGXRAYPERFORMED_YES = 1;  // yes
+  WEIGHTBEARINGXRAYPERFORMED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationJointSpaceNarrowingEnum {
+  JOINTSPACENARROWING_UNSPECIFIED = 0;
+  JOINTSPACENARROWING_NONE = 1;  // none
+  JOINTSPACENARROWING_MILD = 2;  // mild
+  JOINTSPACENARROWING_MODERATE = 3;  // moderate
+  JOINTSPACENARROWING_SEVERE = 4;  // severe
+}
+
+enum HipReplacementSurgeryEvaluationSubchondralSclerosisOrCystsPresentEnum {
+  SUBCHONDRALSCLEROSISORCYSTSPRESENT_UNSPECIFIED = 0;
+  SUBCHONDRALSCLEROSISORCYSTSPRESENT_YES = 1;  // yes
+  SUBCHONDRALSCLEROSISORCYSTSPRESENT_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationMriPerformedEnum {
+  MRIPERFORMED_UNSPECIFIED = 0;
+  MRIPERFORMED_YES = 1;  // yes
+  MRIPERFORMED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationCtPerformedEnum {
+  CTPERFORMED_UNSPECIFIED = 0;
+  CTPERFORMED_YES = 1;  // yes
+  CTPERFORMED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationCtIndicationEnum {
+  CTINDICATION_UNSPECIFIED = 0;
+  CTINDICATION_NONE = 1;  // none
+  CTINDICATION_ROBOTIC_ASSISTED_PLANNING = 2;  // robotic-assisted-planning
+  CTINDICATION_COMPLEX_DEFORMITY = 3;  // complex-deformity
+  CTINDICATION_OTHER = 4;  // other
+}
+
+enum HipReplacementSurgeryEvaluationPhysiotherapyTriedEnum {
+  PHYSIOTHERAPYTRIED_UNSPECIFIED = 0;
+  PHYSIOTHERAPYTRIED_YES = 1;  // yes
+  PHYSIOTHERAPYTRIED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationWeightManagementAdviceGivenEnum {
+  WEIGHTMANAGEMENTADVICEGIVEN_UNSPECIFIED = 0;
+  WEIGHTMANAGEMENTADVICEGIVEN_YES = 1;  // yes
+  WEIGHTMANAGEMENTADVICEGIVEN_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationSteroidInjectionGivenEnum {
+  STEROIDINJECTIONGIVEN_UNSPECIFIED = 0;
+  STEROIDINJECTIONGIVEN_YES = 1;  // yes
+  STEROIDINJECTIONGIVEN_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationSteroidInjectionResponseEnum {
+  STEROIDINJECTIONRESPONSE_UNSPECIFIED = 0;
+  STEROIDINJECTIONRESPONSE_NO_RELIEF = 1;  // no-relief
+  STEROIDINJECTIONRESPONSE_PARTIAL_RELIEF = 2;  // partial-relief
+  STEROIDINJECTIONRESPONSE_GOOD_RELIEF = 3;  // good-relief
+}
+
+enum HipReplacementSurgeryEvaluationAnalgesicTrialGivenEnum {
+  ANALGESICTRIALGIVEN_UNSPECIFIED = 0;
+  ANALGESICTRIALGIVEN_YES = 1;  // yes
+  ANALGESICTRIALGIVEN_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationAnalgesicTrialResponseEnum {
+  ANALGESICTRIALRESPONSE_UNSPECIFIED = 0;
+  ANALGESICTRIALRESPONSE_NO_RELIEF = 1;  // no-relief
+  ANALGESICTRIALRESPONSE_PARTIAL_RELIEF = 2;  // partial-relief
+  ANALGESICTRIALRESPONSE_GOOD_RELIEF = 3;  // good-relief
+}
+
+enum HipReplacementSurgeryEvaluationWalkingAidTrialEnum {
+  WALKINGAIDTRIAL_UNSPECIFIED = 0;
+  WALKINGAIDTRIAL_YES = 1;  // yes
+  WALKINGAIDTRIAL_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationConservativeMeasuresExhaustedEnum {
+  CONSERVATIVEMEASURESEXHAUSTED_UNSPECIFIED = 0;
+  CONSERVATIVEMEASURESEXHAUSTED_YES = 1;  // yes
+  CONSERVATIVEMEASURESEXHAUSTED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationDiabetesControlledEnum {
+  DIABETESCONTROLLED_UNSPECIFIED = 0;
+  DIABETESCONTROLLED_NOT_DIABETIC = 1;  // not-diabetic
+  DIABETESCONTROLLED_CONTROLLED = 2;  // controlled
+  DIABETESCONTROLLED_POORLY_CONTROLLED = 3;  // poorly-controlled
+}
+
+enum HipReplacementSurgeryEvaluationCardiacDiseasePresentEnum {
+  CARDIACDISEASEPRESENT_UNSPECIFIED = 0;
+  CARDIACDISEASEPRESENT_YES = 1;  // yes
+  CARDIACDISEASEPRESENT_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationBleedingDisorderOrAnticoagulantUseEnum {
+  BLEEDINGDISORDERORANTICOAGULANTUSE_UNSPECIFIED = 0;
+  BLEEDINGDISORDERORANTICOAGULANTUSE_YES = 1;  // yes
+  BLEEDINGDISORDERORANTICOAGULANTUSE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX_SMOKER = 2;  // ex-smoker
+  SMOKINGSTATUS_CURRENT_SMOKER = 3;  // current-smoker
+}
+
+enum HipReplacementSurgeryEvaluationFullBloodCountDoneEnum {
+  FULLBLOODCOUNTDONE_UNSPECIFIED = 0;
+  FULLBLOODCOUNTDONE_YES = 1;  // yes
+  FULLBLOODCOUNTDONE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationRenalFunctionDoneEnum {
+  RENALFUNCTIONDONE_UNSPECIFIED = 0;
+  RENALFUNCTIONDONE_YES = 1;  // yes
+  RENALFUNCTIONDONE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationClottingOrInrDoneEnum {
+  CLOTTINGORINRDONE_UNSPECIFIED = 0;
+  CLOTTINGORINRDONE_YES = 1;  // yes
+  CLOTTINGORINRDONE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationEcgDoneEnum {
+  ECGDONE_UNSPECIFIED = 0;
+  ECGDONE_YES = 1;  // yes
+  ECGDONE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationMrsaScreenDoneEnum {
+  MRSASCREENDONE_UNSPECIFIED = 0;
+  MRSASCREENDONE_YES = 1;  // yes
+  MRSASCREENDONE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationUrinalysisDoneEnum {
+  URINALYSISDONE_UNSPECIFIED = 0;
+  URINALYSISDONE_YES = 1;  // yes
+  URINALYSISDONE_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationRisksAndBenefitsDiscussedEnum {
+  RISKSANDBENEFITSDISCUSSED_UNSPECIFIED = 0;
+  RISKSANDBENEFITSDISCUSSED_YES = 1;  // yes
+  RISKSANDBENEFITSDISCUSSED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationRealisticExpectationsDiscussedEnum {
+  REALISTICEXPECTATIONSDISCUSSED_UNSPECIFIED = 0;
+  REALISTICEXPECTATIONSDISCUSSED_YES = 1;  // yes
+  REALISTICEXPECTATIONSDISCUSSED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationPatientDecisionAidGivenEnum {
+  PATIENTDECISIONAIDGIVEN_UNSPECIFIED = 0;
+  PATIENTDECISIONAIDGIVEN_YES = 1;  // yes
+  PATIENTDECISIONAIDGIVEN_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationInterpreterRequiredEnum {
+  INTERPRETERREQUIRED_UNSPECIFIED = 0;
+  INTERPRETERREQUIRED_YES = 1;  // yes
+  INTERPRETERREQUIRED_NO = 2;  // no
+}
+
+enum HipReplacementSurgeryEvaluationRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_TOTAL_HIP_REPLACEMENT = 1;  // total-hip-replacement
+  RECOMMENDATION_HIP_RESURFACING = 2;  // hip-resurfacing
+  RECOMMENDATION_CONTINUE_CONSERVATIVE_MANAGEMENT = 3;  // continue-conservative-management
+  RECOMMENDATION_MDT_REVIEW = 4;  // mdt-review
+  RECOMMENDATION_NOT_CURRENTLY_A_CANDIDATE = 5;  // not-currently-a-candidate
+}
+
+message HipReplacementSurgeryEvaluation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HipReplacementSurgeryEvaluationStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  string assessment_time = 9;  // TIME — iso 8601 time
+  string site_name = 10;  // VARCHAR(255) — max 255 chars
+  HipReplacementSurgeryEvaluationAffectedSideEnum affected_side = 11;  // VARCHAR(10)
+  int32 symptom_duration_months = 12;  // INTEGER
+  int32 pain_at_rest_0_10 = 13;  // INTEGER
+  int32 pain_on_activity_0_10 = 14;  // INTEGER
+  HipReplacementSurgeryEvaluationNightPainEnum night_pain = 15;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationPriorHipSurgeryEnum prior_hip_surgery = 16;  // VARCHAR(5)
+  string prior_hip_surgery_detail = 17;  // TEXT
+  HipReplacementSurgeryEvaluationPriorInjuryOrDysplasiaHistoryEnum prior_injury_or_dysplasia_history = 18;  // VARCHAR(5)
+  string prior_injury_or_dysplasia_detail = 19;  // TEXT
+  int32 ohs_pain_severity = 20;  // SMALLINT
+  int32 ohs_washing_and_drying = 21;  // SMALLINT
+  int32 ohs_transport = 22;  // SMALLINT
+  int32 ohs_dressing_socks = 23;  // SMALLINT
+  int32 ohs_shopping = 24;  // SMALLINT
+  int32 ohs_walking_pain = 25;  // SMALLINT
+  int32 ohs_limping = 26;  // SMALLINT
+  int32 ohs_kneeling = 27;  // SMALLINT
+  int32 ohs_night_pain = 28;  // SMALLINT
+  int32 ohs_work_interference = 29;  // SMALLINT
+  int32 ohs_giving_way = 30;  // SMALLINT
+  int32 ohs_stairs = 31;  // SMALLINT
+  HipReplacementSurgeryEvaluationWalkingDistanceBeforePainEnum walking_distance_before_pain = 32;  // VARCHAR(15)
+  HipReplacementSurgeryEvaluationShoesAndSocksDifficultyEnum shoes_and_socks_difficulty = 33;  // VARCHAR(10)
+  HipReplacementSurgeryEvaluationWalkingAidUseEnum walking_aid_use = 34;  // VARCHAR(15)
+  HipReplacementSurgeryEvaluationLimpPresentEnum limp_present = 35;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationAntalgicGaitEnum antalgic_gait = 36;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationTrendelenburgSignEnum trendelenburg_sign = 37;  // VARCHAR(5)
+  double leg_length_discrepancy_as_cm = 38;  // NUMERIC(3,1) — numeric(3,1)
+  int32 flexion_degrees = 39;  // INTEGER
+  int32 internal_rotation_degrees = 40;  // INTEGER
+  int32 external_rotation_degrees = 41;  // INTEGER
+  int32 abduction_degrees = 42;  // INTEGER
+  int32 adduction_degrees = 43;  // INTEGER
+  HipReplacementSurgeryEvaluationFixedFlexionDeformityPresentEnum fixed_flexion_deformity_present = 44;  // VARCHAR(5)
+  int32 hip_abductor_strength_mrc = 45;  // SMALLINT
+  HipReplacementSurgeryEvaluationJointStabilityEnum joint_stability = 46;  // VARCHAR(10)
+  HipReplacementSurgeryEvaluationTendernessSiteEnum tenderness_site = 47;  // VARCHAR(15)
+  HipReplacementSurgeryEvaluationWeightBearingXrayPerformedEnum weight_bearing_xray_performed = 48;  // VARCHAR(5)
+  int32 kellgren_lawrence_grade = 49;  // SMALLINT
+  HipReplacementSurgeryEvaluationJointSpaceNarrowingEnum joint_space_narrowing = 50;  // VARCHAR(10)
+  HipReplacementSurgeryEvaluationSubchondralSclerosisOrCystsPresentEnum subchondral_sclerosis_or_cysts_present = 51;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationMriPerformedEnum mri_performed = 52;  // VARCHAR(5)
+  string mri_findings = 53;  // TEXT
+  HipReplacementSurgeryEvaluationCtPerformedEnum ct_performed = 54;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationCtIndicationEnum ct_indication = 55;  // VARCHAR(30)
+  HipReplacementSurgeryEvaluationPhysiotherapyTriedEnum physiotherapy_tried = 56;  // VARCHAR(5)
+  int32 physiotherapy_duration_weeks = 57;  // INTEGER
+  HipReplacementSurgeryEvaluationWeightManagementAdviceGivenEnum weight_management_advice_given = 58;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationSteroidInjectionGivenEnum steroid_injection_given = 59;  // VARCHAR(5)
+  int32 steroid_injection_count = 60;  // INTEGER
+  HipReplacementSurgeryEvaluationSteroidInjectionResponseEnum steroid_injection_response = 61;  // VARCHAR(15)
+  HipReplacementSurgeryEvaluationAnalgesicTrialGivenEnum analgesic_trial_given = 62;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationAnalgesicTrialResponseEnum analgesic_trial_response = 63;  // VARCHAR(15)
+  HipReplacementSurgeryEvaluationWalkingAidTrialEnum walking_aid_trial = 64;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationConservativeMeasuresExhaustedEnum conservative_measures_exhausted = 65;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationDiabetesControlledEnum diabetes_controlled = 66;  // VARCHAR(20)
+  HipReplacementSurgeryEvaluationCardiacDiseasePresentEnum cardiac_disease_present = 67;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationBleedingDisorderOrAnticoagulantUseEnum bleeding_disorder_or_anticoagulant_use = 68;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationSmokingStatusEnum smoking_status = 69;  // VARCHAR(20)
+  string general_fitness_note = 70;  // TEXT
+  HipReplacementSurgeryEvaluationFullBloodCountDoneEnum full_blood_count_done = 71;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationRenalFunctionDoneEnum renal_function_done = 72;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationClottingOrInrDoneEnum clotting_or_inr_done = 73;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationEcgDoneEnum ecg_done = 74;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationMrsaScreenDoneEnum mrsa_screen_done = 75;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationUrinalysisDoneEnum urinalysis_done = 76;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationRisksAndBenefitsDiscussedEnum risks_and_benefits_discussed = 77;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationRealisticExpectationsDiscussedEnum realistic_expectations_discussed = 78;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationPatientDecisionAidGivenEnum patient_decision_aid_given = 79;  // VARCHAR(5)
+  HipReplacementSurgeryEvaluationInterpreterRequiredEnum interpreter_required = 80;  // VARCHAR(5)
+  string interpreter_language = 81;  // VARCHAR(100) — max 100 chars
+  HipReplacementSurgeryEvaluationRecommendationEnum recommendation = 82;  // VARCHAR(35)
+  string target_list_date = 83;  // DATE — iso 8601 date
+  string responsible_surgeon = 84;  // VARCHAR(255) — max 255 chars
+  string additional_notes = 85;  // TEXT
+}

@@ -1,0 +1,190 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hip_replacement_surgery_evaluation_grade
+openapi: 3.1.0
+info:
+  title: Hip Replacement Surgery Evaluation — HipReplacementSurgeryEvaluationGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for one hip-replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+paths:
+  /hip-replacement-surgery-evaluation-grades:
+    get:
+      summary: List HipReplacementSurgeryEvaluationGrade records
+      operationId: listHipReplacementSurgeryEvaluationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HipReplacementSurgeryEvaluationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGrade"
+    post:
+      summary: Create a new HipReplacementSurgeryEvaluationGrade
+      operationId: createHipReplacementSurgeryEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGrade"
+      responses:
+        "201":
+          description: The newly created HipReplacementSurgeryEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGrade"
+        "400":
+          description: Validation error
+  /hip-replacement-surgery-evaluation-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HipReplacementSurgeryEvaluationGrade by id
+      operationId: getHipReplacementSurgeryEvaluationGrade
+      responses:
+        "200":
+          description: The requested HipReplacementSurgeryEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGrade"
+        "404":
+          description: HipReplacementSurgeryEvaluationGrade not found
+    patch:
+      summary: Update an existing HipReplacementSurgeryEvaluationGrade
+      operationId: updateHipReplacementSurgeryEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGrade"
+      responses:
+        "200":
+          description: The updated HipReplacementSurgeryEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluationGrade"
+        "404":
+          description: HipReplacementSurgeryEvaluationGrade not found
+    delete:
+      summary: Soft-delete a HipReplacementSurgeryEvaluationGrade
+      operationId: deleteHipReplacementSurgeryEvaluationGrade
+      responses:
+        "204":
+          description: HipReplacementSurgeryEvaluationGrade deleted
+        "404":
+          description: HipReplacementSurgeryEvaluationGrade not found
+components:
+  schemas:
+    HipReplacementSurgeryEvaluationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        hip_replacement_surgery_evaluation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the hip_replacement_surgery_evaluation table, unique because grading is one-to-one with the evaluation.
+        ohs_total:
+          type: integer
+          format: int32
+          description: Oxford Hip Score total, 0 to 48, being the sum of the 12 items, where 48 is the best outcome.
+        ohs_category:
+          type: string
+          enum:
+            - severe
+            - moderate
+            - mild-to-moderate
+            - satisfactory
+            - ""
+          description: "Oxford Hip Score category computed by the engine: severe (0-19), moderate (20-29), mild-to-moderate (30-39), or satisfactory (40-48). This banding is this form's operational convention; see spec/index.md."
+        computed_candidacy:
+          type: string
+          enum:
+            - strong-candidate
+            - candidate
+            - continue-conservative
+            - not-indicated
+            - mdt-review
+            - ""
+          description: "Surgical-candidacy recommendation computed by the engine from the Oxford Hip Score total, the Kellgren and Lawrence grade, and whether conservative measures are exhausted: strong-candidate, candidate, continue-conservative, not-indicated, or mdt-review."
+        final_candidacy:
+          type: string
+          enum:
+            - strong-candidate
+            - candidate
+            - continue-conservative
+            - not-indicated
+            - mdt-review
+            - ""
+          description: Surgical-candidacy recommendation signed off by the clinician, which may equal or differ from the computed value.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the clinician set a final candidacy differently from the computed value, mandatory when they differ.
+        clinician_notes:
+          type: string
+          description: Free-text clinician summary notes.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the clinician who signed the evaluation.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - hip_replacement_surgery_evaluation_id
+        - ohs_category
+        - computed_candidacy
+        - final_candidacy
+        - override_reason
+        - clinician_notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off grading result for one hip-replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.

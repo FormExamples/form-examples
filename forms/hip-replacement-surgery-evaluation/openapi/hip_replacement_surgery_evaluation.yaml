@@ -1,0 +1,650 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hip_replacement_surgery_evaluation
+openapi: 3.1.0
+info:
+  title: Hip Replacement Surgery Evaluation — HipReplacementSurgeryEvaluation
+  version: 1.0.0
+  description: "Hip-replacement surgery evaluation: the payload of the 15-step single-page wizard, i.e. the orthopaedic assessment of whether a patient's hip disease and functional decline justify total hip arthroplasty and whether conservative options have been exhausted."
+paths:
+  /hip-replacement-surgery-evaluations:
+    get:
+      summary: List HipReplacementSurgeryEvaluation records
+      operationId: listHipReplacementSurgeryEvaluation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HipReplacementSurgeryEvaluation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+    post:
+      summary: Create a new HipReplacementSurgeryEvaluation
+      operationId: createHipReplacementSurgeryEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+      responses:
+        "201":
+          description: The newly created HipReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+        "400":
+          description: Validation error
+  /hip-replacement-surgery-evaluations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HipReplacementSurgeryEvaluation by id
+      operationId: getHipReplacementSurgeryEvaluation
+      responses:
+        "200":
+          description: The requested HipReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+        "404":
+          description: HipReplacementSurgeryEvaluation not found
+    patch:
+      summary: Update an existing HipReplacementSurgeryEvaluation
+      operationId: updateHipReplacementSurgeryEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+      responses:
+        "200":
+          description: The updated HipReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+        "404":
+          description: HipReplacementSurgeryEvaluation not found
+    delete:
+      summary: Soft-delete a HipReplacementSurgeryEvaluation
+      operationId: deleteHipReplacementSurgeryEvaluation
+      responses:
+        "204":
+          description: HipReplacementSurgeryEvaluation deleted
+        "404":
+          description: HipReplacementSurgeryEvaluation not found
+components:
+  schemas:
+    HipReplacementSurgeryEvaluation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician table, i.e. the practitioner conducting the evaluation.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Workflow status of the evaluation: draft, submitted, reviewed, or urgent."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the evaluation was conducted.
+        assessment_time:
+          type: string
+          format: time
+          description: Time the evaluation was conducted.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site where the evaluation was conducted, such as the joint-replacement clinic.
+        affected_side:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - ""
+          description: "Hip side affected: left, right, or bilateral."
+        symptom_duration_months:
+          type: integer
+          format: int32
+          description: Duration of hip symptoms in months.
+        pain_at_rest_0_10:
+          type: integer
+          format: int32
+          description: Pain severity at rest, 0 (none) to 10 (worst imaginable).
+        pain_on_activity_0_10:
+          type: integer
+          format: int32
+          description: Pain severity on activity, 0 (none) to 10 (worst imaginable).
+        night_pain:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient reports night pain.
+        prior_hip_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has had prior surgery on the affected hip.
+        prior_hip_surgery_detail:
+          type: string
+          description: Description of any prior hip surgery, such as arthroscopy or osteotomy.
+        prior_injury_or_dysplasia_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient has a history of prior hip injury or developmental dysplasia of the hip.
+        prior_injury_or_dysplasia_detail:
+          type: string
+          description: Description of the prior hip injury or dysplasia history.
+        ohs_pain_severity:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 1: usual hip pain severity, 0 (worst) to 4 (best)."
+        ohs_washing_and_drying:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 2: difficulty washing and drying yourself because of your hip, 0 (worst) to 4 (best)."
+        ohs_transport:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 3: difficulty getting in and out of a car, or using public transport, because of your hip, 0 (worst) to 4 (best)."
+        ohs_dressing_socks:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 4: difficulty putting on a pair of socks or stockings because of your hip, 0 (worst) to 4 (best)."
+        ohs_shopping:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 5: ability to do the household shopping on your own, 0 (worst) to 4 (best)."
+        ohs_walking_pain:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 6: pain experienced walking, 0 (worst) to 4 (best)."
+        ohs_limping:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 7: limping when walking because of your hip, 0 (worst) to 4 (best)."
+        ohs_kneeling:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 8: difficulty kneeling and getting up again afterwards because of your hip, 0 (worst) to 4 (best)."
+        ohs_night_pain:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 9: how often has hip pain troubled you in bed at night, 0 (worst) to 4 (best)."
+        ohs_work_interference:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 10: how much has hip pain interfered with your usual work, 0 (worst) to 4 (best)."
+        ohs_giving_way:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 11: how often has the hip felt like it might suddenly give way or let you down, 0 (worst) to 4 (best)."
+        ohs_stairs:
+          type: integer
+          format: int32
+          description: "Oxford Hip Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best)."
+        walking_distance_before_pain:
+          type: string
+          enum:
+            - unlimited
+            - over-1km
+            - 100m-to-1km
+            - under-100m
+            - housebound
+            - ""
+          description: "Walking distance before pain forces a stop: unlimited, over 1km, 100m to 1km, under 100m, or housebound."
+        shoes_and_socks_difficulty:
+          type: string
+          enum:
+            - none
+            - some
+            - severe
+            - unable
+            - ""
+          description: "Difficulty putting on shoes and socks: none, some, severe, or unable."
+        walking_aid_use:
+          type: string
+          enum:
+            - none
+            - stick
+            - frame
+            - wheelchair
+            - ""
+          description: "Walking aid in use: none, stick, frame, or wheelchair."
+        limp_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a limp is present on examination.
+        antalgic_gait:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an antalgic (pain-avoiding) gait is present on examination.
+        trendelenburg_sign:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Trendelenburg sign is positive, indicating hip abductor weakness relevant to surgical planning.
+        leg_length_discrepancy_as_cm:
+          type: number
+          format: double
+          description: Measured leg-length discrepancy in cm; greater than 2cm affects surgical planning.
+        flexion_degrees:
+          type: integer
+          format: int32
+          description: Hip flexion range of motion in degrees.
+        internal_rotation_degrees:
+          type: integer
+          format: int32
+          description: Hip internal rotation range of motion in degrees.
+        external_rotation_degrees:
+          type: integer
+          format: int32
+          description: Hip external rotation range of motion in degrees.
+        abduction_degrees:
+          type: integer
+          format: int32
+          description: Hip abduction range of motion in degrees.
+        adduction_degrees:
+          type: integer
+          format: int32
+          description: Hip adduction range of motion in degrees.
+        fixed_flexion_deformity_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a fixed flexion deformity is present on examination.
+        hip_abductor_strength_mrc:
+          type: integer
+          format: int32
+          description: Hip abductor muscle strength on the Medical Research Council (MRC) 0 to 5 scale.
+        joint_stability:
+          type: string
+          enum:
+            - stable
+            - unstable
+            - ""
+          description: "Joint stability on examination: stable or unstable."
+        tenderness_site:
+          type: string
+          enum:
+            - none
+            - groin
+            - trochanteric
+            - buttock
+            - other
+            - ""
+          description: "Site of tenderness on examination: none, groin, trochanteric, buttock, or other."
+        weight_bearing_xray_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a weight-bearing pelvic or hip X-ray was performed.
+        kellgren_lawrence_grade:
+          type: integer
+          format: int32
+          description: Kellgren and Lawrence radiographic osteoarthritis grade, 0 (none) to 4 (severe).
+        joint_space_narrowing:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Degree of joint-space narrowing on imaging: none, mild, moderate, or severe."
+        subchondral_sclerosis_or_cysts_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether subchondral sclerosis or cysts are present on imaging.
+        mri_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an MRI was performed.
+        mri_findings:
+          type: string
+          description: Free-text MRI findings.
+        ct_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a CT scan was performed.
+        ct_indication:
+          type: string
+          enum:
+            - none
+            - robotic-assisted-planning
+            - complex-deformity
+            - other
+            - ""
+          description: Indication for the CT scan, such as robotic-assisted surgical planning or a complex deformity.
+        physiotherapy_tried:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether physiotherapy has been tried as a conservative measure.
+        physiotherapy_duration_weeks:
+          type: integer
+          format: int32
+          description: Duration of the physiotherapy trial in weeks.
+        weight_management_advice_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether weight-management advice has been given as a conservative measure.
+        steroid_injection_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an intra-articular steroid injection has been given as a conservative measure.
+        steroid_injection_count:
+          type: integer
+          format: int32
+          description: Number of intra-articular steroid injections given.
+        steroid_injection_response:
+          type: string
+          enum:
+            - no-relief
+            - partial-relief
+            - good-relief
+            - ""
+          description: "Response to the intra-articular steroid injection: no relief, partial relief, or good relief."
+        analgesic_trial_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a trial of NSAID or other analgesic medication has been given as a conservative measure.
+        analgesic_trial_response:
+          type: string
+          enum:
+            - no-relief
+            - partial-relief
+            - good-relief
+            - ""
+          description: "Response to the analgesic trial: no relief, partial relief, or good relief."
+        walking_aid_trial:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a walking-aid trial has been given as a conservative measure.
+        conservative_measures_exhausted:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether all appropriate conservative measures have been exhausted, i.e. the primary gate on surgical candidacy alongside the Oxford Hip Score and the Kellgren and Lawrence grade.
+        diabetes_controlled:
+          type: string
+          enum:
+            - not-diabetic
+            - controlled
+            - poorly-controlled
+            - ""
+          description: "Diabetes control status: not diabetic, controlled, or poorly controlled."
+        cardiac_disease_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether cardiac disease is present.
+        bleeding_disorder_or_anticoagulant_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a bleeding disorder is present or an anticoagulant medicine is in use.
+        smoking_status:
+          type: string
+          enum:
+            - never
+            - ex-smoker
+            - current-smoker
+            - ""
+          description: "Smoking status: never, ex-smoker, or current smoker."
+        general_fitness_note:
+          type: string
+          description: Free-text general surgical-fitness note. Detailed ASA grading belongs to the pre-operative assessment forms, not here.
+        full_blood_count_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a full blood count has been done as part of the pre-operative baseline.
+        renal_function_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether renal function tests have been done as part of the pre-operative baseline.
+        clotting_or_inr_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether clotting studies or INR have been done as part of the pre-operative baseline.
+        ecg_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an ECG has been done as part of the pre-operative baseline.
+        mrsa_screen_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an MRSA screen has been done as part of the pre-operative baseline.
+        urinalysis_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether urinalysis has been done as part of the pre-operative baseline.
+        risks_and_benefits_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the risks and benefits of surgery have been discussed with the patient.
+        realistic_expectations_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether realistic expectations of surgical outcome have been discussed with the patient.
+        patient_decision_aid_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a patient decision aid has been given.
+        interpreter_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an interpreter is required for shared decision-making.
+        interpreter_language:
+          type: string
+          maxLength: 100
+          description: Language the interpreter is required for.
+        recommendation:
+          type: string
+          enum:
+            - total-hip-replacement
+            - hip-resurfacing
+            - continue-conservative-management
+            - mdt-review
+            - not-currently-a-candidate
+            - ""
+          description: "Clinician recommendation: total hip replacement, hip resurfacing, continue conservative management, MDT review, or not currently a candidate."
+        target_list_date:
+          type: string
+          format: date
+          description: Target date to add the patient to the surgical waiting list, where applicable.
+        responsible_surgeon:
+          type: string
+          maxLength: 255
+          description: Name of the surgeon responsible for the planned procedure.
+        additional_notes:
+          type: string
+          description: Free-text summary notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - affected_side
+        - night_pain
+        - prior_hip_surgery
+        - prior_hip_surgery_detail
+        - prior_injury_or_dysplasia_history
+        - prior_injury_or_dysplasia_detail
+        - walking_distance_before_pain
+        - shoes_and_socks_difficulty
+        - walking_aid_use
+        - limp_present
+        - antalgic_gait
+        - trendelenburg_sign
+        - fixed_flexion_deformity_present
+        - joint_stability
+        - tenderness_site
+        - weight_bearing_xray_performed
+        - joint_space_narrowing
+        - subchondral_sclerosis_or_cysts_present
+        - mri_performed
+        - mri_findings
+        - ct_performed
+        - ct_indication
+        - physiotherapy_tried
+        - weight_management_advice_given
+        - steroid_injection_given
+        - steroid_injection_response
+        - analgesic_trial_given
+        - analgesic_trial_response
+        - walking_aid_trial
+        - conservative_measures_exhausted
+        - diabetes_controlled
+        - cardiac_disease_present
+        - bleeding_disorder_or_anticoagulant_use
+        - smoking_status
+        - general_fitness_note
+        - full_blood_count_done
+        - renal_function_done
+        - clotting_or_inr_done
+        - ecg_done
+        - mrsa_screen_done
+        - urinalysis_done
+        - risks_and_benefits_discussed
+        - realistic_expectations_discussed
+        - patient_decision_aid_given
+        - interpreter_required
+        - interpreter_language
+        - recommendation
+        - responsible_surgeon
+        - additional_notes
+      description: "Hip-replacement surgery evaluation: the payload of the 15-step single-page wizard, i.e. the orthopaedic assessment of whether a patient's hip disease and functional decline justify total hip arthroplasty and whether conservative options have been exhausted."
