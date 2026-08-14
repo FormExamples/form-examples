@@ -1,6 +1,6 @@
 # Knee Replacement Surgery Evaluation
 
-> The Knee Replacement Surgery Evaluation form.
+> An orthopaedic **knee-replacement surgery evaluation**: the assessment used by an orthopaedic surgeon or extended-scope physiotherapist in a joint-replacement clinic to decide whether a patient is a suitable candidate for total or partial knee arthroplasty. The form records the presenting history, scores the validated **Oxford Knee Score (OKS)**, captures the physical examination and diagnostic imaging, audits the conservative treatment already tried, and computes an OKS total and category, a surgical-candidacy recommendation, and a set of safety flags. The output is a signed evaluation report suitable for the clinical record and the joint-replacement multidisciplinary team (MDT).
 
 ## Docs
 
