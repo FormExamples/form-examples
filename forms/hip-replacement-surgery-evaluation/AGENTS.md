@@ -150,9 +150,13 @@ report, the PDF, and the FHIR Bundle.
 - Tailwind CSS 4 with `@import 'tailwindcss'` and `@theme`.
 - `pdfmake` for the PDF report endpoint.
 - Vitest for engine unit tests.
-- Routes nested under `src/routes/hip-replacement-surgery-evaluation/`,
-  RESTful dashboard at `/hip-replacement-surgery-evaluations/` and
-  `/hip-replacement-surgery-evaluations/[id]/`.
+- Routes nested under `src/routes/hip-replacement-surgery-evaluation/`
+  (welcome page), with the RESTful dashboard and wizard further nested under
+  `.../hip-replacement-surgery-evaluations/` and
+  `.../hip-replacement-surgery-evaluations/[id]/` — mirroring
+  `dietic-assessment`'s actual route nesting (its own `AGENTS.md` prose
+  describes a flatter `/dietic-assessments/` that the real routes do not use;
+  this form's routes intentionally match the real code, not the prose).
 - LocalStorage draft key:
   `hip-replacement-surgery-evaluation.front-end-with-svelte.<id>.v1`
   (`<id>` is the route id, `new` for a fresh evaluation).

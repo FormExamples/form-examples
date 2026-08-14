@@ -2,18 +2,22 @@
 
 ## Current status
 
-Created 2026-08-14.
+Created 2026-08-14. Foundation and full stack COMPLETE as of 2026-08-14.
 
 | Layer | Status |
 | --- | --- |
 | Documentation (`index.md`, `spec/`, `AGENTS.md`, `doc/`) | complete |
-| `sql/` migrations (source of truth) | complete |
-| Generated representations (XML, FHIR R5, protobuf, OpenAPI) | generated from `sql/` |
+| `sql/` migrations (source of truth) | complete — `bin/test-sql-apply` passes |
+| Generated representations (XML, FHIR R5, protobuf, OpenAPI) | generated from `sql/`, all `--check` gates green |
 | `examples/`, `CHANGELOG.md`, `llms.txt` | generated |
 | Scoring engine (`front-end-with-svelte/src/lib/engine/`) | complete — 25/25 Vitest cases pass |
-| `front-end-with-svelte/` UI (steps, routes, dashboard, PDF) | in progress |
-| `front-end-with-html/` | in progress |
-| `back-end-with-loco/` | in progress |
+| `front-end-with-svelte/` UI (steps, routes, dashboard, PDF) | complete — svelte-check clean, vite build succeeds |
+| `front-end-with-html/` | complete — 49/49 cross-check cases pass, Lily/ES-modules gates clean |
+| `back-end-with-loco/` | complete — loco-rs 1.0.1, `cargo build` + 28/28 tests pass |
+
+`bin/test-form hip-replacement-surgery-evaluation` passes except for the
+intentionally-empty `typespec/` placeholder (left alone per the build
+instructions).
 
 ## Why this form exists
 

@@ -18,7 +18,7 @@
 
 ## Schema
 
-- [x] `sql/00_create_extensions.sql`
+- [x] `sql/00_create_extensions.sql` (pgcrypto + pg_trgm)
 - [x] `sql/01_create_function_set_updated_at.sql`
 - [x] `sql/02_create_table_patient.sql`
 - [x] `sql/03_create_table_clinician.sql`
@@ -26,7 +26,7 @@
 - [x] `sql/05_create_table_hip_replacement_surgery_evaluation_grade.sql`
 - [x] `sql/06_create_table_hip_replacement_surgery_evaluation_grade_flag.sql`
 - [x] `sql/schema.sql` (generated, combined)
-- [ ] `bin/test-sql-apply hip-replacement-surgery-evaluation` passes (pending scratch-Postgres run).
+- [x] `bin/test-sql-apply hip-replacement-surgery-evaluation` passes.
 
 ## Generated representations
 
@@ -37,6 +37,9 @@
 - [x] `back-end-with-loco-setup` — scaffold script.
 - [x] `CHANGELOG.md` and `examples/`.
 - [x] `llms.txt`.
+- [x] Per-directory `index.md`/`AGENTS.md`/`CLAUDE.md`/`README.md` quartet for
+      `xml/`, `protobuf/`, `openapi/`, `fhir/r5/`, `sql/` (not scaffolded
+      uniformly by `bin/create-form`).
 
 ## Scoring engine (SvelteKit / TypeScript)
 
@@ -51,43 +54,57 @@
 
 ## Front-end with SvelteKit
 
-- [ ] `src/lib/components/steps/StepNName.svelte` × 15.
-- [ ] `src/routes/hip-replacement-surgery-evaluation/` wizard route.
-- [ ] `src/routes/hip-replacement-surgery-evaluations/` dashboard list route.
-- [ ] `src/routes/hip-replacement-surgery-evaluations/[id]/` detail route.
-- [ ] PDF report endpoint via `pdfmake`.
-- [ ] Vendored `src/lib/components/ui/` and `static/themes/` from
+- [x] `src/lib/components/steps/StepNName.svelte` × 15.
+- [x] Routes nested under `src/routes/hip-replacement-surgery-evaluation/`
+      (welcome page, wizard at `.../hip-replacement-surgery-evaluations/[id]/`,
+      dashboard at `.../hip-replacement-surgery-evaluations/`, report +
+      report/pdf), mirroring `dietic-assessment`'s actual route nesting.
+- [x] PDF report endpoint via `pdfmake` (`src/lib/report/pdf-builder.ts`).
+- [x] Vendored `src/lib/components/ui/` and `static/themes/` from
       `dietic-assessment`.
-- [ ] `pnpm check` and `pnpm test` pass.
+- [x] `npx vitest run` (25/25), `svelte-check` (0 errors/0 warnings), `vite
+      build` all pass in the main checkout.
 
 ## Front-end with HTML
 
-- [ ] `js/types.js`, `js/ohs-rules.js`, `js/flagged-issues.js`,
+- [x] `js/types.js`, `js/ohs-rules.js`, `js/flagged-issues.js`,
       `js/composite-grader.js` (rule/flag IDs identical to the TS engine).
-- [ ] `js/form-app.js`, `index.html` — 15-step single-page wizard.
-- [ ] `js/dashboard-app.js`, `js/dashboard-types.js`, `js/data.js`,
+- [x] `js/form-app.js`, `index.html` — 15-step single-page wizard.
+- [x] `js/dashboard-app.js`, `js/dashboard-types.js`, `js/data.js`, `js/api.js`,
       `dashboard.html`.
-- [ ] Vendored shared JS/CSS from `dietic-assessment`.
-- [ ] Standalone Node harness cross-checking the HTML engine against the
-      Vitest cases.
-- [ ] `bin/lily-html-refactor --check hip-replacement-surgery-evaluation`
+- [x] Vendored shared JS/CSS from `dietic-assessment` (LocalStorage keys
+      corrected to the `hip-replacement-surgery-evaluation.*` slug).
+- [x] Standalone Node harness (`js/cross-check.mjs`) cross-checking the HTML
+      engine against the Vitest cases — 49/49 pass.
+- [x] `bin/lily-html-refactor --check hip-replacement-surgery-evaluation`
+      passes.
+- [x] `bin/es-modules-refactor --check hip-replacement-surgery-evaluation`
       passes.
 
 ## Back-end with Loco
 
-- [ ] Scaffold `patient`, `clinician`,
+- [x] Scaffolded `patient`, `clinician`,
       `hip_replacement_surgery_evaluation`,
       `hip_replacement_surgery_evaluation_grade`,
-      `hip_replacement_surgery_evaluation_grade_flag` entities.
-- [ ] `cargo build` succeeds.
-- [ ] `cargo test` passes against the scratch Postgres test database.
+      `hip_replacement_surgery_evaluation_grade_flag` entities (loco-rs
+      1.0.1, `i64` ids, relational per-table schema).
+- [x] `cargo build --all-targets` succeeds.
+- [x] `cargo test` passes (28/28) against the scratch Postgres test database.
 
 ## Verification
 
-- [ ] `bin/test-form hip-replacement-surgery-evaluation`
-- [ ] `bin/test-sql-apply hip-replacement-surgery-evaluation`
-- [ ] `bin/test-examples-conformance hip-replacement-surgery-evaluation`
-- [ ] `bin/lily-html-refactor --check hip-replacement-surgery-evaluation`
-- [ ] `bin/lily-svelte-refactor --check hip-replacement-surgery-evaluation`
-- [ ] `bin/generate-llms-txt.py --check hip-replacement-surgery-evaluation`
-- [ ] `bin/generate-spec.py --check hip-replacement-surgery-evaluation`
+- [x] `bin/test-form hip-replacement-surgery-evaluation` — only fails on
+      `typespec/`, intentionally left as an empty placeholder per the build
+      instructions.
+- [x] `bin/test-sql-apply hip-replacement-surgery-evaluation`
+- [x] `bin/test-examples-conformance hip-replacement-surgery-evaluation`
+- [x] `bin/lily-html-refactor --check hip-replacement-surgery-evaluation`
+- [x] `bin/lily-svelte-refactor --check hip-replacement-surgery-evaluation`
+- [x] `bin/generate-llms-txt.py --check hip-replacement-surgery-evaluation`
+- [x] `bin/generate-spec.py --check hip-replacement-surgery-evaluation`
+
+## Deferred / not done
+
+- [ ] `typespec/` left empty per explicit build instructions.
+- [ ] `cargo deny --all-features check` not run against the new crate's
+      `deny.toml` (generator wasn't invoked for this slug in this pass).
