@@ -2,9 +2,12 @@
 
 Clinician-driven pre-operative assessment. Collects **objective findings** via a
 16-step single-page wizard, computes an ASA Physical Status grade (I–VI) plus
-Mallampati, RCRI, STOP-BANG, and Clinical Frailty Scale, produces a composite
-perioperative risk (Low / Moderate / High / Critical) and a set of safety flags,
-and emits a signed anaesthesia plan.
+Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale, Fried Frailty Phenotype,
+and Risk Analysis Index, produces a composite perioperative risk (Low /
+Moderate / High / Critical) and a set of safety flags — including GLP-1
+receptor agonist perioperative management and frailty-intersection risks (see
+[`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md))
+— and emits a signed anaesthesia plan.
 
 See [`index.md`](./index.md) for the full design and the 16-step wizard table.
 
@@ -40,6 +43,8 @@ See [`index.md`](./index.md) for the full design and the 16-step wizard table.
     rcriScore: number;    // 0..6
     stopBangScore: number; // 0..8
     frailtyScale: number | null; // 1..9
+    friedPhenotypeScore: number | null; // 0..5
+    friedFrailtyCategory: 'robust' | 'pre-frail' | 'frail' | '';
     compositeRisk: 'low' | 'moderate' | 'high' | 'critical';
     firedRules: FiredRule[];
     additionalFlags: AdditionalFlag[];
@@ -48,8 +53,8 @@ See [`index.md`](./index.md) for the full design and the 16-step wizard table.
 - **Algorithm:** max-grade — the worst finding sets the composite grade; ASA I
   is the default when no rules fire.
 - **Engine files:** `types.ts`, `utils.ts`, `asa-rules.ts`, `mallampati-rules.ts`,
-  `rcri-rules.ts`, `stopbang-rules.ts`, `frailty-rules.ts`, `composite-grader.ts`,
-  `flagged-issues.ts`.
+  `rcri-rules.ts`, `stopbang-rules.ts`, `frailty-rules.ts` (also exports
+  `computeFriedPhenotypeScore()`), `composite-grader.ts`, `flagged-issues.ts`.
 - **Tests:** `composite-grader.test.ts`, `asa-rules.test.ts`.
 
 ## Clinician-only rules
@@ -66,6 +71,19 @@ observation:
   symptoms (high).
 - **Fasting violation** — clinician confirmation that the patient is not
   adequately fasted for general anaesthesia (high).
+- **GLP-1 aspiration risk** — on a GLP-1 receptor agonist with active GI
+  symptoms, or not held/fasting-extended per guideline (high).
+- **Cognitive assessment indicated** — CFS ≥ 5 without a Mini-Cog performed
+  (medium).
+- **Sarcopenia risk** — frail (Fried "frail" or CFS ≥ 5) and on a GLP-1
+  receptor agonist (medium).
+- **Dehydration/AKI risk** — frail, on a GLP-1 receptor agonist, and
+  reporting active GI symptoms (high).
+- **Rebound glycaemic risk** — a held/fasting-extended GLP-1 receptor
+  agonist in a patient on insulin (medium).
+
+  See [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md)
+  for the full clinical rationale and sources.
 
 ## Clinician override
 
@@ -119,6 +137,11 @@ step 16 with a documented reason. Both the **computed** grade and the
 - ASA Physical Status Classification.
 - NICE NG45 *Routine preoperative tests for elective surgery*.
 - AAGBI / RCoA pre-operative assessment guidance.
+- British Geriatrics Society frailty-screening guidance; Fried Frailty
+  Phenotype (2001); Risk Analysis Index.
+- ASA consensus-based guidance on preoperative GLP-1 receptor agonist
+  management; UK MHRA drug safety update on GLP-1 aspiration risk. See
+  [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md).
 
 ## Compliance
 

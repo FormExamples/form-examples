@@ -17,7 +17,7 @@ suitable for the clinical record.
 > derived representation stays keyed to the directory.
 
 Initial appointments typically last **45–60 minutes** for a general clinical or
-outpatient visit, and up to **90 minutes** for a specialised programme (for
+outpatient visit, and up to **90 minutes** for a specialized programme (for
 example home enteral feeding, bariatric surgery, inherited metabolic disease,
 or intestinal failure). The form records the appointment type and planned
 duration so the wizard can be worked through at the pace of the consultation.

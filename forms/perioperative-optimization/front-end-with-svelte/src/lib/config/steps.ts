@@ -16,8 +16,8 @@ export const steps: StepConfig[] = [
 	{ number: 10, title: 'Nutritional Screening', shortTitle: 'Nutrition' },
 	{ number: 11, title: 'Functional Capacity and Physical Fitness', shortTitle: 'Fitness' },
 	{ number: 12, title: 'Frailty, Cognition and Falls', shortTitle: 'Frailty' },
-	{ number: 13, title: 'Cardiorespiratory Optimisation', shortTitle: 'Cardioresp' },
+	{ number: 13, title: 'Cardiorespiratory Optimization', shortTitle: 'Cardioresp' },
 	{ number: 14, title: 'Psychological Readiness and Social Support', shortTitle: 'Readiness' },
-	{ number: 15, title: 'Optimisation Plan by Domain', shortTitle: 'Plan' },
+	{ number: 15, title: 'Optimization Plan by Domain', shortTitle: 'Plan' },
 	{ number: 16, title: 'Readiness Summary and Sign-off', shortTitle: 'Sign-off' }
 ];

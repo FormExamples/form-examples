@@ -13,7 +13,7 @@
 <Fieldset legend="16. Readiness Summary and Sign-off">
 	<p class="hint">The computed band is advisory. A clinician must record an explicit gate decision and sign.</p>
 
-	<p class="hint">A computed band of “Defer surgery” has exactly two safe resolutions: move the date so the window exists, or record an explicit accept-unoptimised-risk decision. Choosing neither, and proceeding as if the patient were optimised, is the hazard this form exists to prevent.</p>
+	<p class="hint">A computed band of “Defer surgery” has exactly two safe resolutions: move the date so the window exists, or record an explicit accept-unoptimized-risk decision. Choosing neither, and proceeding as if the patient were optimized, is the hazard this form exists to prevent.</p>
 	<Field label="Override readiness band" inputId="signoff-overrideReadiness">
 		<Select id="signoff-overrideReadiness" label="Override readiness band" bind:value={d.signoff.overrideReadiness}>
 			<option value="">— Select —</option>

@@ -175,6 +175,18 @@
 <perioperative_action>continue</perioperative_action>
 <perioperative_notes>Example text.</perioperative_notes>
 <last_dose_at>2026-04-09T10:00:00Z</last_dose_at>
+<on_glp1_receptor_agonist>yes</on_glp1_receptor_agonist>
+<glp1_agonist_name>semaglutide</glp1_agonist_name>
+<glp1_formulation>daily</glp1_formulation>
+<glp1_last_dose_at>2026-04-09T10:00:00Z</glp1_last_dose_at>
+<glp1_held_per_guideline>yes</glp1_held_per_guideline>
+<glp1_extended_clear_fluids_confirmed>yes</glp1_extended_clear_fluids_confirmed>
+<glp1_gi_symptoms>yes</glp1_gi_symptoms>
+<glp1_gi_symptoms_details>Example text.</glp1_gi_symptoms_details>
+<glp1_gastric_ultrasound_performed>yes</glp1_gastric_ultrasound_performed>
+<glp1_gastric_ultrasound_findings>empty</glp1_gastric_ultrasound_findings>
+<glp1_full_stomach_precautions_planned>yes</glp1_full_stomach_precautions_planned>
+<glp1_notes>Example text.</glp1_notes>
 <allergen>Peanuts</allergen>
 <category>drug</category>
 <reaction_type>anaphylaxis</reaction_type>
@@ -194,6 +206,18 @@
 <cpet_notes>Example text.</cpet_notes>
 <malnutrition_risk>none</malnutrition_risk>
 <unintentional_weight_loss_kg>70.0</unintentional_weight_loss_kg>
+<fried_weakness>yes</fried_weakness>
+<fried_slowness>yes</fried_slowness>
+<fried_low_physical_activity>yes</fried_low_physical_activity>
+<fried_exhaustion>yes</fried_exhaustion>
+<fried_unintentional_weight_loss>yes</fried_unintentional_weight_loss>
+<risk_analysis_index_score>5</risk_analysis_index_score>
+<mini_cog_performed>yes</mini_cog_performed>
+<mini_cog_score>5</mini_cog_score>
+<prehabilitation_indicated>yes</prehabilitation_indicated>
+<prehabilitation_type>nutrition</prehabilitation_type>
+<prehabilitation_start_date>2026-01-15</prehabilitation_start_date>
+<protein_supplementation_recommended>yes</protein_supplementation_recommended>
 <technique>ga</technique>
 <airway_plan>face-mask</airway_plan>
 <rsi_planned>yes</rsi_planned>

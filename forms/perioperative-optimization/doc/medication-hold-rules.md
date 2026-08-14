@@ -1,6 +1,6 @@
 # Perioperative medication hold rules
 
-Reference for the `medication` optimisation domain. The form records whether a
+Reference for the `medication` optimization domain. The form records whether a
 hold-and-restart plan has been **agreed**; it does not generate one, and the
 timings below are reproduced for reference only. The prescriber and the
 anaesthetic team own the decision.
@@ -34,14 +34,31 @@ when the drug is in use with no agreed plan.
 Semaglutide, liraglutide, dulaglutide, exenatide, tirzepatide.
 
 These delay gastric emptying, so a patient may have a full stomach despite
-observing standard fasting times. Guidance is evolving; current practice is to
-consider withholding the dose before surgery (a week for weekly preparations,
-the day of surgery for daily ones), to consider gastric ultrasound, and to treat
-the patient as having a potentially full stomach if in doubt.
+observing standard fasting times. Two accepted strategies:
 
-Fires `R-MEDICATION-3` and the `glp1-agonist-aspiration-risk` flag at high
-priority whenever the drug is in use, whether or not a plan exists — the
-aspiration consideration belongs to the anaesthetic team on the day regardless.
+1. **Extended fasting** — a 24-hour solid-food fast combined with a 4–8 hour
+   clear-liquid fast, when the medication itself is not held.
+2. **Holding the medication** — hold daily formulations on the day of
+   surgery; hold weekly formulations exactly one week before the procedure.
+
+Step 4 records the formulation, whether it was held per guideline or the
+extended clear-fluid fast confirmed, active gastrointestinal symptoms
+(nausea, vomiting, bloating, abdominal pain — a significantly elevated
+full-stomach risk on their own), and whether point-of-care gastric
+ultrasound was performed.
+
+Fires `F-GLP1-AGONIST-ASPIRATION-RISK-001` and the
+`glp1-agonist-aspiration-risk` flag at high priority when active GI symptoms
+are present, **or** the drug was neither held per guideline nor the
+extended clear-fluid fast confirmed — not unconditionally whenever the drug
+is in use. If the medication was held correctly and the patient is
+asymptomatic, the flag does not fire, but full-stomach precautions
+(rapid-sequence induction, gastric ultrasound, or a regional-anaesthesia
+preference) still apply whenever guidance was not followed exactly.
+
+See [`glp1-frailty-perioperative-management.md`](glp1-frailty-perioperative-management.md)
+for the frailty-intersecting risks (accelerated sarcopenia, dehydration/AKI,
+rebound glycaemia) that a frail patient on a GLP-1 receptor agonist adds.
 
 ### Anticoagulants and antiplatelets — bleeding against thrombosis
 
@@ -86,7 +103,7 @@ the front-end surface the right prompt.
 
 - Centre for Perioperative Care. *Guideline for Perioperative Care for People
   with Diabetes Mellitus Undergoing Elective and Emergency Surgery.*
-- Centre for Perioperative Care. *Preoperative Assessment and Optimisation for
+- Centre for Perioperative Care. *Preoperative Assessment and Optimization for
   Adult Surgery* (June 2021).
 - NICE NG180. *Perioperative care in adults.*
   <https://www.nice.org.uk/guidance/ng180>

@@ -13,6 +13,7 @@ mod m20260813_222711_perioperative_optimizations;
 mod m20260813_222733_perioperative_optimization_grades;
 mod m20260813_222754_perioperative_optimization_grade_domains;
 mod m20260813_222815_perioperative_optimization_grade_flags;
+mod m20260814_100000_add_glp1_and_frailty_fields_to_perioperative_optimizations;
 pub struct Migrator;
 
 #[async_trait::async_trait]
@@ -30,6 +31,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260813_222733_perioperative_optimization_grades::Migration),
             Box::new(m20260813_222754_perioperative_optimization_grade_domains::Migration),
             Box::new(m20260813_222815_perioperative_optimization_grade_flags::Migration),
+            Box::new(m20260814_100000_add_glp1_and_frailty_fields_to_perioperative_optimizations::Migration),
             // inject-above (do not remove this comment)
         ]
     }

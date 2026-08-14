@@ -4,7 +4,7 @@
 // The same set backs the HTML dashboard, so the two front-ends show identical
 // data. It deliberately includes a fully ready patient, one in progress, one
 // short on anaemia lead time, one short on HbA1c, one where the clinician
-// accepted the unoptimised risk for a cancer resection, and one with no
+// accepted the unoptimized risk for a cancer resection, and one with no
 // surgery date at all, where gating cannot be applied.
 
 import type { AssessmentRow } from '$lib/engine/types';
@@ -35,7 +35,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		nhs: '602 345 6789',
 		procedure: 'Laparoscopic cholecystectomy',
 		severity: 'intermediate',
-		readiness: 'optimisation-in-progress',
+		readiness: 'optimization-in-progress',
 		domainsShortOnTime: [],
 		actionRequired: 0,
 		gateDecision: 'proceed-with-prehabilitation',
@@ -51,7 +51,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		nhs: '603 456 7890',
 		procedure: 'Total hip replacement',
 		severity: 'major',
-		readiness: 'optimisation-required',
+		readiness: 'optimization-required',
 		domainsShortOnTime: [],
 		actionRequired: 3,
 		gateDecision: 'proceed-with-prehabilitation',
@@ -70,7 +70,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		readiness: 'defer-surgery',
 		domainsShortOnTime: ['anaemia', 'nutrition'],
 		actionRequired: 1,
-		gateDecision: 'defer-and-optimise',
+		gateDecision: 'defer-and-optimize',
 		surgeon: 'Mr D Okoro',
 		flagCount: 4
 	},
@@ -86,7 +86,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		readiness: 'defer-surgery',
 		domainsShortOnTime: ['glycaemic-control'],
 		actionRequired: 1,
-		gateDecision: 'defer-and-optimise',
+		gateDecision: 'defer-and-optimize',
 		surgeon: 'Mr S Patel',
 		flagCount: 2
 	},
@@ -102,7 +102,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		readiness: 'defer-surgery',
 		domainsShortOnTime: ['anaemia', 'nutrition', 'physical-fitness'],
 		actionRequired: 0,
-		gateDecision: 'accept-unoptimised-risk',
+		gateDecision: 'accept-unoptimized-risk',
 		surgeon: 'Mr D Okoro',
 		flagCount: 5
 	},
@@ -115,7 +115,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		nhs: '607 890 1234',
 		procedure: 'Awaiting date — shoulder arthroplasty',
 		severity: 'major',
-		readiness: 'optimisation-required',
+		readiness: 'optimization-required',
 		domainsShortOnTime: [],
 		actionRequired: 2,
 		gateDecision: '',
@@ -131,7 +131,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		nhs: '608 901 2345',
 		procedure: 'Radical prostatectomy',
 		severity: 'major',
-		readiness: 'optimisation-required',
+		readiness: 'optimization-required',
 		domainsShortOnTime: [],
 		actionRequired: 2,
 		gateDecision: 'proceed-with-prehabilitation',
@@ -163,7 +163,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		nhs: '610 123 4567',
 		procedure: 'Coronary artery bypass graft',
 		severity: 'major-plus',
-		readiness: 'optimisation-in-progress',
+		readiness: 'optimization-in-progress',
 		domainsShortOnTime: [],
 		actionRequired: 0,
 		gateDecision: 'proceed-with-prehabilitation',
@@ -198,7 +198,7 @@ export const sampleAssessments: AssessmentRow[] = [
 		readiness: 'defer-surgery',
 		domainsShortOnTime: ['smoking', 'physical-fitness', 'medication'],
 		actionRequired: 0,
-		gateDecision: 'accept-unoptimised-risk',
+		gateDecision: 'accept-unoptimized-risk',
 		surgeon: 'Mr D Okoro',
 		flagCount: 6
 	}

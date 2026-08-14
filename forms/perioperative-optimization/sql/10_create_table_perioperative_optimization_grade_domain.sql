@@ -1,4 +1,4 @@
--- Per-domain optimisation result: one row per optimisation domain per
+-- Per-domain optimization result: one row per optimization domain per
 -- assessment.
 --
 -- Unlike the sibling pre-operative forms, where the fired-rule list is an audit
@@ -26,7 +26,7 @@ CREATE TABLE perioperative_optimization_grade_domain (
             'cardiorespiratory'
         )),
     status VARCHAR(20) NOT NULL DEFAULT ''
-        CHECK (status IN ('optimised', 'in-progress', 'action-required', 'insufficient-time', 'not-applicable', '')),
+        CHECK (status IN ('optimized', 'in-progress', 'action-required', 'insufficient-time', 'not-applicable', '')),
     triggered BOOLEAN NOT NULL DEFAULT FALSE,
     lead_time_weeks INTEGER NOT NULL DEFAULT 0
         CHECK (lead_time_weeks BETWEEN 0 AND 52),
@@ -56,7 +56,7 @@ CREATE TRIGGER trigger_perioperative_optimization_grade_domain_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE perioperative_optimization_grade_domain IS
-    'Per-domain optimisation result, one row per optimisation domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.';
+    'Per-domain optimization result, one row per optimization domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.created_at IS
@@ -68,13 +68,13 @@ COMMENT ON COLUMN perioperative_optimization_grade_domain.deleted_at IS
 COMMENT ON COLUMN perioperative_optimization_grade_domain.perioperative_optimization_grade_id IS
     'Foreign key to the parent perioperative_optimization_grade table.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.domain IS
-    'Which of the eight optimisation domains this row grades.';
+    'Which of the eight optimization domains this row grades.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.status IS
-    'Domain status after time-to-surgery gating: optimised, in-progress, action-required, insufficient-time, or not-applicable.';
+    'Domain status after time-to-surgery gating: optimized, in-progress, action-required, insufficient-time, or not-applicable.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.triggered IS
-    'Whether the domain screening threshold was crossed, i.e. whether there is anything to optimise.';
+    'Whether the domain screening threshold was crossed, i.e. whether there is anything to optimize.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.lead_time_weeks IS
-    'Minimum weeks before surgery the intervention needs in order to work, per doc/optimisation-domains.md.';
+    'Minimum weeks before surgery the intervention needs in order to work, per doc/optimization-domains.md.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.weeks_shortfall IS
     'How many weeks short of the lead time this assessment is, i.e. how much later the surgery would have to be for the intervention to work. NULL when there is enough time.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.rule_id IS

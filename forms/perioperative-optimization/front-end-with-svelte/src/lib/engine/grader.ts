@@ -19,6 +19,7 @@ import {
 	DOMAIN_ORDER,
 	computeAuditCScore,
 	computeBmi,
+	computeFriedPhenotypeScore,
 	computeMustScore,
 	computeWeightLossPercent,
 	mustRisk
@@ -28,17 +29,17 @@ import { gateDomain, recommendedEarliestSurgeryDate, weeksBetween } from './gati
 
 export const READINESS_ORDER: Readiness[] = [
 	'ready',
-	'optimisation-in-progress',
-	'optimisation-required',
+	'optimization-in-progress',
+	'optimization-required',
 	'defer-surgery'
 ];
 
 /** Map a domain status onto the readiness band it implies. */
 export const STATUS_TO_READINESS: Record<DomainStatus, Readiness> = {
-	'optimised': 'ready',
+	'optimized': 'ready',
 	'not-applicable': 'ready',
-	'in-progress': 'optimisation-in-progress',
-	'action-required': 'optimisation-required',
+	'in-progress': 'optimization-in-progress',
+	'action-required': 'optimization-required',
 	'insufficient-time': 'defer-surgery'
 };
 
@@ -84,7 +85,7 @@ export function calculateOptimization(data: PerioperativeOptimization): GradingR
 	}
 
 	// Two findings force a deferral regardless of the time available, because
-	// they are unsafe to operate on rather than merely unoptimised.
+	// they are unsafe to operate on rather than merely unoptimized.
 	const hb = num(data.anaemia.haemoglobinGPerL);
 	const hba1c = num(data.glycaemic.hba1cMmolPerMol);
 	if (hb !== null && hb < 80) computedReadiness = 'defer-surgery';
@@ -108,9 +109,10 @@ export function calculateOptimization(data: PerioperativeOptimization): GradingR
 		auditCScore,
 		weeksToSurgery
 	});
+	const fried = computeFriedPhenotypeScore(data);
 
 	const counts = {
-		optimised: domains.filter((d) => d.status === 'optimised' || d.status === 'not-applicable').length,
+		optimized: domains.filter((d) => d.status === 'optimized' || d.status === 'not-applicable').length,
 		inProgress: domains.filter((d) => d.status === 'in-progress').length,
 		actionRequired: domains.filter((d) => d.status === 'action-required').length,
 		insufficientTime: domains.filter((d) => d.status === 'insufficient-time').length
@@ -129,6 +131,8 @@ export function calculateOptimization(data: PerioperativeOptimization): GradingR
 		stopBangScore: num(data.cardioresp.stopBangScore),
 		dukeActivityStatusIndex: num(data.fitness.dukeActivityStatusIndex),
 		clinicalFrailtyScale: num(data.frailty.clinicalFrailtyScale),
+		friedPhenotypeScore: fried.score,
+		friedFrailtyCategory: fried.category,
 		computedReadiness,
 		finalReadiness,
 		overrideReason,

@@ -54,7 +54,7 @@ computed by the engine, so the MUST inputs and their result are visible together
 **Weeks to surgery** and **domains short on time**, side by side, sorted by
 surgery date ascending. Together they answer the question a waiting-list
 coordinator actually has: *which of next month's lists are about to go ahead
-without the optimisation they were promised?* The weeks column is colour-banded
+without the optimization they were promised?* The weeks column is colour-banded
 at four and eight weeks, and rows with no surgery date sort last rather than
 appearing imminent.
 

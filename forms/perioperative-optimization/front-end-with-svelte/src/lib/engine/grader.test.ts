@@ -62,8 +62,8 @@ const blank = calculateOptimization(emptyAssessment());
 	it('blank has 8 domains', () => {
 		expect(blank.domains.length).toEqual(8);
 	});
-	it('blank all optimised/na', () => {
-		expect(blank.counts.optimised).toEqual(8);
+	it('blank all optimized/na', () => {
+		expect(blank.counts.optimized).toEqual(8);
 	});
 });
 
@@ -83,8 +83,8 @@ describe('Anaemia domain, and the 4 vs 8 week lead time', () => {
   	it('10w >= 8w so action-required', () => {
 		expect(d.status).toEqual('action-required');
 	});
-  	it('readiness optimisation-required', () => {
-		expect(r.computedReadiness).toEqual('optimisation-required');
+  	it('readiness optimization-required', () => {
+		expect(r.computedReadiness).toEqual('optimization-required');
 	});
 }
 {
@@ -103,7 +103,7 @@ describe('Anaemia domain, and the 4 vs 8 week lead time', () => {
 		expect(r.computedReadiness).toEqual('defer-surgery');
 	});
   	it('raises the gating flag', () => {
-		expect(r.flags.some((f) => f.category === 'insufficient-time-to-optimise')).toEqual(true);
+		expect(r.flags.some((f) => f.category === 'insufficient-time-to-optimize')).toEqual(true);
 	});
 }
 {
@@ -120,7 +120,7 @@ describe('Anaemia domain, and the 4 vs 8 week lead time', () => {
 		expect(domain(r, 'anaemia').status).toEqual('action-required');
 	});
   	it('no longer defers', () => {
-		expect(r.computedReadiness).toEqual('optimisation-required');
+		expect(r.computedReadiness).toEqual('optimization-required');
 	});
 }
 {
@@ -136,8 +136,8 @@ describe('Anaemia domain, and the 4 vs 8 week lead time', () => {
   	it('started -> in-progress', () => {
 		expect(domain(r, 'anaemia').status).toEqual('in-progress');
 	});
-  	it('readiness optimisation-in-progress', () => {
-		expect(r.computedReadiness).toEqual('optimisation-in-progress');
+  	it('readiness optimization-in-progress', () => {
+		expect(r.computedReadiness).toEqual('optimization-in-progress');
 	});
 }
 });
@@ -259,8 +259,8 @@ describe('Smoking gate boundary', () => {
 		expect(domain(calculateOptimization(a), 'smoking').status).toEqual('not-applicable');
 	});
   const b = dated(20); b.smoking.smokingStatus = 'former';
-  	it('former smoker -> optimised', () => {
-		expect(domain(calculateOptimization(b), 'smoking').status).toEqual('optimised');
+  	it('former smoker -> optimized', () => {
+		expect(domain(calculateOptimization(b), 'smoking').status).toEqual('optimized');
 	});
 }
 {
@@ -409,6 +409,100 @@ describe('Medication', () => {
 		expect(domain(calculateOptimization(a), 'medication').status).toEqual('not-applicable');
 	});
 }
+{
+  const a = dated(20);
+  a.medication.takesGlp1Agonist = 'yes';
+  a.medication.glp1HeldPerGuideline = 'yes';
+  a.medication.glp1GiSymptoms = 'no';
+  	it('GLP-1 held per guideline and asymptomatic does not flag aspiration risk', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'glp1-agonist-aspiration-risk')).toEqual(false);
+	});
+}
+});
+
+describe('Fried Frailty Phenotype', () => {
+{
+  const a = dated(20);
+  a.frailty.friedWeakness = 'no'; a.frailty.friedSlowness = 'no';
+  a.frailty.friedLowPhysicalActivity = 'no'; a.frailty.friedExhaustion = 'no';
+  a.frailty.friedUnintentionalWeightLoss = 'no';
+  const r = calculateOptimization(a);
+  	it('all-no scores 0 and robust', () => {
+		expect(r.friedPhenotypeScore).toEqual(0);
+		expect(r.friedFrailtyCategory).toEqual('robust');
+	});
+}
+{
+  const a = dated(20);
+  a.frailty.friedWeakness = 'yes'; a.frailty.friedSlowness = 'yes';
+  a.frailty.friedLowPhysicalActivity = 'yes'; a.frailty.friedExhaustion = 'no';
+  a.frailty.friedUnintentionalWeightLoss = 'no';
+  const r = calculateOptimization(a);
+  	it('3 of 5 scores frail', () => {
+		expect(r.friedPhenotypeScore).toEqual(3);
+		expect(r.friedFrailtyCategory).toEqual('frail');
+	});
+}
+{
+  const a = dated(20);
+  const r = calculateOptimization(a);
+  	it('unanswered leaves score null', () => {
+		expect(r.friedPhenotypeScore).toBeNull();
+		expect(r.friedFrailtyCategory).toEqual('');
+	});
+}
+});
+
+describe('Frailty x GLP-1 intersecting risks', () => {
+{
+  const a = dated(20);
+  a.frailty.clinicalFrailtyScale = 6;
+  	it('CFS >= 5 without Mini-Cog flags cognitive-assessment-indicated', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'cognitive-assessment-indicated')).toEqual(true);
+	});
+}
+{
+  const a = dated(20);
+  a.frailty.clinicalFrailtyScale = 6;
+  a.frailty.miniCogPerformed = 'yes';
+  	it('Mini-Cog performed clears the flag', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'cognitive-assessment-indicated')).toEqual(false);
+	});
+}
+{
+  const a = dated(20);
+  a.medication.takesGlp1Agonist = 'yes';
+  a.frailty.clinicalFrailtyScale = 5;
+  	it('frail + GLP-1 flags sarcopenia-risk', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'sarcopenia-risk')).toEqual(true);
+	});
+}
+{
+  const a = dated(20);
+  a.medication.takesGlp1Agonist = 'yes';
+  a.medication.glp1GiSymptoms = 'yes';
+  a.frailty.clinicalFrailtyScale = 5;
+  	it('frail + GLP-1 + GI symptoms flags dehydration-aki-risk', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'dehydration-aki-risk')).toEqual(true);
+	});
+}
+{
+  const a = dated(20);
+  a.medication.takesGlp1Agonist = 'yes';
+  a.medication.glp1HeldPerGuideline = 'yes';
+  a.glycaemic.insulinRegimen = 'basal-bolus';
+  	it('held GLP-1 + insulin flags rebound-glycaemic-risk', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'rebound-glycaemic-risk')).toEqual(true);
+	});
+}
+{
+  const a = dated(20);
+  a.medication.takesGlp1Agonist = 'yes';
+  a.glycaemic.insulinRegimen = 'basal-bolus';
+  	it('continued GLP-1 + insulin does not flag rebound-glycaemic-risk', () => {
+		expect(calculateOptimization(a).flags.some((f) => f.category === 'rebound-glycaemic-risk')).toEqual(false);
+	});
+}
 });
 
 describe('Cardiorespiratory', () => {
@@ -459,10 +553,10 @@ describe('Ungated (no surgery date)', () => {
 		expect(domain(r, 'anaemia').status).toEqual('action-required');
 	});
   	it('ungated never defers on time', () => {
-		expect(r.computedReadiness).toEqual('optimisation-required');
+		expect(r.computedReadiness).toEqual('optimization-required');
 	});
   	it('ungated raises no gating flag', () => {
-		expect(r.flags.some((f) => f.category === 'insufficient-time-to-optimise')).toEqual(false);
+		expect(r.flags.some((f) => f.category === 'insufficient-time-to-optimize')).toEqual(false);
 	});
 }
 });
@@ -535,7 +629,7 @@ describe('Override changes the band but never the flags', () => {
 		expect(JSON.stringify(after.flags)).toEqual(JSON.stringify(before.flags));
 	});
   	it('gating flag survives the override', () => {
-		expect(after.flags.some((f) => f.category === 'insufficient-time-to-optimise')).toEqual(true);
+		expect(after.flags.some((f) => f.category === 'insufficient-time-to-optimize')).toEqual(true);
 	});
 }
 {

@@ -180,7 +180,7 @@ CREATE TRIGGER trigger_clinician_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE clinician IS
-    'Clinician, i.e. the practitioner who conducts the perioperative optimisation assessment.';
+    'Clinician, i.e. the practitioner who conducts the perioperative optimization assessment.';
 COMMENT ON COLUMN clinician.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN clinician.created_at IS
@@ -227,7 +227,7 @@ CREATE INDEX clinician_index_gto
 -- ========================================================================
 
 -- Medication catalogue, carrying the perioperative hold guidance that drives
--- the `medication` optimisation domain. A deployment can seed this table with
+-- the `medication` optimization domain. A deployment can seed this table with
 -- local formulary guidance so the front-end surfaces the right prompt per drug.
 -- See ../doc/medication-hold-rules.md.
 
@@ -268,7 +268,7 @@ CREATE TRIGGER trigger_medication_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE medication IS
-    'Medication catalogue, carrying the perioperative hold guidance that drives the medication optimisation domain.';
+    'Medication catalogue, carrying the perioperative hold guidance that drives the medication optimization domain.';
 COMMENT ON COLUMN medication.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN medication.created_at IS
@@ -312,7 +312,7 @@ CREATE INDEX medication_index_gto
 
 -- Join table: which medications a patient takes, with the agreed perioperative
 -- hold-and-restart plan recorded per drug rather than as a single free-text
--- note, so the medication optimisation domain can be graded per medicine.
+-- note, so the medication optimization domain can be graded per medicine.
 
 CREATE TABLE patient_medication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -386,7 +386,7 @@ COMMENT ON COLUMN patient_medication.hold_start_before_days IS
 COMMENT ON COLUMN patient_medication.restart_after_days IS
     'Agreed number of days after surgery to restart this medicine.';
 COMMENT ON COLUMN patient_medication.hold_plan_agreed IS
-    'Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimisation domain.';
+    'Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimization domain.';
 COMMENT ON COLUMN patient_medication.hold_plan_agreed_by IS
     'Who agreed the hold-and-restart plan.';
 COMMENT ON COLUMN patient_medication.hold_plan_agreed_on IS
@@ -532,12 +532,12 @@ COMMENT ON COLUMN patient_allergy.notes IS
 -- BEGIN 08_create_table_perioperative_optimization.sql
 -- ========================================================================
 
--- Perioperative optimisation: the payload of the 16-step single-page wizard.
+-- Perioperative optimization: the payload of the 16-step single-page wizard.
 --
 -- Column groups follow the wizard steps in order. Unanswered text and enum
 -- columns default to the empty string; unanswered numeric, date, and time
 -- columns are NULL. See ../index.md for the wizard table, ../spec/index.md for
--- the contract, and ../doc/optimisation-domains.md for the thresholds that the
+-- the contract, and ../doc/optimization-domains.md for the thresholds that the
 -- engine applies to these columns.
 
 CREATE TABLE perioperative_optimization (
@@ -601,6 +601,13 @@ CREATE TABLE perioperative_optimization (
     takes_ace_inhibitor_or_arb VARCHAR(5) NOT NULL DEFAULT '' CHECK (takes_ace_inhibitor_or_arb IN ('yes', 'no', '')),
     takes_sglt2_inhibitor VARCHAR(5) NOT NULL DEFAULT '' CHECK (takes_sglt2_inhibitor IN ('yes', 'no', '')),
     takes_glp1_agonist VARCHAR(5) NOT NULL DEFAULT '' CHECK (takes_glp1_agonist IN ('yes', 'no', '')),
+    glp1_formulation VARCHAR(10) NOT NULL DEFAULT '' CHECK (glp1_formulation IN ('daily', 'weekly', '')),
+    glp1_held_per_guideline VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_held_per_guideline IN ('yes', 'no', '')),
+    glp1_extended_clear_fluids_confirmed VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_extended_clear_fluids_confirmed IN ('yes', 'no', '')),
+    glp1_gi_symptoms VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_gi_symptoms IN ('yes', 'no', '')),
+    glp1_gi_symptoms_details VARCHAR(500) NOT NULL DEFAULT '',
+    glp1_gastric_ultrasound_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_gastric_ultrasound_performed IN ('yes', 'no', '')),
+    glp1_gastric_ultrasound_findings VARCHAR(20) NOT NULL DEFAULT '' CHECK (glp1_gastric_ultrasound_findings IN ('empty', 'low-risk', 'full-stomach', '')),
     takes_corticosteroid VARCHAR(5) NOT NULL DEFAULT '' CHECK (takes_corticosteroid IN ('yes', 'no', '')),
     takes_immunosuppressant VARCHAR(5) NOT NULL DEFAULT '' CHECK (takes_immunosuppressant IN ('yes', 'no', '')),
     takes_hormone_therapy VARCHAR(5) NOT NULL DEFAULT '' CHECK (takes_hormone_therapy IN ('yes', 'no', '')),
@@ -705,10 +712,19 @@ CREATE TABLE perioperative_optimization (
     prehabilitation_enrolled VARCHAR(5) NOT NULL DEFAULT '' CHECK (prehabilitation_enrolled IN ('yes', 'no', '')),
     prehabilitation_sessions_per_week INTEGER CHECK (prehabilitation_sessions_per_week IS NULL OR prehabilitation_sessions_per_week BETWEEN 0 AND 21),
     prehabilitation_start_date DATE,
+    protein_supplementation_recommended VARCHAR(5) NOT NULL DEFAULT '' CHECK (protein_supplementation_recommended IN ('yes', 'no', '')),
     fitness_notes TEXT NOT NULL DEFAULT '',
 
     -- Step 12: frailty, cognition, and falls
     clinical_frailty_scale INTEGER CHECK (clinical_frailty_scale IS NULL OR clinical_frailty_scale BETWEEN 1 AND 9),
+    fried_weakness VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_weakness IN ('yes', 'no', '')),
+    fried_slowness VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_slowness IN ('yes', 'no', '')),
+    fried_low_physical_activity VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_low_physical_activity IN ('yes', 'no', '')),
+    fried_exhaustion VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_exhaustion IN ('yes', 'no', '')),
+    fried_unintentional_weight_loss VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_unintentional_weight_loss IN ('yes', 'no', '')),
+    risk_analysis_index_score INTEGER CHECK (risk_analysis_index_score IS NULL OR risk_analysis_index_score BETWEEN 0 AND 100),
+    mini_cog_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (mini_cog_performed IN ('yes', 'no', '')),
+    mini_cog_score INTEGER CHECK (mini_cog_score IS NULL OR mini_cog_score BETWEEN 0 AND 5),
     cognitive_screen_tool VARCHAR(20) NOT NULL DEFAULT '' CHECK (cognitive_screen_tool IN ('4at', 'amt', 'moca', 'mmse', 'none', '')),
     cognitive_screen_score NUMERIC(4,1),
     cognitive_impairment VARCHAR(15) NOT NULL DEFAULT '' CHECK (cognitive_impairment IN ('none', 'mild', 'moderate', 'severe', '')),
@@ -719,7 +735,7 @@ CREATE TABLE perioperative_optimization (
     care_package VARCHAR(20) NOT NULL DEFAULT '' CHECK (care_package IN ('none', 'informal', 'daily', 'twice-daily', 'live-in', '')),
     frailty_notes TEXT NOT NULL DEFAULT '',
 
-    -- Step 13: cardiorespiratory optimisation
+    -- Step 13: cardiorespiratory optimization
     systolic_bp INTEGER CHECK (systolic_bp IS NULL OR systolic_bp BETWEEN 50 AND 300),
     diastolic_bp INTEGER CHECK (diastolic_bp IS NULL OR diastolic_bp BETWEEN 20 AND 200),
     heart_rate INTEGER CHECK (heart_rate IS NULL OR heart_rate BETWEEN 20 AND 250),
@@ -752,7 +768,7 @@ CREATE TABLE perioperative_optimization (
     psychological_support_offered VARCHAR(5) NOT NULL DEFAULT '' CHECK (psychological_support_offered IN ('yes', 'no', '')),
     social_notes TEXT NOT NULL DEFAULT '',
 
-    -- Step 15: optimisation plan by domain
+    -- Step 15: optimization plan by domain
     plan_anaemia VARCHAR(500) NOT NULL DEFAULT '',
     referral_anaemia VARCHAR(5) NOT NULL DEFAULT '' CHECK (referral_anaemia IN ('yes', 'no', '')),
     plan_glycaemic_control VARCHAR(500) NOT NULL DEFAULT '',
@@ -776,7 +792,7 @@ CREATE TABLE perioperative_optimization (
     plan_notes TEXT NOT NULL DEFAULT '',
 
     -- Step 16: readiness summary and sign-off
-    gate_decision VARCHAR(30) NOT NULL DEFAULT '' CHECK (gate_decision IN ('proceed', 'proceed-with-prehabilitation', 'defer-and-optimise', 'accept-unoptimised-risk', 'mdt-review', 'cancel', '')),
+    gate_decision VARCHAR(30) NOT NULL DEFAULT '' CHECK (gate_decision IN ('proceed', 'proceed-with-prehabilitation', 'defer-and-optimize', 'accept-unoptimized-risk', 'mdt-review', 'cancel', '')),
     additional_notes TEXT NOT NULL DEFAULT ''
 );
 
@@ -798,7 +814,7 @@ CREATE TRIGGER trigger_perioperative_optimization_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE perioperative_optimization IS
-    'Perioperative optimisation: the payload of the 16-step single-page wizard, covering the eight optimisation domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan.';
+    'Perioperative optimization: the payload of the 16-step single-page wizard, covering the eight optimization domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan.';
 COMMENT ON COLUMN perioperative_optimization.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN perioperative_optimization.created_at IS
@@ -826,7 +842,7 @@ COMMENT ON COLUMN perioperative_optimization.pathway_stage IS
 COMMENT ON COLUMN perioperative_optimization.assessment_mode IS
     'How the assessment was conducted, including online-portal for the patient-completed pattern such as MyPreOp.';
 COMMENT ON COLUMN perioperative_optimization.referral_source IS
-    'Who referred the patient into the perioperative optimisation service.';
+    'Who referred the patient into the perioperative optimization service.';
 COMMENT ON COLUMN perioperative_optimization.planned_procedure IS
     'The procedure the patient is listed for.';
 COMMENT ON COLUMN perioperative_optimization.surgical_specialty IS
@@ -834,11 +850,11 @@ COMMENT ON COLUMN perioperative_optimization.surgical_specialty IS
 COMMENT ON COLUMN perioperative_optimization.consultant_surgeon IS
     'Consultant surgeon responsible for the procedure.';
 COMMENT ON COLUMN perioperative_optimization.planned_surgery_date IS
-    'Planned date of surgery. With assessment_date this determines weeks_to_surgery, which every optimisation domain lead time is gated against. A missing date disables gating and marks every triggered domain action-required.';
+    'Planned date of surgery. With assessment_date this determines weeks_to_surgery, which every optimization domain lead time is gated against. A missing date disables gating and marks every triggered domain action-required.';
 COMMENT ON COLUMN perioperative_optimization.urgency IS
-    'Urgency of the procedure. Emergency surgery is out of scope for this form: there is no lead time to optimise in.';
+    'Urgency of the procedure. Emergency surgery is out of scope for this form: there is no lead time to optimize in.';
 COMMENT ON COLUMN perioperative_optimization.surgical_severity IS
-    'Surgical severity band, where major and major-plus raise the priority of an unoptimised smoking domain.';
+    'Surgical severity band, where major and major-plus raise the priority of an unoptimized smoking domain.';
 COMMENT ON COLUMN perioperative_optimization.laterality IS
     'Side of the body the procedure is on, where applicable.';
 COMMENT ON COLUMN perioperative_optimization.anticipated_blood_loss_ml IS
@@ -860,13 +876,13 @@ COMMENT ON COLUMN perioperative_optimization.condition_hepatic IS
 COMMENT ON COLUMN perioperative_optimization.condition_stroke IS
     'Whether the patient has had a stroke or transient ischaemic attack.';
 COMMENT ON COLUMN perioperative_optimization.condition_cancer IS
-    'Whether the patient has a cancer diagnosis, which often constrains how long surgery can be deferred to optimise.';
+    'Whether the patient has a cancer diagnosis, which often constrains how long surgery can be deferred to optimize.';
 COMMENT ON COLUMN perioperative_optimization.condition_rheumatological IS
     'Whether the patient has a rheumatological diagnosis, which often means immunosuppressant therapy.';
 COMMENT ON COLUMN perioperative_optimization.condition_thyroid IS
     'Whether the patient has a thyroid diagnosis.';
 COMMENT ON COLUMN perioperative_optimization.condition_other IS
-    'Any other active diagnosis relevant to perioperative optimisation.';
+    'Any other active diagnosis relevant to perioperative optimization.';
 COMMENT ON COLUMN perioperative_optimization.previous_surgery IS
     'Whether the patient has had previous surgery.';
 COMMENT ON COLUMN perioperative_optimization.previous_surgery_detail IS
@@ -902,7 +918,21 @@ COMMENT ON COLUMN perioperative_optimization.takes_ace_inhibitor_or_arb IS
 COMMENT ON COLUMN perioperative_optimization.takes_sglt2_inhibitor IS
     'Whether the patient takes an SGLT2 inhibitor. These can precipitate ketoacidosis with a normal blood glucose, so an unheld SGLT2 inhibitor fires a high-priority flag.';
 COMMENT ON COLUMN perioperative_optimization.takes_glp1_agonist IS
-    'Whether the patient takes a GLP-1 receptor agonist. These delay gastric emptying, so the patient may have a full stomach despite standard fasting; this fires a high-priority aspiration flag whenever the drug is in use.';
+    'Whether the patient takes a GLP-1 receptor agonist (semaglutide, tirzepatide, and related drugs). These delay gastric emptying, so the patient may have a full stomach despite standard fasting; the aspiration-risk flag fires when GI symptoms are active or the drug was not held/confirmed per guideline, per glp1_held_per_guideline and glp1_extended_clear_fluids_confirmed.';
+COMMENT ON COLUMN perioperative_optimization.glp1_formulation IS
+    'GLP-1 receptor agonist dosing formulation: daily or weekly. Drives the hold window -- hold daily formulations day-of, hold weekly formulations one week before surgery.';
+COMMENT ON COLUMN perioperative_optimization.glp1_held_per_guideline IS
+    'Whether the GLP-1 receptor agonist was held per the agreed perioperative schedule.';
+COMMENT ON COLUMN perioperative_optimization.glp1_extended_clear_fluids_confirmed IS
+    'Whether the patient instead followed the extended-fasting alternative: 24-hour solid fast plus 4-8 hour clear-liquid fast, when the medication could not be held.';
+COMMENT ON COLUMN perioperative_optimization.glp1_gi_symptoms IS
+    'Whether the patient reports active GLP-1-related gastrointestinal symptoms (nausea, vomiting, early satiety, reflux, bloating) at the time of assessment.';
+COMMENT ON COLUMN perioperative_optimization.glp1_gi_symptoms_details IS
+    'Free-text description of the reported GLP-1-related gastrointestinal symptoms and their severity.';
+COMMENT ON COLUMN perioperative_optimization.glp1_gastric_ultrasound_performed IS
+    'Whether point-of-care gastric ultrasound was performed to assess residual gastric content.';
+COMMENT ON COLUMN perioperative_optimization.glp1_gastric_ultrasound_findings IS
+    'Gastric ultrasound finding: empty, low-risk, or full-stomach.';
 COMMENT ON COLUMN perioperative_optimization.takes_corticosteroid IS
     'Whether the patient takes a systemic corticosteroid, which may require perioperative supplementation and must never be stopped abruptly.';
 COMMENT ON COLUMN perioperative_optimization.takes_immunosuppressant IS
@@ -910,7 +940,7 @@ COMMENT ON COLUMN perioperative_optimization.takes_immunosuppressant IS
 COMMENT ON COLUMN perioperative_optimization.takes_hormone_therapy IS
     'Whether the patient takes hormone therapy or a combined oral contraceptive, which carries a venous thromboembolism risk.';
 COMMENT ON COLUMN perioperative_optimization.medication_hold_plan_agreed IS
-    'Whether a perioperative hold-and-restart plan has been agreed with the prescriber. This is the medication domain''s optimisation criterion.';
+    'Whether a perioperative hold-and-restart plan has been agreed with the prescriber. This is the medication domain''s optimization criterion.';
 COMMENT ON COLUMN perioperative_optimization.medication_hold_plan_agreed_by IS
     'Who agreed the hold-and-restart plan, because the prescriber owns the decision.';
 COMMENT ON COLUMN perioperative_optimization.medication_adherence IS
@@ -942,7 +972,7 @@ COMMENT ON COLUMN perioperative_optimization.bloods_sample_date IS
 COMMENT ON COLUMN perioperative_optimization.haemoglobin_g_per_l IS
     'Haemoglobin in g per litre. Below 130 in men or 120 in women triggers the anaemia domain; below 80 forces a defer-surgery band and a high-priority flag.';
 COMMENT ON COLUMN perioperative_optimization.mean_cell_volume_fl IS
-    'Mean cell volume in femtolitres, which helps characterise the anaemia.';
+    'Mean cell volume in femtolitres, which helps characterize the anaemia.';
 COMMENT ON COLUMN perioperative_optimization.ferritin_ug_per_l IS
     'Ferritin in micrograms per litre. Below 30 indicates absolute iron deficiency and triggers the anaemia domain.';
 COMMENT ON COLUMN perioperative_optimization.transferrin_saturation_percent IS
@@ -956,7 +986,7 @@ COMMENT ON COLUMN perioperative_optimization.c_reactive_protein_mg_per_l IS
 COMMENT ON COLUMN perioperative_optimization.creatinine_umol_per_l IS
     'Serum creatinine in micromol per litre.';
 COMMENT ON COLUMN perioperative_optimization.egfr_ml_per_min IS
-    'Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 raises the renal-optimisation flag.';
+    'Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 raises the renal-optimization flag.';
 COMMENT ON COLUMN perioperative_optimization.anaemia_known_cause IS
     'Known or suspected cause of the anaemia. Iron deficiency in an adult may indicate gastrointestinal blood loss and warrants its own pathway.';
 COMMENT ON COLUMN perioperative_optimization.anaemia_treatment_started IS
@@ -1083,10 +1113,28 @@ COMMENT ON COLUMN perioperative_optimization.prehabilitation_sessions_per_week I
     'Number of prehabilitation sessions per week.';
 COMMENT ON COLUMN perioperative_optimization.prehabilitation_start_date IS
     'Date the prehabilitation programme started.';
+COMMENT ON COLUMN perioperative_optimization.protein_supplementation_recommended IS
+    'Whether protein supplementation is recommended, particularly for a frail patient on a GLP-1 receptor agonist at risk of accelerated sarcopenia.';
 COMMENT ON COLUMN perioperative_optimization.fitness_notes IS
     'Free-text notes about functional capacity and physical fitness.';
 COMMENT ON COLUMN perioperative_optimization.clinical_frailty_scale IS
-    'Clinical Frailty Scale, 1 to 9. Reported and flagged at 7 or above, but not gated, because frailty is rarely reversible in a weeks-long window.';
+    'Clinical Frailty Scale, 1 to 9. Reported and flagged at 7 or above, but not gated, because frailty is rarely reversible in a weeks-long window. A score of 5 or above indicates a Mini-Cog.';
+COMMENT ON COLUMN perioperative_optimization.fried_weakness IS
+    'Fried Frailty Phenotype criterion: weakness, i.e. reduced grip strength for sex and BMI.';
+COMMENT ON COLUMN perioperative_optimization.fried_slowness IS
+    'Fried Frailty Phenotype criterion: slowness, i.e. reduced walking speed for sex and height.';
+COMMENT ON COLUMN perioperative_optimization.fried_low_physical_activity IS
+    'Fried Frailty Phenotype criterion: low physical activity level.';
+COMMENT ON COLUMN perioperative_optimization.fried_exhaustion IS
+    'Fried Frailty Phenotype criterion: self-reported exhaustion.';
+COMMENT ON COLUMN perioperative_optimization.fried_unintentional_weight_loss IS
+    'Fried Frailty Phenotype criterion: unintentional weight loss.';
+COMMENT ON COLUMN perioperative_optimization.risk_analysis_index_score IS
+    'Risk Analysis Index (RAI) score; higher scores indicate greater frailty.';
+COMMENT ON COLUMN perioperative_optimization.mini_cog_performed IS
+    'Whether the Mini-Cog cognitive screen was performed, indicated when the Clinical Frailty Scale is 5 or above.';
+COMMENT ON COLUMN perioperative_optimization.mini_cog_score IS
+    'Mini-Cog total score 0-5 (three-item recall plus clock-draw test). A score of 0-2 suggests cognitive impairment.';
 COMMENT ON COLUMN perioperative_optimization.cognitive_screen_tool IS
     'Which cognitive screening tool was used.';
 COMMENT ON COLUMN perioperative_optimization.cognitive_screen_score IS
@@ -1126,7 +1174,7 @@ COMMENT ON COLUMN perioperative_optimization.asthma_control IS
 COMMENT ON COLUMN perioperative_optimization.copd_control IS
     'Chronic obstructive pulmonary disease control. Uncontrolled COPD triggers the cardiorespiratory domain.';
 COMMENT ON COLUMN perioperative_optimization.inhaler_technique_checked IS
-    'Whether inhaler technique has been checked, one of the quickest respiratory optimisations available.';
+    'Whether inhaler technique has been checked, one of the quickest respiratory optimizations available.';
 COMMENT ON COLUMN perioperative_optimization.rescue_steroids IS
     'Whether the patient has rescue steroids at home.';
 COMMENT ON COLUMN perioperative_optimization.spirometry_fev1_percent IS
@@ -1138,9 +1186,9 @@ COMMENT ON COLUMN perioperative_optimization.sleep_apnoea_diagnosis IS
 COMMENT ON COLUMN perioperative_optimization.cpap_use IS
     'Whether the patient uses continuous positive airway pressure, which should be brought to hospital.';
 COMMENT ON COLUMN perioperative_optimization.oxygen_saturation_percent IS
-    'Peripheral oxygen saturation as a percentage on room air. Below 92 fires the respiratory-optimisation flag.';
+    'Peripheral oxygen saturation as a percentage on room air. Below 92 fires the respiratory-optimization flag.';
 COMMENT ON COLUMN perioperative_optimization.cardiorespiratory_notes IS
-    'Free-text notes about cardiorespiratory optimisation.';
+    'Free-text notes about cardiorespiratory optimization.';
 COMMENT ON COLUMN perioperative_optimization.anxiety_level IS
     'The patient''s anxiety about the procedure, which affects recovery and adherence to the plan.';
 COMMENT ON COLUMN perioperative_optimization.depression_screen IS
@@ -1164,49 +1212,49 @@ COMMENT ON COLUMN perioperative_optimization.psychological_support_offered IS
 COMMENT ON COLUMN perioperative_optimization.social_notes IS
     'Free-text notes about psychological readiness and social support.';
 COMMENT ON COLUMN perioperative_optimization.plan_anaemia IS
-    'Optimisation plan for the anaemia domain.';
+    'Optimization plan for the anaemia domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_anaemia IS
     'Whether an onward referral was made for the anaemia domain, such as to haematology or an iron-infusion service.';
 COMMENT ON COLUMN perioperative_optimization.plan_glycaemic_control IS
-    'Optimisation plan for the glycaemic-control domain.';
+    'Optimization plan for the glycaemic-control domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_glycaemic_control IS
     'Whether an onward referral was made for the glycaemic-control domain, such as to the diabetes team.';
 COMMENT ON COLUMN perioperative_optimization.plan_smoking IS
-    'Optimisation plan for the smoking domain.';
+    'Optimization plan for the smoking domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_smoking IS
     'Whether an onward referral was made for the smoking domain, such as to a stop-smoking service.';
 COMMENT ON COLUMN perioperative_optimization.plan_alcohol IS
-    'Optimisation plan for the alcohol domain.';
+    'Optimization plan for the alcohol domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_alcohol IS
     'Whether an onward referral was made for the alcohol domain, such as to alcohol services.';
 COMMENT ON COLUMN perioperative_optimization.plan_nutrition IS
-    'Optimisation plan for the nutrition domain.';
+    'Optimization plan for the nutrition domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_nutrition IS
     'Whether an onward referral was made for the nutrition domain, such as to a dietitian.';
 COMMENT ON COLUMN perioperative_optimization.plan_physical_fitness IS
-    'Optimisation plan for the physical-fitness domain.';
+    'Optimization plan for the physical-fitness domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_physical_fitness IS
     'Whether an onward referral was made for the physical-fitness domain, such as to a prehabilitation programme.';
 COMMENT ON COLUMN perioperative_optimization.plan_medication IS
-    'Optimisation plan for the medication domain, i.e. the agreed hold-and-restart arrangements.';
+    'Optimization plan for the medication domain, i.e. the agreed hold-and-restart arrangements.';
 COMMENT ON COLUMN perioperative_optimization.referral_medication IS
     'Whether an onward referral was made for the medication domain, such as to a pharmacist or the prescribing specialty.';
 COMMENT ON COLUMN perioperative_optimization.plan_cardiorespiratory IS
-    'Optimisation plan for the cardiorespiratory domain.';
+    'Optimization plan for the cardiorespiratory domain.';
 COMMENT ON COLUMN perioperative_optimization.referral_cardiorespiratory IS
     'Whether an onward referral was made for the cardiorespiratory domain, such as to cardiology, respiratory medicine, or a sleep service.';
 COMMENT ON COLUMN perioperative_optimization.responsible_clinician IS
-    'Clinician responsible for delivering and reviewing the optimisation plan.';
+    'Clinician responsible for delivering and reviewing the optimization plan.';
 COMMENT ON COLUMN perioperative_optimization.plan_agreed_with_patient IS
-    'Whether the patient agreed to the optimisation plan.';
+    'Whether the patient agreed to the optimization plan.';
 COMMENT ON COLUMN perioperative_optimization.plan_shared_with_patient IS
     'Whether a copy of the plan was given to the patient.';
 COMMENT ON COLUMN perioperative_optimization.next_review_date IS
-    'Date of the next planned optimisation review.';
+    'Date of the next planned optimization review.';
 COMMENT ON COLUMN perioperative_optimization.plan_notes IS
-    'Free-text notes about the optimisation plan as a whole.';
+    'Free-text notes about the optimization plan as a whole.';
 COMMENT ON COLUMN perioperative_optimization.gate_decision IS
-    'The explicit human decision recorded at sign-off. A computed defer-surgery band never decides on its own: a clinician must choose to proceed, proceed with prehabilitation, defer and optimise, accept the unoptimised risk, refer to MDT, or cancel.';
+    'The explicit human decision recorded at sign-off. A computed defer-surgery band never decides on its own: a clinician must choose to proceed, proceed with prehabilitation, defer and optimize, accept the unoptimized risk, refer to MDT, or cancel.';
 COMMENT ON COLUMN perioperative_optimization.additional_notes IS
     'Any additional notes the clinician records.';
 
@@ -1218,7 +1266,7 @@ COMMENT ON COLUMN perioperative_optimization.additional_notes IS
 -- BEGIN 09_create_table_perioperative_optimization_grade.sql
 -- ========================================================================
 
--- Computed and signed-off grading result for one perioperative optimisation
+-- Computed and signed-off grading result for one perioperative optimization
 -- assessment. Stores the engine-computed surgical readiness band and the
 -- clinician-final band with an override reason, plus the derived instrument
 -- scores and the weeks remaining before surgery that drove the gating.
@@ -1246,9 +1294,13 @@ CREATE TABLE perioperative_optimization_grade (
         CHECK (duke_activity_status_index IS NULL OR duke_activity_status_index BETWEEN 0 AND 60),
     clinical_frailty_scale INTEGER
         CHECK (clinical_frailty_scale IS NULL OR clinical_frailty_scale BETWEEN 1 AND 9),
+    fried_phenotype_score INTEGER
+        CHECK (fried_phenotype_score IS NULL OR fried_phenotype_score BETWEEN 0 AND 5),
+    fried_frailty_category VARCHAR(15) NOT NULL DEFAULT ''
+        CHECK (fried_frailty_category IN ('robust', 'pre-frail', 'frail', '')),
 
-    domains_optimised INTEGER
-        CHECK (domains_optimised IS NULL OR domains_optimised BETWEEN 0 AND 8),
+    domains_optimized INTEGER
+        CHECK (domains_optimized IS NULL OR domains_optimized BETWEEN 0 AND 8),
     domains_in_progress INTEGER
         CHECK (domains_in_progress IS NULL OR domains_in_progress BETWEEN 0 AND 8),
     domains_action_required INTEGER
@@ -1257,13 +1309,13 @@ CREATE TABLE perioperative_optimization_grade (
         CHECK (domains_insufficient_time IS NULL OR domains_insufficient_time BETWEEN 0 AND 8),
 
     computed_readiness VARCHAR(30) NOT NULL DEFAULT ''
-        CHECK (computed_readiness IN ('ready', 'optimisation-in-progress', 'optimisation-required', 'defer-surgery', '')),
+        CHECK (computed_readiness IN ('ready', 'optimization-in-progress', 'optimization-required', 'defer-surgery', '')),
     final_readiness VARCHAR(30) NOT NULL DEFAULT ''
-        CHECK (final_readiness IN ('ready', 'optimisation-in-progress', 'optimisation-required', 'defer-surgery', '')),
+        CHECK (final_readiness IN ('ready', 'optimization-in-progress', 'optimization-required', 'defer-surgery', '')),
     override_reason VARCHAR(500) NOT NULL DEFAULT '',
 
     gate_decision VARCHAR(30) NOT NULL DEFAULT ''
-        CHECK (gate_decision IN ('proceed', 'proceed-with-prehabilitation', 'defer-and-optimise', 'accept-unoptimised-risk', 'mdt-review', 'cancel', '')),
+        CHECK (gate_decision IN ('proceed', 'proceed-with-prehabilitation', 'defer-and-optimize', 'accept-unoptimized-risk', 'mdt-review', 'cancel', '')),
     recommended_earliest_surgery_date DATE,
     clinician_notes TEXT NOT NULL DEFAULT '',
     signed_by_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -1277,7 +1329,7 @@ CREATE TRIGGER trigger_perioperative_optimization_grade_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE perioperative_optimization_grade IS
-    'Computed and signed-off grading result for one perioperative optimisation assessment, holding the engine-computed and clinician-final surgical readiness bands.';
+    'Computed and signed-off grading result for one perioperative optimization assessment, holding the engine-computed and clinician-final surgical readiness bands.';
 COMMENT ON COLUMN perioperative_optimization_grade.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN perioperative_optimization_grade.created_at IS
@@ -1304,8 +1356,12 @@ COMMENT ON COLUMN perioperative_optimization_grade.duke_activity_status_index IS
     'Duke Activity Status Index, contributing to the physical fitness domain.';
 COMMENT ON COLUMN perioperative_optimization_grade.clinical_frailty_scale IS
     'Clinical Frailty Scale, 1 to 9. Reported and flagged but not gated, because frailty is rarely reversible in the available window.';
-COMMENT ON COLUMN perioperative_optimization_grade.domains_optimised IS
-    'Count of the eight domains graded optimised or not-applicable.';
+COMMENT ON COLUMN perioperative_optimization_grade.fried_phenotype_score IS
+    'Fried Frailty Phenotype score (0-5): count of weakness, slowness, low activity, exhaustion, and unintentional weight loss criteria met.';
+COMMENT ON COLUMN perioperative_optimization_grade.fried_frailty_category IS
+    'Fried Frailty Phenotype category derived from the score: robust (0), pre-frail (1-2), or frail (3-5).';
+COMMENT ON COLUMN perioperative_optimization_grade.domains_optimized IS
+    'Count of the eight domains graded optimized or not-applicable.';
 COMMENT ON COLUMN perioperative_optimization_grade.domains_in_progress IS
     'Count of the eight domains graded in-progress.';
 COMMENT ON COLUMN perioperative_optimization_grade.domains_action_required IS
@@ -1319,7 +1375,7 @@ COMMENT ON COLUMN perioperative_optimization_grade.final_readiness IS
 COMMENT ON COLUMN perioperative_optimization_grade.override_reason IS
     'Reason the clinician set a final band differently from the computed band, mandatory when they differ. Safety flags are unaffected by the override.';
 COMMENT ON COLUMN perioperative_optimization_grade.gate_decision IS
-    'The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimise, accept-unoptimised-risk, mdt-review, or cancel.';
+    'The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimize, accept-unoptimized-risk, mdt-review, or cancel.';
 COMMENT ON COLUMN perioperative_optimization_grade.recommended_earliest_surgery_date IS
     'Earliest date at which every triggered domain would have had its full lead time, derived from the largest domain shortfall.';
 COMMENT ON COLUMN perioperative_optimization_grade.clinician_notes IS
@@ -1339,7 +1395,7 @@ COMMENT ON COLUMN perioperative_optimization_grade.graded_at IS
 -- BEGIN 10_create_table_perioperative_optimization_grade_domain.sql
 -- ========================================================================
 
--- Per-domain optimisation result: one row per optimisation domain per
+-- Per-domain optimization result: one row per optimization domain per
 -- assessment.
 --
 -- Unlike the sibling pre-operative forms, where the fired-rule list is an audit
@@ -1367,7 +1423,7 @@ CREATE TABLE perioperative_optimization_grade_domain (
             'cardiorespiratory'
         )),
     status VARCHAR(20) NOT NULL DEFAULT ''
-        CHECK (status IN ('optimised', 'in-progress', 'action-required', 'insufficient-time', 'not-applicable', '')),
+        CHECK (status IN ('optimized', 'in-progress', 'action-required', 'insufficient-time', 'not-applicable', '')),
     triggered BOOLEAN NOT NULL DEFAULT FALSE,
     lead_time_weeks INTEGER NOT NULL DEFAULT 0
         CHECK (lead_time_weeks BETWEEN 0 AND 52),
@@ -1397,7 +1453,7 @@ CREATE TRIGGER trigger_perioperative_optimization_grade_domain_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE perioperative_optimization_grade_domain IS
-    'Per-domain optimisation result, one row per optimisation domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.';
+    'Per-domain optimization result, one row per optimization domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.created_at IS
@@ -1409,13 +1465,13 @@ COMMENT ON COLUMN perioperative_optimization_grade_domain.deleted_at IS
 COMMENT ON COLUMN perioperative_optimization_grade_domain.perioperative_optimization_grade_id IS
     'Foreign key to the parent perioperative_optimization_grade table.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.domain IS
-    'Which of the eight optimisation domains this row grades.';
+    'Which of the eight optimization domains this row grades.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.status IS
-    'Domain status after time-to-surgery gating: optimised, in-progress, action-required, insufficient-time, or not-applicable.';
+    'Domain status after time-to-surgery gating: optimized, in-progress, action-required, insufficient-time, or not-applicable.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.triggered IS
-    'Whether the domain screening threshold was crossed, i.e. whether there is anything to optimise.';
+    'Whether the domain screening threshold was crossed, i.e. whether there is anything to optimize.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.lead_time_weeks IS
-    'Minimum weeks before surgery the intervention needs in order to work, per doc/optimisation-domains.md.';
+    'Minimum weeks before surgery the intervention needs in order to work, per doc/optimization-domains.md.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.weeks_shortfall IS
     'How many weeks short of the lead time this assessment is, i.e. how much later the surgery would have to be for the intervention to work. NULL when there is enough time.';
 COMMENT ON COLUMN perioperative_optimization_grade_domain.rule_id IS
@@ -1463,18 +1519,22 @@ CREATE TABLE perioperative_optimization_grade_flag (
             'sglt2-inhibitor-not-held',
             'glp1-agonist-aspiration-risk',
             'anticoagulation-plan-missing',
-            'insufficient-time-to-optimise',
+            'insufficient-time-to-optimize',
             'active-smoker-major-surgery',
             'alcohol-dependence-risk',
             'high-malnutrition-risk',
             'poor-functional-capacity',
             'severe-frailty',
             'uncontrolled-hypertension',
-            'cardiac-optimisation-required',
-            'respiratory-optimisation-required',
+            'cardiac-optimization-required',
+            'respiratory-optimization-required',
             'osa-unassessed',
-            'renal-optimisation-required',
+            'renal-optimization-required',
             'prior-anaesthetic-complication',
+            'cognitive-assessment-indicated',
+            'sarcopenia-risk',
+            'dehydration-aki-risk',
+            'rebound-glycaemic-risk',
             'psychological-support-required',
             'social-support-gap',
             'capacity-concern',
@@ -1517,11 +1577,11 @@ COMMENT ON COLUMN perioperative_optimization_grade_flag.perioperative_optimizati
 COMMENT ON COLUMN perioperative_optimization_grade_flag.flag_id IS
     'Stable flag identifier, such as F-SGLT2-INHIBITOR-NOT-HELD-001.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.category IS
-    'Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimise.';
+    'Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimize.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.priority IS
     'Priority: low, medium, or high.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.domain IS
-    'Optimisation domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.';
+    'Optimization domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.description IS
     'Human-readable description of what fired the flag.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.suggested_action IS

@@ -7,7 +7,7 @@
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
 <perioperative_optimization_grade_id>cc0e8400-e29b-41d4-a716-446655440007</perioperative_optimization_grade_id>
 <domain>anaemia</domain>
-<status>optimised</status>
+<status>optimized</status>
 <triggered>true</triggered>
 <lead_time_weeks>1</lead_time_weeks>
 <weeks_shortfall>1</weeks_shortfall>

@@ -3,7 +3,7 @@ import { applyAsaRules } from './asa-rules.js';
 import { applyMallampatiRules } from './mallampati-rules.js';
 import { applyRcriRules } from './rcri-rules.js';
 import { applyStopBangRules } from './stopbang-rules.js';
-import { applyFrailtyRules } from './frailty-rules.js';
+import { applyFrailtyRules, computeFriedPhenotypeScore } from './frailty-rules.js';
 import { detectAdditionalFlags } from './flagged-issues.js';
 import { maxAsa } from './utils.js';
 
@@ -13,9 +13,10 @@ function computeCompositeRisk(
   rcri: number,
   stopbang: number,
   frailty: number | null,
+  friedScore: number | null,
   hasHighPriorityFlag: boolean,
 ): CompositeRisk {
-  if (asa === 'V' || asa === 'VI' || frailty === 9 || (asa === 'IV' && hasHighPriorityFlag)) {
+  if (asa === 'V' || asa === 'VI' || frailty === 9 || friedScore === 5 || (asa === 'IV' && hasHighPriorityFlag)) {
     return 'critical';
   }
   if (
@@ -25,7 +26,8 @@ function computeCompositeRisk(
     mallampati === 'IV' ||
     rcri >= 2 ||
     stopbang >= 5 ||
-    (frailty !== null && frailty >= 5)
+    (frailty !== null && frailty >= 5) ||
+    (friedScore !== null && friedScore >= 3)
   ) {
     return 'high';
   }
@@ -34,7 +36,8 @@ function computeCompositeRisk(
     mallampati === 'II' ||
     rcri === 1 ||
     (stopbang >= 3 && stopbang <= 4) ||
-    (frailty !== null && frailty >= 4)
+    (frailty !== null && frailty >= 4) ||
+    (friedScore !== null && friedScore >= 1)
   ) {
     return 'moderate';
   }
@@ -52,6 +55,7 @@ export function calculateASA(data: ClinicianAssessment): GradingResult {
   const { score: rcriScore, firedRules: rcriFired } = applyRcriRules(data);
   const { score: stopbangScore, firedRules: stopbangFired } = applyStopBangRules(data);
   const frailtyFired = applyFrailtyRules(data);
+  const { score: friedPhenotypeScore, category: friedFrailtyCategory } = computeFriedPhenotypeScore(data);
   const additionalFlags = detectAdditionalFlags(data);
 
   const hasHighFlag = additionalFlags.some((f) => f.priority === 'high');
@@ -61,6 +65,7 @@ export function calculateASA(data: ClinicianAssessment): GradingResult {
     rcriScore,
     stopbangScore,
     data.functionalCapacity.clinicalFrailtyScale,
+    friedPhenotypeScore,
     hasHighFlag,
   );
 
@@ -76,6 +81,8 @@ export function calculateASA(data: ClinicianAssessment): GradingResult {
     rcriScore,
     stopbangScore,
     frailtyScale: data.functionalCapacity.clinicalFrailtyScale,
+    friedPhenotypeScore,
+    friedFrailtyCategory,
     compositeRisk,
     firedRules: [...asaFired, ...mallampatiFired, ...rcriFired, ...stopbangFired, ...frailtyFired],
     additionalFlags,

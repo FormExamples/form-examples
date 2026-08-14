@@ -1,5 +1,5 @@
 <script lang="ts">
-	// The optimisation wizard: one continuous single page holding all sixteen
+	// The optimization wizard: one continuous single page holding all sixteen
 	// steps in document order. The live panel keeps the weeks remaining and the
 	// per-domain statuses visible throughout, because the time available is the
 	// number the whole assessment turns on.
@@ -27,7 +27,7 @@
 	import Step12FrailtyAndCognition from '$lib/components/steps/Step12FrailtyAndCognition.svelte';
 	import Step13Cardiorespiratory from '$lib/components/steps/Step13Cardiorespiratory.svelte';
 	import Step14ReadinessAndSupport from '$lib/components/steps/Step14ReadinessAndSupport.svelte';
-	import Step15OptimisationPlan from '$lib/components/steps/Step15OptimisationPlan.svelte';
+	import Step15OptimizationPlan from '$lib/components/steps/Step15OptimizationPlan.svelte';
 	import Step16SummaryAndSignOff from '$lib/components/steps/Step16SummaryAndSignOff.svelte';
 
 	import { steps, TOTAL_STEPS } from '$lib/config/steps';
@@ -113,7 +113,7 @@
 			list.push({
 				id: 'signoff-gateDecision',
 				message:
-					'The computed band is "Defer surgery". Choose "Defer and optimise", or record "Accept unoptimised risk" explicitly'
+					'The computed band is "Defer surgery". Choose "Defer and optimize", or record "Accept unoptimized risk" explicitly'
 			});
 		}
 		return list;
@@ -151,7 +151,7 @@
 <main class="mx-16 px-4 py-8">
 	<h1 class="text-2xl font-bold text-base-content">Perioperative Optimization</h1>
 	<p class="mt-2 max-w-3xl text-sm text-base-content/70">
-		Sixteen steps on one continuous page. Each of the eight optimisation domains is graded against
+		Sixteen steps on one continuous page. Each of the eight optimization domains is graded against
 		the weeks remaining before surgery, so a finding becomes a decision. The draft is saved to this
 		browser as you work.
 	</p>
@@ -163,7 +163,7 @@
 		</p>
 	</div>
 
-	<StepList label="Perioperative optimisation steps" current={firstUnfinished - 1} class="mt-4">
+	<StepList label="Perioperative optimization steps" current={firstUnfinished - 1} class="mt-4">
 		{#each steps as step (step.number)}
 			<StepListItem
 				status={stepAnswered[step.number - 1]
@@ -179,7 +179,7 @@
 	</StepList>
 
 	<div class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-start">
-		<Form label="Perioperative optimisation assessment" onsubmit={(e: Event) => e.preventDefault()}>
+		<Form label="Perioperative optimization assessment" onsubmit={(e: Event) => e.preventDefault()}>
 			{#if showErrors && errors.length > 0}
 				<ErrorSummary title="Please correct the following">
 					<ul>
@@ -204,7 +204,7 @@
 			<div id="step-12"><Step12FrailtyAndCognition /></div>
 			<div id="step-13"><Step13Cardiorespiratory /></div>
 			<div id="step-14"><Step14ReadinessAndSupport /></div>
-			<div id="step-15"><Step15OptimisationPlan /></div>
+			<div id="step-15"><Step15OptimizationPlan /></div>
 			<div id="step-16"><Step16SummaryAndSignOff /></div>
 
 			<div class="button-group mt-6 flex gap-2">
@@ -213,7 +213,7 @@
 			</div>
 		</Form>
 
-		<Panel label="Live optimisation status" class="lg:sticky lg:top-4">
+		<Panel label="Live optimization status" class="lg:sticky lg:top-4">
 			<h2 class="text-lg font-semibold">Live status</h2>
 
 			<p class="mt-1 text-sm text-base-content/70">

@@ -8,14 +8,14 @@ import type { DomainStatus, GateDecision, Readiness } from './types';
 /** Display labels for the surgical readiness bands. */
 export const READINESS_LABELS: Record<Readiness, string> = {
 	'ready': 'Ready for surgery',
-	'optimisation-in-progress': 'Optimisation in progress',
-	'optimisation-required': 'Optimisation required',
+	'optimization-in-progress': 'Optimization in progress',
+	'optimization-required': 'Optimization required',
 	'defer-surgery': 'Defer surgery'
 };
 
 /** Display labels for the per-domain statuses. */
 export const STATUS_LABELS: Record<DomainStatus, string> = {
-	'optimised': 'Optimised',
+	'optimized': 'Optimized',
 	'in-progress': 'In progress',
 	'action-required': 'Action required',
 	'insufficient-time': 'Insufficient time',
@@ -26,8 +26,8 @@ export const STATUS_LABELS: Record<DomainStatus, string> = {
 export const GATE_DECISION_LABELS: Record<GateDecision, string> = {
 	'proceed': 'Proceed as listed',
 	'proceed-with-prehabilitation': 'Proceed with prehabilitation',
-	'defer-and-optimise': 'Defer and optimise',
-	'accept-unoptimised-risk': 'Accept unoptimised risk',
+	'defer-and-optimize': 'Defer and optimize',
+	'accept-unoptimized-risk': 'Accept unoptimized risk',
 	'mdt-review': 'Refer to MDT review',
 	'cancel': 'Cancel',
 	'': 'Not recorded'

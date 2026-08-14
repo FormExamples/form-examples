@@ -1,4 +1,4 @@
-<!ELEMENT perioperative_optimization_grade (id,created_at,updated_at,deleted_at,perioperative_optimization_id,weeks_to_surgery,gating_applied,must_score,must_risk,audit_c_score,stop_bang_score,duke_activity_status_index,clinical_frailty_scale,domains_optimised,domains_in_progress,domains_action_required,domains_insufficient_time,computed_readiness,final_readiness,override_reason,gate_decision,recommended_earliest_surgery_date,clinician_notes,signed_by_name,signed_at,graded_at)>
+<!ELEMENT perioperative_optimization_grade (id,created_at,updated_at,deleted_at,perioperative_optimization_id,weeks_to_surgery,gating_applied,must_score,must_risk,audit_c_score,stop_bang_score,duke_activity_status_index,clinical_frailty_scale,fried_phenotype_score,fried_frailty_category,domains_optimized,domains_in_progress,domains_action_required,domains_insufficient_time,computed_readiness,final_readiness,override_reason,gate_decision,recommended_earliest_surgery_date,clinician_notes,signed_by_name,signed_at,graded_at)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
@@ -12,7 +12,9 @@
 <!ELEMENT stop_bang_score (#PCDATA)>
 <!ELEMENT duke_activity_status_index (#PCDATA)>
 <!ELEMENT clinical_frailty_scale (#PCDATA)>
-<!ELEMENT domains_optimised (#PCDATA)>
+<!ELEMENT fried_phenotype_score (#PCDATA)>
+<!ELEMENT fried_frailty_category (#PCDATA)>
+<!ELEMENT domains_optimized (#PCDATA)>
 <!ELEMENT domains_in_progress (#PCDATA)>
 <!ELEMENT domains_action_required (#PCDATA)>
 <!ELEMENT domains_insufficient_time (#PCDATA)>

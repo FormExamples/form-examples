@@ -105,24 +105,72 @@ function applyStopBangRules(data) {
   return { score, firedRules };
 }
 
-// ---------- Clinical Frailty Scale (Rockwood 2005) ----------
+// ---------- Clinical Frailty Scale (Rockwood 2005) / Fried Phenotype / RAI ----------
+
+/**
+ * Fried Frailty Phenotype (Fried et al. 2001). Five yes/no criteria; score =
+ * count of criteria met. 0 = robust, 1-2 = pre-frail, 3-5 = frail. Returns
+ * { score: null, category: '' } when no criterion has been answered yet.
+ */
+function computeFriedPhenotypeScore(data) {
+  const fc = data.functionalCapacity;
+  const criteria = [
+    fc.friedWeakness,
+    fc.friedSlowness,
+    fc.friedLowPhysicalActivity,
+    fc.friedExhaustion,
+    fc.friedUnintentionalWeightLoss
+  ];
+  if (criteria.every((c) => c === '')) return { score: null, category: '' };
+
+  const score = criteria.filter((c) => c === 'yes').length;
+  const category = score === 0 ? 'robust' : score <= 2 ? 'pre-frail' : 'frail';
+  return { score, category };
+}
 
 function applyFrailtyRules(data) {
+  const rules = [];
+
   const cfs = data.functionalCapacity.clinicalFrailtyScale;
-  if (cfs === null || cfs === undefined) return [];
-  return [{
-    ruleId: `R-CFS-${cfs}`,
-    instrument: 'frailty',
-    grade: String(cfs),
-    category: 'functional',
-    description: `Clinical Frailty Scale ${cfs}`
-  }];
+  if (cfs !== null && cfs !== undefined) {
+    rules.push({
+      ruleId: `R-CFS-${cfs}`,
+      instrument: 'frailty',
+      grade: String(cfs),
+      category: 'functional',
+      description: `Clinical Frailty Scale ${cfs}`
+    });
+  }
+
+  const { score: friedScore, category: friedCategory } = computeFriedPhenotypeScore(data);
+  if (friedScore !== null) {
+    rules.push({
+      ruleId: `R-FRIED-${friedScore}`,
+      instrument: 'frailty',
+      grade: friedCategory,
+      category: 'functional',
+      description: `Fried Frailty Phenotype ${friedScore}/5 (${friedCategory})`
+    });
+  }
+
+  const rai = data.functionalCapacity.riskAnalysisIndexScore;
+  if (rai !== null && rai !== undefined) {
+    rules.push({
+      ruleId: `R-RAI-${rai}`,
+      instrument: 'frailty',
+      grade: String(rai),
+      category: 'functional',
+      description: `Risk Analysis Index ${rai}`
+    });
+  }
+
+  return rules;
 }
 
 // ---------- Composite risk ----------
 
-function computeCompositeRisk(asa, mallampati, rcri, stopbang, frailty, hasHighFlag) {
-  if (asa === 'V' || asa === 'VI' || frailty === 9 || (asa === 'IV' && hasHighFlag)) {
+function computeCompositeRisk(asa, mallampati, rcri, stopbang, frailty, friedScore, hasHighFlag) {
+  if (asa === 'V' || asa === 'VI' || frailty === 9 || friedScore === 5 || (asa === 'IV' && hasHighFlag)) {
     return 'critical';
   }
   if (
@@ -132,7 +180,8 @@ function computeCompositeRisk(asa, mallampati, rcri, stopbang, frailty, hasHighF
     mallampati === 'IV' ||
     rcri >= 2 ||
     stopbang >= 5 ||
-    (frailty !== null && frailty >= 5)
+    (frailty !== null && frailty >= 5) ||
+    (friedScore !== null && friedScore >= 3)
   ) {
     return 'high';
   }
@@ -141,7 +190,8 @@ function computeCompositeRisk(asa, mallampati, rcri, stopbang, frailty, hasHighF
     mallampati === 'II' ||
     rcri === 1 ||
     (stopbang >= 3 && stopbang <= 4) ||
-    (frailty !== null && frailty >= 4)
+    (frailty !== null && frailty >= 4) ||
+    (friedScore !== null && friedScore >= 1)
   ) {
     return 'moderate';
   }
@@ -163,6 +213,7 @@ function calculateASA(data) {
   const { score: rcriScore, firedRules: rcriFired } = applyRcriRules(data);
   const { score: stopbangScore, firedRules: stopbangFired } = applyStopBangRules(data);
   const frailtyFired = applyFrailtyRules(data);
+  const { score: friedPhenotypeScore, category: friedFrailtyCategory } = computeFriedPhenotypeScore(data);
   const additionalFlags = detectAdditionalFlags
     ? detectAdditionalFlags(data)
     : [];
@@ -174,6 +225,7 @@ function calculateASA(data) {
     rcriScore,
     stopbangScore,
     data.functionalCapacity.clinicalFrailtyScale,
+    friedPhenotypeScore,
     hasHighFlag
   );
 
@@ -191,6 +243,8 @@ function calculateASA(data) {
     rcriScore,
     stopbangScore,
     frailtyScale: data.functionalCapacity.clinicalFrailtyScale,
+    friedPhenotypeScore,
+    friedFrailtyCategory,
     compositeRisk,
     firedRules: [
       ...asaFired,
@@ -203,4 +257,4 @@ function calculateASA(data) {
   };
 }
 
-export { applyMallampatiRules, applyRcriRules, applyStopBangRules, applyFrailtyRules, computeCompositeRisk, calculateASA };
+export { applyMallampatiRules, applyRcriRules, applyStopBangRules, applyFrailtyRules, computeFriedPhenotypeScore, computeCompositeRisk, calculateASA };

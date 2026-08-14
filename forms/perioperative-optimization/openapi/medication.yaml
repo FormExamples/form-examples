@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Perioperative Optimization — Medication
   version: 1.0.0
-  description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimisation domain.
+  description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimization domain.
 paths:
   /medications:
     get:
@@ -183,4 +183,4 @@ components:
         - hold_required
         - perioperative_hold_guidance
         - description
-      description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimisation domain.
+      description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimization domain.

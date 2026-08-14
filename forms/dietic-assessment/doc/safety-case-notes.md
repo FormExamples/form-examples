@@ -10,9 +10,9 @@ point.
 | Standard | Applies to | Status |
 | --- | --- | --- |
 | DCB0129 — Clinical Risk Management: its Application in the Manufacture of Health IT Systems | the manufacturer of this software | **not started** — needs a named Clinical Safety Officer, a Clinical Risk Management Plan, a Hazard Log, and a Clinical Safety Case Report |
-| DCB0160 — Clinical Risk Management: its Application in the Deployment and Use of Health IT Systems | the deploying organisation | **not applicable until deployment** — the deploying trust or health board owns this |
+| DCB0160 — Clinical Risk Management: its Application in the Deployment and Use of Health IT Systems | the deploying organization | **not applicable until deployment** — the deploying trust or health board owns this |
 | DTAC — Digital Technology Assessment Criteria | NHS procurement | not started |
-| DSPT — Data Security and Protection Toolkit | the hosting organisation | not applicable — this form ships no hosting |
+| DSPT — Data Security and Protection Toolkit | the hosting organization | not applicable — this form ships no hosting |
 
 ## Regulatory classification
 
@@ -64,7 +64,7 @@ lawful basis under UK GDPR Article 6 and Article 9, and a retention schedule.
 - Which energy and protein requirement equation is local policy — Henry,
   Schofield, or a kcal/kg rule of thumb? The form records the equation used
   rather than choosing one.
-- Does the deploying organisation require the MUST tool to be reproduced
+- Does the deploying organization require the MUST tool to be reproduced
   verbatim, including the BAPEN flowchart imagery, for the score to be
   accepted?
 - Is a paediatric sibling form (STAMP or PYMS) needed, or is redirect-only

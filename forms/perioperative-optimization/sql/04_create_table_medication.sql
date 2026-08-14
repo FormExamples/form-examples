@@ -1,5 +1,5 @@
 -- Medication catalogue, carrying the perioperative hold guidance that drives
--- the `medication` optimisation domain. A deployment can seed this table with
+-- the `medication` optimization domain. A deployment can seed this table with
 -- local formulary guidance so the front-end surfaces the right prompt per drug.
 -- See ../doc/medication-hold-rules.md.
 
@@ -40,7 +40,7 @@ CREATE TRIGGER trigger_medication_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE medication IS
-    'Medication catalogue, carrying the perioperative hold guidance that drives the medication optimisation domain.';
+    'Medication catalogue, carrying the perioperative hold guidance that drives the medication optimization domain.';
 COMMENT ON COLUMN medication.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN medication.created_at IS

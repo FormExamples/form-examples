@@ -312,6 +312,45 @@ export interface FunctionalCapacity {
   supportAtHome: YesNo;
   mobilityStatus: string;
   fallsRiskWithinYear: YesNo;
+  // Fried Frailty Phenotype (Fried et al. 2001) — five criteria; 0 = robust,
+  // 1-2 = pre-frail, 3-5 = frail.
+  friedWeakness: YesNo;
+  friedSlowness: YesNo;
+  friedLowPhysicalActivity: YesNo;
+  friedExhaustion: YesNo;
+  friedUnintentionalWeightLoss: YesNo;
+  // Risk Analysis Index — higher scores indicate greater frailty.
+  riskAnalysisIndexScore: number | null;
+  // Mini-Cog cognitive screen, indicated when Clinical Frailty Scale >= 5.
+  miniCogPerformed: YesNo;
+  miniCogScore: number | null;
+  // Prehabilitation planning.
+  prehabilitationIndicated: YesNo;
+  prehabilitationType: 'nutrition' | 'aerobic' | 'resistance' | 'multimodal' | 'other' | '';
+  prehabilitationStartDate: string;
+  proteinSupplementationRecommended: YesNo;
+}
+
+export interface Glp1Management {
+  onGlp1ReceptorAgonist: YesNo;
+  glp1AgonistName:
+    | 'semaglutide'
+    | 'tirzepatide'
+    | 'dulaglutide'
+    | 'liraglutide'
+    | 'exenatide'
+    | 'other'
+    | '';
+  glp1Formulation: 'daily' | 'weekly' | '';
+  glp1LastDoseAt: string;
+  glp1HeldPerGuideline: YesNo;
+  glp1ExtendedClearFluidsConfirmed: YesNo;
+  glp1GiSymptoms: YesNo;
+  glp1GiSymptomsDetails: string;
+  glp1GastricUltrasoundPerformed: YesNo;
+  glp1GastricUltrasoundFindings: 'empty' | 'low-risk' | 'full-stomach' | '';
+  glp1FullStomachPrecautionsPlanned: YesNo;
+  glp1Notes: string;
 }
 
 export interface AnaesthesiaPlan {
@@ -380,6 +419,7 @@ export interface ClinicianAssessment {
   musculoskeletal: Musculoskeletal;
   medications: Medication[];
   allergies: Allergy[];
+  glp1Management: Glp1Management;
   functionalCapacity: FunctionalCapacity;
   anaesthesiaPlan: AnaesthesiaPlan;
   summary: Summary;
@@ -422,6 +462,11 @@ export interface AdditionalFlag {
     | 'sux-apnoea'
     | 'pseudocholinesterase-deficiency'
     | 'malnutrition-risk'
+    | 'glp1-aspiration-risk'
+    | 'cognitive-assessment-indicated'
+    | 'sarcopenia-risk'
+    | 'dehydration-aki-risk'
+    | 'rebound-glycaemic-risk'
     | 'other';
   priority: FlagPriority;
   description: string;
@@ -437,6 +482,8 @@ export interface GradingResult {
   rcriScore: number;
   stopbangScore: number;
   frailtyScale: number | null;
+  friedPhenotypeScore: number | null;
+  friedFrailtyCategory: 'robust' | 'pre-frail' | 'frail' | '';
   compositeRisk: CompositeRisk;
   firedRules: FiredRule[];
   additionalFlags: AdditionalFlag[];

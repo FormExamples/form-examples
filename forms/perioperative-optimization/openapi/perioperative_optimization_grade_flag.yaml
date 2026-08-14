@@ -138,18 +138,22 @@ components:
             - sglt2-inhibitor-not-held
             - glp1-agonist-aspiration-risk
             - anticoagulation-plan-missing
-            - insufficient-time-to-optimise
+            - insufficient-time-to-optimize
             - active-smoker-major-surgery
             - alcohol-dependence-risk
             - high-malnutrition-risk
             - poor-functional-capacity
             - severe-frailty
             - uncontrolled-hypertension
-            - cardiac-optimisation-required
-            - respiratory-optimisation-required
+            - cardiac-optimization-required
+            - respiratory-optimization-required
             - osa-unassessed
-            - renal-optimisation-required
+            - renal-optimization-required
             - prior-anaesthetic-complication
+            - cognitive-assessment-indicated
+            - sarcopenia-risk
+            - dehydration-aki-risk
+            - rebound-glycaemic-risk
             - psychological-support-required
             - social-support-gap
             - capacity-concern
@@ -158,7 +162,7 @@ components:
             - safeguarding
             - other
             - ""
-          description: Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimise.
+          description: Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimize.
         priority:
           type: string
           enum:
@@ -170,7 +174,7 @@ components:
         domain:
           type: string
           maxLength: 30
-          description: Optimisation domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.
+          description: Optimization domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.
         description:
           type: string
           maxLength: 500

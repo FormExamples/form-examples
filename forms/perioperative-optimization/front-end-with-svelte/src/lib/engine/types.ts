@@ -20,7 +20,7 @@ export type YesNo = 'yes' | 'no' | '';
 /** Assessment lifecycle status. */
 export type AssessmentStatus = 'draft' | 'submitted' | 'reviewed' | 'urgent';
 
-/** The eight optimisation domains. */
+/** The eight optimization domains. */
 export type DomainKey =
 	| 'anaemia'
 	| 'glycaemic-control'
@@ -33,7 +33,7 @@ export type DomainKey =
 
 /** Per-domain status after time-to-surgery gating. */
 export type DomainStatus =
-	| 'optimised'
+	| 'optimized'
 	| 'in-progress'
 	| 'action-required'
 	| 'insufficient-time'
@@ -42,16 +42,16 @@ export type DomainStatus =
 /** Composite surgical readiness band, by max-grade across the domains. */
 export type Readiness =
 	| 'ready'
-	| 'optimisation-in-progress'
-	| 'optimisation-required'
+	| 'optimization-in-progress'
+	| 'optimization-required'
 	| 'defer-surgery';
 
 /** The explicit human decision recorded at sign-off. */
 export type GateDecision =
 	| 'proceed'
 	| 'proceed-with-prehabilitation'
-	| 'defer-and-optimise'
-	| 'accept-unoptimised-risk'
+	| 'defer-and-optimize'
+	| 'accept-unoptimized-risk'
 	| 'mdt-review'
 	| 'cancel'
 	| '';
@@ -71,18 +71,22 @@ export type FlagCategory =
 	| 'sglt2-inhibitor-not-held'
 	| 'glp1-agonist-aspiration-risk'
 	| 'anticoagulation-plan-missing'
-	| 'insufficient-time-to-optimise'
+	| 'insufficient-time-to-optimize'
 	| 'active-smoker-major-surgery'
 	| 'alcohol-dependence-risk'
 	| 'high-malnutrition-risk'
 	| 'poor-functional-capacity'
 	| 'severe-frailty'
 	| 'uncontrolled-hypertension'
-	| 'cardiac-optimisation-required'
-	| 'respiratory-optimisation-required'
+	| 'cardiac-optimization-required'
+	| 'respiratory-optimization-required'
 	| 'osa-unassessed'
-	| 'renal-optimisation-required'
+	| 'renal-optimization-required'
 	| 'prior-anaesthetic-complication'
+	| 'cognitive-assessment-indicated'
+	| 'sarcopenia-risk'
+	| 'dehydration-aki-risk'
+	| 'rebound-glycaemic-risk'
 	| 'psychological-support-required'
 	| 'social-support-gap'
 	| 'capacity-concern'
@@ -182,6 +186,13 @@ export interface MedicationSection {
 	takesAceInhibitorOrArb: YesNo;
 	takesSglt2Inhibitor: YesNo;
 	takesGlp1Agonist: YesNo;
+	glp1Formulation: 'daily' | 'weekly' | '';
+	glp1HeldPerGuideline: YesNo;
+	glp1ExtendedClearFluidsConfirmed: YesNo;
+	glp1GiSymptoms: YesNo;
+	glp1GiSymptomsDetails: string;
+	glp1GastricUltrasoundPerformed: YesNo;
+	glp1GastricUltrasoundFindings: 'empty' | 'low-risk' | 'full-stomach' | '';
 	takesCorticosteroid: YesNo;
 	takesImmunosuppressant: YesNo;
 	takesHormoneTherapy: YesNo;
@@ -298,12 +309,24 @@ export interface FitnessSection {
 	prehabilitationEnrolled: YesNo;
 	prehabilitationSessionsPerWeek: number | null;
 	prehabilitationStartDate: string;
+	proteinSupplementationRecommended: YesNo;
 	fitnessNotes: string;
 }
 
 /** Wizard section: frailty. */
 export interface FrailtySection {
 	clinicalFrailtyScale: number | null;
+	// Fried Frailty Phenotype (Fried et al. 2001) — five criteria.
+	friedWeakness: YesNo;
+	friedSlowness: YesNo;
+	friedLowPhysicalActivity: YesNo;
+	friedExhaustion: YesNo;
+	friedUnintentionalWeightLoss: YesNo;
+	// Risk Analysis Index — higher scores indicate greater frailty.
+	riskAnalysisIndexScore: number | null;
+	// Mini-Cog, indicated when the Clinical Frailty Scale is 5 or above.
+	miniCogPerformed: YesNo;
+	miniCogScore: number | null;
 	cognitiveScreenTool: string;
 	cognitiveScreenScore: number | null;
 	cognitiveImpairment: string;
@@ -438,7 +461,7 @@ export interface GradingResult {
 	gatingApplied: boolean;
 	domains: DomainResult[];
 	counts: {
-		optimised: number;
+		optimized: number;
 		inProgress: number;
 		actionRequired: number;
 		insufficientTime: number;
@@ -451,6 +474,8 @@ export interface GradingResult {
 	stopBangScore: number | null;
 	dukeActivityStatusIndex: number | null;
 	clinicalFrailtyScale: number | null;
+	friedPhenotypeScore: number | null;
+	friedFrailtyCategory: 'robust' | 'pre-frail' | 'frail' | '';
 	computedReadiness: Readiness;
 	finalReadiness: Readiness;
 	overrideReason: string;

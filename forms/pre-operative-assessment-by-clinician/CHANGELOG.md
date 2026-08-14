@@ -15,8 +15,20 @@ file only records changes scoped to the **Pre-operative Assessment by Clinician*
 ### Added
 - Accessible-UX toolbar (`front-end-with-html/js/a11y.js`): comfortable-reading mode, text-size, read-aloud, start-over.
 - Patientâclinician handoff consumer (`front-end-with-html/js/linkage.js`): when opened from the patient self-report form it pre-fills patient identity + anthropometrics and shows a patient-reported banner to verify against objective findings.
-- _Pending Ã¢ÂÂ record new fields, new fired-rule categories, new schema columns,
-  new front-end steps, new clinical references, new examples, etc._
+- GLP-1 receptor agonist perioperative management (step 13): fasting/hold
+  strategy, GI symptom screening, gastric ultrasound, full-stomach
+  precautions -- 12 new `glp1_*` columns and the `glp1-aspiration-risk`
+  safety flag.
+- Expanded frailty assessment (step 14): Fried Frailty Phenotype (5
+  criteria, computed 0-5 score + robust/pre-frail/frail category), Risk
+  Analysis Index, Mini-Cog cognitive screen (indicated at CFS >= 5), and a
+  prehabilitation plan -- 12 new frailty-extension columns plus
+  `fried_phenotype_score`/`fried_frailty_category` on the grade table.
+- Frailty x GLP-1 intersecting-risk safety flags: `cognitive-assessment-indicated`,
+  `sarcopenia-risk`, `dehydration-aki-risk`, `rebound-glycaemic-risk`.
+- New reference doc [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md).
+- _Pending -- record further new fields, fired-rule categories, schema
+  columns, front-end steps, clinical references, and examples._
 
 ### Changed
 - Linked the patient counterpart in `index.md`; corrected stale directory/architecture references in `AGENTS.md` (dedup consolidated dirs, `xml/`→`xml/`, `fhir/r5/`→`fhir/r5/`, HTMX→JSON API).

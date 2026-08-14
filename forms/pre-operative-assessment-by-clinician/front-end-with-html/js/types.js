@@ -219,6 +219,20 @@ function emptyAssessment() {
     },
     medications: [],
     allergies: [],
+    glp1Management: {
+      onGlp1ReceptorAgonist: '',
+      glp1AgonistName: '',
+      glp1Formulation: '',
+      glp1LastDoseAt: '',
+      glp1HeldPerGuideline: '',
+      glp1ExtendedClearFluidsConfirmed: '',
+      glp1GiSymptoms: '',
+      glp1GiSymptomsDetails: '',
+      glp1GastricUltrasoundPerformed: '',
+      glp1GastricUltrasoundFindings: '',
+      glp1FullStomachPrecautionsPlanned: '',
+      glp1Notes: ''
+    },
     functionalCapacity: {
       metsEstimate: null,
       dasiScore: null,
@@ -236,7 +250,19 @@ function emptyAssessment() {
       livingSituation: '',
       supportAtHome: '',
       mobilityStatus: '',
-      fallsRiskWithinYear: ''
+      fallsRiskWithinYear: '',
+      friedWeakness: '',
+      friedSlowness: '',
+      friedLowPhysicalActivity: '',
+      friedExhaustion: '',
+      friedUnintentionalWeightLoss: '',
+      riskAnalysisIndexScore: null,
+      miniCogPerformed: '',
+      miniCogScore: null,
+      prehabilitationIndicated: '',
+      prehabilitationType: '',
+      prehabilitationStartDate: '',
+      proteinSupplementationRecommended: ''
     },
     anaesthesiaPlan: {
       technique: '',

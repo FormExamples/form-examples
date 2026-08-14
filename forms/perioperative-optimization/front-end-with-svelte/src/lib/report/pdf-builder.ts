@@ -12,20 +12,20 @@ type Margin = [number, number, number, number];
 
 const READINESS_COLOURS: Record<string, string> = {
 	'ready': '#16a34a',
-	'optimisation-in-progress': '#0891b2',
-	'optimisation-required': '#d97706',
+	'optimization-in-progress': '#0891b2',
+	'optimization-required': '#d97706',
 	'defer-surgery': '#dc2626'
 };
 
 const STATUS_COLOURS: Record<string, string> = {
-	'optimised': '#16a34a',
+	'optimized': '#16a34a',
 	'in-progress': '#0891b2',
 	'action-required': '#d97706',
 	'insufficient-time': '#dc2626',
 	'not-applicable': '#9ca3af'
 };
 
-/** Builds the pdfmake document definition for the optimisation report. */
+/** Builds the pdfmake document definition for the optimization report. */
 export function buildPdfDocument(
 	data: PerioperativeOptimization,
 	result: GradingResult,
@@ -37,7 +37,7 @@ export function buildPdfDocument(
 
 	const content: TDocumentDefinitions['content'] = [
 		{
-			text: 'PERIOPERATIVE OPTIMISATION',
+			text: 'PERIOPERATIVE OPTIMIZATION',
 			fontSize: 18,
 			bold: true,
 			alignment: 'center',
@@ -82,7 +82,7 @@ export function buildPdfDocument(
 		content.push({
 			text:
 				`Earliest date at which every domain would have its full lead time: ${result.recommendedEarliestSurgeryDate}. ` +
-				'Either move the list to that date or later, or record an explicit accept-unoptimised-risk decision.',
+				'Either move the list to that date or later, or record an explicit accept-unoptimized-risk decision.',
 			fontSize: 9,
 			bold: true,
 			color: '#b45309',
@@ -126,7 +126,7 @@ export function buildPdfDocument(
 			margin: [0, 0, 0, 16] as Margin
 		},
 		{
-			text: 'Optimisation domains',
+			text: 'Optimization domains',
 			fontSize: 12,
 			bold: true,
 			margin: [0, 0, 0, 6] as Margin
@@ -270,7 +270,7 @@ export function buildPdfDocument(
 		pageSize: 'A4',
 		pageMargins: [40, 60, 40, 60],
 		header: {
-			text: 'PERIOPERATIVE OPTIMISATION — REPORT',
+			text: 'PERIOPERATIVE OPTIMIZATION — REPORT',
 			alignment: 'center',
 			margin: [0, 20, 0, 0],
 			fontSize: 10,

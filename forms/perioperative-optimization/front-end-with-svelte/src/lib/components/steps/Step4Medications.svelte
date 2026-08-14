@@ -11,7 +11,7 @@
 </script>
 
 <Fieldset legend="4. Medications">
-	<p class="hint">The medication domain is optimised when a hold-and-restart plan has been agreed with the prescriber.</p>
+	<p class="hint">The medication domain is optimized when a hold-and-restart plan has been agreed with the prescriber.</p>
 
 	<Field label="Prescription medicines" inputId="medication-takesPrescriptionMedicines">
 		<Select id="medication-takesPrescriptionMedicines" label="Prescription medicines" bind:value={d.medication.takesPrescriptionMedicines}>
@@ -69,6 +69,56 @@
 			{/each}
 		</Select>
 	</Field>
+	<Field label="Formulation" inputId="medication-glp1Formulation">
+		<Select id="medication-glp1Formulation" label="Formulation" bind:value={d.medication.glp1Formulation}>
+			<option value="">— Select —</option>
+			<option value="daily">Daily</option>
+			<option value="weekly">Weekly</option>
+		</Select>
+	</Field>
+	<Field label="Held per guideline" inputId="medication-glp1HeldPerGuideline" description="Daily formulations held day-of; weekly formulations held one week prior.">
+		<Select id="medication-glp1HeldPerGuideline" label="Held per guideline" bind:value={d.medication.glp1HeldPerGuideline}>
+			<option value="">— Select —</option>
+			{#each YES_NO_OPTS as option (option.value)}
+				<option value={option.value}>{option.label}</option>
+			{/each}
+		</Select>
+	</Field>
+	<Field label="Extended clear-fluid fast confirmed" inputId="medication-glp1ExtendedClearFluidsConfirmed" description="24-hour solid fast plus 4-8 hour clear-liquid fast, if not held.">
+		<Select id="medication-glp1ExtendedClearFluidsConfirmed" label="Extended clear-fluid fast confirmed" bind:value={d.medication.glp1ExtendedClearFluidsConfirmed}>
+			<option value="">— Select —</option>
+			{#each YES_NO_OPTS as option (option.value)}
+				<option value={option.value}>{option.label}</option>
+			{/each}
+		</Select>
+	</Field>
+	<Field label="Active GI symptoms" inputId="medication-glp1GiSymptoms" description="Nausea, vomiting, bloating, or abdominal pain.">
+		<Select id="medication-glp1GiSymptoms" label="Active GI symptoms" bind:value={d.medication.glp1GiSymptoms}>
+			<option value="">— Select —</option>
+			{#each YES_NO_OPTS as option (option.value)}
+				<option value={option.value}>{option.label}</option>
+			{/each}
+		</Select>
+	</Field>
+	<Field label="GI symptom details" inputId="medication-glp1GiSymptomsDetails">
+		<TextInput id="medication-glp1GiSymptomsDetails" label="GI symptom details" bind:value={d.medication.glp1GiSymptomsDetails} />
+	</Field>
+	<Field label="Gastric ultrasound performed" inputId="medication-glp1GastricUltrasoundPerformed">
+		<Select id="medication-glp1GastricUltrasoundPerformed" label="Gastric ultrasound performed" bind:value={d.medication.glp1GastricUltrasoundPerformed}>
+			<option value="">— Select —</option>
+			{#each YES_NO_OPTS as option (option.value)}
+				<option value={option.value}>{option.label}</option>
+			{/each}
+		</Select>
+	</Field>
+	<Field label="Gastric ultrasound finding" inputId="medication-glp1GastricUltrasoundFindings">
+		<Select id="medication-glp1GastricUltrasoundFindings" label="Gastric ultrasound finding" bind:value={d.medication.glp1GastricUltrasoundFindings}>
+			<option value="">— Select —</option>
+			<option value="empty">Empty</option>
+			<option value="low-risk">Low risk</option>
+			<option value="full-stomach">Full stomach</option>
+		</Select>
+	</Field>
 	<Field label="ACE inhibitor or ARB" inputId="medication-takesAceInhibitorOrArb">
 		<Select id="medication-takesAceInhibitorOrArb" label="ACE inhibitor or ARB" bind:value={d.medication.takesAceInhibitorOrArb}>
 			<option value="">— Select —</option>
@@ -101,7 +151,7 @@
 			{/each}
 		</Select>
 	</Field>
-	<Field label="Hold-and-restart plan agreed" inputId="medication-medicationHoldPlanAgreed" description="This is the medication domain optimisation criterion.">
+	<Field label="Hold-and-restart plan agreed" inputId="medication-medicationHoldPlanAgreed" description="This is the medication domain optimization criterion.">
 		<Select id="medication-medicationHoldPlanAgreed" label="Hold-and-restart plan agreed" bind:value={d.medication.medicationHoldPlanAgreed}>
 			<option value="">— Select —</option>
 			{#each YES_NO_OPTS as option (option.value)}

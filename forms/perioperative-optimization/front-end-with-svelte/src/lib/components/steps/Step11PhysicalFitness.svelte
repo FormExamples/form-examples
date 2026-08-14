@@ -70,6 +70,14 @@
 	<Field label="Programme start date" inputId="fitness-prehabilitationStartDate">
 		<DateInput id="fitness-prehabilitationStartDate" label="Programme start date" bind:value={d.fitness.prehabilitationStartDate} />
 	</Field>
+	<Field label="Protein supplementation recommended" inputId="fitness-proteinSupplementationRecommended" description="Particularly for a frail patient on a GLP-1 receptor agonist, at risk of accelerated sarcopenia.">
+		<Select id="fitness-proteinSupplementationRecommended" label="Protein supplementation recommended" bind:value={d.fitness.proteinSupplementationRecommended}>
+			<option value="">— Select —</option>
+			{#each YES_NO_OPTS as option (option.value)}
+				<option value={option.value}>{option.label}</option>
+			{/each}
+		</Select>
+	</Field>
 	<Field label="Fitness notes" inputId="fitness-fitnessNotes">
 		<TextAreaInput id="fitness-fitnessNotes" label="Fitness notes" rows={2} bind:value={d.fitness.fitnessNotes} />
 	</Field>

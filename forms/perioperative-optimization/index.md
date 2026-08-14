@@ -1,23 +1,26 @@
 # Perioperative Optimization
 
-A UK NHS–aligned **perioperative optimisation and prehabilitation** intake: the
+A UK NHS–aligned **perioperative optimization and prehabilitation** intake: the
 screening questionnaire a surgical or anaesthetic team uses to identify
 **reversible** health problems before surgery, decide what can be treated in the
-time available, and build a personalised prehabilitation plan.
+time available, and build a personalized prehabilitation plan.
 
-The engine grades each of eight optimisation domains as **optimised**,
+The engine grades each of eight optimization domains as **optimized**,
 **in progress**, **action required**, or **insufficient time**, computes a
 composite **surgical readiness** band, and produces a domain-by-domain plan with
 target values, referrals, and start dates. The goal is the one NHS England
 states for the perioperative pathway: fewer complications, shorter stays, and a
 body better able to handle the physical stress of surgery.
 
-> **Naming.** The directory slug is `perioperative-optimization` (US spelling,
-> as requested). Prose uses the UK spelling **optimisation**, matching NHS
-> England and CPOC. The slug, SQL table names
-> (`perioperative_optimization`, `perioperative_optimization_grade`, …), and
-> every generated artefact keep the `optimization` stem so derived
-> representations stay keyed to the directory.
+> **Spelling.** This form is written in **Oxford spelling** — British English
+> with the `-ize` ending — per [`/spec/oxford-spelling.md`](../../spec/oxford-spelling.md).
+> So the prose, the directory slug `perioperative-optimization`, the SQL table
+> names, the enum values (`optimization-required`, `defer-and-optimize`, …), and
+> every generated artefact all use *optimization*. British forms are otherwise
+> kept: anaemia, haemoglobin, oedema, glycaemic, paediatric, anaesthetic, centre.
+> Quoted URLs and publication titles keep their owners' spelling, so CPOC's
+> *Preoperative Assessment and Optimisation for Adult Surgery* is cited exactly
+> as published.
 
 ## What makes this form different
 
@@ -29,12 +32,12 @@ to fix it?"**
 | | This form | The ASA-grading pre-op forms |
 | --- | --- | --- |
 | Question | what is modifiable, and is there time? | how risky is this patient? |
-| Primary output | per-domain optimisation status + surgical readiness | ASA grade + composite risk |
+| Primary output | per-domain optimization status + surgical readiness | ASA grade + composite risk |
 | Driver | **time to surgery** versus each domain's lead time | severity of findings |
 | Result | a prehabilitation plan with start dates | an anaesthesia plan |
 | Sibling | [`pre-operative-assessment-by-clinician`](../pre-operative-assessment-by-clinician), [`pre-operative-assessment-by-patient`](../pre-operative-assessment-by-patient), [`pre-anaesthesia-assessment`](../pre-anaesthesia-assessment) | each other |
 
-A patient can be ASA III and fully optimised, or ASA II with an untreated iron
+A patient can be ASA III and fully optimized, or ASA II with an untreated iron
 deficiency that a four-week course of intravenous iron would fix. Only this form
 distinguishes those two.
 
@@ -47,11 +50,11 @@ distinguishes those two.
   anaesthetists, surgeons, prehabilitation therapists, specialist nurses,
   clinical pharmacists, and dietitians working to a perioperative pathway.
 - **Patients:** adults (≥ 16 years) listed for elective or scheduled surgery.
-  Emergency surgery is out of scope: there is no lead time to optimise in, so
+  Emergency surgery is out of scope: there is no lead time to optimize in, so
   the form records the urgency and directs the user to the assessment forms
   above instead.
 
-## The eight optimisation domains
+## The eight optimization domains
 
 Each domain carries a **screening threshold**, an **intervention**, and a
 **lead time** — the minimum number of weeks before surgery the intervention
@@ -60,7 +63,7 @@ needs in order to work. The lead time is what turns a finding into a decision.
 | # | Domain | Screening threshold | Intervention | Lead time |
 | --- | --- | --- | --- | --- |
 | 1 | **Anaemia and iron deficiency** | Hb < 130 g/L (men), < 120 g/L (women); ferritin < 30 µg/L, or 30–100 µg/L with TSAT < 20 % | oral iron, or intravenous iron where oral is not tolerated or time is short | 4 weeks (IV) / 8 weeks (oral) |
-| 2 | **Glycaemic control** | HbA1c ≥ 69 mmol/mol (8.5 %) defer; 48–68 optimise | diabetes-team review, medication adjustment, education | 12 weeks (HbA1c reflects ~3 months) |
+| 2 | **Glycaemic control** | HbA1c ≥ 69 mmol/mol (8.5 %) defer; 48–68 optimize | diabetes-team review, medication adjustment, education | 12 weeks (HbA1c reflects ~3 months) |
 | 3 | **Smoking** | any current smoker | cessation support, nicotine replacement, referral | 4 weeks |
 | 4 | **Alcohol** | > 14 units/week, or AUDIT-C ≥ 5 (men) / ≥ 4 (women) | brief intervention, reduction plan, alcohol-services referral | 4 weeks |
 | 5 | **Nutrition** | MUST ≥ 2, or unintentional weight loss > 10 % | dietitian referral, oral nutritional supplements, immunonutrition | 2–4 weeks |
@@ -69,7 +72,7 @@ needs in order to work. The lead time is what turns a finding into a decision.
 | 8 | **Cardiorespiratory** | uncontrolled hypertension, uncontrolled asthma or COPD, unassessed obstructive sleep apnoea (STOP-BANG ≥ 5), ejection fraction < 40 % | specialty referral, inhaler review, sleep study, echocardiogram | 2–8 weeks by finding |
 
 Frailty, cognition, and psychological readiness are assessed and reported but
-are treated as **context that modifies the plan** rather than as optimisation
+are treated as **context that modifies the plan** rather than as optimization
 domains in their own right, because they are rarely reversible in the available
 window.
 
@@ -80,7 +83,7 @@ This is the engine's distinctive computation. For each domain that needs action:
 ```
 weeksAvailable = (plannedSurgeryDate - assessmentDate) / 7
 
-if      domain not triggered            -> 'optimised' or 'not-applicable'
+if      domain not triggered            -> 'optimized' or 'not-applicable'
 else if intervention already started
         and weeksAvailable >= leadTime  -> 'in-progress'
 else if weeksAvailable >= leadTime      -> 'action-required'
@@ -89,7 +92,7 @@ else                                    -> 'insufficient-time'
 
 `insufficient-time` is the finding that changes management: it means the
 intervention cannot work before the listed date, so the team must either **defer
-the surgery** to create the window or **accept the unoptimised risk** and record
+the surgery** to create the window or **accept the unoptimized risk** and record
 that decision. The form makes the team say which.
 
 Where no surgery date is recorded, every triggered domain reports
@@ -98,15 +101,15 @@ Where no surgery date is recorded, every triggered domain reports
 ## Surgical readiness
 
 The composite band, by max-grade across the eight domains — the worst domain
-sets the band, so one unoptimised domain cannot be averaged away by seven good
+sets the band, so one unoptimized domain cannot be averaged away by seven good
 ones.
 
 | Band | Drivers | Meaning |
 | --- | --- | --- |
-| **Ready** | every domain optimised or not applicable | proceed as listed |
-| **Optimisation in progress** | one or more domains in progress, none requiring action | proceed, and continue the plan up to the date |
-| **Optimisation required** | one or more domains action-required, all within their lead time | proceed with prehabilitation, or re-date if the plan slips |
-| **Defer surgery** | any domain `insufficient-time`, or HbA1c ≥ 69 mmol/mol, or Hb < 80 g/L | defer and optimise, or record an explicit accept-risk decision |
+| **Ready** | every domain optimized or not applicable | proceed as listed |
+| **Optimization in progress** | one or more domains in progress, none requiring action | proceed, and continue the plan up to the date |
+| **Optimization required** | one or more domains action-required, all within their lead time | proceed with prehabilitation, or re-date if the plan slips |
+| **Defer surgery** | any domain `insufficient-time`, or HbA1c ≥ 69 mmol/mol, or Hb < 80 g/L | defer and optimize, or record an explicit accept-risk decision |
 
 ## 16-step wizard
 
@@ -117,19 +120,19 @@ One continuous single page, in the order a clinic actually works through it.
 | 1 | Assessment context | assessor name, role, registration, assessment date, site, service, pathway stage, assessment mode (clinic / telephone / online portal), referral source |
 | 2 | Patient and procedural demographics | NHS number, name, DOB, sex, contact details, interpreter, planned procedure, surgical specialty, consultant surgeon, planned surgery date, urgency, surgical severity, anticipated blood loss, anticipated length of stay |
 | 3 | Medical and surgical history | cardiac, respiratory, renal, hepatic, diabetes, stroke, cancer, rheumatological and other active diagnoses, previous surgery, previous anaesthetic complications, postoperative nausea and vomiting, difficult airway, malignant hyperthermia, venous thromboembolism, family history |
-| 4 | Medications | prescription, over-the-counter, herbal and complementary products, anticoagulant, antiplatelet, ACE inhibitor / ARB, SGLT2 inhibitor, GLP-1 agonist, steroid, immunosuppressant, hormone therapy, adherence, hold-and-restart plan agreed |
+| 4 | Medications | prescription, over-the-counter, herbal and complementary products, anticoagulant, antiplatelet, ACE inhibitor / ARB, SGLT2 inhibitor, GLP-1 agonist (formulation, held per guideline, extended clear-fluid fast, GI symptoms, gastric ultrasound), steroid, immunosuppressant, hormone therapy, adherence, hold-and-restart plan agreed |
 | 5 | Allergies and intolerances | drug allergies, food allergies, latex, adhesive, contrast, reaction and severity, adrenaline auto-injector |
 | 6 | Anaemia and iron studies | haemoglobin, mean cell volume, ferritin, transferrin saturation, B12, folate, C-reactive protein, creatinine, eGFR, sample date, known cause, treatment started, route, previous transfusion, group and save |
 | 7 | Glycaemic control | diabetes type and duration, HbA1c and sample date, capillary glucose, treatment, insulin regimen, hypoglycaemia awareness, diabetes-team review, foot check |
 | 8 | Smoking and tobacco | smoking status, cigarettes per day, pack-years, quit date, weeks quit before surgery, cessation support offered and accepted, nicotine replacement, vaping, second-hand exposure |
 | 9 | Alcohol and other substances | units per week, AUDIT-C components and score, dependence features, reduction plan agreed, alcohol-services referral, recreational drug use |
 | 10 | Nutritional screening | height, weight, BMI, unintentional weight loss and percentage, acute disease effect, MUST components and score, appetite, oral nutritional supplements, immunonutrition, dietitian referral |
-| 11 | Functional capacity and physical fitness | usual activity level, stairs without stopping, estimated METs, Duke Activity Status Index, 6-minute walk distance, CPET anaerobic threshold and peak VO₂, grip strength, prehabilitation offered, enrolled, sessions per week |
-| 12 | Frailty, cognition and falls | Clinical Frailty Scale, 4AT or AMT score, falls in 12 months, mobility aid, living situation, care package |
-| 13 | Cardiorespiratory optimisation | blood pressure, heart rate, rhythm, murmur, exercise tolerance, ejection fraction, asthma and COPD control, inhaler technique, rescue steroids, spirometry, STOP-BANG score, obstructive sleep apnoea diagnosis and CPAP use, oxygen saturation |
+| 11 | Functional capacity and physical fitness | usual activity level, stairs without stopping, estimated METs, Duke Activity Status Index, 6-minute walk distance, CPET anaerobic threshold and peak VO₂, grip strength, prehabilitation offered, enrolled, sessions per week, protein supplementation recommended |
+| 12 | Frailty, cognition and falls | Clinical Frailty Scale, Fried Frailty Phenotype (5 criteria), Risk Analysis Index, Mini-Cog performed and score, 4AT or AMT score, falls in 12 months, mobility aid, living situation, care package |
+| 13 | Cardiorespiratory optimization | blood pressure, heart rate, rhythm, murmur, exercise tolerance, ejection fraction, asthma and COPD control, inhaler technique, rescue steroids, spirometry, STOP-BANG score, obstructive sleep apnoea diagnosis and CPAP use, oxygen saturation |
 | 14 | Psychological readiness and social support | anxiety, depression, expectations, understanding of the procedure, shared decision-making discussion, carer, transport home, home circumstances, support after discharge, health literacy |
-| 15 | Optimisation plan by domain | for each triggered domain: intervention, referral made, target value, start date, weeks required, responsible clinician, patient agreement |
-| 16 | Readiness summary and sign-off | computed domain statuses and fired rules, surgical readiness band, safety flags, weeks to surgery, clinician override with reason, gate decision (proceed / proceed with prehabilitation / defer and optimise / accept unoptimised risk / MDT review), notes, electronic signature |
+| 15 | Optimization plan by domain | for each triggered domain: intervention, referral made, target value, start date, weeks required, responsible clinician, patient agreement |
+| 16 | Readiness summary and sign-off | computed domain statuses and fired rules, surgical readiness band, safety flags, weeks to surgery, clinician override with reason, gate decision (proceed / proceed with prehabilitation / defer and optimize / accept unoptimized risk / MDT review), notes, electronic signature |
 
 ## Safety flags
 
@@ -143,19 +146,23 @@ override. Priority: high / medium / low.
 | `hba1c-above-threshold` | HbA1c ≥ 69 mmol/mol (8.5 %) |
 | `undiagnosed-diabetes` | HbA1c ≥ 48 mmol/mol with no diabetes diagnosis recorded |
 | `sglt2-inhibitor-not-held` | SGLT2 inhibitor in use with no hold plan — euglycaemic diabetic ketoacidosis risk |
-| `glp1-agonist-aspiration-risk` | GLP-1 agonist in use — delayed gastric emptying and aspiration risk |
+| `glp1-agonist-aspiration-risk` | GLP-1 agonist in use with active GI symptoms, or neither held per guideline nor an extended clear-fluid fast confirmed — delayed gastric emptying and aspiration risk |
 | `anticoagulation-plan-missing` | anticoagulant or antiplatelet in use with no agreed hold-and-restart plan |
-| `insufficient-time-to-optimise` | any triggered domain cannot be optimised before the listed date |
+| `insufficient-time-to-optimize` | any triggered domain cannot be optimized before the listed date |
 | `active-smoker-major-surgery` | current smoker listed for major or major-plus surgery |
 | `alcohol-dependence-risk` | AUDIT-C ≥ 8, or dependence features recorded — withdrawal risk in hospital |
 | `high-malnutrition-risk` | MUST ≥ 2 |
 | `poor-functional-capacity` | METs < 4, DASI < 34, 6-minute walk < 400 m, or CPET anaerobic threshold < 11 ml/kg/min |
 | `severe-frailty` | Clinical Frailty Scale ≥ 7 |
+| `cognitive-assessment-indicated` | Clinical Frailty Scale ≥ 5 and Mini-Cog not yet performed |
+| `sarcopenia-risk` | frail (Fried "frail" or CFS ≥ 5) and on a GLP-1 receptor agonist |
+| `dehydration-aki-risk` | frail, on a GLP-1 receptor agonist, and reporting active GI symptoms |
+| `rebound-glycaemic-risk` | GLP-1 receptor agonist held or fasting-extended in a patient on insulin |
 | `uncontrolled-hypertension` | systolic ≥ 180 or diastolic ≥ 110 mmHg |
-| `cardiac-optimisation-required` | ejection fraction < 40 %, new murmur, or poor exercise tolerance |
-| `respiratory-optimisation-required` | uncontrolled asthma or COPD, or oxygen saturation < 92 % on air |
+| `cardiac-optimization-required` | ejection fraction < 40 %, new murmur, or poor exercise tolerance |
+| `respiratory-optimization-required` | uncontrolled asthma or COPD, or oxygen saturation < 92 % on air |
 | `osa-unassessed` | STOP-BANG ≥ 5 with no sleep-apnoea diagnosis or CPAP |
-| `renal-optimisation-required` | eGFR < 30 ml/min |
+| `renal-optimization-required` | eGFR < 30 ml/min |
 | `prior-anaesthetic-complication` | previous anaesthetic complication or malignant-hyperthermia history |
 | `psychological-support-required` | significant anxiety or depression recorded |
 | `social-support-gap` | no transport home, or no support after discharge, for a procedure that needs it |
@@ -166,15 +173,15 @@ override. Priority: high / medium / low.
 Two further categories, `safeguarding` and `other`, are permitted by the schema
 but are **not emitted by the shipped rule set**. There is deliberately no
 safeguarding field on this form: a safeguarding concern in a pre-operative
-clinic is routed through the organisation's own safeguarding pathway, not
-through an optimisation score. The categories exist so a deployment that adds a
+clinic is routed through the organization's own safeguarding pathway, not
+through an optimization score. The categories exist so a deployment that adds a
 local field can record against them without a schema change.
 
 ## Clinician override
 
 The engine produces a **computed** surgical readiness band. The responsible
 clinician may override it on step 16 with a mandatory reason — most often to
-record an explicit *accept unoptimised risk* decision when surgery cannot wait.
+record an explicit *accept unoptimized risk* decision when surgery cannot wait.
 Both the computed and final bands are stored and printed, so the decision is
 auditable rather than silent. Safety flags are unaffected by the override.
 
@@ -213,7 +220,7 @@ perioperative-optimization/
 
 ## Clinical references
 
-- NHS England. *Earlier screening, risk assessment and health optimisation in
+- NHS England. *Earlier screening, risk assessment and health optimization in
   perioperative pathways.*
   <https://www.england.nhs.uk/long-read/earlier-screening-risk-assessment-and-health-optimisation-in-perioperative-pathways/>
 - Centre for Perioperative Care (CPOC). *Preoperative Assessment and
@@ -245,6 +252,16 @@ perioperative-optimization/
 - Rockwood K, Song X, MacKnight C, et al. *A global clinical measure of fitness
   and frailty in elderly people (Clinical Frailty Scale).* CMAJ
   2005;173(5):489–95.
+- Fried LP, Tangen CM, Walston J, et al. *Frailty in older adults: evidence
+  for a phenotype.* J Gerontol A Biol Sci Med Sci 2001;56(3):M146–56.
+- British Geriatrics Society. *Guideline for the care of people living with
+  frailty undergoing elective and emergency surgery.*
+- American Society of Anesthesiologists. *Consensus-Based Guidance on
+  Preoperative Management of Patients on GLP-1 Receptor Agonists* (2023).
+- UK gov.uk MHRA Drug Safety Update. *GLP-1 and dual GIP/GLP-1 receptor
+  agonists: potential risk of pulmonary aspiration.*
+- See [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md)
+  for the complete GLP-1 and frailty reference list.
 - NICE. *Routine preoperative tests for elective surgery* (NG45).
   <https://www.nice.org.uk/guidance/ng45>
 - NICE. *Perioperative care in adults* (NG180).

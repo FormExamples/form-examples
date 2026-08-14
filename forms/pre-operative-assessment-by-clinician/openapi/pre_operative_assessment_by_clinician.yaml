@@ -1167,6 +1167,86 @@ components:
           type: string
           format: date-time
           description: Timestamp of the most recent recorded dose.
+        on_glp1_receptor_agonist:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is currently prescribed a GLP-1 receptor agonist (semaglutide, tirzepatide and related drugs), which delays gastric emptying and raises aspiration risk under anaesthesia.
+        glp1_agonist_name:
+          type: string
+          enum:
+            - semaglutide
+            - tirzepatide
+            - dulaglutide
+            - liraglutide
+            - exenatide
+            - other
+            - ""
+          description: Which GLP-1 receptor agonist the patient is prescribed.
+        glp1_formulation:
+          type: string
+          enum:
+            - daily
+            - weekly
+            - ""
+          description: "Dosing formulation: daily or weekly. Drives the hold window — hold daily formulations day-of, hold weekly formulations one week before surgery."
+        glp1_last_dose_at:
+          type: string
+          format: date-time
+          description: Timestamp of the most recent recorded GLP-1 receptor agonist dose.
+        glp1_held_per_guideline:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the GLP-1 receptor agonist was held per the agreed perioperative schedule (daily formulation held day-of; weekly formulation held one week prior).
+        glp1_extended_clear_fluids_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient instead followed the extended-fasting alternative: 24-hour solid fast plus 4-8 hour clear-liquid fast, when the medication could not be held."
+        glp1_gi_symptoms:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient reports active GLP-1-related gastrointestinal symptoms (nausea, vomiting, early satiety, reflux, bloating) at the time of assessment.
+        glp1_gi_symptoms_details:
+          type: string
+          maxLength: 500
+          description: Free-text description of the reported GLP-1-related gastrointestinal symptoms and their severity.
+        glp1_gastric_ultrasound_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether point-of-care gastric ultrasound was performed to assess residual gastric content.
+        glp1_gastric_ultrasound_findings:
+          type: string
+          enum:
+            - empty
+            - low-risk
+            - full-stomach
+            - ""
+          description: "Gastric ultrasound finding: empty, low-risk, or full-stomach."
+        glp1_full_stomach_precautions_planned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether full-stomach precautions (rapid-sequence induction, regional anaesthesia preference, or delaying surgery) are planned because the medication was not held or the patient remains symptomatic.
+        glp1_notes:
+          type: string
+          maxLength: 1000
+          description: Free-text clinician notes on GLP-1 receptor agonist perioperative management.
         allergen:
           type: string
           maxLength: 255
@@ -1274,6 +1354,84 @@ components:
           type: number
           format: double
           description: Recent unintentional weight loss in kilograms.
+        fried_weakness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: weakness, i.e. reduced grip strength for sex and BMI."
+        fried_slowness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: slowness, i.e. reduced walking speed for sex and height."
+        fried_low_physical_activity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: low physical activity level."
+        fried_exhaustion:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: self-reported exhaustion."
+        fried_unintentional_weight_loss:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: unintentional weight loss, distinct from the free-text kilogram figure recorded in unintentional_weight_loss_kg."
+        risk_analysis_index_score:
+          type: integer
+          format: int32
+          description: Risk Analysis Index (RAI) score; higher scores indicate greater frailty.
+        mini_cog_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Mini-Cog cognitive screen was performed, indicated when the Clinical Frailty Scale is 5 or above.
+        mini_cog_score:
+          type: integer
+          format: int32
+          description: Mini-Cog total score 0-5 (three-item recall plus clock-draw test). A score of 0-2 suggests cognitive impairment.
+        prehabilitation_indicated:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether multimodal prehabilitation (nutrition, aerobic and resistance exercise) is indicated before surgery.
+        prehabilitation_type:
+          type: string
+          enum:
+            - nutrition
+            - aerobic
+            - resistance
+            - multimodal
+            - other
+            - ""
+          description: "Type of prehabilitation planned: nutrition, aerobic, resistance, multimodal, or other."
+        prehabilitation_start_date:
+          type: string
+          format: date
+          description: Date prehabilitation started or is planned to start, ideally 2-6 weeks before surgery.
+        protein_supplementation_recommended:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether protein supplementation is recommended, particularly for frail patients on a GLP-1 receptor agonist at risk of accelerated sarcopenia.
         technique:
           type: string
           enum:
@@ -1616,6 +1774,17 @@ components:
         - class
         - perioperative_action
         - perioperative_notes
+        - on_glp1_receptor_agonist
+        - glp1_agonist_name
+        - glp1_formulation
+        - glp1_held_per_guideline
+        - glp1_extended_clear_fluids_confirmed
+        - glp1_gi_symptoms
+        - glp1_gi_symptoms_details
+        - glp1_gastric_ultrasound_performed
+        - glp1_gastric_ultrasound_findings
+        - glp1_full_stomach_precautions_planned
+        - glp1_notes
         - allergen
         - category
         - reaction_type
@@ -1625,6 +1794,15 @@ components:
         - cpet_performed
         - cpet_notes
         - malnutrition_risk
+        - fried_weakness
+        - fried_slowness
+        - fried_low_physical_activity
+        - fried_exhaustion
+        - fried_unintentional_weight_loss
+        - mini_cog_performed
+        - prehabilitation_indicated
+        - prehabilitation_type
+        - protein_supplementation_recommended
         - technique
         - airway_plan
         - rsi_planned

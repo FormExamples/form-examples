@@ -1,8 +1,8 @@
-// The eight optimisation domains: thresholds, interventions, and lead times.
+// The eight optimization domains: thresholds, interventions, and lead times.
 //
 // Single source of truth for what triggers each domain and how many weeks
 // before surgery the intervention needs. The clinical justification for every
-// number lives in doc/optimisation-domains.md; the two must not diverge.
+// number lives in doc/optimization-domains.md; the two must not diverge.
 //
 // Every function here is pure.
 
@@ -105,6 +105,29 @@ export function computeAuditCScore(data: PerioperativeOptimization): number | nu
 	return parts.reduce<number>((sum, p) => sum + (p ?? 0), 0);
 }
 
+/**
+ * Fried Frailty Phenotype (Fried et al. 2001). Five yes/no criteria; score =
+ * count met. 0 = robust, 1-2 = pre-frail, 3-5 = frail. Returns
+ * { score: null, category: '' } when no criterion has been answered.
+ */
+export function computeFriedPhenotypeScore(
+	data: PerioperativeOptimization
+): { score: number | null; category: 'robust' | 'pre-frail' | 'frail' | '' } {
+	const f = data.frailty;
+	const criteria = [
+		f.friedWeakness,
+		f.friedSlowness,
+		f.friedLowPhysicalActivity,
+		f.friedExhaustion,
+		f.friedUnintentionalWeightLoss
+	];
+	if (criteria.every((c) => c === '')) return { score: null, category: '' };
+
+	const score = criteria.filter((c) => c === 'yes').length;
+	const category = score === 0 ? 'robust' : score <= 2 ? 'pre-frail' : 'frail';
+	return { score, category };
+}
+
 // ----------------------------------------------------------------------
 // Domain evaluators
 //
@@ -186,7 +209,7 @@ function evaluateGlycaemicControl(data: PerioperativeOptimization): DomainEvalua
 		return {
 			triggered: true, applicable: true, leadTimeWeeks, started,
 			ruleId: 'R-GLYC-1',
-			finding: `HbA1c ${hba1c} mmol/mol is at or above the optimisation threshold of 48 mmol/mol.`,
+			finding: `HbA1c ${hba1c} mmol/mol is at or above the optimization threshold of 48 mmol/mol.`,
 			intervention: 'Diabetes-team review, medication adjustment, and structured education.'
 		};
 	}

@@ -1044,7 +1044,7 @@
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
         "description": "Perioperative Optimization grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Weeks To Surgery: 1; Gating Applied: True; Must Score: 5; Must Risk: low; Audit C Score: 5; Stop Bang Score: 5; Duke Activity Status Index: 0.0; Clinical Frailty Scale: 1; Domains Optimised: 1; Domains In Progress: 1; Domains Action Required: 1; Domains Insufficient Time: 1; Computed Readiness: ready; Final Readiness: ready; Override Reason: Example text.; Gate Decision: proceed; Recommended Earliest Surgery Date: 2026-01-15; Clinician Notes: Example text.; Signed By Name: Example; Signed At: 2026-04-09T10:00:00+00:00"
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Weeks To Surgery: 1; Gating Applied: True; Must Score: 5; Must Risk: low; Audit C Score: 5; Stop Bang Score: 5; Duke Activity Status Index: 0.0; Clinical Frailty Scale: 1; Fried Phenotype Score: 5; Fried Frailty Category: robust; Domains Optimized: 1; Domains In Progress: 1; Domains Action Required: 1; Domains Insufficient Time: 1; Computed Readiness: ready; Final Readiness: ready; Override Reason: Example text.; Gate Decision: proceed; Recommended Earliest Surgery Date: 2026-01-15; Clinician Notes: Example text.; Signed By Name: Example; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {
@@ -1133,8 +1133,8 @@
               "coding": [
                 {
                   "system": "urn:form-examples:perioperative-optimization:status",
-                  "code": "optimised",
-                  "display": "Optimised"
+                  "code": "optimized",
+                  "display": "Optimized"
                 }
               ]
             }

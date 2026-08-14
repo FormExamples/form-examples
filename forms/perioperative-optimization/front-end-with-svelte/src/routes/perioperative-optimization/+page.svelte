@@ -14,7 +14,7 @@
 		>
 			<h2 class="text-lg font-semibold">Start a new assessment</h2>
 			<p class="mt-2 text-sm text-primary-content/80">
-				Open the step-by-step optimisation intake. One continuous single-page wizard across sixteen
+				Open the step-by-step optimization intake. One continuous single-page wizard across sixteen
 				steps that grades eight domains against the time remaining before surgery.
 			</p>
 			<span class="mt-4 inline-block text-sm font-semibold">Open the form →</span>
@@ -26,7 +26,7 @@
 			<h2 class="text-lg font-semibold">Dashboard</h2>
 			<p class="mt-2 text-sm text-base-content/70">
 				See surgical readiness and weeks to surgery across the waiting list, and which lists are at
-				risk of proceeding unoptimised.
+				risk of proceeding unoptimized.
 			</p>
 			<span class="mt-4 inline-block text-sm font-semibold text-primary">Open the dashboard →</span>
 		</a>
@@ -38,10 +38,10 @@
 			<div>
 				<dt class="font-semibold text-base-content">Purpose</dt>
 				<dd class="mt-1 text-base-content/70">
-					Perioperative optimisation is the active process of identifying, treating, and improving
+					Perioperative optimization is the active process of identifying, treating, and improving
 					reversible health problems before surgery, so that complications fall, stays shorten, and
 					the body copes better with the stress of the operation. This form is the screening intake a
-					surgical or anaesthetic team uses to do that, and to build a personalised prehabilitation
+					surgical or anaesthetic team uses to do that, and to build a personalized prehabilitation
 					plan.
 				</dd>
 			</div>
@@ -51,7 +51,7 @@
 					It does not compute an ASA grade — three sibling forms already do. ASA answers <em>how
 					risky is this patient?</em>, a question whose answer the team cannot change. This form
 					answers <em>what is still fixable, and is there time to fix it?</em> A patient can be ASA
-					III and fully optimised, or ASA II with an untreated iron deficiency that four weeks of
+					III and fully optimized, or ASA II with an untreated iron deficiency that four weeks of
 					intravenous iron would resolve.
 				</dd>
 			</div>
@@ -63,13 +63,13 @@
 					oral iron or four of intravenous. The engine gates every finding against the weeks
 					remaining, so a finding becomes a decision. Where there is not enough time, the band is
 					<strong>Defer surgery</strong> and the team must either move the date or record an explicit
-					accept-unoptimised-risk decision.
+					accept-unoptimized-risk decision.
 				</dd>
 			</div>
 			<div>
 				<dt class="font-semibold text-base-content">Scoring</dt>
 				<dd class="mt-1 text-base-content/70">
-					Thresholds follow NHS England's perioperative-pathway guidance, CPOC's optimisation,
+					Thresholds follow NHS England's perioperative-pathway guidance, CPOC's optimization,
 					anaemia, and diabetes guidelines, NICE NG45 and NG180, and the source papers for MUST,
 					AUDIT-C, the Duke Activity Status Index, STOP-BANG, and the Clinical Frailty Scale.
 					Surgical readiness uses max-grade: the worst domain sets the band. Safety flags are

@@ -179,7 +179,7 @@ components:
           description: Agreed number of days after surgery to restart this medicine.
         hold_plan_agreed:
           type: boolean
-          description: Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimisation domain.
+          description: Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimization domain.
         hold_plan_agreed_by:
           type: string
           description: Who agreed the hold-and-restart plan.

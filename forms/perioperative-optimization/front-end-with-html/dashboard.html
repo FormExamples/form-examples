@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Perioperative Optimization — dashboard</title>
-  <meta name="description" content="Perioperative optimisation dashboard: surgical readiness, weeks to surgery, per-domain status, and the lists at risk of proceeding unoptimised.">
+  <meta name="description" content="Perioperative optimization dashboard: surgical readiness, weeks to surgery, per-domain status, and the lists at risk of proceeding unoptimized.">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
   <script>
@@ -25,7 +25,7 @@
       <div class="page-header-bar">
         <div class="page-header-title">
           <h1>Perioperative Optimization dashboard</h1>
-          <p class="subtitle">Surgical readiness and weeks to surgery across the waiting list, so a coordinator can see which lists are at risk of proceeding unoptimised.</p>
+          <p class="subtitle">Surgical readiness and weeks to surgery across the waiting list, so a coordinator can see which lists are at risk of proceeding unoptimized.</p>
         </div>
         <div class="page-header-controls no-print">
           <p class="subtitle page-header-link"><a href="index.html">← Back to the assessment form</a></p>
@@ -120,8 +120,8 @@
         <select class="select" id="filter-readiness">
           <option value="">All</option>
           <option value="ready">Ready</option>
-          <option value="optimisation-in-progress">Optimisation in progress</option>
-          <option value="optimisation-required">Optimisation required</option>
+          <option value="optimization-in-progress">Optimization in progress</option>
+          <option value="optimization-required">Optimization required</option>
           <option value="defer-surgery">Defer surgery</option>
         </select>
       </div>
@@ -154,8 +154,8 @@
           <option value="">All</option>
           <option value="proceed">Proceed</option>
           <option value="proceed-with-prehabilitation">Proceed with prehabilitation</option>
-          <option value="defer-and-optimise">Defer and optimise</option>
-          <option value="accept-unoptimised-risk">Accept unoptimised risk</option>
+          <option value="defer-and-optimize">Defer and optimize</option>
+          <option value="accept-unoptimized-risk">Accept unoptimized risk</option>
           <option value="mdt-review">MDT review</option>
           <option value="cancel">Cancel</option>
         </select>
@@ -169,7 +169,7 @@
     <section class="summary" id="summary" aria-label="Summary" aria-live="polite"></section>
 
     <table class="data-table" id="assessments-table">
-      <caption class="visually-hidden">Perioperative optimisation assessments</caption>
+      <caption class="visually-hidden">Perioperative optimization assessments</caption>
       <thead class="data-table-head">
         <tr class="data-table-row">
           <th class="data-table-th" scope="col" data-sort="surgeryDate">Surgery date</th>
@@ -199,11 +199,11 @@
 
     <footer class="page-footer">
       <p>
-        Surgical readiness is computed by max-grade across the eight optimisation
+        Surgical readiness is computed by max-grade across the eight optimization
         domains: the worst domain sets the band. A domain marked short on time
-        cannot be optimised before the listed date, which forces a defer-surgery
+        cannot be optimized before the listed date, which forces a defer-surgery
         band until a clinician either moves the date or records an explicit
-        accept-unoptimised-risk decision.
+        accept-unoptimized-risk decision.
       </p>
     </footer>
 

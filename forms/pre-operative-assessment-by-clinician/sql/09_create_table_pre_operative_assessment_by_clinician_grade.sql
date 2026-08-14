@@ -20,6 +20,10 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade (
         CHECK (stopbang_score IS NULL OR stopbang_score BETWEEN 0 AND 8),
     frailty_scale INTEGER
         CHECK (frailty_scale IS NULL OR frailty_scale BETWEEN 1 AND 9),
+    fried_phenotype_score INTEGER
+        CHECK (fried_phenotype_score IS NULL OR fried_phenotype_score BETWEEN 0 AND 5),
+    fried_frailty_category VARCHAR(15) NOT NULL DEFAULT ''
+        CHECK (fried_frailty_category IN ('robust', 'pre-frail', 'frail', '')),
     composite_risk VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (composite_risk IN ('low', 'moderate', 'high', 'critical', '')),
     recommendation VARCHAR(20) NOT NULL DEFAULT ''
@@ -62,6 +66,10 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.stopbang_score IS
     'STOP-BANG score (0-8).';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.frailty_scale IS
     'Clinical Frailty Scale score (1-9).';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.fried_phenotype_score IS
+    'Fried Frailty Phenotype score (0-5): count of weakness, slowness, low activity, exhaustion, and unintentional weight loss criteria met.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.fried_frailty_category IS
+    'Fried Frailty Phenotype category derived from the score: robust (0), pre-frail (1-2), or frail (3-5).';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.composite_risk IS
     'Composite perioperative risk: low, moderate, high, critical.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade.recommendation IS

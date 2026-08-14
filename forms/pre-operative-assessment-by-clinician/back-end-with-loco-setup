@@ -245,6 +245,18 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     perioperative_action:string! \
     perioperative_notes:string! \
     last_dose_at:tstz \
+    on_glp1_receptor_agonist:string! \
+    glp1_agonist_name:string! \
+    glp1_formulation:string! \
+    glp1_last_dose_at:tstz \
+    glp1_held_per_guideline:string! \
+    glp1_extended_clear_fluids_confirmed:string! \
+    glp1_gi_symptoms:string! \
+    glp1_gi_symptoms_details:string! \
+    glp1_gastric_ultrasound_performed:string! \
+    glp1_gastric_ultrasound_findings:string! \
+    glp1_full_stomach_precautions_planned:string! \
+    glp1_notes:string! \
     allergen:string! \
     category:string! \
     reaction_type:string! \
@@ -264,6 +276,18 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     cpet_notes:text! \
     malnutrition_risk:string! \
     unintentional_weight_loss_kg:double \
+    fried_weakness:string! \
+    fried_slowness:string! \
+    fried_low_physical_activity:string! \
+    fried_exhaustion:string! \
+    fried_unintentional_weight_loss:string! \
+    risk_analysis_index_score:int \
+    mini_cog_performed:string! \
+    mini_cog_score:int \
+    prehabilitation_indicated:string! \
+    prehabilitation_type:string! \
+    prehabilitation_start_date:date \
+    protein_supplementation_recommended:string! \
     technique:string! \
     airway_plan:string! \
     rsi_planned:string! \
@@ -276,6 +300,31 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     anticipated_length_of_stay_days:int \
     special_equipment:string! \
     blood_products_required:string! \
+    hospital_number:text! \
+    indication_for_surgery:text! \
+    anaesthetist_name:text! \
+    previous_surgeries:text! \
+    previous_anaesthetic_issues:text! \
+    previous_anaesthetic_issues_details:text! \
+    family_history_anaesthetic_complications:text! \
+    family_history_anaesthetic_complications_details:text! \
+    urinalysis_findings:text! \
+    living_situation:text! \
+    support_at_home:text! \
+    mobility_status:text! \
+    falls_risk_within_year:text! \
+    vte_risk_level:text! \
+    covid_screening_result:text! \
+    discharge_destination:text! \
+    follow_up_requirements:text! \
+    social_services_involvement:text! \
+    reablement_physiotherapy_needs:text! \
+    consent_status:text! \
+    interpreter_required:text! \
+    discussion_procedure:text! \
+    discussion_anaesthetic:text! \
+    discussion_risks_benefits:text! \
+    discussion_alternatives:text! \
     --api
 
 cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \
@@ -289,6 +338,8 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \
     rcri_score:int \
     stopbang_score:int \
     frailty_scale:int \
+    fried_phenotype_score:int \
+    fried_frailty_category:string! \
     composite_risk:string! \
     recommendation:string! \
     clinician_notes:text! \

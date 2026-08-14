@@ -197,15 +197,15 @@ export const OPTIONS: Record<string, Option[]> = {
 	],
 	readiness: [
 		{ value: 'ready', label: 'Ready for surgery' },
-		{ value: 'optimisation-in-progress', label: 'Optimisation in progress' },
-		{ value: 'optimisation-required', label: 'Optimisation required' },
+		{ value: 'optimization-in-progress', label: 'Optimization in progress' },
+		{ value: 'optimization-required', label: 'Optimization required' },
 		{ value: 'defer-surgery', label: 'Defer surgery' }
 	],
 	gateDecision: [
 		{ value: 'proceed', label: 'Proceed as listed' },
 		{ value: 'proceed-with-prehabilitation', label: 'Proceed with prehabilitation' },
-		{ value: 'defer-and-optimise', label: 'Defer and optimise' },
-		{ value: 'accept-unoptimised-risk', label: 'Accept unoptimised risk' },
+		{ value: 'defer-and-optimize', label: 'Defer and optimize' },
+		{ value: 'accept-unoptimized-risk', label: 'Accept unoptimized risk' },
 		{ value: 'mdt-review', label: 'Refer to MDT review' },
 		{ value: 'cancel', label: 'Cancel' }
 	]

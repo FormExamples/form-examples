@@ -20,7 +20,9 @@ pub struct Model {
     #[sea_orm(column_type = "Double", nullable)]
     pub duke_activity_status_index: Option<f64>,
     pub clinical_frailty_scale: Option<i32>,
-    pub domains_optimised: Option<i32>,
+    pub fried_phenotype_score: Option<i32>,
+    pub fried_frailty_category: String,
+    pub domains_optimized: Option<i32>,
     pub domains_in_progress: Option<i32>,
     pub domains_action_required: Option<i32>,
     pub domains_insufficient_time: Option<i32>,

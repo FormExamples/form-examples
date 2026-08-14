@@ -24,6 +24,7 @@
     <p><strong>RCRI score:</strong> {r.rcriScore}</p>
     <p><strong>STOP-BANG score:</strong> {r.stopbangScore}</p>
     <p><strong>Clinical Frailty Scale:</strong> {r.frailtyScale ?? '—'}</p>
+    <p><strong>Fried Frailty Phenotype:</strong> {r.friedPhenotypeScore ?? '—'}{r.friedFrailtyCategory ? ` (${r.friedFrailtyCategory})` : ''}</p>
     <p><strong>Composite risk:</strong> {r.compositeRisk.toUpperCase()}</p>
   </div>
 

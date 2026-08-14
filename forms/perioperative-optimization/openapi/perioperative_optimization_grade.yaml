@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Perioperative Optimization — PerioperativeOptimizationGrade
   version: 1.0.0
-  description: Computed and signed-off grading result for one perioperative optimisation assessment, holding the engine-computed and clinician-final surgical readiness bands.
+  description: Computed and signed-off grading result for one perioperative optimization assessment, holding the engine-computed and clinician-final surgical readiness bands.
 paths:
   /perioperative-optimization-grades:
     get:
@@ -159,10 +159,22 @@ components:
           type: integer
           format: int32
           description: Clinical Frailty Scale, 1 to 9. Reported and flagged but not gated, because frailty is rarely reversible in the available window.
-        domains_optimised:
+        fried_phenotype_score:
           type: integer
           format: int32
-          description: Count of the eight domains graded optimised or not-applicable.
+          description: "Fried Frailty Phenotype score (0-5): count of weakness, slowness, low activity, exhaustion, and unintentional weight loss criteria met."
+        fried_frailty_category:
+          type: string
+          enum:
+            - robust
+            - pre-frail
+            - frail
+            - ""
+          description: "Fried Frailty Phenotype category derived from the score: robust (0), pre-frail (1-2), or frail (3-5)."
+        domains_optimized:
+          type: integer
+          format: int32
+          description: Count of the eight domains graded optimized or not-applicable.
         domains_in_progress:
           type: integer
           format: int32
@@ -179,8 +191,8 @@ components:
           type: string
           enum:
             - ready
-            - optimisation-in-progress
-            - optimisation-required
+            - optimization-in-progress
+            - optimization-required
             - defer-surgery
             - ""
           description: Surgical readiness band computed by the engine using the max-grade algorithm across the eight domains.
@@ -188,8 +200,8 @@ components:
           type: string
           enum:
             - ready
-            - optimisation-in-progress
-            - optimisation-required
+            - optimization-in-progress
+            - optimization-required
             - defer-surgery
             - ""
           description: Surgical readiness band signed off by the clinician, which may equal or differ from the computed band.
@@ -202,12 +214,12 @@ components:
           enum:
             - proceed
             - proceed-with-prehabilitation
-            - defer-and-optimise
-            - accept-unoptimised-risk
+            - defer-and-optimize
+            - accept-unoptimized-risk
             - mdt-review
             - cancel
             - ""
-          description: "The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimise, accept-unoptimised-risk, mdt-review, or cancel."
+          description: "The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimize, accept-unoptimized-risk, mdt-review, or cancel."
         recommended_earliest_surgery_date:
           type: string
           format: date
@@ -233,6 +245,7 @@ components:
         - perioperative_optimization_id
         - gating_applied
         - must_risk
+        - fried_frailty_category
         - computed_readiness
         - final_readiness
         - override_reason
@@ -240,4 +253,4 @@ components:
         - clinician_notes
         - signed_by_name
         - graded_at
-      description: Computed and signed-off grading result for one perioperative optimisation assessment, holding the engine-computed and clinician-final surgical readiness bands.
+      description: Computed and signed-off grading result for one perioperative optimization assessment, holding the engine-computed and clinician-final surgical readiness bands.

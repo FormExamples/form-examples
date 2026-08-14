@@ -14,6 +14,8 @@
 <rcri_score>5</rcri_score>
 <stopbang_score>5</stopbang_score>
 <frailty_scale>1</frailty_scale>
+<fried_phenotype_score>5</fried_phenotype_score>
+<fried_frailty_category>robust</fried_frailty_category>
 <composite_risk>low</composite_risk>
 <recommendation>proceed</recommendation>
 <clinician_notes>Example text.</clinician_notes>

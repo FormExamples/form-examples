@@ -134,4 +134,123 @@ describe('calculateASA', () => {
     const ids = ASA_RULES.map((r) => r.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
+
+  it('scores Fried Phenotype 0 as robust when all five criteria are no', () => {
+    const data = createEmptyAssessment();
+    data.functionalCapacity.friedWeakness = 'no';
+    data.functionalCapacity.friedSlowness = 'no';
+    data.functionalCapacity.friedLowPhysicalActivity = 'no';
+    data.functionalCapacity.friedExhaustion = 'no';
+    data.functionalCapacity.friedUnintentionalWeightLoss = 'no';
+    const r = calculateASA(data);
+    expect(r.friedPhenotypeScore).toBe(0);
+    expect(r.friedFrailtyCategory).toBe('robust');
+  });
+
+  it('scores Fried Phenotype 2 as pre-frail', () => {
+    const data = createEmptyAssessment();
+    data.functionalCapacity.friedWeakness = 'yes';
+    data.functionalCapacity.friedSlowness = 'yes';
+    data.functionalCapacity.friedLowPhysicalActivity = 'no';
+    data.functionalCapacity.friedExhaustion = 'no';
+    data.functionalCapacity.friedUnintentionalWeightLoss = 'no';
+    const r = calculateASA(data);
+    expect(r.friedPhenotypeScore).toBe(2);
+    expect(r.friedFrailtyCategory).toBe('pre-frail');
+    expect(r.compositeRisk).toBe('moderate');
+  });
+
+  it('scores Fried Phenotype 3+ as frail and raises high risk', () => {
+    const data = createEmptyAssessment();
+    data.functionalCapacity.friedWeakness = 'yes';
+    data.functionalCapacity.friedSlowness = 'yes';
+    data.functionalCapacity.friedLowPhysicalActivity = 'yes';
+    data.functionalCapacity.friedExhaustion = 'no';
+    data.functionalCapacity.friedUnintentionalWeightLoss = 'no';
+    const r = calculateASA(data);
+    expect(r.friedPhenotypeScore).toBe(3);
+    expect(r.friedFrailtyCategory).toBe('frail');
+    expect(r.compositeRisk).toBe('high');
+  });
+
+  it('leaves Fried Phenotype unscored when no criterion is answered', () => {
+    const data = createEmptyAssessment();
+    const r = calculateASA(data);
+    expect(r.friedPhenotypeScore).toBeNull();
+    expect(r.friedFrailtyCategory).toBe('');
+  });
+
+  it('fires glp1-aspiration-risk when a GLP-1 agonist was not held and GI symptoms are present', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.glp1Management.glp1GiSymptoms = 'yes';
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'glp1-aspiration-risk')).toBe(true);
+  });
+
+  it('fires glp1-aspiration-risk when not held and extended clear fluids not confirmed', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.glp1Management.glp1HeldPerGuideline = 'no';
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'glp1-aspiration-risk')).toBe(true);
+  });
+
+  it('does not fire glp1-aspiration-risk when held per guideline and asymptomatic', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.glp1Management.glp1HeldPerGuideline = 'yes';
+    data.glp1Management.glp1GiSymptoms = 'no';
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'glp1-aspiration-risk')).toBe(false);
+  });
+
+  it('fires cognitive-assessment-indicated at CFS >= 5 without a Mini-Cog', () => {
+    const data = createEmptyAssessment();
+    data.functionalCapacity.clinicalFrailtyScale = 6;
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'cognitive-assessment-indicated')).toBe(true);
+  });
+
+  it('does not fire cognitive-assessment-indicated once Mini-Cog is performed', () => {
+    const data = createEmptyAssessment();
+    data.functionalCapacity.clinicalFrailtyScale = 6;
+    data.functionalCapacity.miniCogPerformed = 'yes';
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'cognitive-assessment-indicated')).toBe(false);
+  });
+
+  it('fires sarcopenia-risk for a frail patient on a GLP-1 agonist', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.functionalCapacity.clinicalFrailtyScale = 5;
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'sarcopenia-risk')).toBe(true);
+  });
+
+  it('fires dehydration-aki-risk for a frail patient on a GLP-1 agonist with GI symptoms', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.glp1Management.glp1GiSymptoms = 'yes';
+    data.functionalCapacity.clinicalFrailtyScale = 5;
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'dehydration-aki-risk')).toBe(true);
+  });
+
+  it('fires rebound-glycaemic-risk when a held GLP-1 agonist meets insulin-requiring diabetes', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.glp1Management.glp1HeldPerGuideline = 'yes';
+    data.endocrine.diabetesOnInsulin = 'yes';
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'rebound-glycaemic-risk')).toBe(true);
+  });
+
+  it('does not fire rebound-glycaemic-risk when the GLP-1 agonist was continued', () => {
+    const data = createEmptyAssessment();
+    data.glp1Management.onGlp1ReceptorAgonist = 'yes';
+    data.endocrine.diabetesOnInsulin = 'yes';
+    const r = calculateASA(data);
+    expect(r.additionalFlags.some((f) => f.category === 'rebound-glycaemic-risk')).toBe(false);
+  });
 });

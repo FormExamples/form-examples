@@ -35,7 +35,7 @@
 	<Field label="Registration number" inputId="assessment-registrationNumber">
 		<TextInput id="assessment-registrationNumber" label="Registration number" bind:value={d.assessment.registrationNumber} />
 	</Field>
-	<Field label="Assessment date" inputId="assessment-assessmentDate" description="With the planned surgery date this sets the weeks available to optimise." required>
+	<Field label="Assessment date" inputId="assessment-assessmentDate" description="With the planned surgery date this sets the weeks available to optimize." required>
 		<DateInput id="assessment-assessmentDate" label="Assessment date" bind:value={d.assessment.assessmentDate} required />
 	</Field>
 	<Field label="Assessment time" inputId="assessment-assessmentTime">

@@ -37,7 +37,7 @@ Each exposes the standard scaffold set: `GET /` (list), `POST /` (create),
 `GET /{id}`, `PUT /{id}`, `PATCH /{id}`, `DELETE /{id}`.
 
 Note the `_grade_domain` collection: unlike the sibling pre-operative forms,
-the per-domain optimisation statuses are this form's primary output rather than
+the per-domain optimization statuses are this form's primary output rather than
 an audit trail beneath a single score, so they are a first-class resource. A
 waiting-list dashboard can query it directly for "every assessment with an
 anaemia domain short on time".

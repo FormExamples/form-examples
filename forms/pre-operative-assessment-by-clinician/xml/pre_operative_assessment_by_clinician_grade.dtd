@@ -1,4 +1,4 @@
-<!ELEMENT pre_operative_assessment_by_clinician_grade (id,created_at,updated_at,deleted_at,pre_operative_assessment_by_clinician_id,computed_asa_grade,final_asa_grade,asa_emergency_suffix,override_reason,mallampati_class,rcri_score,stopbang_score,frailty_scale,composite_risk,recommendation,clinician_notes,signed_at,graded_at)>
+<!ELEMENT pre_operative_assessment_by_clinician_grade (id,created_at,updated_at,deleted_at,pre_operative_assessment_by_clinician_id,computed_asa_grade,final_asa_grade,asa_emergency_suffix,override_reason,mallampati_class,rcri_score,stopbang_score,frailty_scale,fried_phenotype_score,fried_frailty_category,composite_risk,recommendation,clinician_notes,signed_at,graded_at)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
@@ -12,6 +12,8 @@
 <!ELEMENT rcri_score (#PCDATA)>
 <!ELEMENT stopbang_score (#PCDATA)>
 <!ELEMENT frailty_scale (#PCDATA)>
+<!ELEMENT fried_phenotype_score (#PCDATA)>
+<!ELEMENT fried_frailty_category (#PCDATA)>
 <!ELEMENT composite_risk (#PCDATA)>
 <!ELEMENT recommendation (#PCDATA)>
 <!ELEMENT clinician_notes (#PCDATA)>

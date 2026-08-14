@@ -645,6 +645,65 @@ enum PreOperativeAssessmentByClinicianPerioperativeActionEnum {
   PERIOPERATIVEACTION_BRIDGE = 6;  // bridge
 }
 
+enum PreOperativeAssessmentByClinicianOnGlp1ReceptorAgonistEnum {
+  ONGLP1RECEPTORAGONIST_UNSPECIFIED = 0;
+  ONGLP1RECEPTORAGONIST_YES = 1;  // yes
+  ONGLP1RECEPTORAGONIST_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianGlp1AgonistNameEnum {
+  GLP1AGONISTNAME_UNSPECIFIED = 0;
+  GLP1AGONISTNAME_SEMAGLUTIDE = 1;  // semaglutide
+  GLP1AGONISTNAME_TIRZEPATIDE = 2;  // tirzepatide
+  GLP1AGONISTNAME_DULAGLUTIDE = 3;  // dulaglutide
+  GLP1AGONISTNAME_LIRAGLUTIDE = 4;  // liraglutide
+  GLP1AGONISTNAME_EXENATIDE = 5;  // exenatide
+  GLP1AGONISTNAME_OTHER = 6;  // other
+}
+
+enum PreOperativeAssessmentByClinicianGlp1FormulationEnum {
+  GLP1FORMULATION_UNSPECIFIED = 0;
+  GLP1FORMULATION_DAILY = 1;  // daily
+  GLP1FORMULATION_WEEKLY = 2;  // weekly
+}
+
+enum PreOperativeAssessmentByClinicianGlp1HeldPerGuidelineEnum {
+  GLP1HELDPERGUIDELINE_UNSPECIFIED = 0;
+  GLP1HELDPERGUIDELINE_YES = 1;  // yes
+  GLP1HELDPERGUIDELINE_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianGlp1ExtendedClearFluidsConfirmedEnum {
+  GLP1EXTENDEDCLEARFLUIDSCONFIRMED_UNSPECIFIED = 0;
+  GLP1EXTENDEDCLEARFLUIDSCONFIRMED_YES = 1;  // yes
+  GLP1EXTENDEDCLEARFLUIDSCONFIRMED_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianGlp1GiSymptomsEnum {
+  GLP1GISYMPTOMS_UNSPECIFIED = 0;
+  GLP1GISYMPTOMS_YES = 1;  // yes
+  GLP1GISYMPTOMS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianGlp1GastricUltrasoundPerformedEnum {
+  GLP1GASTRICULTRASOUNDPERFORMED_UNSPECIFIED = 0;
+  GLP1GASTRICULTRASOUNDPERFORMED_YES = 1;  // yes
+  GLP1GASTRICULTRASOUNDPERFORMED_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianGlp1GastricUltrasoundFindingsEnum {
+  GLP1GASTRICULTRASOUNDFINDINGS_UNSPECIFIED = 0;
+  GLP1GASTRICULTRASOUNDFINDINGS_EMPTY = 1;  // empty
+  GLP1GASTRICULTRASOUNDFINDINGS_LOW_RISK = 2;  // low-risk
+  GLP1GASTRICULTRASOUNDFINDINGS_FULL_STOMACH = 3;  // full-stomach
+}
+
+enum PreOperativeAssessmentByClinicianGlp1FullStomachPrecautionsPlannedEnum {
+  GLP1FULLSTOMACHPRECAUTIONSPLANNED_UNSPECIFIED = 0;
+  GLP1FULLSTOMACHPRECAUTIONSPLANNED_YES = 1;  // yes
+  GLP1FULLSTOMACHPRECAUTIONSPLANNED_NO = 2;  // no
+}
+
 enum PreOperativeAssessmentByClinicianCategoryEnum {
   CATEGORY_UNSPECIFIED = 0;
   CATEGORY_DRUG = 1;  // drug
@@ -693,6 +752,63 @@ enum PreOperativeAssessmentByClinicianMalnutritionRiskEnum {
   MALNUTRITIONRISK_LOW = 2;  // low
   MALNUTRITIONRISK_MEDIUM = 3;  // medium
   MALNUTRITIONRISK_HIGH = 4;  // high
+}
+
+enum PreOperativeAssessmentByClinicianFriedWeaknessEnum {
+  FRIEDWEAKNESS_UNSPECIFIED = 0;
+  FRIEDWEAKNESS_YES = 1;  // yes
+  FRIEDWEAKNESS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianFriedSlownessEnum {
+  FRIEDSLOWNESS_UNSPECIFIED = 0;
+  FRIEDSLOWNESS_YES = 1;  // yes
+  FRIEDSLOWNESS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianFriedLowPhysicalActivityEnum {
+  FRIEDLOWPHYSICALACTIVITY_UNSPECIFIED = 0;
+  FRIEDLOWPHYSICALACTIVITY_YES = 1;  // yes
+  FRIEDLOWPHYSICALACTIVITY_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianFriedExhaustionEnum {
+  FRIEDEXHAUSTION_UNSPECIFIED = 0;
+  FRIEDEXHAUSTION_YES = 1;  // yes
+  FRIEDEXHAUSTION_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianFriedUnintentionalWeightLossEnum {
+  FRIEDUNINTENTIONALWEIGHTLOSS_UNSPECIFIED = 0;
+  FRIEDUNINTENTIONALWEIGHTLOSS_YES = 1;  // yes
+  FRIEDUNINTENTIONALWEIGHTLOSS_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianMiniCogPerformedEnum {
+  MINICOGPERFORMED_UNSPECIFIED = 0;
+  MINICOGPERFORMED_YES = 1;  // yes
+  MINICOGPERFORMED_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianPrehabilitationIndicatedEnum {
+  PREHABILITATIONINDICATED_UNSPECIFIED = 0;
+  PREHABILITATIONINDICATED_YES = 1;  // yes
+  PREHABILITATIONINDICATED_NO = 2;  // no
+}
+
+enum PreOperativeAssessmentByClinicianPrehabilitationTypeEnum {
+  PREHABILITATIONTYPE_UNSPECIFIED = 0;
+  PREHABILITATIONTYPE_NUTRITION = 1;  // nutrition
+  PREHABILITATIONTYPE_AEROBIC = 2;  // aerobic
+  PREHABILITATIONTYPE_RESISTANCE = 3;  // resistance
+  PREHABILITATIONTYPE_MULTIMODAL = 4;  // multimodal
+  PREHABILITATIONTYPE_OTHER = 5;  // other
+}
+
+enum PreOperativeAssessmentByClinicianProteinSupplementationRecommendedEnum {
+  PROTEINSUPPLEMENTATIONRECOMMENDED_UNSPECIFIED = 0;
+  PROTEINSUPPLEMENTATIONRECOMMENDED_YES = 1;  // yes
+  PROTEINSUPPLEMENTATIONRECOMMENDED_NO = 2;  // no
 }
 
 enum PreOperativeAssessmentByClinicianTechniqueEnum {
@@ -1021,60 +1137,84 @@ message PreOperativeAssessmentByClinician {
   PreOperativeAssessmentByClinicianPerioperativeActionEnum perioperative_action = 172;  // VARCHAR(20)
   string perioperative_notes = 173;  // VARCHAR(500) — max 500 chars
   string last_dose_at = 174;  // TIMESTAMPTZ — iso 8601
-  string allergen = 175;  // VARCHAR(255) — max 255 chars
-  PreOperativeAssessmentByClinicianCategoryEnum category = 176;  // VARCHAR(30)
-  PreOperativeAssessmentByClinicianReactionTypeEnum reaction_type = 177;  // VARCHAR(30)
-  PreOperativeAssessmentByClinicianReactionSeverityEnum reaction_severity = 178;  // VARCHAR(20)
-  string reaction_notes = 179;  // VARCHAR(500) — max 500 chars
-  PreOperativeAssessmentByClinicianVerifiedEnum verified = 180;  // VARCHAR(5)
-  double mets_estimate = 181;  // NUMERIC(3,1) — numeric(3,1)
-  double dasi_score = 182;  // NUMERIC(4,1) — numeric(4,1)
-  int32 ecog_performance_status = 183;  // INTEGER
-  int32 clinical_frailty_scale = 184;  // INTEGER
-  int32 six_minute_walk_metres = 185;  // INTEGER
-  int32 sts_one_minute_reps = 186;  // INTEGER
-  double tug_seconds = 187;  // NUMERIC(4,1) — numeric(4,1)
-  PreOperativeAssessmentByClinicianCpetPerformedEnum cpet_performed = 188;  // VARCHAR(5)
-  double cpet_vo2_peak_ml_kg_min = 189;  // NUMERIC(4,1) — numeric(4,1)
-  double cpet_anaerobic_threshold_ml_kg_min = 190;  // NUMERIC(4,1) — numeric(4,1)
-  string cpet_notes = 191;  // TEXT
-  PreOperativeAssessmentByClinicianMalnutritionRiskEnum malnutrition_risk = 192;  // VARCHAR(20)
-  double unintentional_weight_loss_kg = 193;  // NUMERIC(4,1) — numeric(4,1)
-  PreOperativeAssessmentByClinicianTechniqueEnum technique = 194;  // VARCHAR(30)
-  PreOperativeAssessmentByClinicianAirwayPlanEnum airway_plan = 195;  // VARCHAR(30)
-  PreOperativeAssessmentByClinicianRsiPlannedEnum rsi_planned = 196;  // VARCHAR(5)
-  PreOperativeAssessmentByClinicianMonitoringLevelEnum monitoring_level = 197;  // VARCHAR(20)
-  string analgesia_plan = 198;  // VARCHAR(500) — max 500 chars
-  string regional_block_planned = 199;  // VARCHAR(100) — max 100 chars
-  string dvt_prophylaxis = 200;  // VARCHAR(100) — max 100 chars
-  string antibiotic_prophylaxis = 201;  // VARCHAR(100) — max 100 chars
-  PreOperativeAssessmentByClinicianPostOpDispositionEnum post_op_disposition = 202;  // VARCHAR(20)
-  int32 anticipated_length_of_stay_days = 203;  // INTEGER
-  string special_equipment = 204;  // VARCHAR(500) — max 500 chars
-  string blood_products_required = 205;  // VARCHAR(100) — max 100 chars
-  string hospital_number = 206;  // TEXT
-  string indication_for_surgery = 207;  // TEXT
-  string anaesthetist_name = 208;  // TEXT
-  string previous_surgeries = 209;  // TEXT
-  PreOperativeAssessmentByClinicianPreviousAnaestheticIssuesEnum previous_anaesthetic_issues = 210;  // TEXT
-  string previous_anaesthetic_issues_details = 211;  // TEXT
-  PreOperativeAssessmentByClinicianFamilyHistoryAnaestheticComplicationsEnum family_history_anaesthetic_complications = 212;  // TEXT
-  string family_history_anaesthetic_complications_details = 213;  // TEXT
-  string urinalysis_findings = 214;  // TEXT
-  PreOperativeAssessmentByClinicianLivingSituationEnum living_situation = 215;  // TEXT
-  PreOperativeAssessmentByClinicianSupportAtHomeEnum support_at_home = 216;  // TEXT
-  string mobility_status = 217;  // TEXT
-  PreOperativeAssessmentByClinicianFallsRiskWithinYearEnum falls_risk_within_year = 218;  // TEXT
-  PreOperativeAssessmentByClinicianVteRiskLevelEnum vte_risk_level = 219;  // TEXT
-  PreOperativeAssessmentByClinicianCovidScreeningResultEnum covid_screening_result = 220;  // TEXT
-  PreOperativeAssessmentByClinicianDischargeDestinationEnum discharge_destination = 221;  // TEXT
-  string follow_up_requirements = 222;  // TEXT
-  PreOperativeAssessmentByClinicianSocialServicesInvolvementEnum social_services_involvement = 223;  // TEXT
-  PreOperativeAssessmentByClinicianReablementPhysiotherapyNeedsEnum reablement_physiotherapy_needs = 224;  // TEXT
-  PreOperativeAssessmentByClinicianConsentStatusEnum consent_status = 225;  // TEXT
-  PreOperativeAssessmentByClinicianInterpreterRequiredEnum interpreter_required = 226;  // TEXT
-  PreOperativeAssessmentByClinicianDiscussionProcedureEnum discussion_procedure = 227;  // TEXT
-  PreOperativeAssessmentByClinicianDiscussionAnaestheticEnum discussion_anaesthetic = 228;  // TEXT
-  PreOperativeAssessmentByClinicianDiscussionRisksBenefitsEnum discussion_risks_benefits = 229;  // TEXT
-  PreOperativeAssessmentByClinicianDiscussionAlternativesEnum discussion_alternatives = 230;  // TEXT
+  PreOperativeAssessmentByClinicianOnGlp1ReceptorAgonistEnum on_glp1_receptor_agonist = 175;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianGlp1AgonistNameEnum glp1_agonist_name = 176;  // VARCHAR(20)
+  PreOperativeAssessmentByClinicianGlp1FormulationEnum glp1_formulation = 177;  // VARCHAR(10)
+  string glp1_last_dose_at = 178;  // TIMESTAMPTZ — iso 8601
+  PreOperativeAssessmentByClinicianGlp1HeldPerGuidelineEnum glp1_held_per_guideline = 179;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianGlp1ExtendedClearFluidsConfirmedEnum glp1_extended_clear_fluids_confirmed = 180;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianGlp1GiSymptomsEnum glp1_gi_symptoms = 181;  // VARCHAR(5)
+  string glp1_gi_symptoms_details = 182;  // VARCHAR(500) — max 500 chars
+  PreOperativeAssessmentByClinicianGlp1GastricUltrasoundPerformedEnum glp1_gastric_ultrasound_performed = 183;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianGlp1GastricUltrasoundFindingsEnum glp1_gastric_ultrasound_findings = 184;  // VARCHAR(20)
+  PreOperativeAssessmentByClinicianGlp1FullStomachPrecautionsPlannedEnum glp1_full_stomach_precautions_planned = 185;  // VARCHAR(5)
+  string glp1_notes = 186;  // VARCHAR(1000) — max 1000 chars
+  string allergen = 187;  // VARCHAR(255) — max 255 chars
+  PreOperativeAssessmentByClinicianCategoryEnum category = 188;  // VARCHAR(30)
+  PreOperativeAssessmentByClinicianReactionTypeEnum reaction_type = 189;  // VARCHAR(30)
+  PreOperativeAssessmentByClinicianReactionSeverityEnum reaction_severity = 190;  // VARCHAR(20)
+  string reaction_notes = 191;  // VARCHAR(500) — max 500 chars
+  PreOperativeAssessmentByClinicianVerifiedEnum verified = 192;  // VARCHAR(5)
+  double mets_estimate = 193;  // NUMERIC(3,1) — numeric(3,1)
+  double dasi_score = 194;  // NUMERIC(4,1) — numeric(4,1)
+  int32 ecog_performance_status = 195;  // INTEGER
+  int32 clinical_frailty_scale = 196;  // INTEGER
+  int32 six_minute_walk_metres = 197;  // INTEGER
+  int32 sts_one_minute_reps = 198;  // INTEGER
+  double tug_seconds = 199;  // NUMERIC(4,1) — numeric(4,1)
+  PreOperativeAssessmentByClinicianCpetPerformedEnum cpet_performed = 200;  // VARCHAR(5)
+  double cpet_vo2_peak_ml_kg_min = 201;  // NUMERIC(4,1) — numeric(4,1)
+  double cpet_anaerobic_threshold_ml_kg_min = 202;  // NUMERIC(4,1) — numeric(4,1)
+  string cpet_notes = 203;  // TEXT
+  PreOperativeAssessmentByClinicianMalnutritionRiskEnum malnutrition_risk = 204;  // VARCHAR(20)
+  double unintentional_weight_loss_kg = 205;  // NUMERIC(4,1) — numeric(4,1)
+  PreOperativeAssessmentByClinicianFriedWeaknessEnum fried_weakness = 206;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianFriedSlownessEnum fried_slowness = 207;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianFriedLowPhysicalActivityEnum fried_low_physical_activity = 208;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianFriedExhaustionEnum fried_exhaustion = 209;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianFriedUnintentionalWeightLossEnum fried_unintentional_weight_loss = 210;  // VARCHAR(5)
+  int32 risk_analysis_index_score = 211;  // INTEGER
+  PreOperativeAssessmentByClinicianMiniCogPerformedEnum mini_cog_performed = 212;  // VARCHAR(5)
+  int32 mini_cog_score = 213;  // INTEGER
+  PreOperativeAssessmentByClinicianPrehabilitationIndicatedEnum prehabilitation_indicated = 214;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianPrehabilitationTypeEnum prehabilitation_type = 215;  // VARCHAR(20)
+  string prehabilitation_start_date = 216;  // DATE — iso 8601 date
+  PreOperativeAssessmentByClinicianProteinSupplementationRecommendedEnum protein_supplementation_recommended = 217;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianTechniqueEnum technique = 218;  // VARCHAR(30)
+  PreOperativeAssessmentByClinicianAirwayPlanEnum airway_plan = 219;  // VARCHAR(30)
+  PreOperativeAssessmentByClinicianRsiPlannedEnum rsi_planned = 220;  // VARCHAR(5)
+  PreOperativeAssessmentByClinicianMonitoringLevelEnum monitoring_level = 221;  // VARCHAR(20)
+  string analgesia_plan = 222;  // VARCHAR(500) — max 500 chars
+  string regional_block_planned = 223;  // VARCHAR(100) — max 100 chars
+  string dvt_prophylaxis = 224;  // VARCHAR(100) — max 100 chars
+  string antibiotic_prophylaxis = 225;  // VARCHAR(100) — max 100 chars
+  PreOperativeAssessmentByClinicianPostOpDispositionEnum post_op_disposition = 226;  // VARCHAR(20)
+  int32 anticipated_length_of_stay_days = 227;  // INTEGER
+  string special_equipment = 228;  // VARCHAR(500) — max 500 chars
+  string blood_products_required = 229;  // VARCHAR(100) — max 100 chars
+  string hospital_number = 230;  // TEXT
+  string indication_for_surgery = 231;  // TEXT
+  string anaesthetist_name = 232;  // TEXT
+  string previous_surgeries = 233;  // TEXT
+  PreOperativeAssessmentByClinicianPreviousAnaestheticIssuesEnum previous_anaesthetic_issues = 234;  // TEXT
+  string previous_anaesthetic_issues_details = 235;  // TEXT
+  PreOperativeAssessmentByClinicianFamilyHistoryAnaestheticComplicationsEnum family_history_anaesthetic_complications = 236;  // TEXT
+  string family_history_anaesthetic_complications_details = 237;  // TEXT
+  string urinalysis_findings = 238;  // TEXT
+  PreOperativeAssessmentByClinicianLivingSituationEnum living_situation = 239;  // TEXT
+  PreOperativeAssessmentByClinicianSupportAtHomeEnum support_at_home = 240;  // TEXT
+  string mobility_status = 241;  // TEXT
+  PreOperativeAssessmentByClinicianFallsRiskWithinYearEnum falls_risk_within_year = 242;  // TEXT
+  PreOperativeAssessmentByClinicianVteRiskLevelEnum vte_risk_level = 243;  // TEXT
+  PreOperativeAssessmentByClinicianCovidScreeningResultEnum covid_screening_result = 244;  // TEXT
+  PreOperativeAssessmentByClinicianDischargeDestinationEnum discharge_destination = 245;  // TEXT
+  string follow_up_requirements = 246;  // TEXT
+  PreOperativeAssessmentByClinicianSocialServicesInvolvementEnum social_services_involvement = 247;  // TEXT
+  PreOperativeAssessmentByClinicianReablementPhysiotherapyNeedsEnum reablement_physiotherapy_needs = 248;  // TEXT
+  PreOperativeAssessmentByClinicianConsentStatusEnum consent_status = 249;  // TEXT
+  PreOperativeAssessmentByClinicianInterpreterRequiredEnum interpreter_required = 250;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionProcedureEnum discussion_procedure = 251;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionAnaestheticEnum discussion_anaesthetic = 252;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionRisksBenefitsEnum discussion_risks_benefits = 253;  // TEXT
+  PreOperativeAssessmentByClinicianDiscussionAlternativesEnum discussion_alternatives = 254;  // TEXT
 }

@@ -7,17 +7,17 @@
 
 /**
  * Surgical readiness band emitted by the engine.
- * @typedef {'ready' | 'optimisation-in-progress' | 'optimisation-required' | 'defer-surgery'} Readiness
+ * @typedef {'ready' | 'optimization-in-progress' | 'optimization-required' | 'defer-surgery'} Readiness
  */
 
 /**
- * Per-domain optimisation status after time-to-surgery gating.
- * @typedef {'optimised' | 'in-progress' | 'action-required' | 'insufficient-time' | 'not-applicable'} DomainStatus
+ * Per-domain optimization status after time-to-surgery gating.
+ * @typedef {'optimized' | 'in-progress' | 'action-required' | 'insufficient-time' | 'not-applicable'} DomainStatus
  */
 
 /**
  * The explicit human decision recorded at sign-off.
- * @typedef {'proceed' | 'proceed-with-prehabilitation' | 'defer-and-optimise' | 'accept-unoptimised-risk' | 'mdt-review' | 'cancel'} GateDecision
+ * @typedef {'proceed' | 'proceed-with-prehabilitation' | 'defer-and-optimize' | 'accept-unoptimized-risk' | 'mdt-review' | 'cancel'} GateDecision
  */
 
 /**
@@ -25,7 +25,7 @@
  *
  * `weeksToSurgery` and `domainsShortOnTime` are the columns that make this
  * dashboard useful to a waiting-list coordinator: together they say which lists
- * are about to proceed without the optimisation they were promised.
+ * are about to proceed without the optimization they were promised.
  *
  * @typedef {Object} AssessmentRow
  * @property {string} id                  - UUID / case identifier

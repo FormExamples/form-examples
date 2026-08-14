@@ -18,7 +18,9 @@ pub struct Params {
     pub stop_bang_score: Option<i32>,
     pub duke_activity_status_index: Option<f64>,
     pub clinical_frailty_scale: Option<i32>,
-    pub domains_optimised: Option<i32>,
+    pub fried_phenotype_score: Option<i32>,
+    pub fried_frailty_category: String,
+    pub domains_optimized: Option<i32>,
     pub domains_in_progress: Option<i32>,
     pub domains_action_required: Option<i32>,
     pub domains_insufficient_time: Option<i32>,
@@ -45,7 +47,9 @@ impl Params {
       item.stop_bang_score = Set(self.stop_bang_score);
       item.duke_activity_status_index = Set(self.duke_activity_status_index);
       item.clinical_frailty_scale = Set(self.clinical_frailty_scale);
-      item.domains_optimised = Set(self.domains_optimised);
+      item.fried_phenotype_score = Set(self.fried_phenotype_score);
+      item.fried_frailty_category = Set(self.fried_frailty_category.clone());
+      item.domains_optimized = Set(self.domains_optimized);
       item.domains_in_progress = Set(self.domains_in_progress);
       item.domains_action_required = Set(self.domains_action_required);
       item.domains_insufficient_time = Set(self.domains_insufficient_time);

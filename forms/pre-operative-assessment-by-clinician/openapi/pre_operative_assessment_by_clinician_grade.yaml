@@ -177,6 +177,18 @@ components:
           type: integer
           format: int32
           description: Clinical Frailty Scale score (1-9).
+        fried_phenotype_score:
+          type: integer
+          format: int32
+          description: "Fried Frailty Phenotype score (0-5): count of weakness, slowness, low activity, exhaustion, and unintentional weight loss criteria met."
+        fried_frailty_category:
+          type: string
+          enum:
+            - robust
+            - pre-frail
+            - frail
+            - ""
+          description: "Fried Frailty Phenotype category derived from the score: robust (0), pre-frail (1-2), or frail (3-5)."
         composite_risk:
           type: string
           enum:
@@ -215,6 +227,7 @@ components:
         - asa_emergency_suffix
         - override_reason
         - mallampati_class
+        - fried_frailty_category
         - composite_risk
         - recommendation
         - clinician_notes

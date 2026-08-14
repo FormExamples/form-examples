@@ -11,7 +11,7 @@
 	const d = assessmentStore.data;
 </script>
 
-<Fieldset legend="13. Cardiorespiratory Optimisation">
+<Fieldset legend="13. Cardiorespiratory Optimization">
 	<p class="hint">Domain 8. Blood pressure at or above 180/110, uncontrolled airways disease, an ejection fraction below 40%, or an unassessed high STOP-BANG all trigger it.</p>
 
 	<Field label="Systolic BP (mmHg)" inputId="cardioresp-systolicBp">

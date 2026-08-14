@@ -76,6 +76,13 @@ export function createDefaultAssessment(): PerioperativeOptimization {
 			takesAceInhibitorOrArb: '',
 			takesSglt2Inhibitor: '',
 			takesGlp1Agonist: '',
+			glp1Formulation: '',
+			glp1HeldPerGuideline: '',
+			glp1ExtendedClearFluidsConfirmed: '',
+			glp1GiSymptoms: '',
+			glp1GiSymptomsDetails: '',
+			glp1GastricUltrasoundPerformed: '',
+			glp1GastricUltrasoundFindings: '',
 			takesCorticosteroid: '',
 			takesImmunosuppressant: '',
 			takesHormoneTherapy: '',
@@ -185,11 +192,20 @@ export function createDefaultAssessment(): PerioperativeOptimization {
 			prehabilitationEnrolled: '',
 			prehabilitationSessionsPerWeek: null,
 			prehabilitationStartDate: '',
+			proteinSupplementationRecommended: '',
 			fitnessNotes: ''
 		},
 		// Step 12 — frailty, cognition, and falls
 		frailty: {
 			clinicalFrailtyScale: null,
+			friedWeakness: '',
+			friedSlowness: '',
+			friedLowPhysicalActivity: '',
+			friedExhaustion: '',
+			friedUnintentionalWeightLoss: '',
+			riskAnalysisIndexScore: null,
+			miniCogPerformed: '',
+			miniCogScore: null,
 			cognitiveScreenTool: '',
 			cognitiveScreenScore: null,
 			cognitiveImpairment: '',
@@ -200,7 +216,7 @@ export function createDefaultAssessment(): PerioperativeOptimization {
 			carePackage: '',
 			frailtyNotes: ''
 		},
-		// Step 13 — cardiorespiratory optimisation
+		// Step 13 — cardiorespiratory optimization
 		cardioresp: {
 			systolicBp: null,
 			diastolicBp: null,
@@ -235,7 +251,7 @@ export function createDefaultAssessment(): PerioperativeOptimization {
 			psychologicalSupportOffered: '',
 			socialNotes: ''
 		},
-		// Step 15 — optimisation plan by domain
+		// Step 15 — optimization plan by domain
 		plan: {
 			planAnaemia: '',
 			referralAnaemia: '',

@@ -43,7 +43,7 @@ export function gateDomain(
 ): { status: DomainStatus; weeksShortfall: number | null } {
 	if (!evaluation.triggered) {
 		return {
-			status: evaluation.applicable ? 'optimised' : 'not-applicable',
+			status: evaluation.applicable ? 'optimized' : 'not-applicable',
 			weeksShortfall: null
 		};
 	}

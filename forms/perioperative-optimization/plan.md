@@ -24,10 +24,10 @@ risks are reversible, and is there time to reverse them before the listed
 date?**
 
 That second question is what NHS England's perioperative-pathway guidance and
-CPOC's optimisation work are about, and it is what this form computes. A patient
-can be ASA III and fully optimised, or ASA II with an untreated iron deficiency
+CPOC's optimization work are about, and it is what this form computes. A patient
+can be ASA III and fully optimized, or ASA II with an untreated iron deficiency
 that four weeks of intravenous iron would fix. The ASA grade is identical in
-both directions of that comparison; the optimisation status is not.
+both directions of that comparison; the optimization status is not.
 
 ## Design principles
 
@@ -42,7 +42,7 @@ both directions of that comparison; the optimisation status is not.
   Clinical Frailty Scale, with thresholds from CPOC, NICE, and the source
   papers. Nothing is invented.
 - **Max-grade composite.** The worst domain sets the readiness band, so one
-  unoptimised domain cannot be averaged away by seven good ones.
+  unoptimized domain cannot be averaged away by seven good ones.
 - **One domain table, read everywhere.** `DOMAIN_DEFINITIONS` is the single
   source of thresholds and lead times; no implementation inlines them.
 - **The override is auditable, not silent.** Computed and final bands are both

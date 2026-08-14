@@ -7,7 +7,7 @@ import { GATE_DECISION_LABELS, READINESS_LABELS, labelFor } from './types.js';
 //
 // The columns that matter here are weeks-to-surgery and the domains short on
 // time: together they say which lists are about to proceed without the
-// optimisation they were promised. Default sort is by surgery date ascending,
+// optimization they were promised. Default sort is by surgery date ascending,
 // so the most imminent lists are at the top.
 //
 // CSV and TSV export come from the shared js/table-export.js, which the page
@@ -23,8 +23,8 @@ const sortState = { key: 'surgeryDate', direction: 'asc' };
 const RANKS = {
   readiness: {
     'ready': 0,
-    'optimisation-in-progress': 1,
-    'optimisation-required': 2,
+    'optimization-in-progress': 1,
+    'optimization-required': 2,
     'defer-surgery': 3
   },
   severity: { 'minor': 0, 'intermediate': 1, 'major': 2, 'major-plus': 3 },
@@ -32,9 +32,9 @@ const RANKS = {
     '': 0,
     'proceed': 1,
     'proceed-with-prehabilitation': 2,
-    'defer-and-optimise': 3,
+    'defer-and-optimize': 3,
     'mdt-review': 4,
-    'accept-unoptimised-risk': 5,
+    'accept-unoptimized-risk': 5,
     'cancel': 6
   }
 };
@@ -154,7 +154,7 @@ function renderSummary(rows) {
     { label: 'Defer surgery', value: count((r) => r.readiness === 'defer-surgery') },
     { label: 'Short on time', value: count((r) => r.domainsShortOnTime.length > 0) },
     { label: 'Under 4 weeks', value: count((r) => r.weeksToSurgery !== null && r.weeksToSurgery < 4) },
-    { label: 'Risk accepted', value: count((r) => r.gateDecision === 'accept-unoptimised-risk') },
+    { label: 'Risk accepted', value: count((r) => r.gateDecision === 'accept-unoptimized-risk') },
     { label: 'Decision not recorded', value: count((r) => !r.gateDecision) }
   ];
   host.innerHTML = cards.map((c) => `

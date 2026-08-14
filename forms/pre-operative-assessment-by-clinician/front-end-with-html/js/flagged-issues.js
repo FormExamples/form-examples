@@ -2,6 +2,26 @@
 // `src/lib/engine/flagged-issues.ts`. Pure function — same output shape and
 // flag IDs as the canonical engine.
 
+/**
+ * Local copy of the Fried Frailty Phenotype scorer also defined in
+ * `composite-grader.js`. Duplicated (rather than imported) to avoid a
+ * circular import, since `composite-grader.js` imports
+ * `detectAdditionalFlags` from this module.
+ */
+function friedPhenotypeCategory(data) {
+  const fc = data.functionalCapacity;
+  const criteria = [
+    fc.friedWeakness,
+    fc.friedSlowness,
+    fc.friedLowPhysicalActivity,
+    fc.friedExhaustion,
+    fc.friedUnintentionalWeightLoss
+  ];
+  if (criteria.every((c) => c === '')) return '';
+  const score = criteria.filter((c) => c === 'yes').length;
+  return score === 0 ? 'robust' : score <= 2 ? 'pre-frail' : 'frail';
+}
+
 function detectAdditionalFlags(data) {
   const flags = [];
 
@@ -191,6 +211,70 @@ function detectAdditionalFlags(data) {
       priority: 'medium',
       description: 'High malnutrition risk',
       suggestedAction: 'Dietitian referral; consider oral nutritional supplements pre-op.'
+    });
+  }
+
+  // --- GLP-1 receptor agonist and frailty-intersection flags ---
+
+  const glp1 = data.glp1Management;
+  const onGlp1 = glp1.onGlp1ReceptorAgonist === 'yes';
+  const glp1NotHeldOrConfirmed =
+    glp1.glp1HeldPerGuideline !== 'yes' && glp1.glp1ExtendedClearFluidsConfirmed !== 'yes';
+  const cfs = data.functionalCapacity.clinicalFrailtyScale;
+  const friedCategory = friedPhenotypeCategory(data);
+  const isFrail = friedCategory === 'frail' || (cfs !== null && cfs >= 5);
+
+  if (onGlp1 && (glp1.glp1GiSymptoms === 'yes' || glp1NotHeldOrConfirmed)) {
+    flags.push({
+      flagId: 'F-GLP1-ASPIRATION-RISK',
+      category: 'glp1-aspiration-risk',
+      priority: 'high',
+      description:
+        glp1.glp1GiSymptoms === 'yes'
+          ? 'GLP-1 receptor agonist with active GI symptoms — delayed gastric emptying raises aspiration risk'
+          : 'GLP-1 receptor agonist not held per guideline and extended clear-fluid fast not confirmed',
+      suggestedAction:
+        'Apply full-stomach precautions: rapid-sequence induction, consider gastric ultrasound, prefer regional anaesthesia where feasible, or consider delaying surgery.'
+    });
+  }
+  if (cfs !== null && cfs >= 5 && data.functionalCapacity.miniCogPerformed !== 'yes') {
+    flags.push({
+      flagId: 'F-COGNITIVE-ASSESSMENT-INDICATED',
+      category: 'cognitive-assessment-indicated',
+      priority: 'medium',
+      description: `Clinical Frailty Scale ${cfs} — Mini-Cog not yet performed`,
+      suggestedAction: 'Perform Mini-Cog and consider a Comprehensive Geriatric Assessment before surgery.'
+    });
+  }
+  if (onGlp1 && isFrail) {
+    flags.push({
+      flagId: 'F-SARCOPENIA-RISK',
+      category: 'sarcopenia-risk',
+      priority: 'medium',
+      description: 'Frail patient on a GLP-1 receptor agonist — risk of accelerated sarcopenia from combined muscle and fat loss',
+      suggestedAction: 'Refer for protein supplementation and resistance-exercise prehabilitation before surgery.'
+    });
+  }
+  if (onGlp1 && glp1.glp1GiSymptoms === 'yes' && isFrail) {
+    flags.push({
+      flagId: 'F-DEHYDRATION-AKI-RISK',
+      category: 'dehydration-aki-risk',
+      priority: 'high',
+      description: 'Frail patient with GLP-1-related GI symptoms plus fasting — elevated risk of dehydration, acute kidney injury, and delirium',
+      suggestedAction: 'Consider pre-admission IV fluids, minimise fasting duration, and monitor renal function and cognition closely.'
+    });
+  }
+  if (
+    onGlp1 &&
+    (glp1.glp1HeldPerGuideline === 'yes' || glp1.glp1ExtendedClearFluidsConfirmed === 'yes') &&
+    data.endocrine.diabetesOnInsulin === 'yes'
+  ) {
+    flags.push({
+      flagId: 'F-REBOUND-GLYCAEMIC-RISK',
+      category: 'rebound-glycaemic-risk',
+      priority: 'medium',
+      description: 'GLP-1 receptor agonist held or fasting extended in a patient on insulin — risk of rebound hyperglycaemia or hypoglycaemia',
+      suggestedAction: 'Agree a perioperative glycaemic monitoring and insulin-adjustment plan with the diabetes team.'
     });
   }
 
