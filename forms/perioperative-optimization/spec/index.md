@@ -9,15 +9,17 @@ Slug: `perioperative-optimization`
 
 ## 1. Purpose
 
-A UK NHS–aligned perioperative optimisation and prehabilitation intake: identify
+A UK NHS–aligned perioperative optimization and prehabilitation intake: identify
 **reversible** health problems before elective surgery, decide what can be
-treated in the time available, and build a personalised prehabilitation plan.
-The engine grades eight optimisation domains against the time remaining before
+treated in the time available, and build a personalized prehabilitation plan.
+The engine grades eight optimization domains against the time remaining before
 surgery, computes a composite surgical readiness band, raises safety flags, and
 emits a domain-by-domain plan.
 
-The directory slug uses the US `optimization` stem; prose uses the UK
-*optimisation*. See [`../AGENTS.md`](../AGENTS.md) §"Slug and spelling".
+Written in Oxford spelling (`-ize`), per
+[`/spec/oxford-spelling.md`](../../../spec/oxford-spelling.md): the slug, table
+and column names, enum values, and prose all use the `optimization` stem. See
+[`../AGENTS.md`](../AGENTS.md) §Spelling for the cited-title exceptions.
 
 Full design description: [`index.md`](../index.md).
 
@@ -30,7 +32,7 @@ Out of scope, deliberately:
 
 - **ASA grading.** Three sibling forms already compute it. This form must not
   grow an ASA grade; see [`../AGENTS.md`](../AGENTS.md) §"What this form is not".
-- **Emergency surgery.** There is no lead time to optimise in. The form records
+- **Emergency surgery.** There is no lead time to optimize in. The form records
   the urgency and directs the user to the assessment siblings.
 - **Paediatrics.** MUST and the Clinical Frailty Scale are not validated below
   16 years; the engine raises a `paediatric` flag and redirects.
@@ -61,7 +63,7 @@ weeksToSurgery = floor((plannedSurgeryDate - assessmentDate) / 7)   // null if e
 
 | Condition | Domain status |
 | --- | --- |
-| domain not triggered, and the domain applies | `optimised` |
+| domain not triggered, and the domain applies | `optimized` |
 | domain not applicable (e.g. no diabetes) | `not-applicable` |
 | triggered, intervention started, `weeks >= leadTime` | `in-progress` |
 | triggered, not started, `weeks >= leadTime` | `action-required` |
@@ -74,13 +76,13 @@ weeksToSurgery = floor((plannedSurgeryDate - assessmentDate) / 7)   // null if e
 
 | Band | Requirement |
 | --- | --- |
-| `ready` | every domain `optimised` or `not-applicable` |
-| `optimisation-in-progress` | at least one `in-progress`, none worse |
-| `optimisation-required` | at least one `action-required`, none worse |
+| `ready` | every domain `optimized` or `not-applicable` |
+| `optimization-in-progress` | at least one `in-progress`, none worse |
+| `optimization-required` | at least one `action-required`, none worse |
 | `defer-surgery` | any `insufficient-time`, or HbA1c ≥ 69 mmol/mol, or Hb < 80 g/L |
 
 Gate decision recorded on step 16: `proceed`, `proceed-with-prehabilitation`,
-`defer-and-optimise`, `accept-unoptimised-risk`, `mdt-review`, or `cancel`.
+`defer-and-optimize`, `accept-unoptimized-risk`, `mdt-review`, or `cancel`.
 
 ## 6. Artefacts
 
@@ -130,7 +132,7 @@ are the primary output rather than a by-product.
   and every gating boundary (`weeks == leadTime`, `weeks == leadTime - 1`) has
   an explicit test on both sides.
 - An `insufficient-time` domain always forces `defer-surgery` and always raises
-  the `insufficient-time-to-optimise` flag.
+  the `insufficient-time-to-optimize` flag.
 - A clinician override changes the readiness band only; the safety-flag list is
   byte-identical with and without it.
 - The HTML front-ends conform to the Lily HTML headless contract
@@ -149,7 +151,7 @@ are the primary output rather than a by-product.
 Inherits the monorepo baseline: MDCG 2019-11 Rev.1, UK Medical Devices
 Regulations 2002, ISO/IEC/IEEE 26514:2022, UK MHRA Software and AI as a Medical
 Device. Decision support only: the form surfaces what is modifiable and whether
-there is time, but the decision to proceed, defer, or accept unoptimised risk
+there is time, but the decision to proceed, defer, or accept unoptimized risk
 belongs to the responsible surgical and anaesthetic team.
 
 ## 10. References
