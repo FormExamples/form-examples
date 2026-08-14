@@ -11,9 +11,12 @@ Created 2026-08-14. Per-phase checkboxes live in [`tasks.md`](./tasks.md).
 | Generated representations (XML, FHIR R5, protobuf, OpenAPI) | generated from `sql/`, `bin/test-examples-conformance` passes |
 | `examples/`, `CHANGELOG.md`, `llms.txt` | generated |
 | Scoring engine (`front-end-with-svelte/src/lib/engine/`) | complete — pure TypeScript, 40 Vitest boundary cases, all green |
-| `front-end-with-svelte/` (wizard + dashboard) | in progress |
-| `front-end-with-html/` (wizard + dashboard) | in progress |
-| `back-end-with-loco/` | in progress |
+| `front-end-with-svelte/` (wizard + dashboard) | complete — `vitest` 40/40, `svelte-check` clean, `bin/lily-svelte-refactor --check` clean |
+| `front-end-with-html/` (wizard + dashboard) | complete — Node cross-check harness 40/40, `bin/lily-html-refactor`/`bin/es-modules-refactor --check` clean |
+| `back-end-with-loco/` | complete — `cargo build` clean, `cargo test` 28/28; `cargo deny` has one pre-existing fleet-wide advisory gap (see Risks) |
+
+`bin/test-form knee-replacement-surgery-evaluation` passes, along with every
+gate in `spec/index.md` §9.
 
 ## Why this form exists
 
@@ -122,3 +125,13 @@ build` + `cargo test` in the Loco crate.
   scoping every change to this form's own directory.
 - **Regulatory classification.** Likely EU MDR Class IIa given the output
   gates a surgical decision — see `doc/safety-case-notes.md`.
+- **`cargo deny --all-features check` fails on `RUSTSEC-2023-0071`** (the
+  "Marvin Attack" timing-sidechannel advisory in `rsa`, transitive via
+  `jsonwebtoken` → `loco-rs`). This is not specific to this form: the
+  `dietic-assessment` reference crate fails identically, because the
+  generated `deny.toml` template predates loco-rs 1.0.1's `jsonwebtoken` v10
+  dependency tree. It is a fleet-wide gap in
+  `bin/generate-loco-deny-config.py`'s policy, not a defect introduced here,
+  and per this repo's "generated artefacts are never hand-edited" rule it
+  should be fixed by updating that generator, not by hand-editing this
+  crate's `deny.toml`.

@@ -56,55 +56,61 @@
 
 ## Front-end with SvelteKit
 
-- [ ] 15 `StepNName.svelte` components under `src/lib/components/steps/`.
-- [ ] Wizard route `src/routes/knee-replacement-surgery-evaluation/`.
-- [ ] RESTful dashboard routes
-      `src/routes/knee-replacement-surgery-evaluations/` and `[id]/`.
-- [ ] Root welcome page.
-- [ ] Vendored `src/lib/components/ui/` and `static/themes/`.
-- [ ] `pdfmake` PDF report.
-- [ ] `pnpm install && npx vitest run` green; `npm run check` clean.
-- [ ] `bin/lily-svelte-refactor --check knee-replacement-surgery-evaluation`
+- [x] 15 `StepNName.svelte` components under `src/lib/components/steps/`.
+- [x] Wizard route `src/routes/knee-replacement-surgery-evaluation/`.
+- [x] RESTful dashboard routes
+      `knee-replacement-surgery-evaluations/` and `[id]/` (nested under the
+      form's own route segment, matching the current dietic-assessment
+      convention).
+- [x] Root welcome page.
+- [x] Vendored `src/lib/components/ui/` and `static/themes/`.
+- [x] `pdfmake` PDF report.
+- [x] `pnpm install && npx vitest run` green (40/40); `npm run check` clean
+      (0 errors, 0 warnings).
+- [x] `bin/lily-svelte-refactor --check knee-replacement-surgery-evaluation`
       passes.
 
 ## Front-end with HTML
 
-- [ ] `index.html` — 15-step single-page wizard, Lily headless classes.
-- [ ] `dashboard.html` — review table with export.
-- [ ] `js/types.js`, `js/oks-rules.js`, `js/flagged-issues.js`,
+- [x] `index.html` — 15-step single-page wizard, Lily headless classes.
+- [x] `dashboard.html` — review table with export.
+- [x] `js/types.js`, `js/oks-rules.js`, `js/flagged-issues.js`,
       `js/composite-grader.js` — plain-JS port of the TypeScript engine,
       identical rule/flag IDs.
-- [ ] `js/form-app.js`, `js/dashboard-app.js`, `js/dashboard-types.js`,
+- [x] `js/form-app.js`, `js/dashboard-app.js`, `js/dashboard-types.js`,
       `js/data.js`.
-- [ ] Vendored shared JS (`date-time-picker.js`, theme/locale/text-size/share
+- [x] Vendored shared JS (`date-time-picker.js`, theme/locale/text-size/share
       pickers, `table-export.js`) and `css/themes/`.
-- [ ] Standalone Node cross-check harness against the TypeScript engine's
-      boundary cases.
-- [ ] `bin/lily-html-refactor --check knee-replacement-surgery-evaluation`
+- [x] Standalone Node cross-check harness (`js/composite-grader.crosscheck.mjs`)
+      against the TypeScript engine's 40 boundary cases — exits 0.
+- [x] `bin/lily-html-refactor --check knee-replacement-surgery-evaluation`
       and `bin/es-modules-refactor --check knee-replacement-surgery-evaluation`
       pass.
 
 ## Back-end with Loco
 
-- [ ] `cargo loco generate scaffold --api` per table, per
+- [x] `cargo loco generate scaffold --api` per table, per
       `back-end-with-loco-setup`.
-- [ ] Migrations/entities corrected for `i64` ids, nullability, and defaults
+- [x] Migrations/entities corrected for `i64` ids, nullability, and defaults
       to match `sql/`.
-- [ ] `src/knee_replacement_surgery_evaluation/` crate-source layout.
-- [ ] `serde(rename_all = "camelCase")` matching the TypeScript engine's
+- [x] `src/knee_replacement_surgery_evaluation/` crate-source layout.
+- [x] `serde(rename_all = "camelCase")` matching the TypeScript engine's
       field names.
-- [ ] `cargo build` succeeds.
-- [ ] `cargo test` passes against a scratch Postgres test database.
-- [ ] `bin/loco-config-refactor`, `bin/generate-loco-deny-config.py`,
+- [x] `cargo build` succeeds (clean, no warnings).
+- [x] `cargo test` passes against a scratch Postgres test database (28/28).
+- [x] `bin/loco-config-refactor`, `bin/generate-loco-deny-config.py`,
       `bin/loco-migration-defaults`, `bin/loco-migration-nullability` clean.
-- [ ] `cargo deny --all-features check` passes.
+- [~] `cargo deny --all-features check` — fails on `RUSTSEC-2023-0071`
+      (transitive `rsa`/`jsonwebtoken` advisory), an identical pre-existing
+      gap in the `dietic-assessment` reference crate; not specific to this
+      form and out of scope to hand-fix (see `plan.md` risks).
 
 ## Final verification
 
-- [ ] `bin/test-form knee-replacement-surgery-evaluation`
-- [ ] `bin/test-sql-apply knee-replacement-surgery-evaluation`
-- [ ] `bin/test-examples-conformance knee-replacement-surgery-evaluation`
-- [ ] `bin/lily-html-refactor --check knee-replacement-surgery-evaluation`
-- [ ] `bin/lily-svelte-refactor --check knee-replacement-surgery-evaluation`
-- [ ] `bin/generate-llms-txt.py --check knee-replacement-surgery-evaluation`
-- [ ] `bin/generate-spec.py --check knee-replacement-surgery-evaluation`
+- [x] `bin/test-form knee-replacement-surgery-evaluation` — PASS
+- [x] `bin/test-sql-apply knee-replacement-surgery-evaluation` — PASS
+- [x] `bin/test-examples-conformance knee-replacement-surgery-evaluation` — PASS
+- [x] `bin/lily-html-refactor --check knee-replacement-surgery-evaluation` — clean
+- [x] `bin/lily-svelte-refactor --check knee-replacement-surgery-evaluation` — clean
+- [x] `bin/generate-llms-txt.py --check knee-replacement-surgery-evaluation` — clean
+- [x] `bin/generate-spec.py --check knee-replacement-surgery-evaluation` — clean
