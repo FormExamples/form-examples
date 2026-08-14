@@ -13,8 +13,28 @@ file only records changes scoped to the **Knee Replacement Surgery Evaluation** 
 ## [Unreleased]
 
 ### Added
-- _Pending — record new fields, new fired-rule categories, new schema columns,
-  new front-end steps, new clinical references, new examples, etc._
+- Initial build of the form: 15-step single-page wizard for an orthopaedic
+  knee-replacement surgery evaluation.
+- SQL schema (`sql/02`–`06`): `patient`, `clinician`,
+  `knee_replacement_surgery_evaluation`, `knee_replacement_surgery_evaluation_grade`,
+  `knee_replacement_surgery_evaluation_grade_flag`.
+- Pure TypeScript scoring engine (`calculateKneeEvaluation()`): the 12-item
+  Oxford Knee Score (Dawson et al. 1998), the operational OKS category bands
+  (severe/moderate/mild-to-moderate/satisfactory), Kellgren-Lawrence
+  radiographic grading per compartment (Kellgren & Lawrence 1957), and a
+  five-rule, first-match-wins surgical-candidacy recommendation
+  (strong-candidate / candidate / continue-conservative / not-indicated /
+  mdt-review).
+- Six independent safety flags: `conservative-treatment-not-exhausted`,
+  `high-bmi-surgical-risk`, `pre-op-bloods-incomplete`,
+  `fixed-flexion-deformity`, `bilateral-symptomatic`, `paediatric`.
+- Clinician override of the computed candidacy, with a mandatory reason when
+  it differs from the computed value.
+- Generated XML, FHIR R5, Protocol Buffers, and OpenAPI representations per
+  SQL table.
+- Front-end with HTML (Lily Design System, ES modules) and front-end with
+  SvelteKit, both single-page wizard + review dashboard.
+- Rust/axum/Loco JSON-API back-end, relational per-table schema.
 
 ### Changed
 - _Pending — record schema migrations, scoring-engine behaviour changes,
