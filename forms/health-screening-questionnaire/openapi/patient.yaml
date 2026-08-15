@@ -1,0 +1,180 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: Health Screening Questionnaire — Patient
+  version: 1.0.0
+  description: Patient, i.e. the person being screened.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date, such as for calculating age and for the paediatric safety flag.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - prefer-not-to-say
+            - ""
+          description: Sex, such as for the sex-adjusted AUDIT-C at-risk threshold.
+        identifier_type:
+          type: string
+          enum:
+            - nhs-number
+            - employee-number
+            - other
+            - ""
+          description: "Which identifier scheme identifier_value belongs to: an NHS number, an employer-issued employee number, or another scheme."
+        identifier_value:
+          type: string
+          maxLength: 50
+          description: The identifier value itself, in the scheme named by identifier_type.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        emergency_contact_name:
+          type: string
+          maxLength: 255
+          description: Name of the emergency contact.
+        emergency_contact_relationship:
+          type: string
+          maxLength: 100
+          description: Relationship of the emergency contact to the patient.
+        emergency_contact_phone:
+          type: string
+          maxLength: 50
+          description: Phone number of the emergency contact.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - sex
+        - identifier_type
+        - identifier_value
+        - emergency_contact_name
+        - emergency_contact_relationship
+        - emergency_contact_phone
+      description: Patient, i.e. the person being screened.

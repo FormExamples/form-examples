@@ -1,0 +1,73 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: health_screening_questionnaire_grade
+
+syntax = "proto3";
+
+package form_examples.health_screening_questionnaire;
+
+enum HealthScreeningQuestionnaireGradeParqPlusClearanceEnum {
+  PARQPLUSCLEARANCE_UNSPECIFIED = 0;
+  PARQPLUSCLEARANCE_CLEARED = 1;  // cleared
+  PARQPLUSCLEARANCE_FURTHER_ASSESSMENT_REQUIRED = 2;  // further-assessment-required
+}
+
+enum HealthScreeningQuestionnaireGradeAuditCBandEnum {
+  AUDITCBAND_UNSPECIFIED = 0;
+  AUDITCBAND_LOW = 1;  // low
+  AUDITCBAND_INCREASING_RISK = 2;  // increasing-risk
+  AUDITCBAND_HIGHER_RISK = 3;  // higher-risk
+}
+
+enum HealthScreeningQuestionnaireGradeComputedRiskBandEnum {
+  COMPUTEDRISKBAND_UNSPECIFIED = 0;
+  COMPUTEDRISKBAND_LOW = 1;  // low
+  COMPUTEDRISKBAND_MODERATE = 2;  // moderate
+  COMPUTEDRISKBAND_HIGH = 3;  // high
+  COMPUTEDRISKBAND_REFER_URGENTLY = 4;  // refer-urgently
+}
+
+enum HealthScreeningQuestionnaireGradeFinalRiskBandEnum {
+  FINALRISKBAND_UNSPECIFIED = 0;
+  FINALRISKBAND_LOW = 1;  // low
+  FINALRISKBAND_MODERATE = 2;  // moderate
+  FINALRISKBAND_HIGH = 3;  // high
+  FINALRISKBAND_REFER_URGENTLY = 4;  // refer-urgently
+}
+
+enum HealthScreeningQuestionnaireGradeComputedRecommendationEnum {
+  COMPUTEDRECOMMENDATION_UNSPECIFIED = 0;
+  COMPUTEDRECOMMENDATION_CLEAR_TO_PROCEED = 1;  // clear-to-proceed
+  COMPUTEDRECOMMENDATION_ROUTINE_REVIEW = 2;  // routine-review
+  COMPUTEDRECOMMENDATION_GP_REVIEW_REQUIRED = 3;  // gp-review-required
+  COMPUTEDRECOMMENDATION_REFER_URGENTLY = 4;  // refer-urgently
+  COMPUTEDRECOMMENDATION_PAEDIATRIC_PATHWAY = 5;  // paediatric-pathway
+}
+
+enum HealthScreeningQuestionnaireGradeFinalRecommendationEnum {
+  FINALRECOMMENDATION_UNSPECIFIED = 0;
+  FINALRECOMMENDATION_CLEAR_TO_PROCEED = 1;  // clear-to-proceed
+  FINALRECOMMENDATION_ROUTINE_REVIEW = 2;  // routine-review
+  FINALRECOMMENDATION_GP_REVIEW_REQUIRED = 3;  // gp-review-required
+  FINALRECOMMENDATION_REFER_URGENTLY = 4;  // refer-urgently
+  FINALRECOMMENDATION_PAEDIATRIC_PATHWAY = 5;  // paediatric-pathway
+}
+
+message HealthScreeningQuestionnaireGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string health_screening_questionnaire_id = 5;  // UUID — uuid
+  HealthScreeningQuestionnaireGradeParqPlusClearanceEnum parq_plus_clearance = 6;  // VARCHAR(30)
+  int32 audit_c_score = 7;  // INTEGER
+  HealthScreeningQuestionnaireGradeAuditCBandEnum audit_c_band = 8;  // VARCHAR(20)
+  HealthScreeningQuestionnaireGradeComputedRiskBandEnum computed_risk_band = 9;  // VARCHAR(20)
+  HealthScreeningQuestionnaireGradeFinalRiskBandEnum final_risk_band = 10;  // VARCHAR(20)
+  HealthScreeningQuestionnaireGradeComputedRecommendationEnum computed_recommendation = 11;  // VARCHAR(30)
+  HealthScreeningQuestionnaireGradeFinalRecommendationEnum final_recommendation = 12;  // VARCHAR(30)
+  string override_reason = 13;  // VARCHAR(500) — max 500 chars
+  string notes = 14;  // TEXT
+  string signed_by_name = 15;  // VARCHAR(255) — max 255 chars
+  string signed_at = 16;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 17;  // TIMESTAMPTZ — iso 8601
+}

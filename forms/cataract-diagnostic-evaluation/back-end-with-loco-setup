@@ -1,0 +1,178 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=cataract-diagnostic-evaluation
+form_snake_case=cataract_diagnostic_evaluation
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    site_name:text! \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold cataract_diagnostic_evaluation \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    status:string! \
+    assessment_date:date \
+    assessment_time:string \
+    blurred_vision:string! \
+    glare_or_halos:string! \
+    night_driving_difficulty:string! \
+    faded_colour_perception:string! \
+    frequent_prescription_changes:string! \
+    symptom_duration_months:double \
+    symptom_laterality:string! \
+    presenting_complaint_notes:text! \
+    history_diabetes:string! \
+    history_prior_eye_surgery:string! \
+    history_prior_eye_surgery_detail:string! \
+    history_ocular_trauma:string! \
+    history_uveitis:string! \
+    history_steroid_use:string! \
+    history_family_cataract:string! \
+    history_smoking_status:string! \
+    history_high_uv_exposure:string! \
+    history_high_myopia:string! \
+    medical_history_notes:text! \
+    unaided_va_logmar_right:double \
+    unaided_va_logmar_left:double \
+    unaided_va_snellen_right:string! \
+    unaided_va_snellen_left:string! \
+    best_corrected_va_logmar_right:double \
+    best_corrected_va_logmar_left:double \
+    best_corrected_va_snellen_right:string! \
+    best_corrected_va_snellen_left:string! \
+    pinhole_va_logmar_right:double \
+    pinhole_va_logmar_left:double \
+    pinhole_va_snellen_right:string! \
+    pinhole_va_snellen_left:string! \
+    refraction_sphere_right:double \
+    refraction_sphere_left:double \
+    refraction_cylinder_right:double \
+    refraction_cylinder_left:double \
+    refraction_axis_right:int \
+    refraction_axis_left:int \
+    refraction_stability:string! \
+    locs_iii_no_right:double \
+    locs_iii_no_left:double \
+    locs_iii_nc_right:double \
+    locs_iii_nc_left:double \
+    locs_iii_c_right:double \
+    locs_iii_c_left:double \
+    locs_iii_p_right:double \
+    locs_iii_p_left:double \
+    cataract_type_right:string! \
+    cataract_type_left:string! \
+    anterior_chamber_depth_right:string! \
+    anterior_chamber_depth_left:string! \
+    corneal_clarity_right:string! \
+    corneal_clarity_left:string! \
+    pupil_reaction_right:string! \
+    pupil_reaction_left:string! \
+    glare_acuity_result_right:string! \
+    glare_acuity_result_left:string! \
+    glare_functional_impact:string! \
+    intraocular_pressure_right_mmhg:double \
+    intraocular_pressure_left_mmhg:double \
+    tonometry_method:string! \
+    dilated_fundus_exam_performed:string! \
+    optic_disc_cup_disc_ratio_right:double \
+    optic_disc_cup_disc_ratio_left:double \
+    macula_findings_right:string! \
+    macula_findings_left:string! \
+    retinal_findings_right:text! \
+    retinal_findings_left:text! \
+    view_obscured_by_cataract_right:string! \
+    view_obscured_by_cataract_left:string! \
+    glaucoma_suspected:string! \
+    glaucoma_notes:text! \
+    amd_suspected:string! \
+    amd_notes:text! \
+    diabetic_retinopathy_suspected:string! \
+    diabetic_retinopathy_notes:text! \
+    biometry_performed:string! \
+    axial_length_right_mm:double \
+    axial_length_left_mm:double \
+    keratometry_k1_right:double \
+    keratometry_k1_left:double \
+    keratometry_k2_right:double \
+    keratometry_k2_left:double \
+    oct_performed:string! \
+    oct_findings:text! \
+    calculated_iol_power_right:double \
+    calculated_iol_power_left:double \
+    functional_difficulty_reading:int \
+    functional_difficulty_driving:int \
+    functional_difficulty_daily_activities:int \
+    functional_impact_notes:text! \
+    management_recommendation:string! \
+    eye_for_surgery:string! \
+    risks_benefits_counselled:string! \
+    consent_discussed:string! \
+    management_notes:text! \
+    --api
+
+cargo loco generate scaffold cataract_diagnostic_evaluation_grade \
+    deleted_at:tstz \
+    cataract_diagnostic_evaluation:references \
+    computed_locs_iii_severity_right:string! \
+    computed_locs_iii_severity_left:string! \
+    computed_surgical_candidacy:string! \
+    final_surgical_candidacy:string! \
+    override_reason:string! \
+    functional_impact_score:int \
+    clinician_notes:text! \
+    signed_by_name:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold cataract_diagnostic_evaluation_grade_flag \
+    deleted_at:tstz \
+    cataract_diagnostic_evaluation_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

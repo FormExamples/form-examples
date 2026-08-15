@@ -1,0 +1,196 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cataract_diagnostic_evaluation_grade
+openapi: 3.1.0
+info:
+  title: Cataract Diagnostic Evaluation — CataractDiagnosticEvaluationGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for one cataract diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+paths:
+  /cataract-diagnostic-evaluation-grades:
+    get:
+      summary: List CataractDiagnosticEvaluationGrade records
+      operationId: listCataractDiagnosticEvaluationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CataractDiagnosticEvaluationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CataractDiagnosticEvaluationGrade"
+    post:
+      summary: Create a new CataractDiagnosticEvaluationGrade
+      operationId: createCataractDiagnosticEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CataractDiagnosticEvaluationGrade"
+      responses:
+        "201":
+          description: The newly created CataractDiagnosticEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CataractDiagnosticEvaluationGrade"
+        "400":
+          description: Validation error
+  /cataract-diagnostic-evaluation-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CataractDiagnosticEvaluationGrade by id
+      operationId: getCataractDiagnosticEvaluationGrade
+      responses:
+        "200":
+          description: The requested CataractDiagnosticEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CataractDiagnosticEvaluationGrade"
+        "404":
+          description: CataractDiagnosticEvaluationGrade not found
+    patch:
+      summary: Update an existing CataractDiagnosticEvaluationGrade
+      operationId: updateCataractDiagnosticEvaluationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CataractDiagnosticEvaluationGrade"
+      responses:
+        "200":
+          description: The updated CataractDiagnosticEvaluationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CataractDiagnosticEvaluationGrade"
+        "404":
+          description: CataractDiagnosticEvaluationGrade not found
+    delete:
+      summary: Soft-delete a CataractDiagnosticEvaluationGrade
+      operationId: deleteCataractDiagnosticEvaluationGrade
+      responses:
+        "204":
+          description: CataractDiagnosticEvaluationGrade deleted
+        "404":
+          description: CataractDiagnosticEvaluationGrade not found
+components:
+  schemas:
+    CataractDiagnosticEvaluationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cataract_diagnostic_evaluation_id:
+          type: string
+          format: uuid
+          description: Foreign key to the cataract_diagnostic_evaluation table, unique because grading is one-to-one with the evaluation.
+        computed_locs_iii_severity_right:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "LOCS III severity band computed for the right eye from the four LOCS III subscores, per this form's own severity-band simplification: mild, moderate, or severe."
+        computed_locs_iii_severity_left:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "LOCS III severity band computed for the left eye from the four LOCS III subscores, per this form's own severity-band simplification: mild, moderate, or severe."
+        computed_surgical_candidacy:
+          type: string
+          enum:
+            - not-indicated
+            - consider
+            - indicated
+            - urgent-referral
+            - ""
+          description: "Surgical-candidacy recommendation computed by the engine from LOCS III severity, best-corrected visual acuity, and glare testing: not-indicated, consider, indicated, or urgent-referral."
+        final_surgical_candidacy:
+          type: string
+          enum:
+            - not-indicated
+            - consider
+            - indicated
+            - urgent-referral
+            - ""
+          description: Surgical-candidacy recommendation signed off by the clinician, which may equal or differ from the computed value.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Mandatory reason recorded when the clinician overrides the computed surgical-candidacy recommendation.
+        functional_impact_score:
+          type: integer
+          format: int32
+          description: Functional/quality-of-life composite score, 0 to 12, being the sum of the three 0-4 self-report sub-scores for reading, driving, and daily activities.
+        clinician_notes:
+          type: string
+          description: Free-text clinician notes on the overall evaluation.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the clinician who signed off the evaluation.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp when the evaluation was signed off.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine computed this grading result.
+      required:
+        - created_at
+        - updated_at
+        - cataract_diagnostic_evaluation_id
+        - computed_locs_iii_severity_right
+        - computed_locs_iii_severity_left
+        - computed_surgical_candidacy
+        - final_surgical_candidacy
+        - override_reason
+        - clinician_notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off grading result for one cataract diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.

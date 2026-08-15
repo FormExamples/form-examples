@@ -1,0 +1,314 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: health_screening_questionnaire
+
+syntax = "proto3";
+
+package form_examples.health_screening_questionnaire;
+
+enum HealthScreeningQuestionnaireStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum HealthScreeningQuestionnaireScreeningPurposeEnum {
+  SCREENINGPURPOSE_UNSPECIFIED = 0;
+  SCREENINGPURPOSE_OCCUPATIONAL_PRE_PLACEMENT = 1;  // occupational-pre-placement
+  SCREENINGPURPOSE_ROUTINE_PUBLIC_HEALTH = 2;  // routine-public-health
+  SCREENINGPURPOSE_PERIOPERATIVE_REFERRAL = 3;  // perioperative-referral
+  SCREENINGPURPOSE_PHYSICAL_ACTIVITY_READINESS = 4;  // physical-activity-readiness
+  SCREENINGPURPOSE_OTHER = 5;  // other
+}
+
+enum HealthScreeningQuestionnaireAssessmentModeEnum {
+  ASSESSMENTMODE_UNSPECIFIED = 0;
+  ASSESSMENTMODE_IN_PERSON = 1;  // in-person
+  ASSESSMENTMODE_TELEPHONE = 2;  // telephone
+  ASSESSMENTMODE_ONLINE = 3;  // online
+}
+
+enum HealthScreeningQuestionnaireUsualActivityLevelEnum {
+  USUALACTIVITYLEVEL_UNSPECIFIED = 0;
+  USUALACTIVITYLEVEL_SEDENTARY = 1;  // sedentary
+  USUALACTIVITYLEVEL_LIGHT = 2;  // light
+  USUALACTIVITYLEVEL_MODERATE = 3;  // moderate
+  USUALACTIVITYLEVEL_ACTIVE = 4;  // active
+  USUALACTIVITYLEVEL_VERY_ACTIVE = 5;  // very-active
+}
+
+enum HealthScreeningQuestionnaireSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX_SMOKER = 2;  // ex-smoker
+  SMOKINGSTATUS_CURRENT_SMOKER = 3;  // current-smoker
+  SMOKINGSTATUS_VAPES_ONLY = 4;  // vapes-only
+}
+
+enum HealthScreeningQuestionnaireConditionDiabetesEnum {
+  CONDITIONDIABETES_UNSPECIFIED = 0;
+  CONDITIONDIABETES_YES = 1;  // yes
+  CONDITIONDIABETES_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireConditionHypertensionEnum {
+  CONDITIONHYPERTENSION_UNSPECIFIED = 0;
+  CONDITIONHYPERTENSION_YES = 1;  // yes
+  CONDITIONHYPERTENSION_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireConditionAsthmaEnum {
+  CONDITIONASTHMA_UNSPECIFIED = 0;
+  CONDITIONASTHMA_YES = 1;  // yes
+  CONDITIONASTHMA_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireConditionCopdEnum {
+  CONDITIONCOPD_UNSPECIFIED = 0;
+  CONDITIONCOPD_YES = 1;  // yes
+  CONDITIONCOPD_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireConditionHeartDiseaseEnum {
+  CONDITIONHEARTDISEASE_UNSPECIFIED = 0;
+  CONDITIONHEARTDISEASE_YES = 1;  // yes
+  CONDITIONHEARTDISEASE_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireConditionKidneyDiseaseEnum {
+  CONDITIONKIDNEYDISEASE_UNSPECIFIED = 0;
+  CONDITIONKIDNEYDISEASE_YES = 1;  // yes
+  CONDITIONKIDNEYDISEASE_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireConditionThyroidEnum {
+  CONDITIONTHYROID_UNSPECIFIED = 0;
+  CONDITIONTHYROID_YES = 1;  // yes
+  CONDITIONTHYROID_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireFamilyHistoryPrematureCardiacEventEnum {
+  FAMILYHISTORYPREMATURECARDIACEVENT_UNSPECIFIED = 0;
+  FAMILYHISTORYPREMATURECARDIACEVENT_YES = 1;  // yes
+  FAMILYHISTORYPREMATURECARDIACEVENT_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomUnexplainedChestPainEnum {
+  SYMPTOMUNEXPLAINEDCHESTPAIN_UNSPECIFIED = 0;
+  SYMPTOMUNEXPLAINEDCHESTPAIN_YES = 1;  // yes
+  SYMPTOMUNEXPLAINEDCHESTPAIN_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomDizzySpellsOrFaintingEnum {
+  SYMPTOMDIZZYSPELLSORFAINTING_UNSPECIFIED = 0;
+  SYMPTOMDIZZYSPELLSORFAINTING_YES = 1;  // yes
+  SYMPTOMDIZZYSPELLSORFAINTING_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomPersistentCoughOver3WeeksEnum {
+  SYMPTOMPERSISTENTCOUGHOVER3WEEKS_UNSPECIFIED = 0;
+  SYMPTOMPERSISTENTCOUGHOVER3WEEKS_YES = 1;  // yes
+  SYMPTOMPERSISTENTCOUGHOVER3WEEKS_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomUnexplainedWeightLossEnum {
+  SYMPTOMUNEXPLAINEDWEIGHTLOSS_UNSPECIFIED = 0;
+  SYMPTOMUNEXPLAINEDWEIGHTLOSS_YES = 1;  // yes
+  SYMPTOMUNEXPLAINEDWEIGHTLOSS_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomJointPainRestrictingMovementEnum {
+  SYMPTOMJOINTPAINRESTRICTINGMOVEMENT_UNSPECIFIED = 0;
+  SYMPTOMJOINTPAINRESTRICTINGMOVEMENT_YES = 1;  // yes
+  SYMPTOMJOINTPAINRESTRICTINGMOVEMENT_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomShortnessOfBreathOnExertionEnum {
+  SYMPTOMSHORTNESSOFBREATHONEXERTION_UNSPECIFIED = 0;
+  SYMPTOMSHORTNESSOFBREATHONEXERTION_YES = 1;  // yes
+  SYMPTOMSHORTNESSOFBREATHONEXERTION_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireSymptomPalpitationsEnum {
+  SYMPTOMPALPITATIONS_UNSPECIFIED = 0;
+  SYMPTOMPALPITATIONS_YES = 1;  // yes
+  SYMPTOMPALPITATIONS_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqDiagnosedHeartConditionEnum {
+  PARQDIAGNOSEDHEARTCONDITION_UNSPECIFIED = 0;
+  PARQDIAGNOSEDHEARTCONDITION_YES = 1;  // yes
+  PARQDIAGNOSEDHEARTCONDITION_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqChestPainAtRestEnum {
+  PARQCHESTPAINATREST_UNSPECIFIED = 0;
+  PARQCHESTPAINATREST_YES = 1;  // yes
+  PARQCHESTPAINATREST_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqChestPainDuringActivityEnum {
+  PARQCHESTPAINDURINGACTIVITY_UNSPECIFIED = 0;
+  PARQCHESTPAINDURINGACTIVITY_YES = 1;  // yes
+  PARQCHESTPAINDURINGACTIVITY_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqDizzinessOrLossOfConsciousnessEnum {
+  PARQDIZZINESSORLOSSOFCONSCIOUSNESS_UNSPECIFIED = 0;
+  PARQDIZZINESSORLOSSOFCONSCIOUSNESS_YES = 1;  // yes
+  PARQDIZZINESSORLOSSOFCONSCIOUSNESS_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqOtherChronicMedicalConditionEnum {
+  PARQOTHERCHRONICMEDICALCONDITION_UNSPECIFIED = 0;
+  PARQOTHERCHRONICMEDICALCONDITION_YES = 1;  // yes
+  PARQOTHERCHRONICMEDICALCONDITION_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqPrescribedMedicationForChronicConditionEnum {
+  PARQPRESCRIBEDMEDICATIONFORCHRONICCONDITION_UNSPECIFIED = 0;
+  PARQPRESCRIBEDMEDICATIONFORCHRONICCONDITION_YES = 1;  // yes
+  PARQPRESCRIBEDMEDICATIONFORCHRONICCONDITION_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireParqBoneOrJointProblemEnum {
+  PARQBONEORJOINTPROBLEM_UNSPECIFIED = 0;
+  PARQBONEORJOINTPROBLEM_YES = 1;  // yes
+  PARQBONEORJOINTPROBLEM_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnairePhysicalDemandsOfRoleEnum {
+  PHYSICALDEMANDSOFROLE_UNSPECIFIED = 0;
+  PHYSICALDEMANDSOFROLE_SEDENTARY = 1;  // sedentary
+  PHYSICALDEMANDSOFROLE_LIGHT = 2;  // light
+  PHYSICALDEMANDSOFROLE_MODERATE = 3;  // moderate
+  PHYSICALDEMANDSOFROLE_HEAVY = 4;  // heavy
+}
+
+enum HealthScreeningQuestionnaireExposureNoiseEnum {
+  EXPOSURENOISE_UNSPECIFIED = 0;
+  EXPOSURENOISE_YES = 1;  // yes
+  EXPOSURENOISE_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireExposureChemicalsEnum {
+  EXPOSURECHEMICALS_UNSPECIFIED = 0;
+  EXPOSURECHEMICALS_YES = 1;  // yes
+  EXPOSURECHEMICALS_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireExposureManualHandlingEnum {
+  EXPOSUREMANUALHANDLING_UNSPECIFIED = 0;
+  EXPOSUREMANUALHANDLING_YES = 1;  // yes
+  EXPOSUREMANUALHANDLING_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireExposureOtherEnum {
+  EXPOSUREOTHER_UNSPECIFIED = 0;
+  EXPOSUREOTHER_YES = 1;  // yes
+  EXPOSUREOTHER_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireMentalHealthConcernEnum {
+  MENTALHEALTHCONCERN_UNSPECIFIED = 0;
+  MENTALHEALTHCONCERN_YES = 1;  // yes
+  MENTALHEALTHCONCERN_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireVaccinationUpToDateEnum {
+  VACCINATIONUPTODATE_UNSPECIFIED = 0;
+  VACCINATIONUPTODATE_YES = 1;  // yes
+  VACCINATIONUPTODATE_NO = 2;  // no
+  VACCINATIONUPTODATE_UNSURE = 3;  // unsure
+}
+
+enum HealthScreeningQuestionnaireConsentToScreeningEnum {
+  CONSENTTOSCREENING_UNSPECIFIED = 0;
+  CONSENTTOSCREENING_YES = 1;  // yes
+  CONSENTTOSCREENING_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireInformationAccurateConfirmedEnum {
+  INFORMATIONACCURATECONFIRMED_UNSPECIFIED = 0;
+  INFORMATIONACCURATECONFIRMED_YES = 1;  // yes
+  INFORMATIONACCURATECONFIRMED_NO = 2;  // no
+}
+
+enum HealthScreeningQuestionnaireInterpreterRequiredEnum {
+  INTERPRETERREQUIRED_UNSPECIFIED = 0;
+  INTERPRETERREQUIRED_YES = 1;  // yes
+  INTERPRETERREQUIRED_NO = 2;  // no
+}
+
+message HealthScreeningQuestionnaire {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string assessor_id = 6;  // UUID — uuid
+  HealthScreeningQuestionnaireStatusEnum status = 7;  // VARCHAR(20)
+  HealthScreeningQuestionnaireScreeningPurposeEnum screening_purpose = 8;  // VARCHAR(30)
+  string site_name = 9;  // VARCHAR(255) — max 255 chars
+  string assessment_date = 10;  // DATE — iso 8601 date
+  HealthScreeningQuestionnaireAssessmentModeEnum assessment_mode = 11;  // VARCHAR(15)
+  HealthScreeningQuestionnaireUsualActivityLevelEnum usual_activity_level = 12;  // VARCHAR(20)
+  int32 moderate_exercise_days_per_week = 13;  // INTEGER
+  int32 fruit_and_vegetable_portions_per_day = 14;  // INTEGER
+  string diet_notes = 15;  // TEXT
+  HealthScreeningQuestionnaireSmokingStatusEnum smoking_status = 16;  // VARCHAR(20)
+  int32 cigarettes_per_day = 17;  // INTEGER
+  int32 audit_c_frequency = 18;  // INTEGER
+  int32 audit_c_typical_quantity = 19;  // INTEGER
+  int32 audit_c_binge_frequency = 20;  // INTEGER
+  HealthScreeningQuestionnaireConditionDiabetesEnum condition_diabetes = 21;  // VARCHAR(5)
+  HealthScreeningQuestionnaireConditionHypertensionEnum condition_hypertension = 22;  // VARCHAR(5)
+  HealthScreeningQuestionnaireConditionAsthmaEnum condition_asthma = 23;  // VARCHAR(5)
+  HealthScreeningQuestionnaireConditionCopdEnum condition_copd = 24;  // VARCHAR(5)
+  HealthScreeningQuestionnaireConditionHeartDiseaseEnum condition_heart_disease = 25;  // VARCHAR(5)
+  HealthScreeningQuestionnaireConditionKidneyDiseaseEnum condition_kidney_disease = 26;  // VARCHAR(5)
+  HealthScreeningQuestionnaireConditionThyroidEnum condition_thyroid = 27;  // VARCHAR(5)
+  string condition_other = 28;  // VARCHAR(500) — max 500 chars
+  string past_surgeries = 29;  // TEXT
+  string current_medications = 30;  // TEXT
+  string known_drug_allergies = 31;  // TEXT
+  HealthScreeningQuestionnaireFamilyHistoryPrematureCardiacEventEnum family_history_premature_cardiac_event = 32;  // VARCHAR(5)
+  string family_history_other = 33;  // TEXT
+  HealthScreeningQuestionnaireSymptomUnexplainedChestPainEnum symptom_unexplained_chest_pain = 34;  // VARCHAR(5)
+  HealthScreeningQuestionnaireSymptomDizzySpellsOrFaintingEnum symptom_dizzy_spells_or_fainting = 35;  // VARCHAR(5)
+  HealthScreeningQuestionnaireSymptomPersistentCoughOver3WeeksEnum symptom_persistent_cough_over_3_weeks = 36;  // VARCHAR(5)
+  HealthScreeningQuestionnaireSymptomUnexplainedWeightLossEnum symptom_unexplained_weight_loss = 37;  // VARCHAR(5)
+  HealthScreeningQuestionnaireSymptomJointPainRestrictingMovementEnum symptom_joint_pain_restricting_movement = 38;  // VARCHAR(5)
+  HealthScreeningQuestionnaireSymptomShortnessOfBreathOnExertionEnum symptom_shortness_of_breath_on_exertion = 39;  // VARCHAR(5)
+  HealthScreeningQuestionnaireSymptomPalpitationsEnum symptom_palpitations = 40;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqDiagnosedHeartConditionEnum parq_diagnosed_heart_condition = 41;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqChestPainAtRestEnum parq_chest_pain_at_rest = 42;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqChestPainDuringActivityEnum parq_chest_pain_during_activity = 43;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqDizzinessOrLossOfConsciousnessEnum parq_dizziness_or_loss_of_consciousness = 44;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqOtherChronicMedicalConditionEnum parq_other_chronic_medical_condition = 45;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqPrescribedMedicationForChronicConditionEnum parq_prescribed_medication_for_chronic_condition = 46;  // VARCHAR(5)
+  HealthScreeningQuestionnaireParqBoneOrJointProblemEnum parq_bone_or_joint_problem = 47;  // VARCHAR(5)
+  double height_as_cm = 48;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_as_kg = 49;  // NUMERIC(5,1) — numeric(5,1)
+  double body_mass_index = 50;  // NUMERIC(4,1) — numeric(4,1)
+  int32 resting_blood_pressure_systolic = 51;  // INTEGER
+  int32 resting_blood_pressure_diastolic = 52;  // INTEGER
+  int32 resting_heart_rate = 53;  // INTEGER
+  string job_role = 54;  // VARCHAR(255) — max 255 chars
+  HealthScreeningQuestionnairePhysicalDemandsOfRoleEnum physical_demands_of_role = 55;  // VARCHAR(15)
+  HealthScreeningQuestionnaireExposureNoiseEnum exposure_noise = 56;  // VARCHAR(5)
+  HealthScreeningQuestionnaireExposureChemicalsEnum exposure_chemicals = 57;  // VARCHAR(5)
+  HealthScreeningQuestionnaireExposureManualHandlingEnum exposure_manual_handling = 58;  // VARCHAR(5)
+  HealthScreeningQuestionnaireExposureOtherEnum exposure_other = 59;  // VARCHAR(5)
+  string exposure_other_detail = 60;  // VARCHAR(500) — max 500 chars
+  int32 stress_level = 61;  // INTEGER
+  int32 sleep_quality = 62;  // INTEGER
+  HealthScreeningQuestionnaireMentalHealthConcernEnum mental_health_concern = 63;  // VARCHAR(5)
+  string mental_health_concern_note = 64;  // TEXT
+  HealthScreeningQuestionnaireVaccinationUpToDateEnum vaccination_up_to_date = 65;  // VARCHAR(10)
+  string vaccination_gaps_note = 66;  // TEXT
+  HealthScreeningQuestionnaireConsentToScreeningEnum consent_to_screening = 67;  // VARCHAR(5)
+  HealthScreeningQuestionnaireInformationAccurateConfirmedEnum information_accurate_confirmed = 68;  // VARCHAR(5)
+  HealthScreeningQuestionnaireInterpreterRequiredEnum interpreter_required = 69;  // VARCHAR(5)
+}

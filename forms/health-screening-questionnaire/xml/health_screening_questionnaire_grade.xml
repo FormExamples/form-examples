@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE health_screening_questionnaire_grade SYSTEM "health_screening_questionnaire_grade.dtd">
+<health_screening_questionnaire_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<health_screening_questionnaire_id>770e8400-e29b-41d4-a716-446655440002</health_screening_questionnaire_id>
+<parq_plus_clearance>cleared</parq_plus_clearance>
+<audit_c_score>5</audit_c_score>
+<audit_c_band>low</audit_c_band>
+<computed_risk_band>low</computed_risk_band>
+<final_risk_band>low</final_risk_band>
+<computed_recommendation>clear-to-proceed</computed_recommendation>
+<final_recommendation>clear-to-proceed</final_recommendation>
+<override_reason>Example text.</override_reason>
+<notes>Example text.</notes>
+<signed_by_name>Example</signed_by_name>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</health_screening_questionnaire_grade>

@@ -143,6 +143,45 @@ cargo loco generate scaffold pre_operative_assessment_by_patient \
     possibly_pregnant:text! \
     pregnancy_confirmed:text! \
     gestation_weeks:int \
+    cancer_history:text! \
+    cancer_history_details:text! \
+    mrsa_history:text! \
+    recent_hospital_or_care_home_admission:text! \
+    palpitations_or_blackouts:text! \
+    heart_or_artery_surgery:text! \
+    swollen_ankles:text! \
+    snoring:text! \
+    snoring_loud:text! \
+    collar_size_inches:double \
+    daytime_sleepiness:text! \
+    observed_apnoea_episodes:text! \
+    urinary_symptoms:text! \
+    urinary_catheter_history:text! \
+    prostate_problems:text! \
+    personal_vte_history:text! \
+    family_vte_history:text! \
+    blood_transfusion_history:text! \
+    joint_or_arthritis_problems:text! \
+    back_or_neck_problems:text! \
+    skin_conditions:text! \
+    pressure_sore_risk:text! \
+    bowel_problems:text! \
+    food_intolerances:text! \
+    food_intolerances_details:text! \
+    blood_donor:text! \
+    body_piercings:text! \
+    hearing_problems:text! \
+    vision_problems:text! \
+    balance_issues:text! \
+    contraceptive_or_hrt_use:text! \
+    last_menstrual_period:text! \
+    head_injury_requiring_hospitalisation:text! \
+    memory_concerns:text! \
+    dementia_diagnosis:text! \
+    depression_or_anxiety_history:text! \
+    depression_anxiety_impacts_daily_life:text! \
+    depression_anxiety_seen_doctor:text! \
+    learning_difficulties:text! \
     --api
 
 cargo loco generate scaffold asa_rule \

@@ -1,0 +1,38 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: patient
+
+syntax = "proto3";
+
+package form_examples.health_screening_questionnaire;
+
+enum PatientSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_PREFER_NOT_TO_SAY = 4;  // prefer-not-to-say
+}
+
+enum PatientIdentifierTypeEnum {
+  IDENTIFIERTYPE_UNSPECIFIED = 0;
+  IDENTIFIERTYPE_NHS_NUMBER = 1;  // nhs-number
+  IDENTIFIERTYPE_EMPLOYEE_NUMBER = 2;  // employee-number
+  IDENTIFIERTYPE_OTHER = 3;  // other
+}
+
+message Patient {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string birth_date = 6;  // DATE — iso 8601 date
+  PatientSexEnum sex = 7;  // VARCHAR(20)
+  PatientIdentifierTypeEnum identifier_type = 8;  // VARCHAR(20)
+  string identifier_value = 9;  // VARCHAR(50) — max 50 chars
+  string email = 10;  // TEXT
+  string phone = 11;  // TEXT
+  string emergency_contact_name = 12;  // VARCHAR(255) — max 255 chars
+  string emergency_contact_relationship = 13;  // VARCHAR(100) — max 100 chars
+  string emergency_contact_phone = 14;  // VARCHAR(50) — max 50 chars
+}

@@ -1,0 +1,728 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: cataract_diagnostic_evaluation
+openapi: 3.1.0
+info:
+  title: Cataract Diagnostic Evaluation — CataractDiagnosticEvaluation
+  version: 1.0.0
+  description: "Cataract diagnostic evaluation: the payload of the 15-step single-page wizard."
+paths:
+  /cataract-diagnostic-evaluations:
+    get:
+      summary: List CataractDiagnosticEvaluation records
+      operationId: listCataractDiagnosticEvaluation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CataractDiagnosticEvaluation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CataractDiagnosticEvaluation"
+    post:
+      summary: Create a new CataractDiagnosticEvaluation
+      operationId: createCataractDiagnosticEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CataractDiagnosticEvaluation"
+      responses:
+        "201":
+          description: The newly created CataractDiagnosticEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CataractDiagnosticEvaluation"
+        "400":
+          description: Validation error
+  /cataract-diagnostic-evaluations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CataractDiagnosticEvaluation by id
+      operationId: getCataractDiagnosticEvaluation
+      responses:
+        "200":
+          description: The requested CataractDiagnosticEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CataractDiagnosticEvaluation"
+        "404":
+          description: CataractDiagnosticEvaluation not found
+    patch:
+      summary: Update an existing CataractDiagnosticEvaluation
+      operationId: updateCataractDiagnosticEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CataractDiagnosticEvaluation"
+      responses:
+        "200":
+          description: The updated CataractDiagnosticEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CataractDiagnosticEvaluation"
+        "404":
+          description: CataractDiagnosticEvaluation not found
+    delete:
+      summary: Soft-delete a CataractDiagnosticEvaluation
+      operationId: deleteCataractDiagnosticEvaluation
+      responses:
+        "204":
+          description: CataractDiagnosticEvaluation deleted
+        "404":
+          description: CataractDiagnosticEvaluation not found
+components:
+  schemas:
+    CataractDiagnosticEvaluation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician table.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Evaluation lifecycle status: draft, submitted, reviewed, or urgent."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the evaluation was performed.
+        assessment_time:
+          type: string
+          format: time
+          description: Time the evaluation was performed.
+        blurred_vision:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Presenting symptom: blurred vision."
+        glare_or_halos:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Presenting symptom: glare or halos around lights."
+        night_driving_difficulty:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Presenting symptom: difficulty with night driving."
+        faded_colour_perception:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Presenting symptom: faded or yellowed colour perception."
+        frequent_prescription_changes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Presenting symptom: frequent spectacle prescription changes."
+        symptom_duration_months:
+          type: number
+          format: double
+          description: Duration of presenting symptoms in months, such as for the rapid-progression safety flag.
+        symptom_laterality:
+          type: string
+          enum:
+            - right-eye
+            - left-eye
+            - both-eyes
+            - ""
+          description: Whether the presenting symptoms affect the right eye, the left eye, or both.
+        presenting_complaint_notes:
+          type: string
+          description: Free-text notes on the presenting complaint.
+        history_diabetes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ocular/medical history: diabetes mellitus."
+        history_prior_eye_surgery:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ocular/medical history: prior eye surgery."
+        history_prior_eye_surgery_detail:
+          type: string
+          maxLength: 500
+          description: Detail of prior eye surgery, such as procedure and eye.
+        history_ocular_trauma:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ocular/medical history: prior ocular trauma."
+        history_uveitis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Ocular/medical history: uveitis."
+        history_steroid_use:
+          type: string
+          enum:
+            - none
+            - systemic
+            - topical
+            - both
+            - ""
+          description: "Steroid use: none, systemic, topical, or both, a recognised risk factor for cataract."
+        history_family_cataract:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Family history of cataract.
+        history_smoking_status:
+          type: string
+          enum:
+            - never
+            - former
+            - current
+            - ""
+          description: "Smoking status: never, former, or current, a recognised risk factor for cataract."
+        history_high_uv_exposure:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: History of high ultraviolet light exposure, a recognised risk factor for cataract.
+        history_high_myopia:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: History of high myopia, a recognised risk factor for early cataract and for retinal detachment.
+        medical_history_notes:
+          type: string
+          description: Free-text notes on ocular and medical history.
+        unaided_va_logmar_right:
+          type: number
+          format: double
+          description: Unaided (uncorrected) visual acuity for the right eye, LogMAR.
+        unaided_va_logmar_left:
+          type: number
+          format: double
+          description: Unaided (uncorrected) visual acuity for the left eye, LogMAR.
+        unaided_va_snellen_right:
+          type: string
+          maxLength: 20
+          description: Unaided (uncorrected) visual acuity for the right eye, Snellen-equivalent text (e.g. 6/12).
+        unaided_va_snellen_left:
+          type: string
+          maxLength: 20
+          description: Unaided (uncorrected) visual acuity for the left eye, Snellen-equivalent text (e.g. 6/12).
+        best_corrected_va_logmar_right:
+          type: number
+          format: double
+          description: Best-corrected visual acuity for the right eye, LogMAR, used in the surgical-candidacy computation.
+        best_corrected_va_logmar_left:
+          type: number
+          format: double
+          description: Best-corrected visual acuity for the left eye, LogMAR, used in the surgical-candidacy computation.
+        best_corrected_va_snellen_right:
+          type: string
+          maxLength: 20
+          description: Best-corrected visual acuity for the right eye, Snellen-equivalent text (e.g. 6/12).
+        best_corrected_va_snellen_left:
+          type: string
+          maxLength: 20
+          description: Best-corrected visual acuity for the left eye, Snellen-equivalent text (e.g. 6/12).
+        pinhole_va_logmar_right:
+          type: number
+          format: double
+          description: Pinhole visual acuity for the right eye, LogMAR, such as for distinguishing refractive error from lenticular/pathological cause.
+        pinhole_va_logmar_left:
+          type: number
+          format: double
+          description: Pinhole visual acuity for the left eye, LogMAR, such as for distinguishing refractive error from lenticular/pathological cause.
+        pinhole_va_snellen_right:
+          type: string
+          maxLength: 20
+          description: Pinhole visual acuity for the right eye, Snellen-equivalent text.
+        pinhole_va_snellen_left:
+          type: string
+          maxLength: 20
+          description: Pinhole visual acuity for the left eye, Snellen-equivalent text.
+        refraction_sphere_right:
+          type: number
+          format: double
+          description: Current spectacle prescription sphere power, right eye, dioptres.
+        refraction_sphere_left:
+          type: number
+          format: double
+          description: Current spectacle prescription sphere power, left eye, dioptres.
+        refraction_cylinder_right:
+          type: number
+          format: double
+          description: Current spectacle prescription cylinder power, right eye, dioptres.
+        refraction_cylinder_left:
+          type: number
+          format: double
+          description: Current spectacle prescription cylinder power, left eye, dioptres.
+        refraction_axis_right:
+          type: integer
+          format: int32
+          description: Current spectacle prescription cylinder axis, right eye, degrees 0-180.
+        refraction_axis_left:
+          type: integer
+          format: int32
+          description: Current spectacle prescription cylinder axis, left eye, degrees 0-180.
+        refraction_stability:
+          type: string
+          enum:
+            - stable
+            - changing
+            - ""
+          description: Whether the refraction is stable or changing, such as for the frequent-prescription-changes symptom.
+        locs_iii_no_right:
+          type: number
+          format: double
+          description: LOCS III Nuclear Opalescence subscore, right eye, 0.1 to 6.9, per Chylack et al. 1993.
+        locs_iii_no_left:
+          type: number
+          format: double
+          description: LOCS III Nuclear Opalescence subscore, left eye, 0.1 to 6.9, per Chylack et al. 1993.
+        locs_iii_nc_right:
+          type: number
+          format: double
+          description: LOCS III Nuclear Colour subscore, right eye, 0.1 to 6.9, per Chylack et al. 1993.
+        locs_iii_nc_left:
+          type: number
+          format: double
+          description: LOCS III Nuclear Colour subscore, left eye, 0.1 to 6.9, per Chylack et al. 1993.
+        locs_iii_c_right:
+          type: number
+          format: double
+          description: LOCS III Cortical cataract subscore, right eye, 0.1 to 5.9, per Chylack et al. 1993.
+        locs_iii_c_left:
+          type: number
+          format: double
+          description: LOCS III Cortical cataract subscore, left eye, 0.1 to 5.9, per Chylack et al. 1993.
+        locs_iii_p_right:
+          type: number
+          format: double
+          description: LOCS III Posterior Subcapsular cataract subscore, right eye, 0.1 to 5.9, per Chylack et al. 1993.
+        locs_iii_p_left:
+          type: number
+          format: double
+          description: LOCS III Posterior Subcapsular cataract subscore, left eye, 0.1 to 5.9, per Chylack et al. 1993.
+        cataract_type_right:
+          type: string
+          enum:
+            - nuclear
+            - cortical
+            - posterior-subcapsular
+            - mixed
+            - none
+            - ""
+          description: "Predominant cataract morphology, right eye: nuclear, cortical, posterior-subcapsular, mixed, or none."
+        cataract_type_left:
+          type: string
+          enum:
+            - nuclear
+            - cortical
+            - posterior-subcapsular
+            - mixed
+            - none
+            - ""
+          description: "Predominant cataract morphology, left eye: nuclear, cortical, posterior-subcapsular, mixed, or none."
+        anterior_chamber_depth_right:
+          type: string
+          enum:
+            - normal
+            - shallow
+            - deep
+            - ""
+          description: "Anterior chamber depth assessment, right eye: normal, shallow, or deep."
+        anterior_chamber_depth_left:
+          type: string
+          enum:
+            - normal
+            - shallow
+            - deep
+            - ""
+          description: "Anterior chamber depth assessment, left eye: normal, shallow, or deep."
+        corneal_clarity_right:
+          type: string
+          enum:
+            - clear
+            - hazy
+            - scarred
+            - ""
+          description: "Corneal clarity, right eye: clear, hazy, or scarred."
+        corneal_clarity_left:
+          type: string
+          enum:
+            - clear
+            - hazy
+            - scarred
+            - ""
+          description: "Corneal clarity, left eye: clear, hazy, or scarred."
+        pupil_reaction_right:
+          type: string
+          enum:
+            - normal
+            - sluggish
+            - fixed
+            - ""
+          description: "Pupil reaction, right eye: normal, sluggish, or fixed."
+        pupil_reaction_left:
+          type: string
+          enum:
+            - normal
+            - sluggish
+            - fixed
+            - ""
+          description: "Pupil reaction, left eye: normal, sluggish, or fixed."
+        glare_acuity_result_right:
+          type: string
+          maxLength: 20
+          description: Glare-testing acuity result, right eye, as text (e.g. Snellen-equivalent under glare conditions).
+        glare_acuity_result_left:
+          type: string
+          maxLength: 20
+          description: Glare-testing acuity result, left eye, as text (e.g. Snellen-equivalent under glare conditions).
+        glare_functional_impact:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Functional impact of glare on the patient's daily life: none, mild, moderate, or severe; a severe impact independently indicates surgical candidacy."
+        intraocular_pressure_right_mmhg:
+          type: number
+          format: double
+          description: Intraocular pressure, right eye, mmHg; above 21 mmHg raises the raised-iop safety flag.
+        intraocular_pressure_left_mmhg:
+          type: number
+          format: double
+          description: Intraocular pressure, left eye, mmHg; above 21 mmHg raises the raised-iop safety flag.
+        tonometry_method:
+          type: string
+          enum:
+            - goldmann
+            - non-contact
+            - icare
+            - other
+            - ""
+          description: "Tonometry method: goldmann, non-contact, icare, or other."
+        dilated_fundus_exam_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a dilated fundus examination was performed.
+        optic_disc_cup_disc_ratio_right:
+          type: number
+          format: double
+          description: Optic disc cup:disc ratio, right eye, 0 to 1.
+        optic_disc_cup_disc_ratio_left:
+          type: number
+          format: double
+          description: Optic disc cup:disc ratio, left eye, 0 to 1.
+        macula_findings_right:
+          type: string
+          enum:
+            - normal
+            - amd-suspected
+            - other
+            - ""
+          description: "Macula findings, right eye: normal, amd-suspected, or other."
+        macula_findings_left:
+          type: string
+          enum:
+            - normal
+            - amd-suspected
+            - other
+            - ""
+          description: "Macula findings, left eye: normal, amd-suspected, or other."
+        retinal_findings_right:
+          type: string
+          description: Free-text retinal findings, right eye.
+        retinal_findings_left:
+          type: string
+          description: Free-text retinal findings, left eye.
+        view_obscured_by_cataract_right:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the cataract is too dense to allow fundus assessment, right eye; combined with a dilated exam not performed, raises the view-obscured-fundus-not-assessed safety flag.
+        view_obscured_by_cataract_left:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the cataract is too dense to allow fundus assessment, left eye; combined with a dilated exam not performed, raises the view-obscured-fundus-not-assessed safety flag.
+        glaucoma_suspected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Differential screen: glaucoma suspected, contributing to the competing-pathology-suspected safety flag."
+        glaucoma_notes:
+          type: string
+          description: Free-text notes on the glaucoma differential.
+        amd_suspected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Differential screen: age-related macular degeneration suspected, contributing to the competing-pathology-suspected safety flag."
+        amd_notes:
+          type: string
+          description: Free-text notes on the age-related macular degeneration differential.
+        diabetic_retinopathy_suspected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Differential screen: diabetic retinopathy suspected, contributing to the competing-pathology-suspected safety flag."
+        diabetic_retinopathy_notes:
+          type: string
+          description: Free-text notes on the diabetic retinopathy differential.
+        biometry_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether biometry for intraocular lens (IOL) surgical planning was performed.
+        axial_length_right_mm:
+          type: number
+          format: double
+          description: Axial length, right eye, mm, for IOL power calculation.
+        axial_length_left_mm:
+          type: number
+          format: double
+          description: Axial length, left eye, mm, for IOL power calculation.
+        keratometry_k1_right:
+          type: number
+          format: double
+          description: Corneal topography keratometry K1 reading, right eye, dioptres.
+        keratometry_k1_left:
+          type: number
+          format: double
+          description: Corneal topography keratometry K1 reading, left eye, dioptres.
+        keratometry_k2_right:
+          type: number
+          format: double
+          description: Corneal topography keratometry K2 reading, right eye, dioptres.
+        keratometry_k2_left:
+          type: number
+          format: double
+          description: Corneal topography keratometry K2 reading, left eye, dioptres.
+        oct_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether optical coherence tomography (OCT) was performed.
+        oct_findings:
+          type: string
+          description: Free-text OCT findings.
+        calculated_iol_power_right:
+          type: number
+          format: double
+          description: Calculated intraocular lens (IOL) power, right eye, dioptres, if available.
+        calculated_iol_power_left:
+          type: number
+          format: double
+          description: Calculated intraocular lens (IOL) power, left eye, dioptres, if available.
+        functional_difficulty_reading:
+          type: integer
+          format: int32
+          description: Self-reported difficulty with reading, 0 (none) to 4 (severe); part of the functional/quality-of-life composite score.
+        functional_difficulty_driving:
+          type: integer
+          format: int32
+          description: Self-reported difficulty with driving, 0 (none) to 4 (severe); part of the functional/quality-of-life composite score.
+        functional_difficulty_daily_activities:
+          type: integer
+          format: int32
+          description: Self-reported difficulty with daily activities, 0 (none) to 4 (severe); part of the functional/quality-of-life composite score.
+        functional_impact_notes:
+          type: string
+          description: Free-text notes on functional and quality-of-life impact.
+        management_recommendation:
+          type: string
+          enum:
+            - monitor
+            - spectacle-change
+            - surgical-referral-routine
+            - surgical-referral-urgent
+            - ""
+          description: "Management recommendation: monitor, spectacle-change, surgical-referral-routine, or surgical-referral-urgent."
+        eye_for_surgery:
+          type: string
+          enum:
+            - right
+            - left
+            - both
+            - none
+            - ""
+          description: "Eye(s) recommended for surgery: right, left, both, or none."
+        risks_benefits_counselled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient was counselled on the risks and benefits of surgery.
+        consent_discussed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a consent discussion took place.
+        management_notes:
+          type: string
+          description: Free-text notes on the management plan.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - blurred_vision
+        - glare_or_halos
+        - night_driving_difficulty
+        - faded_colour_perception
+        - frequent_prescription_changes
+        - symptom_laterality
+        - presenting_complaint_notes
+        - history_diabetes
+        - history_prior_eye_surgery
+        - history_prior_eye_surgery_detail
+        - history_ocular_trauma
+        - history_uveitis
+        - history_steroid_use
+        - history_family_cataract
+        - history_smoking_status
+        - history_high_uv_exposure
+        - history_high_myopia
+        - medical_history_notes
+        - unaided_va_snellen_right
+        - unaided_va_snellen_left
+        - best_corrected_va_snellen_right
+        - best_corrected_va_snellen_left
+        - pinhole_va_snellen_right
+        - pinhole_va_snellen_left
+        - refraction_stability
+        - cataract_type_right
+        - cataract_type_left
+        - anterior_chamber_depth_right
+        - anterior_chamber_depth_left
+        - corneal_clarity_right
+        - corneal_clarity_left
+        - pupil_reaction_right
+        - pupil_reaction_left
+        - glare_acuity_result_right
+        - glare_acuity_result_left
+        - glare_functional_impact
+        - tonometry_method
+        - dilated_fundus_exam_performed
+        - macula_findings_right
+        - macula_findings_left
+        - retinal_findings_right
+        - retinal_findings_left
+        - view_obscured_by_cataract_right
+        - view_obscured_by_cataract_left
+        - glaucoma_suspected
+        - glaucoma_notes
+        - amd_suspected
+        - amd_notes
+        - diabetic_retinopathy_suspected
+        - diabetic_retinopathy_notes
+        - biometry_performed
+        - oct_performed
+        - oct_findings
+        - functional_impact_notes
+        - management_recommendation
+        - eye_for_surgery
+        - risks_benefits_counselled
+        - consent_discussed
+        - management_notes
+      description: "Cataract diagnostic evaluation: the payload of the 15-step single-page wizard."

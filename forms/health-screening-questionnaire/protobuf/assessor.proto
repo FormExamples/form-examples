@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: assessor
+
+syntax = "proto3";
+
+package form_examples.health_screening_questionnaire;
+
+enum AssessorRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_OCCUPATIONAL_HEALTH_NURSE = 1;  // occupational-health-nurse
+  ROLE_GENERAL_PRACTITIONER = 2;  // general-practitioner
+  ROLE_PRACTICE_NURSE = 3;  // practice-nurse
+  ROLE_PHYSIOTHERAPIST = 4;  // physiotherapist
+  ROLE_PERSONAL_TRAINER = 5;  // personal-trainer
+  ROLE_GYM_INSTRUCTOR = 6;  // gym-instructor
+  ROLE_SPORTS_THERAPIST = 7;  // sports-therapist
+  ROLE_HR_OFFICER = 8;  // hr-officer
+  ROLE_OTHER = 9;  // other
+}
+
+message Assessor {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  AssessorRoleEnum role = 8;  // VARCHAR(30)
+  string registration_body = 9;  // TEXT
+  string registration_number = 10;  // TEXT
+  string employer = 11;  // TEXT
+}

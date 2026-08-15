@@ -1,0 +1,15 @@
+<!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,sex,identifier_type,identifier_value,email,phone,emergency_contact_name,emergency_contact_relationship,emergency_contact_phone)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT identifier_type (#PCDATA)>
+<!ELEMENT identifier_value (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT emergency_contact_name (#PCDATA)>
+<!ELEMENT emergency_contact_relationship (#PCDATA)>
+<!ELEMENT emergency_contact_phone (#PCDATA)>

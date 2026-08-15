@@ -1,0 +1,387 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: cataract_diagnostic_evaluation
+
+syntax = "proto3";
+
+package form_examples.cataract_diagnostic_evaluation;
+
+enum CataractDiagnosticEvaluationStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum CataractDiagnosticEvaluationBlurredVisionEnum {
+  BLURREDVISION_UNSPECIFIED = 0;
+  BLURREDVISION_YES = 1;  // yes
+  BLURREDVISION_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationGlareOrHalosEnum {
+  GLAREORHALOS_UNSPECIFIED = 0;
+  GLAREORHALOS_YES = 1;  // yes
+  GLAREORHALOS_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationNightDrivingDifficultyEnum {
+  NIGHTDRIVINGDIFFICULTY_UNSPECIFIED = 0;
+  NIGHTDRIVINGDIFFICULTY_YES = 1;  // yes
+  NIGHTDRIVINGDIFFICULTY_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationFadedColourPerceptionEnum {
+  FADEDCOLOURPERCEPTION_UNSPECIFIED = 0;
+  FADEDCOLOURPERCEPTION_YES = 1;  // yes
+  FADEDCOLOURPERCEPTION_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationFrequentPrescriptionChangesEnum {
+  FREQUENTPRESCRIPTIONCHANGES_UNSPECIFIED = 0;
+  FREQUENTPRESCRIPTIONCHANGES_YES = 1;  // yes
+  FREQUENTPRESCRIPTIONCHANGES_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationSymptomLateralityEnum {
+  SYMPTOMLATERALITY_UNSPECIFIED = 0;
+  SYMPTOMLATERALITY_RIGHT_EYE = 1;  // right-eye
+  SYMPTOMLATERALITY_LEFT_EYE = 2;  // left-eye
+  SYMPTOMLATERALITY_BOTH_EYES = 3;  // both-eyes
+}
+
+enum CataractDiagnosticEvaluationHistoryDiabetesEnum {
+  HISTORYDIABETES_UNSPECIFIED = 0;
+  HISTORYDIABETES_YES = 1;  // yes
+  HISTORYDIABETES_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationHistoryPriorEyeSurgeryEnum {
+  HISTORYPRIOREYESURGERY_UNSPECIFIED = 0;
+  HISTORYPRIOREYESURGERY_YES = 1;  // yes
+  HISTORYPRIOREYESURGERY_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationHistoryOcularTraumaEnum {
+  HISTORYOCULARTRAUMA_UNSPECIFIED = 0;
+  HISTORYOCULARTRAUMA_YES = 1;  // yes
+  HISTORYOCULARTRAUMA_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationHistoryUveitisEnum {
+  HISTORYUVEITIS_UNSPECIFIED = 0;
+  HISTORYUVEITIS_YES = 1;  // yes
+  HISTORYUVEITIS_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationHistorySteroidUseEnum {
+  HISTORYSTEROIDUSE_UNSPECIFIED = 0;
+  HISTORYSTEROIDUSE_NONE = 1;  // none
+  HISTORYSTEROIDUSE_SYSTEMIC = 2;  // systemic
+  HISTORYSTEROIDUSE_TOPICAL = 3;  // topical
+  HISTORYSTEROIDUSE_BOTH = 4;  // both
+}
+
+enum CataractDiagnosticEvaluationHistoryFamilyCataractEnum {
+  HISTORYFAMILYCATARACT_UNSPECIFIED = 0;
+  HISTORYFAMILYCATARACT_YES = 1;  // yes
+  HISTORYFAMILYCATARACT_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationHistorySmokingStatusEnum {
+  HISTORYSMOKINGSTATUS_UNSPECIFIED = 0;
+  HISTORYSMOKINGSTATUS_NEVER = 1;  // never
+  HISTORYSMOKINGSTATUS_FORMER = 2;  // former
+  HISTORYSMOKINGSTATUS_CURRENT = 3;  // current
+}
+
+enum CataractDiagnosticEvaluationHistoryHighUvExposureEnum {
+  HISTORYHIGHUVEXPOSURE_UNSPECIFIED = 0;
+  HISTORYHIGHUVEXPOSURE_YES = 1;  // yes
+  HISTORYHIGHUVEXPOSURE_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationHistoryHighMyopiaEnum {
+  HISTORYHIGHMYOPIA_UNSPECIFIED = 0;
+  HISTORYHIGHMYOPIA_YES = 1;  // yes
+  HISTORYHIGHMYOPIA_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationRefractionStabilityEnum {
+  REFRACTIONSTABILITY_UNSPECIFIED = 0;
+  REFRACTIONSTABILITY_STABLE = 1;  // stable
+  REFRACTIONSTABILITY_CHANGING = 2;  // changing
+}
+
+enum CataractDiagnosticEvaluationCataractTypeRightEnum {
+  CATARACTTYPERIGHT_UNSPECIFIED = 0;
+  CATARACTTYPERIGHT_NUCLEAR = 1;  // nuclear
+  CATARACTTYPERIGHT_CORTICAL = 2;  // cortical
+  CATARACTTYPERIGHT_POSTERIOR_SUBCAPSULAR = 3;  // posterior-subcapsular
+  CATARACTTYPERIGHT_MIXED = 4;  // mixed
+  CATARACTTYPERIGHT_NONE = 5;  // none
+}
+
+enum CataractDiagnosticEvaluationCataractTypeLeftEnum {
+  CATARACTTYPELEFT_UNSPECIFIED = 0;
+  CATARACTTYPELEFT_NUCLEAR = 1;  // nuclear
+  CATARACTTYPELEFT_CORTICAL = 2;  // cortical
+  CATARACTTYPELEFT_POSTERIOR_SUBCAPSULAR = 3;  // posterior-subcapsular
+  CATARACTTYPELEFT_MIXED = 4;  // mixed
+  CATARACTTYPELEFT_NONE = 5;  // none
+}
+
+enum CataractDiagnosticEvaluationAnteriorChamberDepthRightEnum {
+  ANTERIORCHAMBERDEPTHRIGHT_UNSPECIFIED = 0;
+  ANTERIORCHAMBERDEPTHRIGHT_NORMAL = 1;  // normal
+  ANTERIORCHAMBERDEPTHRIGHT_SHALLOW = 2;  // shallow
+  ANTERIORCHAMBERDEPTHRIGHT_DEEP = 3;  // deep
+}
+
+enum CataractDiagnosticEvaluationAnteriorChamberDepthLeftEnum {
+  ANTERIORCHAMBERDEPTHLEFT_UNSPECIFIED = 0;
+  ANTERIORCHAMBERDEPTHLEFT_NORMAL = 1;  // normal
+  ANTERIORCHAMBERDEPTHLEFT_SHALLOW = 2;  // shallow
+  ANTERIORCHAMBERDEPTHLEFT_DEEP = 3;  // deep
+}
+
+enum CataractDiagnosticEvaluationCornealClarityRightEnum {
+  CORNEALCLARITYRIGHT_UNSPECIFIED = 0;
+  CORNEALCLARITYRIGHT_CLEAR = 1;  // clear
+  CORNEALCLARITYRIGHT_HAZY = 2;  // hazy
+  CORNEALCLARITYRIGHT_SCARRED = 3;  // scarred
+}
+
+enum CataractDiagnosticEvaluationCornealClarityLeftEnum {
+  CORNEALCLARITYLEFT_UNSPECIFIED = 0;
+  CORNEALCLARITYLEFT_CLEAR = 1;  // clear
+  CORNEALCLARITYLEFT_HAZY = 2;  // hazy
+  CORNEALCLARITYLEFT_SCARRED = 3;  // scarred
+}
+
+enum CataractDiagnosticEvaluationPupilReactionRightEnum {
+  PUPILREACTIONRIGHT_UNSPECIFIED = 0;
+  PUPILREACTIONRIGHT_NORMAL = 1;  // normal
+  PUPILREACTIONRIGHT_SLUGGISH = 2;  // sluggish
+  PUPILREACTIONRIGHT_FIXED = 3;  // fixed
+}
+
+enum CataractDiagnosticEvaluationPupilReactionLeftEnum {
+  PUPILREACTIONLEFT_UNSPECIFIED = 0;
+  PUPILREACTIONLEFT_NORMAL = 1;  // normal
+  PUPILREACTIONLEFT_SLUGGISH = 2;  // sluggish
+  PUPILREACTIONLEFT_FIXED = 3;  // fixed
+}
+
+enum CataractDiagnosticEvaluationGlareFunctionalImpactEnum {
+  GLAREFUNCTIONALIMPACT_UNSPECIFIED = 0;
+  GLAREFUNCTIONALIMPACT_NONE = 1;  // none
+  GLAREFUNCTIONALIMPACT_MILD = 2;  // mild
+  GLAREFUNCTIONALIMPACT_MODERATE = 3;  // moderate
+  GLAREFUNCTIONALIMPACT_SEVERE = 4;  // severe
+}
+
+enum CataractDiagnosticEvaluationTonometryMethodEnum {
+  TONOMETRYMETHOD_UNSPECIFIED = 0;
+  TONOMETRYMETHOD_GOLDMANN = 1;  // goldmann
+  TONOMETRYMETHOD_NON_CONTACT = 2;  // non-contact
+  TONOMETRYMETHOD_ICARE = 3;  // icare
+  TONOMETRYMETHOD_OTHER = 4;  // other
+}
+
+enum CataractDiagnosticEvaluationDilatedFundusExamPerformedEnum {
+  DILATEDFUNDUSEXAMPERFORMED_UNSPECIFIED = 0;
+  DILATEDFUNDUSEXAMPERFORMED_YES = 1;  // yes
+  DILATEDFUNDUSEXAMPERFORMED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationMaculaFindingsRightEnum {
+  MACULAFINDINGSRIGHT_UNSPECIFIED = 0;
+  MACULAFINDINGSRIGHT_NORMAL = 1;  // normal
+  MACULAFINDINGSRIGHT_AMD_SUSPECTED = 2;  // amd-suspected
+  MACULAFINDINGSRIGHT_OTHER = 3;  // other
+}
+
+enum CataractDiagnosticEvaluationMaculaFindingsLeftEnum {
+  MACULAFINDINGSLEFT_UNSPECIFIED = 0;
+  MACULAFINDINGSLEFT_NORMAL = 1;  // normal
+  MACULAFINDINGSLEFT_AMD_SUSPECTED = 2;  // amd-suspected
+  MACULAFINDINGSLEFT_OTHER = 3;  // other
+}
+
+enum CataractDiagnosticEvaluationViewObscuredByCataractRightEnum {
+  VIEWOBSCUREDBYCATARACTRIGHT_UNSPECIFIED = 0;
+  VIEWOBSCUREDBYCATARACTRIGHT_YES = 1;  // yes
+  VIEWOBSCUREDBYCATARACTRIGHT_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationViewObscuredByCataractLeftEnum {
+  VIEWOBSCUREDBYCATARACTLEFT_UNSPECIFIED = 0;
+  VIEWOBSCUREDBYCATARACTLEFT_YES = 1;  // yes
+  VIEWOBSCUREDBYCATARACTLEFT_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationGlaucomaSuspectedEnum {
+  GLAUCOMASUSPECTED_UNSPECIFIED = 0;
+  GLAUCOMASUSPECTED_YES = 1;  // yes
+  GLAUCOMASUSPECTED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationAmdSuspectedEnum {
+  AMDSUSPECTED_UNSPECIFIED = 0;
+  AMDSUSPECTED_YES = 1;  // yes
+  AMDSUSPECTED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationDiabeticRetinopathySuspectedEnum {
+  DIABETICRETINOPATHYSUSPECTED_UNSPECIFIED = 0;
+  DIABETICRETINOPATHYSUSPECTED_YES = 1;  // yes
+  DIABETICRETINOPATHYSUSPECTED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationBiometryPerformedEnum {
+  BIOMETRYPERFORMED_UNSPECIFIED = 0;
+  BIOMETRYPERFORMED_YES = 1;  // yes
+  BIOMETRYPERFORMED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationOctPerformedEnum {
+  OCTPERFORMED_UNSPECIFIED = 0;
+  OCTPERFORMED_YES = 1;  // yes
+  OCTPERFORMED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationManagementRecommendationEnum {
+  MANAGEMENTRECOMMENDATION_UNSPECIFIED = 0;
+  MANAGEMENTRECOMMENDATION_MONITOR = 1;  // monitor
+  MANAGEMENTRECOMMENDATION_SPECTACLE_CHANGE = 2;  // spectacle-change
+  MANAGEMENTRECOMMENDATION_SURGICAL_REFERRAL_ROUTINE = 3;  // surgical-referral-routine
+  MANAGEMENTRECOMMENDATION_SURGICAL_REFERRAL_URGENT = 4;  // surgical-referral-urgent
+}
+
+enum CataractDiagnosticEvaluationEyeForSurgeryEnum {
+  EYEFORSURGERY_UNSPECIFIED = 0;
+  EYEFORSURGERY_RIGHT = 1;  // right
+  EYEFORSURGERY_LEFT = 2;  // left
+  EYEFORSURGERY_BOTH = 3;  // both
+  EYEFORSURGERY_NONE = 4;  // none
+}
+
+enum CataractDiagnosticEvaluationRisksBenefitsCounselledEnum {
+  RISKSBENEFITSCOUNSELLED_UNSPECIFIED = 0;
+  RISKSBENEFITSCOUNSELLED_YES = 1;  // yes
+  RISKSBENEFITSCOUNSELLED_NO = 2;  // no
+}
+
+enum CataractDiagnosticEvaluationConsentDiscussedEnum {
+  CONSENTDISCUSSED_UNSPECIFIED = 0;
+  CONSENTDISCUSSED_YES = 1;  // yes
+  CONSENTDISCUSSED_NO = 2;  // no
+}
+
+message CataractDiagnosticEvaluation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CataractDiagnosticEvaluationStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  string assessment_time = 9;  // TIME — iso 8601 time
+  CataractDiagnosticEvaluationBlurredVisionEnum blurred_vision = 10;  // VARCHAR(5)
+  CataractDiagnosticEvaluationGlareOrHalosEnum glare_or_halos = 11;  // VARCHAR(5)
+  CataractDiagnosticEvaluationNightDrivingDifficultyEnum night_driving_difficulty = 12;  // VARCHAR(5)
+  CataractDiagnosticEvaluationFadedColourPerceptionEnum faded_colour_perception = 13;  // VARCHAR(5)
+  CataractDiagnosticEvaluationFrequentPrescriptionChangesEnum frequent_prescription_changes = 14;  // VARCHAR(5)
+  double symptom_duration_months = 15;  // NUMERIC(5,1) — numeric(5,1)
+  CataractDiagnosticEvaluationSymptomLateralityEnum symptom_laterality = 16;  // VARCHAR(15)
+  string presenting_complaint_notes = 17;  // TEXT
+  CataractDiagnosticEvaluationHistoryDiabetesEnum history_diabetes = 18;  // VARCHAR(5)
+  CataractDiagnosticEvaluationHistoryPriorEyeSurgeryEnum history_prior_eye_surgery = 19;  // VARCHAR(5)
+  string history_prior_eye_surgery_detail = 20;  // VARCHAR(500) — max 500 chars
+  CataractDiagnosticEvaluationHistoryOcularTraumaEnum history_ocular_trauma = 21;  // VARCHAR(5)
+  CataractDiagnosticEvaluationHistoryUveitisEnum history_uveitis = 22;  // VARCHAR(5)
+  CataractDiagnosticEvaluationHistorySteroidUseEnum history_steroid_use = 23;  // VARCHAR(15)
+  CataractDiagnosticEvaluationHistoryFamilyCataractEnum history_family_cataract = 24;  // VARCHAR(5)
+  CataractDiagnosticEvaluationHistorySmokingStatusEnum history_smoking_status = 25;  // VARCHAR(10)
+  CataractDiagnosticEvaluationHistoryHighUvExposureEnum history_high_uv_exposure = 26;  // VARCHAR(5)
+  CataractDiagnosticEvaluationHistoryHighMyopiaEnum history_high_myopia = 27;  // VARCHAR(5)
+  string medical_history_notes = 28;  // TEXT
+  double unaided_va_logmar_right = 29;  // NUMERIC(4,2) — numeric(4,2)
+  double unaided_va_logmar_left = 30;  // NUMERIC(4,2) — numeric(4,2)
+  string unaided_va_snellen_right = 31;  // VARCHAR(20) — max 20 chars
+  string unaided_va_snellen_left = 32;  // VARCHAR(20) — max 20 chars
+  double best_corrected_va_logmar_right = 33;  // NUMERIC(4,2) — numeric(4,2)
+  double best_corrected_va_logmar_left = 34;  // NUMERIC(4,2) — numeric(4,2)
+  string best_corrected_va_snellen_right = 35;  // VARCHAR(20) — max 20 chars
+  string best_corrected_va_snellen_left = 36;  // VARCHAR(20) — max 20 chars
+  double pinhole_va_logmar_right = 37;  // NUMERIC(4,2) — numeric(4,2)
+  double pinhole_va_logmar_left = 38;  // NUMERIC(4,2) — numeric(4,2)
+  string pinhole_va_snellen_right = 39;  // VARCHAR(20) — max 20 chars
+  string pinhole_va_snellen_left = 40;  // VARCHAR(20) — max 20 chars
+  double refraction_sphere_right = 41;  // NUMERIC(4,2) — numeric(4,2)
+  double refraction_sphere_left = 42;  // NUMERIC(4,2) — numeric(4,2)
+  double refraction_cylinder_right = 43;  // NUMERIC(4,2) — numeric(4,2)
+  double refraction_cylinder_left = 44;  // NUMERIC(4,2) — numeric(4,2)
+  int32 refraction_axis_right = 45;  // INTEGER
+  int32 refraction_axis_left = 46;  // INTEGER
+  CataractDiagnosticEvaluationRefractionStabilityEnum refraction_stability = 47;  // VARCHAR(10)
+  double locs_iii_no_right = 48;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_no_left = 49;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_nc_right = 50;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_nc_left = 51;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_c_right = 52;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_c_left = 53;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_p_right = 54;  // NUMERIC(2,1) — numeric(2,1)
+  double locs_iii_p_left = 55;  // NUMERIC(2,1) — numeric(2,1)
+  CataractDiagnosticEvaluationCataractTypeRightEnum cataract_type_right = 56;  // VARCHAR(25)
+  CataractDiagnosticEvaluationCataractTypeLeftEnum cataract_type_left = 57;  // VARCHAR(25)
+  CataractDiagnosticEvaluationAnteriorChamberDepthRightEnum anterior_chamber_depth_right = 58;  // VARCHAR(10)
+  CataractDiagnosticEvaluationAnteriorChamberDepthLeftEnum anterior_chamber_depth_left = 59;  // VARCHAR(10)
+  CataractDiagnosticEvaluationCornealClarityRightEnum corneal_clarity_right = 60;  // VARCHAR(10)
+  CataractDiagnosticEvaluationCornealClarityLeftEnum corneal_clarity_left = 61;  // VARCHAR(10)
+  CataractDiagnosticEvaluationPupilReactionRightEnum pupil_reaction_right = 62;  // VARCHAR(10)
+  CataractDiagnosticEvaluationPupilReactionLeftEnum pupil_reaction_left = 63;  // VARCHAR(10)
+  string glare_acuity_result_right = 64;  // VARCHAR(20) — max 20 chars
+  string glare_acuity_result_left = 65;  // VARCHAR(20) — max 20 chars
+  CataractDiagnosticEvaluationGlareFunctionalImpactEnum glare_functional_impact = 66;  // VARCHAR(10)
+  double intraocular_pressure_right_mmhg = 67;  // NUMERIC(4,1) — numeric(4,1)
+  double intraocular_pressure_left_mmhg = 68;  // NUMERIC(4,1) — numeric(4,1)
+  CataractDiagnosticEvaluationTonometryMethodEnum tonometry_method = 69;  // VARCHAR(15)
+  CataractDiagnosticEvaluationDilatedFundusExamPerformedEnum dilated_fundus_exam_performed = 70;  // VARCHAR(5)
+  double optic_disc_cup_disc_ratio_right = 71;  // NUMERIC(3,2) — numeric(3,2)
+  double optic_disc_cup_disc_ratio_left = 72;  // NUMERIC(3,2) — numeric(3,2)
+  CataractDiagnosticEvaluationMaculaFindingsRightEnum macula_findings_right = 73;  // VARCHAR(20)
+  CataractDiagnosticEvaluationMaculaFindingsLeftEnum macula_findings_left = 74;  // VARCHAR(20)
+  string retinal_findings_right = 75;  // TEXT
+  string retinal_findings_left = 76;  // TEXT
+  CataractDiagnosticEvaluationViewObscuredByCataractRightEnum view_obscured_by_cataract_right = 77;  // VARCHAR(5)
+  CataractDiagnosticEvaluationViewObscuredByCataractLeftEnum view_obscured_by_cataract_left = 78;  // VARCHAR(5)
+  CataractDiagnosticEvaluationGlaucomaSuspectedEnum glaucoma_suspected = 79;  // VARCHAR(5)
+  string glaucoma_notes = 80;  // TEXT
+  CataractDiagnosticEvaluationAmdSuspectedEnum amd_suspected = 81;  // VARCHAR(5)
+  string amd_notes = 82;  // TEXT
+  CataractDiagnosticEvaluationDiabeticRetinopathySuspectedEnum diabetic_retinopathy_suspected = 83;  // VARCHAR(5)
+  string diabetic_retinopathy_notes = 84;  // TEXT
+  CataractDiagnosticEvaluationBiometryPerformedEnum biometry_performed = 85;  // VARCHAR(5)
+  double axial_length_right_mm = 86;  // NUMERIC(4,2) — numeric(4,2)
+  double axial_length_left_mm = 87;  // NUMERIC(4,2) — numeric(4,2)
+  double keratometry_k1_right = 88;  // NUMERIC(5,2) — numeric(5,2)
+  double keratometry_k1_left = 89;  // NUMERIC(5,2) — numeric(5,2)
+  double keratometry_k2_right = 90;  // NUMERIC(5,2) — numeric(5,2)
+  double keratometry_k2_left = 91;  // NUMERIC(5,2) — numeric(5,2)
+  CataractDiagnosticEvaluationOctPerformedEnum oct_performed = 92;  // VARCHAR(5)
+  string oct_findings = 93;  // TEXT
+  double calculated_iol_power_right = 94;  // NUMERIC(4,2) — numeric(4,2)
+  double calculated_iol_power_left = 95;  // NUMERIC(4,2) — numeric(4,2)
+  int32 functional_difficulty_reading = 96;  // INTEGER
+  int32 functional_difficulty_driving = 97;  // INTEGER
+  int32 functional_difficulty_daily_activities = 98;  // INTEGER
+  string functional_impact_notes = 99;  // TEXT
+  CataractDiagnosticEvaluationManagementRecommendationEnum management_recommendation = 100;  // VARCHAR(30)
+  CataractDiagnosticEvaluationEyeForSurgeryEnum eye_for_surgery = 101;  // VARCHAR(10)
+  CataractDiagnosticEvaluationRisksBenefitsCounselledEnum risks_benefits_counselled = 102;  // VARCHAR(5)
+  CataractDiagnosticEvaluationConsentDiscussedEnum consent_discussed = 103;  // VARCHAR(5)
+  string management_notes = 104;  // TEXT
+}

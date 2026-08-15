@@ -13,8 +13,23 @@ file only records changes scoped to the **Hernia Diagnostic Evaluation** form.
 ## [Unreleased]
 
 ### Added
-- _Pending — record new fields, new fired-rule categories, new schema columns,
-  new front-end steps, new clinical references, new examples, etc._
+- Initial form: a hernia diagnostic evaluation across a 14-step single-page wizard, covering
+  presenting complaint and history, risk factors, visual inspection, palpation and cough impulse,
+  reducibility assessment, a red-flag emergency-symptom screen, clinical classification (European
+  Hernia Society type/subtype/laterality/size grade), imaging, differential diagnosis, functional
+  impact, and a management plan.
+- Scoring engine: a red-flag-first urgency band (`routine` / `soon` / `urgent` / `emergency`) —
+  any positive red flag from step 8 forces `emergency`, mirroring how `perioperative-optimization`'s
+  `insufficient-time` domain forces `defer-surgery` — plus a European Hernia Society classification
+  string, and a safety-flag set (`strangulation-suspected`, `incarceration-risk`,
+  `emergency-surgical-referral`, `atypical-presentation`, `occult-hernia-suspected`,
+  `recurrent-hernia`, `paediatric`, `pregnancy`, `capacity-concern` (reserved), `other`) computed
+  independently of the urgency band and never suppressed by a clinician override.
+- `sql/` — 7 migrations: `patient`, `clinician`, `hernia_diagnostic_evaluation`,
+  `hernia_diagnostic_evaluation_grade`, `hernia_diagnostic_evaluation_grade_flag`.
+- Generated representations: XML+DTD, FHIR R5, Protocol Buffers, OpenAPI 3.1, Loco setup script,
+  `examples/`, `llms.txt`.
+- `doc/ehs-classification.md`, `doc/urgency-rules.md`, `doc/safety-case-notes.md`.
 
 ### Changed
 - _Pending — record schema migrations, scoring-engine behaviour changes,

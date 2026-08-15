@@ -1,0 +1,16 @@
+<!ELEMENT cataract_diagnostic_evaluation_grade (id,created_at,updated_at,deleted_at,cataract_diagnostic_evaluation_id,computed_locs_iii_severity_right,computed_locs_iii_severity_left,computed_surgical_candidacy,final_surgical_candidacy,override_reason,functional_impact_score,clinician_notes,signed_by_name,signed_at,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT cataract_diagnostic_evaluation_id (#PCDATA)>
+<!ELEMENT computed_locs_iii_severity_right (#PCDATA)>
+<!ELEMENT computed_locs_iii_severity_left (#PCDATA)>
+<!ELEMENT computed_surgical_candidacy (#PCDATA)>
+<!ELEMENT final_surgical_candidacy (#PCDATA)>
+<!ELEMENT override_reason (#PCDATA)>
+<!ELEMENT functional_impact_score (#PCDATA)>
+<!ELEMENT clinician_notes (#PCDATA)>
+<!ELEMENT signed_by_name (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

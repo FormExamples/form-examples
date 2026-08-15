@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cataract_diagnostic_evaluation SYSTEM "cataract_diagnostic_evaluation.dtd">
+<cataract_diagnostic_evaluation>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<assessment_date>2026-01-15</assessment_date>
+<assessment_time></assessment_time>
+<blurred_vision>yes</blurred_vision>
+<glare_or_halos>yes</glare_or_halos>
+<night_driving_difficulty>yes</night_driving_difficulty>
+<faded_colour_perception>yes</faded_colour_perception>
+<frequent_prescription_changes>yes</frequent_prescription_changes>
+<symptom_duration_months>1.5</symptom_duration_months>
+<symptom_laterality>right-eye</symptom_laterality>
+<presenting_complaint_notes>Example text.</presenting_complaint_notes>
+<history_diabetes>yes</history_diabetes>
+<history_prior_eye_surgery>yes</history_prior_eye_surgery>
+<history_prior_eye_surgery_detail>Example text.</history_prior_eye_surgery_detail>
+<history_ocular_trauma>yes</history_ocular_trauma>
+<history_uveitis>yes</history_uveitis>
+<history_steroid_use>none</history_steroid_use>
+<history_family_cataract>yes</history_family_cataract>
+<history_smoking_status>never</history_smoking_status>
+<history_high_uv_exposure>yes</history_high_uv_exposure>
+<history_high_myopia>yes</history_high_myopia>
+<medical_history_notes>Example text.</medical_history_notes>
+<unaided_va_logmar_right>0.0</unaided_va_logmar_right>
+<unaided_va_logmar_left>0.0</unaided_va_logmar_left>
+<unaided_va_snellen_right></unaided_va_snellen_right>
+<unaided_va_snellen_left></unaided_va_snellen_left>
+<best_corrected_va_logmar_right>0.0</best_corrected_va_logmar_right>
+<best_corrected_va_logmar_left>0.0</best_corrected_va_logmar_left>
+<best_corrected_va_snellen_right></best_corrected_va_snellen_right>
+<best_corrected_va_snellen_left></best_corrected_va_snellen_left>
+<pinhole_va_logmar_right>0.0</pinhole_va_logmar_right>
+<pinhole_va_logmar_left>0.0</pinhole_va_logmar_left>
+<pinhole_va_snellen_right></pinhole_va_snellen_right>
+<pinhole_va_snellen_left></pinhole_va_snellen_left>
+<refraction_sphere_right>0.0</refraction_sphere_right>
+<refraction_sphere_left>0.0</refraction_sphere_left>
+<refraction_cylinder_right>0.0</refraction_cylinder_right>
+<refraction_cylinder_left>0.0</refraction_cylinder_left>
+<refraction_axis_right>1</refraction_axis_right>
+<refraction_axis_left>1</refraction_axis_left>
+<refraction_stability>stable</refraction_stability>
+<locs_iii_no_right>0.0</locs_iii_no_right>
+<locs_iii_no_left>0.0</locs_iii_no_left>
+<locs_iii_nc_right>0.0</locs_iii_nc_right>
+<locs_iii_nc_left>0.0</locs_iii_nc_left>
+<locs_iii_c_right>0.0</locs_iii_c_right>
+<locs_iii_c_left>0.0</locs_iii_c_left>
+<locs_iii_p_right>0.0</locs_iii_p_right>
+<locs_iii_p_left>0.0</locs_iii_p_left>
+<cataract_type_right>nuclear</cataract_type_right>
+<cataract_type_left>nuclear</cataract_type_left>
+<anterior_chamber_depth_right>normal</anterior_chamber_depth_right>
+<anterior_chamber_depth_left>normal</anterior_chamber_depth_left>
+<corneal_clarity_right>clear</corneal_clarity_right>
+<corneal_clarity_left>clear</corneal_clarity_left>
+<pupil_reaction_right>normal</pupil_reaction_right>
+<pupil_reaction_left>normal</pupil_reaction_left>
+<glare_acuity_result_right>Normal</glare_acuity_result_right>
+<glare_acuity_result_left>Normal</glare_acuity_result_left>
+<glare_functional_impact>none</glare_functional_impact>
+<intraocular_pressure_right_mmhg>120.0</intraocular_pressure_right_mmhg>
+<intraocular_pressure_left_mmhg>120.0</intraocular_pressure_left_mmhg>
+<tonometry_method>goldmann</tonometry_method>
+<dilated_fundus_exam_performed>yes</dilated_fundus_exam_performed>
+<optic_disc_cup_disc_ratio_right>1.5</optic_disc_cup_disc_ratio_right>
+<optic_disc_cup_disc_ratio_left>1.5</optic_disc_cup_disc_ratio_left>
+<macula_findings_right>normal</macula_findings_right>
+<macula_findings_left>normal</macula_findings_left>
+<retinal_findings_right>Example text.</retinal_findings_right>
+<retinal_findings_left>Example text.</retinal_findings_left>
+<view_obscured_by_cataract_right>yes</view_obscured_by_cataract_right>
+<view_obscured_by_cataract_left>yes</view_obscured_by_cataract_left>
+<glaucoma_suspected>yes</glaucoma_suspected>
+<glaucoma_notes>Example text.</glaucoma_notes>
+<amd_suspected>yes</amd_suspected>
+<amd_notes>Example text.</amd_notes>
+<diabetic_retinopathy_suspected>yes</diabetic_retinopathy_suspected>
+<diabetic_retinopathy_notes>Example text.</diabetic_retinopathy_notes>
+<biometry_performed>yes</biometry_performed>
+<axial_length_right_mm>0.0</axial_length_right_mm>
+<axial_length_left_mm>0.0</axial_length_left_mm>
+<keratometry_k1_right>0.0</keratometry_k1_right>
+<keratometry_k1_left>0.0</keratometry_k1_left>
+<keratometry_k2_right>0.0</keratometry_k2_right>
+<keratometry_k2_left>0.0</keratometry_k2_left>
+<oct_performed>yes</oct_performed>
+<oct_findings>Example text.</oct_findings>
+<calculated_iol_power_right>0.0</calculated_iol_power_right>
+<calculated_iol_power_left>0.0</calculated_iol_power_left>
+<functional_difficulty_reading>1</functional_difficulty_reading>
+<functional_difficulty_driving>1</functional_difficulty_driving>
+<functional_difficulty_daily_activities>1</functional_difficulty_daily_activities>
+<functional_impact_notes>Example text.</functional_impact_notes>
+<management_recommendation>monitor</management_recommendation>
+<eye_for_surgery>right</eye_for_surgery>
+<risks_benefits_counselled>yes</risks_benefits_counselled>
+<consent_discussed>yes</consent_discussed>
+<management_notes>Example text.</management_notes>
+</cataract_diagnostic_evaluation>

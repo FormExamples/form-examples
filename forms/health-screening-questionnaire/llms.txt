@@ -1,0 +1,27 @@
+# Health Screening Questionnaire
+
+> A generic, purpose-flexible baseline health and lifestyle screen used by employers, gyms and fitness professionals, and primary-care / preventive-health services to establish a person's medical history, uncover hidden risk factors, and flag whether they need further medical review before starting an activity (an exercise programme, a new job role) or as a routine wellness check. The form wraps two real, validated instruments — **PAR-Q+** for physical-activity readiness and **AUDIT-C** for alcohol use — inside a wider occupational and wellness screening questionnaire, and computes a composite risk band with a referral recommendation and a set of safety flags.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

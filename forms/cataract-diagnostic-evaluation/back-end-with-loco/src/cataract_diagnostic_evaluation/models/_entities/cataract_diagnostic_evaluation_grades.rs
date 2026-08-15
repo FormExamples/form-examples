@@ -9,7 +9,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     #[sea_orm(primary_key)]
-    pub id: i32,
+    pub id: i64,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub computed_locs_iii_severity_right: String,
     pub computed_locs_iii_severity_left: String,
@@ -22,7 +22,7 @@ pub struct Model {
     pub signed_by_name: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
     pub graded_at: DateTimeWithTimeZone,
-    pub cataract_diagnostic_evaluation_id: i32,
+    pub cataract_diagnostic_evaluation_id: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

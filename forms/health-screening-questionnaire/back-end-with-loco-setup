@@ -1,0 +1,142 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=health-screening-questionnaire
+form_snake_case=health_screening_questionnaire
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date \
+    sex:string! \
+    identifier_type:string! \
+    identifier_value:string! \
+    email:text \
+    phone:text \
+    emergency_contact_name:string! \
+    emergency_contact_relationship:string! \
+    emergency_contact_phone:string! \
+    --api
+
+cargo loco generate scaffold assessor \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    role:string! \
+    registration_body:text! \
+    registration_number:text! \
+    employer:text! \
+    --api
+
+cargo loco generate scaffold health_screening_questionnaire \
+    deleted_at:tstz \
+    patient:references \
+    assessor:references \
+    status:string! \
+    screening_purpose:string! \
+    site_name:string! \
+    assessment_date:date \
+    assessment_mode:string! \
+    usual_activity_level:string! \
+    moderate_exercise_days_per_week:int \
+    fruit_and_vegetable_portions_per_day:int \
+    diet_notes:text! \
+    smoking_status:string! \
+    cigarettes_per_day:int \
+    audit_c_frequency:int \
+    audit_c_typical_quantity:int \
+    audit_c_binge_frequency:int \
+    condition_diabetes:string! \
+    condition_hypertension:string! \
+    condition_asthma:string! \
+    condition_copd:string! \
+    condition_heart_disease:string! \
+    condition_kidney_disease:string! \
+    condition_thyroid:string! \
+    condition_other:string! \
+    past_surgeries:text! \
+    current_medications:text! \
+    known_drug_allergies:text! \
+    family_history_premature_cardiac_event:string! \
+    family_history_other:text! \
+    symptom_unexplained_chest_pain:string! \
+    symptom_dizzy_spells_or_fainting:string! \
+    symptom_persistent_cough_over_3_weeks:string! \
+    symptom_unexplained_weight_loss:string! \
+    symptom_joint_pain_restricting_movement:string! \
+    symptom_shortness_of_breath_on_exertion:string! \
+    symptom_palpitations:string! \
+    parq_diagnosed_heart_condition:string! \
+    parq_chest_pain_at_rest:string! \
+    parq_chest_pain_during_activity:string! \
+    parq_dizziness_or_loss_of_consciousness:string! \
+    parq_other_chronic_medical_condition:string! \
+    parq_prescribed_medication_for_chronic_condition:string! \
+    parq_bone_or_joint_problem:string! \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    resting_blood_pressure_systolic:int \
+    resting_blood_pressure_diastolic:int \
+    resting_heart_rate:int \
+    job_role:string! \
+    physical_demands_of_role:string! \
+    exposure_noise:string! \
+    exposure_chemicals:string! \
+    exposure_manual_handling:string! \
+    exposure_other:string! \
+    exposure_other_detail:string! \
+    stress_level:int \
+    sleep_quality:int \
+    mental_health_concern:string! \
+    mental_health_concern_note:text! \
+    vaccination_up_to_date:string! \
+    vaccination_gaps_note:text! \
+    consent_to_screening:string! \
+    information_accurate_confirmed:string! \
+    interpreter_required:string! \
+    --api
+
+cargo loco generate scaffold health_screening_questionnaire_grade \
+    deleted_at:tstz \
+    health_screening_questionnaire:references \
+    parq_plus_clearance:string! \
+    audit_c_score:int \
+    audit_c_band:string! \
+    computed_risk_band:string! \
+    final_risk_band:string! \
+    computed_recommendation:string! \
+    final_recommendation:string! \
+    override_reason:string! \
+    notes:text! \
+    signed_by_name:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold health_screening_questionnaire_grade_flag \
+    deleted_at:tstz \
+    health_screening_questionnaire_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"

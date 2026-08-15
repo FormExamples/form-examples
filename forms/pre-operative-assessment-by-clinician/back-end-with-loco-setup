@@ -276,6 +276,31 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     anticipated_length_of_stay_days:int \
     special_equipment:string! \
     blood_products_required:string! \
+    hospital_number:text! \
+    indication_for_surgery:text! \
+    anaesthetist_name:text! \
+    previous_surgeries:text! \
+    previous_anaesthetic_issues:text! \
+    previous_anaesthetic_issues_details:text! \
+    family_history_anaesthetic_complications:text! \
+    family_history_anaesthetic_complications_details:text! \
+    urinalysis_findings:text! \
+    living_situation:text! \
+    support_at_home:text! \
+    mobility_status:text! \
+    falls_risk_within_year:text! \
+    vte_risk_level:text! \
+    covid_screening_result:text! \
+    discharge_destination:text! \
+    follow_up_requirements:text! \
+    social_services_involvement:text! \
+    reablement_physiotherapy_needs:text! \
+    consent_status:text! \
+    interpreter_required:text! \
+    discussion_procedure:text! \
+    discussion_anaesthetic:text! \
+    discussion_risks_benefits:text! \
+    discussion_alternatives:text! \
     --api
 
 cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \

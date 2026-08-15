@@ -1,0 +1,553 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: health_screening_questionnaire
+openapi: 3.1.0
+info:
+  title: Health Screening Questionnaire — HealthScreeningQuestionnaire
+  version: 1.0.0
+  description: "Health screening questionnaire, i.e. the payload of the 14-step single-page wizard: assessment context, personal details, lifestyle, medical and family history, symptom review, PAR-Q+ screen, optional vital signs, occupational factors, wellbeing check, vaccination status, and consent."
+paths:
+  /health-screening-questionnaires:
+    get:
+      summary: List HealthScreeningQuestionnaire records
+      operationId: listHealthScreeningQuestionnaire
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HealthScreeningQuestionnaire records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+    post:
+      summary: Create a new HealthScreeningQuestionnaire
+      operationId: createHealthScreeningQuestionnaire
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+      responses:
+        "201":
+          description: The newly created HealthScreeningQuestionnaire
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+        "400":
+          description: Validation error
+  /health-screening-questionnaires/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HealthScreeningQuestionnaire by id
+      operationId: getHealthScreeningQuestionnaire
+      responses:
+        "200":
+          description: The requested HealthScreeningQuestionnaire
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+        "404":
+          description: HealthScreeningQuestionnaire not found
+    patch:
+      summary: Update an existing HealthScreeningQuestionnaire
+      operationId: updateHealthScreeningQuestionnaire
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+      responses:
+        "200":
+          description: The updated HealthScreeningQuestionnaire
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+        "404":
+          description: HealthScreeningQuestionnaire not found
+    delete:
+      summary: Soft-delete a HealthScreeningQuestionnaire
+      operationId: deleteHealthScreeningQuestionnaire
+      responses:
+        "204":
+          description: HealthScreeningQuestionnaire deleted
+        "404":
+          description: HealthScreeningQuestionnaire not found
+components:
+  schemas:
+    HealthScreeningQuestionnaire:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table, i.e. the person being screened.
+        assessor_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessor table, i.e. the person conducting the screen.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Questionnaire lifecycle status: draft, submitted, reviewed, or urgent."
+        screening_purpose:
+          type: string
+          enum:
+            - occupational-pre-placement
+            - routine-public-health
+            - perioperative-referral
+            - physical-activity-readiness
+            - other
+            - ""
+          description: "Step 1: purpose of the screen, which determines whether step 10 (occupational factors) is shown."
+        site_name:
+          type: string
+          maxLength: 255
+          description: "Step 1: site where the screening took place."
+        assessment_date:
+          type: string
+          format: date
+          description: "Step 1: date the screening was conducted."
+        assessment_mode:
+          type: string
+          enum:
+            - in-person
+            - telephone
+            - online
+            - ""
+          description: "Step 1: mode of assessment, in-person, telephone, or online."
+        usual_activity_level:
+          type: string
+          enum:
+            - sedentary
+            - light
+            - moderate
+            - active
+            - very-active
+            - ""
+          description: "Step 3: usual physical activity level."
+        moderate_exercise_days_per_week:
+          type: integer
+          format: int32
+          description: "Step 3: number of days per week with at least moderate exercise, 0 to 7."
+        fruit_and_vegetable_portions_per_day:
+          type: integer
+          format: int32
+          description: "Step 3: typical fruit and vegetable portions eaten per day."
+        diet_notes:
+          type: string
+          description: "Step 3: free-text diet notes."
+        smoking_status:
+          type: string
+          enum:
+            - never
+            - ex-smoker
+            - current-smoker
+            - vapes-only
+            - ""
+          description: "Step 4: smoking status."
+        cigarettes_per_day:
+          type: integer
+          format: int32
+          description: "Step 4: cigarettes smoked per day, where applicable."
+        audit_c_frequency:
+          type: integer
+          format: int32
+          description: "Step 4: AUDIT-C item 1, frequency of drinking, 0 to 4."
+        audit_c_typical_quantity:
+          type: integer
+          format: int32
+          description: "Step 4: AUDIT-C item 2, typical quantity per drinking day, 0 to 4."
+        audit_c_binge_frequency:
+          type: integer
+          format: int32
+          description: "Step 4: AUDIT-C item 3, frequency of six-or-more (binge) drinking, 0 to 4."
+        condition_diabetes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed diabetes."
+        condition_hypertension:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed hypertension."
+        condition_asthma:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed asthma."
+        condition_copd:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed chronic obstructive pulmonary disease."
+        condition_heart_disease:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed heart disease."
+        condition_kidney_disease:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed kidney disease."
+        condition_thyroid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 5: diagnosed thyroid condition."
+        condition_other:
+          type: string
+          maxLength: 500
+          description: "Step 5: other diagnosed chronic condition, free text."
+        past_surgeries:
+          type: string
+          description: "Step 5: past surgeries, free text."
+        current_medications:
+          type: string
+          description: "Step 5: current prescription medications, free text."
+        known_drug_allergies:
+          type: string
+          description: "Step 5: known drug allergies, free text."
+        family_history_premature_cardiac_event:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 6: premature (before age 60) heart attack or stroke in a first-degree relative."
+        family_history_other:
+          type: string
+          description: "Step 6: other hereditary conditions in the family, free text."
+        symptom_unexplained_chest_pain:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: unexplained chest pain, a red-flag symptom driving the refer-urgently risk band."
+        symptom_dizzy_spells_or_fainting:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: dizzy spells or fainting, a red-flag symptom driving the refer-urgently risk band."
+        symptom_persistent_cough_over_3_weeks:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: persistent cough lasting more than 3 weeks."
+        symptom_unexplained_weight_loss:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: unexplained weight loss, which alone warrants GP review regardless of other findings."
+        symptom_joint_pain_restricting_movement:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: joint pain restricting movement."
+        symptom_shortness_of_breath_on_exertion:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: shortness of breath on exertion."
+        symptom_palpitations:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 7: palpitations."
+        parq_diagnosed_heart_condition:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 1: has a doctor ever diagnosed you with a heart condition."
+        parq_chest_pain_at_rest:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 2: do you feel pain in your chest at rest."
+        parq_chest_pain_during_activity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 3: do you feel pain in your chest during, or caused by, physical activity in the last month."
+        parq_dizziness_or_loss_of_consciousness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 4: do you lose balance because of dizziness, or have you lost consciousness, in the last 12 months."
+        parq_other_chronic_medical_condition:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 5: have you been diagnosed with another chronic medical condition."
+        parq_prescribed_medication_for_chronic_condition:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 6: are you currently taking prescribed medication for a chronic medical condition."
+        parq_bone_or_joint_problem:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 8, PAR-Q+ item 7: do you have a bone, joint, or soft-tissue problem that could be made worse by becoming more physically active."
+        height_as_cm:
+          type: number
+          format: double
+          description: "Step 9: height measurement in cm, optional."
+        weight_as_kg:
+          type: number
+          format: double
+          description: "Step 9: weight measurement in kg, optional."
+        body_mass_index:
+          type: number
+          format: double
+          description: "Step 9: body mass index, auto-computed from height and weight when both are present."
+        resting_blood_pressure_systolic:
+          type: integer
+          format: int32
+          description: "Step 9: resting systolic blood pressure in mmHg, optional."
+        resting_blood_pressure_diastolic:
+          type: integer
+          format: int32
+          description: "Step 9: resting diastolic blood pressure in mmHg, optional."
+        resting_heart_rate:
+          type: integer
+          format: int32
+          description: "Step 9: resting heart rate in beats per minute, optional."
+        job_role:
+          type: string
+          maxLength: 255
+          description: "Step 10: job role, free text. Shown only for occupational-pre-placement screens."
+        physical_demands_of_role:
+          type: string
+          enum:
+            - sedentary
+            - light
+            - moderate
+            - heavy
+            - ""
+          description: "Step 10: physical demands of the role."
+        exposure_noise:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 10: occupational noise exposure risk."
+        exposure_chemicals:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 10: occupational chemical exposure risk."
+        exposure_manual_handling:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 10: occupational manual-handling exposure risk."
+        exposure_other:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 10: another occupational exposure risk."
+        exposure_other_detail:
+          type: string
+          maxLength: 500
+          description: "Step 10: detail of the other occupational exposure risk, free text."
+        stress_level:
+          type: integer
+          format: int32
+          description: "Step 11: self-reported stress level, 0 (none) to 4 (severe)."
+        sleep_quality:
+          type: integer
+          format: int32
+          description: "Step 11: self-reported sleep quality, 0 (very poor) to 4 (very good)."
+        mental_health_concern:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 11: any current mental-health concern. Light-touch only; this monorepo has dedicated mental-health assessment forms."
+        mental_health_concern_note:
+          type: string
+          description: "Step 11: optional note on the mental-health concern."
+        vaccination_up_to_date:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unsure
+            - ""
+          description: "Step 12: whether vaccinations are up to date."
+        vaccination_gaps_note:
+          type: string
+          description: "Step 12: notable vaccination gaps, free text."
+        consent_to_screening:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 13: consent to the screening."
+        information_accurate_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 13: confirmation that the information given is accurate to the best of the respondent's knowledge."
+        interpreter_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Step 13: whether an interpreter was required for this screening."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - assessor_id
+        - status
+        - screening_purpose
+        - site_name
+        - assessment_mode
+        - usual_activity_level
+        - diet_notes
+        - smoking_status
+        - condition_diabetes
+        - condition_hypertension
+        - condition_asthma
+        - condition_copd
+        - condition_heart_disease
+        - condition_kidney_disease
+        - condition_thyroid
+        - condition_other
+        - past_surgeries
+        - current_medications
+        - known_drug_allergies
+        - family_history_premature_cardiac_event
+        - family_history_other
+        - symptom_unexplained_chest_pain
+        - symptom_dizzy_spells_or_fainting
+        - symptom_persistent_cough_over_3_weeks
+        - symptom_unexplained_weight_loss
+        - symptom_joint_pain_restricting_movement
+        - symptom_shortness_of_breath_on_exertion
+        - symptom_palpitations
+        - parq_diagnosed_heart_condition
+        - parq_chest_pain_at_rest
+        - parq_chest_pain_during_activity
+        - parq_dizziness_or_loss_of_consciousness
+        - parq_other_chronic_medical_condition
+        - parq_prescribed_medication_for_chronic_condition
+        - parq_bone_or_joint_problem
+        - job_role
+        - physical_demands_of_role
+        - exposure_noise
+        - exposure_chemicals
+        - exposure_manual_handling
+        - exposure_other
+        - exposure_other_detail
+        - mental_health_concern
+        - mental_health_concern_note
+        - vaccination_up_to_date
+        - vaccination_gaps_note
+        - consent_to_screening
+        - information_accurate_confirmed
+        - interpreter_required
+      description: "Health screening questionnaire, i.e. the payload of the 14-step single-page wizard: assessment context, personal details, lifestyle, medical and family history, symptom review, PAR-Q+ screen, optional vital signs, occupational factors, wellbeing check, vaccination status, and consent."

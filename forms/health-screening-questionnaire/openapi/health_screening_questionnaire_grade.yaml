@@ -1,0 +1,217 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: health_screening_questionnaire_grade
+openapi: 3.1.0
+info:
+  title: Health Screening Questionnaire — HealthScreeningQuestionnaireGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for one health screening questionnaire. Stores both the engine-computed values and the assessor-final values with an override reason.
+paths:
+  /health-screening-questionnaire-grades:
+    get:
+      summary: List HealthScreeningQuestionnaireGrade records
+      operationId: listHealthScreeningQuestionnaireGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HealthScreeningQuestionnaireGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HealthScreeningQuestionnaireGrade"
+    post:
+      summary: Create a new HealthScreeningQuestionnaireGrade
+      operationId: createHealthScreeningQuestionnaireGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaireGrade"
+      responses:
+        "201":
+          description: The newly created HealthScreeningQuestionnaireGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaireGrade"
+        "400":
+          description: Validation error
+  /health-screening-questionnaire-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HealthScreeningQuestionnaireGrade by id
+      operationId: getHealthScreeningQuestionnaireGrade
+      responses:
+        "200":
+          description: The requested HealthScreeningQuestionnaireGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaireGrade"
+        "404":
+          description: HealthScreeningQuestionnaireGrade not found
+    patch:
+      summary: Update an existing HealthScreeningQuestionnaireGrade
+      operationId: updateHealthScreeningQuestionnaireGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaireGrade"
+      responses:
+        "200":
+          description: The updated HealthScreeningQuestionnaireGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaireGrade"
+        "404":
+          description: HealthScreeningQuestionnaireGrade not found
+    delete:
+      summary: Soft-delete a HealthScreeningQuestionnaireGrade
+      operationId: deleteHealthScreeningQuestionnaireGrade
+      responses:
+        "204":
+          description: HealthScreeningQuestionnaireGrade deleted
+        "404":
+          description: HealthScreeningQuestionnaireGrade not found
+components:
+  schemas:
+    HealthScreeningQuestionnaireGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        health_screening_questionnaire_id:
+          type: string
+          format: uuid
+          description: Foreign key to the health_screening_questionnaire table, unique because grading is one-to-one with the questionnaire.
+        parq_plus_clearance:
+          type: string
+          enum:
+            - cleared
+            - further-assessment-required
+            - ""
+          description: "PAR-Q+ clearance status: cleared when all 7 general health items are no, further-assessment-required when any item is yes."
+        audit_c_score:
+          type: integer
+          format: int32
+          description: AUDIT-C total score, 0 to 12, being the sum of the three items.
+        audit_c_band:
+          type: string
+          enum:
+            - low
+            - increasing-risk
+            - higher-risk
+            - ""
+          description: "AUDIT-C band: low, increasing-risk (score 5+ men / 4+ women), or higher-risk (score 8+)."
+        computed_risk_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - refer-urgently
+            - ""
+          description: "Composite risk band computed by the engine using the max-grade algorithm: low, moderate, high, or refer-urgently."
+        final_risk_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - refer-urgently
+            - ""
+          description: Composite risk band signed off by the assessor, which may equal or differ from the computed value.
+        computed_recommendation:
+          type: string
+          enum:
+            - clear-to-proceed
+            - routine-review
+            - gp-review-required
+            - refer-urgently
+            - paediatric-pathway
+            - ""
+          description: Referral recommendation computed by the engine from the risk band.
+        final_recommendation:
+          type: string
+          enum:
+            - clear-to-proceed
+            - routine-review
+            - gp-review-required
+            - refer-urgently
+            - paediatric-pathway
+            - ""
+          description: Referral recommendation signed off by the assessor, which may equal or differ from the computed value.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the assessor set a final value differently from the computed value, mandatory when they differ.
+        notes:
+          type: string
+          description: Free-text assessor summary notes.
+        signed_by_name:
+          type: string
+          maxLength: 255
+          description: Name of the assessor who signed the questionnaire.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the assessor electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - health_screening_questionnaire_id
+        - parq_plus_clearance
+        - audit_c_band
+        - computed_risk_band
+        - final_risk_band
+        - computed_recommendation
+        - final_recommendation
+        - override_reason
+        - notes
+        - signed_by_name
+        - graded_at
+      description: Computed and signed-off grading result for one health screening questionnaire. Stores both the engine-computed values and the assessor-final values with an override reason.

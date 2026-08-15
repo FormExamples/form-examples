@@ -1,0 +1,170 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: health_screening_questionnaire_grade_flag
+openapi: 3.1.0
+info:
+  title: Health Screening Questionnaire — HealthScreeningQuestionnaireGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the risk band, with a priority and a suggested action. Flags are never suppressed by an assessor override.
+paths:
+  /health-screening-questionnaire-grade-flags:
+    get:
+      summary: List HealthScreeningQuestionnaireGradeFlag records
+      operationId: listHealthScreeningQuestionnaireGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HealthScreeningQuestionnaireGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HealthScreeningQuestionnaireGradeFlag"
+    post:
+      summary: Create a new HealthScreeningQuestionnaireGradeFlag
+      operationId: createHealthScreeningQuestionnaireGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaireGradeFlag"
+      responses:
+        "201":
+          description: The newly created HealthScreeningQuestionnaireGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaireGradeFlag"
+        "400":
+          description: Validation error
+  /health-screening-questionnaire-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HealthScreeningQuestionnaireGradeFlag by id
+      operationId: getHealthScreeningQuestionnaireGradeFlag
+      responses:
+        "200":
+          description: The requested HealthScreeningQuestionnaireGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaireGradeFlag"
+        "404":
+          description: HealthScreeningQuestionnaireGradeFlag not found
+    patch:
+      summary: Update an existing HealthScreeningQuestionnaireGradeFlag
+      operationId: updateHealthScreeningQuestionnaireGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaireGradeFlag"
+      responses:
+        "200":
+          description: The updated HealthScreeningQuestionnaireGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaireGradeFlag"
+        "404":
+          description: HealthScreeningQuestionnaireGradeFlag not found
+    delete:
+      summary: Soft-delete a HealthScreeningQuestionnaireGradeFlag
+      operationId: deleteHealthScreeningQuestionnaireGradeFlag
+      responses:
+        "204":
+          description: HealthScreeningQuestionnaireGradeFlag deleted
+        "404":
+          description: HealthScreeningQuestionnaireGradeFlag not found
+components:
+  schemas:
+    HealthScreeningQuestionnaireGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        health_screening_questionnaire_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent health_screening_questionnaire_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier, such as F-URGENT-CARDIAC-SYMPTOM-001.
+        category:
+          type: string
+          enum:
+            - urgent-cardiac-symptom
+            - parq-positive-medical-clearance-needed
+            - alcohol-higher-risk
+            - family-history-premature-cardiac-event
+            - unexplained-weight-loss
+            - occupational-restriction-indicated
+            - vaccination-gap
+            - paediatric
+            - other
+            - ""
+          description: Flag category, such as urgent-cardiac-symptom or parq-positive-medical-clearance-needed.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action, such as \"same-day GP or emergency review\"."
+      required:
+        - created_at
+        - updated_at
+        - health_screening_questionnaire_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the risk band, with a priority and a suggested action. Flags are never suppressed by an assessor override.

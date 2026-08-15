@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: health_screening_questionnaire_grade_flag
+
+syntax = "proto3";
+
+package form_examples.health_screening_questionnaire;
+
+enum HealthScreeningQuestionnaireGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_URGENT_CARDIAC_SYMPTOM = 1;  // urgent-cardiac-symptom
+  CATEGORY_PARQ_POSITIVE_MEDICAL_CLEARANCE_NEEDED = 2;  // parq-positive-medical-clearance-needed
+  CATEGORY_ALCOHOL_HIGHER_RISK = 3;  // alcohol-higher-risk
+  CATEGORY_FAMILY_HISTORY_PREMATURE_CARDIAC_EVENT = 4;  // family-history-premature-cardiac-event
+  CATEGORY_UNEXPLAINED_WEIGHT_LOSS = 5;  // unexplained-weight-loss
+  CATEGORY_OCCUPATIONAL_RESTRICTION_INDICATED = 6;  // occupational-restriction-indicated
+  CATEGORY_VACCINATION_GAP = 7;  // vaccination-gap
+  CATEGORY_PAEDIATRIC = 8;  // paediatric
+  CATEGORY_OTHER = 9;  // other
+}
+
+enum HealthScreeningQuestionnaireGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message HealthScreeningQuestionnaireGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string health_screening_questionnaire_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  HealthScreeningQuestionnaireGradeFlagCategoryEnum category = 7;  // VARCHAR(45)
+  HealthScreeningQuestionnaireGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}
