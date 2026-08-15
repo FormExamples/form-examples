@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { gradeLabel, gradeDescription, dispositionLabel, formatDuration, calculateAge } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { gradeLabel, gradeDescription, dispositionLabel, formatDuration, calculateAge } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: AssessmentData,

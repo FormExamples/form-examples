@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { outcomeColor, outcomeLabel } from '$lib/engine/utils';
-	import type { Outcome } from '$lib/engine/types';
+	import { outcomeColor, outcomeLabel } from '#lib/engine/utils.js';
+	import type { Outcome } from '#lib/engine/types.js';
 
 	let {
 		outcome

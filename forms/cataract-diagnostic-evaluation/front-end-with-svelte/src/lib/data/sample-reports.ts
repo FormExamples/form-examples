@@ -7,7 +7,7 @@
 // "NNN NNN NNNN" display form; names are invented. The same set backs the
 // HTML dashboard, so the two front-ends show identical data.
 
-import type { EvaluationRow } from '$lib/engine/types';
+import type { EvaluationRow } from '#lib/engine/types.js';
 
 export const sampleEvaluations: EvaluationRow[] = [
 	{

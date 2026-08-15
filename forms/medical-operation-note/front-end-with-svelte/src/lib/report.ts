@@ -1,4 +1,4 @@
-import type { OperationNote, GradingResult } from '$lib/engine/types.js';
+import type { OperationNote, GradingResult } from '#lib/engine/types.js';
 
 /**
  * Build a pdfmake document definition for a Medical Operation Note.

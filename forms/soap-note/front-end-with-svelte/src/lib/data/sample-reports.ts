@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, CompletenessStatus } from '$lib/engine/types';
-import { calculateSoapGrade } from '$lib/engine/soap-note-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, CompletenessStatus } from '#lib/engine/types.js';
+import { calculateSoapGrade } from '#lib/engine/soap-note-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample note: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

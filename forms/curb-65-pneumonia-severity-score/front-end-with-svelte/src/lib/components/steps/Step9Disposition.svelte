@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateCurb65Grade } from '$lib/engine/curb65-grader';
-	import { riskBandLabel, riskBandColor, scoreVariantLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateCurb65Grade } from '#lib/engine/curb65-grader.js';
+	import { riskBandLabel, riskBandColor, scoreVariantLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.disposition;
 	const grade = $derived(calculateCurb65Grade(assessment.data));

@@ -2,11 +2,11 @@
 	// The Oxford Hip Score (OHS): 12 items, each a 0 (worst) to 4 (best)
 	// response scale, summing to a 0-48 total. See doc/ohs-scoring.md for the
 	// item concepts and the licensing note on the instrument's wording.
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import { OHS_ITEMS } from '$lib/config/ohs-items';
-	import { evaluationStore } from '$lib/stores/evaluation.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { OHS_ITEMS } from '#lib/config/ohs-items.js';
+	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 
 	const d = evaluationStore.data;
 	const result = $derived(evaluationStore.result);

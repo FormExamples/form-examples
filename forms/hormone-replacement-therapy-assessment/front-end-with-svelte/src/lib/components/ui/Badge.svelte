@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { mrsSeverityLabel, mrsSeverityColor } from '$lib/engine/utils';
-	import type { MRSSeverity } from '$lib/engine/types';
+	import { mrsSeverityLabel, mrsSeverityColor } from '#lib/engine/utils.js';
+	import type { MRSSeverity } from '#lib/engine/types.js';
 
 	let {
 		severity

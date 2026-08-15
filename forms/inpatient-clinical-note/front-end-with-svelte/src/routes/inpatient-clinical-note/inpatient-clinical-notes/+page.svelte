@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
-	import { browser } from '$app/environment';
+	import { resolve } from '$app/paths';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { acuityLabel, noteTypeShortLabel, statusLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { acuityLabel, noteTypeShortLabel, statusLabel } from '#lib/engine/utils.js';
 
 	let statusFilter = $state('');
 	let acuityFilter = $state('');
@@ -40,7 +40,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -91,7 +91,7 @@
 			header: 'NEWS2',
 			width: 90,
 			sort: true,
-			template: (v: number | null) => (v === null || v === undefined ? '—' : String(v))
+			template: (v: number | null) => v === null || v === undefined ? '—' : String(v)
 		},
 		{ id: 'highFlagCount', header: 'High flags', width: 110, sort: true },
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
@@ -103,7 +103,7 @@
 		api.exec('sort-rows', { key: 'acuityBand', order: 'desc' });
 		// Open a note when its row is selected.
 		api.on('select-row', (ev: { id?: string | number }) => {
-			if (ev?.id != null) goto(`${base}/inpatient-clinical-note/inpatient-clinical-notes/${ev.id}`);
+			if (ev?.id != null) goto(resolve(`inpatient-clinical-note/inpatient-clinical-notes/${ev.id}`));
 		});
 	}
 </script>
@@ -118,7 +118,12 @@
 				are at the top. Select a row to open the note.
 			</p>
 		</div>
-		<a href="{base}/inpatient-clinical-note/inpatient-clinical-notes/new" class="button" data-variant="primary">New note</a>
+
+		<a
+			href="{resolve('')}/inpatient-clinical-note/inpatient-clinical-notes/new"
+			class="button"
+			data-variant="primary"
+		>New note</a>
 	</div>
 
 	<div class="mb-4 flex flex-wrap gap-4">
@@ -152,11 +157,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} notes</p>
 </main>

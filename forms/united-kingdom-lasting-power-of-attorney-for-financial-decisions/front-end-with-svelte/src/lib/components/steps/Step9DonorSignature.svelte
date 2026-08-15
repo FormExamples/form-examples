@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import { createEmptyPerson } from '$lib/factory.js';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
-  import SignaturePad from '$lib/components/ui/SignaturePad.svelte';
-  import AddressInput from '$lib/components/ui/AddressInput.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import { createEmptyPerson } from '#lib/factory.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
+  import SignaturePad from '#lib/components/ui/SignaturePad.svelte';
+  import AddressInput from '#lib/components/ui/AddressInput.svelte';
 
   // Ensure exactly one signature exists for the donor at LP1F section 9.
   function ensureDonorSignature() {

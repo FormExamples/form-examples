@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import type { PatientReportedOutcomeMeasures, AllScoresResult } from '$lib/engine/types';
-import { createEmptyAssessment } from '$lib/engine/factory';
-import { computeAllScores } from '$lib/engine/composite';
+import { browser } from '$app/env';
+import type { PatientReportedOutcomeMeasures, AllScoresResult } from '#lib/engine/types.js';
+import { createEmptyAssessment } from '#lib/engine/factory.js';
+import { computeAllScores } from '#lib/engine/composite.js';
 
 /** localStorage draft key for a given visit id (defaults to `new`). */
 function storageKey(id: string): string {

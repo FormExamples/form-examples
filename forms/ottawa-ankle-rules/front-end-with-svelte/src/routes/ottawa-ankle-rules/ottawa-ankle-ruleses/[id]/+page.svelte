@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeOttawaAnkleRules } from '$lib/engine/ottawa-ankle-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeOttawaAnkleRules } from '#lib/engine/ottawa-ankle-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Applicability from '$lib/components/steps/Step3Applicability.svelte';
-	import Step4PainZones from '$lib/components/steps/Step4PainZones.svelte';
-	import Step5AnkleTenderness from '$lib/components/steps/Step5AnkleTenderness.svelte';
-	import Step6FootTenderness from '$lib/components/steps/Step6FootTenderness.svelte';
-	import Step7WeightBearing from '$lib/components/steps/Step7WeightBearing.svelte';
-	import Step8Summary from '$lib/components/steps/Step8Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Applicability from '#lib/components/steps/Step3Applicability.svelte';
+	import Step4PainZones from '#lib/components/steps/Step4PainZones.svelte';
+	import Step5AnkleTenderness from '#lib/components/steps/Step5AnkleTenderness.svelte';
+	import Step6FootTenderness from '#lib/components/steps/Step6FootTenderness.svelte';
+	import Step7WeightBearing from '#lib/components/steps/Step7WeightBearing.svelte';
+	import Step8Summary from '#lib/components/steps/Step8Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

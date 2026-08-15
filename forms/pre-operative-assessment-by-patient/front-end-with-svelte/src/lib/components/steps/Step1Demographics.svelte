@@ -1,14 +1,14 @@
 <script lang="ts">
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateBMI, bmiCategory } from '#lib/engine/utils.js';
 
 	const d = assessment.data.demographics;
 	const yesNo = [

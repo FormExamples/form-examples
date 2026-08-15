@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { actScoreLabel, actScoreColor } from '$lib/engine/utils';
+	import { actScoreLabel, actScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

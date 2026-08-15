@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeAssessment } from '$lib/engine/hematology-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeAssessment } from '#lib/engine/hematology-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientInformation from '$lib/components/steps/Step1PatientInformation.svelte';
-	import Step2BloodCountAnalysis from '$lib/components/steps/Step2BloodCountAnalysis.svelte';
-	import Step3CoagulationStudies from '$lib/components/steps/Step3CoagulationStudies.svelte';
-	import Step4PeripheralBloodFilm from '$lib/components/steps/Step4PeripheralBloodFilm.svelte';
-	import Step5IronStudies from '$lib/components/steps/Step5IronStudies.svelte';
-	import Step6HemoglobinopathyScreening from '$lib/components/steps/Step6HemoglobinopathyScreening.svelte';
-	import Step7BoneMarrowAssessment from '$lib/components/steps/Step7BoneMarrowAssessment.svelte';
-	import Step8TransfusionHistory from '$lib/components/steps/Step8TransfusionHistory.svelte';
-	import Step9TreatmentMedications from '$lib/components/steps/Step9TreatmentMedications.svelte';
-	import Step10ClinicalReview from '$lib/components/steps/Step10ClinicalReview.svelte';
+	import Step1PatientInformation from '#lib/components/steps/Step1PatientInformation.svelte';
+	import Step2BloodCountAnalysis from '#lib/components/steps/Step2BloodCountAnalysis.svelte';
+	import Step3CoagulationStudies from '#lib/components/steps/Step3CoagulationStudies.svelte';
+	import Step4PeripheralBloodFilm from '#lib/components/steps/Step4PeripheralBloodFilm.svelte';
+	import Step5IronStudies from '#lib/components/steps/Step5IronStudies.svelte';
+	import Step6HemoglobinopathyScreening from '#lib/components/steps/Step6HemoglobinopathyScreening.svelte';
+	import Step7BoneMarrowAssessment from '#lib/components/steps/Step7BoneMarrowAssessment.svelte';
+	import Step8TransfusionHistory from '#lib/components/steps/Step8TransfusionHistory.svelte';
+	import Step9TreatmentMedications from '#lib/components/steps/Step9TreatmentMedications.svelte';
+	import Step10ClinicalReview from '#lib/components/steps/Step10ClinicalReview.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

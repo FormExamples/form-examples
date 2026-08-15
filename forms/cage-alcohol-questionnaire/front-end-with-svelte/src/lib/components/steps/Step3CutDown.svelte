@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateCageGrade } from '$lib/engine/cage-grader';
-	import { pointColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateCageGrade } from '#lib/engine/cage-grader.js';
+	import { pointColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const c = assessment.data.criteria;
 	const point = $derived(calculateCageGrade(assessment.data).cutDownPoint);

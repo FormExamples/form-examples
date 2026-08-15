@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { SleepStudyRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { SleepStudyRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export so consumers can build a blank request from the store module.
 export { createDefaultRequest };

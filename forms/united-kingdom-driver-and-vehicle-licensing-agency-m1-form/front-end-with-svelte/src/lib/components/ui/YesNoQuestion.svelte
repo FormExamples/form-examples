@@ -1,7 +1,7 @@
 <script lang="ts">
 	// YesNoQuestion — Lily-shaped convenience that wraps Field + RadioGroup
 	// emitting Lily class names (radio-group, radio-input).
-	import type { YesNo } from '$lib/engine/types';
+	import type { YesNo } from '#lib/engine/types.js';
 	import Field from './Field.svelte';
 	import RadioGroup from './RadioGroup.svelte';
 

@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, ManagementAction, ResultClass } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/cervical-screening-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, ManagementAction, ResultClass } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/cervical-screening-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample screening: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,7 +1,7 @@
-import type { AssessmentData, RiskLevel, UrgencyLevel } from '$lib/engine/types';
-import { calculateRiskLevel } from '$lib/engine/intake-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, RiskLevel, UrgencyLevel } from '#lib/engine/types.js';
+import { calculateRiskLevel } from '#lib/engine/intake-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample intake: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

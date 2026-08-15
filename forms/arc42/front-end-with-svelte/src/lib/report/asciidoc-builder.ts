@@ -1,4 +1,4 @@
-import type { Arc42Documentation } from '$lib/grading/types.js';
+import type { Arc42Documentation } from '#lib/grading/types.js';
 
 export interface AsciiDocFile {
   filename: string;

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { store } from '$lib/stores/checklist.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import { store } from '#lib/stores/checklist.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
   import FlagBanner from '../ui/FlagBanner.svelte';
 
   const r = $derived(store.result);

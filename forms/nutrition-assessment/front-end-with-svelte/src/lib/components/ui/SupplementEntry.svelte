@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Supplement } from '$lib/engine/types';
+	import type { Supplement } from '#lib/engine/types.js';
 
 	let {
 		supplements = $bindable<Supplement[]>([]),

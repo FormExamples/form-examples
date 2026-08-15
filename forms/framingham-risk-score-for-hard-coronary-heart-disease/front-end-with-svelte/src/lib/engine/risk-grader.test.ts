@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateRisk } from './risk-grader';
 import { detectAdditionalFlags } from './flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import type { AssessmentData } from './types';
 
 function withDemographics(over: Partial<AssessmentData['demographics']>): AssessmentData {

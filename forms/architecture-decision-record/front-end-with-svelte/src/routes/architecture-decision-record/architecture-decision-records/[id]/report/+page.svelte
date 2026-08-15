@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/adr.svelte';
-	import { buildMarkdown } from '$lib/report/build-markdown.js';
+	import { store } from '#lib/stores/adr.svelte.js';
+	import { buildMarkdown } from '#lib/report/build-markdown.js';
 	import {
 		statusLabel,
 		statusColor,
@@ -10,8 +10,8 @@
 		completenessColor,
 		priorityColor,
 		pad4
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

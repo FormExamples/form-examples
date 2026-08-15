@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	riskBandLabel,
 	priorityLabel,
@@ -10,7 +10,7 @@ import {
 	smokingLabel,
 	diabetesLabel,
 	ckdStageLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 const YES_NO: Record<string, string> = { yes: 'Yes', no: 'No', '': 'Not recorded' };
 

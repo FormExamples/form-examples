@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import { request } from '$lib/stores/result.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { request } from '#lib/stores/result.svelte.js';
 
 	const d = request.data.indication;
 </script>

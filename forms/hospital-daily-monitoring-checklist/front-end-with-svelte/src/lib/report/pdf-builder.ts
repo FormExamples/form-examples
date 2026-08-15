@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { ChecklistSummaryResult, HospitalDailyMonitoringChecklist } from '$lib/engine/types.js';
-import { CHECKLIST_ITEMS, SECTIONS } from '$lib/config/items.js';
-import { statusLabel } from '$lib/engine/utils.js';
+import type { ChecklistSummaryResult, HospitalDailyMonitoringChecklist } from '#lib/engine/types.js';
+import { CHECKLIST_ITEMS, SECTIONS } from '#lib/config/items.js';
+import { statusLabel } from '#lib/engine/utils.js';
 
 /**
  * Build the pdfmake document definition for a hospital daily monitoring

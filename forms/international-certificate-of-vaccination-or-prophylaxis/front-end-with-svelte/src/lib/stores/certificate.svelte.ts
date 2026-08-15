@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import { emptyCertificate, type Certificate, type ValidationReport } from '$lib/engine/types';
+import { browser } from '$app/env';
+import { emptyCertificate, type Certificate, type ValidationReport } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given certificate id (defaults to `new`). */
 function storageKey(id: string): string {

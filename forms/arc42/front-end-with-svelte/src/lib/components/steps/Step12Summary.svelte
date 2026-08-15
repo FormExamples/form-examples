@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { store } from '$lib/stores/documentation.svelte.js';
-  import { calculateMaturity } from '$lib/grading/maturity-grader.js';
-  import FlagBanner from '$lib/components/ui/FlagBanner.svelte';
-  import RepeatList from '$lib/components/ui/RepeatList.svelte';
+  import { store } from '#lib/stores/documentation.svelte.js';
+  import { calculateMaturity } from '#lib/grading/maturity-grader.js';
+  import FlagBanner from '#lib/components/ui/FlagBanner.svelte';
+  import RepeatList from '#lib/components/ui/RepeatList.svelte';
 
   const result = $derived(calculateMaturity(store.data));
 </script>

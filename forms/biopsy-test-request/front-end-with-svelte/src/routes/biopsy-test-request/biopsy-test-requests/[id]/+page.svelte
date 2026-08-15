@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { request } from '$lib/stores/request.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleRequests } from '$lib/data/sample-reports';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleRequests } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Clinician from '$lib/components/steps/Step1Clinician.svelte';
-	import Step2Patient from '$lib/components/steps/Step2Patient.svelte';
-	import Step3Procedure from '$lib/components/steps/Step3Procedure.svelte';
-	import Step4Indication from '$lib/components/steps/Step4Indication.svelte';
-	import Step5Lesion from '$lib/components/steps/Step5Lesion.svelte';
-	import Step6Bleeding from '$lib/components/steps/Step6Bleeding.svelte';
-	import Step7RiskReview from '$lib/components/steps/Step7RiskReview.svelte';
-	import Step8Triage from '$lib/components/steps/Step8Triage.svelte';
+	import Step1Clinician from '#lib/components/steps/Step1Clinician.svelte';
+	import Step2Patient from '#lib/components/steps/Step2Patient.svelte';
+	import Step3Procedure from '#lib/components/steps/Step3Procedure.svelte';
+	import Step4Indication from '#lib/components/steps/Step4Indication.svelte';
+	import Step5Lesion from '#lib/components/steps/Step5Lesion.svelte';
+	import Step6Bleeding from '#lib/components/steps/Step6Bleeding.svelte';
+	import Step7RiskReview from '#lib/components/steps/Step7RiskReview.svelte';
+	import Step8Triage from '#lib/components/steps/Step8Triage.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

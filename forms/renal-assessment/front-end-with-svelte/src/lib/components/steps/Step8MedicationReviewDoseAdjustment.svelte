@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
-	import type { YesNo, MedicationReview } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import MedicationEntry from '#lib/components/ui/MedicationEntry.svelte';
+	import type { YesNo, MedicationReview } from '#lib/engine/types.js';
 
 	const m = assessment.data.medicationReview;
 	const yesNo = [

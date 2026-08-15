@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { qolResponseOptions } from '$lib/engine/ipss-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import type { QoLScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { qolResponseOptions } from '#lib/engine/ipss-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import type { QoLScore } from '#lib/engine/types.js';
 
 	const qol = assessment.data.qualityOfLife;
 

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { store } from '$lib/stores/fitnote.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import { store } from '#lib/stores/fitnote.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
 
 	const p = store.data.patient;
 </script>

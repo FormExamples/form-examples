@@ -1,7 +1,7 @@
-import type { AssessmentData, MRSSeverity, HRTRiskClassification } from '$lib/engine/types';
-import { calculateMRS, classifyHRTRisk } from '$lib/engine/mrs-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, MRSSeverity, HRTRiskClassification } from '#lib/engine/types.js';
+import { calculateMRS, classifyHRTRisk } from '#lib/engine/mrs-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

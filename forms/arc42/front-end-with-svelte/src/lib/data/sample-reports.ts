@@ -1,7 +1,7 @@
-import type { Arc42Documentation, Maturity } from '$lib/grading/types.js';
-import { calculateMaturity } from '$lib/grading/maturity-grader.js';
-import { createDefaultDocumentation } from '$lib/stores/documentation.svelte';
-import { completeSectionCount } from '$lib/grading/utils.js';
+import type { Arc42Documentation, Maturity } from '#lib/grading/types.js';
+import { calculateMaturity } from '#lib/grading/maturity-grader.js';
+import { createDefaultDocumentation } from '#lib/stores/documentation.svelte.js';
+import { completeSectionCount } from '#lib/grading/utils.js';
 
 /** A sample arc42 document: an identifier and the full data the engine grades. */
 export interface SampleDocument {

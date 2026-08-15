@@ -2,7 +2,7 @@
   // YesNoField — Lily Svelte headless contract.
   // Emits: <div class="field"><label class="label">...</label>
   //        <select class="select"></select></div>.
-  import type { YesNo } from '$lib/engine/types.js';
+  import type { YesNo } from '#lib/engine/types.js';
   let {
     label,
     value = $bindable(),

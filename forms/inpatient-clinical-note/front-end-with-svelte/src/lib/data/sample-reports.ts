@@ -1,6 +1,6 @@
-import type { AcuityBand, AssessmentData, CompletenessStatus } from '$lib/engine/types';
-import { assess } from '$lib/engine/note-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AcuityBand, AssessmentData, CompletenessStatus } from '#lib/engine/types.js';
+import { assess } from '#lib/engine/note-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /**
  * Sample notes for the dashboard and for seeding the wizard on an existing id.

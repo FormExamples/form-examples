@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { gradeShortLabel } from '$lib/engine/utils';
-	import type { OETGrade } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { gradeShortLabel } from '#lib/engine/utils.js';
+	import type { OETGrade } from '#lib/engine/types.js';
 
 	const plural = 'medical-language-speaking-assessments-for-cymraeg';
 
@@ -35,7 +35,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -47,8 +47,20 @@
 	// shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Assessment', width: 130 },
-		{ id: 'candidateName', header: 'Candidate', flexgrow: 2, sort: true },
-		{ id: 'assessedDate', header: 'Assessed', width: 120, sort: true },
+		{
+			id: 'candidateName',
+			header: 'Candidate',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'assessedDate',
+			header: 'Assessed',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'grade',
 			header: 'Grade',
@@ -56,14 +68,33 @@
 			sort: true,
 			template: (v: OETGrade) => gradeShortLabel(v)
 		},
-		{ id: 'scaledScore', header: 'Score /500', width: 110, sort: true },
-		{ id: 'linguisticTotal', header: 'Ling /24', width: 100, sort: true },
-		{ id: 'clinicalTotal', header: 'Clin /15', width: 100, sort: true },
+
+		{
+			id: 'scaledScore',
+			header: 'Score /500',
+			width: 110,
+			sort: true
+		},
+
+		{
+			id: 'linguisticTotal',
+			header: 'Ling /24',
+			width: 100,
+			sort: true
+		},
+
+		{
+			id: 'clinicalTotal',
+			header: 'Clin /15',
+			width: 100,
+			sort: true
+		},
+
 		{
 			id: 'thresholdMet',
 			header: 'Clinical threshold',
 			width: 150,
-			template: (v: boolean) => (v ? 'Met' : 'Below')
+			template: (v: boolean) => v ? 'Met' : 'Below'
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -115,11 +146,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} candidates</p>
 </main>

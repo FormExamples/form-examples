@@ -1,7 +1,7 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { calculateSatisfaction } from '$lib/engine/satisfaction-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { calculateSatisfaction } from '#lib/engine/satisfaction-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample survey: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

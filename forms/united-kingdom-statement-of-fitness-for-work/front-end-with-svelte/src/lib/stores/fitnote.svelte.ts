@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import { emptyFitNote, type FitNote, type GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import { emptyFitNote, type FitNote, type GradingResult } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given fit-note id (defaults to `new`). */
 function storageKey(id: string): string {

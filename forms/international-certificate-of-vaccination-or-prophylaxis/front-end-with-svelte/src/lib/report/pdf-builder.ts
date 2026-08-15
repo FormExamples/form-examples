@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { Certificate, ValidationReport } from '$lib/engine/types';
-import { diseaseLabel, validityStatusLabel, overallValidityStatus, calculateAge } from '$lib/engine/utils';
+import type { Certificate, ValidationReport } from '#lib/engine/types.js';
+import { diseaseLabel, validityStatusLabel, overallValidityStatus, calculateAge } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: Certificate,

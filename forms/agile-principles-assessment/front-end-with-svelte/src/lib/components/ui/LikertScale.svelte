@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LikertScore } from '$lib/engine/types.js';
+  import type { LikertScore } from '#lib/engine/types.js';
 
   let {
     name,

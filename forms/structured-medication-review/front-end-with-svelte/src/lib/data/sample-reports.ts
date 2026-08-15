@@ -1,7 +1,7 @@
-import type { BurdenBand, CareSetting, ReviewData, ReviewStatus } from '$lib/engine/types';
-import { calculateReview } from '$lib/engine/structured-medication-review-grader';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { createDefaultReview } from '$lib/stores/assessment.svelte';
+import type { BurdenBand, CareSetting, ReviewData, ReviewStatus } from '#lib/engine/types.js';
+import { calculateReview } from '#lib/engine/structured-medication-review-grader.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { createDefaultReview } from '#lib/stores/assessment.svelte.js';
 
 /** A sample review: an identifier and the full data the engine grades. */
 export interface SampleReview {

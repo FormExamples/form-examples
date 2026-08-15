@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateControl } from '$lib/engine/diabetes-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateControl } from '#lib/engine/diabetes-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientInformation from '$lib/components/steps/Step1PatientInformation.svelte';
-	import Step2DiabetesHistory from '$lib/components/steps/Step2DiabetesHistory.svelte';
-	import Step3GlycaemicControl from '$lib/components/steps/Step3GlycaemicControl.svelte';
-	import Step4Medications from '$lib/components/steps/Step4Medications.svelte';
-	import Step5ComplicationsScreening from '$lib/components/steps/Step5ComplicationsScreening.svelte';
-	import Step6CardiovascularRisk from '$lib/components/steps/Step6CardiovascularRisk.svelte';
-	import Step7SelfCareLifestyle from '$lib/components/steps/Step7SelfCareLifestyle.svelte';
-	import Step8PsychologicalWellbeing from '$lib/components/steps/Step8PsychologicalWellbeing.svelte';
-	import Step9FootAssessment from '$lib/components/steps/Step9FootAssessment.svelte';
-	import Step10ReviewCarePlan from '$lib/components/steps/Step10ReviewCarePlan.svelte';
+	import Step1PatientInformation from '#lib/components/steps/Step1PatientInformation.svelte';
+	import Step2DiabetesHistory from '#lib/components/steps/Step2DiabetesHistory.svelte';
+	import Step3GlycaemicControl from '#lib/components/steps/Step3GlycaemicControl.svelte';
+	import Step4Medications from '#lib/components/steps/Step4Medications.svelte';
+	import Step5ComplicationsScreening from '#lib/components/steps/Step5ComplicationsScreening.svelte';
+	import Step6CardiovascularRisk from '#lib/components/steps/Step6CardiovascularRisk.svelte';
+	import Step7SelfCareLifestyle from '#lib/components/steps/Step7SelfCareLifestyle.svelte';
+	import Step8PsychologicalWellbeing from '#lib/components/steps/Step8PsychologicalWellbeing.svelte';
+	import Step9FootAssessment from '#lib/components/steps/Step9FootAssessment.svelte';
+	import Step10ReviewCarePlan from '#lib/components/steps/Step10ReviewCarePlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

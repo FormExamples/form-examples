@@ -1,4 +1,4 @@
-import type { StepConfig } from '$lib/engine/types';
+import type { StepConfig } from '#lib/engine/types.js';
 
 /** Total number of wizard steps. */
 export const TOTAL_STEPS = 7;

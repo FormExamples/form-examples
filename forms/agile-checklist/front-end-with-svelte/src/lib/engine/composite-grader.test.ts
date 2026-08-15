@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { createEmptyChecklist } from './factory.js';
 import { calculateMaturity, deriveMaturity, bandFor } from './composite-grader.js';
-import { ALL_ITEMS, TEAMS_ITEMS, STAKEHOLDERS_ITEMS, PRACTICES_ITEMS } from '$lib/config/items.js';
+import { ALL_ITEMS, TEAMS_ITEMS, STAKEHOLDERS_ITEMS, PRACTICES_ITEMS } from '#lib/config/items.js';
 import type { Answer } from './types.js';
 
 function answerAll(value: Answer): ReturnType<typeof createEmptyChecklist> {

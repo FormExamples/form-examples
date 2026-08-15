@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { DassSeverity } from '$lib/engine/types';
-	import { severityColor, severityLabel } from '$lib/engine/utils';
+	import type { DassSeverity } from '#lib/engine/types.js';
+	import { severityColor, severityLabel } from '#lib/engine/utils.js';
 
 	let {
 		severity,

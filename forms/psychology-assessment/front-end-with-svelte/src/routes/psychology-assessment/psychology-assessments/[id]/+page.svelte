@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateDass21 } from '$lib/engine/dass21-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateDass21 } from '#lib/engine/dass21-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2ReasonForAssessment from '$lib/components/steps/Step2ReasonForAssessment.svelte';
-	import Step3DassDepression from '$lib/components/steps/Step3DassDepression.svelte';
-	import Step4DassAnxiety from '$lib/components/steps/Step4DassAnxiety.svelte';
-	import Step5DassStress from '$lib/components/steps/Step5DassStress.svelte';
-	import Step6FunctionalImpact from '$lib/components/steps/Step6FunctionalImpact.svelte';
-	import Step7RiskScreen from '$lib/components/steps/Step7RiskScreen.svelte';
-	import Step8SupportAndHistory from '$lib/components/steps/Step8SupportAndHistory.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2ReasonForAssessment from '#lib/components/steps/Step2ReasonForAssessment.svelte';
+	import Step3DassDepression from '#lib/components/steps/Step3DassDepression.svelte';
+	import Step4DassAnxiety from '#lib/components/steps/Step4DassAnxiety.svelte';
+	import Step5DassStress from '#lib/components/steps/Step5DassStress.svelte';
+	import Step6FunctionalImpact from '#lib/components/steps/Step6FunctionalImpact.svelte';
+	import Step7RiskScreen from '#lib/components/steps/Step7RiskScreen.svelte';
+	import Step8SupportAndHistory from '#lib/components/steps/Step8SupportAndHistory.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateValidity } from '$lib/engine/validity-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateValidity } from '#lib/engine/validity-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PersonalInformation from '$lib/components/steps/Step1PersonalInformation.svelte';
-	import Step2CapacityDeclaration from '$lib/components/steps/Step2CapacityDeclaration.svelte';
-	import Step3Circumstances from '$lib/components/steps/Step3Circumstances.svelte';
-	import Step4TreatmentsRefusedGeneral from '$lib/components/steps/Step4TreatmentsRefusedGeneral.svelte';
-	import Step5TreatmentsRefusedLifeSustaining from '$lib/components/steps/Step5TreatmentsRefusedLifeSustaining.svelte';
-	import Step6ExceptionsConditions from '$lib/components/steps/Step6ExceptionsConditions.svelte';
-	import Step7OtherWishes from '$lib/components/steps/Step7OtherWishes.svelte';
-	import Step8LastingPowerOfAttorney from '$lib/components/steps/Step8LastingPowerOfAttorney.svelte';
-	import Step9HealthcareProfessionalReview from '$lib/components/steps/Step9HealthcareProfessionalReview.svelte';
-	import Step10LegalSignatures from '$lib/components/steps/Step10LegalSignatures.svelte';
+	import Step1PersonalInformation from '#lib/components/steps/Step1PersonalInformation.svelte';
+	import Step2CapacityDeclaration from '#lib/components/steps/Step2CapacityDeclaration.svelte';
+	import Step3Circumstances from '#lib/components/steps/Step3Circumstances.svelte';
+	import Step4TreatmentsRefusedGeneral from '#lib/components/steps/Step4TreatmentsRefusedGeneral.svelte';
+	import Step5TreatmentsRefusedLifeSustaining from '#lib/components/steps/Step5TreatmentsRefusedLifeSustaining.svelte';
+	import Step6ExceptionsConditions from '#lib/components/steps/Step6ExceptionsConditions.svelte';
+	import Step7OtherWishes from '#lib/components/steps/Step7OtherWishes.svelte';
+	import Step8LastingPowerOfAttorney from '#lib/components/steps/Step8LastingPowerOfAttorney.svelte';
+	import Step9HealthcareProfessionalReview from '#lib/components/steps/Step9HealthcareProfessionalReview.svelte';
+	import Step10LegalSignatures from '#lib/components/steps/Step10LegalSignatures.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

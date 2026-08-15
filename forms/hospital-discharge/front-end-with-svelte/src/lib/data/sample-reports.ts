@@ -1,7 +1,7 @@
-import type { AssessmentData, CompletenessLevel } from '$lib/engine/types';
-import { gradeDischarge } from '$lib/engine/discharge-validator';
-import { destinationLabel, followUpLabel } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletenessLevel } from '#lib/engine/types.js';
+import { gradeDischarge } from '#lib/engine/discharge-validator.js';
+import { destinationLabel, followUpLabel } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample discharge summary: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

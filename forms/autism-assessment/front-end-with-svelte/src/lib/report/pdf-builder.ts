@@ -1,5 +1,5 @@
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { aq10ScoreLabel, calculateAge } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { aq10ScoreLabel, calculateAge } from '#lib/engine/utils.js';
 
 /** Build the pdfmake document definition for an autism assessment report. */
 export function buildPdfDocument(data: AssessmentData, result: GradingResult) {

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { severityLabel, severityColor } from '$lib/engine/utils';
-	import type { SeverityLevel } from '$lib/engine/types';
+	import { severityLabel, severityColor } from '#lib/engine/utils.js';
+	import type { SeverityLevel } from '#lib/engine/types.js';
 
 	let {
 		level

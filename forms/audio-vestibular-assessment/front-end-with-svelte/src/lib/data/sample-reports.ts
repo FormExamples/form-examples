@@ -1,6 +1,6 @@
-import type { AssessmentData, HearingLossGrade, DhiHandicapLevel } from '$lib/engine/types';
-import { grade } from '$lib/engine/audio-vestibular-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, HearingLossGrade, DhiHandicapLevel } from '#lib/engine/types.js';
+import { grade } from '#lib/engine/audio-vestibular-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

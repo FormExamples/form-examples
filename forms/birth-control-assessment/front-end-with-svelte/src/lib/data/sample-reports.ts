@@ -1,6 +1,6 @@
-import type { AssessmentData, MethodMEC, RiskLevel } from '$lib/engine/types';
-import { calculateMECGrade } from '$lib/engine/mec-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, MethodMEC, RiskLevel } from '#lib/engine/types.js';
+import { calculateMECGrade } from '#lib/engine/mec-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

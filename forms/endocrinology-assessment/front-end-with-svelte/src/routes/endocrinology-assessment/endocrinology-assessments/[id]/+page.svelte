@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateGrades } from '$lib/engine/endocrine-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrades } from '#lib/engine/endocrine-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2PresentingSymptoms from '$lib/components/steps/Step2PresentingSymptoms.svelte';
-	import Step3ThyroidAxisReview from '$lib/components/steps/Step3ThyroidAxisReview.svelte';
-	import Step4AdrenalAxisReview from '$lib/components/steps/Step4AdrenalAxisReview.svelte';
-	import Step5GlucoseMetabolism from '$lib/components/steps/Step5GlucoseMetabolism.svelte';
-	import Step6ReproductiveAxis from '$lib/components/steps/Step6ReproductiveAxis.svelte';
-	import Step7PituitaryFunction from '$lib/components/steps/Step7PituitaryFunction.svelte';
-	import Step8BoneCalcium from '$lib/components/steps/Step8BoneCalcium.svelte';
-	import Step9MedicationsLifestyleReview from '$lib/components/steps/Step9MedicationsLifestyleReview.svelte';
-	import Step10ClinicalImpressionManagementPlan from '$lib/components/steps/Step10ClinicalImpressionManagementPlan.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2PresentingSymptoms from '#lib/components/steps/Step2PresentingSymptoms.svelte';
+	import Step3ThyroidAxisReview from '#lib/components/steps/Step3ThyroidAxisReview.svelte';
+	import Step4AdrenalAxisReview from '#lib/components/steps/Step4AdrenalAxisReview.svelte';
+	import Step5GlucoseMetabolism from '#lib/components/steps/Step5GlucoseMetabolism.svelte';
+	import Step6ReproductiveAxis from '#lib/components/steps/Step6ReproductiveAxis.svelte';
+	import Step7PituitaryFunction from '#lib/components/steps/Step7PituitaryFunction.svelte';
+	import Step8BoneCalcium from '#lib/components/steps/Step8BoneCalcium.svelte';
+	import Step9MedicationsLifestyleReview from '#lib/components/steps/Step9MedicationsLifestyleReview.svelte';
+	import Step10ClinicalImpressionManagementPlan from '#lib/components/steps/Step10ClinicalImpressionManagementPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

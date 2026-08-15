@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 	import { formState } from '$stores/formState.svelte';
 
 	const d = formState.data;

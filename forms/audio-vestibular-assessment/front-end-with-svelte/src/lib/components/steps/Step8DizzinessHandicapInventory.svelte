@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { DHI_ITEMS, dhiAnswerScore } from '$lib/engine/rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { DHI_ITEMS, dhiAnswerScore } from '#lib/engine/rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
 	const dhi = assessment.data.dizzinessHandicapInventory;
 

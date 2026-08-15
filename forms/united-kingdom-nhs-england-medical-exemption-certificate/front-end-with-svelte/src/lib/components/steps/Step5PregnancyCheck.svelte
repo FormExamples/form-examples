@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { application } from '$lib/stores/application.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { application } from '#lib/stores/application.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const data = application.data;
 	const patient = data.patient;

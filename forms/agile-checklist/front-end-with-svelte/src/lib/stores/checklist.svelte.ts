@@ -1,8 +1,8 @@
-import { browser } from '$app/environment';
-import type { AgileChecklist, GradingResult } from '$lib/engine/types.js';
-import { createEmptyChecklist } from '$lib/engine/factory.js';
-import { calculateMaturity } from '$lib/engine/composite-grader.js';
-import { TOTAL_STEPS } from '$lib/config/steps.js';
+import { browser } from '$app/env';
+import type { AgileChecklist, GradingResult } from '#lib/engine/types.js';
+import { createEmptyChecklist } from '#lib/engine/factory.js';
+import { calculateMaturity } from '#lib/engine/composite-grader.js';
+import { TOTAL_STEPS } from '#lib/config/steps.js';
 
 /** localStorage draft key for a given checklist id (defaults to `new`). */
 function storageKey(id: string): string {

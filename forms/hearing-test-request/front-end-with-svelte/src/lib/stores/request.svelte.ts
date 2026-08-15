@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { HearingRequest, GradingResult } from '$lib/engine/types';
-import { createDefault } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { HearingRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefault } from '#lib/engine/defaults.js';
 
 /** Re-exported blank-request factory (the engine owns the canonical shape). */
 export { createDefault };

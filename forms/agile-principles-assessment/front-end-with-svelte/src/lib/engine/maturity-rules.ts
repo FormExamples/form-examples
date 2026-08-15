@@ -1,5 +1,5 @@
 import type { AgileAssessment, FiredRule, PrincipleBand } from './types.js';
-import { PRINCIPLES } from '$lib/config/principles.js';
+import { PRINCIPLES } from '#lib/config/principles.js';
 
 export function bandFor(score: number | null): PrincipleBand {
   if (score === null) return 'unanswered';

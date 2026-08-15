@@ -1,7 +1,7 @@
-import type { HospitalDailyMonitoringChecklist } from '$lib/engine/types.js';
-import { CHECKLIST_ITEMS } from '$lib/config/items.js';
-import { summariseChecklist } from '$lib/engine/summary.js';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte.js';
+import type { HospitalDailyMonitoringChecklist } from '#lib/engine/types.js';
+import { CHECKLIST_ITEMS } from '#lib/config/items.js';
+import { summariseChecklist } from '#lib/engine/summary.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample inspection round: an identifier and the full data the engine tallies. */
 export interface SampleAssessment {

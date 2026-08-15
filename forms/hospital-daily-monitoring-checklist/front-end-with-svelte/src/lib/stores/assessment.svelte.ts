@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import type { ChecklistSummaryResult, HospitalDailyMonitoringChecklist } from '$lib/engine/types.js';
-import { createEmptyAssessment } from '$lib/engine/factory.js';
-import { summariseChecklist } from '$lib/engine/summary.js';
-import { TOTAL_STEPS } from '$lib/config/steps.js';
-import { TOTAL_ITEMS } from '$lib/config/items.js';
+import { browser } from '$app/env';
+import type { ChecklistSummaryResult, HospitalDailyMonitoringChecklist } from '#lib/engine/types.js';
+import { createEmptyAssessment } from '#lib/engine/factory.js';
+import { summariseChecklist } from '#lib/engine/summary.js';
+import { TOTAL_STEPS } from '#lib/config/steps.js';
+import { TOTAL_ITEMS } from '#lib/config/items.js';
 
 /** localStorage draft key for a given checklist id (defaults to `new`). */
 function storageKey(id: string): string {
@@ -31,9 +31,9 @@ class AssessmentStore {
   result = $derived<ChecklistSummaryResult>(summariseChecklist(this.data));
 
   /** Crude completeness measure for the Lily Progress bar (0-100). */
-  percentComplete = $derived(
-    TOTAL_ITEMS === 0 ? 0 : Math.round((this.result.answeredCount / TOTAL_ITEMS) * 100),
-  );
+  percentComplete = $derived(TOTAL_ITEMS === 0
+    ? 0
+    : Math.round(this.result.answeredCount / TOTAL_ITEMS * 100));
 
   constructor() {
     if (browser) {

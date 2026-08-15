@@ -1,6 +1,6 @@
-import type { DeathCertificate, ValidityClass } from '$lib/engine/types';
-import { validateCertificate } from '$lib/engine/mccd-grader';
-import { createDefaultCertificate } from '$lib/stores/assessment.svelte';
+import type { DeathCertificate, ValidityClass } from '#lib/engine/types.js';
+import { validateCertificate } from '#lib/engine/mccd-grader.js';
+import { createDefaultCertificate } from '#lib/stores/assessment.svelte.js';
 
 /** A sample certificate: an identifier and the full data the engine grades. */
 export interface SampleCertificate {

@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { calculateAgeYears, eligibilityLabel, eligibilityShortLabel, donorTypeLabel } from '$lib/engine/utils';
-import { TRACKED_FIELD_COUNT } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { calculateAgeYears, eligibilityLabel, eligibilityShortLabel, donorTypeLabel } from '#lib/engine/utils.js';
+import { TRACKED_FIELD_COUNT } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const age = calculateAgeYears(data.donorDemographics.dateOfBirth);

@@ -1,6 +1,6 @@
-import type { AssessmentData, CombinedSeverity, SpaqBand, Phq9Band } from '$lib/engine/types';
-import { calculateSadGrade } from '$lib/engine/sad-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CombinedSeverity, SpaqBand, Phq9Band } from '#lib/engine/types.js';
+import { calculateSadGrade } from '#lib/engine/sad-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

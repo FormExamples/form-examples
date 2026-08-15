@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { coagulationPoints } from '$lib/engine/child-pugh-rules';
-	import { formatPoint } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { coagulationPoints } from '#lib/engine/child-pugh-rules.js';
+	import { formatPoint } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const cg = assessment.data.coagulation;
 	const point = $derived(coagulationPoints(assessment.data));

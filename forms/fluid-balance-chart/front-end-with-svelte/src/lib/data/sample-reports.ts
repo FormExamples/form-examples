@@ -1,6 +1,6 @@
-import type { ChartData, FluidStatus } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/fluid-balance-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { ChartData, FluidStatus } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/fluid-balance-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample chart: an identifier, a display name, and the full data the engine grades. */
 export interface SampleAssessment {

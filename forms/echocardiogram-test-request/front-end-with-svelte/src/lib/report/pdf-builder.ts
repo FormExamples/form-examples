@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { EchoRequest, GradingResult } from '$lib/engine/types';
+import type { EchoRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	echoTypeLabel,
 	indicationLabel,
@@ -8,7 +8,7 @@ import {
 	priorityLabel,
 	recommendationLabel,
 	nyhaLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

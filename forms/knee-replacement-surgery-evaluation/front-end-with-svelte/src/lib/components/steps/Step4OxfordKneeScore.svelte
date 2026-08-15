@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import { OKS_OPTIONS } from '$lib/config/options';
-	import type { OksSection } from '$lib/engine/types';
-	import { evaluationStore } from '$lib/stores/evaluation.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import { OKS_OPTIONS } from '#lib/config/options.js';
+	import type { OksSection } from '#lib/engine/types.js';
+	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 
 	const d = evaluationStore.data;
 

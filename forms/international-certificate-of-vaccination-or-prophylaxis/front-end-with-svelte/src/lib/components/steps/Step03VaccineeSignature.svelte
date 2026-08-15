@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { certificateStore } from '$lib/stores/certificate.svelte';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import { certificateStore } from '#lib/stores/certificate.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
   const c = $derived(certificateStore.data);
 
   function toggleConsent(event: Event) {

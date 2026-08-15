@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
 
 	let search = $state('');
 	let readinessFilter = $state<'' | 'ready' | 'not-ready'>('');
@@ -14,17 +14,17 @@
 
 	const rows = $derived(
 		sampleAssessmentRows.filter((r) => {
-			if (search) {
-				const term = search.toLowerCase();
+		if (search) {
+			const term = search.toLowerCase();
 				const matches =
 					r.buildingNameOrNumber.toLowerCase().includes(term) ||
 					r.roomNameOrNumber.toLowerCase().includes(term) ||
 					r.inspectorName.toLowerCase().includes(term);
-				if (!matches) return false;
-			}
-			if (readinessFilter === 'ready' && !isReady(r)) return false;
-			if (readinessFilter === 'not-ready' && isReady(r)) return false;
-			return true;
+			if (!matches) return false;
+		}
+		if (readinessFilter === 'ready' && !isReady(r)) return false;
+		if (readinessFilter === 'not-ready' && isReady(r)) return false;
+		return true;
 		})
 	);
 
@@ -44,7 +44,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -56,9 +56,27 @@
 	// tally output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Checklist', width: 130 },
-		{ id: 'buildingNameOrNumber', header: 'Building', flexgrow: 1, sort: true },
-		{ id: 'roomNameOrNumber', header: 'Room', flexgrow: 1, sort: true },
-		{ id: 'assessedDate', header: 'Inspected', width: 120, sort: true },
+		{
+			id: 'buildingNameOrNumber',
+			header: 'Building',
+			flexgrow: 1,
+			sort: true
+		},
+
+		{
+			id: 'roomNameOrNumber',
+			header: 'Room',
+			flexgrow: 1,
+			sort: true
+		},
+
+		{
+			id: 'assessedDate',
+			header: 'Inspected',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'checkedCount',
 			header: 'Checkpoints',
@@ -115,11 +133,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 500px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 500px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} rooms</p>
 </main>

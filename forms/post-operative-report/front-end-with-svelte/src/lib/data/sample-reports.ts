@@ -1,6 +1,6 @@
-import type { AssessmentData, ClavienDindoGradeKey, DispositionLocation } from '$lib/engine/types';
-import { calculateClavienDindo } from '$lib/engine/clavien-dindo-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ClavienDindoGradeKey, DispositionLocation } from '#lib/engine/types.js';
+import { calculateClavienDindo } from '#lib/engine/clavien-dindo-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample report: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

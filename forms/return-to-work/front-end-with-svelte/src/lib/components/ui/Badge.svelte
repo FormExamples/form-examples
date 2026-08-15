@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { restrictionGradeLabel, restrictionGradeColor } from '$lib/engine/utils';
+	import { restrictionGradeLabel, restrictionGradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

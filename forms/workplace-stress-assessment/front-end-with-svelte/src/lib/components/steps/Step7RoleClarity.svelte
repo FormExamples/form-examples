@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LikertDomain from '$lib/components/ui/LikertDomain.svelte';
+	import LikertDomain from '#lib/components/ui/LikertDomain.svelte';
 </script>
 
 <LikertDomain

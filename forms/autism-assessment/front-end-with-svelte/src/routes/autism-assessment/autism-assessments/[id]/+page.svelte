@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateAQ10 } from '$lib/engine/aq10-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateAQ10 } from '#lib/engine/aq10-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2ScreeningPurpose from '$lib/components/steps/Step2ScreeningPurpose.svelte';
-	import Step3AQ10Questionnaire from '$lib/components/steps/Step3AQ10Questionnaire.svelte';
-	import Step4SocialCommunication from '$lib/components/steps/Step4SocialCommunication.svelte';
-	import Step5RepetitiveBehaviors from '$lib/components/steps/Step5RepetitiveBehaviors.svelte';
-	import Step6SensoryProfile from '$lib/components/steps/Step6SensoryProfile.svelte';
-	import Step7DevelopmentalHistory from '$lib/components/steps/Step7DevelopmentalHistory.svelte';
-	import Step8CurrentSupport from '$lib/components/steps/Step8CurrentSupport.svelte';
-	import Step9FamilyHistory from '$lib/components/steps/Step9FamilyHistory.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2ScreeningPurpose from '#lib/components/steps/Step2ScreeningPurpose.svelte';
+	import Step3AQ10Questionnaire from '#lib/components/steps/Step3AQ10Questionnaire.svelte';
+	import Step4SocialCommunication from '#lib/components/steps/Step4SocialCommunication.svelte';
+	import Step5RepetitiveBehaviors from '#lib/components/steps/Step5RepetitiveBehaviors.svelte';
+	import Step6SensoryProfile from '#lib/components/steps/Step6SensoryProfile.svelte';
+	import Step7DevelopmentalHistory from '#lib/components/steps/Step7DevelopmentalHistory.svelte';
+	import Step8CurrentSupport from '#lib/components/steps/Step8CurrentSupport.svelte';
+	import Step9FamilyHistory from '#lib/components/steps/Step9FamilyHistory.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

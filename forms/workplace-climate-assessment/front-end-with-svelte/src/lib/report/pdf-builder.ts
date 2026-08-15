@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradedDomainKey, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradedDomainKey, GradingResult } from '#lib/engine/types.js';
 import {
 	categoryLabel,
 	domainLabel,
@@ -11,7 +11,7 @@ import {
 	ROLE_LEVEL_OPTIONS,
 	WORK_LOCATION_OPTIONS,
 	RECOMMEND_OPTIONS
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const domainKeys = Object.keys(DOMAIN_LABELS) as GradedDomainKey[];

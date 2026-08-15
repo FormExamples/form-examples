@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { CANDIDACY_LABELS, OKS_CATEGORY_LABELS } from '$lib/engine/grader';
-import type { GradingResult, KneeReplacementSurgeryEvaluation } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+import { CANDIDACY_LABELS, OKS_CATEGORY_LABELS } from '#lib/engine/grader.js';
+import type { GradingResult, KneeReplacementSurgeryEvaluation } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

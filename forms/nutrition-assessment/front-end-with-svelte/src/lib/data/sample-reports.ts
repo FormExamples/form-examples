@@ -1,6 +1,6 @@
-import type { AssessmentData, MUSTRisk, SeverityLevel } from '$lib/engine/types';
-import { calculateNutritionGrade } from '$lib/engine/nutrition-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, MUSTRisk, SeverityLevel } from '#lib/engine/types.js';
+import { calculateNutritionGrade } from '#lib/engine/nutrition-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

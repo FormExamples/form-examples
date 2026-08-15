@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goldStageLabel, goldStageColor } from '$lib/engine/utils';
+	import { goldStageLabel, goldStageColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

@@ -1,8 +1,8 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { calculatePSQI } from '$lib/engine/psqi-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { frequencyToScore } from '$lib/engine/psqi-rules';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { calculatePSQI } from '#lib/engine/psqi-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { frequencyToScore } from '#lib/engine/psqi-rules.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

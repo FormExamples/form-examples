@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/checklist.svelte';
-	import { statusLabel, statusColor, urgencyLabel, priorityColor } from '$lib/checklist/labels';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { store } from '#lib/stores/checklist.svelte.js';
+	import { statusLabel, statusColor, urgencyLabel, priorityColor } from '#lib/checklist/labels.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

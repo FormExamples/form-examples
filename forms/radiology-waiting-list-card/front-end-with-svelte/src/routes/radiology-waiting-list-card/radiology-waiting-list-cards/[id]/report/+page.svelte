@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/card.svelte';
+	import { store } from '#lib/stores/card.svelte.js';
 	import {
 		waitingTimeStatusLabel,
 		waitingTimeStatusColor,
 		clinicalPriorityLabel,
 		flagPriorityColor
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { authorization } from '$lib/stores/authorization.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import { authorization } from '#lib/stores/authorization.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const d = authorization.data.expiration;
 	const kinds = [

@@ -1,6 +1,6 @@
-import type { EligibilityResult, EligibleConditionCode, Fp92aApplication, Outcome } from '$lib/engine/types';
-import { evaluateFp92a } from '$lib/engine/fp92a-validator';
-import { createDefaultApplication } from '$lib/stores/application.svelte';
+import type { EligibilityResult, EligibleConditionCode, Fp92aApplication, Outcome } from '#lib/engine/types.js';
+import { evaluateFp92a } from '#lib/engine/fp92a-validator.js';
+import { createDefaultApplication } from '#lib/stores/application.svelte.js';
 
 /** A sample FP92A application: an identifier and the full data the engine grades. */
 export interface SampleApplication {

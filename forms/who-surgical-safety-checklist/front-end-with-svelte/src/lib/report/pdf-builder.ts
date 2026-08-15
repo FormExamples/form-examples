@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { WhoSurgicalSafetyChecklist } from '$lib/checklist/types.js';
-import type { ChecklistResult } from '$lib/stores/checklist.svelte';
-import { statusLabel } from '$lib/checklist/labels.js';
+import type { WhoSurgicalSafetyChecklist } from '#lib/checklist/types.js';
+import type { ChecklistResult } from '#lib/stores/checklist.svelte.js';
+import { statusLabel } from '#lib/checklist/labels.js';
 
 /**
  * Build a pdfmake document definition for a WHO Surgical Safety Checklist. The

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import HistologySelect from '$lib/components/ui/HistologySelect.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import HistologySelect from '#lib/components/ui/HistologySelect.svelte';
 
 	const c = assessment.data.cancerDiagnosis;
 </script>

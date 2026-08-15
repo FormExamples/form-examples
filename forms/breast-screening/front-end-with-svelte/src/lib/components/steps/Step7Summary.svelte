@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/breast-screening-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/breast-screening-grader.js';
 	import {
 		eligibilityLabel,
 		outcomeBandColor,
 		outcomeBandLabel,
 		screeningOutcomeLabel
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const n = assessment.data.note;
 	const grade = $derived(calculateGrade(assessment.data));

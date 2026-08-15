@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import { calculateVaccinationStatus } from './vaccination-grader.js';
 import {
   calculateCompositeScore,

@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, ChildPughClass, SurgicalRisk } from '$lib/engine/types';
-import { calculateChildPughGrade } from '$lib/engine/child-pugh-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, ChildPughClass, SurgicalRisk } from '#lib/engine/types.js';
+import { calculateChildPughGrade } from '#lib/engine/child-pugh-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

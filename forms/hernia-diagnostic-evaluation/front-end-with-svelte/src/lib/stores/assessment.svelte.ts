@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import type { HerniaDiagnosticEvaluation, GradingResult } from '$lib/engine/types';
-import { calculateHerniaEvaluation } from '$lib/engine/grader';
-import { createDefaultAssessment } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { HerniaDiagnosticEvaluation, GradingResult } from '#lib/engine/types.js';
+import { calculateHerniaEvaluation } from '#lib/engine/grader.js';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given evaluation id (defaults to `new`). */
 function storageKey(id: string): string {

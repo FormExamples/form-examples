@@ -1,4 +1,4 @@
-import type { LpaApplication, LpaValidityResult } from '$lib/engine/types.js';
+import type { LpaApplication, LpaValidityResult } from '#lib/engine/types.js';
 
 interface PdfLine {
   text: string;

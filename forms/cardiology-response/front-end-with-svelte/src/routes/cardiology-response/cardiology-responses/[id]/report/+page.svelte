@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 	import {
 		responseClassificationLabel,
 		responseClassificationColor,
@@ -16,7 +16,7 @@
 		consultationTypeLabel,
 		responseStatusLabel,
 		primaryDiagnosisCategoryLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	const id = $derived(page.params.id);
 	const data = $derived(resultStore.data);

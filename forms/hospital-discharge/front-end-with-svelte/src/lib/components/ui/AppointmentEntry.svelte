@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { FollowupAppointment } from '$lib/engine/types';
+	import type { FollowupAppointment } from '#lib/engine/types.js';
 
 	let {
 		appointments = $bindable<FollowupAppointment[]>([])

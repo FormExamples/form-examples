@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateBmiBsa } from '$lib/engine/bmi-bsa-grader';
-	import { bmiCategoryColor, bmiCategoryLabel, formatBmi, formatBsa } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateBmiBsa } from '#lib/engine/bmi-bsa-grader.js';
+	import { bmiCategoryColor, bmiCategoryLabel, formatBmi, formatBsa } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.results;
 	const grade = $derived(calculateBmiBsa(assessment.data));

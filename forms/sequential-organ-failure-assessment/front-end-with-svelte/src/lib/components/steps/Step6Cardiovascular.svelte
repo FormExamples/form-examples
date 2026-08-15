@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { scoreCardiovascular } from '$lib/engine/sofa-rules';
-	import { subScoreColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { scoreCardiovascular } from '#lib/engine/sofa-rules.js';
+	import { subScoreColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const cv = assessment.data.cardiovascular;
 	const sub = $derived(scoreCardiovascular(assessment.data).score);

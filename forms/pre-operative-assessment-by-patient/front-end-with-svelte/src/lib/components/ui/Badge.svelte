@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asaGradeLabel, asaGradeColor } from '$lib/engine/utils';
+	import { asaGradeLabel, asaGradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

@@ -4,7 +4,7 @@
 	// 'yes' | 'no' | 'na' otherwise. `id` is the stable input name/anchor id.
 	import Field from './Field.svelte';
 	import RadioGroup from './RadioGroup.svelte';
-	import type { YesNoNA } from '$lib/engine/types';
+	import type { YesNoNA } from '#lib/engine/types.js';
 
 	let {
 		id,

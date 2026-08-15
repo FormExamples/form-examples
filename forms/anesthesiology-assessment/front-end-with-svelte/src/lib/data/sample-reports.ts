@@ -1,6 +1,6 @@
-import type { AssessmentData, AsaClass, MallampatiClass, RiskLevel } from '$lib/engine/types';
-import { gradeAssessment } from '$lib/engine/composite-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, AsaClass, MallampatiClass, RiskLevel } from '#lib/engine/types.js';
+import { gradeAssessment } from '#lib/engine/composite-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

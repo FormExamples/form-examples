@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ALL_ITEMS } from '$lib/config/items.js';
+import { ALL_ITEMS } from '#lib/config/items.js';
 import { createEmptyChecklist } from './factory.js';
 import { agileChecklistSchema, safeParseChecklist } from './schema.js';
 

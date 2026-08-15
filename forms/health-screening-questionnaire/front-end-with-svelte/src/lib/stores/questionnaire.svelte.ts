@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import type { HealthScreeningQuestionnaire, GradingResult } from '$lib/engine/types';
-import { calculateHealthScreening } from '$lib/engine/grader';
-import { createDefaultQuestionnaire } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { HealthScreeningQuestionnaire, GradingResult } from '#lib/engine/types.js';
+import { calculateHealthScreening } from '#lib/engine/grader.js';
+import { createDefaultQuestionnaire } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given questionnaire id (defaults to `new`). */
 function storageKey(id: string): string {

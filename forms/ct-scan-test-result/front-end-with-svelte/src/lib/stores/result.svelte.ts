@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { CtScanResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { CtScanResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'ct-scan-test-result.front-end-with-svelte.v1';
 

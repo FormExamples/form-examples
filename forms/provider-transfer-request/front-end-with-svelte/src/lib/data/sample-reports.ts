@@ -1,7 +1,7 @@
-import type { AssessmentData, CompletenessLevel, TransferUrgency } from '$lib/engine/types';
-import { validateTransfer } from '$lib/engine/transfer-validator';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletenessLevel, TransferUrgency } from '#lib/engine/types.js';
+import { validateTransfer } from '#lib/engine/transfer-validator.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample transfer: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
 	const p = assessment.data.partI;
 </script>

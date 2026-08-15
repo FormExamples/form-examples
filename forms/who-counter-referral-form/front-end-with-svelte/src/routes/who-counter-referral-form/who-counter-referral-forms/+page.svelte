@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { followUpTimeframeLabel, priorityLabel } from '$lib/engine/utils';
-	import type { FlagPriority, FollowUpTimeframe } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { followUpTimeframeLabel, priorityLabel } from '#lib/engine/utils.js';
+	import type { FlagPriority, FollowUpTimeframe } from '#lib/engine/types.js';
 
 	let followUpFilter = $state('');
 	let priorityFilter = $state('');
@@ -34,7 +34,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -46,8 +46,20 @@
 	// shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Referral', width: 130 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'referralDate', header: 'Referred', width: 120, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'referralDate',
+			header: 'Referred',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'followUpTimeframe',
 			header: 'Follow-up',
@@ -55,13 +67,20 @@
 			sort: true,
 			template: (v: FollowUpTimeframe) => followUpTimeframeLabel(v)
 		},
-		{ id: 'completeness', header: 'Completeness', width: 130, sort: true },
+
+		{
+			id: 'completeness',
+			header: 'Completeness',
+			width: 130,
+			sort: true
+		},
+
 		{
 			id: 'reviewPriority',
 			header: 'Review priority',
 			width: 140,
 			sort: true,
-			template: (v: FlagPriority | 'none') => (v === 'none' ? 'None' : priorityLabel(v))
+			template: (v: FlagPriority | 'none') => v === 'none' ? 'None' : priorityLabel(v)
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -112,11 +131,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>

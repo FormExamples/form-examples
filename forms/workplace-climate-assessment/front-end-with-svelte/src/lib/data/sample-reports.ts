@@ -1,8 +1,8 @@
-import type { AssessmentData, ClimateCategory, GradedDomainKey } from '$lib/engine/types';
-import { gradeClimate } from '$lib/engine/grader';
-import { GRADED_DOMAIN_KEYS } from '$lib/engine/rules';
-import { categoryRank, domainLabel, optionLabel, DEPARTMENT_OPTIONS } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ClimateCategory, GradedDomainKey } from '#lib/engine/types.js';
+import { gradeClimate } from '#lib/engine/grader.js';
+import { GRADED_DOMAIN_KEYS } from '#lib/engine/rules.js';
+import { categoryRank, domainLabel, optionLabel, DEPARTMENT_OPTIONS } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample response: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

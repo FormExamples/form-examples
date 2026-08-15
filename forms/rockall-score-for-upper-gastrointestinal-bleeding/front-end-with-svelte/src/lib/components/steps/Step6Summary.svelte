@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateRockallGrade } from '$lib/engine/rockall-grader';
-	import { riskBandColor, riskBandLabel, formatScore } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateRockallGrade } from '#lib/engine/rockall-grader.js';
+	import { riskBandColor, riskBandLabel, formatScore } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const n = assessment.data.note;
 	const grade = $derived(calculateRockallGrade(assessment.data));

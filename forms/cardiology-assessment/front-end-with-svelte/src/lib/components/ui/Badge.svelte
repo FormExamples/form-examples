@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cardioClassLabel, cardioClassColor } from '$lib/engine/utils';
+	import { cardioClassLabel, cardioClassColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

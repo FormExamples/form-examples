@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { GradingResult, WaitingListCard } from '$lib/engine/types.js';
-import { createEmptyCard } from '$lib/engine/factory.js';
+import { browser } from '$app/env';
+import type { GradingResult, WaitingListCard } from '#lib/engine/types.js';
+import { createEmptyCard } from '#lib/engine/factory.js';
 
 /** localStorage draft key for a given card id (defaults to `new`). */
 function storageKey(id: string): string {

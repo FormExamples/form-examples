@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { requestStore } from '$lib/stores/request.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { selectedPanels } from '$lib/engine/panels';
+	import { requestStore } from '#lib/stores/request.svelte.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { selectedPanels } from '#lib/engine/panels.js';
 	import {
 		appropriatenessLabel,
 		appropriatenessColor,
@@ -17,7 +17,7 @@
 		recommendationColor,
 		priorityColor,
 		indicationLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(requestStore.data);

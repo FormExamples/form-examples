@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { ACUTE_IOP_MMHG, RAISED_IOP_MMHG } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { ACUTE_IOP_MMHG, RAISED_IOP_MMHG } from '#lib/engine/utils.js';
 
 	const d = resultStore.data;
 

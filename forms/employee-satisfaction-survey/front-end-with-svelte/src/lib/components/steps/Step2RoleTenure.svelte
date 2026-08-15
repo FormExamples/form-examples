@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import LikertItem from '$lib/components/ui/LikertItem.svelte';
-	import { ROLE_LEVEL_OPTIONS, WORK_LOCATION_OPTIONS } from '$lib/engine/rules';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import LikertItem from '#lib/components/ui/LikertItem.svelte';
+	import { ROLE_LEVEL_OPTIONS, WORK_LOCATION_OPTIONS } from '#lib/engine/rules.js';
 
 	const d = assessment.data.roleTenure;
 </script>

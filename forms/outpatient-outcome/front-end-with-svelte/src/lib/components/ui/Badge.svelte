@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { DomainGrade } from '$lib/engine/types';
-	import { gradeLabel, gradeColor } from '$lib/engine/utils';
+	import type { DomainGrade } from '#lib/engine/types.js';
+	import { gradeLabel, gradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade,

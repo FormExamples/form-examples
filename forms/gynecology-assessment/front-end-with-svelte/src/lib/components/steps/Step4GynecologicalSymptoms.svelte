@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { symptomResponseOptions } from '$lib/engine/symptom-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { SymptomScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { symptomResponseOptions } from '#lib/engine/symptom-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { SymptomScore } from '#lib/engine/types.js';
 
 	const gs = assessment.data.gynecologicalSymptoms;
 

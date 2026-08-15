@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Device } from '$lib/engine/types';
+	import type { Device } from '#lib/engine/types.js';
 
 	let {
 		devices = $bindable<Device[]>([])

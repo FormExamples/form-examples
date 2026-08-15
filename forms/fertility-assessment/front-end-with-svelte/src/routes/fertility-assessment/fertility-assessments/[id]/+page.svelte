@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateConcern } from '$lib/engine/fertility-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateConcern } from '#lib/engine/fertility-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2ReproductiveHistory from '$lib/components/steps/Step2ReproductiveHistory.svelte';
-	import Step3MenstrualCycleHistory from '$lib/components/steps/Step3MenstrualCycleHistory.svelte';
-	import Step4MedicalSurgicalHistory from '$lib/components/steps/Step4MedicalSurgicalHistory.svelte';
-	import Step5LifestyleFactors from '$lib/components/steps/Step5LifestyleFactors.svelte';
-	import Step6MedicationsSupplements from '$lib/components/steps/Step6MedicationsSupplements.svelte';
-	import Step7PartnerSemenAnalysis from '$lib/components/steps/Step7PartnerSemenAnalysis.svelte';
-	import Step8HormoneProfile from '$lib/components/steps/Step8HormoneProfile.svelte';
-	import Step9Investigations from '$lib/components/steps/Step9Investigations.svelte';
-	import Step10ClinicalRecommendation from '$lib/components/steps/Step10ClinicalRecommendation.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2ReproductiveHistory from '#lib/components/steps/Step2ReproductiveHistory.svelte';
+	import Step3MenstrualCycleHistory from '#lib/components/steps/Step3MenstrualCycleHistory.svelte';
+	import Step4MedicalSurgicalHistory from '#lib/components/steps/Step4MedicalSurgicalHistory.svelte';
+	import Step5LifestyleFactors from '#lib/components/steps/Step5LifestyleFactors.svelte';
+	import Step6MedicationsSupplements from '#lib/components/steps/Step6MedicationsSupplements.svelte';
+	import Step7PartnerSemenAnalysis from '#lib/components/steps/Step7PartnerSemenAnalysis.svelte';
+	import Step8HormoneProfile from '#lib/components/steps/Step8HormoneProfile.svelte';
+	import Step9Investigations from '#lib/components/steps/Step9Investigations.svelte';
+	import Step10ClinicalRecommendation from '#lib/components/steps/Step10ClinicalRecommendation.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

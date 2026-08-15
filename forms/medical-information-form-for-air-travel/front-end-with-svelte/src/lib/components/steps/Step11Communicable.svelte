@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import TextField from '$lib/components/ui/TextField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import TextField from '#lib/components/ui/TextField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
 </script>
 
 <section>

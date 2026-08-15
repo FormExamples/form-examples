@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { application } from '$lib/stores/application.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { application } from '#lib/stores/application.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const data = application.data;
 

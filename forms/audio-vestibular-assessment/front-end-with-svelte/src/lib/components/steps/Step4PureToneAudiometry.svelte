@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculatePtaFromThresholds } from '$lib/engine/rules';
-	import type { EarThresholds } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculatePtaFromThresholds } from '#lib/engine/rules.js';
+	import type { EarThresholds } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const p = assessment.data.pureToneAudiometry;
 

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { riskBandLabel, careSettingLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { riskBandLabel, careSettingLabel } from '#lib/engine/utils.js';
 
 	const plural = 'qrisk3-cardiovascular-disease-risk-scores';
 
@@ -35,7 +35,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -47,9 +47,27 @@
 	// through the shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Assessment', width: 120 },
-		{ id: 'patientIdentifier', header: 'Patient ID', width: 130, sort: true },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'assessedDate', header: 'Assessed', width: 120, sort: true },
+		{
+			id: 'patientIdentifier',
+			header: 'Patient ID',
+			width: 130,
+			sort: true
+		},
+
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'assessedDate',
+			header: 'Assessed',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'careSetting',
 			header: 'Setting',
@@ -62,7 +80,7 @@
 			header: '10-yr risk',
 			width: 100,
 			sort: true,
-			template: (v: number | null) => (v === null ? '—' : `${v}%`)
+			template: (v: number | null) => v === null ? '—' : `${v}%`
 		},
 		{
 			id: 'riskBand',
@@ -76,7 +94,7 @@
 			id: 'statinOffer',
 			header: 'Statin',
 			width: 90,
-			template: (v: boolean) => (v ? 'Offer' : 'No')
+			template: (v: boolean) => v ? 'Offer' : 'No'
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -119,17 +137,16 @@
 			<select class="select inline-block w-auto" bind:value={bandFilter}>
 				<option value="">All</option>
 				<option value="low">Low (&lt; 10%)</option>
-				<option value="raised">Raised (&ge; 10%)</option>
-				<option value="high">High (&ge; 20%)</option>
+				<option value="raised">Raised (≥ 10%)</option>
+				<option value="high">High (≥ 20%)</option>
 			</select>
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { eligibilityLabel, eligibilityColor } from '$lib/engine/utils';
+	import { eligibilityLabel, eligibilityColor } from '#lib/engine/utils.js';
 
 	let {
 		status

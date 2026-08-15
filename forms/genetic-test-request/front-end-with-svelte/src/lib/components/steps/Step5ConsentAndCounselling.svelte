@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { isPredictiveTest } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { isPredictiveTest } from '#lib/engine/utils.js';
 
 	const d = request.data;
 

@@ -1,4 +1,4 @@
-import type { ReportRow } from '$lib/engine/types';
+import type { ReportRow } from '#lib/engine/types.js';
 
 /** In-memory sample data for the dashboard (back-end API fallback). */
 export const sampleReports: ReportRow[] = [

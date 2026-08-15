@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { MammographyRequest, GradingResult } from '$lib/engine/types';
+import type { MammographyRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	triageTierLabel,
@@ -8,7 +8,7 @@ import {
 	indicationLabel,
 	lateralityLabel,
 	ageInYears
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 /** Build the printable vetting report as a pdfmake document definition. */
 export function buildPdfDocument(

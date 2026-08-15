@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { steps } from '$lib/config/steps';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { steps } from '#lib/config/steps.js';
 	import {
 		calculateAge,
 		countVisionConditionsDeclared,
@@ -12,9 +12,9 @@
 		priorityLabel,
 		statusColor,
 		statusLabel
-	} from '$lib/engine/utils';
-	import type { AssessmentData } from '$lib/engine/types';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import type { AssessmentData } from '#lib/engine/types.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'united-kingdom-driver-and-vehicle-licensing-agency-v1-forms';
 

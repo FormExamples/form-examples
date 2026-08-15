@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
-  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-  import CheckboxField from '$lib/components/ui/CheckboxField.svelte';
-  import AddressInput from '$lib/components/ui/AddressInput.svelte';
-  import SignaturePad from '$lib/components/ui/SignaturePad.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
+  import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+  import CheckboxField from '#lib/components/ui/CheckboxField.svelte';
+  import AddressInput from '#lib/components/ui/AddressInput.svelte';
+  import SignaturePad from '#lib/components/ui/SignaturePad.svelte';
 
   // Ensure the certificate-provider record exists on the LPA.
   store.ensureCertificateProvider();

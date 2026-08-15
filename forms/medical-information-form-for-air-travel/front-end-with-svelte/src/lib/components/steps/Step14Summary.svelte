@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import { evaluateFitnessToFly } from '$lib/engine/composite-grader.js';
-  import { fitnessBandColor, fitnessBandLabel, priorityColor } from '$lib/engine/utils.js';
-  import TextField from '$lib/components/ui/TextField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import { evaluateFitnessToFly } from '#lib/engine/composite-grader.js';
+  import { fitnessBandColor, fitnessBandLabel, priorityColor } from '#lib/engine/utils.js';
+  import TextField from '#lib/components/ui/TextField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
 
   // Live preview: re-grade as the user edits earlier steps. The authoritative
   // result is computed on submit and shown on the report page.

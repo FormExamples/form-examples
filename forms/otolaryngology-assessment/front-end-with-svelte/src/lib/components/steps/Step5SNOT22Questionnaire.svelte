@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { SNOT22_ITEMS, SNOT22_OPTIONS } from '$lib/engine/types';
-	import { calculateSnot22 } from '$lib/engine/snot22-grader';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { SNOT22_ITEMS, SNOT22_OPTIONS } from '#lib/engine/types.js';
+	import { calculateSnot22 } from '#lib/engine/snot22-grader.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
 	const s = assessment.data.snot22;
 

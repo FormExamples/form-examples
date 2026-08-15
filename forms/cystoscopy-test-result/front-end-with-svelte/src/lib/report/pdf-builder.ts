@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CystoscopyResult, GradingResult } from '$lib/engine/types';
+import type { CystoscopyResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
 	followUpUrgencyLabel,
 	procedureLabel,
 	reportStatusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

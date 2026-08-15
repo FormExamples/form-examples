@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeOttawaKnee } from '$lib/engine/ottawa-knee-grader';
-	import { criterionColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeOttawaKnee } from '#lib/engine/ottawa-knee-grader.js';
+	import { criterionColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const a = assessment.data.age;
 	const grade = $derived(gradeOttawaKnee(assessment.data));

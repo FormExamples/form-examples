@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ruleWeightLabel, ruleWeightColor } from '$lib/engine/utils';
+	import { ruleWeightLabel, ruleWeightColor } from '#lib/engine/utils.js';
 
 	let {
 		score

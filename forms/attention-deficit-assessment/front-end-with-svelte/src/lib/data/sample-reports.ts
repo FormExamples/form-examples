@@ -1,6 +1,6 @@
-import type { AssessmentData, ADHDClassification, ADHDSubtype } from '$lib/engine/types';
-import { calculateASRS } from '$lib/engine/asrs-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ADHDClassification, ADHDSubtype } from '#lib/engine/types.js';
+import { calculateASRS } from '#lib/engine/asrs-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

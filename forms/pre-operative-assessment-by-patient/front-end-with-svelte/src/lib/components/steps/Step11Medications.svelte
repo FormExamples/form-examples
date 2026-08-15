@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import MedicationEntry from '#lib/components/ui/MedicationEntry.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
 </script>
 

@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, TwoLevelBand } from '$lib/engine/types';
-import { calculateWellsGrade } from '$lib/engine/wells-pe-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, TwoLevelBand } from '#lib/engine/types.js';
+import { calculateWellsGrade } from '#lib/engine/wells-pe-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

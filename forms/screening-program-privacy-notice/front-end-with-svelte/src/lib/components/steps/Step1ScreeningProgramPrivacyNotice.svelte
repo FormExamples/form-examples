@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 </script>
 
 <Fieldset title="Screening Program Privacy Notice" description="How your information is used in NHS national screening programmes to identify early signs of disease or risk.">

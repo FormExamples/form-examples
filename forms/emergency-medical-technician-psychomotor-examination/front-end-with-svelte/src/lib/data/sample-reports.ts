@@ -1,6 +1,6 @@
-import type { AssessmentData, ExamAttempt, Outcome } from '$lib/engine/types';
-import { gradePsychomotor } from '$lib/engine/psychomotor-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ExamAttempt, Outcome } from '#lib/engine/types.js';
+import { gradePsychomotor } from '#lib/engine/psychomotor-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample examination: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

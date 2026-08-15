@@ -3,17 +3,17 @@
 	// trail, the safety flags, and the recommendation. Safety flags are printed
 	// whether or not the assessor overrode the risk band.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
 	import {
 		AUDIT_C_BAND_LABELS,
 		PARQ_CLEARANCE_LABELS,
 		RECOMMENDATION_LABELS,
 		RISK_BAND_LABELS
-	} from '$lib/engine/grader';
-	import { titleCase } from '$lib/engine/utils';
-	import { questionnaireStore } from '$lib/stores/questionnaire.svelte';
+	} from '#lib/engine/grader.js';
+	import { titleCase } from '#lib/engine/utils.js';
+	import { questionnaireStore } from '#lib/stores/questionnaire.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

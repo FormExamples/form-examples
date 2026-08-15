@@ -1,4 +1,4 @@
-import type { AssessmentData, PeEntry, RosEntry } from '$lib/engine/types';
+import type { AssessmentData, PeEntry, RosEntry } from '#lib/engine/types.js';
 
 // Plain (non-rune) module holding the default-record factory. Kept separate
 // from the `$state`-backed store so it can be imported by pure unit tests under

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
   const principles: { number: number; text: string }[] = [
     { number: 1, text: 'Ensure all individuals eligible for the medical programme can access timely care.' },

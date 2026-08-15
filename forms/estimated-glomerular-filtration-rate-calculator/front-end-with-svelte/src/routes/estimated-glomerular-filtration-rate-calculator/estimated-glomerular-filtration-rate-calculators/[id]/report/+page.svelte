@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		stageLabel,
 		stageColor,
@@ -12,8 +12,8 @@
 		sexLabel,
 		equationLabel,
 		formatEgfr
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

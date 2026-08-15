@@ -1,7 +1,7 @@
-import type { AssessmentData, ControlLevel } from '$lib/engine/types';
-import { calculateACT } from '$lib/engine/act-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ControlLevel } from '#lib/engine/types.js';
+import { calculateACT } from '#lib/engine/act-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

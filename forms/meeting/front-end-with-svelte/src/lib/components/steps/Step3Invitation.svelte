@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { meeting } from '$lib/stores/meeting.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { meeting } from '#lib/stores/meeting.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const i = meeting.data.invitation;
 </script>

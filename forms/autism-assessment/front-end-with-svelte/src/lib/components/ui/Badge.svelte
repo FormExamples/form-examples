@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { aq10ScoreLabel, aq10ScoreColor } from '$lib/engine/utils';
+	import { aq10ScoreLabel, aq10ScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

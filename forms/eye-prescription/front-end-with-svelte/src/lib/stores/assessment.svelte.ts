@@ -1,8 +1,8 @@
-import { browser } from '$app/environment';
-import type { EyePrescription, ClassificationResult } from '$lib/engine/types';
-import { createEmptyPrescription } from '$lib/engine/factory';
-import { classify } from '$lib/engine/composite';
-import { suggestExpiry } from '$lib/engine/utils';
+import { browser } from '$app/env';
+import type { EyePrescription, ClassificationResult } from '#lib/engine/types.js';
+import { createEmptyPrescription } from '#lib/engine/factory.js';
+import { classify } from '#lib/engine/composite.js';
+import { suggestExpiry } from '#lib/engine/utils.js';
 
 /** localStorage draft key for a given prescription id (defaults to `new`). */
 function storageKey(id: string): string {

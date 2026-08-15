@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { severityLabel, severityColor } from '$lib/engine/utils';
+	import { severityLabel, severityColor } from '#lib/engine/utils.js';
 
 	let {
 		severity

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import ImmunisationEntry from '$lib/components/ui/ImmunisationEntry.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import ImmunisationEntry from '#lib/components/ui/ImmunisationEntry.svelte';
 
 	const d = assessment.data;
 </script>

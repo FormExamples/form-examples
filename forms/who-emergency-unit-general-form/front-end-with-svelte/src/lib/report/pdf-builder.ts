@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { AssessmentData, EuGeneralResult } from '$lib/engine/types';
-import { calculateAge, priorityLabel, sectionLabel } from '$lib/engine/utils';
+import type { AssessmentData, EuGeneralResult } from '#lib/engine/types.js';
+import { calculateAge, priorityLabel, sectionLabel } from '#lib/engine/utils.js';
 
 /**
  * Build the pdfmake document definition for a WHO Emergency Unit (General)

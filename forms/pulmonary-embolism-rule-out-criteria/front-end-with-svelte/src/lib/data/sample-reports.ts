@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, Classification, PretestProbability } from '$lib/engine/types';
-import { calculatePercGrade } from '$lib/engine/perc-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, Classification, PretestProbability } from '#lib/engine/types.js';
+import { calculatePercGrade } from '#lib/engine/perc-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

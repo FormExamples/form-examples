@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { createDefaultAssessmentData } from '$lib/engine/utils';
+import { browser } from '$app/env';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { createDefaultAssessmentData } from '#lib/engine/utils.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {

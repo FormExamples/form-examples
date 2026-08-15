@@ -1,6 +1,6 @@
-import type { MeetingData, Health } from '$lib/engine/types';
-import { validateMeeting } from '$lib/engine/meeting-validator';
-import { createDefaultMeeting } from '$lib/stores/meeting.svelte';
+import type { MeetingData, Health } from '#lib/engine/types.js';
+import { validateMeeting } from '#lib/engine/meeting-validator.js';
+import { createDefaultMeeting } from '#lib/stores/meeting.svelte.js';
 
 /** A sample meeting: an identifier and the full data the engine validates. */
 export interface SampleMeeting {

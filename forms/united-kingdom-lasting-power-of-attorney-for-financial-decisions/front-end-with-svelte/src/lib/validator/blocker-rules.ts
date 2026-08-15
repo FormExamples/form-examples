@@ -1,4 +1,4 @@
-import type { FiredRule, Lpa } from '$lib/types.js';
+import type { FiredRule, Lpa } from '#lib/types.js';
 import { ageOnDate, personEquals, todayIso } from './utils.js';
 
 // Each blocker rule is a pure function that returns a FiredRule when the

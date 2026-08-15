@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
 	const f = assessment.data.familyHistory;
 	const yesNo = [

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { FlagPriority } from '$lib/engine/types';
-	import { priorityColor, priorityLabel } from '$lib/engine/utils';
+	import type { FlagPriority } from '#lib/engine/types.js';
+	import { priorityColor, priorityLabel } from '#lib/engine/utils.js';
 
 	let {
 		priority,

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { eligibilityLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { eligibilityLabel } from '#lib/engine/utils.js';
 
 	let eligibilityFilter = $state('');
 	let indicationFilter = $state('');
@@ -33,7 +33,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -52,8 +52,20 @@
 	// the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Assessment', width: 120 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'assessedDate', header: 'Assessed', width: 120, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'assessedDate',
+			header: 'Assessed',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'eligibilityStatus',
 			header: 'Eligibility',
@@ -66,9 +78,16 @@
 			header: 'BMI',
 			width: 80,
 			sort: true,
-			template: (v: number | null) => (v != null ? v.toFixed(1) : '—')
+			template: (v: number | null) => v != null ? v.toFixed(1) : '—'
 		},
-		{ id: 'bmiCategory', header: 'BMI category', width: 150, sort: true },
+
+		{
+			id: 'bmiCategory',
+			header: 'BMI category',
+			width: 150,
+			sort: true
+		},
+
 		{
 			id: 'primaryIndication',
 			header: 'Indication',
@@ -124,11 +143,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>

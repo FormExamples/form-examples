@@ -1,8 +1,8 @@
-import type { AssessmentData, FlagPriority, FollowUpTimeframe } from '$lib/engine/types';
-import { validateCounterReferral } from '$lib/engine/counter-referral-validator';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { highestPriority } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, FlagPriority, FollowUpTimeframe } from '#lib/engine/types.js';
+import { validateCounterReferral } from '#lib/engine/counter-referral-validator.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { highestPriority } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample counter-referral: an identifier and the full data the engine checks. */
 export interface SampleAssessment {

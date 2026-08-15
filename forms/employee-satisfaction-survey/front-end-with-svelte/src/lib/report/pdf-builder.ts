@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	categoryLabel,
 	domainLabel,
 	enpsClassificationLabel,
 	retentionIntentLabel
-} from '$lib/engine/utils';
-import { GRADED_DOMAIN_KEYS, DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS } from '$lib/engine/rules';
+} from '#lib/engine/utils.js';
+import { GRADED_DOMAIN_KEYS, DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS } from '#lib/engine/rules.js';
 
 function labelFor(options: { value: string; label: string }[], value: string): string {
 	return options.find((o) => o.value === value)?.label ?? 'N/A';

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { sampleReports } from '$lib/data/sample-reports';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { sampleReports } from '#lib/data/sample-reports.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
 	import {
 		resultClassificationLabel,
 		resultClassificationColor,
@@ -10,7 +10,7 @@
 		followUpUrgencyColor,
 		testTypeLabel,
 		reportStatusLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	let classificationFilter = $state('');
 	let urgencyFilter = $state('');

@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateMseGrade } from '$lib/engine/mse-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateMseGrade } from '#lib/engine/mse-grader.js';
 	import {
 		statusLabel,
 		statusColor,
 		riskLevelLabel,
 		riskLevelColor
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const s = assessment.data.summary;
 	const grade = $derived(calculateMseGrade(assessment.data));

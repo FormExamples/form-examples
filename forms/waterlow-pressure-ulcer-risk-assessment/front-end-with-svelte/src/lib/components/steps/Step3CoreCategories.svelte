@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateWaterlowGrade } from '$lib/engine/waterlow-grader';
-	import { options, pointsColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateWaterlowGrade } from '#lib/engine/waterlow-grader.js';
+	import { options, pointsColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const s = assessment.data.core as unknown as Record<string, string>;
 

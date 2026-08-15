@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CasualtyCardData, GradingResult } from '$lib/engine/types';
-import { news2ResponseLabel, mtsCategoryLabel, calculateAge } from '$lib/engine/utils';
+import type { CasualtyCardData, GradingResult } from '#lib/engine/types.js';
+import { news2ResponseLabel, mtsCategoryLabel, calculateAge } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: CasualtyCardData,

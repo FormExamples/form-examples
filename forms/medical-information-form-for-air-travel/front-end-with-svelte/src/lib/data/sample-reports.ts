@@ -1,6 +1,6 @@
-import type { FitnessBand, MedifAssessment } from '$lib/engine/types';
-import { evaluateFitnessToFly } from '$lib/engine/composite-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { FitnessBand, MedifAssessment } from '#lib/engine/types.js';
+import { evaluateFitnessToFly } from '#lib/engine/composite-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample MEDIF: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

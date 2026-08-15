@@ -1,6 +1,6 @@
-import type { AssessmentData, Status, Urgency } from '$lib/engine/types';
-import { gradeReferral } from '$lib/engine/gp-referral-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Status, Urgency } from '#lib/engine/types.js';
+import { gradeReferral } from '#lib/engine/gp-referral-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample referral: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

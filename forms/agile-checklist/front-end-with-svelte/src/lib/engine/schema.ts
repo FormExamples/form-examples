@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ALL_ITEMS } from '$lib/config/items.js';
+import { ALL_ITEMS } from '#lib/config/items.js';
 import type { AgileChecklist } from './types.js';
 
 const answerSchema = z.enum(['yes', 'no', 'not-applicable', '']);

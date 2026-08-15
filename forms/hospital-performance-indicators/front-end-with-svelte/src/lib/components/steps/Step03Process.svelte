@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import IndicatorRow from '$lib/components/ui/IndicatorRow.svelte';
-  import { indicatorsForCategory } from '$lib/config/indicators.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import IndicatorRow from '#lib/components/ui/IndicatorRow.svelte';
+  import { indicatorsForCategory } from '#lib/config/indicators.js';
 
   const indicators = indicatorsForCategory(2);
 </script>

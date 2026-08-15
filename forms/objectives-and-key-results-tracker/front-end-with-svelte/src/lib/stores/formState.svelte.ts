@@ -1,4 +1,4 @@
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import type { ObjectiveAssessment, RawScores, KeyResult, GradeResult } from '$engine/types';
 
 /** localStorage draft key for a given objective id (defaults to `new`). */
@@ -159,7 +159,7 @@ class FormState {
 
 	removeKr(i: number) {
 		this.data.keyResults.splice(i, 1);
-		this.data.keyResults.forEach((k, idx) => (k.position = idx + 1));
+		this.data.keyResults.forEach((k, idx) => k.position = idx + 1);
 	}
 
 	buildAssessment(): ObjectiveAssessment {

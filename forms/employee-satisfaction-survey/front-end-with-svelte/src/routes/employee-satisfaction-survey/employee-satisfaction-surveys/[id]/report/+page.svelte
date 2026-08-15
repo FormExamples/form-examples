@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		categoryLabel,
 		categoryColor,
@@ -9,10 +9,10 @@
 		enpsColor,
 		domainLabel,
 		retentionIntentLabel
-	} from '$lib/engine/utils';
-	import { GRADED_DOMAIN_KEYS } from '$lib/engine/rules';
-	import { DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS } from '$lib/engine/rules';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import { GRADED_DOMAIN_KEYS } from '#lib/engine/rules.js';
+	import { DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS } from '#lib/engine/rules.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

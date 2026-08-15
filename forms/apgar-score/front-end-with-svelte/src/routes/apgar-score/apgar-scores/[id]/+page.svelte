@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateApgarGrade } from '$lib/engine/apgar-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateApgarGrade } from '#lib/engine/apgar-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1BirthContext from '$lib/components/steps/Step1BirthContext.svelte';
-	import Step2NewbornIdentification from '$lib/components/steps/Step2NewbornIdentification.svelte';
-	import Step3TimepointAssessments from '$lib/components/steps/Step3TimepointAssessments.svelte';
-	import Step4Summary from '$lib/components/steps/Step4Summary.svelte';
+	import Step1BirthContext from '#lib/components/steps/Step1BirthContext.svelte';
+	import Step2NewbornIdentification from '#lib/components/steps/Step2NewbornIdentification.svelte';
+	import Step3TimepointAssessments from '#lib/components/steps/Step3TimepointAssessments.svelte';
+	import Step4Summary from '#lib/components/steps/Step4Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

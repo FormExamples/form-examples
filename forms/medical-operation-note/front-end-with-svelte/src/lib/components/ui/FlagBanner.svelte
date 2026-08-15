@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { AdditionalFlag, CompositeRisk } from '$lib/engine/types.js';
+  import type { AdditionalFlag, CompositeRisk } from '#lib/engine/types.js';
 
   let { flags, risk }: { flags: AdditionalFlag[]; risk: CompositeRisk } = $props();
 

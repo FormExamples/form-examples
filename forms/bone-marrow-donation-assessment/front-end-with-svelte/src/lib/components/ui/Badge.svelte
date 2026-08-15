@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { gradeLabel, gradeColor } from '$lib/engine/utils';
+	import { gradeLabel, gradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { eyeOptions, scoreFor } from '$lib/engine/gcs-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { eyeOptions, scoreFor } from '#lib/engine/gcs-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
 	const e = assessment.data.eye;
 	const score = $derived(scoreFor(eyeOptions, e.eyeResponse));

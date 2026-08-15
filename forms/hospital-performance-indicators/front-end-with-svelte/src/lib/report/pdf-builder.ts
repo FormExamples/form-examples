@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { HospitalPerformanceIndicators, IndicatorsSummaryResult } from '$lib/engine/types.js';
-import { CATEGORIES, PERFORMANCE_INDICATORS } from '$lib/config/indicators.js';
+import type { HospitalPerformanceIndicators, IndicatorsSummaryResult } from '#lib/engine/types.js';
+import { CATEGORIES, PERFORMANCE_INDICATORS } from '#lib/config/indicators.js';
 
 /**
  * Build the pdfmake document definition for a hospital performance

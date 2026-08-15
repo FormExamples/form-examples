@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeOOCG } from '$lib/engine/oocg-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeOOCG } from '#lib/engine/oocg-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientDetails from '$lib/components/steps/Step1PatientDetails.svelte';
-	import Step2EncounterDetails from '$lib/components/steps/Step2EncounterDetails.svelte';
-	import Step3OperationalEfficiency from '$lib/components/steps/Step3OperationalEfficiency.svelte';
-	import Step4ClinicalOutcome from '$lib/components/steps/Step4ClinicalOutcome.svelte';
-	import Step5EQ5D5L from '$lib/components/steps/Step5EQ5D5L.svelte';
-	import Step6GRC from '$lib/components/steps/Step6GRC.svelte';
-	import Step7PROMIS from '$lib/components/steps/Step7PROMIS.svelte';
-	import Step8FFT from '$lib/components/steps/Step8FFT.svelte';
-	import Step9FollowupPlan from '$lib/components/steps/Step9FollowupPlan.svelte';
-	import Step10SignOff from '$lib/components/steps/Step10SignOff.svelte';
-	import Step11ReviewSubmit from '$lib/components/steps/Step11ReviewSubmit.svelte';
+	import Step1PatientDetails from '#lib/components/steps/Step1PatientDetails.svelte';
+	import Step2EncounterDetails from '#lib/components/steps/Step2EncounterDetails.svelte';
+	import Step3OperationalEfficiency from '#lib/components/steps/Step3OperationalEfficiency.svelte';
+	import Step4ClinicalOutcome from '#lib/components/steps/Step4ClinicalOutcome.svelte';
+	import Step5EQ5D5L from '#lib/components/steps/Step5EQ5D5L.svelte';
+	import Step6GRC from '#lib/components/steps/Step6GRC.svelte';
+	import Step7PROMIS from '#lib/components/steps/Step7PROMIS.svelte';
+	import Step8FFT from '#lib/components/steps/Step8FFT.svelte';
+	import Step9FollowupPlan from '#lib/components/steps/Step9FollowupPlan.svelte';
+	import Step10SignOff from '#lib/components/steps/Step10SignOff.svelte';
+	import Step11ReviewSubmit from '#lib/components/steps/Step11ReviewSubmit.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

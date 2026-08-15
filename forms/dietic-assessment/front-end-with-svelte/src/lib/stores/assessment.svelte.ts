@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import type { DieticAssessment, GradingResult } from '$lib/engine/types';
-import { calculateNutritionRisk } from '$lib/engine/grader';
-import { createDefaultAssessment } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { DieticAssessment, GradingResult } from '#lib/engine/types.js';
+import { calculateNutritionRisk } from '#lib/engine/grader.js';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {

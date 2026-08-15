@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { MedifAssessment, GradingResult } from '$lib/engine/types';
-import { fitnessBandLabel } from '$lib/engine/utils';
+import type { MedifAssessment, GradingResult } from '#lib/engine/types.js';
+import { fitnessBandLabel } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: MedifAssessment,

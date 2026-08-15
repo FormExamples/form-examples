@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { ipssQuestions, ipssResponseOptions } from '$lib/engine/ipss-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { IPSSScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { ipssQuestions, ipssResponseOptions } from '#lib/engine/ipss-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { IPSSScore } from '#lib/engine/types.js';
 
 	const q = assessment.data.ipssQuestionnaire;
 

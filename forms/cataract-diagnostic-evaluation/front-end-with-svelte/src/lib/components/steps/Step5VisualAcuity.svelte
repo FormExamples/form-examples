@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import { evaluationStore } from '$lib/stores/evaluation.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 
 	const d = evaluationStore.data;
 </script>

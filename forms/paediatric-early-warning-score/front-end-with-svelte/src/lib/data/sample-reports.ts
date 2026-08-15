@@ -1,6 +1,6 @@
-import type { AssessmentData, AgeBand, EscalationBand } from '$lib/engine/types';
-import { gradePews } from '$lib/engine/pews-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, AgeBand, EscalationBand } from '#lib/engine/types.js';
+import { gradePews } from '#lib/engine/pews-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

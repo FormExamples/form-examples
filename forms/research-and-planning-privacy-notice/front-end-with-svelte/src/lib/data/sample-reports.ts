@@ -1,6 +1,6 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
-import { gradeForm } from '$lib/engine/grader';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
+import { gradeForm } from '#lib/engine/grader.js';
 
 /** A full sample acknowledgement record keyed by its dashboard id. */
 export interface SampleAssessment {

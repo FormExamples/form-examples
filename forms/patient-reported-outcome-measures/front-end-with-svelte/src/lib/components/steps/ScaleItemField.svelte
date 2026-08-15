@@ -3,7 +3,7 @@
 	// response scale. Shared across the SF-36v2, NDI, and mJOA steps — each
 	// instrument's item catalogue supplies its own `options` (see
 	// $lib/config/scales.ts and the per-step option lists).
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	interface ScaleOption {
 		value: number;

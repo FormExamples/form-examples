@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateHasBledGrade } from '$lib/engine/hasbled-grader';
-	import { pointColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateHasBledGrade } from '#lib/engine/hasbled-grader.js';
+	import { pointColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.stroke;
 	const point = $derived(calculateHasBledGrade(assessment.data).strokePoint);

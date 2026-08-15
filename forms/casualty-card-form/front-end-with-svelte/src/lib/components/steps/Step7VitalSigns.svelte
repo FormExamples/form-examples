@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateNEWS2 } from '$lib/engine/news2-calculator';
-	import { news2ResponseLabel, news2ResponseColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateNEWS2 } from '#lib/engine/news2-calculator.js';
+	import { news2ResponseLabel, news2ResponseColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const v = assessment.data.vitalSigns;
 

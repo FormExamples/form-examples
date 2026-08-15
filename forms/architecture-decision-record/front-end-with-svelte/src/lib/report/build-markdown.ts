@@ -1,4 +1,4 @@
-import type { AdrFormData } from '$lib/types.js';
+import type { AdrFormData } from '#lib/types.js';
 
 function bullets(text: string): string {
   const lines = String(text || '').split('\n').map((s) => s.trim()).filter(Boolean);

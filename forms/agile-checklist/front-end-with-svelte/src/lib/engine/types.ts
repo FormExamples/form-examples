@@ -1,4 +1,4 @@
-import type { SectionId } from '$lib/config/items.js';
+import type { SectionId } from '#lib/config/items.js';
 
 export type Answer = 'yes' | 'no' | 'not-applicable' | '';
 

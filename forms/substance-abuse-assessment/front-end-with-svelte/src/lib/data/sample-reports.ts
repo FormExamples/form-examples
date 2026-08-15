@@ -1,6 +1,6 @@
-import type { AssessmentData, AuditRiskCategory, RiskLevel } from '$lib/engine/types';
-import { calculateSubstanceGrade } from '$lib/engine/substance-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, AuditRiskCategory, RiskLevel } from '#lib/engine/types.js';
+import { calculateSubstanceGrade } from '#lib/engine/substance-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

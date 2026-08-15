@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import { createEmptyDocumentation } from '$lib/grading/factory.js';
-import type { Arc42Documentation, MaturityResult } from '$lib/grading/types.js';
+import { browser } from '$app/env';
+import { createEmptyDocumentation } from '#lib/grading/factory.js';
+import type { Arc42Documentation, MaturityResult } from '#lib/grading/types.js';
 
 /** localStorage draft key for a given document id (defaults to `new`). */
 function storageKey(id: string): string {

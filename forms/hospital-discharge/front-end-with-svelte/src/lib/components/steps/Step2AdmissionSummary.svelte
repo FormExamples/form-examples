@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateLengthOfStay } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateLengthOfStay } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
 
 	const d = assessment.data.admissionSummary;
 

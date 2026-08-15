@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, Prophylaxis, RiskBand } from '$lib/engine/types';
-import { calculateCapriniGrade } from '$lib/engine/caprini-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, Prophylaxis, RiskBand } from '#lib/engine/types.js';
+import { calculateCapriniGrade } from '#lib/engine/caprini-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

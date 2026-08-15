@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { assessment } from '$lib/stores/assessment.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import Select from '$lib/components/ui/Select.svelte';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
 
   const d = assessment.data.riskAssessmentSummary;
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TeamMember } from '$lib/engine/types';
+	import type { TeamMember } from '#lib/engine/types.js';
 
 	let {
 		members = $bindable<TeamMember[]>([])

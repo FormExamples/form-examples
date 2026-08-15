@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateWardRoundGrade } from '$lib/engine/ward-round-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateWardRoundGrade } from '#lib/engine/ward-round-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Header from '$lib/components/steps/Step1Header.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Overnight from '$lib/components/steps/Step3Overnight.svelte';
-	import Step4Problems from '$lib/components/steps/Step4Problems.svelte';
-	import Step5Examination from '$lib/components/steps/Step5Examination.svelte';
-	import Step6Investigations from '$lib/components/steps/Step6Investigations.svelte';
-	import Step7Vte from '$lib/components/steps/Step7Vte.svelte';
-	import Step8Medication from '$lib/components/steps/Step8Medication.svelte';
-	import Step9Plan from '$lib/components/steps/Step9Plan.svelte';
-	import Step10Escalation from '$lib/components/steps/Step10Escalation.svelte';
-	import Step11Summary from '$lib/components/steps/Step11Summary.svelte';
+	import Step1Header from '#lib/components/steps/Step1Header.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Overnight from '#lib/components/steps/Step3Overnight.svelte';
+	import Step4Problems from '#lib/components/steps/Step4Problems.svelte';
+	import Step5Examination from '#lib/components/steps/Step5Examination.svelte';
+	import Step6Investigations from '#lib/components/steps/Step6Investigations.svelte';
+	import Step7Vte from '#lib/components/steps/Step7Vte.svelte';
+	import Step8Medication from '#lib/components/steps/Step8Medication.svelte';
+	import Step9Plan from '#lib/components/steps/Step9Plan.svelte';
+	import Step10Escalation from '#lib/components/steps/Step10Escalation.svelte';
+	import Step11Summary from '#lib/components/steps/Step11Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

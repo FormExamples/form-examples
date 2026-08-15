@@ -1,6 +1,6 @@
-import type { AssessmentData, CCSClass, NYHAClass, RiskLevel } from '$lib/engine/types';
-import { calculateCardioGrade } from '$lib/engine/cardio-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CCSClass, NYHAClass, RiskLevel } from '#lib/engine/types.js';
+import { calculateCardioGrade } from '#lib/engine/cardio-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

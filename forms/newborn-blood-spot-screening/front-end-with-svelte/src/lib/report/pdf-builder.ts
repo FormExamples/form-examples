@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { BloodspotScreening, GradingResult } from '$lib/engine/types';
+import type { BloodspotScreening, GradingResult } from '#lib/engine/types.js';
 import {
 	careSettingLabel,
 	outcomeLabel,
@@ -8,7 +8,7 @@ import {
 	resultClassLabel,
 	sampleTakerRoleLabel,
 	sexLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: BloodspotScreening,

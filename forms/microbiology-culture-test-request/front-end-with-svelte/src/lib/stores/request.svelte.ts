@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { MicrobiologyRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { MicrobiologyRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export so callers can import the canonical empty request from the store too.
 export { createDefaultRequest };

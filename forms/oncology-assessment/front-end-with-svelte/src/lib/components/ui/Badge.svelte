@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ecogGradeLabel, ecogGradeColor } from '$lib/engine/utils';
+	import { ecogGradeLabel, ecogGradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

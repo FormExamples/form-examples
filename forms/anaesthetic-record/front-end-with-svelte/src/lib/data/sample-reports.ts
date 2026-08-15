@@ -1,6 +1,6 @@
-import type { AssessmentData, CompletenessStatus, Urgency } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/anaesthetic-record-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletenessStatus, Urgency } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/anaesthetic-record-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample record: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

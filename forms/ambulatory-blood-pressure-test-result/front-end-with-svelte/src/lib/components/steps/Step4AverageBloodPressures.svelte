@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { severeByAverages } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { severeByAverages } from '#lib/engine/utils.js';
 
 	const d = resultStore.data;
 

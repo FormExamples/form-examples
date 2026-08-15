@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/documentation.svelte.js';
-  import type { ConstraintItem } from '$lib/grading/types.js';
+  import { store } from '#lib/stores/documentation.svelte.js';
+  import type { ConstraintItem } from '#lib/grading/types.js';
 
   // Helpers for partitioned sections — each adds to the shared constraintItems array
   const MAX_TECHNICAL = 8;

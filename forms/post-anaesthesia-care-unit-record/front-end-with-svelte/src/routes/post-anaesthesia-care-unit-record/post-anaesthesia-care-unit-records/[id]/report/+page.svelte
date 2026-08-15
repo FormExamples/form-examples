@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		readinessBandLabel,
 		readinessBandColor,
@@ -13,9 +13,9 @@
 		sexLabel,
 		ageBandLabel,
 		asaStatusLabel
-	} from '$lib/engine/utils';
-	import { aldreteValueLabel } from '$lib/engine/pacu-rules';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import { aldreteValueLabel } from '#lib/engine/pacu-rules.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'post-anaesthesia-care-unit-records';
 

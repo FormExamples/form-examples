@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import { createEmptyPerson } from '$lib/factory.js';
-  import type { Signature, SignatureRole } from '$lib/types.js';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
-  import SignaturePad from '$lib/components/ui/SignaturePad.svelte';
-  import AddressInput from '$lib/components/ui/AddressInput.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import { createEmptyPerson } from '#lib/factory.js';
+  import type { Signature, SignatureRole } from '#lib/types.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
+  import SignaturePad from '#lib/components/ui/SignaturePad.svelte';
+  import AddressInput from '#lib/components/ui/AddressInput.svelte';
 
   // Each attorney or replacement attorney must have a corresponding section-11
   // signature record with a witness. We make sure one exists for every listed

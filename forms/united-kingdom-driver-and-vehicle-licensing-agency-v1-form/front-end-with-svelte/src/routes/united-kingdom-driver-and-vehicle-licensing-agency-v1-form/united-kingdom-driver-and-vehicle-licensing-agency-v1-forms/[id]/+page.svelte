@@ -1,34 +1,34 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateV1 } from '$lib/engine/v1-validator';
-	import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { validateV1 } from '#lib/engine/v1-validator.js';
+	import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 
-	import Step1PersonalDetails from '$lib/components/steps/Step1PersonalDetails.svelte';
-	import Step2HealthcareProfessionals from '$lib/components/steps/Step2HealthcareProfessionals.svelte';
-	import Step3EyesightStandards from '$lib/components/steps/Step3EyesightStandards.svelte';
-	import Step4VisionInBothEyes from '$lib/components/steps/Step4VisionInBothEyes.svelte';
-	import Step5FieldOfVision from '$lib/components/steps/Step5FieldOfVision.svelte';
-	import Step6Glaucoma from '$lib/components/steps/Step6Glaucoma.svelte';
-	import Step7RetinitisPigmentosa from '$lib/components/steps/Step7RetinitisPigmentosa.svelte';
-	import Step8LaserTreatment from '$lib/components/steps/Step8LaserTreatment.svelte';
-	import Step9Blepharospasm from '$lib/components/steps/Step9Blepharospasm.svelte';
-	import Step10NightBlindness from '$lib/components/steps/Step10NightBlindness.svelte';
-	import Step11DoubleVision from '$lib/components/steps/Step11DoubleVision.svelte';
-	import Step12OtherVisionConditions from '$lib/components/steps/Step12OtherVisionConditions.svelte';
-	import Step13RecentContact from '$lib/components/steps/Step13RecentContact.svelte';
-	import Step14Authorisation from '$lib/components/steps/Step14Authorisation.svelte';
+	import Step1PersonalDetails from '#lib/components/steps/Step1PersonalDetails.svelte';
+	import Step2HealthcareProfessionals from '#lib/components/steps/Step2HealthcareProfessionals.svelte';
+	import Step3EyesightStandards from '#lib/components/steps/Step3EyesightStandards.svelte';
+	import Step4VisionInBothEyes from '#lib/components/steps/Step4VisionInBothEyes.svelte';
+	import Step5FieldOfVision from '#lib/components/steps/Step5FieldOfVision.svelte';
+	import Step6Glaucoma from '#lib/components/steps/Step6Glaucoma.svelte';
+	import Step7RetinitisPigmentosa from '#lib/components/steps/Step7RetinitisPigmentosa.svelte';
+	import Step8LaserTreatment from '#lib/components/steps/Step8LaserTreatment.svelte';
+	import Step9Blepharospasm from '#lib/components/steps/Step9Blepharospasm.svelte';
+	import Step10NightBlindness from '#lib/components/steps/Step10NightBlindness.svelte';
+	import Step11DoubleVision from '#lib/components/steps/Step11DoubleVision.svelte';
+	import Step12OtherVisionConditions from '#lib/components/steps/Step12OtherVisionConditions.svelte';
+	import Step13RecentContact from '#lib/components/steps/Step13RecentContact.svelte';
+	import Step14Authorisation from '#lib/components/steps/Step14Authorisation.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

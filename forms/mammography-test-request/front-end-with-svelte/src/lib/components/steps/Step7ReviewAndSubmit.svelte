@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import { requestStore } from '$lib/stores/request.svelte';
-	import { examTypeLabel, indicationLabel } from '$lib/engine/utils';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import { requestStore } from '#lib/stores/request.svelte.js';
+	import { examTypeLabel, indicationLabel } from '#lib/engine/utils.js';
 
 	const d = requestStore.data;
 </script>

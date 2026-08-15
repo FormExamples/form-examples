@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		completenessColor,
 		calculateAge,
 		formatDate,
 		formatNhsNumber
-	} from '$lib/engine/utils';
-	import { recordTypeOptions, purposeOptions } from '$lib/engine/validation-rules';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import { recordTypeOptions, purposeOptions } from '#lib/engine/validation-rules.js';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

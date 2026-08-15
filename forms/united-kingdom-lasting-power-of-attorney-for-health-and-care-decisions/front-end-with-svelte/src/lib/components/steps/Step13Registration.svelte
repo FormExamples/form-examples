@@ -1,8 +1,8 @@
 <script lang="ts">
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import NumberField from '$lib/components/ui/NumberField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import NumberField from '#lib/components/ui/NumberField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
 
   const reg = $derived(lpaStore.application.registration);
   function changed() {

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { assessment } from '$lib/stores/assessment.svelte';
-  import StepCard from '$lib/components/ui/StepCard.svelte';
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import { fmtDioptres } from '$lib/engine/utils.js';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import StepCard from '#lib/components/ui/StepCard.svelte';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import { fmtDioptres } from '#lib/engine/utils.js';
   const input = 'input w-full';
   const cbLabel = 'flex items-center gap-2 text-sm text-base-content/80';
 

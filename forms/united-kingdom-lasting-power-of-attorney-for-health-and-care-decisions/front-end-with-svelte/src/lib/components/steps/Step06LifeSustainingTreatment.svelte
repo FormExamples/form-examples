@@ -1,6 +1,6 @@
 <script lang="ts">
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
 
   const app = $derived(lpaStore.application);
   function changed() {

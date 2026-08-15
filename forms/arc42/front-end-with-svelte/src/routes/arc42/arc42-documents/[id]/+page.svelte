@@ -1,30 +1,30 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/documentation.svelte';
-	import { calculateMaturity } from '$lib/grading/maturity-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleDocuments } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/documentation.svelte.js';
+	import { calculateMaturity } from '#lib/grading/maturity-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleDocuments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01Introduction from '$lib/components/steps/Step01Introduction.svelte';
-	import Step02Constraints from '$lib/components/steps/Step02Constraints.svelte';
-	import Step03ContextAndScope from '$lib/components/steps/Step03ContextAndScope.svelte';
-	import Step04SolutionStrategy from '$lib/components/steps/Step04SolutionStrategy.svelte';
-	import Step05BuildingBlocks from '$lib/components/steps/Step05BuildingBlocks.svelte';
-	import Step06RuntimeView from '$lib/components/steps/Step06RuntimeView.svelte';
-	import Step07DeploymentView from '$lib/components/steps/Step07DeploymentView.svelte';
-	import Step08CrosscuttingConcepts from '$lib/components/steps/Step08CrosscuttingConcepts.svelte';
-	import Step09ArchitecturalDecisions from '$lib/components/steps/Step09ArchitecturalDecisions.svelte';
-	import Step10QualityRequirements from '$lib/components/steps/Step10QualityRequirements.svelte';
-	import Step11RisksAndDebt from '$lib/components/steps/Step11RisksAndDebt.svelte';
-	import Step12Summary from '$lib/components/steps/Step12Summary.svelte';
+	import Step01Introduction from '#lib/components/steps/Step01Introduction.svelte';
+	import Step02Constraints from '#lib/components/steps/Step02Constraints.svelte';
+	import Step03ContextAndScope from '#lib/components/steps/Step03ContextAndScope.svelte';
+	import Step04SolutionStrategy from '#lib/components/steps/Step04SolutionStrategy.svelte';
+	import Step05BuildingBlocks from '#lib/components/steps/Step05BuildingBlocks.svelte';
+	import Step06RuntimeView from '#lib/components/steps/Step06RuntimeView.svelte';
+	import Step07DeploymentView from '#lib/components/steps/Step07DeploymentView.svelte';
+	import Step08CrosscuttingConcepts from '#lib/components/steps/Step08CrosscuttingConcepts.svelte';
+	import Step09ArchitecturalDecisions from '#lib/components/steps/Step09ArchitecturalDecisions.svelte';
+	import Step10QualityRequirements from '#lib/components/steps/Step10QualityRequirements.svelte';
+	import Step11RisksAndDebt from '#lib/components/steps/Step11RisksAndDebt.svelte';
+	import Step12Summary from '#lib/components/steps/Step12Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

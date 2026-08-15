@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateKdigo } from '$lib/engine/kdigo-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateKdigo } from '#lib/engine/kdigo-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2PresentingSymptoms from '$lib/components/steps/Step2PresentingSymptoms.svelte';
-	import Step3CKDRiskFactors from '$lib/components/steps/Step3CKDRiskFactors.svelte';
-	import Step4PhysicalExamination from '$lib/components/steps/Step4PhysicalExamination.svelte';
-	import Step5BloodTests from '$lib/components/steps/Step5BloodTests.svelte';
-	import Step6UrineTests from '$lib/components/steps/Step6UrineTests.svelte';
-	import Step7ImagingBiopsyReview from '$lib/components/steps/Step7ImagingBiopsyReview.svelte';
-	import Step8MedicationReviewDoseAdjustment from '$lib/components/steps/Step8MedicationReviewDoseAdjustment.svelte';
-	import Step9ClinicalImpressionKDIGOStage from '$lib/components/steps/Step9ClinicalImpressionKDIGOStage.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2PresentingSymptoms from '#lib/components/steps/Step2PresentingSymptoms.svelte';
+	import Step3CKDRiskFactors from '#lib/components/steps/Step3CKDRiskFactors.svelte';
+	import Step4PhysicalExamination from '#lib/components/steps/Step4PhysicalExamination.svelte';
+	import Step5BloodTests from '#lib/components/steps/Step5BloodTests.svelte';
+	import Step6UrineTests from '#lib/components/steps/Step6UrineTests.svelte';
+	import Step7ImagingBiopsyReview from '#lib/components/steps/Step7ImagingBiopsyReview.svelte';
+	import Step8MedicationReviewDoseAdjustment from '#lib/components/steps/Step8MedicationReviewDoseAdjustment.svelte';
+	import Step9ClinicalImpressionKDIGOStage from '#lib/components/steps/Step9ClinicalImpressionKDIGOStage.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

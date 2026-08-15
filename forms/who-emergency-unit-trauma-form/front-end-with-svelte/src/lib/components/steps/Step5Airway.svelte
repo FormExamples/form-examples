@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Checkbox from '#lib/components/ui/Checkbox.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const a = assessment.data.airway;
 

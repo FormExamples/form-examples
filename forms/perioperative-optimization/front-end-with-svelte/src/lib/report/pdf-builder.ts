@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { DOMAIN_LABELS } from '$lib/engine/domain-rules';
+import { DOMAIN_LABELS } from '#lib/engine/domain-rules.js';
 import {
 	GATE_DECISION_LABELS,
 	READINESS_LABELS,
 	STATUS_LABELS
-} from '$lib/engine/labels';
-import type { GradingResult, PerioperativeOptimization } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+} from '#lib/engine/labels.js';
+import type { GradingResult, PerioperativeOptimization } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

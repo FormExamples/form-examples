@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { requestStore } from '$lib/stores/result.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleRequests } from '$lib/data/sample-reports';
+	import { requestStore } from '#lib/stores/result.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleRequests } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1WorkerAndRole from '$lib/components/steps/Step1WorkerAndRole.svelte';
-	import Step2Handler from '$lib/components/steps/Step2Handler.svelte';
-	import Step3NeurodivergentProfile from '$lib/components/steps/Step3NeurodivergentProfile.svelte';
-	import Step4FunctionalDifficulties from '$lib/components/steps/Step4FunctionalDifficulties.svelte';
-	import Step5RequestedAdjustments from '$lib/components/steps/Step5RequestedAdjustments.svelte';
-	import Step6EvidenceAndSupport from '$lib/components/steps/Step6EvidenceAndSupport.svelte';
-	import Step7ImpactAndUrgency from '$lib/components/steps/Step7ImpactAndUrgency.svelte';
-	import Step8ReviewAndSubmit from '$lib/components/steps/Step8ReviewAndSubmit.svelte';
+	import Step1WorkerAndRole from '#lib/components/steps/Step1WorkerAndRole.svelte';
+	import Step2Handler from '#lib/components/steps/Step2Handler.svelte';
+	import Step3NeurodivergentProfile from '#lib/components/steps/Step3NeurodivergentProfile.svelte';
+	import Step4FunctionalDifficulties from '#lib/components/steps/Step4FunctionalDifficulties.svelte';
+	import Step5RequestedAdjustments from '#lib/components/steps/Step5RequestedAdjustments.svelte';
+	import Step6EvidenceAndSupport from '#lib/components/steps/Step6EvidenceAndSupport.svelte';
+	import Step7ImpactAndUrgency from '#lib/components/steps/Step7ImpactAndUrgency.svelte';
+	import Step8ReviewAndSubmit from '#lib/components/steps/Step8ReviewAndSubmit.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

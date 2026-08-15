@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { riskBandLabel, careSettingLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { riskBandLabel, careSettingLabel } from '#lib/engine/utils.js';
 
 	let settingFilter = $state('');
 	let bandFilter = $state('');
@@ -33,7 +33,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -46,9 +46,27 @@
 	// aligned.
 	const columns = [
 		{ id: 'id', header: 'Assessment', width: 120 },
-		{ id: 'patientIdentifier', header: 'Patient ID', width: 130, sort: true },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'assessedDate', header: 'Assessed', width: 120, sort: true },
+		{
+			id: 'patientIdentifier',
+			header: 'Patient ID',
+			width: 130,
+			sort: true
+		},
+
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'assessedDate',
+			header: 'Assessed',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'careSetting',
 			header: 'Setting',
@@ -56,7 +74,14 @@
 			sort: true,
 			template: (v: string) => careSettingLabel(v as never) || '—'
 		},
-		{ id: 'cha2ds2VascScore', header: 'Score', width: 90, sort: true },
+
+		{
+			id: 'cha2ds2VascScore',
+			header: 'Score',
+			width: 90,
+			sort: true
+		},
+
 		{
 			id: 'riskBand',
 			header: 'Risk band',
@@ -68,7 +93,7 @@
 			id: 'anticoagulationFlag',
 			header: 'Anticoag.',
 			width: 110,
-			template: (v: boolean) => (v ? 'Recommended' : '—')
+			template: (v: boolean) => v ? 'Recommended' : '—'
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -118,11 +143,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>

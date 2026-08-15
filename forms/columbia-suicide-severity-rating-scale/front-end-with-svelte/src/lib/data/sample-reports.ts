@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, RiskTier } from '$lib/engine/types';
-import { calculateCssrsGrade } from '$lib/engine/cssrs-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, RiskTier } from '#lib/engine/types.js';
+import { calculateCssrsGrade } from '#lib/engine/cssrs-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

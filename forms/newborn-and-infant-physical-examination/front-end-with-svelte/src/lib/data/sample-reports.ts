@@ -3,9 +3,9 @@ import type {
 	ExaminationContext,
 	OverallOutcome,
 	Sex
-} from '$lib/engine/types';
-import { calculateNipeGrade } from '$lib/engine/nipe-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { calculateNipeGrade } from '#lib/engine/nipe-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample examination: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

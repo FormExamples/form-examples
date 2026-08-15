@@ -1,5 +1,5 @@
 import type { CategoryCount, HospitalPerformanceIndicators, IndicatorsSummaryResult } from './types.js';
-import { CATEGORIES, PERFORMANCE_INDICATORS } from '$lib/config/indicators.js';
+import { CATEGORIES, PERFORMANCE_INDICATORS } from '#lib/config/indicators.js';
 
 /**
  * Pure completeness tally over the 50 Balanced Scorecard indicators — no

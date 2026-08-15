@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { bandShortLabel } from '$lib/engine/utils';
-	import type { Band } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { bandShortLabel } from '#lib/engine/utils.js';
+	import type { Band } from '#lib/engine/types.js';
 
 	const plural = 'agile-consulting-scorecards-for-hiring-help';
 
@@ -40,7 +40,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -54,11 +54,44 @@
 		{ id: 'id', header: 'Scorecard', width: 130 },
 		{ id: 'organizationName', header: 'Organization', flexgrow: 2, sort: true },
 		{ id: 'sector', header: 'Sector', width: 150, sort: true },
-		{ id: 'respondentName', header: 'Respondent', flexgrow: 1, sort: true },
-		{ id: 'assessmentDate', header: 'Assessed', width: 120, sort: true },
-		{ id: 'scoreTotal', header: 'Score', width: 90, sort: true, template: (v: number) => `${v} / 16` },
-		{ id: 'manifestoSubtotal', header: 'Manifesto', width: 110, sort: true, template: (v: number) => `${v} / 4` },
-		{ id: 'principlesSubtotal', header: 'Principles', width: 110, sort: true, template: (v: number) => `${v} / 12` },
+		{
+			id: 'respondentName',
+			header: 'Respondent',
+			flexgrow: 1,
+			sort: true
+		},
+
+		{
+			id: 'assessmentDate',
+			header: 'Assessed',
+			width: 120,
+			sort: true
+		},
+
+		{
+			id: 'scoreTotal',
+			header: 'Score',
+			width: 90,
+			sort: true,
+			template: (v: number) => `${v} / 16`
+		},
+
+		{
+			id: 'manifestoSubtotal',
+			header: 'Manifesto',
+			width: 110,
+			sort: true,
+			template: (v: number) => `${v} / 4`
+		},
+
+		{
+			id: 'principlesSubtotal',
+			header: 'Principles',
+			width: 110,
+			sort: true,
+			template: (v: number) => `${v} / 12`
+		},
+
 		{
 			id: 'computedBand',
 			header: 'Readiness',
@@ -113,11 +146,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} organizations</p>
 </main>

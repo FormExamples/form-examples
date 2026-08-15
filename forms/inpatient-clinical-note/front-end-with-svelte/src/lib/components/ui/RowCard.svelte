@@ -5,7 +5,7 @@
 	// by child tables rather than flat fields. This wraps a single row's fields
 	// with a title and a Remove button, so the four steps share one look.
 	import type { Snippet } from 'svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	let {
 		class: className = '',

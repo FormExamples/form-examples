@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { completenessLevelLabel, completenessLevelColor } from '$lib/engine/utils';
+	import { completenessLevelLabel, completenessLevelColor } from '#lib/engine/utils.js';
 
 	let {
 		level

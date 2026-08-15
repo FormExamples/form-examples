@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gcsTotal } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gcsTotal } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Checkbox from '#lib/components/ui/Checkbox.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.disability;
 

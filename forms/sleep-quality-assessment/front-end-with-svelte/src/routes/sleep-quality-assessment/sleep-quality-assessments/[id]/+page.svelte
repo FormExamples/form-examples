@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculatePSQI } from '$lib/engine/psqi-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculatePSQI } from '#lib/engine/psqi-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2SleepHabits from '$lib/components/steps/Step2SleepHabits.svelte';
-	import Step3SleepLatency from '$lib/components/steps/Step3SleepLatency.svelte';
-	import Step4SleepDuration from '$lib/components/steps/Step4SleepDuration.svelte';
-	import Step5SleepEfficiency from '$lib/components/steps/Step5SleepEfficiency.svelte';
-	import Step6SleepDisturbances from '$lib/components/steps/Step6SleepDisturbances.svelte';
-	import Step7DaytimeDysfunction from '$lib/components/steps/Step7DaytimeDysfunction.svelte';
-	import Step8SleepMedicationUse from '$lib/components/steps/Step8SleepMedicationUse.svelte';
-	import Step9MedicalLifestyle from '$lib/components/steps/Step9MedicalLifestyle.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2SleepHabits from '#lib/components/steps/Step2SleepHabits.svelte';
+	import Step3SleepLatency from '#lib/components/steps/Step3SleepLatency.svelte';
+	import Step4SleepDuration from '#lib/components/steps/Step4SleepDuration.svelte';
+	import Step5SleepEfficiency from '#lib/components/steps/Step5SleepEfficiency.svelte';
+	import Step6SleepDisturbances from '#lib/components/steps/Step6SleepDisturbances.svelte';
+	import Step7DaytimeDysfunction from '#lib/components/steps/Step7DaytimeDysfunction.svelte';
+	import Step8SleepMedicationUse from '#lib/components/steps/Step8SleepMedicationUse.svelte';
+	import Step9MedicalLifestyle from '#lib/components/steps/Step9MedicalLifestyle.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

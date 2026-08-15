@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { calculateAge } from '$lib/engine/utils';
-import { combinedSeverityLabel, spaqBandLabel, phq9BandLabel } from '$lib/engine/sad-rules';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { calculateAge } from '#lib/engine/utils.js';
+import { combinedSeverityLabel, spaqBandLabel, phq9BandLabel } from '#lib/engine/sad-rules.js';
 
 export function buildPdfDocument(
 	data: AssessmentData,

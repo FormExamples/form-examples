@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
 	const r = assessment.data.respiratory;
 	const yesNo = [

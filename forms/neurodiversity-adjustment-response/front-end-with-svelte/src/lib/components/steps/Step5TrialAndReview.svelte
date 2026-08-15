@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { resultStore } from '$lib/stores/result.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { resultStore } from '#lib/stores/result.svelte.js';
 
 	const d = resultStore.data;
 

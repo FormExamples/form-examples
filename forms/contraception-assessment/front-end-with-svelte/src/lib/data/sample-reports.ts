@@ -1,7 +1,7 @@
-import type { AssessmentData, UKMECCategory } from '$lib/engine/types';
-import { gradeContraception } from '$lib/engine/ukmec-grader';
-import { methodLabels } from '$lib/engine/ukmec-rules';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, UKMECCategory } from '#lib/engine/types.js';
+import { gradeContraception } from '#lib/engine/ukmec-grader.js';
+import { methodLabels } from '#lib/engine/ukmec-rules.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

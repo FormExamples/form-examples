@@ -1,7 +1,7 @@
-import type { AssessmentData, SeverityCategory, SupportLevel } from '$lib/engine/types';
-import { calculateLD } from '$lib/engine/ld-grader';
-import { severityIqBand } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/engine/defaults';
+import type { AssessmentData, SeverityCategory, SupportLevel } from '#lib/engine/types.js';
+import { calculateLD } from '#lib/engine/ld-grader.js';
+import { severityIqBand } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

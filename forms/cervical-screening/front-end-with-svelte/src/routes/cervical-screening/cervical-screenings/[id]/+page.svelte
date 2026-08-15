@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/cervical-screening-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/cervical-screening-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Eligibility from '$lib/components/steps/Step3Eligibility.svelte';
-	import Step4Consent from '$lib/components/steps/Step4Consent.svelte';
-	import Step5Symptoms from '$lib/components/steps/Step5Symptoms.svelte';
-	import Step6Adequacy from '$lib/components/steps/Step6Adequacy.svelte';
-	import Step7Hpv from '$lib/components/steps/Step7Hpv.svelte';
-	import Step8Cytology from '$lib/components/steps/Step8Cytology.svelte';
-	import Step9Note from '$lib/components/steps/Step9Note.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Eligibility from '#lib/components/steps/Step3Eligibility.svelte';
+	import Step4Consent from '#lib/components/steps/Step4Consent.svelte';
+	import Step5Symptoms from '#lib/components/steps/Step5Symptoms.svelte';
+	import Step6Adequacy from '#lib/components/steps/Step6Adequacy.svelte';
+	import Step7Hpv from '#lib/components/steps/Step7Hpv.svelte';
+	import Step8Cytology from '#lib/components/steps/Step8Cytology.svelte';
+	import Step9Note from '#lib/components/steps/Step9Note.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

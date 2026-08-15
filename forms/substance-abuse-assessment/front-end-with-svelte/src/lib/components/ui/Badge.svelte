@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { substanceGradeLabel, substanceGradeColor } from '$lib/engine/utils';
+	import { substanceGradeLabel, substanceGradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

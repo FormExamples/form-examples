@@ -3,9 +3,9 @@ import type {
 	FitnessForWork,
 	PeriodCompliance,
 	Recommendation
-} from '$lib/engine/types';
-import { gradeFitNote } from '$lib/engine/grader';
-import { createDefaultFitNote } from '$lib/stores/fitnote.svelte';
+} from '#lib/engine/types.js';
+import { gradeFitNote } from '#lib/engine/grader.js';
+import { createDefaultFitNote } from '#lib/stores/fitnote.svelte.js';
 
 /** A sample fit note: an identifier and the full data the engine grades. */
 export interface SampleFitNote {

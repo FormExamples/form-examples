@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
   // Track per-attorney "applicant" selection in local state, then keep
   // the canonical list of applicant signatures in sync with the LPA's

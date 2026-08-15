@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { hhiesScoreLabel, calculateAge, hearingLossGrade } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { hhiesScoreLabel, calculateAge, hearingLossGrade } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: AssessmentData,

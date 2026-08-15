@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { riskLevelLabel, riskLevelColor } from '$lib/engine/utils';
+	import { riskLevelLabel, riskLevelColor } from '#lib/engine/utils.js';
 
 	let {
 		level

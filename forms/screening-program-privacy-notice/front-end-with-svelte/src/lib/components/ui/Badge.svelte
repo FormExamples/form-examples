@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Badge — renders an acknowledgment status as a Lily-token coloured pill.
-	import { statusColor } from '$lib/engine/utils';
+	import { statusColor } from '#lib/engine/utils.js';
 
 	let {
 		status

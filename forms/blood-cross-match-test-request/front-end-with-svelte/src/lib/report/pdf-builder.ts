@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CrossMatchRequest, GradingResult } from '$lib/engine/types';
+import type { CrossMatchRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessBandLabel,
 	bloodGroupLabel,
@@ -9,7 +9,7 @@ import {
 	indicationLabel,
 	requestTypeLabel,
 	titleCase
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: CrossMatchRequest,

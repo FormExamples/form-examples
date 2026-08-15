@@ -7,7 +7,7 @@
 // invented. The same set backs the HTML dashboard, so the two front-ends show
 // identical data.
 
-import type { AssessmentRow } from '$lib/engine/types';
+import type { AssessmentRow } from '#lib/engine/types.js';
 
 export const sampleAssessments: AssessmentRow[] = [
 	{

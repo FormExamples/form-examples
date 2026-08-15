@@ -4,9 +4,9 @@ import {
 	GLIM_DIAGNOSIS_LABELS,
 	MUST_RISK_LABELS,
 	RECOMMENDATION_LABELS
-} from '$lib/engine/grader';
-import type { DieticAssessment, GradingResult } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+} from '#lib/engine/grader.js';
+import type { DieticAssessment, GradingResult } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

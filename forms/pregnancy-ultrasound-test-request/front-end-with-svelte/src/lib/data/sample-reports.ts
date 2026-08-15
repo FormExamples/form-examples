@@ -1,7 +1,7 @@
-import type { UltrasoundRequest, RequestRow } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefaultRequest } from '$lib/engine/defaults';
-import { formatGestationalAge } from '$lib/engine/utils';
+import type { UltrasoundRequest, RequestRow } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
+import { formatGestationalAge } from '#lib/engine/utils.js';
 
 /** A sample request: an identifier and the full request the engine grades. */
 export interface SampleRequest {

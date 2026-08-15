@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { MriScanResult, GradingResult } from '$lib/engine/types';
+import type { MriScanResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
 	followUpUrgencyLabel,
 	bodyRegionLabel,
 	reportStatusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

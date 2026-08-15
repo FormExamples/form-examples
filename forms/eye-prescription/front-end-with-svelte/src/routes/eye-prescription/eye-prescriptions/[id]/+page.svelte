@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01Prescriber from '$lib/components/steps/Step01Prescriber.svelte';
-	import Step02Patient from '$lib/components/steps/Step02Patient.svelte';
-	import Step03Examination from '$lib/components/steps/Step03Examination.svelte';
-	import Step04VisualAcuity from '$lib/components/steps/Step04VisualAcuity.svelte';
-	import Step05RightEye from '$lib/components/steps/Step05RightEye.svelte';
-	import Step06LeftEye from '$lib/components/steps/Step06LeftEye.svelte';
-	import Step07Addition from '$lib/components/steps/Step07Addition.svelte';
-	import Step08PupillaryDistance from '$lib/components/steps/Step08PupillaryDistance.svelte';
-	import Step09LensRecommendation from '$lib/components/steps/Step09LensRecommendation.svelte';
-	import Step10OcularHealth from '$lib/components/steps/Step10OcularHealth.svelte';
-	import Step11Summary from '$lib/components/steps/Step11Summary.svelte';
+	import Step01Prescriber from '#lib/components/steps/Step01Prescriber.svelte';
+	import Step02Patient from '#lib/components/steps/Step02Patient.svelte';
+	import Step03Examination from '#lib/components/steps/Step03Examination.svelte';
+	import Step04VisualAcuity from '#lib/components/steps/Step04VisualAcuity.svelte';
+	import Step05RightEye from '#lib/components/steps/Step05RightEye.svelte';
+	import Step06LeftEye from '#lib/components/steps/Step06LeftEye.svelte';
+	import Step07Addition from '#lib/components/steps/Step07Addition.svelte';
+	import Step08PupillaryDistance from '#lib/components/steps/Step08PupillaryDistance.svelte';
+	import Step09LensRecommendation from '#lib/components/steps/Step09LensRecommendation.svelte';
+	import Step10OcularHealth from '#lib/components/steps/Step10OcularHealth.svelte';
+	import Step11Summary from '#lib/components/steps/Step11Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

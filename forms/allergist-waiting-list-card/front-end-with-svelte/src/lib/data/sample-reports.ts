@@ -1,6 +1,6 @@
-import type { ClinicalPriority, WaitingListCard, WaitingTimeStatus } from '$lib/engine/types';
-import { calculateWaitingTimeStatus } from '$lib/engine/composite-grader';
-import { createEmptyCard } from '$lib/engine/factory';
+import type { ClinicalPriority, WaitingListCard, WaitingTimeStatus } from '#lib/engine/types.js';
+import { calculateWaitingTimeStatus } from '#lib/engine/composite-grader.js';
+import { createEmptyCard } from '#lib/engine/factory.js';
 
 /**
  * Fixed reference "today" used to derive the dashboard rows so the sample bands

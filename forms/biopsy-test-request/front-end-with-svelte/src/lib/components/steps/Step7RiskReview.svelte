@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { request } from '$lib/stores/request.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
 	import {
 		bleedingRiskLabel,
 		bleedingRiskColor,
 		priorityColor
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
 	// Live preview, recomputed reactively as the request data changes.
 	const result = $derived(calculateGrade(request.data));

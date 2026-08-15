@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { ScreeningData, GradingResult } from '$lib/engine/types';
+import type { ScreeningData, GradingResult } from '#lib/engine/types.js';
 import {
 	clinicianRoleLabel,
 	eligibilityLabel,
@@ -9,7 +9,7 @@ import {
 	priorityLabel,
 	readingOutcomeLabel,
 	screeningOutcomeLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: ScreeningData,

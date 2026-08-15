@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions, TableCell } from 'pdfmake/interfaces';
-import type { ChartData, Entry, GradingResult } from '$lib/engine/types';
+import type { ChartData, Entry, GradingResult } from '#lib/engine/types.js';
 import {
 	fluidStatusLabel,
 	priorityLabel,
 	clinicianRoleLabel,
 	categoryLabel,
 	formatSignedMl
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 function entryBody(entries: Entry[], emptyText: string): TableCell[][] {
 	return [

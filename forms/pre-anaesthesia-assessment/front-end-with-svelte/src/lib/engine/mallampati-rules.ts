@@ -1,4 +1,4 @@
-import type { ClinicianAssessment, FiredRule } from './types.js';
+import type { ClinicianAssessment, FiredRule } from "./types.js";
 
 export function applyMallampatiRules(data: ClinicianAssessment): FiredRule[] {
   const mp = data.airway.mallampatiClass;
@@ -6,9 +6,9 @@ export function applyMallampatiRules(data: ClinicianAssessment): FiredRule[] {
   return [
     {
       ruleId: `R-MP-${mp}`,
-      instrument: 'mallampati',
+      instrument: "mallampati",
       grade: mp,
-      category: 'airway',
+      category: "airway",
       description: `Mallampati class ${mp}`,
     },
   ];

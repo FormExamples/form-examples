@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import Select from '$lib/components/ui/Select.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
 
   const rom = ['', 'full', 'reduced', 'severely-limited'] as const;
 </script>

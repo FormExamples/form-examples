@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/fitnote.svelte';
+	import { store } from '#lib/stores/fitnote.svelte.js';
 	import {
 		fitnessCategoryLabel,
 		fitnessCategoryColor,
@@ -12,8 +12,8 @@
 		validColor,
 		priorityColor,
 		calculateAge
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'united-kingdom-statements-of-fitness-for-work';
 	const id = $derived(page.params.id ?? 'new');

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { application } from '$lib/stores/application.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import type { EligibleConditionCode } from '$lib/engine/types';
+	import { application } from '#lib/stores/application.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import type { EligibleConditionCode } from '#lib/engine/types.js';
 
 	const data = application.data;
 

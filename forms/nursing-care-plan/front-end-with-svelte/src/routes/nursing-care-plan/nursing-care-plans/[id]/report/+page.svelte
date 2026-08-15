@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { classifyProblem } from '$lib/engine/nursing-care-plan-rules';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { classifyProblem } from '#lib/engine/nursing-care-plan-rules.js';
 	import {
 		completenessLabel,
 		completenessColor,
@@ -17,8 +17,8 @@
 		planTypeLabel,
 		careSettingLabel,
 		sexLabel
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

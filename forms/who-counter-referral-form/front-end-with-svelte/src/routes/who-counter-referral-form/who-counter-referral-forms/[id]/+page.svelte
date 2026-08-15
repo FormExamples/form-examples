@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateCounterReferral } from '$lib/engine/counter-referral-validator';
-	import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { validateCounterReferral } from '#lib/engine/counter-referral-validator.js';
+	import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientIdentification from '$lib/components/steps/Step1PatientIdentification.svelte';
-	import Step2FacilityDetails from '$lib/components/steps/Step2FacilityDetails.svelte';
-	import Step3Situation from '$lib/components/steps/Step3Situation.svelte';
-	import Step4Background from '$lib/components/steps/Step4Background.svelte';
-	import Step5Assessment from '$lib/components/steps/Step5Assessment.svelte';
-	import Step6Recommendations from '$lib/components/steps/Step6Recommendations.svelte';
-	import Step7ProviderSignoff from '$lib/components/steps/Step7ProviderSignoff.svelte';
+	import Step1PatientIdentification from '#lib/components/steps/Step1PatientIdentification.svelte';
+	import Step2FacilityDetails from '#lib/components/steps/Step2FacilityDetails.svelte';
+	import Step3Situation from '#lib/components/steps/Step3Situation.svelte';
+	import Step4Background from '#lib/components/steps/Step4Background.svelte';
+	import Step5Assessment from '#lib/components/steps/Step5Assessment.svelte';
+	import Step6Recommendations from '#lib/components/steps/Step6Recommendations.svelte';
+	import Step7ProviderSignoff from '#lib/components/steps/Step7ProviderSignoff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

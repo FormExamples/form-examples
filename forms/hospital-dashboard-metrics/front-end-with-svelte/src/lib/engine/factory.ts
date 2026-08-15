@@ -1,5 +1,5 @@
 import type { MetricResponse, HospitalDashboardMetrics } from './types.js';
-import { DASHBOARD_METRICS } from '$lib/config/metrics.js';
+import { DASHBOARD_METRICS } from '#lib/config/metrics.js';
 
 function emptyItems(): Record<string, MetricResponse> {
   const out: Record<string, MetricResponse> = {};

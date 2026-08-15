@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import { OPTIONS } from '$lib/config/options';
-	import { questionnaireStore } from '$lib/stores/questionnaire.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import { OPTIONS } from '#lib/config/options.js';
+	import { questionnaireStore } from '#lib/stores/questionnaire.svelte.js';
 
 	const d = questionnaireStore.data;
 </script>

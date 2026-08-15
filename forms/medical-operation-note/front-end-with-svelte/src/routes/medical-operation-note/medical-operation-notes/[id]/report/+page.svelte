@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/state.svelte';
-	import { sampleOperationNotes } from '$lib/data/sample-reports';
+	import { store } from '#lib/state.svelte.js';
+	import { sampleOperationNotes } from '#lib/data/sample-reports.js';
 	import {
 		compositeRiskLabel,
 		compositeRiskColor,
 		clavienDindoLabel,
 		bloodLossBandLabel
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 

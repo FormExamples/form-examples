@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { categoryLabel, categoryColor } from '$lib/engine/utils';
-	import type { SatisfactionCategory } from '$lib/engine/types';
+	import { categoryLabel, categoryColor } from '#lib/engine/utils.js';
+	import type { SatisfactionCategory } from '#lib/engine/types.js';
 
 	let {
 		category

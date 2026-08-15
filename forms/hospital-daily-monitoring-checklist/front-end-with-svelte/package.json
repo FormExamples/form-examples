@@ -14,20 +14,520 @@
 		"test:watch": "vitest"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.1",
-		"@sveltejs/kit": "^2.70.2",
-		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/pdfmake": "^0.3.3",
-		"svelte": "^5.56.8",
-		"svelte-check": "^4.7.5",
+		"svelte": "^5.56.9",
+		"svelte-check": "^4.7.6",
 		"tailwindcss": "^4.3.3",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.6",
+		"typescript": "^6.0.0",
+		"vite": "^8.0.12",
 		"vitest": "^4.1.10"
 	},
 	"dependencies": {
 		"@svar-ui/svelte-grid": "^2.7.2",
-		"pdfmake": "^0.3.11"
+		"migrate": "^2.1.0",
+		"npx": "^10.2.2",
+		"package": "^1.0.1",
+		"pdfmake": "^0.3.11",
+		"sv": "^0.17.0"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		"./components/steps/Step01InspectionDetails.svelte": {
+			"types": "./package/components/steps/Step01InspectionDetails.svelte.d.ts",
+			"svelte": "./package/components/steps/Step01InspectionDetails.svelte",
+			"default": "./package/components/steps/Step01InspectionDetails.svelte"
+		},
+		"./components/steps/Step02Opd.svelte": {
+			"types": "./package/components/steps/Step02Opd.svelte.d.ts",
+			"svelte": "./package/components/steps/Step02Opd.svelte",
+			"default": "./package/components/steps/Step02Opd.svelte"
+		},
+		"./components/steps/Step03Causality.svelte": {
+			"types": "./package/components/steps/Step03Causality.svelte.d.ts",
+			"svelte": "./package/components/steps/Step03Causality.svelte",
+			"default": "./package/components/steps/Step03Causality.svelte"
+		},
+		"./components/steps/Step04Dispensary.svelte": {
+			"types": "./package/components/steps/Step04Dispensary.svelte.d.ts",
+			"svelte": "./package/components/steps/Step04Dispensary.svelte",
+			"default": "./package/components/steps/Step04Dispensary.svelte"
+		},
+		"./components/steps/Step05HrAttendance.svelte": {
+			"types": "./package/components/steps/Step05HrAttendance.svelte.d.ts",
+			"svelte": "./package/components/steps/Step05HrAttendance.svelte",
+			"default": "./package/components/steps/Step05HrAttendance.svelte"
+		},
+		"./components/steps/Step06Ambulance.svelte": {
+			"types": "./package/components/steps/Step06Ambulance.svelte.d.ts",
+			"svelte": "./package/components/steps/Step06Ambulance.svelte",
+			"default": "./package/components/steps/Step06Ambulance.svelte"
+		},
+		"./components/steps/Step07DiagnosticFacility.svelte": {
+			"types": "./package/components/steps/Step07DiagnosticFacility.svelte.d.ts",
+			"svelte": "./package/components/steps/Step07DiagnosticFacility.svelte",
+			"default": "./package/components/steps/Step07DiagnosticFacility.svelte"
+		},
+		"./components/steps/Step08Store.svelte": {
+			"types": "./package/components/steps/Step08Store.svelte.d.ts",
+			"svelte": "./package/components/steps/Step08Store.svelte",
+			"default": "./package/components/steps/Step08Store.svelte"
+		},
+		"./components/steps/Step09OtIcu.svelte": {
+			"types": "./package/components/steps/Step09OtIcu.svelte.d.ts",
+			"svelte": "./package/components/steps/Step09OtIcu.svelte",
+			"default": "./package/components/steps/Step09OtIcu.svelte"
+		},
+		"./components/steps/Step10LabourRoom.svelte": {
+			"types": "./package/components/steps/Step10LabourRoom.svelte.d.ts",
+			"svelte": "./package/components/steps/Step10LabourRoom.svelte",
+			"default": "./package/components/steps/Step10LabourRoom.svelte"
+		},
+		"./components/steps/Step11Wards.svelte": {
+			"types": "./package/components/steps/Step11Wards.svelte.d.ts",
+			"svelte": "./package/components/steps/Step11Wards.svelte",
+			"default": "./package/components/steps/Step11Wards.svelte"
+		},
+		"./components/steps/Step12HouseKeeping.svelte": {
+			"types": "./package/components/steps/Step12HouseKeeping.svelte.d.ts",
+			"svelte": "./package/components/steps/Step12HouseKeeping.svelte",
+			"default": "./package/components/steps/Step12HouseKeeping.svelte"
+		},
+		"./components/steps/Step13WaterSupply.svelte": {
+			"types": "./package/components/steps/Step13WaterSupply.svelte.d.ts",
+			"svelte": "./package/components/steps/Step13WaterSupply.svelte",
+			"default": "./package/components/steps/Step13WaterSupply.svelte"
+		},
+		"./components/steps/Step14ElectricSupply.svelte": {
+			"types": "./package/components/steps/Step14ElectricSupply.svelte.d.ts",
+			"svelte": "./package/components/steps/Step14ElectricSupply.svelte",
+			"default": "./package/components/steps/Step14ElectricSupply.svelte"
+		},
+		"./components/steps/Step15Diet.svelte": {
+			"types": "./package/components/steps/Step15Diet.svelte.d.ts",
+			"svelte": "./package/components/steps/Step15Diet.svelte",
+			"default": "./package/components/steps/Step15Diet.svelte"
+		},
+		"./components/steps/Step16HospitalSignage.svelte": {
+			"types": "./package/components/steps/Step16HospitalSignage.svelte.d.ts",
+			"svelte": "./package/components/steps/Step16HospitalSignage.svelte",
+			"default": "./package/components/steps/Step16HospitalSignage.svelte"
+		},
+		"./components/steps/Step17FireFightingEquipment.svelte": {
+			"types": "./package/components/steps/Step17FireFightingEquipment.svelte.d.ts",
+			"svelte": "./package/components/steps/Step17FireFightingEquipment.svelte",
+			"default": "./package/components/steps/Step17FireFightingEquipment.svelte"
+		},
+		"./components/steps/Step18PatientFeedback.svelte": {
+			"types": "./package/components/steps/Step18PatientFeedback.svelte.d.ts",
+			"svelte": "./package/components/steps/Step18PatientFeedback.svelte",
+			"default": "./package/components/steps/Step18PatientFeedback.svelte"
+		},
+		"./components/steps/Step19Mortuary.svelte": {
+			"types": "./package/components/steps/Step19Mortuary.svelte.d.ts",
+			"svelte": "./package/components/steps/Step19Mortuary.svelte",
+			"default": "./package/components/steps/Step19Mortuary.svelte"
+		},
+		"./components/steps/Step20HospitalFurniture.svelte": {
+			"types": "./package/components/steps/Step20HospitalFurniture.svelte.d.ts",
+			"svelte": "./package/components/steps/Step20HospitalFurniture.svelte",
+			"default": "./package/components/steps/Step20HospitalFurniture.svelte"
+		},
+		"./components/steps/Step21WasteManagement.svelte": {
+			"types": "./package/components/steps/Step21WasteManagement.svelte.d.ts",
+			"svelte": "./package/components/steps/Step21WasteManagement.svelte",
+			"default": "./package/components/steps/Step21WasteManagement.svelte"
+		},
+		"./components/steps/Step22InfectionControl.svelte": {
+			"types": "./package/components/steps/Step22InfectionControl.svelte.d.ts",
+			"svelte": "./package/components/steps/Step22InfectionControl.svelte",
+			"default": "./package/components/steps/Step22InfectionControl.svelte"
+		},
+		"./components/steps/Step23RecordRoom.svelte": {
+			"types": "./package/components/steps/Step23RecordRoom.svelte.d.ts",
+			"svelte": "./package/components/steps/Step23RecordRoom.svelte",
+			"default": "./package/components/steps/Step23RecordRoom.svelte"
+		},
+		"./components/steps/Step24Summary.svelte": {
+			"types": "./package/components/steps/Step24Summary.svelte.d.ts",
+			"svelte": "./package/components/steps/Step24Summary.svelte",
+			"default": "./package/components/steps/Step24Summary.svelte"
+		},
+		"./components/ui/Alert.svelte": {
+			"types": "./package/components/ui/Alert.svelte.d.ts",
+			"svelte": "./package/components/ui/Alert.svelte",
+			"default": "./package/components/ui/Alert.svelte"
+		},
+		"./components/ui/Button.svelte": {
+			"types": "./package/components/ui/Button.svelte.d.ts",
+			"svelte": "./package/components/ui/Button.svelte",
+			"default": "./package/components/ui/Button.svelte"
+		},
+		"./components/ui/DateInput.svelte": {
+			"types": "./package/components/ui/DateInput.svelte.d.ts",
+			"svelte": "./package/components/ui/DateInput.svelte",
+			"default": "./package/components/ui/DateInput.svelte"
+		},
+		"./components/ui/DateTimePicker.svelte": {
+			"types": "./package/components/ui/DateTimePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/DateTimePicker.svelte",
+			"default": "./package/components/ui/DateTimePicker.svelte"
+		},
+		"./components/ui/EmailInput.svelte": {
+			"types": "./package/components/ui/EmailInput.svelte.d.ts",
+			"svelte": "./package/components/ui/EmailInput.svelte",
+			"default": "./package/components/ui/EmailInput.svelte"
+		},
+		"./components/ui/ErrorSummary.svelte": {
+			"types": "./package/components/ui/ErrorSummary.svelte.d.ts",
+			"svelte": "./package/components/ui/ErrorSummary.svelte",
+			"default": "./package/components/ui/ErrorSummary.svelte"
+		},
+		"./components/ui/Field.svelte": {
+			"types": "./package/components/ui/Field.svelte.d.ts",
+			"svelte": "./package/components/ui/Field.svelte",
+			"default": "./package/components/ui/Field.svelte"
+		},
+		"./components/ui/Fieldset.svelte": {
+			"types": "./package/components/ui/Fieldset.svelte.d.ts",
+			"svelte": "./package/components/ui/Fieldset.svelte",
+			"default": "./package/components/ui/Fieldset.svelte"
+		},
+		"./components/ui/Form.svelte": {
+			"types": "./package/components/ui/Form.svelte.d.ts",
+			"svelte": "./package/components/ui/Form.svelte",
+			"default": "./package/components/ui/Form.svelte"
+		},
+		"./components/ui/Hint.svelte": {
+			"types": "./package/components/ui/Hint.svelte.d.ts",
+			"svelte": "./package/components/ui/Hint.svelte",
+			"default": "./package/components/ui/Hint.svelte"
+		},
+		"./components/ui/ItemRow.svelte": {
+			"types": "./package/components/ui/ItemRow.svelte.d.ts",
+			"svelte": "./package/components/ui/ItemRow.svelte",
+			"default": "./package/components/ui/ItemRow.svelte"
+		},
+		"./components/ui/LocalePicker.svelte": {
+			"types": "./package/components/ui/LocalePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/LocalePicker.svelte",
+			"default": "./package/components/ui/LocalePicker.svelte"
+		},
+		"./components/ui/NumberInput.svelte": {
+			"types": "./package/components/ui/NumberInput.svelte.d.ts",
+			"svelte": "./package/components/ui/NumberInput.svelte",
+			"default": "./package/components/ui/NumberInput.svelte"
+		},
+		"./components/ui/Panel.svelte": {
+			"types": "./package/components/ui/Panel.svelte.d.ts",
+			"svelte": "./package/components/ui/Panel.svelte",
+			"default": "./package/components/ui/Panel.svelte"
+		},
+		"./components/ui/Progress.svelte": {
+			"types": "./package/components/ui/Progress.svelte.d.ts",
+			"svelte": "./package/components/ui/Progress.svelte",
+			"default": "./package/components/ui/Progress.svelte"
+		},
+		"./components/ui/RadioGroup.svelte": {
+			"types": "./package/components/ui/RadioGroup.svelte.d.ts",
+			"svelte": "./package/components/ui/RadioGroup.svelte",
+			"default": "./package/components/ui/RadioGroup.svelte"
+		},
+		"./components/ui/Select.svelte": {
+			"types": "./package/components/ui/Select.svelte.d.ts",
+			"svelte": "./package/components/ui/Select.svelte",
+			"default": "./package/components/ui/Select.svelte"
+		},
+		"./components/ui/SharePicker.svelte": {
+			"types": "./package/components/ui/SharePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/SharePicker.svelte",
+			"default": "./package/components/ui/SharePicker.svelte"
+		},
+		"./components/ui/StepList.svelte": {
+			"types": "./package/components/ui/StepList.svelte.d.ts",
+			"svelte": "./package/components/ui/StepList.svelte",
+			"default": "./package/components/ui/StepList.svelte"
+		},
+		"./components/ui/StepListItem.svelte": {
+			"types": "./package/components/ui/StepListItem.svelte.d.ts",
+			"svelte": "./package/components/ui/StepListItem.svelte",
+			"default": "./package/components/ui/StepListItem.svelte"
+		},
+		"./components/ui/TextAreaInput.svelte": {
+			"types": "./package/components/ui/TextAreaInput.svelte.d.ts",
+			"svelte": "./package/components/ui/TextAreaInput.svelte",
+			"default": "./package/components/ui/TextAreaInput.svelte"
+		},
+		"./components/ui/TextInput.svelte": {
+			"types": "./package/components/ui/TextInput.svelte.d.ts",
+			"svelte": "./package/components/ui/TextInput.svelte",
+			"default": "./package/components/ui/TextInput.svelte"
+		},
+		"./components/ui/TextSizePicker.svelte": {
+			"types": "./package/components/ui/TextSizePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/TextSizePicker.svelte",
+			"default": "./package/components/ui/TextSizePicker.svelte"
+		},
+		"./components/ui/ThemePicker.svelte": {
+			"types": "./package/components/ui/ThemePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/ThemePicker.svelte",
+			"default": "./package/components/ui/ThemePicker.svelte"
+		},
+		"./components/ui/locales": {
+			"types": "./package/components/ui/locales.d.ts",
+			"default": "./package/components/ui/locales.js"
+		},
+		"./config/items": {
+			"types": "./package/config/items.d.ts",
+			"default": "./package/config/items.js"
+		},
+		"./config/locales": {
+			"types": "./package/config/locales.d.ts",
+			"default": "./package/config/locales.js"
+		},
+		"./config/steps": {
+			"types": "./package/config/steps.d.ts",
+			"default": "./package/config/steps.js"
+		},
+		"./config/text-sizes": {
+			"types": "./package/config/text-sizes.d.ts",
+			"default": "./package/config/text-sizes.js"
+		},
+		"./config/themes": {
+			"types": "./package/config/themes.d.ts",
+			"default": "./package/config/themes.js"
+		},
+		"./data/sample-reports": {
+			"types": "./package/data/sample-reports.d.ts",
+			"default": "./package/data/sample-reports.js"
+		},
+		"./engine/factory": {
+			"types": "./package/engine/factory.d.ts",
+			"default": "./package/engine/factory.js"
+		},
+		"./engine/summary.test": {
+			"types": "./package/engine/summary.test.d.ts",
+			"default": "./package/engine/summary.test.js"
+		},
+		"./engine/summary": {
+			"types": "./package/engine/summary.d.ts",
+			"default": "./package/engine/summary.js"
+		},
+		"./engine/types": {
+			"types": "./package/engine/types.d.ts",
+			"default": "./package/engine/types.js"
+		},
+		"./engine/utils": {
+			"types": "./package/engine/utils.d.ts",
+			"default": "./package/engine/utils.js"
+		},
+		"./report/pdf-builder": {
+			"types": "./package/report/pdf-builder.d.ts",
+			"default": "./package/report/pdf-builder.js"
+		},
+		"./stores/assessment.svelte": {
+			"types": "./package/stores/assessment.svelte.d.ts",
+			"default": "./package/stores/assessment.svelte.js"
+		}
+	},
+	"files": [
+		"package"
+	],
+	"typesVersions": {
+		">4.0": {
+			"components/steps/Step01InspectionDetails.svelte": [
+				"./package/components/steps/Step01InspectionDetails.svelte.d.ts"
+			],
+			"components/steps/Step02Opd.svelte": [
+				"./package/components/steps/Step02Opd.svelte.d.ts"
+			],
+			"components/steps/Step03Causality.svelte": [
+				"./package/components/steps/Step03Causality.svelte.d.ts"
+			],
+			"components/steps/Step04Dispensary.svelte": [
+				"./package/components/steps/Step04Dispensary.svelte.d.ts"
+			],
+			"components/steps/Step05HrAttendance.svelte": [
+				"./package/components/steps/Step05HrAttendance.svelte.d.ts"
+			],
+			"components/steps/Step06Ambulance.svelte": [
+				"./package/components/steps/Step06Ambulance.svelte.d.ts"
+			],
+			"components/steps/Step07DiagnosticFacility.svelte": [
+				"./package/components/steps/Step07DiagnosticFacility.svelte.d.ts"
+			],
+			"components/steps/Step08Store.svelte": [
+				"./package/components/steps/Step08Store.svelte.d.ts"
+			],
+			"components/steps/Step09OtIcu.svelte": [
+				"./package/components/steps/Step09OtIcu.svelte.d.ts"
+			],
+			"components/steps/Step10LabourRoom.svelte": [
+				"./package/components/steps/Step10LabourRoom.svelte.d.ts"
+			],
+			"components/steps/Step11Wards.svelte": [
+				"./package/components/steps/Step11Wards.svelte.d.ts"
+			],
+			"components/steps/Step12HouseKeeping.svelte": [
+				"./package/components/steps/Step12HouseKeeping.svelte.d.ts"
+			],
+			"components/steps/Step13WaterSupply.svelte": [
+				"./package/components/steps/Step13WaterSupply.svelte.d.ts"
+			],
+			"components/steps/Step14ElectricSupply.svelte": [
+				"./package/components/steps/Step14ElectricSupply.svelte.d.ts"
+			],
+			"components/steps/Step15Diet.svelte": [
+				"./package/components/steps/Step15Diet.svelte.d.ts"
+			],
+			"components/steps/Step16HospitalSignage.svelte": [
+				"./package/components/steps/Step16HospitalSignage.svelte.d.ts"
+			],
+			"components/steps/Step17FireFightingEquipment.svelte": [
+				"./package/components/steps/Step17FireFightingEquipment.svelte.d.ts"
+			],
+			"components/steps/Step18PatientFeedback.svelte": [
+				"./package/components/steps/Step18PatientFeedback.svelte.d.ts"
+			],
+			"components/steps/Step19Mortuary.svelte": [
+				"./package/components/steps/Step19Mortuary.svelte.d.ts"
+			],
+			"components/steps/Step20HospitalFurniture.svelte": [
+				"./package/components/steps/Step20HospitalFurniture.svelte.d.ts"
+			],
+			"components/steps/Step21WasteManagement.svelte": [
+				"./package/components/steps/Step21WasteManagement.svelte.d.ts"
+			],
+			"components/steps/Step22InfectionControl.svelte": [
+				"./package/components/steps/Step22InfectionControl.svelte.d.ts"
+			],
+			"components/steps/Step23RecordRoom.svelte": [
+				"./package/components/steps/Step23RecordRoom.svelte.d.ts"
+			],
+			"components/steps/Step24Summary.svelte": [
+				"./package/components/steps/Step24Summary.svelte.d.ts"
+			],
+			"components/ui/Alert.svelte": [
+				"./package/components/ui/Alert.svelte.d.ts"
+			],
+			"components/ui/Button.svelte": [
+				"./package/components/ui/Button.svelte.d.ts"
+			],
+			"components/ui/DateInput.svelte": [
+				"./package/components/ui/DateInput.svelte.d.ts"
+			],
+			"components/ui/DateTimePicker.svelte": [
+				"./package/components/ui/DateTimePicker.svelte.d.ts"
+			],
+			"components/ui/EmailInput.svelte": [
+				"./package/components/ui/EmailInput.svelte.d.ts"
+			],
+			"components/ui/ErrorSummary.svelte": [
+				"./package/components/ui/ErrorSummary.svelte.d.ts"
+			],
+			"components/ui/Field.svelte": [
+				"./package/components/ui/Field.svelte.d.ts"
+			],
+			"components/ui/Fieldset.svelte": [
+				"./package/components/ui/Fieldset.svelte.d.ts"
+			],
+			"components/ui/Form.svelte": [
+				"./package/components/ui/Form.svelte.d.ts"
+			],
+			"components/ui/Hint.svelte": [
+				"./package/components/ui/Hint.svelte.d.ts"
+			],
+			"components/ui/ItemRow.svelte": [
+				"./package/components/ui/ItemRow.svelte.d.ts"
+			],
+			"components/ui/LocalePicker.svelte": [
+				"./package/components/ui/LocalePicker.svelte.d.ts"
+			],
+			"components/ui/NumberInput.svelte": [
+				"./package/components/ui/NumberInput.svelte.d.ts"
+			],
+			"components/ui/Panel.svelte": [
+				"./package/components/ui/Panel.svelte.d.ts"
+			],
+			"components/ui/Progress.svelte": [
+				"./package/components/ui/Progress.svelte.d.ts"
+			],
+			"components/ui/RadioGroup.svelte": [
+				"./package/components/ui/RadioGroup.svelte.d.ts"
+			],
+			"components/ui/Select.svelte": [
+				"./package/components/ui/Select.svelte.d.ts"
+			],
+			"components/ui/SharePicker.svelte": [
+				"./package/components/ui/SharePicker.svelte.d.ts"
+			],
+			"components/ui/StepList.svelte": [
+				"./package/components/ui/StepList.svelte.d.ts"
+			],
+			"components/ui/StepListItem.svelte": [
+				"./package/components/ui/StepListItem.svelte.d.ts"
+			],
+			"components/ui/TextAreaInput.svelte": [
+				"./package/components/ui/TextAreaInput.svelte.d.ts"
+			],
+			"components/ui/TextInput.svelte": [
+				"./package/components/ui/TextInput.svelte.d.ts"
+			],
+			"components/ui/TextSizePicker.svelte": [
+				"./package/components/ui/TextSizePicker.svelte.d.ts"
+			],
+			"components/ui/ThemePicker.svelte": [
+				"./package/components/ui/ThemePicker.svelte.d.ts"
+			],
+			"components/ui/locales": [
+				"./package/components/ui/locales.d.ts"
+			],
+			"config/items": [
+				"./package/config/items.d.ts"
+			],
+			"config/locales": [
+				"./package/config/locales.d.ts"
+			],
+			"config/steps": [
+				"./package/config/steps.d.ts"
+			],
+			"config/text-sizes": [
+				"./package/config/text-sizes.d.ts"
+			],
+			"config/themes": [
+				"./package/config/themes.d.ts"
+			],
+			"data/sample-reports": [
+				"./package/data/sample-reports.d.ts"
+			],
+			"engine/factory": [
+				"./package/engine/factory.d.ts"
+			],
+			"engine/summary.test": [
+				"./package/engine/summary.test.d.ts"
+			],
+			"engine/summary": [
+				"./package/engine/summary.d.ts"
+			],
+			"engine/types": [
+				"./package/engine/types.d.ts"
+			],
+			"engine/utils": [
+				"./package/engine/utils.d.ts"
+			],
+			"report/pdf-builder": [
+				"./package/report/pdf-builder.d.ts"
+			],
+			"stores/assessment.svelte": [
+				"./package/stores/assessment.svelte.d.ts"
+			]
+		}
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
 	}
 }

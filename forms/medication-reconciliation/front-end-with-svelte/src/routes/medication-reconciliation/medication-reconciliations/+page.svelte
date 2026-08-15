@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleReconciliationRows } from '$lib/data/sample-reports';
+	import { sampleReconciliationRows } from '#lib/data/sample-reports.js';
 	import {
 		statusLabel,
 		careSettingLabel,
 		reconciliationTypeLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	let settingFilter = $state('');
 	let statusFilter = $state('');
@@ -37,7 +37,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -49,9 +49,27 @@
 	// shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Reconciliation', width: 140 },
-		{ id: 'patientIdentifier', header: 'Patient ID', width: 130, sort: true },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'reconciledDate', header: 'Reconciled', width: 120, sort: true },
+		{
+			id: 'patientIdentifier',
+			header: 'Patient ID',
+			width: 130,
+			sort: true
+		},
+
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'reconciledDate',
+			header: 'Reconciled',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'reconciliationType',
 			header: 'Type',
@@ -67,7 +85,13 @@
 			template: (v: string) => careSettingLabel(v as never) || '—'
 		},
 		{ id: 'sourceCount', header: 'Sources', width: 90, sort: true },
-		{ id: 'discrepancyCount', header: 'Discrepancies', width: 130, sort: true },
+		{
+			id: 'discrepancyCount',
+			header: 'Discrepancies',
+			width: 130,
+			sort: true
+		},
+
 		{
 			id: 'status',
 			header: 'Status',
@@ -126,11 +150,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>

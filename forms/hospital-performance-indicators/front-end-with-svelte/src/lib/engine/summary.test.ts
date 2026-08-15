@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createEmptyIndicators } from './factory.js';
 import { summariseIndicators } from './summary.js';
-import { PERFORMANCE_INDICATORS, TOTAL_INDICATORS, TOTAL_CATEGORIES } from '$lib/config/indicators.js';
+import { PERFORMANCE_INDICATORS, TOTAL_INDICATORS, TOTAL_CATEGORIES } from '#lib/config/indicators.js';
 
 describe('summariseIndicators', () => {
   it('reports zero recorded on a blank report', () => {

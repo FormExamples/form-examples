@@ -2,10 +2,10 @@
 	// Live status readout. Runs the shared engine over the current store data and
 	// shows the derived plan status, completeness percent, and per-problem class
 	// counts, updating live as problems / goals / interventions are added.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeCarePlan } from '$lib/engine/nursing-care-plan-grader';
-	import { completenessLabel, completenessColor } from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeCarePlan } from '#lib/engine/nursing-care-plan-grader.js';
+	import { completenessLabel, completenessColor } from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const g = $derived(gradeCarePlan(assessment.data));
 	const problemCount = $derived(assessment.data.problems.length);

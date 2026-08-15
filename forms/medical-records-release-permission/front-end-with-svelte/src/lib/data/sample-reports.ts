@@ -1,7 +1,7 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { gradeForm } from '$lib/engine/grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
-import { purposeOptions } from '$lib/engine/validation-rules';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { gradeForm } from '#lib/engine/grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
+import { purposeOptions } from '#lib/engine/validation-rules.js';
 
 /** A sample record: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

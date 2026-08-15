@@ -1,6 +1,6 @@
-import type { AssessmentData, Band, CareSetting } from '$lib/engine/types';
-import { calculateEpdsGrade } from '$lib/engine/epds-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Band, CareSetting } from '#lib/engine/types.js';
+import { calculateEpdsGrade } from '#lib/engine/epds-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,12 +1,12 @@
-import { browser } from '$app/environment';
-import { computeSafetyFlags } from '$lib/checklist/flags.js';
-import { computeStatus } from '$lib/checklist/completion.js';
-import { createEmptyChecklist } from '$lib/checklist/factory.js';
+import { browser } from '$app/env';
+import { computeSafetyFlags } from '#lib/checklist/flags.js';
+import { computeStatus } from '#lib/checklist/completion.js';
+import { createEmptyChecklist } from '#lib/checklist/factory.js';
 import type {
 	ChecklistStatus,
 	SafetyFlag,
 	WhoSurgicalSafetyChecklist
-} from '$lib/checklist/types.js';
+} from '#lib/checklist/types.js';
 
 /** localStorage draft key for a given checklist id (defaults to `new`). */
 function storageKey(id: string): string {

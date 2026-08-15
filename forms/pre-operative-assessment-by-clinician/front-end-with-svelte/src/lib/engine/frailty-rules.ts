@@ -1,4 +1,4 @@
-import type { ClinicianAssessment, FiredRule } from './types.js';
+import type { ClinicianAssessment, FiredRule } from "./types.js";
 
 export function applyFrailtyRules(data: ClinicianAssessment): FiredRule[] {
   const cfs = data.functionalCapacity.clinicalFrailtyScale;
@@ -6,9 +6,9 @@ export function applyFrailtyRules(data: ClinicianAssessment): FiredRule[] {
   return [
     {
       ruleId: `R-CFS-${cfs}`,
-      instrument: 'frailty',
+      instrument: "frailty",
       grade: String(cfs),
-      category: 'functional',
+      category: "functional",
       description: `Clinical Frailty Scale ${cfs}`,
     },
   ];

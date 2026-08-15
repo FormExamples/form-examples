@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { das28Label, das28Color } from '$lib/engine/utils';
+	import { das28Label, das28Color } from '#lib/engine/utils.js';
 
 	let {
 		score

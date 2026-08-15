@@ -1,6 +1,6 @@
-import type { AssessmentData, FlagPriority } from '$lib/engine/types';
-import { gradeCfar } from '$lib/engine/cfar-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, FlagPriority } from '#lib/engine/types.js';
+import { gradeCfar } from '#lib/engine/cfar-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample encounter: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

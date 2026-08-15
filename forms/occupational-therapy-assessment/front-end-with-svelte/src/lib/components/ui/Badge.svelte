@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { copmScoreLabel, copmScoreColor } from '$lib/engine/utils';
+	import { copmScoreLabel, copmScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score,

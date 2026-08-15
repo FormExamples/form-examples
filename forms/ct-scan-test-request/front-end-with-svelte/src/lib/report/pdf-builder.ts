@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CtScanRequest, GradingResult } from '$lib/engine/types';
+import type { CtScanRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	contrastSafetyLabel,
@@ -9,7 +9,7 @@ import {
 	bodyRegionLabel,
 	indicationLabel,
 	contrastLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

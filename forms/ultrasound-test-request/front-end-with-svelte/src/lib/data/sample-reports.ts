@@ -1,6 +1,6 @@
-import type { RequestRow, UltrasoundRequest } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import type { RequestRow, UltrasoundRequest } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 /** A sample request: an identifier and the full record the engine grades. */
 export interface SampleRequest {

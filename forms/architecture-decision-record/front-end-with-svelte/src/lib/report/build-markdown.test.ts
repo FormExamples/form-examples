@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emptyAdrFormData } from '$lib/types.js';
+import { emptyAdrFormData } from '#lib/types.js';
 import { buildMarkdown } from './build-markdown.js';
 
 describe('buildMarkdown', () => {

@@ -1,7 +1,7 @@
-import type { AssessmentData, Severity } from '$lib/engine/types';
-import { gradeSundowner } from '$lib/engine/sundowner-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
-import { CMAI_ITEM_IDS } from '$lib/engine/cmai-rules';
+import type { AssessmentData, Severity } from '#lib/engine/types.js';
+import { gradeSundowner } from '#lib/engine/sundowner-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
+import { CMAI_ITEM_IDS } from '#lib/engine/cmai-rules.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

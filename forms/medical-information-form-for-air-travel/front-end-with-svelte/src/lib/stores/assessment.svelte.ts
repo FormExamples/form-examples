@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { GradingResult, MedifAssessment } from '$lib/engine/types';
-import { createEmptyAssessment } from '$lib/engine/factory';
+import { browser } from '$app/env';
+import type { GradingResult, MedifAssessment } from '#lib/engine/types.js';
+import { createEmptyAssessment } from '#lib/engine/factory.js';
 
 export const TOTAL_STEPS = 14;
 

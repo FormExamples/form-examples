@@ -4,9 +4,9 @@ import type {
 	GoldGrade,
 	ReviewStatus,
 	ReviewType
-} from '$lib/engine/types';
-import { gradeCopdReview } from '$lib/engine/copd-review-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { gradeCopdReview } from '#lib/engine/copd-review-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample review: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

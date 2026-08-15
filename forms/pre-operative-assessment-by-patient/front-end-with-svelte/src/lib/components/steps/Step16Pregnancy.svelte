@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
 	const p = assessment.data.pregnancy;
 	const yesNo = [

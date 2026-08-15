@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { UrinalysisResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { UrinalysisResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'urinalysis-test-result.front-end-with-svelte.v1';
 

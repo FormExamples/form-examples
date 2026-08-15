@@ -1,11 +1,11 @@
 <script lang="ts">
 	// A single yes/no/unanswered checklist item built from Lily primitives:
 	// Field wraps a RadioGroup of RadioInputs plus an evidence TextAreaInput.
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import RadioInput from '$lib/components/ui/RadioInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import type { ChecklistItem as ChecklistItemType } from '$lib/engine/types';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import RadioInput from '#lib/components/ui/RadioInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import type { ChecklistItem as ChecklistItemType } from '#lib/engine/types.js';
 
 	let {
 		item = $bindable(),

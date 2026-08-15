@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { requestStore } from '$lib/stores/request.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { requestStore } from '#lib/stores/request.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
 	import {
 		appropriatenessLabel,
 		appropriatenessColor,
@@ -18,7 +18,7 @@
 		triageTierColor,
 		recommendationLabel,
 		recommendationColor
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	const d = requestStore.data.triage;
 

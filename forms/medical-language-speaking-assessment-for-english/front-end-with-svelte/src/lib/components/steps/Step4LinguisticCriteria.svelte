@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { linguisticTotal, LINGUISTIC_MAX } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { linguisticTotal, LINGUISTIC_MAX } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.linguisticCriteria;
 	const bands = [0, 1, 2, 3, 4, 5, 6];

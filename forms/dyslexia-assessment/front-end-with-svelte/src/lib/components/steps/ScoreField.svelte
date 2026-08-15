@@ -1,9 +1,9 @@
 <script lang="ts">
 	// Step-local convenience wrapper: a standardised-score number input (mean
 	// 100, SD 15) with an auto-derived band + severity readout.
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import { scoreBandLabel, scoreSeverity, severityLabel } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import { scoreBandLabel, scoreSeverity, severityLabel } from '#lib/engine/utils.js';
 
 	let {
 		label,

@@ -1,4 +1,4 @@
-import type { IssueTrackerAssessment } from '$lib/engine/types';
+import type { IssueTrackerAssessment } from '#lib/engine/types.js';
 
 /** One wizard step, bound to a top-level section of the issue data model. */
 export interface StepConfig {

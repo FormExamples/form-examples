@@ -4,17 +4,17 @@
 	// differs from the computed urgency), and the electronic signature. Safety
 	// flags are computed independently of the override and are always shown —
 	// see doc/safety-case-notes.md hazard H-01.
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import { OPTIONS } from '$lib/config/options';
-	import { URGENCY_LABELS, RECOMMENDATION_LABELS } from '$lib/engine/grader';
-	import { titleCase } from '$lib/engine/utils';
-	import { evaluationStore } from '$lib/stores/assessment.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import { OPTIONS } from '#lib/config/options.js';
+	import { URGENCY_LABELS, RECOMMENDATION_LABELS } from '#lib/engine/grader.js';
+	import { titleCase } from '#lib/engine/utils.js';
+	import { evaluationStore } from '#lib/stores/assessment.svelte.js';
 
 	const d = evaluationStore.data;
 	const result = $derived(evaluationStore.result);

@@ -1,11 +1,11 @@
 <script lang="ts">
 	// Graded domain step: renders one 1-5 Likert item per survey item in the
 	// 'wellbeing' domain, bound to the live store section.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { DOMAINS, surveyItems } from '$lib/engine/rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import LikertItem from '$lib/components/ui/LikertItem.svelte';
-	import type { LikertValue } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { DOMAINS, surveyItems } from '#lib/engine/rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import LikertItem from '#lib/components/ui/LikertItem.svelte';
+	import type { LikertValue } from '#lib/engine/types.js';
 
 	const meta = DOMAINS.find((dm) => dm.key === 'wellbeing')!;
 	const items = surveyItems.filter((it) => it.domain === 'wellbeing');

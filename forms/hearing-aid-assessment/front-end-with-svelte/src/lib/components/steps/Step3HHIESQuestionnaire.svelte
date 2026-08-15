@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { hhiesQuestions, hhiesResponseOptions } from '$lib/engine/hhies-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { HHIESScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { hhiesQuestions, hhiesResponseOptions } from '#lib/engine/hhies-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { HHIESScore } from '#lib/engine/types.js';
 
 	const q = assessment.data.hhiesQuestionnaire;
 

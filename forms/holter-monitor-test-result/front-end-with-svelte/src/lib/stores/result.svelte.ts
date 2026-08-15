@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { HolterMonitorResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { HolterMonitorResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'holter-monitor-test-result.front-end-with-svelte.v1';
 

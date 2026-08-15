@@ -1,4 +1,4 @@
-import type { Lpa, ValidityBand } from '$lib/types.js';
+import type { Lpa, ValidityBand } from '#lib/types.js';
 
 // Derive the validity band from signature presence and registration
 // state. The band is independent of the rule-firing output and is used

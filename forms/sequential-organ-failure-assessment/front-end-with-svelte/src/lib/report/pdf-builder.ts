@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult, SubScore } from '$lib/engine/types';
+import type { AssessmentData, GradingResult, SubScore } from '#lib/engine/types.js';
 import {
 	mortalityBandLabel,
 	priorityLabel,
@@ -9,7 +9,7 @@ import {
 	suspectedInfectionLabel,
 	respiratorySupportLabel,
 	vasopressorLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 function subScoreText(s: SubScore): string {
 	return s === null ? '—' : String(s);

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildMarkdown } from './build-markdown.js';
 import { parseMarkdown } from './parse-markdown.js';
-import { emptyAdrFormData } from '$lib/types.js';
+import { emptyAdrFormData } from '#lib/types.js';
 
 describe('parseMarkdown', () => {
   it('round-trips a full ADR through buildMarkdown', () => {

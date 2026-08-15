@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		categoryLabel,
 		categoryColor,
@@ -15,10 +15,10 @@
 		ROLE_LEVEL_OPTIONS,
 		WORK_LOCATION_OPTIONS,
 		RECOMMEND_OPTIONS
-	} from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import type { GradedDomainKey } from '$lib/engine/types';
+	} from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import type { GradedDomainKey } from '#lib/engine/types.js';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

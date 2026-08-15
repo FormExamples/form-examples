@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mcasScoreLabel, mcasScoreColor } from '$lib/engine/utils';
+	import { mcasScoreLabel, mcasScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

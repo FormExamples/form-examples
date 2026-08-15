@@ -1,7 +1,7 @@
-import type { AssessmentData, Outcome } from '$lib/engine/types';
-import { gradeSafety } from '$lib/engine/safety-grader';
-import { countFindings } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Outcome } from '#lib/engine/types.js';
+import { gradeSafety } from '#lib/engine/safety-grader.js';
+import { countFindings } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

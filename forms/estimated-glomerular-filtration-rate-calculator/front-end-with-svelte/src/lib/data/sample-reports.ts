@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, GStage } from '$lib/engine/types';
-import { calculateEgfr } from '$lib/engine/egfr-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, GStage } from '#lib/engine/types.js';
+import { calculateEgfr } from '#lib/engine/egfr-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

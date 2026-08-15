@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeMentalHealthActAssessment } from '$lib/engine/mha-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeMentalHealthActAssessment } from '#lib/engine/mha-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Professionals from '$lib/components/steps/Step3Professionals.svelte';
-	import Step4MentalDisorder from '$lib/components/steps/Step4MentalDisorder.svelte';
-	import Step5Risk from '$lib/components/steps/Step5Risk.svelte';
-	import Step6LeastRestrictive from '$lib/components/steps/Step6LeastRestrictive.svelte';
-	import Step7Treatment from '$lib/components/steps/Step7Treatment.svelte';
-	import Step8NearestRelative from '$lib/components/steps/Step8NearestRelative.svelte';
-	import Step9Recommendation from '$lib/components/steps/Step9Recommendation.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Professionals from '#lib/components/steps/Step3Professionals.svelte';
+	import Step4MentalDisorder from '#lib/components/steps/Step4MentalDisorder.svelte';
+	import Step5Risk from '#lib/components/steps/Step5Risk.svelte';
+	import Step6LeastRestrictive from '#lib/components/steps/Step6LeastRestrictive.svelte';
+	import Step7Treatment from '#lib/components/steps/Step7Treatment.svelte';
+	import Step8NearestRelative from '#lib/components/steps/Step8NearestRelative.svelte';
+	import Step9Recommendation from '#lib/components/steps/Step9Recommendation.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

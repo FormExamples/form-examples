@@ -1,5 +1,5 @@
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { controlLevelLabel, calculateAge } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { controlLevelLabel, calculateAge } from '#lib/engine/utils.js';
 
 /** Build the pdfmake document definition for a diabetes assessment report. */
 export function buildPdfDocument(data: AssessmentData, result: GradingResult) {

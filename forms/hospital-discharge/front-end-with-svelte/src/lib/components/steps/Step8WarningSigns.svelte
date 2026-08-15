@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import RedFlagEntry from '$lib/components/ui/RedFlagEntry.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import RedFlagEntry from '#lib/components/ui/RedFlagEntry.svelte';
 
 	const d = assessment.data.warningSigns;
 

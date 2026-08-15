@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ipssScoreLabel, ipssScoreColor } from '$lib/engine/utils';
+	import { ipssScoreLabel, ipssScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

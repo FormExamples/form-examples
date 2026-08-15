@@ -1,4 +1,4 @@
-import type { CompositeRisk, DecisionMode, RulePriority, FlagPriority } from '$lib/types.js';
+import type { CompositeRisk, DecisionMode, RulePriority, FlagPriority } from '#lib/types.js';
 
 /** Human-readable label for an LP1F decision mode. */
 export function decisionModeLabel(mode: string): string {

@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import { emptyLpaApplication } from '$lib/engine/factory.js';
-import { calculateLpaValidity } from '$lib/engine/composite-validator.js';
-import type { LpaApplication, LpaValidityResult } from '$lib/engine/types.js';
+import { browser } from '$app/env';
+import { emptyLpaApplication } from '#lib/engine/factory.js';
+import { calculateLpaValidity } from '#lib/engine/composite-validator.js';
+import type { LpaApplication, LpaValidityResult } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given LPA id (defaults to `new`). */
 function storageKey(id: string): string {

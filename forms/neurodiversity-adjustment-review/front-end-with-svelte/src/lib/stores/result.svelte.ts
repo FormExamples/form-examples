@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { NeurodiversityAdjustmentReview, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { NeurodiversityAdjustmentReview, GradingResult } from '#lib/engine/types.js';
 
 /** Per-id localStorage draft key (default id `new`). */
 function storageKey(id: string): string {
@@ -80,7 +80,7 @@ class ReviewStore {
 		this.id = id || 'new';
 		this.result = null;
 		this.currentStep = 1;
-		let next = { ...createDefaultReview(), ...(seed ?? {}) };
+		let next = { ...createDefaultReview(), ...seed ?? {} };
 		if (browser) {
 			const raw = localStorage.getItem(storageKey(this.id));
 			if (raw) {

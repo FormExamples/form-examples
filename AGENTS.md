@@ -91,6 +91,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/svelte-helpers-picker-rename [--check|--apply]` — rename the four Svelte helper controls from `*-chooser` to `*-picker` names, matching upstream's `*-chooser` → `*-picker` package rename ("to harmonize with Adobe"; reads fresh component source from the pinned checkout at apply time); `--check` is the CI drift detector
 - `bin/html-helpers-picker-rename [--check|--apply]` — the HTML-side half of the same rename: `text-size-chooser`→`text-size-picker`, `share-chooser`→`share-picker`. `#theme-select`/`#locale-select` are untouched (they mirror the unrelated, never-renamed catalog components); `--check` is the CI drift detector
 - `bin/svelte-test-result-theming-backport [--check|--apply] [--lily-dir PATH]` — one-shot: backport the gold-standard Lily theme system (oklch tokens, `static/themes/`, ThemeSelect) to the `*-test-result` family, which predates the theming rollout; run `bin/svelte-locale-select-refactor` afterwards
+- `bin/svelte-kit-3-theme-url-fix.py [--check|--apply]` — one-shot: fix the `sv migrate sveltekit-3` codemod's fleet-wide `themesUrl={resolve(\`themes/\`)}` mistake in every form's root `+layout.svelte` (SvelteKit 3's typed `resolve()`/`asset()` can't express a runtime-selected theme-directory prefix; no form configures `kit.paths.base`, so the pre-migration value was always the literal `/themes/`) and delete the resolved `MIGRATION_TASKS.md`; `--check` is the CI drift detector
 
 ### Specs
 
@@ -201,6 +202,7 @@ bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/svelte-locale-select-refactor --check      # Svelte LocaleSelect drift detector
 bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector (also re-syncs theme CSS)
 bin/svelte-theme-css-sync --check              # Svelte theme CSS re-sync drift detector
+bin/svelte-kit-3-theme-url-fix.py --check      # Svelte sv-migrate themesUrl-fix drift detector (one-shot)
 bin/svelte-date-time-picker-vendor --check     # Svelte date-time-picker vendor drift detector (vendor-only, unwired)
 bin/html-date-time-picker-vendor --check       # HTML date-time-picker vendor drift detector (vendor-only, unwired)
 bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/anaesthetic-record-grader';
-	import { statusLabel, statusColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/anaesthetic-record-grader.js';
+	import { statusLabel, statusColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const s = assessment.data.signoff;
 	const d = assessment.data;

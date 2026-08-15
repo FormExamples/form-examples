@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { satisfactionQuestions, likertResponseOptions } from '$lib/engine/satisfaction-questions';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import type { LikertScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { satisfactionQuestions, likertResponseOptions } from '#lib/engine/satisfaction-questions.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import type { LikertScore } from '#lib/engine/types.js';
 
 	const section = assessment.data.staffProfessionalism;
 	const questions = satisfactionQuestions.filter((q) => q.domain === 'Staff & Professionalism');

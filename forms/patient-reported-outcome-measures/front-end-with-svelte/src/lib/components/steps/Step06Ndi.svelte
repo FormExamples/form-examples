@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import type { NdiResponse } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import type { NdiResponse } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import ScaleItemField from './ScaleItemField.svelte';
 
 	const n = assessment.data.ndi;

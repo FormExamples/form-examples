@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { scoreRenal } from '$lib/engine/sofa-rules';
-	import { subScoreColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { scoreRenal } from '#lib/engine/sofa-rules.js';
+	import { subScoreColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const r = assessment.data.renal;
 	const sub = $derived(scoreRenal(assessment.data).score);

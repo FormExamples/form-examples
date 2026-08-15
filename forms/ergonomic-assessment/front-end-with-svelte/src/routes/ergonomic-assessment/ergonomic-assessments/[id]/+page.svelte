@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeAssessment } from '$lib/engine/reba-grader';
-	import { steps } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeAssessment } from '#lib/engine/reba-grader.js';
+	import { steps } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2WorkstationSetup from '$lib/components/steps/Step2WorkstationSetup.svelte';
-	import Step3PostureAssessment from '$lib/components/steps/Step3PostureAssessment.svelte';
-	import Step4RepetitiveTasks from '$lib/components/steps/Step4RepetitiveTasks.svelte';
-	import Step5ManualHandling from '$lib/components/steps/Step5ManualHandling.svelte';
-	import Step6CurrentSymptoms from '$lib/components/steps/Step6CurrentSymptoms.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2WorkstationSetup from '#lib/components/steps/Step2WorkstationSetup.svelte';
+	import Step3PostureAssessment from '#lib/components/steps/Step3PostureAssessment.svelte';
+	import Step4RepetitiveTasks from '#lib/components/steps/Step4RepetitiveTasks.svelte';
+	import Step5ManualHandling from '#lib/components/steps/Step5ManualHandling.svelte';
+	import Step6CurrentSymptoms from '#lib/components/steps/Step6CurrentSymptoms.svelte';
 
 	// Only the six implemented sections are rendered as the wizard.
 	const wizardSteps = steps.slice(0, 6);

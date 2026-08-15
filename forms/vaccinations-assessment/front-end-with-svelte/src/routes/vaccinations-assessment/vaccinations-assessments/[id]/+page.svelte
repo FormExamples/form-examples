@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateVaccinationStatus } from '$lib/engine/vaccination-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateVaccinationStatus } from '#lib/engine/vaccination-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientInformation from '$lib/components/steps/Step1PatientInformation.svelte';
-	import Step2ImmunizationHistory from '$lib/components/steps/Step2ImmunizationHistory.svelte';
-	import Step3ChildhoodVaccinations from '$lib/components/steps/Step3ChildhoodVaccinations.svelte';
-	import Step4AdultVaccinations from '$lib/components/steps/Step4AdultVaccinations.svelte';
-	import Step5TravelVaccinations from '$lib/components/steps/Step5TravelVaccinations.svelte';
-	import Step6OccupationalVaccinations from '$lib/components/steps/Step6OccupationalVaccinations.svelte';
-	import Step7ContraindicationsAllergies from '$lib/components/steps/Step7ContraindicationsAllergies.svelte';
-	import Step8ConsentInformation from '$lib/components/steps/Step8ConsentInformation.svelte';
-	import Step9AdministrationRecord from '$lib/components/steps/Step9AdministrationRecord.svelte';
-	import Step10ClinicalReview from '$lib/components/steps/Step10ClinicalReview.svelte';
+	import Step1PatientInformation from '#lib/components/steps/Step1PatientInformation.svelte';
+	import Step2ImmunizationHistory from '#lib/components/steps/Step2ImmunizationHistory.svelte';
+	import Step3ChildhoodVaccinations from '#lib/components/steps/Step3ChildhoodVaccinations.svelte';
+	import Step4AdultVaccinations from '#lib/components/steps/Step4AdultVaccinations.svelte';
+	import Step5TravelVaccinations from '#lib/components/steps/Step5TravelVaccinations.svelte';
+	import Step6OccupationalVaccinations from '#lib/components/steps/Step6OccupationalVaccinations.svelte';
+	import Step7ContraindicationsAllergies from '#lib/components/steps/Step7ContraindicationsAllergies.svelte';
+	import Step8ConsentInformation from '#lib/components/steps/Step8ConsentInformation.svelte';
+	import Step9AdministrationRecord from '#lib/components/steps/Step9AdministrationRecord.svelte';
+	import Step10ClinicalReview from '#lib/components/steps/Step10ClinicalReview.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

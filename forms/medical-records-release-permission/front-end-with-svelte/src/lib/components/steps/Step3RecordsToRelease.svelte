@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { recordTypeOptions } from '$lib/engine/validation-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { recordTypeOptions } from '#lib/engine/validation-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.recordsToRelease;
 

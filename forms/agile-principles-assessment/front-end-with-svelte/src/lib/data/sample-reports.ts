@@ -1,6 +1,6 @@
-import type { AgileAssessment, Maturity } from '$lib/engine/types.js';
-import { calculateMaturity } from '$lib/engine/composite-grader.js';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte.js';
+import type { AgileAssessment, Maturity } from '#lib/engine/types.js';
+import { calculateMaturity } from '#lib/engine/composite-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

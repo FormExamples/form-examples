@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { request } from '$lib/stores/request.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
-	const s = request.data.safety;
+	const s = $state(request.data.safety);
 </script>
 
 <Fieldset legend="Validity and safety">

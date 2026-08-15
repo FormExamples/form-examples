@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateWaterlowGrade } from '$lib/engine/waterlow-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateWaterlowGrade } from '#lib/engine/waterlow-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3CoreCategories from '$lib/components/steps/Step3CoreCategories.svelte';
-	import Step4SpecialRisk from '$lib/components/steps/Step4SpecialRisk.svelte';
-	import Step5Summary from '$lib/components/steps/Step5Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3CoreCategories from '#lib/components/steps/Step3CoreCategories.svelte';
+	import Step4SpecialRisk from '#lib/components/steps/Step4SpecialRisk.svelte';
+	import Step5Summary from '#lib/components/steps/Step5Summary.svelte';
 
 	const plural = 'waterlow-pressure-ulcer-risk-assessments';
 

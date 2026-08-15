@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ukmecLabel, ukmecColor } from '$lib/engine/utils';
-	import type { UKMECCategory } from '$lib/engine/types';
+	import { ukmecLabel, ukmecColor } from '#lib/engine/utils.js';
+	import type { UKMECCategory } from '#lib/engine/types.js';
 
 	let {
 		category

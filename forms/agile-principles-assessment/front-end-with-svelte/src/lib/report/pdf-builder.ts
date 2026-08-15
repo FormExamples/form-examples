@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { AgileAssessment, GradingResult } from '$lib/engine/types.js';
-import { PRINCIPLES } from '$lib/config/principles.js';
+import type { AgileAssessment, GradingResult } from '#lib/engine/types.js';
+import { PRINCIPLES } from '#lib/config/principles.js';
 
 /** Build the pdfmake document definition for an agile-principles report. */
 export function buildPdfDocument(data: AgileAssessment, result: GradingResult): TDocumentDefinitions {

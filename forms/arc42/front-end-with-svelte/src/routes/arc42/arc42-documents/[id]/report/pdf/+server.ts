@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDocDefinition } from '$lib/report/pdf-builder';
-import type { Arc42Documentation, MaturityResult } from '$lib/grading/types';
+import { buildPdfDocDefinition } from '#lib/report/pdf-builder.js';
+import type { Arc42Documentation, MaturityResult } from '#lib/grading/types.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { data, result } = (await request.json()) as {

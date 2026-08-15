@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import { emptyAdrFormData, type AdrFormData } from '$lib/types.js';
-import { evaluateAdr } from '$lib/engine/adr-engine';
-import type { AdrEvaluation } from '$lib/engine/types';
+import { browser } from '$app/env';
+import { emptyAdrFormData, type AdrFormData } from '#lib/types.js';
+import { evaluateAdr } from '#lib/engine/adr-engine.js';
+import type { AdrEvaluation } from '#lib/engine/types.js';
 
 /** A blank ADR draft with every field at its unanswered default. */
 export function createDefaultAdrFormData(): AdrFormData {

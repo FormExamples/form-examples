@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeSafety } from '$lib/engine/safety-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeSafety } from '#lib/engine/safety-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1SiteDetails from '$lib/components/steps/Step1SiteDetails.svelte';
-	import Step2PPEHazardControls from '$lib/components/steps/Step2PPEHazardControls.svelte';
-	import Step3ChemicalBiologicalHazards from '$lib/components/steps/Step3ChemicalBiologicalHazards.svelte';
-	import Step4ElectricalSafety from '$lib/components/steps/Step4ElectricalSafety.svelte';
-	import Step5FireSafety from '$lib/components/steps/Step5FireSafety.svelte';
-	import Step6ErgonomicsManualHandling from '$lib/components/steps/Step6ErgonomicsManualHandling.svelte';
-	import Step7EmergencyProcedures from '$lib/components/steps/Step7EmergencyProcedures.svelte';
-	import Step8TrainingCompetence from '$lib/components/steps/Step8TrainingCompetence.svelte';
-	import Step9IncidentReporting from '$lib/components/steps/Step9IncidentReporting.svelte';
-	import Step10SignoffActionPlan from '$lib/components/steps/Step10SignoffActionPlan.svelte';
+	import Step1SiteDetails from '#lib/components/steps/Step1SiteDetails.svelte';
+	import Step2PPEHazardControls from '#lib/components/steps/Step2PPEHazardControls.svelte';
+	import Step3ChemicalBiologicalHazards from '#lib/components/steps/Step3ChemicalBiologicalHazards.svelte';
+	import Step4ElectricalSafety from '#lib/components/steps/Step4ElectricalSafety.svelte';
+	import Step5FireSafety from '#lib/components/steps/Step5FireSafety.svelte';
+	import Step6ErgonomicsManualHandling from '#lib/components/steps/Step6ErgonomicsManualHandling.svelte';
+	import Step7EmergencyProcedures from '#lib/components/steps/Step7EmergencyProcedures.svelte';
+	import Step8TrainingCompetence from '#lib/components/steps/Step8TrainingCompetence.svelte';
+	import Step9IncidentReporting from '#lib/components/steps/Step9IncidentReporting.svelte';
+	import Step10SignoffActionPlan from '#lib/components/steps/Step10SignoffActionPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

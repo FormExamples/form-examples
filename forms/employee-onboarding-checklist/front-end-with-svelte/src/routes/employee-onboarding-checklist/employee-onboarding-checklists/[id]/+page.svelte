@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateOnboardingGrade } from '$lib/engine/onboarding-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateOnboardingGrade } from '#lib/engine/onboarding-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2PreEmploymentChecks from '$lib/components/steps/Step2PreEmploymentChecks.svelte';
-	import Step3OccupationalHealth from '$lib/components/steps/Step3OccupationalHealth.svelte';
-	import Step4MandatoryTraining from '$lib/components/steps/Step4MandatoryTraining.svelte';
-	import Step5ProfessionalRegistration from '$lib/components/steps/Step5ProfessionalRegistration.svelte';
-	import Step6ITSystemsAccess from '$lib/components/steps/Step6ITSystemsAccess.svelte';
-	import Step7UniformIDBadge from '$lib/components/steps/Step7UniformIDBadge.svelte';
-	import Step8InductionProgramme from '$lib/components/steps/Step8InductionProgramme.svelte';
-	import Step9ProbationSupervision from '$lib/components/steps/Step9ProbationSupervision.svelte';
-	import Step10SignOffCompliance from '$lib/components/steps/Step10SignOffCompliance.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2PreEmploymentChecks from '#lib/components/steps/Step2PreEmploymentChecks.svelte';
+	import Step3OccupationalHealth from '#lib/components/steps/Step3OccupationalHealth.svelte';
+	import Step4MandatoryTraining from '#lib/components/steps/Step4MandatoryTraining.svelte';
+	import Step5ProfessionalRegistration from '#lib/components/steps/Step5ProfessionalRegistration.svelte';
+	import Step6ITSystemsAccess from '#lib/components/steps/Step6ITSystemsAccess.svelte';
+	import Step7UniformIDBadge from '#lib/components/steps/Step7UniformIDBadge.svelte';
+	import Step8InductionProgramme from '#lib/components/steps/Step8InductionProgramme.svelte';
+	import Step9ProbationSupervision from '#lib/components/steps/Step9ProbationSupervision.svelte';
+	import Step10SignOffCompliance from '#lib/components/steps/Step10SignOffCompliance.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

@@ -1,6 +1,6 @@
-import type { AssessmentData, CareLocation, MortalityBand } from '$lib/engine/types';
-import { calculateSofaGrade } from '$lib/engine/sofa-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareLocation, MortalityBand } from '#lib/engine/types.js';
+import { calculateSofaGrade } from '#lib/engine/sofa-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

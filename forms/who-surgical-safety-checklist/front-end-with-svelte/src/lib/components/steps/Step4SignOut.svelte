@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { store } from '$lib/stores/checklist.svelte.js';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { store } from '#lib/stores/checklist.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const c = store.data;
 

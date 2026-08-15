@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 	import {
 		effectivenessBandLabel,
 		wellbeingRiskBandLabel,
 		nextStepUrgencyLabel,
 		reviewStatusLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	let effectivenessFilter = $state('');
 	let urgencyFilter = $state('');
@@ -26,7 +26,7 @@
 	// filters, so slicing by effectiveness or urgency re-scopes the metrics.
 	const cards = $derived.by(() => {
 		const total = rows.length;
-		const pct = (n: number) => (total === 0 ? 0 : Math.round((n / total) * 100));
+		const pct = (n: number) => total === 0 ? 0 : Math.round(n / total * 100);
 		const c = (pred: (r: (typeof rows)[number]) => boolean) => rows.filter(pred).length;
 		const effective = pct(c((r) => r.effectivenessBand === 'effective'));
 		const ineffective = pct(c((r) => r.effectivenessBand === 'ineffective'));
@@ -37,8 +37,18 @@
 				: Math.round(rows.reduce((a, r) => a + (r.completenessPercent || 0), 0) / total);
 		return [
 			{ label: 'Reviews in view', value: String(total), cls: '' },
-			{ label: 'Effective', value: effective + '%', cls: effective ? 'text-success' : '' },
-			{ label: 'Ineffective', value: ineffective + '%', cls: ineffective ? 'text-error' : '' },
+			{
+				label: 'Effective',
+				value: effective + '%',
+				cls: effective ? 'text-success' : ''
+			},
+
+			{
+				label: 'Ineffective',
+				value: ineffective + '%',
+				cls: ineffective ? 'text-error' : ''
+			},
+
 			{
 				label: 'High wellbeing risk',
 				value: highRisk + '%',
@@ -64,7 +74,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -167,11 +177,10 @@
 		</div>
 	</section>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} reviews</p>
 </main>

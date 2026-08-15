@@ -1,6 +1,6 @@
-import type { AdrFormData, Status, DecisionGroup } from '$lib/types';
-import { evaluateAdr } from '$lib/engine/adr-engine';
-import { createDefaultAdrFormData } from '$lib/stores/adr.svelte';
+import type { AdrFormData, Status, DecisionGroup } from '#lib/types.js';
+import { evaluateAdr } from '#lib/engine/adr-engine.js';
+import { createDefaultAdrFormData } from '#lib/stores/adr.svelte.js';
 
 /** A sample ADR: an identifier plus the full data the engine evaluates. */
 export interface SampleAdr {

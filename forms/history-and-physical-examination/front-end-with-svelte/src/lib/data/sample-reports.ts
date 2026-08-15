@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, CompletenessStatus } from '$lib/engine/types';
-import { calculateHistoryAndPhysicalGrade } from '$lib/engine/history-and-physical-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, CompletenessStatus } from '#lib/engine/types.js';
+import { calculateHistoryAndPhysicalGrade } from '#lib/engine/history-and-physical-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample clerking: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

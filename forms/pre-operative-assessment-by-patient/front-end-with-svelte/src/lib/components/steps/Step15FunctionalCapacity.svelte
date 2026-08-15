@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { estimateMETs } from '$lib/engine/utils';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { estimateMETs } from '#lib/engine/utils.js';
 
 	const f = assessment.data.functionalCapacity;
 	const yesNo = [

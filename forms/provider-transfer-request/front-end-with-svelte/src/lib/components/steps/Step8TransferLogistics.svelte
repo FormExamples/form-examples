@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import DateTimeInput from '$lib/components/ui/DateTimeInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import DateTimeInput from '#lib/components/ui/DateTimeInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
 	const d = assessment.data.transferLogistics;
 

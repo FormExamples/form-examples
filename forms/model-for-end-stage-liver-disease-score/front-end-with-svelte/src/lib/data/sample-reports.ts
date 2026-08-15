@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, MortalityBand } from '$lib/engine/types';
-import { calculateMeld } from '$lib/engine/meld-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, MortalityBand } from '#lib/engine/types.js';
+import { calculateMeld } from '#lib/engine/meld-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

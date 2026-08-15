@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Immunisation } from '$lib/engine/types';
+	import type { Immunisation } from '#lib/engine/types.js';
 
 	let {
 		immunisations = $bindable<Immunisation[]>([])

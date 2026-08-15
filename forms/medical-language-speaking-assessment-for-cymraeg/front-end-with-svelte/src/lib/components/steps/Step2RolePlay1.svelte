@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import RolePlaySection from './RolePlaySection.svelte';
 </script>
 

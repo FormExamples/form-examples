@@ -1,6 +1,6 @@
-import type { AssessmentData, GoldStage, AbcdGroup } from '$lib/engine/types';
-import { gradeAssessment } from '$lib/engine/gold-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, GoldStage, AbcdGroup } from '#lib/engine/types.js';
+import { gradeAssessment } from '#lib/engine/gold-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

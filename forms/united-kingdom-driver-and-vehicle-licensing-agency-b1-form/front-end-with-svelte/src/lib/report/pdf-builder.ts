@@ -1,11 +1,11 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, FlaggedIssue, ValidationResult } from '$lib/engine/types';
+import type { AssessmentData, FlaggedIssue, ValidationResult } from '#lib/engine/types.js';
 import {
 	calculateAge,
 	countConditionsDeclared,
 	sectionLabel,
 	statusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 /**
  * Build the printable DVLA B1 report definition: a completeness summary, the

@@ -1,6 +1,6 @@
 <script lang="ts">
   // YesNoField — Lily Svelte headless contract (radio-group / radio-input).
-  import type { YesNo } from '$lib/engine/types.js';
+  import type { YesNo } from '#lib/engine/types.js';
   interface Props {
     label: string;
     value: YesNo;

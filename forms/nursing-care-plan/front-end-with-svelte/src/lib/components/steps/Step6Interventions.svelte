@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { createDefaultIntervention } from '$lib/engine/utils';
-	import type { Intervention } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import ListEditor from '$lib/components/ui/ListEditor.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { createDefaultIntervention } from '#lib/engine/utils.js';
+	import type { Intervention } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import ListEditor from '#lib/components/ui/ListEditor.svelte';
 
 	const data = assessment.data;
 </script>

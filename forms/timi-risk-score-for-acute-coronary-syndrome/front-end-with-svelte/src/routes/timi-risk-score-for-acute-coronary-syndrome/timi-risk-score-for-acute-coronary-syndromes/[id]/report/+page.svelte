@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		riskBandLabel,
 		riskBandColor,
@@ -12,9 +12,9 @@
 		clinicianRoleLabel,
 		sexLabel,
 		workingDiagnosisLabel
-	} from '$lib/engine/utils';
-	import type { YesNo } from '$lib/engine/types';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import type { YesNo } from '#lib/engine/types.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'timi-risk-score-for-acute-coronary-syndromes';
 

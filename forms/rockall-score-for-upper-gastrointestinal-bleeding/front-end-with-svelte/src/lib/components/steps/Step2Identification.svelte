@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { agePoints } from '$lib/engine/rockall-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { agePoints } from '#lib/engine/rockall-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const p = assessment.data.identification;
 	const point = $derived(agePoints(assessment.data));

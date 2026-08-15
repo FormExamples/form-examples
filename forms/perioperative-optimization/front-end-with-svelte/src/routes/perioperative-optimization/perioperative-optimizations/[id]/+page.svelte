@@ -4,36 +4,36 @@
 	// per-domain statuses visible throughout, because the time available is the
 	// number the whole assessment turns on.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-	import Form from '$lib/components/ui/Form.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
-	import Step1AssessmentContext from '$lib/components/steps/Step1AssessmentContext.svelte';
-	import Step2PatientAndProcedure from '$lib/components/steps/Step2PatientAndProcedure.svelte';
-	import Step3MedicalHistory from '$lib/components/steps/Step3MedicalHistory.svelte';
-	import Step4Medications from '$lib/components/steps/Step4Medications.svelte';
-	import Step5Allergies from '$lib/components/steps/Step5Allergies.svelte';
-	import Step6AnaemiaAndIronStudies from '$lib/components/steps/Step6AnaemiaAndIronStudies.svelte';
-	import Step7GlycaemicControl from '$lib/components/steps/Step7GlycaemicControl.svelte';
-	import Step8Smoking from '$lib/components/steps/Step8Smoking.svelte';
-	import Step9Alcohol from '$lib/components/steps/Step9Alcohol.svelte';
-	import Step10NutritionalScreening from '$lib/components/steps/Step10NutritionalScreening.svelte';
-	import Step11PhysicalFitness from '$lib/components/steps/Step11PhysicalFitness.svelte';
-	import Step12FrailtyAndCognition from '$lib/components/steps/Step12FrailtyAndCognition.svelte';
-	import Step13Cardiorespiratory from '$lib/components/steps/Step13Cardiorespiratory.svelte';
-	import Step14ReadinessAndSupport from '$lib/components/steps/Step14ReadinessAndSupport.svelte';
-	import Step15OptimisationPlan from '$lib/components/steps/Step15OptimisationPlan.svelte';
-	import Step16SummaryAndSignOff from '$lib/components/steps/Step16SummaryAndSignOff.svelte';
+	import Step1AssessmentContext from '#lib/components/steps/Step1AssessmentContext.svelte';
+	import Step2PatientAndProcedure from '#lib/components/steps/Step2PatientAndProcedure.svelte';
+	import Step3MedicalHistory from '#lib/components/steps/Step3MedicalHistory.svelte';
+	import Step4Medications from '#lib/components/steps/Step4Medications.svelte';
+	import Step5Allergies from '#lib/components/steps/Step5Allergies.svelte';
+	import Step6AnaemiaAndIronStudies from '#lib/components/steps/Step6AnaemiaAndIronStudies.svelte';
+	import Step7GlycaemicControl from '#lib/components/steps/Step7GlycaemicControl.svelte';
+	import Step8Smoking from '#lib/components/steps/Step8Smoking.svelte';
+	import Step9Alcohol from '#lib/components/steps/Step9Alcohol.svelte';
+	import Step10NutritionalScreening from '#lib/components/steps/Step10NutritionalScreening.svelte';
+	import Step11PhysicalFitness from '#lib/components/steps/Step11PhysicalFitness.svelte';
+	import Step12FrailtyAndCognition from '#lib/components/steps/Step12FrailtyAndCognition.svelte';
+	import Step13Cardiorespiratory from '#lib/components/steps/Step13Cardiorespiratory.svelte';
+	import Step14ReadinessAndSupport from '#lib/components/steps/Step14ReadinessAndSupport.svelte';
+	import Step15OptimisationPlan from '#lib/components/steps/Step15OptimisationPlan.svelte';
+	import Step16SummaryAndSignOff from '#lib/components/steps/Step16SummaryAndSignOff.svelte';
 
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { DOMAIN_LABELS } from '$lib/engine/domain-rules';
-	import { READINESS_LABELS, STATUS_LABELS } from '$lib/engine/labels';
-	import { assessmentStore } from '$lib/stores/assessment.svelte';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { DOMAIN_LABELS } from '#lib/engine/domain-rules.js';
+	import { READINESS_LABELS, STATUS_LABELS } from '#lib/engine/labels.js';
+	import { assessmentStore } from '#lib/stores/assessment.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

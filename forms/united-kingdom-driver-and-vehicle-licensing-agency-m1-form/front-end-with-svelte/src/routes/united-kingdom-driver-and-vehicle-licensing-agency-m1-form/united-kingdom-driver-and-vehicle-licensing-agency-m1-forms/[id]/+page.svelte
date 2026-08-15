@@ -1,25 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateM1 } from '$lib/engine/m1-validator';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { validateM1 } from '#lib/engine/m1-validator.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PersonalDetails from '$lib/components/steps/Step1PersonalDetails.svelte';
-	import Step2HealthcareProfessionals from '$lib/components/steps/Step2HealthcareProfessionals.svelte';
-	import Step3DiagnosisConfirmation from '$lib/components/steps/Step3DiagnosisConfirmation.svelte';
-	import Step4MentalHealthConditions from '$lib/components/steps/Step4MentalHealthConditions.svelte';
-	import Step5RecentContact from '$lib/components/steps/Step5RecentContact.svelte';
-	import Step6Authorisation from '$lib/components/steps/Step6Authorisation.svelte';
+	import Step1PersonalDetails from '#lib/components/steps/Step1PersonalDetails.svelte';
+	import Step2HealthcareProfessionals from '#lib/components/steps/Step2HealthcareProfessionals.svelte';
+	import Step3DiagnosisConfirmation from '#lib/components/steps/Step3DiagnosisConfirmation.svelte';
+	import Step4MentalHealthConditions from '#lib/components/steps/Step4MentalHealthConditions.svelte';
+	import Step5RecentContact from '#lib/components/steps/Step5RecentContact.svelte';
+	import Step6Authorisation from '#lib/components/steps/Step6Authorisation.svelte';
 
 	const plural = 'united-kingdom-driver-and-vehicle-licensing-agency-m1-forms';
 	const title = 'DVLA M1 — Confidential Medical Information';

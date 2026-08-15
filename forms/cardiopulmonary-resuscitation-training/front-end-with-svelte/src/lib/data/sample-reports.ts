@@ -1,6 +1,6 @@
-import type { AssessmentData, Outcome, TriState } from '$lib/engine/types';
-import { gradeBLS } from '$lib/engine/bls-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Outcome, TriState } from '#lib/engine/types.js';
+import { gradeBLS } from '#lib/engine/bls-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, EuTraumaResult, PeEntry } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { AssessmentData, EuTraumaResult, PeEntry } from '#lib/engine/types.js';
 
 function emptyPe(): PeEntry {
 	return { normal: false, notes: '' };

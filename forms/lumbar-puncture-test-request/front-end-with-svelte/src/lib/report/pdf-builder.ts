@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { LumbarPunctureRequest, GradingResult } from '$lib/engine/types';
+import type { LumbarPunctureRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	contraindicationLabel,
@@ -9,7 +9,7 @@ import {
 	procedureIntentLabel,
 	ctHeadStatusLabel,
 	settingLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

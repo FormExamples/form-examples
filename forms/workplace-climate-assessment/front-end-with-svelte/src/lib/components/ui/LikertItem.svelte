@@ -1,8 +1,8 @@
 <script lang="ts">
 	// LikertItem — a single 1-5 Likert agreement radio group for one survey
 	// item. Emits the Lily fieldset/radio-group class contract.
-	import { LIKERT_AGREEMENT } from '$lib/engine/rules';
-	import type { LikertValue } from '$lib/engine/types';
+	import { LIKERT_AGREEMENT } from '#lib/engine/rules.js';
+	import type { LikertValue } from '#lib/engine/types.js';
 
 	let {
 		id,

@@ -1,6 +1,6 @@
-import type { AssessmentData, CFSScore } from '$lib/engine/types';
-import { gradeAssessment } from '$lib/engine/cfs-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CFSScore } from '#lib/engine/types.js';
+import { gradeAssessment } from '#lib/engine/cfs-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

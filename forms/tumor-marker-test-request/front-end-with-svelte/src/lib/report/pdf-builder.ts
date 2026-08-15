@@ -1,13 +1,13 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { TumorMarkerRequest, GradingResult } from '$lib/engine/types';
+import type { TumorMarkerRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	interpretationLabel,
 	triageTierLabel,
 	recommendationLabel,
 	urgencyLabel
-} from '$lib/engine/utils';
-import { MARKERS, indicationLabel } from '$lib/engine/markers';
+} from '#lib/engine/utils.js';
+import { MARKERS, indicationLabel } from '#lib/engine/markers.js';
 
 type Margin = [number, number, number, number];
 

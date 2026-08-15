@@ -9,10 +9,10 @@ import type {
 	Relationships,
 	RiskLevel,
 	Role
-} from '$lib/engine/types';
-import { gradeStress, DOMAIN_KEYS } from '$lib/engine/stress-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
-import { departmentLabel, tenureBandLabel, domainTitle, riskLevelRank } from '$lib/engine/utils';
+} from '#lib/engine/types.js';
+import { gradeStress, DOMAIN_KEYS } from '#lib/engine/stress-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
+import { departmentLabel, tenureBandLabel, domainTitle, riskLevelRank } from '#lib/engine/utils.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

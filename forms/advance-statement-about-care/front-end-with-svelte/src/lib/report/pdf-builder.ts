@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { StatementData, CompletenessResult } from '$lib/engine/types';
-import { completenessLevelLabel, calculateAge, formatDate, placeLabel } from '$lib/engine/utils';
+import type { StatementData, CompletenessResult } from '#lib/engine/types.js';
+import { completenessLevelLabel, calculateAge, formatDate, placeLabel } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: StatementData,

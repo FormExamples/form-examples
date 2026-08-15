@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { store } from '$lib/stores/fitnote.svelte';
-	import { ASSESSMENT_METHODS } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import YesNo from '$lib/components/ui/YesNo.svelte';
+	import { store } from '#lib/stores/fitnote.svelte.js';
+	import { ASSESSMENT_METHODS } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import YesNo from '#lib/components/ui/YesNo.svelte';
 
 	const d = store.data;
 </script>

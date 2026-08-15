@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, FlaggedIssue } from '$lib/engine/types';
-import type { validateV1 } from '$lib/engine/v1-validator';
+import { browser } from '$app/env';
+import type { AssessmentData, FlaggedIssue } from '#lib/engine/types.js';
+import type { validateV1 } from '#lib/engine/v1-validator.js';
 
 /** Result shape produced by the V1 completeness validator. */
 export type V1ValidationResult = ReturnType<typeof validateV1>;

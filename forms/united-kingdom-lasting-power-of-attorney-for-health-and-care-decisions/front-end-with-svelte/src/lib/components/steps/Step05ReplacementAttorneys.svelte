@@ -1,10 +1,10 @@
 <script lang="ts">
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
-  import { emptyReplacementAttorney } from '$lib/engine/factory.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
+  import { emptyReplacementAttorney } from '#lib/engine/factory.js';
 
   const reps = $derived(lpaStore.application.replacementAttorneys);
   function changed() {

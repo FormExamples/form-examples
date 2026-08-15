@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDoc } from '$lib/report/pdf-builder';
-import type { LpaApplication, LpaValidityResult } from '$lib/engine/types';
+import { buildPdfDoc } from '#lib/report/pdf-builder.js';
+import type { LpaApplication, LpaValidityResult } from '#lib/engine/types.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { application, validity } = (await request.json()) as {

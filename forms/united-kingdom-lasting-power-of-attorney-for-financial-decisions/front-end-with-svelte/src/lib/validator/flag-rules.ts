@@ -1,4 +1,4 @@
-import type { AdditionalFlag, Lpa } from '$lib/types.js';
+import type { AdditionalFlag, Lpa } from '#lib/types.js';
 
 // Non-statutory warning flags. The composite-risk algorithm sets
 // compositeRisk to the worst flag priority when no blocker has fired.

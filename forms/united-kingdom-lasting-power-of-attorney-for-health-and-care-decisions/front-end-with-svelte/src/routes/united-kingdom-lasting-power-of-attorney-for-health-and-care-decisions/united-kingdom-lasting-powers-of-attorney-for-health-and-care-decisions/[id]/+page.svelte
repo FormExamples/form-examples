@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { lpaStore } from '$lib/stores/lpa.svelte';
-	import { STEPS, STEP_COUNT } from '$lib/config/steps';
-	import { sampleLpas } from '$lib/data/sample-reports';
+	import { lpaStore } from '#lib/stores/lpa.svelte.js';
+	import { STEPS, STEP_COUNT } from '#lib/config/steps.js';
+	import { sampleLpas } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01Donor from '$lib/components/steps/Step01Donor.svelte';
-	import Step02Scope from '$lib/components/steps/Step02Scope.svelte';
-	import Step03Attorneys from '$lib/components/steps/Step03Attorneys.svelte';
-	import Step04DecisionRule from '$lib/components/steps/Step04DecisionRule.svelte';
-	import Step05ReplacementAttorneys from '$lib/components/steps/Step05ReplacementAttorneys.svelte';
-	import Step06LifeSustainingTreatment from '$lib/components/steps/Step06LifeSustainingTreatment.svelte';
-	import Step07Preferences from '$lib/components/steps/Step07Preferences.svelte';
-	import Step08Instructions from '$lib/components/steps/Step08Instructions.svelte';
-	import Step09PeopleToNotify from '$lib/components/steps/Step09PeopleToNotify.svelte';
-	import Step10CertificateProvider from '$lib/components/steps/Step10CertificateProvider.svelte';
-	import Step11DonorSignature from '$lib/components/steps/Step11DonorSignature.svelte';
-	import Step12AttorneySignatures from '$lib/components/steps/Step12AttorneySignatures.svelte';
-	import Step13Registration from '$lib/components/steps/Step13Registration.svelte';
+	import Step01Donor from '#lib/components/steps/Step01Donor.svelte';
+	import Step02Scope from '#lib/components/steps/Step02Scope.svelte';
+	import Step03Attorneys from '#lib/components/steps/Step03Attorneys.svelte';
+	import Step04DecisionRule from '#lib/components/steps/Step04DecisionRule.svelte';
+	import Step05ReplacementAttorneys from '#lib/components/steps/Step05ReplacementAttorneys.svelte';
+	import Step06LifeSustainingTreatment from '#lib/components/steps/Step06LifeSustainingTreatment.svelte';
+	import Step07Preferences from '#lib/components/steps/Step07Preferences.svelte';
+	import Step08Instructions from '#lib/components/steps/Step08Instructions.svelte';
+	import Step09PeopleToNotify from '#lib/components/steps/Step09PeopleToNotify.svelte';
+	import Step10CertificateProvider from '#lib/components/steps/Step10CertificateProvider.svelte';
+	import Step11DonorSignature from '#lib/components/steps/Step11DonorSignature.svelte';
+	import Step12AttorneySignatures from '#lib/components/steps/Step12AttorneySignatures.svelte';
+	import Step13Registration from '#lib/components/steps/Step13Registration.svelte';
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 

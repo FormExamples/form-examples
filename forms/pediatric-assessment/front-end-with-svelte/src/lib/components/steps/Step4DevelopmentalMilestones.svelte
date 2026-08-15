@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { formatAge } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { formatAge } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const m = assessment.data.developmentalMilestones;
 	const dob = assessment.data.demographics.dateOfBirth;

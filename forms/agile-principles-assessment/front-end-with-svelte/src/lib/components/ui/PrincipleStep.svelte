@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import { PRINCIPLES } from '$lib/config/principles.js';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import { PRINCIPLES } from '#lib/config/principles.js';
   import LikertScale from './LikertScale.svelte';
 
   let { principleNumber }: { principleNumber: number } = $props();

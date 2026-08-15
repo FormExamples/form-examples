@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { AdditionalFlag, Maturity } from '$lib/engine/types.js';
-  import { maturityColor, maturityLabel } from '$lib/engine/utils.js';
+  import type { AdditionalFlag, Maturity } from '#lib/engine/types.js';
+  import { maturityColor, maturityLabel } from '#lib/engine/utils.js';
 
   let { flags, maturity }: { flags: AdditionalFlag[]; maturity: Maturity } = $props();
 

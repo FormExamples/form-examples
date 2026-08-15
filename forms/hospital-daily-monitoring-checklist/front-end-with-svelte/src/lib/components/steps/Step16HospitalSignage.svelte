@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import ItemRow from '$lib/components/ui/ItemRow.svelte';
-  import { itemsForSection } from '$lib/config/items.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import ItemRow from '#lib/components/ui/ItemRow.svelte';
+  import { itemsForSection } from '#lib/config/items.js';
 
   const items = itemsForSection(15);
 

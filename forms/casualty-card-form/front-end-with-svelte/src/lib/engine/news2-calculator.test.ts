@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateNEWS2 } from './news2-calculator';
 import { detectFlaggedIssues } from './flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import type { VitalSigns } from './types';
 
 function vitals(overrides: Partial<VitalSigns>): VitalSigns {

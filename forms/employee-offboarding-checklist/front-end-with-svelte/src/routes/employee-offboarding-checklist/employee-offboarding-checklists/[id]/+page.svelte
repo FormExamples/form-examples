@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateChecklist } from '$lib/engine/checklist-validator';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { validateChecklist } from '#lib/engine/checklist-validator.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1EmployeeDetails from '$lib/components/steps/Step1EmployeeDetails.svelte';
-	import Step2ExitInterview from '$lib/components/steps/Step2ExitInterview.svelte';
-	import Step3KnowledgeTransfer from '$lib/components/steps/Step3KnowledgeTransfer.svelte';
-	import Step4EquipmentReturn from '$lib/components/steps/Step4EquipmentReturn.svelte';
-	import Step5AccessRevocation from '$lib/components/steps/Step5AccessRevocation.svelte';
-	import Step6FinalPayrollBenefits from '$lib/components/steps/Step6FinalPayrollBenefits.svelte';
-	import Step7ReferencesRecommendations from '$lib/components/steps/Step7ReferencesRecommendations.svelte';
-	import Step8NonDisclosurePostEmployment from '$lib/components/steps/Step8NonDisclosurePostEmployment.svelte';
-	import Step9ForwardingDetails from '$lib/components/steps/Step9ForwardingDetails.svelte';
-	import Step10Signoff from '$lib/components/steps/Step10Signoff.svelte';
+	import Step1EmployeeDetails from '#lib/components/steps/Step1EmployeeDetails.svelte';
+	import Step2ExitInterview from '#lib/components/steps/Step2ExitInterview.svelte';
+	import Step3KnowledgeTransfer from '#lib/components/steps/Step3KnowledgeTransfer.svelte';
+	import Step4EquipmentReturn from '#lib/components/steps/Step4EquipmentReturn.svelte';
+	import Step5AccessRevocation from '#lib/components/steps/Step5AccessRevocation.svelte';
+	import Step6FinalPayrollBenefits from '#lib/components/steps/Step6FinalPayrollBenefits.svelte';
+	import Step7ReferencesRecommendations from '#lib/components/steps/Step7ReferencesRecommendations.svelte';
+	import Step8NonDisclosurePostEmployment from '#lib/components/steps/Step8NonDisclosurePostEmployment.svelte';
+	import Step9ForwardingDetails from '#lib/components/steps/Step9ForwardingDetails.svelte';
+	import Step10Signoff from '#lib/components/steps/Step10Signoff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

@@ -3,26 +3,26 @@
 	import { page } from '$app/state';
 	import { formState } from '$stores/formState.svelte';
 	import { gradeObjective } from '$engine/composite-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleObjectives } from '$lib/data/sample-reports';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleObjectives } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01ReporterAndCycle.svelte';
-	import Step02 from '$lib/components/steps/Step02Objective.svelte';
-	import Step03 from '$lib/components/steps/Step03Participants.svelte';
-	import Step04 from '$lib/components/steps/Step04StrategicAlignment.svelte';
-	import Step05 from '$lib/components/steps/Step05KeyResults.svelte';
-	import Step06 from '$lib/components/steps/Step06Initiatives.svelte';
-	import Step07 from '$lib/components/steps/Step07Risks.svelte';
-	import Step08 from '$lib/components/steps/Step08CheckIn.svelte';
-	import Step09 from '$lib/components/steps/Step09Forecast.svelte';
-	import Step10 from '$lib/components/steps/Step10ScoreAndSignOff.svelte';
+	import Step01 from '#lib/components/steps/Step01ReporterAndCycle.svelte';
+	import Step02 from '#lib/components/steps/Step02Objective.svelte';
+	import Step03 from '#lib/components/steps/Step03Participants.svelte';
+	import Step04 from '#lib/components/steps/Step04StrategicAlignment.svelte';
+	import Step05 from '#lib/components/steps/Step05KeyResults.svelte';
+	import Step06 from '#lib/components/steps/Step06Initiatives.svelte';
+	import Step07 from '#lib/components/steps/Step07Risks.svelte';
+	import Step08 from '#lib/components/steps/Step08CheckIn.svelte';
+	import Step09 from '#lib/components/steps/Step09Forecast.svelte';
+	import Step10 from '#lib/components/steps/Step10ScoreAndSignOff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

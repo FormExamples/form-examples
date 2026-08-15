@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/documentation.svelte';
+	import { store } from '#lib/stores/documentation.svelte.js';
 	import {
 		maturityLabel,
 		maturityColor,
 		completenessLabel,
 		completenessColor,
 		recommendationLabel
-	} from '$lib/grading/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/grading/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

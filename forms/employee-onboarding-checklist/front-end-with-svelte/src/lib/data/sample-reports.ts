@@ -1,6 +1,6 @@
-import type { AssessmentData, CompletionStatus, RiskLevel } from '$lib/engine/types';
-import { calculateOnboardingGrade } from '$lib/engine/onboarding-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletionStatus, RiskLevel } from '#lib/engine/types.js';
+import { calculateOnboardingGrade } from '#lib/engine/onboarding-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample checklist: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

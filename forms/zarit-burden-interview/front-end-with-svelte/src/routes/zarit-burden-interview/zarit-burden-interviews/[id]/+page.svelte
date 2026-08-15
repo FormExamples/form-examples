@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateZaritGrade } from '$lib/engine/zarit-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { activeItemNumbers, normalizeInstrumentForm, ratingValue } from '$lib/engine/zarit-rules';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateZaritGrade } from '#lib/engine/zarit-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { activeItemNumbers, normalizeInstrumentForm, ratingValue } from '#lib/engine/zarit-rules.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Carer from '$lib/components/steps/Step2Carer.svelte';
-	import Step3Recipient from '$lib/components/steps/Step3Recipient.svelte';
-	import Step4Items from '$lib/components/steps/Step4Items.svelte';
-	import Step5Summary from '$lib/components/steps/Step5Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Carer from '#lib/components/steps/Step2Carer.svelte';
+	import Step3Recipient from '#lib/components/steps/Step3Recipient.svelte';
+	import Step4Items from '#lib/components/steps/Step4Items.svelte';
+	import Step5Summary from '#lib/components/steps/Step5Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

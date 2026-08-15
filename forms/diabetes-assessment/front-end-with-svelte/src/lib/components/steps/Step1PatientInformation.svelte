@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import TelInput from '$lib/components/ui/TelInput.svelte';
-	import EmailInput from '$lib/components/ui/EmailInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import TelInput from '#lib/components/ui/TelInput.svelte';
+	import EmailInput from '#lib/components/ui/EmailInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.patientInformation;
 </script>

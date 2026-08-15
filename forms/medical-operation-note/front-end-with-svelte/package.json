@@ -12,21 +12,499 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.1",
-		"@sveltejs/kit": "^2.70.2",
-		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/pdfmake": "^0.3.3",
-		"svelte": "^5.56.8",
-		"svelte-check": "^4.7.5",
+		"svelte": "^5.56.9",
+		"svelte-check": "^4.7.6",
 		"tailwindcss": "^4.3.3",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.6",
+		"typescript": "^6.0.0",
+		"vite": "^8.0.12",
 		"vitest": "^4.1.10"
 	},
 	"dependencies": {
 		"@svar-ui/svelte-grid": "^2.7.2",
+		"migrate": "^2.1.0",
+		"npx": "^10.2.2",
+		"package": "^1.0.1",
 		"pdfmake": "^0.3.11",
+		"sv": "^0.17.0",
 		"zod": "^4.4.3"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		"./components/ui/Alert.svelte": {
+			"types": "./package/components/ui/Alert.svelte.d.ts",
+			"svelte": "./package/components/ui/Alert.svelte",
+			"default": "./package/components/ui/Alert.svelte"
+		},
+		"./components/ui/Button.svelte": {
+			"types": "./package/components/ui/Button.svelte.d.ts",
+			"svelte": "./package/components/ui/Button.svelte",
+			"default": "./package/components/ui/Button.svelte"
+		},
+		"./components/ui/CheckboxGroup.svelte": {
+			"types": "./package/components/ui/CheckboxGroup.svelte.d.ts",
+			"svelte": "./package/components/ui/CheckboxGroup.svelte",
+			"default": "./package/components/ui/CheckboxGroup.svelte"
+		},
+		"./components/ui/CheckboxInput.svelte": {
+			"types": "./package/components/ui/CheckboxInput.svelte.d.ts",
+			"svelte": "./package/components/ui/CheckboxInput.svelte",
+			"default": "./package/components/ui/CheckboxInput.svelte"
+		},
+		"./components/ui/DateInput.svelte": {
+			"types": "./package/components/ui/DateInput.svelte.d.ts",
+			"svelte": "./package/components/ui/DateInput.svelte",
+			"default": "./package/components/ui/DateInput.svelte"
+		},
+		"./components/ui/DateTimePicker.svelte": {
+			"types": "./package/components/ui/DateTimePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/DateTimePicker.svelte",
+			"default": "./package/components/ui/DateTimePicker.svelte"
+		},
+		"./components/ui/EmailInput.svelte": {
+			"types": "./package/components/ui/EmailInput.svelte.d.ts",
+			"svelte": "./package/components/ui/EmailInput.svelte",
+			"default": "./package/components/ui/EmailInput.svelte"
+		},
+		"./components/ui/ErrorSummary.svelte": {
+			"types": "./package/components/ui/ErrorSummary.svelte.d.ts",
+			"svelte": "./package/components/ui/ErrorSummary.svelte",
+			"default": "./package/components/ui/ErrorSummary.svelte"
+		},
+		"./components/ui/Field.svelte": {
+			"types": "./package/components/ui/Field.svelte.d.ts",
+			"svelte": "./package/components/ui/Field.svelte",
+			"default": "./package/components/ui/Field.svelte"
+		},
+		"./components/ui/Fieldset.svelte": {
+			"types": "./package/components/ui/Fieldset.svelte.d.ts",
+			"svelte": "./package/components/ui/Fieldset.svelte",
+			"default": "./package/components/ui/Fieldset.svelte"
+		},
+		"./components/ui/FlagBanner.svelte": {
+			"types": "./package/components/ui/FlagBanner.svelte.d.ts",
+			"svelte": "./package/components/ui/FlagBanner.svelte",
+			"default": "./package/components/ui/FlagBanner.svelte"
+		},
+		"./components/ui/Form.svelte": {
+			"types": "./package/components/ui/Form.svelte.d.ts",
+			"svelte": "./package/components/ui/Form.svelte",
+			"default": "./package/components/ui/Form.svelte"
+		},
+		"./components/ui/Hint.svelte": {
+			"types": "./package/components/ui/Hint.svelte.d.ts",
+			"svelte": "./package/components/ui/Hint.svelte",
+			"default": "./package/components/ui/Hint.svelte"
+		},
+		"./components/ui/LocalePicker.svelte": {
+			"types": "./package/components/ui/LocalePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/LocalePicker.svelte",
+			"default": "./package/components/ui/LocalePicker.svelte"
+		},
+		"./components/ui/NumberInput.svelte": {
+			"types": "./package/components/ui/NumberInput.svelte.d.ts",
+			"svelte": "./package/components/ui/NumberInput.svelte",
+			"default": "./package/components/ui/NumberInput.svelte"
+		},
+		"./components/ui/Panel.svelte": {
+			"types": "./package/components/ui/Panel.svelte.d.ts",
+			"svelte": "./package/components/ui/Panel.svelte",
+			"default": "./package/components/ui/Panel.svelte"
+		},
+		"./components/ui/Progress.svelte": {
+			"types": "./package/components/ui/Progress.svelte.d.ts",
+			"svelte": "./package/components/ui/Progress.svelte",
+			"default": "./package/components/ui/Progress.svelte"
+		},
+		"./components/ui/RadioGroup.svelte": {
+			"types": "./package/components/ui/RadioGroup.svelte.d.ts",
+			"svelte": "./package/components/ui/RadioGroup.svelte",
+			"default": "./package/components/ui/RadioGroup.svelte"
+		},
+		"./components/ui/RadioInput.svelte": {
+			"types": "./package/components/ui/RadioInput.svelte.d.ts",
+			"svelte": "./package/components/ui/RadioInput.svelte",
+			"default": "./package/components/ui/RadioInput.svelte"
+		},
+		"./components/ui/Select.svelte": {
+			"types": "./package/components/ui/Select.svelte.d.ts",
+			"svelte": "./package/components/ui/Select.svelte",
+			"default": "./package/components/ui/Select.svelte"
+		},
+		"./components/ui/SharePicker.svelte": {
+			"types": "./package/components/ui/SharePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/SharePicker.svelte",
+			"default": "./package/components/ui/SharePicker.svelte"
+		},
+		"./components/ui/StepList.svelte": {
+			"types": "./package/components/ui/StepList.svelte.d.ts",
+			"svelte": "./package/components/ui/StepList.svelte",
+			"default": "./package/components/ui/StepList.svelte"
+		},
+		"./components/ui/StepListItem.svelte": {
+			"types": "./package/components/ui/StepListItem.svelte.d.ts",
+			"svelte": "./package/components/ui/StepListItem.svelte",
+			"default": "./package/components/ui/StepListItem.svelte"
+		},
+		"./components/ui/TelInput.svelte": {
+			"types": "./package/components/ui/TelInput.svelte.d.ts",
+			"svelte": "./package/components/ui/TelInput.svelte",
+			"default": "./package/components/ui/TelInput.svelte"
+		},
+		"./components/ui/TextAreaInput.svelte": {
+			"types": "./package/components/ui/TextAreaInput.svelte.d.ts",
+			"svelte": "./package/components/ui/TextAreaInput.svelte",
+			"default": "./package/components/ui/TextAreaInput.svelte"
+		},
+		"./components/ui/TextInput.svelte": {
+			"types": "./package/components/ui/TextInput.svelte.d.ts",
+			"svelte": "./package/components/ui/TextInput.svelte",
+			"default": "./package/components/ui/TextInput.svelte"
+		},
+		"./components/ui/TextSizePicker.svelte": {
+			"types": "./package/components/ui/TextSizePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/TextSizePicker.svelte",
+			"default": "./package/components/ui/TextSizePicker.svelte"
+		},
+		"./components/ui/ThemePicker.svelte": {
+			"types": "./package/components/ui/ThemePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/ThemePicker.svelte",
+			"default": "./package/components/ui/ThemePicker.svelte"
+		},
+		"./components/ui/locales": {
+			"types": "./package/components/ui/locales.d.ts",
+			"default": "./package/components/ui/locales.js"
+		},
+		"./config/locales": {
+			"types": "./package/config/locales.d.ts",
+			"default": "./package/config/locales.js"
+		},
+		"./config/steps": {
+			"types": "./package/config/steps.d.ts",
+			"default": "./package/config/steps.js"
+		},
+		"./config/text-sizes": {
+			"types": "./package/config/text-sizes.d.ts",
+			"default": "./package/config/text-sizes.js"
+		},
+		"./config/themes": {
+			"types": "./package/config/themes.d.ts",
+			"default": "./package/config/themes.js"
+		},
+		"./data/sample-reports": {
+			"types": "./package/data/sample-reports.d.ts",
+			"default": "./package/data/sample-reports.js"
+		},
+		"./engine/anaesthetic-event-rules": {
+			"types": "./package/engine/anaesthetic-event-rules.d.ts",
+			"default": "./package/engine/anaesthetic-event-rules.js"
+		},
+		"./engine/blood-loss-rules": {
+			"types": "./package/engine/blood-loss-rules.d.ts",
+			"default": "./package/engine/blood-loss-rules.js"
+		},
+		"./engine/clavien-dindo-rules.test": {
+			"types": "./package/engine/clavien-dindo-rules.test.d.ts",
+			"default": "./package/engine/clavien-dindo-rules.test.js"
+		},
+		"./engine/clavien-dindo-rules": {
+			"types": "./package/engine/clavien-dindo-rules.d.ts",
+			"default": "./package/engine/clavien-dindo-rules.js"
+		},
+		"./engine/composite-grader.test": {
+			"types": "./package/engine/composite-grader.test.d.ts",
+			"default": "./package/engine/composite-grader.test.js"
+		},
+		"./engine/composite-grader": {
+			"types": "./package/engine/composite-grader.d.ts",
+			"default": "./package/engine/composite-grader.js"
+		},
+		"./engine/count-rules": {
+			"types": "./package/engine/count-rules.d.ts",
+			"default": "./package/engine/count-rules.js"
+		},
+		"./engine/factory": {
+			"types": "./package/engine/factory.d.ts",
+			"default": "./package/engine/factory.js"
+		},
+		"./engine/flagged-issues": {
+			"types": "./package/engine/flagged-issues.d.ts",
+			"default": "./package/engine/flagged-issues.js"
+		},
+		"./engine/never-event-rules": {
+			"types": "./package/engine/never-event-rules.d.ts",
+			"default": "./package/engine/never-event-rules.js"
+		},
+		"./engine/types": {
+			"types": "./package/engine/types.d.ts",
+			"default": "./package/engine/types.js"
+		},
+		"./engine/utils": {
+			"types": "./package/engine/utils.d.ts",
+			"default": "./package/engine/utils.js"
+		},
+		"./report": {
+			"types": "./package/report.d.ts",
+			"default": "./package/report.js"
+		},
+		"./state.svelte": {
+			"types": "./package/state.svelte.d.ts",
+			"default": "./package/state.svelte.js"
+		},
+		"./steps/Step10SafetyCountsEbl.svelte": {
+			"types": "./package/steps/Step10SafetyCountsEbl.svelte.d.ts",
+			"svelte": "./package/steps/Step10SafetyCountsEbl.svelte",
+			"default": "./package/steps/Step10SafetyCountsEbl.svelte"
+		},
+		"./steps/Step11PostOperativePlan.svelte": {
+			"types": "./package/steps/Step11PostOperativePlan.svelte.d.ts",
+			"svelte": "./package/steps/Step11PostOperativePlan.svelte",
+			"default": "./package/steps/Step11PostOperativePlan.svelte"
+		},
+		"./steps/Step12SignOff.svelte": {
+			"types": "./package/steps/Step12SignOff.svelte.d.ts",
+			"svelte": "./package/steps/Step12SignOff.svelte",
+			"default": "./package/steps/Step12SignOff.svelte"
+		},
+		"./steps/Step1Identification.svelte": {
+			"types": "./package/steps/Step1Identification.svelte.d.ts",
+			"svelte": "./package/steps/Step1Identification.svelte",
+			"default": "./package/steps/Step1Identification.svelte"
+		},
+		"./steps/Step2PatientIdentification.svelte": {
+			"types": "./package/steps/Step2PatientIdentification.svelte.d.ts",
+			"svelte": "./package/steps/Step2PatientIdentification.svelte",
+			"default": "./package/steps/Step2PatientIdentification.svelte"
+		},
+		"./steps/Step3SurgicalTeam.svelte": {
+			"types": "./package/steps/Step3SurgicalTeam.svelte.d.ts",
+			"svelte": "./package/steps/Step3SurgicalTeam.svelte",
+			"default": "./package/steps/Step3SurgicalTeam.svelte"
+		},
+		"./steps/Step4DiagnosesProcedures.svelte": {
+			"types": "./package/steps/Step4DiagnosesProcedures.svelte.d.ts",
+			"svelte": "./package/steps/Step4DiagnosesProcedures.svelte",
+			"default": "./package/steps/Step4DiagnosesProcedures.svelte"
+		},
+		"./steps/Step5Anaesthesia.svelte": {
+			"types": "./package/steps/Step5Anaesthesia.svelte.d.ts",
+			"svelte": "./package/steps/Step5Anaesthesia.svelte",
+			"default": "./package/steps/Step5Anaesthesia.svelte"
+		},
+		"./steps/Step6PositionPrepApproach.svelte": {
+			"types": "./package/steps/Step6PositionPrepApproach.svelte.d.ts",
+			"svelte": "./package/steps/Step6PositionPrepApproach.svelte",
+			"default": "./package/steps/Step6PositionPrepApproach.svelte"
+		},
+		"./steps/Step7OperativeFindings.svelte": {
+			"types": "./package/steps/Step7OperativeFindings.svelte.d.ts",
+			"svelte": "./package/steps/Step7OperativeFindings.svelte",
+			"default": "./package/steps/Step7OperativeFindings.svelte"
+		},
+		"./steps/Step8MaterialsImplants.svelte": {
+			"types": "./package/steps/Step8MaterialsImplants.svelte.d.ts",
+			"svelte": "./package/steps/Step8MaterialsImplants.svelte",
+			"default": "./package/steps/Step8MaterialsImplants.svelte"
+		},
+		"./steps/Step9DrainsPacksSpecimens.svelte": {
+			"types": "./package/steps/Step9DrainsPacksSpecimens.svelte.d.ts",
+			"svelte": "./package/steps/Step9DrainsPacksSpecimens.svelte",
+			"default": "./package/steps/Step9DrainsPacksSpecimens.svelte"
+		}
+	},
+	"files": [
+		"package"
+	],
+	"typesVersions": {
+		">4.0": {
+			"components/ui/Alert.svelte": [
+				"./package/components/ui/Alert.svelte.d.ts"
+			],
+			"components/ui/Button.svelte": [
+				"./package/components/ui/Button.svelte.d.ts"
+			],
+			"components/ui/CheckboxGroup.svelte": [
+				"./package/components/ui/CheckboxGroup.svelte.d.ts"
+			],
+			"components/ui/CheckboxInput.svelte": [
+				"./package/components/ui/CheckboxInput.svelte.d.ts"
+			],
+			"components/ui/DateInput.svelte": [
+				"./package/components/ui/DateInput.svelte.d.ts"
+			],
+			"components/ui/DateTimePicker.svelte": [
+				"./package/components/ui/DateTimePicker.svelte.d.ts"
+			],
+			"components/ui/EmailInput.svelte": [
+				"./package/components/ui/EmailInput.svelte.d.ts"
+			],
+			"components/ui/ErrorSummary.svelte": [
+				"./package/components/ui/ErrorSummary.svelte.d.ts"
+			],
+			"components/ui/Field.svelte": [
+				"./package/components/ui/Field.svelte.d.ts"
+			],
+			"components/ui/Fieldset.svelte": [
+				"./package/components/ui/Fieldset.svelte.d.ts"
+			],
+			"components/ui/FlagBanner.svelte": [
+				"./package/components/ui/FlagBanner.svelte.d.ts"
+			],
+			"components/ui/Form.svelte": [
+				"./package/components/ui/Form.svelte.d.ts"
+			],
+			"components/ui/Hint.svelte": [
+				"./package/components/ui/Hint.svelte.d.ts"
+			],
+			"components/ui/LocalePicker.svelte": [
+				"./package/components/ui/LocalePicker.svelte.d.ts"
+			],
+			"components/ui/NumberInput.svelte": [
+				"./package/components/ui/NumberInput.svelte.d.ts"
+			],
+			"components/ui/Panel.svelte": [
+				"./package/components/ui/Panel.svelte.d.ts"
+			],
+			"components/ui/Progress.svelte": [
+				"./package/components/ui/Progress.svelte.d.ts"
+			],
+			"components/ui/RadioGroup.svelte": [
+				"./package/components/ui/RadioGroup.svelte.d.ts"
+			],
+			"components/ui/RadioInput.svelte": [
+				"./package/components/ui/RadioInput.svelte.d.ts"
+			],
+			"components/ui/Select.svelte": [
+				"./package/components/ui/Select.svelte.d.ts"
+			],
+			"components/ui/SharePicker.svelte": [
+				"./package/components/ui/SharePicker.svelte.d.ts"
+			],
+			"components/ui/StepList.svelte": [
+				"./package/components/ui/StepList.svelte.d.ts"
+			],
+			"components/ui/StepListItem.svelte": [
+				"./package/components/ui/StepListItem.svelte.d.ts"
+			],
+			"components/ui/TelInput.svelte": [
+				"./package/components/ui/TelInput.svelte.d.ts"
+			],
+			"components/ui/TextAreaInput.svelte": [
+				"./package/components/ui/TextAreaInput.svelte.d.ts"
+			],
+			"components/ui/TextInput.svelte": [
+				"./package/components/ui/TextInput.svelte.d.ts"
+			],
+			"components/ui/TextSizePicker.svelte": [
+				"./package/components/ui/TextSizePicker.svelte.d.ts"
+			],
+			"components/ui/ThemePicker.svelte": [
+				"./package/components/ui/ThemePicker.svelte.d.ts"
+			],
+			"components/ui/locales": [
+				"./package/components/ui/locales.d.ts"
+			],
+			"config/locales": [
+				"./package/config/locales.d.ts"
+			],
+			"config/steps": [
+				"./package/config/steps.d.ts"
+			],
+			"config/text-sizes": [
+				"./package/config/text-sizes.d.ts"
+			],
+			"config/themes": [
+				"./package/config/themes.d.ts"
+			],
+			"data/sample-reports": [
+				"./package/data/sample-reports.d.ts"
+			],
+			"engine/anaesthetic-event-rules": [
+				"./package/engine/anaesthetic-event-rules.d.ts"
+			],
+			"engine/blood-loss-rules": [
+				"./package/engine/blood-loss-rules.d.ts"
+			],
+			"engine/clavien-dindo-rules.test": [
+				"./package/engine/clavien-dindo-rules.test.d.ts"
+			],
+			"engine/clavien-dindo-rules": [
+				"./package/engine/clavien-dindo-rules.d.ts"
+			],
+			"engine/composite-grader.test": [
+				"./package/engine/composite-grader.test.d.ts"
+			],
+			"engine/composite-grader": [
+				"./package/engine/composite-grader.d.ts"
+			],
+			"engine/count-rules": [
+				"./package/engine/count-rules.d.ts"
+			],
+			"engine/factory": [
+				"./package/engine/factory.d.ts"
+			],
+			"engine/flagged-issues": [
+				"./package/engine/flagged-issues.d.ts"
+			],
+			"engine/never-event-rules": [
+				"./package/engine/never-event-rules.d.ts"
+			],
+			"engine/types": [
+				"./package/engine/types.d.ts"
+			],
+			"engine/utils": [
+				"./package/engine/utils.d.ts"
+			],
+			"report": [
+				"./package/report.d.ts"
+			],
+			"state.svelte": [
+				"./package/state.svelte.d.ts"
+			],
+			"steps/Step10SafetyCountsEbl.svelte": [
+				"./package/steps/Step10SafetyCountsEbl.svelte.d.ts"
+			],
+			"steps/Step11PostOperativePlan.svelte": [
+				"./package/steps/Step11PostOperativePlan.svelte.d.ts"
+			],
+			"steps/Step12SignOff.svelte": [
+				"./package/steps/Step12SignOff.svelte.d.ts"
+			],
+			"steps/Step1Identification.svelte": [
+				"./package/steps/Step1Identification.svelte.d.ts"
+			],
+			"steps/Step2PatientIdentification.svelte": [
+				"./package/steps/Step2PatientIdentification.svelte.d.ts"
+			],
+			"steps/Step3SurgicalTeam.svelte": [
+				"./package/steps/Step3SurgicalTeam.svelte.d.ts"
+			],
+			"steps/Step4DiagnosesProcedures.svelte": [
+				"./package/steps/Step4DiagnosesProcedures.svelte.d.ts"
+			],
+			"steps/Step5Anaesthesia.svelte": [
+				"./package/steps/Step5Anaesthesia.svelte.d.ts"
+			],
+			"steps/Step6PositionPrepApproach.svelte": [
+				"./package/steps/Step6PositionPrepApproach.svelte.d.ts"
+			],
+			"steps/Step7OperativeFindings.svelte": [
+				"./package/steps/Step7OperativeFindings.svelte.d.ts"
+			],
+			"steps/Step8MaterialsImplants.svelte": [
+				"./package/steps/Step8MaterialsImplants.svelte.d.ts"
+			],
+			"steps/Step9DrainsPacksSpecimens.svelte": [
+				"./package/steps/Step9DrainsPacksSpecimens.svelte.d.ts"
+			]
+		}
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
 	}
 }

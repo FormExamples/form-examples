@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import type { MedicationAdministered, FluidTherapy, Procedure } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import type { MedicationAdministered, FluidTherapy, Procedure } from '#lib/engine/types.js';
 
 	const tx = assessment.data.treatment;
 

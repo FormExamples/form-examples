@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateCha2ds2VascGrade } from '$lib/engine/cha2ds2vasc-grader';
-	import { riskBandLabel, riskBandColor, anticoagulationLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateCha2ds2VascGrade } from '#lib/engine/cha2ds2vasc-grader.js';
+	import { riskBandLabel, riskBandColor, anticoagulationLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const n = assessment.data.note;
 	const grade = $derived(calculateCha2ds2VascGrade(assessment.data));

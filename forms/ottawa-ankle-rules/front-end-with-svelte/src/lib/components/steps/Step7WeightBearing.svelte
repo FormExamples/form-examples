@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateOttawaDecision } from '$lib/engine/ottawa-ankle-grader';
-	import { weightBearingColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateOttawaDecision } from '#lib/engine/ottawa-ankle-grader.js';
+	import { weightBearingColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const w = assessment.data.weightBearing;
 	const unable = $derived(calculateOttawaDecision(assessment.data).unableToBearWeight);

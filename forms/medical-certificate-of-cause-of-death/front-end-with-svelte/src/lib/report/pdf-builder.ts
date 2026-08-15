@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { DeathCertificate, ValidationResult } from '$lib/engine/types';
+import type { DeathCertificate, ValidationResult } from '#lib/engine/types.js';
 import {
 	validityClassLabel,
 	priorityLabel,
@@ -9,7 +9,7 @@ import {
 	coronerReasonLabel,
 	medicalExaminerStatusLabel,
 	yesNoLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: DeathCertificate,

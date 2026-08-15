@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Procedure } from '$lib/engine/types';
+	import type { Procedure } from '#lib/engine/types.js';
 
 	let {
 		procedures = $bindable<Procedure[]>([])

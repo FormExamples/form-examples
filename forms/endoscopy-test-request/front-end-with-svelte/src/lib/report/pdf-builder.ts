@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { EndoscopyRequest, GradingResult } from '$lib/engine/types';
+import type { EndoscopyRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	triageTierLabel,
@@ -7,7 +7,7 @@ import {
 	recommendationLabel,
 	procedureLabel,
 	indicationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

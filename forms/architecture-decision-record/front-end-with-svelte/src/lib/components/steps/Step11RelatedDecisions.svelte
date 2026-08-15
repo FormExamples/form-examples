@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from '$lib/stores/adr.svelte.js';
+  import { store } from '#lib/stores/adr.svelte.js';
 </script>
 
 <section>

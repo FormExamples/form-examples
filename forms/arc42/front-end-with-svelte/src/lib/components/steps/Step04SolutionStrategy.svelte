@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/documentation.svelte.js';
-  import RepeatList from '$lib/components/ui/RepeatList.svelte';
+  import { store } from '#lib/stores/documentation.svelte.js';
+  import RepeatList from '#lib/components/ui/RepeatList.svelte';
 
   const MAX_QUALITY_STRATEGIES = 5;
 

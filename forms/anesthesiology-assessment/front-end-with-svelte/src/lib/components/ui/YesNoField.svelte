@@ -1,8 +1,8 @@
 <script lang="ts">
 	// A compact yes / no (optionally yes / no / unknown) radio field bound to a
 	// single string value. Built on the Lily Field + RadioGroup contract.
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	let {
 		label,

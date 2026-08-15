@@ -1,4 +1,4 @@
-import type { Person } from '$lib/types.js';
+import type { Person } from '#lib/types.js';
 
 // Age in whole years on `referenceDate`. Returns null if either date is
 // empty or unparseable.

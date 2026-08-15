@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	classificationLabel,
 	priorityLabel,
@@ -10,7 +10,7 @@ import {
 	ageBandLabel,
 	consciousnessLevelLabel,
 	motoricSubtypeLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 function featureStatus(positive: boolean | null): string {
 	if (positive === null) return 'Not assessed';

@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, DizzinessHandicapInventory, GradingResult } from '$lib/engine/types';
-import { DHI_ITEMS } from '$lib/engine/rules';
+import { browser } from '$app/env';
+import type { AssessmentData, DizzinessHandicapInventory, GradingResult } from '#lib/engine/types.js';
+import { DHI_ITEMS } from '#lib/engine/rules.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {

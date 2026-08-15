@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { assessment, createDefaultDrug } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment, createDefaultDrug } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	// Bind directly to the live store array so add/remove stay reactive and any
 	// seeded child rows (merged in place by the store's deepAssign) show here.
-	const d = assessment.data;
+	const d = $state(assessment.data);
 
 	function addDrug() {
 		d.drugs.push(createDefaultDrug());

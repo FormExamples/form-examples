@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { lpaStore } from '$lib/stores/lpa.svelte';
-	import { validityStatusLabel, validityStatusColor, severityColor } from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { lpaStore } from '#lib/stores/lpa.svelte.js';
+	import { validityStatusLabel, validityStatusColor, severityColor } from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 

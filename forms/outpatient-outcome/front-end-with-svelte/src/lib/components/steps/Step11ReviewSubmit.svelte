@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeOOCG } from '$lib/engine/oocg-grader';
-	import { gradeColor, gradeLabel } from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeOOCG } from '#lib/engine/oocg-grader.js';
+	import { gradeColor, gradeLabel } from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const data = assessment.data;
 	const preview = $derived(gradeOOCG(data));

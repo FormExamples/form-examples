@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Answer } from '$lib/engine/types.js';
+  import type { Answer } from '#lib/engine/types.js';
 
   let {
     name,

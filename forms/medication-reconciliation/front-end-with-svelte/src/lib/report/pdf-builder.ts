@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { GradingResult, ReconciliationData } from '$lib/engine/types';
-import { isIntentional } from '$lib/engine/medication-reconciliation-rules';
+import type { GradingResult, ReconciliationData } from '#lib/engine/types.js';
+import { isIntentional } from '#lib/engine/medication-reconciliation-rules.js';
 import {
 	statusLabel,
 	priorityLabel,
@@ -14,7 +14,7 @@ import {
 	sexLabel,
 	ageBandLabel,
 	allergyStatusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: ReconciliationData,

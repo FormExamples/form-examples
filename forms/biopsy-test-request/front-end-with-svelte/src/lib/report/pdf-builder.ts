@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { BiopsyRequestData, GradingResult } from '$lib/engine/types';
+import type { BiopsyRequestData, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessBandLabel,
 	bleedingRiskLabel,
@@ -8,7 +8,7 @@ import {
 	biopsyMethodLabel,
 	indicationLabel,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: BiopsyRequestData,

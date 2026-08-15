@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { endoGradeLabel, endoGradeColor } from '$lib/engine/utils';
+	import { endoGradeLabel, endoGradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

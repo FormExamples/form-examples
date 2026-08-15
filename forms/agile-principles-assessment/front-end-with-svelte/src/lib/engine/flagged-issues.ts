@@ -4,7 +4,7 @@ import type {
   FlagCategory,
   FlagPriority,
 } from './types.js';
-import { PRINCIPLES } from '$lib/config/principles.js';
+import { PRINCIPLES } from '#lib/config/principles.js';
 
 interface PrincipleFlagSpec {
   category: FlagCategory;

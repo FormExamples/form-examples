@@ -3,8 +3,8 @@
 	import { page } from '$app/state';
 	import { formState } from '$stores/formState.svelte';
 	import { ragLabel, ragColor, flagPriorityColor } from '$engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
-	import RagBadge from '$lib/components/ui/RagBadge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import RagBadge from '#lib/components/ui/RagBadge.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(formState.data);

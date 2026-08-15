@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { StressTestRequest, GradingResult } from '$lib/engine/types';
+import type { StressTestRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	contraindicationLabel,
@@ -10,7 +10,7 @@ import {
 	clinicianRoleLabel,
 	aorticStenosisLabel,
 	settingLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, ResultBand } from '$lib/engine/types';
-import { calculateCageGrade } from '$lib/engine/cage-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, ResultBand } from '#lib/engine/types.js';
+import { calculateCageGrade } from '#lib/engine/cage-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { store } from '$lib/stores/checklist.svelte.js';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { statusLabel } from '$lib/checklist/labels.js';
+	import { store } from '#lib/stores/checklist.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { statusLabel } from '#lib/checklist/labels.js';
 
 	const c = $derived(store.data);
 	const flags = $derived(store.flags);

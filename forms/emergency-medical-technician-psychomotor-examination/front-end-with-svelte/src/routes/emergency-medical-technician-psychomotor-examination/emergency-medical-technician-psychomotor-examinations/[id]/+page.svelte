@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradePsychomotor } from '$lib/engine/psychomotor-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradePsychomotor } from '#lib/engine/psychomotor-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1CandidateExaminerScenario from '$lib/components/steps/Step1CandidateExaminerScenario.svelte';
-	import Step2SceneSizeUp from '$lib/components/steps/Step2SceneSizeUp.svelte';
-	import Step3PrimarySurvey from '$lib/components/steps/Step3PrimarySurvey.svelte';
-	import Step4HistorySecondaryAssessment from '$lib/components/steps/Step4HistorySecondaryAssessment.svelte';
-	import Step5Reassessment from '$lib/components/steps/Step5Reassessment.svelte';
-	import Step6CriticalCriteriaReview from '$lib/components/steps/Step6CriticalCriteriaReview.svelte';
+	import Step1CandidateExaminerScenario from '#lib/components/steps/Step1CandidateExaminerScenario.svelte';
+	import Step2SceneSizeUp from '#lib/components/steps/Step2SceneSizeUp.svelte';
+	import Step3PrimarySurvey from '#lib/components/steps/Step3PrimarySurvey.svelte';
+	import Step4HistorySecondaryAssessment from '#lib/components/steps/Step4HistorySecondaryAssessment.svelte';
+	import Step5Reassessment from '#lib/components/steps/Step5Reassessment.svelte';
+	import Step6CriticalCriteriaReview from '#lib/components/steps/Step6CriticalCriteriaReview.svelte';
 
 	const plural = 'emergency-medical-technician-psychomotor-examinations';
 

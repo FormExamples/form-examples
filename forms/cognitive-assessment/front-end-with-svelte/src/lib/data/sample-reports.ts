@@ -1,8 +1,8 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { calculateMMSE } from '$lib/engine/mmse-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { mmseCategory } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { calculateMMSE } from '#lib/engine/mmse-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { mmseCategory } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

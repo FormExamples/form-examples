@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { authorization } from '$lib/stores/authorization.svelte';
-	import { validateAuthorization } from '$lib/engine/validate-authorization';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAuthorizations } from '$lib/data/sample-reports';
+	import { authorization } from '#lib/stores/authorization.svelte.js';
+	import { validateAuthorization } from '#lib/engine/validate-authorization.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAuthorizations } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Patient from '$lib/components/steps/Step1Patient.svelte';
-	import Step2Signer from '$lib/components/steps/Step2Signer.svelte';
-	import Step3DisclosingSource from '$lib/components/steps/Step3DisclosingSource.svelte';
-	import Step4AuthorizedRecipient from '$lib/components/steps/Step4AuthorizedRecipient.svelte';
-	import Step5RecordsToDisclose from '$lib/components/steps/Step5RecordsToDisclose.svelte';
-	import Step6PurposeOfDisclosure from '$lib/components/steps/Step6PurposeOfDisclosure.svelte';
-	import Step7Expiration from '$lib/components/steps/Step7Expiration.svelte';
-	import Step8PatientRights from '$lib/components/steps/Step8PatientRights.svelte';
-	import Step9SignatureWitness from '$lib/components/steps/Step9SignatureWitness.svelte';
+	import Step1Patient from '#lib/components/steps/Step1Patient.svelte';
+	import Step2Signer from '#lib/components/steps/Step2Signer.svelte';
+	import Step3DisclosingSource from '#lib/components/steps/Step3DisclosingSource.svelte';
+	import Step4AuthorizedRecipient from '#lib/components/steps/Step4AuthorizedRecipient.svelte';
+	import Step5RecordsToDisclose from '#lib/components/steps/Step5RecordsToDisclose.svelte';
+	import Step6PurposeOfDisclosure from '#lib/components/steps/Step6PurposeOfDisclosure.svelte';
+	import Step7Expiration from '#lib/components/steps/Step7Expiration.svelte';
+	import Step8PatientRights from '#lib/components/steps/Step8PatientRights.svelte';
+	import Step9SignatureWitness from '#lib/components/steps/Step9SignatureWitness.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

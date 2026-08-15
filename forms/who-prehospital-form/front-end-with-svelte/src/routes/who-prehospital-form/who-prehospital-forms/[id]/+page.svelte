@@ -1,34 +1,34 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradePrehospital } from '$lib/engine/prehospital-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradePrehospital } from '#lib/engine/prehospital-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1CallerAndScene from '$lib/components/steps/Step1CallerAndScene.svelte';
-	import Step2ChiefComplaintAndVitals from '$lib/components/steps/Step2ChiefComplaintAndVitals.svelte';
-	import Step3HighRiskSigns from '$lib/components/steps/Step3HighRiskSigns.svelte';
-	import Step4Triage from '$lib/components/steps/Step4Triage.svelte';
-	import Step5Airway from '$lib/components/steps/Step5Airway.svelte';
-	import Step6Breathing from '$lib/components/steps/Step6Breathing.svelte';
-	import Step7Circulation from '$lib/components/steps/Step7Circulation.svelte';
-	import Step8Disability from '$lib/components/steps/Step8Disability.svelte';
-	import Step9Exposure from '$lib/components/steps/Step9Exposure.svelte';
-	import Step10SampleHistory from '$lib/components/steps/Step10SampleHistory.svelte';
-	import Step11InjuryDetails from '$lib/components/steps/Step11InjuryDetails.svelte';
-	import Step12PhysicalExam from '$lib/components/steps/Step12PhysicalExam.svelte';
-	import Step13AdditionalInterventions from '$lib/components/steps/Step13AdditionalInterventions.svelte';
-	import Step14AssessmentAndPlan from '$lib/components/steps/Step14AssessmentAndPlan.svelte';
-	import Step15Reassessment from '$lib/components/steps/Step15Reassessment.svelte';
-	import Step16Disposition from '$lib/components/steps/Step16Disposition.svelte';
+	import Step1CallerAndScene from '#lib/components/steps/Step1CallerAndScene.svelte';
+	import Step2ChiefComplaintAndVitals from '#lib/components/steps/Step2ChiefComplaintAndVitals.svelte';
+	import Step3HighRiskSigns from '#lib/components/steps/Step3HighRiskSigns.svelte';
+	import Step4Triage from '#lib/components/steps/Step4Triage.svelte';
+	import Step5Airway from '#lib/components/steps/Step5Airway.svelte';
+	import Step6Breathing from '#lib/components/steps/Step6Breathing.svelte';
+	import Step7Circulation from '#lib/components/steps/Step7Circulation.svelte';
+	import Step8Disability from '#lib/components/steps/Step8Disability.svelte';
+	import Step9Exposure from '#lib/components/steps/Step9Exposure.svelte';
+	import Step10SampleHistory from '#lib/components/steps/Step10SampleHistory.svelte';
+	import Step11InjuryDetails from '#lib/components/steps/Step11InjuryDetails.svelte';
+	import Step12PhysicalExam from '#lib/components/steps/Step12PhysicalExam.svelte';
+	import Step13AdditionalInterventions from '#lib/components/steps/Step13AdditionalInterventions.svelte';
+	import Step14AssessmentAndPlan from '#lib/components/steps/Step14AssessmentAndPlan.svelte';
+	import Step15Reassessment from '#lib/components/steps/Step15Reassessment.svelte';
+	import Step16Disposition from '#lib/components/steps/Step16Disposition.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

@@ -1,7 +1,7 @@
-import type { HospitalDashboardMetrics } from '$lib/engine/types.js';
-import { DASHBOARD_METRICS } from '$lib/config/metrics.js';
-import { summariseMetrics } from '$lib/engine/summary.js';
-import { createDefaultMetrics } from '$lib/stores/metrics.svelte.js';
+import type { HospitalDashboardMetrics } from '#lib/engine/types.js';
+import { DASHBOARD_METRICS } from '#lib/config/metrics.js';
+import { summariseMetrics } from '#lib/engine/summary.js';
+import { createDefaultMetrics } from '#lib/stores/metrics.svelte.js';
 
 /** A sample reporting period: an identifier and the full data the engine tallies. */
 export interface SampleReport {

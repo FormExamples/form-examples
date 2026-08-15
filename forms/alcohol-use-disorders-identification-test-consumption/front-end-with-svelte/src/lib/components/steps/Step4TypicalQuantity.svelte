@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateAuditcGrade } from '$lib/engine/auditc-grader';
-	import { pointColor, QUANTITY_OPTIONS } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateAuditcGrade } from '#lib/engine/auditc-grader.js';
+	import { pointColor, QUANTITY_OPTIONS } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const items = assessment.data.items;
 	const point = $derived(calculateAuditcGrade(assessment.data).typicalQuantityPoint);

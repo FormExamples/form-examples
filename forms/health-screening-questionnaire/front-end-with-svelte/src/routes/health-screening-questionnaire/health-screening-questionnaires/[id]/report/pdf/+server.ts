@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDocument } from '$lib/report/pdf-builder';
-import type { HealthScreeningQuestionnaire, GradingResult } from '$lib/engine/types';
+import { buildPdfDocument } from '#lib/report/pdf-builder.js';
+import type { HealthScreeningQuestionnaire, GradingResult } from '#lib/engine/types.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { data, result, generatedAt } = (await request.json()) as {

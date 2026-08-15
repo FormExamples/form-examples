@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { ageModifierFor } from '$lib/engine/centor-grader';
-	import { ageModifierLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { ageModifierFor } from '#lib/engine/centor-grader.js';
+	import { ageModifierLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const p = assessment.data.identification;
 	const modifier = $derived(ageModifierFor(p.ageYears));

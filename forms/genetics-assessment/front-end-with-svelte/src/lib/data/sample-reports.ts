@@ -1,6 +1,6 @@
-import type { AssessmentData, RiskLevel } from '$lib/engine/types';
-import { gradeGenetics } from '$lib/engine/genetics-grader';
-import { createDefaultAssessment, emptyRelative } from '$lib/engine/factory';
+import type { AssessmentData, RiskLevel } from '#lib/engine/types.js';
+import { gradeGenetics } from '#lib/engine/genetics-grader.js';
+import { createDefaultAssessment, emptyRelative } from '#lib/engine/factory.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

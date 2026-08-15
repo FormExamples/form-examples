@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { NerveConductionStudyRequest, GradingResult } from '$lib/engine/types';
+import type { NerveConductionStudyRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	proceduralRiskLabel,
@@ -10,7 +10,7 @@ import {
 	indicationLabel,
 	lateralityLabel,
 	symptomDurationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

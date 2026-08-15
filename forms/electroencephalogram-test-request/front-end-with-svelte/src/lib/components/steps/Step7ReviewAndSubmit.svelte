@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { eegTypeLabel, indicationLabel, settingLabel, triageTierLabel } from '$lib/engine/utils';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { eegTypeLabel, indicationLabel, settingLabel, triageTierLabel } from '#lib/engine/utils.js';
 
 	const d = request.data;
 

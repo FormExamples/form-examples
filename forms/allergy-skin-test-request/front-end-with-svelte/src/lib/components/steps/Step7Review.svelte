@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 </script>
 
 <Fieldset legend="Review and submit">

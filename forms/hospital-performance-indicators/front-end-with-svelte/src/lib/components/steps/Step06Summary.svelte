@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { store } from '$lib/stores/indicators.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
-  import { summariseIndicators } from '$lib/engine/summary.js';
-  import { TOTAL_INDICATORS } from '$lib/config/indicators.js';
+  import { store } from '#lib/stores/indicators.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
+  import { summariseIndicators } from '#lib/engine/summary.js';
+  import { TOTAL_INDICATORS } from '#lib/config/indicators.js';
 
   const result = $derived(summariseIndicators(store.data));
 </script>

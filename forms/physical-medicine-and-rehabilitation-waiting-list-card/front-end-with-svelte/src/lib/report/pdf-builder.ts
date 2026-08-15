@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { GradingResult, WaitingListCard } from '$lib/engine/types';
-import { waitingTimeStatusLabel, clinicalPriorityLabel } from '$lib/engine/utils';
+import type { GradingResult, WaitingListCard } from '#lib/engine/types.js';
+import { waitingTimeStatusLabel, clinicalPriorityLabel } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: WaitingListCard,

@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateHasBledGrade } from '$lib/engine/hasbled-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateHasBledGrade } from '#lib/engine/hasbled-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Hypertension from '$lib/components/steps/Step3Hypertension.svelte';
-	import Step4OrganFunction from '$lib/components/steps/Step4OrganFunction.svelte';
-	import Step5Stroke from '$lib/components/steps/Step5Stroke.svelte';
-	import Step6Bleeding from '$lib/components/steps/Step6Bleeding.svelte';
-	import Step7LabileInr from '$lib/components/steps/Step7LabileInr.svelte';
-	import Step8DrugsAlcohol from '$lib/components/steps/Step8DrugsAlcohol.svelte';
-	import Step9Summary from '$lib/components/steps/Step9Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Hypertension from '#lib/components/steps/Step3Hypertension.svelte';
+	import Step4OrganFunction from '#lib/components/steps/Step4OrganFunction.svelte';
+	import Step5Stroke from '#lib/components/steps/Step5Stroke.svelte';
+	import Step6Bleeding from '#lib/components/steps/Step6Bleeding.svelte';
+	import Step7LabileInr from '#lib/components/steps/Step7LabileInr.svelte';
+	import Step8DrugsAlcohol from '#lib/components/steps/Step8DrugsAlcohol.svelte';
+	import Step9Summary from '#lib/components/steps/Step9Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

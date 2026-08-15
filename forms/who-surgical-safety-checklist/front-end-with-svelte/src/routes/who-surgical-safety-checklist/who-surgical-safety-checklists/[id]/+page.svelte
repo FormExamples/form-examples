@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/checklist.svelte';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleChecklists } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/checklist.svelte.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleChecklists } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1CaseDetails from '$lib/components/steps/Step1CaseDetails.svelte';
-	import Step2SignIn from '$lib/components/steps/Step2SignIn.svelte';
-	import Step3TimeOut from '$lib/components/steps/Step3TimeOut.svelte';
-	import Step4SignOut from '$lib/components/steps/Step4SignOut.svelte';
-	import Step5Summary from '$lib/components/steps/Step5Summary.svelte';
+	import Step1CaseDetails from '#lib/components/steps/Step1CaseDetails.svelte';
+	import Step2SignIn from '#lib/components/steps/Step2SignIn.svelte';
+	import Step3TimeOut from '#lib/components/steps/Step3TimeOut.svelte';
+	import Step4SignOut from '#lib/components/steps/Step4SignOut.svelte';
+	import Step5Summary from '#lib/components/steps/Step5Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

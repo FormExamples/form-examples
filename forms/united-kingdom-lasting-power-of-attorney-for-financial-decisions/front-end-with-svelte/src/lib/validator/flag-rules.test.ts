@@ -7,7 +7,7 @@ import {
   reducedFeeWithoutLPA120A,
   overFourAttorneysFlag,
 } from './flag-rules.js';
-import { createEmptyLpa, createEmptyPerson } from '$lib/factory.js';
+import { createEmptyLpa, createEmptyPerson } from '#lib/factory.js';
 
 describe('flag rules', () => {
   describe('SingleAttorneyNoReplacement', () => {

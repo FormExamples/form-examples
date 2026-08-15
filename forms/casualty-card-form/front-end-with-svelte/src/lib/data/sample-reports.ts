@@ -1,7 +1,7 @@
-import type { CasualtyCardData, MTSCategory, NEWS2ClinicalResponse } from '$lib/engine/types';
-import { calculateNEWS2 } from '$lib/engine/news2-calculator';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { CasualtyCardData, MTSCategory, NEWS2ClinicalResponse } from '#lib/engine/types.js';
+import { calculateNEWS2 } from '#lib/engine/news2-calculator.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample casualty card: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

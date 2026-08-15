@@ -1,25 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1ResponseIdentification from '$lib/components/steps/Step1ResponseIdentification.svelte';
-	import Step2PatientIdentification from '$lib/components/steps/Step2PatientIdentification.svelte';
-	import Step3ClinicalAssessment from '$lib/components/steps/Step3ClinicalAssessment.svelte';
-	import Step4StructuredFindings from '$lib/components/steps/Step4StructuredFindings.svelte';
-	import Step5DiagnosisMeasurement from '$lib/components/steps/Step5DiagnosisMeasurement.svelte';
-	import Step6ManagementFollowUp from '$lib/components/steps/Step6ManagementFollowUp.svelte';
-	import Step7SignOff from '$lib/components/steps/Step7SignOff.svelte';
+	import Step1ResponseIdentification from '#lib/components/steps/Step1ResponseIdentification.svelte';
+	import Step2PatientIdentification from '#lib/components/steps/Step2PatientIdentification.svelte';
+	import Step3ClinicalAssessment from '#lib/components/steps/Step3ClinicalAssessment.svelte';
+	import Step4StructuredFindings from '#lib/components/steps/Step4StructuredFindings.svelte';
+	import Step5DiagnosisMeasurement from '#lib/components/steps/Step5DiagnosisMeasurement.svelte';
+	import Step6ManagementFollowUp from '#lib/components/steps/Step6ManagementFollowUp.svelte';
+	import Step7SignOff from '#lib/components/steps/Step7SignOff.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const isNew = $derived(id === 'new');

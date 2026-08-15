@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import type { RiskGroup } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import type { RiskGroup } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
 	const d = assessment.data;
 </script>

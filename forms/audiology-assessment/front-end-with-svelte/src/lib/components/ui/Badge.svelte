@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { hearingGradeLabel, hearingGradeColor } from '$lib/engine/utils';
+	import { hearingGradeLabel, hearingGradeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

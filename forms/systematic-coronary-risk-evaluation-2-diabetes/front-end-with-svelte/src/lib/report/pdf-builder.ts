@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { riskCategoryLabel, calculateAge, hba1cMmolMol } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { riskCategoryLabel, calculateAge, hba1cMmolMol } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const age = calculateAge(data.patientDemographics.dateOfBirth);

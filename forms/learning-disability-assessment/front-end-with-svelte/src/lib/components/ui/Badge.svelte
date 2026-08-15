@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { supportLevelLabel } from '$lib/engine/utils';
+	import { supportLevelLabel } from '#lib/engine/utils.js';
 
 	let {
 		score

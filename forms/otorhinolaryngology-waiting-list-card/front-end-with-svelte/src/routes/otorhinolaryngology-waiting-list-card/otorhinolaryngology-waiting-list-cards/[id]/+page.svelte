@@ -1,25 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/card.svelte';
-	import { calculateWaitingTimeStatus } from '$lib/engine/composite-grader';
-	import { STEPS, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleCards } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/card.svelte.js';
+	import { calculateWaitingTimeStatus } from '#lib/engine/composite-grader.js';
+	import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleCards } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Practitioner from '$lib/components/steps/Step1Practitioner.svelte';
-	import Step2Patient from '$lib/components/steps/Step2Patient.svelte';
-	import Step3Referral from '$lib/components/steps/Step3Referral.svelte';
-	import Step4WaitingList from '$lib/components/steps/Step4WaitingList.svelte';
-	import Step5Appointment from '$lib/components/steps/Step5Appointment.svelte';
-	import Step6Communication from '$lib/components/steps/Step6Communication.svelte';
-	import Step7Signoff from '$lib/components/steps/Step7Signoff.svelte';
+	import Step1Practitioner from '#lib/components/steps/Step1Practitioner.svelte';
+	import Step2Patient from '#lib/components/steps/Step2Patient.svelte';
+	import Step3Referral from '#lib/components/steps/Step3Referral.svelte';
+	import Step4WaitingList from '#lib/components/steps/Step4WaitingList.svelte';
+	import Step5Appointment from '#lib/components/steps/Step5Appointment.svelte';
+	import Step6Communication from '#lib/components/steps/Step6Communication.svelte';
+	import Step7Signoff from '#lib/components/steps/Step7Signoff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

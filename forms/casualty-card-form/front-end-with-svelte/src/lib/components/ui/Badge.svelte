@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { news2ScoreColor } from '$lib/engine/utils';
+	import { news2ScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score,

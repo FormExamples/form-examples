@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeMentalHealthActAssessment } from '$lib/engine/mha-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeMentalHealthActAssessment } from '#lib/engine/mha-grader.js';
 	import {
 		completenessStatusLabel,
 		completenessStatusColor,
 		urgencyLabel,
 		urgencyColor,
 		sectionClassLabel
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.recommendation;
 	const grade = $derived(gradeMentalHealthActAssessment(assessment.data));

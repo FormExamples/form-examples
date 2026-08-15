@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { RiskLevel } from '$lib/engine/types';
-	import { riskLevelShortLabel, riskLevelColor } from '$lib/engine/utils';
+	import type { RiskLevel } from '#lib/engine/types.js';
+	import { riskLevelShortLabel, riskLevelColor } from '#lib/engine/utils.js';
 
 	let {
 		risk

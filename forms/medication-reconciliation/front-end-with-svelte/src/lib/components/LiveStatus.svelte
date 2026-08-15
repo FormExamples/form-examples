@@ -2,10 +2,10 @@
 	// Live status readout — mirrors the HTML front-end's `renderLiveSummary`.
 	// Runs the shared engine over the current store data and shows the derived
 	// status and counts, updating as the child lists grow.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateReconciliation } from '$lib/engine/medication-reconciliation-grader';
-	import { statusLabel, statusColor } from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateReconciliation } from '#lib/engine/medication-reconciliation-grader.js';
+	import { statusLabel, statusColor } from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const g = $derived(calculateReconciliation(assessment.data));
 </script>

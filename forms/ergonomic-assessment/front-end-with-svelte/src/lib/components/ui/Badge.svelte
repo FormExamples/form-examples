@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { rebaScoreLabel, rebaScoreColor } from '$lib/engine/utils';
+	import { rebaScoreLabel, rebaScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

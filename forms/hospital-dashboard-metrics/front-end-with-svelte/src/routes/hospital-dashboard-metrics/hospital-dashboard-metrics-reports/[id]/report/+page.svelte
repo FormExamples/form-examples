@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/metrics.svelte';
-	import { CATEGORIES, DASHBOARD_METRICS, TOTAL_METRICS } from '$lib/config/metrics';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { store } from '#lib/stores/metrics.svelte.js';
+	import { CATEGORIES, DASHBOARD_METRICS, TOTAL_METRICS } from '#lib/config/metrics.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

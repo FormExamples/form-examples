@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Organization from '$lib/components/steps/Step1Organization.svelte';
-	import Step2Manifesto from '$lib/components/steps/Step2Manifesto.svelte';
-	import Step3PrinciplesA from '$lib/components/steps/Step3PrinciplesA.svelte';
-	import Step4PrinciplesB from '$lib/components/steps/Step4PrinciplesB.svelte';
-	import Step5PrinciplesC from '$lib/components/steps/Step5PrinciplesC.svelte';
-	import Step6ScoreAndSignoff from '$lib/components/steps/Step6ScoreAndSignoff.svelte';
+	import Step1Organization from '#lib/components/steps/Step1Organization.svelte';
+	import Step2Manifesto from '#lib/components/steps/Step2Manifesto.svelte';
+	import Step3PrinciplesA from '#lib/components/steps/Step3PrinciplesA.svelte';
+	import Step4PrinciplesB from '#lib/components/steps/Step4PrinciplesB.svelte';
+	import Step5PrinciplesC from '#lib/components/steps/Step5PrinciplesC.svelte';
+	import Step6ScoreAndSignoff from '#lib/components/steps/Step6ScoreAndSignoff.svelte';
 
 	const plural = 'agile-consulting-scorecards-for-hiring-help';
 

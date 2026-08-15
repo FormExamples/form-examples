@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import TextField from '$lib/components/ui/TextField.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import TextField from '#lib/components/ui/TextField.svelte';
 </script>
 
 <section>

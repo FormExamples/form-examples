@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import RelativeEntry from '$lib/components/ui/RelativeEntry.svelte';
-	import RelativeListEditor from '$lib/components/ui/RelativeListEditor.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import RelativeEntry from '#lib/components/ui/RelativeEntry.svelte';
+	import RelativeListEditor from '#lib/components/ui/RelativeListEditor.svelte';
 
 	const fp = assessment.data.familyPedigree;
 </script>

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
 	import EpdsItemField from './EpdsItemField.svelte';
-	import { itemByNumber, scoreForOption } from '$lib/engine/epds-rules';
+	import { itemByNumber, scoreForOption } from '#lib/engine/epds-rules.js';
 
 	const item10 = itemByNumber(10)!;
 	const raw = $derived(assessment.data.items.item10);

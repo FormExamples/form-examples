@@ -1,5 +1,5 @@
 import type { Band, FiredRule, SectionScore } from './types.js';
-import type { SectionId } from '$lib/config/items.js';
+import type { SectionId } from '#lib/config/items.js';
 
 const COACHING: Record<SectionId, Record<Exclude<Band, 'unanswered'>, string>> = {
   teams: {

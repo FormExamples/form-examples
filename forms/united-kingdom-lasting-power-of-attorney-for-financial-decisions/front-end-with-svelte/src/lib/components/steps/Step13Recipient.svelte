@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-  import CheckboxField from '$lib/components/ui/CheckboxField.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+  import CheckboxField from '#lib/components/ui/CheckboxField.svelte';
 
   const recipient = $derived(store.data.registrationRecipient);
 

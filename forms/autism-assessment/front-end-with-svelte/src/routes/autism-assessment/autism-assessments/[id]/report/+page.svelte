@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { aq10ScoreLabel, aq10ScoreColor, calculateAge } from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { aq10ScoreLabel, aq10ScoreColor, calculateAge } from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

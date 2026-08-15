@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { emptyMedicine } from '$lib/engine/utils';
-	import type { Medicine } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import ListEditor from '$lib/components/ui/ListEditor.svelte';
-	import LiveStatus from '$lib/components/LiveStatus.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { emptyMedicine } from '#lib/engine/utils.js';
+	import type { Medicine } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import ListEditor from '#lib/components/ui/ListEditor.svelte';
+	import LiveStatus from '#lib/components/LiveStatus.svelte';
 
 	const data = assessment.data;
 </script>

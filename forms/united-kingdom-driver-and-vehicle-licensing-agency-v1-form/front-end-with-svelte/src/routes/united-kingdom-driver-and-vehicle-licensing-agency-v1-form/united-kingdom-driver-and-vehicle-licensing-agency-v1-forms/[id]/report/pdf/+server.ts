@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDocument } from '$lib/report/pdf-builder';
-import type { AssessmentData, FlaggedIssue } from '$lib/engine/types';
-import type { V1ValidationResult } from '$lib/stores/assessment.svelte';
+import { buildPdfDocument } from '#lib/report/pdf-builder.js';
+import type { AssessmentData, FlaggedIssue } from '#lib/engine/types.js';
+import type { V1ValidationResult } from '#lib/stores/assessment.svelte.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { data, validation, flags } = (await request.json()) as {

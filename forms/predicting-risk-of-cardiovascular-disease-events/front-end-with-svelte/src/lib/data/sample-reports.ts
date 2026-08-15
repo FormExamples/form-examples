@@ -1,7 +1,7 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { calculateRisk } from '$lib/engine/risk-grader';
-import { isSmoker } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { calculateRisk } from '#lib/engine/risk-grader.js';
+import { isSmoker } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

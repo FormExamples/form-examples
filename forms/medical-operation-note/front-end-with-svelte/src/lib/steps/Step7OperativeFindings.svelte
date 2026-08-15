@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { store } from '$lib/state.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import Select from '$lib/components/ui/Select.svelte';
+  import { store } from '#lib/state.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
 </script>
 
 <Fieldset legend="Step 7 — Operative findings and technique">

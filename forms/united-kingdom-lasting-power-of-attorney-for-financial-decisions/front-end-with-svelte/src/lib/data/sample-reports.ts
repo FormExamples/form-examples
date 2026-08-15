@@ -10,10 +10,10 @@ import type {
 	ReplacementAttorney,
 	ValidityBand,
 	WhenAttorneysCanAct
-} from '$lib/types.js';
-import { createDefaultLpa } from '$lib/stores/lpa.svelte.js';
-import { createEmptyPerson } from '$lib/factory.js';
-import { validateLpa } from '$lib/validator/validator.js';
+} from '#lib/types.js';
+import { createDefaultLpa } from '#lib/stores/lpa.svelte.js';
+import { createEmptyPerson } from '#lib/factory.js';
+import { validateLpa } from '#lib/validator/validator.js';
 
 /** A sample LPA: a stable id, display metadata, and the full data the engine validates. */
 export interface SampleLpa {

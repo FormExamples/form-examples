@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateMatB1 } from '$lib/engine/mat-b1-validator';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { validateMatB1 } from '#lib/engine/mat-b1-validator.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientIdentification from '$lib/components/steps/Step1PatientIdentification.svelte';
-	import Step2PreConfinement from '$lib/components/steps/Step2PreConfinement.svelte';
-	import Step3PostConfinement from '$lib/components/steps/Step3PostConfinement.svelte';
-	import Step4IssuerValidation from '$lib/components/steps/Step4IssuerValidation.svelte';
+	import Step1PatientIdentification from '#lib/components/steps/Step1PatientIdentification.svelte';
+	import Step2PreConfinement from '#lib/components/steps/Step2PreConfinement.svelte';
+	import Step3PostConfinement from '#lib/components/steps/Step3PostConfinement.svelte';
+	import Step4IssuerValidation from '#lib/components/steps/Step4IssuerValidation.svelte';
 
 	const plural = 'united-kingdom-maternity-certificates-mat-b1';
 

@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { XRayRequest, GradingResult } from '$lib/engine/types';
+import type { XRayRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	bodyRegionLabel,
 	indicationLabel,
@@ -9,7 +9,7 @@ import {
 	radiationDoseLabel,
 	triageTierLabel,
 	recommendationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 /** Builds the pdfmake document definition for the X-ray request vetting report. */
 export function buildPdfDocument(data: XRayRequest, result: GradingResult): TDocumentDefinitions {

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { store } from '$lib/stores/fitnote.svelte';
-	import type { PeriodDurationUnit, PeriodType } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import { store } from '#lib/stores/fitnote.svelte.js';
+	import type { PeriodDurationUnit, PeriodType } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
 
 	const d = store.data;
 

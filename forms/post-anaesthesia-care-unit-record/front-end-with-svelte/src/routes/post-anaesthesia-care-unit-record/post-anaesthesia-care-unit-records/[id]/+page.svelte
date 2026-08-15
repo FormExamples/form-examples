@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculatePacuGrade } from '$lib/engine/pacu-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculatePacuGrade } from '#lib/engine/pacu-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Activity from '$lib/components/steps/Step3Activity.svelte';
-	import Step4Respiration from '$lib/components/steps/Step4Respiration.svelte';
-	import Step5Circulation from '$lib/components/steps/Step5Circulation.svelte';
-	import Step6Consciousness from '$lib/components/steps/Step6Consciousness.svelte';
-	import Step7OxygenSaturation from '$lib/components/steps/Step7OxygenSaturation.svelte';
-	import Step8Observations from '$lib/components/steps/Step8Observations.svelte';
-	import Step9Padss from '$lib/components/steps/Step9Padss.svelte';
-	import Step10Summary from '$lib/components/steps/Step10Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Activity from '#lib/components/steps/Step3Activity.svelte';
+	import Step4Respiration from '#lib/components/steps/Step4Respiration.svelte';
+	import Step5Circulation from '#lib/components/steps/Step5Circulation.svelte';
+	import Step6Consciousness from '#lib/components/steps/Step6Consciousness.svelte';
+	import Step7OxygenSaturation from '#lib/components/steps/Step7OxygenSaturation.svelte';
+	import Step8Observations from '#lib/components/steps/Step8Observations.svelte';
+	import Step9Padss from '#lib/components/steps/Step9Padss.svelte';
+	import Step10Summary from '#lib/components/steps/Step10Summary.svelte';
 
 	const plural = 'post-anaesthesia-care-unit-records';
 

@@ -3,13 +3,13 @@
 	// safety flags, and the prehabilitation plan. Safety flags are printed
 	// whether or not the clinician overrode the readiness band.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import { DOMAIN_LABELS } from '$lib/engine/domain-rules';
-	import { GATE_DECISION_LABELS, READINESS_LABELS, STATUS_LABELS } from '$lib/engine/labels';
-	import { titleCase } from '$lib/engine/utils';
-	import { assessmentStore } from '$lib/stores/assessment.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import { DOMAIN_LABELS } from '#lib/engine/domain-rules.js';
+	import { GATE_DECISION_LABELS, READINESS_LABELS, STATUS_LABELS } from '#lib/engine/labels.js';
+	import { titleCase } from '#lib/engine/utils.js';
+	import { assessmentStore } from '#lib/stores/assessment.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

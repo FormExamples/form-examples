@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { page } from '$app/state';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1ResponseIdentification from '$lib/components/steps/Step1ResponseIdentification.svelte';
-	import Step2WorkerIdentification from '$lib/components/steps/Step2WorkerIdentification.svelte';
-	import Step3Decision from '$lib/components/steps/Step3Decision.svelte';
-	import Step4AdjustmentsAgreed from '$lib/components/steps/Step4AdjustmentsAgreed.svelte';
-	import Step5TrialAndReview from '$lib/components/steps/Step5TrialAndReview.svelte';
-	import Step6SupportAndResponsibilities from '$lib/components/steps/Step6SupportAndResponsibilities.svelte';
-	import Step7SignOff from '$lib/components/steps/Step7SignOff.svelte';
+	import Step1ResponseIdentification from '#lib/components/steps/Step1ResponseIdentification.svelte';
+	import Step2WorkerIdentification from '#lib/components/steps/Step2WorkerIdentification.svelte';
+	import Step3Decision from '#lib/components/steps/Step3Decision.svelte';
+	import Step4AdjustmentsAgreed from '#lib/components/steps/Step4AdjustmentsAgreed.svelte';
+	import Step5TrialAndReview from '#lib/components/steps/Step5TrialAndReview.svelte';
+	import Step6SupportAndResponsibilities from '#lib/components/steps/Step6SupportAndResponsibilities.svelte';
+	import Step7SignOff from '#lib/components/steps/Step7SignOff.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const isNew = $derived(id === 'new');
@@ -51,7 +51,7 @@
 		if (!browser) return null;
 		try {
 			const raw = localStorage.getItem(HANDOFF_KEY);
-			return raw ? (JSON.parse(raw) as Handoff) : null;
+			return raw ? JSON.parse(raw) as Handoff : null;
 		} catch {
 			return null;
 		}
@@ -181,7 +181,7 @@
 		<Step7SignOff />
 
 		<div class="button-group">
-			<Button type="submit" data-variant="primary">Compute grade &amp; view response</Button>
+			<Button type="submit" data-variant="primary">Compute grade & view response</Button>
 			<Button data-variant="danger" onclick={startOver}>Start over</Button>
 		</div>
 	</Form>

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
 
   const prefs = $derived(lpaStore.application.preferences);
   function changed() {

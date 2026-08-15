@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { priorityLabel } from '$lib/engine/utils';
-	import type { FlagPriority } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { priorityLabel } from '#lib/engine/utils.js';
+	import type { FlagPriority } from '#lib/engine/types.js';
 
 	let triageFilter = $state('');
 	let statusFilter = $state('');
@@ -35,7 +35,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -45,9 +45,9 @@
 
 	const triageLabel = (v: string) =>
 		v === 'red'
-			? 'Red'
-			: v === 'orange'
-				? 'Orange'
+		? 'Red'
+		: v === 'orange'
+			? 'Orange'
 				: v === 'yellow'
 					? 'Yellow'
 					: v === 'green'
@@ -55,9 +55,9 @@
 						: '—';
 	const dispositionLabel = (v: string) =>
 		v === 'admit'
-			? 'Admit'
-			: v === 'transfer'
-				? 'Transfer'
+		? 'Admit'
+		: v === 'transfer'
+			? 'Transfer'
 				: v === 'discharge'
 					? 'Discharge'
 					: v === 'died'
@@ -68,8 +68,20 @@
 	// the shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Encounter', width: 130 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'recordedDate', header: 'Recorded', width: 120, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'recordedDate',
+			header: 'Recorded',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'triageCategory',
 			header: 'Triage',
@@ -90,7 +102,7 @@
 			header: 'Status',
 			width: 120,
 			sort: true,
-			template: (v: boolean) => (v ? 'Complete' : 'Incomplete')
+			template: (v: boolean) => v ? 'Complete' : 'Incomplete'
 		},
 		{ id: 'urgentFlags', header: 'Urgent', width: 90, sort: true },
 		{ id: 'totalFlags', header: 'Flags', width: 80, sort: true },
@@ -98,7 +110,7 @@
 			id: 'topPriority',
 			header: 'Top priority',
 			width: 120,
-			template: (v: FlagPriority | null) => (v ? priorityLabel(v) : '—')
+			template: (v: FlagPriority | null) => v ? priorityLabel(v) : '—'
 		},
 		{ id: 'recordedBy', header: 'Recorded by', flexgrow: 1, sort: true }
 	];
@@ -148,11 +160,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} encounters</p>
 </main>

@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CarePlan, GradingResult } from '$lib/engine/types';
-import { classifyProblem } from '$lib/engine/nursing-care-plan-rules';
+import type { CarePlan, GradingResult } from '#lib/engine/types.js';
+import { classifyProblem } from '#lib/engine/nursing-care-plan-rules.js';
 import {
 	completenessLabel,
 	priorityLabel,
@@ -13,7 +13,7 @@ import {
 	planTypeLabel,
 	careSettingLabel,
 	sexLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: CarePlan, result: GradingResult): TDocumentDefinitions {
 	const problemBody = [

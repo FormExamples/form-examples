@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, FlaggedIssue, ValidationResult } from '$lib/engine/types';
-import { calculateAge, followUpTimeframeLabel, sectionLabel } from '$lib/engine/utils';
+import type { AssessmentData, FlaggedIssue, ValidationResult } from '#lib/engine/types.js';
+import { calculateAge, followUpTimeframeLabel, sectionLabel } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: AssessmentData,

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { assessment } from '$lib/stores/assessment.svelte';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import NumberInput from '$lib/components/ui/NumberInput.svelte';
-  import Select from '$lib/components/ui/Select.svelte';
-  import { isSmoker } from '$lib/engine/utils';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import NumberInput from '#lib/components/ui/NumberInput.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
+  import { isSmoker } from '#lib/engine/utils.js';
 
   const d = assessment.data.smokingAlcohol;
   const showCigarettes = $derived(isSmoker(d.smokingStatus));

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
-	import YesNoField from '$lib/components/ui/YesNoField.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import MedicationEntry from '#lib/components/ui/MedicationEntry.svelte';
+	import YesNoField from '#lib/components/ui/YesNoField.svelte';
 
-	const d = assessment.data.medications;
+	const d = $state(assessment.data.medications);
 </script>
 
 <Fieldset legend="Medications">

@@ -1,8 +1,8 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { OHS_ITEMS } from '$lib/config/ohs-items';
-import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '$lib/engine/grader';
-import type { GradingResult, HipReplacementSurgeryEvaluation } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+import { OHS_ITEMS } from '#lib/config/ohs-items.js';
+import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '#lib/engine/grader.js';
+import type { GradingResult, HipReplacementSurgeryEvaluation } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { EyeRefraction } from '$lib/engine/types.js';
-  import FormField from '$lib/components/ui/FormField.svelte';
+  import type { EyeRefraction } from '#lib/engine/types.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
   let { eye = $bindable() }: { eye: EyeRefraction } = $props();
   const input = 'input w-full';
 </script>

@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateDonorGrade } from '$lib/engine/donor-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateDonorGrade } from '#lib/engine/donor-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1DonorDemographics from '$lib/components/steps/Step1DonorDemographics.svelte';
-	import Step2GeneralHealthWellbeing from '$lib/components/steps/Step2GeneralHealthWellbeing.svelte';
-	import Step3MedicalHistory from '$lib/components/steps/Step3MedicalHistory.svelte';
-	import Step4RecentIllnessInfections from '$lib/components/steps/Step4RecentIllnessInfections.svelte';
-	import Step5TravelHistory from '$lib/components/steps/Step5TravelHistory.svelte';
-	import Step6LifestyleRiskBehaviours from '$lib/components/steps/Step6LifestyleRiskBehaviours.svelte';
-	import Step7PregnancyTransfusionHistory from '$lib/components/steps/Step7PregnancyTransfusionHistory.svelte';
-	import Step8VitalSigns from '$lib/components/steps/Step8VitalSigns.svelte';
-	import Step9InformedConsent from '$lib/components/steps/Step9InformedConsent.svelte';
-	import Step10DonationPlan from '$lib/components/steps/Step10DonationPlan.svelte';
+	import Step1DonorDemographics from '#lib/components/steps/Step1DonorDemographics.svelte';
+	import Step2GeneralHealthWellbeing from '#lib/components/steps/Step2GeneralHealthWellbeing.svelte';
+	import Step3MedicalHistory from '#lib/components/steps/Step3MedicalHistory.svelte';
+	import Step4RecentIllnessInfections from '#lib/components/steps/Step4RecentIllnessInfections.svelte';
+	import Step5TravelHistory from '#lib/components/steps/Step5TravelHistory.svelte';
+	import Step6LifestyleRiskBehaviours from '#lib/components/steps/Step6LifestyleRiskBehaviours.svelte';
+	import Step7PregnancyTransfusionHistory from '#lib/components/steps/Step7PregnancyTransfusionHistory.svelte';
+	import Step8VitalSigns from '#lib/components/steps/Step8VitalSigns.svelte';
+	import Step9InformedConsent from '#lib/components/steps/Step9InformedConsent.svelte';
+	import Step10DonationPlan from '#lib/components/steps/Step10DonationPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

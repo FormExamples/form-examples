@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { store } from '$lib/state.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import Select from '$lib/components/ui/Select.svelte';
+  import { store } from '#lib/state.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
 </script>
 
 <Fieldset legend="Step 1 — Operation identification">

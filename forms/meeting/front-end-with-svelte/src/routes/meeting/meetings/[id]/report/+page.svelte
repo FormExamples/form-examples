@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { meeting } from '$lib/stores/meeting.svelte';
+	import { meeting } from '#lib/stores/meeting.svelte.js';
 	import {
 		healthLabel,
 		healthColor,
@@ -12,8 +12,8 @@
 		categoryLabel,
 		overallResultLabel,
 		formatDateTime
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(meeting.data);

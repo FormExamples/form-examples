@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/assessment.svelte.js';
-	import { PRINCIPLES } from '$lib/config/principles.js';
-	import { sampleAssessments } from '$lib/data/sample-reports';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { store } from '#lib/stores/assessment.svelte.js';
+	import { PRINCIPLES } from '#lib/config/principles.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const d = $derived(store.data);

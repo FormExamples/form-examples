@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import NumericSelect from '$lib/components/ui/NumericSelect.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import NumericSelect from '#lib/components/ui/NumericSelect.svelte';
 
 	const t = assessment.data.travelVaccinations;
 

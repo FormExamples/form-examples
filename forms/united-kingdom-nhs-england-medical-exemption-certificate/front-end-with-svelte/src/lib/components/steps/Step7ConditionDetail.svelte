@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { application } from '$lib/stores/application.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import { conditionLabel } from '$lib/engine/utils';
+	import { application } from '#lib/stores/application.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { conditionLabel } from '#lib/engine/utils.js';
 
 	const data = application.data;
 

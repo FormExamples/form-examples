@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { NeurodiversityAdjustmentResponse, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { NeurodiversityAdjustmentResponse, GradingResult } from '#lib/engine/types.js';
 
 /** Per-id localStorage draft key (default id `new`). */
 function storageKey(id: string): string {
@@ -87,7 +87,7 @@ class ResponseStore {
 		this.id = id || 'new';
 		this.result = null;
 		this.currentStep = 1;
-		let next = { ...createDefaultResponse(), ...(seed ?? {}) };
+		let next = { ...createDefaultResponse(), ...seed ?? {} };
 		if (browser) {
 			const raw = localStorage.getItem(storageKey(this.id));
 			if (raw) {

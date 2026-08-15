@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { RequestData, GradingResult } from '$lib/engine/types';
+import type { RequestData, GradingResult } from '#lib/engine/types.js';
 import {
 	testTypeLabel,
 	indicationLabel,
@@ -7,8 +7,8 @@ import {
 	validityBandLabel,
 	triageTierLabel,
 	calculateAge
-} from '$lib/engine/utils';
-import { selectedPanelCategories, ALLERGEN_PANELS } from '$lib/engine/rules';
+} from '#lib/engine/utils.js';
+import { selectedPanelCategories, ALLERGEN_PANELS } from '#lib/engine/rules.js';
 
 export function buildPdfDocument(data: RequestData, result: GradingResult): TDocumentDefinitions {
 	const age = calculateAge(data.patient.dateOfBirth);

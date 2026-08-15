@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Checkbox from '#lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.highRiskSigns;
 </script>

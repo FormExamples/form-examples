@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
 </script>
 
 <Fieldset legend="Step 2 — Research & Planning Privacy Notice">

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { authorization } from '$lib/stores/authorization.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import { authorization } from '#lib/stores/authorization.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
 	const d = authorization.data.authorizedRecipient;
 </script>

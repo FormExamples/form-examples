@@ -1,4 +1,4 @@
-import { emptyAdrFormData, type AdrFormData, type Status, type DecisionGroup } from '$lib/types.js';
+import { emptyAdrFormData, type AdrFormData, type Status, type DecisionGroup } from '#lib/types.js';
 
 const VALID_STATUSES: Status[] = ['pending', 'decided', 'approved', 'superseded', 'deprecated'];
 const VALID_GROUPS: DecisionGroup[] = [

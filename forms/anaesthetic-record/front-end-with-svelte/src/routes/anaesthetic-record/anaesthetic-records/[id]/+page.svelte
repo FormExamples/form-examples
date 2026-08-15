@@ -1,30 +1,30 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/anaesthetic-record-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/anaesthetic-record-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1CaseIdentification from '$lib/components/steps/Step1CaseIdentification.svelte';
-	import Step2PreInductionChecks from '$lib/components/steps/Step2PreInductionChecks.svelte';
-	import Step3AsaAirwayAssessment from '$lib/components/steps/Step3AsaAirwayAssessment.svelte';
-	import Step4DrugsAndDoses from '$lib/components/steps/Step4DrugsAndDoses.svelte';
-	import Step5AirwayManagement from '$lib/components/steps/Step5AirwayManagement.svelte';
-	import Step6Monitoring from '$lib/components/steps/Step6Monitoring.svelte';
-	import Step7TimedObservations from '$lib/components/steps/Step7TimedObservations.svelte';
-	import Step8FluidsAndBloodLoss from '$lib/components/steps/Step8FluidsAndBloodLoss.svelte';
-	import Step9RegionalNeuraxial from '$lib/components/steps/Step9RegionalNeuraxial.svelte';
-	import Step10EventsAndComplications from '$lib/components/steps/Step10EventsAndComplications.svelte';
-	import Step11RecoveryHandover from '$lib/components/steps/Step11RecoveryHandover.svelte';
-	import Step12SummaryAndSignOff from '$lib/components/steps/Step12SummaryAndSignOff.svelte';
+	import Step1CaseIdentification from '#lib/components/steps/Step1CaseIdentification.svelte';
+	import Step2PreInductionChecks from '#lib/components/steps/Step2PreInductionChecks.svelte';
+	import Step3AsaAirwayAssessment from '#lib/components/steps/Step3AsaAirwayAssessment.svelte';
+	import Step4DrugsAndDoses from '#lib/components/steps/Step4DrugsAndDoses.svelte';
+	import Step5AirwayManagement from '#lib/components/steps/Step5AirwayManagement.svelte';
+	import Step6Monitoring from '#lib/components/steps/Step6Monitoring.svelte';
+	import Step7TimedObservations from '#lib/components/steps/Step7TimedObservations.svelte';
+	import Step8FluidsAndBloodLoss from '#lib/components/steps/Step8FluidsAndBloodLoss.svelte';
+	import Step9RegionalNeuraxial from '#lib/components/steps/Step9RegionalNeuraxial.svelte';
+	import Step10EventsAndComplications from '#lib/components/steps/Step10EventsAndComplications.svelte';
+	import Step11RecoveryHandover from '#lib/components/steps/Step11RecoveryHandover.svelte';
+	import Step12SummaryAndSignOff from '#lib/components/steps/Step12SummaryAndSignOff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

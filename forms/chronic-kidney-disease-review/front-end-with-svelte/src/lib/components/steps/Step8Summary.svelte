@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { review } from '$lib/engine/ckd-review-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { review } from '#lib/engine/ckd-review-grader.js';
 	import {
 		gfrCategoryLabel,
 		gfrCategoryColor,
@@ -10,12 +10,12 @@
 		kdigoRiskZoneColor,
 		reviewStatusLabel,
 		reviewStatusColor
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const s = assessment.data.summary;
 

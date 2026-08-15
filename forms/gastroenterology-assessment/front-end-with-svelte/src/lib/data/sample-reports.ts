@@ -1,7 +1,7 @@
-import type { AssessmentData, SeverityLevel } from '$lib/engine/types';
-import { calculateGISeverity } from '$lib/engine/gi-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, SeverityLevel } from '#lib/engine/types.js';
+import { calculateGISeverity } from '#lib/engine/gi-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

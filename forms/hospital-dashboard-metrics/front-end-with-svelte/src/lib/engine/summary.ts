@@ -1,5 +1,5 @@
 import type { CategoryCount, HospitalDashboardMetrics, MetricsSummaryResult } from './types.js';
-import { CATEGORIES, DASHBOARD_METRICS } from '$lib/config/metrics.js';
+import { CATEGORIES, DASHBOARD_METRICS } from '#lib/config/metrics.js';
 
 /**
  * Pure completeness tally over the 67 metrics — no side effects, no scoring.

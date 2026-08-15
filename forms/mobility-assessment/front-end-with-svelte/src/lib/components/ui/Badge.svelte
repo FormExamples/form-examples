@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { tinettiScoreLabel, tinettiScoreColor } from '$lib/engine/utils';
+	import { tinettiScoreLabel, tinettiScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

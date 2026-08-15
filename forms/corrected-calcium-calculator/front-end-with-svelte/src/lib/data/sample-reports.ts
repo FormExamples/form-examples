@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, Classification } from '$lib/engine/types';
-import { calculateCorrectedCalcium } from '$lib/engine/calcium-calculator';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, Classification } from '#lib/engine/types.js';
+import { calculateCorrectedCalcium } from '#lib/engine/calcium-calculator.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

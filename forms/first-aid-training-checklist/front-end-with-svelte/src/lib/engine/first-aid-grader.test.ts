@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { gradeFirstAid } from './first-aid-grader';
 import { detectAdditionalFlags } from './flagged-issues';
 import { fawRules, CRITICAL_RULE_IDS } from './faw-rules';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import type { AssessmentData } from './types';
 
 /** A fully-competent trainee: every gradeable item demonstrated to standard. */

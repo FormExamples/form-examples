@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { certificateStore } from '$lib/stores/certificate.svelte';
-  import { validateCertificate } from '$lib/engine/validation-rules';
-  import { severityColor } from '$lib/engine/utils';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import { certificateStore } from '#lib/stores/certificate.svelte.js';
+  import { validateCertificate } from '#lib/engine/validation-rules.js';
+  import { severityColor } from '#lib/engine/utils.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
   const c = $derived(certificateStore.data);
   const report = $derived(validateCertificate(c));
 </script>

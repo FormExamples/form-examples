@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { DOMAINS, RECOMMEND_OPTIONS, surveyItems } from '$lib/engine/rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import LikertItem from '$lib/components/ui/LikertItem.svelte';
-	import type { LikertValue } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { DOMAINS, RECOMMEND_OPTIONS, surveyItems } from '#lib/engine/rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import LikertItem from '#lib/components/ui/LikertItem.svelte';
+	import type { LikertValue } from '#lib/engine/types.js';
 
 	const meta = DOMAINS.find((dm) => dm.key === 'overall')!;
 	const items = surveyItems.filter((it) => it.domain === 'overall');

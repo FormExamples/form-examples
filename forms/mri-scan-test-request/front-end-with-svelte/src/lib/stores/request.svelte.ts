@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { MriRequest, GradingResult } from '$lib/engine/types';
-import { createDefault } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { MriRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefault } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given request id (defaults to `new`). */
 function storageKey(id: string): string {

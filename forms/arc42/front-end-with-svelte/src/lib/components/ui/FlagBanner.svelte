@@ -1,6 +1,6 @@
 <script lang="ts">
   // FlagBanner — Lily Svelte headless contract (alert + data-type).
-  import type { AdditionalFlag } from '$lib/grading/types.js';
+  import type { AdditionalFlag } from '#lib/grading/types.js';
 
   let { flags }: { flags: AdditionalFlag[] } = $props();
 

@@ -1,22 +1,21 @@
 <script lang="ts">
     import "../../app.css";
-    import { base } from "$app/paths";
     import { page } from "$app/state";
-    import ThemePicker from "$lib/components/ui/ThemePicker.svelte";
-    import LocalePicker from "$lib/components/ui/LocalePicker.svelte";
-    import TextSizePicker from "$lib/components/ui/TextSizePicker.svelte";
-    import SharePicker from "$lib/components/ui/SharePicker.svelte";
+    import ThemePicker from "#lib/components/ui/ThemePicker.svelte";
+    import LocalePicker from "#lib/components/ui/LocalePicker.svelte";
+    import TextSizePicker from "#lib/components/ui/TextSizePicker.svelte";
+    import SharePicker from "#lib/components/ui/SharePicker.svelte";
     import {
         THEME_OPTIONS,
         THEME_STORAGE_KEY,
         DEFAULT_THEME,
-    } from "$lib/config/themes";
+    } from "#lib/config/themes.js";
     import {
         TEXT_SIZE_OPTIONS,
         TEXT_SIZE_STORAGE_KEY,
         DEFAULT_TEXT_SIZE,
-    } from "$lib/config/text-sizes";
-    import { locale, LOCALE_OPTIONS } from "$lib/i18n/locale.svelte";
+    } from "#lib/config/text-sizes.js";
+    import { locale, LOCALE_OPTIONS } from "#lib/i18n/locale.svelte.js";
     const t = locale.t;
     let { children } = $props();
 
@@ -33,15 +32,11 @@
     $effect(() => {
         locale.set(localeValue);
     });
-    const localeDecoyTarget =
-        typeof document !== "undefined"
-            ? document.createElement("div")
-            : undefined;
 
-    const navClass = (href: string) =>
-        page.url.pathname === href
-            ? "rounded-md px-3 py-2 text-sm font-semibold text-primary bg-primary/10"
-            : "rounded-md px-3 py-2 text-sm font-medium text-base-content/70 hover:bg-base-200";
+    const localeDecoyTarget = typeof document !== "undefined" ? document.createElement("div") : undefined;
+    const navClass = (href: string) => page.url.pathname === href
+        ? "rounded-md px-3 py-2 text-sm font-semibold text-primary bg-primary/10"
+        : "rounded-md px-3 py-2 text-sm font-medium text-base-content/70 hover:bg-base-200";
 
     // ThemePicker manages <link>/data-theme/localStorage itself.
     const themeValues = THEME_OPTIONS.map((o) => o.value);
@@ -86,16 +81,16 @@
                     label={t("localeLabel")}
                     class="ml-2"
                     locales={localeValues}
-                    {localeLabels}
+                    localeLabels={localeLabels}
                     bind:value={localeValue}
                     target={localeDecoyTarget}
                 />
                 <ThemePicker
                     label={t("themeLabel")}
                     class="ml-2"
-                    themesUrl={`${base}/themes/`}
+                    themesUrl="/themes/"
                     themes={themeValues}
-                    {themeLabels}
+                    themeLabels={themeLabels}
                     defaultValue={DEFAULT_THEME}
                     storageKey={THEME_STORAGE_KEY}
                 />

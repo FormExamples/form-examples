@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { severityOptions, frequencyOptions } from '$lib/engine/symptom-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import type { SymptomSeverity } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { severityOptions, frequencyOptions } from '#lib/engine/symptom-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import type { SymptomSeverity } from '#lib/engine/types.js';
 
 	const c = assessment.data.cardiovascularSymptoms;
 

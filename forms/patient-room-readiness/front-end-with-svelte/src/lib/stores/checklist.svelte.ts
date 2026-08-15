@@ -1,8 +1,8 @@
-import { browser } from '$app/environment';
-import type { PatientRoomReadinessChecklist, ReadinessSummary } from '$lib/engine/types.js';
-import { createEmptyChecklist } from '$lib/engine/factory.js';
-import { summariseReadiness } from '$lib/engine/summary.js';
-import { STEPS, TOTAL_STEPS } from '$lib/config/steps.js';
+import { browser } from '$app/env';
+import type { PatientRoomReadinessChecklist, ReadinessSummary } from '#lib/engine/types.js';
+import { createEmptyChecklist } from '#lib/engine/factory.js';
+import { summariseReadiness } from '#lib/engine/summary.js';
+import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
 
 export interface ValidationErrors {
   [fieldId: string]: string;
@@ -49,27 +49,27 @@ class ChecklistStore {
   /** Per-step status for the Lily StepList. */
   steps = $derived(
     STEPS.map((s) => {
-      let status: 'waiting' | 'in-progress' | 'finished' | 'error' = 'waiting';
-      if (s.slug === 'location') {
-        const { buildingNameOrNumber, roomNameOrNumber } = this.data.location;
+    let status: 'waiting' | 'in-progress' | 'finished' | 'error' = 'waiting';
+    if (s.slug === 'location') {
+      const { buildingNameOrNumber, roomNameOrNumber } = this.data.location;
         if (buildingNameOrNumber && roomNameOrNumber) status = 'finished';
         else if (buildingNameOrNumber || roomNameOrNumber) status = 'in-progress';
-      } else if (s.slug === 'checklist') {
-        const { checkedCount, totalCount } = this.result;
+    } else if (s.slug === 'checklist') {
+      const { checkedCount, totalCount } = this.result;
         if (checkedCount === 0) status = 'waiting';
         else if (checkedCount === totalCount) status = 'finished';
         else status = 'in-progress';
-      } else if (s.slug === 'inspector') {
-        const { name, email } = this.data.inspector;
-        const { date, time } = this.data.inspection;
-        const filled = [name, email, date, time].filter(Boolean).length;
+    } else if (s.slug === 'inspector') {
+      const { name, email } = this.data.inspector;
+      const { date, time } = this.data.inspection;
+      const filled = [name, email, date, time].filter(Boolean).length;
         if (filled === 4) status = 'finished';
         else if (filled > 0) status = 'in-progress';
-      }
-      if (this.errors && Object.keys(this.errors).some((k) => k.startsWith(`step-${s.number}-`))) {
-        status = 'error';
-      }
-      return { ...s, status };
+    }
+    if (this.errors && Object.keys(this.errors).some((k) => k.startsWith(`step-${s.number}-`))) {
+      status = 'error';
+    }
+    return { ...s, status };
     }),
   );
 
@@ -163,7 +163,7 @@ function estimatePercentComplete(d: PatientRoomReadinessChecklist): number {
     d.inspection.time,
   ];
   const filled = tracked.filter((v) => v !== null && v !== undefined && v !== '').length;
-  return Math.round((filled / tracked.length) * 100);
+  return Math.round(filled / tracked.length * 100);
 }
 
 /**

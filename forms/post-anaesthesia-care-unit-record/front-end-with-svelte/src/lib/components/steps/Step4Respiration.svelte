@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { aldreteScore, ALDRETE_OPTIONS } from '$lib/engine/pacu-rules';
-	import { scoreColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { aldreteScore, ALDRETE_OPTIONS } from '#lib/engine/pacu-rules.js';
+	import { scoreColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.respiration;
 	const options = ALDRETE_OPTIONS.respiration;

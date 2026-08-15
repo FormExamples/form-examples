@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { request } from '$lib/stores/request.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 	import {
 		appropriatenessLabel,
 		appropriatenessColor,
@@ -16,8 +16,8 @@
 		recommendationColor,
 		priorityColor,
 		urgencyLabel
-	} from '$lib/engine/utils';
-	import { MARKERS, indicationLabel } from '$lib/engine/markers';
+	} from '#lib/engine/utils.js';
+	import { MARKERS, indicationLabel } from '#lib/engine/markers.js';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(request.data);

@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeSundowner } from '$lib/engine/sundowner-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeSundowner } from '#lib/engine/sundowner-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2CognitiveStatus from '$lib/components/steps/Step2CognitiveStatus.svelte';
-	import Step3BehaviouralSymptoms from '$lib/components/steps/Step3BehaviouralSymptoms.svelte';
-	import Step4TemporalPattern from '$lib/components/steps/Step4TemporalPattern.svelte';
-	import Step5TriggerIdentification from '$lib/components/steps/Step5TriggerIdentification.svelte';
-	import Step6SleepWakeCycle from '$lib/components/steps/Step6SleepWakeCycle.svelte';
-	import Step7MedicationReview from '$lib/components/steps/Step7MedicationReview.svelte';
-	import Step8EnvironmentalAssessment from '$lib/components/steps/Step8EnvironmentalAssessment.svelte';
-	import Step9CarerImpact from '$lib/components/steps/Step9CarerImpact.svelte';
-	import Step10ManagementPlan from '$lib/components/steps/Step10ManagementPlan.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2CognitiveStatus from '#lib/components/steps/Step2CognitiveStatus.svelte';
+	import Step3BehaviouralSymptoms from '#lib/components/steps/Step3BehaviouralSymptoms.svelte';
+	import Step4TemporalPattern from '#lib/components/steps/Step4TemporalPattern.svelte';
+	import Step5TriggerIdentification from '#lib/components/steps/Step5TriggerIdentification.svelte';
+	import Step6SleepWakeCycle from '#lib/components/steps/Step6SleepWakeCycle.svelte';
+	import Step7MedicationReview from '#lib/components/steps/Step7MedicationReview.svelte';
+	import Step8EnvironmentalAssessment from '#lib/components/steps/Step8EnvironmentalAssessment.svelte';
+	import Step9CarerImpact from '#lib/components/steps/Step9CarerImpact.svelte';
+	import Step10ManagementPlan from '#lib/components/steps/Step10ManagementPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

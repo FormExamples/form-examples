@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { gradeLifeguard } from './lifeguard-grader';
 import { detectAdditionalFlags } from './flagged-issues';
 import { lifeguardRules } from './rules';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import type { AssessmentData } from './types';
 
 /** A fully-competent candidate: every rule marked 'yes'. */

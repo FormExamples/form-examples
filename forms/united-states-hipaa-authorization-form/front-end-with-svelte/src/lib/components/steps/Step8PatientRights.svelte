@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { authorization } from '$lib/stores/authorization.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { authorization } from '#lib/stores/authorization.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
 	const d = authorization.data.patientRightsAcknowledgement;
 

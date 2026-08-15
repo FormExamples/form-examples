@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { computeSubscores } from '$lib/engine/news2-grader';
-	import { subscoreColor, spo2ScaleLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { computeSubscores } from '#lib/engine/news2-grader.js';
+	import { subscoreColor, spo2ScaleLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const o = assessment.data.oxygenSaturation;
 	const points = $derived(computeSubscores(assessment.data).spo2);

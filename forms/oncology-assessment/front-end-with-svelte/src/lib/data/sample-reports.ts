@@ -1,7 +1,7 @@
-import type { AssessmentData, ECOGGrade } from '$lib/engine/types';
-import { calculateECOG } from '$lib/engine/ecog-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ECOGGrade } from '#lib/engine/types.js';
+import { calculateECOG } from '#lib/engine/ecog-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

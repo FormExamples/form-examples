@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import type { PetScanRequest, GradingResult } from '$lib/engine/types';
-import { createDefault } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { PetScanRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefault } from '#lib/engine/defaults.js';
 
 /** Re-export so the store stays the single import site for a blank request. */
-export { createDefault } from '$lib/engine/defaults';
+export { createDefault } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given request id (defaults to `new`). */
 function storageKey(id: string): string {

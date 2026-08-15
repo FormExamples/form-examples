@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { EchocardiogramResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { EchocardiogramResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'echocardiogram-test-result.front-end-with-svelte.v1';
 

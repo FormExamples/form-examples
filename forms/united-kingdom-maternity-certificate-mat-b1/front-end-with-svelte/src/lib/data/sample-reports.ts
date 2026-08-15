@@ -1,6 +1,6 @@
-import type { AssessmentData, CertificateType, IssuerType } from '$lib/engine/types';
-import { validateMatB1 } from '$lib/engine/mat-b1-validator';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CertificateType, IssuerType } from '#lib/engine/types.js';
+import { validateMatB1 } from '#lib/engine/mat-b1-validator.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample certificate: an identifier and the full data the engine validates. */
 export interface SampleAssessment {

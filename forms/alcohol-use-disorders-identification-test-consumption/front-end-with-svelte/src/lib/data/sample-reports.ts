@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, RiskBand } from '$lib/engine/types';
-import { calculateAuditcGrade } from '$lib/engine/auditc-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, RiskBand } from '#lib/engine/types.js';
+import { calculateAuditcGrade } from '#lib/engine/auditc-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

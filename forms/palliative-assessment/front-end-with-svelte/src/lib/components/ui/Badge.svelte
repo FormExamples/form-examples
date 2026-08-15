@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { SeverityBand } from '$lib/engine/types';
-	import { severityBandColor, severityBandLabel } from '$lib/engine/utils';
+	import type { SeverityBand } from '#lib/engine/types.js';
+	import { severityBandColor, severityBandLabel } from '#lib/engine/utils.js';
 
 	let {
 		band

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from '$lib/stores/adr.svelte.js';
+  import { store } from '#lib/stores/adr.svelte.js';
 
   let pendingNotedBy = $state('');
   let pendingBody = $state('');

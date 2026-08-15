@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { request } from '$lib/stores/request.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
-	const d = request.data.bloodPressure;
+	const d = $state(request.data.bloodPressure);
 </script>
 
 <Fieldset legend="Clinic blood pressure">

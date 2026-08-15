@@ -1,25 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradePews } from '$lib/engine/pews-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradePews } from '#lib/engine/pews-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Respiratory from '$lib/components/steps/Step3Respiratory.svelte';
-	import Step4Cardiovascular from '$lib/components/steps/Step4Cardiovascular.svelte';
-	import Step5Behaviour from '$lib/components/steps/Step5Behaviour.svelte';
-	import Step6Concern from '$lib/components/steps/Step6Concern.svelte';
-	import Step7Review from '$lib/components/steps/Step7Review.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Respiratory from '#lib/components/steps/Step3Respiratory.svelte';
+	import Step4Cardiovascular from '#lib/components/steps/Step4Cardiovascular.svelte';
+	import Step5Behaviour from '#lib/components/steps/Step5Behaviour.svelte';
+	import Step6Concern from '#lib/components/steps/Step6Concern.svelte';
+	import Step7Review from '#lib/components/steps/Step7Review.svelte';
 
 	const plural = 'paediatric-early-warning-scores';
 

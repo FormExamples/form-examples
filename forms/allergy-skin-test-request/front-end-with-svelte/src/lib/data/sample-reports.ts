@@ -4,9 +4,9 @@ import type {
 	ValidityBand,
 	TriageTier,
 	Recommendation
-} from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefaultRequest } from '$lib/engine/defaults';
+} from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 /** A sample request: an identifier and the full data the engine grades. */
 export interface SampleRequest {

@@ -1,10 +1,10 @@
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import type {
 	EligibleConditionCode,
 	EligibilityResult,
 	Fp92aApplication,
 	QualifyingConditionDetail
-} from '$lib/engine/types';
+} from '#lib/engine/types.js';
 
 const ALL_CODES: EligibleConditionCode[] = [
 	'permanent-fistula',

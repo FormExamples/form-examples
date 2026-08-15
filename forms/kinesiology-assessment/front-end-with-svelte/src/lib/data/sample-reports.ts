@@ -1,7 +1,7 @@
-import type { AssessmentData, FMSScore } from '$lib/engine/types';
-import { calculateFMS } from '$lib/engine/fms-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, FMSScore } from '#lib/engine/types.js';
+import { calculateFMS } from '#lib/engine/fms-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

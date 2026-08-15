@@ -1,6 +1,6 @@
-import type { AssessmentData, PriorityColour, PriorityLevel } from '$lib/engine/types';
-import { triage } from '$lib/engine/ed-triage-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, PriorityColour, PriorityLevel } from '#lib/engine/types.js';
+import { triage } from '#lib/engine/ed-triage-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import { computeBodyMassIndex } from '$lib/engine/grader';
-	import { questionnaireStore } from '$lib/stores/questionnaire.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import { computeBodyMassIndex } from '#lib/engine/grader.js';
+	import { questionnaireStore } from '#lib/stores/questionnaire.svelte.js';
 
 	const d = questionnaireStore.data;
 	const bmi = $derived(computeBodyMassIndex(d));

@@ -1,8 +1,8 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { validateV1 } from '$lib/engine/v1-validator';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { countVisionConditionsDeclared, meetsEyesightStandard } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { validateV1 } from '#lib/engine/v1-validator.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { countVisionConditionsDeclared, meetsEyesightStandard } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample V1 form: an identifier and the full data the engine evaluates. */
 export interface SampleAssessment {

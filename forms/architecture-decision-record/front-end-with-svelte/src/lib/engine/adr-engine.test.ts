@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { evaluateAdr } from './adr-engine';
-import { createDefaultAdrFormData } from '$lib/stores/adr.svelte';
+import { createDefaultAdrFormData } from '#lib/stores/adr.svelte.js';
 
 describe('evaluateAdr — completeness', () => {
 	it('reports 0% for a blank draft', () => {

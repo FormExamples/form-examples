@@ -1,7 +1,7 @@
-import type { AssessmentData, GAFScore, RiskLevel } from '$lib/engine/types';
-import { gradeAssessment } from '$lib/engine/gaf-grader';
-import { gafBracketLabel } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, GAFScore, RiskLevel } from '#lib/engine/types.js';
+import { gradeAssessment } from '#lib/engine/gaf-grader.js';
+import { gafBracketLabel } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { scoreCns } from '$lib/engine/sofa-rules';
-	import { subScoreColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { scoreCns } from '#lib/engine/sofa-rules.js';
+	import { subScoreColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const cns = assessment.data.cns;
 	const sub = $derived(scoreCns(assessment.data).score);

@@ -1,21 +1,21 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { store } from '$lib/stores/checklist.svelte.js';
-  import { sampleAssessments } from '$lib/data/sample-reports';
+  import { store } from '#lib/stores/checklist.svelte.js';
+  import { sampleAssessments } from '#lib/data/sample-reports.js';
 
   // Lily Svelte headless contract — local shape-equivalent components.
-  import Form from '$lib/components/ui/Form.svelte';
-  import Progress from '$lib/components/ui/Progress.svelte';
-  import StepList from '$lib/components/ui/StepList.svelte';
-  import StepListItem from '$lib/components/ui/StepListItem.svelte';
-  import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-  import Button from '$lib/components/ui/Button.svelte';
-  import Panel from '$lib/components/ui/Panel.svelte';
+  import Form from '#lib/components/ui/Form.svelte';
+  import Progress from '#lib/components/ui/Progress.svelte';
+  import StepList from '#lib/components/ui/StepList.svelte';
+  import StepListItem from '#lib/components/ui/StepListItem.svelte';
+  import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+  import Button from '#lib/components/ui/Button.svelte';
+  import Panel from '#lib/components/ui/Panel.svelte';
 
   // 3 step components.
-  import Step1 from '$lib/components/steps/Step1Location.svelte';
-  import Step2 from '$lib/components/steps/Step2Checklist.svelte';
-  import Step3 from '$lib/components/steps/Step3InspectorSignOff.svelte';
+  import Step1 from '#lib/components/steps/Step1Location.svelte';
+  import Step2 from '#lib/components/steps/Step2Checklist.svelte';
+  import Step3 from '#lib/components/steps/Step3InspectorSignOff.svelte';
 
   const stepComponents = [Step1, Step2, Step3];
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
-  import { emptyPersonToNotify } from '$lib/engine/factory.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
+  import { emptyPersonToNotify } from '#lib/engine/factory.js';
 
   const ppl = $derived(lpaStore.application.peopleToNotify);
   function changed() {

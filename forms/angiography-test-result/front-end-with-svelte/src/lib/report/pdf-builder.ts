@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AngiographyResult, GradingResult } from '$lib/engine/types';
+import type { AngiographyResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
@@ -7,7 +7,7 @@ import {
 	angiographyTypeLabel,
 	bodyRegionLabel,
 	reportStatusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

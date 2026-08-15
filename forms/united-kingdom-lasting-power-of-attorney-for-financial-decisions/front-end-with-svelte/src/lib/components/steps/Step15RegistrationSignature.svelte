@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import Field from '$lib/components/ui/Field.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
-  import SignaturePad from '$lib/components/ui/SignaturePad.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
+  import SignaturePad from '#lib/components/ui/SignaturePad.svelte';
 
   const app = $derived(store.data.registrationApplication);
 

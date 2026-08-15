@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { NeurodiversityAdjustmentReview, GradingResult } from '$lib/engine/types';
+import type { NeurodiversityAdjustmentReview, GradingResult } from '#lib/engine/types.js';
 import {
 	effectivenessBandLabel,
 	wellbeingRiskBandLabel,
@@ -10,7 +10,7 @@ import {
 	reviewStatusLabel,
 	reviewMethodLabel,
 	managerRoleLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

@@ -1,7 +1,7 @@
-import type { AssessmentData, DMFTCategory } from '$lib/engine/types';
-import { calculateDMFT } from '$lib/engine/dmft-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, DMFTCategory } from '#lib/engine/types.js';
+import { calculateDMFT } from '#lib/engine/dmft-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

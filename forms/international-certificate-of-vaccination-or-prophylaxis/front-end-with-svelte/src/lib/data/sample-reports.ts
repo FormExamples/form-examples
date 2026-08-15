@@ -1,7 +1,7 @@
-import type { Certificate } from '$lib/engine/types';
-import { validateCertificate } from '$lib/engine/validation-rules';
-import { createDefaultCertificate } from '$lib/stores/certificate.svelte';
-import { overallValidityStatus, type ValidityStatus } from '$lib/engine/utils';
+import type { Certificate } from '#lib/engine/types.js';
+import { validateCertificate } from '#lib/engine/validation-rules.js';
+import { createDefaultCertificate } from '#lib/stores/certificate.svelte.js';
+import { overallValidityStatus, type ValidityStatus } from '#lib/engine/utils.js';
 
 /** A sample certificate: an identifier plus the full data the engine validates. */
 export interface SampleCertificate {

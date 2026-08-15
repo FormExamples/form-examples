@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { GeneticTestRequest, GradingResult } from '$lib/engine/types';
+import type { GeneticTestRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	consentLabel,
@@ -8,7 +8,7 @@ import {
 	testTypeLabel,
 	indicationLabel,
 	patientName
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

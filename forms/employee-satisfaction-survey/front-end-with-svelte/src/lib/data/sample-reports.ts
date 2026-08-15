@@ -2,10 +2,10 @@ import type {
 	AssessmentData,
 	SatisfactionCategory,
 	ENpsClassification
-} from '$lib/engine/types';
-import { gradeSatisfaction } from '$lib/engine/grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
-import { DEPARTMENT_OPTIONS, TENURE_OPTIONS, type OptionItem } from '$lib/engine/rules';
+} from '#lib/engine/types.js';
+import { gradeSatisfaction } from '#lib/engine/grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
+import { DEPARTMENT_OPTIONS, TENURE_OPTIONS, type OptionItem } from '#lib/engine/rules.js';
 
 /** A sample survey: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

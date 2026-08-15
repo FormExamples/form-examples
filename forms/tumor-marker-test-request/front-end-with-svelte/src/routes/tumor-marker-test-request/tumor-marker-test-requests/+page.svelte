@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleRequestRows } from '$lib/data/sample-reports';
+	import { sampleRequestRows } from '#lib/data/sample-reports.js';
 	import {
 		appropriatenessLabel,
 		interpretationLabel,
 		triageTierLabel,
 		recommendationLabel,
 		urgencyLabel
-	} from '$lib/engine/utils';
-	import { indicationLabel } from '$lib/engine/markers';
+	} from '#lib/engine/utils.js';
+	import { indicationLabel } from '#lib/engine/markers.js';
 
 	let triageFilter = $state('');
 	let recommendationFilter = $state('');
@@ -40,7 +40,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -52,7 +52,13 @@
 	// helpers so the dashboard and the report stay in lock-step.
 	const columns = [
 		{ id: 'id', header: 'Request', width: 110 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
 		{
 			id: 'indication',
 			header: 'Indication',
@@ -73,7 +79,14 @@
 			width: 130,
 			template: (v: string) => interpretationLabel(v as never)
 		},
-		{ id: 'completenessPercent', header: 'Complete', width: 100, template: (v: number) => `${v}%` },
+
+		{
+			id: 'completenessPercent',
+			header: 'Complete',
+			width: 100,
+			template: (v: number) => `${v}%`
+		},
+
 		{
 			id: 'triageTier',
 			header: 'Triage',
@@ -140,11 +153,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} requests</p>
 </main>

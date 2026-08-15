@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { riskLevelShortLabel } from '$lib/engine/utils';
-	import type { RiskLevel } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { riskLevelShortLabel } from '#lib/engine/utils.js';
+	import type { RiskLevel } from '#lib/engine/types.js';
 
 	let riskFilter = $state('');
 	let deptFilter = $state('');
@@ -37,7 +37,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -51,7 +51,13 @@
 		{ id: 'id', header: 'Response', width: 130 },
 		{ id: 'department', header: 'Department / team', flexgrow: 2, sort: true },
 		{ id: 'tenureBand', header: 'Tenure', width: 130, sort: true },
-		{ id: 'submittedDate', header: 'Submitted', width: 120, sort: true },
+		{
+			id: 'submittedDate',
+			header: 'Submitted',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'overallRisk',
 			header: 'Overall concern',
@@ -107,11 +113,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} responses</p>
 </main>

@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { NuclearMedicineRequest, GradingResult } from '$lib/engine/types';
+import type { NuclearMedicineRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	scanTypeLabel,
 	indicationLabel,
@@ -9,7 +9,7 @@ import {
 	triageTierLabel,
 	recommendationLabel,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 /** Builds the pdfmake document definition for the nuclear medicine request vetting report. */
 export function buildPdfDocument(data: NuclearMedicineRequest, result: GradingResult): TDocumentDefinitions {

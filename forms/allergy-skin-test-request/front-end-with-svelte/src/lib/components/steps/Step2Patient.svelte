@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { request } from '$lib/stores/request.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
-	const p = request.data.patient;
+	const p = $state(request.data.patient);
 </script>
 
 <Fieldset legend="Patient identification">

@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateApgarGrade } from '$lib/engine/apgar-grader';
-	import { SIGNS } from '$lib/engine/apgar-rules';
-	import { bandLabel, bandColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateApgarGrade } from '#lib/engine/apgar-grader.js';
+	import { SIGNS } from '#lib/engine/apgar-rules.js';
+	import { bandLabel, bandColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	// Grade the whole assessment reactively so each timepoint shows a live total.
 	const graded = $derived(calculateApgarGrade(assessment.data).timepoints);

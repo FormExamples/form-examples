@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting } from '$lib/engine/types';
-import { gradeOttawaAnkleRules } from '$lib/engine/ottawa-ankle-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting } from '#lib/engine/types.js';
+import { gradeOttawaAnkleRules } from '#lib/engine/ottawa-ankle-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

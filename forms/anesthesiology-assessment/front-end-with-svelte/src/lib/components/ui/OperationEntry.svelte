@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PreviousOperation } from '$lib/engine/types';
+	import type { PreviousOperation } from '#lib/engine/types.js';
 
 	let {
 		operations = $bindable<PreviousOperation[]>([])

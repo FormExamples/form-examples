@@ -1,6 +1,6 @@
-import type { AssessmentData, ASAClass, WoundClass, ComplexityScore, RiskLevel } from '$lib/engine/types';
-import { calculatePlasticsGrade } from '$lib/engine/plastics-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ASAClass, WoundClass, ComplexityScore, RiskLevel } from '#lib/engine/types.js';
+import { calculatePlasticsGrade } from '#lib/engine/plastics-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { dlqiScoreLabel, dlqiScoreColor } from '$lib/engine/utils';
+	import { dlqiScoreLabel, dlqiScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

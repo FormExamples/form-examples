@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { ASSAYS } from '$lib/engine/defaults';
-	import { countSelectedAssays } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { ASSAYS } from '#lib/engine/defaults.js';
+	import { countSelectedAssays } from '#lib/engine/utils.js';
 
 	const assays = request.data.assays;
 	const count = $derived(countSelectedAssays(assays));

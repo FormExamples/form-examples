@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import { request } from '$lib/stores/result.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/result.svelte.js';
 
 	const d = request.data.specimen;
 </script>

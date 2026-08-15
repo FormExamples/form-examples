@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeAssessment } from '$lib/engine/oet-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeAssessment } from '#lib/engine/oet-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1CandidateDetails from '$lib/components/steps/Step1CandidateDetails.svelte';
-	import Step2RolePlay1 from '$lib/components/steps/Step2RolePlay1.svelte';
-	import Step3RolePlay2 from '$lib/components/steps/Step3RolePlay2.svelte';
-	import Step4AssessmentCriteria from '$lib/components/steps/Step4AssessmentCriteria.svelte';
-	import Step5OverallFeedback from '$lib/components/steps/Step5OverallFeedback.svelte';
+	import Step1CandidateDetails from '#lib/components/steps/Step1CandidateDetails.svelte';
+	import Step2RolePlay1 from '#lib/components/steps/Step2RolePlay1.svelte';
+	import Step3RolePlay2 from '#lib/components/steps/Step3RolePlay2.svelte';
+	import Step4AssessmentCriteria from '#lib/components/steps/Step4AssessmentCriteria.svelte';
+	import Step5OverallFeedback from '#lib/components/steps/Step5OverallFeedback.svelte';
 
 	const plural = 'medical-language-speaking-assessments-for-cymraeg';
 

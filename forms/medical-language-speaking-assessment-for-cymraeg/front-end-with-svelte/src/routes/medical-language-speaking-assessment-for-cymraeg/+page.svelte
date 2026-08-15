@@ -2,7 +2,7 @@
 	// Welcome page: explains the work and offers prominent links to the two
 	// working surfaces — the examiner form and the exam-admin dashboard. All
 	// user-facing chrome resolves through the i18n message layer (en / cy).
-	import { locale } from '$lib/i18n/locale.svelte';
+	import { locale } from '#lib/i18n/locale.svelte.js';
 	const t = locale.t;
 	const plural = 'medical-language-speaking-assessments-for-cymraeg';
 </script>

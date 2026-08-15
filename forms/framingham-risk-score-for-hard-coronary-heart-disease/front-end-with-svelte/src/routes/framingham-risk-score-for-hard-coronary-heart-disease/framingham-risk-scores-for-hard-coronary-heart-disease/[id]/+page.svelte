@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateRisk } from '$lib/engine/risk-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateRisk } from '#lib/engine/risk-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientInformation from '$lib/components/steps/Step1PatientInformation.svelte';
-	import Step2Demographics from '$lib/components/steps/Step2Demographics.svelte';
-	import Step3SmokingHistory from '$lib/components/steps/Step3SmokingHistory.svelte';
-	import Step4BloodPressure from '$lib/components/steps/Step4BloodPressure.svelte';
-	import Step5Cholesterol from '$lib/components/steps/Step5Cholesterol.svelte';
-	import Step6MedicalHistory from '$lib/components/steps/Step6MedicalHistory.svelte';
-	import Step7FamilyHistory from '$lib/components/steps/Step7FamilyHistory.svelte';
-	import Step8LifestyleFactors from '$lib/components/steps/Step8LifestyleFactors.svelte';
-	import Step9CurrentMedications from '$lib/components/steps/Step9CurrentMedications.svelte';
-	import Step10ReviewCalculate from '$lib/components/steps/Step10ReviewCalculate.svelte';
+	import Step1PatientInformation from '#lib/components/steps/Step1PatientInformation.svelte';
+	import Step2Demographics from '#lib/components/steps/Step2Demographics.svelte';
+	import Step3SmokingHistory from '#lib/components/steps/Step3SmokingHistory.svelte';
+	import Step4BloodPressure from '#lib/components/steps/Step4BloodPressure.svelte';
+	import Step5Cholesterol from '#lib/components/steps/Step5Cholesterol.svelte';
+	import Step6MedicalHistory from '#lib/components/steps/Step6MedicalHistory.svelte';
+	import Step7FamilyHistory from '#lib/components/steps/Step7FamilyHistory.svelte';
+	import Step8LifestyleFactors from '#lib/components/steps/Step8LifestyleFactors.svelte';
+	import Step9CurrentMedications from '#lib/components/steps/Step9CurrentMedications.svelte';
+	import Step10ReviewCalculate from '#lib/components/steps/Step10ReviewCalculate.svelte';
 
 	const plural = 'framingham-risk-scores-for-hard-coronary-heart-disease';
 

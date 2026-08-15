@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { FluoroscopyResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { FluoroscopyResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'fluoroscopy-test-result.front-end-with-svelte.v1';
 

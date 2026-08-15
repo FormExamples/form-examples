@@ -51,13 +51,24 @@ fi
 
 if [ "$do_svelte" -eq 1 ]; then
     echo "== Svelte front-end E2E sweep =="
+    # Kill whatever is actually bound to the preview port, by port rather than
+    # by PID. `pnpm run preview &` interposes a pnpm process ahead of the real
+    # `node .../vite.js preview`; `kill $!` only signals the pnpm wrapper, which
+    # does not reliably forward the signal, so the real preview server can
+    # survive as an orphan and keep serving a *previous* form's stale build to
+    # every subsequent iteration (silent cross-form contamination).
+    free_preview_port() {
+        pids="$(lsof -tiTCP:4173 -sTCP:LISTEN 2>/dev/null || true)"
+        [ -n "$pids" ] && kill -9 $pids 2>/dev/null || true
+    }
     for slug in $FORMS; do
         app="forms/$slug/front-end-with-svelte"
         [ -f "$app/package.json" ] || continue
         echo "-- $slug --"
-        ( cd "$app" && npm ci --no-audit --no-fund >/dev/null 2>&1 && npm run build >/dev/null 2>&1 )
+        free_preview_port
+        ( cd "$app" && pnpm install --no-frozen-lockfile >/dev/null 2>&1 && pnpm run build >/dev/null 2>&1 )
         # Preview on a fixed port; capture and kill afterward.
-        ( cd "$app" && npm run preview -- --port 4173 --host 127.0.0.1 >/dev/null 2>&1 ) &
+        ( cd "$app" && pnpm run preview --port 4173 --host 127.0.0.1 >/dev/null 2>&1 ) &
         preview_pid=$!
         # Wait for the port to accept connections.
         i=0
@@ -69,5 +80,6 @@ if [ "$do_svelte" -eq 1 ]; then
             sh -c 'cd e2e && npx playwright test svelte-smoke' || true
         kill "$preview_pid" 2>/dev/null || true
         wait "$preview_pid" 2>/dev/null || true
+        free_preview_port
     done
 fi

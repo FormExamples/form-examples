@@ -7,7 +7,7 @@
 //
 // Field keys match OhsSection in src/lib/engine/types.ts.
 
-import type { OhsSection } from '$lib/engine/types';
+import type { OhsSection } from '#lib/engine/types.js';
 
 export interface OhsResponseOption {
 	value: number;

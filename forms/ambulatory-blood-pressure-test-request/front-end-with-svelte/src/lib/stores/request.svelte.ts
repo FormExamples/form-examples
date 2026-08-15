@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { AbpmRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { AbpmRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 /** Re-export the plain default factory so callers can `import` it from the store. */
 export { createDefaultRequest };

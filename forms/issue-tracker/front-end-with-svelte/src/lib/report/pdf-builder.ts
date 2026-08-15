@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { GradeResult, IssueTrackerAssessment } from '$lib/engine/types';
-import { priorityLabel, bandLabel, instrumentLabel } from '$lib/engine/utils';
+import type { GradeResult, IssueTrackerAssessment } from '#lib/engine/types.js';
+import { priorityLabel, bandLabel, instrumentLabel } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: IssueTrackerAssessment,

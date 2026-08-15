@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	riskBandLabel,
 	priorityLabel,
@@ -7,7 +7,7 @@ import {
 	clinicianRoleLabel,
 	anticoagulationStatusLabel,
 	sexLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 function yesNoValue(v: string): string {
 	return v === 'yes' ? 'Yes' : v === 'no' ? 'No' : 'Not recorded';

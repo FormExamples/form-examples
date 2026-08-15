@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PriorTestRecord } from '$lib/engine/types';
+	import type { PriorTestRecord } from '#lib/engine/types.js';
 
 	let {
 		tests = $bindable<PriorTestRecord[]>([])

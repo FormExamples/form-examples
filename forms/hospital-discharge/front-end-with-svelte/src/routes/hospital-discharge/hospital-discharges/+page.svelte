@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { completenessShortLabel } from '$lib/engine/utils';
-	import type { CompletenessLevel } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { completenessShortLabel } from '#lib/engine/utils.js';
+	import type { CompletenessLevel } from '#lib/engine/types.js';
 
 	let completenessFilter = $state('');
 	let destinationFilter = $state('');
@@ -36,7 +36,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -49,8 +49,20 @@
 	// report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Discharge', width: 130 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'dischargeDate', header: 'Discharged', width: 120, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'dischargeDate',
+			header: 'Discharged',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'completenessLevel',
 			header: 'Completeness',
@@ -65,7 +77,7 @@
 			id: 'reconciliationFlag',
 			header: 'Recon. gap',
 			width: 110,
-			template: (v: boolean) => (v ? 'Yes' : 'No')
+			template: (v: boolean) => v ? 'Yes' : 'No'
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -113,11 +125,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} discharge summaries</p>
 </main>

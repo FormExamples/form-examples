@@ -3,9 +3,9 @@ import type {
 	CompletenessStatus,
 	RecommendedSectionClass,
 	UrgencyClass
-} from '$lib/engine/types';
-import { gradeMentalHealthActAssessment } from '$lib/engine/mha-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { gradeMentalHealthActAssessment } from '#lib/engine/mha-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

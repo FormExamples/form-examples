@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		DEPARTMENT_OPTIONS,
 		TENURE_OPTIONS,
 		HOURS_OPTIONS,
 		ROLE_LEVEL_OPTIONS,
 		WORK_LOCATION_OPTIONS
-	} from '$lib/engine/rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	} from '#lib/engine/rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const d = assessment.data.demographics;
 </script>

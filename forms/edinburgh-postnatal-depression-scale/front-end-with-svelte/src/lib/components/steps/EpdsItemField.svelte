@@ -4,11 +4,11 @@
 	// The store holds the RAW selected option index 0..3 (printed order); the
 	// grader reverse-corrects items 3, 5, 6, 7, 8, 9 and 10. The live symptom
 	// score pill shows the reverse-corrected 0..3 value.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { scoreForOption } from '$lib/engine/epds-rules';
-	import { itemScoreColor } from '$lib/engine/utils';
-	import type { EpdsItem } from '$lib/engine/types';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { scoreForOption } from '#lib/engine/epds-rules.js';
+	import { itemScoreColor } from '#lib/engine/utils.js';
+	import type { EpdsItem } from '#lib/engine/types.js';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	let { item }: { item: EpdsItem } = $props();
 

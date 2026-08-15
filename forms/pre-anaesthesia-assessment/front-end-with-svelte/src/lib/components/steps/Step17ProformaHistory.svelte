@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Field from '$lib/components/ui/Field.svelte';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
 
-  import { store } from '$lib/stores/assessment.svelte.js';
+  import { store } from '#lib/stores/assessment.svelte.js';
 
   const h = store.data.proformaHeader;
   const pa = store.data.previousAnaesthesiaChecklist;

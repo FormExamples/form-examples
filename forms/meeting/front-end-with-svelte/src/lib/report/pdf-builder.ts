@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { MeetingData, ValidationResult } from '$lib/engine/types';
+import type { MeetingData, ValidationResult } from '#lib/engine/types.js';
 import {
 	healthLabel,
 	completionStatusLabel,
@@ -7,7 +7,7 @@ import {
 	categoryLabel,
 	overallResultLabel,
 	formatDateTime
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: MeetingData,

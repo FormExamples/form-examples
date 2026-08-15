@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import PersonCard from '$lib/components/ui/PersonCard.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import PersonCard from '#lib/components/ui/PersonCard.svelte';
 </script>
 
 <section id="step-attorneys">

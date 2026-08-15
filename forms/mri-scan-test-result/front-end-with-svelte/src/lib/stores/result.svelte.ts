@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { MriScanResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { MriScanResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'mri-scan-test-result.front-end-with-svelte.v1';
 

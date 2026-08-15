@@ -1,6 +1,6 @@
-import type { EyePrescription, Complexity } from '$lib/engine/types';
-import { classify } from '$lib/engine/composite';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { EyePrescription, Complexity } from '#lib/engine/types.js';
+import { classify } from '#lib/engine/composite.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample prescription: an identifier and the full data the engine classifies. */
 export interface SampleAssessment {

@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import type { AgileAssessment, GradingResult } from '$lib/engine/types.js';
-import { createEmptyAssessment } from '$lib/engine/factory.js';
-import { calculateMaturity } from '$lib/engine/composite-grader.js';
+import { browser } from '$app/env';
+import type { AgileAssessment, GradingResult } from '#lib/engine/types.js';
+import { createEmptyAssessment } from '#lib/engine/factory.js';
+import { calculateMaturity } from '#lib/engine/composite-grader.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {

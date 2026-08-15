@@ -3,17 +3,17 @@
 	// safety flags, and the care plan. Safety flags are printed whether or not
 	// the dietitian overrode the composite risk category.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
 	import {
 		COMPOSITE_RISK_LABELS,
 		GLIM_DIAGNOSIS_LABELS,
 		MUST_RISK_LABELS,
 		RECOMMENDATION_LABELS
-	} from '$lib/engine/grader';
-	import { titleCase } from '$lib/engine/utils';
-	import { assessmentStore } from '$lib/stores/assessment.svelte';
+	} from '#lib/engine/grader.js';
+	import { titleCase } from '#lib/engine/utils.js';
+	import { assessmentStore } from '#lib/stores/assessment.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextareaInput from '$lib/components/ui/TextareaInput.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextareaInput from '#lib/components/ui/TextareaInput.svelte';
 </script>
 
 <section>

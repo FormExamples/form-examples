@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import type { Sf36Response } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import type { Sf36Response } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import ScaleItemField from './ScaleItemField.svelte';
-	import { ACTIVITY_LIMITATION_SCALE } from '$lib/config/scales';
+	import { ACTIVITY_LIMITATION_SCALE } from '#lib/config/scales.js';
 
 	const s = assessment.data.sf36;
 

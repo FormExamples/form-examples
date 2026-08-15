@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { RECOMMENDATION_LABELS, URGENCY_LABELS } from '$lib/engine/grader';
-import type { GradingResult, HerniaDiagnosticEvaluation } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+import { RECOMMENDATION_LABELS, URGENCY_LABELS } from '#lib/engine/grader.js';
+import type { GradingResult, HerniaDiagnosticEvaluation } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

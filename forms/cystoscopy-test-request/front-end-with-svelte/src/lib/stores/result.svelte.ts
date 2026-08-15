@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import type { CystoscopyRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { CystoscopyRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the default-request factory so callers can import it from the store.
-export { createDefaultRequest } from '$lib/engine/defaults';
+export { createDefaultRequest } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given request id (defaults to `new`). */
 function storageKey(id: string): string {

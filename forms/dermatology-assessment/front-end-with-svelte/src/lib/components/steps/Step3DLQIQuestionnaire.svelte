@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { dlqiQuestions, dlqiResponseOptions } from '$lib/engine/dlqi-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { DLQIScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { dlqiQuestions, dlqiResponseOptions } from '#lib/engine/dlqi-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { DLQIScore } from '#lib/engine/types.js';
 
 	const q = assessment.data.dlqiQuestionnaire;
 

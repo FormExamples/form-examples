@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import YesNoQuestion from '$lib/components/ui/YesNoQuestion.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import YesNoQuestion from '#lib/components/ui/YesNoQuestion.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const r = assessment.data.recentContact;
 	const stoppedAtQ1 = $derived(

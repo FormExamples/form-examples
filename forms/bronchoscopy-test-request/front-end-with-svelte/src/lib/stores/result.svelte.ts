@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { BronchoscopyRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { BronchoscopyRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the default factory so callers can `import { createDefaultRequest }`
 // from the store (the factory itself lives in engine/defaults.ts).

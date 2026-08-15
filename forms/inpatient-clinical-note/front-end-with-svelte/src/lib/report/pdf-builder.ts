@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	acuityLabel,
 	escalationStatusLabel,
@@ -7,7 +7,7 @@ import {
 	priorityLabel,
 	statusLabel,
 	vteStatusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const documentedCount = result.componentStatuses.filter((c) => c.present).length;

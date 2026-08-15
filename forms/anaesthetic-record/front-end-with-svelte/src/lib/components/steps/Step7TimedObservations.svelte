@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment, createDefaultObservation } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/anaesthetic-record-grader';
-	import { statusLabel, statusColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment, createDefaultObservation } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/anaesthetic-record-grader.js';
+	import { statusLabel, statusColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const d = assessment.data;
 	const grade = $derived(calculateGrade(assessment.data));

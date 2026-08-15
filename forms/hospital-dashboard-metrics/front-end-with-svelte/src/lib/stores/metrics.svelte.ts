@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import type { HospitalDashboardMetrics, MetricsSummaryResult } from '$lib/engine/types.js';
-import { createEmptyMetrics } from '$lib/engine/factory.js';
-import { summariseMetrics } from '$lib/engine/summary.js';
-import { TOTAL_STEPS } from '$lib/config/steps.js';
-import { TOTAL_METRICS } from '$lib/config/metrics.js';
+import { browser } from '$app/env';
+import type { HospitalDashboardMetrics, MetricsSummaryResult } from '#lib/engine/types.js';
+import { createEmptyMetrics } from '#lib/engine/factory.js';
+import { summariseMetrics } from '#lib/engine/summary.js';
+import { TOTAL_STEPS } from '#lib/config/steps.js';
+import { TOTAL_METRICS } from '#lib/config/metrics.js';
 
 /** localStorage draft key for a given report id (defaults to `new`). */
 function storageKey(id: string): string {
@@ -31,9 +31,9 @@ class MetricsStore {
   result = $derived<MetricsSummaryResult>(summariseMetrics(this.data));
 
   /** Crude completeness measure for the Lily Progress bar (0-100). */
-  percentComplete = $derived(
-    TOTAL_METRICS === 0 ? 0 : Math.round((this.result.reportedCount / TOTAL_METRICS) * 100),
-  );
+  percentComplete = $derived(TOTAL_METRICS === 0
+    ? 0
+    : Math.round(this.result.reportedCount / TOTAL_METRICS * 100));
 
   constructor() {
     if (browser) {

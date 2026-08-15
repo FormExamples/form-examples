@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateNIHSS } from '$lib/engine/nihss-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateNIHSS } from '#lib/engine/nihss-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2SymptomOnset from '$lib/components/steps/Step2SymptomOnset.svelte';
-	import Step3LevelOfConsciousness from '$lib/components/steps/Step3LevelOfConsciousness.svelte';
-	import Step4BestGazeVisual from '$lib/components/steps/Step4BestGazeVisual.svelte';
-	import Step5FacialPalsyMotor from '$lib/components/steps/Step5FacialPalsyMotor.svelte';
-	import Step6LimbAtaxiaSensory from '$lib/components/steps/Step6LimbAtaxiaSensory.svelte';
-	import Step7LanguageDysarthria from '$lib/components/steps/Step7LanguageDysarthria.svelte';
-	import Step8ExtinctionInattention from '$lib/components/steps/Step8ExtinctionInattention.svelte';
-	import Step9RiskFactors from '$lib/components/steps/Step9RiskFactors.svelte';
-	import Step10CurrentMedications from '$lib/components/steps/Step10CurrentMedications.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2SymptomOnset from '#lib/components/steps/Step2SymptomOnset.svelte';
+	import Step3LevelOfConsciousness from '#lib/components/steps/Step3LevelOfConsciousness.svelte';
+	import Step4BestGazeVisual from '#lib/components/steps/Step4BestGazeVisual.svelte';
+	import Step5FacialPalsyMotor from '#lib/components/steps/Step5FacialPalsyMotor.svelte';
+	import Step6LimbAtaxiaSensory from '#lib/components/steps/Step6LimbAtaxiaSensory.svelte';
+	import Step7LanguageDysarthria from '#lib/components/steps/Step7LanguageDysarthria.svelte';
+	import Step8ExtinctionInattention from '#lib/components/steps/Step8ExtinctionInattention.svelte';
+	import Step9RiskFactors from '#lib/components/steps/Step9RiskFactors.svelte';
+	import Step10CurrentMedications from '#lib/components/steps/Step10CurrentMedications.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

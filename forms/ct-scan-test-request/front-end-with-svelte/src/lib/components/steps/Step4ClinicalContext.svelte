@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import { request } from '$lib/stores/request.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
 
 	const d = request.data.context;
 </script>

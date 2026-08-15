@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { riskLabel, riskColor } from '$lib/engine/utils';
+	import { riskLabel, riskColor } from '#lib/engine/utils.js';
 
 	let {
 		score

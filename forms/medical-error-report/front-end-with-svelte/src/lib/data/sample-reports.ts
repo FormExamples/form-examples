@@ -1,6 +1,6 @@
-import type { AssessmentData, WHOSeverity, RiskLevel, ErrorType } from '$lib/engine/types';
-import { calculateErrorGrade } from '$lib/engine/error-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, WHOSeverity, RiskLevel, ErrorType } from '#lib/engine/types.js';
+import { calculateErrorGrade } from '#lib/engine/error-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample report: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

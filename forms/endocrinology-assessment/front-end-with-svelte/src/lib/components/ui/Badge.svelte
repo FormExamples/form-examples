@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { axisStatusLabel, axisStatusColor } from '$lib/engine/utils';
-	import type { AxisStatus } from '$lib/engine/types';
+	import { axisStatusLabel, axisStatusColor } from '#lib/engine/utils.js';
+	import type { AxisStatus } from '#lib/engine/types.js';
 
 	let {
 		status

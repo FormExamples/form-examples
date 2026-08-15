@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import ScaleItemField from './ScaleItemField.svelte';
-	import { GENERAL_HEALTH_SCALE, HEALTH_CHANGE_SCALE } from '$lib/config/scales';
+	import { GENERAL_HEALTH_SCALE, HEALTH_CHANGE_SCALE } from '#lib/config/scales.js';
 
 	const s = assessment.data.sf36;
 </script>

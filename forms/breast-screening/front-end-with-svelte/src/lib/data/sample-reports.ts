@@ -5,9 +5,9 @@ import type {
 	ReadingOutcome,
 	ScreeningData,
 	ScreeningOutcome
-} from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/breast-screening-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/breast-screening-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample screening record: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

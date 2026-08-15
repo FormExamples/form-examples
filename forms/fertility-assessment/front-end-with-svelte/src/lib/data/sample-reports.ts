@@ -1,6 +1,6 @@
-import type { AssessmentData, ConcernLevel } from '$lib/engine/types';
-import { calculateConcern } from '$lib/engine/fertility-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ConcernLevel } from '#lib/engine/types.js';
+import { calculateConcern } from '#lib/engine/fertility-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

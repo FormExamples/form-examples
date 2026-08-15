@@ -1,7 +1,7 @@
-import type { AssessmentData, SeverityBand } from '$lib/engine/types';
-import { calculatePalliativeGrade } from '$lib/engine/esas-grader';
-import { ppsBand } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, SeverityBand } from '#lib/engine/types.js';
+import { calculatePalliativeGrade } from '#lib/engine/esas-grader.js';
+import { ppsBand } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

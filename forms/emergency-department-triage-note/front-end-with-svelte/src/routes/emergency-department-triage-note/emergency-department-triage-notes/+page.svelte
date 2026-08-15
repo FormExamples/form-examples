@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { careSettingLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { careSettingLabel } from '#lib/engine/utils.js';
 
 	const plural = 'emergency-department-triage-notes';
 
@@ -35,7 +35,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -48,7 +48,13 @@
 	// report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Triage', width: 150, sort: true },
-		{ id: 'patientIdentifier', header: 'Patient', flexgrow: 2, sort: true },
+		{
+			id: 'patientIdentifier',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
 		{
 			id: 'careSetting',
 			header: 'Care setting',
@@ -57,13 +63,25 @@
 			template: (v: string) => careSettingLabel(v as never)
 		},
 		{ id: 'triagedDate', header: 'Triaged', width: 120, sort: true },
-		{ id: 'priorityLevel', header: 'Priority', width: 90, sort: true },
-		{ id: 'priorityName', header: 'Category', width: 130, sort: true },
+		{
+			id: 'priorityLevel',
+			header: 'Priority',
+			width: 90,
+			sort: true
+		},
+
+		{
+			id: 'priorityName',
+			header: 'Category',
+			width: 130,
+			sort: true
+		},
+
 		{
 			id: 'targetMinutes',
 			header: 'Target',
 			width: 110,
-			template: (v: number) => (v === 0 ? 'Immediate' : `${v} min`)
+			template: (v: number) => v === 0 ? 'Immediate' : `${v} min`
 		},
 		{ id: 'news2Total', header: 'NEWS2', width: 90, sort: true },
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
@@ -115,11 +133,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/checklist.svelte';
-	import { ALL_ITEMS, SECTION_LABEL } from '$lib/config/items';
+	import { assessment } from '#lib/stores/checklist.svelte.js';
+	import { ALL_ITEMS, SECTION_LABEL } from '#lib/config/items.js';
 	import {
 		maturityLabel,
 		maturityColor,
@@ -10,8 +10,8 @@
 		bandColor,
 		priorityColor,
 		pctOrDash
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

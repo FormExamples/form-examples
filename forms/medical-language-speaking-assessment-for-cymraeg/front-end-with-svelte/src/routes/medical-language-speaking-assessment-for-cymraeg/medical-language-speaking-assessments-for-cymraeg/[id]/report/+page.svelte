@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeLabel, gradeColor, isAtOrAboveClinicalThreshold } from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeLabel, gradeColor, isAtOrAboveClinicalThreshold } from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'medical-language-speaking-assessments-for-cymraeg';
 

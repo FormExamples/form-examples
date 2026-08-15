@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { validateAuthorization, computeCompletenessScore } from './validate-authorization';
-import { createDefaultAuthorization } from '$lib/engine/defaults';
+import { createDefaultAuthorization } from '#lib/engine/defaults.js';
 import type { HipaaAuthorization } from './types';
 
 /** A fully-valid authorization with every core element and required statement present. */

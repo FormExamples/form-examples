@@ -1,5 +1,5 @@
 import type { IndicatorResponse, HospitalPerformanceIndicators } from './types.js';
-import { PERFORMANCE_INDICATORS } from '$lib/config/indicators.js';
+import { PERFORMANCE_INDICATORS } from '#lib/config/indicators.js';
 
 function emptyItems(): Record<string, IndicatorResponse> {
   const out: Record<string, IndicatorResponse> = {};

@@ -1,6 +1,6 @@
-import type { AssessmentData, Band, CareSetting, Trend } from '$lib/engine/types';
-import { bandForTotal, calculateApgarGrade } from '$lib/engine/apgar-grader';
-import { createDefaultAssessment, createTimepoint } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Band, CareSetting, Trend } from '#lib/engine/types.js';
+import { bandForTotal, calculateApgarGrade } from '#lib/engine/apgar-grader.js';
+import { createDefaultAssessment, createTimepoint } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

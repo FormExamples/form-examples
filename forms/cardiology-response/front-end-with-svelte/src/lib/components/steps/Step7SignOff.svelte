@@ -1,14 +1,14 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
 	import {
 		responseClassificationLabel,
 		responseClassificationColor,
@@ -16,7 +16,7 @@
 		severityColor,
 		followUpUrgencyLabel,
 		followUpUrgencyColor
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	const d = resultStore.data;
 

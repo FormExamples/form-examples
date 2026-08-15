@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, EuGeneralResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { AssessmentData, EuGeneralResult } from '#lib/engine/types.js';
 import { createDefaultAssessment } from './assessment-data';
 
 // Re-export the default-record factory so existing imports
-// (`$lib/stores/assessment.svelte`) keep working.
+// (`#lib/stores/assessment.svelte.js`) keep working.
 export { createDefaultAssessment };
 
 /** localStorage draft key for a given encounter id (defaults to `new`). */

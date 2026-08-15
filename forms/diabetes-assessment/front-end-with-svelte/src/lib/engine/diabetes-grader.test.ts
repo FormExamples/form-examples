@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import { calculateControl } from './diabetes-grader.js';
 import { calculateCompositeScore, hba1cMmolMol } from './utils.js';
 import type { AssessmentData } from './types.js';

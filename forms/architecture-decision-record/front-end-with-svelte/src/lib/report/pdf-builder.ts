@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { AdrFormData } from '$lib/types';
-import type { AdrEvaluation } from '$lib/engine/types';
-import { statusLabel, groupLabel, pad4 } from '$lib/engine/utils';
+import type { AdrFormData } from '#lib/types.js';
+import type { AdrEvaluation } from '#lib/engine/types.js';
+import { statusLabel, groupLabel, pad4 } from '#lib/engine/utils.js';
 
 function bullets(text: string): string[] {
 	return String(text || '')

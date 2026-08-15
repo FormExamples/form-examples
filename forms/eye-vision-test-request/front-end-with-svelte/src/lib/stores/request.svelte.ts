@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { EyeVisionRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { EyeVisionRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the default factory so consumers can build blank / seed records.
 export { createDefaultRequest };

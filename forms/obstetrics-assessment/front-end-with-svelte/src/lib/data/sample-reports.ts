@@ -1,7 +1,7 @@
-import type { AssessmentData, RiskLevel } from '$lib/engine/types';
-import { calculateAntenatalRisk } from '$lib/engine/antenatal-grader';
-import { carePathwayLabel } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, RiskLevel } from '#lib/engine/types.js';
+import { calculateAntenatalRisk } from '#lib/engine/antenatal-grader.js';
+import { carePathwayLabel } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

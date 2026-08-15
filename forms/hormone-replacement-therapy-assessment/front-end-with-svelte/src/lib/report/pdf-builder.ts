@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { mrsSeverityLabel, riskClassificationLabel, bmiCategory, calculateAge, mrsScoreLabel } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { mrsSeverityLabel, riskClassificationLabel, bmiCategory, calculateAge, mrsScoreLabel } from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: AssessmentData,

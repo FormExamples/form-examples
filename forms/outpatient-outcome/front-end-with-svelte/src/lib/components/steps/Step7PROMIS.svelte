@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { promisGphTScore, promisMhTScore } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { promisGphTScore, promisMhTScore } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
 	// NOTE: PROMIS Global Health v1.2 items are paraphrased. Official wording
 	// and IRT-based scoring are available from healthmeasures.net.

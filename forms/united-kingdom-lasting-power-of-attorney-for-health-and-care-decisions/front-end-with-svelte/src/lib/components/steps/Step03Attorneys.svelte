@@ -1,9 +1,9 @@
 <script lang="ts">
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
-  import { emptyAttorney } from '$lib/engine/factory.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
+  import { emptyAttorney } from '#lib/engine/factory.js';
 
   const attorneys = $derived(lpaStore.application.attorneys);
   function changed() {

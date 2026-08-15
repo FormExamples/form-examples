@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { PetScanResult, GradingResult } from '$lib/engine/types';
+import type { PetScanResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
@@ -7,7 +7,7 @@ import {
 	scanTypeLabel,
 	reportStatusLabel,
 	treatmentResponseLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

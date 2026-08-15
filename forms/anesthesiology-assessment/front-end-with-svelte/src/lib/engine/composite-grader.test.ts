@@ -5,7 +5,7 @@ import { evaluateAsa, asaRiskFromClass } from './asa-rules';
 import { evaluateAirway } from './mallampati-rules';
 import { evaluateRcri, rcriRiskFromScore } from './rcri-rules';
 import { evaluateStopbang, stopbangRiskFromScore } from './stopbang-rules';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import type { AssessmentData } from './types';
 
 function healthyPatient(): AssessmentData {

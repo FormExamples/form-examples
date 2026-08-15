@@ -1,34 +1,34 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/metrics.svelte';
-	import { STEPS } from '$lib/config/steps';
-	import { TOTAL_METRICS } from '$lib/config/metrics';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/metrics.svelte.js';
+	import { STEPS } from '#lib/config/steps.js';
+	import { TOTAL_METRICS } from '#lib/config/metrics.js';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01ReportingPeriod.svelte';
-	import Step02 from '$lib/components/steps/Step02AntibioticsNarcoticsCulture.svelte';
-	import Step03 from '$lib/components/steps/Step03InpatientWard.svelte';
-	import Step04 from '$lib/components/steps/Step04EmergencyDepartment.svelte';
-	import Step05 from '$lib/components/steps/Step05InfectionControl.svelte';
-	import Step06 from '$lib/components/steps/Step06BloodBank.svelte';
-	import Step07 from '$lib/components/steps/Step07Opd.svelte';
-	import Step08 from '$lib/components/steps/Step08SurgeryOperatingRoom.svelte';
-	import Step09 from '$lib/components/steps/Step09Pharmacy.svelte';
-	import Step10 from '$lib/components/steps/Step10Radiology.svelte';
-	import Step11 from '$lib/components/steps/Step11PatientFlowWaitingTimes.svelte';
-	import Step12 from '$lib/components/steps/Step12HumanResources.svelte';
-	import Step13 from '$lib/components/steps/Step13PatientExperience.svelte';
-	import Step14 from '$lib/components/steps/Step14Ovr.svelte';
-	import Step15 from '$lib/components/steps/Step15FacilitiesBiomedical.svelte';
-	import Step16 from '$lib/components/steps/Step16Summary.svelte';
+	import Step01 from '#lib/components/steps/Step01ReportingPeriod.svelte';
+	import Step02 from '#lib/components/steps/Step02AntibioticsNarcoticsCulture.svelte';
+	import Step03 from '#lib/components/steps/Step03InpatientWard.svelte';
+	import Step04 from '#lib/components/steps/Step04EmergencyDepartment.svelte';
+	import Step05 from '#lib/components/steps/Step05InfectionControl.svelte';
+	import Step06 from '#lib/components/steps/Step06BloodBank.svelte';
+	import Step07 from '#lib/components/steps/Step07Opd.svelte';
+	import Step08 from '#lib/components/steps/Step08SurgeryOperatingRoom.svelte';
+	import Step09 from '#lib/components/steps/Step09Pharmacy.svelte';
+	import Step10 from '#lib/components/steps/Step10Radiology.svelte';
+	import Step11 from '#lib/components/steps/Step11PatientFlowWaitingTimes.svelte';
+	import Step12 from '#lib/components/steps/Step12HumanResources.svelte';
+	import Step13 from '#lib/components/steps/Step13PatientExperience.svelte';
+	import Step14 from '#lib/components/steps/Step14Ovr.svelte';
+	import Step15 from '#lib/components/steps/Step15FacilitiesBiomedical.svelte';
+	import Step16 from '#lib/components/steps/Step16Summary.svelte';
 
 	// 16 steps, auto-wrapped: reporting period (1), one per KPI category
 	// (2-15, 14 categories), summary & sign-off (16).

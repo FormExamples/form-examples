@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { calculateResponderGrade } from './responder-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import type { AssessmentData } from './types';
 
 /** A baseline competent responder with no firing rules. */

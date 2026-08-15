@@ -1,6 +1,6 @@
-import type { AssessmentData, Setting, SeverityBand } from '$lib/engine/types';
-import { calculateGcsGrade } from '$lib/engine/gcs-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Setting, SeverityBand } from '#lib/engine/types.js';
+import { calculateGcsGrade } from '#lib/engine/gcs-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

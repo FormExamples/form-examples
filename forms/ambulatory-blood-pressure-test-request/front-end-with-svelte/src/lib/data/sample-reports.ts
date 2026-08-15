@@ -4,9 +4,9 @@ import type {
 	Recommendation,
 	SuitabilityBand,
 	TriageTier
-} from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefaultRequest } from '$lib/stores/request.svelte';
+} from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefaultRequest } from '#lib/stores/request.svelte.js';
 
 /** A sample ABPM request: an identifier and the full data the engine grades. */
 export interface SampleRequest {

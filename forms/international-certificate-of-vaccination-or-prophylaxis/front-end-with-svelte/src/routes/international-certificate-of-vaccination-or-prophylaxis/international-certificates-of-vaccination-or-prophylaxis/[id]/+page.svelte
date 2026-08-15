@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { certificateStore } from '$lib/stores/certificate.svelte';
-	import { validateCertificate } from '$lib/engine/validation-rules';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleCertificates } from '$lib/data/sample-reports';
+	import { certificateStore } from '#lib/stores/certificate.svelte.js';
+	import { validateCertificate } from '#lib/engine/validation-rules.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleCertificates } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01CentreAndClinician from '$lib/components/steps/Step01CentreAndClinician.svelte';
-	import Step02VaccineeIdentity from '$lib/components/steps/Step02VaccineeIdentity.svelte';
-	import Step03VaccineeSignature from '$lib/components/steps/Step03VaccineeSignature.svelte';
-	import Step04TravelContext from '$lib/components/steps/Step04TravelContext.svelte';
-	import Step05EntryDiseaseVaccine from '$lib/components/steps/Step05EntryDiseaseVaccine.svelte';
-	import Step06EntryAdministration from '$lib/components/steps/Step06EntryAdministration.svelte';
-	import Step07EntryValidityStamp from '$lib/components/steps/Step07EntryValidityStamp.svelte';
-	import Step08Summary from '$lib/components/steps/Step08Summary.svelte';
+	import Step01CentreAndClinician from '#lib/components/steps/Step01CentreAndClinician.svelte';
+	import Step02VaccineeIdentity from '#lib/components/steps/Step02VaccineeIdentity.svelte';
+	import Step03VaccineeSignature from '#lib/components/steps/Step03VaccineeSignature.svelte';
+	import Step04TravelContext from '#lib/components/steps/Step04TravelContext.svelte';
+	import Step05EntryDiseaseVaccine from '#lib/components/steps/Step05EntryDiseaseVaccine.svelte';
+	import Step06EntryAdministration from '#lib/components/steps/Step06EntryAdministration.svelte';
+	import Step07EntryValidityStamp from '#lib/components/steps/Step07EntryValidityStamp.svelte';
+	import Step08Summary from '#lib/components/steps/Step08Summary.svelte';
 
 	const plural = 'international-certificates-of-vaccination-or-prophylaxis';
 

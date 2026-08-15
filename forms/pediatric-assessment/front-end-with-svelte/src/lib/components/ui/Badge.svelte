@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { devScreenLabel, devScreenColor } from '$lib/engine/utils';
+	import { devScreenLabel, devScreenColor } from '#lib/engine/utils.js';
 
 	let {
 		result

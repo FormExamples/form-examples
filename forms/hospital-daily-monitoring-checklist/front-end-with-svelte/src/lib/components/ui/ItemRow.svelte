@@ -4,8 +4,8 @@
   // TextInput. Used in a plain {#each} loop over a section's checkpoints —
   // see AGENTS-front-end-svelte.md §4 for the raw radio-input-inside-RadioGroup
   // pattern this mirrors.
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import type { ChecklistItemDef } from '$lib/config/items.js';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import type { ChecklistItemDef } from '#lib/config/items.js';
   import RadioGroup from './RadioGroup.svelte';
   import TextInput from './TextInput.svelte';
 

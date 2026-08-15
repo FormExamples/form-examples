@@ -4,9 +4,9 @@ import type {
 	FunctionalStatus,
 	OptimisationStatus,
 	ReviewStatus
-} from '$lib/engine/types';
-import { gradeReview } from '$lib/engine/heart-failure-review-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { gradeReview } from '#lib/engine/heart-failure-review-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample review: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

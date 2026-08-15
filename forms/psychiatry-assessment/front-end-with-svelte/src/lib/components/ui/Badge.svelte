@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { gafScoreColor, gafScoreLabel } from '$lib/engine/utils';
+	import { gafScoreColor, gafScoreLabel } from '#lib/engine/utils.js';
 
 	let {
 		score

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
 
   const app = $derived(lpaStore.application);
   function changed() {

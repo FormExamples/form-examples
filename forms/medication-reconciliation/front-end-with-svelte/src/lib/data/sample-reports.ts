@@ -3,10 +3,10 @@ import type {
 	ReconciliationData,
 	ReconciliationStatus,
 	ReconciliationType
-} from '$lib/engine/types';
-import { calculateReconciliation } from '$lib/engine/medication-reconciliation-grader';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { createDefaultReconciliation } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { calculateReconciliation } from '#lib/engine/medication-reconciliation-grader.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { createDefaultReconciliation } from '#lib/stores/assessment.svelte.js';
 
 /** A sample reconciliation: an identifier and the full data the engine grades. */
 export interface SampleReconciliation {

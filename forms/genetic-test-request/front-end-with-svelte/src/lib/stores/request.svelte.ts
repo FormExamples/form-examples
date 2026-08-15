@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { GeneticTestRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { GeneticTestRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the canonical empty-shape factory so consumers can import it from
 // the store as well as from the engine.

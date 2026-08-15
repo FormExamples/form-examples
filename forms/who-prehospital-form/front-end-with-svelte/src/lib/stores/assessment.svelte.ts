@@ -1,4 +1,4 @@
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import type {
 	AssessmentData,
 	FlaggedIssue,
@@ -6,7 +6,7 @@ import type {
 	PrehospitalResult,
 	Reassessment,
 	ValidationResult
-} from '$lib/engine/types';
+} from '#lib/engine/types.js';
 
 /** localStorage draft key for a given encounter id (defaults to `new`). */
 function storageKey(id: string): string {

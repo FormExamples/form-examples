@@ -1,7 +1,7 @@
-import type { AssessmentData, Outcome, TriState } from '$lib/engine/types';
-import { gradeFirstAid } from '$lib/engine/first-aid-grader';
-import { certificationCurrency, type CertificationCurrency } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Outcome, TriState } from '#lib/engine/types.js';
+import { gradeFirstAid } from '#lib/engine/first-aid-grader.js';
+import { certificationCurrency, type CertificationCurrency } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample checklist: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

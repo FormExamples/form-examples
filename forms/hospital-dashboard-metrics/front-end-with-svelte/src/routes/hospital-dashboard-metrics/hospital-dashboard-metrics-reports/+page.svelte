@@ -1,22 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleReportRows } from '$lib/data/sample-reports';
+	import { sampleReportRows } from '#lib/data/sample-reports.js';
 
 	let hospitalFilter = $state('');
 	let completenessFilter = $state('');
-
-	const rows = $derived(
-		sampleReportRows.filter(
-			(r) =>
-				(hospitalFilter === '' || r.hospitalName === hospitalFilter) &&
-				(completenessFilter === '' ||
-					(completenessFilter === 'complete' && r.reportedCount === r.totalCount) ||
-					(completenessFilter === 'incomplete' && r.reportedCount < r.totalCount))
-		)
-	);
-
+	const rows = $derived(sampleReportRows.filter((r) => (hospitalFilter === '' || r.hospitalName === hospitalFilter) && (completenessFilter === '' || completenessFilter === 'complete' && r.reportedCount === r.totalCount || completenessFilter === 'incomplete' && r.reportedCount < r.totalCount)));
 	const hospitalOptions = Array.from(new Set(sampleReportRows.map((r) => r.hospitalName)));
 
 	// Follow the active Lily theme: pick the dark SVAR skin when the theme's
@@ -35,7 +25,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -100,11 +90,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} reporting periods</p>
 </main>

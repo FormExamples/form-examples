@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeBloodspot } from '$lib/engine/bloodspot-grader';
-	import { CONDITIONS } from '$lib/engine/bloodspot-rules';
-	import { outcomeColor, outcomeLabel, resultClassColor, resultClassLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeBloodspot } from '#lib/engine/bloodspot-grader.js';
+	import { CONDITIONS } from '#lib/engine/bloodspot-rules.js';
+	import { outcomeColor, outcomeLabel, resultClassColor, resultClassLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const conditions = assessment.data.conditions;
 	const grade = $derived(gradeBloodspot(assessment.data));

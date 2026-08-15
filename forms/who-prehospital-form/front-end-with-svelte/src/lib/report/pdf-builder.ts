@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { AssessmentData, PrehospitalResult } from '$lib/engine/types';
-import { gcsTotal, priorityLabel, sectionLabel } from '$lib/engine/utils';
+import type { AssessmentData, PrehospitalResult } from '#lib/engine/types.js';
+import { gcsTotal, priorityLabel, sectionLabel } from '#lib/engine/utils.js';
 
 const triageLabel = (v: string): string =>
 	v === 'red'

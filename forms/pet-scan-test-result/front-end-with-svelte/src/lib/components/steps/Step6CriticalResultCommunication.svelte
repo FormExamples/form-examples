@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { hasCriticalFinding } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { hasCriticalFinding } from '#lib/engine/utils.js';
 
 	const d = resultStore.data;
 

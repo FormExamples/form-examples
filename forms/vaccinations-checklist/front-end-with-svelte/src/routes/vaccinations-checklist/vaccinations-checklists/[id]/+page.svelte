@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateVaccinationGrade } from '$lib/engine/vaccination-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateVaccinationGrade } from '#lib/engine/vaccination-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2VaccinationHistory from '$lib/components/steps/Step2VaccinationHistory.svelte';
-	import Step3ChildhoodImmunisations from '$lib/components/steps/Step3ChildhoodImmunisations.svelte';
-	import Step4OccupationalVaccines from '$lib/components/steps/Step4OccupationalVaccines.svelte';
-	import Step5TravelVaccines from '$lib/components/steps/Step5TravelVaccines.svelte';
-	import Step6Covid19Vaccination from '$lib/components/steps/Step6Covid19Vaccination.svelte';
-	import Step7InfluenzaVaccination from '$lib/components/steps/Step7InfluenzaVaccination.svelte';
-	import Step8ContraindicationsAllergies from '$lib/components/steps/Step8ContraindicationsAllergies.svelte';
-	import Step9SerologyImmunityTesting from '$lib/components/steps/Step9SerologyImmunityTesting.svelte';
-	import Step10ScheduleCompliance from '$lib/components/steps/Step10ScheduleCompliance.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2VaccinationHistory from '#lib/components/steps/Step2VaccinationHistory.svelte';
+	import Step3ChildhoodImmunisations from '#lib/components/steps/Step3ChildhoodImmunisations.svelte';
+	import Step4OccupationalVaccines from '#lib/components/steps/Step4OccupationalVaccines.svelte';
+	import Step5TravelVaccines from '#lib/components/steps/Step5TravelVaccines.svelte';
+	import Step6Covid19Vaccination from '#lib/components/steps/Step6Covid19Vaccination.svelte';
+	import Step7InfluenzaVaccination from '#lib/components/steps/Step7InfluenzaVaccination.svelte';
+	import Step8ContraindicationsAllergies from '#lib/components/steps/Step8ContraindicationsAllergies.svelte';
+	import Step9SerologyImmunityTesting from '#lib/components/steps/Step9SerologyImmunityTesting.svelte';
+	import Step10ScheduleCompliance from '#lib/components/steps/Step10ScheduleCompliance.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

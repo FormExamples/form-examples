@@ -4,34 +4,34 @@
 	// a table of contents with completion status, not a pager — the monorepo
 	// rule is a single-page wizard, so nothing is hidden behind navigation.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-	import Form from '$lib/components/ui/Form.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
-	import Step1ClinicianIdentification from '$lib/components/steps/Step1ClinicianIdentification.svelte';
-	import Step2PatientIdentification from '$lib/components/steps/Step2PatientIdentification.svelte';
-	import Step3PresentingSymptoms from '$lib/components/steps/Step3PresentingSymptoms.svelte';
-	import Step4OcularAndMedicalHistory from '$lib/components/steps/Step4OcularAndMedicalHistory.svelte';
-	import Step5VisualAcuity from '$lib/components/steps/Step5VisualAcuity.svelte';
-	import Step6Refraction from '$lib/components/steps/Step6Refraction.svelte';
-	import Step7SlitLampExamination from '$lib/components/steps/Step7SlitLampExamination.svelte';
-	import Step8GlareTesting from '$lib/components/steps/Step8GlareTesting.svelte';
-	import Step9Tonometry from '$lib/components/steps/Step9Tonometry.svelte';
-	import Step10DilatedFundusExamination from '$lib/components/steps/Step10DilatedFundusExamination.svelte';
-	import Step11DifferentialDiagnosis from '$lib/components/steps/Step11DifferentialDiagnosis.svelte';
-	import Step12Biometry from '$lib/components/steps/Step12Biometry.svelte';
-	import Step13FunctionalImpact from '$lib/components/steps/Step13FunctionalImpact.svelte';
-	import Step14ManagementPlan from '$lib/components/steps/Step14ManagementPlan.svelte';
-	import Step15SummarySignOff from '$lib/components/steps/Step15SummarySignOff.svelte';
+	import Step1ClinicianIdentification from '#lib/components/steps/Step1ClinicianIdentification.svelte';
+	import Step2PatientIdentification from '#lib/components/steps/Step2PatientIdentification.svelte';
+	import Step3PresentingSymptoms from '#lib/components/steps/Step3PresentingSymptoms.svelte';
+	import Step4OcularAndMedicalHistory from '#lib/components/steps/Step4OcularAndMedicalHistory.svelte';
+	import Step5VisualAcuity from '#lib/components/steps/Step5VisualAcuity.svelte';
+	import Step6Refraction from '#lib/components/steps/Step6Refraction.svelte';
+	import Step7SlitLampExamination from '#lib/components/steps/Step7SlitLampExamination.svelte';
+	import Step8GlareTesting from '#lib/components/steps/Step8GlareTesting.svelte';
+	import Step9Tonometry from '#lib/components/steps/Step9Tonometry.svelte';
+	import Step10DilatedFundusExamination from '#lib/components/steps/Step10DilatedFundusExamination.svelte';
+	import Step11DifferentialDiagnosis from '#lib/components/steps/Step11DifferentialDiagnosis.svelte';
+	import Step12Biometry from '#lib/components/steps/Step12Biometry.svelte';
+	import Step13FunctionalImpact from '#lib/components/steps/Step13FunctionalImpact.svelte';
+	import Step14ManagementPlan from '#lib/components/steps/Step14ManagementPlan.svelte';
+	import Step15SummarySignOff from '#lib/components/steps/Step15SummarySignOff.svelte';
 
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { LOCS_III_SEVERITY_LABELS, SURGICAL_CANDIDACY_LABELS } from '$lib/engine/grader';
-	import { evaluationStore } from '$lib/stores/evaluation.svelte';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { LOCS_III_SEVERITY_LABELS, SURGICAL_CANDIDACY_LABELS } from '#lib/engine/grader.js';
+	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

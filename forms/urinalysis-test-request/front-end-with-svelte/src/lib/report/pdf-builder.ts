@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { UrinalysisRequest, GradingResult } from '$lib/engine/types';
+import type { UrinalysisRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	preanalyticalLabel,
@@ -8,7 +8,7 @@ import {
 	indicationLabel,
 	specimenTypeLabel,
 	selectedTestsLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

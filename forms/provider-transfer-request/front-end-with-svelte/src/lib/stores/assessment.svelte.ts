@@ -1,10 +1,10 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { createDefaultAssessment } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
 
 // Re-exported so callers (sample data, step components) keep the gold-standard
-// `import { createDefaultAssessment } from '$lib/stores/assessment.svelte'`.
-export { createDefaultAssessment } from '$lib/engine/defaults';
+// `import { createDefaultAssessment } from '#lib/stores/assessment.svelte'`.
+export { createDefaultAssessment } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given transfer id (defaults to `new`). */
 function storageKey(id: string): string {

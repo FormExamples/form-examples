@@ -1,6 +1,6 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { calculateNoticeGrade } from '$lib/engine/notice-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { calculateNoticeGrade } from '#lib/engine/notice-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample notice: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

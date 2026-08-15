@@ -1,6 +1,6 @@
-import type { HearingRequest, RequestRow } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefault } from '$lib/stores/request.svelte';
+import type { HearingRequest, RequestRow } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefault } from '#lib/stores/request.svelte.js';
 
 /** A sample request: an identifier and the full request the engine grades. */
 export interface SampleRequest {

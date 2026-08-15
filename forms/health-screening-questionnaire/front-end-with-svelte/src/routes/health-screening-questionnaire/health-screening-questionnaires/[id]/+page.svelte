@@ -6,33 +6,33 @@
 	// Step 10 (occupational factors) is rendered only when step 1's
 	// screeningPurpose is occupational-pre-placement.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-	import Form from '$lib/components/ui/Form.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
-	import Step1AssessmentContext from '$lib/components/steps/Step1AssessmentContext.svelte';
-	import Step2PersonalDetails from '$lib/components/steps/Step2PersonalDetails.svelte';
-	import Step3ActivityAndDiet from '$lib/components/steps/Step3ActivityAndDiet.svelte';
-	import Step4SmokingAndAlcohol from '$lib/components/steps/Step4SmokingAndAlcohol.svelte';
-	import Step5MedicalHistory from '$lib/components/steps/Step5MedicalHistory.svelte';
-	import Step6FamilyHistory from '$lib/components/steps/Step6FamilyHistory.svelte';
-	import Step7SymptomReview from '$lib/components/steps/Step7SymptomReview.svelte';
-	import Step8ParqPlus from '$lib/components/steps/Step8ParqPlus.svelte';
-	import Step9VitalSigns from '$lib/components/steps/Step9VitalSigns.svelte';
-	import Step10Occupational from '$lib/components/steps/Step10Occupational.svelte';
-	import Step11Wellbeing from '$lib/components/steps/Step11Wellbeing.svelte';
-	import Step12Vaccination from '$lib/components/steps/Step12Vaccination.svelte';
-	import Step13Consent from '$lib/components/steps/Step13Consent.svelte';
-	import Step14Summary from '$lib/components/steps/Step14Summary.svelte';
+	import Step1AssessmentContext from '#lib/components/steps/Step1AssessmentContext.svelte';
+	import Step2PersonalDetails from '#lib/components/steps/Step2PersonalDetails.svelte';
+	import Step3ActivityAndDiet from '#lib/components/steps/Step3ActivityAndDiet.svelte';
+	import Step4SmokingAndAlcohol from '#lib/components/steps/Step4SmokingAndAlcohol.svelte';
+	import Step5MedicalHistory from '#lib/components/steps/Step5MedicalHistory.svelte';
+	import Step6FamilyHistory from '#lib/components/steps/Step6FamilyHistory.svelte';
+	import Step7SymptomReview from '#lib/components/steps/Step7SymptomReview.svelte';
+	import Step8ParqPlus from '#lib/components/steps/Step8ParqPlus.svelte';
+	import Step9VitalSigns from '#lib/components/steps/Step9VitalSigns.svelte';
+	import Step10Occupational from '#lib/components/steps/Step10Occupational.svelte';
+	import Step11Wellbeing from '#lib/components/steps/Step11Wellbeing.svelte';
+	import Step12Vaccination from '#lib/components/steps/Step12Vaccination.svelte';
+	import Step13Consent from '#lib/components/steps/Step13Consent.svelte';
+	import Step14Summary from '#lib/components/steps/Step14Summary.svelte';
 
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { RECOMMENDATION_LABELS, RISK_BAND_LABELS } from '$lib/engine/grader';
-	import { questionnaireStore } from '$lib/stores/questionnaire.svelte';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { RECOMMENDATION_LABELS, RISK_BAND_LABELS } from '#lib/engine/grader.js';
+	import { questionnaireStore } from '#lib/stores/questionnaire.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

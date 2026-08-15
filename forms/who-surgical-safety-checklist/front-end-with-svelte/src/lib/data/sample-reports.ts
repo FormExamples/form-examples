@@ -1,7 +1,7 @@
-import type { ChecklistStatus, Urgency, WhoSurgicalSafetyChecklist } from '$lib/checklist/types.js';
-import { createEmptyChecklist } from '$lib/checklist/factory.js';
-import { computeSafetyFlags } from '$lib/checklist/flags.js';
-import { computeStatus } from '$lib/checklist/completion.js';
+import type { ChecklistStatus, Urgency, WhoSurgicalSafetyChecklist } from '#lib/checklist/types.js';
+import { createEmptyChecklist } from '#lib/checklist/factory.js';
+import { computeSafetyFlags } from '#lib/checklist/flags.js';
+import { computeStatus } from '#lib/checklist/completion.js';
 
 /** A sample checklist: an id, presentation metadata, and the full data the engine grades. */
 export interface SampleChecklist {

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeReview } from '$lib/engine/heart-failure-review-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeReview } from '#lib/engine/heart-failure-review-grader.js';
 	import {
 		functionalStatusLabel,
 		functionalStatusColor,
@@ -8,11 +8,11 @@
 		optimisationStatusColor,
 		reviewStatusLabel,
 		reviewStatusColor
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const s = assessment.data.summary;
 	// Live preview of the derived statuses as the record is filled.

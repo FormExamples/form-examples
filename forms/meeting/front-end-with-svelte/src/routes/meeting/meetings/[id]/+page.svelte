@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { meeting } from '$lib/stores/meeting.svelte';
-	import { validateMeeting } from '$lib/engine/meeting-validator';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleMeetings } from '$lib/data/sample-reports';
+	import { meeting } from '#lib/stores/meeting.svelte.js';
+	import { validateMeeting } from '#lib/engine/meeting-validator.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleMeetings } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Organizer from '$lib/components/steps/Step1Organizer.svelte';
-	import Step2TitlePurpose from '$lib/components/steps/Step2TitlePurpose.svelte';
-	import Step3Invitation from '$lib/components/steps/Step3Invitation.svelte';
-	import Step4Agenda from '$lib/components/steps/Step4Agenda.svelte';
-	import Step5Participants from '$lib/components/steps/Step5Participants.svelte';
-	import Step6Resources from '$lib/components/steps/Step6Resources.svelte';
-	import Step7Recurrence from '$lib/components/steps/Step7Recurrence.svelte';
-	import Step8Summary from '$lib/components/steps/Step8Summary.svelte';
-	import Step9Results from '$lib/components/steps/Step9Results.svelte';
-	import Step10SignOff from '$lib/components/steps/Step10SignOff.svelte';
+	import Step1Organizer from '#lib/components/steps/Step1Organizer.svelte';
+	import Step2TitlePurpose from '#lib/components/steps/Step2TitlePurpose.svelte';
+	import Step3Invitation from '#lib/components/steps/Step3Invitation.svelte';
+	import Step4Agenda from '#lib/components/steps/Step4Agenda.svelte';
+	import Step5Participants from '#lib/components/steps/Step5Participants.svelte';
+	import Step6Resources from '#lib/components/steps/Step6Resources.svelte';
+	import Step7Recurrence from '#lib/components/steps/Step7Recurrence.svelte';
+	import Step8Summary from '#lib/components/steps/Step8Summary.svelte';
+	import Step9Results from '#lib/components/steps/Step9Results.svelte';
+	import Step10SignOff from '#lib/components/steps/Step10SignOff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

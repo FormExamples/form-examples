@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeBLS } from '$lib/engine/bls-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeBLS } from '#lib/engine/bls-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1TraineeDetails from '$lib/components/steps/Step1TraineeDetails.svelte';
-	import Step2SceneSafetyAssessment from '$lib/components/steps/Step2SceneSafetyAssessment.svelte';
-	import Step3ResponsivenessBreathing from '$lib/components/steps/Step3ResponsivenessBreathing.svelte';
-	import Step4ActivateEmergencyResponse from '$lib/components/steps/Step4ActivateEmergencyResponse.svelte';
-	import Step5ChestCompressions from '$lib/components/steps/Step5ChestCompressions.svelte';
-	import Step6AirwayRescueBreaths from '$lib/components/steps/Step6AirwayRescueBreaths.svelte';
-	import Step7AEDShockDelivery from '$lib/components/steps/Step7AEDShockDelivery.svelte';
-	import Step8TeamDynamicsHandoff from '$lib/components/steps/Step8TeamDynamicsHandoff.svelte';
+	import Step1TraineeDetails from '#lib/components/steps/Step1TraineeDetails.svelte';
+	import Step2SceneSafetyAssessment from '#lib/components/steps/Step2SceneSafetyAssessment.svelte';
+	import Step3ResponsivenessBreathing from '#lib/components/steps/Step3ResponsivenessBreathing.svelte';
+	import Step4ActivateEmergencyResponse from '#lib/components/steps/Step4ActivateEmergencyResponse.svelte';
+	import Step5ChestCompressions from '#lib/components/steps/Step5ChestCompressions.svelte';
+	import Step6AirwayRescueBreaths from '#lib/components/steps/Step6AirwayRescueBreaths.svelte';
+	import Step7AEDShockDelivery from '#lib/components/steps/Step7AEDShockDelivery.svelte';
+	import Step8TeamDynamicsHandoff from '#lib/components/steps/Step8TeamDynamicsHandoff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

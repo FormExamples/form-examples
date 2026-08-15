@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { BronchoscopyResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { BronchoscopyResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'bronchoscopy-test-result.front-end-with-svelte.v1';
 

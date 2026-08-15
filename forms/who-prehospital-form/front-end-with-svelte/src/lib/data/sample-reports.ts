@@ -1,7 +1,7 @@
-import type { AssessmentData, FlagPriority, TriageCategory } from '$lib/engine/types';
-import { gradePrehospital } from '$lib/engine/prehospital-grader';
-import { gcsTotal } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, FlagPriority, TriageCategory } from '#lib/engine/types.js';
+import { gradePrehospital } from '#lib/engine/prehospital-grader.js';
+import { gcsTotal } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample encounter: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

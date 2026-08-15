@@ -4,9 +4,9 @@
 	// Records the examiner's tri-state observation:
 	//   'yes' Demonstrated · 'no' Not yet · 'na' Not assessed.
 	// Built from the Lily Svelte headless Field and RadioGroup contracts.
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import type { TriState } from '$lib/engine/types';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import type { TriState } from '#lib/engine/types.js';
 
 	let {
 		id,

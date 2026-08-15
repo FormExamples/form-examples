@@ -45,6 +45,7 @@ electronic signature line.
 ## Testing
 
 Vitest in `src/lib/engine/composite-grader.test.ts`. Coverage of:
+
 - Default ASA I when no rules fire.
 - Each ASA II / III / IV / V / VI rule fires correctly.
 - Max-grade algorithm (multiple rules → highest wins).

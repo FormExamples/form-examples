@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AmbulatoryBloodPressureResult, GradingResult } from '$lib/engine/types';
+import type { AmbulatoryBloodPressureResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
@@ -7,7 +7,7 @@ import {
 	monitoringTypeLabel,
 	reportStatusLabel,
 	dipperStatusLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

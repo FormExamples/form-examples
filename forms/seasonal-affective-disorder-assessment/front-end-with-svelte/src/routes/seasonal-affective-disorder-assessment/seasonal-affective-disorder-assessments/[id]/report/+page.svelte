@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateAge, combinedSeverityColor, spaqBandColor, phq9BandColor } from '$lib/engine/utils';
-	import { combinedSeverityLabel, spaqBandLabel, phq9BandLabel } from '$lib/engine/sad-rules';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateAge, combinedSeverityColor, spaqBandColor, phq9BandColor } from '#lib/engine/utils.js';
+	import { combinedSeverityLabel, spaqBandLabel, phq9BandLabel } from '#lib/engine/sad-rules.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

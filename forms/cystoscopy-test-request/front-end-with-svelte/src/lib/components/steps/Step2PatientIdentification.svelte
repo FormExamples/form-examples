@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import { requestStore } from '$lib/stores/result.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import { requestStore } from '#lib/stores/result.svelte.js';
 
 	const p = requestStore.data.patient;
 </script>

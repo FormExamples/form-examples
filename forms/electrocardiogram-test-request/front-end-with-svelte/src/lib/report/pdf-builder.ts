@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { EcgRequest, GradingResult } from '$lib/engine/types';
+import type { EcgRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessLabel,
 	triageTierLabel,
@@ -10,7 +10,7 @@ import {
 	knownArrhythmiaLabel,
 	settingLabel,
 	urgencyLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

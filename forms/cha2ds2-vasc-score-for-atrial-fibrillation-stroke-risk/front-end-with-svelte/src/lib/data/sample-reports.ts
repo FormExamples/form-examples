@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, RiskBand } from '$lib/engine/types';
-import { calculateCha2ds2VascGrade } from '$lib/engine/cha2ds2vasc-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, RiskBand } from '#lib/engine/types.js';
+import { calculateCha2ds2VascGrade } from '#lib/engine/cha2ds2vasc-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

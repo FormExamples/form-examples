@@ -1,6 +1,6 @@
-import type { CarePlan, CareSetting, PlanStatus, PlanType, Problem } from '$lib/engine/types';
-import { gradeCarePlan } from '$lib/engine/nursing-care-plan-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { CarePlan, CareSetting, PlanStatus, PlanType, Problem } from '#lib/engine/types.js';
+import { gradeCarePlan } from '#lib/engine/nursing-care-plan-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample care plan: an identifier and the full data the engine grades. */
 export interface SampleCarePlan {

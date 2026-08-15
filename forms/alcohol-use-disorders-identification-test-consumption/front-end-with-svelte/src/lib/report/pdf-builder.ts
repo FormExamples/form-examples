@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	riskBandLabel,
 	priorityLabel,
@@ -12,7 +12,7 @@ import {
 	FREQUENCY_OPTIONS,
 	QUANTITY_OPTIONS,
 	HEAVY_EPISODE_OPTIONS
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const { frequencyOfDrinking, typicalQuantity, heavyEpisodeFrequency } = data.items;

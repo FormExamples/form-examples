@@ -1,4 +1,4 @@
-import type { StepConfig, ChartData } from '$lib/engine/types';
+import type { StepConfig, ChartData } from '#lib/engine/types.js';
 
 export const TOTAL_STEPS = 5;
 

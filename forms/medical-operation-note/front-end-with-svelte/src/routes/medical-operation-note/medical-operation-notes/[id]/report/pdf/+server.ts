@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDoc } from '$lib/report.js';
-import type { OperationNote, GradingResult } from '$lib/engine/types.js';
+import { buildPdfDoc } from '#lib/report.js';
+import type { OperationNote, GradingResult } from '#lib/engine/types.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { data, result } = (await request.json()) as {

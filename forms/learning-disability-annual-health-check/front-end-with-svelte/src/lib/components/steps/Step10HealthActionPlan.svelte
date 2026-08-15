@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateHealthCheckGrade } from '$lib/engine/ld-health-check-grader';
-	import { statusLabel, statusColor, healthActionPlanColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateHealthCheckGrade } from '#lib/engine/ld-health-check-grader.js';
+	import { statusLabel, statusColor, healthActionPlanColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const p = assessment.data.plan;
 

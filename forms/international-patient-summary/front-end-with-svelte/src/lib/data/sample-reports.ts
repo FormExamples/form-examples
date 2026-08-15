@@ -1,6 +1,6 @@
-import type { AssessmentData, CompletenessLevel } from '$lib/engine/types';
-import { calculateIPSGrade } from '$lib/engine/ips-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletenessLevel } from '#lib/engine/types.js';
+import { calculateIPSGrade } from '#lib/engine/ips-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample IPS: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

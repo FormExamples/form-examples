@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleLpaRows } from '$lib/data/sample-reports';
-	import { validityStatusLabel } from '$lib/engine/utils';
+	import { sampleLpaRows } from '#lib/data/sample-reports.js';
+	import { validityStatusLabel } from '#lib/engine/utils.js';
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 
@@ -35,18 +35,17 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 		return () => obs.disconnect();
 	});
 	const GridTheme = $derived(isDark ? WillowDark : Willow);
+	const capitalize = (v: string) => v ? v.charAt(0).toUpperCase() + v.slice(1) : '—';
 
-	const capitalize = (v: string) => (v ? v.charAt(0).toUpperCase() + v.slice(1) : '—');
-	const decisionRuleLabel = (v: string) =>
-		v === 'jointly-and-severally'
-			? 'Jointly & severally'
+	const decisionRuleLabel = (v: string) => v === 'jointly-and-severally'
+		? 'Jointly & severally'
 			: v === 'jointly'
 				? 'Jointly'
 				: v === 'mixed'
@@ -65,7 +64,14 @@
 			sort: true,
 			template: (v: string) => capitalize(v)
 		},
-		{ id: 'attorneyCount', header: 'Attorneys', width: 100, sort: true },
+
+		{
+			id: 'attorneyCount',
+			header: 'Attorneys',
+			width: 100,
+			sort: true
+		},
+
 		{
 			id: 'decisionRule',
 			header: 'Decision rule',
@@ -131,11 +137,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} applications</p>
 </main>

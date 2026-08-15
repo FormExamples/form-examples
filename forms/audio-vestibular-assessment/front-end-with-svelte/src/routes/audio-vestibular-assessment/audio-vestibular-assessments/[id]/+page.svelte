@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { grade } from '$lib/engine/audio-vestibular-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { grade } from '#lib/engine/audio-vestibular-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2PresentingSymptoms from '$lib/components/steps/Step2PresentingSymptoms.svelte';
-	import Step3OtoscopicExamination from '$lib/components/steps/Step3OtoscopicExamination.svelte';
-	import Step4PureToneAudiometry from '$lib/components/steps/Step4PureToneAudiometry.svelte';
-	import Step5SpeechAudiometry from '$lib/components/steps/Step5SpeechAudiometry.svelte';
-	import Step6TympanometryAcousticReflexes from '$lib/components/steps/Step6TympanometryAcousticReflexes.svelte';
-	import Step7VestibularScreening from '$lib/components/steps/Step7VestibularScreening.svelte';
-	import Step8DizzinessHandicapInventory from '$lib/components/steps/Step8DizzinessHandicapInventory.svelte';
-	import Step9ClinicalImpressionReferral from '$lib/components/steps/Step9ClinicalImpressionReferral.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2PresentingSymptoms from '#lib/components/steps/Step2PresentingSymptoms.svelte';
+	import Step3OtoscopicExamination from '#lib/components/steps/Step3OtoscopicExamination.svelte';
+	import Step4PureToneAudiometry from '#lib/components/steps/Step4PureToneAudiometry.svelte';
+	import Step5SpeechAudiometry from '#lib/components/steps/Step5SpeechAudiometry.svelte';
+	import Step6TympanometryAcousticReflexes from '#lib/components/steps/Step6TympanometryAcousticReflexes.svelte';
+	import Step7VestibularScreening from '#lib/components/steps/Step7VestibularScreening.svelte';
+	import Step8DizzinessHandicapInventory from '#lib/components/steps/Step8DizzinessHandicapInventory.svelte';
+	import Step9ClinicalImpressionReferral from '#lib/components/steps/Step9ClinicalImpressionReferral.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

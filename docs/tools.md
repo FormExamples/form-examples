@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-68 tools.
+69 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -45,6 +45,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-date-time-picker-vendor`](#svelte-date-time-picker-vendor)
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
+- [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
 - [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
@@ -1174,6 +1175,57 @@ Usage:
   bin/svelte-helpers-picker-rename --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-kit-3-theme-url-fixpy"><code>bin/svelte-kit-3-theme-url-fix.py</code></h2>
+
+```text
+bin/svelte-kit-3-theme-url-fix.py — one-shot fix for a bug the `sv migrate
+sveltekit-3` codemod introduced fleet-wide in every `front-end-with-svelte`
+root `+layout.svelte`.
+
+Before the SvelteKit 3 migration (2026-08-15, "Update Svelte" commit), every
+form's `+layout.svelte` built the Lily theme-catalogue URL by hand:
+
+    import { base } from "$app/paths";
+    ...
+    themesUrl={`${base}/themes/`}
+
+`sv migrate sveltekit-3` mechanically rewrote every occurrence to:
+
+    import { resolve } from "$app/paths";
+    ...
+    themesUrl={resolve(`themes/`)}
+
+which is wrong on two counts: (1) `resolve()` in SvelteKit 3 only accepts a
+known route ID or pathname, not an arbitrary static-asset directory prefix,
+and (2) even the asset-flavoured `asset()` function only accepts one of the
+finite literal `static/themes/*.css` filenames it can see at build time, not
+a directory prefix a component concatenates a runtime-selected theme slug
+onto. Both fail `svelte-check` with a "not assignable" error on every single
+form. `base`/`assets` are also no longer part of `$app/paths`'s public type
+surface at the pinned `@sveltejs/kit: "next"` version, so reverting to the
+pre-migration `${base}/themes/` form doesn't type-check either.
+
+None of the 353 affected forms configures `kit.paths.base` (confirmed
+fleet-wide before writing this tool), so `base` is always `''` and the
+pre-migration expression always evaluated to the literal string
+`/themes/` at runtime anyway. The fix hardcodes that literal, which
+type-checks cleanly and is behaviourally identical to the pre-migration code:
+
+    themesUrl="/themes/"
+
+and drops the now-unused `import { resolve } from "$app/paths";` line (every
+affected file uses `resolve(` exactly once, for this expression, confirmed
+before writing this tool).
+
+It also deletes each form's `front-end-with-svelte/MIGRATION_TASKS.md` —
+the `sv migrate` codemod's own per-form task list — once confirmed resolved
+(see the reference fix on `forms/blood-test-result/front-end-with-svelte`).
+
+Usage:
+  bin/svelte-kit-3-theme-url-fix.py --check          # CI drift detector
+  bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
 ```
 
 <h2 id="svelte-locale-select-refactor"><code>bin/svelte-locale-select-refactor</code></h2>

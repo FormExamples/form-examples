@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import EpdsItemField from './EpdsItemField.svelte';
-	import { itemByNumber } from '$lib/engine/epds-rules';
+	import { itemByNumber } from '#lib/engine/epds-rules.js';
 
 	const items = [5, 6, 7, 8, 9].map((n) => itemByNumber(n)!);
 </script>

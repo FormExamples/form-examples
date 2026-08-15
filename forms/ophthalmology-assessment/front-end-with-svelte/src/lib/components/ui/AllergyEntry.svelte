@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { OphthalmicAllergy, AllergySeverity } from '$lib/engine/types';
+	import type { OphthalmicAllergy, AllergySeverity } from '#lib/engine/types.js';
 
 	let {
 		allergies = $bindable<OphthalmicAllergy[]>([])

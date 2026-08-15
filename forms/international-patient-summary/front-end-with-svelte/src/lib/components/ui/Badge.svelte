@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { CompletenessLevel } from '$lib/engine/types';
-	import { completenessLevelLabel, completenessLevelColor } from '$lib/engine/utils';
+	import type { CompletenessLevel } from '#lib/engine/types.js';
+	import { completenessLevelLabel, completenessLevelColor } from '#lib/engine/utils.js';
 
 	let {
 		level

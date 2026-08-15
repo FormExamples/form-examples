@@ -1,8 +1,8 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { validateB1 } from '$lib/engine/b1-validator';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { countConditionsDeclared } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { validateB1 } from '#lib/engine/b1-validator.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { countConditionsDeclared } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample B1 form: an identifier and the full data the engine evaluates. */
 export interface SampleAssessment {

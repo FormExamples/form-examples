@@ -1,15 +1,15 @@
 <script lang="ts">
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
-	const lpa = assessment.data.lastingPowerOfAttorney;
+	const lpa = $state(assessment.data.lastingPowerOfAttorney);
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }

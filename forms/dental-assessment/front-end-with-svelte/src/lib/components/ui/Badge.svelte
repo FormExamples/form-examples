@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { dmftCategoryLabel, dmftCategoryColor } from '$lib/engine/utils';
-	import type { DMFTCategory } from '$lib/engine/types';
+	import { dmftCategoryLabel, dmftCategoryColor } from '#lib/engine/utils.js';
+	import type { DMFTCategory } from '#lib/engine/types.js';
 
 	let {
 		category

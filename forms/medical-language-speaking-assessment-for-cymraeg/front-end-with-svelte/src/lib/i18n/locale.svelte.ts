@@ -5,7 +5,7 @@
 // the active UI locale and a `t(key)` helper that resolves a message key to the
 // active locale's string, with `en` (the source locale) as the implicit fallback.
 
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import { messages, type Locale, type MessageKey } from './messages';
 
 /** localStorage key for the persisted locale selection. */

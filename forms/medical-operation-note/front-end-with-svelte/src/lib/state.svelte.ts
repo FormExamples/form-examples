@@ -1,8 +1,8 @@
-import { browser } from '$app/environment';
-import type { OperationNote, GradingResult } from '$lib/engine/types.js';
-import { createEmptyOperationNote } from '$lib/engine/factory.js';
-import { calculateOperationGrade } from '$lib/engine/composite-grader.js';
-import { STEPS, TOTAL_STEPS } from '$lib/config/steps.js';
+import { browser } from '$app/env';
+import type { OperationNote, GradingResult } from '#lib/engine/types.js';
+import { createEmptyOperationNote } from '#lib/engine/factory.js';
+import { calculateOperationGrade } from '#lib/engine/composite-grader.js';
+import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
 
 export interface ValidationErrors {
   [fieldId: string]: string;
@@ -46,14 +46,14 @@ class OperationNoteStore {
    */
   steps = $derived(
     STEPS.map((s) => {
-      const filled = countStepFilled(this.data, s.number);
-      let status: 'waiting' | 'in-progress' | 'finished' | 'error' = 'waiting';
+    const filled = countStepFilled(this.data, s.number);
+    let status: 'waiting' | 'in-progress' | 'finished' | 'error' = 'waiting';
       if (filled >= 3) status = 'finished';
       else if (filled > 0) status = 'in-progress';
-      if (this.errors && Object.keys(this.errors).some((k) => k.startsWith(`step-${s.number}-`))) {
-        status = 'error';
-      }
-      return { ...s, status, filled };
+    if (this.errors && Object.keys(this.errors).some((k) => k.startsWith(`step-${s.number}-`))) {
+      status = 'error';
+    }
+    return { ...s, status, filled };
     }),
   );
 
@@ -167,7 +167,7 @@ function estimatePercentComplete(d: OperationNote): number {
     }
   }
   if (total === 0) return 0;
-  return Math.round((filled / total) * 100);
+  return Math.round(filled / total * 100);
 }
 
 /**

@@ -1,6 +1,6 @@
-import type { AssessmentData, FitnessStatement, RestrictionPriority } from '$lib/engine/types';
-import { calculateReturnToWork } from '$lib/engine/rtw-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, FitnessStatement, RestrictionPriority } from '#lib/engine/types.js';
+import { calculateReturnToWork } from '#lib/engine/rtw-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample record: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

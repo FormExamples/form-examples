@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
-	const d = assessment.data;
+	const d = $state(assessment.data);
 </script>
 
 <Fieldset legend="1. Organization &amp; respondent">

@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { application } from '$lib/stores/application.svelte';
-	import { evaluateFp92a } from '$lib/engine/fp92a-validator';
-	import { isFilled, looksLikeNhsNumber } from '$lib/engine/utils';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleApplications } from '$lib/data/sample-reports';
+	import { application } from '#lib/stores/application.svelte.js';
+	import { evaluateFp92a } from '#lib/engine/fp92a-validator.js';
+	import { isFilled, looksLikeNhsNumber } from '#lib/engine/utils.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleApplications } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Practitioner from '$lib/components/steps/Step1Practitioner.svelte';
-	import Step2Patient from '$lib/components/steps/Step2Patient.svelte';
-	import Step3ExistingExemption from '$lib/components/steps/Step3ExistingExemption.svelte';
-	import Step4AgeCheck from '$lib/components/steps/Step4AgeCheck.svelte';
-	import Step5PregnancyCheck from '$lib/components/steps/Step5PregnancyCheck.svelte';
-	import Step6ConditionSelection from '$lib/components/steps/Step6ConditionSelection.svelte';
-	import Step7ConditionDetail from '$lib/components/steps/Step7ConditionDetail.svelte';
-	import Step8DisabilityAppliance from '$lib/components/steps/Step8DisabilityAppliance.svelte';
-	import Step9Declaration from '$lib/components/steps/Step9Declaration.svelte';
+	import Step1Practitioner from '#lib/components/steps/Step1Practitioner.svelte';
+	import Step2Patient from '#lib/components/steps/Step2Patient.svelte';
+	import Step3ExistingExemption from '#lib/components/steps/Step3ExistingExemption.svelte';
+	import Step4AgeCheck from '#lib/components/steps/Step4AgeCheck.svelte';
+	import Step5PregnancyCheck from '#lib/components/steps/Step5PregnancyCheck.svelte';
+	import Step6ConditionSelection from '#lib/components/steps/Step6ConditionSelection.svelte';
+	import Step7ConditionDetail from '#lib/components/steps/Step7ConditionDetail.svelte';
+	import Step8DisabilityAppliance from '#lib/components/steps/Step8DisabilityAppliance.svelte';
+	import Step9Declaration from '#lib/components/steps/Step9Declaration.svelte';
 
 	const plural = 'united-kingdom-nhs-england-medical-exemption-certificates';
 

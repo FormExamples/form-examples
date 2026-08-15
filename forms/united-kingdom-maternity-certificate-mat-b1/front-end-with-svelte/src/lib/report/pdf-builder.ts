@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { AssessmentData, ValidationResult } from '$lib/engine/types';
-import { priorityLabel } from '$lib/engine/utils';
+import type { AssessmentData, ValidationResult } from '#lib/engine/types.js';
+import { priorityLabel } from '#lib/engine/utils.js';
 
 const partLabel = (t: string) =>
 	t === 'pre' ? 'Part A — pre-confinement' : t === 'post' ? 'Part B — post-confinement' : 'Not selected';

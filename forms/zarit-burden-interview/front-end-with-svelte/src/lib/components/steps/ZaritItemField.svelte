@@ -4,11 +4,11 @@
 	// The store holds the RAW 0..4 rating; there is NO reverse-scoring. The live
 	// rating pill shows the raw 0..4 value. When the ZBI-12 short form is
 	// selected, items outside the short-form subset are marked as not scored.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { RESPONSE_SCALE, ratingValue, normalizeInstrumentForm } from '$lib/engine/zarit-rules';
-	import { itemRatingColor } from '$lib/engine/utils';
-	import type { ZaritItem } from '$lib/engine/types';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { RESPONSE_SCALE, ratingValue, normalizeInstrumentForm } from '#lib/engine/zarit-rules.js';
+	import { itemRatingColor } from '#lib/engine/utils.js';
+	import type { ZaritItem } from '#lib/engine/types.js';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	let { item }: { item: ZaritItem } = $props();
 

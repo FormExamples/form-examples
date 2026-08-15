@@ -4,9 +4,9 @@ import {
 	PARQ_CLEARANCE_LABELS,
 	RECOMMENDATION_LABELS,
 	RISK_BAND_LABELS
-} from '$lib/engine/grader';
-import type { HealthScreeningQuestionnaire, GradingResult } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+} from '#lib/engine/grader.js';
+import type { HealthScreeningQuestionnaire, GradingResult } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

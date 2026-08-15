@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AbpmRequest, GradingResult } from '$lib/engine/types';
+import type { AbpmRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	appropriatenessBandLabel,
 	suitabilityBandLabel,
@@ -8,7 +8,7 @@ import {
 	indicationLabel,
 	formatBloodPressure,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AbpmRequest, result: GradingResult): TDocumentDefinitions {
 	const age = calculateAge(data.patient.dateOfBirth);

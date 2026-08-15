@@ -1,8 +1,8 @@
 <script lang="ts">
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
 
   const donor = $derived(lpaStore.application.donor);
   function changed() {

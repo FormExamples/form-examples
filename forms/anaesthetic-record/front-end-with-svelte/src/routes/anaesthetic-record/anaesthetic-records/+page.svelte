@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { statusLabel, urgencyLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { statusLabel, urgencyLabel } from '#lib/engine/utils.js';
 
 	let urgencyFilter = $state('');
 	let statusFilter = $state('');
@@ -33,7 +33,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -48,7 +48,13 @@
 		{ id: 'patientIdentifier', header: 'Patient ID', width: 150, sort: true },
 		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
 		{ id: 'theatre', header: 'Theatre', width: 150, sort: true },
-		{ id: 'anaesthetistName', header: 'Anaesthetist', width: 150, sort: true },
+		{
+			id: 'anaesthetistName',
+			header: 'Anaesthetist',
+			width: 150,
+			sort: true
+		},
+
 		{
 			id: 'urgency',
 			header: 'Urgency',
@@ -112,11 +118,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} records</p>
 </main>

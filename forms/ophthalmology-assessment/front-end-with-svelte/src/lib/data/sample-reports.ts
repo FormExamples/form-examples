@@ -1,8 +1,8 @@
-import type { AssessmentData, VAGrade } from '$lib/engine/types';
-import { calculateVisualAcuityGrade } from '$lib/engine/va-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { iopStatusLabel } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, VAGrade } from '#lib/engine/types.js';
+import { calculateVisualAcuityGrade } from '#lib/engine/va-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { iopStatusLabel } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

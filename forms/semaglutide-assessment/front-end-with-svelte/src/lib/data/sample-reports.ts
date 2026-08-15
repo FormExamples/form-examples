@@ -1,7 +1,7 @@
-import type { AssessmentData, EligibilityStatus } from '$lib/engine/types';
-import { evaluateEligibility } from '$lib/engine/eligibility-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, EligibilityStatus } from '#lib/engine/types.js';
+import { evaluateEligibility } from '#lib/engine/eligibility-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

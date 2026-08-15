@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDocument } from '$lib/report/pdf-builder';
+import { buildPdfDocument } from '#lib/report/pdf-builder.js';
 import type { GradeResult } from '$engine/types';
 import type { FormData } from '$stores/formState.svelte';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ClavienDindoGradeKey } from '$lib/engine/types';
-	import { gradeLabel, gradeBadgeColor } from '$lib/engine/utils';
+	import type { ClavienDindoGradeKey } from '#lib/engine/types.js';
+	import { gradeLabel, gradeBadgeColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

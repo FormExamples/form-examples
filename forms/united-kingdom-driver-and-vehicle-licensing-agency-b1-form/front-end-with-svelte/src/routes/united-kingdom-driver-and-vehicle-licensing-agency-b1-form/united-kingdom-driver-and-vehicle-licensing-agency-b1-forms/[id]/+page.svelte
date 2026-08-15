@@ -1,33 +1,33 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateB1 } from '$lib/engine/b1-validator';
-	import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { validateB1 } from '#lib/engine/b1-validator.js';
+	import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 
-	import Step1PersonalDetails from '$lib/components/steps/Step1PersonalDetails.svelte';
-	import Step2HealthcareProfessionals from '$lib/components/steps/Step2HealthcareProfessionals.svelte';
-	import Step3ConditionHistory from '$lib/components/steps/Step3ConditionHistory.svelte';
-	import Step4TreatmentProvider from '$lib/components/steps/Step4TreatmentProvider.svelte';
-	import Step5Blackouts from '$lib/components/steps/Step5Blackouts.svelte';
-	import Step6Seizures from '$lib/components/steps/Step6Seizures.svelte';
-	import Step7Medication from '$lib/components/steps/Step7Medication.svelte';
-	import Step8VpShunt from '$lib/components/steps/Step8VpShunt.svelte';
-	import Step9DailyLiving from '$lib/components/steps/Step9DailyLiving.svelte';
-	import Step10DoubleVision from '$lib/components/steps/Step10DoubleVision.svelte';
-	import Step11Eyesight from '$lib/components/steps/Step11Eyesight.svelte';
-	import Step12VehicleAdaptations from '$lib/components/steps/Step12VehicleAdaptations.svelte';
-	import Step13Authorisation from '$lib/components/steps/Step13Authorisation.svelte';
+	import Step1PersonalDetails from '#lib/components/steps/Step1PersonalDetails.svelte';
+	import Step2HealthcareProfessionals from '#lib/components/steps/Step2HealthcareProfessionals.svelte';
+	import Step3ConditionHistory from '#lib/components/steps/Step3ConditionHistory.svelte';
+	import Step4TreatmentProvider from '#lib/components/steps/Step4TreatmentProvider.svelte';
+	import Step5Blackouts from '#lib/components/steps/Step5Blackouts.svelte';
+	import Step6Seizures from '#lib/components/steps/Step6Seizures.svelte';
+	import Step7Medication from '#lib/components/steps/Step7Medication.svelte';
+	import Step8VpShunt from '#lib/components/steps/Step8VpShunt.svelte';
+	import Step9DailyLiving from '#lib/components/steps/Step9DailyLiving.svelte';
+	import Step10DoubleVision from '#lib/components/steps/Step10DoubleVision.svelte';
+	import Step11Eyesight from '#lib/components/steps/Step11Eyesight.svelte';
+	import Step12VehicleAdaptations from '#lib/components/steps/Step12VehicleAdaptations.svelte';
+	import Step13Authorisation from '#lib/components/steps/Step13Authorisation.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

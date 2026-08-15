@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from '$lib/stores/card.svelte.js';
+  import { store } from '#lib/stores/card.svelte.js';
 </script>
 
 <fieldset class="fieldset">

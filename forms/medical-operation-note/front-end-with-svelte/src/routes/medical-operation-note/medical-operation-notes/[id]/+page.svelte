@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/state.svelte';
-	import { STEPS, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleOperationNotes } from '$lib/data/sample-reports';
+	import { store } from '#lib/state.svelte.js';
+	import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleOperationNotes } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1 from '$lib/steps/Step1Identification.svelte';
-	import Step2 from '$lib/steps/Step2PatientIdentification.svelte';
-	import Step3 from '$lib/steps/Step3SurgicalTeam.svelte';
-	import Step4 from '$lib/steps/Step4DiagnosesProcedures.svelte';
-	import Step5 from '$lib/steps/Step5Anaesthesia.svelte';
-	import Step6 from '$lib/steps/Step6PositionPrepApproach.svelte';
-	import Step7 from '$lib/steps/Step7OperativeFindings.svelte';
-	import Step8 from '$lib/steps/Step8MaterialsImplants.svelte';
-	import Step9 from '$lib/steps/Step9DrainsPacksSpecimens.svelte';
-	import Step10 from '$lib/steps/Step10SafetyCountsEbl.svelte';
-	import Step11 from '$lib/steps/Step11PostOperativePlan.svelte';
-	import Step12 from '$lib/steps/Step12SignOff.svelte';
+	import Step1 from '#lib/steps/Step1Identification.svelte';
+	import Step2 from '#lib/steps/Step2PatientIdentification.svelte';
+	import Step3 from '#lib/steps/Step3SurgicalTeam.svelte';
+	import Step4 from '#lib/steps/Step4DiagnosesProcedures.svelte';
+	import Step5 from '#lib/steps/Step5Anaesthesia.svelte';
+	import Step6 from '#lib/steps/Step6PositionPrepApproach.svelte';
+	import Step7 from '#lib/steps/Step7OperativeFindings.svelte';
+	import Step8 from '#lib/steps/Step8MaterialsImplants.svelte';
+	import Step9 from '#lib/steps/Step9DrainsPacksSpecimens.svelte';
+	import Step10 from '#lib/steps/Step10SafetyCountsEbl.svelte';
+	import Step11 from '#lib/steps/Step11PostOperativePlan.svelte';
+	import Step12 from '#lib/steps/Step12SignOff.svelte';
 
 	const stepComponents = [
 		Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8, Step9, Step10, Step11, Step12,

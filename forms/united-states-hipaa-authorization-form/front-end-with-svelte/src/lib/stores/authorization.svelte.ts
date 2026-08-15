@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { HipaaAuthorization, ValidationResult } from '$lib/engine/types';
-import { createDefaultAuthorization } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { HipaaAuthorization, ValidationResult } from '#lib/engine/types.js';
+import { createDefaultAuthorization } from '#lib/engine/defaults.js';
 
 // Re-exported so consumers can keep importing the factory from the store.
 export { createDefaultAuthorization };

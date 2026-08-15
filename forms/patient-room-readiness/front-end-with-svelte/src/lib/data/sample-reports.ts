@@ -1,7 +1,7 @@
-import type { PatientRoomReadinessChecklist } from '$lib/engine/types.js';
-import { CHECKLIST_ITEMS } from '$lib/engine/types.js';
-import { summariseReadiness } from '$lib/engine/summary.js';
-import { createDefaultAssessment } from '$lib/stores/checklist.svelte.js';
+import type { PatientRoomReadinessChecklist } from '#lib/engine/types.js';
+import { CHECKLIST_ITEMS } from '#lib/engine/types.js';
+import { summariseReadiness } from '#lib/engine/summary.js';
+import { createDefaultAssessment } from '#lib/stores/checklist.svelte.js';
 
 /** A sample checklist: an identifier and the full data the engine tallies. */
 export interface SampleAssessment {

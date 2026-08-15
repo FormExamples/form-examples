@@ -3,15 +3,15 @@
 	// GLIM diagnosis, refeeding risk, composite nutrition risk, and safety
 	// flags. Filterable on each of those, and sortable by clinical severity
 	// rather than alphabetically.
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import { sampleAssessments } from '$lib/data/sample-reports';
-	import { RECOMMENDATION_LABELS } from '$lib/engine/grader';
-	import type { AssessmentRow } from '$lib/engine/types';
-	import { titleCase } from '$lib/engine/utils';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
+	import { RECOMMENDATION_LABELS } from '#lib/engine/grader.js';
+	import type { AssessmentRow } from '#lib/engine/types.js';
+	import { titleCase } from '#lib/engine/utils.js';
 
 	const rows: AssessmentRow[] = sampleAssessments;
 

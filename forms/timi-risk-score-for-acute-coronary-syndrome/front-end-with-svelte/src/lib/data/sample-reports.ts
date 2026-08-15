@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, RiskBand } from '$lib/engine/types';
-import { calculateTimiGrade } from '$lib/engine/timi-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, RiskBand } from '#lib/engine/types.js';
+import { calculateTimiGrade } from '#lib/engine/timi-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -18,9 +18,9 @@ export type {
 	Position,
 	Note,
 	ArchitectureDecisionRecord
-} from '$lib/types';
+} from '#lib/types.js';
 
-import type { Status } from '$lib/types';
+import type { Status } from '#lib/types.js';
 
 /** Re-export the workflow status union for convenience. */
 export type AdrStatus = Status;

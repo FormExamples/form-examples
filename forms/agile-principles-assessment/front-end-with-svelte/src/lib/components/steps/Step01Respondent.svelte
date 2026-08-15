@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
+  import { store } from '#lib/stores/assessment.svelte.js';
 
   function toggleAnonymous(ev: Event) {
     const checked = (ev.currentTarget as HTMLInputElement).checked;

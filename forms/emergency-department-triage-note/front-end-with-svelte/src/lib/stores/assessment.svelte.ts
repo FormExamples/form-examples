@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, TriageResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { AssessmentData, TriageResult } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {

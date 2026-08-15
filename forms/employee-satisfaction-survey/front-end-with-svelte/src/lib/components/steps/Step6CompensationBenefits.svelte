@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import LikertItem from '$lib/components/ui/LikertItem.svelte';
-	import { surveyItems } from '$lib/engine/rules';
-	import type { LikertValue } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import LikertItem from '#lib/components/ui/LikertItem.svelte';
+	import { surveyItems } from '#lib/engine/rules.js';
+	import type { LikertValue } from '#lib/engine/types.js';
 
 	const d = assessment.data.compensation as unknown as Record<string, LikertValue>;
 	const items = surveyItems.filter((it) => it.domain === 'compensation');

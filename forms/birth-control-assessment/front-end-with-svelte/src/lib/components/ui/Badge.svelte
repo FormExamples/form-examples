@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mecClassLabel, mecClassColor } from '$lib/engine/utils';
+	import { mecClassLabel, mecClassColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

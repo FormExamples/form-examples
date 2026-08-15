@@ -1,4 +1,4 @@
-import type { StepConfig, ScreeningData } from '$lib/engine/types';
+import type { StepConfig, ScreeningData } from '#lib/engine/types.js';
 
 export const TOTAL_STEPS = 7;
 

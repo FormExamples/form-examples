@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Result, ResultInterpretation } from '$lib/engine/types';
+	import type { Result, ResultInterpretation } from '#lib/engine/types.js';
 
 	let {
 		results = $bindable<Result[]>([])

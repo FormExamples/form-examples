@@ -1,4 +1,4 @@
-import type { AdrFormData } from '$lib/types';
+import type { AdrFormData } from '#lib/types.js';
 import type { AdrEvaluation, AdrFlag } from './types';
 
 /**

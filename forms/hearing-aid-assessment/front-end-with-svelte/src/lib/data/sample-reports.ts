@@ -1,8 +1,8 @@
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { calculateHHIES } from '$lib/engine/hhies-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { hearingLossGrade } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { calculateHHIES } from '#lib/engine/hhies-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { hearingLossGrade } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

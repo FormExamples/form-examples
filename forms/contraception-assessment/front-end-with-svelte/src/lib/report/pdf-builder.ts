@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { ukmecCategory, ukmecLabel, calculateAge } from '$lib/engine/utils';
-import { methodLabels } from '$lib/engine/ukmec-rules';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { ukmecCategory, ukmecLabel, calculateAge } from '#lib/engine/utils.js';
+import { methodLabels } from '#lib/engine/ukmec-rules.js';
 
 export function buildPdfDocument(
 	data: AssessmentData,

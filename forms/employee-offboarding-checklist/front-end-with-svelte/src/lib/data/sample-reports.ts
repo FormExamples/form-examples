@@ -1,6 +1,6 @@
-import type { AssessmentData, Outcome } from '$lib/engine/types';
-import { validateChecklist } from '$lib/engine/checklist-validator';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Outcome } from '#lib/engine/types.js';
+import { validateChecklist } from '#lib/engine/checklist-validator.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample checklist: an identifier and the full data the engine validates. */
 export interface SampleAssessment {

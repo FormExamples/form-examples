@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, ValidationResult } from '$lib/engine/types';
-import { calculateAge, priorityLabel } from '$lib/engine/utils';
+import type { AssessmentData, ValidationResult } from '#lib/engine/types.js';
+import { calculateAge, priorityLabel } from '#lib/engine/utils.js';
 
 const conditionLabels: Record<string, string> = {
 	anxietyDepressionWithoutImpairment: 'Anxiety or depression (without impairment)',

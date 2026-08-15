@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { psqiScoreLabel, psqiScoreColor } from '$lib/engine/utils';
+	import { psqiScoreLabel, psqiScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

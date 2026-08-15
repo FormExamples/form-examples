@@ -1,7 +1,7 @@
-import type { AssessmentData, HearingGrade } from '$lib/engine/types';
-import { calculateHearingGrade } from '$lib/engine/hearing-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, HearingGrade } from '#lib/engine/types.js';
+import { calculateHearingGrade } from '#lib/engine/hearing-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

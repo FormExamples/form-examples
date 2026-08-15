@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult, Subscores } from '$lib/engine/types';
+import type { AssessmentData, GradingResult, Subscores } from '#lib/engine/types.js';
 import {
 	escalationBandLabel,
 	priorityLabel,
@@ -11,7 +11,7 @@ import {
 	capillaryRefillLabel,
 	consciousnessLabel,
 	subscoreLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 const PARAM_ROWS: { key: keyof Subscores; value: (d: AssessmentData) => string }[] = [
 	{

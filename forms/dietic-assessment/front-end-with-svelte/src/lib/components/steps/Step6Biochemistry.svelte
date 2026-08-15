@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import { assessmentStore } from '$lib/stores/assessment.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import { assessmentStore } from '#lib/stores/assessment.svelte.js';
 
 	const d = assessmentStore.data;
 </script>

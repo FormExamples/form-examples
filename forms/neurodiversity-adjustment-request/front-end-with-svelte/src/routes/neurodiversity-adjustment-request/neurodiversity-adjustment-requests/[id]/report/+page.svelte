@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { page } from '$app/state';
-	import { requestStore } from '$lib/stores/result.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import { requestStore } from '#lib/stores/result.svelte.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 	import {
 		eligibilityLabel,
 		eligibilityColor,
@@ -21,7 +21,7 @@
 		conditionList,
 		difficultyList,
 		adjustmentList
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(requestStore.data);

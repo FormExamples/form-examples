@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { validityStatusLabel, validityStatusColor } from '$lib/engine/utils';
+	import { validityStatusLabel, validityStatusColor } from '#lib/engine/utils.js';
 
 	let {
 		status

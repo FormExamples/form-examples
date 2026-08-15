@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import YesNoQuestion from '$lib/components/ui/YesNoQuestion.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import YesNoQuestion from '#lib/components/ui/YesNoQuestion.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const d = assessment.data.diagnosisConfirmation;
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
   const options = [
     {

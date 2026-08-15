@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CardiologyResponse, GradingResult } from '$lib/engine/types';
+import type { CardiologyResponse, GradingResult } from '#lib/engine/types.js';
 import {
 	responseClassificationLabel,
 	severityLabel,
@@ -7,7 +7,7 @@ import {
 	consultationTypeLabel,
 	responseStatusLabel,
 	primaryDiagnosisCategoryLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

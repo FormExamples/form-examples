@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import type { Sf36Response } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import type { Sf36Response } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import ScaleItemField from './ScaleItemField.svelte';
 	import {
 		NOT_AT_ALL_TO_EXTREMELY_SCALE,
 		BODILY_PAIN_SCALE,
 		ALL_TO_NONE_OF_THE_TIME_SCALE,
 		DEFINITELY_TRUE_TO_FALSE_SCALE
-	} from '$lib/config/scales';
+	} from '#lib/config/scales.js';
 
 	const s = assessment.data.sf36;
 

@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CytologyRequest, GradingResult } from '$lib/engine/types';
+import type { CytologyRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	specimenTypeLabel,
 	indicationLabel,
@@ -7,7 +7,7 @@ import {
 	preanalyticalLabel,
 	triageTierLabel,
 	recommendationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

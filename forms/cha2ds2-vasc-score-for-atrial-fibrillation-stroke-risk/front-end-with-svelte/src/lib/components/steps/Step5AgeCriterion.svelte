@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateCha2ds2VascGrade } from '$lib/engine/cha2ds2vasc-grader';
-	import { ageBandLabel, pointColor } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateCha2ds2VascGrade } from '#lib/engine/cha2ds2vasc-grader.js';
+	import { ageBandLabel, pointColor } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
 
 	const grade = $derived(calculateCha2ds2VascGrade(assessment.data));
 	const ageYears = $derived(assessment.data.identification.ageYears);

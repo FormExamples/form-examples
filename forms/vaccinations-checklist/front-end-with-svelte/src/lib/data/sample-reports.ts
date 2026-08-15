@@ -1,6 +1,6 @@
-import type { AssessmentData, ComplianceStatus, RiskLevel } from '$lib/engine/types';
-import { calculateVaccinationGrade } from '$lib/engine/vaccination-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ComplianceStatus, RiskLevel } from '#lib/engine/types.js';
+import { calculateVaccinationGrade } from '#lib/engine/vaccination-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample checklist: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

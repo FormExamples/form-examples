@@ -3,13 +3,13 @@
 	// fired-rule audit trail, the safety flags, and the management plan. Safety
 	// flags are printed whether or not the clinician overrode the candidacy.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import { OHS_ITEMS } from '$lib/config/ohs-items';
-	import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '$lib/engine/grader';
-	import { titleCase } from '$lib/engine/utils';
-	import { evaluationStore } from '$lib/stores/evaluation.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import { OHS_ITEMS } from '#lib/config/ohs-items.js';
+	import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '#lib/engine/grader.js';
+	import { titleCase } from '#lib/engine/utils.js';
+	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

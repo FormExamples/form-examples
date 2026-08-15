@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { satisfactionCategoryLabel } from '$lib/engine/utils';
-	import type { SatisfactionCategory } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { satisfactionCategoryLabel } from '#lib/engine/utils.js';
+	import type { SatisfactionCategory } from '#lib/engine/types.js';
 
 	let categoryFilter = $state('');
 	let visitTypeFilter = $state('');
@@ -34,7 +34,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -55,8 +55,20 @@
 	// shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'id', header: 'Survey', width: 120 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-		{ id: 'surveyedDate', header: 'Surveyed', width: 120, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'surveyedDate',
+			header: 'Surveyed',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'visitType',
 			header: 'Visit type',
@@ -64,7 +76,15 @@
 			sort: true,
 			template: (v: string) => visitTypeLabel[v] ?? (v || '—')
 		},
-		{ id: 'score', header: 'Score', width: 90, sort: true, template: (v: number) => `${v}/100` },
+
+		{
+			id: 'score',
+			header: 'Score',
+			width: 90,
+			sort: true,
+			template: (v: number) => `${v}/100`
+		},
+
 		{
 			id: 'category',
 			header: 'Satisfaction',
@@ -76,7 +96,7 @@
 			id: 'complaintFlag',
 			header: 'Complaint',
 			width: 100,
-			template: (v: boolean) => (v ? 'Yes' : 'No')
+			template: (v: boolean) => v ? 'Yes' : 'No'
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -129,11 +149,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} surveys</p>
 </main>

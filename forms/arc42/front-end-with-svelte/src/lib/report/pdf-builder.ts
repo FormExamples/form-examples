@@ -1,4 +1,4 @@
-import type { Arc42Documentation, MaturityResult } from '$lib/grading/types.js';
+import type { Arc42Documentation, MaturityResult } from '#lib/grading/types.js';
 
 type Content = Record<string, unknown> | string;
 

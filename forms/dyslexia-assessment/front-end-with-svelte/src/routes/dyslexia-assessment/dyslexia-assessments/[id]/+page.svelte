@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeDyslexia } from '$lib/engine/dyslexia-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeDyslexia } from '#lib/engine/dyslexia-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2DevelopmentalHistory from '$lib/components/steps/Step2DevelopmentalHistory.svelte';
-	import Step3EducationalBackground from '$lib/components/steps/Step3EducationalBackground.svelte';
-	import Step4ReadingAssessment from '$lib/components/steps/Step4ReadingAssessment.svelte';
-	import Step5WritingSpelling from '$lib/components/steps/Step5WritingSpelling.svelte';
-	import Step6PhonologicalProcessing from '$lib/components/steps/Step6PhonologicalProcessing.svelte';
-	import Step7WorkingMemoryProcessingSpeed from '$lib/components/steps/Step7WorkingMemoryProcessingSpeed.svelte';
-	import Step8EmotionalBehavioural from '$lib/components/steps/Step8EmotionalBehavioural.svelte';
-	import Step9PreviousSupport from '$lib/components/steps/Step9PreviousSupport.svelte';
-	import Step10RecommendationsSupportPlan from '$lib/components/steps/Step10RecommendationsSupportPlan.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2DevelopmentalHistory from '#lib/components/steps/Step2DevelopmentalHistory.svelte';
+	import Step3EducationalBackground from '#lib/components/steps/Step3EducationalBackground.svelte';
+	import Step4ReadingAssessment from '#lib/components/steps/Step4ReadingAssessment.svelte';
+	import Step5WritingSpelling from '#lib/components/steps/Step5WritingSpelling.svelte';
+	import Step6PhonologicalProcessing from '#lib/components/steps/Step6PhonologicalProcessing.svelte';
+	import Step7WorkingMemoryProcessingSpeed from '#lib/components/steps/Step7WorkingMemoryProcessingSpeed.svelte';
+	import Step8EmotionalBehavioural from '#lib/components/steps/Step8EmotionalBehavioural.svelte';
+	import Step9PreviousSupport from '#lib/components/steps/Step9PreviousSupport.svelte';
+	import Step10RecommendationsSupportPlan from '#lib/components/steps/Step10RecommendationsSupportPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

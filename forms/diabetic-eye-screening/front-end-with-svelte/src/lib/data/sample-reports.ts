@@ -4,9 +4,9 @@ import type {
 	Referral,
 	WorstMaculopathy,
 	WorstRetinopathy
-} from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/diabetic-eye-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/diabetic-eye-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample screening: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateMseGrade } from '$lib/engine/mse-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateMseGrade } from '#lib/engine/mse-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Appearance from '$lib/components/steps/Step3Appearance.svelte';
-	import Step4Speech from '$lib/components/steps/Step4Speech.svelte';
-	import Step5Emotion from '$lib/components/steps/Step5Emotion.svelte';
-	import Step6Perception from '$lib/components/steps/Step6Perception.svelte';
-	import Step7Thought from '$lib/components/steps/Step7Thought.svelte';
-	import Step8Insight from '$lib/components/steps/Step8Insight.svelte';
-	import Step9Cognition from '$lib/components/steps/Step9Cognition.svelte';
-	import Step10Summary from '$lib/components/steps/Step10Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Appearance from '#lib/components/steps/Step3Appearance.svelte';
+	import Step4Speech from '#lib/components/steps/Step4Speech.svelte';
+	import Step5Emotion from '#lib/components/steps/Step5Emotion.svelte';
+	import Step6Perception from '#lib/components/steps/Step6Perception.svelte';
+	import Step7Thought from '#lib/components/steps/Step7Thought.svelte';
+	import Step8Insight from '#lib/components/steps/Step8Insight.svelte';
+	import Step9Cognition from '#lib/components/steps/Step9Cognition.svelte';
+	import Step10Summary from '#lib/components/steps/Step10Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

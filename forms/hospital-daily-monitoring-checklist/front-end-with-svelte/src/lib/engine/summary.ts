@@ -3,7 +3,7 @@ import type {
   HospitalDailyMonitoringChecklist,
   NeedsAttentionItem,
 } from './types.js';
-import { CHECKLIST_ITEMS } from '$lib/config/items.js';
+import { CHECKLIST_ITEMS } from '#lib/config/items.js';
 
 /**
  * Pure tally/summary over the 97 checkpoints — no side effects, no scoring.

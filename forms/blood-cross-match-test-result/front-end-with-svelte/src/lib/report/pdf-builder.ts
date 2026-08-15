@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { BloodCrossMatchResult, GradingResult } from '$lib/engine/types';
+import type { BloodCrossMatchResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
@@ -9,7 +9,7 @@ import {
 	bloodGroupLabel,
 	componentLabel,
 	crossmatchResultLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

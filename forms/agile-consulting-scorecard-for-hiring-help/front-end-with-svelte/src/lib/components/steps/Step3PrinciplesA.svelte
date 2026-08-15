@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import ChecklistField from '$lib/components/ChecklistField.svelte';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import ChecklistField from '#lib/components/ChecklistField.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
-	const d = assessment.data;
+	const d = $state(assessment.data);
 </script>
 
 <Fieldset legend="3. Principles 1–4">

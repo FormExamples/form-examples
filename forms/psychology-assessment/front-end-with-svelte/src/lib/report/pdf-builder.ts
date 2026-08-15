@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult, SubscaleScore } from '$lib/engine/types';
-import { severityLabel, subscaleLabel, calculateAge } from '$lib/engine/utils';
+import type { AssessmentData, GradingResult, SubscaleScore } from '#lib/engine/types.js';
+import { severityLabel, subscaleLabel, calculateAge } from '#lib/engine/utils.js';
 
 /** Build the printable PDF document definition for a psychology assessment. */
 export function buildPdfDocument(

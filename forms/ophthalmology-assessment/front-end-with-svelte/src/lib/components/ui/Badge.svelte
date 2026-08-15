@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { vaGradeLabel, vaGradeColor } from '$lib/engine/utils';
-	import type { VAGrade } from '$lib/engine/types';
+	import { vaGradeLabel, vaGradeColor } from '#lib/engine/utils.js';
+	import type { VAGrade } from '#lib/engine/types.js';
 
 	let {
 		grade

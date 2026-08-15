@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1ReportIdentification from '$lib/components/steps/Step1ReportIdentification.svelte';
-	import Step2TestDetails from '$lib/components/steps/Step2TestDetails.svelte';
-	import Step3ClinicalContext from '$lib/components/steps/Step3ClinicalContext.svelte';
-	import Step4Findings from '$lib/components/steps/Step4Findings.svelte';
-	import Step5Interpretation from '$lib/components/steps/Step5Interpretation.svelte';
-	import Step6FollowUp from '$lib/components/steps/Step6FollowUp.svelte';
-	import Step7InterpretationSignOff from '$lib/components/steps/Step7InterpretationSignOff.svelte';
+	import Step1ReportIdentification from '#lib/components/steps/Step1ReportIdentification.svelte';
+	import Step2TestDetails from '#lib/components/steps/Step2TestDetails.svelte';
+	import Step3ClinicalContext from '#lib/components/steps/Step3ClinicalContext.svelte';
+	import Step4Findings from '#lib/components/steps/Step4Findings.svelte';
+	import Step5Interpretation from '#lib/components/steps/Step5Interpretation.svelte';
+	import Step6FollowUp from '#lib/components/steps/Step6FollowUp.svelte';
+	import Step7InterpretationSignOff from '#lib/components/steps/Step7InterpretationSignOff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

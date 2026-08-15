@@ -1,12 +1,12 @@
-import type { AgileChecklist, Band, Maturity } from '$lib/engine/types.js';
+import type { AgileChecklist, Band, Maturity } from '#lib/engine/types.js';
 import {
 	PRACTICES_ITEMS,
 	STAKEHOLDERS_ITEMS,
 	TEAMS_ITEMS,
 	type ItemDef,
-} from '$lib/config/items.js';
-import { calculateMaturity } from '$lib/engine/composite-grader.js';
-import { createDefaultAssessment } from '$lib/stores/checklist.svelte.js';
+} from '#lib/config/items.js';
+import { calculateMaturity } from '#lib/engine/composite-grader.js';
+import { createDefaultAssessment } from '#lib/stores/checklist.svelte.js';
 
 /** A sample checklist: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

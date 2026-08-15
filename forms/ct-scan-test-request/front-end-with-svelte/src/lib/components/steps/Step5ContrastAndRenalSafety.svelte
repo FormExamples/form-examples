@@ -1,13 +1,13 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { usesIvContrast } from '$lib/engine/utils';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { usesIvContrast } from '#lib/engine/utils.js';
 
 	const d = request.data.contrast;
 	const iv = $derived(usesIvContrast(d.contrastRequired));

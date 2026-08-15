@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		calculateAge,
 		countConditionsDeclared,
@@ -10,8 +10,8 @@
 		sectionLabel,
 		statusColor,
 		statusLabel
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'united-kingdom-driver-and-vehicle-licensing-agency-b1-forms';
 

@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/indicators.svelte';
-	import { STEPS } from '$lib/config/steps';
-	import { TOTAL_INDICATORS } from '$lib/config/indicators';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/indicators.svelte.js';
+	import { STEPS } from '#lib/config/steps.js';
+	import { TOTAL_INDICATORS } from '#lib/config/indicators.js';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01ReportingPeriod.svelte';
-	import Step02 from '$lib/components/steps/Step02Finance.svelte';
-	import Step03 from '$lib/components/steps/Step03Process.svelte';
-	import Step04 from '$lib/components/steps/Step04LearningAndGrowth.svelte';
-	import Step05 from '$lib/components/steps/Step05Customer.svelte';
-	import Step06 from '$lib/components/steps/Step06Summary.svelte';
+	import Step01 from '#lib/components/steps/Step01ReportingPeriod.svelte';
+	import Step02 from '#lib/components/steps/Step02Finance.svelte';
+	import Step03 from '#lib/components/steps/Step03Process.svelte';
+	import Step04 from '#lib/components/steps/Step04LearningAndGrowth.svelte';
+	import Step05 from '#lib/components/steps/Step05Customer.svelte';
+	import Step06 from '#lib/components/steps/Step06Summary.svelte';
 
 	// 6 steps, auto-wrapped: reporting period (1), one per Balanced Scorecard
 	// perspective (2-5, 4 perspectives), summary & sign-off (6).

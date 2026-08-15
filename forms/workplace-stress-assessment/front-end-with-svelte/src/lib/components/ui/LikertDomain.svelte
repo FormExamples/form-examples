@@ -3,12 +3,12 @@
 	// radio-groups, bound directly into the reactive store section. The first
 	// radio of each item carries the item id so the ErrorSummary can anchor to a
 	// real input.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { stressItems, likertOptions } from '$lib/engine/rules';
-	import type { DomainKey } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { stressItems, likertOptions } from '#lib/engine/rules.js';
+	import type { DomainKey } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	let {
 		domain,

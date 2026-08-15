@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { CytologyRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { CytologyRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the canonical factory so consumers can import it from the store.
 export { createDefaultRequest };

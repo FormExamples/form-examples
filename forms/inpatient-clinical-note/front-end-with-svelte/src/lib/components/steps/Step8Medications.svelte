@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import RowCard from '$lib/components/ui/RowCard.svelte';
-	import * as options from '$lib/config/options';
-	import { TOTAL_STEPS } from '$lib/config/steps';
-	import { emptyMedicationRow } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import RowCard from '#lib/components/ui/RowCard.svelte';
+	import * as options from '#lib/config/options.js';
+	import { TOTAL_STEPS } from '#lib/config/steps.js';
+	import { emptyMedicationRow } from '#lib/engine/types.js';
 
 	const s = assessment.data.medications;
 

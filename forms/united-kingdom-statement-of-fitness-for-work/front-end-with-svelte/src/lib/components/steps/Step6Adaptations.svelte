@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { store } from '$lib/stores/fitnote.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import YesNo from '$lib/components/ui/YesNo.svelte';
+	import { store } from '#lib/stores/fitnote.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import YesNo from '#lib/components/ui/YesNo.svelte';
 
 	const d = store.data;
 	const showAdaptations = $derived(d.fitnessForWork === 'may_be_fit');

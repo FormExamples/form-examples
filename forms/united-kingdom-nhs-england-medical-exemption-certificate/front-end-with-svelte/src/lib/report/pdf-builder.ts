@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { EligibilityResult, Fp92aApplication } from '$lib/engine/types';
-import { conditionLabel } from '$lib/engine/utils';
+import type { EligibilityResult, Fp92aApplication } from '#lib/engine/types.js';
+import { conditionLabel } from '#lib/engine/utils.js';
 
 const OUTCOME_LABEL: Record<string, string> = {
 	eligible: 'Eligible',

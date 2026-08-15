@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { HipaaAuthorization, ValidationResult } from '$lib/engine/types';
+import type { HipaaAuthorization, ValidationResult } from '#lib/engine/types.js';
 import {
 	validityStatusLabel,
 	completenessStatusLabel,
@@ -7,7 +7,7 @@ import {
 	signerRelationshipLabel,
 	recordCategoryLabels,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: HipaaAuthorization,

@@ -5,13 +5,13 @@
 	// this screen without cross-referencing earlier steps. Styled as a warning
 	// panel because a single positive answer here overrides every other
 	// finding in the evaluation.
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import { YES_NO } from '$lib/config/options';
-	import { evaluationStore } from '$lib/stores/assessment.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import { YES_NO } from '#lib/config/options.js';
+	import { evaluationStore } from '#lib/stores/assessment.svelte.js';
 
 	const d = evaluationStore.data;
 

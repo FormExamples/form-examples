@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import type { GradingResult, KneeReplacementSurgeryEvaluation } from '$lib/engine/types';
-import { calculateKneeEvaluation } from '$lib/engine/grader';
-import { createDefaultEvaluation } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { GradingResult, KneeReplacementSurgeryEvaluation } from '#lib/engine/types.js';
+import { calculateKneeEvaluation } from '#lib/engine/grader.js';
+import { createDefaultEvaluation } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given evaluation id (defaults to `new`). */
 function storageKey(id: string): string {

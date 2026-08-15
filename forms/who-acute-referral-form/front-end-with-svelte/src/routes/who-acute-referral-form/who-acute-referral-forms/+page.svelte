@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { modeOfTransferLabel } from '$lib/engine/utils';
-	import type { ModeOfTransfer } from '$lib/engine/types';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { modeOfTransferLabel } from '#lib/engine/utils.js';
+	import type { ModeOfTransfer } from '#lib/engine/types.js';
 
 	let completenessFilter = $state('');
 	let modeFilter = $state('');
@@ -34,7 +34,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -49,8 +49,20 @@
 		{ id: 'id', header: 'Referral', width: 120 },
 		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
 		{ id: 'referralDate', header: 'Date', width: 110, sort: true },
-		{ id: 'initiatingFacility', header: 'From (initiating)', flexgrow: 2, sort: true },
-		{ id: 'referralFacility', header: 'To (referral)', flexgrow: 2, sort: true },
+		{
+			id: 'initiatingFacility',
+			header: 'From (initiating)',
+			flexgrow: 2,
+			sort: true
+		},
+
+		{
+			id: 'referralFacility',
+			header: 'To (referral)',
+			flexgrow: 2,
+			sort: true
+		},
+
 		{
 			id: 'modeOfTransfer',
 			header: 'Mode',
@@ -58,13 +70,20 @@
 			sort: true,
 			template: (v: ModeOfTransfer) => modeOfTransferLabel(v)
 		},
-		{ id: 'primaryDiagnosis', header: 'Diagnosis', flexgrow: 2, sort: true },
+
+		{
+			id: 'primaryDiagnosis',
+			header: 'Diagnosis',
+			flexgrow: 2,
+			sort: true
+		},
+
 		{
 			id: 'completeness',
 			header: 'Status',
 			width: 120,
 			sort: true,
-			template: (v: string) => (v === 'complete' ? 'Complete' : 'Incomplete')
+			template: (v: string) => v === 'complete' ? 'Complete' : 'Incomplete'
 		},
 		{ id: 'completionPercent', header: 'Complete %', width: 110, sort: true, template: (v: number) => `${v}%` },
 		{ id: 'urgentFlagCount', header: 'Urgent', width: 90, sort: true },
@@ -113,11 +132,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} referrals</p>
 </main>

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { request } from '$lib/stores/request.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
 	const d = request.data.procedure;
 </script>

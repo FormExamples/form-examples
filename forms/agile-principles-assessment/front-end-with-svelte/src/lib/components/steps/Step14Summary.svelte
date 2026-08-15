@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import { PRINCIPLES } from '$lib/config/principles.js';
-  import FlagBanner from '$lib/components/ui/FlagBanner.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import { PRINCIPLES } from '#lib/config/principles.js';
+  import FlagBanner from '#lib/components/ui/FlagBanner.svelte';
 
   const r = $derived(store.result);
 

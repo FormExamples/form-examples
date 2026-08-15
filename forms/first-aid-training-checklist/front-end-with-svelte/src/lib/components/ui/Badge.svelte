@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { triStateLabel, triStateColor } from '$lib/engine/utils';
-	import type { TriState } from '$lib/engine/types';
+	import { triStateLabel, triStateColor } from '#lib/engine/utils.js';
+	import type { TriState } from '#lib/engine/types.js';
 
 	let {
 		status

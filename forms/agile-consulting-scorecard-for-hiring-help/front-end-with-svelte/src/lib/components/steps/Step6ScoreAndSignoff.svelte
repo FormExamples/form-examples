@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { bandColor, bandShortLabel, recommendationCopy } from '$lib/engine/utils';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { bandColor, bandShortLabel, recommendationCopy } from '#lib/engine/utils.js';
 
 	const grade = $derived(assessment.grade);
 	const bandClass = $derived(bandColor(grade.computedBand));

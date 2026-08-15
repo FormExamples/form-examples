@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mmseScoreLabel, mmseScoreColor } from '$lib/engine/utils';
+	import { mmseScoreLabel, mmseScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

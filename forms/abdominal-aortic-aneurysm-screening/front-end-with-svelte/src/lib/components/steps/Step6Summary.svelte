@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { classifyAaa } from '$lib/engine/aaa-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { classifyAaa } from '#lib/engine/aaa-grader.js';
 	import {
 		categoryColor,
 		categoryLabel,
 		surveillanceBandLabel,
 		formatDiameter
-	} from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	} from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.result;
 	const grade = $derived(classifyAaa(assessment.data));

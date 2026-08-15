@@ -1,7 +1,7 @@
-import type { TumorMarkerRequest, RequestRow } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { countSelectedMarkers } from '$lib/engine/markers';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import type { TumorMarkerRequest, RequestRow } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { countSelectedMarkers } from '#lib/engine/markers.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 /** A sample request: an identifier and the full request the engine grades. */
 export interface SampleRequest {

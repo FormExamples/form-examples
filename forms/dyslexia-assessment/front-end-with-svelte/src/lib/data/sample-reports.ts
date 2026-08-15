@@ -1,6 +1,6 @@
-import type { AssessmentData, Severity } from '$lib/engine/types';
-import { gradeDyslexia } from '$lib/engine/dyslexia-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, Severity } from '#lib/engine/types.js';
+import { gradeDyslexia } from '#lib/engine/dyslexia-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

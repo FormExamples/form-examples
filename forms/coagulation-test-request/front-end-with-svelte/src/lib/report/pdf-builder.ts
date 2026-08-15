@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { CoagulationTestRequest, GradingResult } from '$lib/engine/types';
-import { indicationLabel, selectedTestLabels } from '$lib/engine/defaults';
+import type { CoagulationTestRequest, GradingResult } from '#lib/engine/types.js';
+import { indicationLabel, selectedTestLabels } from '#lib/engine/defaults.js';
 import {
 	appropriatenessLabel,
 	preanalyticalLabel,
 	triageTierLabel,
 	recommendationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

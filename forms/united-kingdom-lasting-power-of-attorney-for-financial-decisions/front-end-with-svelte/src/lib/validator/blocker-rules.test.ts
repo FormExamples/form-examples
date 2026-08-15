@@ -12,7 +12,7 @@ import {
   attorneyWitnessIsDonor,
   overFourAttorneysNoContinuation,
 } from './blocker-rules.js';
-import { createEmptyLpa, createEmptyPerson } from '$lib/factory.js';
+import { createEmptyLpa, createEmptyPerson } from '#lib/factory.js';
 
 // Reference date used to age-compute against; the rules fall back to today
 // when signedDate is empty, but we pin it for determinism.

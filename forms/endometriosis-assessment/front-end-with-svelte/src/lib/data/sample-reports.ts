@@ -1,6 +1,6 @@
-import type { AssessmentData, ASRMStage, SeverityLevel } from '$lib/engine/types';
-import { calculateEndoGrade } from '$lib/engine/endo-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ASRMStage, SeverityLevel } from '#lib/engine/types.js';
+import { calculateEndoGrade } from '#lib/engine/endo-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

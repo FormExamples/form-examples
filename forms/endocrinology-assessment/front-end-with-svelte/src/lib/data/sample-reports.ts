@@ -1,6 +1,6 @@
-import type { AssessmentData, AxisStatus } from '$lib/engine/types';
-import { calculateGrades } from '$lib/engine/endocrine-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, AxisStatus } from '#lib/engine/types.js';
+import { calculateGrades } from '#lib/engine/endocrine-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

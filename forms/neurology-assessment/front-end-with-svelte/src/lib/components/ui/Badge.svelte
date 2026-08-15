@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { nihssSeverityLabel, nihssSeverityColor } from '$lib/engine/utils';
+	import { nihssSeverityLabel, nihssSeverityColor } from '#lib/engine/utils.js';
 
 	let {
 		score

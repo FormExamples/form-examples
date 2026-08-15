@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleLpaRows } from '$lib/data/sample-reports';
+	import { sampleLpaRows } from '#lib/data/sample-reports.js';
 	import {
 		decisionModeLabel,
 		whenAttorneysCanActLabel,
 		bandLabel,
 		compositeRiskLabel
-	} from '$lib/validator/labels';
+	} from '#lib/validator/labels.js';
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 
@@ -39,7 +39,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -51,7 +51,13 @@
 	// shared engine output so the dashboard and report stay aligned.
 	const columns = [
 		{ id: 'donorName', header: 'Donor', flexgrow: 2, sort: true },
-		{ id: 'attorneyCount', header: 'Attorneys', width: 100, sort: true },
+		{
+			id: 'attorneyCount',
+			header: 'Attorneys',
+			width: 100,
+			sort: true
+		},
+
 		{
 			id: 'decisionMode',
 			header: 'Decision mode',
@@ -66,8 +72,21 @@
 			sort: true,
 			template: (v: string) => whenAttorneysCanActLabel(v)
 		},
-		{ id: 'replacementAttorneyCount', header: 'Replacements', width: 120, sort: true },
-		{ id: 'peopleToNotifyCount', header: 'Notify', width: 90, sort: true },
+
+		{
+			id: 'replacementAttorneyCount',
+			header: 'Replacements',
+			width: 120,
+			sort: true
+		},
+
+		{
+			id: 'peopleToNotifyCount',
+			header: 'Notify',
+			width: 90,
+			sort: true
+		},
+
 		{
 			id: 'validityBand',
 			header: 'Validity',
@@ -137,11 +156,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} LPAs</p>
 </main>

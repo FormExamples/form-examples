@@ -1,7 +1,7 @@
-import type { HipaaAuthorization, PrimaryPurpose, ValidityStatus } from '$lib/engine/types';
-import { validateAuthorization } from '$lib/engine/validate-authorization';
-import { createDefaultAuthorization } from '$lib/stores/authorization.svelte';
-import { recordCategoryLabels } from '$lib/engine/utils';
+import type { HipaaAuthorization, PrimaryPurpose, ValidityStatus } from '#lib/engine/types.js';
+import { validateAuthorization } from '#lib/engine/validate-authorization.js';
+import { createDefaultAuthorization } from '#lib/stores/authorization.svelte.js';
+import { recordCategoryLabels } from '#lib/engine/utils.js';
 
 /** A sample authorization: an identifier and the full data the engine validates. */
 export interface SampleAuthorization {

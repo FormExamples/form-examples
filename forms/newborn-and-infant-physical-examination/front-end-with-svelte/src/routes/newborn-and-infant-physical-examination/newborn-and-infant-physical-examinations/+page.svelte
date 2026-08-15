@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
-	import { outcomeLabel, examinationContextLabel, sexLabel } from '$lib/engine/utils';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+	import { outcomeLabel, examinationContextLabel, sexLabel } from '#lib/engine/utils.js';
 
 	let contextFilter = $state('');
 	let outcomeFilter = $state('');
@@ -33,7 +33,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -55,7 +55,14 @@
 			sort: true,
 			template: (v: string) => sexLabel(v as never) || '—'
 		},
-		{ id: 'examinedDate', header: 'Examined', width: 120, sort: true },
+
+		{
+			id: 'examinedDate',
+			header: 'Examined',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'examinationContext',
 			header: 'Context',
@@ -125,11 +132,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} babies</p>
 </main>

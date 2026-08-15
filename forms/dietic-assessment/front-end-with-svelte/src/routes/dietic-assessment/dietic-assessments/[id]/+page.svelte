@@ -4,35 +4,35 @@
 	// contents with completion status, not a pager — the monorepo rule is a
 	// single-page wizard, so nothing is hidden behind navigation.
 	import { page } from '$app/state';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-	import Form from '$lib/components/ui/Form.svelte';
-	import Panel from '$lib/components/ui/Panel.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Panel from '#lib/components/ui/Panel.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
-	import Step1DietitianIdentification from '$lib/components/steps/Step1DietitianIdentification.svelte';
-	import Step2PatientIdentification from '$lib/components/steps/Step2PatientIdentification.svelte';
-	import Step3MedicalHistory from '$lib/components/steps/Step3MedicalHistory.svelte';
-	import Step4MedicationAndSupplements from '$lib/components/steps/Step4MedicationAndSupplements.svelte';
-	import Step5Anthropometry from '$lib/components/steps/Step5Anthropometry.svelte';
-	import Step6Biochemistry from '$lib/components/steps/Step6Biochemistry.svelte';
-	import Step7PhysicalExamination from '$lib/components/steps/Step7PhysicalExamination.svelte';
-	import Step8DietaryRecall from '$lib/components/steps/Step8DietaryRecall.svelte';
-	import Step9FluidsAndHydration from '$lib/components/steps/Step9FluidsAndHydration.svelte';
-	import Step10PreferencesAndAllergies from '$lib/components/steps/Step10PreferencesAndAllergies.svelte';
-	import Step11GastrointestinalAndSwallowing from '$lib/components/steps/Step11GastrointestinalAndSwallowing.svelte';
-	import Step12LifestyleAndEnvironment from '$lib/components/steps/Step12LifestyleAndEnvironment.svelte';
-	import Step13ActivityAndFunction from '$lib/components/steps/Step13ActivityAndFunction.svelte';
-	import Step14ReadinessToChange from '$lib/components/steps/Step14ReadinessToChange.svelte';
-	import Step15ScreeningAndDiagnosis from '$lib/components/steps/Step15ScreeningAndDiagnosis.svelte';
-	import Step16CarePlanAndSignOff from '$lib/components/steps/Step16CarePlanAndSignOff.svelte';
+	import Step1DietitianIdentification from '#lib/components/steps/Step1DietitianIdentification.svelte';
+	import Step2PatientIdentification from '#lib/components/steps/Step2PatientIdentification.svelte';
+	import Step3MedicalHistory from '#lib/components/steps/Step3MedicalHistory.svelte';
+	import Step4MedicationAndSupplements from '#lib/components/steps/Step4MedicationAndSupplements.svelte';
+	import Step5Anthropometry from '#lib/components/steps/Step5Anthropometry.svelte';
+	import Step6Biochemistry from '#lib/components/steps/Step6Biochemistry.svelte';
+	import Step7PhysicalExamination from '#lib/components/steps/Step7PhysicalExamination.svelte';
+	import Step8DietaryRecall from '#lib/components/steps/Step8DietaryRecall.svelte';
+	import Step9FluidsAndHydration from '#lib/components/steps/Step9FluidsAndHydration.svelte';
+	import Step10PreferencesAndAllergies from '#lib/components/steps/Step10PreferencesAndAllergies.svelte';
+	import Step11GastrointestinalAndSwallowing from '#lib/components/steps/Step11GastrointestinalAndSwallowing.svelte';
+	import Step12LifestyleAndEnvironment from '#lib/components/steps/Step12LifestyleAndEnvironment.svelte';
+	import Step13ActivityAndFunction from '#lib/components/steps/Step13ActivityAndFunction.svelte';
+	import Step14ReadinessToChange from '#lib/components/steps/Step14ReadinessToChange.svelte';
+	import Step15ScreeningAndDiagnosis from '#lib/components/steps/Step15ScreeningAndDiagnosis.svelte';
+	import Step16CarePlanAndSignOff from '#lib/components/steps/Step16CarePlanAndSignOff.svelte';
 
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { COMPOSITE_RISK_LABELS, MUST_RISK_LABELS, RECOMMENDATION_LABELS } from '$lib/engine/grader';
-	import { assessmentStore } from '$lib/stores/assessment.svelte';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { COMPOSITE_RISK_LABELS, MUST_RISK_LABELS, RECOMMENDATION_LABELS } from '#lib/engine/grader.js';
+	import { assessmentStore } from '#lib/stores/assessment.svelte.js';
 
 	const id = $derived(page.params.id ?? 'new');
 

@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	riskBandLabel,
 	priorityLabel,
@@ -7,7 +7,7 @@ import {
 	careSettingLabel,
 	clinicianRoleLabel,
 	sexLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 /** Report factor rows: [factor key, label, value getter]. */
 function factorRows(

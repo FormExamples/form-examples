@@ -1,6 +1,6 @@
-import type { BloodspotScreening, OverallOutcome, ReferralStatus, Sex } from '$lib/engine/types';
-import { gradeBloodspot } from '$lib/engine/bloodspot-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { BloodspotScreening, OverallOutcome, ReferralStatus, Sex } from '#lib/engine/types.js';
+import { gradeBloodspot } from '#lib/engine/bloodspot-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample screening: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

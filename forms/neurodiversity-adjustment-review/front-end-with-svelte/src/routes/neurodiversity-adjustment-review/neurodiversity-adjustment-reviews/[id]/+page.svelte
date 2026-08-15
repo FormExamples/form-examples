@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { resultStore } from '$lib/stores/result.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { resultStore } from '#lib/stores/result.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1ReviewIdentification from '$lib/components/steps/Step1ReviewIdentification.svelte';
-	import Step2WorkerIdentification from '$lib/components/steps/Step2WorkerIdentification.svelte';
-	import Step3Effectiveness from '$lib/components/steps/Step3Effectiveness.svelte';
-	import Step4WorkerExperience from '$lib/components/steps/Step4WorkerExperience.svelte';
-	import Step5ChangesAndNextSteps from '$lib/components/steps/Step5ChangesAndNextSteps.svelte';
-	import Step6SignOff from '$lib/components/steps/Step6SignOff.svelte';
+	import Step1ReviewIdentification from '#lib/components/steps/Step1ReviewIdentification.svelte';
+	import Step2WorkerIdentification from '#lib/components/steps/Step2WorkerIdentification.svelte';
+	import Step3Effectiveness from '#lib/components/steps/Step3Effectiveness.svelte';
+	import Step4WorkerExperience from '#lib/components/steps/Step4WorkerExperience.svelte';
+	import Step5ChangesAndNextSteps from '#lib/components/steps/Step5ChangesAndNextSteps.svelte';
+	import Step6SignOff from '#lib/components/steps/Step6SignOff.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const isNew = $derived(id === 'new');

@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	competencyLabel,
 	fitnessDecisionLabel,
 	riskLevelLabel,
 	bmiCategory,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 const DOMAIN_NAMES: Record<string, string> = {
 	physicalFitness: 'Physical fitness',

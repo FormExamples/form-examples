@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { STEPS, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleVisits } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleVisits } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01VisitDetails.svelte';
-	import Step02 from '$lib/components/steps/Step02Sf36GeneralHealth.svelte';
-	import Step03 from '$lib/components/steps/Step03Sf36Activities.svelte';
-	import Step04 from '$lib/components/steps/Step04Sf36RoleLimitations.svelte';
-	import Step05 from '$lib/components/steps/Step05Sf36Remaining.svelte';
-	import Step06 from '$lib/components/steps/Step06Ndi.svelte';
-	import Step07 from '$lib/components/steps/Step07Mjoa.svelte';
-	import Step08 from '$lib/components/steps/Step08Eq5d.svelte';
-	import Step09 from '$lib/components/steps/Step09Summary.svelte';
+	import Step01 from '#lib/components/steps/Step01VisitDetails.svelte';
+	import Step02 from '#lib/components/steps/Step02Sf36GeneralHealth.svelte';
+	import Step03 from '#lib/components/steps/Step03Sf36Activities.svelte';
+	import Step04 from '#lib/components/steps/Step04Sf36RoleLimitations.svelte';
+	import Step05 from '#lib/components/steps/Step05Sf36Remaining.svelte';
+	import Step06 from '#lib/components/steps/Step06Ndi.svelte';
+	import Step07 from '#lib/components/steps/Step07Mjoa.svelte';
+	import Step08 from '#lib/components/steps/Step08Eq5d.svelte';
+	import Step09 from '#lib/components/steps/Step09Summary.svelte';
 
 	// 9 steps: visit details (1), SF-36v2 across 4 steps (2-5), NDI (6),
 	// mJOA (7), EQ-5D-3L (8), summary (9).

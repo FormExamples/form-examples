@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { store } from '$lib/stores/checklist.svelte.js';
-  import { TEAMS_ITEMS } from '$lib/config/items.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import { store } from '#lib/stores/checklist.svelte.js';
+  import { TEAMS_ITEMS } from '#lib/config/items.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import ItemRow from '../ui/ItemRow.svelte';
 
   const r = $derived(store.result.teams);

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import ProviderFields from '$lib/components/ProviderFields.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import ProviderFields from '#lib/components/ProviderFields.svelte';
 
 	const provider = assessment.data.receivingProvider;
 </script>

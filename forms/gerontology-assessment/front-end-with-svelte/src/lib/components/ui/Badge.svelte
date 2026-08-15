@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cfsScoreLabel, cfsScoreColor } from '$lib/engine/utils';
+	import { cfsScoreLabel, cfsScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		grade

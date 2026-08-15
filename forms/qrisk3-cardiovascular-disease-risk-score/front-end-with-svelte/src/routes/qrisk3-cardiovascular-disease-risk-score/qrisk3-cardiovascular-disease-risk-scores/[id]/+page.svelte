@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateQrisk3Grade } from '$lib/engine/qrisk3-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateQrisk3Grade } from '#lib/engine/qrisk3-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Eligibility from '$lib/components/steps/Step3Eligibility.svelte';
-	import Step4Lifestyle from '$lib/components/steps/Step4Lifestyle.svelte';
-	import Step5Cardiometabolic from '$lib/components/steps/Step5Cardiometabolic.svelte';
-	import Step6Comorbidities from '$lib/components/steps/Step6Comorbidities.svelte';
-	import Step7Medication from '$lib/components/steps/Step7Medication.svelte';
-	import Step8Summary from '$lib/components/steps/Step8Summary.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Eligibility from '#lib/components/steps/Step3Eligibility.svelte';
+	import Step4Lifestyle from '#lib/components/steps/Step4Lifestyle.svelte';
+	import Step5Cardiometabolic from '#lib/components/steps/Step5Cardiometabolic.svelte';
+	import Step6Comorbidities from '#lib/components/steps/Step6Comorbidities.svelte';
+	import Step7Medication from '#lib/components/steps/Step7Medication.svelte';
+	import Step8Summary from '#lib/components/steps/Step8Summary.svelte';
 
 	const plural = 'qrisk3-cardiovascular-disease-risk-scores';
 

@@ -1,5 +1,5 @@
 import type { AgileAssessment, PrincipleResponse } from './types.js';
-import { TOTAL_PRINCIPLES } from '$lib/config/principles.js';
+import { TOTAL_PRINCIPLES } from '#lib/config/principles.js';
 
 function emptyResponse(): PrincipleResponse {
   return { score: null, comment: '', weight: 1.0 };

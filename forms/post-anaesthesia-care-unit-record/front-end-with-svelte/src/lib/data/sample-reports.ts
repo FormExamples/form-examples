@@ -1,6 +1,6 @@
-import type { AssessmentData, AnaestheticTechnique, ReadinessBand } from '$lib/engine/types';
-import { calculatePacuGrade } from '$lib/engine/pacu-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, AnaestheticTechnique, ReadinessBand } from '#lib/engine/types.js';
+import { calculatePacuGrade } from '#lib/engine/pacu-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample record: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

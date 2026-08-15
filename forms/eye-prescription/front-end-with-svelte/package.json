@@ -12,20 +12,374 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.1",
-		"@sveltejs/kit": "^2.70.2",
-		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/pdfmake": "^0.3.3",
-		"svelte": "^5.56.8",
-		"svelte-check": "^4.7.5",
+		"svelte": "^5.56.9",
+		"svelte-check": "^4.7.6",
 		"tailwindcss": "^4.3.3",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.6",
+		"typescript": "^6.0.0",
+		"vite": "^8.0.12",
 		"vitest": "^4.1.10"
 	},
 	"dependencies": {
 		"@svar-ui/svelte-grid": "^2.7.2",
-		"pdfmake": "^0.3.11"
+		"migrate": "^2.1.0",
+		"npx": "^10.2.2",
+		"package": "^1.0.1",
+		"pdfmake": "^0.3.11",
+		"sv": "^0.17.0"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		"./components/steps/EyeRefractionFields.svelte": {
+			"types": "./package/components/steps/EyeRefractionFields.svelte.d.ts",
+			"svelte": "./package/components/steps/EyeRefractionFields.svelte",
+			"default": "./package/components/steps/EyeRefractionFields.svelte"
+		},
+		"./components/steps/Step01Prescriber.svelte": {
+			"types": "./package/components/steps/Step01Prescriber.svelte.d.ts",
+			"svelte": "./package/components/steps/Step01Prescriber.svelte",
+			"default": "./package/components/steps/Step01Prescriber.svelte"
+		},
+		"./components/steps/Step02Patient.svelte": {
+			"types": "./package/components/steps/Step02Patient.svelte.d.ts",
+			"svelte": "./package/components/steps/Step02Patient.svelte",
+			"default": "./package/components/steps/Step02Patient.svelte"
+		},
+		"./components/steps/Step03Examination.svelte": {
+			"types": "./package/components/steps/Step03Examination.svelte.d.ts",
+			"svelte": "./package/components/steps/Step03Examination.svelte",
+			"default": "./package/components/steps/Step03Examination.svelte"
+		},
+		"./components/steps/Step04VisualAcuity.svelte": {
+			"types": "./package/components/steps/Step04VisualAcuity.svelte.d.ts",
+			"svelte": "./package/components/steps/Step04VisualAcuity.svelte",
+			"default": "./package/components/steps/Step04VisualAcuity.svelte"
+		},
+		"./components/steps/Step05RightEye.svelte": {
+			"types": "./package/components/steps/Step05RightEye.svelte.d.ts",
+			"svelte": "./package/components/steps/Step05RightEye.svelte",
+			"default": "./package/components/steps/Step05RightEye.svelte"
+		},
+		"./components/steps/Step06LeftEye.svelte": {
+			"types": "./package/components/steps/Step06LeftEye.svelte.d.ts",
+			"svelte": "./package/components/steps/Step06LeftEye.svelte",
+			"default": "./package/components/steps/Step06LeftEye.svelte"
+		},
+		"./components/steps/Step07Addition.svelte": {
+			"types": "./package/components/steps/Step07Addition.svelte.d.ts",
+			"svelte": "./package/components/steps/Step07Addition.svelte",
+			"default": "./package/components/steps/Step07Addition.svelte"
+		},
+		"./components/steps/Step08PupillaryDistance.svelte": {
+			"types": "./package/components/steps/Step08PupillaryDistance.svelte.d.ts",
+			"svelte": "./package/components/steps/Step08PupillaryDistance.svelte",
+			"default": "./package/components/steps/Step08PupillaryDistance.svelte"
+		},
+		"./components/steps/Step09LensRecommendation.svelte": {
+			"types": "./package/components/steps/Step09LensRecommendation.svelte.d.ts",
+			"svelte": "./package/components/steps/Step09LensRecommendation.svelte",
+			"default": "./package/components/steps/Step09LensRecommendation.svelte"
+		},
+		"./components/steps/Step10OcularHealth.svelte": {
+			"types": "./package/components/steps/Step10OcularHealth.svelte.d.ts",
+			"svelte": "./package/components/steps/Step10OcularHealth.svelte",
+			"default": "./package/components/steps/Step10OcularHealth.svelte"
+		},
+		"./components/steps/Step11Summary.svelte": {
+			"types": "./package/components/steps/Step11Summary.svelte.d.ts",
+			"svelte": "./package/components/steps/Step11Summary.svelte",
+			"default": "./package/components/steps/Step11Summary.svelte"
+		},
+		"./components/ui/Button.svelte": {
+			"types": "./package/components/ui/Button.svelte.d.ts",
+			"svelte": "./package/components/ui/Button.svelte",
+			"default": "./package/components/ui/Button.svelte"
+		},
+		"./components/ui/DateTimePicker.svelte": {
+			"types": "./package/components/ui/DateTimePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/DateTimePicker.svelte",
+			"default": "./package/components/ui/DateTimePicker.svelte"
+		},
+		"./components/ui/ErrorSummary.svelte": {
+			"types": "./package/components/ui/ErrorSummary.svelte.d.ts",
+			"svelte": "./package/components/ui/ErrorSummary.svelte",
+			"default": "./package/components/ui/ErrorSummary.svelte"
+		},
+		"./components/ui/Field.svelte": {
+			"types": "./package/components/ui/Field.svelte.d.ts",
+			"svelte": "./package/components/ui/Field.svelte",
+			"default": "./package/components/ui/Field.svelte"
+		},
+		"./components/ui/Fieldset.svelte": {
+			"types": "./package/components/ui/Fieldset.svelte.d.ts",
+			"svelte": "./package/components/ui/Fieldset.svelte",
+			"default": "./package/components/ui/Fieldset.svelte"
+		},
+		"./components/ui/Form.svelte": {
+			"types": "./package/components/ui/Form.svelte.d.ts",
+			"svelte": "./package/components/ui/Form.svelte",
+			"default": "./package/components/ui/Form.svelte"
+		},
+		"./components/ui/FormField.svelte": {
+			"types": "./package/components/ui/FormField.svelte.d.ts",
+			"svelte": "./package/components/ui/FormField.svelte",
+			"default": "./package/components/ui/FormField.svelte"
+		},
+		"./components/ui/LocalePicker.svelte": {
+			"types": "./package/components/ui/LocalePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/LocalePicker.svelte",
+			"default": "./package/components/ui/LocalePicker.svelte"
+		},
+		"./components/ui/Panel.svelte": {
+			"types": "./package/components/ui/Panel.svelte.d.ts",
+			"svelte": "./package/components/ui/Panel.svelte",
+			"default": "./package/components/ui/Panel.svelte"
+		},
+		"./components/ui/Progress.svelte": {
+			"types": "./package/components/ui/Progress.svelte.d.ts",
+			"svelte": "./package/components/ui/Progress.svelte",
+			"default": "./package/components/ui/Progress.svelte"
+		},
+		"./components/ui/SharePicker.svelte": {
+			"types": "./package/components/ui/SharePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/SharePicker.svelte",
+			"default": "./package/components/ui/SharePicker.svelte"
+		},
+		"./components/ui/StepCard.svelte": {
+			"types": "./package/components/ui/StepCard.svelte.d.ts",
+			"svelte": "./package/components/ui/StepCard.svelte",
+			"default": "./package/components/ui/StepCard.svelte"
+		},
+		"./components/ui/StepList.svelte": {
+			"types": "./package/components/ui/StepList.svelte.d.ts",
+			"svelte": "./package/components/ui/StepList.svelte",
+			"default": "./package/components/ui/StepList.svelte"
+		},
+		"./components/ui/StepListItem.svelte": {
+			"types": "./package/components/ui/StepListItem.svelte.d.ts",
+			"svelte": "./package/components/ui/StepListItem.svelte",
+			"default": "./package/components/ui/StepListItem.svelte"
+		},
+		"./components/ui/TextSizePicker.svelte": {
+			"types": "./package/components/ui/TextSizePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/TextSizePicker.svelte",
+			"default": "./package/components/ui/TextSizePicker.svelte"
+		},
+		"./components/ui/ThemePicker.svelte": {
+			"types": "./package/components/ui/ThemePicker.svelte.d.ts",
+			"svelte": "./package/components/ui/ThemePicker.svelte",
+			"default": "./package/components/ui/ThemePicker.svelte"
+		},
+		"./components/ui/locales": {
+			"types": "./package/components/ui/locales.d.ts",
+			"default": "./package/components/ui/locales.js"
+		},
+		"./config/locales": {
+			"types": "./package/config/locales.d.ts",
+			"default": "./package/config/locales.js"
+		},
+		"./config/steps": {
+			"types": "./package/config/steps.d.ts",
+			"default": "./package/config/steps.js"
+		},
+		"./config/text-sizes": {
+			"types": "./package/config/text-sizes.d.ts",
+			"default": "./package/config/text-sizes.js"
+		},
+		"./config/themes": {
+			"types": "./package/config/themes.d.ts",
+			"default": "./package/config/themes.js"
+		},
+		"./data/sample-reports": {
+			"types": "./package/data/sample-reports.d.ts",
+			"default": "./package/data/sample-reports.js"
+		},
+		"./engine/complexity-grader": {
+			"types": "./package/engine/complexity-grader.d.ts",
+			"default": "./package/engine/complexity-grader.js"
+		},
+		"./engine/composite.test": {
+			"types": "./package/engine/composite.test.d.ts",
+			"default": "./package/engine/composite.test.js"
+		},
+		"./engine/composite": {
+			"types": "./package/engine/composite.d.ts",
+			"default": "./package/engine/composite.js"
+		},
+		"./engine/factory": {
+			"types": "./package/engine/factory.d.ts",
+			"default": "./package/engine/factory.js"
+		},
+		"./engine/flagged-issues": {
+			"types": "./package/engine/flagged-issues.d.ts",
+			"default": "./package/engine/flagged-issues.js"
+		},
+		"./engine/refractive-rules": {
+			"types": "./package/engine/refractive-rules.d.ts",
+			"default": "./package/engine/refractive-rules.js"
+		},
+		"./engine/types": {
+			"types": "./package/engine/types.d.ts",
+			"default": "./package/engine/types.js"
+		},
+		"./engine/utils": {
+			"types": "./package/engine/utils.d.ts",
+			"default": "./package/engine/utils.js"
+		},
+		"./report/pdf-builder": {
+			"types": "./package/report/pdf-builder.d.ts",
+			"default": "./package/report/pdf-builder.js"
+		},
+		"./stores/assessment.svelte": {
+			"types": "./package/stores/assessment.svelte.d.ts",
+			"default": "./package/stores/assessment.svelte.js"
+		}
+	},
+	"files": [
+		"package"
+	],
+	"typesVersions": {
+		">4.0": {
+			"components/steps/EyeRefractionFields.svelte": [
+				"./package/components/steps/EyeRefractionFields.svelte.d.ts"
+			],
+			"components/steps/Step01Prescriber.svelte": [
+				"./package/components/steps/Step01Prescriber.svelte.d.ts"
+			],
+			"components/steps/Step02Patient.svelte": [
+				"./package/components/steps/Step02Patient.svelte.d.ts"
+			],
+			"components/steps/Step03Examination.svelte": [
+				"./package/components/steps/Step03Examination.svelte.d.ts"
+			],
+			"components/steps/Step04VisualAcuity.svelte": [
+				"./package/components/steps/Step04VisualAcuity.svelte.d.ts"
+			],
+			"components/steps/Step05RightEye.svelte": [
+				"./package/components/steps/Step05RightEye.svelte.d.ts"
+			],
+			"components/steps/Step06LeftEye.svelte": [
+				"./package/components/steps/Step06LeftEye.svelte.d.ts"
+			],
+			"components/steps/Step07Addition.svelte": [
+				"./package/components/steps/Step07Addition.svelte.d.ts"
+			],
+			"components/steps/Step08PupillaryDistance.svelte": [
+				"./package/components/steps/Step08PupillaryDistance.svelte.d.ts"
+			],
+			"components/steps/Step09LensRecommendation.svelte": [
+				"./package/components/steps/Step09LensRecommendation.svelte.d.ts"
+			],
+			"components/steps/Step10OcularHealth.svelte": [
+				"./package/components/steps/Step10OcularHealth.svelte.d.ts"
+			],
+			"components/steps/Step11Summary.svelte": [
+				"./package/components/steps/Step11Summary.svelte.d.ts"
+			],
+			"components/ui/Button.svelte": [
+				"./package/components/ui/Button.svelte.d.ts"
+			],
+			"components/ui/DateTimePicker.svelte": [
+				"./package/components/ui/DateTimePicker.svelte.d.ts"
+			],
+			"components/ui/ErrorSummary.svelte": [
+				"./package/components/ui/ErrorSummary.svelte.d.ts"
+			],
+			"components/ui/Field.svelte": [
+				"./package/components/ui/Field.svelte.d.ts"
+			],
+			"components/ui/Fieldset.svelte": [
+				"./package/components/ui/Fieldset.svelte.d.ts"
+			],
+			"components/ui/Form.svelte": [
+				"./package/components/ui/Form.svelte.d.ts"
+			],
+			"components/ui/FormField.svelte": [
+				"./package/components/ui/FormField.svelte.d.ts"
+			],
+			"components/ui/LocalePicker.svelte": [
+				"./package/components/ui/LocalePicker.svelte.d.ts"
+			],
+			"components/ui/Panel.svelte": [
+				"./package/components/ui/Panel.svelte.d.ts"
+			],
+			"components/ui/Progress.svelte": [
+				"./package/components/ui/Progress.svelte.d.ts"
+			],
+			"components/ui/SharePicker.svelte": [
+				"./package/components/ui/SharePicker.svelte.d.ts"
+			],
+			"components/ui/StepCard.svelte": [
+				"./package/components/ui/StepCard.svelte.d.ts"
+			],
+			"components/ui/StepList.svelte": [
+				"./package/components/ui/StepList.svelte.d.ts"
+			],
+			"components/ui/StepListItem.svelte": [
+				"./package/components/ui/StepListItem.svelte.d.ts"
+			],
+			"components/ui/TextSizePicker.svelte": [
+				"./package/components/ui/TextSizePicker.svelte.d.ts"
+			],
+			"components/ui/ThemePicker.svelte": [
+				"./package/components/ui/ThemePicker.svelte.d.ts"
+			],
+			"components/ui/locales": [
+				"./package/components/ui/locales.d.ts"
+			],
+			"config/locales": [
+				"./package/config/locales.d.ts"
+			],
+			"config/steps": [
+				"./package/config/steps.d.ts"
+			],
+			"config/text-sizes": [
+				"./package/config/text-sizes.d.ts"
+			],
+			"config/themes": [
+				"./package/config/themes.d.ts"
+			],
+			"data/sample-reports": [
+				"./package/data/sample-reports.d.ts"
+			],
+			"engine/complexity-grader": [
+				"./package/engine/complexity-grader.d.ts"
+			],
+			"engine/composite.test": [
+				"./package/engine/composite.test.d.ts"
+			],
+			"engine/composite": [
+				"./package/engine/composite.d.ts"
+			],
+			"engine/factory": [
+				"./package/engine/factory.d.ts"
+			],
+			"engine/flagged-issues": [
+				"./package/engine/flagged-issues.d.ts"
+			],
+			"engine/refractive-rules": [
+				"./package/engine/refractive-rules.d.ts"
+			],
+			"engine/types": [
+				"./package/engine/types.d.ts"
+			],
+			"engine/utils": [
+				"./package/engine/utils.d.ts"
+			],
+			"report/pdf-builder": [
+				"./package/report/pdf-builder.d.ts"
+			],
+			"stores/assessment.svelte": [
+				"./package/stores/assessment.svelte.d.ts"
+			]
+		}
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
 	}
 }

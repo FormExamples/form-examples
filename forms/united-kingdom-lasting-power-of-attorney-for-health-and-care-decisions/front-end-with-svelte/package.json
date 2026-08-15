@@ -13,20 +13,418 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^7.0.1",
-    "@sveltejs/kit": "^2.70.2",
-    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/pdfmake": "^0.3.3",
-    "svelte": "^5.56.8",
-    "svelte-check": "^4.7.5",
+    "svelte": "^5.56.9",
+    "svelte-check": "^4.7.6",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.6",
+    "typescript": "^6.0.0",
+    "vite": "^8.0.12",
     "vitest": "^4.1.10"
   },
   "dependencies": {
     "@svar-ui/svelte-grid": "^2.7.2",
-    "pdfmake": "^0.3.11"
+    "migrate": "^2.1.0",
+    "npx": "^10.2.2",
+    "package": "^1.0.1",
+    "pdfmake": "^0.3.11",
+    "sv": "^0.17.0"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./components/steps/Step01Donor.svelte": {
+      "types": "./package/components/steps/Step01Donor.svelte.d.ts",
+      "svelte": "./package/components/steps/Step01Donor.svelte",
+      "default": "./package/components/steps/Step01Donor.svelte"
+    },
+    "./components/steps/Step02Scope.svelte": {
+      "types": "./package/components/steps/Step02Scope.svelte.d.ts",
+      "svelte": "./package/components/steps/Step02Scope.svelte",
+      "default": "./package/components/steps/Step02Scope.svelte"
+    },
+    "./components/steps/Step03Attorneys.svelte": {
+      "types": "./package/components/steps/Step03Attorneys.svelte.d.ts",
+      "svelte": "./package/components/steps/Step03Attorneys.svelte",
+      "default": "./package/components/steps/Step03Attorneys.svelte"
+    },
+    "./components/steps/Step04DecisionRule.svelte": {
+      "types": "./package/components/steps/Step04DecisionRule.svelte.d.ts",
+      "svelte": "./package/components/steps/Step04DecisionRule.svelte",
+      "default": "./package/components/steps/Step04DecisionRule.svelte"
+    },
+    "./components/steps/Step05ReplacementAttorneys.svelte": {
+      "types": "./package/components/steps/Step05ReplacementAttorneys.svelte.d.ts",
+      "svelte": "./package/components/steps/Step05ReplacementAttorneys.svelte",
+      "default": "./package/components/steps/Step05ReplacementAttorneys.svelte"
+    },
+    "./components/steps/Step06LifeSustainingTreatment.svelte": {
+      "types": "./package/components/steps/Step06LifeSustainingTreatment.svelte.d.ts",
+      "svelte": "./package/components/steps/Step06LifeSustainingTreatment.svelte",
+      "default": "./package/components/steps/Step06LifeSustainingTreatment.svelte"
+    },
+    "./components/steps/Step07Preferences.svelte": {
+      "types": "./package/components/steps/Step07Preferences.svelte.d.ts",
+      "svelte": "./package/components/steps/Step07Preferences.svelte",
+      "default": "./package/components/steps/Step07Preferences.svelte"
+    },
+    "./components/steps/Step08Instructions.svelte": {
+      "types": "./package/components/steps/Step08Instructions.svelte.d.ts",
+      "svelte": "./package/components/steps/Step08Instructions.svelte",
+      "default": "./package/components/steps/Step08Instructions.svelte"
+    },
+    "./components/steps/Step09PeopleToNotify.svelte": {
+      "types": "./package/components/steps/Step09PeopleToNotify.svelte.d.ts",
+      "svelte": "./package/components/steps/Step09PeopleToNotify.svelte",
+      "default": "./package/components/steps/Step09PeopleToNotify.svelte"
+    },
+    "./components/steps/Step10CertificateProvider.svelte": {
+      "types": "./package/components/steps/Step10CertificateProvider.svelte.d.ts",
+      "svelte": "./package/components/steps/Step10CertificateProvider.svelte",
+      "default": "./package/components/steps/Step10CertificateProvider.svelte"
+    },
+    "./components/steps/Step11DonorSignature.svelte": {
+      "types": "./package/components/steps/Step11DonorSignature.svelte.d.ts",
+      "svelte": "./package/components/steps/Step11DonorSignature.svelte",
+      "default": "./package/components/steps/Step11DonorSignature.svelte"
+    },
+    "./components/steps/Step12AttorneySignatures.svelte": {
+      "types": "./package/components/steps/Step12AttorneySignatures.svelte.d.ts",
+      "svelte": "./package/components/steps/Step12AttorneySignatures.svelte",
+      "default": "./package/components/steps/Step12AttorneySignatures.svelte"
+    },
+    "./components/steps/Step13Registration.svelte": {
+      "types": "./package/components/steps/Step13Registration.svelte.d.ts",
+      "svelte": "./package/components/steps/Step13Registration.svelte",
+      "default": "./package/components/steps/Step13Registration.svelte"
+    },
+    "./components/ui/Button.svelte": {
+      "types": "./package/components/ui/Button.svelte.d.ts",
+      "svelte": "./package/components/ui/Button.svelte",
+      "default": "./package/components/ui/Button.svelte"
+    },
+    "./components/ui/DateTimePicker.svelte": {
+      "types": "./package/components/ui/DateTimePicker.svelte.d.ts",
+      "svelte": "./package/components/ui/DateTimePicker.svelte",
+      "default": "./package/components/ui/DateTimePicker.svelte"
+    },
+    "./components/ui/ErrorSummary.svelte": {
+      "types": "./package/components/ui/ErrorSummary.svelte.d.ts",
+      "svelte": "./package/components/ui/ErrorSummary.svelte",
+      "default": "./package/components/ui/ErrorSummary.svelte"
+    },
+    "./components/ui/Field.svelte": {
+      "types": "./package/components/ui/Field.svelte.d.ts",
+      "svelte": "./package/components/ui/Field.svelte",
+      "default": "./package/components/ui/Field.svelte"
+    },
+    "./components/ui/Fieldset.svelte": {
+      "types": "./package/components/ui/Fieldset.svelte.d.ts",
+      "svelte": "./package/components/ui/Fieldset.svelte",
+      "default": "./package/components/ui/Fieldset.svelte"
+    },
+    "./components/ui/Form.svelte": {
+      "types": "./package/components/ui/Form.svelte.d.ts",
+      "svelte": "./package/components/ui/Form.svelte",
+      "default": "./package/components/ui/Form.svelte"
+    },
+    "./components/ui/FormField.svelte": {
+      "types": "./package/components/ui/FormField.svelte.d.ts",
+      "svelte": "./package/components/ui/FormField.svelte",
+      "default": "./package/components/ui/FormField.svelte"
+    },
+    "./components/ui/LocalePicker.svelte": {
+      "types": "./package/components/ui/LocalePicker.svelte.d.ts",
+      "svelte": "./package/components/ui/LocalePicker.svelte",
+      "default": "./package/components/ui/LocalePicker.svelte"
+    },
+    "./components/ui/NumberField.svelte": {
+      "types": "./package/components/ui/NumberField.svelte.d.ts",
+      "svelte": "./package/components/ui/NumberField.svelte",
+      "default": "./package/components/ui/NumberField.svelte"
+    },
+    "./components/ui/Panel.svelte": {
+      "types": "./package/components/ui/Panel.svelte.d.ts",
+      "svelte": "./package/components/ui/Panel.svelte",
+      "default": "./package/components/ui/Panel.svelte"
+    },
+    "./components/ui/Progress.svelte": {
+      "types": "./package/components/ui/Progress.svelte.d.ts",
+      "svelte": "./package/components/ui/Progress.svelte",
+      "default": "./package/components/ui/Progress.svelte"
+    },
+    "./components/ui/SelectField.svelte": {
+      "types": "./package/components/ui/SelectField.svelte.d.ts",
+      "svelte": "./package/components/ui/SelectField.svelte",
+      "default": "./package/components/ui/SelectField.svelte"
+    },
+    "./components/ui/SharePicker.svelte": {
+      "types": "./package/components/ui/SharePicker.svelte.d.ts",
+      "svelte": "./package/components/ui/SharePicker.svelte",
+      "default": "./package/components/ui/SharePicker.svelte"
+    },
+    "./components/ui/TextAreaInput.svelte": {
+      "types": "./package/components/ui/TextAreaInput.svelte.d.ts",
+      "svelte": "./package/components/ui/TextAreaInput.svelte",
+      "default": "./package/components/ui/TextAreaInput.svelte"
+    },
+    "./components/ui/TextSizePicker.svelte": {
+      "types": "./package/components/ui/TextSizePicker.svelte.d.ts",
+      "svelte": "./package/components/ui/TextSizePicker.svelte",
+      "default": "./package/components/ui/TextSizePicker.svelte"
+    },
+    "./components/ui/ThemePicker.svelte": {
+      "types": "./package/components/ui/ThemePicker.svelte.d.ts",
+      "svelte": "./package/components/ui/ThemePicker.svelte",
+      "default": "./package/components/ui/ThemePicker.svelte"
+    },
+    "./components/ui/YesNoField.svelte": {
+      "types": "./package/components/ui/YesNoField.svelte.d.ts",
+      "svelte": "./package/components/ui/YesNoField.svelte",
+      "default": "./package/components/ui/YesNoField.svelte"
+    },
+    "./components/ui/locales": {
+      "types": "./package/components/ui/locales.d.ts",
+      "default": "./package/components/ui/locales.js"
+    },
+    "./config/locales": {
+      "types": "./package/config/locales.d.ts",
+      "default": "./package/config/locales.js"
+    },
+    "./config/steps": {
+      "types": "./package/config/steps.d.ts",
+      "default": "./package/config/steps.js"
+    },
+    "./config/text-sizes": {
+      "types": "./package/config/text-sizes.d.ts",
+      "default": "./package/config/text-sizes.js"
+    },
+    "./config/themes": {
+      "types": "./package/config/themes.d.ts",
+      "default": "./package/config/themes.js"
+    },
+    "./data/sample-reports": {
+      "types": "./package/data/sample-reports.d.ts",
+      "default": "./package/data/sample-reports.js"
+    },
+    "./engine/attorney-rules": {
+      "types": "./package/engine/attorney-rules.d.ts",
+      "default": "./package/engine/attorney-rules.js"
+    },
+    "./engine/certificate-provider-rules": {
+      "types": "./package/engine/certificate-provider-rules.d.ts",
+      "default": "./package/engine/certificate-provider-rules.js"
+    },
+    "./engine/composite-validator.test": {
+      "types": "./package/engine/composite-validator.test.d.ts",
+      "default": "./package/engine/composite-validator.test.js"
+    },
+    "./engine/composite-validator": {
+      "types": "./package/engine/composite-validator.d.ts",
+      "default": "./package/engine/composite-validator.js"
+    },
+    "./engine/donor-rules": {
+      "types": "./package/engine/donor-rules.d.ts",
+      "default": "./package/engine/donor-rules.js"
+    },
+    "./engine/factory": {
+      "types": "./package/engine/factory.d.ts",
+      "default": "./package/engine/factory.js"
+    },
+    "./engine/flagged-issues": {
+      "types": "./package/engine/flagged-issues.d.ts",
+      "default": "./package/engine/flagged-issues.js"
+    },
+    "./engine/instruction-rules": {
+      "types": "./package/engine/instruction-rules.d.ts",
+      "default": "./package/engine/instruction-rules.js"
+    },
+    "./engine/registration-rules": {
+      "types": "./package/engine/registration-rules.d.ts",
+      "default": "./package/engine/registration-rules.js"
+    },
+    "./engine/signature-order-rules": {
+      "types": "./package/engine/signature-order-rules.d.ts",
+      "default": "./package/engine/signature-order-rules.js"
+    },
+    "./engine/types": {
+      "types": "./package/engine/types.d.ts",
+      "default": "./package/engine/types.js"
+    },
+    "./engine/utils": {
+      "types": "./package/engine/utils.d.ts",
+      "default": "./package/engine/utils.js"
+    },
+    "./report/pdf-builder": {
+      "types": "./package/report/pdf-builder.d.ts",
+      "default": "./package/report/pdf-builder.js"
+    },
+    "./stores/lpa.svelte": {
+      "types": "./package/stores/lpa.svelte.d.ts",
+      "default": "./package/stores/lpa.svelte.js"
+    }
+  },
+  "files": [
+    "package"
+  ],
+  "typesVersions": {
+    ">4.0": {
+      "components/steps/Step01Donor.svelte": [
+        "./package/components/steps/Step01Donor.svelte.d.ts"
+      ],
+      "components/steps/Step02Scope.svelte": [
+        "./package/components/steps/Step02Scope.svelte.d.ts"
+      ],
+      "components/steps/Step03Attorneys.svelte": [
+        "./package/components/steps/Step03Attorneys.svelte.d.ts"
+      ],
+      "components/steps/Step04DecisionRule.svelte": [
+        "./package/components/steps/Step04DecisionRule.svelte.d.ts"
+      ],
+      "components/steps/Step05ReplacementAttorneys.svelte": [
+        "./package/components/steps/Step05ReplacementAttorneys.svelte.d.ts"
+      ],
+      "components/steps/Step06LifeSustainingTreatment.svelte": [
+        "./package/components/steps/Step06LifeSustainingTreatment.svelte.d.ts"
+      ],
+      "components/steps/Step07Preferences.svelte": [
+        "./package/components/steps/Step07Preferences.svelte.d.ts"
+      ],
+      "components/steps/Step08Instructions.svelte": [
+        "./package/components/steps/Step08Instructions.svelte.d.ts"
+      ],
+      "components/steps/Step09PeopleToNotify.svelte": [
+        "./package/components/steps/Step09PeopleToNotify.svelte.d.ts"
+      ],
+      "components/steps/Step10CertificateProvider.svelte": [
+        "./package/components/steps/Step10CertificateProvider.svelte.d.ts"
+      ],
+      "components/steps/Step11DonorSignature.svelte": [
+        "./package/components/steps/Step11DonorSignature.svelte.d.ts"
+      ],
+      "components/steps/Step12AttorneySignatures.svelte": [
+        "./package/components/steps/Step12AttorneySignatures.svelte.d.ts"
+      ],
+      "components/steps/Step13Registration.svelte": [
+        "./package/components/steps/Step13Registration.svelte.d.ts"
+      ],
+      "components/ui/Button.svelte": [
+        "./package/components/ui/Button.svelte.d.ts"
+      ],
+      "components/ui/DateTimePicker.svelte": [
+        "./package/components/ui/DateTimePicker.svelte.d.ts"
+      ],
+      "components/ui/ErrorSummary.svelte": [
+        "./package/components/ui/ErrorSummary.svelte.d.ts"
+      ],
+      "components/ui/Field.svelte": [
+        "./package/components/ui/Field.svelte.d.ts"
+      ],
+      "components/ui/Fieldset.svelte": [
+        "./package/components/ui/Fieldset.svelte.d.ts"
+      ],
+      "components/ui/Form.svelte": [
+        "./package/components/ui/Form.svelte.d.ts"
+      ],
+      "components/ui/FormField.svelte": [
+        "./package/components/ui/FormField.svelte.d.ts"
+      ],
+      "components/ui/LocalePicker.svelte": [
+        "./package/components/ui/LocalePicker.svelte.d.ts"
+      ],
+      "components/ui/NumberField.svelte": [
+        "./package/components/ui/NumberField.svelte.d.ts"
+      ],
+      "components/ui/Panel.svelte": [
+        "./package/components/ui/Panel.svelte.d.ts"
+      ],
+      "components/ui/Progress.svelte": [
+        "./package/components/ui/Progress.svelte.d.ts"
+      ],
+      "components/ui/SelectField.svelte": [
+        "./package/components/ui/SelectField.svelte.d.ts"
+      ],
+      "components/ui/SharePicker.svelte": [
+        "./package/components/ui/SharePicker.svelte.d.ts"
+      ],
+      "components/ui/TextAreaInput.svelte": [
+        "./package/components/ui/TextAreaInput.svelte.d.ts"
+      ],
+      "components/ui/TextSizePicker.svelte": [
+        "./package/components/ui/TextSizePicker.svelte.d.ts"
+      ],
+      "components/ui/ThemePicker.svelte": [
+        "./package/components/ui/ThemePicker.svelte.d.ts"
+      ],
+      "components/ui/YesNoField.svelte": [
+        "./package/components/ui/YesNoField.svelte.d.ts"
+      ],
+      "components/ui/locales": [
+        "./package/components/ui/locales.d.ts"
+      ],
+      "config/locales": [
+        "./package/config/locales.d.ts"
+      ],
+      "config/steps": [
+        "./package/config/steps.d.ts"
+      ],
+      "config/text-sizes": [
+        "./package/config/text-sizes.d.ts"
+      ],
+      "config/themes": [
+        "./package/config/themes.d.ts"
+      ],
+      "data/sample-reports": [
+        "./package/data/sample-reports.d.ts"
+      ],
+      "engine/attorney-rules": [
+        "./package/engine/attorney-rules.d.ts"
+      ],
+      "engine/certificate-provider-rules": [
+        "./package/engine/certificate-provider-rules.d.ts"
+      ],
+      "engine/composite-validator.test": [
+        "./package/engine/composite-validator.test.d.ts"
+      ],
+      "engine/composite-validator": [
+        "./package/engine/composite-validator.d.ts"
+      ],
+      "engine/donor-rules": [
+        "./package/engine/donor-rules.d.ts"
+      ],
+      "engine/factory": [
+        "./package/engine/factory.d.ts"
+      ],
+      "engine/flagged-issues": [
+        "./package/engine/flagged-issues.d.ts"
+      ],
+      "engine/instruction-rules": [
+        "./package/engine/instruction-rules.d.ts"
+      ],
+      "engine/registration-rules": [
+        "./package/engine/registration-rules.d.ts"
+      ],
+      "engine/signature-order-rules": [
+        "./package/engine/signature-order-rules.d.ts"
+      ],
+      "engine/types": [
+        "./package/engine/types.d.ts"
+      ],
+      "engine/utils": [
+        "./package/engine/utils.d.ts"
+      ],
+      "report/pdf-builder": [
+        "./package/report/pdf-builder.d.ts"
+      ],
+      "stores/lpa.svelte": [
+        "./package/stores/lpa.svelte.d.ts"
+      ]
+    }
+  },
+  "imports": {
+    "#lib": "./src/lib/index.js",
+    "#lib/*": "./src/lib/*"
   }
 }

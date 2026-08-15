@@ -1,5 +1,5 @@
 import type { ChecklistItemResponse, HospitalDailyMonitoringChecklist } from './types.js';
-import { CHECKLIST_ITEMS } from '$lib/config/items.js';
+import { CHECKLIST_ITEMS } from '#lib/config/items.js';
 
 function emptyItems(): Record<string, ChecklistItemResponse> {
   const out: Record<string, ChecklistItemResponse> = {};

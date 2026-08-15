@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { AgileChecklist, GradingResult } from '$lib/engine/types.js';
-import { ALL_ITEMS, SECTION_LABEL } from '$lib/config/items.js';
-import { maturityLabel, pctOrDash } from '$lib/engine/utils.js';
+import type { AgileChecklist, GradingResult } from '#lib/engine/types.js';
+import { ALL_ITEMS, SECTION_LABEL } from '#lib/config/items.js';
+import { maturityLabel, pctOrDash } from '#lib/engine/utils.js';
 
 /**
  * Build the pdfmake document definition for an agile checklist report. Pure —

@@ -1,6 +1,6 @@
-import type { AssessmentData, CamVariant, Classification, MotoricSubtype } from '$lib/engine/types';
-import { calculateCamGrade } from '$lib/engine/cam-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CamVariant, Classification, MotoricSubtype } from '#lib/engine/types.js';
+import { calculateCamGrade } from '#lib/engine/cam-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

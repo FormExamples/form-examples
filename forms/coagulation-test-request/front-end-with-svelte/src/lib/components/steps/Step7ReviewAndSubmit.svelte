@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { selectedTestLabels, indicationLabel } from '$lib/engine/defaults';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { selectedTestLabels, indicationLabel } from '#lib/engine/defaults.js';
 
 	const d = request.data;
 	const tests = $derived(selectedTestLabels(d.tests));

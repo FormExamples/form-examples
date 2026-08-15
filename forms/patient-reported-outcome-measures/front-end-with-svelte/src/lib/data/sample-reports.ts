@@ -1,6 +1,6 @@
-import type { PatientReportedOutcomeMeasures } from '$lib/engine/types';
-import { computeAllScores } from '$lib/engine/composite';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { PatientReportedOutcomeMeasures } from '#lib/engine/types.js';
+import { computeAllScores } from '#lib/engine/composite.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample visit: an identifier and the full battery the engine scores. */
 export interface SampleVisit {

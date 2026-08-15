@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateGrade } from './grader';
 import { detectFlags } from './flags';
-import { createDefaultRequest } from '$lib/stores/result.svelte';
+import { createDefaultRequest } from '#lib/stores/result.svelte.js';
 import type { NeurodiversityAdjustmentRequest } from './types';
 
 /**

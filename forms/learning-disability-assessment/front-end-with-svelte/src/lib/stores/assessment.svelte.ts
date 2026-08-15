@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { createDefaultAssessment } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
 
 // Re-exported so consumers (and the wizard) can build a blank draft from the store.
 export { createDefaultAssessment };

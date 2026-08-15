@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Problem, ProblemStatus } from '$lib/engine/types';
+	import type { Problem, ProblemStatus } from '#lib/engine/types.js';
 
 	let {
 		problems = $bindable<Problem[]>([])

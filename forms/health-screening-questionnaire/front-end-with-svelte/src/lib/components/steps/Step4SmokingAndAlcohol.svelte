@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import { AUDIT_C_BINGE_FREQUENCY, AUDIT_C_FREQUENCY, AUDIT_C_TYPICAL_QUANTITY, OPTIONS } from '$lib/config/options';
-	import { questionnaireStore } from '$lib/stores/questionnaire.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import { AUDIT_C_BINGE_FREQUENCY, AUDIT_C_FREQUENCY, AUDIT_C_TYPICAL_QUANTITY, OPTIONS } from '#lib/config/options.js';
+	import { questionnaireStore } from '#lib/stores/questionnaire.svelte.js';
 
 	const d = questionnaireStore.data;
 

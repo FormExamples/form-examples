@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createEmptyMetrics } from './factory.js';
 import { summariseMetrics } from './summary.js';
-import { DASHBOARD_METRICS, TOTAL_METRICS, TOTAL_CATEGORIES } from '$lib/config/metrics.js';
+import { DASHBOARD_METRICS, TOTAL_METRICS, TOTAL_CATEGORIES } from '#lib/config/metrics.js';
 
 describe('summariseMetrics', () => {
   it('reports zero recorded on a blank report', () => {

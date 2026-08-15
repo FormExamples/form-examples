@@ -3,8 +3,8 @@
   // a TextInput for an optional note. Used in a plain {#each} loop over a
   // category's metrics — see AGENTS-front-end-svelte.md §4 for the
   // component-composition pattern this mirrors.
-  import { store } from '$lib/stores/metrics.svelte.js';
-  import type { MetricDef } from '$lib/config/metrics.js';
+  import { store } from '#lib/stores/metrics.svelte.js';
+  import type { MetricDef } from '#lib/config/metrics.js';
   import NumberInput from './NumberInput.svelte';
   import TextInput from './TextInput.svelte';
 

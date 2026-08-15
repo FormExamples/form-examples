@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/documentation.svelte.js';
-  import type { ContextPartner } from '$lib/grading/types.js';
+  import { store } from '#lib/stores/documentation.svelte.js';
+  import type { ContextPartner } from '#lib/grading/types.js';
 
   const MAX_BUSINESS = 8;
   const MAX_TECHNICAL = 8;

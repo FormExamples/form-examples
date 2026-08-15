@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Band } from '$lib/engine/types';
-	import { bandColor, bandLabel } from '$lib/engine/utils';
+	import type { Band } from '#lib/engine/types.js';
+	import { bandColor, bandLabel } from '#lib/engine/utils.js';
 
 	let {
 		band

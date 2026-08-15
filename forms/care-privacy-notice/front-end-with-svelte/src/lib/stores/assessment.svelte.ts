@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given acknowledgment id (defaults to `new`). */
 function storageKey(id: string): string {

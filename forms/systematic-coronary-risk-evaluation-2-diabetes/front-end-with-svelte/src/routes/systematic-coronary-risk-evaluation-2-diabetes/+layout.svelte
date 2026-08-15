@@ -1,28 +1,23 @@
 <script lang="ts">
     import "../../app.css";
-    import { base } from "$app/paths";
     import { page } from "$app/state";
-    import ThemePicker from "$lib/components/ui/ThemePicker.svelte";
+    import ThemePicker from "#lib/components/ui/ThemePicker.svelte";
     import {
         THEME_OPTIONS,
         THEME_STORAGE_KEY,
         DEFAULT_THEME,
-    } from "$lib/config/themes";
-    import LocalePicker from "$lib/components/ui/LocalePicker.svelte";
+    } from "#lib/config/themes.js";
+    import LocalePicker from "#lib/components/ui/LocalePicker.svelte";
     import {
         LOCALE_OPTIONS,
         LOCALE_STORAGE_KEY,
         DEFAULT_LOCALE,
-    } from "$lib/config/locales";
-    import TextSizePicker from "$lib/components/ui/TextSizePicker.svelte";
-    import SharePicker from "$lib/components/ui/SharePicker.svelte";
-    import {
-        TEXT_SIZE_OPTIONS,
-        TEXT_SIZE_STORAGE_KEY,
-        DEFAULT_TEXT_SIZE,
-    } from "$lib/config/text-sizes";
-    let { children } = $props();
+    } from "#lib/config/locales.js";
+    import TextSizePicker from "#lib/components/ui/TextSizePicker.svelte";
+    import SharePicker from "#lib/components/ui/SharePicker.svelte";
+    import { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from "#lib/config/text-sizes.js";
 
+    let { children } = $props();
     const plural = "systematic-coronary-risk-evaluation-2-diabetes-records";
 
     const navClass = (href: string) =>
@@ -75,16 +70,16 @@
                     label="Language"
                     class="ml-2"
                     locales={localeValues}
-                    {localeLabels}
+                    localeLabels={localeLabels}
                     defaultValue={DEFAULT_LOCALE}
                     storageKey={LOCALE_STORAGE_KEY}
                 />
                 <ThemePicker
                     label="Theme"
                     class="ml-2"
-                    themesUrl={`${base}/themes/`}
+                    themesUrl="/themes/"
                     themes={themeValues}
-                    {themeLabels}
+                    themeLabels={themeLabels}
                     defaultValue={DEFAULT_THEME}
                     storageKey={THEME_STORAGE_KEY}
                 />

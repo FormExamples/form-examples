@@ -1,6 +1,6 @@
-import type { AssessmentData, RiskBand } from '$lib/engine/types';
-import { gradeNews2 } from '$lib/engine/news2-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, RiskBand } from '#lib/engine/types.js';
+import { gradeNews2 } from '#lib/engine/news2-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleCardRows } from '$lib/data/sample-reports';
-	import { waitingTimeStatusLabel } from '$lib/engine/utils';
-	import type { WaitingTimeStatus } from '$lib/engine/types';
+	import { sampleCardRows } from '#lib/data/sample-reports.js';
+	import { waitingTimeStatusLabel } from '#lib/engine/utils.js';
+	import type { WaitingTimeStatus } from '#lib/engine/types.js';
 
 	let priorityFilter = $state('');
 	let statusFilter = $state('');
@@ -35,7 +35,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -49,14 +49,26 @@
 		{ id: 'id', header: 'Card', width: 130 },
 		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
 		{ id: 'specialty', header: 'Specialty', width: 170, sort: true },
-		{ id: 'clinicalPriority', header: 'Priority', width: 90, sort: true },
-		{ id: 'rttClockStartDate', header: 'Clock-start', width: 120, sort: true },
+		{
+			id: 'clinicalPriority',
+			header: 'Priority',
+			width: 90,
+			sort: true
+		},
+
+		{
+			id: 'rttClockStartDate',
+			header: 'Clock-start',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'weeksWaited',
 			header: 'Weeks',
 			width: 80,
 			sort: true,
-			template: (v: number | null) => (v === null ? '—' : String(v))
+			template: (v: number | null) => v === null ? '—' : String(v)
 		},
 		{
 			id: 'waitingTimeStatus',
@@ -120,16 +132,15 @@
 				<option value="within-target">Within target</option>
 				<option value="approaching-breach">Approaching breach</option>
 				<option value="breached">Breached</option>
-				<option value="long-wait">Long wait (&gt; 52 wk)</option>
+				<option value="long-wait">Long wait (> 52 wk)</option>
 			</select>
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} cards</p>
 </main>

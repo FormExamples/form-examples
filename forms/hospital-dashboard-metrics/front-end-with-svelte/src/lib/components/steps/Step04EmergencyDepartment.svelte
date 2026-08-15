@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import MetricRow from '$lib/components/ui/MetricRow.svelte';
-  import { metricsForCategory } from '$lib/config/metrics.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import MetricRow from '#lib/components/ui/MetricRow.svelte';
+  import { metricsForCategory } from '#lib/config/metrics.js';
 
   const metrics = metricsForCategory(3);
 </script>

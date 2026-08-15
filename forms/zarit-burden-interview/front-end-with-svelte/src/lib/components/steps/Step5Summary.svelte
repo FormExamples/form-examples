@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateZaritGrade } from '$lib/engine/zarit-grader';
-	import { bandLabel, bandColor, instrumentFormLabel } from '$lib/engine/utils';
-	import { activeItemNumbers, normalizeInstrumentForm, ratingValue } from '$lib/engine/zarit-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateZaritGrade } from '#lib/engine/zarit-grader.js';
+	import { bandLabel, bandColor, instrumentFormLabel } from '#lib/engine/utils.js';
+	import { activeItemNumbers, normalizeInstrumentForm, ratingValue } from '#lib/engine/zarit-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const n = assessment.data.note;
 	const instrumentForm = $derived(normalizeInstrumentForm(assessment.data));

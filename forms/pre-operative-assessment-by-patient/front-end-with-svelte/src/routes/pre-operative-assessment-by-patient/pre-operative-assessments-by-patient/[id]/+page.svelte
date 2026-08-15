@@ -1,36 +1,36 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateASA } from '$lib/engine/asa-grader';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { steps, getVisibleSteps } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateASA } from '#lib/engine/asa-grader.js';
+	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+	import { steps, getVisibleSteps } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2Cardiovascular from '$lib/components/steps/Step2Cardiovascular.svelte';
-	import Step3Respiratory from '$lib/components/steps/Step3Respiratory.svelte';
-	import Step4Renal from '$lib/components/steps/Step4Renal.svelte';
-	import Step5Hepatic from '$lib/components/steps/Step5Hepatic.svelte';
-	import Step6Endocrine from '$lib/components/steps/Step6Endocrine.svelte';
-	import Step7Neurological from '$lib/components/steps/Step7Neurological.svelte';
-	import Step8Haematological from '$lib/components/steps/Step8Haematological.svelte';
-	import Step9MusculoskeletalAirway from '$lib/components/steps/Step9MusculoskeletalAirway.svelte';
-	import Step10Gastrointestinal from '$lib/components/steps/Step10Gastrointestinal.svelte';
-	import Step11Medications from '$lib/components/steps/Step11Medications.svelte';
-	import Step12Allergies from '$lib/components/steps/Step12Allergies.svelte';
-	import Step13PreviousAnaesthesia from '$lib/components/steps/Step13PreviousAnaesthesia.svelte';
-	import Step14SocialHistory from '$lib/components/steps/Step14SocialHistory.svelte';
-	import Step15FunctionalCapacity from '$lib/components/steps/Step15FunctionalCapacity.svelte';
-	import Step16Pregnancy from '$lib/components/steps/Step16Pregnancy.svelte';
-	import Step17CognitiveMentalHealth from '$lib/components/steps/Step17CognitiveMentalHealth.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2Cardiovascular from '#lib/components/steps/Step2Cardiovascular.svelte';
+	import Step3Respiratory from '#lib/components/steps/Step3Respiratory.svelte';
+	import Step4Renal from '#lib/components/steps/Step4Renal.svelte';
+	import Step5Hepatic from '#lib/components/steps/Step5Hepatic.svelte';
+	import Step6Endocrine from '#lib/components/steps/Step6Endocrine.svelte';
+	import Step7Neurological from '#lib/components/steps/Step7Neurological.svelte';
+	import Step8Haematological from '#lib/components/steps/Step8Haematological.svelte';
+	import Step9MusculoskeletalAirway from '#lib/components/steps/Step9MusculoskeletalAirway.svelte';
+	import Step10Gastrointestinal from '#lib/components/steps/Step10Gastrointestinal.svelte';
+	import Step11Medications from '#lib/components/steps/Step11Medications.svelte';
+	import Step12Allergies from '#lib/components/steps/Step12Allergies.svelte';
+	import Step13PreviousAnaesthesia from '#lib/components/steps/Step13PreviousAnaesthesia.svelte';
+	import Step14SocialHistory from '#lib/components/steps/Step14SocialHistory.svelte';
+	import Step15FunctionalCapacity from '#lib/components/steps/Step15FunctionalCapacity.svelte';
+	import Step16Pregnancy from '#lib/components/steps/Step16Pregnancy.svelte';
+	import Step17CognitiveMentalHealth from '#lib/components/steps/Step17CognitiveMentalHealth.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

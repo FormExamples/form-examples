@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AllScoresResult, PatientReportedOutcomeMeasures } from '$lib/engine/types';
+import type { AllScoresResult, PatientReportedOutcomeMeasures } from '#lib/engine/types.js';
 
 function fmt(v: number | null | undefined, digits = 1): string {
 	return v === null || v === undefined ? 'N/A' : v.toFixed(digits);

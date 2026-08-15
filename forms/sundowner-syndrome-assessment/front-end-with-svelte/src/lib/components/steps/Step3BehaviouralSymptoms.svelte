@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		cmaiItems,
 		cmaiScaleOptions,
 		npiDomains,
 		npiFrequencyOptions,
 		npiSeverityOptions
-	} from '$lib/engine/cmai-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	} from '#lib/engine/cmai-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const b = assessment.data.behaviouralSymptoms;
 </script>

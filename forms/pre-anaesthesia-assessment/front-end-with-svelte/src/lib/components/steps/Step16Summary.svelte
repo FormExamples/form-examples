@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import FlagBanner from '$lib/components/ui/FlagBanner.svelte';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import Select from '$lib/components/ui/Select.svelte';
-  import TextInput from '$lib/components/ui/TextInput.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import FlagBanner from '#lib/components/ui/FlagBanner.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
   const r = $derived(store.result);
 

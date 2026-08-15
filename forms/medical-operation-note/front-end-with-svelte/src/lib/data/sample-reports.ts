@@ -3,9 +3,9 @@ import type {
   CompositeRisk,
   ClavienDindoGrade,
   BloodLossBand,
-} from '$lib/engine/types.js';
-import { calculateOperationGrade } from '$lib/engine/composite-grader.js';
-import { createDefaultOperationNote } from '$lib/state.svelte.js';
+} from '#lib/engine/types.js';
+import { calculateOperationGrade } from '#lib/engine/composite-grader.js';
+import { createDefaultOperationNote } from '#lib/state.svelte.js';
 
 /** A sample operation note: an identifier plus the full data the engine grades. */
 export interface SampleOperationNote {

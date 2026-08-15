@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fmsScoreLabel, fmsScoreColor } from '$lib/engine/utils';
+	import { fmsScoreLabel, fmsScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

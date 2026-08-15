@@ -1,7 +1,7 @@
-import type { AssessmentData, DiseaseActivity, DiseaseHistory } from '$lib/engine/types';
-import { calculateDAS28 } from '$lib/engine/das28-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, DiseaseActivity, DiseaseHistory } from '#lib/engine/types.js';
+import { calculateDAS28 } from '#lib/engine/das28-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,6 +1,6 @@
-import type { AssessmentData, SeverityLevel } from '$lib/engine/types';
-import { calculateSnot22 } from '$lib/engine/snot22-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, SeverityLevel } from '#lib/engine/types.js';
+import { calculateSnot22 } from '#lib/engine/snot22-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

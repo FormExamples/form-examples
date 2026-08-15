@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateNipeGrade } from '$lib/engine/nipe-grader';
-	import { componentResultColor, componentResultLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateNipeGrade } from '#lib/engine/nipe-grader.js';
+	import { componentResultColor, componentResultLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	const hp = assessment.data.hips;
 	const grade = $derived(calculateNipeGrade(assessment.data));

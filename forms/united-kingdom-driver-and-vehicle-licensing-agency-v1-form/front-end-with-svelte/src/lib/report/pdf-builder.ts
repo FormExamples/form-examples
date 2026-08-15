@@ -1,14 +1,14 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, FlaggedIssue } from '$lib/engine/types';
-import type { V1ValidationResult } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, FlaggedIssue } from '#lib/engine/types.js';
+import type { V1ValidationResult } from '#lib/stores/assessment.svelte.js';
 import {
 	calculateAge,
 	countVisionConditionsDeclared,
 	eyesightStandardLabel,
 	meetsEyesightStandard,
 	statusLabel
-} from '$lib/engine/utils';
-import { steps } from '$lib/config/steps';
+} from '#lib/engine/utils.js';
+import { steps } from '#lib/config/steps.js';
 
 const sectionLabels = new Map<keyof AssessmentData, string>(steps.map((s) => [s.section, s.title]));
 

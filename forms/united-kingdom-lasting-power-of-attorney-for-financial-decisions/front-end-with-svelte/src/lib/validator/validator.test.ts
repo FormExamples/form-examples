@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { validateLpa } from './validator.js';
-import { createEmptyLpa } from '$lib/factory.js';
+import { createEmptyLpa } from '#lib/factory.js';
 
 describe('validateLpa happy path', () => {
   it('returns a ValidationResult for an empty LPA', () => {

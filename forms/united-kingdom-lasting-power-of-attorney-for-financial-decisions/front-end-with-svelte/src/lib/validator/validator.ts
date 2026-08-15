@@ -4,7 +4,7 @@ import type {
   FiredRule,
   Lpa,
   ValidationResult,
-} from '$lib/types.js';
+} from '#lib/types.js';
 import { applyBlockerRules } from './blocker-rules.js';
 import { applyFlagRules } from './flag-rules.js';
 import { computeValidityBand } from './band-rules.js';

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { gradeColor, gradeShortLabel } from '$lib/engine/utils';
-	import type { OETGrade } from '$lib/engine/types';
+	import { gradeColor, gradeShortLabel } from '#lib/engine/utils.js';
+	import type { OETGrade } from '#lib/engine/types.js';
 
 	let {
 		grade

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { store } from '$lib/stores/fitnote.svelte';
-	import type { FitnessForWork } from '$lib/engine/types';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import { store } from '#lib/stores/fitnote.svelte.js';
+	import type { FitnessForWork } from '#lib/engine/types.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const d = store.data;
 

@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeSatisfaction } from '$lib/engine/grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeSatisfaction } from '#lib/engine/grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2RoleTenure from '$lib/components/steps/Step2RoleTenure.svelte';
-	import Step3WorkloadBalance from '$lib/components/steps/Step3WorkloadBalance.svelte';
-	import Step4ManagementLeadership from '$lib/components/steps/Step4ManagementLeadership.svelte';
-	import Step5GrowthDevelopment from '$lib/components/steps/Step5GrowthDevelopment.svelte';
-	import Step6CompensationBenefits from '$lib/components/steps/Step6CompensationBenefits.svelte';
-	import Step7CultureInclusion from '$lib/components/steps/Step7CultureInclusion.svelte';
-	import Step8EnvironmentResources from '$lib/components/steps/Step8EnvironmentResources.svelte';
-	import Step9RecognitionEngagement from '$lib/components/steps/Step9RecognitionEngagement.svelte';
-	import Step10OverallExperience from '$lib/components/steps/Step10OverallExperience.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2RoleTenure from '#lib/components/steps/Step2RoleTenure.svelte';
+	import Step3WorkloadBalance from '#lib/components/steps/Step3WorkloadBalance.svelte';
+	import Step4ManagementLeadership from '#lib/components/steps/Step4ManagementLeadership.svelte';
+	import Step5GrowthDevelopment from '#lib/components/steps/Step5GrowthDevelopment.svelte';
+	import Step6CompensationBenefits from '#lib/components/steps/Step6CompensationBenefits.svelte';
+	import Step7CultureInclusion from '#lib/components/steps/Step7CultureInclusion.svelte';
+	import Step8EnvironmentResources from '#lib/components/steps/Step8EnvironmentResources.svelte';
+	import Step9RecognitionEngagement from '#lib/components/steps/Step9RecognitionEngagement.svelte';
+	import Step10OverallExperience from '#lib/components/steps/Step10OverallExperience.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

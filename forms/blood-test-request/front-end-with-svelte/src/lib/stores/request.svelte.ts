@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { BloodTestRequest, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import { browser } from '$app/env';
+import type { BloodTestRequest, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the default factory so callers (sample data, tests) can build blank
 // requests without depending on the store module's reactive class.

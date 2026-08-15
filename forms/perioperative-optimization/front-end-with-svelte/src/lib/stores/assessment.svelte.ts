@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import { createDefaultAssessment } from '$lib/engine/defaults';
-import { calculateOptimization } from '$lib/engine/grader';
-import type { GradingResult, PerioperativeOptimization } from '$lib/engine/types';
+import { browser } from '$app/env';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
+import { calculateOptimization } from '#lib/engine/grader.js';
+import type { GradingResult, PerioperativeOptimization } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {

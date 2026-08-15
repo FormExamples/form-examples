@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProbandCancer } from '$lib/engine/types';
+	import type { ProbandCancer } from '#lib/engine/types.js';
 
 	let {
 		cancers = $bindable<ProbandCancer[]>([])

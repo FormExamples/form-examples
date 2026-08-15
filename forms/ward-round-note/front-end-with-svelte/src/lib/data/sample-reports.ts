@@ -1,6 +1,6 @@
-import type { AssessmentData, CompletenessStatus } from '$lib/engine/types';
-import { calculateWardRoundGrade } from '$lib/engine/ward-round-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletenessStatus } from '#lib/engine/types.js';
+import { calculateWardRoundGrade } from '#lib/engine/ward-round-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample note: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,7 +1,7 @@
-import type { HospitalPerformanceIndicators } from '$lib/engine/types.js';
-import { PERFORMANCE_INDICATORS } from '$lib/config/indicators.js';
-import { summariseIndicators } from '$lib/engine/summary.js';
-import { createDefaultIndicators } from '$lib/stores/indicators.svelte.js';
+import type { HospitalPerformanceIndicators } from '#lib/engine/types.js';
+import { PERFORMANCE_INDICATORS } from '#lib/config/indicators.js';
+import { summariseIndicators } from '#lib/engine/summary.js';
+import { createDefaultIndicators } from '#lib/stores/indicators.svelte.js';
 
 /** A sample reporting period: an identifier and the full data the engine tallies. */
 export interface SampleReport {

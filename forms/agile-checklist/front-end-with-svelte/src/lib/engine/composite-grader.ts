@@ -11,7 +11,7 @@ import {
   TEAMS_ITEMS,
   type ItemDef,
   type SectionId,
-} from '$lib/config/items.js';
+} from '#lib/config/items.js';
 import { applyMaturityRules } from './maturity-rules.js';
 import { detectAdditionalFlags } from './flagged-issues.js';
 

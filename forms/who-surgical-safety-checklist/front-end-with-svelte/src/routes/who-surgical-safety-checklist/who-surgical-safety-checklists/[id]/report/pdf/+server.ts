@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDocument } from '$lib/report/pdf-builder';
-import type { WhoSurgicalSafetyChecklist } from '$lib/checklist/types';
-import type { ChecklistResult } from '$lib/stores/checklist.svelte';
+import { buildPdfDocument } from '#lib/report/pdf-builder.js';
+import type { WhoSurgicalSafetyChecklist } from '#lib/checklist/types.js';
+import type { ChecklistResult } from '#lib/stores/checklist.svelte.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { data, result } = (await request.json()) as {

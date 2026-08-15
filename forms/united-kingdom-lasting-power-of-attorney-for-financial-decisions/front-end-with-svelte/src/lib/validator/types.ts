@@ -21,4 +21,4 @@ export type {
   CompositeRisk,
   RulePriority,
   FlagPriority,
-} from '$lib/types.js';
+} from '#lib/types.js';

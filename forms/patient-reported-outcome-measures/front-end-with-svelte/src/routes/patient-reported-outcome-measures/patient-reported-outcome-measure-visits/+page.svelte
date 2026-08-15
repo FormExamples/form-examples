@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleVisitRows } from '$lib/data/sample-reports';
+	import { sampleVisitRows } from '#lib/data/sample-reports.js';
 
 	let visitFilter = $state('');
 	let ndiBandFilter = $state('');
@@ -33,7 +33,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -54,21 +54,21 @@
 			header: 'SF-36 PCS (approx.)',
 			width: 150,
 			sort: true,
-			template: (v: number | null) => (typeof v === 'number' ? v.toFixed(1) : '—')
+			template: (v: number | null) => typeof v === 'number' ? v.toFixed(1) : '—'
 		},
 		{
 			id: 'sf36Mcs',
 			header: 'SF-36 MCS (approx.)',
 			width: 150,
 			sort: true,
-			template: (v: number | null) => (typeof v === 'number' ? v.toFixed(1) : '—')
+			template: (v: number | null) => typeof v === 'number' ? v.toFixed(1) : '—'
 		},
 		{
 			id: 'ndiPercentage',
 			header: 'NDI %',
 			width: 90,
 			sort: true,
-			template: (v: number | null) => (typeof v === 'number' ? v.toFixed(1) : '—')
+			template: (v: number | null) => typeof v === 'number' ? v.toFixed(1) : '—'
 		},
 		{ id: 'ndiBand', header: 'NDI band', width: 130, sort: true },
 		{
@@ -76,7 +76,7 @@
 			header: 'mJOA',
 			width: 80,
 			sort: true,
-			template: (v: number | null) => (typeof v === 'number' ? String(v) : '—')
+			template: (v: number | null) => typeof v === 'number' ? String(v) : '—'
 		},
 		{ id: 'mjoaBand', header: 'mJOA band', width: 110, sort: true },
 		{
@@ -84,7 +84,7 @@
 			header: 'EQ-5D index',
 			width: 110,
 			sort: true,
-			template: (v: number | null) => (typeof v === 'number' ? v.toFixed(3) : '—')
+			template: (v: number | null) => typeof v === 'number' ? v.toFixed(3) : '—'
 		}
 	];
 
@@ -137,11 +137,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} visits</p>
 </main>

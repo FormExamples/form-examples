@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/lpa.svelte';
+	import { store } from '#lib/stores/lpa.svelte.js';
 	import {
 		decisionModeLabel,
 		whenAttorneysCanActLabel,
@@ -9,8 +9,8 @@
 		compositeRiskLabel,
 		compositeRiskColor,
 		priorityColor
-	} from '$lib/validator/labels';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/validator/labels.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 

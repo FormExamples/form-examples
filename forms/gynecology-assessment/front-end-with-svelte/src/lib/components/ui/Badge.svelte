@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scoreLabel, scoreColor } from '$lib/engine/utils';
+	import { scoreLabel, scoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

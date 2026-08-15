@@ -1,4 +1,4 @@
-import type { StepConfig, HipaaAuthorization } from '$lib/engine/types';
+import type { StepConfig, HipaaAuthorization } from '#lib/engine/types.js';
 
 export const TOTAL_STEPS = 9;
 

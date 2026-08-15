@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, CompletenessStatus, RiskLevel } from '$lib/engine/types';
-import { calculateMseGrade } from '$lib/engine/mse-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, CompletenessStatus, RiskLevel } from '#lib/engine/types.js';
+import { calculateMseGrade } from '#lib/engine/mse-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

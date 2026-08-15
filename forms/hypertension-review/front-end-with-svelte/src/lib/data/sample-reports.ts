@@ -1,6 +1,6 @@
-import type { AssessmentData, ControlClass, HypertensionStage, ReviewStatus } from '$lib/engine/types';
-import { review } from '$lib/engine/hypertension-review-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ControlClass, HypertensionStage, ReviewStatus } from '#lib/engine/types.js';
+import { review } from '#lib/engine/hypertension-review-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample review: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

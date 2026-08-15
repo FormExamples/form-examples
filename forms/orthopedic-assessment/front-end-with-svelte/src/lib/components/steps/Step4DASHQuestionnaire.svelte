@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { dashQuestions, getResponseOptions } from '$lib/engine/dash-rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { DASHScore } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { dashQuestions, getResponseOptions } from '#lib/engine/dash-rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { DASHScore } from '#lib/engine/types.js';
 
 	const q = assessment.data.dashQuestionnaire;
 

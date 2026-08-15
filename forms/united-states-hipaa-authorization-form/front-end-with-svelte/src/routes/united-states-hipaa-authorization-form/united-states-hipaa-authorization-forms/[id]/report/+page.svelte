@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { authorization } from '$lib/stores/authorization.svelte';
+	import { authorization } from '#lib/stores/authorization.svelte.js';
 	import {
 		validityStatusLabel,
 		validityStatusColor,
@@ -11,9 +11,9 @@
 		priorityColor,
 		calculateAge,
 		recordCategoryLabels
-	} from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(authorization.data);

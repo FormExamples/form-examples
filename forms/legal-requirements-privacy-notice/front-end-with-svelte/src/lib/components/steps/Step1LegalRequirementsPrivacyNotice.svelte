@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 </script>
 
 <Fieldset title="Legal Requirements Privacy Notice" description="How your personal information is shared to meet legal requirements of the NHS and UK regulators.">

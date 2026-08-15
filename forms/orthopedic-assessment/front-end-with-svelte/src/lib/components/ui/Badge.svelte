@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { dashScoreLabel, dashScoreColor } from '$lib/engine/utils';
+	import { dashScoreLabel, dashScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

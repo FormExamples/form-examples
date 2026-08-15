@@ -2,8 +2,8 @@
 	// Live status readout — mirrors the HTML front-end's `renderLiveSummary`.
 	// Runs the shared engine over the current store data and shows the derived
 	// burden band, review status, and counts, updating as the medicine list grows.
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateReview } from '$lib/engine/structured-medication-review-grader';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateReview } from '#lib/engine/structured-medication-review-grader.js';
 	import {
 		reviewStatusLabel,
 		reviewStatusColor,
@@ -11,8 +11,8 @@
 		burdenBandColor,
 		polypharmacyBandLabel,
 		anticholinergicBandLabel
-	} from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	} from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const g = $derived(calculateReview(assessment.data));
 </script>

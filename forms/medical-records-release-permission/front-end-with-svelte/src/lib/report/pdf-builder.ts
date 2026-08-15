@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { calculateAge, formatDate, formatNhsNumber } from '$lib/engine/utils';
-import { recordTypeOptions, purposeOptions } from '$lib/engine/validation-rules';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { calculateAge, formatDate, formatNhsNumber } from '#lib/engine/utils.js';
+import { recordTypeOptions, purposeOptions } from '#lib/engine/validation-rules.js';
 
 function getPurposeLabel(value: string): string {
 	return purposeOptions.find((o) => o.value === value)?.label ?? value;

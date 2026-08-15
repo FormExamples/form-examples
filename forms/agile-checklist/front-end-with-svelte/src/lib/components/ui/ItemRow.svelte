@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/checklist.svelte.js';
-  import type { ItemDef } from '$lib/config/items.js';
+  import { store } from '#lib/stores/checklist.svelte.js';
+  import type { ItemDef } from '#lib/config/items.js';
   import YesNoNa from './YesNoNa.svelte';
 
   let { item }: { item: ItemDef } = $props();

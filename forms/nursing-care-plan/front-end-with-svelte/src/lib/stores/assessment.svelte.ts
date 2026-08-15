@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { CarePlan, GradingResult } from '$lib/engine/types';
-import { createDefaultRiskGroup } from '$lib/engine/utils';
+import { browser } from '$app/env';
+import type { CarePlan, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRiskGroup } from '#lib/engine/utils.js';
 
 /** localStorage draft key for a given care-plan id (defaults to `new`). */
 function storageKey(id: string): string {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asrsClassificationLabel, asrsClassificationColor } from '$lib/engine/utils';
+	import { asrsClassificationLabel, asrsClassificationColor } from '#lib/engine/utils.js';
 
 	let {
 		classification

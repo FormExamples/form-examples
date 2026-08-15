@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions, TableCell } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	statusLabel,
 	priorityLabel,
@@ -14,7 +14,7 @@ import {
 	drugCategoryLabel,
 	eventTypeLabel,
 	monitoringModalityLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const satisfied = result.firedRules.filter((r) => r.satisfied).length;

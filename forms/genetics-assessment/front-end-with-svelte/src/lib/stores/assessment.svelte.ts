@@ -1,6 +1,6 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { createDefaultAssessment, emptyFixedRelative, emptyRelative } from '$lib/engine/factory';
+import { browser } from '$app/env';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { createDefaultAssessment, emptyFixedRelative, emptyRelative } from '#lib/engine/factory.js';
 
 // Re-export the runes-free factory helpers so consumers can import them from
 // the store (the conventional location) as well as from the engine.

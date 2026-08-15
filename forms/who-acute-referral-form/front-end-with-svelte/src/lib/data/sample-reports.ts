@@ -1,7 +1,7 @@
-import type { AssessmentData, ModeOfTransfer } from '$lib/engine/types';
-import { validateReferral } from '$lib/engine/referral-validator';
-import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ModeOfTransfer } from '#lib/engine/types.js';
+import { validateReferral } from '#lib/engine/referral-validator.js';
+import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample referral: an identifier and the full data the engine validates. */
 export interface SampleAssessment {

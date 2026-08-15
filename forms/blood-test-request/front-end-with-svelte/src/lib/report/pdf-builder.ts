@@ -1,13 +1,13 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { BloodTestRequest, GradingResult } from '$lib/engine/types';
-import { selectedPanels } from '$lib/engine/panels';
+import type { BloodTestRequest, GradingResult } from '#lib/engine/types.js';
+import { selectedPanels } from '#lib/engine/panels.js';
 import {
 	appropriatenessLabel,
 	preanalyticalLabel,
 	triageTierLabel,
 	recommendationLabel,
 	indicationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

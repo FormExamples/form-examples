@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { calculateGrade } from '$lib/engine/grader';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { calculateGrade } from '#lib/engine/grader.js';
 	import {
 		appropriatenessLabel,
 		appropriatenessColor,
@@ -15,7 +15,7 @@
 		triageTierColor,
 		recommendationLabel,
 		recommendationColor
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	// Live preview of the four-axis vetting grade as the request is edited.
 	const preview = $derived(calculateGrade(request.data));

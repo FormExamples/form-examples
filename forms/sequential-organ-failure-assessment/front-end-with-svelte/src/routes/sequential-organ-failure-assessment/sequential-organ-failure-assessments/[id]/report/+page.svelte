@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		mortalityBandLabel,
 		mortalityBandColor,
@@ -14,9 +14,9 @@
 		suspectedInfectionLabel,
 		respiratorySupportLabel,
 		vasopressorLabel
-	} from '$lib/engine/utils';
-	import type { OrganSystem } from '$lib/engine/types';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import type { OrganSystem } from '#lib/engine/types.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

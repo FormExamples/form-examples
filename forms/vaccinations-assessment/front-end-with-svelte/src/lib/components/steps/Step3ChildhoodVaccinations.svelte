@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import NumericSelect from '$lib/components/ui/NumericSelect.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import NumericSelect from '#lib/components/ui/NumericSelect.svelte';
 
 	const c = assessment.data.childhoodVaccinations;
 

@@ -1,12 +1,12 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { FitNote, GradingResult } from '$lib/engine/types';
+import type { FitNote, GradingResult } from '#lib/engine/types.js';
 import {
 	fitnessCategoryLabel,
 	periodComplianceLabel,
 	recommendationLabel,
 	adaptationIntensityLabel,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: FitNote, result: GradingResult): TDocumentDefinitions {
 	const age = calculateAge(data.patient.birthDate);

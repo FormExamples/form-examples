@@ -1,7 +1,7 @@
-import type { AssessmentData, RiskCategory } from '$lib/engine/types';
-import { gradeAssessment } from '$lib/engine/risk-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
-import { hba1cMmolMol, hasEstablishedCvd } from '$lib/engine/utils';
+import type { AssessmentData, RiskCategory } from '#lib/engine/types.js';
+import { gradeAssessment } from '#lib/engine/risk-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
+import { hba1cMmolMol, hasEstablishedCvd } from '#lib/engine/utils.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

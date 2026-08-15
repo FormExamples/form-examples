@@ -1,10 +1,10 @@
 <script lang="ts">
-  import FormField from '$lib/components/ui/FormField.svelte';
-  import NumberField from '$lib/components/ui/NumberField.svelte';
-  import SelectField from '$lib/components/ui/SelectField.svelte';
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
-  import { lpaStore } from '$lib/stores/lpa.svelte.js';
-  import { emptyCertificateProvider } from '$lib/engine/factory.js';
+  import FormField from '#lib/components/ui/FormField.svelte';
+  import NumberField from '#lib/components/ui/NumberField.svelte';
+  import SelectField from '#lib/components/ui/SelectField.svelte';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
+  import { lpaStore } from '#lib/stores/lpa.svelte.js';
+  import { emptyCertificateProvider } from '#lib/engine/factory.js';
 
   function changed() {
     lpaStore.recompute();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { request } from '$lib/stores/request.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
 	import {
 		appropriatenessBandLabel,
 		appropriatenessBandColor,
@@ -15,8 +15,8 @@
 		indicationLabel,
 		formatBloodPressure,
 		calculateAge
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(request.data);

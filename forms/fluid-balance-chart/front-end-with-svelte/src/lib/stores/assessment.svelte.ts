@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { ChartData, Entry, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { ChartData, Entry, GradingResult } from '#lib/engine/types.js';
 
 /** Default charting period in hours (spec §4). */
 export const DEFAULT_CHART_PERIOD_HOURS = 24;
@@ -125,8 +125,8 @@ function deepAssign(target: Record<string, unknown>, source: Record<string, unkn
 		const sv = source[key];
 		const tv = target[key];
 		if (Array.isArray(sv)) {
-			const arr = Array.isArray(tv) ? (tv as unknown[]) : (target[key] = [] as unknown[]);
-			arr.splice(0, arr.length, ...(sv as unknown[]));
+			const arr = Array.isArray(tv) ? tv as unknown[] : target[key] = [] as unknown[];
+			arr.splice(0, arr.length, ...sv as unknown[]);
 		} else if (sv && typeof sv === 'object' && tv && typeof tv === 'object' && !Array.isArray(tv)) {
 			deepAssign(tv as Record<string, unknown>, sv as Record<string, unknown>);
 		} else {

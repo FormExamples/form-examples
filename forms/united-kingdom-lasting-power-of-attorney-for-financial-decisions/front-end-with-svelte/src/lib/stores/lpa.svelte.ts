@@ -1,8 +1,8 @@
-import { browser } from '$app/environment';
-import type { Lpa, ValidationResult } from '$lib/types.js';
-import { createEmptyLpa, createEmptyPerson } from '$lib/factory.js';
-import { validateLpa } from '$lib/validator/validator.js';
-import { TOTAL_STEPS } from '$lib/config/steps.js';
+import { browser } from '$app/env';
+import type { Lpa, ValidationResult } from '#lib/types.js';
+import { createEmptyLpa, createEmptyPerson } from '#lib/factory.js';
+import { validateLpa } from '#lib/validator/validator.js';
+import { TOTAL_STEPS } from '#lib/config/steps.js';
 
 /** localStorage draft key for a given LPA id (defaults to `new`). */
 function storageKey(id: string): string {

@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { HospitalDashboardMetrics, MetricsSummaryResult } from '$lib/engine/types.js';
-import { CATEGORIES, DASHBOARD_METRICS } from '$lib/config/metrics.js';
+import type { HospitalDashboardMetrics, MetricsSummaryResult } from '#lib/engine/types.js';
+import { CATEGORIES, DASHBOARD_METRICS } from '#lib/config/metrics.js';
 
 /**
  * Build the pdfmake document definition for a hospital dashboard metrics

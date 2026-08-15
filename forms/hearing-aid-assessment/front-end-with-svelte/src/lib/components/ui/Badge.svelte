@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { hhiesScoreLabel, hhiesScoreColor } from '$lib/engine/utils';
+	import { hhiesScoreLabel, hhiesScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

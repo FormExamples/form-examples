@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateNutritionGrade } from '$lib/engine/nutrition-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateNutritionGrade } from '#lib/engine/nutrition-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2AnthropometricMeasurements from '$lib/components/steps/Step2AnthropometricMeasurements.svelte';
-	import Step3DietaryHistory from '$lib/components/steps/Step3DietaryHistory.svelte';
-	import Step4NutritionalScreening from '$lib/components/steps/Step4NutritionalScreening.svelte';
-	import Step5SwallowingOralHealth from '$lib/components/steps/Step5SwallowingOralHealth.svelte';
-	import Step6GastrointestinalFunction from '$lib/components/steps/Step6GastrointestinalFunction.svelte';
-	import Step7FoodAllergiesIntolerances from '$lib/components/steps/Step7FoodAllergiesIntolerances.svelte';
-	import Step8NutritionalRequirements from '$lib/components/steps/Step8NutritionalRequirements.svelte';
-	import Step9CurrentNutritionalSupport from '$lib/components/steps/Step9CurrentNutritionalSupport.svelte';
-	import Step10CarePlanMonitoring from '$lib/components/steps/Step10CarePlanMonitoring.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2AnthropometricMeasurements from '#lib/components/steps/Step2AnthropometricMeasurements.svelte';
+	import Step3DietaryHistory from '#lib/components/steps/Step3DietaryHistory.svelte';
+	import Step4NutritionalScreening from '#lib/components/steps/Step4NutritionalScreening.svelte';
+	import Step5SwallowingOralHealth from '#lib/components/steps/Step5SwallowingOralHealth.svelte';
+	import Step6GastrointestinalFunction from '#lib/components/steps/Step6GastrointestinalFunction.svelte';
+	import Step7FoodAllergiesIntolerances from '#lib/components/steps/Step7FoodAllergiesIntolerances.svelte';
+	import Step8NutritionalRequirements from '#lib/components/steps/Step8NutritionalRequirements.svelte';
+	import Step9CurrentNutritionalSupport from '#lib/components/steps/Step9CurrentNutritionalSupport.svelte';
+	import Step10CarePlanMonitoring from '#lib/components/steps/Step10CarePlanMonitoring.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

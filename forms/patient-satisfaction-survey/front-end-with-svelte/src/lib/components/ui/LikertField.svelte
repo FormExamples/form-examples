@@ -1,8 +1,8 @@
 <script lang="ts">
 	// LikertField — a 5-point satisfaction rating built from the Lily RadioGroup
 	// + radio-input contract. Binds a `number | null` value (null = unrated).
-	import Field from '$lib/components/ui/Field.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	let {
 		label,

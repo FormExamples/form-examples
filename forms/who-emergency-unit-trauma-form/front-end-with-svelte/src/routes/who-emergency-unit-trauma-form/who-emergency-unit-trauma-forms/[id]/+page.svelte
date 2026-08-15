@@ -1,35 +1,35 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeEuTrauma } from '$lib/engine/eu-trauma-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeEuTrauma } from '#lib/engine/eu-trauma-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1PatientRegistration from '$lib/components/steps/Step1PatientRegistration.svelte';
-	import Step2ChiefComplaintAndVitals from '$lib/components/steps/Step2ChiefComplaintAndVitals.svelte';
-	import Step3HighRiskSigns from '$lib/components/steps/Step3HighRiskSigns.svelte';
-	import Step4Triage from '$lib/components/steps/Step4Triage.svelte';
-	import Step5Airway from '$lib/components/steps/Step5Airway.svelte';
-	import Step6Breathing from '$lib/components/steps/Step6Breathing.svelte';
-	import Step7Circulation from '$lib/components/steps/Step7Circulation.svelte';
-	import Step8Disability from '$lib/components/steps/Step8Disability.svelte';
-	import Step9ExposureAndFast from '$lib/components/steps/Step9ExposureAndFast.svelte';
-	import Step10InjuryHistory from '$lib/components/steps/Step10InjuryHistory.svelte';
-	import Step11PastHistories from '$lib/components/steps/Step11PastHistories.svelte';
-	import Step12PhysicalExam from '$lib/components/steps/Step12PhysicalExam.svelte';
-	import Step13AssessmentAndPlan from '$lib/components/steps/Step13AssessmentAndPlan.svelte';
-	import Step14Diagnostics from '$lib/components/steps/Step14Diagnostics.svelte';
-	import Step15MedicationsAndProcedures from '$lib/components/steps/Step15MedicationsAndProcedures.svelte';
-	import Step16Reassessment from '$lib/components/steps/Step16Reassessment.svelte';
-	import Step17Disposition from '$lib/components/steps/Step17Disposition.svelte';
+	import Step1PatientRegistration from '#lib/components/steps/Step1PatientRegistration.svelte';
+	import Step2ChiefComplaintAndVitals from '#lib/components/steps/Step2ChiefComplaintAndVitals.svelte';
+	import Step3HighRiskSigns from '#lib/components/steps/Step3HighRiskSigns.svelte';
+	import Step4Triage from '#lib/components/steps/Step4Triage.svelte';
+	import Step5Airway from '#lib/components/steps/Step5Airway.svelte';
+	import Step6Breathing from '#lib/components/steps/Step6Breathing.svelte';
+	import Step7Circulation from '#lib/components/steps/Step7Circulation.svelte';
+	import Step8Disability from '#lib/components/steps/Step8Disability.svelte';
+	import Step9ExposureAndFast from '#lib/components/steps/Step9ExposureAndFast.svelte';
+	import Step10InjuryHistory from '#lib/components/steps/Step10InjuryHistory.svelte';
+	import Step11PastHistories from '#lib/components/steps/Step11PastHistories.svelte';
+	import Step12PhysicalExam from '#lib/components/steps/Step12PhysicalExam.svelte';
+	import Step13AssessmentAndPlan from '#lib/components/steps/Step13AssessmentAndPlan.svelte';
+	import Step14Diagnostics from '#lib/components/steps/Step14Diagnostics.svelte';
+	import Step15MedicationsAndProcedures from '#lib/components/steps/Step15MedicationsAndProcedures.svelte';
+	import Step16Reassessment from '#lib/components/steps/Step16Reassessment.svelte';
+	import Step17Disposition from '#lib/components/steps/Step17Disposition.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

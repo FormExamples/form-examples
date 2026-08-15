@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleAssessmentRows } from '$lib/data/sample-reports';
+	import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
 
 	const plural = 'united-kingdom-maternity-certificates-mat-b1';
 
@@ -34,7 +34,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -54,28 +54,28 @@
 			header: 'Part',
 			width: 110,
 			sort: true,
-			template: (v: string) => (v === 'pre' ? 'Part A' : v === 'post' ? 'Part B' : '—')
+			template: (v: string) => v === 'pre' ? 'Part A' : v === 'post' ? 'Part B' : '—'
 		},
 		{
 			id: 'issuerType',
 			header: 'Issuer',
 			width: 110,
 			sort: true,
-			template: (v: string) => (v === 'doctor' ? 'Doctor' : v === 'midwife' ? 'Midwife' : '—')
+			template: (v: string) => v === 'doctor' ? 'Doctor' : v === 'midwife' ? 'Midwife' : '—'
 		},
 		{
 			id: 'status',
 			header: 'Status',
 			width: 120,
 			sort: true,
-			template: (v: string) => (v === 'complete' ? 'Complete' : 'Incomplete')
+			template: (v: string) => v === 'complete' ? 'Complete' : 'Incomplete'
 		},
 		{
 			id: 'weeksBeforeEwc',
 			header: 'Weeks to EWC',
 			width: 130,
 			sort: true,
-			template: (v: number | null) => (v == null ? '—' : String(v))
+			template: (v: number | null) => v == null ? '—' : String(v)
 		},
 		{ id: 'flagCount', header: 'Flags', width: 80, sort: true }
 	];
@@ -121,11 +121,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} certificates</p>
 </main>

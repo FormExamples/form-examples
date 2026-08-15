@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/lpa.svelte.js';
-  import CheckboxField from '$lib/components/ui/CheckboxField.svelte';
+  import { store } from '#lib/stores/lpa.svelte.js';
+  import CheckboxField from '#lib/components/ui/CheckboxField.svelte';
 </script>
 
 <section>

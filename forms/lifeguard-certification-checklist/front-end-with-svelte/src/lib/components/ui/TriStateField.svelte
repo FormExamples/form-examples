@@ -4,7 +4,7 @@
 	// rule maps to a single, accessible tri-state control.
 	import Field from './Field.svelte';
 	import RadioGroup from './RadioGroup.svelte';
-	import type { TriState } from '$lib/engine/types';
+	import type { TriState } from '#lib/engine/types.js';
 
 	let {
 		label,

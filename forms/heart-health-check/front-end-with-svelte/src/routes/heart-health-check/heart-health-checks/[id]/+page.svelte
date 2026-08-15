@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeAssessment } from '$lib/engine/risk-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeAssessment } from '#lib/engine/risk-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1 from '$lib/components/steps/Step1PatientInformation.svelte';
-	import Step2 from '$lib/components/steps/Step2DemographicsEthnicity.svelte';
-	import Step3 from '$lib/components/steps/Step3BloodPressure.svelte';
-	import Step4 from '$lib/components/steps/Step4Cholesterol.svelte';
-	import Step5 from '$lib/components/steps/Step5MedicalConditions.svelte';
-	import Step6 from '$lib/components/steps/Step6FamilyHistory.svelte';
-	import Step7 from '$lib/components/steps/Step7SmokingAlcohol.svelte';
-	import Step8 from '$lib/components/steps/Step8PhysicalActivityDiet.svelte';
-	import Step9 from '$lib/components/steps/Step9BodyMeasurements.svelte';
-	import Step10 from '$lib/components/steps/Step10ReviewCalculate.svelte';
+	import Step1 from '#lib/components/steps/Step1PatientInformation.svelte';
+	import Step2 from '#lib/components/steps/Step2DemographicsEthnicity.svelte';
+	import Step3 from '#lib/components/steps/Step3BloodPressure.svelte';
+	import Step4 from '#lib/components/steps/Step4Cholesterol.svelte';
+	import Step5 from '#lib/components/steps/Step5MedicalConditions.svelte';
+	import Step6 from '#lib/components/steps/Step6FamilyHistory.svelte';
+	import Step7 from '#lib/components/steps/Step7SmokingAlcohol.svelte';
+	import Step8 from '#lib/components/steps/Step8PhysicalActivityDiet.svelte';
+	import Step9 from '#lib/components/steps/Step9BodyMeasurements.svelte';
+	import Step10 from '#lib/components/steps/Step10ReviewCalculate.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const isNew = $derived(id === 'new');

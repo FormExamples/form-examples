@@ -1,5 +1,5 @@
 import type { AgileChecklist, Answer } from './types.js';
-import { ALL_ITEMS } from '$lib/config/items.js';
+import { ALL_ITEMS } from '#lib/config/items.js';
 
 function emptyAnswers(): Record<string, Answer> {
   const out: Record<string, Answer> = {};

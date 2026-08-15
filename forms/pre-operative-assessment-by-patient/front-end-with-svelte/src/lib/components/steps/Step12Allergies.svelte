@@ -1,9 +1,9 @@
 <script lang="ts">
-	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import AllergyEntry from '#lib/components/ui/AllergyEntry.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 
 </script>
 

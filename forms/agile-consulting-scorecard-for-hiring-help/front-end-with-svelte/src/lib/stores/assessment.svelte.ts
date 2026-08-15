@@ -1,10 +1,10 @@
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import type {
 	AgileConsultingScorecardAssessment,
 	ChecklistItem,
 	GradeResult,
-} from '$lib/engine/types';
-import { gradeScorecard } from '$lib/engine/score-grader';
+} from '#lib/engine/types.js';
+import { gradeScorecard } from '#lib/engine/score-grader.js';
 
 /** localStorage draft key for a given scorecard id (defaults to `new`). */
 function storageKey(id: string): string {

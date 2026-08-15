@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	riskCategoryLabel,
 	bandLabel,
@@ -10,7 +10,7 @@ import {
 	sexLabel,
 	killipClassLabel,
 	normaliseCreatinine
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const hr = data.haemodynamics.heartRate;

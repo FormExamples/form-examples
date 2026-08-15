@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import { YES_NO } from '$lib/config/options';
-	import { questionnaireStore } from '$lib/stores/questionnaire.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import { YES_NO } from '#lib/config/options.js';
+	import { questionnaireStore } from '#lib/stores/questionnaire.svelte.js';
 
 	const d = questionnaireStore.data;
 

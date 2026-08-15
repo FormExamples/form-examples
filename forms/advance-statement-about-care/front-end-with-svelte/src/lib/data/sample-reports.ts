@@ -1,6 +1,6 @@
-import type { StatementData, CompletenessLevel } from '$lib/engine/types';
-import { calculateCompleteness } from '$lib/engine/completeness-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { StatementData, CompletenessLevel } from '#lib/engine/types.js';
+import { calculateCompleteness } from '#lib/engine/completeness-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample statement: an identifier and the full data the engine assesses. */
 export interface SampleAssessment {

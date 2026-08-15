@@ -1,31 +1,31 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { assess } from '$lib/engine/note-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { assess } from '#lib/engine/note-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1NoteIdentification from '$lib/components/steps/Step1NoteIdentification.svelte';
-	import Step2PatientAndAdmission from '$lib/components/steps/Step2PatientAndAdmission.svelte';
-	import Step3IntervalHistory from '$lib/components/steps/Step3IntervalHistory.svelte';
-	import Step4ObservationsAndNews2 from '$lib/components/steps/Step4ObservationsAndNews2.svelte';
-	import Step5Examination from '$lib/components/steps/Step5Examination.svelte';
-	import Step6Investigations from '$lib/components/steps/Step6Investigations.svelte';
-	import Step7Problems from '$lib/components/steps/Step7Problems.svelte';
-	import Step8Medications from '$lib/components/steps/Step8Medications.svelte';
-	import Step9RiskAssessments from '$lib/components/steps/Step9RiskAssessments.svelte';
-	import Step10AssessmentAndImpression from '$lib/components/steps/Step10AssessmentAndImpression.svelte';
-	import Step11PlanAndEscalation from '$lib/components/steps/Step11PlanAndEscalation.svelte';
-	import Step12CommunicationAndSignOff from '$lib/components/steps/Step12CommunicationAndSignOff.svelte';
+	import Step1NoteIdentification from '#lib/components/steps/Step1NoteIdentification.svelte';
+	import Step2PatientAndAdmission from '#lib/components/steps/Step2PatientAndAdmission.svelte';
+	import Step3IntervalHistory from '#lib/components/steps/Step3IntervalHistory.svelte';
+	import Step4ObservationsAndNews2 from '#lib/components/steps/Step4ObservationsAndNews2.svelte';
+	import Step5Examination from '#lib/components/steps/Step5Examination.svelte';
+	import Step6Investigations from '#lib/components/steps/Step6Investigations.svelte';
+	import Step7Problems from '#lib/components/steps/Step7Problems.svelte';
+	import Step8Medications from '#lib/components/steps/Step8Medications.svelte';
+	import Step9RiskAssessments from '#lib/components/steps/Step9RiskAssessments.svelte';
+	import Step10AssessmentAndImpression from '#lib/components/steps/Step10AssessmentAndImpression.svelte';
+	import Step11PlanAndEscalation from '#lib/components/steps/Step11PlanAndEscalation.svelte';
+	import Step12CommunicationAndSignOff from '#lib/components/steps/Step12CommunicationAndSignOff.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 
@@ -118,7 +118,7 @@
 			return;
 		}
 		assessment.result = assess(assessment.data);
-		goto(`${base}/inpatient-clinical-note/inpatient-clinical-notes/${id}/report`);
+		goto(resolve(`inpatient-clinical-note/inpatient-clinical-notes/${id}/report`));
 	}
 
 	function startOver() {
@@ -170,7 +170,7 @@
 		<Step12CommunicationAndSignOff />
 
 		<div class="button-group">
-			<Button type="submit" data-variant="primary">Grade &amp; view report</Button>
+			<Button type="submit" data-variant="primary">Grade & view report</Button>
 			<Button data-variant="danger" onclick={startOver}>Start over</Button>
 		</div>
 	</Form>

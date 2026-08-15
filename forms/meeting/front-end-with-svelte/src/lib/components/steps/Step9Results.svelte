@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { meeting } from '$lib/stores/meeting.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { ActionItem, OutputItem, OutcomeItem } from '$lib/engine/types';
+	import { meeting } from '#lib/stores/meeting.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { ActionItem, OutputItem, OutcomeItem } from '#lib/engine/types.js';
 
 	const d = meeting.data.results;
 

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateAnionGap } from '$lib/engine/anion-gap-grader';
-	import { classificationColor, classificationLabel, formatGap } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateAnionGap } from '#lib/engine/anion-gap-grader.js';
+	import { classificationColor, classificationLabel, formatGap } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const a = assessment.data.albumin;
 	const grade = $derived(calculateAnionGap(assessment.data));

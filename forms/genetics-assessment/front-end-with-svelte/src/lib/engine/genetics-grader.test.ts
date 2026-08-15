@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createDefaultAssessment, emptyRelative } from '$lib/engine/factory';
+import { createDefaultAssessment, emptyRelative } from '#lib/engine/factory.js';
 import {
 	gradeGenetics,
 	calculateManchesterScore,

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Relative } from '$lib/engine/types';
+	import type { Relative } from '#lib/engine/types.js';
 	import RelativeCancerList from './RelativeCancerList.svelte';
 
 	let {

@@ -1,6 +1,6 @@
-import type { AssessmentData, CompletenessStatus } from '$lib/engine/types';
-import { calculateHealthCheckGrade } from '$lib/engine/ld-health-check-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CompletenessStatus } from '#lib/engine/types.js';
+import { calculateHealthCheckGrade } from '#lib/engine/ld-health-check-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample check: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

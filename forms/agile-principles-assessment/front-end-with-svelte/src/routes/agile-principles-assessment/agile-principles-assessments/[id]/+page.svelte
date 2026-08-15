@@ -1,31 +1,31 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/assessment.svelte.js';
-	import { STEPS, TOTAL_STEPS } from '$lib/config/steps.js';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/assessment.svelte.js';
+	import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01Respondent.svelte';
-	import Step02 from '$lib/components/steps/Step02CustomerSatisfaction.svelte';
-	import Step03 from '$lib/components/steps/Step03WelcomeChange.svelte';
-	import Step04 from '$lib/components/steps/Step04DeliverFrequently.svelte';
-	import Step05 from '$lib/components/steps/Step05Collaboration.svelte';
-	import Step06 from '$lib/components/steps/Step06MotivatedIndividuals.svelte';
-	import Step07 from '$lib/components/steps/Step07FaceToFace.svelte';
-	import Step08 from '$lib/components/steps/Step08WorkingSoftware.svelte';
-	import Step09 from '$lib/components/steps/Step09SustainableDevelopment.svelte';
-	import Step10 from '$lib/components/steps/Step10TechnicalExcellence.svelte';
-	import Step11 from '$lib/components/steps/Step11Simplicity.svelte';
-	import Step12 from '$lib/components/steps/Step12SelfOrganisingTeams.svelte';
-	import Step13 from '$lib/components/steps/Step13RegularReflection.svelte';
-	import Step14 from '$lib/components/steps/Step14Summary.svelte';
+	import Step01 from '#lib/components/steps/Step01Respondent.svelte';
+	import Step02 from '#lib/components/steps/Step02CustomerSatisfaction.svelte';
+	import Step03 from '#lib/components/steps/Step03WelcomeChange.svelte';
+	import Step04 from '#lib/components/steps/Step04DeliverFrequently.svelte';
+	import Step05 from '#lib/components/steps/Step05Collaboration.svelte';
+	import Step06 from '#lib/components/steps/Step06MotivatedIndividuals.svelte';
+	import Step07 from '#lib/components/steps/Step07FaceToFace.svelte';
+	import Step08 from '#lib/components/steps/Step08WorkingSoftware.svelte';
+	import Step09 from '#lib/components/steps/Step09SustainableDevelopment.svelte';
+	import Step10 from '#lib/components/steps/Step10TechnicalExcellence.svelte';
+	import Step11 from '#lib/components/steps/Step11Simplicity.svelte';
+	import Step12 from '#lib/components/steps/Step12SelfOrganisingTeams.svelte';
+	import Step13 from '#lib/components/steps/Step13RegularReflection.svelte';
+	import Step14 from '#lib/components/steps/Step14Summary.svelte';
 
 	const stepComponents = [
 		Step01, Step02, Step03, Step04, Step05, Step06, Step07,

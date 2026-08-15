@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
-	import EmailInput from '$lib/components/ui/EmailInput.svelte';
-	import TelInput from '$lib/components/ui/TelInput.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import EmailInput from '#lib/components/ui/EmailInput.svelte';
+	import TelInput from '#lib/components/ui/TelInput.svelte';
 
 	const gp = assessment.data.healthcareProfessionals.gp;
 	const c = assessment.data.healthcareProfessionals.consultant;

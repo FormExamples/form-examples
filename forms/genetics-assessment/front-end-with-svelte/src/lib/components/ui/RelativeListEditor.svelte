@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Relative } from '$lib/engine/types';
-	import { emptyRelative } from '$lib/engine/factory';
+	import type { Relative } from '#lib/engine/types.js';
+	import { emptyRelative } from '#lib/engine/factory.js';
 	import RelativeEntry from './RelativeEntry.svelte';
 
 	let {

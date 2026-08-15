@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import { PANELS, countSelectedPanels } from '$lib/engine/panels';
-	import { requestStore } from '$lib/stores/request.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import { PANELS, countSelectedPanels } from '#lib/engine/panels.js';
+	import { requestStore } from '#lib/stores/request.svelte.js';
 
 	const d = requestStore.data.panels;
 	const selectedCount = $derived(countSelectedPanels(d));

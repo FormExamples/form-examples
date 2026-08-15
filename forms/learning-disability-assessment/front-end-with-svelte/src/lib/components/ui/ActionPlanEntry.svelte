@@ -1,10 +1,10 @@
 <script lang="ts">
 	// Repeating-list editor for the Health Action Plan: each row captures an
 	// action, its owner, and a due date.
-	import type { HealthActionItem } from '$lib/engine/types';
-	import Button from '$lib/components/ui/Button.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import type { HealthActionItem } from '#lib/engine/types.js';
+	import Button from '#lib/components/ui/Button.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import DateInput from '#lib/components/ui/DateInput.svelte';
 
 	let { actions = $bindable<HealthActionItem[]>([]) }: { actions?: HealthActionItem[] } = $props();
 

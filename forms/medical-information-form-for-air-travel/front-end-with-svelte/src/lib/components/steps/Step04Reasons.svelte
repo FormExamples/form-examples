@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import YesNoField from '$lib/components/ui/YesNoField.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import YesNoField from '#lib/components/ui/YesNoField.svelte';
 </script>
 
 <section>

@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, Classification } from '$lib/engine/types';
-import { calculateAnionGap } from '$lib/engine/anion-gap-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, Classification } from '#lib/engine/types.js';
+import { calculateAnionGap } from '#lib/engine/anion-gap-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { buildPdfDocument } from '$lib/report/pdf-builder';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import { buildPdfDocument } from '#lib/report/pdf-builder.js';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { data, result } = (await request.json()) as {
@@ -20,6 +20,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 	};
 
+	// @ts-expect-error pdfmake types don't expose constructor correctly
 	const printer = new PdfPrinter(fonts);
 	const pdfDoc = printer.createPdfKitDocument(docDefinition);
 	const chunks: Uint8Array[] = [];

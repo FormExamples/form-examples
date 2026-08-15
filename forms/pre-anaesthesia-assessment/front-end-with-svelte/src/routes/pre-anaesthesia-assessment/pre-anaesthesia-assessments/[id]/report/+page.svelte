@@ -1,11 +1,11 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import FlagBanner from '$lib/components/ui/FlagBanner.svelte';
-  import Panel from '$lib/components/ui/Panel.svelte';
-  import Alert from '$lib/components/ui/Alert.svelte';
-  import Button from '$lib/components/ui/Button.svelte';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import FlagBanner from '#lib/components/ui/FlagBanner.svelte';
+  import Panel from '#lib/components/ui/Panel.svelte';
+  import Alert from '#lib/components/ui/Alert.svelte';
+  import Button from '#lib/components/ui/Button.svelte';
 
   const id = $derived(page.params.id ?? 'new');
   const r = $derived(store.result);

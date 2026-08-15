@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import {
 		acuityColor,
 		acuityLabel,
@@ -13,8 +13,8 @@
 		statusColor,
 		statusLabel,
 		vteStatusLabel
-	} from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	} from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);
@@ -25,7 +25,7 @@
 
 	$effect(() => {
 		if (!assessment.result) {
-			goto(`${base}/inpatient-clinical-note/inpatient-clinical-notes/${id}`);
+			goto(resolve(`inpatient-clinical-note/inpatient-clinical-notes/${id}`));
 		}
 	});
 
@@ -41,12 +41,10 @@
 	async function downloadPDF() {
 		pdfError = '';
 		try {
-			const res = await fetch(
-				`${base}/inpatient-clinical-note/inpatient-clinical-notes/${id}/report/pdf`,
-				{
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ data: assessment.data, result: assessment.result })
+			const res = await fetch(resolve(`inpatient-clinical-note/inpatient-clinical-notes/${id}/report/pdf`), {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ data: assessment.data, result: assessment.result })
 				}
 			);
 			if (res.ok) {
@@ -75,13 +73,16 @@
 					<span class="text-sm text-error">{pdfError}</span>
 				{/if}
 				<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
-				<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+
 				<Button
 					data-variant="secondary"
-					onclick={() => goto(`${base}/inpatient-clinical-note/inpatient-clinical-notes/${id}`)}
-				>
-					Edit
-				</Button>
+					onclick={() => window.print()}
+				>Print</Button>
+
+				<Button
+					data-variant="secondary"
+					onclick={() => goto(resolve(`inpatient-clinical-note/inpatient-clinical-notes/${id}`))}
+				>Edit</Button>
 			</div>
 		</div>
 	</header>
@@ -198,13 +199,12 @@
 					{#each acuityRules as r (r.id)}
 						<li class="flex items-start gap-3">
 							<span
-								class="mt-0.5 rounded border px-2 py-0.5 text-xs font-bold uppercase {acuityColor(
-									r.band || 'stable'
-								)}"
-							>
-								{acuityLabel(r.band || 'stable')}
+								class="mt-0.5 rounded border px-2 py-0.5 text-xs font-bold uppercase {acuityColor(r.band || 'stable')}"
+							>{acuityLabel(r.band || 'stable')}</span>
+							<span>
+								<span class="font-medium">{r.id}:</span>
+								{r.description}
 							</span>
-							<span><span class="font-medium">{r.id}:</span> {r.description}</span>
 						</li>
 					{/each}
 				</ul>

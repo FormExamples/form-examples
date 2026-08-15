@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import YesNoField from '$lib/components/ui/YesNoField.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateBMI, bmiCategory } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import YesNoField from '#lib/components/ui/YesNoField.svelte';
 
 	const v = assessment.data.vitalSigns;
 	const ex = assessment.data.physicalExam;

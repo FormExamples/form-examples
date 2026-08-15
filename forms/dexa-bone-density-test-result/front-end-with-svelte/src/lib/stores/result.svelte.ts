@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { DexaBoneDensityResult, GradingResult } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { DexaBoneDensityResult, GradingResult } from '#lib/engine/types.js';
 
 const STORAGE_KEY = 'dexa-bone-density-test-result.front-end-with-svelte.v1';
 

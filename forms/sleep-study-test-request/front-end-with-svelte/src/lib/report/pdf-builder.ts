@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { SleepStudyRequest, GradingResult } from '$lib/engine/types';
+import type { SleepStudyRequest, GradingResult } from '#lib/engine/types.js';
 import {
 	studyTypeLabel,
 	indicationLabel,
@@ -7,7 +7,7 @@ import {
 	priorityLabel,
 	triageTierLabel,
 	recommendationLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

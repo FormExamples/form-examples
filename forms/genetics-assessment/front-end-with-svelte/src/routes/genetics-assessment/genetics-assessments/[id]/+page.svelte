@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeGenetics } from '$lib/engine/genetics-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeGenetics } from '#lib/engine/genetics-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1ProbandDemographics from '$lib/components/steps/Step1ProbandDemographics.svelte';
-	import Step2PresentingConcern from '$lib/components/steps/Step2PresentingConcern.svelte';
-	import Step3PersonalMedicalHistory from '$lib/components/steps/Step3PersonalMedicalHistory.svelte';
-	import Step4FamilyPedigree from '$lib/components/steps/Step4FamilyPedigree.svelte';
-	import Step5ConsanguinityAncestry from '$lib/components/steps/Step5ConsanguinityAncestry.svelte';
-	import Step6TargetedRiskScoring from '$lib/components/steps/Step6TargetedRiskScoring.svelte';
-	import Step7PriorGeneticTesting from '$lib/components/steps/Step7PriorGeneticTesting.svelte';
-	import Step8PatientUnderstandingConcerns from '$lib/components/steps/Step8PatientUnderstandingConcerns.svelte';
-	import Step9RecommendationReferralPlan from '$lib/components/steps/Step9RecommendationReferralPlan.svelte';
+	import Step1ProbandDemographics from '#lib/components/steps/Step1ProbandDemographics.svelte';
+	import Step2PresentingConcern from '#lib/components/steps/Step2PresentingConcern.svelte';
+	import Step3PersonalMedicalHistory from '#lib/components/steps/Step3PersonalMedicalHistory.svelte';
+	import Step4FamilyPedigree from '#lib/components/steps/Step4FamilyPedigree.svelte';
+	import Step5ConsanguinityAncestry from '#lib/components/steps/Step5ConsanguinityAncestry.svelte';
+	import Step6TargetedRiskScoring from '#lib/components/steps/Step6TargetedRiskScoring.svelte';
+	import Step7PriorGeneticTesting from '#lib/components/steps/Step7PriorGeneticTesting.svelte';
+	import Step8PatientUnderstandingConcerns from '#lib/components/steps/Step8PatientUnderstandingConcerns.svelte';
+	import Step9RecommendationReferralPlan from '#lib/components/steps/Step9RecommendationReferralPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

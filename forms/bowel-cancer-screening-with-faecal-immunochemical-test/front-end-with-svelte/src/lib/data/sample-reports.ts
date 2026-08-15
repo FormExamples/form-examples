@@ -1,6 +1,6 @@
-import type { AssessmentData, ManagementAction, ResultClass } from '$lib/engine/types';
-import { gradeFit } from '$lib/engine/bowel-fit-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ManagementAction, ResultClass } from '#lib/engine/types.js';
+import { gradeFit } from '#lib/engine/bowel-fit-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

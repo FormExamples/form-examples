@@ -1,32 +1,32 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/assessment.svelte';
-	import { evaluateFitnessToFly } from '$lib/engine/composite-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/assessment.svelte.js';
+	import { evaluateFitnessToFly } from '#lib/engine/composite-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01Submitter from '$lib/components/steps/Step01Submitter.svelte';
-	import Step02Passenger from '$lib/components/steps/Step02Passenger.svelte';
-	import Step03Trip from '$lib/components/steps/Step03Trip.svelte';
-	import Step04Reasons from '$lib/components/steps/Step04Reasons.svelte';
-	import Step05Physician from '$lib/components/steps/Step05Physician.svelte';
-	import Step06Diagnosis from '$lib/components/steps/Step06Diagnosis.svelte';
-	import Step07Cardiovascular from '$lib/components/steps/Step07Cardiovascular.svelte';
-	import Step08Respiratory from '$lib/components/steps/Step08Respiratory.svelte';
-	import Step09RecentEvents from '$lib/components/steps/Step09RecentEvents.svelte';
-	import Step10Pregnancy from '$lib/components/steps/Step10Pregnancy.svelte';
-	import Step11Communicable from '$lib/components/steps/Step11Communicable.svelte';
-	import Step12InflightNeeds from '$lib/components/steps/Step12InflightNeeds.svelte';
-	import Step13CabinMeds from '$lib/components/steps/Step13CabinMeds.svelte';
-	import Step14Summary from '$lib/components/steps/Step14Summary.svelte';
+	import Step01Submitter from '#lib/components/steps/Step01Submitter.svelte';
+	import Step02Passenger from '#lib/components/steps/Step02Passenger.svelte';
+	import Step03Trip from '#lib/components/steps/Step03Trip.svelte';
+	import Step04Reasons from '#lib/components/steps/Step04Reasons.svelte';
+	import Step05Physician from '#lib/components/steps/Step05Physician.svelte';
+	import Step06Diagnosis from '#lib/components/steps/Step06Diagnosis.svelte';
+	import Step07Cardiovascular from '#lib/components/steps/Step07Cardiovascular.svelte';
+	import Step08Respiratory from '#lib/components/steps/Step08Respiratory.svelte';
+	import Step09RecentEvents from '#lib/components/steps/Step09RecentEvents.svelte';
+	import Step10Pregnancy from '#lib/components/steps/Step10Pregnancy.svelte';
+	import Step11Communicable from '#lib/components/steps/Step11Communicable.svelte';
+	import Step12InflightNeeds from '#lib/components/steps/Step12InflightNeeds.svelte';
+	import Step13CabinMeds from '#lib/components/steps/Step13CabinMeds.svelte';
+	import Step14Summary from '#lib/components/steps/Step14Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

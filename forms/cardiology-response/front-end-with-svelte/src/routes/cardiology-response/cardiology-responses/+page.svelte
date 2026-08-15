@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleReports } from '$lib/data/sample-reports';
+	import { sampleReports } from '#lib/data/sample-reports.js';
 	import {
 		responseClassificationLabel,
 		severityLabel,
 		followUpUrgencyLabel,
 		consultationTypeLabel,
 		responseStatusLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	let classificationFilter = $state('');
 	let urgencyFilter = $state('');
@@ -39,7 +39,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -51,7 +51,13 @@
 	// helpers so the dashboard and the report stay in lock-step.
 	const columns = [
 		{ id: 'id', header: 'Response', width: 90 },
-		{ id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
+		{
+			id: 'patientName',
+			header: 'Patient',
+			flexgrow: 2,
+			sort: true
+		},
+
 		{
 			id: 'consultationType',
 			header: 'Consultation',
@@ -64,14 +70,28 @@
 			width: 110,
 			template: (v: string) => responseStatusLabel(v as never)
 		},
-		{ id: 'respondedDate', header: 'Responded', width: 120, sort: true },
+
+		{
+			id: 'respondedDate',
+			header: 'Responded',
+			width: 120,
+			sort: true
+		},
+
 		{
 			id: 'responseClassification',
 			header: 'Classification',
 			width: 150,
 			template: (v: string) => responseClassificationLabel(v as never)
 		},
-		{ id: 'severity', header: 'Severity', width: 120, template: (v: string) => severityLabel(v as never) },
+
+		{
+			id: 'severity',
+			header: 'Severity',
+			width: 120,
+			template: (v: string) => severityLabel(v as never)
+		},
+
 		{
 			id: 'followUpUrgency',
 			header: 'Urgency',
@@ -128,11 +148,10 @@
 		</label>
 	</div>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} responses</p>
 </main>

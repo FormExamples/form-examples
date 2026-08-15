@@ -1,34 +1,34 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/adr.svelte';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAdrs } from '$lib/data/sample-reports';
-	import { parseMarkdown } from '$lib/report/parse-markdown.js';
+	import { store } from '#lib/stores/adr.svelte.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAdrs } from '#lib/data/sample-reports.js';
+	import { parseMarkdown } from '#lib/report/parse-markdown.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01Author.svelte';
-	import Step02 from '$lib/components/steps/Step02Organization.svelte';
-	import Step03 from '$lib/components/steps/Step03Issue.svelte';
-	import Step04 from '$lib/components/steps/Step04Decision.svelte';
-	import Step05 from '$lib/components/steps/Step05StatusGroup.svelte';
-	import Step06 from '$lib/components/steps/Step06Assumptions.svelte';
-	import Step07 from '$lib/components/steps/Step07Constraints.svelte';
-	import Step08 from '$lib/components/steps/Step08Positions.svelte';
-	import Step09 from '$lib/components/steps/Step09Argument.svelte';
-	import Step10 from '$lib/components/steps/Step10Implications.svelte';
-	import Step11 from '$lib/components/steps/Step11RelatedDecisions.svelte';
-	import Step12 from '$lib/components/steps/Step12RelatedRequirements.svelte';
-	import Step13 from '$lib/components/steps/Step13RelatedArtifacts.svelte';
-	import Step14 from '$lib/components/steps/Step14RelatedPrinciples.svelte';
-	import Step15 from '$lib/components/steps/Step15Notes.svelte';
-	import Step16 from '$lib/components/steps/Step16Summary.svelte';
+	import Step01 from '#lib/components/steps/Step01Author.svelte';
+	import Step02 from '#lib/components/steps/Step02Organization.svelte';
+	import Step03 from '#lib/components/steps/Step03Issue.svelte';
+	import Step04 from '#lib/components/steps/Step04Decision.svelte';
+	import Step05 from '#lib/components/steps/Step05StatusGroup.svelte';
+	import Step06 from '#lib/components/steps/Step06Assumptions.svelte';
+	import Step07 from '#lib/components/steps/Step07Constraints.svelte';
+	import Step08 from '#lib/components/steps/Step08Positions.svelte';
+	import Step09 from '#lib/components/steps/Step09Argument.svelte';
+	import Step10 from '#lib/components/steps/Step10Implications.svelte';
+	import Step11 from '#lib/components/steps/Step11RelatedDecisions.svelte';
+	import Step12 from '#lib/components/steps/Step12RelatedRequirements.svelte';
+	import Step13 from '#lib/components/steps/Step13RelatedArtifacts.svelte';
+	import Step14 from '#lib/components/steps/Step14RelatedPrinciples.svelte';
+	import Step15 from '#lib/components/steps/Step15Notes.svelte';
+	import Step16 from '#lib/components/steps/Step16Summary.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

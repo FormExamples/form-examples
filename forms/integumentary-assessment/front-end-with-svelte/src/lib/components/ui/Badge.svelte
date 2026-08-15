@@ -2,7 +2,7 @@
 	// Badge — renders a single Braden subscale score against its maximum, with a
 	// Lily token colour that reflects how close the subscale is to its highest
 	// (lowest-risk) value.
-	import { subscaleColor } from '$lib/engine/utils';
+	import { subscaleColor } from '#lib/engine/utils.js';
 
 	let {
 		score,

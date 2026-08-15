@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateSnot22 } from '$lib/engine/snot22-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateSnot22 } from '#lib/engine/snot22-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
-	import Step2PresentingComplaint from '$lib/components/steps/Step2PresentingComplaint.svelte';
-	import Step3HistoryOfPresentIllness from '$lib/components/steps/Step3HistoryOfPresentIllness.svelte';
-	import Step4PastENTHistorySurgery from '$lib/components/steps/Step4PastENTHistorySurgery.svelte';
-	import Step5SNOT22Questionnaire from '$lib/components/steps/Step5SNOT22Questionnaire.svelte';
-	import Step6ExternalExamination from '$lib/components/steps/Step6ExternalExamination.svelte';
-	import Step7Otoscopy from '$lib/components/steps/Step7Otoscopy.svelte';
-	import Step8AnteriorRhinoscopy from '$lib/components/steps/Step8AnteriorRhinoscopy.svelte';
-	import Step9OropharyngealNeckExamination from '$lib/components/steps/Step9OropharyngealNeckExamination.svelte';
-	import Step10ClinicalImpressionManagementPlan from '$lib/components/steps/Step10ClinicalImpressionManagementPlan.svelte';
+	import Step1Demographics from '#lib/components/steps/Step1Demographics.svelte';
+	import Step2PresentingComplaint from '#lib/components/steps/Step2PresentingComplaint.svelte';
+	import Step3HistoryOfPresentIllness from '#lib/components/steps/Step3HistoryOfPresentIllness.svelte';
+	import Step4PastENTHistorySurgery from '#lib/components/steps/Step4PastENTHistorySurgery.svelte';
+	import Step5SNOT22Questionnaire from '#lib/components/steps/Step5SNOT22Questionnaire.svelte';
+	import Step6ExternalExamination from '#lib/components/steps/Step6ExternalExamination.svelte';
+	import Step7Otoscopy from '#lib/components/steps/Step7Otoscopy.svelte';
+	import Step8AnteriorRhinoscopy from '#lib/components/steps/Step8AnteriorRhinoscopy.svelte';
+	import Step9OropharyngealNeckExamination from '#lib/components/steps/Step9OropharyngealNeckExamination.svelte';
+	import Step10ClinicalImpressionManagementPlan from '#lib/components/steps/Step10ClinicalImpressionManagementPlan.svelte';
 
 	let errors = $state<{ id: string; message: string }[]>([]);
 

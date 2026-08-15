@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createEmptyAssessment } from './factory.js';
 import { summariseChecklist } from './summary.js';
-import { CHECKLIST_ITEMS, TOTAL_ITEMS } from '$lib/config/items.js';
+import { CHECKLIST_ITEMS, TOTAL_ITEMS } from '#lib/config/items.js';
 
 describe('summariseChecklist', () => {
   it('reports zero answered, zero needs-attention on a blank checklist', () => {

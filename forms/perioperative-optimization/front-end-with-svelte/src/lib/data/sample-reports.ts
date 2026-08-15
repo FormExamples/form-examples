@@ -7,7 +7,7 @@
 // accepted the unoptimised risk for a cancer resection, and one with no
 // surgery date at all, where gating cannot be applied.
 
-import type { AssessmentRow } from '$lib/engine/types';
+import type { AssessmentRow } from '#lib/engine/types.js';
 
 export const sampleAssessments: AssessmentRow[] = [
 	{

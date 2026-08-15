@@ -7,9 +7,9 @@ import type {
 	RadiationDoseBand,
 	TriageTier,
 	Recommendation
-} from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefaultRequest } from '$lib/stores/request.svelte';
+} from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefaultRequest } from '#lib/stores/request.svelte.js';
 
 /** A sample nuclear medicine request: an identifier and the full data the engine grades. */
 export interface SampleRequest {

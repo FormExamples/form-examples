@@ -1,4 +1,4 @@
-import type { ReviewRow } from '$lib/engine/types';
+import type { ReviewRow } from '#lib/engine/types.js';
 
 /** In-memory sample data for the dashboard (back-end API fallback). */
 export const sampleReports: ReviewRow[] = [

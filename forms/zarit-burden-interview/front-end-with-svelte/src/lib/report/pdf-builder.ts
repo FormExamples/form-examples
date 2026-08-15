@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
-import { zaritItems, activeItemNumbers, normalizeInstrumentForm } from '$lib/engine/zarit-rules';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
+import { zaritItems, activeItemNumbers, normalizeInstrumentForm } from '#lib/engine/zarit-rules.js';
 import {
 	bandLabel,
 	priorityLabel,
@@ -10,7 +10,7 @@ import {
 	carerRelationshipLabel,
 	carerCoResidentLabel,
 	recipientConditionLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const instrumentForm = normalizeInstrumentForm(data);

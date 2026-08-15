@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import ZaritItemField from './ZaritItemField.svelte';
-	import { zaritItems, normalizeInstrumentForm } from '$lib/engine/zarit-rules';
+	import { zaritItems, normalizeInstrumentForm } from '#lib/engine/zarit-rules.js';
 
 	const instrumentForm = $derived(normalizeInstrumentForm(assessment.data));
 </script>

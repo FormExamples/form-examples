@@ -1,7 +1,7 @@
-import type { AssessmentData, MRCGrade } from '$lib/engine/types';
-import { calculateRespirologyGrade } from '$lib/engine/mrc-grader';
-import { mrcSeverityLabel } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, MRCGrade } from '#lib/engine/types.js';
+import { calculateRespirologyGrade } from '#lib/engine/mrc-grader.js';
+import { mrcSeverityLabel } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

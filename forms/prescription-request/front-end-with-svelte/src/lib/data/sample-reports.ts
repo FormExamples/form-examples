@@ -1,7 +1,7 @@
-import type { AssessmentData, PriorityLevel } from '$lib/engine/types';
-import { calculatePriorityLevel } from '$lib/engine/prescription-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, PriorityLevel } from '#lib/engine/types.js';
+import { calculatePriorityLevel } from '#lib/engine/prescription-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample prescription request: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

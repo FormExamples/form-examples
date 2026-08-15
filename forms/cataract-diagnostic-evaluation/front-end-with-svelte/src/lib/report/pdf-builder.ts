@@ -1,7 +1,7 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { LOCS_III_SEVERITY_LABELS, SURGICAL_CANDIDACY_LABELS } from '$lib/engine/grader';
-import type { CataractDiagnosticEvaluation, GradingResult } from '$lib/engine/types';
-import { titleCase } from '$lib/engine/utils';
+import { LOCS_III_SEVERITY_LABELS, SURGICAL_CANDIDACY_LABELS } from '#lib/engine/grader.js';
+import type { CataractDiagnosticEvaluation, GradingResult } from '#lib/engine/types.js';
+import { titleCase } from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

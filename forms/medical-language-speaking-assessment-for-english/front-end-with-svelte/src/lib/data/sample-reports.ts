@@ -1,6 +1,6 @@
-import type { AssessmentData, OetGrade, Outcome, Profession } from '$lib/engine/types';
-import { calculateOetGrade } from '$lib/engine/oet-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, OetGrade, Outcome, Profession } from '#lib/engine/types.js';
+import { calculateOetGrade } from '#lib/engine/oet-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,8 +1,8 @@
-import type { AssessmentData, ValidityStatus } from '$lib/engine/types';
-import { calculateValidity } from '$lib/engine/validity-grader';
-import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-import { hasLifeSustainingRefusal } from '$lib/engine/utils';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, ValidityStatus } from '#lib/engine/types.js';
+import { calculateValidity } from '#lib/engine/validity-grader.js';
+import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
+import { hasLifeSustainingRefusal } from '#lib/engine/utils.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample ADRT: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

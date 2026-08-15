@@ -1,6 +1,6 @@
-import type { AssessmentData, RulePriority } from '$lib/engine/types';
-import { validateM1, countConditions } from '$lib/engine/m1-validator';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, RulePriority } from '#lib/engine/types.js';
+import { validateM1, countConditions } from '#lib/engine/m1-validator.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample M1 submission: an identifier and the full data the engine validates. */
 export interface SampleAssessment {

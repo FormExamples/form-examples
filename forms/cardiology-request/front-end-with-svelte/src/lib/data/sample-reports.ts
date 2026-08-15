@@ -1,6 +1,6 @@
-import type { CardiologyRequest, ReferralRow } from '$lib/engine/types';
-import { calculateGrade } from '$lib/engine/grader';
-import { createDefaultRequest } from '$lib/stores/result.svelte';
+import type { CardiologyRequest, ReferralRow } from '#lib/engine/types.js';
+import { calculateGrade } from '#lib/engine/grader.js';
+import { createDefaultRequest } from '#lib/stores/result.svelte.js';
 
 /** A sample referral: an identifier and the full request the engine grades. */
 export interface SampleReferral {

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Complication } from '$lib/engine/types';
-	import { clavienDindoRules } from '$lib/engine/clavien-dindo-rules';
+	import type { Complication } from '#lib/engine/types.js';
+	import { clavienDindoRules } from '#lib/engine/clavien-dindo-rules.js';
 
 	let {
 		complications = $bindable<Complication[]>([])

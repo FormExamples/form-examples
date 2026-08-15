@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import Field from '$lib/components/ui/Field.svelte';
-  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-  import DateInput from '$lib/components/ui/DateInput.svelte';
-  import { summariseChecklist } from '$lib/engine/summary.js';
-  import { TOTAL_ITEMS } from '$lib/config/items.js';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import DateInput from '#lib/components/ui/DateInput.svelte';
+  import { summariseChecklist } from '#lib/engine/summary.js';
+  import { TOTAL_ITEMS } from '#lib/config/items.js';
 
   const result = $derived(summariseChecklist(store.data));
 </script>

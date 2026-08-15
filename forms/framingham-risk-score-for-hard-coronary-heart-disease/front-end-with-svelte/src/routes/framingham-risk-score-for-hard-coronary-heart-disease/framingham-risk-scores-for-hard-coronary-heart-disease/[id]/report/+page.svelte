@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { riskLevelLabel, riskLevelColor, calculateBmi } from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { riskLevelLabel, riskLevelColor, calculateBmi } from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'framingham-risk-scores-for-hard-coronary-heart-disease';
 

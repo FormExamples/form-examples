@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { nihssScoreLabel, nihssScoreColor } from '$lib/engine/utils';
+	import { nihssScoreLabel, nihssScoreColor } from '#lib/engine/utils.js';
 
 	let {
 		score

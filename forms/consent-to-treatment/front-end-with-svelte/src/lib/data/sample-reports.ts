@@ -1,6 +1,6 @@
-import type { AssessmentData } from '$lib/engine/types';
-import { gradeConsent } from '$lib/engine/grade';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData } from '#lib/engine/types.js';
+import { gradeConsent } from '#lib/engine/grade.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample consent record: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

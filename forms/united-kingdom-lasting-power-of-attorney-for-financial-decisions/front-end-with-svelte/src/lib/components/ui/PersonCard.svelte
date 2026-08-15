@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Person } from '$lib/types.js';
+  import type { Person } from '#lib/types.js';
   import Field from './Field.svelte';
   import TextInput from './TextInput.svelte';
   import DateInput from './DateInput.svelte';

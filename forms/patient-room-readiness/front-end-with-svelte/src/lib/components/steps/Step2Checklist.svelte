@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { store } from '$lib/stores/checklist.svelte.js';
-  import { CHECKLIST_ITEMS } from '$lib/engine/types.js';
-  import Fieldset from '$lib/components/ui/Fieldset.svelte';
-  import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+  import { store } from '#lib/stores/checklist.svelte.js';
+  import { CHECKLIST_ITEMS } from '#lib/engine/types.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
   const r = $derived(store.result);
 </script>

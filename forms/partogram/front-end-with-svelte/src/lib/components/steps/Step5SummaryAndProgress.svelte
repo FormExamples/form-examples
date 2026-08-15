@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/partogram-grader';
-	import { progressLabel, progressColor, priorityColor, priorityLabel } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/partogram-grader.js';
+	import { progressLabel, progressColor, priorityColor, priorityLabel } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 
 	const grade = $derived(calculateGrade(assessment.data));
 	const fmtCm = (v: number | null) => (v === null ? '—' : `${v.toFixed(1)} cm`);

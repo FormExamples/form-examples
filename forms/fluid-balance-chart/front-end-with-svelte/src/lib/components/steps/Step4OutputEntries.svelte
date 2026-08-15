@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { assessment, createDefaultEntry } from '$lib/stores/assessment.svelte';
-	import { calculateGrade } from '$lib/engine/fluid-balance-grader';
-	import { OUTPUT_CATEGORIES, categoryLabel, fluidStatusLabel, fluidStatusColor, formatSignedMl } from '$lib/engine/utils';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment, createDefaultEntry } from '#lib/stores/assessment.svelte.js';
+	import { calculateGrade } from '#lib/engine/fluid-balance-grader.js';
+	import { OUTPUT_CATEGORIES, categoryLabel, fluidStatusLabel, fluidStatusColor, formatSignedMl } from '#lib/engine/utils.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const d = assessment.data;
 	const grade = $derived(calculateGrade(assessment.data));

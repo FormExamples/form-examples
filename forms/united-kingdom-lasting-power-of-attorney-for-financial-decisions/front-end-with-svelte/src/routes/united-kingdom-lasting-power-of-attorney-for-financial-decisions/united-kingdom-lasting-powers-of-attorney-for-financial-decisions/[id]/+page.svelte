@@ -1,32 +1,32 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/lpa.svelte';
-	import { STEPS, TOTAL_STEPS } from '$lib/config/steps';
-	import { findSampleLpa } from '$lib/data/sample-reports';
+	import { store } from '#lib/stores/lpa.svelte.js';
+	import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { findSampleLpa } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Donor from '$lib/components/steps/Step1Donor.svelte';
-	import Step2Attorneys from '$lib/components/steps/Step2Attorneys.svelte';
-	import Step3DecisionMode from '$lib/components/steps/Step3DecisionMode.svelte';
-	import Step4ReplacementAttorneys from '$lib/components/steps/Step4ReplacementAttorneys.svelte';
-	import Step5WhenAttorneysCanAct from '$lib/components/steps/Step5WhenAttorneysCanAct.svelte';
-	import Step6PeopleToNotify from '$lib/components/steps/Step6PeopleToNotify.svelte';
-	import Step7PreferencesAndInstructions from '$lib/components/steps/Step7PreferencesAndInstructions.svelte';
-	import Step8LegalRights from '$lib/components/steps/Step8LegalRights.svelte';
-	import Step9DonorSignature from '$lib/components/steps/Step9DonorSignature.svelte';
-	import Step10CertificateProviderSignature from '$lib/components/steps/Step10CertificateProviderSignature.svelte';
-	import Step11AttorneySignatures from '$lib/components/steps/Step11AttorneySignatures.svelte';
-	import Step12Applicant from '$lib/components/steps/Step12Applicant.svelte';
-	import Step13Recipient from '$lib/components/steps/Step13Recipient.svelte';
-	import Step14ApplicationFee from '$lib/components/steps/Step14ApplicationFee.svelte';
-	import Step15RegistrationSignature from '$lib/components/steps/Step15RegistrationSignature.svelte';
+	import Step1Donor from '#lib/components/steps/Step1Donor.svelte';
+	import Step2Attorneys from '#lib/components/steps/Step2Attorneys.svelte';
+	import Step3DecisionMode from '#lib/components/steps/Step3DecisionMode.svelte';
+	import Step4ReplacementAttorneys from '#lib/components/steps/Step4ReplacementAttorneys.svelte';
+	import Step5WhenAttorneysCanAct from '#lib/components/steps/Step5WhenAttorneysCanAct.svelte';
+	import Step6PeopleToNotify from '#lib/components/steps/Step6PeopleToNotify.svelte';
+	import Step7PreferencesAndInstructions from '#lib/components/steps/Step7PreferencesAndInstructions.svelte';
+	import Step8LegalRights from '#lib/components/steps/Step8LegalRights.svelte';
+	import Step9DonorSignature from '#lib/components/steps/Step9DonorSignature.svelte';
+	import Step10CertificateProviderSignature from '#lib/components/steps/Step10CertificateProviderSignature.svelte';
+	import Step11AttorneySignatures from '#lib/components/steps/Step11AttorneySignatures.svelte';
+	import Step12Applicant from '#lib/components/steps/Step12Applicant.svelte';
+	import Step13Recipient from '#lib/components/steps/Step13Recipient.svelte';
+	import Step14ApplicationFee from '#lib/components/steps/Step14ApplicationFee.svelte';
+	import Step15RegistrationSignature from '#lib/components/steps/Step15RegistrationSignature.svelte';
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 

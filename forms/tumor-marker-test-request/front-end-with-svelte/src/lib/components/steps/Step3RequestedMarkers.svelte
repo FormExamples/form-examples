@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
-	import { request } from '$lib/stores/request.svelte';
-	import { MARKERS, countSelectedMarkers } from '$lib/engine/markers';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import { MARKERS, countSelectedMarkers } from '#lib/engine/markers.js';
 
 	const d = request.data.markers;
 	const count = $derived(countSelectedMarkers(d));

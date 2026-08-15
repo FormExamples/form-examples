@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { gradeNews2 } from '$lib/engine/news2-grader';
-	import { steps, TOTAL_STEPS } from '$lib/config/steps';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { gradeNews2 } from '#lib/engine/news2-grader.js';
+	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step1Context from '$lib/components/steps/Step1Context.svelte';
-	import Step2Identification from '$lib/components/steps/Step2Identification.svelte';
-	import Step3Respiration from '$lib/components/steps/Step3Respiration.svelte';
-	import Step4OxygenSaturation from '$lib/components/steps/Step4OxygenSaturation.svelte';
-	import Step5OxygenSupport from '$lib/components/steps/Step5OxygenSupport.svelte';
-	import Step6BloodPressure from '$lib/components/steps/Step6BloodPressure.svelte';
-	import Step7Pulse from '$lib/components/steps/Step7Pulse.svelte';
-	import Step8Consciousness from '$lib/components/steps/Step8Consciousness.svelte';
-	import Step9Temperature from '$lib/components/steps/Step9Temperature.svelte';
-	import Step10Review from '$lib/components/steps/Step10Review.svelte';
+	import Step1Context from '#lib/components/steps/Step1Context.svelte';
+	import Step2Identification from '#lib/components/steps/Step2Identification.svelte';
+	import Step3Respiration from '#lib/components/steps/Step3Respiration.svelte';
+	import Step4OxygenSaturation from '#lib/components/steps/Step4OxygenSaturation.svelte';
+	import Step5OxygenSupport from '#lib/components/steps/Step5OxygenSupport.svelte';
+	import Step6BloodPressure from '#lib/components/steps/Step6BloodPressure.svelte';
+	import Step7Pulse from '#lib/components/steps/Step7Pulse.svelte';
+	import Step8Consciousness from '#lib/components/steps/Step8Consciousness.svelte';
+	import Step9Temperature from '#lib/components/steps/Step9Temperature.svelte';
+	import Step10Review from '#lib/components/steps/Step10Review.svelte';
 
 	const plural = 'national-early-warning-score-2s';
 

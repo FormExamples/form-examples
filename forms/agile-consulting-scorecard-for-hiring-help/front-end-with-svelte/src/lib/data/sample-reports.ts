@@ -1,6 +1,6 @@
-import type { AgileConsultingScorecardAssessment, Band } from '$lib/engine/types';
-import { gradeScorecard } from '$lib/engine/score-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AgileConsultingScorecardAssessment, Band } from '#lib/engine/types.js';
+import { gradeScorecard } from '#lib/engine/score-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample scorecard: an identifier plus the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { store } from '$lib/stores/indicators.svelte';
-	import { CATEGORIES, PERFORMANCE_INDICATORS, TOTAL_INDICATORS } from '$lib/config/indicators';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { store } from '#lib/stores/indicators.svelte.js';
+	import { CATEGORIES, PERFORMANCE_INDICATORS, TOTAL_INDICATORS } from '#lib/config/indicators.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

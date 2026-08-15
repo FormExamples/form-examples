@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, RiskBand, ScoreVariant } from '$lib/engine/types';
-import { calculateCurb65Grade } from '$lib/engine/curb65-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, RiskBand, ScoreVariant } from '#lib/engine/types.js';
+import { calculateCurb65Grade } from '#lib/engine/curb65-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

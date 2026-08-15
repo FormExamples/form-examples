@@ -1,42 +1,42 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { STEPS } from '$lib/config/steps';
-	import { TOTAL_ITEMS } from '$lib/config/items';
-	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { STEPS } from '#lib/config/steps.js';
+	import { TOTAL_ITEMS } from '#lib/config/items.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '$lib/components/ui/Form.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Progress from '$lib/components/ui/Progress.svelte';
-	import StepList from '$lib/components/ui/StepList.svelte';
-	import StepListItem from '$lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
+	import Form from '#lib/components/ui/Form.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Progress from '#lib/components/ui/Progress.svelte';
+	import StepList from '#lib/components/ui/StepList.svelte';
+	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
-	import Step01 from '$lib/components/steps/Step01InspectionDetails.svelte';
-	import Step02 from '$lib/components/steps/Step02Opd.svelte';
-	import Step03 from '$lib/components/steps/Step03Causality.svelte';
-	import Step04 from '$lib/components/steps/Step04Dispensary.svelte';
-	import Step05 from '$lib/components/steps/Step05HrAttendance.svelte';
-	import Step06 from '$lib/components/steps/Step06Ambulance.svelte';
-	import Step07 from '$lib/components/steps/Step07DiagnosticFacility.svelte';
-	import Step08 from '$lib/components/steps/Step08Store.svelte';
-	import Step09 from '$lib/components/steps/Step09OtIcu.svelte';
-	import Step10 from '$lib/components/steps/Step10LabourRoom.svelte';
-	import Step11 from '$lib/components/steps/Step11Wards.svelte';
-	import Step12 from '$lib/components/steps/Step12HouseKeeping.svelte';
-	import Step13 from '$lib/components/steps/Step13WaterSupply.svelte';
-	import Step14 from '$lib/components/steps/Step14ElectricSupply.svelte';
-	import Step15 from '$lib/components/steps/Step15Diet.svelte';
-	import Step16 from '$lib/components/steps/Step16HospitalSignage.svelte';
-	import Step17 from '$lib/components/steps/Step17FireFightingEquipment.svelte';
-	import Step18 from '$lib/components/steps/Step18PatientFeedback.svelte';
-	import Step19 from '$lib/components/steps/Step19Mortuary.svelte';
-	import Step20 from '$lib/components/steps/Step20HospitalFurniture.svelte';
-	import Step21 from '$lib/components/steps/Step21WasteManagement.svelte';
-	import Step22 from '$lib/components/steps/Step22InfectionControl.svelte';
-	import Step23 from '$lib/components/steps/Step23RecordRoom.svelte';
-	import Step24 from '$lib/components/steps/Step24Summary.svelte';
+	import Step01 from '#lib/components/steps/Step01InspectionDetails.svelte';
+	import Step02 from '#lib/components/steps/Step02Opd.svelte';
+	import Step03 from '#lib/components/steps/Step03Causality.svelte';
+	import Step04 from '#lib/components/steps/Step04Dispensary.svelte';
+	import Step05 from '#lib/components/steps/Step05HrAttendance.svelte';
+	import Step06 from '#lib/components/steps/Step06Ambulance.svelte';
+	import Step07 from '#lib/components/steps/Step07DiagnosticFacility.svelte';
+	import Step08 from '#lib/components/steps/Step08Store.svelte';
+	import Step09 from '#lib/components/steps/Step09OtIcu.svelte';
+	import Step10 from '#lib/components/steps/Step10LabourRoom.svelte';
+	import Step11 from '#lib/components/steps/Step11Wards.svelte';
+	import Step12 from '#lib/components/steps/Step12HouseKeeping.svelte';
+	import Step13 from '#lib/components/steps/Step13WaterSupply.svelte';
+	import Step14 from '#lib/components/steps/Step14ElectricSupply.svelte';
+	import Step15 from '#lib/components/steps/Step15Diet.svelte';
+	import Step16 from '#lib/components/steps/Step16HospitalSignage.svelte';
+	import Step17 from '#lib/components/steps/Step17FireFightingEquipment.svelte';
+	import Step18 from '#lib/components/steps/Step18PatientFeedback.svelte';
+	import Step19 from '#lib/components/steps/Step19Mortuary.svelte';
+	import Step20 from '#lib/components/steps/Step20HospitalFurniture.svelte';
+	import Step21 from '#lib/components/steps/Step21WasteManagement.svelte';
+	import Step22 from '#lib/components/steps/Step22InfectionControl.svelte';
+	import Step23 from '#lib/components/steps/Step23RecordRoom.svelte';
+	import Step24 from '#lib/components/steps/Step24Summary.svelte';
 
 	// 24 steps, auto-wrapped: inspection details (1), one per hospital area
 	// (2-23, 22 areas), summary & sign-off (24).

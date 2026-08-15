@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	readinessBandLabel,
 	priorityLabel,
@@ -8,8 +8,8 @@ import {
 	sexLabel,
 	ageBandLabel,
 	asaStatusLabel
-} from '$lib/engine/utils';
-import { aldreteValueLabel } from '$lib/engine/pacu-rules';
+} from '#lib/engine/utils.js';
+import { aldreteValueLabel } from '#lib/engine/pacu-rules.js';
 
 export function buildPdfDocument(data: AssessmentData, result: GradingResult): TDocumentDefinitions {
 	const aldreteRows = [

@@ -2,10 +2,10 @@
 	// Shared provider-details sub-form used by Step 1 (requesting) and Step 2
 	// (receiving). The `provider` object is a live `$state` proxy reference from
 	// the store, so binding its fields mutates the store directly.
-	import type { ProviderDetails } from '$lib/engine/types';
-	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
+	import type { ProviderDetails } from '#lib/engine/types.js';
+	import Field from '#lib/components/ui/Field.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
 
 	let {
 		provider,

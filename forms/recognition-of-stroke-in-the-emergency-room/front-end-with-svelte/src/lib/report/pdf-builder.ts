@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { AssessmentData, GradingResult } from '$lib/engine/types';
+import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import {
 	bandLabel,
 	priorityLabel,
@@ -9,7 +9,7 @@ import {
 	sexLabel,
 	ageBandLabel,
 	hypoglycaemiaCorrectedLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 /** The seven scored criteria, in report order, with their answer and point. */
 function criteriaRows(data: AssessmentData, result: GradingResult) {

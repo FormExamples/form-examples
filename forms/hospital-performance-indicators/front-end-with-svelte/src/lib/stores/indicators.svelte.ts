@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import type { HospitalPerformanceIndicators, IndicatorsSummaryResult } from '$lib/engine/types.js';
-import { createEmptyIndicators } from '$lib/engine/factory.js';
-import { summariseIndicators } from '$lib/engine/summary.js';
-import { TOTAL_STEPS } from '$lib/config/steps.js';
-import { TOTAL_INDICATORS } from '$lib/config/indicators.js';
+import { browser } from '$app/env';
+import type { HospitalPerformanceIndicators, IndicatorsSummaryResult } from '#lib/engine/types.js';
+import { createEmptyIndicators } from '#lib/engine/factory.js';
+import { summariseIndicators } from '#lib/engine/summary.js';
+import { TOTAL_STEPS } from '#lib/config/steps.js';
+import { TOTAL_INDICATORS } from '#lib/config/indicators.js';
 
 /** localStorage draft key for a given report id (defaults to `new`). */
 function storageKey(id: string): string {
@@ -31,9 +31,9 @@ class IndicatorsStore {
   result = $derived<IndicatorsSummaryResult>(summariseIndicators(this.data));
 
   /** Crude completeness measure for the Lily Progress bar (0-100). */
-  percentComplete = $derived(
-    TOTAL_INDICATORS === 0 ? 0 : Math.round((this.result.reportedCount / TOTAL_INDICATORS) * 100),
-  );
+  percentComplete = $derived(TOTAL_INDICATORS === 0
+    ? 0
+    : Math.round(this.result.reportedCount / TOTAL_INDICATORS * 100));
 
   constructor() {
     if (browser) {

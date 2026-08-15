@@ -1,6 +1,6 @@
-import type { AssessmentData, CprRecommendation, Status } from '$lib/engine/types';
-import { calculateRespectGrade } from '$lib/engine/respect-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CprRecommendation, Status } from '#lib/engine/types.js';
+import { calculateRespectGrade } from '#lib/engine/respect-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample plan: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

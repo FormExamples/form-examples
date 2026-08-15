@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { HearingResult, GradingResult } from '$lib/engine/types';
+import type { HearingResult, GradingResult } from '#lib/engine/types.js';
 import {
 	resultClassificationLabel,
 	abnormalitySeverityLabel,
@@ -8,7 +8,7 @@ import {
 	reportStatusLabel,
 	hearingLossTypeLabel,
 	hearingLossSeverityLabel
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 type Margin = [number, number, number, number];
 

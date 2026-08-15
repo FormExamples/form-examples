@@ -1,12 +1,12 @@
-import { createDefaultApplication } from '$lib/stores/lpa.svelte';
-import { calculateLpaValidity } from '$lib/engine/composite-validator';
+import { createDefaultApplication } from '#lib/stores/lpa.svelte.js';
+import { calculateLpaValidity } from '#lib/engine/composite-validator.js';
 import type {
 	Attorney,
 	CertificateProvider,
 	LpaApplication,
 	Signature,
 	ValidityStatus
-} from '$lib/engine/types';
+} from '#lib/engine/types.js';
 
 /** A sample LP1H application keyed by its registration reference. */
 export interface SampleLpa {

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { application } from '$lib/stores/application.svelte';
-	import { conditionLabel } from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { application } from '#lib/stores/application.svelte.js';
+	import { conditionLabel } from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'united-kingdom-nhs-england-medical-exemption-certificates';
 

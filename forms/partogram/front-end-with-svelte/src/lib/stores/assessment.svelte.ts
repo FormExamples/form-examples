@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import type { AssessmentData, GradingResult, Observation } from '$lib/engine/types';
+import { browser } from '$app/env';
+import type { AssessmentData, GradingResult, Observation } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given record id (defaults to `new`). */
 function storageKey(id: string): string {
@@ -138,8 +138,8 @@ function deepAssign(target: Record<string, unknown>, source: Record<string, unkn
 		const tv = target[key];
 		if (Array.isArray(sv)) {
 			// Reuse the existing array instance when present; otherwise create one.
-			const arr = Array.isArray(tv) ? (tv as unknown[]) : (target[key] = [] as unknown[]);
-			arr.splice(0, arr.length, ...(sv as unknown[]));
+			const arr = Array.isArray(tv) ? tv as unknown[] : target[key] = [] as unknown[];
+			arr.splice(0, arr.length, ...sv as unknown[]);
 		} else if (sv && typeof sv === 'object' && tv && typeof tv === 'object' && !Array.isArray(tv)) {
 			deepAssign(tv as Record<string, unknown>, sv as Record<string, unknown>);
 		} else {

@@ -4,16 +4,16 @@
 	// with a mandatory reason when it differs, and always shows every fired
 	// safety flag — flags are never filtered by the override. See
 	// doc/safety-case-notes.md.
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import { OPTIONS } from '$lib/config/options';
-	import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '$lib/engine/grader';
-	import { titleCase } from '$lib/engine/utils';
-	import { evaluationStore } from '$lib/stores/evaluation.svelte';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { OPTIONS } from '#lib/config/options.js';
+	import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '#lib/engine/grader.js';
+	import { titleCase } from '#lib/engine/utils.js';
+	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 
 	const d = evaluationStore.data;
 	const result = $derived(evaluationStore.result);

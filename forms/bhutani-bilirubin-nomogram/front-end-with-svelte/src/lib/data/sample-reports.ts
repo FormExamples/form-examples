@@ -1,6 +1,6 @@
-import type { AssessmentData, CareSetting, RiskZone } from '$lib/engine/types';
-import { gradeBhutani } from '$lib/engine/bhutani-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, CareSetting, RiskZone } from '#lib/engine/types.js';
+import { gradeBhutani } from '#lib/engine/bhutani-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { linguisticCriteria, clinicalCriteria, LINGUISTIC_ANCHORS, CLINICAL_ANCHORS } from '$lib/engine/rules';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import type { LinguisticRating, ClinicalIndicators } from '$lib/engine/types';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { linguisticCriteria, clinicalCriteria, LINGUISTIC_ANCHORS, CLINICAL_ANCHORS } from '#lib/engine/rules.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import type { LinguisticRating, ClinicalIndicators } from '#lib/engine/types.js';
 
 	const rp1 = assessment.data.linguisticRolePlay1;
 	const rp2 = assessment.data.linguisticRolePlay2;

@@ -2,9 +2,9 @@ import type {
 	CompositePriority,
 	IssueCategory,
 	IssueTrackerAssessment
-} from '$lib/engine/types';
-import { gradeIssue } from '$lib/engine/composite-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { gradeIssue } from '#lib/engine/composite-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample issue: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

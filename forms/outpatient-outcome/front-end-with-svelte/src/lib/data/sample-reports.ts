@@ -1,6 +1,6 @@
-import type { AssessmentData, DomainGrade } from '$lib/engine/types';
-import { gradeOOCG } from '$lib/engine/oocg-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+import type { AssessmentData, DomainGrade } from '#lib/engine/types.js';
+import { gradeOOCG } from '#lib/engine/oocg-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample outcome report: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

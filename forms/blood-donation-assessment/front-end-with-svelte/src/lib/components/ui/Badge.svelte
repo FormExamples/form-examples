@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { EligibilityStatus } from '$lib/engine/types';
-	import { eligibilityShortLabel, eligibilityColor } from '$lib/engine/utils';
+	import type { EligibilityStatus } from '#lib/engine/types.js';
+	import { eligibilityShortLabel, eligibilityColor } from '#lib/engine/utils.js';
 
 	let {
 		status

@@ -4,9 +4,9 @@ import type {
 	GfrCategory,
 	KdigoRiskZone,
 	ReviewStatus
-} from '$lib/engine/types';
-import { review } from '$lib/engine/ckd-review-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { review } from '#lib/engine/ckd-review-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample review: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

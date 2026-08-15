@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { sampleAssessments } from '$lib/data/sample-reports';
-	import { getRecommendedActions } from '$lib/engine/recommendations';
-	import { bandColor, bandLabel, recommendationCopy } from '$lib/engine/utils';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
+	import { getRecommendedActions } from '#lib/engine/recommendations.js';
+	import { bandColor, bandLabel, recommendationCopy } from '#lib/engine/utils.js';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const plural = 'agile-consulting-scorecards-for-hiring-help';
 

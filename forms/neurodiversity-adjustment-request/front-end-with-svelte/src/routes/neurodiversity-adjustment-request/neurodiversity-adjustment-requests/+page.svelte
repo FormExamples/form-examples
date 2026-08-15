@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleRequestRows } from '$lib/data/sample-reports';
+	import { sampleRequestRows } from '#lib/data/sample-reports.js';
 	import {
 		eligibilityLabel,
 		impactLabel,
 		priorityTierLabel,
 		recommendationLabel,
 		statusLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	let priorityFilter = $state('');
 	let recommendationFilter = $state('');
@@ -26,7 +26,7 @@
 	// Request overview — rolls up the rows currently in view (reflects filters).
 	const cards = $derived.by(() => {
 		const total = rows.length;
-		const pct = (n: number) => (total === 0 ? 0 : Math.round((n / total) * 100));
+		const pct = (n: number) => total === 0 ? 0 : Math.round(n / total * 100);
 		const c = (pred: (r: (typeof rows)[number]) => boolean) => rows.filter(pred).length;
 		const covered = pct(c((r) => r.eligibilityBand === 'likely-covered'));
 		const highRisk = pct(c((r) => r.impactBand === 'high-risk'));
@@ -60,7 +60,7 @@
 	}
 	$effect(() => {
 		if (!browser) return;
-		const update = () => (isDark = computeDark());
+		const update = () => isDark = computeDark();
 		update();
 		const obs = new MutationObserver(() => setTimeout(update, 120));
 		obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -74,15 +74,34 @@
 		{ id: 'id', header: 'Request', width: 130 },
 		{ id: 'workerName', header: 'Worker', flexgrow: 2, sort: true },
 		{ id: 'workerJobTitle', header: 'Job title', flexgrow: 2 },
-		{ id: 'status', header: 'Status', width: 130, template: (v: string) => statusLabel(v as never) },
+		{
+			id: 'status',
+			header: 'Status',
+			width: 130,
+			template: (v: string) => statusLabel(v as never)
+		},
+
 		{
 			id: 'eligibilityBand',
 			header: 'Eligibility',
 			width: 140,
 			template: (v: string) => eligibilityLabel(v as never)
 		},
-		{ id: 'impactBand', header: 'Impact', width: 110, template: (v: string) => impactLabel(v as never) },
-		{ id: 'completenessPercent', header: 'Complete', width: 100, template: (v: number) => `${v}%` },
+
+		{
+			id: 'impactBand',
+			header: 'Impact',
+			width: 110,
+			template: (v: string) => impactLabel(v as never)
+		},
+
+		{
+			id: 'completenessPercent',
+			header: 'Complete',
+			width: 100,
+			template: (v: number) => `${v}%`
+		},
+
 		{
 			id: 'priorityTier',
 			header: 'Priority',
@@ -154,11 +173,10 @@
 		</div>
 	</section>
 
-	<div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-		<GridTheme>
-			<Grid data={rows} {columns} {init} />
-		</GridTheme>
-	</div>
+	<div
+		class="overflow-hidden rounded-xl border border-base-300"
+		style="height: 600px;"
+	><GridTheme><Grid data={rows} columns={columns} init={init} /></GridTheme></div>
 
 	<p class="mt-4 text-sm text-base-content/60">{rows.length} requests</p>
 </main>

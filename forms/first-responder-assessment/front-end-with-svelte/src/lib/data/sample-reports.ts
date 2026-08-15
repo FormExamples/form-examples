@@ -3,9 +3,9 @@ import type {
 	CompetencyLevel,
 	FitnessDecision,
 	RiskLevel
-} from '$lib/engine/types';
-import { calculateResponderGrade } from '$lib/engine/responder-grader';
-import { createDefaultAssessment } from '$lib/stores/assessment.svelte';
+} from '#lib/engine/types.js';
+import { calculateResponderGrade } from '#lib/engine/responder-grader.js';
+import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 
 /** A sample assessment: an identifier and the full data the engine grades. */
 export interface SampleAssessment {

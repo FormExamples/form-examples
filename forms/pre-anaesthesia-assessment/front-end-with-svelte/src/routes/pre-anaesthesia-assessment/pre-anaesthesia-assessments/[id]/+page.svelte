@@ -1,39 +1,39 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { store } from '$lib/stores/assessment.svelte.js';
-  import { sampleAssessments } from '$lib/data/sample-reports';
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import { sampleAssessments } from '#lib/data/sample-reports.js';
 
   // Lily Svelte headless contract — local shape-equivalent components.
-  import Form from '$lib/components/ui/Form.svelte';
-  import Progress from '$lib/components/ui/Progress.svelte';
-  import StepList from '$lib/components/ui/StepList.svelte';
-  import StepListItem from '$lib/components/ui/StepListItem.svelte';
-  import ErrorSummary from '$lib/components/ui/ErrorSummary.svelte';
-  import Button from '$lib/components/ui/Button.svelte';
+  import Form from '#lib/components/ui/Form.svelte';
+  import Progress from '#lib/components/ui/Progress.svelte';
+  import StepList from '#lib/components/ui/StepList.svelte';
+  import StepListItem from '#lib/components/ui/StepListItem.svelte';
+  import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+  import Button from '#lib/components/ui/Button.svelte';
 
   // 16 step components.
-  import Step01 from '$lib/components/steps/Step01Clinician.svelte';
-  import Step02 from '$lib/components/steps/Step02Patient.svelte';
-  import Step03 from '$lib/components/steps/Step03Vitals.svelte';
-  import Step04 from '$lib/components/steps/Step04Airway.svelte';
-  import Step05 from '$lib/components/steps/Step05Cardiovascular.svelte';
-  import Step06 from '$lib/components/steps/Step06Respiratory.svelte';
-  import Step07 from '$lib/components/steps/Step07Neurological.svelte';
-  import Step08 from '$lib/components/steps/Step08RenalHepatic.svelte';
-  import Step09 from '$lib/components/steps/Step09Haematology.svelte';
-  import Step10 from '$lib/components/steps/Step10Endocrine.svelte';
-  import Step11 from '$lib/components/steps/Step11Gastrointestinal.svelte';
-  import Step12 from '$lib/components/steps/Step12Musculoskeletal.svelte';
-  import Step13 from '$lib/components/steps/Step13Medications.svelte';
-  import Step14 from '$lib/components/steps/Step14FunctionalCapacity.svelte';
-  import Step15 from '$lib/components/steps/Step15AnaesthesiaPlan.svelte';
-  import Step16 from '$lib/components/steps/Step16Summary.svelte';
-  import Step17 from '$lib/components/steps/Step17ProformaHistory.svelte';
-  import Step18 from '$lib/components/steps/Step18PastMedicalHistoryProforma.svelte';
-  import Step19 from '$lib/components/steps/Step19AirwayVitalsExamProforma.svelte';
-  import Step20 from '$lib/components/steps/Step20InvestigationsProforma.svelte';
-  import Step21 from '$lib/components/steps/Step21RiskFactorsAndPlanProforma.svelte';
+  import Step01 from '#lib/components/steps/Step01Clinician.svelte';
+  import Step02 from '#lib/components/steps/Step02Patient.svelte';
+  import Step03 from '#lib/components/steps/Step03Vitals.svelte';
+  import Step04 from '#lib/components/steps/Step04Airway.svelte';
+  import Step05 from '#lib/components/steps/Step05Cardiovascular.svelte';
+  import Step06 from '#lib/components/steps/Step06Respiratory.svelte';
+  import Step07 from '#lib/components/steps/Step07Neurological.svelte';
+  import Step08 from '#lib/components/steps/Step08RenalHepatic.svelte';
+  import Step09 from '#lib/components/steps/Step09Haematology.svelte';
+  import Step10 from '#lib/components/steps/Step10Endocrine.svelte';
+  import Step11 from '#lib/components/steps/Step11Gastrointestinal.svelte';
+  import Step12 from '#lib/components/steps/Step12Musculoskeletal.svelte';
+  import Step13 from '#lib/components/steps/Step13Medications.svelte';
+  import Step14 from '#lib/components/steps/Step14FunctionalCapacity.svelte';
+  import Step15 from '#lib/components/steps/Step15AnaesthesiaPlan.svelte';
+  import Step16 from '#lib/components/steps/Step16Summary.svelte';
+  import Step17 from '#lib/components/steps/Step17ProformaHistory.svelte';
+  import Step18 from '#lib/components/steps/Step18PastMedicalHistoryProforma.svelte';
+  import Step19 from '#lib/components/steps/Step19AirwayVitalsExamProforma.svelte';
+  import Step20 from '#lib/components/steps/Step20InvestigationsProforma.svelte';
+  import Step21 from '#lib/components/steps/Step21RiskFactorsAndPlanProforma.svelte';
 
   const stepComponents = [
     Step01, Step02, Step03, Step04, Step05, Step06, Step07, Step08,

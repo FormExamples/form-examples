@@ -1,11 +1,11 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { Lpa, ValidationResult } from '$lib/types.js';
+import type { Lpa, ValidationResult } from '#lib/types.js';
 import {
 	decisionModeLabel,
 	whenAttorneysCanActLabel,
 	bandLabel,
 	compositeRiskLabel
-} from '$lib/validator/labels.js';
+} from '#lib/validator/labels.js';
 
 function fullName(p: { title: string; firstNames: string; lastName: string }): string {
 	return [p.title, p.firstNames, p.lastName].filter((s) => s && s.length > 0).join(' ').trim();
