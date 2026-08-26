@@ -15,12 +15,20 @@
  * engine that stamps its result with `new Date()` is still coverable — its
  * score is deterministic even though the stamp is not.
  *
+ * A persona may carry an `options` object, passed verbatim as the grader's
+ * second argument. This exists to pin an injected clock: family engines whose
+ * whole OUTPUT derives from "today" (the waiting-list cards' waiting-time
+ * bands, for instance) accept `{ todayIso }` there — without pinning it the
+ * recorded expected would rot daily, so those personas set
+ * `"options": { "todayIso": "2026-08-26" }`.
+ *
  * Persona file: forms/<slug>/examples/personas.json
  *   {
  *     "engine": "front-end-with-html",
  *     "graderHint": "calculateApgarGrade",     // optional: pin the entry fn
  *     "personas": [
  *       { "name": "reassuring", "description": "...", "state": { ... },
+ *         "options": { "todayIso": "2026-08-26" },  // optional 2nd grader arg
  *         "expected": { ... } }                 // filled by --update
  *     ]
  *   }
@@ -96,7 +104,7 @@ async function runForm(slug, update, problems) {
   let status = 'PASS';
   for (const p of doc.personas || []) {
     let result;
-    try { result = grader(JSON.parse(JSON.stringify(p.state))); }
+    try { result = grader(JSON.parse(JSON.stringify(p.state)), p.options && JSON.parse(JSON.stringify(p.options))); }
     catch (e) { problems.push(`${slug}/${p.name}: grader threw: ${String(e.message).split('\n')[0]}`); status = 'FAIL'; continue; }
     if (update) {
       p.expected = stripVolatile(result);

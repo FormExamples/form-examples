@@ -695,10 +695,21 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       roll out mechanically with a `--check` tool (Conventions promise).
 - [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
       at `/api/openapi.yaml` (second half of serve-OpenAPI).
-- [ ] Personas: resume batches from 109 verified toward all scorable forms
-      (unblocked by Phase 8 loader fix); then `example-invalid.json` +
-      wizard-blocks-submission E2E assertion; API transcripts; FHIR bundles
-      for personas; site examples gallery.
+- [ ] Personas: **165/355 verified** (was 109). 2026-08-26: the whole
+      `*-waiting-list-card` family (56 forms) done in one batch — the family
+      engine is template-identical (2 comment lines differ), so three RTT
+      scenarios (within-target / approaching-breach+interpreter /
+      52-week-breach+harm-review) were authored once and specialized per
+      specialty; `bin/test-personas` gained per-persona `options` so the
+      family's clock-derived grader pins `todayIso` (without it the oracle
+      rots daily — the reason this family was never covered). Remaining
+      frontier: 39 `*-test-request` + 37 `*-test-result` (NOT
+      template-identical — per-form panels/rules, needs real per-form
+      batches) and 39 bespoke singles (incl. cardiology-request/response,
+      inpatient-clinical-note, medical-operation-note); 76 forms are
+      engine-SKIP and need discovery hints first. Then
+      `example-invalid.json` + wizard-blocks-submission E2E assertion; API
+      transcripts; FHIR bundles for personas; site examples gallery.
 - [ ] Latent: snake_case↔camelCase API contract (283 crates + snapshot
       regen); i18n past the Welsh pilot.
 

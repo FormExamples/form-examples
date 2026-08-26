@@ -1,0 +1,336 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateWaitingTimeStatus",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The clock is pinned per persona via options.todayIso (the grader's second argument) because every output band derives from it.",
+  "personas": [
+    {
+      "name": "routine-within-target",
+      "description": "Routine P4 cardiology referral 12 weeks into an 18-week target with a booked clinic slot — inside target, no flags expected.",
+      "options": {
+        "todayIso": "2026-08-26"
+      },
+      "state": {
+        "status": "active",
+        "entryDate": "2026-06-01",
+        "entryTime": "09:30",
+        "practitioner": {
+          "name": "Dr Priya Raman",
+          "role": "consultant",
+          "registrationBody": "GMC",
+          "registrationNumber": "7012345",
+          "organisationName": "Sample NHS Foundation Trust",
+          "organisationOdsCode": "RXX01",
+          "siteName": "City General Hospital",
+          "email": "priya.raman@example.nhs.uk",
+          "phone": "020 7946 0100"
+        },
+        "patient": {
+          "name": "Margaret Okafor",
+          "birthDate": "1958-03-14",
+          "sex": "female",
+          "unitedKingdomNhsNumber": "943 476 5919",
+          "email": "m.okafor@example.com",
+          "phone": "07700 900123",
+          "postalAddressAsFullText": "12 Larch Way, Leeds",
+          "postcode": "LS1 4AP",
+          "preferredLanguageAsIso6391": "en",
+          "interpreterRequired": "no",
+          "accessibilityNeeds": "",
+          "preferredContactChannel": "email"
+        },
+        "referral": {
+          "referralSource": "general-practitioner",
+          "referralDate": "2026-05-28",
+          "referralLetterReference": "REF-2026-04481",
+          "reasonForReferral": "Routine cardiology outpatient assessment",
+          "presentingCondition": "Stable symptoms, managed in primary care",
+          "icd10Code": "",
+          "snomedCtCode": "",
+          "suspectedCancer": "no"
+        },
+        "waitingList": {
+          "listName": "Cardiology outpatients",
+          "specialty": "cardiology",
+          "subSpecialty": "",
+          "procedureDescription": "New-patient cardiology clinic assessment",
+          "opcs4Code": "",
+          "clinicalPriority": "P4",
+          "rttClockStartDate": "2026-06-01",
+          "expectedProcedureType": "outpatient-consultation",
+          "expectedWaitWeeks": 14
+        },
+        "appointment": {
+          "appointmentDate": "2026-09-22",
+          "appointmentTime": "10:15",
+          "durationMinutes": 30,
+          "appointmentType": "first-outpatient",
+          "siteName": "City General Hospital",
+          "siteAddress": "1 Hospital Rd, Leeds",
+          "clinicName": "Cardiology Clinic A",
+          "room": "OPD 3",
+          "clinicianName": "Dr Priya Raman",
+          "clinicianTeam": "Cardiology team 1",
+          "status": "scheduled",
+          "travelNotes": "",
+          "accessNotes": ""
+        },
+        "communication": {
+          "consentToReminders": "yes",
+          "communicationNotes": ""
+        },
+        "signoff": {
+          "additionalNotes": "",
+          "signedAt": null
+        }
+      },
+      "expected": {
+        "waitingTimeStatus": "within-target",
+        "clinicalPriority": "P4",
+        "targetWaitWeeks": 18,
+        "daysWaited": 86,
+        "weeksWaited": 12.3,
+        "daysToTarget": 40,
+        "daysToBreach": 40,
+        "daysToAppointment": 27,
+        "firedRules": [
+          {
+            "ruleId": "R-WTS-WITHIN-001",
+            "instrument": "waiting-time-status",
+            "band": "within-target",
+            "category": "within-target",
+            "description": "Patient is within the P4 target and the 18-week RTT standard."
+          }
+        ],
+        "additionalFlags": [],
+        "graderNotes": ""
+      }
+    },
+    {
+      "name": "urgent-approaching-target",
+      "description": "Urgent P2 cardiology referral 3 weeks into a 4-week target, interpreter needed but no access arrangements recorded — approaching target with actionable flags.",
+      "options": {
+        "todayIso": "2026-08-26"
+      },
+      "state": {
+        "status": "active",
+        "entryDate": "2026-08-05",
+        "entryTime": "09:30",
+        "practitioner": {
+          "name": "Dr Priya Raman",
+          "role": "consultant",
+          "registrationBody": "GMC",
+          "registrationNumber": "7012345",
+          "organisationName": "Sample NHS Foundation Trust",
+          "organisationOdsCode": "RXX01",
+          "siteName": "City General Hospital",
+          "email": "priya.raman@example.nhs.uk",
+          "phone": "020 7946 0100"
+        },
+        "patient": {
+          "name": "Tomasz Nowak",
+          "birthDate": "1971-11-02",
+          "sex": "male",
+          "unitedKingdomNhsNumber": "943 476 5920",
+          "email": "",
+          "phone": "07700 900456",
+          "postalAddressAsFullText": "8 Mill Lane, Bradford",
+          "postcode": "BD1 2AB",
+          "preferredLanguageAsIso6391": "pl",
+          "interpreterRequired": "yes",
+          "accessibilityNeeds": "",
+          "preferredContactChannel": "phone"
+        },
+        "referral": {
+          "referralSource": "emergency-department",
+          "referralDate": "2026-08-04",
+          "referralLetterReference": "REF-2026-07712",
+          "reasonForReferral": "Urgent cardiology review after acute presentation",
+          "presentingCondition": "Symptoms progressing over the last month",
+          "icd10Code": "",
+          "snomedCtCode": "",
+          "suspectedCancer": "no"
+        },
+        "waitingList": {
+          "listName": "Cardiology urgent list",
+          "specialty": "cardiology",
+          "subSpecialty": "",
+          "procedureDescription": "Urgent cardiology assessment",
+          "opcs4Code": "",
+          "clinicalPriority": "P2",
+          "rttClockStartDate": "2026-08-05",
+          "expectedProcedureType": "outpatient-consultation",
+          "expectedWaitWeeks": 4
+        },
+        "appointment": {
+          "appointmentDate": "2026-09-01",
+          "appointmentTime": "08:45",
+          "durationMinutes": 30,
+          "appointmentType": "first-outpatient",
+          "siteName": "City General Hospital",
+          "siteAddress": "1 Hospital Rd, Leeds",
+          "clinicName": "Cardiology Urgent Clinic",
+          "room": "OPD 1",
+          "clinicianName": "Dr Priya Raman",
+          "clinicianTeam": "Cardiology team 1",
+          "status": "scheduled",
+          "travelNotes": "",
+          "accessNotes": ""
+        },
+        "communication": {
+          "consentToReminders": "yes",
+          "communicationNotes": "Polish interpreter to be booked"
+        },
+        "signoff": {
+          "additionalNotes": "",
+          "signedAt": null
+        }
+      },
+      "expected": {
+        "waitingTimeStatus": "approaching-breach",
+        "clinicalPriority": "P2",
+        "targetWaitWeeks": 4,
+        "daysWaited": 21,
+        "weeksWaited": 3,
+        "daysToTarget": 7,
+        "daysToBreach": 105,
+        "daysToAppointment": 6,
+        "firedRules": [
+          {
+            "ruleId": "R-WTS-APPROACH-001",
+            "instrument": "waiting-time-status",
+            "band": "approaching-breach",
+            "category": "approaching-target",
+            "description": "Patient is within 4 weeks of their P2 target or the 18-week RTT standard."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-INTERPRETER-001",
+            "category": "interpreter-required",
+            "priority": "medium",
+            "description": "Patient requires an interpreter but no booking is recorded in the appointment access notes.",
+            "suggestedAction": "Book the interpreter and record the booking reference in the appointment access notes."
+          }
+        ],
+        "graderNotes": ""
+      }
+    },
+    {
+      "name": "long-wait-breach",
+      "description": "P3 cardiology referral whose RTT clock started 56 weeks ago with no appointment booked — 52-week long-wait breach, harm review and booking flags expected.",
+      "options": {
+        "todayIso": "2026-08-26"
+      },
+      "state": {
+        "status": "active",
+        "entryDate": "2025-08-01",
+        "entryTime": "09:30",
+        "practitioner": {
+          "name": "Dr Priya Raman",
+          "role": "consultant",
+          "registrationBody": "GMC",
+          "registrationNumber": "7012345",
+          "organisationName": "Sample NHS Foundation Trust",
+          "organisationOdsCode": "RXX01",
+          "siteName": "City General Hospital",
+          "email": "priya.raman@example.nhs.uk",
+          "phone": "020 7946 0100"
+        },
+        "patient": {
+          "name": "Derek Hughes",
+          "birthDate": "1949-06-27",
+          "sex": "male",
+          "unitedKingdomNhsNumber": "943 476 5921",
+          "email": "",
+          "phone": "",
+          "postalAddressAsFullText": "3 Orchard Close, York",
+          "postcode": "YO1 7HH",
+          "preferredLanguageAsIso6391": "en",
+          "interpreterRequired": "no",
+          "accessibilityNeeds": "Wheelchair user",
+          "preferredContactChannel": ""
+        },
+        "referral": {
+          "referralSource": "general-practitioner",
+          "referralDate": "2025-07-28",
+          "referralLetterReference": "REF-2025-09934",
+          "reasonForReferral": "Cardiology assessment for persistent symptoms",
+          "presentingCondition": "Long-standing condition awaiting specialist review",
+          "icd10Code": "",
+          "snomedCtCode": "",
+          "suspectedCancer": "no"
+        },
+        "waitingList": {
+          "listName": "Cardiology outpatients",
+          "specialty": "cardiology",
+          "subSpecialty": "",
+          "procedureDescription": "New-patient cardiology clinic assessment",
+          "opcs4Code": "",
+          "clinicalPriority": "P3",
+          "rttClockStartDate": "2025-08-01",
+          "expectedProcedureType": "outpatient-consultation",
+          "expectedWaitWeeks": 12
+        },
+        "appointment": {
+          "appointmentDate": null,
+          "appointmentTime": null,
+          "durationMinutes": null,
+          "appointmentType": "",
+          "siteName": "",
+          "siteAddress": "",
+          "clinicName": "",
+          "room": "",
+          "clinicianName": "",
+          "clinicianTeam": "",
+          "status": "scheduled",
+          "travelNotes": "",
+          "accessNotes": ""
+        },
+        "communication": {
+          "consentToReminders": "",
+          "communicationNotes": ""
+        },
+        "signoff": {
+          "additionalNotes": "",
+          "signedAt": null
+        }
+      },
+      "expected": {
+        "waitingTimeStatus": "long-wait",
+        "clinicalPriority": "P3",
+        "targetWaitWeeks": 12,
+        "daysWaited": 390,
+        "weeksWaited": 55.7,
+        "daysToTarget": -306,
+        "daysToBreach": -264,
+        "daysToAppointment": null,
+        "firedRules": [
+          {
+            "ruleId": "R-LW-52WK-001",
+            "instrument": "long-wait",
+            "band": "long-wait",
+            "category": "long-waiter",
+            "description": "Patient has waited more than 52 weeks since the RTT clock-start date."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-LONG-WAITER-001",
+            "category": "long-waiter-52-week",
+            "priority": "high",
+            "description": "Patient has waited more than 52 weeks. Mandatory long-waiter review required.",
+            "suggestedAction": "Trigger long-waiter harm-review process and contact the patient."
+          },
+          {
+            "flagId": "F-MISSING-APPT-001",
+            "category": "missing-appointment",
+            "priority": "medium",
+            "description": "No appointment scheduled more than 14 days after RTT clock-start.",
+            "suggestedAction": "Contact the patient and book the next appropriate appointment."
+          }
+        ],
+        "graderNotes": ""
+      }
+    }
+  ]
+}

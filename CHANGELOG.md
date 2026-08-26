@@ -49,6 +49,13 @@ notes from `[Unreleased]`, and every section after it will carry a version.
 - `bin/test-vendored-uniformity` — proves the vendored theme catalogues and
   Lily Svelte helpers are byte-identical across all 355 forms (the
   CI-checkable half of the checkout-reading sync tools' invariant).
+- Personas for the entire `*-waiting-list-card` family (56 forms; fleet
+  total 109 → 165 verified): three clinically coherent RTT scenarios each —
+  routine P4 within target, urgent P2 approaching target with an interpreter
+  flag, and a P3 52-week long-wait breach with harm-review and
+  missing-appointment flags. `bin/test-personas` gained an optional
+  per-persona `options` object passed as the grader's second argument, so
+  clock-derived engines pin `todayIso` and the recorded oracle cannot rot.
 - GitHub issue templates (defect; clinical-correctness, which requires a
   citation against the published instrument; contact links routing security
   reports to SECURITY.md's private path) and a pull-request template carrying
