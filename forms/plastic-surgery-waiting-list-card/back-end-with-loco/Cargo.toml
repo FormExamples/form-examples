@@ -10,7 +10,7 @@ default-run = "plastic_surgery_waiting_list_card-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-loco-rs = { version = "1.0.1", default-features = false, features = [
+loco-rs = { version = "1.1.0", default-features = false, features = [
   "auth",
   "cache_inmem",
   "cli",
@@ -39,7 +39,7 @@ sea-orm = { version = "2.0", features = [
 ] }
 chrono = { version = "0.4" }
 validator = { version = "0.20" }
-uuid = { version = "1.24", features = ["v4"] }
+uuid = { version = "1.25", features = ["v4"] }
 include_dir = { version = "0.7" }
 opentelemetry = "0.27"
 opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }

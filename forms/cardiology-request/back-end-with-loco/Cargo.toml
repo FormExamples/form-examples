@@ -12,7 +12,7 @@ default-run = "cardiology-request-loco-crate-cli"
 path = "src/cardiology_request/lib.rs"
 
 [workspace.dependencies]
-loco-rs = { version = "1.0.1", default-features = false, features = [
+loco-rs = { version = "1.1.0", default-features = false, features = [
   "auth",
   "cache_inmem",
   "cli",
@@ -31,7 +31,7 @@ sea-orm = { version = "2.0", features = [
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
-uuid = { version = "1.24", features = ["v4", "serde"] }
+uuid = { version = "1.25", features = ["v4", "serde"] }
 tokio = { version = "1.53", default-features = false, features = [
   "rt-multi-thread",
 ] }
