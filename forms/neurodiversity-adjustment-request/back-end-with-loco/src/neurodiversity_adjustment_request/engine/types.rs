@@ -2,7 +2,7 @@
 //!
 //! These mirror `front-end-with-svelte/src/lib/engine/types.ts` exactly:
 //! the field names are camelCase on the wire (`serde(rename_all = "camelCase")`)
-//! and snake_case in the SQL columns. Enumerated values are kept as plain
+//! and `snake_case` in the SQL columns. Enumerated values are kept as plain
 //! `String`s so an empty string `''` represents an unanswered enum field, and
 //! `Option<_>` represents an unanswered numeric / date field — matching the
 //! monorepo convention.
@@ -15,6 +15,8 @@ use serde::{Deserialize, Serialize};
 /// and manager fields the engine reads for completeness).
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", default)]
+#[derive(Default)]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 pub struct NeurodiversityAdjustmentRequest {
     // Worker (the neurodivergent employee)
     /// Worker name.
@@ -150,70 +152,6 @@ pub struct NeurodiversityAdjustmentRequest {
     pub notes: String,
 }
 
-impl Default for NeurodiversityAdjustmentRequest {
-    fn default() -> Self {
-        Self {
-            worker_name: String::new(),
-            worker_job_title: String::new(),
-            worker_department: String::new(),
-            worker_employment_type: String::new(),
-            worker_work_pattern: String::new(),
-            worker_work_location: String::new(),
-            worker_employment_start_date: String::new(),
-            worker_employee_reference: String::new(),
-            worker_email: String::new(),
-            worker_phone: String::new(),
-            manager_name: String::new(),
-            manager_role: String::new(),
-            manager_job_title: String::new(),
-            manager_department: String::new(),
-            manager_email: String::new(),
-            manager_phone: String::new(),
-            status: String::new(),
-            requested_by: String::new(),
-            request_date: String::new(),
-            requested_start_date: String::new(),
-            condition_adhd: false,
-            condition_autism: false,
-            condition_dyslexia: false,
-            condition_dyspraxia: false,
-            condition_dyscalculia: false,
-            condition_tourettes: false,
-            condition_other: false,
-            condition_other_detail: String::new(),
-            diagnosis_status: String::new(),
-            considers_disability: String::new(),
-            substantial_long_term_impact: false,
-            disclosure_consent: false,
-            difficulty_concentration: false,
-            difficulty_written_communication: false,
-            difficulty_organisation_time: false,
-            difficulty_sensory_overload: false,
-            difficulty_balance_coordination: false,
-            difficulty_social_communication: false,
-            difficulty_memory: false,
-            difficulty_burnout_wellbeing: false,
-            tasks_situations_affected: String::new(),
-            worker_strengths: String::new(),
-            adjustment_working_environment: false,
-            adjustment_equipment_technology: false,
-            adjustment_working_arrangements: false,
-            adjustment_communication: false,
-            adjustment_support_mentoring: false,
-            adjustment_recruitment_process: false,
-            adjustment_policy_dress: false,
-            adjustment_other: false,
-            adjustments_requested_detail: String::new(),
-            supporting_evidence_type: String::new(),
-            occupational_health_involved: false,
-            access_to_work_involved: false,
-            current_impact: String::new(),
-            at_risk_of_absence: false,
-            urgency: String::new(),
-            notes: String::new(),
-        }
-    }
-}
 
 /// A single rule that fired during grading (audit trail). Mirrors
 /// `sql/06_create_table_neurodiversity_adjustment_request_grade_rule.sql`.

@@ -10,11 +10,13 @@ use super::types::CardiologyResponse;
 /// critical-finding flag. The clinician sets `criticalResult` explicitly when a
 /// critical or unexpected significant cardiac result is present (e.g. critical
 /// arrhythmia, severe symptomatic aortic stenosis, acute coronary syndrome).
+#[must_use]
 pub fn has_critical_finding(r: &CardiologyResponse) -> bool {
     r.critical_result
 }
 
 /// Whether any structured cardiac finding is present.
+#[must_use]
 pub fn has_any_cardiac_finding(r: &CardiologyResponse) -> bool {
     r.ischaemia_or_cad
         || r.significant_arrhythmia
@@ -25,6 +27,7 @@ pub fn has_any_cardiac_finding(r: &CardiologyResponse) -> bool {
 }
 
 /// Reduced ejection fraction is present if the flag is set or LVEF < 40 %.
+#[must_use]
 pub fn has_reduced_ejection_fraction(r: &CardiologyResponse) -> bool {
     r.reduced_ejection_fraction
         || matches!(r.lv_ejection_fraction_percent, Some(ef) if ef < 40.0)
@@ -35,6 +38,7 @@ pub fn has_reduced_ejection_fraction(r: &CardiologyResponse) -> bool {
 // ──────────────────────────────────────────────
 
 /// Axis A response-classification display label.
+#[must_use]
 pub fn response_classification_label(value: &str) -> String {
     match value {
         "no-abnormality" => "No abnormality",
@@ -47,6 +51,7 @@ pub fn response_classification_label(value: &str) -> String {
 }
 
 /// Axis B severity display label.
+#[must_use]
 pub fn severity_label(value: &str) -> String {
     match value {
         "none" => "None",
@@ -59,6 +64,7 @@ pub fn severity_label(value: &str) -> String {
 }
 
 /// Axis D follow-up-urgency display label.
+#[must_use]
 pub fn follow_up_urgency_label(value: &str) -> String {
     match value {
         "routine" => "Routine",
@@ -71,6 +77,7 @@ pub fn follow_up_urgency_label(value: &str) -> String {
 }
 
 /// Human-readable consultation-type label.
+#[must_use]
 pub fn consultation_type_label(value: &str) -> String {
     match value {
         "clinic-review" => "Clinic review",
@@ -84,6 +91,7 @@ pub fn consultation_type_label(value: &str) -> String {
 }
 
 /// Human-readable response-status label.
+#[must_use]
 pub fn response_status_label(value: &str) -> String {
     match value {
         "preliminary" => "Preliminary",
@@ -96,6 +104,7 @@ pub fn response_status_label(value: &str) -> String {
 }
 
 /// Human-readable primary-diagnosis-category label.
+#[must_use]
 pub fn primary_diagnosis_category_label(value: &str) -> String {
     match value {
         "coronary-artery-disease" => "Coronary artery disease",

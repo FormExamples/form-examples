@@ -7,6 +7,7 @@
 use super::types::{BloodLossBand, CompositeRisk, FiredRule};
 
 /// Classify blood loss.
+#[must_use]
 pub fn classify_blood_loss(ml: Option<i32>) -> BloodLossBand {
     match ml {
         None => BloodLossBand::Minimal,
@@ -19,6 +20,7 @@ pub fn classify_blood_loss(ml: Option<i32>) -> BloodLossBand {
 }
 
 /// Returns (band-contribution to composite risk, optional fired rule).
+#[must_use]
 pub fn evaluate(ml: Option<i32>) -> (CompositeRisk, Option<FiredRule>) {
     let band = classify_blood_loss(ml);
     let (risk, rule) = match band {

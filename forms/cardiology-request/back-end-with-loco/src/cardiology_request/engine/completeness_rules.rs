@@ -106,6 +106,8 @@ pub fn grade_completeness(r: &CardiologyRequest) -> Completeness {
     }
 
     // Round-half-up to match JavaScript's Math.round on non-negative values.
+    // The value is a 0-100 percentage, so the f64 -> i32 cast cannot truncate.
+    #[allow(clippy::cast_possible_truncation)]
     let completeness_percent =
         ((f64::from(present_weight) / f64::from(total_weight)) * 100.0).round() as i32;
 

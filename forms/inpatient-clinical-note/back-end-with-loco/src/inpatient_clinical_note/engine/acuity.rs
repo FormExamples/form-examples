@@ -32,6 +32,7 @@ fn rule(id: &str, band: AcuityBand, category: &str, description: String) -> Fire
 
 /// Evaluate every acuity rule (spec §5.2).
 #[must_use]
+#[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
 pub fn evaluate_acuity(note: &InpatientClinicalNote) -> AcuityResult {
     let news2 = effective_news2(&note.observations);
     let mut fired_rules: Vec<FiredRule> = Vec::new();

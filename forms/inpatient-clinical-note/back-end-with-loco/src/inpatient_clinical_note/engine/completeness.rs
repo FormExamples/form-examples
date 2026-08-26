@@ -163,6 +163,7 @@ pub fn is_documented(note: &InpatientClinicalNote, component: ComponentKey) -> b
 /// Run both engines over a note and return the full grading result.
 #[must_use]
 #[allow(clippy::cast_possible_truncation, clippy::cast_precision_loss)]
+#[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
 pub fn grade(note: &InpatientClinicalNote) -> NoteGrade {
     let mut component_statuses = Vec::with_capacity(COMPONENTS.len());
     let mut fired_rules: Vec<FiredRule> = Vec::new();

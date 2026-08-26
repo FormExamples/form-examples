@@ -32,6 +32,7 @@ use crate::models::_entities::{
 /// wire). All referral fields plus the patient and clinician foreign keys.
 #[derive(Debug, Deserialize, Default)]
 #[serde(rename_all = "camelCase", default)]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 struct RequestParams {
     /// Foreign key to the patient being referred.
     patient_id: Uuid,
@@ -197,7 +198,7 @@ async fn load_request(
         .ok_or_else(|| Error::NotFound)
 }
 
-/// POST /api/cardiology_requests -- create a new referral request.
+/// POST /`api/cardiology_requests` -- create a new referral request.
 #[debug_handler]
 async fn create(
     State(ctx): State<AppContext>,
@@ -207,7 +208,7 @@ async fn create(
     Ok(Json(model).into_response())
 }
 
-/// GET /api/cardiology_requests -- list requests (most recent first).
+/// GET /`api/cardiology_requests` -- list requests (most recent first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>) -> Result<Response> {
     let models = cardiology_requests::Entity::find()
@@ -218,14 +219,14 @@ async fn list(State(ctx): State<AppContext>) -> Result<Response> {
     Ok(Json(json!({ "items": models, "total": total })).into_response())
 }
 
-/// GET /api/cardiology_requests/{id} -- fetch one request.
+/// GET /`api/cardiology_requests/{id`} -- fetch one request.
 #[debug_handler]
 async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = load_request(&ctx.db, id).await?;
     Ok(Json(model).into_response())
 }
 
-/// PATCH /api/cardiology_requests/{id} -- replace the request fields.
+/// PATCH /`api/cardiology_requests/{id`} -- replace the request fields.
 #[debug_handler]
 async fn update(
     Path(id): Path<Uuid>,
@@ -241,7 +242,7 @@ async fn update(
     Ok(Json(model).into_response())
 }
 
-/// DELETE /api/cardiology_requests/{id} -- remove a request (cascades grade).
+/// DELETE /`api/cardiology_requests/{id`} -- remove a request (cascades grade).
 #[debug_handler]
 async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     load_request(&ctx.db, id).await?;
@@ -251,7 +252,7 @@ async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     format::empty()
 }
 
-/// POST /api/cardiology_requests/{id}/submit -- run the four-axis vetting
+/// POST /`api/cardiology_requests/{id}/submit` -- run the four-axis vetting
 /// engine over the persisted request (joined with its patient and clinician),
 /// then transactionally persist the computed grade into
 /// `cardiology_request_grades`, one row per fired rule into
@@ -344,7 +345,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(grade_row).into_response())
 }
 
-/// GET /api/cardiology_requests/{id}/result -- read the stored grade back,
+/// GET /`api/cardiology_requests/{id}/result` -- read the stored grade back,
 /// together with its fired-rule audit trail and safety flags.
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {

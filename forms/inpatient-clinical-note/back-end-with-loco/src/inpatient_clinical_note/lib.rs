@@ -1,8 +1,8 @@
 //! Inpatient Clinical Note — Loco JSON API back-end.
 //!
 //! Server-side JSON API for the **Inpatient Clinical Note** medical form, built on the
-//! [Loco](https://loco.rs) framework (axum + SeaORM). The schema is
-//! **relational**, mirroring `../sql/`: one table, entity, and RESTful
+//! [Loco](https://loco.rs) framework (axum + `SeaORM`). The schema is
+//! **relational**, mirroring `../sql/`: one table, entity, and `RESTful`
 //! controller per domain concept — the note, its four child collections, and
 //! the grade with its rule and flag children. There is no JSONB blob column.
 //!

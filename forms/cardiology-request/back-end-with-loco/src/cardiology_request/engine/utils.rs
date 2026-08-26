@@ -22,11 +22,12 @@ pub fn has_typical_angina(r: &CardiologyRequest) -> bool {
 fn allowed_services(reason: &str) -> Option<&'static [&'static str]> {
     match reason {
         "chest-pain" => Some(&["rapid-access-chest-pain", "general-cardiology"]),
-        "breathlessness" => Some(&["heart-failure", "general-cardiology"]),
-        "heart-failure-symptoms" => Some(&["heart-failure", "general-cardiology"]),
-        "palpitations" => Some(&["arrhythmia-ep", "general-cardiology"]),
-        "arrhythmia" => Some(&["arrhythmia-ep", "general-cardiology"]),
-        "syncope" => Some(&["arrhythmia-ep", "general-cardiology"]),
+        "breathlessness" | "heart-failure-symptoms" => {
+            Some(&["heart-failure", "general-cardiology"])
+        }
+        "palpitations" | "arrhythmia" | "syncope" => {
+            Some(&["arrhythmia-ep", "general-cardiology"])
+        }
         "murmur-or-valve" => Some(&["valve-clinic", "general-cardiology"]),
         "abnormal-ecg" => Some(&["general-cardiology", "arrhythmia-ep"]),
         "hypertension" => Some(&["general-cardiology"]),

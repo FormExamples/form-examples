@@ -15,6 +15,7 @@ use super::types::{CardiologyResponse, FiredRule, ResponseClassification};
 use super::utils::{has_any_cardiac_finding, has_critical_finding};
 
 /// Classify a response, returning the classification plus the fired rules.
+#[must_use]
 pub fn classify_response(r: &CardiologyResponse) -> (ResponseClassification, Vec<FiredRule>) {
     let mut fired_rules: Vec<FiredRule> = Vec::new();
 

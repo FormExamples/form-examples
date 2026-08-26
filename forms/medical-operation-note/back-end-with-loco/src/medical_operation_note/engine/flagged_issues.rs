@@ -7,6 +7,8 @@
 use super::types::{AdditionalFlag, FlagPriority, OperationNote};
 
 /// Collect.
+#[must_use]
+#[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
 pub fn collect(note: &OperationNote) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

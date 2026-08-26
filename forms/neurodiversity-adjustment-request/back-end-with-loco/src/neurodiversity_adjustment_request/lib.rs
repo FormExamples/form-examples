@@ -2,7 +2,7 @@
 //!
 //! Server-side JSON API for the **Neurodiversity Adjustment Request** form (a
 //! UK workplace reasonable-adjustments request for neurodiversity), built on the
-//! [Loco](https://loco.rs) framework (axum + SeaORM + PostgreSQL). The schema is
+//! [Loco](https://loco.rs) framework (axum + `SeaORM` + PostgreSQL). The schema is
 //! **relational**, one table per entity, faithfully reproducing the form's
 //! `sql/` source of truth: `workers` and `managers`; the source-of-truth
 //! `neurodiversity_adjustment_requests` (FKs to both); and the computed grade
@@ -13,7 +13,7 @@
 //!
 //! The pure [`engine`] module computes a four-axis grade (Equality Act 2010
 //! eligibility, impact / wellbeing risk, completeness, handling priority) plus
-//! compliance flags. It is ported one-to-one from the SvelteKit front-end
+//! compliance flags. It is ported one-to-one from the `SvelteKit` front-end
 //! engine: rule IDs, flag IDs, axis names, bands, thresholds, and firing order
 //! are identical. The submit endpoint runs the engine and persists its output
 //! into the three grade tables inside a single transaction.

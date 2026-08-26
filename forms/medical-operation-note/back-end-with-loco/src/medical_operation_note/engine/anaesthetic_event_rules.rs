@@ -15,6 +15,7 @@ const HIGH_SEVERITY: [&str; 5] = [
 ];
 
 /// Evaluate.
+#[must_use]
 pub fn evaluate(event: &str) -> (CompositeRisk, Option<FiredRule>) {
     if event.is_empty() || event == "none" {
         return (CompositeRisk::Routine, None);

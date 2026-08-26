@@ -55,8 +55,8 @@ pub fn detect_flags(
     }
 
     // ─── undue-delay: > 20 days between assessment and response ───
-    if let Some(days) = whole_days_between(&r.assessed_date, &r.responded_date) {
-        if days > 20 {
+    if let Some(days) = whole_days_between(&r.assessed_date, &r.responded_date)
+        && days > 20 {
             flags.push(Flag {
                 flag_id: "F-UNDUE-DELAY-001".to_string(),
                 category: "undue-delay".to_string(),
@@ -68,7 +68,6 @@ pub fn detect_flags(
                         .to_string(),
             });
         }
-    }
 
     // ─── no-review-scheduled ───
     if any_agreed(r) && !r.review_scheduled {

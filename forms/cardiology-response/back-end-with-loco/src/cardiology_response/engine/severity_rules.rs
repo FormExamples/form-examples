@@ -4,10 +4,10 @@
 //! (chronic heart failure) and the 2021 ESC/EACTS valvular heart disease
 //! guidelines:
 //! - major: a critical result, severe valve disease, significant arrhythmia, or
-//!   reduced ejection fraction (HFrEF; LVEF < 40 %).
+//!   reduced ejection fraction (`HFrEF`; LVEF < 40 %).
 //! - moderate: any other structured cardiac finding (ischaemia/CAD, structural
 //!   abnormality, uncontrolled hypertension).
-//! - minor: a mild reduction in ejection fraction (40–49 %, HFmrEF) with no
+//! - minor: a mild reduction in ejection fraction (40–49 %, `HFmrEF`) with no
 //!   other finding.
 //! - none: no structured cardiac finding.
 
@@ -18,6 +18,8 @@ use super::utils::{
 
 /// Grade severity, returning the level, the structured-finding category, and
 /// the fired rules.
+#[must_use]
+#[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
 pub fn grade_severity(
     r: &CardiologyResponse,
     classification: &ResponseClassification,

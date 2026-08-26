@@ -1,7 +1,7 @@
 //! Serde data types for the cardiology-response payload and grading result.
 //!
 //! Field names are camelCase on the wire (front-end serde); they mirror the
-//! snake_case columns in `sql/04_create_table_cardiology_response.sql` and
+//! `snake_case` columns in `sql/04_create_table_cardiology_response.sql` and
 //! `sql/05_create_table_cardiology_response_grade.sql`. Empty string `''`
 //! indicates an unanswered enum / text field; `None` indicates an unanswered
 //! numeric / date field.
@@ -37,6 +37,7 @@ pub type FlagPriority = String;
 /// four-axis interpretation grade is computed from.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 pub struct CardiologyResponse {
     // Response identification
     /// Responding clinician (author / signer).

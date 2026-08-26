@@ -37,6 +37,7 @@ use crate::models::_entities::{
 /// foreign keys.
 #[derive(Debug, Deserialize, Default)]
 #[serde(rename_all = "camelCase", default)]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 struct RequestParams {
     /// Foreign key to the worker the request is for.
     worker_id: Uuid,

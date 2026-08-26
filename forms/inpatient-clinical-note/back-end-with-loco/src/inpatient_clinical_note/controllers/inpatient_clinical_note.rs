@@ -259,6 +259,7 @@ pub struct Params {
     }
 
 impl Params {
+    #[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
     fn update(&self, item: &mut ActiveModel) {
       item.deleted_at = Set(self.deleted_at);
       item.status = Set(self.status.clone());

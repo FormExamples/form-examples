@@ -2,7 +2,7 @@
 //!
 //! These mirror `front-end-with-svelte/src/lib/engine/types.ts` exactly:
 //! the field names are camelCase on the wire (`serde(rename_all = "camelCase")`)
-//! and snake_case in the SQL columns. Enumerated values are kept as plain
+//! and `snake_case` in the SQL columns. Enumerated values are kept as plain
 //! `String`s so an empty string `''` represents an unanswered enum field, and
 //! `Option<_>` represents an unanswered numeric / date field — matching the
 //! monorepo convention.
@@ -14,6 +14,8 @@ use serde::{Deserialize, Serialize};
 /// `sql/04_create_table_cardiology_request.sql`.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", default)]
+#[derive(Default)]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 pub struct CardiologyRequest {
     // Referring clinician
     /// Referring clinician name.
@@ -118,54 +120,6 @@ pub struct CardiologyRequest {
     pub notes: String,
 }
 
-impl Default for CardiologyRequest {
-    fn default() -> Self {
-        Self {
-            referring_clinician: String::new(),
-            referrer_role: String::new(),
-            registration_body: String::new(),
-            registration_number: String::new(),
-            supervising_consultant: String::new(),
-            requester_contact: String::new(),
-            referral_date: String::new(),
-            nhs_number: String::new(),
-            patient_name: String::new(),
-            date_of_birth: String::new(),
-            status: String::new(),
-            site_name: String::new(),
-            setting: String::new(),
-            requested_by_date: String::new(),
-            requested_service: String::new(),
-            referral_reason: String::new(),
-            clinical_question: String::new(),
-            relevant_history: String::new(),
-            symptom_chest_pain: false,
-            chest_pain_character: String::new(),
-            symptom_breathlessness: false,
-            nyha_class: String::new(),
-            symptom_palpitations: false,
-            symptom_syncope: false,
-            symptom_oedema: false,
-            suspected_acs: false,
-            exertional_syncope: false,
-            new_onset_heart_failure: false,
-            ecg_done: false,
-            ecg_findings: String::new(),
-            troponin_status: String::new(),
-            bnp_status: String::new(),
-            known_coronary_artery_disease: false,
-            previous_mi: false,
-            heart_failure: false,
-            valve_disease: false,
-            arrhythmia: false,
-            hypertension: false,
-            diabetes: false,
-            current_medications: String::new(),
-            urgency: String::new(),
-            notes: String::new(),
-        }
-    }
-}
 
 /// A single rule that fired during grading (audit trail). Mirrors
 /// `sql/06_create_table_cardiology_request_grade_rule.sql`.
@@ -184,6 +138,7 @@ pub struct FiredRule {
 
 impl FiredRule {
     /// Construct a fired rule from string-likes.
+    #[must_use]
     pub fn new(
         rule_id: &str,
         axis: &str,

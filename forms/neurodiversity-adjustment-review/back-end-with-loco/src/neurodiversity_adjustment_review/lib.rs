@@ -2,7 +2,7 @@
 //!
 //! Server-side JSON API for the **Neurodiversity Adjustment Review**, a UK
 //! workplace reasonable-adjustments review (not a clinical form), built on the
-//! [Loco](https://loco.rs) framework (axum + SeaORM). The schema is
+//! [Loco](https://loco.rs) framework (axum + `SeaORM`). The schema is
 //! **relational**, mirroring `sql/` one table at a time: a
 //! `neurodiversity_adjustment_reviews` row references a `workers` row and a
 //! `managers` row; the four-axis grade computed by the engine is persisted

@@ -93,7 +93,7 @@ async fn ensure_manager(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     Ok(am.insert(&ctx.db).await?.id)
 }
 
-/// POST /api/neurodiversity_adjustment_reviews — create a review (draft or filled).
+/// POST /`api/neurodiversity_adjustment_reviews` — create a review (draft or filled).
 #[debug_handler]
 async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> Result<Response> {
     let worker_id = ensure_worker(&ctx, body.worker_id).await?;
@@ -103,7 +103,7 @@ async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> 
     Ok(Json(review_to_json(&model)).into_response())
 }
 
-/// GET /api/neurodiversity_adjustment_reviews — list reviews (newest first).
+/// GET /`api/neurodiversity_adjustment_reviews` — list reviews (newest first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>) -> Result<Response> {
     let models = neurodiversity_adjustment_reviews::list_all(&ctx.db).await?;
@@ -111,14 +111,14 @@ async fn list(State(ctx): State<AppContext>) -> Result<Response> {
     Ok(Json(json!({ "items": items, "total": items.len() })).into_response())
 }
 
-/// GET /api/neurodiversity_adjustment_reviews/{id} — fetch one review.
+/// GET /`api/neurodiversity_adjustment_reviews/{id`} — fetch one review.
 #[debug_handler]
 async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = find_by_id(&ctx.db, id).await?.ok_or_else(|| Error::NotFound)?;
     Ok(Json(review_to_json(&model)).into_response())
 }
 
-/// PATCH /api/neurodiversity_adjustment_reviews/{id} — overwrite the review payload fields.
+/// PATCH /`api/neurodiversity_adjustment_reviews/{id`} — overwrite the review payload fields.
 #[debug_handler]
 async fn update(
     Path(id): Path<Uuid>,
@@ -139,7 +139,7 @@ async fn update(
     Ok(Json(review_to_json(&model)).into_response())
 }
 
-/// DELETE /api/neurodiversity_adjustment_reviews/{id} — soft-delete the review.
+/// DELETE /`api/neurodiversity_adjustment_reviews/{id`} — soft-delete the review.
 #[debug_handler]
 async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = find_by_id(&ctx.db, id).await?.ok_or_else(|| Error::NotFound)?;
@@ -149,7 +149,7 @@ async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(json!({ "id": id, "deleted": true })).into_response())
 }
 
-/// POST /api/neurodiversity_adjustment_reviews/{id}/submit — run the four-axis engine over
+/// POST /`api/neurodiversity_adjustment_reviews/{id}/submit` — run the four-axis engine over
 /// the stored review and transactionally persist the grade, fired rules, and
 /// flags. Idempotent: re-submitting replaces the prior grade.
 #[debug_handler]
@@ -165,7 +165,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(grade_to_json(&grade_row, &rules, &flags)).into_response())
 }
 
-/// GET /api/neurodiversity_adjustment_reviews/{id}/result — read back the persisted grade.
+/// GET /`api/neurodiversity_adjustment_reviews/{id}/result` — read back the persisted grade.
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let grade = neurodiversity_adjustment_review_grades::find_for_review(&ctx.db, id)

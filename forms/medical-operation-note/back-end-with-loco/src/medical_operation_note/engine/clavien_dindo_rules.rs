@@ -6,6 +6,7 @@
 use super::types::{ClavienDindo, CompositeRisk, FiredRule};
 
 /// Evaluate.
+#[must_use]
 pub fn evaluate(grade: Option<ClavienDindo>) -> (CompositeRisk, Option<FiredRule>) {
     let g = grade.unwrap_or(ClavienDindo::Zero);
     let (risk, label) = match g {
@@ -16,7 +17,7 @@ pub fn evaluate(grade: Option<ClavienDindo>) -> (CompositeRisk, Option<FiredRule
         ClavienDindo::V => (CompositeRisk::Critical, "death (V)"),
     };
     let rule = FiredRule {
-        rule_id: format!("clavien.{:?}", g).to_lowercase(),
+        rule_id: format!("clavien.{g:?}").to_lowercase(),
         instrument: "clavien-dindo".into(),
         band: match risk {
             CompositeRisk::Routine => "routine".into(),

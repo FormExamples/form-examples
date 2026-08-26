@@ -6,6 +6,8 @@
 use super::types::{CompositeRisk, FiredRule};
 
 /// Evaluate.
+#[must_use]
+#[allow(clippy::fn_params_excessive_bools)] // the WHO checklist's independent agreement flags, mirroring sql/
 pub fn evaluate(
     swab_agreed: bool,
     needle_agreed: bool,

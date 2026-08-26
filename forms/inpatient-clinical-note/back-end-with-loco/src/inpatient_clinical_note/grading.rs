@@ -165,17 +165,25 @@ pub async fn grade_note(
         .await?
         .ok_or_else(|| Error::NotFound)?;
 
-    let problem_count = inpatient_clinical_note_problems::Entity::find()
-        .filter(inpatient_clinical_note_problems::Column::InpatientClinicalNoteId.eq(id))
-        .filter(inpatient_clinical_note_problems::Column::DeletedAt.is_null())
-        .count(db)
-        .await? as usize;
+    // SeaORM counts are u64; row counts trivially fit usize on supported
+    // (64-bit) targets, and try_from keeps 32-bit targets honest.
+    let problem_count = usize::try_from(
+        inpatient_clinical_note_problems::Entity::find()
+            .filter(inpatient_clinical_note_problems::Column::InpatientClinicalNoteId.eq(id))
+            .filter(inpatient_clinical_note_problems::Column::DeletedAt.is_null())
+            .count(db)
+            .await?,
+    )
+    .unwrap_or(usize::MAX);
 
-    let job_count = inpatient_clinical_note_jobs::Entity::find()
-        .filter(inpatient_clinical_note_jobs::Column::InpatientClinicalNoteId.eq(id))
-        .filter(inpatient_clinical_note_jobs::Column::DeletedAt.is_null())
-        .count(db)
-        .await? as usize;
+    let job_count = usize::try_from(
+        inpatient_clinical_note_jobs::Entity::find()
+            .filter(inpatient_clinical_note_jobs::Column::InpatientClinicalNoteId.eq(id))
+            .filter(inpatient_clinical_note_jobs::Column::DeletedAt.is_null())
+            .count(db)
+            .await?,
+    )
+    .unwrap_or(usize::MAX);
 
     let investigations = inpatient_clinical_note_investigations::Entity::find()
         .filter(inpatient_clinical_note_investigations::Column::InpatientClinicalNoteId.eq(id))
@@ -262,7 +270,7 @@ pub async fn grade_and_persist(
             rule_id: Set(rule.id.clone()),
             engine: Set(rule.engine.clone()),
             component: Set(rule.component.clone()),
-            band: Set(rule.band.map(AcuityBand::as_str).unwrap_or("").to_owned()),
+            band: Set(rule.band.map_or("", AcuityBand::as_str).to_owned()),
             category: Set(rule.category.clone()),
             description: Set(rule.description.clone()),
             inpatient_clinical_note_grade_id: Set(grade.id),

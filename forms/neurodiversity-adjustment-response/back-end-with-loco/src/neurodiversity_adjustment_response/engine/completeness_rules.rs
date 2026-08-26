@@ -101,6 +101,7 @@ pub fn grade_completeness(r: &NeurodiversityAdjustmentResponse) -> (i32, Vec<Fir
         }
     }
 
+    #[allow(clippy::cast_possible_truncation)] // a 0-100 percentage; the f64 -> i32 cast cannot truncate
     let completeness_percent = if total_weight == 0 {
         0
     } else {

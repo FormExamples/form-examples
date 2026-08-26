@@ -48,6 +48,7 @@ pub fn length_of_stay_days(note: &InpatientClinicalNote) -> Option<i64> {
 
 /// Detect every safety flag for a note.
 #[must_use]
+#[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
 pub fn detect_flagged_issues(
     note: &InpatientClinicalNote,
     acuity_band: AcuityBand,

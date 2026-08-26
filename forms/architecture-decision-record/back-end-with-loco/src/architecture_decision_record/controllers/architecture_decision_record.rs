@@ -12,6 +12,7 @@
 #![allow(clippy::unnecessary_struct_initialization)]
 #![allow(clippy::unused_async)]
 use loco_rs::prelude::*;
+use std::fmt::Write as _;
 use sea_orm::{sea_query::Order, QueryOrder, QuerySelect};
 use serde::{Deserialize, Serialize};
 
@@ -108,16 +109,14 @@ impl Params {
         if let Some(s) = &self.status {
             if !VALID_STATUSES.contains(&s.as_str()) {
                 return Err(Error::BadRequest(format!(
-                    "status `{}` is not one of {:?}",
-                    s, VALID_STATUSES
+                    "status `{s}` is not one of {VALID_STATUSES:?}"
                 )));
             }
         }
         if let Some(g) = &self.decision_group {
             if !VALID_GROUPS.contains(&g.as_str()) {
                 return Err(Error::BadRequest(format!(
-                    "decision_group `{}` is not one of {:?}",
-                    g, VALID_GROUPS
+                    "decision_group `{g}` is not one of {VALID_GROUPS:?}"
                 )));
             }
         }
@@ -199,7 +198,7 @@ fn bullets(text: &str) -> String {
 
 fn pad4(n: Option<i32>) -> String {
     match n {
-        Some(v) => format!("{:04}", v),
+        Some(v) => format!("{v:04}"),
         None => "NNNN".to_string(),
     }
 }
@@ -207,6 +206,7 @@ fn pad4(n: Option<i32>) -> String {
 /// Render an ADR (and its joined positions, notes, author, organization) as
 /// a Tyree & Akerman Markdown document for the JSON `/api/adrs/{slug}`
 /// viewer endpoint.
+#[allow(clippy::too_many_lines)] // linear Markdown builder; splitting adds indirection, not clarity
 async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
     let id = item.id;
     let author = authors::Entity::find_by_id(item.author_id)
@@ -233,16 +233,16 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
 
     let mut md = String::new();
     let heading = format!("{} — {}", pad4(item.number), item.title);
-    md.push_str(&format!("# {}\n\n", heading));
-    md.push_str(&format!(
-        "- **Status:** {}\n",
+    let _ = write!(md, "# {heading}\n\n");
+    let _ = writeln!(md,
+        "- **Status:** {}",
         if item.status.is_empty() { "pending" } else { &item.status }
-    ));
+    );
     if !item.decision_group.is_empty() {
-        md.push_str(&format!("- **Group:** {}\n", item.decision_group));
+        let _ = writeln!(md, "- **Group:** {}", item.decision_group);
     }
     if let Some(d) = item.decision_date {
-        md.push_str(&format!("- **Date:** {}\n", d));
+        let _ = writeln!(md, "- **Date:** {d}");
     }
     if let Some(a) = &author {
         let email = if a.email.is_empty() {
@@ -255,15 +255,15 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         } else {
             format!(" ({})", a.role)
         };
-        md.push_str(&format!("- **Author:** {}{}{}\n", a.name, email, role));
+        let _ = writeln!(md, "- **Author:** {}{}{}", a.name, email, role);
     }
     if let Some(o) = &org {
-        md.push_str(&format!("- **Organization:** {}\n", o.name));
+        let _ = writeln!(md, "- **Organization:** {}", o.name);
     }
     md.push('\n');
 
     let section = |md: &mut String, heading: &str, body: &str| {
-        md.push_str(&format!("## {}\n", heading));
+        let _ = writeln!(md, "## {heading}");
         md.push_str(if body.trim().is_empty() { "_TBD_" } else { body });
         md.push_str("\n\n");
     };
@@ -283,13 +283,13 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
             } else {
                 ""
             };
-            md.push_str(&format!("### {}. {}{}\n", i + 1, p.name, chosen));
+            let _ = writeln!(md, "### {}. {}{}", i + 1, p.name, chosen);
             if !p.description.is_empty() {
                 md.push_str(&p.description);
                 md.push('\n');
             }
             if !p.model_or_diagram_url.is_empty() {
-                md.push_str(&format!("Model/diagram: <{}>\n", p.model_or_diagram_url));
+                let _ = writeln!(md, "Model/diagram: <{}>", p.model_or_diagram_url);
             }
             if !p.pros.trim().is_empty() {
                 md.push_str("\n**Pros:**\n");
@@ -327,7 +327,7 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
             } else {
                 &n.noted_by
             };
-            md.push_str(&format!("- **{}** ({}): {}\n", when, who, n.body));
+            let _ = writeln!(md, "- **{}** ({}): {}", when, who, n.body);
         }
     }
     md.push('\n');
@@ -338,14 +338,14 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
             .signed_off_at
             .map(|d| format!(" on {}", d.to_rfc3339()))
             .unwrap_or_default();
-        md.push_str(&format!("Signed off by {}{}.\n", item.signed_off_by, when));
+        let _ = writeln!(md, "Signed off by {}{}.", item.signed_off_by, when);
     }
 
     Ok(md)
 }
 
 /// JSON ADR view by slug. Returns the row metadata plus the rendered
-/// Markdown body, so the SvelteKit dashboard's `[slug]` route can render
+/// Markdown body, so the `SvelteKit` dashboard's `[slug]` route can render
 /// inline without a second round trip.
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -395,7 +395,7 @@ async fn api_show_by_slug(
     })
 }
 
-/// JSON shape consumed by the SvelteKit dashboard's `AdrRow` interface.
+/// JSON shape consumed by the `SvelteKit` dashboard's `AdrRow` interface.
 /// Field names match the front-end's camelCase convention.
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -488,7 +488,7 @@ mod tests {
         let mut p = base_params();
         for s in &["pending", "decided", "approved", "superseded", "deprecated", ""] {
             p.status = Some((*s).to_string());
-            assert!(p.validate().is_ok(), "status {} should validate", s);
+            assert!(p.validate().is_ok(), "status {s} should validate");
         }
     }
 
@@ -515,7 +515,7 @@ mod tests {
             "",
         ] {
             p.decision_group = Some((*g).to_string());
-            assert!(p.validate().is_ok(), "group {} should validate", g);
+            assert!(p.validate().is_ok(), "group {g} should validate");
         }
     }
 

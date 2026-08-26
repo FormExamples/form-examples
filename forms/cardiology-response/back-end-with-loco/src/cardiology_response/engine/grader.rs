@@ -21,6 +21,7 @@ use super::severity_rules::grade_severity;
 use super::types::{CardiologyResponse, FiredRule, GradingResult, Recommendation};
 
 /// Grade a full cardiology response. Pure function — no side effects.
+#[must_use]
 pub fn calculate_grade(response: &CardiologyResponse) -> GradingResult {
     let mut fired_rules: Vec<FiredRule> = Vec::new();
 

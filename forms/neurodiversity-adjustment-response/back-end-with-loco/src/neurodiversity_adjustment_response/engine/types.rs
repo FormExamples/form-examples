@@ -2,7 +2,7 @@
 //! grading result.
 //!
 //! Field names are camelCase on the wire (front-end serde); they mirror the
-//! snake_case columns in
+//! `snake_case` columns in
 //! `sql/04_create_table_neurodiversity_adjustment_response.sql` and
 //! `sql/05_create_table_neurodiversity_adjustment_response_grade.sql`. Empty
 //! string `''` indicates an unanswered enum / text field; `None` indicates an
@@ -44,6 +44,7 @@ pub type FlagPriority = String;
 /// score them.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 pub struct NeurodiversityAdjustmentResponse {
     // Worker identity
     /// Worker (neurodivergent employee) name.

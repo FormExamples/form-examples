@@ -111,6 +111,7 @@ pub fn grade_completeness(r: &NeurodiversityAdjustmentRequest) -> Completeness {
     }
 
     // Round-half-up to match JavaScript's Math.round on non-negative values.
+    #[allow(clippy::cast_possible_truncation)] // a 0-100 percentage; the f64 -> i32 cast cannot truncate
     let completeness_percent =
         ((f64::from(present_weight) / f64::from(total_weight)) * 100.0).round() as i32;
 

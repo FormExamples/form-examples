@@ -1,7 +1,7 @@
 //! Architecture Decision Record — Loco JSON API back-end.
 //!
 //! Server-side JSON API for the **Architecture Decision Record** medical form, built on the
-//! [Loco](https://loco.rs) framework (axum + SeaORM). Each submission is
+//! [Loco](https://loco.rs) framework (axum + `SeaORM`). Each submission is
 //! persisted as a row whose `data` column holds the questionnaire payload
 //! and whose `result` column holds the grading output produced by the
 //! grading engine.

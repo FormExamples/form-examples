@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "neurodiversity_adjustment_responses")]
 #[serde(rename_all = "camelCase")]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 pub struct Model {
     /// Created at.
     pub created_at: DateTimeWithTimeZone,

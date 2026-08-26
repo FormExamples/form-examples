@@ -1,6 +1,6 @@
 //! Shared types for the medical-operation-note scoring engine.
 //!
-//! Mirrors the TypeScript domain model used by the SvelteKit front-end.
+//! Mirrors the TypeScript domain model used by the `SvelteKit` front-end.
 //! All structs use `serde(rename_all = "camelCase")` so JSON exchange with
 //! the front-end is bit-identical regardless of the language.
 
@@ -23,6 +23,7 @@ pub enum CompositeRisk {
 
 impl CompositeRisk {
     /// Integer rank used for max-grade comparisons. Higher is worse.
+    #[must_use]
     pub fn rank(self) -> u8 {
         match self {
             CompositeRisk::Routine => 0,
@@ -33,6 +34,7 @@ impl CompositeRisk {
     }
 
     /// Max.
+    #[must_use]
     pub fn max(self, other: CompositeRisk) -> CompositeRisk {
         if self.rank() >= other.rank() { self } else { other }
     }
@@ -62,6 +64,7 @@ pub enum ClavienDindo {
 
 impl ClavienDindo {
     /// Rank.
+    #[must_use]
     pub fn rank(self) -> u8 {
         match self {
             ClavienDindo::Zero => 0,
@@ -76,6 +79,8 @@ impl ClavienDindo {
     }
 
     /// From str.
+    #[must_use]
+    #[allow(clippy::should_implement_trait)] // returns Option, not the FromStr trait Result contract
     pub fn from_str(s: &str) -> Option<ClavienDindo> {
         match s {
             "0" => Some(ClavienDindo::Zero),
@@ -156,6 +161,7 @@ pub struct AdditionalFlag {
 /// numeric values are `None`, missing enums are empty strings.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[allow(clippy::struct_excessive_bools)] // mirrors the form's sql/ boolean columns (source of truth)
 pub struct OperationNote {
     /// Estimated blood loss ml.
     pub estimated_blood_loss_ml: Option<i32>,

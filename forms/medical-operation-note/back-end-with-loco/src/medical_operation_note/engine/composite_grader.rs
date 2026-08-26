@@ -11,6 +11,7 @@ use super::{
 };
 
 /// Grade.
+#[must_use]
 pub fn grade(note: &OperationNote) -> OperationGrade {
     let mut composite = CompositeRisk::Routine;
     let mut fired: Vec<FiredRule> = Vec::new();
@@ -108,6 +109,7 @@ pub fn grade(note: &OperationNote) -> OperationGrade {
     }
 }
 
+#[allow(clippy::match_same_arms)] // published clinical band table; explicit rows beat merged arms
 fn intensity(disposition: &str) -> u8 {
     match disposition {
         "day-case-discharge" => 0,

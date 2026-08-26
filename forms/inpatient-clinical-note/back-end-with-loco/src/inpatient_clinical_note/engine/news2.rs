@@ -116,6 +116,7 @@ pub fn score_systolic_blood_pressure(sbp: Option<i32>) -> Option<i32> {
 
 /// Pulse sub-score.
 #[must_use]
+#[allow(clippy::match_same_arms)] // published clinical band table; explicit rows beat merged arms
 pub fn score_pulse(pulse: Option<i32>) -> Option<i32> {
     let pulse = pulse?;
     Some(match pulse {

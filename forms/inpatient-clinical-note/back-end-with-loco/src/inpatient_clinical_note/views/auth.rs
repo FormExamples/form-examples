@@ -20,7 +20,7 @@ pub struct LoginResponse {
 impl LoginResponse {
     /// New.
     #[must_use]
-    pub fn new(user: &users::Model, token: &String) -> Self {
+    pub fn new(user: &users::Model, token: &str) -> Self {
         Self {
             token: token.to_string(),
             pid: user.pid.to_string(),

@@ -1,7 +1,7 @@
 //! Cardiology Response — Loco JSON API back-end.
 //!
 //! Server-side JSON API for the **Cardiology Response** (consult reply) medical
-//! form, built on the [Loco](https://loco.rs) framework (axum + SeaORM). The
+//! form, built on the [Loco](https://loco.rs) framework (axum + `SeaORM`). The
 //! schema is **relational**, mirroring `sql/` one table at a time: a
 //! `cardiology_responses` row references a `patients` row and a `clinicians`
 //! row; the four-axis interpretation grade computed by the engine is persisted

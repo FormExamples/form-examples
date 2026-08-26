@@ -2,7 +2,7 @@
 //!
 //! Server-side JSON API for the **Cardiology Request** medical form (a
 //! cardiology referral / consult request), built on the [Loco](https://loco.rs)
-//! framework (axum + SeaORM + PostgreSQL). The schema is **relational**, one
+//! framework (axum + `SeaORM` + PostgreSQL). The schema is **relational**, one
 //! table per entity, faithfully reproducing the form's `sql/` source of truth:
 //! `patients` and `clinicians`; the source-of-truth `cardiology_requests`
 //! (FKs to both); and the computed grade fanned out across
@@ -12,7 +12,7 @@
 //!
 //! The pure [`engine`] module computes a four-axis vetting grade
 //! (appropriateness, safety / red-flag, completeness, triage) plus safety
-//! flags. It is ported one-to-one from the SvelteKit front-end engine: rule
+//! flags. It is ported one-to-one from the `SvelteKit` front-end engine: rule
 //! IDs, flag IDs, axis names, bands, thresholds, and firing order are
 //! identical. The submit endpoint runs the engine and persists its output into
 //! the three grade tables inside a single transaction.

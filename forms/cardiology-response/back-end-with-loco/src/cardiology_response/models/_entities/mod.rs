@@ -1,4 +1,4 @@
-//! SeaORM entity modules (one per SQL table).
+//! `SeaORM` entity modules (one per SQL table).
 
 pub mod prelude;
 

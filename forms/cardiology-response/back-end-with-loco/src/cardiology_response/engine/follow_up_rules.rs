@@ -23,6 +23,7 @@ pub struct FollowUp {
 }
 
 /// Grade follow-up urgency from the response and the already-computed axes.
+#[must_use]
 pub fn grade_follow_up(
     r: &CardiologyResponse,
     classification: &ResponseClassification,

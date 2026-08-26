@@ -50,6 +50,7 @@ const SECTIONS: &[SectionCheck] = &[
 
 /// Grade completeness, returning the percent and the fired rules (one per
 /// missing section).
+#[must_use]
 pub fn grade_completeness(r: &CardiologyResponse) -> (i32, Vec<FiredRule>) {
     let mut fired_rules: Vec<FiredRule> = Vec::new();
     let mut present_count = 0_i32;
@@ -67,7 +68,12 @@ pub fn grade_completeness(r: &CardiologyResponse) -> (i32, Vec<FiredRule>) {
         }
     }
 
-    let total = SECTIONS.len() as f64;
-    let completeness_percent = ((f64::from(present_count) / total) * 100.0).round() as i32;
+    // A handful of sections and a 0-100 percentage: the usize -> f64 and
+    // f64 -> i32 casts are exact by construction (rounding matches JS).
+    #[allow(clippy::cast_precision_loss, clippy::cast_possible_truncation)]
+    let completeness_percent = {
+        let total = SECTIONS.len() as f64;
+        ((f64::from(present_count) / total) * 100.0).round() as i32
+    };
     (completeness_percent, fired_rules)
 }

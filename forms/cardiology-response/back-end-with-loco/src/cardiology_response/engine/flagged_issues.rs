@@ -15,6 +15,8 @@ fn priority_order(priority: &str) -> u8 {
 }
 
 /// Detect safety-critical flags for a response.
+#[must_use]
+#[allow(clippy::too_many_lines)] // linear clinical rule list; splitting adds indirection, not clarity
 pub fn detect_flags(r: &CardiologyResponse) -> Vec<Flag> {
     let mut flags: Vec<Flag> = Vec::new();
 
