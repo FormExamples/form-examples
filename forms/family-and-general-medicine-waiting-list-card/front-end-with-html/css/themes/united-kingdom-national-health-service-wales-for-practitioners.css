@@ -3376,7 +3376,7 @@
         cursor: pointer;
     }
 
-    :where(.date-time-picker-day:hover:not(:disabled)) {
+    :where(.date-time-picker-day:hover:not([data-disabled])) {
         background-color: var(--lily-surface-alt);
     }
 
@@ -3400,7 +3400,7 @@
         border-color: var(--color-primary);
     }
 
-    :where(.date-time-picker-day:disabled) {
+    :where(.date-time-picker-day[data-disabled]) {
         color: var(--lily-text-muted);
         cursor: not-allowed;
         /* Struck through as well as dimmed: "unavailable" must not rest on

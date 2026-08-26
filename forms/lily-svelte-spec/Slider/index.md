@@ -27,7 +27,7 @@ All keyboard and drag behavior comes from the browser's native `<input type="ran
 - Two-thumb range pickers - native `<input type="range">` does not support this; compose two sliders or build a custom widget.
 - Angle pickers - use `AngleSliderRangeInput`.
 - Dial-style rotary controls - use `Dial`.
-- Discrete step choosers with labels - consider `SegmentGroup` or `RadioGroup`.
+- Discrete step pickers with labels - consider `SegmentGroup` or `RadioGroup`.
 
 ## How to use it
 
