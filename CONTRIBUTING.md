@@ -97,6 +97,7 @@ See [`docs/verification.md`](docs/verification.md) for what each gate proves.
 bin/test                               # structure + forms.tsv + example conformance
 bin/test-sql-apply                     # apply every form's migrations on a scratch DB
 bin/test-examples-conformance          # example fixtures match SQL schema
+bin/test-vendored-uniformity           # vendored themes + helpers uniform fleet-wide
 bin/test-tools                         # every generator/Lily --check gate
 bin/lily-html-refactor --check --all   # Lily HTML class contract
 bin/lily-svelte-refactor --check --all # Lily Svelte class contract

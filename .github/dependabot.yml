@@ -1,0 +1,26 @@
+# Dependabot: currency for the dependency sets a human rarely looks at.
+#
+# Deliberately NOT here: the 355 per-form Loco crates and Svelte front-ends.
+# Dependabot cannot reason about a fleet that must move in lockstep — 355
+# separate bump PRs would be noise, and a partial merge would break the
+# uniformity the repo exists to demonstrate. Those are updated by deliberate
+# fleet-wide sweeps (see AGENTS.md), verified by the sharded CI matrices, and
+# watched for advisories by the weekly cargo-deny job in ci.yml.
+
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+  - package-ecosystem: npm
+    directory: /formexamples.github.io
+    schedule:
+      interval: weekly
+      day: monday
+  - package-ecosystem: npm
+    directory: /e2e
+    schedule:
+      interval: weekly
+      day: monday

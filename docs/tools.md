@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-70 tools.
+71 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -64,6 +64,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-sql-apply`](#test-sql-apply)
 - [`bin/test-tools`](#test-tools)
 - [`bin/test-tutorials`](#test-tutorials)
+- [`bin/test-vendored-uniformity`](#test-vendored-uniformity)
 - [`bin/update`](#update)
 - [`bin/update-group-b-plans.py`](#update-group-b-planspy)
 - [`bin/protobuf/generate-protobuf-representations.py`](#protobufgenerate-protobuf-representationspy)
@@ -1618,6 +1619,40 @@ bin/test-tutorials — honest, fast doc-rot check for docs/tutorials/.
 
  Usage: bin/test-tutorials
  Exit status: 0 if every referenced path resolves, 1 otherwise.
+```
+
+<h2 id="test-vendored-uniformity"><code>bin/test-vendored-uniformity</code></h2>
+
+```text
+bin/test-vendored-uniformity — verify vendored assets are byte-identical
+across every form.
+
+The fleet vendors several asset sets per form that must be identical
+everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and the
+five Lily Svelte helper components plus their locales companion. The tools
+that re-sync them (bin/svelte-theme-css-sync, bin/html-theme-locale-select-
+refactor, bin/svelte-helpers-picker-rename) compare against the local Lily
+checkout, which CI does not have — so this gate proves the CI-checkable half
+of the same invariant: every form carries the SAME bytes as the rest of the
+fleet. Upstream currency (fleet vs the pinned checkout) remains the
+maintainer-run half, guarded locally by those tools' --check modes and
+bin/lib/lily_pin.py.
+
+Checked per form:
+  front-end-with-svelte/static/themes/*.css           (all 355 identical)
+  front-end-with-html/css/themes/*.css                (identical, except the
+      four THEME_COLLISION_SLUGS forms, whose page content collides with
+      theme selectors and which bin/html-theme-locale-select-refactor
+      deliberately skips — they are exempted here for the same reason)
+  front-end-with-svelte/src/lib/components/ui/{ThemePicker,LocalePicker,
+      TextSizePicker,SharePicker,DateTimePicker}.svelte and locales.ts
+
+The majority hash is the reference: any form whose copy differs from the
+fleet majority is reported. Exit is non-zero on any outlier.
+
+Usage:
+  bin/test-vendored-uniformity            # check the whole fleet
+  bin/test-vendored-uniformity --verbose  # list every checked set's hash
 ```
 
 <h2 id="update"><code>bin/update</code></h2>

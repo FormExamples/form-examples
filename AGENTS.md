@@ -32,6 +32,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/test-form <slug>` — test a single form by slug
 - `bin/test-sql-apply [<slug>…]` — apply every form's numbered SQL migrations in order to a fresh scratch Postgres database; the executable gate for `sql/` correctness
 - `bin/test-examples-conformance [<slug>…]` — check each form's `examples/assessment.json` against its `sql/` schema (every key names a real table/column; catches drift after a schema change)
+- `bin/test-vendored-uniformity [--verbose]` — verify the vendored theme catalogues (both stacks) and the five Lily Svelte helper components + `locales.ts` are byte-identical across every form. The CI-checkable half of the checkout-reading sync tools' invariant: fleet uniformity runs everywhere, upstream currency stays a maintainer-run check against the pinned checkout
 - `bin/test-e2e [--html] [--svelte] [--all|<slug>…]` — Playwright smoke + axe-core accessibility sweep over form front-ends
 - `bin/test-tools` — smoke-test every Lily-system tool's `--check` / `--counts` / `--help` modes
 - `bin/create-form <slug>` — scaffold a new form directory
@@ -229,6 +230,7 @@ bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completenes
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
+bin/test-vendored-uniformity          # vendored themes + Svelte helpers byte-identical fleet-wide
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```
 

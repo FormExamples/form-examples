@@ -40,21 +40,14 @@ DENY_TOML = """\
 
 [advisories]
 ignore = [
-    # quick-xml's unbounded-allocation and quadratic-runtime DoS advisories
-    # are only reachable by parsing attacker-controlled XML with an
-    # NsReader; this crate never parses untrusted XML. Pinned transitively
-    # via opendal -> loco-rs 0.16 and not fixable locally (0.38 -> 0.41 is a
-    # semver-incompatible bump opendal doesn't allow yet) -- revisit when
-    # loco-rs bumps its opendal pin.
-    { id = "RUSTSEC-2026-0195", reason = "transitive via loco-rs 0.16's opendal pin; not locally fixable; this crate does not parse untrusted XML" },
-    { id = "RUSTSEC-2026-0194", reason = "transitive via loco-rs 0.16's opendal pin; not locally fixable; this crate does not parse untrusted XML" },
-    # fxhash (via scraper, a loco-rs dep used for HTML templating helpers)
-    # and proc-macro-error2 (a build-time proc-macro dependency, not a
-    # runtime dependency) are both marked unmaintained upstream with no
-    # safe upgrade available yet -- transitive-only, not directly
-    # depended on by this crate.
-    { id = "RUSTSEC-2025-0057", reason = "unmaintained, no safe upgrade available; transitive via loco-rs's scraper dependency, not used directly" },
-    { id = "RUSTSEC-2026-0173", reason = "unmaintained, no safe upgrade available; transitive build-time proc-macro dependency, not used directly" },
+    # rsa's Marvin-attack timing sidechannel (key recovery during RSA
+    # decryption) has no fixed release yet -- rsa 0.9.x is the latest stable
+    # line and the advisory stands against all of it. It arrives transitively
+    # via loco-rs 1.1's jsonwebtoken, whose RSA (RS*/PS*) algorithms these
+    # crates never select: every crate's auth config uses an HMAC (HS256)
+    # shared-secret JWT, so no RSA decryption path is reachable. Revisit when
+    # rsa publishes a fixed release and jsonwebtoken adopts it.
+    { id = "RUSTSEC-2023-0071", reason = "no fixed rsa release exists; transitive via loco-rs 1.1's jsonwebtoken; unreachable here -- JWT auth is HMAC (HS256), no RSA algorithm is configured" },
 ]
 
 [licenses]

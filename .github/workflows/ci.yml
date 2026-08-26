@@ -5,9 +5,14 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # Manual full-fleet run (the changes job treats it like the nightly).
+  workflow_dispatch:
   schedule:
     # Nightly full sweep (E2E + heavy matrices). 03:17 UTC.
     - cron: '17 3 * * *'
+    # Weekly supply-chain advisories sweep (Mondays 05:17 UTC): cargo deny
+    # re-runs against a fresh advisory DB even when nothing was pushed.
+    - cron: '17 5 * * 1'
 
 # Cancel superseded runs on the same ref.
 concurrency:
@@ -15,9 +20,54 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Decide how much of the fleet the heavy Rust/Svelte matrices must cover.
+  # A push or PR that touches only forms/<slug>/… paths tests just those
+  # forms; anything cross-cutting (bin/, AGENTS/, e2e/, workflows, root
+  # files) — or the nightly schedule — tests all 355. The full fleet always
+  # runs nightly, so per-push filtering can narrow coverage by at most one
+  # day.
+  changes:
+    name: Changed-forms detection
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
+    outputs:
+      all: ${{ steps.detect.outputs.all }}
+      forms: ${{ steps.detect.outputs.forms }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: detect
+        run: |
+          set -eu
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "all=true" >> "$GITHUB_OUTPUT"; echo "forms=" >> "$GITHUB_OUTPUT"
+            echo "full fleet: ${{ github.event_name }}"; exit 0
+          fi
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+          # Unknown/garbage base (force push, new branch) => full fleet.
+          if [ -z "$base" ] || ! git cat-file -e "$base" 2>/dev/null; then
+            echo "all=true" >> "$GITHUB_OUTPUT"; echo "forms=" >> "$GITHUB_OUTPUT"
+            echo "full fleet: no usable base commit"; exit 0
+          fi
+          files=$(git diff --name-only "$base"...HEAD)
+          if echo "$files" | grep -qv '^forms/[^/]*/'; then
+            echo "all=true" >> "$GITHUB_OUTPUT"; echo "forms=" >> "$GITHUB_OUTPUT"
+            echo "full fleet: cross-cutting paths changed"; exit 0
+          fi
+          forms=$(echo "$files" | sed -n 's|^forms/\([^/]*\)/.*|\1|p' | sort -u | tr '\n' ' ')
+          echo "all=false" >> "$GITHUB_OUTPUT"
+          echo "forms=$forms" >> "$GITHUB_OUTPUT"
+          echo "changed forms: $forms"
+
   structure:
     name: Structure validation
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     steps:
       - uses: actions/checkout@v4
       - name: Run bin/test
@@ -26,6 +76,7 @@ jobs:
   drift:
     name: Drift detectors (generators + Lily contracts)
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -104,6 +155,44 @@ jobs:
       - name: Every Loco crate root forbids unsafe code
         run: bin/loco-forbid-unsafe --check --all
 
+      - name: Loco migrations mirror sql/ column defaults
+        run: bin/loco-migration-defaults --check --all
+
+      - name: Loco migration/entity/controller nullability matches sql/
+        run: bin/loco-migration-nullability --check --all
+
+      - name: No Loco crate is still on loco-rs 0.16
+        run: bin/loco-rs-1-migration --check --all
+
+      - name: Loco deny.toml files are current
+        run: python3 bin/generate-loco-deny-config.py --check
+
+      - name: HTML front-ends are ES modules
+        run: bin/es-modules-refactor --check --all
+
+      - name: HTML page headers use the title-left/controls-right layout
+        run: bin/page-header-layout-refactor --check
+
+      - name: HTML helper controls carry the *-picker names
+        run: bin/html-helpers-picker-rename --check
+
+      - name: HTML date-time-picker is vendored everywhere
+        run: bin/html-date-time-picker-vendor --check
+
+      - name: Svelte themesUrl sv-migrate fix holds
+        run: python3 bin/svelte-kit-3-theme-url-fix.py --check
+
+      # bin/svelte-helpers-picker-rename --check, bin/svelte-theme-css-sync
+      # --check, bin/svelte-date-time-picker-vendor --check, and
+      # bin/html-theme-locale-select-refactor --check read component/theme
+      # source fresh from the LOCAL Lily checkout (like the lily-sync pair
+      # above) and so cannot run here. Their CI-checkable half — every form
+      # carries byte-identical copies of the vendored assets — is proven by
+      # the step below; upstream currency stays a maintainer-run check,
+      # guarded locally by bin/lib/lily_pin.py.
+      - name: Vendored theme catalogues + Svelte helpers are fleet-uniform
+        run: bin/test-vendored-uniformity
+
       - name: Validate XML against DTDs
         run: |
           failed=0
@@ -162,6 +251,7 @@ jobs:
   sql-apply:
     name: SQL apply gate
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     services:
       postgres:
         image: postgres:18
@@ -191,6 +281,7 @@ jobs:
   fhir:
     name: FHIR R5 validation
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -224,6 +315,8 @@ jobs:
   rust:
     name: Rust (shard ${{ matrix.shard }}/8)
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
+    needs: [changes]
     strategy:
       fail-fast: false
       matrix:
@@ -268,7 +361,12 @@ jobs:
       - name: check / clippy / deny / test each crate in this shard
         run: |
           fail=0
+          CHANGED="${{ needs.changes.outputs.forms }}"
+          ALL="${{ needs.changes.outputs.all }}"
           for slug in $(bin/forms-shard ${{ matrix.shard }} 8); do
+            if [ "$ALL" != "true" ]; then
+              case " $CHANGED " in *" $slug "*) ;; *) continue ;; esac
+            fi
             crate="forms/$slug/back-end-with-loco"
             [ -f "$crate/Cargo.toml" ] || continue
             snake=$(printf '%s' "$slug" | tr '-' '_')
@@ -291,6 +389,8 @@ jobs:
   svelte:
     name: Svelte (shard ${{ matrix.shard }}/8)
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
+    needs: [changes]
     strategy:
       fail-fast: false
       matrix:
@@ -300,10 +400,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+          cache-dependency-path: forms/*/front-end-with-svelte/package-lock.json
       - name: check / build / vitest each front-end in this shard
         run: |
           fail=0
+          CHANGED="${{ needs.changes.outputs.forms }}"
+          ALL="${{ needs.changes.outputs.all }}"
           for slug in $(bin/forms-shard ${{ matrix.shard }} 8); do
+            if [ "$ALL" != "true" ]; then
+              case " $CHANGED " in *" $slug "*) ;; *) continue ;; esac
+            fi
             app="forms/$slug/front-end-with-svelte"
             [ -f "$app/package.json" ] || continue
             echo "::group::$slug"
@@ -316,9 +423,33 @@ jobs:
           done
           exit $fail
 
+  # New RUSTSEC advisories land without any push to this repo; the per-push
+  # cargo deny run only re-checks when code moves. This weekly pass re-runs
+  # the advisories check over every crate's committed lockfile (no
+  # compilation) so a quiet repo still hears about a newly-published CVE.
+  advisories:
+    name: Supply-chain advisories (weekly)
+    if: github.event_name == 'schedule' && github.event.schedule == '17 5 * * 1'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny
+      - name: cargo deny advisories over every crate's lockfile
+        run: |
+          fail=0
+          for slug in $(bin/forms-as-kebab-case); do
+            crate="forms/$slug/back-end-with-loco"
+            [ -f "$crate/Cargo.lock" ] || continue
+            ( cd "$crate" && cargo deny --all-features check advisories -s ) \
+              || { echo "::error::$slug has advisory findings"; fail=1; }
+          done
+          exit $fail
+
   e2e:
     name: End-to-end sweep (nightly)
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' && github.event.schedule != '17 5 * * 1'
     runs-on: ubuntu-latest
     needs: [structure]
     steps:

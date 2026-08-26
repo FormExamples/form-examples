@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""bin/test-vendored-uniformity — verify vendored assets are byte-identical
+across every form.
+
+The fleet vendors several asset sets per form that must be identical
+everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and the
+five Lily Svelte helper components plus their locales companion. The tools
+that re-sync them (bin/svelte-theme-css-sync, bin/html-theme-locale-select-
+refactor, bin/svelte-helpers-picker-rename) compare against the local Lily
+checkout, which CI does not have — so this gate proves the CI-checkable half
+of the same invariant: every form carries the SAME bytes as the rest of the
+fleet. Upstream currency (fleet vs the pinned checkout) remains the
+maintainer-run half, guarded locally by those tools' --check modes and
+bin/lib/lily_pin.py.
+
+Checked per form:
+  front-end-with-svelte/static/themes/*.css           (all 355 identical)
+  front-end-with-html/css/themes/*.css                (identical, except the
+      four THEME_COLLISION_SLUGS forms, whose page content collides with
+      theme selectors and which bin/html-theme-locale-select-refactor
+      deliberately skips — they are exempted here for the same reason)
+  front-end-with-svelte/src/lib/components/ui/{ThemePicker,LocalePicker,
+      TextSizePicker,SharePicker,DateTimePicker}.svelte and locales.ts
+
+The majority hash is the reference: any form whose copy differs from the
+fleet majority is reported. Exit is non-zero on any outlier.
+
+Usage:
+  bin/test-vendored-uniformity            # check the whole fleet
+  bin/test-vendored-uniformity --verbose  # list every checked set's hash
+"""
+
+from __future__ import annotations
+
+import hashlib
+import sys
+from collections import Counter, defaultdict
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS = REPO_ROOT / "forms"
+
+# Kept in sync with bin/html-theme-locale-select-refactor, which skips these
+# forms' HTML theme catalogue on purpose (theme-selector class collisions).
+THEME_COLLISION_SLUGS = {
+    "legal-requirements-privacy-notice",
+    "screening-program-privacy-notice",
+    "united-kingdom-statement-of-fitness-for-work",
+    "international-certificate-of-vaccination-or-prophylaxis",
+}
+
+UI = "front-end-with-svelte/src/lib/components/ui"
+FILE_SETS = [
+    (f"{UI}/ThemePicker.svelte", set()),
+    (f"{UI}/LocalePicker.svelte", set()),
+    (f"{UI}/TextSizePicker.svelte", set()),
+    (f"{UI}/SharePicker.svelte", set()),
+    (f"{UI}/DateTimePicker.svelte", set()),
+    (f"{UI}/locales.ts", set()),
+]
+DIR_SETS = [
+    ("front-end-with-svelte/static/themes", set()),
+    ("front-end-with-html/css/themes", THEME_COLLISION_SLUGS),
+]
+
+
+def dir_hash(d: Path) -> str:
+    h = hashlib.sha256()
+    for f in sorted(d.glob("*.css")):
+        h.update(f.name.encode())
+        h.update(f.read_bytes())
+    return h.hexdigest()
+
+
+def file_hash(f: Path) -> str:
+    return hashlib.sha256(f.read_bytes()).hexdigest()
+
+
+def main() -> int:
+    verbose = "--verbose" in sys.argv[1:]
+    failures: list[str] = []
+    checked: set[str] = set()
+    forms = sorted(p for p in FORMS.iterdir() if p.is_dir())
+
+    def check(rel: str, exempt: set[str], hasher) -> None:
+        hashes: dict[str, str] = {}
+        for form in forms:
+            target = form / rel
+            if form.name in exempt or not target.exists():
+                continue
+            hashes[form.name] = hasher(target)
+            checked.add(form.name)
+        if not hashes:
+            failures.append(f"{rel}: nothing found to check")
+            return
+        counts = Counter(hashes.values())
+        majority, n = counts.most_common(1)[0]
+        outliers = defaultdict(list)
+        for slug, h in hashes.items():
+            if h != majority:
+                outliers[h].append(slug)
+        if verbose:
+            print(f"{rel}: {n}/{len(hashes)} at {majority[:12]}")
+        for h, slugs in sorted(outliers.items()):
+            failures.append(
+                f"{rel}: {len(slugs)} form(s) differ from the fleet "
+                f"({', '.join(slugs[:5])}{'…' if len(slugs) > 5 else ''})"
+            )
+
+    for rel, exempt in DIR_SETS:
+        check(rel, exempt, dir_hash)
+    for rel, exempt in FILE_SETS:
+        check(rel, exempt, file_hash)
+
+    if failures:
+        for f in failures:
+            print(f"FAIL {f}")
+        return 1
+    print(
+        f"test-vendored-uniformity: {len(DIR_SETS)} catalogues + "
+        f"{len(FILE_SETS)} components uniform across {len(checked)} forms"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
