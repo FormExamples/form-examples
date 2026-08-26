@@ -1,0 +1,1144 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "assess",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The grader's live timestamp field is stripped by the harness.",
+  "personas": [
+    {
+      "name": "stable-complete-progress-note",
+      "description": "Day-4 CAP progress note with every required component documented, NEWS2 1 improving on room air — expect complete (100%), stable acuity, no flags.",
+      "state": {
+        "header": {
+          "noteType": "progress",
+          "hospitalName": "City General Hospital",
+          "wardName": "Ward 7B",
+          "bedNumber": "12",
+          "noteAt": "2026-08-26T08:30",
+          "authorName": "Dr Anna Kowalczyk",
+          "authorGrade": "st4",
+          "authorRegistrationNumber": "7654321",
+          "parentSpecialty": "general-medicine",
+          "responsibleConsultantName": "Dr James Okoro",
+          "consultQuestion": "",
+          "consultRequestingTeam": "",
+          "procedurePerformed": "",
+          "procedureDetail": "",
+          "procedureConsent": "",
+          "procedureComplications": "",
+          "transferFromWard": "",
+          "transferToWard": "",
+          "transferReason": ""
+        },
+        "admission": {
+          "patientName": "Gordon Ashworth",
+          "nhsNumber": "943 476 5925",
+          "hospitalMrn": "MRN0071822",
+          "birthDate": "1946-10-05",
+          "sex": "male",
+          "admissionAt": "2026-08-22T19:40",
+          "admittingSpecialty": "general-medicine",
+          "admissionMethod": "emergency-department",
+          "admissionReason": "Community-acquired pneumonia"
+        },
+        "interval": {
+          "intervalHistory": "Comfortable night, afebrile since yesterday evening. Eating and drinking well.",
+          "noIntervalEvents": "",
+          "overnightEvents": "",
+          "patientReportedSymptoms": "",
+          "nursingConcerns": "",
+          "painScore": 1,
+          "sleepQuality": "good",
+          "oralIntake": "adequate",
+          "bowelsLastOpened": "",
+          "mobilityStatus": "mobilising-with-frame"
+        },
+        "observations": {
+          "observedAt": "2026-08-26T08:00",
+          "respiratoryRate": 16,
+          "oxygenSaturation": 96,
+          "spo2Scale": "scale-1",
+          "oxygenDelivery": "room-air",
+          "oxygenFlowLitresPerMinute": null,
+          "systolicBloodPressure": 124,
+          "diastolicBloodPressure": 72,
+          "pulseRate": 78,
+          "acvpu": "alert",
+          "temperatureCelsius": 36.8,
+          "news2Total": 1,
+          "news2Trend": "improving",
+          "news2Applicable": "yes",
+          "news2NotApplicableReason": ""
+        },
+        "examination": {
+          "general": "",
+          "cardiovascular": "",
+          "respiratory": "",
+          "abdominal": "",
+          "neurological": "",
+          "musculoskeletal": "",
+          "skinAndWounds": "",
+          "linesAndDrains": "",
+          "other": ""
+        },
+        "investigations": {
+          "rows": [
+            {
+              "testName": "CRP",
+              "category": "blood",
+              "requestedDate": "2026-08-25",
+              "resultDate": "2026-08-26",
+              "resultSummary": "CRP 42, down from 180 on admission"
+            }
+          ],
+          "noInvestigationsReviewed": ""
+        },
+        "problems": {
+          "rows": [
+            {
+              "problem": "Community-acquired pneumonia",
+              "category": "respiratory",
+              "status": "improving",
+              "priority": "active",
+              "onsetDate": "2026-08-21"
+            }
+          ]
+        },
+        "medications": {
+          "rows": [
+            {
+              "drugName": "Amoxicillin",
+              "action": "continue",
+              "dose": "1 g",
+              "route": "oral",
+              "frequency": "tds"
+            }
+          ],
+          "noMedicationChanges": "",
+          "allergyChecked": "yes",
+          "medicinesReconciliationStatus": "",
+          "antimicrobialReviewStatus": "reviewed-day-3"
+        },
+        "risks": {
+          "vteStatus": "assessed",
+          "vteProphylaxis": "enoxaparin-40mg",
+          "vteNotes": "",
+          "fallsRisk": "low",
+          "fallsInterventions": "",
+          "pressureUlcerRisk": "",
+          "skinIntegrity": "",
+          "pressureUlcerGrade": "",
+          "pressureUlcerSites": "",
+          "deliriumScreen": "",
+          "delirium4atScore": null,
+          "deliriumNotes": "",
+          "nutritionScreen": "done",
+          "mustScore": 0,
+          "nutritionPlan": "",
+          "infectionStatus": "",
+          "isolationStatus": "",
+          "organism": "",
+          "safeguardingConcern": "",
+          "safeguardingNotes": "",
+          "safeguardingReferralMade": ""
+        },
+        "assessment": {
+          "clinicalImpression": "CAP responding to oral antibiotics; day 4, clinically improving.",
+          "differentialDiagnosis": "",
+          "responseToTreatment": "improving",
+          "newOxygenRequirement": "no",
+          "newConfusion": "no",
+          "sepsisScreen": "negative",
+          "arrestCall": "",
+          "criticalCareReferral": "",
+          "newOrganSupport": ""
+        },
+        "planning": {
+          "plan": "Complete 5-day antibiotic course. Repeat CRP tomorrow. Physio review for stairs assessment.",
+          "jobs": [
+            {
+              "job": "Repeat CRP",
+              "category": "investigation",
+              "owner": "FY1",
+              "priority": "routine",
+              "dueAt": "2026-08-27T09:00"
+            }
+          ],
+          "escalationStatus": "for-full-escalation",
+          "escalationAction": "",
+          "ceilingOfCare": "full-active-treatment",
+          "respectStatus": "",
+          "dnacprStatus": "",
+          "seniorReviewNeeded": "no",
+          "seniorReviewBy": "Dr James Okoro (consultant, on this ward round)",
+          "estimatedDischargeDate": "2026-08-28",
+          "dischargePlanningNotes": ""
+        },
+        "signOff": {
+          "familyCommunication": "",
+          "patientCommunication": "Plan discussed with patient, happy to continue oral antibiotics.",
+          "teamHandover": "Nil outstanding overnight.",
+          "consentStatus": "",
+          "capacityAssessed": "",
+          "capacityNotes": "",
+          "authorOverrideAcuity": "",
+          "authorOverrideReason": "",
+          "attestationText": "",
+          "electronicSignature": "A. Kowalczyk ST4"
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "acuityBand": "stable",
+        "computedAcuityBand": "stable",
+        "acuityOverridden": false,
+        "news2Total": 1,
+        "news2DerivedTotal": 2,
+        "componentStatuses": [
+          {
+            "component": "header",
+            "label": "Note header",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "interval-history",
+            "label": "Interval history",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "observations",
+            "label": "Observations and NEWS2",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "examination",
+            "label": "Examination",
+            "required": false,
+            "present": false
+          },
+          {
+            "component": "investigations",
+            "label": "Investigations reviewed",
+            "required": false,
+            "present": true
+          },
+          {
+            "component": "problems",
+            "label": "Problem list",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "medications",
+            "label": "Medications",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "risk-assessments",
+            "label": "Risk assessments",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "impression",
+            "label": "Clinical impression",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "plan",
+            "label": "Plan and jobs",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "escalation",
+            "label": "Escalation status",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "communication",
+            "label": "Communication",
+            "required": false,
+            "present": true
+          }
+        ],
+        "documentedComponents": [
+          "header",
+          "interval-history",
+          "observations",
+          "investigations",
+          "problems",
+          "medications",
+          "risk-assessments",
+          "impression",
+          "plan",
+          "escalation",
+          "communication"
+        ],
+        "documentedRequired": 9,
+        "totalRequired": 9,
+        "firedRules": [
+          {
+            "id": "R-HEADER-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "header",
+            "band": "",
+            "category": "required-component",
+            "description": "Header: note type, date and time, author name and grade recorded"
+          },
+          {
+            "id": "R-INTERVAL-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "interval-history",
+            "band": "",
+            "category": "required-component",
+            "description": "Interval history: events since the last entry recorded, or an explicit \"no events\""
+          },
+          {
+            "id": "R-OBSERVATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "observations",
+            "band": "",
+            "category": "required-component",
+            "description": "Observations: a NEWS2 total recorded, or a full set of the seven NEWS2 parameters"
+          },
+          {
+            "id": "R-INVESTIGATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "investigations",
+            "band": "",
+            "category": "recommended-component",
+            "description": "Investigations: at least one result reviewed, or an explicit \"none reviewed\""
+          },
+          {
+            "id": "R-PROBLEMS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "problems",
+            "band": "",
+            "category": "required-component",
+            "description": "Problems: at least one problem on the list"
+          },
+          {
+            "id": "R-MEDICATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "medications",
+            "band": "",
+            "category": "required-component",
+            "description": "Medications: at least one prescribing change, or an explicit \"no changes\""
+          },
+          {
+            "id": "R-RISKS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "risk-assessments",
+            "band": "",
+            "category": "required-component",
+            "description": "Risk assessments: VTE status recorded (NICE NG89)"
+          },
+          {
+            "id": "R-IMPRESSION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "impression",
+            "band": "",
+            "category": "required-component",
+            "description": "Impression: a clinical impression recorded"
+          },
+          {
+            "id": "R-PLAN-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "plan",
+            "band": "",
+            "category": "required-component",
+            "description": "Plan: a narrative plan, or at least one job"
+          },
+          {
+            "id": "R-ESCALATION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "escalation",
+            "band": "",
+            "category": "required-component",
+            "description": "Escalation: an escalation status and a ceiling of care recorded"
+          },
+          {
+            "id": "R-COMMUNICATION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "communication",
+            "band": "",
+            "category": "recommended-component",
+            "description": "Communication: what was discussed with the family, the patient, or the team"
+          },
+          {
+            "id": "A-NEWS2-LOW",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "stable",
+            "category": "news2",
+            "description": "NEWS2 1 — RCP low-risk band, no single parameter scoring 3"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "engine": "completeness",
+            "component": "completeness",
+            "band": "",
+            "category": "completeness",
+            "description": "All 9 required components documented — entry complete (100%)"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "deteriorating-sepsis-event-note",
+      "description": "03:15 event note: NEWS2 7 worsening, new oxygen requirement, positive sepsis screen, critical-care outreach informed — expect escalate acuity with NEWS2-high, new-oxygen, and sepsis rules fired.",
+      "state": {
+        "header": {
+          "noteType": "event",
+          "hospitalName": "City General Hospital",
+          "wardName": "Ward 7B",
+          "bedNumber": "12",
+          "noteAt": "2026-08-26T03:15",
+          "authorName": "Dr Anna Kowalczyk",
+          "authorGrade": "st4",
+          "authorRegistrationNumber": "7654321",
+          "parentSpecialty": "general-medicine",
+          "responsibleConsultantName": "Dr James Okoro",
+          "consultQuestion": "",
+          "consultRequestingTeam": "",
+          "procedurePerformed": "",
+          "procedureDetail": "",
+          "procedureConsent": "",
+          "procedureComplications": "",
+          "transferFromWard": "",
+          "transferToWard": "",
+          "transferReason": ""
+        },
+        "admission": {
+          "patientName": "Gordon Ashworth",
+          "nhsNumber": "943 476 5925",
+          "hospitalMrn": "MRN0071822",
+          "birthDate": "1946-10-05",
+          "sex": "male",
+          "admissionAt": "2026-08-22T19:40",
+          "admittingSpecialty": "general-medicine",
+          "admissionMethod": "emergency-department",
+          "admissionReason": "Community-acquired pneumonia"
+        },
+        "interval": {
+          "intervalHistory": "Called to see at 03:00: increasing breathlessness and rigors since midnight.",
+          "noIntervalEvents": "",
+          "overnightEvents": "",
+          "patientReportedSymptoms": "",
+          "nursingConcerns": "Nursing staff escalated rising EWS and new oxygen requirement.",
+          "painScore": null,
+          "sleepQuality": "",
+          "oralIntake": "",
+          "bowelsLastOpened": "",
+          "mobilityStatus": ""
+        },
+        "observations": {
+          "observedAt": "2026-08-26T03:05",
+          "respiratoryRate": 26,
+          "oxygenSaturation": 93,
+          "spo2Scale": "scale-1",
+          "oxygenDelivery": "nasal-cannula",
+          "oxygenFlowLitresPerMinute": 2,
+          "systolicBloodPressure": 98,
+          "diastolicBloodPressure": 60,
+          "pulseRate": 118,
+          "acvpu": "alert",
+          "temperatureCelsius": 38.9,
+          "news2Total": 7,
+          "news2Trend": "worsening",
+          "news2Applicable": "yes",
+          "news2NotApplicableReason": ""
+        },
+        "examination": {
+          "general": "",
+          "cardiovascular": "",
+          "respiratory": "",
+          "abdominal": "",
+          "neurological": "",
+          "musculoskeletal": "",
+          "skinAndWounds": "",
+          "linesAndDrains": "",
+          "other": ""
+        },
+        "investigations": {
+          "rows": [
+            {
+              "testName": "Blood cultures",
+              "category": "microbiology",
+              "requestedDate": "2026-08-26",
+              "resultDate": "",
+              "resultSummary": "Taken before antibiotics"
+            },
+            {
+              "testName": "Venous lactate",
+              "category": "blood",
+              "requestedDate": "2026-08-26",
+              "resultDate": "2026-08-26",
+              "resultSummary": "Lactate 2.8"
+            }
+          ],
+          "noInvestigationsReviewed": ""
+        },
+        "problems": {
+          "rows": [
+            {
+              "problem": "Community-acquired pneumonia",
+              "category": "respiratory",
+              "status": "worsening",
+              "priority": "active",
+              "onsetDate": "2026-08-21"
+            },
+            {
+              "problem": "Suspected hospital-onset sepsis",
+              "category": "infection",
+              "status": "new",
+              "priority": "active",
+              "onsetDate": "2026-08-26"
+            }
+          ]
+        },
+        "medications": {
+          "rows": [
+            {
+              "drugName": "Piperacillin-tazobactam",
+              "action": "start",
+              "dose": "4.5 g",
+              "route": "intravenous",
+              "frequency": "tds"
+            }
+          ],
+          "noMedicationChanges": "",
+          "allergyChecked": "yes",
+          "medicinesReconciliationStatus": "",
+          "antimicrobialReviewStatus": ""
+        },
+        "risks": {
+          "vteStatus": "assessed",
+          "vteProphylaxis": "enoxaparin-40mg",
+          "vteNotes": "",
+          "fallsRisk": "",
+          "fallsInterventions": "",
+          "pressureUlcerRisk": "",
+          "skinIntegrity": "",
+          "pressureUlcerGrade": "",
+          "pressureUlcerSites": "",
+          "deliriumScreen": "",
+          "delirium4atScore": null,
+          "deliriumNotes": "",
+          "nutritionScreen": "",
+          "mustScore": null,
+          "nutritionPlan": "",
+          "infectionStatus": "suspected-sepsis",
+          "isolationStatus": "",
+          "organism": "",
+          "safeguardingConcern": "",
+          "safeguardingNotes": "",
+          "safeguardingReferralMade": ""
+        },
+        "assessment": {
+          "clinicalImpression": "Deterioration at day 4: likely progressive pneumonia with sepsis.",
+          "differentialDiagnosis": "Empyema; PE less likely.",
+          "responseToTreatment": "deteriorating",
+          "newOxygenRequirement": "yes",
+          "newConfusion": "no",
+          "sepsisScreen": "positive",
+          "arrestCall": "",
+          "criticalCareReferral": "discussed",
+          "newOrganSupport": ""
+        },
+        "planning": {
+          "plan": "Sepsis 6 completed. Broaden antibiotics per micro advice. Senior review now; critical-care outreach informed. Repeat gas in 1 hour.",
+          "jobs": [
+            {
+              "job": "Chase blood cultures",
+              "category": "investigation",
+              "owner": "on-call SHO",
+              "priority": "urgent",
+              "dueAt": "2026-08-26T09:00"
+            },
+            {
+              "job": "Repeat venous gas",
+              "category": "investigation",
+              "owner": "on-call SHO",
+              "priority": "urgent",
+              "dueAt": "2026-08-26T04:15"
+            }
+          ],
+          "escalationStatus": "for-full-escalation",
+          "escalationAction": "critical-care-outreach-informed",
+          "ceilingOfCare": "full-active-treatment",
+          "respectStatus": "",
+          "dnacprStatus": "",
+          "seniorReviewNeeded": "yes",
+          "seniorReviewBy": "medical-registrar",
+          "estimatedDischargeDate": "",
+          "dischargePlanningNotes": ""
+        },
+        "signOff": {
+          "familyCommunication": "",
+          "patientCommunication": "",
+          "teamHandover": "Handed to day team for consultant review first thing.",
+          "consentStatus": "",
+          "capacityAssessed": "",
+          "capacityNotes": "",
+          "authorOverrideAcuity": "",
+          "authorOverrideReason": "",
+          "attestationText": "",
+          "electronicSignature": "R. Chen SHO"
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "acuityBand": "escalate",
+        "computedAcuityBand": "escalate",
+        "acuityOverridden": false,
+        "news2Total": 7,
+        "news2DerivedTotal": 12,
+        "componentStatuses": [
+          {
+            "component": "header",
+            "label": "Note header",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "interval-history",
+            "label": "Interval history",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "observations",
+            "label": "Observations and NEWS2",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "examination",
+            "label": "Examination",
+            "required": false,
+            "present": false
+          },
+          {
+            "component": "investigations",
+            "label": "Investigations reviewed",
+            "required": false,
+            "present": true
+          },
+          {
+            "component": "problems",
+            "label": "Problem list",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "medications",
+            "label": "Medications",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "risk-assessments",
+            "label": "Risk assessments",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "impression",
+            "label": "Clinical impression",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "plan",
+            "label": "Plan and jobs",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "escalation",
+            "label": "Escalation status",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "communication",
+            "label": "Communication",
+            "required": false,
+            "present": true
+          }
+        ],
+        "documentedComponents": [
+          "header",
+          "interval-history",
+          "observations",
+          "investigations",
+          "problems",
+          "medications",
+          "risk-assessments",
+          "impression",
+          "plan",
+          "escalation",
+          "communication"
+        ],
+        "documentedRequired": 9,
+        "totalRequired": 9,
+        "firedRules": [
+          {
+            "id": "R-HEADER-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "header",
+            "band": "",
+            "category": "required-component",
+            "description": "Header: note type, date and time, author name and grade recorded"
+          },
+          {
+            "id": "R-INTERVAL-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "interval-history",
+            "band": "",
+            "category": "required-component",
+            "description": "Interval history: events since the last entry recorded, or an explicit \"no events\""
+          },
+          {
+            "id": "R-OBSERVATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "observations",
+            "band": "",
+            "category": "required-component",
+            "description": "Observations: a NEWS2 total recorded, or a full set of the seven NEWS2 parameters"
+          },
+          {
+            "id": "R-INVESTIGATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "investigations",
+            "band": "",
+            "category": "recommended-component",
+            "description": "Investigations: at least one result reviewed, or an explicit \"none reviewed\""
+          },
+          {
+            "id": "R-PROBLEMS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "problems",
+            "band": "",
+            "category": "required-component",
+            "description": "Problems: at least one problem on the list"
+          },
+          {
+            "id": "R-MEDICATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "medications",
+            "band": "",
+            "category": "required-component",
+            "description": "Medications: at least one prescribing change, or an explicit \"no changes\""
+          },
+          {
+            "id": "R-RISKS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "risk-assessments",
+            "band": "",
+            "category": "required-component",
+            "description": "Risk assessments: VTE status recorded (NICE NG89)"
+          },
+          {
+            "id": "R-IMPRESSION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "impression",
+            "band": "",
+            "category": "required-component",
+            "description": "Impression: a clinical impression recorded"
+          },
+          {
+            "id": "R-PLAN-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "plan",
+            "band": "",
+            "category": "required-component",
+            "description": "Plan: a narrative plan, or at least one job"
+          },
+          {
+            "id": "R-ESCALATION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "escalation",
+            "band": "",
+            "category": "required-component",
+            "description": "Escalation: an escalation status and a ceiling of care recorded"
+          },
+          {
+            "id": "R-COMMUNICATION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "communication",
+            "band": "",
+            "category": "recommended-component",
+            "description": "Communication: what was discussed with the family, the patient, or the team"
+          },
+          {
+            "id": "A-NEWS2-HIGH",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "escalate",
+            "category": "news2",
+            "description": "NEWS2 7 — RCP high-risk band, emergency assessment by a critical-care-competent team"
+          },
+          {
+            "id": "A-NEWS2-TREND",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "watch",
+            "category": "news2",
+            "description": "NEWS2 trend is worsening — a rising score predicts deterioration better than a single reading"
+          },
+          {
+            "id": "A-NEW-OXYGEN",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "escalate",
+            "category": "deterioration-marker",
+            "description": "New oxygen requirement recorded"
+          },
+          {
+            "id": "A-SEPSIS",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "escalate",
+            "category": "deterioration-marker",
+            "description": "Sepsis screen positive — NICE NG51 requires senior review and the sepsis pathway"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "engine": "completeness",
+            "component": "completeness",
+            "band": "",
+            "category": "completeness",
+            "description": "All 9 required components documented — entry complete (100%)"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "sparse-overnight-note-with-override",
+      "description": "Brief FY2 overnight entry: NEWS2 4 recorded but problems, medications, risks, plan, and escalation undocumented; author overrides acuity to watch WITH a recorded reason — expect incomplete completeness and the override honoured.",
+      "state": {
+        "header": {
+          "noteType": "progress",
+          "hospitalName": "City General Hospital",
+          "wardName": "Ward 7B",
+          "bedNumber": "12",
+          "noteAt": "2026-08-26T02:10",
+          "authorName": "Dr Lee Fenwick",
+          "authorGrade": "fy2",
+          "authorRegistrationNumber": "7654321",
+          "parentSpecialty": "general-medicine",
+          "responsibleConsultantName": "Dr James Okoro",
+          "consultQuestion": "",
+          "consultRequestingTeam": "",
+          "procedurePerformed": "",
+          "procedureDetail": "",
+          "procedureConsent": "",
+          "procedureComplications": "",
+          "transferFromWard": "",
+          "transferToWard": "",
+          "transferReason": ""
+        },
+        "admission": {
+          "patientName": "Gordon Ashworth",
+          "nhsNumber": "943 476 5925",
+          "hospitalMrn": "MRN0071822",
+          "birthDate": "1946-10-05",
+          "sex": "male",
+          "admissionAt": "2026-08-22T19:40",
+          "admittingSpecialty": "general-medicine",
+          "admissionMethod": "emergency-department",
+          "admissionReason": "Community-acquired pneumonia"
+        },
+        "interval": {
+          "intervalHistory": "",
+          "noIntervalEvents": "yes",
+          "overnightEvents": "",
+          "patientReportedSymptoms": "",
+          "nursingConcerns": "",
+          "painScore": null,
+          "sleepQuality": "",
+          "oralIntake": "",
+          "bowelsLastOpened": "",
+          "mobilityStatus": ""
+        },
+        "observations": {
+          "observedAt": "2026-08-26T08:00",
+          "respiratoryRate": 22,
+          "oxygenSaturation": 95,
+          "spo2Scale": "scale-1",
+          "oxygenDelivery": "room-air",
+          "oxygenFlowLitresPerMinute": null,
+          "systolicBloodPressure": 118,
+          "diastolicBloodPressure": 70,
+          "pulseRate": 96,
+          "acvpu": "alert",
+          "temperatureCelsius": 37.6,
+          "news2Total": 4,
+          "news2Trend": "stable",
+          "news2Applicable": "yes",
+          "news2NotApplicableReason": ""
+        },
+        "examination": {
+          "general": "",
+          "cardiovascular": "",
+          "respiratory": "",
+          "abdominal": "",
+          "neurological": "",
+          "musculoskeletal": "",
+          "skinAndWounds": "",
+          "linesAndDrains": "",
+          "other": ""
+        },
+        "investigations": {
+          "rows": [],
+          "noInvestigationsReviewed": ""
+        },
+        "problems": {
+          "rows": []
+        },
+        "medications": {
+          "rows": [],
+          "noMedicationChanges": "",
+          "allergyChecked": "",
+          "medicinesReconciliationStatus": "",
+          "antimicrobialReviewStatus": ""
+        },
+        "risks": {
+          "vteStatus": "",
+          "vteProphylaxis": "",
+          "vteNotes": "",
+          "fallsRisk": "",
+          "fallsInterventions": "",
+          "pressureUlcerRisk": "",
+          "skinIntegrity": "",
+          "pressureUlcerGrade": "",
+          "pressureUlcerSites": "",
+          "deliriumScreen": "",
+          "delirium4atScore": null,
+          "deliriumNotes": "",
+          "nutritionScreen": "",
+          "mustScore": null,
+          "nutritionPlan": "",
+          "infectionStatus": "",
+          "isolationStatus": "",
+          "organism": "",
+          "safeguardingConcern": "",
+          "safeguardingNotes": "",
+          "safeguardingReferralMade": ""
+        },
+        "assessment": {
+          "clinicalImpression": "Reviewed overnight: mildly raised RR, otherwise settled. Watch respiratory trend.",
+          "differentialDiagnosis": "",
+          "responseToTreatment": "",
+          "newOxygenRequirement": "",
+          "newConfusion": "",
+          "sepsisScreen": "",
+          "arrestCall": "",
+          "criticalCareReferral": "",
+          "newOrganSupport": ""
+        },
+        "planning": {
+          "plan": "",
+          "jobs": [],
+          "escalationStatus": "",
+          "escalationAction": "",
+          "ceilingOfCare": "",
+          "respectStatus": "",
+          "dnacprStatus": "",
+          "seniorReviewNeeded": "",
+          "seniorReviewBy": "",
+          "estimatedDischargeDate": "",
+          "dischargePlanningNotes": ""
+        },
+        "signOff": {
+          "familyCommunication": "",
+          "patientCommunication": "",
+          "teamHandover": "",
+          "consentStatus": "",
+          "capacityAssessed": "",
+          "capacityNotes": "",
+          "authorOverrideAcuity": "watch",
+          "authorOverrideReason": "RR trending up over the evening despite aggregate NEWS2 4; asked night staff for 2-hourly obs.",
+          "attestationText": "",
+          "electronicSignature": "L. Fenwick FY2"
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 44,
+        "acuityBand": "watch",
+        "computedAcuityBand": "stable",
+        "acuityOverridden": true,
+        "news2Total": 4,
+        "news2DerivedTotal": 6,
+        "componentStatuses": [
+          {
+            "component": "header",
+            "label": "Note header",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "interval-history",
+            "label": "Interval history",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "observations",
+            "label": "Observations and NEWS2",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "examination",
+            "label": "Examination",
+            "required": false,
+            "present": false
+          },
+          {
+            "component": "investigations",
+            "label": "Investigations reviewed",
+            "required": false,
+            "present": false
+          },
+          {
+            "component": "problems",
+            "label": "Problem list",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "medications",
+            "label": "Medications",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "risk-assessments",
+            "label": "Risk assessments",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "impression",
+            "label": "Clinical impression",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "plan",
+            "label": "Plan and jobs",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "escalation",
+            "label": "Escalation status",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "communication",
+            "label": "Communication",
+            "required": false,
+            "present": false
+          }
+        ],
+        "documentedComponents": [
+          "header",
+          "interval-history",
+          "observations",
+          "impression"
+        ],
+        "documentedRequired": 4,
+        "totalRequired": 9,
+        "firedRules": [
+          {
+            "id": "R-HEADER-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "header",
+            "band": "",
+            "category": "required-component",
+            "description": "Header: note type, date and time, author name and grade recorded"
+          },
+          {
+            "id": "R-INTERVAL-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "interval-history",
+            "band": "",
+            "category": "required-component",
+            "description": "Interval history: events since the last entry recorded, or an explicit \"no events\""
+          },
+          {
+            "id": "R-OBSERVATIONS-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "observations",
+            "band": "",
+            "category": "required-component",
+            "description": "Observations: a NEWS2 total recorded, or a full set of the seven NEWS2 parameters"
+          },
+          {
+            "id": "R-IMPRESSION-DOCUMENTED-01",
+            "engine": "completeness",
+            "component": "impression",
+            "band": "",
+            "category": "required-component",
+            "description": "Impression: a clinical impression recorded"
+          },
+          {
+            "id": "A-NEWS2-LOW",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "stable",
+            "category": "news2",
+            "description": "NEWS2 4 — RCP low-risk band, no single parameter scoring 3"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "engine": "completeness",
+            "component": "completeness",
+            "band": "",
+            "category": "completeness",
+            "description": "4 of 9 required components documented — entry incomplete (44%)"
+          },
+          {
+            "id": "A-AUTHOR-OVERRIDE",
+            "engine": "acuity",
+            "component": "acuity",
+            "band": "watch",
+            "category": "override",
+            "description": "Author overrode the computed acuity band (stable) to watch: RR trending up over the evening despite aggregate NEWS2 4; asked night staff for 2-hourly obs."
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-NO-PLAN-001",
+            "category": "no-plan-documented",
+            "priority": "high",
+            "description": "No plan and no jobs are recorded on this note.",
+            "suggestedAction": "Record the management plan and the outstanding jobs, so the next clinician can safely continue care."
+          },
+          {
+            "id": "F-INCOMPLETE-ENTRY-001",
+            "category": "incomplete-entry",
+            "priority": "low",
+            "description": "5 of 9 required components for this note type are not documented.",
+            "suggestedAction": "Complete the missing components before signing the entry."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,713 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateOperationGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-lap-chole",
+      "description": "Uneventful elective laparoscopic cholecystectomy: EBL 30 ml, all counts agreed, Clavien-Dindo 0, ward recovery as planned — expect routine composite risk and no flags.",
+      "state": {
+        "operation": {
+          "hospital": "City General Hospital",
+          "theatreNumber": "4",
+          "listType": "elective",
+          "caseStartTime": "08:35",
+          "anaesthesiaStartTime": "08:40",
+          "knifeToSkinTime": "09:05",
+          "endOfSurgeryTime": "10:10",
+          "caseEndTime": "10:30",
+          "operationDate": "2026-08-26"
+        },
+        "patient": {
+          "nhsNumber": "943 476 5926",
+          "mrn": "MRN0081934",
+          "firstName": "Carol",
+          "lastName": "Beresford",
+          "dateOfBirth": "1969-05-18",
+          "sex": "female",
+          "weightKg": 78,
+          "heightCm": 164,
+          "allergiesSummary": "No known drug allergies",
+          "consentStatus": "written-consent",
+          "sideMarked": "not-applicable",
+          "whoSignInCompleted": "yes"
+        },
+        "team": {
+          "leadSurgeonName": "Mr David Achebe",
+          "leadSurgeonGmc": "6011223",
+          "firstAssistant": "Ms Farah Iqbal (ST6)",
+          "secondAssistant": "",
+          "anaesthetistName": "Dr Paul Whitmore",
+          "anaesthetistGmc": "5904411",
+          "odp": "Sam Reilly",
+          "scrubNurse": "Nadia Petrov",
+          "circulatingNurse": "Ben Cole",
+          "studentsPresent": "no"
+        },
+        "diagnoses": {
+          "preOperativeDiagnosis": "Symptomatic cholelithiasis",
+          "postOperativeDiagnosis": "Cholelithiasis, chronic cholecystitis",
+          "plannedProcedure": "Laparoscopic cholecystectomy",
+          "procedurePerformed": "Laparoscopic cholecystectomy",
+          "opcs4Codes": "J18.3",
+          "urgency": "elective",
+          "laterality": "not-applicable",
+          "indication": "Recurrent biliary colic with confirmed gallstones on ultrasound"
+        },
+        "anaesthesia": {
+          "type": "general",
+          "airway": "endotracheal-tube",
+          "inductionAgent": "Propofol",
+          "maintenanceAgent": "Sevoflurane",
+          "neuromuscularBlockade": "Rocuronium",
+          "regionalBlockDetails": "",
+          "linesAndMonitoring": "18G IV, standard AAGBI monitoring",
+          "crystalloidMl": 1000,
+          "colloidMl": null,
+          "bloodMl": null,
+          "anaestheticEvent": "none"
+        },
+        "approach": {
+          "patientPosition": "supine",
+          "pressureAreaProtection": "gel pads, heel supports",
+          "prepSolution": "chlorhexidine-2pc",
+          "drapes": "standard four-quadrant",
+          "surgicalApproach": "laparoscopic",
+          "incisionType": "port-sites",
+          "incisionLengthCm": null,
+          "tableTilt": "reverse-trendelenburg",
+          "tourniquetUsed": "no",
+          "tourniquetSite": "",
+          "tourniquetPressureMmHg": null,
+          "tourniquetTimeOn": null,
+          "tourniquetTimeOff": null
+        },
+        "findings": {
+          "techniqueSteps": "Pneumoperitoneum established. Calot's triangle dissected to critical view of safety. Cystic duct and artery clipped and divided. Gallbladder dissected from liver bed and retrieved in a bag.",
+          "pathologyFound": "Thick-walled gallbladder containing multiple small stones",
+          "anatomicalAnomalies": "None",
+          "photographsTaken": "yes",
+          "frozenSectionRequested": "no"
+        },
+        "materials": {
+          "suturesUsed": "3-0 Monocryl to skin",
+          "staplesUsed": "",
+          "clipsUsed": "5 x titanium clips",
+          "meshUsed": "",
+          "screwsUsed": "",
+          "platesUsed": "",
+          "prostheticJoint": "",
+          "vascularGraft": "",
+          "implantLot": "",
+          "implantSerial": "",
+          "implantBatch": "",
+          "implantExpiry": null,
+          "manufacturer": "",
+          "registrySubmitted": ""
+        },
+        "drains": {
+          "drainsPlaced": "no",
+          "drainSite": "",
+          "drainOutputTargetMl": null,
+          "drainRemovalPlan": "",
+          "packsLeftInSitu": "no",
+          "packCount": null,
+          "packRemovalByDate": null,
+          "urinaryCatheter": "no",
+          "ngTube": "no",
+          "specimensSent": "yes",
+          "specimenLabel": "Gallbladder",
+          "specimenContainer": "pot 1",
+          "specimenFixative": "formalin",
+          "specimenDestination": "histopathology",
+          "specimenUrgency": "routine"
+        },
+        "safety": {
+          "swabCountFirst": 10,
+          "swabCountFinal": 10,
+          "swabCountAgreed": "yes",
+          "needleCountFirst": 4,
+          "needleCountFinal": 4,
+          "needleCountAgreed": "yes",
+          "instrumentCountFirst": 42,
+          "instrumentCountFinal": 42,
+          "instrumentCountAgreed": "yes",
+          "countDiscrepancyResolution": "",
+          "estimatedBloodLossMl": 30,
+          "transfusionPrbcUnits": null,
+          "transfusionFfpUnits": null,
+          "transfusionPlateletsUnits": null,
+          "transfusionCryoUnits": null,
+          "massiveHaemorrhageProtocolActivated": "no",
+          "intraOpComplication": "no",
+          "complicationDescription": "",
+          "clavienDindoGrade": "0",
+          "neverEventFlagged": "no",
+          "neverEventType": "",
+          "retainedItemSuspected": "no",
+          "conversionToOpen": "no",
+          "intraOpArrest": "no",
+          "equipmentProblem": "no",
+          "sterilityBreach": "no"
+        },
+        "postOp": {
+          "recoveryDestination": "ward",
+          "preOpPlannedDestination": "ward",
+          "monitoringFrequency": "hourly obs for 4 hours then 4-hourly",
+          "ivFluidsPlan": "Discontinue when drinking",
+          "analgesiaPlan": "Regular paracetamol, PRN oramorph",
+          "antibioticsPlan": "No post-op antibiotics indicated",
+          "vteProphylaxisPlan": "Enoxaparin 40 mg tonight; TEDs",
+          "dietPlan": "Free fluids then light diet",
+          "mobilisationPlan": "Mobilise this evening",
+          "woundCarePlan": "Dressings off at 48 hours",
+          "drainRemovalPlan": "",
+          "followUpPlan": "Histology to clinic in 4 weeks",
+          "specialInstructions": "",
+          "whoSignOutCompleted": "yes",
+          "debriefCompleted": "yes"
+        },
+        "summary": {
+          "asaPhysicalStatus": 2,
+          "surgeonOverrideGrade": "",
+          "surgeonOverrideReason": "",
+          "finalAttestation": "yes",
+          "electronicSignature": "D. Achebe",
+          "dictationTimestamp": null
+        }
+      },
+      "expected": {
+        "compositeRisk": "routine",
+        "computedCompositeRisk": "routine",
+        "surgeonOverride": null,
+        "surgeonOverrideReason": "",
+        "clavienDindoGrade": "0",
+        "asaPhysicalStatus": 2,
+        "bloodLossBand": "minimal",
+        "estimatedBloodLossMl": 30,
+        "countsAgreed": true,
+        "firedRules": [
+          {
+            "ruleId": "R-CD-0",
+            "instrument": "clavien-dindo",
+            "grade": "0",
+            "category": "complication",
+            "description": "No deviation from normal post-operative course"
+          },
+          {
+            "ruleId": "R-EBL-minimal",
+            "instrument": "blood-loss",
+            "grade": "minimal",
+            "category": "haemorrhage",
+            "description": "Estimated blood loss 30 mL — band: minimal"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "complicated-conversion-hdu",
+      "description": "Emergency cholecystectomy converted to open with 900 ml loss, 2 units transfused, Clavien-Dindo II, unplanned step-up ward->HDU — expect an elevated composite with the blood-loss, complication, and step-up rules fired.",
+      "state": {
+        "operation": {
+          "hospital": "City General Hospital",
+          "theatreNumber": "4",
+          "listType": "emergency",
+          "caseStartTime": "14:20",
+          "anaesthesiaStartTime": "14:25",
+          "knifeToSkinTime": "14:50",
+          "endOfSurgeryTime": "17:35",
+          "caseEndTime": "18:05",
+          "operationDate": "2026-08-26"
+        },
+        "patient": {
+          "nhsNumber": "943 476 5927",
+          "mrn": "MRN0081935",
+          "firstName": "Harold",
+          "lastName": "Grieves",
+          "dateOfBirth": "1953-01-22",
+          "sex": "male",
+          "weightKg": 92,
+          "heightCm": 164,
+          "allergiesSummary": "No known drug allergies",
+          "consentStatus": "written-consent",
+          "sideMarked": "not-applicable",
+          "whoSignInCompleted": "yes"
+        },
+        "team": {
+          "leadSurgeonName": "Mr David Achebe",
+          "leadSurgeonGmc": "6011223",
+          "firstAssistant": "Ms Farah Iqbal (ST6)",
+          "secondAssistant": "",
+          "anaesthetistName": "Dr Paul Whitmore",
+          "anaesthetistGmc": "5904411",
+          "odp": "Sam Reilly",
+          "scrubNurse": "Nadia Petrov",
+          "circulatingNurse": "Ben Cole",
+          "studentsPresent": "no"
+        },
+        "diagnoses": {
+          "preOperativeDiagnosis": "Acute cholecystitis",
+          "postOperativeDiagnosis": "Gangrenous cholecystitis",
+          "plannedProcedure": "Laparoscopic cholecystectomy",
+          "procedurePerformed": "Open cholecystectomy (converted from laparoscopic)",
+          "opcs4Codes": "J18.3",
+          "urgency": "emergency",
+          "laterality": "not-applicable",
+          "indication": "Acute cholecystitis failing conservative management"
+        },
+        "anaesthesia": {
+          "type": "general",
+          "airway": "endotracheal-tube",
+          "inductionAgent": "Propofol",
+          "maintenanceAgent": "Sevoflurane",
+          "neuromuscularBlockade": "Rocuronium",
+          "regionalBlockDetails": "",
+          "linesAndMonitoring": "18G IV, standard AAGBI monitoring",
+          "crystalloidMl": 1000,
+          "colloidMl": null,
+          "bloodMl": null,
+          "anaestheticEvent": "none"
+        },
+        "approach": {
+          "patientPosition": "supine",
+          "pressureAreaProtection": "gel pads, heel supports",
+          "prepSolution": "chlorhexidine-2pc",
+          "drapes": "standard four-quadrant",
+          "surgicalApproach": "open-converted",
+          "incisionType": "right-subcostal",
+          "incisionLengthCm": 15,
+          "tableTilt": "reverse-trendelenburg",
+          "tourniquetUsed": "no",
+          "tourniquetSite": "",
+          "tourniquetPressureMmHg": null,
+          "tourniquetTimeOn": null,
+          "tourniquetTimeOff": null
+        },
+        "findings": {
+          "techniqueSteps": "Dense inflammatory adhesions; critical view unobtainable. Converted to open via right subcostal incision. Subtotal cholecystectomy performed for safety.",
+          "pathologyFound": "Gangrenous gallbladder wall, localised bile-stained fluid",
+          "anatomicalAnomalies": "None identified",
+          "photographsTaken": "yes",
+          "frozenSectionRequested": "no"
+        },
+        "materials": {
+          "suturesUsed": "3-0 Monocryl to skin",
+          "staplesUsed": "",
+          "clipsUsed": "5 x titanium clips",
+          "meshUsed": "",
+          "screwsUsed": "",
+          "platesUsed": "",
+          "prostheticJoint": "",
+          "vascularGraft": "",
+          "implantLot": "",
+          "implantSerial": "",
+          "implantBatch": "",
+          "implantExpiry": null,
+          "manufacturer": "",
+          "registrySubmitted": ""
+        },
+        "drains": {
+          "drainsPlaced": "yes",
+          "drainSite": "subhepatic",
+          "drainOutputTargetMl": 100,
+          "drainRemovalPlan": "Review output at 48 hours",
+          "packsLeftInSitu": "no",
+          "packCount": null,
+          "packRemovalByDate": null,
+          "urinaryCatheter": "yes",
+          "ngTube": "no",
+          "specimensSent": "yes",
+          "specimenLabel": "Gallbladder",
+          "specimenContainer": "pot 1",
+          "specimenFixative": "formalin",
+          "specimenDestination": "histopathology",
+          "specimenUrgency": "routine"
+        },
+        "safety": {
+          "swabCountFirst": 10,
+          "swabCountFinal": 10,
+          "swabCountAgreed": "yes",
+          "needleCountFirst": 4,
+          "needleCountFinal": 4,
+          "needleCountAgreed": "yes",
+          "instrumentCountFirst": 42,
+          "instrumentCountFinal": 42,
+          "instrumentCountAgreed": "yes",
+          "countDiscrepancyResolution": "",
+          "estimatedBloodLossMl": 900,
+          "transfusionPrbcUnits": 2,
+          "transfusionFfpUnits": null,
+          "transfusionPlateletsUnits": null,
+          "transfusionCryoUnits": null,
+          "massiveHaemorrhageProtocolActivated": "no",
+          "intraOpComplication": "yes",
+          "complicationDescription": "Bleeding from the gallbladder fossa during dissection, controlled with packing and diathermy; transfused 2 units.",
+          "clavienDindoGrade": "II",
+          "neverEventFlagged": "no",
+          "neverEventType": "",
+          "retainedItemSuspected": "no",
+          "conversionToOpen": "yes",
+          "intraOpArrest": "no",
+          "equipmentProblem": "no",
+          "sterilityBreach": "no"
+        },
+        "postOp": {
+          "recoveryDestination": "hdu",
+          "preOpPlannedDestination": "ward",
+          "monitoringFrequency": "continuous in HDU overnight",
+          "ivFluidsPlan": "Discontinue when drinking",
+          "analgesiaPlan": "Regular paracetamol, PRN oramorph",
+          "antibioticsPlan": "IV co-amoxiclav 5 days",
+          "vteProphylaxisPlan": "Enoxaparin 40 mg tonight; TEDs",
+          "dietPlan": "Free fluids then light diet",
+          "mobilisationPlan": "Mobilise this evening",
+          "woundCarePlan": "Dressings off at 48 hours",
+          "drainRemovalPlan": "",
+          "followUpPlan": "Daily bloods; drain review at 48 h",
+          "specialInstructions": "",
+          "whoSignOutCompleted": "yes",
+          "debriefCompleted": "yes"
+        },
+        "summary": {
+          "asaPhysicalStatus": 3,
+          "surgeonOverrideGrade": "",
+          "surgeonOverrideReason": "",
+          "finalAttestation": "yes",
+          "electronicSignature": "D. Achebe",
+          "dictationTimestamp": null
+        }
+      },
+      "expected": {
+        "compositeRisk": "high-risk",
+        "computedCompositeRisk": "high-risk",
+        "surgeonOverride": null,
+        "surgeonOverrideReason": "",
+        "clavienDindoGrade": "II",
+        "asaPhysicalStatus": 3,
+        "bloodLossBand": "moderate",
+        "estimatedBloodLossMl": 900,
+        "countsAgreed": true,
+        "firedRules": [
+          {
+            "ruleId": "R-CD-II",
+            "instrument": "clavien-dindo",
+            "grade": "II",
+            "category": "complication",
+            "description": "Pharmacological intervention required (including transfusion / TPN)"
+          },
+          {
+            "ruleId": "R-EBL-moderate",
+            "instrument": "blood-loss",
+            "grade": "moderate",
+            "category": "haemorrhage",
+            "description": "Estimated blood loss 900 mL — band: moderate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-UNPLANNED-ICU",
+            "category": "unplanned-icu-admission",
+            "priority": "high",
+            "description": "Recovery destination escalated from ward to hdu",
+            "suggestedAction": "Critical-care handover; document indication for escalation."
+          },
+          {
+            "flagId": "F-CONVERSION-TO-OPEN",
+            "category": "conversion-to-open",
+            "priority": "medium",
+            "description": "Planned minimally-invasive case converted to open",
+            "suggestedAction": "Document indication for conversion in operative findings."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-retained-swab-arrest",
+      "description": "Night-time Hartmann's for faecal peritonitis: intra-operative arrest, massive-haemorrhage protocol, EBL 2,500 ml, final swab count one short with a retained item suspected and a never event declared, unplanned ICU admission — expect critical composite with never-event and count-discrepancy rules and flags.",
+      "state": {
+        "operation": {
+          "hospital": "City General Hospital",
+          "theatreNumber": "4",
+          "listType": "emergency",
+          "caseStartTime": "22:10",
+          "anaesthesiaStartTime": "22:15",
+          "knifeToSkinTime": "22:35",
+          "endOfSurgeryTime": "01:40",
+          "caseEndTime": "02:20",
+          "operationDate": "2026-08-26"
+        },
+        "patient": {
+          "nhsNumber": "943 476 5928",
+          "mrn": "MRN0081936",
+          "firstName": "Maureen",
+          "lastName": "Talbot",
+          "dateOfBirth": "1944-07-30",
+          "sex": "female",
+          "weightKg": 58,
+          "heightCm": 164,
+          "allergiesSummary": "No known drug allergies",
+          "consentStatus": "written-consent",
+          "sideMarked": "not-applicable",
+          "whoSignInCompleted": "yes"
+        },
+        "team": {
+          "leadSurgeonName": "Mr David Achebe",
+          "leadSurgeonGmc": "6011223",
+          "firstAssistant": "Ms Farah Iqbal (ST6)",
+          "secondAssistant": "",
+          "anaesthetistName": "Dr Paul Whitmore",
+          "anaesthetistGmc": "5904411",
+          "odp": "Sam Reilly",
+          "scrubNurse": "Nadia Petrov",
+          "circulatingNurse": "Ben Cole",
+          "studentsPresent": "no"
+        },
+        "diagnoses": {
+          "preOperativeDiagnosis": "Perforated diverticular disease with four-quadrant peritonitis",
+          "postOperativeDiagnosis": "Perforated sigmoid diverticulitis, faecal peritonitis",
+          "plannedProcedure": "Emergency laparotomy",
+          "procedurePerformed": "Hartmann's procedure",
+          "opcs4Codes": "H33.5",
+          "urgency": "immediate",
+          "laterality": "not-applicable",
+          "indication": "Septic shock with free air on CT"
+        },
+        "anaesthesia": {
+          "type": "general",
+          "airway": "endotracheal-tube",
+          "inductionAgent": "Propofol",
+          "maintenanceAgent": "Sevoflurane",
+          "neuromuscularBlockade": "Rocuronium",
+          "regionalBlockDetails": "",
+          "linesAndMonitoring": "Arterial line, CVC, urinary catheter, cell salvage",
+          "crystalloidMl": 4000,
+          "colloidMl": null,
+          "bloodMl": 1200,
+          "anaestheticEvent": "cardiac-arrest"
+        },
+        "approach": {
+          "patientPosition": "supine",
+          "pressureAreaProtection": "gel pads, heel supports",
+          "prepSolution": "chlorhexidine-2pc",
+          "drapes": "standard four-quadrant",
+          "surgicalApproach": "open",
+          "incisionType": "midline-laparotomy",
+          "incisionLengthCm": 22,
+          "tableTilt": "reverse-trendelenburg",
+          "tourniquetUsed": "no",
+          "tourniquetSite": "",
+          "tourniquetPressureMmHg": null,
+          "tourniquetTimeOn": null,
+          "tourniquetTimeOff": null
+        },
+        "findings": {
+          "techniqueSteps": "Midline laparotomy. Four-quadrant washout. Sigmoid perforation identified; Hartmann's resection with end colostomy.",
+          "pathologyFound": "Faecal peritonitis, perforated sigmoid segment",
+          "anatomicalAnomalies": "None",
+          "photographsTaken": "yes",
+          "frozenSectionRequested": "no"
+        },
+        "materials": {
+          "suturesUsed": "3-0 Monocryl to skin",
+          "staplesUsed": "",
+          "clipsUsed": "5 x titanium clips",
+          "meshUsed": "",
+          "screwsUsed": "",
+          "platesUsed": "",
+          "prostheticJoint": "",
+          "vascularGraft": "",
+          "implantLot": "",
+          "implantSerial": "",
+          "implantBatch": "",
+          "implantExpiry": null,
+          "manufacturer": "",
+          "registrySubmitted": ""
+        },
+        "drains": {
+          "drainsPlaced": "yes",
+          "drainSite": "pelvis",
+          "drainOutputTargetMl": null,
+          "drainRemovalPlan": "",
+          "packsLeftInSitu": "no",
+          "packCount": null,
+          "packRemovalByDate": null,
+          "urinaryCatheter": "yes",
+          "ngTube": "no",
+          "specimensSent": "yes",
+          "specimenLabel": "Sigmoid colon",
+          "specimenContainer": "pot 1",
+          "specimenFixative": "formalin",
+          "specimenDestination": "histopathology",
+          "specimenUrgency": "urgent"
+        },
+        "safety": {
+          "swabCountFirst": 20,
+          "swabCountFinal": 19,
+          "swabCountAgreed": "no",
+          "needleCountFirst": 4,
+          "needleCountFinal": 4,
+          "needleCountAgreed": "yes",
+          "instrumentCountFirst": 42,
+          "instrumentCountFinal": 42,
+          "instrumentCountAgreed": "yes",
+          "countDiscrepancyResolution": "Recount and cavity re-exploration performed; imaging requested — swab not yet located at closure.",
+          "estimatedBloodLossMl": 2500,
+          "transfusionPrbcUnits": 4,
+          "transfusionFfpUnits": 2,
+          "transfusionPlateletsUnits": null,
+          "transfusionCryoUnits": null,
+          "massiveHaemorrhageProtocolActivated": "yes",
+          "intraOpComplication": "yes",
+          "complicationDescription": "Intra-operative cardiac arrest during induction-phase hypotension; ROSC after 2 cycles CPR. Ongoing vasopressor requirement.",
+          "clavienDindoGrade": "IVa",
+          "neverEventFlagged": "yes",
+          "neverEventType": "retained-foreign-object",
+          "retainedItemSuspected": "yes",
+          "conversionToOpen": "no",
+          "intraOpArrest": "yes",
+          "equipmentProblem": "no",
+          "sterilityBreach": "no"
+        },
+        "postOp": {
+          "recoveryDestination": "icu",
+          "preOpPlannedDestination": "hdu",
+          "monitoringFrequency": "ICU continuous",
+          "ivFluidsPlan": "Discontinue when drinking",
+          "analgesiaPlan": "Regular paracetamol, PRN oramorph",
+          "antibioticsPlan": "IV piperacillin-tazobactam + metronidazole",
+          "vteProphylaxisPlan": "Mechanical only until haemostasis secure",
+          "dietPlan": "NBM, NG on free drainage",
+          "mobilisationPlan": "ICU-led",
+          "woundCarePlan": "Dressings off at 48 hours",
+          "drainRemovalPlan": "",
+          "followUpPlan": "Urgent portable imaging to locate missing swab; datix and duty-of-candour process started",
+          "specialInstructions": "",
+          "whoSignOutCompleted": "yes",
+          "debriefCompleted": "yes"
+        },
+        "summary": {
+          "asaPhysicalStatus": 4,
+          "surgeonOverrideGrade": "",
+          "surgeonOverrideReason": "",
+          "finalAttestation": "yes",
+          "electronicSignature": "R. Osei (consultant on call)",
+          "dictationTimestamp": null
+        }
+      },
+      "expected": {
+        "compositeRisk": "critical",
+        "computedCompositeRisk": "critical",
+        "surgeonOverride": null,
+        "surgeonOverrideReason": "",
+        "clavienDindoGrade": "IVa",
+        "asaPhysicalStatus": 4,
+        "bloodLossBand": "severe",
+        "estimatedBloodLossMl": 2500,
+        "countsAgreed": false,
+        "firedRules": [
+          {
+            "ruleId": "R-CD-IVa",
+            "instrument": "clavien-dindo",
+            "grade": "IVa",
+            "category": "complication",
+            "description": "Life-threatening — single-organ dysfunction"
+          },
+          {
+            "ruleId": "R-EBL-severe",
+            "instrument": "blood-loss",
+            "grade": "severe",
+            "category": "haemorrhage",
+            "description": "Estimated blood loss 2500 mL — band: severe"
+          },
+          {
+            "ruleId": "R-COUNT-swab-disagreed",
+            "instrument": "count",
+            "grade": "discrepancy",
+            "category": "count",
+            "description": "Swab count not agreed at sign-out (first=20, final=19)"
+          },
+          {
+            "ruleId": "R-NE-retained-foreign-object",
+            "instrument": "never-event",
+            "grade": "never-event",
+            "category": "never-event",
+            "description": "Never-event candidate (type unspecified) — statutory NHS England notification required"
+          },
+          {
+            "ruleId": "R-NE-retained-item",
+            "instrument": "never-event",
+            "grade": "never-event",
+            "category": "never-event",
+            "description": "Retained foreign object suspected"
+          },
+          {
+            "ruleId": "R-AE-cardiac-arrest",
+            "instrument": "anaesthetic-event",
+            "grade": "low",
+            "category": "anaesthetic-event",
+            "description": "cardiac-arrest"
+          },
+          {
+            "ruleId": "R-AE-intra-op-arrest",
+            "instrument": "anaesthetic-event",
+            "grade": "critical",
+            "category": "anaesthetic-event",
+            "description": "Intra-operative cardiac or respiratory arrest"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-INCORRECT-COUNT",
+            "category": "incorrect-count",
+            "priority": "high",
+            "description": "Swab / needle / instrument count discrepancy at sign-out",
+            "suggestedAction": "Recount; perform intra-op imaging; do not close until resolved."
+          },
+          {
+            "flagId": "F-RETAINED-ITEM",
+            "category": "retained-foreign-body",
+            "priority": "high",
+            "description": "Retained foreign object suspected",
+            "suggestedAction": "NHS England Never Event protocol; statutory notification within 48 h."
+          },
+          {
+            "flagId": "F-NEVER-EVENT",
+            "category": "never-event",
+            "priority": "high",
+            "description": "Never-event candidate: retained-foreign-object",
+            "suggestedAction": "StEIS reporting; Duty of Candour disclosure; root-cause analysis."
+          },
+          {
+            "flagId": "F-UNPLANNED-ICU",
+            "category": "unplanned-icu-admission",
+            "priority": "high",
+            "description": "Recovery destination escalated from hdu to icu",
+            "suggestedAction": "Critical-care handover; document indication for escalation."
+          },
+          {
+            "flagId": "F-MASSIVE-HAEMORRHAGE",
+            "category": "massive-haemorrhage",
+            "priority": "high",
+            "description": "Estimated blood loss 2500 mL",
+            "suggestedAction": "Activate massive haemorrhage protocol; transfusion lab liaison."
+          },
+          {
+            "flagId": "F-MASSIVE-TRANSFUSION",
+            "category": "massive-transfusion",
+            "priority": "high",
+            "description": "4 units PRBC transfused; MHP activated",
+            "suggestedAction": "Post-op coagulation panel; transfusion reaction surveillance."
+          },
+          {
+            "flagId": "F-INTRA-OP-ARREST",
+            "category": "intra-operative-arrest",
+            "priority": "high",
+            "description": "Cardiac or respiratory arrest in theatre",
+            "suggestedAction": "NAP7 reporting; debrief; M&M presentation."
+          }
+        ]
+      }
+    }
+  ]
+}
