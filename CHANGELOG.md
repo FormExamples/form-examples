@@ -39,6 +39,15 @@ notes from `[Unreleased]`, and every section after it will carry a version.
 
 - `CONTRIBUTING.md` gained the ways to contribute that are not code.
 
+### Changed
+
+- Every Loco crate bumped loco-rs 1.0.1 → 1.1.0 and uuid 1.24 → 1.25,
+  lockfiles refreshed; fleet-verified with `cargo check --all-targets` on all
+  355 crates (355/355 PASS) before committing.
+- The clippy pedantic debt in the 8 strict-header crates cleared (~140
+  findings fixed or given scoped, justified allows); all 8 now pass
+  `clippy --all-targets -- -D warnings`.
+
 ### Fixed
 
 - The headless engine oracle, broken fleet-wide since the 2026-07 ES-modules

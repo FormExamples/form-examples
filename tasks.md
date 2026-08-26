@@ -27,9 +27,11 @@ Gate-truth repair (Phase 8) largely landed same-day: **all 29 cheap verify
 gates green** (`test-tools` 21 ok / 0 failed) after the ESM engine-loader
 rebuild (test-engines PASS 279/SKIP 76/FAIL 0; test-personas PASS 109, zero
 oracle diff), the es-modules indent fix, and the Lily re-pin to `e05a138e6`
-with fleet theme re-sync. Still open in Phase 8: the ~710-file loco-rs 1.1.0
-dep-bump verify+commit; clippy pedantic debt in the 8 rustdoc'd crates (CI
-rust shards red); checkout-pin guards; `bin/test` no-DB behaviour.
+with fleet theme re-sync. **Phase 8 completed the same day**: the loco-rs
+1.1.0 bump fleet-verified (355/355 `cargo check`) and committed; the clippy
+pedantic debt cleared in all 8 strict crates; checkout-pin guards landed
+(and immediately caught upstream moving again); `bin/test` now survives a
+DB-less machine. Working tree clean. Next: Phase 9 (CI completeness).
 
 ## Status summary (2026-07-13)
 
@@ -565,7 +567,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 - [x] `#![warn(clippy::clippy::pedantic)]` typo → `clippy::pedantic` in the
       3 crates carrying it (which surfaces real pedantic findings — Phase 8).
 
-## Phase 8 — R0 gate truth (do first)
+## Phase 8 — R0 gate truth ✅ COMPLETE (2026-08-26)
 
 - [x] **Engine loader (2026-08-26):** deeper than the skip-list — the
       `STORAGE_KEY` collision was masking that the 2026-07 ES-modules
@@ -580,17 +582,19 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `bin/test-personas` **PASS 109 / FAIL 0**, and `--update` produced a
       **zero diff** across all 109 personas.json — the ESM loader computes
       byte-identical results to the recorded oracle.
-- [ ] **Dep bump:** decide the uncommitted loco-rs 1.0.1→1.1.0 + uuid
-      1.24→1.25 sweep (~710 files). Verify with a sharded
-      `cargo check --all-targets` pass across all 355 crates, then commit as
-      one change with a CHANGELOG entry — or revert deliberately.
-- [ ] **Clippy pedantic:** clear the ~140 pedantic findings in the 8
-      rustdoc'd crates (medical-operation-note 30,
-      architecture-decision-record 25, cardiology-request 22,
-      inpatient-clinical-note 19, + cardiology-response and the 3
-      neurodiversity crates) so `clippy -D warnings` passes; or record the
-      decision to scope pedantic out of CI. No gate-weakening without a
-      recorded ruling (AI_STATEMENT §11).
+- [x] **Dep bump (2026-08-26):** verified with a 4-way-parallel
+      `cargo check --all-targets` over all 355 crates — **355/355 PASS,
+      0 FAIL** (which also validates the forbid-unsafe rollout against
+      loco-rs 1.1.0) — then committed as one change (`aa434eec9`).
+- [x] **Clippy pedantic (2026-08-26):** cleared, not scoped out
+      (`b2f26393c`). `cargo clippy --fix` for the mechanical tier; by hand:
+      format_push_string → `write!`/`writeln!`, ptr_arg `&String`→`&str`,
+      genuinely-redundant match arms merged, u64 counts → `usize::try_from`.
+      Domain-shaped findings got scoped allows with one-line reasons
+      (sql/-mirroring bool structs, linear rule lists, published band
+      tables, 0-100 percentage casts). All 8 crates
+      `clippy --all-targets -- -D warnings` clean; cardiology engine tests
+      (12 + 15) pass unchanged.
 - [x] **es-modules (2026-08-26):** diagnosed — the 36 forms are formatted
       at 8-space indent and the tool regenerated the script block hardcoded
       at 2-space, so `--check` flagged a byte diff that was pure whitespace.
