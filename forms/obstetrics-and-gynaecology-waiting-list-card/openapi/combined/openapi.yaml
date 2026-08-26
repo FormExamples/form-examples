@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Obstetrics and Gynaecology Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Obstetrics and Gynaecology Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Obstetrics and Gynaecology Waiting List Card form,
+    merged from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /obstetrics-and-gynaecology-waiting-list-card-appointments:
+  /obgyn-waiting-list-card-appointments:
     get:
       summary: List ObgynWaitingListCardAppointment records
       operationId: listObgynWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardAppointment'
         '400':
           description: Validation error
-  /obstetrics-and-gynaecology-waiting-list-card-appointments/{id}:
+  /obgyn-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: ObgynWaitingListCardAppointment deleted
         '404':
           description: ObgynWaitingListCardAppointment not found
-  /obstetrics-and-gynaecology-waiting-list-card-grade-flags:
+  /obgyn-waiting-list-card-grade-flags:
     get:
       summary: List ObgynWaitingListCardGradeFlag records
       operationId: listObgynWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /obstetrics-and-gynaecology-waiting-list-card-grade-flags/{id}:
+  /obgyn-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: ObgynWaitingListCardGradeFlag deleted
         '404':
           description: ObgynWaitingListCardGradeFlag not found
-  /obstetrics-and-gynaecology-waiting-list-card-grade-rules:
+  /obgyn-waiting-list-card-grade-rules:
     get:
       summary: List ObgynWaitingListCardGradeRule records
       operationId: listObgynWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /obstetrics-and-gynaecology-waiting-list-card-grade-rules/{id}:
+  /obgyn-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: ObgynWaitingListCardGradeRule deleted
         '404':
           description: ObgynWaitingListCardGradeRule not found
-  /obstetrics-and-gynaecology-waiting-list-card-grades:
+  /obgyn-waiting-list-card-grades:
     get:
       summary: List ObgynWaitingListCardGrade records
       operationId: listObgynWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGrade'
         '400':
           description: Validation error
-  /obstetrics-and-gynaecology-waiting-list-card-grades/{id}:
+  /obgyn-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: ObgynWaitingListCardGrade deleted
         '404':
           description: ObgynWaitingListCardGrade not found
-  /obstetrics-and-gynaecology-waiting-list-cards:
+  /obgyn-waiting-list-cards:
     get:
       summary: List ObgynWaitingListCard records
       operationId: listObgynWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCard'
         '400':
           description: Validation error
-  /obstetrics-and-gynaecology-waiting-list-cards/{id}:
+  /obgyn-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path
@@ -837,8 +837,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a obstetrics and gynaecology waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a obstetrics and gynaecology waiting list. Parent
+        of appointment(s) and grading result.
     ObgynWaitingListCardAppointment:
       type: object
       properties:
@@ -1335,4 +1335,5 @@ components:
       - organisation_name
       - organisation_ods_code
       - site_name
-      description: Practitioner who completes a obstetrics and gynaecology waiting list card on behalf of the patient.
+      description: Practitioner who completes a obstetrics and gynaecology waiting list card on behalf
+        of the patient.

@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Neuropsychiatry Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Neuropsychiatry Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Neuropsychiatry Waiting List Card form, merged from
+    the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /neuropsychiatry-waiting-list-card-appointments:
+  /neuropsych-waiting-list-card-appointments:
     get:
       summary: List NeuropsychWaitingListCardAppointment records
       operationId: listNeuropsychWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardAppointment'
         '400':
           description: Validation error
-  /neuropsychiatry-waiting-list-card-appointments/{id}:
+  /neuropsych-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: NeuropsychWaitingListCardAppointment deleted
         '404':
           description: NeuropsychWaitingListCardAppointment not found
-  /neuropsychiatry-waiting-list-card-grade-flags:
+  /neuropsych-waiting-list-card-grade-flags:
     get:
       summary: List NeuropsychWaitingListCardGradeFlag records
       operationId: listNeuropsychWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /neuropsychiatry-waiting-list-card-grade-flags/{id}:
+  /neuropsych-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: NeuropsychWaitingListCardGradeFlag deleted
         '404':
           description: NeuropsychWaitingListCardGradeFlag not found
-  /neuropsychiatry-waiting-list-card-grade-rules:
+  /neuropsych-waiting-list-card-grade-rules:
     get:
       summary: List NeuropsychWaitingListCardGradeRule records
       operationId: listNeuropsychWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /neuropsychiatry-waiting-list-card-grade-rules/{id}:
+  /neuropsych-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: NeuropsychWaitingListCardGradeRule deleted
         '404':
           description: NeuropsychWaitingListCardGradeRule not found
-  /neuropsychiatry-waiting-list-card-grades:
+  /neuropsych-waiting-list-card-grades:
     get:
       summary: List NeuropsychWaitingListCardGrade records
       operationId: listNeuropsychWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGrade'
         '400':
           description: Validation error
-  /neuropsychiatry-waiting-list-card-grades/{id}:
+  /neuropsych-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: NeuropsychWaitingListCardGrade deleted
         '404':
           description: NeuropsychWaitingListCardGrade not found
-  /neuropsychiatry-waiting-list-cards:
+  /neuropsych-waiting-list-cards:
     get:
       summary: List NeuropsychWaitingListCard records
       operationId: listNeuropsychWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCard'
         '400':
           description: Validation error
-  /neuropsychiatry-waiting-list-cards/{id}:
+  /neuropsych-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

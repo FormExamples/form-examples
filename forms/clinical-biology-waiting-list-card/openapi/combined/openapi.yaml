@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Clinical Biology Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Clinical Biology Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Clinical Biology Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /clinical-biology-waiting-list-card-appointments:
+  /clin-biology-waiting-list-card-appointments:
     get:
       summary: List ClinBiologyWaitingListCardAppointment records
       operationId: listClinBiologyWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/ClinBiologyWaitingListCardAppointment'
         '400':
           description: Validation error
-  /clinical-biology-waiting-list-card-appointments/{id}:
+  /clin-biology-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: ClinBiologyWaitingListCardAppointment deleted
         '404':
           description: ClinBiologyWaitingListCardAppointment not found
-  /clinical-biology-waiting-list-card-grade-flags:
+  /clin-biology-waiting-list-card-grade-flags:
     get:
       summary: List ClinBiologyWaitingListCardGradeFlag records
       operationId: listClinBiologyWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/ClinBiologyWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /clinical-biology-waiting-list-card-grade-flags/{id}:
+  /clin-biology-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: ClinBiologyWaitingListCardGradeFlag deleted
         '404':
           description: ClinBiologyWaitingListCardGradeFlag not found
-  /clinical-biology-waiting-list-card-grade-rules:
+  /clin-biology-waiting-list-card-grade-rules:
     get:
       summary: List ClinBiologyWaitingListCardGradeRule records
       operationId: listClinBiologyWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/ClinBiologyWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /clinical-biology-waiting-list-card-grade-rules/{id}:
+  /clin-biology-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: ClinBiologyWaitingListCardGradeRule deleted
         '404':
           description: ClinBiologyWaitingListCardGradeRule not found
-  /clinical-biology-waiting-list-card-grades:
+  /clin-biology-waiting-list-card-grades:
     get:
       summary: List ClinBiologyWaitingListCardGrade records
       operationId: listClinBiologyWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/ClinBiologyWaitingListCardGrade'
         '400':
           description: Validation error
-  /clinical-biology-waiting-list-card-grades/{id}:
+  /clin-biology-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: ClinBiologyWaitingListCardGrade deleted
         '404':
           description: ClinBiologyWaitingListCardGrade not found
-  /clinical-biology-waiting-list-cards:
+  /clin-biology-waiting-list-cards:
     get:
       summary: List ClinBiologyWaitingListCard records
       operationId: listClinBiologyWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/ClinBiologyWaitingListCard'
         '400':
           description: Validation error
-  /clinical-biology-waiting-list-cards/{id}:
+  /clin-biology-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

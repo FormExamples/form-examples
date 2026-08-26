@@ -7,6 +7,192 @@ info:
   description: Combined OpenAPI specification for the Radiology Waiting List Card form, merged from the
     per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '201':
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Validation error
+  /patients/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        '200':
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '200':
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        '204':
+          description: Patient deleted
+        '404':
+          description: Patient not found
+  /practitioners:
+    get:
+      summary: List Practitioner records
+      operationId: listPractitioner
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Practitioner records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Practitioner'
+    post:
+      summary: Create a new Practitioner
+      operationId: createPractitioner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Practitioner'
+      responses:
+        '201':
+          description: The newly created Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practitioner'
+        '400':
+          description: Validation error
+  /practitioners/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Practitioner by id
+      operationId: getPractitioner
+      responses:
+        '200':
+          description: The requested Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practitioner'
+        '404':
+          description: Practitioner not found
+    patch:
+      summary: Update an existing Practitioner
+      operationId: updatePractitioner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Practitioner'
+      responses:
+        '200':
+          description: The updated Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practitioner'
+        '404':
+          description: Practitioner not found
+    delete:
+      summary: Soft-delete a Practitioner
+      operationId: deletePractitioner
+      responses:
+        '204':
+          description: Practitioner deleted
+        '404':
+          description: Practitioner not found
   /radiology-waiting-list-card-appointments:
     get:
       summary: List RadiologyWaitingListCardAppointment records
@@ -472,194 +658,182 @@ paths:
           description: RadiologyWaitingListCard deleted
         '404':
           description: RadiologyWaitingListCard not found
-  /patients:
-    get:
-      summary: List Patient records
-      operationId: listPatient
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of Patient records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Patient'
-    post:
-      summary: Create a new Patient
-      operationId: createPatient
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Patient'
-      responses:
-        '201':
-          description: The newly created Patient
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Patient'
-        '400':
-          description: Validation error
-  /patients/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one Patient by id
-      operationId: getPatient
-      responses:
-        '200':
-          description: The requested Patient
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Patient'
-        '404':
-          description: Patient not found
-    patch:
-      summary: Update an existing Patient
-      operationId: updatePatient
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Patient'
-      responses:
-        '200':
-          description: The updated Patient
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Patient'
-        '404':
-          description: Patient not found
-    delete:
-      summary: Soft-delete a Patient
-      operationId: deletePatient
-      responses:
-        '204':
-          description: Patient deleted
-        '404':
-          description: Patient not found
-  /practitioners:
-    get:
-      summary: List Practitioner records
-      operationId: listPractitioner
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of Practitioner records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Practitioner'
-    post:
-      summary: Create a new Practitioner
-      operationId: createPractitioner
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Practitioner'
-      responses:
-        '201':
-          description: The newly created Practitioner
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Practitioner'
-        '400':
-          description: Validation error
-  /practitioners/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one Practitioner by id
-      operationId: getPractitioner
-      responses:
-        '200':
-          description: The requested Practitioner
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Practitioner'
-        '404':
-          description: Practitioner not found
-    patch:
-      summary: Update an existing Practitioner
-      operationId: updatePractitioner
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Practitioner'
-      responses:
-        '200':
-          description: The updated Practitioner
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Practitioner'
-        '404':
-          description: Practitioner not found
-    delete:
-      summary: Soft-delete a Practitioner
-      operationId: deletePractitioner
-      responses:
-        '204':
-          description: Practitioner deleted
-        '404':
-          description: Practitioner not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a radiology waiting list.
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+          - gp
+          - consultant
+          - specialist-nurse
+          - referral-coordinator
+          - booking-clerk
+          - rtt-validator
+          - other
+          - ''
+          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
+            rtt-validator, other.'
+        registration_body:
+          type: string
+          enum:
+          - GMC
+          - NMC
+          - HCPC
+          - GPhC
+          - other
+          - ''
+          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - role
+      - registration_body
+      - registration_number
+      - organisation_name
+      - organisation_ods_code
+      - site_name
+      description: Practitioner who completes a radiology waiting list card on behalf of the patient.
     RadiologyWaitingListCard:
       type: object
       properties:
@@ -1162,177 +1336,3 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a radiology waiting list.
-    Practitioner:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        role:
-          type: string
-          enum:
-          - gp
-          - consultant
-          - specialist-nurse
-          - referral-coordinator
-          - booking-clerk
-          - rtt-validator
-          - other
-          - ''
-          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
-            rtt-validator, other.'
-        registration_body:
-          type: string
-          enum:
-          - GMC
-          - NMC
-          - HCPC
-          - GPhC
-          - other
-          - ''
-          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
-        registration_number:
-          type: string
-          maxLength: 50
-          description: Professional registration number.
-        organisation_name:
-          type: string
-          maxLength: 255
-          description: Employing organisation (e.g. NHS trust name, GP practice name).
-        organisation_ods_code:
-          type: string
-          maxLength: 20
-          description: NHS Organisation Data Service (ODS) code for the organisation.
-        site_name:
-          type: string
-          maxLength: 255
-          description: Site or clinic name within the organisation.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - role
-      - registration_body
-      - registration_number
-      - organisation_name
-      - organisation_ods_code
-      - site_name
-      description: Practitioner who completes a radiology waiting list card on behalf of the patient.

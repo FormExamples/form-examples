@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Physical Medicine and Rehabilitation Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Physical Medicine and Rehabilitation Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Physical Medicine and Rehabilitation Waiting List
+    Card form, merged from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /physical-medicine-and-rehabilitation-waiting-list-card-appointments:
-    get:
-      summary: List PmrWaitingListCardAppointment records
-      operationId: listPmrWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PmrWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PmrWaitingListCardAppointment'
-    post:
-      summary: Create a new PmrWaitingListCardAppointment
-      operationId: createPmrWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created PmrWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /physical-medicine-and-rehabilitation-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PmrWaitingListCardAppointment by id
-      operationId: getPmrWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested PmrWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardAppointment'
-        '404':
-          description: PmrWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing PmrWaitingListCardAppointment
-      operationId: updatePmrWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated PmrWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardAppointment'
-        '404':
-          description: PmrWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a PmrWaitingListCardAppointment
-      operationId: deletePmrWaitingListCardAppointment
-      responses:
-        '204':
-          description: PmrWaitingListCardAppointment deleted
-        '404':
-          description: PmrWaitingListCardAppointment not found
-  /physical-medicine-and-rehabilitation-waiting-list-card-grade-flags:
-    get:
-      summary: List PmrWaitingListCardGradeFlag records
-      operationId: listPmrWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PmrWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
-    post:
-      summary: Create a new PmrWaitingListCardGradeFlag
-      operationId: createPmrWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created PmrWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /physical-medicine-and-rehabilitation-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PmrWaitingListCardGradeFlag by id
-      operationId: getPmrWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested PmrWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
-        '404':
-          description: PmrWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing PmrWaitingListCardGradeFlag
-      operationId: updatePmrWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated PmrWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
-        '404':
-          description: PmrWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a PmrWaitingListCardGradeFlag
-      operationId: deletePmrWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: PmrWaitingListCardGradeFlag deleted
-        '404':
-          description: PmrWaitingListCardGradeFlag not found
-  /physical-medicine-and-rehabilitation-waiting-list-card-grade-rules:
-    get:
-      summary: List PmrWaitingListCardGradeRule records
-      operationId: listPmrWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PmrWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
-    post:
-      summary: Create a new PmrWaitingListCardGradeRule
-      operationId: createPmrWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created PmrWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /physical-medicine-and-rehabilitation-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PmrWaitingListCardGradeRule by id
-      operationId: getPmrWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested PmrWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
-        '404':
-          description: PmrWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing PmrWaitingListCardGradeRule
-      operationId: updatePmrWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated PmrWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
-        '404':
-          description: PmrWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a PmrWaitingListCardGradeRule
-      operationId: deletePmrWaitingListCardGradeRule
-      responses:
-        '204':
-          description: PmrWaitingListCardGradeRule deleted
-        '404':
-          description: PmrWaitingListCardGradeRule not found
-  /physical-medicine-and-rehabilitation-waiting-list-card-grades:
-    get:
-      summary: List PmrWaitingListCardGrade records
-      operationId: listPmrWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PmrWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PmrWaitingListCardGrade'
-    post:
-      summary: Create a new PmrWaitingListCardGrade
-      operationId: createPmrWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created PmrWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /physical-medicine-and-rehabilitation-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PmrWaitingListCardGrade by id
-      operationId: getPmrWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested PmrWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGrade'
-        '404':
-          description: PmrWaitingListCardGrade not found
-    patch:
-      summary: Update an existing PmrWaitingListCardGrade
-      operationId: updatePmrWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated PmrWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCardGrade'
-        '404':
-          description: PmrWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a PmrWaitingListCardGrade
-      operationId: deletePmrWaitingListCardGrade
-      responses:
-        '204':
-          description: PmrWaitingListCardGrade deleted
-        '404':
-          description: PmrWaitingListCardGrade not found
-  /physical-medicine-and-rehabilitation-waiting-list-cards:
-    get:
-      summary: List PmrWaitingListCard records
-      operationId: listPmrWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PmrWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PmrWaitingListCard'
-    post:
-      summary: Create a new PmrWaitingListCard
-      operationId: createPmrWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCard'
-      responses:
-        '201':
-          description: The newly created PmrWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCard'
-        '400':
-          description: Validation error
-  /physical-medicine-and-rehabilitation-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PmrWaitingListCard by id
-      operationId: getPmrWaitingListCard
-      responses:
-        '200':
-          description: The requested PmrWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCard'
-        '404':
-          description: PmrWaitingListCard not found
-    patch:
-      summary: Update an existing PmrWaitingListCard
-      operationId: updatePmrWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PmrWaitingListCard'
-      responses:
-        '200':
-          description: The updated PmrWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PmrWaitingListCard'
-        '404':
-          description: PmrWaitingListCard not found
-    delete:
-      summary: Soft-delete a PmrWaitingListCard
-      operationId: deletePmrWaitingListCard
-      responses:
-        '204':
-          description: PmrWaitingListCard deleted
-        '404':
-          description: PmrWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -565,6 +100,471 @@ paths:
           description: Patient deleted
         '404':
           description: Patient not found
+  /pmr-waiting-list-card-appointments:
+    get:
+      summary: List PmrWaitingListCardAppointment records
+      operationId: listPmrWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PmrWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PmrWaitingListCardAppointment'
+    post:
+      summary: Create a new PmrWaitingListCardAppointment
+      operationId: createPmrWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created PmrWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /pmr-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PmrWaitingListCardAppointment by id
+      operationId: getPmrWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested PmrWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardAppointment'
+        '404':
+          description: PmrWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing PmrWaitingListCardAppointment
+      operationId: updatePmrWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated PmrWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardAppointment'
+        '404':
+          description: PmrWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a PmrWaitingListCardAppointment
+      operationId: deletePmrWaitingListCardAppointment
+      responses:
+        '204':
+          description: PmrWaitingListCardAppointment deleted
+        '404':
+          description: PmrWaitingListCardAppointment not found
+  /pmr-waiting-list-card-grade-flags:
+    get:
+      summary: List PmrWaitingListCardGradeFlag records
+      operationId: listPmrWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PmrWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
+    post:
+      summary: Create a new PmrWaitingListCardGradeFlag
+      operationId: createPmrWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created PmrWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /pmr-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PmrWaitingListCardGradeFlag by id
+      operationId: getPmrWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested PmrWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
+        '404':
+          description: PmrWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing PmrWaitingListCardGradeFlag
+      operationId: updatePmrWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated PmrWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGradeFlag'
+        '404':
+          description: PmrWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a PmrWaitingListCardGradeFlag
+      operationId: deletePmrWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: PmrWaitingListCardGradeFlag deleted
+        '404':
+          description: PmrWaitingListCardGradeFlag not found
+  /pmr-waiting-list-card-grade-rules:
+    get:
+      summary: List PmrWaitingListCardGradeRule records
+      operationId: listPmrWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PmrWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
+    post:
+      summary: Create a new PmrWaitingListCardGradeRule
+      operationId: createPmrWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created PmrWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /pmr-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PmrWaitingListCardGradeRule by id
+      operationId: getPmrWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested PmrWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
+        '404':
+          description: PmrWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing PmrWaitingListCardGradeRule
+      operationId: updatePmrWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated PmrWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGradeRule'
+        '404':
+          description: PmrWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a PmrWaitingListCardGradeRule
+      operationId: deletePmrWaitingListCardGradeRule
+      responses:
+        '204':
+          description: PmrWaitingListCardGradeRule deleted
+        '404':
+          description: PmrWaitingListCardGradeRule not found
+  /pmr-waiting-list-card-grades:
+    get:
+      summary: List PmrWaitingListCardGrade records
+      operationId: listPmrWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PmrWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PmrWaitingListCardGrade'
+    post:
+      summary: Create a new PmrWaitingListCardGrade
+      operationId: createPmrWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created PmrWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /pmr-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PmrWaitingListCardGrade by id
+      operationId: getPmrWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested PmrWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGrade'
+        '404':
+          description: PmrWaitingListCardGrade not found
+    patch:
+      summary: Update an existing PmrWaitingListCardGrade
+      operationId: updatePmrWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated PmrWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCardGrade'
+        '404':
+          description: PmrWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a PmrWaitingListCardGrade
+      operationId: deletePmrWaitingListCardGrade
+      responses:
+        '204':
+          description: PmrWaitingListCardGrade deleted
+        '404':
+          description: PmrWaitingListCardGrade not found
+  /pmr-waiting-list-cards:
+    get:
+      summary: List PmrWaitingListCard records
+      operationId: listPmrWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PmrWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PmrWaitingListCard'
+    post:
+      summary: Create a new PmrWaitingListCard
+      operationId: createPmrWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCard'
+      responses:
+        '201':
+          description: The newly created PmrWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCard'
+        '400':
+          description: Validation error
+  /pmr-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PmrWaitingListCard by id
+      operationId: getPmrWaitingListCard
+      responses:
+        '200':
+          description: The requested PmrWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCard'
+        '404':
+          description: PmrWaitingListCard not found
+    patch:
+      summary: Update an existing PmrWaitingListCard
+      operationId: updatePmrWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PmrWaitingListCard'
+      responses:
+        '200':
+          description: The updated PmrWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PmrWaitingListCard'
+        '404':
+          description: PmrWaitingListCard not found
+    delete:
+      summary: Soft-delete a PmrWaitingListCard
+      operationId: deletePmrWaitingListCard
+      responses:
+        '204':
+          description: PmrWaitingListCard deleted
+        '404':
+          description: PmrWaitingListCard not found
   /practitioners:
     get:
       summary: List Practitioner records
@@ -660,6 +660,97 @@ paths:
           description: Practitioner not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a physical medicine and rehabilitation waiting list.
     PmrWaitingListCard:
       type: object
       properties:
@@ -837,8 +928,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a physical medicine and rehabilitation waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a physical medicine and rehabilitation waiting
+        list. Parent of appointment(s) and grading result.
     PmrWaitingListCardAppointment:
       type: object
       properties:
@@ -1162,97 +1253,6 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a physical medicine and rehabilitation waiting list.
     Practitioner:
       type: object
       properties:
@@ -1335,4 +1335,5 @@ components:
       - organisation_name
       - organisation_ods_code
       - site_name
-      description: Practitioner who completes a physical medicine and rehabilitation waiting list card on behalf of the patient.
+      description: Practitioner who completes a physical medicine and rehabilitation waiting list card
+        on behalf of the patient.

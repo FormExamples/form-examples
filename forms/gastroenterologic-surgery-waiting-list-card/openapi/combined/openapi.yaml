@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Gastroenterologic Surgery Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Gastroenterologic Surgery Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Gastroenterologic Surgery Waiting List Card form,
+    merged from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /gastroenterologic-surgery-waiting-list-card-appointments:
+  /gi-surgery-waiting-list-card-appointments:
     get:
       summary: List GiSurgeryWaitingListCardAppointment records
       operationId: listGiSurgeryWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/GiSurgeryWaitingListCardAppointment'
         '400':
           description: Validation error
-  /gastroenterologic-surgery-waiting-list-card-appointments/{id}:
+  /gi-surgery-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: GiSurgeryWaitingListCardAppointment deleted
         '404':
           description: GiSurgeryWaitingListCardAppointment not found
-  /gastroenterologic-surgery-waiting-list-card-grade-flags:
+  /gi-surgery-waiting-list-card-grade-flags:
     get:
       summary: List GiSurgeryWaitingListCardGradeFlag records
       operationId: listGiSurgeryWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/GiSurgeryWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /gastroenterologic-surgery-waiting-list-card-grade-flags/{id}:
+  /gi-surgery-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: GiSurgeryWaitingListCardGradeFlag deleted
         '404':
           description: GiSurgeryWaitingListCardGradeFlag not found
-  /gastroenterologic-surgery-waiting-list-card-grade-rules:
+  /gi-surgery-waiting-list-card-grade-rules:
     get:
       summary: List GiSurgeryWaitingListCardGradeRule records
       operationId: listGiSurgeryWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/GiSurgeryWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /gastroenterologic-surgery-waiting-list-card-grade-rules/{id}:
+  /gi-surgery-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: GiSurgeryWaitingListCardGradeRule deleted
         '404':
           description: GiSurgeryWaitingListCardGradeRule not found
-  /gastroenterologic-surgery-waiting-list-card-grades:
+  /gi-surgery-waiting-list-card-grades:
     get:
       summary: List GiSurgeryWaitingListCardGrade records
       operationId: listGiSurgeryWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/GiSurgeryWaitingListCardGrade'
         '400':
           description: Validation error
-  /gastroenterologic-surgery-waiting-list-card-grades/{id}:
+  /gi-surgery-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: GiSurgeryWaitingListCardGrade deleted
         '404':
           description: GiSurgeryWaitingListCardGrade not found
-  /gastroenterologic-surgery-waiting-list-cards:
+  /gi-surgery-waiting-list-cards:
     get:
       summary: List GiSurgeryWaitingListCard records
       operationId: listGiSurgeryWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/GiSurgeryWaitingListCard'
         '400':
           description: Validation error
-  /gastroenterologic-surgery-waiting-list-cards/{id}:
+  /gi-surgery-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path
@@ -837,8 +837,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a gastroenterologic surgery waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a gastroenterologic surgery waiting list. Parent
+        of appointment(s) and grading result.
     GiSurgeryWaitingListCardAppointment:
       type: object
       properties:
@@ -1335,4 +1335,5 @@ components:
       - organisation_name
       - organisation_ods_code
       - site_name
-      description: Practitioner who completes a gastroenterologic surgery waiting list card on behalf of the patient.
+      description: Practitioner who completes a gastroenterologic surgery waiting list card on behalf
+        of the patient.

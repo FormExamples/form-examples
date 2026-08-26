@@ -3,16 +3,16 @@
 	// the domains short on time: together they answer the question a coordinator
 	// actually has — which of next month's lists are about to go ahead without
 	// the optimization they were promised?
-	import Alert from '$lib/components/ui/Alert.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
-	import Select from '$lib/components/ui/Select.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import { sampleAssessments } from '$lib/data/sample-reports';
-	import { DOMAIN_LABELS } from '$lib/engine/domain-rules';
-	import { GATE_DECISION_LABELS, READINESS_LABELS } from '$lib/engine/labels';
-	import type { AssessmentRow, DomainKey } from '$lib/engine/types';
-	import { titleCase } from '$lib/engine/utils';
+	import Alert from '#lib/components/ui/Alert.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
+	import Select from '#lib/components/ui/Select.svelte';
+	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { sampleAssessments } from '#lib/data/sample-reports.js';
+	import { DOMAIN_LABELS } from '#lib/engine/domain-rules.js';
+	import { GATE_DECISION_LABELS, READINESS_LABELS } from '#lib/engine/labels.js';
+	import type { AssessmentRow, DomainKey } from '#lib/engine/types.js';
+	import { titleCase } from '#lib/engine/utils.js';
 
 	const rows: AssessmentRow[] = sampleAssessments;
 

@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: General Surgery Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the General Surgery Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the General Surgery Waiting List Card form, merged from
+    the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /general-surgery-waiting-list-card-appointments:
+  /gen-surgery-waiting-list-card-appointments:
     get:
       summary: List GenSurgeryWaitingListCardAppointment records
       operationId: listGenSurgeryWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/GenSurgeryWaitingListCardAppointment'
         '400':
           description: Validation error
-  /general-surgery-waiting-list-card-appointments/{id}:
+  /gen-surgery-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: GenSurgeryWaitingListCardAppointment deleted
         '404':
           description: GenSurgeryWaitingListCardAppointment not found
-  /general-surgery-waiting-list-card-grade-flags:
+  /gen-surgery-waiting-list-card-grade-flags:
     get:
       summary: List GenSurgeryWaitingListCardGradeFlag records
       operationId: listGenSurgeryWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/GenSurgeryWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /general-surgery-waiting-list-card-grade-flags/{id}:
+  /gen-surgery-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: GenSurgeryWaitingListCardGradeFlag deleted
         '404':
           description: GenSurgeryWaitingListCardGradeFlag not found
-  /general-surgery-waiting-list-card-grade-rules:
+  /gen-surgery-waiting-list-card-grade-rules:
     get:
       summary: List GenSurgeryWaitingListCardGradeRule records
       operationId: listGenSurgeryWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/GenSurgeryWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /general-surgery-waiting-list-card-grade-rules/{id}:
+  /gen-surgery-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: GenSurgeryWaitingListCardGradeRule deleted
         '404':
           description: GenSurgeryWaitingListCardGradeRule not found
-  /general-surgery-waiting-list-card-grades:
+  /gen-surgery-waiting-list-card-grades:
     get:
       summary: List GenSurgeryWaitingListCardGrade records
       operationId: listGenSurgeryWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/GenSurgeryWaitingListCardGrade'
         '400':
           description: Validation error
-  /general-surgery-waiting-list-card-grades/{id}:
+  /gen-surgery-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: GenSurgeryWaitingListCardGrade deleted
         '404':
           description: GenSurgeryWaitingListCardGrade not found
-  /general-surgery-waiting-list-cards:
+  /gen-surgery-waiting-list-cards:
     get:
       summary: List GenSurgeryWaitingListCard records
       operationId: listGenSurgeryWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/GenSurgeryWaitingListCard'
         '400':
           description: Validation error
-  /general-surgery-waiting-list-cards/{id}:
+  /gen-surgery-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

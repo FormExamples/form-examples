@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { store } from "$lib/stores/assessment.svelte.js";
-  import Fieldset from "$lib/components/ui/Fieldset.svelte";
-  import Field from "$lib/components/ui/Field.svelte";
-  import NumberInput from "$lib/components/ui/NumberInput.svelte";
-  import Select from "$lib/components/ui/Select.svelte";
-  import TextInput from "$lib/components/ui/TextInput.svelte";
-  import DateInput from "$lib/components/ui/DateInput.svelte";
+  import { store } from "#lib/stores/assessment.svelte.js";
+  import Fieldset from "#lib/components/ui/Fieldset.svelte";
+  import Field from "#lib/components/ui/Field.svelte";
+  import NumberInput from "#lib/components/ui/NumberInput.svelte";
+  import Select from "#lib/components/ui/Select.svelte";
+  import TextInput from "#lib/components/ui/TextInput.svelte";
+  import DateInput from "#lib/components/ui/DateInput.svelte";
 </script>
 
 <Fieldset legend="Step 14 — Functional capacity and frailty">

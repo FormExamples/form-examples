@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { store } from "$lib/stores/assessment.svelte.js";
-  import type { Medication, Allergy } from "$lib/engine/types.js";
-  import Fieldset from "$lib/components/ui/Fieldset.svelte";
-  import Field from "$lib/components/ui/Field.svelte";
-  import Button from "$lib/components/ui/Button.svelte";
-  import TextInput from "$lib/components/ui/TextInput.svelte";
-  import TextAreaInput from "$lib/components/ui/TextAreaInput.svelte";
-  import Select from "$lib/components/ui/Select.svelte";
+  import { store } from "#lib/stores/assessment.svelte.js";
+  import type { Medication, Allergy } from "#lib/engine/types.js";
+  import Fieldset from "#lib/components/ui/Fieldset.svelte";
+  import Field from "#lib/components/ui/Field.svelte";
+  import Button from "#lib/components/ui/Button.svelte";
+  import TextInput from "#lib/components/ui/TextInput.svelte";
+  import TextAreaInput from "#lib/components/ui/TextAreaInput.svelte";
+  import Select from "#lib/components/ui/Select.svelte";
 
   function newMed(): Medication {
     return {

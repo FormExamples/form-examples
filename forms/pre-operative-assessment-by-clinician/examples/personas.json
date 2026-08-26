@@ -218,7 +218,20 @@
           "cpetAnaerobicThresholdMlKgMin": null,
           "cpetNotes": "",
           "malnutritionRisk": "low",
-          "unintentionalWeightLossKg": null
+          "unintentionalWeightLossKg": null,
+          "fallsRiskWithinYear": "no",
+          "friedWeakness": "no",
+          "friedSlowness": "no",
+          "friedLowPhysicalActivity": "no",
+          "friedExhaustion": "no",
+          "friedUnintentionalWeightLoss": "no",
+          "riskAnalysisIndexScore": null,
+          "miniCogPerformed": "no",
+          "miniCogScore": null,
+          "prehabilitationIndicated": "no",
+          "prehabilitationType": "",
+          "prehabilitationStartDate": "",
+          "proteinSupplementationRecommended": ""
         },
         "anaesthesiaPlan": {
           "technique": "general",
@@ -240,6 +253,20 @@
           "recommendation": "Proceed with elective surgery",
           "clinicianNotes": "",
           "signedAt": ""
+        },
+        "glp1Management": {
+          "onGlp1ReceptorAgonist": "no",
+          "glp1AgonistName": "",
+          "glp1Formulation": "",
+          "glp1LastDoseAt": "",
+          "glp1HeldPerGuideline": "",
+          "glp1ExtendedClearFluidsConfirmed": "",
+          "glp1GiSymptoms": "",
+          "glp1GiSymptomsDetails": "",
+          "glp1GastricUltrasoundPerformed": "",
+          "glp1GastricUltrasoundFindings": "",
+          "glp1FullStomachPrecautionsPlanned": "",
+          "glp1Notes": ""
         }
       },
       "expected": {
@@ -251,6 +278,8 @@
         "rcriScore": 0,
         "stopbangScore": 1,
         "frailtyScale": null,
+        "friedPhenotypeScore": 0,
+        "friedFrailtyCategory": "robust",
         "compositeRisk": "low",
         "firedRules": [
           {
@@ -266,6 +295,13 @@
             "grade": "component",
             "category": "airway",
             "description": "Male gender"
+          },
+          {
+            "ruleId": "R-FRIED-0",
+            "instrument": "frailty",
+            "grade": "robust",
+            "category": "functional",
+            "description": "Fried Frailty Phenotype 0/5 (robust)"
           }
         ],
         "additionalFlags": []
@@ -486,7 +522,20 @@
           "cpetAnaerobicThresholdMlKgMin": null,
           "cpetNotes": "",
           "malnutritionRisk": "low",
-          "unintentionalWeightLossKg": null
+          "unintentionalWeightLossKg": null,
+          "fallsRiskWithinYear": "no",
+          "friedWeakness": "no",
+          "friedSlowness": "no",
+          "friedLowPhysicalActivity": "yes",
+          "friedExhaustion": "no",
+          "friedUnintentionalWeightLoss": "no",
+          "riskAnalysisIndexScore": null,
+          "miniCogPerformed": "no",
+          "miniCogScore": null,
+          "prehabilitationIndicated": "no",
+          "prehabilitationType": "",
+          "prehabilitationStartDate": "",
+          "proteinSupplementationRecommended": ""
         },
         "anaesthesiaPlan": {
           "technique": "general",
@@ -508,6 +557,20 @@
           "recommendation": "Optimise and proceed; smoking cessation advice",
           "clinicianNotes": "",
           "signedAt": ""
+        },
+        "glp1Management": {
+          "onGlp1ReceptorAgonist": "yes",
+          "glp1AgonistName": "semaglutide",
+          "glp1Formulation": "weekly-injection",
+          "glp1LastDoseAt": "2026-08-18",
+          "glp1HeldPerGuideline": "yes",
+          "glp1ExtendedClearFluidsConfirmed": "yes",
+          "glp1GiSymptoms": "no",
+          "glp1GiSymptomsDetails": "",
+          "glp1GastricUltrasoundPerformed": "",
+          "glp1GastricUltrasoundFindings": "",
+          "glp1FullStomachPrecautionsPlanned": "no",
+          "glp1Notes": "Held one week pre-op per guideline; no GI symptoms."
         }
       },
       "expected": {
@@ -519,6 +582,8 @@
         "rcriScore": 0,
         "stopbangScore": 4,
         "frailtyScale": null,
+        "friedPhenotypeScore": 1,
+        "friedFrailtyCategory": "pre-frail",
         "compositeRisk": "moderate",
         "firedRules": [
           {
@@ -583,6 +648,13 @@
             "grade": "component",
             "category": "airway",
             "description": "Male gender"
+          },
+          {
+            "ruleId": "R-FRIED-1",
+            "instrument": "frailty",
+            "grade": "pre-frail",
+            "category": "functional",
+            "description": "Fried Frailty Phenotype 1/5 (pre-frail)"
           }
         ],
         "additionalFlags": []
@@ -803,7 +875,20 @@
           "cpetAnaerobicThresholdMlKgMin": null,
           "cpetNotes": "",
           "malnutritionRisk": "high",
-          "unintentionalWeightLossKg": null
+          "unintentionalWeightLossKg": null,
+          "fallsRiskWithinYear": "yes",
+          "friedWeakness": "yes",
+          "friedSlowness": "yes",
+          "friedLowPhysicalActivity": "yes",
+          "friedExhaustion": "yes",
+          "friedUnintentionalWeightLoss": "no",
+          "riskAnalysisIndexScore": 27,
+          "miniCogPerformed": "yes",
+          "miniCogScore": 2,
+          "prehabilitationIndicated": "yes",
+          "prehabilitationType": "multimodal",
+          "prehabilitationStartDate": "2026-09-01",
+          "proteinSupplementationRecommended": "yes"
         },
         "anaesthesiaPlan": {
           "technique": "general",
@@ -825,6 +910,20 @@
           "recommendation": "High-risk emergency surgery; ICU postoperatively",
           "clinicianNotes": "",
           "signedAt": ""
+        },
+        "glp1Management": {
+          "onGlp1ReceptorAgonist": "yes",
+          "glp1AgonistName": "tirzepatide",
+          "glp1Formulation": "weekly-injection",
+          "glp1LastDoseAt": "2026-08-24",
+          "glp1HeldPerGuideline": "no",
+          "glp1ExtendedClearFluidsConfirmed": "no",
+          "glp1GiSymptoms": "yes",
+          "glp1GiSymptomsDetails": "Nausea and early satiety this week",
+          "glp1GastricUltrasoundPerformed": "yes",
+          "glp1GastricUltrasoundFindings": "Solid gastric content visualised",
+          "glp1FullStomachPrecautionsPlanned": "yes",
+          "glp1Notes": "Dose not held; treat as full stomach — RSI planned."
         }
       },
       "expected": {
@@ -836,6 +935,8 @@
         "rcriScore": 5,
         "stopbangScore": 5,
         "frailtyScale": null,
+        "friedPhenotypeScore": 4,
+        "friedFrailtyCategory": "frail",
         "compositeRisk": "critical",
         "firedRules": [
           {
@@ -963,6 +1064,20 @@
             "grade": "component",
             "category": "airway",
             "description": "Male gender"
+          },
+          {
+            "ruleId": "R-FRIED-4",
+            "instrument": "frailty",
+            "grade": "frail",
+            "category": "functional",
+            "description": "Fried Frailty Phenotype 4/5 (frail)"
+          },
+          {
+            "ruleId": "R-RAI-27",
+            "instrument": "frailty",
+            "grade": "27",
+            "category": "functional",
+            "description": "Risk Analysis Index 27"
           }
         ],
         "additionalFlags": [
@@ -993,6 +1108,27 @@
             "priority": "medium",
             "description": "High malnutrition risk",
             "suggestedAction": "Dietitian referral; consider oral nutritional supplements pre-op."
+          },
+          {
+            "flagId": "F-GLP1-ASPIRATION-RISK",
+            "category": "glp1-aspiration-risk",
+            "priority": "high",
+            "description": "GLP-1 receptor agonist with active GI symptoms — delayed gastric emptying raises aspiration risk",
+            "suggestedAction": "Apply full-stomach precautions: rapid-sequence induction, consider gastric ultrasound, prefer regional anaesthesia where feasible, or consider delaying surgery."
+          },
+          {
+            "flagId": "F-SARCOPENIA-RISK",
+            "category": "sarcopenia-risk",
+            "priority": "medium",
+            "description": "Frail patient on a GLP-1 receptor agonist — risk of accelerated sarcopenia from combined muscle and fat loss",
+            "suggestedAction": "Refer for protein supplementation and resistance-exercise prehabilitation before surgery."
+          },
+          {
+            "flagId": "F-DEHYDRATION-AKI-RISK",
+            "category": "dehydration-aki-risk",
+            "priority": "high",
+            "description": "Frail patient with GLP-1-related GI symptoms plus fasting — elevated risk of dehydration, acute kidney injury, and delirium",
+            "suggestedAction": "Consider pre-admission IV fluids, minimise fasting duration, and monitor renal function and cognition closely."
           }
         ]
       }

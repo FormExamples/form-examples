@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Clinical Microbiology Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Clinical Microbiology Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Clinical Microbiology Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /clinical-microbiology-waiting-list-card-appointments:
+  /clin-micro-waiting-list-card-appointments:
     get:
       summary: List ClinMicroWaitingListCardAppointment records
       operationId: listClinMicroWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/ClinMicroWaitingListCardAppointment'
         '400':
           description: Validation error
-  /clinical-microbiology-waiting-list-card-appointments/{id}:
+  /clin-micro-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: ClinMicroWaitingListCardAppointment deleted
         '404':
           description: ClinMicroWaitingListCardAppointment not found
-  /clinical-microbiology-waiting-list-card-grade-flags:
+  /clin-micro-waiting-list-card-grade-flags:
     get:
       summary: List ClinMicroWaitingListCardGradeFlag records
       operationId: listClinMicroWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/ClinMicroWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /clinical-microbiology-waiting-list-card-grade-flags/{id}:
+  /clin-micro-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: ClinMicroWaitingListCardGradeFlag deleted
         '404':
           description: ClinMicroWaitingListCardGradeFlag not found
-  /clinical-microbiology-waiting-list-card-grade-rules:
+  /clin-micro-waiting-list-card-grade-rules:
     get:
       summary: List ClinMicroWaitingListCardGradeRule records
       operationId: listClinMicroWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/ClinMicroWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /clinical-microbiology-waiting-list-card-grade-rules/{id}:
+  /clin-micro-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: ClinMicroWaitingListCardGradeRule deleted
         '404':
           description: ClinMicroWaitingListCardGradeRule not found
-  /clinical-microbiology-waiting-list-card-grades:
+  /clin-micro-waiting-list-card-grades:
     get:
       summary: List ClinMicroWaitingListCardGrade records
       operationId: listClinMicroWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/ClinMicroWaitingListCardGrade'
         '400':
           description: Validation error
-  /clinical-microbiology-waiting-list-card-grades/{id}:
+  /clin-micro-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: ClinMicroWaitingListCardGrade deleted
         '404':
           description: ClinMicroWaitingListCardGrade not found
-  /clinical-microbiology-waiting-list-cards:
+  /clin-micro-waiting-list-cards:
     get:
       summary: List ClinMicroWaitingListCard records
       operationId: listClinMicroWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/ClinMicroWaitingListCard'
         '400':
           description: Validation error
-  /clinical-microbiology-waiting-list-cards/{id}:
+  /clin-micro-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path
@@ -837,8 +837,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a clinical microbiology waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a clinical microbiology waiting list. Parent
+        of appointment(s) and grading result.
     ClinMicroWaitingListCardAppointment:
       type: object
       properties:
@@ -1335,4 +1335,5 @@ components:
       - organisation_name
       - organisation_ods_code
       - site_name
-      description: Practitioner who completes a clinical microbiology waiting list card on behalf of the patient.
+      description: Practitioner who completes a clinical microbiology waiting list card on behalf of the
+        patient.

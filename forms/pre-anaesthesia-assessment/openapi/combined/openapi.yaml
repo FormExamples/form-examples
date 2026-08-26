@@ -4,8 +4,8 @@ openapi: 3.1.0
 info:
   title: Pre-Anaesthesia Assessment — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Pre-Anaesthesia Assessment form, merged
-    from the per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Pre-Anaesthesia Assessment form, merged from the
+    per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
   /allergies:
     get:
@@ -2487,6 +2487,660 @@ components:
           type: string
           maxLength: 100
           description: Blood products required for the procedure.
+        proforma_header_department:
+          type: string
+          description: Department.
+        proforma_header_registration_date:
+          type: string
+          description: Registration date.
+        proforma_header_pre_op_diagnosis:
+          type: string
+          description: Pre op diagnosis.
+        prev_anaes_anaesthetic_difficulty:
+          type: boolean
+          description: Anaesthetic difficulty. Proforma checklist item (boolean).
+        prev_anaes_abnormal_reaction:
+          type: boolean
+          description: Abnormal reaction. Proforma checklist item (boolean).
+        prev_anaes_ponv:
+          type: boolean
+          description: Ponv. Proforma checklist item (boolean).
+        prev_anaes_malignant_hyperpyrexia:
+          type: boolean
+          description: Malignant hyperpyrexia. Proforma checklist item (boolean).
+        prev_anaes_difficult_intubation:
+          type: boolean
+          description: Difficult intubation. Proforma checklist item (boolean).
+        prev_anaes_difficult_spinal_or_epidural:
+          type: boolean
+          description: Difficult spinal or epidural. Proforma checklist item (boolean).
+        addiction_alcohol:
+          type: boolean
+          description: Alcohol. Proforma checklist item (boolean).
+        addiction_smoking:
+          type: boolean
+          description: Smoking. Proforma checklist item (boolean).
+        addiction_fast_score3_or_more:
+          type: boolean
+          description: Fast score3 or more. Proforma checklist item (boolean).
+        addiction_betel:
+          type: boolean
+          description: Betel. Proforma checklist item (boolean).
+        addiction_drugs:
+          type: boolean
+          description: Drugs. Proforma checklist item (boolean).
+        addiction_other:
+          type: boolean
+          description: Other. Proforma checklist item (boolean).
+        addiction_other_details:
+          type: string
+          description: Other details.
+        pmh_proforma_hypertension:
+          type: boolean
+          description: Hypertension. Proforma checklist item (boolean).
+        pmh_proforma_mi:
+          type: boolean
+          description: Mi. Proforma checklist item (boolean).
+        pmh_proforma_mi_within_past6_months:
+          type: boolean
+          description: Mi within past6 months. Proforma checklist item (boolean).
+        pmh_proforma_angina_or_chest_pain:
+          type: boolean
+          description: Angina or chest pain. Proforma checklist item (boolean).
+        pmh_proforma_angina_triggers:
+          type: string
+          description: Angina triggers. Comma-separated list of selected values; empty string if none
+            selected.
+        pmh_proforma_heart_failure:
+          type: boolean
+          description: Heart failure. Proforma checklist item (boolean).
+        pmh_proforma_dyspnoea:
+          type: boolean
+          description: Dyspnoea. Proforma checklist item (boolean).
+        pmh_proforma_dyspnoea_subtypes:
+          type: string
+          description: Dyspnoea subtypes. Comma-separated list of selected values; empty string if none
+            selected.
+        pmh_proforma_palpitation:
+          type: boolean
+          description: Palpitation. Proforma checklist item (boolean).
+        pmh_proforma_arrhythmia:
+          type: boolean
+          description: Arrhythmia. Proforma checklist item (boolean).
+        pmh_proforma_syncope_or_fainting:
+          type: boolean
+          description: Syncope or fainting. Proforma checklist item (boolean).
+        pmh_proforma_heart_murmur:
+          type: boolean
+          description: Heart murmur. Proforma checklist item (boolean).
+        pmh_proforma_rheumatic_fever:
+          type: boolean
+          description: Rheumatic fever. Proforma checklist item (boolean).
+        pmh_proforma_pacemaker:
+          type: boolean
+          description: Pacemaker. Proforma checklist item (boolean).
+        pmh_proforma_pacemaker_last_check_within6_months:
+          type: boolean
+          description: Pacemaker last check within6 months. Proforma checklist item (boolean).
+        pmh_proforma_implanted_icd_crtd:
+          type: boolean
+          description: Implanted icd crtd. Proforma checklist item (boolean).
+        pmh_proforma_angioplasty:
+          type: boolean
+          description: Angioplasty. Proforma checklist item (boolean).
+        pmh_proforma_stenting:
+          type: boolean
+          description: Stenting. Proforma checklist item (boolean).
+        pmh_proforma_stenting_within_past6_months:
+          type: boolean
+          description: Stenting within past6 months. Proforma checklist item (boolean).
+        pmh_proforma_stent_type:
+          type: string
+          enum:
+          - drug-eluting
+          - bare-metal
+          - unknown
+          - ''
+          description: 'Stent type. One of: drug-eluting, bare-metal, unknown.'
+        pmh_proforma_valve_disease:
+          type: boolean
+          description: Valve disease. Proforma checklist item (boolean).
+        pmh_proforma_cardiac_surgery:
+          type: boolean
+          description: Cardiac surgery. Proforma checklist item (boolean).
+        pmh_proforma_cardiac_surgery_within_past_year:
+          type: boolean
+          description: Cardiac surgery within past year. Proforma checklist item (boolean).
+        pmh_proforma_peripheral_vascular_disease:
+          type: boolean
+          description: Peripheral vascular disease. Proforma checklist item (boolean).
+        pmh_proforma_ischemic_heart_disease:
+          type: boolean
+          description: Ischemic heart disease. Proforma checklist item (boolean).
+        pmh_proforma_asthma:
+          type: boolean
+          description: Asthma. Proforma checklist item (boolean).
+        pmh_proforma_copd:
+          type: boolean
+          description: Copd. Proforma checklist item (boolean).
+        pmh_proforma_tb:
+          type: boolean
+          description: Tb. Proforma checklist item (boolean).
+        pmh_proforma_bronchiectasis:
+          type: boolean
+          description: Bronchiectasis. Proforma checklist item (boolean).
+        pmh_proforma_previous_hospital_admission:
+          type: boolean
+          description: Previous hospital admission. Proforma checklist item (boolean).
+        pmh_proforma_icu_admission:
+          type: boolean
+          description: Icu admission. Proforma checklist item (boolean).
+        pmh_proforma_on_home_oxygen_or_nebulizers:
+          type: boolean
+          description: On home oxygen or nebulizers. Proforma checklist item (boolean).
+        pmh_proforma_uses_inhaler_daily_or_more:
+          type: boolean
+          description: Uses inhaler daily or more. Proforma checklist item (boolean).
+        pmh_proforma_flu_cough_sputum:
+          type: boolean
+          description: Flu cough sputum. Proforma checklist item (boolean).
+        pmh_proforma_haemoptysis:
+          type: boolean
+          description: Haemoptysis. Proforma checklist item (boolean).
+        pmh_proforma_sleep_apnoea:
+          type: boolean
+          description: Sleep apnoea. Proforma checklist item (boolean).
+        pmh_proforma_sleep_apnoea_using_cpap:
+          type: boolean
+          description: Sleep apnoea using cpap. Proforma checklist item (boolean).
+        pmh_proforma_stop_bang_risk:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          - ''
+          description: 'Stop bang risk. One of: high, medium, low.'
+        pmh_proforma_other_respiratory_disease:
+          type: boolean
+          description: Other respiratory disease. Proforma checklist item (boolean).
+        pmh_proforma_diabetes_mellitus:
+          type: boolean
+          description: Diabetes mellitus. Proforma checklist item (boolean).
+        pmh_proforma_diabetes_diet_controlled:
+          type: boolean
+          description: Diabetes diet controlled. Proforma checklist item (boolean).
+        pmh_proforma_diabetes_drug_controlled:
+          type: boolean
+          description: Diabetes drug controlled. Proforma checklist item (boolean).
+        pmh_proforma_diabetes_insulin_controlled:
+          type: boolean
+          description: Diabetes insulin controlled. Proforma checklist item (boolean).
+        pmh_proforma_diabetes_hba1c_over69:
+          type: boolean
+          description: Diabetes hba1c over69. Proforma checklist item (boolean).
+        pmh_proforma_hypothyroid:
+          type: boolean
+          description: Hypothyroid. Proforma checklist item (boolean).
+        pmh_proforma_hyperthyroid:
+          type: boolean
+          description: Hyperthyroid. Proforma checklist item (boolean).
+        pmh_proforma_stroke_or_tia:
+          type: boolean
+          description: Stroke or tia. Proforma checklist item (boolean).
+        pmh_proforma_stroke_within3_months:
+          type: boolean
+          description: Stroke within3 months. Proforma checklist item (boolean).
+        pmh_proforma_stroke_residual_disability:
+          type: string
+          description: Stroke residual disability.
+        pmh_proforma_epilepsy_or_seizures:
+          type: boolean
+          description: Epilepsy or seizures. Proforma checklist item (boolean).
+        pmh_proforma_epilepsy_control:
+          type: string
+          enum:
+          - well-controlled
+          - 3-12-months-ago
+          - poorly-controlled
+          - ''
+          description: 'Epilepsy control. One of: well-controlled, 3-12-months-ago, poorly-controlled.'
+        pmh_proforma_ms:
+          type: boolean
+          description: Ms. Proforma checklist item (boolean).
+        pmh_proforma_muscular_dystrophy:
+          type: boolean
+          description: Muscular dystrophy. Proforma checklist item (boolean).
+        pmh_proforma_other_neurological_disease:
+          type: boolean
+          description: Other neurological disease. Proforma checklist item (boolean).
+        pmh_proforma_other_neurological_disease_details:
+          type: string
+          description: Other neurological disease details.
+        pmh_proforma_dementia:
+          type: boolean
+          description: Dementia. Proforma checklist item (boolean).
+        pmh_proforma_creutzfeldt_jakob_disease:
+          type: boolean
+          description: Creutzfeldt jakob disease. Proforma checklist item (boolean).
+        pmh_proforma_growth_hormone_or_gonadotrophin:
+          type: boolean
+          description: Growth hormone or gonadotrophin. Proforma checklist item (boolean).
+        pmh_proforma_brain_or_spinal_cord_surgery:
+          type: boolean
+          description: Brain or spinal cord surgery. Proforma checklist item (boolean).
+        pmh_proforma_four_at_score:
+          type: integer
+          format: int32
+          description: Four at score.
+        pmh_proforma_complex_needs:
+          type: boolean
+          description: Complex needs. Proforma checklist item (boolean).
+        pmh_proforma_renal_impairment:
+          type: boolean
+          description: Renal impairment. Proforma checklist item (boolean).
+        pmh_proforma_ckd_stage3:
+          type: boolean
+          description: Ckd stage3. Proforma checklist item (boolean).
+        pmh_proforma_ckd_stage4_or_hemodialysis:
+          type: boolean
+          description: Ckd stage4 or hemodialysis. Proforma checklist item (boolean).
+        pmh_proforma_liver_disease:
+          type: boolean
+          description: Liver disease. Proforma checklist item (boolean).
+        pmh_proforma_clotting_disorders_haemophilia:
+          type: boolean
+          description: Clotting disorders haemophilia. Proforma checklist item (boolean).
+        pmh_proforma_easy_bruising_prolonged_bleeding:
+          type: boolean
+          description: Easy bruising prolonged bleeding. Proforma checklist item (boolean).
+        pmh_proforma_dvt_or_pe:
+          type: boolean
+          description: Dvt or pe. Proforma checklist item (boolean).
+        pmh_proforma_dvt_or_pe_within_past3_months:
+          type: boolean
+          description: Dvt or pe within past3 months. Proforma checklist item (boolean).
+        pmh_proforma_gord:
+          type: boolean
+          description: Gord. Proforma checklist item (boolean).
+        pmh_proforma_any_other_disease:
+          type: boolean
+          description: Any other disease. Proforma checklist item (boolean).
+        pmh_proforma_chronic_pain:
+          type: boolean
+          description: Chronic pain. Proforma checklist item (boolean).
+        pmh_proforma_duke_activity_status_index:
+          type: integer
+          format: int32
+          description: Duke activity status index.
+        pmh_proforma_mets_score:
+          type: number
+          format: double
+          description: Mets score.
+        pmh_proforma_ongoing_medications:
+          type: string
+          description: Ongoing medications.
+        pmh_proforma_cortisone_prednisone_steroid:
+          type: boolean
+          description: Cortisone prednisone steroid. Proforma checklist item (boolean).
+        pmh_proforma_blood_transfusion_history:
+          type: boolean
+          description: Blood transfusion history. Proforma checklist item (boolean).
+        pmh_proforma_chemotherapy_drugs:
+          type: boolean
+          description: Chemotherapy drugs. Proforma checklist item (boolean).
+        pmh_proforma_radiotherapy:
+          type: boolean
+          description: Radiotherapy. Proforma checklist item (boolean).
+        airway_exam_proforma_mouth_opening:
+          type: boolean
+          description: Mouth opening. Proforma checklist item (boolean).
+        airway_exam_proforma_loose_teeth:
+          type: boolean
+          description: Loose teeth. Proforma checklist item (boolean).
+        airway_exam_proforma_denture_missing:
+          type: boolean
+          description: Denture missing. Proforma checklist item (boolean).
+        airway_exam_proforma_mp_grade:
+          type: string
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - ''
+          description: 'Mp grade. One of: 1, 2, 3, 4.'
+        airway_exam_proforma_micrognathia:
+          type: boolean
+          description: Micrognathia. Proforma checklist item (boolean).
+        airway_exam_proforma_tm_distance_over65:
+          type: boolean
+          description: Tm distance over65. Proforma checklist item (boolean).
+        airway_exam_proforma_mo_distance:
+          type: boolean
+          description: Mo distance. Proforma checklist item (boolean).
+        airway_exam_proforma_tm_joint:
+          type: boolean
+          description: Tm joint. Proforma checklist item (boolean).
+        airway_exam_proforma_short_neck_rom:
+          type: boolean
+          description: Short neck rom. Proforma checklist item (boolean).
+        airway_exam_proforma_difficult_airway:
+          type: boolean
+          description: Difficult airway. Proforma checklist item (boolean).
+        airway_exam_proforma_obesity_scoring:
+          type: boolean
+          description: Obesity scoring. Proforma checklist item (boolean).
+        airway_exam_proforma_spine_back:
+          type: boolean
+          description: Spine back. Proforma checklist item (boolean).
+        airway_exam_proforma_scoliosis:
+          type: boolean
+          description: Scoliosis. Proforma checklist item (boolean).
+        airway_exam_proforma_vitals_examination:
+          type: boolean
+          description: Vitals examination. Proforma checklist item (boolean).
+        vitals_proforma_height_cm:
+          type: number
+          format: double
+          description: Height cm.
+        vitals_proforma_weight_kg:
+          type: number
+          format: double
+          description: Weight kg.
+        vitals_proforma_hr:
+          type: integer
+          format: int32
+          description: Hr.
+        vitals_proforma_bp:
+          type: string
+          description: Bp.
+        vitals_proforma_resp_rate:
+          type: integer
+          format: int32
+          description: Resp rate.
+        vitals_proforma_spo2:
+          type: number
+          format: double
+          description: Spo2.
+        vitals_proforma_temp:
+          type: number
+          format: double
+          description: Temp.
+        vitals_proforma_bmi:
+          type: number
+          format: double
+          description: Bmi.
+        gen_exam_proforma_pallor:
+          type: boolean
+          description: Pallor. Proforma checklist item (boolean).
+        gen_exam_proforma_icterus:
+          type: boolean
+          description: Icterus. Proforma checklist item (boolean).
+        gen_exam_proforma_cyanosis:
+          type: boolean
+          description: Cyanosis. Proforma checklist item (boolean).
+        gen_exam_proforma_clubbing:
+          type: boolean
+          description: Clubbing. Proforma checklist item (boolean).
+        gen_exam_proforma_koilonychia:
+          type: boolean
+          description: Koilonychia. Proforma checklist item (boolean).
+        gen_exam_proforma_lymphadenopathy:
+          type: boolean
+          description: Lymphadenopathy. Proforma checklist item (boolean).
+        gen_exam_proforma_edema:
+          type: boolean
+          description: Edema. Proforma checklist item (boolean).
+        gen_exam_proforma_jvp:
+          type: boolean
+          description: Jvp. Proforma checklist item (boolean).
+        invest_proforma_blood_group_haemoglobin:
+          type: string
+          description: Blood group haemoglobin.
+        invest_proforma_differential_n:
+          type: string
+          description: Differential n.
+        invest_proforma_differential_l:
+          type: string
+          description: Differential l.
+        invest_proforma_differential_e:
+          type: string
+          description: Differential e.
+        invest_proforma_differential_m:
+          type: string
+          description: Differential m.
+        invest_proforma_differential_b:
+          type: string
+          description: Differential b.
+        invest_proforma_absolute:
+          type: string
+          description: Absolute.
+        invest_proforma_nc:
+          type: string
+          description: Nc.
+        invest_proforma_tlc:
+          type: string
+          description: Tlc.
+        invest_proforma_tpc:
+          type: string
+          description: Tpc.
+        invest_proforma_esr:
+          type: string
+          description: Esr.
+        invest_proforma_crp:
+          type: string
+          description: Crp.
+        invest_proforma_pcv:
+          type: string
+          description: Pcv.
+        invest_proforma_latex_rast:
+          type: string
+          description: Latex rast.
+        invest_proforma_fbs:
+          type: string
+          description: Fbs.
+        invest_proforma_ppbs:
+          type: string
+          description: Ppbs.
+        invest_proforma_hba1c:
+          type: string
+          description: Hba1c.
+        invest_proforma_na:
+          type: string
+          description: Na.
+        invest_proforma_k:
+          type: string
+          description: K.
+        invest_proforma_urea:
+          type: string
+          description: Urea.
+        invest_proforma_creatinine:
+          type: string
+          description: Creatinine.
+        invest_proforma_bilirubin_total:
+          type: string
+          description: Bilirubin total.
+        invest_proforma_bilirubin_direct:
+          type: string
+          description: Bilirubin direct.
+        invest_proforma_alk_phosphatase:
+          type: string
+          description: Alk phosphatase.
+        invest_proforma_sgpt_alt:
+          type: string
+          description: Sgpt alt.
+        invest_proforma_sgot_ast:
+          type: string
+          description: Sgot ast.
+        invest_proforma_bt:
+          type: string
+          description: Bt.
+        invest_proforma_ct:
+          type: string
+          description: Ct.
+        invest_proforma_pt:
+          type: string
+          description: Pt.
+        invest_proforma_aptt:
+          type: string
+          description: Aptt.
+        invest_proforma_inr:
+          type: string
+          description: Inr.
+        invest_proforma_ft3:
+          type: string
+          description: Ft3.
+        invest_proforma_ft4:
+          type: string
+          description: Ft4.
+        invest_proforma_tsh:
+          type: string
+          description: Tsh.
+        invest_proforma_ecg:
+          type: string
+          description: Ecg.
+        invest_proforma_chest_xray:
+          type: string
+          description: Chest xray.
+        invest_proforma_pft:
+          type: string
+          description: Pft.
+        invest_proforma_abg:
+          type: string
+          description: Abg.
+        invest_proforma_two_d_echo:
+          type: string
+          description: Two d echo.
+        invest_proforma_lvef_percent:
+          type: number
+          format: double
+          description: Lvef percent.
+        invest_proforma_tmt:
+          type: string
+          description: Tmt.
+        invest_proforma_ct_scan:
+          type: string
+          description: Ct scan.
+        invest_proforma_mri:
+          type: string
+          description: Mri.
+        risk_factors_cardiac:
+          type: boolean
+          description: Cardiac. Proforma checklist item (boolean).
+        risk_factors_respiratory:
+          type: boolean
+          description: Respiratory. Proforma checklist item (boolean).
+        risk_factors_diabetes:
+          type: boolean
+          description: Diabetes. Proforma checklist item (boolean).
+        risk_factors_insulin:
+          type: boolean
+          description: Insulin. Proforma checklist item (boolean).
+        risk_factors_bmi_over40:
+          type: boolean
+          description: Bmi over40. Proforma checklist item (boolean).
+        risk_factors_anticoagulants:
+          type: boolean
+          description: Anticoagulants. Proforma checklist item (boolean).
+        risk_factors_allergies:
+          type: boolean
+          description: Allergies. Proforma checklist item (boolean).
+        risk_factors_antiplatelets:
+          type: boolean
+          description: Antiplatelets. Proforma checklist item (boolean).
+        risk_factors_egfr_under30:
+          type: boolean
+          description: Egfr under30. Proforma checklist item (boolean).
+        risk_factors_egfr30_to60:
+          type: boolean
+          description: Egfr30 to60. Proforma checklist item (boolean).
+        risk_factors_age_over70:
+          type: boolean
+          description: Age over70. Proforma checklist item (boolean).
+        risk_factors_pvd:
+          type: boolean
+          description: Pvd. Proforma checklist item (boolean).
+        risk_factors_liver_disease:
+          type: boolean
+          description: Liver disease. Proforma checklist item (boolean).
+        risk_factors_vte_risk:
+          type: boolean
+          description: Vte risk. Proforma checklist item (boolean).
+        risk_factors_complex_needs:
+          type: boolean
+          description: Complex needs. Proforma checklist item (boolean).
+        risk_factors_anaemia:
+          type: boolean
+          description: Anaemia. Proforma checklist item (boolean).
+        risk_factors_neuromuscular_disorders:
+          type: boolean
+          description: Neuromuscular disorders. Proforma checklist item (boolean).
+        risk_factors_others:
+          type: boolean
+          description: Others. Proforma checklist item (boolean).
+        risk_factors_others_details:
+          type: string
+          description: Others details.
+        anaes_plan_proforma_anaesthetic_concerns:
+          type: string
+          description: Anaesthetic concerns.
+        anaes_plan_proforma_plan_tiva:
+          type: boolean
+          description: Plan tiva. Proforma checklist item (boolean).
+        anaes_plan_proforma_plan_ra:
+          type: boolean
+          description: Plan ra. Proforma checklist item (boolean).
+        anaes_plan_proforma_plan_other:
+          type: boolean
+          description: Plan other. Proforma checklist item (boolean).
+        anaes_plan_proforma_plan_other_details:
+          type: string
+          description: Plan other details.
+        anaes_plan_proforma_list_for_ot_defer_not_fit:
+          type: string
+          enum:
+          - list-for-ot
+          - defer
+          - not-fit
+          - ''
+          description: 'List for ot defer not fit. One of: list-for-ot, defer, not-fit.'
+        anaes_plan_proforma_nil_orally_after:
+          type: string
+          description: Nil orally after.
+        anaes_plan_proforma_informed_written_consent:
+          type: boolean
+          description: Informed written consent. Proforma checklist item (boolean).
+        anaes_plan_proforma_risks_benefits_alternatives_discussed:
+          type: boolean
+          description: Risks benefits alternatives discussed. Proforma checklist item (boolean).
+        anaes_plan_proforma_arrange_units_of_blood:
+          type: string
+          description: Arrange units of blood.
+        anaes_plan_proforma_arrange_post_op_icu:
+          type: boolean
+          description: Arrange post op icu. Proforma checklist item (boolean).
+        anaes_plan_proforma_backup:
+          type: boolean
+          description: Backup. Proforma checklist item (boolean).
+        anaes_plan_proforma_do_investigations:
+          type: string
+          description: Do investigations.
+        anaes_plan_proforma_do_special_orders:
+          type: string
+          description: Do special orders.
+        anaes_plan_proforma_reviewed_high_risk_anaesthesia:
+          type: boolean
+          description: Reviewed high risk anaesthesia. Proforma checklist item (boolean).
+        anaes_plan_proforma_reviewed_consent:
+          type: boolean
+          description: Reviewed consent. Proforma checklist item (boolean).
+        anaes_plan_proforma_consultant_anaesthesiologist_name:
+          type: string
+          description: Consultant anaesthesiologist name.
+        anaes_plan_proforma_consultant_anaesthesiologist_signature:
+          type: string
+          description: Consultant anaesthesiologist signature.
       required:
       - created_at
       - updated_at
@@ -2622,6 +3276,200 @@ components:
       - post_op_disposition
       - special_equipment
       - blood_products_required
+      - proforma_header_department
+      - proforma_header_registration_date
+      - proforma_header_pre_op_diagnosis
+      - prev_anaes_anaesthetic_difficulty
+      - prev_anaes_abnormal_reaction
+      - prev_anaes_ponv
+      - prev_anaes_malignant_hyperpyrexia
+      - prev_anaes_difficult_intubation
+      - prev_anaes_difficult_spinal_or_epidural
+      - addiction_alcohol
+      - addiction_smoking
+      - addiction_fast_score3_or_more
+      - addiction_betel
+      - addiction_drugs
+      - addiction_other
+      - addiction_other_details
+      - pmh_proforma_hypertension
+      - pmh_proforma_mi
+      - pmh_proforma_mi_within_past6_months
+      - pmh_proforma_angina_or_chest_pain
+      - pmh_proforma_angina_triggers
+      - pmh_proforma_heart_failure
+      - pmh_proforma_dyspnoea
+      - pmh_proforma_dyspnoea_subtypes
+      - pmh_proforma_palpitation
+      - pmh_proforma_arrhythmia
+      - pmh_proforma_syncope_or_fainting
+      - pmh_proforma_heart_murmur
+      - pmh_proforma_rheumatic_fever
+      - pmh_proforma_pacemaker
+      - pmh_proforma_pacemaker_last_check_within6_months
+      - pmh_proforma_implanted_icd_crtd
+      - pmh_proforma_angioplasty
+      - pmh_proforma_stenting
+      - pmh_proforma_stenting_within_past6_months
+      - pmh_proforma_stent_type
+      - pmh_proforma_valve_disease
+      - pmh_proforma_cardiac_surgery
+      - pmh_proforma_cardiac_surgery_within_past_year
+      - pmh_proforma_peripheral_vascular_disease
+      - pmh_proforma_ischemic_heart_disease
+      - pmh_proforma_asthma
+      - pmh_proforma_copd
+      - pmh_proforma_tb
+      - pmh_proforma_bronchiectasis
+      - pmh_proforma_previous_hospital_admission
+      - pmh_proforma_icu_admission
+      - pmh_proforma_on_home_oxygen_or_nebulizers
+      - pmh_proforma_uses_inhaler_daily_or_more
+      - pmh_proforma_flu_cough_sputum
+      - pmh_proforma_haemoptysis
+      - pmh_proforma_sleep_apnoea
+      - pmh_proforma_sleep_apnoea_using_cpap
+      - pmh_proforma_stop_bang_risk
+      - pmh_proforma_other_respiratory_disease
+      - pmh_proforma_diabetes_mellitus
+      - pmh_proforma_diabetes_diet_controlled
+      - pmh_proforma_diabetes_drug_controlled
+      - pmh_proforma_diabetes_insulin_controlled
+      - pmh_proforma_diabetes_hba1c_over69
+      - pmh_proforma_hypothyroid
+      - pmh_proforma_hyperthyroid
+      - pmh_proforma_stroke_or_tia
+      - pmh_proforma_stroke_within3_months
+      - pmh_proforma_stroke_residual_disability
+      - pmh_proforma_epilepsy_or_seizures
+      - pmh_proforma_epilepsy_control
+      - pmh_proforma_ms
+      - pmh_proforma_muscular_dystrophy
+      - pmh_proforma_other_neurological_disease
+      - pmh_proforma_other_neurological_disease_details
+      - pmh_proforma_dementia
+      - pmh_proforma_creutzfeldt_jakob_disease
+      - pmh_proforma_growth_hormone_or_gonadotrophin
+      - pmh_proforma_brain_or_spinal_cord_surgery
+      - pmh_proforma_complex_needs
+      - pmh_proforma_renal_impairment
+      - pmh_proforma_ckd_stage3
+      - pmh_proforma_ckd_stage4_or_hemodialysis
+      - pmh_proforma_liver_disease
+      - pmh_proforma_clotting_disorders_haemophilia
+      - pmh_proforma_easy_bruising_prolonged_bleeding
+      - pmh_proforma_dvt_or_pe
+      - pmh_proforma_dvt_or_pe_within_past3_months
+      - pmh_proforma_gord
+      - pmh_proforma_any_other_disease
+      - pmh_proforma_chronic_pain
+      - pmh_proforma_ongoing_medications
+      - pmh_proforma_cortisone_prednisone_steroid
+      - pmh_proforma_blood_transfusion_history
+      - pmh_proforma_chemotherapy_drugs
+      - pmh_proforma_radiotherapy
+      - airway_exam_proforma_mouth_opening
+      - airway_exam_proforma_loose_teeth
+      - airway_exam_proforma_denture_missing
+      - airway_exam_proforma_mp_grade
+      - airway_exam_proforma_micrognathia
+      - airway_exam_proforma_tm_distance_over65
+      - airway_exam_proforma_mo_distance
+      - airway_exam_proforma_tm_joint
+      - airway_exam_proforma_short_neck_rom
+      - airway_exam_proforma_difficult_airway
+      - airway_exam_proforma_obesity_scoring
+      - airway_exam_proforma_spine_back
+      - airway_exam_proforma_scoliosis
+      - airway_exam_proforma_vitals_examination
+      - vitals_proforma_bp
+      - gen_exam_proforma_pallor
+      - gen_exam_proforma_icterus
+      - gen_exam_proforma_cyanosis
+      - gen_exam_proforma_clubbing
+      - gen_exam_proforma_koilonychia
+      - gen_exam_proforma_lymphadenopathy
+      - gen_exam_proforma_edema
+      - gen_exam_proforma_jvp
+      - invest_proforma_blood_group_haemoglobin
+      - invest_proforma_differential_n
+      - invest_proforma_differential_l
+      - invest_proforma_differential_e
+      - invest_proforma_differential_m
+      - invest_proforma_differential_b
+      - invest_proforma_absolute
+      - invest_proforma_nc
+      - invest_proforma_tlc
+      - invest_proforma_tpc
+      - invest_proforma_esr
+      - invest_proforma_crp
+      - invest_proforma_pcv
+      - invest_proforma_latex_rast
+      - invest_proforma_fbs
+      - invest_proforma_ppbs
+      - invest_proforma_hba1c
+      - invest_proforma_na
+      - invest_proforma_k
+      - invest_proforma_urea
+      - invest_proforma_creatinine
+      - invest_proforma_bilirubin_total
+      - invest_proforma_bilirubin_direct
+      - invest_proforma_alk_phosphatase
+      - invest_proforma_sgpt_alt
+      - invest_proforma_sgot_ast
+      - invest_proforma_bt
+      - invest_proforma_ct
+      - invest_proforma_pt
+      - invest_proforma_aptt
+      - invest_proforma_inr
+      - invest_proforma_ft3
+      - invest_proforma_ft4
+      - invest_proforma_tsh
+      - invest_proforma_ecg
+      - invest_proforma_chest_xray
+      - invest_proforma_pft
+      - invest_proforma_abg
+      - invest_proforma_two_d_echo
+      - invest_proforma_tmt
+      - invest_proforma_ct_scan
+      - invest_proforma_mri
+      - risk_factors_cardiac
+      - risk_factors_respiratory
+      - risk_factors_diabetes
+      - risk_factors_insulin
+      - risk_factors_bmi_over40
+      - risk_factors_anticoagulants
+      - risk_factors_allergies
+      - risk_factors_antiplatelets
+      - risk_factors_egfr_under30
+      - risk_factors_egfr30_to60
+      - risk_factors_age_over70
+      - risk_factors_pvd
+      - risk_factors_liver_disease
+      - risk_factors_vte_risk
+      - risk_factors_complex_needs
+      - risk_factors_anaemia
+      - risk_factors_neuromuscular_disorders
+      - risk_factors_others
+      - risk_factors_others_details
+      - anaes_plan_proforma_anaesthetic_concerns
+      - anaes_plan_proforma_plan_tiva
+      - anaes_plan_proforma_plan_ra
+      - anaes_plan_proforma_plan_other
+      - anaes_plan_proforma_plan_other_details
+      - anaes_plan_proforma_list_for_ot_defer_not_fit
+      - anaes_plan_proforma_nil_orally_after
+      - anaes_plan_proforma_informed_written_consent
+      - anaes_plan_proforma_risks_benefits_alternatives_discussed
+      - anaes_plan_proforma_arrange_units_of_blood
+      - anaes_plan_proforma_arrange_post_op_icu
+      - anaes_plan_proforma_backup
+      - anaes_plan_proforma_do_investigations
+      - anaes_plan_proforma_do_special_orders
+      - anaes_plan_proforma_reviewed_high_risk_anaesthesia
+      - anaes_plan_proforma_reviewed_consent
+      - anaes_plan_proforma_consultant_anaesthesiologist_name
+      - anaes_plan_proforma_consultant_anaesthesiologist_signature
       description: 'Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati,
         RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult
         elective and urgent surgery.'

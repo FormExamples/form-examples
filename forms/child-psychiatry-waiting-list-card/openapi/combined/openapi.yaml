@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Child Psychiatry Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Child Psychiatry Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Child Psychiatry Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /child-psychiatry-waiting-list-card-appointments:
+  /child-psych-waiting-list-card-appointments:
     get:
       summary: List ChildPsychWaitingListCardAppointment records
       operationId: listChildPsychWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/ChildPsychWaitingListCardAppointment'
         '400':
           description: Validation error
-  /child-psychiatry-waiting-list-card-appointments/{id}:
+  /child-psych-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: ChildPsychWaitingListCardAppointment deleted
         '404':
           description: ChildPsychWaitingListCardAppointment not found
-  /child-psychiatry-waiting-list-card-grade-flags:
+  /child-psych-waiting-list-card-grade-flags:
     get:
       summary: List ChildPsychWaitingListCardGradeFlag records
       operationId: listChildPsychWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/ChildPsychWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /child-psychiatry-waiting-list-card-grade-flags/{id}:
+  /child-psych-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: ChildPsychWaitingListCardGradeFlag deleted
         '404':
           description: ChildPsychWaitingListCardGradeFlag not found
-  /child-psychiatry-waiting-list-card-grade-rules:
+  /child-psych-waiting-list-card-grade-rules:
     get:
       summary: List ChildPsychWaitingListCardGradeRule records
       operationId: listChildPsychWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/ChildPsychWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /child-psychiatry-waiting-list-card-grade-rules/{id}:
+  /child-psych-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: ChildPsychWaitingListCardGradeRule deleted
         '404':
           description: ChildPsychWaitingListCardGradeRule not found
-  /child-psychiatry-waiting-list-card-grades:
+  /child-psych-waiting-list-card-grades:
     get:
       summary: List ChildPsychWaitingListCardGrade records
       operationId: listChildPsychWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/ChildPsychWaitingListCardGrade'
         '400':
           description: Validation error
-  /child-psychiatry-waiting-list-card-grades/{id}:
+  /child-psych-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: ChildPsychWaitingListCardGrade deleted
         '404':
           description: ChildPsychWaitingListCardGrade not found
-  /child-psychiatry-waiting-list-cards:
+  /child-psych-waiting-list-cards:
     get:
       summary: List ChildPsychWaitingListCard records
       operationId: listChildPsychWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/ChildPsychWaitingListCard'
         '400':
           description: Validation error
-  /child-psychiatry-waiting-list-cards/{id}:
+  /child-psych-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

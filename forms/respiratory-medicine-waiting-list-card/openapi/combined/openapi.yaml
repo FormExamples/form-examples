@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Respiratory Medicine Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Respiratory Medicine Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Respiratory Medicine Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /respiratory-medicine-waiting-list-card-appointments:
-    get:
-      summary: List RespMedWaitingListCardAppointment records
-      operationId: listRespMedWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RespMedWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
-    post:
-      summary: Create a new RespMedWaitingListCardAppointment
-      operationId: createRespMedWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created RespMedWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /respiratory-medicine-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RespMedWaitingListCardAppointment by id
-      operationId: getRespMedWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested RespMedWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
-        '404':
-          description: RespMedWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing RespMedWaitingListCardAppointment
-      operationId: updateRespMedWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated RespMedWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
-        '404':
-          description: RespMedWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a RespMedWaitingListCardAppointment
-      operationId: deleteRespMedWaitingListCardAppointment
-      responses:
-        '204':
-          description: RespMedWaitingListCardAppointment deleted
-        '404':
-          description: RespMedWaitingListCardAppointment not found
-  /respiratory-medicine-waiting-list-card-grade-flags:
-    get:
-      summary: List RespMedWaitingListCardGradeFlag records
-      operationId: listRespMedWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RespMedWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
-    post:
-      summary: Create a new RespMedWaitingListCardGradeFlag
-      operationId: createRespMedWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created RespMedWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /respiratory-medicine-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RespMedWaitingListCardGradeFlag by id
-      operationId: getRespMedWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested RespMedWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
-        '404':
-          description: RespMedWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing RespMedWaitingListCardGradeFlag
-      operationId: updateRespMedWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated RespMedWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
-        '404':
-          description: RespMedWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a RespMedWaitingListCardGradeFlag
-      operationId: deleteRespMedWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: RespMedWaitingListCardGradeFlag deleted
-        '404':
-          description: RespMedWaitingListCardGradeFlag not found
-  /respiratory-medicine-waiting-list-card-grade-rules:
-    get:
-      summary: List RespMedWaitingListCardGradeRule records
-      operationId: listRespMedWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RespMedWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
-    post:
-      summary: Create a new RespMedWaitingListCardGradeRule
-      operationId: createRespMedWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created RespMedWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /respiratory-medicine-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RespMedWaitingListCardGradeRule by id
-      operationId: getRespMedWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested RespMedWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
-        '404':
-          description: RespMedWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing RespMedWaitingListCardGradeRule
-      operationId: updateRespMedWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated RespMedWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
-        '404':
-          description: RespMedWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a RespMedWaitingListCardGradeRule
-      operationId: deleteRespMedWaitingListCardGradeRule
-      responses:
-        '204':
-          description: RespMedWaitingListCardGradeRule deleted
-        '404':
-          description: RespMedWaitingListCardGradeRule not found
-  /respiratory-medicine-waiting-list-card-grades:
-    get:
-      summary: List RespMedWaitingListCardGrade records
-      operationId: listRespMedWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RespMedWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RespMedWaitingListCardGrade'
-    post:
-      summary: Create a new RespMedWaitingListCardGrade
-      operationId: createRespMedWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created RespMedWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /respiratory-medicine-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RespMedWaitingListCardGrade by id
-      operationId: getRespMedWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested RespMedWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGrade'
-        '404':
-          description: RespMedWaitingListCardGrade not found
-    patch:
-      summary: Update an existing RespMedWaitingListCardGrade
-      operationId: updateRespMedWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated RespMedWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCardGrade'
-        '404':
-          description: RespMedWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a RespMedWaitingListCardGrade
-      operationId: deleteRespMedWaitingListCardGrade
-      responses:
-        '204':
-          description: RespMedWaitingListCardGrade deleted
-        '404':
-          description: RespMedWaitingListCardGrade not found
-  /respiratory-medicine-waiting-list-cards:
-    get:
-      summary: List RespMedWaitingListCard records
-      operationId: listRespMedWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RespMedWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RespMedWaitingListCard'
-    post:
-      summary: Create a new RespMedWaitingListCard
-      operationId: createRespMedWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCard'
-      responses:
-        '201':
-          description: The newly created RespMedWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCard'
-        '400':
-          description: Validation error
-  /respiratory-medicine-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RespMedWaitingListCard by id
-      operationId: getRespMedWaitingListCard
-      responses:
-        '200':
-          description: The requested RespMedWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCard'
-        '404':
-          description: RespMedWaitingListCard not found
-    patch:
-      summary: Update an existing RespMedWaitingListCard
-      operationId: updateRespMedWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RespMedWaitingListCard'
-      responses:
-        '200':
-          description: The updated RespMedWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RespMedWaitingListCard'
-        '404':
-          description: RespMedWaitingListCard not found
-    delete:
-      summary: Soft-delete a RespMedWaitingListCard
-      operationId: deleteRespMedWaitingListCard
-      responses:
-        '204':
-          description: RespMedWaitingListCard deleted
-        '404':
-          description: RespMedWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -658,8 +193,648 @@ paths:
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+  /resp-med-waiting-list-card-appointments:
+    get:
+      summary: List RespMedWaitingListCardAppointment records
+      operationId: listRespMedWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RespMedWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
+    post:
+      summary: Create a new RespMedWaitingListCardAppointment
+      operationId: createRespMedWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created RespMedWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /resp-med-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RespMedWaitingListCardAppointment by id
+      operationId: getRespMedWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested RespMedWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
+        '404':
+          description: RespMedWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing RespMedWaitingListCardAppointment
+      operationId: updateRespMedWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated RespMedWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardAppointment'
+        '404':
+          description: RespMedWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a RespMedWaitingListCardAppointment
+      operationId: deleteRespMedWaitingListCardAppointment
+      responses:
+        '204':
+          description: RespMedWaitingListCardAppointment deleted
+        '404':
+          description: RespMedWaitingListCardAppointment not found
+  /resp-med-waiting-list-card-grade-flags:
+    get:
+      summary: List RespMedWaitingListCardGradeFlag records
+      operationId: listRespMedWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RespMedWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
+    post:
+      summary: Create a new RespMedWaitingListCardGradeFlag
+      operationId: createRespMedWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created RespMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /resp-med-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RespMedWaitingListCardGradeFlag by id
+      operationId: getRespMedWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested RespMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
+        '404':
+          description: RespMedWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing RespMedWaitingListCardGradeFlag
+      operationId: updateRespMedWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated RespMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGradeFlag'
+        '404':
+          description: RespMedWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a RespMedWaitingListCardGradeFlag
+      operationId: deleteRespMedWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: RespMedWaitingListCardGradeFlag deleted
+        '404':
+          description: RespMedWaitingListCardGradeFlag not found
+  /resp-med-waiting-list-card-grade-rules:
+    get:
+      summary: List RespMedWaitingListCardGradeRule records
+      operationId: listRespMedWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RespMedWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
+    post:
+      summary: Create a new RespMedWaitingListCardGradeRule
+      operationId: createRespMedWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created RespMedWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /resp-med-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RespMedWaitingListCardGradeRule by id
+      operationId: getRespMedWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested RespMedWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
+        '404':
+          description: RespMedWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing RespMedWaitingListCardGradeRule
+      operationId: updateRespMedWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated RespMedWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGradeRule'
+        '404':
+          description: RespMedWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a RespMedWaitingListCardGradeRule
+      operationId: deleteRespMedWaitingListCardGradeRule
+      responses:
+        '204':
+          description: RespMedWaitingListCardGradeRule deleted
+        '404':
+          description: RespMedWaitingListCardGradeRule not found
+  /resp-med-waiting-list-card-grades:
+    get:
+      summary: List RespMedWaitingListCardGrade records
+      operationId: listRespMedWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RespMedWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespMedWaitingListCardGrade'
+    post:
+      summary: Create a new RespMedWaitingListCardGrade
+      operationId: createRespMedWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created RespMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /resp-med-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RespMedWaitingListCardGrade by id
+      operationId: getRespMedWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested RespMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGrade'
+        '404':
+          description: RespMedWaitingListCardGrade not found
+    patch:
+      summary: Update an existing RespMedWaitingListCardGrade
+      operationId: updateRespMedWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated RespMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCardGrade'
+        '404':
+          description: RespMedWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a RespMedWaitingListCardGrade
+      operationId: deleteRespMedWaitingListCardGrade
+      responses:
+        '204':
+          description: RespMedWaitingListCardGrade deleted
+        '404':
+          description: RespMedWaitingListCardGrade not found
+  /resp-med-waiting-list-cards:
+    get:
+      summary: List RespMedWaitingListCard records
+      operationId: listRespMedWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RespMedWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespMedWaitingListCard'
+    post:
+      summary: Create a new RespMedWaitingListCard
+      operationId: createRespMedWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCard'
+      responses:
+        '201':
+          description: The newly created RespMedWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCard'
+        '400':
+          description: Validation error
+  /resp-med-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RespMedWaitingListCard by id
+      operationId: getRespMedWaitingListCard
+      responses:
+        '200':
+          description: The requested RespMedWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCard'
+        '404':
+          description: RespMedWaitingListCard not found
+    patch:
+      summary: Update an existing RespMedWaitingListCard
+      operationId: updateRespMedWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespMedWaitingListCard'
+      responses:
+        '200':
+          description: The updated RespMedWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespMedWaitingListCard'
+        '404':
+          description: RespMedWaitingListCard not found
+    delete:
+      summary: Soft-delete a RespMedWaitingListCard
+      operationId: deleteRespMedWaitingListCard
+      responses:
+        '204':
+          description: RespMedWaitingListCard deleted
+        '404':
+          description: RespMedWaitingListCard not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a respiratory medicine waiting list.
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+          - gp
+          - consultant
+          - specialist-nurse
+          - referral-coordinator
+          - booking-clerk
+          - rtt-validator
+          - other
+          - ''
+          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
+            rtt-validator, other.'
+        registration_body:
+          type: string
+          enum:
+          - GMC
+          - NMC
+          - HCPC
+          - GPhC
+          - other
+          - ''
+          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - role
+      - registration_body
+      - registration_number
+      - organisation_name
+      - organisation_ods_code
+      - site_name
+      description: Practitioner who completes a respiratory medicine waiting list card on behalf of the
+        patient.
     RespMedWaitingListCard:
       type: object
       properties:
@@ -837,8 +1012,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a respiratory medicine waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a respiratory medicine waiting list. Parent of
+        appointment(s) and grading result.
     RespMedWaitingListCardAppointment:
       type: object
       properties:
@@ -1162,177 +1337,3 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a respiratory medicine waiting list.
-    Practitioner:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        role:
-          type: string
-          enum:
-          - gp
-          - consultant
-          - specialist-nurse
-          - referral-coordinator
-          - booking-clerk
-          - rtt-validator
-          - other
-          - ''
-          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
-            rtt-validator, other.'
-        registration_body:
-          type: string
-          enum:
-          - GMC
-          - NMC
-          - HCPC
-          - GPhC
-          - other
-          - ''
-          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
-        registration_number:
-          type: string
-          maxLength: 50
-          description: Professional registration number.
-        organisation_name:
-          type: string
-          maxLength: 255
-          description: Employing organisation (e.g. NHS trust name, GP practice name).
-        organisation_ods_code:
-          type: string
-          maxLength: 20
-          description: NHS Organisation Data Service (ODS) code for the organisation.
-        site_name:
-          type: string
-          maxLength: 255
-          description: Site or clinic name within the organisation.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - role
-      - registration_body
-      - registration_number
-      - organisation_name
-      - organisation_ods_code
-      - site_name
-      description: Practitioner who completes a respiratory medicine waiting list card on behalf of the patient.

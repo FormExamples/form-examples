@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Plastic Surgery Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Plastic Surgery Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Plastic Surgery Waiting List Card form, merged from
+    the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /plastic-surgery-waiting-list-card-appointments:
-    get:
-      summary: List PlasticSurgWaitingListCardAppointment records
-      operationId: listPlasticSurgWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PlasticSurgWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
-    post:
-      summary: Create a new PlasticSurgWaitingListCardAppointment
-      operationId: createPlasticSurgWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created PlasticSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /plastic-surgery-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PlasticSurgWaitingListCardAppointment by id
-      operationId: getPlasticSurgWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested PlasticSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
-        '404':
-          description: PlasticSurgWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing PlasticSurgWaitingListCardAppointment
-      operationId: updatePlasticSurgWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated PlasticSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
-        '404':
-          description: PlasticSurgWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a PlasticSurgWaitingListCardAppointment
-      operationId: deletePlasticSurgWaitingListCardAppointment
-      responses:
-        '204':
-          description: PlasticSurgWaitingListCardAppointment deleted
-        '404':
-          description: PlasticSurgWaitingListCardAppointment not found
-  /plastic-surgery-waiting-list-card-grade-flags:
-    get:
-      summary: List PlasticSurgWaitingListCardGradeFlag records
-      operationId: listPlasticSurgWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PlasticSurgWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
-    post:
-      summary: Create a new PlasticSurgWaitingListCardGradeFlag
-      operationId: createPlasticSurgWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created PlasticSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /plastic-surgery-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PlasticSurgWaitingListCardGradeFlag by id
-      operationId: getPlasticSurgWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested PlasticSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
-        '404':
-          description: PlasticSurgWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing PlasticSurgWaitingListCardGradeFlag
-      operationId: updatePlasticSurgWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated PlasticSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
-        '404':
-          description: PlasticSurgWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a PlasticSurgWaitingListCardGradeFlag
-      operationId: deletePlasticSurgWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: PlasticSurgWaitingListCardGradeFlag deleted
-        '404':
-          description: PlasticSurgWaitingListCardGradeFlag not found
-  /plastic-surgery-waiting-list-card-grade-rules:
-    get:
-      summary: List PlasticSurgWaitingListCardGradeRule records
-      operationId: listPlasticSurgWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PlasticSurgWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
-    post:
-      summary: Create a new PlasticSurgWaitingListCardGradeRule
-      operationId: createPlasticSurgWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created PlasticSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /plastic-surgery-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PlasticSurgWaitingListCardGradeRule by id
-      operationId: getPlasticSurgWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested PlasticSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
-        '404':
-          description: PlasticSurgWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing PlasticSurgWaitingListCardGradeRule
-      operationId: updatePlasticSurgWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated PlasticSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
-        '404':
-          description: PlasticSurgWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a PlasticSurgWaitingListCardGradeRule
-      operationId: deletePlasticSurgWaitingListCardGradeRule
-      responses:
-        '204':
-          description: PlasticSurgWaitingListCardGradeRule deleted
-        '404':
-          description: PlasticSurgWaitingListCardGradeRule not found
-  /plastic-surgery-waiting-list-card-grades:
-    get:
-      summary: List PlasticSurgWaitingListCardGrade records
-      operationId: listPlasticSurgWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PlasticSurgWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
-    post:
-      summary: Create a new PlasticSurgWaitingListCardGrade
-      operationId: createPlasticSurgWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created PlasticSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /plastic-surgery-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PlasticSurgWaitingListCardGrade by id
-      operationId: getPlasticSurgWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested PlasticSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
-        '404':
-          description: PlasticSurgWaitingListCardGrade not found
-    patch:
-      summary: Update an existing PlasticSurgWaitingListCardGrade
-      operationId: updatePlasticSurgWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated PlasticSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
-        '404':
-          description: PlasticSurgWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a PlasticSurgWaitingListCardGrade
-      operationId: deletePlasticSurgWaitingListCardGrade
-      responses:
-        '204':
-          description: PlasticSurgWaitingListCardGrade deleted
-        '404':
-          description: PlasticSurgWaitingListCardGrade not found
-  /plastic-surgery-waiting-list-cards:
-    get:
-      summary: List PlasticSurgWaitingListCard records
-      operationId: listPlasticSurgWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PlasticSurgWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlasticSurgWaitingListCard'
-    post:
-      summary: Create a new PlasticSurgWaitingListCard
-      operationId: createPlasticSurgWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCard'
-      responses:
-        '201':
-          description: The newly created PlasticSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCard'
-        '400':
-          description: Validation error
-  /plastic-surgery-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PlasticSurgWaitingListCard by id
-      operationId: getPlasticSurgWaitingListCard
-      responses:
-        '200':
-          description: The requested PlasticSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCard'
-        '404':
-          description: PlasticSurgWaitingListCard not found
-    patch:
-      summary: Update an existing PlasticSurgWaitingListCard
-      operationId: updatePlasticSurgWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlasticSurgWaitingListCard'
-      responses:
-        '200':
-          description: The updated PlasticSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlasticSurgWaitingListCard'
-        '404':
-          description: PlasticSurgWaitingListCard not found
-    delete:
-      summary: Soft-delete a PlasticSurgWaitingListCard
-      operationId: deletePlasticSurgWaitingListCard
-      responses:
-        '204':
-          description: PlasticSurgWaitingListCard deleted
-        '404':
-          description: PlasticSurgWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -565,6 +100,471 @@ paths:
           description: Patient deleted
         '404':
           description: Patient not found
+  /plastic-surg-waiting-list-card-appointments:
+    get:
+      summary: List PlasticSurgWaitingListCardAppointment records
+      operationId: listPlasticSurgWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PlasticSurgWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
+    post:
+      summary: Create a new PlasticSurgWaitingListCardAppointment
+      operationId: createPlasticSurgWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created PlasticSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /plastic-surg-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PlasticSurgWaitingListCardAppointment by id
+      operationId: getPlasticSurgWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested PlasticSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
+        '404':
+          description: PlasticSurgWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing PlasticSurgWaitingListCardAppointment
+      operationId: updatePlasticSurgWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated PlasticSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardAppointment'
+        '404':
+          description: PlasticSurgWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a PlasticSurgWaitingListCardAppointment
+      operationId: deletePlasticSurgWaitingListCardAppointment
+      responses:
+        '204':
+          description: PlasticSurgWaitingListCardAppointment deleted
+        '404':
+          description: PlasticSurgWaitingListCardAppointment not found
+  /plastic-surg-waiting-list-card-grade-flags:
+    get:
+      summary: List PlasticSurgWaitingListCardGradeFlag records
+      operationId: listPlasticSurgWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PlasticSurgWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
+    post:
+      summary: Create a new PlasticSurgWaitingListCardGradeFlag
+      operationId: createPlasticSurgWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created PlasticSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /plastic-surg-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PlasticSurgWaitingListCardGradeFlag by id
+      operationId: getPlasticSurgWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested PlasticSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
+        '404':
+          description: PlasticSurgWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing PlasticSurgWaitingListCardGradeFlag
+      operationId: updatePlasticSurgWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated PlasticSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeFlag'
+        '404':
+          description: PlasticSurgWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a PlasticSurgWaitingListCardGradeFlag
+      operationId: deletePlasticSurgWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: PlasticSurgWaitingListCardGradeFlag deleted
+        '404':
+          description: PlasticSurgWaitingListCardGradeFlag not found
+  /plastic-surg-waiting-list-card-grade-rules:
+    get:
+      summary: List PlasticSurgWaitingListCardGradeRule records
+      operationId: listPlasticSurgWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PlasticSurgWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
+    post:
+      summary: Create a new PlasticSurgWaitingListCardGradeRule
+      operationId: createPlasticSurgWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created PlasticSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /plastic-surg-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PlasticSurgWaitingListCardGradeRule by id
+      operationId: getPlasticSurgWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested PlasticSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
+        '404':
+          description: PlasticSurgWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing PlasticSurgWaitingListCardGradeRule
+      operationId: updatePlasticSurgWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated PlasticSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGradeRule'
+        '404':
+          description: PlasticSurgWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a PlasticSurgWaitingListCardGradeRule
+      operationId: deletePlasticSurgWaitingListCardGradeRule
+      responses:
+        '204':
+          description: PlasticSurgWaitingListCardGradeRule deleted
+        '404':
+          description: PlasticSurgWaitingListCardGradeRule not found
+  /plastic-surg-waiting-list-card-grades:
+    get:
+      summary: List PlasticSurgWaitingListCardGrade records
+      operationId: listPlasticSurgWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PlasticSurgWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
+    post:
+      summary: Create a new PlasticSurgWaitingListCardGrade
+      operationId: createPlasticSurgWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created PlasticSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /plastic-surg-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PlasticSurgWaitingListCardGrade by id
+      operationId: getPlasticSurgWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested PlasticSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
+        '404':
+          description: PlasticSurgWaitingListCardGrade not found
+    patch:
+      summary: Update an existing PlasticSurgWaitingListCardGrade
+      operationId: updatePlasticSurgWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated PlasticSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCardGrade'
+        '404':
+          description: PlasticSurgWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a PlasticSurgWaitingListCardGrade
+      operationId: deletePlasticSurgWaitingListCardGrade
+      responses:
+        '204':
+          description: PlasticSurgWaitingListCardGrade deleted
+        '404':
+          description: PlasticSurgWaitingListCardGrade not found
+  /plastic-surg-waiting-list-cards:
+    get:
+      summary: List PlasticSurgWaitingListCard records
+      operationId: listPlasticSurgWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PlasticSurgWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlasticSurgWaitingListCard'
+    post:
+      summary: Create a new PlasticSurgWaitingListCard
+      operationId: createPlasticSurgWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCard'
+      responses:
+        '201':
+          description: The newly created PlasticSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCard'
+        '400':
+          description: Validation error
+  /plastic-surg-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PlasticSurgWaitingListCard by id
+      operationId: getPlasticSurgWaitingListCard
+      responses:
+        '200':
+          description: The requested PlasticSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCard'
+        '404':
+          description: PlasticSurgWaitingListCard not found
+    patch:
+      summary: Update an existing PlasticSurgWaitingListCard
+      operationId: updatePlasticSurgWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlasticSurgWaitingListCard'
+      responses:
+        '200':
+          description: The updated PlasticSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlasticSurgWaitingListCard'
+        '404':
+          description: PlasticSurgWaitingListCard not found
+    delete:
+      summary: Soft-delete a PlasticSurgWaitingListCard
+      operationId: deletePlasticSurgWaitingListCard
+      responses:
+        '204':
+          description: PlasticSurgWaitingListCard deleted
+        '404':
+          description: PlasticSurgWaitingListCard not found
   /practitioners:
     get:
       summary: List Practitioner records
@@ -660,6 +660,97 @@ paths:
           description: Practitioner not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a plastic surgery waiting list.
     PlasticSurgWaitingListCard:
       type: object
       properties:
@@ -1162,97 +1253,6 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a plastic surgery waiting list.
     Practitioner:
       type: object
       properties:

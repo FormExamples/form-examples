@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Vascular Surgery Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Vascular Surgery Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Vascular Surgery Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /vascular-surgery-waiting-list-card-appointments:
-    get:
-      summary: List VascSurgeryWaitingListCardAppointment records
-      operationId: listVascSurgeryWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of VascSurgeryWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
-    post:
-      summary: Create a new VascSurgeryWaitingListCardAppointment
-      operationId: createVascSurgeryWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created VascSurgeryWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /vascular-surgery-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one VascSurgeryWaitingListCardAppointment by id
-      operationId: getVascSurgeryWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested VascSurgeryWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
-        '404':
-          description: VascSurgeryWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing VascSurgeryWaitingListCardAppointment
-      operationId: updateVascSurgeryWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated VascSurgeryWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
-        '404':
-          description: VascSurgeryWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a VascSurgeryWaitingListCardAppointment
-      operationId: deleteVascSurgeryWaitingListCardAppointment
-      responses:
-        '204':
-          description: VascSurgeryWaitingListCardAppointment deleted
-        '404':
-          description: VascSurgeryWaitingListCardAppointment not found
-  /vascular-surgery-waiting-list-card-grade-flags:
-    get:
-      summary: List VascSurgeryWaitingListCardGradeFlag records
-      operationId: listVascSurgeryWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of VascSurgeryWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
-    post:
-      summary: Create a new VascSurgeryWaitingListCardGradeFlag
-      operationId: createVascSurgeryWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created VascSurgeryWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /vascular-surgery-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one VascSurgeryWaitingListCardGradeFlag by id
-      operationId: getVascSurgeryWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested VascSurgeryWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
-        '404':
-          description: VascSurgeryWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing VascSurgeryWaitingListCardGradeFlag
-      operationId: updateVascSurgeryWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated VascSurgeryWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
-        '404':
-          description: VascSurgeryWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a VascSurgeryWaitingListCardGradeFlag
-      operationId: deleteVascSurgeryWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: VascSurgeryWaitingListCardGradeFlag deleted
-        '404':
-          description: VascSurgeryWaitingListCardGradeFlag not found
-  /vascular-surgery-waiting-list-card-grade-rules:
-    get:
-      summary: List VascSurgeryWaitingListCardGradeRule records
-      operationId: listVascSurgeryWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of VascSurgeryWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
-    post:
-      summary: Create a new VascSurgeryWaitingListCardGradeRule
-      operationId: createVascSurgeryWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created VascSurgeryWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /vascular-surgery-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one VascSurgeryWaitingListCardGradeRule by id
-      operationId: getVascSurgeryWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested VascSurgeryWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
-        '404':
-          description: VascSurgeryWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing VascSurgeryWaitingListCardGradeRule
-      operationId: updateVascSurgeryWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated VascSurgeryWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
-        '404':
-          description: VascSurgeryWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a VascSurgeryWaitingListCardGradeRule
-      operationId: deleteVascSurgeryWaitingListCardGradeRule
-      responses:
-        '204':
-          description: VascSurgeryWaitingListCardGradeRule deleted
-        '404':
-          description: VascSurgeryWaitingListCardGradeRule not found
-  /vascular-surgery-waiting-list-card-grades:
-    get:
-      summary: List VascSurgeryWaitingListCardGrade records
-      operationId: listVascSurgeryWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of VascSurgeryWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
-    post:
-      summary: Create a new VascSurgeryWaitingListCardGrade
-      operationId: createVascSurgeryWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created VascSurgeryWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /vascular-surgery-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one VascSurgeryWaitingListCardGrade by id
-      operationId: getVascSurgeryWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested VascSurgeryWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
-        '404':
-          description: VascSurgeryWaitingListCardGrade not found
-    patch:
-      summary: Update an existing VascSurgeryWaitingListCardGrade
-      operationId: updateVascSurgeryWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated VascSurgeryWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
-        '404':
-          description: VascSurgeryWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a VascSurgeryWaitingListCardGrade
-      operationId: deleteVascSurgeryWaitingListCardGrade
-      responses:
-        '204':
-          description: VascSurgeryWaitingListCardGrade deleted
-        '404':
-          description: VascSurgeryWaitingListCardGrade not found
-  /vascular-surgery-waiting-list-cards:
-    get:
-      summary: List VascSurgeryWaitingListCard records
-      operationId: listVascSurgeryWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of VascSurgeryWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/VascSurgeryWaitingListCard'
-    post:
-      summary: Create a new VascSurgeryWaitingListCard
-      operationId: createVascSurgeryWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCard'
-      responses:
-        '201':
-          description: The newly created VascSurgeryWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCard'
-        '400':
-          description: Validation error
-  /vascular-surgery-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one VascSurgeryWaitingListCard by id
-      operationId: getVascSurgeryWaitingListCard
-      responses:
-        '200':
-          description: The requested VascSurgeryWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCard'
-        '404':
-          description: VascSurgeryWaitingListCard not found
-    patch:
-      summary: Update an existing VascSurgeryWaitingListCard
-      operationId: updateVascSurgeryWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VascSurgeryWaitingListCard'
-      responses:
-        '200':
-          description: The updated VascSurgeryWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VascSurgeryWaitingListCard'
-        '404':
-          description: VascSurgeryWaitingListCard not found
-    delete:
-      summary: Soft-delete a VascSurgeryWaitingListCard
-      operationId: deleteVascSurgeryWaitingListCard
-      responses:
-        '204':
-          description: VascSurgeryWaitingListCard deleted
-        '404':
-          description: VascSurgeryWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -658,8 +193,647 @@ paths:
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+  /vasc-surgery-waiting-list-card-appointments:
+    get:
+      summary: List VascSurgeryWaitingListCardAppointment records
+      operationId: listVascSurgeryWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of VascSurgeryWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
+    post:
+      summary: Create a new VascSurgeryWaitingListCardAppointment
+      operationId: createVascSurgeryWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created VascSurgeryWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /vasc-surgery-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one VascSurgeryWaitingListCardAppointment by id
+      operationId: getVascSurgeryWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested VascSurgeryWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
+        '404':
+          description: VascSurgeryWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing VascSurgeryWaitingListCardAppointment
+      operationId: updateVascSurgeryWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated VascSurgeryWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardAppointment'
+        '404':
+          description: VascSurgeryWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a VascSurgeryWaitingListCardAppointment
+      operationId: deleteVascSurgeryWaitingListCardAppointment
+      responses:
+        '204':
+          description: VascSurgeryWaitingListCardAppointment deleted
+        '404':
+          description: VascSurgeryWaitingListCardAppointment not found
+  /vasc-surgery-waiting-list-card-grade-flags:
+    get:
+      summary: List VascSurgeryWaitingListCardGradeFlag records
+      operationId: listVascSurgeryWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of VascSurgeryWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
+    post:
+      summary: Create a new VascSurgeryWaitingListCardGradeFlag
+      operationId: createVascSurgeryWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created VascSurgeryWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /vasc-surgery-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one VascSurgeryWaitingListCardGradeFlag by id
+      operationId: getVascSurgeryWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested VascSurgeryWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
+        '404':
+          description: VascSurgeryWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing VascSurgeryWaitingListCardGradeFlag
+      operationId: updateVascSurgeryWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated VascSurgeryWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeFlag'
+        '404':
+          description: VascSurgeryWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a VascSurgeryWaitingListCardGradeFlag
+      operationId: deleteVascSurgeryWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: VascSurgeryWaitingListCardGradeFlag deleted
+        '404':
+          description: VascSurgeryWaitingListCardGradeFlag not found
+  /vasc-surgery-waiting-list-card-grade-rules:
+    get:
+      summary: List VascSurgeryWaitingListCardGradeRule records
+      operationId: listVascSurgeryWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of VascSurgeryWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
+    post:
+      summary: Create a new VascSurgeryWaitingListCardGradeRule
+      operationId: createVascSurgeryWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created VascSurgeryWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /vasc-surgery-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one VascSurgeryWaitingListCardGradeRule by id
+      operationId: getVascSurgeryWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested VascSurgeryWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
+        '404':
+          description: VascSurgeryWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing VascSurgeryWaitingListCardGradeRule
+      operationId: updateVascSurgeryWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated VascSurgeryWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGradeRule'
+        '404':
+          description: VascSurgeryWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a VascSurgeryWaitingListCardGradeRule
+      operationId: deleteVascSurgeryWaitingListCardGradeRule
+      responses:
+        '204':
+          description: VascSurgeryWaitingListCardGradeRule deleted
+        '404':
+          description: VascSurgeryWaitingListCardGradeRule not found
+  /vasc-surgery-waiting-list-card-grades:
+    get:
+      summary: List VascSurgeryWaitingListCardGrade records
+      operationId: listVascSurgeryWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of VascSurgeryWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
+    post:
+      summary: Create a new VascSurgeryWaitingListCardGrade
+      operationId: createVascSurgeryWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created VascSurgeryWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /vasc-surgery-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one VascSurgeryWaitingListCardGrade by id
+      operationId: getVascSurgeryWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested VascSurgeryWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
+        '404':
+          description: VascSurgeryWaitingListCardGrade not found
+    patch:
+      summary: Update an existing VascSurgeryWaitingListCardGrade
+      operationId: updateVascSurgeryWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated VascSurgeryWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCardGrade'
+        '404':
+          description: VascSurgeryWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a VascSurgeryWaitingListCardGrade
+      operationId: deleteVascSurgeryWaitingListCardGrade
+      responses:
+        '204':
+          description: VascSurgeryWaitingListCardGrade deleted
+        '404':
+          description: VascSurgeryWaitingListCardGrade not found
+  /vasc-surgery-waiting-list-cards:
+    get:
+      summary: List VascSurgeryWaitingListCard records
+      operationId: listVascSurgeryWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of VascSurgeryWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VascSurgeryWaitingListCard'
+    post:
+      summary: Create a new VascSurgeryWaitingListCard
+      operationId: createVascSurgeryWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCard'
+      responses:
+        '201':
+          description: The newly created VascSurgeryWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCard'
+        '400':
+          description: Validation error
+  /vasc-surgery-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one VascSurgeryWaitingListCard by id
+      operationId: getVascSurgeryWaitingListCard
+      responses:
+        '200':
+          description: The requested VascSurgeryWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCard'
+        '404':
+          description: VascSurgeryWaitingListCard not found
+    patch:
+      summary: Update an existing VascSurgeryWaitingListCard
+      operationId: updateVascSurgeryWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VascSurgeryWaitingListCard'
+      responses:
+        '200':
+          description: The updated VascSurgeryWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VascSurgeryWaitingListCard'
+        '404':
+          description: VascSurgeryWaitingListCard not found
+    delete:
+      summary: Soft-delete a VascSurgeryWaitingListCard
+      operationId: deleteVascSurgeryWaitingListCard
+      responses:
+        '204':
+          description: VascSurgeryWaitingListCard deleted
+        '404':
+          description: VascSurgeryWaitingListCard not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a vascular surgery waiting list.
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+          - gp
+          - consultant
+          - specialist-nurse
+          - referral-coordinator
+          - booking-clerk
+          - rtt-validator
+          - other
+          - ''
+          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
+            rtt-validator, other.'
+        registration_body:
+          type: string
+          enum:
+          - GMC
+          - NMC
+          - HCPC
+          - GPhC
+          - other
+          - ''
+          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - role
+      - registration_body
+      - registration_number
+      - organisation_name
+      - organisation_ods_code
+      - site_name
+      description: Practitioner who completes a vascular surgery waiting list card on behalf of the patient.
     VascSurgeryWaitingListCard:
       type: object
       properties:
@@ -1162,177 +1336,3 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a vascular surgery waiting list.
-    Practitioner:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        role:
-          type: string
-          enum:
-          - gp
-          - consultant
-          - specialist-nurse
-          - referral-coordinator
-          - booking-clerk
-          - rtt-validator
-          - other
-          - ''
-          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
-            rtt-validator, other.'
-        registration_body:
-          type: string
-          enum:
-          - GMC
-          - NMC
-          - HCPC
-          - GPhC
-          - other
-          - ''
-          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
-        registration_number:
-          type: string
-          maxLength: 50
-          description: Professional registration number.
-        organisation_name:
-          type: string
-          maxLength: 255
-          description: Employing organisation (e.g. NHS trust name, GP practice name).
-        organisation_ods_code:
-          type: string
-          maxLength: 20
-          description: NHS Organisation Data Service (ODS) code for the organisation.
-        site_name:
-          type: string
-          maxLength: 255
-          description: Site or clinic name within the organisation.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - role
-      - registration_body
-      - registration_number
-      - organisation_name
-      - organisation_ods_code
-      - site_name
-      description: Practitioner who completes a vascular surgery waiting list card on behalf of the patient.

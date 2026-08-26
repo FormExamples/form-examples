@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: General Practice Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the General Practice Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the General Practice Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /general-practice-waiting-list-card-appointments:
+  /gen-practice-waiting-list-card-appointments:
     get:
       summary: List GenPracticeWaitingListCardAppointment records
       operationId: listGenPracticeWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/GenPracticeWaitingListCardAppointment'
         '400':
           description: Validation error
-  /general-practice-waiting-list-card-appointments/{id}:
+  /gen-practice-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: GenPracticeWaitingListCardAppointment deleted
         '404':
           description: GenPracticeWaitingListCardAppointment not found
-  /general-practice-waiting-list-card-grade-flags:
+  /gen-practice-waiting-list-card-grade-flags:
     get:
       summary: List GenPracticeWaitingListCardGradeFlag records
       operationId: listGenPracticeWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/GenPracticeWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /general-practice-waiting-list-card-grade-flags/{id}:
+  /gen-practice-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: GenPracticeWaitingListCardGradeFlag deleted
         '404':
           description: GenPracticeWaitingListCardGradeFlag not found
-  /general-practice-waiting-list-card-grade-rules:
+  /gen-practice-waiting-list-card-grade-rules:
     get:
       summary: List GenPracticeWaitingListCardGradeRule records
       operationId: listGenPracticeWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/GenPracticeWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /general-practice-waiting-list-card-grade-rules/{id}:
+  /gen-practice-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: GenPracticeWaitingListCardGradeRule deleted
         '404':
           description: GenPracticeWaitingListCardGradeRule not found
-  /general-practice-waiting-list-card-grades:
+  /gen-practice-waiting-list-card-grades:
     get:
       summary: List GenPracticeWaitingListCardGrade records
       operationId: listGenPracticeWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/GenPracticeWaitingListCardGrade'
         '400':
           description: Validation error
-  /general-practice-waiting-list-card-grades/{id}:
+  /gen-practice-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: GenPracticeWaitingListCardGrade deleted
         '404':
           description: GenPracticeWaitingListCardGrade not found
-  /general-practice-waiting-list-cards:
+  /gen-practice-waiting-list-cards:
     get:
       summary: List GenPracticeWaitingListCard records
       operationId: listGenPracticeWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/GenPracticeWaitingListCard'
         '400':
           description: Validation error
-  /general-practice-waiting-list-cards/{id}:
+  /gen-practice-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

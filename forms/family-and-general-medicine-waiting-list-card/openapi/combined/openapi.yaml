@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Family and General Medicine Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Family and General Medicine Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Family and General Medicine Waiting List Card form,
+    merged from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /family-and-general-medicine-waiting-list-card-appointments:
+  /family-general-waiting-list-card-appointments:
     get:
       summary: List FamilyGeneralWaitingListCardAppointment records
       operationId: listFamilyGeneralWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/FamilyGeneralWaitingListCardAppointment'
         '400':
           description: Validation error
-  /family-and-general-medicine-waiting-list-card-appointments/{id}:
+  /family-general-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: FamilyGeneralWaitingListCardAppointment deleted
         '404':
           description: FamilyGeneralWaitingListCardAppointment not found
-  /family-and-general-medicine-waiting-list-card-grade-flags:
+  /family-general-waiting-list-card-grade-flags:
     get:
       summary: List FamilyGeneralWaitingListCardGradeFlag records
       operationId: listFamilyGeneralWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/FamilyGeneralWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /family-and-general-medicine-waiting-list-card-grade-flags/{id}:
+  /family-general-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: FamilyGeneralWaitingListCardGradeFlag deleted
         '404':
           description: FamilyGeneralWaitingListCardGradeFlag not found
-  /family-and-general-medicine-waiting-list-card-grade-rules:
+  /family-general-waiting-list-card-grade-rules:
     get:
       summary: List FamilyGeneralWaitingListCardGradeRule records
       operationId: listFamilyGeneralWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/FamilyGeneralWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /family-and-general-medicine-waiting-list-card-grade-rules/{id}:
+  /family-general-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: FamilyGeneralWaitingListCardGradeRule deleted
         '404':
           description: FamilyGeneralWaitingListCardGradeRule not found
-  /family-and-general-medicine-waiting-list-card-grades:
+  /family-general-waiting-list-card-grades:
     get:
       summary: List FamilyGeneralWaitingListCardGrade records
       operationId: listFamilyGeneralWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/FamilyGeneralWaitingListCardGrade'
         '400':
           description: Validation error
-  /family-and-general-medicine-waiting-list-card-grades/{id}:
+  /family-general-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: FamilyGeneralWaitingListCardGrade deleted
         '404':
           description: FamilyGeneralWaitingListCardGrade not found
-  /family-and-general-medicine-waiting-list-cards:
+  /family-general-waiting-list-cards:
     get:
       summary: List FamilyGeneralWaitingListCard records
       operationId: listFamilyGeneralWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/FamilyGeneralWaitingListCard'
         '400':
           description: Validation error
-  /family-and-general-medicine-waiting-list-cards/{id}:
+  /family-general-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path
@@ -837,8 +837,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a family and general medicine waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a family and general medicine waiting list. Parent
+        of appointment(s) and grading result.
     FamilyGeneralWaitingListCardAppointment:
       type: object
       properties:
@@ -1335,4 +1335,5 @@ components:
       - organisation_name
       - organisation_ods_code
       - site_name
-      description: Practitioner who completes a family and general medicine waiting list card on behalf of the patient.
+      description: Practitioner who completes a family and general medicine waiting list card on behalf
+        of the patient.

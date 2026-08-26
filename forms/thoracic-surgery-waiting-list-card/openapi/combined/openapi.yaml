@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Thoracic Surgery Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Thoracic Surgery Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Thoracic Surgery Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /thoracic-surgery-waiting-list-card-appointments:
-    get:
-      summary: List ThoracicSurgWaitingListCardAppointment records
-      operationId: listThoracicSurgWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ThoracicSurgWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
-    post:
-      summary: Create a new ThoracicSurgWaitingListCardAppointment
-      operationId: createThoracicSurgWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created ThoracicSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /thoracic-surgery-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ThoracicSurgWaitingListCardAppointment by id
-      operationId: getThoracicSurgWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested ThoracicSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
-        '404':
-          description: ThoracicSurgWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing ThoracicSurgWaitingListCardAppointment
-      operationId: updateThoracicSurgWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated ThoracicSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
-        '404':
-          description: ThoracicSurgWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a ThoracicSurgWaitingListCardAppointment
-      operationId: deleteThoracicSurgWaitingListCardAppointment
-      responses:
-        '204':
-          description: ThoracicSurgWaitingListCardAppointment deleted
-        '404':
-          description: ThoracicSurgWaitingListCardAppointment not found
-  /thoracic-surgery-waiting-list-card-grade-flags:
-    get:
-      summary: List ThoracicSurgWaitingListCardGradeFlag records
-      operationId: listThoracicSurgWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ThoracicSurgWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
-    post:
-      summary: Create a new ThoracicSurgWaitingListCardGradeFlag
-      operationId: createThoracicSurgWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created ThoracicSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /thoracic-surgery-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ThoracicSurgWaitingListCardGradeFlag by id
-      operationId: getThoracicSurgWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested ThoracicSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
-        '404':
-          description: ThoracicSurgWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing ThoracicSurgWaitingListCardGradeFlag
-      operationId: updateThoracicSurgWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated ThoracicSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
-        '404':
-          description: ThoracicSurgWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a ThoracicSurgWaitingListCardGradeFlag
-      operationId: deleteThoracicSurgWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: ThoracicSurgWaitingListCardGradeFlag deleted
-        '404':
-          description: ThoracicSurgWaitingListCardGradeFlag not found
-  /thoracic-surgery-waiting-list-card-grade-rules:
-    get:
-      summary: List ThoracicSurgWaitingListCardGradeRule records
-      operationId: listThoracicSurgWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ThoracicSurgWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
-    post:
-      summary: Create a new ThoracicSurgWaitingListCardGradeRule
-      operationId: createThoracicSurgWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created ThoracicSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /thoracic-surgery-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ThoracicSurgWaitingListCardGradeRule by id
-      operationId: getThoracicSurgWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested ThoracicSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
-        '404':
-          description: ThoracicSurgWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing ThoracicSurgWaitingListCardGradeRule
-      operationId: updateThoracicSurgWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated ThoracicSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
-        '404':
-          description: ThoracicSurgWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a ThoracicSurgWaitingListCardGradeRule
-      operationId: deleteThoracicSurgWaitingListCardGradeRule
-      responses:
-        '204':
-          description: ThoracicSurgWaitingListCardGradeRule deleted
-        '404':
-          description: ThoracicSurgWaitingListCardGradeRule not found
-  /thoracic-surgery-waiting-list-card-grades:
-    get:
-      summary: List ThoracicSurgWaitingListCardGrade records
-      operationId: listThoracicSurgWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ThoracicSurgWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
-    post:
-      summary: Create a new ThoracicSurgWaitingListCardGrade
-      operationId: createThoracicSurgWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created ThoracicSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /thoracic-surgery-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ThoracicSurgWaitingListCardGrade by id
-      operationId: getThoracicSurgWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested ThoracicSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
-        '404':
-          description: ThoracicSurgWaitingListCardGrade not found
-    patch:
-      summary: Update an existing ThoracicSurgWaitingListCardGrade
-      operationId: updateThoracicSurgWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated ThoracicSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
-        '404':
-          description: ThoracicSurgWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a ThoracicSurgWaitingListCardGrade
-      operationId: deleteThoracicSurgWaitingListCardGrade
-      responses:
-        '204':
-          description: ThoracicSurgWaitingListCardGrade deleted
-        '404':
-          description: ThoracicSurgWaitingListCardGrade not found
-  /thoracic-surgery-waiting-list-cards:
-    get:
-      summary: List ThoracicSurgWaitingListCard records
-      operationId: listThoracicSurgWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ThoracicSurgWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
-    post:
-      summary: Create a new ThoracicSurgWaitingListCard
-      operationId: createThoracicSurgWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
-      responses:
-        '201':
-          description: The newly created ThoracicSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
-        '400':
-          description: Validation error
-  /thoracic-surgery-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ThoracicSurgWaitingListCard by id
-      operationId: getThoracicSurgWaitingListCard
-      responses:
-        '200':
-          description: The requested ThoracicSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
-        '404':
-          description: ThoracicSurgWaitingListCard not found
-    patch:
-      summary: Update an existing ThoracicSurgWaitingListCard
-      operationId: updateThoracicSurgWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
-      responses:
-        '200':
-          description: The updated ThoracicSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
-        '404':
-          description: ThoracicSurgWaitingListCard not found
-    delete:
-      summary: Soft-delete a ThoracicSurgWaitingListCard
-      operationId: deleteThoracicSurgWaitingListCard
-      responses:
-        '204':
-          description: ThoracicSurgWaitingListCard deleted
-        '404':
-          description: ThoracicSurgWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -658,8 +193,647 @@ paths:
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+  /thoracic-surg-waiting-list-card-appointments:
+    get:
+      summary: List ThoracicSurgWaitingListCardAppointment records
+      operationId: listThoracicSurgWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ThoracicSurgWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
+    post:
+      summary: Create a new ThoracicSurgWaitingListCardAppointment
+      operationId: createThoracicSurgWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created ThoracicSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /thoracic-surg-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ThoracicSurgWaitingListCardAppointment by id
+      operationId: getThoracicSurgWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested ThoracicSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
+        '404':
+          description: ThoracicSurgWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing ThoracicSurgWaitingListCardAppointment
+      operationId: updateThoracicSurgWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated ThoracicSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardAppointment'
+        '404':
+          description: ThoracicSurgWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a ThoracicSurgWaitingListCardAppointment
+      operationId: deleteThoracicSurgWaitingListCardAppointment
+      responses:
+        '204':
+          description: ThoracicSurgWaitingListCardAppointment deleted
+        '404':
+          description: ThoracicSurgWaitingListCardAppointment not found
+  /thoracic-surg-waiting-list-card-grade-flags:
+    get:
+      summary: List ThoracicSurgWaitingListCardGradeFlag records
+      operationId: listThoracicSurgWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ThoracicSurgWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
+    post:
+      summary: Create a new ThoracicSurgWaitingListCardGradeFlag
+      operationId: createThoracicSurgWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created ThoracicSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /thoracic-surg-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ThoracicSurgWaitingListCardGradeFlag by id
+      operationId: getThoracicSurgWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested ThoracicSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
+        '404':
+          description: ThoracicSurgWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing ThoracicSurgWaitingListCardGradeFlag
+      operationId: updateThoracicSurgWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated ThoracicSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeFlag'
+        '404':
+          description: ThoracicSurgWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a ThoracicSurgWaitingListCardGradeFlag
+      operationId: deleteThoracicSurgWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: ThoracicSurgWaitingListCardGradeFlag deleted
+        '404':
+          description: ThoracicSurgWaitingListCardGradeFlag not found
+  /thoracic-surg-waiting-list-card-grade-rules:
+    get:
+      summary: List ThoracicSurgWaitingListCardGradeRule records
+      operationId: listThoracicSurgWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ThoracicSurgWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
+    post:
+      summary: Create a new ThoracicSurgWaitingListCardGradeRule
+      operationId: createThoracicSurgWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created ThoracicSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /thoracic-surg-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ThoracicSurgWaitingListCardGradeRule by id
+      operationId: getThoracicSurgWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested ThoracicSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
+        '404':
+          description: ThoracicSurgWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing ThoracicSurgWaitingListCardGradeRule
+      operationId: updateThoracicSurgWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated ThoracicSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGradeRule'
+        '404':
+          description: ThoracicSurgWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a ThoracicSurgWaitingListCardGradeRule
+      operationId: deleteThoracicSurgWaitingListCardGradeRule
+      responses:
+        '204':
+          description: ThoracicSurgWaitingListCardGradeRule deleted
+        '404':
+          description: ThoracicSurgWaitingListCardGradeRule not found
+  /thoracic-surg-waiting-list-card-grades:
+    get:
+      summary: List ThoracicSurgWaitingListCardGrade records
+      operationId: listThoracicSurgWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ThoracicSurgWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
+    post:
+      summary: Create a new ThoracicSurgWaitingListCardGrade
+      operationId: createThoracicSurgWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created ThoracicSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /thoracic-surg-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ThoracicSurgWaitingListCardGrade by id
+      operationId: getThoracicSurgWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested ThoracicSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
+        '404':
+          description: ThoracicSurgWaitingListCardGrade not found
+    patch:
+      summary: Update an existing ThoracicSurgWaitingListCardGrade
+      operationId: updateThoracicSurgWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated ThoracicSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCardGrade'
+        '404':
+          description: ThoracicSurgWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a ThoracicSurgWaitingListCardGrade
+      operationId: deleteThoracicSurgWaitingListCardGrade
+      responses:
+        '204':
+          description: ThoracicSurgWaitingListCardGrade deleted
+        '404':
+          description: ThoracicSurgWaitingListCardGrade not found
+  /thoracic-surg-waiting-list-cards:
+    get:
+      summary: List ThoracicSurgWaitingListCard records
+      operationId: listThoracicSurgWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ThoracicSurgWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
+    post:
+      summary: Create a new ThoracicSurgWaitingListCard
+      operationId: createThoracicSurgWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
+      responses:
+        '201':
+          description: The newly created ThoracicSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
+        '400':
+          description: Validation error
+  /thoracic-surg-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ThoracicSurgWaitingListCard by id
+      operationId: getThoracicSurgWaitingListCard
+      responses:
+        '200':
+          description: The requested ThoracicSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
+        '404':
+          description: ThoracicSurgWaitingListCard not found
+    patch:
+      summary: Update an existing ThoracicSurgWaitingListCard
+      operationId: updateThoracicSurgWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
+      responses:
+        '200':
+          description: The updated ThoracicSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThoracicSurgWaitingListCard'
+        '404':
+          description: ThoracicSurgWaitingListCard not found
+    delete:
+      summary: Soft-delete a ThoracicSurgWaitingListCard
+      operationId: deleteThoracicSurgWaitingListCard
+      responses:
+        '204':
+          description: ThoracicSurgWaitingListCard deleted
+        '404':
+          description: ThoracicSurgWaitingListCard not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a thoracic surgery waiting list.
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+          - gp
+          - consultant
+          - specialist-nurse
+          - referral-coordinator
+          - booking-clerk
+          - rtt-validator
+          - other
+          - ''
+          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
+            rtt-validator, other.'
+        registration_body:
+          type: string
+          enum:
+          - GMC
+          - NMC
+          - HCPC
+          - GPhC
+          - other
+          - ''
+          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - role
+      - registration_body
+      - registration_number
+      - organisation_name
+      - organisation_ods_code
+      - site_name
+      description: Practitioner who completes a thoracic surgery waiting list card on behalf of the patient.
     ThoracicSurgWaitingListCard:
       type: object
       properties:
@@ -1162,177 +1336,3 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a thoracic surgery waiting list.
-    Practitioner:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        role:
-          type: string
-          enum:
-          - gp
-          - consultant
-          - specialist-nurse
-          - referral-coordinator
-          - booking-clerk
-          - rtt-validator
-          - other
-          - ''
-          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
-            rtt-validator, other.'
-        registration_body:
-          type: string
-          enum:
-          - GMC
-          - NMC
-          - HCPC
-          - GPhC
-          - other
-          - ''
-          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
-        registration_number:
-          type: string
-          maxLength: 50
-          description: Professional registration number.
-        organisation_name:
-          type: string
-          maxLength: 255
-          description: Employing organisation (e.g. NHS trust name, GP practice name).
-        organisation_ods_code:
-          type: string
-          maxLength: 20
-          description: NHS Organisation Data Service (ODS) code for the organisation.
-        site_name:
-          type: string
-          maxLength: 255
-          description: Site or clinic name within the organisation.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - role
-      - registration_body
-      - registration_number
-      - organisation_name
-      - organisation_ods_code
-      - site_name
-      description: Practitioner who completes a thoracic surgery waiting list card on behalf of the patient.

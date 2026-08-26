@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Radiation Oncology Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Radiation Oncology Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Radiation Oncology Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /radiation-oncology-waiting-list-card-appointments:
-    get:
-      summary: List RadOncWaitingListCardAppointment records
-      operationId: listRadOncWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RadOncWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
-    post:
-      summary: Create a new RadOncWaitingListCardAppointment
-      operationId: createRadOncWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created RadOncWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /radiation-oncology-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RadOncWaitingListCardAppointment by id
-      operationId: getRadOncWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested RadOncWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
-        '404':
-          description: RadOncWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing RadOncWaitingListCardAppointment
-      operationId: updateRadOncWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated RadOncWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
-        '404':
-          description: RadOncWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a RadOncWaitingListCardAppointment
-      operationId: deleteRadOncWaitingListCardAppointment
-      responses:
-        '204':
-          description: RadOncWaitingListCardAppointment deleted
-        '404':
-          description: RadOncWaitingListCardAppointment not found
-  /radiation-oncology-waiting-list-card-grade-flags:
-    get:
-      summary: List RadOncWaitingListCardGradeFlag records
-      operationId: listRadOncWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RadOncWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
-    post:
-      summary: Create a new RadOncWaitingListCardGradeFlag
-      operationId: createRadOncWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created RadOncWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /radiation-oncology-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RadOncWaitingListCardGradeFlag by id
-      operationId: getRadOncWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested RadOncWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
-        '404':
-          description: RadOncWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing RadOncWaitingListCardGradeFlag
-      operationId: updateRadOncWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated RadOncWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
-        '404':
-          description: RadOncWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a RadOncWaitingListCardGradeFlag
-      operationId: deleteRadOncWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: RadOncWaitingListCardGradeFlag deleted
-        '404':
-          description: RadOncWaitingListCardGradeFlag not found
-  /radiation-oncology-waiting-list-card-grade-rules:
-    get:
-      summary: List RadOncWaitingListCardGradeRule records
-      operationId: listRadOncWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RadOncWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
-    post:
-      summary: Create a new RadOncWaitingListCardGradeRule
-      operationId: createRadOncWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created RadOncWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /radiation-oncology-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RadOncWaitingListCardGradeRule by id
-      operationId: getRadOncWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested RadOncWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
-        '404':
-          description: RadOncWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing RadOncWaitingListCardGradeRule
-      operationId: updateRadOncWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated RadOncWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
-        '404':
-          description: RadOncWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a RadOncWaitingListCardGradeRule
-      operationId: deleteRadOncWaitingListCardGradeRule
-      responses:
-        '204':
-          description: RadOncWaitingListCardGradeRule deleted
-        '404':
-          description: RadOncWaitingListCardGradeRule not found
-  /radiation-oncology-waiting-list-card-grades:
-    get:
-      summary: List RadOncWaitingListCardGrade records
-      operationId: listRadOncWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RadOncWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RadOncWaitingListCardGrade'
-    post:
-      summary: Create a new RadOncWaitingListCardGrade
-      operationId: createRadOncWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created RadOncWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /radiation-oncology-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RadOncWaitingListCardGrade by id
-      operationId: getRadOncWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested RadOncWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGrade'
-        '404':
-          description: RadOncWaitingListCardGrade not found
-    patch:
-      summary: Update an existing RadOncWaitingListCardGrade
-      operationId: updateRadOncWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated RadOncWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCardGrade'
-        '404':
-          description: RadOncWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a RadOncWaitingListCardGrade
-      operationId: deleteRadOncWaitingListCardGrade
-      responses:
-        '204':
-          description: RadOncWaitingListCardGrade deleted
-        '404':
-          description: RadOncWaitingListCardGrade not found
-  /radiation-oncology-waiting-list-cards:
-    get:
-      summary: List RadOncWaitingListCard records
-      operationId: listRadOncWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of RadOncWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RadOncWaitingListCard'
-    post:
-      summary: Create a new RadOncWaitingListCard
-      operationId: createRadOncWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCard'
-      responses:
-        '201':
-          description: The newly created RadOncWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCard'
-        '400':
-          description: Validation error
-  /radiation-oncology-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one RadOncWaitingListCard by id
-      operationId: getRadOncWaitingListCard
-      responses:
-        '200':
-          description: The requested RadOncWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCard'
-        '404':
-          description: RadOncWaitingListCard not found
-    patch:
-      summary: Update an existing RadOncWaitingListCard
-      operationId: updateRadOncWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RadOncWaitingListCard'
-      responses:
-        '200':
-          description: The updated RadOncWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RadOncWaitingListCard'
-        '404':
-          description: RadOncWaitingListCard not found
-    delete:
-      summary: Soft-delete a RadOncWaitingListCard
-      operationId: deleteRadOncWaitingListCard
-      responses:
-        '204':
-          description: RadOncWaitingListCard deleted
-        '404':
-          description: RadOncWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -658,8 +193,648 @@ paths:
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+  /rad-onc-waiting-list-card-appointments:
+    get:
+      summary: List RadOncWaitingListCardAppointment records
+      operationId: listRadOncWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RadOncWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
+    post:
+      summary: Create a new RadOncWaitingListCardAppointment
+      operationId: createRadOncWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created RadOncWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /rad-onc-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RadOncWaitingListCardAppointment by id
+      operationId: getRadOncWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested RadOncWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
+        '404':
+          description: RadOncWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing RadOncWaitingListCardAppointment
+      operationId: updateRadOncWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated RadOncWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardAppointment'
+        '404':
+          description: RadOncWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a RadOncWaitingListCardAppointment
+      operationId: deleteRadOncWaitingListCardAppointment
+      responses:
+        '204':
+          description: RadOncWaitingListCardAppointment deleted
+        '404':
+          description: RadOncWaitingListCardAppointment not found
+  /rad-onc-waiting-list-card-grade-flags:
+    get:
+      summary: List RadOncWaitingListCardGradeFlag records
+      operationId: listRadOncWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RadOncWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
+    post:
+      summary: Create a new RadOncWaitingListCardGradeFlag
+      operationId: createRadOncWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created RadOncWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /rad-onc-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RadOncWaitingListCardGradeFlag by id
+      operationId: getRadOncWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested RadOncWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
+        '404':
+          description: RadOncWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing RadOncWaitingListCardGradeFlag
+      operationId: updateRadOncWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated RadOncWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGradeFlag'
+        '404':
+          description: RadOncWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a RadOncWaitingListCardGradeFlag
+      operationId: deleteRadOncWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: RadOncWaitingListCardGradeFlag deleted
+        '404':
+          description: RadOncWaitingListCardGradeFlag not found
+  /rad-onc-waiting-list-card-grade-rules:
+    get:
+      summary: List RadOncWaitingListCardGradeRule records
+      operationId: listRadOncWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RadOncWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
+    post:
+      summary: Create a new RadOncWaitingListCardGradeRule
+      operationId: createRadOncWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created RadOncWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /rad-onc-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RadOncWaitingListCardGradeRule by id
+      operationId: getRadOncWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested RadOncWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
+        '404':
+          description: RadOncWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing RadOncWaitingListCardGradeRule
+      operationId: updateRadOncWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated RadOncWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGradeRule'
+        '404':
+          description: RadOncWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a RadOncWaitingListCardGradeRule
+      operationId: deleteRadOncWaitingListCardGradeRule
+      responses:
+        '204':
+          description: RadOncWaitingListCardGradeRule deleted
+        '404':
+          description: RadOncWaitingListCardGradeRule not found
+  /rad-onc-waiting-list-card-grades:
+    get:
+      summary: List RadOncWaitingListCardGrade records
+      operationId: listRadOncWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RadOncWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RadOncWaitingListCardGrade'
+    post:
+      summary: Create a new RadOncWaitingListCardGrade
+      operationId: createRadOncWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created RadOncWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /rad-onc-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RadOncWaitingListCardGrade by id
+      operationId: getRadOncWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested RadOncWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGrade'
+        '404':
+          description: RadOncWaitingListCardGrade not found
+    patch:
+      summary: Update an existing RadOncWaitingListCardGrade
+      operationId: updateRadOncWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated RadOncWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCardGrade'
+        '404':
+          description: RadOncWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a RadOncWaitingListCardGrade
+      operationId: deleteRadOncWaitingListCardGrade
+      responses:
+        '204':
+          description: RadOncWaitingListCardGrade deleted
+        '404':
+          description: RadOncWaitingListCardGrade not found
+  /rad-onc-waiting-list-cards:
+    get:
+      summary: List RadOncWaitingListCard records
+      operationId: listRadOncWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of RadOncWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RadOncWaitingListCard'
+    post:
+      summary: Create a new RadOncWaitingListCard
+      operationId: createRadOncWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCard'
+      responses:
+        '201':
+          description: The newly created RadOncWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCard'
+        '400':
+          description: Validation error
+  /rad-onc-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one RadOncWaitingListCard by id
+      operationId: getRadOncWaitingListCard
+      responses:
+        '200':
+          description: The requested RadOncWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCard'
+        '404':
+          description: RadOncWaitingListCard not found
+    patch:
+      summary: Update an existing RadOncWaitingListCard
+      operationId: updateRadOncWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RadOncWaitingListCard'
+      responses:
+        '200':
+          description: The updated RadOncWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadOncWaitingListCard'
+        '404':
+          description: RadOncWaitingListCard not found
+    delete:
+      summary: Soft-delete a RadOncWaitingListCard
+      operationId: deleteRadOncWaitingListCard
+      responses:
+        '204':
+          description: RadOncWaitingListCard deleted
+        '404':
+          description: RadOncWaitingListCard not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a radiation oncology waiting list.
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+          - gp
+          - consultant
+          - specialist-nurse
+          - referral-coordinator
+          - booking-clerk
+          - rtt-validator
+          - other
+          - ''
+          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
+            rtt-validator, other.'
+        registration_body:
+          type: string
+          enum:
+          - GMC
+          - NMC
+          - HCPC
+          - GPhC
+          - other
+          - ''
+          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - role
+      - registration_body
+      - registration_number
+      - organisation_name
+      - organisation_ods_code
+      - site_name
+      description: Practitioner who completes a radiation oncology waiting list card on behalf of the
+        patient.
     RadOncWaitingListCard:
       type: object
       properties:
@@ -837,8 +1012,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a radiation oncology waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a radiation oncology waiting list. Parent of
+        appointment(s) and grading result.
     RadOncWaitingListCardAppointment:
       type: object
       properties:
@@ -1162,177 +1337,3 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a radiation oncology waiting list.
-    Practitioner:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        role:
-          type: string
-          enum:
-          - gp
-          - consultant
-          - specialist-nurse
-          - referral-coordinator
-          - booking-clerk
-          - rtt-validator
-          - other
-          - ''
-          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
-            rtt-validator, other.'
-        registration_body:
-          type: string
-          enum:
-          - GMC
-          - NMC
-          - HCPC
-          - GPhC
-          - other
-          - ''
-          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
-        registration_number:
-          type: string
-          maxLength: 50
-          description: Professional registration number.
-        organisation_name:
-          type: string
-          maxLength: 255
-          description: Employing organisation (e.g. NHS trust name, GP practice name).
-        organisation_ods_code:
-          type: string
-          maxLength: 20
-          description: NHS Organisation Data Service (ODS) code for the organisation.
-        site_name:
-          type: string
-          maxLength: 255
-          description: Site or clinic name within the organisation.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - role
-      - registration_body
-      - registration_number
-      - organisation_name
-      - organisation_ods_code
-      - site_name
-      description: Practitioner who completes a radiation oncology waiting list card on behalf of the patient.

@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Gastroenterology Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Gastroenterology Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Gastroenterology Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /gastroenterology-waiting-list-card-appointments:
+  /gastro-waiting-list-card-appointments:
     get:
       summary: List GastroWaitingListCardAppointment records
       operationId: listGastroWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/GastroWaitingListCardAppointment'
         '400':
           description: Validation error
-  /gastroenterology-waiting-list-card-appointments/{id}:
+  /gastro-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: GastroWaitingListCardAppointment deleted
         '404':
           description: GastroWaitingListCardAppointment not found
-  /gastroenterology-waiting-list-card-grade-flags:
+  /gastro-waiting-list-card-grade-flags:
     get:
       summary: List GastroWaitingListCardGradeFlag records
       operationId: listGastroWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/GastroWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /gastroenterology-waiting-list-card-grade-flags/{id}:
+  /gastro-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: GastroWaitingListCardGradeFlag deleted
         '404':
           description: GastroWaitingListCardGradeFlag not found
-  /gastroenterology-waiting-list-card-grade-rules:
+  /gastro-waiting-list-card-grade-rules:
     get:
       summary: List GastroWaitingListCardGradeRule records
       operationId: listGastroWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/GastroWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /gastroenterology-waiting-list-card-grade-rules/{id}:
+  /gastro-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: GastroWaitingListCardGradeRule deleted
         '404':
           description: GastroWaitingListCardGradeRule not found
-  /gastroenterology-waiting-list-card-grades:
+  /gastro-waiting-list-card-grades:
     get:
       summary: List GastroWaitingListCardGrade records
       operationId: listGastroWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/GastroWaitingListCardGrade'
         '400':
           description: Validation error
-  /gastroenterology-waiting-list-card-grades/{id}:
+  /gastro-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: GastroWaitingListCardGrade deleted
         '404':
           description: GastroWaitingListCardGrade not found
-  /gastroenterology-waiting-list-cards:
+  /gastro-waiting-list-cards:
     get:
       summary: List GastroWaitingListCard records
       operationId: listGastroWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/GastroWaitingListCard'
         '400':
           description: Validation error
-  /gastroenterology-waiting-list-cards/{id}:
+  /gastro-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

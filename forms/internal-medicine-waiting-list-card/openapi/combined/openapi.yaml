@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Internal Medicine Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Internal Medicine Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Internal Medicine Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /internal-medicine-waiting-list-card-appointments:
+  /internal-med-waiting-list-card-appointments:
     get:
       summary: List InternalMedWaitingListCardAppointment records
       operationId: listInternalMedWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/InternalMedWaitingListCardAppointment'
         '400':
           description: Validation error
-  /internal-medicine-waiting-list-card-appointments/{id}:
+  /internal-med-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: InternalMedWaitingListCardAppointment deleted
         '404':
           description: InternalMedWaitingListCardAppointment not found
-  /internal-medicine-waiting-list-card-grade-flags:
+  /internal-med-waiting-list-card-grade-flags:
     get:
       summary: List InternalMedWaitingListCardGradeFlag records
       operationId: listInternalMedWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/InternalMedWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /internal-medicine-waiting-list-card-grade-flags/{id}:
+  /internal-med-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: InternalMedWaitingListCardGradeFlag deleted
         '404':
           description: InternalMedWaitingListCardGradeFlag not found
-  /internal-medicine-waiting-list-card-grade-rules:
+  /internal-med-waiting-list-card-grade-rules:
     get:
       summary: List InternalMedWaitingListCardGradeRule records
       operationId: listInternalMedWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/InternalMedWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /internal-medicine-waiting-list-card-grade-rules/{id}:
+  /internal-med-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: InternalMedWaitingListCardGradeRule deleted
         '404':
           description: InternalMedWaitingListCardGradeRule not found
-  /internal-medicine-waiting-list-card-grades:
+  /internal-med-waiting-list-card-grades:
     get:
       summary: List InternalMedWaitingListCardGrade records
       operationId: listInternalMedWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/InternalMedWaitingListCardGrade'
         '400':
           description: Validation error
-  /internal-medicine-waiting-list-card-grades/{id}:
+  /internal-med-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: InternalMedWaitingListCardGrade deleted
         '404':
           description: InternalMedWaitingListCardGrade not found
-  /internal-medicine-waiting-list-cards:
+  /internal-med-waiting-list-cards:
     get:
       summary: List InternalMedWaitingListCard records
       operationId: listInternalMedWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/InternalMedWaitingListCard'
         '400':
           description: Validation error
-  /internal-medicine-waiting-list-cards/{id}:
+  /internal-med-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path

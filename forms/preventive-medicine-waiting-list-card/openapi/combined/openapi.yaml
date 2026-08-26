@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Preventive Medicine Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Preventive Medicine Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Preventive Medicine Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /preventive-medicine-waiting-list-card-appointments:
-    get:
-      summary: List PrevMedWaitingListCardAppointment records
-      operationId: listPrevMedWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PrevMedWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
-    post:
-      summary: Create a new PrevMedWaitingListCardAppointment
-      operationId: createPrevMedWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created PrevMedWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /preventive-medicine-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PrevMedWaitingListCardAppointment by id
-      operationId: getPrevMedWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested PrevMedWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
-        '404':
-          description: PrevMedWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing PrevMedWaitingListCardAppointment
-      operationId: updatePrevMedWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated PrevMedWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
-        '404':
-          description: PrevMedWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a PrevMedWaitingListCardAppointment
-      operationId: deletePrevMedWaitingListCardAppointment
-      responses:
-        '204':
-          description: PrevMedWaitingListCardAppointment deleted
-        '404':
-          description: PrevMedWaitingListCardAppointment not found
-  /preventive-medicine-waiting-list-card-grade-flags:
-    get:
-      summary: List PrevMedWaitingListCardGradeFlag records
-      operationId: listPrevMedWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PrevMedWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
-    post:
-      summary: Create a new PrevMedWaitingListCardGradeFlag
-      operationId: createPrevMedWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created PrevMedWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /preventive-medicine-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PrevMedWaitingListCardGradeFlag by id
-      operationId: getPrevMedWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested PrevMedWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
-        '404':
-          description: PrevMedWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing PrevMedWaitingListCardGradeFlag
-      operationId: updatePrevMedWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated PrevMedWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
-        '404':
-          description: PrevMedWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a PrevMedWaitingListCardGradeFlag
-      operationId: deletePrevMedWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: PrevMedWaitingListCardGradeFlag deleted
-        '404':
-          description: PrevMedWaitingListCardGradeFlag not found
-  /preventive-medicine-waiting-list-card-grade-rules:
-    get:
-      summary: List PrevMedWaitingListCardGradeRule records
-      operationId: listPrevMedWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PrevMedWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
-    post:
-      summary: Create a new PrevMedWaitingListCardGradeRule
-      operationId: createPrevMedWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created PrevMedWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /preventive-medicine-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PrevMedWaitingListCardGradeRule by id
-      operationId: getPrevMedWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested PrevMedWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
-        '404':
-          description: PrevMedWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing PrevMedWaitingListCardGradeRule
-      operationId: updatePrevMedWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated PrevMedWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
-        '404':
-          description: PrevMedWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a PrevMedWaitingListCardGradeRule
-      operationId: deletePrevMedWaitingListCardGradeRule
-      responses:
-        '204':
-          description: PrevMedWaitingListCardGradeRule deleted
-        '404':
-          description: PrevMedWaitingListCardGradeRule not found
-  /preventive-medicine-waiting-list-card-grades:
-    get:
-      summary: List PrevMedWaitingListCardGrade records
-      operationId: listPrevMedWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PrevMedWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
-    post:
-      summary: Create a new PrevMedWaitingListCardGrade
-      operationId: createPrevMedWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created PrevMedWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /preventive-medicine-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PrevMedWaitingListCardGrade by id
-      operationId: getPrevMedWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested PrevMedWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
-        '404':
-          description: PrevMedWaitingListCardGrade not found
-    patch:
-      summary: Update an existing PrevMedWaitingListCardGrade
-      operationId: updatePrevMedWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated PrevMedWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
-        '404':
-          description: PrevMedWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a PrevMedWaitingListCardGrade
-      operationId: deletePrevMedWaitingListCardGrade
-      responses:
-        '204':
-          description: PrevMedWaitingListCardGrade deleted
-        '404':
-          description: PrevMedWaitingListCardGrade not found
-  /preventive-medicine-waiting-list-cards:
-    get:
-      summary: List PrevMedWaitingListCard records
-      operationId: listPrevMedWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PrevMedWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PrevMedWaitingListCard'
-    post:
-      summary: Create a new PrevMedWaitingListCard
-      operationId: createPrevMedWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCard'
-      responses:
-        '201':
-          description: The newly created PrevMedWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCard'
-        '400':
-          description: Validation error
-  /preventive-medicine-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PrevMedWaitingListCard by id
-      operationId: getPrevMedWaitingListCard
-      responses:
-        '200':
-          description: The requested PrevMedWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCard'
-        '404':
-          description: PrevMedWaitingListCard not found
-    patch:
-      summary: Update an existing PrevMedWaitingListCard
-      operationId: updatePrevMedWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PrevMedWaitingListCard'
-      responses:
-        '200':
-          description: The updated PrevMedWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PrevMedWaitingListCard'
-        '404':
-          description: PrevMedWaitingListCard not found
-    delete:
-      summary: Soft-delete a PrevMedWaitingListCard
-      operationId: deletePrevMedWaitingListCard
-      responses:
-        '204':
-          description: PrevMedWaitingListCard deleted
-        '404':
-          description: PrevMedWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -658,8 +193,648 @@ paths:
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+  /prev-med-waiting-list-card-appointments:
+    get:
+      summary: List PrevMedWaitingListCardAppointment records
+      operationId: listPrevMedWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PrevMedWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
+    post:
+      summary: Create a new PrevMedWaitingListCardAppointment
+      operationId: createPrevMedWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created PrevMedWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /prev-med-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PrevMedWaitingListCardAppointment by id
+      operationId: getPrevMedWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested PrevMedWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
+        '404':
+          description: PrevMedWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing PrevMedWaitingListCardAppointment
+      operationId: updatePrevMedWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated PrevMedWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardAppointment'
+        '404':
+          description: PrevMedWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a PrevMedWaitingListCardAppointment
+      operationId: deletePrevMedWaitingListCardAppointment
+      responses:
+        '204':
+          description: PrevMedWaitingListCardAppointment deleted
+        '404':
+          description: PrevMedWaitingListCardAppointment not found
+  /prev-med-waiting-list-card-grade-flags:
+    get:
+      summary: List PrevMedWaitingListCardGradeFlag records
+      operationId: listPrevMedWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PrevMedWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
+    post:
+      summary: Create a new PrevMedWaitingListCardGradeFlag
+      operationId: createPrevMedWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created PrevMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /prev-med-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PrevMedWaitingListCardGradeFlag by id
+      operationId: getPrevMedWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested PrevMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
+        '404':
+          description: PrevMedWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing PrevMedWaitingListCardGradeFlag
+      operationId: updatePrevMedWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated PrevMedWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGradeFlag'
+        '404':
+          description: PrevMedWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a PrevMedWaitingListCardGradeFlag
+      operationId: deletePrevMedWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: PrevMedWaitingListCardGradeFlag deleted
+        '404':
+          description: PrevMedWaitingListCardGradeFlag not found
+  /prev-med-waiting-list-card-grade-rules:
+    get:
+      summary: List PrevMedWaitingListCardGradeRule records
+      operationId: listPrevMedWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PrevMedWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
+    post:
+      summary: Create a new PrevMedWaitingListCardGradeRule
+      operationId: createPrevMedWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created PrevMedWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /prev-med-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PrevMedWaitingListCardGradeRule by id
+      operationId: getPrevMedWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested PrevMedWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
+        '404':
+          description: PrevMedWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing PrevMedWaitingListCardGradeRule
+      operationId: updatePrevMedWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated PrevMedWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGradeRule'
+        '404':
+          description: PrevMedWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a PrevMedWaitingListCardGradeRule
+      operationId: deletePrevMedWaitingListCardGradeRule
+      responses:
+        '204':
+          description: PrevMedWaitingListCardGradeRule deleted
+        '404':
+          description: PrevMedWaitingListCardGradeRule not found
+  /prev-med-waiting-list-card-grades:
+    get:
+      summary: List PrevMedWaitingListCardGrade records
+      operationId: listPrevMedWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PrevMedWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
+    post:
+      summary: Create a new PrevMedWaitingListCardGrade
+      operationId: createPrevMedWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created PrevMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /prev-med-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PrevMedWaitingListCardGrade by id
+      operationId: getPrevMedWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested PrevMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
+        '404':
+          description: PrevMedWaitingListCardGrade not found
+    patch:
+      summary: Update an existing PrevMedWaitingListCardGrade
+      operationId: updatePrevMedWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated PrevMedWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCardGrade'
+        '404':
+          description: PrevMedWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a PrevMedWaitingListCardGrade
+      operationId: deletePrevMedWaitingListCardGrade
+      responses:
+        '204':
+          description: PrevMedWaitingListCardGrade deleted
+        '404':
+          description: PrevMedWaitingListCardGrade not found
+  /prev-med-waiting-list-cards:
+    get:
+      summary: List PrevMedWaitingListCard records
+      operationId: listPrevMedWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PrevMedWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrevMedWaitingListCard'
+    post:
+      summary: Create a new PrevMedWaitingListCard
+      operationId: createPrevMedWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCard'
+      responses:
+        '201':
+          description: The newly created PrevMedWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCard'
+        '400':
+          description: Validation error
+  /prev-med-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PrevMedWaitingListCard by id
+      operationId: getPrevMedWaitingListCard
+      responses:
+        '200':
+          description: The requested PrevMedWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCard'
+        '404':
+          description: PrevMedWaitingListCard not found
+    patch:
+      summary: Update an existing PrevMedWaitingListCard
+      operationId: updatePrevMedWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrevMedWaitingListCard'
+      responses:
+        '200':
+          description: The updated PrevMedWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrevMedWaitingListCard'
+        '404':
+          description: PrevMedWaitingListCard not found
+    delete:
+      summary: Soft-delete a PrevMedWaitingListCard
+      operationId: deletePrevMedWaitingListCard
+      responses:
+        '204':
+          description: PrevMedWaitingListCard deleted
+        '404':
+          description: PrevMedWaitingListCard not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a preventive medicine waiting list.
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        role:
+          type: string
+          enum:
+          - gp
+          - consultant
+          - specialist-nurse
+          - referral-coordinator
+          - booking-clerk
+          - rtt-validator
+          - other
+          - ''
+          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
+            rtt-validator, other.'
+        registration_body:
+          type: string
+          enum:
+          - GMC
+          - NMC
+          - HCPC
+          - GPhC
+          - other
+          - ''
+          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
+        registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Employing organisation (e.g. NHS trust name, GP practice name).
+        organisation_ods_code:
+          type: string
+          maxLength: 20
+          description: NHS Organisation Data Service (ODS) code for the organisation.
+        site_name:
+          type: string
+          maxLength: 255
+          description: Site or clinic name within the organisation.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - role
+      - registration_body
+      - registration_number
+      - organisation_name
+      - organisation_ods_code
+      - site_name
+      description: Practitioner who completes a preventive medicine waiting list card on behalf of the
+        patient.
     PrevMedWaitingListCard:
       type: object
       properties:
@@ -837,8 +1012,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a preventive medicine waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a preventive medicine waiting list. Parent of
+        appointment(s) and grading result.
     PrevMedWaitingListCardAppointment:
       type: object
       properties:
@@ -1162,177 +1337,3 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a preventive medicine waiting list.
-    Practitioner:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        role:
-          type: string
-          enum:
-          - gp
-          - consultant
-          - specialist-nurse
-          - referral-coordinator
-          - booking-clerk
-          - rtt-validator
-          - other
-          - ''
-          description: 'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk,
-            rtt-validator, other.'
-        registration_body:
-          type: string
-          enum:
-          - GMC
-          - NMC
-          - HCPC
-          - GPhC
-          - other
-          - ''
-          description: 'Professional registration body: GMC, NMC, HCPC, GPhC, other.'
-        registration_number:
-          type: string
-          maxLength: 50
-          description: Professional registration number.
-        organisation_name:
-          type: string
-          maxLength: 255
-          description: Employing organisation (e.g. NHS trust name, GP practice name).
-        organisation_ods_code:
-          type: string
-          maxLength: 20
-          description: NHS Organisation Data Service (ODS) code for the organisation.
-        site_name:
-          type: string
-          maxLength: 255
-          description: Site or clinic name within the organisation.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - role
-      - registration_body
-      - registration_number
-      - organisation_name
-      - organisation_ods_code
-      - site_name
-      description: Practitioner who completes a preventive medicine waiting list card on behalf of the patient.

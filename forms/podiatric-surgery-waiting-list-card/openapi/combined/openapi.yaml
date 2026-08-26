@@ -4,474 +4,9 @@ openapi: 3.1.0
 info:
   title: Podiatric Surgery Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Podiatric Surgery Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Podiatric Surgery Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /podiatric-surgery-waiting-list-card-appointments:
-    get:
-      summary: List PodiatricSurgWaitingListCardAppointment records
-      operationId: listPodiatricSurgWaitingListCardAppointment
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PodiatricSurgWaitingListCardAppointment records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
-    post:
-      summary: Create a new PodiatricSurgWaitingListCardAppointment
-      operationId: createPodiatricSurgWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
-      responses:
-        '201':
-          description: The newly created PodiatricSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
-        '400':
-          description: Validation error
-  /podiatric-surgery-waiting-list-card-appointments/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PodiatricSurgWaitingListCardAppointment by id
-      operationId: getPodiatricSurgWaitingListCardAppointment
-      responses:
-        '200':
-          description: The requested PodiatricSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
-        '404':
-          description: PodiatricSurgWaitingListCardAppointment not found
-    patch:
-      summary: Update an existing PodiatricSurgWaitingListCardAppointment
-      operationId: updatePodiatricSurgWaitingListCardAppointment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
-      responses:
-        '200':
-          description: The updated PodiatricSurgWaitingListCardAppointment
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
-        '404':
-          description: PodiatricSurgWaitingListCardAppointment not found
-    delete:
-      summary: Soft-delete a PodiatricSurgWaitingListCardAppointment
-      operationId: deletePodiatricSurgWaitingListCardAppointment
-      responses:
-        '204':
-          description: PodiatricSurgWaitingListCardAppointment deleted
-        '404':
-          description: PodiatricSurgWaitingListCardAppointment not found
-  /podiatric-surgery-waiting-list-card-grade-flags:
-    get:
-      summary: List PodiatricSurgWaitingListCardGradeFlag records
-      operationId: listPodiatricSurgWaitingListCardGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PodiatricSurgWaitingListCardGradeFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
-    post:
-      summary: Create a new PodiatricSurgWaitingListCardGradeFlag
-      operationId: createPodiatricSurgWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
-      responses:
-        '201':
-          description: The newly created PodiatricSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
-        '400':
-          description: Validation error
-  /podiatric-surgery-waiting-list-card-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PodiatricSurgWaitingListCardGradeFlag by id
-      operationId: getPodiatricSurgWaitingListCardGradeFlag
-      responses:
-        '200':
-          description: The requested PodiatricSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
-        '404':
-          description: PodiatricSurgWaitingListCardGradeFlag not found
-    patch:
-      summary: Update an existing PodiatricSurgWaitingListCardGradeFlag
-      operationId: updatePodiatricSurgWaitingListCardGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
-      responses:
-        '200':
-          description: The updated PodiatricSurgWaitingListCardGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
-        '404':
-          description: PodiatricSurgWaitingListCardGradeFlag not found
-    delete:
-      summary: Soft-delete a PodiatricSurgWaitingListCardGradeFlag
-      operationId: deletePodiatricSurgWaitingListCardGradeFlag
-      responses:
-        '204':
-          description: PodiatricSurgWaitingListCardGradeFlag deleted
-        '404':
-          description: PodiatricSurgWaitingListCardGradeFlag not found
-  /podiatric-surgery-waiting-list-card-grade-rules:
-    get:
-      summary: List PodiatricSurgWaitingListCardGradeRule records
-      operationId: listPodiatricSurgWaitingListCardGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PodiatricSurgWaitingListCardGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
-    post:
-      summary: Create a new PodiatricSurgWaitingListCardGradeRule
-      operationId: createPodiatricSurgWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
-      responses:
-        '201':
-          description: The newly created PodiatricSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
-        '400':
-          description: Validation error
-  /podiatric-surgery-waiting-list-card-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PodiatricSurgWaitingListCardGradeRule by id
-      operationId: getPodiatricSurgWaitingListCardGradeRule
-      responses:
-        '200':
-          description: The requested PodiatricSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
-        '404':
-          description: PodiatricSurgWaitingListCardGradeRule not found
-    patch:
-      summary: Update an existing PodiatricSurgWaitingListCardGradeRule
-      operationId: updatePodiatricSurgWaitingListCardGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
-      responses:
-        '200':
-          description: The updated PodiatricSurgWaitingListCardGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
-        '404':
-          description: PodiatricSurgWaitingListCardGradeRule not found
-    delete:
-      summary: Soft-delete a PodiatricSurgWaitingListCardGradeRule
-      operationId: deletePodiatricSurgWaitingListCardGradeRule
-      responses:
-        '204':
-          description: PodiatricSurgWaitingListCardGradeRule deleted
-        '404':
-          description: PodiatricSurgWaitingListCardGradeRule not found
-  /podiatric-surgery-waiting-list-card-grades:
-    get:
-      summary: List PodiatricSurgWaitingListCardGrade records
-      operationId: listPodiatricSurgWaitingListCardGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PodiatricSurgWaitingListCardGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
-    post:
-      summary: Create a new PodiatricSurgWaitingListCardGrade
-      operationId: createPodiatricSurgWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
-      responses:
-        '201':
-          description: The newly created PodiatricSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
-        '400':
-          description: Validation error
-  /podiatric-surgery-waiting-list-card-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PodiatricSurgWaitingListCardGrade by id
-      operationId: getPodiatricSurgWaitingListCardGrade
-      responses:
-        '200':
-          description: The requested PodiatricSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
-        '404':
-          description: PodiatricSurgWaitingListCardGrade not found
-    patch:
-      summary: Update an existing PodiatricSurgWaitingListCardGrade
-      operationId: updatePodiatricSurgWaitingListCardGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
-      responses:
-        '200':
-          description: The updated PodiatricSurgWaitingListCardGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
-        '404':
-          description: PodiatricSurgWaitingListCardGrade not found
-    delete:
-      summary: Soft-delete a PodiatricSurgWaitingListCardGrade
-      operationId: deletePodiatricSurgWaitingListCardGrade
-      responses:
-        '204':
-          description: PodiatricSurgWaitingListCardGrade deleted
-        '404':
-          description: PodiatricSurgWaitingListCardGrade not found
-  /podiatric-surgery-waiting-list-cards:
-    get:
-      summary: List PodiatricSurgWaitingListCard records
-      operationId: listPodiatricSurgWaitingListCard
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PodiatricSurgWaitingListCard records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
-    post:
-      summary: Create a new PodiatricSurgWaitingListCard
-      operationId: createPodiatricSurgWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
-      responses:
-        '201':
-          description: The newly created PodiatricSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
-        '400':
-          description: Validation error
-  /podiatric-surgery-waiting-list-cards/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PodiatricSurgWaitingListCard by id
-      operationId: getPodiatricSurgWaitingListCard
-      responses:
-        '200':
-          description: The requested PodiatricSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
-        '404':
-          description: PodiatricSurgWaitingListCard not found
-    patch:
-      summary: Update an existing PodiatricSurgWaitingListCard
-      operationId: updatePodiatricSurgWaitingListCard
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
-      responses:
-        '200':
-          description: The updated PodiatricSurgWaitingListCard
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
-        '404':
-          description: PodiatricSurgWaitingListCard not found
-    delete:
-      summary: Soft-delete a PodiatricSurgWaitingListCard
-      operationId: deletePodiatricSurgWaitingListCard
-      responses:
-        '204':
-          description: PodiatricSurgWaitingListCard deleted
-        '404':
-          description: PodiatricSurgWaitingListCard not found
   /patients:
     get:
       summary: List Patient records
@@ -565,6 +100,471 @@ paths:
           description: Patient deleted
         '404':
           description: Patient not found
+  /podiatric-surg-waiting-list-card-appointments:
+    get:
+      summary: List PodiatricSurgWaitingListCardAppointment records
+      operationId: listPodiatricSurgWaitingListCardAppointment
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PodiatricSurgWaitingListCardAppointment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
+    post:
+      summary: Create a new PodiatricSurgWaitingListCardAppointment
+      operationId: createPodiatricSurgWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
+      responses:
+        '201':
+          description: The newly created PodiatricSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
+        '400':
+          description: Validation error
+  /podiatric-surg-waiting-list-card-appointments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PodiatricSurgWaitingListCardAppointment by id
+      operationId: getPodiatricSurgWaitingListCardAppointment
+      responses:
+        '200':
+          description: The requested PodiatricSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
+        '404':
+          description: PodiatricSurgWaitingListCardAppointment not found
+    patch:
+      summary: Update an existing PodiatricSurgWaitingListCardAppointment
+      operationId: updatePodiatricSurgWaitingListCardAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
+      responses:
+        '200':
+          description: The updated PodiatricSurgWaitingListCardAppointment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardAppointment'
+        '404':
+          description: PodiatricSurgWaitingListCardAppointment not found
+    delete:
+      summary: Soft-delete a PodiatricSurgWaitingListCardAppointment
+      operationId: deletePodiatricSurgWaitingListCardAppointment
+      responses:
+        '204':
+          description: PodiatricSurgWaitingListCardAppointment deleted
+        '404':
+          description: PodiatricSurgWaitingListCardAppointment not found
+  /podiatric-surg-waiting-list-card-grade-flags:
+    get:
+      summary: List PodiatricSurgWaitingListCardGradeFlag records
+      operationId: listPodiatricSurgWaitingListCardGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PodiatricSurgWaitingListCardGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
+    post:
+      summary: Create a new PodiatricSurgWaitingListCardGradeFlag
+      operationId: createPodiatricSurgWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
+      responses:
+        '201':
+          description: The newly created PodiatricSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
+        '400':
+          description: Validation error
+  /podiatric-surg-waiting-list-card-grade-flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PodiatricSurgWaitingListCardGradeFlag by id
+      operationId: getPodiatricSurgWaitingListCardGradeFlag
+      responses:
+        '200':
+          description: The requested PodiatricSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
+        '404':
+          description: PodiatricSurgWaitingListCardGradeFlag not found
+    patch:
+      summary: Update an existing PodiatricSurgWaitingListCardGradeFlag
+      operationId: updatePodiatricSurgWaitingListCardGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
+      responses:
+        '200':
+          description: The updated PodiatricSurgWaitingListCardGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeFlag'
+        '404':
+          description: PodiatricSurgWaitingListCardGradeFlag not found
+    delete:
+      summary: Soft-delete a PodiatricSurgWaitingListCardGradeFlag
+      operationId: deletePodiatricSurgWaitingListCardGradeFlag
+      responses:
+        '204':
+          description: PodiatricSurgWaitingListCardGradeFlag deleted
+        '404':
+          description: PodiatricSurgWaitingListCardGradeFlag not found
+  /podiatric-surg-waiting-list-card-grade-rules:
+    get:
+      summary: List PodiatricSurgWaitingListCardGradeRule records
+      operationId: listPodiatricSurgWaitingListCardGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PodiatricSurgWaitingListCardGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
+    post:
+      summary: Create a new PodiatricSurgWaitingListCardGradeRule
+      operationId: createPodiatricSurgWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
+      responses:
+        '201':
+          description: The newly created PodiatricSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
+        '400':
+          description: Validation error
+  /podiatric-surg-waiting-list-card-grade-rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PodiatricSurgWaitingListCardGradeRule by id
+      operationId: getPodiatricSurgWaitingListCardGradeRule
+      responses:
+        '200':
+          description: The requested PodiatricSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
+        '404':
+          description: PodiatricSurgWaitingListCardGradeRule not found
+    patch:
+      summary: Update an existing PodiatricSurgWaitingListCardGradeRule
+      operationId: updatePodiatricSurgWaitingListCardGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
+      responses:
+        '200':
+          description: The updated PodiatricSurgWaitingListCardGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGradeRule'
+        '404':
+          description: PodiatricSurgWaitingListCardGradeRule not found
+    delete:
+      summary: Soft-delete a PodiatricSurgWaitingListCardGradeRule
+      operationId: deletePodiatricSurgWaitingListCardGradeRule
+      responses:
+        '204':
+          description: PodiatricSurgWaitingListCardGradeRule deleted
+        '404':
+          description: PodiatricSurgWaitingListCardGradeRule not found
+  /podiatric-surg-waiting-list-card-grades:
+    get:
+      summary: List PodiatricSurgWaitingListCardGrade records
+      operationId: listPodiatricSurgWaitingListCardGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PodiatricSurgWaitingListCardGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
+    post:
+      summary: Create a new PodiatricSurgWaitingListCardGrade
+      operationId: createPodiatricSurgWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
+      responses:
+        '201':
+          description: The newly created PodiatricSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
+        '400':
+          description: Validation error
+  /podiatric-surg-waiting-list-card-grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PodiatricSurgWaitingListCardGrade by id
+      operationId: getPodiatricSurgWaitingListCardGrade
+      responses:
+        '200':
+          description: The requested PodiatricSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
+        '404':
+          description: PodiatricSurgWaitingListCardGrade not found
+    patch:
+      summary: Update an existing PodiatricSurgWaitingListCardGrade
+      operationId: updatePodiatricSurgWaitingListCardGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
+      responses:
+        '200':
+          description: The updated PodiatricSurgWaitingListCardGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCardGrade'
+        '404':
+          description: PodiatricSurgWaitingListCardGrade not found
+    delete:
+      summary: Soft-delete a PodiatricSurgWaitingListCardGrade
+      operationId: deletePodiatricSurgWaitingListCardGrade
+      responses:
+        '204':
+          description: PodiatricSurgWaitingListCardGrade deleted
+        '404':
+          description: PodiatricSurgWaitingListCardGrade not found
+  /podiatric-surg-waiting-list-cards:
+    get:
+      summary: List PodiatricSurgWaitingListCard records
+      operationId: listPodiatricSurgWaitingListCard
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PodiatricSurgWaitingListCard records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
+    post:
+      summary: Create a new PodiatricSurgWaitingListCard
+      operationId: createPodiatricSurgWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
+      responses:
+        '201':
+          description: The newly created PodiatricSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
+        '400':
+          description: Validation error
+  /podiatric-surg-waiting-list-cards/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PodiatricSurgWaitingListCard by id
+      operationId: getPodiatricSurgWaitingListCard
+      responses:
+        '200':
+          description: The requested PodiatricSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
+        '404':
+          description: PodiatricSurgWaitingListCard not found
+    patch:
+      summary: Update an existing PodiatricSurgWaitingListCard
+      operationId: updatePodiatricSurgWaitingListCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
+      responses:
+        '200':
+          description: The updated PodiatricSurgWaitingListCard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodiatricSurgWaitingListCard'
+        '404':
+          description: PodiatricSurgWaitingListCard not found
+    delete:
+      summary: Soft-delete a PodiatricSurgWaitingListCard
+      operationId: deletePodiatricSurgWaitingListCard
+      responses:
+        '204':
+          description: PodiatricSurgWaitingListCard deleted
+        '404':
+          description: PodiatricSurgWaitingListCard not found
   /practitioners:
     get:
       summary: List Practitioner records
@@ -660,6 +660,97 @@ paths:
           description: Practitioner not found
 components:
   schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Name.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+          - female
+          - male
+          - intersex
+          - unknown
+          - ''
+          description: Sex recorded for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        preferred_language_as_iso_639_1:
+          type: string
+          maxLength: 2
+          description: Preferred written / spoken language as ISO 639-1 two-letter code.
+        interpreter_required:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether an interpreter is required for clinical communication.
+        accessibility_needs:
+          type: string
+          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
+        preferred_contact_channel:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - letter
+          - nhs-app
+          - ''
+          description: Preferred channel for waiting-list and appointment communications.
+      required:
+      - created_at
+      - updated_at
+      - name
+      - birth_date
+      - sex
+      - preferred_language_as_iso_639_1
+      - interpreter_required
+      - accessibility_needs
+      - preferred_contact_channel
+      description: Patient placed on a podiatric surgery waiting list.
     PodiatricSurgWaitingListCard:
       type: object
       properties:
@@ -1162,97 +1253,6 @@ components:
       - description
       description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that
         fired during grading of a waiting list card.
-    Patient:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        name:
-          type: string
-          maxLength: 255
-          description: Name.
-        birth_date:
-          type: string
-          format: date
-          description: Birth date.
-        sex:
-          type: string
-          enum:
-          - female
-          - male
-          - intersex
-          - unknown
-          - ''
-          description: Sex recorded for clinical purposes.
-        email:
-          type: string
-          description: Email address.
-        phone:
-          type: string
-          description: Phone number.
-        postal_address_as_full_text:
-          type: string
-          description: Postal address as full text.
-        country_as_iso_3166_1_alpha_2:
-          type: string
-          maxLength: 2
-          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
-        postcode:
-          type: string
-          description: Postal code, such as for validating the postal address.
-        united_kingdom_nhs_number:
-          type: string
-          maxLength: 20
-          description: United Kingdom NHS number, unique per person.
-        preferred_language_as_iso_639_1:
-          type: string
-          maxLength: 2
-          description: Preferred written / spoken language as ISO 639-1 two-letter code.
-        interpreter_required:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: Whether an interpreter is required for clinical communication.
-        accessibility_needs:
-          type: string
-          description: Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).
-        preferred_contact_channel:
-          type: string
-          enum:
-          - sms
-          - email
-          - phone
-          - letter
-          - nhs-app
-          - ''
-          description: Preferred channel for waiting-list and appointment communications.
-      required:
-      - created_at
-      - updated_at
-      - name
-      - birth_date
-      - sex
-      - preferred_language_as_iso_639_1
-      - interpreter_required
-      - accessibility_needs
-      - preferred_contact_channel
-      description: Patient placed on a podiatric surgery waiting list.
     Practitioner:
       type: object
       properties:

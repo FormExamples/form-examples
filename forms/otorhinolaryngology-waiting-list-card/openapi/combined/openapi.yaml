@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Otorhinolaryngology Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Otorhinolaryngology Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Otorhinolaryngology Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /otorhinolaryngology-waiting-list-card-appointments:
+  /ent-waiting-list-card-appointments:
     get:
       summary: List EntWaitingListCardAppointment records
       operationId: listEntWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/EntWaitingListCardAppointment'
         '400':
           description: Validation error
-  /otorhinolaryngology-waiting-list-card-appointments/{id}:
+  /ent-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: EntWaitingListCardAppointment deleted
         '404':
           description: EntWaitingListCardAppointment not found
-  /otorhinolaryngology-waiting-list-card-grade-flags:
+  /ent-waiting-list-card-grade-flags:
     get:
       summary: List EntWaitingListCardGradeFlag records
       operationId: listEntWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/EntWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /otorhinolaryngology-waiting-list-card-grade-flags/{id}:
+  /ent-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: EntWaitingListCardGradeFlag deleted
         '404':
           description: EntWaitingListCardGradeFlag not found
-  /otorhinolaryngology-waiting-list-card-grade-rules:
+  /ent-waiting-list-card-grade-rules:
     get:
       summary: List EntWaitingListCardGradeRule records
       operationId: listEntWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/EntWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /otorhinolaryngology-waiting-list-card-grade-rules/{id}:
+  /ent-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: EntWaitingListCardGradeRule deleted
         '404':
           description: EntWaitingListCardGradeRule not found
-  /otorhinolaryngology-waiting-list-card-grades:
+  /ent-waiting-list-card-grades:
     get:
       summary: List EntWaitingListCardGrade records
       operationId: listEntWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/EntWaitingListCardGrade'
         '400':
           description: Validation error
-  /otorhinolaryngology-waiting-list-card-grades/{id}:
+  /ent-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: EntWaitingListCardGrade deleted
         '404':
           description: EntWaitingListCardGrade not found
-  /otorhinolaryngology-waiting-list-cards:
+  /ent-waiting-list-cards:
     get:
       summary: List EntWaitingListCard records
       operationId: listEntWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/EntWaitingListCard'
         '400':
           description: Validation error
-  /otorhinolaryngology-waiting-list-cards/{id}:
+  /ent-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path
@@ -837,8 +837,8 @@ components:
       - consent_to_reminders
       - communication_notes
       - additional_notes
-      description: Top-level record placing a patient on a otorhinolaryngology waiting list. Parent of appointment(s)
-        and grading result.
+      description: Top-level record placing a patient on a otorhinolaryngology waiting list. Parent of
+        appointment(s) and grading result.
     EntWaitingListCardAppointment:
       type: object
       properties:
@@ -1335,4 +1335,5 @@ components:
       - organisation_name
       - organisation_ods_code
       - site_name
-      description: Practitioner who completes a otorhinolaryngology waiting list card on behalf of the patient.
+      description: Practitioner who completes a otorhinolaryngology waiting list card on behalf of the
+        patient.

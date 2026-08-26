@@ -4,10 +4,10 @@ openapi: 3.1.0
 info:
   title: Nuclear Medicine Waiting List Card — JSON API
   version: 1.0.0
-  description: Combined OpenAPI specification for the Nuclear Medicine Waiting List Card form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+  description: Combined OpenAPI specification for the Nuclear Medicine Waiting List Card form, merged
+    from the per-entity specs in this directory. One RESTful resource per SQL table.
 paths:
-  /nuclear-medicine-waiting-list-card-appointments:
+  /nuclear-med-waiting-list-card-appointments:
     get:
       summary: List NuclearMedWaitingListCardAppointment records
       operationId: listNuclearMedWaitingListCardAppointment
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/NuclearMedWaitingListCardAppointment'
         '400':
           description: Validation error
-  /nuclear-medicine-waiting-list-card-appointments/{id}:
+  /nuclear-med-waiting-list-card-appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -100,7 +100,7 @@ paths:
           description: NuclearMedWaitingListCardAppointment deleted
         '404':
           description: NuclearMedWaitingListCardAppointment not found
-  /nuclear-medicine-waiting-list-card-grade-flags:
+  /nuclear-med-waiting-list-card-grade-flags:
     get:
       summary: List NuclearMedWaitingListCardGradeFlag records
       operationId: listNuclearMedWaitingListCardGradeFlag
@@ -147,7 +147,7 @@ paths:
                 $ref: '#/components/schemas/NuclearMedWaitingListCardGradeFlag'
         '400':
           description: Validation error
-  /nuclear-medicine-waiting-list-card-grade-flags/{id}:
+  /nuclear-med-waiting-list-card-grade-flags/{id}:
     parameters:
     - name: id
       in: path
@@ -193,7 +193,7 @@ paths:
           description: NuclearMedWaitingListCardGradeFlag deleted
         '404':
           description: NuclearMedWaitingListCardGradeFlag not found
-  /nuclear-medicine-waiting-list-card-grade-rules:
+  /nuclear-med-waiting-list-card-grade-rules:
     get:
       summary: List NuclearMedWaitingListCardGradeRule records
       operationId: listNuclearMedWaitingListCardGradeRule
@@ -240,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/NuclearMedWaitingListCardGradeRule'
         '400':
           description: Validation error
-  /nuclear-medicine-waiting-list-card-grade-rules/{id}:
+  /nuclear-med-waiting-list-card-grade-rules/{id}:
     parameters:
     - name: id
       in: path
@@ -286,7 +286,7 @@ paths:
           description: NuclearMedWaitingListCardGradeRule deleted
         '404':
           description: NuclearMedWaitingListCardGradeRule not found
-  /nuclear-medicine-waiting-list-card-grades:
+  /nuclear-med-waiting-list-card-grades:
     get:
       summary: List NuclearMedWaitingListCardGrade records
       operationId: listNuclearMedWaitingListCardGrade
@@ -333,7 +333,7 @@ paths:
                 $ref: '#/components/schemas/NuclearMedWaitingListCardGrade'
         '400':
           description: Validation error
-  /nuclear-medicine-waiting-list-card-grades/{id}:
+  /nuclear-med-waiting-list-card-grades/{id}:
     parameters:
     - name: id
       in: path
@@ -379,7 +379,7 @@ paths:
           description: NuclearMedWaitingListCardGrade deleted
         '404':
           description: NuclearMedWaitingListCardGrade not found
-  /nuclear-medicine-waiting-list-cards:
+  /nuclear-med-waiting-list-cards:
     get:
       summary: List NuclearMedWaitingListCard records
       operationId: listNuclearMedWaitingListCard
@@ -426,7 +426,7 @@ paths:
                 $ref: '#/components/schemas/NuclearMedWaitingListCard'
         '400':
           description: Validation error
-  /nuclear-medicine-waiting-list-cards/{id}:
+  /nuclear-med-waiting-list-cards/{id}:
     parameters:
     - name: id
       in: path
