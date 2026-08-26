@@ -1,0 +1,279 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "triage",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "non-urgent-dressing-check",
+      "description": "Walk-in dressing check: NEWS2 0 across every parameter and an explicit pain score of 0 — the only presentation the engine grades Level 5 (Non-urgent).",
+      "state": {
+        "context": {
+          "nurseName": "SN Rachel Adebayo",
+          "triagedAt": "2026-08-26T10:20",
+          "careSetting": "emergency-department"
+        },
+        "arrival": {
+          "arrivalMode": "walk-in",
+          "arrivedAt": "2026-08-26T10:05",
+          "referralSource": "self"
+        },
+        "identification": {
+          "patientIdentifier": "ED-2026-18344",
+          "ageBand": "adult-18-64",
+          "sex": "female"
+        },
+        "complaint": {
+          "presentingComplaint": "Requests dressing check of a healing forearm laceration",
+          "briefHistory": "Sutured here 6 days ago; wound clean, no discharge, afebrile.",
+          "symptomOnset": "6 days ago"
+        },
+        "vitals": {
+          "respiratoryRate": 14,
+          "spo2": 98,
+          "onOxygen": "no",
+          "systolicBp": 122,
+          "pulse": 72,
+          "consciousnessAcvpu": "A",
+          "temperature": 36.7,
+          "glasgowComaScale": null
+        },
+        "pain": {
+          "painScore": 0
+        },
+        "discriminators": {
+          "airwayThreat": "no",
+          "breathingInadequate": "no",
+          "circulationShock": "no",
+          "haemorrhageMajor": "no",
+          "consciousnessReduced": "no",
+          "seizureActive": "no",
+          "focalNeurology": "no",
+          "sepsisFeatures": "no",
+          "chestPainCardiac": "no",
+          "strokeFeatures": "no",
+          "paediatricRedFlag": "no"
+        },
+        "note": {
+          "clinicalNotes": "Well. Directed to minor injuries stream."
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 0,
+          "spo2": 0,
+          "oxygen": 0,
+          "systolicBp": 0,
+          "pulse": 0,
+          "consciousness": 0,
+          "temperature": 0
+        },
+        "news2Total": 0,
+        "news2AnyParameterThree": false,
+        "firedDiscriminators": [],
+        "priorityLevel": 5,
+        "priorityColour": "blue",
+        "priorityName": "Non-urgent",
+        "targetMinutes": 240,
+        "complete": true
+      }
+    },
+    {
+      "name": "cardiac-chest-pain-very-urgent",
+      "description": "65+ arrival with central crushing chest pain and severe pain 8/10 but stable observations — expect Level 2 (Very urgent) via the cardiac-chest-pain and severe-pain discriminators.",
+      "state": {
+        "context": {
+          "nurseName": "SN Rachel Adebayo",
+          "triagedAt": "2026-08-26T11:42",
+          "careSetting": "emergency-department"
+        },
+        "arrival": {
+          "arrivalMode": "ambulance",
+          "arrivedAt": "2026-08-26T11:35",
+          "referralSource": "nhs-111"
+        },
+        "identification": {
+          "patientIdentifier": "ED-2026-18359",
+          "ageBand": "adult-65-plus",
+          "sex": "male"
+        },
+        "complaint": {
+          "presentingComplaint": "Central crushing chest pain radiating to left arm",
+          "briefHistory": "Onset 45 min ago at rest; sweaty and nauseated. Known hypertension.",
+          "symptomOnset": "45 minutes"
+        },
+        "vitals": {
+          "respiratoryRate": 18,
+          "spo2": 96,
+          "onOxygen": "no",
+          "systolicBp": 148,
+          "pulse": 92,
+          "consciousnessAcvpu": "A",
+          "temperature": 36.9,
+          "glasgowComaScale": null
+        },
+        "pain": {
+          "painScore": 8
+        },
+        "discriminators": {
+          "airwayThreat": "no",
+          "breathingInadequate": "no",
+          "circulationShock": "no",
+          "haemorrhageMajor": "no",
+          "consciousnessReduced": "no",
+          "seizureActive": "no",
+          "focalNeurology": "no",
+          "sepsisFeatures": "no",
+          "chestPainCardiac": "yes",
+          "strokeFeatures": "no",
+          "paediatricRedFlag": "no"
+        },
+        "note": {
+          "clinicalNotes": "Straight to majors; ECG within 10 minutes; troponin sent."
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 0,
+          "spo2": 0,
+          "oxygen": 0,
+          "systolicBp": 0,
+          "pulse": 1,
+          "consciousness": 0,
+          "temperature": 0
+        },
+        "news2Total": 1,
+        "news2AnyParameterThree": false,
+        "firedDiscriminators": [
+          {
+            "id": "D-CHEST-PAIN-CARDIAC",
+            "category": "circulation",
+            "level": 2,
+            "description": "Chest pain of possible cardiac origin (time-critical)"
+          },
+          {
+            "id": "D-PAIN-SEVERE",
+            "category": "pain",
+            "level": 2,
+            "description": "Severe pain (score 8/10)"
+          }
+        ],
+        "priorityLevel": 2,
+        "priorityColour": "orange",
+        "priorityName": "Very urgent",
+        "targetMinutes": 10,
+        "complete": true
+      }
+    },
+    {
+      "name": "shocked-gi-bleed-immediate",
+      "description": "Variceal haematemesis in shock: SBP 82, pulse 128, RR 28, SpO2 91 on oxygen, V on ACVPU — expect Level 1 (Immediate) via the shock and major-haemorrhage discriminators with a high NEWS2 aggregate.",
+      "state": {
+        "context": {
+          "nurseName": "SN Rachel Adebayo",
+          "triagedAt": "2026-08-26T03:50",
+          "careSetting": "emergency-department"
+        },
+        "arrival": {
+          "arrivalMode": "ambulance",
+          "arrivedAt": "2026-08-26T03:45",
+          "referralSource": "999"
+        },
+        "identification": {
+          "patientIdentifier": "ED-2026-18211",
+          "ageBand": "adult-65-plus",
+          "sex": "male"
+        },
+        "complaint": {
+          "presentingComplaint": "Large-volume haematemesis, collapsed at home",
+          "briefHistory": "Known cirrhosis. Two episodes of fresh haematemesis; pale, clammy, drowsy.",
+          "symptomOnset": "1 hour"
+        },
+        "vitals": {
+          "respiratoryRate": 28,
+          "spo2": 91,
+          "onOxygen": "yes",
+          "systolicBp": 82,
+          "pulse": 128,
+          "consciousnessAcvpu": "V",
+          "temperature": 35.8,
+          "glasgowComaScale": 12
+        },
+        "pain": {
+          "painScore": 3
+        },
+        "discriminators": {
+          "airwayThreat": "no",
+          "breathingInadequate": "no",
+          "circulationShock": "yes",
+          "haemorrhageMajor": "yes",
+          "consciousnessReduced": "yes",
+          "seizureActive": "no",
+          "focalNeurology": "no",
+          "sepsisFeatures": "no",
+          "chestPainCardiac": "no",
+          "strokeFeatures": "no",
+          "paediatricRedFlag": "no"
+        },
+        "note": {
+          "clinicalNotes": "Resus. Major haemorrhage call. GI registrar and anaesthetics paged."
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 3,
+          "spo2": 3,
+          "oxygen": 0,
+          "systolicBp": 3,
+          "pulse": 2,
+          "consciousness": 3,
+          "temperature": 1
+        },
+        "news2Total": 15,
+        "news2AnyParameterThree": true,
+        "firedDiscriminators": [
+          {
+            "id": "D-CIRCULATION-SHOCK",
+            "category": "circulation",
+            "level": 1,
+            "description": "Shock or circulatory compromise"
+          },
+          {
+            "id": "D-HAEMORRHAGE-MAJOR",
+            "category": "circulation",
+            "level": 1,
+            "description": "Major or catastrophic haemorrhage"
+          },
+          {
+            "id": "D-CONSCIOUSNESS-REDUCED",
+            "category": "disability",
+            "level": 2,
+            "description": "Reduced consciousness (responds to voice or pain)"
+          },
+          {
+            "id": "D-ACVPU-REDUCED",
+            "category": "disability",
+            "level": 2,
+            "description": "Reduced consciousness on ACVPU (V)"
+          },
+          {
+            "id": "D-HYPOXIA",
+            "category": "breathing",
+            "level": 2,
+            "description": "Oxygen saturation 91% (< 92%)"
+          },
+          {
+            "id": "D-NEWS2-HIGH",
+            "category": "news2",
+            "level": 2,
+            "description": "NEWS2 aggregate 15 (≥ 7) — escalate to at least Very urgent"
+          }
+        ],
+        "priorityLevel": 1,
+        "priorityColour": "red",
+        "priorityName": "Immediate",
+        "targetMinutes": 0,
+        "complete": true
+      }
+    }
+  ]
+}

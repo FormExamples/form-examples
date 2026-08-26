@@ -1,0 +1,327 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "computeFlags",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. computeFlags is the safety oracle for this form; phase status is the separate pure deriveStatus() helper.",
+  "personas": [
+    {
+      "name": "completed-clean-elective",
+      "description": "Elective right TKR with all three phases completed and every item answered safely (site marked on a lateralised case, counts agreed, no specimens) — expect zero safety flags.",
+      "state": {
+        "caseDetails": {
+          "patientName": "Eileen Marsh",
+          "patientBirthDate": "1957-02-11",
+          "patientNhsNumber": "943 476 5929",
+          "patientMedicalRecordNumber": "MRN0092041",
+          "patientWeightKg": 71,
+          "isPaediatric": "no",
+          "surgeonName": "Ms Grace Adeyemi",
+          "anaesthetistName": "Dr Piotr Zielinski",
+          "leadNurseName": "Sr Kate Donnelly",
+          "plannedProcedure": "Total knee replacement (right)",
+          "surgicalSpecialty": "orthopaedics",
+          "urgency": "elective",
+          "laterality": "right",
+          "siteName": "City General Hospital",
+          "operatingRoom": "Theatre 2",
+          "caseDate": "2026-08-26",
+          "caseStartAt": "08:30",
+          "caseEndAt": "10:45"
+        },
+        "signIn": {
+          "identitySiteProcedureConsent": "yes",
+          "siteMarked": "yes",
+          "anaesthesiaCheckComplete": "yes",
+          "pulseOximeterOnPatient": "yes",
+          "knownAllergy": "no",
+          "knownAllergyDetail": "",
+          "difficultAirwayAspirationRisk": "no",
+          "bloodLossRisk": "no",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": "08:35"
+        },
+        "timeOut": {
+          "teamIntroductionsConfirmed": "yes",
+          "patientProcedureIncisionConfirmed": "yes",
+          "antibioticProphylaxisWithin60Min": "yes",
+          "surgeonCriticalSteps": "Standard medial parapatellar approach; cemented components.",
+          "surgeonCaseDurationMinutes": 90,
+          "surgeonAnticipatedBloodLossMl": 200,
+          "anaesthetistPatientConcerns": "None; spinal with sedation.",
+          "nursingSterilityConfirmed": "yes",
+          "nursingEquipmentConcerns": "",
+          "essentialImagingDisplayed": "yes",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": "08:58"
+        },
+        "signOut": {
+          "procedureNameConfirmed": "yes",
+          "countsConfirmed": "yes",
+          "specimensLabelled": "not-applicable",
+          "equipmentProblems": "",
+          "recoveryConcerns": "Routine spinal recovery; observe sensory level.",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": "10:40"
+        },
+        "teamMembers": [
+          {
+            "name": "Ms Grace Adeyemi",
+            "role": "surgeon",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          },
+          {
+            "name": "Dr Piotr Zielinski",
+            "role": "anaesthetist",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          },
+          {
+            "name": "Sr Kate Donnelly",
+            "role": "scrub-nurse",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          }
+        ],
+        "summary": {
+          "abandonedReason": ""
+        }
+      },
+      "expected": []
+    },
+    {
+      "name": "risks-anticipated-and-managed",
+      "description": "Urgent open AAA repair where the Sign-In risks are real but managed: penicillin allergy with substitution recorded, difficult airway with equipment available, high blood-loss risk with two IVs and fluids planned — expect exactly the three informational risk flags.",
+      "state": {
+        "caseDetails": {
+          "patientName": "Victor Osei",
+          "patientBirthDate": "1948-09-03",
+          "patientNhsNumber": "943 476 5930",
+          "patientMedicalRecordNumber": "MRN0092042",
+          "patientWeightKg": 88,
+          "isPaediatric": "no",
+          "surgeonName": "Ms Grace Adeyemi",
+          "anaesthetistName": "Dr Piotr Zielinski",
+          "leadNurseName": "Sr Kate Donnelly",
+          "plannedProcedure": "Open abdominal aortic aneurysm repair",
+          "surgicalSpecialty": "vascular-surgery",
+          "urgency": "urgent",
+          "laterality": "not-applicable",
+          "siteName": "City General Hospital",
+          "operatingRoom": "Theatre 2",
+          "caseDate": "2026-08-26",
+          "caseStartAt": "13:00",
+          "caseEndAt": "17:30"
+        },
+        "signIn": {
+          "identitySiteProcedureConsent": "yes",
+          "siteMarked": "not-applicable",
+          "anaesthesiaCheckComplete": "yes",
+          "pulseOximeterOnPatient": "yes",
+          "knownAllergy": "yes",
+          "knownAllergyDetail": "Penicillin — rash; teicoplanin substituted for prophylaxis",
+          "difficultAirwayAspirationRisk": "yes-equipment-available",
+          "bloodLossRisk": "yes-two-ivs-and-fluids-planned",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": "08:35"
+        },
+        "timeOut": {
+          "teamIntroductionsConfirmed": "yes",
+          "patientProcedureIncisionConfirmed": "yes",
+          "antibioticProphylaxisWithin60Min": "yes",
+          "surgeonCriticalSteps": "Supracoeliac clamp may be needed; cell salvage primed.",
+          "surgeonCaseDurationMinutes": 240,
+          "surgeonAnticipatedBloodLossMl": 1500,
+          "anaesthetistPatientConcerns": "Ischaemic heart disease; arterial line and CVC placed.",
+          "nursingSterilityConfirmed": "yes",
+          "nursingEquipmentConcerns": "",
+          "essentialImagingDisplayed": "yes",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": "08:58"
+        },
+        "signOut": {
+          "procedureNameConfirmed": "yes",
+          "countsConfirmed": "yes",
+          "specimensLabelled": "not-applicable",
+          "equipmentProblems": "",
+          "recoveryConcerns": "To ICU ventilated; watch distal perfusion.",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": "10:40"
+        },
+        "teamMembers": [
+          {
+            "name": "Ms Grace Adeyemi",
+            "role": "surgeon",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          },
+          {
+            "name": "Dr Piotr Zielinski",
+            "role": "anaesthetist",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          },
+          {
+            "name": "Sr Kate Donnelly",
+            "role": "scrub-nurse",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          }
+        ],
+        "summary": {
+          "abandonedReason": ""
+        }
+      },
+      "expected": [
+        {
+          "id": "F-DIFFICULT-AIRWAY",
+          "priority": "high",
+          "category": "airway",
+          "message": "Difficult airway or aspiration risk identified; assistance and equipment available (Sign In #6)."
+        },
+        {
+          "id": "F-HIGH-BLOOD-LOSS-RISK",
+          "priority": "high",
+          "category": "blood-loss",
+          "message": "Risk of > 500 ml (or 7 ml/kg in children) blood loss; two IVs / central access and fluids planned (Sign In #7)."
+        },
+        {
+          "id": "F-KNOWN-ALLERGY",
+          "priority": "medium",
+          "category": "allergy",
+          "message": "Patient has a known allergy — Penicillin — rash; teicoplanin substituted for prophylaxis (Sign In #5)."
+        }
+      ]
+    },
+    {
+      "name": "lapsed-timeout-and-signout",
+      "description": "Evening hernia case with the checklist discipline breaking down: unmarked site on a right-sided procedure, antibiotic prophylaxis and sterility left unconfirmed at Time Out, a count discrepancy and unlabelled specimen at Sign Out, plus an equipment problem — expect the corresponding high flags.",
+      "state": {
+        "caseDetails": {
+          "patientName": "Sandra Quinn",
+          "patientBirthDate": "1972-12-19",
+          "patientNhsNumber": "943 476 5931",
+          "patientMedicalRecordNumber": "MRN0092043",
+          "patientWeightKg": 64,
+          "isPaediatric": "no",
+          "surgeonName": "Ms Grace Adeyemi",
+          "anaesthetistName": "Dr Piotr Zielinski",
+          "leadNurseName": "Sr Kate Donnelly",
+          "plannedProcedure": "Right inguinal hernia repair",
+          "surgicalSpecialty": "general-surgery",
+          "urgency": "expedited",
+          "laterality": "right",
+          "siteName": "City General Hospital",
+          "operatingRoom": "Theatre 2",
+          "caseDate": "2026-08-26",
+          "caseStartAt": "18:40",
+          "caseEndAt": "19:55"
+        },
+        "signIn": {
+          "identitySiteProcedureConsent": "yes",
+          "siteMarked": "",
+          "anaesthesiaCheckComplete": "yes",
+          "pulseOximeterOnPatient": "yes",
+          "knownAllergy": "no",
+          "knownAllergyDetail": "",
+          "difficultAirwayAspirationRisk": "no",
+          "bloodLossRisk": "no",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": ""
+        },
+        "timeOut": {
+          "teamIntroductionsConfirmed": "yes",
+          "patientProcedureIncisionConfirmed": "yes",
+          "antibioticProphylaxisWithin60Min": "",
+          "surgeonCriticalSteps": "Standard mesh repair.",
+          "surgeonCaseDurationMinutes": 60,
+          "surgeonAnticipatedBloodLossMl": 50,
+          "anaesthetistPatientConcerns": "None.",
+          "nursingSterilityConfirmed": "",
+          "nursingEquipmentConcerns": "",
+          "essentialImagingDisplayed": "",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": ""
+        },
+        "signOut": {
+          "procedureNameConfirmed": "yes",
+          "countsConfirmed": "no",
+          "specimensLabelled": "no",
+          "equipmentProblems": "Diathermy pedal intermittently unresponsive",
+          "recoveryConcerns": "",
+          "coordinatorName": "Sr Kate Donnelly",
+          "coordinatorRole": "lead-nurse",
+          "completedAt": ""
+        },
+        "teamMembers": [
+          {
+            "name": "Mr Owen Pryce",
+            "role": "surgeon",
+            "introducedDuringTimeOut": "yes",
+            "notes": ""
+          },
+          {
+            "name": "Dr Lena Fischer",
+            "role": "anaesthetist",
+            "introducedDuringTimeOut": "",
+            "notes": "arrived after introductions"
+          }
+        ],
+        "summary": {
+          "abandonedReason": ""
+        }
+      },
+      "expected": [
+        {
+          "id": "F-SITE-NOT-MARKED",
+          "priority": "high",
+          "category": "identification",
+          "message": "Surgical site has not been marked on a lateralised procedure (Sign In #2)."
+        },
+        {
+          "id": "F-ANTIBIOTIC-PROPHYLAXIS-MISSED",
+          "priority": "high",
+          "category": "infection",
+          "message": "Antibiotic prophylaxis within 60 minutes is not confirmed and not-applicable was not selected (Time Out #3)."
+        },
+        {
+          "id": "F-STERILITY-NOT-CONFIRMED",
+          "priority": "high",
+          "category": "sterility",
+          "message": "Nursing sterility (including indicator results) has not been confirmed (Time Out #8)."
+        },
+        {
+          "id": "F-COUNT-DISCREPANCY",
+          "priority": "high",
+          "category": "counts",
+          "message": "Instrument, sponge, or needle count discrepancy reported (Sign Out #2)."
+        },
+        {
+          "id": "F-SPECIMEN-LABELLING-MISSED",
+          "priority": "high",
+          "category": "specimen",
+          "message": "Specimen labelling not confirmed read aloud (Sign Out #3)."
+        },
+        {
+          "id": "F-IMAGING-MISSING",
+          "priority": "medium",
+          "category": "imaging",
+          "message": "Essential imaging is not confirmed displayed and not-applicable was not selected (Time Out #10)."
+        },
+        {
+          "id": "F-EQUIPMENT-PROBLEM",
+          "priority": "medium",
+          "category": "equipment",
+          "message": "Equipment problem recorded — Diathermy pedal intermittently unresponsive (Sign Out #4)."
+        }
+      ]
+    }
+  ]
+}
