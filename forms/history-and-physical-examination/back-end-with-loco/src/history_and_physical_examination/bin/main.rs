@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use history_and_physical_examination::app::App;
 use loco_rs::cli;
 use migration::Migrator;

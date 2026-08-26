@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use ambulatory_blood_pressure_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

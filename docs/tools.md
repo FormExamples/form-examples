@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-69 tools.
+70 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -34,6 +34,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-svelte-theme-locale-select-refactor`](#lily-svelte-theme-locale-select-refactor)
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/loco-config-refactor`](#loco-config-refactor)
+- [`bin/loco-forbid-unsafe`](#loco-forbid-unsafe)
 - [`bin/loco-migration-defaults`](#loco-migration-defaults)
 - [`bin/loco-migration-nullability`](#loco-migration-nullability)
 - [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
@@ -772,6 +773,52 @@ Usage:
   bin/loco-config-refactor --all               # every form's Loco crate
   bin/loco-config-refactor --dry-run <slug>    # show what would change
   bin/loco-config-refactor --check --all       # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-forbid-unsafe"><code>bin/loco-forbid-unsafe</code></h2>
+
+```text
+bin/loco-forbid-unsafe — add `#![forbid(unsafe_code)]` to every crate root
+in every form's `back-end-with-loco/`.
+
+Nothing in this monorepo's Rust needs `unsafe`: the crates are axum + Loco +
+SeaORM request handlers over a relational schema, and a fleet-wide grep before
+this tool was written found not one `unsafe` token in any crate source (the
+sole match was the word "unsafe" inside a doc comment). `forbid` — rather than
+`deny` — states that as a compiler-enforced invariant that a later inner
+`#![allow(unsafe_code)]` cannot quietly reopen.
+
+The attribute is per **crate root**, not per file, so each Cargo target needs
+its own. Every form's crate has exactly four:
+
+    src/<form_snake_case>/lib.rs           the library
+    src/<form_snake_case>/bin/main.rs      the `<form_snake_case>-cli` binary
+    migration/src/lib.rs                   the `migration` library
+    tests/<name>.rs                        the integration-test target
+                                           (`mod.rs` in 350 crates,
+                                           `engine_tests.rs` in 5)
+
+Insertion point, per file: after any leading `//!` crate-doc block and any
+leading blank lines, and before everything else — so the attribute lands above
+the existing `#![allow(...)]` runs (`migration/src/lib.rs` starts with two of
+them) rather than between them. A file that already carries the attribute is
+left alone: the twelve crates carrying hand-written rustdoc already have a
+`// Always start with high quality coding conventions.` block, and eight of
+those already had `#![forbid(unsafe_code)]` in `lib.rs` before this tool
+existed.
+
+This is an ongoing convention, not a one-shot migration. `cargo loco generate
+scaffold` does not emit the attribute, so each form's generated
+`back-end-with-loco-setup` script calls this tool as its final step, right
+after `bin/route-loco-layout`; `--check` is the CI drift detector that catches
+a crate which skipped it.
+
+Usage:
+  bin/loco-forbid-unsafe <slug>...        # named forms
+  bin/loco-forbid-unsafe --all            # every form's Loco crate
+  bin/loco-forbid-unsafe --dry-run --all  # show what would change
+  bin/loco-forbid-unsafe --check --all    # CI drift check (non-zero on drift)
+  bin/loco-forbid-unsafe --verbose --all  # list every file touched
 ```
 
 <h2 id="loco-migration-defaults"><code>bin/loco-migration-defaults</code></h2>

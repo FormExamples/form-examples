@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use x_ray_test_request::app::App;

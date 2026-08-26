@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use fertility_assessment::app::App;
 use loco_rs::cli;
 use migration::Migrator;

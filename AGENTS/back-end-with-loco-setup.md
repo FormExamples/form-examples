@@ -97,10 +97,18 @@ Once the Loco app exists, run the generated setup script inside it to
 scaffold all resources at once.
 
 `loco new` creates the crate in a nested `<slug_snake>/` directory. The
-generated `back-end-with-loco-setup` script's final step converts this into the
-canonical **route layout** — crate source under `back-end-with-loco/src/<slug_snake>/`,
-crate root files (Cargo.toml, config/, migration/, tests/) at
-`back-end-with-loco/` — by invoking `bin/route-loco-layout <slug>`.
+generated `back-end-with-loco-setup` script's last two steps clean up after the
+scaffold:
+
+1. `bin/route-loco-layout <slug>` converts the nested crate into the canonical
+   **route layout** — crate source under `back-end-with-loco/src/<slug_snake>/`,
+   crate root files (Cargo.toml, config/, migration/, tests/) at
+   `back-end-with-loco/`.
+2. `bin/loco-forbid-unsafe <slug>` adds `#![forbid(unsafe_code)]` to each of the
+   four crate roots the scaffold created (the library, the `-cli` binary, the
+   `migration` library, and the integration-test target). `cargo loco generate
+   scaffold` does not emit the attribute, and `bin/loco-forbid-unsafe --check
+   --all` is the CI gate that catches a crate that skipped this step.
 
 ## Verify
 

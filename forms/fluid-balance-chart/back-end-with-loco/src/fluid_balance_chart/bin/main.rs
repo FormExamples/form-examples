@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use fluid_balance_chart::app::App;
 use loco_rs::cli;
 use migration::Migrator;

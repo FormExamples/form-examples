@@ -16,7 +16,7 @@
 // Always start with high quality coding conventions.
 #![forbid(unsafe_code)]
 #![deny(missing_docs)]
-#![warn(clippy::clippy::pedantic)]
+#![warn(clippy::pedantic)]
 
 // When we build for MUSL static, use faster memory allocator.
 #[cfg(target_env = "musl")]

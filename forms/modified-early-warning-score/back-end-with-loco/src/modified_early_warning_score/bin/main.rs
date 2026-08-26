@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use modified_early_warning_score::app::App;

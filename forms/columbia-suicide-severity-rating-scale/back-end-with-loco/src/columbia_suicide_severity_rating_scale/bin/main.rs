@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use columbia_suicide_severity_rating_scale::app::App;
 use loco_rs::cli;
 use migration::Migrator;

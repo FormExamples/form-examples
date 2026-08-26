@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use microbiology_culture_test_request::app::App;
 use migration::Migrator;

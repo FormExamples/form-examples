@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use employee_satisfaction_survey::app::App;
 use loco_rs::cli;
 use migration::Migrator;

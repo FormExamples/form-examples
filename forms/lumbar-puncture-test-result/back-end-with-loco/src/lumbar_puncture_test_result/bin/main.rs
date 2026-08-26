@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use lumbar_puncture_test_result::app::App;
 use migration::Migrator;

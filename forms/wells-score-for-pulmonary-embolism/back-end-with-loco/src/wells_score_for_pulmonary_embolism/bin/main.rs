@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use wells_score_for_pulmonary_embolism::app::App;

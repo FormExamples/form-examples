@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use allergy_skin_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

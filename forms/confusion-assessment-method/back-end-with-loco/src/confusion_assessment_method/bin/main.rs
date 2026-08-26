@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use confusion_assessment_method::app::App;
 use loco_rs::cli;
 use migration::Migrator;

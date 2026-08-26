@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use audio_vestibular_assessment::app::App;
 use loco_rs::cli;
 use migration::Migrator;

@@ -133,3 +133,7 @@ cargo loco generate scaffold pathology_waiting_list_card_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Add #![forbid(unsafe_code)] to each crate root the scaffold created:
+# the library, the -cli binary, the migration library, and the tests.
+"$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"

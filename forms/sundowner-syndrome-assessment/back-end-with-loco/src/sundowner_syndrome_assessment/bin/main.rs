@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use sundowner_syndrome_assessment::app::App;

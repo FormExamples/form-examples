@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use care_privacy_notice::app::App;
 use loco_rs::cli;
 use migration::Migrator;

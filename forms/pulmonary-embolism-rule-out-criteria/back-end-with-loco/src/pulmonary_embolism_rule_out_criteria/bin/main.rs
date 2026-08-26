@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use pulmonary_embolism_rule_out_criteria::app::App;

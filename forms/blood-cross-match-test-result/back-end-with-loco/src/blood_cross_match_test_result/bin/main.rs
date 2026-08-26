@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use blood_cross_match_test_result::app::App;
 use loco_rs::cli;
 use migration::Migrator;

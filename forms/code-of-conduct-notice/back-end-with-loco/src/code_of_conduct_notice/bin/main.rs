@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use code_of_conduct_notice::app::App;
 use loco_rs::cli;
 use migration::Migrator;

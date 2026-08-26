@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use advance_decision_to_refuse_treatment::app::App;
 use loco_rs::cli;
 use migration::Migrator;

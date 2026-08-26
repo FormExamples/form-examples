@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use cage_alcohol_questionnaire::app::App;
 use loco_rs::cli;
 use migration::Migrator;

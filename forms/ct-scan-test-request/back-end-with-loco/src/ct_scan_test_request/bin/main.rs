@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use ct_scan_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

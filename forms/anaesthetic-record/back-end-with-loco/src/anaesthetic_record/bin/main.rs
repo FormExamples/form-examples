@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use anaesthetic_record::app::App;
 use loco_rs::cli;
 use migration::Migrator;

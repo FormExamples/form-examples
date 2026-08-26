@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medical_waiting_list_card::app::App;
 use migration::Migrator;

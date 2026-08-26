@@ -1,5 +1,7 @@
 //! Main module.
 
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medical_operation_note::app::App;
 use migration::Migrator;

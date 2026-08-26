@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use framingham_risk_score_for_hard_coronary_heart_disease::app::App;
 use loco_rs::cli;
 use migration::Migrator;

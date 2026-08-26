@@ -101,6 +101,9 @@ jobs:
       - name: Loco background-queue + observability has no drift
         run: bin/loco-config-refactor --check --all
 
+      - name: Every Loco crate root forbids unsafe code
+        run: bin/loco-forbid-unsafe --check --all
+
       - name: Validate XML against DTDs
         run: |
           failed=0

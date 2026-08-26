@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medical_language_speaking_assessment_for_cymraeg::app::App;
 use migration::Migrator;

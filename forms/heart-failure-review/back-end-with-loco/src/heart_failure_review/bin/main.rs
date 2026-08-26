@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use heart_failure_review::app::App;
 use loco_rs::cli;
 use migration::Migrator;

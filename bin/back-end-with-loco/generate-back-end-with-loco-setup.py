@@ -245,7 +245,9 @@ def render_generate_sh(form_slug: str, tables: list) -> str:
     `sql/` source order so FK targets already exist when referenced). A final
     step converts the freshly-scaffolded nested crate into the canonical route
     layout (`back-end-with-loco/src/<form_snake_case>/`) via
-    `bin/route-loco-layout`.
+    `bin/route-loco-layout`, then `bin/loco-forbid-unsafe` adds
+    `#![forbid(unsafe_code)]` to each of the new crate's four crate roots
+    (`cargo loco generate scaffold` does not emit it).
     """
     form_snake_case = form_slug.replace("-", "_")
     out = [
@@ -277,6 +279,10 @@ def render_generate_sh(form_slug: str, tables: list) -> str:
         "# layout: back-end-with-loco/src/${form_snake_case}/*.rs",
         'cd ..',
         '"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"',
+        "",
+        "# Add #![forbid(unsafe_code)] to each crate root the scaffold created:",
+        "# the library, the -cli binary, the migration library, and the tests.",
+        '"$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"',
         "",
     ])
 

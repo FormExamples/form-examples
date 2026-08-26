@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use fluoroscopy_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

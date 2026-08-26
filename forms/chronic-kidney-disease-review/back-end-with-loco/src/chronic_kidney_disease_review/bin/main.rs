@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use chronic_kidney_disease_review::app::App;
 use loco_rs::cli;
 use migration::Migrator;

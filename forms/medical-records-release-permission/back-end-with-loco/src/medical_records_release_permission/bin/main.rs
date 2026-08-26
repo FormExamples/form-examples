@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medical_records_release_permission::app::App;
 use migration::Migrator;

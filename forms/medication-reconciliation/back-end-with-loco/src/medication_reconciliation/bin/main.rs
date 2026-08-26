@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medication_reconciliation::app::App;
 use migration::Migrator;

@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use general_practitioner_referral_letter::app::App;
 use loco_rs::cli;
 use migration::Migrator;

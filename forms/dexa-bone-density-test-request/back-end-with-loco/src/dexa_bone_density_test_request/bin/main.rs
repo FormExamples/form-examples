@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use dexa_bone_density_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

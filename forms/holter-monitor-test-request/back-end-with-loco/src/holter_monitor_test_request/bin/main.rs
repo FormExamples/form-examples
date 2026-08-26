@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use holter_monitor_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

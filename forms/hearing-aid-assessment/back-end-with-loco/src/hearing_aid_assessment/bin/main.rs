@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use hearing_aid_assessment::app::App;
 use loco_rs::cli;
 use migration::Migrator;

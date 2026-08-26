@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use eye_vision_test_request::app::App;
 use loco_rs::cli;
 use migration::Migrator;

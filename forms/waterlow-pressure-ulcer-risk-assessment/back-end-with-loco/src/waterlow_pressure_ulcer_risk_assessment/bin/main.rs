@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use waterlow_pressure_ulcer_risk_assessment::app::App;

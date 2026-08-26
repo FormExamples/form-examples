@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medical_information_form_for_air_travel::app::App;
 use migration::Migrator;

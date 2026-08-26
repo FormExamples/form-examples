@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use oral_and_maxillofacial_surgery_waiting_list_card::app::App;
 use migration::Migrator;

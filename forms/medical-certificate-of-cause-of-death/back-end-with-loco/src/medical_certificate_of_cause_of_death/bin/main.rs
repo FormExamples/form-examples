@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use medical_certificate_of_cause_of_death::app::App;
 use migration::Migrator;

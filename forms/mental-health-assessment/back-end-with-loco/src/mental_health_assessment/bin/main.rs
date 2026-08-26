@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use mental_health_assessment::app::App;
 use migration::Migrator;

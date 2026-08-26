@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use emergency_medical_technician_psychomotor_examination::app::App;
 use loco_rs::cli;
 use migration::Migrator;

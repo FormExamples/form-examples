@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use agile_checklist::app::App;
 use loco_rs::cli;
 use migration::Migrator;

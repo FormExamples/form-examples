@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use bronchoscopy_test_result::app::App;
 use loco_rs::cli;
 use migration::Migrator;

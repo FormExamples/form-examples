@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use anion_gap_calculator::app::App;
 use loco_rs::cli;
 use migration::Migrator;

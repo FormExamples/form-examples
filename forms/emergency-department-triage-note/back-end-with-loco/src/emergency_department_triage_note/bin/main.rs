@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use emergency_department_triage_note::app::App;
 use loco_rs::cli;
 use migration::Migrator;

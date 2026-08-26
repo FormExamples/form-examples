@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use employee_onboarding_checklist::app::App;
 use loco_rs::cli;
 use migration::Migrator;

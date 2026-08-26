@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use systematic_coronary_risk_evaluation_2_diabetes::app::App;

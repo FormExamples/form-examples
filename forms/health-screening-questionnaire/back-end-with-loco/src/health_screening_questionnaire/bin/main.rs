@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use health_screening_questionnaire::app::App;
 use loco_rs::cli;
 use migration::Migrator;

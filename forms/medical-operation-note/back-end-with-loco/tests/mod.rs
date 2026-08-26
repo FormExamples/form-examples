@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 mod engine;
 mod models;
 mod requests;

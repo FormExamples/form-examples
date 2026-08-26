@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use bowel_cancer_screening_with_faecal_immunochemical_test::app::App;
 use loco_rs::cli;
 use migration::Migrator;

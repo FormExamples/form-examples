@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use loco_rs::cli;
 use migration::Migrator;
 use united_kingdom_maternity_certificate_mat_b1::app::App;

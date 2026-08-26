@@ -1,5 +1,7 @@
 //! Main module.
 
+#![forbid(unsafe_code)]
+
 use cardiology_response_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

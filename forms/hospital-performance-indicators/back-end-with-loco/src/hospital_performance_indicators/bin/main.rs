@@ -1,5 +1,7 @@
 //! Main module.
 
+#![forbid(unsafe_code)]
+
 use hospital_performance_indicators::app::App;
 use loco_rs::cli;
 use migration::Migrator;

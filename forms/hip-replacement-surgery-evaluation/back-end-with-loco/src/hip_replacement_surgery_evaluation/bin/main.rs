@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use hip_replacement_surgery_evaluation::app::App;
 use loco_rs::cli;
 use migration::Migrator;

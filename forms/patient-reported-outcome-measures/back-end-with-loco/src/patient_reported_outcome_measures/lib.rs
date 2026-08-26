@@ -13,6 +13,9 @@
 //! // then submit it to obtain the grading result.
 //! ```
 //!
+
+#![forbid(unsafe_code)]
+
 pub mod app;
 pub mod controllers;
 pub mod data;

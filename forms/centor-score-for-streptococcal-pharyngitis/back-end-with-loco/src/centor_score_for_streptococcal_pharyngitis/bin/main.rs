@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use centor_score_for_streptococcal_pharyngitis::app::App;
 use loco_rs::cli;
 use migration::Migrator;
