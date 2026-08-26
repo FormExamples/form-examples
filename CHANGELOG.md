@@ -39,8 +39,23 @@ notes from `[Unreleased]`, and every section after it will carry a version.
 
 - `CONTRIBUTING.md` gained the ways to contribute that are not code.
 
+### Added
+
+- CI now runs every repo-internal verify gate (ten were missing), a
+  changed-forms detection job that narrows the Rust/Svelte matrices to
+  touched forms on pushes and PRs (full fleet nightly), a weekly cargo-deny
+  advisories sweep over every crate's lockfile, `workflow_dispatch`, npm
+  caching, and Dependabot for Actions, the site, and the E2E harness.
+- `bin/test-vendored-uniformity` — proves the vendored theme catalogues and
+  Lily Svelte helpers are byte-identical across all 355 forms (the
+  CI-checkable half of the checkout-reading sync tools' invariant).
+
 ### Changed
 
+- The fleet `deny.toml` policy tracks the loco-rs 1.1 dependency tree:
+  RUSTSEC-2023-0071 (rsa Marvin attack, no fixed release; unreachable here —
+  JWT auth is HMAC HS256) ignored with the reasoning stated, and the four
+  stale 0.16-era ignores dropped.
 - Every Loco crate bumped loco-rs 1.0.1 → 1.1.0 and uuid 1.24 → 1.25,
   lockfiles refreshed; fleet-verified with `cargo check --all-targets` on all
   355 crates (355/355 PASS) before committing.

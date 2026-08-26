@@ -631,23 +631,37 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       355/355 structural PASS in 33 s, exit 0, 355 honest notices —
       instead of dying at the first crate on `PoolTimedOut`.
 
-## Phase 9 — R1 CI completeness + efficiency
+## Phase 9 — R1 CI completeness + efficiency ✅ COMPLETE (2026-08-26)
 
-- [ ] Add to the CI drift job: `es-modules-refactor --check --all`,
-      `page-header-layout-refactor --check`, `html-helpers-picker-rename
-      --check`, `svelte-helpers-picker-rename --check`, both
-      `*-date-time-picker-vendor --check`, `svelte-kit-3-theme-url-fix.py
-      --check`, `loco-migration-defaults --check --all`,
-      `loco-migration-nullability --check --all`, `loco-rs-1-migration
-      --check --all`, `generate-loco-deny-config.py --check`.
-- [ ] Checkout-dependent gates in CI: clone the pinned Lily commit in the
-      job (or add a vendored-snapshot comparison mode) so
-      `svelte-theme-css-sync` + `html-theme-locale-select-refactor` can gate.
-- [ ] Per-PR changed-forms shard filtering for the Rust + Svelte matrices
-      (full fleet on `main` + nightly); pnpm store caching in svelte shards.
-- [ ] Scheduled (weekly) `cargo deny --all-features check` advisories job —
-      one currency signal for 355 identical dependency sets.
-- [ ] `dependabot.yml` for GitHub Actions + the `formexamples.github.io` site.
+- [x] **Drift job completeness (2026-08-26):** the ten repo-internal gates
+      wired in (`416312a75`). `svelte-helpers-picker-rename` and
+      `svelte-date-time-picker-vendor` turned out to read the local Lily
+      checkout too, so all four checkout-readers stay maintainer-side with
+      an in-YAML comment (same treatment as the lily-sync pair).
+- [x] **Checkout-dependent gates (2026-08-26):** solved with a
+      vendored-uniformity gate instead of cloning upstream in CI: new
+      `bin/test-vendored-uniformity` proves both theme catalogues (4
+      deliberate collision exemptions) and the five Svelte helper
+      components + `locales.ts` are byte-identical across all 355 forms.
+      Upstream currency remains the maintainer-run half, guarded by
+      `bin/lib/lily_pin.py`.
+- [x] **Changed-forms sharding (2026-08-26):** new `changes` job diffs the
+      push/PR base and narrows the Rust + Svelte shard loops to touched
+      forms; cross-cutting paths, unusable bases, `workflow_dispatch`, and
+      the nightly schedule run the full fleet (so filtering narrows
+      coverage by at most one day). npm dependency caching added to the
+      svelte shards; `workflow_dispatch` trigger added.
+- [x] **Weekly advisories job (2026-08-26):** Mondays 05:17 UTC, cargo-deny
+      advisories over every crate's committed lockfile (no compilation);
+      the other jobs are excluded from that cron. It caught a live finding
+      before ever running: loco-rs 1.1's jsonwebtoken pulls rsa 0.9.10
+      (RUSTSEC-2023-0071, no fixed release). deny.toml policy updated with
+      the reachability argument (HS256 HMAC auth; no RSA algorithm
+      configured), four stale 0.16-era ignores dropped, 355 regenerated,
+      full `cargo deny` green on sampled crates.
+- [x] **dependabot.yml (2026-08-26):** GitHub Actions + the site + the E2E
+      harness, weekly; the 355-crate fleet deliberately excluded (lockstep
+      sweeps, not 355 bump PRs — reasoning recorded in the file).
 
 ## Phase 10 — R2 professionalization
 
