@@ -1,0 +1,350 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeCompleteness",
+  "note": "Realistic filled-in states in the engine's FLAT clerking-record shape (the wizard's flatten() output — the graders consume the flat record). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. gradeCompleteness is the completeness oracle; the separate detectFlaggedIssues engine (abnormal vitals, red-flag-no-plan) is exercised by the app, not this file.",
+  "personas": [
+    {
+      "name": "complete-cap-clerking",
+      "description": "Full ten-component admission clerking for community-acquired pneumonia with normal-range observations bar a mild temperature — expect complete / 100%.",
+      "state": {
+        "clinicianName": "Dr Anna Kowalczyk",
+        "clinicianRole": "doctor",
+        "registrationNumber": "7654321",
+        "clerkedAt": "2026-08-26T21:15",
+        "careSetting": "acute-medical-unit",
+        "admissionSource": "emergency-department",
+        "patientIdentifier": "MRN0071822",
+        "ageBand": "adult-65-plus",
+        "sex": "male",
+        "presentingComplaint": "Productive cough and fever for four days",
+        "historyOfPresentingComplaint": "Gradual onset; rusty sputum; breathless on stairs; no chest pain or haemoptysis.",
+        "pastMedicalSurgicalHistory": "Hypertension; appendicectomy 1985",
+        "drugHistory": "Amlodipine 5 mg od",
+        "allergyStatus": "no-known-allergies",
+        "allergyDetail": "",
+        "familyHistory": "Father: IHD",
+        "socialHistory": "Ex-smoker 20 pack-years, lives with wife, independent ADLs",
+        "systemsReview": "No urinary or GI symptoms; no weight loss",
+        "temperature": 37.8,
+        "heartRate": 88,
+        "respiratoryRate": 20,
+        "systolicBloodPressure": 132,
+        "oxygenSaturation": 96,
+        "consciousnessLevel": "alert",
+        "examCardiovascular": "HS I+II+0, no oedema",
+        "examRespiratory": "Right basal crackles, dull to percussion",
+        "examAbdominal": "Soft, non-tender",
+        "examNeurological": "Grossly intact",
+        "examOther": "",
+        "investigations": "CXR: right lower lobe consolidation; CRP 180",
+        "impression": "Community-acquired pneumonia, CURB-65 1",
+        "redFlagFindings": "",
+        "managementPlan": "Oral amoxicillin, ward-based care, repeat CRP 48 h",
+        "clinicalNote": "Full clerking completed on admission."
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "satisfiedComponents": [
+          "presenting-complaint",
+          "history-of-presenting-complaint",
+          "past-medical-surgical-history",
+          "drug-history-and-allergies",
+          "social-history",
+          "systems-review",
+          "vital-signs",
+          "core-examination",
+          "impression",
+          "management-plan"
+        ],
+        "missingComponents": [],
+        "firedRules": [
+          {
+            "id": "R-COMPONENT-PRESENTING-COMPLAINT-01",
+            "component": "presenting-complaint",
+            "section": "history",
+            "category": "required-component",
+            "description": "Presenting complaint documented"
+          },
+          {
+            "id": "R-COMPONENT-HISTORY-OF-PRESENTING-COMPLAINT-01",
+            "component": "history-of-presenting-complaint",
+            "section": "history",
+            "category": "required-component",
+            "description": "History of the presenting complaint documented"
+          },
+          {
+            "id": "R-COMPONENT-PAST-MEDICAL-SURGICAL-HISTORY-01",
+            "component": "past-medical-surgical-history",
+            "section": "history",
+            "category": "required-component",
+            "description": "Past medical and surgical history documented (or explicit \"nil\")"
+          },
+          {
+            "id": "R-COMPONENT-DRUG-HISTORY-AND-ALLERGIES-01",
+            "component": "drug-history-and-allergies",
+            "section": "history",
+            "category": "required-component",
+            "description": "Drug history documented and allergy status explicitly recorded"
+          },
+          {
+            "id": "R-COMPONENT-SOCIAL-HISTORY-01",
+            "component": "social-history",
+            "section": "history",
+            "category": "required-component",
+            "description": "Social history documented"
+          },
+          {
+            "id": "R-COMPONENT-SYSTEMS-REVIEW-01",
+            "component": "systems-review",
+            "section": "history",
+            "category": "required-component",
+            "description": "Systems review documented"
+          },
+          {
+            "id": "R-COMPONENT-VITAL-SIGNS-01",
+            "component": "vital-signs",
+            "section": "vitals",
+            "category": "required-component",
+            "description": "At least one vital sign recorded"
+          },
+          {
+            "id": "R-COMPONENT-CORE-EXAMINATION-01",
+            "component": "core-examination",
+            "section": "examination",
+            "category": "required-component",
+            "description": "All four core systems examined or explicitly deferred"
+          },
+          {
+            "id": "R-COMPONENT-IMPRESSION-01",
+            "component": "impression",
+            "section": "impression",
+            "category": "required-component",
+            "description": "Working impression / problem list documented"
+          },
+          {
+            "id": "R-COMPONENT-MANAGEMENT-PLAN-01",
+            "component": "management-plan",
+            "section": "plan",
+            "category": "required-component",
+            "description": "Management plan documented"
+          },
+          {
+            "id": "R-COMPLETENESS-STATUS-01",
+            "component": "completeness-status",
+            "section": "completeness",
+            "category": "derived-status",
+            "description": "Status complete — 10 of 10 required components documented (100%)"
+          }
+        ],
+        "blocking": false
+      }
+    },
+    {
+      "name": "thunderclap-headache-red-flags",
+      "description": "Focused but thorough clerking for a thunderclap headache: red flags documented WITH a management plan and systolic 165 recorded — expect partial (family/social history and systems review not yet taken).",
+      "state": {
+        "clinicianName": "Dr Anna Kowalczyk",
+        "clinicianRole": "doctor",
+        "registrationNumber": "7654321",
+        "clerkedAt": "2026-08-26T21:15",
+        "careSetting": "acute-medical-unit",
+        "admissionSource": "emergency-department",
+        "patientIdentifier": "MRN0092080",
+        "ageBand": "adult-18-64",
+        "sex": "female",
+        "presentingComplaint": "Sudden severe headache at 18:00",
+        "historyOfPresentingComplaint": "Thunderclap onset during exercise, worst headache of life, vomited twice, photophobia.",
+        "pastMedicalSurgicalHistory": "",
+        "drugHistory": "Combined oral contraceptive",
+        "allergyStatus": "no-known-allergies",
+        "allergyDetail": "",
+        "familyHistory": "",
+        "socialHistory": "",
+        "systemsReview": "",
+        "temperature": 36.9,
+        "heartRate": 96,
+        "respiratoryRate": 18,
+        "systolicBloodPressure": 165,
+        "oxygenSaturation": 98,
+        "consciousnessLevel": "alert",
+        "examCardiovascular": "Normal",
+        "examRespiratory": "Clear",
+        "examAbdominal": "Soft",
+        "examNeurological": "No focal deficit; mild neck stiffness; fundi normal",
+        "examOther": "",
+        "investigations": "CT head requested",
+        "impression": "Thunderclap headache — subarachnoid haemorrhage until excluded",
+        "redFlagFindings": "Thunderclap onset, neck stiffness, hypertension",
+        "managementPlan": "Urgent CT head; LP at 12 h if CT negative; analgesia and antiemetic; neuro obs hourly",
+        "clinicalNote": ""
+      },
+      "expected": {
+        "status": "partial",
+        "completenessPercent": 70,
+        "satisfiedComponents": [
+          "presenting-complaint",
+          "history-of-presenting-complaint",
+          "drug-history-and-allergies",
+          "vital-signs",
+          "core-examination",
+          "impression",
+          "management-plan"
+        ],
+        "missingComponents": [
+          "past-medical-surgical-history",
+          "social-history",
+          "systems-review"
+        ],
+        "firedRules": [
+          {
+            "id": "R-COMPONENT-PRESENTING-COMPLAINT-01",
+            "component": "presenting-complaint",
+            "section": "history",
+            "category": "required-component",
+            "description": "Presenting complaint documented"
+          },
+          {
+            "id": "R-COMPONENT-HISTORY-OF-PRESENTING-COMPLAINT-01",
+            "component": "history-of-presenting-complaint",
+            "section": "history",
+            "category": "required-component",
+            "description": "History of the presenting complaint documented"
+          },
+          {
+            "id": "R-COMPONENT-DRUG-HISTORY-AND-ALLERGIES-01",
+            "component": "drug-history-and-allergies",
+            "section": "history",
+            "category": "required-component",
+            "description": "Drug history documented and allergy status explicitly recorded"
+          },
+          {
+            "id": "R-COMPONENT-VITAL-SIGNS-01",
+            "component": "vital-signs",
+            "section": "vitals",
+            "category": "required-component",
+            "description": "At least one vital sign recorded"
+          },
+          {
+            "id": "R-COMPONENT-CORE-EXAMINATION-01",
+            "component": "core-examination",
+            "section": "examination",
+            "category": "required-component",
+            "description": "All four core systems examined or explicitly deferred"
+          },
+          {
+            "id": "R-COMPONENT-IMPRESSION-01",
+            "component": "impression",
+            "section": "impression",
+            "category": "required-component",
+            "description": "Working impression / problem list documented"
+          },
+          {
+            "id": "R-COMPONENT-MANAGEMENT-PLAN-01",
+            "component": "management-plan",
+            "section": "plan",
+            "category": "required-component",
+            "description": "Management plan documented"
+          },
+          {
+            "id": "R-COMPLETENESS-STATUS-01",
+            "component": "completeness-status",
+            "section": "completeness",
+            "category": "derived-status",
+            "description": "Status partial — 7 of 10 required components documented (70%)"
+          }
+        ],
+        "blocking": false
+      }
+    },
+    {
+      "name": "stalled-night-clerking-no-allergy",
+      "description": "04:05 clerking of an unwitnessed fall stalled before allergies, impression, or plan were recorded, with hypothermia, tachycardia, and reduced consciousness — expect incomplete via both blocking rules (allergies undocumented, no impression-or-plan).",
+      "state": {
+        "clinicianName": "Dr Anna Kowalczyk",
+        "clinicianRole": "doctor",
+        "registrationNumber": "7654321",
+        "clerkedAt": "2026-08-26T04:05",
+        "careSetting": "acute-medical-unit",
+        "admissionSource": "emergency-department",
+        "patientIdentifier": "MRN0092085",
+        "ageBand": "adult-65-plus",
+        "sex": "female",
+        "presentingComplaint": "Found on floor by carer",
+        "historyOfPresentingComplaint": "Unwitnessed fall; unable to give further history; carer unavailable for collateral.",
+        "pastMedicalSurgicalHistory": "",
+        "drugHistory": "",
+        "allergyStatus": "",
+        "allergyDetail": "",
+        "familyHistory": "",
+        "socialHistory": "",
+        "systemsReview": "",
+        "temperature": 35.9,
+        "heartRate": 102,
+        "respiratoryRate": 22,
+        "systolicBloodPressure": 108,
+        "oxygenSaturation": 94,
+        "consciousnessLevel": "voice",
+        "examCardiovascular": "Cool peripheries",
+        "examRespiratory": "Reduced air entry left base",
+        "examAbdominal": "",
+        "examNeurological": "",
+        "examOther": "",
+        "investigations": "Bloods sent; awaiting",
+        "impression": "",
+        "redFlagFindings": "",
+        "managementPlan": "",
+        "clinicalNote": ""
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 30,
+        "satisfiedComponents": [
+          "presenting-complaint",
+          "history-of-presenting-complaint",
+          "vital-signs"
+        ],
+        "missingComponents": [
+          "past-medical-surgical-history",
+          "drug-history-and-allergies",
+          "social-history",
+          "systems-review",
+          "core-examination",
+          "impression",
+          "management-plan"
+        ],
+        "firedRules": [
+          {
+            "id": "R-COMPONENT-PRESENTING-COMPLAINT-01",
+            "component": "presenting-complaint",
+            "section": "history",
+            "category": "required-component",
+            "description": "Presenting complaint documented"
+          },
+          {
+            "id": "R-COMPONENT-HISTORY-OF-PRESENTING-COMPLAINT-01",
+            "component": "history-of-presenting-complaint",
+            "section": "history",
+            "category": "required-component",
+            "description": "History of the presenting complaint documented"
+          },
+          {
+            "id": "R-COMPONENT-VITAL-SIGNS-01",
+            "component": "vital-signs",
+            "section": "vitals",
+            "category": "required-component",
+            "description": "At least one vital sign recorded"
+          },
+          {
+            "id": "R-COMPLETENESS-STATUS-01",
+            "component": "completeness-status",
+            "section": "completeness",
+            "category": "derived-status",
+            "description": "Status incomplete — 3 of 10 required components documented (30%); a blocking flag forced incomplete"
+          }
+        ],
+        "blocking": true
+      }
+    }
+  ]
+}

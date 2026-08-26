@@ -49,6 +49,12 @@ notes from `[Unreleased]`, and every section after it will carry a version.
 - `bin/test-vendored-uniformity` — proves the vendored theme catalogues and
   Lily Svelte helpers are byte-identical across all 355 forms (the
   CI-checkable half of the checkout-reading sync tools' invariant).
+- Personas for `general-practitioner-referral-letter` (routine complete at
+  10/10 mandatory; an NG12 two-week-wait whose conditional fields grow the
+  mandatory set to 13/13; an urgent referral missing its urgency reason)
+  and `history-and-physical-examination` (complete CAP clerking; a partial
+  thunderclap-headache clerking with red flags and a plan; a stalled 04:05
+  clerking held incomplete by both blocking rules).
 - Personas for `medical-error-report` (wrong-patient near miss at low risk;
   a three-day anticoagulant overdose at moderate with candour completed; an
   ABO-incompatible transfusion at critical with candour outstanding) and
@@ -82,7 +88,7 @@ notes from `[Unreleased]`, and every section after it will carry a version.
   escalation on the request; no-abnormality, HFrEF (EF 32%), and an
   uncommunicated critical aortic-stenosis result on the response.
 - Personas for the entire `*-waiting-list-card` family (56 forms; fleet
-  total 109 → 177 verified): three clinically coherent RTT scenarios each —
+  total 109 → 179 verified): three clinically coherent RTT scenarios each —
   routine P4 within target, urgent P2 approaching target with an interpreter
   flag, and a P3 52-week long-wait breach with harm-review and
   missing-appointment flags. `bin/test-personas` gained an optional

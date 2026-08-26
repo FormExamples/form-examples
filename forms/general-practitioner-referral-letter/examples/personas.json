@@ -1,0 +1,446 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeReferral",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-orthopaedic-complete",
+      "description": "Routine knee-OA referral with every mandatory field, consent, and safety-netting present — expect Complete at 100%.",
+      "state": {
+        "referrer": {
+          "referrerName": "Dr Sarah Ellison",
+          "referrerRole": "general-practitioner",
+          "referrerRegistrationNumber": "6543210",
+          "referringPractice": "Riverbank Medical Practice",
+          "practiceAddress": "2 River St, Leeds LS1 3AA",
+          "referrerContact": "0113 496 0341",
+          "referralDate": "2026-08-26"
+        },
+        "patient": {
+          "patientIdentifier": "943 476 5932",
+          "patientName": "Brian Holloway",
+          "patientDateOfBirth": "1959-07-21",
+          "patientSex": "male",
+          "patientAddress": "5 Cedar Rd, Leeds LS2 8QT",
+          "patientContact": "07700 900789",
+          "accessNeeds": ""
+        },
+        "destination": {
+          "referralSpecialty": "orthopaedics",
+          "namedClinician": "",
+          "receivingOrganisation": "City General Hospital"
+        },
+        "urgencyInfo": {
+          "urgency": "routine",
+          "urgencyReason": "",
+          "suspectedCancerCriterion": "",
+          "suspectedCancerPathway": ""
+        },
+        "clinical": {
+          "reasonForReferral": "Progressive right knee osteoarthritis limiting walking distance despite conservative management",
+          "relevantHistory": "Hypertension; BMI 31; physiotherapy completed twice with limited benefit",
+          "presentingProblem": "Right knee pain and stiffness",
+          "symptomDuration": "3 years, worse over 6 months",
+          "redFlagSymptoms": ""
+        },
+        "examination": {
+          "examinationFindings": "Varus deformity, crepitus, flexion limited to 100 degrees",
+          "investigationResults": "Weight-bearing X-ray: Kellgren-Lawrence grade 3 medial compartment OA"
+        },
+        "medications": {
+          "currentMedications": "Amlodipine 5 mg od; paracetamol prn",
+          "allergies": "No known drug allergies"
+        },
+        "expectations": {
+          "patientExpectations": "Wishes to discuss knee replacement",
+          "consentToShare": "yes",
+          "safetyNetting": "Advised to return if locking, giving way, or rest pain develops"
+        },
+        "review": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "status": "Complete",
+        "urgency": "routine",
+        "completenessPercent": 100,
+        "presentCount": 10,
+        "mandatoryCount": 10,
+        "firedRules": [
+          {
+            "id": "R-MANDATORY-PATIENT-IDENTIFIER",
+            "rule": "patientIdentifier",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "A patient identifier (NHS number or local identifier) is recorded"
+          },
+          {
+            "id": "R-MANDATORY-PATIENT-NAME",
+            "rule": "patientName",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The patient’s name is recorded"
+          },
+          {
+            "id": "R-MANDATORY-PATIENT-DOB",
+            "rule": "patientDateOfBirth",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The patient’s date of birth is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRER-NAME",
+            "rule": "referrerName",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referring clinician’s name is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRER-ROLE",
+            "rule": "referrerRole",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referrer’s role is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRING-PRACTICE",
+            "rule": "referringPractice",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referring practice is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRAL-SPECIALTY",
+            "rule": "referralSpecialty",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The specialty or service being referred to is recorded"
+          },
+          {
+            "id": "R-MANDATORY-URGENCY",
+            "rule": "urgency",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "An urgency classification is selected"
+          },
+          {
+            "id": "R-MANDATORY-REASON",
+            "rule": "reasonForReferral",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The reason for the referral is recorded"
+          },
+          {
+            "id": "R-MANDATORY-HISTORY",
+            "rule": "relevantHistory",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "Relevant clinical history is recorded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "two-week-wait-colorectal",
+      "description": "NG12-criteria lower-GI two-week-wait referral: the three urgency-conditional mandatory fields (urgency reason, cancer criterion, pathway) are all present — expect Complete with the suspected-cancer pathway flag.",
+      "state": {
+        "referrer": {
+          "referrerName": "Dr Sarah Ellison",
+          "referrerRole": "general-practitioner",
+          "referrerRegistrationNumber": "6543210",
+          "referringPractice": "Riverbank Medical Practice",
+          "practiceAddress": "2 River St, Leeds LS1 3AA",
+          "referrerContact": "0113 496 0341",
+          "referralDate": "2026-08-26"
+        },
+        "patient": {
+          "patientIdentifier": "943 476 5933",
+          "patientName": "Freda Kessler",
+          "patientDateOfBirth": "1951-02-08",
+          "patientSex": "female",
+          "patientAddress": "5 Cedar Rd, Leeds LS2 8QT",
+          "patientContact": "07700 900789",
+          "accessNeeds": ""
+        },
+        "destination": {
+          "referralSpecialty": "colorectal-surgery",
+          "namedClinician": "",
+          "receivingOrganisation": "City General Hospital"
+        },
+        "urgencyInfo": {
+          "urgency": "two-week-wait",
+          "urgencyReason": "NICE NG12 criteria met: change in bowel habit with rectal bleeding aged over 50",
+          "suspectedCancerCriterion": "Aged >= 50 with rectal bleeding and change in bowel habit for 6 weeks",
+          "suspectedCancerPathway": "lower-gastrointestinal"
+        },
+        "clinical": {
+          "reasonForReferral": "Six weeks of altered bowel habit with intermittent fresh rectal bleeding",
+          "relevantHistory": "No prior colonoscopy; ferritin low at 18",
+          "presentingProblem": "Change in bowel habit, PR bleeding, fatigue",
+          "symptomDuration": "6 weeks",
+          "redFlagSymptoms": "Rectal bleeding, iron-deficiency anaemia, weight loss 3 kg"
+        },
+        "examination": {
+          "examinationFindings": "Abdomen soft; PR: no mass palpable, altered blood on glove",
+          "investigationResults": "FBC: Hb 104; ferritin 18; FIT 87"
+        },
+        "medications": {
+          "currentMedications": "Levothyroxine 75 mcg od",
+          "allergies": "Penicillin (rash)"
+        },
+        "expectations": {
+          "patientExpectations": "Aware of two-week-wait reason and expects hospital contact",
+          "consentToShare": "yes",
+          "safetyNetting": "Advised to attend ED if heavy bleeding or obstruction symptoms"
+        },
+        "review": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "status": "Complete",
+        "urgency": "two-week-wait",
+        "completenessPercent": 100,
+        "presentCount": 13,
+        "mandatoryCount": 13,
+        "firedRules": [
+          {
+            "id": "R-MANDATORY-PATIENT-IDENTIFIER",
+            "rule": "patientIdentifier",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "A patient identifier (NHS number or local identifier) is recorded"
+          },
+          {
+            "id": "R-MANDATORY-PATIENT-NAME",
+            "rule": "patientName",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The patient’s name is recorded"
+          },
+          {
+            "id": "R-MANDATORY-PATIENT-DOB",
+            "rule": "patientDateOfBirth",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The patient’s date of birth is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRER-NAME",
+            "rule": "referrerName",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referring clinician’s name is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRER-ROLE",
+            "rule": "referrerRole",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referrer’s role is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRING-PRACTICE",
+            "rule": "referringPractice",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referring practice is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRAL-SPECIALTY",
+            "rule": "referralSpecialty",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The specialty or service being referred to is recorded"
+          },
+          {
+            "id": "R-MANDATORY-URGENCY",
+            "rule": "urgency",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "An urgency classification is selected"
+          },
+          {
+            "id": "R-MANDATORY-REASON",
+            "rule": "reasonForReferral",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The reason for the referral is recorded"
+          },
+          {
+            "id": "R-MANDATORY-HISTORY",
+            "rule": "relevantHistory",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "Relevant clinical history is recorded"
+          },
+          {
+            "id": "R-MANDATORY-URGENCY-REASON",
+            "rule": "urgencyReason",
+            "satisfied": true,
+            "category": "conditional-requirement",
+            "description": "A reason for the urgency is recorded (required for urgent and two-week-wait)"
+          },
+          {
+            "id": "R-MANDATORY-SUSPECTED-CANCER-CRITERION",
+            "rule": "suspectedCancerCriterion",
+            "satisfied": true,
+            "category": "conditional-requirement",
+            "description": "A named NICE NG12 suspected-cancer criterion is recorded (required for two-week-wait)"
+          },
+          {
+            "id": "R-MANDATORY-SUSPECTED-CANCER-PATHWAY",
+            "rule": "suspectedCancerPathway",
+            "satisfied": true,
+            "category": "conditional-requirement",
+            "description": "A tumour-site suspected-cancer pathway is recorded (required for two-week-wait)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "urgent-dysphagia-missing-reason",
+      "description": "Urgent dysphagia referral dashed off without the urgency reason, relevant history, allergies, or consent — expect Incomplete with the mandatory- and urgency-information flags.",
+      "state": {
+        "referrer": {
+          "referrerName": "Dr Sarah Ellison",
+          "referrerRole": "general-practitioner",
+          "referrerRegistrationNumber": "6543210",
+          "referringPractice": "Riverbank Medical Practice",
+          "practiceAddress": "2 River St, Leeds LS1 3AA",
+          "referrerContact": "0113 496 0341",
+          "referralDate": "2026-08-26"
+        },
+        "patient": {
+          "patientIdentifier": "943 476 5934",
+          "patientName": "Marcus Webb",
+          "patientDateOfBirth": "1988-05-30",
+          "patientSex": "male",
+          "patientAddress": "5 Cedar Rd, Leeds LS2 8QT",
+          "patientContact": "07700 900789",
+          "accessNeeds": ""
+        },
+        "destination": {
+          "referralSpecialty": "gastroenterology",
+          "namedClinician": "",
+          "receivingOrganisation": ""
+        },
+        "urgencyInfo": {
+          "urgency": "urgent",
+          "urgencyReason": "",
+          "suspectedCancerCriterion": "",
+          "suspectedCancerPathway": ""
+        },
+        "clinical": {
+          "reasonForReferral": "Dysphagia to solids for three weeks",
+          "relevantHistory": "",
+          "presentingProblem": "Progressive dysphagia",
+          "symptomDuration": "3 weeks",
+          "redFlagSymptoms": "Dysphagia"
+        },
+        "examination": {
+          "examinationFindings": "",
+          "investigationResults": ""
+        },
+        "medications": {
+          "currentMedications": "",
+          "allergies": ""
+        },
+        "expectations": {
+          "patientExpectations": "",
+          "consentToShare": "",
+          "safetyNetting": ""
+        },
+        "review": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "status": "Incomplete",
+        "urgency": "urgent",
+        "completenessPercent": 82,
+        "presentCount": 9,
+        "mandatoryCount": 11,
+        "firedRules": [
+          {
+            "id": "R-MANDATORY-PATIENT-IDENTIFIER",
+            "rule": "patientIdentifier",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "A patient identifier (NHS number or local identifier) is recorded"
+          },
+          {
+            "id": "R-MANDATORY-PATIENT-NAME",
+            "rule": "patientName",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The patient’s name is recorded"
+          },
+          {
+            "id": "R-MANDATORY-PATIENT-DOB",
+            "rule": "patientDateOfBirth",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The patient’s date of birth is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRER-NAME",
+            "rule": "referrerName",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referring clinician’s name is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRER-ROLE",
+            "rule": "referrerRole",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referrer’s role is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRING-PRACTICE",
+            "rule": "referringPractice",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The referring practice is recorded"
+          },
+          {
+            "id": "R-MANDATORY-REFERRAL-SPECIALTY",
+            "rule": "referralSpecialty",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The specialty or service being referred to is recorded"
+          },
+          {
+            "id": "R-MANDATORY-URGENCY",
+            "rule": "urgency",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "An urgency classification is selected"
+          },
+          {
+            "id": "R-MANDATORY-REASON",
+            "rule": "reasonForReferral",
+            "satisfied": true,
+            "category": "mandatory-field",
+            "description": "The reason for the referral is recorded"
+          },
+          {
+            "id": "R-MANDATORY-HISTORY",
+            "rule": "relevantHistory",
+            "satisfied": false,
+            "category": "mandatory-field",
+            "description": "Relevant clinical history is recorded"
+          },
+          {
+            "id": "R-MANDATORY-URGENCY-REASON",
+            "rule": "urgencyReason",
+            "satisfied": false,
+            "category": "conditional-requirement",
+            "description": "A reason for the urgency is recorded (required for urgent and two-week-wait)"
+          }
+        ]
+      }
+    }
+  ]
+}
