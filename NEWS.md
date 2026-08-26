@@ -9,6 +9,17 @@ per-form record, each `forms/<slug>/CHANGELOG.md`.
 
 ## Latest
 
+### 2026-08-26 — v1.0.0, the first tagged release
+
+The repository cut its first release. v1.0.0 marks the point where the
+355-form fleet is uniformly built, every verify gate is green and
+CI-enforced, the public-repo document set is complete, and the release
+process itself is written down (GOVERNANCE.md). The version number is a
+statement about the *repository-level* surface — the conventions, the
+toolchain contracts, the per-form layout; individual forms keep their own
+CHANGELOGs and versions. Release notes: the `[1.0.0]` section of
+[CHANGELOG.md](CHANGELOG.md).
+
 ### 2026-08 — Repository documentation set completed
 
 The repository gained the full set of public-repository documents: an

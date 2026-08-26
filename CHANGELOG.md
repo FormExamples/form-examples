@@ -10,13 +10,18 @@ rollouts. Each form additionally carries its own `forms/<slug>/CHANGELOG.md`
 under the same format, versioned independently, for changes to that form's
 schema, engine, and front-ends.
 
-**No versioned release has been cut yet.** The repository has never been tagged
-for release, so this file has no version headings before `[Unreleased]`; the
-historical sections below are dated milestones reconstructed from git history,
-which remains the authoritative record. The first tagged release will draw its
-notes from `[Unreleased]`, and every section after it will carry a version.
+Sections before `[1.0.0]`'s date are dated milestones reconstructed from git
+history (no release existed yet); git history remains the authoritative record
+for them.
 
 ## [Unreleased]
+
+_Nothing yet._
+
+## [1.0.0] - 2026-08-26
+
+First tagged release. Everything below happened before any release existed;
+this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 
 ### Added
 
@@ -103,6 +108,22 @@ notes from `[Unreleased]`, and every section after it will carry a version.
   factor one) and a 5-step release runbook; repo topics set from NEWS.md's
   fact sheet.
 
+### Merged
+
+- The `glp1-frailty-perioperative-management` branch: GLP-1 receptor-agonist
+  perioperative management (hold-per-guideline, gastric POCUS, full-stomach
+  precautions, `F-GLP1-ASPIRATION-RISK`) and expanded Fried-frailty fields
+  for `perioperative-optimization` and
+  `pre-operative-assessment-by-clinician` — SQL through representations,
+  both front-ends, Loco migrations, and the engines. Merged with the
+  post-fork conventions applied (SvelteKit 3 `#lib` alias, `.js` import
+  extensions, prettier); all gates and builds green; personas extended and
+  re-verified.
+- The `oxford-spelling-repo-wide-sweep` branch, by re-application rather
+  than merge: the branch's 237-word `-ise` → `-ize` mapping was extracted
+  from its diff and re-applied to current prose (1,656 files), protecting
+  code spans and the spec's keep-list.
+
 ### Changed
 
 - The fleet `deny.toml` policy tracks the loco-rs 1.1 dependency tree:
@@ -118,6 +139,9 @@ notes from `[Unreleased]`, and every section after it will carry a version.
 
 ### Fixed
 
+- The formexamples.com Pages deploy: `package-lock.json` regenerated after
+  the Svelte/Vite bump left it inconsistent (npm ci refused); the first
+  Dependabot cycle's ten bumps applied (site packages + workflow actions).
 - The headless engine oracle, broken fleet-wide since the 2026-07 ES-modules
   conversion: `bin/lib/engine-loader.js` now loads ES-module engines with real
   dynamic `import()` (temp dir + `{"type":"module"}`, merged exports; classic

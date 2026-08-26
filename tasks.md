@@ -677,10 +677,12 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       at bus factor one — the honest control is the gates) and a 5-step
       release runbook. GitHub topics set from the fact sheet (14 topics,
       via gh); description left as the maintainer's wording.
-- [ ] **Maintainer decision — first release:** everything is staged (green
-      gates, populated `[Unreleased]`, runbook in GOVERNANCE.md §Releases).
-      Recommendation: `v1.0.0`. The tag itself is the maintainer's act
-      (GOVERNANCE.md; AI_STATEMENT.md §5 release-decisions: none).
+- [x] **First release (2026-08-26):** the maintainer directed
+      "commit, merge, push, publish" — v1.0.0 tagged per the GOVERNANCE.md
+      runbook: CHANGELOG `[Unreleased]` cut to `[1.0.0]`, NEWS.md updated,
+      annotated tag pushed to all three remotes, GitHub release created
+      with the changelog section as notes. AI_STATEMENT.md reviewed —
+      issued the same day, no changes needed.
 - [ ] **Maintainer decision — Zenodo DOI** for `CITATION.cff` (link the
       GitHub repo to Zenodo before the first release so the release mints
       the DOI; then add the DOI to CITATION.cff and NEWS.md).
