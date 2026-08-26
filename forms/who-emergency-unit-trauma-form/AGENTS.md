@@ -1,11 +1,11 @@
 # WHO Emergency Unit Form: Trauma
 
-World Health Organization standardised emergency unit clinical documentation form for trauma patients.
+World Health Organization standardized emergency unit clinical documentation form for trauma patients.
 
 ## Source
 
 - **Form**: Emergency Unit Form: Trauma
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/trauma-scf.pdf?sfvrsn=ece887a4_1>
 - **Reference Card**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/trauma-scf-ref-card.pdf?sfvrsn=dc803c3e_1>
 - **Pages**: 2

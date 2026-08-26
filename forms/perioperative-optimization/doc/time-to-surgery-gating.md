@@ -51,7 +51,7 @@ The form's job is to make the team say which one, and to record it. Step 16's
 gate decision includes `accept-unoptimised-risk` for precisely this purpose, and
 selecting it requires the override reason. Softening `insufficient-time` into a
 warning would let the third, unsafe path happen by default: proceeding while
-believing the patient was optimised.
+believing the patient was optimized.
 
 ## Worked examples
 
@@ -66,7 +66,7 @@ Assessment 2026-09-01, surgery 2026-12-01. `weeksToSurgery = 13`.
 | smoking | current smoker | 4 | `action-required` |
 | others | none | — | `optimised` / `not-applicable` |
 
-Readiness: **optimisation-required**. Every intervention fits. The plan starts
+Readiness: **optimization-required**. Every intervention fits. The plan starts
 today and the list stands.
 
 ### B — the anaemia will not make it
@@ -92,7 +92,7 @@ Assessment 2026-09-01, surgery 2026-11-10. `weeksToSurgery = 10`.
 | anaemia | Hb 119 g/L | IV iron given | 4 | `in-progress` |
 | smoking | current smoker | cessation accepted | 4 | `in-progress` |
 
-Readiness: **optimisation-in-progress**. Nothing to start; the plan continues to
+Readiness: **optimization-in-progress**. Nothing to start; the plan continues to
 the date.
 
 ### D — no date yet

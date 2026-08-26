@@ -48,7 +48,7 @@ discuss:
 - **Mood switch risk** in patients with bipolar diathesis (rare but
   documented).
 - **Ophthalmological screening** if pre-existing retinal disease,
-  diabetes mellitus, photosensitising medications (e.g. lithium,
+  diabetes mellitus, photosensitizing medications (e.g. lithium,
   amiodarone, certain antibiotics, isotretinoin, St John's wort).
 - **Eye strain, headache** — common, usually mild and self-limiting.
 - **Skin photosensitivity** — usually not relevant for visible-light

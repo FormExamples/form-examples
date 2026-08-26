@@ -21,7 +21,7 @@ Admin/staff enters practice-specific values that populate placeholders in the no
 | Practice address | text | yes |
 | DPO name | text | yes |
 | DPO contact details | text | yes |
-| Research organisations | text | no |
+| Research organizations | text | no |
 | Data sharing partners | text | no |
 
 ### Step 2: Privacy Notice

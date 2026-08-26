@@ -2,8 +2,8 @@
 
 UK primary-care structured annual review for adults with established chronic
 heart failure. Collects functional status, fluid balance, monitoring bloods, and
-medication optimisation via a single continuous single-page wizard, then derives
-an **NYHA functional status**, a **medication-optimisation status** against the
+medication optimization via a single continuous single-page wizard, then derives
+an **NYHA functional status**, a **medication-optimization status** against the
 four pillars of guideline-directed medical therapy (ACEi/ARB/ARNI, beta-blocker,
 MRA, SGLT2 inhibitor), a **review-completeness grade**, and a set of safety
 flags. It is a documentation and status-classification form — it does not
@@ -62,13 +62,13 @@ See [`index.md`](./index.md) for the full design and the section table, and
 - **Engine files:** `types.ts`, `utils.ts`, `review-rules.ts`,
   `review-grader.ts`, `flagged-issues.ts`.
 - **Tests:** `review-grader.test.ts`, `review-rules.test.ts` — cover each NYHA
-  class, each `heartFailureType`, the optimisation-status transitions, the
+  class, each `heartFailureType`, the optimization-status transitions, the
   potassium (5.5 / 3.5) and eGFR (30) thresholds, and each completeness band.
 
 ## Flagged issues
 
 Computed independently of the grades (see spec §5): urgent review
-(`nyhaClass >= 3` or decompensation, high), optimisation gap (indicated pillar
+(`nyhaClass >= 3` or decompensation, high), optimization gap (indicated pillar
 `not-prescribed` without contraindication; high for HFrEF with ≥ 2 missing),
 hyperkalaemia (`potassium > 5.5`, high), hypokalaemia (`potassium < 3.5`,
 medium), renal impairment (`egfr < 30`, high), fluid overload (weight gain

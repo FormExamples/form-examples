@@ -1,6 +1,6 @@
 # Regulatory Framework
 
-The Medical Records Release Permission form authorises the disclosure of a
+The Medical Records Release Permission form authorizes the disclosure of a
 patient's medical records to a named third party. The form operates at the
 intersection of UK GDPR data-protection law, the common-law duty of
 confidentiality, and (in US contexts) the HIPAA Privacy Rule.
@@ -24,11 +24,11 @@ confidentiality, and (in US contexts) the HIPAA Privacy Rule.
 - UK GDPR Article 6(1)(a) — explicit consent of the data subject.
 - UK GDPR Article 9(2)(a) — explicit consent for special-category data.
 
-The form's signed authorisation captures this consent and forms the
+The form's signed authorization captures this consent and forms the
 controller's evidence of compliance with Article 7 (conditions for
 consent) and ICO consent guidance:
 
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
 
 ### Subject access vs. third-party release
 
@@ -38,7 +38,7 @@ their own records and then forward them to a third party. The form is the
 as intermediary.
 
 ICO subject-access guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
 
 ### Confidentiality framework
 
@@ -51,8 +51,8 @@ ICO subject-access guidance:
 ## US / HIPAA framework
 
 Where the controller is a HIPAA covered entity or business associate, the
-release authorisation must comply with the HIPAA Privacy Rule's
-authorisation requirements:
+release authorization must comply with the HIPAA Privacy Rule's
+authorization requirements:
 
 - 45 CFR § 164.508 — Uses and disclosures for which an authorization is
   required —
@@ -63,7 +63,7 @@ authorisation requirements:
   <https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/index.html>
 
 The 45 CFR § 164.508 "core elements" required for a valid HIPAA
-authorisation are reflected in the form's wizard steps.
+authorization are reflected in the form's wizard steps.
 
 ## Required elements (cross-jurisdictional)
 
@@ -72,14 +72,14 @@ HIPAA § 164.508:
 
 | Element | UK GDPR hook | HIPAA hook |
 | --- | --- | --- |
-| Specific identification of the data subject | Art. 7(1), 13(1)(a) | § 164.508(c)(1)(i) description of who is authorised |
+| Specific identification of the data subject | Art. 7(1), 13(1)(a) | § 164.508(c)(1)(i) description of who is authorized |
 | Description of the records to be released | Art. 7(2) specific | § 164.508(c)(1)(i) specific & meaningful description |
 | Identity of the recipient | Art. 13(1)(e) | § 164.508(c)(1)(iii) |
 | Purpose of release | Art. 7(2), 13(1)(c) | § 164.508(c)(1)(iv) |
 | Expiration date or event | Art. 7(3) withdrawal | § 164.508(c)(1)(v) |
 | Signature of the patient and date | Art. 7(1) | § 164.508(c)(1)(vi) |
 | Right to revoke | Art. 7(3) | § 164.508(c)(2)(i) |
-| Statement that treatment cannot be conditioned on the authorisation | n/a | § 164.508(c)(2)(ii) |
+| Statement that treatment cannot be conditioned on the authorization | n/a | § 164.508(c)(2)(ii) |
 | Statement that re-disclosure may no longer be protected | n/a | § 164.508(c)(2)(iii) |
 
 ## Special situations
@@ -97,14 +97,14 @@ authority on which they apply.
 US federal and state law impose additional safeguards on:
 
 - Mental health records and psychotherapy notes — 45 CFR § 164.508(a)(2)
-  separate authorisation.
-- Substance-use disorder records — 42 CFR Part 2 separate authorisation:
+  separate authorization.
+- Substance-use disorder records — 42 CFR Part 2 separate authorization:
   <https://www.ecfr.gov/current/title-42/chapter-I/subchapter-A/part-2>
 - HIV / AIDS, genetic test results, sexually-transmitted infection records
   — state-specific.
 
 The form supports a "sensitive categories" block where the patient
-explicitly authorises (or excludes) each sensitive category.
+explicitly authorizes (or excludes) each sensitive category.
 
 ## Software classification
 

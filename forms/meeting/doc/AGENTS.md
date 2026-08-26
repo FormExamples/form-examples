@@ -24,7 +24,7 @@ human-authored prose; no generator writes here.
 
 ## Conventions
 
-- British English spelling (organiser, behaviour, optimise).
+- British English spelling (organizer, behaviour, optimize).
 - Markdown, no HTML.
 - Reference URLs are bare angle-bracket links: `<https://...>`.
 - Tables use GitHub-flavoured pipe syntax with a separator row.

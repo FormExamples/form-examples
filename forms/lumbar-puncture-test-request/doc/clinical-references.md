@@ -16,7 +16,7 @@ usually-appropriate when the clinical question is well-formed.
 
 | Concern | Threshold / rule | Band impact |
 | --- | --- | --- |
-| Raised intracranial pressure | Suspected raised ICP, new focal neurological signs, or reduced consciousness (GCS ≤ 9) without prior CT head | caution → contraindicated until imaged and stabilised |
+| Raised intracranial pressure | Suspected raised ICP, new focal neurological signs, or reduced consciousness (GCS ≤ 9) without prior CT head | caution → contraindicated until imaged and stabilized |
 | INR | > 1.5 | caution / contraindicated |
 | Platelet count | < 40–50 ×10⁹/L | caution / contraindicated |
 | Anticoagulant therapy | active anticoagulation | caution; hold / reverse and discuss with haematology |
@@ -24,7 +24,7 @@ usually-appropriate when the clinical question is well-formed.
 | Local skin / soft-tissue infection at site | present | contraindicated |
 
 NICE NG240: do **not** routinely neuroimage before LP, but image (and treat /
-stabilise) first when there are risk factors for an evolving space-occupying
+stabilize) first when there are risk factors for an evolving space-occupying
 lesion or signs of raised ICP — new focal neurological features, abnormal
 pupillary reactions, or GCS ≤ 9. Antibiotics and blood cultures should not be
 delayed for imaging in suspected bacterial meningitis.

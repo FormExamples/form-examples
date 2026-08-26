@@ -48,7 +48,7 @@
 - The Pensions Regulator — Employer guidance.
   <https://www.thepensionsregulator.gov.uk/en/employers>
 - ICO — Employment practices and data protection.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/>
 
 ## Standards
 

@@ -42,7 +42,7 @@ psychological triggers. Cross-link to allergic comorbidity (Step 6).
 - Adherence (prescription refill record), inhaler technique check date.
 
 ### Step 6 — Allergies
-Aeroallergen sensitisation (HDM, pollen, animal dander, mould). Allergic
+Aeroallergen sensitization (HDM, pollen, animal dander, mould). Allergic
 rhinitis comorbidity (TNSS).
 
 ### Step 7 — Exacerbation history
@@ -64,7 +64,7 @@ use, household exposures, pet ownership.
 - ACT total score and category.
 - Treatment-step recommendation per NG245 step ladder.
 - NRAD risk-marker count.
-- Personalised asthma action plan (PAAP) PDF.
+- Personalized asthma action plan (PAAP) PDF.
 
 ## Quality controls
 

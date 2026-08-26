@@ -24,7 +24,7 @@ the patient, and is aligned with the Royal College of Radiologists (RCR)
 *Standards for the interpretation and reporting of imaging investigations*, the
 Lugano classification / 5-point **Deauville** score for lymphoma, the **PERCIST**
 metabolic-response criteria for solid tumours, EANM / SNMMI FDG-PET reporting
-guidance, and the UK Ionising Radiation (Medical Exposure) Regulations —
+guidance, and the UK Ionizing Radiation (Medical Exposure) Regulations —
 IR(ME)R 2017.
 
 ## Scope and intended users
@@ -47,7 +47,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -82,7 +82,7 @@ classification, severity, and flags:
 `no_abnormal_uptake`, `physiological_uptake_only`, `incidental_finding`.
 
 Key measurements: `suv_max` (most-avid reference lesion) and
-`largest_lesion_size_mm` (surveillance / categorisation). Acquisition data:
+`largest_lesion_size_mm` (surveillance / categorization). Acquisition data:
 `blood_glucose_mmol_l` and `injected_activity_mbq`.
 
 ### Structured reporting — Deauville and PERCIST
@@ -153,7 +153,7 @@ pet-scan-test-result/
 ## Clinical references
 
 - RCR — Standards for the interpretation and reporting of imaging investigations
-  (third edition). Emphasises *actionable reporting* and applies to all who
+  (third edition). Emphasizes *actionable reporting* and applies to all who
   report imaging.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/standards-for-interpretation-and-reporting-of-imaging-investigations-third-edition/>
 - Lugano classification / 5-point Deauville score for FDG-PET response in
@@ -164,7 +164,7 @@ pet-scan-test-result/
   <https://en.wikipedia.org/wiki/PET_response_criteria_in_solid_tumors>
 - EANM procedure guidelines for tumour imaging with [18F]FDG PET/CT (v3.0).
   <https://www.sciencedirect.com/science/article/pii/S3051292125000065>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (dose audit; administered activity recorded per study).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 
@@ -177,7 +177,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

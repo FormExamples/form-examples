@@ -1,11 +1,11 @@
 # WHO Counter-Referral Form
 
-World Health Organization standardised counter-referral form for discharging patients back to primary care.
+World Health Organization standardized counter-referral form for discharging patients back to primary care.
 
 ## Source
 
 - **Form**: Counter-Referral Form
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/ect/counter-referral-form.pdf?sfvrsn=d56d08c9_2>
 - **Pages**: 1
 

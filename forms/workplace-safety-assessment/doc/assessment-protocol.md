@@ -18,7 +18,7 @@ The assessment record captures hazards by category:
 - electrical;
 - fire;
 - noise and vibration;
-- ionising and non-ionising radiation;
+- ionizing and non-ionizing radiation;
 - psychosocial (workplace stress — cross-referenced to the workplace-
   stress-assessment form);
 - security and violence;

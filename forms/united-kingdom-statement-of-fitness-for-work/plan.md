@@ -8,14 +8,14 @@ for patients and employees, and the 2022 amendment to the Social Security
 
 ## Why this form exists
 
-The fit note (Med 3) is the legally-recognised UK record of a healthcare
+The fit note (Med 3) is the legally-recognized UK record of a healthcare
 professional's assessment of fitness for work. It is the statutory route to
 Statutory Sick Pay, the evidence for many health-related benefit claims, and
 the trigger document for employer conversations about workplace adjustments.
 
 Until 2022, only doctors could issue fit notes and they were always
 hand-signed. The 2022 amendments enabled digital delivery and broadened the
-set of authorised issuers to include nurses, occupational therapists,
+set of authorized issuers to include nurses, occupational therapists,
 pharmacists, and physiotherapists. This implementation reflects the post-2022
 form and supports both digital and printed issuance.
 
@@ -54,7 +54,7 @@ recommendation.
   months in the first 6 months of the condition), `long_term` (> 4 weeks),
   or `very_long_term` (> 6 months).
 - **Safety-flag rules** scan the assessment for the eighteen-flag catalogue
-  described in `index.md` and emit prioritised flags with suggested actions.
+  described in `index.md` and emit prioritized flags with suggested actions.
 
 The recommendation is the worst-severity match across the fired flags, with
 `review_for_validity` superseding all others.

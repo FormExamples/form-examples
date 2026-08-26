@@ -19,7 +19,7 @@ and aligned with RCOphth / NICE NG81 / NHS Diabetic Eye Screening guidance.
 
 - **Four orthogonal axes.** Appropriateness, urgency / triage priority,
   completeness, and clinical priority are independent and each citable to a
-  recognised body. A request can be appropriate yet incomplete, or complete yet
+  recognized body. A request can be appropriate yet incomplete, or complete yet
   urgent.
 - **Red-flags auto-escalate.** Any red flag (sudden visual loss, retinal
   detachment symptoms, acute painful red eye, suspected GCA) forces emergency

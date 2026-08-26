@@ -32,7 +32,7 @@ authentication, multi-tenancy, and any medical diagnosis of neurodivergence
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each anchored to a
-recognised source. Axes are orthogonal: a request can strongly engage the
+recognized source. Axes are orthogonal: a request can strongly engage the
 Equality Act duty yet still be incomplete, and a low-eligibility request can
 still be urgent on wellbeing grounds.
 
@@ -53,7 +53,7 @@ other axes. Choose the least-urgent band only when no rule fires.
 | --- | --- | --- |
 | Concentration / focus | Working environment; equipment | Quiet workspace, noise-cancelling headphones, standing desk, breaks |
 | Reading / written communication | Equipment; communication | Screen reader, speech-to-text, clear-step instructions |
-| Organisation / time management | Communication; support | Visual planners, check-ins, smaller tasks |
+| Organization / time management | Communication; support | Visual planners, check-ins, smaller tasks |
 | Sensory overload | Working environment; policy | Quiet space, screen filters, softer-material uniform |
 | Balance / coordination | Equipment; working environment | Specialist keyboard / mouse, clutter-free workspace |
 | Fatigue / burnout | Working arrangements | Flexible hours, phased return, remote / hybrid |

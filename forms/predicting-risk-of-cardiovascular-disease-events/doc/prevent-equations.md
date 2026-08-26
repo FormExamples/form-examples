@@ -88,7 +88,7 @@ hand-typing coefficients.
 
 ## Differences from PCE 2013
 
-- Race-free (PCE used black/non-black categorisation).
+- Race-free (PCE used black/non-black categorization).
 - Adds eGFR and BMI as predictors (PCE had neither).
 - Adds 30-year horizon (PCE was 10-year only).
 - Adds heart failure outcome (PCE was ASCVD only).

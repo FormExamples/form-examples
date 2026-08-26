@@ -46,7 +46,7 @@ SCORE2-Diabetes adds:
 
 SCORE2 and SCORE2-Diabetes are recalibrated to four European CVD-mortality
 risk regions (Low, Moderate, High, Very High) defined by WHO age-
-standardised CVD mortality. The recalibration tables are in the 2021 and
+standardized CVD mortality. The recalibration tables are in the 2021 and
 2023 ESC publications and in the 2021 ESC Prevention Guidelines.
 
 - Low-risk countries include Belgium, Denmark, France, Germany, Israel,

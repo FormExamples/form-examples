@@ -11,7 +11,7 @@ clinical microbiology waiting list and gives the patient a transparent, easy-to-
 their referral, expected wait, and upcoming appointment(s).
 
 The card is aligned with NHS England's *Referral to Treatment (RTT)*
-patient-pathway rules and the *Elective recovery* / *Clinical Prioritisation*
+patient-pathway rules and the *Elective recovery* / *Clinical Prioritization*
 framework (P1–P5 / P6). It serves as the single record that records:
 
 Full design description: [`index.md`](../index.md).
@@ -26,7 +26,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
   computed from the RTT clock-start date, the clinical priority, and the
   scheduled appointment date.
 - **Secondary instrument:** Clinical Priority per NHS England clinical
-  prioritisation (P1 / P2 / P3 / P4 / P5 / P6).
+  prioritization (P1 / P2 / P3 / P4 / P5 / P6).
 - **Algorithm:** the worst-band finding sets the overall Waiting Time Status.
 
 | Category | Drivers |

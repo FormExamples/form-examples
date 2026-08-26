@@ -6,7 +6,7 @@ controls, and corroborative-history sources required alongside the MMSE.
 ## Administration procedure
 
 The MMSE must be administered by a trained clinician in a structured,
-standardised way. Departures from the standard wording or order can
+standardized way. Departures from the standard wording or order can
 invalidate the score.
 
 | Step                       | Standard procedure                                       |
@@ -32,7 +32,7 @@ invalidate the score.
   possible. If interpreting is required, document the interpreter and
   note that some items (e.g. "No ifs, ands, or buts" repetition) do not
   translate cleanly.
-- **Quiet room**: minimise external distractions for the attention and
+- **Quiet room**: minimize external distractions for the attention and
   recall items.
 - **Time of day**: cognition fluctuates in delirium and Lewy body
   dementia. Document the time of administration.

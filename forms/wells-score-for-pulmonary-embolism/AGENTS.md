@@ -3,7 +3,7 @@
 Clinical prediction rule for the pre-test probability of acute pulmonary
 embolism (PE) in adults with suspected PE. Collects seven weighted criteria via
 a single continuous single-page wizard — DVT signs (+3), PE most likely (+3),
-heart rate > 100 (+1.5), immobilisation ≥ 3 days or surgery in the previous
+heart rate > 100 (+1.5), immobilization ≥ 3 days or surgery in the previous
 4 weeks (+1.5), previous DVT/PE (+1.5), haemoptysis (+1), malignancy (+1) —
 sums a total of **0–12.5**, and stratifies into a two-level band: **> 4 → PE
 likely → CTPA**; **≤ 4 → PE unlikely → D-dimer** (consider PERC for unlikely,

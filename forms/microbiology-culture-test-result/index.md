@@ -8,7 +8,7 @@ it, this form records what the culture **found** and a structured
 **interpretation**. It records the specimen and its condition, the clinical
 history, the Gram-stain and culture results, the organism(s) isolated and colony
 count, antibiotic sensitivities and key resistance markers (MRSA / ESBL / CPE),
-specialised tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative
+specialized tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative
 findings, the impression, and recommended follow-up — then computes a **four-axis
 interpretation grade** (result classification, abnormality severity / structured
 reporting, report completeness, and follow-up urgency) plus a set of
@@ -25,9 +25,9 @@ of critical and unexpected pathology results**.
 
 ## Scope and intended users
 
-- **Setting:** NHS microbiology laboratory reporting / authorisation workflow.
+- **Setting:** NHS microbiology laboratory reporting / authorization workflow.
 - **Users:** consultant microbiologists, biomedical scientists, and infection
-  specialists who interpret, authorise, and sign microbiology reports.
+  specialists who interpret, authorize, and sign microbiology reports.
 - **Patients:** any patient whose clinical specimen has undergone culture.
 
 ## Result semantics (not a referral)
@@ -42,7 +42,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical result.
 
 | Axis | Instrument | Output |
@@ -68,7 +68,7 @@ severity, and flags:
 - `culture_result` (no-growth / mixed-growth / significant-growth / positive),
   `organism_isolated`, `second_organism_isolated`, `colony_count`.
 - Resistance markers: `resistance_mrsa`, `resistance_esbl`, `resistance_cpe`.
-- Specialised tests: `c_difficile_toxin`, `acid_fast_bacilli`, `pcr_result`.
+- Specialized tests: `c_difficile_toxin`, `acid_fast_bacilli`, `pcr_result`.
 - Alert flag: `critical_organism`.
 
 ## Wizard steps

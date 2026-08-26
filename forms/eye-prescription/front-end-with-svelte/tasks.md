@@ -6,7 +6,7 @@
 
 ## Engine
 - [ ] `src/lib/types.ts` — EyePrescription + child types.
-- [ ] `src/lib/utils.ts` — quantise to 0.25 D, format, validate.
+- [ ] `src/lib/utils.ts` — quantize to 0.25 D, format, validate.
 - [ ] `src/lib/refractive-rules.ts` — sphere / cylinder / addition bands.
 - [ ] `src/lib/complexity-grader.ts` — composite engine.
 - [ ] `src/lib/flagged-issues.ts` — 11 safety flags.

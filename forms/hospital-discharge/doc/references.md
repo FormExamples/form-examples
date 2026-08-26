@@ -17,7 +17,7 @@
 - NICE NG27. *Transition between inpatient hospital settings and
   community or care home settings for adults with social care needs.*
   <https://www.nice.org.uk/guidance/ng27>
-- NICE NG5. *Medicines optimisation.*
+- NICE NG5. *Medicines optimization.*
   <https://www.nice.org.uk/guidance/ng5>
 - NICE NG94. *Emergency and acute medical care in over 16s.*
   <https://www.nice.org.uk/guidance/ng94>

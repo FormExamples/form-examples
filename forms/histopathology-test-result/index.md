@@ -7,7 +7,7 @@ captures why a specimen should be examined, this form records what the
 examination **found** and a structured **interpretation**. It records the
 examined specimen and its adequacy, the clinical history, the macroscopic and
 microscopic descriptions, the histopathological diagnosis, malignancy and
-tumour characterisation (tumour type, histological grade, pathological TNM
+tumour characterization (tumour type, histological grade, pathological TNM
 stage, resection margins, lymphovascular invasion), ancillary immunohistochemistry
 and SNOMED coding, the impression, and recommended follow-up — then computes a
 **four-axis interpretation grade** (result classification, abnormality severity /
@@ -51,7 +51,7 @@ data items**: the diagnosis, the tumour type, the **histological grade**
 the **pathological TNM stage** (`pT`, `pN`, `pM` per the UICC/AJCC TNM 8th
 edition), the **resection margin** status, and the presence of **lymphovascular
 invasion**. These structured items drive cancer staging, prognosis, and
-multidisciplinary-team (MDT) management decisions, and are summarised in the
+multidisciplinary-team (MDT) management decisions, and are summarized in the
 free-text `reporting_category` grade/stage line (Axis B). The `snomed_code`
 captures the SNOMED CT topography / morphology coding mandated by the dataset
 appendices.
@@ -59,7 +59,7 @@ appendices.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -137,7 +137,7 @@ histopathology-test-result/
 
 ## Clinical references
 
-- RCPath *Cancer datasets and tissue pathways* (standardised structured
+- RCPath *Cancer datasets and tissue pathways* (standardized structured
   reporting; core data items mandated for the Cancer Outcomes and Services
   Dataset, COSD).
   <https://www.rcpath.org/profession/guidelines/cancer-datasets-and-tissue-pathways.html>

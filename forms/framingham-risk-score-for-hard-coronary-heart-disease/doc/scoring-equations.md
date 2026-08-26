@@ -51,7 +51,7 @@ final point total is mapped to the 10-year hard-CHD probability via the
 sex-specific look-up table (men: ≤ −1 → < 1 %; 17+ → ≥ 30 %; women: ≤ 8 →
 < 1 %; 25+ → ≥ 30 %).
 
-## Categorisation
+## Categorization
 
 Standard cut-points (ATP III §I-B):
 
@@ -64,7 +64,7 @@ Standard cut-points (ATP III §I-B):
 Per the Wilson 1998 paper and ATP III §II-A:
 
 - Adults aged 30–79 years.
-- No history of CHD (prior MI, angina, coronary revascularisation, or CHD
+- No history of CHD (prior MI, angina, coronary revascularization, or CHD
   death).
 - No diabetes (diabetes is treated as a CHD risk equivalent in ATP III).
 - No active lipid-lowering therapy at the time of measurement preferred.

@@ -82,7 +82,7 @@ reference (low). Flags sort high → medium → low.
   reporting of imaging investigations.*
 - NASCET / ECST arterial-stenosis grading conventions.
 - ACR Appropriateness Criteria.
-- UK Ionising Radiation (Medical Exposure) Regulations — IR(ME)R 2017.
+- UK Ionizing Radiation (Medical Exposure) Regulations — IR(ME)R 2017.
 
 ## Compliance
 

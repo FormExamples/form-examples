@@ -7,7 +7,7 @@ from [§1.2](01-introduction-and-goals.md) and is expanded in
 
 ## 4.1 One shared design, N domains
 
-The organising thesis: **a single uniform design is instantiated once per
+The organizing thesis: **a single uniform design is instantiated once per
 domain.** Every form has the identical directory layout, the identical engine
 file decomposition (`types → rules → grader → flagged-issues`), the identical
 UI class vocabulary (Lily), and the identical API surface

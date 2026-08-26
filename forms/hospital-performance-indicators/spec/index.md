@@ -82,7 +82,7 @@ indicator name; this form does not enforce a unit per field.
 
 Transcribed from a hospital Balanced Scorecard indicator list
 (Kaplan & Norton framework applied to hospital operations). Item
-text is lightly normalised for readability (spelling/punctuation
+text is lightly normalized for readability (spelling/punctuation
 corrections, expanded abbreviations) while preserving the original
 indicator meaning. Two items in the source combined two distinct
 concepts onto one line (`1.8`, the drugs/materials-cost and

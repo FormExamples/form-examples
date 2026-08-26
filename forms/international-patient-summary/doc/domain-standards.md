@@ -37,7 +37,7 @@ Per the IG `Composition-uv-ips` profile, the *required* sections are:
 
 The *recommended* sections include:
 
-- Immunisations — LOINC 11369-6
+- Immunizations — LOINC 11369-6
 - History of Procedures — LOINC 47519-4
 - Medical Devices — LOINC 46264-8
 - Results — LOINC 30954-2
@@ -79,7 +79,7 @@ terminologies bound:
 
 - **MyHealth@EU** (formerly *eHDSI*) — the European Commission's
   cross-border patient summary exchange infrastructure that
-  operationalises the IPS in EU member states.
+  operationalizes the IPS in EU member states.
   <https://health.ec.europa.eu/ehealth-digital-health-and-care/electronic-cross-border-health-services_en>
 - **NHS England UK Core FHIR IG** — the UK national FHIR profile set.
   The UK does not currently publish a UK-specific IPS profile; the

@@ -6,7 +6,7 @@ Slug: `endocrinology-assessment`
 
 ## 1. Purpose
 
-General endocrinology consultation assessment covering the thyroid, adrenal, glucose, reproductive, pituitary, and bone/calcium axes, integrating symptom review, clinical examination, and laboratory findings to characterise endocrine disturbance and guide management.
+General endocrinology consultation assessment covering the thyroid, adrenal, glucose, reproductive, pituitary, and bone/calcium axes, integrating symptom review, clinical examination, and laboratory findings to characterize endocrine disturbance and guide management.
 
 Full design description: [`index.md`](../index.md).
 

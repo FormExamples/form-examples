@@ -38,7 +38,7 @@ for a "yes" answer and **0** for "no". Total score 0–4.
 | # | Letter | Question (scores 1 when answered "yes") | Points |
 | --- | --- | --- | --- |
 | 1 | **C** — Cut down | Have you ever felt you should cut down on your drinking? | 0 or 1 |
-| 2 | **A** — Annoyed | Have people annoyed you by criticising your drinking? | 0 or 1 |
+| 2 | **A** — Annoyed | Have people annoyed you by criticizing your drinking? | 0 or 1 |
 | 3 | **G** — Guilty | Have you ever felt bad or guilty about your drinking? | 0 or 1 |
 | 4 | **E** — Eye-opener | Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover (an "eye-opener")? | 0 or 1 |
 

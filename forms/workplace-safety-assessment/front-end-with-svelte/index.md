@@ -8,7 +8,7 @@ single-page wizard that captures a UK HSE-aligned workplace safety audit for
 healthcare settings across ten sections, grades each checklist item Yes / No /
 N/A with the shared scoring engine, derives an overall audit outcome
 (Compliant / Minor / Major / Critical Findings), and renders a report with a
-findings-by-category breakdown, non-compliant findings, and prioritised flagged
+findings-by-category breakdown, non-compliant findings, and prioritized flagged
 issues.
 
 ## Routes

@@ -66,7 +66,7 @@ note type shares the same schema; the required-component set differs.
 
 ## Completeness model
 
-The note is organised into twelve components. Each is either **documented** (a
+The note is organized into twelve components. Each is either **documented** (a
 meaningful entry is present) or **absent**. An explicit negative — "no overnight
 events", "no medication changes", "nil outstanding" — counts as documented,
 because a deliberate negative is a valid clinical record.

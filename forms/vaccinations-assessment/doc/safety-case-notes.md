@@ -2,19 +2,19 @@
 
 ## Intended use
 
-A structured record of a patient's immunisation status against the UK
-Routine Immunisation Schedule (UKHSA Green Book). It computes compliance,
+A structured record of a patient's immunization status against the UK
+Routine Immunization Schedule (UKHSA Green Book). It computes compliance,
 generates catch-up recommendations, and records administration details.
 
 ## Intended user
 
-GP, practice nurse, immunisation nurse, health visitor, school nurse,
+GP, practice nurse, immunization nurse, health visitor, school nurse,
 pharmacist, or travel medicine clinician acting within scope.
 
 ## Risk classification (MDCG 2019-11 Rev.1)
 
 - **Class:** Class IIa medical device software (Rule 11).
-- **Rationale:** Output drives clinical immunisation decisions (catch-up
+- **Rationale:** Output drives clinical immunization decisions (catch-up
   schedules, contraindication screening). Misuse has foreseeable harm
   (missed vaccinations, adverse vaccine reactions in contraindicated
   patients).
@@ -36,11 +36,11 @@ pharmacist, or travel medicine clinician acting within scope.
 - MHRA *Software and AI as a medical device*, 2022.
 - ISO 14971:2019.
 - IEC 62304:2006+A1:2015.
-- UK Green Book (Immunisation against infectious disease).
+- UK Green Book (Immunization against infectious disease).
 
 ## Clinical evidence base
 
-- UKHSA *Immunisation against infectious disease* (Green Book).
+- UKHSA *Immunization against infectious disease* (Green Book).
 - JCVI statements.
 - WHO Vaccine Position Papers.
 - WHO IHR (2005) Annex 6.
@@ -58,7 +58,7 @@ pharmacist, or travel medicine clinician acting within scope.
   Art.9.
 - Lawful basis: Art.9(2)(h) (and Art.9(2)(i) for public health where
   applicable).
-- Records can be uploaded to the NHS National Immunisation Management
+- Records can be uploaded to the NHS National Immunization Management
   System (NIMS) where the practice is enrolled.
 - Encryption at rest (AES-256) and in transit (TLS 1.3).
 

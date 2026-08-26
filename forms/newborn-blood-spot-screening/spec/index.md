@@ -96,7 +96,7 @@ A single logical screening record. Fields default to `''` (text/enum) or `null`
 | `hcuResult` | homocystinuria (pyridoxine unresponsive) |
 
 **Derived (never stored as input).** `ageAtSampleDays` (recomputed),
-`conditionResults[]` (normalised per-condition classification with referral
+`conditionResults[]` (normalized per-condition classification with referral
 target), `referrals[]`, `overallOutcome`, `referralStatus`, `sampleQuality`,
 `flaggedIssues[]`.
 
@@ -104,7 +104,7 @@ target), `referrals[]`, `overallOutcome`, `referralStatus`, `sampleQuality`,
 
 Pure function `gradeBloodspot(data)`, no I/O.
 
-**Per-condition normalisation.** For each of the nine conditions, emit a
+**Per-condition normalization.** For each of the nine conditions, emit a
 `ConditionResult { code, label, result, referralTarget }`. Validate that
 `carrier` appears only for `scd`; a `carrier` value on any other condition is a
 data-validity flag and is treated as `pending` for outcome purposes.

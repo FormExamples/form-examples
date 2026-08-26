@@ -18,7 +18,7 @@
 - National Institute for Health and Care Excellence. NG51. *Sepsis: recognition,
   diagnosis and early management.* 2016, updated 2024.
 - National Institute for Health and Care Excellence. NG191. *Acutely ill adults
-  in hospital: recognising and responding to deterioration.* 2007, updated 2025.
+  in hospital: recognizing and responding to deterioration.* 2007, updated 2025.
 
 ## Risk assessments
 

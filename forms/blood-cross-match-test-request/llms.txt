@@ -1,6 +1,6 @@
 # Blood Cross-Match Test Request
 
-> A UK NHS–aligned **blood cross-match / transfusion compatibility request (referral)** that a clinician completes to request group-and-save, antibody screen, crossmatch, or emergency blood for a patient. It records the requested test type and blood component, the clinical indication, the patient's ABO/Rh blood group, antibody and transfusion history, pre-transfusion sample collection and two-sample (group-check) status, and the requested urgency — then computes a **four-axis grading** (appropriateness, identity / sample safety, request completeness, and triage priority) plus a set of safety-critical flags. The output is a vetting report that supports the transfusion laboratory's acceptance, query, and prioritisation decision.
+> A UK NHS–aligned **blood cross-match / transfusion compatibility request (referral)** that a clinician completes to request group-and-save, antibody screen, crossmatch, or emergency blood for a patient. It records the requested test type and blood component, the clinical indication, the patient's ABO/Rh blood group, antibody and transfusion history, pre-transfusion sample collection and two-sample (group-check) status, and the requested urgency — then computes a **four-axis grading** (appropriateness, identity / sample safety, request completeness, and triage priority) plus a set of safety-critical flags. The output is a vetting report that supports the transfusion laboratory's acceptance, query, and prioritization decision.
 
 ## Docs
 

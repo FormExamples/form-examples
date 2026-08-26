@@ -23,7 +23,7 @@ References:
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Employment practices and data protection.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/>
 
 ## Right-to-work records retention
 
@@ -31,7 +31,7 @@ Home Office guidance requires the employer to retain right-to-work
 evidence for the **duration of employment plus two years**. The
 implementation stores only the metadata (document type, date checked,
 checker identity, list A/B classification) — not document images. Image
-storage, if any, is delegated to the organisation's identity-document
+storage, if any, is delegated to the organization's identity-document
 store, which has its own retention controls.
 
 - Home Office — Right to work checks: an employer's guide.

@@ -1,4 +1,4 @@
-# WHO Emergency Unit Standardised Clinical Form: Trauma
+# WHO Emergency Unit Standardized Clinical Form: Trauma
 
 This form implements the WHO standard clinical-encounter form for
 trauma adult and paediatric presentations to a hospital emergency unit
@@ -9,7 +9,7 @@ Form: General and forms part of the WHO Emergency Care Toolkit family.
 
 - **Form PDF** — WHO. *Emergency Unit Form: Trauma*.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/trauma-scf.pdf>
-- **Reference card PDF** — WHO. *Trauma Standardised Clinical Form
+- **Reference card PDF** — WHO. *Trauma Standardized Clinical Form
   Reference Card*.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/trauma-scf-ref-card.pdf>
 - **Emergency Care Toolkit** —
@@ -38,7 +38,7 @@ The trauma form adds two extensions over the General form's ABCD:
 
 | Letter | Section in the form | Trauma-specific content |
 | --- | --- | --- |
-| A — Airway | Step 5 | Same as general; cervical-spine stabilisation always considered |
+| A — Airway | Step 5 | Same as general; cervical-spine stabilization always considered |
 | B — Breathing | Step 6 | Tension/open pneumothorax flags; chest needle/tube |
 | C — Circulation | Step 7 | External / cavity haemorrhage; tranexamic acid; massive-transfusion |
 | D — Disability | Step 8 | GCS / AVPU; pupils; glucose |
@@ -150,7 +150,7 @@ adults with significant haemorrhage, following CRASH-2 evidence:
 
 Reference: CRASH-2 trial collaborators. Effects of tranexamic acid on
 death, vascular occlusive events, and blood transfusion in trauma
-patients with significant haemorrhage (CRASH-2): a randomised,
+patients with significant haemorrhage (CRASH-2): a randomized,
 placebo-controlled trial. *Lancet.* 2010;376(9734):23-32.
 doi:10.1016/S0140-6736(10)60835-5
 

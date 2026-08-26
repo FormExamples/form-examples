@@ -27,7 +27,7 @@ counselling, DVLA safety) where the recorded findings warrant it.
   a primary-care epilepsy register.
 - **Not for:** first-seizure or new-diagnosis work-up, acute seizure or status
   epilepticus management, paediatric-only pathways, or definitive ASM selection.
-  A "seizure-free" classification does not by itself authorise driving or
+  A "seizure-free" classification does not by itself authorize driving or
   medication withdrawal — those remain clinical and DVLA decisions.
 
 ## Sections captured

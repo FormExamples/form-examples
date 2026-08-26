@@ -24,7 +24,7 @@ vestibular physiotherapist.
 | --- | --- |
 | Acute vestibular syndrome mis-routed to outpatient vestibular rehab when central origin | HINTS exam embedded with explicit "central features" stroke flag |
 | Sudden sensorineural hearing loss treated as routine | Onset ≤30 days field triggers AAO-HNS emergency pathway |
-| Failure to recognise BPPV | Dix-Hallpike / supine roll test mandated in Step 7 |
+| Failure to recognize BPPV | Dix-Hallpike / supine roll test mandated in Step 7 |
 | Pure-tone audiometry without calibration | Step 4 requires equipment calibration date entry per BSA recommended procedure |
 
 ## Regulatory framework

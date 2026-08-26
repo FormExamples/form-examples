@@ -6,12 +6,12 @@ How the LPA Health and Welfare form interacts with the sibling
 
 ## The legal interplay
 
-Both an LPA and an ADRT can authorise or refuse treatment decisions for a
+Both an LPA and an ADRT can authorize or refuse treatment decisions for a
 donor / patient who has lost capacity. The Mental Capacity Act 2005 sets
 out which takes precedence:
 
 - **ADRT made AFTER an LPA was registered** — the ADRT overrides the LPA
-  only if the LPA *did not* expressly authorise the attorney to give or
+  only if the LPA *did not* expressly authorize the attorney to give or
   refuse consent to the relevant treatment (MCA 2005 s.25(7)).
 - **LPA made AFTER an ADRT** — the LPA overrides the ADRT only if the
   LPA *expressly* gives the attorney authority to consent to or refuse
@@ -30,7 +30,7 @@ engine performs these cross-checks:
 | Check | Severity | Effect |
 | --- | --- | --- |
 | ADRT refuses life-sustaining treatment AND lpa_lst_choice.lst_choice = 'option-a' AND any instruction permits LST | high | rule `R-MCA-INSTR-ADRT` fires; flag `adrt-conflict` is raised |
-| ADRT refuses a specific treatment AND any instruction authorises the same treatment | high | rule `R-MCA-INSTR-ADRT` fires |
+| ADRT refuses a specific treatment AND any instruction authorizes the same treatment | high | rule `R-MCA-INSTR-ADRT` fires |
 | LPA exists with no ADRT | informational | flag `adrt-recommended` (optional; not in the canonical catalogue) |
 | ADRT exists with no LPA | informational | (raised by the ADRT form, not by this one) |
 

@@ -9,7 +9,7 @@ and two-sample (group-check) status, and the requested urgency — then computes
 **four-axis grading** (appropriateness, identity / sample safety, request
 completeness, and triage priority) plus a set of safety-critical flags. The
 output is a vetting report that supports the transfusion laboratory's
-acceptance, query, and prioritisation decision.
+acceptance, query, and prioritization decision.
 
 This form is the transfusion-compatibility counterpart to the repository's other
 clinician-driven request forms. It is completed by a doctor, nurse, midwife, or
@@ -31,7 +31,7 @@ group-check rule.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete, identity-unsafe, or time-critical.
 
 | Axis | Instrument | Output |
@@ -68,7 +68,7 @@ the other axes.
 | Acute bleeding | major haemorrhage protocol, target Hb 70–90 g/L |
 | Anaemia (non-bleeding) | restrictive 70 g/L threshold; consider alternatives |
 | Obstetric haemorrhage | major haemorrhage protocol; anti-D relevance |
-| Chemotherapy support | individualised threshold for chronic anaemia |
+| Chemotherapy support | individualized threshold for chronic anaemia |
 | Transfusion-dependent | individual thresholds and targets |
 
 ## Wizard steps

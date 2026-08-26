@@ -14,7 +14,7 @@ bilirubin, INR, serum creatinine, and (for MELD-Na) serum sodium, applies a
 weighted logarithmic formula with a dialysis creatinine rule and value bounds,
 and produces an integer score of **6–40** mapped to an estimated 3-month
 mortality band. Higher scores indicate more severe disease and inform liver
-transplant prioritisation. It is a decision-support calculator, not a diagnosis.
+transplant prioritization. It is a decision-support calculator, not a diagnosis.
 
 Full design description: [`index.md`](../index.md).
 
@@ -50,7 +50,7 @@ A single logical assessment record. Fields default to `''` (text/enum) or `null`
 | --- | --- | --- |
 | `bilirubin` | numeric | total bilirubin |
 | `bilirubinUnit` | enum | `mg/dL` or `umol/L` |
-| `inr` | numeric | international normalised ratio |
+| `inr` | numeric | international normalized ratio |
 | `creatinine` | numeric | serum creatinine |
 | `creatinineUnit` | enum | `mg/dL` or `umol/L` |
 | `dialysisSessionsPastWeek` | numeric | count of haemodialysis sessions in the past 7 days |

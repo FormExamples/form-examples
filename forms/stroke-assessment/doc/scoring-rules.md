@@ -94,5 +94,5 @@ The grading engine produces:
   despite a low NIHSS.
 - NIHSS does NOT measure the long-term disability potential of a stroke;
   the modified Rankin Scale (mRS) is the conventional outcome measure.
-- NIHSS administration in a hyperacute setting must be standardised;
+- NIHSS administration in a hyperacute setting must be standardized;
   delays in scoring delay treatment.

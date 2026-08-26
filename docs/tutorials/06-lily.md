@@ -1,4 +1,4 @@
-# Tutorial 6 — Customise Lily
+# Tutorial 6 — Customize Lily
 
 Every form's UI is built to the **Lily Design System** — a *headless* component
 contract shared by the HTML and Svelte front-ends. "Headless" means Lily fixes

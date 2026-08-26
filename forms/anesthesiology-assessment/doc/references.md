@@ -18,7 +18,7 @@
 
 ## Guidelines and standards
 
-- Centre for Perioperative Care. *Preoperative Assessment and Optimisation
+- Centre for Perioperative Care. *Preoperative Assessment and Optimization
   for Adult Surgery* (June 2021). https://cpoc.org.uk/
 - Royal College of Anaesthetists. *Guidelines for the Provision of
   Anaesthesia Services* (GPAS, annual). https://rcoa.ac.uk/

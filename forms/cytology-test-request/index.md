@@ -31,7 +31,7 @@ referral).
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 pre-analytically poor, incomplete, or urgent.
 
 | Axis | Instrument | Output |

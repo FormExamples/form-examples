@@ -20,7 +20,7 @@ process without reading the field list.
 
 ## The five assessment domains
 
-Steps 3–14 are organised around the five domains a dietetic assessment covers.
+Steps 3–14 are organized around the five domains a dietetic assessment covers.
 The wizard's step order follows the shape of a real consultation — history
 first, measurements when the patient is comfortable, plan last — rather than
 grouping strictly by domain.

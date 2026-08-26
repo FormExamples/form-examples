@@ -17,7 +17,7 @@ arc42 document in HTML, PDF, AsciiDoc, FHIR R5 Bundle, and XML.
 
 The form is non-clinical. It demonstrates that the `forms/` monorepo
 pattern — single-page wizard + structured schema + scoring engine + multi-
-format report — generalises beyond medical assessments.
+format report — generalizes beyond medical assessments.
 
 ## Scope
 

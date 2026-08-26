@@ -27,7 +27,7 @@ other clinician-driven result forms. It is completed by a radiologist,
 consultant, or reporting radiographer rather than by the patient, and is aligned
 with the Royal College of Radiologists (RCR) *Standards for the interpretation
 and reporting of imaging investigations*, the ACR practice parameter for the
-performance of esophagrams and upper-GI examinations, and the UK Ionising
+performance of esophagrams and upper-GI examinations, and the UK Ionizing
 Radiation (Medical Exposure) Regulations — IR(ME)R 2017.
 
 Full design description: [`index.md`](../index.md).

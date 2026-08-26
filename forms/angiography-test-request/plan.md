@@ -19,11 +19,11 @@ ACR / RCR iRefer / ESUR / IR(ME)R guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, contrast / radiation safety,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet contraindicated for contrast, or
   complete yet urgent.
 - **Safety auto-escalates.** eGFR < 30 with iodinated contrast, severe contrast
-  allergy, active bleeding on anticoagulation, or pregnancy with ionising
+  allergy, active bleeding on anticoagulation, or pregnancy with ionizing
   radiation drive the safety band to `contraindicated` and fire high-priority
   flags regardless of the other axes.
 - **Pure scoring engine.** Deterministic function with stable rule IDs shared

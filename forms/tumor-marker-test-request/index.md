@@ -33,7 +33,7 @@ guidance, and ACB / RCPath tumour-marker recommendations.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body or principle. Axes are orthogonal: a highly appropriate request
+recognized body or principle. Axes are orthogonal: a highly appropriate request
 can still be incomplete or carry interpretation risk.
 
 | Axis | Instrument | Output |

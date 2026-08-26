@@ -5,7 +5,7 @@
 The UK **Professional Record Standards Body (PRSB)** publishes the
 *eDischarge Summary Standard*, the canonical record-structure standard
 for NHS inpatient discharge summaries. NHS Digital adopted it as the
-basis for the *Transfer of Care* standardisation programme; it is the
+basis for the *Transfer of Care* standardization programme; it is the
 upstream source for the field set used by this form.
 
 - PRSB *eDischarge summary standard*.
@@ -28,7 +28,7 @@ are:
 - Medications and medical devices
 - Allergies and adverse reactions
 - Plan and requested actions (community / GP follow-up)
-- Information given to patient and authorised representatives
+- Information given to patient and authorized representatives
 - Person completing record
 
 This form's 10 steps map onto these PRSB headings; the *Warning Signs
@@ -57,7 +57,7 @@ patient* heading.
   completeness and community-handover sections of this form.
   <https://www.nice.org.uk/guidance/ng27>
 - **NICE NG94** — *Emergency and acute medical care in over 16s:
-  service delivery and organisation* (2018) §1.7 covers transfer to
+  service delivery and organization* (2018) §1.7 covers transfer to
   community settings and is complementary to NG27.
   <https://www.nice.org.uk/guidance/ng94>
 - **NICE QS136** — *Transition between inpatient hospital settings and
@@ -81,7 +81,7 @@ patient* heading.
 
 ## Medication reconciliation
 
-- **NICE NG5** — *Medicines optimisation: the safe and effective use
+- **NICE NG5** — *Medicines optimization: the safe and effective use
   of medicines to enable the best possible outcomes* (2015).
   <https://www.nice.org.uk/guidance/ng5>
 - **Royal Pharmaceutical Society** — *Keeping patients safe when they

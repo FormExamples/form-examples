@@ -9,7 +9,7 @@ RIDDOR places a duty on employers and certain other duty-holders to
 report specified work-related accidents, diseases, and dangerous
 occurrences to the Health and Safety Executive (HSE). The duty
 falls on the **employer** but a clinician may be the first
-professional to recognise that an absence has a workplace cause.
+professional to recognize that an absence has a workplace cause.
 
 ### Trigger
 

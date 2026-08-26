@@ -40,12 +40,12 @@ both consolidated front-ends (`front-end-with-html` and
   — a met referral criterion blocks issue regardless of how complete the form is.
 - The unacceptable "mode of death" list (cardiac arrest, respiratory arrest,
   old age alone, organ failure without a stated cause, and similar) lives in
-  `validation-rules.ts` and is normalised (lower-cased, trimmed) before matching;
+  `validation-rules.ts` and is normalized (lower-cased, trimmed) before matching;
   it only fires when the mode is the **sole** cause given.
 - Part I must read top-down: a completed I(b) or I(c) below an empty line above
   is an illogical sequence. The underlying cause is the lowest completed line.
 - Medical-examiner scrutiny is a statutory step for every non-coroner death, so
   the scrutiny flag is always raised for a non-referred certificate that has not
-  yet been scrutinised — independent of the validity class.
+  yet been scrutinized — independent of the validity class.
 - Wizard is 7 steps but must remain one continuous single-page wizard. Treat the
   form as a statutory instrument: precise British English, no diagnostic claims.

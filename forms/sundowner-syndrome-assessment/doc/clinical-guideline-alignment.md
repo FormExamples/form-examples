@@ -18,7 +18,7 @@ NG97 §1.7 — Managing non-cognitive symptoms — recommends:
 - **Initial non-pharmacological assessment** — explore reasons for
   behaviour, address pain, infection, hunger, thirst, overstimulation,
   understimulation, communication needs.
-- **Personalised activities** — life-story-based, music, exercise,
+- **Personalized activities** — life-story-based, music, exercise,
   reminiscence.
 - **Antipsychotics** — only after non-pharmacological strategies have been
   tried and only if the person is at risk of harm to self or others, or

@@ -68,7 +68,7 @@ LocSSIPs:
   <https://www.cas.mhra.gov.uk/ViewandAcknowledgment/ViewAlert.aspx?AlertID=103218>
 
 NatSSIPs 2 explicitly retains the three-phase structure with additional
-standardised "stop" moments and team briefings.
+standardized "stop" moments and team briefings.
 
 ## Royal-college and society guidance
 

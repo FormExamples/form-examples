@@ -20,5 +20,5 @@ See [AGENTS.md](AGENTS.md) for the form's design spec and step list.
 - Add input validation with Zod schemas
 - Add accessibility audit (axe-core)
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - User acceptance testing with domain stakeholders

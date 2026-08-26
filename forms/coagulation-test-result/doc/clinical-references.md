@@ -38,7 +38,7 @@ Source:
 
 British Society for Haematology (BSH) oral-anticoagulation guidance treats a
 markedly raised INR as a bleeding-risk emergency: an INR > 8 (even without
-bleeding) warrants action and is a recognised reversal threshold (withhold
+bleeding) warrants action and is a recognized reversal threshold (withhold
 warfarin; consider oral vitamin K). Serious / major bleeding at any INR is
 reversed urgently with intravenous vitamin K plus prothrombin complex
 concentrate (PCC). This anchors the INR critical rule (`inr` > 8 →

@@ -1,11 +1,11 @@
 # WHO Emergency First Aid Form
 
-World Health Organization standardised emergency first aid documentation form for community first aid responders (CFAR).
+World Health Organization standardized emergency first aid documentation form for community first aid responders (CFAR).
 
 ## Source
 
 - **Form**: Emergency First Aid Form
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/emergency-first-aid-form.pdf?sfvrsn=fd38f178_1>
 - **Pages**: 1
 
@@ -28,7 +28,7 @@ World Health Organization standardised emergency first aid documentation form fo
 - **Background**: Past medical/surgical history, medications, allergies
 - **CABCDE Assessment & Intervention**: Systematic assessment with paired interventions
 - **Recommendations**: Transport plan, precautions, concerns
-- **Community First Aid Responder**: Name, signature, contact, organisation
+- **Community First Aid Responder**: Name, signature, contact, organization
 
 ## Assessment steps (12 total)
 
@@ -57,7 +57,7 @@ Each category has:
 - **A (Airway)**: Neck Immobilization, Head-Tilt Chin-Lift, Jaw Thrust, Choking Care
 - **B (Breathing)**: Maintained position of patient comfort
 - **C (Circulation)**: Pelvic Binder, Control minor bleeding, Fracture Care, Oral Hydration, Left-lateral position
-- **D (Disability)**: Spinal Immobilisation, Glucose Given, Seizure Care, High/Low Temperature Care
+- **D (Disability)**: Spinal Immobilization, Glucose Given, Seizure Care, High/Low Temperature Care
 - **E (Exposure/Other)**: Recovery Position, Burn Care, Wound Care, Drowning Care, Snakebite Care
 
 ## Precaution flags

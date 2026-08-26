@@ -1,8 +1,8 @@
 # Perioperative Optimization — Agent Instructions
 
-Perioperative optimisation and prehabilitation intake. Collects modifiable
+Perioperative optimization and prehabilitation intake. Collects modifiable
 pre-operative risk across eight domains via a 16-step single-page wizard; grades
-each domain as **optimised / in-progress / action-required / insufficient-time /
+each domain as **optimized / in-progress / action-required / insufficient-time /
 not-applicable** against the time remaining before surgery; computes a composite
 **surgical readiness** band and a set of safety flags; and emits a
 domain-by-domain prehabilitation plan.
@@ -13,7 +13,7 @@ See [`index.md`](./index.md) for the full design, the domain table, and the
 ## Slug and spelling
 
 The directory slug is `perioperative-optimization` (US spelling). Prose uses the
-UK spelling *optimisation*, matching NHS England and CPOC. The slug, SQL table
+UK spelling *optimization*, matching NHS England and CPOC. The slug, SQL table
 names (`perioperative_optimization`, `perioperative_optimization_grade`, …), and
 every generated artefact keep the `optimization` stem so derived representations
 stay keyed to the directory. Do not "fix" the stem in code — it would break
@@ -180,8 +180,8 @@ independently and are never filtered by the override.**
 
 ## Clinical grounding
 
-- NHS England perioperative-pathway optimisation guidance.
-- CPOC *Preoperative Assessment and Optimisation for Adult Surgery* (2021),
+- NHS England perioperative-pathway optimization guidance.
+- CPOC *Preoperative Assessment and Optimization for Adult Surgery* (2021),
   and the CPOC perioperative anaemia and diabetes guidelines.
 - NICE NG45 (routine preoperative tests) and NG180 (perioperative care).
 - BAPEN MUST; Duke Activity Status Index; AUDIT-C; STOP-BANG; Clinical Frailty

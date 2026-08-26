@@ -32,7 +32,7 @@ For each field the table records:
 | `line3` | text | no | |
 | `town` | text | yes | |
 | `county` | text | no | |
-| `postcode` | text | yes | UK postcode; uppercase normalised |
+| `postcode` | text | yes | UK postcode; uppercase normalized |
 | `country` | text | no | Defaults to "United Kingdom" |
 
 ### `signature`
@@ -333,7 +333,7 @@ also acts as the section-9 witness.
 ### LPC continuation sheet 4 — trust corporation
 
 Used when one of the attorneys is a trust corporation. Replaces the
-attorney's signature with the corporation's seal and authorised-
+attorney's signature with the corporation's seal and authorized-
 signatory block.
 
 | Name | Type | Required | Validation | Guide |
@@ -342,7 +342,7 @@ signatory block.
 | `lpcSheet4.companyRegistrationNumber` | text | yes | | B2 |
 | `lpcSheet4.registeredAddress` | address | yes | | B2 |
 | `lpcSheet4.authorisedSignatoryName` | text | yes | natural-person signatory | B2 |
-| `lpcSheet4.authorisedSignatoryRole` | text | yes | director, secretary, authorised officer, etc. | B2 |
+| `lpcSheet4.authorisedSignatoryRole` | text | yes | director, secretary, authorized officer, etc. | B2 |
 | `lpcSheet4.authorisedSignature` | signature | yes | | B2 |
 | `lpcSheet4.companySealApplied` | bool | yes | must be `true` | B2 |
 | `lpcSheet4.witness.name` | text | yes | not the donor | B2 |

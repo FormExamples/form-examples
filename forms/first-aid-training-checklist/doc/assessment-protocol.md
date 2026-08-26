@@ -18,7 +18,7 @@ guidelines.
 
 ## Primary survey (DRABC)
 
-The candidate must demonstrate the survey in sequence and verbalise each
+The candidate must demonstrate the survey in sequence and verbalize each
 step.
 
 | Letter | Action | Pass criterion |
@@ -30,7 +30,7 @@ step.
 | C | Circulation | Major bleeding identified and controlled before further care |
 
 Failure to make the scene safe, failure to open the airway, or failure to
-recognise absent or abnormal breathing each constitutes a critical
+recognize absent or abnormal breathing each constitutes a critical
 deficiency.
 
 ## CPR and AED
@@ -45,7 +45,7 @@ Resuscitation Council UK adult BLS pass criteria:
 - **Recoil**: full chest recoil between compressions
 - **Compression:ventilation ratio**: 30:2 with two effective rescue breaths
 - **Hand position**: lower half of sternum
-- **Interruptions**: minimised; <10 seconds between cycles
+- **Interruptions**: minimized; <10 seconds between cycles
 
 AED operation:
 
@@ -91,9 +91,9 @@ Catastrophic-haemorrhage control sequence (in order):
 
 ## Fractures, sprains, and spinal injury
 
-- Fracture — immobilise with splint or sling in position found; do not
+- Fracture — immobilize with splint or sling in position found; do not
   attempt reduction.
-- Suspected spinal injury — manual in-line stabilisation; do not move
+- Suspected spinal injury — manual in-line stabilization; do not move
   unless required for ABC.
 - Sprain — RICE (Rest, Ice, Compression, Elevation) for first 48 hours.
 

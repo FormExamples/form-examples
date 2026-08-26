@@ -48,7 +48,7 @@ fhir/r5/
 - Encounter `type` coded with SNOMED CT where available
 - Observation `category` coded as `survey` for form-based data
 - Observation `components` map SQL columns to typed FHIR values (`valueInteger`, `valueString`, `valueQuantity`, etc.)
-- ClinicalImpression summarises grading results in `summary` as free text, with `finding` entries for each categorical outcome
+- ClinicalImpression summarizes grading results in `summary` as free text, with `finding` entries for each categorical outcome
 - DetectedIssue `severity` maps from SQL priority: `high` → `high`, `medium` → `moderate`, `low` → `low`
 - Form-specific code systems use `urn:form-examples:<slug>` URIs
 - Form-specific ValueSets use `urn:form-examples:<slug>:<name>` URIs

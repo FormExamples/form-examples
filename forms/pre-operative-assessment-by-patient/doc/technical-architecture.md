@@ -278,7 +278,7 @@ function calculateASA(data: AssessmentData): { asaGrade: ASAGrade; firedRules: F
 
 ### Flag Detection
 
-Flags follow a similar but distinct pattern - they are procedural checks that produce prioritised alerts rather than grade assignments.
+Flags follow a similar but distinct pattern - they are procedural checks that produce prioritized alerts rather than grade assignments.
 
 ---
 
@@ -382,6 +382,6 @@ Manual testing through the browser:
 | XSS | Svelte auto-escapes all rendered values; no `{@html}` usage |
 | CSRF | SvelteKit built-in CSRF protection on form actions |
 | Data in transit | HTTPS required for production |
-| Data at rest | Backend uses PostgreSQL with parameterised queries; no raw SQL |
-| Injection | SeaORM parameterised queries prevent SQL injection; no shell execution |
+| Data at rest | Backend uses PostgreSQL with parameterized queries; no raw SQL |
+| Injection | SeaORM parameterized queries prevent SQL injection; no shell execution |
 | Dependency vulnerabilities | Regular `npm audit`; minimal dependency tree |

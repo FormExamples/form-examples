@@ -6,7 +6,7 @@ Confidential medical information — neurological conditions for driving fitness
 
 - **Form**: B1 — Confidential medical information (neurological)
 - **Agency**: Driver & Vehicle Licensing Agency (DVLA), United Kingdom
-- **Revision**: May 2024 (Part A); Medical questionnaire May 2023; Authorisation March 2025
+- **Revision**: May 2024 (Part A); Medical questionnaire May 2023; Authorization March 2025
 - **Pages**: 6
 - **URL**: <https://assets.publishing.service.gov.uk/media/67ffcccc694d57c6b1cf8e2e/b1-confidential-medical-information.pdf>
 
@@ -27,7 +27,7 @@ Confidential medical information — neurological conditions for driving fitness
 - **Part B**: Healthcare Professional — GP details, consultant details
 - **Medical Questionnaire — Neurological**: 12 questions covering condition history, treatment, blackouts, seizures/epilepsy, medication, VP shunt, daily living, double vision, eyesight, vehicle adaptations
 - **Epilepsy Declaration**: Required if diagnosis of epilepsy or more than 1 seizure
-- **Applicant's Authorisation**: Medical disclosure declaration, correspondence consent
+- **Applicant's Authorization**: Medical disclosure declaration, correspondence consent
 
 ## Conditions covered
 
@@ -56,7 +56,7 @@ Confidential medical information — neurological conditions for driving fitness
 10. Double Vision - Q10 — diplopia and correction methods
 11. Eyesight - Q11 — eyesight problems from condition
 12. Vehicle Adaptations - Q12 — special controls or automatic transmission
-13. Authorisation - Applicant's authorisation and declaration
+13. Authorization - Applicant's authorization and declaration
 
 ## Conditional logic
 
@@ -74,7 +74,7 @@ Confidential medical information — neurological conditions for driving fitness
 - **Subarachnoid haemorrhage**: Bleeding in the space surrounding the brain
 - **Diplopia**: Double vision
 - **Nyctalopia**: Night blindness
-- **Orthoptist**: Healthcare professional specialising in eye movement disorders
+- **Orthoptist**: Healthcare professional specializing in eye movement disorders
 
 ## Compliance
 

@@ -50,12 +50,12 @@
 - WHO child growth standards:
   <https://www.who.int/tools/child-growth-standards>
 
-## Immunisation
+## Immunization
 
-- UKHSA *Immunisation against infectious disease* ("Green Book"):
-  <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
-- UK routine immunisation schedule:
-  <https://www.gov.uk/government/publications/the-complete-routine-immunisation-schedule>
+- UKHSA *Immunization against infectious disease* ("Green Book"):
+  <https://www.gov.uk/government/collections/immunization-against-infectious-disease-the-green-book>
+- UK routine immunization schedule:
+  <https://www.gov.uk/government/publications/the-complete-routine-immunization-schedule>
 
 ## Developmental and adolescent screening
 

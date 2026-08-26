@@ -24,7 +24,7 @@ instructions).
 Joint-replacement clinics need a structured record of *why* a patient is or
 is not being listed for total hip arthroplasty — not another anaesthetic
 fitness form (the monorepo already has three ASA-grading pre-operative
-assessments and a dedicated optimisation form), but the orthopaedic case for
+assessments and a dedicated optimization form), but the orthopaedic case for
 surgery itself: pain and functional decline quantified with a validated
 instrument, imaging correlation, and a documented conservative-treatment
 trial. This form is that record.

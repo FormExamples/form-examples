@@ -20,7 +20,7 @@ radiologist, cardiologist, vascular surgeon, or other reporting clinician rather
 than by the patient, and is aligned with the Royal College of Radiologists (RCR)
 *Standards for the interpretation and reporting of imaging investigations*, the
 ACR Appropriateness Criteria, established carotid- and arterial-stenosis grading
-conventions (NASCET / ECST), and the UK Ionising Radiation (Medical Exposure)
+conventions (NASCET / ECST), and the UK Ionizing Radiation (Medical Exposure)
 Regulations — IR(ME)R 2017.
 
 ## Scope and intended users
@@ -47,7 +47,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -83,8 +83,8 @@ classification, severity, and flags:
 `active_extravasation`, `thrombus`, `normal_vessels`, `incidental_finding`.
 
 Key measurements / facts: `max_stenosis_percent` (stenosis severity grading and
-categorisation) and `intervention_performed` (whether an angioplasty, stent, or
-embolisation was performed during the study).
+categorization) and `intervention_performed` (whether an angioplasty, stent, or
+embolization was performed during the study).
 
 ## Wizard steps
 
@@ -135,7 +135,7 @@ angiography-test-result/
 ## Clinical references
 
 - RCR — Standards for the interpretation and reporting of imaging investigations
-  (third edition). Emphasises *actionable reporting* and applies to all who
+  (third edition). Emphasizes *actionable reporting* and applies to all who
   report imaging.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/standards-for-interpretation-and-reporting-of-imaging-investigations-third-edition/>
 - NASCET / ECST carotid- and arterial-stenosis grading conventions (percentage
@@ -144,8 +144,8 @@ angiography-test-result/
   <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7607093/>
 - ACR Appropriateness Criteria (cardiovascular and vascular variants).
   <https://acsearch.acr.org/list>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
-  (justification and dose audit for ionising-radiation angiography).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+  (justification and dose audit for ionizing-radiation angiography).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 
 See [`doc/clinical-references.md`](doc/clinical-references.md) for the full
@@ -157,7 +157,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

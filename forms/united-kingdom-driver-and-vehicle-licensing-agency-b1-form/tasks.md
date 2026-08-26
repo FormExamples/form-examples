@@ -7,7 +7,7 @@
 
 ## Pending
 
-- [ ] Author SQL migrations (patient, form parts, epilepsy declaration, authorisation)
+- [ ] Author SQL migrations (patient, form parts, epilepsy declaration, authorization)
 - [ ] Generate XML representations and DTDs
 - [ ] Generate FHIR R5 JSON resources
 - [ ] Implement patient form frontend with HTML/CSS/JS (13 steps)

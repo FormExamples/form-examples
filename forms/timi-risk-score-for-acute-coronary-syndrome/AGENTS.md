@@ -6,7 +6,7 @@ age ≥ 65; ≥ 3 coronary risk factors; known CAD (stenosis ≥ 50%); aspirin i
 prior 7 days; ≥ 2 anginal episodes in 24 h; ST deviation ≥ 0.5 mm; positive
 cardiac marker — awards 1 point each, sums a total of 0–7, and maps that total
 to a risk band (0–1 low, 2–4 intermediate, 5–7 high) and a 14-day risk of death,
-MI, or urgent revascularisation.
+MI, or urgent revascularization.
 
 A **separate TIMI STEMI score exists**; this form is the UA/NSTEMI version only.
 

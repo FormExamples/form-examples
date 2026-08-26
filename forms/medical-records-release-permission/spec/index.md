@@ -6,7 +6,7 @@ Slug: `medical-records-release-permission`
 
 ## 1. Purpose
 
-Authorisation form for releasing medical records, validated for completeness of patient consent and recipient information.
+Authorization form for releasing medical records, validated for completeness of patient consent and recipient information.
 
 Full design description: [`index.md`](../index.md).
 

@@ -33,4 +33,4 @@ bin/protobuf/generate-protobuf-representations.py
 - Enum-style strings map to `enum` definitions.
 - Timestamps use `google.protobuf.Timestamp`.
 - `NUMERIC(5,2)` columns map to `double` (the lossy round-trip is acceptable
-  for refractive values that are pre-quantised to 0.25 D steps).
+  for refractive values that are pre-quantized to 0.25 D steps).

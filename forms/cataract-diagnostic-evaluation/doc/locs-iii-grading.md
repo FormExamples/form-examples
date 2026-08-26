@@ -18,7 +18,7 @@ one decimal place:
 
 LOCS III is read and recorded **per eye**. It does not itself define a
 severity band, a treatment threshold, or a surgical indication — it is a
-continuous descriptive scale intended for standardised documentation and
+continuous descriptive scale intended for standardized documentation and
 research comparability.
 
 ## This form's severity-band simplification
@@ -79,7 +79,7 @@ reasons to escalate rather than to file a routine recommendation.
 
 A simple, non-validated 0–4 self-report composite (0–12 total) covering
 difficulty with reading, driving, and daily activities (step 13). It
-contextualises the clinical picture — a patient with only a moderate LOCS
+contextualizes the clinical picture — a patient with only a moderate LOCS
 III grade but severe functional difficulty is still a patient in distress —
 but it does not itself gate the computed surgical-candidacy recommendation,
 because it is not a validated instrument.

@@ -54,7 +54,7 @@
       `<locale>/main.ftl`. Server now boots in the default config.
 - [ ] Replace Loco's default starter `User` model and auth controllers
       with the ADR-specific tables, or remove them
-- [x] Customise the generated templates into a 16-section wizard at
+- [x] Customize the generated templates into a 16-section wizard at
       `/architecture_decision_records/{id}/edit`
 - [x] HTMX-driven position add/remove. Three endpoints scoped under
       `/architecture_decision_records/{id}/positions[/{position_id}]`

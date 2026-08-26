@@ -13,7 +13,7 @@ payment, or health-care operations (TPO).
 This implementation is modelled on the Tennessee Department of Human Services
 form **HS-2557 — HIPAA Authorization for Release of Medical/Health
 Information** (revised 12-15), reproduced in [`seed.pdf`](./seed.pdf). The
-HS-2557 layout is representative of the standardised state-agency templates
+HS-2557 layout is representative of the standardized state-agency templates
 issued by US Departments of Human Services (Tennessee, Pennsylvania, and
 others) and complies with the disclosure provisions of:
 
@@ -32,7 +32,7 @@ others) and complies with the disclosure provisions of:
   (parent of a minor, court-appointed guardian, conservator, power of
   attorney for health care, executor of a deceased patient's estate).
 - **Output consumers:** the medical-records department of the disclosing
-  provider, the named recipient organisation, and the patient (who is
+  provider, the named recipient organization, and the patient (who is
   entitled to a copy of the signed form).
 
 ## Scoring system
@@ -47,7 +47,7 @@ others) and complies with the disclosure provisions of:
 
 1. A specific and meaningful description of the PHI to be used or disclosed.
 2. The name (or specific identification) of the person(s) or class of
-   persons authorised to make the use or disclosure.
+   persons authorized to make the use or disclosure.
 3. The name (or specific identification) of the person(s) or class of
    persons to whom the use or disclosure may be made.
 4. A description of each purpose of the requested use or disclosure.
@@ -78,8 +78,8 @@ forms.
 | --- | --------------------------------- | --- |
 | 1   | Patient identification            | print name, date of birth, Social Security Number (optional), street address, city, state, ZIP, phone |
 | 2   | Signer identification             | signer relationship (self / parent of minor / guardian / other authorized representative), description of representative authority, parent/guardian co-signature when required by state law |
-| 3   | Disclosing source                 | specific identification of the person(s) or organisation(s) holding the records, OR an explicit class (doctors, hospitals, clinics, nursing homes, government and private providers, insurance companies, health plans) |
-| 4   | Authorized recipient              | recipient name, organisation, role, address, phone, email |
+| 3   | Disclosing source                 | specific identification of the person(s) or organization(s) holding the records, OR an explicit class (doctors, hospitals, clinics, nursing homes, government and private providers, insurance companies, health plans) |
+| 4   | Authorized recipient              | recipient name, organization, role, address, phone, email |
 | 5   | Records to disclose               | yes/no plus initials for each sensitive category: general medical / health, mental health, drug or alcohol treatment / referral, HIV-AIDS test or treatment; free-text "other" description |
 | 6   | Purpose of disclosure             | one or more of: eligibility determination, continuing treatment, insurance claim, legal proceeding, disability application, personal use, research, employment, "at the request of the individual", other (free-text) |
 | 7   | Expiration                        | expiration date OR expiration event (e.g. "12 months from signature", "upon conclusion of my claim"); "none" is not permitted |

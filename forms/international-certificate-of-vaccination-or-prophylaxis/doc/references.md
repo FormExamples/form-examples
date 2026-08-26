@@ -41,7 +41,7 @@
 
 ## UK
 
-- UK Health Security Agency. *Immunisation against infectious disease* —
+- UK Health Security Agency. *Immunization against infectious disease* —
   Chapter 35 Yellow fever.
   <https://www.gov.uk/government/publications/yellow-fever-the-green-book-chapter-35>
 - UK Health Security Agency. *Travel Health Pro — Yellow Fever*.

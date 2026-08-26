@@ -19,7 +19,7 @@ payment, or health-care operations (TPO).
 This implementation is modelled on the Tennessee Department of Human Services
 form **HS-2557 — HIPAA Authorization for Release of Medical/Health
 Information** (revised 12-15), reproduced in [`seed.pdf`](./seed.pdf). The
-HS-2557 layout is representative of the standardised state-agency templates
+HS-2557 layout is representative of the standardized state-agency templates
 issued by US Departments of Human Services (Tennessee, Pennsylvania, and
 others) and complies with the disclosure provisions of:
 
@@ -41,7 +41,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 1. A specific and meaningful description of the PHI to be used or disclosed.
 2. The name (or specific identification) of the person(s) or class of
-   persons authorised to make the use or disclosure.
+   persons authorized to make the use or disclosure.
 3. The name (or specific identification) of the person(s) or class of
    persons to whom the use or disclosure may be made.
 4. A description of each purpose of the requested use or disclosure.

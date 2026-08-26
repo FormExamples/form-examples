@@ -49,7 +49,7 @@ A **unit** is 8 g / 10 mL of pure alcohol (UK definition). Question 1 answered
 | Total score | Risk band | Recommended action |
 | --- | --- | --- |
 | 0–4 | Lower risk | Reinforce low-risk drinking guidance (UK Chief Medical Officers' ≤ 14 units/week, spread over 3+ days). No further action from this screen. |
-| 5–7 | Increasing risk | Positive screen. Deliver brief structured advice on reducing consumption; complete the full 10-item AUDIT to characterise risk. |
+| 5–7 | Increasing risk | Positive screen. Deliver brief structured advice on reducing consumption; complete the full 10-item AUDIT to characterize risk. |
 | 8–10 | Higher risk | Positive screen. Brief advice plus offer of an extended brief intervention; complete the full AUDIT. |
 | 11–12 | Possible dependence | Positive screen. Complete the full AUDIT; a full-AUDIT score ≥ 20 or clinical features of dependence warrant referral to specialist alcohol services. |
 

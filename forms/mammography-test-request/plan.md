@@ -20,7 +20,7 @@ NICE NG12 guidance.
 
 - **Four orthogonal axes.** Appropriateness, cancer-pathway urgency,
   completeness, and clinical priority are independent and each citable to a
-  recognised body. A request can be appropriate yet incomplete, or complete yet
+  recognized body. A request can be appropriate yet incomplete, or complete yet
   urgent.
 - **NICE NG12 triggers auto-escalate.** Any suspected-cancer criterion forces a
   two-week-wait tier regardless of the other axes.

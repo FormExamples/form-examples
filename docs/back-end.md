@@ -104,7 +104,7 @@ cd back-end-with-loco && cargo deny --all-features check
 Model and request tests use `loco_rs::testing::prelude::*`: `boot_test::<App>()`
 brings up the app against the `_test` Postgres database, `seed::<App>()` loads
 fixtures, and assertions use `insta` snapshots (`serial_test`'s `#[serial]`
-serialises DB access). In CI the Rust job runs `cargo check` + `cargo clippy -D
+serializes DB access). In CI the Rust job runs `cargo check` + `cargo clippy -D
 warnings` + `cargo deny --all-features check` + `cargo test` across an 8-way
 shard matrix, each shard with its own Postgres-backed per-crate database.
 

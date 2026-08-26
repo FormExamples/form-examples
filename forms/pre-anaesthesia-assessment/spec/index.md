@@ -15,7 +15,7 @@ report with an anaesthesia plan suitable for the pre-operative record.
 This form is the clinician counterpart to a patient self-report pre-operative
 questionnaire: it is completed by an anaesthetist, surgeon, pre-op assessment
 nurse, or perioperative physician rather than by the patient. It is aligned with
-CPOC's _Preoperative Assessment and Optimisation for Adult Surgery_ (June 2021)
+CPOC's _Preoperative Assessment and Optimization for Adult Surgery_ (June 2021)
 and the Geeky Medics _Anaesthetic Pre-operative Assessment OSCE Guide_, and is
 intended to support shared decision-making under the Montgomery consent
 standard.

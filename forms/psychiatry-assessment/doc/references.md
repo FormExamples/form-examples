@@ -35,7 +35,7 @@
 - NICE NG222 — *Depression in adults: treatment and management* (2022).
   https://www.nice.org.uk/guidance/ng222
 
-- NICE CG113 — *Generalised anxiety disorder and panic disorder in
+- NICE CG113 — *Generalized anxiety disorder and panic disorder in
   adults: management* (2011, updated 2019).
   https://www.nice.org.uk/guidance/cg113
 

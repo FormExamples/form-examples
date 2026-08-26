@@ -29,7 +29,7 @@ intracranial pressure.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe (needing imaging or coagulation correction first) or incomplete.
 
 | Axis | Instrument | Output |
@@ -46,7 +46,7 @@ triage tier to **emergency** regardless of the other axes.
 
 | Concern | Threshold / rule |
 | --- | --- |
-| Raised intracranial pressure | Image (CT head) and stabilise before LP if suspected ICP, new focal neurological signs, or reduced consciousness (GCS ≤ 9) |
+| Raised intracranial pressure | Image (CT head) and stabilize before LP if suspected ICP, new focal neurological signs, or reduced consciousness (GCS ≤ 9) |
 | INR | LP generally avoided / delayed if INR > 1.5 |
 | Platelet count | LP generally avoided if platelets < 40–50 ×10⁹/L |
 | Anticoagulation | Hold / reverse and discuss with haematology before LP |
@@ -106,7 +106,7 @@ lumbar-puncture-test-request/
 
 - NICE NG240 *Meningitis (bacterial) and meningococcal disease: recognition,
   diagnosis and management* — neuroimaging prior to LP; do not routinely image,
-  but image and stabilise first when raised ICP is suspected (new focal signs,
+  but image and stabilize first when raised ICP is suspected (new focal signs,
   abnormal pupils, GCS ≤ 9). <https://www.nice.org.uk/guidance/ng240>
 - NICE NG240 evidence — *Role of neuroimaging prior to lumbar puncture*.
   <https://www.nice.org.uk/guidance/ng240/evidence/b5-role-of-neuroimaging-prior-to-lumbar-puncture-pdf-481072534164>

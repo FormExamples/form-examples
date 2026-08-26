@@ -48,7 +48,7 @@ values rather than vetting a request.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical result.
 
 | Axis | Instrument | Output |

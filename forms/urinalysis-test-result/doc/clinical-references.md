@@ -68,7 +68,7 @@ haematuria appear; this can drive the `urgent-referral` flag and Axis D
 escalation.
 
 - NICE NG12 *Suspected cancer: recognition and referral*.
-  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer>
+  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organized-by-site-of-cancer>
 
 ## How the references map to the schema
 

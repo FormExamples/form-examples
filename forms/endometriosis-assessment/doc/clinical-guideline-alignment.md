@@ -30,7 +30,7 @@ elements.
   endometriosis.* Human Reproduction Open. 2022;2022(2):hoac009. DOI:
   <https://doi.org/10.1093/hropen/hoac009>
 
-ESHRE 2022 emphasises:
+ESHRE 2022 emphasizes:
 
 - Patient-reported outcome measures (EHP-30) for symptom impact
 - Imaging (TVUS, MRI) before laparoscopy where possible

@@ -19,7 +19,7 @@ inappropriate screening use before the sample reaches the laboratory.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, interpretation safety,
-  completeness, and urgency are independent and each citable to a recognised
+  completeness, and urgency are independent and each citable to a recognized
   body. A request can be appropriate yet incomplete, or appropriate yet carry
   interpretation risk.
 - **Discourage screening misuse.** Markers requested as broad screening force

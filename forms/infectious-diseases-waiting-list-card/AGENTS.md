@@ -14,7 +14,7 @@ See [`index.md`](./index.md) for the full design and the 7-step wizard table.
 - `./tasks.md` — task tracking
 - `./spec.md` — living domain spec for spec-driven development
 - `./seed.md` — original seed brief
-- `./doc/` — RTT / clinical-prioritisation reference notes
+- `./doc/` — RTT / clinical-prioritization reference notes
 - `./sql/` — Liquibase-formatted Postgres schema (source of truth)
 - `./xml/` — generated XML + DTD per SQL table
 - `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
@@ -55,7 +55,7 @@ See [`index.md`](./index.md) for the full design and the 7-step wizard table.
 ## Priority targets
 
 The clinical priority determines the maximum permitted wait. These targets
-mirror the NHS England Clinical Prioritisation framework (P1–P6) and the
+mirror the NHS England Clinical Prioritization framework (P1–P6) and the
 overarching 18-week RTT standard.
 
 | Priority | Maximum wait | Use |

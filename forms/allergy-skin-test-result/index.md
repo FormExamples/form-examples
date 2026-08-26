@@ -7,7 +7,7 @@ captures why testing should be done and whether it is safe, this form records
 what the test **found** and a structured **interpretation**. It records the
 performed test type, the clinical history, the pre-analytic validity controls
 (antihistamine washout and positive histamine control), the allergens tested and
-their measured weal sizes or specific-IgE (sIgE) results, the sensitised
+their measured weal sizes or specific-IgE (sIgE) results, the sensitized
 allergens and a structured reaction summary, the clinical interpretation and
 impression, and recommended follow-up — then computes a **four-axis
 interpretation grade** (result classification, abnormality severity / structured
@@ -21,7 +21,7 @@ template. It is completed by an allergist-immunologist, dermatologist, or nurse
 rather than by the patient, and is aligned with BSACI and EAACI skin-test and
 specific-IgE interpretation guidance — including the ≥3 mm positive-weal
 threshold, the requirement for a valid positive histamine control, and the
-essential distinction between **sensitisation** and **clinically relevant
+essential distinction between **sensitization** and **clinically relevant
 allergy**.
 
 ## Scope and intended users
@@ -45,17 +45,17 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical reaction.
 
 | Axis | Instrument | Output |
 | --- | --- | --- |
 | **A. Result classification** | Overall reporting conclusion | normal / abnormal / critical / inconclusive |
-| **B. Severity & structured reporting** | EAACI / BSACI reaction interpretation + structured sensitisation pattern | abnormality severity (none / minor / moderate / major) + a `reporting_category` label |
+| **B. Severity & structured reporting** | EAACI / BSACI reaction interpretation + structured sensitization pattern | abnormality severity (none / minor / moderate / major) + a `reporting_category` label |
 | **C. Report completeness** | Mandatory report-section checklist (history, validity controls, allergens / weal sizes, interpretation, impression) | 0–100 % complete |
 | **D. Follow-up urgency** | Acuity / action escalation rules | routine / recommended / urgent / critical-alert (+ target timeframe + recommended action) |
 
-**Clinically relevant sensitisation** classifies the result as *abnormal*. A
+**Clinically relevant sensitization** classifies the result as *abnormal*. A
 **systemic / anaphylactic reaction during the test** classifies it as *critical*,
 **auto-escalates** Axis D to *critical-alert*, and raises the
 `critical-result-alert` flag regardless of the other axes. An **invalid test**
@@ -63,13 +63,13 @@ still describe a critical reaction.
 the result as *inconclusive*. Choose the least-urgent band only when no rule
 fires.
 
-### Sensitisation versus clinical allergy
+### Sensitization versus clinical allergy
 
 Skin-prick and specific-IgE tests have a good negative predictive value but a
 positive predictive value that can be as low as ~50 %. A positive result
-demonstrates **sensitisation**, not necessarily clinical allergy, and must be
+demonstrates **sensitization**, not necessarily clinical allergy, and must be
 interpreted against a convincing clinical history. Only clinically relevant
-sensitisation is graded *abnormal*.
+sensitization is graded *abnormal*.
 
 ### Structured reaction summary
 
@@ -92,8 +92,8 @@ Completed in order on a single continuous single-page wizard (~7 sections).
 | 1 | Report identification | reporting clinician, originating request reference, test type, report status, performed & reported dates |
 | 2 | Clinical history | clinical history / question |
 | 3 | Validity controls | antihistamines withheld, positive control valid |
-| 4 | Allergens & reactions | allergens tested, weal sizes, specific-IgE results, sensitised allergens |
-| 5 | Reaction summary | positive reactions, sensitisation confirmed, anaphylaxis during test, all negative, test invalid |
+| 4 | Allergens & reactions | allergens tested, weal sizes, specific-IgE results, sensitized allergens |
+| 5 | Reaction summary | positive reactions, sensitization confirmed, anaphylaxis during test, all negative, test invalid |
 | 6 | Interpretation & impression | interpretation, impression, reporting category, recommended follow-up |
 | 7 | Interpretation & sign-off | computed four-axis grade, flags, recommendation, critical-result communication, signature |
 
@@ -137,7 +137,7 @@ allergy-skin-test-result/
   histamine control. <https://pmc.ncbi.nlm.nih.gov/articles/PMC3565910/>
 - Measurement and interpretation of skin prick test results, *Clinical and
   Translational Allergy*. <https://pmc.ncbi.nlm.nih.gov/articles/PMC4763448/>
-- Skin Prick Tests and specific IgE tests, BSACI — sensitisation versus
+- Skin Prick Tests and specific IgE tests, BSACI — sensitization versus
   clinically relevant allergy; positive predictive value limitations.
   <https://www.bsaci.org/resources/allergy-management/food-allergy/investigations/skin-prick-tests-and-specific-ige-tests/>
 - BSACI Standard Operating Procedure for skin-prick testing — antihistamine

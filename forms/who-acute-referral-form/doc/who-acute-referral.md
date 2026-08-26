@@ -1,6 +1,6 @@
 # WHO Acute Referral Form
 
-This form implements the WHO standardised acute referral form for
+This form implements the WHO standardized acute referral form for
 transferring patients between healthcare facilities — typically from a
 lower-tier facility (rural health centre, district hospital) to a
 higher-tier facility (referral hospital, tertiary centre).
@@ -149,5 +149,5 @@ time of import.
 - Haig KM, Sutton S, Whittington J. SBAR. *Jt Comm J Qual Patient Saf.*
   2006;32(3):167-75. PMID: 16617948.
 - NICE NG94. *Emergency and acute medical care in over 16s: service
-  delivery and organisation*. 2018.
+  delivery and organization*. 2018.
   <https://www.nice.org.uk/guidance/ng94>

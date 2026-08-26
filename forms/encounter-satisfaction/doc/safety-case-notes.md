@@ -55,7 +55,7 @@ adjustment methodology.
   providers, with Article 9(2)(h) — provision of health or social care
   — for any health-data items.
 - Information Commissioner's Office *Health and social care data*
-  guidance. <https://ico.org.uk/for-organisations/sector-specific-guidance/health/>
+  guidance. <https://ico.org.uk/for-organizations/sector-specific-guidance/health/>
 - Retention: align with the *NHS Records Management Code of Practice*
   current edition (NHSX / NHS England).
   <https://www.nhsx.nhs.uk/information-governance/guidance/records-management-code/>

@@ -165,5 +165,5 @@ Captured in `index.md` compliance section.
 - Not a patient-facing portal; designed for clinician data entry after encounter.
 - Does not implement real EuroQol EQ-5D-5L item wording — paraphrased only. Production deployment requires a signed EuroQol licence.
 - Does not compute PROMIS T-scores from raw responses using the official item-response-theory calibration tables; uses a documented linear approximation with an explicit note in `doc/licensing.md`. Production use requires the official scoring tables.
-- No internationalisation in this iteration (English only).
+- No internationalization in this iteration (English only).
 - No autosave to localStorage in this iteration.

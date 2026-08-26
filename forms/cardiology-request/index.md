@@ -31,7 +31,7 @@ pain (CG95), chronic heart failure (NG106), transient loss of consciousness
 ## Scoring system
 
 The engine grades each referral on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate referral can still be
+recognized body. Axes are orthogonal: a highly appropriate referral can still be
 unsafe to manage as a routine referral, incomplete, or urgent.
 
 | Axis | Instrument | Output |

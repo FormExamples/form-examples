@@ -1,11 +1,11 @@
 # Perioperative Optimization
 
-A UK NHS–aligned **perioperative optimisation and prehabilitation** intake: the
+A UK NHS–aligned **perioperative optimization and prehabilitation** intake: the
 screening questionnaire a surgical or anaesthetic team uses to identify
 **reversible** health problems before surgery, decide what can be treated in the
-time available, and build a personalised prehabilitation plan.
+time available, and build a personalized prehabilitation plan.
 
-The engine grades each of eight optimisation domains as **optimised**,
+The engine grades each of eight optimization domains as **optimized**,
 **in progress**, **action required**, or **insufficient time**, computes a
 composite **surgical readiness** band, and produces a domain-by-domain plan with
 target values, referrals, and start dates. The goal is the one NHS England
@@ -13,7 +13,7 @@ states for the perioperative pathway: fewer complications, shorter stays, and a
 body better able to handle the physical stress of surgery.
 
 > **Naming.** The directory slug is `perioperative-optimization` (US spelling,
-> as requested). Prose uses the UK spelling **optimisation**, matching NHS
+> as requested). Prose uses the UK spelling **optimization**, matching NHS
 > England and CPOC. The slug, SQL table names
 > (`perioperative_optimization`, `perioperative_optimization_grade`, …), and
 > every generated artefact keep the `optimization` stem so derived
@@ -29,12 +29,12 @@ to fix it?"**
 | | This form | The ASA-grading pre-op forms |
 | --- | --- | --- |
 | Question | what is modifiable, and is there time? | how risky is this patient? |
-| Primary output | per-domain optimisation status + surgical readiness | ASA grade + composite risk |
+| Primary output | per-domain optimization status + surgical readiness | ASA grade + composite risk |
 | Driver | **time to surgery** versus each domain's lead time | severity of findings |
 | Result | a prehabilitation plan with start dates | an anaesthesia plan |
 | Sibling | [`pre-operative-assessment-by-clinician`](../pre-operative-assessment-by-clinician), [`pre-operative-assessment-by-patient`](../pre-operative-assessment-by-patient), [`pre-anaesthesia-assessment`](../pre-anaesthesia-assessment) | each other |
 
-A patient can be ASA III and fully optimised, or ASA II with an untreated iron
+A patient can be ASA III and fully optimized, or ASA II with an untreated iron
 deficiency that a four-week course of intravenous iron would fix. Only this form
 distinguishes those two.
 
@@ -47,11 +47,11 @@ distinguishes those two.
   anaesthetists, surgeons, prehabilitation therapists, specialist nurses,
   clinical pharmacists, and dietitians working to a perioperative pathway.
 - **Patients:** adults (≥ 16 years) listed for elective or scheduled surgery.
-  Emergency surgery is out of scope: there is no lead time to optimise in, so
+  Emergency surgery is out of scope: there is no lead time to optimize in, so
   the form records the urgency and directs the user to the assessment forms
   above instead.
 
-## The eight optimisation domains
+## The eight optimization domains
 
 Each domain carries a **screening threshold**, an **intervention**, and a
 **lead time** — the minimum number of weeks before surgery the intervention
@@ -60,7 +60,7 @@ needs in order to work. The lead time is what turns a finding into a decision.
 | # | Domain | Screening threshold | Intervention | Lead time |
 | --- | --- | --- | --- | --- |
 | 1 | **Anaemia and iron deficiency** | Hb < 130 g/L (men), < 120 g/L (women); ferritin < 30 µg/L, or 30–100 µg/L with TSAT < 20 % | oral iron, or intravenous iron where oral is not tolerated or time is short | 4 weeks (IV) / 8 weeks (oral) |
-| 2 | **Glycaemic control** | HbA1c ≥ 69 mmol/mol (8.5 %) defer; 48–68 optimise | diabetes-team review, medication adjustment, education | 12 weeks (HbA1c reflects ~3 months) |
+| 2 | **Glycaemic control** | HbA1c ≥ 69 mmol/mol (8.5 %) defer; 48–68 optimize | diabetes-team review, medication adjustment, education | 12 weeks (HbA1c reflects ~3 months) |
 | 3 | **Smoking** | any current smoker | cessation support, nicotine replacement, referral | 4 weeks |
 | 4 | **Alcohol** | > 14 units/week, or AUDIT-C ≥ 5 (men) / ≥ 4 (women) | brief intervention, reduction plan, alcohol-services referral | 4 weeks |
 | 5 | **Nutrition** | MUST ≥ 2, or unintentional weight loss > 10 % | dietitian referral, oral nutritional supplements, immunonutrition | 2–4 weeks |
@@ -69,7 +69,7 @@ needs in order to work. The lead time is what turns a finding into a decision.
 | 8 | **Cardiorespiratory** | uncontrolled hypertension, uncontrolled asthma or COPD, unassessed obstructive sleep apnoea (STOP-BANG ≥ 5), ejection fraction < 40 % | specialty referral, inhaler review, sleep study, echocardiogram | 2–8 weeks by finding |
 
 Frailty, cognition, and psychological readiness are assessed and reported but
-are treated as **context that modifies the plan** rather than as optimisation
+are treated as **context that modifies the plan** rather than as optimization
 domains in their own right, because they are rarely reversible in the available
 window.
 
@@ -103,10 +103,10 @@ ones.
 
 | Band | Drivers | Meaning |
 | --- | --- | --- |
-| **Ready** | every domain optimised or not applicable | proceed as listed |
-| **Optimisation in progress** | one or more domains in progress, none requiring action | proceed, and continue the plan up to the date |
-| **Optimisation required** | one or more domains action-required, all within their lead time | proceed with prehabilitation, or re-date if the plan slips |
-| **Defer surgery** | any domain `insufficient-time`, or HbA1c ≥ 69 mmol/mol, or Hb < 80 g/L | defer and optimise, or record an explicit accept-risk decision |
+| **Ready** | every domain optimized or not applicable | proceed as listed |
+| **Optimization in progress** | one or more domains in progress, none requiring action | proceed, and continue the plan up to the date |
+| **Optimization required** | one or more domains action-required, all within their lead time | proceed with prehabilitation, or re-date if the plan slips |
+| **Defer surgery** | any domain `insufficient-time`, or HbA1c ≥ 69 mmol/mol, or Hb < 80 g/L | defer and optimize, or record an explicit accept-risk decision |
 
 ## 16-step wizard
 
@@ -126,10 +126,10 @@ One continuous single page, in the order a clinic actually works through it.
 | 10 | Nutritional screening | height, weight, BMI, unintentional weight loss and percentage, acute disease effect, MUST components and score, appetite, oral nutritional supplements, immunonutrition, dietitian referral |
 | 11 | Functional capacity and physical fitness | usual activity level, stairs without stopping, estimated METs, Duke Activity Status Index, 6-minute walk distance, CPET anaerobic threshold and peak VO₂, grip strength, prehabilitation offered, enrolled, sessions per week |
 | 12 | Frailty, cognition and falls | Clinical Frailty Scale, 4AT or AMT score, falls in 12 months, mobility aid, living situation, care package |
-| 13 | Cardiorespiratory optimisation | blood pressure, heart rate, rhythm, murmur, exercise tolerance, ejection fraction, asthma and COPD control, inhaler technique, rescue steroids, spirometry, STOP-BANG score, obstructive sleep apnoea diagnosis and CPAP use, oxygen saturation |
+| 13 | Cardiorespiratory optimization | blood pressure, heart rate, rhythm, murmur, exercise tolerance, ejection fraction, asthma and COPD control, inhaler technique, rescue steroids, spirometry, STOP-BANG score, obstructive sleep apnoea diagnosis and CPAP use, oxygen saturation |
 | 14 | Psychological readiness and social support | anxiety, depression, expectations, understanding of the procedure, shared decision-making discussion, carer, transport home, home circumstances, support after discharge, health literacy |
-| 15 | Optimisation plan by domain | for each triggered domain: intervention, referral made, target value, start date, weeks required, responsible clinician, patient agreement |
-| 16 | Readiness summary and sign-off | computed domain statuses and fired rules, surgical readiness band, safety flags, weeks to surgery, clinician override with reason, gate decision (proceed / proceed with prehabilitation / defer and optimise / accept unoptimised risk / MDT review), notes, electronic signature |
+| 15 | Optimization plan by domain | for each triggered domain: intervention, referral made, target value, start date, weeks required, responsible clinician, patient agreement |
+| 16 | Readiness summary and sign-off | computed domain statuses and fired rules, surgical readiness band, safety flags, weeks to surgery, clinician override with reason, gate decision (proceed / proceed with prehabilitation / defer and optimize / accept unoptimised risk / MDT review), notes, electronic signature |
 
 ## Safety flags
 
@@ -145,7 +145,7 @@ override. Priority: high / medium / low.
 | `sglt2-inhibitor-not-held` | SGLT2 inhibitor in use with no hold plan — euglycaemic diabetic ketoacidosis risk |
 | `glp1-agonist-aspiration-risk` | GLP-1 agonist in use — delayed gastric emptying and aspiration risk |
 | `anticoagulation-plan-missing` | anticoagulant or antiplatelet in use with no agreed hold-and-restart plan |
-| `insufficient-time-to-optimise` | any triggered domain cannot be optimised before the listed date |
+| `insufficient-time-to-optimise` | any triggered domain cannot be optimized before the listed date |
 | `active-smoker-major-surgery` | current smoker listed for major or major-plus surgery |
 | `alcohol-dependence-risk` | AUDIT-C ≥ 8, or dependence features recorded — withdrawal risk in hospital |
 | `high-malnutrition-risk` | MUST ≥ 2 |
@@ -166,8 +166,8 @@ override. Priority: high / medium / low.
 Two further categories, `safeguarding` and `other`, are permitted by the schema
 but are **not emitted by the shipped rule set**. There is deliberately no
 safeguarding field on this form: a safeguarding concern in a pre-operative
-clinic is routed through the organisation's own safeguarding pathway, not
-through an optimisation score. The categories exist so a deployment that adds a
+clinic is routed through the organization's own safeguarding pathway, not
+through an optimization score. The categories exist so a deployment that adds a
 local field can record against them without a schema change.
 
 ## Clinician override
@@ -213,18 +213,18 @@ perioperative-optimization/
 
 ## Clinical references
 
-- NHS England. *Earlier screening, risk assessment and health optimisation in
+- NHS England. *Earlier screening, risk assessment and health optimization in
   perioperative pathways.*
-  <https://www.england.nhs.uk/long-read/earlier-screening-risk-assessment-and-health-optimisation-in-perioperative-pathways/>
+  <https://www.england.nhs.uk/long-read/earlier-screening-risk-assessment-and-health-optimization-in-perioperative-pathways/>
 - Centre for Perioperative Care (CPOC). *Preoperative Assessment and
-  Optimisation for Adult Surgery* (June 2021).
-  <https://cpoc.org.uk/guidelines-resources-guidelines/preoperative-assessment-and-optimisation>
+  Optimization for Adult Surgery* (June 2021).
+  <https://cpoc.org.uk/guidelines-resources-guidelines/preoperative-assessment-and-optimization>
 - CPOC / British Society for Haematology. *Guideline for the Management of
   Anaemia in the Perioperative Pathway.*
 - CPOC / Centre for Perioperative Care. *Guideline for Perioperative Care for
   People with Diabetes Mellitus Undergoing Elective and Emergency Surgery.*
-- Agency for Clinical Innovation (NSW). *Perioperative Toolkit — Optimisation.*
-  <https://aci.health.nsw.gov.au/projects/perioperative-toolkit/journey/optimisation>
+- Agency for Clinical Innovation (NSW). *Perioperative Toolkit — Optimization.*
+  <https://aci.health.nsw.gov.au/projects/perioperative-toolkit/journey/optimization>
 - NHS Inform Scotland. *Waiting Well — getting fit for surgery.*
   <https://www.nhsinform.scot/waiting-well/getting-fit-for-surgery/>
 - Kettering General Hospital NHS Trust. *Pre-operative assessment online

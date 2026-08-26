@@ -29,7 +29,7 @@ investigation guidance.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still
+recognized body. Axes are orthogonal: a highly appropriate request can still
 have an unsuitable specimen, be incomplete, or be urgent.
 
 | Axis | Instrument | Output |
@@ -70,7 +70,7 @@ Completed in order on a single-page wizard.
 | 1 | Requesting clinician | name, role, registration body + number, contact, supervising consultant, referral date |
 | 2 | Patient identification | NHS number, name, DOB |
 | 3 | Requested tests | the eight-test panel (dipstick … 24-hour collection); at least one required |
-| 4 | Clinical context | primary indication, clinical details, pregnant / catheterised / current antibiotics |
+| 4 | Clinical context | primary indication, clinical details, pregnant / catheterized / current antibiotics |
 | 5 | Symptoms & red flags | dysuria, frequency, visible haematuria, loin pain, fever |
 | 6 | Specimen | specimen type, collected (yes/no), collection date-time |
 | 7 | Triage & submit | requested urgency, setting, site, notes; computed four-axis grade, flags, recommendation |
@@ -129,7 +129,7 @@ urinalysis-test-request/
   <https://www.nice.org.uk/guidance/ng109/chapter/recommendations>
 - NICE NG12 *Suspected cancer: recognition and referral* — refer people aged 45
   and over with unexplained visible haematuria (2-week-wait bladder-cancer
-  pathway). <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer>
+  pathway). <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organized-by-site-of-cancer>
 - UK Standards for Microbiology Investigations (UK SMI) B41 *Investigation of
   urine* (UKHSA) — MSU collection, transport within 4 hours, refrigeration or
   boric acid up to 48 hours, contamination.

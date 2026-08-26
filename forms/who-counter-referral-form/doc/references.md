@@ -42,7 +42,7 @@
 ## UK clinical guidance for discharge
 
 - NICE NG94. *Emergency and acute medical care in over 16s: service
-  delivery and organisation*. 2018.
+  delivery and organization*. 2018.
   <https://www.nice.org.uk/guidance/ng94>
 - NICE NG27. *Transition between inpatient hospital settings and community
   or care home settings for adults with social care needs*. 2015.

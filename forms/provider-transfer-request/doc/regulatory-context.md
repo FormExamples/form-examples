@@ -10,7 +10,7 @@ this form is:
   <https://theprsb.org/standards/outpatientletter/>
 - PRSB. *Standards.* <https://theprsb.org/standards/>
 
-For inter-team and inter-organisation transfers, the *PRSB Core
+For inter-team and inter-organization transfers, the *PRSB Core
 Information Standard* defines the common dataset.
 
 - PRSB. *Core information standard.*

@@ -16,7 +16,7 @@ Department for Work and Pensions (DWP), and other benefit-paying bodies.
   — the foundational regulations specifying that a statement of
   fitness for work is the prescribed medical evidence for SSP and
   benefit claims; amended in 2010 to introduce "may be fit for work"
-  and in 2022 to expand the list of authorised issuers.
+  and in 2022 to expand the list of authorized issuers.
   <https://www.legislation.gov.uk/uksi/1976/615/contents>
 - **Statutory Sick Pay (Medical Evidence) Regulations 1985** (SI 1985/
   1604). <https://www.legislation.gov.uk/uksi/1985/1604/contents>
@@ -25,7 +25,7 @@ Department for Work and Pensions (DWP), and other benefit-paying bodies.
 
 The Social Security (Medical Evidence) and Statutory Sick Pay (Medical
 Evidence) (Amendment) Regulations 2022 (SI 2022/630) expanded the list
-of healthcare professionals authorised to issue a Med 3 beyond doctors
+of healthcare professionals authorized to issue a Med 3 beyond doctors
 to include:
 
 - Registered nurses (NMC).

@@ -31,7 +31,7 @@ testing.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 invalid (e.g. the patient is on antihistamines), incomplete, or urgent.
 
 | Axis | Instrument | Output |

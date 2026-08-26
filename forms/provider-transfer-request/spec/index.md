@@ -6,7 +6,7 @@ Slug: `provider-transfer-request`
 
 ## 1. Purpose
 
-Inter-provider handover form for transferring a patient's care between clinicians, wards, or organisations, structured around the SBAR (Situation, Background, Assessment, Recommendation) framework with transfer-logistics capture.
+Inter-provider handover form for transferring a patient's care between clinicians, wards, or organizations, structured around the SBAR (Situation, Background, Assessment, Recommendation) framework with transfer-logistics capture.
 
 Full design description: [`index.md`](../index.md).
 

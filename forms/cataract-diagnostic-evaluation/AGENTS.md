@@ -100,7 +100,7 @@ Evaluated in order, later conditions override earlier ones:
 
 - **Glare testing** — a severe functional impact of glare independently
   raises the computed candidacy to `indicated`, even with a mild LOCS III
-  grade, because glare disability is a recognised surgical indication not
+  grade, because glare disability is a recognized surgical indication not
   captured by static acuity.
 - **View obscured by cataract** — when the cataract is too dense to assess
   the fundus and the dilated exam was not performed, the

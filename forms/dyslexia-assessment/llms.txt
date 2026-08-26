@@ -1,6 +1,6 @@
 # Dyslexia Assessment
 
-> Specific learning difficulty evaluation using standardised scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.
+> Specific learning difficulty evaluation using standardized scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.
 
 ## Docs
 

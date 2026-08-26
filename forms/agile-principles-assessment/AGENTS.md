@@ -1,9 +1,9 @@
 # Agile Principles Assessment — Agent Instructions
 
-Self-assessment of an organisation's adoption of the **12 Agile Manifesto
+Self-assessment of an organization's adoption of the **12 Agile Manifesto
 principles**. Collects a Likert score (1–5) plus optional comment per
 principle, then computes a composite agility maturity level
-(Ad-hoc / Initial / Developing / Mature / Optimising), fires per-principle
+(Ad-hoc / Initial / Developing / Mature / Optimizing), fires per-principle
 rules, and emits operational flags (burnout risk, technical-debt risk,
 command-and-control, etc.).
 

@@ -76,7 +76,7 @@ table. The 50 indicators are catalogued in
 
 ## SQL shape
 
-Normalised **parent + child** tables (not one wide row per submission
+Normalized **parent + child** tables (not one wide row per submission
 — at 50 indicators a flat table would need over 100 columns):
 
 - `hospital_performance_indicators` — one row per reporting period:

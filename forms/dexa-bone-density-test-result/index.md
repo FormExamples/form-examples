@@ -86,7 +86,7 @@ risk and informs the management recommendation.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -169,7 +169,7 @@ dexa-bone-density-test-result/
 ## Clinical references
 
 - WHO densitometric classification of osteoporosis (normal / osteopenia /
-  osteoporosis / severe osteoporosis by T-score), as summarised by the
+  osteoporosis / severe osteoporosis by T-score), as summarized by the
   International Osteoporosis Foundation.
   <https://www.osteoporosis.foundation/health-professionals/diagnosis>
 - ISCD — 2023 Official Adult Positions (T-scores preferred; WHO classification
@@ -192,7 +192,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

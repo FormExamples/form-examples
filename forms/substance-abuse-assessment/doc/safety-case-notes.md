@@ -82,7 +82,7 @@ captures:
 
 ## Safeguarding
 
-- **Children** — parental substance use is a recognised safeguarding
+- **Children** — parental substance use is a recognized safeguarding
   trigger. Direct enquiry about children in the household and care
   arrangements.
 - **Domestic abuse** — substance use intersects with intimate-partner

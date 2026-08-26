@@ -3,7 +3,7 @@
 This form is dental decision-support software and, under UK regulation,
 falls within scope of the NHS Digital Clinical Safety Officer process
 (**DCB0129** for manufacturers, **DCB0160** for deploying
-organisations). Dental software in the NHS is also subject to the
+organizations). Dental software in the NHS is also subject to the
 General Dental Council Standards.
 
 This document is a **placeholder** intended to be populated during a

@@ -51,9 +51,9 @@ A single logical assessment record. Fields default to `''` (text/enum) or `null`
 | Field | Points | Criterion |
 | --- | --- | --- |
 | `activeCancer` | +1 | 1 — active cancer (ongoing, ≤ 6 months, or palliative) |
-| `paralysisParesisImmobilisation` | +1 | 2 — paralysis, paresis, or recent plaster immobilisation |
+| `paralysisParesisImmobilisation` | +1 | 2 — paralysis, paresis, or recent plaster immobilization |
 | `bedriddenOrMajorSurgery` | +1 | 3 — bedridden ≥ 3 days or major surgery ≤ 12 weeks |
-| `localisedTenderness` | +1 | 4 — localised deep-vein tenderness |
+| `localisedTenderness` | +1 | 4 — localized deep-vein tenderness |
 | `entireLegSwollen` | +1 | 5 — entire leg swollen |
 | `calfSwellingOver3cm` | +1 | 6 — calf swelling ≥ 3 cm vs asymptomatic side |
 | `pittingOedema` | +1 | 7 — pitting oedema confined to symptomatic leg |

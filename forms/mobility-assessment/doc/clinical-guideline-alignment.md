@@ -23,7 +23,7 @@ setting in patients post critical illness.
 
 The STEADI algorithm uses TUG (≥ 12 s flag), 30-second chair stand, and
 4-stage balance as a paired triad. Step 5 (gait), step 6 (TUG), and step
-4 (balance) operationalise the STEADI battery.
+4 (balance) operationalize the STEADI battery.
 
 ## Royal College of Physicians — National Audit of Inpatient Falls
 

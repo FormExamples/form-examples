@@ -1,6 +1,6 @@
 # Padua Venous Thromboembolism Risk Assessment — Agent Instructions
 
-VTE (venous thromboembolism) risk-stratification tool for hospitalised
+VTE (venous thromboembolism) risk-stratification tool for hospitalized
 **medical** patients. Collects eleven weighted risk factors via a single
 continuous single-page wizard, sums a Padua Prediction Score of **0–20**, and
 classifies **Padua ≥ 4** as **high risk** (consider pharmacological

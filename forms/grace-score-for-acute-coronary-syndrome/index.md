@@ -110,7 +110,7 @@ an **objective admission finding**.
 - UUIDv4 primary keys via `gen_random_uuid()`.
 - Timestamps on every table: `created_at`, `updated_at`, `deleted_at`.
 - Import and export via JSON, XML, CSV, and TSV.
-- Serum creatinine is normalised to a single internal unit before scoring; the
+- Serum creatinine is normalized to a single internal unit before scoring; the
   entered unit is stored alongside the raw value.
 - The scoring engine is pure (no side effects, no I/O) and unit-tested.
 

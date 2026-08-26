@@ -1,6 +1,6 @@
 # WHO Prehospital Form
 
-> World Health Organization standardised prehospital clinical documentation form for emergency medical services.
+> World Health Organization standardized prehospital clinical documentation form for emergency medical services.
 
 ## Docs
 

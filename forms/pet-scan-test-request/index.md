@@ -32,7 +32,7 @@ guidelines, and IR(ME)R radiation-justification duties.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe to prepare, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -53,7 +53,7 @@ safety flag, regardless of how appropriate the request is.
 | --- | --- | --- |
 | FDG-PET-CT | [18F]FDG | cancer staging / restaging, treatment response, suspected recurrence, lymphoma, solitary pulmonary nodule, infection / inflammation |
 | PSMA-PET | [68Ga]/[18F]PSMA | prostate cancer staging / biochemical recurrence |
-| DOTATATE-PET | [68Ga]DOTATATE | neuroendocrine tumour localisation / staging |
+| DOTATATE-PET | [68Ga]DOTATATE | neuroendocrine tumour localization / staging |
 | Amyloid-PET | [18F] amyloid tracers | neurology — dementia / Alzheimer assessment |
 | Cardiac-PET | [18F]FDG / perfusion | myocardial viability, cardiac sarcoid |
 
@@ -130,7 +130,7 @@ pet-scan-test-request/
   <https://www.sciencedirect.com/science/article/pii/S3051292125000065>
 - SNMMI — *18F-FDG PET and PET/CT Patient Preparation: A Review of the
   Literature* (glucose 7–11 mmol/L target). <https://tech.snmjournals.org/content/42/1/5>
-- UK Ionising Radiation (Medical Exposure) Regulations — IR(ME)R 2017
+- UK Ionizing Radiation (Medical Exposure) Regulations — IR(ME)R 2017
   justification of medical exposures.
   <https://www.legislation.gov.uk/uksi/2017/1322/contents>
 
@@ -139,7 +139,7 @@ pet-scan-test-request/
 - MDCG 2019-11 Rev.1 (EU MDR Software Classification) — clinical decision
   support, Class IIa where output drives triage / scan-type selection.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

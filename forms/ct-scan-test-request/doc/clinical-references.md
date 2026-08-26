@@ -19,7 +19,7 @@ Source: ACR Appropriateness Criteria, <https://acsearch.acr.org/list>; RCR
 | eGFR (mL/min/1.73m²) | IV iodinated contrast | Renal risk |
 | --- | --- | --- |
 | ≥ 45 | proceed (standard hydration) | low |
-| 30–44 | caution; minimise volume, hydrate | moderate |
+| 30–44 | caution; minimize volume, hydrate | moderate |
 | < 30 / AKI | contraindicated relative; weigh benefit vs risk | high |
 
 - **Metformin:** continue normally at eGFR ≥ 30; stop from the time of contrast
@@ -45,10 +45,10 @@ Source: ESUR Contrast Media Safety Committee guidelines,
 
 Every medical exposure must be justified: the benefit to the individual must
 outweigh the radiation detriment. Pregnancy (or possible pregnancy) requires
-explicit justification and dose optimisation, and may prompt redirection to a
-non-ionising modality.
+explicit justification and dose optimization, and may prompt redirection to a
+non-ionizing modality.
 
-Source: UK Ionising Radiation (Medical Exposure) Regulations 2017,
+Source: UK Ionizing Radiation (Medical Exposure) Regulations 2017,
 <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>.
 
 ## Triage tiers
@@ -64,4 +64,4 @@ Source: UK Ionising Radiation (Medical Exposure) Regulations 2017,
 - ACR Appropriateness Criteria; ACR Manual on Contrast Media.
 - RCR *iRefer: Making the best use of clinical radiology*.
 - ESUR Contrast Media Safety Committee guidelines (iodinated contrast + eGFR).
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).

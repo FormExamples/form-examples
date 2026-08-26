@@ -5,7 +5,7 @@ the volume of blood the kidneys filter each minute — from a single serum
 **creatinine** measurement together with the patient's **age** and **sex**. It
 returns an **eGFR in mL/min/1.73 m²** and classifies the result into a **chronic
 kidney disease (CKD) G-stage** (G1–G5). The calculator does not diagnose kidney
-disease; it standardises a laboratory result into a staged estimate that prompts
+disease; it standardizes a laboratory result into a staged estimate that prompts
 monitoring, medication-dose review, or referral.
 
 The primary equation is the **CKD-EPI 2021 creatinine equation** — the
@@ -37,7 +37,7 @@ records.
 
 **Primary instrument:** CKD-EPI 2021 creatinine equation (race-free).
 
-The equation takes standardised (IDMS-traceable) serum creatinine, age, and sex
+The equation takes standardized (IDMS-traceable) serum creatinine, age, and sex
 and returns eGFR in mL/min/1.73 m². It uses a sex-specific creatinine scaling
 factor (κ) and exponent (α), a piecewise term that behaves differently below and
 above κ, an age-decay term, and a female multiplier:

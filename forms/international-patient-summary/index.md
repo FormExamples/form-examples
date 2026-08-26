@@ -1,6 +1,6 @@
 # International Patient Summary
 
-International Patient Summary (IPS) — a standardised, minimal, specialty-agnostic electronic health record extract conforming to ISO 27269 and HL7 FHIR R5, designed to support cross-border and unplanned care by exchanging a patient's core clinical facts (medications, allergies, problems, procedures, immunisations, demographics).
+International Patient Summary (IPS) — a standardized, minimal, specialty-agnostic electronic health record extract conforming to ISO 27269 and HL7 FHIR R5, designed to support cross-border and unplanned care by exchanging a patient's core clinical facts (medications, allergies, problems, procedures, immunizations, demographics).
 
 ## Scoring system
 
@@ -19,7 +19,7 @@ International Patient Summary (IPS) — a standardised, minimal, specialty-agnos
 | 2   | Problem List (active & past)                   |
 | 3   | Medication Summary                             |
 | 4   | Allergies & Intolerances                       |
-| 5   | Immunisations                                  |
+| 5   | Immunizations                                  |
 | 6   | Procedures                                     |
 | 7   | Results & Investigations                       |
 | 8   | Medical Devices / Implants                     |

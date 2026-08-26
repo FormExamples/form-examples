@@ -31,7 +31,7 @@
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Employment practices: monitoring at work.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/monitoring-workers-at-work/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/monitoring-workers-at-work/>
 
 ## Accessibility
 

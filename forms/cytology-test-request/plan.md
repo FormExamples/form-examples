@@ -20,7 +20,7 @@ NG12 guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, pre-analytical specimen adequacy,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet pre-analytically poor, or complete yet
   two-week-wait urgent.
 - **Suspected cancer auto-escalates.** A suspected-cancer indication or a

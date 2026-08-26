@@ -1,7 +1,7 @@
 # Perioperative Optimization — front-end-with-svelte/
 
 SvelteKit single continuous single-page wizard for the perioperative
-optimisation intake: sixteen steps grading eight modifiable-risk domains against
+optimization intake: sixteen steps grading eight modifiable-risk domains against
 the time remaining before surgery. Lily Design System Svelte conventions; rule
 and flag IDs match the HTML front-end and the back-end.
 

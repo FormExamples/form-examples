@@ -50,7 +50,7 @@ patient-reported measure (mMRC, CAT).
 | 7 | Inhaler therapy | current inhaled therapy (SABA / LABA / LAMA / ICS combinations), device type(s), inhaler technique checked and adequate (yes/no), self-reported adherence |
 | 8 | Vaccinations | seasonal influenza, pneumococcal, and COVID-19 vaccination status (up-to-date / due / declined) |
 | 9 | Pulmonary rehabilitation & oxygen | pulmonary-rehab status (completed / referred / eligible-not-referred / not-indicated), long-term or ambulatory oxygen use, resting SpO₂ on room air |
-| 10 | Comorbidities & self-management | recorded comorbidities (cardiovascular, anxiety/depression, osteoporosis, etc.), personalised self-management plan in place, rescue-pack supplied, next review interval |
+| 10 | Comorbidities & self-management | recorded comorbidities (cardiovascular, anxiety/depression, osteoporosis, etc.), personalized self-management plan in place, rescue-pack supplied, next review interval |
 | 11 | Summary & classification | computed GOLD grade, ABE group, symptom and exacerbation axes, review-completeness grade, flagged issues, and free-text clinician note |
 
 ## Severity / risk & completeness model

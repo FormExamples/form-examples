@@ -14,10 +14,10 @@ the subject of the assessment.
 
 ## Scope and intended users
 
-- **Setting:** any organisation that runs scheduled meetings — engineering
+- **Setting:** any organization that runs scheduled meetings — engineering
   stand-ups, project reviews, board meetings, customer calls, medical
   multidisciplinary team (MDT) meetings, training sessions, retrospectives.
-- **Users:** organisers, secretaries, project managers, team leads,
+- **Users:** organizers, secretaries, project managers, team leads,
   facilitators, scrum masters, executive assistants.
 - **Subjects:** any meeting that warrants a written record — a single ad-hoc
   call, a recurring weekly stand-up, a quarterly business review, an annual
@@ -34,7 +34,7 @@ A meeting record has two halves: the **plan** (what we intend to do) and the
 | --- | --- | --- |
 | 1 | Invitation | Date, time, time zone, duration, location, phone number, video link, dial-in code, joining instructions |
 | 2 | Agenda | Ordered list of agenda items with title, duration, presenter, and notes |
-| 3 | Participants | Named attendees with role (organiser / required / optional / observer) and response (accepted / declined / tentative / no-response) |
+| 3 | Participants | Named attendees with role (organizer / required / optional / observer) and response (accepted / declined / tentative / no-response) |
 | 4 | Resources | Rooms, equipment, documents, links, budget — anything required for the meeting to succeed |
 | 5 | Recurring | Optional recurrence rule — every weekday, every Monday, every month on the *n*th day, every quarter, every year |
 
@@ -53,7 +53,7 @@ Completed in order on one continuous page (no multi-page forms — monorepo rule
 
 | # | Step | Key fields |
 | --- | --- | --- |
-| 1 | Organiser & metadata | organiser name, email, role, organisation, time zone, draft / scheduled / completed / cancelled |
+| 1 | Organizer & metadata | organizer name, email, role, organization, time zone, draft / scheduled / completed / cancelled |
 | 2 | Title & purpose | meeting title, one-sentence purpose, long description, category (stand-up / review / planning / training / one-to-one / interview / governance / social / other) |
 | 3 | Invitation | scheduled start, scheduled end, time zone, location, video link, phone number, dial-in code, joining instructions, calendar UID |
 | 4 | Agenda | ordered list — title, duration minutes, presenter, notes |

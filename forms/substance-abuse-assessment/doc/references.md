@@ -100,7 +100,7 @@
   https://www.addiction-ssa.org
 
 - Public Health England / UK Health Security Agency:
-  https://www.gov.uk/government/organisations/uk-health-security-agency
+  https://www.gov.uk/government/organizations/uk-health-security-agency
 
 ## Harm reduction
 

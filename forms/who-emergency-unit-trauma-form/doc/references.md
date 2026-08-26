@@ -4,7 +4,7 @@
 
 - **Form** — WHO. *Emergency Unit Form: Trauma*. PDF.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/trauma-scf.pdf>
-- **Reference card** — WHO. *Trauma Standardised Clinical Form
+- **Reference card** — WHO. *Trauma Standardized Clinical Form
   Reference Card*. PDF.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/trauma-scf-ref-card.pdf>
 - **Emergency Care Toolkit** — WHO.

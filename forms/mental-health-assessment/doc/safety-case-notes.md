@@ -60,7 +60,7 @@ clinician collaboratively develops a **safety plan** with the patient.
 The Stanley-Brown Safety Planning Intervention (Stanley & Brown, 2012) is
 the recommended structure:
 
-1. Recognising warning signs and triggers.
+1. Recognizing warning signs and triggers.
 2. Internal coping strategies.
 3. Social contacts and settings for distraction.
 4. People who can be contacted for help.

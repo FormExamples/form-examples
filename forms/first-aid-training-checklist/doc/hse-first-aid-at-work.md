@@ -28,7 +28,7 @@ at work." Since the October 2013 deregulation, HSE no longer approves
 first-aid training providers, but it sets out the syllabus expectations in
 the L74 ACOP and INDG214 guidance.
 
-The two recognised qualifications under L74 are:
+The two recognized qualifications under L74 are:
 
 - **Emergency First Aid at Work (EFAW)** — minimum 6 hours of contact
   training; suitable for low-hazard workplaces.
@@ -38,11 +38,11 @@ The two recognised qualifications under L74 are:
 Both qualifications are valid for 3 years; a 3-yearly requalification
 course is required.
 
-## Awarding-organisation framework
+## Awarding-organization framework
 
-The certificate is awarded by an Ofqual-regulated awarding organisation
+The certificate is awarded by an Ofqual-regulated awarding organization
 (or SQA in Scotland; Qualifications Wales in Wales; CCEA in Northern
-Ireland) using a recognised RQF (Regulated Qualifications Framework) unit:
+Ireland) using a recognized RQF (Regulated Qualifications Framework) unit:
 
 - *Level 3 Award in First Aid at Work* — RQF code varies by awarding body
   (e.g. Highfield, Qualsafe, NUCO, Pearson Edexcel).
@@ -81,7 +81,7 @@ Council UK Adult Basic Life Support algorithm:
 - Compression rate: 100-120 per minute
 - Compression:ventilation ratio: 30:2 (untrained-rescuer compression-only
   CPR is acceptable)
-- Minimise interruptions; full chest recoil
+- Minimize interruptions; full chest recoil
 
 Source: Resuscitation Council UK, *Adult Basic Life Support Guidelines*
 (2021): <https://www.resus.org.uk/library/2021-resuscitation-guidelines/adult-basic-life-support-guidelines>
@@ -100,7 +100,7 @@ and the use of an adrenaline auto-injector for anaphylaxis. Reference:
 
 ## British Red Cross syllabus
 
-The British Red Cross is also an Ofqual-recognised FAW provider. Syllabus
+The British Red Cross is also an Ofqual-recognized FAW provider. Syllabus
 reference: <https://www.redcross.org.uk/first-aid/learn-first-aid>
 
 ## Versioning note

@@ -1,6 +1,6 @@
 # back-end-with-loco — tasks
 
-- [x] Materialise the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Materialize the Loco crate (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Relational per-table migrations: `users` (Loco default), `workers`,
       `managers`, `neurodiversity_adjustment_reviews` (FKs to worker +
       manager), `neurodiversity_adjustment_review_grades` (1:1 unique FK to

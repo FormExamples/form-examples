@@ -39,7 +39,7 @@ duty to make reasonable adjustments.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each anchored to a
-recognised source. Axes are orthogonal: a request can strongly engage the
+recognized source. Axes are orthogonal: a request can strongly engage the
 Equality Act duty yet still be incomplete, and a low-eligibility request can
 still be urgent on wellbeing grounds.
 
@@ -60,9 +60,9 @@ Choose the least-urgent band only when no rule fires.
 | --- | --- | --- |
 | Concentration / focus | Working environment; equipment | Quiet workspace, noise-cancelling headphones / ear defenders, fidget toys, standing desk, regular breaks |
 | Reading / written communication | Equipment / technology; communication | Screen reader, speech-to-text software, instructions broken into clear steps, coloured document backgrounds |
-| Organisation / time management | Communication; support | Visual planners with deadlines, regular check-ins, work broken into smaller tasks |
+| Organization / time management | Communication; support | Visual planners with deadlines, regular check-ins, work broken into smaller tasks |
 | Sensory overload | Working environment; policy | Private / quiet space, noise-cancelling headphones, screen filters, softer-material uniform / dress-code change |
-| Balance / coordination | Equipment; working environment | Specialist keyboard / mouse, clutter-free organised workspace, clear directional signage |
+| Balance / coordination | Equipment; working environment | Specialist keyboard / mouse, clutter-free organized workspace, clear directional signage |
 | Fatigue / burnout | Working arrangements | Flexible hours, planned breaks, phased return, remote / hybrid working |
 
 ## Wizard steps
@@ -74,7 +74,7 @@ Completed in order on a single continuous single-page wizard.
 | 1 | Worker & role | name, job title, department, employment type, work pattern & location, start date |
 | 2 | Handler | manager / HR contact name, role, contact; who is making the request |
 | 3 | Neurodivergent profile | conditions, diagnosis status, considers-disability, substantial + long-term impact, disclosure consent |
-| 4 | Functional difficulties | concentration, written communication, organisation/time, sensory overload, balance/coordination, social communication, memory, burnout; tasks & situations affected; strengths |
+| 4 | Functional difficulties | concentration, written communication, organization/time, sensory overload, balance/coordination, social communication, memory, burnout; tasks & situations affected; strengths |
 | 5 | Requested adjustments | working environment, equipment / technology, working arrangements, communication, support / mentoring, recruitment process, policy / dress; free-text detail |
 | 6 | Evidence & support | supporting-evidence type, occupational health, Access to Work |
 | 7 | Impact & urgency | current impact, at-risk-of-absence, requested urgency |

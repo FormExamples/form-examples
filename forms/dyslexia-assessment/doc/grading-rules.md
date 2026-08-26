@@ -1,6 +1,6 @@
 # Dyslexia — Grading Rules
 
-This form implements a standardised-score battery for the assessment of
+This form implements a standardized-score battery for the assessment of
 specific learning difficulties in reading, writing, and spelling. The
 grading rules below follow the conventions of the British Dyslexia
 Association (BDA) and the SpLD Assessment Standards Committee (SASC).
@@ -37,7 +37,7 @@ The form captures standard scores in the following domains:
 | Written expression           | Writing & Spelling Assessment   |
 | Phonological awareness       | Phonological Processing         |
 | Phonological memory          | Phonological Processing         |
-| Rapid automatised naming (RAN) | Phonological Processing       |
+| Rapid automatized naming (RAN) | Phonological Processing       |
 | Working memory               | Working Memory & Processing Speed |
 | Processing speed             | Working Memory & Processing Speed |
 
@@ -86,7 +86,7 @@ The grading engine produces:
   a current Assessment Practising Certificate (APC) from a SASC-approved
   professional body (e.g. PATOSS, BDA, Dyslexia Guild) or a registered
   educational/clinical psychologist.
-- This form supports the **recording and presentation** of standardised
+- This form supports the **recording and presentation** of standardized
   scores; it does not administer the underlying tests. The clinician
   remains responsible for selecting and administering an appropriate test
   battery.

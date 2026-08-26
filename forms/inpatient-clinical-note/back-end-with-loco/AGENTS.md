@@ -47,7 +47,7 @@ Grading is **append-only**: each `POST` inserts a new grade row rather than
 updating the last, so a note's grading history stays auditable. The grade row
 and its rule and flag children are written in one transaction.
 
-Note that the grade row is a SeaORM entity and therefore serialises
+Note that the grade row is a SeaORM entity and therefore serializes
 **snake_case**, as every entity controller in this crate does; the engine
 result nested beside it is camelCase.
 

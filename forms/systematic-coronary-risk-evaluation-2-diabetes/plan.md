@@ -14,7 +14,7 @@ The SCORE2-Diabetes (ESC 2023) calculator estimates 10-year cardiovascular risk 
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - Clinical safety case documentation
 - User acceptance testing with clinical staff
 - GDPR data processing impact assessment

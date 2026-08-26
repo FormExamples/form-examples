@@ -43,7 +43,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical impairment.
 
 | Axis | Instrument | Output |

@@ -85,7 +85,7 @@ casualtyCard store ($state reactive properties)
 ### Input Flow
 
 1. The user interacts with form controls in step components.
-2. Step components use `bind:value` with `$bindable()` props to synchronise input values with the parent.
+2. Step components use `bind:value` with `$bindable()` props to synchronize input values with the parent.
 3. The parent page component writes values into the `casualtyCard` store.
 4. The store properties are declared with `$state()` for reactivity.
 
@@ -193,7 +193,7 @@ class CasualtyCardStore {
 
 ### Reactive Properties
 
-- `data` -- the complete form data object, initialised with default values (empty strings for text, `null` for numbers, empty arrays for collections).
+- `data` -- the complete form data object, initialized with default values (empty strings for text, `null` for numbers, empty arrays for collections).
 - `result` -- the final result object, `null` until the form is submitted.
 - `currentStep` -- integer 1--14 tracking the active wizard step.
 - `news2` -- derived from `data.vitalSigns`, recalculated automatically when vitals change.
@@ -227,7 +227,7 @@ Each step component (`Step1Demographics.svelte` through `Step14SafeguardingConse
 
 - Props use `$bindable()` for two-way data flow.
 - Each step wraps its content in one or more `SectionCard` components.
-- Form controls use `bind:value` to synchronise with the data object.
+- Form controls use `bind:value` to synchronize with the data object.
 
 ### UI Components
 

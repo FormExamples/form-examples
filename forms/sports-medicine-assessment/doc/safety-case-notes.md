@@ -23,7 +23,7 @@ information used in management of a health condition.
 | --- | --- |
 | Missed sudden-cardiac-death precursor | Step 6 enforces all 14 AHA items; family-history red flags (premature SCD, HCM, ARVC, Marfan, LQTS) escalate to "Not Cleared Pending Further Evaluation" |
 | Premature return after concussion | Step 8 SCAT6 baseline; symptomatic or abnormal post-injury record blocks "Cleared" pathway |
-| Under-recognised RED-S in female athletes | Step 5 mandatory for menstrual / energy availability history; abnormal pattern triggers referral prompt |
+| Under-recognized RED-S in female athletes | Step 5 mandatory for menstrual / energy availability history; abnormal pattern triggers referral prompt |
 | Heat-illness risk overlooked | Step 9 includes hot-environment sport-specific risk factor capture |
 | Asthma / exercise-induced bronchoconstriction missed | Step 3 captures peak flow, prior exercise-induced symptoms |
 | Eating disorder missed | Step 5 captures structured RED-S items; positive screen triggers safeguarding referral |
@@ -53,7 +53,7 @@ TUE process when clearance includes prescribed medication.
 - Athlete records contain sensitive personal data (mental health, sexual
   health where part of RED-S, family genetic history); access tightly
   controlled.
-- Sport-organisation data sharing requires explicit consent.
+- Sport-organization data sharing requires explicit consent.
 
 ## Audit and traceability
 

@@ -20,7 +20,7 @@ guidance, and ESUR / RCR gadolinium guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, MRI safety, completeness, and
-  triage are independent and each citable to a recognised body. A request can be
+  triage are independent and each citable to a recognized body. A request can be
   appropriate yet unsafe to scan, or complete yet urgent.
 - **Safety dominates.** A positive ferromagnetic / electronic implant screen
   drives the safety band to needs-mri-physics-review or contraindicated, and

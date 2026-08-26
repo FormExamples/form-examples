@@ -2,15 +2,15 @@
 
 Consolidated SvelteKit front-end for the Heart Failure Annual Review. A single
 continuous single-page wizard captures functional status, fluid balance,
-monitoring bloods, and medication optimisation; the shared pure engine derives
-the NYHA functional status, the four-pillar medication-optimisation status, and
+monitoring bloods, and medication optimization; the shared pure engine derives
+the NYHA functional status, the four-pillar medication-optimization status, and
 the review-completeness grade, and raises safety flags; and a SVAR DataGrid
 dashboard lists reviewed patients with their engine-computed statuses.
 
 This is a **documentation and status-classification** form, not a numeric score.
 The engine reports four independent outputs — an NYHA functional status, a
-medication-optimisation status, a review-completeness grade with a completeness
-percentage, and a set of prioritised safety flags. There is no total, cut-off,
+medication-optimization status, a review-completeness grade with a completeness
+percentage, and a set of prioritized safety flags. There is no total, cut-off,
 or band table.
 
 ## Surfaces
@@ -18,11 +18,11 @@ or band table.
 - **Welcome** (`/`) — purpose, specification, documentation, and links.
 - **Wizard** (`/heart-failure-reviews/[id]`) — the nine-section review; derives
   all statuses on submit.
-- **Report** (`/heart-failure-reviews/[id]/report`) — NYHA / optimisation /
+- **Report** (`/heart-failure-reviews/[id]/report`) — NYHA / optimization /
   completeness banners, interpretation, four-pillar table, domain-documentation
   table, and flagged issues; PDF via `report/pdf`.
 - **Dashboard** (`/heart-failure-reviews`) — SVAR DataGrid of reviewed patients
-  (client-only, `ssr = false`), filterable by NYHA status, optimisation status,
+  (client-only, `ssr = false`), filterable by NYHA status, optimization status,
   and completeness.
 
 ## Engine
@@ -47,7 +47,7 @@ The four pillars of guideline-directed medical therapy are the RAAS inhibitor
 (ACEi/ARB/ARNI), a beta-blocker, an MRA, and an SGLT2 inhibitor. All four are
 indicated in HFrEF; the SGLT2 inhibitor is the principal disease-modifying
 pillar in HFmrEF/HFpEF. A pillar documented `contraindicated` / `not-tolerated`
-counts as addressed. Safety flags (urgent review, optimisation gap,
+counts as addressed. Safety flags (urgent review, optimization gap,
 hyperkalaemia, hypokalaemia, renal impairment, fluid overload, missing
 monitoring bloods, incomplete review) are raised independently of the grades.
 It is a documentation aid, not a diagnosis or a prescribing instrument.

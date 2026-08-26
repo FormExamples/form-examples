@@ -15,7 +15,7 @@ Comprehensive allergy evaluation covering drug, food, and environmental allergie
 
 - **Instrument**: Allergy Severity
 - **Range**: Four-level categorical (Low, Moderate, High, Critical)
-- **Categories**: Low (mild localised reactions only), Moderate (systemic but non-life-threatening reactions), High (severe reactions or multiple allergen categories), Critical (history of anaphylaxis or life-threatening reactions)
+- **Categories**: Low (mild localized reactions only), Moderate (systemic but non-life-threatening reactions), High (severe reactions or multiple allergen categories), Critical (history of anaphylaxis or life-threatening reactions)
 - **Engine files**: `types.ts`, `allergy-grader.ts`, `allergy-rules.ts`, `flagged-issues.ts`, `utils.ts`
 - **Test file**: `allergy-grader.test.ts`
 

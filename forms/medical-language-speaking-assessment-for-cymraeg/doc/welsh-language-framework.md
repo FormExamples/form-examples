@@ -1,7 +1,7 @@
 # Welsh language framework — More Than Just Words
 
 The Welsh Government's *More Than Just Words* strategic framework sets
-the duty on NHS Wales and partner social-care organisations to provide
+the duty on NHS Wales and partner social-care organizations to provide
 Welsh-language services on an *active offer* basis — services
 should be available in Welsh without the patient having to ask.
 

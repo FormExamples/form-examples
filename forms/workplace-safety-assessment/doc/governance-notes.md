@@ -34,7 +34,7 @@ References:
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Employment practices and data protection.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/>
 
 ## Equality Act 2010 alignment
 
@@ -50,9 +50,9 @@ characteristics, in particular:
 Two statutory consultation regimes apply:
 
 - **Safety Representatives and Safety Committees Regulations 1977**
-  (SI 1977/500) — for workplaces with a recognised trade union.
+  (SI 1977/500) — for workplaces with a recognized trade union.
 - **Health and Safety (Consultation with Employees) Regulations 1996**
-  (SI 1996/1513) — for workplaces without recognised union
+  (SI 1996/1513) — for workplaces without recognized union
   representation.
 
 The implementation records consultation events as linked Meeting

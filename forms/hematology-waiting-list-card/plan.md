@@ -4,7 +4,7 @@
 
 Scaffolded 2026-05-31 from `seed.md`. Design extends the seed into a
 7-step practitioner wizard aligned with NHS England Referral to Treatment
-(RTT) rules and the Clinical Prioritisation framework (P1–P6).
+(RTT) rules and the Clinical Prioritization framework (P1–P6).
 
 ## Why this form exists
 

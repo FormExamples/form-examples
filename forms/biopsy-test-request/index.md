@@ -30,7 +30,7 @@ NG12 suspected-cancer recognition and referral.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 high bleeding-risk, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -50,17 +50,17 @@ periprocedural anticoagulant action.
 
 | Biopsy site | Typical method | Common indication |
 | --- | --- | --- |
-| Skin | punch / excision / incision | suspected-malignancy, characterise-lesion |
+| Skin | punch / excision / incision | suspected-malignancy, characterize-lesion |
 | Breast | core-needle / fine-needle-aspiration | suspected-malignancy, cancer-staging |
 | Lymph node | core-needle / excision / fine-needle-aspiration | lymphadenopathy, cancer-staging |
-| Liver | core-needle / image-guided | characterise-lesion, transplant-monitoring |
+| Liver | core-needle / image-guided | characterize-lesion, transplant-monitoring |
 | Kidney | core-needle / image-guided | inflammatory-disease, transplant-monitoring |
 | Prostate | core-needle / image-guided | suspected-malignancy |
 | Lung | core-needle / image-guided | suspected-malignancy, suspected-infection |
-| Bone marrow | core-needle / aspiration | suspected-malignancy, characterise-lesion |
+| Bone marrow | core-needle / aspiration | suspected-malignancy, characterize-lesion |
 | GI tract | endoscopic | suspected-malignancy, inflammatory-disease |
-| Thyroid | fine-needle-aspiration / image-guided | characterise-lesion, suspected-malignancy |
-| Soft tissue | core-needle / image-guided / incision | suspected-malignancy, characterise-lesion |
+| Thyroid | fine-needle-aspiration / image-guided | characterize-lesion, suspected-malignancy |
+| Soft tissue | core-needle / image-guided / incision | suspected-malignancy, characterize-lesion |
 
 ## Wizard steps
 

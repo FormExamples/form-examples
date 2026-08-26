@@ -22,7 +22,7 @@ pure Svelte 5 scoring engine.
 factors; known CAD; aspirin in the prior 7 days; &ge; 2 anginal episodes in 24
 h; ST deviation &ge; 0.5 mm; positive cardiac marker), each 1 point; total 0-7;
 band 0-1 low, 2-4 intermediate, 5-7 high; the total maps to the 14-day risk of
-death, MI, or urgent revascularisation. Tests in `timi-grader.test.ts`.
+death, MI, or urgent revascularization. Tests in `timi-grader.test.ts`.
 
 This is the UA/NSTEMI instrument only; a separate TIMI STEMI score exists.
 

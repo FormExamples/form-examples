@@ -21,7 +21,7 @@
 
 - NICE NG56 — *Multimorbidity*: <https://www.nice.org.uk/guidance/ng56>
 - NICE CG161 — *Falls in older people*: <https://www.nice.org.uk/guidance/cg161>
-- NICE NG5 — *Medicines optimisation*: <https://www.nice.org.uk/guidance/ng5>
+- NICE NG5 — *Medicines optimization*: <https://www.nice.org.uk/guidance/ng5>
 - NICE CG32 — *Nutrition support for adults*: <https://www.nice.org.uk/guidance/cg32>
 - NICE NG97 — *Dementia*: <https://www.nice.org.uk/guidance/ng97>
 - NICE CG103 — *Delirium*: <https://www.nice.org.uk/guidance/cg103>

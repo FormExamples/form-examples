@@ -45,7 +45,7 @@ referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -69,7 +69,7 @@ classification, severity, and flags:
 `mass_or_lesion`, `cyst`, `gallstones`, `hydronephrosis`, `free_fluid`,
 `dvt_present`, `aneurysm`, `organ_enlargement`, `incidental_finding`.
 
-Key measurement: `largest_lesion_size_mm` (surveillance / categorisation). The
+Key measurement: `largest_lesion_size_mm` (surveillance / categorization). The
 free-text `reporting_category` carries a structured-reporting label where
 applicable (e.g. an ACR TI-RADS level TR1–TR5 for thyroid nodules, or a breast
 U-classification U1–U5).
@@ -138,13 +138,13 @@ ultrasound-test-result/
 ## Clinical references
 
 - RCR — Standards for the interpretation and reporting of imaging investigations.
-  Emphasises *actionable reporting*, mandatory report sections, and the
+  Emphasizes *actionable reporting*, mandatory report sections, and the
   communication of critical, urgent, and unexpected significant findings; applies
   to all who interpret and report imaging, including sonographers and reporting
   radiographers.
   <https://www.rcr.ac.uk/media/wlsf4ufl/ppqi_reporting-standards-guidance.pdf>
 - ACR Thyroid Imaging, Reporting and Data System (TI-RADS) — structured TR1–TR5
-  categorisation of thyroid nodules driving FNA / surveillance management; an
+  categorization of thyroid nodules driving FNA / surveillance management; an
   example value stored in the grade's `reporting_category` field.
   <https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/TI-RADS>
 - ACR TI-RADS White Paper of the ACR TI-RADS Committee, *JACR*.

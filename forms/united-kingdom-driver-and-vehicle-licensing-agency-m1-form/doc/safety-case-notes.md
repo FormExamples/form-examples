@@ -52,7 +52,7 @@ must be processed with controls equivalent to NHS clinical records:
    SNOMED CT UK Drug Extension) used for medication and drug names.
 3. **Identity confusion** — driver number (DVLA format) plus NHS number
    plus date of birth captured.
-4. **Stigmatising language in reports** — generated report uses neutral,
+4. **Stigmatizing language in reports** — generated report uses neutral,
    guide-aligned wording (e.g. "persistent alcohol misuse" not "alcoholic").
 
 ## Governance references

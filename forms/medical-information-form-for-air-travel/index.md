@@ -1,6 +1,6 @@
 # Medical Information Form for Air Travel (MEDIF)
 
-A **Medical Information Form (MEDIF)** is the standardised airline document used
+A **Medical Information Form (MEDIF)** is the standardized airline document used
 to determine whether a passenger with specific health needs is fit to fly and
 whether in-flight medical support (supplemental oxygen, stretcher, incubator,
 medical escort, battery-powered medical device) must be arranged in advance. It
@@ -8,7 +8,7 @@ is completed in two parts: Part 1 by the passenger (or booking agent) and Part 2
 by the attending physician, then forwarded to the airline's medical desk for
 clearance.
 
-This form digitises that workflow as a single-page, step-by-step wizard. It
+This form digitizes that workflow as a single-page, step-by-step wizard. It
 captures passenger and trip details, the attending physician's clinical
 evaluation, the requested in-flight medical accommodations, and computes a
 **fitness-to-fly band** (`fit`, `fit-with-conditions`, `requires-review`,
@@ -70,7 +70,7 @@ Completed in order on one continuous page; no multi-page flow.
 
 | # | Step | Key fields |
 | --- | --- | --- |
-| 1 | Submitting agent identification | name, role (passenger / agent / clinician), email, phone, organisation, airline booking reference |
+| 1 | Submitting agent identification | name, role (passenger / agent / clinician), email, phone, organization, airline booking reference |
 | 2 | Passenger identification | name, date of birth, sex, nationality, passport number, NHS / national health ID, address, emergency contact |
 | 3 | Trip details | airline, flight number(s), origin, destination, transit airports, outbound and return dates, cabin class, sector duration, special-assistance code requested (WCHR / WCHS / WCHC / MEDA / STCR / OXYG / POC) |
 | 4 | Reason MEDIF is required | one or more of: equipment, recent acute event, unstable condition, communicable disease, pregnancy, mobility / escort, psychiatric |

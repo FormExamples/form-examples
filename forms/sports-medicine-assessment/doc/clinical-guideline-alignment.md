@@ -8,7 +8,7 @@
 - AAFP overview:
   https://www.aafp.org/family-physician/patient-care/care-resources/sports-medicine/preparticipation-physical-evaluation.html
 
-The PPE 5 monograph organises preparticipation evaluation into history,
+The PPE 5 monograph organizes preparticipation evaluation into history,
 examination, and clearance. The form's step ordering matches the PPE 5
 chapter ordering.
 

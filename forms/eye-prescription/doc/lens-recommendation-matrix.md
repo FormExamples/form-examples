@@ -37,7 +37,7 @@ may override based on frame choice, budget, and patient preference.
 | Hydrophobic | When patient reports lens fogging or smudging issues. |
 | Blue-light filter | On patient request; not mandated by evidence. |
 | Photochromic | Patient who spends significant time outdoors. |
-| Polarised | Driver, water-sports, fishing. |
+| Polarized | Driver, water-sports, fishing. |
 | UV-400 | Always — patient education on UV protection. |
 
 ## Tint recommendations

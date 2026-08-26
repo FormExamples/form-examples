@@ -42,7 +42,7 @@
 - Police Foundation. *Roadcraft: the police driver's handbook*.
   The Stationery Office; 2020. ISBN 978-0117083219.
 - Driver and Vehicle Standards Agency. *Emergency response driving*.
-  <https://www.gov.uk/government/organisations/driver-and-vehicle-standards-agency>
+  <https://www.gov.uk/government/organizations/driver-and-vehicle-standards-agency>
 
 ## Occupational health and psychological wellbeing
 

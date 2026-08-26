@@ -51,7 +51,7 @@ and [`spec/index.md`](./spec/index.md) for the living domain spec.
     flaggedIssues: FlaggedIssue[];
   }
   ```
-- **Algorithm:** classification, not scoring. Normalise each condition to a
+- **Algorithm:** classification, not scoring. Normalize each condition to a
   `ConditionResult` (result class + specialist referral target); emit a
   `Referral` for every `suspected` condition; derive `overallOutcome` by
   precedence (`suspected` → `referral-required` wins over `repeat-required` →

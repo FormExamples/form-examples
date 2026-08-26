@@ -89,7 +89,7 @@ client-side and merely stored by the back-end).
   - **SORT** (Surgical Outcome Risk Tool) 30-day mortality estimate.
   - **ARISCAT** postoperative pulmonary complication risk.
   - **Apfel score** for post-operative nausea and vomiting (0–4).
-  - **DASI-derived METs** to formalise the existing functional-capacity step.
+  - **DASI-derived METs** to formalize the existing functional-capacity step.
   Each instrument: SQL columns (new migration, never editing shipped ones),
   regenerate derived artefacts, engine rules + tests, both front-ends, Rust
   port, golden vectors, `doc/` reference page.

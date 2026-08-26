@@ -6,7 +6,7 @@ Slug: `who-emergency-unit-general-form`
 
 ## 1. Purpose
 
-World Health Organization standardised emergency unit clinical documentation form for general (non-trauma) patients.
+World Health Organization standardized emergency unit clinical documentation form for general (non-trauma) patients.
 
 This comprehensive two-page form captures patient registration, arrival and ambulance details, initial vital signs with pain scale, high risk signs, triage category, ABCD primary survey with interventions, history of present illness, review of systems (14 systems), past medical history, physical exam (12 body systems), diagnostics (labs with diagram, imaging, ECG), additional interventions (medications and procedures), assessment and plan, reassessment, and disposition. Designed for use with the WHO General Reference Card.
 

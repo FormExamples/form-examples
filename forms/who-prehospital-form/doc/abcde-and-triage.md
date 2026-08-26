@@ -62,7 +62,7 @@ Any high-risk sign immediately upgrades the triage to RED.
   - Non-rebreather 10-15 L/min for severe.
   - BVM with O2 for inadequate ventilation.
   - CPAP / BiPAP for pulmonary oedema, COPD, asthma.
-- Bronchodilator if wheeze (salbutamol 5 mg nebulised, repeat as needed).
+- Bronchodilator if wheeze (salbutamol 5 mg nebulized, repeat as needed).
 - Chest needle decompression for suspected tension pneumothorax.
 
 ### C — Circulation (Step 7)
@@ -82,7 +82,7 @@ Any high-risk sign immediately upgrades the triage to RED.
 
 - GCS (E + V + M) or AVPU.
 - Pupils — size in mm, reactivity.
-- Lateralising signs — facial droop, arm drift, leg weakness.
+- Lateralizing signs — facial droop, arm drift, leg weakness.
 - Blood glucose — abnormal if <3.5 mmol/L.
 - Interventions — IV/IM/IO dextrose for hypoglycaemia; midazolam or
   diazepam for active seizure; naloxone for suspected opioid overdose.
@@ -104,7 +104,7 @@ WHO BEC and JRCALC reference doses for prehospital use:
 | --- | --- | --- |
 | Adrenaline | Anaphylaxis | 0.5 mg IM (1:1000) |
 | Adrenaline | Cardiac arrest | 1 mg IV every 3-5 min |
-| Salbutamol | Asthma, COPD | 5 mg nebulised |
+| Salbutamol | Asthma, COPD | 5 mg nebulized |
 | Hydrocortisone | Asthma, anaphylaxis | 200 mg IV/IM |
 | Midazolam | Seizure | 10 mg IM/buccal |
 | Glucose 10% | Hypoglycaemia | 100-150 mL IV |

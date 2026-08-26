@@ -39,7 +39,7 @@ mammogram raise it toward moderate; routine asymptomatic screening stays low.
   <https://www.jacr.org/article/S1546-1440(17)30216-8/fulltext>
   / <https://acsearch.acr.org/list>
 - NICE NG12 *Suspected cancer: recognition and referral* (breast site).
-  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer>
+  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organized-by-site-of-cancer>
 - NHS Breast Screening Programme (NHSBSP).
   <https://www.gov.uk/topic/population-screening-programmes/breast>
 - ACR BI-RADS® Atlas — breast imaging reporting and data system.

@@ -12,7 +12,7 @@ a leadership dashboard, sharing one pure scoring engine.
 - Welcome page: `/`
 
 The engine (`src/lib/engine/`) grades 1-5 Likert items across eight domains,
-normalises each domain to 0-100 (mean × 20), averages them into a composite
+normalizes each domain to 0-100 (mean × 20), averages them into a composite
 Workplace Climate Index, bands it Thriving / Healthy / Developing / Strained /
 Critical, and raises flagged issues for HR and leadership.
 

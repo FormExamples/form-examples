@@ -20,7 +20,7 @@ consistent, auditable, and aligned with BSACI / EAACI guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, validity and safety, completeness,
-  and triage are independent and each citable to a recognised body. A request
+  and triage are independent and each citable to a recognized body. A request
   can be appropriate yet invalid (patient on antihistamines), or complete yet
   urgent.
 - **Validity rules are first-class.** Antihistamines invalidate skin-prick /

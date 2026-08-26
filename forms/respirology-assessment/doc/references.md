@@ -5,7 +5,7 @@
 - Fletcher CM, Elmes PC, Fairbairn AS, Wood CH. *The significance of
   respiratory symptoms and the diagnosis of chronic bronchitis in a working
   population*. BMJ 1959;2:257-66. PMID: 13823380
-- Fletcher CM. *Standardised questionnaire on respiratory symptoms: a
+- Fletcher CM. *Standardized questionnaire on respiratory symptoms: a
   statement prepared and approved by the MRC Committee on the Aetiology of
   Chronic Bronchitis (MRC breathlessness score)*. BMJ 1960;2:1665.
 

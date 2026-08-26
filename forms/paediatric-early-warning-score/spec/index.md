@@ -119,7 +119,7 @@ Emitted independently of the aggregate, each with a priority:
 - **Medium escalation** (high) — `aggregateScore` 4–5: urgent nurse-in-charge and
   doctor review within 30 minutes.
 - **Parent / carer concern** (high) — `parentConcern == 'yes'`: documented family
-  concern is a recognised predictor of deterioration; escalate and act.
+  concern is a recognized predictor of deterioration; escalate and act.
 - **Nurse / staff concern** (high) — `nurseConcern == 'yes'`: documented staff
   concern; escalate.
 - **Deteriorating trend** (medium) — `aggregateScore` 2–3: increase observation

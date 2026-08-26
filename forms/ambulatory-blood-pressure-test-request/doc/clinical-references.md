@@ -10,7 +10,7 @@ anchor for the appropriateness axis (ordinal 1–9, three bands).
 | Clinic BP | Recommended action | Appropriateness direction |
 | --- | --- | --- |
 | ≥140/90 and <180/120 mmHg | Offer ABPM to confirm the diagnosis (HBPM if ABPM unsuitable/not tolerated) | usually-appropriate |
-| Suspected white-coat or masked hypertension | ABPM / HBPM to characterise | usually-appropriate |
+| Suspected white-coat or masked hypertension | ABPM / HBPM to characterize | usually-appropriate |
 | Known hypertension, treatment monitoring | ABPM / HBPM as adjunct | may-be-appropriate |
 | <140/90 mmHg, no labile / symptomatic indication | ABPM not routinely indicated | usually-not-appropriate |
 | ≥180/120 mmHg | Same-day specialist review takes priority | escalate triage (see below) |

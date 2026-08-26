@@ -42,7 +42,7 @@ in the UK (the other being IELTS Academic).
 OET publishes the canonical list of accepting regulators and
 employers; verify currency against the OET site.
 
-- OET. *Who recognises OET?*
+- OET. *Who recognizes OET?*
   <https://www.occupationalenglishtest.org/about-oet/recognition/>
 
 Includes:

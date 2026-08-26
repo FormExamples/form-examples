@@ -15,7 +15,7 @@ the full conventions and the table-naming pattern.
 | # | Table | Role |
 | --- | --- | --- |
 | 02 | `person` | Every named individual: donor, attorney, replacement, certificate provider, person to notify, witness, applicant, recipient. One row per unique person. |
-| 03 | `address` | Every postal address, normalised so an attorney living at the donor's address shares one row. |
+| 03 | `address` | Every postal address, normalized so an attorney living at the donor's address shares one row. |
 | 04 | `lasting_power_of_attorney` | One row per LPA — top-level deed with donor, decision mode, when-it-can-act, declared and registered states. |
 | 05 | `lpa_attorney` | Many-to-one join: persons appointed as original attorneys. |
 | 06 | `lpa_replacement_attorney` | Many-to-one join: persons appointed as replacement attorneys. |

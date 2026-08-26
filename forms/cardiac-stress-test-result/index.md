@@ -43,7 +43,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical, high-risk finding.
 
 | Axis | Instrument | Output |
@@ -71,7 +71,7 @@ least-urgent band only when no rule fires.
 
 ### Duke treadmill score
 
-For exercise treadmill ECG, the **Duke treadmill score (DTS)** summarises
+For exercise treadmill ECG, the **Duke treadmill score (DTS)** summarizes
 prognosis from three measured terms:
 
 ```

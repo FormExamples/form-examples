@@ -12,7 +12,7 @@ schema: SQL migrations are the source of truth, XML/FHIR/JSON
 representations are generated, and front-ends are built in HTML and
 SvelteKit. To add the architecture-decision-record form, we need to
 pick a template for ADRs themselves so the form's data model maps
-cleanly onto a recognised ADR schema. We're picking *now* because every
+cleanly onto a recognized ADR schema. We're picking *now* because every
 sibling form already commits to a specific upstream standard
 (FHIR, ASA, NEWS2…) and the ADR form should match that pattern.
 
@@ -80,7 +80,7 @@ Model/diagram: <https://github.com/joelparkerhenderson/architecture-decision-rec
 **Cons:**
 - more sections to fill in than Nygard — higher friction
 - the template predates Markdown ecosystem tooling
-- "Group" categorisation is opinionated and may not match every org
+- "Group" categorization is opinionated and may not match every org
 
 ## Argument
 The form is a structured data-entry tool whose value scales with

@@ -20,7 +20,7 @@ guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, safety / contraindication,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet unsafe to perform as requested.
 - **Safety contraindications block or escalate.** Recent ACS, severe
   symptomatic aortic stenosis, uncontrolled hypertension, or inability to

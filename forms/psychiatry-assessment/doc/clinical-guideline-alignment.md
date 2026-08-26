@@ -38,7 +38,7 @@ NICE clinical guidelines. The most-commonly-applied are:
 
 - **NG222** — Depression in adults: treatment and management (2022).
   https://www.nice.org.uk/guidance/ng222
-- **CG113** — Generalised anxiety disorder and panic disorder in adults:
+- **CG113** — Generalized anxiety disorder and panic disorder in adults:
   management (2011, updated 2019).
   https://www.nice.org.uk/guidance/cg113
 - **NG225** — Self-harm: assessment, management and preventing

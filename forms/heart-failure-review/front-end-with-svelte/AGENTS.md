@@ -10,7 +10,7 @@ conventions: [`../../AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.
 
 This is a **documentation and status-classification** form — the engine derives
 an NYHA functional status (`stable` / `symptomatic` / `advanced` / `unknown`), a
-four-pillar medication-optimisation status (`optimised` / `partial` /
+four-pillar medication-optimization status (`optimised` / `partial` /
 `suboptimal` / `not-applicable`), a review-completeness grade (`complete` /
 `partial` / `incomplete`) with a completeness percentage, and a set of safety
 flags. There is no numeric score.
@@ -24,7 +24,7 @@ flags. There is no numeric score.
   persistence, in-place `deepAssign` deep-merge, `createDefaultAssessment()`.
 - `src/lib/components/steps/` — `StepNName.svelte` (1-indexed) wizard sections
   (9 steps: context, patient & diagnosis, functional status, fluid status,
-  investigations, medication optimisation, devices, vaccinations, summary).
+  investigations, medication optimization, devices, vaccinations, summary).
 - `src/lib/components/ui/` — Lily Svelte headless component set.
 - `src/lib/config/` — `steps.ts`, `themes.ts`.
 - `src/lib/data/sample-reports.ts` — sample records + engine-derived dashboard rows.
@@ -52,7 +52,7 @@ reviewStatus      = documented == 6 ? 'complete'
 ```
 
 A pillar documented `contraindicated` / `not-tolerated` counts as addressed.
-`gradeReview` returns the functional status, medication optimisation, review
+`gradeReview` returns the functional status, medication optimization, review
 status, completeness score, the per-domain documented flags, the fired-rule
 audit trail, and the safety flags.
 

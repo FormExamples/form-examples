@@ -20,7 +20,7 @@ and aligned with BTS bronchoscopy and NICE NG12 guidance.
 
 - **Four orthogonal axes.** Appropriateness, cancer-pathway urgency,
   completeness, and pre-procedure risk are independent and each citable to a
-  recognised body. A request can be appropriate yet incomplete, or complete yet
+  recognized body. A request can be appropriate yet incomplete, or complete yet
   high-risk.
 - **Emergencies auto-escalate.** Massive haemoptysis or haemodynamic instability
   forces emergency triage regardless of the other axes.

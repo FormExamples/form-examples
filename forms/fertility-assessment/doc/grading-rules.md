@@ -12,7 +12,7 @@ a three-level "concern" band that drives a referral pathway recommendation.
 
 | Band | Criteria (any of) | Action |
 | ---- | ----------------- | ------ |
-| Low | Female partner < 36 and duration trying < 12 months; regular cycles; no known reproductive pathology; normal partner factors | Continue attempts; lifestyle optimisation; review at 12 months |
+| Low | Female partner < 36 and duration trying < 12 months; regular cycles; no known reproductive pathology; normal partner factors | Continue attempts; lifestyle optimization; review at 12 months |
 | Moderate | Duration trying 12–24 months in female < 36, OR > 6 months in female ≥ 36; one or two modifiable factors (BMI, smoking, alcohol, prolactin, TSH); cycle irregularity | Targeted investigation and treatment of identified factor; primary-care or community gynaecology |
 | High | Known cause (tubal disease, severe male factor, anovulation refractory to lifestyle change), AMH < 5.4 pmol/L or AFC < 4, age ≥ 40, secondary subfertility with ≥ 2 abnormal investigations, recurrent miscarriage | Early specialist / ART referral |
 

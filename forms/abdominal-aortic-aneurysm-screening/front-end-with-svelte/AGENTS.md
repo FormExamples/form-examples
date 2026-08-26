@@ -28,7 +28,7 @@ headless conventions: [`../../AGENTS-front-end-svelte.md`](../../AGENTS-front-en
 Classification-based (not additive): the maximum antero-posterior aortic
 diameter is classified against fixed thresholds — normal (`< 3.0 cm`), small
 (`3.0-4.4 cm`), medium (`4.5-5.4 cm`), large (`>= 5.5 cm`), each band
-lower-bound inclusive and upper-bound exclusive. A non-visualised guard applies
+lower-bound inclusive and upper-bound exclusive. A non-visualized guard applies
 first when `aortaVisualised == 'no'` or the diameter is missing. Each category
 maps to a surveillance/referral band; growth since the prior scan
 (`maxAorticDiameterCm - priorMaxDiameterCm`) feeds the rapid-growth flag.

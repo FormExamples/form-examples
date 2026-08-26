@@ -44,7 +44,7 @@ the decision — and its legal risk — rather than triaging a request.
 ## Interpretation grading
 
 The engine grades each response on **four independent axes**, each anchored to a
-recognised source. Axes are orthogonal: a complete, well-structured response can
+recognized source. Axes are orthogonal: a complete, well-structured response can
 still carry high legal risk if it declines adjustments a worker is likely
 entitled to.
 

@@ -19,7 +19,7 @@ NG106 heart-failure guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, urgency, completeness, and clinical
-  priority are independent and each citable to a recognised body. A request can
+  priority are independent and each citable to a recognized body. A request can
   be appropriate yet incomplete, or complete yet urgent.
 - **Red flags auto-escalate.** Suspected endocarditis, severe symptomatic valve
   disease, or acute heart failure forces urgent / emergency triage regardless of
@@ -43,5 +43,5 @@ NG106 heart-failure guidance.
 ## Future enhancements
 
 - ACC/AHA/ASE appropriateness lookup table per (indication × echo type).
-- NT-proBNP-driven auto-prioritisation per NICE NG106 thresholds.
+- NT-proBNP-driven auto-prioritization per NICE NG106 thresholds.
 - Curated routine / urgent / rarely-appropriate example fixtures.

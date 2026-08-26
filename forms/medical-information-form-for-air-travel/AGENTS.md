@@ -1,6 +1,6 @@
 # Medical Information Form for Air Travel — Agent Instructions
 
-Digitisation of the airline **Medical Information Form (MEDIF)**: a single-page
+Digitization of the airline **Medical Information Form (MEDIF)**: a single-page
 wizard that captures passenger identification, trip details, the attending
 physician's clinical evaluation, requested in-flight medical accommodations,
 and produces a fitness-to-fly band plus safety flags suitable for submission to

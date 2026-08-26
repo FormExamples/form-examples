@@ -1,6 +1,6 @@
 # Abdominal Aortic Aneurysm (AAA) Screening
 
-> A documentation and result-classification form for the **UK NHS Abdominal Aortic Aneurysm (AAA) Screening Programme**. It records a single abdominal ultrasound of the aorta: eligibility, consent, and the **maximum antero-posterior aortic diameter** measured in centimetres. From that diameter a validated engine classifies the aorta into one of four categories — normal, small aneurysm, medium aneurysm, or large aneurysm — and sets the corresponding **surveillance or referral action**. It checks completeness and raises clinical flags (large aneurysm requiring vascular referral, rapid growth, a non-visualised aorta requiring re-scan, or a symptomatic patient requiring emergency assessment).
+> A documentation and result-classification form for the **UK NHS Abdominal Aortic Aneurysm (AAA) Screening Programme**. It records a single abdominal ultrasound of the aorta: eligibility, consent, and the **maximum antero-posterior aortic diameter** measured in centimetres. From that diameter a validated engine classifies the aorta into one of four categories — normal, small aneurysm, medium aneurysm, or large aneurysm — and sets the corresponding **surveillance or referral action**. It checks completeness and raises clinical flags (large aneurysm requiring vascular referral, rapid growth, a non-visualized aorta requiring re-scan, or a symptomatic patient requiring emergency assessment).
 
 ## Docs
 

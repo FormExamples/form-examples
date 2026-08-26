@@ -15,7 +15,7 @@ a completeness/discrepancy status).
       `medication-reconciliation-rules.ts`, `medication-reconciliation-grader.ts`,
       `flagged-issues.ts`.
 - [x] Model the four child lists as arrays on the store data;
-      `createDefaultReconciliation()` initialises them to `[]`.
+      `createDefaultReconciliation()` initializes them to `[]`.
 - [x] Generic `ListEditor.svelte` repeating-row editor (add / remove) for
       sources, allergies, medication line items, and discrepancies.
 - [x] Seven step components; live-status readout (`LiveStatus.svelte`).

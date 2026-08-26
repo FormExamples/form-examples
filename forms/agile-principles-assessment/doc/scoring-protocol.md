@@ -73,8 +73,8 @@ Principles scoring at or below 3 emit a "mid" advisory rule.
 | `rule_output_not_outcome` | P7 ≤ 2 | Outcome measurement |
 | `rule_burnout` | P8 ≤ 2 | Sustainable pace |
 | `rule_technical_debt` | P9 ≤ 2 | Technical excellence and design |
-| `rule_scope_creep` | P10 ≤ 2 | Simplicity (maximising work not done) |
-| `rule_command_and_control` | P11 ≤ 2 | Self-organising teams |
+| `rule_scope_creep` | P10 ≤ 2 | Simplicity (maximizing work not done) |
+| `rule_command_and_control` | P11 ≤ 2 | Self-organizing teams |
 | `rule_no_retrospective` | P12 ≤ 2 | Regular reflection |
 
 ## Additional flags

@@ -24,7 +24,7 @@ The OKR tracker is the second non-clinical sibling in the monorepo (after
   reviews, individual performance objectives, quarterly business reviews.
 - **Users:** OKR owners (DRIs), team leads, department heads, executives,
   OKR coaches, programme managers.
-- **Subjects:** any objective at any organisational level — individual,
+- **Subjects:** any objective at any organizational level — individual,
   team, department, or company.
 
 ## 2. Form shape
@@ -87,7 +87,7 @@ The composite RAG status uses the **worst-band-finding** algorithm from
 | 2 | `score_by_confidence_decile` | 1 – 10 | Industry practice (Atlassian, Asana) | Owner's stated confidence in achieving the objective by `cycle_end_date` |
 | 3 | `score_by_stretch_tier` | 1 – 3 | Google OKR — *committed* / *aspirational* / *moonshot* | Risk-tolerance classification; modulates the RAG thresholds for progress |
 | 4 | `score_by_alignment_grade` | 1 – 5 | Enterprise OKR practice (Profit.co, Quantive) | Fit to `parent_objective_id` / strategic theme; 1 = mis-aligned, 5 = directly furthers parent |
-| 5 | `score_by_impact_tier` | 1 – 5 | MoSCoW prioritisation (Clegg & Barker, 1994) | Business / mission value if achieved; 1 = nice-to-have, 5 = mission-critical |
+| 5 | `score_by_impact_tier` | 1 – 5 | MoSCoW prioritization (Clegg & Barker, 1994) | Business / mission value if achieved; 1 = nice-to-have, 5 = mission-critical |
 | 6 | `score_by_smart_quality` | 0 – 5 | Doran (1981), *Management Review* | Count of SMART attributes the objective + KRs satisfy: Specific, Measurable, Achievable, Relevant, Time-bound |
 | 7 | `score_by_pace_deviation_percent` | −100 .. +100 | PMI earned-value analysis (SPI / CPI) | Deviation from expected linear pace at this point in the cycle; negative = behind |
 
@@ -123,7 +123,7 @@ positive flag for recognition.
 | `stale-check-in` | medium | days since last check-in > max(14, 25 % of cycle length) |
 | `cascading-broken` | medium | `parent_objective_id` references an objective whose status is `retired`, `cancelled`, or `missed` |
 | `over-scoped` | low | KR count > 5 (UI-capped, kept as a guard for imported data) |
-| `moonshot-progress` | low (positive) | `stretch_tier = moonshot` AND `progress_percent` ≥ 70 — worth recognising |
+| `moonshot-progress` | low (positive) | `stretch_tier = moonshot` AND `progress_percent` ≥ 70 — worth recognizing |
 
 ## 5. SQL data model
 
@@ -302,7 +302,7 @@ the back-end recompute.
 - Doran, G. T. *There's a S.M.A.R.T. way to write management's goals
   and objectives.* Management Review, 1981.
 - Clegg, D. & Barker, R. *Case Method Fast-Track: A RAD Approach.*
-  Addison-Wesley, 1994 — origin of MoSCoW prioritisation.
+  Addison-Wesley, 1994 — origin of MoSCoW prioritization.
 - Project Management Institute — earned-value management (SPI / CPI).
 - ISO/IEC/IEEE 26514:2022 — *Design and development of information
   for users.*

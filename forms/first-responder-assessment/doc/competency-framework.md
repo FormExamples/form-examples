@@ -94,7 +94,7 @@ References:
 - *Roadcraft: The Police Driver's Handbook*. The Stationery Office; 2020.
   ISBN 978-0117083219.
 - Driver and Vehicle Standards Agency (DVSA) emergency response driving
-  standards. <https://www.gov.uk/government/organisations/driver-and-vehicle-standards-agency>
+  standards. <https://www.gov.uk/government/organizations/driver-and-vehicle-standards-agency>
 
 ## Psychological readiness reference
 

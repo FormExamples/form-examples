@@ -16,7 +16,7 @@ is a signed arc42 document in HTML, PDF, AsciiDoc, FHIR R5 Bundle, and XML.
 
 This is a non-clinical reference form. It demonstrates that the
 `forms/` monorepo pattern — single-page wizard, structured schema,
-scoring engine, multi-format report — generalises beyond medical
+scoring engine, multi-format report — generalizes beyond medical
 assessments.
 
 Full design description: [`index.md`](../index.md).

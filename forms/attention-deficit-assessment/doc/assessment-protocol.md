@@ -51,7 +51,7 @@ NICE NG87 §1.3.4 requires explicit consideration of differential
 diagnoses. The clinician should review and record their reasoning for
 excluding (or co-diagnosing):
 
-- **Generalised anxiety disorder** (ICD-11 6B00) — anxiety can mimic
+- **Generalized anxiety disorder** (ICD-11 6B00) — anxiety can mimic
   inattention.
 - **Major depressive disorder** (ICD-11 6A70) — anhedonia and cognitive
   slowing can mimic inattention.

@@ -58,7 +58,7 @@ a per-flow basis, which rights the patient can exercise:
 | CQC inspection | Access, Rectification |
 | UKHSA notifiable disease | Access, Rectification |
 
-ICO guidance: <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/>
+ICO guidance: <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/>
 
 ## Disclosure log requirement
 
@@ -66,11 +66,11 @@ While outside this form, the practice's clinical system must log every
 statutory disclosure with at least the following fields:
 
 - Patient identifier (NHS number).
-- Recipient organisation (statutory body).
+- Recipient organization (statutory body).
 - Date of disclosure.
 - Statutory instrument cited.
 - Data items disclosed.
-- Operator identity (the practice user who triggered or authorised the
+- Operator identity (the practice user who triggered or authorized the
   disclosure, even where automated).
 
 This log is the controller's primary evidence that the disclosure was

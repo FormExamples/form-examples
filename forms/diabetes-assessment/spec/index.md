@@ -19,7 +19,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 - **Instrument**: NICE Diabetes Review (HbA1c target + composite risk)
 - **Range**: Controlled / Suboptimal / Poorly Controlled
 - **Categories**:
-  - Controlled: HbA1c at individualised target, no new complications, good self-care
+  - Controlled: HbA1c at individualized target, no new complications, good self-care
   - Suboptimal: HbA1c above target or modifiable risk factors present
   - Poorly Controlled: HbA1c significantly above target or active complications identified
 

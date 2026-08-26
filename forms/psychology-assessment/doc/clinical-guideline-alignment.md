@@ -10,7 +10,7 @@ NG222 §1.3 — *Identification and assessment* — recommends use of a
 validated severity measure. PHQ-9 is named explicitly; DASS-21 is a
 valid alternative depression measure (DASS-21 Depression subscale).
 
-## NICE CG113 — Generalised anxiety disorder and panic disorder
+## NICE CG113 — Generalized anxiety disorder and panic disorder
 
 Source: NICE. Guideline ID: **CG113** (published January 2011, updated
 July 2019).
@@ -57,7 +57,7 @@ Relevant codes:
 
 - 6A70 — Single episode depressive disorder.
 - 6A71 — Recurrent depressive disorder.
-- 6B00 — Generalised anxiety disorder.
+- 6B00 — Generalized anxiety disorder.
 - 6B01 — Panic disorder.
 - 6B43 — Adjustment disorder.
 

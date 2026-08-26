@@ -67,14 +67,14 @@ clinicians can apply them in the correct order:
 
 The advance statement records UK GDPR Article 9 special-category data
 (health, religious or philosophical beliefs). The lawful basis for storage
-within an NHS organisation is:
+within an NHS organization is:
 
 - UK GDPR Article 6(1)(e) — task carried out in the public interest.
 - UK GDPR Article 9(2)(h) — preventive medicine, provision of health or
   social care.
 
 Information Commissioner's Office guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 
 ## Confidentiality
 
@@ -87,7 +87,7 @@ Information Commissioner's Office guidance:
 
 ## Template authority
 
-Recognised templates:
+Recognized templates:
 
 - Compassion in Dying — Advance Statement guide and template:
   <https://compassionindying.org.uk/library/advance-statement-form/>

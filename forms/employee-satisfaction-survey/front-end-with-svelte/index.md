@@ -12,7 +12,7 @@ HR dashboard:
 
 The shared pure scoring engine lives in `src/lib/engine/` (`types.ts`,
 `rules.ts`, `grader.ts`, `flagged-issues.ts`, `utils.ts`) with Vitest tests in
-`grader.test.ts`. Each 1–5 Likert domain is normalised to 0–100 (mean × 20)
+`grader.test.ts`. Each 1–5 Likert domain is normalized to 0–100 (mean × 20)
 and averaged into a composite; eNPS uses the 0–10 promoter / passive /
 detractor bands.
 

@@ -20,7 +20,7 @@ guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, urgency/triage, completeness, and
-  clinical priority are independent and each citable to a recognised body. A
+  clinical priority are independent and each citable to a recognized body. A
   request can be appropriate yet incomplete, or complete yet urgent.
 - **Red-flags auto-escalate.** Any red flag (syncope, suspected VT, post-stroke
   AF detection) forces urgent / emergency triage regardless of the other axes.

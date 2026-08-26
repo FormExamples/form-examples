@@ -7,7 +7,7 @@ Slug: `national-early-warning-score-2`
 ## 1. Purpose
 
 A UK NHS–aligned implementation of the **National Early Warning Score 2
-(NEWS2)**, the Royal College of Physicians' (RCP, 2017) standardised
+(NEWS2)**, the Royal College of Physicians' (RCP, 2017) standardized
 track-and-trigger early warning system. The form records six routinely measured
 physiological parameters, scores each against the published NEWS2 allocation,
 aggregates them into a total of **0 to 20+**, and returns the resulting

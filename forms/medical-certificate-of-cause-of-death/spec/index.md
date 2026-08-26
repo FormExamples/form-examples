@@ -90,7 +90,7 @@ A single logical certificate record. Fields default to `''` (text/enum) or
 | --- | --- | --- |
 | `referredToCoroner` | enum | yes / no |
 | `coronerReason` | enum | unnatural / violent / suspicious / unknown-cause / industrial-disease / medical-procedure / custody / no-attending-practitioner / other / none |
-| `medicalExaminerStatus` | enum | scrutinised / discussed / pending / not-required |
+| `medicalExaminerStatus` | enum | scrutinized / discussed / pending / not-required |
 | `certifierNote` | text | free-text |
 
 **Derived (never stored as input).** `validityClass`, `underlyingCause`,
@@ -144,7 +144,7 @@ Emitted independently of the class, each with a priority:
 - **Coroner referral required** (high) — `coronerReferralIndicated`: a referral
   criterion is asserted; do not issue the MCCD until the coroner has considered
   the case.
-- **Unacceptable sole cause** (high) — `unacceptableSoleCause`: a recognised
+- **Unacceptable sole cause** (high) — `unacceptableSoleCause`: a recognized
   mode of death is the only cause given; state the underlying disease.
 - **Missing Part I(a)** (high) — `missingPartIa`: no direct cause of death
   recorded.
@@ -152,7 +152,7 @@ Emitted independently of the class, each with a priority:
   a plausible downward causal order.
 - **Medical-examiner scrutiny required** (medium) — `referredToCoroner != 'yes'`
   and `medicalExaminerStatus` not `scrutinised`: every non-referred death must
-  be scrutinised by a medical examiner before registration.
+  be scrutinized by a medical examiner before registration.
 - **Missing interval** (low) — a completed Part I condition line has an empty
   interval.
 - **Incomplete certifier details** (low) — `certifyingDoctorName`,

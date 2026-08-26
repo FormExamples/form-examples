@@ -37,7 +37,7 @@ The following Lily components are required to support the majority of forms (130
 
 ---
 
-## 2. Long-Tail / Specialised Components
+## 2. Long-Tail / Specialized Components
 
 ### Signature Capture
 **Use:** Legal consent, advance decisions, medical records release, power-of-attorney, HIPAA authorization.
@@ -149,7 +149,7 @@ ls /Users/jph/git/lilydesignsystem/lily-design-system/lily-design-system-html-he
   | grep -E "^(form|field|label|text-input|email-input|number-input|date-input|select|radio|checkbox|button|step-list|progress|error|alert|panel|data-table|file-upload|signature|measurement|net-promoter|red-amber|tag|pin)"
 ```
 
-### ✅ Present Components (All Required Core + Specialised)
+### ✅ Present Components (All Required Core + Specialized)
 
 | Component | Status | Notes |
 |---|---|---|

@@ -19,7 +19,7 @@ report.
 This form is the laboratory-medicine result counterpart to the repository's
 other clinician-driven result forms (it mirrors the *CT Scan Test Result* gold
 template). It is completed by a pathologist, reporting biomedical or clinical
-scientist, or authorising clinician rather than by the patient, and is aligned
+scientist, or authorizing clinician rather than by the patient, and is aligned
 with the Royal College of Pathologists (RCPath) best-practice recommendations on
 the communication of critical and unexpected pathology results and with UK
 Pathology Harmony consensus reference ranges.
@@ -27,9 +27,9 @@ Pathology Harmony consensus reference ranges.
 ## Scope and intended users
 
 - **Setting:** NHS pathology / clinical-biochemistry / haematology laboratory
-  reporting workflow, or a clinician reviewing and authorising results.
+  reporting workflow, or a clinician reviewing and authorizing results.
 - **Users:** pathologists, reporting biomedical and clinical scientists, and
-  authorising clinicians who interpret and sign blood / pathology reports.
+  authorizing clinicians who interpret and sign blood / pathology reports.
 - **Patients:** any patient who has had a blood specimen analysed.
 
 ## Result semantics (not a referral)
@@ -65,7 +65,7 @@ range is always the one issued by the reporting laboratory.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical value.
 
 | Axis | Instrument | Output |

@@ -11,7 +11,7 @@ carries `deleted_at`. The scaffold contract is documented in
 table, in FK-dependency order).
 
 - [x] Setup script generated from `sql/`
-- [x] Loco crate materialised (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Loco crate materialized (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Relational migrations: `users`, `patients`, `clinicians`,
       `cardiology_responses`, `cardiology_response_grades` (1:1 unique FK),
       `cardiology_response_grade_rules`, `cardiology_response_grade_flags`

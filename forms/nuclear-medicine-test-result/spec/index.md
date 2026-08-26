@@ -29,7 +29,7 @@ patient, and is aligned with the British Nuclear Medicine Society (BNMS)
 clinical guidelines, the European Association of Nuclear Medicine (EANM) and
 Society of Nuclear Medicine and Molecular Imaging (SNMMI) procedure guidelines,
 the Royal College of Radiologists (RCR) *Standards for the interpretation and
-reporting of imaging investigations*, and the UK Ionising Radiation (Medical
+reporting of imaging investigations*, and the UK Ionizing Radiation (Medical
 Exposure) Regulations — IR(ME)R 2017.
 
 Full design description: [`index.md`](../index.md).

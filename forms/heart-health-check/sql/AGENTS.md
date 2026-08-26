@@ -1,6 +1,6 @@
 # Heart Health Check: SQL Migrations
 
-PostgreSQL schema migrations for the Heart Health Check assessment. 15 files creating a normalised relational schema with UUID primary keys, timestamp tracking, and referential integrity.
+PostgreSQL schema migrations for the Heart Health Check assessment. 15 files creating a normalized relational schema with UUID primary keys, timestamp tracking, and referential integrity.
 
 @../../../AGENTS/sql.md
 

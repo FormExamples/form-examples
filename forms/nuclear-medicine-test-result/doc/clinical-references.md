@@ -86,7 +86,7 @@ the grade's `reporting_category` field. Two complementary systems are used:
 
 ## Dose context
 
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification and dose audit; administered activity in MBq recorded per study
   and compared against diagnostic reference levels, DRLs).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>

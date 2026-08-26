@@ -15,16 +15,16 @@ Strength & Conditioning Coach with FMS certification).
 ## Equipment
 
 - FMS test kit (dowel, hurdle, board, measuring stick) — or equivalent
-  standardised equipment.
+  standardized equipment.
 - Flat, non-slip surface, at least 3 m × 3 m clear area.
-- Standardised footwear (athletic shoes or barefoot, consistent across
+- Standardized footwear (athletic shoes or barefoot, consistent across
   occasions for the same individual).
 
 ## Pre-screen preparation
 
 - The participant should be free of acute injury and pain.
 - Light warm-up (5–10 minutes general mobility) is permitted but should
-  be standardised.
+  be standardized.
 - Explain that the screen measures movement quality, not strength or
   endurance.
 - Reassure that scoring is not pass/fail in a competitive sense.
@@ -32,7 +32,7 @@ Strength & Conditioning Coach with FMS certification).
 
 ## Movement Test order and procedure
 
-Standardised order (as published):
+Standardized order (as published):
 
 1. **Deep squat** — feet shoulder-width apart, dowel overhead; full squat
    with heels remaining on the ground.

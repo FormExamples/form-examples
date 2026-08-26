@@ -24,7 +24,7 @@ In scope: the schema, reconciliation engine, two consolidated front-ends
 (`front-end-with-html`, `front-end-with-svelte`), the Rust Loco JSON-API crate,
 and the generated representations (XML, FHIR R5, protobuf, OpenAPI). Out of
 scope: hosted deployment, authentication, multi-tenancy, definitive interaction
-decision-support, and primary-care repeat authorisation.
+decision-support, and primary-care repeat authorization.
 
 ## 3. Data model
 

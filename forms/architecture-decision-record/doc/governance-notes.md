@@ -52,7 +52,7 @@ to enable cross-project queries.
 
 ## Access control
 
-ADRs are typically internal-organisation documents. The implementation
+ADRs are typically internal-organization documents. The implementation
 supports:
 
 - Per-project read/write roles.

@@ -14,7 +14,7 @@ for the EMT level of certification.
   (downloadable from <https://www.nremt.org/Document/handbook>)
 - **EMT psychomotor portfolio guidance**: <https://www.nremt.org/Resources/EMT-Recertification>
 
-NREMT no longer administers a single nationally-standardised psychomotor
+NREMT no longer administers a single nationally-standardized psychomotor
 examination day for the EMT level; since the 2023 transition the
 psychomotor verification is delegated to the candidate's state EMS office
 or training programme. The candidate handbook and the EMT Education
@@ -57,8 +57,8 @@ decision.
 
 | Form step | NREMT skill sheet element |
 | --- | --- |
-| 2. Scene Size-Up | Takes BSI / PPE; determines scene safety; determines mechanism of injury / nature of illness; determines number of patients; requests additional EMS assistance; considers stabilisation of spine |
-| 3. Primary Survey | Verbalises general impression; determines responsiveness (AVPU); determines chief complaint / apparent life threats; assesses airway and breathing; assesses circulation; identifies priority patient / transport decision |
+| 2. Scene Size-Up | Takes BSI / PPE; determines scene safety; determines mechanism of injury / nature of illness; determines number of patients; requests additional EMS assistance; considers stabilization of spine |
+| 3. Primary Survey | Verbalizes general impression; determines responsiveness (AVPU); determines chief complaint / apparent life threats; assesses airway and breathing; assesses circulation; identifies priority patient / transport decision |
 | 4. History Taking & Secondary Assessment | OPQRST and SAMPLE history; vital signs (BP, HR, RR, SpO2, pupils, skin); detailed exam directed by complaint or mechanism |
 | 5. Reassessment | Repeat primary survey; repeat vitals; check interventions; document and report changes |
 | 6. Critical Criteria Review | Any failure → Fail outcome |

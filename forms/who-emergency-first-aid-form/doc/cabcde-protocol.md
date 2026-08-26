@@ -40,10 +40,10 @@ and must be addressed before securing the airway.
 | Form step | CABCDE letter | Key interventions captured |
 | --- | --- | --- |
 | 5. Major Bleeding | C (catastrophic) | Direct pressure, deep wound packing, tourniquet (with time of application), uterine massage |
-| 6. Airway | A | Neck immobilisation, head-tilt chin-lift, jaw thrust, choking care |
+| 6. Airway | A | Neck immobilization, head-tilt chin-lift, jaw thrust, choking care |
 | 7. Breathing | B | Position of comfort |
 | 8. Circulation | C | Pelvic binder, minor bleeding control, fracture care, oral hydration, left-lateral position |
-| 9. Disability | D | Spinal immobilisation, glucose, seizure care, hyperthermia/hypothermia care |
+| 9. Disability | D | Spinal immobilization, glucose, seizure care, hyperthermia/hypothermia care |
 | 10. Exposure / Other | E | Recovery position, burn care, wound care, drowning care, snakebite care |
 
 ## Tourniquet protocol
@@ -88,7 +88,7 @@ WHO BEC recovery position (left-lateral) is indicated for:
 
 The form captures recovery position under step 10 (Exposure / Other).
 
-## Spinal immobilisation triggers
+## Spinal immobilization triggers
 
 CFARs apply spinal precautions when any of the following are present:
 
@@ -99,7 +99,7 @@ CFARs apply spinal precautions when any of the following are present:
 - Patient complaining of neck or back pain after trauma
 - Unconscious trauma patient
 
-Manual in-line stabilisation is taught for CFARs; rigid cervical collar
+Manual in-line stabilization is taught for CFARs; rigid cervical collar
 application is delegated to prehospital EMS in the WHO BEC scope.
 
 ## Hand-over

@@ -56,7 +56,7 @@ structure:
 - **Thought content** — preoccupations, obsessions, compulsions,
   delusions, suicidal/homicidal ideation, perceptual abnormalities.
 - **Perception** — hallucinations (modality, command, hypnagogic),
-  illusions, derealisation, depersonalisation.
+  illusions, derealization, depersonalization.
 - **Cognition** — orientation, attention, memory, abstract reasoning.
 - **Insight** — into illness and need for treatment.
 - **Judgement** — practical, social, interpersonal.

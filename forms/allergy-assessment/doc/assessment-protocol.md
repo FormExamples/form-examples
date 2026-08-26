@@ -52,7 +52,7 @@ For each episode, capture:
 - Trigger, time to onset, signs/symptoms by system.
 - Adrenaline given (dose, route, repeated?), other treatments.
 - Hospital admission, ITU admission, biphasic reaction.
-- Whether a personalised written Anaphylaxis Action Plan exists.
+- Whether a personalized written Anaphylaxis Action Plan exists.
 
 ### Step 7 — Testing results
 - Skin prick test results (wheal diameter, control comparison).

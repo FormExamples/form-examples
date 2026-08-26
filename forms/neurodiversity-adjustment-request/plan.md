@@ -21,7 +21,7 @@ It is the **request** half of the pair with
 ## Design principles
 
 - **Four orthogonal axes.** Eligibility (Equality Act), impact / wellbeing,
-  completeness, and priority are independent and each anchored to a recognised
+  completeness, and priority are independent and each anchored to a recognized
   source.
 - **Wellbeing escalates.** A worker at risk of absence / burnout, or with severe
   impact, drives the impact axis and auto-escalates the priority tier.

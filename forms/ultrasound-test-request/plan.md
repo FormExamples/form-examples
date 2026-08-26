@@ -21,7 +21,7 @@ guidance.
 
 - **Four orthogonal axes.** Appropriateness, preparation / technical
   suitability, completeness, and triage are independent and each citable to a
-  recognised body. A request can be appropriate yet incomplete, or complete yet
+  recognized body. A request can be appropriate yet incomplete, or complete yet
   urgent.
 - **Red-flags auto-escalate.** Any red flag (suspected DVT, testicular torsion,
   AAA) forces urgent / emergency triage regardless of the other axes.

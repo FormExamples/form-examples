@@ -54,7 +54,7 @@ The form will flag:
   LH, prolactin, TSH
 - AMH ≤ 5.4 pmol/L or AFC ≤ 4 — low ovarian reserve flag
 - Semen analysis result below WHO 6th edition lower reference limits
-- BMI < 19 or ≥ 30 — lifestyle optimisation flag
+- BMI < 19 or ≥ 30 — lifestyle optimization flag
 - Smoking — strong cessation recommendation
 - Significant alcohol intake — reduction recommendation
 - History of PID or chlamydia — consider tubal assessment

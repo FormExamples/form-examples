@@ -28,7 +28,7 @@ UK 15 Healthcare Essentials.
 1. **Demographics.** Patient identifiers; date of last review.
 2. **Diabetes History.** Type (1 / 2 / other), age at diagnosis, duration,
    prior diabetic emergencies (DKA, HHS, severe hypoglycaemia).
-3. **Glycaemic Control.** Current HbA1c; individualised target (48–53
+3. **Glycaemic Control.** Current HbA1c; individualized target (48–53
    mmol/mol per NG28). Continuous-glucose-monitoring metrics if relevant
    (time-in-range 3.9–10.0 mmol/L, ATTD 2019 consensus).
 4. **Medications.** Metformin, SGLT2i, GLP-1RA, DPP-4i, sulphonylurea,
@@ -44,7 +44,7 @@ UK 15 Healthcare Essentials.
    distress (PAID-5).
 9. **Foot Assessment.** NICE NG19 risk-stratification: low, moderate,
    high, active foot problem.
-10. **Review & Care Plan.** Individualised care plan; onward referrals;
+10. **Review & Care Plan.** Individualized care plan; onward referrals;
     education review; next-review date.
 
 ## Scoring engine output
@@ -52,7 +52,7 @@ UK 15 Healthcare Essentials.
 The engine outputs a composite category — Controlled / Suboptimal / Poorly
 Controlled — based on:
 
-- HbA1c relative to individualised target.
+- HbA1c relative to individualized target.
 - Presence of macrovascular or microvascular complications.
 - Self-care quality (education, lifestyle, foot care).
 - Psychological distress.

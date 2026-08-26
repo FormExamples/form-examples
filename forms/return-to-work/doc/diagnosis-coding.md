@@ -76,6 +76,6 @@ patient has no MAT B1 reference on file.
 ## See also
 
 - NHS Digital. *SNOMED CT UK Edition release notes.*
-- World Health Organisation. *International Statistical
+- World Health Organization. *International Statistical
   Classification of Diseases and Related Health Problems, 10th
   Revision.*

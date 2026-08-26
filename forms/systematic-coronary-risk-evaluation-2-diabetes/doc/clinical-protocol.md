@@ -8,7 +8,7 @@ assessment.
 - Adults aged 40–69 years with type 2 diabetes.
 - No prior atherosclerotic cardiovascular disease (myocardial infarction,
   stroke, transient ischaemic attack, peripheral arterial disease,
-  coronary or peripheral revascularisation).
+  coronary or peripheral revascularization).
 - No target-organ damage at the threshold that automatically classifies
   the patient as very high risk (eGFR < 45 mL/min/1.73 m²,
   microalbuminuria, advanced retinopathy, neuropathy).
@@ -63,7 +63,7 @@ Per Hageman 2023 §Methods:
 ## Onward actions in any band
 
 - BP target < 130/80 mmHg (ESC 2023).
-- HbA1c individualised target (NICE NG28 § 1.6 recommends 48 mmol/mol on
+- HbA1c individualized target (NICE NG28 § 1.6 recommends 48 mmol/mol on
   diet/metformin; 53 mmol/mol if hypoglycaemia risk).
 - Annual retinal screening (NHS Diabetic Eye Screening Programme in the
   UK).

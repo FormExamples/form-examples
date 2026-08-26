@@ -5,7 +5,7 @@ or Prophylaxis** ("yellow card"), the official document used under the
 **International Health Regulations 2005, Annex 6** to record vaccinations or
 prophylactic treatments that are required for international travel.
 
-The certificate is issued by an authorised vaccination centre on behalf of a
+The certificate is issued by an authorized vaccination centre on behalf of a
 **vaccinee** (traveller). It is validated by the **handwritten signature** of a
 supervising clinician and the **uniform stamp** of the administering centre.
 Yellow fever vaccination is currently the only vaccination that may be
@@ -18,8 +18,8 @@ recommendations.
 
 - **Setting:** WHO-designated yellow fever vaccination centre, travel-medicine
   clinic, port-health unit, military pre-deployment clinic.
-- **Operator:** authorised supervising clinician (physician, nurse, pharmacist,
-  or other healthcare professional authorised by the national health authority).
+- **Operator:** authorized supervising clinician (physician, nurse, pharmacist,
+  or other healthcare professional authorized by the national health authority).
 - **Vaccinee:** any traveller of any age requiring documentary proof of
   vaccination for international travel.
 - **Verifier:** border-control officer, airline check-in agent, port-health

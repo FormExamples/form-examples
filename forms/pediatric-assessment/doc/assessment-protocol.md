@@ -3,7 +3,7 @@
 ## Intended use
 
 A child / adolescent screening questionnaire that captures birth history,
-growth, development, immunisation, and family-environment data; applies
+growth, development, immunization, and family-environment data; applies
 UK Healthy Child Programme, NICE, and RCPCH-aligned thresholds; and
 produces a per-domain outcome (Pass / Concern / Refer).
 
@@ -31,10 +31,10 @@ UK primary care, community child-health clinic, school, or hospital PAU.
 4. **Developmental milestones** — review age-banded milestones
    (gross motor, fine motor, language, social, problem-solving) at the
    relevant HCP review age; parent concern question explicitly included.
-5. **Immunisation status** — completeness against the UK routine schedule
+5. **Immunization status** — completeness against the UK routine schedule
    (Green Book); reasons for missed doses.
 6. **Medical history** — congenital conditions, chronic conditions,
-   hospitalisations, allergies, surgeries.
+   hospitalizations, allergies, surgeries.
 7. **Current medications** — including OTC, dose-by-weight check.
 8. **Family history** — relevant inheritable conditions; consanguinity for
    genetics referral consideration.
@@ -46,7 +46,7 @@ UK primary care, community child-health clinic, school, or hospital PAU.
 
 - Per-domain outcome (Pass / Concern / Refer)
 - Overall recommendation
-- Flagged-issues list (e.g. growth faltering, missed milestone, immunisation
+- Flagged-issues list (e.g. growth faltering, missed milestone, immunization
   gap, safeguarding concern, NICE NG143 amber/red fever sign)
 - Suggested onward referrals (community paediatrics, audiology, SaLT,
   health visitor team, safeguarding)
@@ -57,7 +57,7 @@ UK primary care, community child-health clinic, school, or hospital PAU.
 - Suspected sepsis features (NICE NG51) → urgent escalation
 - NICE NG143 red fever features → urgent escalation
 - Weight loss > 10% birth weight in first week → urgent feeding review
-- Missing immunisation in school-age child → catch-up plan
+- Missing immunization in school-age child → catch-up plan
 - Disclosure or sign of maltreatment → safeguarding pathway per NICE NG76 / CG89
 - Looked-after-child status → NICE NG174 pathway flagged
 - Parental smoking / unsafe sleep arrangements → SIDS safer-sleep advice

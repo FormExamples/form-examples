@@ -42,7 +42,7 @@ Sources:
 
 ### ACR Lung-RADS
 
-ACR Lung-RADS is a structured assessment-and-management categorisation system
+ACR Lung-RADS is a structured assessment-and-management categorization system
 for lung-cancer-screening CT. Its category label is an example of the value the
 form stores in the grade's `reporting_category` field for chest/lung studies.
 
@@ -70,7 +70,7 @@ category.
 ## Appropriateness and dose context (carried from the request)
 
 - ACR Appropriateness Criteria. <https://acsearch.acr.org/list>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification and dose audit; dose-length product / DLP recorded per study).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 

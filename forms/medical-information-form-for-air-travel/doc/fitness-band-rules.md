@@ -18,7 +18,7 @@ the form's `outbound_date`.
 | R-CARDIAC-ACUTE-MI-7D | cardiovascular | `recent_mi_date` within 7 d of `outbound_date` | unfit-to-fly | high | Do not fly; reassess in ≥ 7 days. |
 | R-CARDIAC-MI-COMPLICATED-6W | cardiovascular | `recent_mi_date` 7 d–6 wk of `outbound_date` AND `nyha_class` IN ('III','IV') | requires-review | medium | Submit to airline medical desk; senior physician review. |
 | R-CARDIAC-STENT-5D | cardiovascular | `recent_stent_date` within 5 d of `outbound_date` | requires-review | medium | Medical-desk clearance; document antiplatelet therapy. |
-| R-CARDIAC-UNSTABLE-ANGINA | cardiovascular | `unstable_angina` = 'yes' | unfit-to-fly | high | Stabilise before travel; cardiologist review. |
+| R-CARDIAC-UNSTABLE-ANGINA | cardiovascular | `unstable_angina` = 'yes' | unfit-to-fly | high | Stabilize before travel; cardiologist review. |
 | R-CARDIAC-NYHA-IV | cardiovascular | `nyha_class` = 'IV' | requires-review | medium | Medical-desk clearance; consider escort. |
 | R-CARDIAC-HEART-FAILURE | cardiovascular | `nyha_class` = 'III' AND `exercise_tolerance_metres` < 50 | requires-review | medium | Document supplemental oxygen need. |
 
@@ -32,7 +32,7 @@ the form's `outbound_date`.
 | R-RESP-HCT-FAIL | respiratory | `hypoxic_challenge_result` = 'fail' | unfit-to-fly | high | Do not fly without supplemental O2 + medical clearance. |
 | R-RESP-HCT-BORDERLINE | respiratory | `hypoxic_challenge_result` = 'borderline' | requires-review | medium | Document predicted in-flight SpO2; arrange O2. |
 | R-RESP-COPD-SEVERE | respiratory | `copd_severity` = 'severe' | requires-review | medium | Senior physician review. |
-| R-RESP-ASTHMA-UNCONTROLLED | respiratory | `asthma_severity` = 'severe-uncontrolled' | requires-review | medium | Stabilise before travel; rescue inhaler in cabin. |
+| R-RESP-ASTHMA-UNCONTROLLED | respiratory | `asthma_severity` = 'severe-uncontrolled' | requires-review | medium | Stabilize before travel; rescue inhaler in cabin. |
 | R-RESP-PE-6W | respiratory | `recent_pulmonary_embolism_date` within 6 wk of `outbound_date` | requires-review | medium | Confirm anticoagulation stable for ≥ 7 d. |
 
 ## Recent-event rules

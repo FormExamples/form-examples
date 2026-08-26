@@ -92,7 +92,7 @@ acts (medium), non-suicidal self-injury (medium), incomplete assessment (low).
   Journal of Psychiatry* 2011; 168(12):1266–1277.
 - NICE NG225. *Self-harm: assessment, management and preventing recurrence.*
 - NICE CG133. *Self-harm: longer-term management.*
-- US FDA and SAMHSA guidance recognising the C-SSRS.
+- US FDA and SAMHSA guidance recognizing the C-SSRS.
 
 ## Compliance
 

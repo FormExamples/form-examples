@@ -19,7 +19,7 @@ clinician-driven result forms. It is completed by a neurologist, clinical
 neurophysiologist, or clinical physiologist rather than by the patient, and is
 aligned with the joint IFCN / ILAE minimum recording standards, the ILAE /
 IFCN reporting practice for routine, sleep, ambulatory, and video-EEG, the
-Standardised Computer-based Organised Reporting of EEG (SCORE) framework, and
+Standardized Computer-based Organized Reporting of EEG (SCORE) framework, and
 the ACNS standardized critical-care EEG terminology.
 
 ## Scope and intended users
@@ -43,7 +43,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -130,7 +130,7 @@ electroencephalogram-test-result/
 - ILAE — minimum standards for long-term video-EEG monitoring (joint ILAE /
   IFCN clinical practice guideline).
   <https://www.ilae.org/guidelines/guidelines-and-reports/proposed-guideline-minimum-standards-for-long-term-video-eeg-monitoring>
-- SCORE — Standardised Computer-based Organised Reporting of EEG (structured
+- SCORE — Standardized Computer-based Organized Reporting of EEG (structured
   reporting from predefined elements per EEG feature), *Clinical
   Neurophysiology*.
   <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3759702/>

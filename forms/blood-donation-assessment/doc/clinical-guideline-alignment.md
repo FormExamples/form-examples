@@ -19,12 +19,12 @@
 - Blood Safety and Quality Regulations 2005 (UK):
   <https://www.legislation.gov.uk/uksi/2005/50/contents>
 - MHRA blood regulation pages:
-  <https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency>
+  <https://www.gov.uk/government/organizations/medicines-and-healthcare-products-regulatory-agency>
 - EU Directives 2002/98/EC and 2004/33/EC (historical EU framework retained
   in UK statutory instruments):
   <https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0098>
 
-## Individualised Risk Assessment (IRA)
+## Individualized Risk Assessment (IRA)
 
 - UK joint statement on IRA implementation (2021):
   <https://www.nhsbt.nhs.uk/news/landmark-changes-to-blood-donation-criteria-come-into-effect/>

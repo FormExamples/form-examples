@@ -9,10 +9,10 @@ against the adult reference range as **hypocalcaemia**, **normal**, or
 
 Roughly half of circulating calcium is bound to albumin, so a total-calcium
 result measured in a hypo- or hyper-albuminaemic patient can misrepresent the
-physiologically active (ionised) calcium. The correction estimates what the
+physiologically active (ionized) calcium. The correction estimates what the
 total calcium would be if albumin were normal (40 g/L), improving interpretation
 when albumin is abnormal. It is an estimate, not a substitute for a measured
-ionised calcium.
+ionized calcium.
 
 ## Scope and intended users
 
@@ -24,8 +24,8 @@ ionised calcium.
   interpret a calcium result in the context of albumin.
 - **Patients:** adults. The correction and reference range assume adult
   physiology and UK SI units.
-- **Not for:** paediatric interpretation, patients where a measured ionised
-  calcium is available (use the ionised value directly), or as a stand-alone
+- **Not for:** paediatric interpretation, patients where a measured ionized
+  calcium is available (use the ionized value directly), or as a stand-alone
   diagnosis of a calcium disorder. The corrected value supports, and does not
   replace, clinical judgement.
 

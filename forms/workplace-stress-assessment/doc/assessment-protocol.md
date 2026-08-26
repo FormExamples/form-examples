@@ -18,7 +18,7 @@ Management Standards approach* (WBK01).
 4. **Record** findings and develop and implement action plans.
 5. **Monitor** and review.
 
-The implementation operationalises these five steps as the assessment
+The implementation operationalizes these five steps as the assessment
 record's section structure.
 
 ## Indicator Tool
@@ -78,7 +78,7 @@ model.
 
 ## Worker consultation
 
-The HSE approach emphasises that solutions must be co-designed with
+The HSE approach emphasizes that solutions must be co-designed with
 workers, not imposed. The implementation persists:
 
 - focus-group records with attendance and theme summaries;
@@ -116,7 +116,7 @@ Where stress is associated with a disability under the Equality Act
 Reviews are triggered by:
 
 - annual cycle (minimum);
-- significant change (organisational, role, premises);
+- significant change (organizational, role, premises);
 - spikes in sickness absence;
 - adverse engagement signals from the workplace-climate-assessment or
   employee-satisfaction-survey forms.

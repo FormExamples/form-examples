@@ -37,7 +37,7 @@ References:
 
 Personally identifying content embedded by users in descriptions or
 attachments (e.g. screenshots containing PII) is handled per the
-organisation's PII redaction policy.
+organization's PII redaction policy.
 
 ## Retention
 

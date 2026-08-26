@@ -3,7 +3,7 @@
 Grounded reference material for the structured interpretation and reporting of
 allergy skin tests and specific-IgE testing. These sources anchor the four-axis
 interpretation grade, the positive-reaction thresholds, the
-sensitisation-versus-clinical-allergy distinction, and the critical-result
+sensitization-versus-clinical-allergy distinction, and the critical-result
 alerting rules used by this form.
 
 ## Interpretation thresholds
@@ -22,15 +22,15 @@ form's `positive_reactions` flag and the per-allergen `wheal_sizes` field.
 - Measurement and interpretation of skin prick test results, *Clinical and
   Translational Allergy*. <https://pmc.ncbi.nlm.nih.gov/articles/PMC4763448/>
 
-### Sensitisation versus clinically relevant allergy
+### Sensitization versus clinically relevant allergy
 
 Skin-prick and specific-IgE tests have a **good negative predictive value but a
 positive predictive value that can be as low as ~50 %**. A positive test
-therefore demonstrates **sensitisation**, not necessarily clinical allergy: it
+therefore demonstrates **sensitization**, not necessarily clinical allergy: it
 must be interpreted against a convincing clinical history. This distinction is
 the core of the form's `interpretation` field, the `sensitisation_confirmed`
 flag, and the Axis A *abnormal* classification — only **clinically relevant**
-sensitisation is graded abnormal.
+sensitization is graded abnormal.
 
 - Skin Prick Tests and specific IgE tests, BSACI.
   <https://www.bsaci.org/resources/allergy-management/food-allergy/investigations/skin-prick-tests-and-specific-ige-tests/>
@@ -70,6 +70,6 @@ and the `critical-result-alert` safety flag.
 | EAACI ≥3 mm positive weal threshold | `wheal_sizes`, `positive_reactions` |
 | Positive histamine control validity | `positive_control_valid`, `test_invalid` |
 | BSACI antihistamine washout | `antihistamines_withheld`, `test_invalid` |
-| Sensitisation vs clinical allergy (PPV) | `interpretation`, `sensitisation_confirmed`, Axis A abnormal |
+| Sensitization vs clinical allergy (PPV) | `interpretation`, `sensitisation_confirmed`, Axis A abnormal |
 | Specific-IgE testing | `specific_ige_results`, `sensitised_allergens` |
 | EAACI / WAO anaphylaxis-during-test | `anaphylaxis_during_test`, `critical-result-alert` flag, Axis D critical-alert |

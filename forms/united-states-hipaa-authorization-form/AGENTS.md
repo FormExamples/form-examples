@@ -76,7 +76,7 @@ core-element check:
   separate initials.
 - **Mental-health records:** must be specifically and separately
   initialled — a single global checkbox is not sufficient.
-- **Psychotherapy notes (45 CFR § 164.508(a)(2)):** must be authorised
+- **Psychotherapy notes (45 CFR § 164.508(a)(2)):** must be authorized
   on a *separate* form; no compound authorization permitted.
 - **Genetic information (GINA):** flagged but not federally restricted
   on disclosure.

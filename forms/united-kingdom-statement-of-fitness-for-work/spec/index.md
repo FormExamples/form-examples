@@ -15,7 +15,7 @@ The fit note supports the patient to stay in or return to work, and acts as
 evidence for Statutory Sick Pay (SSP) and health-related benefits. It is the
 statutory replacement of the older "sick note" introduced by the UK Department
 for Work and Pensions (DWP) in 2010 and significantly revised in 2022 to
-broaden the set of authorised issuers and to enable digital delivery.
+broaden the set of authorized issuers and to enable digital delivery.
 
 Full design description: [`index.md`](../index.md).
 

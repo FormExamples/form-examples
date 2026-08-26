@@ -60,7 +60,7 @@ A red flag (visible haematuria; fever + loin pain) auto-escalates the tier.
   <https://www.nice.org.uk/guidance/ng109/chapter/recommendations>
 - NICE NG12 *Suspected cancer: recognition and referral* (visible haematuria
   2-week-wait, age ≥45).
-  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer>
+  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organized-by-site-of-cancer>
 - UK Standards for Microbiology Investigations (UK SMI) B41 *Investigation of
   urine* (UKHSA).
   <https://www.gov.uk/government/collections/standards-for-microbiology-investigations-smi>

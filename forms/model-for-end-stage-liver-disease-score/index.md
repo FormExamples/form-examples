@@ -6,7 +6,7 @@ small number of objective blood results — **total bilirubin**, **INR**,
 weighted logarithmic formula, and produces an integer score of **6–40** that
 maps to an estimated **3-month mortality**. A higher score indicates more
 severe liver dysfunction and greater short-term mortality risk. The score is
-used to stratify disease severity and to prioritise candidates for liver
+used to stratify disease severity and to prioritize candidates for liver
 transplantation.
 
 MELD was derived to predict survival after a transjugular intrahepatic
@@ -25,10 +25,10 @@ the primary instruments and supports MELD 3.0 as an extended variant.
 - **Users:** hepatologists, gastroenterologists, transplant coordinators,
   intensivists, and other clinicians managing chronic liver disease.
 - **Patients:** adults with chronic liver disease being assessed for severity or
-  transplant prioritisation.
-- **Not for:** paediatric transplant prioritisation (use PELD), acute liver
+  transplant prioritization.
+- **Not for:** paediatric transplant prioritization (use PELD), acute liver
   failure allocation (handled by separate status-1 criteria), or as a
-  standalone substitute for full clinical assessment. The score summarises
+  standalone substitute for full clinical assessment. The score summarizes
   mortality risk; it does not diagnose the underlying liver disease.
 
 ## Calculation and interpretation
@@ -92,7 +92,7 @@ Completed in order on a single continuous single-page wizard.
 | 1 | Assessment context | assessing clinician name and role, date and time of assessment, care setting, MELD variant (MELD / MELD-Na / MELD 3.0) |
 | 2 | Patient identification | patient identifier, age band, sex |
 | 3 | Bilirubin | total bilirubin value and unit (mg/dL or µmol/L) |
-| 4 | INR | international normalised ratio |
+| 4 | INR | international normalized ratio |
 | 5 | Creatinine and dialysis | serum creatinine value and unit; number of dialysis sessions in the past 7 days; CVVHD ≥ 24 h yes/no |
 | 6 | Sodium | serum sodium (MELD-Na and MELD 3.0) |
 | 7 | Albumin | serum albumin (only when variant is MELD 3.0) |
@@ -112,7 +112,7 @@ Completed in order on a single continuous single-page wizard.
 ## Compliance
 
 - **MDCG 2019-11 Rev.1** (EU MDR/IVDR software classification) — clinical
-  decision-support calculator; the output informs prioritisation and escalation
+  decision-support calculator; the output informs prioritization and escalation
   rather than determining treatment.
 - **UK Medical Devices Regulations 2002.**
 - **ISO/IEC/IEEE 26514:2022** — design and development of information for users.

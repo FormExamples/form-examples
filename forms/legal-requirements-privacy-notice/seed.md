@@ -27,7 +27,7 @@ how-to-report
 
 We are required by law to provide you with the following information about how we handle your information and our legal obligations to share data.
 Data Controller contact details
-[Insert practice name and address details of the practice or organisation(s) that is(are) acting as Data Controller]
+[Insert practice name and address details of the practice or organization(s) that is(are) acting as Data Controller]
 Data Protection Officer contact details
 [Insert the designated Data Protection Officer's name and contact details]
 Purpose of the processing

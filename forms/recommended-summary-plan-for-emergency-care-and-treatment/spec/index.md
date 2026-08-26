@@ -9,7 +9,7 @@ Slug: `recommended-summary-plan-for-emergency-care-and-treatment`
 
 ## 1. Purpose
 
-A UK personalised emergency care and treatment plan created through shared
+A UK personalized emergency care and treatment plan created through shared
 decision-making. It records a summary of the person's relevant health, their
 preferences and what matters to them, agreed clinical recommendations balancing
 life-sustaining treatment against comfort, an explicit CPR recommendation

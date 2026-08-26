@@ -41,7 +41,7 @@ setup script); both consolidated front-ends (`front-end-with-html` and
 - Override triggers are independent of the total: any single parameter scoring 3,
   nurse/staff concern, and parent/carer concern each escalate on their own.
 - Parent / carer concern is a first-class, recorded escalation trigger — a
-  recognised predictor of deterioration, not an afterthought.
+  recognized predictor of deterioration, not an afterthought.
 - Missing numeric input scores 0 for that parameter and raises a
   data-completeness flag — the score can understate risk.
 - Must remain one continuous single-page wizard (7 steps).

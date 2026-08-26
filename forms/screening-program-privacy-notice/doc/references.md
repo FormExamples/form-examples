@@ -32,18 +32,18 @@
 - NHS Data Security and Protection Toolkit:
   <https://www.dsptoolkit.nhs.uk/>
 - UK Health Security Agency:
-  <https://www.gov.uk/government/organisations/uk-health-security-agency>
+  <https://www.gov.uk/government/organizations/uk-health-security-agency>
 
 ## Information Commissioner's Office guidance
 
 - Right to be informed:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-to-be-informed/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-to-be-informed/>
 - Lawful basis:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
 - Special-category data:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 - Research provisions:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-and-research-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/data-protection-and-research-information/>
 
 ## Confidentiality codes and professional standards
 
@@ -53,7 +53,7 @@
   patient information* (2017) —
   <https://www.gmc-uk.org/professional-standards/professional-standards-for-doctors/confidentiality>
 - National Data Guardian:
-  <https://www.gov.uk/government/organisations/national-data-guardian>
+  <https://www.gov.uk/government/organizations/national-data-guardian>
 
 ## Standards
 

@@ -91,7 +91,7 @@ bradypnoea (medium), tachycardia / bradycardia (medium), pyrexia / hypothermia
 - Subbe C.P. *et al.* Validation of a modified Early Warning Score in medical
   admissions. *QJM* 2001; 94(10):521–526.
 - Royal College of Physicians. *National Early Warning Score (NEWS2)* (2017).
-- NICE CG50. *Acutely ill adults in hospital: recognising and responding to
+- NICE CG50. *Acutely ill adults in hospital: recognizing and responding to
   deterioration.*
 
 ## Compliance

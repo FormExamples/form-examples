@@ -1,6 +1,6 @@
 # Estimated Glomerular Filtration Rate (eGFR) Calculator
 
-> A formula calculator that estimates the **glomerular filtration rate (GFR)** — the volume of blood the kidneys filter each minute — from a single serum **creatinine** measurement together with the patient's **age** and **sex**. It returns an **eGFR in mL/min/1.73 m²** and classifies the result into a **chronic kidney disease (CKD) G-stage** (G1–G5). The calculator does not diagnose kidney disease; it standardises a laboratory result into a staged estimate that prompts monitoring, medication-dose review, or referral.
+> A formula calculator that estimates the **glomerular filtration rate (GFR)** — the volume of blood the kidneys filter each minute — from a single serum **creatinine** measurement together with the patient's **age** and **sex**. It returns an **eGFR in mL/min/1.73 m²** and classifies the result into a **chronic kidney disease (CKD) G-stage** (G1–G5). The calculator does not diagnose kidney disease; it standardizes a laboratory result into a staged estimate that prompts monitoring, medication-dose review, or referral.
 
 ## Docs
 

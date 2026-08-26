@@ -8,7 +8,7 @@ The DVLA B1 form is used by car drivers and motorcyclists in the United Kingdom 
 
 - **Form**: B1 — Confidential medical information (neurological)
 - **Agency**: Driver & Vehicle Licensing Agency (DVLA), United Kingdom
-- **Revision**: May 2024 (Part A Rev May 24); Medical questionnaire Rev May 2023; Authorisation Rev March 2025
+- **Revision**: May 2024 (Part A Rev May 24); Medical questionnaire Rev May 2023; Authorization Rev March 2025
 - **Pages**: 6
 - **URL**: <https://assets.publishing.service.gov.uk/media/67ffcccc694d57c6b1cf8e2e/b1-confidential-medical-information.pdf>
 
@@ -194,11 +194,11 @@ Do you need to drive a vehicle fitted with special controls or automatic transmi
 
 Note: "If you have any relevant hospital notes about your medical condition, please send copies with this form."
 
-### Applicant's Authorisation (Page 5)
+### Applicant's Authorization (Page 5)
 
 Same structure as other DVLA forms (Rev March 2025):
 
-- Declaration authorising medical information disclosure
+- Declaration authorizing medical information disclosure
 - Criminal offence warning for false declarations
 - Name, Signature, Date
 - Electronic correspondence consent (email): Yes / No
@@ -226,7 +226,7 @@ Same structure as other DVLA forms (Rev March 2025):
 | 10 | Double Vision | Q10 — diplopia and correction methods |
 | 11 | Eyesight | Q11 — eyesight problems from condition |
 | 12 | Vehicle Adaptations | Q12 — special controls or automatic transmission |
-| 13 | Authorisation | Applicant's authorisation and declaration |
+| 13 | Authorization | Applicant's authorization and declaration |
 
 ## Directory structure
 

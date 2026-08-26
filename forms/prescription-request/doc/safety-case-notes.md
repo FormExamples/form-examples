@@ -4,7 +4,7 @@
 
 - WHO. *Medication Without Harm — Global Patient Safety Challenge.*
   2017. <https://www.who.int/initiatives/medication-without-harm>
-- NICE NG5. *Medicines optimisation.*
+- NICE NG5. *Medicines optimization.*
   <https://www.nice.org.uk/guidance/ng5>
 - Royal Pharmaceutical Society. *Professional standards for hospital
   pharmacy services.*

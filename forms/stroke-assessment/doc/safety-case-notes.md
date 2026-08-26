@@ -35,7 +35,7 @@ The clinician must consider:
   raised inflammatory markers.
 - **Drug intoxication** — opioid, benzodiazepine, alcohol.
 
-## Stroke chameleons (under-recognised stroke)
+## Stroke chameleons (under-recognized stroke)
 
 - **Acute confusion / encephalopathy** — particularly in older patients;
   large MCA stroke can present as delirium.

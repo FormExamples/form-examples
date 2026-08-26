@@ -60,6 +60,6 @@ per form; cross-cutting documentation, agent instructions, and verification
 gates.
 
 **Out of scope (today):** hosted deployment, infrastructure, authentication,
-multi-tenancy; a unified backend serving every form; internationalisation
+multi-tenancy; a unified backend serving every form; internationalization
 beyond the English + Welsh pilot. See [§7 Deployment View](07-deployment-view.md)
 and [§11 Risks](11-risks-and-technical-debt.md).

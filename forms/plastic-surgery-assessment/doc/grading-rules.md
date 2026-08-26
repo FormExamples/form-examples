@@ -34,12 +34,12 @@ risk level (low / moderate / high / critical).
 | I — Clean | Uninfected operative wound in which no inflammation is encountered and the respiratory, alimentary, genital, or uninfected urinary tracts are not entered |
 | II — Clean-Contaminated | Operative wound in which the respiratory, alimentary, genital, or urinary tract is entered under controlled conditions and without unusual contamination |
 | III — Contaminated | Open, fresh, accidental wounds; or operations with major breaks in sterile technique; or gross spillage from the gastrointestinal tract |
-| IV — Dirty/Infected | Old traumatic wounds with retained devitalised tissue; or existing clinical infection or perforated viscera |
+| IV — Dirty/Infected | Old traumatic wounds with retained devitalized tissue; or existing clinical infection or perforated viscera |
 
 ## Surgical complexity / procedure grade
 
 This form uses the four-band complexity scale (1–4) consistent with the
-NHS Modernisation Agency operative-procedure grading used by NICE NG45:
+NHS Modernization Agency operative-procedure grading used by NICE NG45:
 
 - Grade 1 (minor) — e.g., excision of skin lesion, simple repair
 - Grade 2 (intermediate) — e.g., local flap, complex laceration repair

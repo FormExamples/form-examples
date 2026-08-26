@@ -20,10 +20,10 @@ Medical Problems: Major diagnoses or chronic conditions.
 Procedures: Significant past surgeries or medical interventions.
 Demographics: Basic identity details like name, address, and date of birth. 
 Technical Standards
-The IPS is built on internationally recognised technical frameworks to ensure it works across different countries: 
+The IPS is built on internationally recognized technical frameworks to ensure it works across different countries: 
 
 HL7 FHIR (Fast Healthcare Interoperability Resources): The primary standard used to format the data for electronic exchange.
-SNOMED CT: Provides a standardised clinical terminology so that medical terms mean the same thing in different languages.
+SNOMED CT: Provides a standardized clinical terminology so that medical terms mean the same thing in different languages.
 ISO 27269: The formal international standard that defines the IPS data set. 
 
 Adoption and Availability

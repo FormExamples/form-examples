@@ -41,7 +41,7 @@ Protection Act 2018:
   provision of health or social care.
 
 Information Commissioner's Office (ICO) special-category guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 
 ## Confidentiality
 

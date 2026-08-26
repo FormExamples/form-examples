@@ -15,7 +15,7 @@ longer exist anywhere; every form was migrated to the routes below.
 **Route layout (canonical):** every route is nested under a per-form directory
 named by the **form's kebab-case slug** (`src/routes/<form-kebab-case>/`), so
 the app is served at `/<slug>/`. Within it, the URL space is the form's
-**collection**, named by the **pluralised slug** (the form's resource name —
+**collection**, named by the **pluralized slug** (the form's resource name —
 e.g. `cardiology-requests`, `medical-operation-notes`). Collections use a
 plural base directory; individual items use a dynamic `[id]` route parameter:
 

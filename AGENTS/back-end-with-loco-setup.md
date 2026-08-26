@@ -68,7 +68,7 @@ forms/<slug>/
 The file is a `#!/bin/sh` script with `set -euf`. It does **not** create
 databases or users; it only emits scaffold-generation commands. Run it
 from inside the form's `back-end-with-loco/` crate after the Loco app
-has been initialised and a database is reachable.
+has been initialized and a database is reachable.
 
 ## Bootstrapping a new Loco app (one-time, manual)
 

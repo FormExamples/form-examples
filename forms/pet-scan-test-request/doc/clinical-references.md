@@ -30,7 +30,7 @@ the preparation-safety band to caution / contraindicated.
 
 Every exposure must be justified: the benefit must outweigh the detriment. The
 referrer supplies the clinical justification statement; the practitioner /
-operator justifies and optimises. Pregnancy is a key consideration — an FDG-PET
+operator justifies and optimizes. Pregnancy is a key consideration — an FDG-PET
 study in a pregnant patient requires explicit justification and is otherwise a
 relative contraindication.
 

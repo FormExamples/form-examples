@@ -1,18 +1,18 @@
-# Immunisation compliance scoring rules
+# Immunization compliance scoring rules
 
 ## Instrument
 
-The form classifies a patient's immunisation status against the **UK
-Routine Immunisation Schedule** as published in the *Immunisation against
+The form classifies a patient's immunization status against the **UK
+Routine Immunization Schedule** as published in the *Immunization against
 infectious disease* handbook ("the **Green Book**") maintained by the UK
 Health Security Agency (UKHSA), formerly Public Health England (PHE).
 
-- UK Health Security Agency. *Immunisation against infectious disease* (the
+- UK Health Security Agency. *Immunization against infectious disease* (the
   Green Book). London: UKHSA, ongoing.
-  <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
-- UK Health Security Agency. *The complete routine immunisation schedule
+  <https://www.gov.uk/government/collections/immunization-against-infectious-disease-the-green-book>
+- UK Health Security Agency. *The complete routine immunization schedule
   from spring 2024*.
-  <https://www.gov.uk/government/publications/the-complete-routine-immunisation-schedule>
+  <https://www.gov.uk/government/publications/the-complete-routine-immunization-schedule>
 
 ## Categories
 
@@ -25,7 +25,7 @@ Health Security Agency (UKHSA), formerly Public Health England (PHE).
 ## UK schedule highlights (Spring 2024 schedule)
 
 The form encodes the following routine schedule from the *Complete Routine
-Immunisation Schedule from Spring 2024*:
+Immunization Schedule from Spring 2024*:
 
 | Age | Vaccines |
 | --- | --- |
@@ -62,7 +62,7 @@ The form references:
   tuberculosis, hepatitis B, hepatitis C and HIV: new healthcare workers*.
   London: DHSC, 2007.
   <https://www.gov.uk/government/publications/health-clearance-for-tuberculosis-hepatitis-b-hepatitis-c-and-hiv-new-healthcare-workers>
-- UKHSA Green Book Chapter 12 (Immunisation of healthcare and laboratory
+- UKHSA Green Book Chapter 12 (Immunization of healthcare and laboratory
   staff).
 
 ## Contraindications (Step 7)

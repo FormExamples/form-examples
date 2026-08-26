@@ -47,7 +47,7 @@
 
 - JPAC DSG: <https://www.transfusionguidelines.org/dsg>
 - UKHSA Green Book:
-  <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
+  <https://www.gov.uk/government/collections/immunization-against-infectious-disease-the-green-book>
 
 ## Regulatory
 

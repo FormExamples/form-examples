@@ -23,7 +23,7 @@
   https://www.nice.org.uk/guidance/ng45
 - NICE NG125 *Surgical site infections: prevention and treatment.*
   https://www.nice.org.uk/guidance/ng125
-- Centre for Perioperative Care *Preoperative Assessment and Optimisation
+- Centre for Perioperative Care *Preoperative Assessment and Optimization
   for Adult Surgery* (June 2021). https://cpoc.org.uk/
 - BAPRAS index. https://www.bapras.org.uk/
 - BAAPS index. https://baaps.org.uk/

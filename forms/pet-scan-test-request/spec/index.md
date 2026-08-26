@@ -35,7 +35,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe to prepare, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -56,7 +56,7 @@ safety flag, regardless of how appropriate the request is.
 | --- | --- | --- |
 | FDG-PET-CT | [18F]FDG | cancer staging / restaging, treatment response, suspected recurrence, lymphoma, solitary pulmonary nodule, infection / inflammation |
 | PSMA-PET | [68Ga]/[18F]PSMA | prostate cancer staging / biochemical recurrence |
-| DOTATATE-PET | [68Ga]DOTATATE | neuroendocrine tumour localisation / staging |
+| DOTATATE-PET | [68Ga]DOTATATE | neuroendocrine tumour localization / staging |
 | Amyloid-PET | [18F] amyloid tracers | neurology — dementia / Alzheimer assessment |
 | Cardiac-PET | [18F]FDG / perfusion | myocardial viability, cardiac sarcoid |
 

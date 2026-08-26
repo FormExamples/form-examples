@@ -10,9 +10,9 @@ what must be produced and the current position on each point.
 | Standard | Applies to | Status |
 | --- | --- | --- |
 | DCB0129 — Clinical Risk Management: its Application in the Manufacture of Health IT Systems | the manufacturer of this software | **not started** — needs a named Clinical Safety Officer, a Clinical Risk Management Plan, a Hazard Log, and a Clinical Safety Case Report |
-| DCB0160 — Clinical Risk Management: its Application in the Deployment and Use of Health IT Systems | the deploying organisation | **not applicable until deployment** — the deploying employer, gym, or practice owns this |
+| DCB0160 — Clinical Risk Management: its Application in the Deployment and Use of Health IT Systems | the deploying organization | **not applicable until deployment** — the deploying employer, gym, or practice owns this |
 | DTAC — Digital Technology Assessment Criteria | NHS procurement, where a primary-care or perioperative-referral deployment is commissioned by the NHS | not started |
-| DSPT — Data Security and Protection Toolkit | the hosting organisation | not applicable — this form ships no hosting |
+| DSPT — Data Security and Protection Toolkit | the hosting organization | not applicable — this form ships no hosting |
 
 ## Regulatory classification
 

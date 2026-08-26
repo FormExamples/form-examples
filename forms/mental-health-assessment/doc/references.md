@@ -29,7 +29,7 @@
   https://www.nice.org.uk/guidance/ng222
 
 - National Institute for Health and Care Excellence (2011, updated 2019).
-  *Generalised anxiety disorder and panic disorder in adults: management*.
+  *Generalized anxiety disorder and panic disorder in adults: management*.
   NICE clinical guideline CG113.
   https://www.nice.org.uk/guidance/cg113
 

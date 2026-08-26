@@ -87,7 +87,7 @@ hospital-performance-indicators/
 
 - [`hospital-dashboard-metrics`](../hospital-dashboard-metrics) —
   a departmental (not strategic-perspective) hospital KPI dashboard,
-  67 metrics across 14 department-organised categories.
+  67 metrics across 14 department-organized categories.
 - [`hospital-daily-monitoring-checklist`](../hospital-daily-monitoring-checklist) —
   a facility-condition rounds checklist (satisfactory / needs-attention
   per checkpoint), rather than a numeric KPI report.
@@ -99,7 +99,7 @@ hospital-performance-indicators/
 - Kaplan, R. S. & Norton, D. P. *The Balanced Scorecard: Translating
   Strategy into Action*. Harvard Business School Press, 1996.
 - Indicators transcribed from a hospital Balanced Scorecard indicator
-  list; item text lightly normalised for readability.
+  list; item text lightly normalized for readability.
 
 ## Compliance
 

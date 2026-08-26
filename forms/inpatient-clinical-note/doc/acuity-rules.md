@@ -19,7 +19,7 @@ Bands are ordered `stable < watch < escalate < critical`.
 | `A-NEW-OXYGEN` | `new_oxygen_requirement == 'yes'` | escalate | A new oxygen requirement is an independent deterioration marker |
 | `A-NEW-CONFUSION` | ACVPU below Alert and `new_confusion == 'yes'` | escalate | New confusion scores 3 on NEWS2 and is a core delirium and sepsis marker (NICE CG103, NG51) |
 | `A-SEPSIS` | `sepsis_screen == 'positive'` | escalate | NICE NG51: a positive screen requires senior review and the sepsis pathway |
-| `A-ABNORMAL-UNRESOLVED` | Any investigation abnormal and not actioned | escalate | An unactioned abnormal result is a recognised source of avoidable harm |
+| `A-ABNORMAL-UNRESOLVED` | Any investigation abnormal and not actioned | escalate | An unactioned abnormal result is a recognized source of avoidable harm |
 | `A-NEWS2-CRITICAL` | NEWS2 ≥ 9 | critical | See the note in [`news2.md`](news2.md) — a dashboard separation of the highest scores, never a downgrade |
 | `A-ARREST` | `arrest_call` in (`cardiac`, `respiratory`, `peri-arrest`) | critical | Self-evident |
 | `A-CRITICAL-CARE` | `critical_care_referral == 'yes'` | critical | A referral made is a decision already taken that the patient may need organ support |

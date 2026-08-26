@@ -19,7 +19,7 @@ The RTT clock starts when *any* of the following occurs:
 - A referral letter is received from a GP, optometrist, GP-with-
   specialist-interest, or community dental service to a consultant
   service.
-- A self-referral is accepted through a recognised pathway.
+- A self-referral is accepted through a recognized pathway.
 - A consultant-to-consultant referral that meets the criteria.
 - The patient is added to a waiting list following a decision-to-
   treat at outpatient.

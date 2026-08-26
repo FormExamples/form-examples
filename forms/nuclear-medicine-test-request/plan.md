@@ -20,7 +20,7 @@ IR(ME)R / EANM–SNMMI guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, preparation & radiation safety,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet unsafe to perform now, or complete yet
   urgent.
 - **Safety drives the prep band.** Confirmed / possible pregnancy and

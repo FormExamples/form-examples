@@ -21,13 +21,13 @@
 - EU Directive 2002/98/EC (legacy reference):
   <https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0098>
 - MHRA blood regulation:
-  <https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency>
+  <https://www.gov.uk/government/organizations/medicines-and-healthcare-products-regulatory-agency>
 
-## Individualised Risk Assessment
+## Individualized Risk Assessment
 
 - Joint statement on IRA implementation (NHSBT, June 2021):
   <https://www.nhsbt.nhs.uk/news/landmark-changes-to-blood-donation-criteria-come-into-effect/>
-- For the Assessment of Individualised Risk (FAIR) steering group:
+- For the Assessment of Individualized Risk (FAIR) steering group:
   referenced via the joint statement above.
 
 ## Geographic-risk references

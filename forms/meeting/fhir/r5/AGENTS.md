@@ -22,7 +22,7 @@ generator contract.
 
 | File | SQL table | FHIR R5 resource role |
 | --- | --- | --- |
-| `organizer.json` | `organizer` | *Practitioner* / *RelatedPerson* — meeting organiser |
+| `organizer.json` | `organizer` | *Practitioner* / *RelatedPerson* — meeting organizer |
 | `meeting.json` | `meeting` | *Appointment* (or *Encounter* for clinical MDT) |
 | `agenda_item.json` | `agenda_item` | Contained *PlanDefinition.action* list |
 | `participant.json` | `participant` | `Appointment.participant` slice |

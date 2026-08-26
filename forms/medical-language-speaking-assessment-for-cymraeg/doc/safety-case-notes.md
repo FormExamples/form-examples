@@ -3,7 +3,7 @@
 ## Patient-safety considerations of language matching
 
 Mismatched clinician–patient language is an established source of
-clinical risk. Evidence is summarised in:
+clinical risk. Evidence is summarized in:
 
 - Flores G. *Language Barriers to Health Care in the United States.*
   N Engl J Med 2006; 355: 229–231. PMID: 16855260.
@@ -15,7 +15,7 @@ clinical risk. Evidence is summarised in:
 - Hughes E et al. *Why does language matter in healthcare?* British
   Journal of Healthcare Management 2020.
 
-The active-offer principle in *More Than Just Words* recognises that
+The active-offer principle in *More Than Just Words* recognizes that
 some Welsh-speaking patients (particularly older patients living with
 dementia, very young children, and patients in acute distress) revert
 to first-language Welsh and cannot reliably switch to English. The

@@ -6,7 +6,7 @@ Slug: `dyslexia-assessment`
 
 ## 1. Purpose
 
-Specific learning difficulty evaluation using standardised scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.
+Specific learning difficulty evaluation using standardized scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.
 
 Full design description: [`index.md`](../index.md).
 
@@ -16,7 +16,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 ## 3. Scoring system
 
-- **Instrument**: Standardised score assessment battery
+- **Instrument**: Standardized score assessment battery
 - **Range**: Standard scores (mean 100, SD 15)
 - **Categories**:
   - Standard score 85-115: Average (no dyslexia)

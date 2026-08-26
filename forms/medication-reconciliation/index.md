@@ -29,7 +29,7 @@ preventable medication-related harm.
   compile the BPMH), prescribers (doctors, non-medical prescribers), and nurses.
 - **Patients:** any admitted patient taking, or expected to take, regular or
   as-required medicines, including high-risk medicines.
-- **Not for:** primary-care repeat-prescription authorisation, a substitute for
+- **Not for:** primary-care repeat-prescription authorization, a substitute for
   a full clinical medication review, or definitive interaction screening (it
   flags for pharmacist review rather than replacing a decision-support engine).
 
@@ -131,7 +131,7 @@ no multi-page forms.
 
 - World Health Organization. *The High 5s Project — Assuring Medication Accuracy
   at Transitions in Care (Medication Reconciliation)*, 2014.
-- NICE NG5. *Medicines optimisation: the safe and effective use of medicines to
+- NICE NG5. *Medicines optimization: the safe and effective use of medicines to
   enable the best possible outcomes*, 2015.
 - Royal Pharmaceutical Society. *Keeping patients safe when they transfer between
   care providers*, 2012.

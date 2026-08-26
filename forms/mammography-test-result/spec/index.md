@@ -21,7 +21,7 @@ including an automatic **critical-result alert**. The output is a structured
 breast-imaging report.
 
 Mammography is the classic **BI-RADS** use case: the Breast Imaging Reporting and
-Data System gives every mammogram a single standardised final assessment
+Data System gives every mammogram a single standardized final assessment
 category that determines management. This form is completed by a radiologist,
 consultant, or reporting radiographer rather than by the patient, and is aligned
 with the ACR BI-RADS Atlas, the Royal College of Radiologists (RCR) breast

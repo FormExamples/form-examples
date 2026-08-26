@@ -103,7 +103,7 @@ For each pending investigation:
 4. Confirm that the primary care provider has been informed of the
    pending result.
 
-Unactioned pending results are a recognised harm; the WHO patient-safety
+Unactioned pending results are a recognized harm; the WHO patient-safety
 curriculum classifies them as a "diagnostic error" subcategory.
 
 ## Counter-referral delivery

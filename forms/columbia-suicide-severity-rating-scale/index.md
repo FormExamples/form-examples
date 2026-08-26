@@ -57,7 +57,7 @@ none are present).
 | 4 | Active ideation with some intent to act | Active thoughts with some intent to act, without a fully worked-out plan. |
 | 5 | Active ideation with specific plan and intent | Active thoughts with a specific plan **and** intent to carry it out. |
 
-Optional **ideation intensity** sub-items (full version) further characterise the
+Optional **ideation intensity** sub-items (full version) further characterize the
 most severe ideation: frequency, duration, controllability, deterrents, and
 reasons for ideation. These inform clinical judgement but do not alter the
 ordinal level.
@@ -143,7 +143,7 @@ explored when the preceding item is affirmative, but every item is recorded.
 - NICE NG225. *Self-harm: assessment, management and preventing recurrence*
   (2022).
 - NICE CG133. *Self-harm: longer-term management* (2011).
-- US FDA and SAMHSA guidance recognising the C-SSRS for suicide-risk assessment.
+- US FDA and SAMHSA guidance recognizing the C-SSRS for suicide-risk assessment.
 
 ## Verify
 

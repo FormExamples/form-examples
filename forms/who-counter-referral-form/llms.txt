@@ -1,6 +1,6 @@
 # WHO Counter-Referral Form
 
-> World Health Organization standardised counter-referral form for discharging patients back from a referral facility to their primary care facility.
+> World Health Organization standardized counter-referral form for discharging patients back from a referral facility to their primary care facility.
 
 ## Docs
 

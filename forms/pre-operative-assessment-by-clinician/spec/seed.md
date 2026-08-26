@@ -115,7 +115,7 @@ Discharge Planning / Post-Op Care
 Summary & Clinical Decision
 
 - Fit for surgery?
-- Required Optimisation Steps:
+- Required Optimization Steps:
 - Pre-operative Optimization Plan Finalized by:
 
 Signatures

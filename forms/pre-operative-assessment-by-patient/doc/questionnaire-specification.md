@@ -331,7 +331,7 @@ If the patient is not female or is outside the 12-55 age range, this step is ski
 
 ### Default Values
 
-All fields initialise to:
+All fields initialize to:
 - Empty string `''` for text, radio, and select fields
 - `null` for number fields
 - Empty array `[]` for medications and allergies

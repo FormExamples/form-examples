@@ -27,7 +27,7 @@ conventions: [`../../AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.
 ## Scoring engine
 
 Seven weighted criteria — clinical signs of DVT (+3), PE most likely (+3),
-heart rate > 100 (+1.5), immobilisation/surgery (+1.5), previous DVT/PE (+1.5),
+heart rate > 100 (+1.5), immobilization/surgery (+1.5), previous DVT/PE (+1.5),
 haemoptysis (+1), malignancy (+1). Total 0..12.5.
 
 - `wellsScore = sum of weighted points for each positive criterion`

@@ -72,7 +72,7 @@ The composite grader runs a single pass over the 12 sections:
 - End-to-end tests with Playwright.
 - LocalStorage autosave with draft-recovery.
 - Multi-cycle maturity tracking (version history per system).
-- Radar-chart visualisation of per-section completeness.
+- Radar-chart visualization of per-section completeness.
 - ADR diff tool across architecture versions.
 - Multi-architecture collaboration and co-authoring.
 - Import from existing arc42 AsciiDoc.

@@ -56,7 +56,7 @@ expectation.
 - Free-text fields (chief complaint, review of systems narrative)
   often contain PHI of third parties. Operational guidance: redact
   third-party identifiers before sharing the record outside the
-  treating organisation.
+  treating organization.
 - Audit trail must capture every read/write to the intake record per
   HIPAA §164.312 (US) / NHS England Data Security and Protection
   Toolkit (UK).

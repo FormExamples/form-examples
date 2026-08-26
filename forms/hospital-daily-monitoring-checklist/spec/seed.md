@@ -16,7 +16,7 @@
 
 1.7 Grievance Redressal by RMO/ Superintendent.
 
-1.8 Minor O.T. - Dressing material, instruments, sterilised drums, Gloves etc.
+1.8 Minor O.T. - Dressing material, instruments, sterilized drums, Gloves etc.
 
 1.9 Plaster Room, Injection Room Availability of material & performance status.
 

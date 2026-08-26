@@ -29,7 +29,7 @@ and referral.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete or urgent.
 
 | Axis | Instrument | Output |
@@ -113,7 +113,7 @@ mammography-test-request/
 - NICE NG12 *Suspected cancer: recognition and referral* (breast: two-week-wait
   referral for unexplained breast lump aged ≥ 30; nipple/skin changes aged ≥ 50).
   <https://www.nice.org.uk/guidance/ng12>
-  / <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer>
+  / <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organized-by-site-of-cancer>
 - NHS Breast Screening Programme (NHSBSP) — routine screening age range and
   high-risk surveillance.
   <https://www.gov.uk/topic/population-screening-programmes/breast>
@@ -127,7 +127,7 @@ mammography-test-request/
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.
-- IR(ME)R 2017 — justification of medical exposure to ionising radiation.
+- IR(ME)R 2017 — justification of medical exposure to ionizing radiation.
 
 ## Verify
 

@@ -46,7 +46,7 @@ A single logical review record. Text/enum fields default to `''`, numeric / date
 | `patientIdentifier` | text | local identifier |
 | `ageBand` | enum | adult age band |
 | `sex` | enum | patient sex |
-| `epilepsyType` | enum | focal / generalised / combined / unknown |
+| `epilepsyType` | enum | focal / generalized / combined / unknown |
 | `ageAtOnset` | numeric | years |
 | `yearsSinceDiagnosis` | numeric | years |
 | `learningDisability` | enum | yes / no |

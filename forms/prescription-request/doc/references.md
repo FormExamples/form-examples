@@ -10,7 +10,7 @@
   <https://www.rpharms.com/standards>
 - General Pharmaceutical Council. *Standards for pharmacy
   professionals.* <https://www.pharmacyregulation.org/standards>
-- NICE NG5. *Medicines optimisation.*
+- NICE NG5. *Medicines optimization.*
   <https://www.nice.org.uk/guidance/ng5>
 - NICE NG46. *Controlled drugs: safe use and management.*
   <https://www.nice.org.uk/guidance/ng46>

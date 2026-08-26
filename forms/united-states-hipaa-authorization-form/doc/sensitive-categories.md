@@ -55,7 +55,7 @@ included without the state-specific consent language.
 
 ## 3. Mental-health records
 
-Most states require mental-health records to be authorised by a
+Most states require mental-health records to be authorized by a
 *separate*, *initialled* field. A single global checkbox is treated as
 medium-priority by the engine.
 
@@ -64,8 +64,8 @@ medium-priority by the engine.
 > A covered entity must obtain an authorization for any use or
 > disclosure of psychotherapy notes, except: …
 
-Psychotherapy notes are **not** ordinarily authorised by the same form
-that authorises other PHI. Combining them is a compound authorization
+Psychotherapy notes are **not** ordinarily authorized by the same form
+that authorizes other PHI. Combining them is a compound authorization
 prohibited by § 164.508(b)(3) except for use in the treatment of
 counselling. The engine fires `psychotherapy-separate-auth` when
 psychotherapy notes are released alongside any other category.

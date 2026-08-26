@@ -6,7 +6,7 @@ Slug: `who-acute-referral-form`
 
 ## 1. Purpose
 
-World Health Organization standardised acute referral form for transferring patients between healthcare facilities.
+World Health Organization standardized acute referral form for transferring patients between healthcare facilities.
 
 This single-page form documents the referral of a patient from an initiating facility to a referral facility. It follows the SBAR (Situation, Background, Assessment, Recommendations) communication framework and captures patient identification, facility details, transport information, ABCDE assessment with interventions, clinical assessment, and transport recommendations with precautions. A copy should be sent to the referral facility.
 

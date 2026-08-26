@@ -1,6 +1,6 @@
 # Model for End-Stage Liver Disease (MELD) Score
 
-> A laboratory-based severity calculator for chronic liver disease. It takes a small number of objective blood results — **total bilirubin**, **INR**, **serum creatinine**, and (for MELD-Na) **serum sodium** — applies a validated weighted logarithmic formula, and produces an integer score of **6–40** that maps to an estimated **3-month mortality**. A higher score indicates more severe liver dysfunction and greater short-term mortality risk. The score is used to stratify disease severity and to prioritise candidates for liver transplantation.
+> A laboratory-based severity calculator for chronic liver disease. It takes a small number of objective blood results — **total bilirubin**, **INR**, **serum creatinine**, and (for MELD-Na) **serum sodium** — applies a validated weighted logarithmic formula, and produces an integer score of **6–40** that maps to an estimated **3-month mortality**. A higher score indicates more severe liver dysfunction and greater short-term mortality risk. The score is used to stratify disease severity and to prioritize candidates for liver transplantation.
 
 ## Docs
 

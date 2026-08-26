@@ -64,7 +64,7 @@ A single logical screening-scan record. Fields default to `''` (text/enum) or
 
 | Field | Type | Notes |
 | --- | --- | --- |
-| `aortaVisualised` | enum (yes/no) | aorta adequately visualised |
+| `aortaVisualised` | enum (yes/no) | aorta adequately visualized |
 | `maxAorticDiameterCm` | numeric (cm) | maximum antero-posterior diameter — the classified value |
 | `priorMaxDiameterCm` | numeric (cm) | prior maximum diameter (surveillance patients) |
 | `priorScanDate` | date | date of prior scan (surveillance patients) |
@@ -83,7 +83,7 @@ A single logical screening-scan record. Fields default to `''` (text/enum) or
 ## 4. Classification algorithm
 
 Pure function, no I/O. Classification is driven solely by
-`maxAorticDiameterCm`, with a guard for non-visualisation:
+`maxAorticDiameterCm`, with a guard for non-visualization:
 
 ```
 if aortaVisualised == 'no' || maxAorticDiameterCm == null:
@@ -128,10 +128,10 @@ Emitted independently of the category, each with a priority:
 - **Rapid growth** (high) — `growthCm >= 1.0` over a ~12-month interval (or
   growth exceeding the programme threshold for the interval): accelerated
   expansion; consider expediting referral.
-- **Non-visualised aorta** (medium) — `aortaVisualised == 'no'` or
+- **Non-visualized aorta** (medium) — `aortaVisualised == 'no'` or
   `maxAorticDiameterCm == null`: aorta not adequately measured; arrange re-scan.
 - **Incomplete assessment** (low) — required context, consent, or measurement
-  fields missing: record cannot be finalised; complete before sign-off.
+  fields missing: record cannot be finalized; complete before sign-off.
 
 ## 6. Inputs and outputs
 
@@ -176,7 +176,7 @@ Generated artefacts are never hand-edited; re-run the generators in
 - `bin/test-form abdominal-aortic-aneurysm-screening` exits cleanly.
 - The classification engine is pure (no side effects, no I/O) and unit-tested,
   covering each threshold boundary (2.9/3.0, 4.4/4.5, 5.4/5.5 cm), the
-  non-visualised guard, and the growth calculation.
+  non-visualized guard, and the growth calculation.
 - The HTML front-ends conform to the Lily HTML headless contract
   ([`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md)).
 - The SvelteKit front-ends conform to the Lily Svelte headless contract

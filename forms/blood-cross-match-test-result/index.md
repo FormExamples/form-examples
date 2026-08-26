@@ -46,13 +46,13 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical, incompatible result.
 
 | Axis | Instrument | Output |
 | --- | --- | --- |
 | **A. Result classification** | Overall compatibility conclusion | normal / abnormal / critical / inconclusive |
-| **B. Severity & structured reporting** | BSH antibody-significance + compatibility-status categorisation | abnormality severity (none / minor / moderate / major) + a `reporting_category` label |
+| **B. Severity & structured reporting** | BSH antibody-significance + compatibility-status categorization | abnormality severity (none / minor / moderate / major) + a `reporting_category` label |
 | **C. Report completeness** | Mandatory report-section checklist (clinical history, grouping, antibody screen, crossmatch, impression) | 0–100 % complete |
 | **D. Follow-up urgency** | Acuity / action escalation rules | routine / recommended / urgent / critical-alert (+ target timeframe + recommended action) |
 

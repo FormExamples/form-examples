@@ -71,7 +71,7 @@ curb65Score = C + U + R + B + A65
 - **Banding (CURB-65):** 0–1 → low; 2 → intermediate; 3–5 → high.
 - **Banding (CRB-65):** 0 → low; 1–2 → intermediate; 3–4 → high.
 - **Disposition:** low → consider home/outpatient; intermediate → consider
-  short-stay/supervised; high → hospitalise (scores 4–5 add an ICU/HDU review
+  short-stay/supervised; high → hospitalize (scores 4–5 add an ICU/HDU review
   flag).
 - **Override:** a clinician may set a final disposition band with a documented
   reason; both computed and final are stored and rendered.
@@ -80,7 +80,7 @@ curb65Score = C + U + R + B + A65
 
 Fired independently of the numeric band; priority high / medium / low.
 
-- **`high-severity-admit`** (high) — score ≥ 3: manage as severe CAP, hospitalise.
+- **`high-severity-admit`** (high) — score ≥ 3: manage as severe CAP, hospitalize.
 - **`consider-icu`** (high) — score 4–5: assess for intensive-care / HDU admission.
 - **`hypotension`** (high) — systolic < 90 or diastolic ≤ 60 mmHg (shock risk;
   fires regardless of total).

@@ -1,6 +1,6 @@
 # Workplace Stress Assessment
 
-Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organisational domains and identify teams or individuals at elevated risk of work-related ill health.
+Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organizational domains and identify teams or individuals at elevated risk of work-related ill health.
 
 ## Directory structure
 
@@ -28,7 +28,7 @@ Workplace stress assessment using the UK HSE Management Standards Indicator Tool
 5. Peer Support - `Step5PeerSupport.svelte`
 6. Relationships - `Step6Relationships.svelte`
 7. Role Clarity - `Step7RoleClarity.svelte`
-8. Organisational Change - `Step8OrganisationalChange.svelte`
+8. Organizational Change - `Step8OrganisationalChange.svelte`
 9. Additional Comments - `Step9AdditionalComments.svelte`
 
 ## Patient form architecture

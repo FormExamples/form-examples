@@ -58,7 +58,7 @@ Fields default to `''` (text/enum) or `null` (numeric/date/time) when unanswered
 | --- | --- | --- |
 | `id` | uuid | PK |
 | `problemStatement` | text | the identified need |
-| `adlCategory` | enum | RLT activity of living (e.g. breathing, eating-drinking, mobilising, elimination, hygiene, communication) |
+| `adlCategory` | enum | RLT activity of living (e.g. breathing, eating-drinking, mobilizing, elimination, hygiene, communication) |
 | `actualOrPotential` | enum | actual / potential |
 | `assessmentData` | text | supporting observation |
 | `linkedRisk` | enum | none / falls / pressure-ulcer / vte / nutrition |

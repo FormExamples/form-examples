@@ -27,7 +27,7 @@ How PREVENT 2023 fits in current cardiovascular prevention guidelines.
 Khan 2024 and the 2023 AHA scientific statement classify 10-year total CVD
 risk as:
 
-- < 5 % → emphasise lifestyle; reassess in 4–6 years.
+- < 5 % → emphasize lifestyle; reassess in 4–6 years.
 - 5 – < 7.5 % → lifestyle + shared decision about statin; consider risk
   enhancers (family history of premature CVD, chronic inflammatory
   disease, etc.).

@@ -9,7 +9,7 @@ spot classification engine from the HTML front-end.
 ## Done
 
 - Ported the pure classification engine to TypeScript: `types.ts`,
-  `bloodspot-rules.ts` (nine-condition metadata, per-condition normalisation,
+  `bloodspot-rules.ts` (nine-condition metadata, per-condition normalization,
   referral derivation, overall-outcome precedence, referral status, sample
   quality), `bloodspot-grader.ts` (`gradeBloodspot`), `flagged-issues.ts`, and
   `utils.ts` label + Lily token colour helpers.

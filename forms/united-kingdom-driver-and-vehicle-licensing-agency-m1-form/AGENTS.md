@@ -24,7 +24,7 @@ Confidential medical information — mental health conditions for driving fitnes
 - **Part A**: About You — personal/driving licence details, change of details
 - **Part B**: Healthcare Professional — GP details, consultant details
 - **Medical Questionnaire — Mental Health**: 3 questions covering diagnosis confirmation, specific conditions, recent healthcare contact
-- **Applicant's Authorisation**: Medical disclosure declaration, electronic correspondence consent, contact preferences
+- **Applicant's Authorization**: Medical disclosure declaration, electronic correspondence consent, contact preferences
 
 ## Assessment steps (6 total)
 
@@ -33,7 +33,7 @@ Confidential medical information — mental health conditions for driving fitnes
 3. Diagnosis Confirmation - Q1 — has a mental health condition been diagnosed
 4. Mental Health Conditions - Q2 — specific conditions diagnosed
 5. Recent Contact - Q3 — recent healthcare professional contact
-6. Authorisation - Applicant's authorisation and declaration
+6. Authorization - Applicant's authorization and declaration
 
 ## Conditional logic
 

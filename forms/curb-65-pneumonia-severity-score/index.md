@@ -49,7 +49,7 @@ Each positive criterion scores 1; the total is the sum (0–5).
 | --- | --- | --- | --- |
 | 0–1 | Low | ~0.7–3% | Consider treatment at home / outpatient management |
 | 2 | Intermediate | ~9% | Consider short-stay inpatient care or hospital-supervised outpatient treatment |
-| 3–5 | High | ~14–40% | Hospitalise and manage as severe CAP; for scores **4–5**, assess for intensive-care / HDU admission |
+| 3–5 | High | ~14–40% | Hospitalize and manage as severe CAP; for scores **4–5**, assess for intensive-care / HDU admission |
 
 Mortality figures are the pooled derivation/validation estimates from Lim *et al.*
 (2003) and are indicative only; local outcomes vary. The score informs, but does

@@ -55,7 +55,7 @@
 - Data Protection Act 2018 (c. 12) —
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Lawful basis for processing —
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
 
 ## Internal cross-references
 

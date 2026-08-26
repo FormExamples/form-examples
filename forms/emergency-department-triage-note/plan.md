@@ -42,6 +42,6 @@ both consolidated front-ends (`front-end-with-html` and
   parameter 3 → at least Level 2; 5–6 → at least Level 3) but never de-escalates.
 - Missing vital signs are treated as *not measured* — they never lower the
   category and always raise a data-completeness flag.
-- Paediatric red-flag discriminators are recognised, but paediatric early-warning
+- Paediatric red-flag discriminators are recognized, but paediatric early-warning
   scoring (PEWS) is out of scope.
 - The wizard must remain one continuous single-page wizard (8 steps).

@@ -18,7 +18,7 @@ aligned with NICE CG146 / NOGG / FRAX / ISCD guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, radiation safety, completeness, and
-  triage are independent and each citable to a recognised body. A request can be
+  triage are independent and each citable to a recognized body. A request can be
   appropriate yet incomplete, or complete yet urgent.
 - **Acuity escalates triage.** Recent fragility fracture, very high FRAX risk,
   or long-term high-dose steroids escalate triage regardless of other axes.

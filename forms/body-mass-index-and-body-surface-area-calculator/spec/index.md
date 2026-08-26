@@ -13,7 +13,7 @@ An anthropometric calculator that takes a patient's height and weight and derive
 two measurements: **Body Mass Index (BMI)** in kg/m² with the WHO adult
 weight-status category, and **Body Surface Area (BSA)** in m² (Mosteller by
 default; Du Bois shown for comparison). BMI screens for underweight/overweight/
-obesity; BSA is used to normalise physiological parameters and to calculate
+obesity; BSA is used to normalize physiological parameters and to calculate
 drug (especially chemotherapy) doses. It is a calculator with classification,
 not a diagnostic test.
 

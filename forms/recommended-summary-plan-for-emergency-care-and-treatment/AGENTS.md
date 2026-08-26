@@ -1,6 +1,6 @@
 # Recommended Summary Plan for Emergency Care and Treatment (ReSPECT) — Agent Instructions
 
-A UK personalised emergency care and treatment plan created through shared
+A UK personalized emergency care and treatment plan created through shared
 decision-making. Collects the person's summary of health, preferences and what
 matters, agreed clinical recommendations, an explicit CPR recommendation, and
 ceilings of treatment via a single continuous single-page wizard. This is a

@@ -6,11 +6,11 @@ Slug: `agile-checklist`
 
 ## 1. Purpose
 
-A team / organisation self-assessment that audits **57 concrete behaviours**
+A team / organization self-assessment that audits **57 concrete behaviours**
 of an agile way-of-working across three sections — **Teams**,
 **Stakeholders**, and **Practices** — and produces a composite
 **agility maturity level** (Ad-hoc / Initial / Developing / Mature /
-Optimising), a per-section sub-score, weak-section flags, and a coaching
+Optimizing), a per-section sub-score, weak-section flags, and a coaching
 action plan.
 
 The form is a single-page, 5-step wizard. Each item is answered as
@@ -42,7 +42,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 | Maturity     | Mean % yes | Description |
 | ---          | ---        | --- |
-| Optimising   | ≥ 90 %     | Agile behaviours are pervasive; team continuously inspects and adapts. |
+| Optimizing   | ≥ 90 %     | Agile behaviours are pervasive; team continuously inspects and adapts. |
 | Mature       | 75 – 89 %  | High adoption with deliberate refinement; few weak sections. |
 | Developing   | 50 – 74 %  | Practices in place but uneven; one or two weak sections. |
 | Initial      | 25 – 49 %  | Partial adoption; multiple weak sections; coaching needed. |

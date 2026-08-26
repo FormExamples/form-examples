@@ -70,7 +70,7 @@ Sources:
 
 The structured `tumour_appearance` field (papillary / solid / flat) reflects the
 endoscopic morphology recorded at cystoscopy, which — together with
-`tumour_size_mm` and `biopsy_taken` — supports categorisation and the decision
+`tumour_size_mm` and `biopsy_taken` — supports categorization and the decision
 to proceed to resection / histopathology.
 
 - Cancer Research UK — Cystoscopy to check for cancer (assessment of tumour size

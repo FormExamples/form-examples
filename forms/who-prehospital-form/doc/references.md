@@ -2,7 +2,7 @@
 
 ## Primary WHO sources
 
-- **Form** — WHO. *Prehospital Standardised Clinical Form*. PDF.
+- **Form** — WHO. *Prehospital Standardized Clinical Form*. PDF.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/prehospital-scf.pdf>
 - **Emergency Care Toolkit** — WHO.
   <https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care>

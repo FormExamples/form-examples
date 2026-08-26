@@ -28,6 +28,6 @@ neutropenia, deranged coagulation).
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support
+- Add internationalization (i18n) support
 - Clinical safety case documentation
 - User acceptance testing with haematology clinicians

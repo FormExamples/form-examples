@@ -5,7 +5,7 @@ child psychiatry waiting list and gives the patient a transparent, easy-to-use v
 their referral, expected wait, and upcoming appointment(s).
 
 The card is aligned with NHS England's *Referral to Treatment (RTT)*
-patient-pathway rules and the *Elective recovery* / *Clinical Prioritisation*
+patient-pathway rules and the *Elective recovery* / *Clinical Prioritization*
 framework (P1–P5 / P6). It serves as the single record that records:
 
 - what the patient is waiting to do (procedure, specialty referral, or
@@ -33,7 +33,7 @@ framework (P1–P5 / P6). It serves as the single record that records:
   computed from the RTT clock-start date, the clinical priority, and the
   scheduled appointment date.
 - **Secondary instrument:** Clinical Priority per NHS England clinical
-  prioritisation (P1 / P2 / P3 / P4 / P5 / P6).
+  prioritization (P1 / P2 / P3 / P4 / P5 / P6).
 - **Algorithm:** the worst-band finding sets the overall Waiting Time Status.
 
 | Category | Drivers |
@@ -51,7 +51,7 @@ patient with their position, expected wait, and next appointment.
 
 | # | Step | Key fields |
 | --- | --- | --- |
-| 1 | Practitioner identification | name, role, registration body, registration number, organisation, site, date and time of entry |
+| 1 | Practitioner identification | name, role, registration body, registration number, organization, site, date and time of entry |
 | 2 | Patient identification | NHS number, name, date of birth, sex, contact details, preferred language, accessibility needs |
 | 3 | Referral details | referring source (GP / consultant / A&E / self), referral date, referral letter reference, reason for referral, presenting condition, ICD-10 / SNOMED code |
 | 4 | Waiting list entry | list name, specialty, sub-specialty, procedure description (free-text + OPCS-4 code if available), clinical priority (P1–P6), RTT clock-start date, expected procedure or appointment type, expected wait in weeks |
@@ -121,12 +121,12 @@ child-psychiatry-waiting-list-card/
 - NHS England. *Referral to Treatment (RTT) consultant-led waiting times —
   Rules Suite* (current version).
 - NHS England. *Clinical validation of waiting lists* operational guidance.
-- NHS England. *Clinical prioritisation* (P1–P5 / P6) framework, originally
+- NHS England. *Clinical prioritization* (P1–P5 / P6) framework, originally
   published during COVID-19 elective recovery.
 - NHS Constitution for England — operational standards (18-week RTT).
 - NHS England. *Elective recovery plan*.
 - Royal College of Surgeons of England. *Clinical guide to surgical
-  prioritisation during the coronavirus pandemic* (P1–P4 origin).
+  prioritization during the coronavirus pandemic* (P1–P4 origin).
 
 ## Compliance
 

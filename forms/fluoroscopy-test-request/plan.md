@@ -19,9 +19,9 @@ and aligned with ACR Appropriateness Criteria, RCR iRefer, and IR(ME)R.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, safety + radiation dose,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet unsafe, or complete yet urgent.
-- **Safety contraindications dominate.** Pregnancy with an ionising study, and
+- **Safety contraindications dominate.** Pregnancy with an ionizing study, and
   barium chosen when perforation is suspected (use water-soluble contrast),
   drive the safety band to `contraindicated` and a redirect / query.
 - **Pure scoring engine.** Deterministic function with stable rule IDs shared

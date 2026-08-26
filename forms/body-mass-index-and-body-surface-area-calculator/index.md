@@ -7,7 +7,7 @@ into two derived measurements used throughout clinical practice:
   Health Organization (WHO) weight-status categories to screen for underweight,
   overweight, and obesity.
 - **Body Surface Area (BSA)** — the total surface area of the body in square
-  metres, used to normalise physiological parameters and, most importantly, to
+  metres, used to normalize physiological parameters and, most importantly, to
   calculate weight-and-size-appropriate drug doses (notably cytotoxic
   chemotherapy).
 
@@ -26,7 +26,7 @@ BMI category is a screening prompt, not a diagnosis of malnutrition or obesity.
   (with age-appropriate caveats), dietetics, and nursing.
 - **Users:** all clinicians and clinical support staff — doctors, nurses,
   pharmacists, dietitians, healthcare assistants — as well as anyone computing a
-  BSA-normalised drug dose.
+  BSA-normalized drug dose.
 - **Patients:** primarily adults. The BMI category thresholds below are the WHO
   adult thresholds; paediatric BMI must be interpreted against age-and-sex
   centile charts, not the fixed adult bands.
@@ -84,7 +84,7 @@ historical reference standard for BSA:
 BSA (m²) = 0.007184 × height (cm)^0.725 × weight (kg)^0.425
 ```
 
-**Use.** BSA normalises cardiac index, glomerular filtration rate, and — most
+**Use.** BSA normalizes cardiac index, glomerular filtration rate, and — most
 significantly — cytotoxic and other drug dosing. Many chemotherapy regimens are
 prescribed in mg/m², so an accurate BSA is directly dose-determining; the
 calculator therefore flags extreme heights or weights that could produce a

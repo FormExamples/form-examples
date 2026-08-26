@@ -39,9 +39,9 @@ diagnosis is at least as likely as DVT. Total score ranges **−2 to 9**.
 | # | Criterion | Points |
 | --- | --- | --- |
 | 1 | Active cancer (treatment ongoing, within the previous 6 months, or palliative) | +1 |
-| 2 | Paralysis, paresis, or recent plaster immobilisation of the lower extremities | +1 |
+| 2 | Paralysis, paresis, or recent plaster immobilization of the lower extremities | +1 |
 | 3 | Recently bedridden ≥ 3 days, or major surgery within the previous 12 weeks requiring general or regional anaesthesia | +1 |
-| 4 | Localised tenderness along the distribution of the deep venous system | +1 |
+| 4 | Localized tenderness along the distribution of the deep venous system | +1 |
 | 5 | Entire leg swollen | +1 |
 | 6 | Calf swelling ≥ 3 cm larger than the asymptomatic side (measured 10 cm below the tibial tuberosity) | +1 |
 | 7 | Pitting oedema confined to the symptomatic leg | +1 |
@@ -76,8 +76,8 @@ one or more clinical criteria as present or absent.
 | --- | --- | --- |
 | 1 | Assessment context | assessing clinician name and role, date and time of assessment, care setting |
 | 2 | Patient identification | patient identifier, age band, sex, symptomatic leg (left / right) |
-| 3 | Predisposing factors | active cancer; paralysis/paresis or plaster immobilisation; recently bedridden ≥ 3 days or major surgery ≤ 12 weeks; previously documented DVT (criteria 1, 2, 3, 9) |
-| 4 | Leg examination | localised deep-vein tenderness; entire leg swollen; calf swelling ≥ 3 cm; pitting oedema confined to symptomatic leg; collateral superficial veins (criteria 4–8) |
+| 3 | Predisposing factors | active cancer; paralysis/paresis or plaster immobilization; recently bedridden ≥ 3 days or major surgery ≤ 12 weeks; previously documented DVT (criteria 1, 2, 3, 9) |
+| 4 | Leg examination | localized deep-vein tenderness; entire leg swollen; calf swelling ≥ 3 cm; pitting oedema confined to symptomatic leg; collateral superficial veins (criteria 4–8) |
 | 5 | Alternative diagnosis | whether an alternative diagnosis is at least as likely as DVT (−2 adjustment) |
 | 6 | Summary and score | computed Wells total, two-level band, three-level band, fired criteria, flagged issues, recommended investigation, free-text clinical note |
 

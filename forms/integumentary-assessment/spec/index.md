@@ -6,7 +6,7 @@ Slug: `integumentary-assessment`
 
 ## 1. Purpose
 
-Structured integumentary (skin, hair, nails) clinical assessment combining a head-to-toe skin inspection with the Braden Scale for pressure ulcer risk and wound TIME assessment, to grade pressure-ulcer risk and characterise integumentary findings.
+Structured integumentary (skin, hair, nails) clinical assessment combining a head-to-toe skin inspection with the Braden Scale for pressure ulcer risk and wound TIME assessment, to grade pressure-ulcer risk and characterize integumentary findings.
 
 Full design description: [`index.md`](../index.md).
 

@@ -31,7 +31,7 @@ The patient form has two sections:
 
 ## Practice customization
 
-The patient form includes a `practiceConfig` JavaScript object at the top of the script section. Practices edit this object to fill in their specific details (practice name, DPO, research organisations, GDPR basis).
+The patient form includes a `practiceConfig` JavaScript object at the top of the script section. Practices edit this object to fill in their specific details (practice name, DPO, research organizations, GDPR basis).
 
 ## Dashboard
 

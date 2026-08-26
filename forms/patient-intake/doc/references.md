@@ -9,7 +9,7 @@
 - UK *Data Protection Act 2018.*
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO. *Health and social care guidance.*
-  <https://ico.org.uk/for-organisations/sector-specific-guidance/health/>
+  <https://ico.org.uk/for-organizations/sector-specific-guidance/health/>
 - NHS England. *National Data Opt-out.*
   <https://digital.nhs.uk/services/national-data-opt-out>
 - NHS England. *Accessible Information Standard.*

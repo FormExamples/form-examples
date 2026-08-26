@@ -21,7 +21,7 @@ guidance.
 
 - **Four orthogonal axes.** Appropriateness, cancer-pathway urgency,
   completeness, and pre-procedure risk are independent and each citable to a
-  recognised body. A request can be appropriate yet incomplete, or complete yet
+  recognized body. A request can be appropriate yet incomplete, or complete yet
   urgent or high-risk.
 - **Cancer-pathway escalation.** A positive FIT (≥10 µg Hb/g) or NICE NG12
   lower-GI red-flag combination escalates to two-week-wait; an acute emergency

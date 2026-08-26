@@ -9,7 +9,7 @@ Generated artifact: `main.tsp` defines one TypeSpec `model` per SQL table.
 - snake_case SQL columns become camelCase TypeSpec properties? No — to keep
   parity with FHIR / protobuf and to round-trip with SQL, we keep
   snake_case property names. (camelCase is reserved for the TS / front-end
-  serialisation layer.)
+  serialization layer.)
 - `@key id: string;` on every model with `@format("uuid")`.
 - TIMESTAMPTZ columns become `utcDateTime`.
 - DATE columns become `plainDate`.
@@ -17,6 +17,6 @@ Generated artifact: `main.tsp` defines one TypeSpec `model` per SQL table.
 - TEXT CHECK enums become TypeSpec named `union` types.
 - Cross-table references use a documentation comment plus the FK column
   typed as `@format("uuid") string`. A future iteration may wire these via
-  `@references` once that decorator stabilises in the TypeSpec spec.
+  `@references` once that decorator stabilizes in the TypeSpec spec.
 
 Compile with `tsp compile main.tsp`.

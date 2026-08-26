@@ -56,9 +56,9 @@
 ## Information Commissioner's Office guidance
 
 - Lawful basis for processing —
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
 - Right of access —
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
 
 ## Standards
 

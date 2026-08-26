@@ -5,8 +5,8 @@ This practice keeps medical records confidential and complies with the UK
 General Data Protection Regulation and Data Protection Act 2018.
 We hold your medical record so that we can provide you with safe care and treatment.
 We will also use your information so that this practice can check and review the quality of the care we provide. This helps us to improve our services to you.
-• We will share relevant information from your medical record with other health or social care staff or organisations when they provide you with care. For example, your GP will share information when they refer you to a specialist in a hospital. Or your GP will send details about your prescription to your chosen pharmacy.
-• For more information on how we share your information with organisations who| are directly involved in your care, for example hospitals and communicate care teams, can be found here: [Insert link to information about local shared records arrangements]
+• We will share relevant information from your medical record with other health or social care staff or organizations when they provide you with care. For example, your GP will share information when they refer you to a specialist in a hospital. Or your GP will send details about your prescription to your chosen pharmacy.
+• For more information on how we share your information with organizations who| are directly involved in your care, for example hospitals and communicate care teams, can be found here: [Insert link to information about local shared records arrangements]
 • Healthcare staff working in A&E and out of hours care will also have access to your information. For example, it is important that staff who are treating you in an emergency know if you have any allergic reactions. This will involve the use of your Summary Care Record [OR Emergency Care Summary / Individual Health Record].
 For more information see: https://digital.nhs.uk/summary-care-records or alternatively speak to your practice.
 • You have the right to object to information being shared for your own care. Please speak to the practice if you wish to object. You also have the right to have any mistakes or errors corrected.
@@ -15,7 +15,7 @@ Other important information about how your information is used to provide you wi
 Registering for NHS care
 All patients who receive NHS care are registered on a national database.
 • This database holds your name, address, date of birth, and NHS Number but it does not hold information about the care you receive.
-• The database is held by [Insert name of relevant body e.g. NHS England, NHS Wales Information Services, Business Services Authority, or NHS National Services Scotland], a national organisation which has legal responsibilities to collect NHS data.
+• The database is held by [Insert name of relevant body e.g. NHS England, NHS Wales Information Services, Business Services Authority, or NHS National Services Scotland], a national organization which has legal responsibilities to collect NHS data.
 • More information can be found at: [Link to relevant website] or the phone number for general enquires at [insert name of relevant body and phone number]
 
 Identifying patients who might be at risk of certain diseases
@@ -35,7 +35,7 @@ We are required by law to provide you with the following information about how w
 Data Controller contact details
 Data Protection Officer contact details
 Purpose of the processing
-[Insert practice name and address details of the practice or organisation(s) that is(are) acting as Data Controller]
+[Insert practice name and address details of the practice or organization(s) that is(are) acting as Data Controller]
 [Insert the designated Data Protection Officer's name and contact details]
 ・
 To give direct health or social care to individual patients.
@@ -54,9 +54,9 @@ The data will be shared with:
 healthcare professionals and staff in this surgery; local hospitals;
 out of hours services;
 diagnostic and treatment centres;
-or other organisations involved in the provision of direct care to individual patients.
+or other organizations involved in the provision of direct care to individual patients.
 [option to list named sites such as local hospital name]
-• national NHS bodies, such as NHS England, when legally required to develop IT systems and data programmes with the appropriate organisations, in certain circumstances where there is a risk of serious harm to a person or a serious crime has been committed
+• national NHS bodies, such as NHS England, when legally required to develop IT systems and data programmes with the appropriate organizations, in certain circumstances where there is a risk of serious harm to a person or a serious crime has been committed
 • Add as appropriate
 [Practice to update with name of data processor if it has a contract to share data, for example, for risk stratification]
 
@@ -92,8 +92,8 @@ https://transform.england.nhs.uk/information-governance/guidance/records-managem
 You have the right to complain to the Information Commissioner's
 Office. If you wish to complain follow this link
 https://ico.org.uk/global/contact-us/or call the helpline 0303 123 1113
-organisations
-Data we get from other We receive information about your health from other organisations
+organizations
+Data we get from other We receive information about your health from other organizations
 who are involved in providing you with health and social care. For
 example, if you go to hospital for treatment or an operation the hospital will send us a letter to let us know what happens. This means your GP medical record is kept up-to date when you receive care from other parts of the health service.
 

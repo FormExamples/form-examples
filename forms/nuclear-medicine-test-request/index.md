@@ -16,7 +16,7 @@ This form is the nuclear-medicine counterpart to the repository's other
 clinician-driven imaging request forms. It is completed by a radiologist,
 nuclear-medicine physician, oncologist, cardiologist, GP, or technologist rather
 than by the patient, and is aligned with the ACR Appropriateness Criteria, RCR
-iRefer, ARSAC guidance, the Ionising Radiation (Medical Exposure) Regulations
+iRefer, ARSAC guidance, the Ionizing Radiation (Medical Exposure) Regulations
 IR(ME)R, and EANM / SNMMI procedure guidelines.
 
 ## Scope and intended users
@@ -31,7 +31,7 @@ IR(ME)R, and EANM / SNMMI procedure guidelines.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe to perform now, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -56,8 +56,8 @@ other axes, and a high-acuity indication auto-escalates the triage tier.
 | Thyroid uptake (I-123 / Tc-99m) | thyroid function | low |
 | Renal DMSA | renal cortical assessment | low |
 | Renal MAG3 | renal function / drainage | low |
-| Gallium / octreotide (Ga-68 / In-111) | tumour or infection localisation | high |
-| White-cell scan | infection localisation | moderate |
+| Gallium / octreotide (Ga-68 / In-111) | tumour or infection localization | high |
+| White-cell scan | infection localization | moderate |
 | Sentinel-node | sentinel-node mapping | low |
 
 ## Wizard steps
@@ -123,7 +123,7 @@ nuclear-medicine-test-request/
 - ARSAC *Notes for guidance on the clinical administration of radiopharmaceuticals
   and use of sealed radioactive sources*.
   <https://www.gov.uk/government/publications/arsac-notes-for-guidance>
-- Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R) — justification,
+- Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R) — justification,
   pregnancy and breastfeeding status.
   <https://www.legislation.gov.uk/uksi/2017/1322/contents>
 - ICRP radiation protection of the pregnant patient in nuclear medicine; IAEA RPOP.

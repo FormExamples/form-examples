@@ -6,7 +6,7 @@ Slug: `who-emergency-unit-trauma-form`
 
 ## 1. Purpose
 
-World Health Organization standardised emergency unit clinical documentation form for trauma patients.
+World Health Organization standardized emergency unit clinical documentation form for trauma patients.
 
 This comprehensive two-page form captures patient registration, initial vital signs, high risk red signs and high risk trauma indicators, triage category, ABCDE primary survey with detailed assessment findings and interventions, FAST ultrasound, history of present illness with injury mechanism details, past histories, full physical exam with body diagram, assessment and plan, diagnostics (labs and imaging), medications and procedures, reassessment vitals, and disposition/handover. Designed for use with the WHO Trauma Reference Card.
 

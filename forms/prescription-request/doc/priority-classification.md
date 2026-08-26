@@ -26,7 +26,7 @@ message header and the dispenser is alerted.
 An *emergency* prescription is one issued in the context of an acute
 clinical need where delay would cause harm. The form's *Emergency*
 classification triggers a referral to the on-call clinician for
-authorisation.
+authorization.
 
 In the UK, the *emergency supply* of prescription-only medicine
 without a prescription is governed by:

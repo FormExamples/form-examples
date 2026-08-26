@@ -56,7 +56,7 @@ A single logical assessment record. Fields default to `''` (text/enum) or `null`
 | --- | --- | --- |
 | `buildWeightForHeight` | enum | average / above-average / obese / below-average |
 | `skinType` | enum | healthy / tissue-paper / dry / oedematous / clammy-pyrexial / discoloured / broken |
-| `continence` | enum | complete-catheterised / incontinent-urine / incontinent-faeces / doubly-incontinent |
+| `continence` | enum | complete-catheterized / incontinent-urine / incontinent-faeces / doubly-incontinent |
 | `mobility` | enum | fully-mobile / restless / apathetic / restricted / bedbound / chairbound |
 
 **Special-risk inputs.**

@@ -53,7 +53,7 @@
   the safe transfer of children with critical illness*. 2015.
   <https://www.rcpch.ac.uk/resources/safe-transfer-children-critical-illness>
 - NICE NG94. *Emergency and acute medical care in over 16s: service
-  delivery and organisation*. 2018.
+  delivery and organization*. 2018.
   <https://www.nice.org.uk/guidance/ng94>
 
 ## Disease-specific referral protocols

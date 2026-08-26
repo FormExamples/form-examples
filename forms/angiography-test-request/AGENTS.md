@@ -19,7 +19,7 @@ Pure function over the request returning:
 completenessPercent, triageTier + targetTimeframe, recommendation,
 firedRules[], flags[] }`. Rule IDs are identical across every front-end and the
 back-end. Safety-critical conditions (eGFR < 30 with iodinated contrast, severe
-contrast allergy, active bleeding on anticoagulation, pregnancy with ionising
+contrast allergy, active bleeding on anticoagulation, pregnancy with ionizing
 radiation) drive the safety band to `contraindicated` and surface high-priority
 flags. Choose the least-alarming band only when no rule fires.
 

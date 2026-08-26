@@ -102,7 +102,7 @@ Emitted independently of the totals, each with a priority:
 - **Resuscitation required** (high) — any timepoint total ≤ 3: newborn severely
   depressed; commence active resuscitation and obtain neonatal support.
 - **Continue scoring** (high) — 5-minute total < 7: repeat scoring at 10 minutes
-  (and every 5 minutes thereafter) until the newborn stabilises.
+  (and every 5 minutes thereafter) until the newborn stabilizes.
 - **Falling trend** (high) — a later total is lower than an earlier total: the
   newborn is deteriorating; escalate.
 - **Support and stimulation** (medium) — any timepoint total 4–6: provide

@@ -6,7 +6,7 @@ General confidential medical information — vision self-declaration for driving
 
 - **Form**: V1 — General confidential medical information
 - **Agency**: Driver & Vehicle Licensing Agency (DVLA), United Kingdom
-- **Revision**: September 2025; Authorisation Rev July 2022
+- **Revision**: September 2025; Authorization Rev July 2022
 - **Pages**: 7
 - **URL**: <https://assets.publishing.service.gov.uk/media/695bc852e8f9a8d94d8d1981/v1-online-confidential-medical-information.pdf>
 
@@ -26,7 +26,7 @@ General confidential medical information — vision self-declaration for driving
 - **Part A**: About You — personal details, change of details
 - **Part B**: Healthcare Professional — GP details, consultant details
 - **Vision Self-Declaration**: 11 questions covering eyesight standards, monocular vision, visual field, glaucoma, retinitis pigmentosa, laser treatment, blepharospasm, night blindness, double vision, other conditions, recent contact
-- **Applicant's Authorisation**: Medical disclosure declaration, electronic correspondence consent, contact preferences
+- **Applicant's Authorization**: Medical disclosure declaration, electronic correspondence consent, contact preferences
 
 ## Assessment steps (14 total)
 
@@ -43,7 +43,7 @@ General confidential medical information — vision self-declaration for driving
 11. Double Vision - Q9 — diplopia assessment and declaration
 12. Other Vision Conditions - Q10 — additional vision conditions
 13. Recent Contact - Q11 — recent healthcare professional contact
-14. Authorisation - Applicant's authorisation and declaration
+14. Authorization - Applicant's authorization and declaration
 
 ## Conditional logic
 
@@ -68,7 +68,7 @@ General confidential medical information — vision self-declaration for driving
 - **Blepharospasm**: Involuntary eyelid muscle spasm
 - **Nyctalopia**: Night blindness
 - **Diplopia**: Double vision
-- **Orthoptist**: Healthcare professional specialising in eye movement disorders
+- **Orthoptist**: Healthcare professional specializing in eye movement disorders
 
 ## Compliance
 

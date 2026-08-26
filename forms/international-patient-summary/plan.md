@@ -14,7 +14,7 @@ The IPS validator walks each mandatory section defined in the HL7 FHIR Internati
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright
 - Add form autosave to localStorage
-- Add internationalisation (i18n) support across EU languages
+- Add internationalization (i18n) support across EU languages
 - Add backend database migrations and seed data
 - Clinical safety case documentation
 - Conformance testing against the HL7 FHIR IPS validator

@@ -2,7 +2,7 @@
 
 ## Regulatory classification
 
-The Meeting record is an organisational / governance information
+The Meeting record is an organizational / governance information
 system. It is **not** a medical device.
 
 For UK companies, board and general-meeting minutes are statutory
@@ -20,7 +20,7 @@ implementation supports those retention and access requirements.
   pragmatic minimum.
 - **Public sector minutes**: per the body's records management policy
   and the Public Records Act 1958 where applicable.
-- **Operational team minutes**: per the organisation's records
+- **Operational team minutes**: per the organization's records
   schedule; typically 1–7 years.
 
 ## Data protection
@@ -38,7 +38,7 @@ References:
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Recording calls (transparency guidance applies by analogy):
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/monitoring-workers-at-work/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/monitoring-workers-at-work/>
 
 ## Confidentiality
 

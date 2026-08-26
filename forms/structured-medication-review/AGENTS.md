@@ -93,11 +93,11 @@ low).
 
 ## Clinical grounding
 
-- NHS England. *Structured Medication Reviews and Medicines Optimisation:
+- NHS England. *Structured Medication Reviews and Medicines Optimization:
   guidance* (Network Contract DES).
 - O'Mahony D. *et al.* STOPP/START criteria version 3. *Age and Ageing* 2023.
 - Boustani M. *et al.* Anticholinergic Cognitive Burden (ACB) scale.
-- NICE NG5 *Medicines optimisation*; NICE NG197 *Shared decision making*.
+- NICE NG5 *Medicines optimization*; NICE NG197 *Shared decision making*.
 - PrescQIPP / NHS *Polypharmacy: Getting our medicines right.*
 
 ## Compliance

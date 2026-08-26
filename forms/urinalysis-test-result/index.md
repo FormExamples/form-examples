@@ -40,7 +40,7 @@ rather than vetting an order.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -140,7 +140,7 @@ urinalysis-test-result/
   <https://www.nice.org.uk/guidance/ng109/chapter/recommendations>
 - NICE NG12 *Suspected cancer: recognition and referral* — visible haematuria
   referral pathway context.
-  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer>
+  <https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organized-by-site-of-cancer>
 
 See [`doc/clinical-references.md`](doc/clinical-references.md) for the full
 grounded reference set and how each source maps to the schema.

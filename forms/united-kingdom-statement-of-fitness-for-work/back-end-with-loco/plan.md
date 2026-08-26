@@ -35,7 +35,7 @@ it requires a running `loco` Postgres user and database. See
 5. Add cargo tests covering the grader's headline outcomes (empty form
    → `review_for_validity`, comprehensive adaptations →
    `refer_occupational_health`, 200-day period → `refer_access_to_work`).
-6. Run the sibling setup script to materialise the SeaORM scaffolding
+6. Run the sibling setup script to materialize the SeaORM scaffolding
    against PostgreSQL once a `loco` user / database is available.
 
 ## Deviations from the standard stack

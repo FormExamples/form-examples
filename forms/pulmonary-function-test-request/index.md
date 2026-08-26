@@ -28,7 +28,7 @@ testing, ERS/ATS spirometry standards, and NICE NG80 (asthma) and NG115 (COPD).
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 contraindicated, incomplete, or urgent.
 
 | Axis | Instrument | Output |

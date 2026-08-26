@@ -26,7 +26,7 @@ radiologist, cardiologist, vascular surgeon, or other reporting clinician rather
 than by the patient, and is aligned with the Royal College of Radiologists (RCR)
 *Standards for the interpretation and reporting of imaging investigations*, the
 ACR Appropriateness Criteria, established carotid- and arterial-stenosis grading
-conventions (NASCET / ECST), and the UK Ionising Radiation (Medical Exposure)
+conventions (NASCET / ECST), and the UK Ionizing Radiation (Medical Exposure)
 Regulations — IR(ME)R 2017.
 
 Full design description: [`index.md`](../index.md).

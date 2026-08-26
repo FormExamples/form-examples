@@ -114,7 +114,7 @@ step 16 with a documented reason. Both the **computed** grade and the
 ## Clinical grounding
 
 - Centre for Perioperative Care (CPOC) *Preoperative Assessment and
-  Optimisation for Adult Surgery* (June 2021) — `seeds/`.
+  Optimization for Adult Surgery* (June 2021) — `seeds/`.
 - Geeky Medics *Anaesthetic Pre-operative Assessment OSCE Guide*.
 - ASA Physical Status Classification.
 - NICE NG45 *Routine preoperative tests for elective surgery*.

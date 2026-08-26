@@ -2,7 +2,7 @@
 National screening programmes
 • The NHS provides national screening programmes so that certain diseases can be detected at an early stage.
 • These screening programmes include bowel cancer, breast cancer, cervical cancer, aortic aneurysms, and a diabetic eye screening service.
-• The law allows us to share your contact information with the UK Health Security Agency, or other relevant health organisations, so that you can be invited to the appropriate screening programmes.
+• The law allows us to share your contact information with the UK Health Security Agency, or other relevant health organizations, so that you can be invited to the appropriate screening programmes.
 • You can opt out of receiving invitations for screening programmes. You may want to discuss this with your GP.
 • There are different options for opting out of the different screening programmes. Please visit: https://www.gov.uk/government/publications/opting-
 out-of-the-nhs-population-screening-programmes/opting-out-of-screening
@@ -11,7 +11,7 @@ screening-programmes [Or insert relevant link] or speak to the practice.
 
 We are required by law to provide you with the following information about how we handle your information in relation to our legal obligations to share data.
 Data Controller contact details
-[Insert practice name and address details of the practice or organisation(s) that is(are) acting as Data Controller]
+[Insert practice name and address details of the practice or organization(s) that is(are) acting as Data Controller]
 Data Protection Officer contact details
 [Insert the designated Data Protection Officer's name and contact details]
 Purpose of the processing
@@ -46,6 +46,6 @@ Right to complain
 You have the right to complain to the Information Commissioner's
 Office. If you wish to complain follow this link
 https://ico.org.uk/global/contact-us/_or call the helpline 0303 123 1113
-Data we get from other organisations
-We receive information about your health from other organisations who are involved in providing you with health and social care. For example, if you go to hospital for treatment or an operation the hospital will send us a letter to let us know what happens. This means your GP medical record is kept up-to date when you receive care from other parts of the health service.
+Data we get from other organizations
+We receive information about your health from other organizations who are involved in providing you with health and social care. For example, if you go to hospital for treatment or an operation the hospital will send us a letter to let us know what happens. This means your GP medical record is kept up-to date when you receive care from other parts of the health service.
 

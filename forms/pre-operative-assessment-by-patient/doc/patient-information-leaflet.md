@@ -94,7 +94,7 @@ You can go back to any section and change your answers before submitting. Use th
 
 ## What happens after I submit the questionnaire?
 
-1. **Your answers are used to generate a report** summarising your health information and any areas of concern.
+1. **Your answers are used to generate a report** summarizing your health information and any areas of concern.
 2. **An anaesthetist will review the report** before or on the day of your operation.
 3. **You may be contacted** if additional information, tests, or consultations are needed before your surgery.
 4. **On the day of your operation**, the anaesthetist will discuss your anaesthetic plan with you and answer any questions.

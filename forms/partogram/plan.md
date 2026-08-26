@@ -45,4 +45,4 @@ setup script); both consolidated front-ends (`front-end-with-html` and
   it or the latest dilatation is missing, classify as `normal` and raise the
   incomplete-observation flag.
 - Model the classic fixed alert / action lines; the WHO Labour Care Guide's
-  individualised ranges are noted as the reference standard but out of scope.
+  individualized ranges are noted as the reference standard but out of scope.

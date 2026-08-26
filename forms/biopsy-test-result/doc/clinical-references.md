@@ -9,7 +9,7 @@ critical-result alerting rules used by this form.
 
 ### RCPath — Standards and datasets for reporting cancers
 
-The Royal College of Pathologists (RCPath) cancer datasets standardise cancer
+The Royal College of Pathologists (RCPath) cancer datasets standardize cancer
 reporting among pathologists, defining the range of acceptable practice for
 handling pathology specimens and enhancing cancer diagnosis and treatment
 quality. Each dataset specifies **core (required)** items — the robust,
@@ -54,7 +54,7 @@ the form stores in the grade's `reporting_category` field.
 
 ### ICCR — International Collaboration on Cancer Reporting
 
-ICCR develops internationally standardised, evidence-based datasets for the
+ICCR develops internationally standardized, evidence-based datasets for the
 pathology reporting of cancer specimens, composed of Required (core) and
 Recommended (non-core) elements. ICCR datasets reduce development effort for
 RCPath and CAP checklists and underpin the structured items (specimen adequacy,

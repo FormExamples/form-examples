@@ -23,10 +23,10 @@ References:
 - UK GDPR. <https://www.legislation.gov.uk/eur/2016/679/contents>
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
-- ICO — Anonymisation code of practice.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/anonymisation/>
+- ICO — Anonymization code of practice.
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/anonymization/>
 - ICO — Employment practices.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/>
 
 ## Equality Act 2010 alignment
 
@@ -50,13 +50,13 @@ characteristics of the Act:
 Equality Act 2010, s.4.
 <https://www.legislation.gov.uk/ukpga/2010/15/section/4>
 
-## Anonymisation strategy
+## Anonymization strategy
 
 - Opaque submission IDs.
 - Cohort minimum 10 enforced at every demographic break-down.
 - Free-text reviewed for personally identifying content before
   release.
-- Trend reports across cycles re-anonymise (no longitudinal join key
+- Trend reports across cycles re-anonymize (no longitudinal join key
   exists at the individual level).
 
 ## Audit and assurance

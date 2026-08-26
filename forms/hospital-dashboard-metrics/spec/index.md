@@ -136,6 +136,6 @@ department group) and are **not** part of the original source text.
 ## Source
 
 Transcribed from a hospital quality/performance dashboard metrics
-list. Item text is lightly normalised for readability (title case,
+list. Item text is lightly normalized for readability (title case,
 expanded abbreviations on first mention) while preserving the
 original metric names.

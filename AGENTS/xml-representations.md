@@ -70,8 +70,8 @@ Example merged structure:
 - External DTD reference via `<!DOCTYPE ... SYSTEM "<entity>.dtd">`
 - One root element per file, matching the entity name (snake_case)
 - Child element order matches the column order in the corresponding SQL CREATE TABLE
-- UUIDs serialised as hyphenated lowercase strings
-- Timestamps serialised as ISO 8601 in UTC (e.g. `2026-04-17T10:30:00Z`)
+- UUIDs serialized as hyphenated lowercase strings
+- Timestamps serialized as ISO 8601 in UTC (e.g. `2026-04-17T10:30:00Z`)
 - NULL values represented by an empty element (e.g. `<middle_name/>`)
 
 Example XML:

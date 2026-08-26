@@ -1,11 +1,11 @@
 # Mental Capacity Act 2005 — section mapping
 
 How each statutory section of the **Mental Capacity Act 2005** (E&W) is
-realised in this form's schema, validity engine, and UI.
+realized in this form's schema, validity engine, and UI.
 
 ## Sections in scope
 
-| MCA 2005 section | What it covers | Realised in |
+| MCA 2005 section | What it covers | Realized in |
 | --- | --- | --- |
 | s.1 — Principles | the five MCA principles | `doc/safety-case-notes.md` for context; not directly encoded |
 | s.2 — People who lack capacity | definition of capacity | non-rule flag `donor-capacity-concern` |

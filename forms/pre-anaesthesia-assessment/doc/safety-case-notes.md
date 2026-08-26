@@ -2,7 +2,7 @@
 
 This form is clinical decision-support software and, under UK regulation,
 falls within scope of the NHS Digital Clinical Safety Officer process
-(**DCB0129** for manufacturers, **DCB0160** for deploying organisations).
+(**DCB0129** for manufacturers, **DCB0160** for deploying organizations).
 
 This document is a **placeholder** intended to be populated during a trust
 deployment. It is not a substitute for a formal safety case.

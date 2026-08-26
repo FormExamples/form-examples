@@ -4,9 +4,9 @@ SvelteKit 2 + Svelte 5 runes + Tailwind CSS 4 + SVAR DataGrid. Vitest for the
 grading engine.
 
 An anonymous employee survey using the UK HSE Management Standards Indicator
-Tool (35 items, 1-5 Likert) across seven organisational domains: demands,
+Tool (35 items, 1-5 Likert) across seven organizational domains: demands,
 control, manager support, peer support, relationships, role clarity, and
-organisational change. The shared pure engine reverse-codes negatively-worded
+organizational change. The shared pure engine reverse-codes negatively-worded
 items, computes a per-domain mean, benchmarks each against HSE percentile norms
 (Low / Moderate / High / Very High concern), takes the worst domain as the
 overall concern level, and raises flagged issues.

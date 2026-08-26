@@ -13,7 +13,7 @@ or secondary legislation, and the patient cannot opt out.
   legal obligation to which the controller is subject. Indexed:
   <https://www.legislation.gov.uk/eur/2016/679/contents>
 - **UK GDPR** Article 9(2)(h) — processing for the provision of health or
-  social care, authorised by UK law (DPA 2018 Schedule 1 Part 1 paragraph
+  social care, authorized by UK law (DPA 2018 Schedule 1 Part 1 paragraph
   2). Article 9(2)(i) is the appropriate special-category basis where the
   recipient is the UK Health Security Agency for public-health purposes.
 - **Data Protection Act 2018** (c. 12) —
@@ -58,7 +58,7 @@ Disease) Act 1984 and the Health Protection (Notification) Regulations 2010
 - Health Protection (Notification) Regulations 2010 —
   <https://www.legislation.gov.uk/uksi/2010/659/contents>
 - UKHSA — About us:
-  <https://www.gov.uk/government/organisations/uk-health-security-agency>
+  <https://www.gov.uk/government/organizations/uk-health-security-agency>
 
 ## Common-law duty interaction
 
@@ -73,9 +73,9 @@ NHS Confidentiality Code of Practice (archived):
 ## ICO guidance
 
 - ICO — Lawful basis: legal obligation:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/legal-obligation/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/legal-obligation/>
 - ICO — Right to be informed:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-to-be-informed/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-to-be-informed/>
 
 ## Patient choice
 

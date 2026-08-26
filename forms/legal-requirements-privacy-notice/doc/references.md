@@ -23,11 +23,11 @@
 ## Information Commissioner's Office guidance
 
 - Right to be informed:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-to-be-informed/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-to-be-informed/>
 - Lawful basis: legal obligation:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/legal-obligation/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/legal-obligation/>
 - Special-category data:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 
 ## NHS and statutory recipient guidance
 
@@ -43,14 +43,14 @@
 - Care Quality Commission — Privacy statement:
   <https://www.cqc.org.uk/about-us/our-policies/privacy-statement>
 - UK Health Security Agency:
-  <https://www.gov.uk/government/organisations/uk-health-security-agency>
+  <https://www.gov.uk/government/organizations/uk-health-security-agency>
 
 ## Confidentiality codes
 
 - NHS *Confidentiality: NHS Code of Practice* (2003) — archived:
   <https://webarchive.nationalarchives.gov.uk/ukgwa/+/http://www.dh.gov.uk/en/Publicationsandstatistics/Publications/PublicationsPolicyAndGuidance/DH_4069253>
 - National Data Guardian:
-  <https://www.gov.uk/government/organisations/national-data-guardian>
+  <https://www.gov.uk/government/organizations/national-data-guardian>
 
 ## Professional standards
 

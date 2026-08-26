@@ -38,10 +38,10 @@
 
 - JPAC DSG for transfusion donor screening provides comparable infectious
   disease panels: <https://www.transfusionguidelines.org/dsg>
-- UKHSA *Immunisation against infectious disease* ("Green Book"):
-  <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
+- UKHSA *Immunization against infectious disease* ("Green Book"):
+  <https://www.gov.uk/government/collections/immunization-against-infectious-disease-the-green-book>
 
-## G-CSF / PBSC mobilisation safety
+## G-CSF / PBSC mobilization safety
 
 - Pulsipher MA, Chitphakdithai P, Logan BR, et al. *Acute toxicities of
   unrelated bone marrow versus peripheral blood stem cell donation:

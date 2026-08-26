@@ -21,7 +21,7 @@ clinician-driven imaging-request forms (CT, MRI, ultrasound). It is completed by
 a radiologist, GP, hospital doctor, surgeon, emergency physician, or radiographer
 rather than by the patient, and is aligned with the ACR Appropriateness
 Criteria, the Royal College of Radiologists *iRefer* guidelines, and the UK
-Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 
 Full design description: [`index.md`](../index.md).
 
@@ -32,7 +32,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete, carry a radiation-safety concern, or be urgent.
 
 | Axis | Instrument | Output |

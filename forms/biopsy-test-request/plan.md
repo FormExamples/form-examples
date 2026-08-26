@@ -20,7 +20,7 @@ guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, bleeding risk, completeness, and
-  urgency / cancer pathway are independent and each citable to a recognised body.
+  urgency / cancer pathway are independent and each citable to a recognized body.
   A request can be appropriate yet high bleeding-risk, or complete yet urgent.
 - **Cancer pathway escalates.** A suspected-malignancy / cancer-staging
   indication makes the request two-week-wait eligible and raises the triage tier.

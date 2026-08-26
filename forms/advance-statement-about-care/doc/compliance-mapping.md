@@ -43,7 +43,7 @@ References:
 | Signature block (Step 9) | Art. 6 | Art. 6(1)(c) legal obligation under MCA | n/a |
 
 ICO special-category guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 
 ## Form fields ↔ NHS Confidentiality
 
@@ -57,7 +57,7 @@ record satisfies the model by:
   no further patient-facing privacy notice is required.
 - **Provide choice** — the patient may amend or withdraw the statement at
   any time while they retain capacity.
-- **Improve** — anonymised aggregates may inform service planning under
+- **Improve** — anonymized aggregates may inform service planning under
   the separate Research and Planning Privacy Notice.
 
 Code: archived at the National Archives:

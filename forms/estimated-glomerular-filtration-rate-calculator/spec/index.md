@@ -49,7 +49,7 @@ A single logical assessment record. Fields default to `''` (text/enum) or `null`
 | --- | --- | --- |
 | `ageYears` | numeric (years) | patient age |
 | `sex` | enum | `female` / `male` (drives κ, α, and the female multiplier) |
-| `serumCreatinine` | numeric (µmol/L) | standardised (IDMS-traceable) serum creatinine |
+| `serumCreatinine` | numeric (µmol/L) | standardized (IDMS-traceable) serum creatinine |
 | `specimenDate` | date | date the specimen was taken |
 | `steadyState` | enum (yes/no) | whether renal function is at steady state |
 

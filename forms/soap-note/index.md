@@ -34,7 +34,7 @@ care.
 
 ## The SOAP sections and completeness model
 
-The note is organised into the four SOAP sections. Each section contributes one
+The note is organized into the four SOAP sections. Each section contributes one
 or more **required components**; the engine records which components are present
 and derives an overall status.
 

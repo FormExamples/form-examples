@@ -14,7 +14,7 @@ notes below capture the principal safety pathways.
   Challenge.* 2017. Targets a 50% reduction in severe avoidable
   medication-related harm; transitions of care are one of three named
   priority areas. <https://www.who.int/initiatives/medication-without-harm>
-- **NICE NG5.** *Medicines optimisation.* §1.5 covers medicines
+- **NICE NG5.** *Medicines optimization.* §1.5 covers medicines
   reconciliation at transfer of care.
   <https://www.nice.org.uk/guidance/ng5>
 
@@ -48,7 +48,7 @@ patient-safety events under the **Learn from patient safety events
 
 The *Patient / Carer Acknowledgement* step records the discharge
 recipient (patient or, where capacity is impaired, a carer or
-authorised representative).
+authorized representative).
 
 ## Equality Act 2010 / Accessible Information Standard
 

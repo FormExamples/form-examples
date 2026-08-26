@@ -1,10 +1,10 @@
 # Agile Checklist
 
-A team / organisation self-assessment that audits **57 concrete behaviours**
+A team / organization self-assessment that audits **57 concrete behaviours**
 of an agile way-of-working across three sections — **Teams**,
 **Stakeholders**, and **Practices** — and produces a composite
 **agility maturity level** (Ad-hoc / Initial / Developing / Mature /
-Optimising), a per-section sub-score, weak-section flags, and a coaching
+Optimizing), a per-section sub-score, weak-section flags, and a coaching
 action plan.
 
 The form is a single-page, 5-step wizard. Each item is answered as
@@ -17,13 +17,13 @@ The 57 items are sourced verbatim from [`seed.md`](./seed.md).
 
 ## Scope and intended users
 
-- **Setting:** software-development teams, product organisations,
+- **Setting:** software-development teams, product organizations,
   transformation programmes, agile coaches, scrum masters, engineering
   managers, executive sponsors.
 - **Respondents:** team members, team leads, scrum masters, product
   owners, engineering managers, agile coaches, executive sponsors.
 - **Unit of assessment:** a named team, programme, value stream, or
-  whole organisation. One submission per respondent per assessment cycle.
+  whole organization. One submission per respondent per assessment cycle.
 
 ## Item structure
 
@@ -53,7 +53,7 @@ not-applicable).
 
 | Maturity     | Mean % yes | Description |
 | ---          | ---        | --- |
-| Optimising   | ≥ 90 %     | Agile behaviours are pervasive; team continuously inspects and adapts. |
+| Optimizing   | ≥ 90 %     | Agile behaviours are pervasive; team continuously inspects and adapts. |
 | Mature       | 75 – 89 %  | High adoption with deliberate refinement; few weak sections. |
 | Developing   | 50 – 74 %  | Practices in place but uneven; one or two weak sections. |
 | Initial      | 25 – 49 %  | Partial adoption; multiple weak sections; coaching needed. |
@@ -67,7 +67,7 @@ not-applicable) the composite maturity is reported as
 
 | # | Step | Content |
 | --- | --- | --- |
-| 1 | Respondent identification | name, role, team, organisation, assessment date, assessment period |
+| 1 | Respondent identification | name, role, team, organization, assessment date, assessment period |
 | 2 | Teams (25 items) | autonomy, collaboration, learning, motivation, delivery |
 | 3 | Stakeholders (14 items) | trust, delegation, experimentation, communication |
 | 4 | Practices (18 items) | decisions, plans, dependencies, finished work, transparency |

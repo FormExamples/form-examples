@@ -61,7 +61,7 @@ be likely to attach significance to it."
 - GMC *Treatment and Care Towards the End of Life* —
   <https://www.gmc-uk.org/professional-standards/professional-standards-for-doctors/end-of-life-care>
 
-The 2020 GMC guidance organises consent around seven decision-making
+The 2020 GMC guidance organizes consent around seven decision-making
 principles, all of which are reflected in the form's eight wizard steps.
 
 ## Special category data — UK GDPR
@@ -76,7 +76,7 @@ basis (explicit consent for data processing); it is the common-law
 consent to the treatment itself.
 
 ICO guidance on consent vs. GDPR consent:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
 
 ## Children and young people
 

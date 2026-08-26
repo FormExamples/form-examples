@@ -32,7 +32,7 @@ classification  = deliriumPresent ? 'present' : 'absent'
 
 - feature 1 — acute onset and fluctuating course
 - feature 2 — inattention
-- feature 3 — disorganised thinking
+- feature 3 — disorganized thinking
 - feature 4 — altered level of consciousness
 
 For the CAM-ICU variant, an unrousable patient (RASS -4/-5) yields

@@ -1,6 +1,6 @@
 # Agile Principles Assessment
 
-> A team / organisation self-assessment that scores adoption of the **12 principles of the Agile Manifesto** (Beck *et al.*, 2001) and produces a composite **agility maturity level** (Ad-hoc / Initial / Developing / Mature / Optimising), a list of weak-principle flags, and a coaching action plan.
+> A team / organization self-assessment that scores adoption of the **12 principles of the Agile Manifesto** (Beck *et al.*, 2001) and produces a composite **agility maturity level** (Ad-hoc / Initial / Developing / Mature / Optimizing), a list of weak-principle flags, and a coaching action plan.
 
 ## Docs
 

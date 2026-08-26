@@ -182,7 +182,7 @@ See the per-stack agent docs:
 - `bin/test` — validate structure of all forms
 - `bin/test-form <slug>` — validate one form
 - `bin/update` — run the update/upgrade/fix/harmonize/audit/test prompt via Claude Code
-- `bin/migrate-sql-filenames.py` — canonicalise `sql/` filenames
+- `bin/migrate-sql-filenames.py` — canonicalize `sql/` filenames
 - `bin/sql/generate-sql-comments.py` — append missing SQL comments
 - `bin/sql/generate-sql-combined.py` — combine numbered migrations into `schema.sql`
 - `bin/xml-representations/generate-xml-representations.py` — XML + DTD per SQL entity

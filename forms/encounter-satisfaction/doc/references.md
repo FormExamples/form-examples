@@ -43,7 +43,7 @@
 ## Data protection
 
 - Information Commissioner's Office. *Health and social care guidance.*
-  <https://ico.org.uk/for-organisations/sector-specific-guidance/health/>
+  <https://ico.org.uk/for-organizations/sector-specific-guidance/health/>
 - NHS Records Management Code of Practice. NHSX / NHS England.
   <https://www.nhsx.nhs.uk/information-governance/guidance/records-management-code/>
 - UK GDPR. *Data Protection Act 2018.*

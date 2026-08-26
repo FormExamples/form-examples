@@ -6,7 +6,7 @@ Slug: `vaccinations-checklist`
 
 ## 1. Purpose
 
-Immunisation status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
+Immunization status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
 
 Full design description: [`index.md`](../index.md).
 
@@ -19,13 +19,13 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 - **Instrument**: Vaccination Compliance Classification
 - **Range**: Compliance levels with risk stratification
 - **Categories**:
-  - Fully Immunised: All recommended vaccinations complete and up to date
-  - Partially Immunised: Some vaccinations incomplete or overdue
+  - Fully Immunized: All recommended vaccinations complete and up to date
+  - Partially Immunized: Some vaccinations incomplete or overdue
   - Non-Compliant: Required vaccinations missing, especially in high-risk roles
   - Contraindicated: Medical exemptions documented with supporting evidence
 - **Risk Levels**:
-  - Low: Fully immunised, no gaps
-  - Moderate: Partially immunised, non-critical gaps
+  - Low: Fully immunized, no gaps
+  - Moderate: Partially immunized, non-critical gaps
   - High: Non-compliant in high-risk occupational role
   - Critical: Active exposure without documented immunity
 

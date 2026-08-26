@@ -42,7 +42,7 @@ themselves.
   Financial Affairs, which can be used with the donor's consent).
 - An LPA cannot override an **Advance Decision to Refuse Treatment (ADRT)**
   made by the donor while they had capacity, *unless* the ADRT was made
-  before the LPA and the LPA expressly authorises the attorney to consent
+  before the LPA and the LPA expressly authorizes the attorney to consent
   to or refuse the same treatment.
 - Attorneys must act in the donor's **best interests** under MCA s.4 and
   follow the MCA's five statutory principles.
@@ -114,7 +114,7 @@ across releases.
 | `R-MCA-INSTR-ADRT` | instructions do not contradict a known ADRT | high | MCA 2005 s.25 |
 | `R-MCA-JOINT-COLLAPSE` | warn when *jointly* decision-rule selected with replacements named | medium | OPG guidance LP12 |
 | `R-MCA-JOINT-MIXED-SCOPE` | when mixed decisions chosen, the joint-decision set must be listed | high | LPA Regs 2007 Sch.1 |
-| `R-MCA-COP-PROHIBITED` | instructions do not authorise assisted dying or unlawful restraint | **fatal** | Suicide Act 1961; MCA 2005 |
+| `R-MCA-COP-PROHIBITED` | instructions do not authorize assisted dying or unlawful restraint | **fatal** | Suicide Act 1961; MCA 2005 |
 | `R-MCA-WIT-NOT-ATT` | witness is not an attorney named in the same LPA | **fatal** | LPA Regs 2007 |
 | `R-MCA-WALES` | Welsh-language form accepted for Welsh donors | informational | Welsh Language (Wales) Measure 2011 |
 
@@ -183,7 +183,7 @@ united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
 - **Lasting Powers of Attorney, Enduring Powers of Attorney and Public
   Guardian Regulations 2007** (SI 2007/1253), as amended by SI 2009/1884,
   SI 2015/899, SI 2024/367 — prescribes form LP1H content.
-- **Powers of Attorney Act 2023** — modernises LPA creation, introduces a
+- **Powers of Attorney Act 2023** — modernizes LPA creation, introduces a
   digital channel for OPG submission (commencement pending 2026).
 - **Office of the Public Guardian** practice notes LP12 (decisions),
   LP12 *Decisions*, LP13 *Life-sustaining treatment*.
@@ -202,7 +202,7 @@ united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
 - ICO UK GDPR — donor and attorney personal data (Article 9 — health data
   category).
 - NHS Data Security and Protection Toolkit — when run within an NHS
-  organisation.
+  organization.
 
 ## Verify
 

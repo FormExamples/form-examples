@@ -96,7 +96,7 @@ riskCategory = worseOf(inHospitalMortalityBand, sixMonthMortalityBand)  // max-b
 - The exact per-band point coefficients live in the engine (`grace-rules.ts`) as
   named lookup tables; boundaries follow the published GRACE / GRACE 2.0 point
   tables and are covered by unit tests.
-- **Unit normalisation:** creatinine entered in µmol/L is divided by 88.4 to
+- **Unit normalization:** creatinine entered in µmol/L is divided by 88.4 to
   mg/dL before banding; the raw value and unit are stored.
 - A **missing** numeric input contributes 0 points for that variable and raises
   a data-completeness flag — the total (and therefore the risk category) may
@@ -118,7 +118,7 @@ Emitted independently of the total, each with a priority:
   failure to cardiogenic shock; escalate.
 - **Hypotension** (high) — `systolicBloodPressure < 90`: haemodynamic
   compromise.
-- **Renal impairment** (medium) — normalised creatinine ≥ 2.0 mg/dL
+- **Renal impairment** (medium) — normalized creatinine ≥ 2.0 mg/dL
   (≈ 177 µmol/L): affects contrast and antithrombotic dosing.
 - **ST-segment deviation** (medium) — `stSegmentDeviation == 'yes'`: dynamic
   ischaemia; repeat ECG and expedite.
@@ -172,7 +172,7 @@ Generated artefacts are never hand-edited; re-run the generators in
   each band boundary (age, heart rate, systolic BP, creatinine bands; Killip
   I–IV; each yes/no contributor) and every mortality-band boundary (108/109,
   140/141, 88/89, 118/119).
-- Creatinine unit normalisation (mg/dL vs µmol/L) is tested.
+- Creatinine unit normalization (mg/dL vs µmol/L) is tested.
 - The HTML front-ends conform to the Lily HTML headless contract
   ([`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md)).
 - The SvelteKit front-ends conform to the Lily Svelte headless contract

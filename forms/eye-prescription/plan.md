@@ -108,7 +108,7 @@ medium / high), a human-readable description, and a suggested action
 ## Future enhancements
 
 - Zod runtime validation on the SvelteKit client (especially axis 1-180
-  integer-only, sphere/cyl/add 0.25-step quantisation).
+  integer-only, sphere/cyl/add 0.25-step quantization).
 - Plus-cylinder display toggle for US-trained prescribers.
 - Side-by-side comparison view (current vs. prior prescription) with
   delta highlighting.

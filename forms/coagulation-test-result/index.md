@@ -28,7 +28,7 @@ anticoagulation management (including reversal at high INR).
 - **Setting:** NHS haematology / coagulation laboratory, haematology day unit,
   anticoagulation clinic, or hospital reporting workflow.
 - **Users:** consultant haematologists, biomedical scientists, and other
-  reporting clinicians who interpret, authorise, and sign coagulation reports.
+  reporting clinicians who interpret, authorize, and sign coagulation reports.
 - **Patients:** any patient who has undergone a coagulation / haemostasis test.
 
 ## Result semantics (not a referral)
@@ -45,7 +45,7 @@ result values rather than vetting a referral.
 | Value | Column | Typical use |
 | --- | --- | --- |
 | Prothrombin time (PT) | `prothrombin_time_seconds` | Extrinsic / common pathway; warfarin, liver disease, DIC |
-| INR | `inr` | Standardised PT for warfarin monitoring and reversal decisions |
+| INR | `inr` | Standardized PT for warfarin monitoring and reversal decisions |
 | APTT | `activated_partial_thromboplastin_time_seconds` | Intrinsic / common pathway; heparin, factor deficiency, inhibitors |
 | APTT ratio | `aptt_ratio` | Patient APTT ÷ mean normal APTT |
 | Fibrinogen (Clauss) | `fibrinogen_g_l` | DIC, major haemorrhage, liver disease (g/L) |
@@ -56,7 +56,7 @@ result values rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical value.
 
 | Axis | Instrument | Output |

@@ -29,7 +29,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
   - C: Error reached patient but caused no harm
   - D: Error reached patient, required monitoring to confirm no harm
   - E: Error contributed to temporary harm, required intervention
-  - F: Error contributed to temporary harm, required hospitalisation
+  - F: Error contributed to temporary harm, required hospitalization
   - G: Error contributed to permanent harm
   - H: Error required intervention to sustain life
   - I: Error contributed to patient death

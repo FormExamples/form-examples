@@ -76,9 +76,9 @@ Airway management is the single most critical safety domain in anaesthesia. Fail
 | FLAG-ANAES-001 | Previous Anaesthesia | Previous anaesthesia problems: {details} | High | Anaesthesia problems = yes |
 
 **Clinical Context:**
-- **FLAG-MH-001** is potentially the most life-threatening flag in the system. Malignant hyperthermia (MH) is a pharmacogenetic condition triggered by volatile anaesthetic agents (sevoflurane, desflurane, isoflurane) and depolarising muscle relaxants (suxamethonium). The response includes:
+- **FLAG-MH-001** is potentially the most life-threatening flag in the system. Malignant hyperthermia (MH) is a pharmacogenetic condition triggered by volatile anaesthetic agents (sevoflurane, desflurane, isoflurane) and depolarizing muscle relaxants (suxamethonium). The response includes:
   - Total intravenous anaesthesia (TIVA) must be used
-  - MH-free anaesthetic machine preparation (flush with oxygen for 20+ minutes, remove/disable vaporisers)
+  - MH-free anaesthetic machine preparation (flush with oxygen for 20+ minutes, remove/disable vaporizers)
   - Dantrolene must be immediately available
   - Prolonged post-operative monitoring
 - **FLAG-ANAES-001** captures any previous anaesthetic problems. These could range from difficult intubation to awareness, prolonged paralysis, or severe allergic reactions.
@@ -155,11 +155,11 @@ Airway management is the single most critical safety domain in anaesthesia. Fail
 
 | Flag ID | Category | Message | Priority | Trigger |
 |---------|----------|---------|----------|---------|
-| FLAG-EMERG-001 | Procedure | Emergency procedure - limited time for optimisation | High | Procedure urgency = emergency |
+| FLAG-EMERG-001 | Procedure | Emergency procedure - limited time for optimization | High | Procedure urgency = emergency |
 
 **Clinical Context:**
 - Emergency procedures carry inherently higher risk due to:
-  - Limited time for pre-operative investigation and optimisation
+  - Limited time for pre-operative investigation and optimization
   - Patients often not fasted (aspiration risk)
   - Acute physiological derangement
   - Reduced availability of senior staff (out-of-hours)

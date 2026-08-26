@@ -46,7 +46,7 @@ vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -134,7 +134,7 @@ biopsy-test-result/
   framework incorporated across RCPath cancer datasets.
   <https://www.uicc.org/resources/tnm>
 - International Collaboration on Cancer Reporting (ICCR) — internationally
-  standardised, evidence-based pathology-reporting datasets (specimen adequacy,
+  standardized, evidence-based pathology-reporting datasets (specimen adequacy,
   resection margins, lymphovascular invasion as core / non-core items).
   <https://www.iccr-cancer.org/publications/>
 - SNOMED CT — morphology / topography coding of the diagnosis.

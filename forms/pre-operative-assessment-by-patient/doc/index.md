@@ -7,7 +7,7 @@ Comprehensive documentation for the Pre-Operative Assessment web application, a 
 ### Clinical and Medical
 
 - **[ASA Grading Rules Reference](asa-grading-rules.md)**
-  Complete reference of all 42 implemented ASA classification rules, organised by body system, with rule IDs, grade assignments, and clinical rationale.
+  Complete reference of all 42 implemented ASA classification rules, organized by body system, with rule IDs, grade assignments, and clinical rationale.
 
 - **[Medical Capabilities](medical-capabilities.md)**
   Detailed overview of the clinical assessments covered, body systems evaluated, scoring methodologies, and the medical knowledge encoded in the system.
@@ -32,7 +32,7 @@ Comprehensive documentation for the Pre-Operative Assessment web application, a 
   Practical guide for IT teams deploying the system in a hospital environment, including infrastructure requirements, network configuration, device setup for waiting room tablets, and integration considerations.
 
 - **[Administrator Guide](administrator-guide.md)**
-  System configuration, rule customisation, user management concepts, audit logging, and ongoing maintenance procedures.
+  System configuration, rule customization, user management concepts, audit logging, and ongoing maintenance procedures.
 
 ### For Patients
 

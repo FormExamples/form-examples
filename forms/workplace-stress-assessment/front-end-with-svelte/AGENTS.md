@@ -7,7 +7,7 @@ This is the consolidated gold front-end: a single continuous wizard at
 `/workplace-stress-assessments/[id]`, an occupational-health dashboard at
 `/workplace-stress-assessments`, and an id-based report + PDF. It uses the UK
 HSE Management Standards Indicator Tool (35 items, 1-5 Likert) across seven
-organisational domains.
+organizational domains.
 
 See parent [`../index.md`](../index.md) for the form specification.
 

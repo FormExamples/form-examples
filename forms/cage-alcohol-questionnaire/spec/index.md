@@ -47,7 +47,7 @@ A single logical assessment record. Fields default to `''` (text/enum) or `null`
 | Field | Letter | Question |
 | --- | --- | --- |
 | `cutDown` | C | felt you should cut down on drinking |
-| `annoyed` | A | people annoyed you by criticising your drinking |
+| `annoyed` | A | people annoyed you by criticizing your drinking |
 | `guilty` | G | felt bad or guilty about your drinking |
 | `eyeOpener` | E | morning drink to steady nerves or cure a hangover |
 

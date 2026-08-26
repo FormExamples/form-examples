@@ -1,7 +1,7 @@
 # Safety case notes — DCB0129 / DCB0160
 
 Placeholder notes for the NHS Digital clinical-safety standards. Required
-only if this form is deployed inside an NHS organisation; not required
+only if this form is deployed inside an NHS organization; not required
 for a citizen-facing standalone tool, since the form is administrative
 (legal document drafting) rather than clinical-decision-support.
 
@@ -14,7 +14,7 @@ for a citizen-facing standalone tool, since the form is administrative
 - **NHS DCB0129 / DCB0160** — applies only when an NHS trust deploys
   this software in its IT estate. The standards require, in summary:
   - DCB0129 — manufacturer (or maintainer) safety case
-  - DCB0160 — deploying organisation safety case
+  - DCB0160 — deploying organization safety case
 
 ## DCB0129 placeholder
 
@@ -48,7 +48,7 @@ go-live. This document feeds into that artefact but does not replace it.
 - **UK GDPR Article 9** — donor and attorney personal data is
   special-category (health data). The form classifies all PII columns
   as Article 9 in the data-protection impact assessment.
-- **Data minimisation** — NHS number is optional. The form runs without
+- **Data minimization** — NHS number is optional. The form runs without
   it; the cross-form ADRT check is the only feature that benefits from
   it.
 - **Retention** — LPA records are kept indefinitely. The OPG keeps

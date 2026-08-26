@@ -10,9 +10,9 @@ after a bleeding-risk check; it is not a substitute for clinical judgement.
 
 The Caprini Risk Assessment Model was developed by Joseph A. Caprini and refined
 across the 2005 and later revisions. It is endorsed for surgical and
-hospitalised medical patients and is the model recommended by the American
+hospitalized medical patients and is the model recommended by the American
 College of Chest Physicians (ACCP) *Prevention of VTE in Nonorthopedic Surgical
-Patients* guidance for individualised risk stratification.
+Patients* guidance for individualized risk stratification.
 
 ## Scope and intended users
 
@@ -63,7 +63,7 @@ a single band; every other factor is a yes/no item.
 | Laparoscopic surgery | > 45 minutes |
 | Malignancy | present or previous |
 | Confined to bed | > 72 hours |
-| Immobilising plaster cast | |
+| Immobilizing plaster cast | |
 | Central venous access | central line |
 
 **3-point factors**

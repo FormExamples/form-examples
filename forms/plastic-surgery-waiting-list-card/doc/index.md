@@ -15,9 +15,9 @@ from clock-start to first definitive treatment for non-urgent referrals.
 A patient still on the list at **52 weeks** is a *long waiter* and is
 subject to mandatory harm-review and patient-contact processes.
 
-## NHS England Clinical Prioritisation
+## NHS England Clinical Prioritization
 
-NHS England's clinical prioritisation framework (introduced during the
+NHS England's clinical prioritization framework (introduced during the
 COVID-19 elective recovery programme and retained for ongoing use) sets
 maximum permitted waits by priority:
 
@@ -58,8 +58,8 @@ The composite engine emits one of four bands:
 - NHS England. *Referral to Treatment (RTT) consultant-led waiting times —
   Rules Suite*. <https://www.england.nhs.uk/statistics/statistical-work-areas/rtt-waiting-times/>
 - NHS England. *Clinical validation of waiting lists* operational guidance.
-- NHS England. *Clinical prioritisation* framework (P1–P6).
+- NHS England. *Clinical prioritization* framework (P1–P6).
 - NHS England. *Elective recovery plan*.
 - NHS Constitution for England.
 - Royal College of Surgeons of England. *Clinical guide to surgical
-  prioritisation during the coronavirus pandemic* (P1–P4 origin).
+  prioritization during the coronavirus pandemic* (P1–P4 origin).

@@ -41,7 +41,7 @@ The CAM assesses four features. Each feature is recorded as **present** or
 | --- | --- | --- |
 | 1 | **Acute onset and fluctuating course** | There is an acute change in mental status from the patient's baseline **and** the abnormal behaviour fluctuates during the day (comes and goes, or varies in severity). Usually established from a family member, carer, or nurse. |
 | 2 | **Inattention** | The patient has difficulty focusing attention — e.g. is easily distractible, or has difficulty keeping track of what is said. Confirmed with a formal attention test (digit span, months-of-the-year backwards, or serial recitation). |
-| 3 | **Disorganised thinking** | The patient's thinking is disorganised or incoherent — rambling or irrelevant conversation, unclear or illogical flow of ideas, or unpredictable switching between subjects. |
+| 3 | **Disorganized thinking** | The patient's thinking is disorganized or incoherent — rambling or irrelevant conversation, unclear or illogical flow of ideas, or unpredictable switching between subjects. |
 | 4 | **Altered level of consciousness** | The patient's level of consciousness is anything other than **alert** — i.e. vigilant (hyperalert), lethargic (drowsy, easily roused), stuporous (difficult to rouse), or comatose (unrousable). |
 
 ### Diagnostic algorithm
@@ -54,7 +54,7 @@ delirium present  ⇔  Feature 1  AND  Feature 2  AND  ( Feature 3  OR  Feature 
 
 That is, the diagnosis requires **both** feature 1 (acute onset and fluctuating
 course) **and** feature 2 (inattention), **plus at least one** of feature 3
-(disorganised thinking) or feature 4 (altered level of consciousness). If the
+(disorganized thinking) or feature 4 (altered level of consciousness). If the
 pattern does not hold, delirium is classified as **absent**.
 
 ### Classification (output)
@@ -80,7 +80,7 @@ assesses the same four features using objective, non-verbal tasks:
    fluctuation.
 3. **Feature 2** — inattention via the **Attention Screening Examination**
    (letters "SAVEAHAART" squeeze-on-A task, or pictures).
-4. **Feature 3** — disorganised thinking via yes/no logic questions and simple
+4. **Feature 3** — disorganized thinking via yes/no logic questions and simple
    commands.
 5. **Feature 4** — altered level of consciousness via a non-zero RASS.
 
@@ -97,14 +97,14 @@ Completed in order on a single continuous single-page wizard.
 | 2 | Patient identification | patient identifier, name, date of birth, age, sex, cognitive baseline (independent / known dementia / mild cognitive impairment), source of collateral history |
 | 3 | Feature 1 — acute onset and fluctuating course | evidence of acute change from baseline, fluctuation over the day, collateral source, onset timing |
 | 4 | Feature 2 — inattention | attention test used (digit span / months backwards / serial sevens), performance, distractibility observed |
-| 5 | Feature 3 — disorganised thinking | coherence of conversation, logical flow, subject switching, tangentiality |
+| 5 | Feature 3 — disorganized thinking | coherence of conversation, logical flow, subject switching, tangentiality |
 | 6 | Feature 4 — altered level of consciousness | consciousness level (alert / vigilant / lethargic / stupor / coma), RASS score if CAM-ICU |
 | 7 | Motoric subtype and observations | psychomotor activity (hypoactive / hyperactive / mixed / normal), hallucinations, delusions, sleep–wake disturbance |
 | 8 | Result and disposition | computed classification (present / absent), positive-feature set, suspected precipitants, safety flags, recommended actions, assessor sign-off |
 
 ## Flagged issues
 
-Computed independently of the present / absent classification and prioritised
+Computed independently of the present / absent classification and prioritized
 high / medium / low. Categories include:
 
 - **Delirium present → cause workup** (high) — prompt the search for reversible

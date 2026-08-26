@@ -3,7 +3,7 @@
 This form is organ-donation decision-support software and, under UK
 regulation, falls within scope of the NHS Digital Clinical Safety
 Officer process (**DCB0129** for manufacturers, **DCB0160** for
-deploying organisations) and the Human Tissue Authority's regulatory
+deploying organizations) and the Human Tissue Authority's regulatory
 oversight.
 
 This document is a **placeholder** intended to be populated during a

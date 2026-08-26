@@ -31,13 +31,13 @@ for the patient's notes, medico-legal archive, and audit.
 - **Patients:** adults and, where locally configured, paediatric patients
   undergoing a procedure requiring general anaesthesia, regional anaesthesia,
   sedation, or monitored anaesthesia care.
-- **Not for:** pre-operative optimisation (see *Pre-operative Assessment by
+- **Not for:** pre-operative optimization (see *Pre-operative Assessment by
   Clinician*), the surgical operation note (see *Medical Operation Note*), or
   post-operative ward care. It is the intra-operative anaesthetic record only.
 
 ## Data captured / sections
 
-The record is organised into the sections below. Each maps to a SQL table and to
+The record is organized into the sections below. Each maps to a SQL table and to
 a step in the single-page wizard.
 
 | Section | Key data |

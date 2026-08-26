@@ -1,14 +1,14 @@
-# Clinical prioritisation — P1 to P6
+# Clinical prioritization — P1 to P6
 
 The P1–P6 clinical priority codes used by this form originate from
 the Royal College of Surgeons of England *Clinical Guide to Surgical
-Prioritisation during the Coronavirus Pandemic* and are now embedded
+Prioritization during the Coronavirus Pandemic* and are now embedded
 in the NHS England *Elective Recovery* framework.
 
 - Royal College of Surgeons of England. *Clinical Guide to Surgical
-  Prioritisation during the Coronavirus Pandemic.* April 2020 (NHS
+  Prioritization during the Coronavirus Pandemic.* April 2020 (NHS
   England-adopted).
-  <https://www.rcseng.ac.uk/coronavirus/clinical-prioritisation-of-elective-surgery/>
+  <https://www.rcseng.ac.uk/coronavirus/clinical-prioritization-of-elective-surgery/>
 - Federation of Surgical Specialty Associations. *Clinical Guide for
   the Management of Surgical Priorities during the Coronavirus
   Pandemic.* Maintained version:

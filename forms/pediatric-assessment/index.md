@@ -1,6 +1,6 @@
 # Pediatric Assessment
 
-Child development screening covering birth history, growth, developmental milestones, immunisation status, and family environment.
+Child development screening covering birth history, growth, developmental milestones, immunization status, and family environment.
 
 ## Scoring system
 

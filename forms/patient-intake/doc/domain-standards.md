@@ -18,7 +18,7 @@ by the HIPAA Privacy Rule and Security Rule.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - Information Commissioner's Office. *Health and social care
   guidance.*
-  <https://ico.org.uk/for-organisations/sector-specific-guidance/health/>
+  <https://ico.org.uk/for-organizations/sector-specific-guidance/health/>
 - NHS England. *Records management code of practice.*
   <https://www.nhsx.nhs.uk/information-governance/guidance/records-management-code/>
 
@@ -78,5 +78,5 @@ record include:
 - **RxNorm** (US) / **dm+d** (UK) — medications.
   - RxNorm: <https://www.nlm.nih.gov/research/umls/rxnorm/>
   - dm+d: <https://services.nhsbsa.nhs.uk/dmd-browser/>
-- **CVX** — vaccine codes (US CDC) when capturing immunisation
+- **CVX** — vaccine codes (US CDC) when capturing immunization
   history. <https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp>

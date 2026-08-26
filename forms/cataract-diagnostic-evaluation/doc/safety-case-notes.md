@@ -10,9 +10,9 @@ point.
 | Standard | Applies to | Status |
 | --- | --- | --- |
 | DCB0129 — Clinical Risk Management: its Application in the Manufacture of Health IT Systems | the manufacturer of this software | **not started** — needs a named Clinical Safety Officer, a Clinical Risk Management Plan, a Hazard Log, and a Clinical Safety Case Report |
-| DCB0160 — Clinical Risk Management: its Application in the Deployment and Use of Health IT Systems | the deploying organisation | **not applicable until deployment** — the deploying trust or health board owns this |
+| DCB0160 — Clinical Risk Management: its Application in the Deployment and Use of Health IT Systems | the deploying organization | **not applicable until deployment** — the deploying trust or health board owns this |
 | DTAC — Digital Technology Assessment Criteria | NHS procurement | not started |
-| DSPT — Data Security and Protection Toolkit | the hosting organisation | not applicable — this form ships no hosting |
+| DSPT — Data Security and Protection Toolkit | the hosting organization | not applicable — this form ships no hosting |
 
 ## Regulatory classification
 
@@ -46,7 +46,7 @@ Mitigating design decisions already in place:
 | --- | --- | --- | --- | --- |
 | H-01 | LOCS III subscore mistyped or transposed between eyes | data-entry error | wrong eye graded severe/mild, wrong surgical candidacy | each subscore is entered against a clearly labelled right/left column; out-of-range values rejected by `CHECK` constraints (0.1–6.9 / 0.1–5.9) |
 | H-02 | Competing pathology missed because the cataract obscured the fundus view | dense cataract prevents examination, dilated exam skipped | glaucoma, AMD, or diabetic retinopathy progresses undetected before surgery | `view-obscured-fundus-not-assessed` flag fires whenever the view is obscured and no dilated exam was performed |
-| H-03 | Raised intraocular pressure overlooked | glaucoma screen not prioritised alongside cataract assessment | undiagnosed glaucoma, irreversible visual field loss | `raised-iop` flag fires above 21 mmHg in either eye, independent of the cataract grading |
+| H-03 | Raised intraocular pressure overlooked | glaucoma screen not prioritized alongside cataract assessment | undiagnosed glaucoma, irreversible visual field loss | `raised-iop` flag fires above 21 mmHg in either eye, independent of the cataract grading |
 | H-04 | Rapid, atypical cataract progression attributed to normal ageing | duration not asked or not checked against the grade | underlying cause (steroid, trauma, uveitis, diabetes) missed | `rapid-progression` flag fires when symptom duration is under 3 months with a severe LOCS III grade |
 | H-05 | Surgery listed without biometry | urgency to refer skips the planning step | wrong or unavailable IOL power at the time of surgery, cancelled operating list | `biometry-incomplete-for-surgical-planning` flag fires whenever a surgical referral is recommended without biometry recorded |
 | H-06 | Paediatric patient assessed with an adult-validated instrument and pathway | age not checked | invalid grading, wrong referral pathway, delayed paediatric ophthalmology input | `paediatric` flag fires below age 16 and the report directs the user to a paediatric ophthalmology pathway; the flag also forces the computed recommendation to `urgent-referral` |

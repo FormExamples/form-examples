@@ -26,7 +26,7 @@ to commit.
 - **Alternatives are first-class.** The "positions" table is 1:N because
   enumerating alternatives is the whole point — collapsing them to a text
   blob undermines the template.
-- **Notes are append-only.** Discussion captured during socialisation is
+- **Notes are append-only.** Discussion captured during socialization is
   timestamped and never edited. This preserves the audit trail.
 
 ## Build order

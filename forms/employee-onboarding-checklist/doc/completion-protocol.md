@@ -7,7 +7,7 @@
 | Hiring manager | Owns the checklist; signs off completion at end of probation |
 | HR / People Operations | Ensures statutory items are completed before day 1 |
 | IT / facilities | Provisioning of accounts, devices, building access |
-| Buddy / mentor | Informal socialisation; first-week shadowing |
+| Buddy / mentor | Informal socialization; first-week shadowing |
 | New hire | Self-attestation of receipt of policies, contract, and training |
 
 ## Sections
@@ -40,7 +40,7 @@ The checklist is grouped by time horizon (see methodology-reference.md):
 4. **First month**
    - 30-day check-in.
    - Objectives and key results (OKRs) for probation set.
-   - Documented socialisation: cross-team introductions; access to
+   - Documented socialization: cross-team introductions; access to
      team rituals (stand-ups, retros).
    - Confirmation of working pattern, location, and any reasonable
      adjustments.

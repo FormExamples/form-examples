@@ -13,7 +13,7 @@ safety events (LFPSE) service**.
   2022 — replaces the older *Serious Incident Framework* (2015).
   <https://www.england.nhs.uk/patient-safety/patient-safety-incident-response-framework/>
 
-Incidents in LFPSE are categorised with a degree of harm aligned to
+Incidents in LFPSE are categorized with a degree of harm aligned to
 the WHO ICPS scale; this form's *WHO Severity Scale* mapping is the
 field used.
 

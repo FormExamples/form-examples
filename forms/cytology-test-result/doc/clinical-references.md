@@ -37,7 +37,7 @@ Source:
 ## Structured-reporting (grading) categories
 
 The free-text `cytology_result_category` and the structured `reporting_category`
-hold the recognised grading category for the specimen type.
+hold the recognized grading category for the specimen type.
 
 ### NHS Cervical Screening Programme — dyskaryosis terminology
 
@@ -64,7 +64,7 @@ finding and **Thy4** is abnormal-requiring-action.
 
 ### Breast FNA cytology — C categories
 
-Breast fine-needle aspiration cytology is categorised C1 (inadequate), C2
+Breast fine-needle aspiration cytology is categorized C1 (inadequate), C2
 (benign), C3 (atypia, probably benign), C4 (suspicious of malignancy), and C5
 (malignant), as used in the NHS Breast Screening Programme. **C5** is a critical
 finding and **C4** is abnormal-requiring-action.

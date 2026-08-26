@@ -114,7 +114,7 @@ A single logical review record. Fields default to `''` (text/enum) or `null`
 | `oxygenUse` | enum | none / long-term / ambulatory |
 | `restingSpo2` | numeric (%) | resting SpO₂ on room air |
 | `comorbidities` | text | recorded comorbidities |
-| `selfManagementPlan` | enum (yes/no) | personalised plan in place |
+| `selfManagementPlan` | enum (yes/no) | personalized plan in place |
 | `rescuePackSupplied` | enum (yes/no) | rescue pack supplied |
 | `nextReviewInterval` | text | months to next review |
 | `clinicianNote` | text | free-text summary |
@@ -182,7 +182,7 @@ reviewStatus =
 Emitted independently of the grades, each with a priority:
 
 - **High exacerbation risk** (high) — `abeGroup == 'E'` (≥ 2 moderate or ≥ 1
-  hospitalised exacerbation): review and consider escalating maintenance inhaled
+  hospitalized exacerbation): review and consider escalating maintenance inhaled
   therapy.
 - **Current smoker** (high) — `smokingStatus == 'current'`: offer very-brief
   advice and refer to stop-smoking support with pharmacotherapy.
@@ -243,7 +243,7 @@ Generated artefacts are never hand-edited; re-run the generators in
 - The grading engine is pure (no side effects, no I/O) and unit-tested, covering
   each GOLD boundary (FEV₁ % 80/79, 50/49, 30/29), each symptom threshold
   (mMRC 1/2, CAT 9/10), each exacerbation threshold (1/2 moderate, 0/1
-  hospitalised), every ABE group, and every completeness grade.
+  hospitalized), every ABE group, and every completeness grade.
 - The HTML front-ends conform to the Lily HTML headless contract
   ([`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md)).
 - The SvelteKit front-ends conform to the Lily Svelte headless contract

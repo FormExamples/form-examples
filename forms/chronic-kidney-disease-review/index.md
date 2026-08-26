@@ -83,7 +83,7 @@ The two stages combine into a risk zone — the KDIGO "heat-map":
 | **G5** (< 15) | Very high | Very high | Very high |
 
 - **Low** — routine primary-care monitoring; annual review sufficient.
-- **Moderate** — increased monitoring frequency; optimise BP and cardiovascular
+- **Moderate** — increased monitoring frequency; optimize BP and cardiovascular
   risk.
 - **High** — more frequent monitoring; review medication; consider referral if
   progressing.

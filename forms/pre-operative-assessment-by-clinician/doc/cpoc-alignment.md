@@ -1,7 +1,7 @@
 # CPOC Alignment
 
 Cross-walk between this form and the Centre for Perioperative Care
-*Preoperative Assessment and Optimisation for Adult Surgery* (June 2021)
+*Preoperative Assessment and Optimization for Adult Surgery* (June 2021)
 guidance. The source PDF is in `seeds/`.
 
 | CPOC section | Recommendation | Where handled in this form |

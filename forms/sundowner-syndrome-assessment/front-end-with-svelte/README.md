@@ -13,5 +13,5 @@ DataGrid clinician dashboard.
 The shared scoring engine (`src/lib/engine/`) scores the Cohen-Mansfield
 Agitation Inventory (CMAI, 29-203) and the Neuropsychiatric Inventory (NPI,
 0-144), classifies a severity band (mild / moderate / severe / critical), and
-raises prioritised flagged issues. See parent [`../index.md`](../index.md) for
+raises prioritized flagged issues. See parent [`../index.md`](../index.md) for
 the full form specification.

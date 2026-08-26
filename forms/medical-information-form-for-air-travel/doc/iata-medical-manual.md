@@ -47,7 +47,7 @@ in [`airline-windows.md`](./airline-windows.md).
   duration by **+50 %** as a safety margin.
 - **Supplemental oxygen, gaseous:** Subject to IATA *Dangerous Goods
   Regulations* (DGR). High-flow (> 4 L/min sustained) requires medical-desk
-  authorisation.
+  authorization.
 - **Lithium-ion medical batteries:** Subject to IATA DGR Packing Instruction
   967 / 970. Spare batteries must travel in cabin baggage with terminals
   protected.

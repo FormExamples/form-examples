@@ -45,7 +45,7 @@
 
 ## Medication safety on handover
 
-- NICE NG5. *Medicines optimisation.*
+- NICE NG5. *Medicines optimization.*
   <https://www.nice.org.uk/guidance/ng5>
 - NICE CG183. *Drug allergy.* <https://www.nice.org.uk/guidance/cg183>
 - Royal Pharmaceutical Society. *Getting the medicines right.*

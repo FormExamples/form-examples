@@ -76,7 +76,7 @@ clinically significant incidental findings must be communicated and followed up.
 - The Royal College of Radiologists *iRefer: Making the best use of clinical
   radiology*.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/irefer/>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (justification recorded on the originating request; the result records the
   performed examination).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>

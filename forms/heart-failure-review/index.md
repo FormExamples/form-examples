@@ -4,10 +4,10 @@ A UK primary-care structured **annual review** for adults with an established
 diagnosis of chronic heart failure. It records the objective and self-reported
 findings needed to confirm functional status, review fluid balance, verify
 monitoring bloods, and check that guideline-directed medical therapy has been
-optimised. The engine derives an **NYHA functional status**, a **medication-
-optimisation status** against the "four pillars" of heart-failure therapy,
+optimized. The engine derives an **NYHA functional status**, a **medication-
+optimization status** against the "four pillars" of heart-failure therapy,
 grades the **completeness** of the review, and raises safety flags (urgent
-review, optimisation gaps, deranged renal function or potassium, fluid overload,
+review, optimization gaps, deranged renal function or potassium, fluid overload,
 missing monitoring bloods).
 
 This is a **documentation and status-classification** form, not a diagnostic
@@ -23,7 +23,7 @@ failure register review.
 
 - **Setting:** UK general practice, community heart-failure services, and the
   primary–secondary care interface. Suitable for the QOF annual review and for
-  structured medication-optimisation clinics.
+  structured medication-optimization clinics.
 - **Users:** general practitioners, practice nurses, community heart-failure
   specialist nurses, clinical pharmacists, and cardiology teams reviewing a
   shared-care patient.
@@ -45,10 +45,10 @@ either an objective finding or a documented review action.
 | 3 | Functional status | NYHA class (I–IV), exercise tolerance, breathlessness, orthopnoea, paroxysmal nocturnal dyspnoea, fatigue, change since last review |
 | 4 | Fluid status & observations | weight, weight change since last review, peripheral oedema, jugular venous pressure, lung crackles, blood pressure, heart rate and rhythm |
 | 5 | Investigations | NT-proBNP, sodium, potassium, urea, creatinine, eGFR, haemoglobin, ferritin/transferrin saturation, HbA1c, date of bloods |
-| 6 | Medication optimisation | for each of the four pillars — ACEi/ARB/ARNI, beta-blocker, MRA, SGLT2 inhibitor — prescribed (yes/no/contraindicated), agent, current dose, at target dose, adherence; loop diuretic dose; other relevant drugs |
-| 7 | Devices & procedures | ICD, CRT-P/CRT-D, pacemaker, device check status, revascularisation history |
+| 6 | Medication optimization | for each of the four pillars — ACEi/ARB/ARNI, beta-blocker, MRA, SGLT2 inhibitor — prescribed (yes/no/contraindicated), agent, current dose, at target dose, adherence; loop diuretic dose; other relevant drugs |
+| 7 | Devices & procedures | ICD, CRT-P/CRT-D, pacemaker, device check status, revascularization history |
 | 8 | Vaccinations & self-management | annual influenza and pneumococcal vaccination, COVID-19 status, smoking, alcohol, fluid/salt advice, daily weights, self-management plan, cardiac rehabilitation |
-| 9 | Summary & plan | derived NYHA functional status, medication-optimisation status, review-completeness grade, flagged issues, agreed actions, next review interval, free-text clinical note |
+| 9 | Summary & plan | derived NYHA functional status, medication-optimization status, review-completeness grade, flagged issues, agreed actions, next review interval, free-text clinical note |
 
 ## Status-classification & completeness model
 
@@ -63,7 +63,7 @@ The engine derives four independent outputs; none is a diagnosis.
 | III | Marked limitation; less than ordinary activity causes symptoms | `symptomatic` |
 | IV | Symptoms at rest; unable to carry out any activity without discomfort | `advanced` |
 
-**Medication-optimisation status** — the "four pillars" of guideline-directed
+**Medication-optimization status** — the "four pillars" of guideline-directed
 medical therapy are most strongly indicated in heart failure with **reduced**
 ejection fraction (HFrEF):
 
@@ -88,7 +88,7 @@ review, vaccinations, self-management): `complete`, `partial`, or `incomplete`.
 **Flagged issues** — raised independently of the grades:
 
 - **Urgent review** (high) — NYHA III–IV or documented decompensation.
-- **Optimisation gap** (high/medium) — not on all indicated four-pillar
+- **Optimization gap** (high/medium) — not on all indicated four-pillar
   therapies without a documented contraindication.
 - **Renal/electrolyte derangement** (high) — hyperkalaemia (potassium
   > 5.5 mmol/L), significant hypokalaemia, or a fall in eGFR relevant to RAAS-

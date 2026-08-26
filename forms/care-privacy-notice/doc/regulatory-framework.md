@@ -15,9 +15,9 @@ statute — but it satisfies the practice's transparency obligation.
   <https://www.legislation.gov.uk/eur/2016/679/contents>
 - **Data Protection Act 2018** (c. 12) —
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
-- **Common Law Duty of Confidentiality** — judge-made law summarised by the
+- **Common Law Duty of Confidentiality** — judge-made law summarized by the
   ICO at
-  <https://ico.org.uk/media/for-organisations/documents/1546/anonymisation-code.pdf>
+  <https://ico.org.uk/media/for-organizations/documents/1546/anonymization-code.pdf>
   and by the Department of Health (2003 Code of Practice, archived).
 - **NHS Act 2006** s.251 — statutory mechanism for setting aside the common
   law duty for specific defined purposes via the Confidentiality Advisory
@@ -37,10 +37,10 @@ direct-care processing the cited bases are:
   Schedule 1 Part 1 paragraph 2).
 
 ICO guidance on lawful bases:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/>
 
 ICO guidance on special-category data:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 
 ## Template authority
 
@@ -57,7 +57,7 @@ form mirrors the structure of the BMA template:
   archived at the National Archives:
   <https://webarchive.nationalarchives.gov.uk/ukgwa/+/http://www.dh.gov.uk/en/Publicationsandstatistics/Publications/PublicationsPolicyAndGuidance/DH_4069253>
 - Caldicott Review series — see the National Data Guardian:
-  <https://www.gov.uk/government/organisations/national-data-guardian>
+  <https://www.gov.uk/government/organizations/national-data-guardian>
 
 ## Professional standards
 

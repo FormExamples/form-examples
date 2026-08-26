@@ -2,7 +2,7 @@
 
 ## Overview
 
-The National Early Warning Score 2 (NEWS2) is a standardised clinical scoring system developed by the Royal College of Physicians (RCP) to improve the detection and response to clinical deterioration in adult patients. NEWS2 is widely adopted across NHS trusts and is recommended by NHS England for use in acute and ambulance settings.
+The National Early Warning Score 2 (NEWS2) is a standardized clinical scoring system developed by the Royal College of Physicians (RCP) to improve the detection and response to clinical deterioration in adult patients. NEWS2 is widely adopted across NHS trusts and is recommended by NHS England for use in acute and ambulance settings.
 
 NEWS2 aggregates six physiological parameters plus supplemental oxygen status into a single composite score (range 0--20). The score guides clinical decision-making by triggering escalation pathways proportional to the severity of physiological derangement.
 

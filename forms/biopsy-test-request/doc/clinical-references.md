@@ -8,7 +8,7 @@ Ordinal 1–9 scale in three bands: usually-appropriate (7–9),
 may-be-appropriate (4–6), usually-not-appropriate (1–3). Mapped per
 (indication × biopsy site × method). Image-guided / percutaneous needle biopsy
 of a suspected mass is generally usually-appropriate once imaging has
-characterised the lesion; biopsy without a clear indication or clinical
+characterized the lesion; biopsy without a clear indication or clinical
 question is usually-not-appropriate.
 
 ## Periprocedural bleeding risk (BSG / ESGE & BSIR)
@@ -38,7 +38,7 @@ for the NICE NG12 **suspected-cancer two-week-wait** pathway.
 | Emergency | same day | unstable patient, critical airway / cord compression context |
 | Two-week-wait | ≤ 14 days | suspected-malignancy / cancer-staging (NICE NG12) |
 | Urgent | 24–72 h | suspected-infection, transplant monitoring, rapid clinical change |
-| Routine | standard booking | inflammatory-disease, characterise-lesion, follow-up |
+| Routine | standard booking | inflammatory-disease, characterize-lesion, follow-up |
 
 ## Sources
 

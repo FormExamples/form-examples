@@ -69,7 +69,7 @@
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Employment practices and data protection.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/>
 - NHSX / Transformation Directorate — Records Management Code of
   Practice (2023).
   <https://transform.england.nhs.uk/information-governance/guidance/records-management-code/>

@@ -46,7 +46,7 @@ Sources:
 
 ### ACR TI-RADS (thyroid)
 
-The ACR Thyroid Imaging, Reporting and Data System (TI-RADS) standardises
+The ACR Thyroid Imaging, Reporting and Data System (TI-RADS) standardizes
 reporting of thyroid ultrasounds. It scores five feature categories (composition,
 echogenicity, shape, margin, echogenic foci) into a level from **TR1 (benign)**
 to **TR5 (high suspicion of malignancy)**, and ties each level plus nodule size

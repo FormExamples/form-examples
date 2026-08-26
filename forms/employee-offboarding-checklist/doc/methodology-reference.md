@@ -1,7 +1,7 @@
 # Methodology reference — employee offboarding
 
-The Employee Offboarding Checklist captures the steps an organisation
-takes to transition a departing employee out of the organisation: from
+The Employee Offboarding Checklist captures the steps an organization
+takes to transition a departing employee out of the organization: from
 resignation, dismissal, redundancy, retirement, or end of fixed-term
 contract through final pay and post-employment obligations.
 
@@ -67,7 +67,7 @@ employee experience. CIPD recommends:
 
 - Structured questions, not free-form discussion.
 - Conducted by HR (not the line manager) for honesty.
-- Anonymised aggregation for trend reporting.
+- Anonymized aggregation for trend reporting.
 - Held in the final week, after notice tensions have settled.
 
 CIPD — Exit interviews factsheet:
@@ -78,6 +78,6 @@ CIPD — Exit interviews factsheet:
 ISO 30401:2018 "Knowledge management systems" defines knowledge
 management requirements. The checklist captures handover artefacts
 (documentation, work-in-progress, key contacts, access reassignments)
-to operationalise the standard in the offboarding context.
+to operationalize the standard in the offboarding context.
 
 - ISO 30401:2018. <https://www.iso.org/standard/68683.html>

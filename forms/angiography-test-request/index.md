@@ -29,7 +29,7 @@ Media Safety guidance, and the UK IR(ME)R radiation regulations.
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe for contrast, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -40,7 +40,7 @@ unsafe for contrast, incomplete, or urgent.
 | **D. Triage priority** | Acuity escalation rules | routine / urgent / emergency (+ target timeframe) |
 
 A safety-critical condition (eGFR < 30 with iodinated contrast, severe contrast
-allergy, active bleeding on anticoagulation, or pregnancy with ionising
+allergy, active bleeding on anticoagulation, or pregnancy with ionizing
 radiation) drives the safety band toward **contraindicated** and is surfaced as
 a high-priority flag regardless of the other axes.
 
@@ -119,9 +119,9 @@ angiography-test-request/
   contrast; eGFR thresholds; metformin and post-contrast acute kidney injury).
   <https://www.esur.org/esur-guidelines-on-contrast-agents/>
 - ACR–NKF consensus on intravenous iodinated contrast media in patients with
-  kidney disease (eGFR ≥ 30 generally safe; < 30 individualised).
+  kidney disease (eGFR ≥ 30 generally safe; < 30 individualized).
   <https://pubs.rsna.org/doi/full/10.1148/radiol.2019192094>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   justification of every radiation exposure.
   <https://www.legislation.gov.uk/uksi/2017/1322/contents>
 - NICE NG12 / cardiology and vascular pathways for indication appropriateness.
@@ -131,7 +131,7 @@ angiography-test-request/
 - MDCG 2019-11 Rev.1 (EU MDR Software Classification) — clinical decision
   support, Class IIa where output drives triage / contrast-safety decisions.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

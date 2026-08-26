@@ -45,7 +45,7 @@ overall Complete / Partial status.
 | 1 | **A** — Appearance and behaviour | Grooming, hygiene, dress, physical state, eye contact, rapport, psychomotor activity (agitation / retardation), abnormal movements, engagement | Agitation / behavioural risk |
 | 2 | **S** — Speech | Rate, volume, quantity, tone, fluency, spontaneity, articulation | — |
 | 3 | **E** — Emotion (mood and affect) | Subjective mood (patient's own words), objective affect: range, congruence, reactivity, appropriateness | Low / depressed mood with risk |
-| 4 | **P** — Perception | Hallucinations (auditory, visual, olfactory, gustatory, tactile), illusions, depersonalisation, derealisation | Command hallucinations; psychosis with risk |
+| 4 | **P** — Perception | Hallucinations (auditory, visual, olfactory, gustatory, tactile), illusions, depersonalization, derealization | Command hallucinations; psychosis with risk |
 | 5 | **T** — Thought (form and content) | Form (linear, circumstantial, tangential, flight of ideas, thought block), content: delusions, obsessions, overvalued ideas, **suicidal ideation**, **homicidal ideation**, self-harm thoughts | Suicidal ideation; homicidal ideation / harm to others; thoughts of self-harm; delusional content with risk |
 | 6 | **I** — Insight and judgement | Insight into illness (full / partial / none), understanding of need for treatment, decision-making and judgement | Lack of insight with risk |
 | 7 | **C** — Cognition | Orientation (time, place, person), attention and concentration, memory (immediate, recent, remote), gross cognitive impression | Cognitive impairment with risk |
@@ -79,7 +79,7 @@ Completed in order on a single continuous single-page wizard. Each step records
 | 3 | Appearance and behaviour | grooming, dress, eye contact, rapport, psychomotor activity, abnormal movements, behaviour → domain 1 |
 | 4 | Speech | rate, volume, quantity, tone, fluency, spontaneity → domain 2 |
 | 5 | Emotion (mood and affect) | subjective mood (patient's words), affect range / congruence / reactivity → domain 3 |
-| 6 | Perception | hallucination modalities, illusions, depersonalisation / derealisation, command-hallucination flag → domain 4 |
+| 6 | Perception | hallucination modalities, illusions, depersonalization / derealization, command-hallucination flag → domain 4 |
 | 7 | Thought (form and content) | thought form, delusions, obsessions, suicidal ideation, homicidal ideation, self-harm thoughts → domain 5 |
 | 8 | Insight and judgement | insight level, understanding of treatment, judgement → domain 6 |
 | 9 | Cognition | orientation, attention, memory, gross cognitive impression → domain 7 |

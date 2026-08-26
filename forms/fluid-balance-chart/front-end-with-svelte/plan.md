@@ -13,7 +13,7 @@ Svelte headless, a pure reconciliation engine, and a `pdfmake` report — with
       to `src/lib/engine/{types,utils,fluid-balance-rules,fluid-balance-grader,flagged-issues}.ts`.
       Intake and output modelled as two arrays on the store data.
 - [x] Id-keyed store (`assessment.svelte.ts`) with in-place `deepAssign`,
-      `createDefaultAssessment()` (arrays initialised), `createDefaultEntry()`,
+      `createDefaultAssessment()` (arrays initialized), `createDefaultEntry()`,
       and the localStorage key `fluid-balance-chart.front-end-with-svelte.<id>.v1`.
 - [x] Five step components; steps 3 and 4 are add/remove repeating-row editors
       for the intake and output child lists, with a live balance readout.

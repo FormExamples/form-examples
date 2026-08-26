@@ -1,6 +1,6 @@
 # Return to Work
 
-A clinician-issued medical certificate authorising an employee's return to
+A clinician-issued medical certificate authorizing an employee's return to
 work after illness, injury, or extended absence. The form captures the
 clinician's assessment, the period of validity, the patient's fitness
 status, any workplace adjustments or restrictions, and a phased-return
@@ -18,7 +18,7 @@ employee self-certification (SC2) and do not require this form.
 ## Scope and intended users
 
 - **Setting:** GP practice, occupational health clinic, hospital
-  outpatient clinic, A&E follow-up, community pharmacy where authorised
+  outpatient clinic, A&E follow-up, community pharmacy where authorized
   to issue fit notes.
 - **Clinician users:** GPs, occupational-health physicians, hospital
   doctors, nurses, pharmacists, physiotherapists, occupational
@@ -37,7 +37,7 @@ The form computes a fitness status from clinician input:
 | **Not fit for work** | Clinician confirms unfit; period of incapacity stated | Employee remains absent for the period; SSP / occupational sick pay continues |
 
 A secondary **restriction-priority grade** (`routine` / `standard` /
-`restricted` / `high-risk`) summarises the cumulative effect of all
+`restricted` / `high-risk`) summarizes the cumulative effect of all
 adjustments and is used by the employer's occupational-health team to
 plan risk assessments. The grade is computed by the *max-grade* rule:
 the most severe adjustment sets the overall grade.

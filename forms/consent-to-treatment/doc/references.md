@@ -51,9 +51,9 @@
 ## Information governance
 
 - ICO — Lawful basis: consent:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
 - ICO — Special-category data:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 - NHS England — Records Management Code of Practice:
   <https://www.nhsx.nhs.uk/information-governance/guidance/records-management-code/>
 - NHS *Confidentiality: NHS Code of Practice* (2003) — archived:

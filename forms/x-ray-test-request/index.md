@@ -15,7 +15,7 @@ clinician-driven imaging-request forms (CT, MRI, ultrasound). It is completed by
 a radiologist, GP, hospital doctor, surgeon, emergency physician, or radiographer
 rather than by the patient, and is aligned with the ACR Appropriateness
 Criteria, the Royal College of Radiologists *iRefer* guidelines, and the UK
-Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 
 ## Scope and intended users
 
@@ -28,7 +28,7 @@ Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 ## Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 incomplete, carry a radiation-safety concern, or be urgent.
 
 | Axis | Instrument | Output |
@@ -114,12 +114,12 @@ x-ray-test-request/
   <https://acsearch.acr.org/list>
 - Royal College of Radiologists *iRefer: Making the best use of clinical
   radiology*. <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/irefer/>
-- The Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- The Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
   <https://www.legislation.gov.uk/uksi/2017/1322/made>
-- GOV.UK *Guidance to the Ionising Radiation (Medical Exposure) Regulations
-  2017*. <https://www.gov.uk/government/publications/ionising-radiation-medical-exposure-regulations-2017-guidance/guidance-to-the-ionising-radiation-medical-exposure-regulations-2017>
+- GOV.UK *Guidance to the Ionizing Radiation (Medical Exposure) Regulations
+  2017*. <https://www.gov.uk/government/publications/ionizing-radiation-medical-exposure-regulations-2017-guidance/guidance-to-the-ionizing-radiation-medical-exposure-regulations-2017>
 - Care Quality Commission — IR(ME)R duty-holder responsibilities.
-  <https://www.cqc.org.uk/guidance-providers/ionising-radiation/ionising-radiation-medical-exposure-regulations-irmer>
+  <https://www.cqc.org.uk/guidance-providers/ionizing-radiation/ionizing-radiation-medical-exposure-regulations-irmer>
 
 ## Compliance
 

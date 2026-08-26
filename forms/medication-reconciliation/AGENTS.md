@@ -87,7 +87,7 @@ allergy status not documented (low).
 ## Clinical grounding
 
 - World Health Organization. *High 5s — Medication Reconciliation*, 2014.
-- NICE NG5. *Medicines optimisation*, 2015.
+- NICE NG5. *Medicines optimization*, 2015.
 - Royal Pharmaceutical Society. *Keeping patients safe when they transfer between
   care providers*, 2012.
 - NICE / NPSA PSG001. *Medicines reconciliation on admission of adults to

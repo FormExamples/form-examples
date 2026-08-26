@@ -312,7 +312,7 @@ fenced shell blocks:
    FHIR/protobuf/OpenAPI update; what `--check` gates catch.
 5. **Consume the API** — curl walkthrough against a seeded crate, mapped to
    the OpenAPI spec; FHIR Bundle export.
-6. **Customise Lily** — theming and the sync/refactor/status tools.
+6. **Customize Lily** — theming and the sync/refactor/status tools.
 
 #### WS6 — Examples
 

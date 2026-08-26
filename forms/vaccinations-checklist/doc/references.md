@@ -2,9 +2,9 @@
 
 ## UK Green Book
 
-- UK Health Security Agency. *Immunisation against infectious disease* (the
+- UK Health Security Agency. *Immunization against infectious disease* (the
   Green Book). Continuously updated.
-  <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
+  <https://www.gov.uk/government/collections/immunization-against-infectious-disease-the-green-book>
 
 ## UK DHSC HCW clearance
 
@@ -18,8 +18,8 @@
 
 ## JCVI
 
-- Joint Committee on Vaccination and Immunisation. *Statements*.
-  <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunisation>
+- Joint Committee on Vaccination and Immunization. *Statements*.
+  <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunization>
 
 ## WHO
 
@@ -37,8 +37,8 @@
 
 ## NHS Employers / Faculty of Occupational Medicine
 
-- NHS Employers. *Vaccinations and immunisations*.
-  <https://www.nhsemployers.org/articles/vaccinations-and-immunisations>
+- NHS Employers. *Vaccinations and immunizations*.
+  <https://www.nhsemployers.org/articles/vaccinations-and-immunizations>
 - Faculty of Occupational Medicine. *Ethics guidance for occupational
   health practice*. London: FOM, 2018.
   <https://www.fom.ac.uk/professional-development/publications-policy-guidance-and-consultations/ethics-guidance>

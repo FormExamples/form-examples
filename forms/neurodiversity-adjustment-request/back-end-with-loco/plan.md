@@ -6,7 +6,7 @@ mirrors the canonical **relational** Loco back-end (see
 SeaORM `_entity` per SQL table, the four-axis grading engine under
 `src/engine/`, and JSON controllers under `src/controllers/`.
 
-- [x] Loco crate materialised (`Cargo.toml`, `src/`, `migration/`, `config/`)
+- [x] Loco crate materialized (`Cargo.toml`, `src/`, `migration/`, `config/`)
 - [x] Per-table relational migrations in FK-dependency order: `users`,
       `workers`, `managers`, `neurodiversity_adjustment_requests`,
       `neurodiversity_adjustment_request_grades`,

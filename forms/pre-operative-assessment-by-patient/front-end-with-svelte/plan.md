@@ -30,4 +30,4 @@ all in place.
 - Axe-core accessibility audit.
 - Playwright end-to-end smoke tests.
 - LocalStorage autosave.
-- Internationalisation (i18n).
+- Internationalization (i18n).

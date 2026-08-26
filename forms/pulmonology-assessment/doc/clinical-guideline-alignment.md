@@ -20,7 +20,7 @@
 - Form coverage:
   - Step 3 captures the spirometry quality criteria (ATS/ERS 2019).
   - Step 5 captures pulmonary rehabilitation eligibility per §1.2.41
-    (MRC ≥ 3 or recovery from a hospitalised exacerbation).
+    (MRC ≥ 3 or recovery from a hospitalized exacerbation).
   - Step 6 captures the NICE-preferred dual or triple inhaler regimens
     differentiated by asthmatic features / steroid responsiveness.
 

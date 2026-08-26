@@ -18,16 +18,16 @@ language is a documented source of clinical risk and complaints.
   PMID: 17362215.
   <https://pubmed.ncbi.nlm.nih.gov/17362215/>
 
-## Examiner training and standardisation
+## Examiner training and standardization
 
 - Cambridge Boxhill Language Assessment Trust runs the OET examiner
   certification programme; only Cambridge-Boxhill-certified
   *interlocutors* and *raters* can produce a regulator-grade OET
   outcome.
 - The form is suitable for *internal* / *practice* assessment by an
-  organisation. Practice assessments **MUST NOT** be presented to a
+  organization. Practice assessments **MUST NOT** be presented to a
   regulator as evidence of English-language proficiency; only the
-  formal OET sitting issues a recognised statement of results.
+  formal OET sitting issues a recognized statement of results.
 
 ## Fairness, equity, and protected characteristics
 

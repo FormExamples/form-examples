@@ -1,7 +1,7 @@
 # IPS Bundle validation
 
 The FHIR R5 output of this form is an IPS-conformant `Bundle`
-serialised by the `/ips` server endpoint. Validation is performed
+serialized by the `/ips` server endpoint. Validation is performed
 both client-side (rule-based completeness validator) and against the
 official IPS IG using the FHIR validator.
 

@@ -20,7 +20,7 @@ with the Test Directory eligibility criteria and ACGS consent guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, consent & counselling, completeness,
-  and triage are independent and each citable to a recognised body. A request can
+  and triage are independent and each citable to a recognized body. A request can
   be eligible yet lack documented consent, or complete yet urgent.
 - **Consent is mandatory-blocking for predictive testing.** A predictive /
   presymptomatic request with no consent or pre-test counselling is `not-met` and

@@ -55,7 +55,7 @@ Article 15 UK GDPR access requests are fulfilled by exporting:
 - The history of any opt-out election.
 
 ICO subject access guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
 
 ## Access controls
 

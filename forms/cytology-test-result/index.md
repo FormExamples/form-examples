@@ -43,7 +43,7 @@ findings rather than vetting a referral.
 ## Cytology grading systems
 
 The free-text `cytology_result_category` and the structured `reporting_category`
-hold the **recognised grading category** for the specimen type. Different
+hold the **recognized grading category** for the specimen type. Different
 specimen types use different validated reporting systems:
 
 | Specimen type | Reporting system | Category values |
@@ -54,14 +54,14 @@ specimen types use different validated reporting systems:
 | Urine | The Paris System for Reporting Urinary Cytology | negative / atypical / suspicious / high-grade urothelial carcinoma |
 | Serous fluid (pleural / ascitic) | The International System for Reporting Serous Fluid Cytopathology | non-diagnostic / negative / atypical / suspicious / malignant |
 
-The boolean `malignancy_present` and `dysplasia_present` summarise the headline
+The boolean `malignancy_present` and `dysplasia_present` summarize the headline
 finding so the engine can classify and flag independently of the free-text
 category.
 
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |

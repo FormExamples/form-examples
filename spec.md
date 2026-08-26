@@ -37,7 +37,7 @@ Out of scope (today):
 
 - Hosted deployment, infrastructure, authentication, multi-tenancy.
 - A unified backend serving every form (each crate is independent).
-- Internationalisation beyond English + Welsh (planned in `plan.md`).
+- Internationalization beyond English + Welsh (planned in `plan.md`).
 
 ## 3. Architecture
 

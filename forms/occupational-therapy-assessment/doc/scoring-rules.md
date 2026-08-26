@@ -20,7 +20,7 @@ in collaboration with researchers at the University of Toronto and McGill.
    three occupational performance areas:
    - Self-care (personal care, functional mobility, community management)
    - Productivity (paid / unpaid work, household management, play / school)
-   - Leisure (quiet recreation, active recreation, socialisation)
+   - Leisure (quiet recreation, active recreation, socialization)
 2. The client identifies up to five problems and rates **importance**
    (1–10).
 3. The five highest-importance problems are carried forward.

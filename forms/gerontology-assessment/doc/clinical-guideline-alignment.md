@@ -24,7 +24,7 @@
   <https://www.nice.org.uk/guidance/ng56>
 - NICE CG161 — *Falls in older people: assessing risk and prevention*:
   <https://www.nice.org.uk/guidance/cg161>
-- NICE NG5 — *Medicines optimisation*: <https://www.nice.org.uk/guidance/ng5>
+- NICE NG5 — *Medicines optimization*: <https://www.nice.org.uk/guidance/ng5>
 - NICE CG32 — *Nutrition support for adults*: <https://www.nice.org.uk/guidance/cg32>
 - NICE NG97 — *Dementia: assessment, management and support for people
   living with dementia and their carers*: <https://www.nice.org.uk/guidance/ng97>

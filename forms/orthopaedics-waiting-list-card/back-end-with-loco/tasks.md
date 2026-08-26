@@ -3,7 +3,7 @@
 - [x] Create Cargo workspace manifest and `migration` sub-crate
 - [x] Add `.gitignore` (`target`, `Cargo.lock`, `tmp`)
 - [x] Write the `assessments` migration (`m20260601_000001_create_waiting_list_cards.rs`)
-- [x] Implement `src/app.rs` with `Hooks` and Tera initialiser
+- [x] Implement `src/app.rs` with `Hooks` and Tera initializer
 - [x] Implement `src/bin/main.rs` entry point
 - [x] Implement SeaORM entity in `src/models/_entities/assessments.rs`
 - [x] Implement `src/models/assessments.rs` (`new_draft`, `find_by_id`, `list_completed`)

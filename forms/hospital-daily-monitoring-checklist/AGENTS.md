@@ -1,6 +1,6 @@
 # Hospital Daily Monitoring Checklist — Agent Instructions
 
-Operational rounds checklist that audits **97 checkpoints** organised
+Operational rounds checklist that audits **97 checkpoints** organized
 in 22 hospital areas. Each checkpoint is answered **satisfactory /
 needs-attention / not-applicable**, with an optional remark. There is
 no clinical grading engine — this is a facility/operations audit, not
@@ -78,7 +78,7 @@ source proforma) in [`spec/index.md`](./spec/index.md).
 
 ## SQL shape
 
-Normalised **parent + child** tables (not one wide row per submission
+Normalized **parent + child** tables (not one wide row per submission
 — at 97 checkpoints a flat table would need ~200 columns):
 
 - `hospital_daily_monitoring_checklists` — one row per inspection
@@ -93,7 +93,7 @@ Normalised **parent + child** tables (not one wide row per submission
 This matches the repo's relational-schema convention (one migration +
 one entity per SQL table; see `medical-operation-note` as the
 reference relational back-end) rather than agile-checklist's flat
-named-column table, because 97 checkpoints makes a normalised child
+named-column table, because 97 checkpoints makes a normalized child
 table the maintainable choice.
 
 ## Front-end SvelteKit stack

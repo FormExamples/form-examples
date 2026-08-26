@@ -8,7 +8,7 @@ authored 2026-05-18 from the brief in `seed.md`.
 ## Why this form exists
 
 Employers and statutory sick pay (SSP) processes need a clinician's
-written authorisation before an employee returns to work after illness,
+written authorization before an employee returns to work after illness,
 injury, or extended absence. In the UK this is the *Statement of
 Fitness for Work* (Med 3, often called a "fit note"). In other
 jurisdictions it is called a medical clearance letter or physician's

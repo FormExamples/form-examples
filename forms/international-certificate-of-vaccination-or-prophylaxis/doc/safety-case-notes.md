@@ -12,7 +12,7 @@ Immunization bundle.
 ## Intended user
 
 - WHO-designated yellow fever vaccination centre clinician (physician,
-  nurse, pharmacist) authorised by the national health authority.
+  nurse, pharmacist) authorized by the national health authority.
 - Travel medicine clinic.
 - Port-health unit.
 - Military pre-deployment clinic.

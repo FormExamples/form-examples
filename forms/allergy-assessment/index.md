@@ -21,7 +21,7 @@ Comprehensive allergy evaluation covering drug, food, and environmental allergie
 | 7   | Testing Results         | Skin prick tests, blood tests (specific IgE), and other diagnostics |
 | 8   | Current Management      | Current medications, immunotherapy, and avoidance strategies        |
 | 9   | Comorbidities           | Related conditions such as asthma, eczema, and rhinitis             |
-| 10  | Impact & Action Plan    | Quality of life impact and personalised action plan                 |
+| 10  | Impact & Action Plan    | Quality of life impact and personalized action plan                 |
 
 ## Directory structure
 

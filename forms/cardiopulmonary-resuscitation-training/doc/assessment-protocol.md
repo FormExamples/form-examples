@@ -29,7 +29,7 @@ but adds to the non-critical deficiency count.
 
 - Tap shoulders and shout "Are you OK?".
 - Look, listen, feel for breathing for **no more than 10 seconds**.
-- Agonal gasps recognised as abnormal.
+- Agonal gasps recognized as abnormal.
 
 Critical action: spending more than 10 seconds on breathing check, or
 failure to start CPR after detecting abnormal breathing.

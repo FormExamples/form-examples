@@ -10,7 +10,7 @@ referral recommendation.
 
 - Respiratory outpatient clinic.
 - Primary care annual COPD review.
-- Post-discharge clinic within 2 weeks of an exacerbation hospitalisation.
+- Post-discharge clinic within 2 weeks of an exacerbation hospitalization.
 
 ## Step-by-step protocol
 

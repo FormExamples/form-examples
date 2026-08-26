@@ -4,7 +4,7 @@
 
 - **Form** — WHO. *Emergency Unit Form: General*. PDF.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf.pdf>
-- **Reference card** — WHO. *General Standardised Clinical Form
+- **Reference card** — WHO. *General Standardized Clinical Form
   Reference Card*. PDF.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf-ref-card.pdf>
 - **Emergency Care Toolkit** — WHO.

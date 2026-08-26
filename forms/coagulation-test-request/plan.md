@@ -19,7 +19,7 @@ BSH and NICE guidance.
 ## Design principles
 
 - **Four orthogonal axes.** Appropriateness, pre-analytical specimen safety,
-  completeness, and triage are independent and each citable to a recognised
+  completeness, and triage are independent and each citable to a recognized
   body. A request can be appropriate yet incomplete, or complete yet urgent.
 - **Acuity auto-escalates.** Active bleeding or suspected DIC forces stat triage
   regardless of the other axes.

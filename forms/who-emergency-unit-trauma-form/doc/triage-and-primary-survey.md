@@ -104,7 +104,7 @@ Course Manual*, 10th edition. American College of Surgeons; 2018.
 
 Step 12 captures an 11-body-system physical exam with an injury body
 diagram. The exam is performed only after the primary survey is
-stabilised. AMPLE history is collected in parallel where possible:
+stabilized. AMPLE history is collected in parallel where possible:
 
 - **A**llergies
 - **M**edications
@@ -126,7 +126,7 @@ stabilised. AMPLE history is collected in parallel where possible:
 | | Incomprehensible | 2 |
 | | None | 1 |
 | Motor response | Obeys commands | 6 |
-| | Localises pain | 5 |
+| | Localizes pain | 5 |
 | | Withdraws from pain | 4 |
 | | Abnormal flexion (decorticate) | 3 |
 | | Abnormal extension (decerebrate) | 2 |

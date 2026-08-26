@@ -39,7 +39,7 @@
 
 - Information Commissioner's Office — UK GDPR special-category data
   guidance:
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data/>
 - NHS *Confidentiality: NHS Code of Practice* (2003), Department of Health
   — archived at the National Archives:
   <https://webarchive.nationalarchives.gov.uk/ukgwa/+/http://www.dh.gov.uk/en/Publicationsandstatistics/Publications/PublicationsPolicyAndGuidance/DH_4069253>

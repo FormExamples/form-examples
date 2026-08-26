@@ -10,7 +10,7 @@ This form is the clinician counterpart to the patient self-report pre-operative
 questionnaire [`pre-operative-assessment-by-patient`](../pre-operative-assessment-by-patient):
 it is completed by an anaesthetist, surgeon, pre-op assessment
 nurse, or perioperative physician rather than by the patient. It is aligned with
-CPOC's *Preoperative Assessment and Optimisation for Adult Surgery* (June 2021)
+CPOC's *Preoperative Assessment and Optimization for Adult Surgery* (June 2021)
 and the Geeky Medics *Anaesthetic Pre-operative Assessment OSCE Guide*, and is
 intended to support shared decision-making under the Montgomery consent
 standard.
@@ -63,7 +63,7 @@ clinician findings** — not patient self-report.
 | 13 | Medications & allergies | clinician-reconciled medication list, anticoagulant hold plan, steroid cover, confirmed allergies with reactions, alcohol and smoking status |
 | 14 | Functional capacity & frailty | METs estimate, Duke Activity Status Index, Clinical Frailty Scale, ECOG, 6-minute walk test result if available, CPET summary |
 | 15 | Anaesthesia & post-op plan | proposed technique (GA / regional / sedation / MAC / combined), airway plan (supraglottic / ETT / awake FOI), monitoring level, analgesia plan, DVT prophylaxis, post-op disposition (ward / enhanced care / HDU / ICU), anticipated length of stay |
-| 16 | Summary, ASA & sign-off | computed ASA grade + fired rules, composite risk, safety flags, clinician override + reason (optional), overall recommendation (proceed / optimise first / cancel), additional notes, electronic signature |
+| 16 | Summary, ASA & sign-off | computed ASA grade + fired rules, composite risk, safety flags, clinician override + reason (optional), overall recommendation (proceed / optimize first / cancel), additional notes, electronic signature |
 
 ## Safety flags
 
@@ -114,7 +114,7 @@ pre-anaesthesia-assessment/
 ## Clinical references
 
 - Centre for Perioperative Care (CPOC). *Preoperative Assessment and
-  Optimisation for Adult Surgery* (June 2021) — see `seeds/`.
+  Optimization for Adult Surgery* (June 2021) — see `seeds/`.
 - Geeky Medics. *Anaesthetic Pre-operative Assessment OSCE Guide*.
   <https://geekymedics.com/anaesthetic-pre-operative-assessment-osce-guide/>.
 - American Society of Anesthesiologists. *ASA Physical Status Classification

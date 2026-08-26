@@ -8,7 +8,7 @@
   <https://www.occupationalenglishtest.org/speaking-test/>
 - OET. *Speaking criteria.*
   <https://www.occupationalenglishtest.org/speaking-criteria/>
-- OET. *Recognising organisations.*
+- OET. *Recognizing organizations.*
   <https://www.occupationalenglishtest.org/about-oet/recognition/>
 
 ## UK regulators

@@ -14,11 +14,11 @@
 ### Information Commissioner's Office guidance
 
 - Lawful basis: consent —
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/>
 - Right of access —
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
 - Right to withdraw consent —
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/right-to-withdraw-consent/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/consent/right-to-withdraw-consent/>
 
 ### NHS guidance and standards
 

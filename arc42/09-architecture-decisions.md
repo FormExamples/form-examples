@@ -30,7 +30,7 @@ layout across stacks.
 - **Back-end:** all crate source under `back-end-with-loco/src/<form_snake_case>/`
   (crate root keeps `Cargo.toml`, `config/`, `migration/`, `tests/`).
 - **Svelte:** all routes under `src/routes/<form-kebab-case>/`, served at
-  `/<slug>/`, with a **RESTful collection** named by the pluralised slug:
+  `/<slug>/`, with a **RESTful collection** named by the pluralized slug:
   `/<slug>/<plural>/` is the dashboard list and `/<slug>/<plural>/[id]` is the
   wizard (`[id] = new` to create); `/<slug>/` is a welcome page.
 

@@ -52,7 +52,7 @@ is happening. The dashboard supports a per-patient export of:
 - The history of changes to the opt-out election with timestamps.
 
 ICO subject access guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
 
 ## Demonstrating accountability (Article 5(2))
 
@@ -70,7 +70,7 @@ NHS Data Security and Protection Toolkit:
 
 ## Rights status panel
 
-The dashboard provides a "rights status" per patient summarising:
+The dashboard provides a "rights status" per patient summarizing:
 
 - Acknowledgment status (Complete / Incomplete / Outdated).
 - Opt-out status (opt-out / opt-in / unspecified).

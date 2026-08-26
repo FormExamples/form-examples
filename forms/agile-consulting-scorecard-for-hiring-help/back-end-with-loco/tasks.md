@@ -29,7 +29,7 @@
       (`agile-consulting-scorecard-cli` now wraps `cli::main`),
       `config/development.yaml`. Single migration creates a
       `scorecards` table with `data` + `result` JSONB columns plus
-      denormalised headline columns (`organization_name`, `sector`,
+      denormalized headline columns (`organization_name`, `sector`,
       `size_band`, `computed_band`, `score_total`, `assessment_date`)
       and indexes on `computed_band` and `sector`. Replaces the
       thin in-memory axum server end-to-end
@@ -52,7 +52,7 @@
       `GET /dashboard/table` returning just the table partial
 - [x] Author `templates/landing.html.tera` — root marketing page with
       readiness-band explainer and pointers into the JSON API
-- [x] Tera initialised in `app::App::routes` and threaded into the
+- [x] Tera initialized in `app::App::routes` and threaded into the
       HTML controller via an `Extension<Arc<Tera>>` layer
 - [x] In-memory `ScorecardStore` in `src/server/store.rs` wrapping an
       `Arc<Mutex<>>` of submitted rows + id counter. `POST /api/scorecards`

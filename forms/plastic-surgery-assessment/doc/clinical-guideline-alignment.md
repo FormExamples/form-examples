@@ -24,7 +24,7 @@ exactly as NG45 specifies.
 
 ## CPOC preoperative assessment
 
-- Centre for Perioperative Care. *Preoperative Assessment and Optimisation
+- Centre for Perioperative Care. *Preoperative Assessment and Optimization
   for Adult Surgery* (June 2021). https://cpoc.org.uk/
 
 ## Wound assessment

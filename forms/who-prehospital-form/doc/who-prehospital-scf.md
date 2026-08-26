@@ -1,4 +1,4 @@
-# WHO Prehospital Standardised Clinical Form
+# WHO Prehospital Standardized Clinical Form
 
 This form implements the WHO standard prehospital patient-encounter
 form for emergency medical services (EMS) operating in low-, middle-,
@@ -7,7 +7,7 @@ Emergency Unit forms.
 
 ## Authoritative WHO sources
 
-- **Form PDF** — WHO. *Prehospital Standardised Clinical Form*.
+- **Form PDF** — WHO. *Prehospital Standardized Clinical Form*.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/prehospital-scf.pdf>
 - **Emergency Care Toolkit** —
   <https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care>
@@ -30,7 +30,7 @@ form for an EMS encounter. It is designed to be:
 - **Mass-casualty-ready** — the "Mass Casualty" checkbox at the head of
   the form allows the same instrument to be used in mass-casualty
   incidents alongside a triage tag.
-- **Inter-operable** — the field set is harmonised with the WHO
+- **Inter-operable** — the field set is harmonized with the WHO
   Emergency Unit General and Trauma forms so the receiving facility can
   transcribe directly without re-collection.
 - **Reference-card driven** — used with the same WHO reference card
@@ -143,7 +143,7 @@ in 2019; revisions are tracked via the WHO CDN PDF query strings.
 
 ## References
 
-- WHO. *Prehospital Standardised Clinical Form* (PDF) — see header.
+- WHO. *Prehospital Standardized Clinical Form* (PDF) — see header.
 - WHO. *Basic Emergency Care*. 2018.
 - WHO. *Prehospital trauma care systems*. 2005. ISBN 92-4-159294-X.
 - WHO. *Strengthening care for the injured*. 2010. ISBN

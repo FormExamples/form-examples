@@ -64,7 +64,7 @@ Even without persistent storage, GDPR applies because the system processes speci
 
 | GDPR Article | Obligation | Implementation |
 |---|---|---|
-| Art. 5 | Data minimisation | Only clinically necessary data collected |
+| Art. 5 | Data minimization | Only clinically necessary data collected |
 | Art. 6 | Lawful basis | Legitimate interest / explicit consent for healthcare |
 | Art. 9 | Special categories | Health data processed for healthcare purposes under Art. 9(2)(h) |
 | Art. 13/14 | Transparency | Patient information leaflet explains data use |
@@ -133,7 +133,7 @@ DCB 0129 is the NHS Digital standard for manufacturers of health IT systems. Com
 
 ### DCB 0160 - Deployer Clinical Risk Management
 
-DCB 0160 applies to the organisation deploying the system (the hospital). The deploying organisation must:
+DCB 0160 applies to the organization deploying the system (the hospital). The deploying organization must:
 
 1. Appoint a Clinical Safety Officer
 2. Conduct a deployment clinical risk assessment
@@ -194,7 +194,7 @@ The system maintains an audit trail through:
 ### Clinical Audit
 
 The system supports clinical audit by:
-- Providing a standardised assessment format
+- Providing a standardized assessment format
 - Recording objective rule-based grading alongside clinical override capability
 - Generating PDF reports suitable for inclusion in patient records
 - Enabling comparison of automated grades with clinician-assigned grades

@@ -5,7 +5,7 @@ perioperative anaesthesia guidelines.
 
 ## Centre for Perioperative Care (CPOC)
 
-- *Preoperative Assessment and Optimisation for Adult Surgery* (June 2021).
+- *Preoperative Assessment and Optimization for Adult Surgery* (June 2021).
 - Index page: https://cpoc.org.uk/guidelines-resources-guidelines
 
 | CPOC section | This form |

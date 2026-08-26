@@ -3,7 +3,7 @@
 The Code of Conduct Notice records that medical-service providers and
 supporting staff have read and acknowledged a set of professional-conduct
 principles. The notice is not a single statutory instrument; it is the
-provider organisation's restatement of the standards expected by NHS
+provider organization's restatement of the standards expected by NHS
 employers, the GMC (and equivalent regulators), and the wider professional
 codes that govern conduct in health and social care.
 

@@ -2,11 +2,11 @@
 
 ## UK Green Book
 
-- UKHSA *Immunisation against infectious disease* (Green Book).
-  <https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book>
+- UKHSA *Immunization against infectious disease* (Green Book).
+  <https://www.gov.uk/government/collections/immunization-against-infectious-disease-the-green-book>
 - Especially:
   - Chapter 6 — Contraindications.
-  - Chapter 12 — Immunisation of healthcare and laboratory staff.
+  - Chapter 12 — Immunization of healthcare and laboratory staff.
   - Chapter 14a — COVID-19.
   - Chapter 14b — RSV.
   - Chapter 18 — Hepatitis B.
@@ -23,8 +23,8 @@
 
 ## JCVI
 
-- Joint Committee on Vaccination and Immunisation. *Statements*.
-  <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunisation>
+- Joint Committee on Vaccination and Immunization. *Statements*.
+  <https://www.gov.uk/government/groups/joint-committee-on-vaccination-and-immunization>
 
 ## WHO
 
@@ -41,8 +41,8 @@
 
 ## NHS Employers
 
-- NHS Employers. *Health and Safety: Vaccinations and Immunisations*.
-  <https://www.nhsemployers.org/articles/vaccinations-and-immunisations>
+- NHS Employers. *Health and Safety: Vaccinations and Immunizations*.
+  <https://www.nhsemployers.org/articles/vaccinations-and-immunizations>
 
 ## CDC
 

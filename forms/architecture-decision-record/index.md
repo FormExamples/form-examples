@@ -32,7 +32,7 @@ architecture governance.
 11. **Related Requirements** — business/functional requirements addressed
 12. **Related Artifacts** — designs, models, or scope documents impacted
 13. **Related Principles** — enterprise principles this aligns with or breaks
-14. **Notes** — discussion log captured during socialisation
+14. **Notes** — discussion log captured during socialization
 
 ## Wizard layout (16 steps)
 

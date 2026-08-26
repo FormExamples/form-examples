@@ -32,7 +32,7 @@ condition.
 
 ## Behaviour as communication
 
-Captured in the Behavioural Concerns & Triggers step. NG93 emphasises
+Captured in the Behavioural Concerns & Triggers step. NG93 emphasizes
 that behaviour that challenges is communication, often of an unmet need.
 The clinician should investigate, in order:
 
@@ -71,7 +71,7 @@ The Mental Capacity & Consent step records:
   best-interests decision-making process.
 - Whether a Lasting Power of Attorney (LPA) or Court-appointed Deputy
   is in place.
-- Whether a Deprivation of Liberty Safeguard (DoLS) authorisation
+- Whether a Deprivation of Liberty Safeguard (DoLS) authorization
   applies or is needed.
 
 ## Safeguarding

@@ -2,7 +2,7 @@
 
 ## Phase 1 — Scaffold (done)
 
-- SvelteKit 2.x project initialised with Tailwind 4, Vitest, TypeScript.
+- SvelteKit 2.x project initialized with Tailwind 4, Vitest, TypeScript.
 - Reactive store with `$state` and `$derived` runes.
 - 14 step components mirroring the spec.
 

@@ -9,7 +9,7 @@ URL: https://www.nice.org.uk/guidance/ng128
 NG128 is the principal NICE guideline for acute stroke and TIA.
 Alignments encoded by the form:
 
-- **§1.1.1** — recognise stroke with FAST (face, arm, speech, time) in
+- **§1.1.1** — recognize stroke with FAST (face, arm, speech, time) in
   pre-hospital settings.
 - **§1.1.4** — use ROSIER in the emergency department.
 - **§1.4.1** — brain imaging immediately for patients eligible for

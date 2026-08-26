@@ -4,7 +4,7 @@ SvelteKit 2 + Svelte 5 runes + Tailwind CSS 4 + SVAR DataGrid. Vitest for unit
 tests.
 
 Inter-provider handover (SBAR) wizard for transferring a patient's care between
-clinicians, wards, or organisations. A single continuous nine-section wizard
+clinicians, wards, or organizations. A single continuous nine-section wizard
 captures requesting/receiving provider details, patient demographics, the SBAR
 narrative (Situation, Background, Assessment, Recommendation), transfer
 logistics, and a two-party sign-off and acknowledgement. The shared engine

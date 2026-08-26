@@ -94,5 +94,5 @@ The grading engine produces:
   musculoskeletal examination.
 - Pain (score 0) on any test requires referral for medical / physical
   therapy evaluation before continued training.
-- Inter-rater reliability requires standardised training; videoed scoring
+- Inter-rater reliability requires standardized training; videoed scoring
   improves consistency.

@@ -39,7 +39,7 @@ A single logical referral record. Fields default to `''` (text/enum) or `null`
 | --- | --- | --- |
 | `referrerName` | text | mandatory |
 | `referrerRole` | text | job role / title |
-| `referrerOrganisation` | text | employing organisation |
+| `referrerOrganisation` | text | employing organization |
 | `referrerPhone` | text | mandatory (one of phone/email) |
 | `referrerEmail` | text | contact email |
 | `referredAt` | timestamp | date and time of referral |

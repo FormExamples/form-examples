@@ -32,8 +32,8 @@ single statement the respondent can agree or disagree with.
 | 7 | Working software is the primary measure of progress | Progress is measured by working software, not artefacts |
 | 8 | Sustainable development pace | The team works at a sustainable, indefinitely-maintainable pace |
 | 9 | Technical excellence and good design | The team continuously attends to design and quality |
-| 10 | Simplicity — maximise work not done | Simplicity (maximising work not done) is actively practised |
-| 11 | Self-organising teams | Architecture, requirements, and designs emerge from self-organising teams |
+| 10 | Simplicity — maximize work not done | Simplicity (maximizing work not done) is actively practised |
+| 11 | Self-organizing teams | Architecture, requirements, and designs emerge from self-organizing teams |
 | 12 | Regular reflection and adjustment | The team reflects regularly and adjusts behaviour accordingly |
 
 Each is scored on a 1–5 Likert scale (Strongly disagree → Strongly agree).
@@ -41,7 +41,7 @@ Unanswered principles are recorded as `null` and excluded from the mean.
 
 ## Scrum Guide
 
-The Scrum Guide is the canonical operational framework that operationalises
+The Scrum Guide is the canonical operational framework that operationalizes
 many of the principles (notably the Sprint Review for principle 12, and
 the Daily Scrum for principles 4 and 6).
 
@@ -51,7 +51,7 @@ the Daily Scrum for principles 4 and 6).
 ## Maturity model rationale
 
 The five-band maturity model (Ad-hoc / Initial / Developing / Mature /
-Optimising) borrows from the Capability Maturity Model (CMM and CMMI)
+Optimizing) borrows from the Capability Maturity Model (CMM and CMMI)
 tradition of process-maturity self-assessment.
 
 - Capability Maturity Model Integration (CMMI) — Software Engineering
@@ -60,7 +60,7 @@ tradition of process-maturity self-assessment.
 
 The thresholds are tuned to:
 
-- **Optimising** (≥ 4.50): nearly every principle scored 5; teams in this
+- **Optimizing** (≥ 4.50): nearly every principle scored 5; teams in this
   band are "continuously inspecting and adapting".
 - **Mature** (3.75–4.49): high adoption with a few weak points.
 - **Developing** (3.00–3.74): practices in place but uneven.

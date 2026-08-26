@@ -2,7 +2,7 @@
 
 WHO model certificate ("yellow card") used under the **International Health
 Regulations 2005, Annex 6** to record vaccinations or prophylactic treatments
-required for international travel. Issued by an authorised vaccination centre,
+required for international travel. Issued by an authorized vaccination centre,
 signed by hand by a supervising clinician, and validated by the centre's
 uniform stamp.
 

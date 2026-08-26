@@ -57,7 +57,7 @@ table indexes by NHS number so a Subject Access Request can be fulfilled
 without searching free-text.
 
 ICO Subject Access guidance:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/>
 
 ## Sensitive defaults
 

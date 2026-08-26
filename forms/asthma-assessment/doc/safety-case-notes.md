@@ -29,7 +29,7 @@ output must be reviewed by a clinician before any treatment change.
 | Self-completed ACT used to drive treatment without clinician review | Hard "clinician sign-off" requirement on Step 9 |
 | Stale ACT recall (>4 weeks ago) | Mandatory "date of completion" timestamp |
 | Missing inhaler technique check | Hard flag in summary if last check date >12 months |
-| Missing personalised asthma action plan (PAAP) | Hard flag if no PAAP on file (NRAD criterion) |
+| Missing personalized asthma action plan (PAAP) | Hard flag if no PAAP on file (NRAD criterion) |
 
 ## Regulatory framework
 

@@ -44,7 +44,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -71,7 +71,7 @@ narratives, used to drive classification, severity, and flags:
 `motor_neurone_disease_features`, `myopathy`, `neuromuscular_junction_disorder`,
 `normal_study`.
 
-Characterisation: `severity` (mild / moderate / severe / not-applicable) and
+Characterization: `severity` (mild / moderate / severe / not-applicable) and
 `pattern` (demyelinating / axonal / mixed / not-applicable).
 
 ### Finding-to-interpretation mapping
@@ -97,7 +97,7 @@ Completed in order on a single continuous single-page wizard (~7 sections).
 | 2 | Study details | study type, region, laterality, study adequacy |
 | 3 | Clinical history | clinical history, comparison with previous studies |
 | 4 | Findings | nerve-conduction findings, EMG findings + structured finding booleans |
-| 5 | Characterisation | severity, pattern |
+| 5 | Characterization | severity, pattern |
 | 6 | Impression | impression, reporting category, recommended follow-up |
 | 7 | Interpretation & sign-off | computed four-axis grade, flags, recommendation, critical-result communication, signature |
 
@@ -151,7 +151,7 @@ nerve-conduction-study-test-result/
   tunnel syndrome* (mild / moderate / severe severity grading; reaffirmed).
   <https://www.aanem.org/docs/default-source/documents/cts_reaffirmed.pdf>
 - AAN / AANEM / AAPM&R Practice Parameter: *Evaluation of distal symmetric
-  polyneuropathy* (axonal vs demyelinating characterisation).
+  polyneuropathy* (axonal vs demyelinating characterization).
   <https://www.neurology.org/doi/10.1212/01.wnl.0000336370.51010.a1>
 - AANEM — *Carpal Tunnel Syndrome: an AANEM Quality Measure Set*
   (electrodiagnostic quality measures).

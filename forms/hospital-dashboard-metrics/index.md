@@ -107,7 +107,7 @@ hospital-dashboard-metrics/
 - [`hospital-performance-indicators`](../hospital-performance-indicators) —
   a Balanced Scorecard (Finance / Process / Learning & Growth /
   Customer) hospital indicator set; overlaps with some metrics here
-  (e.g. ALOS, bed occupancy, mortality rate) but organised by strategic
+  (e.g. ALOS, bed occupancy, mortality rate) but organized by strategic
   perspective rather than department.
 
 ## Compliance

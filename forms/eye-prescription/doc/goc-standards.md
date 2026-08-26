@@ -17,7 +17,7 @@ Source: <https://standards.optical.org/>
 | **3.** Obtain valid consent. | Step 1 (Prescriber) and step 11 (Sign-off) record a `consent_obtained` boolean. |
 | **4.** Show care and compassion for your patients. | n/a — behavioural standard. |
 | **5.** Keep your knowledge and skills up to date. | n/a — practitioner standard. |
-| **6.** Recognise, and work within, your limits of competence. | Step 11 includes an explicit *refer to ophthalmologist* button that fires the `refer-ophthalmology` flag. |
+| **6.** Recognize, and work within, your limits of competence. | Step 11 includes an explicit *refer to ophthalmologist* button that fires the `refer-ophthalmology` flag. |
 | **7.** Conduct appropriate assessments, examinations, treatments and referrals. | Steps 4 (Visual acuity), 5–6 (Refraction), 10 (Ocular health) and the safety-flag engine. |
 | **8.** Maintain adequate patient records. | Every field is timestamped, soft-deletable, and includes the prescriber's GOC number; the FHIR Bundle is exportable to the EHR. |
 | **9.** Ensure that supervision is undertaken appropriately. | Step 1 captures the prescriber's role (`optometrist` / `dispensing optician`) and optional supervising practitioner. |

@@ -120,12 +120,12 @@ Completed in order on one continuous single-page wizard.
 
 ## Clinical references
 
-- NHS England. *Structured Medication Reviews and Medicines Optimisation:
+- NHS England. *Structured Medication Reviews and Medicines Optimization:
   guidance* (Network Contract DES).
 - O'Mahony D. *et al.* STOPP/START criteria for potentially inappropriate
   prescribing in older people, version 3. *Age and Ageing* 2023.
 - Boustani M. *et al.* Anticholinergic Cognitive Burden (ACB) scale.
-- NICE NG5. *Medicines optimisation: the safe and effective use of medicines.*
+- NICE NG5. *Medicines optimization: the safe and effective use of medicines.*
 - NICE NG197. *Shared decision making.*
 - PrescQIPP / NHS *Polypharmacy: Getting our medicines right.*
 

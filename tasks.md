@@ -159,14 +159,14 @@ heterogeneous per-form work, NOT a clean mechanical sweep. Findings:
   (`icvp-form-state`, `adr.form.v1`, `who-surgical-safety-checklist-draft`),
   and ~100 form-app.js files have no `STORAGE_KEY` constant at all (state is
   persisted elsewhere or not at all). So a generic "export the localStorage
-  blob" approach is not reliable — **first normalise the STORAGE_KEY
-  convention** (a `bin/` normaliser + `--check`) as a prerequisite.
+  blob" approach is not reliable — **first normalize the STORAGE_KEY
+  convention** (a `bin/` normalizer + `--check`) as a prerequisite.
 - Export/import exists in only 2 forms; each `form-app.js` is bespoke (the
   `state` object is module-local), so export needs per-form wiring OR a
   refactor to expose a common `getState()`/`setState()` hook per form.
-- Recommended sequencing: (0) normalise STORAGE_KEY; (1) add a shared
+- Recommended sequencing: (0) normalize STORAGE_KEY; (1) add a shared
   `getState()`/`setState()` seam to each form-app.js (mechanical once the key
-  is normalised); (2) drop in a shared `js/form-io.js` (export JSON/XML/CSV/
+  is normalized); (2) drop in a shared `js/form-io.js` (export JSON/XML/CSV/
   TSV + import) referenced from index.html; (3) roll out via subagents in
   batches, verified by the E2E harness (round-trip export→import→same report).
 
@@ -191,7 +191,7 @@ Design each feature on the reference forms
       still pending.
 - [x] **Dashboard CSV/TSV export (HTML)** on all 286 dashboards. Shared,
       form-agnostic `js/table-export.js` self-injects "Download CSV" / "Download
-      TSV" buttons above the dashboard's data table and serialises the rendered
+      TSV" buttons above the dashboard's data table and serializes the rendered
       header + visible rows (respecting filters/sort) with correct delimiter
       escaping. Rolled out mechanically (283 via `<script src>`, 3 inline for
       the no-`js/` dashboards). Verified by `e2e/tests/dashboard-export.spec.ts`
@@ -354,7 +354,7 @@ Design each feature on the reference forms
       `onsubmit="return false;"` + live recompute-on-input and no `js/` dir; its
       `report.html` is an intentional standalone printable artifact, not wizard
       navigation. The full `bin/test-e2e --html --all` sweep passes it. The
-      ES-modules refactor correctly skipped it — nothing to modularise.)*
+      ES-modules refactor correctly skipped it — nothing to modularize.)*
 - [i] **Representation-coverage audit — CORRECTED (2026-07-14).** The earlier
       audit (2026-07-13) wrongly called the FHIR-only extra file a "synthetic
       `grading_result`" and declared it intentional. It was NOT: `grading_result`
@@ -486,7 +486,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       types→rules→flags→grader order), discovers the grader + default-state
       factory, runs the grader over the default state, and asserts structured
       output. **PASS 220 / SKIP 63 / FAIL 0** (0 broken engines; 63 SKIP are
-      ESM engines, inline computation, or unrecognised entry points, reported
+      ESM engines, inline computation, or unrecognized entry points, reported
       honestly via `--verbose`). Wired into `bin/test-tools` + CI. This is the
       reusable engine-execution half of the oracle; the remaining work is the
       per-form fixture→engine-state adapter that yields the actual `expected`

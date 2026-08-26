@@ -1,13 +1,13 @@
 # WHO Emergency Unit Form: General
 
-World Health Organization standardised emergency unit clinical documentation form for general (non-trauma) patients.
+World Health Organization standardized emergency unit clinical documentation form for general (non-trauma) patients.
 
 This comprehensive two-page form captures patient registration, arrival and ambulance details, initial vital signs with pain scale, high risk signs, triage category, ABCD primary survey with interventions, history of present illness, review of systems (14 systems), past medical history, physical exam (12 body systems), diagnostics (labs with diagram, imaging, ECG), additional interventions (medications and procedures), assessment and plan, reassessment, and disposition. Designed for use with the WHO General Reference Card.
 
 ## Source
 
 - **Form**: WHO Emergency Unit Form: General
-- **Organisation**: World Health Organization (WHO)
+- **Organization**: World Health Organization (WHO)
 - **URL**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf.pdf?sfvrsn=ebdc8087_1>
 - **Reference Card**: <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf-ref-card.pdf?sfvrsn=f55fd6d5_1>
 - **Pages**: 2

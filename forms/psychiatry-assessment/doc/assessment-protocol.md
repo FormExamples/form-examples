@@ -50,8 +50,8 @@ The MSE is conducted throughout the interview. Specific cues to observe:
   insertion/broadcasting/withdrawal).
 - **Perceptual abnormalities**: hallucinations (modality, command,
   third-person, second-person, running commentary, hypnagogic,
-  hypnopompic), pseudohallucinations, illusions, derealisation,
-  depersonalisation.
+  hypnopompic), pseudohallucinations, illusions, derealization,
+  depersonalization.
 - **Cognition**: orientation, attention (digit span, serial 7s),
   short-term and long-term memory, abstract reasoning (similarities,
   proverbs), executive function (Frontal Assessment Battery).

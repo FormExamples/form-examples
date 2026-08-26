@@ -1,6 +1,6 @@
 # Vaccinations Checklist
 
-Immunisation status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
+Immunization status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.
 
 ## Directory structure
 
@@ -14,7 +14,7 @@ Immunisation status tracking for healthcare workers and patients covering routin
 ## Scoring system
 
 - **Instrument**: Vaccination Compliance Classification
-- **Range**: Fully Immunised, Partially Immunised, Non-Compliant, Contraindicated
+- **Range**: Fully Immunized, Partially Immunized, Non-Compliant, Contraindicated
 - **Risk Levels**: Low, Moderate, High, Critical
 - **Engine files**: `types.ts`, `vaccination-grader.ts`, `flagged-issues.ts`, `utils.ts`
 - **Test file**: `vaccination-grader.test.ts`
@@ -23,7 +23,7 @@ Immunisation status tracking for healthcare workers and patients covering routin
 
 1. Demographics - `Step1Demographics.svelte`
 2. Vaccination History - `Step2VaccinationHistory.svelte`
-3. Childhood Immunisations - `Step3ChildhoodImmunisations.svelte`
+3. Childhood Immunizations - `Step3ChildhoodImmunisations.svelte`
 4. Occupational Vaccines - `Step4OccupationalVaccines.svelte`
 5. Travel Vaccines - `Step5TravelVaccines.svelte`
 6. COVID-19 Vaccination - `Step6Covid19Vaccination.svelte`

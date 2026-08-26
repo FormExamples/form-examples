@@ -3,7 +3,7 @@
 Microbiology culture test result (report). A reporting clinician (consultant
 microbiologist, biomedical scientist, or infection specialist) completes a
 single-page wizard recording the processed specimen's **findings** (Gram stain,
-culture, organisms, sensitivities, resistance markers, specialised tests) and a
+culture, organisms, sensitivities, resistance markers, specialized tests) and a
 structured **interpretation**; the engine computes a **four-axis interpretation
 grade** (result classification, abnormality severity / structured reporting,
 report completeness, follow-up urgency) plus safety flags, and produces a

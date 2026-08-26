@@ -85,7 +85,7 @@ Access to Work
 Access to Work is discretionary grant that can provide practical and financial support to people with a disability or health condition to help them stay in, or return to, work. The grant contributes to the disability related extra costs of working faced by disabled people and those with a health condition that are beyond reasonable adjustment, but it does not replace an employer’s duty under the Equality Act to make reasonable adjustments.
 
 The Health Adjustment Passport
-The Health Adjustment Passport (HAP) is used to support patients with a new or an existing health condition to identify what help and changes are available to support them to stay in, or return to, work. Patients may use this form to talk to their organisation about reasonable adjustments and support that they may need and support any Access to Work applications.
+The Health Adjustment Passport (HAP) is used to support patients with a new or an existing health condition to identify what help and changes are available to support them to stay in, or return to, work. Patients may use this form to talk to their organization about reasonable adjustments and support that they may need and support any Access to Work applications.
 
 Help with personal or social problems
 Fit notes can only be issued for medical problems. Your healthcare professional may be able to refer you to support for other personal or social problems. For example:
@@ -121,7 +121,7 @@ NHS Health at Work Network – Support for Business
 
 Using occupational health at work: Occupational health - Acas
 
-Supporting organisational health and wellbeing professionals
+Supporting organizational health and wellbeing professionals
 
 Safe Effective Quality Occupational Health Service
 

@@ -23,7 +23,7 @@ patient, and is aligned with the British Nuclear Medicine Society (BNMS)
 clinical guidelines, the European Association of Nuclear Medicine (EANM) and
 Society of Nuclear Medicine and Molecular Imaging (SNMMI) procedure guidelines,
 the Royal College of Radiologists (RCR) *Standards for the interpretation and
-reporting of imaging investigations*, and the UK Ionising Radiation (Medical
+reporting of imaging investigations*, and the UK Ionizing Radiation (Medical
 Exposure) Regulations — IR(ME)R 2017.
 
 ## Scope and intended users
@@ -46,7 +46,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |
@@ -140,10 +140,10 @@ nuclear-medicine-test-result/
   categories: high probability, normal, very low, non-diagnostic/intermediate).
   <https://tech.snmjournals.org/content/40/1/57>
 - RCR — Standards for the interpretation and reporting of imaging investigations
-  (third edition). Emphasises *actionable reporting* and applies to all who
+  (third edition). Emphasizes *actionable reporting* and applies to all who
   report imaging.
   <https://www.rcr.ac.uk/our-services/all-our-publications/clinical-radiology-publications/standards-for-interpretation-and-reporting-of-imaging-investigations-third-edition/>
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 — IR(ME)R
   (dose audit; administered activity recorded per study).
   <https://www.legislation.gov.uk/uksi/2017/1322/contents/made>
 
@@ -156,7 +156,7 @@ grounded reference set and how each source maps to the schema.
   support; Class IIa where the interpretation output drives downstream
   management.
 - UK Medical Devices Regulations 2002.
-- UK Ionising Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
+- UK Ionizing Radiation (Medical Exposure) Regulations 2017 (IR(ME)R).
 - ISO/IEC/IEEE 26514:2022.
 - UK MHRA *Software and AI as a Medical Device*.
 - NHS Data Security and Protection Toolkit.

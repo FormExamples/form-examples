@@ -1,6 +1,6 @@
 # Mental Capacity Act 2005 — Legal Framework
 
-This document summarises the parts of the Mental Capacity Act 2005
+This document summarizes the parts of the Mental Capacity Act 2005
 (c. 9) ("MCA 2005") and the Lasting Powers of Attorney, Enduring
 Powers of Attorney and Public Guardian Regulations 2007
 (SI 2007/1253) ("LPA Regs 2007") that are relevant to the LP1F deed
@@ -233,7 +233,7 @@ that expands ss. 1–4 and is referenced throughout the LP12 Guide.
 
 ## 10. Updates: Powers of Attorney Act 2023
 
-The Powers of Attorney Act 2023 (c. 22) modernises LPA registration
+The Powers of Attorney Act 2023 (c. 22) modernizes LPA registration
 (digital first, photo-ID checks, online objection). It is being
 phased in; the current LP1F October 2025 issue and the validator
 implement the pre-existing paper-and-form workflow described in this

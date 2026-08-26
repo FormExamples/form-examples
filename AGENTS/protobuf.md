@@ -3,7 +3,7 @@
 Protocol Buffers (`.proto`) schemas for each form, **generated** from
 `sql/` (the source of truth — see `spec.md` §3.1). One `.proto`
 file is produced per top-level SQL table entity, so that a form's data can
-be serialised, transmitted, or code-generated into any of the languages the
+be serialized, transmitted, or code-generated into any of the languages the
 protobuf compiler supports. Do not hand-edit; re-run the generator after
 schema changes.
 
@@ -73,7 +73,7 @@ names on column-name collisions to keep every field unique.
 | `REAL`                                      | `float`     |                                    |
 | `DOUBLE PRECISION`                          | `double`    |                                    |
 | `TEXT`, `VARCHAR(n)`, `CHAR(n)`             | `string`    | length recorded as a comment       |
-| `JSON`, `JSONB`                             | `string`    | serialised JSON                    |
+| `JSON`, `JSONB`                             | `string`    | serialized JSON                    |
 | `BYTEA`                                     | `bytes`     |                                    |
 
 Columns with `CHECK (... IN (...))` constraints become a proto `enum`

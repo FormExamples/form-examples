@@ -23,7 +23,7 @@ an optional free-text remark.
 - `1.5` — Chambers of Doctors & Specialist, patient's sitting arrangement, patient disposal.
 - `1.6` — Dispensary — availability of drugs, pharmacist, duty roster.
 - `1.7` — Grievance redressal by RMO / Superintendent.
-- `1.8` — Minor O.T. — dressing material, instruments, sterilised drums, gloves etc.
+- `1.8` — Minor O.T. — dressing material, instruments, sterilized drums, gloves etc.
 - `1.9` — Plaster room, injection room — availability of material & performance status.
 - `1.10` — Referral register.
 - `1.11` — Enquire whether patients are getting medicine or not.
@@ -189,4 +189,4 @@ proforma (Resident Medical Officer / Medical Superintendent daily
 checklist format). Item text is preserved as closely as possible to
 the source, with obvious OCR-style abbreviations expanded for
 readability (e.g. "O.T." kept, ampersands kept, minor punctuation
-normalised).
+normalized).

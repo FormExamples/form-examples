@@ -13,13 +13,13 @@
 - NHS Constitution.
   <https://www.gov.uk/government/publications/the-nhs-constitution-for-england>
 
-## Clinical prioritisation
+## Clinical prioritization
 
 - Royal College of Surgeons of England. *Clinical Guide to Surgical
-  Prioritisation during the Coronavirus Pandemic.*
-  <https://www.rcseng.ac.uk/coronavirus/clinical-prioritisation-of-elective-surgery/>
+  Prioritization during the Coronavirus Pandemic.*
+  <https://www.rcseng.ac.uk/coronavirus/clinical-prioritization-of-elective-surgery/>
 - Federation of Surgical Specialty Associations. *Surgical
-  prioritisation maintained guidance.*
+  prioritization maintained guidance.*
   <https://fssa.org.uk/covid-19_documents.aspx>
 - NHS England. *Elective care transformation.*
   <https://www.england.nhs.uk/elective-care-transformation/>

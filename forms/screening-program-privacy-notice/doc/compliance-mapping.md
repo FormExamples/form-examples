@@ -2,7 +2,7 @@
 
 This document maps each clause of the Screening Program Privacy Notice to
 the UK GDPR / DPA 2018 / NHS-Act 2006 / Public-Health instrument that
-authorises the processing.
+authorizes the processing.
 
 ## Article 13 fulfilment matrix
 
@@ -27,7 +27,7 @@ authorises the processing.
 | Screening surveillance to UKHSA | 6(1)(c) | 9(2)(i) | statutory under Health Protection (Notification) Regulations 2010 | No |
 | Screening service planning & quality audit | 6(1)(e) | 9(2)(h) | s.251 CAG approval | Yes |
 | Approved screening research | 6(1)(e) | 9(2)(j) | s.251 CAG approval + HRA approval | Yes |
-| Anonymised statistics | outside UK GDPR | n/a | Anonymisation Code | No (not personal data) |
+| Anonymized statistics | outside UK GDPR | n/a | Anonymization Code | No (not personal data) |
 
 ## Practice-customisable block
 
@@ -35,7 +35,7 @@ The form includes a `practice_config` block so each practice fills in:
 
 - Practice name and contact.
 - DPO contact.
-- Named local research organisations participating in screening cohorts.
+- Named local research organizations participating in screening cohorts.
 - The local CAG approval reference where applicable.
 
 This satisfies the Art. 13(1)(a) / (e) requirements at the local-controller
@@ -53,7 +53,7 @@ impair the achievement of an archiving / research / statistical purpose:
   statistical comparability.
 
 ICO research provisions:
-<https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-and-research-information/>
+<https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/data-protection-and-research-information/>
 
 ## National Data Opt-Out scope
 

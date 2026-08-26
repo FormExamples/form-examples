@@ -27,7 +27,7 @@ conventions: [`../../AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.
 
 The GRACE weighted regression point model. Each of the eight admission variables
 maps through a weighted, banded lookup (`grace-rules.ts`): age, heart rate,
-systolic BP (inverse weight), serum creatinine (normalised to mg/dL), Killip
+systolic BP (inverse weight), serum creatinine (normalized to mg/dL), Killip
 class, plus three yes/no contributors (cardiac arrest +39, ST-segment deviation
 +28, elevated enzymes +14). The points sum to the GRACE total, read against the
 in-hospital (108 / 140) and 6-month (88 / 118) mortality-band thresholds; the
@@ -39,7 +39,7 @@ numeric input contributes 0 points and raises a data-completeness flag.
 - Empty string `''` for unanswered text / enum fields; `null` for numeric.
 - camelCase property names in TypeScript.
 - Serum creatinine stores both the raw value and the entered unit; scoring
-  normalises to mg/dL.
+  normalizes to mg/dL.
 - Store submit-time validation + `ErrorSummary`; `Form.svelte` carries
   `novalidate` (native constraint validation must not block submit).
 - Full Lily token migration — no hardcoded palette classes.

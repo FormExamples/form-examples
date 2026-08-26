@@ -20,7 +20,7 @@ Relevant alignments:
   windows with imaging selection.
 - **§1.4.17–§1.4.22**: mechanical thrombectomy criteria.
 
-The form's NIHSS step provides the standardised severity input for these
+The form's NIHSS step provides the standardized severity input for these
 decision pathways.
 
 ## NICE NG137 — Epilepsies in children, young people and adults
@@ -32,7 +32,7 @@ URL: https://www.nice.org.uk/guidance/ng217
 NG217 covers epilepsy diagnosis and management. The Seizure History step
 prompts capture of:
 
-- Seizure type (focal, generalised, unknown).
+- Seizure type (focal, generalized, unknown).
 - Frequency and triggers.
 - First-aid measures used.
 - Antiseizure medication history.

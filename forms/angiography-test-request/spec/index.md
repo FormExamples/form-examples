@@ -31,7 +31,7 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 ## 3. Scoring system
 
 The engine grades each request on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a highly appropriate request can still be
+recognized body. Axes are orthogonal: a highly appropriate request can still be
 unsafe for contrast, incomplete, or urgent.
 
 | Axis | Instrument | Output |
@@ -42,7 +42,7 @@ unsafe for contrast, incomplete, or urgent.
 | **D. Triage priority** | Acuity escalation rules | routine / urgent / emergency (+ target timeframe) |
 
 A safety-critical condition (eGFR < 30 with iodinated contrast, severe contrast
-allergy, active bleeding on anticoagulation, or pregnancy with ionising
+allergy, active bleeding on anticoagulation, or pregnancy with ionizing
 radiation) drives the safety band toward **contraindicated** and is surfaced as
 a high-priority flag regardless of the other axes.
 

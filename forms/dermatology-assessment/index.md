@@ -1,6 +1,6 @@
 # Dermatology Assessment
 
-Dermatological quality of life evaluation using the DLQI (Dermatology Life Quality Index) with lesion characterisation.
+Dermatological quality of life evaluation using the DLQI (Dermatology Life Quality Index) with lesion characterization.
 
 ## Scoring system
 

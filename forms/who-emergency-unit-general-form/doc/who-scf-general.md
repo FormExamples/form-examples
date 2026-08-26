@@ -1,4 +1,4 @@
-# WHO Emergency Unit Standardised Clinical Form: General
+# WHO Emergency Unit Standardized Clinical Form: General
 
 This form implements the WHO standard clinical-encounter form for
 non-trauma adult and paediatric presentations to a hospital emergency
@@ -10,7 +10,7 @@ Services, Clinical Services and Systems unit.
 
 - **Form PDF** — WHO. *Emergency Unit Form: General*.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf.pdf>
-- **Reference card PDF** — WHO. *General Standardised Clinical Form
+- **Reference card PDF** — WHO. *General Standardized Clinical Form
   Reference Card*.
   <https://cdn.who.int/media/docs/default-source/integrated-health-services-(ihs)/csy/general-scf-ref-card.pdf>
 - **Emergency Care Toolkit** —

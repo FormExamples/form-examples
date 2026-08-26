@@ -40,7 +40,7 @@ instrument in UK respiratory practice.
 | Grade | Clinical implication |
 | --- | --- |
 | MRC 1 (mMRC 0) | Mild impact; reassure; address risk factors |
-| MRC 2 (mMRC 1) | Optimise inhaled therapy; smoking cessation |
+| MRC 2 (mMRC 1) | Optimize inhaled therapy; smoking cessation |
 | MRC 3 (mMRC 2) | **Pulmonary rehabilitation referral** per BTS 2013 |
 | MRC 4 (mMRC 3) | Pulmonary rehab essential; consider LTOT screening |
 | MRC 5 (mMRC 4) | Housebound; consider LTOT, palliative dyspnoea care |

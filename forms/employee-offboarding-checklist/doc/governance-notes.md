@@ -12,7 +12,7 @@ The Employee Offboarding Checklist is an HR information system. It is
 | Final pay administration | UK GDPR Art. 6(1)(b) — contract |
 | Statutory payroll and pension records | UK GDPR Art. 6(1)(c) — legal obligation |
 | Settlement agreement | UK GDPR Art. 6(1)(b) — contract; UK GDPR Art. 9(2)(b) where health data is referenced |
-| Exit interview aggregation | UK GDPR Art. 6(1)(f) — legitimate interests; anonymised |
+| Exit interview aggregation | UK GDPR Art. 6(1)(f) — legitimate interests; anonymized |
 | Reference administration | UK GDPR Art. 6(1)(f) — legitimate interests (giver) and Art. 6(1)(c) for FCA-regulated firms |
 
 References:
@@ -21,11 +21,11 @@ References:
 - Data Protection Act 2018.
   <https://www.legislation.gov.uk/ukpga/2018/12/contents>
 - ICO — Employment practices guidance.
-  <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment-information/>
+  <https://ico.org.uk/for-organizations/uk-gdpr-guidance-and-resources/employment-information/>
 
 ## Retention
 
-HR records retention follows the organisation's published schedule.
+HR records retention follows the organization's published schedule.
 Typical UK practice:
 
 - **Payroll records**: 6 years after end of tax year (HMRC).

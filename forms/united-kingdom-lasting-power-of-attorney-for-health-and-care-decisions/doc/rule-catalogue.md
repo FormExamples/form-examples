@@ -88,7 +88,7 @@ The composite cascade is: any **fatal** → `invalid`; else any **high** →
 | --- | --- | --- | --- |
 | `R-MCA-INSTR-LAW` | every instruction.lawfulness_assessed = 'yes' | high | MCA 2005 s.9(4) |
 | `R-MCA-INSTR-ADRT` | no instruction.contradicts_adrt = 'yes' | high | MCA 2005 s.25 |
-| `R-MCA-COP-PROHIBITED` | no instruction authorises assisted dying or unlawful restraint | fatal | Suicide Act 1961 s.2; MCA 2005 s.6 |
+| `R-MCA-COP-PROHIBITED` | no instruction authorizes assisted dying or unlawful restraint | fatal | Suicide Act 1961 s.2; MCA 2005 s.6 |
 
 ## Registration rules (`R-MCA-REG-…`, `R-MCA-NOTIFY-…`, `R-MCA-FEE-…`)
 

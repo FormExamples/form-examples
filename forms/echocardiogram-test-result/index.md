@@ -20,7 +20,7 @@ clinician-driven result forms. It is completed by a cardiologist, cardiac
 physiologist, sonographer, or other reporting clinician rather than by the
 patient, and is aligned with the British Society of Echocardiography (BSE)
 minimum dataset for adult transthoracic echocardiography, the ASE/EACVI
-recommendations for cardiac chamber quantification, and recognised valve-disease
+recommendations for cardiac chamber quantification, and recognized valve-disease
 severity-grading conventions.
 
 ## Scope and intended users
@@ -43,7 +43,7 @@ rather than vetting a referral.
 ## Interpretation grading
 
 The engine grades each result on **four independent axes**, each citable to a
-recognised body. Axes are orthogonal: a complete, well-structured report can
+recognized body. Axes are orthogonal: a complete, well-structured report can
 still describe a critical finding.
 
 | Axis | Instrument | Output |

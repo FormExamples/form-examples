@@ -1,6 +1,6 @@
 # Employee Offboarding Checklist
 
-Structured offboarding checklist ensuring every departing employee completes the administrative, operational, and knowledge-transfer steps required to protect patient safety, organisational data, and service continuity.
+Structured offboarding checklist ensuring every departing employee completes the administrative, operational, and knowledge-transfer steps required to protect patient safety, organizational data, and service continuity.
 
 ## Directory structure
 

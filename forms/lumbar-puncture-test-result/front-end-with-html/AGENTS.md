@@ -9,7 +9,7 @@ Agent instructions for this directory. See the form root [`../index.md`](../inde
   of `../front-end-with-svelte/src/lib/engine/*.ts`. Rule IDs, flag IDs,
   categories, and descriptions are verbatim-identical across every front-end and
   the back-end. Do not rename or renumber them.
-- Numeric fields serialise `''` → `null` (never `NaN`); localStorage
+- Numeric fields serialize `''` → `null` (never `NaN`); localStorage
   rehydration is null-safe for `number | null` fields.
 - Required fields carry `data-required`; `validateForm` targets
   `input[data-required], select[data-required], textarea[data-required]`.

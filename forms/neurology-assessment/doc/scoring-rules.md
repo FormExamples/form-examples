@@ -47,7 +47,7 @@ subsequent stroke literature.
 ## Administration standards
 
 The NIHSS must be administered in a **fixed sequence**, with item-specific
-prompts and standardised stimuli. The official NINDS training and
+prompts and standardized stimuli. The official NINDS training and
 certification programme is available at:
 
 - https://www.ninds.nih.gov/health-information/public-education/know-stroke

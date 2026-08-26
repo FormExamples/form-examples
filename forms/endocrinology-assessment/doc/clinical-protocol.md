@@ -44,10 +44,10 @@ Operational protocol the endocrinology assessment encodes.
 9. **Medications & Lifestyle Review.** Endocrine-active drugs (steroids,
    amiodarone, lithium, opioids, antipsychotics), supplements
    (iodine, biotin which can falsely lower TSH).
-10. **Clinical Impression & Management Plan.** Per-axis categorisation
+10. **Clinical Impression & Management Plan.** Per-axis categorization
     (Normal / Subclinical / Mild / Moderate / Severe) and onward plan.
 
-## Per-axis categorisation rule of thumb
+## Per-axis categorization rule of thumb
 
 - **Normal**: clinically and biochemically within reference range.
 - **Subclinical**: biochemical abnormality without symptoms (e.g.
