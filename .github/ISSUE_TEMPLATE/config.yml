@@ -1,0 +1,11 @@
+# Route security reports away from the public tracker before they start.
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability (private)
+    url: https://github.com/FormExamples/form-examples/blob/main/SECURITY.md
+    about: >-
+      Do not open a public issue for a suspected vulnerability. SECURITY.md
+      has the private reporting route, scope, and response commitments.
+  - name: Press / media
+    url: https://github.com/FormExamples/form-examples/blob/main/NEWS.md
+    about: Fact sheet, boilerplate, and the press contact.

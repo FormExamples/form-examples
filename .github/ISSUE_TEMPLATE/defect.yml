@@ -1,0 +1,41 @@
+name: Defect report
+description: Something is broken — a form, a gate, a generator, a build.
+labels: [defect]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thanks — defect reports are genuinely useful to this project.
+        One report per defect, please. For a suspected **security**
+        vulnerability, stop here and follow
+        [SECURITY.md](https://github.com/FormExamples/form-examples/blob/main/SECURITY.md)
+        instead of opening a public issue.
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: >-
+        Form slug and stack, or the tool/path. Examples: `apgar-score`
+        front-end-with-html; `bin/test-engines`; `forms/*/sql/`.
+      placeholder: apgar-score / front-end-with-svelte
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens, and what should happen instead
+      description: A failing command or a minimal reproduction beats prose.
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, and versions of whatever is involved (Node, Rust, Postgres, Python).
+      placeholder: macOS 15 / Node 22 / rustc 1.98 / Postgres 18
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Verify gates
+      options:
+        - label: I ran the relevant `--check` gate or test tool and can paste its output

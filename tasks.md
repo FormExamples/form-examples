@@ -27,11 +27,10 @@ Gate-truth repair (Phase 8) largely landed same-day: **all 29 cheap verify
 gates green** (`test-tools` 21 ok / 0 failed) after the ESM engine-loader
 rebuild (test-engines PASS 279/SKIP 76/FAIL 0; test-personas PASS 109, zero
 oracle diff), the es-modules indent fix, and the Lily re-pin to `e05a138e6`
-with fleet theme re-sync. **Phase 8 completed the same day**: the loco-rs
-1.1.0 bump fleet-verified (355/355 `cargo check`) and committed; the clippy
-pedantic debt cleared in all 8 strict crates; checkout-pin guards landed
-(and immediately caught upstream moving again); `bin/test` now survives a
-DB-less machine. Working tree clean. Next: Phase 9 (CI completeness).
+with fleet theme re-sync. **Phases 8 and 9 completed the same day**
+(gate truth; CI completeness — see each phase), and Phase 10's tooling half
+too. Open: three maintainer decisions in Phase 10 (first release tag —
+recommendation v1.0.0; Zenodo DOI; licence fit), then Phases 11-12.
 
 ## Status summary (2026-07-13)
 
@@ -663,17 +662,32 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       harness, weekly; the 355-crate fleet deliberately excluded (lockstep
       sweeps, not 355 bump PRs — reasoning recorded in the file).
 
-## Phase 10 — R2 professionalization
+## Phase 10 — R2 professionalization — tooling done; 3 maintainer decisions open
 
-- [ ] `.github/ISSUE_TEMPLATE/` (defect / clinical-correctness / security
-      pointer per SECURITY.md) + `PULL_REQUEST_TEMPLATE.md` with the
-      AI-disclosure line per `AI_STATEMENT.md` §10.
-- [ ] Tag the first release per GOVERNANCE.md; move `CHANGELOG.md`
-      `[Unreleased]` under the version; update `NEWS.md`.
-- [ ] Document branch-protection / required-checks in GOVERNANCE.md; set
-      GitHub repo description + topics from `NEWS.md`'s fact sheet.
-- [ ] Maintainer decisions (record in spec): Zenodo DOI for `CITATION.cff`;
-      licence fit of CC BY-NC-SA for a code corpus (decision item only).
+- [x] **Issue + PR templates (2026-08-26):** `.github/ISSUE_TEMPLATE/`
+      (defect form; clinical-correctness form requiring a citation against
+      the published instrument; config.yml contact links routing security
+      to SECURITY.md's private path and press to NEWS.md) +
+      `PULL_REQUEST_TEMPLATE.md` (spec-first / regenerate / gates /
+      uniformity / CHANGELOG checklist, and the AI-disclosure section per
+      `AI_STATEMENT.md` §10 — in the PR description, never trailers).
+- [x] **Governance of settings (2026-08-26):** GOVERNANCE.md gains a
+      Repository settings section (branch protection = the per-push CI
+      checks required, no force push; review-requirement deliberately off
+      at bus factor one — the honest control is the gates) and a 5-step
+      release runbook. GitHub topics set from the fact sheet (14 topics,
+      via gh); description left as the maintainer's wording.
+- [ ] **Maintainer decision — first release:** everything is staged (green
+      gates, populated `[Unreleased]`, runbook in GOVERNANCE.md §Releases).
+      Recommendation: `v1.0.0`. The tag itself is the maintainer's act
+      (GOVERNANCE.md; AI_STATEMENT.md §5 release-decisions: none).
+- [ ] **Maintainer decision — Zenodo DOI** for `CITATION.cff` (link the
+      GitHub repo to Zenodo before the first release so the release mints
+      the DOI; then add the DOI to CITATION.cff and NEWS.md).
+- [ ] **Maintainer decision — licence fit** of CC BY-NC-SA for a code
+      corpus (COMPARISONS.md names it a weakness). Decide and record in
+      the spec; if it ever changes, LICENSE.md, CITATION.cff, and
+      AI_STATEMENT.md §8 move together.
 
 ## Phase 11 — R3 functionality carry-overs (from Phases 3/6)
 

@@ -49,6 +49,14 @@ notes from `[Unreleased]`, and every section after it will carry a version.
 - `bin/test-vendored-uniformity` — proves the vendored theme catalogues and
   Lily Svelte helpers are byte-identical across all 355 forms (the
   CI-checkable half of the checkout-reading sync tools' invariant).
+- GitHub issue templates (defect; clinical-correctness, which requires a
+  citation against the published instrument; contact links routing security
+  reports to SECURITY.md's private path) and a pull-request template carrying
+  the spec-first checklist and the `AI_STATEMENT.md` §10 disclosure section.
+- GOVERNANCE.md documents the intended repository settings (branch
+  protection, required checks, why review-requirement stays off at bus
+  factor one) and a 5-step release runbook; repo topics set from NEWS.md's
+  fact sheet.
 
 ### Changed
 

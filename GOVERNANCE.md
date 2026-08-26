@@ -84,6 +84,40 @@ repository level, and each form carries its own `CHANGELOG.md` under
 Keep-a-Changelog and SemVer. Release decisions are the maintainer's and no
 tool's.
 
+The mechanics, so a release is a checklist and not an improvisation:
+
+1. All CI jobs green on the candidate commit.
+2. Move the root `CHANGELOG.md` `[Unreleased]` content under the new version
+   heading with today's date; pick the version by SemVer against the
+   repository-level surface (the conventions, the toolchain contracts, the
+   per-form layout).
+3. Update `NEWS.md` (a Latest entry; refresh the fact sheet's measured
+   numbers).
+4. Commit, then `git tag -a vX.Y.Z -m "vX.Y.Z"` and push the tag; create the
+   GitHub release with the changelog section as its notes.
+5. Review `AI_STATEMENT.md` — its §13 ties review to releases.
+
+## Repository settings
+
+The GitHub-side settings are part of governance but live outside the tree, so
+this section records what they are meant to be; if the settings and this
+section disagree, one of them is wrong and the fix lands as a PR to this file
+or a settings change, deliberately.
+
+- **Branch protection on `main`**: require the CI checks that run on every
+  push — Structure validation, Drift detectors, SQL apply gate, FHIR R5
+  validation, and the Rust and Svelte shards — to pass before merge; no
+  force pushes; no branch deletion. With a bus factor of one
+  ([`MAINTAINERS.md`](MAINTAINERS.md)), "require pull request reviews" is
+  deliberately **not** enabled: there is nobody to review, and pretending
+  otherwise would only mean self-approval theatre. The protection that is
+  real at this size is the machine gates.
+- **Issues**: enabled, with the templates in `.github/ISSUE_TEMPLATE/`
+  (defect, clinical correctness, and a private-route pointer for security
+  per [`SECURITY.md`](SECURITY.md)).
+- **Description and topics**: kept in line with the fact sheet in
+  [`NEWS.md`](NEWS.md).
+
 ## Changing this document
 
 By pull request, like everything else. The maintainer decides.

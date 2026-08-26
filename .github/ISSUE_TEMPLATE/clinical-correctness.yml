@@ -1,0 +1,41 @@
+name: Clinical correctness report
+description: >-
+  A wrong threshold, a mis-implemented score or grading band, or a schema
+  that disagrees with the instrument it models.
+labels: [clinical-correctness]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        These are the most valuable reports this project receives: the machine
+        gates prove internal consistency, but only a person comparing against
+        the published instrument can catch a clinically wrong value
+        ([AI_STATEMENT.md §12](https://github.com/FormExamples/form-examples/blob/main/AI_STATEMENT.md)
+        says so plainly). Nothing here is clinically validated; reports like
+        yours are how the examples get better.
+  - type: input
+    id: form
+    attributes:
+      label: Form slug
+      placeholder: framingham-risk-score
+    validations:
+      required: true
+  - type: textarea
+    id: discrepancy
+    attributes:
+      label: What the implementation does vs what the instrument says
+      description: >-
+        The value, band, flag, or field in question — and what the published
+        source specifies instead.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Citation
+      description: >-
+        The published instrument, guideline, or form you are comparing
+        against — authors, year, and section/table if possible. The form's
+        own `doc/` directory lists what it was built from.
+    validations:
+      required: true
