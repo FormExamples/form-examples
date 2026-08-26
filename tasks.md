@@ -609,13 +609,23 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       (pre-anaesthesia-assessment, pre-operative-assessment-by-clinician)
       via `svelte-helpers-picker-rename --apply`. All Lily gates green;
       `bin/test-tools` 21 ok / 0 failed.
-- [ ] **Checkout-pin guards** (still worth doing): make the three
-      checkout-reading tools assert the local checkout commit equals the
-      recorded pin before comparing, and fail with "checkout the pin"
-      instead of reporting fleet drift when it merely moved.
-- [ ] **`bin/test` without a DB:** detect an unreachable Postgres up front
-      and skip the cargo portion with an explicit notice (matching
-      `TEST_FORM_SKIP_CARGO=1`), instead of dying 24 s in on `PoolTimedOut`.
+- [x] **Checkout-pin guards (2026-08-26):** new `bin/lib/lily_pin.py`
+      (`assert_lily_pin`), wired into `svelte-theme-css-sync`,
+      `html-theme-locale-select-refactor`, and
+      `svelte-helpers-picker-rename` right after arg parsing. A resolvable
+      checkout HEAD that contradicts the `forms/lily-version.md` pin now
+      aborts with the two remedies (checkout the pin / deliberately re-pin);
+      unverifiable checkouts (no `.git`, no pin file) proceed best-effort.
+      Vindicated within the hour: upstream moved again (`e05a138e6` →
+      `d891fff23`) and the tools now refuse cleanly instead of reporting
+      355-form phantom drift. The pin deliberately stays at the inspected
+      `e05a138e6` — no chasing an actively-moving upstream.
+- [x] **`bin/test` without a DB (2026-08-26):** `bin/test-form` now probes
+      `pg_isready` before the cargo-test gate and skips with an explicit
+      per-crate notice when no Postgres is reachable (missing `pg_isready`
+      counts as unreachable). Full `bin/test` on a DB-less machine:
+      355/355 structural PASS in 33 s, exit 0, 355 honest notices —
+      instead of dying at the first crate on `PoolTimedOut`.
 
 ## Phase 9 — R1 CI completeness + efficiency
 

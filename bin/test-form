@@ -100,6 +100,15 @@ rust_crate_exists_or_err() (
     if test "${TEST_FORM_SKIP_CARGO:-0}" = "1"; then
         return 0
     fi
+    # The cargo tests need a reachable Postgres (they seed per-crate DBs).
+    # Without one, every seeding test dies on PoolTimedOut ~20s in — skip
+    # with an explicit notice instead, so a DB-less run stays honest AND
+    # fast. CI supplies a service container; locally see CONTRIBUTING.md
+    # for the throwaway-Postgres recipe.
+    if ! pg_isready -q -h "${PGHOST:-localhost}" -p "${PGPORT:-5432}" 2>/dev/null; then
+        >&2 printf %s\\n "notice: no Postgres at ${PGHOST:-localhost}:${PGPORT:-5432} — skipping cargo test for $crate (set TEST_FORM_SKIP_CARGO=1 to silence, or start a DB per CONTRIBUTING.md)"
+        return 0
+    fi
     cd "$crate" && cargo test || err "cargo test failed: $crate"
 )
 

@@ -39,6 +39,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from lily_pin import assert_lily_pin  # noqa: E402
 LILY_HELPERS_DIR = Path(
     "~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-helpers"
 ).expanduser()
@@ -173,6 +176,8 @@ def main() -> int:
     mode.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     check = args.check
+    assert_lily_pin(LILY_HELPERS_DIR, REPO_ROOT)
+
 
     sources = {}
     for old_name, new_name, old_prefix, new_prefix, pkg_dir, upstream_file in CONTROLS:

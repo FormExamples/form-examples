@@ -31,6 +31,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from lily_pin import assert_lily_pin  # noqa: E402
 DEFAULT_LILY_THEMES_DIR = Path(
     "~/git/lilydesignsystem/lily-design-system/themes"
 ).expanduser()
@@ -58,6 +61,8 @@ def main() -> int:
     parser.add_argument("--lily-dir", type=Path, default=DEFAULT_LILY_THEMES_DIR)
     args = parser.parse_args()
     check = args.check
+    assert_lily_pin(args.lily_dir, REPO_ROOT)
+
 
     if not check and not args.lily_dir.is_dir():
         sys.exit(f"Lily themes dir not found: {args.lily_dir}")
