@@ -1,0 +1,302 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape (grouped wizard form; the grader flattens it). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "final-no-abnormality",
+      "description": "Complete final clinic-review reply: normal examination and echo, non-cardiac musculoskeletal cause, discharged back to the GP — expect no-abnormality, severity none, full completeness, routine follow-up.",
+      "state": {
+        "identification": {
+          "respondingClinician": "Dr Helena Vasquez",
+          "originatingRequestReference": "CR-2026-04481",
+          "responseStatus": "final",
+          "consultationType": "clinic-review",
+          "assessedDate": "2026-08-18",
+          "respondedDate": "2026-08-20"
+        },
+        "patient": {
+          "patientName": "Alan Whitfield",
+          "patientNhsNumber": "943 476 5922",
+          "patientBirthDate": "1962-04-09"
+        },
+        "assessment": {
+          "clinicalSummary": "Reviewed in clinic for atypical chest discomfort. History suggests a musculoskeletal origin; reproducible on palpation.",
+          "examinationFindings": "Heart sounds normal, no murmurs, chest wall tenderness over costochondral junctions. BP 128/78.",
+          "investigationsPerformed": "Resting ECG normal. Transthoracic echo: structurally normal heart, EF 62%."
+        },
+        "findings": {
+          "ischaemiaOrCad": false,
+          "significantArrhythmia": false,
+          "reducedEjectionFraction": false,
+          "significantValveDisease": false,
+          "structuralAbnormality": false,
+          "uncontrolledHypertension": false,
+          "nonCardiacCause": true
+        },
+        "diagnosis": {
+          "primaryDiagnosisCategory": "non-cardiac",
+          "diagnosisNarrative": "Costochondritis; no evidence of cardiac disease.",
+          "lvEjectionFractionPercent": 62
+        },
+        "management": {
+          "managementPlan": "Reassurance given. Simple analgesia as needed. No cardiology follow-up required.",
+          "medicationChanges": "None.",
+          "recommendedFollowUp": "Discharge to GP; re-refer if symptoms change character."
+        },
+        "signOff": {
+          "criticalResult": false,
+          "criticalResultCommunicated": false,
+          "reportedTo": "",
+          "clinicianNotes": "",
+          "signed": true
+        }
+      },
+      "expected": {
+        "responseClassification": "no-abnormality",
+        "severity": "none",
+        "severityCategory": "no-abnormality",
+        "completenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific cardiology follow-up required; discharge back to the referrer for usual care.",
+        "recommendation": "no-action",
+        "recommendationLabel": "No action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NONE-01",
+            "axis": "classification",
+            "category": "no-abnormality",
+            "description": "No structured cardiac finding and a non-cardiac / no-abnormality conclusion; classified as no abnormality."
+          },
+          {
+            "ruleId": "R-SEVERITY-NONE-01",
+            "axis": "severity",
+            "category": "no-finding",
+            "description": "No structured cardiac finding; condition severity graded none."
+          },
+          {
+            "ruleId": "R-FOLLOWUP-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "no-abnormality",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "heart-failure-reduced-ef",
+      "description": "Final reply diagnosing heart failure with reduced ejection fraction (EF 32%): full sections, medication changes started, urgent HF-nurse follow-up — expect cardiac-condition, major severity, urgent follow-up.",
+      "state": {
+        "identification": {
+          "respondingClinician": "Dr Helena Vasquez",
+          "originatingRequestReference": "CR-2026-05112",
+          "responseStatus": "final",
+          "consultationType": "clinic-review",
+          "assessedDate": "2026-08-21",
+          "respondedDate": "2026-08-22"
+        },
+        "patient": {
+          "patientName": "Doris Ademola",
+          "patientNhsNumber": "943 476 5924",
+          "patientBirthDate": "1951-09-30"
+        },
+        "assessment": {
+          "clinicalSummary": "Progressive exertional breathlessness and ankle swelling over three months; NYHA class III at review.",
+          "examinationFindings": "Raised JVP, bibasal crackles, mild pitting oedema to mid-shin. BP 142/88, HR 92 regular.",
+          "investigationsPerformed": "NT-proBNP 2,340 ng/L. Echo: dilated LV, global hypokinesia, EF 32%. ECG: LBBB."
+        },
+        "findings": {
+          "ischaemiaOrCad": false,
+          "significantArrhythmia": false,
+          "reducedEjectionFraction": true,
+          "significantValveDisease": false,
+          "structuralAbnormality": false,
+          "uncontrolledHypertension": false,
+          "nonCardiacCause": false
+        },
+        "diagnosis": {
+          "primaryDiagnosisCategory": "heart-failure",
+          "diagnosisNarrative": "Heart failure with reduced ejection fraction, likely non-ischaemic; awaiting angiography to exclude CAD.",
+          "lvEjectionFractionPercent": 32
+        },
+        "management": {
+          "managementPlan": "Start four-pillar HF therapy; daily weights; refer to HF specialist nurse; outpatient angiogram requested.",
+          "medicationChanges": "Started ramipril 2.5 mg od, bisoprolol 1.25 mg od, dapagliflozin 10 mg od, spironolactone 25 mg od.",
+          "recommendedFollowUp": "HF nurse review in 2 weeks with bloods; clinic review in 6 weeks with repeat echo at 3 months."
+        },
+        "signOff": {
+          "criticalResult": false,
+          "criticalResultCommunicated": false,
+          "reportedTo": "",
+          "clinicianNotes": "GP copy sent.",
+          "signed": true
+        }
+      },
+      "expected": {
+        "responseClassification": "cardiac-condition",
+        "severity": "major",
+        "severityCategory": "reduced-ejection-fraction",
+        "completenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Arrange urgent cardiology follow-up and expedite specialist management as clinically indicated.",
+        "recommendation": "specialist-management",
+        "recommendationLabel": "Specialist management",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CARDIAC-01",
+            "axis": "classification",
+            "category": "cardiac-condition",
+            "description": "One or more structured cardiac findings or a cardiac diagnosis are present; classified as a cardiac condition."
+          },
+          {
+            "ruleId": "R-SEVERITY-MAJOR-03",
+            "axis": "severity",
+            "category": "reduced-ejection-fraction",
+            "description": "Reduced left-ventricular ejection fraction (HFrEF); condition severity graded major."
+          },
+          {
+            "ruleId": "R-FOLLOWUP-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-condition",
+            "description": "Major cardiac condition present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-REDUCED-EJECTION-FRACTION-001",
+            "category": "reduced-ejection-fraction",
+            "priority": "high",
+            "description": "Reduced left-ventricular ejection fraction (heart failure with reduced ejection fraction).",
+            "suggestedAction": "Start / optimise guideline-directed heart-failure therapy and arrange heart-failure service follow-up per NICE NG106."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-uncommunicated-preliminary",
+      "description": "Preliminary inpatient reply with a critical finding (severe aortic stenosis with syncope) marked critical but NOT yet communicated, management sections still empty — expect critical classification, critical-alert follow-up, and the uncommunicated-critical-result / incompleteness rules to fire.",
+      "state": {
+        "identification": {
+          "respondingClinician": "Dr Rowan Blake",
+          "originatingRequestReference": "CR-2026-05310",
+          "responseStatus": "preliminary",
+          "consultationType": "inpatient-review",
+          "assessedDate": "2026-08-26",
+          "respondedDate": ""
+        },
+        "patient": {
+          "patientName": "Peter Lindqvist",
+          "patientNhsNumber": "",
+          "patientBirthDate": "1948-02-17"
+        },
+        "assessment": {
+          "clinicalSummary": "Seen on the ward after exertional syncope. Loud ejection systolic murmur radiating to carotids.",
+          "examinationFindings": "Slow-rising pulse, ESM grade 4/6.",
+          "investigationsPerformed": "Bedside echo: heavily calcified aortic valve, peak gradient 82 mmHg, AVA 0.7 cm2."
+        },
+        "findings": {
+          "ischaemiaOrCad": false,
+          "significantArrhythmia": false,
+          "reducedEjectionFraction": false,
+          "significantValveDisease": true,
+          "structuralAbnormality": false,
+          "uncontrolledHypertension": false,
+          "nonCardiacCause": false
+        },
+        "diagnosis": {
+          "primaryDiagnosisCategory": "valve-disease",
+          "diagnosisNarrative": "Severe symptomatic aortic stenosis.",
+          "lvEjectionFractionPercent": null
+        },
+        "management": {
+          "managementPlan": "",
+          "medicationChanges": "",
+          "recommendedFollowUp": ""
+        },
+        "signOff": {
+          "criticalResult": true,
+          "criticalResultCommunicated": false,
+          "reportedTo": "",
+          "clinicianNotes": "",
+          "signed": false
+        }
+      },
+      "expected": {
+        "responseClassification": "critical",
+        "severity": "major",
+        "severityCategory": "critical-cardiac",
+        "completenessPercent": 60,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and arrange urgent review; document the conversation.",
+        "recommendation": "urgent-review",
+        "recommendationLabel": "Urgent review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical or unexpected significant cardiac result is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEVERITY-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical result present; condition severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-MANAGEMENT-01",
+            "axis": "completeness",
+            "category": "management",
+            "description": "Mandatory response section missing: management plan."
+          },
+          {
+            "ruleId": "R-COMP-FOLLOWUP-01",
+            "axis": "completeness",
+            "category": "follow-up",
+            "description": "Mandatory response section missing: recommended follow-up."
+          },
+          {
+            "ruleId": "R-FOLLOWUP-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical result auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-FINDING-001",
+            "category": "critical-finding",
+            "priority": "high",
+            "description": "A critical or unexpected significant cardiac result is present (e.g. critical arrhythmia, severe symptomatic aortic stenosis, acute coronary syndrome).",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, arrange urgent review, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-FINDING-002",
+            "category": "critical-finding",
+            "priority": "high",
+            "description": "Critical result present but it has not been recorded as communicated to the referrer.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-SEVERE-VALVE-DISEASE-001",
+            "category": "severe-valve-disease",
+            "priority": "high",
+            "description": "Significant (moderate–severe) valve disease requiring specialist management.",
+            "suggestedAction": "Refer to the valve / structural heart team and consider Heart Team discussion per ESC/EACTS guidance."
+          },
+          {
+            "flagId": "F-INCOMPLETE-RESPONSE-001",
+            "category": "incomplete-response",
+            "priority": "medium",
+            "description": "One or more mandatory response sections are missing (2 of summary / examination / management / follow-up).",
+            "suggestedAction": "Complete the missing response sections before finalising the reply."
+          }
+        ]
+      }
+    }
+  ]
+}

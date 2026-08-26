@@ -1,0 +1,330 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-palpitations-complete",
+      "description": "Well-formed routine GP referral: intermittent palpitations, normal ECG done, no red flags, sent to the arrhythmia/EP clinic — every completeness field present, expect appropriate + routine triage.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Sarah Ellison",
+          "clinicianRole": "general-practitioner",
+          "registrationBody": "GMC",
+          "registrationNumber": "6543210",
+          "requesterContact": "s.ellison@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Alan",
+          "lastName": "Whitfield",
+          "dateOfBirth": "1962-04-09",
+          "nhsNumber": "943 476 5922"
+        },
+        "request": {
+          "requestedService": "arrhythmia-ep",
+          "referralReason": "palpitations",
+          "clinicalQuestion": "Intermittent palpitations with documented ectopy — does this need EP assessment or reassurance?",
+          "relevantHistory": "Six months of brief self-terminating palpitations. No syncope. Normal thyroid function.",
+          "setting": "primary-care"
+        },
+        "symptoms": {
+          "symptomChestPain": false,
+          "chestPainCharacter": "",
+          "symptomBreathlessness": false,
+          "nyhaClass": "",
+          "symptomPalpitations": true,
+          "symptomSyncope": false,
+          "symptomOedema": false
+        },
+        "redFlags": {
+          "suspectedAcs": false,
+          "exertionalSyncope": false,
+          "newOnsetHeartFailure": false,
+          "ecgDone": true,
+          "ecgFindings": "Sinus rhythm, occasional ventricular ectopics",
+          "troponinStatus": "",
+          "bnpStatus": ""
+        },
+        "history": {
+          "knownCoronaryArteryDisease": false,
+          "previousMi": false,
+          "heartFailure": false,
+          "valveDisease": false,
+          "arrhythmia": false,
+          "hypertension": true,
+          "diabetes": false,
+          "currentMedications": "Amlodipine 5 mg od"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "appropriatenessBand": "usually-appropriate",
+        "safetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PALPITATIONS-IDEAL",
+            "axis": "appropriateness",
+            "category": "palpitations",
+            "description": "Requested arrhythmia-ep is the recommended service for \"palpitations\"."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "red-flag",
+            "description": "No acute red flag detected from the safety screen."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-typical-angina",
+      "description": "Urgent rapid-access chest-pain referral: exertional typical angina in a diabetic ex-smoker, normal troponin, ECG done — expect red-flag caution and urgent (2-week) triage with the typical-angina escalation fired.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Marcus Boateng",
+          "clinicianRole": "general-practitioner",
+          "registrationBody": "GMC",
+          "registrationNumber": "7100223",
+          "requesterContact": "m.boateng@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Hillside Surgery",
+          "referralDate": "2026-08-24"
+        },
+        "patient": {
+          "firstName": "June",
+          "lastName": "Carmichael",
+          "dateOfBirth": "1955-12-01",
+          "nhsNumber": "943 476 5923"
+        },
+        "request": {
+          "requestedService": "rapid-access-chest-pain",
+          "referralReason": "chest-pain",
+          "clinicalQuestion": "New exertional chest tightness, relieved by rest — please assess for stable angina.",
+          "relevantHistory": "Type 2 diabetes, ex-smoker (30 pack-years). Symptoms for 3 weeks on moderate exertion.",
+          "setting": "primary-care"
+        },
+        "symptoms": {
+          "symptomChestPain": true,
+          "chestPainCharacter": "typical-angina",
+          "symptomBreathlessness": false,
+          "nyhaClass": "",
+          "symptomPalpitations": false,
+          "symptomSyncope": false,
+          "symptomOedema": false
+        },
+        "redFlags": {
+          "suspectedAcs": false,
+          "exertionalSyncope": false,
+          "newOnsetHeartFailure": false,
+          "ecgDone": true,
+          "ecgFindings": "Sinus rhythm, no acute ischaemic change",
+          "troponinStatus": "normal",
+          "bnpStatus": ""
+        },
+        "history": {
+          "knownCoronaryArteryDisease": false,
+          "previousMi": false,
+          "heartFailure": false,
+          "valveDisease": false,
+          "arrhythmia": false,
+          "hypertension": true,
+          "diabetes": true,
+          "currentMedications": "Metformin 1 g bd, ramipril 5 mg od, atorvastatin 40 mg on"
+        },
+        "triage": {
+          "urgency": "urgent",
+          "requestedByDate": "2026-09-07",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "appropriatenessBand": "usually-appropriate",
+        "safetyBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CHEST-PAIN-IDEAL",
+            "axis": "appropriateness",
+            "category": "chest-pain",
+            "description": "Requested rapid-access-chest-pain is the recommended service for \"chest-pain\"."
+          },
+          {
+            "ruleId": "R-SAFETY-TYPICAL-ANGINA",
+            "axis": "safety",
+            "category": "red-flag",
+            "description": "Typical-angina chest pain — expedite rapid-access chest-pain assessment."
+          },
+          {
+            "ruleId": "R-TRIAGE-TYPICAL-ANGINA",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Typical-angina chest pain — expedited rapid-access chest-pain assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RED-FLAG-CHEST-PAIN-001",
+            "category": "red-flag-chest-pain",
+            "priority": "medium",
+            "description": "Typical-angina chest pain reported.",
+            "suggestedAction": "Expedite rapid-access chest-pain assessment (NICE CG95)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "suspected-acs-escalated-incomplete",
+      "description": "Out-of-hours call handler's sparse note: suspected ACS with elevated troponin but requested as routine and missing NHS number, urgency, and clinical question — expect emergency escalation overriding the request, red-flag safety band, missing-field rules, and the ACS flag.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Imran Shah",
+          "clinicianRole": "out-of-hours-gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7811990",
+          "requesterContact": "",
+          "supervisingConsultant": "",
+          "siteName": "OOH Hub North",
+          "referralDate": "2026-08-26"
+        },
+        "patient": {
+          "firstName": "Peter",
+          "lastName": "Lindqvist",
+          "dateOfBirth": "1948-02-17",
+          "nhsNumber": ""
+        },
+        "request": {
+          "requestedService": "general-cardiology",
+          "referralReason": "chest-pain",
+          "clinicalQuestion": "",
+          "relevantHistory": "Central chest pain at rest overnight.",
+          "setting": "out-of-hours"
+        },
+        "symptoms": {
+          "symptomChestPain": true,
+          "chestPainCharacter": "atypical",
+          "symptomBreathlessness": true,
+          "nyhaClass": "ii",
+          "symptomPalpitations": false,
+          "symptomSyncope": false,
+          "symptomOedema": false
+        },
+        "redFlags": {
+          "suspectedAcs": true,
+          "exertionalSyncope": false,
+          "newOnsetHeartFailure": false,
+          "ecgDone": true,
+          "ecgFindings": "T-wave inversion V4-V6",
+          "troponinStatus": "elevated",
+          "bnpStatus": ""
+        },
+        "history": {
+          "knownCoronaryArteryDisease": true,
+          "previousMi": true,
+          "heartFailure": false,
+          "valveDisease": false,
+          "arrhythmia": false,
+          "hypertension": true,
+          "diabetes": false,
+          "currentMedications": "Aspirin 75 mg od, bisoprolol 2.5 mg od"
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "notes": "Sent from OOH triage call"
+        }
+      },
+      "expected": {
+        "appropriatenessBand": "may-be-appropriate",
+        "safetyBand": "red-flag",
+        "completenessPercent": 64,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CHEST-PAIN-PLAUSIBLE",
+            "axis": "appropriateness",
+            "category": "chest-pain",
+            "description": "Requested general-cardiology may be appropriate for \"chest-pain\" but is not the first-line service."
+          },
+          {
+            "ruleId": "R-SAFETY-SUSPECTED-ACS",
+            "axis": "safety",
+            "category": "red-flag",
+            "description": "Suspected acute coronary syndrome — divert to the emergency ACS pathway, not a routine cardiology referral."
+          },
+          {
+            "ruleId": "R-SAFETY-ELEVATED-TROPONIN",
+            "axis": "safety",
+            "category": "red-flag",
+            "description": "Elevated troponin — treat as possible acute coronary syndrome until excluded."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-ACS",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Suspected acute coronary syndrome — emergency pathway, do not wait for routine clinic."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-ACS-001",
+            "category": "suspected-acs",
+            "priority": "high",
+            "description": "Suspected acute coronary syndrome (red flag or elevated troponin).",
+            "suggestedAction": "Divert to the emergency ACS pathway; do not wait for a routine cardiology clinic."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the cardiology team should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -695,7 +695,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       roll out mechanically with a `--check` tool (Conventions promise).
 - [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
       at `/api/openapi.yaml` (second half of serve-OpenAPI).
-- [ ] Personas: **165/355 verified** (was 109). 2026-08-26: the whole
+- [ ] Personas: **167/355 verified** (was 109). 2026-08-26: the whole
       `*-waiting-list-card` family (56 forms) done in one batch — the family
       engine is template-identical (2 comment lines differ), so three RTT
       scenarios (within-target / approaching-breach+interpreter /
@@ -705,8 +705,9 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       rots daily — the reason this family was never covered). Remaining
       frontier: 39 `*-test-request` + 37 `*-test-result` (NOT
       template-identical — per-form panels/rules, needs real per-form
-      batches) and 39 bespoke singles (incl. cardiology-request/response,
-      inpatient-clinical-note, medical-operation-note); 76 forms are
+      batches) and 37 bespoke singles (cardiology-request/response done
+      2026-08-26 — 3 personas each, grounded in the engines' own rule sets;
+      inpatient-clinical-note, medical-operation-note next); 76 forms are
       engine-SKIP and need discovery hints first. Then
       `example-invalid.json` + wizard-blocks-submission E2E assertion; API
       transcripts; FHIR bundles for personas; site examples gallery.
