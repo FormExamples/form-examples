@@ -290,7 +290,7 @@ jobs:
           java-version: '21'
       - name: Cache FHIR validator
         id: cache-validator
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/validator_cli.jar
           key: fhir-validator-6.3.11
