@@ -1,10 +1,142 @@
-# Plan — major improvements (2026-07)
+# Plan
+
+Living roadmap for the medical-forms monorepo. The current round is first;
+previous rounds are archived below, verbatim. Companion file:
+[`tasks.md`](tasks.md) holds the executable checklists.
+
+## Round 2 (2026-08-26) — gate truth, CI completeness, professionalization
+
+Planned after a research pass over the whole monorepo (355 forms, ~146k
+tracked files, 1,141 commits). The build-out is done and uniform; Round 1
+built the verification machinery. The finding of this pass is that **some of
+that machinery has quietly stopped telling the truth**: two CI-wired gates are
+red fleet-wide from one loader bug, a third of the AGENTS.md verify list never
+made it into CI, three gates false-positive against an un-pinned local
+checkout, and a 710-file dependency bump is sitting uncommitted on `main`.
+The theme of this round is therefore *make every gate green, honest, and
+CI-enforced* — then finish professionalization and the deliberate Round 1
+carry-overs.
+
+### Already landed in this round (2026-08-26, this session)
+
+- Public-repo special files per `spec/special-files-for-public-repos/`:
+  `AI_STATEMENT.md`, `GOVERNANCE.md`, `MAINTAINERS.md`, `SECURITY.md`,
+  `CODEOWNERS`, root `CHANGELOG.md`, `NEWS.md`, `INSTALL.md`,
+  `COMPARISONS.md`, `BENCHMARKS.md`; SPDX in `LICENSE.md`; richer
+  `CITATION.cff`; ways-to-contribute in `CONTRIBUTING.md`; project-documents
+  table in `index.md`.
+- `#![forbid(unsafe_code)]` on all 1,412 crate roots (355 crates × 4 targets),
+  via new `bin/loco-forbid-unsafe` with `--check` in CI; the generated
+  `back-end-with-loco-setup` scripts now apply it to freshly scaffolded crates.
+- Fixed the `#![warn(clippy::clippy::pedantic)]` unknown-lint typo (3 crates).
+
+### Defects found (verified 2026-08-26 — the evidence for R0)
+
+1. **`bin/test-engines` FAIL 355/355 and `bin/test-personas` FAIL 109/109**
+   — every form, same error: `text-size-picker.js: Identifier 'STORAGE_KEY'
+   has already been declared`. Root cause: `bin/lib/engine-loader.js`'s
+   `NON_ENGINE` skip-list predates the header-control helpers
+   (`theme-select.js`, `locale-select.js`, `text-size-picker.js`,
+   `share-picker.js`, `date-time-picker.js`); they are classic scripts, each
+   declaring a top-level `STORAGE_KEY`, and the loader concatenates them into
+   one shared `vm` scope. Both gates run in the CI drift job, so **the drift
+   job has been red since the picker vendoring**. Fix is one skip-list edit.
+2. **Uncommitted fleet-wide dependency bump on `main`**: loco-rs 1.0.1 →
+   1.1.0 + uuid 1.24 → 1.25 across all 355 `Cargo.toml` + `Cargo.lock` pairs
+   (~710 files), plus a `formexamples.github.io/pnpm-lock.yaml` refresh.
+   Five crates verified compiling this session; the rest are unverified and
+   the change is unrecorded. Verify (sharded `cargo check`) then commit — or
+   revert deliberately.
+3. **Clippy pedantic debt fails CI**: the 8 rustdoc'd crates carry
+   `#![warn(clippy::pedantic)]`, and the CI Rust shards run
+   `cargo clippy -- -D warnings`, so warn = error there. Measured:
+   medical-operation-note 30, architecture-decision-record 25,
+   cardiology-request 22, inpatient-clinical-note 19 distinct errors
+   (doc_markdown, must_use_candidate, uninlined_format_args, casts, …).
+   Either fix the ~140 findings or make the lint level match CI intent.
+4. **`bin/es-modules-refactor --check --all` reports 36 forms drifted**
+   ("no namespace (html-only)", both HTML files). The inline FOUC
+   theme-restore `<script>` exists fleet-wide, so the discriminator for these
+   36 is not yet understood — diagnose before "fixing" either side.
+5. **Three gates false-drift against an un-pinned checkout**:
+   `svelte-theme-css-sync --check` (reports all 355 changed),
+   `html-theme-locale-select-refactor --check`, and
+   `svelte-helpers-picker-rename --check` read the live
+   `~/git/lilydesignsystem/` checkout, which is at `7396cf295` (2026-08-26)
+   while the recorded pin is `ebf770be7`. The tools should assert the
+   checkout matches `forms/lily-version.md` / `lily-svelte-version.md` and
+   refuse with a clear message, not report fleet drift. Separately: decide
+   whether to re-pin + re-sync to current upstream.
+6. **CI runs only part of the AGENTS.md verify list.** Not in `ci.yml`:
+   `es-modules-refactor --check`, `page-header-layout-refactor --check`,
+   `html-helpers-picker-rename --check`, `svelte-helpers-picker-rename
+   --check`, both `*-date-time-picker-vendor --check`,
+   `html-theme-locale-select-refactor --check`, `svelte-theme-css-sync
+   --check`, `svelte-kit-3-theme-url-fix.py --check`,
+   `loco-migration-defaults --check`, `loco-migration-nullability --check`,
+   `loco-rs-1-migration --check`, `generate-loco-deny-config.py --check`.
+   A gate that only runs on a maintainer's machine protects nothing.
+7. **`bin/test` without Postgres dies 24 s in** at the first crate's
+   `cargo test` (mass `PoolTimedOut`) instead of skipping with a notice
+   (`TEST_FORM_SKIP_CARGO=1` exists but is not self-applied).
+8. **GitHub hygiene gaps**: no issue templates, no PR template (nowhere to
+   put the `AI_STATEMENT.md` §10 disclosure prompt), no dependabot/renovate,
+   and no release has ever been tagged (root `CHANGELOG.md` now says so).
+
+### Workstreams
+
+**R0 — Gate truth (first; small, high leverage).** Fix defects 1–5 and 7.
+Order: engine-loader skip-list (un-reds two CI gates at a stroke), then the
+dep-bump verify+commit, then clippy debt, then the checkout-pin guards, the
+es-modules diagnosis, and the `bin/test` no-DB behaviour.
+
+**R1 — CI completeness and efficiency.** Wire every AGENTS.md verify gate
+into CI (defect 6) — checkout-dependent ones need either the pin cloned in CI
+or a vendored-snapshot comparison mode. Then efficiency: per-PR changed-forms
+detection for the Rust/Svelte shards (full matrix on nightly + main), pnpm
+store caching, and a scheduled `cargo deny` advisories job so 355 identical
+dependency sets get one currency signal. Add dependabot for the two
+workflows' actions and the site.
+
+**R2 — Professionalization.** Issue templates + PR template (with the AI
+disclosure checkbox), tag the first release (`v1.0.0` per GOVERNANCE.md,
+drawing notes from `CHANGELOG.md` `[Unreleased]`), document branch-protection
+/ required-checks settings in GOVERNANCE.md, set GitHub repo
+description/topics from `NEWS.md`'s fact sheet, and decide (maintainer call,
+recorded in the spec) on: Zenodo DOI for `CITATION.cff`, and whether the
+CC BY-NC-SA licence remains right for a code corpus (`COMPARISONS.md` names
+it as a weakness — a decision item, not a recommendation).
+
+**R3 — Functionality carry-overs (from Round 1 Phases 3/6, still open).**
+Form export/import (JSON/XML/CSV/TSV — the Conventions section promises it);
+Loco per-crate seed + serve-OpenAPI second half; personas from 109 → all
+scorable forms (unblocked by R0's loader fix); `example-invalid.json` +
+validation-error assertions; API transcripts; examples gallery on the site;
+the latent snake_case↔camelCase API contract; i18n past the pilot.
+
+**R4 — Optimizations (measured, not guessed — see BENCHMARKS.md).**
+Document a shared `CARGO_TARGET_DIR` + sccache for local dev (355 `target/`
+dirs is tens of GB); note that the 45-theme × 710-copy CSS catalogue is
+byte-identical across forms (git stores ~90 blobs — repo cost is fine, the
+working tree and file-count cost is the debatable part; curate the theme set
+only if a real need appears); add the Svelte E2E sweep to the nightly job
+alongside HTML.
+
+### Sequencing
+
+R0 strictly first — extending CI (R1) before the gates tell the truth would
+enshrine red. R1 before R3's mechanical rollouts (land against green,
+CI-enforced gates). R2 any time after R0. R4 opportunistic.
+
+---
+
+## Plan — major improvements (2026-07)
 
 Roadmap for the next round of work on the medical-forms monorepo:
 capabilities, functionality, documentation, tutorials, and examples.
 Companion file: [`tasks.md`](tasks.md) holds the executable task checklist.
 
-## Execution progress (2026-07-12 → 07-13)
+### Execution progress (2026-07-12 → 07-13)
 
 **See [`tasks.md`](tasks.md) "Status summary" for the current, authoritative
 state** (Phases 0/1/4/5 done; 2 done bar oracle-dependent `expected` blocks; 3
@@ -38,7 +170,7 @@ work — see the notes under each in [`tasks.md`](tasks.md)). Highlights:
   an 11-file `docs/` suite, and 6 runnable `docs/tutorials/` with a
   `bin/test-tutorials` doc-rot gate.
 
-## Current status (verified 2026-07-12)
+### Current status (verified 2026-07-12)
 
 The build-out phase is essentially complete. Coverage is uniform:
 
@@ -59,7 +191,7 @@ that accumulated during the build-out, (1) making CI actually prove what the
 repo claims, (2) deepening runtime functionality, and (3) making the repo
 teachable: documentation, tutorials, richer examples.
 
-## Known defects (found during this planning pass — fix first)
+### Known defects (found during this planning pass — fix first)
 
 1. **`forms.tsv` is stale**: 124 rows vs 286 forms, so
    `bin/forms-as-kebab-case` (and anything built on it) sees fewer than half
@@ -79,15 +211,15 @@ teachable: documentation, tutorials, richer examples.
    only `rust/` and `superpowers/` — no architecture, authoring, or usage
    documentation despite `spec.md` §1 promising a teachable shared design.
 
-## Workstreams
+### Workstreams
 
-### WS0 — Repair & hygiene (prerequisite)
+#### WS0 — Repair & hygiene (prerequisite)
 
 Fix the five defects above. Make `forms.tsv` a generated artefact
 (`bin/generate-forms-tsv.py [--check]`) so it can never rot again, and wire
 the `--check` into `bin/test` and CI.
 
-### WS1 — Capabilities: CI and verification depth
+#### WS1 — Capabilities: CI and verification depth
 
 CI today runs structure validation plus a broken generators job. Target: CI
 proves every claim the repo makes about itself.
@@ -111,7 +243,7 @@ proves every claim the repo makes about itself.
   fixture must match the form's schema (field names/types derived from
   `sql/`), so examples can't drift from migrations.
 
-### WS2 — Capabilities: end-to-end and accessibility testing
+#### WS2 — Capabilities: end-to-end and accessibility testing
 
 There are currently **zero** Playwright configs in the repo.
 
@@ -126,7 +258,7 @@ There are currently **zero** Playwright configs in the repo.
   violations per form page and dashboard.
 - CI runs the full sweep nightly and a changed-forms subset per PR.
 
-### WS3 — Functionality: runtime features across all forms
+#### WS3 — Functionality: runtime features across all forms
 
 The conventions section promises import/export via JSON, XML, CSV, TSV —
 make that uniformly true, plus the long-standing UX items:
@@ -146,7 +278,7 @@ make that uniformly true, plus the long-standing UX items:
 - **i18n scaffold**: extract UI strings behind a minimal i18n layer; ship
   Welsh for one pilot form (the Cymraeg-relevant one) to prove the shape.
 
-### WS4 — Documentation
+#### WS4 — Documentation
 
 - Populate `arc42/` with a real arc42 architecture document (context,
   building blocks = the per-form layout, runtime views = wizard/scoring/
@@ -164,7 +296,7 @@ make that uniformly true, plus the long-standing UX items:
 - Document every `bin/` tool in a generated `docs/tools.md` (from each tool's
   `--help`), with a `--check` drift gate.
 
-### WS5 — Tutorials
+#### WS5 — Tutorials
 
 New `docs/tutorials/` series, each a runnable, copy-paste walkthrough,
 smoke-tested by a `bin/test-tutorials` script that executes each tutorial's
@@ -182,7 +314,7 @@ fenced shell blocks:
    the OpenAPI spec; FHIR Bundle export.
 6. **Customise Lily** — theming and the sync/refactor/status tools.
 
-### WS6 — Examples
+#### WS6 — Examples
 
 Today each form has one filled-form fixture + one FHIR Bundle. Deepen:
 
@@ -197,7 +329,7 @@ Today each form has one filled-form fixture + one FHIR Bundle. Deepen:
   files; scaffold mechanically, then fill domain-specific values in batches.
 - Add an examples gallery page to the `formexamples.github.io` site.
 
-## Sequencing
+### Sequencing
 
 - **WS0 first** (small, unblocks everything; CI must be trustworthy before
   it is extended).
@@ -207,7 +339,7 @@ Today each form has one filled-form fixture + one FHIR Bundle. Deepen:
   so interleave: WS6 fixture schema → WS2 harness → WS6 full fill-out.
 - **WS4/WS5** can proceed in parallel with anything after WS0.
 
-## Execution conventions (for the Opus run)
+### Execution conventions (for the Opus run)
 
 - Work directly on `main`; avoid `.claude/worktrees/` (they vanish in this
   repo). Batch mechanical per-form work into parallel foreground subagents,

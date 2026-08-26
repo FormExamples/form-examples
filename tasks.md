@@ -1,6 +1,7 @@
 # Tasks
 
-Executable checklist for [`plan.md`](plan.md) (2026-07 improvement round).
+Executable checklist for [`plan.md`](plan.md) (Round 2, 2026-08; Round 1,
+2026-07, below).
 Work phases in order; within a phase, mechanical per-form items may be
 batched across parallel subagents. After every phase run the full gate:
 
@@ -13,6 +14,22 @@ bin/generate-llms-txt.py --check && bin/generate-spec.py --check
 bin/generate-changelog-and-examples.py --check
 bin/loco-config-refactor --check --all
 ```
+
+## Status summary (2026-08-26) — Round 2
+
+Round 2 (see [`plan.md`](plan.md) "Round 2") opened after a research pass:
+355 forms, all Round 1 build-out claims still hold, but several gates have
+stopped telling the truth. Special files + `forbid(unsafe_code)` landed the
+same day (Phase 7 below, complete); Phases 8–12 are open. **Start at Phase 8
+(R0 gate truth) — everything else sequences behind it.**
+
+Gate-truth repair (Phase 8) largely landed same-day: **all 29 cheap verify
+gates green** (`test-tools` 21 ok / 0 failed) after the ESM engine-loader
+rebuild (test-engines PASS 279/SKIP 76/FAIL 0; test-personas PASS 109, zero
+oracle diff), the es-modules indent fix, and the Lily re-pin to `e05a138e6`
+with fleet theme re-sync. Still open in Phase 8: the ~710-file loco-rs 1.1.0
+dep-bump verify+commit; clippy pedantic debt in the 8 rustdoc'd crates (CI
+rust shards red); checkout-pin guards; `bin/test` no-DB behaviour.
 
 ## Status summary (2026-07-13)
 
@@ -532,6 +549,125 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 - [ ] Examples gallery page on `formexamples.github.io` (per-form card:
       description, personas, score ranges, links).
 - [ ] Run E2E sweep against all three personas per form.
+
+## Phase 7 — Special files + unsafe-forbid ✅ COMPLETE (2026-08-26)
+
+- [x] `spec/special-files-for-public-repos/` implemented: `AI_STATEMENT.md`,
+      `GOVERNANCE.md`, `MAINTAINERS.md`, `SECURITY.md`, `CODEOWNERS`,
+      root `CHANGELOG.md`, `NEWS.md`, `INSTALL.md`, `COMPARISONS.md`,
+      `BENCHMARKS.md`; SPDX in `LICENSE.md`; `CITATION.cff` enriched;
+      ways-to-contribute in `CONTRIBUTING.md`; docs table in `index.md`;
+      spec marked implemented with per-file status table.
+- [x] `#![forbid(unsafe_code)]` on all 1,412 crate roots via new
+      `bin/loco-forbid-unsafe` (idempotent; `--check` in CI drift job);
+      generated `back-end-with-loco-setup` scripts now run it post-scaffold
+      (355 regenerated); 5 sample crates compile clean.
+- [x] `#![warn(clippy::clippy::pedantic)]` typo → `clippy::pedantic` in the
+      3 crates carrying it (which surfaces real pedantic findings — Phase 8).
+
+## Phase 8 — R0 gate truth (do first)
+
+- [x] **Engine loader (2026-08-26):** deeper than the skip-list — the
+      `STORAGE_KEY` collision was masking that the 2026-07 ES-modules
+      conversion had made every engine unloadable by the classic-vm harness.
+      Rebuilt `bin/lib/engine-loader.js` with a real-`import()` ESM path
+      (temp-dir copy + `{"type":"module"}` package.json, browser-global
+      stubs, merged exports; classic-vm fallback kept), added the helpers to
+      `NON_ENGINE`, refactored `bin/test-engines` onto the shared lib
+      (deleting its inlined duplicate loader). Result: `bin/test-engines`
+      **PASS 279 / SKIP 76 / FAIL 0** (up from PASS 220 pre-breakage — the
+      ESM path recovers forms the old harness couldn't load);
+      `bin/test-personas` **PASS 109 / FAIL 0**, and `--update` produced a
+      **zero diff** across all 109 personas.json — the ESM loader computes
+      byte-identical results to the recorded oracle.
+- [ ] **Dep bump:** decide the uncommitted loco-rs 1.0.1→1.1.0 + uuid
+      1.24→1.25 sweep (~710 files). Verify with a sharded
+      `cargo check --all-targets` pass across all 355 crates, then commit as
+      one change with a CHANGELOG entry — or revert deliberately.
+- [ ] **Clippy pedantic:** clear the ~140 pedantic findings in the 8
+      rustdoc'd crates (medical-operation-note 30,
+      architecture-decision-record 25, cardiology-request 22,
+      inpatient-clinical-note 19, + cardiology-response and the 3
+      neurodiversity crates) so `clippy -D warnings` passes; or record the
+      decision to scope pedantic out of CI. No gate-weakening without a
+      recorded ruling (AI_STATEMENT §11).
+- [x] **es-modules (2026-08-26):** diagnosed — the 36 forms are formatted
+      at 8-space indent and the tool regenerated the script block hardcoded
+      at 2-space, so `--check` flagged a byte diff that was pure whitespace.
+      Fixed the tool to emit at the file's own indent (first script tag's
+      leading whitespace). `--check --all` → 0 / 355 drifted.
+- [x] **Re-pin + re-sync (2026-08-26):** re-pinned both Lily snapshots to
+      upstream `e05a138e6` (HEAD had moved again past `7396cf295`). Content
+      delta was tiny and inspected: HTML spec 491/491 unchanged; Svelte spec
+      2 files (upstream's own ProgressCircle test ARIA fix
+      `Progress`→`progressbar`, a Slider doc wording change) — no component
+      source changed, no per-form rollout triggered. Then re-synced the theme
+      catalogues fleet-wide (`svelte-theme-css-sync --apply`,
+      `html-theme-locale-select-refactor --apply`): the only real change is
+      the unwired date-time-picker's `:disabled`→`[data-disabled]` selectors
+      (4 lines/theme). Canonicalized 2 divergent `locales.ts`
+      (pre-anaesthesia-assessment, pre-operative-assessment-by-clinician)
+      via `svelte-helpers-picker-rename --apply`. All Lily gates green;
+      `bin/test-tools` 21 ok / 0 failed.
+- [ ] **Checkout-pin guards** (still worth doing): make the three
+      checkout-reading tools assert the local checkout commit equals the
+      recorded pin before comparing, and fail with "checkout the pin"
+      instead of reporting fleet drift when it merely moved.
+- [ ] **`bin/test` without a DB:** detect an unreachable Postgres up front
+      and skip the cargo portion with an explicit notice (matching
+      `TEST_FORM_SKIP_CARGO=1`), instead of dying 24 s in on `PoolTimedOut`.
+
+## Phase 9 — R1 CI completeness + efficiency
+
+- [ ] Add to the CI drift job: `es-modules-refactor --check --all`,
+      `page-header-layout-refactor --check`, `html-helpers-picker-rename
+      --check`, `svelte-helpers-picker-rename --check`, both
+      `*-date-time-picker-vendor --check`, `svelte-kit-3-theme-url-fix.py
+      --check`, `loco-migration-defaults --check --all`,
+      `loco-migration-nullability --check --all`, `loco-rs-1-migration
+      --check --all`, `generate-loco-deny-config.py --check`.
+- [ ] Checkout-dependent gates in CI: clone the pinned Lily commit in the
+      job (or add a vendored-snapshot comparison mode) so
+      `svelte-theme-css-sync` + `html-theme-locale-select-refactor` can gate.
+- [ ] Per-PR changed-forms shard filtering for the Rust + Svelte matrices
+      (full fleet on `main` + nightly); pnpm store caching in svelte shards.
+- [ ] Scheduled (weekly) `cargo deny --all-features check` advisories job —
+      one currency signal for 355 identical dependency sets.
+- [ ] `dependabot.yml` for GitHub Actions + the `formexamples.github.io` site.
+
+## Phase 10 — R2 professionalization
+
+- [ ] `.github/ISSUE_TEMPLATE/` (defect / clinical-correctness / security
+      pointer per SECURITY.md) + `PULL_REQUEST_TEMPLATE.md` with the
+      AI-disclosure line per `AI_STATEMENT.md` §10.
+- [ ] Tag the first release per GOVERNANCE.md; move `CHANGELOG.md`
+      `[Unreleased]` under the version; update `NEWS.md`.
+- [ ] Document branch-protection / required-checks in GOVERNANCE.md; set
+      GitHub repo description + topics from `NEWS.md`'s fact sheet.
+- [ ] Maintainer decisions (record in spec): Zenodo DOI for `CITATION.cff`;
+      licence fit of CC BY-NC-SA for a code corpus (decision item only).
+
+## Phase 11 — R3 functionality carry-overs (from Phases 3/6)
+
+- [ ] Form export/import (JSON/XML/CSV/TSV) — design on the reference forms,
+      roll out mechanically with a `--check` tool (Conventions promise).
+- [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
+      at `/api/openapi.yaml` (second half of serve-OpenAPI).
+- [ ] Personas: resume batches from 109 verified toward all scorable forms
+      (unblocked by Phase 8 loader fix); then `example-invalid.json` +
+      wizard-blocks-submission E2E assertion; API transcripts; FHIR bundles
+      for personas; site examples gallery.
+- [ ] Latent: snake_case↔camelCase API contract (283 crates + snapshot
+      regen); i18n past the Welsh pilot.
+
+## Phase 12 — R4 optimizations
+
+- [ ] Document shared `CARGO_TARGET_DIR` + sccache in CONTRIBUTING.md
+      (355 `target/` dirs ≈ tens of GB local).
+- [ ] Add `--svelte` E2E sweep to the nightly job alongside `--html`.
+- [ ] Theme-catalogue size: leave as-is unless a need appears (byte-identical
+      copies; git stores ~90 blobs — working-tree cost only); revisit only
+      with a measurement.
 
 ## Done (previous rounds — summary)
 
