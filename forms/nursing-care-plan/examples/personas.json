@@ -1,0 +1,431 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validate",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The overdue-review flag compares against the live clock (validate() takes no injected clock), so these personas deliberately avoid the not-met-past-date branch; every other rule and flag is deterministic.",
+  "personas": [
+    {
+      "name": "complete-two-problem-plan",
+      "description": "Day-4 pneumonia plan: two problems each with goal, intervention, and evaluation; all four risk assessments done and actioned — expect complete with no flags.",
+      "state": {
+        "planContext": {
+          "nurseName": "RN Aoife Brennan",
+          "nurseRole": "staff-nurse",
+          "nmcNumber": "12A3456B",
+          "authoredAt": "2026-08-26T14:00",
+          "careSetting": "medical-ward",
+          "planType": "inpatient",
+          "modelUsed": "roper-logan-tierney"
+        },
+        "patient": {
+          "patientIdentifier": "MRN0071822",
+          "patientName": "Gordon Ashworth",
+          "dateOfBirth": "1946-10-05",
+          "sex": "male",
+          "wardLocation": "Ward 7B bed 12"
+        },
+        "fallsRisk": {
+          "done": "yes",
+          "level": "low",
+          "assessedOn": "2026-08-23",
+          "actioned": "yes"
+        },
+        "pressureUlcerRisk": {
+          "done": "yes",
+          "level": "low",
+          "assessedOn": "2026-08-23",
+          "actioned": "yes"
+        },
+        "vteRisk": {
+          "done": "yes",
+          "level": "medium",
+          "assessedOn": "2026-08-23",
+          "actioned": "yes"
+        },
+        "nutritionRisk": {
+          "done": "yes",
+          "level": "low",
+          "assessedOn": "2026-08-23",
+          "actioned": "yes"
+        },
+        "problems": [
+          {
+            "id": "problem-1",
+            "problemStatement": "Impaired gas exchange related to pneumonia, evidenced by SpO2 94% on air and productive cough",
+            "adlCategory": "breathing",
+            "actualOrPotential": "actual",
+            "assessmentData": "SpO2 94% air, RR 18, productive cough improving",
+            "linkedRisk": "",
+            "goals": [
+              {
+                "id": "goal-1",
+                "goalText": "SpO2 >= 94% on room air throughout admission",
+                "targetDate": "2026-08-28",
+                "met": "met"
+              }
+            ],
+            "interventions": [
+              {
+                "id": "intervention-1",
+                "interventionText": "4-hourly observations; encourage deep-breathing exercises and mobilisation",
+                "carriedOut": "yes"
+              }
+            ],
+            "evaluationNote": "Day 4: saturations stable 95-96% on air, cough settling.",
+            "goalMet": "met",
+            "nextReviewDate": "2026-08-28"
+          },
+          {
+            "id": "problem-2",
+            "problemStatement": "Risk of venous thromboembolism related to reduced mobility",
+            "adlCategory": "mobilising",
+            "actualOrPotential": "potential",
+            "assessmentData": "Reduced mobility since admission; VTE risk medium",
+            "linkedRisk": "vte",
+            "goals": [
+              {
+                "id": "goal-2",
+                "goalText": "No signs of VTE during admission",
+                "targetDate": "2026-08-29",
+                "met": "partially-met"
+              }
+            ],
+            "interventions": [
+              {
+                "id": "intervention-2",
+                "interventionText": "Daily enoxaparin 40 mg; anti-embolism stockings; mobilise twice daily with physio",
+                "carriedOut": "yes"
+              }
+            ],
+            "evaluationNote": "No calf swelling or chest symptoms; continues prophylaxis.",
+            "goalMet": "partially-met",
+            "nextReviewDate": "2026-08-29"
+          }
+        ],
+        "summary": {
+          "handoverNote": "Both problems on track; VTE prophylaxis continues.",
+          "reviewDate": "2026-08-28"
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "problemClasses": [
+          {
+            "problemId": "problem-1",
+            "completenessClass": "complete"
+          },
+          {
+            "problemId": "problem-2",
+            "completenessClass": "complete"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "problem-1-goal",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "goal",
+            "present": true,
+            "description": "Problem 1: goal recorded (1)"
+          },
+          {
+            "id": "problem-1-intervention",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "intervention",
+            "present": true,
+            "description": "Problem 1: intervention recorded (1)"
+          },
+          {
+            "id": "problem-1-evaluation",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "evaluation",
+            "present": true,
+            "description": "Problem 1: evaluation recorded"
+          },
+          {
+            "id": "problem-2-goal",
+            "problemId": "problem-2",
+            "problemLabel": "Problem 2",
+            "element": "goal",
+            "present": true,
+            "description": "Problem 2: goal recorded (1)"
+          },
+          {
+            "id": "problem-2-intervention",
+            "problemId": "problem-2",
+            "problemLabel": "Problem 2",
+            "element": "intervention",
+            "present": true,
+            "description": "Problem 2: intervention recorded (1)"
+          },
+          {
+            "id": "problem-2-evaluation",
+            "problemId": "problem-2",
+            "problemLabel": "Problem 2",
+            "element": "evaluation",
+            "present": true,
+            "description": "Problem 2: evaluation recorded"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "high-falls-risk-not-actioned",
+      "description": "New confused admission: high falls risk assessed but not actioned (high flag), high nutrition risk with no linked problem (high flag), and a delirium problem with goal+intervention but no evaluation yet — expect partial with the risk and no-evaluation flags.",
+      "state": {
+        "planContext": {
+          "nurseName": "RN Aoife Brennan",
+          "nurseRole": "staff-nurse",
+          "nmcNumber": "12A3456B",
+          "authoredAt": "2026-08-26T14:00",
+          "careSetting": "medical-ward",
+          "planType": "inpatient",
+          "modelUsed": "roper-logan-tierney"
+        },
+        "patient": {
+          "patientIdentifier": "MRN0092060",
+          "patientName": "Ivy Chambers",
+          "dateOfBirth": "1938-04-12",
+          "sex": "male",
+          "wardLocation": "Ward 7B bed 4"
+        },
+        "fallsRisk": {
+          "done": "yes",
+          "level": "high",
+          "assessedOn": "2026-08-26",
+          "actioned": "no"
+        },
+        "pressureUlcerRisk": {
+          "done": "yes",
+          "level": "low",
+          "assessedOn": "2026-08-23",
+          "actioned": "yes"
+        },
+        "vteRisk": {
+          "done": "yes",
+          "level": "medium",
+          "assessedOn": "2026-08-23",
+          "actioned": "yes"
+        },
+        "nutritionRisk": {
+          "done": "yes",
+          "level": "high",
+          "assessedOn": "2026-08-26",
+          "actioned": "yes"
+        },
+        "problems": [
+          {
+            "id": "problem-1",
+            "problemStatement": "Acute confusion related to urinary tract infection",
+            "adlCategory": "communication",
+            "actualOrPotential": "actual",
+            "assessmentData": "4AT score 6 on admission; disoriented to time and place",
+            "linkedRisk": "",
+            "goals": [
+              {
+                "id": "goal-1",
+                "goalText": "Return to baseline cognition before discharge",
+                "targetDate": "2026-08-30",
+                "met": ""
+              }
+            ],
+            "interventions": [
+              {
+                "id": "intervention-1",
+                "interventionText": "Delirium bundle: orientation aids, day-night routine, family visits encouraged",
+                "carriedOut": "yes"
+              }
+            ],
+            "evaluationNote": "",
+            "goalMet": "",
+            "nextReviewDate": "2026-08-28"
+          }
+        ],
+        "summary": {
+          "handoverNote": "New admission; falls interventions still to be put in place.",
+          "reviewDate": "2026-08-28"
+        }
+      },
+      "expected": {
+        "status": "partial",
+        "completenessPercent": 67,
+        "problemClasses": [
+          {
+            "problemId": "problem-1",
+            "completenessClass": "partial"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "problem-1-goal",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "goal",
+            "present": true,
+            "description": "Problem 1: goal recorded (1)"
+          },
+          {
+            "id": "problem-1-intervention",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "intervention",
+            "present": true,
+            "description": "Problem 1: intervention recorded (1)"
+          },
+          {
+            "id": "problem-1-evaluation",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "evaluation",
+            "present": false,
+            "description": "Problem 1: no evaluation recorded"
+          }
+        ],
+        "flags": [
+          {
+            "id": "FLAG-RISK-NOACTION-falls",
+            "category": "Risk assessment",
+            "message": "Falls assessed high risk but not actioned",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RISK-NOINTERVENTION-falls",
+            "category": "Risk assessment",
+            "message": "Falls assessed high risk with no linked intervention",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RISK-NOINTERVENTION-nutrition",
+            "category": "Risk assessment",
+            "message": "Nutrition (MUST) assessed high risk with no linked intervention",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NOEVAL-problem-1",
+            "category": "Evaluation",
+            "message": "Problem 1 has a goal and intervention but no evaluation recorded",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "skeleton-night-plan",
+      "description": "A 03:00 skeleton: no risk group even assessed, one problem with a statement only (no goal, intervention, or evaluation, no review date) — expect incomplete with the incomplete-problem and no-review flags.",
+      "state": {
+        "planContext": {
+          "nurseName": "RN Aoife Brennan",
+          "nurseRole": "staff-nurse",
+          "nmcNumber": "12A3456B",
+          "authoredAt": "2026-08-26T14:00",
+          "careSetting": "medical-ward",
+          "planType": "inpatient",
+          "modelUsed": "roper-logan-tierney"
+        },
+        "patient": {
+          "patientIdentifier": "MRN0092071",
+          "patientName": "Stanley Burrows",
+          "dateOfBirth": "1950-11-08",
+          "sex": "male",
+          "wardLocation": "Ward 7B bed 9"
+        },
+        "fallsRisk": {
+          "done": "",
+          "level": "",
+          "assessedOn": "",
+          "actioned": ""
+        },
+        "pressureUlcerRisk": {
+          "done": "",
+          "level": "",
+          "assessedOn": "",
+          "actioned": ""
+        },
+        "vteRisk": {
+          "done": "",
+          "level": "",
+          "assessedOn": "",
+          "actioned": ""
+        },
+        "nutritionRisk": {
+          "done": "",
+          "level": "",
+          "assessedOn": "",
+          "actioned": ""
+        },
+        "problems": [
+          {
+            "id": "problem-1",
+            "problemStatement": "Pain management post hip surgery",
+            "adlCategory": "mobilising",
+            "actualOrPotential": "actual",
+            "assessmentData": "",
+            "linkedRisk": "",
+            "goals": [],
+            "interventions": [],
+            "evaluationNote": "",
+            "goalMet": "",
+            "nextReviewDate": ""
+          }
+        ],
+        "summary": {
+          "handoverNote": "Skeleton plan started at 03:00; to be completed by day shift.",
+          "reviewDate": "2026-08-28"
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 0,
+        "problemClasses": [
+          {
+            "problemId": "problem-1",
+            "completenessClass": "incomplete"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "problem-1-goal",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "goal",
+            "present": false,
+            "description": "Problem 1: no goal recorded"
+          },
+          {
+            "id": "problem-1-intervention",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "intervention",
+            "present": false,
+            "description": "Problem 1: no intervention recorded"
+          },
+          {
+            "id": "problem-1-evaluation",
+            "problemId": "problem-1",
+            "problemLabel": "Problem 1",
+            "element": "evaluation",
+            "present": false,
+            "description": "Problem 1: no evaluation recorded"
+          }
+        ],
+        "flags": [
+          {
+            "id": "FLAG-NOREVIEW-problem-1",
+            "category": "Review",
+            "message": "Problem 1 has no next review date set",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INCOMPLETE-problem-1",
+            "category": "Completeness",
+            "message": "Problem 1 is incomplete (a problem statement only)",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,422 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "assess",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The grader's live timestamp is stripped by the harness.",
+  "personas": [
+    {
+      "name": "complete-tonsillitis-home-managed",
+      "description": "Full four-section SOAP note for home-managed tonsillitis with explicit safety-netting (required because managedAtHome=yes) — expect complete / 100%.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naomi Okonkwo",
+          "clinicianRole": "general-practitioner",
+          "encounteredAt": "2026-08-26T09:40",
+          "careSetting": "general-practice",
+          "encounterType": "face-to-face"
+        },
+        "identification": {
+          "patientIdentifier": "GP-2026-33108",
+          "ageBand": "adult-18-64",
+          "sex": "female"
+        },
+        "subjective": {
+          "presentingComplaint": "Three days of sore throat and painful swallowing",
+          "historyOfPresentingComplaint": "Gradual onset, no cough, mild fever at home, eating less but drinking well.",
+          "patientReportedSymptoms": "Odynophagia, fatigue",
+          "relevantHistory": "No recurrent tonsillitis. Non-smoker.",
+          "redFlagSymptoms": "no"
+        },
+        "objective": {
+          "examinationFindings": "Erythematous tonsils with exudate, tender anterior cervical nodes. Chest clear.",
+          "vitalSigns": "T 37.9, HR 88, BP 118/74",
+          "abnormalVitalsPresent": "no",
+          "investigationResults": "FeverPAIN score 4"
+        },
+        "assessment": {
+          "primaryDiagnosis": "Acute tonsillitis (likely streptococcal)",
+          "problemList": "Acute tonsillitis",
+          "differential": "Infectious mononucleosis",
+          "clinicalImpression": "Bacterial tonsillitis probable given FeverPAIN 4."
+        },
+        "plan": {
+          "investigationsPlan": "None today; monospot if not settling in 1 week",
+          "treatmentPlan": "Phenoxymethylpenicillin 500 mg qds 5 days; analgesia",
+          "referrals": "",
+          "followUp": "Return in 3-5 days if no improvement",
+          "safetyNetting": "Advised to seek urgent review for stridor, drooling, inability to swallow fluids, or worsening despite antibiotics.",
+          "managedAtHome": "yes"
+        },
+        "summary": {
+          "clinicalNote": "Full SOAP documentation for a home-managed presentation."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "sectionStatuses": [
+          {
+            "section": "subjective",
+            "label": "Subjective",
+            "present": true
+          },
+          {
+            "section": "objective",
+            "label": "Objective",
+            "present": true
+          },
+          {
+            "section": "assessment",
+            "label": "Assessment",
+            "present": true
+          },
+          {
+            "section": "plan",
+            "label": "Plan",
+            "present": true
+          }
+        ],
+        "presence": {
+          "subjectivePresent": true,
+          "objectivePresent": true,
+          "assessmentPresent": true,
+          "planPresent": true
+        },
+        "firedRules": [
+          {
+            "id": "R-SUBJECTIVE-COMPLAINT-01",
+            "section": "subjective",
+            "category": "required-component",
+            "description": "Subjective: presenting complaint recorded"
+          },
+          {
+            "id": "R-SUBJECTIVE-HISTORY-01",
+            "section": "subjective",
+            "category": "required-component",
+            "description": "Subjective: history of the presenting complaint recorded"
+          },
+          {
+            "id": "R-OBJECTIVE-PRESENT-01",
+            "section": "objective",
+            "category": "required-component",
+            "description": "Objective: examination findings, vital signs, or investigation results recorded"
+          },
+          {
+            "id": "R-ASSESSMENT-PRESENT-01",
+            "section": "assessment",
+            "category": "required-component",
+            "description": "Assessment: a diagnosis, problem, or differential recorded"
+          },
+          {
+            "id": "R-PLAN-PRESENT-01",
+            "section": "plan",
+            "category": "required-component",
+            "description": "Plan: at least one plan item (investigation, treatment, referral, or follow-up) recorded"
+          },
+          {
+            "id": "R-SAFETY-NETTING-01",
+            "section": "plan",
+            "category": "conditional-requirement",
+            "description": "Plan: safety-netting advice recorded (required — red-flag symptoms present or patient managed at home)"
+          },
+          {
+            "id": "R-FOLLOW-UP-01",
+            "section": "plan",
+            "category": "conditional-requirement",
+            "description": "Plan: a follow-up or review arrangement recorded (required whenever a plan is recorded)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "completeness",
+            "description": "All 7 required components present — note complete (100%)"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "partial-copd-no-safety-netting",
+      "description": "Telephone COPD exacerbation managed at home with abnormal vitals addressed in the plan but NO safety-netting recorded — expect partial with the no-safety-netting flag.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naomi Okonkwo",
+          "clinicianRole": "general-practitioner",
+          "encounteredAt": "2026-08-26T15:10",
+          "careSetting": "general-practice",
+          "encounterType": "telephone"
+        },
+        "identification": {
+          "patientIdentifier": "GP-2026-33127",
+          "ageBand": "adult-65-plus",
+          "sex": "male"
+        },
+        "subjective": {
+          "presentingComplaint": "Worsening breathlessness on exertion over two weeks",
+          "historyOfPresentingComplaint": "COPD patient; increased sputum volume, now green. Using salbutamol hourly.",
+          "patientReportedSymptoms": "",
+          "relevantHistory": "",
+          "redFlagSymptoms": "no"
+        },
+        "objective": {
+          "examinationFindings": "Telephone consult — no examination performed.",
+          "vitalSigns": "Home SpO2 90% (usual 94%)",
+          "abnormalVitalsPresent": "yes",
+          "investigationResults": ""
+        },
+        "assessment": {
+          "primaryDiagnosis": "Infective exacerbation of COPD",
+          "problemList": "",
+          "differential": "",
+          "clinicalImpression": "Moderate exacerbation, saturations below baseline."
+        },
+        "plan": {
+          "investigationsPlan": "",
+          "treatmentPlan": "Rescue pack: prednisolone 30 mg od 5 days + doxycycline. Increase bronchodilators.",
+          "referrals": "",
+          "followUp": "Telephone review tomorrow morning",
+          "safetyNetting": "",
+          "managedAtHome": "yes"
+        },
+        "summary": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "status": "partial",
+        "completenessPercent": 86,
+        "sectionStatuses": [
+          {
+            "section": "subjective",
+            "label": "Subjective",
+            "present": true
+          },
+          {
+            "section": "objective",
+            "label": "Objective",
+            "present": true
+          },
+          {
+            "section": "assessment",
+            "label": "Assessment",
+            "present": true
+          },
+          {
+            "section": "plan",
+            "label": "Plan",
+            "present": true
+          }
+        ],
+        "presence": {
+          "subjectivePresent": true,
+          "objectivePresent": true,
+          "assessmentPresent": true,
+          "planPresent": true
+        },
+        "firedRules": [
+          {
+            "id": "R-SUBJECTIVE-COMPLAINT-01",
+            "section": "subjective",
+            "category": "required-component",
+            "description": "Subjective: presenting complaint recorded"
+          },
+          {
+            "id": "R-SUBJECTIVE-HISTORY-01",
+            "section": "subjective",
+            "category": "required-component",
+            "description": "Subjective: history of the presenting complaint recorded"
+          },
+          {
+            "id": "R-OBJECTIVE-PRESENT-01",
+            "section": "objective",
+            "category": "required-component",
+            "description": "Objective: examination findings, vital signs, or investigation results recorded"
+          },
+          {
+            "id": "R-ASSESSMENT-PRESENT-01",
+            "section": "assessment",
+            "category": "required-component",
+            "description": "Assessment: a diagnosis, problem, or differential recorded"
+          },
+          {
+            "id": "R-PLAN-PRESENT-01",
+            "section": "plan",
+            "category": "required-component",
+            "description": "Plan: at least one plan item (investigation, treatment, referral, or follow-up) recorded"
+          },
+          {
+            "id": "R-FOLLOW-UP-01",
+            "section": "plan",
+            "category": "conditional-requirement",
+            "description": "Plan: a follow-up or review arrangement recorded (required whenever a plan is recorded)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "completeness",
+            "description": "6 of 7 required components present — note partial (86%)"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-NO-SAFETY-NETTING-001",
+            "category": "no-safety-netting",
+            "priority": "medium",
+            "description": "The patient is managed at home but no safety-netting advice is documented",
+            "suggestedAction": "Document safety-netting advice: what to look out for and when and how to seek further help."
+          },
+          {
+            "id": "F-INCOMPLETE-DOCUMENTATION-001",
+            "category": "incomplete-documentation",
+            "priority": "low",
+            "description": "One or more required components are missing — the note is not fully documented",
+            "suggestedAction": "Complete the outstanding required components so the SOAP note is whole."
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-septic-red-flags",
+      "description": "Home visit for an acutely confused, febrile, hypotensive patient: red flags and abnormal vitals documented subjectively/objectively but Assessment and Plan never written — expect incomplete with the missing-assessment, missing-plan, and red-flag/abnormal-vitals flags.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naomi Okonkwo",
+          "clinicianRole": "general-practitioner",
+          "encounteredAt": "2026-08-26T18:25",
+          "careSetting": "home-visit",
+          "encounterType": "home-visit"
+        },
+        "identification": {
+          "patientIdentifier": "GP-2026-33140",
+          "ageBand": "adult-65-plus",
+          "sex": "female"
+        },
+        "subjective": {
+          "presentingComplaint": "Confusion and reduced mobility since this morning",
+          "historyOfPresentingComplaint": "",
+          "patientReportedSymptoms": "",
+          "relevantHistory": "",
+          "redFlagSymptoms": "yes"
+        },
+        "objective": {
+          "examinationFindings": "Drowsy but rousable; temperature 38.6; suprapubic tenderness.",
+          "vitalSigns": "T 38.6, HR 104, BP 96/60",
+          "abnormalVitalsPresent": "yes",
+          "investigationResults": "Urine dip: nitrites +, leucocytes ++"
+        },
+        "assessment": {
+          "primaryDiagnosis": "",
+          "problemList": "",
+          "differential": "",
+          "clinicalImpression": ""
+        },
+        "plan": {
+          "investigationsPlan": "",
+          "treatmentPlan": "",
+          "referrals": "",
+          "followUp": "",
+          "safetyNetting": "",
+          "managedAtHome": ""
+        },
+        "summary": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 33,
+        "sectionStatuses": [
+          {
+            "section": "subjective",
+            "label": "Subjective",
+            "present": false
+          },
+          {
+            "section": "objective",
+            "label": "Objective",
+            "present": true
+          },
+          {
+            "section": "assessment",
+            "label": "Assessment",
+            "present": false
+          },
+          {
+            "section": "plan",
+            "label": "Plan",
+            "present": false
+          }
+        ],
+        "presence": {
+          "subjectivePresent": false,
+          "objectivePresent": true,
+          "assessmentPresent": false,
+          "planPresent": false
+        },
+        "firedRules": [
+          {
+            "id": "R-SUBJECTIVE-COMPLAINT-01",
+            "section": "subjective",
+            "category": "required-component",
+            "description": "Subjective: presenting complaint recorded"
+          },
+          {
+            "id": "R-OBJECTIVE-PRESENT-01",
+            "section": "objective",
+            "category": "required-component",
+            "description": "Objective: examination findings, vital signs, or investigation results recorded"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "completeness",
+            "description": "2 of 6 required components present — note incomplete (33%)"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-MISSING-ASSESSMENT-001",
+            "category": "missing-assessment",
+            "priority": "high",
+            "description": "No diagnosis, problem, or differential recorded in the Assessment section",
+            "suggestedAction": "Record the primary diagnosis or problem so another clinician can safely continue care."
+          },
+          {
+            "id": "F-MISSING-PLAN-001",
+            "category": "missing-plan",
+            "priority": "high",
+            "description": "No plan item (investigation, treatment, referral, or follow-up) recorded in the Plan section",
+            "suggestedAction": "Record what happens next so the note can safely stand alone."
+          },
+          {
+            "id": "F-RED-FLAG-NO-PLAN-001",
+            "category": "red-flag-no-plan",
+            "priority": "high",
+            "description": "Red-flag symptoms are documented but the Plan section is empty",
+            "suggestedAction": "Document the management and escalation plan for the red-flag symptoms recorded."
+          },
+          {
+            "id": "F-NO-SAFETY-NETTING-001",
+            "category": "no-safety-netting",
+            "priority": "medium",
+            "description": "Red-flag symptoms are recorded but no safety-netting advice is documented",
+            "suggestedAction": "Document safety-netting advice: what to look out for and when and how to seek further help."
+          },
+          {
+            "id": "F-ABNORMAL-VITALS-UNADDRESSED-001",
+            "category": "abnormal-vitals-unaddressed",
+            "priority": "medium",
+            "description": "Abnormal vital signs are flagged but are not referenced in the Assessment or Plan",
+            "suggestedAction": "Address the abnormal vital signs in the Assessment or Plan, or explain why no action is needed."
+          },
+          {
+            "id": "F-INCOMPLETE-DOCUMENTATION-001",
+            "category": "incomplete-documentation",
+            "priority": "low",
+            "description": "One or more required components are missing — the note is not fully documented",
+            "suggestedAction": "Complete the outstanding required components so the SOAP note is whole."
+          }
+        ]
+      }
+    }
+  ]
+}
