@@ -1,6 +1,6 @@
 -- Join table: which medications a patient takes, with the agreed perioperative
 -- hold-and-restart plan recorded per drug rather than as a single free-text
--- note, so the medication optimisation domain can be graded per medicine.
+-- note, so the medication optimization domain can be graded per medicine.
 
 CREATE TABLE patient_medication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -74,7 +74,7 @@ COMMENT ON COLUMN patient_medication.hold_start_before_days IS
 COMMENT ON COLUMN patient_medication.restart_after_days IS
     'Agreed number of days after surgery to restart this medicine.';
 COMMENT ON COLUMN patient_medication.hold_plan_agreed IS
-    'Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimisation domain.';
+    'Whether a hold-and-restart plan has been agreed with the prescriber. An unagreed plan on a hold-requiring medicine triggers the medication optimization domain.';
 COMMENT ON COLUMN patient_medication.hold_plan_agreed_by IS
     'Who agreed the hold-and-restart plan.';
 COMMENT ON COLUMN patient_medication.hold_plan_agreed_on IS

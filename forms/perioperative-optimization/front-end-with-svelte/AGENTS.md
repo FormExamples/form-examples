@@ -10,12 +10,12 @@ and flag IDs match the HTML front-end and the back-end.
 - The engine in `src/lib/engine/` must stay **pure**: no I/O, no `Date.now()`.
   Both dates come from the data. Generators must not overwrite it.
 - Thresholds and lead times live only in `domain-rules.ts`. Change
-  `../doc/optimisation-domains.md` first, then the code, then add a boundary
+  `../doc/optimization-domains.md` first, then the code, then add a boundary
   test — and make the same change in the HTML front-end's `js/domain-rules.js`.
   The two implementations are kept in lockstep deliberately and share a case
   list.
 - `insufficient-time` must always force `defer-surgery` and always raise the
-  `insufficient-time-to-optimise` flag. Never soften it to a warning.
+  `insufficient-time-to-optimize` flag. Never soften it to a warning.
 - Safety flags are computed independently of the readiness band and must never
   be filtered by the clinician override.
 - The submit guard that blocks `proceed` against a computed `defer-surgery` band

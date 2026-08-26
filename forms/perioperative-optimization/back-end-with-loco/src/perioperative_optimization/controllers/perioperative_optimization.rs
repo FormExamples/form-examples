@@ -57,6 +57,13 @@ pub struct Params {
     pub takes_ace_inhibitor_or_arb: String,
     pub takes_sglt2_inhibitor: String,
     pub takes_glp1_agonist: String,
+    pub glp1_formulation: String,
+    pub glp1_held_per_guideline: String,
+    pub glp1_extended_clear_fluids_confirmed: String,
+    pub glp1_gi_symptoms: String,
+    pub glp1_gi_symptoms_details: String,
+    pub glp1_gastric_ultrasound_performed: String,
+    pub glp1_gastric_ultrasound_findings: String,
     pub takes_corticosteroid: String,
     pub takes_immunosuppressant: String,
     pub takes_hormone_therapy: String,
@@ -147,8 +154,17 @@ pub struct Params {
     pub prehabilitation_enrolled: String,
     pub prehabilitation_sessions_per_week: Option<i32>,
     pub prehabilitation_start_date: Option<Date>,
+    pub protein_supplementation_recommended: String,
     pub fitness_notes: String,
     pub clinical_frailty_scale: Option<i32>,
+    pub fried_weakness: String,
+    pub fried_slowness: String,
+    pub fried_low_physical_activity: String,
+    pub fried_exhaustion: String,
+    pub fried_unintentional_weight_loss: String,
+    pub risk_analysis_index_score: Option<i32>,
+    pub mini_cog_performed: String,
+    pub mini_cog_score: Option<i32>,
     pub cognitive_screen_tool: String,
     pub cognitive_screen_score: Option<f64>,
     pub cognitive_impairment: String,
@@ -263,6 +279,13 @@ impl Params {
       item.takes_ace_inhibitor_or_arb = Set(self.takes_ace_inhibitor_or_arb.clone());
       item.takes_sglt2_inhibitor = Set(self.takes_sglt2_inhibitor.clone());
       item.takes_glp1_agonist = Set(self.takes_glp1_agonist.clone());
+      item.glp1_formulation = Set(self.glp1_formulation.clone());
+      item.glp1_held_per_guideline = Set(self.glp1_held_per_guideline.clone());
+      item.glp1_extended_clear_fluids_confirmed = Set(self.glp1_extended_clear_fluids_confirmed.clone());
+      item.glp1_gi_symptoms = Set(self.glp1_gi_symptoms.clone());
+      item.glp1_gi_symptoms_details = Set(self.glp1_gi_symptoms_details.clone());
+      item.glp1_gastric_ultrasound_performed = Set(self.glp1_gastric_ultrasound_performed.clone());
+      item.glp1_gastric_ultrasound_findings = Set(self.glp1_gastric_ultrasound_findings.clone());
       item.takes_corticosteroid = Set(self.takes_corticosteroid.clone());
       item.takes_immunosuppressant = Set(self.takes_immunosuppressant.clone());
       item.takes_hormone_therapy = Set(self.takes_hormone_therapy.clone());
@@ -353,8 +376,17 @@ impl Params {
       item.prehabilitation_enrolled = Set(self.prehabilitation_enrolled.clone());
       item.prehabilitation_sessions_per_week = Set(self.prehabilitation_sessions_per_week);
       item.prehabilitation_start_date = Set(self.prehabilitation_start_date);
+      item.protein_supplementation_recommended = Set(self.protein_supplementation_recommended.clone());
       item.fitness_notes = Set(self.fitness_notes.clone());
       item.clinical_frailty_scale = Set(self.clinical_frailty_scale);
+      item.fried_weakness = Set(self.fried_weakness.clone());
+      item.fried_slowness = Set(self.fried_slowness.clone());
+      item.fried_low_physical_activity = Set(self.fried_low_physical_activity.clone());
+      item.fried_exhaustion = Set(self.fried_exhaustion.clone());
+      item.fried_unintentional_weight_loss = Set(self.fried_unintentional_weight_loss.clone());
+      item.risk_analysis_index_score = Set(self.risk_analysis_index_score);
+      item.mini_cog_performed = Set(self.mini_cog_performed.clone());
+      item.mini_cog_score = Set(self.mini_cog_score);
       item.cognitive_screen_tool = Set(self.cognitive_screen_tool.clone());
       item.cognitive_screen_score = Set(self.cognitive_screen_score);
       item.cognitive_impairment = Set(self.cognitive_impairment.clone());

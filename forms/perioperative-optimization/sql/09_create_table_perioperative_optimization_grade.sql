@@ -1,4 +1,4 @@
--- Computed and signed-off grading result for one perioperative optimisation
+-- Computed and signed-off grading result for one perioperative optimization
 -- assessment. Stores the engine-computed surgical readiness band and the
 -- clinician-final band with an override reason, plus the derived instrument
 -- scores and the weeks remaining before surgery that drove the gating.
@@ -26,9 +26,13 @@ CREATE TABLE perioperative_optimization_grade (
         CHECK (duke_activity_status_index IS NULL OR duke_activity_status_index BETWEEN 0 AND 60),
     clinical_frailty_scale INTEGER
         CHECK (clinical_frailty_scale IS NULL OR clinical_frailty_scale BETWEEN 1 AND 9),
+    fried_phenotype_score INTEGER
+        CHECK (fried_phenotype_score IS NULL OR fried_phenotype_score BETWEEN 0 AND 5),
+    fried_frailty_category VARCHAR(15) NOT NULL DEFAULT ''
+        CHECK (fried_frailty_category IN ('robust', 'pre-frail', 'frail', '')),
 
-    domains_optimised INTEGER
-        CHECK (domains_optimised IS NULL OR domains_optimised BETWEEN 0 AND 8),
+    domains_optimized INTEGER
+        CHECK (domains_optimized IS NULL OR domains_optimized BETWEEN 0 AND 8),
     domains_in_progress INTEGER
         CHECK (domains_in_progress IS NULL OR domains_in_progress BETWEEN 0 AND 8),
     domains_action_required INTEGER
@@ -37,13 +41,13 @@ CREATE TABLE perioperative_optimization_grade (
         CHECK (domains_insufficient_time IS NULL OR domains_insufficient_time BETWEEN 0 AND 8),
 
     computed_readiness VARCHAR(30) NOT NULL DEFAULT ''
-        CHECK (computed_readiness IN ('ready', 'optimisation-in-progress', 'optimisation-required', 'defer-surgery', '')),
+        CHECK (computed_readiness IN ('ready', 'optimization-in-progress', 'optimization-required', 'defer-surgery', '')),
     final_readiness VARCHAR(30) NOT NULL DEFAULT ''
-        CHECK (final_readiness IN ('ready', 'optimisation-in-progress', 'optimisation-required', 'defer-surgery', '')),
+        CHECK (final_readiness IN ('ready', 'optimization-in-progress', 'optimization-required', 'defer-surgery', '')),
     override_reason VARCHAR(500) NOT NULL DEFAULT '',
 
     gate_decision VARCHAR(30) NOT NULL DEFAULT ''
-        CHECK (gate_decision IN ('proceed', 'proceed-with-prehabilitation', 'defer-and-optimise', 'accept-unoptimised-risk', 'mdt-review', 'cancel', '')),
+        CHECK (gate_decision IN ('proceed', 'proceed-with-prehabilitation', 'defer-and-optimize', 'accept-unoptimized-risk', 'mdt-review', 'cancel', '')),
     recommended_earliest_surgery_date DATE,
     clinician_notes TEXT NOT NULL DEFAULT '',
     signed_by_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -57,7 +61,7 @@ CREATE TRIGGER trigger_perioperative_optimization_grade_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE perioperative_optimization_grade IS
-    'Computed and signed-off grading result for one perioperative optimisation assessment, holding the engine-computed and clinician-final surgical readiness bands.';
+    'Computed and signed-off grading result for one perioperative optimization assessment, holding the engine-computed and clinician-final surgical readiness bands.';
 COMMENT ON COLUMN perioperative_optimization_grade.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN perioperative_optimization_grade.created_at IS
@@ -84,8 +88,12 @@ COMMENT ON COLUMN perioperative_optimization_grade.duke_activity_status_index IS
     'Duke Activity Status Index, contributing to the physical fitness domain.';
 COMMENT ON COLUMN perioperative_optimization_grade.clinical_frailty_scale IS
     'Clinical Frailty Scale, 1 to 9. Reported and flagged but not gated, because frailty is rarely reversible in the available window.';
-COMMENT ON COLUMN perioperative_optimization_grade.domains_optimised IS
-    'Count of the eight domains graded optimised or not-applicable.';
+COMMENT ON COLUMN perioperative_optimization_grade.fried_phenotype_score IS
+    'Fried Frailty Phenotype score (0-5): count of weakness, slowness, low activity, exhaustion, and unintentional weight loss criteria met.';
+COMMENT ON COLUMN perioperative_optimization_grade.fried_frailty_category IS
+    'Fried Frailty Phenotype category derived from the score: robust (0), pre-frail (1-2), or frail (3-5).';
+COMMENT ON COLUMN perioperative_optimization_grade.domains_optimized IS
+    'Count of the eight domains graded optimized or not-applicable.';
 COMMENT ON COLUMN perioperative_optimization_grade.domains_in_progress IS
     'Count of the eight domains graded in-progress.';
 COMMENT ON COLUMN perioperative_optimization_grade.domains_action_required IS
@@ -99,7 +107,7 @@ COMMENT ON COLUMN perioperative_optimization_grade.final_readiness IS
 COMMENT ON COLUMN perioperative_optimization_grade.override_reason IS
     'Reason the clinician set a final band differently from the computed band, mandatory when they differ. Safety flags are unaffected by the override.';
 COMMENT ON COLUMN perioperative_optimization_grade.gate_decision IS
-    'The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimise, accept-unoptimised-risk, mdt-review, or cancel.';
+    'The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimize, accept-unoptimized-risk, mdt-review, or cancel.';
 COMMENT ON COLUMN perioperative_optimization_grade.recommended_earliest_surgery_date IS
     'Earliest date at which every triggered domain would have had its full lead time, derived from the largest domain shortfall.';
 COMMENT ON COLUMN perioperative_optimization_grade.clinician_notes IS

@@ -1,5 +1,5 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect } from "@sveltejs/kit";
 
 export function GET() {
-	redirect(307, '/perioperative-optimization/');
+  redirect(307, "/perioperative-optimization/");
 }

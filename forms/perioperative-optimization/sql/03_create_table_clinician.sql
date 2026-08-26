@@ -28,7 +28,7 @@ CREATE TRIGGER trigger_clinician_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE clinician IS
-    'Clinician, i.e. the practitioner who conducts the perioperative optimisation assessment.';
+    'Clinician, i.e. the practitioner who conducts the perioperative optimization assessment.';
 COMMENT ON COLUMN clinician.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN clinician.created_at IS

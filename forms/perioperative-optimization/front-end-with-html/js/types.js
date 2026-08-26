@@ -10,7 +10,7 @@
 // and time fields are null; yes/no fields are the strings 'yes' / 'no' / '' so
 // they round-trip to the SQL CHECK constraints without translation.
 
-/** Build a fresh, fully-blank perioperative optimisation assessment. */
+/** Build a fresh, fully-blank perioperative optimization assessment. */
 function emptyAssessment() {
   return {
     // Step 1 — assessment context
@@ -82,6 +82,13 @@ function emptyAssessment() {
       takesAceInhibitorOrArb: '',
       takesSglt2Inhibitor: '',
       takesGlp1Agonist: '',
+      glp1Formulation: '',
+      glp1HeldPerGuideline: '',
+      glp1ExtendedClearFluidsConfirmed: '',
+      glp1GiSymptoms: '',
+      glp1GiSymptomsDetails: '',
+      glp1GastricUltrasoundPerformed: '',
+      glp1GastricUltrasoundFindings: '',
       takesCorticosteroid: '',
       takesImmunosuppressant: '',
       takesHormoneTherapy: '',
@@ -191,11 +198,20 @@ function emptyAssessment() {
       prehabilitationEnrolled: '',
       prehabilitationSessionsPerWeek: null,
       prehabilitationStartDate: '',
+      proteinSupplementationRecommended: '',
       fitnessNotes: ''
     },
     // Step 12 — frailty, cognition, and falls
     frailty: {
       clinicalFrailtyScale: null,
+      friedWeakness: '',
+      friedSlowness: '',
+      friedLowPhysicalActivity: '',
+      friedExhaustion: '',
+      friedUnintentionalWeightLoss: '',
+      riskAnalysisIndexScore: null,
+      miniCogPerformed: '',
+      miniCogScore: null,
       cognitiveScreenTool: '',
       cognitiveScreenScore: null,
       cognitiveImpairment: '',
@@ -206,7 +222,7 @@ function emptyAssessment() {
       carePackage: '',
       frailtyNotes: ''
     },
-    // Step 13 — cardiorespiratory optimisation
+    // Step 13 — cardiorespiratory optimization
     cardioresp: {
       systolicBp: null,
       diastolicBp: null,
@@ -241,7 +257,7 @@ function emptyAssessment() {
       psychologicalSupportOffered: '',
       socialNotes: ''
     },
-    // Step 15 — optimisation plan by domain
+    // Step 15 — optimization plan by domain
     plan: {
       planAnaemia: '',
       referralAnaemia: '',
@@ -279,14 +295,14 @@ function emptyAssessment() {
 /** Display labels for the surgical readiness bands. */
 const READINESS_LABELS = {
   'ready': 'Ready for surgery',
-  'optimisation-in-progress': 'Optimisation in progress',
-  'optimisation-required': 'Optimisation required',
+  'optimization-in-progress': 'Optimization in progress',
+  'optimization-required': 'Optimization required',
   'defer-surgery': 'Defer surgery'
 };
 
 /** Display labels for the per-domain statuses. */
 const STATUS_LABELS = {
-  'optimised': 'Optimised',
+  'optimized': 'Optimized',
   'in-progress': 'In progress',
   'action-required': 'Action required',
   'insufficient-time': 'Insufficient time',
@@ -297,8 +313,8 @@ const STATUS_LABELS = {
 const GATE_DECISION_LABELS = {
   'proceed': 'Proceed as listed',
   'proceed-with-prehabilitation': 'Proceed with prehabilitation',
-  'defer-and-optimise': 'Defer and optimise',
-  'accept-unoptimised-risk': 'Accept unoptimised risk',
+  'defer-and-optimize': 'Defer and optimize',
+  'accept-unoptimized-risk': 'Accept unoptimized risk',
   'mdt-review': 'Refer to MDT review',
   'cancel': 'Cancel'
 };

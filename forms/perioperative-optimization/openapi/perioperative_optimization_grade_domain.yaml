@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Perioperative Optimization — PerioperativeOptimizationGradeDomain
   version: 1.0.0
-  description: Per-domain optimisation result, one row per optimisation domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.
+  description: Per-domain optimization result, one row per optimization domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.
 paths:
   /perioperative-optimization-grade-domains:
     get:
@@ -135,24 +135,24 @@ components:
             - physical-fitness
             - medication
             - cardiorespiratory
-          description: Which of the eight optimisation domains this row grades.
+          description: Which of the eight optimization domains this row grades.
         status:
           type: string
           enum:
-            - optimised
+            - optimized
             - in-progress
             - action-required
             - insufficient-time
             - not-applicable
             - ""
-          description: "Domain status after time-to-surgery gating: optimised, in-progress, action-required, insufficient-time, or not-applicable."
+          description: "Domain status after time-to-surgery gating: optimized, in-progress, action-required, insufficient-time, or not-applicable."
         triggered:
           type: boolean
-          description: Whether the domain screening threshold was crossed, i.e. whether there is anything to optimise.
+          description: Whether the domain screening threshold was crossed, i.e. whether there is anything to optimize.
         lead_time_weeks:
           type: integer
           format: int32
-          description: Minimum weeks before surgery the intervention needs in order to work, per doc/optimisation-domains.md.
+          description: Minimum weeks before surgery the intervention needs in order to work, per doc/optimization-domains.md.
         weeks_shortfall:
           type: integer
           format: int32
@@ -197,4 +197,4 @@ components:
         - intervention_started
         - referral_made
         - target_value
-      description: Per-domain optimisation result, one row per optimisation domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.
+      description: Per-domain optimization result, one row per optimization domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.

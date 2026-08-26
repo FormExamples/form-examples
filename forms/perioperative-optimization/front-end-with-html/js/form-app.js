@@ -447,15 +447,15 @@ const OPTIONS = {
   ],
   readiness: [
     { value: 'ready', label: 'Ready for surgery' },
-    { value: 'optimisation-in-progress', label: 'Optimisation in progress' },
-    { value: 'optimisation-required', label: 'Optimisation required' },
+    { value: 'optimization-in-progress', label: 'Optimization in progress' },
+    { value: 'optimization-required', label: 'Optimization required' },
     { value: 'defer-surgery', label: 'Defer surgery' }
   ],
   gateDecision: [
     { value: 'proceed', label: 'Proceed as listed' },
     { value: 'proceed-with-prehabilitation', label: 'Proceed with prehabilitation' },
-    { value: 'defer-and-optimise', label: 'Defer and optimise' },
-    { value: 'accept-unoptimised-risk', label: 'Accept unoptimised risk' },
+    { value: 'defer-and-optimize', label: 'Defer and optimize' },
+    { value: 'accept-unoptimized-risk', label: 'Accept unoptimized risk' },
     { value: 'mdt-review', label: 'Refer to MDT review' },
     { value: 'cancel', label: 'Cancel' }
   ]
@@ -479,7 +479,7 @@ function renderStep1() {
   card.appendChild(grid('two-col', [
     textInput({
       label: 'Assessment date', section: 'assessment', field: 'assessmentDate', type: 'date', required: true,
-      hint: 'With the planned surgery date this sets the weeks available to optimise.'
+      hint: 'With the planned surgery date this sets the weeks available to optimize.'
     }),
     textInput({ label: 'Assessment time', section: 'assessment', field: 'assessmentTime', type: 'time' })
   ]));
@@ -585,7 +585,7 @@ function renderStep3() {
 function renderStep4() {
   const card = sectionCard({
     stepNumber: 4, title: 'Medications',
-    description: 'The medication domain is optimised when a hold-and-restart plan has been agreed with the prescriber.'
+    description: 'The medication domain is optimized when a hold-and-restart plan has been agreed with the prescriber.'
   });
   card.appendChild(grid('three-col', [
     yesNo({ label: 'Prescription medicines', section: 'medication', field: 'takesPrescriptionMedicines' }),
@@ -607,6 +607,39 @@ function renderStep4() {
       hint: 'Delays gastric emptying — aspiration risk despite standard fasting.'
     })
   ]));
+  card.appendChild(subHead('GLP-1 receptor agonist management'));
+  card.appendChild(grid('three-col', [
+    selectInput({
+      label: 'Formulation', section: 'medication', field: 'glp1Formulation',
+      options: [{ value: 'daily', label: 'Daily' }, { value: 'weekly', label: 'Weekly' }]
+    }),
+    yesNo({
+      label: 'Held per guideline', section: 'medication', field: 'glp1HeldPerGuideline',
+      hint: 'Daily formulations held day-of; weekly formulations held one week prior.'
+    }),
+    yesNo({
+      label: 'Extended clear-fluid fast confirmed', section: 'medication', field: 'glp1ExtendedClearFluidsConfirmed',
+      hint: '24-hour solid fast plus 4-8 hour clear-liquid fast, if not held.'
+    })
+  ]));
+  card.appendChild(grid('two-col', [
+    yesNo({
+      label: 'Active GI symptoms', section: 'medication', field: 'glp1GiSymptoms',
+      hint: 'Nausea, vomiting, bloating, or abdominal pain.'
+    }),
+    textInput({ label: 'GI symptom details', section: 'medication', field: 'glp1GiSymptomsDetails' })
+  ]));
+  card.appendChild(grid('two-col', [
+    yesNo({ label: 'Gastric ultrasound performed', section: 'medication', field: 'glp1GastricUltrasoundPerformed' }),
+    selectInput({
+      label: 'Gastric ultrasound finding', section: 'medication', field: 'glp1GastricUltrasoundFindings',
+      options: [
+        { value: 'empty', label: 'Empty' },
+        { value: 'low-risk', label: 'Low risk' },
+        { value: 'full-stomach', label: 'Full stomach' }
+      ]
+    })
+  ]));
   card.appendChild(grid('two-col', [
     yesNo({ label: 'ACE inhibitor or ARB', section: 'medication', field: 'takesAceInhibitorOrArb' }),
     yesNo({ label: 'Systemic corticosteroid', section: 'medication', field: 'takesCorticosteroid' })
@@ -619,7 +652,7 @@ function renderStep4() {
   card.appendChild(grid('two-col', [
     yesNo({
       label: 'Hold-and-restart plan agreed', section: 'medication', field: 'medicationHoldPlanAgreed',
-      hint: 'This is the medication domain optimisation criterion.'
+      hint: 'This is the medication domain optimization criterion.'
     }),
     textInput({ label: 'Agreed by', section: 'medication', field: 'medicationHoldPlanAgreedBy' })
   ]));
@@ -844,6 +877,10 @@ function renderStep11() {
     textInput({ label: 'Sessions per week', section: 'fitness', field: 'prehabilitationSessionsPerWeek', type: 'number', min: 0, max: 21 }),
     textInput({ label: 'Programme start date', section: 'fitness', field: 'prehabilitationStartDate', type: 'date' })
   ]));
+  card.appendChild(yesNo({
+    label: 'Protein supplementation recommended', section: 'fitness', field: 'proteinSupplementationRecommended',
+    hint: 'Particularly for a frail patient on a GLP-1 receptor agonist, at risk of accelerated sarcopenia.'
+  }));
   card.appendChild(textArea({ label: 'Fitness notes', section: 'fitness', field: 'fitnessNotes', rows: 2 }));
   return card;
 }
@@ -855,8 +892,24 @@ function renderStep12() {
   });
   card.appendChild(textInput({
     label: 'Clinical Frailty Scale', section: 'frailty', field: 'clinicalFrailtyScale', type: 'number', min: 1, max: 9,
-    hint: '1 very fit to 9 terminally ill. 7 or above raises a flag.'
+    hint: '1 very fit to 9 terminally ill. 7 or above raises a flag; 5 or above indicates a Mini-Cog.'
   }));
+  card.appendChild(subHead('Fried Frailty Phenotype'));
+  card.appendChild(grid('three-col', [
+    yesNo({ label: 'Weakness', section: 'frailty', field: 'friedWeakness' }),
+    yesNo({ label: 'Slowness', section: 'frailty', field: 'friedSlowness' }),
+    yesNo({ label: 'Low physical activity', section: 'frailty', field: 'friedLowPhysicalActivity' })
+  ]));
+  card.appendChild(grid('three-col', [
+    yesNo({ label: 'Exhaustion', section: 'frailty', field: 'friedExhaustion' }),
+    yesNo({ label: 'Unintentional weight loss', section: 'frailty', field: 'friedUnintentionalWeightLoss' }),
+    textInput({ label: 'Risk Analysis Index score', section: 'frailty', field: 'riskAnalysisIndexScore', type: 'number', min: 0, max: 100 })
+  ]));
+  card.appendChild(subHead('Cognitive screening (Mini-Cog)'));
+  card.appendChild(grid('two-col', [
+    yesNo({ label: 'Mini-Cog performed', section: 'frailty', field: 'miniCogPerformed', hint: 'Indicated when the Clinical Frailty Scale is 5 or above.' }),
+    textInput({ label: 'Mini-Cog score (0-5)', section: 'frailty', field: 'miniCogScore', type: 'number', min: 0, max: 5 })
+  ]));
   card.appendChild(grid('three-col', [
     selectInput({ label: 'Cognitive screen tool', section: 'frailty', field: 'cognitiveScreenTool', options: OPTIONS.cognitiveTool }),
     textInput({ label: 'Score', section: 'frailty', field: 'cognitiveScreenScore', type: 'number', step: 0.1 }),
@@ -877,7 +930,7 @@ function renderStep12() {
 
 function renderStep13() {
   const card = sectionCard({
-    stepNumber: 13, title: 'Cardiorespiratory optimisation',
+    stepNumber: 13, title: 'Cardiorespiratory optimization',
     description: 'Domain 8. Blood pressure at or above 180/110, uncontrolled airways disease, an ejection fraction below 40%, or an unassessed high STOP-BANG all trigger it.'
   });
   card.appendChild(grid('three-col', [
@@ -918,7 +971,7 @@ function renderStep13() {
 function renderStep14() {
   const card = sectionCard({
     stepNumber: 14, title: 'Psychological readiness and social support',
-    description: 'Assessed and flagged rather than gated. A plan the patient cannot follow, or a discharge with no support, undoes the rest of the optimisation.'
+    description: 'Assessed and flagged rather than gated. A plan the patient cannot follow, or a discharge with no support, undoes the rest of the optimization.'
   });
   card.appendChild(grid('two-col', [
     selectInput({ label: 'Anxiety about the procedure', section: 'social', field: 'anxietyLevel', options: OPTIONS.severity4 }),
@@ -956,7 +1009,7 @@ const PLAN_FIELDS = [
 
 function renderStep15() {
   const card = sectionCard({
-    stepNumber: 15, title: 'Optimisation plan by domain',
+    stepNumber: 15, title: 'Optimization plan by domain',
     description: 'What will be done for each triggered domain, and whether an onward referral has been made.'
   });
   for (const [domain, planField, referralField] of PLAN_FIELDS) {
@@ -983,7 +1036,7 @@ function renderStep16() {
     description: 'The computed band is advisory. A clinician must record an explicit gate decision and sign.'
   });
   card.appendChild(note(
-    'A computed band of "Defer surgery" has exactly two safe resolutions: move the date so the window exists, or record an explicit accept-unoptimised-risk decision. Choosing neither, and proceeding as if the patient were optimised, is the hazard this form exists to prevent.'
+    'A computed band of "Defer surgery" has exactly two safe resolutions: move the date so the window exists, or record an explicit accept-unoptimized-risk decision. Choosing neither, and proceeding as if the patient were optimized, is the hazard this form exists to prevent.'
   ));
   card.appendChild(subHead('Clinician override'));
   card.appendChild(grid('two-col', [
@@ -1033,7 +1086,7 @@ function updateLiveReadiness() {
     <span class="band-badge readiness-${esc(r.finalReadiness)}">${esc(labelFor(READINESS_LABELS, r.finalReadiness))}</span>
     <span class="live-weeks">${esc(weeks)}</span>
     <span class="live-counts">
-      ${r.counts.optimised} optimised ·
+      ${r.counts.optimized} optimized ·
       ${r.counts.inProgress} in progress ·
       ${r.counts.actionRequired} action required ·
       ${r.counts.insufficientTime} short on time
@@ -1173,7 +1226,7 @@ function validateForm() {
       ['proceed', 'proceed-with-prehabilitation'].includes(state.signoff.gateDecision)) {
     const id = 'signoff-gateDecision';
     const message =
-      'The computed band is "Defer surgery". Choose "Defer and optimise", or record "Accept unoptimised risk" explicitly';
+      'The computed band is "Defer surgery". Choose "Defer and optimize", or record "Accept unoptimized risk" explicitly';
     errors.push({ id, message });
     setFieldError(id, message);
   }
@@ -1243,7 +1296,7 @@ function renderReport() {
          <strong>Earliest date at which every domain would have its full lead time:
          ${esc(r.recommendedEarliestSurgeryDate)}.</strong>
          Either move the list to that date or later, or record an explicit
-         accept-unoptimised-risk decision.
+         accept-unoptimized-risk decision.
        </div>`
     : '';
 
@@ -1258,7 +1311,7 @@ function renderReport() {
     : '';
 
   out.innerHTML = `
-    <h2>Perioperative Optimisation Report</h2>
+    <h2>Perioperative Optimization Report</h2>
     <p class="muted">
       Generated ${esc(new Date(r.timestamp).toLocaleString())} ·
       ${esc(`${state.patient.firstName} ${state.patient.lastName}`.trim() || 'Patient not named')} ·
@@ -1275,7 +1328,7 @@ function renderReport() {
       ${r.gateDecision ? `<span class="band-badge gate-${esc(r.gateDecision)}">${esc(labelFor(GATE_DECISION_LABELS, r.gateDecision))}</span>` : ''}
     </div>
 
-    <h3>Optimisation domains</h3>
+    <h3>Optimization domains</h3>
     <table class="subscales">
       <thead>
         <tr>
@@ -1297,6 +1350,7 @@ function renderReport() {
       <div class="axis-card"><span class="axis-name">STOP-BANG</span><span class="axis-value">${r.stopBangScore === null ? '—' : `${r.stopBangScore} / 8`}</span></div>
       <div class="axis-card"><span class="axis-name">Duke Activity Status Index</span><span class="axis-value">${r.dukeActivityStatusIndex === null ? '—' : r.dukeActivityStatusIndex}</span></div>
       <div class="axis-card"><span class="axis-name">Clinical Frailty Scale</span><span class="axis-value">${r.clinicalFrailtyScale === null ? '—' : `${r.clinicalFrailtyScale} / 9`}</span></div>
+      <div class="axis-card"><span class="axis-name">Fried Frailty Phenotype</span><span class="axis-value">${r.friedPhenotypeScore === null ? '—' : `${r.friedPhenotypeScore} / 5${r.friedFrailtyCategory ? ` · ${titleCase(r.friedFrailtyCategory)}` : ''}`}</span></div>
       <div class="axis-card"><span class="axis-name">Body mass index</span><span class="axis-value">${r.bmi === null ? '—' : `${r.bmi} kg/m²`}</span></div>
     </div>
 
@@ -1341,7 +1395,7 @@ function startOver() {
   state = emptyAssessment();
   lastResult = null;
   document.getElementById('report').innerHTML =
-    '<p class="empty-message">Submit the form to see the optimisation report.</p>';
+    '<p class="empty-message">Submit the form to see the optimization report.</p>';
   renderErrorSummary([]);
   renderForm();
   updateLiveReadiness();

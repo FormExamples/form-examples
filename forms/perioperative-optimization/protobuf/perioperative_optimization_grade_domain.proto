@@ -19,7 +19,7 @@ enum PerioperativeOptimizationGradeDomainDomainEnum {
 
 enum PerioperativeOptimizationGradeDomainStatusEnum {
   STATUS_UNSPECIFIED = 0;
-  STATUS_OPTIMISED = 1;  // optimised
+  STATUS_OPTIMIZED = 1;  // optimized
   STATUS_IN_PROGRESS = 2;  // in-progress
   STATUS_ACTION_REQUIRED = 3;  // action-required
   STATUS_INSUFFICIENT_TIME = 4;  // insufficient-time

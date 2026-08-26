@@ -42,7 +42,7 @@ both directions of that comparison; the optimization status is not.
   Clinical Frailty Scale, with thresholds from CPOC, NICE, and the source
   papers. Nothing is invented.
 - **Max-grade composite.** The worst domain sets the readiness band, so one
-  unoptimised domain cannot be averaged away by seven good ones.
+  unoptimized domain cannot be averaged away by seven good ones.
 - **One domain table, read everywhere.** `DOMAIN_DEFINITIONS` is the single
   source of thresholds and lead times; no implementation inlines them.
 - **The override is auditable, not silent.** Computed and final bands are both

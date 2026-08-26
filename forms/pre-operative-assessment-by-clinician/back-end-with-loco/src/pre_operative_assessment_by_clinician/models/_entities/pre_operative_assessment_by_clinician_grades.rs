@@ -19,6 +19,8 @@ pub struct Model {
     pub rcri_score: Option<i32>,
     pub stopbang_score: Option<i32>,
     pub frailty_scale: Option<i32>,
+    pub fried_phenotype_score: Option<i32>,
+    pub fried_frailty_category: String,
     pub composite_risk: String,
     pub recommendation: String,
     #[sea_orm(column_type = "Text")]

@@ -18,7 +18,7 @@ For each domain:
 | Condition | Status | Meaning |
 | --- | --- | --- |
 | domain does not apply (no diabetes, never smoked, …) | `not-applicable` | nothing to do |
-| domain applies but the trigger is absent | `optimised` | already where it should be |
+| domain applies but the trigger is absent | `optimized` | already where it should be |
 | triggered, intervention started, `weeksToSurgery >= leadTime` | `in-progress` | on track; keep going |
 | triggered, not started, `weeksToSurgery >= leadTime` | `action-required` | start now and it will work |
 | triggered, `weeksToSurgery < leadTime` | `insufficient-time` | it cannot work before the listed date |
@@ -34,7 +34,7 @@ surgery would have to be for the intervention to work.
 ## Why `insufficient-time` is not a warning
 
 It forces the composite readiness band to `defer-surgery` and raises the
-`insufficient-time-to-optimise` safety flag. Neither is suppressible by the
+`insufficient-time-to-optimize` safety flag. Neither is suppressible by the
 clinician override, which changes only the readiness band and leaves the flag
 list untouched.
 
@@ -43,12 +43,12 @@ a person to choose:
 
 1. **Re-date the surgery** so the window exists. The report gives the shortfall
    in weeks, so the new date is arithmetic.
-2. **Accept the unoptimised risk** because the surgery cannot wait — an
+2. **Accept the unoptimized risk** because the surgery cannot wait — an
    oncological resection, a rapidly deteriorating joint, a patient who declines
    delay. This is a legitimate and common decision.
 
 The form's job is to make the team say which one, and to record it. Step 16's
-gate decision includes `accept-unoptimised-risk` for precisely this purpose, and
+gate decision includes `accept-unoptimized-risk` for precisely this purpose, and
 selecting it requires the override reason. Softening `insufficient-time` into a
 warning would let the third, unsafe path happen by default: proceeding while
 believing the patient was optimized.
@@ -64,7 +64,7 @@ Assessment 2026-09-01, surgery 2026-12-01. `weeksToSurgery = 13`.
 | anaemia | Hb 118 g/L, ferritin 18 µg/L | 8 | `action-required` |
 | glycaemic-control | HbA1c 55 mmol/mol | 12 | `action-required` |
 | smoking | current smoker | 4 | `action-required` |
-| others | none | — | `optimised` / `not-applicable` |
+| others | none | — | `optimized` / `not-applicable` |
 
 Readiness: **optimization-required**. Every intervention fits. The plan starts
 today and the list stands.

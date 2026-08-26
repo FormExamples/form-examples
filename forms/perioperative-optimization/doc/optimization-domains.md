@@ -30,7 +30,7 @@ oral is not tolerated, absorption is impaired, or the window is under eight
 weeks. Investigate the cause — iron deficiency in an adult may indicate
 gastrointestinal blood loss and warrants its own pathway.
 
-The engine treats the domain as `optimised` when the trigger is absent, and as
+The engine treats the domain as `optimized` when the trigger is absent, and as
 `in-progress` when `anaemia_treatment_started = yes` and there is time.
 
 ---

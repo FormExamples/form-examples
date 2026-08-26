@@ -30,7 +30,9 @@ standard.
   objective clinician findings, with a clinician override + reason.
 - **Secondary instruments:** Mallampati airway class (I–IV), Revised Cardiac
   Risk Index (RCRI, 0–6), STOP-BANG OSA screening (0–8), Clinical Frailty Scale
-  (1–9), Duke Activity Status Index (DASI), ECOG performance status.
+  (1–9), Fried Frailty Phenotype (0–5: robust / pre-frail / frail), Risk
+  Analysis Index, Mini-Cog cognitive screen, Duke Activity Status Index
+  (DASI), ECOG performance status.
 - **Composite perioperative risk:** Low / Moderate / High / Critical, driven by
   the worst-band finding across instruments (max-grade algorithm).
 
@@ -60,8 +62,8 @@ clinician findings** — not patient self-report.
 | 10 | Endocrine | fasting glucose, HbA1c, thyroid status (TSH if indicated), adrenal status, steroid use, diabetes type and control |
 | 11 | Gastrointestinal | abdominal exam, reflux assessment, fasting status confirmation, last oral intake, NG tube / stoma |
 | 12 | Musculoskeletal & integumentary | spine for neuraxial, joint range of motion for positioning, skin at IV / regional block sites, pressure-ulcer risk |
-| 13 | Medications & allergies | clinician-reconciled medication list, anticoagulant hold plan, steroid cover, confirmed allergies with reactions, alcohol and smoking status |
-| 14 | Functional capacity & frailty | METs estimate, Duke Activity Status Index, Clinical Frailty Scale, ECOG, 6-minute walk test result if available, CPET summary |
+| 13 | Medications & allergies | clinician-reconciled medication list, anticoagulant hold plan, steroid cover, confirmed allergies with reactions, alcohol and smoking status, GLP-1 receptor agonist management (fasting/hold plan, GI symptom screening, gastric ultrasound, full-stomach precautions) |
+| 14 | Functional capacity & frailty | METs estimate, Duke Activity Status Index, Clinical Frailty Scale, Fried Frailty Phenotype (5 criteria), Risk Analysis Index, Mini-Cog cognitive screen (indicated at CFS ≥ 5), prehabilitation plan, ECOG, 6-minute walk test result if available, CPET summary |
 | 15 | Anaesthesia & post-op plan | proposed technique (GA / regional / sedation / MAC / combined), airway plan (supraglottic / ETT / awake FOI), monitoring level, analgesia plan, DVT prophylaxis, post-op disposition (ward / enhanced care / HDU / ICU), anticipated length of stay |
 | 16 | Summary, ASA & sign-off | computed ASA grade + fired rules, composite risk, safety flags, clinician override + reason (optional), overall recommendation (proceed / optimize first / cancel), additional notes, electronic signature |
 
@@ -76,7 +78,12 @@ frailty (CFS ≥ 7), recent COVID-19 (< 7 weeks), fasting violation, missing
 crossmatch for high-blood-loss surgery, high-risk medication conflict,
 cognitive impairment / capacity concern, paediatric, pregnancy, safeguarding,
 malignant hyperthermia risk, latex allergy, suxamethonium apnoea, pseudocholine-
-sterase deficiency.
+sterase deficiency, malnutrition risk, **GLP-1 receptor agonist aspiration
+risk**, **cognitive assessment indicated** (CFS ≥ 5 without a Mini-Cog),
+**sarcopenia risk** and **dehydration/AKI risk** (frailty intersecting with a
+GLP-1 receptor agonist), and **rebound glycaemic risk** (a held/fasting-
+extended GLP-1 receptor agonist in a patient on insulin) — see
+[`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md).
 
 ## Output
 
@@ -122,9 +129,20 @@ pre-operative-assessment-by-clinician/
 - Lee T.H. *et al.* Revised Cardiac Risk Index. *Circulation* 1999; 100:1043–9.
 - Chung F. *et al.* STOP-BANG Questionnaire. *Anesthesiology* 2008; 108:812–21.
 - Rockwood K. *et al.* Clinical Frailty Scale. *CMAJ* 2005; 173:489–95.
+- Fried L.P. *et al.* Frailty in Older Adults: Evidence for a Phenotype.
+  *J Gerontol A Biol Sci Med Sci* 2001; 56(3):M146–56.
 - NICE NG45. *Routine preoperative tests for elective surgery* (2016).
 - Association of Anaesthetists. *Pre-operative Assessment and Patient
   Preparation* (2010).
+- British Geriatrics Society. *Guideline for the care of people living with
+  frailty undergoing elective and emergency surgery*.
+- American Society of Anesthesiologists. *Consensus-Based Guidance on
+  Preoperative Management of Patients on GLP-1 Receptor Agonists* (2023).
+- UK gov.uk MHRA Drug Safety Update. *GLP-1 and dual GIP/GLP-1 receptor
+  agonists: potential risk of pulmonary aspiration during general
+  anaesthesia or deep sedation.*
+- See [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md)
+  for the complete GLP-1 and frailty reference list.
 
 ## Compliance
 

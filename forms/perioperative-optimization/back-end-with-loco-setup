@@ -157,6 +157,13 @@ cargo loco generate scaffold perioperative_optimization \
     takes_ace_inhibitor_or_arb:string! \
     takes_sglt2_inhibitor:string! \
     takes_glp1_agonist:string! \
+    glp1_formulation:string! \
+    glp1_held_per_guideline:string! \
+    glp1_extended_clear_fluids_confirmed:string! \
+    glp1_gi_symptoms:string! \
+    glp1_gi_symptoms_details:string! \
+    glp1_gastric_ultrasound_performed:string! \
+    glp1_gastric_ultrasound_findings:string! \
     takes_corticosteroid:string! \
     takes_immunosuppressant:string! \
     takes_hormone_therapy:string! \
@@ -247,8 +254,17 @@ cargo loco generate scaffold perioperative_optimization \
     prehabilitation_enrolled:string! \
     prehabilitation_sessions_per_week:int \
     prehabilitation_start_date:date \
+    protein_supplementation_recommended:string! \
     fitness_notes:text! \
     clinical_frailty_scale:int \
+    fried_weakness:string! \
+    fried_slowness:string! \
+    fried_low_physical_activity:string! \
+    fried_exhaustion:string! \
+    fried_unintentional_weight_loss:string! \
+    risk_analysis_index_score:int \
+    mini_cog_performed:string! \
+    mini_cog_score:int \
     cognitive_screen_tool:string! \
     cognitive_screen_score:double \
     cognitive_impairment:string! \
@@ -323,7 +339,9 @@ cargo loco generate scaffold perioperative_optimization_grade \
     stop_bang_score:int \
     duke_activity_status_index:double \
     clinical_frailty_scale:int \
-    domains_optimised:int \
+    fried_phenotype_score:int \
+    fried_frailty_category:string! \
+    domains_optimized:int \
     domains_in_progress:int \
     domains_action_required:int \
     domains_insufficient_time:int \

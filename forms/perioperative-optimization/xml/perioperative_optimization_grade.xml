@@ -14,7 +14,9 @@
 <stop_bang_score>5</stop_bang_score>
 <duke_activity_status_index>0.0</duke_activity_status_index>
 <clinical_frailty_scale>1</clinical_frailty_scale>
-<domains_optimised>1</domains_optimised>
+<fried_phenotype_score>5</fried_phenotype_score>
+<fried_frailty_category>robust</fried_frailty_category>
+<domains_optimized>1</domains_optimized>
 <domains_in_progress>1</domains_in_progress>
 <domains_action_required>1</domains_action_required>
 <domains_insufficient_time>1</domains_insufficient_time>

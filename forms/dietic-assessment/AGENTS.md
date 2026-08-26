@@ -18,6 +18,14 @@ every generated artefact keep the `dietic` stem so derived representations stay
 keyed to the directory. Do not "fix" the stem in code — it would break every
 generated file and the `bin/` drift detectors.
 
+The form is otherwise written in **Oxford spelling** (`-ize`), per
+[`/spec/oxford-spelling.md`](../../spec/oxford-spelling.md): *organization*,
+*specialized*, *organized*. British forms are retained as Oxford requires —
+anaemia, coeliac, oedema, paediatric, dietitian, diarrhoea, programme — and
+standards bodies' own terminology is left as published, so IDDSI's level-3
+label stays *Liquidised* and its name stays the *International Dysphagia Diet
+Standardisation Initiative*.
+
 ## Directory map
 
 - `./index.md` — project overview

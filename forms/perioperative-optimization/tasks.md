@@ -13,7 +13,7 @@
 - [x] `plan.md` — design principles and build order.
 - [x] `tasks.md` (this file).
 - [x] `doc/index.md` — reference-material index.
-- [x] `doc/optimisation-domains.md` — per-domain thresholds, interventions, lead times.
+- [x] `doc/optimization-domains.md` — per-domain thresholds, interventions, lead times.
 - [x] `doc/time-to-surgery-gating.md` — the gating model and worked examples.
 - [x] `doc/medication-hold-rules.md` — SGLT2, GLP-1, anticoagulant, ACE-i guidance.
 - [x] `doc/safety-case-notes.md` — DCB0129 / DCB0160 placeholders and hazards.

@@ -30,6 +30,11 @@ CREATE TABLE pre_operative_assessment_by_clinician_grade_flag (
             'sux-apnoea',
             'pseudocholinesterase-deficiency',
             'malnutrition-risk',
+            'glp1-aspiration-risk',
+            'cognitive-assessment-indicated',
+            'sarcopenia-risk',
+            'dehydration-aki-risk',
+            'rebound-glycaemic-risk',
             'other',
             ''
         )),

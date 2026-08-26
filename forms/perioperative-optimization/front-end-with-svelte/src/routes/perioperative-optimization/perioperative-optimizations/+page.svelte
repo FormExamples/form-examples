@@ -2,17 +2,17 @@
 	// Waiting-list dashboard. The columns that matter are weeks-to-surgery and
 	// the domains short on time: together they answer the question a coordinator
 	// actually has — which of next month's lists are about to go ahead without
-	// the optimisation they were promised?
-	import Alert from '#lib/components/ui/Alert.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import Field from '#lib/components/ui/Field.svelte';
-	import Select from '#lib/components/ui/Select.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import { sampleAssessments } from '#lib/data/sample-reports.js';
-	import { DOMAIN_LABELS } from '#lib/engine/domain-rules.js';
-	import { GATE_DECISION_LABELS, READINESS_LABELS } from '#lib/engine/labels.js';
-	import type { AssessmentRow, DomainKey } from '#lib/engine/types.js';
-	import { titleCase } from '#lib/engine/utils.js';
+	// the optimization they were promised?
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import { sampleAssessments } from '$lib/data/sample-reports';
+	import { DOMAIN_LABELS } from '$lib/engine/domain-rules';
+	import { GATE_DECISION_LABELS, READINESS_LABELS } from '$lib/engine/labels';
+	import type { AssessmentRow, DomainKey } from '$lib/engine/types';
+	import { titleCase } from '$lib/engine/utils';
 
 	const rows: AssessmentRow[] = sampleAssessments;
 
@@ -27,8 +27,8 @@
 	const RANKS: Partial<Record<keyof AssessmentRow, Record<string, number>>> = {
 		readiness: {
 			'ready': 0,
-			'optimisation-in-progress': 1,
-			'optimisation-required': 2,
+			'optimization-in-progress': 1,
+			'optimization-required': 2,
 			'defer-surgery': 3
 		},
 		severity: { minor: 0, intermediate: 1, major: 2, 'major-plus': 3 },
@@ -36,9 +36,9 @@
 			'': 0,
 			'proceed': 1,
 			'proceed-with-prehabilitation': 2,
-			'defer-and-optimise': 3,
+			'defer-and-optimize': 3,
 			'mdt-review': 4,
-			'accept-unoptimised-risk': 5,
+			'accept-unoptimized-risk': 5,
 			'cancel': 6
 		}
 	};
@@ -139,7 +139,7 @@
 	<h1 class="text-2xl font-bold text-base-content">Perioperative Optimization dashboard</h1>
 	<p class="mt-2 max-w-3xl text-sm text-base-content/70">
 		Surgical readiness and weeks to surgery across the waiting list, sorted by surgery date so the
-		most imminent lists come first. A domain short on time cannot be optimised before the listed
+		most imminent lists come first. A domain short on time cannot be optimized before the listed
 		date.
 	</p>
 
@@ -160,8 +160,8 @@
 			<Select id="filter-readiness" label="Surgical readiness" bind:value={readinessFilter}>
 				<option value="">All</option>
 				<option value="ready">Ready</option>
-				<option value="optimisation-in-progress">Optimisation in progress</option>
-				<option value="optimisation-required">Optimisation required</option>
+				<option value="optimization-in-progress">Optimization in progress</option>
+				<option value="optimization-required">Optimization required</option>
 				<option value="defer-surgery">Defer surgery</option>
 			</Select>
 		</Field>
@@ -186,8 +186,8 @@
 				<option value="">All</option>
 				<option value="proceed">Proceed</option>
 				<option value="proceed-with-prehabilitation">Proceed with prehabilitation</option>
-				<option value="defer-and-optimise">Defer and optimise</option>
-				<option value="accept-unoptimised-risk">Accept unoptimised risk</option>
+				<option value="defer-and-optimize">Defer and optimize</option>
+				<option value="accept-unoptimized-risk">Accept unoptimized risk</option>
 				<option value="mdt-review">MDT review</option>
 				<option value="cancel">Cancel</option>
 			</Select>
@@ -207,7 +207,7 @@
 
 	<div class="mt-6 overflow-x-auto">
 		<table class="data-table w-full">
-			<caption class="sr-only">Perioperative optimisation assessments</caption>
+			<caption class="sr-only">Perioperative optimization assessments</caption>
 			<thead class="data-table-head">
 				<tr class="data-table-row">
 					{#each COLUMNS as column (column.label)}

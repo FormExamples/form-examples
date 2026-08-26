@@ -215,6 +215,43 @@ enum PerioperativeOptimizationTakesGlp1AgonistEnum {
   TAKESGLP1AGONIST_NO = 2;  // no
 }
 
+enum PerioperativeOptimizationGlp1FormulationEnum {
+  GLP1FORMULATION_UNSPECIFIED = 0;
+  GLP1FORMULATION_DAILY = 1;  // daily
+  GLP1FORMULATION_WEEKLY = 2;  // weekly
+}
+
+enum PerioperativeOptimizationGlp1HeldPerGuidelineEnum {
+  GLP1HELDPERGUIDELINE_UNSPECIFIED = 0;
+  GLP1HELDPERGUIDELINE_YES = 1;  // yes
+  GLP1HELDPERGUIDELINE_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationGlp1ExtendedClearFluidsConfirmedEnum {
+  GLP1EXTENDEDCLEARFLUIDSCONFIRMED_UNSPECIFIED = 0;
+  GLP1EXTENDEDCLEARFLUIDSCONFIRMED_YES = 1;  // yes
+  GLP1EXTENDEDCLEARFLUIDSCONFIRMED_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationGlp1GiSymptomsEnum {
+  GLP1GISYMPTOMS_UNSPECIFIED = 0;
+  GLP1GISYMPTOMS_YES = 1;  // yes
+  GLP1GISYMPTOMS_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationGlp1GastricUltrasoundPerformedEnum {
+  GLP1GASTRICULTRASOUNDPERFORMED_UNSPECIFIED = 0;
+  GLP1GASTRICULTRASOUNDPERFORMED_YES = 1;  // yes
+  GLP1GASTRICULTRASOUNDPERFORMED_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationGlp1GastricUltrasoundFindingsEnum {
+  GLP1GASTRICULTRASOUNDFINDINGS_UNSPECIFIED = 0;
+  GLP1GASTRICULTRASOUNDFINDINGS_EMPTY = 1;  // empty
+  GLP1GASTRICULTRASOUNDFINDINGS_LOW_RISK = 2;  // low-risk
+  GLP1GASTRICULTRASOUNDFINDINGS_FULL_STOMACH = 3;  // full-stomach
+}
+
 enum PerioperativeOptimizationTakesCorticosteroidEnum {
   TAKESCORTICOSTEROID_UNSPECIFIED = 0;
   TAKESCORTICOSTEROID_YES = 1;  // yes
@@ -480,6 +517,48 @@ enum PerioperativeOptimizationPrehabilitationEnrolledEnum {
   PREHABILITATIONENROLLED_NO = 2;  // no
 }
 
+enum PerioperativeOptimizationProteinSupplementationRecommendedEnum {
+  PROTEINSUPPLEMENTATIONRECOMMENDED_UNSPECIFIED = 0;
+  PROTEINSUPPLEMENTATIONRECOMMENDED_YES = 1;  // yes
+  PROTEINSUPPLEMENTATIONRECOMMENDED_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationFriedWeaknessEnum {
+  FRIEDWEAKNESS_UNSPECIFIED = 0;
+  FRIEDWEAKNESS_YES = 1;  // yes
+  FRIEDWEAKNESS_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationFriedSlownessEnum {
+  FRIEDSLOWNESS_UNSPECIFIED = 0;
+  FRIEDSLOWNESS_YES = 1;  // yes
+  FRIEDSLOWNESS_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationFriedLowPhysicalActivityEnum {
+  FRIEDLOWPHYSICALACTIVITY_UNSPECIFIED = 0;
+  FRIEDLOWPHYSICALACTIVITY_YES = 1;  // yes
+  FRIEDLOWPHYSICALACTIVITY_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationFriedExhaustionEnum {
+  FRIEDEXHAUSTION_UNSPECIFIED = 0;
+  FRIEDEXHAUSTION_YES = 1;  // yes
+  FRIEDEXHAUSTION_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationFriedUnintentionalWeightLossEnum {
+  FRIEDUNINTENTIONALWEIGHTLOSS_UNSPECIFIED = 0;
+  FRIEDUNINTENTIONALWEIGHTLOSS_YES = 1;  // yes
+  FRIEDUNINTENTIONALWEIGHTLOSS_NO = 2;  // no
+}
+
+enum PerioperativeOptimizationMiniCogPerformedEnum {
+  MINICOGPERFORMED_UNSPECIFIED = 0;
+  MINICOGPERFORMED_YES = 1;  // yes
+  MINICOGPERFORMED_NO = 2;  // no
+}
+
 enum PerioperativeOptimizationCognitiveScreenToolEnum {
   COGNITIVESCREENTOOL_UNSPECIFIED = 0;
   COGNITIVESCREENTOOL_V_4AT = 1;  // 4at
@@ -728,8 +807,8 @@ enum PerioperativeOptimizationGateDecisionEnum {
   GATEDECISION_UNSPECIFIED = 0;
   GATEDECISION_PROCEED = 1;  // proceed
   GATEDECISION_PROCEED_WITH_PREHABILITATION = 2;  // proceed-with-prehabilitation
-  GATEDECISION_DEFER_AND_OPTIMISE = 3;  // defer-and-optimise
-  GATEDECISION_ACCEPT_UNOPTIMISED_RISK = 4;  // accept-unoptimised-risk
+  GATEDECISION_DEFER_AND_OPTIMIZE = 3;  // defer-and-optimize
+  GATEDECISION_ACCEPT_UNOPTIMIZED_RISK = 4;  // accept-unoptimized-risk
   GATEDECISION_MDT_REVIEW = 5;  // mdt-review
   GATEDECISION_CANCEL = 6;  // cancel
 }
@@ -787,157 +866,173 @@ message PerioperativeOptimization {
   PerioperativeOptimizationTakesAceInhibitorOrArbEnum takes_ace_inhibitor_or_arb = 50;  // VARCHAR(5)
   PerioperativeOptimizationTakesSglt2InhibitorEnum takes_sglt2_inhibitor = 51;  // VARCHAR(5)
   PerioperativeOptimizationTakesGlp1AgonistEnum takes_glp1_agonist = 52;  // VARCHAR(5)
-  PerioperativeOptimizationTakesCorticosteroidEnum takes_corticosteroid = 53;  // VARCHAR(5)
-  PerioperativeOptimizationTakesImmunosuppressantEnum takes_immunosuppressant = 54;  // VARCHAR(5)
-  PerioperativeOptimizationTakesHormoneTherapyEnum takes_hormone_therapy = 55;  // VARCHAR(5)
-  PerioperativeOptimizationMedicationHoldPlanAgreedEnum medication_hold_plan_agreed = 56;  // VARCHAR(5)
-  string medication_hold_plan_agreed_by = 57;  // VARCHAR(255) — max 255 chars
-  PerioperativeOptimizationMedicationAdherenceEnum medication_adherence = 58;  // VARCHAR(10)
-  string medication_notes = 59;  // TEXT
-  PerioperativeOptimizationHasDrugAllergyEnum has_drug_allergy = 60;  // VARCHAR(5)
-  string drug_allergy_detail = 61;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationHasFoodAllergyEnum has_food_allergy = 62;  // VARCHAR(5)
-  string food_allergy_detail = 63;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationHasLatexAllergyEnum has_latex_allergy = 64;  // VARCHAR(5)
-  PerioperativeOptimizationHasAdhesiveAllergyEnum has_adhesive_allergy = 65;  // VARCHAR(5)
-  PerioperativeOptimizationHasContrastAllergyEnum has_contrast_allergy = 66;  // VARCHAR(5)
-  PerioperativeOptimizationAllergySeverityEnum allergy_severity = 67;  // VARCHAR(15)
-  PerioperativeOptimizationAdrenalineAutoInjectorEnum adrenaline_auto_injector = 68;  // VARCHAR(5)
-  string allergy_notes = 69;  // TEXT
-  string bloods_sample_date = 70;  // DATE — iso 8601 date
-  double haemoglobin_g_per_l = 71;  // NUMERIC(4,1) — numeric(4,1)
-  double mean_cell_volume_fl = 72;  // NUMERIC(4,1) — numeric(4,1)
-  double ferritin_ug_per_l = 73;  // NUMERIC(7,1) — numeric(7,1)
-  double transferrin_saturation_percent = 74;  // NUMERIC(4,1) — numeric(4,1)
-  double vitamin_b12_ng_per_l = 75;  // NUMERIC(7,1) — numeric(7,1)
-  double folate_ug_per_l = 76;  // NUMERIC(5,1) — numeric(5,1)
-  double c_reactive_protein_mg_per_l = 77;  // NUMERIC(6,1) — numeric(6,1)
-  double creatinine_umol_per_l = 78;  // NUMERIC(6,1) — numeric(6,1)
-  double egfr_ml_per_min = 79;  // NUMERIC(4,1) — numeric(4,1)
-  string anaemia_known_cause = 80;  // VARCHAR(255) — max 255 chars
-  PerioperativeOptimizationAnaemiaTreatmentStartedEnum anaemia_treatment_started = 81;  // VARCHAR(5)
-  PerioperativeOptimizationAnaemiaTreatmentRouteEnum anaemia_treatment_route = 82;  // VARCHAR(15)
-  string anaemia_treatment_start_date = 83;  // DATE — iso 8601 date
-  PerioperativeOptimizationPreviousTransfusionEnum previous_transfusion = 84;  // VARCHAR(5)
-  PerioperativeOptimizationGroupAndSaveDoneEnum group_and_save_done = 85;  // VARCHAR(5)
-  string anaemia_notes = 86;  // TEXT
-  PerioperativeOptimizationDiabetesTypeEnum diabetes_type = 87;  // VARCHAR(20)
-  double diabetes_duration_years = 88;  // NUMERIC(4,1) — numeric(4,1)
-  double hba1c_mmol_per_mol = 89;  // NUMERIC(4,1) — numeric(4,1)
-  string hba1c_sample_date = 90;  // DATE — iso 8601 date
-  double capillary_glucose_mmol_per_l = 91;  // NUMERIC(4,1) — numeric(4,1)
-  PerioperativeOptimizationDiabetesTreatmentEnum diabetes_treatment = 92;  // VARCHAR(30)
-  string insulin_regimen = 93;  // VARCHAR(255) — max 255 chars
-  PerioperativeOptimizationHypoglycaemiaAwarenessEnum hypoglycaemia_awareness = 94;  // VARCHAR(15)
-  PerioperativeOptimizationDiabetesTeamReviewEnum diabetes_team_review = 95;  // VARCHAR(5)
-  string diabetes_team_review_date = 96;  // DATE — iso 8601 date
-  PerioperativeOptimizationFootCheckDoneEnum foot_check_done = 97;  // VARCHAR(5)
-  string glycaemic_notes = 98;  // TEXT
-  PerioperativeOptimizationSmokingStatusEnum smoking_status = 99;  // VARCHAR(15)
-  int32 cigarettes_per_day = 100;  // INTEGER
-  double pack_years = 101;  // NUMERIC(5,1) — numeric(5,1)
-  string quit_date = 102;  // DATE — iso 8601 date
-  PerioperativeOptimizationSmokingCessationOfferedEnum smoking_cessation_offered = 103;  // VARCHAR(5)
-  PerioperativeOptimizationSmokingCessationAcceptedEnum smoking_cessation_accepted = 104;  // VARCHAR(5)
-  PerioperativeOptimizationNicotineReplacementEnum nicotine_replacement = 105;  // VARCHAR(5)
-  PerioperativeOptimizationVapingEnum vaping = 106;  // VARCHAR(5)
-  string smoking_notes = 107;  // TEXT
-  double alcohol_units_per_week = 108;  // NUMERIC(5,1) — numeric(5,1)
-  int32 audit_c_frequency = 109;  // INTEGER
-  int32 audit_c_typical_quantity = 110;  // INTEGER
-  int32 audit_c_binge_frequency = 111;  // INTEGER
-  PerioperativeOptimizationAlcoholDependenceFeaturesEnum alcohol_dependence_features = 112;  // VARCHAR(5)
-  PerioperativeOptimizationAlcoholReductionPlanAgreedEnum alcohol_reduction_plan_agreed = 113;  // VARCHAR(5)
-  PerioperativeOptimizationAlcoholServicesReferralEnum alcohol_services_referral = 114;  // VARCHAR(5)
-  PerioperativeOptimizationRecreationalDrugUseEnum recreational_drug_use = 115;  // VARCHAR(5)
-  string recreational_drug_detail = 116;  // VARCHAR(255) — max 255 chars
-  string alcohol_notes = 117;  // TEXT
-  double height_as_cm = 118;  // NUMERIC(5,1) — numeric(5,1)
-  double weight_as_kg = 119;  // NUMERIC(5,1) — numeric(5,1)
-  double body_mass_index = 120;  // NUMERIC(4,1) — numeric(4,1)
-  double usual_weight_as_kg = 121;  // NUMERIC(5,1) — numeric(5,1)
-  double weight_loss_percent = 122;  // NUMERIC(4,1) — numeric(4,1)
-  PerioperativeOptimizationWeightLossIsIntentionalEnum weight_loss_is_intentional = 123;  // VARCHAR(5)
-  PerioperativeOptimizationAcutelyIllEnum acutely_ill = 124;  // VARCHAR(5)
-  PerioperativeOptimizationNoNutritionalIntakeOver5DaysEnum no_nutritional_intake_over_5_days = 125;  // VARCHAR(5)
-  PerioperativeOptimizationAppetiteEnum appetite = 126;  // VARCHAR(15)
-  PerioperativeOptimizationOralNutritionalSupplementsEnum oral_nutritional_supplements = 127;  // VARCHAR(5)
-  PerioperativeOptimizationImmunonutritionEnum immunonutrition = 128;  // VARCHAR(5)
-  PerioperativeOptimizationDietitianReferralEnum dietitian_referral = 129;  // VARCHAR(5)
-  string nutrition_notes = 130;  // TEXT
-  PerioperativeOptimizationUsualActivityLevelEnum usual_activity_level = 131;  // VARCHAR(20)
-  PerioperativeOptimizationClimbsFlightOfStairsEnum climbs_flight_of_stairs = 132;  // VARCHAR(20)
-  double metabolic_equivalents = 133;  // NUMERIC(4,1) — numeric(4,1)
-  double duke_activity_status_index = 134;  // NUMERIC(5,2) — numeric(5,2)
-  int32 six_minute_walk_metres = 135;  // INTEGER
-  double cpet_anaerobic_threshold = 136;  // NUMERIC(4,1) — numeric(4,1)
-  double cpet_peak_vo2 = 137;  // NUMERIC(4,1) — numeric(4,1)
-  double grip_strength_kg = 138;  // NUMERIC(4,1) — numeric(4,1)
-  PerioperativeOptimizationPrehabilitationOfferedEnum prehabilitation_offered = 139;  // VARCHAR(5)
-  PerioperativeOptimizationPrehabilitationEnrolledEnum prehabilitation_enrolled = 140;  // VARCHAR(5)
-  int32 prehabilitation_sessions_per_week = 141;  // INTEGER
-  string prehabilitation_start_date = 142;  // DATE — iso 8601 date
-  string fitness_notes = 143;  // TEXT
-  int32 clinical_frailty_scale = 144;  // INTEGER
-  PerioperativeOptimizationCognitiveScreenToolEnum cognitive_screen_tool = 145;  // VARCHAR(20)
-  double cognitive_screen_score = 146;  // NUMERIC(4,1) — numeric(4,1)
-  PerioperativeOptimizationCognitiveImpairmentEnum cognitive_impairment = 147;  // VARCHAR(15)
-  PerioperativeOptimizationCapacityConcernEnum capacity_concern = 148;  // VARCHAR(5)
-  int32 falls_in_last_12_months = 149;  // INTEGER
-  PerioperativeOptimizationMobilityAidEnum mobility_aid = 150;  // VARCHAR(25)
-  PerioperativeOptimizationLivingSituationEnum living_situation = 151;  // VARCHAR(30)
-  PerioperativeOptimizationCarePackageEnum care_package = 152;  // VARCHAR(20)
-  string frailty_notes = 153;  // TEXT
-  int32 systolic_bp = 154;  // INTEGER
-  int32 diastolic_bp = 155;  // INTEGER
-  int32 heart_rate = 156;  // INTEGER
-  PerioperativeOptimizationHeartRhythmEnum heart_rhythm = 157;  // VARCHAR(25)
-  PerioperativeOptimizationMurmurPresentEnum murmur_present = 158;  // VARCHAR(5)
-  PerioperativeOptimizationExerciseToleranceEnum exercise_tolerance = 159;  // VARCHAR(20)
-  int32 ejection_fraction_percent = 160;  // INTEGER
-  string echo_date = 161;  // DATE — iso 8601 date
-  PerioperativeOptimizationAsthmaControlEnum asthma_control = 162;  // VARCHAR(20)
-  PerioperativeOptimizationCopdControlEnum copd_control = 163;  // VARCHAR(20)
-  PerioperativeOptimizationInhalerTechniqueCheckedEnum inhaler_technique_checked = 164;  // VARCHAR(5)
-  PerioperativeOptimizationRescueSteroidsEnum rescue_steroids = 165;  // VARCHAR(5)
-  double spirometry_fev1_percent = 166;  // NUMERIC(4,1) — numeric(4,1)
-  int32 stop_bang_score = 167;  // INTEGER
-  PerioperativeOptimizationSleepApnoeaDiagnosisEnum sleep_apnoea_diagnosis = 168;  // VARCHAR(5)
-  PerioperativeOptimizationCpapUseEnum cpap_use = 169;  // VARCHAR(5)
-  double oxygen_saturation_percent = 170;  // NUMERIC(4,1) — numeric(4,1)
-  string cardiorespiratory_notes = 171;  // TEXT
-  PerioperativeOptimizationAnxietyLevelEnum anxiety_level = 172;  // VARCHAR(15)
-  PerioperativeOptimizationDepressionScreenEnum depression_screen = 173;  // VARCHAR(15)
-  PerioperativeOptimizationUnderstandsProcedureEnum understands_procedure = 174;  // VARCHAR(5)
-  PerioperativeOptimizationExpectationsRealisticEnum expectations_realistic = 175;  // VARCHAR(5)
-  PerioperativeOptimizationSharedDecisionMakingDiscussedEnum shared_decision_making_discussed = 176;  // VARCHAR(5)
-  PerioperativeOptimizationHasCarerEnum has_carer = 177;  // VARCHAR(5)
-  PerioperativeOptimizationTransportHomeArrangedEnum transport_home_arranged = 178;  // VARCHAR(5)
-  PerioperativeOptimizationSupportAfterDischargeEnum support_after_discharge = 179;  // VARCHAR(15)
-  PerioperativeOptimizationHealthLiteracyEnum health_literacy = 180;  // VARCHAR(15)
-  PerioperativeOptimizationPsychologicalSupportOfferedEnum psychological_support_offered = 181;  // VARCHAR(5)
-  string social_notes = 182;  // TEXT
-  string plan_anaemia = 183;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralAnaemiaEnum referral_anaemia = 184;  // VARCHAR(5)
-  string plan_glycaemic_control = 185;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralGlycaemicControlEnum referral_glycaemic_control = 186;  // VARCHAR(5)
-  string plan_smoking = 187;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralSmokingEnum referral_smoking = 188;  // VARCHAR(5)
-  string plan_alcohol = 189;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralAlcoholEnum referral_alcohol = 190;  // VARCHAR(5)
-  string plan_nutrition = 191;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralNutritionEnum referral_nutrition = 192;  // VARCHAR(5)
-  string plan_physical_fitness = 193;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralPhysicalFitnessEnum referral_physical_fitness = 194;  // VARCHAR(5)
-  string plan_medication = 195;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralMedicationEnum referral_medication = 196;  // VARCHAR(5)
-  string plan_cardiorespiratory = 197;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationReferralCardiorespiratoryEnum referral_cardiorespiratory = 198;  // VARCHAR(5)
-  string responsible_clinician = 199;  // VARCHAR(255) — max 255 chars
-  PerioperativeOptimizationPlanAgreedWithPatientEnum plan_agreed_with_patient = 200;  // VARCHAR(5)
-  PerioperativeOptimizationPlanSharedWithPatientEnum plan_shared_with_patient = 201;  // VARCHAR(5)
-  string next_review_date = 202;  // DATE — iso 8601 date
-  string plan_notes = 203;  // TEXT
-  PerioperativeOptimizationGateDecisionEnum gate_decision = 204;  // VARCHAR(30)
-  string additional_notes = 205;  // TEXT
+  PerioperativeOptimizationGlp1FormulationEnum glp1_formulation = 53;  // VARCHAR(10)
+  PerioperativeOptimizationGlp1HeldPerGuidelineEnum glp1_held_per_guideline = 54;  // VARCHAR(5)
+  PerioperativeOptimizationGlp1ExtendedClearFluidsConfirmedEnum glp1_extended_clear_fluids_confirmed = 55;  // VARCHAR(5)
+  PerioperativeOptimizationGlp1GiSymptomsEnum glp1_gi_symptoms = 56;  // VARCHAR(5)
+  string glp1_gi_symptoms_details = 57;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationGlp1GastricUltrasoundPerformedEnum glp1_gastric_ultrasound_performed = 58;  // VARCHAR(5)
+  PerioperativeOptimizationGlp1GastricUltrasoundFindingsEnum glp1_gastric_ultrasound_findings = 59;  // VARCHAR(20)
+  PerioperativeOptimizationTakesCorticosteroidEnum takes_corticosteroid = 60;  // VARCHAR(5)
+  PerioperativeOptimizationTakesImmunosuppressantEnum takes_immunosuppressant = 61;  // VARCHAR(5)
+  PerioperativeOptimizationTakesHormoneTherapyEnum takes_hormone_therapy = 62;  // VARCHAR(5)
+  PerioperativeOptimizationMedicationHoldPlanAgreedEnum medication_hold_plan_agreed = 63;  // VARCHAR(5)
+  string medication_hold_plan_agreed_by = 64;  // VARCHAR(255) — max 255 chars
+  PerioperativeOptimizationMedicationAdherenceEnum medication_adherence = 65;  // VARCHAR(10)
+  string medication_notes = 66;  // TEXT
+  PerioperativeOptimizationHasDrugAllergyEnum has_drug_allergy = 67;  // VARCHAR(5)
+  string drug_allergy_detail = 68;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationHasFoodAllergyEnum has_food_allergy = 69;  // VARCHAR(5)
+  string food_allergy_detail = 70;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationHasLatexAllergyEnum has_latex_allergy = 71;  // VARCHAR(5)
+  PerioperativeOptimizationHasAdhesiveAllergyEnum has_adhesive_allergy = 72;  // VARCHAR(5)
+  PerioperativeOptimizationHasContrastAllergyEnum has_contrast_allergy = 73;  // VARCHAR(5)
+  PerioperativeOptimizationAllergySeverityEnum allergy_severity = 74;  // VARCHAR(15)
+  PerioperativeOptimizationAdrenalineAutoInjectorEnum adrenaline_auto_injector = 75;  // VARCHAR(5)
+  string allergy_notes = 76;  // TEXT
+  string bloods_sample_date = 77;  // DATE — iso 8601 date
+  double haemoglobin_g_per_l = 78;  // NUMERIC(4,1) — numeric(4,1)
+  double mean_cell_volume_fl = 79;  // NUMERIC(4,1) — numeric(4,1)
+  double ferritin_ug_per_l = 80;  // NUMERIC(7,1) — numeric(7,1)
+  double transferrin_saturation_percent = 81;  // NUMERIC(4,1) — numeric(4,1)
+  double vitamin_b12_ng_per_l = 82;  // NUMERIC(7,1) — numeric(7,1)
+  double folate_ug_per_l = 83;  // NUMERIC(5,1) — numeric(5,1)
+  double c_reactive_protein_mg_per_l = 84;  // NUMERIC(6,1) — numeric(6,1)
+  double creatinine_umol_per_l = 85;  // NUMERIC(6,1) — numeric(6,1)
+  double egfr_ml_per_min = 86;  // NUMERIC(4,1) — numeric(4,1)
+  string anaemia_known_cause = 87;  // VARCHAR(255) — max 255 chars
+  PerioperativeOptimizationAnaemiaTreatmentStartedEnum anaemia_treatment_started = 88;  // VARCHAR(5)
+  PerioperativeOptimizationAnaemiaTreatmentRouteEnum anaemia_treatment_route = 89;  // VARCHAR(15)
+  string anaemia_treatment_start_date = 90;  // DATE — iso 8601 date
+  PerioperativeOptimizationPreviousTransfusionEnum previous_transfusion = 91;  // VARCHAR(5)
+  PerioperativeOptimizationGroupAndSaveDoneEnum group_and_save_done = 92;  // VARCHAR(5)
+  string anaemia_notes = 93;  // TEXT
+  PerioperativeOptimizationDiabetesTypeEnum diabetes_type = 94;  // VARCHAR(20)
+  double diabetes_duration_years = 95;  // NUMERIC(4,1) — numeric(4,1)
+  double hba1c_mmol_per_mol = 96;  // NUMERIC(4,1) — numeric(4,1)
+  string hba1c_sample_date = 97;  // DATE — iso 8601 date
+  double capillary_glucose_mmol_per_l = 98;  // NUMERIC(4,1) — numeric(4,1)
+  PerioperativeOptimizationDiabetesTreatmentEnum diabetes_treatment = 99;  // VARCHAR(30)
+  string insulin_regimen = 100;  // VARCHAR(255) — max 255 chars
+  PerioperativeOptimizationHypoglycaemiaAwarenessEnum hypoglycaemia_awareness = 101;  // VARCHAR(15)
+  PerioperativeOptimizationDiabetesTeamReviewEnum diabetes_team_review = 102;  // VARCHAR(5)
+  string diabetes_team_review_date = 103;  // DATE — iso 8601 date
+  PerioperativeOptimizationFootCheckDoneEnum foot_check_done = 104;  // VARCHAR(5)
+  string glycaemic_notes = 105;  // TEXT
+  PerioperativeOptimizationSmokingStatusEnum smoking_status = 106;  // VARCHAR(15)
+  int32 cigarettes_per_day = 107;  // INTEGER
+  double pack_years = 108;  // NUMERIC(5,1) — numeric(5,1)
+  string quit_date = 109;  // DATE — iso 8601 date
+  PerioperativeOptimizationSmokingCessationOfferedEnum smoking_cessation_offered = 110;  // VARCHAR(5)
+  PerioperativeOptimizationSmokingCessationAcceptedEnum smoking_cessation_accepted = 111;  // VARCHAR(5)
+  PerioperativeOptimizationNicotineReplacementEnum nicotine_replacement = 112;  // VARCHAR(5)
+  PerioperativeOptimizationVapingEnum vaping = 113;  // VARCHAR(5)
+  string smoking_notes = 114;  // TEXT
+  double alcohol_units_per_week = 115;  // NUMERIC(5,1) — numeric(5,1)
+  int32 audit_c_frequency = 116;  // INTEGER
+  int32 audit_c_typical_quantity = 117;  // INTEGER
+  int32 audit_c_binge_frequency = 118;  // INTEGER
+  PerioperativeOptimizationAlcoholDependenceFeaturesEnum alcohol_dependence_features = 119;  // VARCHAR(5)
+  PerioperativeOptimizationAlcoholReductionPlanAgreedEnum alcohol_reduction_plan_agreed = 120;  // VARCHAR(5)
+  PerioperativeOptimizationAlcoholServicesReferralEnum alcohol_services_referral = 121;  // VARCHAR(5)
+  PerioperativeOptimizationRecreationalDrugUseEnum recreational_drug_use = 122;  // VARCHAR(5)
+  string recreational_drug_detail = 123;  // VARCHAR(255) — max 255 chars
+  string alcohol_notes = 124;  // TEXT
+  double height_as_cm = 125;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_as_kg = 126;  // NUMERIC(5,1) — numeric(5,1)
+  double body_mass_index = 127;  // NUMERIC(4,1) — numeric(4,1)
+  double usual_weight_as_kg = 128;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_loss_percent = 129;  // NUMERIC(4,1) — numeric(4,1)
+  PerioperativeOptimizationWeightLossIsIntentionalEnum weight_loss_is_intentional = 130;  // VARCHAR(5)
+  PerioperativeOptimizationAcutelyIllEnum acutely_ill = 131;  // VARCHAR(5)
+  PerioperativeOptimizationNoNutritionalIntakeOver5DaysEnum no_nutritional_intake_over_5_days = 132;  // VARCHAR(5)
+  PerioperativeOptimizationAppetiteEnum appetite = 133;  // VARCHAR(15)
+  PerioperativeOptimizationOralNutritionalSupplementsEnum oral_nutritional_supplements = 134;  // VARCHAR(5)
+  PerioperativeOptimizationImmunonutritionEnum immunonutrition = 135;  // VARCHAR(5)
+  PerioperativeOptimizationDietitianReferralEnum dietitian_referral = 136;  // VARCHAR(5)
+  string nutrition_notes = 137;  // TEXT
+  PerioperativeOptimizationUsualActivityLevelEnum usual_activity_level = 138;  // VARCHAR(20)
+  PerioperativeOptimizationClimbsFlightOfStairsEnum climbs_flight_of_stairs = 139;  // VARCHAR(20)
+  double metabolic_equivalents = 140;  // NUMERIC(4,1) — numeric(4,1)
+  double duke_activity_status_index = 141;  // NUMERIC(5,2) — numeric(5,2)
+  int32 six_minute_walk_metres = 142;  // INTEGER
+  double cpet_anaerobic_threshold = 143;  // NUMERIC(4,1) — numeric(4,1)
+  double cpet_peak_vo2 = 144;  // NUMERIC(4,1) — numeric(4,1)
+  double grip_strength_kg = 145;  // NUMERIC(4,1) — numeric(4,1)
+  PerioperativeOptimizationPrehabilitationOfferedEnum prehabilitation_offered = 146;  // VARCHAR(5)
+  PerioperativeOptimizationPrehabilitationEnrolledEnum prehabilitation_enrolled = 147;  // VARCHAR(5)
+  int32 prehabilitation_sessions_per_week = 148;  // INTEGER
+  string prehabilitation_start_date = 149;  // DATE — iso 8601 date
+  PerioperativeOptimizationProteinSupplementationRecommendedEnum protein_supplementation_recommended = 150;  // VARCHAR(5)
+  string fitness_notes = 151;  // TEXT
+  int32 clinical_frailty_scale = 152;  // INTEGER
+  PerioperativeOptimizationFriedWeaknessEnum fried_weakness = 153;  // VARCHAR(5)
+  PerioperativeOptimizationFriedSlownessEnum fried_slowness = 154;  // VARCHAR(5)
+  PerioperativeOptimizationFriedLowPhysicalActivityEnum fried_low_physical_activity = 155;  // VARCHAR(5)
+  PerioperativeOptimizationFriedExhaustionEnum fried_exhaustion = 156;  // VARCHAR(5)
+  PerioperativeOptimizationFriedUnintentionalWeightLossEnum fried_unintentional_weight_loss = 157;  // VARCHAR(5)
+  int32 risk_analysis_index_score = 158;  // INTEGER
+  PerioperativeOptimizationMiniCogPerformedEnum mini_cog_performed = 159;  // VARCHAR(5)
+  int32 mini_cog_score = 160;  // INTEGER
+  PerioperativeOptimizationCognitiveScreenToolEnum cognitive_screen_tool = 161;  // VARCHAR(20)
+  double cognitive_screen_score = 162;  // NUMERIC(4,1) — numeric(4,1)
+  PerioperativeOptimizationCognitiveImpairmentEnum cognitive_impairment = 163;  // VARCHAR(15)
+  PerioperativeOptimizationCapacityConcernEnum capacity_concern = 164;  // VARCHAR(5)
+  int32 falls_in_last_12_months = 165;  // INTEGER
+  PerioperativeOptimizationMobilityAidEnum mobility_aid = 166;  // VARCHAR(25)
+  PerioperativeOptimizationLivingSituationEnum living_situation = 167;  // VARCHAR(30)
+  PerioperativeOptimizationCarePackageEnum care_package = 168;  // VARCHAR(20)
+  string frailty_notes = 169;  // TEXT
+  int32 systolic_bp = 170;  // INTEGER
+  int32 diastolic_bp = 171;  // INTEGER
+  int32 heart_rate = 172;  // INTEGER
+  PerioperativeOptimizationHeartRhythmEnum heart_rhythm = 173;  // VARCHAR(25)
+  PerioperativeOptimizationMurmurPresentEnum murmur_present = 174;  // VARCHAR(5)
+  PerioperativeOptimizationExerciseToleranceEnum exercise_tolerance = 175;  // VARCHAR(20)
+  int32 ejection_fraction_percent = 176;  // INTEGER
+  string echo_date = 177;  // DATE — iso 8601 date
+  PerioperativeOptimizationAsthmaControlEnum asthma_control = 178;  // VARCHAR(20)
+  PerioperativeOptimizationCopdControlEnum copd_control = 179;  // VARCHAR(20)
+  PerioperativeOptimizationInhalerTechniqueCheckedEnum inhaler_technique_checked = 180;  // VARCHAR(5)
+  PerioperativeOptimizationRescueSteroidsEnum rescue_steroids = 181;  // VARCHAR(5)
+  double spirometry_fev1_percent = 182;  // NUMERIC(4,1) — numeric(4,1)
+  int32 stop_bang_score = 183;  // INTEGER
+  PerioperativeOptimizationSleepApnoeaDiagnosisEnum sleep_apnoea_diagnosis = 184;  // VARCHAR(5)
+  PerioperativeOptimizationCpapUseEnum cpap_use = 185;  // VARCHAR(5)
+  double oxygen_saturation_percent = 186;  // NUMERIC(4,1) — numeric(4,1)
+  string cardiorespiratory_notes = 187;  // TEXT
+  PerioperativeOptimizationAnxietyLevelEnum anxiety_level = 188;  // VARCHAR(15)
+  PerioperativeOptimizationDepressionScreenEnum depression_screen = 189;  // VARCHAR(15)
+  PerioperativeOptimizationUnderstandsProcedureEnum understands_procedure = 190;  // VARCHAR(5)
+  PerioperativeOptimizationExpectationsRealisticEnum expectations_realistic = 191;  // VARCHAR(5)
+  PerioperativeOptimizationSharedDecisionMakingDiscussedEnum shared_decision_making_discussed = 192;  // VARCHAR(5)
+  PerioperativeOptimizationHasCarerEnum has_carer = 193;  // VARCHAR(5)
+  PerioperativeOptimizationTransportHomeArrangedEnum transport_home_arranged = 194;  // VARCHAR(5)
+  PerioperativeOptimizationSupportAfterDischargeEnum support_after_discharge = 195;  // VARCHAR(15)
+  PerioperativeOptimizationHealthLiteracyEnum health_literacy = 196;  // VARCHAR(15)
+  PerioperativeOptimizationPsychologicalSupportOfferedEnum psychological_support_offered = 197;  // VARCHAR(5)
+  string social_notes = 198;  // TEXT
+  string plan_anaemia = 199;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralAnaemiaEnum referral_anaemia = 200;  // VARCHAR(5)
+  string plan_glycaemic_control = 201;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralGlycaemicControlEnum referral_glycaemic_control = 202;  // VARCHAR(5)
+  string plan_smoking = 203;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralSmokingEnum referral_smoking = 204;  // VARCHAR(5)
+  string plan_alcohol = 205;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralAlcoholEnum referral_alcohol = 206;  // VARCHAR(5)
+  string plan_nutrition = 207;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralNutritionEnum referral_nutrition = 208;  // VARCHAR(5)
+  string plan_physical_fitness = 209;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralPhysicalFitnessEnum referral_physical_fitness = 210;  // VARCHAR(5)
+  string plan_medication = 211;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralMedicationEnum referral_medication = 212;  // VARCHAR(5)
+  string plan_cardiorespiratory = 213;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationReferralCardiorespiratoryEnum referral_cardiorespiratory = 214;  // VARCHAR(5)
+  string responsible_clinician = 215;  // VARCHAR(255) — max 255 chars
+  PerioperativeOptimizationPlanAgreedWithPatientEnum plan_agreed_with_patient = 216;  // VARCHAR(5)
+  PerioperativeOptimizationPlanSharedWithPatientEnum plan_shared_with_patient = 217;  // VARCHAR(5)
+  string next_review_date = 218;  // DATE — iso 8601 date
+  string plan_notes = 219;  // TEXT
+  PerioperativeOptimizationGateDecisionEnum gate_decision = 220;  // VARCHAR(30)
+  string additional_notes = 221;  // TEXT
 }

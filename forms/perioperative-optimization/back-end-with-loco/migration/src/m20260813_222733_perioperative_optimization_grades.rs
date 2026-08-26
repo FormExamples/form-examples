@@ -21,7 +21,7 @@ impl MigrationTrait for Migration {
             ("stop_bang_score", ColType::IntegerNull),
             ("duke_activity_status_index", ColType::DoubleNull),
             ("clinical_frailty_scale", ColType::IntegerNull),
-            ("domains_optimised", ColType::IntegerNull),
+            ("domains_optimized", ColType::IntegerNull),
             ("domains_in_progress", ColType::IntegerNull),
             ("domains_action_required", ColType::IntegerNull),
             ("domains_insufficient_time", ColType::IntegerNull),

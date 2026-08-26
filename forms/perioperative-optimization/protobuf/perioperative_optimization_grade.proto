@@ -12,19 +12,26 @@ enum PerioperativeOptimizationGradeMustRiskEnum {
   MUSTRISK_HIGH = 3;  // high
 }
 
+enum PerioperativeOptimizationGradeFriedFrailtyCategoryEnum {
+  FRIEDFRAILTYCATEGORY_UNSPECIFIED = 0;
+  FRIEDFRAILTYCATEGORY_ROBUST = 1;  // robust
+  FRIEDFRAILTYCATEGORY_PRE_FRAIL = 2;  // pre-frail
+  FRIEDFRAILTYCATEGORY_FRAIL = 3;  // frail
+}
+
 enum PerioperativeOptimizationGradeComputedReadinessEnum {
   COMPUTEDREADINESS_UNSPECIFIED = 0;
   COMPUTEDREADINESS_READY = 1;  // ready
-  COMPUTEDREADINESS_OPTIMISATION_IN_PROGRESS = 2;  // optimisation-in-progress
-  COMPUTEDREADINESS_OPTIMISATION_REQUIRED = 3;  // optimisation-required
+  COMPUTEDREADINESS_OPTIMIZATION_IN_PROGRESS = 2;  // optimization-in-progress
+  COMPUTEDREADINESS_OPTIMIZATION_REQUIRED = 3;  // optimization-required
   COMPUTEDREADINESS_DEFER_SURGERY = 4;  // defer-surgery
 }
 
 enum PerioperativeOptimizationGradeFinalReadinessEnum {
   FINALREADINESS_UNSPECIFIED = 0;
   FINALREADINESS_READY = 1;  // ready
-  FINALREADINESS_OPTIMISATION_IN_PROGRESS = 2;  // optimisation-in-progress
-  FINALREADINESS_OPTIMISATION_REQUIRED = 3;  // optimisation-required
+  FINALREADINESS_OPTIMIZATION_IN_PROGRESS = 2;  // optimization-in-progress
+  FINALREADINESS_OPTIMIZATION_REQUIRED = 3;  // optimization-required
   FINALREADINESS_DEFER_SURGERY = 4;  // defer-surgery
 }
 
@@ -32,8 +39,8 @@ enum PerioperativeOptimizationGradeGateDecisionEnum {
   GATEDECISION_UNSPECIFIED = 0;
   GATEDECISION_PROCEED = 1;  // proceed
   GATEDECISION_PROCEED_WITH_PREHABILITATION = 2;  // proceed-with-prehabilitation
-  GATEDECISION_DEFER_AND_OPTIMISE = 3;  // defer-and-optimise
-  GATEDECISION_ACCEPT_UNOPTIMISED_RISK = 4;  // accept-unoptimised-risk
+  GATEDECISION_DEFER_AND_OPTIMIZE = 3;  // defer-and-optimize
+  GATEDECISION_ACCEPT_UNOPTIMIZED_RISK = 4;  // accept-unoptimized-risk
   GATEDECISION_MDT_REVIEW = 5;  // mdt-review
   GATEDECISION_CANCEL = 6;  // cancel
 }
@@ -52,17 +59,19 @@ message PerioperativeOptimizationGrade {
   int32 stop_bang_score = 11;  // INTEGER
   double duke_activity_status_index = 12;  // NUMERIC(5,2) — numeric(5,2)
   int32 clinical_frailty_scale = 13;  // INTEGER
-  int32 domains_optimised = 14;  // INTEGER
-  int32 domains_in_progress = 15;  // INTEGER
-  int32 domains_action_required = 16;  // INTEGER
-  int32 domains_insufficient_time = 17;  // INTEGER
-  PerioperativeOptimizationGradeComputedReadinessEnum computed_readiness = 18;  // VARCHAR(30)
-  PerioperativeOptimizationGradeFinalReadinessEnum final_readiness = 19;  // VARCHAR(30)
-  string override_reason = 20;  // VARCHAR(500) — max 500 chars
-  PerioperativeOptimizationGradeGateDecisionEnum gate_decision = 21;  // VARCHAR(30)
-  string recommended_earliest_surgery_date = 22;  // DATE — iso 8601 date
-  string clinician_notes = 23;  // TEXT
-  string signed_by_name = 24;  // VARCHAR(255) — max 255 chars
-  string signed_at = 25;  // TIMESTAMPTZ — iso 8601
-  string graded_at = 26;  // TIMESTAMPTZ — iso 8601
+  int32 fried_phenotype_score = 14;  // INTEGER
+  PerioperativeOptimizationGradeFriedFrailtyCategoryEnum fried_frailty_category = 15;  // VARCHAR(15)
+  int32 domains_optimized = 16;  // INTEGER
+  int32 domains_in_progress = 17;  // INTEGER
+  int32 domains_action_required = 18;  // INTEGER
+  int32 domains_insufficient_time = 19;  // INTEGER
+  PerioperativeOptimizationGradeComputedReadinessEnum computed_readiness = 20;  // VARCHAR(30)
+  PerioperativeOptimizationGradeFinalReadinessEnum final_readiness = 21;  // VARCHAR(30)
+  string override_reason = 22;  // VARCHAR(500) — max 500 chars
+  PerioperativeOptimizationGradeGateDecisionEnum gate_decision = 23;  // VARCHAR(30)
+  string recommended_earliest_surgery_date = 24;  // DATE — iso 8601 date
+  string clinician_notes = 25;  // TEXT
+  string signed_by_name = 26;  // VARCHAR(255) — max 255 chars
+  string signed_at = 27;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 28;  // TIMESTAMPTZ — iso 8601
 }

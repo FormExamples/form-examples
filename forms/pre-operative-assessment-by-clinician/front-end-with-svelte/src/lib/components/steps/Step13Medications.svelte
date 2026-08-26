@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { store } from '#lib/stores/assessment.svelte.js';
-  import type { Medication, Allergy } from '#lib/engine/types.js';
-  import Fieldset from '#lib/components/ui/Fieldset.svelte';
-  import Button from '#lib/components/ui/Button.svelte';
-  import TextInput from '#lib/components/ui/TextInput.svelte';
-  import Select from '#lib/components/ui/Select.svelte';
+  import { store } from '$lib/stores/assessment.svelte.js';
+  import type { Medication, Allergy } from '$lib/engine/types.js';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
 
   function newMed(): Medication {
     return {
@@ -96,4 +98,82 @@
       <Button data-variant="danger" onclick={() => store.data.allergies.splice(i, 1)}>Remove</Button>
     </div>
   {/each}
+
+  <h3 class="step-subhead">GLP-1 receptor agonist management</h3>
+  <div class="field-grid field-grid-3">
+    <Field label="On a GLP-1 receptor agonist">
+      <Select label="On a GLP-1 receptor agonist" bind:value={store.data.glp1Management.onGlp1ReceptorAgonist}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Agonist">
+      <Select label="Agonist" bind:value={store.data.glp1Management.glp1AgonistName}>
+        <option value="">—</option>
+        <option value="semaglutide">Semaglutide</option>
+        <option value="tirzepatide">Tirzepatide</option>
+        <option value="dulaglutide">Dulaglutide</option>
+        <option value="liraglutide">Liraglutide</option>
+        <option value="exenatide">Exenatide</option>
+        <option value="other">Other</option>
+      </Select>
+    </Field>
+    <Field label="Formulation">
+      <Select label="Formulation" bind:value={store.data.glp1Management.glp1Formulation}>
+        <option value="">—</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+      </Select>
+    </Field>
+    <Field label="Held per guideline">
+      <Select label="Held per guideline" bind:value={store.data.glp1Management.glp1HeldPerGuideline}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Extended clear-fluid fast confirmed">
+      <Select label="Extended clear-fluid fast confirmed" bind:value={store.data.glp1Management.glp1ExtendedClearFluidsConfirmed}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Active GI symptoms">
+      <Select label="Active GI symptoms" bind:value={store.data.glp1Management.glp1GiSymptoms}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="GI symptom details" class="field-span-2">
+      <TextInput label="GI symptom details" bind:value={store.data.glp1Management.glp1GiSymptomsDetails} />
+    </Field>
+    <Field label="Gastric ultrasound performed">
+      <Select label="Gastric ultrasound performed" bind:value={store.data.glp1Management.glp1GastricUltrasoundPerformed}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="Gastric ultrasound finding">
+      <Select label="Gastric ultrasound finding" bind:value={store.data.glp1Management.glp1GastricUltrasoundFindings}>
+        <option value="">—</option>
+        <option value="empty">Empty</option>
+        <option value="low-risk">Low risk</option>
+        <option value="full-stomach">Full stomach</option>
+      </Select>
+    </Field>
+    <Field label="Full-stomach precautions planned">
+      <Select label="Full-stomach precautions planned" bind:value={store.data.glp1Management.glp1FullStomachPrecautionsPlanned}>
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </Select>
+    </Field>
+    <Field label="GLP-1 notes" class="field-span-3">
+      <TextAreaInput label="GLP-1 notes" rows={3} bind:value={store.data.glp1Management.glp1Notes} />
+    </Field>
+  </div>
 </Fieldset>

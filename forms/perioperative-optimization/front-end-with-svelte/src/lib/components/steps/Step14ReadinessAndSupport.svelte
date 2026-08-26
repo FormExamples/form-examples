@@ -10,7 +10,7 @@
 </script>
 
 <Fieldset legend="14. Psychological Readiness and Social Support">
-	<p class="hint">Assessed and flagged rather than gated. A plan the patient cannot follow, or a discharge with no support, undoes the rest of the optimisation.</p>
+	<p class="hint">Assessed and flagged rather than gated. A plan the patient cannot follow, or a discharge with no support, undoes the rest of the optimization.</p>
 
 	<Field label="Anxiety about the procedure" inputId="social-anxietyLevel">
 		<Select id="social-anxietyLevel" label="Anxiety about the procedure" bind:value={d.social.anxietyLevel}>

@@ -20,18 +20,22 @@ CREATE TABLE perioperative_optimization_grade_flag (
             'sglt2-inhibitor-not-held',
             'glp1-agonist-aspiration-risk',
             'anticoagulation-plan-missing',
-            'insufficient-time-to-optimise',
+            'insufficient-time-to-optimize',
             'active-smoker-major-surgery',
             'alcohol-dependence-risk',
             'high-malnutrition-risk',
             'poor-functional-capacity',
             'severe-frailty',
             'uncontrolled-hypertension',
-            'cardiac-optimisation-required',
-            'respiratory-optimisation-required',
+            'cardiac-optimization-required',
+            'respiratory-optimization-required',
             'osa-unassessed',
-            'renal-optimisation-required',
+            'renal-optimization-required',
             'prior-anaesthetic-complication',
+            'cognitive-assessment-indicated',
+            'sarcopenia-risk',
+            'dehydration-aki-risk',
+            'rebound-glycaemic-risk',
             'psychological-support-required',
             'social-support-gap',
             'capacity-concern',
@@ -74,11 +78,11 @@ COMMENT ON COLUMN perioperative_optimization_grade_flag.perioperative_optimizati
 COMMENT ON COLUMN perioperative_optimization_grade_flag.flag_id IS
     'Stable flag identifier, such as F-SGLT2-INHIBITOR-NOT-HELD-001.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.category IS
-    'Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimise.';
+    'Flag category, such as sglt2-inhibitor-not-held or insufficient-time-to-optimize.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.priority IS
     'Priority: low, medium, or high.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.domain IS
-    'Optimisation domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.';
+    'Optimization domain the flag relates to, where it belongs to one, so a dashboard can group flags by domain.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.description IS
     'Human-readable description of what fired the flag.';
 COMMENT ON COLUMN perioperative_optimization_grade_flag.suggested_action IS

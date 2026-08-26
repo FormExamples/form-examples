@@ -1,5 +1,5 @@
 <script lang="ts">
-	// The signed optimisation report: the domain table, the screening scores, the
+	// The signed optimization report: the domain table, the screening scores, the
 	// safety flags, and the prehabilitation plan. Safety flags are printed
 	// whether or not the clinician overrode the readiness band.
 	import { page } from '$app/state';
@@ -66,7 +66,7 @@
 </svelte:head>
 
 <main class="mx-16 px-4 py-8">
-	<h1 class="text-2xl font-bold text-base-content">Perioperative Optimisation Report</h1>
+	<h1 class="text-2xl font-bold text-base-content">Perioperative Optimization Report</h1>
 	<p class="mt-1 text-sm text-base-content/70">
 		{patientName}
 		{#if d.patient.nhsNumber}· NHS {d.patient.nhsNumber}{/if}
@@ -87,10 +87,10 @@
 	{/if}
 
 	{#if result.recommendedEarliestSurgeryDate}
-		<Alert type="warning" class="mt-4" heading="Not enough time to optimise">
+		<Alert type="warning" class="mt-4" heading="Not enough time to optimize">
 			Earliest date at which every domain would have its full lead time:
 			<strong>{result.recommendedEarliestSurgeryDate}</strong>. Either move the list to that date or
-			later, or record an explicit accept-unoptimised-risk decision.
+			later, or record an explicit accept-unoptimized-risk decision.
 		</Alert>
 	{/if}
 
@@ -109,7 +109,7 @@
 		</p>
 	</Panel>
 
-	<h2 class="mt-8 text-lg font-semibold">Optimisation domains</h2>
+	<h2 class="mt-8 text-lg font-semibold">Optimization domains</h2>
 	<div class="mt-2 overflow-x-auto">
 		<table class="data-table w-full">
 			<thead class="data-table-head">

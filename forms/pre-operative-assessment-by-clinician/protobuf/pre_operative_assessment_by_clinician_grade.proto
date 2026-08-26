@@ -38,6 +38,13 @@ enum PreOperativeAssessmentByClinicianGradeMallampatiClassEnum {
   MALLAMPATICLASS_IV = 4;  // IV
 }
 
+enum PreOperativeAssessmentByClinicianGradeFriedFrailtyCategoryEnum {
+  FRIEDFRAILTYCATEGORY_UNSPECIFIED = 0;
+  FRIEDFRAILTYCATEGORY_ROBUST = 1;  // robust
+  FRIEDFRAILTYCATEGORY_PRE_FRAIL = 2;  // pre-frail
+  FRIEDFRAILTYCATEGORY_FRAIL = 3;  // frail
+}
+
 enum PreOperativeAssessmentByClinicianGradeCompositeRiskEnum {
   COMPOSITERISK_UNSPECIFIED = 0;
   COMPOSITERISK_LOW = 1;  // low
@@ -68,9 +75,11 @@ message PreOperativeAssessmentByClinicianGrade {
   int32 rcri_score = 11;  // INTEGER
   int32 stopbang_score = 12;  // INTEGER
   int32 frailty_scale = 13;  // INTEGER
-  PreOperativeAssessmentByClinicianGradeCompositeRiskEnum composite_risk = 14;  // VARCHAR(10)
-  PreOperativeAssessmentByClinicianGradeRecommendationEnum recommendation = 15;  // VARCHAR(20)
-  string clinician_notes = 16;  // TEXT
-  string signed_at = 17;  // TIMESTAMPTZ — iso 8601
-  string graded_at = 18;  // TIMESTAMPTZ — iso 8601
+  int32 fried_phenotype_score = 14;  // INTEGER
+  PreOperativeAssessmentByClinicianGradeFriedFrailtyCategoryEnum fried_frailty_category = 15;  // VARCHAR(15)
+  PreOperativeAssessmentByClinicianGradeCompositeRiskEnum composite_risk = 16;  // VARCHAR(10)
+  PreOperativeAssessmentByClinicianGradeRecommendationEnum recommendation = 17;  // VARCHAR(20)
+  string clinician_notes = 18;  // TEXT
+  string signed_at = 19;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 20;  // TIMESTAMPTZ — iso 8601
 }

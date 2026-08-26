@@ -173,6 +173,18 @@ CREATE TABLE pre_operative_assessment_by_clinician (
     perioperative_action VARCHAR(20) NOT NULL DEFAULT '' CHECK (perioperative_action IN ('continue', 'hold-on-day', 'hold-n-days', 'stop', 'switch', 'bridge', '')),
     perioperative_notes VARCHAR(500) NOT NULL DEFAULT '',
     last_dose_at TIMESTAMPTZ,
+    on_glp1_receptor_agonist VARCHAR(5) NOT NULL DEFAULT '' CHECK (on_glp1_receptor_agonist IN ('yes', 'no', '')),
+    glp1_agonist_name VARCHAR(20) NOT NULL DEFAULT '' CHECK (glp1_agonist_name IN ('semaglutide', 'tirzepatide', 'dulaglutide', 'liraglutide', 'exenatide', 'other', '')),
+    glp1_formulation VARCHAR(10) NOT NULL DEFAULT '' CHECK (glp1_formulation IN ('daily', 'weekly', '')),
+    glp1_last_dose_at TIMESTAMPTZ,
+    glp1_held_per_guideline VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_held_per_guideline IN ('yes', 'no', '')),
+    glp1_extended_clear_fluids_confirmed VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_extended_clear_fluids_confirmed IN ('yes', 'no', '')),
+    glp1_gi_symptoms VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_gi_symptoms IN ('yes', 'no', '')),
+    glp1_gi_symptoms_details VARCHAR(500) NOT NULL DEFAULT '',
+    glp1_gastric_ultrasound_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_gastric_ultrasound_performed IN ('yes', 'no', '')),
+    glp1_gastric_ultrasound_findings VARCHAR(20) NOT NULL DEFAULT '' CHECK (glp1_gastric_ultrasound_findings IN ('empty', 'low-risk', 'full-stomach', '')),
+    glp1_full_stomach_precautions_planned VARCHAR(5) NOT NULL DEFAULT '' CHECK (glp1_full_stomach_precautions_planned IN ('yes', 'no', '')),
+    glp1_notes VARCHAR(1000) NOT NULL DEFAULT '',
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     category VARCHAR(30) NOT NULL DEFAULT '' CHECK (category IN ('drug', 'latex', 'food', 'adhesive', 'contrast', 'environment', 'other', '')),
     reaction_type VARCHAR(30) NOT NULL DEFAULT '' CHECK (reaction_type IN ('anaphylaxis', 'rash', 'urticaria', 'angioedema', 'gi-upset', 'bronchospasm', 'other', '')),
@@ -192,6 +204,18 @@ CREATE TABLE pre_operative_assessment_by_clinician (
     cpet_notes TEXT NOT NULL DEFAULT '',
     malnutrition_risk VARCHAR(20) NOT NULL DEFAULT '' CHECK (malnutrition_risk IN ('none', 'low', 'medium', 'high', '')),
     unintentional_weight_loss_kg NUMERIC(4,1),
+    fried_weakness VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_weakness IN ('yes', 'no', '')),
+    fried_slowness VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_slowness IN ('yes', 'no', '')),
+    fried_low_physical_activity VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_low_physical_activity IN ('yes', 'no', '')),
+    fried_exhaustion VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_exhaustion IN ('yes', 'no', '')),
+    fried_unintentional_weight_loss VARCHAR(5) NOT NULL DEFAULT '' CHECK (fried_unintentional_weight_loss IN ('yes', 'no', '')),
+    risk_analysis_index_score INTEGER CHECK (risk_analysis_index_score IS NULL OR risk_analysis_index_score BETWEEN 0 AND 100),
+    mini_cog_performed VARCHAR(5) NOT NULL DEFAULT '' CHECK (mini_cog_performed IN ('yes', 'no', '')),
+    mini_cog_score INTEGER CHECK (mini_cog_score IS NULL OR mini_cog_score BETWEEN 0 AND 5),
+    prehabilitation_indicated VARCHAR(5) NOT NULL DEFAULT '' CHECK (prehabilitation_indicated IN ('yes', 'no', '')),
+    prehabilitation_type VARCHAR(20) NOT NULL DEFAULT '' CHECK (prehabilitation_type IN ('nutrition', 'aerobic', 'resistance', 'multimodal', 'other', '')),
+    prehabilitation_start_date DATE,
+    protein_supplementation_recommended VARCHAR(5) NOT NULL DEFAULT '' CHECK (protein_supplementation_recommended IN ('yes', 'no', '')),
     technique VARCHAR(30) NOT NULL DEFAULT '' CHECK (technique IN ('ga', 'regional', 'neuraxial', 'sedation', 'mac', 'local', 'combined-ga-regional', '')),
     airway_plan VARCHAR(30) NOT NULL DEFAULT '' CHECK (airway_plan IN ('face-mask', 'supraglottic', 'ett', 'awake-fibreoptic', 'surgical-airway', '')),
     rsi_planned VARCHAR(5) NOT NULL DEFAULT '' CHECK (rsi_planned IN ('yes', 'no', '')),
@@ -586,6 +610,30 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician.perioperative_notes IS
     'Perioperative instructions or caveats for this medication.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.last_dose_at IS
     'Timestamp of the most recent recorded dose.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.on_glp1_receptor_agonist IS
+    'Whether the patient is currently prescribed a GLP-1 receptor agonist (semaglutide, tirzepatide and related drugs), which delays gastric emptying and raises aspiration risk under anaesthesia.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_agonist_name IS
+    'Which GLP-1 receptor agonist the patient is prescribed.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_formulation IS
+    'Dosing formulation: daily or weekly. Drives the hold window — hold daily formulations day-of, hold weekly formulations one week before surgery.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_last_dose_at IS
+    'Timestamp of the most recent recorded GLP-1 receptor agonist dose.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_held_per_guideline IS
+    'Whether the GLP-1 receptor agonist was held per the agreed perioperative schedule (daily formulation held day-of; weekly formulation held one week prior).';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_extended_clear_fluids_confirmed IS
+    'Whether the patient instead followed the extended-fasting alternative: 24-hour solid fast plus 4-8 hour clear-liquid fast, when the medication could not be held.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gi_symptoms IS
+    'Whether the patient reports active GLP-1-related gastrointestinal symptoms (nausea, vomiting, early satiety, reflux, bloating) at the time of assessment.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gi_symptoms_details IS
+    'Free-text description of the reported GLP-1-related gastrointestinal symptoms and their severity.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gastric_ultrasound_performed IS
+    'Whether point-of-care gastric ultrasound was performed to assess residual gastric content.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gastric_ultrasound_findings IS
+    'Gastric ultrasound finding: empty, low-risk, or full-stomach.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_full_stomach_precautions_planned IS
+    'Whether full-stomach precautions (rapid-sequence induction, regional anaesthesia preference, or delaying surgery) are planned because the medication was not held or the patient remains symptomatic.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_notes IS
+    'Free-text clinician notes on GLP-1 receptor agonist perioperative management.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.allergen IS
     'Known allergen or trigger.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.category IS
@@ -624,6 +672,30 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician.malnutrition_risk IS
     'Malnutrition risk category: none, low, medium, or high.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.unintentional_weight_loss_kg IS
     'Recent unintentional weight loss in kilograms.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_weakness IS
+    'Fried Frailty Phenotype criterion: weakness, i.e. reduced grip strength for sex and BMI.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_slowness IS
+    'Fried Frailty Phenotype criterion: slowness, i.e. reduced walking speed for sex and height.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_low_physical_activity IS
+    'Fried Frailty Phenotype criterion: low physical activity level.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_exhaustion IS
+    'Fried Frailty Phenotype criterion: self-reported exhaustion.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_unintentional_weight_loss IS
+    'Fried Frailty Phenotype criterion: unintentional weight loss, distinct from the free-text kilogram figure recorded in unintentional_weight_loss_kg.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.risk_analysis_index_score IS
+    'Risk Analysis Index (RAI) score; higher scores indicate greater frailty.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.mini_cog_performed IS
+    'Whether the Mini-Cog cognitive screen was performed, indicated when the Clinical Frailty Scale is 5 or above.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.mini_cog_score IS
+    'Mini-Cog total score 0-5 (three-item recall plus clock-draw test). A score of 0-2 suggests cognitive impairment.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.prehabilitation_indicated IS
+    'Whether multimodal prehabilitation (nutrition, aerobic and resistance exercise) is indicated before surgery.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.prehabilitation_type IS
+    'Type of prehabilitation planned: nutrition, aerobic, resistance, multimodal, or other.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.prehabilitation_start_date IS
+    'Date prehabilitation started or is planned to start, ideally 2-6 weeks before surgery.';
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.protein_supplementation_recommended IS
+    'Whether protein supplementation is recommended, particularly for frail patients on a GLP-1 receptor agonist at risk of accelerated sarcopenia.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.technique IS
     'Planned primary anaesthetic technique.';
 COMMENT ON COLUMN pre_operative_assessment_by_clinician.airway_plan IS

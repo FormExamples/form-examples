@@ -1241,6 +1241,59 @@ function renderStep13() {
     <p class="hint">Drug, latex, food, contrast, environmental.</p>`;
   card.appendChild(allergyHeader);
   card.appendChild(allergyListEditor());
+
+  const glp1Header = document.createElement('div');
+  glp1Header.className = 'list-section-header';
+  glp1Header.innerHTML = `
+    <h3>GLP-1 receptor agonist management</h3>
+    <p class="hint">Delayed gastric emptying raises aspiration risk under anaesthesia.</p>`;
+  card.appendChild(glp1Header);
+
+  card.appendChild(radioGroup({ label: 'On a GLP-1 receptor agonist?', section: 'glp1Management', field: 'onGlp1ReceptorAgonist', options: yesNo }));
+  const glp1Box = document.createElement('div');
+  glp1Box.dataset.conditional = 'glp1Management.onGlp1ReceptorAgonist=yes';
+
+  const glp1G1 = document.createElement('div'); glp1G1.className = 'three-col';
+  glp1G1.appendChild(selectInput({
+    label: 'Agonist', section: 'glp1Management', field: 'glp1AgonistName',
+    options: [
+      { value: 'semaglutide', label: 'Semaglutide' },
+      { value: 'tirzepatide', label: 'Tirzepatide' },
+      { value: 'dulaglutide', label: 'Dulaglutide' },
+      { value: 'liraglutide', label: 'Liraglutide' },
+      { value: 'exenatide', label: 'Exenatide' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+  glp1G1.appendChild(selectInput({
+    label: 'Formulation', section: 'glp1Management', field: 'glp1Formulation',
+    options: [
+      { value: 'daily', label: 'Daily' },
+      { value: 'weekly', label: 'Weekly' }
+    ]
+  }));
+  glp1G1.appendChild(radioGroup({ label: 'Held per guideline?', section: 'glp1Management', field: 'glp1HeldPerGuideline', options: yesNo }));
+  glp1Box.appendChild(glp1G1);
+
+  const glp1G2 = document.createElement('div'); glp1G2.className = 'three-col';
+  glp1G2.appendChild(radioGroup({ label: 'Extended clear-fluid fast confirmed?', section: 'glp1Management', field: 'glp1ExtendedClearFluidsConfirmed', options: yesNo }));
+  glp1G2.appendChild(radioGroup({ label: 'Active GI symptoms?', section: 'glp1Management', field: 'glp1GiSymptoms', options: yesNo }));
+  glp1G2.appendChild(radioGroup({ label: 'Gastric ultrasound performed?', section: 'glp1Management', field: 'glp1GastricUltrasoundPerformed', options: yesNo }));
+  glp1Box.appendChild(glp1G2);
+
+  glp1Box.appendChild(textInput({ label: 'GI symptom details', section: 'glp1Management', field: 'glp1GiSymptomsDetails' }));
+  glp1Box.appendChild(selectInput({
+    label: 'Gastric ultrasound finding', section: 'glp1Management', field: 'glp1GastricUltrasoundFindings',
+    options: [
+      { value: 'empty', label: 'Empty' },
+      { value: 'low-risk', label: 'Low risk' },
+      { value: 'full-stomach', label: 'Full stomach' }
+    ]
+  }));
+  glp1Box.appendChild(radioGroup({ label: 'Full-stomach precautions planned?', section: 'glp1Management', field: 'glp1FullStomachPrecautionsPlanned', options: yesNo }));
+  glp1Box.appendChild(textArea({ label: 'GLP-1 notes', section: 'glp1Management', field: 'glp1Notes', rows: 2 }));
+  card.appendChild(glp1Box);
+
   return card;
 }
 
@@ -1302,6 +1355,51 @@ function renderStep14() {
   card.appendChild(radioGroup({ label: 'Support at home?', section: 'functionalCapacity', field: 'supportAtHome', options: yesNo }));
   card.appendChild(radioGroup({ label: 'Falls within last year?', section: 'functionalCapacity', field: 'fallsRiskWithinYear', options: yesNo }));
   card.appendChild(textInput({ label: 'Mobility status', section: 'functionalCapacity', field: 'mobilityStatus' }));
+
+  const friedHead = document.createElement('h3');
+  friedHead.textContent = 'Fried Frailty Phenotype';
+  card.appendChild(friedHead);
+  const g4 = document.createElement('div'); g4.className = 'three-col';
+  g4.appendChild(radioGroup({ label: 'Weakness', section: 'functionalCapacity', field: 'friedWeakness', options: yesNo }));
+  g4.appendChild(radioGroup({ label: 'Slowness', section: 'functionalCapacity', field: 'friedSlowness', options: yesNo }));
+  g4.appendChild(radioGroup({ label: 'Low physical activity', section: 'functionalCapacity', field: 'friedLowPhysicalActivity', options: yesNo }));
+  card.appendChild(g4);
+  const g5 = document.createElement('div'); g5.className = 'three-col';
+  g5.appendChild(radioGroup({ label: 'Exhaustion', section: 'functionalCapacity', field: 'friedExhaustion', options: yesNo }));
+  g5.appendChild(radioGroup({ label: 'Unintentional weight loss', section: 'functionalCapacity', field: 'friedUnintentionalWeightLoss', options: yesNo }));
+  g5.appendChild(textInput({ label: 'Risk Analysis Index score', section: 'functionalCapacity', field: 'riskAnalysisIndexScore', type: 'number', min: 0, max: 100 }));
+  card.appendChild(g5);
+
+  const cogHead = document.createElement('h3');
+  cogHead.textContent = 'Cognitive screening (Mini-Cog)';
+  card.appendChild(cogHead);
+  const cogHint = document.createElement('p');
+  cogHint.className = 'hint';
+  cogHint.textContent = 'Indicated when the Clinical Frailty Scale is 5 or above.';
+  card.appendChild(cogHint);
+  const g6 = document.createElement('div'); g6.className = 'two-col';
+  g6.appendChild(radioGroup({ label: 'Mini-Cog performed?', section: 'functionalCapacity', field: 'miniCogPerformed', options: yesNo }));
+  g6.appendChild(textInput({ label: 'Mini-Cog score (0-5)', section: 'functionalCapacity', field: 'miniCogScore', type: 'number', min: 0, max: 5 }));
+  card.appendChild(g6);
+
+  const prehabHead = document.createElement('h3');
+  prehabHead.textContent = 'Prehabilitation';
+  card.appendChild(prehabHead);
+  const g7 = document.createElement('div'); g7.className = 'three-col';
+  g7.appendChild(radioGroup({ label: 'Prehabilitation indicated?', section: 'functionalCapacity', field: 'prehabilitationIndicated', options: yesNo }));
+  g7.appendChild(selectInput({
+    label: 'Prehabilitation type', section: 'functionalCapacity', field: 'prehabilitationType',
+    options: [
+      { value: 'nutrition', label: 'Nutrition' },
+      { value: 'aerobic', label: 'Aerobic' },
+      { value: 'resistance', label: 'Resistance' },
+      { value: 'multimodal', label: 'Multimodal' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+  g7.appendChild(textInput({ label: 'Prehabilitation start date', section: 'functionalCapacity', field: 'prehabilitationStartDate', type: 'date' }));
+  card.appendChild(g7);
+  card.appendChild(radioGroup({ label: 'Protein supplementation recommended?', section: 'functionalCapacity', field: 'proteinSupplementationRecommended', options: yesNo }));
   return card;
 }
 
@@ -1748,6 +1846,8 @@ function renderReport() {
     rcriScore,
     stopbangScore,
     frailtyScale,
+    friedPhenotypeScore,
+    friedFrailtyCategory,
     compositeRisk,
     firedRules,
     additionalFlags,
@@ -1822,6 +1922,7 @@ function renderReport() {
       <span class="subscale-chip">RCRI: <strong>${rcriScore}</strong> / 6</span>
       <span class="subscale-chip">STOP-BANG: <strong>${stopbangScore}</strong> / 8</span>
       <span class="subscale-chip">CFS: <strong>${frailtyScale ?? '—'}</strong> / 9</span>
+      <span class="subscale-chip">Fried: <strong>${friedPhenotypeScore ?? '—'}</strong> / 5${friedFrailtyCategory ? ` (${esc(friedFrailtyCategory)})` : ''}</span>
     </div>
 
     <h3>Fired rules</h3>

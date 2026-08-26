@@ -5,7 +5,7 @@
 // hazard H-07. Flag IDs are stable and identical across every front-end and the
 // back-end.
 
-import { num } from './domain-rules.js';
+import { num, computeFriedPhenotypeScore } from './domain-rules.js';
 
 /** Age in whole years at the assessment date, or null when unknown. */
 function ageInYears(birthDate, assessmentDate) {
@@ -38,9 +38,9 @@ function detectFlags(data, context) {
   const short = domains.filter((d) => d.status === 'insufficient-time');
   if (short.length > 0) {
     const worst = Math.max(...short.map((d) => d.weeksShortfall ?? 0));
-    push('F-INSUFFICIENT-TIME-TO-OPTIMISE-001', 'insufficient-time-to-optimise', 'high', '',
-      `${short.length} domain${short.length === 1 ? '' : 's'} cannot be optimised before the listed date: ${short.map((d) => d.domain).join(', ')}. The largest shortfall is ${worst} week${worst === 1 ? '' : 's'}.`,
-      'Either move the surgery date to create the window, or record an explicit accept-unoptimised-risk decision at sign-off. Do not proceed believing the patient is optimised.');
+    push('F-INSUFFICIENT-TIME-TO-OPTIMIZE-001', 'insufficient-time-to-optimize', 'high', '',
+      `${short.length} domain${short.length === 1 ? '' : 's'} cannot be optimized before the listed date: ${short.map((d) => d.domain).join(', ')}. The largest shortfall is ${worst} week${worst === 1 ? '' : 's'}.`,
+      'Either move the surgery date to create the window, or record an explicit accept-unoptimized-risk decision at sign-off. Do not proceed believing the patient is optimized.');
   }
 
   // --- Anaemia ------------------------------------------------------------
@@ -78,10 +78,16 @@ function detectFlags(data, context) {
       'An SGLT2 inhibitor is in use with no agreed hold plan.',
       'Agree a hold plan with the prescriber. These drugs can precipitate ketoacidosis with a normal blood glucose, so check ketones rather than glucose if the patient is unwell.');
   }
-  if (data.medication.takesGlp1Agonist === 'yes') {
+  const onGlp1 = data.medication.takesGlp1Agonist === 'yes';
+  const glp1NotHeldOrConfirmed =
+    data.medication.glp1HeldPerGuideline !== 'yes' &&
+    data.medication.glp1ExtendedClearFluidsConfirmed !== 'yes';
+  if (onGlp1 && (data.medication.glp1GiSymptoms === 'yes' || glp1NotHeldOrConfirmed)) {
     push('F-GLP1-AGONIST-ASPIRATION-RISK-001', 'glp1-agonist-aspiration-risk', 'high', 'medication',
-      'A GLP-1 receptor agonist is in use.',
-      'Delayed gastric emptying means the patient may have a full stomach despite standard fasting. Consider withholding the dose, consider gastric ultrasound, and treat as a full stomach if in doubt.');
+      data.medication.glp1GiSymptoms === 'yes'
+        ? 'A GLP-1 receptor agonist is in use with active gastrointestinal symptoms — delayed gastric emptying raises aspiration risk.'
+        : 'A GLP-1 receptor agonist is in use and was neither held per guideline nor an extended clear-fluid fast confirmed.',
+      'Apply full-stomach precautions: consider withholding the dose per guideline (daily formulations on the day of surgery, weekly formulations one week prior), consider point-of-care gastric ultrasound, and prefer regional anaesthesia where appropriate.');
   }
   if ((data.medication.takesAnticoagulant === 'yes' || data.medication.takesAntiplatelet === 'yes') &&
       data.medication.medicationHoldPlanAgreed !== 'yes') {
@@ -135,6 +141,32 @@ function detectFlags(data, context) {
       `Clinical Frailty Scale ${cfs} indicates severe frailty.`,
       'Involve a perioperative medicine for older people service; revisit shared decision-making, including the option of not operating.');
   }
+  if (cfs !== null && cfs >= 5 && data.frailty.miniCogPerformed !== 'yes') {
+    push('F-COGNITIVE-ASSESSMENT-INDICATED-001', 'cognitive-assessment-indicated', 'medium', 'physical-fitness',
+      `Clinical Frailty Scale ${cfs} — Mini-Cog not yet performed.`,
+      'Perform a Mini-Cog and consider a Comprehensive Geriatric Assessment before surgery.');
+  }
+
+  // --- Frailty x GLP-1 receptor agonist intersecting risks --------------------------
+  const { category: friedCategory } = computeFriedPhenotypeScore(data);
+  const isFrail = friedCategory === 'frail' || (cfs !== null && cfs >= 5);
+  if (onGlp1 && isFrail) {
+    push('F-SARCOPENIA-RISK-001', 'sarcopenia-risk', 'medium', 'physical-fitness',
+      'Frail patient on a GLP-1 receptor agonist — risk of accelerated sarcopenia from combined muscle and fat loss.',
+      'Refer for protein supplementation and resistance-exercise prehabilitation before surgery.');
+  }
+  if (onGlp1 && data.medication.glp1GiSymptoms === 'yes' && isFrail) {
+    push('F-DEHYDRATION-AKI-RISK-001', 'dehydration-aki-risk', 'high', 'medication',
+      'Frail patient with GLP-1-related gastrointestinal symptoms plus fasting — elevated risk of dehydration, acute kidney injury, and delirium.',
+      'Consider pre-admission intravenous fluids, minimise fasting duration, and monitor renal function and cognition closely.');
+  }
+  if (onGlp1 &&
+      (data.medication.glp1HeldPerGuideline === 'yes' || data.medication.glp1ExtendedClearFluidsConfirmed === 'yes') &&
+      data.glycaemic.insulinRegimen !== '') {
+    push('F-REBOUND-GLYCAEMIC-RISK-001', 'rebound-glycaemic-risk', 'medium', 'glycaemic-control',
+      'A GLP-1 receptor agonist was held or fasting extended in a patient on insulin — risk of rebound hyperglycaemia or hypoglycaemia.',
+      'Agree a perioperative glycaemic monitoring and insulin-adjustment plan with the diabetes team.');
+  }
 
   // --- Cardiorespiratory -------------------------------------------------------------
   const sbp = num(data.cardioresp.systolicBp);
@@ -146,7 +178,7 @@ function detectFlags(data, context) {
   }
   const ef = num(data.cardioresp.ejectionFractionPercent);
   if (ef !== null && ef < 40) {
-    push('F-CARDIAC-OPTIMISATION-REQUIRED-001', 'cardiac-optimisation-required', 'high', 'cardiorespiratory',
+    push('F-CARDIAC-OPTIMIZATION-REQUIRED-001', 'cardiac-optimization-required', 'high', 'cardiorespiratory',
       `Ejection fraction ${ef}% is below 40%.`,
       'Cardiology review before surgery; consider enhanced perioperative care and postoperative critical care.');
   }
@@ -154,7 +186,7 @@ function detectFlags(data, context) {
   if (data.cardioresp.asthmaControl === 'uncontrolled' ||
       data.cardioresp.copdControl === 'uncontrolled' ||
       (spo2 !== null && spo2 < 92)) {
-    push('F-RESPIRATORY-OPTIMISATION-REQUIRED-001', 'respiratory-optimisation-required', 'high', 'cardiorespiratory',
+    push('F-RESPIRATORY-OPTIMIZATION-REQUIRED-001', 'respiratory-optimization-required', 'high', 'cardiorespiratory',
       spo2 !== null && spo2 < 92
         ? `Oxygen saturation ${spo2}% on room air is below 92%.`
         : 'Airways disease is uncontrolled.',
@@ -170,7 +202,7 @@ function detectFlags(data, context) {
   // --- Renal -----------------------------------------------------------------------
   const egfr = num(data.anaemia.egfrMlPerMin);
   if (egfr !== null && egfr < 30) {
-    push('F-RENAL-OPTIMISATION-REQUIRED-001', 'renal-optimisation-required', 'high', '',
+    push('F-RENAL-OPTIMIZATION-REQUIRED-001', 'renal-optimization-required', 'high', '',
       `eGFR ${egfr} ml/min indicates severe renal impairment.`,
       'Renal review; check nephrotoxic medicines, contrast exposure, and fluid plan before surgery.');
   }

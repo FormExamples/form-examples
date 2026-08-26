@@ -179,6 +179,18 @@ pub struct Params {
     pub perioperative_action: String,
     pub perioperative_notes: String,
     pub last_dose_at: Option<DateTimeWithTimeZone>,
+    pub on_glp1_receptor_agonist: String,
+    pub glp1_agonist_name: String,
+    pub glp1_formulation: String,
+    pub glp1_last_dose_at: Option<DateTimeWithTimeZone>,
+    pub glp1_held_per_guideline: String,
+    pub glp1_extended_clear_fluids_confirmed: String,
+    pub glp1_gi_symptoms: String,
+    pub glp1_gi_symptoms_details: String,
+    pub glp1_gastric_ultrasound_performed: String,
+    pub glp1_gastric_ultrasound_findings: String,
+    pub glp1_full_stomach_precautions_planned: String,
+    pub glp1_notes: String,
     pub allergen: String,
     pub category: String,
     pub reaction_type: String,
@@ -198,6 +210,18 @@ pub struct Params {
     pub cpet_notes: String,
     pub malnutrition_risk: String,
     pub unintentional_weight_loss_kg: Option<f64>,
+    pub fried_weakness: String,
+    pub fried_slowness: String,
+    pub fried_low_physical_activity: String,
+    pub fried_exhaustion: String,
+    pub fried_unintentional_weight_loss: String,
+    pub risk_analysis_index_score: Option<i32>,
+    pub mini_cog_performed: String,
+    pub mini_cog_score: Option<i32>,
+    pub prehabilitation_indicated: String,
+    pub prehabilitation_type: String,
+    pub prehabilitation_start_date: Option<Date>,
+    pub protein_supplementation_recommended: String,
     pub technique: String,
     pub airway_plan: String,
     pub rsi_planned: String,
@@ -410,6 +434,18 @@ impl Params {
       item.perioperative_action = Set(self.perioperative_action.clone());
       item.perioperative_notes = Set(self.perioperative_notes.clone());
       item.last_dose_at = Set(self.last_dose_at);
+      item.on_glp1_receptor_agonist = Set(self.on_glp1_receptor_agonist.clone());
+      item.glp1_agonist_name = Set(self.glp1_agonist_name.clone());
+      item.glp1_formulation = Set(self.glp1_formulation.clone());
+      item.glp1_last_dose_at = Set(self.glp1_last_dose_at);
+      item.glp1_held_per_guideline = Set(self.glp1_held_per_guideline.clone());
+      item.glp1_extended_clear_fluids_confirmed = Set(self.glp1_extended_clear_fluids_confirmed.clone());
+      item.glp1_gi_symptoms = Set(self.glp1_gi_symptoms.clone());
+      item.glp1_gi_symptoms_details = Set(self.glp1_gi_symptoms_details.clone());
+      item.glp1_gastric_ultrasound_performed = Set(self.glp1_gastric_ultrasound_performed.clone());
+      item.glp1_gastric_ultrasound_findings = Set(self.glp1_gastric_ultrasound_findings.clone());
+      item.glp1_full_stomach_precautions_planned = Set(self.glp1_full_stomach_precautions_planned.clone());
+      item.glp1_notes = Set(self.glp1_notes.clone());
       item.allergen = Set(self.allergen.clone());
       item.category = Set(self.category.clone());
       item.reaction_type = Set(self.reaction_type.clone());
@@ -429,6 +465,18 @@ impl Params {
       item.cpet_notes = Set(self.cpet_notes.clone());
       item.malnutrition_risk = Set(self.malnutrition_risk.clone());
       item.unintentional_weight_loss_kg = Set(self.unintentional_weight_loss_kg);
+      item.fried_weakness = Set(self.fried_weakness.clone());
+      item.fried_slowness = Set(self.fried_slowness.clone());
+      item.fried_low_physical_activity = Set(self.fried_low_physical_activity.clone());
+      item.fried_exhaustion = Set(self.fried_exhaustion.clone());
+      item.fried_unintentional_weight_loss = Set(self.fried_unintentional_weight_loss.clone());
+      item.risk_analysis_index_score = Set(self.risk_analysis_index_score);
+      item.mini_cog_performed = Set(self.mini_cog_performed.clone());
+      item.mini_cog_score = Set(self.mini_cog_score);
+      item.prehabilitation_indicated = Set(self.prehabilitation_indicated.clone());
+      item.prehabilitation_type = Set(self.prehabilitation_type.clone());
+      item.prehabilitation_start_date = Set(self.prehabilitation_start_date);
+      item.protein_supplementation_recommended = Set(self.protein_supplementation_recommended.clone());
       item.technique = Set(self.technique.clone());
       item.airway_plan = Set(self.airway_plan.clone());
       item.rsi_planned = Set(self.rsi_planned.clone());

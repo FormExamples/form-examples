@@ -29,7 +29,12 @@ enum PreOperativeAssessmentByClinicianGradeFlagCategoryEnum {
   CATEGORY_SUX_APNOEA = 20;  // sux-apnoea
   CATEGORY_PSEUDOCHOLINESTERASE_DEFICIENCY = 21;  // pseudocholinesterase-deficiency
   CATEGORY_MALNUTRITION_RISK = 22;  // malnutrition-risk
-  CATEGORY_OTHER = 23;  // other
+  CATEGORY_GLP1_ASPIRATION_RISK = 23;  // glp1-aspiration-risk
+  CATEGORY_COGNITIVE_ASSESSMENT_INDICATED = 24;  // cognitive-assessment-indicated
+  CATEGORY_SARCOPENIA_RISK = 25;  // sarcopenia-risk
+  CATEGORY_DEHYDRATION_AKI_RISK = 26;  // dehydration-aki-risk
+  CATEGORY_REBOUND_GLYCAEMIC_RISK = 27;  // rebound-glycaemic-risk
+  CATEGORY_OTHER = 28;  // other
 }
 
 enum PreOperativeAssessmentByClinicianGradeFlagPriorityEnum {

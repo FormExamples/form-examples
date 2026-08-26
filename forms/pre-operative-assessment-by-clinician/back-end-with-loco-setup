@@ -245,6 +245,18 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     perioperative_action:string! \
     perioperative_notes:string! \
     last_dose_at:tstz \
+    on_glp1_receptor_agonist:string! \
+    glp1_agonist_name:string! \
+    glp1_formulation:string! \
+    glp1_last_dose_at:tstz \
+    glp1_held_per_guideline:string! \
+    glp1_extended_clear_fluids_confirmed:string! \
+    glp1_gi_symptoms:string! \
+    glp1_gi_symptoms_details:string! \
+    glp1_gastric_ultrasound_performed:string! \
+    glp1_gastric_ultrasound_findings:string! \
+    glp1_full_stomach_precautions_planned:string! \
+    glp1_notes:string! \
     allergen:string! \
     category:string! \
     reaction_type:string! \
@@ -264,6 +276,18 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     cpet_notes:text! \
     malnutrition_risk:string! \
     unintentional_weight_loss_kg:double \
+    fried_weakness:string! \
+    fried_slowness:string! \
+    fried_low_physical_activity:string! \
+    fried_exhaustion:string! \
+    fried_unintentional_weight_loss:string! \
+    risk_analysis_index_score:int \
+    mini_cog_performed:string! \
+    mini_cog_score:int \
+    prehabilitation_indicated:string! \
+    prehabilitation_type:string! \
+    prehabilitation_start_date:date \
+    protein_supplementation_recommended:string! \
     technique:string! \
     airway_plan:string! \
     rsi_planned:string! \
@@ -314,6 +338,8 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \
     rcri_score:int \
     stopbang_score:int \
     frailty_scale:int \
+    fried_phenotype_score:int \
+    fried_frailty_category:string! \
     composite_risk:string! \
     recommendation:string! \
     clinician_notes:text! \

@@ -18,6 +18,8 @@ pub struct Params {
     pub rcri_score: Option<i32>,
     pub stopbang_score: Option<i32>,
     pub frailty_scale: Option<i32>,
+    pub fried_phenotype_score: Option<i32>,
+    pub fried_frailty_category: String,
     pub composite_risk: String,
     pub recommendation: String,
     pub clinician_notes: String,
@@ -37,6 +39,8 @@ impl Params {
       item.rcri_score = Set(self.rcri_score);
       item.stopbang_score = Set(self.stopbang_score);
       item.frailty_scale = Set(self.frailty_scale);
+      item.fried_phenotype_score = Set(self.fried_phenotype_score);
+      item.fried_frailty_category = Set(self.fried_frailty_category.clone());
       item.composite_risk = Set(self.composite_risk.clone());
       item.recommendation = Set(self.recommendation.clone());
       item.clinician_notes = Set(self.clinician_notes.clone());

@@ -3,7 +3,7 @@
 //
 // Pure: both dates come from the recorded data, never from the system clock.
 
-import type { DomainEvaluation, DomainResult, DomainStatus } from './types';
+import type { DomainEvaluation, DomainResult, DomainStatus } from "./types";
 
 export const MILLISECONDS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
 
@@ -20,14 +20,14 @@ export const MILLISECONDS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
  * @returns {number|null}
  */
 export function weeksBetween(
-	assessmentDate: string,
-	plannedSurgeryDate: string
+  assessmentDate: string,
+  plannedSurgeryDate: string,
 ): number | null {
-	if (!assessmentDate || !plannedSurgeryDate) return null;
-	const from = new Date(assessmentDate);
-	const to = new Date(plannedSurgeryDate);
-	if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) return null;
-	return Math.floor((to.getTime() - from.getTime()) / MILLISECONDS_PER_WEEK);
+  if (!assessmentDate || !plannedSurgeryDate) return null;
+  const from = new Date(assessmentDate);
+  const to = new Date(plannedSurgeryDate);
+  if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) return null;
+  return Math.floor((to.getTime() - from.getTime()) / MILLISECONDS_PER_WEEK);
 }
 
 /**
@@ -38,32 +38,32 @@ export function weeksBetween(
  * @returns {{ status: string, weeksShortfall: number|null }}
  */
 export function gateDomain(
-	evaluation: DomainEvaluation,
-	weeksToSurgery: number | null
+  evaluation: DomainEvaluation,
+  weeksToSurgery: number | null,
 ): { status: DomainStatus; weeksShortfall: number | null } {
-	if (!evaluation.triggered) {
-		return {
-			status: evaluation.applicable ? 'optimised' : 'not-applicable',
-			weeksShortfall: null
-		};
-	}
+  if (!evaluation.triggered) {
+    return {
+      status: evaluation.applicable ? "optimized" : "not-applicable",
+      weeksShortfall: null,
+    };
+  }
 
-	// Ungated: no surgery date, so report the least alarming actionable status
-	// and let the report say that gating could not be applied.
-	if (weeksToSurgery === null) {
-		return { status: 'action-required', weeksShortfall: null };
-	}
+  // Ungated: no surgery date, so report the least alarming actionable status
+  // and let the report say that gating could not be applied.
+  if (weeksToSurgery === null) {
+    return { status: "action-required", weeksShortfall: null };
+  }
 
-	const shortfall = evaluation.leadTimeWeeks - weeksToSurgery;
+  const shortfall = evaluation.leadTimeWeeks - weeksToSurgery;
 
-	if (weeksToSurgery >= evaluation.leadTimeWeeks) {
-		return {
-			status: evaluation.started ? 'in-progress' : 'action-required',
-			weeksShortfall: null
-		};
-	}
+  if (weeksToSurgery >= evaluation.leadTimeWeeks) {
+    return {
+      status: evaluation.started ? "in-progress" : "action-required",
+      weeksShortfall: null,
+    };
+  }
 
-	return { status: 'insufficient-time', weeksShortfall: shortfall };
+  return { status: "insufficient-time", weeksShortfall: shortfall };
 }
 
 /**
@@ -76,18 +76,17 @@ export function gateDomain(
  * @returns {string} ISO date, or ''
  */
 export function recommendedEarliestSurgeryDate(
-	domains: DomainResult[],
-	plannedSurgeryDate: string
+  domains: DomainResult[],
+  plannedSurgeryDate: string,
 ): string {
-	if (!plannedSurgeryDate) return '';
-	const shortfalls = domains
-		.map((d) => d.weeksShortfall)
-		.filter((w): w is number => typeof w === 'number' && w > 0);
-	if (shortfalls.length === 0) return '';
-	const worst = Math.max(...shortfalls);
-	const planned = new Date(plannedSurgeryDate);
-	if (Number.isNaN(planned.getTime())) return '';
-	const moved = new Date(planned.getTime() + worst * MILLISECONDS_PER_WEEK);
-	return moved.toISOString().slice(0, 10);
+  if (!plannedSurgeryDate) return "";
+  const shortfalls = domains
+    .map((d) => d.weeksShortfall)
+    .filter((w): w is number => typeof w === "number" && w > 0);
+  if (shortfalls.length === 0) return "";
+  const worst = Math.max(...shortfalls);
+  const planned = new Date(plannedSurgeryDate);
+  if (Number.isNaN(planned.getTime())) return "";
+  const moved = new Date(planned.getTime() + worst * MILLISECONDS_PER_WEEK);
+  return moved.toISOString().slice(0, 10);
 }
-

@@ -53,6 +53,13 @@
 <takes_ace_inhibitor_or_arb>yes</takes_ace_inhibitor_or_arb>
 <takes_sglt2_inhibitor>yes</takes_sglt2_inhibitor>
 <takes_glp1_agonist>yes</takes_glp1_agonist>
+<glp1_formulation>daily</glp1_formulation>
+<glp1_held_per_guideline>yes</glp1_held_per_guideline>
+<glp1_extended_clear_fluids_confirmed>yes</glp1_extended_clear_fluids_confirmed>
+<glp1_gi_symptoms>yes</glp1_gi_symptoms>
+<glp1_gi_symptoms_details>Example text.</glp1_gi_symptoms_details>
+<glp1_gastric_ultrasound_performed>yes</glp1_gastric_ultrasound_performed>
+<glp1_gastric_ultrasound_findings>empty</glp1_gastric_ultrasound_findings>
 <takes_corticosteroid>yes</takes_corticosteroid>
 <takes_immunosuppressant>yes</takes_immunosuppressant>
 <takes_hormone_therapy>yes</takes_hormone_therapy>
@@ -143,8 +150,17 @@
 <prehabilitation_enrolled>yes</prehabilitation_enrolled>
 <prehabilitation_sessions_per_week>1</prehabilitation_sessions_per_week>
 <prehabilitation_start_date>2026-01-15</prehabilitation_start_date>
+<protein_supplementation_recommended>yes</protein_supplementation_recommended>
 <fitness_notes>Example text.</fitness_notes>
 <clinical_frailty_scale>1</clinical_frailty_scale>
+<fried_weakness>yes</fried_weakness>
+<fried_slowness>yes</fried_slowness>
+<fried_low_physical_activity>yes</fried_low_physical_activity>
+<fried_exhaustion>yes</fried_exhaustion>
+<fried_unintentional_weight_loss>yes</fried_unintentional_weight_loss>
+<risk_analysis_index_score>5</risk_analysis_index_score>
+<mini_cog_performed>yes</mini_cog_performed>
+<mini_cog_score>5</mini_cog_score>
 <cognitive_screen_tool>4at</cognitive_screen_tool>
 <cognitive_screen_score>5.0</cognitive_screen_score>
 <cognitive_impairment>none</cognitive_impairment>

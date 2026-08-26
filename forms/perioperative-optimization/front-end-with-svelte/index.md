@@ -62,7 +62,7 @@ the whole assessment turns on, so it is never more than a glance away.
 
 Submitting is blocked when the computed band is **Defer surgery** and the gate
 decision is `proceed` or `proceed-with-prehabilitation`. The team must choose
-`defer-and-optimise` or record `accept-unoptimised-risk` explicitly. Proceeding
+`defer-and-optimize` or record `accept-unoptimized-risk` explicitly. Proceeding
 while believing the patient is optimized is the hazard the form exists to
 prevent; see `doc/safety-case-notes.md` H-01.
 

@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Perioperative Optimization — PerioperativeOptimization
   version: 1.0.0
-  description: "Perioperative optimisation: the payload of the 16-step single-page wizard, covering the eight optimisation domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
+  description: "Perioperative optimization: the payload of the 16-step single-page wizard, covering the eight optimization domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
 paths:
   /perioperative-optimizations:
     get:
@@ -183,7 +183,7 @@ components:
             - self-referral
             - other
             - ""
-          description: Who referred the patient into the perioperative optimisation service.
+          description: Who referred the patient into the perioperative optimization service.
         planned_procedure:
           type: string
           maxLength: 500
@@ -199,7 +199,7 @@ components:
         planned_surgery_date:
           type: string
           format: date
-          description: Planned date of surgery. With assessment_date this determines weeks_to_surgery, which every optimisation domain lead time is gated against. A missing date disables gating and marks every triggered domain action-required.
+          description: Planned date of surgery. With assessment_date this determines weeks_to_surgery, which every optimization domain lead time is gated against. A missing date disables gating and marks every triggered domain action-required.
         urgency:
           type: string
           enum:
@@ -209,7 +209,7 @@ components:
             - urgent
             - emergency
             - ""
-          description: "Urgency of the procedure. Emergency surgery is out of scope for this form: there is no lead time to optimise in."
+          description: "Urgency of the procedure. Emergency surgery is out of scope for this form: there is no lead time to optimize in."
         surgical_severity:
           type: string
           enum:
@@ -218,7 +218,7 @@ components:
             - major
             - major-plus
             - ""
-          description: Surgical severity band, where major and major-plus raise the priority of an unoptimised smoking domain.
+          description: Surgical severity band, where major and major-plus raise the priority of an unoptimized smoking domain.
         laterality:
           type: string
           enum:
@@ -289,7 +289,7 @@ components:
             - "yes"
             - "no"
             - ""
-          description: Whether the patient has a cancer diagnosis, which often constrains how long surgery can be deferred to optimise.
+          description: Whether the patient has a cancer diagnosis, which often constrains how long surgery can be deferred to optimize.
         condition_rheumatological:
           type: string
           enum:
@@ -307,7 +307,7 @@ components:
         condition_other:
           type: string
           maxLength: 500
-          description: Any other active diagnosis relevant to perioperative optimisation.
+          description: Any other active diagnosis relevant to perioperative optimization.
         previous_surgery:
           type: string
           enum:
@@ -426,7 +426,54 @@ components:
             - "yes"
             - "no"
             - ""
-          description: Whether the patient takes a GLP-1 receptor agonist. These delay gastric emptying, so the patient may have a full stomach despite standard fasting; this fires a high-priority aspiration flag whenever the drug is in use.
+          description: Whether the patient takes a GLP-1 receptor agonist (semaglutide, tirzepatide, and related drugs). These delay gastric emptying, so the patient may have a full stomach despite standard fasting; the aspiration-risk flag fires when GI symptoms are active or the drug was not held/confirmed per guideline, per glp1_held_per_guideline and glp1_extended_clear_fluids_confirmed.
+        glp1_formulation:
+          type: string
+          enum:
+            - daily
+            - weekly
+            - ""
+          description: "GLP-1 receptor agonist dosing formulation: daily or weekly. Drives the hold window -- hold daily formulations day-of, hold weekly formulations one week before surgery."
+        glp1_held_per_guideline:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the GLP-1 receptor agonist was held per the agreed perioperative schedule.
+        glp1_extended_clear_fluids_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient instead followed the extended-fasting alternative: 24-hour solid fast plus 4-8 hour clear-liquid fast, when the medication could not be held."
+        glp1_gi_symptoms:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient reports active GLP-1-related gastrointestinal symptoms (nausea, vomiting, early satiety, reflux, bloating) at the time of assessment.
+        glp1_gi_symptoms_details:
+          type: string
+          maxLength: 500
+          description: Free-text description of the reported GLP-1-related gastrointestinal symptoms and their severity.
+        glp1_gastric_ultrasound_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether point-of-care gastric ultrasound was performed to assess residual gastric content.
+        glp1_gastric_ultrasound_findings:
+          type: string
+          enum:
+            - empty
+            - low-risk
+            - full-stomach
+            - ""
+          description: "Gastric ultrasound finding: empty, low-risk, or full-stomach."
         takes_corticosteroid:
           type: string
           enum:
@@ -454,7 +501,7 @@ components:
             - "yes"
             - "no"
             - ""
-          description: Whether a perioperative hold-and-restart plan has been agreed with the prescriber. This is the medication domain's optimisation criterion.
+          description: Whether a perioperative hold-and-restart plan has been agreed with the prescriber. This is the medication domain's optimization criterion.
         medication_hold_plan_agreed_by:
           type: string
           maxLength: 255
@@ -544,7 +591,7 @@ components:
         mean_cell_volume_fl:
           type: number
           format: double
-          description: Mean cell volume in femtolitres, which helps characterise the anaemia.
+          description: Mean cell volume in femtolitres, which helps characterize the anaemia.
         ferritin_ug_per_l:
           type: number
           format: double
@@ -572,7 +619,7 @@ components:
         egfr_ml_per_min:
           type: number
           format: double
-          description: Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 raises the renal-optimisation flag.
+          description: Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 raises the renal-optimization flag.
         anaemia_known_cause:
           type: string
           maxLength: 255
@@ -922,13 +969,70 @@ components:
           type: string
           format: date
           description: Date the prehabilitation programme started.
+        protein_supplementation_recommended:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether protein supplementation is recommended, particularly for a frail patient on a GLP-1 receptor agonist at risk of accelerated sarcopenia.
         fitness_notes:
           type: string
           description: Free-text notes about functional capacity and physical fitness.
         clinical_frailty_scale:
           type: integer
           format: int32
-          description: Clinical Frailty Scale, 1 to 9. Reported and flagged at 7 or above, but not gated, because frailty is rarely reversible in a weeks-long window.
+          description: Clinical Frailty Scale, 1 to 9. Reported and flagged at 7 or above, but not gated, because frailty is rarely reversible in a weeks-long window. A score of 5 or above indicates a Mini-Cog.
+        fried_weakness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: weakness, i.e. reduced grip strength for sex and BMI."
+        fried_slowness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: slowness, i.e. reduced walking speed for sex and height."
+        fried_low_physical_activity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: low physical activity level."
+        fried_exhaustion:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: self-reported exhaustion."
+        fried_unintentional_weight_loss:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Fried Frailty Phenotype criterion: unintentional weight loss."
+        risk_analysis_index_score:
+          type: integer
+          format: int32
+          description: Risk Analysis Index (RAI) score; higher scores indicate greater frailty.
+        mini_cog_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the Mini-Cog cognitive screen was performed, indicated when the Clinical Frailty Scale is 5 or above.
+        mini_cog_score:
+          type: integer
+          format: int32
+          description: Mini-Cog total score 0-5 (three-item recall plus clock-draw test). A score of 0-2 suggests cognitive impairment.
         cognitive_screen_tool:
           type: string
           enum:
@@ -1071,7 +1175,7 @@ components:
             - "yes"
             - "no"
             - ""
-          description: Whether inhaler technique has been checked, one of the quickest respiratory optimisations available.
+          description: Whether inhaler technique has been checked, one of the quickest respiratory optimizations available.
         rescue_steroids:
           type: string
           enum:
@@ -1104,10 +1208,10 @@ components:
         oxygen_saturation_percent:
           type: number
           format: double
-          description: Peripheral oxygen saturation as a percentage on room air. Below 92 fires the respiratory-optimisation flag.
+          description: Peripheral oxygen saturation as a percentage on room air. Below 92 fires the respiratory-optimization flag.
         cardiorespiratory_notes:
           type: string
-          description: Free-text notes about cardiorespiratory optimisation.
+          description: Free-text notes about cardiorespiratory optimization.
         anxiety_level:
           type: string
           enum:
@@ -1190,7 +1294,7 @@ components:
         plan_anaemia:
           type: string
           maxLength: 500
-          description: Optimisation plan for the anaemia domain.
+          description: Optimization plan for the anaemia domain.
         referral_anaemia:
           type: string
           enum:
@@ -1201,7 +1305,7 @@ components:
         plan_glycaemic_control:
           type: string
           maxLength: 500
-          description: Optimisation plan for the glycaemic-control domain.
+          description: Optimization plan for the glycaemic-control domain.
         referral_glycaemic_control:
           type: string
           enum:
@@ -1212,7 +1316,7 @@ components:
         plan_smoking:
           type: string
           maxLength: 500
-          description: Optimisation plan for the smoking domain.
+          description: Optimization plan for the smoking domain.
         referral_smoking:
           type: string
           enum:
@@ -1223,7 +1327,7 @@ components:
         plan_alcohol:
           type: string
           maxLength: 500
-          description: Optimisation plan for the alcohol domain.
+          description: Optimization plan for the alcohol domain.
         referral_alcohol:
           type: string
           enum:
@@ -1234,7 +1338,7 @@ components:
         plan_nutrition:
           type: string
           maxLength: 500
-          description: Optimisation plan for the nutrition domain.
+          description: Optimization plan for the nutrition domain.
         referral_nutrition:
           type: string
           enum:
@@ -1245,7 +1349,7 @@ components:
         plan_physical_fitness:
           type: string
           maxLength: 500
-          description: Optimisation plan for the physical-fitness domain.
+          description: Optimization plan for the physical-fitness domain.
         referral_physical_fitness:
           type: string
           enum:
@@ -1256,7 +1360,7 @@ components:
         plan_medication:
           type: string
           maxLength: 500
-          description: Optimisation plan for the medication domain, i.e. the agreed hold-and-restart arrangements.
+          description: Optimization plan for the medication domain, i.e. the agreed hold-and-restart arrangements.
         referral_medication:
           type: string
           enum:
@@ -1267,7 +1371,7 @@ components:
         plan_cardiorespiratory:
           type: string
           maxLength: 500
-          description: Optimisation plan for the cardiorespiratory domain.
+          description: Optimization plan for the cardiorespiratory domain.
         referral_cardiorespiratory:
           type: string
           enum:
@@ -1278,14 +1382,14 @@ components:
         responsible_clinician:
           type: string
           maxLength: 255
-          description: Clinician responsible for delivering and reviewing the optimisation plan.
+          description: Clinician responsible for delivering and reviewing the optimization plan.
         plan_agreed_with_patient:
           type: string
           enum:
             - "yes"
             - "no"
             - ""
-          description: Whether the patient agreed to the optimisation plan.
+          description: Whether the patient agreed to the optimization plan.
         plan_shared_with_patient:
           type: string
           enum:
@@ -1296,21 +1400,21 @@ components:
         next_review_date:
           type: string
           format: date
-          description: Date of the next planned optimisation review.
+          description: Date of the next planned optimization review.
         plan_notes:
           type: string
-          description: Free-text notes about the optimisation plan as a whole.
+          description: Free-text notes about the optimization plan as a whole.
         gate_decision:
           type: string
           enum:
             - proceed
             - proceed-with-prehabilitation
-            - defer-and-optimise
-            - accept-unoptimised-risk
+            - defer-and-optimize
+            - accept-unoptimized-risk
             - mdt-review
             - cancel
             - ""
-          description: "The explicit human decision recorded at sign-off. A computed defer-surgery band never decides on its own: a clinician must choose to proceed, proceed with prehabilitation, defer and optimise, accept the unoptimised risk, refer to MDT, or cancel."
+          description: "The explicit human decision recorded at sign-off. A computed defer-surgery band never decides on its own: a clinician must choose to proceed, proceed with prehabilitation, defer and optimize, accept the unoptimized risk, refer to MDT, or cancel."
         additional_notes:
           type: string
           description: Any additional notes the clinician records.
@@ -1360,6 +1464,13 @@ components:
         - takes_ace_inhibitor_or_arb
         - takes_sglt2_inhibitor
         - takes_glp1_agonist
+        - glp1_formulation
+        - glp1_held_per_guideline
+        - glp1_extended_clear_fluids_confirmed
+        - glp1_gi_symptoms
+        - glp1_gi_symptoms_details
+        - glp1_gastric_ultrasound_performed
+        - glp1_gastric_ultrasound_findings
         - takes_corticosteroid
         - takes_immunosuppressant
         - takes_hormone_therapy
@@ -1414,7 +1525,14 @@ components:
         - climbs_flight_of_stairs
         - prehabilitation_offered
         - prehabilitation_enrolled
+        - protein_supplementation_recommended
         - fitness_notes
+        - fried_weakness
+        - fried_slowness
+        - fried_low_physical_activity
+        - fried_exhaustion
+        - fried_unintentional_weight_loss
+        - mini_cog_performed
         - cognitive_screen_tool
         - cognitive_impairment
         - capacity_concern
@@ -1465,4 +1583,4 @@ components:
         - plan_notes
         - gate_decision
         - additional_notes
-      description: "Perioperative optimisation: the payload of the 16-step single-page wizard, covering the eight optimisation domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
+      description: "Perioperative optimization: the payload of the 16-step single-page wizard, covering the eight optimization domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."

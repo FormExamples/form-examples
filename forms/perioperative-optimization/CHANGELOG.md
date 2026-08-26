@@ -26,12 +26,21 @@ file only records changes scoped to the **Perioperative Optimization** form.
   smoking (4), alcohol (4), nutrition (3), physical fitness (6), medication (1), and
   cardiorespiratory (4).
 - Surgical readiness by max-grade across the domains: `ready`,
-  `optimisation-in-progress`, `optimisation-required`, `defer-surgery`.
-- Twenty-six safety-flag categories, including the three high-consequence medication classes:
+  `optimization-in-progress`, `optimization-required`, `defer-surgery`.
+- Thirty safety-flag categories, including the three high-consequence medication classes:
   SGLT2 inhibitors (euglycaemic ketoacidosis), GLP-1 agonists (delayed gastric emptying and
   aspiration), and unplanned anticoagulant gaps.
+- GLP-1 receptor agonist perioperative management fields (step 4): formulation, held per
+  guideline, extended clear-fluid fast confirmed, active GI symptoms, gastric ultrasound.
+- Expanded frailty assessment (step 12): Fried Frailty Phenotype (5 criteria, computed 0-5
+  score + robust/pre-frail/frail category), Risk Analysis Index, and Mini-Cog cognitive screen
+  (indicated at CFS >= 5); protein-supplementation field added to the physical-fitness domain
+  (step 11).
+- Four new safety flags: `cognitive-assessment-indicated`, `sarcopenia-risk`,
+  `dehydration-aki-risk`, `rebound-glycaemic-risk` -- see
+  [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md).
 - A mandatory human gate decision at sign-off (`proceed`, `proceed-with-prehabilitation`,
-  `defer-and-optimise`, `accept-unoptimised-risk`, `mdt-review`, `cancel`), with a submit guard
+  `defer-and-optimize`, `accept-unoptimized-risk`, `mdt-review`, `cancel`), with a submit guard
   that blocks `proceed` against a computed `defer-surgery` band.
 - `recommendedEarliestSurgeryDate`: the date at which every triggered domain would have had its
   full lead time, derived from the largest shortfall, so re-dating is arithmetic.
@@ -50,7 +59,10 @@ file only records changes scoped to the **Perioperative Optimization** form.
   rules, and clinical-safety case notes with a twelve-entry hazard list.
 
 ### Changed
-- _Pending — record schema migrations, scoring-engine behaviour changes,
+- `glp1-agonist-aspiration-risk` now fires only when active GI symptoms are reported, or the
+  drug was neither held per guideline nor an extended clear-fluid fast confirmed -- previously
+  it fired unconditionally whenever a GLP-1 receptor agonist was in use.
+- _Pending — record further schema migrations, scoring-engine behaviour changes,
   re-banding of composite risk, front-end UX changes, breaking renames._
 
 ### Deprecated

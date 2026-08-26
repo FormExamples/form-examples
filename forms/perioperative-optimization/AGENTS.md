@@ -10,14 +10,28 @@ domain-by-domain prehabilitation plan.
 See [`index.md`](./index.md) for the full design, the domain table, and the
 16-step wizard table.
 
-## Slug and spelling
+## Spelling
 
-The directory slug is `perioperative-optimization` (US spelling). Prose uses the
-UK spelling *optimization*, matching NHS England and CPOC. The slug, SQL table
-names (`perioperative_optimization`, `perioperative_optimization_grade`, …), and
-every generated artefact keep the `optimization` stem so derived representations
-stay keyed to the directory. Do not "fix" the stem in code — it would break
-every generated file and the `bin/` drift detectors.
+This form is written in **Oxford spelling** (`-ize`), per
+[`/spec/oxford-spelling.md`](../../spec/oxford-spelling.md). One stem is used
+everywhere — prose, the directory slug, SQL table and column names
+(`perioperative_optimization`, `domains_optimized`), enum values
+(`optimization-required`, `defer-and-optimize`, `accept-unoptimized-risk`), and
+every generated artefact — so they stay keyed to one another. Do not "fix" the
+stem to `-ise`: it would break every generated file and the `bin/` drift
+detectors.
+
+British spelling is otherwise retained, as Oxford requires: anaemia,
+haemoglobin, oedema, glycaemic, paediatric, anaesthetic, centre, programme.
+
+Three classes of `-ise`/`-isation` are deliberate and must **not** be converted:
+
+- **URLs**, byte for byte.
+- **Publication titles cited as published** — CPOC's *Preoperative Assessment
+  and Optimization for Adult Surgery*, the ACI *Perioperative Toolkit —
+  Optimization*, and the NHS England long-read title.
+- **Standards bodies' own names and terminology** — the *International Dysphagia
+  Diet Standardisation Initiative* and its level-3 label *Liquidised*.
 
 ## What this form is not
 
@@ -58,23 +72,25 @@ answer "how risky is this patient?" instead, it belongs in one of the siblings.
   calculateOptimization(data: PerioperativeOptimization): {
     weeksToSurgery: number | null;
     domains: DomainResult[];          // one per domain, in DOMAIN_ORDER
-    computedReadiness: 'ready' | 'optimisation-in-progress'
-                     | 'optimisation-required' | 'defer-surgery';
-    finalReadiness: 'ready' | 'optimisation-in-progress'
-                  | 'optimisation-required' | 'defer-surgery';
+    computedReadiness: 'ready' | 'optimization-in-progress'
+                     | 'optimization-required' | 'defer-surgery';
+    finalReadiness: 'ready' | 'optimization-in-progress'
+                  | 'optimization-required' | 'defer-surgery';
     overrideReason: string;
     gateDecision: GateDecision;
     mustScore: number | null;         // 0..6
     auditCScore: number | null;       // 0..12
     stopBangScore: number | null;     // 0..8
     dasiScore: number | null;
+    friedPhenotypeScore: number | null;  // 0..5
+    friedFrailtyCategory: 'robust' | 'pre-frail' | 'frail' | '';
     firedRules: FiredRule[];
     flags: AdditionalFlag[];
   }
 
   interface DomainResult {
     domain: DomainKey;
-    status: 'optimised' | 'in-progress' | 'action-required'
+    status: 'optimized' | 'in-progress' | 'action-required'
           | 'insufficient-time' | 'not-applicable';
     triggered: boolean;
     leadTimeWeeks: number;
@@ -86,8 +102,9 @@ answer "how risky is this patient?" instead, it belongs in one of the siblings.
 
 - **Algorithm:** per-domain trigger → gate on time → max-grade composite. The
   worst domain sets the readiness band. Safety flags fire independently.
-- **Engine files (HTML):** `js/types.js`, `js/domain-rules.js`,
-  `js/gating.js`, `js/composite-grader.js`, `js/flagged-issues.js`.
+- **Engine files (HTML):** `js/types.js`, `js/domain-rules.js` (also exports
+  `computeFriedPhenotypeScore()`), `js/gating.js`, `js/composite-grader.js`,
+  `js/flagged-issues.js`.
 - **Engine files (Svelte):** the same modules in TypeScript under
   `src/lib/engine/` (`types.ts`, `defaults.ts`, `utils.ts`, `domain-rules.ts`,
   `gating.ts`, `flagged-issues.ts`, `grader.ts`), with `grader.test.ts`.
@@ -117,7 +134,7 @@ same table. Do not duplicate the thresholds inline.
 ```
 weeksToSurgery = (plannedSurgeryDate - assessmentDate) / 7   // null if either is absent
 
-not triggered                                  -> 'optimised' | 'not-applicable'
+not triggered                                  -> 'optimized' | 'not-applicable'
 triggered, started, weeks >= leadTime          -> 'in-progress'
 triggered, weeks >= leadTime                   -> 'action-required'
 triggered, weeks <  leadTime                   -> 'insufficient-time'
@@ -125,7 +142,7 @@ triggered, weeksToSurgery === null             -> 'action-required'   (ungated)
 ```
 
 `insufficient-time` on any domain forces `defer-surgery` and raises the
-`insufficient-time-to-optimise` flag. This is the whole point of the form: the
+`insufficient-time-to-optimize` flag. This is the whole point of the form: the
 team must then either re-date the surgery or record an explicit accept-risk
 decision. Never soften this to a warning.
 
@@ -133,7 +150,7 @@ decision. Never soften this to a warning.
 
 The engine produces a computed readiness band. The responsible clinician may
 override it on step 16 with a mandatory reason — usually to record *accept
-unoptimised risk*. Both bands are stored in
+unoptimized risk*. Both bands are stored in
 `perioperative_optimization_grade` and printed. **Safety flags are computed
 independently and are never filtered by the override.**
 
@@ -185,7 +202,11 @@ independently and are never filtered by the override.**
   and the CPOC perioperative anaemia and diabetes guidelines.
 - NICE NG45 (routine preoperative tests) and NG180 (perioperative care).
 - BAPEN MUST; Duke Activity Status Index; AUDIT-C; STOP-BANG; Clinical Frailty
-  Scale.
+  Scale; Fried Frailty Phenotype; Risk Analysis Index.
+- ASA consensus-based guidance on preoperative GLP-1 receptor agonist
+  management; UK MHRA drug safety update on GLP-1 aspiration risk; British
+  Geriatrics Society frailty-screening guidance. See
+  [`doc/glp1-frailty-perioperative-management.md`](doc/glp1-frailty-perioperative-management.md).
 
 ## Compliance
 

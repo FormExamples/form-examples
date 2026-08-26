@@ -14,25 +14,29 @@ enum PerioperativeOptimizationGradeFlagCategoryEnum {
   CATEGORY_SGLT2_INHIBITOR_NOT_HELD = 5;  // sglt2-inhibitor-not-held
   CATEGORY_GLP1_AGONIST_ASPIRATION_RISK = 6;  // glp1-agonist-aspiration-risk
   CATEGORY_ANTICOAGULATION_PLAN_MISSING = 7;  // anticoagulation-plan-missing
-  CATEGORY_INSUFFICIENT_TIME_TO_OPTIMISE = 8;  // insufficient-time-to-optimise
+  CATEGORY_INSUFFICIENT_TIME_TO_OPTIMIZE = 8;  // insufficient-time-to-optimize
   CATEGORY_ACTIVE_SMOKER_MAJOR_SURGERY = 9;  // active-smoker-major-surgery
   CATEGORY_ALCOHOL_DEPENDENCE_RISK = 10;  // alcohol-dependence-risk
   CATEGORY_HIGH_MALNUTRITION_RISK = 11;  // high-malnutrition-risk
   CATEGORY_POOR_FUNCTIONAL_CAPACITY = 12;  // poor-functional-capacity
   CATEGORY_SEVERE_FRAILTY = 13;  // severe-frailty
   CATEGORY_UNCONTROLLED_HYPERTENSION = 14;  // uncontrolled-hypertension
-  CATEGORY_CARDIAC_OPTIMISATION_REQUIRED = 15;  // cardiac-optimisation-required
-  CATEGORY_RESPIRATORY_OPTIMISATION_REQUIRED = 16;  // respiratory-optimisation-required
+  CATEGORY_CARDIAC_OPTIMIZATION_REQUIRED = 15;  // cardiac-optimization-required
+  CATEGORY_RESPIRATORY_OPTIMIZATION_REQUIRED = 16;  // respiratory-optimization-required
   CATEGORY_OSA_UNASSESSED = 17;  // osa-unassessed
-  CATEGORY_RENAL_OPTIMISATION_REQUIRED = 18;  // renal-optimisation-required
+  CATEGORY_RENAL_OPTIMIZATION_REQUIRED = 18;  // renal-optimization-required
   CATEGORY_PRIOR_ANAESTHETIC_COMPLICATION = 19;  // prior-anaesthetic-complication
-  CATEGORY_PSYCHOLOGICAL_SUPPORT_REQUIRED = 20;  // psychological-support-required
-  CATEGORY_SOCIAL_SUPPORT_GAP = 21;  // social-support-gap
-  CATEGORY_CAPACITY_CONCERN = 22;  // capacity-concern
-  CATEGORY_PREGNANCY = 23;  // pregnancy
-  CATEGORY_PAEDIATRIC = 24;  // paediatric
-  CATEGORY_SAFEGUARDING = 25;  // safeguarding
-  CATEGORY_OTHER = 26;  // other
+  CATEGORY_COGNITIVE_ASSESSMENT_INDICATED = 20;  // cognitive-assessment-indicated
+  CATEGORY_SARCOPENIA_RISK = 21;  // sarcopenia-risk
+  CATEGORY_DEHYDRATION_AKI_RISK = 22;  // dehydration-aki-risk
+  CATEGORY_REBOUND_GLYCAEMIC_RISK = 23;  // rebound-glycaemic-risk
+  CATEGORY_PSYCHOLOGICAL_SUPPORT_REQUIRED = 24;  // psychological-support-required
+  CATEGORY_SOCIAL_SUPPORT_GAP = 25;  // social-support-gap
+  CATEGORY_CAPACITY_CONCERN = 26;  // capacity-concern
+  CATEGORY_PREGNANCY = 27;  // pregnancy
+  CATEGORY_PAEDIATRIC = 28;  // paediatric
+  CATEGORY_SAFEGUARDING = 29;  // safeguarding
+  CATEGORY_OTHER = 30;  // other
 }
 
 enum PerioperativeOptimizationGradeFlagPriorityEnum {

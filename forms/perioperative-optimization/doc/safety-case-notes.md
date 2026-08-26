@@ -32,8 +32,8 @@ Mitigating design decisions already in place:
   decide whether surgery proceeds.
 - **Step 16 requires an explicit human gate decision.** The engine's readiness
   band is never the final word; a clinician must select `proceed`,
-  `proceed-with-prehabilitation`, `defer-and-optimise`,
-  `accept-unoptimised-risk`, `mdt-review`, or `cancel`, and sign.
+  `proceed-with-prehabilitation`, `defer-and-optimize`,
+  `accept-unoptimized-risk`, `mdt-review`, or `cancel`, and sign.
 - The clinician override is auditable: computed and final bands are both stored
   and printed, and an override that differs from the computed band requires a
   reason.
@@ -51,11 +51,11 @@ Mitigating design decisions already in place:
 | H-05 | GLP-1 agonist aspiration risk missed | standard fasting assumed adequate | aspiration on induction | flag fires whenever the drug is in use, regardless of any plan, so the anaesthetic team sees it on the day |
 | H-06 | Anticoagulant gap mismanaged | no agreed plan, or bridging applied by default | bleeding or thrombosis | dedicated rule and flag; per-drug hold fields in `patient_medication` rather than a single free-text note |
 | H-07 | Override used to hide a hazard | clinician lowers the readiness band | flagged hazard invisible downstream | the override changes the band only; flags are computed independently and always printed, and the computed band is printed beside the final one |
-| H-08 | Deferral advised when delay is the greater harm | engine applied without clinical context to oncological or rapidly deteriorating cases | harm from delay | the band is advisory; `accept-unoptimised-risk` is a first-class gate decision, and the form never states that surgery must not proceed |
+| H-08 | Deferral advised when delay is the greater harm | engine applied without clinical context to oncological or rapidly deteriorating cases | harm from delay | the band is advisory; `accept-unoptimized-risk` is a first-class gate decision, and the form never states that surgery must not proceed |
 | H-09 | Paediatric patient scored with adult instruments | age not checked | invalid MUST and Clinical Frailty Scale results | `paediatric` flag below 16 years, and the report directs the user to a paediatric pathway |
 | H-10 | Duplicate, contradictory data across pathway forms | this form and an ASA-grading sibling both completed | conflicting records | documented in `plan.md` §Risks; a deployment should populate one from the other rather than asking twice |
 | H-11 | Draft lost mid-assessment | browser cleared, portal session ended | patient burden, repeated appointment | draft autosaved to LocalStorage under a versioned key; JSON export available at any step |
-| H-12 | Lead times wrong for local policy | trust policy differs from the shipped defaults | systematically wrong gating | lead times live in one `DOMAIN_DEFINITIONS` table, documented in `doc/optimisation-domains.md`, and flagged in `plan.md` as expected to be tuned per deployment |
+| H-12 | Lead times wrong for local policy | trust policy differs from the shipped defaults | systematically wrong gating | lead times live in one `DOMAIN_DEFINITIONS` table, documented in `doc/optimization-domains.md`, and flagged in `plan.md` as expected to be tuned per deployment |
 
 Each hazard needs an initial and residual risk rating (severity × likelihood) in
 a formal Hazard Log before this list can be treated as a safety artefact.
@@ -76,7 +76,7 @@ that a clinic-completed form does not have. Neither is addressed here.
 
 STOP-BANG and the Clinical Frailty Scale are free for non-commercial use but
 require a licence for commercial distribution. See
-[`optimisation-domains.md`](./optimization-domains.md) §Licensing. Resolve this
+[`optimization-domains.md`](./optimization-domains.md) §Licensing. Resolve this
 before any commercial deployment.
 
 ## Open questions
