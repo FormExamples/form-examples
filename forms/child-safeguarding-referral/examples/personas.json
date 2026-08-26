@@ -1,0 +1,370 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeReferral",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Child names are placeholders by design (Child A/B/C), matching safeguarding-referral practice for worked examples.",
+  "personas": [
+    {
+      "name": "neglect-standard-with-consent",
+      "description": "Teacher-referred neglect concern with parental consent given and no immediate danger — expect standard urgency with the mandatory rules satisfied.",
+      "state": {
+        "referrer": {
+          "referrerName": "Laura Whitby",
+          "referrerRole": "class-teacher",
+          "referrerOrganisation": "Hillcrest Primary School",
+          "referrerPhone": "0113 496 0223",
+          "referrerEmail": "l.whitby@example.sch.uk",
+          "referredAt": "2026-08-26T10:30",
+          "relationshipToChild": "Class teacher for the past year"
+        },
+        "child": {
+          "childName": "Child A",
+          "childDateOfBirth": "2018-03-15",
+          "childAge": null,
+          "childSex": "male",
+          "childAddress": "14 Elm Grove, Leeds",
+          "childSetting": "primary-school",
+          "childReference": "",
+          "childEthnicity": "",
+          "childFirstLanguage": "English",
+          "childDisability": "no"
+        },
+        "family": {
+          "carers": "Mother and stepfather at home address",
+          "householdMembers": "Mother, stepfather, younger sibling (age 3)",
+          "otherChildren": "Younger sibling age 3 in the same household",
+          "professionalsInvolved": "Health visitor (sibling); GP"
+        },
+        "concern": {
+          "concernDescription": "Persistent hunger, unwashed clothing, and repeated lateness over the last half-term; child says there is often no food at home in the mornings.",
+          "concernOnset": "Gradual over 6 weeks",
+          "childDisclosed": "no",
+          "referrerObservations": "Weight appears reduced; keeps food from lunch in his bag."
+        },
+        "category": {
+          "primaryCategory": "neglect",
+          "additionalCategories": "",
+          "presentingEvidence": "Attendance log, breakfast-club records, welfare-check notes"
+        },
+        "risk": {
+          "immediateDanger": "no",
+          "childWhereabouts": "In school today",
+          "whoWithChild": "Class teacher",
+          "allegedPersonInContact": "no",
+          "otherChildrenAtRisk": "no"
+        },
+        "consent": {
+          "consentSought": "yes",
+          "consentStatus": "given",
+          "sharingBasisWithoutConsent": "",
+          "familyAware": "yes",
+          "unsafeToInformReason": ""
+        },
+        "informed": {
+          "agenciesContacted": "None yet",
+          "strategyDiscussionHeld": "no",
+          "previousSafeguardingHistory": "None known to school"
+        },
+        "action": {
+          "requestedAction": "Early-help assessment",
+          "referrerDeclaration": "yes",
+          "notes": "Mother engaged with breakfast club offer."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "urgency": "standard",
+        "completenessPercent": 100,
+        "presentCount": 23,
+        "applicableCount": 23,
+        "satisfiedCount": 6,
+        "mandatoryCount": 6,
+        "firedRules": [
+          {
+            "id": "R-REFERRER-01",
+            "rule": "referrer",
+            "satisfied": true,
+            "category": "referrer-details",
+            "description": "The referrer is identified by name and at least one contact route (phone or email) is recorded"
+          },
+          {
+            "id": "R-CHILD-01",
+            "rule": "child",
+            "satisfied": true,
+            "category": "child-details",
+            "description": "The child is identified by name and a date of birth or age is recorded"
+          },
+          {
+            "id": "R-CONCERN-01",
+            "rule": "concern",
+            "satisfied": true,
+            "category": "the-concern",
+            "description": "The concern or allegation is described"
+          },
+          {
+            "id": "R-CATEGORY-01",
+            "rule": "category",
+            "satisfied": true,
+            "category": "category-of-abuse",
+            "description": "A primary category of abuse is selected (physical, emotional, sexual, or neglect)"
+          },
+          {
+            "id": "R-IMMEDIATE-DANGER-01",
+            "rule": "immediateDanger",
+            "satisfied": true,
+            "category": "immediate-risk",
+            "description": "The immediate-danger question is answered so the referral can be routed for urgency"
+          },
+          {
+            "id": "R-CONSENT-BASIS-01",
+            "rule": "consentBasis",
+            "satisfied": true,
+            "category": "consent-and-sharing",
+            "description": "A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "disclosure-urgent-consent-not-sought",
+      "description": "Same-day sexual-abuse disclosure with the alleged person in weekly contact; consent deliberately not sought on the seeking-consent-increases-risk basis — expect urgent classification with the consent-basis rule satisfied.",
+      "state": {
+        "referrer": {
+          "referrerName": "Laura Whitby",
+          "referrerRole": "class-teacher",
+          "referrerOrganisation": "Hillcrest Primary School",
+          "referrerPhone": "0113 496 0223",
+          "referrerEmail": "l.whitby@example.sch.uk",
+          "referredAt": "2026-08-26T10:30",
+          "relationshipToChild": "Class teacher for the past year"
+        },
+        "child": {
+          "childName": "Child B",
+          "childDateOfBirth": null,
+          "childAge": 9,
+          "childSex": "female",
+          "childAddress": "14 Elm Grove, Leeds",
+          "childSetting": "primary-school",
+          "childReference": "",
+          "childEthnicity": "",
+          "childFirstLanguage": "English",
+          "childDisability": "no"
+        },
+        "family": {
+          "carers": "Mother and stepfather at home address",
+          "householdMembers": "Mother, stepfather, younger sibling (age 3)",
+          "otherChildren": "Younger sibling age 3 in the same household",
+          "professionalsInvolved": "Health visitor (sibling); GP"
+        },
+        "concern": {
+          "concernDescription": "Child disclosed this morning that her uncle 'hurts her' during weekend visits; became distressed and asked not to go there again.",
+          "concernOnset": "Disclosure today; visits weekly",
+          "childDisclosed": "yes",
+          "referrerObservations": "Disclosure recorded verbatim; no leading questions asked."
+        },
+        "category": {
+          "primaryCategory": "sexual",
+          "additionalCategories": "",
+          "presentingEvidence": "Verbatim disclosure record signed and timed"
+        },
+        "risk": {
+          "immediateDanger": "no",
+          "childWhereabouts": "In school today",
+          "whoWithChild": "Class teacher",
+          "allegedPersonInContact": "yes",
+          "otherChildrenAtRisk": "unknown"
+        },
+        "consent": {
+          "consentSought": "no",
+          "consentStatus": "not-sought",
+          "sharingBasisWithoutConsent": "seeking-consent-increases-risk",
+          "familyAware": "no",
+          "unsafeToInformReason": "Alleged person is a family member with weekend contact"
+        },
+        "informed": {
+          "agenciesContacted": "LADO consultation line",
+          "strategyDiscussionHeld": "no",
+          "previousSafeguardingHistory": "Unknown"
+        },
+        "action": {
+          "requestedAction": "Section 47 enquiry",
+          "referrerDeclaration": "yes",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "urgency": "urgent",
+        "completenessPercent": 100,
+        "presentCount": 24,
+        "applicableCount": 24,
+        "satisfiedCount": 6,
+        "mandatoryCount": 6,
+        "firedRules": [
+          {
+            "id": "R-REFERRER-01",
+            "rule": "referrer",
+            "satisfied": true,
+            "category": "referrer-details",
+            "description": "The referrer is identified by name and at least one contact route (phone or email) is recorded"
+          },
+          {
+            "id": "R-CHILD-01",
+            "rule": "child",
+            "satisfied": true,
+            "category": "child-details",
+            "description": "The child is identified by name and a date of birth or age is recorded"
+          },
+          {
+            "id": "R-CONCERN-01",
+            "rule": "concern",
+            "satisfied": true,
+            "category": "the-concern",
+            "description": "The concern or allegation is described"
+          },
+          {
+            "id": "R-CATEGORY-01",
+            "rule": "category",
+            "satisfied": true,
+            "category": "category-of-abuse",
+            "description": "A primary category of abuse is selected (physical, emotional, sexual, or neglect)"
+          },
+          {
+            "id": "R-IMMEDIATE-DANGER-01",
+            "rule": "immediateDanger",
+            "satisfied": true,
+            "category": "immediate-risk",
+            "description": "The immediate-danger question is answered so the referral can be routed for urgency"
+          },
+          {
+            "id": "R-CONSENT-BASIS-01",
+            "rule": "consentBasis",
+            "satisfied": true,
+            "category": "consent-and-sharing",
+            "description": "A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "immediate-danger-incomplete-referral",
+      "description": "Emergency: facial bruising, child removed from school mid-day, immediate danger yes — but the rushed referral is missing referrer contact, child DOB/age, and a lawful sharing basis — expect emergency urgency with an incomplete status and mandatory rules failing.",
+      "state": {
+        "referrer": {
+          "referrerName": "Laura Whitby",
+          "referrerRole": "class-teacher",
+          "referrerOrganisation": "Hillcrest Primary School",
+          "referrerPhone": "",
+          "referrerEmail": "",
+          "referredAt": "2026-08-26T10:30",
+          "relationshipToChild": "Class teacher for the past year"
+        },
+        "child": {
+          "childName": "Child C",
+          "childDateOfBirth": null,
+          "childAge": null,
+          "childSex": "male",
+          "childAddress": "14 Elm Grove, Leeds",
+          "childSetting": "primary-school",
+          "childReference": "",
+          "childEthnicity": "",
+          "childFirstLanguage": "English",
+          "childDisability": "no"
+        },
+        "family": {
+          "carers": "Mother and stepfather at home address",
+          "householdMembers": "Mother, stepfather, younger sibling (age 3)",
+          "otherChildren": "Younger sibling age 3 in the same household",
+          "professionalsInvolved": "Health visitor (sibling); GP"
+        },
+        "concern": {
+          "concernDescription": "Child arrived with a hand-shaped bruise on the face; parent collected him at lunchtime before staff could speak with him.",
+          "concernOnset": "Seen today",
+          "childDisclosed": "no",
+          "referrerObservations": ""
+        },
+        "category": {
+          "primaryCategory": "physical",
+          "additionalCategories": "",
+          "presentingEvidence": "Bruise observed by two staff"
+        },
+        "risk": {
+          "immediateDanger": "yes",
+          "childWhereabouts": "Collected by parent — current whereabouts unknown",
+          "whoWithChild": "Parent",
+          "allegedPersonInContact": "yes",
+          "otherChildrenAtRisk": "unknown"
+        },
+        "consent": {
+          "consentSought": "no",
+          "consentStatus": "not-sought",
+          "sharingBasisWithoutConsent": "",
+          "familyAware": "no",
+          "unsafeToInformReason": ""
+        },
+        "informed": {
+          "agenciesContacted": "",
+          "strategyDiscussionHeld": "",
+          "previousSafeguardingHistory": ""
+        },
+        "action": {
+          "requestedAction": "Immediate safeguarding response",
+          "referrerDeclaration": "",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "urgency": "emergency",
+        "completenessPercent": 79,
+        "presentCount": 19,
+        "applicableCount": 24,
+        "satisfiedCount": 3,
+        "mandatoryCount": 6,
+        "firedRules": [
+          {
+            "id": "R-REFERRER-01",
+            "rule": "referrer",
+            "satisfied": false,
+            "category": "referrer-details",
+            "description": "The referrer is identified by name and at least one contact route (phone or email) is recorded"
+          },
+          {
+            "id": "R-CHILD-01",
+            "rule": "child",
+            "satisfied": false,
+            "category": "child-details",
+            "description": "The child is identified by name and a date of birth or age is recorded"
+          },
+          {
+            "id": "R-CONCERN-01",
+            "rule": "concern",
+            "satisfied": true,
+            "category": "the-concern",
+            "description": "The concern or allegation is described"
+          },
+          {
+            "id": "R-CATEGORY-01",
+            "rule": "category",
+            "satisfied": true,
+            "category": "category-of-abuse",
+            "description": "A primary category of abuse is selected (physical, emotional, sexual, or neglect)"
+          },
+          {
+            "id": "R-IMMEDIATE-DANGER-01",
+            "rule": "immediateDanger",
+            "satisfied": true,
+            "category": "immediate-risk",
+            "description": "The immediate-danger question is answered so the referral can be routed for urgency"
+          },
+          {
+            "id": "R-CONSENT-BASIS-01",
+            "rule": "consentBasis",
+            "satisfied": false,
+            "category": "consent-and-sharing",
+            "description": "A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)"
+          }
+        ]
+      }
+    }
+  ]
+}

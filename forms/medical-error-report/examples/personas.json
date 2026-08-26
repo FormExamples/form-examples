@@ -1,0 +1,646 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateErrorGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The grader's live timestamp is stripped by the harness.",
+  "personas": [
+    {
+      "name": "near-miss-wrong-patient",
+      "description": "Wrong-patient medication near miss caught at the bedside check: WHO near-miss / MERP B, no harm — expect low overall risk.",
+      "state": {
+        "demographics": {
+          "reporterFirstName": "Hannah",
+          "reporterLastName": "Croft",
+          "reporterRole": "staff-nurse",
+          "reporterDepartment": "Ward 7B",
+          "reporterContactPhone": "ext 4471",
+          "reporterContactEmail": "h.croft@example.nhs.uk",
+          "facilityName": "City General Hospital",
+          "facilityWard": "Ward 7B",
+          "reportDate": "2026-08-26",
+          "anonymousReport": "no"
+        },
+        "incidentDetails": {
+          "incidentDate": "2026-08-25",
+          "incidentTime": "21:40",
+          "discoveryDate": "2026-08-25",
+          "discoveryTime": "21:45",
+          "locationType": "inpatient-ward",
+          "locationDetails": "Bay 3",
+          "incidentSummary": "Amoxicillin due at 22:00 nearly administered to the wrong patient; second checker caught the wristband mismatch before administration.",
+          "incidentWitnessed": "yes",
+          "witnessDetails": "Second checker present",
+          "shiftType": "night",
+          "staffingLevel": "normal"
+        },
+        "patientInvolvement": {
+          "patientInvolved": "yes",
+          "patientFirstName": "Gordon",
+          "patientLastName": "Ashworth",
+          "patientNhsNumber": "943 476 5925",
+          "patientDateOfBirth": "1946-10-05",
+          "patientSex": "male",
+          "patientAgeAtIncident": 79,
+          "patientInformed": "yes",
+          "patientInformedDate": "2026-08-25",
+          "patientInformedBy": "Ward sister",
+          "dutyOfCandourApplies": "no",
+          "dutyOfCandourCompleted": ""
+        },
+        "errorClassification": {
+          "errorType": "medication",
+          "errorTypeDetails": "",
+          "medicationErrorStage": "administration",
+          "whoSeverity": "near-miss",
+          "nccMerpCategory": "B",
+          "preventability": "preventable",
+          "recurrenceLikelihood": "possible"
+        },
+        "contributingFactors": {
+          "staffFatigue": "no",
+          "inadequateTraining": "no",
+          "communicationFailure": "no",
+          "communicationFailureDetails": "",
+          "handoverFailure": "no",
+          "equipmentFailure": "no",
+          "equipmentFailureDetails": "",
+          "environmentalFactors": "no",
+          "environmentalDetails": "",
+          "policyNotFollowed": "no",
+          "policyDetails": "",
+          "workloadPressure": "no",
+          "patientFactors": "no",
+          "patientFactorsDetails": "",
+          "otherFactors": ""
+        },
+        "immediateActions": {
+          "patientAssessed": "yes",
+          "treatmentProvided": "no",
+          "treatmentDetails": "",
+          "errorContained": "yes",
+          "containmentDetails": "",
+          "seniorStaffNotified": "yes",
+          "seniorStaffName": "Sr Kate Donnelly",
+          "seniorStaffRole": "ward-sister",
+          "riskTeamNotified": "yes",
+          "additionalMonitoring": "no",
+          "monitoringDetails": "",
+          "immediateActionsSummary": "Drug returned; both patients re-identified; near-miss logged."
+        },
+        "patientOutcome": {
+          "harmReachedPatient": "no",
+          "harmLevel": "",
+          "harmDescription": "",
+          "additionalTreatmentRequired": "no",
+          "additionalTreatmentDetails": "",
+          "extendedHospitalStay": "no",
+          "extraDays": null,
+          "readmissionRequired": "no",
+          "permanentDisability": "no",
+          "disabilityDetails": "",
+          "patientDied": "no",
+          "deathDate": "",
+          "outcomeNotes": ""
+        },
+        "rootCauseAnalysis": {
+          "rcaConducted": "",
+          "rcaDate": "",
+          "rcaLead": "",
+          "rcaTeamMembers": "",
+          "rootCauseCategory": "",
+          "rootCauseDescription": "",
+          "fiveWhysAnalysis": "",
+          "fishboneFactors": "",
+          "systemVulnerabilities": "",
+          "similarIncidents": "",
+          "similarIncidentsDetails": "",
+          "rcaFindingsSummary": ""
+        },
+        "correctiveActions": {
+          "immediateCorrectiveActions": "Reinforced two-person wristband check at handover huddle",
+          "longTermCorrectiveActions": "",
+          "policyChangeRequired": "",
+          "policyChangeDetails": "",
+          "trainingRequired": "no",
+          "trainingDetails": "",
+          "equipmentChangeRequired": "",
+          "equipmentChangeDetails": "",
+          "processRedesignRequired": "",
+          "processRedesignDetails": "",
+          "responsiblePerson": "Ward sister",
+          "targetCompletionDate": "",
+          "actionsStatus": "completed"
+        },
+        "reportingFollowup": {
+          "internalReference": "IR-2026-2211",
+          "reportedToDatix": "yes",
+          "datixReference": "DTX-88410",
+          "reportedToNrls": "",
+          "nrlsReference": "",
+          "reportedToCqc": "",
+          "reportedToHsib": "",
+          "reportedToCoroner": "",
+          "safeguardingReferral": "no",
+          "lessonsLearned": "Bedside check works when followed — near miss used as positive example.",
+          "sharedWithTeam": "yes",
+          "followUpReviewDate": "",
+          "followUpReviewer": "",
+          "finalStatus": "closed",
+          "closureDate": "2026-08-26"
+        }
+      },
+      "expected": {
+        "whoSeverity": "near-miss",
+        "nccMerpCategory": "B",
+        "overallRisk": "low",
+        "firedRules": [
+          {
+            "id": "SEV-001",
+            "category": "Severity",
+            "description": "Near miss - error did not reach patient",
+            "grade": 1
+          },
+          {
+            "id": "ET-001",
+            "category": "Error Type",
+            "description": "Medication error",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Error Type",
+            "message": "Medication error at administration stage",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-anticoagulant-overdose",
+      "description": "Three days of treatment-dose enoxaparin prescribed instead of prophylaxis: WHO moderate / MERP E, extended stay 2 days, duty of candour completed — expect moderate overall risk with severity, MERP, and outcome rules fired.",
+      "state": {
+        "demographics": {
+          "reporterFirstName": "Owen",
+          "reporterLastName": "Pryce",
+          "reporterRole": "pharmacist",
+          "reporterDepartment": "Pharmacy",
+          "reporterContactPhone": "ext 4471",
+          "reporterContactEmail": "h.croft@example.nhs.uk",
+          "facilityName": "City General Hospital",
+          "facilityWard": "Ward 7B",
+          "reportDate": "2026-08-26",
+          "anonymousReport": "no"
+        },
+        "incidentDetails": {
+          "incidentDate": "2026-08-25",
+          "incidentTime": "09:15",
+          "discoveryDate": "2026-08-25",
+          "discoveryTime": "21:45",
+          "locationType": "inpatient-ward",
+          "locationDetails": "Bay 3",
+          "incidentSummary": "Enoxaparin prescribed at treatment dose instead of prophylactic dose for three days before pharmacy review identified it.",
+          "incidentWitnessed": "yes",
+          "witnessDetails": "Second checker present",
+          "shiftType": "day",
+          "staffingLevel": "normal"
+        },
+        "patientInvolvement": {
+          "patientInvolved": "yes",
+          "patientFirstName": "Gordon",
+          "patientLastName": "Ashworth",
+          "patientNhsNumber": "943 476 5925",
+          "patientDateOfBirth": "1946-10-05",
+          "patientSex": "male",
+          "patientAgeAtIncident": 79,
+          "patientInformed": "yes",
+          "patientInformedDate": "2026-08-25",
+          "patientInformedBy": "Ward sister",
+          "dutyOfCandourApplies": "yes",
+          "dutyOfCandourCompleted": "yes"
+        },
+        "errorClassification": {
+          "errorType": "medication",
+          "errorTypeDetails": "",
+          "medicationErrorStage": "prescribing",
+          "whoSeverity": "moderate",
+          "nccMerpCategory": "E",
+          "preventability": "preventable",
+          "recurrenceLikelihood": "likely"
+        },
+        "contributingFactors": {
+          "staffFatigue": "no",
+          "inadequateTraining": "no",
+          "communicationFailure": "no",
+          "communicationFailureDetails": "",
+          "handoverFailure": "no",
+          "equipmentFailure": "no",
+          "equipmentFailureDetails": "",
+          "environmentalFactors": "no",
+          "environmentalDetails": "",
+          "policyNotFollowed": "yes",
+          "policyDetails": "Weight-based dosing chart not consulted at prescribing",
+          "workloadPressure": "yes",
+          "patientFactors": "no",
+          "patientFactorsDetails": "",
+          "otherFactors": ""
+        },
+        "immediateActions": {
+          "patientAssessed": "yes",
+          "treatmentProvided": "yes",
+          "treatmentDetails": "Anticoagulation withheld; observation increased",
+          "errorContained": "yes",
+          "containmentDetails": "",
+          "seniorStaffNotified": "yes",
+          "seniorStaffName": "Sr Kate Donnelly",
+          "seniorStaffRole": "ward-sister",
+          "riskTeamNotified": "yes",
+          "additionalMonitoring": "yes",
+          "monitoringDetails": "Daily FBC for 3 days",
+          "immediateActionsSummary": "Prescription corrected; consultant and patient informed."
+        },
+        "patientOutcome": {
+          "harmReachedPatient": "yes",
+          "harmLevel": "moderate",
+          "harmDescription": "Minor bruising and a small drop in haemoglobin; transfusion not required.",
+          "additionalTreatmentRequired": "yes",
+          "additionalTreatmentDetails": "Dose withheld, repeat FBC",
+          "extendedHospitalStay": "yes",
+          "extraDays": 2,
+          "readmissionRequired": "no",
+          "permanentDisability": "no",
+          "disabilityDetails": "",
+          "patientDied": "no",
+          "deathDate": "",
+          "outcomeNotes": ""
+        },
+        "rootCauseAnalysis": {
+          "rcaConducted": "yes",
+          "rcaDate": "2026-08-26",
+          "rcaLead": "Patient-safety pharmacist",
+          "rcaTeamMembers": "",
+          "rootCauseCategory": "process",
+          "rootCauseDescription": "Prescribing workflow permits free-text dose without weight check.",
+          "fiveWhysAnalysis": "",
+          "fishboneFactors": "",
+          "systemVulnerabilities": "",
+          "similarIncidents": "",
+          "similarIncidentsDetails": "",
+          "rcaFindingsSummary": ""
+        },
+        "correctiveActions": {
+          "immediateCorrectiveActions": "Prescription corrected; prescriber counselled",
+          "longTermCorrectiveActions": "Weight-based dosing forcing function requested in ePMA",
+          "policyChangeRequired": "yes",
+          "policyChangeDetails": "Mandatory weight entry before LMWH prescribing",
+          "trainingRequired": "yes",
+          "trainingDetails": "LMWH dosing refresher for junior doctors",
+          "equipmentChangeRequired": "",
+          "equipmentChangeDetails": "",
+          "processRedesignRequired": "yes",
+          "processRedesignDetails": "ePMA dose-check rule",
+          "responsiblePerson": "Chief pharmacist",
+          "targetCompletionDate": "2026-10-01",
+          "actionsStatus": "in-progress"
+        },
+        "reportingFollowup": {
+          "internalReference": "IR-2026-2218",
+          "reportedToDatix": "yes",
+          "datixReference": "DTX-88433",
+          "reportedToNrls": "yes",
+          "nrlsReference": "NRLS-77120",
+          "reportedToCqc": "",
+          "reportedToHsib": "",
+          "reportedToCoroner": "",
+          "safeguardingReferral": "no",
+          "lessonsLearned": "Dose-check rules must not be bypassable by free text.",
+          "sharedWithTeam": "yes",
+          "followUpReviewDate": "2026-09-26",
+          "followUpReviewer": "Patient-safety pharmacist",
+          "finalStatus": "open",
+          "closureDate": ""
+        }
+      },
+      "expected": {
+        "whoSeverity": "moderate",
+        "nccMerpCategory": "E",
+        "overallRisk": "moderate",
+        "firedRules": [
+          {
+            "id": "SEV-003",
+            "category": "Severity",
+            "description": "Moderate severity - temporary significant harm",
+            "grade": 3
+          },
+          {
+            "id": "MERP-001",
+            "category": "NCC MERP",
+            "description": "NCC MERP Category E - temporary harm requiring intervention",
+            "grade": 3
+          },
+          {
+            "id": "OUT-003",
+            "category": "Outcome",
+            "description": "Extended hospital stay required",
+            "grade": 3
+          },
+          {
+            "id": "OUT-005",
+            "category": "Outcome",
+            "description": "Additional treatment required due to error",
+            "grade": 2
+          },
+          {
+            "id": "ET-001",
+            "category": "Error Type",
+            "description": "Medication error",
+            "grade": 2
+          },
+          {
+            "id": "CF-003",
+            "category": "Contributing Factors",
+            "description": "Policy or protocol not followed",
+            "grade": 2
+          },
+          {
+            "id": "REC-002",
+            "category": "Recurrence",
+            "description": "Recurrence likely",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Error Type",
+            "message": "Medication error at prescribing stage",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-POLICY-001",
+            "category": "Contributing Factors",
+            "message": "Policy/protocol not followed: Weight-based dosing chart not consulted at prescribing",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-STAY-001",
+            "category": "Patient Outcome",
+            "message": "Extended hospital stay: 2 extra days",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-abo-transfusion",
+      "description": "ABO-incompatible transfusion started in an emergency with the bedside check bypassed: WHO critical / MERP H, severe harm, ICU with renal support, duty of candour NOT yet completed — expect critical overall risk.",
+      "state": {
+        "demographics": {
+          "reporterFirstName": "Imogen",
+          "reporterLastName": "Vale",
+          "reporterRole": "consultant",
+          "reporterDepartment": "Theatres",
+          "reporterContactPhone": "ext 4471",
+          "reporterContactEmail": "h.croft@example.nhs.uk",
+          "facilityName": "City General Hospital",
+          "facilityWard": "Ward 7B",
+          "reportDate": "2026-08-26",
+          "anonymousReport": "no"
+        },
+        "incidentDetails": {
+          "incidentDate": "2026-08-24",
+          "incidentTime": "16:30",
+          "discoveryDate": "2026-08-25",
+          "discoveryTime": "21:45",
+          "locationType": "operating-theatre",
+          "locationDetails": "Bay 3",
+          "incidentSummary": "ABO-incompatible unit connected due to a bedside check bypass during an emergency; transfusion stopped after ~20 ml when the second nurse challenged it.",
+          "incidentWitnessed": "yes",
+          "witnessDetails": "Second checker present",
+          "shiftType": "day",
+          "staffingLevel": "short"
+        },
+        "patientInvolvement": {
+          "patientInvolved": "yes",
+          "patientFirstName": "Gordon",
+          "patientLastName": "Ashworth",
+          "patientNhsNumber": "943 476 5925",
+          "patientDateOfBirth": "1946-10-05",
+          "patientSex": "male",
+          "patientAgeAtIncident": 79,
+          "patientInformed": "yes",
+          "patientInformedDate": "2026-08-25",
+          "patientInformedBy": "Ward sister",
+          "dutyOfCandourApplies": "yes",
+          "dutyOfCandourCompleted": "no"
+        },
+        "errorClassification": {
+          "errorType": "transfusion",
+          "errorTypeDetails": "",
+          "medicationErrorStage": "administration",
+          "whoSeverity": "critical",
+          "nccMerpCategory": "H",
+          "preventability": "preventable",
+          "recurrenceLikelihood": "rare"
+        },
+        "contributingFactors": {
+          "staffFatigue": "no",
+          "inadequateTraining": "no",
+          "communicationFailure": "yes",
+          "communicationFailureDetails": "Verbal-only identification during emergency",
+          "handoverFailure": "no",
+          "equipmentFailure": "no",
+          "equipmentFailureDetails": "",
+          "environmentalFactors": "no",
+          "environmentalDetails": "",
+          "policyNotFollowed": "yes",
+          "policyDetails": "Bedside two-person check bypassed",
+          "workloadPressure": "yes",
+          "patientFactors": "no",
+          "patientFactorsDetails": "",
+          "otherFactors": ""
+        },
+        "immediateActions": {
+          "patientAssessed": "yes",
+          "treatmentProvided": "yes",
+          "treatmentDetails": "Transfusion stopped, ABO reaction protocol, ICU transfer",
+          "errorContained": "yes",
+          "containmentDetails": "",
+          "seniorStaffNotified": "yes",
+          "seniorStaffName": "Sr Kate Donnelly",
+          "seniorStaffRole": "ward-sister",
+          "riskTeamNotified": "yes",
+          "additionalMonitoring": "yes",
+          "monitoringDetails": "ICU continuous",
+          "immediateActionsSummary": "Never-event process and SHOT report initiated."
+        },
+        "patientOutcome": {
+          "harmReachedPatient": "yes",
+          "harmLevel": "severe",
+          "harmDescription": "Acute haemolytic reaction; ICU admission, renal support for 48 hours.",
+          "additionalTreatmentRequired": "yes",
+          "additionalTreatmentDetails": "ICU, fluids, renal support",
+          "extendedHospitalStay": "yes",
+          "extraDays": 9,
+          "readmissionRequired": "no",
+          "permanentDisability": "no",
+          "disabilityDetails": "",
+          "patientDied": "no",
+          "deathDate": "",
+          "outcomeNotes": ""
+        },
+        "rootCauseAnalysis": {
+          "rcaConducted": "yes",
+          "rcaDate": "2026-08-25",
+          "rcaLead": "Medical director",
+          "rcaTeamMembers": "",
+          "rootCauseCategory": "process",
+          "rootCauseDescription": "Emergency pathway lacks forcing function for bedside verification.",
+          "fiveWhysAnalysis": "",
+          "fishboneFactors": "",
+          "systemVulnerabilities": "",
+          "similarIncidents": "",
+          "similarIncidentsDetails": "",
+          "rcaFindingsSummary": ""
+        },
+        "correctiveActions": {
+          "immediateCorrectiveActions": "Emergency transfusion pathway suspended pending review",
+          "longTermCorrectiveActions": "Forcing function for bedside verification in all pathways",
+          "policyChangeRequired": "yes",
+          "policyChangeDetails": "No verbal-only identification under any circumstances",
+          "trainingRequired": "yes",
+          "trainingDetails": "Transfusion-safety retraining, all theatre staff",
+          "equipmentChangeRequired": "",
+          "equipmentChangeDetails": "",
+          "processRedesignRequired": "yes",
+          "processRedesignDetails": "Two-person electronic check at bedside",
+          "responsiblePerson": "Medical director",
+          "targetCompletionDate": "2026-09-15",
+          "actionsStatus": "in-progress"
+        },
+        "reportingFollowup": {
+          "internalReference": "IR-2026-2205",
+          "reportedToDatix": "yes",
+          "datixReference": "DTX-88399",
+          "reportedToNrls": "yes",
+          "nrlsReference": "NRLS-77098",
+          "reportedToCqc": "yes",
+          "reportedToHsib": "yes",
+          "reportedToCoroner": "",
+          "safeguardingReferral": "no",
+          "lessonsLearned": "Emergency pressure defeated a single-lane manual check.",
+          "sharedWithTeam": "yes",
+          "followUpReviewDate": "2026-09-10",
+          "followUpReviewer": "Medical director",
+          "finalStatus": "open",
+          "closureDate": ""
+        }
+      },
+      "expected": {
+        "whoSeverity": "critical",
+        "nccMerpCategory": "H",
+        "overallRisk": "critical",
+        "firedRules": [
+          {
+            "id": "SEV-005",
+            "category": "Severity",
+            "description": "Critical - death or life-threatening event",
+            "grade": 5
+          },
+          {
+            "id": "MERP-004",
+            "category": "NCC MERP",
+            "description": "NCC MERP Category H - intervention to sustain life",
+            "grade": 5
+          },
+          {
+            "id": "OUT-003",
+            "category": "Outcome",
+            "description": "Extended hospital stay required",
+            "grade": 3
+          },
+          {
+            "id": "OUT-005",
+            "category": "Outcome",
+            "description": "Additional treatment required due to error",
+            "grade": 2
+          },
+          {
+            "id": "OUT-006",
+            "category": "Outcome",
+            "description": "Severe harm level reported",
+            "grade": 4
+          },
+          {
+            "id": "ET-003",
+            "category": "Error Type",
+            "description": "Transfusion error",
+            "grade": 3
+          },
+          {
+            "id": "CF-001",
+            "category": "Contributing Factors",
+            "description": "Multiple contributing factors identified (3+)",
+            "grade": 3
+          },
+          {
+            "id": "CF-002",
+            "category": "Contributing Factors",
+            "description": "Communication failure contributed to error",
+            "grade": 2
+          },
+          {
+            "id": "CF-003",
+            "category": "Contributing Factors",
+            "description": "Policy or protocol not followed",
+            "grade": 2
+          },
+          {
+            "id": "DOC-001",
+            "category": "Duty of Candour",
+            "description": "Duty of candour applies but not yet completed",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CRITICAL-001",
+            "category": "Severity",
+            "message": "WHO Critical severity - death or life-threatening event",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MERP-HIGH-001",
+            "category": "NCC MERP",
+            "message": "NCC MERP Category H - intervention to sustain life",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOC-001",
+            "category": "Duty of Candour",
+            "message": "Duty of candour applies but NOT YET COMPLETED - urgent action required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COMM-001",
+            "category": "Contributing Factors",
+            "message": "Communication failure: Verbal-only identification during emergency",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-POLICY-001",
+            "category": "Contributing Factors",
+            "message": "Policy/protocol not followed: Bedside two-person check bypassed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-STAY-001",
+            "category": "Patient Outcome",
+            "message": "Extended hospital stay: 9 extra days",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}
