@@ -78,14 +78,14 @@ function personaFile(slug) {
   return path.join(FORMS, slug, 'examples', 'personas.json');
 }
 
-function runForm(slug, update, problems) {
+async function runForm(slug, update, problems) {
   const file = personaFile(slug);
   if (!fs.existsSync(file)) return null;
   let doc;
   try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); }
   catch (e) { problems.push(`${slug}: personas.json invalid JSON: ${e.message}`); return 'FAIL'; }
 
-  const eng = loadEngine(REPO_ROOT, slug);
+  const eng = await loadEngine(REPO_ROOT, slug);
   if (eng.error || !eng.ns) { problems.push(`${slug}: engine not loadable (${eng.error || 'no ns'})`); return 'FAIL'; }
   const graderName = doc.graderHint || eng.grader;
   if (!graderName || typeof eng.ns[graderName] !== 'function') {
@@ -110,7 +110,7 @@ function runForm(slug, update, problems) {
   return status;
 }
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
   const update = args.includes('--update');
   let slugs = args.filter((a) => !a.startsWith('--'));
@@ -121,7 +121,7 @@ function main() {
   const problems = [];
   let pass = 0, fail = 0, none = 0;
   for (const slug of slugs) {
-    const r = runForm(slug, update, problems);
+    const r = await runForm(slug, update, problems);
     if (r === null) none++;
     else if (r === 'PASS') pass++;
     else fail++;

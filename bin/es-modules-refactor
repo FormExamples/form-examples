@@ -620,11 +620,19 @@ def rewrite_html(html: str, entries: list[str]) -> str:
     # Remove the stale "Classic <script>" explanatory comment.
     html = CLASSIC_COMMENT_RE.sub("", html)
 
-    replacement_lines = [f'  <script type="module" src="js/{entry}"></script>']
+    # Preserve the file's own indentation (some front-ends are formatted at
+    # 8 spaces, most at 2): emit the block at the indent of the first local
+    # script tag, so an already-canonical block round-trips byte-identically
+    # whatever the indent style.
+    first = LOCAL_SCRIPT_RE.search(html)
+    indent = re.match(r"[ \t]*", first.group(0)).group(0) if first else "  "
+
+    replacement_lines = [
+        f'{indent}<script type="module" src="js/{entry}"></script>']
     for f in keep_standalone:
         if f != entry:
             replacement_lines.append(
-                f'  <script type="module" src="js/{f}"></script>')
+                f'{indent}<script type="module" src="js/{f}"></script>')
     replacement = "\n".join(replacement_lines) + "\n"
 
     # Replace the first local-script tag with the replacement block and drop

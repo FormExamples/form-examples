@@ -5,21 +5,19 @@
  *
  * The HTML front-ends carry a pure scoring engine in js/ (types + rules +
  * grader + flags, sometimes under domain-specific filenames such as
- * nihss-grader.js). This gate loads each form's engine modules in a Node vm
- * sandbox — with no DOM, so only the pure logic runs — discovers the grader
- * and the default-state factory, runs the grader over the default state, and
- * asserts a structured result. It catches engines that throw on load (a syntax
- * or ordering regression) or that fail to produce a well-formed grade, without
- * a browser.
- *
- * Engine files are loaded retry-until-stable (types before rules before
- * grader), so declaration order does not need to be known ahead of time.
+ * nihss-grader.js). This gate loads each form's engine via the shared
+ * bin/lib/engine-loader.js — real dynamic import() for the ES-module engines
+ * (the fleet-wide state since the 2026-07 conversion), a vm sandbox for any
+ * classic-script stragglers — discovers the grader and the default-state
+ * factory, runs the grader over the default state, and asserts a structured
+ * result. It catches engines that throw on load (a syntax or import
+ * regression) or that fail to produce a well-formed grade, without a browser.
  *
  * Outcomes per form:
  *   PASS   engine loaded, grader ran over the default state, structured result
  *   SKIP   grader or default factory could not be discovered (reported, not
  *          failed — some forms compute inline in form-app.js)
- *   FAIL   an engine module threw on load, or the grader threw / returned junk
+ *   FAIL   an engine module threw on load/import, or the grader returned junk
  *
  * Usage:
  *   bin/test-engines                 # every form
@@ -34,136 +32,27 @@
 
 const fs = require('fs');
 const path = require('path');
-const vm = require('vm');
 const { execSync } = require('child_process');
+const { loadEngine } = require('./lib/engine-loader.js');
 
 const REPO_ROOT = execSync('git rev-parse --show-toplevel').toString().trim();
 const FORMS = path.join(REPO_ROOT, 'forms');
 
-// UI / data / plumbing modules that are not part of the pure engine and that
-// touch the DOM or browser globals — never loaded here.
-const NON_ENGINE = new Set([
-  'form-app.js', 'dashboard-app.js', 'dashboard-types.js', 'api.js',
-  'data.js', 'sample-data.js', 'a11y.js', 'form-validator.js',
-  'linkage.js', 'dashboard.js', 'wizard.js', 'app.js', 'main.js', 'ui.js',
-]);
-
-// A file that uses ES-module syntax cannot run in a CommonJS vm script; such
-// engines are honestly out of scope for this harness (reported as SKIP).
-const ESM_RE = /^\s*(export|import)\s/m;
-
-function makeSandbox() {
-  const noop = () => {};
-  const el = new Proxy({}, { get: () => noop });
-  const doc = {
-    addEventListener: noop, getElementById: () => null,
-    querySelector: () => null, querySelectorAll: () => [],
-    createElement: () => el, body: el, documentElement: el,
-  };
-  const sandbox = {
-    window: {}, document: doc, console: { log: noop, warn: noop, error: noop },
-    localStorage: { getItem: () => null, setItem: noop, removeItem: noop },
-    navigator: { language: 'en-GB' }, location: { href: '' },
-    setTimeout: noop, structuredClone: (x) => JSON.parse(JSON.stringify(x)),
-  };
-  sandbox.globalThis = sandbox;
-  sandbox.self = sandbox;
-  vm.createContext(sandbox);
-  return sandbox;
-}
-
-// Engine files publish shared constants onto the namespace at load time and
-// grader files capture them via `const { x } = window.Ns` — so they MUST load
-// in dependency order: types, then rules, then grader, then flags, then the
-// rest. Rank each filename by that convention.
-function loadRank(f) {
-  if (/type/.test(f)) return 0;
-  if (/rule/.test(f)) return 1;
-  if (/flag/.test(f)) return 2; // grader closures capture detectFlags, so flags first
-  if (/grad|calc|score|maturity/.test(f)) return 4;
-  return 3; // utils/helpers between flags and grader
-}
-
-// Load engine files in dependency order, then retry-until-stable for anything
-// with cross-dependencies the ranking missed.
-function loadEngine(jsDir, sandbox) {
-  let files;
-  try {
-    files = fs.readdirSync(jsDir)
-      .filter((f) => f.endsWith('.js') && !NON_ENGINE.has(f))
-      .sort((a, b) => loadRank(a) - loadRank(b) || a.localeCompare(b));
-  } catch {
-    return { loaded: [], errors: ['no js/ dir'] };
+async function checkForm(slug) {
+  const eng = await loadEngine(REPO_ROOT, slug);
+  if (eng.error === 'no namespace') {
+    return { slug, status: 'SKIP', detail: 'no engine namespace published' };
   }
-  const remaining = new Set(files);
-  const loaded = [];
-  let esm = false;
-  let lastErr = {};
-  let progress = true;
-  while (progress && remaining.size) {
-    progress = false;
-    for (const f of [...remaining]) {
-      const src = fs.readFileSync(path.join(jsDir, f), 'utf8');
-      if (ESM_RE.test(src)) { remaining.delete(f); esm = true; continue; }
-      try {
-        vm.runInContext(src, sandbox, { filename: f });
-        remaining.delete(f);
-        loaded.push(f);
-        progress = true;
-      } catch (e) {
-        lastErr[f] = String(e.message || e).split('\n')[0];
-      }
-    }
+  if (eng.error) {
+    return { slug, status: 'FAIL', detail: `load error — ${eng.error}` };
   }
-  const errors = [...remaining].map((f) => `${f}: ${lastErr[f] || 'unknown'}`);
-  return { loaded, errors, esm };
-}
-
-function findNamespace(win) {
-  let best = null, bestName = null, bestCount = -1;
-  for (const k of Object.keys(win)) {
-    const v = win[k];
-    if (v && typeof v === 'object') {
-      const n = Object.values(v).filter((x) => typeof x === 'function').length;
-      if (n > bestCount) { best = v; bestName = k; bestCount = n; }
-    }
-  }
-  return { ns: best, name: bestName, count: bestCount };
-}
-
-function pick(fnNames, re, avoid) {
-  return fnNames.find((n) => re.test(n) && !(avoid && avoid.test(n)));
-}
-
-function checkForm(slug, verbose) {
-  const jsDir = path.join(FORMS, slug, 'front-end-with-html', 'js');
-  const sandbox = makeSandbox();
-  const { loaded, errors, esm } = loadEngine(jsDir, sandbox);
-  if (errors.length) {
-    return { slug, status: 'FAIL', detail: `load error — ${errors[0]}` };
-  }
-  const { ns, name } = findNamespace(sandbox.window);
-  if (!ns) {
-    return { slug, status: 'SKIP', detail: esm ? 'ESM engine (not loadable via CJS harness)' : 'no engine namespace published' };
-  }
-  const fns = Object.keys(ns).filter((k) => typeof ns[k] === 'function');
-
-  // Prefer a top-level grade entry over per-item/section helpers.
-  const perItem = /timepoint|domain|item|sign|section|criterion|question|category|row|dimension|subscale|response|answer|single|^sum/i;
-  const grader =
-    pick(fns, /^calculate.*grade$/i, perItem) ||
-    pick(fns, /^(grade|assess|evaluate|calculate)(Assessment|Form|Record|Overall|Composite|Total|Maturity)/i, perItem) ||
-    pick(fns, /grade|maturity|score|evaluate|classify|validity|validation|status|appropriate|stage|stratif|risk|complet|readiness/i,
-      new RegExp(`${perItem.source}|label|class$|band$|points$|helper|^is[A-Z]`, 'i'));
-  const factory =
-    pick(fns, /^(createDefault|createEmpty|empty|default)/i) ||
-    pick(fns, /(Assessment|Checklist|State|Data|Form)$/i);
+  const { ns, name, fns, grader, factory, loaded } = eng;
 
   // Discovery misses and input-shape mismatches are honestly SKIPs, not FAILs:
   // this gate only FAILs a form whose engine MODULE throws on load (a real
-  // syntax/ordering regression, checked above). A PASS additionally proves the
+  // syntax/import regression, checked above). A PASS additionally proves the
   // grader runs over the default state and yields structured output.
-  if (!grader) return { slug, status: 'SKIP', detail: `grader not found (ns window.${name}, ${fns.length} fns)` };
+  if (!grader) return { slug, status: 'SKIP', detail: `grader not found (${name}, ${fns.length} fns)` };
   if (!factory) return { slug, status: 'SKIP', detail: `default factory not found (grader=${grader})` };
 
   let state, result;
@@ -182,10 +71,10 @@ function checkForm(slug, verbose) {
   if (!ok) {
     return { slug, status: 'SKIP', detail: `grader ${grader}() returned ${typeof result}` };
   }
-  return { slug, status: 'PASS', detail: `${grader}(${factory}()) ok (ns window.${name}, ${loaded.length} modules)` };
+  return { slug, status: 'PASS', detail: `${grader}(${factory}()) ok (${name}, ${loaded} modules)` };
 }
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
   const verbose = args.includes('--verbose');
   let slugs = args.filter((a) => !a.startsWith('--'));
@@ -194,7 +83,8 @@ function main() {
       .toString().split('\n').map((s) => s.trim()).filter(Boolean)
       .filter((s) => fs.existsSync(path.join(FORMS, s, 'front-end-with-html', 'js')));
   }
-  const results = slugs.map((s) => checkForm(s, verbose));
+  const results = [];
+  for (const s of slugs) results.push(await checkForm(s));
   const by = { PASS: [], SKIP: [], FAIL: [] };
   for (const r of results) by[r.status].push(r);
 
