@@ -12,32 +12,28 @@ use architecture_decision_record::app::App;
 use loco_rs::testing::prelude::*;
 use serial_test::serial;
 
-fn seed_author(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Output = i64> + '_ {
-    async move {
-        use architecture_decision_record::models::_entities::authors;
-        use loco_rs::prelude::*;
-        let a = authors::ActiveModel {
-            name: Set("Test Architect".to_string()),
-            email: Set("arch@example.com".to_string()),
-            role: Set("architect".to_string()),
-            ..Default::default()
-        };
-        let a = a.insert(&ctx.db).await.expect("seed author");
-        a.id
-    }
+async fn seed_author(ctx: &loco_rs::app::AppContext) -> i64 {
+    use architecture_decision_record::models::_entities::authors;
+    use loco_rs::prelude::*;
+    let a = authors::ActiveModel {
+        name: Set("Test Architect".to_string()),
+        email: Set("arch@example.com".to_string()),
+        role: Set("architect".to_string()),
+        ..Default::default()
+    };
+    let a = a.insert(&ctx.db).await.expect("seed author");
+    a.id
 }
 
-fn seed_org(ctx: &loco_rs::app::AppContext) -> impl std::future::Future<Output = i64> + '_ {
-    async move {
-        use architecture_decision_record::models::_entities::organizations;
-        use loco_rs::prelude::*;
-        let o = organizations::ActiveModel {
-            name: Set("Acme Corp".to_string()),
-            ..Default::default()
-        };
-        let o = o.insert(&ctx.db).await.expect("seed org");
-        o.id
-    }
+async fn seed_org(ctx: &loco_rs::app::AppContext) -> i64 {
+    use architecture_decision_record::models::_entities::organizations;
+    use loco_rs::prelude::*;
+    let o = organizations::ActiveModel {
+        name: Set("Acme Corp".to_string()),
+        ..Default::default()
+    };
+    let o = o.insert(&ctx.db).await.expect("seed org");
+    o.id
 }
 
 #[tokio::test]
