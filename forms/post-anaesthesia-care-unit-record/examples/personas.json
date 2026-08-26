@@ -1,0 +1,341 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePacuGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "day-case-street-fit",
+      "description": "Uneventful day-case recovery: Aldrete 10/10 on room air and PADSS 10/10 — expect discharge-ready and street-fit.",
+      "state": {
+        "context": {
+          "nurseName": "SN Priya Nair",
+          "nurseRole": "recovery-nurse",
+          "anaesthetistName": "Dr Paul Whitmore",
+          "admittedAt": "2026-08-26T11:05",
+          "anaestheticTechnique": "general",
+          "procedure": "Laparoscopic cholecystectomy"
+        },
+        "identification": {
+          "patientIdentifier": "MRN0081934",
+          "ageBand": "adult-18-64",
+          "sex": "female",
+          "asaStatus": "2",
+          "baselineSystolicBp": 128,
+          "ambulatoryCase": "yes"
+        },
+        "activity": {
+          "activity": "all-four"
+        },
+        "respiration": {
+          "respiration": "deep-cough"
+        },
+        "circulation": {
+          "circulation": "within-20"
+        },
+        "consciousness": {
+          "consciousness": "awake"
+        },
+        "oxygenSaturation": {
+          "oxygenSaturation": "room-air"
+        },
+        "observations": {
+          "airwayStatus": "patent-unsupported",
+          "painScore": 2,
+          "ponvSeverity": "none",
+          "analgesiaGiven": "Paracetamol 1 g IV in theatre",
+          "antiemeticsGiven": "Ondansetron 4 mg"
+        },
+        "padss": {
+          "padssVitalSigns": "within-20",
+          "padssAmbulation": "steady",
+          "padssNauseaVomiting": "minimal",
+          "padssPain": "minimal",
+          "padssSurgicalBleeding": "minimal"
+        },
+        "note": {
+          "recoveryNote": "Uneventful 40-minute stay; tolerated sips; ready for day-case discharge pathway."
+        }
+      },
+      "expected": {
+        "activityScore": 2,
+        "respirationScore": 2,
+        "circulationScore": 2,
+        "consciousnessScore": 2,
+        "oxygenSaturationScore": 2,
+        "aldreteTotal": 10,
+        "readinessBand": "discharge-ready",
+        "padssTotal": 10,
+        "padssStreetFit": true,
+        "firedParameters": [
+          {
+            "id": "R-ACTIVITY-01",
+            "parameter": "activity",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Activity — voluntary limb movement on command"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "parameter": "respiration",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Respiration — breathing effort, cough, ventilation"
+          },
+          {
+            "id": "R-CIRCULATION-01",
+            "parameter": "circulation",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Circulation — blood pressure deviation from baseline"
+          },
+          {
+            "id": "R-CONSCIOUSNESS-01",
+            "parameter": "consciousness",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Consciousness — level of arousal"
+          },
+          {
+            "id": "R-OXYGEN-SATURATION-01",
+            "parameter": "oxygenSaturation",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Oxygen saturation — SpO2 and supplemental-oxygen need"
+          },
+          {
+            "id": "R-BAND-01",
+            "parameter": "band",
+            "points": 0,
+            "category": "readiness-band",
+            "description": "Aldrete 10/10 with SpO2 parameter met — discharge-ready"
+          },
+          {
+            "id": "R-PADSS-01",
+            "parameter": "padss",
+            "points": 10,
+            "category": "padss-total",
+            "description": "PADSS 10/10 — street-fit for discharge home"
+          }
+        ]
+      }
+    },
+    {
+      "name": "aldrete-nine-but-on-oxygen",
+      "description": "Post-open-surgery patient at Aldrete 9/10 whose only lost point is the SpO2 parameter (still needs oxygen) — expect not-ready despite the >= 9 total, exercising the SpO2 gate.",
+      "state": {
+        "context": {
+          "nurseName": "SN Priya Nair",
+          "nurseRole": "recovery-nurse",
+          "anaesthetistName": "Dr Paul Whitmore",
+          "admittedAt": "2026-08-26T18:10",
+          "anaestheticTechnique": "general",
+          "procedure": "Open cholecystectomy"
+        },
+        "identification": {
+          "patientIdentifier": "MRN0081935",
+          "ageBand": "adult-65-plus",
+          "sex": "male",
+          "asaStatus": "3",
+          "baselineSystolicBp": 145,
+          "ambulatoryCase": "no"
+        },
+        "activity": {
+          "activity": "all-four"
+        },
+        "respiration": {
+          "respiration": "deep-cough"
+        },
+        "circulation": {
+          "circulation": "within-20"
+        },
+        "consciousness": {
+          "consciousness": "awake"
+        },
+        "oxygenSaturation": {
+          "oxygenSaturation": "needs-o2"
+        },
+        "observations": {
+          "airwayStatus": "patent-unsupported",
+          "painScore": 5,
+          "ponvSeverity": "mild",
+          "analgesiaGiven": "Morphine PCA commenced",
+          "antiemeticsGiven": "Cyclizine 50 mg"
+        },
+        "padss": {
+          "padssVitalSigns": "",
+          "padssAmbulation": "",
+          "padssNauseaVomiting": "",
+          "padssPain": "",
+          "padssSurgicalBleeding": ""
+        },
+        "note": {
+          "recoveryNote": "Aldrete 9 but still needing 2 L nasal oxygen; remains in PACU until weaned."
+        }
+      },
+      "expected": {
+        "activityScore": 2,
+        "respirationScore": 2,
+        "circulationScore": 2,
+        "consciousnessScore": 2,
+        "oxygenSaturationScore": 1,
+        "aldreteTotal": 9,
+        "readinessBand": "not-ready",
+        "padssTotal": null,
+        "padssStreetFit": null,
+        "firedParameters": [
+          {
+            "id": "R-ACTIVITY-01",
+            "parameter": "activity",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Activity — voluntary limb movement on command"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "parameter": "respiration",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Respiration — breathing effort, cough, ventilation"
+          },
+          {
+            "id": "R-CIRCULATION-01",
+            "parameter": "circulation",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Circulation — blood pressure deviation from baseline"
+          },
+          {
+            "id": "R-CONSCIOUSNESS-01",
+            "parameter": "consciousness",
+            "points": 2,
+            "category": "aldrete-parameter",
+            "description": "Consciousness — level of arousal"
+          },
+          {
+            "id": "R-OXYGEN-SATURATION-01",
+            "parameter": "oxygenSaturation",
+            "points": 1,
+            "category": "aldrete-parameter",
+            "description": "Oxygen saturation — SpO2 and supplemental-oxygen need"
+          },
+          {
+            "id": "R-BAND-01",
+            "parameter": "band",
+            "points": 0,
+            "category": "readiness-band",
+            "description": "Aldrete 9/10 but oxygen-saturation parameter below 2 — not ready"
+          }
+        ]
+      }
+    },
+    {
+      "name": "slow-emergence-hypoxic",
+      "description": "Emergency-laparotomy patient with slow emergence: unresponsive to commands on activity, limited respiration, arousable only, hypoxic on oxygen (Aldrete 4/10) — expect not-ready with low parameter scores throughout.",
+      "state": {
+        "context": {
+          "nurseName": "SN Priya Nair",
+          "nurseRole": "recovery-nurse",
+          "anaesthetistName": "Dr Paul Whitmore",
+          "admittedAt": "2026-08-26T02:35",
+          "anaestheticTechnique": "general",
+          "procedure": "Emergency laparotomy"
+        },
+        "identification": {
+          "patientIdentifier": "MRN0092055",
+          "ageBand": "adult-65-plus",
+          "sex": "female",
+          "asaStatus": "3",
+          "baselineSystolicBp": 150,
+          "ambulatoryCase": "no"
+        },
+        "activity": {
+          "activity": "none"
+        },
+        "respiration": {
+          "respiration": "limited"
+        },
+        "circulation": {
+          "circulation": "within-50"
+        },
+        "consciousness": {
+          "consciousness": "arousable"
+        },
+        "oxygenSaturation": {
+          "oxygenSaturation": "low-on-o2"
+        },
+        "observations": {
+          "airwayStatus": "supported-jaw-thrust",
+          "painScore": 7,
+          "ponvSeverity": "moderate",
+          "analgesiaGiven": "Fentanyl boluses titrated",
+          "antiemeticsGiven": "Ondansetron 4 mg"
+        },
+        "padss": {
+          "padssVitalSigns": "",
+          "padssAmbulation": "",
+          "padssNauseaVomiting": "",
+          "padssPain": "",
+          "padssSurgicalBleeding": ""
+        },
+        "note": {
+          "recoveryNote": "Slow emergence; hypoxic on 6 L; anaesthetist recalled, considering HDU."
+        }
+      },
+      "expected": {
+        "activityScore": 0,
+        "respirationScore": 1,
+        "circulationScore": 1,
+        "consciousnessScore": 1,
+        "oxygenSaturationScore": 0,
+        "aldreteTotal": 3,
+        "readinessBand": "not-ready",
+        "padssTotal": null,
+        "padssStreetFit": null,
+        "firedParameters": [
+          {
+            "id": "R-ACTIVITY-01",
+            "parameter": "activity",
+            "points": 0,
+            "category": "aldrete-parameter",
+            "description": "Activity — voluntary limb movement on command"
+          },
+          {
+            "id": "R-RESPIRATION-01",
+            "parameter": "respiration",
+            "points": 1,
+            "category": "aldrete-parameter",
+            "description": "Respiration — breathing effort, cough, ventilation"
+          },
+          {
+            "id": "R-CIRCULATION-01",
+            "parameter": "circulation",
+            "points": 1,
+            "category": "aldrete-parameter",
+            "description": "Circulation — blood pressure deviation from baseline"
+          },
+          {
+            "id": "R-CONSCIOUSNESS-01",
+            "parameter": "consciousness",
+            "points": 1,
+            "category": "aldrete-parameter",
+            "description": "Consciousness — level of arousal"
+          },
+          {
+            "id": "R-OXYGEN-SATURATION-01",
+            "parameter": "oxygenSaturation",
+            "points": 0,
+            "category": "aldrete-parameter",
+            "description": "Oxygen saturation — SpO2 and supplemental-oxygen need"
+          },
+          {
+            "id": "R-BAND-01",
+            "parameter": "band",
+            "points": 0,
+            "category": "readiness-band",
+            "description": "Aldrete 3/10 below the discharge threshold — not ready"
+          }
+        ]
+      }
+    }
+  ]
+}

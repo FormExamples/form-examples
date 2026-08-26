@@ -1,0 +1,291 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradePartogram",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Elapsed time derives from in-state timestamps (activePhaseStartAt vs observedAt), so the oracle is fully deterministic.",
+  "personas": [
+    {
+      "name": "normal-progress",
+      "description": "Multiparous labour progressing 1 cm/h from 4 cm: 8 cm at 4 hours sits exactly on the WHO alert line — expect normal classification with no fired lines.",
+      "state": {
+        "context": {
+          "clinicianName": "Midwife Joy Mensah",
+          "clinicianRole": "midwife",
+          "careSetting": "labour-ward",
+          "activePhaseStartAt": "2026-08-26T02:00"
+        },
+        "patient": {
+          "patientIdentifier": "LW-2026-0771",
+          "ageBand": "25-34",
+          "parity": "multiparous",
+          "gestationWeeks": 39
+        },
+        "admission": {
+          "membranesOnAdmission": "ruptured",
+          "riskFactors": "",
+          "plannedCare": "Routine active-phase partogram monitoring"
+        },
+        "observations": [
+          {
+            "observedAt": "2026-08-26T02:00",
+            "cervicalDilatationCm": 4,
+            "descentFifths": 3,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 140,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          },
+          {
+            "observedAt": "2026-08-26T04:00",
+            "cervicalDilatationCm": 6,
+            "descentFifths": 2,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 140,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          },
+          {
+            "observedAt": "2026-08-26T06:00",
+            "cervicalDilatationCm": 8,
+            "descentFifths": 1,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 140,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          }
+        ]
+      },
+      "expected": {
+        "activePhaseStartAt": "2026-08-26T02:00",
+        "latestDilatationCm": 8,
+        "elapsedHours": 4,
+        "alertLineExpectedCm": 8,
+        "actionLineExpectedCm": 4,
+        "progressClassification": "normal",
+        "firedLines": []
+      }
+    },
+    {
+      "name": "alert-line-crossed-meconium",
+      "description": "Nulliparous labour at 5 cm after 4 hours (alert line expects 8 cm) with fresh meconium-stained liquor — expect alertLineCrossed plus the meconium flag territory.",
+      "state": {
+        "context": {
+          "clinicianName": "Midwife Joy Mensah",
+          "clinicianRole": "midwife",
+          "careSetting": "labour-ward",
+          "activePhaseStartAt": "2026-08-26T08:00"
+        },
+        "patient": {
+          "patientIdentifier": "LW-2026-0771",
+          "ageBand": "25-34",
+          "parity": "nulliparous",
+          "gestationWeeks": 39
+        },
+        "admission": {
+          "membranesOnAdmission": "ruptured",
+          "riskFactors": "",
+          "plannedCare": "Routine active-phase partogram monitoring"
+        },
+        "observations": [
+          {
+            "observedAt": "2026-08-26T08:00",
+            "cervicalDilatationCm": 4,
+            "descentFifths": 3,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 140,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          },
+          {
+            "observedAt": "2026-08-26T12:00",
+            "cervicalDilatationCm": 5,
+            "descentFifths": 3,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 150,
+            "liquorState": "meconium",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          }
+        ]
+      },
+      "expected": {
+        "activePhaseStartAt": "2026-08-26T08:00",
+        "latestDilatationCm": 5,
+        "elapsedHours": 4,
+        "alertLineExpectedCm": 8,
+        "actionLineExpectedCm": 4,
+        "progressClassification": "alertLineCrossed",
+        "firedLines": [
+          {
+            "id": "alert",
+            "description": "Latest dilatation 5 cm is below the alert-line expectation of 8.0 cm at 4.0 h"
+          }
+        ]
+      }
+    },
+    {
+      "name": "action-line-crossed-obstructed",
+      "description": "No cervical change from 4 cm over 6 hours despite oxytocin, with maternal fever 38.4, pulse 118, ketonuria ++ and fetal tachycardia 168 — expect actionLineCrossed with both lines fired.",
+      "state": {
+        "context": {
+          "clinicianName": "Midwife Joy Mensah",
+          "clinicianRole": "midwife",
+          "careSetting": "labour-ward",
+          "activePhaseStartAt": "2026-08-26T00:00"
+        },
+        "patient": {
+          "patientIdentifier": "LW-2026-0771",
+          "ageBand": "25-34",
+          "parity": "nulliparous",
+          "gestationWeeks": 39
+        },
+        "admission": {
+          "membranesOnAdmission": "ruptured",
+          "riskFactors": "Prolonged rupture of membranes",
+          "plannedCare": "Routine active-phase partogram monitoring"
+        },
+        "observations": [
+          {
+            "observedAt": "2026-08-26T00:00",
+            "cervicalDilatationCm": 4,
+            "descentFifths": 3,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 140,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          },
+          {
+            "observedAt": "2026-08-26T03:00",
+            "cervicalDilatationCm": 4,
+            "descentFifths": 4,
+            "contractionsPer10Min": 3,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "moderate",
+            "fetalHeartRate": 140,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 82,
+            "temperature": 36.8,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "negative",
+            "urineGlucose": "negative",
+            "oxytocinRate": null,
+            "drugsAndFluids": ""
+          },
+          {
+            "observedAt": "2026-08-26T06:00",
+            "cervicalDilatationCm": 4,
+            "descentFifths": 4,
+            "contractionsPer10Min": 2,
+            "contractionDurationBand": "20-40s",
+            "contractionStrength": "mild",
+            "fetalHeartRate": 168,
+            "liquorState": "clear",
+            "moulding": "0",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "pulse": 118,
+            "temperature": 38.4,
+            "urineVolumeMl": 150,
+            "urineProtein": "negative",
+            "urineKetones": "++",
+            "urineGlucose": "negative",
+            "oxytocinRate": 4,
+            "drugsAndFluids": ""
+          }
+        ]
+      },
+      "expected": {
+        "activePhaseStartAt": "2026-08-26T00:00",
+        "latestDilatationCm": 4,
+        "elapsedHours": 6,
+        "alertLineExpectedCm": 10,
+        "actionLineExpectedCm": 6,
+        "progressClassification": "actionLineCrossed",
+        "firedLines": [
+          {
+            "id": "alert",
+            "description": "Latest dilatation 4 cm is below the alert-line expectation of 10.0 cm at 6.0 h"
+          },
+          {
+            "id": "action",
+            "description": "Latest dilatation 4 cm is on or right of the action line (6.0 cm at 6.0 h)"
+          }
+        ]
+      }
+    }
+  ]
+}
