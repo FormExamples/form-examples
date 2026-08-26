@@ -1,10 +1,43 @@
 # Contributing
 
-This is a spec-driven monorepo of 347 medical / administrative forms. Each form
+This is a spec-driven monorepo of 355 medical / administrative forms. Each form
 carries a full stack — SQL schema, generated representations (XML, FHIR R5,
 Protocol Buffers, OpenAPI), two front-ends (HTML and SvelteKit), and a Rust
 back-end (axum + Loco). The uniformity is the point: one shared design proven
 across many clinical domains. Contributions must preserve that uniformity.
+
+## Ways to contribute
+
+Not all of them are code, and the non-code ones are genuinely useful to a
+project with one maintainer.
+
+- **Report a defect.** A wrong threshold, a mis-implemented score, a schema that
+  disagrees with the form it models, a broken wizard step: open an issue. A form
+  slug and a reproduction are enough. Clinical-correctness reports are the most
+  valuable kind, because the machine gates cannot catch them.
+- **Report a vulnerability.** Privately, and not as an issue — read
+  [`SECURITY.md`](SECURITY.md) first.
+- **Improve a form's clinical documentation.** Each form has a `doc/` citing the
+  instrument it implements. Better citations, corrected references, and notes on
+  licensing terms of an instrument are all welcome.
+- **Add or fix a form.** The workflow is below.
+- **Improve the toolchain.** A generator, a drift detector, a test gate. See
+  [`BENCHMARKS.md`](BENCHMARKS.md) for what the gates currently cost to run.
+- **Translate.** The i18n groundwork is in [`docs/i18n.md`](docs/i18n.md).
+- **Review a pull request.** Sustained, useful review is the main route to
+  becoming a maintainer; [`GOVERNANCE.md`](GOVERNANCE.md) describes it.
+- **Donate money.** There is no funding mechanism, no sponsorship tier, and no
+  legal entity to receive money — this is deliberate, and it means the answer to
+  "can I fund this?" is no. If you want to fund something in this space, fund
+  the publishers of the clinical instruments, or the open-source projects in
+  [`COMPARISONS.md`](COMPARISONS.md) that do have funding routes.
+
+Everyone taking part is covered by the
+[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Contributions are accepted under the
+repository's licence, [`LICENSE.md`](LICENSE.md) (CC BY-NC-SA 4.0). If you use
+AI tooling on a contribution, disclose it in the pull-request description and
+not in a commit trailer; the rule and the reasoning are in
+[`AI_STATEMENT.md`](AI_STATEMENT.md) §10.
 
 Read [`spec.md`](spec.md) (the system spec) and the relevant per-stack agent
 doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.
@@ -70,6 +103,7 @@ bin/lily-svelte-refactor --check --all # Lily Svelte class contract
 bin/lily-sync --check                  # Lily HTML snapshot
 bin/lily-svelte-sync --check           # Lily Svelte snapshot
 bin/loco-config-refactor --check --all # Loco queue + observability conventions
+bin/loco-forbid-unsafe --check --all   # #![forbid(unsafe_code)] in every crate root
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift
 bin/test-e2e --html                    # Playwright smoke + axe-core a11y (HTML)
 ```

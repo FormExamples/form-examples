@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: Medical forms
+title: 'Form Examples: medical and administrative forms as full worked stacks'
 message: >-
   If you use this work and you want to cite it,
   then you can use the metadata from this file.
@@ -10,11 +10,39 @@ authors:
     email: joel@joelparkerhenderson.com
     affiliation: joelparkerhenderson.com
     orcid: 'https://orcid.org/0009-0000-4681-282X'
+contact:
+  - given-names: Joel Parker
+    family-names: Henderson
+    email: joel@joelparkerhenderson.com
+    orcid: 'https://orcid.org/0009-0000-4681-282X'
 identifiers:
   - type: url
-    value: 'https://github.com/formexamples/form-examples/'
-    description: Medical forms
-repository-code: 'https://github.com/formexamples/form-examples/'
+    value: 'https://github.com/FormExamples/form-examples/'
+    description: Source repository
+  - type: url
+    value: 'https://formexamples.com'
+    description: Project website
+repository-code: 'https://github.com/FormExamples/form-examples/'
+url: 'https://formexamples.com'
 abstract: >-
-  Medical forms
-license: See license file
+  A spec-driven monorepo of medical and administrative forms, each published as
+  a complete worked stack: a PostgreSQL schema that is the source of truth, four
+  representations generated from it (XML with DTD, HL7 FHIR R5, Protocol
+  Buffers, and OpenAPI 3.1), two front-end implementations (static HTML and
+  SvelteKit) of a single-page questionnaire wizard with a deterministic scoring
+  or grading engine, and a Rust JSON API (axum and Loco). Machine-checked drift
+  detectors hold every generated artefact in agreement with its source. The
+  forms are worked examples; none is clinically validated or approved for care.
+keywords:
+  - medical forms
+  - clinical assessment
+  - questionnaire
+  - HL7 FHIR
+  - OpenAPI
+  - Protocol Buffers
+  - PostgreSQL
+  - SvelteKit
+  - Rust
+  - spec-driven development
+  - health informatics
+license: CC-BY-NC-SA-4.0

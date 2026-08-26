@@ -8,7 +8,7 @@ engine, and generates a clinical report with flagged issues.
 
 ## Contents
 
-- **347** form project directories under `forms/<slug>/`.
+- **355** form project directories under `forms/<slug>/`.
 - PostgreSQL SQL migrations in Liquibase SQL format (source of truth for data shape).
 - XML + DTD representations per SQL entity (generated).
 - FHIR HL7 R5 JSON resources per SQL entity (generated).
@@ -37,7 +37,26 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 - [`docs/tutorials/`](docs/tutorials) — hands-on walkthroughs (quickstart,
   building a new form, scoring engines, the generator pipeline, the API, Lily).
 - [`arc42/`](arc42/index.md) — the full arc42 architecture document.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — environment, workflow, verify gates.
+- [`INSTALL.md`](INSTALL.md) — run one form locally, three ways.
+
+## Project documents
+
+| Document | What it covers |
+| --- | --- |
+| [`INSTALL.md`](INSTALL.md) | prerequisites, running a form, and what to change before deploying anything |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | ways to contribute, environment, workflow, verify gates |
+| [`GOVERNANCE.md`](GOVERNANCE.md) | who decides what, how decisions are recorded, how to become a maintainer |
+| [`MAINTAINERS.md`](MAINTAINERS.md) | the roster, the publishing identities, and the bus factor |
+| [`SECURITY.md`](SECURITY.md) | what counts as a vulnerability here, how to report one, response times |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | expected conduct, and enforcement |
+| [`AI_STATEMENT.md`](AI_STATEMENT.md) | how AI tooling is used to build this, what it may not do, and the limits |
+| [`CHANGELOG.md`](CHANGELOG.md) | repository-level change history |
+| [`NEWS.md`](NEWS.md) | news, the project fact sheet, and press contact |
+| [`COMPARISONS.md`](COMPARISONS.md) | related projects, and when one of them is the better choice |
+| [`BENCHMARKS.md`](BENCHMARKS.md) | measured gate timings, page weight, and what is deliberately not measured |
+| [`LICENSE.md`](LICENSE.md) | CC BY-NC-SA 4.0, and third-party works included here |
+| [`CITATION.cff`](CITATION.cff) | how to cite this work |
+| [`CODEOWNERS`](CODEOWNERS) | review ownership per path |
 
 ## Form categories
 

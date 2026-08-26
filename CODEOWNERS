@@ -1,0 +1,52 @@
+# Code owners for this repository.
+#
+# GitHub requests a review from the owner of every path a pull request touches.
+# The roster and what "sole maintainer" means in practice are in MAINTAINERS.md;
+# the route to becoming an owner of an area is in GOVERNANCE.md.
+#
+# Ownership is total and deliberate: one maintainer owns every path, so the
+# catch-all below is the whole policy. The per-area lines that follow it are not
+# a second owner — they are the areas that would be split first if a second
+# maintainer joined, and they keep this file honest about where the work is.
+#
+# Note: the email address below only routes a review request if it is a verified
+# email on the owner's GitHub account. The handle is the reliable form; both are
+# listed so the file stays useful outside GitHub too.
+
+# Everything.
+*                                       joel@joelparkerhenderson.com @joelparkerhenderson
+
+# Specs — the source of truth. Changes here precede code changes.
+/spec.md                                @joelparkerhenderson
+/spec/                                  @joelparkerhenderson
+/forms/*/spec/                          @joelparkerhenderson
+
+# The toolchain: generators, refactors, drift detectors, test gates.
+/bin/                                   @joelparkerhenderson
+
+# SQL schemas — the source of truth for every data shape.
+/forms/*/sql/                           @joelparkerhenderson
+
+# Generated artefacts — never hand-edited; change the generator instead.
+/forms/*/xml/                           @joelparkerhenderson
+/forms/*/fhir/                          @joelparkerhenderson
+/forms/*/protobuf/                      @joelparkerhenderson
+/forms/*/openapi/                       @joelparkerhenderson
+/forms/*/back-end-with-loco-setup       @joelparkerhenderson
+/forms.tsv                              @joelparkerhenderson
+/docs/tools.md                          @joelparkerhenderson
+
+# Vendored upstream snapshots — re-synced by tool, pinned by commit.
+/forms/lily-spec/                       @joelparkerhenderson
+/forms/lily-svelte-spec/                @joelparkerhenderson
+
+# CI and repository policy.
+/.github/                               @joelparkerhenderson
+/AGENTS.md                              @joelparkerhenderson
+/AGENTS/                                @joelparkerhenderson
+/CODEOWNERS                             @joelparkerhenderson
+/GOVERNANCE.md                          @joelparkerhenderson
+/MAINTAINERS.md                         @joelparkerhenderson
+/SECURITY.md                            @joelparkerhenderson
+/AI_STATEMENT.md                        @joelparkerhenderson
+/LICENSE.md                             @joelparkerhenderson
