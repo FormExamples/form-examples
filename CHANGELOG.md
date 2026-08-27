@@ -33,6 +33,14 @@ for them.
     npm 5. Switched to `pnpm/action-setup` + `pnpm install
     --frozen-lockfile`, matching `bin/test-e2e --svelte` and the
     documented dev workflow.
+- `bin/lib/engine-loader.js`'s `NON_ENGINE` skip-list wrongly excluded
+  `form-validator.js` as a presumed generic DOM utility; it is the actual
+  scoring engine's entry file in the 4 forms that use that name
+  (`code-of-conduct-notice`, `consent-to-treatment`,
+  `medical-records-release-permission`,
+  `research-and-planning-privacy-notice`), so both `bin/test-engines` and
+  `bin/test-personas` silently failed to load them. Found authoring
+  `consent-to-treatment`'s personas; fixed and re-verified.
 
 ### Added
 
@@ -43,7 +51,14 @@ for them.
   `advance-statement-about-care` (partial with full content but no
   signature; complete once witnessed; verified once the GP also
   acknowledges it — the engine's three-tier ladder exercised end to end).
-  Fleet persona total 179 → 181.
+  Fleet persona total 179 → 181. Personas for
+  `cardiopulmonary-resuscitation-training` (pass with every criterion met;
+  fail on three accumulated non-critical deficiencies; fail on three
+  critical failures — rate, depth, and no visible chest rise) and
+  `consent-to-treatment` (complete at all 26 required fields; incomplete
+  missing 6 identification/scheduling fields; incomplete missing only the
+  two witness fields, since the engine's status is binary). Fleet persona
+  total 181 → 183.
 
 ## [1.0.0] - 2026-08-26
 

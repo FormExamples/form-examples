@@ -1,0 +1,285 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateForm",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. validateForm is the completeness oracle only; the separate detectAdditionalFlags engine (understanding gaps, anaesthesia-risk flags, high-risk procedure, missing consent) is app-level and outside this oracle.",
+  "personas": [
+    {
+      "name": "complete-all-26-required",
+      "description": "Every one of the engine's 26 required fields present across all eight sections — expect Complete at 100%.",
+      "state": {
+        "patientInformation": {
+          "firstName": "Nadia",
+          "lastName": "Farouk",
+          "dob": "1978-03-11",
+          "sex": "female",
+          "nhsNumber": "943 476 5937",
+          "address": "22 Hollow Lane, Leeds",
+          "phone": "07700 900321",
+          "emergencyContact": "Karim Farouk (husband)",
+          "emergencyContactPhone": "07700 900322"
+        },
+        "procedureDetails": {
+          "procedureName": "Laparoscopic cholecystectomy",
+          "procedureDescription": "Keyhole removal of the gallbladder under general anaesthetic.",
+          "treatingClinician": "Mr David Achebe",
+          "department": "General Surgery",
+          "scheduledDate": "2026-09-10",
+          "estimatedDuration": "45-60 minutes",
+          "admissionRequired": "yes"
+        },
+        "risksBenefits": {
+          "commonRisks": "Bruising, wound infection, shoulder-tip pain from gas",
+          "seriousRisks": "Bile duct injury (<1%), bleeding requiring transfusion, conversion to open surgery",
+          "expectedBenefits": "Resolution of biliary colic; prevention of further gallstone attacks",
+          "successRate": "over 95% resolve symptoms",
+          "recoveryPeriod": "1-2 weeks light duties"
+        },
+        "alternativeTreatments": {
+          "alternativeOptions": "Conservative management with dietary change; open cholecystectomy",
+          "noTreatmentConsequences": "Recurrent biliary colic, risk of cholecystitis or pancreatitis",
+          "patientPreference": "Wishes to proceed with keyhole surgery"
+        },
+        "anesthesiaInformation": {
+          "anesthesiaType": "General anaesthesia",
+          "anesthesiaRisks": "Nausea, sore throat, rare serious anaesthetic complications",
+          "previousAnesthesiaProblems": "no",
+          "previousAnesthesiaDetails": "",
+          "fastingInstructions": "Nil by mouth from midnight"
+        },
+        "questionsUnderstanding": {
+          "questionsAsked": "yes",
+          "understandsProcedure": "yes",
+          "understandsRisks": "yes",
+          "understandsAlternatives": "yes",
+          "understandsRecovery": "yes",
+          "additionalConcerns": ""
+        },
+        "patientRights": {
+          "rightToWithdraw": "yes",
+          "rightToSecondOpinion": "yes",
+          "informedVoluntarily": "yes",
+          "noGuaranteeAcknowledged": "yes"
+        },
+        "signatureConsent": {
+          "patientConsent": "yes",
+          "signatureDate": "2026-08-27",
+          "witnessName": "Helen Marsh",
+          "witnessRole": "staff-nurse",
+          "witnessSignatureDate": "2026-08-27",
+          "clinicianName": "Mr David Achebe",
+          "clinicianRole": "consultant-surgeon",
+          "clinicianSignatureDate": "2026-08-27",
+          "interpreterUsed": "no",
+          "interpreterName": ""
+        }
+      },
+      "expected": {
+        "completeness": 100,
+        "status": "Complete",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "incomplete-missing-identification-and-scheduling",
+      "description": "Patient name, NHS number, emergency contact, and the scheduled date all left blank — 6 of 26 required fields missing — expect Incomplete, well under 100%.",
+      "state": {
+        "patientInformation": {
+          "firstName": "",
+          "lastName": "",
+          "dob": "1978-03-11",
+          "sex": "female",
+          "nhsNumber": "",
+          "address": "22 Hollow Lane, Leeds",
+          "phone": "07700 900321",
+          "emergencyContact": "",
+          "emergencyContactPhone": ""
+        },
+        "procedureDetails": {
+          "procedureName": "Laparoscopic cholecystectomy",
+          "procedureDescription": "Keyhole removal of the gallbladder under general anaesthetic.",
+          "treatingClinician": "Mr David Achebe",
+          "department": "General Surgery",
+          "scheduledDate": "",
+          "estimatedDuration": "45-60 minutes",
+          "admissionRequired": "yes"
+        },
+        "risksBenefits": {
+          "commonRisks": "Bruising, wound infection, shoulder-tip pain from gas",
+          "seriousRisks": "Bile duct injury (<1%), bleeding requiring transfusion, conversion to open surgery",
+          "expectedBenefits": "Resolution of biliary colic; prevention of further gallstone attacks",
+          "successRate": "over 95% resolve symptoms",
+          "recoveryPeriod": "1-2 weeks light duties"
+        },
+        "alternativeTreatments": {
+          "alternativeOptions": "Conservative management with dietary change; open cholecystectomy",
+          "noTreatmentConsequences": "Recurrent biliary colic, risk of cholecystitis or pancreatitis",
+          "patientPreference": "Wishes to proceed with keyhole surgery"
+        },
+        "anesthesiaInformation": {
+          "anesthesiaType": "General anaesthesia",
+          "anesthesiaRisks": "Nausea, sore throat, rare serious anaesthetic complications",
+          "previousAnesthesiaProblems": "no",
+          "previousAnesthesiaDetails": "",
+          "fastingInstructions": "Nil by mouth from midnight"
+        },
+        "questionsUnderstanding": {
+          "questionsAsked": "yes",
+          "understandsProcedure": "yes",
+          "understandsRisks": "yes",
+          "understandsAlternatives": "yes",
+          "understandsRecovery": "yes",
+          "additionalConcerns": ""
+        },
+        "patientRights": {
+          "rightToWithdraw": "yes",
+          "rightToSecondOpinion": "yes",
+          "informedVoluntarily": "yes",
+          "noGuaranteeAcknowledged": "yes"
+        },
+        "signatureConsent": {
+          "patientConsent": "yes",
+          "signatureDate": "2026-08-27",
+          "witnessName": "Helen Marsh",
+          "witnessRole": "staff-nurse",
+          "witnessSignatureDate": "2026-08-27",
+          "clinicianName": "Mr David Achebe",
+          "clinicianRole": "consultant-surgeon",
+          "clinicianSignatureDate": "2026-08-27",
+          "interpreterUsed": "no",
+          "interpreterName": ""
+        }
+      },
+      "expected": {
+        "completeness": 83,
+        "status": "Incomplete",
+        "firedRules": [
+          {
+            "id": "REQ-PI-001",
+            "section": "patientInformation",
+            "description": "Patient first name is required",
+            "field": "firstName"
+          },
+          {
+            "id": "REQ-PI-002",
+            "section": "patientInformation",
+            "description": "Patient last name is required",
+            "field": "lastName"
+          },
+          {
+            "id": "REQ-PI-005",
+            "section": "patientInformation",
+            "description": "NHS number is required",
+            "field": "nhsNumber"
+          },
+          {
+            "id": "REQ-PI-008",
+            "section": "patientInformation",
+            "description": "Emergency contact name is required",
+            "field": "emergencyContact"
+          },
+          {
+            "id": "REQ-PI-009",
+            "section": "patientInformation",
+            "description": "Emergency contact phone is required",
+            "field": "emergencyContactPhone"
+          },
+          {
+            "id": "REQ-PD-005",
+            "section": "procedureDetails",
+            "description": "Scheduled date is required",
+            "field": "scheduledDate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-missing-witness-only",
+      "description": "Everything else complete; only the witness name and role were never recorded — expect Incomplete despite being 24/26, since the engine's status is binary (100% or nothing).",
+      "state": {
+        "patientInformation": {
+          "firstName": "Nadia",
+          "lastName": "Farouk",
+          "dob": "1978-03-11",
+          "sex": "female",
+          "nhsNumber": "943 476 5937",
+          "address": "22 Hollow Lane, Leeds",
+          "phone": "07700 900321",
+          "emergencyContact": "Karim Farouk (husband)",
+          "emergencyContactPhone": "07700 900322"
+        },
+        "procedureDetails": {
+          "procedureName": "Laparoscopic cholecystectomy",
+          "procedureDescription": "Keyhole removal of the gallbladder under general anaesthetic.",
+          "treatingClinician": "Mr David Achebe",
+          "department": "General Surgery",
+          "scheduledDate": "2026-09-10",
+          "estimatedDuration": "45-60 minutes",
+          "admissionRequired": "yes"
+        },
+        "risksBenefits": {
+          "commonRisks": "Bruising, wound infection, shoulder-tip pain from gas",
+          "seriousRisks": "Bile duct injury (<1%), bleeding requiring transfusion, conversion to open surgery",
+          "expectedBenefits": "Resolution of biliary colic; prevention of further gallstone attacks",
+          "successRate": "over 95% resolve symptoms",
+          "recoveryPeriod": "1-2 weeks light duties"
+        },
+        "alternativeTreatments": {
+          "alternativeOptions": "Conservative management with dietary change; open cholecystectomy",
+          "noTreatmentConsequences": "Recurrent biliary colic, risk of cholecystitis or pancreatitis",
+          "patientPreference": "Wishes to proceed with keyhole surgery"
+        },
+        "anesthesiaInformation": {
+          "anesthesiaType": "General anaesthesia",
+          "anesthesiaRisks": "Nausea, sore throat, rare serious anaesthetic complications",
+          "previousAnesthesiaProblems": "no",
+          "previousAnesthesiaDetails": "",
+          "fastingInstructions": "Nil by mouth from midnight"
+        },
+        "questionsUnderstanding": {
+          "questionsAsked": "yes",
+          "understandsProcedure": "yes",
+          "understandsRisks": "yes",
+          "understandsAlternatives": "yes",
+          "understandsRecovery": "yes",
+          "additionalConcerns": ""
+        },
+        "patientRights": {
+          "rightToWithdraw": "yes",
+          "rightToSecondOpinion": "yes",
+          "informedVoluntarily": "yes",
+          "noGuaranteeAcknowledged": "yes"
+        },
+        "signatureConsent": {
+          "patientConsent": "yes",
+          "signatureDate": "2026-08-27",
+          "witnessName": "",
+          "witnessRole": "",
+          "witnessSignatureDate": "2026-08-27",
+          "clinicianName": "Mr David Achebe",
+          "clinicianRole": "consultant-surgeon",
+          "clinicianSignatureDate": "2026-08-27",
+          "interpreterUsed": "no",
+          "interpreterName": ""
+        }
+      },
+      "expected": {
+        "completeness": 94,
+        "status": "Incomplete",
+        "firedRules": [
+          {
+            "id": "REQ-SC-003",
+            "section": "signatureConsent",
+            "description": "Witness name is required",
+            "field": "witnessName"
+          },
+          {
+            "id": "REQ-SC-004",
+            "section": "signatureConsent",
+            "description": "Witness role is required",
+            "field": "witnessRole"
+          }
+        ]
+      }
+    }
+  ]
+}

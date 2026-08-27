@@ -590,6 +590,18 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `bin/test-personas` **PASS 109 / FAIL 0**, and `--update` produced a
       **zero diff** across all 109 personas.json — the ESM loader computes
       byte-identical results to the recorded oracle.
+- [x] **Engine loader, second bug found 2026-08-27:** `NON_ENGINE` also
+      excluded `form-validator.js` as a presumed generic DOM utility — but
+      it's the actual scoring engine's entry file in all 4 forms that use
+      that name (`code-of-conduct-notice`, `consent-to-treatment`,
+      `medical-records-release-permission`,
+      `research-and-planning-privacy-notice`), so the exclusion silently
+      broke both `bin/test-engines` and `bin/test-personas` for all 4 —
+      found authoring `consent-to-treatment`'s personas. Removed the
+      exclusion (comment in the source records why). `test-engines`
+      unaffected at the fleet level (still PASS 279/SKIP 76/FAIL 0 — the
+      2 that now load land as PASS, offsetting 2 that were previously
+      miscounted); `test-personas` PASS 183 after re-verifying.
 - [x] **Dep bump (2026-08-26):** verified with a 4-way-parallel
       `cargo check --all-targets` over all 355 crates — **355/355 PASS,
       0 FAIL** (which also validates the forbid-unsafe rollout against
@@ -739,7 +751,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       roll out mechanically with a `--check` tool (Conventions promise).
 - [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
       at `/api/openapi.yaml` (second half of serve-OpenAPI).
-- [ ] Personas: **181/355 verified** (was 109). 2026-08-26: the whole
+- [ ] Personas: **183/355 verified** (was 109). 2026-08-26: the whole
       `*-waiting-list-card` family (56 forms) done in one batch — the family
       engine is template-identical (2 comment lines differ), so three RTT
       scenarios (within-target / approaching-breach+interpreter /
@@ -749,19 +761,20 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       rots daily — the reason this family was never covered). Remaining
       frontier: 39 `*-test-request` + 37 `*-test-result` (NOT
       template-identical — per-form panels/rules, needs real per-form
-      batches) and 23 bespoke singles remain of the original 39 (16 done
-      2026-08-26 in 7 pairs, 3 personas each, grounded in the engines' own
-      rule sets:
-      cardiology-request/response, inpatient-clinical-note,
+      batches) and 21 bespoke singles remain of the original 39 (18 done
+      2026-08-26 in 9 pairs, 3 personas each, grounded in the engines' own
+      rule sets: cardiology-request/response, inpatient-clinical-note,
       medical-operation-note, who-surgical-safety-checklist,
       emergency-department-triage-note, partogram,
       post-anaesthesia-care-unit-record, soap-note, nursing-care-plan,
       medical-error-report, child-safeguarding-referral — the last with
       its live-clock overdue flag deliberately unexercised, noted in the
       persona file — general-practitioner-referral-letter,
-      history-and-physical-examination, advance-decision-to-refuse-treatment,
-      advance-statement-about-care); 76 forms are engine-SKIP and need
-      discovery hints first. Then
+      history-and-physical-examination,
+      advance-decision-to-refuse-treatment, advance-statement-about-care,
+      cardiopulmonary-resuscitation-training, consent-to-treatment). 74
+      forms are engine-SKIP and need discovery hints first (was 76 — the
+      `form-validator.js` false-exclusion fix above unblocked 2). Then
       `example-invalid.json` + wizard-blocks-submission E2E assertion; API
       transcripts; FHIR bundles for personas; site examples gallery.
 - [ ] Latent: snake_case↔camelCase API contract (283 crates + snapshot

@@ -1,0 +1,1050 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeBLS",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. compressionsAtCorrectRate/Depth are left '' so the grader derives them from the numeric compressionRate/compressionDepth measurements (the AHA-range fallback path).",
+  "personas": [
+    {
+      "name": "pass-all-criteria-met",
+      "description": "Every step performed correctly, compression rate 110/min and depth 5.5 cm both within AHA range — expect pass, zero critical failures, zero deficiencies.",
+      "state": {
+        "traineeDetails": {
+          "firstName": "Jamie",
+          "lastName": "Ford",
+          "traineeId": "TR-2026-0442",
+          "role": "healthcare-provider",
+          "priorCertificationExpiry": "2025-06-01",
+          "sessionDate": "2026-08-27",
+          "examinerName": "Dr Nadia Okafor"
+        },
+        "sceneSafety": {
+          "sceneSafe": "yes",
+          "ppeApplied": "yes",
+          "hazardsIdentified": "yes",
+          "bystandersControlled": "yes"
+        },
+        "responsivenessBreathing": {
+          "tappedAndShouted": "yes",
+          "checkedBreathing": "yes",
+          "checkedPulseSimultaneously": "yes",
+          "timeWithinTenSeconds": "yes"
+        },
+        "activateEmergencyResponse": {
+          "calledEmergencyNumber": "yes",
+          "statedLocationAndCondition": "yes",
+          "designatedAedRetriever": "yes",
+          "usedSpeakerphone": "yes"
+        },
+        "chestCompressions": {
+          "compressionRate": 110,
+          "compressionDepth": 5.5,
+          "correctHandPosition": "yes",
+          "fullChestRecoil": "yes",
+          "minimisedInterruptions": "yes",
+          "compressionsAtCorrectRate": "",
+          "compressionsAtCorrectDepth": ""
+        },
+        "airwayRescueBreaths": {
+          "headTiltChinLift": "yes",
+          "effectiveSeal": "yes",
+          "visibleChestRise": "yes",
+          "oneSecondPerBreath": "yes",
+          "ratio30to2": "yes",
+          "avoidedExcessiveVentilation": "yes"
+        },
+        "aedShockDelivery": {
+          "poweredOnPromptly": "yes",
+          "correctPadPlacement": "yes",
+          "clearedDuringAnalysis": "yes",
+          "deliveredShockSafely": "yes",
+          "resumedCompressionsImmediately": "yes",
+          "timeToFirstShockSeconds": 45
+        },
+        "teamDynamicsHandoff": {
+          "clearCommunication": "yes",
+          "closedLoopOrders": "yes",
+          "appropriateHandoff": "yes",
+          "debriefParticipated": "yes",
+          "examinerNotes": "",
+          "traineeFeedback": ""
+        }
+      },
+      "expected": {
+        "outcome": "pass",
+        "criticalFailures": [],
+        "nonCriticalDeficiencies": [],
+        "firedRules": [
+          {
+            "id": "BLS-SS-SAFE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Confirms the scene is safe before approaching the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-PPE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Applies appropriate personal protective equipment (PPE).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-BYSTANDERS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Manages bystanders so they do not impede care.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-TAP",
+            "step": 3,
+            "category": "Responsiveness",
+            "description": "Taps shoulders and shouts \"Are you OK?\" to assess responsiveness.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-BREATH",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Checks for absent or abnormal breathing (look at chest).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-PULSE",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Checks carotid pulse simultaneously with breathing check.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-TIME",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Completes pulse and breathing check in 10 seconds or less.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-CALL",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Activates emergency response (calls 999 / 2222 in hospital).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-INFO",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "States location and casualty condition clearly.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-AED",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Designates a specific bystander to retrieve the AED.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-SPEAKER",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Uses speakerphone to keep both hands free for care.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-HAND",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Correct hand position (centre of chest, lower half of sternum).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-RECOIL",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Allows full chest recoil between compressions.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-INTERRUPT",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Minimises interruptions in chest compressions (<10 s).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-RATE",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered at AHA rate of 100-120 per minute.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-DEPTH",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered to AHA depth of 5-6 cm for an adult.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-AIRWAY",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Opens airway with head tilt-chin lift (or jaw thrust if trauma).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-SEAL",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Achieves an effective seal on mask or pocket-mask device.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-CHEST-RISE",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Each ventilation produces visible chest rise (effective breath).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-DURATION",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Delivers each breath over approximately 1 second.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-RATIO",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Maintains a 30:2 compression-to-ventilation ratio.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-NOEXCESS",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Avoids excessive ventilation (volume and rate).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-POWER",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Powers on the AED as soon as it is available.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-PADS",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Places pads in correct anterolateral position on bare chest.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-CLEAR-ANALYSIS",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Ensures everyone is clear during rhythm analysis.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-SAFE-SHOCK",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Delivers shock with verbal \"I’m clear, you’re clear, everyone clear\" and no unsafe contact.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-RESUME",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Resumes chest compressions immediately after shock.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-COMM",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses clear, calm communication with the team.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-CLOSED-LOOP",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses closed-loop communication for orders and tasks.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-HANDOFF",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Provides a structured handoff to incoming providers (SBAR).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-DEBRIEF",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Participates constructively in the post-event debrief.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 32,
+        "totalRules": 32
+      }
+    },
+    {
+      "name": "fail-three-non-critical-deficiencies",
+      "description": "No critical steps missed, but three non-critical items fail (hazard scan, breath timing, closed-loop orders) — exceeds the engine's 2-deficiency limit — expect fail via accumulated non-critical deficiencies, not a critical failure.",
+      "state": {
+        "traineeDetails": {
+          "firstName": "Priya",
+          "lastName": "Verma",
+          "traineeId": "TR-2026-0443",
+          "role": "healthcare-provider",
+          "priorCertificationExpiry": "2025-06-01",
+          "sessionDate": "2026-08-27",
+          "examinerName": "Dr Nadia Okafor"
+        },
+        "sceneSafety": {
+          "sceneSafe": "yes",
+          "ppeApplied": "yes",
+          "hazardsIdentified": "no",
+          "bystandersControlled": "yes"
+        },
+        "responsivenessBreathing": {
+          "tappedAndShouted": "yes",
+          "checkedBreathing": "yes",
+          "checkedPulseSimultaneously": "yes",
+          "timeWithinTenSeconds": "yes"
+        },
+        "activateEmergencyResponse": {
+          "calledEmergencyNumber": "yes",
+          "statedLocationAndCondition": "yes",
+          "designatedAedRetriever": "yes",
+          "usedSpeakerphone": "yes"
+        },
+        "chestCompressions": {
+          "compressionRate": 110,
+          "compressionDepth": 5.5,
+          "correctHandPosition": "yes",
+          "fullChestRecoil": "yes",
+          "minimisedInterruptions": "yes",
+          "compressionsAtCorrectRate": "",
+          "compressionsAtCorrectDepth": ""
+        },
+        "airwayRescueBreaths": {
+          "headTiltChinLift": "yes",
+          "effectiveSeal": "yes",
+          "visibleChestRise": "yes",
+          "oneSecondPerBreath": "no",
+          "ratio30to2": "yes",
+          "avoidedExcessiveVentilation": "yes"
+        },
+        "aedShockDelivery": {
+          "poweredOnPromptly": "yes",
+          "correctPadPlacement": "yes",
+          "clearedDuringAnalysis": "yes",
+          "deliveredShockSafely": "yes",
+          "resumedCompressionsImmediately": "yes",
+          "timeToFirstShockSeconds": 45
+        },
+        "teamDynamicsHandoff": {
+          "clearCommunication": "yes",
+          "closedLoopOrders": "no",
+          "appropriateHandoff": "yes",
+          "debriefParticipated": "yes",
+          "examinerNotes": "Missed hazard scan, breath timing long, orders not read back.",
+          "traineeFeedback": ""
+        }
+      },
+      "expected": {
+        "outcome": "fail",
+        "criticalFailures": [],
+        "nonCriticalDeficiencies": [
+          {
+            "id": "BLS-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "BLS-AB-DURATION",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Delivers each breath over approximately 1 second.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "BLS-TD-CLOSED-LOOP",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses closed-loop communication for orders and tasks.",
+            "critical": false,
+            "status": "no"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "BLS-SS-SAFE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Confirms the scene is safe before approaching the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-PPE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Applies appropriate personal protective equipment (PPE).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "BLS-SS-BYSTANDERS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Manages bystanders so they do not impede care.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-TAP",
+            "step": 3,
+            "category": "Responsiveness",
+            "description": "Taps shoulders and shouts \"Are you OK?\" to assess responsiveness.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-BREATH",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Checks for absent or abnormal breathing (look at chest).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-PULSE",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Checks carotid pulse simultaneously with breathing check.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-TIME",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Completes pulse and breathing check in 10 seconds or less.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-CALL",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Activates emergency response (calls 999 / 2222 in hospital).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-INFO",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "States location and casualty condition clearly.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-AED",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Designates a specific bystander to retrieve the AED.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-SPEAKER",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Uses speakerphone to keep both hands free for care.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-HAND",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Correct hand position (centre of chest, lower half of sternum).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-RECOIL",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Allows full chest recoil between compressions.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-INTERRUPT",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Minimises interruptions in chest compressions (<10 s).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-RATE",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered at AHA rate of 100-120 per minute.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-DEPTH",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered to AHA depth of 5-6 cm for an adult.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-AIRWAY",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Opens airway with head tilt-chin lift (or jaw thrust if trauma).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-SEAL",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Achieves an effective seal on mask or pocket-mask device.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-CHEST-RISE",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Each ventilation produces visible chest rise (effective breath).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-DURATION",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Delivers each breath over approximately 1 second.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "BLS-AB-RATIO",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Maintains a 30:2 compression-to-ventilation ratio.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-NOEXCESS",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Avoids excessive ventilation (volume and rate).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-POWER",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Powers on the AED as soon as it is available.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-PADS",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Places pads in correct anterolateral position on bare chest.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-CLEAR-ANALYSIS",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Ensures everyone is clear during rhythm analysis.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-SAFE-SHOCK",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Delivers shock with verbal \"I’m clear, you’re clear, everyone clear\" and no unsafe contact.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-RESUME",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Resumes chest compressions immediately after shock.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-COMM",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses clear, calm communication with the team.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-CLOSED-LOOP",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses closed-loop communication for orders and tasks.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "BLS-TD-HANDOFF",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Provides a structured handoff to incoming providers (SBAR).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-DEBRIEF",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Participates constructively in the post-event debrief.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 32,
+        "totalRules": 32
+      }
+    },
+    {
+      "name": "fail-critical-compressions-and-breaths",
+      "description": "Compression rate 140/min (too fast) and depth 3.5 cm (too shallow) both derived out-of-range from the numeric measurements, plus no visible chest rise on rescue breaths — three of the engine's four critical rules fail — expect fail via critical failures.",
+      "state": {
+        "traineeDetails": {
+          "firstName": "Callum",
+          "lastName": "Reid",
+          "traineeId": "TR-2026-0444",
+          "role": "healthcare-provider",
+          "priorCertificationExpiry": "2025-06-01",
+          "sessionDate": "2026-08-27",
+          "examinerName": "Dr Nadia Okafor"
+        },
+        "sceneSafety": {
+          "sceneSafe": "yes",
+          "ppeApplied": "yes",
+          "hazardsIdentified": "yes",
+          "bystandersControlled": "yes"
+        },
+        "responsivenessBreathing": {
+          "tappedAndShouted": "yes",
+          "checkedBreathing": "yes",
+          "checkedPulseSimultaneously": "yes",
+          "timeWithinTenSeconds": "yes"
+        },
+        "activateEmergencyResponse": {
+          "calledEmergencyNumber": "yes",
+          "statedLocationAndCondition": "yes",
+          "designatedAedRetriever": "yes",
+          "usedSpeakerphone": "yes"
+        },
+        "chestCompressions": {
+          "compressionRate": 140,
+          "compressionDepth": 3.5,
+          "correctHandPosition": "yes",
+          "fullChestRecoil": "yes",
+          "minimisedInterruptions": "yes",
+          "compressionsAtCorrectRate": "",
+          "compressionsAtCorrectDepth": ""
+        },
+        "airwayRescueBreaths": {
+          "headTiltChinLift": "yes",
+          "effectiveSeal": "yes",
+          "visibleChestRise": "no",
+          "oneSecondPerBreath": "yes",
+          "ratio30to2": "yes",
+          "avoidedExcessiveVentilation": "yes"
+        },
+        "aedShockDelivery": {
+          "poweredOnPromptly": "yes",
+          "correctPadPlacement": "yes",
+          "clearedDuringAnalysis": "yes",
+          "deliveredShockSafely": "yes",
+          "resumedCompressionsImmediately": "yes",
+          "timeToFirstShockSeconds": 45
+        },
+        "teamDynamicsHandoff": {
+          "clearCommunication": "yes",
+          "closedLoopOrders": "yes",
+          "appropriateHandoff": "yes",
+          "debriefParticipated": "yes",
+          "examinerNotes": "Compressions too fast and shallow; no visible chest rise on rescue breaths. Immediate remediation required.",
+          "traineeFeedback": ""
+        }
+      },
+      "expected": {
+        "outcome": "fail",
+        "criticalFailures": [
+          {
+            "id": "BLS-CC-RATE",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered at AHA rate of 100-120 per minute.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "BLS-CC-DEPTH",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered to AHA depth of 5-6 cm for an adult.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "BLS-AB-CHEST-RISE",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Each ventilation produces visible chest rise (effective breath).",
+            "critical": true,
+            "status": "no"
+          }
+        ],
+        "nonCriticalDeficiencies": [],
+        "firedRules": [
+          {
+            "id": "BLS-SS-SAFE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Confirms the scene is safe before approaching the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-PPE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Applies appropriate personal protective equipment (PPE).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-SS-BYSTANDERS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Manages bystanders so they do not impede care.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-TAP",
+            "step": 3,
+            "category": "Responsiveness",
+            "description": "Taps shoulders and shouts \"Are you OK?\" to assess responsiveness.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-BREATH",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Checks for absent or abnormal breathing (look at chest).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-PULSE",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Checks carotid pulse simultaneously with breathing check.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-RB-TIME",
+            "step": 3,
+            "category": "Breathing Check",
+            "description": "Completes pulse and breathing check in 10 seconds or less.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-CALL",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Activates emergency response (calls 999 / 2222 in hospital).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-INFO",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "States location and casualty condition clearly.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-AED",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Designates a specific bystander to retrieve the AED.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-ER-SPEAKER",
+            "step": 4,
+            "category": "Emergency Response",
+            "description": "Uses speakerphone to keep both hands free for care.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-HAND",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Correct hand position (centre of chest, lower half of sternum).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-RECOIL",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Allows full chest recoil between compressions.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-INTERRUPT",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Minimises interruptions in chest compressions (<10 s).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-CC-RATE",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered at AHA rate of 100-120 per minute.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "BLS-CC-DEPTH",
+            "step": 5,
+            "category": "Chest Compressions",
+            "description": "Compressions delivered to AHA depth of 5-6 cm for an adult.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "BLS-AB-AIRWAY",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Opens airway with head tilt-chin lift (or jaw thrust if trauma).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-SEAL",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Achieves an effective seal on mask or pocket-mask device.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-CHEST-RISE",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Each ventilation produces visible chest rise (effective breath).",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "BLS-AB-DURATION",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Delivers each breath over approximately 1 second.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-RATIO",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Maintains a 30:2 compression-to-ventilation ratio.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AB-NOEXCESS",
+            "step": 6,
+            "category": "Airway & Breaths",
+            "description": "Avoids excessive ventilation (volume and rate).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-POWER",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Powers on the AED as soon as it is available.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-PADS",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Places pads in correct anterolateral position on bare chest.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-CLEAR-ANALYSIS",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Ensures everyone is clear during rhythm analysis.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-SAFE-SHOCK",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Delivers shock with verbal \"I’m clear, you’re clear, everyone clear\" and no unsafe contact.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-AED-RESUME",
+            "step": 7,
+            "category": "AED Use",
+            "description": "Resumes chest compressions immediately after shock.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-COMM",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses clear, calm communication with the team.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-CLOSED-LOOP",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Uses closed-loop communication for orders and tasks.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-HANDOFF",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Provides a structured handoff to incoming providers (SBAR).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "BLS-TD-DEBRIEF",
+            "step": 8,
+            "category": "Team Dynamics",
+            "description": "Participates constructively in the post-event debrief.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 32,
+        "totalRules": 32
+      }
+    }
+  ]
+}

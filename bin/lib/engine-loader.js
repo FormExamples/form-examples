@@ -31,9 +31,16 @@ const { pathToFileURL } = require('url');
 
 // UI / data / plumbing modules that are not part of the pure engine and that
 // touch the DOM or browser globals — never loaded or imported here.
+//
+// 'form-validator.js' is deliberately NOT here: it was excluded until this
+// comment (as a presumed generic DOM validator), but the only 4 forms in the
+// fleet using that filename (code-of-conduct-notice, consent-to-treatment,
+// medical-records-release-permission, research-and-planning-privacy-notice)
+// all use it as the actual grading engine's entry file — the exclusion
+// silently broke both bin/test-engines and bin/test-personas for all 4.
 const NON_ENGINE = new Set([
   'form-app.js', 'dashboard-app.js', 'dashboard-types.js', 'api.js',
-  'data.js', 'sample-data.js', 'a11y.js', 'form-validator.js',
+  'data.js', 'sample-data.js', 'a11y.js',
   'linkage.js', 'dashboard.js', 'wizard.js', 'app.js', 'main.js', 'ui.js',
   // Header-control UI helpers (vendored fleet-wide): DOM-driven, and as
   // classic scripts each declares a top-level STORAGE_KEY, which collides
