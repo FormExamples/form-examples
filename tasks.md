@@ -29,8 +29,17 @@ rebuild (test-engines PASS 279/SKIP 76/FAIL 0; test-personas PASS 109, zero
 oracle diff), the es-modules indent fix, and the Lily re-pin to `e05a138e6`
 with fleet theme re-sync. **Phases 8 and 9 completed the same day**
 (gate truth; CI completeness — see each phase), and Phase 10's tooling half
-too. Open: three maintainer decisions in Phase 10 (first release tag —
-recommendation v1.0.0; Zenodo DOI; licence fit), then Phases 11-12.
+too. v1.0.0 tagged 2026-08-26. Open: two maintainer decisions in Phase 10
+(Zenodo DOI; licence fit), then Phases 11-12.
+
+**2026-08-27 — Phase 9 correction:** checked GitHub's actual CI run history
+for the first time since Phase 9 claimed "complete" — every run had failed
+or been cancelled, Rust and Svelte matrices had never once gone green. Two
+pre-existing, fleet-wide bugs (a `loco new` scaffold default clippy always
+flags; `npm ci` against pnpm-only front-ends), neither introduced by this
+round, now fixed and locally verified — see Phase 9's correction entry
+below for the full account. **Still needs a real CI run to confirm green**
+before this correction itself can be called done.
 
 ## Status summary (2026-07-13)
 
@@ -661,6 +670,39 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 - [x] **dependabot.yml (2026-08-26):** GitHub Actions + the site + the E2E
       harness, weekly; the 355-crate fleet deliberately excluded (lockstep
       sweeps, not 355 bump PRs — reasoning recorded in the file).
+- [x] **Correction (2026-08-27) — "complete" above was gate-shape complete,
+      not gate-*green*.** The first real push after v1.0.0 was checked
+      against GitHub's actual run history: every CI run on this repository
+      had failed or been cancelled — the Rust and Svelte matrices had
+      never gone green, not once, including every run this phase's own
+      commits triggered. Two independent, pre-existing, fleet-wide bugs,
+      neither introduced this round:
+      - **Rust, all 8 shards:** `loco new` scaffolds
+        `App::seed(ctx: &AppContext, base: &Path)` (unused `base` —
+        fixtures load via `env!("CARGO_MANIFEST_DIR")`) and the test
+        `auth_header()` helper's `format!("Bearer {}", &token)` (redundant
+        `&`, `token: &str` already a reference) — both fail
+        `clippy -D warnings` by default, on 346/355 crates. New
+        `bin/loco-seed-base-rename` and `bin/loco-test-auth-header-fix`
+        (single-occurrence-per-file confirmed before writing, `--check`
+        gated, wired into the setup script alongside `loco-forbid-unsafe`).
+        24-crate sample across all 8 shards verified clippy-clean.
+      - **Svelte, all 8 shards:** the job ran `npm ci`, but every
+        `front-end-with-svelte` is its own pnpm project with no
+        `package-lock.json` — `npm ci` has required one since npm 5 and
+        failed immediately, every time. This predates the session; this
+        round's own npm-caching addition pointed at the same nonexistent
+        lockfile without catching the underlying bug. Switched to
+        `pnpm/action-setup` + `pnpm install --frozen-lockfile` +
+        `pnpm run check/build` + `pnpm exec vitest`, matching
+        `bin/test-e2e --svelte` and the documented dev workflow. Full
+        pipeline verified locally (check 0 errors, build green, vitest
+        19/19) before committing.
+      **Lesson for how "complete" gets claimed going forward:** a gate
+      wired into `ci.yml` is a claim, not a fact, until a real CI run has
+      gone green on it — local reproduction of individual steps is not a
+      substitute for checking `gh run list`. Watch the next push's Rust
+      and Svelte matrices before calling this phase actually done.
 
 ## Phase 10 — R2 professionalization — tooling done; 3 maintainer decisions open
 

@@ -29,6 +29,13 @@ carry-overs.
   via new `bin/loco-forbid-unsafe` with `--check` in CI; the generated
   `back-end-with-loco-setup` scripts now apply it to freshly scaffolded crates.
 - Fixed the `#![warn(clippy::clippy::pedantic)]` unknown-lint typo (3 crates).
+- v1.0.0 tagged and released 2026-08-26.
+- 2026-08-27: checked GitHub's actual CI run history for the first time —
+  every run had failed or been cancelled. Fixed two pre-existing,
+  fleet-wide bugs (a `loco new` scaffold default that fails
+  `clippy -D warnings` on 346 crates two different ways; the Svelte job's
+  `npm ci` against pnpm-only front-ends) — see tasks.md Phase 9's
+  correction entry. **Not yet confirmed green by a real CI run.**
 
 ### Defects found (verified 2026-08-26 — the evidence for R0)
 

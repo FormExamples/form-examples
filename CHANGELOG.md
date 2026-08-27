@@ -16,7 +16,23 @@ for them.
 
 ## [Unreleased]
 
-_Nothing yet._
+### Fixed
+
+- CI's Rust and Svelte matrices, which had never gone green on this
+  repository (confirmed against GitHub's run history, including every run
+  v1.0.0's own commits triggered) — two pre-existing, fleet-wide bugs,
+  neither introduced by v1.0.0:
+  - Every `loco new` scaffold ships an unused `base` parameter on
+    `App::seed()` and a redundant `&` in the generated test's
+    `auth_header()` helper; both fail `clippy -D warnings` by default on
+    346/355 crates. New `bin/loco-seed-base-rename` and
+    `bin/loco-test-auth-header-fix` (each `--check`-gated, wired into the
+    generated setup script) fix and guard both fleet-wide.
+  - The Svelte CI job ran `npm ci` against front-ends that are pnpm-only
+    projects (no `package-lock.json`), which has failed immediately since
+    npm 5. Switched to `pnpm/action-setup` + `pnpm install
+    --frozen-lockfile`, matching `bin/test-e2e --svelte` and the
+    documented dev workflow.
 
 ## [1.0.0] - 2026-08-26
 
