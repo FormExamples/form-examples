@@ -84,6 +84,8 @@ jobs:
           python-version: '3.12'
       - name: Install xmllint
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+      - name: Install Python generator dependencies
+        run: pip install --quiet pyyaml
 
       # Regenerate every derived artefact, then fail if anything changed.
       - name: Regenerate generated artefacts
@@ -192,6 +194,9 @@ jobs:
       # guarded locally by bin/lib/lily_pin.py.
       - name: Vendored theme catalogues + Svelte helpers are fleet-uniform
         run: bin/test-vendored-uniformity
+
+      - name: Svelte pnpm-workspace.yaml is correct (packages field + esbuild allow)
+        run: bin/svelte-pnpm-workspace-fix --check --all
 
       - name: Validate XML against DTDs
         run: |

@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""bin/svelte-pnpm-workspace-fix — fix every form's
+`front-end-with-svelte/pnpm-workspace.yaml`.
+
+Two bugs, found diagnosing CI's Svelte matrix (which had never gone green):
+
+  1. Every one of the 355 files was missing a `packages:` key. pnpm 9 (what
+     `pnpm/action-setup` pins in CI) rejects a `pnpm-workspace.yaml` with no
+     `packages:` field outright — `ERROR packages field missing or empty` —
+     and refuses to install anything. The local pnpm 11 on the maintainer's
+     machine tolerates the omission, which is why this went unnoticed:
+     reproduced fleet-wide with a real pnpm 9 binary before writing this
+     tool. Every front-end is a single, standalone package (never an actual
+     multi-package pnpm workspace), so `packages: ['.']`  is the correct,
+     minimal fix — not a null workaround.
+  2. `allowBuilds.esbuild` — approval for esbuild's postinstall binary
+     fetch — is `true` in 321/355 files but a stray unfilled template
+     string (`"set this to true or false"`) in 32 and `false` in 1.
+     Confirmed this does NOT itself break `pnpm install` (only the missing
+     `packages:` key does), but it is dead-wrong data left over from
+     whatever produced it originally. Normalized to `true`, matching the
+     fleet majority and the sensible default (esbuild's script only fetches
+     its own platform binary; nothing to gate).
+
+This is an ongoing convention, not a one-shot migration: a newly scaffolded
+form's `pnpm-workspace.yaml` needs the same fix, so `--check` is the CI
+drift detector.
+
+Usage:
+  bin/svelte-pnpm-workspace-fix <slug>...        # named forms
+  bin/svelte-pnpm-workspace-fix --all            # every form's Svelte front-end
+  bin/svelte-pnpm-workspace-fix --dry-run --all  # show what would change
+  bin/svelte-pnpm-workspace-fix --check --all    # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+ESBUILD_LINE_RE = re.compile(r"^(\s*esbuild:\s*).*$", re.MULTILINE)
+PACKAGES_BLOCK = "packages:\n  - '.'\n\n"
+
+
+def fixed_text(original: str) -> str:
+    text = original
+    if not re.match(r"^\s*packages:\s*$", text, re.MULTILINE):
+        text = PACKAGES_BLOCK + text
+    text = ESBUILD_LINE_RE.sub(r"\1true", text)
+    return text
+
+
+def process_form(front_end: pathlib.Path, apply: bool) -> bool:
+    path = front_end / "pnpm-workspace.yaml"
+    if not path.is_file():
+        return False
+    original = path.read_text()
+    new = fixed_text(original)
+    if new == original:
+        return False
+    if apply:
+        path.write_text(new)
+    return True
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Fix pnpm-workspace.yaml's missing packages: field and "
+        "malformed allowBuilds.esbuild value, fleet-wide."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(
+            p for p in FORMS.iterdir() if (p / "front-end-with-svelte").is_dir()
+        )
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[str] = []
+
+    for form in forms:
+        front_end = form / "front-end-with-svelte"
+        if not front_end.is_dir():
+            print(f"no such front-end: {front_end}", file=sys.stderr)
+            return 2
+        if process_form(front_end, apply):
+            drifted.append(form.name)
+
+    if args.check:
+        if drifted:
+            print(
+                f"pnpm-workspace.yaml drift in {len(drifted)} form(s) "
+                f"(run: bin/svelte-pnpm-workspace-fix --all)"
+            )
+            for name in drifted[:10]:
+                print(f"  {name}")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"pnpm-workspace.yaml correct in every form ({len(forms)} forms)")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    print(f"{len(drifted)} form(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -33,6 +33,21 @@ for them.
     npm 5. Switched to `pnpm/action-setup` + `pnpm install
     --frozen-lockfile`, matching `bin/test-e2e --svelte` and the
     documented dev workflow.
+- Watching that fix's own CI run (rather than assuming it worked) surfaced
+  two more pre-existing bugs it didn't touch:
+  - The drift job's `bin/openapi/generate-openapi-combined.py` needs
+    PyYAML, which the job's Python setup never installed — ran locally
+    only because PyYAML happens to already be present on the maintainer's
+    machine. Added `pip install pyyaml` to the drift job.
+  - Every one of the 355 `front-end-with-svelte/pnpm-workspace.yaml` files
+    was missing the `packages:` key pnpm 9 (the CI-pinned version)
+    requires — `ERROR packages field missing or empty`, failing all 8
+    Svelte shards outright before any real work ran. The local pnpm 11
+    tolerates the omission, which is why this went unnoticed. New
+    `bin/svelte-pnpm-workspace-fix` adds `packages: ['.']` fleet-wide and
+    normalizes the same file's `allowBuilds.esbuild` (a stray unfilled
+    template string in 32 files, `false` in 1) to `true`. Verified with a
+    real pnpm 9 binary, not the local pnpm 11 that cannot see the bug.
 - `bin/lib/engine-loader.js`'s `NON_ENGINE` skip-list wrongly excluded
   `form-validator.js` as a presumed generic DOM utility; it is the actual
   scoring engine's entry file in the 4 forms that use that name
@@ -96,6 +111,12 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 - `bin/test-vendored-uniformity` — proves the vendored theme catalogues and
   Lily Svelte helpers are byte-identical across all 355 forms (the
   CI-checkable half of the checkout-reading sync tools' invariant).
+- Personas for `employee-onboarding-checklist` (complete, low risk; a
+  critical DBS-not-started case regardless of otherwise-high completion; a
+  high-risk case on unsatisfactory references and a pending DBS) and
+  `first-aid-training-checklist` (pass with every criterion met;
+  needs-development right at the 2-deficiency boundary; fail on missed
+  tourniquet application and anaphylaxis recognition).
 - Personas for `general-practitioner-referral-letter` (routine complete at
   10/10 mandatory; an NG12 two-week-wait whose conditional fields grow the
   mandatory set to 13/13; an urgent referral missing its urgency reason)

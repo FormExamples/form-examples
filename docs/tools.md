@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-73 tools.
+74 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -50,6 +50,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
+- [`bin/svelte-pnpm-workspace-fix`](#svelte-pnpm-workspace-fix)
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
 - [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
 - [`bin/svelte-text-size-select-refactor`](#svelte-text-size-select-refactor)
@@ -1372,6 +1373,43 @@ for-cymraeg i18n pilot, which ships its own translated LocaleSelect).
 
 Idempotent: re-running on an already-refactored form makes no further
 changes.
+```
+
+<h2 id="svelte-pnpm-workspace-fix"><code>bin/svelte-pnpm-workspace-fix</code></h2>
+
+```text
+bin/svelte-pnpm-workspace-fix — fix every form's
+`front-end-with-svelte/pnpm-workspace.yaml`.
+
+Two bugs, found diagnosing CI's Svelte matrix (which had never gone green):
+
+  1. Every one of the 355 files was missing a `packages:` key. pnpm 9 (what
+     `pnpm/action-setup` pins in CI) rejects a `pnpm-workspace.yaml` with no
+     `packages:` field outright — `ERROR packages field missing or empty` —
+     and refuses to install anything. The local pnpm 11 on the maintainer's
+     machine tolerates the omission, which is why this went unnoticed:
+     reproduced fleet-wide with a real pnpm 9 binary before writing this
+     tool. Every front-end is a single, standalone package (never an actual
+     multi-package pnpm workspace), so `packages: ['.']`  is the correct,
+     minimal fix — not a null workaround.
+  2. `allowBuilds.esbuild` — approval for esbuild's postinstall binary
+     fetch — is `true` in 321/355 files but a stray unfilled template
+     string (`"set this to true or false"`) in 32 and `false` in 1.
+     Confirmed this does NOT itself break `pnpm install` (only the missing
+     `packages:` key does), but it is dead-wrong data left over from
+     whatever produced it originally. Normalized to `true`, matching the
+     fleet majority and the sensible default (esbuild's script only fetches
+     its own platform binary; nothing to gate).
+
+This is an ongoing convention, not a one-shot migration: a newly scaffolded
+form's `pnpm-workspace.yaml` needs the same fix, so `--check` is the CI
+drift detector.
+
+Usage:
+  bin/svelte-pnpm-workspace-fix <slug>...        # named forms
+  bin/svelte-pnpm-workspace-fix --all            # every form's Svelte front-end
+  bin/svelte-pnpm-workspace-fix --dry-run --all  # show what would change
+  bin/svelte-pnpm-workspace-fix --check --all    # CI drift check (non-zero on drift)
 ```
 
 <h2 id="svelte-share-button-refactor"><code>bin/svelte-share-button-refactor</code></h2>

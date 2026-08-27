@@ -32,14 +32,19 @@ with fleet theme re-sync. **Phases 8 and 9 completed the same day**
 too. v1.0.0 tagged 2026-08-26. Open: two maintainer decisions in Phase 10
 (Zenodo DOI; licence fit), then Phases 11-12.
 
-**2026-08-27 — Phase 9 correction:** checked GitHub's actual CI run history
-for the first time since Phase 9 claimed "complete" — every run had failed
-or been cancelled, Rust and Svelte matrices had never once gone green. Two
-pre-existing, fleet-wide bugs (a `loco new` scaffold default clippy always
-flags; `npm ci` against pnpm-only front-ends), neither introduced by this
-round, now fixed and locally verified — see Phase 9's correction entry
-below for the full account. **Still needs a real CI run to confirm green**
-before this correction itself can be called done.
+**2026-08-27 — Phase 9 correction, then a second correction:** checked
+GitHub's actual CI run history for the first time since Phase 9 claimed
+"complete" — every run had failed or been cancelled, Rust and Svelte
+matrices had never once gone green. Fixed two pre-existing, fleet-wide
+bugs (a `loco new` scaffold default clippy always flags; `npm ci` against
+pnpm-only front-ends) and pushed — then **watched that push's own CI run**
+rather than assuming it worked, and it hadn't: Drift failed on a missing
+PyYAML install, and all 8 Svelte shards failed again for a different
+reason (`pnpm-workspace.yaml` missing the `packages:` key pnpm 9
+requires). Both fixed and verified with a real pnpm 9 binary. Persona
+work continued in parallel: 109 → 185 this session. **Still needs a real
+CI run to confirm green** before either correction can be called done —
+see Phase 9's two correction entries below for the full account.
 
 ## Status summary (2026-07-13)
 
@@ -715,6 +720,32 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       gone green on it — local reproduction of individual steps is not a
       substitute for checking `gh run list`. Watch the next push's Rust
       and Svelte matrices before calling this phase actually done.
+- [x] **Second correction, same day — the lesson above was immediately
+      vindicated.** The push containing the fix above (`beea33fd4`) was
+      watched through to its own real CI result rather than assumed green,
+      and it wasn't: **Drift detectors failed** (`ModuleNotFoundError: No
+      module named 'yaml'` — `bin/openapi/generate-openapi-combined.py`
+      needs PyYAML, which the drift job's bare `actions/setup-python@v5`
+      never installs; ran fine on the maintainer's machine only because
+      PyYAML happens to be globally present there) and **all 8 Svelte
+      shards failed again**, for a *different* reason than the one just
+      fixed: `pnpm install --frozen-lockfile` under the CI-pinned pnpm 9
+      hit `ERROR packages field missing or empty` — every one of the 355
+      `pnpm-workspace.yaml` files was missing a `packages:` key, which
+      pnpm 9 rejects outright and the maintainer's local pnpm 11 silently
+      tolerates. Fixed both: `pip install pyyaml` added to the drift job;
+      new `bin/svelte-pnpm-workspace-fix` adds `packages: ['.']`
+      fleet-wide (355 files) and, found in the same file while there,
+      normalizes `allowBuilds.esbuild` (a stray unfilled template string
+      in 32 files, `false` in 1, `true` in the rest — confirmed the bad
+      values don't themselves break the install, just wrong data) to
+      `true`. Reproduced the original error and verified the fix with a
+      **real pnpm 9 binary** (not the local pnpm 11, which cannot see
+      this bug) across three sample forms: install, `check`, `build`, and
+      `vitest run` all green. `--check`-gated, wired into the drift job.
+      **Still unconfirmed by a real CI run — do not mark this phase
+      actually done until the next push's Drift, Rust, and Svelte jobs
+      are checked and green, not assumed.**
 
 ## Phase 10 — R2 professionalization — tooling done; 3 maintainer decisions open
 
@@ -751,7 +782,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       roll out mechanically with a `--check` tool (Conventions promise).
 - [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
       at `/api/openapi.yaml` (second half of serve-OpenAPI).
-- [ ] Personas: **183/355 verified** (was 109). 2026-08-26: the whole
+- [ ] Personas: **185/355 verified** (was 109). 2026-08-26: the whole
       `*-waiting-list-card` family (56 forms) done in one batch — the family
       engine is template-identical (2 comment lines differ), so three RTT
       scenarios (within-target / approaching-breach+interpreter /
@@ -761,7 +792,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       rots daily — the reason this family was never covered). Remaining
       frontier: 39 `*-test-request` + 37 `*-test-result` (NOT
       template-identical — per-form panels/rules, needs real per-form
-      batches) and 21 bespoke singles remain of the original 39 (18 done
+      batches) and 19 bespoke singles remain of the original 39 (20 done
       2026-08-26 in 9 pairs, 3 personas each, grounded in the engines' own
       rule sets: cardiology-request/response, inpatient-clinical-note,
       medical-operation-note, who-surgical-safety-checklist,
@@ -772,7 +803,8 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       persona file — general-practitioner-referral-letter,
       history-and-physical-examination,
       advance-decision-to-refuse-treatment, advance-statement-about-care,
-      cardiopulmonary-resuscitation-training, consent-to-treatment). 74
+      cardiopulmonary-resuscitation-training, consent-to-treatment,
+      employee-onboarding-checklist, first-aid-training-checklist). 74
       forms are engine-SKIP and need discovery hints first (was 76 — the
       `form-validator.js` false-exclusion fix above unblocked 2). Then
       `example-invalid.json` + wizard-blocks-submission E2E assertion; API

@@ -1,0 +1,1379 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFirstAid",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "pass-all-criteria-met",
+      "description": "Every scenario across all 9 categories performed correctly — expect pass, zero critical failures, zero deficiencies.",
+      "state": {
+        "traineeDetails": {
+          "firstName": "Ruby",
+          "lastName": "Chen",
+          "traineeId": "FAW-2026-0210",
+          "role": "first-aider-at-work",
+          "priorCertificationExpiry": "2025-01-15",
+          "sessionDate": "2026-08-27",
+          "examinerName": "Dr Nadia Okafor",
+          "venue": "Training Centre 2"
+        },
+        "sceneAssessmentSafety": {
+          "sceneSafe": "yes",
+          "ppeApplied": "yes",
+          "hazardsIdentified": "yes",
+          "bystandersControlled": "yes"
+        },
+        "primarySurveyDRABC": {
+          "dangerCheck": "yes",
+          "responseCheck": "yes",
+          "airwayManagement": "yes",
+          "breathingCheck": "yes",
+          "circulationAssessment": "yes",
+          "recoveryPositionWhenAppropriate": "yes"
+        },
+        "cprAed": {
+          "effectiveCompressions": "yes",
+          "effectiveVentilations": "yes",
+          "ratio30to2": "yes",
+          "aedPowerOnPromptly": "yes",
+          "aedPadPlacement": "yes",
+          "aedSafeShockDelivery": "yes"
+        },
+        "chokingManagement": {
+          "encouragedCoughing": "yes",
+          "fiveBackBlows": "yes",
+          "fiveAbdominalThrusts": "yes",
+          "alternatesUntilDislodged": "yes",
+          "unconsciousChokingCpr": "yes"
+        },
+        "bleedingWoundCare": {
+          "directPressureApplied": "yes",
+          "elevatedAndImmobilised": "yes",
+          "appliedDressingCorrectly": "yes",
+          "tourniquetWhenIndicated": "yes",
+          "haemostaticDressingApplied": "yes",
+          "treatedForShock": "yes"
+        },
+        "burnsScalds": {
+          "cooledForTwentyMinutes": "yes",
+          "removedJewelleryAndLooseClothing": "yes",
+          "coveredWithClingFilmOrSterileDressing": "yes",
+          "avoidedCreamsOrIce": "yes",
+          "referredAppropriately": "yes"
+        },
+        "fracturesSprainsSpinal": {
+          "immobilisedInjuredLimb": "yes",
+          "appliedRiceForSprains": "yes",
+          "suspectedSpinalManualSupport": "yes",
+          "performedLogRollWithTeam": "yes",
+          "avoidedUnnecessaryMovement": "yes"
+        },
+        "medicalEmergencies": {
+          "recognisedAnaphylaxis": "yes",
+          "administeredEpiPenSafely": "yes",
+          "assistedAsthmaInhaler": "yes",
+          "managedHypoglycaemia": "yes",
+          "managedSeizureSafely": "yes",
+          "recognisedStrokeFAST": "yes",
+          "recognisedChestPain": "yes"
+        },
+        "recordingReportingHandover": {
+          "accidentBookEntry": "yes",
+          "riddorAwareness": "yes",
+          "structuredHandoffSbar": "yes",
+          "confidentialityMaintained": "yes",
+          "examinerNotes": "",
+          "traineeFeedback": "",
+          "debriefNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "pass",
+        "criticalFailures": [],
+        "deficiencies": [],
+        "firedRules": [
+          {
+            "id": "FAW-SS-SAFE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Confirms the scene is safe before approaching the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-PPE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Applies appropriate personal protective equipment (gloves, face shield).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards (traffic, electricity, chemicals).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-BYSTANDERS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Manages bystanders so they do not impede care or compromise safety.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-DANGER",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "D — checks for Danger to self, casualty, and bystanders.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-RESPONSE",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "R — assesses Response using AVPU / shake-and-shout.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-AIRWAY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "A — opens and clears Airway with head tilt-chin lift (or jaw thrust).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-BREATHING",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "B — checks Breathing (look, listen, feel) for up to 10 seconds.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-CIRCULATION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "C — assesses Circulation and obvious life-threatening bleeding.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-RECOVERY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Places unconscious-but-breathing casualty in the recovery position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-COMPRESSIONS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers effective chest compressions at 100-120/min, 5-6 cm depth.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-VENTILATIONS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers effective rescue breaths producing visible chest rise.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-RATIO",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Maintains a 30:2 compression-to-ventilation ratio.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-POWER",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Powers on the AED as soon as it is available and follows voice prompts.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-PADS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Places AED pads in correct anterolateral position on bare chest.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-SAFE-SHOCK",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers shock safely with verbal \"stand clear\" — no unsafe contact.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-COUGH",
+            "step": 5,
+            "category": "Choking",
+            "description": "Encourages an effective cough first when the airway is partially obstructed.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-BACKBLOWS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Delivers up to 5 firm back blows between the shoulder blades.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-THRUSTS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Delivers up to 5 abdominal thrusts (Heimlich) with correct hand position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-ALTERNATE",
+            "step": 5,
+            "category": "Choking",
+            "description": "Alternates back blows and abdominal thrusts until obstruction is dislodged.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-UNCONSCIOUS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Begins CPR immediately if the choking casualty becomes unconscious.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-PRESSURE",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies firm direct pressure to control major external bleeding.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-ELEVATE",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Elevates and immobilises the injured part where appropriate.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-DRESSING",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a sterile dressing and bandage with appropriate pressure.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-TOURNIQUET",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a tourniquet correctly for catastrophic limb haemorrhage when indicated.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-HAEMOSTATIC",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies haemostatic dressing/wound packing for junctional haemorrhage.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-SHOCK",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Treats casualty for shock (lay flat, raise legs, keep warm).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-COOL",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Cools the burn with running cool water for at least 20 minutes.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-REMOVE",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Removes jewellery and loose clothing before swelling — but not stuck items.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-COVER",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Covers the burn loosely with cling film or a sterile non-adherent dressing.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-NOCREAM",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Avoids applying creams, butter, ice, or bursting blisters.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-REFER",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Refers serious burns to hospital (size, depth, age, location criteria).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-IMMOB",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Immobilises a suspected fracture in the position found.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-RICE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Applies RICE (Rest, Ice, Compression, Elevation) for sprains and strains.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-SPINAL-SUPPORT",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Provides manual in-line head/neck support when spinal injury is suspected.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-LOGROLL",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Performs a coordinated log roll with team members where indicated.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-NOMOVE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Avoids unnecessary movement of suspected spinal or unstable fractures.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-ANAPHYLAXIS",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises anaphylaxis (airway / breathing / circulation symptoms).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-EPIPEN",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Administers an EpiPen / adrenaline auto-injector safely into the outer thigh.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-ASTHMA",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Assists casualty with a reliever inhaler during an asthma attack.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-HYPO",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Manages hypoglycaemia with sugary drink/glucose if conscious.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-SEIZURE",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Manages a seizure: protect head, time the seizure, recovery position after.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-STROKE",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises stroke using FAST (Face, Arms, Speech, Time).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-CHEST-PAIN",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises chest pain / suspected MI and provides appropriate care.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 44,
+        "totalRules": 44
+      }
+    },
+    {
+      "name": "needs-development-two-deficiencies",
+      "description": "Two non-critical deficiencies (a burn treated with cream instead of cooling/cling film; a sprain not managed with RICE) with no critical steps missed — expect needs-development, exercising the tier between pass and fail, and right at the 2-deficiency boundary before it would flip to fail.",
+      "state": {
+        "traineeDetails": {
+          "firstName": "Aiden",
+          "lastName": "Blake",
+          "traineeId": "FAW-2026-0211",
+          "role": "first-aider-at-work",
+          "priorCertificationExpiry": "2025-01-15",
+          "sessionDate": "2026-08-27",
+          "examinerName": "Dr Nadia Okafor",
+          "venue": "Training Centre 2"
+        },
+        "sceneAssessmentSafety": {
+          "sceneSafe": "yes",
+          "ppeApplied": "yes",
+          "hazardsIdentified": "yes",
+          "bystandersControlled": "yes"
+        },
+        "primarySurveyDRABC": {
+          "dangerCheck": "yes",
+          "responseCheck": "yes",
+          "airwayManagement": "yes",
+          "breathingCheck": "yes",
+          "circulationAssessment": "yes",
+          "recoveryPositionWhenAppropriate": "yes"
+        },
+        "cprAed": {
+          "effectiveCompressions": "yes",
+          "effectiveVentilations": "yes",
+          "ratio30to2": "yes",
+          "aedPowerOnPromptly": "yes",
+          "aedPadPlacement": "yes",
+          "aedSafeShockDelivery": "yes"
+        },
+        "chokingManagement": {
+          "encouragedCoughing": "yes",
+          "fiveBackBlows": "yes",
+          "fiveAbdominalThrusts": "yes",
+          "alternatesUntilDislodged": "yes",
+          "unconsciousChokingCpr": "yes"
+        },
+        "bleedingWoundCare": {
+          "directPressureApplied": "yes",
+          "elevatedAndImmobilised": "yes",
+          "appliedDressingCorrectly": "yes",
+          "tourniquetWhenIndicated": "yes",
+          "haemostaticDressingApplied": "yes",
+          "treatedForShock": "yes"
+        },
+        "burnsScalds": {
+          "cooledForTwentyMinutes": "yes",
+          "removedJewelleryAndLooseClothing": "yes",
+          "coveredWithClingFilmOrSterileDressing": "yes",
+          "avoidedCreamsOrIce": "no",
+          "referredAppropriately": "yes"
+        },
+        "fracturesSprainsSpinal": {
+          "immobilisedInjuredLimb": "yes",
+          "appliedRiceForSprains": "no",
+          "suspectedSpinalManualSupport": "yes",
+          "performedLogRollWithTeam": "yes",
+          "avoidedUnnecessaryMovement": "yes"
+        },
+        "medicalEmergencies": {
+          "recognisedAnaphylaxis": "yes",
+          "administeredEpiPenSafely": "yes",
+          "assistedAsthmaInhaler": "yes",
+          "managedHypoglycaemia": "yes",
+          "managedSeizureSafely": "yes",
+          "recognisedStrokeFAST": "yes",
+          "recognisedChestPain": "yes"
+        },
+        "recordingReportingHandover": {
+          "accidentBookEntry": "yes",
+          "riddorAwareness": "yes",
+          "structuredHandoffSbar": "yes",
+          "confidentialityMaintained": "yes",
+          "examinerNotes": "Applied cream to a burn; unclear on RIDDOR reporting duty.",
+          "traineeFeedback": "",
+          "debriefNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "needs-development",
+        "criticalFailures": [],
+        "deficiencies": [
+          {
+            "id": "FAW-BURN-NOCREAM",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Avoids applying creams, butter, ice, or bursting blisters.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "FAW-FX-RICE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Applies RICE (Rest, Ice, Compression, Elevation) for sprains and strains.",
+            "critical": false,
+            "status": "no"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "FAW-SS-SAFE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Confirms the scene is safe before approaching the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-PPE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Applies appropriate personal protective equipment (gloves, face shield).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards (traffic, electricity, chemicals).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-BYSTANDERS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Manages bystanders so they do not impede care or compromise safety.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-DANGER",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "D — checks for Danger to self, casualty, and bystanders.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-RESPONSE",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "R — assesses Response using AVPU / shake-and-shout.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-AIRWAY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "A — opens and clears Airway with head tilt-chin lift (or jaw thrust).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-BREATHING",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "B — checks Breathing (look, listen, feel) for up to 10 seconds.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-CIRCULATION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "C — assesses Circulation and obvious life-threatening bleeding.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-RECOVERY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Places unconscious-but-breathing casualty in the recovery position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-COMPRESSIONS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers effective chest compressions at 100-120/min, 5-6 cm depth.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-VENTILATIONS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers effective rescue breaths producing visible chest rise.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-RATIO",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Maintains a 30:2 compression-to-ventilation ratio.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-POWER",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Powers on the AED as soon as it is available and follows voice prompts.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-PADS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Places AED pads in correct anterolateral position on bare chest.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-SAFE-SHOCK",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers shock safely with verbal \"stand clear\" — no unsafe contact.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-COUGH",
+            "step": 5,
+            "category": "Choking",
+            "description": "Encourages an effective cough first when the airway is partially obstructed.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-BACKBLOWS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Delivers up to 5 firm back blows between the shoulder blades.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-THRUSTS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Delivers up to 5 abdominal thrusts (Heimlich) with correct hand position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-ALTERNATE",
+            "step": 5,
+            "category": "Choking",
+            "description": "Alternates back blows and abdominal thrusts until obstruction is dislodged.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-UNCONSCIOUS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Begins CPR immediately if the choking casualty becomes unconscious.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-PRESSURE",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies firm direct pressure to control major external bleeding.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-ELEVATE",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Elevates and immobilises the injured part where appropriate.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-DRESSING",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a sterile dressing and bandage with appropriate pressure.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-TOURNIQUET",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a tourniquet correctly for catastrophic limb haemorrhage when indicated.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-HAEMOSTATIC",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies haemostatic dressing/wound packing for junctional haemorrhage.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-SHOCK",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Treats casualty for shock (lay flat, raise legs, keep warm).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-COOL",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Cools the burn with running cool water for at least 20 minutes.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-REMOVE",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Removes jewellery and loose clothing before swelling — but not stuck items.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-COVER",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Covers the burn loosely with cling film or a sterile non-adherent dressing.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-NOCREAM",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Avoids applying creams, butter, ice, or bursting blisters.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "FAW-BURN-REFER",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Refers serious burns to hospital (size, depth, age, location criteria).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-IMMOB",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Immobilises a suspected fracture in the position found.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-RICE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Applies RICE (Rest, Ice, Compression, Elevation) for sprains and strains.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "FAW-FX-SPINAL-SUPPORT",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Provides manual in-line head/neck support when spinal injury is suspected.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-LOGROLL",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Performs a coordinated log roll with team members where indicated.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-NOMOVE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Avoids unnecessary movement of suspected spinal or unstable fractures.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-ANAPHYLAXIS",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises anaphylaxis (airway / breathing / circulation symptoms).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-EPIPEN",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Administers an EpiPen / adrenaline auto-injector safely into the outer thigh.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-ASTHMA",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Assists casualty with a reliever inhaler during an asthma attack.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-HYPO",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Manages hypoglycaemia with sugary drink/glucose if conscious.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-SEIZURE",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Manages a seizure: protect head, time the seizure, recovery position after.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-STROKE",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises stroke using FAST (Face, Arms, Speech, Time).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-CHEST-PAIN",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises chest pain / suspected MI and provides appropriate care.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 44,
+        "totalRules": 44
+      }
+    },
+    {
+      "name": "fail-critical-tourniquet-and-anaphylaxis",
+      "description": "Failed to apply a tourniquet for catastrophic limb haemorrhage and did not recognise anaphylaxis — two of the engine's eight critical rules fail — expect fail via critical failures, regardless of everything else being correct.",
+      "state": {
+        "traineeDetails": {
+          "firstName": "Sara",
+          "lastName": "Nkosi",
+          "traineeId": "FAW-2026-0212",
+          "role": "first-aider-at-work",
+          "priorCertificationExpiry": "2025-01-15",
+          "sessionDate": "2026-08-27",
+          "examinerName": "Dr Nadia Okafor",
+          "venue": "Training Centre 2"
+        },
+        "sceneAssessmentSafety": {
+          "sceneSafe": "yes",
+          "ppeApplied": "yes",
+          "hazardsIdentified": "yes",
+          "bystandersControlled": "yes"
+        },
+        "primarySurveyDRABC": {
+          "dangerCheck": "yes",
+          "responseCheck": "yes",
+          "airwayManagement": "yes",
+          "breathingCheck": "yes",
+          "circulationAssessment": "yes",
+          "recoveryPositionWhenAppropriate": "yes"
+        },
+        "cprAed": {
+          "effectiveCompressions": "yes",
+          "effectiveVentilations": "yes",
+          "ratio30to2": "yes",
+          "aedPowerOnPromptly": "yes",
+          "aedPadPlacement": "yes",
+          "aedSafeShockDelivery": "yes"
+        },
+        "chokingManagement": {
+          "encouragedCoughing": "yes",
+          "fiveBackBlows": "yes",
+          "fiveAbdominalThrusts": "yes",
+          "alternatesUntilDislodged": "yes",
+          "unconsciousChokingCpr": "yes"
+        },
+        "bleedingWoundCare": {
+          "directPressureApplied": "yes",
+          "elevatedAndImmobilised": "yes",
+          "appliedDressingCorrectly": "yes",
+          "tourniquetWhenIndicated": "no",
+          "haemostaticDressingApplied": "yes",
+          "treatedForShock": "yes"
+        },
+        "burnsScalds": {
+          "cooledForTwentyMinutes": "yes",
+          "removedJewelleryAndLooseClothing": "yes",
+          "coveredWithClingFilmOrSterileDressing": "yes",
+          "avoidedCreamsOrIce": "yes",
+          "referredAppropriately": "yes"
+        },
+        "fracturesSprainsSpinal": {
+          "immobilisedInjuredLimb": "yes",
+          "appliedRiceForSprains": "yes",
+          "suspectedSpinalManualSupport": "yes",
+          "performedLogRollWithTeam": "yes",
+          "avoidedUnnecessaryMovement": "yes"
+        },
+        "medicalEmergencies": {
+          "recognisedAnaphylaxis": "no",
+          "administeredEpiPenSafely": "yes",
+          "assistedAsthmaInhaler": "yes",
+          "managedHypoglycaemia": "yes",
+          "managedSeizureSafely": "yes",
+          "recognisedStrokeFAST": "yes",
+          "recognisedChestPain": "yes"
+        },
+        "recordingReportingHandover": {
+          "accidentBookEntry": "yes",
+          "riddorAwareness": "yes",
+          "structuredHandoffSbar": "yes",
+          "confidentialityMaintained": "yes",
+          "examinerNotes": "Did not apply tourniquet for catastrophic limb bleed; missed anaphylaxis recognition. Immediate remediation required.",
+          "traineeFeedback": "",
+          "debriefNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "fail",
+        "criticalFailures": [
+          {
+            "id": "FAW-BLEED-TOURNIQUET",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a tourniquet correctly for catastrophic limb haemorrhage when indicated.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "FAW-MED-ANAPHYLAXIS",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises anaphylaxis (airway / breathing / circulation symptoms).",
+            "critical": true,
+            "status": "no"
+          }
+        ],
+        "deficiencies": [],
+        "firedRules": [
+          {
+            "id": "FAW-SS-SAFE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Confirms the scene is safe before approaching the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-PPE",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Applies appropriate personal protective equipment (gloves, face shield).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-HAZARDS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Identifies and mitigates environmental hazards (traffic, electricity, chemicals).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-SS-BYSTANDERS",
+            "step": 2,
+            "category": "Scene Safety",
+            "description": "Manages bystanders so they do not impede care or compromise safety.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-DANGER",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "D — checks for Danger to self, casualty, and bystanders.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-RESPONSE",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "R — assesses Response using AVPU / shake-and-shout.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-AIRWAY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "A — opens and clears Airway with head tilt-chin lift (or jaw thrust).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-BREATHING",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "B — checks Breathing (look, listen, feel) for up to 10 seconds.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-CIRCULATION",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "C — assesses Circulation and obvious life-threatening bleeding.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-PS-RECOVERY",
+            "step": 3,
+            "category": "Primary Survey",
+            "description": "Places unconscious-but-breathing casualty in the recovery position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-COMPRESSIONS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers effective chest compressions at 100-120/min, 5-6 cm depth.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-VENTILATIONS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers effective rescue breaths producing visible chest rise.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CPR-RATIO",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Maintains a 30:2 compression-to-ventilation ratio.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-POWER",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Powers on the AED as soon as it is available and follows voice prompts.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-PADS",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Places AED pads in correct anterolateral position on bare chest.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-AED-SAFE-SHOCK",
+            "step": 4,
+            "category": "CPR & AED",
+            "description": "Delivers shock safely with verbal \"stand clear\" — no unsafe contact.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-COUGH",
+            "step": 5,
+            "category": "Choking",
+            "description": "Encourages an effective cough first when the airway is partially obstructed.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-BACKBLOWS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Delivers up to 5 firm back blows between the shoulder blades.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-THRUSTS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Delivers up to 5 abdominal thrusts (Heimlich) with correct hand position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-ALTERNATE",
+            "step": 5,
+            "category": "Choking",
+            "description": "Alternates back blows and abdominal thrusts until obstruction is dislodged.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-CHOKE-UNCONSCIOUS",
+            "step": 5,
+            "category": "Choking",
+            "description": "Begins CPR immediately if the choking casualty becomes unconscious.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-PRESSURE",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies firm direct pressure to control major external bleeding.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-ELEVATE",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Elevates and immobilises the injured part where appropriate.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-DRESSING",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a sterile dressing and bandage with appropriate pressure.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-TOURNIQUET",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies a tourniquet correctly for catastrophic limb haemorrhage when indicated.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "FAW-BLEED-HAEMOSTATIC",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Applies haemostatic dressing/wound packing for junctional haemorrhage.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BLEED-SHOCK",
+            "step": 6,
+            "category": "Bleeding",
+            "description": "Treats casualty for shock (lay flat, raise legs, keep warm).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-COOL",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Cools the burn with running cool water for at least 20 minutes.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-REMOVE",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Removes jewellery and loose clothing before swelling — but not stuck items.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-COVER",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Covers the burn loosely with cling film or a sterile non-adherent dressing.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-NOCREAM",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Avoids applying creams, butter, ice, or bursting blisters.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-BURN-REFER",
+            "step": 7,
+            "category": "Burns & Scalds",
+            "description": "Refers serious burns to hospital (size, depth, age, location criteria).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-IMMOB",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Immobilises a suspected fracture in the position found.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-RICE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Applies RICE (Rest, Ice, Compression, Elevation) for sprains and strains.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-SPINAL-SUPPORT",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Provides manual in-line head/neck support when spinal injury is suspected.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-LOGROLL",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Performs a coordinated log roll with team members where indicated.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-FX-NOMOVE",
+            "step": 8,
+            "category": "Fractures & Spinal",
+            "description": "Avoids unnecessary movement of suspected spinal or unstable fractures.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-ANAPHYLAXIS",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises anaphylaxis (airway / breathing / circulation symptoms).",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "FAW-MED-EPIPEN",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Administers an EpiPen / adrenaline auto-injector safely into the outer thigh.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-ASTHMA",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Assists casualty with a reliever inhaler during an asthma attack.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-HYPO",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Manages hypoglycaemia with sugary drink/glucose if conscious.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-SEIZURE",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Manages a seizure: protect head, time the seizure, recovery position after.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-STROKE",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises stroke using FAST (Face, Arms, Speech, Time).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "FAW-MED-CHEST-PAIN",
+            "step": 9,
+            "category": "Medical Emergencies",
+            "description": "Recognises chest pain / suspected MI and provides appropriate care.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 44,
+        "totalRules": 44
+      }
+    }
+  ]
+}
