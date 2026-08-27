@@ -68,7 +68,6 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, _base: &Path) -> Result<()> {
-        let _ = base;
         db::seed::<users::ActiveModel>(
             &ctx.db,
             &format!("{}/src/hospital_daily_monitoring_checklist/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),

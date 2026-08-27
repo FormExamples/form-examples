@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""bin/loco-seed-base-stray-usage-fix — remove the stray `let _ = base;`
+line left behind in `App::seed()` after the route-nesting-layout move.
+
+When each form's fixtures moved from a caller-supplied `base` path to
+`src/<form_snake_case>/fixtures/` (resolved via `env!("CARGO_MANIFEST_DIR")`
+instead — see the route-layout convention in AGENTS.md), 11 forms' hand-
+edited `seed()` picked up an explanatory comment plus a `let _ = base;`
+line to silence the then-unused `base` parameter. `bin/loco-seed-base-
+rename` later renamed that same parameter to `_base` fleet-wide (the
+`_`-prefix convention already silences the warning on its own), but its
+mechanical sed-style rename touched only the parameter's declaration,
+not this stray body reference — so these 11 files were left with a
+`let _ = base;` referring to a binding that no longer exists, a hard
+compile error (E0425 `cannot find value 'base' in this scope`), not a
+lint. Found via a real, verified CI run: Rust CI shard 5/8 failed
+compiling `dietic_assessment` on exactly this error.
+
+The `_base` parameter itself is untouched (still intentionally unused,
+still correctly prefixed) — only the now-invalid `let _ = base;` line is
+removed; the explanatory comment above it, where present, stays.
+
+This is a one-shot fix, not an ongoing convention: no scaffold or other
+generator produces this stray line, so `--check` exists purely as a
+completeness/regression gate, not a routine CI drift detector.
+
+Usage:
+  bin/loco-seed-base-stray-usage-fix <slug>...        # named forms
+  bin/loco-seed-base-stray-usage-fix --all             # every form's Loco crate
+  bin/loco-seed-base-stray-usage-fix --dry-run --all   # show what would change
+  bin/loco-seed-base-stray-usage-fix --check --all     # drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+STRAY_LINE = "        let _ = base;\n"
+
+
+def app_rs_path(form: pathlib.Path) -> pathlib.Path | None:
+    src = form / "back-end-with-loco" / "src"
+    if not src.is_dir():
+        return None
+    for child in src.iterdir():
+        candidate = child / "app.rs"
+        if candidate.is_file():
+            return candidate
+    return None
+
+
+def process_form(form: pathlib.Path, apply: bool) -> bool:
+    path = app_rs_path(form)
+    if path is None:
+        return False
+    original = path.read_text()
+    if STRAY_LINE not in original:
+        return False
+    if apply:
+        path.write_text(original.replace(STRAY_LINE, ""))
+    return True
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Remove the stray `let _ = base;` line left in App::seed() "
+        "after the _base rename."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(
+            p for p in FORMS.iterdir() if (p / "back-end-with-loco").is_dir()
+        )
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[str] = []
+
+    for form in forms:
+        back_end = form / "back-end-with-loco"
+        if not back_end.is_dir():
+            print(f"no such back end: {back_end}", file=sys.stderr)
+            return 2
+        if process_form(form, apply):
+            drifted.append(form.name)
+
+    if args.check:
+        if drifted:
+            print(
+                f"stray `let _ = base;` in {len(drifted)} form(s) "
+                f"(run: bin/loco-seed-base-stray-usage-fix --all)"
+            )
+            for name in drifted[:10]:
+                print(f"  {name}")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"no stray `let _ = base;` in any form ({len(forms)} forms)")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    print(f"{len(drifted)} form(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

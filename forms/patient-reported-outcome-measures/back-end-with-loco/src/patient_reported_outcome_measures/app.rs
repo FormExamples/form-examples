@@ -68,7 +68,6 @@ impl Hooks for App {
         Ok(())
     }
     async fn seed(ctx: &AppContext, _base: &Path) -> Result<()> {
-        let _ = base;
         db::seed::<users::ActiveModel>(
             &ctx.db,
             &format!(

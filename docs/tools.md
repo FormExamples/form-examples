@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-75 tools.
+76 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -39,6 +39,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-migration-nullability`](#loco-migration-nullability)
 - [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
 - [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
+- [`bin/loco-seed-base-stray-usage-fix`](#loco-seed-base-stray-usage-fix)
 - [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/normalize`](#normalize)
@@ -1044,6 +1045,41 @@ Usage:
   bin/loco-seed-base-rename --all            # every form's Loco crate
   bin/loco-seed-base-rename --dry-run --all  # show what would change
   bin/loco-seed-base-rename --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-seed-base-stray-usage-fix"><code>bin/loco-seed-base-stray-usage-fix</code></h2>
+
+```text
+bin/loco-seed-base-stray-usage-fix — remove the stray `let _ = base;`
+line left behind in `App::seed()` after the route-nesting-layout move.
+
+When each form's fixtures moved from a caller-supplied `base` path to
+`src/<form_snake_case>/fixtures/` (resolved via `env!("CARGO_MANIFEST_DIR")`
+instead — see the route-layout convention in AGENTS.md), 11 forms' hand-
+edited `seed()` picked up an explanatory comment plus a `let _ = base;`
+line to silence the then-unused `base` parameter. `bin/loco-seed-base-
+rename` later renamed that same parameter to `_base` fleet-wide (the
+`_`-prefix convention already silences the warning on its own), but its
+mechanical sed-style rename touched only the parameter's declaration,
+not this stray body reference — so these 11 files were left with a
+`let _ = base;` referring to a binding that no longer exists, a hard
+compile error (E0425 `cannot find value 'base' in this scope`), not a
+lint. Found via a real, verified CI run: Rust CI shard 5/8 failed
+compiling `dietic_assessment` on exactly this error.
+
+The `_base` parameter itself is untouched (still intentionally unused,
+still correctly prefixed) — only the now-invalid `let _ = base;` line is
+removed; the explanatory comment above it, where present, stays.
+
+This is a one-shot fix, not an ongoing convention: no scaffold or other
+generator produces this stray line, so `--check` exists purely as a
+completeness/regression gate, not a routine CI drift detector.
+
+Usage:
+  bin/loco-seed-base-stray-usage-fix <slug>...        # named forms
+  bin/loco-seed-base-stray-usage-fix --all             # every form's Loco crate
+  bin/loco-seed-base-stray-usage-fix --dry-run --all   # show what would change
+  bin/loco-seed-base-stray-usage-fix --check --all     # drift check (non-zero on drift)
 ```
 
 <h2 id="loco-test-auth-header-fix"><code>bin/loco-test-auth-header-fix</code></h2>

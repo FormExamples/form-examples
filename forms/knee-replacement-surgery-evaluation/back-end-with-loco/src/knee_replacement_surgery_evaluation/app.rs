@@ -71,7 +71,6 @@ impl Hooks for App {
         // The fixtures moved to src/<form_snake_case>/fixtures/ when the crate
         // was put into the canonical route layout, so resolve them from the
         // manifest directory rather than from the caller-supplied base path.
-        let _ = base;
         db::seed::<users::ActiveModel>(
             &ctx.db,
             &format!(
