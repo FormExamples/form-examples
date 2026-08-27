@@ -117,6 +117,12 @@ or a settings change, deliberately.
   per [`SECURITY.md`](SECURITY.md)).
 - **Description and topics**: kept in line with the fact sheet in
   [`NEWS.md`](NEWS.md).
+- **Pages**: `build_type: workflow` (GitHub Actions builds and deploys, per
+  [`.github/workflows/deploy-formexamples.yml`](.github/workflows/deploy-formexamples.yml))
+  — not on by default for a repository; without it the deploy job fails
+  with "Get Pages site failed" regardless of how correct the workflow is.
+  Enable via Settings → Pages → Build and deployment → Source, or
+  `gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow`.
 
 ## Changing this document
 
