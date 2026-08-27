@@ -10,7 +10,7 @@
 <cervical_dilatation_cm>0.0</cervical_dilatation_cm>
 <descent_fifths>0.0</descent_fifths>
 <contractions_per_10_min>0.0</contractions_per_10_min>
-<contraction_duration_band><20s</contraction_duration_band>
+<contraction_duration_band>&lt;20s</contraction_duration_band>
 <contraction_strength>mild</contraction_strength>
 <fetal_heart_rate>1</fetal_heart_rate>
 <liquor_state>intact</liquor_state>

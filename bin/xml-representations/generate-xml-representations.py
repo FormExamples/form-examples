@@ -9,6 +9,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from xml.sax.saxutils import escape as xml_escape
 
 FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
 
@@ -338,7 +339,7 @@ def generate_xml(table_name, columns, all_tables):
             if value is None:
                 value = table_uuid
 
-        lines.append(f"<{name}>{value}</{name}>")
+        lines.append(f"<{name}>{xml_escape(str(value))}</{name}>")
 
     lines.append(f"</{table_name}>")
 
@@ -391,6 +392,18 @@ def process_form(form_dir):
         dtd_path.write_text(dtd_content, encoding="utf-8")
         xml_path.write_text(xml_content, encoding="utf-8")
         count += 1
+
+    # Remove stale .xml/.dtd files left over from a renamed or dropped table.
+    # A generator that only ever adds files lets renames accumulate orphans
+    # forever — this directory's committed content must equal exactly what
+    # the current sql/ produces, which is also what the CI drift check
+    # ("Fail if any generator produced an uncommitted diff") assumes.
+    expected = {f"{name}.xml" for name, _ in all_tables} | {
+        f"{name}.dtd" for name, _ in all_tables
+    }
+    for existing in list(xml_dir.glob("*.xml")) + list(xml_dir.glob("*.dtd")):
+        if existing.name not in expected:
+            existing.unlink()
 
     return count
 

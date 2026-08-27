@@ -1,9 +1,0 @@
-<!ELEMENT assessment_clinical (id,assessment_id,presenting_complaint,diagnosis,treatment_delivered,outcome_classification,created_at,updated_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
-<!ELEMENT presenting_complaint (#PCDATA)>
-<!ELEMENT diagnosis (#PCDATA)>
-<!ELEMENT treatment_delivered (#PCDATA)>
-<!ELEMENT outcome_classification (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

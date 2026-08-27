@@ -1,9 +1,0 @@
-<!ELEMENT grading_fired_rule (id,grade_id,rule_id,category,description,severity_level,created_at,updated_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT grade_id (#PCDATA)>
-<!ELEMENT rule_id (#PCDATA)>
-<!ELEMENT category (#PCDATA)>
-<!ELEMENT description (#PCDATA)>
-<!ELEMENT severity_level (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

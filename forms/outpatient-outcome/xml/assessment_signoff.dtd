@@ -1,9 +1,0 @@
-<!ELEMENT assessment_signoff (id,assessment_id,reporting_clinician_id,reporting_clinician_name,reporting_clinician_role,signed_off_at,created_at,updated_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
-<!ELEMENT reporting_clinician_id (#PCDATA)>
-<!ELEMENT reporting_clinician_name (#PCDATA)>
-<!ELEMENT reporting_clinician_role (#PCDATA)>
-<!ELEMENT signed_off_at (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

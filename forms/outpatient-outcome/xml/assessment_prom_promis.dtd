@@ -1,3 +1,0 @@
-<!ELEMENT assessment_prom_promis (id,assessment_id)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>

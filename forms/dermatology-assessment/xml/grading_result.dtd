@@ -1,9 +1,0 @@
-<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,dlqi_score,impact_level,graded_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>
-<!ELEMENT deleted_at (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
-<!ELEMENT dlqi_score (#PCDATA)>
-<!ELEMENT impact_level (#PCDATA)>
-<!ELEMENT graded_at (#PCDATA)>

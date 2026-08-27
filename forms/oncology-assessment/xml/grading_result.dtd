@@ -1,9 +1,0 @@
-<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,ecog_score,ecog_category,graded_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>
-<!ELEMENT deleted_at (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
-<!ELEMENT ecog_score (#PCDATA)>
-<!ELEMENT ecog_category (#PCDATA)>
-<!ELEMENT graded_at (#PCDATA)>

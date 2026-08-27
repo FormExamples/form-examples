@@ -1,9 +1,0 @@
-<!ELEMENT assessment_followup (id,assessment_id,disposition,next_appointment_date,onward_referral_specialty,followup_notes,created_at,updated_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
-<!ELEMENT disposition (#PCDATA)>
-<!ELEMENT next_appointment_date (#PCDATA)>
-<!ELEMENT onward_referral_specialty (#PCDATA)>
-<!ELEMENT followup_notes (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

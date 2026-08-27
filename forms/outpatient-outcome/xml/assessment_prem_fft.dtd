@@ -1,7 +1,0 @@
-<!ELEMENT assessment_prem_fft (id,assessment_id,fft_response,fft_comment,created_at,updated_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
-<!ELEMENT fft_response (#PCDATA)>
-<!ELEMENT fft_comment (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

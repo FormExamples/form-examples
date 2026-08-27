@@ -7,7 +7,7 @@
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
 <bhutani_bilirubin_nomogram_id>770e8400-e29b-41d4-a716-446655440002</bhutani_bilirubin_nomogram_id>
 <risk_zone>low</risk_zone>
-<percentile_band><40</percentile_band>
+<percentile_band>&lt;40</percentile_band>
 <phototherapy_threshold_umol_l>0.0</phototherapy_threshold_umol_l>
 <exchange_threshold_umol_l>0.0</exchange_threshold_umol_l>
 <above_phototherapy_threshold>yes</above_phototherapy_threshold>

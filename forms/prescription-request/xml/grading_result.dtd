@@ -1,9 +1,0 @@
-<!ELEMENT grade (id,created_at,updated_at,deleted_at,prescription_request_id,priority_level,rule_count,graded_at)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>
-<!ELEMENT deleted_at (#PCDATA)>
-<!ELEMENT prescription_request_id (#PCDATA)>
-<!ELEMENT priority_level (#PCDATA)>
-<!ELEMENT rule_count (#PCDATA)>
-<!ELEMENT graded_at (#PCDATA)>
