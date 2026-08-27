@@ -11,7 +11,7 @@ export default defineConfig({
 			$lib: path.resolve(__dirname, 'src/lib'),
 			// SvelteKit's `$app/*` ambient modules are not available under plain
 			// Vitest; stub `$app/environment` so engine tests can import the store.
-			'$app/environment': path.resolve(__dirname, 'src/lib/test/app-environment-mock.ts')
+			'$app/env': path.resolve(__dirname, 'src/lib/test/app-environment-mock.ts')
 		}
 	},
 	test: {

@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-74 tools.
+75 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -55,6 +55,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
 - [`bin/svelte-text-size-select-refactor`](#svelte-text-size-select-refactor)
 - [`bin/svelte-theme-css-sync`](#svelte-theme-css-sync)
+- [`bin/svelte-vitest-app-env-alias-fix`](#svelte-vitest-app-env-alias-fix)
 - [`bin/sync-from-skel-to-forms`](#sync-from-skel-to-forms)
 - [`bin/test`](#test)
 - [`bin/test-e2e`](#test-e2e)
@@ -1546,6 +1547,51 @@ Usage:
   bin/svelte-theme-css-sync --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-vitest-app-env-alias-fix"><code>bin/svelte-vitest-app-env-alias-fix</code></h2>
+
+```text
+bin/svelte-vitest-app-env-alias-fix — fix the `$app/environment` vs
+`$app/env` alias-key mismatch in hand-written `vitest.config.ts` files.
+
+`@sveltejs/kit@3.0.0-next.23` (the fleet-standard pin) renamed the
+`browser`/`dev`/`building`/`version` module from `$app/environment` to
+`$app/env`, keeping `$app/environment` only as a deprecated runtime-only
+compatibility shim (`export * from '../env/index.js'`, with a
+dev-time `console.warn`) — it carries no ambient type declaration at all
+in this prerelease, so `svelte-check` fails outright on any source file
+that still imports it: "Cannot find module '$app/environment' or its
+corresponding type declarations". Every form's actual source already
+imports the correct, current `$app/env` (confirmed fleet-wide; `svelte-
+check`, `vite build`, and `svelte-kit sync` all resolve it cleanly).
+
+A handful of forms' reactive stores are also covered by plain Vitest
+(not the full SvelteKit test integration, which has no virtual-module
+runtime outside a real SvelteKit app), so their `vitest.config.ts` stubs
+out the browser/dev/building/version exports via a `resolve.alias` entry
+pointing at a local stub file. That alias key was written against the
+pre-rename module path `'$app/environment'`, so it never matches what
+the source code actually imports (`$app/env`) — Vite falls through to
+try resolving the literal bare specifier `$app/env`, which does not
+exist for plain Vitest (no SvelteKit plugin, no runtime), and fails with
+`Cannot find module '$app/env'`. Fixed by renaming the alias key only;
+the stub file path is untouched. Confirmed fleet-wide: exactly the
+string `'$app/environment':` at the start of an alias entry, in 7 of the
+332 forms whose `vitest.config.ts` stubs this module at all — the other
+325 don't exercise `browser`/`dev`/etc. from a Vitest-covered file, so
+they never needed the alias and are unaffected either way.
+
+This is an ongoing convention, not a one-shot migration: a newly
+authored Vitest suite that stubs `$app/environment` for its store tests
+would reintroduce the same mismatch, so `--check` is the CI drift
+detector.
+
+Usage:
+  bin/svelte-vitest-app-env-alias-fix <slug>...        # named forms
+  bin/svelte-vitest-app-env-alias-fix --all            # every form with a vitest.config.ts
+  bin/svelte-vitest-app-env-alias-fix --dry-run --all  # show what would change
+  bin/svelte-vitest-app-env-alias-fix --check --all    # CI drift check (non-zero on drift)
 ```
 
 <h2 id="sync-from-skel-to-forms"><code>bin/sync-from-skel-to-forms</code></h2>
