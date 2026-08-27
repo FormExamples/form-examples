@@ -111,6 +111,14 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 - `bin/test-vendored-uniformity` — proves the vendored theme catalogues and
   Lily Svelte helpers are byte-identical across all 355 forms (the
   CI-checkable half of the checkout-reading sync tools' invariant).
+- Personas for `medical-records-release-permission` (complete and valid;
+  nearly-complete on three missing signature/acknowledgement fields — and
+  a correction recorded in the persona file itself: the engine's
+  completeness and validation labels are not fully independent axes,
+  since missing required fields populate the same firedRules list format
+  errors do; complete-but-minor-issues on malformed emails and an
+  end-before-start authorisation period). This is the second of the 4
+  forms unblocked by the form-validator.js loader fix above.
 - Personas for `employee-onboarding-checklist` (complete, low risk; a
   critical DBS-not-started case regardless of otherwise-high completion; a
   high-risk case on unsatisfactory references and a pending DBS) and

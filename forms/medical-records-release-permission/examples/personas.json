@@ -1,0 +1,267 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateForm",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Two independent axes: completeness (required fields present) and validation (format/logic issues) \u2014 a form can be complete and still have issues, or incomplete with zero issues. Correction: firedRules mixes missing-required-field entries with format/logic error entries, so validationStatus is not purely independent of completeness \u2014 a form with missing required fields will show validation issues too.",
+  "personas": [
+    {
+      "name": "complete-and-valid",
+      "description": "Every required field present with well-formed emails and a valid date range \u2014 expect Complete / Valid, zero fired rules.",
+      "state": {
+        "patientInformation": {
+          "firstName": "Grace",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1950-09-27",
+          "sex": "female",
+          "address": "9 Cypress Grove, Leeds LS4 2QR",
+          "phone": "0113 496 0871",
+          "email": "grace.okonkwo@example.com",
+          "nhsNumber": "943 476 5938",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice"
+        },
+        "authorizedRecipient": {
+          "recipientName": "Dr Michael Osei",
+          "recipientOrganization": "City Insurance Medical Assessors",
+          "recipientAddress": "40 Corn Exchange, Leeds",
+          "recipientPhone": "0113 496 2200",
+          "recipientEmail": "m.osei@example-assessors.co.uk",
+          "recipientRole": "medical-examiner"
+        },
+        "recordsToRelease": {
+          "recordTypes": [
+            "gp-records",
+            "hospital-discharge-summaries"
+          ],
+          "specificDateRange": "no",
+          "dateFrom": "",
+          "dateTo": "",
+          "specificRecordDetails": "Records relating to knee surgery 2024-2026"
+        },
+        "purposeOfRelease": {
+          "purpose": "insurance-claim",
+          "otherDetails": ""
+        },
+        "authorizationPeriod": {
+          "startDate": "2026-08-27",
+          "endDate": "2026-11-27",
+          "singleUse": "no"
+        },
+        "restrictionsLimitations": {
+          "excludeHIV": "no",
+          "excludeSubstanceAbuse": "no",
+          "excludeMentalHealth": "no",
+          "excludeGeneticInfo": "no",
+          "excludeSTI": "no",
+          "additionalRestrictions": ""
+        },
+        "patientRights": {
+          "acknowledgedRightToRevoke": "yes",
+          "acknowledgedNoChargeForAccess": "yes",
+          "acknowledgedDataProtection": "yes"
+        },
+        "signatureConsent": {
+          "patientSignatureConfirmed": "yes",
+          "signatureDate": "2026-08-27",
+          "witnessName": "Helen Marsh",
+          "witnessSignatureConfirmed": "yes",
+          "witnessDate": "2026-08-27",
+          "parentGuardianName": ""
+        }
+      },
+      "expected": {
+        "completenessScore": 100,
+        "completenessStatusLabel": "Complete",
+        "validationStatusLabel": "Valid",
+        "firedRules": [],
+        "completedFields": 16,
+        "totalFields": 16
+      }
+    },
+    {
+      "name": "nearly-complete-minor-issues",
+      "description": "Three required fields never completed (patient signature, its date, and the data-protection acknowledgement) \u2014 expect Nearly Complete on completeness (81%). Missing required fields populate the SAME firedRules list format errors do, so validationStatus also degrades to Minor Issues here: the two labels are computed from overlapping data, not fully independent axes (corrected after the first --update showed this).",
+      "state": {
+        "patientInformation": {
+          "firstName": "Walter",
+          "lastName": "Byrne",
+          "dateOfBirth": "1950-09-27",
+          "sex": "female",
+          "address": "9 Cypress Grove, Leeds LS4 2QR",
+          "phone": "0113 496 0871",
+          "email": "grace.okonkwo@example.com",
+          "nhsNumber": "943 476 5938",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice"
+        },
+        "authorizedRecipient": {
+          "recipientName": "Dr Michael Osei",
+          "recipientOrganization": "City Insurance Medical Assessors",
+          "recipientAddress": "40 Corn Exchange, Leeds",
+          "recipientPhone": "0113 496 2200",
+          "recipientEmail": "m.osei@example-assessors.co.uk",
+          "recipientRole": "medical-examiner"
+        },
+        "recordsToRelease": {
+          "recordTypes": [
+            "gp-records",
+            "hospital-discharge-summaries"
+          ],
+          "specificDateRange": "no",
+          "dateFrom": "",
+          "dateTo": "",
+          "specificRecordDetails": "Records relating to knee surgery 2024-2026"
+        },
+        "purposeOfRelease": {
+          "purpose": "insurance-claim",
+          "otherDetails": ""
+        },
+        "authorizationPeriod": {
+          "startDate": "2026-08-27",
+          "endDate": "2026-11-27",
+          "singleUse": "no"
+        },
+        "restrictionsLimitations": {
+          "excludeHIV": "no",
+          "excludeSubstanceAbuse": "no",
+          "excludeMentalHealth": "no",
+          "excludeGeneticInfo": "no",
+          "excludeSTI": "no",
+          "additionalRestrictions": ""
+        },
+        "patientRights": {
+          "acknowledgedRightToRevoke": "yes",
+          "acknowledgedNoChargeForAccess": "yes",
+          "acknowledgedDataProtection": ""
+        },
+        "signatureConsent": {
+          "patientSignatureConfirmed": "",
+          "signatureDate": "",
+          "witnessName": "",
+          "witnessSignatureConfirmed": "",
+          "witnessDate": "",
+          "parentGuardianName": ""
+        }
+      },
+      "expected": {
+        "completenessScore": 81,
+        "completenessStatusLabel": "Nearly Complete",
+        "validationStatusLabel": "Minor Issues",
+        "firedRules": [
+          {
+            "id": "RULE-PTR-002",
+            "domain": "patientRights",
+            "description": "Patient must acknowledge data protection rights",
+            "score": 0
+          },
+          {
+            "id": "RULE-SC-001",
+            "domain": "signatureConsent",
+            "description": "Patient signature confirmation is required",
+            "score": 0
+          },
+          {
+            "id": "RULE-SC-002",
+            "domain": "signatureConsent",
+            "description": "Signature date is required",
+            "score": 0
+          }
+        ],
+        "completedFields": 13,
+        "totalFields": 16
+      }
+    },
+    {
+      "name": "complete-but-minor-issues",
+      "description": "Every required field present, but both email addresses are malformed and the authorisation end date precedes its start date \u2014 expect Complete completeness with Minor Issues validation (3 fired format/logic rules), demonstrating the axes can diverge the other way.",
+      "state": {
+        "patientInformation": {
+          "firstName": "Priya",
+          "lastName": "Anand",
+          "dateOfBirth": "1950-09-27",
+          "sex": "female",
+          "address": "9 Cypress Grove, Leeds LS4 2QR",
+          "phone": "0113 496 0871",
+          "email": "not-an-email",
+          "nhsNumber": "943 476 5938",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice"
+        },
+        "authorizedRecipient": {
+          "recipientName": "Dr Michael Osei",
+          "recipientOrganization": "City Insurance Medical Assessors",
+          "recipientAddress": "40 Corn Exchange, Leeds",
+          "recipientPhone": "0113 496 2200",
+          "recipientEmail": "also-bad",
+          "recipientRole": "medical-examiner"
+        },
+        "recordsToRelease": {
+          "recordTypes": [
+            "gp-records",
+            "hospital-discharge-summaries"
+          ],
+          "specificDateRange": "no",
+          "dateFrom": "",
+          "dateTo": "",
+          "specificRecordDetails": "Records relating to knee surgery 2024-2026"
+        },
+        "purposeOfRelease": {
+          "purpose": "insurance-claim",
+          "otherDetails": ""
+        },
+        "authorizationPeriod": {
+          "startDate": "2026-11-01",
+          "endDate": "2026-09-01",
+          "singleUse": "no"
+        },
+        "restrictionsLimitations": {
+          "excludeHIV": "no",
+          "excludeSubstanceAbuse": "no",
+          "excludeMentalHealth": "no",
+          "excludeGeneticInfo": "no",
+          "excludeSTI": "no",
+          "additionalRestrictions": ""
+        },
+        "patientRights": {
+          "acknowledgedRightToRevoke": "yes",
+          "acknowledgedNoChargeForAccess": "yes",
+          "acknowledgedDataProtection": "yes"
+        },
+        "signatureConsent": {
+          "patientSignatureConfirmed": "yes",
+          "signatureDate": "2026-08-27",
+          "witnessName": "Helen Marsh",
+          "witnessSignatureConfirmed": "yes",
+          "witnessDate": "2026-08-27",
+          "parentGuardianName": ""
+        }
+      },
+      "expected": {
+        "completenessScore": 100,
+        "completenessStatusLabel": "Complete",
+        "validationStatusLabel": "Minor Issues",
+        "firedRules": [
+          {
+            "id": "RULE-FMT-001",
+            "domain": "patientInformation",
+            "description": "Patient email format is invalid",
+            "score": 0
+          },
+          {
+            "id": "RULE-FMT-002",
+            "domain": "authorizedRecipient",
+            "description": "Recipient email format is invalid",
+            "score": 0
+          },
+          {
+            "id": "RULE-FMT-003",
+            "domain": "authorizationPeriod",
+            "description": "Authorization end date must be after start date",
+            "score": 0
+          }
+        ],
+        "completedFields": 16,
+        "totalFields": 16
+      }
+    }
+  ]
+}
