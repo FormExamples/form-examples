@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-71 tools.
+73 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -38,6 +38,8 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-migration-defaults`](#loco-migration-defaults)
 - [`bin/loco-migration-nullability`](#loco-migration-nullability)
 - [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
+- [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
+- [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/normalize`](#normalize)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
@@ -1005,6 +1007,72 @@ Usage:
   bin/loco-rs-1-migration --all            # every form's Loco crate
   bin/loco-rs-1-migration --dry-run --all  # show what would change
   bin/loco-rs-1-migration --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-seed-base-rename"><code>bin/loco-seed-base-rename</code></h2>
+
+```text
+bin/loco-seed-base-rename — rename the unused `base` param in every
+crate's `App::seed()` to `_base`.
+
+`loco new` scaffolds `async fn seed(ctx: &AppContext, base: &Path)` in
+src/<slug>/app.rs and never uses `base` in the body (fixtures load via
+`env!("CARGO_MANIFEST_DIR")` instead) — so `cargo clippy --all-targets --
+-D warnings` fails every crate that still carries the bare name, which is
+346 of 355. This is a genuine, fleet-wide CI-breaking bug: the CI Rust job
+has never gone green on this repository (checked against its run history).
+`register_tasks` right above `seed` gets `#[allow(unused_variables)]` from
+the same scaffold template for the identical reason; `seed`'s parameter is
+simply renamed instead, matching the 9 crates that were already correct
+(6 hand-authored with `_ctx, _base`; 3 fixed ad hoc during earlier pedantic
+cleanup).
+
+Confirmed fleet-wide before writing this tool: `base` appears exactly once
+per file (the parameter declaration itself), so the rename is unconditionally
+safe — nothing else in `app.rs` references it.
+
+This is an ongoing convention, not a one-shot migration: `loco new` re-creates
+the same bare `base` on every newly scaffolded crate, so the generated
+`back-end-with-loco-setup` script calls this tool as a final step (after
+`bin/loco-forbid-unsafe`); `--check` is the CI drift detector that catches a
+crate which skipped it.
+
+Usage:
+  bin/loco-seed-base-rename <slug>...        # named forms
+  bin/loco-seed-base-rename --all            # every form's Loco crate
+  bin/loco-seed-base-rename --dry-run --all  # show what would change
+  bin/loco-seed-base-rename --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-test-auth-header-fix"><code>bin/loco-test-auth-header-fix</code></h2>
+
+```text
+bin/loco-test-auth-header-fix — drop the redundant `&` in every crate's
+test `auth_header()` helper.
+
+`loco new` scaffolds `tests/requests/prepare_data.rs` with
+`HeaderValue::from_str(&format!("Bearer {}", &token))` — the `&token` is
+redundant (`token: &str` is already a reference) and
+`clippy::useless_borrows_in_formatting` fails every crate that still
+carries it under `-D warnings`. Confirmed fleet-wide before writing this
+tool: `&token` appears exactly once per file, so the fix is unconditionally
+safe.
+
+Discovered alongside bin/loco-seed-base-rename while diagnosing why CI's
+Rust job has never gone green on this repository: both are `loco new`
+scaffold boilerplate, never touched by any of our generators, so the bug
+is identical and invariant across the fleet.
+
+This is an ongoing convention, not a one-shot migration: `loco new`
+re-creates the same redundant `&token` on every newly scaffolded crate, so
+the generated `back-end-with-loco-setup` script calls this tool as a final
+step; `--check` is the CI drift detector.
+
+Usage:
+  bin/loco-test-auth-header-fix <slug>...        # named forms
+  bin/loco-test-auth-header-fix --all            # every form's Loco crate
+  bin/loco-test-auth-header-fix --dry-run --all  # show what would change
+  bin/loco-test-auth-header-fix --check --all    # CI drift check (non-zero on drift)
 ```
 
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>

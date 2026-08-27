@@ -104,3 +104,9 @@ cd ..
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.
 "$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"
+
+# Fix two loco-new scaffold defaults that fail clippy -D warnings:
+# App::seed()'s unused base param, and the test auth_header() helper's
+# redundant &token.
+"$(git rev-parse --show-toplevel)/bin/loco-seed-base-rename" "${form_kebab_case}"
+"$(git rev-parse --show-toplevel)/bin/loco-test-auth-header-fix" "${form_kebab_case}"

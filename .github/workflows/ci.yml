@@ -397,13 +397,20 @@ jobs:
         shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '9'
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
-          cache: npm
-          cache-dependency-path: forms/*/front-end-with-svelte/package-lock.json
+          cache: pnpm
+          cache-dependency-path: forms/*/front-end-with-svelte/pnpm-lock.yaml
       - name: check / build / vitest each front-end in this shard
         run: |
+          # Each front-end-with-svelte is its own pnpm project (own
+          # pnpm-lock.yaml + pnpm-workspace.yaml) — npm ci has no lockfile
+          # here and always fails; pnpm install --frozen-lockfile is the
+          # equivalent gate against pnpm-lock.yaml.
           fail=0
           CHANGED="${{ needs.changes.outputs.forms }}"
           ALL="${{ needs.changes.outputs.all }}"
@@ -415,10 +422,10 @@ jobs:
             [ -f "$app/package.json" ] || continue
             echo "::group::$slug"
             ( cd "$app" \
-              && npm ci --no-audit --no-fund \
-              && npm run check \
-              && npm run build \
-              && npx vitest run ) || { echo "::error::$slug failed"; fail=1; }
+              && pnpm install --frozen-lockfile \
+              && pnpm run check \
+              && pnpm run build \
+              && pnpm exec vitest run ) || { echo "::error::$slug failed"; fail=1; }
             echo "::endgroup::"
           done
           exit $fail

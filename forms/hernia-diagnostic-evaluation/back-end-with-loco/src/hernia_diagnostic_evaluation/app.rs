@@ -67,7 +67,7 @@ impl Hooks for App {
         truncate_table(&ctx.db, users::Entity).await?;
         Ok(())
     }
-    async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
+    async fn seed(ctx: &AppContext, _base: &Path) -> Result<()> {
         // The fixtures moved to src/<form_snake_case>/fixtures/ when the crate
         // was put into the canonical route layout, so resolve them from the
         // manifest directory rather than from the caller-supplied base path.

@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""bin/loco-test-auth-header-fix — drop the redundant `&` in every crate's
+test `auth_header()` helper.
+
+`loco new` scaffolds `tests/requests/prepare_data.rs` with
+`HeaderValue::from_str(&format!("Bearer {}", &token))` — the `&token` is
+redundant (`token: &str` is already a reference) and
+`clippy::useless_borrows_in_formatting` fails every crate that still
+carries it under `-D warnings`. Confirmed fleet-wide before writing this
+tool: `&token` appears exactly once per file, so the fix is unconditionally
+safe.
+
+Discovered alongside bin/loco-seed-base-rename while diagnosing why CI's
+Rust job has never gone green on this repository: both are `loco new`
+scaffold boilerplate, never touched by any of our generators, so the bug
+is identical and invariant across the fleet.
+
+This is an ongoing convention, not a one-shot migration: `loco new`
+re-creates the same redundant `&token` on every newly scaffolded crate, so
+the generated `back-end-with-loco-setup` script calls this tool as a final
+step; `--check` is the CI drift detector.
+
+Usage:
+  bin/loco-test-auth-header-fix <slug>...        # named forms
+  bin/loco-test-auth-header-fix --all            # every form's Loco crate
+  bin/loco-test-auth-header-fix --dry-run --all  # show what would change
+  bin/loco-test-auth-header-fix --check --all    # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+OLD = 'HeaderValue::from_str(&format!("Bearer {}", &token)).unwrap();'
+NEW = 'HeaderValue::from_str(&format!("Bearer {}", token)).unwrap();'
+
+
+def process_crate(back_end: pathlib.Path, apply: bool) -> bool:
+    path = back_end / "tests" / "requests" / "prepare_data.rs"
+    if not path.is_file():
+        return False
+    original = path.read_text()
+    if OLD not in original:
+        return False
+    if apply:
+        path.write_text(original.replace(OLD, NEW))
+    return True
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Drop the redundant & in every crate's test auth_header()."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(
+            p for p in FORMS.iterdir() if (p / "back-end-with-loco").is_dir()
+        )
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[str] = []
+
+    for form in forms:
+        back_end = form / "back-end-with-loco"
+        if not back_end.is_dir():
+            print(f"no such crate: {back_end}", file=sys.stderr)
+            return 2
+        if process_crate(back_end, apply):
+            drifted.append(form.name)
+
+    if args.check:
+        if drifted:
+            print(
+                f"redundant &token in {len(drifted)} crate(s)' test helper "
+                f"(run: bin/loco-test-auth-header-fix --all)"
+            )
+            for name in drifted[:10]:
+                print(f"  {name}")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"auth_header() test helper clean in every crate ({len(forms)} forms)")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    print(f"{len(drifted)} form(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

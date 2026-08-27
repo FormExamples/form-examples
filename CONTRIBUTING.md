@@ -105,6 +105,8 @@ bin/lily-sync --check                  # Lily HTML snapshot
 bin/lily-svelte-sync --check           # Lily Svelte snapshot
 bin/loco-config-refactor --check --all # Loco queue + observability conventions
 bin/loco-forbid-unsafe --check --all   # #![forbid(unsafe_code)] in every crate root
+bin/loco-seed-base-rename --check --all      # seed() unused-base-param drift
+bin/loco-test-auth-header-fix --check --all  # test auth_header() redundant-& drift
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift
 bin/test-e2e --html                    # Playwright smoke + axe-core a11y (HTML)
 ```

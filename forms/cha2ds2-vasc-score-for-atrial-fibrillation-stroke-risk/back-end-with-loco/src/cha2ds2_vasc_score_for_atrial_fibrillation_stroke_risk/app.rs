@@ -68,7 +68,7 @@ impl Hooks for App {
         truncate_table(&ctx.db, users::Entity).await?;
         Ok(())
     }
-    async fn seed(ctx: &AppContext, base: &Path) -> Result<()> {
+    async fn seed(ctx: &AppContext, _base: &Path) -> Result<()> {
         db::seed::<users::ActiveModel>(
             &ctx.db,
             &format!("{}/src/cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
