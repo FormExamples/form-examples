@@ -21,7 +21,7 @@ page lists each gate, what it proves, and how it runs in CI
 | FHIR validity | official HL7 `validator_cli.jar` (CI) | Generated `fhir/r5/*.json` and example Bundles are valid FHIR R5. |
 | XML validity | `xmllint --valid` (CI) | Generated `xml/*.xml` validate against their DTDs. |
 | Rust | `cargo check` + `cargo clippy -D warnings` + `cargo deny --all-features check` + `cargo test` (CI, 8 shards) | Every Loco crate compiles, is lint-clean, clears the supply-chain policy, and its model/request tests pass against Postgres. |
-| Svelte | `npm run check` + `npm run build` + `vitest run` (CI, 8 shards) | Every SvelteKit front-end type-checks, builds (catches the SVAR/SSR trap), and its engine tests pass. |
+| Svelte | `pnpm run check` + `pnpm run build` + `vitest run` (CI, 8 shards) | Every SvelteKit front-end type-checks, builds (catches the SVAR/SSR trap), and its engine tests pass. Each front-end is its own pnpm project (`pnpm-lock.yaml`); `npm ci` has no lockfile to install from and fails immediately. |
 | E2E + a11y | `bin/test-e2e --html` (nightly + changed-forms) | Every HTML front-end loads with no uncaught JS error and no serious/critical axe-core accessibility violation. |
 
 ## CI job map
