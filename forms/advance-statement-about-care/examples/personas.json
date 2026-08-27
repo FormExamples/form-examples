@@ -1,0 +1,466 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCompleteness",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The grader's live timestamp is stripped by the harness.",
+  "personas": [
+    {
+      "name": "partial-content-no-signatures",
+      "description": "Every substantive section thoughtfully filled in (values, care preferences, treatment wishes, practical matters) but the statement was never signed or witnessed — expect partial, not complete, since signature is a required section.",
+      "state": {
+        "personalInformation": {
+          "firstName": "Eileen",
+          "lastName": "Marsh",
+          "dateOfBirth": "1938-06-02",
+          "nhsNumber": "943 476 5936",
+          "address": "9 Cypress Grove, Leeds",
+          "postcode": "LS4 2QR",
+          "telephone": "0113 496 0871",
+          "email": "",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice",
+          "gpTelephone": "0113 496 0341"
+        },
+        "statementContext": {
+          "reasonForStatement": "Wish to record my preferences while I have capacity",
+          "currentDiagnosis": "Early-stage Parkinson's disease",
+          "understandingOfCondition": "I understand this may progress and affect my independence over time.",
+          "whenStatementShouldApply": "When I can no longer express my wishes clearly",
+          "previousAdvanceStatements": "no",
+          "previousStatementDetails": ""
+        },
+        "valuesBeliefs": {
+          "religiousBeliefs": "Church of England",
+          "spiritualBeliefs": "",
+          "culturalValues": "",
+          "qualityOfLifePriorities": "Being able to garden and see my grandchildren",
+          "whatMakesLifeMeaningful": "Family visits, music, my garden",
+          "importantTraditions": "Sunday roast with the family",
+          "viewsOnDying": "Peacefully, at home if possible"
+        },
+        "carePreferences": {
+          "preferredPlaceOfCare": "Own home, then a local care home if needed",
+          "preferredPlaceOfDeath": "Own home",
+          "personalComfortPreferences": "Warm room, radio on in the background",
+          "dailyRoutinePreferences": "Up by 8am, short walk if able",
+          "dietaryRequirements": "Vegetarian",
+          "clothingPreferences": "",
+          "hygienePreferences": "Bath rather than shower where possible",
+          "environmentPreferences": ""
+        },
+        "medicalTreatmentWishes": {
+          "painManagementPreferences": "Prefer non-opioid options where effective",
+          "nutritionHydrationWishes": "",
+          "ventilationWishes": "",
+          "resuscitationWishes": "Would like resuscitation attempted if there is a reasonable prospect of recovery to a quality of life I would value.",
+          "antibioticsWishes": "",
+          "hospitalisationWishes": "Prefer to avoid hospital admission where safe to do so",
+          "bloodTransfusionWishes": "",
+          "organDonationWishes": "no"
+        },
+        "communicationPreferences": {
+          "preferredLanguage": "English",
+          "communicationAids": "",
+          "howToBeAddressed": "Eileen",
+          "informationSharingPreferences": "Share with my son Robert",
+          "interpreterNeeded": "no",
+          "interpreterLanguage": ""
+        },
+        "peopleImportantToMe": {
+          "people": [
+            {
+              "name": "Robert Fielding",
+              "relationship": "son",
+              "telephone": "0113 496 0900"
+            }
+          ],
+          "petsDetails": "Cat, Whiskers",
+          "petCareArrangements": "Robert will care for Whiskers"
+        },
+        "practicalMatters": {
+          "financialArrangements": "Managed by Robert under LPA",
+          "propertyMatters": "",
+          "petCareInstructions": "See petCareArrangements above",
+          "socialMediaWishes": "",
+          "personalBelongings": "",
+          "funeralWishes": "Church service, cremation",
+          "willDetails": "Held by Smith & Co Solicitors",
+          "powerOfAttorneyDetails": "Robert Fielding, health and welfare LPA"
+        },
+        "signaturesWitnesses": {
+          "patientSignature": "",
+          "patientSignatureDate": "",
+          "witnessName": "",
+          "witnessAddress": "",
+          "witnessSignature": "",
+          "witnessSignatureDate": "",
+          "reviewDate": "",
+          "healthcareProfessionalName": "",
+          "healthcareProfessionalRole": "",
+          "healthcareProfessionalSignature": "",
+          "healthcareProfessionalDate": ""
+        }
+      },
+      "expected": {
+        "level": "partial",
+        "missingSections": [
+          {
+            "id": "MT-003",
+            "section": "Medical Treatment Wishes",
+            "description": "Nutrition/hydration wishes stated",
+            "required": false
+          },
+          {
+            "id": "MT-004",
+            "section": "Medical Treatment Wishes",
+            "description": "Ventilation wishes stated",
+            "required": false
+          },
+          {
+            "id": "MT-005",
+            "section": "Medical Treatment Wishes",
+            "description": "Antibiotics wishes stated",
+            "required": false
+          },
+          {
+            "id": "SW-001",
+            "section": "Signatures & Witnesses",
+            "description": "Patient has signed",
+            "required": true
+          },
+          {
+            "id": "SW-002",
+            "section": "Signatures & Witnesses",
+            "description": "Patient signature dated",
+            "required": true
+          },
+          {
+            "id": "SW-003",
+            "section": "Signatures & Witnesses",
+            "description": "Witness details provided",
+            "required": false
+          },
+          {
+            "id": "SW-004",
+            "section": "Signatures & Witnesses",
+            "description": "Review date set",
+            "required": false
+          },
+          {
+            "id": "SW-005",
+            "section": "Signatures & Witnesses",
+            "description": "Healthcare professional acknowledged",
+            "required": false
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-SIGN-001",
+            "category": "Signatures",
+            "message": "Statement is unsigned - not valid without patient signature",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WITNESS-001",
+            "category": "Witnesses",
+            "message": "No witness recorded - statement validity may be challenged",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-REVIEW-001",
+            "category": "Review",
+            "message": "No review date set - statement should be reviewed regularly",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HCP-001",
+            "category": "Healthcare Professional",
+            "message": "No healthcare professional acknowledgement - recommended for inclusion in medical records",
+            "priority": "medium"
+          }
+        ],
+        "completedCount": 22,
+        "totalCount": 30
+      }
+    },
+    {
+      "name": "complete-witnessed-not-professionally-acknowledged",
+      "description": "Fully signed and witnessed, but no healthcare professional has acknowledged it yet — expect complete, one level short of verified.",
+      "state": {
+        "personalInformation": {
+          "firstName": "Walter",
+          "lastName": "Byrne",
+          "dateOfBirth": "1945-01-19",
+          "nhsNumber": "943 476 5936",
+          "address": "9 Cypress Grove, Leeds",
+          "postcode": "LS4 2QR",
+          "telephone": "0113 496 0871",
+          "email": "",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice",
+          "gpTelephone": "0113 496 0341"
+        },
+        "statementContext": {
+          "reasonForStatement": "Wish to record my preferences while I have capacity",
+          "currentDiagnosis": "Early-stage Parkinson's disease",
+          "understandingOfCondition": "I understand this may progress and affect my independence over time.",
+          "whenStatementShouldApply": "When I can no longer express my wishes clearly",
+          "previousAdvanceStatements": "no",
+          "previousStatementDetails": ""
+        },
+        "valuesBeliefs": {
+          "religiousBeliefs": "Church of England",
+          "spiritualBeliefs": "",
+          "culturalValues": "",
+          "qualityOfLifePriorities": "Being able to garden and see my grandchildren",
+          "whatMakesLifeMeaningful": "Family visits, music, my garden",
+          "importantTraditions": "Sunday roast with the family",
+          "viewsOnDying": "Peacefully, at home if possible"
+        },
+        "carePreferences": {
+          "preferredPlaceOfCare": "Own home, then a local care home if needed",
+          "preferredPlaceOfDeath": "Own home",
+          "personalComfortPreferences": "Warm room, radio on in the background",
+          "dailyRoutinePreferences": "Up by 8am, short walk if able",
+          "dietaryRequirements": "Vegetarian",
+          "clothingPreferences": "",
+          "hygienePreferences": "Bath rather than shower where possible",
+          "environmentPreferences": ""
+        },
+        "medicalTreatmentWishes": {
+          "painManagementPreferences": "Prefer non-opioid options where effective",
+          "nutritionHydrationWishes": "",
+          "ventilationWishes": "",
+          "resuscitationWishes": "Would like resuscitation attempted if there is a reasonable prospect of recovery to a quality of life I would value.",
+          "antibioticsWishes": "",
+          "hospitalisationWishes": "Prefer to avoid hospital admission where safe to do so",
+          "bloodTransfusionWishes": "",
+          "organDonationWishes": "no"
+        },
+        "communicationPreferences": {
+          "preferredLanguage": "English",
+          "communicationAids": "",
+          "howToBeAddressed": "Eileen",
+          "informationSharingPreferences": "Share with my son Robert",
+          "interpreterNeeded": "no",
+          "interpreterLanguage": ""
+        },
+        "peopleImportantToMe": {
+          "people": [
+            {
+              "name": "Robert Fielding",
+              "relationship": "son",
+              "telephone": "0113 496 0900"
+            }
+          ],
+          "petsDetails": "Cat, Whiskers",
+          "petCareArrangements": "Robert will care for Whiskers"
+        },
+        "practicalMatters": {
+          "financialArrangements": "Managed by Robert under LPA",
+          "propertyMatters": "",
+          "petCareInstructions": "See petCareArrangements above",
+          "socialMediaWishes": "",
+          "personalBelongings": "",
+          "funeralWishes": "Church service, cremation",
+          "willDetails": "Held by Smith & Co Solicitors",
+          "powerOfAttorneyDetails": "Robert Fielding, health and welfare LPA"
+        },
+        "signaturesWitnesses": {
+          "patientSignature": "yes",
+          "patientSignatureDate": "2026-08-20",
+          "witnessName": "Helen Marsh",
+          "witnessAddress": "11 Cypress Grove, Leeds",
+          "witnessSignature": "yes",
+          "witnessSignatureDate": "2026-08-20",
+          "reviewDate": "",
+          "healthcareProfessionalName": "",
+          "healthcareProfessionalRole": "",
+          "healthcareProfessionalSignature": "",
+          "healthcareProfessionalDate": ""
+        }
+      },
+      "expected": {
+        "level": "complete",
+        "missingSections": [
+          {
+            "id": "MT-003",
+            "section": "Medical Treatment Wishes",
+            "description": "Nutrition/hydration wishes stated",
+            "required": false
+          },
+          {
+            "id": "MT-004",
+            "section": "Medical Treatment Wishes",
+            "description": "Ventilation wishes stated",
+            "required": false
+          },
+          {
+            "id": "MT-005",
+            "section": "Medical Treatment Wishes",
+            "description": "Antibiotics wishes stated",
+            "required": false
+          },
+          {
+            "id": "SW-004",
+            "section": "Signatures & Witnesses",
+            "description": "Review date set",
+            "required": false
+          },
+          {
+            "id": "SW-005",
+            "section": "Signatures & Witnesses",
+            "description": "Healthcare professional acknowledged",
+            "required": false
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-REVIEW-001",
+            "category": "Review",
+            "message": "No review date set - statement should be reviewed regularly",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HCP-001",
+            "category": "Healthcare Professional",
+            "message": "No healthcare professional acknowledgement - recommended for inclusion in medical records",
+            "priority": "medium"
+          }
+        ],
+        "completedCount": 25,
+        "totalCount": 30
+      }
+    },
+    {
+      "name": "verified-fully-acknowledged",
+      "description": "Signed, witnessed, AND acknowledged by the GP with a review date — the engine's top tier — expect verified.",
+      "state": {
+        "personalInformation": {
+          "firstName": "Grace",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1950-09-27",
+          "nhsNumber": "943 476 5936",
+          "address": "9 Cypress Grove, Leeds",
+          "postcode": "LS4 2QR",
+          "telephone": "0113 496 0871",
+          "email": "",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice",
+          "gpTelephone": "0113 496 0341"
+        },
+        "statementContext": {
+          "reasonForStatement": "Wish to record my preferences while I have capacity",
+          "currentDiagnosis": "Early-stage Parkinson's disease",
+          "understandingOfCondition": "I understand this may progress and affect my independence over time.",
+          "whenStatementShouldApply": "When I can no longer express my wishes clearly",
+          "previousAdvanceStatements": "no",
+          "previousStatementDetails": ""
+        },
+        "valuesBeliefs": {
+          "religiousBeliefs": "Church of England",
+          "spiritualBeliefs": "",
+          "culturalValues": "",
+          "qualityOfLifePriorities": "Being able to garden and see my grandchildren",
+          "whatMakesLifeMeaningful": "Family visits, music, my garden",
+          "importantTraditions": "Sunday roast with the family",
+          "viewsOnDying": "Peacefully, at home if possible"
+        },
+        "carePreferences": {
+          "preferredPlaceOfCare": "Own home, then a local care home if needed",
+          "preferredPlaceOfDeath": "Own home",
+          "personalComfortPreferences": "Warm room, radio on in the background",
+          "dailyRoutinePreferences": "Up by 8am, short walk if able",
+          "dietaryRequirements": "Vegetarian",
+          "clothingPreferences": "",
+          "hygienePreferences": "Bath rather than shower where possible",
+          "environmentPreferences": ""
+        },
+        "medicalTreatmentWishes": {
+          "painManagementPreferences": "Prefer non-opioid options where effective",
+          "nutritionHydrationWishes": "",
+          "ventilationWishes": "",
+          "resuscitationWishes": "Would like resuscitation attempted if there is a reasonable prospect of recovery to a quality of life I would value.",
+          "antibioticsWishes": "",
+          "hospitalisationWishes": "Prefer to avoid hospital admission where safe to do so",
+          "bloodTransfusionWishes": "",
+          "organDonationWishes": "no"
+        },
+        "communicationPreferences": {
+          "preferredLanguage": "English",
+          "communicationAids": "",
+          "howToBeAddressed": "Eileen",
+          "informationSharingPreferences": "Share with my son Robert",
+          "interpreterNeeded": "no",
+          "interpreterLanguage": ""
+        },
+        "peopleImportantToMe": {
+          "people": [
+            {
+              "name": "Robert Fielding",
+              "relationship": "son",
+              "telephone": "0113 496 0900"
+            }
+          ],
+          "petsDetails": "Cat, Whiskers",
+          "petCareArrangements": "Robert will care for Whiskers"
+        },
+        "practicalMatters": {
+          "financialArrangements": "Managed by Robert under LPA",
+          "propertyMatters": "",
+          "petCareInstructions": "See petCareArrangements above",
+          "socialMediaWishes": "",
+          "personalBelongings": "",
+          "funeralWishes": "Church service, cremation",
+          "willDetails": "Held by Smith & Co Solicitors",
+          "powerOfAttorneyDetails": "Robert Fielding, health and welfare LPA"
+        },
+        "signaturesWitnesses": {
+          "patientSignature": "yes",
+          "patientSignatureDate": "2026-08-15",
+          "witnessName": "Helen Marsh",
+          "witnessAddress": "11 Cypress Grove, Leeds",
+          "witnessSignature": "yes",
+          "witnessSignatureDate": "2026-08-15",
+          "reviewDate": "2026-08-18",
+          "healthcareProfessionalName": "Dr Sarah Ellison",
+          "healthcareProfessionalRole": "general-practitioner",
+          "healthcareProfessionalSignature": "yes",
+          "healthcareProfessionalDate": "2026-08-18"
+        }
+      },
+      "expected": {
+        "level": "verified",
+        "missingSections": [
+          {
+            "id": "MT-003",
+            "section": "Medical Treatment Wishes",
+            "description": "Nutrition/hydration wishes stated",
+            "required": false
+          },
+          {
+            "id": "MT-004",
+            "section": "Medical Treatment Wishes",
+            "description": "Ventilation wishes stated",
+            "required": false
+          },
+          {
+            "id": "MT-005",
+            "section": "Medical Treatment Wishes",
+            "description": "Antibiotics wishes stated",
+            "required": false
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-REVIEW-002",
+            "category": "Review",
+            "message": "Review date has passed - statement may need updating",
+            "priority": "high"
+          }
+        ],
+        "completedCount": 27,
+        "totalCount": 30
+      }
+    }
+  ]
+}

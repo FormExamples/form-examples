@@ -1,0 +1,465 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateValidity",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "valid-general-refusal-only",
+      "description": "Refuses tube feeding under specific circumstances (no life-sustaining-treatment refusal), full capacity declaration, all signatures, witness, NHS number, GP details, and HCP review present — expect valid, no fired rules.",
+      "state": {
+        "personalInformation": {
+          "fullLegalName": "Margaret Eleanor Fielding",
+          "dateOfBirth": "1941-03-22",
+          "nhsNumber": "943 476 5935",
+          "address": "9 Cypress Grove",
+          "postcode": "LS4 2QR",
+          "telephone": "0113 496 0871",
+          "email": "",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice",
+          "gpAddress": "2 River St, Leeds",
+          "gpTelephone": "0113 496 0341"
+        },
+        "capacityDeclaration": {
+          "confirmsCapacity": "yes",
+          "understandsConsequences": "yes",
+          "noUndueInfluence": "yes",
+          "professionalCapacityAssessment": "yes",
+          "assessedByName": "Dr Sarah Ellison",
+          "assessedByRole": "general-practitioner",
+          "assessmentDate": "2026-08-10",
+          "assessmentDetails": "Assessed under MCA 2005 s2-3; capacity confirmed."
+        },
+        "circumstances": {
+          "specificCircumstances": "Advanced dementia with loss of ability to swallow safely",
+          "medicalConditions": "Mild cognitive impairment, progressive; early Alzheimer's disease",
+          "situationsDescription": "To apply if I lose capacity and develop advanced dementia."
+        },
+        "treatmentsRefusedGeneral": {
+          "antibiotics": {
+            "treatment": "Antibiotics",
+            "refused": "",
+            "specification": ""
+          },
+          "bloodTransfusion": {
+            "treatment": "Blood Transfusion",
+            "refused": "",
+            "specification": ""
+          },
+          "ivFluids": {
+            "treatment": "IV Fluids",
+            "refused": "",
+            "specification": ""
+          },
+          "tubeFeeding": {
+            "treatment": "Tube Feeding",
+            "refused": "yes",
+            "specification": "Refuse PEG or NG tube feeding if advanced dementia prevents safe oral intake."
+          },
+          "dialysis": {
+            "treatment": "Dialysis",
+            "refused": "",
+            "specification": ""
+          },
+          "ventilation": {
+            "treatment": "Ventilation",
+            "refused": "",
+            "specification": ""
+          },
+          "otherTreatments": []
+        },
+        "treatmentsRefusedLifeSustaining": {
+          "cpr": {
+            "treatment": "CPR",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "mechanicalVentilation": {
+            "treatment": "Mechanical Ventilation",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "artificialNutritionHydration": {
+            "treatment": "Artificial Nutrition/Hydration",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "otherLifeSustaining": []
+        },
+        "exceptionsConditions": {
+          "hasExceptions": "no",
+          "exceptionsDescription": "",
+          "hasTimeLimitations": "no",
+          "timeLimitationsDescription": "",
+          "invalidatingConditions": ""
+        },
+        "otherWishes": {
+          "preferredCareSetting": "Own home for as long as safely possible, then care home",
+          "comfortMeasures": "Full comfort and palliative care at all times",
+          "spiritualReligiousWishes": "Church of England; chaplaincy visits welcome",
+          "otherPreferences": ""
+        },
+        "lastingPowerOfAttorney": {
+          "hasLPA": "yes",
+          "lpaType": "health-and-welfare",
+          "lpaRegistered": "yes",
+          "lpaRegistrationDate": "2024-05-14",
+          "doneeNames": "Robert Fielding (son)",
+          "relationshipBetweenADRTAndLPA": "ADRT takes precedence for the treatments it specifically covers"
+        },
+        "healthcareProfessionalReview": {
+          "reviewedByClinicianName": "Dr Sarah Ellison",
+          "reviewedByClinicianRole": "general-practitioner",
+          "reviewDate": "2026-08-12",
+          "clinicalOpinionOnCapacity": "Capacity confirmed at time of making this decision.",
+          "anyConcerns": "no",
+          "concernsDetails": ""
+        },
+        "legalSignatures": {
+          "patientSignature": "yes",
+          "patientStatementOfUnderstanding": "yes",
+          "patientSignatureDate": "2026-08-12",
+          "witnessSignature": "yes",
+          "witnessName": "Helen Marsh",
+          "witnessAddress": "11 Cypress Grove, Leeds",
+          "witnessSignatureDate": "2026-08-12",
+          "lifeSustainingWrittenStatement": "",
+          "lifeSustainingStatementText": "",
+          "lifeSustainingSignature": "",
+          "lifeSustainingWitnessSignature": "",
+          "lifeSustainingWitnessName": "",
+          "lifeSustainingWitnessAddress": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "valid",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "complete-missing-recommended",
+      "description": "All required capacity/signature/personal-information fields present, but NHS number, GP details, and healthcare-professional review are not recorded (recommended, not required) — expect complete, not valid.",
+      "state": {
+        "personalInformation": {
+          "fullLegalName": "Thomas Wren",
+          "dateOfBirth": "1955-11-08",
+          "nhsNumber": "",
+          "address": "9 Cypress Grove",
+          "postcode": "LS4 2QR",
+          "telephone": "0113 496 0871",
+          "email": "",
+          "gpName": "",
+          "gpPractice": "",
+          "gpAddress": "",
+          "gpTelephone": ""
+        },
+        "capacityDeclaration": {
+          "confirmsCapacity": "yes",
+          "understandsConsequences": "yes",
+          "noUndueInfluence": "yes",
+          "professionalCapacityAssessment": "yes",
+          "assessedByName": "Dr Sarah Ellison",
+          "assessedByRole": "general-practitioner",
+          "assessmentDate": "2026-08-10",
+          "assessmentDetails": "Assessed under MCA 2005 s2-3; capacity confirmed."
+        },
+        "circumstances": {
+          "specificCircumstances": "Advanced dementia with loss of ability to swallow safely",
+          "medicalConditions": "Mild cognitive impairment, progressive; early Alzheimer's disease",
+          "situationsDescription": "To apply if I lose capacity and develop advanced dementia."
+        },
+        "treatmentsRefusedGeneral": {
+          "antibiotics": {
+            "treatment": "Antibiotics",
+            "refused": "",
+            "specification": ""
+          },
+          "bloodTransfusion": {
+            "treatment": "Blood Transfusion",
+            "refused": "",
+            "specification": ""
+          },
+          "ivFluids": {
+            "treatment": "IV Fluids",
+            "refused": "",
+            "specification": ""
+          },
+          "tubeFeeding": {
+            "treatment": "Tube Feeding",
+            "refused": "yes",
+            "specification": "Refuse PEG or NG tube feeding if advanced dementia prevents safe oral intake."
+          },
+          "dialysis": {
+            "treatment": "Dialysis",
+            "refused": "",
+            "specification": ""
+          },
+          "ventilation": {
+            "treatment": "Ventilation",
+            "refused": "",
+            "specification": ""
+          },
+          "otherTreatments": []
+        },
+        "treatmentsRefusedLifeSustaining": {
+          "cpr": {
+            "treatment": "CPR",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "mechanicalVentilation": {
+            "treatment": "Mechanical Ventilation",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "artificialNutritionHydration": {
+            "treatment": "Artificial Nutrition/Hydration",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "otherLifeSustaining": []
+        },
+        "exceptionsConditions": {
+          "hasExceptions": "no",
+          "exceptionsDescription": "",
+          "hasTimeLimitations": "no",
+          "timeLimitationsDescription": "",
+          "invalidatingConditions": ""
+        },
+        "otherWishes": {
+          "preferredCareSetting": "Own home for as long as safely possible, then care home",
+          "comfortMeasures": "Full comfort and palliative care at all times",
+          "spiritualReligiousWishes": "Church of England; chaplaincy visits welcome",
+          "otherPreferences": ""
+        },
+        "lastingPowerOfAttorney": {
+          "hasLPA": "yes",
+          "lpaType": "health-and-welfare",
+          "lpaRegistered": "yes",
+          "lpaRegistrationDate": "2024-05-14",
+          "doneeNames": "Robert Fielding (son)",
+          "relationshipBetweenADRTAndLPA": "ADRT takes precedence for the treatments it specifically covers"
+        },
+        "healthcareProfessionalReview": {
+          "reviewedByClinicianName": "",
+          "reviewedByClinicianRole": "general-practitioner",
+          "reviewDate": "",
+          "clinicalOpinionOnCapacity": "Capacity confirmed at time of making this decision.",
+          "anyConcerns": "no",
+          "concernsDetails": ""
+        },
+        "legalSignatures": {
+          "patientSignature": "yes",
+          "patientStatementOfUnderstanding": "yes",
+          "patientSignatureDate": "2026-08-12",
+          "witnessSignature": "yes",
+          "witnessName": "Helen Marsh",
+          "witnessAddress": "11 Cypress Grove, Leeds",
+          "witnessSignatureDate": "2026-08-12",
+          "lifeSustainingWrittenStatement": "",
+          "lifeSustainingStatementText": "",
+          "lifeSustainingSignature": "",
+          "lifeSustainingWitnessSignature": "",
+          "lifeSustainingWitnessName": "",
+          "lifeSustainingWitnessAddress": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "complete",
+        "firedRules": [
+          {
+            "id": "VR-018",
+            "category": "Healthcare Professional",
+            "description": "Healthcare professional review is recommended",
+            "severity": "recommended"
+          },
+          {
+            "id": "VR-019",
+            "category": "Healthcare Professional",
+            "description": "Review date should be recorded",
+            "severity": "recommended"
+          },
+          {
+            "id": "VR-020",
+            "category": "Personal Information",
+            "description": "NHS number should be recorded for identification",
+            "severity": "recommended"
+          },
+          {
+            "id": "VR-021",
+            "category": "Personal Information",
+            "description": "GP details should be recorded",
+            "severity": "recommended"
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid-life-sustaining-missing-statutory-formalities",
+      "description": "Refuses CPR and artificial nutrition/hydration even if life is at risk, but the MCA s25(5) statutory formalities for a life-sustaining refusal — the written statement, the life-sustaining-section patient signature, and its witness signature — were never completed, and CPR's own even-if-life-at-risk box was left unticked — expect invalid (not draft, since the patient's name and signature ARE present) via multiple critical rules.",
+      "state": {
+        "personalInformation": {
+          "fullLegalName": "Priya Anand",
+          "dateOfBirth": "1941-03-22",
+          "nhsNumber": "943 476 5935",
+          "address": "9 Cypress Grove",
+          "postcode": "LS4 2QR",
+          "telephone": "0113 496 0871",
+          "email": "",
+          "gpName": "Dr Sarah Ellison",
+          "gpPractice": "Riverbank Medical Practice",
+          "gpAddress": "2 River St, Leeds",
+          "gpTelephone": "0113 496 0341"
+        },
+        "capacityDeclaration": {
+          "confirmsCapacity": "yes",
+          "understandsConsequences": "yes",
+          "noUndueInfluence": "yes",
+          "professionalCapacityAssessment": "yes",
+          "assessedByName": "Dr Sarah Ellison",
+          "assessedByRole": "general-practitioner",
+          "assessmentDate": "2026-08-10",
+          "assessmentDetails": "Assessed under MCA 2005 s2-3; capacity confirmed."
+        },
+        "circumstances": {
+          "specificCircumstances": "Advanced dementia with loss of ability to swallow safely",
+          "medicalConditions": "Mild cognitive impairment, progressive; early Alzheimer's disease",
+          "situationsDescription": "To apply if I lose capacity and develop advanced dementia."
+        },
+        "treatmentsRefusedGeneral": {
+          "antibiotics": {
+            "treatment": "Antibiotics",
+            "refused": "",
+            "specification": ""
+          },
+          "bloodTransfusion": {
+            "treatment": "Blood Transfusion",
+            "refused": "",
+            "specification": ""
+          },
+          "ivFluids": {
+            "treatment": "IV Fluids",
+            "refused": "",
+            "specification": ""
+          },
+          "tubeFeeding": {
+            "treatment": "Tube Feeding",
+            "refused": "yes",
+            "specification": "Refuse PEG or NG tube feeding if advanced dementia prevents safe oral intake."
+          },
+          "dialysis": {
+            "treatment": "Dialysis",
+            "refused": "",
+            "specification": ""
+          },
+          "ventilation": {
+            "treatment": "Ventilation",
+            "refused": "",
+            "specification": ""
+          },
+          "otherTreatments": []
+        },
+        "treatmentsRefusedLifeSustaining": {
+          "cpr": {
+            "treatment": "CPR",
+            "refused": "yes",
+            "evenIfLifeAtRisk": "",
+            "specification": "Refuse CPR in any circumstance, including if it would prolong life."
+          },
+          "mechanicalVentilation": {
+            "treatment": "Mechanical Ventilation",
+            "refused": "",
+            "evenIfLifeAtRisk": "",
+            "specification": ""
+          },
+          "artificialNutritionHydration": {
+            "treatment": "Artificial Nutrition/Hydration",
+            "refused": "yes",
+            "evenIfLifeAtRisk": "yes",
+            "specification": "Refuse ANH even if life is at risk, if I cannot recover awareness."
+          },
+          "otherLifeSustaining": []
+        },
+        "exceptionsConditions": {
+          "hasExceptions": "no",
+          "exceptionsDescription": "",
+          "hasTimeLimitations": "no",
+          "timeLimitationsDescription": "",
+          "invalidatingConditions": ""
+        },
+        "otherWishes": {
+          "preferredCareSetting": "Own home for as long as safely possible, then care home",
+          "comfortMeasures": "Full comfort and palliative care at all times",
+          "spiritualReligiousWishes": "Church of England; chaplaincy visits welcome",
+          "otherPreferences": ""
+        },
+        "lastingPowerOfAttorney": {
+          "hasLPA": "yes",
+          "lpaType": "health-and-welfare",
+          "lpaRegistered": "yes",
+          "lpaRegistrationDate": "2024-05-14",
+          "doneeNames": "Robert Fielding (son)",
+          "relationshipBetweenADRTAndLPA": "ADRT takes precedence for the treatments it specifically covers"
+        },
+        "healthcareProfessionalReview": {
+          "reviewedByClinicianName": "Dr Sarah Ellison",
+          "reviewedByClinicianRole": "general-practitioner",
+          "reviewDate": "2026-08-12",
+          "clinicalOpinionOnCapacity": "Capacity confirmed at time of making this decision.",
+          "anyConcerns": "no",
+          "concernsDetails": ""
+        },
+        "legalSignatures": {
+          "patientSignature": "yes",
+          "patientStatementOfUnderstanding": "yes",
+          "patientSignatureDate": "2026-08-12",
+          "witnessSignature": "yes",
+          "witnessName": "Helen Marsh",
+          "witnessAddress": "11 Cypress Grove, Leeds",
+          "witnessSignatureDate": "2026-08-12",
+          "lifeSustainingWrittenStatement": "",
+          "lifeSustainingStatementText": "",
+          "lifeSustainingSignature": "",
+          "lifeSustainingWitnessSignature": "",
+          "lifeSustainingWitnessName": "",
+          "lifeSustainingWitnessAddress": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "invalid",
+        "firedRules": [
+          {
+            "id": "VR-001",
+            "category": "Life-Sustaining Treatment",
+            "description": "Life-sustaining refusal requires \"even if life is at risk\" statement for CPR",
+            "severity": "critical"
+          },
+          {
+            "id": "VR-004",
+            "category": "Life-Sustaining Treatment",
+            "description": "Life-sustaining refusal requires written statement that decision applies even if life is at risk",
+            "severity": "critical"
+          },
+          {
+            "id": "VR-005",
+            "category": "Life-Sustaining Treatment",
+            "description": "Life-sustaining refusal requires patient signature on life-sustaining section",
+            "severity": "critical"
+          },
+          {
+            "id": "VR-006",
+            "category": "Life-Sustaining Treatment",
+            "description": "Life-sustaining refusal requires witness signature on life-sustaining section",
+            "severity": "critical"
+          }
+        ]
+      }
+    }
+  ]
+}

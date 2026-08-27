@@ -34,6 +34,17 @@ for them.
     --frozen-lockfile`, matching `bin/test-e2e --svelte` and the
     documented dev workflow.
 
+### Added
+
+- Personas for `advance-decision-to-refuse-treatment` (a valid general
+  refusal; a form complete on every required MCA field but missing
+  recommended ones; a life-sustaining refusal missing the s25(5) statutory
+  written-statement/signature/witness formalities — invalid) and
+  `advance-statement-about-care` (partial with full content but no
+  signature; complete once witnessed; verified once the GP also
+  acknowledges it — the engine's three-tier ladder exercised end to end).
+  Fleet persona total 179 → 181.
+
 ## [1.0.0] - 2026-08-26
 
 First tagged release. Everything below happened before any release existed;
@@ -109,7 +120,7 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
   escalation on the request; no-abnormality, HFrEF (EF 32%), and an
   uncommunicated critical aortic-stenosis result on the response.
 - Personas for the entire `*-waiting-list-card` family (56 forms; fleet
-  total 109 → 179 verified): three clinically coherent RTT scenarios each —
+  total 109 → 181 verified): three clinically coherent RTT scenarios each —
   routine P4 within target, urgent P2 approaching target with an interpreter
   flag, and a P3 52-week long-wait breach with harm-review and
   missing-appointment flags. `bin/test-personas` gained an optional
