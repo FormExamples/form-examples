@@ -9,6 +9,16 @@ per-form record, each `forms/<slug>/CHANGELOG.md`.
 
 ## Latest
 
+### 2026-08-28 — GitHub Sponsors funding channel added
+
+The project gained its first funding channel:
+[GitHub Sponsors](https://github.com/sponsors/joelparkerhenderson), wired up
+via [`.github/FUNDING.yml`](.github/FUNDING.yml) and described in
+[`CONTRIBUTING.md`](CONTRIBUTING.md). It is a personal sponsorship of the sole
+maintainer — the project still has no organization and no legal entity behind
+it (see [`MAINTAINERS.md`](MAINTAINERS.md)), and this doesn't change that.
+Open Collective, which would need one, is not set up.
+
 ### 2026-08-26 — v1.0.0, the first tagged release
 
 The repository cut its first release. v1.0.0 marks the point where the

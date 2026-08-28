@@ -36,6 +36,7 @@ an inventory nobody can hand over.
 | `GITHUB_TOKEN` (ephemeral, per workflow run) | the GitHub Pages deployment of `formexamples.com` | GitHub, minted per run; nothing is stored | not applicable — there is no credential to lose |
 | The `formexamples.com` domain | the documentation site's DNS | the maintainer (registrar account) | none: registrar account recovery only |
 | The Codeberg and GitLab mirrors | a push mirror of the same history | the maintainer | not applicable — they are copies, and their value is that they survive independently |
+| [GitHub Sponsors](https://github.com/sponsors/joelparkerhenderson) | the project's funding channel ([`.github/FUNDING.yml`](.github/FUNDING.yml), [`CONTRIBUTING.md`](CONTRIBUTING.md)) | the maintainer, personally — there is no organization or legal entity to hold it instead | none beyond GitHub's own account-recovery process |
 
 **The honest reading of that table:** every publishing identity terminates at
 one person's accounts. That is the residual risk, and it is stated rather than

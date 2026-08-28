@@ -26,11 +26,13 @@ project with one maintainer.
 - **Translate.** The i18n groundwork is in [`docs/i18n.md`](docs/i18n.md).
 - **Review a pull request.** Sustained, useful review is the main route to
   becoming a maintainer; [`GOVERNANCE.md`](GOVERNANCE.md) describes it.
-- **Donate money.** There is no funding mechanism, no sponsorship tier, and no
-  legal entity to receive money — this is deliberate, and it means the answer to
-  "can I fund this?" is no. If you want to fund something in this space, fund
+- **Donate money.** [GitHub Sponsors](https://github.com/sponsors/joelparkerhenderson)
+  is the funding channel, and it is a personal sponsorship of the sole
+  maintainer, not of an organization — there still isn't a legal entity behind
+  this project (see [`MAINTAINERS.md`](MAINTAINERS.md)), and sponsoring changes
+  nothing about that. If you'd rather fund something else in this space, fund
   the publishers of the clinical instruments, or the open-source projects in
-  [`COMPARISONS.md`](COMPARISONS.md) that do have funding routes.
+  [`COMPARISONS.md`](COMPARISONS.md) that have their own funding routes.
 
 Everyone taking part is covered by the
 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Contributions are accepted under the
