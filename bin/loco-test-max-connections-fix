@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""bin/loco-test-max-connections-fix — raise the scaffold's `max_connections: 1`
+default in every crate's config/test.yaml.
+
+`cargo loco generate scaffold` writes `max_connections:
+{{ get_env(name="DB_MAX_CONNECTIONS", default="1") }}` fleet-wide — a pool
+that admits exactly one connection at a time, paired with a 500ms
+`connect_timeout`. `cargo test` runs its test binary's tests concurrently
+across CPU threads by default; the moment two DB-touching tests in the same
+crate happen to run at once, the second blocks behind the first's single
+connection and times out if it takes longer than 500ms, surfacing as
+`SqlxError(PoolTimedOut)`. Found via a real, verified CI run: the nightly
+full-matrix sweep's Rust shard 3/8 failed exactly this way on
+`hearing-test-request` — 33 of its 35 tests passed; the 2 that lost the race
+for the single connection did not. This is not simple flakiness with no
+cause: it is a race with a deterministic mechanism, just an intermittent
+outcome, so it can resurface on any crate, not only this one.
+
+Raises the default to 10 — comfortable headroom for a CI runner's handful of
+parallel test threads against a single-purpose, freshly created database,
+well inside PostgreSQL's own default server-side `max_connections` of 100.
+Scoped to config/test.yaml only: this is specifically about `cargo test`'s
+concurrency, and the fleet's `config/development.yaml` carries the same
+scaffold default but isn't implicated in the observed failure.
+
+5 forms (the hand-authored gold-standard reference pair cardiology-
+request/-response and the neurodiversity-adjustment-request/-response/
+-review trio) predate the `get_env(...)`-templated scaffold and carry a
+bare `max_connections: 1` instead — same bug, different literal shape.
+Handled as a second, narrower replacement.
+
+This is an ongoing convention, not a one-shot migration: a newly scaffolded
+crate inherits the same low default from whatever `cargo loco generate
+scaffold` version produced it, so `--check` is the CI drift detector.
+
+Usage:
+  bin/loco-test-max-connections-fix <slug>...        # named forms
+  bin/loco-test-max-connections-fix --all             # every form's Loco crate
+  bin/loco-test-max-connections-fix --dry-run --all   # show what would change
+  bin/loco-test-max-connections-fix --check --all     # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+TEMPLATED_OLD = 'max_connections: {{ get_env(name="DB_MAX_CONNECTIONS", default="1") }}'
+TEMPLATED_NEW = 'max_connections: {{ get_env(name="DB_MAX_CONNECTIONS", default="10") }}'
+BARE_OLD = "max_connections: 1\n"
+BARE_NEW = "max_connections: 10\n"
+
+
+def process_form(form: pathlib.Path, apply: bool) -> bool:
+    path = form / "back-end-with-loco" / "config" / "test.yaml"
+    if not path.is_file():
+        return False
+    original = path.read_text()
+    if TEMPLATED_OLD in original:
+        if apply:
+            path.write_text(original.replace(TEMPLATED_OLD, TEMPLATED_NEW))
+        return True
+    if BARE_OLD in original:
+        if apply:
+            path.write_text(original.replace(BARE_OLD, BARE_NEW))
+        return True
+    return False
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Raise config/test.yaml's max_connections default from 1 to 10."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(
+            p for p in FORMS.iterdir() if (p / "back-end-with-loco").is_dir()
+        )
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[str] = []
+
+    for form in forms:
+        back_end = form / "back-end-with-loco"
+        if not back_end.is_dir():
+            print(f"no such back end: {back_end}", file=sys.stderr)
+            return 2
+        if process_form(form, apply):
+            drifted.append(form.name)
+
+    if args.check:
+        if drifted:
+            print(
+                f"config/test.yaml max_connections default still 1 in "
+                f"{len(drifted)} form(s) (run: bin/loco-test-max-connections-fix --all)"
+            )
+            for name in drifted[:10]:
+                print(f"  {name}")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"config/test.yaml max_connections raised in every form ({len(forms)} forms)")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    print(f"{len(drifted)} form(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

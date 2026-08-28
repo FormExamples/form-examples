@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-76 tools.
+77 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -41,6 +41,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
 - [`bin/loco-seed-base-stray-usage-fix`](#loco-seed-base-stray-usage-fix)
 - [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
+- [`bin/loco-test-max-connections-fix`](#loco-test-max-connections-fix)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/normalize`](#normalize)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
@@ -1111,6 +1112,50 @@ Usage:
   bin/loco-test-auth-header-fix --all            # every form's Loco crate
   bin/loco-test-auth-header-fix --dry-run --all  # show what would change
   bin/loco-test-auth-header-fix --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-test-max-connections-fix"><code>bin/loco-test-max-connections-fix</code></h2>
+
+```text
+bin/loco-test-max-connections-fix — raise the scaffold's `max_connections: 1`
+default in every crate's config/test.yaml.
+
+`cargo loco generate scaffold` writes `max_connections:
+{{ get_env(name="DB_MAX_CONNECTIONS", default="1") }}` fleet-wide — a pool
+that admits exactly one connection at a time, paired with a 500ms
+`connect_timeout`. `cargo test` runs its test binary's tests concurrently
+across CPU threads by default; the moment two DB-touching tests in the same
+crate happen to run at once, the second blocks behind the first's single
+connection and times out if it takes longer than 500ms, surfacing as
+`SqlxError(PoolTimedOut)`. Found via a real, verified CI run: the nightly
+full-matrix sweep's Rust shard 3/8 failed exactly this way on
+`hearing-test-request` — 33 of its 35 tests passed; the 2 that lost the race
+for the single connection did not. This is not simple flakiness with no
+cause: it is a race with a deterministic mechanism, just an intermittent
+outcome, so it can resurface on any crate, not only this one.
+
+Raises the default to 10 — comfortable headroom for a CI runner's handful of
+parallel test threads against a single-purpose, freshly created database,
+well inside PostgreSQL's own default server-side `max_connections` of 100.
+Scoped to config/test.yaml only: this is specifically about `cargo test`'s
+concurrency, and the fleet's `config/development.yaml` carries the same
+scaffold default but isn't implicated in the observed failure.
+
+5 forms (the hand-authored gold-standard reference pair cardiology-
+request/-response and the neurodiversity-adjustment-request/-response/
+-review trio) predate the `get_env(...)`-templated scaffold and carry a
+bare `max_connections: 1` instead — same bug, different literal shape.
+Handled as a second, narrower replacement.
+
+This is an ongoing convention, not a one-shot migration: a newly scaffolded
+crate inherits the same low default from whatever `cargo loco generate
+scaffold` version produced it, so `--check` is the CI drift detector.
+
+Usage:
+  bin/loco-test-max-connections-fix <slug>...        # named forms
+  bin/loco-test-max-connections-fix --all             # every form's Loco crate
+  bin/loco-test-max-connections-fix --dry-run --all   # show what would change
+  bin/loco-test-max-connections-fix --check --all     # CI drift check (non-zero on drift)
 ```
 
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>

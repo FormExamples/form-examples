@@ -71,7 +71,7 @@ database:
   # Minimum number of connections for a pool.
   min_connections: {{ get_env(name="DB_MIN_CONNECTIONS", default="1") }}
   # Maximum number of connections for a pool.
-  max_connections: {{ get_env(name="DB_MAX_CONNECTIONS", default="1") }}
+  max_connections: {{ get_env(name="DB_MAX_CONNECTIONS", default="10") }}
   # Run migration up when application loaded
   auto_migrate: true
   # Truncate database when application loaded. This is a dangerous operation, make sure that you using this flag only on dev environments or test mode

@@ -57,6 +57,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/loco-seed-base-stray-usage-fix [--check] [--dry-run] [--all|<slug>…]` — one-shot: remove the stray `let _ = base;` left in 11 forms' `App::seed()` by the route-nesting-layout fixture move, which predated (and was never updated by) `bin/loco-seed-base-rename`'s parameter rename above — once the parameter became `_base`, the leftover body reference to `base` turned from silencing a lint into a hard `E0425` compile error. Found via a real, verified CI run (Rust shard 5/8 failing to compile `dietic_assessment`), not a local guess. `--check` is a completeness/regression gate, not a routine CI drift detector — no generator produces this stray line
 - `bin/loco-test-auth-header-fix [--check] [--dry-run] [--all|<slug>…]` — drop the redundant `&` in every crate's test `auth_header()` helper (`format!("Bearer {}", &token)` where `token: &str` is already a reference). Same `loco new` scaffold-bug class as `loco-seed-base-rename`, found alongside it (346/355 crates); wired into the same setup-script step; `--check` is the CI drift detector
 - `bin/loco-rs-1-migration [--check] [--dry-run] [--all|<slug>…]` — one-shot loco-rs 0.16 → 1.0.1 major-version migration: `Cargo.toml`/`migration/Cargo.toml` version bumps, the `auth_jwt`/`bg_pg` → `auth`/`worker` feature rename, and every `id`/`*_id` entity, controller `Params`, `Path<i32>`, and hand-written helper moved `i32` → `i64` (loco-rs 1.0's `ColType::PkAuto` now renders `BIGINT`). Applied fleet-wide 2026-08-02; `--check` confirms no crate is still on 0.16
+- `bin/loco-test-max-connections-fix [--check] [--dry-run] [--all|<slug>…]` — raise every crate's `config/test.yaml` `max_connections` default from the scaffold's `1` to `10`. Paired with the default 500ms `connect_timeout`, a pool of exactly one connection races `cargo test`'s default multi-threaded concurrency: the moment two DB-touching tests in one crate run at once, the loser blocks behind the winner's single connection and times out (`SqlxError(PoolTimedOut)`) — a real, deterministic race, not unexplained flakiness, though the failure itself is intermittent. Found via a real, verified CI run (the nightly full-matrix sweep's Rust shard 3/8 failing 2 of `hearing-test-request`'s 35 tests this way). `--check` is the CI drift detector
 
 ### Generators (SQL → derived representations)
 
@@ -236,6 +237,7 @@ bin/loco-seed-base-stray-usage-fix --check --all # Loco seed() stray `let _ = ba
 bin/loco-test-auth-header-fix --check --all # Loco test auth_header() redundant-& drift detector
 bin/loco-migration-defaults --check --all # Loco migration vs sql/ column-default drift detector
 bin/loco-migration-nullability --check --all # Loco migration/entity/controller vs sql/ nullability drift detector
+bin/loco-test-max-connections-fix --check --all # Loco config/test.yaml max_connections=1 pool-race drift detector
 bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completeness check (one-shot)
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
