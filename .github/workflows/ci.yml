@@ -361,6 +361,18 @@ jobs:
         with:
           shared-key: loco-shard-${{ matrix.shard }}
           workspaces: forms/*/back-end-with-loco
+      # Free the runner's preinstalled Android/.NET/Haskell/CodeQL toolchains
+      # (unused by this job, tens of GB): every shard's target/ is wiped per
+      # crate below too, but this heavier build (axum + sea-orm + opentelemetry
+      # + tonic per crate, ~44 crates/shard) still fills the default ~14GB
+      # free space outright — confirmed by a real CI run, all 8 shards failing
+      # identically with the runner's own "No space left on device" (not a
+      # cargo/test failure at all, so no in-band error from our own commands).
+      - name: Free runner disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /opt/hostedtoolcache/CodeQL "$AGENT_TOOLSDIRECTORY" || true
+          df -h /
       # Plain cargo (no --locked): lock hygiene is not maintained across all
       # 347 crates, matching the repo's own bin/test-loco-project.
       - name: check / clippy / deny / test each crate in this shard
@@ -387,6 +399,19 @@ jobs:
               && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
                  cargo test ) || { echo "::error::$slug failed"; fail=1; }
             dropdb --if-exists "$db" 2>/dev/null || true
+            # Each crate builds its own independent target/ (no shared
+            # workspace across the ~44 crates in a shard); axum + sea-orm +
+            # opentelemetry + tonic make a single crate's debug build several
+            # hundred MB to low GB, which fills the runner's disk well before
+            # the shard finishes if left to accumulate. Wipe it now that this
+            # crate is done, whether it passed or failed. This does give up
+            # Swatinem/rust-cache's cross-run warm start for this crate (its
+            # target/ won't exist for the job's cache-save step to pick up),
+            # but the run-to-run speedup was never actually reliable while
+            # the shard was disk-overflowing and failing outright before that
+            # save step ran — a slower run that finishes beats a faster one
+            # that doesn't.
+            rm -rf "$crate/target" 2>/dev/null || true
             echo "::endgroup::"
           done
           exit $fail
