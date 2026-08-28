@@ -50,6 +50,23 @@ vulnerable".
 - Findings that require an attacker who already has commit access, or physical
   access to the developer's machine.
 
+## Publishing and Trusted Publishing
+
+This repository does not publish a package today — no crate to crates.io, no
+module to npm, no image to a container registry
+([`INSTALL.md`](INSTALL.md), [`MAINTAINERS.md`](MAINTAINERS.md)) — so there is
+no long-lived publishing token sitting in repository secrets to leak.
+
+That is a statement about this repository specifically, not a stance against
+ever publishing one anywhere. As a general supply-chain policy, this project
+intends to adopt [Trusted Publishing](https://crates.io/docs/trusted-publishing)
+— OIDC-based, short-lived credentials scoped to a single CI run, issued at
+publish time, rather than a static API token stored indefinitely in repository
+secrets — for any future package this project or a future one publishes from
+CI, once it is production-ready across the code forges actually in use here
+(GitHub, Codeberg, GitLab) and whichever registry a publish would target.
+Recorded as policy in [`spec/trusted-publishing/`](spec/trusted-publishing/).
+
 ## Supported versions
 
 | Version | Supported |

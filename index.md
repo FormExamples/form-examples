@@ -47,7 +47,7 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | ways to contribute, environment, workflow, verify gates |
 | [`GOVERNANCE.md`](GOVERNANCE.md) | who decides what, how decisions are recorded, how to become a maintainer |
 | [`MAINTAINERS.md`](MAINTAINERS.md) | the roster, the publishing identities, and the bus factor |
-| [`SECURITY.md`](SECURITY.md) | what counts as a vulnerability here, how to report one, response times |
+| [`SECURITY.md`](SECURITY.md) | what counts as a vulnerability here, how to report one, response times, publishing and Trusted Publishing policy |
 | [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | expected conduct, and enforcement |
 | [`AI_STATEMENT.md`](AI_STATEMENT.md) | how AI tooling is used to build this, what it may not do, and the limits |
 | [`CHANGELOG.md`](CHANGELOG.md) | repository-level change history |
