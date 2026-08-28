@@ -14,9 +14,18 @@ on:
     # re-runs against a fresh advisory DB even when nothing was pushed.
     - cron: '17 5 * * 1'
 
-# Cancel superseded runs on the same ref.
+# Cancel superseded runs on the same ref — but only within the same trigger
+# type. A single group across push/schedule/workflow_dispatch meant a
+# delayed nightly or weekly cron firing (GitHub Actions can queue a
+# `schedule` trigger for hours during high load — confirmed happening here:
+# a 03:17 UTC cron actually started at 15:22 UTC) would cancel real,
+# in-progress push-triggered CI outright, discarding hours of a Rust
+# matrix's work with nothing to show for it. Scoping the group by
+# github.event_name keeps each trigger type superseding only its own kind:
+# a new push still cancels an older, now-stale push's run; a new nightly
+# sweep still cancels an overlapping older one; neither cancels the other.
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
