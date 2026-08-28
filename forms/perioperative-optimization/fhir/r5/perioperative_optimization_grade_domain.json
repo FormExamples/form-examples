@@ -146,7 +146,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Intervention"
     },
     {
       "code": {
@@ -182,7 +182,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Target Value"
     },
     {
       "code": {

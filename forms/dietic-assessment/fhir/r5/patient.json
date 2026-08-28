@@ -32,11 +32,5 @@
     {
       "postalCode": "SW1A 1AA"
     }
-  ],
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/patient-ethnicity",
-      "valueString": "White British"
-    }
   ]
 }

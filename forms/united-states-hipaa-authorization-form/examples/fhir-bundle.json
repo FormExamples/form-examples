@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -90,7 +90,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Recipient Organization"
           },
           {
             "code": {
@@ -102,7 +102,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Recipient Role"
           },
           {
             "code": {
@@ -245,7 +245,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Specific Persons Or Organizations"
           },
           {
             "code": {
@@ -396,7 +396,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Expiration Event"
           },
           {
             "code": {
@@ -420,7 +420,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Duration Label"
           }
         ]
       }
@@ -739,7 +739,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Purposes"
           },
           {
             "code": {
@@ -858,7 +858,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Medical Health Initials"
           },
           {
             "code": {
@@ -890,7 +890,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Mental Health Initials"
           },
           {
             "code": {
@@ -922,7 +922,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Substance Use Initials"
           },
           {
             "code": {
@@ -974,7 +974,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Hiv Aids Initials"
           },
           {
             "code": {
@@ -1209,7 +1209,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Individual Signature Image Uri"
           },
           {
             "code": {
@@ -1353,7 +1353,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Witness Role"
           }
         ]
       }
@@ -1646,7 +1646,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Citation"
           },
           {
             "code": {
@@ -1829,7 +1829,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Validator Version"
           }
         ]
       }

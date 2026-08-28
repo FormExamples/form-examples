@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -126,7 +126,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -190,7 +190,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           },
           {
             "code": {
@@ -202,7 +202,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Employer"
           }
         ]
       }
@@ -271,7 +271,7 @@
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
         "description": "Hernia Diagnostic Evaluation grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Hernia Type: inguinal; Hernia Subtype: direct; Ehs Classification: ; Ehs Size Grade: 1; Reducibility Status: reducible; Computed Urgency: routine; Final Urgency: routine; Override Reason: Example text.; Recommendation: watchful-waiting; Clinician Notes: Example text.; Signed By Name: Example; Signed At: 2026-04-09T10:00:00+00:00"
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Hernia Type: inguinal; Hernia Subtype: direct; Ehs Classification: Example Ehs Classification; Ehs Size Grade: 1; Reducibility Status: reducible; Computed Urgency: routine; Final Urgency: routine; Override Reason: Example text.; Recommendation: watchful-waiting; Clinician Notes: Example text.; Signed By Name: Example; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {

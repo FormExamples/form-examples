@@ -118,7 +118,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Ambulance Incident Number"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Triage Nurse"
     },
     {
       "code": {
@@ -154,7 +154,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Mts Flowchart"
     },
     {
       "code": {
@@ -186,7 +186,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Mts Discriminator"
     }
   ]
 }

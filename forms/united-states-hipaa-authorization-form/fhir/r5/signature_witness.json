@@ -78,7 +78,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Individual Signature Image Uri"
     },
     {
       "code": {
@@ -222,7 +222,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Witness Role"
     }
   ]
 }

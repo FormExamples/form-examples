@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Chief Complaint"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Onset"
     },
     {
       "code": {
@@ -94,7 +94,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Duration"
     },
     {
       "code": {
@@ -106,7 +106,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Character"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Radiation"
     },
     {
       "code": {
@@ -154,7 +154,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Aggravating Factors"
     },
     {
       "code": {
@@ -166,7 +166,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Relieving Factors"
     },
     {
       "code": {
@@ -190,7 +190,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Previous Episodes"
     },
     {
       "code": {
@@ -202,7 +202,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Treatment Prior To Arrival"
     }
   ]
 }

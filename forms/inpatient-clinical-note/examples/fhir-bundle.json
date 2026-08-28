@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -126,7 +126,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -190,7 +190,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Specialty"
           },
           {
             "code": {
@@ -222,7 +222,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           }
         ]
       }
@@ -556,7 +556,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Action Taken"
           }
         ]
       }
@@ -635,7 +635,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Job"
           },
           {
             "code": {
@@ -667,7 +667,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Owner"
           },
           {
             "code": {
@@ -898,7 +898,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Indication"
           },
           {
             "code": {
@@ -1045,7 +1045,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Problem"
           },
           {
             "code": {

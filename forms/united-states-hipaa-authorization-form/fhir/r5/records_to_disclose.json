@@ -78,7 +78,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Medical Health Initials"
     },
     {
       "code": {
@@ -110,7 +110,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Mental Health Initials"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Substance Use Initials"
     },
     {
       "code": {
@@ -194,7 +194,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Hiv Aids Initials"
     },
     {
       "code": {

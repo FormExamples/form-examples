@@ -79,7 +79,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Industry"
     },
     {
       "code": {
@@ -91,7 +91,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Domain"
     },
     {
       "code": {
@@ -103,7 +103,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Country As Iso 3166 1 Alpha 2"
     },
     {
       "code": {

@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Who Designation Reference"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example National Authority Reference"
     },
     {
       "code": {
@@ -130,7 +130,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Country As Iso 3166 1 Alpha 2"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Country As Iso 3166 1 Alpha 3"
     },
     {
       "code": {
@@ -166,7 +166,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Uniform Stamp Image Data Url"
     },
     {
       "code": {
@@ -178,7 +178,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Authorised Diseases"
     },
     {
       "code": {

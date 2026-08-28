@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Endoscopy Test Request grading result",
-  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Appropriateness Score: 5; Appropriateness Band: usually-appropriate; Triage Tier: routine; Target Timeframe: ; Two Week Wait Eligible: True; Two Week Wait Rationale: ; Completeness Percent: 1; Glasgow Blatchford Score: 5; Rockall Score: 5; Risk Band: low; Anticoagulant Action: ; Recommendation: accept; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Appropriateness Score: 5; Appropriateness Band: usually-appropriate; Triage Tier: routine; Target Timeframe: Example Target Timeframe; Two Week Wait Eligible: True; Two Week Wait Rationale: Example Two Week Wait Rationale; Completeness Percent: 1; Glasgow Blatchford Score: 5; Rockall Score: 5; Risk Band: low; Anticoagulant Action: Example Anticoagulant Action; Recommendation: accept; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
 }

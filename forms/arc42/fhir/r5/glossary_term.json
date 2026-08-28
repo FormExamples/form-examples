@@ -67,7 +67,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Term"
     },
     {
       "code": {
@@ -79,7 +79,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Definition"
     }
   ]
 }

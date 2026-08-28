@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Slit Lamp Right"
     },
     {
       "code": {
@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Slit Lamp Left"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Fundus Right"
     },
     {
       "code": {
@@ -94,7 +94,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Fundus Left"
     },
     {
       "code": {

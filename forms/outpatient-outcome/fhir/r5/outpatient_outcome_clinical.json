@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Presenting Complaint"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Treatment Delivered"
     },
     {
       "code": {

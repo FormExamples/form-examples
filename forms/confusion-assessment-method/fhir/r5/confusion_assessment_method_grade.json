@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Confusion Assessment Method grading result",
-  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Classification: present; Delirium Present: True; Feature 1 Positive: True; Feature 2 Positive: True; Feature 3 Positive: True; Feature 4 Positive: True; Positive Features: ; Motoric Subtype: hypoactive"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Classification: present; Delirium Present: True; Feature 1 Positive: True; Feature 2 Positive: True; Feature 3 Positive: True; Feature 4 Positive: True; Positive Features: Example Positive Features; Motoric Subtype: hypoactive"
 }

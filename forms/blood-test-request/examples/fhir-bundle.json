@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -80,7 +80,7 @@
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
         "description": "Blood Test Request grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Appropriateness Score: 5; Appropriateness Band: usually-appropriate; Preanalytical Band: ok; Fasting Violation: True; Completeness Percent: 1; Triage Tier: routine; Target Timeframe: ; Recommendation: accept; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Appropriateness Score: 5; Appropriateness Band: usually-appropriate; Preanalytical Band: ok; Fasting Violation: True; Completeness Percent: 1; Triage Tier: routine; Target Timeframe: Example Target Timeframe; Recommendation: accept; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
       }
     },
     {
@@ -273,7 +273,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -337,7 +337,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           },
           {
             "code": {

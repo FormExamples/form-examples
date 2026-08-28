@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -159,7 +159,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -367,7 +367,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -431,7 +431,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Profession Registration Number"
           },
           {
             "code": {
@@ -685,7 +685,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -969,7 +969,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Joint Decision Set"
           }
         ]
       }
@@ -1065,7 +1065,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Statement"
           },
           {
             "code": {
@@ -1369,7 +1369,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Statement"
           }
         ]
       }
@@ -1615,7 +1615,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Replacement Trigger"
           }
         ]
       }
@@ -1731,7 +1731,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Signature Data"
           },
           {
             "code": {
@@ -1907,7 +1907,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Engine Version"
           },
           {
             "code": {
@@ -2035,7 +2035,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Suggested Action"
           }
         ]
       }
@@ -2139,7 +2139,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Source Citation"
           },
           {
             "code": {
@@ -2163,7 +2163,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Suggested Correction"
           }
         ]
       }
@@ -2299,7 +2299,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -2479,7 +2479,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {

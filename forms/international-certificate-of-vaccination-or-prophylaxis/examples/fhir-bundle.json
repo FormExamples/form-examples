@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -90,7 +90,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Who Designation Reference"
           },
           {
             "code": {
@@ -102,7 +102,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example National Authority Reference"
           },
           {
             "code": {
@@ -150,7 +150,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -162,7 +162,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 3"
           },
           {
             "code": {
@@ -186,7 +186,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Uniform Stamp Image Data Url"
           },
           {
             "code": {
@@ -198,7 +198,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Authorised Diseases"
           },
           {
             "code": {
@@ -357,7 +357,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -401,7 +401,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           },
           {
             "code": {
@@ -413,7 +413,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Signature Image Data Url"
           },
           {
             "code": {
@@ -567,7 +567,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Disease Other Label"
           },
           {
             "code": {
@@ -579,7 +579,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Disease As Snomed Ct"
           },
           {
             "code": {
@@ -591,7 +591,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Disease As Icd 11"
           },
           {
             "code": {
@@ -615,7 +615,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Vaccine As Snomed Ct"
           },
           {
             "code": {
@@ -627,7 +627,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Vaccine As Atc"
           },
           {
             "code": {
@@ -639,7 +639,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Manufacturer"
           },
           {
             "code": {
@@ -651,7 +651,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Manufacturer Country As Iso 3166 1 Alpha 3"
           },
           {
             "code": {
@@ -663,7 +663,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Batch Number"
           },
           {
             "code": {
@@ -797,7 +797,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Vaccination Time"
           },
           {
             "code": {
@@ -877,7 +877,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Centre Stamp Image Data Url"
           },
           {
             "code": {

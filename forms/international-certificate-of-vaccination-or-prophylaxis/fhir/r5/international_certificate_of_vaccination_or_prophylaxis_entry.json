@@ -90,7 +90,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Disease Other Label"
     },
     {
       "code": {
@@ -102,7 +102,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Disease As Snomed Ct"
     },
     {
       "code": {
@@ -114,7 +114,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Disease As Icd 11"
     },
     {
       "code": {
@@ -138,7 +138,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Vaccine As Snomed Ct"
     },
     {
       "code": {
@@ -150,7 +150,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Vaccine As Atc"
     },
     {
       "code": {
@@ -162,7 +162,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Manufacturer"
     },
     {
       "code": {
@@ -174,7 +174,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Manufacturer Country As Iso 3166 1 Alpha 3"
     },
     {
       "code": {
@@ -186,7 +186,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Batch Number"
     },
     {
       "code": {
@@ -320,7 +320,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Vaccination Time"
     },
     {
       "code": {
@@ -400,7 +400,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Centre Stamp Image Data Url"
     },
     {
       "code": {

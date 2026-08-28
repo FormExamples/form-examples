@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Glasgow Coma Scale grading result",
-  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Eye Score: 5; Verbal Score: 5; Motor Score: 5; Total Score: 5; Breakdown: ; Total Display: ; Severity Band: mild; Pupil Reactivity Score: 5; Gcs P: 1"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Eye Score: 5; Verbal Score: 5; Motor Score: 5; Total Score: 5; Breakdown: Example Breakdown; Total Display: Example Total Display; Severity Band: mild; Pupil Reactivity Score: 5; Gcs P: 1"
 }

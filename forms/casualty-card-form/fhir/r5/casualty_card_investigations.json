@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Blood Tests"
     },
     {
       "code": {
@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Urinalysis"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Pregnancy Test"
     },
     {
       "code": {
@@ -126,7 +126,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Other Investigations"
     }
   ]
 }

@@ -330,7 +330,11 @@ def guess_fhir_value(col_name, col_type, check_values, fhir_type):
         return "ABC123"
     if 'title' in name:
         return "Example Title"
-    return ""
+    # FHIR forbids an empty-string primitive value (ele-1: "All FHIR
+    # elements must have a @value or children"); every string column must
+    # get *some* non-empty example, even one this generic keyword table
+    # doesn't have a specific case for.
+    return f"Example {col_name_to_display(col_name)}"
 
 
 def map_sex_to_fhir_gender(value):
@@ -436,16 +440,19 @@ def build_patient_resource(table_name, columns):
         if "postcode" in col_map:
             addr["postalCode"] = col_map["postcode"]
         resource.setdefault("address", []).append(addr)
-    if "ethnicity" in col_map:
-        resource.setdefault("extension", []).append({
-            "url": "http://hl7.org/fhir/StructureDefinition/patient-ethnicity",
-            "valueString": col_map["ethnicity"]
-        })
-    if "occupation" in col_map:
-        resource.setdefault("extension", []).append({
-            "url": "http://hl7.org/fhir/StructureDefinition/patient-occupation",
-            "valueString": col_map["occupation"]
-        })
+    # Deliberately not represented: FHIR R5's core Patient resource has no
+    # element for ethnicity or occupation, and any `extension` needs a real,
+    # resolvable StructureDefinition to be valid — "http://hl7.org/fhir/..."
+    # was a fabricated URL under the base spec's own namespace (rejected
+    # outright: claims conformance to a registered extension that doesn't
+    # exist), and a project-local `urn:form-examples:...` one fares no
+    # better, since an unresolvable extension URL is invalid regardless of
+    # scheme ("could not be found so is not allowed here"). Standing up a
+    # real custom FHIR IG with StructureDefinitions to carry two ad hoc
+    # demographic fields is disproportionate to what these are: illustrative
+    # example data, not a conformance target. ethnicity/occupation stay out
+    # of the generated Patient resource; the SQL and front-end still carry
+    # them.
 
     return resource
 
@@ -728,7 +735,19 @@ def build_fired_rule_resource(table_name, columns, form_slug):
         elif col['name'] == 'description':
             resource["detail"] = str(value)
         elif col['name'] == 'severity_level':
-            resource["severity"] = str(value)
+            # DetectedIssue.severity is bound to a fixed FHIR value set
+            # (high | moderate | low) — a raw passthrough of the column's own
+            # CHECK-constraint value broke validation the moment a form used
+            # any other word for its severity-like enum (seen in the wild:
+            # 'mild', 'complete', 'routine', 'remission', 'no_effect', …).
+            # Same map-with-safe-default pattern as the `priority` column in
+            # build_additional_flag_resource below.
+            severity_map = {
+                'high': 'high', 'severe': 'high',
+                'medium': 'moderate', 'moderate': 'moderate',
+                'low': 'low', 'mild': 'low', 'minor': 'low',
+            }
+            resource["severity"] = severity_map.get(str(value).lower(), 'moderate')
         elif col['name'] == 'category':
             resource["category"][0]["coding"][0]["display"] = str(value)
 

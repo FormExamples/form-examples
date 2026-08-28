@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -126,7 +126,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -190,7 +190,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           }
         ]
       }
@@ -364,7 +364,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Action Taken"
           },
           {
             "code": {
@@ -515,7 +515,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Size Or Gauge"
           },
           {
             "code": {
@@ -527,7 +527,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Output Target"
           },
           {
             "code": {
@@ -778,7 +778,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Size Or Gauge"
           },
           {
             "code": {
@@ -802,7 +802,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Manufacturer"
           },
           {
             "code": {
@@ -814,7 +814,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Lot Number"
           },
           {
             "code": {
@@ -826,7 +826,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Serial Number"
           },
           {
             "code": {
@@ -838,7 +838,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Batch Number"
           },
           {
             "code": {
@@ -862,7 +862,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Udi Di"
           },
           {
             "code": {
@@ -1136,7 +1136,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Label"
           },
           {
             "code": {

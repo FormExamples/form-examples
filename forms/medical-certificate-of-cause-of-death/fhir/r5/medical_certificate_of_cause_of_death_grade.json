@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Medical Certificate Of Cause Of Death grading result",
-  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Validity Class: valid; Underlying Cause: ; Coroner Referral Indicated: yes"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Validity Class: valid; Underlying Cause: Example Underlying Cause; Coroner Referral Indicated: yes"
 }

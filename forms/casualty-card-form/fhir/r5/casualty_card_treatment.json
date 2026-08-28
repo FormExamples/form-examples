@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Oxygen Therapy Device"
     },
     {
       "code": {
@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Oxygen Therapy Flow Rate"
     },
     {
       "code": {

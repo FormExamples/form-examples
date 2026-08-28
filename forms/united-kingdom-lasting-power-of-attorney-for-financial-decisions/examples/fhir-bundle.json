@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -123,7 +123,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           }
         ]
       }
@@ -275,7 +275,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Opg Reference Number"
           },
           {
             "code": {
@@ -915,7 +915,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Repeat Case Number"
           },
           {
             "code": {
@@ -927,7 +927,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Payment Reference"
           },
           {
             "code": {
@@ -1257,7 +1257,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Replacement Step In Condition"
           }
         ]
       }
@@ -1353,7 +1353,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Signature Blob Path"
           },
           {
             "code": {
@@ -1497,7 +1497,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Remediation Hint"
           },
           {
             "code": {
@@ -1709,7 +1709,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Statutory Citation"
           },
           {
             "code": {
@@ -1721,7 +1721,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Remediation Hint"
           },
           {
             "code": {
@@ -1797,7 +1797,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Witness Signature Blob Path"
           },
           {
             "code": {

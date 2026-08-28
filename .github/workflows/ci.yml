@@ -314,8 +314,18 @@ jobs:
             echo "::error::no FHIR JSON found to validate"
             exit 1
           fi
+          # -tx n/a: skip terminology-server validation. Without it the
+          # validator's default -tx http://tx.fhir.org round-trips every
+          # coded element in every one of these 2,300+ files against the
+          # public terminology server — confirmed locally to make even a
+          # single form's 7 files hang past 100s with no output at all,
+          # which is why this job had never once completed in CI (a real
+          # run sat "in progress" for 4+ hours with an empty log). None of
+          # our own codes are registered with tx.fhir.org anyway (they're
+          # all local `urn:form-examples:...` systems), so there was never
+          # anything for the terminology server to actually validate here.
           # shellcheck disable=SC2086
-          java -jar ~/validator_cli.jar $files -version 5.0 -level errors
+          java -jar ~/validator_cli.jar $files -version 5.0 -level errors -tx n/a
 
   rust:
     name: Rust (shard ${{ matrix.shard }}/8)

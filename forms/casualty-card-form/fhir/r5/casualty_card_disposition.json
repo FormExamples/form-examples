@@ -78,7 +78,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Admitting Specialty"
     },
     {
       "code": {
@@ -90,7 +90,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Admitting Consultant"
     },
     {
       "code": {
@@ -102,7 +102,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Ward"
     },
     {
       "code": {
@@ -114,7 +114,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Level Of Care"
     },
     {
       "code": {
@@ -162,7 +162,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Follow Up"
     },
     {
       "code": {
@@ -174,7 +174,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Return Precautions"
     },
     {
       "code": {
@@ -186,7 +186,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Receiving Hospital"
     },
     {
       "code": {
@@ -210,7 +210,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Mode Of Transfer"
     },
     {
       "code": {
@@ -234,7 +234,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Total Time In Department"
     }
   ]
 }

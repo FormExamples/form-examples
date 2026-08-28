@@ -78,7 +78,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Airway Adjuncts"
     },
     {
       "code": {
@@ -130,7 +130,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Chest Movement"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Breath Sounds"
     },
     {
       "code": {
@@ -154,7 +154,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Trachea Position"
     },
     {
       "code": {
@@ -166,7 +166,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Pulse Character"
     },
     {
       "code": {
@@ -178,7 +178,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Skin Colour"
     },
     {
       "code": {
@@ -190,7 +190,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Skin Temperature"
     },
     {
       "code": {
@@ -202,7 +202,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Capillary Refill"
     },
     {
       "code": {
@@ -214,7 +214,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Haemorrhage"
     },
     {
       "code": {
@@ -226,7 +226,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Iv Access"
     },
     {
       "code": {
@@ -286,7 +286,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Pupils"
     },
     {
       "code": {
@@ -298,7 +298,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Blood Glucose Disability"
     },
     {
       "code": {
@@ -310,7 +310,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Limb Movements"
     },
     {
       "code": {
@@ -322,7 +322,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Skin Examination"
     },
     {
       "code": {
@@ -334,7 +334,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Injuries Identified"
     },
     {
       "code": {

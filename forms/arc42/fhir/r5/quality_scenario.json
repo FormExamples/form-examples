@@ -67,7 +67,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Source"
     },
     {
       "code": {
@@ -79,7 +79,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Stimulus"
     },
     {
       "code": {
@@ -91,7 +91,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Artifact"
     },
     {
       "code": {
@@ -103,7 +103,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Response"
     },
     {
       "code": {
@@ -115,7 +115,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Measure"
     }
   ]
 }

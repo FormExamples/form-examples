@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Distance Right Unaided"
     },
     {
       "code": {
@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Distance Left Unaided"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Distance Binocular Unaided"
     },
     {
       "code": {
@@ -94,7 +94,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Distance Right Corrected"
     },
     {
       "code": {
@@ -106,7 +106,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Distance Left Corrected"
     },
     {
       "code": {
@@ -118,7 +118,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Distance Binocular Corrected"
     },
     {
       "code": {
@@ -130,7 +130,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Near Right Unaided"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Near Left Unaided"
     },
     {
       "code": {
@@ -154,7 +154,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Near Binocular Unaided"
     },
     {
       "code": {
@@ -166,7 +166,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Near Right Corrected"
     },
     {
       "code": {
@@ -178,7 +178,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Near Left Corrected"
     },
     {
       "code": {
@@ -190,7 +190,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Near Binocular Corrected"
     },
     {
       "code": {
@@ -202,7 +202,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Pinhole Right"
     },
     {
       "code": {
@@ -214,7 +214,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Pinhole Left"
     },
     {
       "code": {

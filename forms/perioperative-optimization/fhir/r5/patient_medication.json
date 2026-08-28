@@ -102,7 +102,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Indication"
     },
     {
       "code": {
@@ -126,7 +126,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Prescribed By"
     },
     {
       "code": {

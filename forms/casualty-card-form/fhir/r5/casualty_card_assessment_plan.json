@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Differential Diagnoses"
     },
     {
       "code": {
@@ -94,7 +94,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Risk Stratification"
     }
   ]
 }

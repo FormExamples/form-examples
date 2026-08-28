@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -335,7 +335,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Top Action 1"
           },
           {
             "code": {
@@ -347,7 +347,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Top Action 2"
           },
           {
             "code": {
@@ -359,7 +359,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Top Action 3"
           },
           {
             "code": {

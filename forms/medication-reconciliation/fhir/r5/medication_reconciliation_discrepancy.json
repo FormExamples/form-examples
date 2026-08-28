@@ -78,7 +78,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Bpmh Item Ref"
     },
     {
       "code": {
@@ -90,7 +90,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Inpatient Item Ref"
     },
     {
       "code": {
@@ -122,7 +122,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Rationale"
     },
     {
       "code": {

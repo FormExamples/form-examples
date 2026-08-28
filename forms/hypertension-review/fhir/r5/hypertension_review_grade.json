@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Hypertension Review grading result",
-  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Control Status: controlled; Hypertension Stage: none; Review Status: complete; Primary Source: home; Target Group: ; Clinic Target Systolic: 1; Clinic Target Diastolic: 1; Home Target Systolic: 1; Home Target Diastolic: 1"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Control Status: controlled; Hypertension Stage: none; Review Status: complete; Primary Source: home; Target Group: Example Target Group; Clinic Target Systolic: 1; Clinic Target Diastolic: 1; Home Target Systolic: 1; Home Target Diastolic: 1"
 }

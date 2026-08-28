@@ -94,7 +94,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Treatment Detail"
     },
     {
       "code": {
@@ -146,7 +146,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Substitution Therapy"
     },
     {
       "code": {
@@ -198,7 +198,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Anticonvulsant"
     },
     {
       "code": {
@@ -250,7 +250,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Disability Carer Detail"
     },
     {
       "code": {

@@ -106,7 +106,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Country As Iso 3166 1 Alpha 2"
     },
     {
       "code": {
@@ -150,7 +150,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Gmc Number"
     },
     {
       "code": {
@@ -174,7 +174,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Employer"
     }
   ]
 }

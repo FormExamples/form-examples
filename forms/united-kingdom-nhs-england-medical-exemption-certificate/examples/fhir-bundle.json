@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -157,7 +157,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Treatment Detail"
           },
           {
             "code": {
@@ -209,7 +209,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Substitution Therapy"
           },
           {
             "code": {
@@ -261,7 +261,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Anticonvulsant"
           },
           {
             "code": {
@@ -313,7 +313,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Disability Carer Detail"
           },
           {
             "code": {
@@ -484,7 +484,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Label"
           },
           {
             "code": {
@@ -608,7 +608,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Snomed Ct Reference"
           },
           {
             "code": {
@@ -620,7 +620,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Icd10 Reference"
           }
         ]
       }
@@ -1052,7 +1052,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           },
           {
             "code": {
@@ -1112,7 +1112,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {

@@ -58,7 +58,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example General Appearance"
     },
     {
       "code": {
@@ -70,7 +70,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Head And Face"
     },
     {
       "code": {
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Neck"
     },
     {
       "code": {
@@ -94,7 +94,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Chest Cardiovascular"
     },
     {
       "code": {
@@ -106,7 +106,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Chest Respiratory"
     },
     {
       "code": {
@@ -118,7 +118,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Abdomen"
     },
     {
       "code": {
@@ -130,7 +130,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Pelvis"
     },
     {
       "code": {
@@ -142,7 +142,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Musculoskeletal Limbs"
     },
     {
       "code": {
@@ -154,7 +154,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Neurological"
     },
     {
       "code": {
@@ -166,7 +166,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Skin"
     },
     {
       "code": {
@@ -178,7 +178,7 @@
           }
         ]
       },
-      "valueString": ""
+      "valueString": "Example Mental State"
     },
     {
       "code": {

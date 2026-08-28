@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -261,7 +261,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -325,7 +325,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           },
           {
             "code": {
@@ -337,7 +337,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Employer"
           },
           {
             "code": {
@@ -516,7 +516,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Perioperative Hold Guidance"
           },
           {
             "code": {
@@ -568,12 +568,6 @@
         "address": [
           {
             "postalCode": "SW1A 1AA"
-          }
-        ],
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/patient-ethnicity",
-            "valueString": "White British"
           }
         ]
       }
@@ -847,7 +841,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Indication"
           },
           {
             "code": {
@@ -871,7 +865,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Prescribed By"
           },
           {
             "code": {
@@ -1197,7 +1191,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Intervention"
           },
           {
             "code": {
@@ -1233,7 +1227,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Target Value"
           },
           {
             "code": {

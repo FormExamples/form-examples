@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -126,7 +126,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
@@ -190,7 +190,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Registration Number"
           }
         ]
       }
@@ -259,7 +259,7 @@
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
         "description": "Curb 65 Pneumonia Severity Score grading result",
-        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Confusion Score: 5; Urea Score: 5; Respiratory Rate Score: 5; Blood Pressure Score: 5; Age Score: 5; Total Score: 5; Score Variant: curb-65; Risk Band: low; Recommended Setting: "
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Confusion Score: 5; Urea Score: 5; Respiratory Rate Score: 5; Blood Pressure Score: 5; Age Score: 5; Total Score: 5; Score Variant: curb-65; Risk Band: low; Recommended Setting: Example Recommended Setting"
       }
     },
     {

@@ -209,7 +209,7 @@ For every form under forms/ this script ensures:
 - forms/<slug>/examples/AGENTS.md, CLAUDE.md, index.md, README.md (skeleton)
 - forms/<slug>/examples/assessment.json (a filled-form JSON fixture derived from
   sql/ — type-defaulted, CHECK-constraint aware)
-- forms/<slug>/examples/fhir-bundle.json (a FHIR R5 Bundle of type=document
+- forms/<slug>/examples/fhir-bundle.json (a FHIR R5 Bundle of type=collection
   composed by wrapping every resource under forms/<slug>/fhir/r5/*.json)
 
 Idempotent. Re-running with no upstream schema change is a no-op (same bytes).

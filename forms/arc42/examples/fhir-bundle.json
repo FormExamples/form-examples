@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -589,7 +589,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Decision"
           },
           {
             "code": {
@@ -601,7 +601,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Consequences"
           }
         ]
       }
@@ -677,7 +677,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Version"
           },
           {
             "code": {
@@ -689,7 +689,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Owner"
           },
           {
             "code": {
@@ -809,7 +809,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Responsibility"
           },
           {
             "code": {
@@ -821,7 +821,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Interfaces"
           }
         ]
       }
@@ -1137,7 +1137,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Protocol"
           },
           {
             "code": {
@@ -1353,7 +1353,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Responsibility"
           }
         ]
       }
@@ -1429,7 +1429,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Term"
           },
           {
             "code": {
@@ -1441,7 +1441,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Definition"
           }
         ]
       }
@@ -1549,7 +1549,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Scenario"
           }
         ]
       }
@@ -1625,7 +1625,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Source"
           },
           {
             "code": {
@@ -1637,7 +1637,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Stimulus"
           },
           {
             "code": {
@@ -1649,7 +1649,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Artifact"
           },
           {
             "code": {
@@ -1661,7 +1661,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Response"
           },
           {
             "code": {
@@ -1673,7 +1673,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Measure"
           }
         ]
       }
@@ -1821,7 +1821,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Mitigation"
           }
         ]
       }
@@ -2009,7 +2009,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Role"
           },
           {
             "code": {
@@ -2021,7 +2021,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Concerns"
           }
         ]
       }
@@ -2109,7 +2109,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Choice"
           },
           {
             "code": {
@@ -2121,7 +2121,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Rationale"
           }
         ]
       }

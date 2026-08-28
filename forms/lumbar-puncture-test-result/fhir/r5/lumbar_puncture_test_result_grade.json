@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Lumbar Puncture Test Result grading result",
-  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Result Classification: normal; Abnormality Severity: none; Reporting Category: General; Report Completeness Percent: 1; Follow Up Urgency: routine; Target Timeframe: ; Recommended Action: ; Recommendation: no-action; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Result Classification: normal; Abnormality Severity: none; Reporting Category: General; Report Completeness Percent: 1; Follow Up Urgency: routine; Target Timeframe: Example Target Timeframe; Recommended Action: Example Recommended Action; Recommendation: no-action; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
 }

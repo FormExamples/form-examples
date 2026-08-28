@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -293,7 +293,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Signed By"
           },
           {
             "code": {
@@ -511,7 +511,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Organisation"
           },
           {
             "code": {
@@ -523,7 +523,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Team"
           },
           {
             "code": {
@@ -663,7 +663,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Organisation"
           },
           {
             "code": {
@@ -675,7 +675,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Team"
           },
           {
             "code": {
@@ -699,7 +699,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Timezone"
           },
           {
             "code": {

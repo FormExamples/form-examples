@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "id": "550e8400-e29b-41d4-a716-000000000063",
-  "type": "document",
+  "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
     "profile": [
@@ -677,7 +677,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Slit Lamp Right"
           },
           {
             "code": {
@@ -689,7 +689,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Slit Lamp Left"
           },
           {
             "code": {
@@ -701,7 +701,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Fundus Right"
           },
           {
             "code": {
@@ -713,7 +713,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Fundus Left"
           },
           {
             "code": {
@@ -1087,7 +1087,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Distance Right Unaided"
           },
           {
             "code": {
@@ -1099,7 +1099,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Distance Left Unaided"
           },
           {
             "code": {
@@ -1111,7 +1111,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Distance Binocular Unaided"
           },
           {
             "code": {
@@ -1123,7 +1123,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Distance Right Corrected"
           },
           {
             "code": {
@@ -1135,7 +1135,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Distance Left Corrected"
           },
           {
             "code": {
@@ -1147,7 +1147,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Distance Binocular Corrected"
           },
           {
             "code": {
@@ -1159,7 +1159,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Near Right Unaided"
           },
           {
             "code": {
@@ -1171,7 +1171,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Near Left Unaided"
           },
           {
             "code": {
@@ -1183,7 +1183,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Near Binocular Unaided"
           },
           {
             "code": {
@@ -1195,7 +1195,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Near Right Corrected"
           },
           {
             "code": {
@@ -1207,7 +1207,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Near Left Corrected"
           },
           {
             "code": {
@@ -1219,7 +1219,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Near Binocular Corrected"
           },
           {
             "code": {
@@ -1231,7 +1231,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Pinhole Right"
           },
           {
             "code": {
@@ -1243,7 +1243,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Pinhole Left"
           },
           {
             "code": {
@@ -1381,7 +1381,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Goc Registration Number"
           },
           {
             "code": {
@@ -1449,7 +1449,7 @@
                 }
               ]
             },
-            "valueString": ""
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
           },
           {
             "code": {
