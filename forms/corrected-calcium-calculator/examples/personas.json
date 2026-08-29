@@ -1,0 +1,306 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCorrectedCalcium",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-with-normal-albumin",
+      "description": "Routine general-practice bloods, albumin within normal range: total calcium 2.30 mmol/L, albumin 40 g/L — no correction needed, corrected calcium 2.30 mmol/L, normal.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Elena Vasquez",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-24T09:00",
+          "careSetting": "general-practice",
+          "sampleReference": "GP-44201"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100221",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "calcium": {
+          "totalCalcium": 2.3
+        },
+        "albumin": {
+          "albumin": 40
+        },
+        "symptoms": {
+          "symptomatic": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "correctedCalcium": 2.3,
+        "correctedCalciumRaw": 2.3,
+        "classification": "normal",
+        "firedRules": [
+          {
+            "id": "R-CORRECTION-01",
+            "instrument": "correction",
+            "band": "unknown",
+            "category": "correction",
+            "description": "Corrected calcium = 2.3 + 0.02 × (40 − 40) = 2.3 mmol/L"
+          },
+          {
+            "id": "R-CLASSIFY-NORMAL-01",
+            "instrument": "classification",
+            "band": "normal",
+            "category": "reference-range",
+            "description": "Corrected calcium within 2.20–2.60 mmol/L — normal adult reference range"
+          }
+        ]
+      }
+    },
+    {
+      "name": "hypocalcaemia-mild",
+      "description": "Post-thyroidectomy ward review with low albumin: total calcium 1.95 mmol/L, albumin 30 g/L — corrected calcium 2.15 mmol/L, below the 2.20 lower limit but not severe.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-25T08:30",
+          "careSetting": "ward",
+          "sampleReference": "WD-44310"
+        },
+        "identification": {
+          "patientIdentifier": "WD-100355",
+          "ageBand": "18-39",
+          "sex": "female"
+        },
+        "calcium": {
+          "totalCalcium": 1.95
+        },
+        "albumin": {
+          "albumin": 30
+        },
+        "symptoms": {
+          "symptomatic": "no"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "correctedCalcium": 2.15,
+        "correctedCalciumRaw": 2.15,
+        "classification": "hypocalcaemia",
+        "firedRules": [
+          {
+            "id": "R-CORRECTION-01",
+            "instrument": "correction",
+            "band": "unknown",
+            "category": "correction",
+            "description": "Corrected calcium = 1.95 + 0.02 × (40 − 30) = 2.15 mmol/L"
+          },
+          {
+            "id": "R-CLASSIFY-HYPOCALCAEMIA-01",
+            "instrument": "classification",
+            "band": "hypocalcaemia",
+            "category": "reference-range",
+            "description": "Corrected calcium below 2.20 mmol/L — hypocalcaemia"
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-hypocalcaemia-symptomatic",
+      "description": "Emergency department presentation with perioral tingling and carpopedal spasm: total calcium 1.60 mmol/L, normal albumin — corrected calcium 1.60 mmol/L, below the 1.9 severe threshold, urgent.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-26T22:10",
+          "careSetting": "emergency-department",
+          "sampleReference": "ED-44422"
+        },
+        "identification": {
+          "patientIdentifier": "ED-100489",
+          "ageBand": "18-39",
+          "sex": "male"
+        },
+        "calcium": {
+          "totalCalcium": 1.6
+        },
+        "albumin": {
+          "albumin": 40
+        },
+        "symptoms": {
+          "symptomatic": "yes"
+        },
+        "note": {
+          "clinicalNote": "Perioral tingling, positive Trousseau's sign"
+        }
+      },
+      "expected": {
+        "correctedCalcium": 1.6,
+        "correctedCalciumRaw": 1.6,
+        "classification": "hypocalcaemia",
+        "firedRules": [
+          {
+            "id": "R-CORRECTION-01",
+            "instrument": "correction",
+            "band": "unknown",
+            "category": "correction",
+            "description": "Corrected calcium = 1.6 + 0.02 × (40 − 40) = 1.6 mmol/L"
+          },
+          {
+            "id": "R-CLASSIFY-HYPOCALCAEMIA-01",
+            "instrument": "classification",
+            "band": "hypocalcaemia",
+            "category": "reference-range",
+            "description": "Corrected calcium below 2.20 mmol/L — hypocalcaemia"
+          }
+        ]
+      }
+    },
+    {
+      "name": "hypercalcaemia-mild-asymptomatic",
+      "description": "Incidental finding on routine outpatient bloods: total calcium 2.70 mmol/L, normal albumin — corrected calcium 2.70 mmol/L, above the 2.60 upper limit but asymptomatic and not severe.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-27T11:45",
+          "careSetting": "outpatient",
+          "sampleReference": "OP-44518"
+        },
+        "identification": {
+          "patientIdentifier": "OP-100602",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "calcium": {
+          "totalCalcium": 2.7
+        },
+        "albumin": {
+          "albumin": 40
+        },
+        "symptoms": {
+          "symptomatic": "no"
+        },
+        "note": {
+          "clinicalNote": "Incidental finding, primary hyperparathyroidism suspected"
+        }
+      },
+      "expected": {
+        "correctedCalcium": 2.7,
+        "correctedCalciumRaw": 2.7,
+        "classification": "hypercalcaemia",
+        "firedRules": [
+          {
+            "id": "R-CORRECTION-01",
+            "instrument": "correction",
+            "band": "unknown",
+            "category": "correction",
+            "description": "Corrected calcium = 2.7 + 0.02 × (40 − 40) = 2.7 mmol/L"
+          },
+          {
+            "id": "R-CLASSIFY-HYPERCALCAEMIA-01",
+            "instrument": "classification",
+            "band": "hypercalcaemia",
+            "category": "reference-range",
+            "description": "Corrected calcium above 2.60 mmol/L — hypercalcaemia"
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-hypercalcaemia-crisis",
+      "description": "Malignancy-associated hypercalcaemia on the oncology ward: total calcium 3.20 mmol/L, normal albumin — corrected calcium 3.20 mmol/L, at or above the 3.0 severe threshold, hypercalcaemic crisis risk.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Miriam Solheim",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-28T15:20",
+          "careSetting": "ward",
+          "sampleReference": "ON-44633"
+        },
+        "identification": {
+          "patientIdentifier": "ON-100714",
+          "ageBand": "65-74",
+          "sex": "female"
+        },
+        "calcium": {
+          "totalCalcium": 3.2
+        },
+        "albumin": {
+          "albumin": 40
+        },
+        "symptoms": {
+          "symptomatic": "yes"
+        },
+        "note": {
+          "clinicalNote": "Confusion, polyuria; known metastatic breast cancer"
+        }
+      },
+      "expected": {
+        "correctedCalcium": 3.2,
+        "correctedCalciumRaw": 3.2,
+        "classification": "hypercalcaemia",
+        "firedRules": [
+          {
+            "id": "R-CORRECTION-01",
+            "instrument": "correction",
+            "band": "unknown",
+            "category": "correction",
+            "description": "Corrected calcium = 3.2 + 0.02 × (40 − 40) = 3.2 mmol/L"
+          },
+          {
+            "id": "R-CLASSIFY-HYPERCALCAEMIA-01",
+            "instrument": "classification",
+            "band": "hypercalcaemia",
+            "category": "reference-range",
+            "description": "Corrected calcium above 2.60 mmol/L — hypercalcaemia"
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-missing-albumin",
+      "description": "Laboratory result pending: total calcium back but albumin not yet resulted — the correction cannot be applied and the classification is unknown, not assumed normal.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "laboratory-staff",
+          "assessedAt": "",
+          "careSetting": "laboratory",
+          "sampleReference": "LB-44701"
+        },
+        "identification": {
+          "patientIdentifier": "LB-100822",
+          "ageBand": "40-64",
+          "sex": "unknown"
+        },
+        "calcium": {
+          "totalCalcium": 2.1
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "symptoms": {
+          "symptomatic": ""
+        },
+        "note": {
+          "clinicalNote": "Albumin pending, will re-run once available"
+        }
+      },
+      "expected": {
+        "correctedCalcium": null,
+        "correctedCalciumRaw": null,
+        "classification": "unknown",
+        "firedRules": [
+          {
+            "id": "R-CORRECTION-INCOMPLETE-01",
+            "instrument": "correction",
+            "band": "unknown",
+            "category": "missing-input",
+            "description": "Correction not computed — total calcium and/or albumin is missing"
+          }
+        ]
+      }
+    }
+  ]
+}
