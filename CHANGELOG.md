@@ -18,6 +18,41 @@ for them.
 
 ### Fixed
 
+- **Dependabot alerts, enabled per `spec/dependabot/`, immediately surfaced
+  207 real open vulnerabilities (7 critical, 60 high, 126 moderate, 14
+  low) — down to 3 (all low, no safe fix available) after triage:**
+  - `formexamples.github.io/package.json` carried four dependencies never
+    referenced anywhere in the site's source or scripts — `migrate`,
+    `npx`, `package`, `sv`. `npx` alone (a package that has no reason to
+    be a project dependency at all; it ships with npm itself) dragged in
+    its own deeply bundled, years-old copy of npm and accounted for most
+    of the 84 alerts against this file, the production site's actual
+    `npm ci` build lockfile. Removed all four; `npm audit` dropped from
+    66 to 3 low-severity findings; `npm run check` and `npm run build`
+    verified clean against the regenerated lockfile.
+  - 3 of the 355 forms' `front-end-with-svelte/` (`cognitive-assessment`,
+    `predicting-risk-of-cardiovascular-disease-events`,
+    `prescription-request`) carried a leftover npm `package-lock.json`
+    dated before the `pnpm-lock.yaml` beside it — every other form has
+    `pnpm-lock.yaml` only. Nothing installs from these stale files (46
+    of the 207 alerts, against files no build ever reads); deleted.
+  - The remaining 113 (medium-severity, one per Loco crate as GitHub's
+    scan progressed across the fleet in stages) were the same
+    `opentelemetry_sdk` unbounded-memory-on-oversized-baggage-header
+    advisory (GHSA-w9wp-h8wv-79jx). Grepped this fleet's own code and
+    loco-rs 1.1.0's source for the only vulnerable function,
+    `BaggagePropagator::extract_with_context` — neither calls it, so the
+    path is unreachable. Dismissed via the GitHub API with that reasoning
+    on record, the same basis already used for RUSTSEC-2023-0071 in
+    `deny.toml`; a synchronized major-version bump of the whole
+    OpenTelemetry stack (0.27 → 0.32+) across all 355 crates is real work
+    disproportionate to an unreachable, DoS-only finding.
+  - The 3 remaining low-severity alerts are the same transitive `cookie`
+    advisory inside `@sveltejs/kit`'s own dependency tree in three
+    different lockfiles; `npm audit fix --force` can only "fix" it by
+    downgrading `@sveltejs/kit` to a 2022-era prerelease, so left for a
+    real upstream fix via the existing Dependabot npm watch instead of a
+    regression.
 - **CI went fully green for the first time in this repository's history**
   (run [33213955606](https://github.com/FormExamples/form-examples/actions/runs/33213955606):
   every job — both matrices, FHIR, drift, SQL apply, structure — `success`,
