@@ -1,0 +1,441 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateEgfr",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "g1-normal-young-adult",
+      "description": "Healthy young adult, routine occupational-health bloods: low-normal creatinine, steady state — G1, normal or high eGFR.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-24T09:00",
+          "careSetting": "primary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100221",
+          "ageYears": 28,
+          "sex": "female"
+        },
+        "creatinine": {
+          "serumCreatinine": 62,
+          "specimenDate": "2026-06-24",
+          "steadyState": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 0.701,
+        "egfr": 120,
+        "egfrRaw": 120.4894099665904,
+        "egfrStage": "G1",
+        "egfrStageLabel": "Normal or high",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 62 µmol/L ÷ 88.42 = 0.701 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(1.002, 1)^-0.241 × max(1.002, 1)^-1.200 × 0.9938^28 × 1.012 = 120 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G1-01",
+            "instrument": "staging",
+            "band": "G1",
+            "category": "g-stage",
+            "description": "eGFR ≥ 90 mL/min/1.73 m² — G1 (normal or high)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "g2-mildly-decreased-middle-aged",
+      "description": "Middle-aged man, annual health check, mildly raised creatinine — G2, mildly decreased eGFR, no action needed beyond routine monitoring.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-25T10:30",
+          "careSetting": "primary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100355",
+          "ageYears": 55,
+          "sex": "male"
+        },
+        "creatinine": {
+          "serumCreatinine": 100,
+          "specimenDate": "2026-06-25",
+          "steadyState": "yes"
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 1.131,
+        "egfr": 77,
+        "egfrRaw": 76.68043199801087,
+        "egfrStage": "G2",
+        "egfrStageLabel": "Mildly decreased",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 100 µmol/L ÷ 88.42 = 1.131 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(1.257, 1)^-0.302 × max(1.257, 1)^-1.200 × 0.9938^55 = 77 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G2-01",
+            "instrument": "staging",
+            "band": "G2",
+            "category": "g-stage",
+            "description": "eGFR 60–89 mL/min/1.73 m² — G2 (mildly decreased)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "g3a-mildly-to-moderately-decreased",
+      "description": "Known early CKD on annual review: eGFR in the G3a band — reduced function, monitor and manage per CKD guidance.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-26T11:15",
+          "careSetting": "primary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100489",
+          "ageYears": 68,
+          "sex": "male"
+        },
+        "creatinine": {
+          "serumCreatinine": 135,
+          "specimenDate": "2026-06-26",
+          "steadyState": "yes"
+        },
+        "note": {
+          "clinicalNote": "Known CKD, on ACE inhibitor"
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 1.527,
+        "egfr": 49,
+        "egfrRaw": 49.336794598592135,
+        "egfrStage": "G3a",
+        "egfrStageLabel": "Mildly to moderately decreased",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 135 µmol/L ÷ 88.42 = 1.527 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(1.696, 1)^-0.302 × max(1.696, 1)^-1.200 × 0.9938^68 = 49 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G3A-01",
+            "instrument": "staging",
+            "band": "G3a",
+            "category": "g-stage",
+            "description": "eGFR 45–59 mL/min/1.73 m² — G3a (mildly to moderately decreased)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "g3b-moderately-to-severely-decreased",
+      "description": "Elderly woman with progressive CKD: eGFR in the G3b band — drug-dosing review required for renally-cleared medicines.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Miriam Solheim",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-27T09:45",
+          "careSetting": "secondary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "SC-100602",
+          "ageYears": 74,
+          "sex": "female"
+        },
+        "creatinine": {
+          "serumCreatinine": 140,
+          "specimenDate": "2026-06-27",
+          "steadyState": "yes"
+        },
+        "note": {
+          "clinicalNote": "Progressive decline over 2 years, nephrology follow-up"
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 1.583,
+        "egfr": 34,
+        "egfrRaw": 34.05798211452599,
+        "egfrStage": "G3b",
+        "egfrStageLabel": "Moderately to severely decreased",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 140 µmol/L ÷ 88.42 = 1.583 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(2.262, 1)^-0.241 × max(2.262, 1)^-1.200 × 0.9938^74 × 1.012 = 34 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G3B-01",
+            "instrument": "staging",
+            "band": "G3b",
+            "category": "g-stage",
+            "description": "eGFR 30–44 mL/min/1.73 m² — G3b (moderately to severely decreased)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "g4-severely-decreased-referral",
+      "description": "Advanced CKD under nephrology follow-up: eGFR in the G4 band — severely decreased, referral per NICE NG203.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-28T14:00",
+          "careSetting": "secondary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "SC-100714",
+          "ageYears": 80,
+          "sex": "male"
+        },
+        "creatinine": {
+          "serumCreatinine": 320,
+          "specimenDate": "2026-06-28",
+          "steadyState": "yes"
+        },
+        "note": {
+          "clinicalNote": "Under nephrology, renal replacement planning discussed"
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 3.619,
+        "egfr": 16,
+        "egfrRaw": 16.254716044988005,
+        "egfrStage": "G4",
+        "egfrStageLabel": "Severely decreased",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 320 µmol/L ÷ 88.42 = 3.619 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(4.021, 1)^-0.302 × max(4.021, 1)^-1.200 × 0.9938^80 = 16 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G4-01",
+            "instrument": "staging",
+            "band": "G4",
+            "category": "g-stage",
+            "description": "eGFR 15–29 mL/min/1.73 m² — G4 (severely decreased)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "g5-kidney-failure",
+      "description": "Established kidney failure on the renal ward: eGFR in the G5 band — kidney failure, renal replacement therapy.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Elena Vasquez",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-29T08:20",
+          "careSetting": "secondary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "SC-100822",
+          "ageYears": 70,
+          "sex": "female"
+        },
+        "creatinine": {
+          "serumCreatinine": 620,
+          "specimenDate": "2026-06-29",
+          "steadyState": "yes"
+        },
+        "note": {
+          "clinicalNote": "On haemodialysis three times weekly"
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 7.012,
+        "egfr": 6,
+        "egfrRaw": 5.854725782502039,
+        "egfrStage": "G5",
+        "egfrStageLabel": "Kidney failure",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 620 µmol/L ÷ 88.42 = 7.012 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(10.017, 1)^-0.241 × max(10.017, 1)^-1.200 × 0.9938^70 × 1.012 = 6 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G5-01",
+            "instrument": "staging",
+            "band": "G5",
+            "category": "g-stage",
+            "description": "eGFR < 15 mL/min/1.73 m² — G5 (kidney failure)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "non-steady-state-possible-aki",
+      "description": "Acutely unwell inpatient with a rapidly rising creatinine: steady state is explicitly 'no', so the numeric eGFR still computes but should not be relied on for staging — a possible acute kidney injury, not chronic disease.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-30T03:10",
+          "careSetting": "secondary-care",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "SC-100913",
+          "ageYears": 62,
+          "sex": "male"
+        },
+        "creatinine": {
+          "serumCreatinine": 210,
+          "specimenDate": "2026-06-30",
+          "steadyState": "no"
+        },
+        "note": {
+          "clinicalNote": "Creatinine doubled over 48 hours, sepsis, oliguric"
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": 2.375,
+        "egfr": 30,
+        "egfrRaw": 30.137994140263718,
+        "egfrStage": "G3b",
+        "egfrStageLabel": "Moderately to severely decreased",
+        "firedRules": [
+          {
+            "id": "R-CONVERT-01",
+            "instrument": "conversion",
+            "band": "unknown",
+            "category": "conversion",
+            "description": "Serum creatinine 210 µmol/L ÷ 88.42 = 2.375 mg/dL"
+          },
+          {
+            "id": "R-EQUATION-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "ckd-epi-2021-creatinine",
+            "description": "eGFR = 142 × min(2.639, 1)^-0.302 × max(2.639, 1)^-1.200 × 0.9938^62 = 30 mL/min/1.73 m²"
+          },
+          {
+            "id": "R-STAGE-G3B-01",
+            "instrument": "staging",
+            "band": "G3b",
+            "category": "g-stage",
+            "description": "eGFR 30–44 mL/min/1.73 m² — G3b (moderately to severely decreased)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-missing-creatinine",
+      "description": "Age and sex recorded but the creatinine result has not come back yet — eGFR cannot be computed and the stage is unknown, not assumed normal.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "laboratory",
+          "assessedAt": "",
+          "careSetting": "laboratory",
+          "equation": "ckd-epi-2021-creatinine"
+        },
+        "identification": {
+          "patientIdentifier": "LB-101004",
+          "ageYears": 50,
+          "sex": "female"
+        },
+        "creatinine": {
+          "serumCreatinine": null,
+          "specimenDate": "2026-07-01",
+          "steadyState": ""
+        },
+        "note": {
+          "clinicalNote": "Creatinine pending, will re-run once available"
+        }
+      },
+      "expected": {
+        "serumCreatinineMgDl": null,
+        "egfr": null,
+        "egfrRaw": null,
+        "egfrStage": null,
+        "egfrStageLabel": "",
+        "firedRules": [
+          {
+            "id": "R-EQUATION-INCOMPLETE-01",
+            "instrument": "equation",
+            "band": "unknown",
+            "category": "missing-input",
+            "description": "eGFR not computed — serum creatinine, age, and/or sex is missing"
+          }
+        ]
+      }
+    }
+  ]
+}
