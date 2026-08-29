@@ -1,0 +1,542 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMeld",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "base-meld-moderate",
+      "description": "Compensated cirrhosis on hepatology clinic review, base MELD (no sodium/albumin correction): moderate severity band.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Femi Adeyemi",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "2026-06-24T09:00",
+          "careSetting": "hepatology-clinic",
+          "meldVariant": "meld"
+        },
+        "identification": {
+          "patientIdentifier": "HC-100221",
+          "ageBand": "40-64",
+          "sex": "male"
+        },
+        "bilirubin": {
+          "bilirubin": 2,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 1.5
+        },
+        "renal": {
+          "creatinine": 1.2,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 2,
+        "creatinineMgDl": 1.2,
+        "creatinineAdjusted": 1.2,
+        "dialysisRuleApplied": false,
+        "meldScore": 15,
+        "mortalityBand": "moderate",
+        "estimatedMortalityPercent": 6,
+        "firedRules": [
+          {
+            "id": "R-FORMULA-MELD-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "base-meld",
+            "description": "Base MELD = round(3.78·ln(2) + 11.2·ln(1.5) + 9.57·ln(1.2) + 6.43) = 15"
+          },
+          {
+            "id": "R-BAND-MODERATE-01",
+            "instrument": "band",
+            "band": "moderate",
+            "category": "mortality-band",
+            "description": "MELD score 10–19 — moderate estimated 3-month mortality (~6%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "meld-na-sodium-correction",
+      "description": "Same laboratory picture as the base-MELD persona, but scored as MELD-Na with hyponatraemia (sodium 128 mEq/L): the sodium correction raises the score into the high band, since base MELD (15) exceeds the 11 threshold the correction requires.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "2026-06-25T10:30",
+          "careSetting": "transplant-unit",
+          "meldVariant": "meld-na"
+        },
+        "identification": {
+          "patientIdentifier": "TU-100355",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "bilirubin": {
+          "bilirubin": 2,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 1.5
+        },
+        "renal": {
+          "creatinine": 1.2,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": 128
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": "Hyponatraemic, on fluid restriction"
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 2,
+        "creatinineMgDl": 1.2,
+        "creatinineAdjusted": 1.2,
+        "dialysisRuleApplied": false,
+        "meldScore": 22,
+        "mortalityBand": "high",
+        "estimatedMortalityPercent": 20,
+        "firedRules": [
+          {
+            "id": "R-FORMULA-MELD-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "base-meld",
+            "description": "Base MELD = round(3.78·ln(2) + 11.2·ln(1.5) + 9.57·ln(1.2) + 6.43) = 15"
+          },
+          {
+            "id": "R-SODIUM-CORRECTION-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "sodium-correction",
+            "description": "MELD-Na correction (Na=128 mEq/L): 15 → 22"
+          },
+          {
+            "id": "R-BAND-HIGH-01",
+            "instrument": "band",
+            "band": "high",
+            "category": "mortality-band",
+            "description": "MELD score 20–29 — high estimated 3-month mortality (~20%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "dialysis-rule-very-high",
+      "description": "Established renal failure, twice-weekly haemodialysis: the dialysis rule forces creatinine to 4.0 mg/dL regardless of the measured value, pushing the score into the very-high band and firing both the transplant-referral and on-dialysis flags.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "intensivist",
+          "assessedAt": "2026-06-26T14:00",
+          "careSetting": "intensive-care",
+          "meldVariant": "meld"
+        },
+        "identification": {
+          "patientIdentifier": "IC-100489",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "bilirubin": {
+          "bilirubin": 3,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 2
+        },
+        "renal": {
+          "creatinine": 2,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 3,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": "Twice-weekly haemodialysis, hepatorenal syndrome"
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 3,
+        "creatinineMgDl": 2,
+        "creatinineAdjusted": 4,
+        "dialysisRuleApplied": true,
+        "meldScore": 32,
+        "mortalityBand": "very-high",
+        "estimatedMortalityPercent": 53,
+        "firedRules": [
+          {
+            "id": "R-DIALYSIS-01",
+            "instrument": "dialysis",
+            "band": "",
+            "category": "dialysis-rule",
+            "description": "Dialysis rule applied — creatinine set to 4.0 mg/dL (≥ 2 haemodialysis sessions or ≥ 24 h CVVHD in the past 7 days)"
+          },
+          {
+            "id": "R-FORMULA-MELD-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "base-meld",
+            "description": "Base MELD = round(3.78·ln(3) + 11.2·ln(2) + 9.57·ln(4) + 6.43) = 32"
+          },
+          {
+            "id": "R-BAND-VERY-HIGH-01",
+            "instrument": "band",
+            "band": "very-high",
+            "category": "mortality-band",
+            "description": "MELD score 30–39 — very high estimated 3-month mortality (~53%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "meld-3-with-albumin",
+      "description": "MELD 3.0 (Kim et al. 2021), which incorporates sex and serum albumin: female patient with hypoalbuminaemia — high severity band.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Helena Kowalski",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "2026-06-27T11:15",
+          "careSetting": "transplant-unit",
+          "meldVariant": "meld-3"
+        },
+        "identification": {
+          "patientIdentifier": "TU-100602",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "bilirubin": {
+          "bilirubin": 2,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 1.5
+        },
+        "renal": {
+          "creatinine": 1.5,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": 130
+        },
+        "albumin": {
+          "albumin": 2.5
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 2,
+        "creatinineMgDl": 1.5,
+        "creatinineAdjusted": 1.5,
+        "dialysisRuleApplied": false,
+        "meldScore": 24,
+        "mortalityBand": "high",
+        "estimatedMortalityPercent": 20,
+        "firedRules": [
+          {
+            "id": "R-FORMULA-MELD3-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "meld-3",
+            "description": "MELD 3.0 = 24 (sex, bilirubin, INR, creatinine, sodium, albumin)"
+          },
+          {
+            "id": "R-BAND-HIGH-01",
+            "instrument": "band",
+            "band": "high",
+            "category": "mortality-band",
+            "description": "MELD score 20–29 — high estimated 3-month mortality (~20%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "extreme-severity",
+      "description": "Fulminant hepatic failure on the transplant waiting list: markedly deranged bilirubin, INR, and creatinine — the calculated score exceeds the scale and is clamped to the extreme-band maximum of 40.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "transplant-coordinator",
+          "assessedAt": "2026-06-28T22:00",
+          "careSetting": "intensive-care",
+          "meldVariant": "meld"
+        },
+        "identification": {
+          "patientIdentifier": "IC-100714",
+          "ageBand": "18-39",
+          "sex": "female"
+        },
+        "bilirubin": {
+          "bilirubin": 15,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 4
+        },
+        "renal": {
+          "creatinine": 3,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": "Fulminant hepatic failure, listed status 1A"
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 15,
+        "creatinineMgDl": 3,
+        "creatinineAdjusted": 3,
+        "dialysisRuleApplied": false,
+        "meldScore": 40,
+        "mortalityBand": "extreme",
+        "estimatedMortalityPercent": 71,
+        "firedRules": [
+          {
+            "id": "R-FORMULA-MELD-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "base-meld",
+            "description": "Base MELD = round(3.78·ln(15) + 11.2·ln(4) + 9.57·ln(3) + 6.43) = 43"
+          },
+          {
+            "id": "R-BAND-EXTREME-01",
+            "instrument": "band",
+            "band": "extreme",
+            "category": "mortality-band",
+            "description": "MELD score ≥ 40 — extreme estimated 3-month mortality (~71%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "minimum-score-floor",
+      "description": "Well-compensated cirrhosis with entirely normal labs: bilirubin, INR, and creatinine all at or below the floor of 1.0 — the score computes to the scale's minimum of 6.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "gastroenterologist",
+          "assessedAt": "2026-06-29T09:30",
+          "careSetting": "hepatology-clinic",
+          "meldVariant": "meld"
+        },
+        "identification": {
+          "patientIdentifier": "HC-100822",
+          "ageBand": "40-64",
+          "sex": "male"
+        },
+        "bilirubin": {
+          "bilirubin": 0.8,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 1
+        },
+        "renal": {
+          "creatinine": 0.9,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": "Stable, annual surveillance"
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 0.8,
+        "creatinineMgDl": 0.9,
+        "creatinineAdjusted": 0.9,
+        "dialysisRuleApplied": false,
+        "meldScore": 6,
+        "mortalityBand": "low",
+        "estimatedMortalityPercent": 2,
+        "firedRules": [
+          {
+            "id": "R-FORMULA-MELD-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "base-meld",
+            "description": "Base MELD = round(3.78·ln(1) + 11.2·ln(1) + 9.57·ln(1) + 6.43) = 6"
+          },
+          {
+            "id": "R-BAND-LOW-01",
+            "instrument": "band",
+            "band": "low",
+            "category": "mortality-band",
+            "description": "MELD score ≤ 9 — low estimated 3-month mortality (~2%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "unit-conversion-si-units",
+      "description": "Laboratory reports bilirubin and creatinine in SI units (µmol/L) rather than mg/dL: exercises the unit-conversion step (bilirubin ÷ 17.1, creatinine ÷ 88.4) before the formula runs.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "2026-06-30T13:45",
+          "careSetting": "hepatology-clinic",
+          "meldVariant": "meld"
+        },
+        "identification": {
+          "patientIdentifier": "HC-100913",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "bilirubin": {
+          "bilirubin": 34.2,
+          "bilirubinUnit": "umol/L"
+        },
+        "inr": {
+          "inr": 1.5
+        },
+        "renal": {
+          "creatinine": 88.4,
+          "creatinineUnit": "umol/L",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 2,
+        "creatinineMgDl": 1,
+        "creatinineAdjusted": 1,
+        "dialysisRuleApplied": false,
+        "meldScore": 14,
+        "mortalityBand": "moderate",
+        "estimatedMortalityPercent": 6,
+        "firedRules": [
+          {
+            "id": "R-FORMULA-MELD-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "base-meld",
+            "description": "Base MELD = round(3.78·ln(2) + 11.2·ln(1.5) + 9.57·ln(1) + 6.43) = 14"
+          },
+          {
+            "id": "R-BAND-MODERATE-01",
+            "instrument": "band",
+            "band": "moderate",
+            "category": "mortality-band",
+            "description": "MELD score 10–19 — moderate estimated 3-month mortality (~6%)"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "incomplete-meld-na-missing-sodium",
+      "description": "MELD-Na selected but sodium has not been entered: the variant's required input is missing, so no partial score is computed — meldScore stays null rather than silently falling back to the base MELD.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "hepatologist",
+          "assessedAt": "",
+          "careSetting": "hepatology-clinic",
+          "meldVariant": "meld-na"
+        },
+        "identification": {
+          "patientIdentifier": "HC-101004",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "bilirubin": {
+          "bilirubin": 2,
+          "bilirubinUnit": "mg/dL"
+        },
+        "inr": {
+          "inr": 1.5
+        },
+        "renal": {
+          "creatinine": 1.2,
+          "creatinineUnit": "mg/dL",
+          "dialysisSessionsPastWeek": 0,
+          "cvvhd24h": "no"
+        },
+        "sodium": {
+          "sodium": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": "Sodium result pending"
+        }
+      },
+      "expected": {
+        "bilirubinMgDl": 2,
+        "creatinineMgDl": 1.2,
+        "creatinineAdjusted": null,
+        "dialysisRuleApplied": false,
+        "meldScore": null,
+        "mortalityBand": "",
+        "estimatedMortalityPercent": null,
+        "firedRules": [
+          {
+            "id": "R-INCOMPLETE-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "missing-input",
+            "description": "Score not computed — missing input(s): serum sodium"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    }
+  ]
+}
