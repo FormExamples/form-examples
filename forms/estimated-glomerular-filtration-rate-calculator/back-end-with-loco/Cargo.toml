@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "estimated_glomerular_filtration_rate_calculator"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "estimated_glomerular_filtration_rate_calculator-cli"
 

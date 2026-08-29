@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "cardiac_stress_test_request"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "cardiac_stress_test_request-cli"
 

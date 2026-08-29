@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "rockall_score_for_upper_gastrointestinal_bleeding"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "rockall_score_for_upper_gastrointestinal_bleeding-cli"
 

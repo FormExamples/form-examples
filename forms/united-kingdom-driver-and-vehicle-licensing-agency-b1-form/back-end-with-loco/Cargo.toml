@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "united_kingdom_driver_and_vehicle_licensing_agency_b1_form"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "united_kingdom_driver_and_vehicle_licensing_agency_b1_form-cli"
 

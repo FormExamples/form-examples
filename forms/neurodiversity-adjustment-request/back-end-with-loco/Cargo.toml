@@ -1,10 +1,14 @@
 [workspace]
 members = ["migration"]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "neurodiversity-adjustment-request-loco-crate"
 version = "0.1.0"
 edition = "2024"
+rust-version.workspace = true
 publish = false
 default-run = "neurodiversity-adjustment-request-loco-crate-cli"
 

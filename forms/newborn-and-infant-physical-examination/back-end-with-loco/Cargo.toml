@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "newborn_and_infant_physical_examination"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "newborn_and_infant_physical_examination-cli"
 

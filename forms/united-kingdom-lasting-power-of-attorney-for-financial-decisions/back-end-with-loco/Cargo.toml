@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "united_kingdom_lasting_power_of_attorney_for_financial_decisions"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "united_kingdom_lasting_power_of_attorney_for_financial_decisions-cli"
 

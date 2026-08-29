@@ -1,9 +1,13 @@
 [workspace]
 
+[workspace.package]
+rust-version = "1.96"
+
 [package]
 name = "recommended_summary_plan_for_emergency_care_and_treatment"
 version = "0.1.0"
 edition = "2021"
+rust-version.workspace = true
 publish = false
 default-run = "recommended_summary_plan_for_emergency_care_and_treatment-cli"
 

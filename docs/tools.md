@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-77 tools.
+78 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -37,6 +37,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-forbid-unsafe`](#loco-forbid-unsafe)
 - [`bin/loco-migration-defaults`](#loco-migration-defaults)
 - [`bin/loco-migration-nullability`](#loco-migration-nullability)
+- [`bin/loco-msrv-set`](#loco-msrv-set)
 - [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
 - [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
 - [`bin/loco-seed-base-stray-usage-fix`](#loco-seed-base-stray-usage-fix)
@@ -948,6 +949,43 @@ Usage:
   bin/loco-migration-nullability --all              # every form's Loco crate
   bin/loco-migration-nullability --dry-run --all    # show what would change
   bin/loco-migration-nullability --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-msrv-set"><code>bin/loco-msrv-set</code></h2>
+
+```text
+bin/loco-msrv-set — set the Rust MSRV (current stable N-2) fleet-wide,
+per spec/rust-msrv-n-minus-2/.
+
+The spec's guidance assumes a single repo-root Cargo workspace
+(`[workspace.package]` with `rust-version`, every member crate inheriting
+via `rust-version.workspace = true`). This repo has no such root: each
+form's `back-end-with-loco/` is its OWN self-contained workspace (`[workspace]`
+with no explicit `members`, which still auto-includes `migration/` as a
+member via its path dependency — confirmed by `migration/Cargo.toml`'s
+`loco-rs = { workspace = true }`). So the same pattern is applied 355 times,
+once per form's workspace, rather than once at a repo root that doesn't
+exist:
+
+- `back-end-with-loco/Cargo.toml` gains a `[workspace.package]` table with
+  `rust-version = "<MSRV>"`, and its own `[package]` gets
+  `rust-version.workspace = true`.
+- `back-end-with-loco/migration/Cargo.toml` (a member of the same implicit
+  workspace, confirmed above) gets `rust-version.workspace = true` too.
+
+MSRV is computed from the locally installed `rustc`'s stable version minus
+two minor releases (e.g. stable 1.98 -> MSRV 1.96), matching the spec's
+rule exactly: `--msrv` overrides this for a specific value instead.
+
+This is an ongoing convention, not a one-shot migration: it must be
+re-applied (with a new --msrv) every time stable Rust advances, per the
+spec's "Maintenance" section. `--check` is the CI drift detector.
+
+Usage:
+  bin/loco-msrv-set --msrv 1.96 <slug>...        # named forms
+  bin/loco-msrv-set --msrv 1.96 --all            # every form's Loco crate
+  bin/loco-msrv-set --msrv 1.96 --dry-run --all  # show what would change
+  bin/loco-msrv-set --msrv 1.96 --check --all    # CI drift check (non-zero on drift)
 ```
 
 <h2 id="loco-rs-1-migration"><code>bin/loco-rs-1-migration</code></h2>

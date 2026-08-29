@@ -1,0 +1,181 @@
+#!/usr/bin/env python3
+"""bin/loco-msrv-set — set the Rust MSRV (current stable N-2) fleet-wide,
+per spec/rust-msrv-n-minus-2/.
+
+The spec's guidance assumes a single repo-root Cargo workspace
+(`[workspace.package]` with `rust-version`, every member crate inheriting
+via `rust-version.workspace = true`). This repo has no such root: each
+form's `back-end-with-loco/` is its OWN self-contained workspace (`[workspace]`
+with no explicit `members`, which still auto-includes `migration/` as a
+member via its path dependency — confirmed by `migration/Cargo.toml`'s
+`loco-rs = { workspace = true }`). So the same pattern is applied 355 times,
+once per form's workspace, rather than once at a repo root that doesn't
+exist:
+
+- `back-end-with-loco/Cargo.toml` gains a `[workspace.package]` table with
+  `rust-version = "<MSRV>"`, and its own `[package]` gets
+  `rust-version.workspace = true`.
+- `back-end-with-loco/migration/Cargo.toml` (a member of the same implicit
+  workspace, confirmed above) gets `rust-version.workspace = true` too.
+
+MSRV is computed from the locally installed `rustc`'s stable version minus
+two minor releases (e.g. stable 1.98 -> MSRV 1.96), matching the spec's
+rule exactly: `--msrv` overrides this for a specific value instead.
+
+This is an ongoing convention, not a one-shot migration: it must be
+re-applied (with a new --msrv) every time stable Rust advances, per the
+spec's "Maintenance" section. `--check` is the CI drift detector.
+
+Usage:
+  bin/loco-msrv-set --msrv 1.96 <slug>...        # named forms
+  bin/loco-msrv-set --msrv 1.96 --all            # every form's Loco crate
+  bin/loco-msrv-set --msrv 1.96 --dry-run --all  # show what would change
+  bin/loco-msrv-set --msrv 1.96 --check --all    # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+PACKAGE_ANCHOR_RE = re.compile(r'\n\n\[package\]\n')
+EDITION_RE = re.compile(r'(\nedition = "[^"]+"\n)')
+
+
+def fixed_root_cargo_toml(text: str, msrv: str) -> str | None:
+    """Return the updated back-end-with-loco/Cargo.toml text, or None if
+    already correct."""
+    changed = False
+
+    if "[workspace.package]" not in text:
+        new_text = PACKAGE_ANCHOR_RE.sub(
+            f'\n\n[workspace.package]\nrust-version = "{msrv}"\n\n[package]\n',
+            text,
+            count=1,
+        )
+        if new_text == text:
+            return None  # anchor not found; leave untouched rather than guess
+        text = new_text
+        changed = True
+    elif f'rust-version = "{msrv}"' not in text:
+        text = re.sub(
+            r'\[workspace\.package\]\nrust-version = "[^"]+"\n',
+            f'[workspace.package]\nrust-version = "{msrv}"\n',
+            text,
+            count=1,
+        )
+        changed = True
+
+    if "rust-version.workspace = true" not in text:
+        new_text = EDITION_RE.sub(
+            r'\1rust-version.workspace = true\n', text, count=1
+        )
+        if new_text == text:
+            return None
+        text = new_text
+        changed = True
+
+    return text if changed else None
+
+
+def fixed_migration_cargo_toml(text: str) -> str | None:
+    """Return the updated migration/Cargo.toml text, or None if already
+    correct."""
+    if "rust-version.workspace = true" in text:
+        return None
+    new_text = EDITION_RE.sub(r'\1rust-version.workspace = true\n', text, count=1)
+    return new_text if new_text != text else None
+
+
+def process_form(form: pathlib.Path, msrv: str, apply: bool) -> list[str]:
+    """Return the list of relative paths that drifted (or were fixed)."""
+    back_end = form / "back-end-with-loco"
+    touched: list[str] = []
+
+    root_toml = back_end / "Cargo.toml"
+    if root_toml.is_file():
+        fixed = fixed_root_cargo_toml(root_toml.read_text(), msrv)
+        if fixed is not None:
+            touched.append("Cargo.toml")
+            if apply:
+                root_toml.write_text(fixed)
+
+    migration_toml = back_end / "migration" / "Cargo.toml"
+    if migration_toml.is_file():
+        fixed = fixed_migration_cargo_toml(migration_toml.read_text())
+        if fixed is not None:
+            touched.append("migration/Cargo.toml")
+            if apply:
+                migration_toml.write_text(fixed)
+
+    return touched
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Set the Rust MSRV (rust-version) fleet-wide, per "
+        "spec/rust-msrv-n-minus-2/."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--msrv", required=True, help='MSRV to set, e.g. "1.96"'
+    )
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(
+            p for p in FORMS.iterdir() if (p / "back-end-with-loco").is_dir()
+        )
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: dict[str, list[str]] = {}
+
+    for form in forms:
+        back_end = form / "back-end-with-loco"
+        if not back_end.is_dir():
+            print(f"no such back end: {back_end}", file=sys.stderr)
+            return 2
+        touched = process_form(form, args.msrv, apply)
+        if touched:
+            drifted[form.name] = touched
+
+    if args.check:
+        if drifted:
+            total_files = sum(len(v) for v in drifted.values())
+            print(
+                f"rust-version != {args.msrv} in {len(drifted)} form(s), "
+                f"{total_files} file(s) (run: bin/loco-msrv-set --msrv "
+                f"{args.msrv} --all)"
+            )
+            for name, files in list(drifted.items())[:10]:
+                print(f"  {name}: {', '.join(files)}")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"rust-version = {args.msrv} set correctly in every form ({len(forms)} forms)")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    total_files = sum(len(v) for v in drifted.values())
+    print(f"{len(drifted)} form(s), {total_files} file(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

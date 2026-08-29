@@ -435,6 +435,55 @@ jobs:
           done
           exit $fail
 
+  # Verifies the MSRV (spec/rust-msrv-n-minus-2/): CI must confirm the code
+  # actually compiles on the oldest toolchain the policy allows, not merely
+  # declare a rust-version and hope. Separate from the `rust` job above so a
+  # failure names the cause directly — `rust` red is a behavior regression on
+  # current stable, `msrv` red means the code started requiring a newer
+  # toolchain than the policy permits. `cargo check` only (no clippy/deny/
+  # test): the MSRV question is "does this compile", which the spec says is
+  # sufficient and fast.
+  msrv:
+    name: MSRV 1.96 (shard ${{ matrix.shard }}/8)
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
+    needs: [changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.96
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: msrv-shard-${{ matrix.shard }}
+          workspaces: forms/*/back-end-with-loco
+      # Same disk-exhaustion risk as the `rust` job above (~44 independent
+      # crates/shard, no shared workspace) — same two mitigations up front.
+      - name: Free runner disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /opt/hostedtoolcache/CodeQL "$AGENT_TOOLSDIRECTORY" || true
+      - name: cargo +1.96 check --all-targets --workspace, each crate in this shard
+        run: |
+          fail=0
+          CHANGED="${{ needs.changes.outputs.forms }}"
+          ALL="${{ needs.changes.outputs.all }}"
+          for slug in $(bin/forms-shard ${{ matrix.shard }} 8); do
+            if [ "$ALL" != "true" ]; then
+              case " $CHANGED " in *" $slug "*) ;; *) continue ;; esac
+            fi
+            crate="forms/$slug/back-end-with-loco"
+            [ -f "$crate/Cargo.toml" ] || continue
+            echo "::group::$slug"
+            ( cd "$crate" && cargo check --all-targets --workspace ) \
+              || { echo "::error::$slug failed the MSRV check"; fail=1; }
+            rm -rf "$crate/target" 2>/dev/null || true
+            echo "::endgroup::"
+          done
+          exit $fail
+
   svelte:
     name: Svelte (shard ${{ matrix.shard }}/8)
     runs-on: ubuntu-latest
