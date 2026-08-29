@@ -119,6 +119,21 @@ for them.
   `research-and-planning-privacy-notice`), so both `bin/test-engines` and
   `bin/test-personas` silently failed to load them. Found authoring
   `consent-to-treatment`'s personas; fixed and re-verified.
+- A `bin/test-personas --update` run against a formula engine that uses
+  `Math.pow()` with a fractional exponent (the eGFR calculator's CKD-EPI
+  equation) recorded an `expected` that failed CI's drift job outright —
+  `expected` was computed on local Node v26.7.0; CI runs the pinned Node
+  22, and `Math.pow()`'s IEEE 754 result for a non-integer exponent is not
+  guaranteed bit-identical across V8/Node versions (both mismatches were
+  in `egfrRaw`'s last one or two digits; the rounded, displayed value and
+  classification were unaffected either way). `bin/test-personas` compares
+  exact JSON, so even a last-ULP difference fails it. Fixed by installing
+  Node 22.23.2 via mise (matching `ci.yml`'s pin) and regenerating
+  `expected` with that binary — confirmed the mismatch reproduces on
+  Node 26 and disappears on Node 22, rather than assuming the fix.
+  **Lesson for authoring personas on a formula engine that uses `pow()`,
+  `sqrt()`, or similar: regenerate `--update` under the CI-pinned Node
+  version, not whatever's on `PATH` locally.**
 
 ### Added
 
@@ -136,6 +151,16 @@ for them.
   short-lived credentials are the intended mechanism, not a stored API
   token. Not yet applicable here — this repository doesn't publish a
   package today, and `INSTALL.md` is explicit that it never will.
+- Personas for `anion-gap-calculator` (every classification band — normal,
+  high, very-high, low — plus the hypoalbuminaemia-masking case, where a
+  reassuring raw gap hides a raised albumin-corrected one, and the
+  incomplete/unknown path) and `corrected-calcium-calculator` (normal,
+  mild and severe hypocalcaemia, mild and severe hypercalcaemia,
+  incomplete). Fleet persona total 186 → 188. Personas for
+  `estimated-glomerular-filtration-rate-calculator`: every CKD G-stage
+  (G1–G5), the non-steady-state caveat (a numeric eGFR still computes but
+  shouldn't be relied on for staging during a possible acute kidney
+  injury), and incomplete. Fleet persona total 188 → 189.
 - Personas for `advance-decision-to-refuse-treatment` (a valid general
   refusal; a form complete on every required MCA field but missing
   recommended ones; a life-sustaining refusal missing the s25(5) statutory
