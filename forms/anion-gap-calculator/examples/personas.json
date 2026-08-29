@@ -1,0 +1,349 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateAnionGap",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-without-potassium",
+      "description": "Routine ward panel, potassium not entered: anion gap 10 mmol/L, within the potassium-exclusive reference range (8-12) — normal.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Aisha Rahman",
+          "clinicianRole": "doctor",
+          "calculatedAt": "2026-06-24T09:15",
+          "careSetting": "ward",
+          "clinicalContext": "Routine electrolyte panel, post-operative day 1"
+        },
+        "identification": {
+          "patientIdentifier": "WD-573110",
+          "ageBand": "40-64",
+          "sex": "female"
+        },
+        "electrolytes": {
+          "sodium": 140,
+          "potassium": null,
+          "chloride": 105,
+          "bicarbonate": 25
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "includesPotassium": false,
+        "anionGap": 10,
+        "anionGapRaw": 10,
+        "correctedAnionGap": null,
+        "correctedAnionGapRaw": null,
+        "normalLow": 8,
+        "normalHigh": 12,
+        "classificationValue": 10,
+        "classification": "normal",
+        "firedRules": [
+          {
+            "id": "R-FORMULA-WITHOUT-K-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "formula",
+            "description": "Anion gap = 140 − (105 + 25) = 10 mmol/L (potassium-exclusive; normal 8–12)"
+          },
+          {
+            "id": "R-CLASSIFY-NORMAL-01",
+            "instrument": "classification",
+            "band": "normal",
+            "category": "reference-range",
+            "description": "Anion gap within the normal reference range"
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-hagma-with-potassium",
+      "description": "Early diabetic ketoacidosis on the acute medical unit: potassium-inclusive anion gap 17.5 mmol/L, above the potassium-inclusive upper limit (16) but below the very-high threshold (20) — high, prompting the GOLDMARK/MUDPILES differential.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "doctor",
+          "calculatedAt": "2026-06-25T02:40",
+          "careSetting": "emergency-department",
+          "clinicalContext": "New hyperglycaemia, mild ketosis, early suspected DKA"
+        },
+        "identification": {
+          "patientIdentifier": "ED-100517",
+          "ageBand": "18-39",
+          "sex": "male"
+        },
+        "electrolytes": {
+          "sodium": 135,
+          "potassium": 4.5,
+          "chloride": 100,
+          "bicarbonate": 22
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "includesPotassium": true,
+        "anionGap": 17.5,
+        "anionGapRaw": 17.5,
+        "correctedAnionGap": null,
+        "correctedAnionGapRaw": null,
+        "normalLow": 8,
+        "normalHigh": 16,
+        "classificationValue": 17.5,
+        "classification": "high",
+        "firedRules": [
+          {
+            "id": "R-FORMULA-WITH-K-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "formula",
+            "description": "Anion gap = (135 + 4.5) − (100 + 22) = 17.5 mmol/L (potassium-inclusive; normal 8–16)"
+          },
+          {
+            "id": "R-CLASSIFY-HIGH-01",
+            "instrument": "classification",
+            "band": "high",
+            "category": "reference-range",
+            "description": "Anion gap above the normal upper bound — high anion gap metabolic acidosis"
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-severe-acidosis",
+      "description": "Intensive-care sepsis with severe lactic acidosis: anion gap 29 mmol/L, at or above the very-high threshold (20) — marked elevation, urgent flag.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "doctor",
+          "calculatedAt": "2026-06-26T14:05",
+          "careSetting": "intensive-care",
+          "clinicalContext": "Septic shock, rising lactate, ventilated"
+        },
+        "identification": {
+          "patientIdentifier": "IC-100628",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "electrolytes": {
+          "sodium": 132,
+          "potassium": null,
+          "chloride": 95,
+          "bicarbonate": 8
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "includesPotassium": false,
+        "anionGap": 29,
+        "anionGapRaw": 29,
+        "correctedAnionGap": null,
+        "correctedAnionGapRaw": null,
+        "normalLow": 8,
+        "normalHigh": 12,
+        "classificationValue": 29,
+        "classification": "very-high",
+        "firedRules": [
+          {
+            "id": "R-FORMULA-WITHOUT-K-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "formula",
+            "description": "Anion gap = 132 − (95 + 8) = 29 mmol/L (potassium-exclusive; normal 8–12)"
+          },
+          {
+            "id": "R-CLASSIFY-VERY-HIGH-01",
+            "instrument": "classification",
+            "band": "very-high",
+            "category": "reference-range",
+            "description": "Anion gap at or above 20 mmol/L — very high, urgent"
+          }
+        ]
+      }
+    },
+    {
+      "name": "hypoalbuminaemia-masking",
+      "description": "Critically ill patient with severe hypoalbuminaemia: the raw anion gap (10 mmol/L) looks normal, but the albumin correction (albumin 15 g/L) raises it to 16.25 mmol/L — above the potassium-exclusive upper limit. The uncorrected value would falsely reassure.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Helena Kowalski",
+          "clinicianRole": "doctor",
+          "calculatedAt": "2026-06-27T11:20",
+          "careSetting": "intensive-care",
+          "clinicalContext": "Prolonged ICU stay, nutritional deficit, low albumin"
+        },
+        "identification": {
+          "patientIdentifier": "IC-100701",
+          "ageBand": "75-84",
+          "sex": "female"
+        },
+        "electrolytes": {
+          "sodium": 138,
+          "potassium": null,
+          "chloride": 104,
+          "bicarbonate": 24
+        },
+        "albumin": {
+          "albumin": 15
+        },
+        "note": {
+          "clinicalNote": "Corrected gap flagged despite reassuring raw value"
+        }
+      },
+      "expected": {
+        "includesPotassium": false,
+        "anionGap": 10,
+        "anionGapRaw": 10,
+        "correctedAnionGap": 16.3,
+        "correctedAnionGapRaw": 16.25,
+        "normalLow": 8,
+        "normalHigh": 12,
+        "classificationValue": 16.25,
+        "classification": "high",
+        "firedRules": [
+          {
+            "id": "R-FORMULA-WITHOUT-K-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "formula",
+            "description": "Anion gap = 138 − (104 + 24) = 10 mmol/L (potassium-exclusive; normal 8–12)"
+          },
+          {
+            "id": "R-CORRECTION-01",
+            "instrument": "correction",
+            "band": "",
+            "category": "albumin-correction",
+            "description": "Corrected anion gap = 10 + 0.25 × (40 − 15) = 16.3 mmol/L"
+          },
+          {
+            "id": "R-CLASSIFY-HIGH-01",
+            "instrument": "classification",
+            "band": "high",
+            "category": "reference-range",
+            "description": "Anion gap above the normal upper bound — high anion gap metabolic acidosis"
+          }
+        ]
+      }
+    },
+    {
+      "name": "low-anion-gap",
+      "description": "Multiple myeloma with a paraprotein gammopathy: anion gap 5 mmol/L, below the lower reference limit (8) — low, prompting consideration of paraproteinaemia, lithium toxicity, or laboratory error.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Femi Adeyemi",
+          "clinicianRole": "doctor",
+          "calculatedAt": "2026-06-28T10:00",
+          "careSetting": "ward",
+          "clinicalContext": "Known IgG multiple myeloma, routine bloods"
+        },
+        "identification": {
+          "patientIdentifier": "WD-573905",
+          "ageBand": "65-74",
+          "sex": "male"
+        },
+        "electrolytes": {
+          "sodium": 140,
+          "potassium": null,
+          "chloride": 108,
+          "bicarbonate": 27
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "includesPotassium": false,
+        "anionGap": 5,
+        "anionGapRaw": 5,
+        "correctedAnionGap": null,
+        "correctedAnionGapRaw": null,
+        "normalLow": 8,
+        "normalHigh": 12,
+        "classificationValue": 5,
+        "classification": "low",
+        "firedRules": [
+          {
+            "id": "R-FORMULA-WITHOUT-K-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "formula",
+            "description": "Anion gap = 140 − (108 + 27) = 5 mmol/L (potassium-exclusive; normal 8–12)"
+          },
+          {
+            "id": "R-CLASSIFY-LOW-01",
+            "instrument": "classification",
+            "band": "low",
+            "category": "reference-range",
+            "description": "Anion gap below 8 mmol/L — low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-missing-bicarbonate",
+      "description": "Laboratory result still pending: sodium and chloride entered but bicarbonate not yet back — the anion gap cannot be computed and the calculation is unknown, not zero.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "scientist",
+          "calculatedAt": "",
+          "careSetting": "laboratory",
+          "clinicalContext": "Bicarbonate pending, will re-run once available"
+        },
+        "identification": {
+          "patientIdentifier": "LB-880351",
+          "ageBand": "40-64",
+          "sex": "unknown"
+        },
+        "electrolytes": {
+          "sodium": 138,
+          "potassium": null,
+          "chloride": 102,
+          "bicarbonate": null
+        },
+        "albumin": {
+          "albumin": null
+        },
+        "note": {
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "includesPotassium": false,
+        "anionGap": null,
+        "anionGapRaw": null,
+        "correctedAnionGap": null,
+        "correctedAnionGapRaw": null,
+        "normalLow": 8,
+        "normalHigh": 12,
+        "classificationValue": null,
+        "classification": "unknown",
+        "firedRules": [
+          {
+            "id": "R-FORMULA-INCOMPLETE-01",
+            "instrument": "formula",
+            "band": "",
+            "category": "missing-input",
+            "description": "Anion gap not computed — sodium, chloride and/or bicarbonate is missing"
+          }
+        ]
+      }
+    }
+  ]
+}
