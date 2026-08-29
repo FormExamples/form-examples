@@ -31,11 +31,14 @@ carry-overs.
 - Fixed the `#![warn(clippy::clippy::pedantic)]` unknown-lint typo (3 crates).
 - v1.0.0 tagged and released 2026-08-26.
 - 2026-08-27: checked GitHub's actual CI run history for the first time —
-  every run had failed or been cancelled. Fixed two pre-existing,
-  fleet-wide bugs (a `loco new` scaffold default that fails
-  `clippy -D warnings` on 346 crates two different ways; the Svelte job's
-  `npm ci` against pnpm-only front-ends) — see tasks.md Phase 9's
-  correction entry. **Not yet confirmed green by a real CI run.**
+  every run had failed or been cancelled. What followed was a real-CI-
+  run-at-a-time loop: ten more fleet-wide bugs found and fixed, each
+  by watching an actual run rather than assuming a fix worked (one
+  wrong diagnosis, on a SvelteKit rename, was caught and reverted
+  before landing) — see tasks.md Phase 9's correction entries for the
+  full account. **2026-08-28: confirmed green by a real CI run** — run
+  [33213955606](https://github.com/FormExamples/form-examples/actions/runs/33213955606),
+  every job `success`, first time in this repository's history.
 
 ### Defects found (verified 2026-08-26 — the evidence for R0)
 

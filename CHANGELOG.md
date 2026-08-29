@@ -18,6 +18,69 @@ for them.
 
 ### Fixed
 
+- **CI went fully green for the first time in this repository's history**
+  (run [33213955606](https://github.com/FormExamples/form-examples/actions/runs/33213955606):
+  every job — both matrices, FHIR, drift, SQL apply, structure — `success`,
+  confirmed via `gh run view`, not assumed). Getting there took ten more
+  real, previously-undiscovered bugs, each found by watching an actual CI
+  run rather than guessing what it would do:
+  - Two forms' `locales.ts` had regressed to non-canonical content in a
+    merge conflict two days earlier, failing `bin/test-vendored-uniformity`;
+    restored from the fleet-uniform content every other form carries.
+  - `bin/xml-representations/generate-xml-representations.py` wrote example
+    values into XML elements unescaped, breaking well-formedness wherever a
+    SQL CHECK-constraint enum contained a literal `<` (2 forms), and never
+    deleted a stale `.xml`/`.dtd` left over from a renamed or dropped table
+    (260 orphaned files across 110 forms). Both fixed at the generator.
+  - `@sveltejs/kit@3.0.0-next.23` (the fleet's pin) renamed
+    `$app/environment` to `$app/env`, keeping the old path only as a
+    type-less deprecated shim — `svelte-check` fails outright on it fleet-
+    wide. (An earlier attempt in this same investigation misdiagnosed this
+    as a missing `svelte.config.js` and was reverted before landing.) 7
+    forms' hand-written `vitest.config.ts` stubbed the old module path for
+    their store tests, so fixing the source imports back to `$app/env`
+    needed the stub's alias key fixed to match; new
+    `bin/svelte-vitest-app-env-alias-fix`.
+  - 11 forms' `App::seed()` carried a stray `let _ = base;` left over from
+    before `bin/loco-seed-base-rename` renamed the parameter it referenced
+    to `_base` — a hard `E0425` compile error, not a lint. New
+    `bin/loco-seed-base-stray-usage-fix`.
+  - Every Rust CI shard was failing identically on the runner's own "No
+    space left on device": ~44 independent Loco crates per shard, each
+    leaving its `target/` behind, filled the disk before the shard could
+    finish. Fixed by freeing preinstalled runner toolchains and wiping each
+    crate's `target/` once it's done — at the cost of Swatinem/rust-cache's
+    cross-run warm start, which was never reliable while shards were
+    disk-overflowing anyway.
+  - FHIR CI had never once completed: the validator's default terminology-
+    server round-trip (`-tx http://tx.fhir.org`) against 2,600+ generated
+    resources hung for hours with no output. Fixed with `-tx n/a` (~19s for
+    the whole fleet locally) — which then surfaced the real validation
+    errors it had been masking: 1,090 empty `valueString`s (FHIR forbids an
+    empty primitive value) across 522 files; every example Bundle declared
+    `type: document` without the Composition/identifier it requires,
+    changed to `type: collection`; `DetectedIssue.severity` values outside
+    FHIR's fixed `high|moderate|low` set (22 distinct words across the
+    fleet) now go through a proper map with a safe default; two fabricated
+    `patient-ethnicity`/`patient-occupation` extension URLs (3 forms)
+    removed rather than standing up a custom FHIR IG to carry two ad hoc
+    fields.
+  - The workflow's `concurrency` group covered every trigger type, so a
+    `schedule` run (GitHub can queue these for hours during high load —
+    a 03:17 UTC cron here actually started at 15:22 UTC) cancelled a real,
+    in-progress push-triggered run outright, discarding hours of Rust-
+    matrix work. Scoped the group by `github.event_name` so push and
+    schedule runs no longer compete.
+  - `cargo loco generate scaffold`'s `config/test.yaml` ships
+    `max_connections: 1` with a 500ms `connect_timeout` — a genuine race
+    with `cargo test`'s default multi-threaded concurrency
+    (`SqlxError(PoolTimedOut)` the moment two DB-touching tests in one
+    crate run at once), not unexplained flakiness. Raised to 10 fleet-wide
+    (355 forms, two different literal shapes); new
+    `bin/loco-test-max-connections-fix`.
+  - The nightly E2E job's `e2e/.gitignore` listed `package-lock.json`, so
+    `npm ci` had no lockfile to install from — this schedule-only job had
+    never been able to get past its install step. Lockfile committed.
 - CI's Rust and Svelte matrices, which had never gone green on this
   repository (confirmed against GitHub's run history, including every run
   v1.0.0's own commits triggered) — two pre-existing, fleet-wide bugs,
@@ -59,6 +122,20 @@ for them.
 
 ### Added
 
+- [GitHub Sponsors](https://github.com/sponsors/joelparkerhenderson) as a
+  funding channel: `.github/FUNDING.yml`, and `CONTRIBUTING.md`'s "Donate
+  money" item now points to it instead of stating there is no funding
+  mechanism — a personal sponsorship of the sole maintainer, not of an
+  organization; the project still has no legal entity, and this doesn't
+  change that. Open Collective, the spec's other half, is explicitly
+  deferred: it needs a fiscal host or a legal entity this project
+  deliberately doesn't have.
+- Trusted Publishing recorded as general supply-chain policy in
+  `SECURITY.md`, per `spec/trusted-publishing/`: if this or any future
+  project of this maintainer's publishes a package from CI, OIDC-based
+  short-lived credentials are the intended mechanism, not a stored API
+  token. Not yet applicable here — this repository doesn't publish a
+  package today, and `INSTALL.md` is explicit that it never will.
 - Personas for `advance-decision-to-refuse-treatment` (a valid general
   refusal; a form complete on every required MCA field but missing
   recommended ones; a life-sustaining refusal missing the s25(5) statutory

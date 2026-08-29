@@ -32,19 +32,27 @@ with fleet theme re-sync. **Phases 8 and 9 completed the same day**
 too. v1.0.0 tagged 2026-08-26. Open: two maintainer decisions in Phase 10
 (Zenodo DOI; licence fit), then Phases 11-12.
 
-**2026-08-27 — Phase 9 correction, then a second correction:** checked
-GitHub's actual CI run history for the first time since Phase 9 claimed
-"complete" — every run had failed or been cancelled, Rust and Svelte
-matrices had never once gone green. Fixed two pre-existing, fleet-wide
-bugs (a `loco new` scaffold default clippy always flags; `npm ci` against
-pnpm-only front-ends) and pushed — then **watched that push's own CI run**
-rather than assuming it worked, and it hadn't: Drift failed on a missing
-PyYAML install, and all 8 Svelte shards failed again for a different
-reason (`pnpm-workspace.yaml` missing the `packages:` key pnpm 9
-requires). Both fixed and verified with a real pnpm 9 binary. Persona
-work continued in parallel: 109 → 185 this session. **Still needs a real
-CI run to confirm green** before either correction can be called done —
-see Phase 9's two correction entries below for the full account.
+**2026-08-27/28 — Phase 9 correction, repeated eight more times, then
+confirmed green.** Checked GitHub's actual CI run history for the first
+time since Phase 9 claimed "complete" — every run had failed or been
+cancelled, Rust and Svelte matrices had never once gone green. What
+followed was a real-CI-run-at-a-time loop, not a single fix: each push's
+own run was watched through to its actual result rather than assumed,
+and nine more times it surfaced a bug the previous fix hadn't touched —
+a scaffold clippy default, `npm ci` against pnpm-only front-ends, a
+missing PyYAML install, a missing `pnpm-workspace.yaml` key, a merge-
+regressed `locales.ts`, an XML-escaping/orphan-file generator bug, a
+SvelteKit 3.0-next rename (after one wrong diagnosis was caught and
+reverted before landing), a stray post-rename reference left in
+`seed()`, the Rust runner filling its own disk, an FHIR validator that
+had never once completed plus every real error it was masking, a
+concurrency group that let a delayed cron cancel real work, a test-only
+connection-pool race, and a gitignored E2E lockfile. Persona work
+continued in parallel: 109 → 186 this session. **Confirmed, not
+assumed:** run
+[33213955606](https://github.com/FormExamples/form-examples/actions/runs/33213955606)
+— every job green, first time in this repository's history. See Phase
+9's correction entries below for the full account of each bug.
 
 ## Status summary (2026-07-13)
 
@@ -746,6 +754,59 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       **Still unconfirmed by a real CI run — do not mark this phase
       actually done until the next push's Drift, Rust, and Svelte jobs
       are checked and green, not assumed.**
+- [x] **Third correction, same investigation — confirmed, then found eight
+      more.** Watching kept surfacing real bugs the local checks couldn't
+      see, one real CI run at a time, right up to the first fully green
+      run in this repository's history:
+      - `test-vendored-uniformity` failed on two forms' `locales.ts`
+        (regressed in a merge two days earlier) — restored from the
+        fleet-uniform content.
+      - The XML generator wrote unescaped element text (2 forms broke
+        well-formedness on a literal `<` in a CHECK-constraint enum) and
+        never cleaned up orphaned `.xml`/`.dtd` from a renamed/dropped
+        table (260 files, 110 forms). Both fixed at the generator.
+      - `@sveltejs/kit@3.0.0-next.23` renamed `$app/environment` to
+        `$app/env`, dropping the old path's type declarations —
+        `svelte-check` fails fleet-wide on it. **A first attempt
+        misdiagnosed this as a missing `svelte.config.js`, applied it
+        fleet-wide, and had to revert it** after re-verification showed
+        kit 3.0-next hard-errors the moment that file exists; the actual
+        fix (source imports already correct at `$app/env`; 7 forms'
+        `vitest.config.ts` alias keys needed to follow) came from reading
+        the installed `@sveltejs/kit` package's own bundled types, not
+        from the error text alone.
+      - 11 forms' `App::seed()` had a stray `let _ = base;` — a leftover
+        reference to the parameter `bin/loco-seed-base-rename` had
+        already renamed to `_base`, a hard compile error found only by
+        actually compiling those 11 crates.
+      - All 8 Rust shards failed identically on the runner's own "No
+        space left on device" — ~44 independent crates per shard, no
+        shared workspace, each leaving `target/` behind. Fixed by wiping
+        each crate's `target/` once done, at the cost of rust-cache's
+        cross-run warm start.
+      - FHIR CI had never completed at all: the validator's default
+        `tx.fhir.org` round-trip against 2,600+ files hung for hours.
+        `-tx n/a` fixed the hang (~19s fleet-wide) and surfaced what it
+        had been masking — 1,090 empty `valueString`s, every example
+        Bundle's invalid `document` type, `DetectedIssue.severity` values
+        outside FHIR's fixed set, two fabricated extension URLs.
+      - The workflow's single `concurrency` group let a delayed nightly
+        cron (GitHub queued a 03:17 UTC schedule run until 15:22 UTC)
+        cancel a real, in-progress push run outright. Scoped by
+        `github.event_name`.
+      - `config/test.yaml`'s scaffold default `max_connections: 1`
+        raced `cargo test`'s default concurrency
+        (`SqlxError(PoolTimedOut)`) — a real, deterministic mechanism
+        with an intermittent outcome, not unexplained flakiness. Raised
+        to 10, fleet-wide.
+      - The nightly E2E job's `e2e/.gitignore` excluded
+        `package-lock.json` — `npm ci` had never had a lockfile to
+        install from. Committed.
+      **Confirmed, not assumed:** run
+      [33213955606](https://github.com/FormExamples/form-examples/actions/runs/33213955606)
+      — every job green: both matrices (8/8 Rust, 8/8 Svelte), FHIR,
+      drift, SQL apply, structure. First fully green run in this
+      repository's history. Phase 9 is now actually done.
 
 ## Phase 10 — R2 professionalization — tooling done; 3 maintainer decisions open
 
