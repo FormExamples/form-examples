@@ -1,0 +1,781 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-complete-study",
+      "description": "Fully normal transthoracic echo with normal LV function, no valve disease, and no structured findings — every axis at baseline on a complete report.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "ECHO-REQ-100221",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "final",
+        "studyQuality": "good",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "clinicalHistory": "Routine pre-employment cardiovascular screening",
+        "lvEjectionFractionPercent": 62,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 46,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "none",
+        "aorticRegurgitation": "none",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": 24,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": true,
+        "findingsNarrative": "Normal LV size and systolic function. No valve disease. No pericardial effusion.",
+        "comparisonWithPrevious": "No previous study for comparison",
+        "impression": "Normal transthoracic echocardiogram.",
+        "recommendedFollowUp": "None required",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific echocardiographic follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable study; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "moderate-aortic-stenosis-surveillance",
+      "description": "Moderate aortic stenosis on an otherwise normal study — severity moderate via the moderate-valve-disease path, with a surveillance referral flag but short of the critical/severe threshold.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "ECHO-REQ-100355",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "final",
+        "studyQuality": "good",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "clinicalHistory": "Exertional breathlessness, known aortic valve murmur",
+        "lvEjectionFractionPercent": 58,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 48,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "moderate",
+        "aorticRegurgitation": "none",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": 28,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Moderate aortic stenosis with a mean gradient in the moderate range. Normal LV size and systolic function.",
+        "comparisonWithPrevious": "",
+        "impression": "Moderate aortic stenosis; preserved LV function.",
+        "recommendedFollowUp": "Cardiology surveillance review with repeat echo in 12 months",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "moderate-abnormality",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 6 weeks",
+        "recommendedAction": "Recommend cardiology review or surveillance echo as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "moderate-abnormality",
+            "description": "Moderate valve disease or moderate LV impairment is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Moderate valve disease is present and may warrant cardiology referral.",
+            "suggestedAction": "Consider referral to cardiology for surveillance and management."
+          }
+        ]
+      }
+    },
+    {
+      "name": "regional-wall-motion-abnormality-ischaemic",
+      "description": "An isolated regional wall-motion abnormality with no valve disease and preserved overall LV function — severity moderate via the separate RWMA rule rather than the valve/LV-impairment path, raising an ischaemia-work-up flag.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "ECHO-REQ-100489",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "final",
+        "studyQuality": "adequate",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-22",
+        "clinicalHistory": "Recent troponin-positive chest pain, post-MI assessment",
+        "lvEjectionFractionPercent": 52,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 50,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": true,
+        "aorticStenosis": "none",
+        "aorticRegurgitation": "none",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": 26,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Hypokinesis of the inferior wall consistent with the recent inferior territory infarct. Overall LV systolic function preserved.",
+        "comparisonWithPrevious": "",
+        "impression": "Regional wall-motion abnormality (inferior hypokinesis) consistent with the recent infarct; overall LV function preserved.",
+        "recommendedFollowUp": "Cardiology review; consider ischaemia work-up if not already completed",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "regional-wall-motion",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 6 weeks",
+        "recommendedAction": "Recommend cardiology review or surveillance echo as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "regional-wall-motion",
+            "description": "A regional wall-motion abnormality is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "medium",
+            "description": "A regional wall-motion abnormality is present, suggesting ischaemic disease.",
+            "suggestedAction": "Ensure the referrer is alerted and an ischaemia work-up is considered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-aortic-stenosis-critical",
+      "description": "Severe aortic stenosis, the classic severe-valve-disease critical trigger — auto-escalates to critical-alert; not yet communicated to the referrer.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "ECHO-REQ-100602",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "final",
+        "studyQuality": "good",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-26",
+        "clinicalHistory": "Progressive exertional dyspnoea and one episode of exertional syncope",
+        "lvEjectionFractionPercent": 55,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 47,
+        "lvHypertrophy": true,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "severe",
+        "aorticRegurgitation": "mild",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": 34,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Severely calcified aortic valve with a high mean gradient and reduced valve area, consistent with severe aortic stenosis. Compensatory LV hypertrophy.",
+        "comparisonWithPrevious": "Prior study 2025-06 showed moderate stenosis; interval progression to severe",
+        "impression": "Severe aortic stenosis with interval progression; symptomatic.",
+        "recommendedFollowUp": "Urgent heart-team / valve-clinic referral for consideration of intervention",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "severe-valve-disease",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-SEVERE-VALVE-001",
+            "category": "severe-valve-disease",
+            "priority": "high",
+            "description": "Severe valvular stenosis or regurgitation is present.",
+            "suggestedAction": "Refer to the valve / heart-team for assessment of intervention."
+          }
+        ]
+      }
+    },
+    {
+      "name": "vegetation-endocarditis-critical-communicated",
+      "description": "A valvular vegetation raising suspicion of infective endocarditis — a critical trigger independent of valve-severity grading, already communicated to the admitting team so the not-yet-communicated flag correctly does not fire.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "ECHO-REQ-100714",
+        "echoType": "transoesophageal-toe",
+        "reportStatus": "final",
+        "studyQuality": "good",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "clinicalHistory": "Persistent fever and positive blood cultures, intravenous drug use history",
+        "lvEjectionFractionPercent": 60,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 45,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "none",
+        "aorticRegurgitation": "mild",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": 25,
+        "pericardialEffusion": false,
+        "vegetation": true,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Mobile echodensity attached to the aortic valve leaflet consistent with a vegetation. Mild associated aortic regurgitation. No abscess identified.",
+        "comparisonWithPrevious": "",
+        "impression": "Aortic valve vegetation, findings consistent with infective endocarditis.",
+        "recommendedFollowUp": "Endocarditis-team review; continue targeted antibiotics per blood culture sensitivities",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Marcus Webb, admitting infectious-diseases registrar, by phone at time of reporting",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-ENDOCARDITIS-001",
+            "category": "suspected-endocarditis",
+            "priority": "high",
+            "description": "A valvular vegetation is reported, raising suspicion of infective endocarditis.",
+            "suggestedAction": "Alert the referring team urgently; consider blood cultures, antibiotics, and endocarditis-team review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "pericardial-effusion-tamponade-critical",
+      "description": "A moderate-to-large pericardial effusion with tamponade risk — a critical trigger on its own with no valve or LV abnormality; not yet communicated.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "ECHO-REQ-100822",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "preliminary",
+        "studyQuality": "adequate",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-28",
+        "clinicalHistory": "Known malignancy, new breathlessness and raised jugular venous pressure",
+        "lvEjectionFractionPercent": 58,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 44,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "none",
+        "aorticRegurgitation": "none",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": 30,
+        "pericardialEffusion": true,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Moderate-to-large circumferential pericardial effusion with early diastolic right ventricular collapse, concerning for impending tamponade.",
+        "comparisonWithPrevious": "",
+        "impression": "Moderate-to-large pericardial effusion with echocardiographic signs of early tamponade.",
+        "recommendedFollowUp": "Urgent cardiology / cardiothoracic review for consideration of pericardiocentesis",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-PERICARDIAL-EFFUSION-001",
+            "category": "pericardial-effusion-tamponade",
+            "priority": "high",
+            "description": "A pericardial effusion is present, with potential tamponade risk.",
+            "suggestedAction": "Assess for tamponade and escalate urgently if haemodynamic compromise."
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-lv-impairment-thrombus-composite",
+      "description": "A composite worst-case report: severely impaired LV function described qualitatively with no ejection fraction recorded (triggering the missing-measurement flag), plus an intracardiac thrombus, and no originating request reference linked (triggering the unexpected-finding discrepancy flag) — exercises severe-LV-impairment as an independent critical trigger from valve disease, and stacks four simultaneous safety flags on one report.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "final",
+        "studyQuality": "adequate",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "clinicalHistory": "Acute decompensated heart failure, new atrial fibrillation",
+        "lvEjectionFractionPercent": null,
+        "lvFunction": "severely-impaired",
+        "lvInternalDiameterDiastoleMm": 68,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "none",
+        "aorticRegurgitation": "none",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "mild",
+        "pulmonaryArterySystolicPressureMmhg": 48,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": true,
+        "normalStudy": false,
+        "findingsNarrative": "Severely dilated, severely impaired left ventricle (ejection fraction not formally quantified due to poor endocardial definition). A mobile thrombus is seen in the LV apex.",
+        "comparisonWithPrevious": "",
+        "impression": "Severe LV systolic impairment with an LV apical thrombus.",
+        "recommendedFollowUp": "Urgent heart-failure and anticoagulation review",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Requesting clinician / originating referral not identified in the system at time of reporting",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "severe-lv-impairment",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-SEVERE-LV-001",
+            "category": "severe-lv-impairment",
+            "priority": "high",
+            "description": "Left-ventricular systolic function is severely impaired.",
+            "suggestedAction": "Refer to the heart-failure service and optimise guideline-directed therapy."
+          },
+          {
+            "flagId": "F-THROMBUS-001",
+            "category": "intracardiac-thrombus",
+            "priority": "high",
+            "description": "An intracardiac thrombus is reported.",
+            "suggestedAction": "Alert the referrer; consider anticoagulation and embolic-risk assessment."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "Impaired LV function is reported but no ejection fraction was recorded.",
+            "suggestedAction": "Record the LV ejection fraction percentage for surveillance."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "poor-quality-inconclusive",
+      "description": "A technically poor-quality study (obese body habitus, poor acoustic windows) — classified inconclusive regardless of whatever findings could be glimpsed, with a high-priority limited-study-quality flag.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "ECHO-REQ-100913",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "final",
+        "studyQuality": "poor",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "clinicalHistory": "Breathlessness on exertion, difficult body habitus for imaging",
+        "lvEjectionFractionPercent": null,
+        "lvFunction": "",
+        "lvInternalDiameterDiastoleMm": null,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "",
+        "aorticRegurgitation": "",
+        "mitralStenosis": "",
+        "mitralRegurgitation": "",
+        "pulmonaryArterySystolicPressureMmhg": null,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Poor acoustic windows throughout; LV function and valve structures could not be reliably assessed.",
+        "comparisonWithPrevious": "",
+        "impression": "Technically limited study of poor diagnostic quality; unable to reliably exclude significant pathology.",
+        "recommendedFollowUp": "Recommend a contrast-enhanced study or alternative imaging modality",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 50,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 6 weeks",
+        "recommendedAction": "Recommend a repeat or alternative study (e.g. TOE or contrast echo) to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "poor-quality",
+            "description": "Study quality was poor; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-LV-FUNCTION-01",
+            "axis": "completeness",
+            "category": "lv-function",
+            "description": "Mandatory report section missing: left-ventricular function."
+          },
+          {
+            "ruleId": "R-COMP-VALVES-01",
+            "axis": "completeness",
+            "category": "valves",
+            "description": "Mandatory report section missing: valve assessment."
+          },
+          {
+            "ruleId": "R-COMP-PULMONARY-01",
+            "axis": "completeness",
+            "category": "pulmonary-pressure",
+            "description": "Mandatory report section missing: pulmonary artery systolic pressure."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative imaging recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-LIMITED-QUALITY-001",
+            "category": "limited-study-quality",
+            "priority": "high",
+            "description": "Study quality is poor; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider a contrast study or transoesophageal echo to reach diagnostic quality."
+          }
+        ]
+      }
+    },
+    {
+      "name": "limited-quality-no-impression-inconclusive",
+      "description": "A limited-quality study with no impression yet recorded — classified inconclusive on the limited-with-no-impression rule, distinct from the poor-quality persona above (which is inconclusive regardless of the impression); a medium-priority limited-quality flag alongside the missing-impression flag.",
+      "state": {
+        "reportingClinician": "Dr Ingrid Solberg",
+        "originatingRequestReference": "ECHO-REQ-101004",
+        "echoType": "transthoracic-tte",
+        "reportStatus": "preliminary",
+        "studyQuality": "limited",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "clinicalHistory": "Routine surveillance echo, limited views obtained due to patient positioning",
+        "lvEjectionFractionPercent": 55,
+        "lvFunction": "normal",
+        "lvInternalDiameterDiastoleMm": 46,
+        "lvHypertrophy": false,
+        "regionalWallMotionAbnormality": false,
+        "aorticStenosis": "none",
+        "aorticRegurgitation": "none",
+        "mitralStenosis": "none",
+        "mitralRegurgitation": "none",
+        "pulmonaryArterySystolicPressureMmhg": null,
+        "pericardialEffusion": false,
+        "vegetation": false,
+        "intracardiacThrombus": false,
+        "normalStudy": false,
+        "findingsNarrative": "Apical views only obtained; LV function appears grossly preserved but valve assessment incomplete due to limited windows.",
+        "comparisonWithPrevious": "",
+        "impression": "",
+        "recommendedFollowUp": "Repeat study with full views once patient positioning allows",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 67,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 6 weeks",
+        "recommendedAction": "Recommend a repeat or alternative study (e.g. TOE or contrast echo) to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-02",
+            "axis": "classification",
+            "category": "limited-no-impression",
+            "description": "Study was limited and no impression was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-PULMONARY-01",
+            "axis": "completeness",
+            "category": "pulmonary-pressure",
+            "description": "Mandatory report section missing: pulmonary artery systolic pressure."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative imaging recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-LIMITED-QUALITY-001",
+            "category": "limited-study-quality",
+            "priority": "medium",
+            "description": "Study quality is limited; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider a contrast study or transoesophageal echo to reach diagnostic quality."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    }
+  ]
+}
