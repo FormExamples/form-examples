@@ -1,0 +1,830 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The 'minimal-documentation-aneurysm-no-request-link' persona documents a real, verified gap: `discrepancy-with-request` is a defined flag category (types.ts FlagCategory, sql/07_create_table_angiography_test_result_grade_flag.sql CHECK constraint, protobuf, OpenAPI, and index.md's documented flag-category list) that neither the SvelteKit engine (`flagged-issues.ts`) nor this HTML port (`flags.js`) ever emits — no rule anywhere sets `category: 'discrepancy-with-request'`. The nearest real rule, F-UNEXPECTED-FINDING-001 (a significant finding with no originating-request reference), is tagged `unexpected-finding` instead, which is a different, narrower concept (present-but-unlinked, not present-but-contradicting-the-request). A report describing a finding that actively conflicts with the referral's stated indication has no flag path to `discrepancy-with-request` at all.",
+  "personas": [
+    {
+      "name": "normal-adequate-carotid-study",
+      "description": "Adequate carotid Doppler-confirmed CT angiogram with no structured abnormal findings and a fully completed report; classifies as normal with routine follow-up and no flags.",
+      "state": {
+        "reportingClinician": "Dr Fiona Marsh",
+        "originatingRequestReference": "ANGIO-REQ-40021",
+        "reportStatus": "final",
+        "performedDate": "2026-08-10",
+        "reportedDate": "2026-08-10",
+        "angiographyType": "ct-angiography",
+        "bodyRegion": "carotid",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Transient right-sided weakness one week ago; carotid territory TIA work-up",
+        "comparisonWithPrevious": "No prior angiographic imaging available for comparison",
+        "findingsNarrative": "Both carotid bifurcations and intracranial vessels are patent with smooth luminal contours. No stenosis, occlusion, dissection, aneurysm, or thrombus identified.",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": true,
+        "incidentalFinding": false,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "Normal carotid and intracranial arterial study; no cause for the TIA identified on imaging.",
+        "reportingCategory": "normal",
+        "recommendedFollowUp": "No further vascular imaging required; continue clinical TIA work-up",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific imaging follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "critical-active-extravasation-uncommunicated",
+      "description": "CT angiogram of the aorta shows active contrast extravasation from a traumatic splenic artery injury, not yet communicated to the referrer; auto-escalates to critical/critical-alert with both critical-result flags firing.",
+      "state": {
+        "reportingClinician": "Dr Priya Chandra",
+        "originatingRequestReference": "ANGIO-REQ-40099",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-29",
+        "reportedDate": "2026-08-29",
+        "angiographyType": "ct-angiography",
+        "bodyRegion": "aorta",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "High-speed road traffic collision, left upper quadrant tenderness, haemodynamically borderline",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "Grade IV splenic laceration with a focus of active contrast extravasation from a distal splenic artery branch. No other solid-organ injury.",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": true,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "Active splenic arterial extravasation; requires immediate interventional radiology or surgical referral.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Immediate interventional radiology embolisation or surgical review",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Trauma call activated",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (active extravasation, dissection, occlusion, or critical stenosis) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (active extravasation, dissection, occlusion, or critical stenosis) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-dissection-communicated",
+      "description": "Cerebral angiogram shows an internal carotid artery dissection, already telephoned to the stroke team; critical/critical-alert fires but the second (uncommunicated) critical flag does not.",
+      "state": {
+        "reportingClinician": "Dr Adam Okoro",
+        "originatingRequestReference": "ANGIO-REQ-40110",
+        "reportStatus": "final",
+        "performedDate": "2026-08-27",
+        "reportedDate": "2026-08-27",
+        "angiographyType": "cerebral-angiography",
+        "bodyRegion": "carotid",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Sudden-onset neck pain and left hemiparesis following a chiropractic manipulation",
+        "comparisonWithPrevious": "No prior imaging",
+        "findingsNarrative": "Right internal carotid artery dissection with an intimal flap and tapered 'string sign' narrowing extending 3 cm from the bifurcation. No associated occlusion.",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": true,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": 40,
+        "interventionPerformed": false,
+        "impression": "Right internal carotid artery dissection; discussed directly with the stroke consultant on call.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent stroke team review and anticoagulation/antiplatelet decision",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Wallace, stroke consultant, by telephone 2026-08-27 14:20",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "<50%",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (active extravasation, dissection, occlusion, or critical stenosis) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (active extravasation, dissection, occlusion, or critical stenosis) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-occlusion-reporting-category-override",
+      "description": "Peripheral CT angiogram shows a complete superficial femoral artery occlusion; demonstrates that stenosisSeverityCategory reports 'occluded' rather than a stenosis percentage band even though a (now moot) percentage happens to be recorded.",
+      "state": {
+        "reportingClinician": "Dr Helen Cross",
+        "originatingRequestReference": "ANGIO-REQ-40133",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "angiographyType": "peripheral-angiography",
+        "bodyRegion": "peripheral-lower-limb",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Acute-on-chronic critical limb ischaemia, absent distal pulses",
+        "comparisonWithPrevious": "Prior duplex showed severe SFA stenosis six months ago",
+        "findingsNarrative": "Complete occlusion of the left superficial femoral artery from the origin to the adductor hiatus, with reconstitution via collaterals distally. Proximal segment shows 95 % stenosis immediately above the occlusion.",
+        "significantStenosis": true,
+        "occlusion": true,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": 95,
+        "interventionPerformed": false,
+        "impression": "Complete left SFA occlusion with critical limb ischaemia; urgent vascular surgical referral.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent vascular surgery referral for revascularisation",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "occluded",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (active extravasation, dissection, occlusion, or critical stenosis) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (active extravasation, dissection, occlusion, or critical stenosis) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "inconclusive-non-diagnostic-technique",
+      "description": "Renal MR angiogram degraded by motion artefact is non-diagnostic; classifies as inconclusive with recommended repeat imaging and a high-priority inadequate-technique flag, ahead of any stenosis assessment.",
+      "state": {
+        "reportingClinician": "Dr Samuel Ige",
+        "originatingRequestReference": "ANGIO-REQ-40145",
+        "reportStatus": "final",
+        "performedDate": "2026-08-15",
+        "reportedDate": "2026-08-15",
+        "angiographyType": "mr-angiography",
+        "bodyRegion": "renal",
+        "contrastUsed": "gadolinium",
+        "examinationAdequacy": "non-diagnostic",
+        "clinicalHistory": "Resistant hypertension, query renal artery stenosis",
+        "comparisonWithPrevious": "None available",
+        "findingsNarrative": "Severe respiratory and bulk motion artefact throughout the acquisition precludes reliable assessment of the renal arteries.",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "Non-diagnostic study due to motion artefact; renal artery stenosis cannot be excluded or confirmed.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat MR angiography with breath-hold technique, or CT angiography if renal function permits",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Patient unable to breath-hold adequately",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat or alternative imaging to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "non-diagnostic",
+            "description": "Examination was non-diagnostic; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative imaging recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "high",
+            "description": "Examination adequacy is non-diagnostic; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating or supplementing the examination to reach diagnostic quality."
+          }
+        ]
+      }
+    },
+    {
+      "name": "inconclusive-limited-no-impression",
+      "description": "Limited-quality mesenteric catheter angiogram with findings noted but no impression yet dictated; classifies as inconclusive via the limited-plus-no-impression rule and raises both a medium inadequate-technique flag and a missing-impression flag.",
+      "state": {
+        "reportingClinician": "Dr Naomi Brenner",
+        "originatingRequestReference": "ANGIO-REQ-40160",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-28",
+        "reportedDate": "",
+        "angiographyType": "catheter-dsa",
+        "bodyRegion": "mesenteric",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "limited",
+        "clinicalHistory": "Post-prandial abdominal pain, weight loss, query chronic mesenteric ischaemia",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "Selective catheterisation of the superior mesenteric artery was incomplete due to severe aorto-iliac tortuosity; coeliac axis appears patent.",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Draft pending consultant review before dictating impression",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat or alternative imaging to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-02",
+            "axis": "classification",
+            "category": "limited-no-impression",
+            "description": "Examination was limited and no impression was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative imaging recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Examination adequacy is limited; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating or supplementing the examination to reach diagnostic quality."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    },
+    {
+      "name": "abnormal-high-grade-stenosis-not-yet-critical",
+      "description": "Coronary angiogram shows an 85% proximal LAD stenosis (below the 99% near-occlusion critical threshold): major severity and urgent follow-up, but not the critical-alert escalation, with both abnormal-requiring-action and urgent-referral flags firing together.",
+      "state": {
+        "reportingClinician": "Dr Michael Antoun",
+        "originatingRequestReference": "ANGIO-REQ-40177",
+        "reportStatus": "final",
+        "performedDate": "2026-08-22",
+        "reportedDate": "2026-08-22",
+        "angiographyType": "coronary-angiography",
+        "bodyRegion": "coronary",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Exertional chest pain, positive exercise tolerance test",
+        "comparisonWithPrevious": "No prior coronary angiogram",
+        "findingsNarrative": "Eccentric 85 % stenosis of the proximal left anterior descending artery with TIMI III flow. Remaining coronary tree is angiographically normal.",
+        "significantStenosis": true,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": 85,
+        "interventionPerformed": false,
+        "impression": "High-grade proximal LAD stenosis; refer for urgent revascularisation planning.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent cardiology/cardiac-surgery MDT discussion for revascularisation",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "70-99%",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "high-grade-stenosis",
+            "description": "Maximum stenosis is 70 % or greater; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "An abnormal vascular finding requiring timely action is present.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear action plan is documented."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "High-grade stenosis (>= 70 %) is present and may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate vascular / interventional team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "incidental-finding-only-abdominal-aorta",
+      "description": "CT angiogram performed for a peripheral indication incidentally shows a small, sub-threshold abdominal aortic aneurysm with no other abnormal finding; classifies as abnormal (not normal) with minor severity and recommended surveillance follow-up.",
+      "state": {
+        "reportingClinician": "Dr Grace Lindqvist",
+        "originatingRequestReference": "ANGIO-REQ-40188",
+        "reportStatus": "final",
+        "performedDate": "2026-08-18",
+        "reportedDate": "2026-08-18",
+        "angiographyType": "ct-angiography",
+        "bodyRegion": "peripheral-lower-limb",
+        "contrastUsed": "iodinated",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Intermittent claudication, runoff assessment prior to angioplasty planning",
+        "comparisonWithPrevious": "None available",
+        "findingsNarrative": "Bilateral lower-limb runoff vessels are patent with mild atherosclerotic wall irregularity but no flow-limiting stenosis. Incidental note is made of a 3.6 cm infrarenal abdominal aortic aneurysm, below the surgical threshold.",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": true,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "No flow-limiting lower-limb arterial disease. Incidental 3.6 cm infrarenal AAA, below surgical threshold.",
+        "reportingCategory": "incidental",
+        "recommendedFollowUp": "Enrol in aneurysm surveillance ultrasound programme per local AAA pathway",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "incidental",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per incidental-findings guidance",
+        "recommendedAction": "Manage the incidental finding per the relevant structured incidental-findings pathway.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "incidental-finding",
+            "description": "Only incidental finding(s) present; classified as abnormal (not a normal study)."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "incidental-finding",
+            "description": "Incidental finding(s) only; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "incidental-finding",
+            "description": "Incidental finding; structured follow-up per incidental-findings guidance recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCIDENTAL-FINDING-001",
+            "category": "incidental-finding",
+            "priority": "low",
+            "description": "One or more incidental findings are documented.",
+            "suggestedAction": "Manage the incidental finding per the relevant structured pathway."
+          }
+        ]
+      }
+    },
+    {
+      "name": "significant-stenosis-percentage-not-recorded",
+      "description": "Carotid duplex-correlated CT angiogram documents a haemodynamically significant stenosis narratively but the sonographer/reporter never entered a numeric percentage; moderate severity via the actionable-finding path, plus a low-priority missing-measurement flag alongside the high-priority abnormal-requiring-action flag.",
+      "state": {
+        "reportingClinician": "Dr Louisa Petit",
+        "originatingRequestReference": "ANGIO-REQ-40201",
+        "reportStatus": "final",
+        "performedDate": "2026-08-24",
+        "reportedDate": "2026-08-24",
+        "angiographyType": "mr-angiography",
+        "bodyRegion": "carotid",
+        "contrastUsed": "gadolinium",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Carotid bruit found incidentally on examination",
+        "comparisonWithPrevious": "None available",
+        "findingsNarrative": "Significant stenosis of the left internal carotid artery origin with post-stenotic flow signal loss; precise percentage not quantified on this sequence.",
+        "significantStenosis": true,
+        "occlusion": false,
+        "aneurysm": false,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "Significant left internal carotid artery stenosis; recommend duplex ultrasound for precise grading.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Carotid duplex ultrasound to quantify stenosis severity and vascular surgery referral",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "actionable-finding",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend follow-up imaging or specialist referral as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (significant stenosis, aneurysm, thrombus, or 50–69 % stenosis) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "An abnormal vascular finding requiring timely action is present.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear action plan is documented."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "A significant stenosis is reported but no maximum stenosis percentage was recorded.",
+            "suggestedAction": "Record the maximum stenosis percentage (e.g. NASCET-style) for grading."
+          }
+        ]
+      }
+    },
+    {
+      "name": "minimal-documentation-aneurysm-no-request-link",
+      "description": "Sparsely documented aortic aneurysm report with only clinical history recorded (20% completeness), no impression, and no originating request reference — the finding is unlinked to any referral and is flagged unexpected-finding rather than the documented-but-unimplemented discrepancy-with-request category.",
+      "state": {
+        "reportingClinician": "Dr Owen Vasquez",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-29",
+        "reportedDate": "",
+        "angiographyType": "",
+        "bodyRegion": "",
+        "contrastUsed": "",
+        "examinationAdequacy": "",
+        "clinicalHistory": "Incidental aortic dilatation noted on an unrelated trauma CT; formal angiogram requested locally without a tracked referral reference",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "",
+        "significantStenosis": false,
+        "occlusion": false,
+        "aneurysm": true,
+        "dissection": false,
+        "activeExtravasation": false,
+        "thrombus": false,
+        "normalVessels": false,
+        "incidentalFinding": false,
+        "maxStenosisPercent": null,
+        "interventionPerformed": false,
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Draft only; awaiting formal request linkage",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "actionable-finding",
+        "reportCompletenessPercent": 20,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend follow-up imaging or specialist referral as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (significant stenosis, aneurysm, thrombus, or 50–69 % stenosis) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-TECHNIQUE-01",
+            "axis": "completeness",
+            "category": "technique",
+            "description": "Mandatory report section missing: technique (angiography type)."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: findings narrative."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "An abnormal vascular finding requiring timely action is present.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear action plan is documented."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}
