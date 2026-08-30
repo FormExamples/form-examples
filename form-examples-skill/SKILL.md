@@ -1,6 +1,6 @@
 ---
 name: form-examples-skill
-description: Explains concepts, terminology, and worked examples from the form-examples medical-forms monorepo (355+ clinical/administrative forms) — what a form's grading axes mean, how to read a persona or example fixture, and how forms are categorized. Use when a user asks what a form or field means, how a score/grade is computed, wants a worked/example answer for a form, or is browsing what this repo covers.
+description: Explains concepts, terminology, and worked examples from the form-examples medical-forms monorepo (355 clinical/administrative forms) — what a form's grading axes mean, how to read a persona or example fixture, and how forms are categorized. Use when a user asks what a form or field means, how a score/grade is computed, wants a worked/example answer for a form, or is browsing what this repo covers.
 ---
 
 # Form Examples

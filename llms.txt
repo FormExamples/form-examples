@@ -2,7 +2,7 @@
 
 > Medical forms monorepo for structured clinical assessments, patient intake,
 > cardiovascular risk calculators, administrative healthcare documents,
-> privacy notices, and staff training checklists. 370+ form projects under
+> privacy notices, and staff training checklists. 355 form projects under
 > `forms/<slug>/`, each collecting data via a single-page, step-by-step
 > questionnaire, applying a validated scoring or grading engine, and
 > generating a clinical report with flagged issues. Every form carries a full
