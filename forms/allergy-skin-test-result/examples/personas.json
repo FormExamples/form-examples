@@ -1,0 +1,821 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Two personas below (all-negative-flag-not-required-for-normal-classification and all-negative-ticked-but-positive-reaction-recorded-gap) document a real, verified gap found by reading rules.js/flags.js against the actual state shape in types.js/data.js rather than assumed from index.md's summary. index.md's 'Structured reaction summary' section explicitly lists `all_negative` among the booleans 'used to drive classification, severity, and flags' alongside positive_reactions, sensitisation_confirmed, anaphylaxis_during_test, and test_invalid. In fact `r.allNegative` is never read anywhere in rules.js or flags.js (confirmed by grep across both files) -- the 'normal' classification, 'none' severity, and 'routine' follow-up bands are all reached purely by the *absence* of positiveReactions/sensitisationConfirmed/testInvalid/anaphylaxisDuringTest, never by checking allNegative itself. The wizard captures `allNegative` as an explicit clinician-ticked checkbox (form-app.js field 'All allergens negative') but the grading engine silently ignores it, so a contradictory report -- allNegative=true together with positiveReactions=true -- grades as abnormal exactly as if allNegative had never been set, with no cross-validation or discrepancy flag raised.",
+  "personas": [
+    {
+      "name": "anaphylaxis-during-skin-prick-test-critical-alert-uncommunicated",
+      "description": "Systemic anaphylactic reaction during skin-prick testing to peanut extract, not yet communicated to the referrer -- the textbook critical-escalation invariant firing all three critical flags.",
+      "state": {
+        "reportingClinician": "Dr Amara Osei",
+        "originatingRequestReference": "AST-REQ-30021",
+        "testType": "skin-prick-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-01",
+        "reportedDate": "2026-06-01",
+        "clinicalHistory": "5-year-old with suspected peanut allergy after facial swelling at a birthday party; referred for skin-prick testing to confirm sensitisation.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "Peanut, tree nut mix, egg, cow's milk",
+        "whealSizes": "Peanut 12mm, tree nut mix 3mm, egg 2mm, cow's milk 0mm; positive control 6mm, negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "Peanut",
+        "positiveReactions": true,
+        "sensitisationConfirmed": true,
+        "anaphylaxisDuringTest": true,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "Marked peanut skin-prick weal with a systemic reaction (facial angioedema, wheeze, and hypotension) developing during testing, requiring immediate treatment with intramuscular adrenaline and observation.",
+        "impression": "Confirmed peanut sensitisation with a severe systemic reaction during in-vivo testing.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent allergy/immunology review, adrenaline auto-injector prescription and training, strict peanut avoidance advice.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Resuscitation trolley used; patient observed for 4 hours post-reaction and discharged well.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the reaction and resuscitation, and arrange urgent allergy / immunology review.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "anaphylaxis-during-test",
+            "description": "A systemic / anaphylactic reaction occurred during the test; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "anaphylaxis-during-test",
+            "description": "Anaphylaxis during the test; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Anaphylaxis during the test auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A systemic / anaphylactic reaction occurred during the test.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the reaction, treatment, and observation."
+          },
+          {
+            "flagId": "F-ANAPHYLAXIS-001",
+            "category": "anaphylaxis-during-test",
+            "priority": "high",
+            "description": "Anaphylaxis during testing is a critical safety event.",
+            "suggestedAction": "Ensure resuscitation was provided, prescribe / review an adrenaline auto-injector, and refer to allergy / immunology."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical event present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "anaphylaxis-critical-result-already-communicated",
+      "description": "Same systemic reaction during intradermal testing, but the critical result has already been phoned through to the referring GP -- confirms F-CRITICAL-RESULT-002 (not-yet-communicated) does not fire once criticalResultCommunicated is true.",
+      "state": {
+        "reportingClinician": "Dr Amara Osei",
+        "originatingRequestReference": "AST-REQ-30022",
+        "testType": "intradermal-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-02",
+        "reportedDate": "2026-06-02",
+        "clinicalHistory": "Adult with prior mild reaction to wasp sting, referred for venom intradermal testing before immunotherapy work-up.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "Wasp venom",
+        "whealSizes": "Wasp venom 15mm at 1.0 mcg/mL dilution; positive control 6mm, negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "Wasp venom",
+        "positiveReactions": true,
+        "sensitisationConfirmed": true,
+        "anaphylaxisDuringTest": true,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "Systemic urticaria and throat tightness developed during intradermal venom testing, treated with intramuscular adrenaline and antihistamine with full recovery.",
+        "impression": "Confirmed wasp-venom sensitisation with a systemic reaction during testing.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent allergy/immunology review for venom immunotherapy assessment; adrenaline auto-injector review.",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Nadia Farrow, referring GP, by telephone",
+        "clinicianNotes": "Referrer informed by telephone immediately after the event; written confirmation to follow.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the reaction and resuscitation, and arrange urgent allergy / immunology review.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "anaphylaxis-during-test",
+            "description": "A systemic / anaphylactic reaction occurred during the test; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "anaphylaxis-during-test",
+            "description": "Anaphylaxis during the test; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Anaphylaxis during the test auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A systemic / anaphylactic reaction occurred during the test.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the reaction, treatment, and observation."
+          },
+          {
+            "flagId": "F-ANAPHYLAXIS-001",
+            "category": "anaphylaxis-during-test",
+            "priority": "high",
+            "description": "Anaphylaxis during testing is a critical safety event.",
+            "suggestedAction": "Ensure resuscitation was provided, prescribe / review an adrenaline auto-injector, and refer to allergy / immunology."
+          }
+        ]
+      }
+    },
+    {
+      "name": "clinically-relevant-sensitisation-confirmed-moderate-with-follow-up-plan",
+      "description": "Confirmed clinically relevant sensitisation to grass pollen correlating with seasonal rhinoconjunctivitis, with a documented follow-up plan and only the antihistamine washout satisfied (not the positive control) -- checks the validity-controls completeness rule accepts either control on its own.",
+      "state": {
+        "reportingClinician": "Dr Priya Shah",
+        "originatingRequestReference": "AST-REQ-30045",
+        "testType": "skin-prick-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-03",
+        "reportedDate": "2026-06-03",
+        "clinicalHistory": "Seasonal rhinoconjunctivitis each May-July, worse outdoors; referred to confirm grass pollen sensitisation.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": false,
+        "allergensTested": "Timothy grass, silver birch, mugwort",
+        "whealSizes": "Timothy grass 8mm, silver birch 2mm, mugwort 1mm; negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "Timothy grass",
+        "positiveReactions": true,
+        "sensitisationConfirmed": true,
+        "anaphylaxisDuringTest": false,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "Clinically relevant sensitisation to timothy grass, consistent with the seasonal symptom pattern.",
+        "impression": "Grass pollen allergic rhinoconjunctivitis.",
+        "reportingCategory": "seasonal-aeroallergen-sensitisation",
+        "recommendedFollowUp": "Intranasal corticosteroid and antihistamine trial; consider grass pollen immunotherapy if symptoms remain uncontrolled next season.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Positive histamine control weal read as 2mm, below the usual >=3mm validity threshold; antihistamine washout confirmed adequate.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "clinically-relevant-sensitisation",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend allergen avoidance advice, immunotherapy referral, or oral food / drug challenge as clinically indicated.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "clinically-relevant-sensitisation",
+            "description": "Clinically relevant sensitisation was confirmed; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "clinically-relevant-sensitisation",
+            "description": "Clinically relevant sensitisation confirmed; abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Clinically relevant sensitisation present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SENSITISATION-001",
+            "category": "clinically-relevant-sensitisation",
+            "priority": "medium",
+            "description": "Clinically relevant sensitisation was confirmed.",
+            "suggestedAction": "Provide allergen avoidance advice and consider immunotherapy referral or an oral challenge."
+          }
+        ]
+      }
+    },
+    {
+      "name": "sensitisation-confirmed-missing-follow-up-plan-urgent-referral-flag",
+      "description": "Confirmed egg sensitisation in a child but the recommended-follow-up field was left blank at sign-off -- exercises the (misleadingly named) urgent-referral flag, which actually fires only for a missing follow-up plan on a moderate sensitisation, not for any acute urgency.",
+      "state": {
+        "reportingClinician": "Dr Priya Shah",
+        "originatingRequestReference": "AST-REQ-30046",
+        "testType": "skin-prick-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-04",
+        "reportedDate": "2026-06-04",
+        "clinicalHistory": "Toddler with eczema and one episode of perioral urticaria after egg exposure; referred to assess egg sensitisation.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "Whole egg, egg white, egg yolk",
+        "whealSizes": "Whole egg 6mm, egg white 5mm, egg yolk 1mm; positive control 5mm, negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "Whole egg, egg white",
+        "positiveReactions": true,
+        "sensitisationConfirmed": true,
+        "anaphylaxisDuringTest": false,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "Clinically relevant egg sensitisation consistent with the reported reaction history.",
+        "impression": "Egg allergy, sensitisation confirmed.",
+        "reportingCategory": "food-sensitisation",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Follow-up plan to be agreed at the paediatric allergy clinic appointment; not finalised at time of signing.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "clinically-relevant-sensitisation",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend allergen avoidance advice, immunotherapy referral, or oral food / drug challenge as clinically indicated.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "clinically-relevant-sensitisation",
+            "description": "Clinically relevant sensitisation was confirmed; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "clinically-relevant-sensitisation",
+            "description": "Clinically relevant sensitisation confirmed; abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Clinically relevant sensitisation present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SENSITISATION-001",
+            "category": "clinically-relevant-sensitisation",
+            "priority": "medium",
+            "description": "Clinically relevant sensitisation was confirmed.",
+            "suggestedAction": "Provide allergen avoidance advice and consider immunotherapy referral or an oral challenge."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Clinically relevant sensitisation but no recommended follow-up recorded.",
+            "suggestedAction": "Record a follow-up plan (avoidance advice, immunotherapy, or challenge)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "positive-reaction-not-confirmed-sensitisation-minor-missing-measurement",
+      "description": "A positive weal reaction to house dust mite is recorded but clinical relevance has not yet been confirmed against history, and no weal sizes were transcribed into the report -- exercises the minor-severity / abnormal-requiring-action path together with the missing-measurement flag.",
+      "state": {
+        "reportingClinician": "Dr Liam Fitzgerald",
+        "originatingRequestReference": "AST-REQ-30052",
+        "testType": "skin-prick-test",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-05",
+        "reportedDate": "",
+        "clinicalHistory": "Chronic nasal congestion, referred for aeroallergen panel.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "House dust mite, cat dander, dog dander",
+        "whealSizes": "",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "House dust mite",
+        "positiveReactions": true,
+        "sensitisationConfirmed": false,
+        "anaphylaxisDuringTest": false,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "Positive house dust mite weal noted; clinical correlation pending.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Correlate with symptom pattern before advising on environmental control measures.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Weal sizes read by the nurse but not yet transcribed into the report from the paper worksheet.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "sensitisation",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per allergy pathway",
+        "recommendedAction": "Interpret the sensitisation against the clinical history; consider an oral challenge to confirm or exclude clinical allergy.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "positive-reaction",
+            "description": "One or more positive reactions are present (sensitisation, not necessarily clinical allergy); classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "sensitisation",
+            "description": "Positive reaction(s) present without confirmed clinical relevance (sensitisation only); abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "sensitisation",
+            "description": "Positive reaction (sensitisation only); correlate with clinical history and consider further evaluation."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "medium",
+            "description": "Positive reaction(s) present; sensitisation versus clinical allergy needs review.",
+            "suggestedAction": "Correlate the positive result with the clinical history before advising the patient."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "A positive reaction is reported but no weal sizes or specific-IgE results were recorded.",
+            "suggestedAction": "Record the measured weal sizes (mm) or specific-IgE results (kUA/L) per allergen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "all-negative-flag-not-required-for-normal-classification",
+      "description": "Fully reassuring, complete drug-allergy work-up with no positive reactions -- but the clinician never ticked the 'all allergens negative' checkbox, demonstrating that the engine's normal/none/routine bands are reached purely by the absence of positive findings and do not actually require allNegative to be set.",
+      "state": {
+        "reportingClinician": "Dr Liam Fitzgerald",
+        "originatingRequestReference": "AST-REQ-30058",
+        "testType": "skin-prick-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-06",
+        "reportedDate": "2026-06-06",
+        "clinicalHistory": "Reported penicillin rash in childhood; referred to assess before a planned course of amoxicillin.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "Benzylpenicilloyl-polylysine (PPL), minor determinant mixture, amoxicillin",
+        "whealSizes": "PPL 0mm, minor determinant mixture 0mm, amoxicillin 0mm; positive control 5mm, negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "",
+        "positiveReactions": false,
+        "sensitisationConfirmed": false,
+        "anaphylaxisDuringTest": false,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "No sensitisation demonstrated to any of the penicillin determinants tested on a valid panel.",
+        "impression": "No evidence of penicillin allergy on skin testing; graded oral challenge may proceed per local protocol.",
+        "reportingCategory": "all-negative",
+        "recommendedFollowUp": "No specific allergy follow-up required; proceed with amoxicillin as clinically indicated.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "The 'all allergens negative' summary checkbox was left unticked in error during data entry, but every individual weal was 0mm.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "all-negative",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific allergy follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "all-negative",
+            "description": "No positive reactions on a valid, interpretable test; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "all-negative",
+            "description": "No positive reaction; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "all-negative-ticked-but-positive-reaction-recorded-gap",
+      "description": "Contradictory report -- the clinician ticked 'all allergens negative' at the summary step but a positive shellfish reaction was also recorded -- demonstrates the engine grades purely on positiveReactions/sensitisationConfirmed with no cross-check against allNegative, silently ignoring the inconsistency rather than raising a discrepancy flag.",
+      "state": {
+        "reportingClinician": "Dr Sofia Ricci",
+        "originatingRequestReference": "AST-REQ-30061",
+        "testType": "skin-prick-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-07",
+        "reportedDate": "2026-06-07",
+        "clinicalHistory": "One episode of lip swelling after eating prawns; referred for shellfish panel.",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "Prawn, crab, mussel",
+        "whealSizes": "Prawn 4mm, crab 0mm, mussel 0mm; positive control 5mm, negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "Prawn",
+        "positiveReactions": true,
+        "sensitisationConfirmed": false,
+        "anaphylaxisDuringTest": false,
+        "allNegative": true,
+        "testInvalid": false,
+        "interpretation": "Positive prawn weal recorded; summary checkbox marked all-negative in error at final sign-off.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Data-entry inconsistency retained deliberately in this persona to document the engine's handling: allNegative is not read by rules.js/flags.js at all, so this report still grades abnormal/minor exactly as if allNegative were false.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "sensitisation",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per allergy pathway",
+        "recommendedAction": "Interpret the sensitisation against the clinical history; consider an oral challenge to confirm or exclude clinical allergy.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "positive-reaction",
+            "description": "One or more positive reactions are present (sensitisation, not necessarily clinical allergy); classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "sensitisation",
+            "description": "Positive reaction(s) present without confirmed clinical relevance (sensitisation only); abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "sensitisation",
+            "description": "Positive reaction (sensitisation only); correlate with clinical history and consider further evaluation."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "medium",
+            "description": "Positive reaction(s) present; sensitisation versus clinical allergy needs review.",
+            "suggestedAction": "Correlate the positive result with the clinical history before advising the patient."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid-test-antihistamines-not-withheld-inconclusive",
+      "description": "Patient continued taking daily antihistamines up to the test, invalidating weal interpretation -- the invalid-test inconclusive path with a repeat-testing recommendation.",
+      "state": {
+        "reportingClinician": "Dr Sofia Ricci",
+        "originatingRequestReference": "AST-REQ-30063",
+        "testType": "skin-prick-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-08",
+        "reportedDate": "2026-06-08",
+        "clinicalHistory": "Suspected pollen allergy; patient takes daily cetirizine for chronic urticaria and was not advised to stop before the appointment.",
+        "antihistaminesWithheld": false,
+        "positiveControlValid": false,
+        "allergensTested": "Timothy grass, silver birch",
+        "whealSizes": "Timothy grass 0mm, silver birch 0mm; positive control 0mm (no weal on histamine control), negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "",
+        "positiveReactions": false,
+        "sensitisationConfirmed": false,
+        "anaphylaxisDuringTest": false,
+        "allNegative": false,
+        "testInvalid": true,
+        "interpretation": "Positive histamine control failed to raise a weal, confirming antihistamine suppression; the panel is non-interpretable.",
+        "impression": "Invalid skin-prick test due to unwashed antihistamines.",
+        "reportingCategory": "indeterminate",
+        "recommendedFollowUp": "Repeat skin-prick testing after a confirmed 5-7 day antihistamine washout, or proceed to specific-IgE blood testing instead.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Patient counselled on which antihistamines to withhold and for how long before rebooking.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat testing after an adequate antihistamine washout, or alternative specific-IgE testing.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "invalid-test",
+            "description": "Test was invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism); classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-VALIDITY-01",
+            "axis": "completeness",
+            "category": "validity-controls",
+            "description": "Mandatory report section missing: validity controls (antihistamine washout / positive control)."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Invalid / inconclusive test; repeat or alternative testing recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INVALID-TEST-001",
+            "category": "invalid-test",
+            "priority": "high",
+            "description": "Test is invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism).",
+            "suggestedAction": "Repeat testing after an adequate washout, or arrange specific-IgE blood testing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "anaphylaxis-during-invalid-test-critical-overrides-inconclusive",
+      "description": "A systemic reaction occurred during a test that was also technically invalid (positive control failed) -- confirms classifyResult()'s critical check is evaluated before the invalid-test check, so classification stays critical rather than inconclusive, while the invalid-test flag is still raised but at a downgraded medium priority alongside the high-priority critical flags.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "AST-REQ-30070",
+        "testType": "intradermal-test",
+        "reportStatus": "final",
+        "performedDate": "2026-06-09",
+        "reportedDate": "2026-06-09",
+        "clinicalHistory": "Suspected local anaesthetic allergy prior to a planned dental procedure; intradermal testing arranged.",
+        "antihistaminesWithheld": false,
+        "positiveControlValid": false,
+        "allergensTested": "Lidocaine, mepivacaine",
+        "whealSizes": "Lidocaine 10mm with systemic flushing; positive control 0mm (no weal on histamine control), negative control 0mm",
+        "specificIgeResults": "",
+        "sensitisedAllergens": "Lidocaine",
+        "positiveReactions": true,
+        "sensitisationConfirmed": false,
+        "anaphylaxisDuringTest": true,
+        "allNegative": false,
+        "testInvalid": true,
+        "interpretation": "Systemic flushing, tachycardia, and hypotension developed during intradermal lidocaine testing; the histamine control also failed, so the panel is technically invalid despite the clear systemic event.",
+        "impression": "Systemic reaction during testing; local anaesthetic allergy work-up will need to be repeated with a valid positive control.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent allergy/immunology review before any further local anaesthetic exposure; repeat testing with a valid positive control once stable.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Patient treated with intramuscular adrenaline and observed for 4 hours; positive control weal failure noted separately on the worksheet.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the reaction and resuscitation, and arrange urgent allergy / immunology review.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "anaphylaxis-during-test",
+            "description": "A systemic / anaphylactic reaction occurred during the test; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "anaphylaxis-during-test",
+            "description": "Anaphylaxis during the test; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-VALIDITY-01",
+            "axis": "completeness",
+            "category": "validity-controls",
+            "description": "Mandatory report section missing: validity controls (antihistamine washout / positive control)."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Anaphylaxis during the test auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A systemic / anaphylactic reaction occurred during the test.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the reaction, treatment, and observation."
+          },
+          {
+            "flagId": "F-ANAPHYLAXIS-001",
+            "category": "anaphylaxis-during-test",
+            "priority": "high",
+            "description": "Anaphylaxis during testing is a critical safety event.",
+            "suggestedAction": "Ensure resuscitation was provided, prescribe / review an adrenaline auto-injector, and refer to allergy / immunology."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical event present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-INVALID-TEST-001",
+            "category": "invalid-test",
+            "priority": "medium",
+            "description": "Test is invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism).",
+            "suggestedAction": "Repeat testing after an adequate washout, or arrange specific-IgE blood testing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-report-missing-history-interpretation-impression",
+      "description": "A hurriedly filed preliminary report: no clinical history, no interpretation, and no impression recorded, though the allergen panel and validity controls are documented -- exercises the report-completeness percentage and the missing-impression flag together.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "",
+        "testType": "specific-ige-blood",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-10",
+        "reportedDate": "2026-06-10",
+        "clinicalHistory": "",
+        "antihistaminesWithheld": true,
+        "positiveControlValid": true,
+        "allergensTested": "Peanut, tree nut mix",
+        "whealSizes": "",
+        "specificIgeResults": "Peanut 0.2 kUA/L, tree nut mix 0.1 kUA/L",
+        "sensitisedAllergens": "",
+        "positiveReactions": false,
+        "sensitisationConfirmed": false,
+        "anaphylaxisDuringTest": false,
+        "allNegative": false,
+        "testInvalid": false,
+        "interpretation": "",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Preliminary lab report auto-filed pending clinician dictation; narrative fields to be completed before finalisation.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "all-negative",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific allergy follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "all-negative",
+            "description": "No positive reactions on a valid, interpretable test; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "all-negative",
+            "description": "No positive reaction; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-INTERPRETATION-01",
+            "axis": "completeness",
+            "category": "interpretation",
+            "description": "Mandatory report section missing: interpretation."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    }
+  ]
+}
