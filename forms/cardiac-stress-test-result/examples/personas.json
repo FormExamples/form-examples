@@ -1,0 +1,797 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-negative-treadmill-low-risk-duke",
+      "description": "Negative exercise treadmill ECG with excellent functional capacity and a low-risk Duke treadmill score (+11, above the +5 low-risk threshold) — every axis at baseline.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "CST-REQ-100221",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Atypical chest pain, low pre-test probability of coronary artery disease",
+        "comparisonWithPrevious": "No previous study for comparison",
+        "maximumHeartRateBpm": 165,
+        "percentPredictedHeartRate": 96,
+        "exerciseDurationMinutes": 11,
+        "metsAchieved": 12,
+        "peakBloodPressure": "168/82",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": false,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": false,
+        "testPositive": false,
+        "testNegative": true,
+        "testInconclusive": false,
+        "reasonForTermination": "Target heart rate achieved",
+        "dukeTreadmillScore": 11,
+        "impression": "Negative exercise ECG with excellent functional capacity and a low-risk Duke treadmill score.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "None required",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "duke-low-risk",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific cardiac follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable test; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "actionable-chest-pain-no-critical-trigger",
+      "description": "Typical exertional chest pain reproduced at a submaximal workload without diagnostic ST-segment change — an actionable finding graded moderate, short of the critical threshold; an intermediate-risk Duke score.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "CST-REQ-100355",
+        "reportStatus": "final",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Exertional chest tightness for 6 weeks, intermediate pre-test probability",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 132,
+        "percentPredictedHeartRate": 78,
+        "exerciseDurationMinutes": 6,
+        "metsAchieved": 6,
+        "peakBloodPressure": "150/88",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": false,
+        "chestPainInduced": true,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": true,
+        "testPositive": false,
+        "testNegative": false,
+        "testInconclusive": false,
+        "reasonForTermination": "Test stopped due to reproduction of typical chest pain",
+        "dukeTreadmillScore": -3,
+        "impression": "Exertional chest pain reproducing the patient's typical symptoms at a submaximal workload without diagnostic ST-segment change.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Cardiology referral for further functional or anatomical imaging",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "duke-intermediate-risk",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend further functional or anatomical imaging or cardiology referral as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (induced ischaemia, chest pain, or arrhythmia) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: structured findings."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Induced ischaemia or chest pain requiring timely action is present.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear action plan is documented."
+          },
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+          }
+        ]
+      }
+    },
+    {
+      "name": "strongly-positive-ischaemia-critical",
+      "description": "Positive test with induced ischaemic ST changes at a low workload and a high-risk Duke treadmill score (-14) — a strongly positive result that auto-escalates to critical; already communicated to the on-call cardiologist.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "CST-REQ-100489",
+        "reportStatus": "final",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-22",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Crescendo exertional angina over 2 weeks, high pre-test probability",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 118,
+        "percentPredictedHeartRate": 70,
+        "exerciseDurationMinutes": 4,
+        "metsAchieved": 4,
+        "peakBloodPressure": "142/90",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": true,
+        "chestPainInduced": true,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": true,
+        "testPositive": true,
+        "testNegative": false,
+        "testInconclusive": false,
+        "reasonForTermination": "Test stopped due to 3mm ST depression with limiting chest pain",
+        "dukeTreadmillScore": -14,
+        "impression": "Strongly positive exercise ECG: 3mm ST depression with limiting angina at a low workload; high-risk Duke treadmill score.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent cardiology referral for invasive coronary angiography",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Marcus Webb, on-call cardiologist, by phone at time of reporting",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "duke-high-risk",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and make an urgent cardiology referral; document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-result",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-result",
+            "description": "Critical result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical result auto-escalates follow-up urgency to critical-alert with an urgent cardiology referral, regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, make an urgent cardiology referral, and document the communication."
+          },
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+          }
+        ]
+      }
+    },
+    {
+      "name": "exertional-hypotension-critical",
+      "description": "Test terminated early due to a hypotensive blood-pressure response to exercise — a critical trigger on its own with no ischaemic ECG change; not yet communicated to the referrer.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "CST-REQ-100602",
+        "reportStatus": "final",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-26",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Modified Bruce protocol",
+        "clinicalHistory": "Exertional presyncope, known left ventricular impairment",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 128,
+        "percentPredictedHeartRate": 76,
+        "exerciseDurationMinutes": 5,
+        "metsAchieved": 5,
+        "peakBloodPressure": "98/64",
+        "bloodPressureResponse": "hypotensive",
+        "ischaemicStChanges": false,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": true,
+        "testPositive": false,
+        "testNegative": false,
+        "testInconclusive": false,
+        "reasonForTermination": "Test stopped due to a falling systolic blood pressure with exercise",
+        "dukeTreadmillScore": null,
+        "impression": "Test terminated early due to a hypotensive blood pressure response to exercise, an exertional hypotension warning sign of possible severe underlying disease.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent cardiology referral to investigate the hypotensive response",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and make an urgent cardiology referral; document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-result",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-result",
+            "description": "Critical result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: structured findings."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical result auto-escalates follow-up urgency to critical-alert with an urgent cardiology referral, regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, make an urgent cardiology referral, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical result present but it has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "An induced arrhythmia or exertional hypotension is present and may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate cardiology team."
+          },
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "An exercise treadmill ECG with an abnormal finding has no Duke treadmill score recorded.",
+            "suggestedAction": "Record the Duke treadmill score for prognostic risk stratification."
+          }
+        ]
+      }
+    },
+    {
+      "name": "ischaemia-at-low-workload-critical",
+      "description": "ST-segment depression induced at only 4 METs — a high-risk finding on its own even though the overall conclusion was not marked positive; auto-escalates to critical via the low-workload-ischaemia trigger rather than the strongly-positive trigger.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "CST-REQ-100714",
+        "reportStatus": "final",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Known triple-vessel disease, pre-operative risk stratification",
+        "comparisonWithPrevious": "Prior study 2025-01 was negative",
+        "maximumHeartRateBpm": 110,
+        "percentPredictedHeartRate": 65,
+        "exerciseDurationMinutes": 4,
+        "metsAchieved": 4,
+        "peakBloodPressure": "156/94",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": true,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": true,
+        "testPositive": false,
+        "testNegative": false,
+        "testInconclusive": false,
+        "reasonForTermination": "Test stopped due to 2mm ST depression at low workload",
+        "dukeTreadmillScore": -12,
+        "impression": "ST-segment depression of 2mm induced at a low workload (4 METs), a high-risk finding regardless of the overall test conclusion recorded.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent cardiology referral for invasive assessment",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "duke-high-risk",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and make an urgent cardiology referral; document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-result",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-result",
+            "description": "Critical result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: structured findings."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical result auto-escalates follow-up urgency to critical-alert with an urgent cardiology referral, regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, make an urgent cardiology referral, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical result present but it has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A high-risk Duke treadmill score is recorded but the test conclusion is not marked positive.",
+            "suggestedAction": "Reconcile the Duke score risk band with the recorded conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-duke-score-discordant-critical",
+      "description": "A high-risk Duke treadmill score exactly at the -11 threshold with no other abnormal structured finding recorded and the conclusion not marked positive — the Duke score alone drives the critical escalation, surfacing the discordance for the reporting clinician to reconcile.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "CST-REQ-100822",
+        "reportStatus": "final",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-28",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Exertional breathlessness, intermediate pre-test probability",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 150,
+        "percentPredictedHeartRate": 92,
+        "exerciseDurationMinutes": 6,
+        "metsAchieved": 7,
+        "peakBloodPressure": "158/86",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": false,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": false,
+        "testPositive": false,
+        "testNegative": true,
+        "testInconclusive": false,
+        "reasonForTermination": "Target heart rate achieved",
+        "dukeTreadmillScore": -11,
+        "impression": "High-risk Duke treadmill score of -11 despite a test conclusion recorded as negative; recommend correlation with functional imaging.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent cardiology referral and reconciliation of the Duke score against the recorded conclusion",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "duke-high-risk",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and make an urgent cardiology referral; document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-result",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-result",
+            "description": "Critical result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical result auto-escalates follow-up urgency to critical-alert with an urgent cardiology referral, regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, make an urgent cardiology referral, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical result present but it has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A high-risk Duke treadmill score is recorded but the test conclusion is not marked positive.",
+            "suggestedAction": "Reconcile the Duke score risk band with the recorded conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "name": "inconclusive-submaximal-test",
+      "description": "Study terminated early at only 78% of predicted maximum heart rate with no diagnostic ST change or symptoms — non-diagnostic due to submaximal effort, correctly marked inconclusive rather than assumed negative.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "CST-REQ-100913",
+        "reportStatus": "final",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Non-specific chest discomfort, patient limited by peripheral fatigue",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 132,
+        "percentPredictedHeartRate": 78,
+        "exerciseDurationMinutes": 5,
+        "metsAchieved": 6,
+        "peakBloodPressure": "144/84",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": false,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": true,
+        "testPositive": false,
+        "testNegative": false,
+        "testInconclusive": true,
+        "reasonForTermination": "Test stopped due to general fatigue before target heart rate reached",
+        "dukeTreadmillScore": null,
+        "impression": "Study terminated early at 78% of predicted maximum heart rate without diagnostic ST-segment change or symptoms; non-diagnostic due to submaximal effort.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat exercise test to a maximal endpoint, or consider pharmacological stress imaging",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat or alternative stress / imaging testing to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "non-diagnostic",
+            "description": "Test was inconclusive / non-diagnostic; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative testing recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+          }
+        ]
+      }
+    },
+    {
+      "name": "terminated-early-no-impression-inconclusive",
+      "description": "Test terminated early for a non-cardiac reason (leg fatigue) with no structured findings recorded and no impression written yet — inconclusive on the terminated-with-no-impression rule, distinct from the submaximal-effort persona above.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "CST-REQ-101004",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Routine pre-operative cardiac risk assessment",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 152,
+        "percentPredictedHeartRate": 90,
+        "exerciseDurationMinutes": 7,
+        "metsAchieved": 8,
+        "peakBloodPressure": "150/80",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": false,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": true,
+        "testPositive": false,
+        "testNegative": false,
+        "testInconclusive": false,
+        "reasonForTermination": "Patient requested the test be stopped due to leg fatigue, a non-cardiac reason",
+        "dukeTreadmillScore": null,
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat exercise test to a maximal endpoint if clinically tolerated",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat or alternative stress / imaging testing to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-02",
+            "axis": "classification",
+            "category": "terminated-no-impression",
+            "description": "Test was terminated early and no impression was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: structured findings."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative testing recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    },
+    {
+      "name": "positive-ecg-missing-duke-score",
+      "description": "Overall conclusion marked positive by symptom/clinical criteria with no corroborating ST-segment change, chest pain, or arrhythmia, and no Duke treadmill score calculated — an edge case where the classification is abnormal but the independently-graded severity lands at none, surfacing the missing-measurement flag for the reporting clinician to resolve.",
+      "state": {
+        "reportingClinician": "Dr Ingrid Solberg",
+        "originatingRequestReference": "CST-REQ-101115",
+        "reportStatus": "final",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "testType": "exercise-treadmill-ecg",
+        "protocol": "Bruce protocol",
+        "clinicalHistory": "Family history of premature coronary artery disease, asymptomatic screening",
+        "comparisonWithPrevious": "",
+        "maximumHeartRateBpm": 162,
+        "percentPredictedHeartRate": 96,
+        "exerciseDurationMinutes": 10,
+        "metsAchieved": 11,
+        "peakBloodPressure": "170/84",
+        "bloodPressureResponse": "normal",
+        "ischaemicStChanges": false,
+        "chestPainInduced": false,
+        "arrhythmiaInduced": false,
+        "terminatedEarly": false,
+        "testPositive": true,
+        "testNegative": false,
+        "testInconclusive": false,
+        "reasonForTermination": "Target heart rate achieved",
+        "dukeTreadmillScore": null,
+        "impression": "Positive treadmill test based on symptom/clinical criteria without diagnostic ST-segment change; Duke treadmill score not calculated.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Calculate and document the Duke treadmill score; correlate with clinical criteria used to mark the test positive",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific cardiac follow-up required; manage per usual care.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "An exercise treadmill ECG with an abnormal finding has no Duke treadmill score recorded.",
+            "suggestedAction": "Record the Duke treadmill score for prognostic risk stratification."
+          }
+        ]
+      }
+    }
+  ]
+}
