@@ -1,0 +1,734 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-complete-study",
+      "description": "Normal awake EEG with a normal background rhythm and no structured findings — every axis at baseline on a complete report.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "EEG-REQ-100221",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "eegType": "routine-awake",
+        "recordingDurationMinutes": 25,
+        "recordingQuality": "good",
+        "clinicalHistory": "First unprovoked seizure-like episode query syncope; routine EEG requested",
+        "comparisonWithPrevious": "No previous EEG for comparison",
+        "backgroundRhythm": "normal",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": true,
+        "findingsNarrative": "Normal alpha background rhythm, reactive to eye opening. No epileptiform discharges, no focal or generalised slowing. Hyperventilation and photic stimulation unremarkable.",
+        "clinicalCorrelation": "No electrographic correlate of the reported episode captured during the recording.",
+        "impression": "Normal awake EEG.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "None required from a neurophysiology perspective",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific neurophysiology follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured or background findings on an interpretable recording; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "minor-excess-slow-background-incidental",
+      "description": "An isolated excess-slow background rhythm with no other structured findings — minor severity from the background abnormality alone, reported as an incidental finding rather than an actionable one (the incidental-finding flag requires no focal/generalised slowing alongside it).",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "EEG-REQ-100355",
+        "reportStatus": "final",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "eegType": "routine-awake",
+        "recordingDurationMinutes": 22,
+        "recordingQuality": "good",
+        "clinicalHistory": "Non-specific dizzy spells, no clear seizure semiology",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "excess-slow",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "Mild excess of theta activity in the background, otherwise a well-organised recording. No epileptiform discharges or focal abnormality.",
+        "clinicalCorrelation": "Non-specific finding; can be seen with drowsiness or mild encephalopathy.",
+        "impression": "Mild non-specific background slowing, an incidental finding.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No specific action required; correlate clinically if symptoms persist",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "minor-background",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per clinical pathway",
+        "recommendedAction": "Correlate the minor background abnormality with the clinical context and follow up as indicated.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured or background findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "minor-background",
+            "description": "A minor background abnormality (excess slowing or asymmetry) only; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "minor-abnormality",
+            "description": "Minor background abnormality; structured follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCIDENTAL-FINDING-001",
+            "category": "incidental-finding",
+            "priority": "low",
+            "description": "A minor background abnormality is documented as an incidental finding.",
+            "suggestedAction": "Correlate the minor background abnormality with the clinical context."
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-focal-slowing-actionable-no-flag",
+      "description": "Isolated focal slowing with no other structured findings — moderate severity via the actionable-finding rule, but notably raises no dedicated safety flag of its own (unlike the seizure/status-epilepticus triggers below), since focal slowing sits outside every flags.js condition; a real, verified gap between the severity grading and the flag set.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "EEG-REQ-100489",
+        "reportStatus": "final",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-22",
+        "eegType": "routine-awake",
+        "recordingDurationMinutes": 30,
+        "recordingQuality": "good",
+        "clinicalHistory": "Focal-onset seizure semiology with left-sided jerking; interictal EEG",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "normal",
+        "epileptiformDischarges": false,
+        "focalSlowing": true,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "Intermittent focal slowing over the right temporal region, without epileptiform discharges. Background otherwise normal.",
+        "clinicalCorrelation": "Non-specific for a structural lesion in the right temporal region; correlate with imaging.",
+        "impression": "Right temporal focal slowing, non-epileptiform.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Neurology review; correlate with MRI if not already performed",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "abnormal-background",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend neurology review or a follow-up recording as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured or background findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (focal slowing, generalised slowing, photoparoxysmal response, or abnormal background) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "moderate-photoparoxysmal-response-urgent-referral",
+      "description": "A photoparoxysmal response to photic stimulation with no other structured findings — moderate severity via the actionable-finding rule, and raises the urgent-referral flag (photoparoxysmal response is one of its two triggers).",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "EEG-REQ-100602",
+        "reportStatus": "final",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-26",
+        "eegType": "routine-awake",
+        "recordingDurationMinutes": 28,
+        "recordingQuality": "good",
+        "clinicalHistory": "Teenager with episodes triggered by flashing lights at a concert",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "normal",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": true,
+        "normalEeg": false,
+        "findingsNarrative": "A generalised photoparoxysmal response was elicited during photic stimulation at 16 Hz. Background otherwise normal.",
+        "clinicalCorrelation": "Consistent with a photosensitive epilepsy trait; correlates with the reported flashing-light-triggered episodes.",
+        "impression": "Photoparoxysmal response, consistent with photosensitivity.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent neurology / epilepsy clinic referral; photosensitivity precautions advice",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "abnormal-background",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend neurology review or a follow-up recording as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured or background findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (focal slowing, generalised slowing, photoparoxysmal response, or abnormal background) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "A recorded seizure or photoparoxysmal response is present and may warrant urgent neurology referral.",
+            "suggestedAction": "Consider urgent referral to the neurology / epilepsy team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-abnormal-background-rhythm",
+      "description": "An abnormal background rhythm (neither simply excess-slow nor asymmetric, but qualitatively disorganised) with no other structured findings — moderate severity via the abnormal-background branch of the actionable rule, and raises no dedicated flag (a second real gap between the moderate-severity grading and the flag set, distinct from the focal-slowing persona above).",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "EEG-REQ-100714",
+        "reportStatus": "final",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "eegType": "sleep-deprived",
+        "recordingDurationMinutes": 35,
+        "recordingQuality": "adequate",
+        "clinicalHistory": "Encephalopathy of uncertain cause, mild confusion",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "abnormal",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "Disorganised background with poor state changes and reduced reactivity, without focal or epileptiform features.",
+        "clinicalCorrelation": "Consistent with a mild diffuse encephalopathy; correlate with metabolic and infective screen.",
+        "impression": "Disorganised background consistent with mild encephalopathy.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Neurology review; correlate with metabolic and infective work-up",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "abnormal-background",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend neurology review or a follow-up recording as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured or background findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (focal slowing, generalised slowing, photoparoxysmal response, or abnormal background) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "epileptiform-discharges-critical-composite",
+      "description": "Frequent epileptiform discharges with no recording duration documented and no originating request reference linked — the third critical trigger, stacking the missing-measurement and unexpected-finding flags alongside the two universal critical-result flags; not yet communicated.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "",
+        "reportStatus": "final",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-28",
+        "eegType": "routine-awake",
+        "recordingDurationMinutes": null,
+        "recordingQuality": "adequate",
+        "clinicalHistory": "Recurrent brief staring episodes with unresponsiveness in a school-age child",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "normal",
+        "epileptiformDischarges": true,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "Frequent generalised 3Hz spike-and-wave discharges, several activated by hyperventilation, consistent with a generalised epilepsy syndrome.",
+        "clinicalCorrelation": "Findings support a diagnosis of childhood absence epilepsy; the originating referral could not be matched in the requesting system.",
+        "impression": "Frequent generalised spike-and-wave discharges, consistent with absence epilepsy.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent paediatric neurology referral for antiepileptic treatment planning",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Recording duration not logged by the technologist; requesting clarification",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-epileptiform",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "A significant finding is present but no recording duration was recorded.",
+            "suggestedAction": "Record the total recording duration in minutes for audit."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "seizure-recorded-critical-communicated",
+      "description": "An electrographic seizure captured during the recording, already communicated to the on-call neurology team — a real, verified contrast with the ECG/echocardiogram engines' pattern: here F-URGENT-REFERRAL-001 has no `!hasCriticalFinding` guard in flags.js, so it correctly co-fires alongside F-CRITICAL-RESULT-001 for the same recorded-seizure finding rather than being suppressed once the report is already critical.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "EEG-REQ-100913",
+        "reportStatus": "final",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "eegType": "ambulatory-24h",
+        "recordingDurationMinutes": 1440,
+        "recordingQuality": "good",
+        "clinicalHistory": "Admitted with breakthrough seizures despite therapeutic antiepileptic levels",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "normal",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": true,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "A single electrographic seizure of 45 seconds' duration was captured, arising from the left temporal region, with a corresponding brief clinical arrest of activity noted by the ward nurse.",
+        "clinicalCorrelation": "Correlates temporally with the nurse-witnessed event logged on the seizure diary.",
+        "impression": "One electrographic seizure captured, left temporal onset.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Immediate antiepileptic medication review by the neurology team",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Marcus Webb, on-call neurology registrar, by phone at the time of the event",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-epileptiform",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "A recorded seizure or photoparoxysmal response is present and may warrant urgent neurology referral.",
+            "suggestedAction": "Consider urgent referral to the neurology / epilepsy team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "status-epilepticus-critical",
+      "description": "Non-convulsive status epilepticus — the most acute of the three critical triggers, with its own dedicated abnormal-requiring-action flag (F-ABNORMAL-ACTION-001) distinct from the seizure/epileptiform-discharge triggers; not yet communicated.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "EEG-REQ-101004",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "eegType": "ambulatory-24h",
+        "recordingDurationMinutes": 180,
+        "recordingQuality": "good",
+        "clinicalHistory": "Persistently reduced consciousness on the intensive care unit, query non-convulsive status",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "abnormal",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": true,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "Continuous generalised rhythmic epileptiform activity throughout the recording without return to a normal background, consistent with non-convulsive status epilepticus.",
+        "clinicalCorrelation": "Explains the persistently reduced level of consciousness.",
+        "impression": "Non-convulsive status epilepticus.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Immediate escalation to the treating ICU/neurology team for urgent anti-status treatment",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-epileptiform",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Status epilepticus (including non-convulsive status) requires immediate action.",
+            "suggestedAction": "Ensure the treating team is alerted and an urgent management plan is documented."
+          }
+        ]
+      }
+    },
+    {
+      "name": "limited-quality-no-impression-inconclusive",
+      "description": "A technically limited recording (excessive muscle and movement artefact) with no impression yet recorded — classified inconclusive on the combined limited-quality-and-no-impression rule; raises both the inadequate-technique and missing-impression flags.",
+      "state": {
+        "reportingClinician": "Dr Ingrid Solberg",
+        "originatingRequestReference": "EEG-REQ-101115",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "eegType": "routine-awake",
+        "recordingDurationMinutes": 20,
+        "recordingQuality": "limited",
+        "clinicalHistory": "Uncooperative patient, unable to remain still for the recording",
+        "comparisonWithPrevious": "",
+        "backgroundRhythm": "",
+        "epileptiformDischarges": false,
+        "focalSlowing": false,
+        "generalisedSlowing": false,
+        "seizureRecorded": false,
+        "statusEpilepticus": false,
+        "photoparoxysmalResponse": false,
+        "normalEeg": false,
+        "findingsNarrative": "Recording heavily contaminated by muscle and movement artefact throughout; background rhythm could not be reliably characterised.",
+        "clinicalCorrelation": "",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat recording, consider sedation or a sleep-deprived study to improve cooperation",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend a repeat or sleep-deprived recording to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "limited-no-impression",
+            "description": "Recording quality was limited and no impression was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous EEG."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; a repeat or alternative recording is recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Recording quality is limited; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating or extending the recording to reach diagnostic quality."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    }
+  ]
+}
