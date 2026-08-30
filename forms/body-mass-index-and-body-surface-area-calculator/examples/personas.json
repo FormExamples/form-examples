@@ -1,0 +1,411 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateBmiBsa",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-weight",
+      "description": "Routine primary-care screening: height 170 cm, weight 65 kg — BMI 22.5, WHO normal category.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Elena Vasquez",
+          "clinicianRole": "nurse",
+          "assessedAt": "2026-06-24T09:00",
+          "careSetting": "primary-care",
+          "purpose": "screening"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100221",
+          "ageBand": "40-64",
+          "sex": "female",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 170
+        },
+        "weight": {
+          "weightKg": 65
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bmi": 22.5,
+        "bmiRaw": 22.49134948096886,
+        "bmiCategory": "normal",
+        "bsaMosteller": 1.75,
+        "bsaDuBois": 1.75,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-NORMAL-01",
+            "instrument": "bmi-category",
+            "band": "normal",
+            "category": "who-weight-status",
+            "description": "BMI 18.5–24.9 kg/m² — normal (healthy) weight"
+          }
+        ]
+      }
+    },
+    {
+      "name": "underweight",
+      "description": "Nutritional assessment referral: height 175 cm, weight 50 kg — BMI 16.3, below the 18.5 underweight threshold.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "dietitian",
+          "assessedAt": "2026-06-25T10:30",
+          "careSetting": "outpatient",
+          "purpose": "screening"
+        },
+        "identification": {
+          "patientIdentifier": "OP-100355",
+          "ageBand": "18-39",
+          "sex": "male",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 175
+        },
+        "weight": {
+          "weightKg": 50
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": "Recent unintentional weight loss"
+        }
+      },
+      "expected": {
+        "bmi": 16.3,
+        "bmiRaw": 16.3265306122449,
+        "bmiCategory": "underweight",
+        "bsaMosteller": 1.56,
+        "bsaDuBois": 1.6,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-UNDERWEIGHT-01",
+            "instrument": "bmi-category",
+            "band": "underweight",
+            "category": "who-weight-status",
+            "description": "BMI below 18.5 kg/m² — underweight"
+          }
+        ]
+      }
+    },
+    {
+      "name": "overweight",
+      "description": "Annual health check: height 170 cm, weight 80 kg — BMI 27.7, WHO overweight category.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-26T11:15",
+          "careSetting": "primary-care",
+          "purpose": "screening"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100489",
+          "ageBand": "40-64",
+          "sex": "male",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 170
+        },
+        "weight": {
+          "weightKg": 80
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bmi": 27.7,
+        "bmiRaw": 27.68166089965398,
+        "bmiCategory": "overweight",
+        "bsaMosteller": 1.94,
+        "bsaDuBois": 1.92,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-OVERWEIGHT-01",
+            "instrument": "bmi-category",
+            "band": "overweight",
+            "category": "who-weight-status",
+            "description": "BMI 25.0–29.9 kg/m² — overweight (pre-obesity)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "obese-class-1",
+      "description": "Weight-management clinic review: height 165 cm, weight 90 kg — BMI 33.1, obese class I.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Miriam Solheim",
+          "clinicianRole": "dietitian",
+          "assessedAt": "2026-06-27T09:45",
+          "careSetting": "outpatient",
+          "purpose": "monitoring"
+        },
+        "identification": {
+          "patientIdentifier": "OP-100602",
+          "ageBand": "40-64",
+          "sex": "female",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 165
+        },
+        "weight": {
+          "weightKg": 90
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bmi": 33.1,
+        "bmiRaw": 33.057851239669425,
+        "bmiCategory": "obese-class-1",
+        "bsaMosteller": 2.03,
+        "bsaDuBois": 1.97,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-OBESE-1-01",
+            "instrument": "bmi-category",
+            "band": "obese-class-1",
+            "category": "who-weight-status",
+            "description": "BMI 30.0–34.9 kg/m² — obese class I"
+          }
+        ]
+      }
+    },
+    {
+      "name": "obese-class-3-severe",
+      "description": "Pre-operative bariatric assessment: height 165 cm, weight 120 kg — BMI 44.1, obese class III, specialist referral flag.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-28T14:00",
+          "careSetting": "pre-operative",
+          "purpose": "monitoring"
+        },
+        "identification": {
+          "patientIdentifier": "PO-100714",
+          "ageBand": "40-64",
+          "sex": "male",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 165
+        },
+        "weight": {
+          "weightKg": 120
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": "Referred for bariatric surgery work-up"
+        }
+      },
+      "expected": {
+        "bmi": 44.1,
+        "bmiRaw": 44.0771349862259,
+        "bmiCategory": "obese-class-3",
+        "bsaMosteller": 2.35,
+        "bsaDuBois": 2.23,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-OBESE-3-01",
+            "instrument": "bmi-category",
+            "band": "obese-class-3",
+            "category": "who-weight-status",
+            "description": "BMI 40.0 kg/m² or above — obese class III"
+          }
+        ]
+      }
+    },
+    {
+      "name": "asian-ancestry-increased-risk",
+      "description": "Diabetes screening clinic: height 165 cm, weight 65 kg — BMI 23.9, WHO 'normal' but within the Asian increased-risk action point (23-27.5).",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-29T10:00",
+          "careSetting": "primary-care",
+          "purpose": "screening"
+        },
+        "identification": {
+          "patientIdentifier": "GP-100822",
+          "ageBand": "40-64",
+          "sex": "female",
+          "ancestry": "asian"
+        },
+        "height": {
+          "heightCm": 165
+        },
+        "weight": {
+          "weightKg": 65
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "bmi": 23.9,
+        "bmiRaw": 23.875114784205696,
+        "bmiCategory": "normal",
+        "bsaMosteller": 1.73,
+        "bsaDuBois": 1.72,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-NORMAL-01",
+            "instrument": "bmi-category",
+            "band": "normal",
+            "category": "who-weight-status",
+            "description": "BMI 18.5–24.9 kg/m² — normal (healthy) weight"
+          },
+          {
+            "id": "T-ASIAN-INCREASED-01",
+            "instrument": "asian-threshold",
+            "band": "asian-increased-risk",
+            "category": "asian-action-point",
+            "description": "BMI ≥ 23 kg/m² — increased cardiometabolic risk (Asian threshold)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "chemotherapy-dosing-bsa",
+      "description": "Oncology day unit, chemotherapy dose calculation — the actual purpose BSA exists for: height 160 cm, weight 55 kg, Du Bois formula selected for comparison against Mosteller.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Helena Kowalski",
+          "clinicianRole": "pharmacist",
+          "assessedAt": "2026-06-30T08:30",
+          "careSetting": "oncology",
+          "purpose": "drug-dosing"
+        },
+        "identification": {
+          "patientIdentifier": "ON-100913",
+          "ageBand": "65-74",
+          "sex": "female",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 160
+        },
+        "weight": {
+          "weightKg": 55
+        },
+        "results": {
+          "bsaFormula": "du-bois",
+          "clinicalNote": "Cycle 3 chemotherapy dose calculation"
+        }
+      },
+      "expected": {
+        "bmi": 21.5,
+        "bmiRaw": 21.484374999999996,
+        "bmiCategory": "normal",
+        "bsaMosteller": 1.56,
+        "bsaDuBois": 1.56,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-NORMAL-01",
+            "instrument": "bmi-category",
+            "band": "normal",
+            "category": "who-weight-status",
+            "description": "BMI 18.5–24.9 kg/m² — normal (healthy) weight"
+          }
+        ]
+      }
+    },
+    {
+      "name": "extreme-value-data-entry-error",
+      "description": "Implausible weight entered (typo — an extra digit): height 170 cm, weight 450 kg — BSA would be unsafe to use for dosing without re-measurement; the extreme-value flag exists precisely for this.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "nurse",
+          "assessedAt": "2026-06-30T15:00",
+          "careSetting": "inpatient",
+          "purpose": "monitoring"
+        },
+        "identification": {
+          "patientIdentifier": "IP-101004",
+          "ageBand": "40-64",
+          "sex": "male",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 170
+        },
+        "weight": {
+          "weightKg": 450
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": "Weight as entered — verify before use"
+        }
+      },
+      "expected": {
+        "bmi": 155.7,
+        "bmiRaw": 155.70934256055364,
+        "bmiCategory": "obese-class-3",
+        "bsaMosteller": 4.61,
+        "bsaDuBois": 3.99,
+        "firedThresholds": [
+          {
+            "id": "T-WHO-OBESE-3-01",
+            "instrument": "bmi-category",
+            "band": "obese-class-3",
+            "category": "who-weight-status",
+            "description": "BMI 40.0 kg/m² or above — obese class III"
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-missing-weight",
+      "description": "Height recorded but weight not yet measured — BMI and BSA cannot be computed; both stay null rather than assuming a value.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "assessedAt": "",
+          "careSetting": "primary-care",
+          "purpose": "screening"
+        },
+        "identification": {
+          "patientIdentifier": "GP-101115",
+          "ageBand": "40-64",
+          "sex": "female",
+          "ancestry": "other"
+        },
+        "height": {
+          "heightCm": 165
+        },
+        "weight": {
+          "weightKg": null
+        },
+        "results": {
+          "bsaFormula": "mosteller",
+          "clinicalNote": "Scales unavailable, will complete later"
+        }
+      },
+      "expected": {
+        "bmi": null,
+        "bmiRaw": null,
+        "bmiCategory": "",
+        "bsaMosteller": null,
+        "bsaDuBois": null,
+        "firedThresholds": []
+      }
+    }
+  ]
+}
