@@ -1,0 +1,779 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "pathogenic-variant-major-critical",
+      "description": "A confirmed pathogenic variant (ACMG Class 5) — the ONLY path that reaches severity 'major' (R-SEV-MAJOR-01 checks the exact string variantClassification === 'pathogenic'); classification critical, follow-up critical-alert, cascade testing recommended.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "GEN-REQ-100221",
+        "reportStatus": "final",
+        "testType": "diagnostic-single-gene",
+        "genesTested": "BRCA1",
+        "sampleType": "blood",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "clinicalHistory": "Strong family history of early-onset breast and ovarian cancer, diagnostic testing",
+        "inheritancePattern": "Autosomal dominant",
+        "variantsDetected": "BRCA1 c.68_69delAG (p.Glu23ValfsTer17)",
+        "variantClassification": "pathogenic",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": true,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "A well-established pathogenic frameshift variant in BRCA1, consistent with hereditary breast and ovarian cancer syndrome.",
+        "impression": "Pathogenic BRCA1 variant identified, consistent with hereditary breast and ovarian cancer syndrome.",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": true,
+        "recommendedFollowUp": "Urgent genetics MDT and clinical genetics counselling; offer cascade testing to first-degree relatives",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "Class 5 — pathogenic",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the actionable result to the referrer now, arrange urgent genetics MDT / counselling, and offer cascade testing of at-risk relatives.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "pathogenic-variant",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "pathogenic",
+            "description": "Pathogenic variant (ACMG Class 5); abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "pathogenic-variant",
+            "description": "Pathogenic / likely-pathogenic actionable variant auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PATHOGENIC-VARIANT-001",
+            "category": "pathogenic-variant-found",
+            "priority": "high",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present.",
+            "suggestedAction": "Communicate the actionable result to the referrer, arrange urgent genetics MDT / counselling, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable genomic result requiring direct communication to the referrer.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable variant present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CASCADE-TESTING-001",
+            "category": "cascade-testing-recommended",
+            "priority": "medium",
+            "description": "Cascade (predictive) testing of at-risk relatives is recommended.",
+            "suggestedAction": "Offer cascade testing and genetic counselling to at-risk relatives."
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-pathogenic-critical-but-moderate-severity",
+      "description": "A likely-pathogenic variant (ACMG Class 4) — a real, verified discordance opposite to every other four-axis engine this session: classification is 'critical' (hasPathogenicVariant() includes 'likely-pathogenic') and follow-up escalates to 'critical-alert', but abnormalitySeverity is only 'moderate' (R-SEV-MODERATE-01), not 'major' — severity 'major' is reserved exclusively for the exact string 'pathogenic'. Every prior test-result engine this session paired 'critical' classification with 'major' severity; this one does not.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "GEN-REQ-100355",
+        "reportStatus": "final",
+        "testType": "gene-panel",
+        "genesTested": "MLH1, MSH2, MSH6, PMS2",
+        "sampleType": "blood",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "clinicalHistory": "Colorectal cancer diagnosed age 38, family history suggestive of Lynch syndrome",
+        "inheritancePattern": "Autosomal dominant",
+        "variantsDetected": "MSH2 c.1786_1788del (p.Lys596del)",
+        "variantClassification": "likely-pathogenic",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": false,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "An in-frame deletion in MSH2 classified likely-pathogenic per ACMG/AMP criteria, consistent with Lynch syndrome.",
+        "impression": "Likely-pathogenic MSH2 variant identified, consistent with Lynch syndrome.",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": true,
+        "recommendedFollowUp": "Genetics MDT review; offer cascade testing to at-risk relatives",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "Class 4 — likely pathogenic",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the actionable result to the referrer now, arrange urgent genetics MDT / counselling, and offer cascade testing of at-risk relatives.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "pathogenic-variant",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "likely-pathogenic",
+            "description": "Likely-pathogenic actionable variant (ACMG Class 4); abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "pathogenic-variant",
+            "description": "Pathogenic / likely-pathogenic actionable variant auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PATHOGENIC-VARIANT-001",
+            "category": "pathogenic-variant-found",
+            "priority": "high",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present.",
+            "suggestedAction": "Communicate the actionable result to the referrer, arrange urgent genetics MDT / counselling, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable genomic result requiring direct communication to the referrer.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable variant present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CASCADE-TESTING-001",
+            "category": "cascade-testing-recommended",
+            "priority": "medium",
+            "description": "Cascade (predictive) testing of at-risk relatives is recommended.",
+            "suggestedAction": "Offer cascade testing and genetic counselling to at-risk relatives."
+          }
+        ]
+      }
+    },
+    {
+      "name": "pathogenic-flag-boolean-only-critical-moderate-severity",
+      "description": "The pathogenicVariantFound boolean is set true but the variantClassification string field itself was left unset (a real-world documentation gap) — hasPathogenicVariant() is still true via the boolean alone, so classification is critical and follow-up critical-alert, but severity resolves to 'moderate' (via the same R-SEV-MODERATE-01 rule, since it OR's in hasPathogenicVariant()) rather than 'major' — confirming 'major' severity is reachable ONLY through the literal string 'pathogenic' on variantClassification, never through the boolean flag alone, a distinct code path from the likely-pathogenic persona above reaching the identical moderate outcome.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "GEN-REQ-100489",
+        "reportStatus": "preliminary",
+        "testType": "whole-exome",
+        "genesTested": "Whole exome, targeted analysis of cardiomyopathy gene panel",
+        "sampleType": "blood",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-22",
+        "clinicalHistory": "Sudden cardiac death in a first-degree relative, hypertrophic cardiomyopathy gene panel",
+        "inheritancePattern": "Autosomal dominant",
+        "variantsDetected": "MYBPC3 c.1504C>T (p.Arg502Trp)",
+        "variantClassification": "",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": true,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "A well-recognised MYBPC3 variant strongly associated with hypertrophic cardiomyopathy; formal ACMG classification pending laboratory sign-off.",
+        "impression": "Pathogenic-appearing MYBPC3 variant identified; formal classification pending.",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": true,
+        "recommendedFollowUp": "Urgent cardiology and genetics review; offer cascade testing to first-degree relatives",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Formal ACMG classification string to be finalised before the final report is issued",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "Class 4 — likely pathogenic",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the actionable result to the referrer now, arrange urgent genetics MDT / counselling, and offer cascade testing of at-risk relatives.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "pathogenic-variant",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "likely-pathogenic",
+            "description": "Likely-pathogenic actionable variant (ACMG Class 4); abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "pathogenic-variant",
+            "description": "Pathogenic / likely-pathogenic actionable variant auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PATHOGENIC-VARIANT-001",
+            "category": "pathogenic-variant-found",
+            "priority": "high",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present.",
+            "suggestedAction": "Communicate the actionable result to the referrer, arrange urgent genetics MDT / counselling, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable genomic result requiring direct communication to the referrer.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable variant present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CASCADE-TESTING-001",
+            "category": "cascade-testing-recommended",
+            "priority": "medium",
+            "description": "Cascade (predictive) testing of at-risk relatives is recommended.",
+            "suggestedAction": "Offer cascade testing and genetic counselling to at-risk relatives."
+          },
+          {
+            "flagId": "F-MISSING-CLASSIFICATION-001",
+            "category": "missing-classification",
+            "priority": "medium",
+            "description": "Variants are described but no ACMG/AMP classification has been recorded.",
+            "suggestedAction": "Record the overall ACMG/AMP (ACGS) five-tier variant classification."
+          }
+        ]
+      }
+    },
+    {
+      "name": "secondary-finding-abnormal-urgent",
+      "description": "An actionable secondary (incidental) finding unrelated to the primary indication, with no pathogenic variant for the primary indication itself — classification abnormal (not critical, since hasPathogenicVariant() is false), severity moderate, but follow-up is 'urgent' (R-FU-URGENT-01) rather than 'critical-alert', a distinct urgency tier from every pathogenic-variant persona above.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "GEN-REQ-100602",
+        "reportStatus": "final",
+        "testType": "whole-exome",
+        "genesTested": "Whole exome, primary indication: developmental delay",
+        "sampleType": "blood",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-26",
+        "clinicalHistory": "Global developmental delay, whole-exome sequencing for diagnostic yield",
+        "inheritancePattern": "",
+        "variantsDetected": "No variant identified relevant to the primary indication. Incidental finding: BRCA2 c.5946delT (pathogenic) identified on secondary-findings analysis.",
+        "variantClassification": "",
+        "zygosity": "",
+        "pathogenicVariantFound": false,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": true,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "No variant explaining the primary indication was identified. An unrelated pathogenic BRCA2 variant was identified as a secondary finding per the ACMG secondary-findings gene list, which the family had consented to receive.",
+        "impression": "No diagnosis for the primary indication; actionable secondary finding (pathogenic BRCA2 variant) identified.",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": true,
+        "recommendedFollowUp": "Refer for genetics review of the secondary BRCA2 finding, separate from the primary developmental-delay pathway",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "actionable-finding",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Arrange genetics review of the secondary finding and onward referral as clinically indicated.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "secondary-finding",
+            "description": "A secondary / incidental actionable finding is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "A secondary finding or positive carrier status is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "secondary-finding",
+            "description": "Actionable secondary finding present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SECONDARY-FINDING-001",
+            "category": "secondary-finding",
+            "priority": "high",
+            "description": "A secondary / incidental actionable finding was identified.",
+            "suggestedAction": "Review the secondary finding per the relevant secondary-findings policy and arrange genetics review."
+          },
+          {
+            "flagId": "F-CASCADE-TESTING-001",
+            "category": "cascade-testing-recommended",
+            "priority": "medium",
+            "description": "Cascade (predictive) testing of at-risk relatives is recommended.",
+            "suggestedAction": "Offer cascade testing and genetic counselling to at-risk relatives."
+          },
+          {
+            "flagId": "F-MISSING-CLASSIFICATION-001",
+            "category": "missing-classification",
+            "priority": "medium",
+            "description": "Variants are described but no ACMG/AMP classification has been recorded.",
+            "suggestedAction": "Record the overall ACMG/AMP (ACGS) five-tier variant classification."
+          }
+        ]
+      }
+    },
+    {
+      "name": "carrier-status-positive-abnormal-recommended-not-urgent",
+      "description": "Positive carrier status for a recessive condition, with no top-level ACMG classification tier recorded for this carrier-screening report (a real, plausible documentation gap distinct from the diagnostic-variant reports above) and no secondary finding — classification abnormal, the same moderate-severity bucket as the secondary-finding persona above (R-SEV-MODERATE-02, shared rule ID), but follow-up is only 'recommended' (within 6 weeks, R-FU-RECOMMENDED-01) rather than 'urgent' — a real, verified divergence in Axis D between two findings that share the identical Axis B severity bucket. Note the deliberate contrast with the pathogenic-classified personas above: setting variantClassification to the literal string 'pathogenic' or 'likely-pathogenic' on a carrier report would instead trip hasPathogenicVariant() and sweep it into the critical/major path regardless of carrierStatusPositive, since classifyResult() checks pathogenicity before carrier status — the engine does not distinguish a variant causing disease in this patient from the same tier of variant carried in a single copy. Leaving the field unpopulated here (as this report genuinely does) is what keeps this persona on the carrier-status path, and correctly raises the missing-classification flag alongside it.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "GEN-REQ-100714",
+        "reportStatus": "final",
+        "testType": "diagnostic-single-gene",
+        "genesTested": "CFTR",
+        "sampleType": "blood",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "clinicalHistory": "Preconception carrier screening, partner testing following a positive maternal result",
+        "inheritancePattern": "Autosomal recessive",
+        "variantsDetected": "CFTR c.1521_1523delCTT (p.Phe508del), heterozygous carrier",
+        "variantClassification": "",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": false,
+        "vusFound": false,
+        "carrierStatusPositive": true,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "Heterozygous carrier of the common CFTR delta-F508 variant. Not expected to cause cystic fibrosis in the carrier; relevant to reproductive planning given the partner's carrier status. A formal top-level ACMG tier was not separately recorded for this carrier-screening report.",
+        "impression": "Positive CFTR carrier status (delta-F508, heterozygous).",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": false,
+        "recommendedFollowUp": "Genetic counselling regarding reproductive options given both partners are carriers",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "actionable-finding",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 6 weeks",
+        "recommendedAction": "Offer genetic counselling and partner / reproductive carrier testing as appropriate.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "carrier-status",
+            "description": "Carrier status is positive for a recessive / X-linked condition; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "A secondary finding or positive carrier status is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "carrier-status",
+            "description": "Positive carrier status; genetic counselling recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Positive carrier status may warrant genetic counselling / reproductive advice.",
+            "suggestedAction": "Consider referral for genetic counselling and reproductive options."
+          },
+          {
+            "flagId": "F-MISSING-CLASSIFICATION-001",
+            "category": "missing-classification",
+            "priority": "medium",
+            "description": "Variants are described but no ACMG/AMP classification has been recorded.",
+            "suggestedAction": "Record the overall ACMG/AMP (ACGS) five-tier variant classification."
+          }
+        ]
+      }
+    },
+    {
+      "name": "vus-inconclusive-minor-severity",
+      "description": "A variant of uncertain significance (VUS, ACMG Class 3) — classification inconclusive, but abnormalitySeverity is 'minor' (R-SEV-MINOR-01), NOT 'none' — a real, verified break from the pattern established by every other test-result engine this session, where an inconclusive classification always pairs with severity 'none'. Follow-up is 'recommended' with a periodic-reclassification-review timeframe rather than a fixed window, and raises the dedicated VUS flag.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "GEN-REQ-100822",
+        "reportStatus": "final",
+        "testType": "gene-panel",
+        "genesTested": "BRCA1, BRCA2, PALB2, ATM, CHEK2",
+        "sampleType": "blood",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-28",
+        "clinicalHistory": "Personal history of breast cancer age 45, moderate family history",
+        "inheritancePattern": "",
+        "variantsDetected": "ATM c.7271T>G (p.Val2424Gly)",
+        "variantClassification": "variant-uncertain-significance",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": false,
+        "vusFound": true,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "A missense variant in ATM of uncertain clinical significance per current ACMG/AMP criteria; insufficient evidence to classify as pathogenic or benign at this time.",
+        "impression": "Variant of uncertain significance in ATM; not currently actionable.",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": false,
+        "recommendedFollowUp": "No cascade testing at this time; re-contact if the variant is reclassified",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "Class 3 — uncertain significance",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "periodic reclassification review",
+        "recommendedAction": "Recommend periodic variant reclassification review and re-contact if the classification changes.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "variant-uncertain-significance",
+            "description": "A variant of uncertain significance (VUS) is present; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "variant-uncertain-significance",
+            "description": "Variant of uncertain significance (ACMG Class 3); abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "variant-uncertain-significance",
+            "description": "Variant of uncertain significance; re-contact / reclassification follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-VUS-001",
+            "category": "variant-uncertain-significance",
+            "priority": "medium",
+            "description": "A variant of uncertain significance (VUS) is reported.",
+            "suggestedAction": "Do not act clinically on the VUS alone; recommend periodic reclassification review and re-contact."
+          }
+        ]
+      }
+    },
+    {
+      "name": "negative-result-normal",
+      "description": "A negative result with no clinically significant variant identified — classification normal, severity none, follow-up routine; no flags raised.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "GEN-REQ-100913",
+        "reportStatus": "final",
+        "testType": "diagnostic-single-gene",
+        "genesTested": "BRCA1, BRCA2",
+        "sampleType": "blood",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "clinicalHistory": "Predictive testing, known familial BRCA1 pathogenic variant",
+        "inheritancePattern": "Autosomal dominant",
+        "variantsDetected": "No pathogenic or likely-pathogenic variant identified; the known familial BRCA1 variant was specifically tested for and not detected.",
+        "variantClassification": "no-variant-detected",
+        "zygosity": "not-applicable",
+        "pathogenicVariantFound": false,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": true,
+        "interpretation": "Predictive testing for the known familial BRCA1 pathogenic variant (c.68_69delAG) is negative; the variant was not detected.",
+        "impression": "Negative predictive test for the known familial BRCA1 variant.",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": false,
+        "recommendedFollowUp": "None required; population-level breast screening applies",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "Class 1/2 — benign / no variant",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific genetics follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-significant-variant",
+            "description": "A negative / benign result with no clinically significant variant; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-significant-variant",
+            "description": "No clinically significant variant; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "variants-detected-no-classification-defaults-normal-missing-classification-flag",
+      "description": "A real, verified and arguably risky default: variants are described in free text but no structured ACMG classification was recorded and none of the interpretation booleans (pathogenicVariantFound, vusFound, carrierStatusPositive, secondaryFinding, noClinicallySignificantVariant) were set — classifyResult() has no catch-all for this state and falls all the way through to R-CLASS-NORMAL-02 ('No actionable variant or finding recorded'), classifying the report 'normal' even though a variant WAS described. The only safety net is F-MISSING-CLASSIFICATION-001, a flag rather than a classification change, confirmed to fire here (variantsDetected non-empty, variantClassification empty, noClinicallySignificantVariant false).",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "GEN-REQ-101004",
+        "reportStatus": "preliminary",
+        "testType": "gene-panel",
+        "genesTested": "Epilepsy gene panel",
+        "sampleType": "blood",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "clinicalHistory": "Early-onset epilepsy of unknown cause, gene panel testing",
+        "inheritancePattern": "",
+        "variantsDetected": "SCN1A c.602G>A (p.Arg201His), a missense variant not previously reported in the literature.",
+        "variantClassification": "",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": false,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "A novel SCN1A missense variant of undetermined significance; formal ACMG classification and interpretation booleans not yet finalised pending MDT discussion.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedCascadeTesting": false,
+        "recommendedFollowUp": "Finalise classification at the next genomics MDT before the report is issued as final",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Draft report; classification pending MDT discussion, do not act on this preliminary version",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "Class 1/2 — benign / no variant",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific genetics follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-02",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No actionable variant or finding recorded; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-significant-variant",
+            "description": "No clinically significant variant; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-CLASSIFICATION-001",
+            "category": "missing-classification",
+            "priority": "medium",
+            "description": "Variants are described but no ACMG/AMP classification has been recorded.",
+            "suggestedAction": "Record the overall ACMG/AMP (ACGS) five-tier variant classification."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    },
+    {
+      "name": "pathogenic-no-request-reference-explicit-category-override",
+      "description": "A pathogenic variant with no originating request reference linked (raising the discrepancy flag) and an explicitly entered free-text reportingCategory — confirms that when the clinician has typed their own category label, gradeSeverity() preserves it verbatim (`explicit || 'Class 5 — pathogenic'`) rather than overwriting it with the default ACMG-class string.",
+      "state": {
+        "reportingClinician": "Dr Ingrid Solberg",
+        "originatingRequestReference": "",
+        "reportStatus": "final",
+        "testType": "diagnostic-single-gene",
+        "genesTested": "LDLR",
+        "sampleType": "blood",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "clinicalHistory": "Severe hypercholesterolaemia identified on a routine lipid panel; opportunistic genomic testing arranged directly by the laboratory",
+        "inheritancePattern": "Autosomal dominant",
+        "variantsDetected": "LDLR c.1187-1G>A, a canonical splice-site variant",
+        "variantClassification": "pathogenic",
+        "zygosity": "heterozygous",
+        "pathogenicVariantFound": true,
+        "vusFound": false,
+        "carrierStatusPositive": false,
+        "secondaryFinding": false,
+        "noClinicallySignificantVariant": false,
+        "interpretation": "A pathogenic canonical splice-site variant in LDLR, consistent with familial hypercholesterolaemia.",
+        "impression": "Pathogenic LDLR variant identified, consistent with familial hypercholesterolaemia; no matching clinical referral located.",
+        "reportingCategory": "FH-confirmed, Simon Broome definite",
+        "recommendedCascadeTesting": true,
+        "recommendedFollowUp": "Urgent lipid clinic referral and cascade testing of first-degree relatives",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Opportunistic finding; originating clinical referral not yet identified in the requesting system",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "FH-confirmed, Simon Broome definite",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the actionable result to the referrer now, arrange urgent genetics MDT / counselling, and offer cascade testing of at-risk relatives.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "pathogenic-variant",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "pathogenic",
+            "description": "Pathogenic variant (ACMG Class 5); abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "pathogenic-variant",
+            "description": "Pathogenic / likely-pathogenic actionable variant auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PATHOGENIC-VARIANT-001",
+            "category": "pathogenic-variant-found",
+            "priority": "high",
+            "description": "A pathogenic or likely-pathogenic actionable variant is present.",
+            "suggestedAction": "Communicate the actionable result to the referrer, arrange urgent genetics MDT / counselling, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable genomic result requiring direct communication to the referrer.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Actionable variant present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CASCADE-TESTING-001",
+            "category": "cascade-testing-recommended",
+            "priority": "medium",
+            "description": "Cascade (predictive) testing of at-risk relatives is recommended.",
+            "suggestedAction": "Offer cascade testing and genetic counselling to at-risk relatives."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "low",
+            "description": "An actionable variant is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}
