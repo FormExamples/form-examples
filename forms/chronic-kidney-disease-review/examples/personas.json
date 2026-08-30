@@ -1,0 +1,1259 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "review",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "low-risk-complete-review",
+      "description": "Stable G2/A1 CKD, complete annual review bundle, blood pressure at the standard 140/90 target (no diabetes, ACR under 70) — KDIGO low risk zone.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Elena Vasquez",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-24",
+          "careSetting": "general-practice",
+          "reviewType": "annual"
+        },
+        "patient": {
+          "patientIdentifier": "GP-100221",
+          "ageBand": "65-74",
+          "sex": "female",
+          "diabetesStatus": "none",
+          "primaryCause": "hypertensive",
+          "monthsSinceDiagnosis": 36
+        },
+        "renal": {
+          "egfr": 75,
+          "egfrSampleDate": "2026-06-20",
+          "previousEgfr": 76,
+          "previousEgfrDate": "2025-06-18"
+        },
+        "albuminuria": {
+          "acr": 2,
+          "acrSampleDate": "2026-06-20",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 130,
+          "diastolicBloodPressure": 80
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "not-indicated",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": null,
+          "potassium": 4.5,
+          "bicarbonate": 25,
+          "calcium": 2.3,
+          "phosphate": 1.1,
+          "pth": 5.5,
+          "haemoglobin": 138
+        },
+        "summary": {
+          "referralDecision": "monitor",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "gfrCategory": "G2",
+        "albuminuriaCategory": "A1",
+        "kdigoRiskZone": "low",
+        "bloodPressureTarget": {
+          "systolic": 140,
+          "diastolic": 90
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 75 mL/min/1.73 m² → G2 (mildly decreased)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 2 mg/mmol → A1 (normal–mild)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G2 × A1 → KDIGO Low risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 140/90 mmHg (No qualifying comorbidity) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "moderate-risk-g3a-a1",
+      "description": "G3a with normal albuminuria (A1) — KDIGO moderate risk zone, the top-left step into the heat-map's moderate band.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-25",
+          "careSetting": "general-practice",
+          "reviewType": "annual"
+        },
+        "patient": {
+          "patientIdentifier": "GP-100355",
+          "ageBand": "65-74",
+          "sex": "male",
+          "diabetesStatus": "none",
+          "primaryCause": "unknown",
+          "monthsSinceDiagnosis": 48
+        },
+        "renal": {
+          "egfr": 50,
+          "egfrSampleDate": "2026-06-22",
+          "previousEgfr": 52,
+          "previousEgfrDate": "2025-06-20"
+        },
+        "albuminuria": {
+          "acr": 2,
+          "acrSampleDate": "2026-06-22",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 135,
+          "diastolicBloodPressure": 82
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "not-indicated",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": null,
+          "potassium": 4.8,
+          "bicarbonate": 24,
+          "calcium": 2.3,
+          "phosphate": 1.2,
+          "pth": 6.2,
+          "haemoglobin": 130
+        },
+        "summary": {
+          "referralDecision": "monitor",
+          "clinicalNote": ""
+        }
+      },
+      "expected": {
+        "gfrCategory": "G3a",
+        "albuminuriaCategory": "A1",
+        "kdigoRiskZone": "moderate",
+        "bloodPressureTarget": {
+          "systolic": 140,
+          "diastolic": 90
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 50 mL/min/1.73 m² → G3a (mild–moderate)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 2 mg/mmol → A1 (normal–mild)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G3a × A1 → KDIGO Moderate risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 140/90 mmHg (No qualifying comorbidity) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "high-risk-diabetic-above-target",
+      "description": "G3a/A2 with type 2 diabetes — KDIGO high risk zone; the tighter 130/80 target applies because of diabetes, and the recorded blood pressure (135/85) is above it — uncontrolled blood pressure flag.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-26",
+          "careSetting": "long-term-conditions-clinic",
+          "reviewType": "annual"
+        },
+        "patient": {
+          "patientIdentifier": "LT-100489",
+          "ageBand": "65-74",
+          "sex": "male",
+          "diabetesStatus": "type2",
+          "primaryCause": "diabetic",
+          "monthsSinceDiagnosis": 60
+        },
+        "renal": {
+          "egfr": 50,
+          "egfrSampleDate": "2026-06-24",
+          "previousEgfr": 51,
+          "previousEgfrDate": "2025-06-22"
+        },
+        "albuminuria": {
+          "acr": 15,
+          "acrSampleDate": "2026-06-24",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 135,
+          "diastolicBloodPressure": 85
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "yes",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": 58,
+          "potassium": 4.6,
+          "bicarbonate": 23,
+          "calcium": 2.3,
+          "phosphate": 1.2,
+          "pth": 7,
+          "haemoglobin": 128
+        },
+        "summary": {
+          "referralDecision": "monitor",
+          "clinicalNote": "Titrate antihypertensive at next visit"
+        }
+      },
+      "expected": {
+        "gfrCategory": "G3a",
+        "albuminuriaCategory": "A2",
+        "kdigoRiskZone": "high",
+        "bloodPressureTarget": {
+          "systolic": 130,
+          "diastolic": 80
+        },
+        "bloodPressureAtTarget": false,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 50 mL/min/1.73 m² → G3a (mild–moderate)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 15 mg/mmol → A2 (moderate)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G3a × A2 → KDIGO High risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 130/80 mmHg (Diabetes with CKD) — recorded blood pressure above target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-UNCONTROLLED-BP-001",
+            "category": "uncontrolled-bp",
+            "priority": "medium",
+            "description": "Blood pressure is above the applicable CKD target",
+            "suggestedAction": "Optimise antihypertensive therapy (ACEi/ARB first line in CKD) and arrange follow-up per NICE NG203."
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-risk-g4-nephrology-referral",
+      "description": "G4 (eGFR 20) — KDIGO very-high risk zone regardless of albuminuria stage, and eGFR below 30 fires the nephrology-referral flag on its own.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-27",
+          "careSetting": "community-nephrology",
+          "reviewType": "interval"
+        },
+        "patient": {
+          "patientIdentifier": "CN-100602",
+          "ageBand": "75-84",
+          "sex": "female",
+          "diabetesStatus": "type2",
+          "primaryCause": "diabetic",
+          "monthsSinceDiagnosis": 96
+        },
+        "renal": {
+          "egfr": 20,
+          "egfrSampleDate": "2026-06-25",
+          "previousEgfr": 22,
+          "previousEgfrDate": "2025-12-20"
+        },
+        "albuminuria": {
+          "acr": 5,
+          "acrSampleDate": "2026-06-25",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 76
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "yes",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": 62,
+          "potassium": 5.2,
+          "bicarbonate": 20,
+          "calcium": 2.2,
+          "phosphate": 1.5,
+          "pth": 12.5,
+          "haemoglobin": 108
+        },
+        "summary": {
+          "referralDecision": "already-under-nephrology",
+          "clinicalNote": "Established nephrology follow-up, CKD-MBD monitoring"
+        }
+      },
+      "expected": {
+        "gfrCategory": "G4",
+        "albuminuriaCategory": "A2",
+        "kdigoRiskZone": "very-high",
+        "bloodPressureTarget": {
+          "systolic": 130,
+          "diastolic": 80
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 20 mL/min/1.73 m² → G4 (severely decreased)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 5 mg/mmol → A2 (moderate)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G4 × A2 → KDIGO Very high risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 130/80 mmHg (Diabetes with CKD) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-VERY-HIGH-RISK-REFERRAL-001",
+            "category": "very-high-risk-referral",
+            "priority": "high",
+            "description": "KDIGO risk zone is very high",
+            "suggestedAction": "Consider or arrange nephrology referral and increase monitoring frequency per NICE NG203."
+          },
+          {
+            "id": "F-EGFR-REFERRAL-001",
+            "category": "egfr-referral",
+            "priority": "high",
+            "description": "eGFR 20 corresponds to G4 (eGFR < 30 mL/min/1.73 m²)",
+            "suggestedAction": "Refer to nephrology (eGFR < 30) unless already under specialist care."
+          },
+          {
+            "id": "F-ANAEMIA-001",
+            "category": "anaemia",
+            "priority": "medium",
+            "description": "Haemoglobin 108 g/L is < 110",
+            "suggestedAction": "Assess iron status and exclude other causes; consider ESA therapy or renal referral for anaemia of CKD."
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-heavy-proteinuria-acr-referral",
+      "description": "G2/A3 (eGFR 70, ACR 80 mg/mmol) — KDIGO high risk zone on the heat-map, and the ACR-≥70 threshold fires the nephrology-referral flag independently of the risk zone, plus pulls the blood-pressure target to 130/80 regardless of diabetes status.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Helena Kowalski",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-28",
+          "careSetting": "general-practice",
+          "reviewType": "annual"
+        },
+        "patient": {
+          "patientIdentifier": "GP-100714",
+          "ageBand": "40-64",
+          "sex": "male",
+          "diabetesStatus": "none",
+          "primaryCause": "glomerular",
+          "monthsSinceDiagnosis": 24
+        },
+        "renal": {
+          "egfr": 70,
+          "egfrSampleDate": "2026-06-26",
+          "previousEgfr": 72,
+          "previousEgfrDate": "2025-06-24"
+        },
+        "albuminuria": {
+          "acr": 80,
+          "acrSampleDate": "2026-06-26",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 125,
+          "diastolicBloodPressure": 78
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "not-indicated",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": null,
+          "potassium": 4.7,
+          "bicarbonate": 24,
+          "calcium": 2.3,
+          "phosphate": 1.1,
+          "pth": 6,
+          "haemoglobin": 132
+        },
+        "summary": {
+          "referralDecision": "refer-nephrology",
+          "clinicalNote": "New heavy proteinuria, referred for biopsy work-up"
+        }
+      },
+      "expected": {
+        "gfrCategory": "G2",
+        "albuminuriaCategory": "A3",
+        "kdigoRiskZone": "high",
+        "bloodPressureTarget": {
+          "systolic": 130,
+          "diastolic": 80
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 70 mL/min/1.73 m² → G2 (mildly decreased)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 80 mg/mmol → A3 (severe)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G2 × A3 → KDIGO High risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 130/80 mmHg (ACR >= 70 mg/mmol) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACR-REFERRAL-001",
+            "category": "acr-referral",
+            "priority": "high",
+            "description": "Urine ACR 80 mg/mmol is >= 70 (severe albuminuria)",
+            "suggestedAction": "Refer to nephrology for severe albuminuria (ACR >= 70) per NICE NG203."
+          }
+        ]
+      }
+    },
+    {
+      "name": "rapid-egfr-decline",
+      "description": "eGFR fell from 60 (G2) to 40 (G3b) over the past year — a 33% fall with a G-stage change, meeting the rapid-decline rule and firing that flag independently of the (unchanged) risk-zone logic.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-29",
+          "careSetting": "general-practice",
+          "reviewType": "interval"
+        },
+        "patient": {
+          "patientIdentifier": "GP-100822",
+          "ageBand": "65-74",
+          "sex": "male",
+          "diabetesStatus": "none",
+          "primaryCause": "hypertensive",
+          "monthsSinceDiagnosis": 30
+        },
+        "renal": {
+          "egfr": 40,
+          "egfrSampleDate": "2026-06-27",
+          "previousEgfr": 60,
+          "previousEgfrDate": "2025-06-25"
+        },
+        "albuminuria": {
+          "acr": 4,
+          "acrSampleDate": "2026-06-27",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 138,
+          "diastolicBloodPressure": 84
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "not-indicated",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "yes",
+          "nephrotoxicDoseAdjusted": "no",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": null,
+          "potassium": 4.9,
+          "bicarbonate": 22,
+          "calcium": 2.3,
+          "phosphate": 1.3,
+          "pth": 8,
+          "haemoglobin": 122
+        },
+        "summary": {
+          "referralDecision": "refer-nephrology",
+          "clinicalNote": "Started ibuprofen for gout flare 3 weeks ago, not dose-adjusted"
+        }
+      },
+      "expected": {
+        "gfrCategory": "G3b",
+        "albuminuriaCategory": "A2",
+        "kdigoRiskZone": "very-high",
+        "bloodPressureTarget": {
+          "systolic": 140,
+          "diastolic": 90
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 40 mL/min/1.73 m² → G3b (moderate–severe)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 4 mg/mmol → A2 (moderate)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G3b × A2 → KDIGO Very high risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 140/90 mmHg (No qualifying comorbidity) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-VERY-HIGH-RISK-REFERRAL-001",
+            "category": "very-high-risk-referral",
+            "priority": "high",
+            "description": "KDIGO risk zone is very high",
+            "suggestedAction": "Consider or arrange nephrology referral and increase monitoring frequency per NICE NG203."
+          },
+          {
+            "id": "F-RAPID-DECLINE-001",
+            "category": "rapid-decline",
+            "priority": "high",
+            "description": "Sustained eGFR fall from 60 to 40 mL/min/1.73 m²",
+            "suggestedAction": "Investigate the cause of the accelerated decline; refer to nephrology and review nephrotoxic exposures."
+          },
+          {
+            "id": "F-NEPHROTOXIC-DRUG-001",
+            "category": "nephrotoxic-drug",
+            "priority": "high",
+            "description": "A nephrotoxic or renally-cleared drug is present and has not been dose-adjusted or held",
+            "suggestedAction": "Review the medication; dose-adjust or hold the nephrotoxic agent and re-check renal function."
+          }
+        ]
+      }
+    },
+    {
+      "name": "hyperkalaemia-severe",
+      "description": "Potassium 6.5 mmol/L — at or above the 6.0 severe hyperkalaemia threshold (high priority), distinct from the 5.5-5.9 medium-priority band.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-06-30",
+          "careSetting": "general-practice",
+          "reviewType": "interval"
+        },
+        "patient": {
+          "patientIdentifier": "GP-100913",
+          "ageBand": "65-74",
+          "sex": "male",
+          "diabetesStatus": "type2",
+          "primaryCause": "diabetic",
+          "monthsSinceDiagnosis": 72
+        },
+        "renal": {
+          "egfr": 35,
+          "egfrSampleDate": "2026-06-28",
+          "previousEgfr": 37,
+          "previousEgfrDate": "2025-12-26"
+        },
+        "albuminuria": {
+          "acr": 10,
+          "acrSampleDate": "2026-06-28",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 128,
+          "diastolicBloodPressure": 78
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "yes",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": 55,
+          "potassium": 6.5,
+          "bicarbonate": 19,
+          "calcium": 2.2,
+          "phosphate": 1.6,
+          "pth": 10,
+          "haemoglobin": 118
+        },
+        "summary": {
+          "referralDecision": "refer-nephrology",
+          "clinicalNote": "Hold ACE inhibitor pending repeat potassium"
+        }
+      },
+      "expected": {
+        "gfrCategory": "G3b",
+        "albuminuriaCategory": "A2",
+        "kdigoRiskZone": "very-high",
+        "bloodPressureTarget": {
+          "systolic": 130,
+          "diastolic": 80
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "complete",
+        "completenessScore": 5,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 35 mL/min/1.73 m² → G3b (moderate–severe)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 10 mg/mmol → A2 (moderate)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "G3b × A2 → KDIGO Very high risk"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 130/80 mmHg (Diabetes with CKD) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "All 5 review bundle items documented — review complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-VERY-HIGH-RISK-REFERRAL-001",
+            "category": "very-high-risk-referral",
+            "priority": "high",
+            "description": "KDIGO risk zone is very high",
+            "suggestedAction": "Consider or arrange nephrology referral and increase monitoring frequency per NICE NG203."
+          },
+          {
+            "id": "F-HYPERKALAEMIA-001",
+            "category": "hyperkalaemia",
+            "priority": "high",
+            "description": "Serum potassium 6.5 mmol/L is >= 6.0",
+            "suggestedAction": "Assess urgently for the cause; recheck potassium, review RAAS blockade and diet, and treat per local protocol."
+          }
+        ]
+      }
+    },
+    {
+      "name": "partial-review-acr-not-measured",
+      "description": "eGFR and blood pressure recorded, but ACR was not measured this visit — reviewStatus 'partial' (eGFR and BP present, one bundle item missing), and kdigoRiskZone stays null since the A-stage cannot be determined.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Miriam Solheim",
+          "clinicianRole": "nurse",
+          "reviewedAt": "2026-07-01",
+          "careSetting": "general-practice",
+          "reviewType": "annual"
+        },
+        "patient": {
+          "patientIdentifier": "GP-101004",
+          "ageBand": "40-64",
+          "sex": "female",
+          "diabetesStatus": "none",
+          "primaryCause": "unknown",
+          "monthsSinceDiagnosis": 12
+        },
+        "renal": {
+          "egfr": 65,
+          "egfrSampleDate": "2026-06-29",
+          "previousEgfr": null,
+          "previousEgfrDate": ""
+        },
+        "albuminuria": {
+          "acr": null,
+          "acrSampleDate": "",
+          "acrMeasured": "no"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 132,
+          "diastolicBloodPressure": 82
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "yes",
+          "sglt2iPrescribed": "not-indicated",
+          "statinPrescribed": "yes",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "yes"
+        },
+        "bloods": {
+          "hba1c": null,
+          "potassium": 4.4,
+          "bicarbonate": 25,
+          "calcium": 2.3,
+          "phosphate": 1,
+          "pth": 5,
+          "haemoglobin": 135
+        },
+        "summary": {
+          "referralDecision": "monitor",
+          "clinicalNote": "Urine sample not brought to appointment, will send kit"
+        }
+      },
+      "expected": {
+        "gfrCategory": "G2",
+        "albuminuriaCategory": null,
+        "kdigoRiskZone": null,
+        "bloodPressureTarget": {
+          "systolic": 140,
+          "diastolic": 90
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "partial",
+        "completenessScore": 4,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": true
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": false
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": true
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": true
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "eGFR 65 mL/min/1.73 m² → G2 (mildly decreased)"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "No urine ACR recorded — albuminuria stage not determined"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "KDIGO risk zone not determined (eGFR and/or ACR missing)"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 140/90 mmHg (No qualifying comorbidity) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "4 of 5 bundle items documented — review partial"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MISSING-ACR-001",
+            "category": "missing-acr",
+            "priority": "medium",
+            "description": "Urine albumin:creatinine ratio not measured this review — KDIGO zone cannot be fully determined",
+            "suggestedAction": "Send a urine ACR to complete KDIGO staging and confirm the applicable BP target."
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-review-missing-egfr",
+      "description": "eGFR was not recorded at all this visit — the review is 'incomplete' per spec §4 (eGFR missing overrides everything else), and no G-stage or KDIGO risk zone can be derived even though other data was collected.",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "nurse",
+          "reviewedAt": "2026-07-02",
+          "careSetting": "general-practice",
+          "reviewType": "annual"
+        },
+        "patient": {
+          "patientIdentifier": "GP-101115",
+          "ageBand": "40-64",
+          "sex": "male",
+          "diabetesStatus": "none",
+          "primaryCause": "unknown",
+          "monthsSinceDiagnosis": 6
+        },
+        "renal": {
+          "egfr": null,
+          "egfrSampleDate": "",
+          "previousEgfr": null,
+          "previousEgfrDate": ""
+        },
+        "albuminuria": {
+          "acr": 5,
+          "acrSampleDate": "2026-06-30",
+          "acrMeasured": "yes"
+        },
+        "bloodPressure": {
+          "systolicBloodPressure": 130,
+          "diastolicBloodPressure": 80
+        },
+        "medication": {
+          "aceiOrArbPrescribed": "no",
+          "sglt2iPrescribed": "not-indicated",
+          "statinPrescribed": "no",
+          "nephrotoxicDrugPresent": "no",
+          "nephrotoxicDoseAdjusted": "not-applicable",
+          "medicationReviewCompleted": "no"
+        },
+        "bloods": {
+          "hba1c": null,
+          "potassium": null,
+          "bicarbonate": null,
+          "calcium": null,
+          "phosphate": null,
+          "pth": null,
+          "haemoglobin": null
+        },
+        "summary": {
+          "referralDecision": "none",
+          "clinicalNote": "Blood test cancelled, patient unwell — rebook"
+        }
+      },
+      "expected": {
+        "gfrCategory": null,
+        "albuminuriaCategory": "A2",
+        "kdigoRiskZone": null,
+        "bloodPressureTarget": {
+          "systolic": 140,
+          "diastolic": 90
+        },
+        "bloodPressureAtTarget": true,
+        "reviewStatus": "incomplete",
+        "completenessScore": 2,
+        "componentStatuses": [
+          {
+            "component": "egfr",
+            "label": "Renal function (eGFR)",
+            "documented": false
+          },
+          {
+            "component": "acr",
+            "label": "Albuminuria (urine ACR)",
+            "documented": true
+          },
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (systolic and diastolic)",
+            "documented": true
+          },
+          {
+            "component": "medication-review",
+            "label": "Structured medication review",
+            "documented": false
+          },
+          {
+            "component": "core-bloods",
+            "label": "Core CKD bloods (potassium and haemoglobin)",
+            "documented": false
+          }
+        ],
+        "firedCriteria": [
+          {
+            "id": "R-GFR-STAGE-01",
+            "section": "gfr-stage",
+            "category": "staging",
+            "description": "No eGFR recorded — G-stage not determined"
+          },
+          {
+            "id": "R-ALBUMINURIA-STAGE-01",
+            "section": "albuminuria-stage",
+            "category": "staging",
+            "description": "Urine ACR 5 mg/mmol → A2 (moderate)"
+          },
+          {
+            "id": "R-RISK-ZONE-01",
+            "section": "risk-zone",
+            "category": "heat-map",
+            "description": "KDIGO risk zone not determined (eGFR and/or ACR missing)"
+          },
+          {
+            "id": "R-BP-TARGET-01",
+            "section": "bp-target",
+            "category": "target-selection",
+            "description": "Blood-pressure target 140/90 mmHg (No qualifying comorbidity) — recorded blood pressure at target"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-component",
+            "description": "2 of 5 bundle items documented — review incomplete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "Core review bundle items are missing — the review cannot be reliably classified",
+            "suggestedAction": "Re-book to complete the outstanding review components (eGFR, ACR, BP, medication review, core bloods)."
+          }
+        ]
+      }
+    }
+  ]
+}
