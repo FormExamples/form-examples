@@ -1,0 +1,577 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-bone-density",
+      "description": "Lowest T-score -0.5 (>= -1.0): WHO normal, complete report, every axis at baseline.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "DEXA-REQ-100221",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-25",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Routine post-menopausal bone health screening",
+        "lumbarSpineTScore": -0.3,
+        "lumbarSpineZScore": 0.1,
+        "femoralNeckTScore": -0.5,
+        "femoralNeckZScore": -0.1,
+        "totalHipTScore": -0.4,
+        "lowestTScore": -0.5,
+        "boneMineralDensityGCm2": 1.05,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": 4.2,
+        "fraxHipFracturePercent": 0.6,
+        "vertebralFractureIdentified": false,
+        "comparisonWithPrevious": "No prior study available",
+        "percentChangeSincePrevious": null,
+        "impression": "Normal bone mineral density for age.",
+        "recommendedFollowUp": "Routine surveillance per national screening interval",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific DEXA follow-up required; manage fracture risk per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "normal-bone-density",
+            "description": "Normal bone density (T ≥ −1.0) on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "normal-bone-density",
+            "description": "Normal bone density; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "Normal bone density; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "osteopenia-moderate",
+      "description": "Lowest T-score -1.8 (between -1.0 and -2.5): WHO osteopenia, abnormal classification, moderate severity.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "DEXA-REQ-100355",
+        "reportStatus": "final",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-26",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Long-term corticosteroid use for rheumatoid arthritis",
+        "lumbarSpineTScore": -1.8,
+        "lumbarSpineZScore": -0.9,
+        "femoralNeckTScore": -1.5,
+        "femoralNeckZScore": -0.6,
+        "totalHipTScore": -1.6,
+        "lowestTScore": -1.8,
+        "boneMineralDensityGCm2": 0.88,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": 12.5,
+        "fraxHipFracturePercent": 2.1,
+        "vertebralFractureIdentified": false,
+        "comparisonWithPrevious": "",
+        "percentChangeSincePrevious": null,
+        "impression": "Osteopenia (low bone mass).",
+        "recommendedFollowUp": "Lifestyle and calcium/vitamin D advice; repeat DEXA in 2 years",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "osteopenia",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Assess fracture risk (FRAX), advise lifestyle / bone-health measures, and arrange interval monitoring.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "reduced-bone-density",
+            "description": "Reduced bone density (osteopenia or osteoporosis) on the WHO densitometric classification; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "osteopenia",
+            "description": "Osteopenia (low bone mass); abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "osteopenia",
+            "description": "Osteopenia (low bone mass); follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "osteoporosis-major-no-request-linked",
+      "description": "Lowest T-score -2.8 (<= -2.5, no fracture): WHO osteoporosis, major severity — and no originating request reference was recorded, which fires the discrepancy-with-request flag alongside the treatment-review flags.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "",
+        "reportStatus": "final",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-27",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Postmenopausal, early menopause at 42, family history of hip fracture",
+        "lumbarSpineTScore": -2.8,
+        "lumbarSpineZScore": -1.9,
+        "femoralNeckTScore": -2.4,
+        "femoralNeckZScore": -1.5,
+        "totalHipTScore": -2.5,
+        "lowestTScore": -2.8,
+        "boneMineralDensityGCm2": 0.72,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": 22,
+        "fraxHipFracturePercent": 6.5,
+        "vertebralFractureIdentified": false,
+        "comparisonWithPrevious": "",
+        "percentChangeSincePrevious": null,
+        "impression": "Osteoporosis.",
+        "recommendedFollowUp": "Refer for fracture-risk treatment review",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "osteoporosis",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 4 weeks",
+        "recommendedAction": "Refer for specialist osteoporosis / fracture-risk treatment review and consider pharmacological therapy.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "reduced-bone-density",
+            "description": "Reduced bone density (osteopenia or osteoporosis) on the WHO densitometric classification; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "osteoporosis",
+            "description": "Osteoporosis (T ≤ −2.5); abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "osteoporosis",
+            "description": "Osteoporosis (T ≤ −2.5); follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Osteoporosis (T ≤ −2.5) requiring fracture-risk treatment review.",
+            "suggestedAction": "Refer for specialist treatment review and consider pharmacological therapy."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Osteoporosis warrants onward referral for treatment review.",
+            "suggestedAction": "Consider urgent referral to the metabolic-bone / fracture-liaison service."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "low",
+            "description": "A significant densitometric finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "severe-osteoporosis-critical-fragility-fracture",
+      "description": "Lowest T-score -3.2 with an identified vertebral fragility fracture: severe (established) osteoporosis — auto-escalates to critical classification and critical-alert follow-up regardless of the other axes.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "DEXA-REQ-100602",
+        "reportStatus": "final",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Presented with acute back pain after minimal trauma (fall from standing height)",
+        "lumbarSpineTScore": -3.2,
+        "lumbarSpineZScore": -2.4,
+        "femoralNeckTScore": -2.9,
+        "femoralNeckZScore": -2,
+        "totalHipTScore": -3,
+        "lowestTScore": -3.2,
+        "boneMineralDensityGCm2": 0.58,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": 38,
+        "fraxHipFracturePercent": 15.5,
+        "vertebralFractureIdentified": true,
+        "comparisonWithPrevious": "No prior DEXA; new diagnosis following fragility fracture",
+        "percentChangeSincePrevious": null,
+        "impression": "Severe (established) osteoporosis with vertebral fragility fracture — urgent treatment review required.",
+        "recommendedFollowUp": "Urgent fracture-liaison service referral and same-day treatment review",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Amara Osei, fracture liaison service",
+        "clinicianNotes": "Telephoned fracture liaison service directly, urgent clinic slot arranged.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "severe-osteoporosis",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "urgent — within days",
+        "recommendedAction": "Communicate the result to the referrer and refer urgently for a fracture-risk treatment review.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "severe-osteoporosis",
+            "description": "Severe (established) osteoporosis — T ≤ −2.5 with an identified fragility / vertebral fracture; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "severe-osteoporosis",
+            "description": "Severe (established) osteoporosis; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "severe-osteoporosis",
+            "description": "Severe (established) osteoporosis auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Severe (established) osteoporosis — T ≤ −2.5 with an identified fragility / vertebral fracture.",
+            "suggestedAction": "Communicate the result to the referrer and refer urgently for a fracture-risk treatment review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "unexpected-vertebral-fracture-without-osteoporosis",
+      "description": "A vertebral fracture was identified incidentally, but the lowest T-score (-1.6) is only in the osteopenia range, not osteoporotic — the unexpected-finding flag exists precisely because a fragility fracture can occur, and itself warrant treatment, even without a T-score in the osteoporosis range.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "DEXA-REQ-100714",
+        "reportStatus": "final",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-29",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Incidental vertebral wedge deformity noted on lateral spine image during routine DEXA",
+        "lumbarSpineTScore": -1.6,
+        "lumbarSpineZScore": -0.8,
+        "femoralNeckTScore": -1.2,
+        "femoralNeckZScore": -0.5,
+        "totalHipTScore": -1.3,
+        "lowestTScore": -1.6,
+        "boneMineralDensityGCm2": 0.9,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": 15,
+        "fraxHipFracturePercent": 2.8,
+        "vertebralFractureIdentified": true,
+        "comparisonWithPrevious": "",
+        "percentChangeSincePrevious": null,
+        "impression": "Osteopenia with an unexpected vertebral wedge fracture on lateral imaging.",
+        "recommendedFollowUp": "Fracture-risk review despite T-score in the osteopenia range; consider vertebral fracture assessment",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "osteopenia",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Assess fracture risk (FRAX), advise lifestyle / bone-health measures, and arrange interval monitoring.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "reduced-bone-density",
+            "description": "Reduced bone density (osteopenia or osteoporosis) on the WHO densitometric classification; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "osteopenia",
+            "description": "Osteopenia (low bone mass); abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "osteopenia",
+            "description": "Osteopenia (low bone mass); follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "medium",
+            "description": "A vertebral fracture was identified without a T-score in the osteoporotic range.",
+            "suggestedAction": "Review fracture risk; a fragility fracture may itself indicate treatment irrespective of BMD."
+          }
+        ]
+      }
+    },
+    {
+      "name": "non-diagnostic-inconclusive",
+      "description": "Examination was non-diagnostic (patient unable to tolerate positioning) — classified inconclusive regardless of whatever partial T-score data exists.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "DEXA-REQ-100822",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-29",
+        "reportedDate": "2026-06-30",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "non-diagnostic",
+        "clinicalHistory": "Severe kyphoscoliosis, unable to achieve standard positioning",
+        "lumbarSpineTScore": null,
+        "lumbarSpineZScore": null,
+        "femoralNeckTScore": -1.5,
+        "femoralNeckZScore": -0.7,
+        "totalHipTScore": null,
+        "lowestTScore": null,
+        "boneMineralDensityGCm2": null,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": null,
+        "fraxHipFracturePercent": null,
+        "vertebralFractureIdentified": false,
+        "comparisonWithPrevious": "",
+        "percentChangeSincePrevious": null,
+        "impression": "Non-diagnostic study — unable to obtain valid lumbar spine or hip measurements.",
+        "recommendedFollowUp": "Consider alternative site (forearm) or repeat with specialist positioning support",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Recommend a repeat or alternative-site DEXA to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "non-diagnostic",
+            "description": "Examination was non-diagnostic; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: quantitative findings (lowest T-score / WHO classification)."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative assessment recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "high",
+            "description": "Examination adequacy is non-diagnostic; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating or supplementing the examination to reach diagnostic quality."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "medium",
+            "description": "No lowest T-score was recorded; the WHO densitometric classification cannot be derived.",
+            "suggestedAction": "Record the lowest (most negative) T-score across the measured skeletal sites."
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-quantitative-finding-inconclusive",
+      "description": "No lowest T-score was ever recorded — the WHO classification cannot be derived, so the study is inconclusive rather than assumed normal, and the missing-measurement flag fires.",
+      "state": {
+        "reportingClinician": "",
+        "originatingRequestReference": "DEXA-REQ-100913",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-30",
+        "reportedDate": "",
+        "scanRegion": "lumbar-spine-and-hip",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "",
+        "lumbarSpineTScore": null,
+        "lumbarSpineZScore": null,
+        "femoralNeckTScore": null,
+        "femoralNeckZScore": null,
+        "totalHipTScore": null,
+        "lowestTScore": null,
+        "boneMineralDensityGCm2": null,
+        "whoClassification": "",
+        "fraxMajorFracturePercent": null,
+        "fraxHipFracturePercent": null,
+        "vertebralFractureIdentified": false,
+        "comparisonWithPrevious": "",
+        "percentChangeSincePrevious": null,
+        "impression": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Analysis software output pending, T-scores not yet transcribed",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 20,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Recommend a repeat or alternative-site DEXA to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-03",
+            "axis": "classification",
+            "category": "no-quantitative-finding",
+            "description": "No lowest T-score / WHO classification was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-FINDINGS-01",
+            "axis": "completeness",
+            "category": "findings",
+            "description": "Mandatory report section missing: quantitative findings (lowest T-score / WHO classification)."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative assessment recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "medium",
+            "description": "No lowest T-score was recorded; the WHO densitometric classification cannot be derived.",
+            "suggestedAction": "Record the lowest (most negative) T-score across the measured skeletal sites."
+          }
+        ]
+      }
+    }
+  ]
+}
