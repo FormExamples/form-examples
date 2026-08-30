@@ -1,0 +1,786 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradePews",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. gradePews() always returns `flaggedIssues: []` — the safety flags are computed separately by flags.js/detectFlaggedIssues, which graderHint does not call, so no persona here exercises them.",
+  "personas": [
+    {
+      "name": "routine-well-child-young-child-normal",
+      "description": "A well child (1-4 years) on the ward with every observation within the young-child normal range — aggregate 0, routine escalation band.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Elena Vasquez",
+          "clinicianRole": "nurse",
+          "observationAt": "2026-06-24T09:00",
+          "careSetting": "ward"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100221",
+          "ageBand": "young-child",
+          "sex": "female"
+        },
+        "respiratory": {
+          "respiratoryRate": 30,
+          "respiratoryEffort": "none",
+          "oxygenSaturation": 98,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 110,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Routine 4-hourly observations, recovering well post-tonsillectomy"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 0,
+          "respiratoryEffort": 0,
+          "oxygenSaturation": 0,
+          "supplementalOxygen": 0,
+          "heartRate": 0,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 0,
+        "maxParameterScore": 0,
+        "singleParameterTrigger": false,
+        "escalationBand": "routine",
+        "monitoringFrequency": "Routine (e.g. 4-hourly)",
+        "recommendation": "Continue routine observations at the scheduled frequency (e.g. 4-hourly).",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "routine",
+            "points": 0,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 0 — routine escalation band."
+          }
+        ],
+        "firedTriggers": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "neonate-mild-tachypnoea-low-escalation",
+      "description": "A neonate with mild tachypnoea (65/min) and mild tachycardia (170/min) — each scores 1, aggregate 2, the low escalation band (2-3).",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "nurse",
+          "observationAt": "2026-06-25T10:30",
+          "careSetting": "childrens-assessment-unit"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100355",
+          "ageBand": "neonate",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 65,
+          "respiratoryEffort": "none",
+          "oxygenSaturation": 97,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 170,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Term neonate, day 3 of life, feeding well; mild increase in rate noted at this observation"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 1,
+          "respiratoryEffort": 0,
+          "oxygenSaturation": 0,
+          "supplementalOxygen": 0,
+          "heartRate": 1,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 2,
+        "maxParameterScore": 1,
+        "singleParameterTrigger": false,
+        "escalationBand": "low",
+        "monitoringFrequency": "Minimum hourly",
+        "recommendation": "Increase observation frequency (e.g. hourly); inform the nurse in charge; clinical review within 1 hour.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-RESP-RATE-1-01",
+            "instrument": "respiratory-rate",
+            "band": "",
+            "points": 1,
+            "category": "respiratory-rate",
+            "description": "respiratory-rate scored 1"
+          },
+          {
+            "id": "R-HEART-RATE-1-01",
+            "instrument": "heart-rate",
+            "band": "",
+            "points": 1,
+            "category": "heart-rate",
+            "description": "heart-rate scored 1"
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "low",
+            "points": 2,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 2 — low escalation band."
+          }
+        ],
+        "firedTriggers": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "infant-medium-escalation-aggregate-5",
+      "description": "An infant with several mildly-to-moderately abnormal parameters (tachypnoea 1, moderate respiratory effort 2, mild desaturation 1, borderline tachycardia 1) summing to exactly 5 with no single parameter at 3 — the medium escalation band (4-5) driven by the aggregate alone.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "doctor",
+          "observationAt": "2026-06-22T14:00",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100489",
+          "ageBand": "infant",
+          "sex": "female"
+        },
+        "respiratory": {
+          "respiratoryRate": 55,
+          "respiratoryEffort": "moderate",
+          "oxygenSaturation": 95,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 95,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Bronchiolitis, worsening work of breathing over the last hour"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 1,
+          "respiratoryEffort": 2,
+          "oxygenSaturation": 1,
+          "supplementalOxygen": 0,
+          "heartRate": 1,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 5,
+        "maxParameterScore": 2,
+        "singleParameterTrigger": false,
+        "escalationBand": "medium",
+        "monitoringFrequency": "Continuous monitoring",
+        "recommendation": "Urgent review by the nurse in charge and a doctor within 30 minutes; continuous monitoring; consider outreach.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-RESP-RATE-1-01",
+            "instrument": "respiratory-rate",
+            "band": "",
+            "points": 1,
+            "category": "respiratory-rate",
+            "description": "respiratory-rate scored 1"
+          },
+          {
+            "id": "R-RESP-EFFORT-2-01",
+            "instrument": "respiratory-effort",
+            "band": "",
+            "points": 2,
+            "category": "respiratory-effort",
+            "description": "respiratory-effort scored 2"
+          },
+          {
+            "id": "R-SPO2-1-01",
+            "instrument": "oxygen-saturation",
+            "band": "",
+            "points": 1,
+            "category": "hypoxia",
+            "description": "oxygen-saturation scored 1"
+          },
+          {
+            "id": "R-HEART-RATE-1-01",
+            "instrument": "heart-rate",
+            "band": "",
+            "points": 1,
+            "category": "heart-rate",
+            "description": "heart-rate scored 1"
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "medium",
+            "points": 5,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 5 — medium escalation band."
+          }
+        ],
+        "firedTriggers": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "child-high-escalation-multisystem",
+      "description": "A school-age child with multiple moderately-abnormal parameters (respiratory rate 2, moderate effort 2, desaturation 2, low-flow oxygen 1, tachycardia 1) summing to 8 with no single parameter at the grossly-abnormal 3 — high escalation (>=6) driven by cumulative multi-system deterioration rather than one critical finding.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "doctor",
+          "observationAt": "2026-06-26T11:15",
+          "careSetting": "ward"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100602",
+          "ageBand": "child",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 45,
+          "respiratoryEffort": "moderate",
+          "oxygenSaturation": 93,
+          "supplementalOxygen": "low-flow"
+        },
+        "cardiovascular": {
+          "heartRate": 65,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Community-acquired pneumonia, deteriorating over the shift"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 2,
+          "respiratoryEffort": 2,
+          "oxygenSaturation": 2,
+          "supplementalOxygen": 1,
+          "heartRate": 1,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 8,
+        "maxParameterScore": 2,
+        "singleParameterTrigger": false,
+        "escalationBand": "high",
+        "monitoringFrequency": "Continuous monitoring",
+        "recommendation": "Immediate review by a senior doctor / registrar; consider critical-care outreach; continuous monitoring of vital signs.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-RESP-RATE-2-01",
+            "instrument": "respiratory-rate",
+            "band": "",
+            "points": 2,
+            "category": "respiratory-rate",
+            "description": "respiratory-rate scored 2"
+          },
+          {
+            "id": "R-RESP-EFFORT-2-01",
+            "instrument": "respiratory-effort",
+            "band": "",
+            "points": 2,
+            "category": "respiratory-effort",
+            "description": "respiratory-effort scored 2"
+          },
+          {
+            "id": "R-SPO2-2-01",
+            "instrument": "oxygen-saturation",
+            "band": "",
+            "points": 2,
+            "category": "hypoxia",
+            "description": "oxygen-saturation scored 2"
+          },
+          {
+            "id": "R-OXYGEN-1-01",
+            "instrument": "supplemental-oxygen",
+            "band": "",
+            "points": 1,
+            "category": "supplemental-oxygen",
+            "description": "supplemental-oxygen scored 1"
+          },
+          {
+            "id": "R-HEART-RATE-1-01",
+            "instrument": "heart-rate",
+            "band": "",
+            "points": 1,
+            "category": "heart-rate",
+            "description": "heart-rate scored 1"
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "high",
+            "points": 8,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 8 — high escalation band."
+          }
+        ],
+        "firedTriggers": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "adolescent-single-parameter-critical-bradycardia",
+      "description": "An adolescent with severe bradycardia (35 bpm, scores 3) and every other parameter normal — the aggregate alone is only 3 (which would map to the low band), but the single-parameter-3 override raises the effective escalation to medium regardless of the total, exactly the safety invariant the aggregate can otherwise mask.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Miriam Solheim",
+          "clinicianRole": "doctor",
+          "observationAt": "2026-06-27T09:45",
+          "careSetting": "ward"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100714",
+          "ageBand": "adolescent",
+          "sex": "female"
+        },
+        "respiratory": {
+          "respiratoryRate": 16,
+          "respiratoryEffort": "none",
+          "oxygenSaturation": 98,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 35,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Incidental bradycardia noted on routine observations; asymptomatic, athletic teenager under investigation"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 0,
+          "respiratoryEffort": 0,
+          "oxygenSaturation": 0,
+          "supplementalOxygen": 0,
+          "heartRate": 3,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 3,
+        "maxParameterScore": 3,
+        "singleParameterTrigger": true,
+        "escalationBand": "medium",
+        "monitoringFrequency": "Continuous monitoring",
+        "recommendation": "Urgent review by the nurse in charge and a doctor within 30 minutes; continuous monitoring; consider outreach.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-HEART-RATE-3-01",
+            "instrument": "heart-rate",
+            "band": "medium",
+            "points": 3,
+            "category": "heart-rate",
+            "description": "heart-rate scored 3"
+          },
+          {
+            "id": "R-SINGLE-PARAMETER-3-01",
+            "instrument": "single-parameter",
+            "band": "medium",
+            "points": 3,
+            "category": "single-parameter",
+            "description": "A single parameter scored 3 — escalate to at least medium regardless of the aggregate total."
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "medium",
+            "points": 3,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 3 — medium escalation band."
+          }
+        ],
+        "firedTriggers": [
+          {
+            "id": "T-SINGLE-PARAMETER-3",
+            "category": "single-parameter",
+            "description": "Single parameter scored 3 — urgent review (at least medium escalation) regardless of the total."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "young-child-severe-hypoxia-spo2-critical",
+      "description": "A young child found with a saturation of 88% on room air (scores 3) before supplemental oxygen has been applied, everything else normal — the same single-parameter override as the bradycardia persona above but on a different parameter and a different age band, confirming the override is parameter-agnostic.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "nurse",
+          "observationAt": "2026-06-28T14:00",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100822",
+          "ageBand": "young-child",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 30,
+          "respiratoryEffort": "none",
+          "oxygenSaturation": 88,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 110,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Saturation probe just applied on arrival; oxygen not yet commenced, reading confirmed on repeat"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 0,
+          "respiratoryEffort": 0,
+          "oxygenSaturation": 3,
+          "supplementalOxygen": 0,
+          "heartRate": 0,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 3,
+        "maxParameterScore": 3,
+        "singleParameterTrigger": true,
+        "escalationBand": "medium",
+        "monitoringFrequency": "Continuous monitoring",
+        "recommendation": "Urgent review by the nurse in charge and a doctor within 30 minutes; continuous monitoring; consider outreach.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-SPO2-3-01",
+            "instrument": "oxygen-saturation",
+            "band": "medium",
+            "points": 3,
+            "category": "hypoxia",
+            "description": "oxygen-saturation scored 3"
+          },
+          {
+            "id": "R-SINGLE-PARAMETER-3-01",
+            "instrument": "single-parameter",
+            "band": "medium",
+            "points": 3,
+            "category": "single-parameter",
+            "description": "A single parameter scored 3 — escalate to at least medium regardless of the aggregate total."
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "medium",
+            "points": 3,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 3 — medium escalation band."
+          }
+        ],
+        "firedTriggers": [
+          {
+            "id": "T-SINGLE-PARAMETER-3",
+            "category": "single-parameter",
+            "description": "Single parameter scored 3 — urgent review (at least medium escalation) regardless of the total."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "neonate-parent-concern-normal-vitals-routine-band",
+      "description": "A neonate with every vital sign fully within the normal range (aggregate 0) but a documented parent concern — the escalationBand computed by gradePews() stays 'routine' because parent/nurse concern is not folded into the aggregate-or-override band calculation in grader.js, only recorded as an independent firedTrigger/firedRule; the safety escalation itself is a separate high-priority flag raised by flags.js, which graderHint does not call. Verified directly against grader.js rather than assumed from AGENTS.md's summary.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Helena Kowalski",
+          "clinicianRole": "nurse",
+          "observationAt": "2026-06-30T08:30",
+          "careSetting": "ward"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-100913",
+          "ageBand": "neonate",
+          "sex": "female"
+        },
+        "respiratory": {
+          "respiratoryRate": 50,
+          "respiratoryEffort": "none",
+          "oxygenSaturation": 99,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 140,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "no",
+          "parentConcern": "yes"
+        },
+        "note": {
+          "clinicalNotes": "Parents feel the baby 'isn't quite herself' despite entirely normal observations; concern documented and escalated to the nurse in charge per policy"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 0,
+          "respiratoryEffort": 0,
+          "oxygenSaturation": 0,
+          "supplementalOxygen": 0,
+          "heartRate": 0,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 0,
+        "maxParameterScore": 0,
+        "singleParameterTrigger": false,
+        "escalationBand": "routine",
+        "monitoringFrequency": "Routine (e.g. 4-hourly)",
+        "recommendation": "Continue routine observations at the scheduled frequency (e.g. 4-hourly).",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-PARENT-CONCERN-01",
+            "instrument": "concern",
+            "band": "",
+            "points": null,
+            "category": "parent-concern",
+            "description": "Documented parent / carer concern — an independent escalation trigger."
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "routine",
+            "points": 0,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 0 — routine escalation band."
+          }
+        ],
+        "firedTriggers": [
+          {
+            "id": "T-PARENT-CONCERN",
+            "category": "parent-concern",
+            "description": "Documented parent / carer concern."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "child-nurse-concern-with-borderline-vitals",
+      "description": "A school-age child with mildly abnormal vitals (aggregate 2, low band) and a documented nurse/staff concern — the escalationBand stays 'low' from the aggregate alone; the nurse concern is recorded as its own firedTrigger/firedRule (T-NURSE-CONCERN / R-NURSE-CONCERN-01) rather than raising the band itself, the same real engine behaviour as the parent-concern persona above.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "nurse",
+          "observationAt": "2026-06-30T15:00",
+          "careSetting": "ward"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-101004",
+          "ageBand": "child",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 35,
+          "respiratoryEffort": "none",
+          "oxygenSaturation": 98,
+          "supplementalOxygen": "room-air"
+        },
+        "cardiovascular": {
+          "heartRate": 65,
+          "capillaryRefill": "under-2s"
+        },
+        "behaviour": {
+          "consciousness": "alert"
+        },
+        "concern": {
+          "nurseConcern": "yes",
+          "parentConcern": "no"
+        },
+        "note": {
+          "clinicalNotes": "Experienced nurse reports the child 'looks different to earlier' despite only mildly abnormal numbers; increasing observation frequency"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": 1,
+          "respiratoryEffort": 0,
+          "oxygenSaturation": 0,
+          "supplementalOxygen": 0,
+          "heartRate": 1,
+          "capillaryRefill": 0,
+          "consciousness": 0
+        },
+        "aggregateScore": 2,
+        "maxParameterScore": 1,
+        "singleParameterTrigger": false,
+        "escalationBand": "low",
+        "monitoringFrequency": "Minimum hourly",
+        "recommendation": "Increase observation frequency (e.g. hourly); inform the nurse in charge; clinical review within 1 hour.",
+        "complete": true,
+        "firedRules": [
+          {
+            "id": "R-RESP-RATE-1-01",
+            "instrument": "respiratory-rate",
+            "band": "",
+            "points": 1,
+            "category": "respiratory-rate",
+            "description": "respiratory-rate scored 1"
+          },
+          {
+            "id": "R-HEART-RATE-1-01",
+            "instrument": "heart-rate",
+            "band": "",
+            "points": 1,
+            "category": "heart-rate",
+            "description": "heart-rate scored 1"
+          },
+          {
+            "id": "R-NURSE-CONCERN-01",
+            "instrument": "concern",
+            "band": "",
+            "points": null,
+            "category": "nurse-concern",
+            "description": "Documented nurse / staff concern — an independent escalation trigger."
+          },
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "low",
+            "points": 2,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 2 — low escalation band."
+          }
+        ],
+        "firedTriggers": [
+          {
+            "id": "T-NURSE-CONCERN",
+            "category": "nurse-concern",
+            "description": "Documented nurse / staff concern."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "incomplete-assessment-missing-age-band",
+      "description": "Age band not yet selected and most enum observations not yet recorded, though a respiratory rate and heart rate happen to have been charted already — with no age band, both rate parameters score null (contributing 0) regardless of the recorded numbers, per the documented invariant that the age band must be selected first; the aggregate is deceptively 0/routine despite being far from a complete assessment (`complete: false`).",
+      "state": {
+        "context": {
+          "clinicianName": "",
+          "clinicianRole": "healthcare-assistant",
+          "observationAt": "2026-07-01T07:00",
+          "careSetting": "ward"
+        },
+        "identification": {
+          "patientIdentifier": "PEWS-101115",
+          "ageBand": "",
+          "sex": "male"
+        },
+        "respiratory": {
+          "respiratoryRate": 28,
+          "respiratoryEffort": "",
+          "oxygenSaturation": null,
+          "supplementalOxygen": ""
+        },
+        "cardiovascular": {
+          "heartRate": 115,
+          "capillaryRefill": ""
+        },
+        "behaviour": {
+          "consciousness": ""
+        },
+        "concern": {
+          "nurseConcern": "",
+          "parentConcern": ""
+        },
+        "note": {
+          "clinicalNotes": "First observations of the shift; age band and remaining parameters still to be completed"
+        }
+      },
+      "expected": {
+        "subscores": {
+          "respiratoryRate": null,
+          "respiratoryEffort": null,
+          "oxygenSaturation": null,
+          "supplementalOxygen": null,
+          "heartRate": null,
+          "capillaryRefill": null,
+          "consciousness": null
+        },
+        "aggregateScore": 0,
+        "maxParameterScore": 0,
+        "singleParameterTrigger": false,
+        "escalationBand": "routine",
+        "monitoringFrequency": "Routine (e.g. 4-hourly)",
+        "recommendation": "Continue routine observations at the scheduled frequency (e.g. 4-hourly).",
+        "complete": false,
+        "firedRules": [
+          {
+            "id": "R-AGGREGATE-01",
+            "instrument": "aggregate",
+            "band": "routine",
+            "points": 0,
+            "category": "aggregate",
+            "description": "Aggregate PEWS total 0 — routine escalation band."
+          }
+        ],
+        "firedTriggers": [],
+        "flaggedIssues": []
+      }
+    }
+  ]
+}
