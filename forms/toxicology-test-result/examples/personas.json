@@ -1,0 +1,687 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Several personas below (lithium-, carboxyhaemoglobin-, and salicylate-toxic-level-not-critical) document a real, verified gap: hasToxicResult() and hasCriticalFinding-equivalent logic only recognise paracetamol-above-the-line or the toxicLevelPresent/overallResultStatus='critical' booleans — a numerically toxic lithium, carboxyhaemoglobin, or salicylate level on its own does NOT auto-escalate Axis A/D or raise F-CRITICAL-RESULT-001, even though it does drive severity to 'major' via the separate over-toxic-threshold rule. This looks like a genuine safety-relevant discordance in the engine worth a follow-up fix, not merely a documentation nuance; captured faithfully here rather than worked around.",
+  "personas": [
+    {
+      "name": "paracetamol-above-treatment-line-critical",
+      "description": "Paracetamol level plotted above the MHRA nomogram treatment line at 6 hours post-ingestion — the textbook toxic-result trigger; classification critical, severity major, follow-up critical-alert with an explicit NAC (N-acetylcysteine) recommendation; not yet communicated.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "TOX-REQ-100221",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Deliberate paracetamol overdose, staggered timing uncertain, presented to the emergency department",
+        "suspectedAgent": "Paracetamol",
+        "timeSinceIngestionHours": 6,
+        "paracetamolLevelMgL": 145,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "above-treatment-line",
+        "overallResultStatus": "critical",
+        "toxicLevelPresent": true,
+        "findingsNarrative": "Paracetamol level of 145 mg/L at 6 hours post-ingestion plots above the MHRA treatment nomogram line.",
+        "impression": "Toxic paracetamol level, above the treatment line; NAC treatment indicated.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Commence NAC immediately per the local paracetamol overdose protocol",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "paracetamol-above-treatment-line",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Start N-acetylcysteine (NAC) now, communicate the critical result directly to the requester, and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "toxic-level",
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, or overall critical status); classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "toxic-level",
+            "description": "Toxic level present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Paracetamol level is above the treatment line.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and start N-acetylcysteine (NAC)."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Toxic result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "toxic-level-present-non-paracetamol-critical",
+      "description": "A digoxin level explicitly flagged toxicLevelPresent, unrelated to paracetamol — confirms the critical/major/critical-alert path is reachable for any analyte via the generic toxicLevelPresent boolean, with the reportingCategory correctly resolving to the generic 'toxic-range' label (not the paracetamol-specific one) and the generic (non-NAC) antidote wording in the recommended action.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "TOX-REQ-100355",
+        "reportStatus": "final",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Known atrial fibrillation on digoxin, presented with nausea, visual disturbance, and bradycardia",
+        "suspectedAgent": "Digoxin",
+        "timeSinceIngestionHours": null,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": 4.2,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "not-applicable",
+        "overallResultStatus": "critical",
+        "toxicLevelPresent": true,
+        "findingsNarrative": "Digoxin level of 4.2 (well above the therapeutic range) with a clinical picture of digoxin toxicity.",
+        "impression": "Toxic digoxin level with a compatible clinical picture.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Consider digoxin-specific antibody fragments (DigiFab); continuous cardiac monitoring",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "toxic-range",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Start the appropriate antidote / urgent treatment now, communicate the critical result directly to the requester, and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "toxic-level",
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, or overall critical status); classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "toxic-level",
+            "description": "Toxic level present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A toxic level requiring action is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and start the appropriate antidote / urgent treatment."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Toxic result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "lithium-severely-toxic-not-critical-classification-gap",
+      "description": "A severely toxic lithium level (3.2 mmol/L, more than double the 1.5 mmol/L threshold) with neither toxicLevelPresent nor overallResultStatus ticked — a real, verified engine gap: classifyResult() and gradeFollowUp() only check hasToxicResult() (paracetamol-above-line or the toxicLevelPresent/overallResultStatus='critical' booleans), NOT the separate over-toxic-threshold check used by gradeSeverity(). The result is a genuinely dangerous discordance: resultClassification stays 'normal' and followUpUrgency is only 'urgent' (not 'critical-alert'), even though abnormalitySeverity correctly grades 'major' via R-SEV-MAJOR-02. The only safety net is the medium-priority F-URGENT-REFERRAL-001 flag — F-CRITICAL-RESULT-001 does not fire at all for this level of lithium toxicity.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "TOX-REQ-100489",
+        "reportStatus": "final",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-22",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Known bipolar disorder on long-term lithium, presented with confusion, tremor, and ataxia",
+        "suspectedAgent": "Lithium",
+        "timeSinceIngestionHours": null,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": 3.2,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "not-applicable",
+        "overallResultStatus": "",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "Lithium level of 3.2 mmol/L, more than double the 1.5 mmol/L toxic threshold, with a compatible clinical picture of severe lithium toxicity.",
+        "impression": "Severely toxic lithium level with clinical toxicity.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent discussion with renal / toxicology regarding haemodialysis; stop lithium immediately",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "toxic-range",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-result",
+            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "over-toxic-threshold",
+            "description": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "A lithium or carboxyhaemoglobin level is in a range that may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate specialist / toxicology team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "carboxyhaemoglobin-toxic-not-critical-classification-gap",
+      "description": "A toxic carboxyhaemoglobin level (18%, well above the 10% threshold, consistent with significant carbon monoxide poisoning) with neither toxicLevelPresent nor overallResultStatus ticked — a second, independent confirmation of the same verified engine gap via a different analyte: classification stays 'normal', follow-up only 'urgent', with only the medium-priority F-URGENT-REFERRAL-001 flag raised and no critical-result-alert flag at all.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "TOX-REQ-100602",
+        "reportStatus": "final",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-26",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Found in a car with a faulty exhaust, headache and confusion",
+        "suspectedAgent": "Carbon monoxide",
+        "timeSinceIngestionHours": null,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": 18,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "not-applicable",
+        "overallResultStatus": "",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "Carboxyhaemoglobin of 18%, well above the 10% toxic threshold, consistent with significant carbon monoxide poisoning.",
+        "impression": "Toxic carboxyhaemoglobin level consistent with carbon monoxide poisoning.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "High-flow oxygen; consider hyperbaric oxygen referral per local protocol",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "toxic-range",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-result",
+            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "over-toxic-threshold",
+            "description": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "A lithium or carboxyhaemoglobin level is in a range that may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate specialist / toxicology team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "salicylate-toxic-completely-unflagged-classification-gap",
+      "description": "A frankly toxic salicylate level (350 mg/L, above the 300 mg/L threshold) with neither toxicLevelPresent nor overallResultStatus ticked — the most striking of the three over-threshold gap personas: unlike lithium and carboxyhaemoglobin, F-URGENT-REFERRAL-001's condition in flags.js checks ONLY lithium and carboxyhaemoglobin, omitting salicylate entirely, so this toxic salicylate level raises NO flags whatsoever (flags: []) despite abnormalitySeverity correctly grading 'major'. Classification 'normal', follow-up only 'urgent', and zero flags — verified directly against both rules.js and flags.js source, not assumed.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "TOX-REQ-100714",
+        "reportStatus": "final",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Deliberate aspirin overdose, tinnitus, tachypnoea, and vomiting",
+        "suspectedAgent": "Salicylate (aspirin)",
+        "timeSinceIngestionHours": 5,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": 350,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "not-applicable",
+        "overallResultStatus": "",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "Salicylate level of 350 mg/L, above the 300 mg/L toxic threshold, with a compatible clinical picture of salicylate toxicity.",
+        "impression": "Toxic salicylate level with clinical toxicity.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urinary alkalinisation per local protocol; consider haemodialysis if severe",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "toxic-range",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-result",
+            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "over-toxic-threshold",
+            "description": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "insufficient-specimen-inconclusive",
+      "description": "An insufficient specimen volume for the requested panel — classified inconclusive regardless of any partial results; raises the high-priority inadequate-technique flag.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "TOX-REQ-100822",
+        "reportStatus": "final",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-28",
+        "specimenCondition": "insufficient",
+        "clinicalHistory": "Query overdose, difficult venous access, minimal sample obtained",
+        "suspectedAgent": "Unknown",
+        "timeSinceIngestionHours": null,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "",
+        "overallResultStatus": "",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "Insufficient sample volume obtained; unable to run the requested panel.",
+        "impression": "Insufficient specimen; unable to complete the requested toxicology panel.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat venepuncture and resend at the earliest opportunity",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend a repeat or alternative assay to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "insufficient-specimen",
+            "description": "Specimen was insufficient; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-RESULTS-01",
+            "axis": "completeness",
+            "category": "result-values",
+            "description": "Mandatory report section missing: result values."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative assay recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "high",
+            "description": "Specimen condition is insufficient; interpretive confidence may be reduced.",
+            "suggestedAction": "Consider repeating the assay on a satisfactory, correctly-timed specimen."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "No assay result value has been recorded.",
+            "suggestedAction": "Record at least one assay level or screen result for the report."
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-result-value-no-status-inconclusive",
+      "description": "A satisfactory specimen but nothing has been recorded yet — no assay result value and no overall status — classified inconclusive on the 'nothing to interpret' rule (distinct from the insufficient-specimen path above, which is about specimen adequacy rather than missing data); raises the low-priority missing-measurement flag.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "TOX-REQ-100913",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Screening panel requested pending laboratory processing",
+        "suspectedAgent": "",
+        "timeSinceIngestionHours": null,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "",
+        "overallResultStatus": "",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "",
+        "impression": "Results pending laboratory processing.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Finalise once assay results are available",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend a repeat or alternative assay to resolve the inconclusive study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-02",
+            "axis": "classification",
+            "category": "no-result-value",
+            "description": "No assay result value and no overall status recorded; nothing to interpret. Classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-RESULTS-01",
+            "axis": "completeness",
+            "category": "result-values",
+            "description": "Mandatory report section missing: result values."
+          },
+          {
+            "ruleId": "R-COMP-INTERPRETATION-01",
+            "axis": "completeness",
+            "category": "interpretation",
+            "description": "Mandatory report section missing: interpretation / findings narrative."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat or alternative assay recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "No assay result value has been recorded.",
+            "suggestedAction": "Record at least one assay level or screen result for the report."
+          }
+        ]
+      }
+    },
+    {
+      "name": "drugs-of-abuse-screen-abnormal-moderate",
+      "description": "A positive drugs-of-abuse screen with the clinician recording an overall 'abnormal' status, no toxic level — classification abnormal, severity moderate (via the abnormal-status rule rather than a toxic threshold), follow-up recommended; raises the abnormal-requiring-action flag.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "TOX-REQ-101004",
+        "reportStatus": "final",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Altered mental state, query recreational drug use",
+        "suspectedAgent": "Unknown, screening panel requested",
+        "timeSinceIngestionHours": null,
+        "paracetamolLevelMgL": null,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "Positive for cocaine metabolites and opiates",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "not-applicable",
+        "overallResultStatus": "abnormal",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "Urine drugs-of-abuse screen positive for cocaine metabolites and opiates, consistent with the clinical presentation.",
+        "impression": "Positive drugs-of-abuse screen (cocaine metabolites, opiates).",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Correlate clinically; consider substance-misuse liaison referral",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "elevated-range",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend a repeat level or specialist review as clinically indicated.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-status",
+            "description": "Overall result status recorded as abnormal; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "abnormal-status",
+            "description": "An actionable abnormal result is present without a frank toxic level; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "An abnormal result requiring timely action is present.",
+            "suggestedAction": "Ensure the requester is alerted and a clear action plan is documented."
+          }
+        ]
+      }
+    },
+    {
+      "name": "paracetamol-below-treatment-line-minor-severity-falls-to-routine",
+      "description": "Paracetamol level plotted below the MHRA nomogram treatment line, a reassuring result — classification 'normal' (the same as a completely blank study) but abnormalitySeverity resolves to 'minor' rather than 'none' (R-SEV-MINOR-01), a distinct 'normal but minor' pairing from the lithium/carboxyhaemoglobin/salicylate gap personas above (which were 'normal but major'). A second real, verified engine characteristic: gradeFollowUp() has no explicit branch for severity 'minor' at all (unlike every sibling test-result engine authored earlier this session, which all had an explicit minor -> 'recommended, per local pathway' branch) — it simply falls through to the routine default (R-FU-ROUTINE-01), so this reassuring-but-not-blank result gets exactly the same follow-up urgency as a fully normal study.",
+      "state": {
+        "reportingClinician": "Dr Ingrid Solberg",
+        "originatingRequestReference": "TOX-REQ-101115",
+        "reportStatus": "final",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Accidental single paracetamol overdose reported by a family member, asymptomatic",
+        "suspectedAgent": "Paracetamol",
+        "timeSinceIngestionHours": 5,
+        "paracetamolLevelMgL": 18,
+        "salicylateLevelMgL": null,
+        "ethanolLevel": null,
+        "lithiumLevelMmolL": null,
+        "digoxinLevel": null,
+        "carboxyhaemoglobinPercent": null,
+        "drugsOfAbuseScreen": "",
+        "specificDrugLevel": "",
+        "paracetamolNomogram": "below-treatment-line",
+        "overallResultStatus": "",
+        "toxicLevelPresent": false,
+        "findingsNarrative": "Paracetamol level of 18 mg/L at 5 hours post-ingestion plots well below the MHRA treatment nomogram line.",
+        "impression": "Paracetamol level below the treatment line; no NAC indicated.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No specific toxicology follow-up required; safe for medical discharge from a paracetamol perspective",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "paracetamol-below-treatment-line",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific toxicology follow-up required; manage per usual care.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-result",
+            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "below-treatment-line",
+            "description": "Paracetamol level is below the treatment line; a reassuring interpreted result. Severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    }
+  ]
+}
