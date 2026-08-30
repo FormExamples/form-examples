@@ -1,0 +1,814 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-satisfactory-specimen",
+      "description": "Fully normal dipstick, microscopy, and culture on a satisfactory specimen — every axis at baseline.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "UA-REQ-100221",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "specimenType": "midstream",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Routine pre-employment health check",
+        "pregnant": false,
+        "leucocytes": "negative",
+        "nitrites": "negative",
+        "protein": "negative",
+        "blood": "negative",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6,
+        "specificGravity": 1.02,
+        "redCellCount": "0-2/hpf",
+        "whiteCellCount": "0-2/hpf",
+        "epithelialCells": "few",
+        "casts": "",
+        "organismsSeen": false,
+        "crystals": "",
+        "cultureResult": "no-growth",
+        "organismIsolated": "",
+        "colonyCountCfuMl": "<1000",
+        "antibioticSensitivities": "",
+        "overallResultStatus": "normal",
+        "findingsNarrative": "No abnormal findings on dipstick, microscopy, or culture.",
+        "impression": "Normal urinalysis.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "None required",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal findings on a satisfactory specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "uti-features-no-culture-yet",
+      "description": "Positive leucocytes, positive nitrites, and organisms seen on microscopy — classic UTI dipstick/microscopy features — while culture is still pending, so the classification rests on the UTI-features path rather than a positive culture.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "UA-REQ-100355",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "specimenType": "clean-catch",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Dysuria and urinary frequency for 2 days",
+        "pregnant": false,
+        "leucocytes": "plus-two",
+        "nitrites": "positive",
+        "protein": "negative",
+        "blood": "negative",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6.5,
+        "specificGravity": 1.018,
+        "redCellCount": "0-2/hpf",
+        "whiteCellCount": "20-50/hpf",
+        "epithelialCells": "few",
+        "casts": "",
+        "organismsSeen": true,
+        "crystals": "",
+        "cultureResult": "",
+        "organismIsolated": "",
+        "colonyCountCfuMl": "",
+        "antibioticSensitivities": "",
+        "overallResultStatus": "abnormal",
+        "findingsNarrative": "Pyuria, positive nitrites, and organisms seen on microscopy; culture pending.",
+        "impression": "Findings consistent with urinary tract infection; awaiting culture confirmation.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Empirical antibiotics per local guidance; review on culture result",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "suspected urinary tract infection",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 1 week",
+        "recommendedAction": "Treat per antimicrobial guidance / sensitivities or recommend repeat testing as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "uti-features",
+            "description": "UTI features (pyuria, nitrites, organisms seen) or dipstick haematuria / proteinuria present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "significant-bacteriuria-e-coli",
+      "description": "Culture confirms significant growth of Escherichia coli — moderate severity, the reporting category names the organism.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "UA-REQ-100489",
+        "reportStatus": "final",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-26",
+        "specimenType": "midstream",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Dysuria, frequency, and suprapubic discomfort for 3 days",
+        "pregnant": false,
+        "leucocytes": "plus-two",
+        "nitrites": "positive",
+        "protein": "trace",
+        "blood": "negative",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6.8,
+        "specificGravity": 1.02,
+        "redCellCount": "0-2/hpf",
+        "whiteCellCount": "50-100/hpf",
+        "epithelialCells": "few",
+        "casts": "",
+        "organismsSeen": true,
+        "crystals": "",
+        "cultureResult": "significant-growth",
+        "organismIsolated": "Escherichia coli",
+        "colonyCountCfuMl": ">100000",
+        "antibioticSensitivities": "Sensitive to nitrofurantoin and trimethoprim; resistant to amoxicillin",
+        "overallResultStatus": "abnormal",
+        "findingsNarrative": "Significant growth of Escherichia coli (>10^5 CFU/mL) with pyuria and positive nitrites.",
+        "impression": "Uncomplicated lower urinary tract infection.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Complete course of nitrofurantoin per sensitivities",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "significant Escherichia coli bacteriuria",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 1 week",
+        "recommendedAction": "Treat per antimicrobial guidance / sensitivities or recommend repeat testing as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "significant-bacteriuria",
+            "description": "Significant bacteriuria on culture; abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Significant bacteriuria on culture requiring timely action.",
+            "suggestedAction": "Ensure the requester is alerted and treat per sensitivities / antimicrobial guidance."
+          }
+        ]
+      }
+    },
+    {
+      "name": "asymptomatic-bacteriuria-pregnancy-critical",
+      "description": "Significant growth in a pregnant patient — asymptomatic bacteriuria in pregnancy is treated as a critical finding regardless of symptoms, since untreated it carries a meaningfully higher risk of pyelonephritis and preterm labour.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "UA-REQ-100602",
+        "reportStatus": "final",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-28",
+        "specimenType": "midstream",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Routine antenatal booking urine culture, 14 weeks gestation, asymptomatic",
+        "pregnant": true,
+        "leucocytes": "negative",
+        "nitrites": "negative",
+        "protein": "negative",
+        "blood": "negative",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6.2,
+        "specificGravity": 1.015,
+        "redCellCount": "0-2/hpf",
+        "whiteCellCount": "0-2/hpf",
+        "epithelialCells": "few",
+        "casts": "",
+        "organismsSeen": false,
+        "crystals": "",
+        "cultureResult": "significant-growth",
+        "organismIsolated": "Escherichia coli",
+        "colonyCountCfuMl": ">100000",
+        "antibioticSensitivities": "Sensitive to nitrofurantoin, amoxicillin, and cefalexin",
+        "overallResultStatus": "critical",
+        "findingsNarrative": "Significant growth on a routine antenatal screening culture despite no urinary symptoms.",
+        "impression": "Asymptomatic bacteriuria of pregnancy — treatment indicated.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Treat per antenatal antibiotic guidance and arrange test-of-cure culture",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": true,
+        "reportedTo": "Midwifery team, antenatal clinic",
+        "clinicianNotes": "Result telephoned to the antenatal clinic same day per local pathway.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "significant bacteriuria in pregnancy",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and document the communication."
+          }
+        ]
+      }
+    },
+    {
+      "name": "suspected-urosepsis-critical",
+      "description": "Suspected urosepsis flagged directly by the reporting clinician (fever, rigors, and flank pain alongside the urinalysis findings) — auto-escalates to critical regardless of the dipstick/culture picture on its own.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "UA-REQ-100714",
+        "reportStatus": "final",
+        "performedDate": "2026-06-29",
+        "reportedDate": "2026-06-29",
+        "specimenType": "catheter",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Fever 39.2C, rigors, flank pain and tachycardia — admitted via ED",
+        "pregnant": false,
+        "leucocytes": "plus-three",
+        "nitrites": "positive",
+        "protein": "plus-one",
+        "blood": "trace",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 7,
+        "specificGravity": 1.025,
+        "redCellCount": "5-10/hpf",
+        "whiteCellCount": ">100/hpf",
+        "epithelialCells": "few",
+        "casts": "white cell casts present",
+        "organismsSeen": true,
+        "crystals": "",
+        "cultureResult": "significant-growth",
+        "organismIsolated": "Escherichia coli",
+        "colonyCountCfuMl": ">100000",
+        "antibioticSensitivities": "Pending",
+        "overallResultStatus": "critical",
+        "findingsNarrative": "Marked pyuria with white cell casts and heavy growth in a clinically septic patient.",
+        "impression": "Findings consistent with pyelonephritis / urosepsis in a systemically unwell patient.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent IV antibiotics and sepsis-six pathway; blood cultures",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": true,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Amara Osei, acute medicine on-call",
+        "clinicianNotes": "Telephoned acute medical team immediately; sepsis pathway already activated on the ward.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and document the communication."
+          }
+        ]
+      }
+    },
+    {
+      "name": "visible-haematuria-critical",
+      "description": "Visible (frank) haematuria reported by the patient and confirmed on the specimen — auto-escalates to critical to ensure urgent investigation for a structural or malignant cause, independent of the rest of the urinalysis.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "UA-REQ-100822",
+        "reportStatus": "final",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "specimenType": "midstream",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Painless visible blood in urine for 2 days, no dysuria, smoker, aged 68",
+        "pregnant": false,
+        "leucocytes": "negative",
+        "nitrites": "negative",
+        "protein": "negative",
+        "blood": "plus-three",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6,
+        "specificGravity": 1.02,
+        "redCellCount": ">100/hpf",
+        "whiteCellCount": "0-2/hpf",
+        "epithelialCells": "few",
+        "casts": "",
+        "organismsSeen": false,
+        "crystals": "",
+        "cultureResult": "no-growth",
+        "organismIsolated": "",
+        "colonyCountCfuMl": "<1000",
+        "antibioticSensitivities": "",
+        "overallResultStatus": "critical",
+        "findingsNarrative": "Macroscopically visible blood confirmed by heavy red cell count on microscopy; no evidence of infection.",
+        "impression": "Painless visible haematuria in an older smoker — urgent two-week-wait urology referral indicated.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent two-week-wait urology referral for haematuria investigation",
+        "visibleHaematuria": true,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Owen Fitzgerald, GP",
+        "clinicianNotes": "GP notified directly to initiate the two-week-wait referral pathway.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and document the communication."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Visible haematuria is present and may warrant urgent referral.",
+            "suggestedAction": "Consider an urgent suspected-cancer referral per NICE NG12."
+          }
+        ]
+      }
+    },
+    {
+      "name": "incidental-glucosuria",
+      "description": "Isolated glucosuria on an otherwise entirely normal urinalysis — an incidental finding worth acting on (new diabetes screening), but not itself a UTI or significant growth, so it grades as abnormal-but-minor rather than moderate or normal.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "UA-REQ-100913",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "specimenType": "random",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Routine health check, incidental glucosuria found",
+        "pregnant": false,
+        "leucocytes": "negative",
+        "nitrites": "negative",
+        "protein": "negative",
+        "blood": "negative",
+        "glucose": "plus-two",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6,
+        "specificGravity": 1.02,
+        "redCellCount": "0-2/hpf",
+        "whiteCellCount": "0-2/hpf",
+        "epithelialCells": "few",
+        "casts": "",
+        "organismsSeen": false,
+        "crystals": "",
+        "cultureResult": "no-growth",
+        "organismIsolated": "",
+        "colonyCountCfuMl": "<1000",
+        "antibioticSensitivities": "",
+        "overallResultStatus": "abnormal",
+        "findingsNarrative": "Isolated glucosuria on an otherwise normal dipstick, microscopy, and culture.",
+        "impression": "Incidental glucosuria — recommend fasting glucose / HbA1c to screen for diabetes.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Fasting glucose or HbA1c requested; GP follow-up",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "incidental",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per incidental-findings guidance",
+        "recommendedAction": "Manage the incidental finding (e.g. glucosuria) per the relevant clinical pathway.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "incidental-finding",
+            "description": "Incidental finding(s) only; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "incidental-finding",
+            "description": "Incidental finding; structured follow-up per relevant guidance recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCIDENTAL-FINDING-001",
+            "category": "incidental-finding",
+            "priority": "low",
+            "description": "Glucosuria detected on dipstick (incidental finding).",
+            "suggestedAction": "Consider screening for diabetes per the relevant pathway."
+          }
+        ]
+      }
+    },
+    {
+      "name": "insufficient-specimen-inconclusive",
+      "description": "Sample volume was too small to complete dipstick, microscopy, and culture — classified inconclusive regardless of whatever partial data was obtained.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "UA-REQ-101004",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "specimenType": "clean-catch",
+        "specimenCondition": "insufficient",
+        "clinicalHistory": "Paediatric clean-catch, only a few drops obtained",
+        "pregnant": false,
+        "leucocytes": "",
+        "nitrites": "",
+        "protein": "",
+        "blood": "",
+        "glucose": "",
+        "ketones": "",
+        "bilirubin": "",
+        "ph": null,
+        "specificGravity": null,
+        "redCellCount": "",
+        "whiteCellCount": "",
+        "epithelialCells": "",
+        "casts": "",
+        "organismsSeen": false,
+        "crystals": "",
+        "cultureResult": "",
+        "organismIsolated": "",
+        "colonyCountCfuMl": "",
+        "antibioticSensitivities": "",
+        "overallResultStatus": "",
+        "findingsNarrative": "Insufficient volume to complete the requested tests.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat specimen requested",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 1 week",
+        "recommendedAction": "Recommend a repeat midstream specimen to resolve the inconclusive study.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "insufficient-specimen",
+            "description": "Specimen was insufficient; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-DIPSTICK-01",
+            "axis": "completeness",
+            "category": "dipstick",
+            "description": "Mandatory report section missing: dipstick results."
+          },
+          {
+            "ruleId": "R-COMP-CULTURE-01",
+            "axis": "completeness",
+            "category": "microscopy-culture",
+            "description": "Mandatory report section missing: microscopy / culture."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive study; repeat specimen recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "high",
+            "description": "Specimen condition is insufficient; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating with a fresh, correctly-collected midstream specimen."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    },
+    {
+      "name": "mixed-growth-contaminant-no-impression",
+      "description": "Mixed growth of multiple organisms typical of a contaminated collection technique, and no impression has been recorded yet — inconclusive rather than assumed abnormal, pending either a repeat specimen or a clinician's interpretation.",
+      "state": {
+        "reportingClinician": "",
+        "originatingRequestReference": "UA-REQ-101115",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-07-02",
+        "reportedDate": "",
+        "specimenType": "midstream",
+        "specimenCondition": "contaminated",
+        "clinicalHistory": "",
+        "pregnant": false,
+        "leucocytes": "trace",
+        "nitrites": "negative",
+        "protein": "negative",
+        "blood": "negative",
+        "glucose": "negative",
+        "ketones": "negative",
+        "bilirubin": "negative",
+        "ph": 6.5,
+        "specificGravity": 1.018,
+        "redCellCount": "0-2/hpf",
+        "whiteCellCount": "5-10/hpf",
+        "epithelialCells": "many",
+        "casts": "",
+        "organismsSeen": false,
+        "crystals": "",
+        "cultureResult": "mixed-growth-likely-contaminant",
+        "organismIsolated": "",
+        "colonyCountCfuMl": "",
+        "antibioticSensitivities": "",
+        "overallResultStatus": "",
+        "findingsNarrative": "Mixed growth of multiple organism types with heavy epithelial cell contamination, consistent with poor collection technique.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat clean-catch specimen with collection advice",
+        "visibleHaematuria": false,
+        "suspectedUrosepsis": false,
+        "criticalOrganism": false,
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Awaiting reporting clinician's review",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "suspected urinary tract infection",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 1 week",
+        "recommendedAction": "Treat per antimicrobial guidance / sensitivities or recommend repeat testing as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-02",
+            "axis": "classification",
+            "category": "mixed-growth-no-impression",
+            "description": "Mixed growth (likely contaminant) and no impression was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "uti-features",
+            "description": "UTI features (pyuria, nitrites, organisms seen) or dipstick haematuria / proteinuria present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Specimen condition is contaminated; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating with a fresh, correctly-collected midstream specimen."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "Mixed growth, likely contaminant; significance uncertain.",
+            "suggestedAction": "Recommend a repeat specimen if clinically indicated to confirm significance."
+          }
+        ]
+      }
+    }
+  ]
+}
