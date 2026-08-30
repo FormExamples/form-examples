@@ -1,0 +1,645 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-adequate-study",
+      "description": "Fully normal 24-hour ABPM, adequate recording, complete report: every axis at its baseline — normal / none / routine, 100% complete.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "ABPM-REQ-100221",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-20",
+        "reportedDate": "2026-06-22",
+        "validReadingsPercent": 92,
+        "recordingAdequate": true,
+        "clinicalHistory": "Routine hypertension surveillance, no new symptoms",
+        "daytimeAverageSystolic": 125,
+        "daytimeAverageDiastolic": 78,
+        "nighttimeAverageSystolic": 105,
+        "nighttimeAverageDiastolic": 62,
+        "twentyFourHourAverageSystolic": 118,
+        "twentyFourHourAverageDiastolic": 72,
+        "nocturnalDipPercent": 16,
+        "dipperStatus": "dipper",
+        "hypertensionConfirmed": false,
+        "whiteCoatEffect": false,
+        "maskedHypertension": false,
+        "severeHypertension": false,
+        "nocturnalHypertension": false,
+        "normalStudy": true,
+        "findingsNarrative": "All averaged readings within normal ambulatory limits; normal dipping pattern.",
+        "comparisonWithPrevious": "Consistent with prior study 12 months ago",
+        "impression": "Normal 24-hour ambulatory blood pressure study.",
+        "recommendedFollowUp": "Routine annual surveillance",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normotensive",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal interpretation on an adequate recording; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "stage1-minor-raised-24h-average",
+      "description": "24-hour average 132/81 crosses the 130/80 threshold, but the daytime average stays below 135/85 and no structured hypertension boolean is confirmed — abnormal, minor severity, stage-1 category.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "ABPM-REQ-100355",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-21",
+        "reportedDate": "2026-06-23",
+        "validReadingsPercent": 88,
+        "recordingAdequate": true,
+        "clinicalHistory": "Borderline clinic readings over the past 6 months",
+        "daytimeAverageSystolic": 130,
+        "daytimeAverageDiastolic": 82,
+        "nighttimeAverageSystolic": 118,
+        "nighttimeAverageDiastolic": 68,
+        "twentyFourHourAverageSystolic": 132,
+        "twentyFourHourAverageDiastolic": 81,
+        "nocturnalDipPercent": 12,
+        "dipperStatus": "dipper",
+        "hypertensionConfirmed": false,
+        "whiteCoatEffect": false,
+        "maskedHypertension": false,
+        "severeHypertension": false,
+        "nocturnalHypertension": false,
+        "normalStudy": false,
+        "findingsNarrative": "24-hour average mildly raised; daytime average within normal limits.",
+        "comparisonWithPrevious": "",
+        "impression": "Mild ambulatory hypertension, stage 1.",
+        "recommendedFollowUp": "Lifestyle advice; repeat ABPM in 6 months",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "stage-1",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Recommend lifestyle advice and follow-up monitoring per NICE NG136; consider treatment by cardiovascular risk.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "stage-1-hypertension",
+            "description": "Raised ambulatory average below the stage-2 threshold; severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "minor-abnormality",
+            "description": "Minor abnormality (stage 1, nocturnal, or white-coat); structured follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "stage2-moderate-confirmed-hypertension",
+      "description": "Confirmed hypertension documented by the reporting clinician, daytime average 140/88 — below the 150/95 stage-2 numeric cutoff but the confirmed-hypertension boolean alone is sufficient to grade moderate/stage-2 severity.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "ABPM-REQ-100489",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-24",
+        "validReadingsPercent": 90,
+        "recordingAdequate": true,
+        "clinicalHistory": "Persistently raised clinic readings, known left ventricular hypertrophy on ECG",
+        "daytimeAverageSystolic": 140,
+        "daytimeAverageDiastolic": 88,
+        "nighttimeAverageSystolic": 128,
+        "nighttimeAverageDiastolic": 76,
+        "twentyFourHourAverageSystolic": 136,
+        "twentyFourHourAverageDiastolic": 84,
+        "nocturnalDipPercent": 8,
+        "dipperStatus": "non-dipper",
+        "hypertensionConfirmed": true,
+        "whiteCoatEffect": false,
+        "maskedHypertension": false,
+        "severeHypertension": false,
+        "nocturnalHypertension": false,
+        "normalStudy": false,
+        "findingsNarrative": "Sustained ambulatory hypertension consistent with clinic readings; non-dipping pattern.",
+        "comparisonWithPrevious": "Progression from stage 1 six months ago",
+        "impression": "Confirmed stage 2 hypertension.",
+        "recommendedFollowUp": "Initiate/intensify antihypertensive therapy; review in 4-6 weeks",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "stage-2",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 4 weeks",
+        "recommendedAction": "Recommend antihypertensive treatment initiation or review per NICE NG136.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "stage-2-hypertension",
+            "description": "Stage 2 hypertension (ABPM daytime average >= 150/95) or confirmed / masked hypertension present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Hypertension is confirmed on ambulatory averages and requires action.",
+            "suggestedAction": "Ensure the referrer is alerted and a treatment / management plan is documented per NICE NG136."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Masked or nocturnal hypertension is present and carries elevated cardiovascular risk.",
+            "suggestedAction": "Consider referral to a hypertension specialist for further assessment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-severe-hypertension",
+      "description": "Daytime average 155/98 crosses the severe 150/95 threshold (ABPM-equivalent to clinic >= 180/120): auto-escalates classification to critical, severity to major, and follow-up to same-day critical-alert regardless of the other axes.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "ABPM-REQ-100602",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-23",
+        "reportedDate": "2026-06-23",
+        "validReadingsPercent": 85,
+        "recordingAdequate": true,
+        "clinicalHistory": "Headache, visual disturbance, clinic BP 195/125",
+        "daytimeAverageSystolic": 155,
+        "daytimeAverageDiastolic": 98,
+        "nighttimeAverageSystolic": 148,
+        "nighttimeAverageDiastolic": 92,
+        "twentyFourHourAverageSystolic": 152,
+        "twentyFourHourAverageDiastolic": 96,
+        "nocturnalDipPercent": 3,
+        "dipperStatus": "non-dipper",
+        "hypertensionConfirmed": true,
+        "whiteCoatEffect": false,
+        "maskedHypertension": false,
+        "severeHypertension": true,
+        "nocturnalHypertension": true,
+        "normalStudy": false,
+        "findingsNarrative": "Severe sustained hypertension throughout the recording period with minimal nocturnal dip.",
+        "comparisonWithPrevious": "",
+        "impression": "Severe (grade 3) ambulatory hypertension — urgent review required.",
+        "recommendedFollowUp": "Same-day specialist review",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Dr Amara Osei, on-call medicine",
+        "clinicianNotes": "Telephoned referrer directly at 14:20, results discussed and same-day clinic slot arranged.",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "severe",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "same-day",
+        "recommendedAction": "Arrange same-day specialist review and communicate the critical result directly to the referrer now; document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "severe-hypertension",
+            "description": "A severe-hypertension result (ABPM average >= 150/95, equivalent to clinic >= 180/120) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "severe-hypertension",
+            "description": "Severe hypertension present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Severe hypertension auto-escalates follow-up urgency to critical-alert regardless of the other axes (NICE NG136 same-day specialist review)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A severe-hypertension result (ABPM average >= 150/95, equivalent to clinic >= 180/120) is present.",
+            "suggestedAction": "Arrange same-day specialist review and communicate the critical result to the referrer immediately; document the communication."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Masked or nocturnal hypertension is present and carries elevated cardiovascular risk.",
+            "suggestedAction": "Consider referral to a hypertension specialist for further assessment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "masked-hypertension",
+      "description": "Masked hypertension confirmed by the clinician while every averaged measurement stays below its own threshold (normal clinic readings, raised ambulatory pattern is the whole point of masked hypertension) — the structured boolean alone grades moderate/stage-2.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "ABPM-REQ-100714",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-26",
+        "validReadingsPercent": 91,
+        "recordingAdequate": true,
+        "clinicalHistory": "Normal clinic readings but asymptomatic left ventricular hypertrophy noted incidentally",
+        "daytimeAverageSystolic": 128,
+        "daytimeAverageDiastolic": 80,
+        "nighttimeAverageSystolic": 116,
+        "nighttimeAverageDiastolic": 68,
+        "twentyFourHourAverageSystolic": 125,
+        "twentyFourHourAverageDiastolic": 78,
+        "nocturnalDipPercent": 10,
+        "dipperStatus": "dipper",
+        "hypertensionConfirmed": false,
+        "whiteCoatEffect": false,
+        "maskedHypertension": true,
+        "severeHypertension": false,
+        "nocturnalHypertension": false,
+        "normalStudy": false,
+        "findingsNarrative": "Ambulatory pattern discordant with clinic readings — masked hypertension.",
+        "comparisonWithPrevious": "",
+        "impression": "Masked hypertension.",
+        "recommendedFollowUp": "Initiate antihypertensive therapy; repeat ABPM to confirm response",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "stage-2",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 4 weeks",
+        "recommendedAction": "Recommend antihypertensive treatment initiation or review per NICE NG136.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "stage-2-hypertension",
+            "description": "Stage 2 hypertension (ABPM daytime average >= 150/95) or confirmed / masked hypertension present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Masked or nocturnal hypertension is present and carries elevated cardiovascular risk.",
+            "suggestedAction": "Consider referral to a hypertension specialist for further assessment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "isolated-nocturnal-hypertension-non-dipper",
+      "description": "Nighttime average 122/72 crosses the 120/70 nocturnal threshold with a non-dipping pattern (2% dip), while daytime and 24-hour averages stay normal — isolated nocturnal hypertension, minor severity.",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "ABPM-REQ-100822",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-27",
+        "validReadingsPercent": 87,
+        "recordingAdequate": true,
+        "clinicalHistory": "Known type 2 diabetes, screening for non-dipping pattern",
+        "daytimeAverageSystolic": 128,
+        "daytimeAverageDiastolic": 80,
+        "nighttimeAverageSystolic": 122,
+        "nighttimeAverageDiastolic": 72,
+        "twentyFourHourAverageSystolic": 126,
+        "twentyFourHourAverageDiastolic": 78,
+        "nocturnalDipPercent": 2,
+        "dipperStatus": "non-dipper",
+        "hypertensionConfirmed": false,
+        "whiteCoatEffect": false,
+        "maskedHypertension": false,
+        "severeHypertension": false,
+        "nocturnalHypertension": true,
+        "normalStudy": false,
+        "findingsNarrative": "Isolated nocturnal hypertension with a non-dipping pattern; daytime readings normal.",
+        "comparisonWithPrevious": "",
+        "impression": "Isolated nocturnal hypertension, non-dipper.",
+        "recommendedFollowUp": "Review medication timing (consider evening dosing); cardiovascular risk assessment",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "nocturnal-hypertension",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Recommend lifestyle advice and follow-up monitoring per NICE NG136; consider treatment by cardiovascular risk.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-02",
+            "axis": "severity",
+            "category": "nocturnal-hypertension",
+            "description": "Isolated nocturnal hypertension present; severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "minor-abnormality",
+            "description": "Minor abnormality (stage 1, nocturnal, or white-coat); structured follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Masked or nocturnal hypertension is present and carries elevated cardiovascular risk.",
+            "suggestedAction": "Consider referral to a hypertension specialist for further assessment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "white-coat-effect",
+      "description": "Raised clinic blood pressure but every ambulatory average is within normal limits — the white-coat-effect boolean is what makes this abnormal (not a normal study) rather than the numbers themselves.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "ABPM-REQ-100913",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "final",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-28",
+        "validReadingsPercent": 93,
+        "recordingAdequate": true,
+        "clinicalHistory": "Clinic BP consistently 155/95, requested to rule out white-coat effect before starting treatment",
+        "daytimeAverageSystolic": 128,
+        "daytimeAverageDiastolic": 80,
+        "nighttimeAverageSystolic": 100,
+        "nighttimeAverageDiastolic": 60,
+        "twentyFourHourAverageSystolic": 122,
+        "twentyFourHourAverageDiastolic": 76,
+        "nocturnalDipPercent": 18,
+        "dipperStatus": "dipper",
+        "hypertensionConfirmed": false,
+        "whiteCoatEffect": true,
+        "maskedHypertension": false,
+        "severeHypertension": false,
+        "nocturnalHypertension": false,
+        "normalStudy": false,
+        "findingsNarrative": "All ambulatory averages normal despite persistently raised clinic readings — white-coat effect.",
+        "comparisonWithPrevious": "",
+        "impression": "White-coat effect; true ambulatory blood pressure is normal.",
+        "recommendedFollowUp": "No pharmacological treatment indicated; continue annual monitoring",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "white-coat",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 3 months",
+        "recommendedAction": "Recommend lifestyle advice and follow-up monitoring per NICE NG136; consider treatment by cardiovascular risk.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "white-coat-effect",
+            "description": "White-coat effect present (raised clinic BP but normal ambulatory averages); classified as abnormal (not a normal study)."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-03",
+            "axis": "severity",
+            "category": "white-coat-effect",
+            "description": "White-coat effect present; severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "minor-abnormality",
+            "description": "Minor abnormality (stage 1, nocturnal, or white-coat); structured follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCIDENTAL-FINDING-001",
+            "category": "incidental-finding",
+            "priority": "low",
+            "description": "A white-coat effect is documented (raised clinic BP but normal ambulatory averages).",
+            "suggestedAction": "Manage per the relevant white-coat-hypertension pathway and document."
+          }
+        ]
+      }
+    },
+    {
+      "name": "inconclusive-inadequate-recording",
+      "description": "Only 45% of readings were valid — below the 70% adequacy threshold — and no impression was recorded: the study is inconclusive rather than assumed normal or abnormal.",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "ABPM-REQ-101004",
+        "monitoringType": "24-hour-abpm",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-29",
+        "validReadingsPercent": 45,
+        "recordingAdequate": false,
+        "clinicalHistory": "Device removed early by patient due to discomfort",
+        "daytimeAverageSystolic": null,
+        "daytimeAverageDiastolic": null,
+        "nighttimeAverageSystolic": null,
+        "nighttimeAverageDiastolic": null,
+        "twentyFourHourAverageSystolic": null,
+        "twentyFourHourAverageDiastolic": null,
+        "nocturnalDipPercent": null,
+        "dipperStatus": "",
+        "hypertensionConfirmed": false,
+        "whiteCoatEffect": false,
+        "maskedHypertension": false,
+        "severeHypertension": false,
+        "nocturnalHypertension": false,
+        "normalStudy": false,
+        "findingsNarrative": "Insufficient valid readings to interpret reliably.",
+        "comparisonWithPrevious": "",
+        "impression": "",
+        "recommendedFollowUp": "Repeat ABPM with reinforced patient instructions",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Patient reported cuff discomfort overnight",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "indeterminate",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 4 weeks",
+        "recommendedAction": "Recommend repeat ambulatory or home monitoring to obtain an adequate study.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "inadequate-recording",
+            "description": "Recording was inadequate (< 70% valid readings) and no impression was recorded; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive study; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-AVERAGES-01",
+            "axis": "completeness",
+            "category": "averages",
+            "description": "Mandatory report section missing: averaged blood-pressure measurements."
+          },
+          {
+            "ruleId": "R-COMP-DIPPING-01",
+            "axis": "completeness",
+            "category": "dipping",
+            "description": "Mandatory report section missing: nocturnal dipping."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inadequate-recording",
+            "description": "Inconclusive or inadequate recording; repeat monitoring recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "Recording adequacy is below the 70% valid-readings threshold; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeating the monitoring period to obtain an adequate study."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "No daytime or 24-hour average blood pressure was recorded.",
+            "suggestedAction": "Record the averaged blood-pressure measurements for interpretation."
+          }
+        ]
+      }
+    }
+  ]
+}
