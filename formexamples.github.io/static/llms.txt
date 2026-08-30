@@ -2,29 +2,40 @@
 
 > Medical forms monorepo for structured clinical assessments, patient intake,
 > cardiovascular risk calculators, administrative healthcare documents,
-> privacy notices, and staff training checklists. 370+ form projects under
-> `forms/<slug>/`, each collecting data via a single-page, step-by-step
-> questionnaire, applying a validated scoring or grading engine, and
-> generating a clinical report with flagged issues. Every form carries a full
-> stack: a PostgreSQL SQL schema (source of truth), generated representations
-> (XML+DTD, FHIR HL7 R5, Protocol Buffers, OpenAPI 3.1), two front-ends (HTML
-> and SvelteKit, both on the Lily Design System), and a Rust back-end JSON API
-> (axum + Loco).
+> privacy notices, and staff training checklists. 370+ form projects, each
+> collecting data via a single-page, step-by-step questionnaire, applying a
+> validated scoring or grading engine, and generating a clinical report with
+> flagged issues. Every form carries a full stack: a PostgreSQL SQL schema
+> (source of truth), generated representations (XML+DTD, FHIR HL7 R5,
+> Protocol Buffers, OpenAPI 3.1), two front-ends (HTML and SvelteKit, both on
+> the Lily Design System), and a Rust back-end JSON API (axum + Loco).
 
-## Docs
+## Site
 
-- [Repository overview](index.md): what this repo contains, contents summary, repository structure
-- [System spec](spec.md): the spec-driven-development contract — spec → code → regenerate → verify
-- [Contributing](CONTRIBUTING.md): ways to contribute, environment, workflow, verify gates
-- [Architecture and topic guides](docs/index.md): architecture, data model, generator pipeline, scoring engines, Lily Design System, back end, verification, i18n, tools reference
-- [Tutorials](docs/tutorials/01-quickstart.md): quickstart, building a new form, authoring a scoring engine, the generator pipeline, consuming the API, customizing Lily
-- [Full arc42 architecture document](arc42/index.md)
-- [Installation](INSTALL.md): prerequisites, running a form locally three ways, what to change before deploying
-- [Full form index](forms/AGENTS.md): the alphabetical list of every form project directory
-- [Generated tools reference](docs/tools.md): every `bin/` tool, self-documented
-- [Agent instructions](AGENTS.md): conventions, spec-driven workflow, and the full `bin/` tool catalogue for coding agents
-- [End-user concepts skill](form-examples-skill/SKILL.md): form/grading/persona terminology and a lookup guide
-- [Maintainer implementation skill](form-examples-maintainer-skill/SKILL.md): technical workflow for extending the repo
+- [Home](https://formexamples.com/): project overview and highlights
+- [Get started](https://formexamples.com/get-started): run a form locally
+- [Forms](https://formexamples.com/forms): browse the form catalogue
+- [Architecture](https://formexamples.com/architecture): the big-picture design
+- [Tech stacks](https://formexamples.com/tech-stacks): the front-end/back-end stacks per form
+- [Compliance](https://formexamples.com/compliance): the regulatory standards this project tracks
+
+## Repository docs
+
+These are markdown files in the source repository and have no dedicated page
+on this site — read them on GitHub.
+
+- [Repository overview](https://github.com/FormExamples/form-examples/blob/main/index.md): what the repo contains, contents summary, repository structure
+- [System spec](https://github.com/FormExamples/form-examples/blob/main/spec.md): the spec-driven-development contract — spec → code → regenerate → verify
+- [Contributing](https://github.com/FormExamples/form-examples/blob/main/CONTRIBUTING.md): ways to contribute, environment, workflow, verify gates
+- [Architecture and topic guides](https://github.com/FormExamples/form-examples/blob/main/docs/index.md): architecture, data model, generator pipeline, scoring engines, Lily Design System, back end, verification, i18n, tools reference
+- [Tutorials](https://github.com/FormExamples/form-examples/blob/main/docs/tutorials/01-quickstart.md): quickstart, building a new form, authoring a scoring engine, the generator pipeline, consuming the API, customizing Lily
+- [Full arc42 architecture document](https://github.com/FormExamples/form-examples/blob/main/arc42/index.md)
+- [Installation](https://github.com/FormExamples/form-examples/blob/main/INSTALL.md): prerequisites, running a form locally three ways, what to change before deploying
+- [Full form index](https://github.com/FormExamples/form-examples/blob/main/forms/AGENTS.md): the alphabetical list of every form project directory
+- [Generated tools reference](https://github.com/FormExamples/form-examples/blob/main/docs/tools.md): every `bin/` tool, self-documented
+- [Agent instructions](https://github.com/FormExamples/form-examples/blob/main/AGENTS.md): conventions, spec-driven workflow, and the full `bin/` tool catalogue for coding agents
+- [End-user concepts skill](https://github.com/FormExamples/form-examples/blob/main/form-examples-skill/SKILL.md): form/grading/persona terminology and a lookup guide
+- [Maintainer implementation skill](https://github.com/FormExamples/form-examples/blob/main/form-examples-maintainer-skill/SKILL.md): technical workflow for extending the repo
 
 ## Form categories
 
@@ -41,19 +52,20 @@
 - **WHO referral & emergency** — Acute referral, Counter-referral, Prehospital, Emergency unit forms
 - **UK statutory** — DVLA B1/M1/V1, MAT B1 maternity certificate, LPA, fit-note (Med 3)
 
-See [index.md](index.md) for the same table with more detail, or
-[forms/AGENTS.md](forms/AGENTS.md) to browse every form by name.
+See [Forms](https://formexamples.com/forms) to browse the catalogue on this
+site, or [forms/AGENTS.md](https://github.com/FormExamples/form-examples/blob/main/forms/AGENTS.md)
+for the full alphabetical index in the repository.
 
 ## Optional
 
-- [Governance](GOVERNANCE.md): who decides what, how to become a maintainer
-- [Maintainers](MAINTAINERS.md): the roster and publishing identities
-- [Security](SECURITY.md): what counts as a vulnerability, how to report one
-- [Code of conduct](CODE_OF_CONDUCT.md)
-- [AI statement](AI_STATEMENT.md): how AI tooling is used to build this repo, and its limits
-- [Changelog](CHANGELOG.md): repository-level change history
-- [News](NEWS.md): project fact sheet and press contact
-- [Comparisons](COMPARISONS.md): related projects, and when one is the better choice
-- [Benchmarks](BENCHMARKS.md): measured gate timings and page weight
-- [License](LICENSE.md): CC BY-NC-SA 4.0, and third-party works included here
-- [Citation](CITATION.cff): how to cite this work
+- [Governance](https://github.com/FormExamples/form-examples/blob/main/GOVERNANCE.md): who decides what, how to become a maintainer
+- [Maintainers](https://github.com/FormExamples/form-examples/blob/main/MAINTAINERS.md): the roster and publishing identities
+- [Security](https://github.com/FormExamples/form-examples/blob/main/SECURITY.md): what counts as a vulnerability, how to report one
+- [Code of conduct](https://github.com/FormExamples/form-examples/blob/main/CODE_OF_CONDUCT.md)
+- [AI statement](https://github.com/FormExamples/form-examples/blob/main/AI_STATEMENT.md): how AI tooling is used to build this repo, and its limits
+- [Changelog](https://github.com/FormExamples/form-examples/blob/main/CHANGELOG.md): repository-level change history
+- [News](https://github.com/FormExamples/form-examples/blob/main/NEWS.md): project fact sheet and press contact
+- [Comparisons](https://github.com/FormExamples/form-examples/blob/main/COMPARISONS.md): related projects, and when one is the better choice
+- [Benchmarks](https://github.com/FormExamples/form-examples/blob/main/BENCHMARKS.md): measured gate timings and page weight
+- [License](https://github.com/FormExamples/form-examples/blob/main/LICENSE.md): CC BY-NC-SA 4.0, and third-party works included here
+- [Citation](https://github.com/FormExamples/form-examples/blob/main/CITATION.cff): how to cite this work

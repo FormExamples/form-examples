@@ -1,19 +1,27 @@
 {
   "title": "Medical Forms — form-examples",
-  "summary": "Medical forms monorepo for structured clinical assessments, patient intake, cardiovascular risk calculators, administrative healthcare documents, privacy notices, and staff training checklists. 370+ form projects under forms/<slug>/, each collecting data via a single-page, step-by-step questionnaire, applying a validated scoring or grading engine, and generating a clinical report with flagged issues. Every form carries a full stack: a PostgreSQL SQL schema (source of truth), generated representations (XML+DTD, FHIR HL7 R5, Protocol Buffers, OpenAPI 3.1), two front-ends (HTML and SvelteKit, both on the Lily Design System), and a Rust back-end JSON API (axum + Loco).",
-  "docs": [
-    { "title": "Repository overview", "url": "index.md", "description": "What this repo contains, contents summary, repository structure" },
-    { "title": "System spec", "url": "spec.md", "description": "The spec-driven-development contract — spec → code → regenerate → verify" },
-    { "title": "Contributing", "url": "CONTRIBUTING.md", "description": "Ways to contribute, environment, workflow, verify gates" },
-    { "title": "Architecture and topic guides", "url": "docs/index.md", "description": "Architecture, data model, generator pipeline, scoring engines, Lily Design System, back end, verification, i18n, tools reference" },
-    { "title": "Tutorials", "url": "docs/tutorials/01-quickstart.md", "description": "Quickstart, building a new form, authoring a scoring engine, the generator pipeline, consuming the API, customizing Lily" },
-    { "title": "Full arc42 architecture document", "url": "arc42/index.md", "description": "" },
-    { "title": "Installation", "url": "INSTALL.md", "description": "Prerequisites, running a form locally three ways, what to change before deploying" },
-    { "title": "Full form index", "url": "forms/AGENTS.md", "description": "The alphabetical list of every form project directory" },
-    { "title": "Generated tools reference", "url": "docs/tools.md", "description": "Every bin/ tool, self-documented" },
-    { "title": "Agent instructions", "url": "AGENTS.md", "description": "Conventions, spec-driven workflow, and the full bin/ tool catalogue for coding agents" },
-    { "title": "End-user concepts skill", "url": "form-examples-skill/SKILL.md", "description": "Form/grading/persona terminology and a lookup guide" },
-    { "title": "Maintainer implementation skill", "url": "form-examples-maintainer-skill/SKILL.md", "description": "Technical workflow for extending the repo" }
+  "summary": "Medical forms monorepo for structured clinical assessments, patient intake, cardiovascular risk calculators, administrative healthcare documents, privacy notices, and staff training checklists. 370+ form projects, each collecting data via a single-page, step-by-step questionnaire, applying a validated scoring or grading engine, and generating a clinical report with flagged issues. Every form carries a full stack: a PostgreSQL SQL schema (source of truth), generated representations (XML+DTD, FHIR HL7 R5, Protocol Buffers, OpenAPI 3.1), two front-ends (HTML and SvelteKit, both on the Lily Design System), and a Rust back-end JSON API (axum + Loco).",
+  "site": [
+    { "title": "Home", "url": "https://formexamples.com/", "description": "Project overview and highlights" },
+    { "title": "Get started", "url": "https://formexamples.com/get-started", "description": "Run a form locally" },
+    { "title": "Forms", "url": "https://formexamples.com/forms", "description": "Browse the form catalogue" },
+    { "title": "Architecture", "url": "https://formexamples.com/architecture", "description": "The big-picture design" },
+    { "title": "Tech stacks", "url": "https://formexamples.com/tech-stacks", "description": "The front-end/back-end stacks per form" },
+    { "title": "Compliance", "url": "https://formexamples.com/compliance", "description": "The regulatory standards this project tracks" }
+  ],
+  "repositoryDocs": [
+    { "title": "Repository overview", "url": "https://github.com/FormExamples/form-examples/blob/main/index.md", "description": "What the repo contains, contents summary, repository structure" },
+    { "title": "System spec", "url": "https://github.com/FormExamples/form-examples/blob/main/spec.md", "description": "The spec-driven-development contract — spec → code → regenerate → verify" },
+    { "title": "Contributing", "url": "https://github.com/FormExamples/form-examples/blob/main/CONTRIBUTING.md", "description": "Ways to contribute, environment, workflow, verify gates" },
+    { "title": "Architecture and topic guides", "url": "https://github.com/FormExamples/form-examples/blob/main/docs/index.md", "description": "Architecture, data model, generator pipeline, scoring engines, Lily Design System, back end, verification, i18n, tools reference" },
+    { "title": "Tutorials", "url": "https://github.com/FormExamples/form-examples/blob/main/docs/tutorials/01-quickstart.md", "description": "Quickstart, building a new form, authoring a scoring engine, the generator pipeline, consuming the API, customizing Lily" },
+    { "title": "Full arc42 architecture document", "url": "https://github.com/FormExamples/form-examples/blob/main/arc42/index.md", "description": "" },
+    { "title": "Installation", "url": "https://github.com/FormExamples/form-examples/blob/main/INSTALL.md", "description": "Prerequisites, running a form locally three ways, what to change before deploying" },
+    { "title": "Full form index", "url": "https://github.com/FormExamples/form-examples/blob/main/forms/AGENTS.md", "description": "The alphabetical list of every form project directory" },
+    { "title": "Generated tools reference", "url": "https://github.com/FormExamples/form-examples/blob/main/docs/tools.md", "description": "Every bin/ tool, self-documented" },
+    { "title": "Agent instructions", "url": "https://github.com/FormExamples/form-examples/blob/main/AGENTS.md", "description": "Conventions, spec-driven workflow, and the full bin/ tool catalogue for coding agents" },
+    { "title": "End-user concepts skill", "url": "https://github.com/FormExamples/form-examples/blob/main/form-examples-skill/SKILL.md", "description": "Form/grading/persona terminology and a lookup guide" },
+    { "title": "Maintainer implementation skill", "url": "https://github.com/FormExamples/form-examples/blob/main/form-examples-maintainer-skill/SKILL.md", "description": "Technical workflow for extending the repo" }
   ],
   "formCategories": [
     { "name": "Risk scores & calculators", "examples": ["Framingham", "QRISK3-based heart health check", "PREVENT", "SCORE2-Diabetes"] },
@@ -30,16 +38,16 @@
     { "name": "UK statutory", "examples": ["DVLA B1/M1/V1", "MAT B1 maternity certificate", "LPA", "fit-note (Med 3)"] }
   ],
   "optional": [
-    { "title": "Governance", "url": "GOVERNANCE.md", "description": "Who decides what, how to become a maintainer" },
-    { "title": "Maintainers", "url": "MAINTAINERS.md", "description": "The roster and publishing identities" },
-    { "title": "Security", "url": "SECURITY.md", "description": "What counts as a vulnerability, how to report one" },
-    { "title": "Code of conduct", "url": "CODE_OF_CONDUCT.md", "description": "" },
-    { "title": "AI statement", "url": "AI_STATEMENT.md", "description": "How AI tooling is used to build this repo, and its limits" },
-    { "title": "Changelog", "url": "CHANGELOG.md", "description": "Repository-level change history" },
-    { "title": "News", "url": "NEWS.md", "description": "Project fact sheet and press contact" },
-    { "title": "Comparisons", "url": "COMPARISONS.md", "description": "Related projects, and when one is the better choice" },
-    { "title": "Benchmarks", "url": "BENCHMARKS.md", "description": "Measured gate timings and page weight" },
-    { "title": "License", "url": "LICENSE.md", "description": "CC BY-NC-SA 4.0, and third-party works included here" },
-    { "title": "Citation", "url": "CITATION.cff", "description": "How to cite this work" }
+    { "title": "Governance", "url": "https://github.com/FormExamples/form-examples/blob/main/GOVERNANCE.md", "description": "Who decides what, how to become a maintainer" },
+    { "title": "Maintainers", "url": "https://github.com/FormExamples/form-examples/blob/main/MAINTAINERS.md", "description": "The roster and publishing identities" },
+    { "title": "Security", "url": "https://github.com/FormExamples/form-examples/blob/main/SECURITY.md", "description": "What counts as a vulnerability, how to report one" },
+    { "title": "Code of conduct", "url": "https://github.com/FormExamples/form-examples/blob/main/CODE_OF_CONDUCT.md", "description": "" },
+    { "title": "AI statement", "url": "https://github.com/FormExamples/form-examples/blob/main/AI_STATEMENT.md", "description": "How AI tooling is used to build this repo, and its limits" },
+    { "title": "Changelog", "url": "https://github.com/FormExamples/form-examples/blob/main/CHANGELOG.md", "description": "Repository-level change history" },
+    { "title": "News", "url": "https://github.com/FormExamples/form-examples/blob/main/NEWS.md", "description": "Project fact sheet and press contact" },
+    { "title": "Comparisons", "url": "https://github.com/FormExamples/form-examples/blob/main/COMPARISONS.md", "description": "Related projects, and when one is the better choice" },
+    { "title": "Benchmarks", "url": "https://github.com/FormExamples/form-examples/blob/main/BENCHMARKS.md", "description": "Measured gate timings and page weight" },
+    { "title": "License", "url": "https://github.com/FormExamples/form-examples/blob/main/LICENSE.md", "description": "CC BY-NC-SA 4.0, and third-party works included here" },
+    { "title": "Citation", "url": "https://github.com/FormExamples/form-examples/blob/main/CITATION.cff", "description": "How to cite this work" }
   ]
 }
