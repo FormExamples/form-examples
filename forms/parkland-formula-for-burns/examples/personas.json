@@ -1,0 +1,608 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateParkland",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "standard-adult-burn-immediate-assessment",
+      "description": "Adult house fire, 20% TBSA, assessed at the moment of injury (0 h elapsed) — the whole first-8-h window remains, giving the textbook first-phase rate.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Elena Vasquez",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-24T08:00",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "ED-100221",
+          "ageBand": "adult",
+          "sex": "female"
+        },
+        "weight": {
+          "weightKg": 80
+        },
+        "burn": {
+          "tbsaPercent": 20
+        },
+        "injury": {
+          "injuryAt": "2026-06-24T08:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "House fire; brought in by ambulance directly from the scene"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 6400,
+        "first8hVolumeMl": 3200,
+        "next16hVolumeMl": 3200,
+        "hoursSinceInjury": 0,
+        "remainingFirst8hHours": 8,
+        "first8hRateMlPerHour": 400,
+        "next16hRateMlPerHour": 200,
+        "targetUrineOutputLowMlPerHour": 40,
+        "targetUrineOutputHighMlPerHour": 80,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 80 kg × 20% = 6400 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (3200 mL) in the first 8 h from injury; half (3200 mL) over the next 16 h"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "resuscitation",
+            "category": "time-offset",
+            "description": "0 h elapsed since injury; 8 h of the first-8-h window remain"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 40–80 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "paediatric-scald-burn",
+      "description": "Child scalded by hot bath water, 12% TBSA, assessed 1 h after injury — exercises the lower child major-burn threshold and a partially-elapsed first-phase window.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Tobias Lindqvist",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-25T15:00",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "ED-100355",
+          "ageBand": "child",
+          "sex": "male"
+        },
+        "weight": {
+          "weightKg": 18
+        },
+        "burn": {
+          "tbsaPercent": 12
+        },
+        "injury": {
+          "injuryAt": "2026-06-25T14:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "Pulled a kettle of boiling water onto himself at home; parents gave first aid with cool running water"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 864,
+        "first8hVolumeMl": 432,
+        "next16hVolumeMl": 432,
+        "hoursSinceInjury": 1,
+        "remainingFirst8hHours": 7,
+        "first8hRateMlPerHour": 61.714285714285715,
+        "next16hRateMlPerHour": 27,
+        "targetUrineOutputLowMlPerHour": 9,
+        "targetUrineOutputHighMlPerHour": 18,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 18 kg × 12% = 864 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (432 mL) in the first 8 h from injury; half (432 mL) over the next 16 h"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "resuscitation",
+            "category": "time-offset",
+            "description": "1 h elapsed since injury; 7 h of the first-8-h window remain"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 9–18 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mid-window-partial-elapsed",
+      "description": "Major adult burn, 30% TBSA, assessed 4 h after injury following inter-hospital transfer — half the first-8-h window has already elapsed, so the first-phase rate is offset upward.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Priya Nair",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-22T14:00",
+          "careSetting": "burns-unit"
+        },
+        "identification": {
+          "patientIdentifier": "BU-100489",
+          "ageBand": "adult",
+          "sex": "male"
+        },
+        "weight": {
+          "weightKg": 70
+        },
+        "burn": {
+          "tbsaPercent": 30
+        },
+        "injury": {
+          "injuryAt": "2026-06-22T10:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "Transferred from a district general hospital following initial resuscitation there"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 8400,
+        "first8hVolumeMl": 4200,
+        "next16hVolumeMl": 4200,
+        "hoursSinceInjury": 4,
+        "remainingFirst8hHours": 4,
+        "first8hRateMlPerHour": 1050,
+        "next16hRateMlPerHour": 262.5,
+        "targetUrineOutputLowMlPerHour": 35,
+        "targetUrineOutputHighMlPerHour": 70,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 70 kg × 30% = 8400 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (4200 mL) in the first 8 h from injury; half (4200 mL) over the next 16 h"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "resuscitation",
+            "category": "time-offset",
+            "description": "4 h elapsed since injury; 4 h of the first-8-h window remain"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 35–70 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "resuscitation-overdue",
+      "description": "10 h have elapsed since injury by the time of assessment, past the mandated first-8-h window — the first-phase rate cannot be computed (give the outstanding volume now) rather than dividing by a non-positive remaining window.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Owen Fitzgerald",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-21T06:00",
+          "careSetting": "retrieval"
+        },
+        "identification": {
+          "patientIdentifier": "RT-100602",
+          "ageBand": "adult",
+          "sex": "male"
+        },
+        "weight": {
+          "weightKg": 65
+        },
+        "burn": {
+          "tbsaPercent": 25
+        },
+        "injury": {
+          "injuryAt": "2026-06-20T20:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "Remote farm injury; long retrieval delay before reaching definitive care"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 6500,
+        "first8hVolumeMl": 3250,
+        "next16hVolumeMl": 3250,
+        "hoursSinceInjury": 10,
+        "remainingFirst8hHours": 0,
+        "first8hRateMlPerHour": null,
+        "next16hRateMlPerHour": 203.125,
+        "targetUrineOutputLowMlPerHour": 32.5,
+        "targetUrineOutputHighMlPerHour": 65,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 65 kg × 25% = 6500 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (3250 mL) in the first 8 h from injury; half (3250 mL) over the next 16 h"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "overdue",
+            "category": "time-offset",
+            "description": "10 h elapsed since injury; 0 h of the first-8-h window remain"
+          },
+          {
+            "id": "R-OVERDUE-01",
+            "instrument": "offset",
+            "band": "overdue",
+            "category": "overdue",
+            "description": "First-8-h window from injury has elapsed — give the outstanding first-phase volume as a priority and re-plan against the 24 h total"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 32.5–65 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "exactly-eight-hours-boundary",
+      "description": "Assessed at exactly 8 h since injury — the boundary case: the first-8-h window has just closed (remaining = 0, not negative), which the engine treats the same as overdue rather than as a sliver of window still open.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Miriam Solheim",
+          "clinicianRole": "nurse",
+          "assessedAt": "2026-06-23T10:00",
+          "careSetting": "burns-unit"
+        },
+        "identification": {
+          "patientIdentifier": "BU-100714",
+          "ageBand": "adult",
+          "sex": "female"
+        },
+        "weight": {
+          "weightKg": 75
+        },
+        "burn": {
+          "tbsaPercent": 18
+        },
+        "injury": {
+          "injuryAt": "2026-06-23T02:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "Assessment coincides exactly with the 8-hour mark from the recorded injury time"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 5400,
+        "first8hVolumeMl": 2700,
+        "next16hVolumeMl": 2700,
+        "hoursSinceInjury": 8,
+        "remainingFirst8hHours": 0,
+        "first8hRateMlPerHour": null,
+        "next16hRateMlPerHour": 168.75,
+        "targetUrineOutputLowMlPerHour": 37.5,
+        "targetUrineOutputHighMlPerHour": 75,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 75 kg × 18% = 5400 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (2700 mL) in the first 8 h from injury; half (2700 mL) over the next 16 h"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "overdue",
+            "category": "time-offset",
+            "description": "8 h elapsed since injury; 0 h of the first-8-h window remain"
+          },
+          {
+            "id": "R-OVERDUE-01",
+            "instrument": "offset",
+            "band": "overdue",
+            "category": "overdue",
+            "description": "First-8-h window from injury has elapsed — give the outstanding first-phase volume as a priority and re-plan against the 24 h total"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 37.5–75 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing-weight-and-tbsa-incomplete",
+      "description": "Body weight not yet measured and %TBSA not yet estimated on arrival — no volume can be computed and none is invented; the time-offset and injury record are still complete.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Naledi Khumalo",
+          "clinicianRole": "nurse",
+          "assessedAt": "2026-06-26T11:00",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "ED-100822",
+          "ageBand": "adult",
+          "sex": "male"
+        },
+        "weight": {
+          "weightKg": null
+        },
+        "burn": {
+          "tbsaPercent": null
+        },
+        "injury": {
+          "injuryAt": "2026-06-26T09:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "Weight and burn-extent assessment pending; patient not yet weighed or fully exposed"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": null,
+        "first8hVolumeMl": null,
+        "next16hVolumeMl": null,
+        "hoursSinceInjury": 2,
+        "remainingFirst8hHours": 6,
+        "first8hRateMlPerHour": null,
+        "next16hRateMlPerHour": null,
+        "targetUrineOutputLowMlPerHour": null,
+        "targetUrineOutputHighMlPerHour": null,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-INCOMPLETE-01",
+            "instrument": "formula",
+            "band": "unknown",
+            "category": "missing-input",
+            "description": "Total volume not computed — body weight and/or %TBSA is missing"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "resuscitation",
+            "category": "time-offset",
+            "description": "2 h elapsed since injury; 6 h of the first-8-h window remain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "injury-time-unknown-default-window",
+      "description": "Time of injury not known (found down, history unclear) — the offset cannot be computed, so the engine defaults the remaining first-phase window to the full 8 h rather than assuming any elapsed time.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Helena Kowalski",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-27T09:00",
+          "careSetting": "emergency-department"
+        },
+        "identification": {
+          "patientIdentifier": "ED-100913",
+          "ageBand": "adult",
+          "sex": "unknown"
+        },
+        "weight": {
+          "weightKg": 60
+        },
+        "burn": {
+          "tbsaPercent": 22
+        },
+        "injury": {
+          "injuryAt": "",
+          "injuryTimeKnown": "estimated"
+        },
+        "features": {
+          "inhalationSuspected": "no",
+          "circumferentialOrDeep": "no",
+          "mechanism": "thermal"
+        },
+        "note": {
+          "clinicalNote": "Found unconscious at a house fire; exact time of injury unknown, estimated from when smoke was first reported"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 5280,
+        "first8hVolumeMl": 2640,
+        "next16hVolumeMl": 2640,
+        "hoursSinceInjury": null,
+        "remainingFirst8hHours": 8,
+        "first8hRateMlPerHour": 330,
+        "next16hRateMlPerHour": 165,
+        "targetUrineOutputLowMlPerHour": 30,
+        "targetUrineOutputHighMlPerHour": 60,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 60 kg × 22% = 5280 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (2640 mL) in the first 8 h from injury; half (2640 mL) over the next 16 h"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 30–60 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "electrical-major-burn-with-critical-features",
+      "description": "High-voltage electrical injury with suspected inhalation and a circumferential deep burn — a major burn (35% TBSA) with the highest-acuity feature combination, assessed 2 h after injury.",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Marcus Webb",
+          "clinicianRole": "doctor",
+          "assessedAt": "2026-06-28T09:00",
+          "careSetting": "intensive-care"
+        },
+        "identification": {
+          "patientIdentifier": "IC-101004",
+          "ageBand": "adult",
+          "sex": "male"
+        },
+        "weight": {
+          "weightKg": 90
+        },
+        "burn": {
+          "tbsaPercent": 35
+        },
+        "injury": {
+          "injuryAt": "2026-06-28T07:00",
+          "injuryTimeKnown": "known"
+        },
+        "features": {
+          "inhalationSuspected": "yes",
+          "circumferentialOrDeep": "yes",
+          "mechanism": "electrical"
+        },
+        "note": {
+          "clinicalNote": "High-voltage industrial electrical injury with an entry and exit wound; facial burns and soot in the airway noted at the scene"
+        }
+      },
+      "expected": {
+        "total24hVolumeMl": 12600,
+        "first8hVolumeMl": 6300,
+        "next16hVolumeMl": 6300,
+        "hoursSinceInjury": 2,
+        "remainingFirst8hHours": 6,
+        "first8hRateMlPerHour": 1050,
+        "next16hRateMlPerHour": 393.75,
+        "targetUrineOutputLowMlPerHour": 45,
+        "targetUrineOutputHighMlPerHour": 90,
+        "firedRules": [
+          {
+            "id": "R-TOTAL-VOLUME-01",
+            "instrument": "formula",
+            "band": "resuscitation",
+            "category": "total-volume",
+            "description": "Total 24 h volume = 4 × 90 kg × 35% = 12600 mL crystalloid"
+          },
+          {
+            "id": "R-PHASE-SPLIT-01",
+            "instrument": "phase-split",
+            "band": "resuscitation",
+            "category": "phase-split",
+            "description": "Half (6300 mL) in the first 8 h from injury; half (6300 mL) over the next 16 h"
+          },
+          {
+            "id": "R-OFFSET-01",
+            "instrument": "offset",
+            "band": "resuscitation",
+            "category": "time-offset",
+            "description": "2 h elapsed since injury; 6 h of the first-8-h window remain"
+          },
+          {
+            "id": "R-TITRATION-01",
+            "instrument": "titration",
+            "band": "resuscitation",
+            "category": "urine-output",
+            "description": "Titrate to a urine output of 45–90 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ]
+      }
+    }
+  ]
+}
