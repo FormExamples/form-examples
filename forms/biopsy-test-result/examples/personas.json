@@ -1,0 +1,666 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "benign-complete-normal",
+      "description": "A benign skin lesion, clear margins, adequate specimen, complete report — every axis at baseline.",
+      "state": {
+        "reportingClinician": "Dr Elena Vasquez",
+        "originatingRequestReference": "BIO-REQ-100221",
+        "reportStatus": "final",
+        "performedDate": "2026-06-24",
+        "reportedDate": "2026-06-24",
+        "biopsySite": "skin",
+        "biopsyMethod": "punch",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Pigmented lesion, query benign naevus versus melanoma",
+        "comparisonWithPrevious": "No previous biopsy for comparison",
+        "macroscopicDescription": "4mm punch biopsy of skin, uniformly pigmented on cut surface.",
+        "microscopicDescription": "Benign compound melanocytic naevus with no cytological atypia, no mitoses, and no evidence of malignancy.",
+        "diagnosis": "Benign compound melanocytic naevus.",
+        "malignancyPresent": false,
+        "tumourType": "",
+        "histologicalGrade": "not-applicable",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Benign compound melanocytic naevus, completely excised.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "None required",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "benign",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific histopathology follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal diagnostic feature on an interpretable specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal feature; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "high-grade-malignancy-linked-request-major-not-critical",
+      "description": "A poorly-differentiated malignancy with clear resection margins and a properly linked originating request — a real, verified gotcha in hasCriticalFinding(): a critical finding requires EITHER an involved margin OR an 'unexpected' malignancy specifically defined as malignancyPresent with no originating request reference. Because the request reference IS linked here, this high-grade cancer is graded severity 'major' (R-SEV-MAJOR-02, the high-grade-malignancy path, not the critical-finding path) but classification stays 'abnormal' and follow-up is 'urgent' (within 1 week) rather than 'critical-alert' (immediate) — the exact same tumour grade produces a different classification and urgency purely based on whether the referral was linked, confirmed by direct contrast with the next persona.",
+      "state": {
+        "reportingClinician": "Dr Tobias Lindqvist",
+        "originatingRequestReference": "BIO-REQ-100355",
+        "reportStatus": "final",
+        "performedDate": "2026-06-25",
+        "reportedDate": "2026-06-25",
+        "biopsySite": "breast",
+        "biopsyMethod": "core-needle",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Screen-detected breast mass, core biopsy for tissue diagnosis",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Three cores of tan-white tissue, each approximately 15mm in length.",
+        "microscopicDescription": "Infiltrating ductal carcinoma with poor glandular differentiation, high nuclear pleomorphism, and a high mitotic count.",
+        "diagnosis": "Invasive ductal carcinoma of the breast, poorly-differentiated (Grade 3).",
+        "malignancyPresent": true,
+        "tumourType": "Invasive ductal carcinoma",
+        "histologicalGrade": "poorly-differentiated",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "ER positive, PR positive, HER2 negative",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Poorly-differentiated invasive ductal carcinoma, ER/PR positive, HER2 negative.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Discuss at the breast cancer MDT for staging and treatment planning",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "malignant / poorly-differentiated",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 1 week",
+        "recommendedAction": "Refer to the relevant cancer MDT and expedite onward management.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "high-grade-malignancy",
+            "description": "Poorly-differentiated or undifferentiated malignancy; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "high-grade-malignancy-unlinked-request-critical",
+      "description": "The identical poorly-differentiated malignancy and clear margins as the previous persona, but with no originating request reference recorded — this alone flips hasCriticalFinding() to true (an 'unexpected malignancy'), so classification becomes 'critical' via R-SEV-MAJOR-01 (the critical-finding severity path, not R-SEV-MAJOR-02), and follow-up escalates to 'critical-alert' / immediate. Also raises F-DISCREPANCY-001 (malignancy with no linked request) alongside the two universal critical-result flags — the direct, verified contrast with the persona above.",
+      "state": {
+        "reportingClinician": "Dr Priya Nair",
+        "originatingRequestReference": "",
+        "reportStatus": "final",
+        "performedDate": "2026-06-22",
+        "reportedDate": "2026-06-22",
+        "biopsySite": "breast",
+        "biopsyMethod": "core-needle",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Incidental breast mass identified during an unrelated imaging study; no formal biopsy referral located",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Three cores of tan-white tissue, each approximately 15mm in length.",
+        "microscopicDescription": "Infiltrating ductal carcinoma with poor glandular differentiation, high nuclear pleomorphism, and a high mitotic count.",
+        "diagnosis": "Invasive ductal carcinoma of the breast, poorly-differentiated (Grade 3).",
+        "malignancyPresent": true,
+        "tumourType": "Invasive ductal carcinoma",
+        "histologicalGrade": "poorly-differentiated",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "ER positive, PR positive, HER2 negative",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Poorly-differentiated invasive ductal carcinoma; no matching referral could be identified for this specimen.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent identification of the originating clinician; discuss at the breast cancer MDT",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Patient identity confirmed via the laboratory information system but no matching referral found",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "malignant / poorly-differentiated",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the conversation, and refer to the urgent MDT.",
+        "recommendation": "urgent-mdt",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (unexpected malignancy or an involved resection margin) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding (unexpected malignancy or involved margin) present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert and urgent MDT regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (unexpected malignancy or an involved resection margin) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, refer to the urgent MDT, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "medium",
+            "description": "Malignancy is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    },
+    {
+      "name": "involved-margin-low-grade-tumour-critical",
+      "description": "A well-differentiated (low-grade) malignancy with an INVOLVED resection margin and a properly linked request — demonstrates that an involved margin overrides even the lowest tumour grade: hasInvolvedMargin() alone makes hasCriticalFinding() true regardless of malignancyPresent's grade weight, so severity resolves to major via R-SEV-MAJOR-01 (critical-finding) rather than R-SEV-MINOR-01 (which a well-differentiated tumour would otherwise reach). Raises F-ABNORMAL-ACTION-001, the margin-specific flag, alongside the two universal critical-result flags.",
+      "state": {
+        "reportingClinician": "Dr Owen Fitzgerald",
+        "originatingRequestReference": "BIO-REQ-100602",
+        "reportStatus": "final",
+        "performedDate": "2026-06-26",
+        "reportedDate": "2026-06-26",
+        "biopsySite": "skin",
+        "biopsyMethod": "excision",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Basal cell carcinoma, wide local excision",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Ellipse of skin, 22 x 12mm, with a central 8mm nodular lesion.",
+        "microscopicDescription": "Well-differentiated basal cell carcinoma, nodular subtype. Tumour extends to the deep resection margin.",
+        "diagnosis": "Well-differentiated basal cell carcinoma with an involved deep margin.",
+        "malignancyPresent": true,
+        "tumourType": "Basal cell carcinoma",
+        "histologicalGrade": "well-differentiated",
+        "resectionMargins": "involved",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Well-differentiated basal cell carcinoma with an involved deep resection margin.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Discuss re-excision at the skin cancer MDT",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "malignant / well-differentiated / margin-involved",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the conversation, and refer to the urgent MDT.",
+        "recommendation": "urgent-mdt",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (unexpected malignancy or an involved resection margin) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding (unexpected malignancy or involved margin) present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert and urgent MDT regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (unexpected malignancy or an involved resection margin) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, refer to the urgent MDT, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "The resection margin is involved (tumour at the cut edge).",
+            "suggestedAction": "Ensure the referrer is alerted and discuss re-excision or further management at MDT."
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-grade-malignancy-clear-margin-moderate",
+      "description": "A moderately-differentiated malignancy with clear margins and a linked request — moderate severity via the intermediate-grade-malignancy rule (R-SEV-MODERATE-01), classification abnormal, follow-up recommended; no flags raised (no LVI, no discrepancy, grade recorded, impression present).",
+      "state": {
+        "reportingClinician": "Dr Miriam Solheim",
+        "originatingRequestReference": "BIO-REQ-100714",
+        "reportStatus": "final",
+        "performedDate": "2026-06-27",
+        "reportedDate": "2026-06-27",
+        "biopsySite": "prostate",
+        "biopsyMethod": "core-needle",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Raised PSA, transrectal ultrasound-guided biopsy",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Twelve cores of prostatic tissue submitted from a standard sextant template.",
+        "microscopicDescription": "Acinar adenocarcinoma of moderate differentiation identified in three of twelve cores, Gleason pattern 3+4.",
+        "diagnosis": "Prostatic acinar adenocarcinoma, Gleason 3+4 (Grade Group 2), moderately-differentiated.",
+        "malignancyPresent": true,
+        "tumourType": "Prostatic acinar adenocarcinoma",
+        "histologicalGrade": "moderately-differentiated",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Moderately-differentiated prostatic adenocarcinoma, Gleason 3+4, Grade Group 2.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urology MDT discussion for staging and treatment options",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "malignant / moderately-differentiated",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend MDT discussion or specialist referral as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "intermediate-grade-malignancy",
+            "description": "Moderately-differentiated malignancy; abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "close-margin-lymphovascular-invasion-overrides-low-grade",
+      "description": "A well-differentiated (low-grade) malignancy that would normally grade minor, but with BOTH a close resection margin and lymphovascular invasion present — the actionable-finding rule (R-SEV-MODERATE-02) takes precedence over the low-grade weight in the severity ladder's evaluation order, so severity resolves to moderate rather than minor. Raises F-URGENT-REFERRAL-001 (malignancy with lymphovascular invasion).",
+      "state": {
+        "reportingClinician": "Dr Naledi Khumalo",
+        "originatingRequestReference": "BIO-REQ-100822",
+        "reportStatus": "final",
+        "performedDate": "2026-06-28",
+        "reportedDate": "2026-06-28",
+        "biopsySite": "gi-tract",
+        "biopsyMethod": "endoscopic",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Colonic polyp with suspicious endoscopic features, endoscopic mucosal resection",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Endoscopic mucosal resection specimen, 18 x 15mm, with a central 6mm polypoid lesion.",
+        "microscopicDescription": "Well-differentiated adenocarcinoma arising in a tubulovillous adenoma. Lymphovascular invasion is identified. The deep resection margin is within 0.5mm of tumour (close).",
+        "diagnosis": "Well-differentiated adenocarcinoma arising in a tubulovillous adenoma, with lymphovascular invasion and a close margin.",
+        "malignancyPresent": true,
+        "tumourType": "Colonic adenocarcinoma",
+        "histologicalGrade": "well-differentiated",
+        "resectionMargins": "close",
+        "lymphovascularInvasion": true,
+        "immunohistochemistry": "",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Well-differentiated adenocarcinoma with lymphovascular invasion and a close margin; consider further surgical resection.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Colorectal MDT discussion for consideration of further surgical resection",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "malignant / well-differentiated / margin-close",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend MDT discussion or specialist referral as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal feature (lymphovascular invasion or a close margin) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Malignancy with lymphovascular invasion is present and may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate cancer specialist team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "well-differentiated-malignancy-minor",
+      "description": "An isolated well-differentiated malignancy with clear margins, no lymphovascular invasion, and a linked request — minor severity via the low-grade-malignancy rule (R-SEV-MINOR-01); no flags raised.",
+      "state": {
+        "reportingClinician": "Dr Helena Kowalski",
+        "originatingRequestReference": "BIO-REQ-100913",
+        "reportStatus": "final",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "biopsySite": "thyroid",
+        "biopsyMethod": "fine-needle-aspiration",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Thyroid nodule, ultrasound-guided fine-needle aspiration",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Fine-needle aspiration smears from a 12mm right thyroid nodule.",
+        "microscopicDescription": "Well-differentiated papillary thyroid carcinoma, classic subtype, with characteristic nuclear features.",
+        "diagnosis": "Well-differentiated papillary thyroid carcinoma.",
+        "malignancyPresent": true,
+        "tumourType": "Papillary thyroid carcinoma",
+        "histologicalGrade": "well-differentiated",
+        "resectionMargins": "not-applicable",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Well-differentiated papillary thyroid carcinoma on fine-needle aspiration.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Endocrine surgery referral for consideration of thyroidectomy",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "malignant / well-differentiated",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per local pathway",
+        "recommendedAction": "Manage the low-grade finding per the relevant structured follow-up pathway.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "low-grade-malignancy",
+            "description": "Well-differentiated malignancy; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "minor-abnormality",
+            "description": "Minor abnormality present; structured follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "malignancy-present-ungraded-minor-missing-measurement",
+      "description": "Malignancy is confirmed but no histological differentiation grade has been recorded yet (pending further work-up) — reaches minor severity via a distinct rule (R-SEV-MINOR-02, 'malignancy-ungraded') rather than the graded low-grade rule the previous persona used, and correctly raises the missing-measurement flag prompting the grade to be recorded.",
+      "state": {
+        "reportingClinician": "Dr Marcus Webb",
+        "originatingRequestReference": "BIO-REQ-101004",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-06-30",
+        "reportedDate": "2026-06-30",
+        "biopsySite": "lymph-node",
+        "biopsyMethod": "excision",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Enlarged cervical lymph node, excision biopsy",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Lymph node, 28 x 20 x 15mm, with a firm cut surface.",
+        "microscopicDescription": "Effaced nodal architecture with a diffuse infiltrate of atypical lymphoid cells. Formal grading pending immunohistochemistry and flow cytometry results.",
+        "diagnosis": "Non-Hodgkin lymphoma, subtype and grade pending ancillary studies.",
+        "malignancyPresent": true,
+        "tumourType": "Non-Hodgkin lymphoma",
+        "histologicalGrade": "",
+        "resectionMargins": "not-applicable",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "Pending",
+        "molecularResults": "Pending",
+        "snomedCode": "",
+        "impression": "Non-Hodgkin lymphoma; formal subtyping and grading pending ancillary studies.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Haematology MDT discussion once ancillary results are available",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "malignant",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per local pathway",
+        "recommendedAction": "Manage the low-grade finding per the relevant structured follow-up pathway.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-02",
+            "axis": "severity",
+            "category": "malignancy-ungraded",
+            "description": "Malignancy present without a recorded grade; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "minor-abnormality",
+            "description": "Minor abnormality present; structured follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "Malignancy is reported but no histological grade was recorded.",
+            "suggestedAction": "Record the histological differentiation grade for the cancer dataset."
+          }
+        ]
+      }
+    },
+    {
+      "name": "inadequate-specimen-inconclusive",
+      "description": "An inadequate specimen (insufficient tissue for diagnosis) — classified inconclusive regardless of whatever partial diagnosis was possible; raises a high-priority inadequate-technique flag.",
+      "state": {
+        "reportingClinician": "Dr Ingrid Solberg",
+        "originatingRequestReference": "BIO-REQ-101115",
+        "reportStatus": "final",
+        "performedDate": "2026-07-01",
+        "reportedDate": "2026-07-01",
+        "biopsySite": "liver",
+        "biopsyMethod": "core-needle",
+        "specimenAdequacy": "inadequate",
+        "clinicalHistory": "Abnormal liver function tests, query underlying liver disease",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "A single core of tissue, 4mm in length, fragmented on processing.",
+        "microscopicDescription": "Insufficient tissue for meaningful histological assessment; portal tracts could not be reliably evaluated.",
+        "diagnosis": "",
+        "malignancyPresent": false,
+        "tumourType": "",
+        "histologicalGrade": "",
+        "resectionMargins": "",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "molecularResults": "",
+        "snomedCode": "",
+        "impression": "Inadequate specimen for diagnosis; insufficient tissue obtained.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Repeat liver biopsy with a larger-gauge needle if clinically indicated",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "inconclusive",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "benign",
+        "reportCompletenessPercent": 80,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat biopsy or ancillary testing to resolve the inconclusive specimen.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-INCONCLUSIVE-01",
+            "axis": "classification",
+            "category": "inadequate-specimen",
+            "description": "Specimen was inadequate for diagnosis; classified as inconclusive."
+          },
+          {
+            "ruleId": "R-SEV-NONE-02",
+            "axis": "severity",
+            "category": "inconclusive",
+            "description": "Inconclusive specimen; abnormality severity not established."
+          },
+          {
+            "ruleId": "R-COMP-DIAGNOSIS-01",
+            "axis": "completeness",
+            "category": "diagnosis",
+            "description": "Mandatory report section missing: diagnosis."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-02",
+            "axis": "follow-up",
+            "category": "inconclusive",
+            "description": "Inconclusive specimen; repeat sampling or further testing recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "high",
+            "description": "Specimen adequacy is inadequate; diagnostic confidence may be reduced.",
+            "suggestedAction": "Consider repeat sampling or ancillary testing to reach a diagnostic standard."
+          }
+        ]
+      }
+    }
+  ]
+}
