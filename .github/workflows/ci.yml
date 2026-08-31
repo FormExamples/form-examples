@@ -43,7 +43,7 @@ jobs:
       all: ${{ steps.detect.outputs.all }}
       forms: ${{ steps.detect.outputs.forms }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - id: detect
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run bin/test
         run: bin/test
 
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -299,7 +299,7 @@ jobs:
       PGUSER: loco
       PGPASSWORD: loco
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install psql client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
       - name: Apply every form's migrations to a fresh scratch DB
@@ -310,7 +310,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -380,7 +380,7 @@ jobs:
       PGUSER: loco
       PGPASSWORD: loco
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
@@ -466,7 +466,7 @@ jobs:
       matrix:
         shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@1.96
       - uses: Swatinem/rust-cache@v2
         with:
@@ -507,7 +507,7 @@ jobs:
       matrix:
         shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v4
         with:
           version: '9'
@@ -550,7 +550,7 @@ jobs:
     if: github.event_name == 'schedule' && github.event.schedule == '17 5 * * 1'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-deny
@@ -571,7 +571,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [structure]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: '26'
