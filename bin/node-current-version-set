@@ -1,0 +1,239 @@
+#!/usr/bin/env python3
+"""bin/node-current-version-set — apply spec/node-current-version/ fleet-wide.
+
+The spec is a small, generic per-project checklist (deliberately phrased as
+"if file X exists, then...", never "create X"): every existing package.json
+gets an `engines.node` pin, every existing `.npmrc` gets `engine-strict=true`
+so the pin can't silently become a no-op, every existing GitHub Actions
+workflow's `node-version:` gets bumped, and any `.nvmrc`/`.tool-versions`
+(none exist in this repo yet) would get the exact locally-installed patch
+version. Nothing is ever created that doesn't already exist — that is the
+spec's own scope, not an oversight.
+
+This repo has no single Node project: there are 358 package.json files
+(355 forms' front-end-with-svelte, one stray front-end-with-html, plus
+e2e/ and formexamples.github.io/), so this scans the whole tree via
+`git ls-files` rather than the forms/<slug> --all|<slug> pattern most bin/
+tools use — there is no meaningful "one form" scope for a repo-wide
+toolchain-version policy.
+
+The target version is read from spec/node-current-version/index.md's
+"Node current version is N." line, not hardcoded here, so re-running this
+after the spec is bumped (mirroring bin/loco-msrv-set's pattern for Rust)
+needs no code change.
+
+Usage:
+  bin/node-current-version-set              # apply fleet-wide
+  bin/node-current-version-set --dry-run     # show what would change
+  bin/node-current-version-set --check       # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SPEC_PATH = ROOT / "spec" / "node-current-version" / "index.md"
+
+VERSION_RE = re.compile(r"Node current version is (\d+)\.")
+ENGINES_BLOCK_RE = re.compile(r'"engines"\s*:\s*\{[^}]*\}\s*,?\n?')
+ENGINES_NODE_RE = re.compile(r'"engines"\s*:\s*\{\s*"node"\s*:\s*"([^"]*)"\s*\}')
+PRIVATE_TRUE_RE = re.compile(r'(\n[ \t]*"private"\s*:\s*true,\n)')
+NODE_VERSION_LINE_RE = re.compile(r"(node-version:\s*)'(\d+)'")
+
+
+def current_major() -> str:
+    text = SPEC_PATH.read_text()
+    m = VERSION_RE.search(text)
+    if not m:
+        print(f"could not find 'Node current version is N.' in {SPEC_PATH}", file=sys.stderr)
+        raise SystemExit(2)
+    return m.group(1)
+
+
+def tracked_files(*patterns: str) -> list[Path]:
+    out = subprocess.run(
+        ["git", "ls-files", "--", *patterns],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    return [ROOT / line for line in out.splitlines() if line]
+
+
+def fixed_package_json(text: str, major: str) -> str | None:
+    """Return updated package.json text, or None if already correct."""
+    want = f'"node": "={major}"'
+    m = ENGINES_NODE_RE.search(text)
+    if m:
+        return None if m.group(1) == f"={major}" else ENGINES_NODE_RE.sub(
+            f'"engines": {{ {want} }}', text, count=1
+        )
+    if '"engines"' in text:
+        # Some other engines shape (e.g. also pins npm/pnpm) — leave it,
+        # not this tool's business to guess intent; report as drift so a
+        # human looks at it rather than silently overwriting.
+        return "DRIFT-MANUAL"
+    block = f'\n  "engines": {{ {want} }},\n'
+    new_text, n = PRIVATE_TRUE_RE.subn(lambda mm: mm.group(1) + block.lstrip("\n"), text, count=1)
+    if n == 0:
+        # No "private": true anchor (none observed today, but stay safe):
+        # insert as the first key after the opening brace.
+        new_text = re.sub(r"\{\n", "{\n" + block.lstrip("\n"), text, count=1)
+    return new_text
+
+
+def fixed_npmrc(text: str) -> str | None:
+    if re.search(r"^engine-strict\s*=\s*true\s*$", text, re.MULTILINE):
+        return None
+    sep = "" if text.endswith("\n") or text == "" else "\n"
+    return text + sep + "engine-strict=true\n"
+
+
+def fixed_pnpm_workspace_yaml(text: str) -> str | None:
+    """pnpm >=10 does not honour .npmrc's engine-strict (verified: `pnpm
+    install` only warns, never fails, on an engines mismatch even with
+    engine-strict=true in .npmrc — only `pnpm-workspace.yaml`'s camelCase
+    `engineStrict: true`, or the --engine-strict CLI flag, actually raises
+    ERR_PNPM_UNSUPPORTED_ENGINE). Every form's front-end-with-svelte uses
+    pnpm, so a bare .npmrc engine-strict=true is a silent no-op there;
+    this sets the setting that actually works, alongside it."""
+    if re.search(r"^engineStrict\s*:\s*true\s*$", text, re.MULTILINE):
+        return None
+    sep = "" if text.endswith("\n") or text == "" else "\n"
+    return text + sep + "engineStrict: true\n"
+
+
+def fixed_workflow(text: str, major: str) -> str | None:
+    def repl(m: re.Match) -> str:
+        return m.group(1) + f"'{major}'"
+
+    new_text, n = NODE_VERSION_LINE_RE.subn(repl, text)
+    if n == 0:
+        return None
+    return None if new_text == text else new_text
+
+
+def local_node_patch(major: str) -> str | None:
+    node = shutil.which("node")
+    if not node:
+        return None
+    out = subprocess.run([node, "--version"], capture_output=True, text=True).stdout.strip()
+    if not out.startswith(f"v{major}."):
+        return None
+    return out.lstrip("v")
+
+
+def process(apply: bool, major: str) -> dict[str, list[str]]:
+    drifted: dict[str, list[str]] = {}
+
+    for path in tracked_files("*/package.json", ":!:*/node_modules/*") + (
+        [ROOT / "package.json"] if (ROOT / "package.json").exists() else []
+    ):
+        text = path.read_text()
+        fixed = fixed_package_json(text, major)
+        if fixed == "DRIFT-MANUAL":
+            drifted.setdefault(str(path.relative_to(ROOT)), []).append(
+                'has an "engines" block this tool won\'t guess how to merge — check by hand'
+            )
+        elif fixed is not None:
+            drifted.setdefault(str(path.relative_to(ROOT)), []).append(f'engines.node -> "={major}"')
+            if apply:
+                path.write_text(fixed)
+
+    for path in tracked_files("*/.npmrc"):
+        text = path.read_text()
+        fixed = fixed_npmrc(text)
+        if fixed is not None:
+            drifted.setdefault(str(path.relative_to(ROOT)), []).append("engine-strict=true")
+            if apply:
+                path.write_text(fixed)
+
+        # Not part of the spec's literal text, but required to make its
+        # verified intent (an actual EBADENGINE-equivalent failure) true
+        # for pnpm projects — see fixed_pnpm_workspace_yaml().
+        ws_path = path.parent / "pnpm-workspace.yaml"
+        if ws_path.exists():
+            ws_text = ws_path.read_text()
+            ws_fixed = fixed_pnpm_workspace_yaml(ws_text)
+            if ws_fixed is not None:
+                drifted.setdefault(str(ws_path.relative_to(ROOT)), []).append("engineStrict: true")
+                if apply:
+                    ws_path.write_text(ws_fixed)
+
+    for path in tracked_files("*/.nvmrc") + tracked_files(".nvmrc"):
+        patch = local_node_patch(major)
+        want = patch or f"{major}\n"
+        text = path.read_text() if path.exists() else ""
+        want_text = want if want.endswith("\n") else want + "\n"
+        if text != want_text:
+            drifted.setdefault(str(path.relative_to(ROOT)), []).append(f"pin -> {want_text.strip()}")
+            if apply:
+                path.write_text(want_text)
+
+    for path in tracked_files("*/.tool-versions") + tracked_files(".tool-versions"):
+        patch = local_node_patch(major)
+        want_version = patch or major
+        text = path.read_text()
+        new_text, n = re.subn(r"^node\s+\S+$", f"node {want_version}", text, flags=re.MULTILINE)
+        if n == 0 and re.search(r"^node\s", text, re.MULTILINE) is None:
+            sep = "" if text.endswith("\n") or text == "" else "\n"
+            new_text = text + sep + f"node {want_version}\n"
+        if new_text != text:
+            drifted.setdefault(str(path.relative_to(ROOT)), []).append(f"node -> {want_version}")
+            if apply:
+                path.write_text(new_text)
+
+    for path in tracked_files(".github/workflows/*.yml", ".github/workflows/*.yaml"):
+        text = path.read_text()
+        fixed = fixed_workflow(text, major)
+        if fixed is not None:
+            drifted.setdefault(str(path.relative_to(ROOT)), []).append(f"node-version -> '{major}'")
+            if apply:
+                path.write_text(fixed)
+
+    return drifted
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Apply spec/node-current-version/ fleet-wide."
+    )
+    parser.add_argument("--check", action="store_true", help="report drift; exit non-zero if any")
+    parser.add_argument("--dry-run", action="store_true", help="report what would change")
+    args = parser.parse_args()
+
+    major = current_major()
+    apply = not (args.check or args.dry_run)
+
+    drifted = process(apply, major)
+
+    if args.check:
+        if drifted:
+            total = sum(len(v) for v in drifted.values())
+            print(
+                f"node-current-version-set: {len(drifted)} file(s), {total} change(s) needed "
+                f"for Node {major} (run: bin/node-current-version-set)"
+            )
+            for name, changes in list(drifted.items())[:15]:
+                print(f"  {name}: {', '.join(changes)}")
+            if len(drifted) > 15:
+                print(f"  … and {len(drifted) - 15} more")
+            return 1
+        print(f"node-current-version-set: clean, Node {major} everywhere spec/node-current-version/ applies")
+        return 0
+
+    verb = "would change" if args.dry_run else "changed"
+    total = sum(len(v) for v in drifted.values())
+    print(f"node-current-version-set: {len(drifted)} file(s), {total} change(s) {verb} (Node {major})")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

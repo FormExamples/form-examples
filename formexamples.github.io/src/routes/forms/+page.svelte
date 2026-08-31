@@ -8,12 +8,8 @@
   }
 </script>
 
-<svelte:head>
-  <title>Forms — FormExamples</title>
-</svelte:head>
-
 <h1 class="text-3xl font-semibold tracking-tight">Forms</h1>
-<p class="mt-2 text-slate-600 dark:text-slate-400">All {forms.length} medical-form projects in the monorepo, grouped by category.</p>
+<p class="mt-2 text-muted">All {forms.length} medical-form projects in the monorepo, grouped by category.</p>
 
 <h2 class="mt-10 text-xl font-semibold">Categories</h2>
 <CategoryTable />
@@ -23,7 +19,7 @@
   {#each forms as form}
     <li class="break-inside-avoid py-1">
       <a href={formUrl(form.slug)} target="_blank" rel="noopener noreferrer">{form.title}</a>
-      <span class="ml-1 text-xs text-slate-500 dark:text-slate-400">{form.slug}</span>
+      <span class="ml-1 text-xs text-muted">{form.slug}</span>
     </li>
   {/each}
 </ul>

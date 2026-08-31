@@ -18,6 +18,6 @@ npm run preview
 
 ## Deploy
 
-Push to `main` — `.github/workflows/deploy.yml` builds and deploys to GitHub Pages automatically.
+Push to `main` — `.github/workflows/deploy-formexamples.yml` builds and deploys to GitHub Pages automatically.
 
 See `docs/superpowers/specs/2026-05-02-formexamples-site-design.md` (in the parent monorepo) for the design spec.

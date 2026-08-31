@@ -15,7 +15,7 @@
 <!-- Mobile backdrop -->
 {#if open}
   <div
-    class="fixed inset-0 top-14 z-20 bg-slate-900/40 md:hidden"
+    class="fixed inset-0 top-14 z-20 bg-base-content/40 md:hidden"
     role="presentation"
     aria-hidden="true"
     onclick={() => onClose?.()}
@@ -24,7 +24,7 @@
 {/if}
 
 <aside
-  class="fixed left-0 top-14 z-20 h-[calc(100vh-3.5rem)] w-60 border-r border-slate-200 bg-white transition-transform dark:border-slate-800 dark:bg-slate-950 md:sticky md:translate-x-0
+  class="fixed left-0 top-14 z-20 h-[calc(100vh-3.5rem)] w-60 border-r border-base-300 bg-base-100 transition-transform md:sticky md:translate-x-0
     {open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}"
   aria-label="Section navigation"
 >
@@ -36,8 +36,8 @@
             href={link.href}
             class="block rounded-md px-3 py-2 text-sm hover:no-underline
               {isActive(link.href)
-                ? 'bg-teal-50 font-medium text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-                : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'}"
+                ? 'bg-primary/10 font-medium text-primary'
+                : 'text-base-content hover:bg-base-200'}"
             onclick={() => onClose?.()}
           >
             {link.label}

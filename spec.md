@@ -219,11 +219,18 @@ bin/generate-llms-txt.py --check      # per-form llms.txt drift detector
 bin/generate-spec.py --check          # per-form spec/ presence check (specs are hand-maintained)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
+bin/back-end-with-loco/generate-loco-agents.py --list-stale # back-end AGENTS.md staleness check
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
+bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
+bin/test-tutorials                    # docs/tutorials/ reference only existing tools/paths
+bin/test-engines                      # HTML scoring engines load and run headless
+bin/test-loco-routes                  # every Loco crate exposes its domain HTTP API
+bin/test-vendored-uniformity          # vendored themes + Svelte helpers byte-identical fleet-wide
+bin/test-personas                     # personas.json vs each form's actual scoring engine
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```
 

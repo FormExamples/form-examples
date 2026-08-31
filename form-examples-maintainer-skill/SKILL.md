@@ -110,7 +110,7 @@ bin/test-personas <slug> ...      # verify only the named forms
 bin/test-personas <slug> --update # (re)compute `expected` from the engine
 ```
 
-Compute `expected` under Node 22 (the CI-pinned version — `mise exec node@22
+Compute `expected` under Node 26 (the CI-pinned version — `mise exec node@26
 -- node bin/test-personas <slug> --update`), then re-verify with a plain
 run. When authoring new personas, read the actual engine source
 (`rules.js`/`flags.js`/`grader.js` under `front-end-with-html/js/`) rather

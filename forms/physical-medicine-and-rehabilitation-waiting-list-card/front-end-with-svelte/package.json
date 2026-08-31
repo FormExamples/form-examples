@@ -1,6 +1,7 @@
 {
   "name": "physical-medicine-and-rehabilitation-waiting-list-card-front-end",
   "private": true,
+  "engines": { "node": "=26" },
   "version": "0.0.1",
   "type": "module",
   "scripts": {

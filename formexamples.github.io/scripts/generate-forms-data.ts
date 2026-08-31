@@ -41,6 +41,15 @@ function main() {
     }
     if (!isDir) continue;
     if (entry.startsWith('.')) continue;
+    // A real form directory has an index.md (see AGENTS.md's form directory
+    // structure). This excludes non-form directories under forms/ — doc/,
+    // fhir/, lily-spec/, lily-svelte-spec/ — which readdirSync otherwise
+    // picks up like any other entry.
+    try {
+      statSync(join(fullPath, 'index.md'));
+    } catch {
+      continue;
+    }
     forms.push({ slug: entry, title: readTitle(entry) });
   }
 

@@ -4,15 +4,23 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="116 medical-form reference implementations: clinical assessments, scoring engines, SQL, FHIR R5, SvelteKit and Rust." />
+    <meta name="description" content="355 medical-form reference implementations: clinical assessments, scoring engines, SQL, FHIR R5, SvelteKit and Rust." />
+    <!-- Every theme's stylesheet is preloaded (one <link> per $lib/config/themes.ts
+         entry, emitted from the root +layout.svelte's <svelte:head>) so
+         lily-design-system-svelte-theme-picker's runtime data-theme switch is
+         pure attribute mutation — no stylesheet fetch, ever, on toggle. -->
     <script>
-      // Apply theme synchronously to prevent flash of wrong theme.
+      // Apply theme synchronously to prevent flash of wrong theme. This is
+      // adapter-static (no server to read a cookie from), so the stored
+      // preference (or prefers-color-scheme) is resolved client-side before
+      // first paint. lily-design-system-svelte-theme-picker re-derives and
+      // owns this same value on mount (see Header.svelte).
       (function () {
         try {
-          var stored = localStorage.getItem('theme');
+          var stored = localStorage.getItem('form-examples.theme.v1');
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var dark = stored === 'dark' || (!stored && prefersDark);
-          if (dark) document.documentElement.classList.add('dark');
+          var theme = stored || (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
         } catch (_) {}
       })();
     </script>

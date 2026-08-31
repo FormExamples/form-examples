@@ -2,6 +2,7 @@
   "name": "objectives-and-key-results-tracker-front-end-form-with-html",
   "version": "0.1.0",
   "private": true,
+  "engines": { "node": "=26" },
   "scripts": { "test": "playwright test smoke.spec.mjs --reporter=line" },
   "devDependencies": { "@playwright/test": "^1.50.0" }
 }

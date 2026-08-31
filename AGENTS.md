@@ -35,6 +35,10 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/test-vendored-uniformity [--verbose]` — verify the vendored theme catalogues (both stacks) and the five Lily Svelte helper components + `locales.ts` are byte-identical across every form. The CI-checkable half of the checkout-reading sync tools' invariant: fleet uniformity runs everywhere, upstream currency stays a maintainer-run check against the pinned checkout
 - `bin/test-e2e [--html] [--svelte] [--all|<slug>…]` — Playwright smoke + axe-core accessibility sweep over form front-ends
 - `bin/test-tools` — smoke-test every Lily-system tool's `--check` / `--counts` / `--help` modes
+- `bin/test-personas [<slug>…] [--update]` — verify each form's hand-authored `examples/personas.json` (a realistic filled state + the engine's exact expected grade) against its actual scoring engine; `--update` (re)computes `expected`. Richer regression oracle than the type-defaulted `examples/assessment.json` fixture — several persona sets have found real, verified gaps between a form's documented behavior and what its engine actually does
+- `bin/test-engines [<slug>…] [--verbose]` — headless smoke gate for every HTML front-end's scoring engine: loads it (real ES-module `import()`, or a `vm` sandbox for any classic-script straggler), runs its grader over the default state, and asserts a structured result. Catches an engine that throws on load or returns malformed output, with no browser
+- `bin/test-loco-routes` — assert every Loco crate exposes its domain HTTP API: a crate whose `app.rs` `routes()` wires only `auth::routes()` compiles and has a full data layer but exposes no domain entities over HTTP; fails any crate wiring fewer than two routes
+- `bin/test-tutorials` — fast doc-rot check for `docs/tutorials/`: extracts every fenced ` ```sh ` block, scans it for `bin/...` and `forms/...` path tokens, and asserts each still exists. Static reference check only — starts no servers, runs no tutorial commands
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
 - `bin/generate-forms-tsv.py [--check]` — generate `forms.tsv`, the case-conversion lookup table read by `bin/forms-as-kebab-case` and friends
@@ -66,8 +70,10 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
+- `bin/openapi/generate-openapi-combined.py [--check] [<slug>…]` — merge a form's per-entity OpenAPI files into one `forms/<slug>/openapi/openapi.yaml` (union of `paths` and `components.schemas` under a form-level `info` block, for Swagger UI / client codegen consumers that want one document per form); `--check` is the CI drift detector
 - `bin/back-end-with-loco/generate-back-end-with-loco-setup.py [--check] [<slug>…]` — emit each form's `cargo loco generate scaffold --api` setup script; `--check` is the CI drift detector
 - `bin/back-end-with-loco/generate-rust-docs.py <crate>…` — insert rustdoc (crate `//!`, module headers, `///` on every `pub` item) so each Loco crate compiles under `#![deny(missing_docs)]`; idempotent
+- `bin/back-end-with-loco/generate-loco-agents.py [--stale|--list-stale] <slug>…` — regenerate a form's `back-end-with-loco/AGENTS.md` to describe the crate as it actually is (relational per-table Loco JSON API, RESTful scaffold controller per domain table); replaces docs still describing the obsolete single-`assessments`-table-with-JSONB design. `--list-stale` is the CI drift detector
 - `bin/generate-changelog-and-examples.py [--check] [<slug>…]` — scaffold per-form `CHANGELOG.md` and `examples/` (filled-form JSON fixture + FHIR R5 Bundle); `--check` is the CI drift detector
 
 ### Lily Design System (HTML front-ends)
@@ -106,6 +112,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 
 - `bin/generate-llms-txt.py [--check] [<slug>…]` — generate per-form `llms.txt` (llmstxt.org format, derived from `index.md`); `--check` is the CI drift detector
 - `bin/generate-spec.py [--check] [--force] [<slug>…]` — scaffold per-form `spec/index.md` (hand-maintained living domain spec, seeded from `index.md`; never overwritten unless `--force <slug>`); `--check` verifies every form has a non-empty spec + README symlink
+- `bin/node-current-version-set [--check] [--dry-run]` — apply [`spec/node-current-version/`](spec/node-current-version/) fleet-wide: every existing `package.json` gets `engines.node` pinned to the spec's current major, every existing `.npmrc` gets `engine-strict=true`, and every GitHub Actions workflow's `node-version:` is bumped to match. Also sets `pnpm-workspace.yaml`'s `engineStrict: true` alongside any `.npmrc` — not in the spec's literal text, but required to make its own verified requirement (an actual `EBADENGINE`-equivalent failure on a stale Node) true for the fleet's actual package manager: `pnpm install` only *warns* on an engines mismatch even with `.npmrc`'s `engine-strict=true` set, verified directly; only `pnpm-workspace.yaml`'s camelCase key (or the `--engine-strict` CLI flag) actually raises `ERR_PNPM_UNSUPPORTED_ENGINE`. Repo-wide (`git ls-files`-driven), not the `--all|<slug>` pattern — there is no single per-form scope for a toolchain-version policy that also covers `e2e/` and `formexamples.github.io/`. Never creates a file that doesn't already exist, per the spec's own "if file X exists" scoping; the target version is parsed from the spec, not hardcoded, so it needs no code change when the spec's version bumps. `--check` is the CI drift detector
 
 ## Form index
 
@@ -228,8 +235,10 @@ bin/html-helpers-picker-rename --check        # HTML text-size-chooser/share-cho
 # bin/lily-svelte-theme-locale-select-refactor --check # one-shot, superseded — app.css marker check uses pre-rename class names; do not run as a CI gate
 bin/generate-llms-txt.py --check      # Per-form llms.txt drift detector
 bin/generate-spec.py --check          # Per-form spec/ presence check (specs are hand-maintained)
+bin/node-current-version-set --check  # spec/node-current-version/ drift detector (engines.node, engine-strict, engineStrict, CI node-version)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
+bin/back-end-with-loco/generate-loco-agents.py --list-stale # Back-end AGENTS.md staleness check (empty output = clean)
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
 bin/loco-forbid-unsafe --check --all # Loco #![forbid(unsafe_code)] crate-root drift detector
@@ -243,8 +252,13 @@ bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completenes
 bin/loco-msrv-set --msrv 1.96 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
+bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
+bin/test-tutorials                    # docs/tutorials/ reference only existing tools/paths
+bin/test-engines                      # HTML scoring engines load and run headless
+bin/test-loco-routes                  # every Loco crate exposes its domain HTTP API
 bin/test-vendored-uniformity          # vendored themes + Svelte helpers byte-identical fleet-wide
+bin/test-personas                     # personas.json vs each form's actual scoring engine
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```
 

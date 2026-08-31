@@ -91,6 +91,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # bin/test-personas' exact-JSON comparison is sensitive to V8's
+      # floating-point output for non-integer Math.pow()/sqrt() exponents,
+      # which is not guaranteed bit-identical across Node versions (see
+      # CHANGELOG.md "Unreleased" — the
+      # estimated-glomerular-filtration-rate-calculator ULP mismatch this
+      # caused twice). This job previously ran bin/test-personas and
+      # bin/test-engines against whatever Node ubuntu-latest happened to
+      # ship, not an actual pin — explicit setup-node makes "the CI-pinned
+      # Node version" (as CONTRIBUTING.md and the maintainer skill already
+      # describe it) true, and matches the svelte/e2e jobs' pin below.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '26'
       - name: Install xmllint
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils
       - name: Install Python generator dependencies
@@ -500,7 +513,7 @@ jobs:
           version: '9'
       - uses: actions/setup-node@v7
         with:
-          node-version: '22'
+          node-version: '26'
           cache: pnpm
           cache-dependency-path: forms/*/front-end-with-svelte/pnpm-lock.yaml
       - name: check / build / vitest each front-end in this shard
@@ -561,7 +574,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: '22'
+          node-version: '26'
       - name: Install E2E harness deps
         working-directory: e2e
         run: npm ci --no-audit --no-fund

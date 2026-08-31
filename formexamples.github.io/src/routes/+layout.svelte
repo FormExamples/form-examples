@@ -1,8 +1,11 @@
 <script lang="ts">
   import '../app.css';
+  import { page } from '$app/state';
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import { pageTitle } from '$lib/site';
+  import { THEME_OPTIONS } from '$lib/config/themes';
   import type { Snippet } from 'svelte';
 
   type Props = { children: Snippet };
@@ -10,9 +13,19 @@
   let menuOpen = $state(false);
 </script>
 
+<svelte:head>
+  <title>{pageTitle(page.data.title)}</title>
+  <!-- One <link> per $lib/config/themes.ts entry — the site's multi-stylesheet
+       setup. Every theme is always loaded, so ThemePicker's data-theme switch
+       (Header.svelte) is pure attribute mutation, never a stylesheet fetch. -->
+  {#each THEME_OPTIONS as theme (theme.value)}
+    <link rel="stylesheet" href="/themes/{theme.value}.css" />
+  {/each}
+</svelte:head>
+
 <a
   href="#main-content"
-  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-slate-900 focus:shadow dark:focus:bg-slate-900 dark:focus:text-slate-100"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-base-100 focus:px-4 focus:py-2 focus:text-base-content focus:shadow"
 >
   Skip to content
 </a>

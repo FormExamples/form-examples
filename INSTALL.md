@@ -19,7 +19,7 @@ You only need the tools for the stacks you actually intend to run.
 | Stack | Needs |
 | --- | --- |
 | HTML front-end | any static file server — Python 3 is enough |
-| SvelteKit front-end | Node 22+ and [pnpm](https://pnpm.io/) |
+| SvelteKit front-end | Node 26+ and [pnpm](https://pnpm.io/) |
 | Rust back-end | Rust stable via [rustup](https://rustup.rs/), the Loco CLI (`cargo install loco`), and PostgreSQL 18 (server + client) |
 | The generators and gates | Python 3.12+, plus `xmllint` for XML validation |
 

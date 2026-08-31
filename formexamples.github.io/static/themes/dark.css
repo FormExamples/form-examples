@@ -1,0 +1,18 @@
+/* ============================================================================
+ * form-examples site theme: dark
+ *
+ * See light.css for the rationale (hand-authored token file, not a vendored
+ * Lily component stylesheet). Same token set, dark palette.
+ * ========================================================================= */
+
+:where(:root[data-theme="dark"]) {
+    color-scheme: dark;
+
+    --color-base-100: oklch(19% 0.01 255);
+    --color-base-200: oklch(24% 0.012 255);
+    --color-base-300: oklch(32% 0.014 255);
+    --color-base-content: oklch(93% 0.006 255);
+    --color-muted: oklch(72% 0.012 255);
+    --color-primary: oklch(75% 0.11 184);
+    --color-primary-content: oklch(18% 0.03 184);
+}

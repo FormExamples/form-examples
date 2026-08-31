@@ -169,8 +169,43 @@ for them.
   **Lesson for authoring personas on a formula engine that uses `pow()`,
   `sqrt()`, or similar: regenerate `--update` under the CI-pinned Node
   version, not whatever's on `PATH` locally.**
+- The Node 22 → 26 pin bump (below) reproduced the exact same
+  `estimated-glomerular-filtration-rate-calculator` ULP mismatch in the
+  opposite direction: `bin/test-personas` run fleet-wide under Node 26
+  (207 personas, 355 forms) found 2 of that form's personas' `egfrRaw`
+  off in the last digit against `expected` recorded under Node 22
+  (`g2-mildly-decreased-middle-aged`, `g5-kidney-failure`; the rounded
+  `egfr` and `egfrStage` were unaffected). Regenerated `expected` under
+  Node 26.8.1 to match the new pin; fleet-wide personas and
+  `bin/test-engines` both verified clean under Node 26 afterward
+  (207/207 and 279/279 respectively).
+- `forms/pre-operative-assessment-by-patient/.npmrc` sat at the form root,
+  not inside `front-end-with-svelte/` where its sibling 109 forms all
+  carry theirs — no `package.json` or `pnpm-workspace.yaml` next to it, so
+  its `engine-strict=true` had never constrained anything. Moved to the
+  correct location.
 
 ### Added
+
+- **`spec/node-current-version/` applied fleet-wide** via a new
+  `bin/node-current-version-set` (`--check` is the CI drift detector):
+  `engines.node` pinned in all 358 `package.json` files (355 forms'
+  `front-end-with-svelte`, one stray `front-end-with-html`, `e2e/`,
+  `formexamples.github.io/`); `.npmrc`'s `engine-strict=true` confirmed on
+  the 110 that already carry one (the spec creates nothing that doesn't
+  already exist); no `.nvmrc`/`.tool-versions` exist yet, so those two
+  spec steps are currently no-ops. Verified with real installs, not
+  assumed: `npm install` under Node 25.9.0 against a `.npmrc` with
+  `engine-strict=true` fails `EBADENGINE` as expected, and succeeds under
+  26 — but the identical `.npmrc` setting is a **silent no-op under
+  pnpm** (`pnpm install` only warns, never fails, even fresh with no
+  cache) — the fleet's actual front-end package manager. Confirmed the
+  mechanism that does work (`pnpm-workspace.yaml`'s camelCase
+  `engineStrict: true`, raising `ERR_PNPM_UNSUPPORTED_ENGINE`) and had the
+  tool set it alongside every `.npmrc`, beyond the spec's literal text but
+  required to make its own stated verification requirement true for pnpm.
+  Re-verified end to end on a real form after the fix: fails under Node
+  25.9.0, succeeds under 26.
 
 - [GitHub Sponsors](https://github.com/sponsors/joelparkerhenderson) as a
   funding channel: `.github/FUNDING.yml`, and `CONTRIBUTING.md`'s "Donate
@@ -211,6 +246,71 @@ for them.
   missing 6 identification/scheduling fields; incomplete missing only the
   two witness fields, since the engine's status is binary). Fleet persona
   total 181 → 183.
+
+### Changed
+
+- **`formexamples.github.io` refactored onto the Lily Design System**,
+  via the published npm packages rather than a vendored local copy (the
+  site previously carried none of Lily at all — plain Tailwind CSS with
+  a hand-rolled dark-mode toggle): `lily-design-system-svelte-theme-picker`,
+  `-text-size-picker`, and `-share-picker`. Every component moved from
+  Tailwind `dark:` variants to a small, hand-authored `--color-base-*` /
+  `--color-primary*` token set (`static/themes/{light,dark}.css`,
+  `$lib/config/themes.ts`) matching the same `data-theme` contract every
+  form's `front-end-with-svelte` uses — not a copy of Lily's ~20 KB-per-
+  theme component stylesheet, which this Tailwind-utility site has no use
+  for. Every theme is preloaded (one `<link>` per `$lib/config/themes.ts`
+  entry, emitted from the root `+layout.svelte`), so the picker's runtime
+  switch is pure `data-theme` attribute mutation, never a stylesheet
+  fetch. `SharePicker` wires LinkedIn/Mastodon/Bluesky/Reddit share-intent
+  URLs plus copy-link, titled from a new `page.data.title` convention
+  (`+page.ts` per route, typed via `src/app.d.ts`) so a page's tab title
+  and its shared title can never drift apart. No `LocalePicker` — the
+  site has no translated content, so wiring one would be decorative.
+  Also fixed: the home/architecture/tech-stacks/get-started pages still
+  described a retired architecture (116 forms, a split
+  `front-end-form-with-*`/`front-end-dashboard-with-*` layout, SVAR
+  dashboards, `full-stack-with-loco-tera-htmx-alpine/`) rewritten to the
+  current 355-form / `front-end-with-html` + `front-end-with-svelte` +
+  `back-end-with-loco` reality; and `scripts/generate-forms-data.ts`
+  listed *any* directory under `forms/` (picking up `doc/`, `fhir/`,
+  `lily-spec/`, `lily-svelte-spec/` as 4 bogus entries on the public
+  Forms page) rather than requiring an `index.md`.
+- **Node 22 → 26 fleet-wide** (`ci.yml`'s `svelte` and `e2e` jobs;
+  `deploy-formexamples.yml`), plus the doc/skill prose that names the
+  CI-pinned version (`CONTRIBUTING.md`, `INSTALL.md`,
+  `form-examples-maintainer-skill/SKILL.md`). Node 26 (first released
+  2026-04) is Current, not yet LTS (expected 2026-10). See "Fixed" above
+  for the one real fallout (`estimated-glomerular-filtration-rate-calculator`
+  personas) and its regeneration.
+- `deploy-formexamples.yml` was pinned to Node **20** — a full major
+  behind `ci.yml`'s Node 22 — and unnoticed because nothing exercises it
+  except an actual push-to-`main` deploy. Bumped straight to 26 with
+  everything else, closing the gap rather than landing on 22 first.
+- **`ci.yml`'s `drift` job — the one that runs `bin/test-personas` and
+  `bin/test-engines` — had no `actions/setup-node` step at all.** Despite
+  CONTRIBUTING.md and the maintainer skill both describing "the CI-pinned
+  Node version" for regenerating personas, that job ran on whatever Node
+  `ubuntu-latest` happens to ship preinstalled — never actually pinned by
+  this repo, and exactly the kind of floating dependency that produces a
+  silent Math.pow()/sqrt() ULP drift like the one just fixed above. Added
+  an explicit `actions/setup-node@v7` pin (Node 26, matching every other
+  job) so "the CI-pinned version" is now true rather than aspirational.
+- While bumping the deploy workflow, found `formexamples.github.io` was
+  carrying two competing lockfiles: `package-lock.json` (the deliberate,
+  actively-maintained one — confirmed as `deploy-formexamples.yml`'s real
+  `npm ci` input by the Dependabot-triage fix above) and a `pnpm-lock.yaml`
+  + `pnpm-workspace.yaml` pair added incidentally by the fleet-wide
+  Aug-15 "Update Svelte" commit (which otherwise only touched forms'
+  `front-end-with-svelte/`), never wired into any script or workflow, and
+  itself broken — `pnpm-workspace.yaml` still held the unfilled
+  `allowBuilds.esbuild: set this to true or false` template placeholder
+  the same bug `bin/svelte-pnpm-workspace-fix` fixes fleet-wide for forms
+  (a tool whose target glob doesn't reach this directory). Deleted the
+  orphaned pnpm pair; `package-lock.json` remains the single lockfile,
+  regenerated under Node 26 to pick up the three
+  `lily-design-system-svelte-*` picker packages from the theming
+  refactor above.
 
 ## [1.0.0] - 2026-08-26
 

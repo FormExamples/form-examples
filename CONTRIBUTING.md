@@ -48,7 +48,7 @@ doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.
 
 - **Python 3.12+** — the generators (`bin/*.py`).
 - **PostgreSQL 18** — the SQL apply gate and Loco back-end tests.
-- **Node 22+** and **pnpm** — the SvelteKit front-ends and the E2E harness.
+- **Node 26+** and **pnpm** — the SvelteKit front-ends and the E2E harness.
 - **Rust (stable; most crates are edition 2021, a few 2024)** with the
   `x86_64-unknown-linux-musl` target and `clippy` — the Loco back-ends.
 - **xmllint** (`libxml2-utils`) — XML/DTD validation.
@@ -99,17 +99,23 @@ See [`docs/verification.md`](docs/verification.md) for what each gate proves.
 bin/test                               # structure + forms.tsv + example conformance
 bin/test-sql-apply                     # apply every form's migrations on a scratch DB
 bin/test-examples-conformance          # example fixtures match SQL schema
+bin/test-tutorials                     # docs/tutorials/ reference only existing tools/paths
+bin/test-engines                       # HTML scoring engines load and run headless
+bin/test-loco-routes                   # every Loco crate exposes its domain HTTP API
 bin/test-vendored-uniformity           # vendored themes + helpers uniform fleet-wide
+bin/test-personas                      # personas.json vs each form's actual scoring engine
 bin/test-tools                         # every generator/Lily --check gate
 bin/lily-html-refactor --check --all   # Lily HTML class contract
 bin/lily-svelte-refactor --check --all # Lily Svelte class contract
 bin/lily-sync --check                  # Lily HTML snapshot
 bin/lily-svelte-sync --check           # Lily Svelte snapshot
+bin/back-end-with-loco/generate-loco-agents.py --list-stale # back-end AGENTS.md staleness
 bin/loco-config-refactor --check --all # Loco queue + observability conventions
 bin/loco-forbid-unsafe --check --all   # #![forbid(unsafe_code)] in every crate root
 bin/loco-seed-base-rename --check --all      # seed() unused-base-param drift
 bin/loco-test-auth-header-fix --check --all  # test auth_header() redundant-& drift
 bin/generate-loco-deny-config.py --check # Loco deny.toml drift
+bin/node-current-version-set --check   # spec/node-current-version/ drift
 bin/test-e2e --html                    # Playwright smoke + axe-core a11y (HTML)
 ```
 

@@ -25,12 +25,8 @@
   ];
 </script>
 
-<svelte:head>
-  <title>Compliance — FormExamples</title>
-</svelte:head>
-
 <h1 class="text-3xl font-semibold tracking-tight">Compliance</h1>
-<p class="mt-2 text-slate-600 dark:text-slate-400">Reference standards and guidance the monorepo aligns to.</p>
+<p class="mt-2 text-muted">Reference standards and guidance the monorepo aligns to.</p>
 
 <div class="mt-8 grid gap-4 sm:grid-cols-2">
   {#each refs as r}
@@ -38,7 +34,7 @@
   {/each}
 </div>
 
-<p class="mt-8 text-sm text-slate-500 dark:text-slate-400">
+<p class="mt-8 text-sm text-muted">
   These references provide context for the implementation choices in the monorepo. None of the forms
   in this project have themselves been certified as medical devices.
 </p>

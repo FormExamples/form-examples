@@ -7,8 +7,8 @@
   {href}
   target="_blank"
   rel="noopener noreferrer"
-  class="block rounded-lg border border-slate-200 p-5 no-underline transition hover:border-teal-500 hover:shadow-sm dark:border-slate-700 dark:hover:border-teal-500"
+  class="block rounded-lg border border-base-300 p-5 no-underline transition hover:border-primary hover:shadow-sm"
 >
-  <div class="font-semibold text-slate-900 dark:text-slate-100">{title}</div>
-  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">{description}</p>
+  <div class="font-semibold text-base-content">{title}</div>
+  <p class="mt-2 text-sm text-muted">{description}</p>
 </a>

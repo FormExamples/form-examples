@@ -1,0 +1,36 @@
+/* ============================================================================
+ * form-examples site theme: light
+ *
+ * Hand-authored, minimal Lily Design System token file for this docs site —
+ * NOT a vendored copy of Lily's full ~492-component stylesheet (the kind
+ * every forms/<slug>/front-end-with-svelte/static/themes/*.css carries).
+ * This site styles everything with plain Tailwind utilities, so it needs
+ * only the token layer, not Lily's class-based component CSS. It follows
+ * the same `--color-base-*` / `--color-primary*` naming and the same
+ * `:root[data-theme="…"]` selector convention as every form's theme
+ * catalogue, and is swapped at runtime by the published
+ * lily-design-system-svelte-theme-picker npm package (not a local copy).
+ *
+ * This *is* the default theme: it applies both on bare `:root` (so a page
+ * with no `data-theme` set yet still renders correctly) and on
+ * `:root[data-theme="light"]`.
+ * ========================================================================= */
+
+:where(:root, :root[data-theme="light"]) {
+    color-scheme: light;
+
+    /* Page canvas. */
+    --color-base-100: oklch(100% 0 0);
+    /* Elevated surface — header, sidebar, code blocks, cards. */
+    --color-base-200: oklch(97% 0.002 240);
+    /* Borders and dividers. */
+    --color-base-300: oklch(91% 0.004 240);
+    /* Primary text. */
+    --color-base-content: oklch(21% 0.006 285.885);
+    /* Secondary / muted text (captions, nav labels, footer copy). */
+    --color-muted: oklch(46% 0.012 260);
+    /* Brand / link / active-state colour. */
+    --color-primary: oklch(60% 0.118 184.704);
+    /* Foreground used over a `--color-primary` fill. */
+    --color-primary-content: oklch(99% 0.005 184.704);
+}

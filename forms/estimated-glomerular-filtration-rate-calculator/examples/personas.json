@@ -87,7 +87,7 @@
       "expected": {
         "serumCreatinineMgDl": 1.131,
         "egfr": 77,
-        "egfrRaw": 76.68043199801086,
+        "egfrRaw": 76.68043199801087,
         "egfrStage": "G2",
         "egfrStageLabel": "Mildly decreased",
         "firedRules": [
@@ -311,7 +311,7 @@
       "expected": {
         "serumCreatinineMgDl": 7.012,
         "egfr": 6,
-        "egfrRaw": 5.8547257825020385,
+        "egfrRaw": 5.854725782502039,
         "egfrStage": "G5",
         "egfrStageLabel": "Kidney failure",
         "firedRules": [

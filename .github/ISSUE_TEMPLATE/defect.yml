@@ -32,7 +32,7 @@ body:
     attributes:
       label: Environment
       description: OS, and versions of whatever is involved (Node, Rust, Postgres, Python).
-      placeholder: macOS 15 / Node 22 / rustc 1.98 / Postgres 18
+      placeholder: macOS 15 / Node 26 / rustc 1.98 / Postgres 18
   - type: checkboxes
     id: gates
     attributes:

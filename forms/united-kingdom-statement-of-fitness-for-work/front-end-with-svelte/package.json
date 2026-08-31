@@ -1,6 +1,7 @@
 {
 	"name": "united-kingdom-statement-of-fitness-for-work-front-end",
 	"private": true,
+  "engines": { "node": "=26" },
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {

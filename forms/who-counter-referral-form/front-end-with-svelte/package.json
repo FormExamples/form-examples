@@ -1,6 +1,7 @@
 {
 	"name": "who-counter-referral-form-front-end",
 	"private": true,
+  "engines": { "node": "=26" },
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {

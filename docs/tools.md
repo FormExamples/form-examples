@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-78 tools.
+79 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -44,6 +44,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
 - [`bin/loco-test-max-connections-fix`](#loco-test-max-connections-fix)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
+- [`bin/node-current-version-set`](#node-current-version-set)
 - [`bin/normalize`](#normalize)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
 - [`bin/route-loco-layout`](#route-loco-layout)
@@ -1237,6 +1238,38 @@ Actions per form:
   delete `04_main.sql` and continue with the normal rename pass.
 
 Idempotent. Safe to re-run.
+```
+
+<h2 id="node-current-version-set"><code>bin/node-current-version-set</code></h2>
+
+```text
+bin/node-current-version-set — apply spec/node-current-version/ fleet-wide.
+
+The spec is a small, generic per-project checklist (deliberately phrased as
+"if file X exists, then...", never "create X"): every existing package.json
+gets an `engines.node` pin, every existing `.npmrc` gets `engine-strict=true`
+so the pin can't silently become a no-op, every existing GitHub Actions
+workflow's `node-version:` gets bumped, and any `.nvmrc`/`.tool-versions`
+(none exist in this repo yet) would get the exact locally-installed patch
+version. Nothing is ever created that doesn't already exist — that is the
+spec's own scope, not an oversight.
+
+This repo has no single Node project: there are 358 package.json files
+(355 forms' front-end-with-svelte, one stray front-end-with-html, plus
+e2e/ and formexamples.github.io/), so this scans the whole tree via
+`git ls-files` rather than the forms/<slug> --all|<slug> pattern most bin/
+tools use — there is no meaningful "one form" scope for a repo-wide
+toolchain-version policy.
+
+The target version is read from spec/node-current-version/index.md's
+"Node current version is N." line, not hardcoded here, so re-running this
+after the spec is bumped (mirroring bin/loco-msrv-set's pattern for Rust)
+needs no code change.
+
+Usage:
+  bin/node-current-version-set              # apply fleet-wide
+  bin/node-current-version-set --dry-run     # show what would change
+  bin/node-current-version-set --check       # CI drift check (non-zero on drift)
 ```
 
 <h2 id="normalize"><code>bin/normalize</code></h2>
