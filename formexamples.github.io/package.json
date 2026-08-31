@@ -18,7 +18,7 @@
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.3",
-    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.2.0",
     "lily-design-system-svelte-share-picker": "^0.1.1",
