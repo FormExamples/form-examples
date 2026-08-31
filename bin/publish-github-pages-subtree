@@ -25,7 +25,7 @@ set -euf
 
 top="$(git rev-parse --show-toplevel)"
 prefix="formexamples.github.io"
-remote_name="formexamples-github-io-pages"
+remote_name="github-pages"
 remote_url="git@github.com:FormExamples/formexamples.github.io.git"
 branch="pages-export"
 
