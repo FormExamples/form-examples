@@ -43,11 +43,11 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-seed-base-stray-usage-fix`](#loco-seed-base-stray-usage-fix)
 - [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
 - [`bin/loco-test-max-connections-fix`](#loco-test-max-connections-fix)
+- [`bin/make-github-pages`](#make-github-pages)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/node-current-version-set`](#node-current-version-set)
 - [`bin/normalize`](#normalize)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
-- [`bin/publish-github-pages-subtree`](#publish-github-pages-subtree)
 - [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
 - [`bin/svelte-date-time-picker-vendor`](#svelte-date-time-picker-vendor)
@@ -1198,6 +1198,32 @@ Usage:
   bin/loco-test-max-connections-fix --check --all     # CI drift check (non-zero on drift)
 ```
 
+<h2 id="make-github-pages"><code>bin/make-github-pages</code></h2>
+
+```text
+bin/make-github-pages — publish formexamples.github.io/, per
+ spec/monorepo-github-pages/. Delegate of `make github-pages`.
+
+ This monorepo's GitHub Pages subproject (formexamples.github.io/) is
+ maintained here, in-tree, like any other subproject. It is PUBLISHED by
+ exporting its tree via `git subtree push` into the sibling, top-level,
+ read-only repo github.com/FormExamples/formexamples.github.io — the
+ GitHub-convention <org>.github.io repo, which GitHub auto-serves at the
+ domain root (unlike a project repo's Pages, which nests under
+ /<repo-name>/). The spec's own directive: never work directly in the
+ sibling; always re-publish it from here via this tool.
+
+ formexamples.github.io/.github/workflows/deploy.yml is inert in the
+ monorepo (GitHub only reads .github/workflows/ at a repo's root) but
+ becomes the sibling repo's real, root-level deploy workflow once
+ exported — so the sibling repo builds and deploys itself on every push
+ this tool makes to it, no separate setup needed there.
+
+ Usage:
+   bin/make-github-pages              # export + push (same as `make github-pages`)
+   bin/make-github-pages --dry-run    # split only, don't push
+```
+
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>
 
 ```text
@@ -1327,32 +1353,6 @@ Usage:
   bin/page-header-layout-refactor --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
-```
-
-<h2 id="publish-github-pages-subtree"><code>bin/publish-github-pages-subtree</code></h2>
-
-```text
-bin/publish-github-pages-subtree — publish formexamples.github.io/, per
- spec/monorepo-github-pages/.
-
- This monorepo's GitHub Pages subproject (formexamples.github.io/) is
- maintained here, in-tree, like any other subproject. It is PUBLISHED by
- exporting its tree via `git subtree push` into the sibling, top-level,
- read-only repo github.com/FormExamples/formexamples.github.io — the
- GitHub-convention <org>.github.io repo, which GitHub auto-serves at the
- domain root (unlike a project repo's Pages, which nests under
- /<repo-name>/). The spec's own directive: never work directly in the
- sibling; always re-publish it from here via this tool.
-
- formexamples.github.io/.github/workflows/deploy.yml is inert in the
- monorepo (GitHub only reads .github/workflows/ at a repo's root) but
- becomes the sibling repo's real, root-level deploy workflow once
- exported — so the sibling repo builds and deploys itself on every push
- this tool makes to it, no separate setup needed there.
-
- Usage:
-   bin/publish-github-pages-subtree              # export + push
-   bin/publish-github-pages-subtree --dry-run     # split only, don't push
 ```
 
 <h2 id="route-loco-layout"><code>bin/route-loco-layout</code></h2>

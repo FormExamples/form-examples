@@ -272,14 +272,14 @@ for them.
   whenever this runs inside the monorepo, same as before); that file is
   consequently no longer gitignored, so the fallback has something
   correct to fall back to.
-- New root `Makefile`: `make github-pages` (also the default target) runs
+- New root `Makefile`: `make github-pages` (also the default target)
+  delegates to a new POSIX shell script, `bin/make-github-pages` (renamed
+  from `bin/publish-github-pages-subtree`), which runs
   `git subtree push --prefix=formexamples.github.io github-pages main`
-  directly — the exact, minimal command, for when the `github-pages`
-  remote (renamed to match, from `formexamples-github-io-pages`) is
-  already configured. `bin/publish-github-pages-subtree` remains the
-  more robust entry point (adds the remote if missing, supports
-  `--dry-run`). Verified: `make github-pages` re-derives the identical
-  split tree and reports "Everything up-to-date" against the
+  — plus adds the `github-pages` remote (renamed to match, from
+  `formexamples-github-io-pages`) if it's missing, e.g. on a fresh clone,
+  and supports `--dry-run`. Verified: `make github-pages` re-derives the
+  identical split tree and reports "Everything up-to-date" against the
   already-published sibling. Preserved the file's prior sole content
   (a `claude mcp add …` command for the `svelte` MCP server, not valid
   Make syntax) as a leading comment rather than discarding it.

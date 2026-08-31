@@ -4,10 +4,10 @@
 
 # Publish formexamples.github.io/ to the sibling, top-level, read-only
 # github.com/FormExamples/formexamples.github.io repo, per
-# spec/monorepo-github-pages/. Pushes a subdirectory of this repo out to
-# the main branch on the remote named github-pages, using git's subtree
-# mechanism (see bin/publish-github-pages-subtree for the version that
-# also adds the github-pages remote if it's missing, e.g. on a fresh
-# clone, and supports --dry-run).
+# spec/monorepo-github-pages/. Delegates to bin/make-github-pages, a POSIX
+# shell script that runs
+#   git subtree push --prefix=formexamples.github.io github-pages main
+# (and, unlike this target alone, adds the github-pages remote first if
+# it's missing — e.g. on a fresh clone — and supports --dry-run).
 github-pages:
-	git subtree push --prefix=formexamples.github.io github-pages main
+	bin/make-github-pages

@@ -1,6 +1,6 @@
 #!/bin/sh
-# bin/publish-github-pages-subtree — publish formexamples.github.io/, per
-# spec/monorepo-github-pages/.
+# bin/make-github-pages — publish formexamples.github.io/, per
+# spec/monorepo-github-pages/. Delegate of `make github-pages`.
 #
 # This monorepo's GitHub Pages subproject (formexamples.github.io/) is
 # maintained here, in-tree, like any other subproject. It is PUBLISHED by
@@ -18,8 +18,8 @@
 # this tool makes to it, no separate setup needed there.
 #
 # Usage:
-#   bin/publish-github-pages-subtree              # export + push
-#   bin/publish-github-pages-subtree --dry-run     # split only, don't push
+#   bin/make-github-pages              # export + push (same as `make github-pages`)
+#   bin/make-github-pages --dry-run    # split only, don't push
 
 set -euf
 
