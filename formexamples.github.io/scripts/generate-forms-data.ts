@@ -28,7 +28,19 @@ function readTitle(slug: string): string {
 }
 
 function main() {
-  const entries = readdirSync(FORMS_DIR);
+  let entries: string[];
+  try {
+    entries = readdirSync(FORMS_DIR);
+  } catch {
+    // FORMS_DIR (../../forms) only exists inside the form-examples monorepo.
+    // This site is also published standalone — via bin/publish-github-pages-subtree,
+    // per spec/monorepo-github-pages/ — to github.com/FormExamples/formexamples.github.io,
+    // which has no sibling forms/ to scan. There, this is a no-op: the committed
+    // src/lib/data/forms.generated.ts (last regenerated in the monorepo and carried
+    // through by the subtree export) is used as-is.
+    console.log(`${FORMS_DIR} not found — standalone checkout, keeping committed forms.generated.ts`);
+    return;
+  }
   const forms: Form[] = [];
 
   for (const entry of entries) {

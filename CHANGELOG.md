@@ -260,6 +260,18 @@ for them.
   existing `deploy-formexamples.yml` (this monorepo's own Pages deploy)
   is untouched — the spec doesn't call for retiring it, and the two don't
   conflict (different paths under the same GitHub Pages domain).
+  First real publish surfaced two things a dry-run split couldn't:
+  pushing to a fresh `<org>.github.io` repo's `main` auto-enables classic
+  branch-based ("legacy") Pages before the new `deploy.yml` gets a chance
+  to run — fixed by explicitly setting `build_type=workflow` via the
+  Pages API. And the deploy itself failed:
+  `scripts/generate-forms-data.ts` resolves `../../forms` to list every
+  form, which only exists inside the monorepo — nonexistent in the
+  standalone export. Fixed to fall back to the already-committed
+  `forms.generated.ts` when `../../forms` isn't there (regenerated fresh
+  whenever this runs inside the monorepo, same as before); that file is
+  consequently no longer gitignored, so the fallback has something
+  correct to fall back to.
 
 ### Changed
 

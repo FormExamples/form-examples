@@ -4,5 +4,4 @@ build/
 .env
 .env.*
 !.env.example
-src/lib/data/forms.generated.ts
 .DS_Store
