@@ -18,6 +18,18 @@ for them.
 
 ### Fixed
 
+- **`bin/lily-svelte-sync --check` reported 2 files drifted** — a routine
+  audit sweep (`forms/lily-svelte-version.md` pinned `e05a138e6`, the
+  local Lily Design System checkout had since moved to `a89961e8f`).
+  The only change: `Kbd.svelte` now renders a semantic `<kbd>` element
+  instead of a generic `<div>` (plus its matching test). No form
+  actually vendors `Kbd` (`git ls-files
+  '*/front-end-with-svelte/src/lib/components/ui/Kbd.svelte'` is
+  empty) — the reference snapshot only, zero runtime impact. Refreshed
+  via `bin/lily-svelte-sync` (updates the pin + date automatically);
+  re-verified `bin/lily-svelte-refactor --check --all`,
+  `bin/test-vendored-uniformity`, and `pnpm run check` on the reference
+  form all clean.
 - **Dependabot alerts, enabled per `spec/dependabot/`, immediately surfaced
   207 real open vulnerabilities (7 critical, 60 high, 126 moderate, 14
   low) — down to 3 (all low, no safe fix available) after triage:**

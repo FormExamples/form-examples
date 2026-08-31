@@ -13,6 +13,6 @@
 </script>
 
 <!-- Kbd.svelte -->
-<div class={`kbd ${className}`} aria-label={label} {...restProps}>
+<kbd class={`kbd ${className}`} aria-label={label} {...restProps}>
     {@render children?.()}
-</div>
+</kbd>
