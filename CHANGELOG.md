@@ -246,6 +246,20 @@ for them.
   missing 6 identification/scheduling fields; incomplete missing only the
   two witness fields, since the engine's status is binary). Fleet persona
   total 181 → 183.
+- **`spec/monorepo-github-pages/` implemented**: a new
+  `bin/publish-github-pages-subtree` publishes `formexamples.github.io/`'s
+  tree via `git subtree push` to the sibling, top-level, read-only
+  `github.com/FormExamples/formexamples.github.io` repo — the
+  GitHub-convention `<org>.github.io` repo, empty since its creation on
+  2026-05-02, auto-served at the domain root rather than nested under
+  `/form-examples/` the way this monorepo's own Pages deploy is. Added
+  `formexamples.github.io/.github/workflows/deploy.yml`: inert in the
+  monorepo (GitHub only reads `.github/workflows/` at a repo's root) but
+  becomes the sibling's real root-level deploy workflow once exported, so
+  the sibling builds and redeploys itself on every future publish. The
+  existing `deploy-formexamples.yml` (this monorepo's own Pages deploy)
+  is untouched — the spec doesn't call for retiring it, and the two don't
+  conflict (different paths under the same GitHub Pages domain).
 
 ### Changed
 

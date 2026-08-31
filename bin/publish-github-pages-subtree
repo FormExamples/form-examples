@@ -1,0 +1,45 @@
+#!/bin/sh
+# bin/publish-github-pages-subtree — publish formexamples.github.io/, per
+# spec/monorepo-github-pages/.
+#
+# This monorepo's GitHub Pages subproject (formexamples.github.io/) is
+# maintained here, in-tree, like any other subproject. It is PUBLISHED by
+# exporting its tree via `git subtree push` into the sibling, top-level,
+# read-only repo github.com/FormExamples/formexamples.github.io — the
+# GitHub-convention <org>.github.io repo, which GitHub auto-serves at the
+# domain root (unlike a project repo's Pages, which nests under
+# /<repo-name>/). The spec's own directive: never work directly in the
+# sibling; always re-publish it from here via this tool.
+#
+# formexamples.github.io/.github/workflows/deploy.yml is inert in the
+# monorepo (GitHub only reads .github/workflows/ at a repo's root) but
+# becomes the sibling repo's real, root-level deploy workflow once
+# exported — so the sibling repo builds and deploys itself on every push
+# this tool makes to it, no separate setup needed there.
+#
+# Usage:
+#   bin/publish-github-pages-subtree              # export + push
+#   bin/publish-github-pages-subtree --dry-run     # split only, don't push
+
+set -euf
+
+top="$(git rev-parse --show-toplevel)"
+prefix="formexamples.github.io"
+remote_name="formexamples-github-io-pages"
+remote_url="git@github.com:FormExamples/formexamples.github.io.git"
+branch="pages-export"
+
+cd "$top"
+
+if ! git remote get-url "$remote_name" >/dev/null 2>&1; then
+    git remote add "$remote_name" "$remote_url"
+fi
+
+if [ "${1:-}" = "--dry-run" ]; then
+    git subtree split --prefix="$prefix" -b "$branch"
+    echo "split only (--dry-run): branch '$branch' created, not pushed"
+    exit 0
+fi
+
+git subtree push --prefix="$prefix" "$remote_name" main
+echo "pushed $prefix/ -> $remote_url main"
