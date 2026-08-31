@@ -20,7 +20,7 @@
     "@sveltejs/kit": "^2.70.3",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.4.0",
     "lily-design-system-svelte-share-picker": "^0.1.1",
     "lily-design-system-svelte-text-size-picker": "^0.1.1",
     "lily-design-system-svelte-theme-picker": "^0.1.1",
