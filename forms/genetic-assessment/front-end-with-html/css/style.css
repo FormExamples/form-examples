@@ -6,6 +6,12 @@
  *  Design tokens
  * -------------------------------------------------------------- */
 :root {
+  /* Darkened from the raw Lily token (#00d390, 1.96:1 vs white) to clear WCAG AA 4.5:1 where this repo uses it as text — see CHANGELOG.md. */
+  --color-success: #007e56;
+  /* Darkened from the raw Lily token (#fcb700, 1.76:1 vs white) to clear WCAG AA 4.5:1 where this repo uses it as text — see CHANGELOG.md. */
+  --color-warning: #976d00;
+  /* Darkened from the raw Lily token (#00bafe, 2.22:1 vs white) to clear WCAG AA 4.5:1 where this repo uses it as text — see CHANGELOG.md. */
+  --color-info: #0078a5;
     --color-primary-dark: #1d4ed8;
     --color-primary-light: color-mix(
         in oklab,
@@ -17,7 +23,7 @@
     --color-text: var(--color-base-content);
     --color-muted: color-mix(
         in oklab,
-        var(--color-base-content) 62%,
+        var(--color-base-content) 68%,
         var(--color-base-100)
     );
     --color-border: var(--color-base-300);
@@ -27,7 +33,10 @@
         var(--color-base-content) 28%
     );
     --color-focus: var(--color-primary);
-    --color-danger: var(--color-error);
+    /* Darkened from --color-error (#ff627d, 2.88:1 vs white) to clear WCAG AA
+     4.5:1 for .error-message/.error-summary text — see CHANGELOG.md. */
+
+    --color-danger: #b24457;
     --color-danger-bg: color-mix(
         in oklab,
         var(--color-error) 16%,

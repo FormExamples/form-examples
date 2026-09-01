@@ -18,6 +18,58 @@ for them.
 
 ### Fixed
 
+- **Fleet-wide WCAG AA colour-contrast sweep: `bin/test-e2e --html --all`
+  run in full for the first time this session (355 forms), found 18
+  failures, fixed via a new `bin/html-error-message-contrast-fix`,
+  re-run three times as the fix itself was corrected, ending 355/355
+  clean (710/710 tests).** Root cause, common to all of it: several
+  semantic-colour CSS custom properties (`--color-danger`,
+  `--color-success`, `--color-warning`, `--color-info`) are used
+  directly as *text* colour (or, for warning, as a white-text button
+  fill) against the raw Lily brand token's own value — each comfortably
+  legible as an *accent* (a border, an icon, a light background tint)
+  but too light for AA text contrast against white (1.75:1–2.88:1;
+  needs 4.5:1). `--color-danger: var(--color-error);` alone was present
+  in 352/355 forms — only 18 failed outright because the rest don't
+  render a visible error message at the smoke test's default page
+  state; the other 334 carried the identical latent bug.
+  - Darkened each token to a same-hue shade that clears 4.5:1 against
+    white: `--color-danger` #ff627d→#b24457 (5.44:1), `--color-success`
+    #00d390→#007e56 (5.10:1), `--color-warning` #fcb700→#976d00
+    (4.66:1), `--color-info` #00bafe→#0078a5 (4.96:1, pre-emptive — not
+    caught failing by this smoke test, but the identical
+    never-safe-as-text token shape).
+  - **First attempt at success/warning/info got it wrong and was
+    reverted before commit.** Overriding the raw token directly also
+    darkens `--color-success-bg: color-mix(in oklab,
+    var(--color-success) 18%, var(--color-base-100))`, which derives
+    from the *same* token — so the badge's own background darkened
+    along with its text and undercut the fix. Verified live (not
+    assumed): `--color-danger` didn't have this problem
+    (`--color-danger-bg` derives from the untouched `--color-error`),
+    but re-running the full sweep after the success/warning/info change
+    showed `meeting`'s "Organiser" badge only 3.97:1 (needs 4.5:1) — the
+    darkened text on its now-also-darkened background. Fixed by also
+    freezing `--color-success-bg`/`--color-warning-bg` to the *original*
+    raw hex (not the token, which now points at the darkened value),
+    decoupling text from background; re-verified live before moving on.
+  - A third, unrelated near-miss survived even that: `--color-muted`
+    (`color-mix(in oklab, var(--color-base-content) 62%,
+    var(--color-base-100))`, identical in 334/355 forms, used for plain
+    body/muted text everywhere) at 4.41:1 against `--color-warning-bg`
+    specifically — off by 0.09, only visible in
+    `biopsy-test-request`'s default demo data (a "medium" severity
+    flag). Bumped the mix from 62% to 68% (kept relative, not a
+    hardcoded hex — `--color-base-content` is theme-swappable in these
+    forms): 5.47:1 against the warning tint, and better against white
+    too (7.09:1 vs 5.73:1 before).
+  - Verified throughout with real installs and live renders, not
+    assumed: each stage re-checked via `bin/lily-html-refactor
+    --check --all` (0 drift) and a full `bin/test-e2e --html --all`
+    re-run; the regression in the middle was caught by exactly that
+    discipline — re-running instead of trusting the first "fixed"
+    result.
+
 - **`bin/test-e2e --html` a11y sweep, run as verification after the theme
   re-sync above, caught a real, pre-existing `color-contrast` violation**
   in `international-certificate-of-vaccination-or-prophylaxis` (a "theme

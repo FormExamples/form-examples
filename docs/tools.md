@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-80 tools.
+81 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -22,6 +22,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/generate-spec.py`](#generate-specpy)
 - [`bin/generate-tools-doc.py`](#generate-tools-docpy)
 - [`bin/html-date-time-picker-vendor`](#html-date-time-picker-vendor)
+- [`bin/html-error-message-contrast-fix`](#html-error-message-contrast-fix)
 - [`bin/html-helpers-chooser-rename`](#html-helpers-chooser-rename)
 - [`bin/html-helpers-picker-rename`](#html-helpers-picker-rename)
 - [`bin/html-share-button-refactor`](#html-share-button-refactor)
@@ -364,6 +365,81 @@ Usage:
   bin/html-date-time-picker-vendor --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="html-error-message-contrast-fix"><code>bin/html-error-message-contrast-fix</code></h2>
+
+```text
+bin/html-error-message-contrast-fix — fix fleet-wide semantic-colour
+text-contrast bugs in front-end-with-html/css/style.css.
+
+Found via bin/test-e2e --html --all (355 forms), in two waves:
+
+1. `--color-danger: var(--color-error);` — 352/355 forms alias the
+   danger/error text colour directly to the raw Lily brand token
+   (oklch(71% 0.194 13.428) = #ff627d, 2.88:1 against white; WCAG AA
+   needs 4.5:1). 18 forms failed axe's color-contrast check outright
+   (the rest carry the identical latent bug, just not visibly rendering
+   an error message at this smoke test's default page state). Fixed by
+   overriding --color-danger to a darkened shade of the same hue
+   (#b24457, 5.44:1). --color-danger-bg (a light background tint) and
+   --color-error itself (used correctly elsewhere, e.g. borders/icons)
+   are untouched.
+
+2. Re-running the sweep after (1) found 10 forms still failing — a
+   second, parallel bug: `color: var(--color-success)` (350/355 forms,
+   same "raw brand token as text" pattern, e.g. the
+   `.step-list-item[data-status="finished"]` badge: #00d390 on its own
+   #dff8eb tint, 1.75:1) and `--color-warning` used as a white-text
+   button/badge fill (#fcb700, 1.76:1 for white text). --color-info
+   wasn't caught failing by this particular smoke test, but shares the
+   identical token-definition shape (oklch 74%/0.16/232.661, 2.22:1
+   against white) and is fixed pre-emptively rather than left as the
+   same latent bug for a future sweep to rediscover.
+
+   First attempt at this got it wrong and was reverted before commit:
+   overriding the raw --color-success/-warning/-info tokens directly
+   (mirroring the --color-danger fix) also darkens
+   `--color-success-bg: color-mix(in oklab, var(--color-success) 18%,
+   var(--color-base-100))` — which derives from the SAME token — so the
+   badge's own background got darker along with its text, undercutting
+   the fix (verified live: #007e56 on the resulting #d7e7df was only
+   3.97:1, still failing). --color-danger didn't have this problem
+   because --color-danger-bg derives from the untouched --color-error,
+   not from --color-danger itself. Fixed by also freezing
+   --color-success-bg/--color-warning-bg to the *original* raw hex
+   (not the token, which now points at the darkened value) wherever
+   they're already defined, decoupling the background from the text
+   override — then re-verified live against the actual rendered
+   background, not just against plain white.
+
+All darkened values, computed by scaling each token's sRGB channels
+until crossing 4.5:1 against white, then confirmed live (Playwright +
+axe-core) against each token's own actual rendered *-bg background:
+
+  --color-danger:  #ff627d -> #b24457  (5.44:1 vs white; --color-danger-bg untouched)
+  --color-success: #00d390 -> #007e56  (5.10:1 vs white; --color-success-bg frozen to the original #00d390)
+  --color-warning: #fcb700 -> #976d00  (4.66:1 vs white; --color-warning-bg frozen to the original #fcb700)
+  --color-info:    #00bafe -> #0078a5  (4.96:1 vs white; no form defines --color-info-bg)
+
+3. Re-running the full sweep after (2) left exactly 1 of 355 forms
+   failing (biopsy-test-request): `.flag-category`/`.flag-action`
+   (`color: var(--color-muted)`) inside `.flags li.flag-medium`
+   (`background: var(--color-warning-bg)`) — #666668 on #eae1d1,
+   4.41:1, off by 0.09. --color-muted itself
+   (`color-mix(in oklab, var(--color-base-content) 62%,
+   var(--color-base-100))`) is identical in 334/355 forms and reused
+   for plain body/muted text everywhere, not just this one badge, so
+   the same near-miss is latent fleet-wide (only this one form's
+   default demo data happens to render a "medium" severity flag). Bumped
+   the mix from 62% to 68% (kept as a relative color-mix() percentage,
+   not a hardcoded hex, since --color-base-content is theme-swappable in
+   these forms) — #666668 -> #58585b, 5.47:1 against the warning tint
+   and *better* against white (7.09:1 vs 5.73:1 before), confirmed via
+   the same oklab conversion used for the other three tokens.
+
+Usage:
+  bin/html-error-message-contrast-fix [--check] [--dry-run]
 ```
 
 <h2 id="html-helpers-chooser-rename"><code>bin/html-helpers-chooser-rename</code></h2>

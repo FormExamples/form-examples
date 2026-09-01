@@ -1,0 +1,219 @@
+#!/usr/bin/env python3
+"""bin/html-error-message-contrast-fix — fix fleet-wide semantic-colour
+text-contrast bugs in front-end-with-html/css/style.css.
+
+Found via bin/test-e2e --html --all (355 forms), in two waves:
+
+1. `--color-danger: var(--color-error);` — 352/355 forms alias the
+   danger/error text colour directly to the raw Lily brand token
+   (oklch(71% 0.194 13.428) = #ff627d, 2.88:1 against white; WCAG AA
+   needs 4.5:1). 18 forms failed axe's color-contrast check outright
+   (the rest carry the identical latent bug, just not visibly rendering
+   an error message at this smoke test's default page state). Fixed by
+   overriding --color-danger to a darkened shade of the same hue
+   (#b24457, 5.44:1). --color-danger-bg (a light background tint) and
+   --color-error itself (used correctly elsewhere, e.g. borders/icons)
+   are untouched.
+
+2. Re-running the sweep after (1) found 10 forms still failing — a
+   second, parallel bug: `color: var(--color-success)` (350/355 forms,
+   same "raw brand token as text" pattern, e.g. the
+   `.step-list-item[data-status="finished"]` badge: #00d390 on its own
+   #dff8eb tint, 1.75:1) and `--color-warning` used as a white-text
+   button/badge fill (#fcb700, 1.76:1 for white text). --color-info
+   wasn't caught failing by this particular smoke test, but shares the
+   identical token-definition shape (oklch 74%/0.16/232.661, 2.22:1
+   against white) and is fixed pre-emptively rather than left as the
+   same latent bug for a future sweep to rediscover.
+
+   First attempt at this got it wrong and was reverted before commit:
+   overriding the raw --color-success/-warning/-info tokens directly
+   (mirroring the --color-danger fix) also darkens
+   `--color-success-bg: color-mix(in oklab, var(--color-success) 18%,
+   var(--color-base-100))` — which derives from the SAME token — so the
+   badge's own background got darker along with its text, undercutting
+   the fix (verified live: #007e56 on the resulting #d7e7df was only
+   3.97:1, still failing). --color-danger didn't have this problem
+   because --color-danger-bg derives from the untouched --color-error,
+   not from --color-danger itself. Fixed by also freezing
+   --color-success-bg/--color-warning-bg to the *original* raw hex
+   (not the token, which now points at the darkened value) wherever
+   they're already defined, decoupling the background from the text
+   override — then re-verified live against the actual rendered
+   background, not just against plain white.
+
+All darkened values, computed by scaling each token's sRGB channels
+until crossing 4.5:1 against white, then confirmed live (Playwright +
+axe-core) against each token's own actual rendered *-bg background:
+
+  --color-danger:  #ff627d -> #b24457  (5.44:1 vs white; --color-danger-bg untouched)
+  --color-success: #00d390 -> #007e56  (5.10:1 vs white; --color-success-bg frozen to the original #00d390)
+  --color-warning: #fcb700 -> #976d00  (4.66:1 vs white; --color-warning-bg frozen to the original #fcb700)
+  --color-info:    #00bafe -> #0078a5  (4.96:1 vs white; no form defines --color-info-bg)
+
+3. Re-running the full sweep after (2) left exactly 1 of 355 forms
+   failing (biopsy-test-request): `.flag-category`/`.flag-action`
+   (`color: var(--color-muted)`) inside `.flags li.flag-medium`
+   (`background: var(--color-warning-bg)`) — #666668 on #eae1d1,
+   4.41:1, off by 0.09. --color-muted itself
+   (`color-mix(in oklab, var(--color-base-content) 62%,
+   var(--color-base-100))`) is identical in 334/355 forms and reused
+   for plain body/muted text everywhere, not just this one badge, so
+   the same near-miss is latent fleet-wide (only this one form's
+   default demo data happens to render a "medium" severity flag). Bumped
+   the mix from 62% to 68% (kept as a relative color-mix() percentage,
+   not a hardcoded hex, since --color-base-content is theme-swappable in
+   these forms) — #666668 -> #58585b, 5.47:1 against the warning tint
+   and *better* against white (7.09:1 vs 5.73:1 before), confirmed via
+   the same oklab conversion used for the other three tokens.
+
+Usage:
+  bin/html-error-message-contrast-fix [--check] [--dry-run]
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+DANGER_LINE_RE = re.compile(r"(\s*)--color-danger:\s*var\(--color-error\);\s*\n")
+DANGER_VALUE = "#b24457"
+DANGER_COMMENT = (
+    "/* Darkened from --color-error (#ff627d, 2.88:1 vs white) to clear WCAG AA\n"
+    "     4.5:1 for .error-message/.error-summary text — see CHANGELOG.md. */\n"
+)
+
+ROOT_OPEN_RE = re.compile(r"^:root \{\n", re.MULTILINE)
+
+# token -> (darkened text value, original raw-token hex, original contrast vs white)
+OVERRIDES = {
+    "--color-success": ("#007e56", "#00d390", "1.96"),
+    "--color-warning": ("#976d00", "#fcb700", "1.76"),
+    "--color-info": ("#0078a5", "#00bafe", "2.22"),
+}
+
+# For each darkened token, the background variable(s) (if defined in this
+# file) that must keep deriving from the *original* colour, not the new
+# darkened one, or the badge's own background darkens along with its text
+# and undercuts the fix (see module docstring, point 2).
+BG_VAR_RE = {
+    token: re.compile(
+        rf"(--color-{name}-bg:\s*color-mix\(in oklab,\s*)var\({re.escape(token)}\)(\s*\d+%)"
+    )
+    for token, name in (
+        ("--color-success", "success"),
+        ("--color-warning", "warning"),
+        ("--color-info", "info"),
+    )
+}
+
+MUTED_RE = re.compile(
+    r"(--color-muted:\s*color-mix\(\s*in oklab,\s*var\(--color-base-content\)\s*)62(%)"
+)
+
+
+def tracked_files() -> list[Path]:
+    out = subprocess.run(
+        ["git", "ls-files", "--", "*/front-end-with-html/css/style.css"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    return [ROOT / line for line in out.splitlines() if line]
+
+
+def fixed(text: str) -> tuple[str, list[str]] | None:
+    changes: list[str] = []
+    new_text = text
+
+    m = DANGER_LINE_RE.search(new_text)
+    if m:
+        indent = m.group(1)
+        replacement = f"{indent}{DANGER_COMMENT}{indent}--color-danger: {DANGER_VALUE};\n"
+        new_text = new_text[: m.start()] + replacement + new_text[m.end() :]
+        changes.append("--color-danger")
+
+    # Freeze each token's own *-bg color-mix() to the ORIGINAL raw hex before
+    # overriding the token itself — otherwise the badge's background darkens
+    # along with its text and undercuts the fix (see module docstring).
+    for token, bg_re in BG_VAR_RE.items():
+        dark, source, _ = OVERRIDES[token]
+        new_text, n = bg_re.subn(rf"\g<1>{source}\g<2>", new_text)
+        if n:
+            changes.append(f"{token}-bg frozen to {source}")
+
+    # Insert missing overrides right after :root {, in a fixed, deterministic
+    # order — only for tokens this file doesn't already override locally.
+    to_insert = [
+        token
+        for token in ("--color-success", "--color-warning", "--color-info")
+        if not re.search(rf"^\s*{re.escape(token)}\s*:", new_text, re.MULTILINE)
+    ]
+    if to_insert:
+        m2 = ROOT_OPEN_RE.search(new_text)
+        if m2:
+            lines = []
+            for token in to_insert:
+                dark, source, source_contrast = OVERRIDES[token]
+                lines.append(
+                    f"  /* Darkened from the raw Lily token ({source}, {source_contrast}:1 vs "
+                    f"white) to clear WCAG AA 4.5:1 where this repo uses it as text — see "
+                    f"CHANGELOG.md. */\n  {token}: {dark};\n"
+                )
+                changes.append(token)
+            block = "".join(lines)
+            new_text = new_text[: m2.end()] + block + new_text[m2.end() :]
+
+    new_text, n = MUTED_RE.subn(r"\g<1>68\g<2>", new_text)
+    if n:
+        changes.append("--color-muted 62% -> 68%")
+
+    if not changes:
+        return None
+    return new_text, changes
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="report drift; exit non-zero if any")
+    parser.add_argument("--dry-run", action="store_true", help="report what would change")
+    args = parser.parse_args()
+
+    apply = not (args.check or args.dry_run)
+    drifted: dict[str, list[str]] = {}
+
+    for path in tracked_files():
+        text = path.read_text()
+        result = fixed(text)
+        if result is not None:
+            new_text, changes = result
+            drifted[str(path.relative_to(ROOT))] = changes
+            if apply:
+                path.write_text(new_text)
+
+    if args.check:
+        if drifted:
+            total = sum(len(v) for v in drifted.values())
+            print(f"html-error-message-contrast-fix: {len(drifted)} file(s), {total} change(s) needed")
+            for name, changes in list(drifted.items())[:15]:
+                print(f"  {name}: {', '.join(changes)}")
+            if len(drifted) > 15:
+                print(f"  … and {len(drifted) - 15} more")
+            return 1
+        print("html-error-message-contrast-fix: clean, every form uses the accessible semantic-colour values")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    total = sum(len(v) for v in drifted.values())
+    print(f"html-error-message-contrast-fix: {len(drifted)} file(s), {total} change(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
