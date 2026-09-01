@@ -6,6 +6,8 @@
  * only stylesheet required to render a Lily-styled page.
  *
  * Credit for the theme source: DaisyUI (https://daisyui.com/)
+ *
+ * Upstream tracked: DaisyUI v5-era theme palette, adapted to Lily tokens and hooks.
  * ========================================================================= */
 
 /* Theme tokens — the colour, radius, border, and depth variables consumed
@@ -17,87 +19,99 @@
 :where(:root, :root[data-theme="business"]) {
     color-scheme: dark;
 
-    /* Page-level surface (primary canvas). Sits behind body copy and
-       primary content areas. Lightest base shade in light themes,
-       deepest in dark themes. */
-    --color-base-100: oklch(24.353% 0 0);
-    /* Secondary surface — section panels, card backgrounds, sidebars,
-       table-header fills. One step away from the page surface. */
-    --color-base-200: oklch(22.648% 0 0);
-    /* Tertiary surface — dividers, sunken wells, hover-row backgrounds.
-       The most muted of the three base shades. */
-    --color-base-300: oklch(20.944% 0 0);
-    /* Primary text colour. High-contrast against base-100 to meet WCAG
-       contrast ratios for body copy. */
+    /* Page-level surface (primary canvas). Sits behind body copy
+       and primary content areas. Lightest base shade in light
+       themes, deepest in dark themes. */
+    --color-base-100: oklch(24.35% 0 0);
+    /* Secondary surface — section panels, card backgrounds,
+       sidebars, table-header fills. One step away from the page
+       surface. */
+    --color-base-200: oklch(22.65% 0 0);
+    /* Tertiary surface — dividers, sunken wells, hover-row
+       backgrounds. The most muted of the three base shades. */
+    --color-base-300: oklch(20.94% 0 0);
+    /* Primary text colour. High-contrast against base-100 to meet
+       WCAG contrast ratios for body copy. */
     --color-base-content: oklch(84.87% 0 0);
-    /* Primary brand / action colour. Used on primary buttons, active
-       navigation items, selected states, and the focus ring. */
-    --color-primary: oklch(41.703% 0.099 251.473);
-    /* Foreground colour used over `--color-primary` fills (so primary
-       buttons retain a guaranteed contrast ratio). */
+    /* Primary brand / action colour. Used on primary buttons,
+       active navigation items, selected states, and the focus
+       ring. */
+    --color-primary: oklch(41.7% 0.099 251.473);
+    /* Foreground colour used over `--color-primary` fills (so
+       primary buttons retain a guaranteed contrast ratio). */
     --color-primary-content: oklch(88.34% 0.019 251.473);
-    /* Secondary brand colour. Pressed/hover state for primary buttons
-       and visited links; also drives the secondary chrome family. */
-    --color-secondary: oklch(64.092% 0.027 229.389);
+    /* Secondary brand colour. Pressed/hover state for primary
+       buttons and visited links; also drives the secondary chrome
+       family. */
+    --color-secondary: oklch(64.09% 0.027 229.389);
     /* Foreground colour used over `--color-secondary` fills. */
-    --color-secondary-content: oklch(12.818% 0.005 229.389);
+    --color-secondary-content: oklch(12.82% 0.005 229.389);
     /* Accent colour — used sparingly for emphasis, the AI label,
        illustrations, and tertiary call-outs. */
-    --color-accent: oklch(67.271% 0.167 35.791);
+    --color-accent: oklch(67.27% 0.167 35.791);
     /* Foreground colour used over `--color-accent` fills. */
-    --color-accent-content: oklch(13.454% 0.033 35.791);
-    /* Neutral chrome surface — footer bars, code blocks, tooltips,
-       government-banner strips. Typically the theme's darkest neutral. */
-    --color-neutral: oklch(27.441% 0.013 253.041);
+    --color-accent-content: oklch(13.45% 0.033 35.791);
+    /* Neutral chrome surface — footer bars, code blocks,
+       tooltips, government-banner strips. Typically the theme's
+       darkest neutral. */
+    --color-neutral: oklch(27.44% 0.013 253.041);
     /* Foreground colour used over `--color-neutral` fills. */
-    --color-neutral-content: oklch(85.488% 0.002 253.041);
+    --color-neutral-content: oklch(85.49% 0.002 253.041);
     /* Informational status colour — informational banners, links,
        'did-you-know' callouts. */
-    --color-info: oklch(62.616% 0.143 240.033);
+    --color-info: oklch(62.62% 0.143 240.033);
     /* Foreground colour used over `--color-info` fills. */
-    --color-info-content: oklch(12.523% 0.028 240.033);
-    /* Success / confirmation colour — used on success panels, completed
-       step indicators, validation pass states, and the green RAG status. */
-    --color-success: oklch(70.226% 0.094 156.596);
+    --color-info-content: oklch(12.52% 0.028 240.033);
+    /* Success / confirmation colour — used on success panels,
+       completed step indicators, validation pass states, and the
+       green RAG status. */
+    --color-success: oklch(70.23% 0.094 156.596);
     /* Foreground colour used over `--color-success` fills. */
-    --color-success-content: oklch(14.045% 0.018 156.596);
+    --color-success-content: oklch(14.04% 0.018 156.596);
     /* Warning colour — yellow/amber band; used on phase banners,
-       in-progress states, validation warnings, and the amber RAG status. */
-    --color-warning: oklch(77.482% 0.115 81.519);
-    /* Foreground colour used over `--color-warning` fills. Often dark so
-       text remains legible on a bright yellow background. */
-    --color-warning-content: oklch(15.496% 0.023 81.519);
-    /* Error / destructive colour — used on alert dialogs, error messages,
-       validation failures, urgent care cards, and the red RAG status. */
+       in-progress states, validation warnings, and the amber RAG
+       status. */
+    --color-warning: oklch(77.48% 0.115 81.519);
+    /* Foreground colour used over `--color-warning` fills. Often
+       dark so text remains legible on a bright yellow background. */
+    --color-warning-content: oklch(15.5% 0.023 81.519);
+    /* Error / destructive colour — used on alert dialogs, error
+       messages, validation failures, urgent care cards, and the
+       red RAG status. */
     --color-error: oklch(51.61% 0.146 29.674);
     /* Foreground colour used over `--color-error` fills. */
-    --color-error-content: oklch(90.322% 0.029 29.674);
+    --color-error-content: oklch(90.32% 0.029 29.674);
     /* Smallest corner radius. Applied to chips, badges, switches,
-       and radio/checkbox containers (mapped to `--lily-radius-sm`). */
+       and radio/checkbox containers (mapped to `--lily-radius-
+       sm`). */
     --radius-selector: 0rem;
-    /* Medium corner radius. Applied to inputs, buttons, menu items,
-       tooltips, and most everyday form controls
-       (mapped to `--lily-radius-md`). */
+    /* Medium corner radius. Applied to inputs, buttons, menu
+       items, tooltips, and most everyday form controls (mapped to
+       `--lily-radius-md`). */
     --radius-field: 0.25rem;
-    /* Largest corner radius. Applied to cards, dialogs, drawers, and
-       hero blocks (mapped to `--lily-radius-lg`). */
+    /* Largest corner radius. Applied to cards, dialogs, drawers,
+       and hero blocks (mapped to `--lily-radius-lg`). */
     --radius-box: 0.25rem;
     /* Base size for selector-style controls (checkbox/radio glyph
        size, switch thumb diameter). Currently unused by Lily's
-       baseline component rules but available for theme extensions. */
+       baseline component rules but available for theme
+       extensions. */
     --size-selector: 0.25rem;
-    /* Base size for field-style controls (input height multiplier).
-       Currently unused by Lily's baseline component rules but
-       available for theme extensions. */
+    /* Base size for field-style controls (input height
+       multiplier). Currently unused by Lily's baseline component
+       rules but available for theme extensions. */
     --size-field: 0.25rem;
-    /* Default border width applied to inputs, buttons, dividers, table
-       cells, etc. Single source of truth for the system's stroke weight. */
+    /* Default border width applied to inputs, buttons, dividers,
+       table cells, etc. Single source of truth for the system's
+       stroke weight. */
     --border: 1px;
-    /* Depth flag (0 or 1). Lily's baseline rules read it implicitly via
-       the shadow tokens; a depth-0 theme effectively renders flat. */
+    /* Depth flag (0 or 1). Lily's baseline rules read it
+       implicitly via the shadow tokens; a depth-0 theme
+       effectively renders flat. */
     --depth: 0;
-    /* Noise flag (0 or 1). Reserved for theme extensions that want to
-       layer a subtle texture; the baseline rules do not consume it. */
+    /* Noise flag (0 or 1). Reserved for theme extensions that
+       want to layer a subtle texture; the baseline rules do not
+       consume it. */
     --noise: 0;
 }
 
@@ -224,7 +238,6 @@
         .input,
         .select,
         .option,
-        .link,
         .menu-item,
         .tab-bar-button,
         .switch-button,
@@ -495,15 +508,15 @@
      * pre-formatted data. Every Lily class ending in `-view` is a span/div
      * that renders a value the user shouldn't edit.
      *
-     * The exclusions (`theme-view`, `scroll-view`, `split-view`, `tree-view`)
+     * The exclusions (`theme-view`, `split-view`)
      * are larger containers that don't fit the chip pattern — they're
      * styled separately further down.
      * ====================================================================== */
 
     :where(
-        [class$="-view"]:not(.theme-view):not(.scroll-view):not(
+        [class$="-view"]:not(.theme-view):not(
                 .split-view
-            ):not(.tree-view)
+            )
     ) {
         display: inline-block;
         padding: 0.125rem 0.5rem;
@@ -990,7 +1003,7 @@
     /* --- Summary list (three-column key/value/action grid) ------------------ */
     :where(.summary-list) {
         display: grid;
-        grid-template-columns: max-content 1fr auto;
+        grid-template-columns: minmax(0, max-content) 1fr auto;
         column-gap: 1rem;
         row-gap: 0.5rem;
     }
@@ -2638,7 +2651,11 @@
         width: 100%;
         max-width: 100%;
         border-radius: var(--lily-radius-md);
+        /* Video chrome is black in every theme; pair the text colour with
+           it here rather than inheriting the theme's (possibly dark)
+           content colour onto a black surface. */
         background-color: black;
+        color: white;
     }
 
     /* ==========================================================================
@@ -2867,6 +2884,11 @@
         background-color: var(--color-primary);
         color: var(--color-primary-content);
     }
+    /* Links inside the call-to-action inherit its content colour —
+       otherwise the UA default link blue lands on the primary fill. */
+    :where(.call-to-action) :where(a) {
+        color: inherit;
+    }
     /* Expander / collapsible / details — boxed disclosure controls. */
     :where(.expander, .collapsible, .details) {
         display: block;
@@ -3072,4 +3094,61 @@
             border-color: var(--lily-text);
         }
     }
+}
+
+/* ============================================================================
+ * WCAG 2.2 target-size (minimum) floor — 2.5.8
+ *
+ * Every interactive Lily hook offers a >=24x24 CSS-pixel target. Links
+ * that render as short inline text (a pagination "1", a breadcrumb crumb)
+ * fail the 24px floor under typographic sizing alone, so the link-shaped
+ * hooks become inline-block with a minimum box. :where() keeps specificity
+ * at zero, so any consumer rule still wins. Shared verbatim by all themes.
+ * ========================================================================= */
+
+:where(.action-link,
+       .back-link,
+       .breadcrumb-list-item > a,
+       .pagination-list-item > a,
+       .contents-list-item > a,
+       .section-list-item > a) {
+    display: inline-block;
+    min-inline-size: 24px;
+    min-block-size: 24px;
+}
+
+:where(.pagination-list-item > a) {
+    text-align: center;
+}
+
+:where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    min-block-size: 24px;
+}
+
+/* ============================================================================
+ * Overflow guards — narrow-viewport safety, shared verbatim by all themes.
+ *
+ * Content that is intrinsically wider than the viewport scrolls or wraps
+ * within its own box instead of pushing the page wider. Deliberately NOT
+ * `display: block` on <table> — that strips implicit table semantics for
+ * assistive technology; capping width and letting cell content wrap keeps
+ * both the layout and the roles. Proven in the example apps' own
+ * stylesheets before the theme layer took over component styling.
+ * ========================================================================= */
+
+:where(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+:where(table) {
+    max-width: 100%;
+}
+
+:where(th, td) {
+    overflow-wrap: anywhere;
+}
+
+:where(a, code) {
+    overflow-wrap: anywhere;
 }

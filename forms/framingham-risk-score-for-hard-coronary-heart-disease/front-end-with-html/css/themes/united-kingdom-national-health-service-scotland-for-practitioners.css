@@ -56,6 +56,11 @@
  *      more clinical reading of the same palette with magenta/violet
  *      callouts reserved for safety messaging.
  *
+ * Upstream tracked: NHS.UK frontend v9.x visual language (v10 is in
+ * pre-release; re-check the palette when it goes stable). Independent
+ * implementation against Lily class hooks; not affiliated with or
+ * endorsed by the NHS.
+ *
  * Canonical references
  *   - NHS Scotland Identity Standards (Scottish Government CMO Directorate):
  *       https://www.publications.scot.nhs.uk/
@@ -155,133 +160,143 @@
 
 /* Theme tokens — the colour, radius, border, and depth variables consumed
  * by every Lily component rule below. The theme applies by default (`:root`)
- * and also when explicitly opted into via `<html data-theme="united-kingdom-national-health-service-scotland">`,
+ * and also when explicitly opted into via `<html data-theme="united-kingdom-national-health-service-scotland-for-practitioners">`,
  * so multiple themes can coexist in one document and be switched at runtime
  * by updating the `data-theme` attribute. */
 
-:where(:root, :root[data-theme="united-kingdom-national-health-service-scotland"]) {
+:where(:root, :root[data-theme="united-kingdom-national-health-service-scotland-for-practitioners"]) {
     color-scheme: light;
 
-    /* ---- Surfaces -------------------------------------------------------- */
-    /* base-100: page background. NHS White #FFFFFF — the canvas behind   */
-    /* body copy, primary content cards, and dialog modals.                */
+    /* ---- Surfaces
+       -------------------------------------------------------- */
+       /* base-100: page background. NHS White #FFFFFF — the
+       canvas behind */ /* body copy, primary content cards, and
+       dialog modals. */
     --color-base-100: oklch(100% 0 0);
-
-    /* base-200: secondary surface. NHS Inform Off-White #F0F4F5 — used    */
-    /* on nhsinform.scot for the page wash behind the main column at      */
-    /* wide breakpoints, and for summary / "at a glance" panels.          */
+    /* base-200: secondary surface. NHS Inform Off-White #F0F4F5 —
+       used */ /* on nhsinform.scot for the page wash behind the
+       main column at */ /* wide breakpoints, and for summary /
+       "at a glance" panels. */
     --color-base-200: oklch(96% 0.008 220);
-
-    /* base-300: tertiary surface. NHS Pale Grey #E8EDEE — divider rows,  */
-    /* table zebra striping, list-row hover, and the "grey panel" used    */
-    /* for sectioned navigation in NHS 24 service journeys.               */
-    --color-base-300: oklch(92% 0.010 220);
-
-    /* base-content: primary text. NHS Black #212B32 — warm near-black    */
-    /* tuned to reduce on-screen glare for users reading long-form        */
-    /* clinical content (a shared NHS UK / NHS Scotland choice).          */
+    /* base-300: tertiary surface. NHS Pale Grey #E8EDEE — divider
+       rows, */ /* table zebra striping, list-row hover, and the
+       "grey panel" used */ /* for sectioned navigation in NHS 24
+       service journeys. */
+    --color-base-300: oklch(92% 0.01 220);
+    /* base-content: primary text. NHS Black #212B32 — warm near-
+       black */ /* tuned to reduce on-screen glare for users
+       reading long-form */ /* clinical content (a shared NHS UK /
+       NHS Scotland choice). */
     --color-base-content: oklch(26% 0.015 230);
-
-    /* ---- Primary (NHS Scotland Navy) ------------------------------------ */
-    /* NHS Scotland Navy #003087 (Pantone 287) — the flagship brand        */
-    /* colour. Darker than NHS England's #005EB8: this is the single       */
-    /* clearest visual signal that a service belongs to NHS Scotland       */
-    /* rather than NHS England. Used on the NHS Scotland logo block,      */
-    /* primary buttons, the global header band on nhsinform.scot, and     */
-    /* the active state of primary nav.                                    */
+    /* ---- Primary (NHS Scotland Navy)
+       ------------------------------------ */ /* NHS Scotland
+       Navy #003087 (Pantone 287) — the flagship brand */ /*
+       colour. Darker than NHS England's #005EB8: this is the
+       single */ /* clearest visual signal that a service belongs
+       to NHS Scotland */ /* rather than NHS England. Used on the
+       NHS Scotland logo block, */ /* primary buttons, the global
+       header band on nhsinform.scot, and */ /* the active state
+       of primary nav. */
     --color-primary: oklch(32% 0.18 264);
     --color-primary-content: oklch(100% 0 0);
-
-    /* ---- Secondary (NHS Scotland Mid Blue) ------------------------------ */
-    /* NHS Scotland Mid Blue #0078D4 — the link colour on nhsinform.scot   */
-    /* and the secondary-button fill on NHS 24 journeys. Sits between     */
-    /* the navy primary and the bright accent so layered buttons keep a   */
-    /* clear hierarchy without losing the NHS Scotland identity.          */
+    /* ---- Secondary (NHS Scotland Mid Blue)
+       ------------------------------ */ /* NHS Scotland Mid Blue
+       #0078D4 — the link colour on nhsinform.scot */ /* and the
+       secondary-button fill on NHS 24 journeys. Sits between */
+       /* the navy primary and the bright accent so layered
+       buttons keep a */ /* clear hierarchy without losing the NHS
+       Scotland identity. */
     --color-secondary: oklch(52% 0.18 248);
     --color-secondary-content: oklch(100% 0 0);
-
-    /* ---- Accent (NHS Aqua / Teal) --------------------------------------- */
-    /* NHS Aqua / Teal #00A499 — supplementary accent associated with      */
-    /* NHS 24 chrome and used for illustrative chart series. Not for      */
-    /* primary calls to action; reserve for decorative emphasis,          */
-    /* category chips, and data visualisation.                            */
-    --color-accent: oklch(62% 0.11 192);
+    /* ---- Accent (NHS Aqua / Teal)
+       --------------------------------------- */ /* NHS Aqua /
+       Teal #00A499 — supplementary accent associated with */ /*
+       NHS 24 chrome and used for illustrative chart series. Not
+       for */ /* primary calls to action; reserve for decorative
+       emphasis, */ /* category chips, and data visualisation.
+       Darkened from L=0.62 on 2026-08-27: white accent-content
+       needs >=4.5:1 for small text (axe color-contrast on ai-
+       label). */
+    --color-accent: oklch(52% 0.11 192);
     --color-accent-content: oklch(100% 0 0);
-
-    /* ---- Neutral -------------------------------------------------------- */
-    /* Neutral chrome (dark footer, NHS 24 dark cards, on-call signage).   */
-    /* Mirrors base-content so dark blocks share the same warm near-black  */
-    /* identity as body text, keeping the page visually coherent.          */
+    /* ---- Neutral
+       -------------------------------------------------------- */
+       /* Neutral chrome (dark footer, NHS 24 dark cards, on-call
+       signage). */ /* Mirrors base-content so dark blocks share
+       the same warm near-black */ /* identity as body text,
+       keeping the page visually coherent. */
     --color-neutral: oklch(26% 0.015 230);
     --color-neutral-content: oklch(100% 0 0);
-
-    /* ---- Info (NHS Bright Blue) ----------------------------------------- */
-    /* NHS Bright Blue #0072CE — informational banners ("did you know?",  */
-    /* "your appointment is at…"), inline help, and link chips. Distinct  */
-    /* from primary so message banners read as messages, not actions.     */
+    /* ---- Info (NHS Bright Blue)
+       ----------------------------------------- */ /* NHS Bright
+       Blue #0072CE — informational banners ("did you know?", */
+       /* "your appointment is at…"), inline help, and link chips.
+       Distinct */ /* from primary so message banners read as
+       messages, not actions. */
     --color-info: oklch(54% 0.17 247);
     --color-info-content: oklch(100% 0 0);
-
-    /* ---- Success (NHS Green) -------------------------------------------- */
-    /* NHS Green #009639 — confirmation panels, completed-step indicators */
-    /* ("you have been booked"), and the success state on form summaries. */
-    /* Identical role and contrast target as the NHS UK system so shared  */
-    /* components carry the same meaning across the border.               */
+    /* ---- Success (NHS Green)
+       -------------------------------------------- */ /* NHS
+       Green #009639 — confirmation panels, completed-step
+       indicators */ /* ("you have been booked"), and the success
+       state on form summaries. */ /* Identical role and contrast
+       target as the NHS UK system so shared */ /* components
+       carry the same meaning across the border. */
     --color-success: oklch(56% 0.16 145);
     --color-success-content: oklch(100% 0 0);
-
-    /* ---- Warning (NHS Warm Yellow) -------------------------------------- */
-    /* NHS Warm Yellow #FFB81C — caution banners and the canonical focus  */
-    /* indicator. Yellow swatches are light, so the content colour MUST   */
-    /* stay dark (≈ NHS Black) to clear WCAG AA contrast. Reusing this    */
-    /* hue across NHS England, NHS Scotland, and NHS Wales is deliberate: */
-    /* keyboard users build muscle memory for "yellow means focus".       */
+    /* ---- Warning (NHS Warm Yellow)
+       -------------------------------------- */ /* NHS Warm
+       Yellow #FFB81C — caution banners and the canonical focus */
+       /* indicator. Yellow swatches are light, so the content
+       colour MUST */ /* stay dark (≈ NHS Black) to clear WCAG AA
+       contrast. Reusing this */ /* hue across NHS England, NHS
+       Scotland, and NHS Wales is deliberate: */ /* keyboard users
+       build muscle memory for "yellow means focus". */
     --color-warning: oklch(82% 0.16 79);
     --color-warning-content: oklch(26% 0.015 230);
-
-    /* ---- Error (NHS Emergency Services Red) ----------------------------- */
-    /* NHS Emergency Services Red #DA291C — validation errors,            */
-    /* destructive actions, "phone 999" badges inside NHS Inform.         */
-    /* Reserved for genuine errors and safety messages: the colour        */
-    /* carries strong NHS meaning across both nations and must not be     */
-    /* used for decorative emphasis.                                       */
+    /* ---- Error (NHS Emergency Services Red)
+       ----------------------------- */ /* NHS Emergency Services
+       Red #DA291C — validation errors, */ /* destructive actions,
+       "phone 999" badges inside NHS Inform. */ /* Reserved for
+       genuine errors and safety messages: the colour */ /*
+       carries strong NHS meaning across both nations and must not
+       be */ /* used for decorative emphasis. */
     --color-error: oklch(55% 0.22 28);
     --color-error-content: oklch(100% 0 0);
-
-    /* ---- Geometry tokens (clinical / high-density) --------------------- */
-
-    /* Selectors (checkbox / radio): square per NHS frontend defaults so   */
-    /* the tick / dot stays perfectly centred at every font size. Square   */
-    /* selectors are doubly appropriate for clinical UI where checklist    */
-    /* grids dominate (allergies, observations, problem-list flags).       */
+    /* ---- Geometry tokens (clinical / high-density)
+       --------------------- */ /* Selectors (checkbox / radio):
+       square per NHS frontend defaults so */ /* the tick / dot
+       stays perfectly centred at every font size. Square */ /*
+       selectors are doubly appropriate for clinical UI where
+       checklist */ /* grids dominate (allergies, observations,
+       problem-list flags). */
     --radius-selector: 0rem;
-
-    /* Form fields: 2px corners — sharper than the 4px patient theme.     */
-    /* Clinical instruments traditionally use crisp rectangles; the small */
-    /* radius keeps a hint of softness so the UI doesn't read as hostile  */
-    /* while still aligning more closely to EPR conventions.              */
+    /* Form fields: 2px corners — sharper than the 4px patient
+       theme. */ /* Clinical instruments traditionally use crisp
+       rectangles; the small */ /* radius keeps a hint of softness
+       so the UI doesn't read as hostile */ /* while still
+       aligning more closely to EPR conventions. */
     --radius-field: 0.125rem;
-
-    /* Card / panel / dialog: 2px corner radius. Tight corners keep       */
-    /* clinical worklists, observation tables, and side-panel cards       */
-    /* visually instrument-like and align edges to a 2px grid.            */
+    /* Card / panel / dialog: 2px corner radius. Tight corners
+       keep */ /* clinical worklists, observation tables, and
+       side-panel cards */ /* visually instrument-like and align
+       edges to a 2px grid. */
     --radius-box: 0.125rem;
-
-    /* Inner padding hints for selectors and fields — compressed so       */
-    /* checklist rows and field grids pack tightly.                       */
+    /* Inner padding hints for selectors and fields — compressed
+       so */ /* checklist rows and field grids pack tightly. */
     --size-selector: 0.125rem;
     --size-field: 0.125rem;
-
-    /* Border width: 1px hairline, matching `$nhsuk-border-width-form`.   */
-    /* The hairline is the smallest legible border on the LCDs used in   */
-    /* clinical settings; going to 0.5px loses the edge on non-Retina    */
-    /* workstation displays still common in NHS estate.                  */
+    /* Border width: 1px hairline, matching `$nhsuk-border-width-
+       form`. */ /* The hairline is the smallest legible border on
+       the LCDs used in */ /* clinical settings; going to 0.5px
+       loses the edge on non-Retina */ /* workstation displays
+       still common in NHS estate. */
     --border: 1px;
-
-    /* Depth & noise off — NHS Scotland identity guidance, like NHS UK,   */
-    /* avoids shadows, gradients, and textures so the interface looks    */
-    /* clinical, calm, and easy to read on low-end devices common in     */
-    /* community health settings.                                         */
+    /* Depth & noise off — NHS Scotland identity guidance, like
+       NHS UK, */ /* avoids shadows, gradients, and textures so
+       the interface looks */ /* clinical, calm, and easy to read
+       on low-end devices common in */ /* community health
+       settings. */
     --depth: 0;
     --noise: 0;
 }
@@ -428,7 +443,6 @@
         .input,
         .select,
         .option,
-        .link,
         .menu-item,
         .tab-bar-button,
         .switch-button,
@@ -703,15 +717,15 @@
      * pre-formatted data. Every Lily class ending in `-view` is a span/div
      * that renders a value the user shouldn't edit.
      *
-     * The exclusions (`theme-view`, `scroll-view`, `split-view`, `tree-view`)
+     * The exclusions (`theme-view`, `split-view`)
      * are larger containers that don't fit the chip pattern — they're
      * styled separately further down.
      * ====================================================================== */
 
     :where(
-        [class$="-view"]:not(.theme-view):not(.scroll-view):not(
+        [class$="-view"]:not(.theme-view):not(
                 .split-view
-            ):not(.tree-view)
+            )
     ) {
         display: inline-block;
         padding: 0.125rem 0.5rem;
@@ -1205,7 +1219,7 @@
     /* --- Summary list (three-column key/value/action grid) ------------------ */
     :where(.summary-list) {
         display: grid;
-        grid-template-columns: max-content 1fr auto;
+        grid-template-columns: minmax(0, max-content) 1fr auto;
         column-gap: 1rem;
         row-gap: 0.5rem;
     }
@@ -2865,7 +2879,11 @@
         width: 100%;
         max-width: 100%;
         border-radius: var(--lily-radius-md);
+        /* Video chrome is black in every theme; pair the text colour with
+           it here rather than inheriting the theme's (possibly dark)
+           content colour onto a black surface. */
         background-color: black;
+        color: white;
     }
 
     /* ==========================================================================
@@ -3096,6 +3114,11 @@
         background-color: var(--color-primary);
         color: var(--color-primary-content);
     }
+    /* Links inside the call-to-action inherit its content colour —
+       otherwise the UA default link blue lands on the primary fill. */
+    :where(.call-to-action) :where(a) {
+        color: inherit;
+    }
     /* Expander / collapsible / details — boxed disclosure controls. */
     :where(.expander, .collapsible, .details) {
         display: block;
@@ -3301,4 +3324,61 @@
             border-color: var(--lily-text);
         }
     }
+}
+
+/* ============================================================================
+ * WCAG 2.2 target-size (minimum) floor — 2.5.8
+ *
+ * Every interactive Lily hook offers a >=24x24 CSS-pixel target. Links
+ * that render as short inline text (a pagination "1", a breadcrumb crumb)
+ * fail the 24px floor under typographic sizing alone, so the link-shaped
+ * hooks become inline-block with a minimum box. :where() keeps specificity
+ * at zero, so any consumer rule still wins. Shared verbatim by all themes.
+ * ========================================================================= */
+
+:where(.action-link,
+       .back-link,
+       .breadcrumb-list-item > a,
+       .pagination-list-item > a,
+       .contents-list-item > a,
+       .section-list-item > a) {
+    display: inline-block;
+    min-inline-size: 24px;
+    min-block-size: 24px;
+}
+
+:where(.pagination-list-item > a) {
+    text-align: center;
+}
+
+:where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    min-block-size: 24px;
+}
+
+/* ============================================================================
+ * Overflow guards — narrow-viewport safety, shared verbatim by all themes.
+ *
+ * Content that is intrinsically wider than the viewport scrolls or wraps
+ * within its own box instead of pushing the page wider. Deliberately NOT
+ * `display: block` on <table> — that strips implicit table semantics for
+ * assistive technology; capping width and letting cell content wrap keeps
+ * both the layout and the roles. Proven in the example apps' own
+ * stylesheets before the theme layer took over component styling.
+ * ========================================================================= */
+
+:where(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+:where(table) {
+    max-width: 100%;
+}
+
+:where(th, td) {
+    overflow-wrap: anywhere;
+}
+
+:where(a, code) {
+    overflow-wrap: anywhere;
 }

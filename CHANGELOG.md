@@ -18,18 +18,31 @@ for them.
 
 ### Fixed
 
-- **`bin/lily-svelte-sync --check` reported 2 files drifted** — a routine
-  audit sweep (`forms/lily-svelte-version.md` pinned `e05a138e6`, the
-  local Lily Design System checkout had since moved to `a89961e8f`).
-  The only change: `Kbd.svelte` now renders a semantic `<kbd>` element
-  instead of a generic `<div>` (plus its matching test). No form
-  actually vendors `Kbd` (`git ls-files
-  '*/front-end-with-svelte/src/lib/components/ui/Kbd.svelte'` is
-  empty) — the reference snapshot only, zero runtime impact. Refreshed
-  via `bin/lily-svelte-sync` (updates the pin + date automatically);
-  re-verified `bin/lily-svelte-refactor --check --all`,
-  `bin/test-vendored-uniformity`, and `pnpm run check` on the reference
-  form all clean.
+- **`bin/lily-svelte-sync --check` reported 2 files drifted, which turned
+  out to be the tip of a much bigger pin refresh** — a routine audit
+  sweep found `forms/lily-svelte-version.md` still pinned `e05a138e6`
+  while the local Lily Design System checkout had moved to `a89961e8f`
+  (5 days of upstream work: DTCG token files, GDS v6, accessibility
+  audit pack). The immediate finding was small: `Kbd.svelte` now renders
+  a semantic `<kbd>` element instead of a generic `<div>` (plus its
+  matching test); no form actually vendors `Kbd` (`git ls-files
+  '*/front-end-with-svelte/src/lib/components/ui/Kbd.svelte'` is empty),
+  so this alone was zero runtime impact. Refreshing the pin
+  (`bin/lily-svelte-sync`, `bin/lily-sync`) exposed the real scope,
+  though: `bin/svelte-theme-css-sync --check` and
+  `bin/html-theme-locale-select-refactor --check` both then reported
+  **all 355 forms'** vendored theme catalogues drifted — 90 upstream
+  files, +22,190/−2,814 lines. Applied fleet-wide
+  (`bin/svelte-theme-css-sync --apply`,
+  `bin/html-theme-locale-select-refactor --apply`; 351 processed, 4
+  skipped for a pre-existing theme-collision slug) after confirming the
+  scale with the user first. Re-verified: `bin/lily-html-refactor`,
+  `bin/lily-svelte-refactor`, `bin/test-vendored-uniformity`, `bin/test`,
+  `bin/test-personas` (207/207), and `bin/test-engines` (279/279) all
+  clean; visually spot-checked the reference form
+  (`pre-operative-assessment-by-clinician`) in both stacks across
+  light/dark/a third theme via Playwright — no console errors, no
+  visual breakage, legible in every theme checked.
 - **Dependabot alerts, enabled per `spec/dependabot/`, immediately surfaced
   207 real open vulnerabilities (7 critical, 60 high, 126 moderate, 14
   low) — down to 3 (all low, no safe fix available) after triage:**
