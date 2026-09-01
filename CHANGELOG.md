@@ -18,6 +18,31 @@ for them.
 
 ### Fixed
 
+- **`bin/test-e2e --html` a11y sweep, run as verification after the theme
+  re-sync above, caught a real, pre-existing `color-contrast` violation**
+  in `international-certificate-of-vaccination-or-prophylaxis` (a "theme
+  collision" bespoke page, so untouched by that re-sync — confirmed via
+  `git blame` the bug predates this session, July 2026). Root cause:
+  `--color-primary` was referenced 5 times (border, focus ring, progress
+  bar, the in-progress step badge) but never actually *defined* — only
+  `--color-primary-dark`/`-light` were, both derived from it. An
+  undefined custom property makes the declaration invalid at computed-
+  value time, so `background: var(--color-primary)` silently fell back
+  to transparent; the step badge's white text then rendered with no
+  background of its own, and axe walked up to the yellow `.page-header`
+  behind it (1.65:1, needs 4.5:1). The exact same bug — same variable,
+  same never-defined pattern — was also present in
+  `united-kingdom-statement-of-fitness-for-work`, whose own
+  `--colour-nhs-blue: #005eb8` was the obvious, unambiguous intended
+  value (6.38:1, fixed directly). ICVP had no such unambiguous sibling
+  value; `--color-primary-dark: #e65100` alone only reaches 3.79:1 with
+  the badge's white text, so set `--color-primary` to a computed darker
+  shade in the same hue (`#cf4800`, 4.59:1) rather than inventing an
+  unrelated color. Re-verified both forms pass `bin/test-e2e --html`;
+  visually confirmed the ICVP fix on a fresh render — the step badge is
+  now a legible, appropriately-branded deep-orange pill instead of
+  invisible white text.
+
 - **`bin/lily-svelte-sync --check` reported 2 files drifted, which turned
   out to be the tip of a much bigger pin refresh** — a routine audit
   sweep found `forms/lily-svelte-version.md` still pinned `e05a138e6`

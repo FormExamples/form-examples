@@ -7,6 +7,7 @@
 :root {
   --colour-nhs-blue: #005eb8;
   --colour-nhs-dark-blue: #003087;
+  --color-primary: #005eb8;
   --color-primary-dark: #003087;
   --color-primary-light: color-mix(in oklab, var(--color-primary) 15%, var(--color-base-100));
   --color-bg: var(--color-base-200);

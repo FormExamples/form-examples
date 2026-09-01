@@ -2,6 +2,9 @@
  * See forms/AGENTS-front-end-html.md for the class vocabulary. */
 
 :root {
+  /* Darkened from --color-primary-dark to clear WCAG AA 4.5:1 with the
+     white step-badge text that uses it (#e65100 alone is only 3.79:1). */
+  --color-primary: #cf4800;
   --color-primary-dark: #e65100;
   --color-primary-light: color-mix(in oklab, var(--color-primary) 15%, var(--color-base-100));
   --color-bg: var(--color-base-200);
