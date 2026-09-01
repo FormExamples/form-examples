@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../../app.css';
-	import { base } from '$app/paths';
 	import { page } from '$app/state';
 	import ThemePicker from '$lib/components/ui/ThemePicker.svelte';
 	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';
@@ -53,7 +52,7 @@
 				<ThemePicker
 					label="Theme"
 					class="ml-2"
-					themesUrl={`${base}/themes/`}
+					themesUrl="/themes/"
 					themes={themeValues}
 					themeLabels={themeLabels}
 					defaultValue={DEFAULT_THEME}
