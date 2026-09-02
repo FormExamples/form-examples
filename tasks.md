@@ -843,7 +843,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       roll out mechanically with a `--check` tool (Conventions promise).
 - [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
       at `/api/openapi.yaml` (second half of serve-OpenAPI).
-- [ ] Personas: **222/355 verified** (`bin/test-personas` ground truth,
+- [ ] Personas: **225/355 verified** (`bin/test-personas` ground truth,
       not hand-tracked — the incrementally-tracked count in this entry had
       drifted from it; was 109). 2026-08-26: the whole
       `*-waiting-list-card` family (56 forms) done in one batch — the family
@@ -872,14 +872,16 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       panels/rules, needs real per-form batches; confirmed 2026-09-02 that
       **all 39 have a working `calculateGrade` engine** (none are
       engine-SKIP) via `bin/test-engines --verbose`, so every one is
-      immediately actionable. 15 done 2026-09-02 (angiography-test-request,
+      immediately actionable. 18 done 2026-09-02 (angiography-test-request,
       blood-test-request, x-ray-test-request, mri-scan-test-request,
       coagulation-test-request, lumbar-puncture-test-request,
       allergy-skin-test-request, electrocardiogram-test-request,
       genetic-test-request, biopsy-test-request, cytology-test-request,
       cardiac-stress-test-request, ambulatory-blood-pressure-test-request,
-      blood-cross-match-test-request, endoscopy-test-request — each 3
-      personas spanning a well-formed/routine, a caution/escalated, and a
+      blood-cross-match-test-request, endoscopy-test-request,
+      ct-scan-test-request, echocardiogram-test-request,
+      urinalysis-test-request — each 3 personas spanning a
+      well-formed/routine, a caution/escalated, and a
       contraindicated-or-reject/incomplete scenario, verified field-by-field
       against that form's own `js/rules.js` + `js/form-app.js` option lists
       before running `--update`, not just accepting whatever it computed;
@@ -888,7 +890,8 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       doesn't drift as real time passes — not-yet-collected or a timestamp
       far enough in the past — rather than a narrow window a fixed date
       would age out of, the same rot risk `*-waiting-list-card` hit first).
-      24 remain. 73
+      21 remain (count re-verified directly against the fleet each update,
+      not hand-tracked, after the 2026-09-02 tracking-drift correction). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

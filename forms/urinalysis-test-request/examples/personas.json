@@ -1,0 +1,325 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-suspected-uti-dipstick-msu-complete",
+      "description": "Well-formed routine GP referral: suspected UTI, dipstick requested (first-line), a correctly collected midstream specimen, every completeness field present — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1985-03-14",
+          "nhsNumber": "943 476 5922"
+        },
+        "tests": {
+          "dipstick": true,
+          "microscopyCultureSensitivity": false,
+          "albuminCreatinineRatio": false,
+          "proteinCreatinineRatio": false,
+          "pregnancyTest": false,
+          "drugScreen": false,
+          "cytology": false,
+          "twentyFourHourCollection": false
+        },
+        "context": {
+          "primaryIndication": "suspected-uti",
+          "clinicalDetails": "Two days of dysuria and urinary frequency, no fever or loin pain.",
+          "pregnant": false,
+          "catheterised": false,
+          "currentAntibiotics": false
+        },
+        "symptoms": {
+          "symptomDysuria": true,
+          "symptomFrequency": true,
+          "symptomVisibleHaematuria": false,
+          "symptomLoinPain": false,
+          "symptomFever": false
+        },
+        "specimen": {
+          "specimenType": "midstream",
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-20T09:00"
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Sample brought in with the appointment."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "ok",
+        "fastingOrSpecimen": "Specimen handling appears acceptable.",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 5-7 working days",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-UTI-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-uti",
+            "description": "A first-line test was requested for \"suspected-uti\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-OK",
+            "axis": "preanalytical",
+            "category": "specimen",
+            "description": "No preanalytical concerns detected for the requested tests."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-visible-haematuria-cytology-random-specimen-caution",
+      "description": "Painless visible haematuria: cytology is first-line for the haematuria indication, and visible haematuria itself auto-escalates triage to urgent regardless of the requested urgency, but the specimen provided was a random sample rather than midstream/clean-catch — a random specimen is sub-optimal for culture/cytology, forcing a pre-analytical caution — expect usually-appropriate + caution + urgent + accept (caution alone does not block acceptance, only reject-risk does).",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "urologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Urology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1955-11-02",
+          "nhsNumber": "887 342 1190"
+        },
+        "tests": {
+          "dipstick": true,
+          "microscopyCultureSensitivity": false,
+          "albuminCreatinineRatio": false,
+          "proteinCreatinineRatio": false,
+          "pregnancyTest": false,
+          "drugScreen": false,
+          "cytology": true,
+          "twentyFourHourCollection": false
+        },
+        "context": {
+          "primaryIndication": "haematuria",
+          "clinicalDetails": "One episode of painless visible haematuria yesterday, no dysuria or loin pain. Two-week-wait urology referral already made separately.",
+          "pregnant": false,
+          "catheterised": false,
+          "currentAntibiotics": false
+        },
+        "symptoms": {
+          "symptomDysuria": false,
+          "symptomFrequency": false,
+          "symptomVisibleHaematuria": true,
+          "symptomLoinPain": false,
+          "symptomFever": false
+        },
+        "specimen": {
+          "specimenType": "random",
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-25T11:20"
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Patient provided a random sample opportunistically at the clinic visit; advise midstream next time."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "caution",
+        "fastingOrSpecimen": "A random specimen is sub-optimal for culture; prefer a midstream (MSU) or clean-catch sample.",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-48 hours",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-HAEMATURIA-IDEAL",
+            "axis": "appropriateness",
+            "category": "haematuria",
+            "description": "A first-line test was requested for \"haematuria\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-RANDOM-FOR-CULTURE",
+            "axis": "preanalytical",
+            "category": "contamination-risk",
+            "description": "Random specimen requested for culture; contamination / contamination-risk per UK SMI B41."
+          },
+          {
+            "ruleId": "R-TRIAGE-VISIBLE-HAEMATURIA",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Visible haematuria — expedite culture / cytology and assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-VISIBLE-HAEMATURIA-2WW-001",
+            "category": "visible-haematuria-2ww",
+            "priority": "high",
+            "description": "Visible (macroscopic) haematuria reported.",
+            "suggestedAction": "Consider NICE NG12 suspected-cancer (2-week-wait) bladder pathway, especially age ≥45 with unexplained visible haematuria."
+          }
+        ]
+      }
+    },
+    {
+      "name": "stat-pyelonephritis-mcs-not-collected-incomplete",
+      "description": "Fever with loin pain phoned through from the emergency department: microscopy, culture and sensitivity is first-line to confirm suspected UTI, and the fever-plus-loin-pain combination itself forces stat triage (possible pyelonephritis / urosepsis), but no specimen has been collected yet — the request cannot proceed to the lab until one is provided, forcing a reject-risk pre-analytical band — and several administrative fields are not yet captured — expect usually-appropriate + reject-risk + stat + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": ""
+        },
+        "tests": {
+          "dipstick": false,
+          "microscopyCultureSensitivity": true,
+          "albuminCreatinineRatio": false,
+          "proteinCreatinineRatio": false,
+          "pregnancyTest": false,
+          "drugScreen": false,
+          "cytology": false,
+          "twentyFourHourCollection": false
+        },
+        "context": {
+          "primaryIndication": "suspected-uti",
+          "clinicalDetails": "",
+          "pregnant": false,
+          "catheterised": false,
+          "currentAntibiotics": false
+        },
+        "symptoms": {
+          "symptomDysuria": true,
+          "symptomFrequency": false,
+          "symptomVisibleHaematuria": false,
+          "symptomLoinPain": true,
+          "symptomFever": true
+        },
+        "specimen": {
+          "specimenType": "midstream",
+          "specimenCollected": "no",
+          "collectionDatetime": ""
+        },
+        "triage": {
+          "urgency": "",
+          "setting": "emergency",
+          "notes": "Phoned through from ED resus; septic screen and IV antibiotics being arranged, specimen to follow."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "reject-risk",
+        "fastingOrSpecimen": "Specimen not yet collected; the request cannot proceed until a sample is provided.",
+        "completenessPercent": 69,
+        "triageTier": "stat",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-UTI-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-uti",
+            "description": "A first-line test was requested for \"suspected-uti\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-NOT-COLLECTED",
+            "axis": "preanalytical",
+            "category": "specimen-not-collected",
+            "description": "Specimen has not been collected; cannot be processed."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-DETAILS",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical details."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-PYELONEPHRITIS",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Fever with loin pain — possible pyelonephritis / urosepsis; immediate assessment."
+          },
+          {
+            "ruleId": "R-TRIAGE-FEVER",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Fever / systemic symptoms — expedited assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-PYELONEPHRITIS-001",
+            "category": "suspected-pyelonephritis",
+            "priority": "high",
+            "description": "Fever with loin pain — possible upper-tract infection (pyelonephritis) / urosepsis.",
+            "suggestedAction": "Expedite MSU culture and clinical assessment; do not delay empirical treatment if systemically unwell."
+          },
+          {
+            "flagId": "F-SPECIMEN-NOT-COLLECTED-001",
+            "category": "specimen-not-collected",
+            "priority": "medium",
+            "description": "The specimen has not yet been collected.",
+            "suggestedAction": "Collect an appropriate specimen (e.g. MSU) before the request can be processed; refrigerate or use boric acid if >4 h to lab."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-DETAILS-001",
+            "category": "missing-clinical-details",
+            "priority": "low",
+            "description": "No clinical details recorded (highest-value field).",
+            "suggestedAction": "Add the relevant clinical details so the laboratory can interpret and triage the request."
+          }
+        ]
+      }
+    }
+  ]
+}

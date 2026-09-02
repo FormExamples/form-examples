@@ -1,0 +1,319 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's appropriateness band names differ from most of the *-test-request family: 'appropriate' / 'may-be-appropriate' / 'rarely-appropriate', not 'usually-appropriate' / 'usually-not-appropriate'.",
+  "personas": [
+    {
+      "name": "routine-heart-failure-tte-low-priority-complete",
+      "description": "Well-formed routine GP referral: suspected heart failure, transthoracic echo requested (first-line), NT-proBNP 250 ng/L (below the NICE NG106 routine threshold), NYHA class I, every completeness field present — expect appropriate + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1958-03-14",
+          "nhsNumber": "943 476 5922",
+          "heightAsCm": 178,
+          "weightAsKg": 82,
+          "bodyMassIndex": 25.9
+        },
+        "request": {
+          "echoType": "transthoracic-tte",
+          "primaryIndication": "heart-failure",
+          "clinicalQuestion": "Mild ankle swelling and reduced exercise tolerance over 3 months — assess left ventricular function.",
+          "relevantHistory": "Hypertension on amlodipine. No previous cardiac history.",
+          "relevantMedications": "Amlodipine 5mg od",
+          "previousEcho": "none",
+          "previousEchoDate": "",
+          "ejectionFractionKnown": null
+        },
+        "symptoms": {
+          "breathlessness": false,
+          "chestPain": false,
+          "palpitations": false,
+          "syncope": false,
+          "oedema": true,
+          "nyhaClass": "i"
+        },
+        "investigations": {
+          "ecgFindings": "Normal sinus rhythm.",
+          "bnpOrNtProbnp": 250,
+          "knownMurmur": false,
+          "onCardiotoxicChemotherapy": false
+        },
+        "redFlags": {
+          "suspectedEndocarditis": false,
+          "severeSymptomaticValve": false,
+          "acuteHeartFailure": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-15",
+          "setting": "outpatient",
+          "notes": "Patient mobile and independent."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-HEART-FAILURE-IDEAL",
+            "axis": "appropriateness",
+            "category": "heart-failure",
+            "description": "Requested transthoracic-tte study is the recommended examination for \"heart-failure\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; urgency follows the requested tier (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "baseline",
+            "description": "No high-priority features; baseline low clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-palpitations-tte-syncope-moderate-priority",
+      "description": "Palpitations with a single syncopal episode: transthoracic echo is first-line for palpitations, and syncope itself auto-escalates urgency to urgent (to exclude a structural cause) and raises clinical priority to moderate, regardless of the routine urgency requested — expect appropriate + urgent + moderate priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "cardiologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Cardiology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1949-11-02",
+          "nhsNumber": "887 342 1190",
+          "heightAsCm": 162,
+          "weightAsKg": 68,
+          "bodyMassIndex": 25.9
+        },
+        "request": {
+          "echoType": "transthoracic-tte",
+          "primaryIndication": "palpitations",
+          "clinicalQuestion": "Recurrent palpitations with one brief syncopal episode while standing last week — exclude a structural cause.",
+          "relevantHistory": "No previous cardiac history. Ambulatory ECG already requested separately.",
+          "relevantMedications": "None regular.",
+          "previousEcho": "none",
+          "previousEchoDate": "",
+          "ejectionFractionKnown": null
+        },
+        "symptoms": {
+          "breathlessness": false,
+          "chestPain": false,
+          "palpitations": true,
+          "syncope": true,
+          "oedema": false,
+          "nyhaClass": "i"
+        },
+        "investigations": {
+          "ecgFindings": "Normal sinus rhythm at rest.",
+          "bnpOrNtProbnp": null,
+          "knownMurmur": false,
+          "onCardiotoxicChemotherapy": false
+        },
+        "redFlags": {
+          "suspectedEndocarditis": false,
+          "severeSymptomaticValve": false,
+          "acuteHeartFailure": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "setting": "outpatient",
+          "notes": "Ambulatory ECG monitor to be fitted the same week."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "appropriate",
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 2 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "moderate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PALPITATIONS-IDEAL",
+            "axis": "appropriateness",
+            "category": "palpitations",
+            "description": "Requested transthoracic-tte study is the recommended examination for \"palpitations\"."
+          },
+          {
+            "ruleId": "R-URGENCY-SYNCOPE",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Syncope — urgent echo to exclude structural cause."
+          },
+          {
+            "ruleId": "R-PRIORITY-SYNCOPE",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "Syncope reported — moderate clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "emergency-suspected-endocarditis-toe-incomplete",
+      "description": "Fever and a new murmur in a patient with a prosthetic valve, phoned through from the acute medical unit: transoesophageal echo is first-line for suspected endocarditis, and the red flag itself forces emergency/inpatient triage and high clinical priority; several administrative fields are not yet captured — expect appropriate + emergency + high priority + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Acute Medical Unit",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "heightAsCm": null,
+          "weightAsKg": null,
+          "bodyMassIndex": null
+        },
+        "request": {
+          "echoType": "transoesophageal-toe",
+          "primaryIndication": "endocarditis",
+          "clinicalQuestion": "",
+          "relevantHistory": "Mechanical aortic valve replacement 2019. Fevers and rigors for 5 days, new early diastolic murmur, positive blood cultures.",
+          "relevantMedications": "Warfarin for the mechanical valve.",
+          "previousEcho": "abnormal",
+          "previousEchoDate": "2019-04-10",
+          "ejectionFractionKnown": null
+        },
+        "symptoms": {
+          "breathlessness": true,
+          "chestPain": false,
+          "palpitations": false,
+          "syncope": false,
+          "oedema": false,
+          "nyhaClass": ""
+        },
+        "investigations": {
+          "ecgFindings": "",
+          "bnpOrNtProbnp": null,
+          "knownMurmur": true,
+          "onCardiotoxicChemotherapy": false
+        },
+        "redFlags": {
+          "suspectedEndocarditis": true,
+          "severeSymptomaticValve": false,
+          "acuteHeartFailure": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "inpatient",
+          "notes": "Microbiology and cardiology both aware; IV antibiotics started empirically."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / inpatient",
+        "completenessPercent": 60,
+        "priorityBand": "high",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ENDOCARDITIS-IDEAL",
+            "axis": "appropriateness",
+            "category": "endocarditis",
+            "description": "Requested transoesophageal-toe study is the recommended examination for \"endocarditis\"."
+          },
+          {
+            "ruleId": "R-URGENCY-SUSPECTED-ENDOCARDITIS",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Suspected infective endocarditis — emergency / inpatient echo."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NYHA",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NYHA class."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-RED-FLAG",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "A red flag (endocarditis / severe symptomatic valve / acute heart failure) is present — high clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-ENDOCARDITIS-001",
+            "category": "suspected-endocarditis",
+            "priority": "high",
+            "description": "Suspected infective endocarditis.",
+            "suggestedAction": "Arrange urgent TTE then TOE; discuss with cardiology and follow ESC 2023 endocarditis pathway."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the echo should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

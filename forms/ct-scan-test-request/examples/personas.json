@@ -1,0 +1,369 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-cancer-staging-abdomen-pelvis-complete",
+      "description": "Well-formed routine oncology referral: CT chest/abdomen/pelvis for staging (first-line), normal renal function, no contrast-safety concerns, every completeness field present — expect usually-appropriate + safe contrast + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "oncologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Oncology",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1958-03-14",
+          "nhsNumber": "943 476 5922",
+          "weightKg": 78,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "abdomen-pelvis",
+          "primaryIndication": "cancer-staging",
+          "clinicalQuestion": "Newly diagnosed colorectal cancer on colonoscopy biopsy — staging CT chest/abdomen/pelvis before the MDT."
+        },
+        "context": {
+          "relevantHistory": "No previous malignancy. No significant comorbidity.",
+          "relevantPreviousImaging": "Colonoscopy report attached."
+        },
+        "contrast": {
+          "contrastRequired": "iv-iodinated",
+          "egfr": 88,
+          "iodineContrastAllergy": false,
+          "previousContrastReaction": "none",
+          "metformin": false,
+          "diabetes": false,
+          "renalImpairment": false
+        },
+        "radiation": {
+          "pregnancyStatus": "not-applicable",
+          "irMeRJustification": "Newly diagnosed colorectal cancer requiring staging — justified under IR(ME)R by the requesting oncologist."
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "outpatient",
+          "requestedByDate": "2026-09-05",
+          "notes": "Staging CT to be completed before the colorectal MDT on 2026-09-08."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contrastSafetyBand": "safe",
+        "estimatedDoseBand": "high",
+        "renalRisk": false,
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and protocol",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CANCER-STAGING-IDEAL",
+            "axis": "appropriateness",
+            "category": "cancer-staging",
+            "description": "CT abdomen-pelvis is the recommended examination for \"cancer-staging\"."
+          },
+          {
+            "ruleId": "R-SAFETY-DOSE-ABDOMEN-PELVIS",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Estimated radiation dose for CT abdomen-pelvis is high."
+          },
+          {
+            "ruleId": "R-SAFETY-CONTRAST-OK",
+            "axis": "safety",
+            "category": "contrast-safety",
+            "description": "No contrast-safety concerns identified for the requested IV contrast study."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No acuity escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-RADIATION-DOSE-001",
+            "category": "high-radiation-dose",
+            "priority": "medium",
+            "description": "Requested study carries a high estimated effective radiation dose.",
+            "suggestedAction": "Confirm the study is justified and optimised (ALARP); consider a more targeted protocol."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-pulmonary-embolism-ctpa-metformin-borderline-egfr-caution",
+      "description": "Suspected pulmonary embolism: CT pulmonary angiogram is first-line and the indication itself auto-escalates triage to emergency, but the patient is on metformin with borderline renal function (eGFR 40, the 30-44 caution band) — contrast safety is 'caution' pending renal-protective precautions, not blocking, so the request is still accepted — expect usually-appropriate + caution + emergency + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1962-11-02",
+          "nhsNumber": "887 342 1190",
+          "weightKg": 84,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "ct-angiogram",
+          "primaryIndication": "pulmonary-embolism",
+          "clinicalQuestion": "Acute pleuritic chest pain and breathlessness, Wells score 6 (PE likely) — CT pulmonary angiogram requested."
+        },
+        "context": {
+          "relevantHistory": "Type 2 diabetes on metformin. Chronic kidney disease stage 3a.",
+          "relevantPreviousImaging": ""
+        },
+        "contrast": {
+          "contrastRequired": "iv-iodinated",
+          "egfr": 40,
+          "iodineContrastAllergy": false,
+          "previousContrastReaction": "none",
+          "metformin": true,
+          "diabetes": true,
+          "renalImpairment": true
+        },
+        "radiation": {
+          "pregnancyStatus": "not-applicable",
+          "irMeRJustification": "High Wells-score suspected PE — justified under IR(ME)R by the requesting emergency physician."
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "emergency",
+          "requestedByDate": "2026-08-25",
+          "notes": "Metformin withheld and hydration started per ESUR guidance ahead of contrast."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contrastSafetyBand": "caution",
+        "estimatedDoseBand": "moderate",
+        "renalRisk": true,
+        "completenessPercent": 100,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and protocol",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PULMONARY-EMBOLISM-IDEAL",
+            "axis": "appropriateness",
+            "category": "pulmonary-embolism",
+            "description": "CT ct-angiogram is the recommended examination for \"pulmonary-embolism\"."
+          },
+          {
+            "ruleId": "R-SAFETY-DOSE-CT-ANGIOGRAM",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Estimated radiation dose for CT ct-angiogram is moderate."
+          },
+          {
+            "ruleId": "R-SAFETY-EGFR-BORDERLINE",
+            "axis": "safety",
+            "category": "renal-impairment",
+            "description": "eGFR 40 mL/min/1.73m2 is 30-44 — caution; consider hydration / nephrology advice."
+          },
+          {
+            "ruleId": "R-SAFETY-METFORMIN",
+            "axis": "safety",
+            "category": "metformin-contrast",
+            "description": "Patient on metformin with eGFR < 45 — withhold metformin around IV contrast."
+          },
+          {
+            "ruleId": "R-TRIAGE-PE",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Suspected pulmonary embolism — emergency CT pulmonary angiogram."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RENAL-IMPAIRMENT-001",
+            "category": "renal-impairment",
+            "priority": "high",
+            "description": "Reduced renal function (low eGFR) with IV iodinated contrast requested.",
+            "suggestedAction": "Assess contrast-induced nephropathy risk; hydrate and consider a non-contrast or alternative study."
+          },
+          {
+            "flagId": "F-METFORMIN-CONTRAST-001",
+            "category": "metformin-contrast",
+            "priority": "medium",
+            "description": "Patient on metformin with reduced eGFR and IV iodinated contrast requested.",
+            "suggestedAction": "Withhold metformin around contrast administration per ESUR guidance and recheck renal function."
+          }
+        ]
+      }
+    },
+    {
+      "name": "urgent-renal-colic-severe-contrast-allergy-contraindicated-incomplete",
+      "description": "Acute loin-to-groin pain with suspected ureteric colic: CT abdomen/pelvis is first-line and the renal-colic indication itself auto-escalates triage to urgent, but the patient has a documented severe iodinated-contrast reaction, forcing the contrast-safety band to contraindicated — redirect to a non-contrast or alternative-modality protocol — and several administrative fields are not yet captured — expect usually-appropriate + contraindicated + urgent + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1988-06-18",
+          "nhsNumber": "",
+          "weightKg": null,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "abdomen-pelvis",
+          "primaryIndication": "renal-colic",
+          "clinicalQuestion": ""
+        },
+        "context": {
+          "relevantHistory": "Sudden-onset severe left loin pain radiating to the groin, haematuria on dipstick. Known severe anaphylactic reaction to iodinated contrast in 2019, documented on the allergy record.",
+          "relevantPreviousImaging": ""
+        },
+        "contrast": {
+          "contrastRequired": "iv-iodinated",
+          "egfr": null,
+          "iodineContrastAllergy": true,
+          "previousContrastReaction": "severe",
+          "metformin": false,
+          "diabetes": false,
+          "renalImpairment": false
+        },
+        "radiation": {
+          "pregnancyStatus": "not-applicable",
+          "irMeRJustification": ""
+        },
+        "triage": {
+          "urgency": "",
+          "setting": "emergency",
+          "requestedByDate": "",
+          "notes": "Non-contrast CT KUB protocol should be substituted given the documented severe reaction."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contrastSafetyBand": "contraindicated",
+        "estimatedDoseBand": "high",
+        "renalRisk": false,
+        "completenessPercent": 61,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / alternative study",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-RENAL-COLIC-IDEAL",
+            "axis": "appropriateness",
+            "category": "renal-colic",
+            "description": "CT abdomen-pelvis is the recommended examination for \"renal-colic\"."
+          },
+          {
+            "ruleId": "R-SAFETY-DOSE-ABDOMEN-PELVIS",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Estimated radiation dose for CT abdomen-pelvis is high."
+          },
+          {
+            "ruleId": "R-SAFETY-CONTRAST-ALLERGY",
+            "axis": "safety",
+            "category": "contrast-allergy",
+            "description": "Known iodinated-contrast allergy or previous severe reaction with IV contrast requested."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-JUSTIFICATION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-RENAL-COLIC",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Acute renal colic — urgent CT to confirm and assess obstruction."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CONTRAST-ALLERGY-001",
+            "category": "contrast-allergy",
+            "priority": "high",
+            "description": "Known iodinated-contrast allergy or previous severe reaction with IV contrast requested.",
+            "suggestedAction": "Avoid IV iodinated contrast or arrange premedication and a non-contrast / alternative protocol with the radiologist."
+          },
+          {
+            "flagId": "F-MISSING-EGFR-001",
+            "category": "missing-egfr",
+            "priority": "medium",
+            "description": "IV iodinated contrast requested but no eGFR recorded.",
+            "suggestedAction": "Obtain a current eGFR before contrast administration."
+          },
+          {
+            "flagId": "F-HIGH-RADIATION-DOSE-001",
+            "category": "high-radiation-dose",
+            "priority": "medium",
+            "description": "Requested study carries a high estimated effective radiation dose.",
+            "suggestedAction": "Confirm the study is justified and optimised (ALARP); consider a more targeted protocol."
+          },
+          {
+            "flagId": "F-UNJUSTIFIED-EXPOSURE-001",
+            "category": "unjustified-exposure",
+            "priority": "medium",
+            "description": "No IR(ME)R justification recorded for this ionising-radiation exposure.",
+            "suggestedAction": "Record the clinical justification; every medical exposure must be justified under IR(ME)R 2017."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
