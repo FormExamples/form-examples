@@ -874,7 +874,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 - [ ] Latent: snake_case↔camelCase API contract (283 crates + snapshot
       regen); i18n past the Welsh pilot.
 
-## Phase 12 — R4 optimizations
+## Phase 12 — R4 optimizations ✅ COMPLETE (2026-09-02)
 
 - [x] **Document shared `CARGO_TARGET_DIR` + sccache in CONTRIBUTING.md
       (2026-09-02)** — new "Rust build performance (355 crates)" subsection
