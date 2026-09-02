@@ -876,8 +876,13 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 
 ## Phase 12 — R4 optimizations
 
-- [ ] Document shared `CARGO_TARGET_DIR` + sccache in CONTRIBUTING.md
-      (355 `target/` dirs ≈ tens of GB local).
+- [x] **Document shared `CARGO_TARGET_DIR` + sccache in CONTRIBUTING.md
+      (2026-09-02)** — new "Rust build performance (355 crates)" subsection
+      under Environment, linking to the existing (but undiscoverable —
+      no guide linked to it) `docs/rust/index.md` sccache setup page for
+      detail. Also fixed that page's "sscache" → "sccache" typo (heading +
+      two mentions in prose; the actual shell commands were already
+      correct) while touching it.
 - [x] **Add `--svelte` E2E sweep to the nightly job alongside `--html` (2026-09-02).**
       Found two real gate-truth bugs in `bin/test-e2e` while wiring this up —
       exactly the class of defect Phase 8/9 fixed elsewhere, so fixed rather

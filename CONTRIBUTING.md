@@ -54,6 +54,28 @@ doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.
 - **xmllint** (`libxml2-utils`) — XML/DTD validation.
 - **Java 21** — the HL7 FHIR validator (CI only).
 
+### Rust build performance (355 crates)
+
+Each `forms/<slug>/back-end-with-loco/` is its own self-contained workspace
+(there is no repo-root `Cargo.toml` uniting them), so a plain `cargo build`
+gives every one of the 355 crates its own `target/` directory — tens of GB
+in aggregate, with the same dependency versions (loco-rs, sea-orm, tokio, …)
+compiled from scratch 355 times over. Two independent fixes, both safe to
+set globally in `~/.cargo/config.toml`:
+
+- **A shared `CARGO_TARGET_DIR`** — point every crate's build output at one
+  directory (`export CARGO_TARGET_DIR=~/.cargo-target-shared`, or the
+  equivalent `[build]` `target-dir` key in `~/.cargo/config.toml`) so
+  identical dependency versions across crates are compiled once and reused,
+  not duplicated per crate.
+- **`sccache`** as the compiler wrapper, caching individual compiler
+  invocations across builds (including across unrelated crates, and across
+  clean rebuilds). See [`docs/rust/index.md`](docs/rust/index.md) for setup
+  and sizing the cache.
+
+CI gets the same effect per-job via `Swatinem/rust-cache@v2`, scoped to each
+sharded job rather than shared across the whole matrix.
+
 ## Golden rule: the spec is the source of truth
 
 The workflow is **spec → code → regenerate → verify**, never the reverse:

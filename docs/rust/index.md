@@ -2,13 +2,13 @@
 
 This page is Rust-related documentation for the form-examples monorepo.
 
-## Rust sscache
+## Rust sccache
 
 For Rust projects, we recommend using a Rust cache for dependencies.
 
-- We recommend the Rust cache program `sscache`.
+- We recommend the Rust cache program `sccache`.
 
-- We recommend sscache configuration via environment variables, or in an environment file such as `~/.bashrc` or `~/.zshenv`, or in the cargo config file for the user `~/.cargo/config.toml` or project `.cargo/config.toml`.
+- We recommend sccache configuration via environment variables, or in an environment file such as `~/.bashrc` or `~/.zshenv`, or in the cargo config file for the user `~/.cargo/config.toml` or project `.cargo/config.toml`.
 
 - We recommend increasing the cache size from the default 10G to much larger such as 100G, if you have enough drive space.
 
