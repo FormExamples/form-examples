@@ -49,7 +49,7 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 | [`MAINTAINERS.md`](MAINTAINERS.md) | the roster, the publishing identities, and the bus factor |
 | [`SECURITY.md`](SECURITY.md) | what counts as a vulnerability here, how to report one, response times, publishing and Trusted Publishing policy |
 | [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | expected conduct, and enforcement |
-| [`AI_STATEMENT.md`](AI_STATEMENT.md) | how AI tooling is used to build this, what it may not do, and the limits |
+| [`AI_STATEMENT.md`](AI_STATEMENT.md) | how AI tooling is used to build this, what it may and may not do — including the standing, maintainer-granted authority to decide a release is ready and publish a crate — and the limits |
 | [`CHANGELOG.md`](CHANGELOG.md) | repository-level change history |
 | [`NEWS.md`](NEWS.md) | news, the project fact sheet, and press contact |
 | [`COMPARISONS.md`](COMPARISONS.md) | related projects, and when one of them is the better choice |

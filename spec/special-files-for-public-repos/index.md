@@ -26,7 +26,7 @@ describes.
 | [`SECURITY.md`](../../SECURITY.md) | scope, supported versions, private reporting route, response commitments | present |
 | [`CODE_OF_CONDUCT.md`](../../CODE_OF_CONDUCT.md) | expected conduct and enforcement | present |
 | [`CHANGELOG.md`](../../CHANGELOG.md) | repository-level change history, Keep a Changelog 1.1.0 + SemVer | present |
-| [`AI_STATEMENT.md`](../../AI_STATEMENT.md) | how AI tooling is used to build this, what it may not do, and the limits | present |
+| [`AI_STATEMENT.md`](../../AI_STATEMENT.md) | how AI tooling is used to build this, what it may and may not do — including the standing, maintainer-granted authority to decide a release is ready and publish a crate — and the limits | present |
 
 Two scopes for the change log, deliberately: the root `CHANGELOG.md` records
 repository-level change, and each form carries its own

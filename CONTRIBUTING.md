@@ -40,7 +40,13 @@ repository's licence, [`LICENSE.md`](LICENSE.md) (CC BY-NC-SA 4.0). If you use
 AI tooling on a contribution, disclose it in the pull-request description —
 which tool, and what it did — and carry a `Co-Authored-By:` trailer naming
 the tool on any commit it touched (see Commit conventions below); the rule
-and the reasoning are in [`AI_STATEMENT.md`](AI_STATEMENT.md) §10.
+and the reasoning are in [`AI_STATEMENT.md`](AI_STATEMENT.md) §10. Note for
+context: Claude Code also carries a standing, maintainer-granted authority
+to decide a candidate commit is release-ready and carry out the release
+itself, and to publish a fleet crate to crates.io — see
+[`GOVERNANCE.md`](GOVERNANCE.md)'s Releases and Publishing crates sections.
+Neither authority extends to merging a pull request, which stays the
+maintainer's alone.
 
 Read [`spec.md`](spec.md) (the system spec) and the relevant per-stack agent
 doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.

@@ -81,8 +81,19 @@ Removal is recorded in the same three places as an addition.
 The project releases by tagging `main`; there is no release train and no
 schedule. The root [`CHANGELOG.md`](CHANGELOG.md) records what changed at the
 repository level, and each form carries its own `CHANGELOG.md` under
-Keep-a-Changelog and SemVer. Release decisions are the maintainer's and no
-tool's.
+Keep-a-Changelog and SemVer.
+
+As of 2026-09-02, the maintainer has granted Claude Code standing authority
+to decide that a specific candidate commit is ready to release — checking
+it against the criteria below (CI green, changelog current, the right
+SemVer bump) — and to carry out the release runbook that follows from that
+decision, without asking per release. This is a bounded, explicit exception
+to "no tool decides release," alongside "Publishing crates" below, and
+recorded here for the same reason: it changes what §6 and §11 of
+[`AI_STATEMENT.md`](AI_STATEMENT.md) say, and a decision that lives only in
+a tool session is not a decision this project made (see "How decisions are
+made" above). It does not extend to a merge, which remains the
+maintainer's, no tool's.
 
 The mechanics, so a release is a checklist and not an improvisation:
 
@@ -97,6 +108,13 @@ The mechanics, so a release is a checklist and not an improvisation:
    GitHub release with the changelog section as its notes.
 5. Review `AI_STATEMENT.md` — its §13 ties review to releases.
 
+In practice this composes with "Publishing crates" below into one pipeline,
+not two hand-offs the maintainer has to bless separately: an agent working
+in this repository may work through §§1–4 above, decide the release meets
+them, and carry out §5 itself — the maintainer no longer has to tick every
+box personally before `cargo publish` runs for whichever crates that
+release makes ready.
+
 ## Publishing crates
 
 The fleet's back-end crates default to `publish = false` — they are worked
@@ -110,9 +128,10 @@ crate or per publish. This is a bounded, explicit exception to "no tool
 decides release" — recorded here because it changes what §6 and §11 of
 [`AI_STATEMENT.md`](AI_STATEMENT.md) say, and because a decision that lives
 only in a tool session is not a decision this project made (see "How
-decisions are made" above). It covers publishing alone: a GitHub release, a
-version tag, a merge, and every other release mechanic in the section above
-remain the maintainer's, no tool's.
+decisions are made" above). It covers crate publishing specifically,
+separate from — and no wider than — the release-readiness exception in the
+Releases section above; a merge is not included in either and remains the
+maintainer's, no tool's.
 
 ## Repository settings
 

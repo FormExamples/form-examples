@@ -1,6 +1,6 @@
 # AI Statement
 
-Version 1.2.1, status is active.
+Version 1.3.0, status is active.
 
 Canonical location is `AI_STATEMENT.md` at the repository root.
 
@@ -91,22 +91,33 @@ measuring one.
 | Tests, personas, and example fixtures | ai-generated | held to the same authority as the code they test: expectations cite the form's spec |
 | Documentation and this statement | ai-generated | held to the repository's own prose rules, including [Oxford spelling](spec/oxford-spelling/oxford-spelling.md) |
 | Which forms exist, and what a form means clinically | none | decided by the maintainer and recorded in the form's `spec/index.md` |
-| Release decisions and contribution verdicts | none | the maintainer's, and no tool's |
-| Publishing a crate to crates.io (`cargo publish`) | autonomous | standing exception, maintainer-granted 2026-09-02: Claude Code judges for itself which crates are ready, removes `publish = false` where it judges a crate should be publishable, and runs `cargo publish`, without asking per crate or per publish — see [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". No other release mechanic moves with it |
+| Contribution verdicts | none | the maintainer's, and no tool's |
+| Deciding a specific release is ready, and carrying out the release runbook | autonomous | standing exception, maintainer-granted 2026-09-02: Claude Code works through the release checklist itself, decides a candidate commit meets it, and carries out the runbook (changelog, `NEWS.md`, tag, GitHub release) without asking per release — see [`GOVERNANCE.md`](GOVERNANCE.md) §"Releases". A merge is not included and remains the maintainer's |
+| Publishing a crate to crates.io (`cargo publish`) | autonomous | standing exception, maintainer-granted 2026-09-02: Claude Code judges for itself which crates are ready, removes `publish = false` where it judges a crate should be publishable, and runs `cargo publish`, without asking per crate or per publish — see [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". Composes with the row above into one pipeline: a decided-ready release can run straight into the `cargo publish` calls it makes ready, with no maintainer hand-off in between |
 
 ## 6. Human oversight
 
 The maintainer directs the work, reviews it, and merges it. **No AI tool merges
 anything**, and no automation has write access to the default branch.
 
-One bounded, explicit exception exists, granted 2026-09-02 and recorded in
-[`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates": Claude Code may decide
-for itself which fleet crates are ready to publish, remove their
-`publish = false`, and run `cargo publish`, without asking per crate or per
-publish. It is scoped narrowly to publishing — not a merge, a GitHub release,
-a version tag, or anything else this section or §11 covers — and it is
-recorded here rather than left inside a tool session precisely because §13's
-rule applies to changes in practice as much as to changes in code: a standing
+Two bounded, explicit exceptions exist, both granted 2026-09-02:
+
+- **Release readiness**, recorded in [`GOVERNANCE.md`](GOVERNANCE.md)
+  §"Releases": Claude Code may work through the release checklist itself,
+  decide a candidate commit meets it, and carry out the runbook that
+  follows — changelog, `NEWS.md`, git tag, GitHub release — without asking
+  per release.
+- **Crate publishing**, recorded in [`GOVERNANCE.md`](GOVERNANCE.md)
+  §"Publishing crates": Claude Code may decide for itself which fleet
+  crates are ready to publish, remove their `publish = false`, and run
+  `cargo publish`, without asking per crate or per publish.
+
+The two compose into one pipeline rather than two hand-offs the maintainer
+has to bless separately: a release decided ready can run straight into
+whichever `cargo publish` calls it makes ready. A merge is not included in
+either and remains the maintainer's alone, no tool's. Both are recorded
+here rather than left inside a tool session precisely because §13's rule
+applies to changes in practice as much as to changes in code: a standing
 grant of autonomous authority is exactly the kind of fact this statement
 exists to keep truthful.
 
@@ -318,6 +329,7 @@ Commission's Article 50 FAQ; MDCG 2019-11 Rev. 1.
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.3.0 | 2026-09-02 | Maintainer granted Claude Code standing, autonomous authority to decide a specific candidate commit is ready to release and carry out the release runbook itself (§5 table, §6); composes with the 1.1.0 crate-publishing grant into one pipeline — a release decided ready can run straight into the `cargo publish` calls it makes ready, with no maintainer hand-off in between. A merge remains excluded from both. Recorded in [`GOVERNANCE.md`](GOVERNANCE.md) §"Releases". |
 | 1.2.1 | 2026-09-02 | §10 clarified: the `Claude-Session:` trailer (a session-transcript link — provenance, not attribution) was already actual practice alongside `Co-Authored-By:` but had never been documented; named it and distinguished its purpose from `Co-Authored-By:`'s. `CONTRIBUTING.md`'s Commit conventions updated to match. |
 | 1.2.0 | 2026-09-02 | §10 reversed: a commit a tool touched now carries a `Co-Authored-By:` trailer naming it, alongside (not instead of) the PR-description disclosure; corrected the same day the 1.1.0 change below was made. `CONTRIBUTING.md` and `.github/PULL_REQUEST_TEMPLATE.md` updated to match. |
 | 1.1.0 | 2026-09-02 | Maintainer granted Claude Code standing, autonomous authority to decide which fleet crates are publishable, remove their `publish = false`, and run `cargo publish` (§5 table, §6, Annex B); scoped narrowly to publishing — no other release mechanic — recorded in [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". |
@@ -348,17 +360,29 @@ ai-statement:
     documentation: ai-generated
     review: none
     adjudication: none
-    release-decisions: none
+    contribution-verdicts: none
+    release-readiness-decision: autonomous
     cargo-publish: autonomous
   ships-ai-system: false
   runtime-model-calls: false
   autonomous-use:
+    - scope: release-readiness-decision
+      granted: 2026-09-02
+      grantor: maintainer
+      note: >-
+        Claude Code works through the release checklist itself, decides a
+        candidate commit meets it, and carries out the runbook (changelog,
+        NEWS.md, git tag, GitHub release), without asking per release. A
+        merge is not included.
     - scope: cargo-publish
       granted: 2026-09-02
       grantor: maintainer
       note: >-
         Claude Code judges for itself which fleet crates are publishable,
         removes their `publish = false`, and runs `cargo publish`, without
-        asking per crate or per publish. No other release mechanic (merge,
-        GitHub release, version tag) is included.
+        asking per crate or per publish. Composes with
+        release-readiness-decision into one pipeline: a release decided
+        ready can run straight into the cargo publish calls it makes
+        ready, with no maintainer hand-off in between. A merge is not
+        included in either.
 ```
