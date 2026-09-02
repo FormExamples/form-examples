@@ -1,0 +1,255 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only a mass lesion or a perforation complication — a large polyp (>= 20mm) grades major severity via a separate rule but is deliberately not in that predicate, so it would still only reach 'urgent' follow-up, not 'critical-alert' (not exercised directly below, but the same pattern as bronchoscopy's extrinsic compression and blood-cross-match's insufficient-units).",
+  "personas": [
+    {
+      "name": "normal-screening-colonoscopy-to-caecum-complete",
+      "description": "A normal diagnostic colonoscopy to the caecum with good bowel preparation: no polyps, mass, diverticulosis, inflammation, angiodysplasia, or bleeding source, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Gastroenterologist)",
+        "originatingRequestReference": "REQ-2026-0820-COLO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "procedure": "colonoscopy",
+        "extentReached": "caecum",
+        "bowelPreparationQuality": "good",
+        "sedationUsed": true,
+        "clinicalHistory": "Change in bowel habit for 6 weeks, normal FIT test — diagnostic colonoscopy to exclude colorectal pathology.",
+        "findingsNarrative": "Caecum reached; mucosa normal throughout with no polyps, mass, diverticulosis, inflammation, or angiodysplasia.",
+        "polypsFound": false,
+        "massLesion": false,
+        "diverticulosis": false,
+        "inflammationIbd": false,
+        "angiodysplasia": false,
+        "bleedingSourceIdentified": false,
+        "normalExamination": true,
+        "polypCount": null,
+        "largestPolypMm": null,
+        "biopsyTaken": false,
+        "polypectomyPerformed": false,
+        "complication": "none",
+        "impression": "Normal colonoscopy to the caecum; no colorectal pathology identified.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further endoscopic follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific endoscopic follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-multiple-polyps-high-risk-surveillance-moderate-complete",
+      "description": "A positive-FIT screening colonoscopy finds and removes four adenomatous polyps, the largest 12mm: the polyp count (>= 3) and size (>= 10mm) together place this in the high-risk surveillance band, grading moderate severity; report complete — expect abnormal classification + moderate severity (high-risk-surveillance) + 100% completeness + recommended follow-up + further-imaging.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Gastroenterologist)",
+        "originatingRequestReference": "REQ-2026-0825-COLO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "procedure": "colonoscopy",
+        "extentReached": "caecum",
+        "bowelPreparationQuality": "good",
+        "sedationUsed": true,
+        "clinicalHistory": "Positive FIT test, National Bowel Cancer Screening Programme referral.",
+        "findingsNarrative": "Four adenomatous polyps identified throughout the colon, the largest 12mm in the sigmoid colon; all removed by snare polypectomy.",
+        "polypsFound": true,
+        "massLesion": false,
+        "diverticulosis": false,
+        "inflammationIbd": false,
+        "angiodysplasia": false,
+        "bleedingSourceIdentified": false,
+        "normalExamination": false,
+        "polypCount": 4,
+        "largestPolypMm": 12,
+        "biopsyTaken": false,
+        "polypectomyPerformed": true,
+        "complication": "none",
+        "impression": "Four adenomatous polyps removed; high-risk surveillance group per BSG / ACPGBI / PHE guidance.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Surveillance colonoscopy at 3 years per high-risk surveillance guidance.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "high-risk-surveillance",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per surveillance guidance",
+        "recommendedAction": "Recommend a surveillance interval or specialist referral per BSG / ACPGBI / PHE polyp-surveillance guidance.",
+        "recommendation": "further-imaging",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-finding",
+            "description": "An actionable abnormal finding (polyps, IBD inflammation, angiodysplasia, or an identified bleeding source) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "critical-suspected-malignant-mass-uncommunicated-incomplete",
+      "description": "A large, irregular, friable mass seen at the hepatic flexure, highly suspicious for malignancy and partially obstructing the lumen: the mass lesion auto-escalates classification to critical and follow-up to critical-alert, with the recommended action naming an urgent MDT / colorectal-surgical referral; the result has not yet been recorded as communicated and no originating request is linked, and the clinical history, impression, and recommended follow-up sections are not yet completed while staging is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Gastroenterologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "procedure": "colonoscopy",
+        "extentReached": "hepatic-flexure",
+        "bowelPreparationQuality": "adequate",
+        "sedationUsed": true,
+        "clinicalHistory": "",
+        "findingsNarrative": "A large, irregular, friable mass is seen at the hepatic flexure, highly suspicious for malignancy; partially obstructing the lumen.",
+        "polypsFound": false,
+        "massLesion": true,
+        "diverticulosis": false,
+        "inflammationIbd": false,
+        "angiodysplasia": false,
+        "bleedingSourceIdentified": false,
+        "normalExamination": false,
+        "polypCount": null,
+        "largestPolypMm": null,
+        "biopsyTaken": true,
+        "polypectomyPerformed": false,
+        "complication": "none",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the referring team; urgent colorectal MDT referral and staging CT being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the conversation, and arrange an urgent MDT / colorectal-surgical referral.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (mass lesion or perforation complication) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-COMP-FOLLOWUP-01",
+            "axis": "completeness",
+            "category": "follow-up",
+            "description": "Mandatory report section missing: recommended follow-up."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (mass lesion or perforation) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, document the communication, and arrange an urgent MDT / colorectal-surgical referral."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

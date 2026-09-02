@@ -1,0 +1,250 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This form is the family's gold template, so the second persona intentionally exercises the one severity path not yet covered by other *-test-result batches this backlog: an incidental-finding-only result grades 'minor' (not 'none' or 'moderate'), since `hasOnlyIncidentalFinding` requires incidentalFinding true AND no other abnormal structured finding.",
+  "personas": [
+    {
+      "name": "normal-ct-chest-complete",
+      "description": "A normal contrast-enhanced CT chest for chronic cough and weight loss: lungs clear, no acute, mass, infection, or obstructive finding, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0820-CT",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "bodyRegion": "chest",
+        "contrastUsed": "iv-iodinated",
+        "technique": "Contrast-enhanced CT chest, 1mm axial reconstructions with coronal and sagittal reformats.",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Chronic cough and weight loss; CT chest to investigate for underlying lung pathology.",
+        "comparisonWithPrevious": "No previous chest imaging available for comparison.",
+        "findingsNarrative": "Lungs clear with no nodule, mass, consolidation, or pleural effusion. Mediastinal and hilar structures normal. No acute finding.",
+        "acuteFinding": false,
+        "massOrLesion": false,
+        "haemorrhage": false,
+        "infarct": false,
+        "fracture": false,
+        "infectionInflammation": false,
+        "obstruction": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": null,
+        "radiationDoseDlp": 350,
+        "impression": "Normal CT chest; no underlying structural lung pathology identified.",
+        "recommendedFollowUp": "No further CT imaging follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific imaging follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-incidental-renal-cyst-minor-complete",
+      "description": "A CT abdomen/pelvis for non-specific abdominal pain finds no acute pathology to account for the pain, but notes an incidental simple renal cyst: this is the one severity path not yet covered elsewhere in this backlog — an incidental-only finding grades 'minor' (below 'moderate', above 'none'), classified as abnormal (not normal, since an incidental finding is still a positive finding) — report complete — expect abnormal classification + minor severity + 100% completeness + recommended follow-up (per incidental-findings guidance).",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0825-CT",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "bodyRegion": "abdomen-pelvis",
+        "contrastUsed": "both",
+        "technique": "Contrast-enhanced CT abdomen and pelvis with oral and IV contrast, portal-venous phase.",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Non-specific abdominal pain; CT abdomen/pelvis to investigate.",
+        "comparisonWithPrevious": "No previous abdominal imaging available for comparison.",
+        "findingsNarrative": "No acute intra-abdominal abnormality. A simple 8mm cortical cyst is noted in the right kidney, an incidental finding of no clinical significance. No mass, fracture, infection, or obstruction.",
+        "acuteFinding": false,
+        "massOrLesion": false,
+        "haemorrhage": false,
+        "infarct": false,
+        "fracture": false,
+        "infectionInflammation": false,
+        "obstruction": false,
+        "incidentalFinding": true,
+        "largestLesionSizeMm": null,
+        "radiationDoseDlp": 420,
+        "impression": "No acute abdominal pathology to account for the pain. Incidental simple renal cyst; no further action required.",
+        "recommendedFollowUp": "No specific follow-up required for the incidental renal cyst; manage per usual care.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "incidental",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per incidental-findings guidance",
+        "recommendedAction": "Manage the incidental finding per the relevant structured incidental-findings pathway.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "incidental-finding",
+            "description": "Only incidental finding(s) present; classified as abnormal (not a normal study)."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "incidental-finding",
+            "description": "Incidental finding(s) only; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "incidental-finding",
+            "description": "Incidental finding; structured follow-up per incidental-findings guidance recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCIDENTAL-FINDING-001",
+            "category": "incidental-finding",
+            "priority": "low",
+            "description": "One or more incidental findings are documented.",
+            "suggestedAction": "Manage the incidental finding per the relevant structured pathway."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-acute-intracranial-haemorrhage-uncommunicated-incomplete",
+      "description": "An acute intraparenchymal haemorrhage in the right basal ganglia with surrounding oedema and mass effect, phoned through from the on-call radiologist: the haemorrhage auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, and the clinical history, comparison, and impression sections are not yet completed while the stroke team responds — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (On-call Radiologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "bodyRegion": "head",
+        "contrastUsed": "none",
+        "technique": "Non-contrast CT head, standard protocol.",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "Acute intraparenchymal haemorrhage in the right basal ganglia with surrounding oedema and mass effect; no midline shift.",
+        "acuteFinding": false,
+        "massOrLesion": false,
+        "haemorrhage": true,
+        "infarct": false,
+        "fracture": false,
+        "infectionInflammation": false,
+        "obstruction": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": null,
+        "radiationDoseDlp": null,
+        "impression": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the stroke / neurosurgical on-call team immediately.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (haemorrhage or infarct) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (haemorrhage or infarct) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    }
+  ]
+}

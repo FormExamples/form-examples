@@ -1,0 +1,260 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-pre-operative-screen-complete",
+      "description": "A normal pre-operative coagulation screen: PT, INR, APTT, fibrinogen, D-dimer, and thrombin time all within the adult reference range, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Biomedical Scientist)",
+        "originatingRequestReference": "REQ-2026-0820-COAG",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Pre-operative coagulation screen for elective surgery; no bleeding history.",
+        "onAnticoagulant": false,
+        "anticoagulantAgent": "",
+        "prothrombinTimeSeconds": 12,
+        "inr": 1,
+        "activatedPartialThromboplastinTimeSeconds": 30,
+        "apttRatio": 0.9,
+        "fibrinogenGL": 2.8,
+        "dDimer": 200,
+        "thrombinTimeSeconds": 14,
+        "factorAssays": "",
+        "findingsNarrative": "All coagulation parameters are within the normal adult reference range.",
+        "overallResultStatus": "normal",
+        "criticalValuePresent": false,
+        "criticalValueDetail": "",
+        "comparisonWithPrevious": "No previous coagulation screen on file; this is a baseline result.",
+        "reportingCategory": "",
+        "impression": "Normal coagulation screen; no contraindication to surgery identified.",
+        "recommendedFollowUp": "No further coagulation follow-up required.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal-haemostasis",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-value",
+            "description": "No abnormal or critical result values on a satisfactory specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-value",
+            "description": "No abnormal value; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-isolated-aptt-prolongation-moderate-complete",
+      "description": "Pre-operative screening reveals an isolated APTT prolongation (55 seconds, ratio 1.5) with a normal PT/INR and no bleeding history: this grades moderate severity via the dedicated isolated-APTT rule, not a critical value, so follow-up stays at 'recommended' rather than escalating — report complete — expect abnormal classification + moderate severity + 100% completeness + recommended follow-up + further-testing.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Haematologist)",
+        "originatingRequestReference": "REQ-2026-0825-COAG",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Pre-operative coagulation screen; no known bleeding disorder, not on anticoagulants.",
+        "onAnticoagulant": false,
+        "anticoagulantAgent": "",
+        "prothrombinTimeSeconds": 12.5,
+        "inr": 1,
+        "activatedPartialThromboplastinTimeSeconds": 55,
+        "apttRatio": 1.5,
+        "fibrinogenGL": 2.5,
+        "dDimer": 300,
+        "thrombinTimeSeconds": 15,
+        "factorAssays": "",
+        "findingsNarrative": "Isolated prolongation of the APTT with a normal PT/INR; no clinical bleeding history.",
+        "overallResultStatus": "abnormal",
+        "criticalValuePresent": false,
+        "criticalValueDetail": "",
+        "comparisonWithPrevious": "No previous coagulation screen on file.",
+        "reportingCategory": "",
+        "impression": "Isolated APTT prolongation of uncertain cause; recommend mixing studies and factor / inhibitor work-up.",
+        "recommendedFollowUp": "Refer to haematology for mixing studies and factor assays.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "isolated-APTT-prolongation",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat testing or specialist referral as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-value",
+            "description": "The reported status is abnormal or one or more result values are outside the reference range; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "isolated-aptt-prolongation",
+            "description": "An isolated APTT prolongation (with a normal PT/INR) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "An isolated APTT prolongation is present and may warrant haematology referral for inhibitor / factor work-up.",
+            "suggestedAction": "Consider referral to haematology for mixing studies and factor assays."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-warfarin-inr-9-2-uncommunicated-incomplete",
+      "description": "INR 9.2 on warfarin — above the BSH reversal threshold of 8 — auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the critical result has not yet been recorded as communicated, and the clinical history, comparison, and impression sections are not yet completed while reversal is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (On-call Haematologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "",
+        "onAnticoagulant": true,
+        "anticoagulantAgent": "Warfarin",
+        "prothrombinTimeSeconds": 45,
+        "inr": 9.2,
+        "activatedPartialThromboplastinTimeSeconds": 32,
+        "apttRatio": 1,
+        "fibrinogenGL": 2.2,
+        "dDimer": 250,
+        "thrombinTimeSeconds": 15,
+        "factorAssays": "",
+        "findingsNarrative": "Markedly prolonged PT/INR consistent with excessive anticoagulant effect.",
+        "overallResultStatus": "critical",
+        "criticalValuePresent": true,
+        "criticalValueDetail": "INR 9.2 (critical threshold > 8).",
+        "comparisonWithPrevious": "",
+        "reportingCategory": "",
+        "impression": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through from the on-call lab; ward contacted regarding vitamin K reversal.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, consider reversal / replacement therapy, and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-value",
+            "description": "A critical value (INR > 8, fibrinogen < 1.0 g/L, a DIC picture, or a flagged critical result) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-value",
+            "description": "Critical value present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous results."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical value auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical value (INR > 8, fibrinogen < 1.0 g/L, a DIC picture, or a flagged critical result) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical value present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "low",
+            "description": "A significant result is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

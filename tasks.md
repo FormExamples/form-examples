@@ -867,11 +867,11 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       advance-statement-about-care, cardiopulmonary-resuscitation-training,
       consent-to-treatment, employee-onboarding-checklist,
       first-aid-training-checklist, medical-records-release-permission; 18 of
-      that batch remain. Remaining frontier: 36 `*-test-result` (13 already
+      that batch remain. Remaining frontier: 37 `*-test-result` (13 already
       had verified personas from earlier, pre-this-tracking work — this
       entry's "37 not started" had drifted from that ground truth, the
       same class of error the 2026-09-02 *-test-request correction below
-      fixed; 23 remained as of 2026-09-02) and 39 `*-test-request` — NOT
+      fixed; 24 remained as of 2026-09-02) and 39 `*-test-request` — NOT
       template-identical, per-form panels/rules, needs real per-form
       batches; confirmed 2026-09-02 that **all 39 have a working
       `calculateGrade` engine** (none are
@@ -972,7 +972,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       interpretation counterpart, per-form but structurally parallel:
       resultClassification / abnormalitySeverity+reportingCategory /
       reportCompletenessPercent / followUpUrgency, same
-      read-rules.js-then-author-3-personas-then-`--update` method); all 36
+      read-rules.js-then-author-3-personas-then-`--update` method); all 37
       confirmed engine-actionable via `bin/test-engines --verbose` (none
       SKIP), and these engines stamp a `gradedAt` wall-clock ISO timestamp
       that `bin/test-personas` already strips via its volatile-key regex,
@@ -984,10 +984,24 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       finding that is *not* in that predicate — blood-cross-match's
       insufficient-units, bronchoscopy's extrinsic central-airway
       compression — to verify the non-critical-alert path actually stays
-      non-critical-alert, not just the obvious critical path). 16 of 36
-      forms of this family done, 20 remain (count re-verified directly
-      against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 249/355). 73
+      non-critical-alert, not just the obvious critical path). 3 more
+      done 2026-09-03 (coagulation-test-result, colonoscopy-test-result,
+      ct-scan-test-result — the last is this family's gold template;
+      coagulation's second persona confirmed a genuine dead-code branch
+      (`R-FU-RECOMMENDED-03`, an isolated-APTT-specific follow-up message)
+      is unreachable, since `gradeSeverity` always routes isolated APTT
+      prolongation through the generic 'moderate' severity first, which
+      `gradeFollowUp`'s `severity === 'moderate'` check catches before
+      ever reaching the dedicated branch — confirmed by running
+      `--update`, the same class of finding as tumor-marker-test-request's
+      unreachable `redirect` from the prior *-test-request batch;
+      ct-scan's second persona instead covers the one severity band
+      (`minor`, incidental-only) not yet exercised by this family's other
+      forms this backlog, and confirmed that same follow-up branch IS
+      reachable there, unlike coagulation's). 19 of 37 forms of this
+      family done, 18 remain (count re-verified directly against the
+      fleet each update, not hand-tracked — `bin/test-personas` ground
+      truth: PASS 252/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +
