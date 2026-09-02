@@ -936,10 +936,24 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       reject persona (confirmed pregnancy again) is a third such outcome;
       pet-scan's dose and prep-safety axes are also fully independent,
       unlike nuclear-medicine's, so even its well-formed persona carries a
-      non-blocking high-dose flag). 33 forms of this family done, 6 remain
-      (count re-verified directly against the fleet each update, not
-      hand-tracked, after the 2026-09-02 tracking-drift correction —
-      `bin/test-personas` ground truth: PASS 240/355). 73
+      non-blocking high-dose flag). 3 more done 2026-09-02
+      (pregnancy-ultrasound-test-request, pulmonary-function-test-request,
+      sleep-study-test-request — same methodology; pregnancy-ultrasound's
+      distinctive Axis B is a gestational-age window fit, not a safety
+      band — its `redirect` persona is an ideal indication/scan-type
+      pairing at a gestation far outside that scan's window, recommending
+      the scan type that actually fits; sleep-study mirrors holter-
+      monitor's score-adjustment pattern (+1/-1 for Epworth/STOP-BANG
+      evidence on OSA-pathway indications) and its first persona
+      deliberately has evidence present but below threshold, so neither
+      adjustment fires; pulmonary-function's `redirect` means 'Defer /
+      redirect' — a fourth distinct semantic for that label in this family
+      (compare fluoroscopy's literal redirect, holter-monitor's redirect-
+      to-a-different-monitor, and nuclear-medicine's accept-with-caution)).
+      36 forms of this family done, 3 remain (count re-verified directly
+      against the fleet each update, not hand-tracked, after the
+      2026-09-02 tracking-drift correction — `bin/test-personas` ground
+      truth: PASS 243/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

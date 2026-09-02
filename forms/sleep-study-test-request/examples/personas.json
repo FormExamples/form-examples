@@ -1,0 +1,341 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. On the OSA-pathway indications, this engine adjusts its raw indication-fit score by +1 when Epworth >= 11 or STOP-BANG >= 5, by -1 when neither score is recorded at all, and leaves it unchanged when a score is present but below those thresholds (as in the first persona below).",
+  "personas": [
+    {
+      "name": "routine-suspected-osa-home-sleep-apnoea-test-complete",
+      "description": "Well-formed routine referral: witnessed apnoeas, a home sleep apnoea test is the recommended (ideal) study for the suspected-osa indication; Epworth (9) and STOP-BANG (2) are both recorded but below the abnormal/high-risk thresholds, so neither the +1 evidence bonus nor the -1 no-evidence penalty applies, every completeness field present — expect usually-appropriate (score 8, unadjusted) + low priority + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1975-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 31.5,
+          "interpreterRequired": false
+        },
+        "request": {
+          "studyType": "home-sleep-apnoea-test",
+          "primaryIndication": "suspected-osa",
+          "clinicalQuestion": "Loud snoring with witnessed apnoeas reported by partner — assess for obstructive sleep apnoea.",
+          "relevantHistory": "No previous sleep study. Not an occupational driver."
+        },
+        "scores": {
+          "epworthScore": 9,
+          "stopBangScore": 2,
+          "neckCircumferenceCm": 38
+        },
+        "symptoms": {
+          "witnessedApnoeas": true,
+          "occupationalDriver": false,
+          "cardiovascularDisease": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Patient can self-administer the home test with instructions provided."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "priorityBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-OSA-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-osa",
+            "description": "Requested home-sleep-apnoea-test study is the recommended investigation for \"suspected-osa\"."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "No priority drivers present; baseline low priority."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation triggers; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-driver-assessment-home-sleep-apnoea-test-severe-sleepiness-high-priority",
+      "description": "HGV driver reporting severe excessive daytime sleepiness and falling asleep at the wheel: a home sleep apnoea test is the recommended (ideal) study for the driver-assessment indication, and the high Epworth (17) supports the OSA-pathway request, nudging the score from 8 to 9; the combination of occupational driving with excessive sleepiness, and the severe sleepiness alone, each independently force both urgent triage (DVLA fast-track) and high clinical priority, regardless of the routine urgency requested — expect usually-appropriate (score 9) + high priority + urgent + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "sleep-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Sleep Service",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1970-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 33,
+          "interpreterRequired": false
+        },
+        "request": {
+          "studyType": "home-sleep-apnoea-test",
+          "primaryIndication": "driver-assessment",
+          "clinicalQuestion": "HGV driver reporting severe excessive daytime sleepiness and falling asleep at the wheel — urgent OSA assessment for a DVLA fitness-to-drive decision.",
+          "relevantHistory": "Occupational HGV driver. Loud snoring reported by partner. Hypertension."
+        },
+        "scores": {
+          "epworthScore": 17,
+          "stopBangScore": 7,
+          "neckCircumferenceCm": 44
+        },
+        "symptoms": {
+          "witnessedApnoeas": true,
+          "occupationalDriver": true,
+          "cardiovascularDisease": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "setting": "outpatient",
+          "notes": "DVLA Group 2 licence; advised not to drive pending assessment per DVLA guidance."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 9,
+        "appropriatenessBand": "usually-appropriate",
+        "priorityBand": "high",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-DRIVER-ASSESSMENT-IDEAL",
+            "axis": "appropriateness",
+            "category": "driver-assessment",
+            "description": "Requested home-sleep-apnoea-test study is the recommended investigation for \"driver-assessment\"."
+          },
+          {
+            "ruleId": "R-APPROP-OSA-EVIDENCE",
+            "axis": "appropriateness",
+            "category": "driver-assessment",
+            "description": "High Epworth and/or STOP-BANG supports the OSA-pathway request."
+          },
+          {
+            "ruleId": "R-PRIORITY-DRIVER-SLEEPINESS",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "Occupational driver with excessive daytime sleepiness — high priority (DVLA)."
+          },
+          {
+            "ruleId": "R-PRIORITY-SEVERE-SLEEPINESS",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "Severe excessive daytime sleepiness (Epworth ≥ 16) — high priority."
+          },
+          {
+            "ruleId": "R-PRIORITY-MODERATE-SLEEPINESS",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "Abnormal daytime sleepiness (Epworth ≥ 11) — moderate priority."
+          },
+          {
+            "ruleId": "R-PRIORITY-OCCUPATIONAL-DRIVER",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "Occupational / vocational driver — moderate priority (DVLA relevance)."
+          },
+          {
+            "ruleId": "R-PRIORITY-HIGH-OSA-RISK",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "High STOP-BANG (≥ 5) indicates high OSA risk — moderate priority."
+          },
+          {
+            "ruleId": "R-TRIAGE-DRIVER-SLEEPINESS",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Vocational driver with excessive sleepiness — fast-track urgent (DVLA)."
+          },
+          {
+            "ruleId": "R-TRIAGE-SEVERE-SLEEPINESS",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Severe excessive daytime sleepiness (Epworth ≥ 16) — urgent assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-OCCUPATIONAL-DRIVER-OSA-001",
+            "category": "occupational-driver-osa",
+            "priority": "high",
+            "description": "Occupational / vocational driver with suspected or confirmed OSA-related sleepiness.",
+            "suggestedAction": "Fast-track vocational-driver assessment; advise on DVLA notification and fitness to drive."
+          },
+          {
+            "flagId": "F-SEVERE-DAYTIME-SLEEPINESS-001",
+            "category": "severe-daytime-sleepiness",
+            "priority": "high",
+            "description": "Severe excessive daytime sleepiness (Epworth 17 ≥ 16).",
+            "suggestedAction": "Prioritise the study; counsel on driving and operating machinery pending assessment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-suspected-narcolepsy-other-study-mismatch-incomplete",
+      "description": "Excessive daytime sleepiness with cataplexy triggered by laughter: an 'other' study was requested even though multiple sleep latency testing (with preceding polysomnography also ideal) is the recommended investigation for the suspected-narcolepsy indication, a clear mismatch that forces appropriateness to usually-not-appropriate and the recommendation to query-referrer regardless of completeness; suspected-narcolepsy is not an OSA-pathway indication, so no Epworth/STOP-BANG score adjustment applies here, but the missing Epworth still costs completeness and raises its own flag; several administrative fields are not yet captured — expect usually-not-appropriate + low priority + routine + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1994-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": 24,
+          "interpreterRequired": false
+        },
+        "request": {
+          "studyType": "other",
+          "primaryIndication": "suspected-narcolepsy",
+          "clinicalQuestion": "",
+          "relevantHistory": "Excessive daytime sleepiness with episodes of cataplexy triggered by laughter — query narcolepsy."
+        },
+        "scores": {
+          "epworthScore": null,
+          "stopBangScore": null,
+          "neckCircumferenceCm": null
+        },
+        "symptoms": {
+          "witnessedApnoeas": false,
+          "occupationalDriver": false,
+          "cardiovascularDisease": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Query whether MSLT with preceding polysomnography should be requested instead of 'other'."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "priorityBand": "low",
+        "completenessPercent": 53,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-NARCOLEPSY-MISMATCH",
+            "axis": "appropriateness",
+            "category": "suspected-narcolepsy",
+            "description": "Requested other study is not usually appropriate for \"suspected-narcolepsy\"; query the referrer."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "clinical-priority",
+            "description": "No priority drivers present; baseline low priority."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-EPWORTH",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing Epworth score."
+          },
+          {
+            "ruleId": "R-COMPLETE-STOP-BANG",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing STOP-BANG score."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation triggers; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-NARCOLEPSY-001",
+            "category": "suspected-narcolepsy",
+            "priority": "medium",
+            "description": "Suspected narcolepsy / central hypersomnolence.",
+            "suggestedAction": "Route to the MSLT pathway with preceding polysomnography; consider sleep-medicine referral."
+          },
+          {
+            "flagId": "F-MISSING-EPWORTH-001",
+            "category": "missing-epworth",
+            "priority": "medium",
+            "description": "No Epworth Sleepiness Scale score recorded.",
+            "suggestedAction": "Record the Epworth score; it drives priority, triage, and DVLA decisions."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "low",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the study should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

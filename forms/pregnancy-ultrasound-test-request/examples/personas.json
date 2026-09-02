@@ -1,0 +1,343 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's distinctive Axis B is gestational-age window fit, not a safety/risk band; `deriveRecommendation` checks appropriateness first, then windowFit === 'outside-window' forces `redirect` independently of any appropriateness mismatch.",
+  "personas": [
+    {
+      "name": "routine-anomaly-screening-anomaly-scan-19-weeks-complete",
+      "description": "Well-formed routine referral: a standard 20-week fetal anomaly scan, the anomaly scan type is the recommended (ideal) examination for the anomaly-screening indication, and at 19+3 weeks the gestation sits squarely within the anomaly scan's 18+0-20+6 window, no red-flag symptoms, every completeness field present — expect usually-appropriate + appropriate window fit + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Priya Anand",
+          "clinicianRole": "midwife",
+          "registrationBody": "NMC",
+          "registrationNumber": "12A3456B",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Maternity Unit",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Chloe",
+          "lastName": "Bennett",
+          "dateOfBirth": "1994-05-02",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 23.4,
+          "interpreterRequired": false
+        },
+        "dating": {
+          "lastMenstrualPeriodDate": "2026-04-10",
+          "lastMenstrualPeriodReliability": "reliable",
+          "estimatedDueDate": "2027-01-15",
+          "estimatedDueDateMethod": "lmp",
+          "gestationalAgeWeeks": 19,
+          "gestationalAgeDays": 3
+        },
+        "history": {
+          "gravida": 2,
+          "para": 1,
+          "plurality": "singleton",
+          "chorionicity": "not-applicable",
+          "conceptionMethod": "spontaneous",
+          "rhesusStatus": "positive"
+        },
+        "request": {
+          "requestedScanType": "anomaly",
+          "primaryIndication": "anomaly-screening",
+          "clinicalQuestion": "Routine 20-week fetal anomaly screening scan.",
+          "relevantHistory": "Uncomplicated pregnancy to date. Combined screening low risk.",
+          "previousScanFinding": "normal",
+          "previousScanDate": "2026-06-05"
+        },
+        "symptoms": {
+          "vaginalBleeding": "none",
+          "abdominalPain": "none",
+          "reducedFetalMovements": false,
+          "suspectedEctopic": false,
+          "haemodynamicallyUnstable": false
+        },
+        "riskFactors": {
+          "hypertension": false,
+          "diabetes": false,
+          "previousGrowthRestriction": false,
+          "previousPretermBirth": false,
+          "previousCaesarean": false,
+          "smoker": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-05",
+          "setting": "outpatient",
+          "notes": "Standard NHS FASP anomaly scan appointment."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "windowFit": "appropriate",
+        "recommendedScanType": "",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ANOMALY-SCREENING-IDEAL",
+            "axis": "appropriateness",
+            "category": "anomaly-screening",
+            "description": "Requested anomaly scan is the recommended examination for \"anomaly-screening\"."
+          },
+          {
+            "ruleId": "R-WINDOW-ANOMALY-FIT",
+            "axis": "window",
+            "category": "anomaly",
+            "description": "Gestation is within the recommended window for a anomaly scan."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "soon-bleeding-viability-scan-8-weeks-moderate-bleeding",
+      "description": "Moderate vaginal bleeding at 8 weeks with no pain: a viability scan is the recommended (ideal) examination for the bleeding indication, and at 8+0 weeks the gestation sits within the viability scan's 6+0-10+6 window; the moderate bleeding itself auto-escalates triage to 'soon' regardless of the routine urgency requested, but — unlike heavy bleeding — moderate bleeding has no corresponding safety flag in this engine, so the triage escalation is unaccompanied by any flag — expect usually-appropriate + appropriate window fit + soon + accept, no flags.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Femi Okafor",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Early Pregnancy Assessment Unit",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1990-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 26.5,
+          "interpreterRequired": false
+        },
+        "dating": {
+          "lastMenstrualPeriodDate": "2026-07-01",
+          "lastMenstrualPeriodReliability": "uncertain",
+          "estimatedDueDate": "2027-04-07",
+          "estimatedDueDateMethod": "lmp",
+          "gestationalAgeWeeks": 8,
+          "gestationalAgeDays": 0
+        },
+        "history": {
+          "gravida": 1,
+          "para": 0,
+          "plurality": "singleton",
+          "chorionicity": "not-applicable",
+          "conceptionMethod": "spontaneous",
+          "rhesusStatus": "unknown"
+        },
+        "request": {
+          "requestedScanType": "viability",
+          "primaryIndication": "bleeding",
+          "clinicalQuestion": "Moderate vaginal bleeding at 8 weeks gestation with no pain — confirm viability and exclude miscarriage.",
+          "relevantHistory": "First pregnancy. No previous miscarriages.",
+          "previousScanFinding": "",
+          "previousScanDate": ""
+        },
+        "symptoms": {
+          "vaginalBleeding": "moderate",
+          "abdominalPain": "none",
+          "reducedFetalMovements": false,
+          "suspectedEctopic": false,
+          "haemodynamicallyUnstable": false
+        },
+        "riskFactors": {
+          "hypertension": false,
+          "diabetes": false,
+          "previousGrowthRestriction": false,
+          "previousPretermBirth": false,
+          "previousCaesarean": false,
+          "smoker": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "outpatient",
+          "notes": "Early pregnancy assessment unit same-week appointment."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "windowFit": "appropriate",
+        "recommendedScanType": "",
+        "completenessPercent": 100,
+        "triageTier": "soon",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-BLEEDING-IDEAL",
+            "axis": "appropriateness",
+            "category": "bleeding",
+            "description": "Requested viability scan is the recommended examination for \"bleeding\"."
+          },
+          {
+            "ruleId": "R-WINDOW-VIABILITY-FIT",
+            "axis": "window",
+            "category": "viability",
+            "description": "Gestation is within the recommended window for a viability scan."
+          },
+          {
+            "ruleId": "R-TRIAGE-MODERATE-BLEEDING",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Moderate vaginal bleeding — expedited assessment."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "redirect-anomaly-screening-anomaly-scan-30-weeks-outside-window-incomplete",
+      "description": "A missed booking anomaly scan now presenting at 30 weeks: the anomaly scan type is itself the recommended (ideal) examination for the anomaly-screening indication — there is no appropriateness mismatch — but at 30+0 weeks the gestation is far outside the anomaly scan's 18+0-20+6 window (and outside even the one-week borderline grace), so this engine's gestational-age-window axis independently forces `redirect`, recommending a growth scan instead; several administrative fields are not yet captured — expect usually-appropriate + outside-window fit (recommending growth) + routine + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Maternity",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1988-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": 31.2,
+          "interpreterRequired": false
+        },
+        "dating": {
+          "lastMenstrualPeriodDate": "2026-02-01",
+          "lastMenstrualPeriodReliability": "reliable",
+          "estimatedDueDate": "2026-11-08",
+          "estimatedDueDateMethod": "lmp",
+          "gestationalAgeWeeks": 30,
+          "gestationalAgeDays": 0
+        },
+        "history": {
+          "gravida": 3,
+          "para": 2,
+          "plurality": "singleton",
+          "chorionicity": "not-applicable",
+          "conceptionMethod": "spontaneous",
+          "rhesusStatus": "positive"
+        },
+        "request": {
+          "requestedScanType": "anomaly",
+          "primaryIndication": "anomaly-screening",
+          "clinicalQuestion": "",
+          "relevantHistory": "The booking anomaly scan was missed; now presenting at 30 weeks requesting the anomaly scan retrospectively.",
+          "previousScanFinding": "",
+          "previousScanDate": ""
+        },
+        "symptoms": {
+          "vaginalBleeding": "none",
+          "abdominalPain": "none",
+          "reducedFetalMovements": false,
+          "suspectedEctopic": false,
+          "haemodynamicallyUnstable": false
+        },
+        "riskFactors": {
+          "hypertension": false,
+          "diabetes": false,
+          "previousGrowthRestriction": false,
+          "previousPretermBirth": false,
+          "previousCaesarean": false,
+          "smoker": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Patient missed the routine 20-week window; now 30 weeks — an anomaly scan is no longer appropriate at this gestation."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "windowFit": "outside-window",
+        "recommendedScanType": "growth",
+        "completenessPercent": 69,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect to a more suitable scan",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ANOMALY-SCREENING-IDEAL",
+            "axis": "appropriateness",
+            "category": "anomaly-screening",
+            "description": "Requested anomaly scan is the recommended examination for \"anomaly-screening\"."
+          },
+          {
+            "ruleId": "R-WINDOW-ANOMALY-OUTSIDE",
+            "axis": "window",
+            "category": "anomaly",
+            "description": "Gestation is outside the anomaly window; a growth scan fits this gestation."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          },
+          {
+            "flagId": "F-WINDOW-MISMATCH-001",
+            "category": "window-mismatch",
+            "priority": "medium",
+            "description": "Requested scan type does not fit the gestational-age window.",
+            "suggestedAction": "Consider redirecting to a growth scan for this gestation."
+          }
+        ]
+      }
+    }
+  ]
+}

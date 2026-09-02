@@ -1,0 +1,294 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's `redirect` recommendation means 'Defer / redirect' — yet another distinct semantic for the label across this *-test-request family (compare fluoroscopy's literal redirect-to-a-different-study, holter-monitor's redirect-to-a-different-monitor, and nuclear-medicine's 'accept with caution').",
+  "personas": [
+    {
+      "name": "routine-suspected-asthma-spirometry-with-reversibility-complete",
+      "description": "Well-formed routine referral: episodic wheeze and nocturnal cough, spirometry with reversibility is the recommended (ideal) test for the suspected-asthma indication, no forced-expiration or infection-control contraindications, every completeness field including height and weight present — expect usually-appropriate + ok safety + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1985-03-14",
+          "nhsNumber": "943 476 5922",
+          "heightCm": 178,
+          "weightKg": 82
+        },
+        "request": {
+          "testType": "spirometry-with-reversibility",
+          "primaryIndication": "suspected-asthma",
+          "clinicalQuestion": "Episodic wheeze and nocturnal cough for 6 months — assess for reversible airflow obstruction.",
+          "relevantHistory": "No previous respiratory diagnosis. Trial of salbutamol partially helpful."
+        },
+        "symptoms": {
+          "breathlessness": false,
+          "cough": true,
+          "wheeze": true
+        },
+        "background": {
+          "smokingStatus": "never",
+          "currentInhalers": "Salbutamol PRN"
+        },
+        "safety": {
+          "recentRespiratoryInfection": false,
+          "recentMiOrEyeAbdominalSurgery": false,
+          "suspectedActiveTuberculosis": false,
+          "haemoptysis": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Withhold bronchodilators for 6 hours before the test per protocol."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-ASTHMA-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-asthma",
+            "description": "Requested spirometry-with-reversibility test is the recommended first-line investigation for \"suspected-asthma\"."
+          },
+          {
+            "ruleId": "R-SAFETY-CLEAR",
+            "axis": "safety",
+            "category": "contraindication",
+            "description": "No forced-expiration or infection-control contraindication identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-pre-operative-spirometry-recent-infection-caution",
+      "description": "Pre-operative lung function assessment for major abdominal surgery in a patient with COPD: spirometry is the recommended (ideal) test for the pre-operative indication, and the indication itself auto-escalates triage to urgent (to avoid delaying surgery) regardless of the routine urgency requested; a recent respiratory infection 10 days ago independently forces a safety caution (defer until recovered), which is not severe enough to force redirect — expect usually-appropriate + caution safety + urgent + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Pre-Assessment Clinic",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "heightCm": 162,
+          "weightKg": 68
+        },
+        "request": {
+          "testType": "spirometry",
+          "primaryIndication": "pre-operative",
+          "clinicalQuestion": "Listed for major abdominal surgery with a background of COPD — pre-operative lung function assessment.",
+          "relevantHistory": "Known COPD, moderate severity. Recent cough and cold 10 days ago, now improving."
+        },
+        "symptoms": {
+          "breathlessness": true,
+          "cough": true,
+          "wheeze": false
+        },
+        "background": {
+          "smokingStatus": "ex",
+          "currentInhalers": "Tiotropium, Seretide"
+        },
+        "safety": {
+          "recentRespiratoryInfection": true,
+          "recentMiOrEyeAbdominalSurgery": false,
+          "suspectedActiveTuberculosis": false,
+          "haemoptysis": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-05",
+          "setting": "outpatient",
+          "notes": "Surgery scheduled in 3 weeks; test needed before the pre-op clinic review."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PRE-OPERATIVE-IDEAL",
+            "axis": "appropriateness",
+            "category": "pre-operative",
+            "description": "Requested spirometry test is the recommended first-line investigation for \"pre-operative\"."
+          },
+          {
+            "ruleId": "R-SAFETY-RESPIRATORY-INFECTION",
+            "axis": "safety",
+            "category": "contraindication",
+            "description": "Recent respiratory infection — defer for infection control and result validity (caution)."
+          },
+          {
+            "ruleId": "R-TRIAGE-PRE-OPERATIVE",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Pre-operative indication — expedite to avoid delaying surgery."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ACTIVE-RESPIRATORY-INFECTION-001",
+            "category": "active-respiratory-infection",
+            "priority": "medium",
+            "description": "Recent or active respiratory infection.",
+            "suggestedAction": "Defer until recovered (typically 4-6 weeks) for infection control and result validity."
+          }
+        ]
+      }
+    },
+    {
+      "name": "redirect-breathlessness-full-lung-function-haemoptysis-incomplete",
+      "description": "Progressive breathlessness with an episode of haemoptysis yesterday: full lung function is itself the recommended (ideal) test for the breathlessness indication — there is no appropriateness mismatch here — but haemoptysis of unknown origin is a forced-expiration contraindication, forcing the safety band to contraindicated and, ahead of any appropriateness or completeness check, this engine's `redirect` ('Defer / redirect') recommendation; the haemoptysis independently also forces urgent triage; several administrative fields are not yet captured — expect usually-appropriate + contraindicated safety + urgent + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Respiratory",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "heightCm": 160,
+          "weightKg": 58
+        },
+        "request": {
+          "testType": "full-lung-function",
+          "primaryIndication": "breathlessness",
+          "clinicalQuestion": "",
+          "relevantHistory": "Progressive breathlessness over 3 months with one episode of coughing up blood-streaked sputum yesterday."
+        },
+        "symptoms": {
+          "breathlessness": true,
+          "cough": true,
+          "wheeze": false
+        },
+        "background": {
+          "smokingStatus": "current",
+          "currentInhalers": ""
+        },
+        "safety": {
+          "recentRespiratoryInfection": false,
+          "recentMiOrEyeAbdominalSurgery": false,
+          "suspectedActiveTuberculosis": false,
+          "haemoptysis": true
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Respiratory team aware; CT chest and urgent review arranged before any forced-expiration testing."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "contraindicated",
+        "completenessPercent": 71,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Defer / redirect",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-BREATHLESSNESS-IDEAL",
+            "axis": "appropriateness",
+            "category": "breathlessness",
+            "description": "Requested full-lung-function test is the recommended first-line investigation for \"breathlessness\"."
+          },
+          {
+            "ruleId": "R-SAFETY-HAEMOPTYSIS",
+            "axis": "safety",
+            "category": "contraindication",
+            "description": "Haemoptysis of unknown origin — forced expiration contraindicated until investigated."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-HAEMOPTYSIS",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Haemoptysis — expedite investigation; urgent assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HAEMOPTYSIS-001",
+            "category": "haemoptysis",
+            "priority": "high",
+            "description": "Haemoptysis of unknown origin reported.",
+            "suggestedAction": "Defer forced expiration until the cause is investigated; expedite respiratory review."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the test should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
