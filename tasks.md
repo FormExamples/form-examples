@@ -950,10 +950,21 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       redirect' — a fourth distinct semantic for that label in this family
       (compare fluoroscopy's literal redirect, holter-monitor's redirect-
       to-a-different-monitor, and nuclear-medicine's accept-with-caution)).
-      36 forms of this family done, 3 remain (count re-verified directly
-      against the fleet each update, not hand-tracked, after the
-      2026-09-02 tracking-drift correction — `bin/test-personas` ground
-      truth: PASS 243/355). 73
+      Final 3 done 2026-09-02 (toxicology-test-request,
+      tumor-marker-test-request, ultrasound-test-request — same
+      methodology; tumor-marker-test-request's third persona is a verified
+      *engine finding*, not just a persona design choice — its `redirect`
+      recommendation (interpretationBand === 'misuse-risk') is unreachable
+      in practice, because `scoreAppropriateness` forces
+      `usually-not-appropriate` in the exact same broad-screening case that
+      `scoreInterpretation` forces `misuse-risk`, and `deriveRecommendation`
+      checks the appropriateness band first — so screening misuse always
+      resolves to query-referrer, confirmed by running `--update` rather
+      than assumed).
+      **`*-test-request` family COMPLETE: 39/39 forms have verified
+      personas** (count re-verified directly against the fleet each
+      update, not hand-tracked, after the 2026-09-02 tracking-drift
+      correction — `bin/test-personas` ground truth: PASS 246/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

@@ -1,0 +1,295 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's suitability axis has three bands (ok/caution/limited); both caution and limited raise the same F-PREP-NOT-MET-001 flag (with different wording), but only 'limited' (unflagged prep alone stays 'caution') forces the distinctive `redirect` recommendation.",
+  "personas": [
+    {
+      "name": "routine-suspected-gallstones-liver-biliary-fasting-flagged-complete",
+      "description": "Well-formed routine referral: recurrent right-upper-quadrant pain after fatty meals, a liver/biliary ultrasound is the recommended (ideal) examination for the suspected-gallstones indication, fasting is correctly flagged as required (matching what a liver/biliary scan needs), every completeness field present — expect usually-appropriate + ok suitability + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1975-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 24.5,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "liver-biliary",
+          "laterality": "not-applicable",
+          "primaryIndication": "suspected-gallstones",
+          "clinicalQuestion": "Recurrent right upper quadrant pain after fatty meals — assess for gallstones.",
+          "relevantHistory": "No previous abdominal surgery.",
+          "previousScanFinding": "",
+          "previousScanDate": ""
+        },
+        "prep": {
+          "fastingRequired": true,
+          "fullBladderRequired": false
+        },
+        "redFlags": {
+          "suspectedDvt": false,
+          "suspectedTesticularTorsion": false,
+          "suspectedAaa": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-10",
+          "setting": "outpatient",
+          "notes": "Patient advised to fast for 6 hours before the appointment."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "suitabilityBand": "ok",
+        "prepRequirements": "Fasting 6 hours to distend the gallbladder. Fasting required.",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-GALLSTONES-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-gallstones",
+            "description": "Requested liver-biliary ultrasound is the recommended examination for \"suspected-gallstones\"."
+          },
+          {
+            "ruleId": "R-SUIT-LIVER-BILIARY-OK",
+            "axis": "suitability",
+            "category": "prep",
+            "description": "Preparation requirements are met for a liver-biliary scan."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "emergency-suspected-aaa-abdomen-fasting-not-flagged-caution",
+      "description": "Sudden severe back and abdominal pain with a pulsatile abdominal mass: an abdominal ultrasound is the recommended (ideal) examination for the suspected-aaa indication, and the red flag itself auto-escalates triage to emergency regardless of the routine urgency requested; there was no time to fast the patient, so the request does not flag fasting required even though an abdominal scan usually needs it — this forces a suitability caution (not the more severe 'limited' band), which is non-blocking — expect usually-appropriate + caution suitability + emergency + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1950-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 26,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "abdomen",
+          "laterality": "not-applicable",
+          "primaryIndication": "suspected-aaa",
+          "clinicalQuestion": "Sudden severe back and abdominal pain with a pulsatile abdominal mass — assess for abdominal aortic aneurysm.",
+          "relevantHistory": "Hypertension. Smoker.",
+          "previousScanFinding": "",
+          "previousScanDate": ""
+        },
+        "prep": {
+          "fastingRequired": false,
+          "fullBladderRequired": false
+        },
+        "redFlags": {
+          "suspectedDvt": false,
+          "suspectedTesticularTorsion": false,
+          "suspectedAaa": true
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-25",
+          "setting": "emergency",
+          "notes": "Phoned through from the emergency department; vascular surgery on-call aware. No time for fasting preparation."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "suitabilityBand": "caution",
+        "prepRequirements": "Fasting 6 hours for upper-abdominal / biliary views. Fasting required.",
+        "completenessPercent": 100,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-AAA-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-aaa",
+            "description": "Requested abdomen ultrasound is the recommended examination for \"suspected-aaa\"."
+          },
+          {
+            "ruleId": "R-SUIT-ABDOMEN-FASTING-NOT-FLAGGED",
+            "axis": "suitability",
+            "category": "prep",
+            "description": "A abdomen scan usually needs fasting, but the request does not flag fasting required."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-AAA",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Suspected abdominal aortic aneurysm — emergency assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-AAA-001",
+            "category": "suspected-aaa",
+            "priority": "high",
+            "description": "Suspected abdominal aortic aneurysm.",
+            "suggestedAction": "Arrange emergency abdominal aortic ultrasound; if haemodynamically unstable or tender, treat as a surgical emergency."
+          },
+          {
+            "flagId": "F-PREP-NOT-MET-001",
+            "category": "prep-not-met",
+            "priority": "medium",
+            "description": "Required preparation has not been flagged on the request.",
+            "suggestedAction": "Confirm preparation before booking: Fasting 6 hours for upper-abdominal / biliary views. Fasting required."
+          }
+        ]
+      }
+    },
+    {
+      "name": "redirect-abdominal-pain-abdomen-high-bmi-limited-incomplete",
+      "description": "Vague generalised abdominal discomfort in a patient with a raised BMI: an abdominal ultrasound is itself the recommended (ideal) examination for the abdominal-pain indication — there is no appropriateness mismatch, and fasting is correctly flagged — but a BMI of 38 (>= the 35 body-habitus threshold) on this deep region independently forces the suitability band to 'limited', which is this engine's distinctive trigger for the `redirect` recommendation ('Redirect / amend preparation'), overriding the 'ok' fasting outcome directly rather than just adding a caution; several administrative fields are not yet captured — expect usually-appropriate + limited suitability + routine + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Radiology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1970-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": 38,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "abdomen",
+          "laterality": "not-applicable",
+          "primaryIndication": "abdominal-pain",
+          "clinicalQuestion": "",
+          "relevantHistory": "Vague generalised abdominal discomfort for several weeks. Raised BMI noted at booking.",
+          "previousScanFinding": "",
+          "previousScanDate": ""
+        },
+        "prep": {
+          "fastingRequired": true,
+          "fullBladderRequired": false
+        },
+        "redFlags": {
+          "suspectedDvt": false,
+          "suspectedTesticularTorsion": false,
+          "suspectedAaa": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Patient counselled that a raised BMI may technically limit deep abdominal views; consider CT as an alternative if ultrasound is non-diagnostic."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "suitabilityBand": "limited",
+        "prepRequirements": "Fasting 6 hours for upper-abdominal / biliary views. Fasting required.",
+        "completenessPercent": 64,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / amend preparation",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ABDOMINAL-PAIN-IDEAL",
+            "axis": "appropriateness",
+            "category": "abdominal-pain",
+            "description": "Requested abdomen ultrasound is the recommended examination for \"abdominal-pain\"."
+          },
+          {
+            "ruleId": "R-SUIT-HIGH-BMI",
+            "axis": "suitability",
+            "category": "body-habitus",
+            "description": "Raised BMI (38 kg/m²) may technically limit a deep abdomen ultrasound."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREP-NOT-MET-001",
+            "category": "prep-not-met",
+            "priority": "medium",
+            "description": "Examination may be technically limited (preparation or body habitus).",
+            "suggestedAction": "Confirm preparation before booking: Fasting 6 hours for upper-abdominal / biliary views. Fasting required."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

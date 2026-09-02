@@ -1,0 +1,335 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's timing axis has a `caution` band (unknown ingestion time, or very early sampling) alongside `ok`/`invalid`, but only `invalid` has a dedicated safety flag and only `invalid` forces query-referrer — caution alone is non-blocking, mirroring the pattern seen in several sibling *-test-request engines' non-worst bands.",
+  "personas": [
+    {
+      "name": "routine-therapeutic-drug-monitoring-lithium-level-complete",
+      "description": "Well-formed routine referral: routine 3-monthly lithium trough level, the lithium assay is a first-line assay for the therapeutic-drug-monitoring indication, timing (12 hours post last dose) is well clear of the early-sampling caution window, every completeness field present — expect usually-appropriate + ok timing + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922"
+        },
+        "assays": {
+          "paracetamolLevel": false,
+          "salicylateLevel": false,
+          "alcoholLevel": false,
+          "drugsOfAbuseScreen": false,
+          "lithiumLevel": true,
+          "digoxinLevel": false,
+          "antiepilepticDrugLevel": false,
+          "carboxyhaemoglobin": false,
+          "heavyMetals": false,
+          "specificDrugLevel": false
+        },
+        "clinical": {
+          "primaryIndication": "therapeutic-drug-monitoring",
+          "clinicalDetails": "On lithium for bipolar disorder — routine 3-monthly trough level, 12 hours post last dose.",
+          "suspectedAgent": "",
+          "timeSinceIngestionHours": 12,
+          "deliberateOverdose": false,
+          "symptomatic": false
+        },
+        "specimen": {
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-20T08:00"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "community",
+          "notes": "Routine lithium monitoring per shared-care protocol."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "timingBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Routine laboratory turnaround",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-THERAPEUTIC-DRUG-MONITORING-IDEAL",
+            "axis": "appropriateness",
+            "category": "therapeutic-drug-monitoring",
+            "description": "Selected assays include a first-line assay for \"therapeutic-drug-monitoring\"."
+          },
+          {
+            "ruleId": "R-TIMING-OK",
+            "axis": "timing",
+            "category": "timing",
+            "description": "Ingestion timing is compatible with interpretation of the requested assays."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "stat-suspected-overdose-paracetamol-salicylate-unknown-timing-caution",
+      "description": "Found unresponsive at home with empty paracetamol and aspirin packets: paracetamol and salicylate levels are both first-line assays for the suspected-overdose indication, and the deliberate overdose (and the patient being symptomatic) each independently force stat triage regardless of the routine urgency requested; the exact ingestion time is unclear, so the paracetamol assay's timing band is caution (not invalid) — caution has no dedicated safety flag in this engine and does not block acceptance — expect usually-appropriate + caution timing + stat + accept, completeness below 100 (missing ingestion time).",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1990-11-02",
+          "nhsNumber": "887 342 1190"
+        },
+        "assays": {
+          "paracetamolLevel": true,
+          "salicylateLevel": true,
+          "alcoholLevel": false,
+          "drugsOfAbuseScreen": false,
+          "lithiumLevel": false,
+          "digoxinLevel": false,
+          "antiepilepticDrugLevel": false,
+          "carboxyhaemoglobin": false,
+          "heavyMetals": false,
+          "specificDrugLevel": false
+        },
+        "clinical": {
+          "primaryIndication": "suspected-overdose",
+          "clinicalDetails": "Found unresponsive at home with empty paracetamol and aspirin packets nearby; exact ingestion time unclear.",
+          "suspectedAgent": "Paracetamol and aspirin",
+          "timeSinceIngestionHours": null,
+          "deliberateOverdose": true,
+          "symptomatic": true
+        },
+        "specimen": {
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-25T14:00"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-25",
+          "setting": "emergency",
+          "notes": "NPIS/TOXBASE contacted; a psychiatric liaison referral has been made in parallel."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "timingBand": "caution",
+        "completenessPercent": 88,
+        "triageTier": "stat",
+        "targetTimeframe": "Immediate / stat — phone result",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-OVERDOSE-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-overdose",
+            "description": "Selected assays include a first-line assay for \"suspected-overdose\"."
+          },
+          {
+            "ruleId": "R-TIMING-PARACETAMOL-UNKNOWN",
+            "axis": "timing",
+            "category": "paracetamol-nomogram",
+            "description": "Paracetamol level requested but time since ingestion is unknown; confirm timing for nomogram interpretation."
+          },
+          {
+            "ruleId": "R-COMPLETE-TIMING",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing time since ingestion."
+          },
+          {
+            "ruleId": "R-TRIAGE-DELIBERATE-OVERDOSE",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Deliberate overdose — stat handling."
+          },
+          {
+            "ruleId": "R-TRIAGE-SYMPTOMATIC",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Patient is symptomatic from the exposure — stat handling."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-OVERDOSE",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Suspected overdose / poisoning indication — urgent handling."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-OVERDOSE-STAT-001",
+            "category": "suspected-overdose-stat",
+            "priority": "high",
+            "description": "Overdose context requiring stat handling.",
+            "suggestedAction": "Process stat; contact NPIS / TOXBASE (0344 892 0111) and the toxicology team."
+          },
+          {
+            "flagId": "F-DELIBERATE-SELF-HARM-SAFEGUARDING-001",
+            "category": "deliberate-self-harm-safeguarding",
+            "priority": "high",
+            "description": "Deliberate overdose / self-harm; requires psychosocial / safeguarding assessment.",
+            "suggestedAction": "Arrange a psychosocial assessment by mental-health services while the patient is in hospital; consider safeguarding."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-suspected-overdose-paracetamol-early-invalid-timing-incomplete",
+      "description": "Vomiting after a paracetamol overdose 90 minutes ago: the paracetamol assay is itself a first-line assay for the suspected-overdose indication — there is no appropriateness mismatch here — but a level taken 1.5 hours post-ingestion is before the UK nomogram's 4-hour interpretation threshold, forcing the timing band to invalid, which this engine's `deriveRecommendation` treats as forcing query-referrer just like an appropriateness mismatch would; the patient being symptomatic independently forces stat triage; several administrative fields are not yet captured — expect usually-appropriate + invalid timing + stat + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1994-06-18",
+          "nhsNumber": ""
+        },
+        "assays": {
+          "paracetamolLevel": true,
+          "salicylateLevel": false,
+          "alcoholLevel": false,
+          "drugsOfAbuseScreen": false,
+          "lithiumLevel": false,
+          "digoxinLevel": false,
+          "antiepilepticDrugLevel": false,
+          "carboxyhaemoglobin": false,
+          "heavyMetals": false,
+          "specificDrugLevel": false
+        },
+        "clinical": {
+          "primaryIndication": "suspected-overdose",
+          "clinicalDetails": "",
+          "suspectedAgent": "Paracetamol",
+          "timeSinceIngestionHours": 1.5,
+          "deliberateOverdose": false,
+          "symptomatic": true
+        },
+        "specimen": {
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-30T20:00"
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Patient vomiting; an early paracetamol level was taken and will need repeating at 4 hours per the nomogram."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "timingBand": "invalid",
+        "completenessPercent": 71,
+        "triageTier": "stat",
+        "targetTimeframe": "Immediate / stat — phone result",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-OVERDOSE-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-overdose",
+            "description": "Selected assays include a first-line assay for \"suspected-overdose\"."
+          },
+          {
+            "ruleId": "R-TIMING-PARACETAMOL-INVALID",
+            "axis": "timing",
+            "category": "paracetamol-nomogram",
+            "description": "Paracetamol level requested at 1.5 h post-ingestion; the treatment nomogram is not interpretable before 4 h. Repeat at >= 4 h."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-DETAILS",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical details."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SYMPTOMATIC",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Patient is symptomatic from the exposure — stat handling."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-OVERDOSE",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Suspected overdose / poisoning indication — urgent handling."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-OVERDOSE-STAT-001",
+            "category": "suspected-overdose-stat",
+            "priority": "high",
+            "description": "Overdose context requiring stat handling.",
+            "suggestedAction": "Process stat; contact NPIS / TOXBASE (0344 892 0111) and the toxicology team."
+          },
+          {
+            "flagId": "F-PARACETAMOL-TIMING-CRITICAL-001",
+            "category": "paracetamol-timing-critical",
+            "priority": "high",
+            "description": "Paracetamol level requested but the sampling time is invalid (< 4 h post-ingestion) for nomogram interpretation.",
+            "suggestedAction": "Repeat the paracetamol level at >= 4 h post-ingestion; do not interpret early levels on the nomogram."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-DETAILS-001",
+            "category": "missing-clinical-details",
+            "priority": "medium",
+            "description": "No clinical details / history recorded.",
+            "suggestedAction": "Query the referrer for the clinical details before vetting."
+          }
+        ]
+      }
+    }
+  ]
+}
