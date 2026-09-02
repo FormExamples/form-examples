@@ -1,0 +1,269 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-diagnose-hypertension-stage1-complete",
+      "description": "Well-formed routine GP referral: raised clinic BP confirming a new hypertension diagnosis, 24-hour ABPM requested (NICE NG136 first-line confirmation), no oscillometric accuracy concerns, every completeness field present — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1968-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 27.2
+        },
+        "request": {
+          "testType": "24-hour-abpm",
+          "primaryIndication": "diagnose-hypertension",
+          "clinicalQuestion": "Clinic BP 148/94 on two separate occasions — confirm or exclude a diagnosis of hypertension before starting treatment.",
+          "relevantHistory": "No previous cardiovascular history. Family history of hypertension."
+        },
+        "bloodPressure": {
+          "clinicBpSystolic": 148,
+          "clinicBpDiastolic": 94,
+          "onAntihypertensives": false,
+          "currentMedications": ""
+        },
+        "symptoms": {
+          "symptomDizziness": false,
+          "symptomHeadache": false,
+          "atrialFibrillation": false,
+          "pregnant": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-10",
+          "setting": "outpatient",
+          "notes": "Monitor to be fitted and returned to the practice nurse."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "suitabilityBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-4 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CONFIRM-DIAGNOSIS",
+            "axis": "appropriateness",
+            "category": "diagnose-hypertension",
+            "description": "Clinic BP >=140/90 confirming a new diagnosis — ABPM is the recommended confirmation method (NICE NG136)."
+          },
+          {
+            "ruleId": "R-SUIT-OK",
+            "axis": "suitability",
+            "category": "accuracy",
+            "description": "No oscillometric accuracy factors identified — standard ABPM is suitable."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation triggers; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "white-coat-hypertension-atrial-fibrillation-limited-redirect",
+      "description": "Suspected white-coat hypertension with markedly variable clinic readings: out-of-office monitoring is usually appropriate for this indication, but the patient has known atrial fibrillation, which reduces oscillometric ABPM accuracy — suitability is 'limited' and the recommendation redirects to an auscultatory alternative regardless of how appropriate the test choice was — expect usually-appropriate + limited + routine + redirect.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "cardiologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Cardiology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1955-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 25.6
+        },
+        "request": {
+          "testType": "24-hour-abpm",
+          "primaryIndication": "white-coat-hypertension",
+          "clinicalQuestion": "Clinic BP consistently elevated (155-170/95-100) but home readings normal — confirm suspected white-coat effect before starting treatment.",
+          "relevantHistory": "Known paroxysmal atrial fibrillation, rate-controlled on bisoprolol. Anxious during clinic appointments."
+        },
+        "bloodPressure": {
+          "clinicBpSystolic": 162,
+          "clinicBpDiastolic": 98,
+          "onAntihypertensives": false,
+          "currentMedications": "Bisoprolol 5mg od"
+        },
+        "symptoms": {
+          "symptomDizziness": false,
+          "symptomHeadache": false,
+          "atrialFibrillation": true,
+          "pregnant": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "setting": "outpatient",
+          "notes": "Consider manual auscultatory home readings given the AF."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "suitabilityBand": "limited",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-4 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / use alternative method",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-WHITE-COAT-HYPERTENSION",
+            "axis": "appropriateness",
+            "category": "white-coat-hypertension",
+            "description": "Suspected white coat hypertension — out-of-office monitoring is usually appropriate (NICE NG136)."
+          },
+          {
+            "ruleId": "R-SUIT-ATRIAL-FIBRILLATION",
+            "axis": "suitability",
+            "category": "atrial-fibrillation",
+            "description": "Atrial fibrillation reduces the accuracy of oscillometric ABPM (BIHS) — consider auscultatory confirmation."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation triggers; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ATRIAL-FIBRILLATION-ACCURACY-001",
+            "category": "atrial-fibrillation-accuracy",
+            "priority": "medium",
+            "description": "Atrial fibrillation reduces oscillometric ABPM accuracy (BIHS).",
+            "suggestedAction": "Use an AF-validated device or confirm readings auscultatorily; interpret ABPM results with caution."
+          }
+        ]
+      }
+    },
+    {
+      "name": "urgent-severe-hypertension-priority-review-incomplete",
+      "description": "Clinic BP well into the severe/accelerated range: NICE NG136 makes same-day specialist review the priority over routine ABPM confirmation, so appropriateness is only may-be-appropriate (score 4) even though the request itself is otherwise reasonable, and the severe reading independently forces urgent triage; several administrative fields are not yet captured — expect may-be-appropriate + ok + urgent + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1958-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": 29
+        },
+        "request": {
+          "testType": "24-hour-abpm",
+          "primaryIndication": "diagnose-hypertension",
+          "clinicalQuestion": "Clinic BP 190/125 today, asymptomatic — same-day same-day BP recheck and target-organ-damage screen arranged; ABPM requested to characterise variability once stable.",
+          "relevantHistory": "No previous hypertension diagnosis. No headache, chest pain, or visual disturbance today."
+        },
+        "bloodPressure": {
+          "clinicBpSystolic": 190,
+          "clinicBpDiastolic": 125,
+          "onAntihypertensives": false,
+          "currentMedications": ""
+        },
+        "symptoms": {
+          "symptomDizziness": false,
+          "symptomHeadache": false,
+          "atrialFibrillation": false,
+          "pregnant": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Same-day specialist review arranged separately per NICE NG136; ABPM to follow once acute review complete."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 4,
+        "appropriatenessBand": "may-be-appropriate",
+        "suitabilityBand": "ok",
+        "completenessPercent": 88,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours / same-day specialist review",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SEVERE-BP-PRIORITY",
+            "axis": "appropriateness",
+            "category": "severe-hypertension",
+            "description": "Clinic BP >=180/120 — same-day specialist review takes priority over routine ABPM confirmation."
+          },
+          {
+            "ruleId": "R-SUIT-OK",
+            "axis": "suitability",
+            "category": "accuracy",
+            "description": "No oscillometric accuracy factors identified — standard ABPM is suitable."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SEVERE-HYPERTENSION",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Clinic BP >=180/120 — same-day specialist review (NICE NG136)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SEVERE-HYPERTENSION-001",
+            "category": "severe-hypertension-urgent",
+            "priority": "high",
+            "description": "Clinic BP >=180/120 mmHg (severe hypertension).",
+            "suggestedAction": "Arrange same-day specialist review (NICE NG136); same-day assessment takes priority over routine ABPM booking."
+          }
+        ]
+      }
+    }
+  ]
+}

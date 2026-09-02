@@ -1,0 +1,400 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Note: this engine's deriveRecommendation only reads appropriateness and completeness, not the risk band — so a high-risk persona can still legitimately compute to 'accept' (risk is surfaced for the endoscopist's peri-procedure planning, not as a booking gate).",
+  "personas": [
+    {
+      "name": "routine-dyspepsia-ogd-low-risk-complete",
+      "description": "Well-formed routine GP referral: uninvestigated dyspepsia, OGD requested (first-line), no anticoagulation or comorbidity risk factors, every completeness field present — expect usually-appropriate + routine + low risk + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1985-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1,
+          "interpreterRequired": false
+        },
+        "request": {
+          "requestedProcedure": "ogd",
+          "primaryIndication": "dyspepsia",
+          "clinicalQuestion": "Six weeks of epigastric discomfort and early satiety, no response to a PPI trial — exclude peptic ulcer disease.",
+          "relevantHistory": "No alarm symptoms. No NSAID use. H. pylori stool antigen negative."
+        },
+        "redFlags": {
+          "redFlagDysphagia": false,
+          "redFlagWeightLoss": false,
+          "redFlagAnaemia": false,
+          "redFlagGiBleeding": false,
+          "redFlagAbdominalMass": false,
+          "redFlagAgeOver55": false,
+          "fitResultUgG": null,
+          "haemoglobinGL": 142,
+          "ferritinUgL": null
+        },
+        "medication": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "diabetesMedication": "none",
+          "allergies": "None known.",
+          "latexAllergy": false
+        },
+        "comorbidities": {
+          "cardiacNyhaClass": "I",
+          "pacemakerIcd": false,
+          "chronicKidneyDisease": false,
+          "egfrMlMin": 95,
+          "sleepApnoea": false,
+          "neutropenia": false,
+          "asaGrade": "I"
+        },
+        "infectionPrep": {
+          "vcjdRisk": false,
+          "cpeCarriage": false,
+          "mrsa": false,
+          "bloodBorneVirus": false,
+          "fitForBowelPrep": false,
+          "bowelPrepAgent": "none",
+          "sedation": "throat-spray",
+          "escortAvailable": true
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-15",
+          "setting": "outpatient",
+          "notes": "Patient keen on throat spray rather than sedation; driving self home."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks",
+        "twoWeekWaitEligible": false,
+        "twoWeekWaitRationale": "",
+        "completenessPercent": 100,
+        "glasgowBlatchfordScore": 0,
+        "rockallScore": 0,
+        "riskBand": "low",
+        "anticoagulantAction": "No anticoagulant / antiplatelet management required.",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-DYSPEPSIA-IDEAL",
+            "axis": "appropriateness",
+            "category": "dyspepsia",
+            "description": "Requested ogd procedure is the recommended examination for \"dyspepsia\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No suspected-cancer or acute criteria; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-RISK-SCORE-LOW",
+            "axis": "risk",
+            "category": "bleeding-score",
+            "description": "Glasgow-Blatchford 0 / Rockall 0 — low bleeding risk."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "two-week-wait-suspected-malignancy-eus-doac-high-risk",
+      "description": "Suspected pancreatic malignancy on staging CT: EUS is first-line and ideal for suspected-malignancy, and the indication itself meets NICE NG12 two-week-wait eligibility regardless of the requested urgency; the patient is on apixaban and EUS is a BSG/ESGE high-bleeding-risk procedure, so the anticoagulant/high-risk-procedure rule forces the risk band to high with an explicit DOAC peri-procedure plan — expect usually-appropriate + two-week-wait + high risk + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "gastroenterologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Gastroenterology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1955-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 22.8,
+          "interpreterRequired": false
+        },
+        "request": {
+          "requestedProcedure": "eus",
+          "primaryIndication": "suspected-malignancy",
+          "clinicalQuestion": "2.8cm pancreatic head lesion on staging CT — EUS with FNA requested for tissue diagnosis before the MDT.",
+          "relevantHistory": "Painless jaundice and 6kg weight loss over 2 months. Atrial fibrillation on apixaban."
+        },
+        "redFlags": {
+          "redFlagDysphagia": false,
+          "redFlagWeightLoss": true,
+          "redFlagAnaemia": false,
+          "redFlagGiBleeding": false,
+          "redFlagAbdominalMass": false,
+          "redFlagAgeOver55": true,
+          "fitResultUgG": null,
+          "haemoglobinGL": 128,
+          "ferritinUgL": null
+        },
+        "medication": {
+          "takingAnticoagulant": true,
+          "anticoagulantAgent": "apixaban",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "diabetesMedication": "none",
+          "allergies": "None known.",
+          "latexAllergy": false
+        },
+        "comorbidities": {
+          "cardiacNyhaClass": "II",
+          "pacemakerIcd": false,
+          "chronicKidneyDisease": false,
+          "egfrMlMin": 78,
+          "sleepApnoea": false,
+          "neutropenia": false,
+          "asaGrade": "II"
+        },
+        "infectionPrep": {
+          "vcjdRisk": false,
+          "cpeCarriage": false,
+          "mrsa": false,
+          "bloodBorneVirus": false,
+          "fitForBowelPrep": false,
+          "bowelPrepAgent": "none",
+          "sedation": "conscious",
+          "escortAvailable": true
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "setting": "outpatient",
+          "notes": "Apixaban to be omitted per BSG/ESGE ahead of EUS-FNA; anticoagulation clinic informed."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "<= 14 days (2WW)",
+        "twoWeekWaitEligible": true,
+        "twoWeekWaitRationale": "Age >= 55 with weight loss plus upper-GI symptoms (NICE NG12) — urgent endoscopy. Suspected GI malignancy — suspected-cancer two-week-wait pathway.",
+        "completenessPercent": 100,
+        "glasgowBlatchfordScore": 1,
+        "rockallScore": 1,
+        "riskBand": "high",
+        "anticoagulantAction": "DOAC (apixaban): omit on the day (and the day before for high-risk procedures) per BSG/ESGE; confirm renal function.",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MALIGNANCY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-malignancy",
+            "description": "Requested eus procedure is the recommended examination for \"suspected-malignancy\"."
+          },
+          {
+            "ruleId": "R-URGENCY-2WW-AGE-WEIGHT-LOSS",
+            "axis": "urgency",
+            "category": "two-week-wait",
+            "description": "Age >= 55 with weight loss plus upper-GI symptoms (NICE NG12) — urgent endoscopy."
+          },
+          {
+            "ruleId": "R-URGENCY-2WW-SUSPECTED-MALIGNANCY",
+            "axis": "urgency",
+            "category": "two-week-wait",
+            "description": "Suspected GI malignancy — suspected-cancer two-week-wait pathway."
+          },
+          {
+            "ruleId": "R-RISK-SCORE-LOW",
+            "axis": "risk",
+            "category": "bleeding-score",
+            "description": "Glasgow-Blatchford 1 / Rockall 1 — low bleeding risk."
+          },
+          {
+            "ruleId": "R-RISK-ANTICOAG-HIGH-PROCEDURE",
+            "axis": "risk",
+            "category": "anticoagulant",
+            "description": "On apixaban for a high-bleeding-risk procedure — BSG/ESGE peri-procedure plan required."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Age >= 55 with weight loss plus upper-GI symptoms (NICE NG12) — urgent endoscopy. Suspected GI malignancy — suspected-cancer two-week-wait pathway.",
+            "suggestedAction": "Book on the suspected-cancer two-week-wait pathway; perform the endoscopy within 14 days."
+          },
+          {
+            "flagId": "F-HIGH-BLEEDING-RISK-ANTICOAG-001",
+            "category": "high-bleeding-risk-anticoag",
+            "priority": "high",
+            "description": "Anticoagulant / antiplatelet therapy with a high-bleeding-risk procedure.",
+            "suggestedAction": "Plan peri-procedure anticoagulation per BSG/ESGE; confirm thrombotic risk and bridging need before booking."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-upper-gi-bleeding-high-gbs-incomplete",
+      "description": "Acute haematemesis phoned through from the emergency department: OGD is first-line for upper-GI bleeding and active bleeding is itself an acute red flag forcing emergency triage; a low haemoglobin, active GI bleeding, anaemia, and chronic kidney disease combine into a Glasgow-Blatchford score of 11 (>=7), forcing the risk band to high, and several administrative fields are not yet captured — expect usually-appropriate + emergency + high risk + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null,
+          "interpreterRequired": false
+        },
+        "request": {
+          "requestedProcedure": "ogd",
+          "primaryIndication": "upper-gi-bleeding",
+          "clinicalQuestion": "",
+          "relevantHistory": "Two episodes of coffee-ground haematemesis and one episode of melaena overnight. Known chronic kidney disease stage 3."
+        },
+        "redFlags": {
+          "redFlagDysphagia": false,
+          "redFlagWeightLoss": false,
+          "redFlagAnaemia": true,
+          "redFlagGiBleeding": true,
+          "redFlagAbdominalMass": false,
+          "redFlagAgeOver55": true,
+          "fitResultUgG": null,
+          "haemoglobinGL": 85,
+          "ferritinUgL": null
+        },
+        "medication": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "diabetesMedication": "none",
+          "allergies": "",
+          "latexAllergy": false
+        },
+        "comorbidities": {
+          "cardiacNyhaClass": "",
+          "pacemakerIcd": false,
+          "chronicKidneyDisease": true,
+          "egfrMlMin": 42,
+          "sleepApnoea": false,
+          "neutropenia": false,
+          "asaGrade": ""
+        },
+        "infectionPrep": {
+          "vcjdRisk": false,
+          "cpeCarriage": false,
+          "mrsa": false,
+          "bloodBorneVirus": false,
+          "fitForBowelPrep": false,
+          "bowelPrepAgent": "none",
+          "sedation": "",
+          "escortAvailable": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Phoned through from ED resus; two units cross-matched, gastroenterology on-call aware."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "twoWeekWaitEligible": false,
+        "twoWeekWaitRationale": "",
+        "completenessPercent": 67,
+        "glasgowBlatchfordScore": 11,
+        "rockallScore": 4,
+        "riskBand": "high",
+        "anticoagulantAction": "No anticoagulant / antiplatelet management required.",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-UPPER-GI-BLEEDING-IDEAL",
+            "axis": "appropriateness",
+            "category": "upper-gi-bleeding",
+            "description": "Requested ogd procedure is the recommended examination for \"upper-gi-bleeding\"."
+          },
+          {
+            "ruleId": "R-URGENCY-ACUTE-GI-BLEED",
+            "axis": "urgency",
+            "category": "acute-red-flag",
+            "description": "Active upper-GI bleeding — emergency assessment and admission."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-RISK-SCORE-HIGH",
+            "axis": "risk",
+            "category": "bleeding-score",
+            "description": "Glasgow-Blatchford 11 / Rockall 4 — high bleeding / mortality risk."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ACUTE-GI-BLEED-001",
+            "category": "acute-gi-bleed",
+            "priority": "high",
+            "description": "Active gastrointestinal bleeding reported.",
+            "suggestedAction": "Assess haemodynamics and resuscitate; arrange urgent inpatient endoscopy (OGD within 24 hours for upper-GI bleeding)."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the procedure should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
