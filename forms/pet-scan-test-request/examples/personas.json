@@ -1,0 +1,369 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Unlike the sibling nuclear-medicine-test-request engine, a high radiationDoseBand here does NOT lift the prepSafetyBand to caution — the two are fully independent, so even the well-formed persona below carries a (non-blocking) high-dose flag.",
+  "personas": [
+    {
+      "name": "routine-lymphoma-fdg-pet-ct-well-controlled-glucose-complete",
+      "description": "Well-formed routine referral: biopsy-confirmed lymphoma, FDG-PET-CT is the recommended (ideal) study for the lymphoma indication, blood glucose is well-controlled (5.5 mmol/L, below even the EANM-preferred 7 mmol/L threshold), no pregnancy/breastfeeding concerns, every completeness field including the IR(ME)R justification present — expect usually-appropriate + ok prep safety + high dose (flagged but non-blocking) + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "oncologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Oncology Centre",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1965-03-14",
+          "nhsNumber": "943 476 5922",
+          "weightKg": 78,
+          "setting": "outpatient",
+          "interpreterRequired": false
+        },
+        "request": {
+          "scanType": "fdg-pet-ct",
+          "primaryIndication": "lymphoma",
+          "clinicalQuestion": "New cervical lymphadenopathy with biopsy-confirmed diffuse large B-cell lymphoma — baseline staging PET-CT."
+        },
+        "context": {
+          "primaryTumourSite": "Cervical lymph nodes",
+          "relevantHistory": "No previous PET imaging. Fasted for 6 hours prior to attendance.",
+          "recentChemoRadiotherapy": "none"
+        },
+        "preparation": {
+          "diabetes": false,
+          "bloodGlucoseMmolL": 5.5,
+          "pregnancyStatus": "not-applicable",
+          "breastfeeding": false,
+          "egfr": 90,
+          "claustrophobia": false
+        },
+        "justification": {
+          "irMeRJustification": "Clinically indicated for baseline lymphoma staging; benefit outweighs the radiation dose.",
+          "urgency": "routine"
+        },
+        "triage": {
+          "requestedByDate": "2026-09-10",
+          "notes": "Haematology MDT discussion planned once staged."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "prepSafetyBand": "ok",
+        "radiationDoseBand": "high",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-4 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-LYMPHOMA-IDEAL",
+            "axis": "appropriateness",
+            "category": "lymphoma",
+            "description": "Requested fdg-pet-ct study is the recommended examination for \"lymphoma\"."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "preparation",
+            "description": "No preparation-safety concern detected for the recorded data."
+          },
+          {
+            "ruleId": "R-SAFETY-DOSE-HIGH",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Requested fdg-pet-ct study carries a high relative radiation dose; ensure IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "Triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-RADIATION-DOSE-001",
+            "category": "high-radiation-dose",
+            "priority": "low",
+            "description": "Requested study carries a high relative radiation dose.",
+            "suggestedAction": "Confirm the IR(ME)R justification documents that the benefit outweighs the dose."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-cancer-staging-fdg-pet-ct-uncontrolled-glucose-caution",
+      "description": "Newly diagnosed lung cancer with poorly-controlled diabetes: FDG-PET-CT is the recommended (ideal) study for the cancer-staging indication, but a blood glucose of 14.2 mmol/L is above the ~11 mmol/L uncontrolled threshold — FDG uptake will be impaired — forcing the prep-safety band to caution, which alone is enough to force query-referrer in this engine (unlike the sibling nuclear-medicine engine, caution here is not relabelled as an 'accept with caution'); urgency was explicitly requested as urgent — expect usually-appropriate + caution prep safety + high dose + urgent + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "oncologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Oncology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "weightKg": 70,
+          "setting": "outpatient",
+          "interpreterRequired": false
+        },
+        "request": {
+          "scanType": "fdg-pet-ct",
+          "primaryIndication": "cancer-staging",
+          "clinicalQuestion": "Newly diagnosed non-small-cell lung cancer — staging PET-CT to assess for nodal and distant metastatic spread."
+        },
+        "context": {
+          "primaryTumourSite": "Right upper lobe lung",
+          "relevantHistory": "Type 2 diabetes, poorly controlled. Arrived for the scan without a fasting glucose check beforehand.",
+          "recentChemoRadiotherapy": "none"
+        },
+        "preparation": {
+          "diabetes": true,
+          "bloodGlucoseMmolL": 14.2,
+          "pregnancyStatus": "not-pregnant",
+          "breastfeeding": false,
+          "egfr": 75,
+          "claustrophobia": false
+        },
+        "justification": {
+          "irMeRJustification": "Clinically indicated for staging of newly diagnosed lung cancer; benefit outweighs the radiation dose.",
+          "urgency": "urgent"
+        },
+        "triage": {
+          "requestedByDate": "2026-09-03",
+          "notes": "MDT requires staging before treatment planning; glucose elevated on arrival, recheck before tracer injection."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "prepSafetyBand": "caution",
+        "radiationDoseBand": "high",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 3-7 days",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CANCER-STAGING-IDEAL",
+            "axis": "appropriateness",
+            "category": "cancer-staging",
+            "description": "Requested fdg-pet-ct study is the recommended examination for \"cancer-staging\"."
+          },
+          {
+            "ruleId": "R-SAFETY-GLUCOSE-UNCONTROLLED",
+            "axis": "safety",
+            "category": "glucose",
+            "description": "Blood glucose 14.2 mmol/L is above ~11 mmol/L — recheck and reschedule; FDG uptake will be impaired."
+          },
+          {
+            "ruleId": "R-SAFETY-DOSE-HIGH",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Requested fdg-pet-ct study carries a high relative radiation dose; ensure IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "Triage follows the requested urgency (urgent)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-UNCONTROLLED-GLUCOSE-001",
+            "category": "uncontrolled-glucose",
+            "priority": "high",
+            "description": "Blood glucose 14.2 mmol/L is above ~11 mmol/L.",
+            "suggestedAction": "Recheck glucose and reschedule if it remains above ~11 mmol/L; impaired FDG uptake degrades the study."
+          },
+          {
+            "flagId": "F-HIGH-RADIATION-DOSE-001",
+            "category": "high-radiation-dose",
+            "priority": "low",
+            "description": "Requested study carries a high relative radiation dose.",
+            "suggestedAction": "Confirm the IR(ME)R justification documents that the benefit outweighs the dose."
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject-solitary-pulmonary-nodule-fdg-pet-ct-pregnant-incomplete",
+      "description": "An incidental solitary pulmonary nodule in a patient confirmed 8 weeks pregnant: FDG-PET-CT is the recommended (ideal) study for the solitary-pulmonary-nodule indication — there is no appropriateness mismatch here — but confirmed pregnancy is contraindicated for PET-CT radiation exposure, forcing this engine's `reject` recommendation ahead of any appropriateness or completeness check; blood glucose was also never recorded for this FDG study, and several other administrative fields are not yet captured — expect usually-appropriate + contraindicated prep safety + high dose + routine + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Oncology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1994-06-18",
+          "nhsNumber": "",
+          "weightKg": 62,
+          "setting": "outpatient",
+          "interpreterRequired": false
+        },
+        "request": {
+          "scanType": "fdg-pet-ct",
+          "primaryIndication": "solitary-pulmonary-nodule",
+          "clinicalQuestion": ""
+        },
+        "context": {
+          "primaryTumourSite": "Right lower lobe lung nodule",
+          "relevantHistory": "Incidental 2.2cm solitary pulmonary nodule on CT. Currently 8 weeks pregnant, confirmed by urine hCG.",
+          "recentChemoRadiotherapy": ""
+        },
+        "preparation": {
+          "diabetes": false,
+          "bloodGlucoseMmolL": null,
+          "pregnancyStatus": "pregnant",
+          "breastfeeding": false,
+          "egfr": null,
+          "claustrophobia": false
+        },
+        "justification": {
+          "irMeRJustification": "",
+          "urgency": ""
+        },
+        "triage": {
+          "requestedByDate": "",
+          "notes": "Respiratory team aware; the scan should be deferred or alternative imaging considered given confirmed pregnancy."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "prepSafetyBand": "contraindicated",
+        "radiationDoseBand": "high",
+        "completenessPercent": 53,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-4 weeks",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SOLITARY-PULMONARY-NODULE-IDEAL",
+            "axis": "appropriateness",
+            "category": "solitary-pulmonary-nodule",
+            "description": "Requested fdg-pet-ct study is the recommended examination for \"solitary-pulmonary-nodule\"."
+          },
+          {
+            "ruleId": "R-SAFETY-PREGNANT",
+            "axis": "safety",
+            "category": "pregnancy",
+            "description": "Patient is pregnant — PET-CT radiation exposure is contraindicated unless justified by exception."
+          },
+          {
+            "ruleId": "R-SAFETY-GLUCOSE-MISSING",
+            "axis": "safety",
+            "category": "glucose",
+            "description": "No blood glucose recorded for an FDG study — measure and document before tracer injection."
+          },
+          {
+            "ruleId": "R-SAFETY-DOSE-HIGH",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Requested fdg-pet-ct study carries a high relative radiation dose; ensure IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-GLUCOSE",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing blood glucose (FDG study)."
+          },
+          {
+            "ruleId": "R-COMPLETE-JUSTIFICATION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "Triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREGNANCY-001",
+            "category": "pregnancy",
+            "priority": "high",
+            "description": "Patient is pregnant.",
+            "suggestedAction": "Do not expose unless justified by exception; discuss alternatives with the nuclear-medicine physician and ARSAC holder."
+          },
+          {
+            "flagId": "F-MISSING-GLUCOSE-001",
+            "category": "missing-glucose",
+            "priority": "medium",
+            "description": "No blood glucose recorded for an FDG study.",
+            "suggestedAction": "Measure and document blood glucose before tracer injection; FDG uptake depends on glucose control."
+          },
+          {
+            "flagId": "F-HIGH-RADIATION-DOSE-001",
+            "category": "high-radiation-dose",
+            "priority": "low",
+            "description": "Requested study carries a high relative radiation dose.",
+            "suggestedAction": "Confirm the IR(ME)R justification documents that the benefit outweighs the dose."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          },
+          {
+            "flagId": "F-OTHER-MISSING-JUSTIFICATION-001",
+            "category": "other",
+            "priority": "medium",
+            "description": "No IR(ME)R justification statement recorded.",
+            "suggestedAction": "Record the IR(ME)R justification supporting the radiation exposure before booking."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine repurposes the `redirect` recommendation to mean 'Accept with safety caution' (not 'send elsewhere') — it fires whenever prepSafetyBand is 'caution', including when a high-dose study lifts an otherwise-clean request from 'ok' to 'caution' on dose alone.",
+  "personas": [
+    {
+      "name": "routine-thyroid-function-thyroid-uptake-complete",
+      "description": "Well-formed routine referral: biochemical hyperthyroidism with a goitre, thyroid uptake is the recommended (ideal) scan for the thyroid-function indication and carries a low radiation dose, no pregnancy/breastfeeding/renal concerns, every completeness field including the IR(ME)R justification present — expect usually-appropriate + ok prep safety + low dose + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922",
+          "weightKg": 82
+        },
+        "request": {
+          "scanType": "thyroid-uptake",
+          "primaryIndication": "thyroid-function",
+          "clinicalQuestion": "Biochemical hyperthyroidism with a palpable goitre — assess thyroid uptake to differentiate Graves disease from a toxic nodule.",
+          "relevantHistory": "No previous thyroid imaging. Not on amiodarone."
+        },
+        "safety": {
+          "pregnancyStatus": "not-applicable",
+          "breastfeeding": false,
+          "egfr": 95,
+          "recentOtherNuclearScan": false
+        },
+        "justification": {
+          "irMeRJustification": "Clinically indicated to characterise hyperthyroidism; benefit outweighs the low radiation dose.",
+          "supervisingConsultant": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "TFTs and TSH receptor antibodies already sent."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "prepSafetyBand": "ok",
+        "radiationDoseBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-THYROID-FUNCTION-IDEAL",
+            "axis": "appropriateness",
+            "category": "thyroid-function",
+            "description": "Requested thyroid-uptake scan is the recommended examination for \"thyroid-function\"."
+          },
+          {
+            "ruleId": "R-DOSE-THYROID-UPTAKE-LOW",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "A thyroid-uptake scan carries a low effective-dose band."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "prep-safety",
+            "description": "No preparation or radiation-safety concerns identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No acuity escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-cardiac-ischaemia-myocardial-perfusion-high-dose-caution",
+      "description": "Exertional chest tightness with an equivocal exercise ECG: myocardial perfusion imaging is the recommended (ideal) scan for the cardiac-ischaemia indication, and the indication itself auto-escalates triage to urgent regardless of the routine urgency requested; the scan's high effective-dose band alone lifts an otherwise-clean prep-safety band from ok to caution, which this engine's `redirect` recommendation represents as 'Accept with safety caution' rather than sending the request elsewhere — expect usually-appropriate + caution prep safety + high dose + urgent + redirect (accept with caution).",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "cardiologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Cardiology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "weightKg": 68
+        },
+        "request": {
+          "scanType": "myocardial-perfusion",
+          "primaryIndication": "cardiac-ischaemia",
+          "clinicalQuestion": "Exertional chest tightness with an equivocal exercise ECG — assess for reversible myocardial ischaemia.",
+          "relevantHistory": "Hypertension and hypercholesterolaemia. No previous myocardial infarction."
+        },
+        "safety": {
+          "pregnancyStatus": "not-pregnant",
+          "breastfeeding": false,
+          "egfr": 70,
+          "recentOtherNuclearScan": false
+        },
+        "justification": {
+          "irMeRJustification": "Clinically indicated to investigate possible reversible ischaemia; benefit outweighs the high radiation dose given the non-diagnostic exercise ECG.",
+          "supervisingConsultant": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-05",
+          "setting": "outpatient",
+          "notes": "Beta-blockers withheld for 48 hours pre-test per protocol."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "prepSafetyBand": "caution",
+        "radiationDoseBand": "high",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "redirect",
+        "recommendationLabel": "Accept with safety caution",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CARDIAC-ISCHAEMIA-IDEAL",
+            "axis": "appropriateness",
+            "category": "cardiac-ischaemia",
+            "description": "Requested myocardial-perfusion scan is the recommended examination for \"cardiac-ischaemia\"."
+          },
+          {
+            "ruleId": "R-DOSE-MYOCARDIAL-PERFUSION-HIGH",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "A myocardial-perfusion scan carries a high effective-dose band."
+          },
+          {
+            "ruleId": "R-SAFETY-HIGH-DOSE",
+            "axis": "safety",
+            "category": "prep-safety",
+            "description": "High effective-dose study — ensure justification and ALARA optimisation."
+          },
+          {
+            "ruleId": "R-TRIAGE-CARDIAC-ISCHAEMIA",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Cardiac ischaemia query — expedited assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-RADIATION-DOSE-001",
+            "category": "high-radiation-dose",
+            "priority": "medium",
+            "description": "Requested study carries a high effective radiation dose.",
+            "suggestedAction": "Confirm IR(ME)R justification and optimise administered activity (ALARA)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject-suspected-bone-metastases-bone-scan-pregnant-incomplete",
+      "description": "Known breast cancer with new back pain in a patient confirmed 10 weeks pregnant: a bone scan is the recommended (ideal) examination for the suspected-bone-metastases indication — there is no appropriateness mismatch here — but confirmed pregnancy makes radionuclide administration contraindicated pending justification, and this engine's distinctive `reject` recommendation fires from the prep-safety contraindication ahead of any appropriateness or completeness check; several administrative fields are not yet captured — expect usually-appropriate + contraindicated prep safety + moderate dose + routine + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Nuclear Medicine",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1994-06-18",
+          "nhsNumber": "",
+          "weightKg": null
+        },
+        "request": {
+          "scanType": "bone-scan",
+          "primaryIndication": "suspected-bone-metastases",
+          "clinicalQuestion": "",
+          "relevantHistory": "Known breast cancer, new back pain — assess for bone metastases. Currently 10 weeks pregnant, confirmed by urine hCG."
+        },
+        "safety": {
+          "pregnancyStatus": "pregnant",
+          "breastfeeding": false,
+          "egfr": null,
+          "recentOtherNuclearScan": false
+        },
+        "justification": {
+          "irMeRJustification": "",
+          "supervisingConsultant": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Oncology aware; the scan should be deferred or alternative non-ionising imaging considered given confirmed pregnancy."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "prepSafetyBand": "contraindicated",
+        "radiationDoseBand": "moderate",
+        "completenessPercent": 58,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-BONE-METASTASES-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-bone-metastases",
+            "description": "Requested bone-scan scan is the recommended examination for \"suspected-bone-metastases\"."
+          },
+          {
+            "ruleId": "R-DOSE-BONE-SCAN-MODERATE",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "A bone-scan scan carries a moderate effective-dose band."
+          },
+          {
+            "ruleId": "R-SAFETY-PREGNANT",
+            "axis": "safety",
+            "category": "prep-safety",
+            "description": "Confirmed pregnancy — radionuclide administration is contraindicated pending justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-JUSTIFICATION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-WEIGHT",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing patient weight."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No acuity escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREGNANCY-001",
+            "category": "pregnancy",
+            "priority": "high",
+            "description": "Patient is pregnant.",
+            "suggestedAction": "Do not administer until justified by a nuclear-medicine physician; consider alternative non-ionising imaging."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          },
+          {
+            "flagId": "F-MISSING-JUSTIFICATION-001",
+            "category": "other",
+            "priority": "low",
+            "description": "No IR(ME)R justification statement recorded.",
+            "suggestedAction": "Obtain the referrer justification before the practitioner authorises the exposure."
+          }
+        ]
+      }
+    }
+  ]
+}

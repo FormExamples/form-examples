@@ -922,10 +922,24 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       query-referrer, so its second persona is stat-tier triage yet
       still query-referrer, and its third persona is this backlog's
       first `reject` outcome, from a blood culture drawn after
-      antibiotics were already started). 30 forms of this family done,
-      9 remain (count re-verified directly against the fleet each
-      update, not hand-tracked, after the 2026-09-02 tracking-drift
-      correction — `bin/test-personas` ground truth: PASS 237/355). 73
+      antibiotics were already started). 3 more done 2026-09-02
+      (nerve-conduction-study-test-request, nuclear-medicine-test-request,
+      pet-scan-test-request — same methodology; nerve-conduction-study's
+      third persona isolates its procedural-risk-high query-referrer path
+      from an otherwise-ideal indication pairing (needle EMG vs
+      anticoagulation), distinct from the usual appropriateness-mismatch
+      route; nuclear-medicine repurposes `redirect` to mean "Accept with
+      safety caution" (a high-dose study alone lifts prep-safety from ok
+      to caution) and contributed this backlog's second `reject` (confirmed
+      pregnancy); pet-scan's sibling engine is stricter — caution forces
+      plain query-referrer, not an accept-with-caution redirect — and its
+      reject persona (confirmed pregnancy again) is a third such outcome;
+      pet-scan's dose and prep-safety axes are also fully independent,
+      unlike nuclear-medicine's, so even its well-formed persona carries a
+      non-blocking high-dose flag). 33 forms of this family done, 6 remain
+      (count re-verified directly against the fleet each update, not
+      hand-tracked, after the 2026-09-02 tracking-drift correction —
+      `bin/test-personas` ground truth: PASS 240/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

@@ -1,0 +1,313 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-carpal-tunnel-nerve-conduction-complete",
+      "description": "Well-formed routine referral: nocturnal median-nerve symptoms after failed conservative treatment, nerve conduction study requested (first-line for carpal-tunnel), no needle-EMG or cardiac-device risk factors, every completeness field present — expect usually-appropriate + low procedural risk + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1975-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "study": {
+          "studyType": "nerve-conduction",
+          "region": "upper-limb",
+          "laterality": "right",
+          "requestedByDate": "2026-09-20"
+        },
+        "request": {
+          "primaryIndication": "carpal-tunnel",
+          "clinicalQuestion": "Nocturnal right hand numbness and tingling in the median nerve distribution for 4 months — confirm carpal tunnel syndrome and grade severity.",
+          "relevantHistory": "No diabetes. Manual occupation (warehouse work)."
+        },
+        "symptoms": {
+          "symptomNumbness": true,
+          "symptomWeakness": false,
+          "symptomPain": false,
+          "symptomTingling": true,
+          "symptomDuration": "3-to-12-months"
+        },
+        "safety": {
+          "diabetes": false,
+          "takingAnticoagulant": false,
+          "pacemakerOrIcd": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Conservative treatment (splinting) tried without improvement."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "proceduralRiskBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CARPAL-TUNNEL-IDEAL",
+            "axis": "appropriateness",
+            "category": "carpal-tunnel",
+            "description": "Requested nerve-conduction study is the recommended examination for \"carpal-tunnel\"."
+          },
+          {
+            "ruleId": "R-RISK-LOW",
+            "axis": "risk",
+            "category": "baseline",
+            "description": "No needle-EMG bleeding risk or cardiac-device caution identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-suspected-mnd-nerve-conduction-and-emg-pacemaker-moderate-risk",
+      "description": "Progressive limb weakness and fasciculations over 5 weeks: nerve conduction + EMG is the recommended (ideal) study for the suspected-motor-neurone-disease indication, and the indication itself auto-escalates triage to urgent (early electrodiagnostic confirmation changes management) — independently, the rapid (under-6-weeks) weakness would also escalate to urgent; the patient's pacemaker plus the needle-EMG component both raise procedural risk to moderate, but not to the 'high' band that would force query-referrer — expect usually-appropriate + moderate procedural risk + urgent + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1962-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "study": {
+          "studyType": "nerve-conduction-and-emg",
+          "region": "generalised",
+          "laterality": "not-applicable",
+          "requestedByDate": "2026-09-01"
+        },
+        "request": {
+          "primaryIndication": "suspected-motor-neurone-disease",
+          "clinicalQuestion": "Progressive limb weakness and fasciculations over 5 weeks with no sensory symptoms — assess for evidence of motor neurone disease.",
+          "relevantHistory": "No family history of MND. Has a cardiac pacemaker fitted in 2019 for complete heart block."
+        },
+        "symptoms": {
+          "symptomNumbness": false,
+          "symptomWeakness": true,
+          "symptomPain": false,
+          "symptomTingling": false,
+          "symptomDuration": "less-than-6-weeks"
+        },
+        "safety": {
+          "diabetes": false,
+          "takingAnticoagulant": false,
+          "pacemakerOrIcd": true
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Neurology MDT aware; rapid access pathway requested."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "proceduralRiskBand": "moderate",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MOTOR-NEURONE-DISEASE-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-motor-neurone-disease",
+            "description": "Requested nerve-conduction-and-emg study is the recommended examination for \"suspected-motor-neurone-disease\"."
+          },
+          {
+            "ruleId": "R-RISK-NEEDLE-EMG",
+            "axis": "risk",
+            "category": "needle-emg",
+            "description": "Needle EMG requested — standard sterile-needle precautions apply."
+          },
+          {
+            "ruleId": "R-RISK-CARDIAC-DEVICE",
+            "axis": "risk",
+            "category": "cardiac-device",
+            "description": "Pacemaker / ICD present — apply stimulation-technique caution."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-MND",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Suspected motor neurone disease — expedite for early electrodiagnostic confirmation."
+          },
+          {
+            "ruleId": "R-TRIAGE-RAPID-WEAKNESS",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Rapidly progressive weakness (under 6 weeks) — expedite assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-MND-URGENT-001",
+            "category": "suspected-mnd-urgent",
+            "priority": "high",
+            "description": "Suspected motor neurone disease.",
+            "suggestedAction": "Expedite as an urgent neurophysiology slot; early electrodiagnostic confirmation changes management and access to disease-modifying therapy."
+          },
+          {
+            "flagId": "F-PACEMAKER-STIMULATION-CAUTION-001",
+            "category": "pacemaker-stimulation-caution",
+            "priority": "medium",
+            "description": "Pacemaker or implantable cardioverter-defibrillator present.",
+            "suggestedAction": "Apply stimulation-technique caution; avoid stimulating near the device and over the chest; follow local cardiac-device protocol."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-radiculopathy-emg-anticoagulant-high-risk-incomplete",
+      "description": "L5 radiculopathy on warfarin for a mechanical mitral valve: needle EMG is itself the recommended (ideal) study for the radiculopathy indication — there is no appropriateness mismatch here — but needle EMG against anticoagulation independently forces the procedural-risk band to high, and that alone is enough to force query-referrer in this engine's recommendation logic; several administrative fields are not yet captured — expect usually-appropriate + high procedural risk + routine + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurophysiology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "study": {
+          "studyType": "emg",
+          "region": "lower-limb",
+          "laterality": "left",
+          "requestedByDate": "2026-09-10"
+        },
+        "request": {
+          "primaryIndication": "radiculopathy",
+          "clinicalQuestion": "",
+          "relevantHistory": "Left leg pain radiating to the foot with numbness in an L5 dermatome distribution for 6 months. On warfarin for a mechanical heart valve."
+        },
+        "symptoms": {
+          "symptomNumbness": true,
+          "symptomWeakness": false,
+          "symptomPain": true,
+          "symptomTingling": false,
+          "symptomDuration": "3-to-12-months"
+        },
+        "safety": {
+          "diabetes": false,
+          "takingAnticoagulant": true,
+          "pacemakerOrIcd": false
+        },
+        "triage": {
+          "urgency": "",
+          "setting": "outpatient",
+          "notes": "On warfarin for a mechanical mitral valve; query whether needle EMG should proceed given anticoagulation."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "proceduralRiskBand": "high",
+        "completenessPercent": 72,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-RADICULOPATHY-IDEAL",
+            "axis": "appropriateness",
+            "category": "radiculopathy",
+            "description": "Requested emg study is the recommended examination for \"radiculopathy\"."
+          },
+          {
+            "ruleId": "R-RISK-NEEDLE-ANTICOAG",
+            "axis": "risk",
+            "category": "anticoagulation",
+            "description": "Needle EMG requested in an anticoagulated patient — high bleeding risk."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ANTICOAG-EMG-BLEEDING-RISK-001",
+            "category": "anticoag-emg-bleeding-risk",
+            "priority": "high",
+            "description": "Needle EMG requested in an anticoagulated patient.",
+            "suggestedAction": "Review anticoagulation and INR before needle EMG; consider limiting needling, deferring, or a nerve-conduction-only study."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the study should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
