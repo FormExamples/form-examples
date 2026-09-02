@@ -1,0 +1,313 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-lower-urinary-tract-symptoms-flexible-cystoscopy-complete",
+      "description": "Well-formed routine referral: worsening lower urinary tract symptoms, flexible cystoscopy requested (first-line), no haematuria or bleeding-risk factors, every completeness field present — expect usually-appropriate + routine + low risk + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "age": 56,
+          "nhsNumber": "943 476 5922"
+        },
+        "request": {
+          "procedure": "flexible-cystoscopy",
+          "primaryIndication": "lower-urinary-tract-symptoms",
+          "clinicalQuestion": "Worsening urinary frequency and hesitancy over 3 months — assess for bladder outflow pathology.",
+          "relevantHistory": "No haematuria. Benign prostatic enlargement suspected."
+        },
+        "symptoms": {
+          "symptomHaematuria": false,
+          "symptomDysuria": false,
+          "symptomFrequency": true,
+          "symptomRetention": false,
+          "visibleHaematuria": false,
+          "currentUti": false
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "previousBladderCancer": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-10-01",
+          "setting": "outpatient",
+          "notes": "Flow studies arranged in parallel."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-18 weeks",
+        "twoWeekWaitEligible": false,
+        "completenessPercent": 100,
+        "riskBand": "low",
+        "anticoagulantAction": "",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-LOWER-URINARY-TRACT-SYMPTOMS-IDEAL",
+            "axis": "appropriateness",
+            "category": "lower-urinary-tract-symptoms",
+            "description": "Requested flexible-cystoscopy is the recommended examination for \"lower-urinary-tract-symptoms\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-RISK-LOW",
+            "axis": "risk",
+            "category": "baseline",
+            "description": "No bleeding-risk or active-infection factors recorded — low pre-procedure risk."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "two-week-wait-visible-haematuria-flexible-cystoscopy-antiplatelet-moderate-risk",
+      "description": "Painless visible haematuria aged 45 or over: flexible cystoscopy is the recommended examination for the visible-haematuria indication, and the haematuria itself independently auto-escalates triage onto the suspected-cancer two-week-wait pathway via both the red-flag rule and the NICE NG12 age/haematuria threshold, regardless of the routine urgency requested; an antiplatelet agent forces moderate bleeding risk — expect usually-appropriate + two-week-wait + moderate risk + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "urologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Urology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1968-11-02",
+          "age": 58,
+          "nhsNumber": "887 342 1190"
+        },
+        "request": {
+          "procedure": "flexible-cystoscopy",
+          "primaryIndication": "visible-haematuria",
+          "clinicalQuestion": "One episode of painless visible haematuria last week — exclude bladder tumour.",
+          "relevantHistory": "Ex-smoker. No UTI symptoms."
+        },
+        "symptoms": {
+          "symptomHaematuria": true,
+          "symptomDysuria": false,
+          "symptomFrequency": false,
+          "symptomRetention": false,
+          "visibleHaematuria": true,
+          "currentUti": false
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": true,
+          "previousBladderCancer": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-08",
+          "setting": "outpatient",
+          "notes": "Urology 2WW haematuria pathway referral."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Seen within 14 days (suspected-cancer pathway)",
+        "twoWeekWaitEligible": true,
+        "completenessPercent": 100,
+        "riskBand": "moderate",
+        "anticoagulantAction": "Note antiplatelet therapy; diagnostic flexible cystoscopy is usually safe to proceed without stopping it.",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-VISIBLE-HAEMATURIA-IDEAL",
+            "axis": "appropriateness",
+            "category": "visible-haematuria",
+            "description": "Requested flexible-cystoscopy is the recommended examination for \"visible-haematuria\"."
+          },
+          {
+            "ruleId": "R-URGENCY-VISIBLE-HAEMATURIA",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Visible haematuria — urological assessment on the suspected-cancer pathway."
+          },
+          {
+            "ruleId": "R-URGENCY-2WW-VISIBLE-HAEMATURIA",
+            "axis": "urgency",
+            "category": "suspected-cancer-2ww",
+            "description": "Aged >= 45 with unexplained visible haematuria — meets NICE NG12 two-week-wait criteria."
+          },
+          {
+            "ruleId": "R-RISK-ANTIPLATELET",
+            "axis": "risk",
+            "category": "bleeding-risk",
+            "description": "Patient is taking an antiplatelet agent — moderate bleeding risk."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Request meets a NICE NG12 suspected-cancer two-week-wait threshold.",
+            "suggestedAction": "Refer on the suspected-cancer two-week-wait pathway; book the cystoscopy within 14 days."
+          },
+          {
+            "flagId": "F-VISIBLE-HAEMATURIA-001",
+            "category": "visible-haematuria",
+            "priority": "high",
+            "description": "Visible (macroscopic) haematuria reported.",
+            "suggestedAction": "Per BAUS, any episode of visible haematuria warrants urological assessment including cystoscopy and upper-tract imaging."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-catheter-problems-other-procedure-mismatch-active-uti-incomplete",
+      "description": "Recurrent catheter blockages with a febrile, suspected active UTI: an 'other' procedure was requested even though flexible cystoscopy is the recommended examination for the catheter-problems indication, a clear mismatch that forces appropriateness to usually-not-appropriate and the recommendation to query-referrer regardless of completeness; the active UTI independently forces high pre-procedure risk (instrumentation should be deferred until treated), and several administrative fields are not yet captured — expect usually-not-appropriate + routine + high risk + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Urology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "age": null,
+          "nhsNumber": ""
+        },
+        "request": {
+          "procedure": "other",
+          "primaryIndication": "catheter-problems",
+          "clinicalQuestion": "",
+          "relevantHistory": "Long-term catheter, recurrent blockages. Currently febrile with cloudy urine."
+        },
+        "symptoms": {
+          "symptomHaematuria": false,
+          "symptomDysuria": true,
+          "symptomFrequency": false,
+          "symptomRetention": false,
+          "visibleHaematuria": false,
+          "currentUti": true
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "previousBladderCancer": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "community",
+          "notes": "District nurse reports the catheter blocked twice this week; patient also unwell with a suspected UTI."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-18 weeks",
+        "twoWeekWaitEligible": false,
+        "completenessPercent": 60,
+        "riskBand": "high",
+        "anticoagulantAction": "Defer the cystoscopy: treat the active UTI first and reschedule once the infection has resolved.",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CATHETER-PROBLEMS-MISMATCH",
+            "axis": "appropriateness",
+            "category": "catheter-problems",
+            "description": "Requested other is not usually appropriate for \"catheter-problems\"; query the referrer."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-AGE",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing patient age."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-RISK-ACTIVE-UTI",
+            "axis": "risk",
+            "category": "bleeding-risk",
+            "description": "Active urinary tract infection — defer instrumentation until treated."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ACTIVE-UTI-DEFER-001",
+            "category": "active-uti-defer",
+            "priority": "high",
+            "description": "Active urinary tract infection at the time of request.",
+            "suggestedAction": "Defer instrumentation: treat the active UTI first and reschedule once resolved to avoid urosepsis."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the cystoscopy should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

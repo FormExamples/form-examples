@@ -1,0 +1,275 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-suspected-epilepsy-routine-awake-complete",
+      "description": "Well-formed routine referral: transient loss of awareness with post-ictal confusion, routine awake EEG requested (first-line for suspected-epilepsy), no red flags, clinical question free of NICE NG217 exclude-epilepsy language, every completeness field present — expect usually-appropriate + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1985-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "request": {
+          "eegType": "routine-awake",
+          "primaryIndication": "suspected-epilepsy",
+          "clinicalQuestion": "Two episodes of transient loss of awareness with post-ictal confusion — assess for epileptiform activity.",
+          "relevantHistory": "No significant past medical history. Not on antiepileptics."
+        },
+        "context": {
+          "seizureFrequency": "2 episodes in the last 3 months",
+          "currentAntiepileptics": "",
+          "firstSeizure": false,
+          "knownEpilepsy": false
+        },
+        "redFlags": {
+          "recentSeizure": false,
+          "suspectedStatusEpilepticus": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Patient safe to drive pending outcome per DVLA guidance."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-EPILEPSY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-epilepsy",
+            "description": "Requested routine-awake EEG is the recommended study for \"suspected-epilepsy\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; urgency follows the requested tier (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "baseline",
+            "description": "No high-acuity indication or red flag; routine clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-recent-first-seizure-routine-awake-moderate-priority",
+      "description": "First unprovoked seizure 3 days ago: routine awake EEG is the recommended study for the first-seizure indication, and the recency of the seizure itself auto-escalates triage to urgent via the first-seizure-clinic rule, regardless of the routine urgency requested, and independently raises clinical priority to moderate from two separate first-seizure rules — expect usually-appropriate + urgent + moderate priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1960-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "request": {
+          "eegType": "routine-awake",
+          "primaryIndication": "first-seizure",
+          "clinicalQuestion": "First unprovoked generalised tonic-clonic seizure 3 days ago — assess for epileptiform discharges to guide first-seizure-clinic management.",
+          "relevantHistory": "No previous seizures. No alcohol history. MRI brain already requested."
+        },
+        "context": {
+          "seizureFrequency": "Single episode",
+          "currentAntiepileptics": "",
+          "firstSeizure": true,
+          "knownEpilepsy": false
+        },
+        "redFlags": {
+          "recentSeizure": true,
+          "suspectedStatusEpilepticus": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "setting": "outpatient",
+          "notes": "First-seizure clinic appointment booked for next week."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "completenessPercent": 100,
+        "priorityBand": "moderate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-FIRST-SEIZURE-IDEAL",
+            "axis": "appropriateness",
+            "category": "first-seizure",
+            "description": "Requested routine-awake EEG is the recommended study for \"first-seizure\"."
+          },
+          {
+            "ruleId": "R-URGENCY-RECENT-FIRST-SEIZURE",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Recent first seizure — expedited first-seizure-clinic EEG."
+          },
+          {
+            "ruleId": "R-PRIORITY-RECENT-FIRST-SEIZURE",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "Recent first seizure — moderate priority."
+          },
+          {
+            "ruleId": "R-PRIORITY-FIRST-SEIZURE",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "First-seizure work-up — moderate priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RECENT-FIRST-SEIZURE-001",
+            "category": "recent-first-seizure",
+            "priority": "high",
+            "description": "Recent first unprovoked seizure.",
+            "suggestedAction": "Expedite EEG via first-seizure pathway; an early EEG increases the diagnostic yield of interictal discharges."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-exclude-epilepsy-guideline-misuse-incomplete",
+      "description": "The clinical question asks the EEG to confirm this is not epilepsy — NICE NG217 is explicit that EEG must not be used to exclude a diagnosis of epilepsy, so the guideline-misuse flag forces query-referrer even though the requested study (routine awake EEG for suspected-epilepsy) is itself usually-appropriate and carries no red flags; several administrative fields are not yet captured — expect usually-appropriate + routine + low priority + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "request": {
+          "eegType": "routine-awake",
+          "primaryIndication": "suspected-epilepsy",
+          "clinicalQuestion": "Please can you confirm this is not epilepsy?",
+          "relevantHistory": ""
+        },
+        "context": {
+          "seizureFrequency": "",
+          "currentAntiepileptics": "",
+          "firstSeizure": false,
+          "knownEpilepsy": false
+        },
+        "redFlags": {
+          "recentSeizure": false,
+          "suspectedStatusEpilepticus": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Query whether the funny turns are epileptic in nature."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "completenessPercent": 80,
+        "priorityBand": "low",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-EPILEPSY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-epilepsy",
+            "description": "Requested routine-awake EEG is the recommended study for \"suspected-epilepsy\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; urgency follows the requested tier (routine)."
+          },
+          {
+            "ruleId": "R-COMPLETE-HISTORY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing relevant history."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "baseline",
+            "description": "No high-acuity indication or red flag; routine clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-EEG-NOT-TO-EXCLUDE-EPILEPSY-001",
+            "category": "eeg-not-to-exclude-epilepsy",
+            "priority": "medium",
+            "description": "Clinical question implies the EEG is being used to exclude epilepsy.",
+            "suggestedAction": "Per NICE NG217, EEG must not be used to exclude a diagnosis of epilepsy nor in isolation; query the referrer."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -896,10 +896,16 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       scan-region persona drafts each had a design error caught by
       cross-checking the computed `expected` against the intended clinical
       narrative before treating the persona as done, fixed before commit).
-      21 forms of this family done, 18 remain (count re-verified directly
-      against the fleet each update, not hand-tracked, after the
-      2026-09-02 tracking-drift correction — `bin/test-personas` ground
-      truth: PASS 228/355). 73
+      3 more done 2026-09-02 (bronchoscopy-test-request,
+      cystoscopy-test-request, electroencephalogram-test-request — same
+      methodology; electroencephalogram's third persona exercises a
+      distinctive rule unique to that engine — NICE NG217's
+      eeg-not-to-exclude-epilepsy guideline-misuse flag, detected from
+      clinical-question free text, forces query-referrer independently of
+      the appropriateness band). 24 forms of this family done, 15 remain
+      (count re-verified directly against the fleet each update, not
+      hand-tracked, after the 2026-09-02 tracking-drift correction —
+      `bin/test-personas` ground truth: PASS 231/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

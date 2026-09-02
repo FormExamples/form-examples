@@ -1,0 +1,350 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-persistent-cough-flexible-bronchoscopy-complete",
+      "description": "Well-formed routine referral: persistent cough despite treatment, flexible bronchoscopy requested (first-line), no haemoptysis or bleeding-risk factors, every completeness field present — expect usually-appropriate + routine + low risk + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1965-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1,
+          "interpreterRequired": false
+        },
+        "request": {
+          "procedure": "flexible-bronchoscopy",
+          "primaryIndication": "persistent-cough",
+          "clinicalQuestion": "Persistent cough for 8 weeks despite treatment — exclude endobronchial pathology.",
+          "relevantHistory": "Ex-smoker (20 pack-years, stopped 5 years ago). No haemoptysis."
+        },
+        "symptoms": {
+          "symptomHaemoptysis": false,
+          "haemoptysisSeverity": "",
+          "symptomCough": true,
+          "symptomBreathlessness": false,
+          "symptomWeightLoss": false,
+          "imagingFindings": "Chest x-ray unremarkable."
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "plateletCount": null
+        },
+        "procedural": {
+          "oxygenDependent": false,
+          "asaGrade": "I",
+          "sedation": "conscious",
+          "haemodynamicallyUnstable": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Patient fit for day case."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks",
+        "twoWeekWaitEligible": false,
+        "completenessPercent": 100,
+        "riskBand": "low",
+        "anticoagulantAction": "No anticoagulant or antiplatelet recorded; standard bleeding precautions apply.",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PERSISTENT-COUGH-IDEAL",
+            "axis": "appropriateness",
+            "category": "persistent-cough",
+            "description": "Requested flexible-bronchoscopy is the recommended procedure for \"persistent-cough\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No escalation rule fired; urgency follows the requested tier (routine)."
+          },
+          {
+            "ruleId": "R-RISK-LOW",
+            "axis": "risk",
+            "category": "pre-procedure",
+            "description": "No bleeding or procedural risk factors recorded; pre-procedure risk is low."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "two-week-wait-suspected-lung-cancer-ebus-antiplatelet-moderate-risk",
+      "description": "Suspected lung cancer with a mediastinal mass on CT and unintentional weight loss: EBUS is the recommended (ideal) procedure for the suspected-lung-cancer indication, and the indication itself auto-escalates triage onto the NICE NG12 two-week-wait pathway regardless of the routine urgency requested; the weight loss independently would only escalate to urgent, so the more severe two-week-wait wins; clopidogrel forces moderate bleeding risk — expect usually-appropriate + two-week-wait + moderate risk + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "respiratory-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Respiratory",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1955-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 23.4,
+          "interpreterRequired": false
+        },
+        "request": {
+          "procedure": "ebus",
+          "primaryIndication": "suspected-lung-cancer",
+          "clinicalQuestion": "CT shows a 3cm right upper lobe mass with mediastinal lymphadenopathy — tissue diagnosis and nodal staging required.",
+          "relevantHistory": "Current smoker, 40 pack-years. Unintentional weight loss over 2 months."
+        },
+        "symptoms": {
+          "symptomHaemoptysis": false,
+          "haemoptysisSeverity": "",
+          "symptomCough": true,
+          "symptomBreathlessness": true,
+          "symptomWeightLoss": true,
+          "imagingFindings": "CT chest: 3cm right upper lobe mass with ipsilateral mediastinal lymphadenopathy (station 7)."
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": true,
+          "antiplateletAgent": "Clopidogrel",
+          "plateletCount": 220
+        },
+        "procedural": {
+          "oxygenDependent": false,
+          "asaGrade": "II",
+          "sedation": "conscious",
+          "haemodynamicallyUnstable": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-05",
+          "setting": "outpatient",
+          "notes": "MDT discussed; EBUS requested for nodal staging."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Within 14 days (NICE NG12)",
+        "twoWeekWaitEligible": true,
+        "completenessPercent": 100,
+        "riskBand": "moderate",
+        "anticoagulantAction": "Review the antiplatelet agent (Clopidogrel); aspirin may usually continue, but clopidogrel / dual therapy should be discussed before biopsy.",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-LUNG-CANCER-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-lung-cancer",
+            "description": "Requested ebus is the recommended procedure for \"suspected-lung-cancer\"."
+          },
+          {
+            "ruleId": "R-URGENCY-2WW-SUSPECTED-CANCER",
+            "axis": "urgency",
+            "category": "cancer-pathway",
+            "description": "Suspected lung cancer / lung mass on imaging — NICE NG12 two-week-wait pathway."
+          },
+          {
+            "ruleId": "R-URGENCY-WEIGHT-LOSS",
+            "axis": "urgency",
+            "category": "cancer-pathway",
+            "description": "Unexplained weight loss — expedite assessment."
+          },
+          {
+            "ruleId": "R-RISK-ANTIPLATELET",
+            "axis": "risk",
+            "category": "pre-procedure",
+            "description": "Patient on an antiplatelet agent — moderate bleeding risk."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Request meets NICE NG12 suspected-cancer criteria.",
+            "suggestedAction": "Expedite onto the two-week-wait lung-cancer pathway."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-massive-haemoptysis-other-procedure-mismatch-anticoagulant-incomplete",
+      "description": "Massive haemoptysis on warfarin, phoned through from the emergency department: an 'other' procedure was requested even though flexible bronchoscopy is the recommended (and rigid/EBUS the plausible) procedure for the haemoptysis indication, a clear mismatch that forces appropriateness to usually-not-appropriate and the recommendation to query-referrer regardless of the massive haemoptysis independently forcing emergency triage; the anticoagulant forces high pre-procedure risk, and several administrative fields are not yet captured — expect usually-not-appropriate + emergency + high risk + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Respiratory",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null,
+          "interpreterRequired": false
+        },
+        "request": {
+          "procedure": "other",
+          "primaryIndication": "haemoptysis",
+          "clinicalQuestion": "",
+          "relevantHistory": "Coughing large volumes of fresh blood since this morning. On warfarin for atrial fibrillation."
+        },
+        "symptoms": {
+          "symptomHaemoptysis": true,
+          "haemoptysisSeverity": "massive",
+          "symptomCough": true,
+          "symptomBreathlessness": true,
+          "symptomWeightLoss": false,
+          "imagingFindings": "CT chest pending; portable chest x-ray shows no obvious mass."
+        },
+        "bleeding": {
+          "takingAnticoagulant": true,
+          "anticoagulantAgent": "Warfarin",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "plateletCount": null
+        },
+        "procedural": {
+          "oxygenDependent": false,
+          "asaGrade": "",
+          "sedation": "",
+          "haemodynamicallyUnstable": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Phoned through from the emergency department; anaesthetics and ENT aware."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "twoWeekWaitEligible": true,
+        "completenessPercent": 65,
+        "riskBand": "high",
+        "anticoagulantAction": "Withhold the anticoagulant (Warfarin) before the procedure per BTS bleeding-risk guidance; confirm the omission interval and any bridging plan with the responsible team.",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-HAEMOPTYSIS-MISMATCH",
+            "axis": "appropriateness",
+            "category": "haemoptysis",
+            "description": "Requested other is not usually appropriate for \"haemoptysis\"; query the referrer."
+          },
+          {
+            "ruleId": "R-URGENCY-MASSIVE-HAEMOPTYSIS",
+            "axis": "urgency",
+            "category": "cancer-pathway",
+            "description": "Massive haemoptysis — emergency airway assessment."
+          },
+          {
+            "ruleId": "R-URGENCY-2WW-HAEMOPTYSIS",
+            "axis": "urgency",
+            "category": "cancer-pathway",
+            "description": "Unexplained haemoptysis — NICE NG12 two-week-wait pathway (people aged 40+)."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-ASA",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing ASA grade."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-RISK-ANTICOAGULANT",
+            "axis": "risk",
+            "category": "pre-procedure",
+            "description": "Patient on an anticoagulant — high bleeding risk for biopsy."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MASSIVE-HAEMOPTYSIS-EMERGENCY-001",
+            "category": "massive-haemoptysis-emergency",
+            "priority": "high",
+            "description": "Massive haemoptysis reported — life-threatening airway emergency.",
+            "suggestedAction": "Immediate emergency assessment with airway protection; do not delay for routine booking."
+          },
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Request meets NICE NG12 suspected-cancer criteria.",
+            "suggestedAction": "Expedite onto the two-week-wait lung-cancer pathway."
+          },
+          {
+            "flagId": "F-HIGH-BLEEDING-RISK-ANTICOAG-001",
+            "category": "high-bleeding-risk-anticoag",
+            "priority": "high",
+            "description": "Patient is taking an anticoagulant (Warfarin) — high bleeding risk for biopsy.",
+            "suggestedAction": "Confirm anticoagulant omission / bridging plan before any endobronchial biopsy."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the procedure should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
