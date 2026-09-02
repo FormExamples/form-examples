@@ -1,0 +1,330 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-suspected-ms-brain-complete",
+      "description": "Well-formed routine neurology referral: suspected MS, brain MRI with gadolinium and normal renal function, implant screen cleared, every completeness field present — expect usually-appropriate + cleared + no renal flag + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1991-03-14",
+          "nhsNumber": "943 476 5922",
+          "weightKg": 74,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "brain",
+          "primaryIndication": "suspected-ms",
+          "clinicalQuestion": "Optic neuritis and intermittent limb paraesthesia over 6 months — assess for demyelination.",
+          "relevantHistory": "No significant past medical history. No contraindications volunteered."
+        },
+        "contrast": {
+          "contrastRequired": "iv-gadolinium",
+          "egfr": 95,
+          "previousGadoliniumReaction": "none",
+          "pregnancyStatus": "not-pregnant"
+        },
+        "safety": {
+          "pacemakerOrIcd": false,
+          "cochlearImplant": false,
+          "aneurysmClip": false,
+          "metallicForeignBodyEye": false,
+          "shrapnelOrMetalFragments": false,
+          "programmableShunt": false,
+          "neurostimulator": false,
+          "metalImplantOrProsthesis": false,
+          "insulinPump": false,
+          "claustrophobia": false,
+          "mriSafetyStatus": "cleared"
+        },
+        "priorImaging": {
+          "relevantPreviousImaging": "None."
+        },
+        "logistics": {
+          "weightVersusBoreLimit": "within-limit",
+          "setting": "outpatient",
+          "siteName": "St Aldhelm's Hospital Imaging"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-10-01",
+          "notes": "Patient not claustrophobic; standard bore scanner suitable."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "mriSafetyBand": "cleared",
+        "contrastRenalFlag": "none",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MS-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-ms",
+            "description": "MRI of the brain is the recommended examination for \"suspected-ms\"."
+          },
+          {
+            "ruleId": "R-SAFETY-CLEARED",
+            "axis": "safety",
+            "category": "implant-screen",
+            "description": "No positive MRI safety screen items recorded."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-neurological-deficit-metal-implant-conditional",
+      "description": "New focal neurological deficit — cervical spine MRI requested (first-line), but the patient has a metal spinal fixation implant, forcing a conditional MRI-safety band pending confirmation of MR-conditional labelling; acuity escalates triage to urgent — expect usually-appropriate + conditional + urgent + accept (conditional alone does not block booking, unlike needs-mri-physics-review).",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "Dr Susan Marr",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1962-11-02",
+          "nhsNumber": "887 342 1190",
+          "weightKg": 82,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "spine-cervical",
+          "primaryIndication": "neurological-deficit",
+          "clinicalQuestion": "New right arm weakness and sensory loss over 48 hours — assess for cervical cord compression.",
+          "relevantHistory": "Cervical spine fusion with metal plate and screws (C5/6) in 2019 following trauma; documented MR-conditional implant card available."
+        },
+        "contrast": {
+          "contrastRequired": "none",
+          "egfr": null,
+          "previousGadoliniumReaction": "none",
+          "pregnancyStatus": "not-applicable"
+        },
+        "safety": {
+          "pacemakerOrIcd": false,
+          "cochlearImplant": false,
+          "aneurysmClip": false,
+          "metallicForeignBodyEye": false,
+          "shrapnelOrMetalFragments": false,
+          "programmableShunt": false,
+          "neurostimulator": false,
+          "metalImplantOrProsthesis": true,
+          "insulinPump": false,
+          "claustrophobia": false,
+          "mriSafetyStatus": "conditional"
+        },
+        "priorImaging": {
+          "relevantPreviousImaging": "Post-fixation radiographs 2019, no complication."
+        },
+        "logistics": {
+          "weightVersusBoreLimit": "within-limit",
+          "setting": "inpatient",
+          "siteName": "St Aldhelm's Hospital Imaging"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "notes": "Admitted for observation; implant card to be brought to scanner check-in."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "mriSafetyBand": "conditional",
+        "contrastRenalFlag": "none",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-NEUROLOGICAL-DEFICIT-IDEAL",
+            "axis": "appropriateness",
+            "category": "neurological-deficit",
+            "description": "MRI of the spine-cervical is the recommended examination for \"neurological-deficit\"."
+          },
+          {
+            "ruleId": "R-SAFETY-METAL-IMPLANT",
+            "axis": "safety",
+            "category": "implant-screen",
+            "description": "Metal implant or prosthesis present — confirm MR-conditional labelling and correct field strength."
+          },
+          {
+            "ruleId": "R-TRIAGE-NEUROLOGICAL-DEFICIT",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Neurological deficit — urgent imaging."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-FERROMAGNETIC-IMPLANT-001",
+            "category": "ferromagnetic-implant",
+            "priority": "medium",
+            "description": "Conditional implant or metal fragment recorded on the safety screen.",
+            "suggestedAction": "Refer to MR physics to confirm MR-conditional labelling, field strength, and protocol."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-suspected-stroke-pacemaker-contraindicated-incomplete",
+      "description": "Suspected posterior-circulation stroke phoned through from the emergency department: brain MRI is first-line, but the patient has a non-MR-conditional cardiac pacemaker, forcing the safety band to contraindicated, and several administrative fields are not yet captured — expect usually-appropriate + contraindicated + emergency + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1941-06-18",
+          "nhsNumber": "",
+          "weightKg": null,
+          "interpreterRequired": false
+        },
+        "request": {
+          "bodyRegion": "brain",
+          "primaryIndication": "suspected-stroke",
+          "clinicalQuestion": "",
+          "relevantHistory": "Sudden-onset vertigo, diplopia, and dysarthria 90 minutes ago. Known non-MR-conditional pacemaker for complete heart block."
+        },
+        "contrast": {
+          "contrastRequired": "unknown",
+          "egfr": null,
+          "previousGadoliniumReaction": "unknown",
+          "pregnancyStatus": "not-applicable"
+        },
+        "safety": {
+          "pacemakerOrIcd": true,
+          "cochlearImplant": false,
+          "aneurysmClip": false,
+          "metallicForeignBodyEye": false,
+          "shrapnelOrMetalFragments": false,
+          "programmableShunt": false,
+          "neurostimulator": false,
+          "metalImplantOrProsthesis": false,
+          "insulinPump": false,
+          "claustrophobia": false,
+          "mriSafetyStatus": "unsafe"
+        },
+        "priorImaging": {
+          "relevantPreviousImaging": ""
+        },
+        "logistics": {
+          "weightVersusBoreLimit": "unknown",
+          "setting": "emergency",
+          "siteName": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "notes": "Phoned through from ED resus; stroke team aware, CT already performed, MRI requested for confirmation."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "mriSafetyBand": "contraindicated",
+        "contrastRenalFlag": "none",
+        "completenessPercent": 74,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-STROKE-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-stroke",
+            "description": "MRI of the brain is the recommended examination for \"suspected-stroke\"."
+          },
+          {
+            "ruleId": "R-SAFETY-PACEMAKER-ICD",
+            "axis": "safety",
+            "category": "implant-screen",
+            "description": "Cardiac pacemaker or ICD present — contraindicated unless MR-conditional and programmed for MRI."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-STROKE",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Suspected stroke — emergency imaging."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PACEMAKER-ICD-001",
+            "category": "pacemaker-icd",
+            "priority": "high",
+            "description": "Cardiac pacemaker or ICD present.",
+            "suggestedAction": "Do not scan until device MR-conditional status and programming are confirmed by cardiology and MR physics."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

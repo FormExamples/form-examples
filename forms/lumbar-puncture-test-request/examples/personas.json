@@ -1,0 +1,301 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-suspected-ms-cleared-complete",
+      "description": "Well-formed routine neurology referral: suspected MS, diagnostic lumbar puncture requested (first-line), no raised-ICP or bleeding-risk concerns, every completeness field present — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1991-03-14",
+          "nhsNumber": "943 476 5922"
+        },
+        "procedure": {
+          "procedureIntent": "diagnostic",
+          "primaryIndication": "suspected-multiple-sclerosis",
+          "clinicalQuestion": "Optic neuritis and intermittent limb paraesthesia with MRI brain lesions consistent with demyelination — CSF oligoclonal bands requested.",
+          "relevantHistory": "No significant past medical history. Not on anticoagulation."
+        },
+        "neuroSafety": {
+          "suspectedRaisedIntracranialPressure": false,
+          "focalNeurologicalSigns": false,
+          "reducedConsciousness": false,
+          "ctHeadStatus": "not-required"
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "inr": null,
+          "plateletCount": 260,
+          "bleedingDisorder": false,
+          "localSkinInfection": false
+        },
+        "triage": {
+          "openingPressureRequired": false,
+          "urgency": "routine",
+          "requestedByDate": "2026-09-10",
+          "setting": "outpatient",
+          "notes": "Day-case procedure; patient to bring a chaperone."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and schedule",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MULTIPLE-SCLEROSIS-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-multiple-sclerosis",
+            "description": "A diagnostic lumbar puncture is the recommended procedure for \"suspected-multiple-sclerosis\"."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "ok",
+            "description": "No raised-ICP, bleeding, or local-infection contraindication identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-guillain-barre-anticoagulant-caution",
+      "description": "Ascending limb weakness over 3 days with suspected Guillain-Barré syndrome — diagnostic LP is first-line and the indication itself auto-escalates triage to urgent, but the patient is on apixaban, forcing a safety caution pending anticoagulant review — expect usually-appropriate + caution + urgent + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "neurologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "Dr Susan Marr",
+          "siteName": "St Aldhelm's Hospital Neurology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1962-11-02",
+          "nhsNumber": "887 342 1190"
+        },
+        "procedure": {
+          "procedureIntent": "diagnostic",
+          "primaryIndication": "suspected-guillain-barre",
+          "clinicalQuestion": "Progressive ascending limb weakness and areflexia over 3 days following a diarrhoeal illness — CSF albuminocytological dissociation requested.",
+          "relevantHistory": "Atrial fibrillation on apixaban. No known bleeding disorder."
+        },
+        "neuroSafety": {
+          "suspectedRaisedIntracranialPressure": false,
+          "focalNeurologicalSigns": false,
+          "reducedConsciousness": false,
+          "ctHeadStatus": "not-required"
+        },
+        "bleeding": {
+          "takingAnticoagulant": true,
+          "anticoagulantAgent": "Apixaban",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "inr": null,
+          "plateletCount": 240,
+          "bleedingDisorder": false,
+          "localSkinInfection": false
+        },
+        "triage": {
+          "openingPressureRequired": false,
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "inpatient",
+          "notes": "Admitted for respiratory monitoring; anticoagulation team to advise on timing."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-GUILLAIN-BARRE-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-guillain-barre",
+            "description": "A diagnostic lumbar puncture is the recommended procedure for \"suspected-guillain-barre\"."
+          },
+          {
+            "ruleId": "R-SAFETY-ANTICOAGULANT",
+            "axis": "safety",
+            "category": "high-bleeding-risk-anticoag",
+            "description": "Patient taking an anticoagulant — hold / reverse and discuss with haematology before LP."
+          },
+          {
+            "ruleId": "R-TRIAGE-GUILLAIN-BARRE",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Suspected Guillain-Barré — urgent assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-BLEEDING-RISK-ANTICOAG-001",
+            "category": "high-bleeding-risk-anticoag",
+            "priority": "high",
+            "description": "Patient is taking an anticoagulant (Apixaban).",
+            "suggestedAction": "Hold / reverse anticoagulation and discuss timing with haematology before LP."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-suspected-meningitis-raised-icp-contraindicated-incomplete",
+      "description": "Suspected bacterial meningitis phoned through from the emergency department: diagnostic LP is first-line and the indication auto-escalates triage to emergency, but focal neurological signs with a CT head still awaited forces the safety band to contraindicated — image and stabilise first — and several administrative fields are not yet captured — expect usually-appropriate + contraindicated + emergency + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1998-06-18",
+          "nhsNumber": ""
+        },
+        "procedure": {
+          "procedureIntent": "diagnostic",
+          "primaryIndication": "suspected-meningitis",
+          "clinicalQuestion": "",
+          "relevantHistory": "Fever, neck stiffness, photophobia, and a new right-sided weakness over 6 hours."
+        },
+        "neuroSafety": {
+          "suspectedRaisedIntracranialPressure": true,
+          "focalNeurologicalSigns": true,
+          "reducedConsciousness": false,
+          "ctHeadStatus": "awaited"
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "inr": null,
+          "plateletCount": null,
+          "bleedingDisorder": false,
+          "localSkinInfection": false
+        },
+        "triage": {
+          "openingPressureRequired": false,
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Empirical IV antibiotics already given; CT head requested urgently before LP given the focal signs."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "contraindicated",
+        "completenessPercent": 69,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject — contraindicated",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MENINGITIS-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-meningitis",
+            "description": "A diagnostic lumbar puncture is the recommended procedure for \"suspected-meningitis\"."
+          },
+          {
+            "ruleId": "R-SAFETY-RAISED-ICP-NO-IMAGING",
+            "axis": "safety",
+            "category": "suspected-raised-icp-needs-imaging",
+            "description": "Suspected raised intracranial pressure without a reassuring CT head — image and stabilise before LP."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-MENINGITIS",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Suspected meningitis — emergency lumbar puncture / treatment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RAISED-ICP-NEEDS-IMAGING-001",
+            "category": "suspected-raised-icp-needs-imaging",
+            "priority": "high",
+            "description": "Suspected raised intracranial pressure without a reassuring CT head.",
+            "suggestedAction": "Obtain CT head and stabilise before LP; LP risks cerebral herniation if ICP is raised."
+          },
+          {
+            "flagId": "F-SUSPECTED-MENINGITIS-EMERGENCY-001",
+            "category": "suspected-meningitis-emergency",
+            "priority": "high",
+            "description": "Suspected bacterial meningitis — time-critical.",
+            "suggestedAction": "Do not delay antibiotics for LP; give empirical treatment and arrange emergency LP per NICE NG240."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the CSF analysis should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
