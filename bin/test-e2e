@@ -61,12 +61,23 @@ if [ "$do_svelte" -eq 1 ]; then
         pids="$(lsof -tiTCP:4173 -sTCP:LISTEN 2>/dev/null || true)"
         [ -n "$pids" ] && kill -9 $pids 2>/dev/null || true
     }
+    # Track failures across the loop rather than letting `set -e` abort the
+    # whole sweep on one bad form (install/build failure) or letting a
+    # swallowed `|| true` mask a real test failure (a gate that can never
+    # turn red is not a gate) — accumulate and report at the end instead.
+    svelte_fail=0
+    svelte_failed_forms=""
     for slug in $FORMS; do
         app="forms/$slug/front-end-with-svelte"
         [ -f "$app/package.json" ] || continue
         echo "-- $slug --"
         free_preview_port
-        ( cd "$app" && pnpm install --no-frozen-lockfile >/dev/null 2>&1 && pnpm run build >/dev/null 2>&1 )
+        if ! ( cd "$app" && pnpm install --no-frozen-lockfile >/dev/null 2>&1 && pnpm run build >/dev/null 2>&1 ); then
+            echo "::error::$slug: pnpm install/build failed" >&2
+            svelte_fail=1
+            svelte_failed_forms="$svelte_failed_forms $slug"
+            continue
+        fi
         # Preview on a fixed port; capture and kill afterward.
         ( cd "$app" && pnpm run preview --port 4173 --host 127.0.0.1 >/dev/null 2>&1 ) &
         preview_pid=$!
@@ -76,10 +87,18 @@ if [ "$do_svelte" -eq 1 ]; then
             if curl -sf "http://127.0.0.1:4173/$slug/" >/dev/null 2>&1; then break; fi
             i=$((i + 1)); sleep 1
         done
-        BASE_URL="http://127.0.0.1:4173" SLUG="$slug" \
-            sh -c 'cd e2e && npx playwright test svelte-smoke' || true
+        if ! BASE_URL="http://127.0.0.1:4173" SLUG="$slug" \
+            sh -c 'cd e2e && npx playwright test svelte-smoke'; then
+            echo "::error::$slug: svelte-smoke test failed" >&2
+            svelte_fail=1
+            svelte_failed_forms="$svelte_failed_forms $slug"
+        fi
         kill "$preview_pid" 2>/dev/null || true
         wait "$preview_pid" 2>/dev/null || true
         free_preview_port
     done
+    if [ "$svelte_fail" -ne 0 ]; then
+        echo "Svelte E2E sweep: FAILED —$svelte_failed_forms" >&2
+        exit 1
+    fi
 fi

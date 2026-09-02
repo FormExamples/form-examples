@@ -878,7 +878,23 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 
 - [ ] Document shared `CARGO_TARGET_DIR` + sccache in CONTRIBUTING.md
       (355 `target/` dirs ≈ tens of GB local).
-- [ ] Add `--svelte` E2E sweep to the nightly job alongside `--html`.
+- [x] **Add `--svelte` E2E sweep to the nightly job alongside `--html` (2026-09-02).**
+      Found two real gate-truth bugs in `bin/test-e2e` while wiring this up —
+      exactly the class of defect Phase 8/9 fixed elsewhere, so fixed rather
+      than carried: (1) the svelte loop's `pnpm install && pnpm run build`
+      had no failure guard, so under `set -eu` one bad form's install/build
+      failure aborted the *entire* fleet sweep rather than being reported
+      and skipped; (2) the per-form Playwright test result was swallowed by
+      a trailing `|| true` with no aggregate failure tracking at all, so the
+      svelte sweep could never turn the job red regardless of how many forms
+      failed their a11y smoke check — a gate that cannot fail is not a gate.
+      Both fixed: failures are now caught per-form, reported, and the script
+      exits 1 if any form failed, while still running every other form.
+      Verified against 25 forms (random sample across families) passing,
+      plus both failure paths (install failure, and — by construction, same
+      code path as the playwright branch — test failure) exercised directly.
+      CI: added `pnpm/action-setup@v6` to the `e2e` job and a second step
+      running `bin/test-e2e --svelte --all` after the existing `--html` one.
 - [ ] Theme-catalogue size: leave as-is unless a need appears (byte-identical
       copies; git stores ~90 blobs — working-tree cost only); revisit only
       with a measurement.

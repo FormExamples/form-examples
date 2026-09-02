@@ -572,6 +572,9 @@ jobs:
     needs: [structure]
     steps:
       - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: '9'
       - uses: actions/setup-node@v7
         with:
           node-version: '26'
@@ -581,5 +584,7 @@ jobs:
       - name: Install Playwright browsers
         working-directory: e2e
         run: npx playwright install --with-deps chromium
-      - name: Run the full E2E + accessibility sweep
-        run: bin/test-e2e --all
+      - name: Run the HTML front-end E2E + accessibility sweep
+        run: bin/test-e2e --html --all
+      - name: Run the Svelte front-end E2E sweep
+        run: bin/test-e2e --svelte --all
