@@ -97,6 +97,23 @@ The mechanics, so a release is a checklist and not an improvisation:
    GitHub release with the changelog section as its notes.
 5. Review `AI_STATEMENT.md` — its §13 ties review to releases.
 
+## Publishing crates
+
+The fleet's back-end crates default to `publish = false` — they are worked
+examples, not reusable libraries, and every one carries it today.
+
+As of 2026-09-02, the maintainer has granted Claude Code standing authority
+over publishing any crate in the fleet to crates.io: judging for itself
+which crates are ready, removing `publish = false` where it judges a crate
+should be publishable, and running `cargo publish`, without asking per
+crate or per publish. This is a bounded, explicit exception to "no tool
+decides release" — recorded here because it changes what §6 and §11 of
+[`AI_STATEMENT.md`](AI_STATEMENT.md) say, and because a decision that lives
+only in a tool session is not a decision this project made (see "How
+decisions are made" above). It covers publishing alone: a GitHub release, a
+version tag, a merge, and every other release mechanic in the section above
+remain the maintainer's, no tool's.
+
 ## Repository settings
 
 The GitHub-side settings are part of governance but live outside the tree, so

@@ -1,6 +1,6 @@
 # AI Statement
 
-Version 1.0.0, status is active.
+Version 1.1.0, status is active.
 
 Canonical location is `AI_STATEMENT.md` at the repository root.
 
@@ -92,11 +92,23 @@ measuring one.
 | Documentation and this statement | ai-generated | held to the repository's own prose rules, including [Oxford spelling](spec/oxford-spelling/oxford-spelling.md) |
 | Which forms exist, and what a form means clinically | none | decided by the maintainer and recorded in the form's `spec/index.md` |
 | Release decisions and contribution verdicts | none | the maintainer's, and no tool's |
+| Publishing a crate to crates.io (`cargo publish`) | autonomous | standing exception, maintainer-granted 2026-09-02: Claude Code judges for itself which crates are ready, removes `publish = false` where it judges a crate should be publishable, and runs `cargo publish`, without asking per crate or per publish — see [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". No other release mechanic moves with it |
 
 ## 6. Human oversight
 
 The maintainer directs the work, reviews it, and merges it. **No AI tool merges
 anything**, and no automation has write access to the default branch.
+
+One bounded, explicit exception exists, granted 2026-09-02 and recorded in
+[`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates": Claude Code may decide
+for itself which fleet crates are ready to publish, remove their
+`publish = false`, and run `cargo publish`, without asking per crate or per
+publish. It is scoped narrowly to publishing — not a merge, a GitHub release,
+a version tag, or anything else this section or §11 covers — and it is
+recorded here rather than left inside a tool session precisely because §13's
+rule applies to changes in practice as much as to changes in code: a standing
+grant of autonomous authority is exactly the kind of fact this statement
+exists to keep truthful.
 
 Where the tools run sessions, decisions with consequences — what a specification
 silence means, which convention a fleet-wide rollout adopts, what ships — are
@@ -297,6 +309,7 @@ Commission's Article 50 FAQ; MDCG 2019-11 Rev. 1.
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.1.0 | 2026-09-02 | Maintainer granted Claude Code standing, autonomous authority to decide which fleet crates are publishable, remove their `publish = false`, and run `cargo publish` (§5 table, §6, Annex B); scoped narrowly to publishing — no other release mechanic — recorded in [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". |
 | 1.0.0 | 2026-08-26 | First issue. |
 
 ## Annex B. Machine-readable summary
@@ -306,8 +319,8 @@ authoritative where the two could ever disagree.
 
 ```yaml
 ai-statement:
-  version: 1.0.0
-  last-updated: 2026-08-26
+  version: 1.1.0
+  last-updated: 2026-09-02
   vocabulary: w3c-ai-content-disclosure
   disclosure-default: ai-generated
   tools:
@@ -321,7 +334,16 @@ ai-statement:
     review: none
     adjudication: none
     release-decisions: none
+    cargo-publish: autonomous
   ships-ai-system: false
   runtime-model-calls: false
-  autonomous-use: none
+  autonomous-use:
+    - scope: cargo-publish
+      granted: 2026-09-02
+      grantor: maintainer
+      note: >-
+        Claude Code judges for itself which fleet crates are publishable,
+        removes their `publish = false`, and runs `cargo publish`, without
+        asking per crate or per publish. No other release mechanic (merge,
+        GitHub release, version tag) is included.
 ```
