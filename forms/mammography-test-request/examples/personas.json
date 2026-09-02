@@ -1,0 +1,310 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-screening-ideal-match-complete",
+      "description": "Well-formed routine population screening referral: screening exam type is the recommended (ideal) examination for the routine-screening indication, patient is decades above the age-below-screening threshold, no symptoms or risk factors, every completeness field present — expect usually-appropriate + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Alice",
+          "lastName": "Whitfield",
+          "dateOfBirth": "1966-04-12",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 24.5
+        },
+        "request": {
+          "examType": "screening",
+          "primaryIndication": "routine-screening",
+          "laterality": "bilateral",
+          "clinicalQuestion": "Routine three-yearly NHS breast screening call.",
+          "relevantHistory": "No previous breast symptoms."
+        },
+        "symptoms": {
+          "symptomLump": false,
+          "symptomPain": false,
+          "symptomNippleDischarge": false,
+          "symptomSkinChange": false,
+          "symptomNippleInversion": false
+        },
+        "history": {
+          "previousMammogram": "normal",
+          "previousMammogramDate": "2023-04-10",
+          "familyHistoryBreastCancer": false,
+          "breastImplants": false,
+          "pregnancyOrLactating": "no",
+          "hormoneReplacementTherapy": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-10-01",
+          "setting": "screening-unit",
+          "siteName": "Riverbank Screening Unit",
+          "notes": "Routine screening round."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks (routine)",
+        "twoWeekWaitEligible": false,
+        "twoWeekWaitRationale": "",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ROUTINE-SCREENING-IDEAL",
+            "axis": "appropriateness",
+            "category": "routine-screening",
+            "description": "Requested screening mammography is the recommended examination for \"routine-screening\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No NICE NG12 trigger fired; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "baseline",
+            "description": "No symptom or risk escalation; baseline low clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-breast-lump-ng12-two-week-wait",
+      "description": "New breast lump aged 30 or over: diagnostic mammography is the recommended examination for the breast-lump indication, and the lump itself auto-escalates triage to NICE NG12 two-week-wait regardless of the routine urgency requested, and forces high clinical priority — expect usually-appropriate + two-week-wait + high priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "breast-surgeon",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Breast Unit",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1970-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 27.3
+        },
+        "request": {
+          "examType": "diagnostic",
+          "primaryIndication": "breast-lump",
+          "laterality": "left",
+          "clinicalQuestion": "New left breast lump noticed 2 weeks ago — assess with diagnostic mammography.",
+          "relevantHistory": "No previous breast surgery. Not on HRT."
+        },
+        "symptoms": {
+          "symptomLump": true,
+          "symptomPain": false,
+          "symptomNippleDischarge": false,
+          "symptomSkinChange": false,
+          "symptomNippleInversion": false
+        },
+        "history": {
+          "previousMammogram": "none",
+          "previousMammogramDate": "",
+          "familyHistoryBreastCancer": false,
+          "breastImplants": false,
+          "pregnancyOrLactating": "no",
+          "hormoneReplacementTherapy": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-08",
+          "setting": "outpatient",
+          "siteName": "",
+          "notes": "Two-week-wait breast pathway referral being made in parallel."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Seen within 14 days (NICE NG12 two-week-wait)",
+        "twoWeekWaitEligible": true,
+        "twoWeekWaitRationale": "NICE NG12: unexplained breast lump aged 30 or over.",
+        "completenessPercent": 100,
+        "priorityBand": "high",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-BREAST-LUMP-IDEAL",
+            "axis": "appropriateness",
+            "category": "breast-lump",
+            "description": "Requested diagnostic mammography is the recommended examination for \"breast-lump\"."
+          },
+          {
+            "ruleId": "R-URGENCY-NG12-LUMP-30",
+            "axis": "urgency",
+            "category": "suspected-cancer-2ww",
+            "description": "NICE NG12: unexplained breast lump aged 30 or over."
+          },
+          {
+            "ruleId": "R-PRIORITY-LUMP",
+            "axis": "priority",
+            "category": "escalation",
+            "description": "Breast lump reported — high clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "NICE NG12: unexplained breast lump aged 30 or over.",
+            "suggestedAction": "Refer on the two-week-wait suspected-cancer pathway; book within 14 days."
+          },
+          {
+            "flagId": "F-BREAST-LUMP-001",
+            "category": "breast-lump",
+            "priority": "high",
+            "description": "Breast lump reported.",
+            "suggestedAction": "Prioritise diagnostic work-up, usually triple assessment with ultrasound."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-breast-pain-other-exam-mismatch-pregnant-incomplete",
+      "description": "Bilateral breast pain in a currently-pregnant patient: an 'other' exam type was requested even though breast-pain's only recommended examinations are symptomatic/diagnostic mammography, a clear mismatch that forces appropriateness to usually-not-appropriate and the recommendation to query-referrer regardless of completeness; pregnancy separately requires radiation justification, and several administrative fields are not yet captured — expect usually-not-appropriate + routine + moderate priority + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Breast Unit",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1980-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null
+        },
+        "request": {
+          "examType": "other",
+          "primaryIndication": "breast-pain",
+          "laterality": "bilateral",
+          "clinicalQuestion": "",
+          "relevantHistory": "Intermittent bilateral breast pain for 6 weeks, cyclical. Currently 10 weeks pregnant."
+        },
+        "symptoms": {
+          "symptomLump": false,
+          "symptomPain": true,
+          "symptomNippleDischarge": false,
+          "symptomSkinChange": false,
+          "symptomNippleInversion": false
+        },
+        "history": {
+          "previousMammogram": "unknown",
+          "previousMammogramDate": "",
+          "familyHistoryBreastCancer": false,
+          "breastImplants": false,
+          "pregnancyOrLactating": "pregnant",
+          "hormoneReplacementTherapy": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "siteName": "",
+          "notes": "Pain likely hormonal given pregnancy; imaging requested cautiously given the atypical presentation."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks (routine)",
+        "twoWeekWaitEligible": false,
+        "twoWeekWaitRationale": "",
+        "completenessPercent": 69,
+        "priorityBand": "moderate",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-BREAST-PAIN-MISMATCH",
+            "axis": "appropriateness",
+            "category": "breast-pain",
+            "description": "Requested other mammography is not usually appropriate for \"breast-pain\"; query the referrer."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No NICE NG12 trigger fired; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-PAIN",
+            "axis": "priority",
+            "category": "escalation",
+            "description": "Breast pain reported — moderate clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREGNANCY-LACTATING-001",
+            "category": "pregnancy-lactating",
+            "priority": "medium",
+            "description": "Patient is pregnant — radiation justification required.",
+            "suggestedAction": "Justify ionising-radiation exposure (IR(ME)R 2017); consider ultrasound as first-line."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the examination should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

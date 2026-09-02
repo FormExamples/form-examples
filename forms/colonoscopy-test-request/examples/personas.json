@@ -1,0 +1,340 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-polyp-surveillance-colonoscopy-low-risk-complete",
+      "description": "Well-formed routine surveillance referral: colonoscopy is first-line for polyp-surveillance, the FIT recorded for completeness is negative (4 ug Hb/g, below the NICE DG56 threshold of 10, so it does not itself trigger the suspected-cancer pathway), no anticoagulation or fitness concerns, every completeness field present — expect usually-appropriate + low risk + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1962-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1,
+          "setting": "outpatient"
+        },
+        "request": {
+          "procedure": "colonoscopy",
+          "primaryIndication": "polyp-surveillance",
+          "clinicalQuestion": "Two tubular adenomas removed at colonoscopy 3 years ago — due routine surveillance colonoscopy per the post-polypectomy interval.",
+          "relevantHistory": "No new symptoms. No family history of colorectal cancer."
+        },
+        "redFlags": {
+          "weightLoss": false,
+          "anaemia": false,
+          "abdominalMass": false,
+          "rectalBleeding": false,
+          "fitResultUgG": 4,
+          "haemoglobinGL": 142
+        },
+        "medication": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "diabetesMedication": "none"
+        },
+        "fitness": {
+          "fitForBowelPrep": true,
+          "bowelPrepAgent": "moviprep",
+          "chronicKidneyDisease": false,
+          "egfrMlMin": 92,
+          "asaGrade": "I"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "notes": "Routine surveillance slot; patient already sent prep instructions."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks (routine)",
+        "twoWeekWaitEligible": false,
+        "twoWeekWaitRationale": "Does not meet NICE NG12 / DG56 two-week-wait suspected-cancer criteria.",
+        "completenessPercent": 100,
+        "riskBand": "low",
+        "anticoagulantAction": "",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-POLYP-SURVEILLANCE-IDEAL",
+            "axis": "appropriateness",
+            "category": "polyp-surveillance",
+            "description": "Requested colonoscopy is the recommended examination for \"polyp-surveillance\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No suspected-cancer escalation; urgency follows the requested tier (routine)."
+          },
+          {
+            "ruleId": "R-RISK-LOW",
+            "axis": "risk",
+            "category": "low",
+            "description": "No anticoagulant, prep-fitness, renal, or ASA risk factors identified."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "two-week-wait-positive-fit-colonoscopy-anticoagulant-high-risk-redirect",
+      "description": "Symptomatic patient with a strongly positive FIT test: colonoscopy is first-line and the FIT result alone (45 ug Hb/g, well above the NICE DG56 threshold of 10) meets two-week-wait suspected-cancer eligibility regardless of requested urgency, but the patient is on rivaroxaban — anticoagulation is a high bleeding risk for this high-risk procedure and the recommendation is to redirect for periprocedural anticoagulant planning before booking, even though the request is otherwise appropriate and complete — expect usually-appropriate + high risk + two-week-wait + redirect.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "gastroenterologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Gastroenterology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 27.8,
+          "setting": "outpatient"
+        },
+        "request": {
+          "procedure": "colonoscopy",
+          "primaryIndication": "change-in-bowel-habit",
+          "clinicalQuestion": "Six weeks of altered bowel habit and abdominal discomfort, symptomatic FIT 45 ug Hb/g — colonoscopy requested.",
+          "relevantHistory": "Atrial fibrillation on rivaroxaban. No previous colonoscopy."
+        },
+        "redFlags": {
+          "weightLoss": false,
+          "anaemia": false,
+          "abdominalMass": false,
+          "rectalBleeding": false,
+          "fitResultUgG": 45,
+          "haemoglobinGL": 132
+        },
+        "medication": {
+          "takingAnticoagulant": true,
+          "anticoagulantAgent": "Rivaroxaban",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "diabetesMedication": "none"
+        },
+        "fitness": {
+          "fitForBowelPrep": true,
+          "bowelPrepAgent": "moviprep",
+          "chronicKidneyDisease": false,
+          "egfrMlMin": 76,
+          "asaGrade": "II"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-05",
+          "notes": "Anticoagulation clinic to advise on periprocedural rivaroxaban omission before booking."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "<= 14 days (2WW suspected-cancer pathway)",
+        "twoWeekWaitEligible": true,
+        "twoWeekWaitRationale": "Positive FIT (45 ug Hb/g >= 10, NICE DG56) — suspected-cancer pathway.",
+        "completenessPercent": 100,
+        "riskBand": "high",
+        "anticoagulantAction": "On Rivaroxaban: plan periprocedural interruption per BSG / ESGE (omit DOAC on the morning of the procedure; bridge warfarin per INR / thrombotic risk).",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / review before booking",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CHANGE-IN-BOWEL-HABIT-IDEAL",
+            "axis": "appropriateness",
+            "category": "change-in-bowel-habit",
+            "description": "Requested colonoscopy is the recommended examination for \"change-in-bowel-habit\"."
+          },
+          {
+            "ruleId": "R-URGENCY-FIT-2WW",
+            "axis": "urgency",
+            "category": "positive-fit",
+            "description": "Positive FIT (45 ug Hb/g >= 10, NICE DG56) — suspected-cancer pathway."
+          },
+          {
+            "ruleId": "R-RISK-ANTICOAG",
+            "axis": "risk",
+            "category": "high-bleeding-risk",
+            "description": "Anticoagulant therapy — high bleeding risk for a high-risk lower-GI procedure (BSG / ESGE)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Positive FIT (45 ug Hb/g >= 10, NICE DG56) — suspected-cancer pathway.",
+            "suggestedAction": "Book on the suspected-cancer two-week-wait pathway; ensure the patient is informed and tracked."
+          },
+          {
+            "flagId": "F-HIGH-BLEEDING-RISK-ANTICOAG-001",
+            "category": "high-bleeding-risk-anticoag",
+            "priority": "high",
+            "description": "Patient is taking an anticoagulant (Rivaroxaban).",
+            "suggestedAction": "Plan periprocedural anticoagulant management per BSG / ESGE before booking a high-risk lower-GI procedure."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-active-rectal-bleeding-incomplete",
+      "description": "Active rectal bleeding phoned through from the emergency department: colonoscopy is first-line for rectal-bleeding, and the combination of the emergency setting with active bleeding auto-escalates triage to emergency regardless of the requested urgency; the patient is on no anticoagulation and otherwise low risk, but several administrative fields are not yet captured — expect usually-appropriate + low risk + emergency + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null,
+          "setting": "emergency"
+        },
+        "request": {
+          "procedure": "colonoscopy",
+          "primaryIndication": "rectal-bleeding",
+          "clinicalQuestion": "",
+          "relevantHistory": "Ongoing fresh rectal bleeding for 4 hours, no clot passage, haemodynamically stable so far."
+        },
+        "redFlags": {
+          "weightLoss": false,
+          "anaemia": false,
+          "abdominalMass": false,
+          "rectalBleeding": true,
+          "fitResultUgG": null,
+          "haemoglobinGL": 118
+        },
+        "medication": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "diabetesMedication": "none"
+        },
+        "fitness": {
+          "fitForBowelPrep": true,
+          "bowelPrepAgent": "",
+          "chronicKidneyDisease": false,
+          "egfrMlMin": null,
+          "asaGrade": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "notes": "Phoned through from ED resus; surgical team also aware, two units cross-matched as a precaution."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "twoWeekWaitEligible": false,
+        "twoWeekWaitRationale": "Does not meet NICE NG12 / DG56 two-week-wait suspected-cancer criteria.",
+        "completenessPercent": 53,
+        "riskBand": "low",
+        "anticoagulantAction": "",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-RECTAL-BLEEDING-IDEAL",
+            "axis": "appropriateness",
+            "category": "rectal-bleeding",
+            "description": "Requested colonoscopy is the recommended examination for \"rectal-bleeding\"."
+          },
+          {
+            "ruleId": "R-URGENCY-EMERGENCY-BLEED",
+            "axis": "urgency",
+            "category": "acute-presentation",
+            "description": "Emergency setting with active rectal bleeding — auto-escalated to emergency."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-FIT",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing FIT result."
+          },
+          {
+            "ruleId": "R-COMPLETE-ASA",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing ASA grade."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-RISK-LOW",
+            "axis": "risk",
+            "category": "low",
+            "description": "No anticoagulant, prep-fitness, renal, or ASA risk factors identified."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-FIT-001",
+            "category": "missing-fit",
+            "priority": "medium",
+            "description": "No FIT result recorded for a symptomatic lower-GI referral.",
+            "suggestedAction": "Request a quantitative FIT to guide the colorectal-cancer pathway (NICE DG56)."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the procedure should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

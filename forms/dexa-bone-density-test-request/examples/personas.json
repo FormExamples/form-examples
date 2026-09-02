@@ -1,0 +1,310 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-early-menopause-hip-and-spine-complete",
+      "description": "Well-formed routine GP referral: early menopause, hip-and-spine DEXA requested (first-line), a moderate FRAX score that doesn't itself adjust appropriateness, not pregnant, every completeness field present — expect usually-appropriate + low radiation dose + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1976-03-14",
+          "nhsNumber": "943 476 5922",
+          "pregnancyStatus": "not-applicable"
+        },
+        "request": {
+          "scanRegion": "hip-and-spine",
+          "primaryIndication": "early-menopause",
+          "clinicalQuestion": "Surgical menopause at age 38 following bilateral oophorectomy — baseline bone density assessment.",
+          "relevantHistory": "No previous fractures. Not on HRT."
+        },
+        "riskFactors": {
+          "fraxMajorFracturePercent": 8,
+          "previousFragilityFracture": false,
+          "longTermSteroids": false,
+          "menopauseStatus": "post",
+          "parentalHipFracture": false,
+          "weightKg": 64
+        },
+        "previousDexa": {
+          "previousDexa": "none",
+          "previousDexaDate": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Baseline scan; annual review with rheumatology to follow."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "radiationDoseBand": "low",
+        "safetyNote": "DEXA delivers a very low effective dose (~1-5 microsievert). No additional radiation precautions required.",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-EARLY-MENOPAUSE-IDEAL",
+            "axis": "appropriateness",
+            "category": "early-menopause",
+            "description": "Requested hip-and-spine DEXA is the recommended site for \"early-menopause\"."
+          },
+          {
+            "ruleId": "R-SAFETY-HIP-AND-SPINE-LOW",
+            "axis": "safety",
+            "category": "dose",
+            "description": "Standard DEXA site: very low effective dose."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No high-acuity factors; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-fragility-fracture-hip-high-frax-boosted",
+      "description": "Recent low-trauma wrist fracture with a high FRAX score: hip DEXA is first-line for fragility-fracture, and the fracture itself auto-escalates triage to urgent; the FRAX major-fracture probability (35%) is above both the NOGG intervention threshold and the very-high-risk threshold, so it boosts appropriateness by one point (capped at 9) and independently triggers the high-FRAX urgent rule too — expect usually-appropriate (score 9) + low radiation dose + urgent + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "rheumatologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Rheumatology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1948-11-02",
+          "nhsNumber": "887 342 1190",
+          "pregnancyStatus": "not-applicable"
+        },
+        "request": {
+          "scanRegion": "hip",
+          "primaryIndication": "fragility-fracture",
+          "clinicalQuestion": "Distal radius fracture from a standing-height fall 3 weeks ago — assess bone density to guide treatment.",
+          "relevantHistory": "Mother had a hip fracture at age 72. No steroid use."
+        },
+        "riskFactors": {
+          "fraxMajorFracturePercent": 35,
+          "previousFragilityFracture": true,
+          "longTermSteroids": false,
+          "menopauseStatus": "post",
+          "parentalHipFracture": true,
+          "weightKg": 58
+        },
+        "previousDexa": {
+          "previousDexa": "none",
+          "previousDexaDate": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-01",
+          "setting": "outpatient",
+          "notes": "Fracture liaison service referral made in parallel."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 9,
+        "appropriatenessBand": "usually-appropriate",
+        "radiationDoseBand": "low",
+        "safetyNote": "DEXA delivers a very low effective dose (~1-5 microsievert). No additional radiation precautions required.",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-FRAGILITY-FRACTURE-IDEAL",
+            "axis": "appropriateness",
+            "category": "fragility-fracture",
+            "description": "Requested hip DEXA is the recommended site for \"fragility-fracture\"."
+          },
+          {
+            "ruleId": "R-APPROP-FRAX-ABOVE-THRESHOLD",
+            "axis": "appropriateness",
+            "category": "frax",
+            "description": "FRAX major-fracture probability (35%) is at or above the NOGG intervention threshold; DEXA strongly supported."
+          },
+          {
+            "ruleId": "R-SAFETY-HIP-LOW",
+            "axis": "safety",
+            "category": "dose",
+            "description": "Standard DEXA site: very low effective dose."
+          },
+          {
+            "ruleId": "R-TRIAGE-RECENT-FRAGILITY-FRACTURE",
+            "axis": "triage",
+            "category": "high-acuity",
+            "description": "Recent fragility fracture — expedite bone-density assessment."
+          },
+          {
+            "ruleId": "R-TRIAGE-HIGH-FRAX",
+            "axis": "triage",
+            "category": "high-acuity",
+            "description": "Very high FRAX major-fracture probability — expedite assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RECENT-FRAGILITY-FRACTURE-001",
+            "category": "recent-fragility-fracture",
+            "priority": "high",
+            "description": "A previous (low-trauma) fragility fracture is recorded.",
+            "suggestedAction": "Expedite vetting; a fragility fracture is itself a strong indication and may warrant treatment regardless of BMD."
+          },
+          {
+            "flagId": "F-HIGH-FRAX-RISK-001",
+            "category": "high-frax-risk",
+            "priority": "high",
+            "description": "FRAX 10-year major-fracture probability (35%) is very high.",
+            "suggestedAction": "Expedite vetting; consider whether treatment can be started against the NOGG intervention threshold."
+          }
+        ]
+      }
+    },
+    {
+      "name": "deferred-pregnancy-hip-and-spine-secondary-osteoporosis-incomplete",
+      "description": "Secondary osteoporosis work-up in a patient who is currently pregnant: hip-and-spine DEXA is first-line for secondary-osteoporosis, but pregnancy — even at DEXA's very low dose — means the scan should be deferred, forcing the radiation-safety band to high (the pregnancy check overrides the site-specific dose banding entirely) and the recommendation to redirect; several administrative fields are not yet captured — expect usually-appropriate + high radiation dose + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "endocrinologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Endocrinology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1994-06-18",
+          "nhsNumber": "",
+          "pregnancyStatus": "pregnant"
+        },
+        "request": {
+          "scanRegion": "hip-and-spine",
+          "primaryIndication": "secondary-osteoporosis",
+          "clinicalQuestion": "",
+          "relevantHistory": "Coeliac disease and hyperthyroidism, both risk factors for secondary osteoporosis. Currently 14 weeks pregnant."
+        },
+        "riskFactors": {
+          "fraxMajorFracturePercent": null,
+          "previousFragilityFracture": false,
+          "longTermSteroids": false,
+          "menopauseStatus": "not-applicable",
+          "parentalHipFracture": false,
+          "weightKg": null
+        },
+        "previousDexa": {
+          "previousDexa": "unknown",
+          "previousDexaDate": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Defer DEXA until after delivery; reassess at the postnatal endocrine review."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "radiationDoseBand": "high",
+        "safetyNote": "Known or suspected pregnancy — defer DEXA. Although the dose is very low (~1-5 microsievert), avoid unnecessary exposure.",
+        "completenessPercent": 56,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / defer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SECONDARY-OSTEOPOROSIS-IDEAL",
+            "axis": "appropriateness",
+            "category": "secondary-osteoporosis",
+            "description": "Requested hip-and-spine DEXA is the recommended site for \"secondary-osteoporosis\"."
+          },
+          {
+            "ruleId": "R-SAFETY-PREGNANCY",
+            "axis": "safety",
+            "category": "pregnancy",
+            "description": "Known or suspected pregnancy raises the radiation-safety band and the scan should be deferred."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-FRAX",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing FRAX major-fracture probability."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No high-acuity factors; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREGNANCY-001",
+            "category": "pregnancy",
+            "priority": "high",
+            "description": "Pregnancy is known or suspected.",
+            "suggestedAction": "Defer DEXA until pregnancy is excluded or completed; although the dose is very low, avoid unnecessary exposure."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the scan should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

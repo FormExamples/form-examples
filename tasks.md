@@ -890,8 +890,16 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       doesn't drift as real time passes — not-yet-collected or a timestamp
       far enough in the past — rather than a narrow window a fixed date
       would age out of, the same rot risk `*-waiting-list-card` hit first).
-      21 remain (count re-verified directly against the fleet each update,
-      not hand-tracked, after the 2026-09-02 tracking-drift correction). 73
+      3 more done 2026-09-02 (colonoscopy-test-request,
+      dexa-bone-density-test-request, mammography-test-request — same
+      per-form-verified methodology; colonoscopy's FIT-value and dexa's
+      scan-region persona drafts each had a design error caught by
+      cross-checking the computed `expected` against the intended clinical
+      narrative before treating the persona as done, fixed before commit).
+      21 forms of this family done, 18 remain (count re-verified directly
+      against the fleet each update, not hand-tracked, after the
+      2026-09-02 tracking-drift correction — `bin/test-personas` ground
+      truth: PASS 228/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +
