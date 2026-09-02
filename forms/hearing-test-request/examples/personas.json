@@ -1,0 +1,292 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-hearing-loss-pure-tone-audiometry-complete",
+      "description": "Well-formed routine referral: gradual bilateral hearing difficulty, pure-tone audiometry requested (first-line), no red flags, every completeness field present — expect usually-appropriate + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "request": {
+          "testType": "pure-tone-audiometry",
+          "laterality": "bilateral",
+          "primaryIndication": "hearing-loss",
+          "clinicalQuestion": "Gradual bilateral hearing difficulty over the past year, worse in noisy environments — assess hearing thresholds.",
+          "relevantHistory": "No occupational noise exposure. No ototoxic medication."
+        },
+        "symptoms": {
+          "hearingLoss": true,
+          "tinnitus": false,
+          "vertigo": false,
+          "otalgia": false,
+          "suddenOnset": false,
+          "onsetWithinDays": "",
+          "earDischarge": false,
+          "ototoxicMedication": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "community",
+          "notes": "Routine audiology assessment."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks (routine audiology booking)",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-HEARING-LOSS-IDEAL",
+            "axis": "appropriateness",
+            "category": "hearing-loss",
+            "description": "Requested pure-tone-audiometry test is the recommended examination for \"hearing-loss\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; urgency follows the requested tier (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-ROUTINE",
+            "axis": "priority",
+            "category": "composite",
+            "description": "Routine acuity and an acceptable indication — clinical priority low."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "emergency-sudden-hearing-loss-within-30-days-high-priority",
+      "description": "Sudden bilateral hearing loss 3 days ago: pure-tone audiometry is the recommended test for the sudden-hearing-loss indication, and the sudden onset within the past 30 days itself auto-escalates triage to an otological emergency (be seen within 24 hours, per NICE QS185 / ENT-UK) regardless of the routine urgency requested, which independently sets clinical priority to high — expect usually-appropriate + emergency + high priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "ent-surgeon",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital ENT",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1975-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "request": {
+          "testType": "pure-tone-audiometry",
+          "laterality": "bilateral",
+          "primaryIndication": "sudden-hearing-loss",
+          "clinicalQuestion": "Sudden onset bilateral hearing loss 3 days ago, no preceding infection — assess hearing thresholds urgently to guide steroid treatment.",
+          "relevantHistory": "No recent upper respiratory tract infection. Not on ototoxic medication."
+        },
+        "symptoms": {
+          "hearingLoss": true,
+          "tinnitus": false,
+          "vertigo": false,
+          "otalgia": false,
+          "suddenOnset": true,
+          "onsetWithinDays": "within-30-days",
+          "earDischarge": false,
+          "ototoxicMedication": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "emergency",
+          "notes": "ENT on-call aware; time-critical for the steroid treatment window."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Within 24 hours (otological emergency)",
+        "completenessPercent": 100,
+        "priorityBand": "high",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUDDEN-HEARING-LOSS-IDEAL",
+            "axis": "appropriateness",
+            "category": "sudden-hearing-loss",
+            "description": "Requested pure-tone-audiometry test is the recommended examination for \"sudden-hearing-loss\"."
+          },
+          {
+            "ruleId": "R-URGENCY-SUDDEN-SNHL-EMERGENCY",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Sudden sensorineural hearing loss within the past 30 days — otological emergency; be seen within 24 hours."
+          },
+          {
+            "ruleId": "R-PRIORITY-EMERGENCY",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "Emergency triage tier sets clinical priority high."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUDDEN-SNHL-001",
+            "category": "sudden-sensorineural-hearing-loss-urgent",
+            "priority": "high",
+            "description": "Sudden onset of hearing loss within the past 30 days — possible sudden sensorineural hearing loss (otological emergency).",
+            "suggestedAction": "Refer to ENT to be seen within 24 hours; steroid treatment is time-critical (ENT-UK / BAO-HNS)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-suspected-otosclerosis-other-test-mismatch-unilateral-discharge-incomplete",
+      "description": "Progressive left-sided hearing loss with intermittent ear discharge: an 'other' test was requested even though tympanometry (with pure-tone audiometry also ideal) is the recommended examination for the suspected-otosclerosis indication, a clear mismatch that forces appropriateness to usually-not-appropriate and the recommendation to query-referrer regardless of completeness; the unilateral symptoms and the ear discharge each independently force urgent triage and moderate clinical priority, and several administrative fields are not yet captured — expect usually-not-appropriate + urgent + moderate priority + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital ENT",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "request": {
+          "testType": "other",
+          "laterality": "left",
+          "primaryIndication": "suspected-otosclerosis",
+          "clinicalQuestion": "",
+          "relevantHistory": "Progressive left-sided hearing loss over several years with intermittent discharge; family history of otosclerosis."
+        },
+        "symptoms": {
+          "hearingLoss": true,
+          "tinnitus": false,
+          "vertigo": false,
+          "otalgia": false,
+          "suddenOnset": false,
+          "onsetWithinDays": "",
+          "earDischarge": true,
+          "ototoxicMedication": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Query whether tympanometry or PTA is more appropriate; the discharge needs review before testing."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 2 weeks (urgent ENT / audiovestibular referral)",
+        "completenessPercent": 67,
+        "priorityBand": "moderate",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-OTOSCLEROSIS-MISMATCH",
+            "axis": "appropriateness",
+            "category": "suspected-otosclerosis",
+            "description": "Requested other test is not usually appropriate for \"suspected-otosclerosis\"; query the referrer."
+          },
+          {
+            "ruleId": "R-URGENCY-EAR-DISCHARGE",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Ear discharge (otorrhoea) — expedite ENT review."
+          },
+          {
+            "ruleId": "R-URGENCY-UNILATERAL",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Unilateral / asymmetric audiovestibular symptoms — urgent diagnostic referral."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-URGENT-OR-INAPPROPRIATE",
+            "axis": "priority",
+            "category": "composite",
+            "description": "Urgent triage tier sets clinical priority moderate."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-UNILATERAL-001",
+            "category": "unilateral-symptoms-red-flag",
+            "priority": "high",
+            "description": "Unilateral / asymmetric hearing loss, tinnitus, or vertigo reported.",
+            "suggestedAction": "Refer for ENT / audiovestibular diagnostic assessment to exclude retrocochlear pathology (e.g. vestibular schwannoma)."
+          },
+          {
+            "flagId": "F-EAR-DISCHARGE-001",
+            "category": "ear-discharge",
+            "priority": "medium",
+            "description": "Ear discharge (otorrhoea) reported.",
+            "suggestedAction": "Arrange ENT review before / alongside testing; tympanometry and pure-tone audiometry may be deferred until the ear is dry."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "low",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the test should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

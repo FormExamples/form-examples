@@ -1,0 +1,298 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-cataract-assessment-visual-acuity-complete",
+      "description": "Well-formed routine pre-operative referral: longstanding cataract listed for elective surgery, visual acuity assessment requested (first-line for cataract-assessment), no acute symptoms or risk factors, every completeness field present — expect usually-appropriate + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "optometrist",
+          "registrationBody": "GOC",
+          "registrationNumber": "01-23456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Eye Clinic",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1955-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "request": {
+          "testType": "visual-acuity",
+          "laterality": "bilateral",
+          "primaryIndication": "cataract-assessment",
+          "clinicalQuestion": "Longstanding cataract, now listed for elective surgery — pre-operative visual acuity assessment.",
+          "relevantHistory": "Cataract diagnosed 2 years ago; now listed for elective surgery."
+        },
+        "symptoms": {
+          "reducedVision": false,
+          "suddenLoss": false,
+          "flashesFloaters": false,
+          "eyePain": false,
+          "redEye": false
+        },
+        "riskFactors": {
+          "diabetes": false,
+          "knownGlaucoma": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-10-01",
+          "setting": "community",
+          "notes": "Routine cataract pathway referral."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CATARACT-ASSESSMENT-IDEAL",
+            "axis": "appropriateness",
+            "category": "cataract-assessment",
+            "description": "Requested visual-acuity test is the recommended examination for \"cataract-assessment\"."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "baseline",
+            "description": "No additional risk factors; clinical priority is low."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-diabetic-retinopathy-screening-fundus-examination-moderate-priority",
+      "description": "Diabetic patient with new blurred vision: fundus examination is the recommended (ideal) test for the diabetic-retinopathy-screening indication, and the reduced vision itself auto-escalates triage to urgent regardless of the routine urgency requested; the reduced vision plus the diabetes risk factor together raise clinical priority to moderate — expect usually-appropriate + urgent + moderate priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Medical Centre",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1965-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "request": {
+          "testType": "fundus-examination",
+          "laterality": "bilateral",
+          "primaryIndication": "diabetic-retinopathy-screening",
+          "clinicalQuestion": "Type 2 diabetes with new blurred vision over the past 2 weeks — screen for diabetic retinopathy.",
+          "relevantHistory": "Type 2 diabetes diagnosed 8 years ago, HbA1c 74 mmol/mol. No retinopathy screening this year."
+        },
+        "symptoms": {
+          "reducedVision": true,
+          "suddenLoss": false,
+          "flashesFloaters": false,
+          "eyePain": false,
+          "redEye": false
+        },
+        "riskFactors": {
+          "diabetes": true,
+          "knownGlaucoma": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-08",
+          "setting": "community",
+          "notes": "Overdue annual diabetic eye screening; now symptomatic."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "completenessPercent": 100,
+        "priorityBand": "moderate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-DIABETIC-RETINOPATHY-SCREENING-IDEAL",
+            "axis": "appropriateness",
+            "category": "diabetic-retinopathy-screening",
+            "description": "Requested fundus-examination test is the recommended examination for \"diabetic-retinopathy-screening\"."
+          },
+          {
+            "ruleId": "R-TRIAGE-REDUCED-VISION",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Reduced vision reported — urgent assessment."
+          },
+          {
+            "ruleId": "R-PRIORITY-REDUCED-VISION",
+            "axis": "priority",
+            "category": "risk",
+            "description": "Reduced vision raises clinical priority."
+          },
+          {
+            "ruleId": "R-PRIORITY-DIABETES",
+            "axis": "priority",
+            "category": "risk",
+            "description": "Diabetes (retinopathy risk) adds to clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "query-referrer-suspected-glaucoma-other-test-mismatch-acute-painful-red-eye-incomplete",
+      "description": "Sudden severe eye pain and redness with headache and nausea, phoned through from the emergency department — a presentation consistent with acute angle-closure glaucoma: an 'other' test was requested even though tonometry is the recommended examination for the suspected-glaucoma indication, a clear mismatch that forces appropriateness to usually-not-appropriate and the recommendation to query-referrer regardless of the acute painful red eye independently forcing emergency triage and high clinical priority; several administrative fields are not yet captured — expect usually-not-appropriate + emergency + high priority + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "request": {
+          "testType": "other",
+          "laterality": "left",
+          "primaryIndication": "suspected-glaucoma",
+          "clinicalQuestion": "",
+          "relevantHistory": "Sudden onset severe left eye pain and redness this morning, associated headache and nausea. Vision blurred."
+        },
+        "symptoms": {
+          "reducedVision": true,
+          "suddenLoss": false,
+          "flashesFloaters": false,
+          "eyePain": true,
+          "redEye": true
+        },
+        "riskFactors": {
+          "diabetes": false,
+          "knownGlaucoma": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Suspected acute angle-closure glaucoma; ophthalmology on-call already contacted."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "completenessPercent": 69,
+        "priorityBand": "high",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-GLAUCOMA-MISMATCH",
+            "axis": "appropriateness",
+            "category": "suspected-glaucoma",
+            "description": "Requested other test is not usually appropriate for \"suspected-glaucoma\"; query the referrer."
+          },
+          {
+            "ruleId": "R-TRIAGE-ACUTE-PAINFUL-RED-EYE",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Acute painful red eye — emergency assessment (exclude angle-closure / keratitis / uveitis)."
+          },
+          {
+            "ruleId": "R-TRIAGE-REDUCED-VISION",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Reduced vision reported — urgent assessment."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-PAINFUL-RED-EYE",
+            "axis": "priority",
+            "category": "risk",
+            "description": "Acute painful red eye raises clinical priority."
+          },
+          {
+            "ruleId": "R-PRIORITY-REDUCED-VISION",
+            "axis": "priority",
+            "category": "risk",
+            "description": "Reduced vision raises clinical priority."
+          },
+          {
+            "ruleId": "R-PRIORITY-RED-EYE",
+            "axis": "priority",
+            "category": "risk",
+            "description": "Red eye adds to clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ACUTE-PAINFUL-RED-EYE-001",
+            "category": "acute-painful-red-eye",
+            "priority": "high",
+            "description": "Acute painful red eye reported.",
+            "suggestedAction": "Emergency slit-lamp assessment; exclude acute angle-closure glaucoma, keratitis, and uveitis."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the examination should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

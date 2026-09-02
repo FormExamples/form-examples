@@ -1,0 +1,294 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-dysphagia-barium-swallow-complete",
+      "description": "Well-formed routine referral: progressive dysphagia, barium swallow requested (first-line), no pregnancy or contrast-risk factors, every completeness field including the IR(ME)R justification present — expect usually-appropriate + ok safety + low dose + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 25.4
+        },
+        "request": {
+          "studyType": "barium-swallow",
+          "primaryIndication": "dysphagia",
+          "clinicalQuestion": "Progressive difficulty swallowing solids over 3 months — assess for stricture or motility disorder.",
+          "relevantHistory": "No previous GI surgery. No known allergies."
+        },
+        "safety": {
+          "pregnancyStatus": "not-applicable",
+          "contrastAllergy": false,
+          "aspirationRisk": false,
+          "diabetes": false,
+          "irMeRJustification": "Clinically indicated to investigate progressive dysphagia; no non-ionising alternative provides equivalent functional assessment."
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Speech and language therapy also involved."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "safetyBand": "ok",
+        "radiationDoseBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-DYSPHAGIA-IDEAL",
+            "axis": "appropriateness",
+            "category": "dysphagia",
+            "description": "Requested barium-swallow study is the recommended examination for \"dysphagia\"."
+          },
+          {
+            "ruleId": "R-DOSE-BARIUM-SWALLOW",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Estimated radiation-dose band for a barium-swallow study is low."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "safety",
+            "description": "No safety contraindications or cautions identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No acuity escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-suspected-obstruction-water-soluble-aspiration-caution",
+      "description": "Suspected small bowel obstruction with a documented aspiration risk: a water-soluble contrast swallow is the recommended (ideal) study for the suspected-obstruction indication, and the indication itself auto-escalates triage to urgent regardless of the routine urgency requested; the aspiration risk independently forces a safety caution band (favouring water-soluble contrast over barium, which this request already correctly does) — expect usually-appropriate + caution safety + low dose + urgent + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "gastroenterologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Gastroenterology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 22.1
+        },
+        "request": {
+          "studyType": "water-soluble-contrast-swallow",
+          "primaryIndication": "suspected-obstruction",
+          "clinicalQuestion": "Bilious vomiting and abdominal distension for 2 days — assess for small bowel obstruction and transit.",
+          "relevantHistory": "Previous laparotomy for appendicectomy 15 years ago (adhesion risk). Reduced swallow safety noted by SALT."
+        },
+        "safety": {
+          "pregnancyStatus": "not-applicable",
+          "contrastAllergy": false,
+          "aspirationRisk": true,
+          "diabetes": false,
+          "irMeRJustification": "Urgent contrast study to confirm level and cause of suspected obstruction; water-soluble contrast chosen given aspiration risk."
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "setting": "inpatient",
+          "notes": "Surgical team aware; NG tube in situ."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "safetyBand": "caution",
+        "radiationDoseBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-OBSTRUCTION-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-obstruction",
+            "description": "Requested water-soluble-contrast-swallow study is the recommended examination for \"suspected-obstruction\"."
+          },
+          {
+            "ruleId": "R-DOSE-WATER-SOLUBLE-CONTRAST-SWALLOW",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Estimated radiation-dose band for a water-soluble-contrast-swallow study is low."
+          },
+          {
+            "ruleId": "R-SAFETY-ASPIRATION-RISK",
+            "axis": "safety",
+            "category": "aspiration-risk",
+            "description": "Aspiration risk — caution; favour water-soluble (non-ionic, low-osmolar) contrast over barium."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-OBSTRUCTION",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Suspected obstruction — urgent contrast study."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ASPIRATION-RISK-001",
+            "category": "aspiration-risk",
+            "priority": "medium",
+            "description": "Patient at risk of aspiration.",
+            "suggestedAction": "Favour water-soluble (low-osmolar non-ionic) contrast; avoid barium and high-osmolar agents."
+          }
+        ]
+      }
+    },
+    {
+      "name": "redirect-suspected-perforation-barium-contraindicated-incomplete",
+      "description": "Suspected oesophageal perforation (Boerhaave syndrome) after forceful vomiting, phoned through from the emergency department: barium swallow was requested, but water-soluble contrast is the recommended study for suspected-perforation and barium is contraindicated when perforation is suspected (peritonitis / mediastinitis risk) — this forces the safety band to contraindicated and, uniquely for this engine, the recommendation to redirect (not query-referrer) since barium-for-perforation has a clear safe redirect target; the indication independently forces emergency triage; several administrative fields are not yet captured — expect contraindicated safety + emergency + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null
+        },
+        "request": {
+          "studyType": "barium-swallow",
+          "primaryIndication": "suspected-perforation",
+          "clinicalQuestion": "",
+          "relevantHistory": "Sudden severe chest and epigastric pain after forceful vomiting (suspected Boerhaave syndrome). Surgical team requesting an urgent contrast swallow."
+        },
+        "safety": {
+          "pregnancyStatus": "not-pregnant",
+          "contrastAllergy": false,
+          "aspirationRisk": false,
+          "diabetes": false,
+          "irMeRJustification": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Phoned through from the emergency department; cardiothoracic surgery also involved."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "safetyBand": "contraindicated",
+        "radiationDoseBand": "low",
+        "completenessPercent": 65,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect to a more suitable study",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-PERFORATION-MISMATCH",
+            "axis": "appropriateness",
+            "category": "suspected-perforation",
+            "description": "Requested barium-swallow study is not usually appropriate for \"suspected-perforation\"; query the referrer."
+          },
+          {
+            "ruleId": "R-DOSE-BARIUM-SWALLOW",
+            "axis": "safety",
+            "category": "radiation-dose",
+            "description": "Estimated radiation-dose band for a barium-swallow study is low."
+          },
+          {
+            "ruleId": "R-SAFETY-PERFORATION-BARIUM",
+            "axis": "safety",
+            "category": "suspected-perforation-contrast-choice",
+            "description": "Barium study requested when perforation is suspected — contraindicated; redirect to a water-soluble contrast study."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-IRMER-JUSTIFICATION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-PERFORATION",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Suspected perforation — emergency contrast study."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-PERFORATION-CONTRAST-CHOICE-001",
+            "category": "suspected-perforation-contrast-choice",
+            "priority": "high",
+            "description": "Barium study requested when perforation is suspected (barium peritonitis / mediastinitis risk).",
+            "suggestedAction": "Redirect to a water-soluble contrast study; do not use barium."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the study should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

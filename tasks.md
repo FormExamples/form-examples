@@ -902,10 +902,19 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       distinctive rule unique to that engine — NICE NG217's
       eeg-not-to-exclude-epilepsy guideline-misuse flag, detected from
       clinical-question free text, forces query-referrer independently of
-      the appropriateness band). 24 forms of this family done, 15 remain
-      (count re-verified directly against the fleet each update, not
-      hand-tracked, after the 2026-09-02 tracking-drift correction —
-      `bin/test-personas` ground truth: PASS 231/355). 73
+      the appropriateness band). 3 more done 2026-09-02
+      (eye-vision-test-request, fluoroscopy-test-request,
+      hearing-test-request — same methodology; fluoroscopy's third
+      persona exercises a distinctive `redirect` recommendation unique to
+      that engine — barium requested for suspected perforation forces a
+      `contraindicated` safety band, which short-circuits straight to
+      `redirect` in `deriveRecommendation` ahead of the appropriateness
+      check, even though the same mismatch would independently have
+      earned a `query-referrer` verdict on its own). 27 forms of this
+      family done, 12 remain (count re-verified directly against the
+      fleet each update, not hand-tracked, after the 2026-09-02
+      tracking-drift correction — `bin/test-personas` ground truth:
+      PASS 234/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +
