@@ -1,6 +1,6 @@
 # AI Statement
 
-Version 1.2.0, status is active.
+Version 1.2.1, status is active.
 
 Canonical location is `AI_STATEMENT.md` at the repository root.
 
@@ -201,11 +201,15 @@ per §3 **shall** say so in the pull-request description — which tool, and wha
 it did.
 
 Disclosure belongs in the PR description — which tool, and what it did — and,
-as of 2026-09-02, a commit it touched also carries a `Co-Authored-By:`
-trailer naming the tool (see `CONTRIBUTING.md`'s Commit conventions for the
-exact form). Git's `Author:`/`Committer:` fields stay the human's; a
-`Co-Authored-By:` trailer does not touch either — it is a second name on the
-commit, not a claim about who ran `git commit`. This supersedes this
+as of 2026-09-02, a commit it touched also carries two trailers naming it:
+`Co-Authored-By:`, the standard git/GitHub attribution trailer (GitHub
+renders it as a co-author on the commit), and `Claude-Session:`, a link to
+the session transcript — not a standard git trailer, specific to this tool,
+and doing a different job: provenance a reader can follow, not attribution.
+See `CONTRIBUTING.md`'s Commit conventions for the exact form. Git's
+`Author:`/`Committer:` fields stay the human's either way; neither trailer
+touches them — each is a second, additional line on the commit, not a claim
+about who ran `git commit`. This supersedes this
 document's earlier "never in commit trailers" position (see Annex A): the
 per-commit trailer and the PR-description narrative now do different jobs —
 one is a durable, per-commit record even a squash-merge or a PR-description
@@ -314,6 +318,7 @@ Commission's Article 50 FAQ; MDCG 2019-11 Rev. 1.
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.2.1 | 2026-09-02 | §10 clarified: the `Claude-Session:` trailer (a session-transcript link — provenance, not attribution) was already actual practice alongside `Co-Authored-By:` but had never been documented; named it and distinguished its purpose from `Co-Authored-By:`'s. `CONTRIBUTING.md`'s Commit conventions updated to match. |
 | 1.2.0 | 2026-09-02 | §10 reversed: a commit a tool touched now carries a `Co-Authored-By:` trailer naming it, alongside (not instead of) the PR-description disclosure; corrected the same day the 1.1.0 change below was made. `CONTRIBUTING.md` and `.github/PULL_REQUEST_TEMPLATE.md` updated to match. |
 | 1.1.0 | 2026-09-02 | Maintainer granted Claude Code standing, autonomous authority to decide which fleet crates are publishable, remove their `publish = false`, and run `cargo publish` (§5 table, §6, Annex B); scoped narrowly to publishing — no other release mechanic — recorded in [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". |
 | 1.0.0 | 2026-08-26 | First issue. |
@@ -325,11 +330,14 @@ authoritative where the two could ever disagree.
 
 ```yaml
 ai-statement:
-  version: 1.2.0
+  version: 1.2.1
   last-updated: 2026-09-02
   vocabulary: w3c-ai-content-disclosure
   disclosure-default: ai-generated
-  disclosure-channels: [pull-request-description, commit-co-authored-by-trailer]
+  disclosure-channels:
+    - pull-request-description
+    - commit-co-authored-by-trailer
+    - commit-claude-session-trailer
   tools:
     - name: Claude Code
       provider: Anthropic

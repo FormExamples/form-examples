@@ -183,9 +183,20 @@ say so — never truncate silently.
   commit as the schema change that caused it.
 - Update the affected form's `CHANGELOG.md` (Keep-a-Changelog + SemVer).
 - Never commit a red gate. If a gate cannot pass, explain why in the PR.
-- A commit an AI tool touched carries a `Co-Authored-By:` trailer naming it,
-  e.g. `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`. This does
-  not change git's `Author:`/`Committer:` fields, which stay the human's; the
-  trailer is a second name on the commit, not a claim about who ran
-  `git commit`. Per [`AI_STATEMENT.md`](AI_STATEMENT.md) §10, this is
-  alongside the PR-description disclosure, not instead of it.
+- A commit an AI tool touched carries two trailers naming it — distinct
+  purposes, both kept:
+
+  ```
+  Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+  Claude-Session: https://claude.ai/code/session_...
+  ```
+
+  `Co-Authored-By:` is the standard git/GitHub attribution trailer — GitHub
+  renders it as a co-author on the commit. `Claude-Session:` is not a
+  standard git trailer; it links to the session transcript, so a reader can
+  follow the actual work rather than take the trailer's word for it — that's
+  provenance, a different job from attribution. Neither changes git's
+  `Author:`/`Committer:` fields, which stay the human's; each is a second,
+  additional line on the commit, not a claim about who ran `git commit`. Per
+  [`AI_STATEMENT.md`](AI_STATEMENT.md) §10, both are alongside the
+  PR-description disclosure, not instead of it.
