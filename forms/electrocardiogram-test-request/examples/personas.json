@@ -1,0 +1,307 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-palpitations-holter-complete",
+      "description": "Well-formed routine GP referral: intermittent palpitations, 24-hour ambulatory Holter monitor requested (first-line to capture an infrequent event), no red-flag symptoms, every completeness field present — expect usually-appropriate + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1962-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "request": {
+          "ecgType": "ambulatory-holter-24h",
+          "primaryIndication": "palpitations",
+          "clinicalQuestion": "Intermittent brief palpitations over 3 months, not present at consultation — capture rhythm during a typical episode.",
+          "relevantHistory": "No syncope. Normal resting ECG in clinic. No significant past medical history."
+        },
+        "symptoms": {
+          "symptomChestPain": false,
+          "symptomPalpitations": true,
+          "symptomSyncope": false,
+          "symptomBreathlessness": false,
+          "symptomDizziness": false,
+          "currentlySymptomatic": false,
+          "suspectedAcs": false,
+          "knownArrhythmia": "none"
+        },
+        "medications": {
+          "relevantMedications": "None regular."
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-15",
+          "setting": "outpatient",
+          "siteName": "Riverbank Medical Practice",
+          "notes": "Patient to keep a symptom diary during the monitoring period."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-6 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PALPITATIONS-IDEAL",
+            "axis": "appropriateness",
+            "category": "palpitations",
+            "description": "Requested ambulatory-holter-24h ECG is the recommended examination for \"palpitations\"."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-BASELINE",
+            "axis": "priority",
+            "category": "baseline",
+            "description": "No escalating factors; baseline low clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-syncope-resting-ecg-complete",
+      "description": "Unheralded collapse while standing at a bus stop: resting 12-lead ECG requested (first-line to exclude an arrhythmic cause), and syncope itself auto-escalates triage to urgent regardless of the requested urgency — expect usually-appropriate + urgent + moderate priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1949-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "request": {
+          "ecgType": "resting-12-lead",
+          "primaryIndication": "syncope",
+          "clinicalQuestion": "Sudden collapse with brief loss of consciousness while standing, no prodrome reported by witnesses — exclude an arrhythmic cause before considering a tilt-table test.",
+          "relevantHistory": "No previous syncope. No chest pain or palpitations associated. Bystander CPR not required; recovered spontaneously within seconds."
+        },
+        "symptoms": {
+          "symptomChestPain": false,
+          "symptomPalpitations": false,
+          "symptomSyncope": true,
+          "symptomBreathlessness": false,
+          "symptomDizziness": true,
+          "currentlySymptomatic": false,
+          "suspectedAcs": false,
+          "knownArrhythmia": "none"
+        },
+        "medications": {
+          "relevantMedications": "Amlodipine 5 mg od for hypertension."
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "outpatient",
+          "siteName": "St Aldhelm's Hospital",
+          "notes": "Lying and standing blood pressure already checked in clinic, no significant drop."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "completenessPercent": 100,
+        "priorityBand": "moderate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SYNCOPE-IDEAL",
+            "axis": "appropriateness",
+            "category": "syncope",
+            "description": "Requested resting-12-lead ECG is the recommended examination for \"syncope\"."
+          },
+          {
+            "ruleId": "R-URGENCY-SYNCOPE",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Syncope / collapse — urgent assessment to exclude arrhythmic cause."
+          },
+          {
+            "ruleId": "R-PRIORITY-URGENT",
+            "axis": "priority",
+            "category": "triage",
+            "description": "Urgent triage tier — moderate clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SYNCOPE-RED-FLAG-001",
+            "category": "syncope-red-flag",
+            "priority": "high",
+            "description": "Syncope or collapse reported.",
+            "suggestedAction": "Urgent 12-lead ECG to exclude an arrhythmic / structural cause; consider ambulatory monitoring."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-suspected-acs-active-chest-pain-incomplete",
+      "description": "Active crushing chest pain phoned through from the emergency department with suspected ACS: resting 12-lead ECG is first-line, and both the suspected-ACS flag and active symptomatic chest pain independently force emergency same-hour triage, but several administrative fields are not yet captured — expect usually-appropriate + emergency + high priority + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1941-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "request": {
+          "ecgType": "resting-12-lead",
+          "primaryIndication": "suspected-mi-acs",
+          "clinicalQuestion": "",
+          "relevantHistory": "Central crushing chest pain radiating to the left arm, started 40 minutes ago, ongoing. Known type 2 diabetes and hypertension."
+        },
+        "symptoms": {
+          "symptomChestPain": true,
+          "symptomPalpitations": false,
+          "symptomSyncope": false,
+          "symptomBreathlessness": true,
+          "symptomDizziness": false,
+          "currentlySymptomatic": true,
+          "suspectedAcs": true,
+          "knownArrhythmia": "none"
+        },
+        "medications": {
+          "relevantMedications": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "siteName": "",
+          "notes": "Phoned through from ED resus; ACS pathway activated, aspirin given."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "triageTier": "emergency",
+        "targetTimeframe": "Same hour / immediate",
+        "completenessPercent": 67,
+        "priorityBand": "high",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MI-ACS-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-mi-acs",
+            "description": "Requested resting-12-lead ECG is the recommended examination for \"suspected-mi-acs\"."
+          },
+          {
+            "ruleId": "R-URGENCY-SUSPECTED-ACS",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Suspected acute coronary syndrome — emergency same-hour 12-lead ECG."
+          },
+          {
+            "ruleId": "R-URGENCY-ACTIVE-CHEST-PAIN",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Active chest pain at the time of request — emergency same-hour 12-lead ECG."
+          },
+          {
+            "ruleId": "R-URGENCY-CHEST-PAIN",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Chest pain reported — urgent assessment."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-EMERGENCY",
+            "axis": "priority",
+            "category": "triage",
+            "description": "Emergency triage tier — high clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-ACS-001",
+            "category": "suspected-acs",
+            "priority": "high",
+            "description": "Acute coronary syndrome is suspected.",
+            "suggestedAction": "Arrange same-hour emergency 12-lead ECG and senior review; follow the ACS pathway (NICE NG185)."
+          },
+          {
+            "flagId": "F-ACTIVE-CHEST-PAIN-001",
+            "category": "active-chest-pain",
+            "priority": "high",
+            "description": "Patient has active chest pain at the time of request.",
+            "suggestedAction": "Do not delay for routine booking; perform an emergency same-hour 12-lead ECG (NICE CG95)."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the ECG should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-rhinitis-aeroallergen-skin-prick-complete",
+      "description": "Well-formed routine GP referral: perennial rhinitis, aeroallergen skin-prick testing requested (first-line), no antihistamines / skin disease / beta-blocker concerns, every completeness field present — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1991-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "test": {
+          "testType": "skin-prick-test",
+          "allergenAeroallergens": true,
+          "allergenFood": false,
+          "allergenDrug": false,
+          "allergenVenom": false,
+          "allergenLatex": false,
+          "allergenContact": false
+        },
+        "indication": {
+          "primaryIndication": "rhinitis-asthma",
+          "clinicalQuestion": "Perennial nasal congestion and sneezing worse indoors — assess for house dust mite / animal dander sensitisation.",
+          "clinicalDetails": "Symptoms year-round, worse at home; two cats in the household. No asthma diagnosis."
+        },
+        "safety": {
+          "previousAnaphylaxis": false,
+          "onAntihistamines": false,
+          "onBetaBlocker": false,
+          "currentSkinDisease": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-10-01",
+          "setting": "outpatient",
+          "notes": "Patient to stop antihistamines 5 days before the appointment (advice already given)."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "validitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-RHINITIS-ASTHMA-IDEAL",
+            "axis": "appropriateness",
+            "category": "rhinitis-asthma",
+            "description": "Requested skin-prick-test is the recommended test for \"rhinitis-asthma\"."
+          },
+          {
+            "ruleId": "R-VALIDITY-OK",
+            "axis": "validity",
+            "category": "ok",
+            "description": "No validity or safety concerns recorded."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation rules fired; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-venom-allergy-beta-blocker-anaphylaxis-caution",
+      "description": "Systemic reaction to a wasp sting with a background of previous anaphylaxis and current beta-blocker therapy — venom skin-prick testing is first-line and the indication itself auto-escalates triage to urgent, but the beta-blocker + anaphylaxis-history combination forces a safety caution (adrenaline may be less effective if a systemic reaction occurs during testing) — expect usually-appropriate + caution + urgent + accept (this engine only redirects on the contraindicated band, not caution).",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "allergist-immunologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Allergy Clinic",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1962-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "test": {
+          "testType": "skin-prick-test",
+          "allergenAeroallergens": false,
+          "allergenFood": false,
+          "allergenDrug": false,
+          "allergenVenom": true,
+          "allergenLatex": false,
+          "allergenContact": false
+        },
+        "indication": {
+          "primaryIndication": "venom-allergy",
+          "clinicalQuestion": "Generalised urticaria, facial swelling, and hypotension within 15 minutes of a wasp sting last month, treated with IM adrenaline — assess for venom sensitisation ahead of immunotherapy.",
+          "clinicalDetails": "Beta-blocker (bisoprolol) for hypertension. Carries two adrenaline auto-injectors."
+        },
+        "safety": {
+          "previousAnaphylaxis": true,
+          "onAntihistamines": false,
+          "onBetaBlocker": true,
+          "currentSkinDisease": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "outpatient",
+          "notes": "Testing to be performed in a resuscitation-ready setting with senior cover."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "validitySafetyBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-VENOM-ALLERGY-IDEAL",
+            "axis": "appropriateness",
+            "category": "venom-allergy",
+            "description": "Requested skin-prick-test is the recommended test for \"venom-allergy\"."
+          },
+          {
+            "ruleId": "R-VALIDITY-BETA-BLOCKER-ANAPHYLAXIS",
+            "axis": "validity",
+            "category": "beta-blocker-caution",
+            "description": "Beta-blocker with a history of anaphylaxis — adrenaline may be less effective if a systemic reaction occurs during testing."
+          },
+          {
+            "ruleId": "R-TRIAGE-PREVIOUS-ANAPHYLAXIS",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "History of anaphylaxis — expedite assessment in a resuscitation-ready setting."
+          },
+          {
+            "ruleId": "R-TRIAGE-VENOM-ALLERGY",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Venom allergy with systemic-reaction risk — expedite testing and immunotherapy assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREVIOUS-ANAPHYLAXIS-001",
+            "category": "previous-anaphylaxis-resus-ready",
+            "priority": "high",
+            "description": "Patient has a history of anaphylaxis.",
+            "suggestedAction": "Perform testing in a resuscitation-ready setting with adrenaline and trained staff immediately available."
+          },
+          {
+            "flagId": "F-BETA-BLOCKER-CAUTION-001",
+            "category": "beta-blocker-caution",
+            "priority": "high",
+            "description": "Beta-blocker with a history of anaphylaxis — adrenaline may be less effective.",
+            "suggestedAction": "Review whether the beta-blocker can be safely withheld; ensure resuscitation readiness before any provocation or skin testing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalidated-food-allergy-antihistamines-incomplete",
+      "description": "Suspected peanut allergy referred from primary care: skin-prick testing is first-line, but the patient is still taking daily antihistamines, which invalidates the weal-and-flare response — the test cannot proceed until an appropriate washout — and several administrative fields were left blank on the referral form — expect usually-appropriate + contraindicated + routine + redirect (not reject — this engine redirects patients to a washout / alternative test rather than rejecting outright), completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "2015-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "test": {
+          "testType": "skin-prick-test",
+          "allergenAeroallergens": false,
+          "allergenFood": true,
+          "allergenDrug": false,
+          "allergenVenom": false,
+          "allergenLatex": false,
+          "allergenContact": false
+        },
+        "indication": {
+          "primaryIndication": "suspected-food-allergy",
+          "clinicalQuestion": "",
+          "clinicalDetails": "Facial rash and lip swelling after eating a peanut-containing snack. On daily cetirizine for eczema."
+        },
+        "safety": {
+          "previousAnaphylaxis": false,
+          "onAntihistamines": true,
+          "onBetaBlocker": false,
+          "currentSkinDisease": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Parent not advised to stop antihistamines before referral was submitted."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "validitySafetyBand": "contraindicated",
+        "completenessPercent": 72,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6-12 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect to a more suitable test",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-FOOD-ALLERGY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-food-allergy",
+            "description": "Requested skin-prick-test is the recommended test for \"suspected-food-allergy\"."
+          },
+          {
+            "ruleId": "R-VALIDITY-ANTIHISTAMINES-INVALIDATE",
+            "axis": "validity",
+            "category": "antihistamines-invalidate-test",
+            "description": "Patient is on antihistamines — skin-prick / intradermal testing is invalidated until an appropriate washout (typically five half-lives)."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation rules fired; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ANTIHISTAMINES-INVALIDATE-001",
+            "category": "antihistamines-invalidate-test",
+            "priority": "high",
+            "description": "Patient is on antihistamines — skin-prick / intradermal testing will be invalid.",
+            "suggestedAction": "Stop antihistamines for an appropriate washout (typically five half-lives) before testing, or use specific-IgE blood testing instead."
+          }
+        ]
+      }
+    }
+  ]
+}

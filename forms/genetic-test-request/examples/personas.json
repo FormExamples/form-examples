@@ -1,0 +1,269 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-familial-cancer-panel-consented-complete",
+      "description": "Well-formed routine oncology referral: strong family history of breast/ovarian cancer, a BRCA gene panel requested (National Genomic Test Directory eligible for familial-cancer), consent and pre-test counselling both documented, every completeness field present — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "oncologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Oncology",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1985-03-14",
+          "nhsNumber": "943 476 5922",
+          "addressLine": "12 Riverbank Close"
+        },
+        "request": {
+          "testType": "gene-panel",
+          "primaryIndication": "familial-cancer",
+          "clinicalQuestion": "Mother and maternal aunt both diagnosed with breast cancer before age 45 — assess eligibility for a hereditary breast/ovarian cancer gene panel.",
+          "requestedByDate": "2026-09-10"
+        },
+        "clinical": {
+          "clinicalDetails": "No personal cancer history. Ashkenazi Jewish ancestry on the maternal side.",
+          "suspectedCondition": "Hereditary breast and ovarian cancer syndrome",
+          "familyHistory": "Mother diagnosed breast cancer age 42; maternal aunt breast cancer age 44; maternal grandmother ovarian cancer age 58.",
+          "affectedRelativeTested": false
+        },
+        "consent": {
+          "consentObtained": true,
+          "geneticCounsellingOffered": true
+        },
+        "triage": {
+          "specimenType": "blood",
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Patient counselled on implications for cascade testing of relatives."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "consentCounsellingBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Standard laboratory turnaround",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-FAMILIAL-CANCER-ELIGIBLE",
+            "axis": "appropriateness",
+            "category": "familial-cancer",
+            "description": "Requested gene-panel test meets the National Genomic Test Directory eligibility for \"familial-cancer\"."
+          },
+          {
+            "ruleId": "R-CONSENT-OK",
+            "axis": "consent",
+            "category": "consent",
+            "description": "Informed consent and pre-test counselling are both documented."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-prenatal-diagnosis-time-critical-consented",
+      "description": "Abnormal nuchal translucency on the 12-week scan: prenatal testing on a CVS sample is first-line for prenatal-diagnosis, consent and counselling both documented, and the prenatal specimen type itself auto-escalates triage to urgent with a time-critical decision window regardless of the requested urgency — expect usually-appropriate + ok + urgent (time-critical) + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "clinical-geneticist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Fetal Medicine",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1994-11-02",
+          "nhsNumber": "887 342 1190",
+          "addressLine": "4 Orchard Lane"
+        },
+        "request": {
+          "testType": "prenatal",
+          "primaryIndication": "prenatal-diagnosis",
+          "clinicalQuestion": "Nuchal translucency 4.2mm at the 12-week scan, combined screening high risk for trisomy 21 — confirm karyotype/microarray via CVS.",
+          "requestedByDate": "2026-08-27"
+        },
+        "clinical": {
+          "clinicalDetails": "First pregnancy. No other structural anomalies seen on scan.",
+          "suspectedCondition": "Trisomy 21",
+          "familyHistory": "No known family history of chromosomal disorders.",
+          "affectedRelativeTested": false
+        },
+        "consent": {
+          "consentObtained": true,
+          "geneticCounsellingOffered": true
+        },
+        "triage": {
+          "specimenType": "prenatal",
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Fetal medicine and genetic counselling both seen the same clinic visit."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "consentCounsellingBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Time-critical — prenatal window",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PRENATAL-DIAGNOSIS-ELIGIBLE",
+            "axis": "appropriateness",
+            "category": "prenatal-diagnosis",
+            "description": "Requested prenatal test meets the National Genomic Test Directory eligibility for \"prenatal-diagnosis\"."
+          },
+          {
+            "ruleId": "R-CONSENT-OK",
+            "axis": "consent",
+            "category": "consent",
+            "description": "Informed consent and pre-test counselling are both documented."
+          },
+          {
+            "ruleId": "R-TRIAGE-PRENATAL-TIME-CRITICAL",
+            "axis": "triage",
+            "category": "prenatal",
+            "description": "Prenatal request — time-critical; the result is needed within the prenatal decision window."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PRENATAL-TIME-CRITICAL-001",
+            "category": "prenatal-time-critical",
+            "priority": "high",
+            "description": "Prenatal request is time-critical; the result is needed within the prenatal decision window.",
+            "suggestedAction": "Expedite specimen receipt and analysis; confirm the gestational decision deadline with the referrer."
+          }
+        ]
+      }
+    },
+    {
+      "name": "predictive-huntingtons-no-counselling-not-met-incomplete",
+      "description": "Predictive testing requested for a patient with an affected parent with Huntington's disease: predictive/presymptomatic testing is eligible for this indication, but pre-test genetic counselling was never recorded as offered — predictive testing mandatorily requires BOTH documented consent and counselling, so the consent axis is 'not-met' even though consent itself was obtained — and several administrative fields are incomplete — expect usually-appropriate + not-met + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1996-06-18",
+          "nhsNumber": "",
+          "addressLine": ""
+        },
+        "request": {
+          "testType": "predictive-presymptomatic",
+          "primaryIndication": "predictive-family-history",
+          "clinicalQuestion": "",
+          "requestedByDate": ""
+        },
+        "clinical": {
+          "clinicalDetails": "Asymptomatic; requesting to know her own risk status.",
+          "suspectedCondition": "Huntington's disease",
+          "familyHistory": "Father diagnosed with genetically confirmed Huntington's disease at age 50.",
+          "affectedRelativeTested": true
+        },
+        "consent": {
+          "consentObtained": true,
+          "geneticCounsellingOffered": false
+        },
+        "triage": {
+          "specimenType": "blood",
+          "urgency": "",
+          "setting": "outpatient",
+          "notes": "Patient requested testing directly from her GP without a genetics clinic referral; onward referral for formal predictive-testing counselling protocol needed before proceeding."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "consentCounsellingBand": "not-met",
+        "completenessPercent": 80,
+        "triageTier": "routine",
+        "targetTimeframe": "Standard laboratory turnaround",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject — blocking issue",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PREDICTIVE-FAMILY-HISTORY-ELIGIBLE",
+            "axis": "appropriateness",
+            "category": "predictive-family-history",
+            "description": "Requested predictive-presymptomatic test meets the National Genomic Test Directory eligibility for \"predictive-family-history\"."
+          },
+          {
+            "ruleId": "R-CONSENT-PREDICTIVE-NOT-MET",
+            "axis": "consent",
+            "category": "predictive",
+            "description": "Predictive / presymptomatic testing requires both documented informed consent and pre-test counselling; one or both are absent."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREDICTIVE-COUNSELLING-001",
+            "category": "predictive-test-counselling-required",
+            "priority": "high",
+            "description": "Predictive / presymptomatic testing without documented pre-test genetic counselling.",
+            "suggestedAction": "Arrange pre-test genetic counselling before proceeding; do not process the test until counselling is documented."
+          }
+        ]
+      }
+    }
+  ]
+}
