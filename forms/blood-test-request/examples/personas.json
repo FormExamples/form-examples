@@ -1,0 +1,345 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-diabetes-monitoring-complete",
+      "description": "Well-formed routine GP request: HbA1c monitoring for known type 2 diabetes, every completeness field present, no pre-analytical concerns — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1958-03-14",
+          "nhsNumber": "943 476 5922"
+        },
+        "panels": {
+          "fullBloodCount": false,
+          "ureaElectrolytes": false,
+          "liverFunction": false,
+          "thyroidFunction": false,
+          "hba1c": false,
+          "lipidProfile": false,
+          "cReactiveProtein": false,
+          "coagulationScreen": false,
+          "boneProfile": false,
+          "ferritinIron": false,
+          "vitaminB12Folate": false,
+          "vitaminD": false,
+          "hba1cMonitoring": true,
+          "glucose": false,
+          "inr": false,
+          "bloodCulture": false,
+          "groupAndSave": false,
+          "crossmatch": false,
+          "troponin": false,
+          "dDimer": false,
+          "amylaseLipase": false
+        },
+        "clinical": {
+          "primaryIndication": "diabetes-monitoring",
+          "clinicalDetails": "Type 2 diabetes, diagnosed 2021, on metformin. Annual HbA1c review.",
+          "relevantMedications": "Metformin 1g bd"
+        },
+        "preanalytical": {
+          "fastingRequired": false,
+          "fastingStatus": "",
+          "specimenCollected": "no",
+          "collectionDate": "",
+          "collectionTime": ""
+        },
+        "safety": {
+          "knownBloodBorneVirus": false,
+          "difficultVenousAccess": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "setting": "outpatient",
+          "notes": "Annual review; any phlebotomy slot suitable."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "ok",
+        "fastingViolation": false,
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within standard laboratory turnaround",
+        "testsSelectedCount": 1,
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-DIABETES-MONITORING-IDEAL",
+            "axis": "appropriateness",
+            "category": "diabetes-monitoring",
+            "description": "Selected panels include the recommended tests for \"diabetes-monitoring\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-OK",
+            "axis": "preanalytical",
+            "category": "specimen",
+            "description": "No pre-analytical / specimen-safety concerns detected."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-lipid-profile-fasting-violation",
+      "description": "Cardiovascular-risk lipid profile requested urgently but collected non-fasting — the panel requires fasting, so this forces a fasting violation and a reject-risk pre-analytical band even though the test choice itself is appropriate — expect usually-appropriate + reject-risk + urgent + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "Dr Susan Marr",
+          "siteName": "St Aldhelm's Hospital",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1949-11-02",
+          "nhsNumber": "887 342 1190"
+        },
+        "panels": {
+          "fullBloodCount": false,
+          "ureaElectrolytes": false,
+          "liverFunction": false,
+          "thyroidFunction": false,
+          "hba1c": false,
+          "lipidProfile": true,
+          "cReactiveProtein": false,
+          "coagulationScreen": false,
+          "boneProfile": false,
+          "ferritinIron": false,
+          "vitaminB12Folate": false,
+          "vitaminD": false,
+          "hba1cMonitoring": false,
+          "glucose": false,
+          "inr": false,
+          "bloodCulture": false,
+          "groupAndSave": false,
+          "crossmatch": false,
+          "troponin": false,
+          "dDimer": false,
+          "amylaseLipase": false
+        },
+        "clinical": {
+          "primaryIndication": "cardiovascular-risk",
+          "clinicalDetails": "New hypertension diagnosis; cardiovascular risk assessment ahead of starting a statin.",
+          "relevantMedications": "Amlodipine 5 mg od"
+        },
+        "preanalytical": {
+          "fastingRequired": true,
+          "fastingStatus": "non-fasting",
+          "specimenCollected": "yes",
+          "collectionDate": "2026-08-25",
+          "collectionTime": "09:15"
+        },
+        "safety": {
+          "knownBloodBorneVirus": false,
+          "difficultVenousAccess": false
+        },
+        "triage": {
+          "urgency": "urgent",
+          "setting": "outpatient",
+          "notes": "Patient attended fasting clinic slot but had eaten breakfast; phlebotomist proceeded anyway at the patient's request."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "reject-risk",
+        "fastingViolation": true,
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within a few hours",
+        "testsSelectedCount": 1,
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CARDIOVASCULAR-RISK-IDEAL",
+            "axis": "appropriateness",
+            "category": "cardiovascular-risk",
+            "description": "Selected panels include the recommended tests for \"cardiovascular-risk\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-FASTING-NOT-MET",
+            "axis": "preanalytical",
+            "category": "fasting",
+            "description": "A fasting-required test was collected non-fasting — fasting violation."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (urgent)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-FASTING-REQUIRED-NOT-MET-001",
+            "category": "fasting-required-not-met",
+            "priority": "medium",
+            "description": "A fasting-required test was collected non-fasting, or fasting status is unknown.",
+            "suggestedAction": "Confirm fasting status; consider re-collecting fasting samples (e.g. lipid profile, fasting glucose)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "stat-suspected-sepsis-blood-culture-incomplete",
+      "description": "Suspected sepsis phoned through from the emergency department: full blood count + blood culture ordered (blood culture is a critical test, forcing stat triage regardless of requested urgency), but several administrative fields not yet captured — expect usually-appropriate + ok + stat + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1941-06-18",
+          "nhsNumber": ""
+        },
+        "panels": {
+          "fullBloodCount": true,
+          "ureaElectrolytes": false,
+          "liverFunction": false,
+          "thyroidFunction": false,
+          "hba1c": false,
+          "lipidProfile": false,
+          "cReactiveProtein": false,
+          "coagulationScreen": false,
+          "boneProfile": false,
+          "ferritinIron": false,
+          "vitaminB12Folate": false,
+          "vitaminD": false,
+          "hba1cMonitoring": false,
+          "glucose": false,
+          "inr": false,
+          "bloodCulture": true,
+          "groupAndSave": false,
+          "crossmatch": false,
+          "troponin": false,
+          "dDimer": false,
+          "amylaseLipase": false
+        },
+        "clinical": {
+          "primaryIndication": "infection",
+          "clinicalDetails": "",
+          "relevantMedications": ""
+        },
+        "preanalytical": {
+          "fastingRequired": false,
+          "fastingStatus": "",
+          "specimenCollected": "no",
+          "collectionDate": "",
+          "collectionTime": ""
+        },
+        "safety": {
+          "knownBloodBorneVirus": false,
+          "difficultVenousAccess": false
+        },
+        "triage": {
+          "urgency": "",
+          "setting": "emergency",
+          "notes": "Phoned through from ED resus; NEWS2 score 7, query sepsis."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "ok",
+        "fastingViolation": false,
+        "completenessPercent": 67,
+        "triageTier": "stat",
+        "targetTimeframe": "Immediate / within 1 hour",
+        "testsSelectedCount": 2,
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-INFECTION-IDEAL",
+            "axis": "appropriateness",
+            "category": "infection",
+            "description": "Selected panels include the recommended tests for \"infection\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-OK",
+            "axis": "preanalytical",
+            "category": "specimen",
+            "description": "No pre-analytical / specimen-safety concerns detected."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-DETAILS",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical details."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-CRITICAL-BLOODCULTURE",
+            "axis": "triage",
+            "category": "critical-test",
+            "description": "Blood culture is a critical test — escalate to stat."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-STAT-CRITICAL-001",
+            "category": "stat-critical",
+            "priority": "high",
+            "description": "Critical / time-sensitive test requested (Blood culture).",
+            "suggestedAction": "Process immediately and telephone any critical result to the requesting clinician."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-DETAILS-001",
+            "category": "missing-clinical-details",
+            "priority": "medium",
+            "description": "No clinical details recorded to support the request.",
+            "suggestedAction": "Query the referrer for the clinical details the laboratory needs to interpret the result."
+          }
+        ]
+      }
+    }
+  ]
+}

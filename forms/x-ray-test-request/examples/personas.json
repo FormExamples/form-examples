@@ -1,0 +1,295 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-chest-infection-complete",
+      "description": "Well-formed routine GP referral: suspected chest infection, chest X-ray requested (first-line), IR(ME)R justification and pregnancy status recorded, every completeness field present — expect usually-appropriate + safe + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1958-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1
+        },
+        "request": {
+          "bodyRegion": "chest",
+          "laterality": "not-applicable",
+          "primaryIndication": "chest-infection"
+        },
+        "detail": {
+          "clinicalQuestion": "Productive cough and fever for 5 days, focal crackles at the right base — assess for consolidation.",
+          "relevantHistory": "No significant respiratory history. Non-smoker."
+        },
+        "safety": {
+          "pregnancyStatus": "not-pregnant",
+          "recentSimilarXray": false,
+          "irMeRJustification": "Clinical signs of focal chest infection not resolving with empirical treatment; justified under IR(ME)R by the requesting GP."
+        },
+        "practical": {
+          "mobility": "ambulant",
+          "setting": "outpatient",
+          "requestedByDate": "2026-08-27"
+        },
+        "triage": {
+          "urgency": "routine",
+          "notes": "Patient ambulant; any weekday slot suitable."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "radiationSafetyBand": "safe",
+        "radiationDoseBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CHEST-IDEAL",
+            "axis": "appropriateness",
+            "category": "chest-infection",
+            "description": "Plain chest radiograph is first-line for \"chest-infection\"."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "justified",
+            "description": "Exposure justified; chest carries a low relative effective dose."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-wrist-trauma-emergency-setting-possible-pregnancy",
+      "description": "Fall onto an outstretched hand in the emergency department: wrist X-ray requested for suspected fracture (first-line), trauma in the emergency setting escalates triage to urgent, and pregnancy status is only 'possible' — forcing a radiation-safety caution even though the examination itself is appropriate — expect usually-appropriate + caution + urgent + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Laila Hassan",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "6554433",
+          "requesterContact": "l.hassan@example.nhs.uk",
+          "supervisingConsultant": "Dr Tom Bryce",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-28"
+        },
+        "patient": {
+          "firstName": "Sofia",
+          "lastName": "Marchetti",
+          "dateOfBirth": "1996-07-22",
+          "nhsNumber": "712 998 3344",
+          "bodyMassIndex": 23
+        },
+        "request": {
+          "bodyRegion": "wrist-hand",
+          "laterality": "right",
+          "primaryIndication": "trauma-fracture"
+        },
+        "detail": {
+          "clinicalQuestion": "Fall onto outstretched right hand; tender over the distal radius with reduced range of movement — assess for fracture.",
+          "relevantHistory": "No previous wrist injury. Last menstrual period uncertain."
+        },
+        "safety": {
+          "pregnancyStatus": "possible",
+          "recentSimilarXray": false,
+          "irMeRJustification": "Clinical suspicion of distal radius fracture following a fall — justified under IR(ME)R; abdominal shielding to be used."
+        },
+        "practical": {
+          "mobility": "ambulant",
+          "setting": "emergency",
+          "requestedByDate": "2026-08-28"
+        },
+        "triage": {
+          "urgency": "routine",
+          "notes": "Patient triaged in ED minors; analgesia given."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "radiationSafetyBand": "caution",
+        "radiationDoseBand": "low",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-WRIST-HAND-IDEAL",
+            "axis": "appropriateness",
+            "category": "trauma-fracture",
+            "description": "Plain wrist-hand radiograph is first-line for \"trauma-fracture\"."
+          },
+          {
+            "ruleId": "R-SAFETY-POSSIBLE-PREGNANCY",
+            "axis": "safety",
+            "category": "pregnancy",
+            "description": "Pregnancy is possible or unknown — confirm pregnancy status before exposure."
+          },
+          {
+            "ruleId": "R-TRIAGE-TRAUMA",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Acute trauma in the emergency setting — urgent assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREGNANCY-002",
+            "category": "pregnancy",
+            "priority": "medium",
+            "description": "Pregnancy status is possible or unknown.",
+            "suggestedAction": "Confirm pregnancy status (LMP / pregnancy test) before exposure."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-abdominal-obstruction-pregnant-contraindicated-incomplete",
+      "description": "Suspected bowel obstruction in a pregnant patient, phoned through from the emergency department: abdominal X-ray is first-line for this indication, but confirmed pregnancy with a moderate-dose abdominal exposure forces the safety band to contraindicated, and several administrative fields are not yet captured — expect usually-appropriate + contraindicated + emergency + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "emergency-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1998-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null
+        },
+        "request": {
+          "bodyRegion": "abdomen",
+          "laterality": "not-applicable",
+          "primaryIndication": "abdominal-obstruction"
+        },
+        "detail": {
+          "clinicalQuestion": "",
+          "relevantHistory": "Absolute constipation and distension for 3 days, vomiting overnight. 24 weeks pregnant."
+        },
+        "safety": {
+          "pregnancyStatus": "pregnant",
+          "recentSimilarXray": false,
+          "irMeRJustification": ""
+        },
+        "practical": {
+          "mobility": "trolley",
+          "setting": "emergency",
+          "requestedByDate": ""
+        },
+        "triage": {
+          "urgency": "emergency",
+          "notes": "Phoned through from ED resus; obstetrics and surgery both aware."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "radiationSafetyBand": "contraindicated",
+        "radiationDoseBand": "moderate",
+        "completenessPercent": 68,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ABDOMEN-IDEAL",
+            "axis": "appropriateness",
+            "category": "abdominal-obstruction",
+            "description": "Plain abdomen radiograph is first-line for \"abdominal-obstruction\"."
+          },
+          {
+            "ruleId": "R-SAFETY-PREGNANT",
+            "axis": "safety",
+            "category": "pregnancy",
+            "description": "Confirmed pregnancy with a moderate-dose abdomen — exposure to the conceptus must be justified or avoided."
+          },
+          {
+            "ruleId": "R-SAFETY-UNJUSTIFIED",
+            "axis": "safety",
+            "category": "unjustified-exposure",
+            "description": "No IR(ME)R justification recorded — the referrer must justify the exposure before it can proceed."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-JUSTIFICATION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing IR(ME)R justification."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-TRIAGE-OBSTRUCTION",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Suspected abdominal obstruction — urgent assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREGNANCY-001",
+            "category": "pregnancy",
+            "priority": "high",
+            "description": "Patient is pregnant; ionising-radiation exposure to the conceptus must be justified.",
+            "suggestedAction": "Apply IR(ME)R pregnancy procedure; justify or defer; shield and minimise dose if it proceeds."
+          },
+          {
+            "flagId": "F-UNJUSTIFIED-EXPOSURE-001",
+            "category": "unjustified-exposure",
+            "priority": "high",
+            "description": "No IR(ME)R justification recorded for the exposure.",
+            "suggestedAction": "Obtain the referrer justification before the exposure can be authorised."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the X-ray should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

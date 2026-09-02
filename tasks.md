@@ -843,34 +843,44 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       roll out mechanically with a `--check` tool (Conventions promise).
 - [ ] Loco: per-crate seeder from `examples/` + serve `combined/openapi.yaml`
       at `/api/openapi.yaml` (second half of serve-OpenAPI).
-- [ ] Personas: **186/355 verified** (was 109). 2026-08-26: the whole
+- [ ] Personas: **189/355 verified** (was 109). 2026-08-26: the whole
       `*-waiting-list-card` family (56 forms) done in one batch — the family
       engine is template-identical (2 comment lines differ), so three RTT
       scenarios (within-target / approaching-breach+interpreter /
       52-week-breach+harm-review) were authored once and specialized per
       specialty; `bin/test-personas` gained per-persona `options` so the
       family's clock-derived grader pins `todayIso` (without it the oracle
-      rots daily — the reason this family was never covered). Remaining
-      frontier: 39 `*-test-request` + 37 `*-test-result` (NOT
-      template-identical — per-form panels/rules, needs real per-form
-      batches) and 18 bespoke singles remain of the original 39 (21 done
-      2026-08-26 in 9 pairs, 3 personas each, grounded in the engines' own
-      rule sets: cardiology-request/response, inpatient-clinical-note,
-      medical-operation-note, who-surgical-safety-checklist,
-      emergency-department-triage-note, partogram,
-      post-anaesthesia-care-unit-record, soap-note, nursing-care-plan,
-      medical-error-report, child-safeguarding-referral — the last with
-      its live-clock overdue flag deliberately unexercised, noted in the
-      persona file — general-practitioner-referral-letter,
-      history-and-physical-examination,
-      advance-decision-to-refuse-treatment, advance-statement-about-care,
-      cardiopulmonary-resuscitation-training, consent-to-treatment,
-      employee-onboarding-checklist, first-aid-training-checklist,
-      medical-records-release-permission). 73
-      forms are engine-SKIP and need discovery hints first (was 76 — the
-      `form-validator.js` false-exclusion fix above unblocked 2). Then
-      `example-invalid.json` + wizard-blocks-submission E2E assertion; API
-      transcripts; FHIR bundles for personas; site examples gallery.
+      rots daily — the reason this family was never covered). A separate
+      batch of 39 bespoke single-document forms (not the `*-test-request`
+      suffix family below — admin/clinical documents like referral letters
+      and training checklists) had 21 done 2026-08-26 in 9 pairs, 3 personas
+      each, grounded in the engines' own rule sets: cardiology-request/response,
+      inpatient-clinical-note, medical-operation-note,
+      who-surgical-safety-checklist, emergency-department-triage-note,
+      partogram, post-anaesthesia-care-unit-record, soap-note,
+      nursing-care-plan, medical-error-report, child-safeguarding-referral —
+      the last with its live-clock overdue flag deliberately unexercised,
+      noted in the persona file — general-practitioner-referral-letter,
+      history-and-physical-examination, advance-decision-to-refuse-treatment,
+      advance-statement-about-care, cardiopulmonary-resuscitation-training,
+      consent-to-treatment, employee-onboarding-checklist,
+      first-aid-training-checklist, medical-records-release-permission; 18 of
+      that batch remain. Remaining frontier: 37 `*-test-result` (not started)
+      and 39 `*-test-request` — NOT template-identical, per-form
+      panels/rules, needs real per-form batches; confirmed 2026-09-02 that
+      **all 39 have a working `calculateGrade` engine** (none are
+      engine-SKIP) via `bin/test-engines --verbose`, so every one is
+      immediately actionable. 3 done 2026-09-02 (angiography-test-request,
+      blood-test-request, x-ray-test-request — each 3 personas spanning a
+      well-formed/routine, a caution/escalated, and a
+      contraindicated-or-reject/incomplete scenario, verified field-by-field
+      against that form's own `js/rules.js` + `js/form-app.js` option lists
+      before running `--update`, not just accepting whatever it computed);
+      36 remain. 73 forms (outside this family) are engine-SKIP and need
+      discovery hints first (was 76 — the `form-validator.js`
+      false-exclusion fix above unblocked 2). Then `example-invalid.json` +
+      wizard-blocks-submission E2E assertion; API transcripts; FHIR bundles
+      for personas; site examples gallery.
 - [ ] Latent: snake_case↔camelCase API contract (283 crates + snapshot
       regen); i18n past the Welsh pilot.
 

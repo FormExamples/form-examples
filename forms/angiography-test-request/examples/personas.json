@@ -1,0 +1,316 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-suspected-cad-complete",
+      "description": "Well-formed routine GP referral: suspected coronary artery disease, CT angiography requested (the recommended first-line examination), no contrast/radiation safety concerns, every completeness field present — expect usually-appropriate + ok + routine.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1958-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1,
+          "interpreterRequired": false
+        },
+        "request": {
+          "angiographyType": "ct-angiography",
+          "bodyRegion": "coronary",
+          "primaryIndication": "suspected-coronary-disease",
+          "clinicalQuestion": "Exertional chest tightness with an intermediate pre-test probability of coronary artery disease — assess for obstructive CAD.",
+          "relevantHistory": "Three months of exertional chest tightness, resolves with rest. No red flags. ECG and troponin normal in primary care."
+        },
+        "contrast": {
+          "contrastRequired": "iodinated",
+          "egfr": 82,
+          "contrastAllergy": false,
+          "diabetes": false,
+          "metformin": false
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "bleedingDisorder": false
+        },
+        "pregnancy": {
+          "pregnancyStatus": "not-applicable",
+          "irMeRJustification": "Intermediate pre-test probability CAD per NICE CG95 — CT coronary angiography is first-line; justified under IR(ME)R by the requesting radiologist."
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-10-01",
+          "setting": "outpatient",
+          "notes": "Patient has no mobility issues; any weekday appointment suitable."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "safetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-CORONARY-DISEASE-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-coronary-disease",
+            "description": "Requested ct-angiography is a recommended examination for \"suspected-coronary-disease\"."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "safety",
+            "description": "No contrast or radiation safety concerns identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No acuity escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-aneurysm-plausible-metformin-caution",
+      "description": "Known abdominal aortic aneurysm under surveillance now tender on examination — catheter/DSA requested (plausible but not first-line for aneurysm), on metformin with iodinated contrast. Acuity escalation from routine to urgent via the aneurysm rule; safety caution from metformin + contrast — expect may-be-appropriate + caution + urgent + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "vascular-surgeon",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "Mr Ian Carmichael",
+          "siteName": "St Aldhelm's Hospital Vascular Unit",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1949-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 29.4,
+          "interpreterRequired": false
+        },
+        "request": {
+          "angiographyType": "catheter-dsa",
+          "bodyRegion": "aorta",
+          "primaryIndication": "aneurysm",
+          "clinicalQuestion": "5.8cm infrarenal AAA under surveillance, now tender with new back pain — assess for impending rupture and confirm pre-intervention anatomy.",
+          "relevantHistory": "AAA under annual ultrasound surveillance since 2022, last measured 5.8cm. Type 2 diabetes on metformin. Independently mobile."
+        },
+        "contrast": {
+          "contrastRequired": "iodinated",
+          "egfr": 68,
+          "contrastAllergy": false,
+          "diabetes": true,
+          "metformin": true
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": true,
+          "bleedingDisorder": false
+        },
+        "pregnancy": {
+          "pregnancyStatus": "not-applicable",
+          "irMeRJustification": "Symptomatic AAA — catheter angiography justified under IR(ME)R to confirm anatomy ahead of urgent repair."
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "inpatient",
+          "notes": "Patient admitted for observation; vascular surgery aware and on standby."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "safetyBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 24-72 hours",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ANEURYSM-PLAUSIBLE",
+            "axis": "appropriateness",
+            "category": "aneurysm",
+            "description": "Requested catheter-dsa may be appropriate for \"aneurysm\" but is not the first-line examination."
+          },
+          {
+            "ruleId": "R-SAFETY-METFORMIN-CONTRAST",
+            "axis": "safety",
+            "category": "safety",
+            "description": "Metformin with iodinated contrast — review per ESUR guidance based on eGFR."
+          },
+          {
+            "ruleId": "R-SAFETY-ANTICOAG-CATHETER",
+            "axis": "safety",
+            "category": "safety",
+            "description": "Catheter / DSA on anticoagulant / antiplatelet — review peri-procedural bridging and access plan."
+          },
+          {
+            "ruleId": "R-TRIAGE-ANEURYSM",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Aneurysm indication — urgent assessment to exclude rupture / leak."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-METFORMIN-CONTRAST-001",
+            "category": "metformin-contrast",
+            "priority": "medium",
+            "description": "Metformin with iodinated contrast.",
+            "suggestedAction": "Review metformin per ESUR guidance based on eGFR; withhold and recheck renal function where indicated."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-suspected-pe-renal-impairment-incomplete",
+      "description": "Acute suspected pulmonary embolism, CT pulmonary angiography requested (ideal) but severe renal impairment with iodinated contrast required, and several administrative fields not yet captured because the referral was phoned through from ED — expect usually-appropriate + contraindicated + emergency + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1941-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null,
+          "interpreterRequired": false
+        },
+        "request": {
+          "angiographyType": "ct-angiography",
+          "bodyRegion": "pulmonary",
+          "primaryIndication": "suspected-pulmonary-embolism",
+          "clinicalQuestion": "",
+          "relevantHistory": "Acute breathlessness and pleuritic chest pain, Wells score 6 (PE likely). Known CKD stage 4."
+        },
+        "contrast": {
+          "contrastRequired": "iodinated",
+          "egfr": 22,
+          "contrastAllergy": false,
+          "diabetes": false,
+          "metformin": false
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "bleedingDisorder": false
+        },
+        "pregnancy": {
+          "pregnancyStatus": "not-applicable",
+          "irMeRJustification": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Phoned through from ED resus; full demographics to follow."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "safetyBand": "contraindicated",
+        "completenessPercent": 71,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-PULMONARY-EMBOLISM-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-pulmonary-embolism",
+            "description": "Requested ct-angiography is a recommended examination for \"suspected-pulmonary-embolism\"."
+          },
+          {
+            "ruleId": "R-SAFETY-EGFR-SEVERE",
+            "axis": "safety",
+            "category": "safety",
+            "description": "eGFR < 30 with iodinated contrast — high post-contrast acute kidney injury risk."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-PULMONARY-EMBOLISM",
+            "axis": "triage",
+            "category": "acuity",
+            "description": "Suspected pulmonary embolism — emergency CT pulmonary angiography."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RENAL-IMPAIRMENT-001",
+            "category": "renal-impairment",
+            "priority": "high",
+            "description": "eGFR 22 with iodinated contrast — high post-contrast acute kidney injury risk.",
+            "suggestedAction": "Discuss with the radiologist; individualise per ACR–NKF / ESUR, arrange renal-protective hydration, and consider a non-iodinated alternative."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the examination should answer."
+          },
+          {
+            "flagId": "F-MISSING-IRMER-001",
+            "category": "other",
+            "priority": "low",
+            "description": "No IR(ME)R justification recorded for an ionising-radiation examination.",
+            "suggestedAction": "Record the IR(ME)R justification before the exposure is authorised."
+          }
+        ]
+      }
+    }
+  ]
+}
