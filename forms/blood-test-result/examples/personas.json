@@ -1,0 +1,300 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `gradedAt` is a wall-clock ISO timestamp stamped by the grader; `bin/test-personas` strips volatile timestamp-shaped keys before comparing, so it is not present in `expected`.",
+  "personas": [
+    {
+      "name": "normal-annual-health-check-complete",
+      "description": "A normal routine annual-health-check panel: every measured analyte is within its reference range, eGFR is CKD G1, no abnormal or critical flags, all five mandatory report sections present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Biochemist)",
+        "originatingRequestReference": "REQ-2026-0820-BT",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-21",
+        "specimenType": "serum",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Annual health check; no symptoms.",
+        "haemoglobinGL": 142,
+        "whiteCellCount": 6.8,
+        "platelets": 260,
+        "neutrophils": 3.9,
+        "sodiumMmolL": 140,
+        "potassiumMmolL": 4.2,
+        "ureaMmolL": 5.1,
+        "creatinineUmolL": 68,
+        "egfr": 95,
+        "altUL": 22,
+        "alkalinePhosphatase": 70,
+        "bilirubinUmolL": 10,
+        "albuminGL": 44,
+        "cReactiveProtein": 2,
+        "hba1cMmolMol": 34,
+        "glucoseMmolL": 4.9,
+        "tsh": 1.8,
+        "ferritin": 90,
+        "inr": null,
+        "overallResultStatus": "normal",
+        "abnormalResultsPresent": false,
+        "criticalValuePresent": false,
+        "criticalValueDetail": "",
+        "findingsNarrative": "All measured analytes are within the laboratory reference range.",
+        "comparisonWithPrevious": "No previous results available for comparison; this is a baseline panel.",
+        "impression": "Normal full blood count, renal, liver, and metabolic panel.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Routine annual review.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "eGFR CKD G1 (>=90)",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-result",
+            "description": "No abnormal results on an adequate specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-result",
+            "description": "No abnormal result; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-ckd-progression-moderate-complete",
+      "description": "Routine CKD monitoring bloods showing further renal decline: eGFR has fallen to 25 mL/min/1.73m2 (CKD G4), abnormalResultsPresent is flagged, report complete — expect abnormal classification + moderate severity + 100% completeness + recommended follow-up + repeat-test, with an abnormal-action flag and a separate urgent-referral flag from eGFR < 30 (two independently-triggered flags from the same low eGFR value).",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Clinical Biochemist)",
+        "originatingRequestReference": "REQ-2026-0825-BT",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-26",
+        "specimenType": "serum",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Known CKD stage 3b, routine monitoring bloods.",
+        "haemoglobinGL": 110,
+        "whiteCellCount": 7.1,
+        "platelets": 230,
+        "neutrophils": 4.5,
+        "sodiumMmolL": 138,
+        "potassiumMmolL": 4.8,
+        "ureaMmolL": 14.2,
+        "creatinineUmolL": 210,
+        "egfr": 25,
+        "altUL": 24,
+        "alkalinePhosphatase": 80,
+        "bilirubinUmolL": 12,
+        "albuminGL": 38,
+        "cReactiveProtein": 4,
+        "hba1cMmolMol": 40,
+        "glucoseMmolL": 5.2,
+        "tsh": 2.1,
+        "ferritin": 120,
+        "inr": null,
+        "overallResultStatus": "abnormal",
+        "abnormalResultsPresent": true,
+        "criticalValuePresent": false,
+        "criticalValueDetail": "",
+        "findingsNarrative": "Renal function has declined further since the previous panel, with eGFR now in the CKD G4 range.",
+        "comparisonWithPrevious": "eGFR has fallen from 34 to 25 mL/min/1.73m2 over the past 6 months.",
+        "impression": "Worsening chronic kidney disease, now CKD stage 4.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Refer to the renal team; repeat U&E in 4 weeks.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "eGFR CKD G4 (15-29)",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend repeat testing or specialist referral as clinically indicated.",
+        "recommendation": "repeat-test",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-result",
+            "description": "One or more abnormal results are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "abnormal-result",
+            "description": "One or more abnormal results are present; abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "abnormal-result",
+            "description": "Abnormal result present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "An abnormal result requiring timely action is present.",
+            "suggestedAction": "Ensure the requester is alerted and a clear action plan is documented."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "eGFR below 30 mL/min/1.73m² indicates advanced renal impairment.",
+            "suggestedAction": "Consider urgent referral to the renal team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-severe-hyperkalaemia-uncommunicated-incomplete",
+      "description": "Severe hyperkalaemia (potassium 7.2 mmol/L) phoned through from the on-call lab: a critical (panic) value auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated and no critical-value detail was recorded, each independently raising its own flag, alongside a missing impression and several other report sections left blank — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (On-call Biochemist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "specimenType": "serum",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "",
+        "haemoglobinGL": null,
+        "whiteCellCount": null,
+        "platelets": null,
+        "neutrophils": null,
+        "sodiumMmolL": null,
+        "potassiumMmolL": 7.2,
+        "ureaMmolL": null,
+        "creatinineUmolL": null,
+        "egfr": null,
+        "altUL": null,
+        "alkalinePhosphatase": null,
+        "bilirubinUmolL": null,
+        "albuminGL": null,
+        "cReactiveProtein": null,
+        "hba1cMmolMol": null,
+        "glucoseMmolL": null,
+        "tsh": null,
+        "ferritin": null,
+        "inr": null,
+        "overallResultStatus": "critical",
+        "abnormalResultsPresent": false,
+        "criticalValuePresent": true,
+        "criticalValueDetail": "",
+        "findingsNarrative": "Severe hyperkalaemia on a haemolysis-free sample; ECG changes not yet assessed.",
+        "comparisonWithPrevious": "",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through from the on-call lab; ward contacted for urgent ECG and treatment.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-value",
+            "description": "A critical (panic) value is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-value",
+            "description": "Critical (panic) value present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous results."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-value",
+            "description": "Critical (panic) value auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical (panic) value is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical value present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-003",
+            "category": "critical-result-alert",
+            "priority": "medium",
+            "description": "A critical value is present but no critical-value detail was recorded.",
+            "suggestedAction": "Record which analyte(s) breached the critical (panic) threshold."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    }
+  ]
+}

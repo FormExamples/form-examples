@@ -867,10 +867,14 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       advance-statement-about-care, cardiopulmonary-resuscitation-training,
       consent-to-treatment, employee-onboarding-checklist,
       first-aid-training-checklist, medical-records-release-permission; 18 of
-      that batch remain. Remaining frontier: 37 `*-test-result` (not started)
-      and 39 `*-test-request` — NOT template-identical, per-form
-      panels/rules, needs real per-form batches; confirmed 2026-09-02 that
-      **all 39 have a working `calculateGrade` engine** (none are
+      that batch remain. Remaining frontier: 36 `*-test-result` (13 already
+      had verified personas from earlier, pre-this-tracking work — this
+      entry's "37 not started" had drifted from that ground truth, the
+      same class of error the 2026-09-02 *-test-request correction below
+      fixed; 23 remained as of 2026-09-02) and 39 `*-test-request` — NOT
+      template-identical, per-form panels/rules, needs real per-form
+      batches; confirmed 2026-09-02 that **all 39 have a working
+      `calculateGrade` engine** (none are
       engine-SKIP) via `bin/test-engines --verbose`, so every one is
       immediately actionable. 18 done 2026-09-02 (angiography-test-request,
       blood-test-request, x-ray-test-request, mri-scan-test-request,
@@ -964,7 +968,26 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       **`*-test-request` family COMPLETE: 39/39 forms have verified
       personas** (count re-verified directly against the fleet each
       update, not hand-tracked, after the 2026-09-02 tracking-drift
-      correction — `bin/test-personas` ground truth: PASS 246/355). 73
+      correction). Moved on to the `*-test-result` family (the report/
+      interpretation counterpart, per-form but structurally parallel:
+      resultClassification / abnormalitySeverity+reportingCategory /
+      reportCompletenessPercent / followUpUrgency, same
+      read-rules.js-then-author-3-personas-then-`--update` method); all 36
+      confirmed engine-actionable via `bin/test-engines --verbose` (none
+      SKIP), and these engines stamp a `gradedAt` wall-clock ISO timestamp
+      that `bin/test-personas` already strips via its volatile-key regex,
+      so no special pinning was needed. 3 done 2026-09-02
+      (blood-test-result, blood-cross-match-test-result,
+      bronchoscopy-test-result — each form's `hasCriticalFinding`-style
+      predicate bundles some, but not all, of its major-severity triggers;
+      every form's second persona deliberately isolates a major/abnormal
+      finding that is *not* in that predicate — blood-cross-match's
+      insufficient-units, bronchoscopy's extrinsic central-airway
+      compression — to verify the non-critical-alert path actually stays
+      non-critical-alert, not just the obvious critical path). 16 of 36
+      forms of this family done, 20 remain (count re-verified directly
+      against the fleet each update, not hand-tracked —
+      `bin/test-personas` ground truth: PASS 249/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

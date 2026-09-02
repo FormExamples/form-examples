@@ -1,0 +1,268 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` only covers endobronchialLesion, bleeding, and a pneumothorax complication — extrinsic central-airway compression grades 'major' severity (R-SEV-MAJOR-02) but is deliberately NOT in that predicate, so it escalates to 'urgent' follow-up, not 'critical-alert'. The second persona below isolates exactly that gap.",
+  "personas": [
+    {
+      "name": "normal-diagnostic-bronchoscopy-complete",
+      "description": "A normal diagnostic flexible bronchoscopy for persistent cough: airways patent throughout, no abnormal structured findings, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Respiratory Physician)",
+        "originatingRequestReference": "REQ-2026-0820-BR",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "procedure": "flexible-bronchoscopy",
+        "sedationUsed": "conscious",
+        "extentExamined": "Main carina, both main bronchi, and segmental bronchi to subsegmental level bilaterally.",
+        "clinicalHistory": "Persistent cough for 8 weeks, normal chest x-ray — diagnostic bronchoscopy to exclude endobronchial pathology.",
+        "findingsNarrative": "Airways patent throughout with normal mucosa; no endobronchial lesion, compression, bleeding, foreign body, or purulent secretions.",
+        "endobronchialLesion": false,
+        "mucosalAbnormality": false,
+        "extrinsicCompression": false,
+        "bleeding": false,
+        "foreignBody": false,
+        "secretionsPurulent": false,
+        "normalExamination": true,
+        "lesionLocation": "",
+        "samplesTaken": "Bronchial washings sent for routine microbiology and cytology.",
+        "complication": "none",
+        "impression": "Normal bronchoscopic examination; no endobronchial pathology identified.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further respiratory follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-extrinsic-compression-major-urgent-not-critical",
+      "description": "EBUS for CT-demonstrated subcarinal lymphadenopathy: significant extrinsic compression of the left main bronchus is confirmed, grading major severity via the dedicated extrinsic-compression rule — but extrinsic compression is deliberately not one of the three triggers in `hasCriticalFinding` (endobronchial lesion, bleeding, pneumothorax), so it escalates only to 'urgent' follow-up, not 'critical-alert'; report complete — expect abnormal classification + major severity + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Respiratory Physician)",
+        "originatingRequestReference": "REQ-2026-0825-BR",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "procedure": "ebus",
+        "sedationUsed": "conscious",
+        "extentExamined": "Trachea, carina, and both main bronchi; EBUS survey of mediastinal and hilar stations.",
+        "clinicalHistory": "CT chest shows subcarinal lymphadenopathy with apparent extrinsic compression of the left main bronchus.",
+        "findingsNarrative": "Significant extrinsic compression of the left main bronchus consistent with the CT-demonstrated subcarinal mass; no endobronchial lesion, bleeding, foreign body, or purulent secretions.",
+        "endobronchialLesion": false,
+        "mucosalAbnormality": false,
+        "extrinsicCompression": true,
+        "bleeding": false,
+        "foreignBody": false,
+        "secretionsPurulent": false,
+        "normalExamination": false,
+        "lesionLocation": "",
+        "samplesTaken": "EBUS-TBNA of the subcarinal (station 7) lymph node.",
+        "complication": "none",
+        "impression": "Extrinsic compression of the left main bronchus from subcarinal lymphadenopathy; tissue sampled for histology.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Urgent respiratory / oncology MDT review pending histology.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "central-airway-compromise",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "extrinsic-compression",
+            "description": "Extrinsic central-airway compression present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Extrinsic central-airway compression requiring timely action is present.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear airway-management plan is documented."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-suspected-endobronchial-tumour-uncommunicated-incomplete",
+      "description": "A friable, partially obstructing endobronchial mass seen in the right main bronchus: the suspected endobronchial tumour auto-escalates classification to critical and follow-up to critical-alert, with the recommended action specifically naming an urgent lung-cancer MDT referral; the result has not yet been recorded as communicated, no lesion location was recorded despite the lesion being present, and several report sections (history, extent examined, impression) are not yet completed while the patient is worked up — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Respiratory Physician)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "procedure": "flexible-bronchoscopy",
+        "sedationUsed": "conscious",
+        "extentExamined": "",
+        "clinicalHistory": "",
+        "findingsNarrative": "A friable, partially obstructing endobronchial mass is seen in the right main bronchus, with contact bleeding controlled without intervention.",
+        "endobronchialLesion": true,
+        "mucosalAbnormality": false,
+        "extrinsicCompression": false,
+        "bleeding": false,
+        "foreignBody": false,
+        "secretionsPurulent": false,
+        "normalExamination": false,
+        "lesionLocation": "",
+        "samplesTaken": "Endobronchial biopsies x4 taken from the mass.",
+        "complication": "none",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the referring team; urgent CT chest and lung-cancer MDT referral being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "suspected-malignancy",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result to the referrer now, document the conversation, and refer urgently to the lung-cancer MDT.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (endobronchial lesion, bleeding, or pneumothorax) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-PROCEDURE-01",
+            "axis": "completeness",
+            "category": "procedure",
+            "description": "Mandatory report section missing: procedure / extent examined."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (suspected endobronchial tumour, massive haemoptysis, or pneumothorax) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "high",
+            "description": "A suspected endobronchial tumour requires urgent lung-cancer MDT referral.",
+            "suggestedAction": "Refer urgently to the lung-cancer MDT per the National Optimal Lung Cancer Pathway."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "An endobronchial lesion is reported but no anatomical location was recorded.",
+            "suggestedAction": "Record the anatomical location of the lesion to support staging and follow-up."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

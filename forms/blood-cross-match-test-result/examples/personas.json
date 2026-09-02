@@ -1,0 +1,258 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalResult` (the follow-up critical-alert trigger) bundles a positive antibody screen together with true identity-safety events (ABO discrepancy, unmet two-sample rule) and an incompatible crossmatch — so an antibody-positive result, despite grading only 'moderate' severity, still escalates straight to critical-alert / urgent-review. The second persona below instead uses insufficient-units (the other moderate-severity path) specifically because it is the one NOT folded into `hasCriticalResult`, to demonstrate a genuine non-critical-alert 'recommended' outcome.",
+  "personas": [
+    {
+      "name": "normal-compatible-group-o-negative-complete",
+      "description": "A straightforward compatible crossmatch: group O RhD-negative, historical group concordant, antibody screen negative, two-sample rule met, exactly as many compatible units available as crossmatched, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Biomedical Scientist)",
+        "originatingRequestReference": "REQ-2026-0820-XM",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "requestType": "crossmatch",
+        "clinicalHistory": "Elective hip replacement; pre-operative group and crossmatch for 2 units.",
+        "aboGroup": "o",
+        "rhdGroup": "negative",
+        "historicalGroupConcordant": true,
+        "antibodyScreenResult": "negative",
+        "antibodiesIdentified": "",
+        "crossmatchResult": "compatible",
+        "component": "red-cells",
+        "unitsCrossmatched": 2,
+        "unitsAvailable": 2,
+        "specialRequirements": "",
+        "twoSampleRuleMet": true,
+        "overallResultStatus": "normal",
+        "findingsNarrative": "Group and screen concordant with historical record; crossmatch compatible by electronic/serological method.",
+        "impression": "Compatible for 2 units red cells; no antibodies detected.",
+        "recommendedFollowUp": "Issue per standard pathway when clinically required.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "compatible",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "Issue compatible units per the standard transfusion pathway; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "compatible",
+            "description": "Compatible result on a complete, concordant work-up with no critical result; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "compatible",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "compatible",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-insufficient-units-moderate-complete",
+      "description": "A compatible crossmatch with no antibodies and no identity-safety concerns, but only 2 of the 4 requested units are currently available: insufficient units is the one moderate-severity path that is NOT bundled into the critical-result predicate, so this stays at 'recommended' follow-up rather than escalating to critical-alert — expect abnormal classification + moderate severity + 100% completeness + recommended follow-up + further-testing.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Transfusion Practitioner)",
+        "originatingRequestReference": "REQ-2026-0825-XM",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "requestType": "crossmatch",
+        "clinicalHistory": "Major gastrointestinal bleed; 4 units red cells crossmatched for a planned transfusion.",
+        "aboGroup": "a",
+        "rhdGroup": "positive",
+        "historicalGroupConcordant": true,
+        "antibodyScreenResult": "negative",
+        "antibodiesIdentified": "",
+        "crossmatchResult": "compatible",
+        "component": "red-cells",
+        "unitsCrossmatched": 4,
+        "unitsAvailable": 2,
+        "specialRequirements": "",
+        "twoSampleRuleMet": true,
+        "overallResultStatus": "abnormal",
+        "findingsNarrative": "Group and screen concordant with historical record; crossmatch compatible, but only 2 of the 4 requested units are currently held in stock.",
+        "impression": "Compatible for the 2 units available; 2 further units on order from the regional blood centre.",
+        "recommendedFollowUp": "Order the 2 outstanding units urgently from the regional blood centre.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "insufficient-units",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "before issue",
+        "recommendedAction": "Select antigen-negative units and/or order additional compatible units as clinically indicated.",
+        "recommendation": "further-testing",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "An abnormal structured finding (e.g. insufficient compatible units) is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-02",
+            "axis": "severity",
+            "category": "insufficient-units",
+            "description": "Fewer compatible units are available than were crossmatched; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "Fewer compatible units are available than were crossmatched.",
+            "suggestedAction": "Order additional compatible units to meet the requested quantity."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-abo-discrepancy-identity-safety-incomplete",
+      "description": "A new sample groups as A-positive, but the historical record does not concordantly match it — a possible Wrong-Blood-in-Tube identity event per SHOT: this ABO discrepancy auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes, independently of the crossmatch (withheld pending resolution) and the two-sample rule (met); the critical result has not yet been communicated, and several report sections are not yet completed while the discrepancy is investigated — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Biomedical Scientist)",
+        "originatingRequestReference": "REQ-2026-0830-XM",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "requestType": "crossmatch",
+        "clinicalHistory": "",
+        "aboGroup": "a",
+        "rhdGroup": "positive",
+        "historicalGroupConcordant": false,
+        "antibodyScreenResult": "",
+        "antibodiesIdentified": "",
+        "crossmatchResult": "not-performed",
+        "component": "red-cells",
+        "unitsCrossmatched": 2,
+        "unitsAvailable": null,
+        "specialRequirements": "",
+        "twoSampleRuleMet": true,
+        "overallResultStatus": "critical",
+        "findingsNarrative": "New sample groups as A RhD-positive, but the historical record on file shows group O RhD-negative — a discordant result requiring a fresh group-check sample before any issue.",
+        "impression": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Consultant haematologist informed; fresh sample requested to resolve the discrepancy before crossmatch proceeds.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "identity-safety-event",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now, withhold issue until resolved, and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "identity-safety",
+            "description": "An ABO discrepancy (historical-group non-concordance) or an unmet two-sample group-check rule is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "identity-safety",
+            "description": "An ABO discrepancy or unmet two-sample rule is present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-ANTIBODY-01",
+            "axis": "completeness",
+            "category": "antibody-screen",
+            "description": "Mandatory report section missing: antibody screen."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "A critical result (incompatible crossmatch, clinically-significant antibodies, ABO discrepancy, or unmet two-sample rule) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical result (incompatible crossmatch, clinically-significant antibodies, ABO discrepancy, or unmet two-sample rule) is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately, withhold issue until resolved, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical result present but it has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "high",
+            "description": "An ABO discrepancy (historical-group non-concordance) or an unmet two-sample group-check rule indicates a possible Wrong-Blood-in-Tube / identity event.",
+            "suggestedAction": "Do not issue. Investigate the discrepancy, request a fresh group-check sample, and escalate to the consultant haematologist."
+          },
+          {
+            "flagId": "F-INADEQUATE-TECHNIQUE-001",
+            "category": "inadequate-technique",
+            "priority": "medium",
+            "description": "A crossmatch / compatibility test was not performed for a crossmatch or emergency-issue request.",
+            "suggestedAction": "Complete the appropriate compatibility testing or document the emergency-issue justification."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the compatibility question."
+          }
+        ]
+      }
+    }
+  ]
+}
