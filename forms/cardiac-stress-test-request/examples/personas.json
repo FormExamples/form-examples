@@ -1,0 +1,294 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "urgent-suspected-angina-chest-pain-treadmill-complete",
+      "description": "Well-formed GP referral: suspected stable angina with chest pain, exercise treadmill ECG requested (first-line), patient able to exercise, no contraindications, every completeness field present. Chest pain plus a suspected-angina indication auto-escalates the rapid-access chest-pain pathway to urgent regardless of the routine urgency requested — expect usually-appropriate + ok + urgent + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1962-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1
+        },
+        "request": {
+          "testType": "exercise-treadmill-ecg",
+          "primaryIndication": "suspected-angina",
+          "clinicalQuestion": "Intermittent exertional chest tightness over 2 months, low-intermediate pre-test probability of CAD — assess for inducible ischaemia.",
+          "relevantHistory": "No previous cardiac history. Hypertension well controlled on amlodipine."
+        },
+        "symptoms": {
+          "symptomChestPain": true,
+          "symptomBreathlessness": false,
+          "symptomPalpitations": false,
+          "ableToExercise": true,
+          "restingEcgFindings": "Normal sinus rhythm, no ST-T changes."
+        },
+        "safety": {
+          "knownCoronaryArteryDisease": false,
+          "recentAcuteCoronarySyndrome": false,
+          "aorticStenosis": "none",
+          "uncontrolledHypertension": false,
+          "betaBlocker": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-15",
+          "setting": "outpatient",
+          "notes": "Patient mobile and keen to exercise; no orthopaedic limitations."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-ANGINA-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-angina",
+            "description": "Requested exercise-treadmill-ecg is a recommended test for \"suspected-angina\"."
+          },
+          {
+            "ruleId": "R-SAFETY-OK",
+            "axis": "safety",
+            "category": "contraindication",
+            "description": "No absolute or relative contraindication detected from the safety screen."
+          },
+          {
+            "ruleId": "R-TRIAGE-CHEST-PAIN",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Chest pain with suspected angina — expedited rapid-access chest-pain assessment."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "exercise-tolerance-treadmill-unable-to-exercise-redirect",
+      "description": "Exercise tolerance assessment ahead of a pulmonary rehabilitation programme: exercise treadmill ECG is the only listed ideal test for exercise-tolerance, so appropriateness scores well, but severe osteoarthritis means the patient cannot exercise on a treadmill — the exercise-safety rule redirects to a pharmacological/imaging alternative regardless of how appropriate the test choice was on paper — expect usually-appropriate + caution + routine + redirect.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1949-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 31.4
+        },
+        "request": {
+          "testType": "exercise-treadmill-ecg",
+          "primaryIndication": "exercise-tolerance",
+          "clinicalQuestion": "Formal exercise tolerance assessment ahead of pulmonary rehabilitation referral.",
+          "relevantHistory": "Severe bilateral knee osteoarthritis, awaiting joint replacement. Uses a walking frame."
+        },
+        "symptoms": {
+          "symptomChestPain": false,
+          "symptomBreathlessness": true,
+          "symptomPalpitations": false,
+          "ableToExercise": false,
+          "restingEcgFindings": "Normal sinus rhythm."
+        },
+        "safety": {
+          "knownCoronaryArteryDisease": false,
+          "recentAcuteCoronarySyndrome": false,
+          "aorticStenosis": "none",
+          "uncontrolledHypertension": false,
+          "betaBlocker": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-10",
+          "setting": "outpatient",
+          "notes": "Patient cannot mobilise on a treadmill; consider pharmacological stress alternative."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect to a more suitable test",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-EXERCISE-TOLERANCE-IDEAL",
+            "axis": "appropriateness",
+            "category": "exercise-tolerance",
+            "description": "Requested exercise-treadmill-ecg is a recommended test for \"exercise-tolerance\"."
+          },
+          {
+            "ruleId": "R-SAFETY-UNABLE-TO-EXERCISE",
+            "axis": "safety",
+            "category": "contraindication",
+            "description": "Exercise test requested but patient cannot exercise — redirect to a pharmacological / imaging modality."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-UNABLE-TO-EXERCISE-001",
+            "category": "unable-to-exercise",
+            "priority": "medium",
+            "description": "Exercise test requested but patient is unable to exercise.",
+            "suggestedAction": "Redirect to a pharmacological / imaging modality (e.g. dobutamine stress echo or perfusion imaging)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-recent-acs-contraindicated-incomplete",
+      "description": "Chest pain referral phoned through from the emergency department: exercise treadmill ECG would be first-line for suspected angina, but the patient had an NSTEMI four days ago — recent acute coronary syndrome is an absolute contraindication to stress testing until stabilised, and also forces emergency same-day cardiology review, overriding the routine-looking test request; several administrative fields are not yet captured — expect usually-appropriate + contraindicated + emergency + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Emergency Department",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1941-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null
+        },
+        "request": {
+          "testType": "exercise-treadmill-ecg",
+          "primaryIndication": "suspected-angina",
+          "clinicalQuestion": "",
+          "relevantHistory": "NSTEMI 4 days ago, treated with PCI to the right coronary artery. New exertional chest discomfort since discharge."
+        },
+        "symptoms": {
+          "symptomChestPain": true,
+          "symptomBreathlessness": false,
+          "symptomPalpitations": false,
+          "ableToExercise": true,
+          "restingEcgFindings": "Q waves inferior leads, unchanged from post-PCI ECG."
+        },
+        "safety": {
+          "knownCoronaryArteryDisease": true,
+          "recentAcuteCoronarySyndrome": true,
+          "aorticStenosis": "unknown",
+          "uncontrolledHypertension": false,
+          "betaBlocker": true
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "emergency",
+          "notes": "Phoned through from ED; cardiology on-call already aware and reviewing."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "contraindicationBand": "contraindicated",
+        "completenessPercent": 64,
+        "triageTier": "emergency",
+        "targetTimeframe": "Same day / immediate",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-ANGINA-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-angina",
+            "description": "Requested exercise-treadmill-ecg is a recommended test for \"suspected-angina\"."
+          },
+          {
+            "ruleId": "R-SAFETY-RECENT-ACS",
+            "axis": "safety",
+            "category": "contraindication",
+            "description": "Recent acute coronary syndrome — exercise / stress testing contraindicated until stabilised."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-RECENT-ACS",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Recent acute coronary syndrome — emergency cardiology review before any stress test."
+          },
+          {
+            "ruleId": "R-TRIAGE-CHEST-PAIN",
+            "axis": "triage",
+            "category": "red-flag",
+            "description": "Chest pain with suspected angina — expedited rapid-access chest-pain assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-RECENT-ACS-CONTRAINDICATION-001",
+            "category": "recent-acs-contraindication",
+            "priority": "high",
+            "description": "Recent acute coronary syndrome reported.",
+            "suggestedAction": "Do not stress test until clinically stabilised; arrange emergency cardiology review."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the test should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

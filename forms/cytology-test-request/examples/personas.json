@@ -1,0 +1,277 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The pre-analytical axis is clock-derived (hoursSinceCollection uses Date.now()) for a *collected* specimen with a timestamp, so every persona here either leaves the specimen not-yet-collected (deterministic 'ok', immune to rot) or uses a collection date-time far enough in the past that it stays in the same band indefinitely (elapsed time only grows) — never a date chosen to land in the narrow 24–48h 'ageing' caution window, which a fixed timestamp would drift out of.",
+  "personas": [
+    {
+      "name": "routine-cervical-screening-smear-not-yet-collected-complete",
+      "description": "Well-formed routine cervical screening recall: cervical smear requested (first-line, the only appropriate specimen type for this indication), specimen not yet collected so pre-analytical adequacy is deterministically 'ok' pending collection, every completeness field present — expect usually-appropriate + ok + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1985-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "request": {
+          "specimenType": "cervical-smear",
+          "specimenSite": "Cervix",
+          "primaryIndication": "cervical-screening",
+          "clinicalQuestion": "Routine 3-yearly cervical screening recall.",
+          "clinicalDetails": "No symptoms. Last smear 3 years ago, normal, HPV negative."
+        },
+        "context": {
+          "hpvTestRequested": true,
+          "previousAbnormalCytology": "none",
+          "lastMenstrualPeriodDate": "2026-08-08"
+        },
+        "collection": {
+          "specimenCollected": "no",
+          "collectionDatetime": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-15",
+          "setting": "outpatient",
+          "notes": "Booked for the practice nurse-led smear clinic."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 2-6 weeks",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CERVICAL-SCREENING-IDEAL",
+            "axis": "appropriateness",
+            "category": "cervical-screening",
+            "description": "Requested cervical-smear specimen is the recommended examination for \"cervical-screening\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-NOT-COLLECTED",
+            "axis": "preanalytical",
+            "category": "collection",
+            "description": "Specimen not yet collected — pre-analytical adequacy assessed at collection."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SPECIMEN-NOT-COLLECTED-001",
+            "category": "specimen-not-collected",
+            "priority": "medium",
+            "description": "Specimen has not yet been collected.",
+            "suggestedAction": "Arrange specimen collection before laboratory processing; confirm fixation and labelling."
+          }
+        ]
+      }
+    },
+    {
+      "name": "two-week-wait-breast-lump-fna-timing-unconfirmed",
+      "description": "New palpable breast lump: FNA of breast is first-line for breast-lump, and the indication itself meets NICE NG12 two-week-wait eligibility regardless of requested urgency; the specimen was collected but its date-time was never recorded, forcing a deterministic pre-analytical caution (verify timing/fixation) rather than the fresh 'ok' band — expect usually-appropriate + caution + two-week-wait + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1979-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "request": {
+          "specimenType": "fine-needle-aspiration-breast",
+          "specimenSite": "Right breast, upper outer quadrant",
+          "primaryIndication": "breast-lump",
+          "clinicalQuestion": "New 2cm firm, irregular, painless lump in the right breast noticed 3 weeks ago — exclude malignancy.",
+          "clinicalDetails": "No nipple discharge or skin changes. No family history of breast cancer."
+        },
+        "context": {
+          "hpvTestRequested": false,
+          "previousAbnormalCytology": "none",
+          "lastMenstrualPeriodDate": ""
+        },
+        "collection": {
+          "specimenCollected": "yes",
+          "collectionDatetime": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-08",
+          "setting": "outpatient",
+          "notes": "FNA performed in the one-stop breast clinic; collection time not logged on the request form."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Within 14 days (2-week-wait pathway)",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-BREAST-LUMP-IDEAL",
+            "axis": "appropriateness",
+            "category": "breast-lump",
+            "description": "Requested fine-needle-aspiration-breast specimen is the recommended examination for \"breast-lump\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-NO-TIMING",
+            "axis": "preanalytical",
+            "category": "timing",
+            "description": "Specimen collected but collection date-time is missing — confirm timing and fixation."
+          },
+          {
+            "ruleId": "R-TRIAGE-BREAST-LUMP",
+            "axis": "urgency",
+            "category": "escalation",
+            "description": "Breast lump — NICE NG12 suspected-cancer two-week-wait pathway."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Suspected-cancer indication recorded.",
+            "suggestedAction": "Route on the NICE NG12 two-week-wait suspected-cancer pathway; do not delay for routine booking."
+          }
+        ]
+      }
+    },
+    {
+      "name": "suspected-malignancy-sputum-stale-specimen-incomplete",
+      "description": "Suspected lung malignancy: sputum cytology is first-line, and the indication meets NICE NG12 two-week-wait eligibility, but the specimen was collected long before the request was submitted — well past the pre-analytical window — forcing a reject-risk band (redirect / recollect), and several administrative fields are not yet captured — expect usually-appropriate + reject-risk + two-week-wait + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "respiratory-physician",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Respiratory Medicine",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "request": {
+          "specimenType": "sputum-cytology",
+          "specimenSite": "Expectorated sputum",
+          "primaryIndication": "suspected-malignancy",
+          "clinicalQuestion": "",
+          "clinicalDetails": "Haemoptysis and weight loss over 6 weeks. 40 pack-year smoking history. CXR shows a right upper lobe mass."
+        },
+        "context": {
+          "hpvTestRequested": false,
+          "previousAbnormalCytology": "unknown",
+          "lastMenstrualPeriodDate": ""
+        },
+        "collection": {
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-06-01T09:00"
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "Specimen collected at an earlier appointment before the referral pathway was finalised; recollection likely needed."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "reject-risk",
+        "completenessPercent": 71,
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Within 14 days (2-week-wait pathway)",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / recollect",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MALIGNANCY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-malignancy",
+            "description": "Requested sputum-cytology specimen is the recommended examination for \"suspected-malignancy\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-STALE",
+            "axis": "preanalytical",
+            "category": "timing",
+            "description": "Specimen collected more than 48h ago — degradation risk; confirm fixation or recollect."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-CANCER",
+            "axis": "urgency",
+            "category": "escalation",
+            "description": "Suspected malignancy — NICE NG12 two-week-wait pathway."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Suspected-cancer indication recorded.",
+            "suggestedAction": "Route on the NICE NG12 two-week-wait suspected-cancer pathway; do not delay for routine booking."
+          }
+        ]
+      }
+    }
+  ]
+}

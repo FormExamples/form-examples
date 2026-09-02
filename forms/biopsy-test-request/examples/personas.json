@@ -1,0 +1,346 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "two-week-wait-suspected-malignancy-skin-punch-complete",
+      "description": "Well-formed dermatology referral: a suspicious pigmented lesion, punch biopsy of skin requested (first-line), no bleeding-risk factors, every completeness field present — the suspected-malignancy indication itself meets NICE NG12 two-week-wait eligibility and escalates triage regardless of the requested urgency — expect usually-appropriate + low bleeding risk + two-week-wait + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "dermatologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Dermatology",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1958-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26.1
+        },
+        "procedure": {
+          "biopsySite": "skin",
+          "biopsyMethod": "punch",
+          "laterality": "not-applicable",
+          "imagingGuidanceRequired": false,
+          "setting": "outpatient"
+        },
+        "indication": {
+          "primaryIndication": "suspected-malignancy",
+          "clinicalQuestion": "Irregular pigmented lesion on the back, ABCDE features positive, growing over 3 months — exclude melanoma.",
+          "relevantHistory": "Fair skin, history of childhood sunburns. No previous skin cancer."
+        },
+        "lesion": {
+          "lesionDescription": "8mm irregular pigmented macule, asymmetric borders, variable colour, left upper back.",
+          "lesionSize": 8,
+          "lesionLocation": "Left upper back",
+          "imagingCorrelate": "",
+          "previousFinding": ""
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "inr": null,
+          "plateletCount": 280,
+          "bleedingDisorder": false,
+          "immunosuppressed": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-01",
+          "notes": "Dermoscopy already performed in clinic, images attached."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "bleedingRiskBand": "low",
+        "anticoagulantAction": "Low bleeding risk: proceed without specific anticoagulant action; standard haemostasis precautions.",
+        "completenessPercent": 100,
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Within 14 days (suspected-cancer pathway)",
+        "twoWeekWaitEligible": true,
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MALIGNANCY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-malignancy",
+            "description": "A skin biopsy is a recommended target for \"suspected-malignancy\"."
+          },
+          {
+            "ruleId": "R-BLEED-BASELINE",
+            "axis": "bleeding-risk",
+            "category": "baseline",
+            "description": "No anticoagulant / antiplatelet, normal coagulation — baseline low bleeding risk."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-CANCER",
+            "axis": "urgency",
+            "category": "suspected-cancer",
+            "description": "A \"suspected-malignancy\" indication meets NICE NG12 two-week-wait eligibility."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Suspected-malignancy / cancer-staging indication — two-week-wait eligible.",
+            "suggestedAction": "Book on a suspected-cancer two-week-wait pathway; complete within 14 days."
+          }
+        ]
+      }
+    },
+    {
+      "name": "two-week-wait-cancer-staging-liver-core-needle-anticoagulant-high-risk",
+      "description": "Known lymphoma requiring liver biopsy for staging: core-needle liver biopsy is first-line, cancer-staging also meets two-week-wait eligibility, but the patient is on warfarin — a high periprocedural bleeding risk overrides an otherwise appropriate, complete request and the recommendation is to query the referrer (anticoagulation must be addressed before proceeding) — expect usually-appropriate + high bleeding risk + two-week-wait + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "oncologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Oncology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1962-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 24.8
+        },
+        "procedure": {
+          "biopsySite": "liver",
+          "biopsyMethod": "core-needle",
+          "laterality": "not-applicable",
+          "imagingGuidanceRequired": true,
+          "setting": "outpatient"
+        },
+        "indication": {
+          "primaryIndication": "cancer-staging",
+          "clinicalQuestion": "PET-avid liver lesion on staging scan for newly diagnosed follicular lymphoma — confirm hepatic involvement before starting treatment.",
+          "relevantHistory": "Newly diagnosed follicular lymphoma. Atrial fibrillation on warfarin, target INR 2.0-3.0."
+        },
+        "lesion": {
+          "lesionDescription": "2.1cm segment VI liver lesion, PET-avid.",
+          "lesionSize": 21,
+          "lesionLocation": "Liver segment VI",
+          "imagingCorrelate": "CT and PET-CT reports attached.",
+          "previousFinding": ""
+        },
+        "bleeding": {
+          "takingAnticoagulant": true,
+          "anticoagulantAgent": "Warfarin",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "inr": 2.4,
+          "plateletCount": 210,
+          "bleedingDisorder": false,
+          "immunosuppressed": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-29",
+          "notes": "Oncology requests bridging anticoagulation plan before the biopsy slot is confirmed."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "bleedingRiskBand": "high",
+        "anticoagulantAction": "High bleeding risk: withhold the anticoagulant (Warfarin) per BSG / ESGE timing and consider bridging; correct the INR to < 1.5.",
+        "completenessPercent": 100,
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Within 14 days (suspected-cancer pathway)",
+        "twoWeekWaitEligible": true,
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CANCER-STAGING-IDEAL",
+            "axis": "appropriateness",
+            "category": "cancer-staging",
+            "description": "A liver biopsy is a recommended target for \"cancer-staging\"."
+          },
+          {
+            "ruleId": "R-BLEED-INR-HIGH",
+            "axis": "bleeding-risk",
+            "category": "coagulopathy",
+            "description": "INR ≥ 1.5 — correction usually required before biopsy (high risk)."
+          },
+          {
+            "ruleId": "R-BLEED-ANTICOAG",
+            "axis": "bleeding-risk",
+            "category": "anticoagulant",
+            "description": "Patient on an anticoagulant — high periprocedural bleeding risk."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-CANCER",
+            "axis": "urgency",
+            "category": "suspected-cancer",
+            "description": "A \"cancer-staging\" indication meets NICE NG12 two-week-wait eligibility."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Suspected-malignancy / cancer-staging indication — two-week-wait eligible.",
+            "suggestedAction": "Book on a suspected-cancer two-week-wait pathway; complete within 14 days."
+          },
+          {
+            "flagId": "F-HIGH-BLEEDING-RISK-ANTICOAG-001",
+            "category": "high-bleeding-risk-anticoag",
+            "priority": "high",
+            "description": "Patient is taking an anticoagulant (Warfarin).",
+            "suggestedAction": "Withhold / bridge per BSG / ESGE timing; confirm a periprocedural anticoagulant plan before booking."
+          },
+          {
+            "flagId": "F-COAGULOPATHY-001",
+            "category": "coagulopathy",
+            "priority": "high",
+            "description": "Raised INR (2.4).",
+            "suggestedAction": "Liaise with haematology; correct coagulation (INR < 1.5) before the procedure."
+          }
+        ]
+      }
+    },
+    {
+      "name": "characterise-lesion-thyroid-fna-borderline-platelets-incomplete",
+      "description": "Fine-needle aspiration of an indeterminate thyroid nodule found incidentally: FNA of thyroid is first-line to characterise the lesion, borderline thrombocytopenia gives a moderate (not high) bleeding-risk band — which alone does not block acceptance — and a few administrative fields were left blank on the referral form — expect usually-appropriate + moderate bleeding risk + routine + accept, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1975-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null
+        },
+        "procedure": {
+          "biopsySite": "thyroid",
+          "biopsyMethod": "fine-needle-aspiration",
+          "laterality": "left",
+          "imagingGuidanceRequired": true,
+          "setting": "outpatient"
+        },
+        "indication": {
+          "primaryIndication": "characterise-lesion",
+          "clinicalQuestion": "",
+          "relevantHistory": "Nodule found incidentally on a CT scan for an unrelated reason. No compressive symptoms. Mild chronic liver disease with borderline platelet count."
+        },
+        "lesion": {
+          "lesionDescription": "1.4cm left thyroid nodule, solid, mildly hypoechoic on ultrasound.",
+          "lesionSize": 14,
+          "lesionLocation": "Left thyroid lobe",
+          "imagingCorrelate": "Ultrasound report attached, U3 classification.",
+          "previousFinding": ""
+        },
+        "bleeding": {
+          "takingAnticoagulant": false,
+          "anticoagulantAgent": "",
+          "takingAntiplatelet": false,
+          "antiplateletAgent": "",
+          "inr": null,
+          "plateletCount": 70,
+          "bleedingDisorder": false,
+          "immunosuppressed": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "2026-09-20",
+          "notes": "Patient counselled on incidental finding; not anxious to be seen urgently."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "bleedingRiskBand": "moderate",
+        "anticoagulantAction": "Moderate bleeding risk: confirm a recent platelet count and clotting screen.",
+        "completenessPercent": 71,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 6 weeks",
+        "twoWeekWaitEligible": false,
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CHARACTERISE-LESION-IDEAL",
+            "axis": "appropriateness",
+            "category": "characterise-lesion",
+            "description": "A thyroid biopsy is a recommended target for \"characterise-lesion\"."
+          },
+          {
+            "ruleId": "R-BLEED-PLATELETS-BORDERLINE",
+            "axis": "bleeding-risk",
+            "category": "thrombocytopenia",
+            "description": "Platelet count 50–99 ×10⁹/L — borderline thrombocytopenia (moderate risk)."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No cancer-pathway escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-THROMBOCYTOPENIA-001",
+            "category": "thrombocytopenia",
+            "priority": "medium",
+            "description": "Platelet count 70 ×10⁹/L (borderline).",
+            "suggestedAction": "Confirm a recent platelet count; consider transfusion for higher-risk sites."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the biopsy should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
