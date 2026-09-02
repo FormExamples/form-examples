@@ -1,0 +1,311 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-characterise-lesion-skin-lesion-complete",
+      "description": "Well-formed routine referral: a changing pigmented skin lesion, excised skin-lesion specimen requested (first-line for characterise-lesion), properly fixed in formalin and confirmed labelled with a specimen count recorded, every completeness field present — expect usually-appropriate + ok specimen quality + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "dermatologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Dermatology Clinic",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922",
+          "interpreterRequired": false
+        },
+        "specimen": {
+          "specimenType": "skin-lesion",
+          "specimenSite": "Left forearm skin lesion",
+          "numberOfSpecimens": 1,
+          "fixative": "formalin",
+          "specimenLabelled": true
+        },
+        "indication": {
+          "primaryIndication": "characterise-lesion",
+          "clinicalQuestion": "Irregular pigmented lesion on the left forearm, changing in size over 3 months — characterise for malignancy.",
+          "clinicalDetails": "No personal or family history of melanoma. Lesion excised in clinic under local anaesthetic.",
+          "provisionalDiagnosis": "Atypical naevus vs early melanoma",
+          "previousHistology": "none"
+        },
+        "urgency": {
+          "urgentFrozenSection": false,
+          "twoWeekWait": false,
+          "urgency": "routine"
+        },
+        "triage": {
+          "setting": "outpatient",
+          "requestedByDate": "2026-09-10",
+          "notes": "Excision margins marked with sutures for orientation."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "specimenQualityBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 7-10 working days",
+        "immediate": false,
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-CHARACTERISE-LESION-IDEAL",
+            "axis": "appropriateness",
+            "category": "characterise-lesion",
+            "description": "Requested skin-lesion specimen is the recommended sample for \"characterise-lesion\"."
+          },
+          {
+            "ruleId": "R-SPECIMEN-OK",
+            "axis": "specimen",
+            "category": "quality",
+            "description": "Fixative, labelling, and specimen count are satisfactory."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "two-week-wait-suspected-malignancy-biopsy-fixative-other-caution",
+      "description": "Colonoscopic biopsies from a suspicious sigmoid colon mass: biopsy is the recommended (ideal) specimen for the suspected-malignancy indication, and the indication itself auto-escalates triage onto the two-week-wait suspected-cancer pathway regardless of the routine urgency requested; the endoscopy unit's non-standard fixative forces a specimen-quality caution — expect usually-appropriate + caution specimen quality + two-week-wait + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "gastroenterologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Gastroenterology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "interpreterRequired": false
+        },
+        "specimen": {
+          "specimenType": "biopsy",
+          "specimenSite": "Sigmoid colon",
+          "numberOfSpecimens": 4,
+          "fixative": "other",
+          "specimenLabelled": true
+        },
+        "indication": {
+          "primaryIndication": "suspected-malignancy",
+          "clinicalQuestion": "Colonoscopic biopsies from a sigmoid colon mass — confirm or exclude adenocarcinoma.",
+          "clinicalDetails": "FIT-positive screening; mass seen on colonoscopy with contact bleeding.",
+          "provisionalDiagnosis": "Sigmoid colon adenocarcinoma",
+          "previousHistology": "none"
+        },
+        "urgency": {
+          "urgentFrozenSection": false,
+          "twoWeekWait": false,
+          "urgency": "routine"
+        },
+        "triage": {
+          "setting": "outpatient",
+          "requestedByDate": "2026-09-01",
+          "notes": "Colorectal MDT discussion planned once histology is available. Non-standard fixative used by the endoscopy unit — confirm suitability."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "specimenQualityBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "two-week-wait",
+        "targetTimeframe": "Within the 2-week-wait cancer pathway",
+        "immediate": false,
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-MALIGNANCY-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-malignancy",
+            "description": "Requested biopsy specimen is the recommended sample for \"suspected-malignancy\"."
+          },
+          {
+            "ruleId": "R-SPECIMEN-FIXATIVE-OTHER",
+            "axis": "specimen",
+            "category": "fixation",
+            "description": "Fixative recorded as \"other\"; confirm suitability for histology."
+          },
+          {
+            "ruleId": "R-URGENCY-TWO-WEEK-WAIT",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Suspected-cancer two-week-wait pathway — expedite reporting."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "suspected-cancer-2ww",
+            "priority": "high",
+            "description": "Suspected-cancer two-week-wait pathway request.",
+            "suggestedAction": "Expedite accessioning and reporting on the suspected-cancer (NICE NG12) pathway."
+          },
+          {
+            "flagId": "F-SPECIMEN-FIXATION-ISSUE-002",
+            "category": "specimen-fixation-issue",
+            "priority": "medium",
+            "description": "Fixative recorded as \"other\"; suitability for histology not confirmed.",
+            "suggestedAction": "Confirm the fixative used is appropriate for histological processing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "query-referrer-inflammatory-disease-other-specimen-mismatch-fresh-unfixed-incomplete",
+      "description": "A skin biopsy sent fresh (unfixed) without formalin, container labelling unconfirmed, and specimen count not recorded: fresh tissue submitted outside a frozen-section pathway is at reject-risk for autolysis, which forces query-referrer ahead of the appropriateness check; an 'other' specimen type was also requested even though biopsy / endoscopic-biopsy are recommended for the inflammatory-disease indication, an independent mismatch; several administrative fields are not yet captured — expect usually-not-appropriate + reject-risk specimen quality + routine + query-referrer, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Dermatology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "interpreterRequired": false
+        },
+        "specimen": {
+          "specimenType": "other",
+          "specimenSite": "Right forearm skin lesion",
+          "numberOfSpecimens": null,
+          "fixative": "fresh",
+          "specimenLabelled": false
+        },
+        "indication": {
+          "primaryIndication": "inflammatory-disease",
+          "clinicalQuestion": "",
+          "clinicalDetails": "Chronic itchy rash for 6 months, suspected inflammatory dermatosis; biopsy sent fresh in error without formalin.",
+          "provisionalDiagnosis": "Query psoriasis vs eczema",
+          "previousHistology": "unknown"
+        },
+        "urgency": {
+          "urgentFrozenSection": false,
+          "twoWeekWait": false,
+          "urgency": ""
+        },
+        "triage": {
+          "setting": "outpatient",
+          "requestedByDate": "",
+          "notes": "Specimen sent to the lab without fixative; container not clearly labelled."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "specimenQualityBand": "reject-risk",
+        "completenessPercent": 72,
+        "triageTier": "routine",
+        "targetTimeframe": "Within 7-10 working days",
+        "immediate": false,
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-INFLAMMATORY-DISEASE-MISMATCH",
+            "axis": "appropriateness",
+            "category": "inflammatory-disease",
+            "description": "Requested other specimen is not usually appropriate for \"inflammatory-disease\"; query the referrer."
+          },
+          {
+            "ruleId": "R-SPECIMEN-FRESH-NOT-FROZEN",
+            "axis": "specimen",
+            "category": "fixation",
+            "description": "Fresh (unfixed) specimen submitted outside a frozen-section pathway — autolysis / drying risk."
+          },
+          {
+            "ruleId": "R-SPECIMEN-NOT-LABELLED",
+            "axis": "specimen",
+            "category": "labelling",
+            "description": "Specimen container labelling not confirmed — mislabel risk."
+          },
+          {
+            "ruleId": "R-SPECIMEN-NO-COUNT",
+            "axis": "specimen",
+            "category": "adequacy",
+            "description": "Number of specimen containers / pots not recorded."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-URGENCY-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SPECIMEN-FIXATION-ISSUE-001",
+            "category": "specimen-fixation-issue",
+            "priority": "high",
+            "description": "Specimen fixation is inadequate (fresh / unfixed outside a frozen-section pathway, or no fixative recorded).",
+            "suggestedAction": "Contact the requester urgently; the specimen may be unfit for diagnosis without prompt fixation."
+          },
+          {
+            "flagId": "F-MISLABEL-RISK-001",
+            "category": "mislabel-risk",
+            "priority": "medium",
+            "description": "Specimen container labelling not confirmed.",
+            "suggestedAction": "Verify the specimen container is labelled with patient identifiers matching the request before accessioning."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-DETAILS-002",
+            "category": "missing-clinical-details",
+            "priority": "low",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the report should answer."
+          }
+        ]
+      }
+    }
+  ]
+}

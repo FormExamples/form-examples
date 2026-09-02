@@ -910,11 +910,22 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `contraindicated` safety band, which short-circuits straight to
       `redirect` in `deriveRecommendation` ahead of the appropriateness
       check, even though the same mismatch would independently have
-      earned a `query-referrer` verdict on its own). 27 forms of this
-      family done, 12 remain (count re-verified directly against the
-      fleet each update, not hand-tracked, after the 2026-09-02
-      tracking-drift correction — `bin/test-personas` ground truth:
-      PASS 234/355). 73
+      earned a `query-referrer` verdict on its own). 3 more done
+      2026-09-02 (histopathology-test-request,
+      holter-monitor-test-request, microbiology-culture-test-request —
+      same methodology; holter-monitor's engine adjusts its raw
+      indication-fit score by a symptom-frequency/monitor-duration match
+      (+1/-1/-3, capped 1-9), so its `redirect` persona shows a score of
+      5 despite an "ideal" indication pairing; microbiology-culture's
+      `deriveRecommendation` is stricter than its siblings — a `caution`
+      pre-analytical band alone (not just `reject-risk`) forces
+      query-referrer, so its second persona is stat-tier triage yet
+      still query-referrer, and its third persona is this backlog's
+      first `reject` outcome, from a blood culture drawn after
+      antibiotics were already started). 30 forms of this family done,
+      9 remain (count re-verified directly against the fleet each
+      update, not hand-tracked, after the 2026-09-02 tracking-drift
+      correction — `bin/test-personas` ground truth: PASS 237/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

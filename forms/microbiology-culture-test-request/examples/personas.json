@@ -1,0 +1,284 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's `deriveRecommendation` is stricter than most siblings: a `caution` pre-analytical band alone (not just `reject-risk`) forces query-referrer, so triage acuity and vetting recommendation are genuinely orthogonal here — a stat-tier request can still be query-referrer.",
+  "personas": [
+    {
+      "name": "routine-urinary-tract-infection-urine-culture-complete",
+      "description": "Well-formed routine referral: suspected UTI, a midstream urine specimen requested for culture & sensitivity (first-line for urinary-tract-infection), correctly collected and not transport-sensitive, no antibiotics on board, every completeness field present — expect usually-appropriate + ok pre-analytical + routine + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922"
+        },
+        "specimen": {
+          "specimenType": "urine",
+          "specimenSiteDetail": "Midstream urine",
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-20T09:00"
+        },
+        "tests": {
+          "cultureAndSensitivity": true,
+          "gramStain": false,
+          "acidFastBacilliTb": false,
+          "fungalCulture": false,
+          "pcrMolecular": false,
+          "cDifficileToxin": false,
+          "mrsaScreen": false
+        },
+        "clinical": {
+          "primaryIndication": "urinary-tract-infection",
+          "clinicalDetails": "Two days of dysuria and frequency, no fever or loin pain.",
+          "fever": false,
+          "currentAntibiotics": false,
+          "antibioticName": "",
+          "recentTravel": false,
+          "immunocompromised": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-27",
+          "setting": "outpatient",
+          "notes": "Sample brought in with the appointment."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "Routine — standard laboratory turnaround",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-URINARY-TRACT-INFECTION-IDEAL",
+            "axis": "appropriateness",
+            "category": "urinary-tract-infection",
+            "description": "A urine specimen is the recommended sample for \"urinary-tract-infection\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-OK",
+            "axis": "preanalytical",
+            "category": "ok",
+            "description": "No pre-analytical concerns identified."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "stat-suspected-sepsis-blood-culture-no-collection-time-caution",
+      "description": "Suspected sepsis on the ward (NEWS2 7): blood culture is the recommended (ideal) specimen for the suspected-sepsis indication, and the indication itself auto-escalates triage to stat (NICE NG51) regardless of the routine urgency requested; but no collection date/time was recorded for this transport-sensitive specimen, and this engine's stricter recommendation logic means that pre-analytical caution alone — not just reject-risk — forces query-referrer, even on a stat-tier request: triage acuity and vetting recommendation are orthogonal here — expect usually-appropriate + caution pre-analytical + stat + query-referrer.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "hospital-doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Acute Medical Unit",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190"
+        },
+        "specimen": {
+          "specimenType": "blood-culture",
+          "specimenSiteDetail": "Peripheral venepuncture, two sets",
+          "specimenCollected": "yes",
+          "collectionDatetime": ""
+        },
+        "tests": {
+          "cultureAndSensitivity": true,
+          "gramStain": false,
+          "acidFastBacilliTb": false,
+          "fungalCulture": false,
+          "pcrMolecular": false,
+          "cDifficileToxin": false,
+          "mrsaScreen": false
+        },
+        "clinical": {
+          "primaryIndication": "suspected-sepsis",
+          "clinicalDetails": "Fever 38.9C, tachycardia and hypotension on the ward - NEWS2 score 7, query source of sepsis.",
+          "fever": true,
+          "currentAntibiotics": false,
+          "antibioticName": "",
+          "recentTravel": false,
+          "immunocompromised": false
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-08-25",
+          "setting": "inpatient",
+          "notes": "Sepsis Six pathway started; cultures taken before antibiotics as per protocol."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "stat",
+        "targetTimeframe": "Stat — process immediately / within the hour",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-SUSPECTED-SEPSIS-IDEAL",
+            "axis": "appropriateness",
+            "category": "suspected-sepsis",
+            "description": "A blood-culture specimen is the recommended sample for \"suspected-sepsis\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-NO-COLLECTION-TIME",
+            "axis": "preanalytical",
+            "category": "transport-sensitive",
+            "description": "blood-culture is transport-sensitive but no collection date/time was recorded; record it for the transport clock."
+          },
+          {
+            "ruleId": "R-TRIAGE-SUSPECTED-SEPSIS",
+            "axis": "triage",
+            "category": "escalation",
+            "description": "Suspected sepsis — process as stat (NICE NG51)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUSPECTED-SEPSIS-STAT-001",
+            "category": "suspected-sepsis-stat",
+            "priority": "high",
+            "description": "Suspected sepsis — this request must be processed as stat.",
+            "suggestedAction": "Escalate to the on-call microbiologist; take blood cultures and give broad-spectrum antibiotics within the hour (NICE NG51)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject-pyrexia-unknown-origin-blood-culture-on-antibiotics-incomplete",
+      "description": "Pyrexia of unknown origin with blood cultures drawn after empirical antibiotics were already started: blood culture is the recommended (ideal) specimen for the pyrexia-unknown-origin indication, but taking it while the patient is on antibiotics is a critical pre-analytical problem (compromised yield) that forces reject-risk and, uniquely among the vetting outcomes exercised so far, a `reject` recommendation — this overrides even the otherwise-appropriate specimen choice, ahead of any appropriateness or completeness check; several administrative fields are not yet captured — expect usually-appropriate + reject-risk pre-analytical + routine + reject, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Acute Medical Unit",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": ""
+        },
+        "specimen": {
+          "specimenType": "blood-culture",
+          "specimenSiteDetail": "Peripheral venepuncture",
+          "specimenCollected": "yes",
+          "collectionDatetime": "2026-08-30T14:00"
+        },
+        "tests": {
+          "cultureAndSensitivity": true,
+          "gramStain": false,
+          "acidFastBacilliTb": false,
+          "fungalCulture": false,
+          "pcrMolecular": false,
+          "cDifficileToxin": false,
+          "mrsaScreen": false
+        },
+        "clinical": {
+          "primaryIndication": "pyrexia-unknown-origin",
+          "clinicalDetails": "Intermittent fevers for 3 weeks, no localising source found on initial work-up; already started on empirical co-amoxiclav by the GP before referral.",
+          "fever": true,
+          "currentAntibiotics": true,
+          "antibioticName": "Co-amoxiclav",
+          "recentTravel": false,
+          "immunocompromised": false
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "inpatient",
+          "notes": "Blood cultures taken after antibiotics were already started - yield likely reduced; ideally should have been taken first."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "preanalyticalBand": "reject-risk",
+        "completenessPercent": 88,
+        "triageTier": "routine",
+        "targetTimeframe": "Routine — standard laboratory turnaround",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PYREXIA-UNKNOWN-ORIGIN-IDEAL",
+            "axis": "appropriateness",
+            "category": "pyrexia-unknown-origin",
+            "description": "A blood-culture specimen is the recommended sample for \"pyrexia-unknown-origin\"."
+          },
+          {
+            "ruleId": "R-PREANALYTICAL-BLOOD-CULTURE-ON-ABX",
+            "axis": "preanalytical",
+            "category": "blood-culture-before-antibiotics",
+            "description": "Blood culture requested while the patient is on antibiotics — cultures should be taken before the first dose."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "triage",
+            "category": "requested",
+            "description": "No escalation; triage follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-BLOOD-CULTURE-BEFORE-ANTIBIOTICS-001",
+            "category": "blood-culture-before-antibiotics",
+            "priority": "high",
+            "description": "Blood culture requested while the patient is on antibiotics.",
+            "suggestedAction": "Cultures should be taken before the first antibiotic dose; flag reduced yield to the requester."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's appropriateness score combines a raw indication-fit score (Axis A.1) with a symptom-frequency / monitor-duration match adjustment (Axis A.2, +1/-1/-3) before banding, so `appropriatenessScore` can exceed the usual 8-for-ideal ceiling (capped at 9).",
+  "personas": [
+    {
+      "name": "routine-palpitations-24-hour-daily-matched-complete",
+      "description": "Well-formed routine referral: daily palpitations, a 24-hour Holter is the recommended (ideal) monitor for the palpitations indication and also matches daily symptom frequency for good diagnostic yield — the frequency match nudges the score from 8 to 9 — every completeness field present — expect usually-appropriate (score 9) + matched + routine + low priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Priya Anand",
+          "clinicianRole": "gp",
+          "registrationBody": "GMC",
+          "registrationNumber": "7123456",
+          "requesterContact": "p.anand@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "Riverbank Medical Practice",
+          "referralDate": "2026-08-20"
+        },
+        "patient": {
+          "firstName": "Harold",
+          "lastName": "Fenwick",
+          "dateOfBirth": "1970-03-14",
+          "nhsNumber": "943 476 5922",
+          "bodyMassIndex": 26
+        },
+        "request": {
+          "monitorType": "24-hour",
+          "primaryIndication": "palpitations",
+          "clinicalQuestion": "Daily palpitations for 2 weeks, no syncope — correlate symptoms with cardiac rhythm.",
+          "relevantHistory": "No known cardiac history. Not on rate-control medication."
+        },
+        "symptoms": {
+          "palpitations": true,
+          "syncope": false,
+          "presyncope": false,
+          "breathlessness": false,
+          "symptomFrequency": "daily"
+        },
+        "cardiac": {
+          "knownArrhythmia": "none",
+          "recentStrokeTia": false,
+          "relevantMedications": ""
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-20",
+          "setting": "outpatient",
+          "notes": "Diary card provided to correlate symptoms with the monitor trace."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 9,
+        "appropriatenessBand": "usually-appropriate",
+        "matchFit": "matched",
+        "recommendedMonitor": "",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "low",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PALPITATIONS-IDEAL",
+            "axis": "appropriateness",
+            "category": "palpitations",
+            "description": "Requested 24-hour monitor is a recommended choice for \"palpitations\"."
+          },
+          {
+            "ruleId": "R-MATCH-DAILY-MATCHED",
+            "axis": "appropriateness",
+            "category": "symptom-frequency",
+            "description": "24-hour monitor matches daily symptoms."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-PRIORITY-PALPITATIONS",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "Palpitations recorded."
+          },
+          {
+            "ruleId": "R-PRIORITY-BAND-LOW",
+            "axis": "priority",
+            "category": "band",
+            "description": "Acuity score 1 maps to low clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-atrial-fibrillation-detection-7-day-weekly-matched-presyncope-moderate-priority",
+      "description": "Weekly palpitations with presyncope: a 7-day monitor is the recommended (ideal) choice for atrial-fibrillation-detection and also matches weekly symptom frequency, nudging the score from 8 to 9; the presyncope itself auto-escalates triage to urgent regardless of the routine urgency requested, and together with the palpitations raises clinical priority to moderate — expect usually-appropriate (score 9) + matched + urgent + moderate priority + accept.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Femi Okafor",
+          "clinicianRole": "cardiologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "6891234",
+          "requesterContact": "f.okafor@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Cardiology",
+          "referralDate": "2026-08-25"
+        },
+        "patient": {
+          "firstName": "Brenda",
+          "lastName": "Holt",
+          "dateOfBirth": "1958-11-02",
+          "nhsNumber": "887 342 1190",
+          "bodyMassIndex": 24.2
+        },
+        "request": {
+          "monitorType": "7-day",
+          "primaryIndication": "atrial-fibrillation-detection",
+          "clinicalQuestion": "Weekly episodes of irregular palpitations with light-headedness — screen for paroxysmal AF.",
+          "relevantHistory": "Hypertension on amlodipine. No previous AF diagnosis."
+        },
+        "symptoms": {
+          "palpitations": true,
+          "syncope": false,
+          "presyncope": true,
+          "breathlessness": false,
+          "symptomFrequency": "weekly"
+        },
+        "cardiac": {
+          "knownArrhythmia": "none",
+          "recentStrokeTia": false,
+          "relevantMedications": "Amlodipine 5mg od"
+        },
+        "triage": {
+          "urgency": "routine",
+          "requestedByDate": "2026-09-05",
+          "setting": "outpatient",
+          "notes": "GP already excluded thyroid dysfunction."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 9,
+        "appropriatenessBand": "usually-appropriate",
+        "matchFit": "matched",
+        "recommendedMonitor": "",
+        "triageTier": "urgent",
+        "targetTimeframe": "Within 1-2 weeks",
+        "completenessPercent": 100,
+        "priorityBand": "moderate",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and book",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-ATRIAL-FIBRILLATION-DETECTION-IDEAL",
+            "axis": "appropriateness",
+            "category": "atrial-fibrillation-detection",
+            "description": "Requested 7-day monitor is a recommended choice for \"atrial-fibrillation-detection\"."
+          },
+          {
+            "ruleId": "R-MATCH-WEEKLY-MATCHED",
+            "axis": "appropriateness",
+            "category": "symptom-frequency",
+            "description": "7-day monitor matches weekly symptoms."
+          },
+          {
+            "ruleId": "R-TRIAGE-PRESYNCOPE",
+            "axis": "urgency",
+            "category": "red-flag",
+            "description": "Presyncope / near-syncope — expedited assessment."
+          },
+          {
+            "ruleId": "R-PRIORITY-PRESYNCOPE",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "Presyncope raises clinical acuity."
+          },
+          {
+            "ruleId": "R-PRIORITY-PALPITATIONS",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "Palpitations recorded."
+          },
+          {
+            "ruleId": "R-PRIORITY-BAND-MODERATE",
+            "axis": "priority",
+            "category": "band",
+            "description": "Acuity score 3 maps to moderate clinical priority."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "redirect-palpitations-24-hour-rare-frequency-mismatch-incomplete",
+      "description": "Infrequent palpitations (roughly once every few months): a 24-hour Holter is the recommended (ideal) monitor type for the palpitations indication itself, but is a poor fit for rare symptom frequency — an event recorder or implantable loop recorder would give far better diagnostic yield. The -3 mismatch penalty pulls the score from 8 down to 5 (may-be-appropriate, not usually-not-appropriate), so this engine's distinctive `redirect` recommendation fires from the frequency-mismatch check rather than a query-referrer appropriateness mismatch; several administrative fields are not yet captured — expect may-be-appropriate (score 5) + mismatched + routine + low priority + redirect, completeness below 100.",
+      "state": {
+        "clinician": {
+          "clinicianName": "Dr Wei Zhang",
+          "clinicianRole": "other",
+          "registrationBody": "GMC",
+          "registrationNumber": "",
+          "requesterContact": "w.zhang@example.nhs.uk",
+          "supervisingConsultant": "",
+          "siteName": "St Aldhelm's Hospital Cardiology",
+          "referralDate": "2026-08-30"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Okonkwo",
+          "dateOfBirth": "1948-06-18",
+          "nhsNumber": "",
+          "bodyMassIndex": null
+        },
+        "request": {
+          "monitorType": "24-hour",
+          "primaryIndication": "palpitations",
+          "clinicalQuestion": "",
+          "relevantHistory": "Intermittent palpitations, occurring roughly once every few months, each lasting a few minutes."
+        },
+        "symptoms": {
+          "palpitations": true,
+          "syncope": false,
+          "presyncope": false,
+          "breathlessness": false,
+          "symptomFrequency": "rare"
+        },
+        "cardiac": {
+          "knownArrhythmia": "none",
+          "recentStrokeTia": false,
+          "relevantMedications": ""
+        },
+        "triage": {
+          "urgency": "",
+          "requestedByDate": "",
+          "setting": "outpatient",
+          "notes": "GP requested a standard 24-hour Holter despite the infrequent symptoms; consider an event recorder or implantable loop recorder instead."
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "matchFit": "mismatched",
+        "recommendedMonitor": "event recorder or implantable loop recorder",
+        "triageTier": "routine",
+        "targetTimeframe": "Within 4-6 weeks",
+        "completenessPercent": 69,
+        "priorityBand": "low",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect to a more suitable monitor",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-PALPITATIONS-IDEAL",
+            "axis": "appropriateness",
+            "category": "palpitations",
+            "description": "Requested 24-hour monitor is a recommended choice for \"palpitations\"."
+          },
+          {
+            "ruleId": "R-MATCH-RARE-MISMATCH",
+            "axis": "appropriateness",
+            "category": "symptom-frequency",
+            "description": "24-hour monitor is a poor fit for rare symptoms; event recorder or implantable loop recorder recommended."
+          },
+          {
+            "ruleId": "R-TRIAGE-REQUESTED",
+            "axis": "urgency",
+            "category": "requested",
+            "description": "No red flags; triage follows the requested urgency (routine)."
+          },
+          {
+            "ruleId": "R-COMPLETE-CLINICAL-QUESTION",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing clinical question."
+          },
+          {
+            "ruleId": "R-COMPLETE-NHS-NUMBER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing NHS number."
+          },
+          {
+            "ruleId": "R-COMPLETE-URGENCY",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested urgency."
+          },
+          {
+            "ruleId": "R-PRIORITY-PALPITATIONS",
+            "axis": "priority",
+            "category": "acuity",
+            "description": "Palpitations recorded."
+          },
+          {
+            "ruleId": "R-PRIORITY-BAND-LOW",
+            "axis": "priority",
+            "category": "band",
+            "description": "Acuity score 1 maps to low clinical priority."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SYMPTOM-FREQUENCY-MONITOR-MISMATCH-001",
+            "category": "symptom-frequency-monitor-mismatch",
+            "priority": "medium",
+            "description": "Requested monitor duration is a poor fit for the reported symptom frequency.",
+            "suggestedAction": "Consider redirecting to a event recorder or implantable loop recorder for adequate diagnostic yield."
+          },
+          {
+            "flagId": "F-MISSING-CLINICAL-QUESTION-001",
+            "category": "missing-clinical-question",
+            "priority": "medium",
+            "description": "No specific clinical question recorded.",
+            "suggestedAction": "Query the referrer for the specific question the monitoring should answer."
+          }
+        ]
+      }
+    }
+  ]
+}
