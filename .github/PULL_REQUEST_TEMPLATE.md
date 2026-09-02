@@ -22,10 +22,11 @@
 ## AI disclosure
 
 Per [AI_STATEMENT.md §10](../blob/main/AI_STATEMENT.md): if any content here
-is **ai-generated**, say so below — which tool, and what it did. Disclosure
-lives here in the PR description, never in commit trailers. You remain
-responsible for the submission in full: understood, explained on request,
-tested, and honest.
+is **ai-generated**, say so below — which tool, and what it did — and check
+that any commit it touched carries a `Co-Authored-By:` trailer naming the
+tool (see [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md)'s Commit
+conventions). You remain responsible for the submission in full: understood,
+explained on request, tested, and honest.
 
 <!-- e.g. "Claude Code generated the SQL migrations and step components;
      I reviewed, adjusted the grading bands, and wrote the spec." -->

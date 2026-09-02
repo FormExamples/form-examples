@@ -37,9 +37,10 @@ project with one maintainer.
 Everyone taking part is covered by the
 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Contributions are accepted under the
 repository's licence, [`LICENSE.md`](LICENSE.md) (CC BY-NC-SA 4.0). If you use
-AI tooling on a contribution, disclose it in the pull-request description and
-not in a commit trailer; the rule and the reasoning are in
-[`AI_STATEMENT.md`](AI_STATEMENT.md) §10.
+AI tooling on a contribution, disclose it in the pull-request description —
+which tool, and what it did — and carry a `Co-Authored-By:` trailer naming
+the tool on any commit it touched (see Commit conventions below); the rule
+and the reasoning are in [`AI_STATEMENT.md`](AI_STATEMENT.md) §10.
 
 Read [`spec.md`](spec.md) (the system spec) and the relevant per-stack agent
 doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.
@@ -182,3 +183,9 @@ say so — never truncate silently.
   commit as the schema change that caused it.
 - Update the affected form's `CHANGELOG.md` (Keep-a-Changelog + SemVer).
 - Never commit a red gate. If a gate cannot pass, explain why in the PR.
+- A commit an AI tool touched carries a `Co-Authored-By:` trailer naming it,
+  e.g. `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`. This does
+  not change git's `Author:`/`Committer:` fields, which stay the human's; the
+  trailer is a second name on the commit, not a claim about who ran
+  `git commit`. Per [`AI_STATEMENT.md`](AI_STATEMENT.md) §10, this is
+  alongside the PR-description disclosure, not instead of it.

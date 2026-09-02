@@ -1,6 +1,6 @@
 # AI Statement
 
-Version 1.1.0, status is active.
+Version 1.2.0, status is active.
 
 Canonical location is `AI_STATEMENT.md` at the repository root.
 
@@ -200,12 +200,17 @@ Contributors **may** use AI tools. A contribution with **ai-generated** content
 per §3 **shall** say so in the pull-request description — which tool, and what
 it did.
 
-Disclosure lives in the PR description and never in commit trailers, for two
-reasons stated openly: this repository's standing rule keeps tool attribution
-out of commit metadata (one maintained disclosure beats ten thousand trailer
-lines, and this document is that disclosure), and the wider ecosystem has no
-agreed trailer anyway — the same trailers some communities recommend, others
-forbid.
+Disclosure belongs in the PR description — which tool, and what it did — and,
+as of 2026-09-02, a commit it touched also carries a `Co-Authored-By:`
+trailer naming the tool (see `CONTRIBUTING.md`'s Commit conventions for the
+exact form). Git's `Author:`/`Committer:` fields stay the human's; a
+`Co-Authored-By:` trailer does not touch either — it is a second name on the
+commit, not a claim about who ran `git commit`. This supersedes this
+document's earlier "never in commit trailers" position (see Annex A): the
+per-commit trailer and the PR-description narrative now do different jobs —
+one is a durable, per-commit record even a squash-merge or a PR-description
+edit cannot lose; the other is where the fuller "what it did" explanation
+lives, which no trailer format can carry.
 
 The contributor remains responsible for their submission in full, under the same
 [`CONTRIBUTING.md`](CONTRIBUTING.md) bar as any other work: understood,
@@ -309,6 +314,7 @@ Commission's Article 50 FAQ; MDCG 2019-11 Rev. 1.
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.2.0 | 2026-09-02 | §10 reversed: a commit a tool touched now carries a `Co-Authored-By:` trailer naming it, alongside (not instead of) the PR-description disclosure; corrected the same day the 1.1.0 change below was made. `CONTRIBUTING.md` and `.github/PULL_REQUEST_TEMPLATE.md` updated to match. |
 | 1.1.0 | 2026-09-02 | Maintainer granted Claude Code standing, autonomous authority to decide which fleet crates are publishable, remove their `publish = false`, and run `cargo publish` (§5 table, §6, Annex B); scoped narrowly to publishing — no other release mechanic — recorded in [`GOVERNANCE.md`](GOVERNANCE.md) §"Publishing crates". |
 | 1.0.0 | 2026-08-26 | First issue. |
 
@@ -319,10 +325,11 @@ authoritative where the two could ever disagree.
 
 ```yaml
 ai-statement:
-  version: 1.1.0
+  version: 1.2.0
   last-updated: 2026-09-02
   vocabulary: w3c-ai-content-disclosure
   disclosure-default: ai-generated
+  disclosure-channels: [pull-request-description, commit-co-authored-by-trailer]
   tools:
     - name: Claude Code
       provider: Anthropic
