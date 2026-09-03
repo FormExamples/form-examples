@@ -1,0 +1,449 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Axis A (eligibility) has four distinct rules for the same 'likely-covered'/'possibly-covered' outcomes, evaluated top-to-bottom, first match wins — the personas below deliberately exercise different ones (R-ELIG-SUBSTANTIAL-LONG-TERM, R-ELIG-DIAGNOSED-IMPACT, and the weakest-tier R-ELIG-NEURODIVERGENCE-PRESENT fallback). Axis D's 'soon' priority tier (burnout escalation) is distinct from 'urgent' (reserved for absence risk / severe impact) — the second persona isolates 'soon' without ever touching 'urgent'.",
+  "personas": [
+    {
+      "name": "likely-covered-ok-impact-routine-complete",
+      "description": "A software engineer with diagnosed ADHD and a substantial, long-term impact requests noise-cancelling headphones, a quiet desk, and written meeting summaries; current impact is low and well-managed, occupational health and Access to Work are both already involved, every field complete — expect likely-covered eligibility (via the substantial-long-term-impact rule) + ok impact + 100% completeness + routine priority + progress-to-meeting.",
+      "state": {
+        "worker": {
+          "name": "Jordan Ellis",
+          "jobTitle": "Software Engineer",
+          "department": "Engineering",
+          "employmentType": "permanent",
+          "workPattern": "full-time",
+          "workLocation": "hybrid",
+          "employmentStartDate": "2022-03-01",
+          "employeeReference": "EMP-4821",
+          "email": "jordan.ellis@example.com",
+          "phone": "07700 900123"
+        },
+        "manager": {
+          "name": "Priya Shah",
+          "role": "line-manager",
+          "jobTitle": "Engineering Manager",
+          "department": "Engineering",
+          "email": "priya.shah@example.com",
+          "phone": "07700 900456"
+        },
+        "request": {
+          "status": "submitted",
+          "requestedBy": "worker",
+          "requestDate": "2026-08-20",
+          "requestedStartDate": "2026-09-01"
+        },
+        "profile": {
+          "conditionAdhd": true,
+          "conditionAutism": false,
+          "conditionDyslexia": false,
+          "conditionDyspraxia": false,
+          "conditionDyscalculia": false,
+          "conditionTourettes": false,
+          "conditionOther": false,
+          "conditionOtherDetail": "",
+          "diagnosisStatus": "diagnosed",
+          "considersDisability": "yes",
+          "substantialLongTermImpact": true,
+          "disclosureConsent": true
+        },
+        "difficulties": {
+          "difficultyConcentration": true,
+          "difficultyWrittenCommunication": false,
+          "difficultyOrganisationTime": true,
+          "difficultySensoryOverload": false,
+          "difficultyBalanceCoordination": false,
+          "difficultySocialCommunication": false,
+          "difficultyMemory": false,
+          "difficultyBurnoutWellbeing": false,
+          "tasksSituationsAffected": "Long unstructured meetings and open-plan office noise make it hard to concentrate and keep track of action items.",
+          "workerStrengths": "Strong at deep-focus coding work and pattern recognition when given quiet time."
+        },
+        "adjustments": {
+          "adjustmentWorkingEnvironment": true,
+          "adjustmentEquipmentTechnology": true,
+          "adjustmentWorkingArrangements": false,
+          "adjustmentCommunication": false,
+          "adjustmentSupportMentoring": false,
+          "adjustmentRecruitmentProcess": false,
+          "adjustmentPolicyDress": false,
+          "adjustmentOther": false,
+          "adjustmentsRequestedDetail": "Noise-cancelling headphones, a quiet-zone desk away from the main walkway, and written meeting summaries."
+        },
+        "evidence": {
+          "supportingEvidenceType": "diagnostic-report",
+          "occupationalHealthInvolved": true,
+          "accessToWorkInvolved": true
+        },
+        "impact": {
+          "currentImpact": "low",
+          "atRiskOfAbsence": false,
+          "urgency": "routine",
+          "notes": "Managing well currently but would benefit from adjustments to sustain performance."
+        }
+      },
+      "expected": {
+        "eligibilityBand": "likely-covered",
+        "impactBand": "ok",
+        "completenessPercent": 100,
+        "priorityTier": "routine",
+        "targetTimeframe": "Within 20 working days",
+        "recommendation": "progress-to-meeting",
+        "recommendationLabel": "Progress to an adjustments meeting",
+        "firedRules": [
+          {
+            "ruleId": "R-ELIG-SUBSTANTIAL-LONG-TERM",
+            "axis": "eligibility",
+            "category": "eligibility",
+            "description": "Substantial and long-term adverse effect reported — meets the Equality Act 2010 disability test; the duty to make reasonable adjustments is likely engaged."
+          },
+          {
+            "ruleId": "R-IMPACT-OK",
+            "axis": "impact",
+            "category": "impact",
+            "description": "No wellbeing risk detected from the impact screen."
+          },
+          {
+            "ruleId": "R-PRIORITY-REQUESTED",
+            "axis": "priority",
+            "category": "requested",
+            "description": "Priority follows the requested urgency (routine)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-DISABILITY-DUTY-001",
+            "category": "disability-duty-engaged",
+            "priority": "high",
+            "description": "The Equality Act 2010 duty to make reasonable adjustments is likely engaged.",
+            "suggestedAction": "Treat as a formal request; arrange a meeting and respond without unreasonable delay."
+          }
+        ]
+      }
+    },
+    {
+      "name": "possibly-covered-caution-soon-complete",
+      "description": "A customer service advisor self-identifies as dyslexic (not formally diagnosed, and does not personally consider themselves disabled) but reports written-task difficulty and burnout fatigue with moderate current impact: eligibility falls through to the weakest-tier neurodivergence-present rule (possibly-covered), and the burnout difficulty alone escalates priority to 'soon' — distinct from the 'urgent' tier reserved for absence risk or severe impact, which is not present here; report complete — expect possibly-covered eligibility + caution impact + 100% completeness + soon priority + progress-to-meeting.",
+      "state": {
+        "worker": {
+          "name": "Sam Okoro",
+          "jobTitle": "Customer Service Advisor",
+          "department": "Customer Support",
+          "employmentType": "permanent",
+          "workPattern": "part-time",
+          "workLocation": "office",
+          "employmentStartDate": "2023-01-15",
+          "employeeReference": "EMP-3157",
+          "email": "sam.okoro@example.com",
+          "phone": "07700 900234"
+        },
+        "manager": {
+          "name": "Diane Foster",
+          "role": "line-manager",
+          "jobTitle": "Customer Support Team Leader",
+          "department": "Customer Support",
+          "email": "diane.foster@example.com",
+          "phone": "07700 900567"
+        },
+        "request": {
+          "status": "submitted",
+          "requestedBy": "worker",
+          "requestDate": "2026-08-25",
+          "requestedStartDate": "2026-09-08"
+        },
+        "profile": {
+          "conditionAdhd": false,
+          "conditionAutism": false,
+          "conditionDyslexia": true,
+          "conditionDyspraxia": false,
+          "conditionDyscalculia": false,
+          "conditionTourettes": false,
+          "conditionOther": false,
+          "conditionOtherDetail": "",
+          "diagnosisStatus": "self-identified",
+          "considersDisability": "no",
+          "substantialLongTermImpact": false,
+          "disclosureConsent": true
+        },
+        "difficulties": {
+          "difficultyConcentration": false,
+          "difficultyWrittenCommunication": true,
+          "difficultyOrganisationTime": false,
+          "difficultySensoryOverload": false,
+          "difficultyBalanceCoordination": false,
+          "difficultySocialCommunication": false,
+          "difficultyMemory": false,
+          "difficultyBurnoutWellbeing": true,
+          "tasksSituationsAffected": "Written call-summary templates and lengthy email threads take much longer to read and complete accurately, and the pace is becoming tiring.",
+          "workerStrengths": "Excellent verbal communication and rapport with customers on calls."
+        },
+        "adjustments": {
+          "adjustmentWorkingEnvironment": false,
+          "adjustmentEquipmentTechnology": false,
+          "adjustmentWorkingArrangements": true,
+          "adjustmentCommunication": false,
+          "adjustmentSupportMentoring": true,
+          "adjustmentRecruitmentProcess": false,
+          "adjustmentPolicyDress": false,
+          "adjustmentOther": false,
+          "adjustmentsRequestedDetail": "Extra time to complete written call summaries, and a buddy/mentor to review written work before it is sent."
+        },
+        "evidence": {
+          "supportingEvidenceType": "",
+          "occupationalHealthInvolved": false,
+          "accessToWorkInvolved": false
+        },
+        "impact": {
+          "currentImpact": "moderate",
+          "atRiskOfAbsence": false,
+          "urgency": "routine",
+          "notes": "Coping day-to-day but written tasks are becoming a source of stress; keen to get ahead of it before it worsens."
+        }
+      },
+      "expected": {
+        "eligibilityBand": "possibly-covered",
+        "impactBand": "caution",
+        "completenessPercent": 100,
+        "priorityTier": "soon",
+        "targetTimeframe": "Within 10 working days",
+        "recommendation": "progress-to-meeting",
+        "recommendationLabel": "Progress to an adjustments meeting",
+        "firedRules": [
+          {
+            "ruleId": "R-ELIG-NEURODIVERGENCE-PRESENT",
+            "axis": "eligibility",
+            "category": "eligibility",
+            "description": "Neurodivergence recorded; being neurodivergent will often amount to a disability under the Equality Act 2010 (ACAS)."
+          },
+          {
+            "ruleId": "R-IMPACT-BURNOUT",
+            "axis": "impact",
+            "category": "impact",
+            "description": "Fatigue / burnout difficulty reported."
+          },
+          {
+            "ruleId": "R-IMPACT-MODERATE",
+            "axis": "impact",
+            "category": "impact",
+            "description": "Moderate current impact on work and wellbeing."
+          },
+          {
+            "ruleId": "R-PRIORITY-BURNOUT",
+            "axis": "priority",
+            "category": "escalation",
+            "description": "Burnout difficulty — respond soon."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-BURNOUT-RISK-001",
+            "category": "burnout-risk",
+            "priority": "medium",
+            "description": "Fatigue / burnout or severe impact reported.",
+            "suggestedAction": "Monitor wellbeing; consider adjustments promptly."
+          }
+        ]
+      }
+    },
+    {
+      "name": "likely-covered-high-risk-urgent-uncommunicated-incomplete",
+      "description": "A warehouse operative with diagnosed ADHD and severe current impact reports being at risk of sickness absence, with no adjustments yet specified, no consent to share details, no manager named, and occupational health not yet involved: absence risk and severe impact both independently escalate priority to urgent and impact to high-risk, and the high-risk impact with no occupational-health input drives the recommendation to seek an occupational-health assessment rather than progressing straight to a meeting; multiple wellbeing and process flags fire together — expect likely-covered eligibility (via the diagnosed-with-material-impact rule) + high-risk impact + 50% completeness + urgent priority + seek-occupational-health.",
+      "state": {
+        "worker": {
+          "name": "Alex Morgan",
+          "jobTitle": "Warehouse Operative",
+          "department": "Logistics",
+          "employmentType": "permanent",
+          "workPattern": "full-time",
+          "workLocation": "field",
+          "employmentStartDate": "2019-06-10",
+          "employeeReference": "EMP-2290",
+          "email": "alex.morgan@example.com",
+          "phone": "07700 900789"
+        },
+        "manager": {
+          "name": "",
+          "role": "",
+          "jobTitle": "",
+          "department": "",
+          "email": "",
+          "phone": ""
+        },
+        "request": {
+          "status": "submitted",
+          "requestedBy": "worker",
+          "requestDate": "2026-08-30",
+          "requestedStartDate": ""
+        },
+        "profile": {
+          "conditionAdhd": true,
+          "conditionAutism": false,
+          "conditionDyslexia": false,
+          "conditionDyspraxia": false,
+          "conditionDyscalculia": false,
+          "conditionTourettes": false,
+          "conditionOther": false,
+          "conditionOtherDetail": "",
+          "diagnosisStatus": "diagnosed",
+          "considersDisability": "yes",
+          "substantialLongTermImpact": false,
+          "disclosureConsent": false
+        },
+        "difficulties": {
+          "difficultyConcentration": true,
+          "difficultyWrittenCommunication": false,
+          "difficultyOrganisationTime": false,
+          "difficultySensoryOverload": false,
+          "difficultyBalanceCoordination": false,
+          "difficultySocialCommunication": false,
+          "difficultyMemory": false,
+          "difficultyBurnoutWellbeing": true,
+          "tasksSituationsAffected": "",
+          "workerStrengths": ""
+        },
+        "adjustments": {
+          "adjustmentWorkingEnvironment": false,
+          "adjustmentEquipmentTechnology": false,
+          "adjustmentWorkingArrangements": false,
+          "adjustmentCommunication": false,
+          "adjustmentSupportMentoring": false,
+          "adjustmentRecruitmentProcess": false,
+          "adjustmentPolicyDress": false,
+          "adjustmentOther": false,
+          "adjustmentsRequestedDetail": ""
+        },
+        "evidence": {
+          "supportingEvidenceType": "",
+          "occupationalHealthInvolved": false,
+          "accessToWorkInvolved": false
+        },
+        "impact": {
+          "currentImpact": "severe",
+          "atRiskOfAbsence": true,
+          "urgency": "routine",
+          "notes": "Worker reports feeling overwhelmed and close to taking sick leave; struggling to keep up with shift pace and warehouse noise."
+        }
+      },
+      "expected": {
+        "eligibilityBand": "likely-covered",
+        "impactBand": "high-risk",
+        "completenessPercent": 50,
+        "priorityTier": "urgent",
+        "targetTimeframe": "Within 5 working days (act without unreasonable delay)",
+        "recommendation": "seek-occupational-health",
+        "recommendationLabel": "Seek an occupational-health assessment",
+        "firedRules": [
+          {
+            "ruleId": "R-ELIG-DIAGNOSED-IMPACT",
+            "axis": "eligibility",
+            "category": "eligibility",
+            "description": "Diagnosed neurodivergence with material impact on work — likely a disability under the Equality Act 2010."
+          },
+          {
+            "ruleId": "R-IMPACT-ABSENCE-RISK",
+            "axis": "impact",
+            "category": "impact",
+            "description": "Worker at risk of sickness absence or burnout without adjustments — act promptly."
+          },
+          {
+            "ruleId": "R-IMPACT-SEVERE",
+            "axis": "impact",
+            "category": "impact",
+            "description": "Severe current impact on work and wellbeing."
+          },
+          {
+            "ruleId": "R-IMPACT-BURNOUT",
+            "axis": "impact",
+            "category": "impact",
+            "description": "Fatigue / burnout difficulty reported."
+          },
+          {
+            "ruleId": "R-COMPLETE-ADJUSTMENTS",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested adjustments."
+          },
+          {
+            "ruleId": "R-COMPLETE-TASKS",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing tasks and situations affected."
+          },
+          {
+            "ruleId": "R-COMPLETE-CONSENT",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing disclosure consent."
+          },
+          {
+            "ruleId": "R-COMPLETE-MANAGER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing manager / HR contact."
+          },
+          {
+            "ruleId": "R-COMPLETE-ADJUSTMENTS-DETAIL",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing requested-adjustments detail."
+          },
+          {
+            "ruleId": "R-PRIORITY-ABSENCE-RISK",
+            "axis": "priority",
+            "category": "escalation",
+            "description": "Absence / burnout risk — respond urgently and without unreasonable delay."
+          },
+          {
+            "ruleId": "R-PRIORITY-SEVERE",
+            "axis": "priority",
+            "category": "escalation",
+            "description": "Severe impact — respond urgently."
+          },
+          {
+            "ruleId": "R-PRIORITY-BURNOUT",
+            "axis": "priority",
+            "category": "escalation",
+            "description": "Burnout difficulty — respond soon."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-DISABILITY-DUTY-001",
+            "category": "disability-duty-engaged",
+            "priority": "high",
+            "description": "The Equality Act 2010 duty to make reasonable adjustments is likely engaged.",
+            "suggestedAction": "Treat as a formal request; arrange a meeting and respond without unreasonable delay."
+          },
+          {
+            "flagId": "F-BURNOUT-RISK-001",
+            "category": "burnout-risk",
+            "priority": "high",
+            "description": "Worker at risk of sickness absence or burnout.",
+            "suggestedAction": "Prioritise; consider interim adjustments now."
+          },
+          {
+            "flagId": "F-NO-CONSENT-001",
+            "category": "no-consent-to-share",
+            "priority": "medium",
+            "description": "Worker has not consented to share details with HR / occupational health.",
+            "suggestedAction": "Handle sensitively; seek explicit consent before sharing."
+          },
+          {
+            "flagId": "F-MISSING-ADJUSTMENTS-001",
+            "category": "missing-adjustments",
+            "priority": "medium",
+            "description": "No specific adjustments requested.",
+            "suggestedAction": "Ask the worker what adjustments would help, or explore options together."
+          },
+          {
+            "flagId": "F-OCC-HEALTH-001",
+            "category": "occupational-health-recommended",
+            "priority": "medium",
+            "description": "High wellbeing risk without occupational-health input.",
+            "suggestedAction": "Consider an occupational-health referral to identify and confirm adjustments."
+          }
+        ]
+      }
+    }
+  ]
+}

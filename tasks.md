@@ -1122,10 +1122,61 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       personas — this sub-family of Phase 11 is COMPLETE** (count
       re-verified directly against the fleet each update, not
       hand-tracked — `bin/test-personas` ground truth: PASS 270/355,
-      up from the family's starting baseline). 73
-      forms (outside this family) are engine-SKIP and need
-      discovery hints first (was 76 — the `form-validator.js`
-      false-exclusion fix above unblocked 2). Then `example-invalid.json` +
+      up from the family's starting baseline). Next frontier identified
+      2026-09-03: of the 76 engine-SKIP forms (`bin/test-engines
+      --verbose`), 355 - 279 PASS = 76 SKIP is unchanged, but
+      cross-referencing the 85 forms fleet-wide still without a
+      personas.json against that PASS list surfaced **19 forms with a
+      working grader that were simply never reached** — not part of the
+      `*-test-result`/`*-test-request`/`*-waiting-list-card` families,
+      spanning several distinct older engine shapes (single custom
+      grader function names rather than a uniform `calculateGrade`;
+      one, gynecology-assessment, uses a `symptom-grader.js` +
+      `symptom-rules.js` + `flagged-issues.js` split instead of the
+      `rules.js`/`grader.js`/`flags.js` convention). 3 done 2026-09-03
+      (neurodiversity-adjustment-request, neurodiversity-adjustment-response,
+      arc42 — completing the neurodiversity request/response pair
+      alongside the already-personad neurodiversity-adjustment-review).
+      neurodiversity-adjustment-request's second persona isolates the
+      weakest-tier `R-ELIG-NEURODIVERGENCE-PRESENT` eligibility rule and
+      the 'soon' priority tier (burnout escalation, distinct from
+      'urgent' which needs absence risk or severe impact).
+      neurodiversity-adjustment-response's second persona isolates a
+      *justified* decline (rationale + a real decline-reason category)
+      which caps legal risk at 'caution' via R-LEGAL-DECLINE-JUSTIFIED,
+      distinct from the third persona's unjustified, escalated decline
+      that independently trips two separate high-risk rules; also
+      confirmed a genuine engine quirk — `deriveRecommendation`'s
+      waterfall bottoms out at 'implement' for a declined response with
+      nothing agreed and no escalation, there is no dedicated "decline
+      acknowledged" outcome. arc42's maturity algorithm needs ALL 12
+      arc42 sections individually 'complete' before it even checks the
+      four mature-band drivers (>=5 non-draft ADRs, >=3 fully-populated
+      quality scenarios, >=3 mitigated risks, no medium-priority flag);
+      the second persona meets every section's own (lower) threshold
+      without meeting the mature drivers (ready, not mature), the third
+      strengthens exactly those three counts to cross into mature with
+      zero fired flags — all three bands (draft/ready/mature) matched
+      hand-derived predictions exactly on first `--update`, including a
+      literal 12-flag draft persona and a 0-flag mature persona.
+      16 of these 19 forms remain: genetic-assessment,
+      gynecology-assessment, hernia-diagnostic-evaluation,
+      hip-replacement-surgery-evaluation, care-privacy-notice,
+      international-patient-summary, lifeguard-certification-checklist,
+      outpatient-outcome, patient-reported-outcome-measures,
+      post-operative-report,
+      recommended-summary-plan-for-emergency-care-and-treatment,
+      substance-abuse-assessment,
+      systematic-coronary-risk-evaluation-2-diabetes,
+      united-kingdom-statement-of-fitness-for-work,
+      vaccinations-checklist, ward-round-note (count re-verified
+      directly against the fleet each update, not hand-tracked —
+      `bin/test-personas` ground truth: PASS 273/355). The remaining
+      ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
+      fuller input / returns a bare object or boolean / no engine
+      namespace published) need discovery-hint fixes in their engines
+      before any persona work is possible — a distinct, harder
+      follow-on task from the 19 above. Then `example-invalid.json` +
       wizard-blocks-submission E2E assertion; API transcripts; FHIR bundles
       for personas; site examples gallery.
 - [ ] Latent: snake_case↔camelCase API contract (283 crates + snapshot

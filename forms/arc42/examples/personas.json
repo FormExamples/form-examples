@@ -1,0 +1,788 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMaturity",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `bandFromCompleteness` needs ALL 12 sections at 'complete' before it even checks the four mature drivers (nonDraftAdrs >= 5, fullyPopulatedQualityScenarios >= 3, risksWithMitigation >= 3, no medium-priority flag) — the second persona below deliberately meets every section's own (lower) completeness threshold without meeting the mature drivers, landing on 'ready' rather than 'mature'; the third persona strengthens exactly those three counts to cross into 'mature'.",
+  "personas": [
+    {
+      "name": "draft-early-stage-architecture",
+      "description": "A brand-new microservice architecture document with only the introduction and a single business goal written so far — no quality goals, stakeholders, context, strategy, structure, runtime, deployment, crosscutting concepts, ADRs, quality scenarios, risks, or glossary yet: any one empty section forces the whole document to 'draft' regardless of how developed the others are — expect computedMaturity draft, finalMaturity draft (no override), section 1 partial and sections 2-12 empty, with most of the high-priority missing-section flags firing.",
+      "state": {
+        "architecture": {
+          "name": "Order Fulfilment Service",
+          "version": "0.1.0",
+          "owner": "Platform Engineering",
+          "status": "draft",
+          "description": "A new microservice to orchestrate order fulfilment across the warehouse, payments, and shipping systems."
+        },
+        "authorName": "Casey Whitfield",
+        "authorRole": "Solution Architect",
+        "documentDate": "2026-08-20",
+        "introduction": "This document describes the initial architecture for the Order Fulfilment Service, replacing the monolithic order-processing module.",
+        "businessGoals": [
+          {
+            "ordinal": 1,
+            "name": "Reduce order-processing latency",
+            "description": "Cut end-to-end order fulfilment time from 4 hours to under 15 minutes."
+          }
+        ],
+        "qualityGoals": [],
+        "stakeholders": [],
+        "constraintItems": [],
+        "businessContextDescription": "",
+        "technicalContextDescription": "",
+        "contextPartners": [],
+        "solutionStrategySummary": "",
+        "technologyDecisions": [],
+        "topLevelDecompositionSummary": "",
+        "qualityStrategies": [],
+        "buildingBlockOverview": "",
+        "buildingBlocks": [],
+        "runtimeOverview": "",
+        "runtimeScenarios": [],
+        "deploymentOverview": "",
+        "deploymentNodes": [],
+        "crosscuttingOverview": "",
+        "crosscuttingConcepts": [],
+        "architecturalDecisions": [],
+        "qualityTreeSummary": "",
+        "qualityScenarios": [],
+        "riskItems": [],
+        "glossaryTerms": [],
+        "recommendation": "",
+        "additionalNotes": "First draft; circulated for early feedback before the design review.",
+        "signedBy": "",
+        "signedAt": "",
+        "finalMaturityOverride": "",
+        "finalMaturityOverrideReason": ""
+      },
+      "expected": {
+        "computedMaturity": "draft",
+        "finalMaturity": "draft",
+        "completenessBySection": {
+          "1": "partial",
+          "2": "empty",
+          "3": "empty",
+          "4": "empty",
+          "5": "empty",
+          "6": "empty",
+          "7": "empty",
+          "8": "empty",
+          "9": "empty",
+          "10": "empty",
+          "11": "empty",
+          "12": "empty"
+        },
+        "firedRules": [
+          {
+            "ruleId": "R-H-01",
+            "sectionNumber": 0,
+            "description": "No stakeholders documented in §1."
+          },
+          {
+            "ruleId": "R-H-02",
+            "sectionNumber": 0,
+            "description": "No quality goals documented in §1."
+          },
+          {
+            "ruleId": "R-H-03",
+            "sectionNumber": 0,
+            "description": "No ADRs documented in §9."
+          },
+          {
+            "ruleId": "R-H-04",
+            "sectionNumber": 0,
+            "description": "No risks or technical debt documented in §11."
+          },
+          {
+            "ruleId": "R-H-05",
+            "sectionNumber": 0,
+            "description": "Business context (§3) is empty."
+          },
+          {
+            "ruleId": "R-H-06",
+            "sectionNumber": 0,
+            "description": "Deployment view (§7) has no nodes."
+          },
+          {
+            "ruleId": "R-M-07",
+            "sectionNumber": 0,
+            "description": "Glossary (§12) is empty."
+          },
+          {
+            "ruleId": "R-M-08",
+            "sectionNumber": 0,
+            "description": "Runtime view (§6) has no scenarios."
+          },
+          {
+            "ruleId": "R-M-09",
+            "sectionNumber": 0,
+            "description": "Quality requirements (§10) have no scenarios."
+          },
+          {
+            "ruleId": "R-M-10",
+            "sectionNumber": 0,
+            "description": "Crosscutting concepts (§8) is empty."
+          },
+          {
+            "ruleId": "R-L-11",
+            "sectionNumber": 0,
+            "description": "No conventions documented in §2."
+          },
+          {
+            "ruleId": "R-L-12",
+            "sectionNumber": 0,
+            "description": "Technical-debt section (§11) is empty."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "category": "no-stakeholders",
+            "priority": "high",
+            "description": "No stakeholders documented in §1."
+          },
+          {
+            "category": "no-quality-goals",
+            "priority": "high",
+            "description": "No quality goals documented in §1."
+          },
+          {
+            "category": "no-architectural-decisions",
+            "priority": "high",
+            "description": "No ADRs documented in §9."
+          },
+          {
+            "category": "no-risks",
+            "priority": "high",
+            "description": "No risks or technical debt documented in §11."
+          },
+          {
+            "category": "no-business-context",
+            "priority": "high",
+            "description": "Business context (§3) is empty."
+          },
+          {
+            "category": "no-deployment-view",
+            "priority": "high",
+            "description": "Deployment view (§7) has no nodes."
+          },
+          {
+            "category": "no-glossary",
+            "priority": "medium",
+            "description": "Glossary (§12) is empty."
+          },
+          {
+            "category": "no-runtime-scenarios",
+            "priority": "medium",
+            "description": "Runtime view (§6) has no scenarios."
+          },
+          {
+            "category": "no-quality-scenarios",
+            "priority": "medium",
+            "description": "Quality requirements (§10) have no scenarios."
+          },
+          {
+            "category": "no-crosscutting-concepts",
+            "priority": "medium",
+            "description": "Crosscutting concepts (§8) is empty."
+          },
+          {
+            "category": "no-conventions",
+            "priority": "low",
+            "description": "No conventions documented in §2."
+          },
+          {
+            "category": "no-technical-debt",
+            "priority": "low",
+            "description": "Technical-debt section (§11) is empty."
+          }
+        ]
+      }
+    },
+    {
+      "name": "ready-all-sections-complete-mature-drivers-not-met",
+      "description": "A payments-gateway architecture with all 12 sections individually meeting their own completeness threshold (3 quality goals, 2 stakeholders, both business and technical context with partners, a solution strategy with a technology decision, 3 building blocks, a runtime scenario, a deployment node, a crosscutting concept, 3 non-draft ADRs, 3 fully-populated quality scenarios, 1 risk with mitigation, and 5 glossary terms) — every section is 'complete' and no medium-priority flag fires, but only 3 non-draft ADRs (mature needs >= 5) and only 1 risk with mitigation (mature needs >= 3) fall short of the mature drivers: expect computedMaturity ready (not mature), finalMaturity ready.",
+      "state": {
+        "architecture": {
+          "name": "Payments Gateway Service",
+          "version": "1.2.0",
+          "owner": "Payments Platform Team",
+          "status": "active",
+          "description": "Central service that authorises, captures, and reconciles card and bank-transfer payments across all storefronts."
+        },
+        "authorName": "Nadia Osei",
+        "authorRole": "Principal Architect",
+        "documentDate": "2026-08-25",
+        "introduction": "This document describes the architecture of the Payments Gateway Service, covering its context, structure, runtime behaviour, deployment, and quality attributes.",
+        "businessGoals": [
+          {
+            "ordinal": 1,
+            "name": "PCI DSS compliance",
+            "description": "Achieve and maintain PCI DSS Level 1 compliance for all card-payment flows."
+          }
+        ],
+        "qualityGoals": [
+          {
+            "ordinal": 1,
+            "name": "Availability",
+            "priority": "high",
+            "scenario": "The service remains available for at least 99.95% of the time measured monthly, including during a single availability-zone failure."
+          },
+          {
+            "ordinal": 2,
+            "name": "Security",
+            "priority": "high",
+            "scenario": "No card primary account numbers are stored outside the PCI-scoped vault at any point in the processing pipeline."
+          },
+          {
+            "ordinal": 3,
+            "name": "Performance",
+            "priority": "medium",
+            "scenario": "95% of authorisation requests complete within 800ms under normal load."
+          }
+        ],
+        "stakeholders": [
+          {
+            "ordinal": 1,
+            "name": "Nadia Osei",
+            "role": "Principal Architect",
+            "concerns": "Overall architectural integrity and compliance posture."
+          },
+          {
+            "ordinal": 2,
+            "name": "Marcus Webb",
+            "role": "Head of Payments Product",
+            "concerns": "Feature delivery timelines and merchant experience."
+          }
+        ],
+        "constraintItems": [
+          {
+            "ordinal": 1,
+            "kind": "technical",
+            "name": "PCI DSS scope isolation",
+            "description": "Cardholder-data-environment services must run in a network-isolated PCI enclave."
+          }
+        ],
+        "businessContextDescription": "The service integrates with storefronts, the finance/reconciliation system, and external acquiring banks and card schemes.",
+        "technicalContextDescription": "The service exposes a REST API to internal storefronts and communicates with acquiring-bank APIs over mutually-authenticated TLS.",
+        "contextPartners": [
+          {
+            "ordinal": 1,
+            "kind": "business",
+            "name": "Storefront Checkout",
+            "interfaceDescription": "Initiates payment authorisation and capture requests.",
+            "protocol": "REST/HTTPS",
+            "direction": "inbound"
+          },
+          {
+            "ordinal": 2,
+            "kind": "technical",
+            "name": "Acquiring Bank Gateway",
+            "interfaceDescription": "Authorises and settles card transactions.",
+            "protocol": "ISO 8583 over mTLS",
+            "direction": "bidirectional"
+          }
+        ],
+        "solutionStrategySummary": "A PCI-isolated microservice fronted by a tokenising API gateway, using an event-driven ledger for reconciliation.",
+        "technologyDecisions": [
+          {
+            "ordinal": 1,
+            "category": "Runtime",
+            "choice": "Rust + axum",
+            "rationale": "Memory safety and predictable low-latency performance for the authorisation hot path."
+          }
+        ],
+        "topLevelDecompositionSummary": "Decomposed into an authorisation service, a tokenisation vault, and a reconciliation ledger.",
+        "qualityStrategies": [],
+        "buildingBlockOverview": "Three top-level building blocks: Authorisation Service, Tokenisation Vault, and Reconciliation Ledger.",
+        "buildingBlocks": [
+          {
+            "ordinal": 1,
+            "parentOrdinal": null,
+            "name": "Authorisation Service",
+            "responsibility": "Validates and routes authorisation requests to the acquiring bank.",
+            "interfaces": "REST API, internal event bus."
+          },
+          {
+            "ordinal": 2,
+            "parentOrdinal": null,
+            "name": "Tokenisation Vault",
+            "responsibility": "Stores and exchanges tokens for cardholder data within the PCI enclave.",
+            "interfaces": "Internal gRPC API."
+          },
+          {
+            "ordinal": 3,
+            "parentOrdinal": null,
+            "name": "Reconciliation Ledger",
+            "responsibility": "Reconciles settled transactions against the acquiring bank statement.",
+            "interfaces": "Nightly batch job, internal event bus."
+          }
+        ],
+        "runtimeOverview": "A typical card-payment authorisation flow from checkout through to the acquiring bank and back.",
+        "runtimeScenarios": [
+          {
+            "ordinal": 1,
+            "name": "Card authorisation",
+            "triggerDescription": "Customer confirms checkout.",
+            "stepsSummary": "Checkout calls Authorisation Service, which tokenises the card via the Vault and forwards the authorisation request to the Acquiring Bank Gateway, returning an approve/decline decision."
+          }
+        ],
+        "deploymentOverview": "Deployed across two availability zones in the production PCI enclave.",
+        "deploymentNodes": [
+          {
+            "ordinal": 1,
+            "environment": "production",
+            "nodeName": "PCI Enclave — eu-west-1",
+            "responsibility": "Hosts the Authorisation Service, Tokenisation Vault, and Reconciliation Ledger."
+          }
+        ],
+        "crosscuttingOverview": "Shared concerns spanning all building blocks: audit logging and secrets management.",
+        "crosscuttingConcepts": [
+          {
+            "ordinal": 1,
+            "name": "Audit logging",
+            "description": "Every authorisation decision is written to an immutable, PCI-compliant audit log."
+          }
+        ],
+        "architecturalDecisions": [
+          {
+            "ordinal": 1,
+            "title": "Use Rust for the authorisation hot path",
+            "status": "accepted",
+            "context": "Need predictable low-latency performance under PCI constraints.",
+            "decision": "Build the Authorisation Service in Rust with axum.",
+            "consequences": "Smaller talent pool but strong safety and performance guarantees."
+          },
+          {
+            "ordinal": 2,
+            "title": "Tokenise cardholder data at ingress",
+            "status": "accepted",
+            "context": "Minimise PCI DSS scope across the rest of the platform.",
+            "decision": "All cardholder data is tokenised at the API gateway before reaching downstream services.",
+            "consequences": "Downstream services never handle raw PANs, reducing audit scope."
+          },
+          {
+            "ordinal": 3,
+            "title": "Event-driven reconciliation ledger",
+            "status": "accepted",
+            "context": "Need an auditable, replayable reconciliation process.",
+            "decision": "Reconciliation is built as an event-sourced ledger rather than a mutable table.",
+            "consequences": "Higher storage cost but full replayability and audit trail."
+          }
+        ],
+        "qualityTreeSummary": "Quality attributes prioritised: security, availability, then performance.",
+        "qualityScenarios": [
+          {
+            "ordinal": 1,
+            "source": "Attacker",
+            "stimulus": "Attempts to exfiltrate cardholder data from a downstream service.",
+            "artifact": "Downstream reporting service",
+            "response": "No raw PAN is present outside the PCI enclave to exfiltrate.",
+            "measure": "Verified by quarterly PCI DSS penetration test."
+          },
+          {
+            "ordinal": 2,
+            "source": "Availability zone",
+            "stimulus": "Fails completely.",
+            "artifact": "Authorisation Service",
+            "response": "Traffic fails over to the healthy availability zone within 30 seconds.",
+            "measure": "Monthly availability remains at or above 99.95%."
+          },
+          {
+            "ordinal": 3,
+            "source": "Customer",
+            "stimulus": "Submits a payment authorisation request at peak load.",
+            "artifact": "Authorisation Service",
+            "response": "The request is authorised or declined.",
+            "measure": "95% of requests complete within 800ms."
+          }
+        ],
+        "riskItems": [
+          {
+            "ordinal": 1,
+            "kind": "risk",
+            "name": "Acquiring bank API deprecation",
+            "probability": "low",
+            "impact": "high",
+            "mitigation": "Contractual 12-month deprecation notice; integration tested against the bank sandbox quarterly."
+          }
+        ],
+        "glossaryTerms": [
+          {
+            "ordinal": 1,
+            "term": "PAN",
+            "definition": "Primary Account Number — the card number printed on a payment card."
+          },
+          {
+            "ordinal": 2,
+            "term": "PCI DSS",
+            "definition": "Payment Card Industry Data Security Standard."
+          },
+          {
+            "ordinal": 3,
+            "term": "Tokenisation",
+            "definition": "Replacing a PAN with a non-sensitive surrogate value (token)."
+          },
+          {
+            "ordinal": 4,
+            "term": "Acquiring bank",
+            "definition": "The bank that processes card payments on behalf of a merchant."
+          },
+          {
+            "ordinal": 5,
+            "term": "Settlement",
+            "definition": "The transfer of funds from the acquiring bank to the merchant following a captured transaction."
+          }
+        ],
+        "recommendation": "proceed",
+        "additionalNotes": "Ready for implementation; revisit after the first production quarter to assess for mature-band promotion.",
+        "signedBy": "Nadia Osei",
+        "signedAt": "2026-08-25",
+        "finalMaturityOverride": "",
+        "finalMaturityOverrideReason": ""
+      },
+      "expected": {
+        "computedMaturity": "ready",
+        "finalMaturity": "ready",
+        "completenessBySection": {
+          "1": "complete",
+          "2": "complete",
+          "3": "complete",
+          "4": "complete",
+          "5": "complete",
+          "6": "complete",
+          "7": "complete",
+          "8": "complete",
+          "9": "complete",
+          "10": "complete",
+          "11": "complete",
+          "12": "complete"
+        },
+        "firedRules": [
+          {
+            "ruleId": "R-L-01",
+            "sectionNumber": 0,
+            "description": "No conventions documented in §2."
+          },
+          {
+            "ruleId": "R-L-02",
+            "sectionNumber": 0,
+            "description": "Technical-debt section (§11) is empty."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "category": "no-conventions",
+            "priority": "low",
+            "description": "No conventions documented in §2."
+          },
+          {
+            "category": "no-technical-debt",
+            "priority": "low",
+            "description": "Technical-debt section (§11) is empty."
+          }
+        ]
+      }
+    },
+    {
+      "name": "mature-all-drivers-met-no-flags",
+      "description": "The same payments-gateway architecture, further matured: 5 non-draft ADRs (was 3), and 3 risk items each carrying a mitigation, one of them technical debt (was 1 risk with mitigation), plus a documented coding convention — every section remains complete, all four mature drivers are now met (nonDraftAdrs >= 5, fullyPopulatedQualityScenarios >= 3, risksWithMitigation >= 3, no medium-priority flag), and the added convention/technical-debt entries also clear the two low-priority flags the previous revision carried: expect computedMaturity mature, finalMaturity mature (no override), and zero fired flags.",
+      "state": {
+        "architecture": {
+          "name": "Payments Gateway Service",
+          "version": "1.3.0",
+          "owner": "Payments Platform Team",
+          "status": "active",
+          "description": "Central service that authorises, captures, and reconciles card and bank-transfer payments across all storefronts."
+        },
+        "authorName": "Nadia Osei",
+        "authorRole": "Principal Architect",
+        "documentDate": "2026-08-30",
+        "introduction": "This document describes the architecture of the Payments Gateway Service, covering its context, structure, runtime behaviour, deployment, and quality attributes.",
+        "businessGoals": [
+          {
+            "ordinal": 1,
+            "name": "PCI DSS compliance",
+            "description": "Achieve and maintain PCI DSS Level 1 compliance for all card-payment flows."
+          }
+        ],
+        "qualityGoals": [
+          {
+            "ordinal": 1,
+            "name": "Availability",
+            "priority": "high",
+            "scenario": "The service remains available for at least 99.95% of the time measured monthly, including during a single availability-zone failure."
+          },
+          {
+            "ordinal": 2,
+            "name": "Security",
+            "priority": "high",
+            "scenario": "No card primary account numbers are stored outside the PCI-scoped vault at any point in the processing pipeline."
+          },
+          {
+            "ordinal": 3,
+            "name": "Performance",
+            "priority": "medium",
+            "scenario": "95% of authorisation requests complete within 800ms under normal load."
+          }
+        ],
+        "stakeholders": [
+          {
+            "ordinal": 1,
+            "name": "Nadia Osei",
+            "role": "Principal Architect",
+            "concerns": "Overall architectural integrity and compliance posture."
+          },
+          {
+            "ordinal": 2,
+            "name": "Marcus Webb",
+            "role": "Head of Payments Product",
+            "concerns": "Feature delivery timelines and merchant experience."
+          }
+        ],
+        "constraintItems": [
+          {
+            "ordinal": 1,
+            "kind": "technical",
+            "name": "PCI DSS scope isolation",
+            "description": "Cardholder-data-environment services must run in a network-isolated PCI enclave."
+          },
+          {
+            "ordinal": 2,
+            "kind": "convention",
+            "name": "Commit message format",
+            "description": "Conventional Commits format enforced via CI."
+          }
+        ],
+        "businessContextDescription": "The service integrates with storefronts, the finance/reconciliation system, and external acquiring banks and card schemes.",
+        "technicalContextDescription": "The service exposes a REST API to internal storefronts and communicates with acquiring-bank APIs over mutually-authenticated TLS.",
+        "contextPartners": [
+          {
+            "ordinal": 1,
+            "kind": "business",
+            "name": "Storefront Checkout",
+            "interfaceDescription": "Initiates payment authorisation and capture requests.",
+            "protocol": "REST/HTTPS",
+            "direction": "inbound"
+          },
+          {
+            "ordinal": 2,
+            "kind": "technical",
+            "name": "Acquiring Bank Gateway",
+            "interfaceDescription": "Authorises and settles card transactions.",
+            "protocol": "ISO 8583 over mTLS",
+            "direction": "bidirectional"
+          }
+        ],
+        "solutionStrategySummary": "A PCI-isolated microservice fronted by a tokenising API gateway, using an event-driven ledger for reconciliation.",
+        "technologyDecisions": [
+          {
+            "ordinal": 1,
+            "category": "Runtime",
+            "choice": "Rust + axum",
+            "rationale": "Memory safety and predictable low-latency performance for the authorisation hot path."
+          }
+        ],
+        "topLevelDecompositionSummary": "Decomposed into an authorisation service, a tokenisation vault, and a reconciliation ledger.",
+        "qualityStrategies": [],
+        "buildingBlockOverview": "Three top-level building blocks: Authorisation Service, Tokenisation Vault, and Reconciliation Ledger.",
+        "buildingBlocks": [
+          {
+            "ordinal": 1,
+            "parentOrdinal": null,
+            "name": "Authorisation Service",
+            "responsibility": "Validates and routes authorisation requests to the acquiring bank.",
+            "interfaces": "REST API, internal event bus."
+          },
+          {
+            "ordinal": 2,
+            "parentOrdinal": null,
+            "name": "Tokenisation Vault",
+            "responsibility": "Stores and exchanges tokens for cardholder data within the PCI enclave.",
+            "interfaces": "Internal gRPC API."
+          },
+          {
+            "ordinal": 3,
+            "parentOrdinal": null,
+            "name": "Reconciliation Ledger",
+            "responsibility": "Reconciles settled transactions against the acquiring bank statement.",
+            "interfaces": "Nightly batch job, internal event bus."
+          }
+        ],
+        "runtimeOverview": "A typical card-payment authorisation flow from checkout through to the acquiring bank and back.",
+        "runtimeScenarios": [
+          {
+            "ordinal": 1,
+            "name": "Card authorisation",
+            "triggerDescription": "Customer confirms checkout.",
+            "stepsSummary": "Checkout calls Authorisation Service, which tokenises the card via the Vault and forwards the authorisation request to the Acquiring Bank Gateway, returning an approve/decline decision."
+          }
+        ],
+        "deploymentOverview": "Deployed across two availability zones in the production PCI enclave.",
+        "deploymentNodes": [
+          {
+            "ordinal": 1,
+            "environment": "production",
+            "nodeName": "PCI Enclave — eu-west-1",
+            "responsibility": "Hosts the Authorisation Service, Tokenisation Vault, and Reconciliation Ledger."
+          }
+        ],
+        "crosscuttingOverview": "Shared concerns spanning all building blocks: audit logging and secrets management.",
+        "crosscuttingConcepts": [
+          {
+            "ordinal": 1,
+            "name": "Audit logging",
+            "description": "Every authorisation decision is written to an immutable, PCI-compliant audit log."
+          }
+        ],
+        "architecturalDecisions": [
+          {
+            "ordinal": 1,
+            "title": "Use Rust for the authorisation hot path",
+            "status": "accepted",
+            "context": "Need predictable low-latency performance under PCI constraints.",
+            "decision": "Build the Authorisation Service in Rust with axum.",
+            "consequences": "Smaller talent pool but strong safety and performance guarantees."
+          },
+          {
+            "ordinal": 2,
+            "title": "Tokenise cardholder data at ingress",
+            "status": "accepted",
+            "context": "Minimise PCI DSS scope across the rest of the platform.",
+            "decision": "All cardholder data is tokenised at the API gateway before reaching downstream services.",
+            "consequences": "Downstream services never handle raw PANs, reducing audit scope."
+          },
+          {
+            "ordinal": 3,
+            "title": "Event-driven reconciliation ledger",
+            "status": "accepted",
+            "context": "Need an auditable, replayable reconciliation process.",
+            "decision": "Reconciliation is built as an event-sourced ledger rather than a mutable table.",
+            "consequences": "Higher storage cost but full replayability and audit trail."
+          },
+          {
+            "ordinal": 4,
+            "title": "Idempotency keys for authorisation requests",
+            "status": "accepted",
+            "context": "Network retries must not double-authorise a payment.",
+            "decision": "Every authorisation request carries a client-generated idempotency key, deduplicated for 24 hours.",
+            "consequences": "Requires a low-latency deduplication store; adds minor complexity to the client SDK."
+          },
+          {
+            "ordinal": 5,
+            "title": "Central audit log is append-only object storage",
+            "status": "accepted",
+            "context": "Auditors require tamper-evident logs retained for 7 years.",
+            "decision": "Audit events are written to append-only, versioned object storage with object-lock retention.",
+            "consequences": "Slightly higher query latency for audit investigations, mitigated by a separate indexed read replica."
+          }
+        ],
+        "qualityTreeSummary": "Quality attributes prioritised: security, availability, then performance.",
+        "qualityScenarios": [
+          {
+            "ordinal": 1,
+            "source": "Attacker",
+            "stimulus": "Attempts to exfiltrate cardholder data from a downstream service.",
+            "artifact": "Downstream reporting service",
+            "response": "No raw PAN is present outside the PCI enclave to exfiltrate.",
+            "measure": "Verified by quarterly PCI DSS penetration test."
+          },
+          {
+            "ordinal": 2,
+            "source": "Availability zone",
+            "stimulus": "Fails completely.",
+            "artifact": "Authorisation Service",
+            "response": "Traffic fails over to the healthy availability zone within 30 seconds.",
+            "measure": "Monthly availability remains at or above 99.95%."
+          },
+          {
+            "ordinal": 3,
+            "source": "Customer",
+            "stimulus": "Submits a payment authorisation request at peak load.",
+            "artifact": "Authorisation Service",
+            "response": "The request is authorised or declined.",
+            "measure": "95% of requests complete within 800ms."
+          }
+        ],
+        "riskItems": [
+          {
+            "ordinal": 1,
+            "kind": "risk",
+            "name": "Acquiring bank API deprecation",
+            "probability": "low",
+            "impact": "high",
+            "mitigation": "Contractual 12-month deprecation notice; integration tested against the bank sandbox quarterly."
+          },
+          {
+            "ordinal": 2,
+            "kind": "technical-debt",
+            "name": "Legacy XML settlement parser",
+            "probability": "medium",
+            "impact": "medium",
+            "mitigation": "Scheduled for replacement with the JSON settlement API in Q1 2027; tracked in the platform backlog."
+          },
+          {
+            "ordinal": 3,
+            "kind": "risk",
+            "name": "Single-region tokenisation vault",
+            "probability": "low",
+            "impact": "high",
+            "mitigation": "Cross-region replication of the vault is planned for the next infrastructure investment cycle; interim mitigation is a documented manual failover runbook."
+          }
+        ],
+        "glossaryTerms": [
+          {
+            "ordinal": 1,
+            "term": "PAN",
+            "definition": "Primary Account Number — the card number printed on a payment card."
+          },
+          {
+            "ordinal": 2,
+            "term": "PCI DSS",
+            "definition": "Payment Card Industry Data Security Standard."
+          },
+          {
+            "ordinal": 3,
+            "term": "Tokenisation",
+            "definition": "Replacing a PAN with a non-sensitive surrogate value (token)."
+          },
+          {
+            "ordinal": 4,
+            "term": "Acquiring bank",
+            "definition": "The bank that processes card payments on behalf of a merchant."
+          },
+          {
+            "ordinal": 5,
+            "term": "Settlement",
+            "definition": "The transfer of funds from the acquiring bank to the merchant following a captured transaction."
+          }
+        ],
+        "recommendation": "proceed",
+        "additionalNotes": "Third revision, following the first production quarter; promoted to the mature band.",
+        "signedBy": "Nadia Osei",
+        "signedAt": "2026-08-30",
+        "finalMaturityOverride": "",
+        "finalMaturityOverrideReason": ""
+      },
+      "expected": {
+        "computedMaturity": "mature",
+        "finalMaturity": "mature",
+        "completenessBySection": {
+          "1": "complete",
+          "2": "complete",
+          "3": "complete",
+          "4": "complete",
+          "5": "complete",
+          "6": "complete",
+          "7": "complete",
+          "8": "complete",
+          "9": "complete",
+          "10": "complete",
+          "11": "complete",
+          "12": "complete"
+        },
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    }
+  ]
+}

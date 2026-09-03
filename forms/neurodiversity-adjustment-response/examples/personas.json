@@ -1,0 +1,399 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `gradeLegalRisk` distinguishes a *justified* decline (rationale recorded, a real decline-reason category other than 'not-reasonable') — capped at 'caution' via R-LEGAL-DECLINE-JUSTIFIED — from a decline with no rationale and no alternative, which independently trips two separate high-risk rules. The second persona below isolates the justified-decline caution path; the third isolates the unjustified, escalated high-risk path. Also notable, verified directly: `deriveRecommendation`'s waterfall bottoms out at 'implement' for a declined response with nothing agreed and no escalation — there is no dedicated 'decline acknowledged' outcome, a genuine engine quirk, not an authoring choice.",
+  "personas": [
+    {
+      "name": "fully-agreed-ok-risk-review-scheduled-complete",
+      "description": "A manager agrees in full to a software engineer's ADHD adjustment request (headphones, a quiet desk, written meeting summaries) following a meeting, with a review scheduled and responsibilities assigned: expect fully-agreed outcome + ok legal risk + 100% completeness + review-scheduled follow-up (targeted at the review date) + implement.",
+      "state": {
+        "manager": {
+          "name": "Priya Shah",
+          "role": "line-manager",
+          "jobTitle": "Engineering Manager",
+          "department": "Engineering",
+          "email": "priya.shah@example.com",
+          "phone": "07700 900456"
+        },
+        "worker": {
+          "name": "Jordan Ellis",
+          "jobTitle": "Software Engineer",
+          "department": "Engineering",
+          "employeeReference": "EMP-4821",
+          "email": "jordan.ellis@example.com",
+          "phone": "07700 900123"
+        },
+        "response": {
+          "responseStatus": "agreed",
+          "requestReference": "REQ-2026-0820-NDA",
+          "handlingMethod": "meeting",
+          "assessedDate": "2026-08-22",
+          "respondedDate": "2026-08-27",
+          "effectiveDate": "2026-09-01"
+        },
+        "decision": {
+          "overallDecision": "agreed",
+          "decisionRationale": "All requested adjustments are low-cost and straightforward to implement; agreed in full following a meeting with the worker.",
+          "declineReasonCategory": ""
+        },
+        "adjustments": {
+          "agreedWorkingEnvironment": true,
+          "agreedEquipmentTechnology": true,
+          "agreedWorkingArrangements": false,
+          "agreedCommunication": false,
+          "agreedSupportMentoring": false,
+          "agreedRecruitmentProcess": false,
+          "agreedPolicyDress": false,
+          "agreedOther": false,
+          "agreedAdjustmentsDetail": "Noise-cancelling headphones, a quiet-zone desk away from the main walkway, and written meeting summaries, as requested.",
+          "alternativeAdjustmentsDetail": ""
+        },
+        "review": {
+          "trialPeriod": false,
+          "trialPeriodWeeks": null,
+          "reviewScheduled": true,
+          "reviewDate": "2026-11-27"
+        },
+        "support": {
+          "occupationalHealthReferred": false,
+          "accessToWorkReferred": true,
+          "supportResourcesDetail": "ACAS neurodiversity adjustments guidance shared with the worker and manager.",
+          "responsibilitiesDetail": "IT to order equipment by 2026-08-29; facilities to relocate the desk by 2026-08-29; manager to circulate written meeting summaries from 2026-09-01.",
+          "pointOfContact": "Priya Shah, Engineering Manager"
+        },
+        "signOff": {
+          "escalated": false,
+          "escalationDetail": "",
+          "notes": ""
+        }
+      },
+      "expected": {
+        "outcomeClassification": "fully-agreed",
+        "legalRiskBand": "ok",
+        "completenessPercent": 100,
+        "followUpUrgency": "review-scheduled",
+        "targetTimeframe": "2026-11-27",
+        "recommendation": "implement",
+        "recommendationLabel": "Implement the agreed adjustments",
+        "firedRules": [
+          {
+            "ruleId": "R-OUTCOME-AGREED",
+            "axis": "outcome",
+            "category": "fully-agreed",
+            "description": "All requested adjustments agreed."
+          },
+          {
+            "ruleId": "R-LEGAL-OK",
+            "axis": "legal-risk",
+            "category": "ok",
+            "description": "No elevated discrimination risk detected."
+          },
+          {
+            "ruleId": "R-FOLLOWUP-REVIEW",
+            "axis": "follow-up",
+            "category": "review-scheduled",
+            "description": "Review scheduled for the agreed adjustments."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "declined-justified-caution-not-high-risk-complete",
+      "description": "A manager declines a customer service advisor's request for a dedicated buddy/mentor role, recording a clear rationale (disproportionate cost — no such post exists in the team structure) and a real decline-reason category: `declineJustified` requires a recorded rationale AND a decline-reason category other than 'not-reasonable', which caps this at R-LEGAL-DECLINE-JUSTIFIED (caution) rather than either of the two high-risk decline rules (no-rationale, no-alternative) — expect declined outcome + caution legal risk + 75% completeness + none follow-up + implement (the engine's waterfall fallback for a declined response with nothing agreed and no escalation).",
+      "state": {
+        "manager": {
+          "name": "Diane Foster",
+          "role": "line-manager",
+          "jobTitle": "Customer Support Team Leader",
+          "department": "Customer Support",
+          "email": "diane.foster@example.com",
+          "phone": "07700 900567"
+        },
+        "worker": {
+          "name": "Sam Okoro",
+          "jobTitle": "Customer Service Advisor",
+          "department": "Customer Support",
+          "employeeReference": "EMP-3157",
+          "email": "sam.okoro@example.com",
+          "phone": "07700 900234"
+        },
+        "response": {
+          "responseStatus": "declined",
+          "requestReference": "REQ-2026-0825-NDA",
+          "handlingMethod": "hr-review",
+          "assessedDate": "2026-08-27",
+          "respondedDate": "2026-09-01",
+          "effectiveDate": ""
+        },
+        "decision": {
+          "overallDecision": "declined",
+          "decisionRationale": "A dedicated buddy/mentor role is not operationally available in the current team structure and would require a new permanent post; extra time on written summaries was already standard practice for the whole team, so no specific adjustment was required.",
+          "declineReasonCategory": "disproportionate-cost"
+        },
+        "adjustments": {
+          "agreedWorkingEnvironment": false,
+          "agreedEquipmentTechnology": false,
+          "agreedWorkingArrangements": false,
+          "agreedCommunication": false,
+          "agreedSupportMentoring": false,
+          "agreedRecruitmentProcess": false,
+          "agreedPolicyDress": false,
+          "agreedOther": false,
+          "agreedAdjustmentsDetail": "",
+          "alternativeAdjustmentsDetail": ""
+        },
+        "review": {
+          "trialPeriod": false,
+          "trialPeriodWeeks": null,
+          "reviewScheduled": false,
+          "reviewDate": ""
+        },
+        "support": {
+          "occupationalHealthReferred": false,
+          "accessToWorkReferred": false,
+          "supportResourcesDetail": "",
+          "responsibilitiesDetail": "",
+          "pointOfContact": "Diane Foster, Customer Support Team Leader"
+        },
+        "signOff": {
+          "escalated": false,
+          "escalationDetail": "",
+          "notes": "Worker was informed of the right to raise a grievance if unhappy with this decision."
+        }
+      },
+      "expected": {
+        "outcomeClassification": "declined",
+        "legalRiskBand": "caution",
+        "completenessPercent": 75,
+        "followUpUrgency": "none",
+        "targetTimeframe": "No follow-up scheduled",
+        "recommendation": "implement",
+        "recommendationLabel": "Implement the agreed adjustments",
+        "firedRules": [
+          {
+            "ruleId": "R-OUTCOME-DECLINED",
+            "axis": "outcome",
+            "category": "declined",
+            "description": "Requested adjustments declined."
+          },
+          {
+            "ruleId": "R-LEGAL-DECLINE-JUSTIFIED",
+            "axis": "legal-risk",
+            "category": "caution",
+            "description": "Adjustments declined but a reasonableness justification is recorded — retain evidence."
+          },
+          {
+            "ruleId": "R-COMPLETE-REVIEW",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: review arrangements."
+          },
+          {
+            "ruleId": "R-COMPLETE-EFFECTIVE-DATE",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: effective date."
+          },
+          {
+            "ruleId": "R-COMPLETE-RESPONSIBILITIES",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: responsibilities."
+          },
+          {
+            "ruleId": "R-FOLLOWUP-NONE",
+            "axis": "follow-up",
+            "category": "none",
+            "description": "No follow-up scheduled."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "declined-unjustified-escalated-high-risk-incomplete",
+      "description": "A warehouse operative's adjustment request was declined verbally in a rushed meeting with no rationale recorded and no alternative offered; the worker has now raised a formal grievance: an unjustified decline (no rationale) and a decline with neither justification nor alternative are two independently-firing high-risk rules, and the active escalation adds a third — escalation also auto-escalates follow-up urgency ahead of the legal-risk check itself, and drives the recommendation straight to escalate-to-hr; the decision rationale, review arrangements, point of contact, and manager fields are not yet completed — expect declined outcome + high-risk legal risk + 38% completeness + escalation-needed follow-up + escalate-to-hr.",
+      "state": {
+        "manager": {
+          "name": "",
+          "role": "",
+          "jobTitle": "",
+          "department": "",
+          "email": "",
+          "phone": ""
+        },
+        "worker": {
+          "name": "Alex Morgan",
+          "jobTitle": "Warehouse Operative",
+          "department": "Logistics",
+          "employeeReference": "EMP-2290",
+          "email": "alex.morgan@example.com",
+          "phone": "07700 900789"
+        },
+        "response": {
+          "responseStatus": "declined",
+          "requestReference": "REQ-2026-0830-NDA",
+          "handlingMethod": "meeting",
+          "assessedDate": "2026-08-30",
+          "respondedDate": "",
+          "effectiveDate": ""
+        },
+        "decision": {
+          "overallDecision": "declined",
+          "decisionRationale": "",
+          "declineReasonCategory": ""
+        },
+        "adjustments": {
+          "agreedWorkingEnvironment": false,
+          "agreedEquipmentTechnology": false,
+          "agreedWorkingArrangements": false,
+          "agreedCommunication": false,
+          "agreedSupportMentoring": false,
+          "agreedRecruitmentProcess": false,
+          "agreedPolicyDress": false,
+          "agreedOther": false,
+          "agreedAdjustmentsDetail": "",
+          "alternativeAdjustmentsDetail": ""
+        },
+        "review": {
+          "trialPeriod": false,
+          "trialPeriodWeeks": null,
+          "reviewScheduled": false,
+          "reviewDate": ""
+        },
+        "support": {
+          "occupationalHealthReferred": false,
+          "accessToWorkReferred": false,
+          "supportResourcesDetail": "",
+          "responsibilitiesDetail": "",
+          "pointOfContact": ""
+        },
+        "signOff": {
+          "escalated": true,
+          "escalationDetail": "Worker has raised a formal grievance disputing the decision to decline all requested adjustments; grievance hearing being scheduled.",
+          "notes": "Decision made verbally in a rushed meeting; no written rationale was recorded at the time."
+        }
+      },
+      "expected": {
+        "outcomeClassification": "declined",
+        "legalRiskBand": "high-risk",
+        "completenessPercent": 38,
+        "followUpUrgency": "escalation-needed",
+        "targetTimeframe": "Escalate now",
+        "recommendation": "escalate-to-hr",
+        "recommendationLabel": "Escalate to HR",
+        "firedRules": [
+          {
+            "ruleId": "R-OUTCOME-DECLINED",
+            "axis": "outcome",
+            "category": "declined",
+            "description": "Requested adjustments declined."
+          },
+          {
+            "ruleId": "R-LEGAL-DECLINE-NO-RATIONALE",
+            "axis": "legal-risk",
+            "category": "high-risk",
+            "description": "Adjustments declined with no rationale recorded — high failure-to-make-reasonable-adjustments risk."
+          },
+          {
+            "ruleId": "R-LEGAL-DECLINE-NO-ALTERNATIVE",
+            "axis": "legal-risk",
+            "category": "high-risk",
+            "description": "Adjustments declined without a reasonableness justification or any alternative offered."
+          },
+          {
+            "ruleId": "R-LEGAL-ESCALATED-DECLINE",
+            "axis": "legal-risk",
+            "category": "high-risk",
+            "description": "Declined adjustment has been escalated — treat as a live discrimination-risk dispute."
+          },
+          {
+            "ruleId": "R-LEGAL-ESCALATED",
+            "axis": "legal-risk",
+            "category": "caution",
+            "description": "Matter escalated (dispute / grievance / appeal)."
+          },
+          {
+            "ruleId": "R-COMPLETE-RATIONALE",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: decision rationale."
+          },
+          {
+            "ruleId": "R-COMPLETE-REVIEW",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: review arrangements."
+          },
+          {
+            "ruleId": "R-COMPLETE-CONTACT",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: point of contact."
+          },
+          {
+            "ruleId": "R-COMPLETE-EFFECTIVE-DATE",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: effective date."
+          },
+          {
+            "ruleId": "R-COMPLETE-RESPONDED-DATE",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: responded date."
+          },
+          {
+            "ruleId": "R-COMPLETE-RESPONSIBILITIES",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: responsibilities."
+          },
+          {
+            "ruleId": "R-COMPLETE-MANAGER",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Mandatory response section missing: manager / HR contact."
+          },
+          {
+            "ruleId": "R-FOLLOWUP-ESCALATED",
+            "axis": "follow-up",
+            "category": "escalation-needed",
+            "description": "Escalation in progress — engage HR / grievance procedure."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-DISCRIMINATION-RISK-001",
+            "category": "discrimination-risk",
+            "priority": "high",
+            "description": "Adjustments declined for a worker likely covered by the Equality Act 2010 without adequate justification or alternatives.",
+            "suggestedAction": "Reconsider the decision, or record a reasonableness justification and offer alternatives before finalising."
+          },
+          {
+            "flagId": "F-GRIEVANCE-001",
+            "category": "grievance-escalation",
+            "priority": "high",
+            "description": "Matter escalated (dispute / grievance / appeal).",
+            "suggestedAction": "Engage HR and follow the grievance / appeal procedure."
+          },
+          {
+            "flagId": "F-MISSING-RATIONALE-001",
+            "category": "missing-rationale",
+            "priority": "high",
+            "description": "A decision was recorded without a rationale.",
+            "suggestedAction": "Record why the decision was reached, especially where anything was declined."
+          },
+          {
+            "flagId": "F-INCOMPLETE-001",
+            "category": "incomplete-response",
+            "priority": "medium",
+            "description": "Mandatory response sections are missing.",
+            "suggestedAction": "Complete the decision, rationale, review arrangements, and point of contact."
+          }
+        ]
+      }
+    }
+  ]
+}
