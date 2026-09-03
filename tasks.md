@@ -1011,9 +1011,29 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       retinopathy (R1) is deliberately not "referable" per NHS Diabetic
       Eye Screening Programme criteria, so it grades minor severity, not
       major, distinct from pre-proliferative / proliferative / maculopathy).
-      22 of 37 forms of this family done, 15 remain (count re-verified
-      directly against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 255/355). 73
+      3 more done 2026-09-03 (fluoroscopy-test-result,
+      hearing-test-result, histopathology-test-result — same
+      methodology; fluoroscopy's second persona isolates a fistula
+      finding, which grades major severity via its own dedicated rule
+      but is deliberately not one of the two triggers in
+      `hasCriticalFinding` (perforation/leak, obstruction), so it
+      escalates only to 'urgent' follow-up, not 'critical-alert';
+      hearing's second persona isolates a conductive-component finding
+      (bilateral otosclerosis) that grades only moderate severity via
+      its own actionable-finding rule, distinct from the PTA-severity
+      ladder and from `hasCriticalFinding`'s sudden-SNHL/asymmetry
+      triggers; histopathology's engine has the richest split of this
+      family — malignancy alone is not a critical finding, only an
+      *unexpected* malignancy (no linked originating request) or an
+      involved resection margin is — so the second persona confirms a
+      biopsy-anticipated, originating-request-linked colorectal
+      adenocarcinoma classifies abnormal + moderate severity and drives
+      urgent MDT follow-up without ever reaching critical-alert, while
+      the third persona's incidental appendiceal adenocarcinoma with no
+      originating request confirms the true unexpected-malignancy
+      critical path). 25 of 37 forms of this family done, 12 remain
+      (count re-verified directly against the fleet each update, not
+      hand-tracked — `bin/test-personas` ground truth: PASS 258/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

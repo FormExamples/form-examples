@@ -1,0 +1,257 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only perforation/leak and obstruction — a fistula grades major severity via its own dedicated rule but is deliberately not in that predicate, so it escalates to 'urgent' follow-up, not 'critical-alert'.",
+  "personas": [
+    {
+      "name": "normal-barium-swallow-complete",
+      "description": "A normal barium swallow for intermittent dysphagia: normal peristalsis, no stricture, filling defect, reflux, fistula, or obstruction, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0820-FLUORO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "studyType": "barium-swallow",
+        "contrastUsed": "barium",
+        "examinationAdequacy": "adequate",
+        "screeningTimeMinutes": 2.5,
+        "clinicalHistory": "Intermittent dysphagia to solids; barium swallow to assess oesophageal motility and structure.",
+        "comparisonWithPrevious": "No previous barium swallow available for comparison.",
+        "findingsNarrative": "Normal oesophageal peristalsis throughout. No stricture, filling defect, reflux, fistula, or obstruction. Smooth mucosal outline.",
+        "stricture": false,
+        "reflux": false,
+        "obstruction": false,
+        "perforationOrLeak": false,
+        "fistula": false,
+        "fillingDefect": false,
+        "dysmotility": false,
+        "normalStudy": true,
+        "incidentalFinding": false,
+        "impression": "Normal barium swallow; no structural or motility abnormality identified.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further fluoroscopic follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific imaging follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-enterocutaneous-fistula-major-not-critical-complete",
+      "description": "A barium follow-through for known Crohn's disease demonstrates a fistulous tract between the terminal ileum and the skin of the right iliac fossa: the fistula grades major severity via its own dedicated rule, but a fistula is deliberately not one of the two triggers in `hasCriticalFinding` (perforation/leak, obstruction), so it escalates only to 'urgent' follow-up, not 'critical-alert'; report complete — expect abnormal classification + major severity + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0825-FLUORO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "studyType": "barium-follow-through",
+        "contrastUsed": "barium",
+        "examinationAdequacy": "adequate",
+        "screeningTimeMinutes": 6,
+        "clinicalHistory": "Known Crohn's disease with persistent perianal discharge; barium follow-through to assess for an enteric fistula.",
+        "comparisonWithPrevious": "Previous follow-through 2 years ago showed terminal ileal Crohn changes without a fistula.",
+        "findingsNarrative": "A fistulous tract is demonstrated between the terminal ileum and the skin of the right iliac fossa, in keeping with an enterocutaneous fistula. No free perforation or obstruction.",
+        "stricture": false,
+        "reflux": false,
+        "obstruction": false,
+        "perforationOrLeak": false,
+        "fistula": true,
+        "fillingDefect": false,
+        "dysmotility": false,
+        "normalStudy": false,
+        "incidentalFinding": false,
+        "impression": "Enterocutaneous fistula arising from the terminal ileum, in keeping with active Crohn's disease.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Refer to the gastroenterology / colorectal surgical MDT for fistula management.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "fistula",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "fistula",
+            "description": "A fistulous tract is demonstrated; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "A fistulous tract requiring timely action is present.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear action plan is documented."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-anastomotic-leak-uncommunicated-incomplete",
+      "description": "A water-soluble contrast swallow shows contrast extravasation at the oesophago-gastric anastomosis, in keeping with an anastomotic leak: this critical finding (perforation / leak) auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history and impression sections are not yet completed while the surgical team responds — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Radiologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "studyType": "water-soluble-contrast-swallow",
+        "contrastUsed": "water-soluble-iodinated",
+        "examinationAdequacy": "adequate",
+        "screeningTimeMinutes": null,
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "Contrast extravasation is seen at the oesophago-gastric anastomosis, in keeping with an anastomotic leak. No contained collection seen on this study.",
+        "stricture": false,
+        "reflux": false,
+        "obstruction": false,
+        "perforationOrLeak": true,
+        "fistula": false,
+        "fillingDefect": false,
+        "dysmotility": false,
+        "normalStudy": false,
+        "incidentalFinding": false,
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the surgical team immediately; patient kept nil by mouth pending review.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (perforation / leak or obstruction) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (perforation / leak or obstruction) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "No fluoroscopy screening time was recorded for dose audit.",
+            "suggestedAction": "Record the total fluoroscopy screening time in minutes for IR(ME)R dose audit."
+          }
+        ]
+      }
+    }
+  ]
+}

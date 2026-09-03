@@ -1,0 +1,298 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only an *unexpected* malignancy (malignancyPresent with no originatingRequestReference) or an involved resection margin — a malignancy the requester already anticipated (a linked originating request) still classifies abnormal and drives urgent MDT follow-up, but does not itself escalate to critical-alert. The second and third personas below isolate exactly that expected-vs-unexpected distinction.",
+  "personas": [
+    {
+      "name": "normal-benign-melanocytic-naevus-complete",
+      "description": "Excision of a pigmented skin lesion shows a benign compound melanocytic naevus with clear margins and no malignancy, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Histopathologist)",
+        "originatingRequestReference": "REQ-2026-0820-HISTO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "specimenType": "skin-excision",
+        "specimenSite": "left forearm",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Excision of a suspicious pigmented lesion on the left forearm for histological assessment.",
+        "comparisonWithPrevious": "No previous biopsy of this lesion.",
+        "macroscopicDescription": "Ellipse of skin measuring 20 x 10mm with a central 4mm pigmented macule. Margins inked.",
+        "microscopicDescription": "Sections show a benign compound melanocytic naevus with no cytological atypia, no mitotic activity, and no evidence of malignancy. Excision margins clear.",
+        "diagnosis": "Benign compound melanocytic naevus, completely excised.",
+        "malignancyPresent": false,
+        "tumourType": "",
+        "histologicalGrade": "not-applicable",
+        "tnmPt": "",
+        "tnmPn": "",
+        "tnmPm": "",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "snomedCode": "",
+        "impression": "Benign melanocytic naevus; no further action required.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further follow-up required for this benign lesion.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "benign",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific pathology follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No malignancy and no abnormal structured findings on an adequate specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-expected-colorectal-adenocarcinoma-moderate-not-critical-complete",
+      "description": "A colonic resection for a pre-operatively biopsy-proven and referred colorectal tumour confirms a moderately differentiated adenocarcinoma, pT2 pN0 pM0, with clear margins: malignancy is present but the report is linked to the originating diagnostic-biopsy request, so this is an *expected* (not unexpected) malignancy and does not trigger `hasCriticalFinding` — it grades only moderate severity (not high-grade or nodal/metastatic), yet confirmed malignancy still drives urgent 2-week-wait MDT follow-up regardless of severity; report complete — expect abnormal classification + moderate severity + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Histopathologist)",
+        "originatingRequestReference": "REQ-2026-0825-HISTO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "specimenType": "colonic-resection",
+        "specimenSite": "sigmoid colon",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "Anterior resection for a pre-operatively biopsy-proven sigmoid adenocarcinoma; specimen submitted for full pathological staging.",
+        "comparisonWithPrevious": "Correlates with the diagnostic colonoscopic biopsy (REQ-2026-0825-HISTO) confirming adenocarcinoma.",
+        "macroscopicDescription": "Segment of sigmoid colon, 180mm in length, with an ulcerating tumour mass measuring 35mm in maximum dimension. Proximal and distal margins grossly clear.",
+        "microscopicDescription": "Sections show an infiltrating moderately differentiated adenocarcinoma invading into the muscularis propria. No lymphovascular invasion identified. Nine regional lymph nodes examined, all free of tumour.",
+        "diagnosis": "Moderately differentiated adenocarcinoma of the sigmoid colon.",
+        "malignancyPresent": true,
+        "tumourType": "adenocarcinoma",
+        "histologicalGrade": "moderately-differentiated",
+        "tnmPt": "pT2",
+        "tnmPn": "pN0",
+        "tnmPm": "pM0",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": false,
+        "immunohistochemistry": "",
+        "snomedCode": "M-81403 |Adenocarcinoma|, T-67000 |Sigmoid colon|",
+        "impression": "pT2 pN0 pM0 moderately differentiated adenocarcinoma of the sigmoid colon, completely excised with clear margins.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Discuss at the colorectal cancer MDT for adjuvant-therapy decision and surveillance planning.",
+        "criticalResultCommunicated": true,
+        "reportedTo": "Colorectal surgical team and cancer MDT coordinator",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "pT2 pN0 pM0, moderately-differentiated",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Refer to the cancer multidisciplinary team (MDT) and expedite onward management per the 2-week-wait pathway.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "malignancy-present",
+            "description": "Malignancy is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "malignancy-present",
+            "description": "Confirmed malignancy present; abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "malignancy-mdt",
+            "description": "Confirmed malignancy or a major abnormality present; urgent MDT discussion required."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Confirmed malignancy requiring timely action is present.",
+            "suggestedAction": "Ensure the requester is alerted and a clear MDT action plan is documented."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Malignancy present; urgent cancer MDT referral is warranted.",
+            "suggestedAction": "Refer to the cancer MDT and manage per the 2-week-wait suspected-cancer pathway."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-unexpected-appendiceal-adenocarcinoma-uncommunicated-incomplete",
+      "description": "A routine appendicectomy for presumed simple appendicitis incidentally shows a poorly differentiated adenocarcinoma with nodal metastasis and lymphovascular invasion: no originating request anticipated a malignancy finding, so this is an *unexpected* malignancy and auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, and the clinical history, diagnosis, and impression sections are not yet completed while the urgent MDT referral is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Histopathologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "specimenType": "appendix",
+        "specimenSite": "right iliac fossa",
+        "specimenAdequacy": "adequate",
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "macroscopicDescription": "Appendix, 60mm in length, with a firm white tumour mass at the tip measuring 18mm.",
+        "microscopicDescription": "Sections show an infiltrating adenocarcinoma arising in the appendix, poorly differentiated, with invasion through the muscularis propria into the mesoappendix. Regional lymph nodes show metastatic involvement in 2 of 9 nodes examined. Lymphovascular invasion identified.",
+        "diagnosis": "",
+        "malignancyPresent": true,
+        "tumourType": "adenocarcinoma",
+        "histologicalGrade": "poorly-differentiated",
+        "tnmPt": "pT3",
+        "tnmPn": "pN1",
+        "tnmPm": "pMx",
+        "resectionMargins": "clear",
+        "lymphovascularInvasion": true,
+        "immunohistochemistry": "",
+        "snomedCode": "",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Incidental finding on a routine appendicectomy specimen; phoned through to the surgical team immediately and urgent colorectal cancer MDT referral being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "pT3 pN1 pMx, poorly-differentiated",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now, refer to the urgent cancer MDT, and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (an unexpected malignancy or an involved resection margin) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-DIAGNOSIS-01",
+            "axis": "completeness",
+            "category": "diagnosis",
+            "description": "Mandatory report section missing: diagnosis."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding (unexpected malignancy or involved margin) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (an unexpected malignancy or an involved resection margin) is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "high",
+            "description": "Malignancy is present but no originating request reference is recorded.",
+            "suggestedAction": "Treat as an unexpected significant finding; alert the requester and link the report to the originating request."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Confirmed malignancy requiring timely action is present.",
+            "suggestedAction": "Ensure the requester is alerted and a clear MDT action plan is documented."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Malignancy present; urgent cancer MDT referral is warranted.",
+            "suggestedAction": "Refer to the cancer MDT and manage per the 2-week-wait suspected-cancer pathway."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-002",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Lymphovascular invasion is identified and may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral and MDT discussion of adjuvant management."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "low",
+            "description": "Malignancy is present but no SNOMED CT code was recorded.",
+            "suggestedAction": "Add the SNOMED CT topography / morphology code mandated by the dataset."
+          }
+        ]
+      }
+    }
+  ]
+}
