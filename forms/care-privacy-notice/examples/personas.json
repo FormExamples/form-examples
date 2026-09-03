@@ -1,0 +1,97 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "grade",
+  "note": "Realistic filled-in states in the engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This is an acknowledgement-only form: `grade` is a three-check completeness validator (box ticked, name present, date present) returning `overallStatus` complete/incomplete plus one fired rule per missing item; there is no severity axis and no separate flags module. The practice-configuration section (practice name, DPO, sharing partners) is notice content only and is never graded.",
+  "personas": [
+    {
+      "name": "complete-acknowledged-signed-dated",
+      "description": "The patient has read the notice, ticked the acknowledgement box, and given their name and the date — expect overallStatus complete with no fired rules.",
+      "state": {
+        "config": {
+          "practiceName": "Riverside Medical Practice",
+          "practiceAddress": "12 Riverside Road, Oxford OX1 1AA",
+          "dpoName": "Sarah Whitfield",
+          "dpoContactDetails": "dpo@riverside-practice.example.nhs.uk",
+          "researchOrganisations": "University of Oxford Primary Care Research Network",
+          "dataSharingPartners": "Oxford University Hospitals NHS Foundation Trust; NHS England"
+        },
+        "acknowledgment": {
+          "checked": true,
+          "patientName": "Jordan Ellis",
+          "date": "2026-08-20"
+        },
+        "submittedAt": null
+      },
+      "expected": {
+        "overallStatus": "complete",
+        "firedRules": []
+      }
+    },
+    {
+      "name": "incomplete-signed-but-box-unticked",
+      "description": "Name and date are filled in but the acknowledgement box was left unticked — the one check that fails is the tick, so expect overallStatus incomplete with exactly one fired rule (acknowledgment-not-checked).",
+      "state": {
+        "config": {
+          "practiceName": "Riverside Medical Practice",
+          "practiceAddress": "12 Riverside Road, Oxford OX1 1AA",
+          "dpoName": "Sarah Whitfield",
+          "dpoContactDetails": "dpo@riverside-practice.example.nhs.uk",
+          "researchOrganisations": "",
+          "dataSharingPartners": "Oxford University Hospitals NHS Foundation Trust"
+        },
+        "acknowledgment": {
+          "checked": false,
+          "patientName": "Sam Okoro",
+          "date": "2026-08-25"
+        },
+        "submittedAt": null
+      },
+      "expected": {
+        "overallStatus": "incomplete",
+        "firedRules": [
+          {
+            "id": "acknowledgment-not-checked",
+            "message": "Patient has not checked the acknowledgment box."
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-nothing-acknowledged",
+      "description": "The notice was opened (practice details configured) but the acknowledgement step was never completed — box unticked, name and date blank, with the date field holding whitespace only, which the trim-based check correctly treats as blank — expect overallStatus incomplete with all three rules fired.",
+      "state": {
+        "config": {
+          "practiceName": "Riverside Medical Practice",
+          "practiceAddress": "12 Riverside Road, Oxford OX1 1AA",
+          "dpoName": "Sarah Whitfield",
+          "dpoContactDetails": "dpo@riverside-practice.example.nhs.uk",
+          "researchOrganisations": "",
+          "dataSharingPartners": ""
+        },
+        "acknowledgment": {
+          "checked": false,
+          "patientName": "",
+          "date": "  "
+        },
+        "submittedAt": null
+      },
+      "expected": {
+        "overallStatus": "incomplete",
+        "firedRules": [
+          {
+            "id": "acknowledgment-not-checked",
+            "message": "Patient has not checked the acknowledgment box."
+          },
+          {
+            "id": "name-blank",
+            "message": "Patient name is required."
+          },
+          {
+            "id": "date-blank",
+            "message": "Date is required."
+          }
+        ]
+      }
+    }
+  ]
+}

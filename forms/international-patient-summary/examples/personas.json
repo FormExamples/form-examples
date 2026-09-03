@@ -1,0 +1,520 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateIPS",
+  "note": "Realistic filled-in states in the IPS validator's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `graderHint` is set explicitly because `bin/test-engines` auto-discovers `classifyCompleteness`, which takes a *counts* object, not the assessment — it only 'passed' on the empty assessment because every property read came back undefined and `undefined < undefined` is false, yielding 'complete'; the real entry point is `validateIPS`. Grading: all 8 mandatory sections populated AND both optional sections populated -> complete; all 8 mandatory but an optional missing -> partial; any mandatory missing -> incomplete. `firedRules` always lists all ten IPS-00x sections with status ok / empty / optional. The separate `detectAdditionalFlags` module is not covered by `expected`.",
+  "personas": [
+    {
+      "name": "complete-all-ten-sections-populated",
+      "description": "A finalised cross-border summary for a patient with a well-documented chronic condition: every mandatory section has at least one usable entry, an implanted device is recorded, and advance-directive consent to EU sharing is answered — expect completenessLevel complete, 8/8 mandatory, 2/2 optional, all ten rules 'ok'.",
+      "state": {
+        "patientDemographics": {
+          "givenName": "Elena",
+          "familyName": "Rossi",
+          "dateOfBirth": "1962-07-18",
+          "sex": "female",
+          "nationalIdentifier": "RSSLNE62L58H501Z",
+          "addressLine": "Via Garibaldi 14",
+          "city": "Bologna",
+          "postalCode": "40124",
+          "country": "IT",
+          "preferredLanguage": "it",
+          "contactPhone": "+39 051 000000"
+        },
+        "problemList": [
+          {
+            "description": "Type 2 diabetes mellitus",
+            "icd10Code": "E11",
+            "onsetDate": "2015-03-01",
+            "status": "active"
+          },
+          {
+            "description": "Essential hypertension",
+            "icd10Code": "I10",
+            "onsetDate": "2012-09-01",
+            "status": "active"
+          }
+        ],
+        "medicationSummary": [
+          {
+            "name": "Metformin",
+            "atcCode": "A10BA02",
+            "dose": "1000 mg",
+            "frequency": "twice daily",
+            "route": "oral"
+          },
+          {
+            "name": "Ramipril",
+            "atcCode": "C09AA05",
+            "dose": "5 mg",
+            "frequency": "once daily",
+            "route": "oral"
+          }
+        ],
+        "allergiesIntolerances": [
+          {
+            "substance": "Penicillin",
+            "reaction": "Urticaria",
+            "severity": "moderate",
+            "criticality": "low"
+          }
+        ],
+        "immunisations": [
+          {
+            "vaccine": "Influenza (seasonal)",
+            "date": "2025-10-12",
+            "lotNumber": "FLU25-0918"
+          },
+          {
+            "vaccine": "COVID-19 mRNA booster",
+            "date": "2025-10-12",
+            "lotNumber": "CV25-3341"
+          }
+        ],
+        "procedures": [
+          {
+            "description": "Laparoscopic cholecystectomy",
+            "date": "2019-05-22",
+            "performer": "Ospedale Maggiore, Bologna"
+          }
+        ],
+        "resultsInvestigations": [
+          {
+            "testName": "HbA1c",
+            "value": "52",
+            "unit": "mmol/mol",
+            "interpretation": "high",
+            "date": "2026-07-30"
+          }
+        ],
+        "medicalDevices": [
+          {
+            "description": "Continuous glucose monitor sensor",
+            "udi": "(01)08717648200274(21)CGM4471",
+            "implantDate": "2026-08-01"
+          }
+        ],
+        "advanceDirectives": {
+          "dnrInPlace": "no",
+          "livingWillInPlace": "no",
+          "consentToShareEu": "yes",
+          "directiveNotes": ""
+        },
+        "authoringClinician": {
+          "clinicianName": "Dr. Marco Bianchi",
+          "clinicianRole": "General practitioner",
+          "organisation": "AUSL Bologna",
+          "country": "IT",
+          "email": "m.bianchi@example.it",
+          "phone": "+39 051 111111",
+          "signoffDate": "2026-08-20",
+          "authoringStatus": "final"
+        }
+      },
+      "expected": {
+        "completenessLevel": "complete",
+        "mandatoryPopulated": 8,
+        "mandatoryTotal": 8,
+        "optionalPopulated": 2,
+        "optionalTotal": 2,
+        "firedRules": [
+          {
+            "id": "IPS-001",
+            "category": "Patient Demographics",
+            "description": "Identifying patient details (name, DOB, sex) populated.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-002",
+            "category": "Problem List",
+            "description": "At least one problem (active or past) recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-003",
+            "category": "Medication Summary",
+            "description": "At least one current or recent medication recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-004",
+            "category": "Allergies & Intolerances",
+            "description": "Allergies recorded, including \"no known allergies\" marker if applicable.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-005",
+            "category": "Immunisations",
+            "description": "At least one immunisation recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-006",
+            "category": "Procedures",
+            "description": "At least one procedure recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-007",
+            "category": "Results & Investigations",
+            "description": "At least one diagnostic result or investigation recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-008",
+            "category": "Authoring Clinician",
+            "description": "Authoring clinician identified and signoff status set.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-009",
+            "category": "Medical Devices / Implants",
+            "description": "Medical devices recorded (optional).",
+            "status": "ok",
+            "mandatory": false
+          },
+          {
+            "id": "IPS-010",
+            "category": "Advance Directives & Consent",
+            "description": "Advance directives or cross-border consent recorded (optional).",
+            "status": "ok",
+            "mandatory": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "partial-mandatory-complete-optional-empty",
+      "description": "A finalised summary for a healthy traveller with no known allergies (recorded via the IPS 'no-known-allergies' substance marker, which the allergies rule accepts as a populated section) and every mandatory section present, but no devices and no advance-directive or consent answers — expect completenessLevel partial, 8/8 mandatory, 0/2 optional, with IPS-009 and IPS-010 reported as 'optional' rather than 'empty'.",
+      "state": {
+        "patientDemographics": {
+          "givenName": "Tomasz",
+          "familyName": "Nowak",
+          "dateOfBirth": "1990-02-05",
+          "sex": "male",
+          "nationalIdentifier": "90020512345",
+          "addressLine": "ul. Długa 8",
+          "city": "Kraków",
+          "postalCode": "31-147",
+          "country": "PL",
+          "preferredLanguage": "pl",
+          "contactPhone": "+48 12 000 0000"
+        },
+        "problemList": [
+          {
+            "description": "Seasonal allergic rhinitis",
+            "icd10Code": "J30.1",
+            "onsetDate": "2008-04-01",
+            "status": "active"
+          }
+        ],
+        "medicationSummary": [
+          {
+            "name": "Cetirizine",
+            "atcCode": "R06AE07",
+            "dose": "10 mg",
+            "frequency": "once daily as required",
+            "route": "oral"
+          }
+        ],
+        "allergiesIntolerances": [
+          {
+            "substance": "no-known-allergies",
+            "reaction": "",
+            "severity": "",
+            "criticality": ""
+          }
+        ],
+        "immunisations": [
+          {
+            "vaccine": "Tetanus-diphtheria booster",
+            "date": "2021-06-14",
+            "lotNumber": "TD21-772"
+          }
+        ],
+        "procedures": [
+          {
+            "description": "Appendicectomy",
+            "date": "2004-11-03",
+            "performer": "Szpital Uniwersytecki, Kraków"
+          }
+        ],
+        "resultsInvestigations": [
+          {
+            "testName": "Full blood count",
+            "value": "Normal",
+            "unit": "",
+            "interpretation": "normal",
+            "date": "2026-01-15"
+          }
+        ],
+        "medicalDevices": [],
+        "advanceDirectives": {
+          "dnrInPlace": "",
+          "livingWillInPlace": "",
+          "consentToShareEu": "",
+          "directiveNotes": ""
+        },
+        "authoringClinician": {
+          "clinicianName": "Dr. Anna Kowalska",
+          "clinicianRole": "Family physician",
+          "organisation": "Przychodnia Rodzinna Kraków",
+          "country": "PL",
+          "email": "a.kowalska@example.pl",
+          "phone": "+48 12 111 1111",
+          "signoffDate": "2026-08-25",
+          "authoringStatus": "final"
+        }
+      },
+      "expected": {
+        "completenessLevel": "partial",
+        "mandatoryPopulated": 8,
+        "mandatoryTotal": 8,
+        "optionalPopulated": 0,
+        "optionalTotal": 2,
+        "firedRules": [
+          {
+            "id": "IPS-001",
+            "category": "Patient Demographics",
+            "description": "Identifying patient details (name, DOB, sex) populated.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-002",
+            "category": "Problem List",
+            "description": "At least one problem (active or past) recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-003",
+            "category": "Medication Summary",
+            "description": "At least one current or recent medication recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-004",
+            "category": "Allergies & Intolerances",
+            "description": "Allergies recorded, including \"no known allergies\" marker if applicable.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-005",
+            "category": "Immunisations",
+            "description": "At least one immunisation recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-006",
+            "category": "Procedures",
+            "description": "At least one procedure recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-007",
+            "category": "Results & Investigations",
+            "description": "At least one diagnostic result or investigation recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-008",
+            "category": "Authoring Clinician",
+            "description": "Authoring clinician identified and signoff status set.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-009",
+            "category": "Medical Devices / Implants",
+            "description": "Medical devices recorded (optional).",
+            "status": "optional",
+            "mandatory": false
+          },
+          {
+            "id": "IPS-010",
+            "category": "Advance Directives & Consent",
+            "description": "Advance directives or cross-border consent recorded (optional).",
+            "status": "optional",
+            "mandatory": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "incomplete-draft-missing-allergies-and-signoff",
+      "description": "A draft still being assembled at an emergency admission: problems, medications, immunisations, procedures, and a result are recorded, but the allergies section holds only a placeholder row with a blank substance (which the allergies rule treats as empty — a row is not enough, it needs a substance or the no-known-allergies marker) and the authoring clinician's status is unset; the patient has explicitly declined cross-border sharing, which populates the optional advance-directives section — expect completenessLevel incomplete, 6/8 mandatory, 1/2 optional.",
+      "state": {
+        "patientDemographics": {
+          "givenName": "Aisha",
+          "familyName": "Bello",
+          "dateOfBirth": "1985-09-30",
+          "sex": "female",
+          "nationalIdentifier": "",
+          "addressLine": "",
+          "city": "Lisbon",
+          "postalCode": "",
+          "country": "PT",
+          "preferredLanguage": "",
+          "contactPhone": ""
+        },
+        "problemList": [
+          {
+            "description": "Asthma",
+            "icd10Code": "",
+            "onsetDate": "2001-01-01",
+            "status": "active"
+          }
+        ],
+        "medicationSummary": [
+          {
+            "name": "Salbutamol inhaler",
+            "atcCode": "R03AC02",
+            "dose": "",
+            "frequency": "as required",
+            "route": "inhaled"
+          }
+        ],
+        "allergiesIntolerances": [
+          {
+            "substance": "",
+            "reaction": "",
+            "severity": "",
+            "criticality": ""
+          }
+        ],
+        "immunisations": [
+          {
+            "vaccine": "Influenza (seasonal)",
+            "date": "2025-11-02",
+            "lotNumber": ""
+          }
+        ],
+        "procedures": [
+          {
+            "description": "Wisdom tooth extraction",
+            "date": "2010-03-15",
+            "performer": ""
+          }
+        ],
+        "resultsInvestigations": [
+          {
+            "testName": "Peak expiratory flow",
+            "value": "310",
+            "unit": "L/min",
+            "interpretation": "low",
+            "date": "2026-08-30"
+          }
+        ],
+        "medicalDevices": [],
+        "advanceDirectives": {
+          "dnrInPlace": "",
+          "livingWillInPlace": "",
+          "consentToShareEu": "no",
+          "directiveNotes": ""
+        },
+        "authoringClinician": {
+          "clinicianName": "Dr. Rui Carvalho",
+          "clinicianRole": "Emergency physician",
+          "organisation": "Hospital de Santa Maria",
+          "country": "PT",
+          "email": "",
+          "phone": "",
+          "signoffDate": "",
+          "authoringStatus": ""
+        }
+      },
+      "expected": {
+        "completenessLevel": "incomplete",
+        "mandatoryPopulated": 6,
+        "mandatoryTotal": 8,
+        "optionalPopulated": 1,
+        "optionalTotal": 2,
+        "firedRules": [
+          {
+            "id": "IPS-001",
+            "category": "Patient Demographics",
+            "description": "Identifying patient details (name, DOB, sex) populated.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-002",
+            "category": "Problem List",
+            "description": "At least one problem (active or past) recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-003",
+            "category": "Medication Summary",
+            "description": "At least one current or recent medication recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-004",
+            "category": "Allergies & Intolerances",
+            "description": "Allergies recorded, including \"no known allergies\" marker if applicable.",
+            "status": "empty",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-005",
+            "category": "Immunisations",
+            "description": "At least one immunisation recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-006",
+            "category": "Procedures",
+            "description": "At least one procedure recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-007",
+            "category": "Results & Investigations",
+            "description": "At least one diagnostic result or investigation recorded.",
+            "status": "ok",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-008",
+            "category": "Authoring Clinician",
+            "description": "Authoring clinician identified and signoff status set.",
+            "status": "empty",
+            "mandatory": true
+          },
+          {
+            "id": "IPS-009",
+            "category": "Medical Devices / Implants",
+            "description": "Medical devices recorded (optional).",
+            "status": "optional",
+            "mandatory": false
+          },
+          {
+            "id": "IPS-010",
+            "category": "Advance Directives & Consent",
+            "description": "Advance directives or cross-border consent recorded (optional).",
+            "status": "ok",
+            "mandatory": false
+          }
+        ]
+      }
+    }
+  ]
+}

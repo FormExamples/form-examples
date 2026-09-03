@@ -1192,18 +1192,40 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       not its `expected` JSON, needed a same-turn arithmetic fix:
       gynecology-assessment's severe persona was hand-computed as 26,
       confirmed by the tool as 27, and the description corrected to
-      match). 13 of these 19 forms remain:
-      hip-replacement-surgery-evaluation, care-privacy-notice,
-      international-patient-summary, lifeguard-certification-checklist,
-      outpatient-outcome, patient-reported-outcome-measures,
-      post-operative-report,
+      match). 3 more done 2026-09-03
+      (hip-replacement-surgery-evaluation, care-privacy-notice,
+      international-patient-summary — all matched on first `--update`).
+      hip-replacement's `deriveCandidacy` is rule-ordered with the
+      conservative-not-exhausted gate checked first, so its first persona
+      is a would-be 'candidate' on OHS 26 / KL 2 forced to
+      'continue-conservative'; the second isolates the 'mdt-review'
+      fallback (KL 3 imaging but OHS 34, outside the 'candidate' rule's
+      OHS <= 29); the third exercises the clinician override
+      (strong-candidate computed, mdt-review final, reason recorded) and
+      confirms flags are unaffected by it. care-privacy-notice is a
+      three-check acknowledgement validator with no severity axis and no
+      flags module. international-patient-summary's `validateIPS` grades
+      complete / partial / incomplete over 8 mandatory + 2 optional
+      ISO 27269 sections, and the second persona confirms the
+      'no-known-allergies' substance marker counts as a populated
+      allergies section. **Two more `bin/test-engines` discovery
+      mis-picks for the Phase 13 tooling item:** it chose `scoreOhs`
+      (OHS sub-instrument, no candidacy/flags) over
+      `calculateHipEvaluation`, and — worse — `classifyCompleteness`
+      for the IPS, a function that takes a *counts* object, not the
+      assessment; it only "passed" on the empty assessment because every
+      property read was undefined and `undefined < undefined` is false,
+      yielding 'complete'. Both persona files set `graderHint`
+      explicitly. 10 of these 19 forms remain:
+      lifeguard-certification-checklist, outpatient-outcome,
+      patient-reported-outcome-measures, post-operative-report,
       recommended-summary-plan-for-emergency-care-and-treatment,
       substance-abuse-assessment,
       systematic-coronary-risk-evaluation-2-diabetes,
       united-kingdom-statement-of-fitness-for-work,
       vaccinations-checklist, ward-round-note (count re-verified
       directly against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 276/355). The remaining
+      `bin/test-personas` ground truth: PASS 279/355). The remaining
       ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
       fuller input / returns a bare object or boolean / no engine
       namespace published) need discovery-hint fixes in their engines
@@ -1336,13 +1358,20 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       score but never the flags. Add an optional `flagsHint` (default:
       auto-discover `detectAdditionalFlags` / `detectFlags`) and merge its
       output under `expected.additionalFlags`; re-pin the affected forms.
-- [ ] **`bin/test-engines` discovery can pick a sub-axis grader.** For
-      hernia-diagnostic-evaluation it reported `classifyHernia` (Axis A
-      only) rather than the composite `calculateHerniaEvaluation`; the
-      persona file had to override with `graderHint`. Prefer exports whose
-      result carries `firedRules` + `flags`, then names starting
-      `calculate`/`grade`; then audit the 279 PASS forms for other
-      partial picks and list them.
+- [ ] **`bin/test-engines` discovery can pick a sub-axis grader — or a
+      non-grader.** Three verified mis-picks so far, each overridden with
+      `graderHint` in the persona file: hernia-diagnostic-evaluation
+      (`classifyHernia`, Axis A only, vs `calculateHerniaEvaluation`);
+      hip-replacement-surgery-evaluation (`scoreOhs`, the OHS
+      sub-instrument, vs `calculateHipEvaluation`); and
+      international-patient-summary (`classifyCompleteness`, which takes
+      a *counts* object, not the assessment — it "passed" on the empty
+      assessment only because `undefined < undefined` is false, so a
+      structurally wrong call still returned 'complete'). Prefer exports
+      whose result carries `firedRules` (+ `flags`), then names starting
+      `calculate`/`grade`/`validate`, and reject candidates whose result
+      has no rule/flag array; then audit the 279 PASS forms for other
+      partial or wrong picks and list them.
 - [ ] **Persona counts, not form counts.** `bin/test-personas` prints
       `PASS 1` for a form with three personas. Report both (`forms 1/1,
       personas 3/3`) and add `--verbose` to list per-persona pass/fail.

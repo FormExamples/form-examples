@@ -1,0 +1,566 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateHipEvaluation",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `graderHint` is set explicitly because `bin/test-engines` auto-discovers `scoreOhs` (the OHS sub-instrument only, no candidacy or flags) rather than the composite public entry point `calculateHipEvaluation`. `deriveCandidacy` is rule-ordered: `conservativeMeasuresExhausted === 'no'` is checked first and overrides every OHS/Kellgren-Lawrence combination (the first persona would otherwise be a 'candidate'); the 'candidate' rule needs OHS <= 29 AND KL >= 2, so a KL-3 hip with an OHS in the mild-to-moderate band falls through to 'mdt-review'. Age and BMI are computed from recorded dates/measurements, not the clock.",
+  "personas": [
+    {
+      "name": "continue-conservative-gate-overrides-candidate",
+      "description": "Moderate hip osteoarthritis (OHS 26, moderate band; Kellgren-Lawrence grade 2) that would satisfy the 'candidate' rule on score and imaging alone, but physiotherapy has only just started and no injection or analgesic trial has been given, so conservative measures are recorded as not exhausted — the first-checked conservative gate overrides everything else: expect computedCandidacy continue-conservative, finalCandidacy continue-conservative (no override), BMI 27, with the conservative-not-exhausted and pre-op-bloods-incomplete flags (nothing has been ordered because the patient is not being listed).",
+      "state": {
+        "status": "submitted",
+        "clinician": {
+          "clinicianName": "Priya Anand",
+          "role": "extended-scope-physiotherapist",
+          "gmcNumber": "",
+          "siteName": "Riverside Musculoskeletal Clinic",
+          "assessmentDate": "2026-08-20",
+          "assessmentTime": "10:15"
+        },
+        "patient": {
+          "name": "David Chen",
+          "birthDate": "1968-04-12",
+          "sex": "male",
+          "nhsNumber": "",
+          "email": "",
+          "phone": "",
+          "heightAsCm": 170,
+          "weightAsKg": 78
+        },
+        "history": {
+          "affectedSide": "left",
+          "symptomDurationMonths": 9,
+          "painAtRest0To10": 2,
+          "painOnActivity0To10": 6,
+          "nightPain": "no",
+          "priorHipSurgery": "no",
+          "priorHipSurgeryDetail": "",
+          "priorInjuryOrDysplasiaHistory": "no",
+          "priorInjuryOrDysplasiaDetail": ""
+        },
+        "ohs": {
+          "painSeverity": 2,
+          "washingAndDrying": 2,
+          "transport": 2,
+          "dressingSocks": 3,
+          "shopping": 2,
+          "walkingPain": 2,
+          "limping": 3,
+          "kneeling": 2,
+          "nightPain": 2,
+          "workInterference": 2,
+          "givingWay": 2,
+          "stairs": 2
+        },
+        "function": {
+          "walkingDistanceBeforePain": "100m-to-1km",
+          "shoesAndSocksDifficulty": "some",
+          "walkingAidUse": "none"
+        },
+        "gait": {
+          "limpPresent": "yes",
+          "antalgicGait": "yes",
+          "trendelenburgSign": "no",
+          "legLengthDiscrepancyAsCm": 0.5
+        },
+        "rangeOfMotion": {
+          "flexionDegrees": 100,
+          "internalRotationDegrees": 15,
+          "externalRotationDegrees": 30,
+          "abductionDegrees": 30,
+          "adductionDegrees": 20,
+          "fixedFlexionDeformityPresent": "no"
+        },
+        "stability": {
+          "hipAbductorStrengthMrc": 4,
+          "jointStability": "stable",
+          "tendernessSite": "groin"
+        },
+        "imaging": {
+          "weightBearingXrayPerformed": "yes",
+          "kellgrenLawrenceGrade": 2,
+          "jointSpaceNarrowing": "mild",
+          "subchondralSclerosisOrCystsPresent": "no",
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "ctPerformed": "no",
+          "ctIndication": ""
+        },
+        "conservative": {
+          "physiotherapyTried": "yes",
+          "physiotherapyDurationWeeks": 3,
+          "weightManagementAdviceGiven": "yes",
+          "steroidInjectionGiven": "no",
+          "steroidInjectionCount": null,
+          "steroidInjectionResponse": "",
+          "analgesicTrialGiven": "no",
+          "analgesicTrialResponse": "",
+          "walkingAidTrial": "no",
+          "conservativeMeasuresExhausted": "no"
+        },
+        "fitness": {
+          "diabetesControlled": "not-diabetic",
+          "cardiacDiseasePresent": "no",
+          "bleedingDisorderOrAnticoagulantUse": "no",
+          "smokingStatus": "never",
+          "generalFitnessNote": "Fit and active; no significant comorbidity."
+        },
+        "baselineTests": {
+          "fullBloodCountDone": "",
+          "renalFunctionDone": "",
+          "clottingOrInrDone": "",
+          "ecgDone": "",
+          "mrsaScreenDone": "",
+          "urinalysisDone": ""
+        },
+        "decisionMaking": {
+          "risksAndBenefitsDiscussed": "yes",
+          "realisticExpectationsDiscussed": "yes",
+          "patientDecisionAidGiven": "yes",
+          "interpreterRequired": "no",
+          "interpreterLanguage": ""
+        },
+        "plan": {
+          "recommendation": "continue-conservative-management",
+          "targetListDate": "",
+          "responsibleSurgeon": ""
+        },
+        "summary": {
+          "overrideCandidacy": "",
+          "overrideReason": "",
+          "clinicianNotes": "Complete a 12-week physiotherapy programme and a regular analgesic trial; review in clinic thereafter.",
+          "additionalNotes": "",
+          "signedByName": "Priya Anand"
+        }
+      },
+      "expected": {
+        "ohsTotal": 26,
+        "ohsCategory": "moderate",
+        "bmi": 27,
+        "kellgrenLawrenceGrade": 2,
+        "computedCandidacy": "continue-conservative",
+        "finalCandidacy": "continue-conservative",
+        "overrideReason": "",
+        "firedRules": [
+          {
+            "ruleId": "R-OHS-TOTAL",
+            "instrument": "ohs",
+            "component": "total",
+            "score": 26,
+            "band": "moderate",
+            "category": "oxford-hip-score",
+            "description": "Oxford Hip Score total 26 of 48 falls in the moderate band."
+          },
+          {
+            "ruleId": "R-IMAGING-KL-GRADE",
+            "instrument": "imaging",
+            "component": "kellgren-lawrence",
+            "score": 2,
+            "band": "2",
+            "category": "radiographic-grading",
+            "description": "Kellgren and Lawrence grade 2."
+          },
+          {
+            "ruleId": "R-CANDIDACY-CONSERVATIVE-NOT-EXHAUSTED",
+            "instrument": "conservative",
+            "component": "exhausted",
+            "score": null,
+            "band": "continue-conservative",
+            "category": "candidacy",
+            "description": "Conservative measures have not been exhausted, so surgery is not yet indicated regardless of the Oxford Hip Score or imaging grade."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CONSERVATIVE-TREATMENT-NOT-EXHAUSTED-001",
+            "category": "conservative-treatment-not-exhausted",
+            "priority": "medium",
+            "description": "Conservative measures have not yet been exhausted.",
+            "suggestedAction": "Complete physiotherapy, weight-management advice, and an analgesic or steroid-injection trial before listing for surgery."
+          },
+          {
+            "flagId": "F-PRE-OP-BLOODS-INCOMPLETE-001",
+            "category": "pre-op-bloods-incomplete",
+            "priority": "medium",
+            "description": "Pre-operative baseline tests not yet done: full blood count, renal function, clotting/INR, ECG, MRSA screen, urinalysis.",
+            "suggestedAction": "Complete the outstanding pre-operative baseline tests before listing for surgery."
+          }
+        ]
+      }
+    },
+    {
+      "name": "mdt-review-severe-imaging-mild-symptoms-mismatch",
+      "description": "Kellgren-Lawrence grade 3 radiographic disease but only mild-to-moderate symptoms (OHS 34), conservative measures exhausted: the 'strong-candidate' rule needs OHS <= 19 and the 'candidate' rule OHS <= 29, so a 34 with severe imaging is the mixed picture that falls through to the multidisciplinary-team fallback; BMI 41.1 (165 cm, 112 kg) crosses the >= 40 surgical-risk threshold, three baseline tests are still outstanding, and the Trendelenburg sign is positive — expect computedCandidacy mdt-review, finalCandidacy mdt-review, with high-BMI and pre-op-bloods flags (medium) and the Trendelenburg flag (low).",
+      "state": {
+        "status": "submitted",
+        "clinician": {
+          "clinicianName": "Dr. Femi Okafor",
+          "role": "orthopaedic-registrar",
+          "gmcNumber": "7654321",
+          "siteName": "City General Hospital — Orthopaedic Clinic",
+          "assessmentDate": "2026-08-25",
+          "assessmentTime": "14:40"
+        },
+        "patient": {
+          "name": "Margaret Wallis",
+          "birthDate": "1957-11-03",
+          "sex": "female",
+          "nhsNumber": "",
+          "email": "",
+          "phone": "",
+          "heightAsCm": 165,
+          "weightAsKg": 112
+        },
+        "history": {
+          "affectedSide": "right",
+          "symptomDurationMonths": 30,
+          "painAtRest0To10": 2,
+          "painOnActivity0To10": 5,
+          "nightPain": "no",
+          "priorHipSurgery": "no",
+          "priorHipSurgeryDetail": "",
+          "priorInjuryOrDysplasiaHistory": "no",
+          "priorInjuryOrDysplasiaDetail": ""
+        },
+        "ohs": {
+          "painSeverity": 3,
+          "washingAndDrying": 3,
+          "transport": 3,
+          "dressingSocks": 3,
+          "shopping": 3,
+          "walkingPain": 3,
+          "limping": 2,
+          "kneeling": 3,
+          "nightPain": 3,
+          "workInterference": 3,
+          "givingWay": 2,
+          "stairs": 3
+        },
+        "function": {
+          "walkingDistanceBeforePain": "over-1km",
+          "shoesAndSocksDifficulty": "some",
+          "walkingAidUse": "none"
+        },
+        "gait": {
+          "limpPresent": "yes",
+          "antalgicGait": "no",
+          "trendelenburgSign": "yes",
+          "legLengthDiscrepancyAsCm": 1
+        },
+        "rangeOfMotion": {
+          "flexionDegrees": 90,
+          "internalRotationDegrees": 10,
+          "externalRotationDegrees": 25,
+          "abductionDegrees": 25,
+          "adductionDegrees": 15,
+          "fixedFlexionDeformityPresent": "no"
+        },
+        "stability": {
+          "hipAbductorStrengthMrc": 3,
+          "jointStability": "stable",
+          "tendernessSite": "greater trochanter"
+        },
+        "imaging": {
+          "weightBearingXrayPerformed": "yes",
+          "kellgrenLawrenceGrade": 3,
+          "jointSpaceNarrowing": "moderate",
+          "subchondralSclerosisOrCystsPresent": "yes",
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "ctPerformed": "no",
+          "ctIndication": ""
+        },
+        "conservative": {
+          "physiotherapyTried": "yes",
+          "physiotherapyDurationWeeks": 16,
+          "weightManagementAdviceGiven": "yes",
+          "steroidInjectionGiven": "yes",
+          "steroidInjectionCount": 2,
+          "steroidInjectionResponse": "partial-relief",
+          "analgesicTrialGiven": "yes",
+          "analgesicTrialResponse": "partial-relief",
+          "walkingAidTrial": "yes",
+          "conservativeMeasuresExhausted": "yes"
+        },
+        "fitness": {
+          "diabetesControlled": "controlled",
+          "cardiacDiseasePresent": "no",
+          "bleedingDisorderOrAnticoagulantUse": "no",
+          "smokingStatus": "ex-smoker",
+          "generalFitnessNote": "Type 2 diabetes, diet-controlled; BMI 41."
+        },
+        "baselineTests": {
+          "fullBloodCountDone": "yes",
+          "renalFunctionDone": "yes",
+          "clottingOrInrDone": "no",
+          "ecgDone": "yes",
+          "mrsaScreenDone": "no",
+          "urinalysisDone": "no"
+        },
+        "decisionMaking": {
+          "risksAndBenefitsDiscussed": "yes",
+          "realisticExpectationsDiscussed": "yes",
+          "patientDecisionAidGiven": "yes",
+          "interpreterRequired": "no",
+          "interpreterLanguage": ""
+        },
+        "plan": {
+          "recommendation": "mdt-review",
+          "targetListDate": "",
+          "responsibleSurgeon": "Mr. A. Patel"
+        },
+        "summary": {
+          "overrideCandidacy": "",
+          "overrideReason": "",
+          "clinicianNotes": "Discrepancy between radiographic severity and reported function; discuss at the arthroplasty MDT with weight-management input.",
+          "additionalNotes": "",
+          "signedByName": "Dr. Femi Okafor"
+        }
+      },
+      "expected": {
+        "ohsTotal": 34,
+        "ohsCategory": "mild-to-moderate",
+        "bmi": 41.1,
+        "kellgrenLawrenceGrade": 3,
+        "computedCandidacy": "mdt-review",
+        "finalCandidacy": "mdt-review",
+        "overrideReason": "",
+        "firedRules": [
+          {
+            "ruleId": "R-OHS-TOTAL",
+            "instrument": "ohs",
+            "component": "total",
+            "score": 34,
+            "band": "mild-to-moderate",
+            "category": "oxford-hip-score",
+            "description": "Oxford Hip Score total 34 of 48 falls in the mild-to-moderate band."
+          },
+          {
+            "ruleId": "R-IMAGING-KL-GRADE",
+            "instrument": "imaging",
+            "component": "kellgren-lawrence",
+            "score": 3,
+            "band": "3",
+            "category": "radiographic-grading",
+            "description": "Kellgren and Lawrence grade 3."
+          },
+          {
+            "ruleId": "R-CANDIDACY-MDT-REVIEW",
+            "instrument": "composite",
+            "component": "candidacy",
+            "score": 34,
+            "band": "mdt-review",
+            "category": "candidacy",
+            "description": "Oxford Hip Score 34 and Kellgren and Lawrence grade 3 form a mixed or borderline picture requiring multidisciplinary-team review."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-BMI-SURGICAL-RISK-001",
+            "category": "high-bmi-surgical-risk",
+            "priority": "medium",
+            "description": "Body mass index 41.1 kg/m² is 40 or above.",
+            "suggestedAction": "Discuss weight-management options and peri-operative risk with the patient before listing; consider a bariatric or weight-management referral."
+          },
+          {
+            "flagId": "F-PRE-OP-BLOODS-INCOMPLETE-001",
+            "category": "pre-op-bloods-incomplete",
+            "priority": "medium",
+            "description": "Pre-operative baseline tests not yet done: clotting/INR, MRSA screen, urinalysis.",
+            "suggestedAction": "Complete the outstanding pre-operative baseline tests before listing for surgery."
+          },
+          {
+            "flagId": "F-TRENDELENBURG-POSITIVE-001",
+            "category": "trendelenburg-positive",
+            "priority": "low",
+            "description": "The Trendelenburg sign is positive, indicating hip abductor weakness.",
+            "suggestedAction": "Note abductor weakness for surgical approach planning and consider pre-habilitation physiotherapy."
+          }
+        ]
+      }
+    },
+    {
+      "name": "strong-candidate-overridden-to-mdt-review",
+      "description": "Severe bilateral hip disease (OHS 14, severe band; Kellgren-Lawrence grade 4) with conservative measures exhausted and all pre-operative baseline tests done: the engine computes strong-candidate, but the surgeon overrides to mdt-review with a recorded reason (cardiac disease plus anticoagulant use need anaesthetic MDT input before listing) — the override changes only the candidacy, never the flags: a 2.5 cm leg-length discrepancy (> 2 cm, medium) and bilateral symptoms (low) still report — expect computedCandidacy strong-candidate, finalCandidacy mdt-review, overrideReason populated.",
+      "state": {
+        "status": "reviewed",
+        "clinician": {
+          "clinicianName": "Mr. Wei Zhang",
+          "role": "orthopaedic-surgeon",
+          "gmcNumber": "1122334",
+          "siteName": "City General Hospital — Orthopaedic Clinic",
+          "assessmentDate": "2026-08-30",
+          "assessmentTime": "09:00"
+        },
+        "patient": {
+          "name": "Thomas Reyes",
+          "birthDate": "1955-03-10",
+          "sex": "male",
+          "nhsNumber": "",
+          "email": "",
+          "phone": "",
+          "heightAsCm": 178,
+          "weightAsKg": 84
+        },
+        "history": {
+          "affectedSide": "bilateral",
+          "symptomDurationMonths": 48,
+          "painAtRest0To10": 6,
+          "painOnActivity0To10": 9,
+          "nightPain": "yes",
+          "priorHipSurgery": "no",
+          "priorHipSurgeryDetail": "",
+          "priorInjuryOrDysplasiaHistory": "no",
+          "priorInjuryOrDysplasiaDetail": ""
+        },
+        "ohs": {
+          "painSeverity": 1,
+          "washingAndDrying": 1,
+          "transport": 1,
+          "dressingSocks": 1,
+          "shopping": 1,
+          "walkingPain": 1,
+          "limping": 1,
+          "kneeling": 2,
+          "nightPain": 1,
+          "workInterference": 1,
+          "givingWay": 2,
+          "stairs": 1
+        },
+        "function": {
+          "walkingDistanceBeforePain": "under-100m",
+          "shoesAndSocksDifficulty": "unable",
+          "walkingAidUse": "stick"
+        },
+        "gait": {
+          "limpPresent": "yes",
+          "antalgicGait": "yes",
+          "trendelenburgSign": "no",
+          "legLengthDiscrepancyAsCm": 2.5
+        },
+        "rangeOfMotion": {
+          "flexionDegrees": 70,
+          "internalRotationDegrees": 0,
+          "externalRotationDegrees": 10,
+          "abductionDegrees": 15,
+          "adductionDegrees": 10,
+          "fixedFlexionDeformityPresent": "yes"
+        },
+        "stability": {
+          "hipAbductorStrengthMrc": 3,
+          "jointStability": "stable",
+          "tendernessSite": "groin"
+        },
+        "imaging": {
+          "weightBearingXrayPerformed": "yes",
+          "kellgrenLawrenceGrade": 4,
+          "jointSpaceNarrowing": "severe",
+          "subchondralSclerosisOrCystsPresent": "yes",
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "ctPerformed": "no",
+          "ctIndication": ""
+        },
+        "conservative": {
+          "physiotherapyTried": "yes",
+          "physiotherapyDurationWeeks": 24,
+          "weightManagementAdviceGiven": "yes",
+          "steroidInjectionGiven": "yes",
+          "steroidInjectionCount": 3,
+          "steroidInjectionResponse": "no-relief",
+          "analgesicTrialGiven": "yes",
+          "analgesicTrialResponse": "no-relief",
+          "walkingAidTrial": "yes",
+          "conservativeMeasuresExhausted": "yes"
+        },
+        "fitness": {
+          "diabetesControlled": "not-diabetic",
+          "cardiacDiseasePresent": "yes",
+          "bleedingDisorderOrAnticoagulantUse": "yes",
+          "smokingStatus": "ex-smoker",
+          "generalFitnessNote": "Atrial fibrillation on apixaban; ischaemic heart disease with stent 2022."
+        },
+        "baselineTests": {
+          "fullBloodCountDone": "yes",
+          "renalFunctionDone": "yes",
+          "clottingOrInrDone": "yes",
+          "ecgDone": "yes",
+          "mrsaScreenDone": "yes",
+          "urinalysisDone": "yes"
+        },
+        "decisionMaking": {
+          "risksAndBenefitsDiscussed": "yes",
+          "realisticExpectationsDiscussed": "yes",
+          "patientDecisionAidGiven": "yes",
+          "interpreterRequired": "no",
+          "interpreterLanguage": ""
+        },
+        "plan": {
+          "recommendation": "mdt-review",
+          "targetListDate": "",
+          "responsibleSurgeon": "Mr. Wei Zhang"
+        },
+        "summary": {
+          "overrideCandidacy": "mdt-review",
+          "overrideReason": "Cardiac disease and anticoagulant use need anaesthetic MDT input before listing; surgical indication itself is not in doubt.",
+          "clinicianNotes": "",
+          "additionalNotes": "Consider staged bilateral replacement, right first.",
+          "signedByName": "Mr. Wei Zhang"
+        }
+      },
+      "expected": {
+        "ohsTotal": 14,
+        "ohsCategory": "severe",
+        "bmi": 26.5,
+        "kellgrenLawrenceGrade": 4,
+        "computedCandidacy": "strong-candidate",
+        "finalCandidacy": "mdt-review",
+        "overrideReason": "Cardiac disease and anticoagulant use need anaesthetic MDT input before listing; surgical indication itself is not in doubt.",
+        "firedRules": [
+          {
+            "ruleId": "R-OHS-TOTAL",
+            "instrument": "ohs",
+            "component": "total",
+            "score": 14,
+            "band": "severe",
+            "category": "oxford-hip-score",
+            "description": "Oxford Hip Score total 14 of 48 falls in the severe band."
+          },
+          {
+            "ruleId": "R-IMAGING-KL-GRADE",
+            "instrument": "imaging",
+            "component": "kellgren-lawrence",
+            "score": 4,
+            "band": "4",
+            "category": "radiographic-grading",
+            "description": "Kellgren and Lawrence grade 4."
+          },
+          {
+            "ruleId": "R-CANDIDACY-STRONG",
+            "instrument": "composite",
+            "component": "candidacy",
+            "score": 14,
+            "band": "strong-candidate",
+            "category": "candidacy",
+            "description": "Oxford Hip Score 14 is 19 or below with Kellgren and Lawrence grade 4: a strong candidate for surgery."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-LEG-LENGTH-DISCREPANCY-SIGNIFICANT-001",
+            "category": "leg-length-discrepancy-significant",
+            "priority": "medium",
+            "description": "Measured leg-length discrepancy of 2.5cm exceeds 2cm.",
+            "suggestedAction": "Factor the discrepancy into templating and surgical planning, and discuss expectations for correction with the patient."
+          },
+          {
+            "flagId": "F-BILATERAL-SYMPTOMATIC-001",
+            "category": "bilateral-symptomatic",
+            "priority": "low",
+            "description": "Both hips are symptomatic.",
+            "suggestedAction": "Discuss staged versus simultaneous bilateral surgery and plan rehabilitation accordingly."
+          }
+        ]
+      }
+    }
+  ]
+}
