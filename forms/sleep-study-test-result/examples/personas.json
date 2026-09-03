@@ -1,0 +1,266 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` requires severe OSA (AHI >= 30) TOGETHER WITH significant desaturation (or nocturnal hypoventilation alone) — severe OSA on its own (no significant desaturation) still grades major severity via the AHI severity band (R-SEV-MAJOR-02) but never trips the critical predicate, so it escalates only to 'urgent' follow-up, not 'critical-alert'. The second persona below isolates exactly that distinction.",
+  "personas": [
+    {
+      "name": "normal-home-sleep-apnoea-test-complete",
+      "description": "A home sleep apnoea test for reported snoring with no witnessed apnoeas or daytime sleepiness: AHI 3.2 (normal range), no significant desaturation, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Respiratory Physician)",
+        "originatingRequestReference": "REQ-2026-0820-SLEEP",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "studyType": "home-sleep-apnoea-test",
+        "studyAdequacy": "adequate",
+        "clinicalHistory": "Snoring reported by partner, no witnessed apnoeas or excessive daytime sleepiness; home sleep apnoea test to screen for OSA.",
+        "comparisonWithPrevious": "No previous sleep study on file.",
+        "totalRecordingTimeHours": 7.5,
+        "totalSleepTimeHours": 6.8,
+        "apnoeaHypopnoeaIndex": 3.2,
+        "oxygenDesaturationIndex": 2.8,
+        "minimumSpo2Percent": 93,
+        "timeBelow90PercentSpo2": 0,
+        "meanHeartRateBpm": 64,
+        "osaSeverity": "none",
+        "obstructiveSleepApnoea": false,
+        "centralSleepApnoea": false,
+        "periodicLimbMovements": false,
+        "nocturnalHypoventilation": false,
+        "significantDesaturation": false,
+        "normalStudy": true,
+        "findingsNarrative": "No significant sleep-disordered breathing. AHI 3.2 (normal range). No significant oxygen desaturation.",
+        "impression": "Normal home sleep apnoea test; no evidence of obstructive sleep apnoea.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further sleep-study follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "No OSA (AHI <5)",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific sleep-study follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable study; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-severe-osa-no-desaturation-major-not-critical-complete",
+      "description": "Attended polysomnography for loud snoring, witnessed apnoeas, and excessive daytime sleepiness confirms severe obstructive sleep apnoea (AHI 42) without significant desaturation (minimum SpO2 88%): `hasCriticalFinding` requires severe OSA together with significant desaturation specifically, so this grades major severity via the AHI severity band alone but never trips the critical predicate — it escalates only to 'urgent' follow-up, not 'critical-alert'; report complete — expect abnormal classification + major severity (reportingCategory Severe OSA (AHI >=30)) + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Respiratory Physician)",
+        "originatingRequestReference": "REQ-2026-0825-SLEEP",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "studyType": "polysomnography",
+        "studyAdequacy": "adequate",
+        "clinicalHistory": "Loud snoring, witnessed apnoeas, and excessive daytime sleepiness (Epworth 16/24); attended polysomnography to confirm suspected severe OSA.",
+        "comparisonWithPrevious": "No previous sleep study on file.",
+        "totalRecordingTimeHours": 8,
+        "totalSleepTimeHours": 6.5,
+        "apnoeaHypopnoeaIndex": 42,
+        "oxygenDesaturationIndex": 38,
+        "minimumSpo2Percent": 88,
+        "timeBelow90PercentSpo2": 12,
+        "meanHeartRateBpm": 70,
+        "osaSeverity": "severe",
+        "obstructiveSleepApnoea": true,
+        "centralSleepApnoea": false,
+        "periodicLimbMovements": false,
+        "nocturnalHypoventilation": false,
+        "significantDesaturation": false,
+        "normalStudy": false,
+        "findingsNarrative": "Frequent obstructive apnoeas and hypopnoeas throughout the recording, AHI 42 (severe), predominantly supine and REM-related. Oxygen desaturation index 38; minimum SpO2 88%, without sustained or significant desaturation.",
+        "impression": "Severe obstructive sleep apnoea (AHI 42).",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Refer to the sleep clinic for CPAP titration; advise on DVLA driving implications pending treatment.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "Severe OSA (AHI >=30)",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Arrange urgent sleep-clinic review for CPAP titration and advise on DVLA driving implications.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "severe-osa",
+            "description": "Severe OSA (AHI >= 30); abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality (severe OSA) present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Severe OSA (AHI >= 30) is present and requires timely action.",
+            "suggestedAction": "Ensure the referrer is alerted and arrange a sleep-clinic review for CPAP titration."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-severe-osa-significant-desaturation-uncommunicated-incomplete",
+      "description": "Polysomnography shows very frequent obstructive apnoeas and hypopnoeas (AHI 65, severe) with profound and sustained oxygen desaturation — minimum SpO2 71%, 95 minutes spent below 90% SpO2: severe OSA together with significant desaturation is a critical finding that auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes, with the recommended action naming an urgent CPAP / ventilation review and DVLA driving implications; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history, comparison, and impression sections are not yet completed while urgent CPAP initiation is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Respiratory Physician)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "studyType": "polysomnography",
+        "studyAdequacy": "adequate",
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "totalRecordingTimeHours": 8,
+        "totalSleepTimeHours": 6.2,
+        "apnoeaHypopnoeaIndex": 65,
+        "oxygenDesaturationIndex": 60,
+        "minimumSpo2Percent": 71,
+        "timeBelow90PercentSpo2": 95,
+        "meanHeartRateBpm": 78,
+        "osaSeverity": "severe",
+        "obstructiveSleepApnoea": true,
+        "centralSleepApnoea": false,
+        "periodicLimbMovements": false,
+        "nocturnalHypoventilation": false,
+        "significantDesaturation": true,
+        "normalStudy": false,
+        "findingsNarrative": "Very frequent obstructive apnoeas and hypopnoeas throughout the recording, AHI 65 (severe), with profound and sustained oxygen desaturation: minimum SpO2 71%, 95 minutes spent below 90% SpO2.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the on-call respiratory team immediately; urgent CPAP initiation being arranged and patient advised not to drive pending treatment.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "Severe OSA (AHI >=30)",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Arrange an urgent CPAP / ventilation review, communicate the critical result directly to the referrer now and document the conversation, and advise on occupational-driver (DVLA) implications.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (severe OSA with significant desaturation, or nocturnal hypoventilation) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous studies."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (severe OSA with significant desaturation, or nocturnal hypoventilation) is present.",
+            "suggestedAction": "Arrange an urgent CPAP / ventilation review, communicate the critical result to the referrer immediately, document the communication, and advise on DVLA driving implications."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

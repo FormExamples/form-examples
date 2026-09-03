@@ -1078,9 +1078,27 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       trips the critical predicate, since only the acute demyelinating
       (GBS-like) pattern is treated as the medical emergency, distinct
       from the third persona's motor-neurone-disease critical path).
-      31 of 37 forms of this family done, 6 remain (count re-verified
-      directly against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 264/355). 73
+      3 more done 2026-09-03 (nuclear-medicine-test-result,
+      pet-scan-test-result, sleep-study-test-result — same methodology;
+      nuclear-medicine's second persona isolates a reduced ejection
+      fraction (< 40%) on a myocardial perfusion gated SPECT, a
+      dedicated major-severity rule checked BEFORE the perfusion-defect
+      actionable-finding rule and entirely independent of
+      `hasCriticalFinding` (a perfusion defect only counts toward
+      critical on a `vq-lung-scan`, never on myocardial-perfusion), so
+      it escalates only to 'urgent'; pet-scan's second persona isolates
+      a high SUVmax (>= 10) primary lesion with no nodal or distant
+      spread, a dedicated major-severity rule wholly separate from
+      `hasCriticalFinding` (distant metastasis / progressive disease
+      only); sleep-study's `hasCriticalFinding` requires severe OSA
+      (AHI >= 30) TOGETHER WITH significant desaturation (or nocturnal
+      hypoventilation alone) — the second persona's severe OSA (AHI 42)
+      with no significant desaturation grades major severity via the
+      AHI band alone but never trips the critical predicate, distinct
+      from the third persona's severe-OSA-plus-desaturation critical
+      path). 34 of 37 forms of this family done, 3 remain
+      (count re-verified directly against the fleet each update, not
+      hand-tracked — `bin/test-personas` ground truth: PASS 267/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

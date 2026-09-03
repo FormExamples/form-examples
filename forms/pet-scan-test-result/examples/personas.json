@@ -1,0 +1,264 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only distant metastasis and a progressive metabolic treatment response — a high SUVmax (>= 10) is its own dedicated major-severity trigger (R-SEV-MAJOR-02), entirely independent of `hasCriticalFinding`, so an intensely avid primary lesion with no nodal or distant spread grades major severity but escalates only to 'urgent' follow-up, not 'critical-alert'.",
+  "personas": [
+    {
+      "name": "normal-fdg-pet-ct-complete-response-complete",
+      "description": "An interval FDG PET-CT for post-treatment Hodgkin lymphoma surveillance: no abnormal FDG-avid lesion, physiological tracer distribution only, complete metabolic response maintained, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Nuclear Medicine Physician)",
+        "originatingRequestReference": "REQ-2026-0820-PET",
+        "scanType": "fdg-pet-ct",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "clinicalHistory": "Post-treatment surveillance for Hodgkin lymphoma, previously in complete remission; interval FDG PET-CT.",
+        "bloodGlucoseMmolL": 5.2,
+        "injectedActivityMbq": 280,
+        "examinationAdequacy": "adequate",
+        "findingsNarrative": "No abnormal FDG-avid lesion identified. Physiological tracer distribution only, with normal biodistribution in the brain, myocardium, liver, and urinary tract.",
+        "hypermetabolicLesion": false,
+        "nodalUptake": false,
+        "distantMetastasis": false,
+        "noAbnormalUptake": true,
+        "physiologicalUptakeOnly": true,
+        "incidentalFinding": false,
+        "suvMax": null,
+        "largestLesionSizeMm": null,
+        "comparisonWithPrevious": "Compared with the prior post-treatment PET-CT 6 months ago, also showing no abnormal uptake.",
+        "treatmentResponse": "complete",
+        "impression": "No FDG-avid disease; complete metabolic response maintained.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Continue routine surveillance per the lymphoma follow-up pathway.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific imaging follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-high-avidity-lung-primary-major-not-critical-complete",
+      "description": "A staging FDG PET-CT for newly diagnosed non-small-cell lung cancer shows an intensely FDG-avid right upper lobe mass (28mm, SUVmax 12.5) with no nodal or distant metastatic disease: SUVmax >= 10 is a dedicated major-severity trigger (R-SEV-MAJOR-02) entirely independent of `hasCriticalFinding` (distant metastasis or progressive disease only), so this grades major severity but escalates only to 'urgent' follow-up, never critical-alert; report complete — expect abnormal classification + major severity (reportingCategory high-avidity) + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Nuclear Medicine Physician)",
+        "originatingRequestReference": "REQ-2026-0825-PET",
+        "scanType": "fdg-pet-ct",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "clinicalHistory": "Newly diagnosed non-small-cell lung cancer; staging FDG PET-CT.",
+        "bloodGlucoseMmolL": 5.8,
+        "injectedActivityMbq": 300,
+        "examinationAdequacy": "adequate",
+        "findingsNarrative": "An intensely FDG-avid spiculated mass is seen in the right upper lobe, measuring 28mm, with SUVmax 12.5. No FDG-avid mediastinal or hilar nodal uptake. No evidence of distant metastatic disease.",
+        "hypermetabolicLesion": true,
+        "nodalUptake": false,
+        "distantMetastasis": false,
+        "noAbnormalUptake": false,
+        "physiologicalUptakeOnly": false,
+        "incidentalFinding": false,
+        "suvMax": 12.5,
+        "largestLesionSizeMm": 28,
+        "comparisonWithPrevious": "No previous PET-CT on file.",
+        "treatmentResponse": "not-applicable",
+        "impression": "Highly FDG-avid right upper lobe mass (SUVmax 12.5), consistent with the known non-small-cell lung cancer. No nodal or distant metastatic disease identified on this study.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Discuss at the lung cancer MDT for staging confirmation and treatment planning.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "high-avidity",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward oncology referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "high-avidity",
+            "description": "Highly tracer-avid disease (SUVmax 10 or greater); abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Abnormal tracer uptake (hypermetabolic lesion or nodal uptake) is present and may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate oncology / specialist team."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-widespread-distant-metastasis-uncommunicated-incomplete",
+      "description": "A staging FDG PET-CT shows an intensely FDG-avid primary right upper lobe mass with FDG-avid mediastinal and contralateral hilar nodal disease, and multiple FDG-avid hepatic and osseous lesions in keeping with widespread distant metastatic disease: distant metastasis auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history, comparison, and impression sections are not yet completed while an urgent MDT discussion is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Nuclear Medicine Physician)",
+        "originatingRequestReference": "",
+        "scanType": "fdg-pet-ct",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "clinicalHistory": "",
+        "bloodGlucoseMmolL": 6.1,
+        "injectedActivityMbq": 290,
+        "examinationAdequacy": "adequate",
+        "findingsNarrative": "Intensely FDG-avid primary mass in the right upper lobe, with FDG-avid mediastinal and contralateral hilar nodal disease, and multiple FDG-avid hepatic and osseous lesions in keeping with widespread distant metastatic disease.",
+        "hypermetabolicLesion": true,
+        "nodalUptake": true,
+        "distantMetastasis": true,
+        "noAbnormalUptake": false,
+        "physiologicalUptakeOnly": false,
+        "incidentalFinding": false,
+        "suvMax": 16.8,
+        "largestLesionSizeMm": 42,
+        "comparisonWithPrevious": "",
+        "treatmentResponse": "not-applicable",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the referring respiratory and oncology teams immediately; urgent lung cancer MDT discussion being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, request urgent oncology review, and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (distant metastasis or progressive disease) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding (distant metastasis or progressive disease) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (distant metastasis or progressive disease) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, request urgent oncology review, and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Distant metastatic disease is present and requires timely action.",
+            "suggestedAction": "Ensure the referrer is alerted and a clear oncology action plan is documented."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}
