@@ -1,0 +1,303 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine is driven primarily by the ACR BI-RADS final assessment category rather than the structured-finding booleans: BI-RADS 4a/4b is `isBiRadsUrgent` (urgent follow-up, specialist-referral) but only BI-RADS 4c/5 is `isBiRadsCritical` (critical-alert, urgent-review) — the second persona below isolates the 4a urgent band to prove it stays short of critical-alert, distinct from the third persona's BI-RADS 5.",
+  "personas": [
+    {
+      "name": "normal-screening-birads-1-complete",
+      "description": "A routine three-yearly NHS Breast Screening Programme mammogram, asymptomatic: no structured findings in either breast, BI-RADS 1 (negative), every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0820-MAMMO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "examType": "screening",
+        "laterality": "bilateral",
+        "examinationAdequacy": "adequate",
+        "breastDensity": "b",
+        "clinicalHistory": "Routine three-yearly NHS Breast Screening Programme mammogram, asymptomatic.",
+        "comparisonWithPrevious": "Previous screening mammogram 3 years ago, also normal, available for comparison.",
+        "findingsNarrative": "No mass, calcifications, architectural distortion, asymmetry, skin/nipple change, or lymphadenopathy in either breast. Scattered fibroglandular density.",
+        "mass": false,
+        "calcifications": false,
+        "architecturalDistortion": false,
+        "asymmetry": false,
+        "skinOrNippleChange": false,
+        "lymphadenopathy": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": null,
+        "impression": "No mammographic evidence of malignancy.",
+        "biRadsCategory": "1",
+        "recommendedFollowUp": "Return to routine three-yearly screening interval.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "BI-RADS 1",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "routine screening interval",
+        "recommendedAction": "Return to the routine screening interval; no specific follow-up required.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "birads-negative",
+            "description": "BI-RADS 1 (negative or benign); classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "birads-negative",
+            "description": "BI-RADS 1 (negative / benign); abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine screening interval only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-birads-4a-suspicious-mass-urgent-not-critical-complete",
+      "description": "A diagnostic mammogram for a 3-week palpable left breast lump shows an irregular, spiculated 12mm mass, BI-RADS 4a: `isBiRadsUrgent` covers 4a/4b (urgent tissue-diagnosis referral) but only 4c/5 is `isBiRadsCritical`, so this stays on the urgent pathway and never reaches critical-alert; report complete — expect abnormal classification + moderate severity (reportingCategory BI-RADS 4a) + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0825-MAMMO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "examType": "diagnostic",
+        "laterality": "left",
+        "examinationAdequacy": "adequate",
+        "breastDensity": "c",
+        "clinicalHistory": "Palpable lump in the left breast, upper outer quadrant, for 3 weeks; diagnostic mammogram as part of triple assessment.",
+        "comparisonWithPrevious": "No previous mammogram on file.",
+        "findingsNarrative": "An irregular, spiculated mass measuring 12mm is seen in the left upper outer quadrant, corresponding to the palpable abnormality. No associated calcifications, skin change, or axillary lymphadenopathy.",
+        "mass": true,
+        "calcifications": false,
+        "architecturalDistortion": false,
+        "asymmetry": false,
+        "skinOrNippleChange": false,
+        "lymphadenopathy": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": 12,
+        "impression": "Irregular spiculated left breast mass, BI-RADS 4a; suspicious, biopsy recommended.",
+        "biRadsCategory": "4a",
+        "recommendedFollowUp": "Refer for image-guided (ultrasound-guided) core biopsy on the two-week-wait pathway.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "BI-RADS 4a",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "two-week-wait biopsy",
+        "recommendedAction": "Refer for tissue diagnosis / image-guided biopsy on a two-week-wait pathway.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "birads-suspicious",
+            "description": "BI-RADS 4a (probably benign or suspicious); classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "birads-suspicious",
+            "description": "BI-RADS 4a (suspicious); abnormality severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "birads-suspicious",
+            "description": "BI-RADS 4a (suspicious); urgent tissue diagnosis / biopsy referral."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "BI-RADS 4a final assessment requires tissue diagnosis / action.",
+            "suggestedAction": "Ensure the referrer is alerted and an image-guided biopsy is arranged."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "high",
+            "description": "Suspected cancer — refer on a two-week-wait (2WW) breast pathway.",
+            "suggestedAction": "Refer for image-guided biopsy and communicate to the breast MDT."
+          },
+          {
+            "flagId": "F-BREAST-LUMP-001",
+            "category": "abnormal-requiring-action",
+            "priority": "medium",
+            "description": "A mass is reported on a symptomatic / diagnostic study (palpable breast lump).",
+            "suggestedAction": "Correlate clinically and ensure triple assessment is completed."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-birads-5-uncommunicated-incomplete",
+      "description": "A large, irregular, highly spiculated 34mm right breast mass with pleomorphic calcifications, skin thickening, and axillary lymphadenopathy, BI-RADS 5 (highly suggestive of malignancy): `isBiRadsCritical` auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history, comparison, and impression sections are not yet completed while urgent biopsy and MDT referral are arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Radiologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "examType": "symptomatic",
+        "laterality": "right",
+        "examinationAdequacy": "adequate",
+        "breastDensity": "d",
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "A large, irregular, highly spiculated mass measuring 34mm is seen in the right breast at the 10 o'clock position, with associated pleomorphic calcifications and skin thickening. Right axillary lymphadenopathy is also noted.",
+        "mass": true,
+        "calcifications": true,
+        "architecturalDistortion": true,
+        "asymmetry": false,
+        "skinOrNippleChange": true,
+        "lymphadenopathy": true,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": 34,
+        "impression": "",
+        "biRadsCategory": "5",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the breast care nurse specialist and breast surgical team immediately; urgent biopsy and MDT referral being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "BI-RADS 5",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "two-week-wait biopsy",
+        "recommendedAction": "Refer for image-guided biopsy and communicate to the breast MDT now; document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "birads-high",
+            "description": "BI-RADS 5 (≥ 50 % likelihood of malignancy); classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "birads-high",
+            "description": "BI-RADS 5; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "birads-critical",
+            "description": "BI-RADS 4c or 5 (highly suspicious) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "BI-RADS 5 (≥ 50 % likelihood of malignancy) is a critical result.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical BI-RADS result but it has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "BI-RADS 5 final assessment requires tissue diagnosis / action.",
+            "suggestedAction": "Ensure the referrer is alerted and an image-guided biopsy is arranged."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "high",
+            "description": "Suspected cancer — refer on a two-week-wait (2WW) breast pathway.",
+            "suggestedAction": "Refer for image-guided biopsy and communicate to the breast MDT."
+          },
+          {
+            "flagId": "F-BREAST-LUMP-001",
+            "category": "abnormal-requiring-action",
+            "priority": "medium",
+            "description": "A mass is reported on a symptomatic / diagnostic study (palpable breast lump).",
+            "suggestedAction": "Correlate clinically and ensure triple assessment is completed."
+          },
+          {
+            "flagId": "F-NIPPLE-CHANGE-001",
+            "category": "abnormal-requiring-action",
+            "priority": "medium",
+            "description": "A skin or nipple change (e.g. retraction, bloody nipple discharge) is documented.",
+            "suggestedAction": "Correlate with clinical examination; consider further imaging / referral."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-002",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "Axillary or intramammary lymphadenopathy is present and may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral and nodal assessment as clinically indicated."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

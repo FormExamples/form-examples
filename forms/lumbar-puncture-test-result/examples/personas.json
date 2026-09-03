@@ -1,0 +1,268 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `culturePositive` treats a free-text `cultureResult` as positive unless it matches a recognised negative phrase (no growth / negative / sterile / no organism / not grown / awaited / pending) — 'No growth after 48 hours incubation.' correctly reads as negative. The second persona isolates `viralPattern` (its own dedicated moderate-severity trigger) with a negative culture, so it never reaches the critical/bacterial pathway even with a markedly raised white cell count.",
+  "personas": [
+    {
+      "name": "normal-clear-csf-complete",
+      "description": "A normal lumbar puncture for headache work-up: clear CSF, normal opening pressure, normal cell counts and biochemistry, negative microbiology, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Neurologist)",
+        "originatingRequestReference": "REQ-2026-0820-LP",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "clinicalHistory": "Progressive headache with no focal neurology; lumbar puncture to exclude raised intracranial pressure and infection.",
+        "openingPressureCmh2o": 16,
+        "csfAppearance": "clear",
+        "csfWhiteCellCount": 2,
+        "csfRedCellCount": 0,
+        "csfProteinGL": 0.35,
+        "csfGlucoseMmolL": 3.2,
+        "csfSerumGlucoseRatio": 0.62,
+        "csfLactateMmolL": 1.5,
+        "gramStainResult": "No organisms seen.",
+        "cultureResult": "No growth after 48 hours incubation.",
+        "pcrResult": "Negative for herpes simplex virus and enterovirus.",
+        "oligoclonalBands": "negative",
+        "xanthochromia": "negative",
+        "raisedProtein": false,
+        "pleocytosis": false,
+        "lowGlucose": false,
+        "bacterialMeningitisPattern": false,
+        "viralPattern": false,
+        "subarachnoidHaemorrhageSuggested": false,
+        "normalCsf": true,
+        "findingsNarrative": "Clear CSF with a normal opening pressure. Normal cell counts, protein, and glucose ratio. No organisms seen on Gram stain; no growth on culture.",
+        "impression": "Normal CSF analysis; no evidence of infection or raised intracranial pressure.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further CSF follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific CSF follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured CSF findings on an interpretable analysis; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal CSF finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-viral-meningitis-pattern-moderate-not-critical-complete",
+      "description": "A lymphocytic pleocytosis with a mildly raised opening pressure, negative Gram stain and culture, and enterovirus RNA detected on PCR: `viralPattern` is its own dedicated moderate-severity trigger, entirely independent of `hasCriticalFinding` (bacterial meningitis pattern, suggested SAH, or positive culture) — the negative culture ('No growth') is explicitly not treated as positive despite the markedly raised white cell count, so this never reaches the critical pathway; report complete — expect abnormal classification + moderate severity (reportingCategory viral-pattern) + 100% completeness + recommended follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Neurologist)",
+        "originatingRequestReference": "REQ-2026-0825-LP",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "clinicalHistory": "Fever, headache, and neck stiffness for 2 days with no rash; lumbar puncture to distinguish viral from bacterial meningitis.",
+        "openingPressureCmh2o": 22,
+        "csfAppearance": "clear",
+        "csfWhiteCellCount": 150,
+        "csfRedCellCount": 2,
+        "csfProteinGL": 0.55,
+        "csfGlucoseMmolL": 3,
+        "csfSerumGlucoseRatio": 0.58,
+        "csfLactateMmolL": 2,
+        "gramStainResult": "No organisms seen.",
+        "cultureResult": "No growth after 48 hours incubation.",
+        "pcrResult": "Enterovirus RNA detected.",
+        "oligoclonalBands": "negative",
+        "xanthochromia": "negative",
+        "raisedProtein": false,
+        "pleocytosis": true,
+        "lowGlucose": false,
+        "bacterialMeningitisPattern": false,
+        "viralPattern": true,
+        "subarachnoidHaemorrhageSuggested": false,
+        "normalCsf": false,
+        "findingsNarrative": "Lymphocytic pleocytosis (150 cells/microlitre, predominantly lymphocytes) with a mildly raised opening pressure. Protein and CSF:serum glucose ratio within normal limits. No organisms on Gram stain; no growth on culture; enterovirus RNA detected on CSF PCR.",
+        "impression": "CSF pattern consistent with viral (enteroviral) meningitis; no evidence of bacterial infection.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Supportive management; discuss with infectious diseases if the clinical course does not improve as expected.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "viral-pattern",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "within 2 weeks",
+        "recommendedAction": "Recommend specialist review or repeat sampling as clinically indicated.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured CSF findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "actionable-pattern",
+            "description": "An actionable abnormal CSF pattern (viral pattern, low glucose, combined pleocytosis with raised protein, or positive xanthochromia) is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-01",
+            "axis": "follow-up",
+            "category": "moderate-abnormality",
+            "description": "Moderate abnormality present; follow-up recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "critical-bacterial-meningitis-uncommunicated-incomplete",
+      "description": "Turbid CSF with a markedly raised opening pressure, neutrophilic pleocytosis, raised protein, and a low CSF:serum glucose ratio: Gram-negative diplococci are seen on direct microscopy and Neisseria meningitidis is subsequently isolated on culture — a bacterial meningitis pattern and a positive culture are each independently a critical CSF result, auto-escalating classification to critical and follow-up to critical-alert regardless of the other axes, with the recommended action explicitly naming not delaying antibiotics for investigations per NICE NG240; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history and impression sections are not yet completed while empirical treatment is already underway — expect critical classification + major severity + 60% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Microbiologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "clinicalHistory": "",
+        "openingPressureCmh2o": 32,
+        "csfAppearance": "turbid",
+        "csfWhiteCellCount": 2400,
+        "csfRedCellCount": 5,
+        "csfProteinGL": 3.8,
+        "csfGlucoseMmolL": 1.1,
+        "csfSerumGlucoseRatio": 0.18,
+        "csfLactateMmolL": 6.2,
+        "gramStainResult": "Gram-negative diplococci seen on direct microscopy.",
+        "cultureResult": "Neisseria meningitidis isolated on culture.",
+        "pcrResult": "",
+        "oligoclonalBands": "not-tested",
+        "xanthochromia": "not-tested",
+        "raisedProtein": true,
+        "pleocytosis": true,
+        "lowGlucose": true,
+        "bacterialMeningitisPattern": true,
+        "viralPattern": false,
+        "subarachnoidHaemorrhageSuggested": false,
+        "normalCsf": false,
+        "findingsNarrative": "Turbid CSF with markedly raised opening pressure, neutrophilic pleocytosis, raised protein, and a low CSF:serum glucose ratio. Gram-negative diplococci seen on direct microscopy; Neisseria meningitidis subsequently isolated on culture.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the on-call infectious diseases and ICU teams immediately; patient already commenced on empirical IV antibiotics per NICE NG240.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "bacterial-pattern",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requesting / responsible clinician now, do not delay antibiotics for investigations (NICE NG240), and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-result",
+            "description": "A critical CSF result (bacterial meningitis pattern, suggested subarachnoid haemorrhage, or positive culture) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-result",
+            "description": "Critical CSF result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical CSF result auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical CSF result (bacterial meningitis pattern, suggested subarachnoid haemorrhage, or positive culture) is present.",
+            "suggestedAction": "Communicate the critical result to the requesting clinician immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical CSF result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requesting clinician now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "A bacterial meningitis CSF pattern is present and requires immediate action.",
+            "suggestedAction": "Ensure empirical antibiotics are given without delay per NICE NG240 and the responsible team is alerted."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-DISCREPANCY-001",
+            "category": "discrepancy-with-request",
+            "priority": "low",
+            "description": "A positive culture is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

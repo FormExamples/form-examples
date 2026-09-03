@@ -1031,9 +1031,30 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       urgent MDT follow-up without ever reaching critical-alert, while
       the third persona's incidental appendiceal adenocarcinoma with no
       originating request confirms the true unexpected-malignancy
-      critical path). 25 of 37 forms of this family done, 12 remain
+      critical path). 3 more done 2026-09-03 (holter-monitor-test-result,
+      lumbar-puncture-test-result, mammography-test-result — same
+      methodology; holter's second persona isolates paroxysmal atrial
+      fibrillation with a controlled ventricular rate (max 132 bpm,
+      below the 150 bpm `FAST_AF_MAX_HR_BPM` threshold), which grades
+      only moderate via its own dedicated AF rule, distinct from
+      `hasCriticalFinding`'s fast-AF/VT/pause>3s/high-grade-AV-block
+      triggers — and separately confirmed `F-UNEXPECTED-FINDING-001`
+      checks only AF/VT/high-grade-AV-block, not a significant pause, so
+      the third (critical, pause-only) persona never raises it even with
+      no originating request linked; lumbar-puncture's second persona
+      isolates `viralPattern` (its own moderate-severity trigger) with
+      an explicitly negative culture ('No growth'), confirming
+      `culturePositive`'s negative-phrase matching correctly keeps a
+      markedly raised white-cell count off the bacterial/critical
+      pathway; mammography is the family's first BI-RADS-driven engine —
+      classification and follow-up are keyed off the ACR BI-RADS final
+      assessment category rather than the structured-finding booleans,
+      and the second persona isolates BI-RADS 4a (`isBiRadsUrgent`,
+      urgent biopsy referral) to confirm it stays short of
+      `isBiRadsCritical` (BI-RADS 4c/5 only), distinct from the third
+      persona's BI-RADS 5). 28 of 37 forms of this family done, 9 remain
       (count re-verified directly against the fleet each update, not
-      hand-tracked — `bin/test-personas` ground truth: PASS 258/355). 73
+      hand-tracked — `bin/test-personas` ground truth: PASS 261/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +
