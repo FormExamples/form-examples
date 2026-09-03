@@ -1,0 +1,325 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "computeAllScores",
+  "note": "Three hand-authored personas for the four-instrument PRO battery (SF-36 RAND-method domains + non-licensed pcsApprox/mcsApprox, NDI, mJOA, EQ-5D-3L with the Dolan 1997 UK TTO value set). computeAllScores (composite.js) is the true entry point and simply aggregates the four independent instrument scorers; there is no cross-instrument composite, no bands beyond NDI/mJOA, and no flags. Every SF-36 item is linearly recoded to 0-100 on its own scale/polarity and each domain is the unweighted mean of its ANSWERED items (unanswered items are dropped from the mean, not scored as zero); pcsApprox = mean(pf, rp, bp, gh) and mcsApprox = mean(vt, sf, re, mh) over the non-null domains. healthChangeVsYearAgo is collected but unscored. NDI: percentageScore = rawScore / (5 x answeredSections) x 100, so a skipped section (e.g. driving for a non-driver) rescales the denominator; bands <5 no-disability, <15 mild, <25 moderate, <35 severe, else complete. mJOA needs all six items or returns null/''; bands >=15 mild, >=12 moderate, else severe. EQ-5D needs all five dimensions; '11111' is exactly 1.0, otherwise 1 - 0.081 - sum(level-2/3 dimension coefficients) - 0.269 if any dimension is level 3 (the N3 term); the index can be negative (33333 = -0.594, worse than dead). Floating-point values in 'expected' are whatever JavaScript produces (e.g. 83.33333333333333, 0.6910000000000001) - do not round them by hand; regenerate with: bin/test-personas patient-reported-outcome-measures --update",
+  "personas": [
+    {
+      "name": "Best possible health - post-rehabilitation discharge visit",
+      "description": "All-best answers on every instrument (the AGENTS.md all-best test case, made into a persona). SF-36: every item at its best pole -> all eight domains 100, pcsApprox 100, mcsApprox 100. NDI all 0 -> raw 0, 10 sections, 0 %, band 'no-disability'. mJOA 4+4+2+2+2+3 = 17, band 'mild'. EQ-5D '11111' -> ukIndexValue exactly 1 (JSON 1), VAS 95.",
+      "state": {
+        "visitDetails": {
+          "subjectId": "PROM-0117",
+          "visit": "12-month post-op",
+          "assessmentDate": "2026-06-02"
+        },
+        "sf36": {
+          "generalHealth": 1,
+          "healthChangeVsYearAgo": 1,
+          "vigorousActivities": 3,
+          "moderateActivities": 3,
+          "liftingCarryingGroceries": 3,
+          "climbingSeveralFlights": 3,
+          "climbingOneFlight": 3,
+          "bendingKneelingStooping": 3,
+          "walkingMoreThanMile": 3,
+          "walkingSeveralHundredYards": 3,
+          "walkingOneHundredYards": 3,
+          "bathingDressing": 3,
+          "cutDownTimePhysical": 5,
+          "accomplishedLessPhysical": 5,
+          "limitedInKindPhysical": 5,
+          "difficultyPerformingPhysical": 5,
+          "cutDownTimeEmotional": 5,
+          "accomplishedLessEmotional": 5,
+          "lessCarefulThanUsual": 5,
+          "socialActivitiesInterference": 1,
+          "bodilyPain": 1,
+          "painInterferenceWithWork": 1,
+          "feltFullOfLife": 1,
+          "veryNervous": 5,
+          "soDownInDumps": 5,
+          "feltCalmPeaceful": 1,
+          "lotOfEnergy": 1,
+          "downheartedDepressed": 5,
+          "feltWornOut": 5,
+          "beenHappy": 1,
+          "feltTired": 5,
+          "socialActivitiesInterferenceTime": 5,
+          "getSickEasier": 5,
+          "asHealthyAsAnybody": 1,
+          "expectHealthWorse": 5,
+          "healthExcellent": 1
+        },
+        "ndi": {
+          "painIntensity": 0,
+          "personalCare": 0,
+          "lifting": 0,
+          "reading": 0,
+          "headache": 0,
+          "concentration": 0,
+          "work": 0,
+          "driving": 0,
+          "sleeping": 0,
+          "recreation": 0
+        },
+        "mjoa": {
+          "motorArms": 4,
+          "motorLegs": 4,
+          "sensationArms": 2,
+          "sensationLegs": 2,
+          "sensationTrunk": 2,
+          "bladderFunction": 3
+        },
+        "eq5d": {
+          "mobility": 1,
+          "selfCare": 1,
+          "usualActivities": 1,
+          "painDiscomfort": 1,
+          "anxietyDepression": 1,
+          "vasScore": 95
+        }
+      },
+      "expected": {
+        "sf36": {
+          "pf": 100,
+          "rp": 100,
+          "bp": 100,
+          "gh": 100,
+          "vt": 100,
+          "sf": 100,
+          "re": 100,
+          "mh": 100,
+          "pcsApprox": 100,
+          "mcsApprox": 100
+        },
+        "ndi": {
+          "rawScore": 0,
+          "answeredSections": 10,
+          "percentageScore": 0,
+          "band": "no-disability"
+        },
+        "mjoa": {
+          "totalScore": 17,
+          "band": "mild"
+        },
+        "eq5d": {
+          "healthStateDescriptor": "11111",
+          "ukIndexValue": 1,
+          "vasScore": 95
+        }
+      }
+    },
+    {
+      "name": "Moderate cervical myelopathy - partially answered, non-driver",
+      "description": "Pre-operative baseline for a patient with degenerative cervical myelopathy. Exercises every partial-answer path: SF-36 expectHealthWorse and socialActivitiesInterferenceTime left null (so GH averages 4 items and SF averages 1), NDI driving null (non-driver, so 9 sections and a /45 denominator). Hand-derived SF-36: pf 55, rp 43.75, bp 45, gh 43.75 (50+50+50+25 over 4), vt 37.5, sf 75, re 83.333..., mh 80; pcsApprox 46.875, mcsApprox 68.958333... NDI raw 9 over 9 sections = exactly 20 % -> 'moderate'. mJOA 3+3+1+2+2+2 = 13 -> 'moderate'. EQ-5D '21221' with no level-3 dimension -> 1 - 0.081 - 0.069 - 0.036 - 0.123 = 0.691 (floating point), VAS 65.",
+      "state": {
+        "visitDetails": {
+          "subjectId": "PROM-0342",
+          "visit": "Pre-operative baseline",
+          "assessmentDate": "2026-04-15"
+        },
+        "sf36": {
+          "generalHealth": 3,
+          "healthChangeVsYearAgo": 4,
+          "vigorousActivities": 1,
+          "moderateActivities": 2,
+          "liftingCarryingGroceries": 2,
+          "climbingSeveralFlights": 1,
+          "climbingOneFlight": 2,
+          "bendingKneelingStooping": 2,
+          "walkingMoreThanMile": 2,
+          "walkingSeveralHundredYards": 3,
+          "walkingOneHundredYards": 3,
+          "bathingDressing": 3,
+          "cutDownTimePhysical": 3,
+          "accomplishedLessPhysical": 3,
+          "limitedInKindPhysical": 2,
+          "difficultyPerformingPhysical": 3,
+          "cutDownTimeEmotional": 4,
+          "accomplishedLessEmotional": 4,
+          "lessCarefulThanUsual": 5,
+          "socialActivitiesInterference": 2,
+          "bodilyPain": 4,
+          "painInterferenceWithWork": 3,
+          "feltFullOfLife": 3,
+          "veryNervous": 4,
+          "soDownInDumps": 5,
+          "feltCalmPeaceful": 2,
+          "lotOfEnergy": 4,
+          "downheartedDepressed": 4,
+          "feltWornOut": 3,
+          "beenHappy": 2,
+          "feltTired": 2,
+          "socialActivitiesInterferenceTime": null,
+          "getSickEasier": 3,
+          "asHealthyAsAnybody": 3,
+          "expectHealthWorse": null,
+          "healthExcellent": 4
+        },
+        "ndi": {
+          "painIntensity": 2,
+          "personalCare": 0,
+          "lifting": 2,
+          "reading": 1,
+          "headache": 1,
+          "concentration": 1,
+          "work": 1,
+          "driving": null,
+          "sleeping": 1,
+          "recreation": 0
+        },
+        "mjoa": {
+          "motorArms": 3,
+          "motorLegs": 3,
+          "sensationArms": 1,
+          "sensationLegs": 2,
+          "sensationTrunk": 2,
+          "bladderFunction": 2
+        },
+        "eq5d": {
+          "mobility": 2,
+          "selfCare": 1,
+          "usualActivities": 2,
+          "painDiscomfort": 2,
+          "anxietyDepression": 1,
+          "vasScore": 65
+        }
+      },
+      "expected": {
+        "sf36": {
+          "pf": 55,
+          "rp": 43.75,
+          "bp": 45,
+          "gh": 43.75,
+          "vt": 37.5,
+          "sf": 75,
+          "re": 83.33333333333333,
+          "mh": 80,
+          "pcsApprox": 46.875,
+          "mcsApprox": 68.95833333333333
+        },
+        "ndi": {
+          "rawScore": 9,
+          "answeredSections": 9,
+          "percentageScore": 20,
+          "band": "moderate"
+        },
+        "mjoa": {
+          "totalScore": 13,
+          "band": "moderate"
+        },
+        "eq5d": {
+          "healthStateDescriptor": "21221",
+          "ukIndexValue": 0.6910000000000001,
+          "vasScore": 65
+        }
+      }
+    },
+    {
+      "name": "Worst possible health - severe myelopathy with complete disability",
+      "description": "All-worst answers on every instrument (the AGENTS.md all-worst test case). SF-36: every item at its worst pole -> all eight domains 0, pcsApprox 0, mcsApprox 0. NDI all 5 -> raw 50, 10 sections, 100 %, band 'complete'. mJOA all 0 -> 0, band 'severe'. EQ-5D '33333' -> 1 - 0.081 - (0.314+0.214+0.094+0.386+0.236) - 0.269 = -0.594 (floating point; a negative index, worse than dead on the UK TTO scale), VAS 10.",
+      "state": {
+        "visitDetails": {
+          "subjectId": "PROM-0508",
+          "visit": "Pre-operative baseline",
+          "assessmentDate": "2026-05-20"
+        },
+        "sf36": {
+          "generalHealth": 5,
+          "healthChangeVsYearAgo": 5,
+          "vigorousActivities": 1,
+          "moderateActivities": 1,
+          "liftingCarryingGroceries": 1,
+          "climbingSeveralFlights": 1,
+          "climbingOneFlight": 1,
+          "bendingKneelingStooping": 1,
+          "walkingMoreThanMile": 1,
+          "walkingSeveralHundredYards": 1,
+          "walkingOneHundredYards": 1,
+          "bathingDressing": 1,
+          "cutDownTimePhysical": 1,
+          "accomplishedLessPhysical": 1,
+          "limitedInKindPhysical": 1,
+          "difficultyPerformingPhysical": 1,
+          "cutDownTimeEmotional": 1,
+          "accomplishedLessEmotional": 1,
+          "lessCarefulThanUsual": 1,
+          "socialActivitiesInterference": 5,
+          "bodilyPain": 6,
+          "painInterferenceWithWork": 5,
+          "feltFullOfLife": 5,
+          "veryNervous": 1,
+          "soDownInDumps": 1,
+          "feltCalmPeaceful": 5,
+          "lotOfEnergy": 5,
+          "downheartedDepressed": 1,
+          "feltWornOut": 1,
+          "beenHappy": 5,
+          "feltTired": 1,
+          "socialActivitiesInterferenceTime": 1,
+          "getSickEasier": 1,
+          "asHealthyAsAnybody": 5,
+          "expectHealthWorse": 1,
+          "healthExcellent": 5
+        },
+        "ndi": {
+          "painIntensity": 5,
+          "personalCare": 5,
+          "lifting": 5,
+          "reading": 5,
+          "headache": 5,
+          "concentration": 5,
+          "work": 5,
+          "driving": 5,
+          "sleeping": 5,
+          "recreation": 5
+        },
+        "mjoa": {
+          "motorArms": 0,
+          "motorLegs": 0,
+          "sensationArms": 0,
+          "sensationLegs": 0,
+          "sensationTrunk": 0,
+          "bladderFunction": 0
+        },
+        "eq5d": {
+          "mobility": 3,
+          "selfCare": 3,
+          "usualActivities": 3,
+          "painDiscomfort": 3,
+          "anxietyDepression": 3,
+          "vasScore": 10
+        }
+      },
+      "expected": {
+        "sf36": {
+          "pf": 0,
+          "rp": 0,
+          "bp": 0,
+          "gh": 0,
+          "vt": 0,
+          "sf": 0,
+          "re": 0,
+          "mh": 0,
+          "pcsApprox": 0,
+          "mcsApprox": 0
+        },
+        "ndi": {
+          "rawScore": 50,
+          "answeredSections": 10,
+          "percentageScore": 100,
+          "band": "complete"
+        },
+        "mjoa": {
+          "totalScore": 0,
+          "band": "severe"
+        },
+        "eq5d": {
+          "healthStateDescriptor": "33333",
+          "ukIndexValue": -0.594,
+          "vasScore": 10
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,446 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateClavienDindo",
+  "note": "Three hand-authored personas for the Post-Operative Report Clavien-Dindo grader. graderHint is set explicitly because bin/test-engines' discovery heuristic picks gradeOrder (the grade-key -> ordinal helper), not the composite. calculateClavienDindo returns { overallGrade, complicationCount, firedRules } only; detectAdditionalFlags (flagged-issues.js) is a separate export that form-app.js composes at render time, so the vital-sign / blood-loss / ASA / disposition / plan-gap flags are NOT pinned here (Phase 13 'flagsHint' tooling task) - each description records the flags the persona would raise for cross-reference. Engine behaviour: overallGrade is the worst grade across complications whose 'grade' is a recognised key; entries with an empty grade are skipped entirely and do NOT consume a CD-n id slot's value but DO consume its index (ids are CD-<array index + 1>, so a blank entry in the middle leaves a gap in the id sequence); complicationCount counts graded entries only; when nothing is graded the result is grade-0 regardless of complicationsOccurred ('yes' with no graded entries still yields grade-0). Each fired rule's 'category' is the free-text complication description (or '(complication not described)') and its 'description' is the canonical Clavien-Dindo definition text for that grade. No timestamp is returned by this function. Regenerate 'expected' with: bin/test-personas post-operative-report --update",
+  "personas": [
+    {
+      "name": "Uncomplicated elective laparoscopic cholecystectomy",
+      "description": "ASA II day-case patient, 55-minute elective procedure, EBL 30 mL, awake and comfortable in recovery with normal observations, complete post-op plan. complicationsOccurred 'no' with an empty complications array. Expect overallGrade 'grade-0', complicationCount 0, firedRules []. Unpinned flags: none (no vital-sign, blood-loss, ASA, disposition or plan-gap trigger).",
+      "state": {
+        "patientDetails": {
+          "firstName": "Helen",
+          "lastName": "Marchetti",
+          "dateOfBirth": "1974-02-09",
+          "mrn": "MRN-4471902",
+          "sex": "female",
+          "weight": 71,
+          "height": 163,
+          "asaGrade": "II",
+          "allergies": "Penicillin (rash)"
+        },
+        "procedureDetails": {
+          "procedureName": "Laparoscopic cholecystectomy",
+          "procedureCode": "J18.3",
+          "indication": "Symptomatic cholelithiasis",
+          "priority": "elective",
+          "surgicalApproach": "Laparoscopic (4-port)",
+          "laterality": "Not applicable",
+          "dateOfSurgery": "2026-03-11",
+          "startTime": "09:05",
+          "endTime": "10:00",
+          "durationMinutes": 55,
+          "operatingRoom": "Theatre 4"
+        },
+        "surgicalTeam": {
+          "primarySurgeon": "Mr A. Farouk",
+          "primarySurgeonGrade": "Consultant",
+          "primaryAnaesthetist": "Dr L. Bergstrom",
+          "primaryAnaesthetistGrade": "Consultant",
+          "additionalMembers": [
+            {
+              "name": "Dr K. Ndlovu",
+              "role": "Surgical assistant",
+              "grade": "ST4"
+            }
+          ],
+          "scrubNurse": "S. Patel",
+          "circulator": "M. O'Brien"
+        },
+        "intraoperativeFindings": {
+          "findings": "Thin-walled gallbladder containing multiple small stones; no adhesions; critical view of safety achieved.",
+          "procedurePerformed": "Laparoscopic cholecystectomy with clipping of cystic duct and artery",
+          "unexpectedFindings": "",
+          "conversionToOpen": "no",
+          "conversionReason": ""
+        },
+        "anaesthesiaSummary": {
+          "anaesthesiaType": "general",
+          "airwayManagement": "Endotracheal tube, grade 1 view",
+          "difficultIntubation": "no",
+          "airwayNotes": "",
+          "medicationsAdministered": "Propofol, fentanyl, rocuronium, sevoflurane, ondansetron, dexamethasone",
+          "reversalAgents": "Sugammadex 200 mg",
+          "anaesthesiaNotes": "Uneventful."
+        },
+        "bloodLossFluidBalance": {
+          "estimatedBloodLossMl": 30,
+          "crystalloidsMl": 1000,
+          "colloidsMl": 0,
+          "bloodProductsMl": 0,
+          "bloodProductDetails": "",
+          "urineOutputMl": null,
+          "otherDrainsMl": 0,
+          "fluidNotes": "No urinary catheter."
+        },
+        "specimensImplants": {
+          "specimens": [
+            {
+              "description": "Gallbladder",
+              "site": "Gallbladder fossa",
+              "disposition": "Histopathology"
+            }
+          ],
+          "implants": [],
+          "prosthesisUsed": "no",
+          "drainsPlaced": "None",
+          "cathetersPlaced": "None"
+        },
+        "immediatePostopStatus": {
+          "consciousLevel": "awake",
+          "systolicBp": 122,
+          "diastolicBp": 74,
+          "heartRate": 68,
+          "respiratoryRate": 14,
+          "oxygenSaturation": 98,
+          "temperature": 36.7,
+          "painScore": 2,
+          "painNotes": "Comfortable on oral analgesia.",
+          "disposition": "recovery"
+        },
+        "complicationsAssessment": {
+          "complicationsOccurred": "no",
+          "complications": [],
+          "narrative": "No intra-operative or immediate post-operative complications."
+        },
+        "postopPlanInstructions": {
+          "medicationsPrescribed": "Paracetamol 1 g QDS, ibuprofen 400 mg TDS PRN",
+          "antibioticPlan": "None required",
+          "thromboprophylaxis": "Early mobilisation; TEDS only (low risk, day case)",
+          "analgesiaPlan": "Regular paracetamol, PRN ibuprofen; codeine if needed",
+          "dietPlan": "Free fluids then light diet once awake",
+          "mobilisationPlan": "Mobilise as tolerated",
+          "woundCareInstructions": "Keep dressings dry 48 h; remove at 7 days",
+          "followUpPlan": "Telephone review at 2 weeks; histology to GP",
+          "dischargeCriteria": "Tolerating diet, pain controlled, mobile, passed urine",
+          "alertsAndEscalation": "Return if fever, jaundice, or worsening abdominal pain"
+        }
+      },
+      "expected": {
+        "overallGrade": "grade-0",
+        "complicationCount": 0,
+        "firedRules": []
+      }
+    },
+    {
+      "name": "Right hemicolectomy with ileus and wound infection - one ungraded entry",
+      "description": "Non-critical edge case: ASA III, 190-minute elective procedure with three complication entries, the MIDDLE one left ungraded (grade ''). Entry 1 is post-operative ileus managed conservatively (grade-i), entry 2 is an undescribed observation with no grade chosen (skipped), entry 3 is superficial wound infection needing IV antibiotics (grade-ii). Expect overallGrade 'grade-ii', complicationCount 2, and firedRules with ids CD-1 and CD-3 (the CD-2 slot is consumed by the skipped entry). Unpinned flags: FLAG-ASA-III (medium), FLAG-DISP-HDU (medium) - no vital-sign or plan-gap triggers.",
+      "state": {
+        "patientDetails": {
+          "firstName": "Gordon",
+          "lastName": "Ashworth",
+          "dateOfBirth": "1951-08-30",
+          "mrn": "MRN-2093384",
+          "sex": "male",
+          "weight": 92,
+          "height": 176,
+          "asaGrade": "III",
+          "allergies": "None known"
+        },
+        "procedureDetails": {
+          "procedureName": "Laparoscopic right hemicolectomy",
+          "procedureCode": "H07.3",
+          "indication": "Caecal adenocarcinoma (T2 N0 on staging)",
+          "priority": "elective",
+          "surgicalApproach": "Laparoscopic with extraction incision",
+          "laterality": "Right",
+          "dateOfSurgery": "2026-04-22",
+          "startTime": "08:30",
+          "endTime": "11:40",
+          "durationMinutes": 190,
+          "operatingRoom": "Theatre 2"
+        },
+        "surgicalTeam": {
+          "primarySurgeon": "Miss R. Achebe",
+          "primarySurgeonGrade": "Consultant",
+          "primaryAnaesthetist": "Dr P. Sørensen",
+          "primaryAnaesthetistGrade": "Consultant",
+          "additionalMembers": [
+            {
+              "name": "Mr T. Quinn",
+              "role": "Surgical assistant",
+              "grade": "ST6"
+            },
+            {
+              "name": "Dr F. Haddad",
+              "role": "Anaesthetic trainee",
+              "grade": "CT2"
+            }
+          ],
+          "scrubNurse": "J. Lindqvist",
+          "circulator": "A. Mensah"
+        },
+        "intraoperativeFindings": {
+          "findings": "5 cm caecal tumour, no serosal breach, no liver or peritoneal deposits.",
+          "procedurePerformed": "Right hemicolectomy with stapled ileocolic anastomosis",
+          "unexpectedFindings": "",
+          "conversionToOpen": "no",
+          "conversionReason": ""
+        },
+        "anaesthesiaSummary": {
+          "anaesthesiaType": "general",
+          "airwayManagement": "Endotracheal tube",
+          "difficultIntubation": "no",
+          "airwayNotes": "",
+          "medicationsAdministered": "Propofol, remifentanil, rocuronium, sevoflurane, cefuroxime + metronidazole",
+          "reversalAgents": "Sugammadex",
+          "anaesthesiaNotes": "Rectus sheath catheters sited."
+        },
+        "bloodLossFluidBalance": {
+          "estimatedBloodLossMl": 250,
+          "crystalloidsMl": 2000,
+          "colloidsMl": 0,
+          "bloodProductsMl": 0,
+          "bloodProductDetails": "",
+          "urineOutputMl": 350,
+          "otherDrainsMl": 0,
+          "fluidNotes": ""
+        },
+        "specimensImplants": {
+          "specimens": [
+            {
+              "description": "Right colon with terminal ileum and mesentery",
+              "site": "Caecum",
+              "disposition": "Histopathology (cancer pathway)"
+            }
+          ],
+          "implants": [],
+          "prosthesisUsed": "no",
+          "drainsPlaced": "None",
+          "cathetersPlaced": "Urinary catheter"
+        },
+        "immediatePostopStatus": {
+          "consciousLevel": "drowsy",
+          "systolicBp": 134,
+          "diastolicBp": 80,
+          "heartRate": 88,
+          "respiratoryRate": 16,
+          "oxygenSaturation": 96,
+          "temperature": 36.4,
+          "painScore": 4,
+          "painNotes": "Rectus sheath catheters running.",
+          "disposition": "hdu"
+        },
+        "complicationsAssessment": {
+          "complicationsOccurred": "yes",
+          "complications": [
+            {
+              "description": "Post-operative ileus (day 2-4), resolved with nil by mouth and antiemetics",
+              "grade": "grade-i",
+              "interventionRequired": "Conservative - NBM, IV fluids, antiemetics",
+              "timing": "Post-operative day 2"
+            },
+            {
+              "description": "",
+              "grade": "",
+              "interventionRequired": "",
+              "timing": ""
+            },
+            {
+              "description": "Superficial surgical site infection at extraction incision",
+              "grade": "grade-ii",
+              "interventionRequired": "IV co-amoxiclav 5 days",
+              "timing": "Post-operative day 5"
+            }
+          ],
+          "narrative": "Two minor complications; recovering on the ward by day 7."
+        },
+        "postopPlanInstructions": {
+          "medicationsPrescribed": "Regular paracetamol, PRN oxycodone, ondansetron",
+          "antibioticPlan": "Prophylaxis only (complete); wound infection course as charted",
+          "thromboprophylaxis": "Dalteparin 5000 units SC daily for 28 days + TEDS",
+          "analgesiaPlan": "Rectus sheath catheters 48 h then oral step-down",
+          "dietPlan": "Enhanced recovery - sips day 0, light diet day 1 as tolerated",
+          "mobilisationPlan": "Sit out day 0, walk day 1",
+          "woundCareInstructions": "Inspect daily; wound swab if erythema",
+          "followUpPlan": "Colorectal MDT for histology; clinic at 6 weeks",
+          "dischargeCriteria": "Bowels open, tolerating diet, pain controlled orally",
+          "alertsAndEscalation": "Escalate if temperature > 38, HR > 100, or abdominal distension"
+        }
+      },
+      "expected": {
+        "overallGrade": "grade-ii",
+        "complicationCount": 2,
+        "firedRules": [
+          {
+            "id": "CD-1",
+            "category": "Post-operative ileus (day 2-4), resolved with nil by mouth and antiemetics",
+            "description": "Any deviation from the normal post-operative course without pharmacological treatment or surgical, endoscopic, or radiological interventions. Allowed therapeutic regimens are antiemetics, antipyretics, analgesics, diuretics, electrolytes and physiotherapy. Wound infections opened at the bedside are also included.",
+            "grade": "grade-i"
+          },
+          {
+            "id": "CD-3",
+            "category": "Superficial surgical site infection at extraction incision",
+            "description": "Requires pharmacological treatment with drugs other than those allowed for grade I. Blood transfusions and total parenteral nutrition are also included.",
+            "grade": "grade-ii"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Emergency laparotomy with return to theatre and multi-organ failure",
+      "description": "Critical-highest persona: ASA IV emergency laparotomy for perforated diverticulitis with faecal peritonitis, 265 minutes, EBL 1800 mL with transfusion, hypotensive, tachycardic, hypoxic and hypothermic on ICU arrival. Three graded complications: transfusion for haemorrhage (grade-ii), return to theatre under GA for anastomotic bleeding (grade-iiib), and multi-organ dysfunction with ventilation + renal replacement therapy (grade-ivb). Expect overallGrade 'grade-ivb' (worst of orders 2, 4, 6), complicationCount 3, firedRules CD-1, CD-2, CD-3. Unpinned flags would be numerous: urgent FLAG-CD-IV, FLAG-BLOOD-MASSIVE, FLAG-VITAL-HYPOTENSION, FLAG-VITAL-HYPOXIA; high FLAG-CD-IIIB, FLAG-ASA-HIGH, FLAG-VITAL-TACHY, FLAG-VITAL-TACHYPNOEA, FLAG-DISP-ICU; medium FLAG-PROC-EMERGENCY, FLAG-DURATION-LONG, FLAG-VITAL-HYPOTHERMIA; low FLAG-PLAN-FOLLOWUP (follow-up plan intentionally blank).",
+      "state": {
+        "patientDetails": {
+          "firstName": "Margaret",
+          "lastName": "Delacroix",
+          "dateOfBirth": "1946-12-05",
+          "mrn": "MRN-8810275",
+          "sex": "female",
+          "weight": 58,
+          "height": 158,
+          "asaGrade": "IV",
+          "allergies": "None known"
+        },
+        "procedureDetails": {
+          "procedureName": "Emergency laparotomy, Hartmann's procedure",
+          "procedureCode": "H33.5",
+          "indication": "Perforated sigmoid diverticulitis with faecal peritonitis and septic shock",
+          "priority": "emergency",
+          "surgicalApproach": "Open midline laparotomy",
+          "laterality": "Not applicable",
+          "dateOfSurgery": "2026-05-17",
+          "startTime": "23:10",
+          "endTime": "03:35",
+          "durationMinutes": 265,
+          "operatingRoom": "Emergency theatre"
+        },
+        "surgicalTeam": {
+          "primarySurgeon": "Mr D. Vasquez",
+          "primarySurgeonGrade": "Consultant",
+          "primaryAnaesthetist": "Dr H. Nakamura",
+          "primaryAnaesthetistGrade": "Consultant",
+          "additionalMembers": [
+            {
+              "name": "Ms E. Brennan",
+              "role": "Surgical registrar",
+              "grade": "ST7"
+            },
+            {
+              "name": "Dr O. Adeyemi",
+              "role": "Anaesthetic registrar",
+              "grade": "ST5"
+            }
+          ],
+          "scrubNurse": "R. Kowalczyk",
+          "circulator": "B. Osei"
+        },
+        "intraoperativeFindings": {
+          "findings": "Four-quadrant faecal peritonitis from a 2 cm sigmoid perforation; dense inflammatory phlegmon; small bowel oedematous.",
+          "procedurePerformed": "Sigmoid colectomy with end colostomy (Hartmann's), peritoneal lavage 10 L, laparostomy avoided",
+          "unexpectedFindings": "Extent of faecal contamination greater than CT suggested",
+          "conversionToOpen": "no",
+          "conversionReason": ""
+        },
+        "anaesthesiaSummary": {
+          "anaesthesiaType": "general",
+          "airwayManagement": "Rapid sequence induction, endotracheal tube",
+          "difficultIntubation": "no",
+          "airwayNotes": "",
+          "medicationsAdministered": "Ketamine, rocuronium, sevoflurane, noradrenaline infusion, piperacillin-tazobactam, tranexamic acid",
+          "reversalAgents": "None - remained intubated",
+          "anaesthesiaNotes": "Arterial and central lines sited; vasopressor dependent throughout."
+        },
+        "bloodLossFluidBalance": {
+          "estimatedBloodLossMl": 1800,
+          "crystalloidsMl": 4500,
+          "colloidsMl": 500,
+          "bloodProductsMl": 1200,
+          "bloodProductDetails": "4 units packed red cells, 2 units FFP",
+          "urineOutputMl": 60,
+          "otherDrainsMl": 400,
+          "fluidNotes": "Oliguric; massive transfusion protocol activated."
+        },
+        "specimensImplants": {
+          "specimens": [
+            {
+              "description": "Sigmoid colon with perforation",
+              "site": "Sigmoid",
+              "disposition": "Histopathology"
+            },
+            {
+              "description": "Peritoneal fluid",
+              "site": "Pelvis",
+              "disposition": "Microbiology culture"
+            }
+          ],
+          "implants": [],
+          "prosthesisUsed": "no",
+          "drainsPlaced": "Two pelvic drains",
+          "cathetersPlaced": "Urinary catheter, right IJ central line, left radial arterial line"
+        },
+        "immediatePostopStatus": {
+          "consciousLevel": "intubated",
+          "systolicBp": 82,
+          "diastolicBp": 44,
+          "heartRate": 128,
+          "respiratoryRate": 26,
+          "oxygenSaturation": 90,
+          "temperature": 35.2,
+          "painScore": null,
+          "painNotes": "Sedated and ventilated - pain score not assessable.",
+          "disposition": "icu"
+        },
+        "complicationsAssessment": {
+          "complicationsOccurred": "yes",
+          "complications": [
+            {
+              "description": "Intra-operative haemorrhage requiring transfusion of 4 units red cells and 2 units FFP",
+              "grade": "grade-ii",
+              "interventionRequired": "Blood product transfusion",
+              "timing": "Intra-operative"
+            },
+            {
+              "description": "Return to theatre for bleeding from the rectal stump",
+              "grade": "grade-iiib",
+              "interventionRequired": "Re-laparotomy and suture ligation under general anaesthesia",
+              "timing": "Post-operative day 1"
+            },
+            {
+              "description": "Septic shock with multi-organ dysfunction - ventilated, vasopressors, continuous renal replacement therapy",
+              "grade": "grade-ivb",
+              "interventionRequired": "ICU organ support (respiratory, cardiovascular, renal)",
+              "timing": "Immediate post-operative"
+            }
+          ],
+          "narrative": "Critically unwell; prognosis guarded. Family updated by consultant surgeon and intensivist."
+        },
+        "postopPlanInstructions": {
+          "medicationsPrescribed": "Piperacillin-tazobactam, noradrenaline, propofol/fentanyl sedation, insulin sliding scale",
+          "antibioticPlan": "Broad spectrum for 7 days minimum; rationalise on peritoneal culture",
+          "thromboprophylaxis": "Mechanical only until haemostasis confirmed; review LMWH at 48 h",
+          "analgesiaPlan": "Fentanyl infusion while ventilated",
+          "dietPlan": "Nil by mouth; NG on free drainage; consider TPN day 3 if no enteral route",
+          "mobilisationPlan": "Bed-bound on ICU; passive physiotherapy",
+          "woundCareInstructions": "Midline wound with negative-pressure dressing; stoma review daily",
+          "followUpPlan": "",
+          "dischargeCriteria": "Not applicable - ICU",
+          "alertsAndEscalation": "Consultant surgeon to be informed of any further bleeding, rising lactate, or stoma ischaemia"
+        }
+      },
+      "expected": {
+        "overallGrade": "grade-ivb",
+        "complicationCount": 3,
+        "firedRules": [
+          {
+            "id": "CD-1",
+            "category": "Intra-operative haemorrhage requiring transfusion of 4 units red cells and 2 units FFP",
+            "description": "Requires pharmacological treatment with drugs other than those allowed for grade I. Blood transfusions and total parenteral nutrition are also included.",
+            "grade": "grade-ii"
+          },
+          {
+            "id": "CD-2",
+            "category": "Return to theatre for bleeding from the rectal stump",
+            "description": "Requires surgical, endoscopic or radiological intervention under general anaesthesia.",
+            "grade": "grade-iiib"
+          },
+          {
+            "id": "CD-3",
+            "category": "Septic shock with multi-organ dysfunction - ventilated, vasopressors, continuous renal replacement therapy",
+            "description": "Life-threatening complication (incl. CNS complications) requiring intermediate care or intensive care unit management — multi-organ dysfunction.",
+            "grade": "grade-ivb"
+          }
+        ]
+      }
+    }
+  ]
+}

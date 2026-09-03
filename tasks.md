@@ -1235,13 +1235,36 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       backlog that doesn't sort); its third persona confirms validity
       supersedes both the automatic-disability (regex on free-text
       diagnosis, explicit field blank) and over-max-period
-      recommendations. 7 of these 19 forms remain:
+      recommendations. 3 more done 2026-09-03 (vaccinations-checklist,
+      post-operative-report, patient-reported-outcome-measures — all
+      nine personas matched on first `--update`). vaccinations'
+      `calculateVaccinationGrade` folds flags in; its critical persona
+      (13 rules, three at grade 4, six flags, five missing vaccinations)
+      confirms that anaphylaxis history alone does NOT reach the
+      'contraindicated' status — that branch needs
+      `liveVaccineContraindicated` or immunocompromised+anaphylaxis —
+      so a needlestick-exposed HCA with prior vaccine anaphylaxis lands
+      on 'non-compliant'/'critical' via the grade-4 rules instead.
+      post-operative-report is a split engine (`calculateClavienDindo`
+      + a separate `detectAdditionalFlags` that form-app.js composes at
+      render time), so flags are unpinned there — and **a third
+      discovery mis-pick:** `bin/test-engines` chose `gradeOrder` (the
+      grade-key → ordinal helper) over the composite. Its edge persona
+      pins the ungraded-entry behaviour: a blank middle complication is
+      skipped for grading and count but still consumes its `CD-<index>`
+      id, leaving a CD-1 / CD-3 gap. PROM's `computeAllScores` is a
+      pure four-instrument aggregator with no bands beyond NDI/mJOA and
+      no flags; the partial persona pins the answered-items-only
+      denominators (SF-36 domain means drop nulls; NDI /45 for a
+      non-driver) and the raw JavaScript floats (83.33333333333333,
+      0.6910000000000001), and the all-worst persona pins the negative
+      EQ-5D index (33333 → −0.594, worse-than-dead on the Dolan UK TTO
+      scale). 4 of these 19 forms remain:
       lifeguard-certification-checklist, outpatient-outcome,
-      patient-reported-outcome-measures, post-operative-report,
       recommended-summary-plan-for-emergency-care-and-treatment,
-      vaccinations-checklist, ward-round-note (count re-verified
-      directly against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 282/355). The remaining
+      ward-round-note (count re-verified directly against the fleet
+      each update, not hand-tracked — `bin/test-personas` ground truth:
+      PASS 285/355). The remaining
       ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
       fuller input / returns a bare object or boolean / no engine
       namespace published) need discovery-hint fixes in their engines
@@ -1375,15 +1398,18 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       auto-discover `detectAdditionalFlags` / `detectFlags`) and merge its
       output under `expected.additionalFlags`; re-pin the affected forms.
 - [ ] **`bin/test-engines` discovery can pick a sub-axis grader — or a
-      non-grader.** Three verified mis-picks so far, each overridden with
+      non-grader.** Four verified mis-picks so far, each overridden with
       `graderHint` in the persona file: hernia-diagnostic-evaluation
       (`classifyHernia`, Axis A only, vs `calculateHerniaEvaluation`);
       hip-replacement-surgery-evaluation (`scoreOhs`, the OHS
-      sub-instrument, vs `calculateHipEvaluation`); and
+      sub-instrument, vs `calculateHipEvaluation`);
       international-patient-summary (`classifyCompleteness`, which takes
       a *counts* object, not the assessment — it "passed" on the empty
       assessment only because `undefined < undefined` is false, so a
-      structurally wrong call still returned 'complete'). Prefer exports
+      structurally wrong call still returned 'complete'); and
+      post-operative-report (`gradeOrder`, a grade-key → ordinal helper
+      that returns `-1` for the empty assessment, vs
+      `calculateClavienDindo`). Prefer exports
       whose result carries `firedRules` (+ `flags`), then names starting
       `calculate`/`grade`/`validate`, and reject candidates whose result
       has no rule/flag array; then audit the 279 PASS forms for other
