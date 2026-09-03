@@ -1,0 +1,563 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeAssessment",
+  "note": "Realistic filled-in states in the SCORE2-Diabetes engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `gradeAssessment` folds `detectAdditionalFlags` into `additionalFlags` and stamps a wall-clock `timestamp`, which the oracle strips. The category is the maximum fired-rule level, shifted one band up (high -> veryHigh, medium -> high, low -> moderate, none -> low); `isLikelyDraft` (no name, no DOB, no HbA1c, no systolic) short-circuits to 'draft' and is never hit by a named patient. Verified nuances: an HbA1c entered in percent is converted with the IFCC formula (10.2 % -> 88.0 mmol/mol) before every threshold; and the type-2-without-metformin flag is deliberately suppressed once eGFR < 30 (metformin contraindicated), so the very-high persona records metformin 'no' with no flag.",
+  "personas": [
+    {
+      "name": "low-well-controlled-no-rules-fire",
+      "description": "Recently diagnosed type 2 diabetes, well controlled on metformin: HbA1c 48 mmol/mol, systolic 128, LDL 2.1, HDL 1.3, eGFR 88, ACR 1.2, BMI 25.7 (derived from 172 cm / 76 kg, no override), never-smoker, moderately active, retinopathy screen normal, 6 years' duration — none of the twenty rules fire and no flag applies — expect riskCategory low, no fired rules, no flags.",
+      "state": {
+        "patientDemographics": {
+          "fullName": "Priya Anand",
+          "dateOfBirth": "1970-06-21",
+          "sex": "female",
+          "nhsNumber": "",
+          "heightCm": 172,
+          "weightKg": 76,
+          "ethnicity": "south-asian"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 50,
+          "diabetesDurationYears": 6,
+          "hba1cValue": 48,
+          "hba1cUnit": "mmol/mol",
+          "fastingGlucose": 6.4,
+          "diabetesTreatment": "oral",
+          "insulinDurationYears": null
+        },
+        "cardiovascularHistory": {
+          "previousMi": "no",
+          "previousStroke": "no",
+          "previousTia": "no",
+          "peripheralArterialDisease": "no",
+          "heartFailure": "no",
+          "atrialFibrillation": "no",
+          "familyCvdHistory": "no",
+          "familyCvdDetails": "",
+          "currentChestPain": "no",
+          "currentDyspnoea": "no"
+        },
+        "bloodPressure": {
+          "systolicBp": 128,
+          "diastolicBp": 78,
+          "onAntihypertensive": "no",
+          "numberOfBpMedications": null,
+          "bpAtTarget": "yes",
+          "homeBpMonitoring": "yes"
+        },
+        "lipidProfile": {
+          "totalCholesterol": 4.6,
+          "hdlCholesterol": 1.3,
+          "ldlCholesterol": 2.1,
+          "triglycerides": 1.4,
+          "nonHdlCholesterol": 3.3,
+          "onStatin": "yes",
+          "statinName": "atorvastatin 20 mg",
+          "onOtherLipidTherapy": "no"
+        },
+        "renalFunction": {
+          "egfr": 88,
+          "creatinine": 68,
+          "urineAcr": 1.2,
+          "proteinuria": "no",
+          "ckdStage": "G2"
+        },
+        "lifestyleFactors": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "yearsSinceQuit": null,
+          "alcoholUnitsPerWeek": 4,
+          "physicalActivity": "moderate",
+          "dietQuality": "good",
+          "bmi": null,
+          "waistCircumferenceCm": 84
+        },
+        "currentMedications": {
+          "metformin": "yes",
+          "sglt2Inhibitor": "no",
+          "glp1Agonist": "no",
+          "sulfonylurea": "no",
+          "dpp4Inhibitor": "no",
+          "insulin": "no",
+          "aceInhibitorOrArb": "no",
+          "antiplatelet": "no",
+          "anticoagulant": "no",
+          "otherMedications": ""
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "none",
+          "lastEyeScreeningDate": "2026-03-10",
+          "neuropathySymptoms": "no",
+          "monofilamentTest": "normal",
+          "footPulses": "present",
+          "footUlcerHistory": "no",
+          "ankleBrachialIndex": 1.1,
+          "erectileDysfunction": ""
+        },
+        "riskAssessmentSummary": {
+          "riskRegion": "low",
+          "additionalRiskFactors": "",
+          "clinicalNotes": "All targets met; continue current regimen.",
+          "agreedTreatmentTargets": "HbA1c < 53, BP < 140/90, LDL < 2.6",
+          "followUpInterval": "12-months"
+        }
+      },
+      "expected": {
+        "riskCategory": "low",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "high-many-medium-rules-no-high-rule",
+      "description": "Long-standing type 2 diabetes with above-target but not very poor control (HbA1c 62), stage 1 hypertension on treatment (152/92), LDL 3.4, low HDL for a female (1.0), triglycerides 2.8, moderate CKD (eGFR 52) with albuminuria (ACR 4.5) and no ACE inhibitor/ARB, BMI 33.1, current smoker, sedentary, background retinopathy, and a family history of premature CVD — twelve medium/low rules fire but no high rule (no established CVD, systolic < 180, HbA1c < 75, eGFR >= 30, retinopathy not proliferative, duration 12 years) — expect riskCategory high (not veryHigh), with the BP-not-at-target, albuminuria-without-ACEi/ARB, and current-smoker flags.",
+      "state": {
+        "patientDemographics": {
+          "fullName": "Grace Muthoni",
+          "dateOfBirth": "1963-02-09",
+          "sex": "female",
+          "nhsNumber": "",
+          "heightCm": 165,
+          "weightKg": 90,
+          "ethnicity": "black-african"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 51,
+          "diabetesDurationYears": 12,
+          "hba1cValue": 62,
+          "hba1cUnit": "mmol/mol",
+          "fastingGlucose": 8.9,
+          "diabetesTreatment": "oral",
+          "insulinDurationYears": null
+        },
+        "cardiovascularHistory": {
+          "previousMi": "no",
+          "previousStroke": "no",
+          "previousTia": "no",
+          "peripheralArterialDisease": "no",
+          "heartFailure": "no",
+          "atrialFibrillation": "no",
+          "familyCvdHistory": "yes",
+          "familyCvdDetails": "Father had an MI at 54.",
+          "currentChestPain": "no",
+          "currentDyspnoea": "no"
+        },
+        "bloodPressure": {
+          "systolicBp": 152,
+          "diastolicBp": 92,
+          "onAntihypertensive": "yes",
+          "numberOfBpMedications": 1,
+          "bpAtTarget": "no",
+          "homeBpMonitoring": "no"
+        },
+        "lipidProfile": {
+          "totalCholesterol": 5.9,
+          "hdlCholesterol": 1,
+          "ldlCholesterol": 3.4,
+          "triglycerides": 2.8,
+          "nonHdlCholesterol": 4.9,
+          "onStatin": "yes",
+          "statinName": "simvastatin 20 mg",
+          "onOtherLipidTherapy": "no"
+        },
+        "renalFunction": {
+          "egfr": 52,
+          "creatinine": 104,
+          "urineAcr": 4.5,
+          "proteinuria": "yes",
+          "ckdStage": "G3a"
+        },
+        "lifestyleFactors": {
+          "smokingStatus": "current",
+          "cigarettesPerDay": 10,
+          "yearsSinceQuit": null,
+          "alcoholUnitsPerWeek": 6,
+          "physicalActivity": "sedentary",
+          "dietQuality": "poor",
+          "bmi": null,
+          "waistCircumferenceCm": 104
+        },
+        "currentMedications": {
+          "metformin": "yes",
+          "sglt2Inhibitor": "no",
+          "glp1Agonist": "no",
+          "sulfonylurea": "yes",
+          "dpp4Inhibitor": "no",
+          "insulin": "no",
+          "aceInhibitorOrArb": "no",
+          "antiplatelet": "no",
+          "anticoagulant": "no",
+          "otherMedications": "amlodipine 5 mg"
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "background",
+          "lastEyeScreeningDate": "2026-01-18",
+          "neuropathySymptoms": "no",
+          "monofilamentTest": "normal",
+          "footPulses": "present",
+          "footUlcerHistory": "no",
+          "ankleBrachialIndex": 1,
+          "erectileDysfunction": ""
+        },
+        "riskAssessmentSummary": {
+          "riskRegion": "moderate",
+          "additionalRiskFactors": "Central obesity; poor diet.",
+          "clinicalNotes": "Intensify BP and lipid therapy; start ACE inhibitor for albuminuria; smoking cessation referral.",
+          "agreedTreatmentTargets": "HbA1c < 58, BP < 140/90, LDL < 2.6",
+          "followUpInterval": "3-months"
+        }
+      },
+      "expected": {
+        "riskCategory": "high",
+        "firedRules": [
+          {
+            "id": "CVR-008",
+            "category": "Blood Pressure",
+            "description": "Elevated blood pressure (systolic 140-179 mmHg)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-009",
+            "category": "Glycaemic Control",
+            "description": "Above-target HbA1c (53-74 mmol/mol / 7-8.9%)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-010",
+            "category": "Lipid Profile",
+            "description": "Elevated LDL cholesterol (>= 2.6 mmol/L)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-011",
+            "category": "Lifestyle",
+            "description": "Current smoker",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-012",
+            "category": "Renal Function",
+            "description": "Moderate renal impairment (eGFR 30-59 mL/min/1.73m2)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-013",
+            "category": "Renal Function",
+            "description": "Albuminuria present (urine ACR >= 3 mg/mmol)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-014",
+            "category": "Lifestyle",
+            "description": "Obesity (BMI >= 30)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-016",
+            "category": "Cardiovascular",
+            "description": "Family history of premature cardiovascular disease",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-017",
+            "category": "Lipid Profile",
+            "description": "Low HDL cholesterol (< 1.0 mmol/L male, < 1.2 mmol/L female)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-018",
+            "category": "Lifestyle",
+            "description": "Sedentary lifestyle reported",
+            "riskLevel": "low"
+          },
+          {
+            "id": "CVR-019",
+            "category": "Complications",
+            "description": "Background retinopathy present",
+            "riskLevel": "low"
+          },
+          {
+            "id": "CVR-020",
+            "category": "Lipid Profile",
+            "description": "Elevated triglycerides (>= 2.3 mmol/L)",
+            "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BP-002",
+            "category": "Blood Pressure",
+            "message": "Blood pressure not at target despite antihypertensive therapy - review medication",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MED-003",
+            "category": "Medications",
+            "message": "Albuminuria without ACE inhibitor or ARB - consider renoprotective therapy",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Lifestyle",
+            "message": "Current smoker - offer smoking cessation support",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "very-high-established-cvd-multiple-high-rules",
+      "description": "Type 2 diabetes for 22 years with a previous MI, atrial fibrillation, systolic 184 (hypertensive-crisis range) despite treatment, HbA1c entered as 10.2 % (converted to 88.0 mmol/mol, crossing both the >= 75 rule and the >= 86 flag), eGFR 24 with heavy albuminuria (ACR 35, on an ARB), total cholesterol 8.4, proliferative retinopathy, absent foot pulses with a prior ulcer, BMI 40.8, current dyspnoea, and — because of statin intolerance and no SGLT2i/GLP-1 — the cardioprotective-therapy gaps: seven high rules fire alongside seven medium/low ones — expect riskCategory veryHigh, and seven high-priority plus three medium-priority flags; metformin is 'no' but the first-line-metformin flag is correctly suppressed by eGFR < 30.",
+      "state": {
+        "patientDemographics": {
+          "fullName": "Thomas Reyes",
+          "dateOfBirth": "1958-10-30",
+          "sex": "male",
+          "nhsNumber": "",
+          "heightCm": 170,
+          "weightKg": 118,
+          "ethnicity": "white-british"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 45,
+          "diabetesDurationYears": 22,
+          "hba1cValue": 10.2,
+          "hba1cUnit": "percent",
+          "fastingGlucose": 13.1,
+          "diabetesTreatment": "insulin",
+          "insulinDurationYears": 8
+        },
+        "cardiovascularHistory": {
+          "previousMi": "yes",
+          "previousStroke": "no",
+          "previousTia": "no",
+          "peripheralArterialDisease": "no",
+          "heartFailure": "no",
+          "atrialFibrillation": "yes",
+          "familyCvdHistory": "no",
+          "familyCvdDetails": "",
+          "currentChestPain": "no",
+          "currentDyspnoea": "yes"
+        },
+        "bloodPressure": {
+          "systolicBp": 184,
+          "diastolicBp": 96,
+          "onAntihypertensive": "yes",
+          "numberOfBpMedications": 3,
+          "bpAtTarget": "no",
+          "homeBpMonitoring": "yes"
+        },
+        "lipidProfile": {
+          "totalCholesterol": 8.4,
+          "hdlCholesterol": 0.8,
+          "ldlCholesterol": 4.1,
+          "triglycerides": 3.1,
+          "nonHdlCholesterol": 7.6,
+          "onStatin": "no",
+          "statinName": "",
+          "onOtherLipidTherapy": "yes"
+        },
+        "renalFunction": {
+          "egfr": 24,
+          "creatinine": 238,
+          "urineAcr": 35,
+          "proteinuria": "yes",
+          "ckdStage": "G4"
+        },
+        "lifestyleFactors": {
+          "smokingStatus": "ex",
+          "cigarettesPerDay": null,
+          "yearsSinceQuit": 9,
+          "alcoholUnitsPerWeek": 0,
+          "physicalActivity": "sedentary",
+          "dietQuality": "poor",
+          "bmi": null,
+          "waistCircumferenceCm": 126
+        },
+        "currentMedications": {
+          "metformin": "no",
+          "sglt2Inhibitor": "no",
+          "glp1Agonist": "no",
+          "sulfonylurea": "no",
+          "dpp4Inhibitor": "no",
+          "insulin": "yes",
+          "aceInhibitorOrArb": "yes",
+          "antiplatelet": "no",
+          "anticoagulant": "yes",
+          "otherMedications": "ezetimibe 10 mg; bisoprolol; amlodipine; doxazosin; apixaban"
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "proliferative",
+          "lastEyeScreeningDate": "2026-06-02",
+          "neuropathySymptoms": "yes",
+          "monofilamentTest": "abnormal",
+          "footPulses": "absent",
+          "footUlcerHistory": "yes",
+          "ankleBrachialIndex": 0.6,
+          "erectileDysfunction": "yes"
+        },
+        "riskAssessmentSummary": {
+          "riskRegion": "very-high",
+          "additionalRiskFactors": "Statin intolerance (myalgia); metformin stopped for CKD G4.",
+          "clinicalNotes": "Same-day BP review; urgent glycaemic review; cardiology and nephrology referrals; diabetic foot team.",
+          "agreedTreatmentTargets": "BP < 130/80, LDL < 1.4 (non-statin therapy), HbA1c < 64",
+          "followUpInterval": "2-weeks"
+        }
+      },
+      "expected": {
+        "riskCategory": "veryHigh",
+        "firedRules": [
+          {
+            "id": "CVR-001",
+            "category": "Cardiovascular History",
+            "description": "Established cardiovascular disease (prior MI, stroke, TIA, PAD, or HF)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-002",
+            "category": "Blood Pressure",
+            "description": "Severely elevated blood pressure (systolic >= 180 mmHg)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-003",
+            "category": "Glycaemic Control",
+            "description": "Very poor glycaemic control (HbA1c >= 75 mmol/mol / 9%)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-004",
+            "category": "Renal Function",
+            "description": "Severe renal impairment (eGFR < 30 mL/min/1.73m2)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-005",
+            "category": "Lipid Profile",
+            "description": "Severely elevated total cholesterol (>= 8.0 mmol/L)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-006",
+            "category": "Complications",
+            "description": "Proliferative or maculopathy retinopathy",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-007",
+            "category": "Diabetes Duration",
+            "description": "Long diabetes duration (>= 20 years)",
+            "riskLevel": "high"
+          },
+          {
+            "id": "CVR-010",
+            "category": "Lipid Profile",
+            "description": "Elevated LDL cholesterol (>= 2.6 mmol/L)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-013",
+            "category": "Renal Function",
+            "description": "Albuminuria present (urine ACR >= 3 mg/mmol)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-014",
+            "category": "Lifestyle",
+            "description": "Obesity (BMI >= 30)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-015",
+            "category": "Cardiovascular",
+            "description": "Atrial fibrillation",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-017",
+            "category": "Lipid Profile",
+            "description": "Low HDL cholesterol (< 1.0 mmol/L male, < 1.2 mmol/L female)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "CVR-018",
+            "category": "Lifestyle",
+            "description": "Sedentary lifestyle reported",
+            "riskLevel": "low"
+          },
+          {
+            "id": "CVR-020",
+            "category": "Lipid Profile",
+            "description": "Elevated triglycerides (>= 2.3 mmol/L)",
+            "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BP-001",
+            "category": "Blood Pressure",
+            "message": "Hypertensive crisis - urgent assessment required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HBA1C-001",
+            "category": "Glycaemic Control",
+            "message": "HbA1c >= 86 mmol/mol (10%) - urgent glycaemic management review",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medications",
+            "message": "Established CVD without SGLT2 inhibitor or GLP-1 agonist - consider cardioprotective therapy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MED-002",
+            "category": "Medications",
+            "message": "Established CVD without statin therapy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SCREEN-002",
+            "category": "Screening",
+            "message": "Abnormal foot examination - refer to diabetic foot team",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RENAL-001",
+            "category": "Renal",
+            "message": "eGFR < 30 - consider nephrology referral and medication dose adjustment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CVD-001",
+            "category": "Cardiovascular",
+            "message": "Active cardiovascular symptoms reported - consider urgent cardiology assessment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BP-002",
+            "category": "Blood Pressure",
+            "message": "Blood pressure not at target despite antihypertensive therapy - review medication",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SCREEN-003",
+            "category": "Screening",
+            "message": "History of foot ulceration - high-risk foot, ensure podiatry follow-up",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BMI-001",
+            "category": "Lifestyle",
+            "message": "Severe obesity (BMI >= 40) - consider bariatric/metabolic surgery referral",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

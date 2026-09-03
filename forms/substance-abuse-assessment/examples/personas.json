@@ -1,0 +1,749 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateSubstanceGrade",
+  "note": "Realistic filled-in states in the AUDIT + DAST-10 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `calculateSubstanceGrade` folds `detectAdditionalFlags` into `additionalFlags` (so flags ARE pinned here, unlike the split assessment engines) and stamps a wall-clock `timestamp`, which the oracle strips. `deriveOverallRisk` is a max over three inputs — the highest fired-rule grade, the AUDIT total, and the DAST total — so a case can reach 'high' with no grade-4 rule at all (second persona) while any single grade-4 rule, AUDIT >= 20, or DAST >= 9 forces 'critical'. DAST Q3 is inversely scored: 'no' (unable to stop) scores the point. `firedRules` come out in `substanceRules` array order, not by grade.",
+  "personas": [
+    {
+      "name": "low-risk-social-drinker-no-drug-use",
+      "description": "Occasional social drinking (AUDIT 4: 2-4 times a month, 1-2 drinks, rare binge), no drug use at all, no withdrawal, mental-health, physical, or social risk factors — only the AUDIT low-risk band rule fires — expect auditScore 4 (low-risk), dastScore 0 (no-problems), overallRisk low, no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Priya",
+          "lastName": "Anand",
+          "dateOfBirth": "1991-05-14",
+          "sex": "female",
+          "weight": 62,
+          "height": 165,
+          "bmi": 22.8
+        },
+        "alcoholUseAudit": {
+          "auditQ1Frequency": 2,
+          "auditQ2TypicalQuantity": 1,
+          "auditQ3BingeFrequency": 1,
+          "auditQ4ImpairedControl": 0,
+          "auditQ5FailedExpectations": 0,
+          "auditQ6MorningDrinking": 0,
+          "auditQ7Guilt": 0,
+          "auditQ8Blackout": 0,
+          "auditQ9Injury": 0,
+          "auditQ10Concern": 0
+        },
+        "drugUseDast": {
+          "dastQ1NonMedicalUse": "no",
+          "dastQ2PolyDrug": "no",
+          "dastQ3AbleToStop": "yes",
+          "dastQ4Blackouts": "no",
+          "dastQ5Guilt": "no",
+          "dastQ6Complaints": "no",
+          "dastQ7Neglect": "no",
+          "dastQ8IllegalActivities": "no",
+          "dastQ9Withdrawal": "no",
+          "dastQ10MedicalProblems": "no"
+        },
+        "substanceUseHistory": {
+          "ageFirstAlcoholUse": 18,
+          "ageFirstDrugUse": null,
+          "primarySubstance": "alcohol",
+          "primarySubstanceOther": "",
+          "secondarySubstances": "",
+          "routeOfAdministration": "oral",
+          "frequencyOfUse": "monthly",
+          "durationOfUse": "5-10-years",
+          "lastUseDate": "2026-08-15",
+          "currentUseStatus": "not-currently-using",
+          "ivDrugUse": "no",
+          "needleSharing": "no"
+        },
+        "withdrawalAssessment": {
+          "currentlyInWithdrawal": "no",
+          "withdrawalSubstance": "",
+          "tremor": "no",
+          "sweating": "no",
+          "nauseaVomiting": "no",
+          "anxiety": "no",
+          "agitation": "no",
+          "seizureHistory": "no",
+          "deliriumTremensHistory": "no",
+          "hallucinations": "no",
+          "lastDrinkDrugHours": null,
+          "withdrawalSeverity": "",
+          "medicallySupervisedDetoxNeeded": "no"
+        },
+        "mentalHealthComorbidities": {
+          "depression": "no",
+          "depressionSeverity": "",
+          "anxietyDisorder": "no",
+          "anxietyDisorderType": "",
+          "ptsd": "no",
+          "ptsdDetails": "",
+          "bipolarDisorder": "no",
+          "psychosis": "no",
+          "personalityDisorder": "no",
+          "eatingDisorder": "no",
+          "adhd": "no",
+          "suicidalIdeation": "no",
+          "suicidalIdeationCurrent": "no",
+          "selfHarmHistory": "no",
+          "previousSuicideAttempts": "no",
+          "psychiatricMedication": "no",
+          "psychiatricMedicationDetails": ""
+        },
+        "physicalHealthImpact": {
+          "liverDisease": "no",
+          "liverDiseaseType": "",
+          "hepatitisB": "no",
+          "hepatitisC": "no",
+          "hivStatus": "negative",
+          "cardiovascularIssues": "no",
+          "cardiovascularDetails": "",
+          "respiratoryIssues": "no",
+          "respiratoryDetails": "",
+          "gastrointestinalIssues": "no",
+          "gastrointestinalDetails": "",
+          "neurologicalIssues": "no",
+          "neurologicalDetails": "",
+          "nutritionalDeficiency": "no",
+          "chronicPain": "no",
+          "chronicPainDetails": "",
+          "overdoseHistory": "no",
+          "overdoseCount": null,
+          "lastOverdoseDate": ""
+        },
+        "socialLegalImpact": {
+          "employmentStatus": "employed",
+          "occupation": "Accountant",
+          "employmentAffected": "no",
+          "housingStatus": "owned",
+          "relationshipStatus": "partnered",
+          "relationshipImpact": "no",
+          "dependents": 0,
+          "childrenSafeguardingConcerns": "no",
+          "socialSupport": "good",
+          "criminalRecord": "no",
+          "criminalRecordDetails": "",
+          "currentLegalIssues": "no",
+          "currentLegalDetails": "",
+          "duiDwiHistory": "no",
+          "financialDifficulties": "no",
+          "domesticViolence": "no",
+          "domesticViolenceDetails": ""
+        },
+        "previousTreatmentHistory": {
+          "previousTreatment": "no",
+          "numberOfTreatmentEpisodes": null,
+          "previousDetox": "no",
+          "detoxSetting": "",
+          "previousRehab": "no",
+          "rehabType": "",
+          "previousCounselling": "no",
+          "counsellingType": "",
+          "previousMedicationAssisted": "no",
+          "matMedication": "",
+          "selfHelpGroups": "no",
+          "selfHelpGroupType": "",
+          "longestPeriodAbstinent": "",
+          "relapseTriggers": ""
+        },
+        "treatmentPlanningGoals": {
+          "treatmentGoal": "maintain",
+          "readinessToChange": "maintenance",
+          "motivationLevel": "high",
+          "preferredTreatmentSetting": "none-needed",
+          "interestedInCounselling": "no",
+          "interestedInMedication": "no",
+          "interestedInSelfHelp": "no",
+          "barriersToTreatment": "",
+          "supportNetworkAvailable": "yes",
+          "supportNetworkDetails": "Partner and close friends.",
+          "riskOfRelapse": "low",
+          "safetyPlanNeeded": "no",
+          "naloxoneProvided": "no",
+          "followUpPlan": "Brief education on safe drinking limits; no follow-up required."
+        }
+      },
+      "expected": {
+        "auditScore": 4,
+        "auditRiskCategory": "low-risk",
+        "dastScore": 0,
+        "dastRiskCategory": "no-problems",
+        "overallRisk": "low",
+        "firedRules": [
+          {
+            "id": "AUDIT-001",
+            "category": "Alcohol",
+            "description": "AUDIT score low risk (0-7)",
+            "grade": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "high-risk-harmful-drinking-daily-cannabis-no-grade-4-rule",
+      "description": "Harmful drinking (AUDIT 17) with daily cannabis use for over ten years, moderate depression, and fatty liver, but no withdrawal, no overdose, no suicidality, no IV use, and no safeguarding issue: the strongest rule that fires is grade 3 (harmful AUDIT band, daily use), so 'critical' is never reached — 'high' comes from the AUDIT total crossing 16 and the grade-3 rules together, with the DAST only moderate (4) — expect auditScore 17 (harmful), dastScore 4 (moderate), overallRisk high, and no flags (every flag needs a grade-4-class finding or a specific medium-tier item this case lacks).",
+      "state": {
+        "demographics": {
+          "firstName": "Sam",
+          "lastName": "Okoro",
+          "dateOfBirth": "1984-11-02",
+          "sex": "male",
+          "weight": 92,
+          "height": 178,
+          "bmi": 29
+        },
+        "alcoholUseAudit": {
+          "auditQ1Frequency": 3,
+          "auditQ2TypicalQuantity": 2,
+          "auditQ3BingeFrequency": 3,
+          "auditQ4ImpairedControl": 2,
+          "auditQ5FailedExpectations": 2,
+          "auditQ6MorningDrinking": 1,
+          "auditQ7Guilt": 2,
+          "auditQ8Blackout": 1,
+          "auditQ9Injury": 1,
+          "auditQ10Concern": 0
+        },
+        "drugUseDast": {
+          "dastQ1NonMedicalUse": "yes",
+          "dastQ2PolyDrug": "no",
+          "dastQ3AbleToStop": "no",
+          "dastQ4Blackouts": "no",
+          "dastQ5Guilt": "yes",
+          "dastQ6Complaints": "no",
+          "dastQ7Neglect": "yes",
+          "dastQ8IllegalActivities": "no",
+          "dastQ9Withdrawal": "no",
+          "dastQ10MedicalProblems": "no"
+        },
+        "substanceUseHistory": {
+          "ageFirstAlcoholUse": 15,
+          "ageFirstDrugUse": 17,
+          "primarySubstance": "cannabis",
+          "primarySubstanceOther": "",
+          "secondarySubstances": "alcohol",
+          "routeOfAdministration": "smoked",
+          "frequencyOfUse": "daily",
+          "durationOfUse": "greater-10-years",
+          "lastUseDate": "2026-08-24",
+          "currentUseStatus": "actively-using",
+          "ivDrugUse": "no",
+          "needleSharing": "no"
+        },
+        "withdrawalAssessment": {
+          "currentlyInWithdrawal": "no",
+          "withdrawalSubstance": "",
+          "tremor": "no",
+          "sweating": "no",
+          "nauseaVomiting": "no",
+          "anxiety": "yes",
+          "agitation": "no",
+          "seizureHistory": "no",
+          "deliriumTremensHistory": "no",
+          "hallucinations": "no",
+          "lastDrinkDrugHours": 14,
+          "withdrawalSeverity": "mild",
+          "medicallySupervisedDetoxNeeded": "no"
+        },
+        "mentalHealthComorbidities": {
+          "depression": "yes",
+          "depressionSeverity": "moderate",
+          "anxietyDisorder": "no",
+          "anxietyDisorderType": "",
+          "ptsd": "no",
+          "ptsdDetails": "",
+          "bipolarDisorder": "no",
+          "psychosis": "no",
+          "personalityDisorder": "no",
+          "eatingDisorder": "no",
+          "adhd": "no",
+          "suicidalIdeation": "no",
+          "suicidalIdeationCurrent": "no",
+          "selfHarmHistory": "no",
+          "previousSuicideAttempts": "no",
+          "psychiatricMedication": "yes",
+          "psychiatricMedicationDetails": "Sertraline 100 mg daily."
+        },
+        "physicalHealthImpact": {
+          "liverDisease": "yes",
+          "liverDiseaseType": "fatty-liver",
+          "hepatitisB": "no",
+          "hepatitisC": "no",
+          "hivStatus": "negative",
+          "cardiovascularIssues": "no",
+          "cardiovascularDetails": "",
+          "respiratoryIssues": "yes",
+          "respiratoryDetails": "Chronic cough attributed to smoking.",
+          "gastrointestinalIssues": "no",
+          "gastrointestinalDetails": "",
+          "neurologicalIssues": "no",
+          "neurologicalDetails": "",
+          "nutritionalDeficiency": "no",
+          "chronicPain": "no",
+          "chronicPainDetails": "",
+          "overdoseHistory": "no",
+          "overdoseCount": null,
+          "lastOverdoseDate": ""
+        },
+        "socialLegalImpact": {
+          "employmentStatus": "employed",
+          "occupation": "Delivery driver",
+          "employmentAffected": "yes",
+          "housingStatus": "rented",
+          "relationshipStatus": "separated",
+          "relationshipImpact": "yes",
+          "dependents": 1,
+          "childrenSafeguardingConcerns": "no",
+          "socialSupport": "limited",
+          "criminalRecord": "no",
+          "criminalRecordDetails": "",
+          "currentLegalIssues": "no",
+          "currentLegalDetails": "",
+          "duiDwiHistory": "no",
+          "financialDifficulties": "yes",
+          "domesticViolence": "no",
+          "domesticViolenceDetails": ""
+        },
+        "previousTreatmentHistory": {
+          "previousTreatment": "yes",
+          "numberOfTreatmentEpisodes": 1,
+          "previousDetox": "no",
+          "detoxSetting": "",
+          "previousRehab": "no",
+          "rehabType": "",
+          "previousCounselling": "yes",
+          "counsellingType": "Brief alcohol intervention in primary care, 2023.",
+          "previousMedicationAssisted": "no",
+          "matMedication": "",
+          "selfHelpGroups": "no",
+          "selfHelpGroupType": "",
+          "longestPeriodAbstinent": "3 months (2023)",
+          "relapseTriggers": "Work stress and evenings alone."
+        },
+        "treatmentPlanningGoals": {
+          "treatmentGoal": "reduce",
+          "readinessToChange": "contemplation",
+          "motivationLevel": "moderate",
+          "preferredTreatmentSetting": "community",
+          "interestedInCounselling": "yes",
+          "interestedInMedication": "no",
+          "interestedInSelfHelp": "yes",
+          "barriersToTreatment": "Shift work.",
+          "supportNetworkAvailable": "yes",
+          "supportNetworkDetails": "Sister lives nearby.",
+          "riskOfRelapse": "moderate",
+          "safetyPlanNeeded": "no",
+          "naloxoneProvided": "no",
+          "followUpPlan": "Community alcohol service referral; extended brief intervention; review in 4 weeks."
+        }
+      },
+      "expected": {
+        "auditScore": 17,
+        "auditRiskCategory": "harmful",
+        "dastScore": 4,
+        "dastRiskCategory": "moderate",
+        "overallRisk": "high",
+        "firedRules": [
+          {
+            "id": "AUDIT-003",
+            "category": "Alcohol",
+            "description": "AUDIT score harmful (16-19)",
+            "grade": 3
+          },
+          {
+            "id": "DAST-002",
+            "category": "Drug",
+            "description": "DAST score moderate level (3-5)",
+            "grade": 2
+          },
+          {
+            "id": "SUH-003",
+            "category": "Substance History",
+            "description": "Daily substance use",
+            "grade": 3
+          },
+          {
+            "id": "SUH-004",
+            "category": "Substance History",
+            "description": "Long-term use (>10 years)",
+            "grade": 2
+          },
+          {
+            "id": "SUH-005",
+            "category": "Substance History",
+            "description": "Actively using",
+            "grade": 2
+          },
+          {
+            "id": "MH-005",
+            "category": "Mental Health",
+            "description": "Comorbid depression (mild/moderate)",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "critical-active-withdrawal-overdose-suicidality-needle-sharing",
+      "description": "Alcohol dependence (AUDIT 32) with severe poly-drug use (DAST 10), currently in withdrawal with a seizure history, two previous opioid overdoses, current suicidal ideation with prior attempts, IV use with needle sharing, hepatitis C, severe depression, homelessness, and no social support: every route to 'critical' is hit at once (multiple grade-4 rules, AUDIT >= 20, DAST >= 9) — expect auditScore 32 (dependence-likely), dastScore 10 (severe), overallRisk critical, twenty-one fired rules, and eight high-priority plus three medium-priority flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Alex",
+          "lastName": "Morgan",
+          "dateOfBirth": "1979-03-27",
+          "sex": "male",
+          "weight": 58,
+          "height": 176,
+          "bmi": 18.7
+        },
+        "alcoholUseAudit": {
+          "auditQ1Frequency": 4,
+          "auditQ2TypicalQuantity": 3,
+          "auditQ3BingeFrequency": 4,
+          "auditQ4ImpairedControl": 3,
+          "auditQ5FailedExpectations": 2,
+          "auditQ6MorningDrinking": 3,
+          "auditQ7Guilt": 3,
+          "auditQ8Blackout": 2,
+          "auditQ9Injury": 4,
+          "auditQ10Concern": 4
+        },
+        "drugUseDast": {
+          "dastQ1NonMedicalUse": "yes",
+          "dastQ2PolyDrug": "yes",
+          "dastQ3AbleToStop": "no",
+          "dastQ4Blackouts": "yes",
+          "dastQ5Guilt": "yes",
+          "dastQ6Complaints": "yes",
+          "dastQ7Neglect": "yes",
+          "dastQ8IllegalActivities": "yes",
+          "dastQ9Withdrawal": "yes",
+          "dastQ10MedicalProblems": "yes"
+        },
+        "substanceUseHistory": {
+          "ageFirstAlcoholUse": 13,
+          "ageFirstDrugUse": 16,
+          "primarySubstance": "heroin",
+          "primarySubstanceOther": "",
+          "secondarySubstances": "alcohol, crack cocaine, diazepam",
+          "routeOfAdministration": "intravenous",
+          "frequencyOfUse": "daily",
+          "durationOfUse": "5-10-years",
+          "lastUseDate": "2026-08-29",
+          "currentUseStatus": "actively-using",
+          "ivDrugUse": "yes",
+          "needleSharing": "yes"
+        },
+        "withdrawalAssessment": {
+          "currentlyInWithdrawal": "yes",
+          "withdrawalSubstance": "alcohol and heroin",
+          "tremor": "yes",
+          "sweating": "yes",
+          "nauseaVomiting": "yes",
+          "anxiety": "yes",
+          "agitation": "yes",
+          "seizureHistory": "yes",
+          "deliriumTremensHistory": "no",
+          "hallucinations": "no",
+          "lastDrinkDrugHours": 18,
+          "withdrawalSeverity": "severe",
+          "medicallySupervisedDetoxNeeded": "yes"
+        },
+        "mentalHealthComorbidities": {
+          "depression": "yes",
+          "depressionSeverity": "severe",
+          "anxietyDisorder": "yes",
+          "anxietyDisorderType": "Generalised anxiety disorder",
+          "ptsd": "yes",
+          "ptsdDetails": "Childhood trauma.",
+          "bipolarDisorder": "no",
+          "psychosis": "no",
+          "personalityDisorder": "no",
+          "eatingDisorder": "no",
+          "adhd": "no",
+          "suicidalIdeation": "yes",
+          "suicidalIdeationCurrent": "yes",
+          "selfHarmHistory": "yes",
+          "previousSuicideAttempts": "yes",
+          "psychiatricMedication": "no",
+          "psychiatricMedicationDetails": ""
+        },
+        "physicalHealthImpact": {
+          "liverDisease": "no",
+          "liverDiseaseType": "",
+          "hepatitisB": "no",
+          "hepatitisC": "yes",
+          "hivStatus": "negative",
+          "cardiovascularIssues": "no",
+          "cardiovascularDetails": "",
+          "respiratoryIssues": "no",
+          "respiratoryDetails": "",
+          "gastrointestinalIssues": "yes",
+          "gastrointestinalDetails": "Recurrent gastritis.",
+          "neurologicalIssues": "no",
+          "neurologicalDetails": "",
+          "nutritionalDeficiency": "yes",
+          "chronicPain": "no",
+          "chronicPainDetails": "",
+          "overdoseHistory": "yes",
+          "overdoseCount": 2,
+          "lastOverdoseDate": "2026-05-11"
+        },
+        "socialLegalImpact": {
+          "employmentStatus": "unemployed",
+          "occupation": "",
+          "employmentAffected": "yes",
+          "housingStatus": "homeless",
+          "relationshipStatus": "single",
+          "relationshipImpact": "yes",
+          "dependents": 0,
+          "childrenSafeguardingConcerns": "no",
+          "socialSupport": "none",
+          "criminalRecord": "yes",
+          "criminalRecordDetails": "Shoplifting and possession.",
+          "currentLegalIssues": "yes",
+          "currentLegalDetails": "Pending court date.",
+          "duiDwiHistory": "no",
+          "financialDifficulties": "yes",
+          "domesticViolence": "no",
+          "domesticViolenceDetails": ""
+        },
+        "previousTreatmentHistory": {
+          "previousTreatment": "yes",
+          "numberOfTreatmentEpisodes": 4,
+          "previousDetox": "yes",
+          "detoxSetting": "inpatient",
+          "previousRehab": "yes",
+          "rehabType": "Residential, 2022 — left after 3 weeks.",
+          "previousCounselling": "yes",
+          "counsellingType": "Drug service keyworker.",
+          "previousMedicationAssisted": "yes",
+          "matMedication": "Methadone (disengaged 2025).",
+          "selfHelpGroups": "yes",
+          "selfHelpGroupType": "NA, sporadic.",
+          "longestPeriodAbstinent": "5 months (2022)",
+          "relapseTriggers": "Loss of housing; bereavement."
+        },
+        "treatmentPlanningGoals": {
+          "treatmentGoal": "abstain",
+          "readinessToChange": "preparation",
+          "motivationLevel": "moderate",
+          "preferredTreatmentSetting": "inpatient",
+          "interestedInCounselling": "yes",
+          "interestedInMedication": "yes",
+          "interestedInSelfHelp": "yes",
+          "barriersToTreatment": "No fixed address; no phone.",
+          "supportNetworkAvailable": "no",
+          "supportNetworkDetails": "",
+          "riskOfRelapse": "high",
+          "safetyPlanNeeded": "yes",
+          "naloxoneProvided": "yes",
+          "followUpPlan": "Same-day medical assessment for withdrawal; inpatient detox bed requested; crisis team informed; take-home naloxone issued; BBV screen sent."
+        }
+      },
+      "expected": {
+        "auditScore": 32,
+        "auditRiskCategory": "dependence-likely",
+        "dastScore": 10,
+        "dastRiskCategory": "severe",
+        "overallRisk": "critical",
+        "firedRules": [
+          {
+            "id": "AUDIT-004",
+            "category": "Alcohol",
+            "description": "AUDIT score dependence likely (20-40)",
+            "grade": 4
+          },
+          {
+            "id": "AUDIT-005",
+            "category": "Alcohol",
+            "description": "Morning drinking (AUDIT Q6 elevated)",
+            "grade": 3
+          },
+          {
+            "id": "AUDIT-006",
+            "category": "Alcohol",
+            "description": "Alcohol-related injury (AUDIT Q9 positive)",
+            "grade": 3
+          },
+          {
+            "id": "DAST-004",
+            "category": "Drug",
+            "description": "DAST score severe level (9-10)",
+            "grade": 4
+          },
+          {
+            "id": "DAST-005",
+            "category": "Drug",
+            "description": "Poly-drug use",
+            "grade": 3
+          },
+          {
+            "id": "DAST-006",
+            "category": "Drug",
+            "description": "Illegal activities to obtain drugs",
+            "grade": 3
+          },
+          {
+            "id": "SUH-001",
+            "category": "Substance History",
+            "description": "Intravenous drug use",
+            "grade": 3
+          },
+          {
+            "id": "SUH-002",
+            "category": "Substance History",
+            "description": "Needle sharing",
+            "grade": 4
+          },
+          {
+            "id": "SUH-003",
+            "category": "Substance History",
+            "description": "Daily substance use",
+            "grade": 3
+          },
+          {
+            "id": "SUH-005",
+            "category": "Substance History",
+            "description": "Actively using",
+            "grade": 2
+          },
+          {
+            "id": "WD-001",
+            "category": "Withdrawal",
+            "description": "Currently in withdrawal",
+            "grade": 4
+          },
+          {
+            "id": "WD-002",
+            "category": "Withdrawal",
+            "description": "History of withdrawal seizures",
+            "grade": 4
+          },
+          {
+            "id": "WD-005",
+            "category": "Withdrawal",
+            "description": "Severe withdrawal symptoms",
+            "grade": 4
+          },
+          {
+            "id": "MH-001",
+            "category": "Mental Health",
+            "description": "Current suicidal ideation",
+            "grade": 4
+          },
+          {
+            "id": "MH-002",
+            "category": "Mental Health",
+            "description": "Previous suicide attempts",
+            "grade": 3
+          },
+          {
+            "id": "MH-003",
+            "category": "Mental Health",
+            "description": "Severe depression",
+            "grade": 3
+          },
+          {
+            "id": "MH-006",
+            "category": "Mental Health",
+            "description": "PTSD",
+            "grade": 2
+          },
+          {
+            "id": "PH-001",
+            "category": "Physical Health",
+            "description": "Overdose history",
+            "grade": 4
+          },
+          {
+            "id": "PH-004",
+            "category": "Physical Health",
+            "description": "Hepatitis C positive",
+            "grade": 2
+          },
+          {
+            "id": "SL-001",
+            "category": "Social",
+            "description": "Homeless",
+            "grade": 3
+          },
+          {
+            "id": "SL-004",
+            "category": "Social",
+            "description": "No social support",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-WD-001",
+            "category": "Withdrawal",
+            "message": "Active withdrawal from alcohol and heroin - IMMEDIATE MEDICAL ASSESSMENT REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WD-002",
+            "category": "Withdrawal",
+            "message": "History of withdrawal seizures - HIGH RISK for complicated withdrawal",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SI-001",
+            "category": "Suicidality",
+            "message": "CURRENT SUICIDAL IDEATION - URGENT SAFETY ASSESSMENT REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SI-002",
+            "category": "Suicidality",
+            "message": "History of suicide attempts - elevated risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-OD-001",
+            "category": "Overdose",
+            "message": "Previous overdose(s): 2 episode(s) - naloxone provision recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BBV-001",
+            "category": "Blood-Borne Viruses",
+            "message": "Needle sharing reported - BBV screening required (HIV, Hep B, Hep C)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AUDIT-001",
+            "category": "Alcohol",
+            "message": "AUDIT score 32/40 - alcohol dependence likely, specialist referral recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DAST-001",
+            "category": "Drug",
+            "message": "DAST score 10/10 - severe drug problem, intensive treatment needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IV-001",
+            "category": "Substance History",
+            "message": "Intravenous drug use - BBV screening and harm reduction advice",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HOUSING-001",
+            "category": "Social",
+            "message": "Homeless - housing support and assertive outreach recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SH-001",
+            "category": "Mental Health",
+            "message": "History of self-harm - risk assessment and monitoring",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

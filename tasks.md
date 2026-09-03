@@ -1216,16 +1216,32 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       assessment; it only "passed" on the empty assessment because every
       property read was undefined and `undefined < undefined` is false,
       yielding 'complete'. Both persona files set `graderHint`
-      explicitly. 10 of these 19 forms remain:
+      explicitly. 3 more done 2026-09-03 (substance-abuse-assessment,
+      systematic-coronary-risk-evaluation-2-diabetes,
+      united-kingdom-statement-of-fitness-for-work — all nine personas
+      matched on first `--update`, including a 21-rule / 11-flag critical
+      substance case). substance-abuse's `deriveOverallRisk` is a max
+      over three inputs (highest fired grade, AUDIT total, DAST total),
+      so the second persona reaches 'high' with no grade-4 rule at all
+      and zero flags; both it and SCORE2 fold `detectAdditionalFlags`
+      into the graded result (so flags ARE pinned here, unlike the
+      split engines) and stamp a `timestamp` the oracle strips.
+      SCORE2's category is the max fired-rule level shifted one band up;
+      the very-high persona verified the percent→mmol/mol IFCC
+      conversion (10.2 % → 88.0) and that the metformin-first-line flag
+      is deliberately suppressed at eGFR < 30. The fit note is a
+      single self-contained engine whose `safetyFlags` are returned in
+      push order, NOT sorted by priority (the only engine in this
+      backlog that doesn't sort); its third persona confirms validity
+      supersedes both the automatic-disability (regex on free-text
+      diagnosis, explicit field blank) and over-max-period
+      recommendations. 7 of these 19 forms remain:
       lifeguard-certification-checklist, outpatient-outcome,
       patient-reported-outcome-measures, post-operative-report,
       recommended-summary-plan-for-emergency-care-and-treatment,
-      substance-abuse-assessment,
-      systematic-coronary-risk-evaluation-2-diabetes,
-      united-kingdom-statement-of-fitness-for-work,
       vaccinations-checklist, ward-round-note (count re-verified
       directly against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 279/355). The remaining
+      `bin/test-personas` ground truth: PASS 282/355). The remaining
       ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
       fuller input / returns a bare object or boolean / no engine
       namespace published) need discovery-hint fixes in their engines

@@ -1,0 +1,362 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFitNote",
+  "note": "Realistic filled-in states in the fit-note grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `gradeFitNote` is a single self-contained engine (no separate flags module, no timestamp): validity, adaptation, period, and safety rule sets fire independently, then `recommendation` is decided top-down with validity superseding everything. Verified nuances: `safetyFlags` are returned in push order, NOT sorted by priority (unlike every other engine in this backlog); the automatic-disability rule fires on a regex over the free-text diagnosis (HIV / cancer / carcinoma / malignan- / neoplasm / multiple sclerosis) even when the explicit yes/no field is blank; and `periodCompliance` 'exceeds_initial_max' needs both > 90 days AND the condition first recorded within the last 183 days of the assessment, else the same period is only 'long_term'.",
+  "personas": [
+    {
+      "name": "standard-may-be-fit-compliant-period",
+      "description": "A valid GP-issued note for a lower-back strain: 'may be fit' with two adaptations (phased return, altered hours) and practical comments, a 3-week duration in the first month of the condition — the adaptation rule fires at 'moderate' intensity (count 2, low severity) and the period is 'compliant' (21 days) — expect isValid yes, fitnessCategory may_be_fit, adaptationIntensity moderate, periodDays 21, periodCompliance compliant, isWithinFirstSixMonthsOfCondition yes, recommendation standard, and no safety flags.",
+      "state": {
+        "clinician": {
+          "name": "Dr Priya Anand",
+          "profession": "doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "7654321",
+          "isPrivatePractice": "no"
+        },
+        "medicalPractice": {
+          "name": "Riverside Medical Practice",
+          "postalAddressAsFullText": "12 Riverside Road, Oxford",
+          "postcode": "OX1 1AA",
+          "odsCode": "K82001",
+          "setting": "primary_care"
+        },
+        "patient": {
+          "name": "David Chen",
+          "birthDate": "1985-06-15",
+          "unitedKingdomNhsNumber": "",
+          "postalAddressAsFullText": "4 Mill Lane, Oxford",
+          "postcode": "OX2 6QQ",
+          "employerName": "Northgate Logistics Ltd",
+          "occupation": "Warehouse operative"
+        },
+        "assessmentDate": "2026-08-20",
+        "assessmentMethod": "in_person",
+        "generalFitnessConsidered": "yes",
+        "diagnosisText": "Lower back strain",
+        "diagnosisSnomedCode": "279039007",
+        "diagnosisSnomedDisplay": "Low back strain",
+        "diagnosisCategory": "musculoskeletal",
+        "conditionFirstRecordedDate": "2026-07-20",
+        "isAutomaticDisability": "no",
+        "isNonMedical": "no",
+        "fitnessForWork": "may_be_fit",
+        "adaptationPhasedReturn": "yes",
+        "adaptationAlteredHours": "yes",
+        "adaptationAmendedDuties": "no",
+        "adaptationWorkplaceAdaptations": "no",
+        "comments": "Avoid lifting over 10 kg for three weeks; shorter shifts initially, building back to full hours.",
+        "periodType": "duration",
+        "periodDurationValue": 3,
+        "periodDurationUnit": "weeks",
+        "periodFrom": "",
+        "periodTo": "",
+        "willAssessAgain": "no",
+        "plannedReviewDate": "",
+        "issuedAt": "2026-08-20",
+        "issuedVia": "digital",
+        "issueSetting": "primary_care",
+        "safeguardingConcern": "no",
+        "safeguardingNotes": ""
+      },
+      "expected": {
+        "fitnessCategory": "may_be_fit",
+        "adaptationIntensity": "moderate",
+        "adaptationCount": 2,
+        "periodDays": 21,
+        "periodCompliance": "compliant",
+        "isWithinFirstSixMonthsOfCondition": "yes",
+        "isValid": "yes",
+        "recommendation": "standard",
+        "firedRules": [
+          {
+            "ruleId": "R-ADAPT-MODERATE-001",
+            "ruleSet": "adaptation",
+            "severity": "low",
+            "description": "Adaptation count = 2 → intensity moderate."
+          },
+          {
+            "ruleId": "R-PERIOD-COMPLIANT-001",
+            "ruleSet": "period",
+            "severity": "low",
+            "description": "Period = 21 days → compliant"
+          }
+        ],
+        "safetyFlags": []
+      }
+    },
+    {
+      "name": "refer-occupational-health-long-term-not-fit-nurse-issued",
+      "description": "A nurse-issued (2022-authorised profession) note for a moderate depressive episode: 'not fit' (so no adaptation rules at all), a from/to period of 49 days — over 4 weeks but under 3 months, so 'long_term' rather than 'exceeds_initial_max' even though the condition is within its first six months — with a review booked; the mental-health, new-authority, and review safety rules also fire — expect isValid yes, fitnessCategory not_fit, adaptationIntensity blank, periodDays 49, periodCompliance long_term, recommendation refer_occupational_health, and four safety flags in push order (4-week, mental-health, new-authority, review).",
+      "state": {
+        "clinician": {
+          "name": "Femi Okafor",
+          "profession": "nurse",
+          "registrationBody": "NMC",
+          "registrationNumber": "12A3456B",
+          "isPrivatePractice": "no"
+        },
+        "medicalPractice": {
+          "name": "Cowley Community Mental Health Team",
+          "postalAddressAsFullText": "Unit 3, Templars Square, Oxford",
+          "postcode": "OX4 3XH",
+          "odsCode": "RNU01",
+          "setting": "community_clinic"
+        },
+        "patient": {
+          "name": "Sam Okoro",
+          "birthDate": "1990-11-02",
+          "unitedKingdomNhsNumber": "",
+          "postalAddressAsFullText": "18 Barns Road, Oxford",
+          "postcode": "OX4 3RQ",
+          "employerName": "Oxford City Council",
+          "occupation": "Customer service advisor"
+        },
+        "assessmentDate": "2026-08-25",
+        "assessmentMethod": "video_call",
+        "generalFitnessConsidered": "yes",
+        "diagnosisText": "Moderate depressive episode",
+        "diagnosisSnomedCode": "310496002",
+        "diagnosisSnomedDisplay": "Moderate depression",
+        "diagnosisCategory": "mental_health",
+        "conditionFirstRecordedDate": "2026-06-01",
+        "isAutomaticDisability": "no",
+        "isNonMedical": "no",
+        "fitnessForWork": "not_fit",
+        "adaptationPhasedReturn": "",
+        "adaptationAlteredHours": "",
+        "adaptationAmendedDuties": "",
+        "adaptationWorkplaceAdaptations": "",
+        "comments": "",
+        "periodType": "from_to",
+        "periodDurationValue": null,
+        "periodDurationUnit": "",
+        "periodFrom": "2026-08-25",
+        "periodTo": "2026-10-13",
+        "willAssessAgain": "yes",
+        "plannedReviewDate": "2026-10-10",
+        "issuedAt": "2026-08-25",
+        "issuedVia": "digital",
+        "issueSetting": "community_clinic",
+        "safeguardingConcern": "no",
+        "safeguardingNotes": ""
+      },
+      "expected": {
+        "fitnessCategory": "not_fit",
+        "adaptationIntensity": "",
+        "adaptationCount": 0,
+        "periodDays": 49,
+        "periodCompliance": "long_term",
+        "isWithinFirstSixMonthsOfCondition": "yes",
+        "isValid": "yes",
+        "recommendation": "refer_occupational_health",
+        "firedRules": [
+          {
+            "ruleId": "R-PERIOD-LONG-TERM-001",
+            "ruleSet": "period",
+            "severity": "low",
+            "description": "Period = 49 days → long_term"
+          },
+          {
+            "ruleId": "R-SAFE-MH-001",
+            "ruleSet": "safety",
+            "severity": "medium",
+            "description": "Mental-health diagnosis selected."
+          },
+          {
+            "ruleId": "R-SAFE-NEW-AUTH-001",
+            "ruleSet": "safety",
+            "severity": "low",
+            "description": "2022-authorised issuer profession."
+          },
+          {
+            "ruleId": "R-SAFE-REVIEW-001",
+            "ruleSet": "safety",
+            "severity": "low",
+            "description": "Review at end of period requested."
+          }
+        ],
+        "safetyFlags": [
+          {
+            "flagId": "F-4W",
+            "category": "long_absence_four_weeks",
+            "priority": "low",
+            "description": "Absence > 4 weeks — consider Access to Work referral.",
+            "suggestedAction": "Signpost the patient to Access to Work and the Health Adjustment Passport."
+          },
+          {
+            "flagId": "F-MENTAL-HEALTH",
+            "category": "mental_health_condition",
+            "priority": "medium",
+            "description": "Mental-health diagnosis — additional support pathways available.",
+            "suggestedAction": "Signpost to NHS Talking Therapies, MIND, or workplace mental-health resources."
+          },
+          {
+            "flagId": "F-NEW-AUTH",
+            "category": "new_authority_hcp",
+            "priority": "low",
+            "description": "Issued by a 2022-authorised profession (nurse).",
+            "suggestedAction": "No action required — informational."
+          },
+          {
+            "flagId": "F-REVIEW",
+            "category": "ongoing_review_required",
+            "priority": "low",
+            "description": "Clinician will reassess at end of period.",
+            "suggestedAction": "Book a follow-up review around 2026-10-10."
+          }
+        ]
+      }
+    },
+    {
+      "name": "review-for-validity-supersedes-cancer-and-over-max-period",
+      "description": "A hospital-discharge note for a patient recovering from breast cancer surgery with the practice address left blank: the missing address is a high-severity validity failure, so the recommendation is review_for_validity even though this note would otherwise be refer_access_to_work (the diagnosis text matches the automatic-disability regex although the explicit yes/no field is blank) and also breaches the 3-months-in-first-6-months rule (4 months = 122 days, condition recorded 60 days earlier) — expect isValid no, periodDays 122, periodCompliance exceeds_initial_max, isWithinFirstSixMonthsOfCondition yes, recommendation review_for_validity, and seven safety flags in push order (validity, period-max, 4-week, 12-week, auto-disability, discharge, review with the 'end of the period' fallback text).",
+      "state": {
+        "clinician": {
+          "name": "Mr Wei Zhang",
+          "profession": "doctor",
+          "registrationBody": "GMC",
+          "registrationNumber": "1122334",
+          "isPrivatePractice": "no"
+        },
+        "medicalPractice": {
+          "name": "City General Hospital — Breast Surgery",
+          "postalAddressAsFullText": "",
+          "postcode": "",
+          "odsCode": "RTH00",
+          "setting": "secondary_care_discharge"
+        },
+        "patient": {
+          "name": "Margaret Wallis",
+          "birthDate": "1966-02-10",
+          "unitedKingdomNhsNumber": "",
+          "postalAddressAsFullText": "7 Church Walk, Abingdon",
+          "postcode": "OX14 3JD",
+          "employerName": "Abingdon Primary School",
+          "occupation": "Teaching assistant"
+        },
+        "assessmentDate": "2026-08-30",
+        "assessmentMethod": "in_person",
+        "generalFitnessConsidered": "yes",
+        "diagnosisText": "Breast cancer — post-operative recovery following mastectomy",
+        "diagnosisSnomedCode": "254837009",
+        "diagnosisSnomedDisplay": "Malignant neoplasm of breast",
+        "diagnosisCategory": "neoplasm",
+        "conditionFirstRecordedDate": "2026-07-01",
+        "isAutomaticDisability": "",
+        "isNonMedical": "no",
+        "fitnessForWork": "not_fit",
+        "adaptationPhasedReturn": "",
+        "adaptationAlteredHours": "",
+        "adaptationAmendedDuties": "",
+        "adaptationWorkplaceAdaptations": "",
+        "comments": "",
+        "periodType": "duration",
+        "periodDurationValue": 4,
+        "periodDurationUnit": "months",
+        "periodFrom": "",
+        "periodTo": "",
+        "willAssessAgain": "yes",
+        "plannedReviewDate": "",
+        "issuedAt": "2026-08-30",
+        "issuedVia": "printed_computer_generated",
+        "issueSetting": "secondary_care_discharge",
+        "safeguardingConcern": "no",
+        "safeguardingNotes": ""
+      },
+      "expected": {
+        "fitnessCategory": "not_fit",
+        "adaptationIntensity": "",
+        "adaptationCount": 0,
+        "periodDays": 122,
+        "periodCompliance": "exceeds_initial_max",
+        "isWithinFirstSixMonthsOfCondition": "yes",
+        "isValid": "no",
+        "recommendation": "review_for_validity",
+        "firedRules": [
+          {
+            "ruleId": "R-VALID-PRACTICE-001",
+            "ruleSet": "validity",
+            "severity": "high",
+            "description": "Practice address missing (DWP policy 3.7)."
+          },
+          {
+            "ruleId": "R-PERIOD-EXCEEDS-INITIAL-MAX-001",
+            "ruleSet": "period",
+            "severity": "high",
+            "description": "Period = 122 days → exceeds_initial_max"
+          },
+          {
+            "ruleId": "R-SAFE-DISABILITY-001",
+            "ruleSet": "safety",
+            "severity": "medium",
+            "description": "Diagnosis matches automatic disability (Equality Act 2010 s.6)."
+          },
+          {
+            "ruleId": "R-SAFE-DISCHARGE-001",
+            "ruleSet": "safety",
+            "severity": "medium",
+            "description": "Fit note issued on hospital discharge (DWP policy 3.5)."
+          },
+          {
+            "ruleId": "R-SAFE-REVIEW-001",
+            "ruleSet": "safety",
+            "severity": "low",
+            "description": "Review at end of period requested."
+          }
+        ],
+        "safetyFlags": [
+          {
+            "flagId": "F-VALID-PRACTICE",
+            "category": "invalid_no_practice_address",
+            "priority": "high",
+            "description": "Fit note is invalid: no practice address.",
+            "suggestedAction": "Re-issue with the practice address printed."
+          },
+          {
+            "flagId": "F-PERIOD-MAX",
+            "category": "duration_exceeds_3_months_in_first_6_months",
+            "priority": "high",
+            "description": "Period exceeds the 3-month maximum allowed in the first six months of the condition.",
+            "suggestedAction": "Reduce period to ≤ 3 months or document why the rule does not apply."
+          },
+          {
+            "flagId": "F-4W",
+            "category": "long_absence_four_weeks",
+            "priority": "low",
+            "description": "Absence > 4 weeks — consider Access to Work referral.",
+            "suggestedAction": "Signpost the patient to Access to Work and the Health Adjustment Passport."
+          },
+          {
+            "flagId": "F-12W",
+            "category": "long_absence_twelve_weeks",
+            "priority": "medium",
+            "description": "Absence > 12 weeks — review SSP entitlement.",
+            "suggestedAction": "Discuss SSP, ESA, or Universal Credit eligibility with the patient."
+          },
+          {
+            "flagId": "F-AUTO-DISABILITY",
+            "category": "automatic_disability",
+            "priority": "medium",
+            "description": "Condition is automatically classed as a disability (HIV / cancer / MS).",
+            "suggestedAction": "Signpost to Access to Work, the Health Adjustment Passport, and condition-specific charities."
+          },
+          {
+            "flagId": "F-DISCHARGE",
+            "category": "secondary_care_discharge",
+            "priority": "medium",
+            "description": "Issued on hospital discharge; ensure GP is informed.",
+            "suggestedAction": "Send a copy of the fit note to the patient's GP."
+          },
+          {
+            "flagId": "F-REVIEW",
+            "category": "ongoing_review_required",
+            "priority": "low",
+            "description": "Clinician will reassess at end of period.",
+            "suggestedAction": "Book a follow-up review around the end of the period."
+          }
+        ]
+      }
+    }
+  ]
+}
