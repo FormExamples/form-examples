@@ -998,10 +998,22 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       ct-scan's second persona instead covers the one severity band
       (`minor`, incidental-only) not yet exercised by this family's other
       forms this backlog, and confirmed that same follow-up branch IS
-      reachable there, unlike coagulation's). 19 of 37 forms of this
-      family done, 18 remain (count re-verified directly against the
-      fleet each update, not hand-tracked — `bin/test-personas` ground
-      truth: PASS 252/355). 73
+      reachable there, unlike coagulation's). 3 more done 2026-09-03
+      (cystoscopy-test-result, cytology-test-result,
+      eye-vision-test-result — same methodology; cytology's critical/
+      low-grade detection is keyword-based (scans `cytologyResultCategory`
+      + `reportingCategory` text for substrings like "high-grade" /
+      "malignant" / "thy5" / "c5"), not purely boolean-driven, and its
+      third persona's narrative deliberately includes "suspicious" (a
+      low-grade trigger word) to confirm the sibling urgent-referral flag
+      still correctly stays suppressed once hasCriticalFinding is already
+      true; eye-vision's second persona confirms background diabetic
+      retinopathy (R1) is deliberately not "referable" per NHS Diabetic
+      Eye Screening Programme criteria, so it grades minor severity, not
+      major, distinct from pre-proliferative / proliferative / maculopathy).
+      22 of 37 forms of this family done, 15 remain (count re-verified
+      directly against the fleet each update, not hand-tracked —
+      `bin/test-personas` ground truth: PASS 255/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

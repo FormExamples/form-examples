@@ -1,0 +1,245 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. This engine's critical/low-grade detection is keyword-based (`categoryText` scans `cytologyResultCategory` + `reportingCategory`), not purely boolean-driven — wording matters, and 'malignancy' deliberately does NOT match the 'malignant' substring the high-grade detector looks for.",
+  "personas": [
+    {
+      "name": "normal-routine-cervical-screening-complete",
+      "description": "A normal routine cervical smear: negative for intraepithelial lesion or malignancy (NILM), HPV negative, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Cytopathologist)",
+        "originatingRequestReference": "REQ-2026-0820-CYTO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "specimenType": "cervical-smear",
+        "specimenAdequacy": "satisfactory",
+        "clinicalHistory": "Routine cervical screening, age 35.",
+        "comparisonWithPrevious": "Previous smear 3 years ago, also normal.",
+        "cytologyResultCategory": "Negative for intraepithelial lesion or malignancy (NILM)",
+        "hpvResult": "negative",
+        "malignancyPresent": false,
+        "dysplasiaPresent": false,
+        "microscopicDescription": "Adequate squamous and endocervical cellular component; no dyskaryotic or malignant cells seen.",
+        "diagnosis": "Negative for intraepithelial lesion or malignancy.",
+        "impression": "Normal cervical cytology; HPV negative. Return to routine recall.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Routine recall in 3 years per the national screening programme.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "negative",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "routine recall",
+        "recommendedAction": "No specific follow-up required; return to routine recall.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal cytology finding on a satisfactory specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine recall only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-isolated-hpv-positive-minor-complete",
+      "description": "Negative cytology (NILM) but HPV primary screening positive: an isolated HPV-positive result on otherwise normal cytology classifies as abnormal via the dedicated HPV-surveillance rule and grades minor severity, distinct from dysplasia-driven moderate severity; report complete — expect abnormal classification + minor severity + 100% completeness + recommended follow-up (early recall at 12 months).",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Cytopathologist)",
+        "originatingRequestReference": "REQ-2026-0825-CYTO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "specimenType": "cervical-smear",
+        "specimenAdequacy": "satisfactory",
+        "clinicalHistory": "Routine cervical screening, age 28.",
+        "comparisonWithPrevious": "No previous cervical screening on file.",
+        "cytologyResultCategory": "Negative for intraepithelial lesion or malignancy (NILM), HPV positive",
+        "hpvResult": "positive",
+        "malignancyPresent": false,
+        "dysplasiaPresent": false,
+        "microscopicDescription": "Adequate cellular component; no dyskaryotic or malignant cells seen. HPV primary screening positive.",
+        "diagnosis": "Negative cytology; HPV positive.",
+        "impression": "Negative cytology with a positive HPV test; manage per the HPV-primary-screening early-recall pathway.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Early recall for repeat HPV testing in 12 months.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "hpv-surveillance",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "early recall (12 months)",
+        "recommendedAction": "Manage per the HPV-surveillance pathway with early recall for repeat HPV testing.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-02",
+            "axis": "classification",
+            "category": "hpv-positive",
+            "description": "HPV positive with negative cytology; classified as abnormal (HPV surveillance pathway)."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "hpv-positive",
+            "description": "HPV positive with negative cytology; abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "hpv-positive",
+            "description": "HPV positive; early recall / surveillance recommended."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "critical-high-grade-dyskaryosis-suspected-carcinoma-uncommunicated-incomplete",
+      "description": "High-grade dyskaryosis, suspicious for invasive squamous cell carcinoma, with malignant cells confirmed on microscopy: this critical finding auto-escalates classification to critical and follow-up to critical-alert, with the recommended action naming urgent colposcopy / MDT review; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history, diagnosis, and impression sections are not yet completed while the referral is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Cytopathologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "specimenType": "cervical-smear",
+        "specimenAdequacy": "satisfactory",
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "cytologyResultCategory": "High-grade dyskaryosis, suspicious for invasive squamous cell carcinoma",
+        "hpvResult": "positive",
+        "malignancyPresent": true,
+        "dysplasiaPresent": false,
+        "microscopicDescription": "Numerous malignant squamous cells with a high nuclear-to-cytoplasmic ratio, irregular nuclear contours, and abnormal mitoses, in keeping with invasive squamous cell carcinoma.",
+        "diagnosis": "",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the referring team; urgent colposcopy and gynae-oncology MDT referral being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "high-grade / malignant",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now, document the conversation, and refer for urgent colposcopy / MDT review.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical finding (malignant cells, high-grade dyskaryosis, Thy5, or breast C5) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-DIAGNOSIS-01",
+            "axis": "completeness",
+            "category": "diagnosis",
+            "description": "Mandatory report section missing: diagnosis."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (malignant cells, high-grade dyskaryosis, Thy5, or breast C5) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately, document the communication, and refer for urgent colposcopy / MDT review."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-SUSPECTED-CANCER-2WW-001",
+            "category": "urgent-referral",
+            "priority": "high",
+            "description": "Malignant cells reported; this is a suspected-cancer (2-week-wait) result.",
+            "suggestedAction": "Refer urgently on a suspected-cancer (2-week-wait) pathway."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "An abnormal finding is reported but no structured reporting category was recorded.",
+            "suggestedAction": "Record the structured reporting category (e.g. dyskaryosis grade, Thy or C category)."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

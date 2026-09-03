@@ -1,0 +1,254 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "normal-flexible-cystoscopy-complete",
+      "description": "A normal flexible cystoscopy for recurrent UTIs: bladder mucosa normal throughout, no tumour, inflammation, stones, stricture, or benign structural finding, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Urologist)",
+        "originatingRequestReference": "REQ-2026-0820-CYSTO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "procedure": "flexible-cystoscopy",
+        "anaesthesia": "local",
+        "clinicalHistory": "Recurrent UTIs; flexible cystoscopy to exclude bladder pathology.",
+        "findingsNarrative": "Bladder mucosa normal throughout; no tumour, inflammation, stones, stricture, trabeculation, or prostatic enlargement. Urethra normal calibre.",
+        "bladderTumour": false,
+        "inflammationCystitis": false,
+        "bladderStones": false,
+        "urethralStricture": false,
+        "trabeculation": false,
+        "prostaticEnlargement": false,
+        "normalExamination": true,
+        "tumourSizeMm": null,
+        "tumourAppearance": "",
+        "biopsyTaken": false,
+        "complication": "none",
+        "impression": "Normal flexible cystoscopy; no bladder or urethral pathology identified.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further cystoscopic follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific cystoscopy follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "A normal examination with no abnormal structured findings; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-benign-trabeculation-prostatic-enlargement-minor-complete",
+      "description": "Flexible cystoscopy for lower urinary tract symptoms in an elderly male finds mild bladder wall trabeculation and prostatic enlargement, both benign structural findings: no tumour, inflammation, stones, or stricture — this grades minor severity via the dedicated benign-structural rule, classified as abnormal (not normal) since these are genuine structured findings; report complete — expect abnormal classification + minor severity + 100% completeness + recommended follow-up (per local surveillance guidance) + routine-follow-up.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Urologist)",
+        "originatingRequestReference": "REQ-2026-0825-CYSTO",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "procedure": "flexible-cystoscopy",
+        "anaesthesia": "local",
+        "clinicalHistory": "Lower urinary tract symptoms in an elderly male; flexible cystoscopy for further assessment.",
+        "findingsNarrative": "Mild bladder wall trabeculation consistent with longstanding bladder outflow obstruction, and mild prostatic enlargement narrowing the prostatic urethra. No tumour, inflammation, stones, or stricture.",
+        "bladderTumour": false,
+        "inflammationCystitis": false,
+        "bladderStones": false,
+        "urethralStricture": false,
+        "trabeculation": true,
+        "prostaticEnlargement": true,
+        "normalExamination": false,
+        "tumourSizeMm": null,
+        "tumourAppearance": "",
+        "biopsyTaken": false,
+        "complication": "none",
+        "impression": "Benign bladder trabeculation and prostatic enlargement consistent with bladder outflow obstruction; no tumour or other significant pathology.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Refer to urology for consideration of BPH management; no further cystoscopic surveillance required for this finding alone.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "minor",
+        "reportingCategory": "benign-structural",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "recommended",
+        "targetTimeframe": "per local surveillance guidance",
+        "recommendedAction": "Manage the benign structural finding per the relevant follow-up pathway.",
+        "recommendation": "routine-follow-up",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MINOR-01",
+            "axis": "severity",
+            "category": "benign-structural-finding",
+            "description": "Benign structural finding(s) only (trabeculation / prostatic enlargement); abnormality severity graded minor."
+          },
+          {
+            "ruleId": "R-FU-RECOMMENDED-03",
+            "axis": "follow-up",
+            "category": "benign-structural-finding",
+            "description": "Benign structural finding; structured follow-up per local surveillance guidance recommended."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCIDENTAL-FINDING-001",
+            "category": "incidental-finding",
+            "priority": "low",
+            "description": "One or more incidental benign structural findings are documented.",
+            "suggestedAction": "Manage the incidental finding per the relevant structured pathway."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-suspected-bladder-tumour-uncommunicated-incomplete",
+      "description": "A 15mm papillary lesion on the right lateral bladder wall, suspicious for a bladder tumour: this critical finding auto-escalates classification to critical and follow-up to critical-alert, with the recommended action specifically naming an urgent TURBT booking and MDT referral; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history, impression, and recommended follow-up sections are not yet completed — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Urologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "procedure": "flexible-cystoscopy",
+        "anaesthesia": "local",
+        "clinicalHistory": "",
+        "findingsNarrative": "A 15mm papillary lesion is seen on the right lateral bladder wall, suspicious for a bladder tumour.",
+        "bladderTumour": true,
+        "inflammationCystitis": false,
+        "bladderStones": false,
+        "urethralStricture": false,
+        "trabeculation": false,
+        "prostaticEnlargement": false,
+        "normalExamination": false,
+        "tumourSizeMm": 15,
+        "tumourAppearance": "papillary",
+        "biopsyTaken": true,
+        "complication": "none",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the referring team; urgent TURBT booking and urology MDT referral being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "suspected-tumour",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result to the referrer now, book urgent TURBT, and refer to the MDT.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A bladder tumour or suspicious lesion is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Bladder tumour or suspicious lesion present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-COMP-FOLLOW-UP-01",
+            "axis": "completeness",
+            "category": "follow-up",
+            "description": "Mandatory report section missing: recommended follow-up."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Bladder tumour / suspicious lesion auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A bladder tumour or suspicious lesion is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and book urgent TURBT / MDT referral."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}
