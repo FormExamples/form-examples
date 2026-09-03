@@ -1259,12 +1259,30 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       non-driver) and the raw JavaScript floats (83.33333333333333,
       0.6910000000000001), and the all-worst persona pins the negative
       EQ-5D index (33333 → −0.594, worse-than-dead on the Dolan UK TTO
-      scale). 4 of these 19 forms remain:
-      lifeguard-certification-checklist, outpatient-outcome,
+      scale). 3 more done 2026-09-03 (outpatient-outcome,
       recommended-summary-plan-for-emergency-care-and-treatment,
-      ward-round-note (count re-verified directly against the fleet
-      each update, not hand-tracked — `bin/test-personas` ground truth:
-      PASS 285/355). The remaining
+      ward-round-note — all nine matched on first `--update`).
+      outpatient-outcome's OOCG is a worst-of-four-domains grade with
+      flags folded in; its personas pin two quirks: `eq5dSummary`
+      counts the VAS as a sixth "dimension" in FLAG-PROM-001's message,
+      and the PROMIS item-9 recode reaches 6 at pain 0, so the linear
+      T-score can exceed its nominal ceiling (personas stay on-scale).
+      ReSPECT is a split engine (`gradePlan` + a wall-clock-dependent
+      `detectFlaggedIssues`), so flags are unpinned; `completenessPercent`
+      counts field-slots (14, or 15 when the person lacks capacity),
+      not passed rules, and every mandatory rule is always listed with
+      a `satisfied` boolean. ward-round-note's `assess` folds flags in;
+      its two 5-of-8 (63 %) personas land on 'partial' vs 'incomplete'
+      purely on whether the plan is documented, and pin that
+      `vteStatus: 'not-done'` counts as documented while raising the
+      high-priority VTE flag. **Two more `bin/test-engines` discovery
+      mis-picks** (six total, Phase 13 item updated): ReSPECT
+      `completenessPercent` (a bare number) and ward-round-note
+      `calculateGrade` (the intermediate tally — no status, no flags —
+      over `assess`). 1 of these 19 forms remains:
+      lifeguard-certification-checklist (count re-verified directly
+      against the fleet each update, not hand-tracked —
+      `bin/test-personas` ground truth: PASS 288/355). The remaining
       ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
       fuller input / returns a bare object or boolean / no engine
       namespace published) need discovery-hint fixes in their engines
@@ -1398,7 +1416,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       auto-discover `detectAdditionalFlags` / `detectFlags`) and merge its
       output under `expected.additionalFlags`; re-pin the affected forms.
 - [ ] **`bin/test-engines` discovery can pick a sub-axis grader — or a
-      non-grader.** Four verified mis-picks so far, each overridden with
+      non-grader.** Six verified mis-picks so far, each overridden with
       `graderHint` in the persona file: hernia-diagnostic-evaluation
       (`classifyHernia`, Axis A only, vs `calculateHerniaEvaluation`);
       hip-replacement-surgery-evaluation (`scoreOhs`, the OHS
@@ -1409,7 +1427,12 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       structurally wrong call still returned 'complete'); and
       post-operative-report (`gradeOrder`, a grade-key → ordinal helper
       that returns `-1` for the empty assessment, vs
-      `calculateClavienDindo`). Prefer exports
+      `calculateClavienDindo`);
+      recommended-summary-plan-for-emergency-care-and-treatment
+      (`completenessPercent`, a bare-number helper, vs `gradePlan`); and
+      ward-round-note (`calculateGrade`, the intermediate tally with no
+      status and no flags, vs `assess` — the name-prefix heuristic
+      preferred `calculate*` over the spec's own entry point). Prefer exports
       whose result carries `firedRules` (+ `flags`), then names starting
       `calculate`/`grade`/`validate`, and reject candidates whose result
       has no rule/flag array; then audit the 279 PASS forms for other

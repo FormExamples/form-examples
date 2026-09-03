@@ -1,0 +1,361 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradePlan",
+  "note": "Three hand-authored personas for the ReSPECT completeness grader. graderHint is set explicitly because bin/test-engines' discovery heuristic picks completenessPercent (a bare-number helper), not the composite. gradePlan returns { status, completenessPercent, satisfiedCount, mandatoryCount, firedRules } where firedRules always lists all eight mandatory rules with a 'satisfied' boolean (this is a documentation instrument: nothing is scored, rules are pass/fail). detectFlaggedIssues (flags.js) is a separate export that form-app.js composes at render time - and it depends on the wall clock for the review-date-passed flag - so flags are NOT pinned here (Phase 13 'flagsHint' tooling task); each description records the flags the persona would raise. completenessPercent counts populated field-slots, not passed rules: 14 slots always apply and a 15th (capacity assessment + non-person involvement) applies only when hasCapacity === 'no', so a plan for a person with capacity reaches 100% on 14/14. status is 'complete' only at 8/8 satisfied. No timestamp is returned by gradePlan. Regenerate 'expected' with: bin/test-personas recommended-summary-plan-for-emergency-care-and-treatment --update",
+  "personas": [
+    {
+      "name": "Complete plan - person with capacity, DNACPR agreed and discussed",
+      "description": "An 84-year-old with end-stage COPD who has capacity and has agreed a comfort-focused plan with a do-not-attempt-CPR recommendation, discussed and signed by the consultant. All eight mandatory rules satisfied; the capacity-proxy slot does not apply (hasCapacity 'yes'), so 14 of 14 slots present -> 100%. Expect status 'complete', satisfiedCount 8, mandatoryCount 8, every firedRules entry satisfied true. Unpinned flags: none (CPR documented, cprDiscussed 'yes', signed and dated, review date 2027 is in the future, health summary present).",
+      "state": {
+        "personal": {
+          "personName": "Arthur Pemberton",
+          "dateOfBirth": "1941-11-08",
+          "identifier": "NHS 401 233 7788",
+          "address": "Flat 3, 14 Wellfield Road, Cardiff CF14 3AA",
+          "keyContact": "Daughter - Susan Pemberton, 07700 900123"
+        },
+        "health": {
+          "healthSummary": "End-stage COPD (FEV1 24% predicted) on long-term oxygen; three admissions with type 2 respiratory failure in the last year, the latest requiring NIV which he found very distressing. Frail, housebound, weight loss.",
+          "diagnoses": "COPD GOLD D; cor pulmonale; osteoporosis; previous NSTEMI 2019",
+          "existingDocuments": "No ADRT. LPA for health and welfare registered (daughter). Not on organ donor register."
+        },
+        "preferences": {
+          "whatMatters": "To stay at home with his dog, to not be 'kept going on machines', and for his daughter to be with him.",
+          "carePreferences": "Preferred place of care and death: home. Would accept antibiotics and steroids at home; does not want readmission for NIV."
+        },
+        "recommendations": {
+          "priorityBalance": "comfort",
+          "recommendedInterventions": "Oral antibiotics and steroids for exacerbations at home; opioids and benzodiazepines for breathlessness and anxiety; community palliative care team involvement; oxygen for comfort.",
+          "notRecommendedInterventions": "Non-invasive ventilation; intubation and ventilation; hospital transfer unless symptoms cannot be controlled at home."
+        },
+        "cpr": {
+          "cprRecommendation": "do-not-attempt",
+          "cprRationale": "CPR would not be successful given end-stage lung disease and would not be in keeping with his wishes.",
+          "cprDiscussed": "yes"
+        },
+        "ceilings": {
+          "hospitalTransfer": "not-appropriate",
+          "criticalCareAdmission": "not-appropriate",
+          "treatmentCeilings": "Ward-level care only if admitted for symptom control; no NIV, no critical care."
+        },
+        "capacity": {
+          "hasCapacity": "yes",
+          "capacityAssessment": "",
+          "involvement": "person",
+          "proxyDetails": ""
+        },
+        "signOff": {
+          "clinicianName": "Dr Rhian Llewellyn",
+          "clinicianRole": "doctor",
+          "clinicianRegistration": "GMC 6153302",
+          "signature": "R. Llewellyn",
+          "signedAt": "2026-02-10T14:30:00",
+          "seniorEndorsement": "Dr Rhian Llewellyn, Consultant in Respiratory Medicine",
+          "emergencyContacts": "Community respiratory team 029 2074 7747; palliative care 24h line 029 2061 5555",
+          "reviewDate": "2027-02-10"
+        },
+        "note": "Plan discussed at length with Mr Pemberton and his daughter present; both in agreement."
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "satisfiedCount": 8,
+        "mandatoryCount": 8,
+        "firedRules": [
+          {
+            "id": "R-IDENTITY-01",
+            "rule": "identity",
+            "satisfied": true,
+            "category": "personal-details",
+            "description": "Personal details identify the person: name, date of birth, and an identifier are all recorded"
+          },
+          {
+            "id": "R-HEALTH-SUMMARY-01",
+            "rule": "healthSummary",
+            "satisfied": true,
+            "category": "summary-of-health",
+            "description": "A summary of relevant health is recorded"
+          },
+          {
+            "id": "R-PREFERENCES-01",
+            "rule": "preferences",
+            "satisfied": true,
+            "category": "preferences",
+            "description": "Personal preferences / what matters to the person are recorded"
+          },
+          {
+            "id": "R-RECOMMENDATIONS-01",
+            "rule": "recommendations",
+            "satisfied": true,
+            "category": "clinical-recommendations",
+            "description": "Clinical recommendations are recorded, including the life-sustaining ↔ comfort balance and at least one recommended or not-recommended intervention"
+          },
+          {
+            "id": "R-CPR-01",
+            "rule": "cpr",
+            "satisfied": true,
+            "category": "cpr-recommendation",
+            "description": "A CPR recommendation is documented (attempt or do-not-attempt)"
+          },
+          {
+            "id": "R-CEILINGS-01",
+            "rule": "ceilings",
+            "satisfied": true,
+            "category": "ceilings-of-treatment",
+            "description": "Ceilings of treatment are recorded"
+          },
+          {
+            "id": "R-CAPACITY-01",
+            "rule": "capacity",
+            "satisfied": true,
+            "category": "capacity-and-involvement",
+            "description": "Capacity is recorded; if the person lacks capacity, a capacity assessment and legal-proxy / consultee involvement are documented (Mental Capacity Act 2005)"
+          },
+          {
+            "id": "R-SIGN-OFF-01",
+            "rule": "signOff",
+            "satisfied": true,
+            "category": "clinician-sign-off",
+            "description": "The plan is signed by the completing clinician, with role and date"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete plan - lacks capacity, proxy documented, CPR recommendation not yet made",
+      "description": "Non-critical edge case: a 79-year-old with advanced dementia who lacks capacity. The capacity assessment and welfare-attorney involvement are properly documented, so R-CAPACITY-01 is satisfied and the conditional capacity-proxy slot both applies AND is present. Only the CPR recommendation is missing (the family meeting is booked for tomorrow). Seven of eight rules satisfied -> 'incomplete'; 14 of 15 applicable slots present -> round(93.33) = 93. Expect satisfiedCount 7 with only R-CPR-01 unsatisfied. Unpinned flags: F-CPR-NOT-DOCUMENTED-001 (high) only.",
+      "state": {
+        "personal": {
+          "personName": "Margaret Achterberg",
+          "dateOfBirth": "1946-07-30",
+          "identifier": "CHI 3007466214",
+          "address": "Room 12, Braeside Care Home, Dundee DD2 1QX",
+          "keyContact": "Son - Pieter Achterberg (welfare attorney), 07700 900456"
+        },
+        "health": {
+          "healthSummary": "Advanced Alzheimer's dementia (FAST 7c): non-verbal, fully dependent for care, recurrent aspiration pneumonia, 8 kg weight loss in 6 months.",
+          "diagnoses": "Alzheimer's dementia; dysphagia; hypertension; osteoarthritis",
+          "existingDocuments": "Welfare power of attorney registered with OPG Scotland (son). No ADRT."
+        },
+        "preferences": {
+          "whatMatters": "Son reports she always said she would not want to be 'a burden' or go to hospital again; enjoys music and her son's visits.",
+          "carePreferences": "Care to remain at Braeside; hospital only if comfort cannot be achieved there."
+        },
+        "recommendations": {
+          "priorityBalance": "comfort",
+          "recommendedInterventions": "Comfort-focused care at the home; oral antibiotics if likely to relieve symptoms; subcutaneous anticipatory medicines available.",
+          "notRecommendedInterventions": "Intravenous therapy, artificial feeding, hospital transfer for investigation."
+        },
+        "cpr": {
+          "cprRecommendation": "",
+          "cprRationale": "",
+          "cprDiscussed": ""
+        },
+        "ceilings": {
+          "hospitalTransfer": "not-appropriate",
+          "criticalCareAdmission": "not-appropriate",
+          "treatmentCeilings": "Care-home level treatment only."
+        },
+        "capacity": {
+          "hasCapacity": "no",
+          "capacityAssessment": "Assessed 2026-03-02 under the Adults with Incapacity (Scotland) Act 2000: unable to understand, retain, or communicate a decision about emergency treatment because of advanced dementia. Certificate of incapacity (s.47) in place.",
+          "involvement": "legal-proxy",
+          "proxyDetails": "Pieter Achterberg, son, registered welfare attorney - consulted 2026-03-02; CPR discussion arranged for 2026-03-04."
+        },
+        "signOff": {
+          "clinicianName": "Dr Fiona Macrae",
+          "clinicianRole": "doctor",
+          "clinicianRegistration": "GMC 7204415",
+          "signature": "F. Macrae",
+          "signedAt": "2026-03-03T11:15:00",
+          "seniorEndorsement": "",
+          "emergencyContacts": "Braeside Care Home 01382 555 010; GP out of hours 111",
+          "reviewDate": "2027-03-03"
+        },
+        "note": "CPR recommendation to be completed after the best-interests discussion with the welfare attorney on 2026-03-04."
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 93,
+        "satisfiedCount": 7,
+        "mandatoryCount": 8,
+        "firedRules": [
+          {
+            "id": "R-IDENTITY-01",
+            "rule": "identity",
+            "satisfied": true,
+            "category": "personal-details",
+            "description": "Personal details identify the person: name, date of birth, and an identifier are all recorded"
+          },
+          {
+            "id": "R-HEALTH-SUMMARY-01",
+            "rule": "healthSummary",
+            "satisfied": true,
+            "category": "summary-of-health",
+            "description": "A summary of relevant health is recorded"
+          },
+          {
+            "id": "R-PREFERENCES-01",
+            "rule": "preferences",
+            "satisfied": true,
+            "category": "preferences",
+            "description": "Personal preferences / what matters to the person are recorded"
+          },
+          {
+            "id": "R-RECOMMENDATIONS-01",
+            "rule": "recommendations",
+            "satisfied": true,
+            "category": "clinical-recommendations",
+            "description": "Clinical recommendations are recorded, including the life-sustaining ↔ comfort balance and at least one recommended or not-recommended intervention"
+          },
+          {
+            "id": "R-CPR-01",
+            "rule": "cpr",
+            "satisfied": false,
+            "category": "cpr-recommendation",
+            "description": "A CPR recommendation is documented (attempt or do-not-attempt)"
+          },
+          {
+            "id": "R-CEILINGS-01",
+            "rule": "ceilings",
+            "satisfied": true,
+            "category": "ceilings-of-treatment",
+            "description": "Ceilings of treatment are recorded"
+          },
+          {
+            "id": "R-CAPACITY-01",
+            "rule": "capacity",
+            "satisfied": true,
+            "category": "capacity-and-involvement",
+            "description": "Capacity is recorded; if the person lacks capacity, a capacity assessment and legal-proxy / consultee involvement are documented (Mental Capacity Act 2005)"
+          },
+          {
+            "id": "R-SIGN-OFF-01",
+            "rule": "signOff",
+            "satisfied": true,
+            "category": "clinician-sign-off",
+            "description": "The plan is signed by the completing clinician, with role and date"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Unsafe draft - unsigned, no CPR decision, capacity gap, lapsed review date",
+      "description": "Critical-highest persona: a draft started on the acute medical unit by a night nurse and never completed. Identifier blank (R-IDENTITY-01 fails), no health summary, no recommended/not-recommended interventions despite a priority balance (R-RECOMMENDATIONS-01 fails), no CPR recommendation, person recorded as lacking capacity with no assessment and involvement 'person' (R-CAPACITY-01 fails), and no signature or date (R-SIGN-OFF-01 fails). Only R-PREFERENCES-01 and R-CEILINGS-01 are satisfied -> satisfiedCount 2, 'incomplete'; 8 of 15 applicable slots present (name, DOB, preferences, priorityBalance, ceilings, hasCapacity, clinicianName, clinicianRole) -> round(53.33) = 53. Unpinned flags would be five: high F-CPR-NOT-DOCUMENTED-001, F-CAPACITY-MISSING-001, F-NO-SIGNATURE-001; medium F-REVIEW-DATE-PASSED-001 (review date 2025-01-15 is in the past on any run from 2026 onward); low F-HEALTH-SUMMARY-MISSING-001. F-DNACPR-NO-DISCUSSION-001 does not fire because no CPR decision exists to discuss.",
+      "state": {
+        "personal": {
+          "personName": "Desmond Okafor",
+          "dateOfBirth": "1953-04-19",
+          "identifier": "",
+          "address": "",
+          "keyContact": "Wife - Grace Okafor (number not recorded)"
+        },
+        "health": {
+          "healthSummary": "",
+          "diagnoses": "Metastatic pancreatic cancer",
+          "existingDocuments": ""
+        },
+        "preferences": {
+          "whatMatters": "Wants to see his grandson's christening next month.",
+          "carePreferences": ""
+        },
+        "recommendations": {
+          "priorityBalance": "balanced",
+          "recommendedInterventions": "",
+          "notRecommendedInterventions": ""
+        },
+        "cpr": {
+          "cprRecommendation": "",
+          "cprRationale": "",
+          "cprDiscussed": ""
+        },
+        "ceilings": {
+          "hospitalTransfer": "appropriate",
+          "criticalCareAdmission": "",
+          "treatmentCeilings": ""
+        },
+        "capacity": {
+          "hasCapacity": "no",
+          "capacityAssessment": "",
+          "involvement": "person",
+          "proxyDetails": ""
+        },
+        "signOff": {
+          "clinicianName": "Staff Nurse T. Bassett",
+          "clinicianRole": "nurse",
+          "clinicianRegistration": "",
+          "signature": "",
+          "signedAt": null,
+          "seniorEndorsement": "",
+          "emergencyContacts": "",
+          "reviewDate": "2025-01-15"
+        },
+        "note": "Started overnight - for medical team to complete on the morning round."
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 53,
+        "satisfiedCount": 2,
+        "mandatoryCount": 8,
+        "firedRules": [
+          {
+            "id": "R-IDENTITY-01",
+            "rule": "identity",
+            "satisfied": false,
+            "category": "personal-details",
+            "description": "Personal details identify the person: name, date of birth, and an identifier are all recorded"
+          },
+          {
+            "id": "R-HEALTH-SUMMARY-01",
+            "rule": "healthSummary",
+            "satisfied": false,
+            "category": "summary-of-health",
+            "description": "A summary of relevant health is recorded"
+          },
+          {
+            "id": "R-PREFERENCES-01",
+            "rule": "preferences",
+            "satisfied": true,
+            "category": "preferences",
+            "description": "Personal preferences / what matters to the person are recorded"
+          },
+          {
+            "id": "R-RECOMMENDATIONS-01",
+            "rule": "recommendations",
+            "satisfied": false,
+            "category": "clinical-recommendations",
+            "description": "Clinical recommendations are recorded, including the life-sustaining ↔ comfort balance and at least one recommended or not-recommended intervention"
+          },
+          {
+            "id": "R-CPR-01",
+            "rule": "cpr",
+            "satisfied": false,
+            "category": "cpr-recommendation",
+            "description": "A CPR recommendation is documented (attempt or do-not-attempt)"
+          },
+          {
+            "id": "R-CEILINGS-01",
+            "rule": "ceilings",
+            "satisfied": true,
+            "category": "ceilings-of-treatment",
+            "description": "Ceilings of treatment are recorded"
+          },
+          {
+            "id": "R-CAPACITY-01",
+            "rule": "capacity",
+            "satisfied": false,
+            "category": "capacity-and-involvement",
+            "description": "Capacity is recorded; if the person lacks capacity, a capacity assessment and legal-proxy / consultee involvement are documented (Mental Capacity Act 2005)"
+          },
+          {
+            "id": "R-SIGN-OFF-01",
+            "rule": "signOff",
+            "satisfied": false,
+            "category": "clinician-sign-off",
+            "description": "The plan is signed by the completing clinician, with role and date"
+          }
+        ]
+      }
+    }
+  ]
+}

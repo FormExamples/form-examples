@@ -1,0 +1,631 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "assess",
+  "note": "Three hand-authored personas for the Ward Round Note documentation-completeness engine. graderHint is set explicitly because bin/test-engines' discovery heuristic picks calculateGrade - the intermediate tally that returns presence/required/recommended objects but no status and no flags - rather than assess, the canonical entry point (spec s6). assess returns status ('complete' at 8/8 required; 'partial' when header AND plan are documented and >= 4 required are; else 'incomplete'), completenessPercent = round(100 x documentedRequired / 8) (62.5 rounds UP to 63 under Math.round), componentStatuses for all ten components, documentedComponents, an audit trail of one fired rule per DOCUMENTED component (required then recommended, in catalogue order) plus a final R-COMPLETENESS-01 row whose description embeds the counts and status, and the safety flags folded in (stable-sorted high > medium > low). Quirks pinned here: an explicit negative ('no changes', 'none outstanding', 'not yet estimable') counts as documented; escalationStatus 'not-recorded' does NOT count as documented; vteStatus 'not-done' DOES count as documented for completeness while simultaneously raising the high-priority F-VTE-NOT-DONE-001 flag; the deteriorating-NEWS2 flag is suppressed whenever a plan or a concrete escalation status exists. The 'timestamp' key is wall-clock and stripped by bin/test-personas. Regenerate 'expected' with: bin/test-personas ward-round-note --update",
+  "personas": [
+    {
+      "name": "Complete consultant round - stable pneumonia, EDD set",
+      "description": "All eight required components and both recommended components documented by the consultant. Medication uses the explicit 'no changes' negative and investigations use free text. NEWS2 2, stable, VTE assessed with prophylaxis, for full escalation, senior present, EDD recorded. Expect status 'complete', 100%, documentedRequired 8, ten component statuses all present, documentedComponents listing all ten in catalogue order, firedRules = eight required + R-OVERNIGHT-DOCUMENTED-01 + R-DISCHARGE-DOCUMENTED-01 + R-COMPLETENESS-01 ('All 8 required components documented - entry complete (100%)'), and no flags.",
+      "state": {
+        "header": {
+          "clinicianName": "Dr Amara Nwosu",
+          "clinicianGrade": "consultant",
+          "reviewedAt": "2026-04-14T08:40",
+          "ward": "Ward 7 (Respiratory)"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 776 401 2290",
+          "admissionDate": "2026-04-11",
+          "primaryDiagnosis": "Community-acquired pneumonia, right lower lobe (CURB-65 2 on admission)"
+        },
+        "overnight": {
+          "overnightEvents": "",
+          "noOvernightEvents": "yes"
+        },
+        "problems": {
+          "problemList": "1. CAP RLL - day 3 IV co-amoxiclav, improving. 2. T2DM - BMs 6-9. 3. Mild AKI on admission - resolved."
+        },
+        "examination": {
+          "examinationSummary": "Alert, comfortable at rest. Chest: reduced air entry R base, crackles resolving. Sats 95% on room air. Apyrexial 24 h.",
+          "news2Total": 2,
+          "news2SingleParamThree": "no",
+          "observationTrend": "improving"
+        },
+        "investigations": {
+          "investigationsReviewed": "CRP 210 -> 68; WCC 14.2 -> 9.8; creatinine back to baseline 82; blood cultures no growth at 48 h.",
+          "noInvestigationsOutstanding": "yes",
+          "abnormalResultFlagged": "no",
+          "abnormalResultActioned": ""
+        },
+        "vte": {
+          "vteStatus": "assessed",
+          "vteProphylaxisInPlace": "yes"
+        },
+        "medication": {
+          "medicationChanges": "",
+          "noMedicationChanges": "yes"
+        },
+        "plan": {
+          "planAndJobs": "Switch to oral co-amoxiclav tomorrow if apyrexial; mobilise with physio; repeat CRP Thursday; discharge planning with family."
+        },
+        "escalation": {
+          "escalationStatus": "for-full-escalation",
+          "seniorReviewPresent": "yes",
+          "estimatedDischargeDate": "2026-04-16",
+          "dischargeNotEstimable": ""
+        },
+        "summary": {
+          "clinicalNote": "Improving as expected. Aim home in 48 h."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "componentStatuses": [
+          {
+            "component": "header",
+            "label": "Review header",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "problems",
+            "label": "Problems and progress",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "examination",
+            "label": "Examination and NEWS2",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "investigations",
+            "label": "Investigations reviewed",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "vte",
+            "label": "VTE assessment",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "medication",
+            "label": "Medication changes",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "plan",
+            "label": "Plan and jobs",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "escalation",
+            "label": "Escalation status",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "overnight-events",
+            "label": "Overnight events",
+            "required": false,
+            "present": true
+          },
+          {
+            "component": "estimated-discharge",
+            "label": "Estimated discharge",
+            "required": false,
+            "present": true
+          }
+        ],
+        "documentedComponents": [
+          "header",
+          "problems",
+          "examination",
+          "investigations",
+          "vte",
+          "medication",
+          "plan",
+          "escalation",
+          "overnight-events",
+          "estimated-discharge"
+        ],
+        "documentedRequired": 8,
+        "totalRequired": 8,
+        "firedRules": [
+          {
+            "id": "R-HEADER-DOCUMENTED-01",
+            "component": "header",
+            "category": "required-component",
+            "description": "Header: clinician name, grade, and date/time of review recorded"
+          },
+          {
+            "id": "R-PROBLEMS-DOCUMENTED-01",
+            "component": "problems",
+            "category": "required-component",
+            "description": "Problems: the current problem list and progress recorded"
+          },
+          {
+            "id": "R-EXAMINATION-DOCUMENTED-01",
+            "component": "examination",
+            "category": "required-component",
+            "description": "Examination: examination summary recorded with a NEWS2 total"
+          },
+          {
+            "id": "R-INVESTIGATIONS-DOCUMENTED-01",
+            "component": "investigations",
+            "category": "required-component",
+            "description": "Investigations: results reviewed, or \"none outstanding\" recorded"
+          },
+          {
+            "id": "R-VTE-DOCUMENTED-01",
+            "component": "vte",
+            "category": "required-component",
+            "description": "VTE: assessment status recorded (assessed, not required, or not done)"
+          },
+          {
+            "id": "R-MEDICATION-DOCUMENTED-01",
+            "component": "medication",
+            "category": "required-component",
+            "description": "Medication: changes recorded, or \"no changes\" recorded"
+          },
+          {
+            "id": "R-PLAN-DOCUMENTED-01",
+            "component": "plan",
+            "category": "required-component",
+            "description": "Plan: at least one plan item or job for the day recorded"
+          },
+          {
+            "id": "R-ESCALATION-DOCUMENTED-01",
+            "component": "escalation",
+            "category": "required-component",
+            "description": "Escalation: a ceiling-of-care / escalation status recorded"
+          },
+          {
+            "id": "R-OVERNIGHT-DOCUMENTED-01",
+            "component": "overnight-events",
+            "category": "recommended-component",
+            "description": "Overnight: events recorded, or \"no events overnight\" recorded"
+          },
+          {
+            "id": "R-DISCHARGE-DOCUMENTED-01",
+            "component": "estimated-discharge",
+            "category": "recommended-component",
+            "description": "Discharge: an estimated discharge date, or \"not yet estimable\" recorded"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "component": "completeness",
+            "category": "completeness",
+            "description": "All 8 required components documented — entry complete (100%)"
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "Partial registrar round - three components missing, abnormal potassium not actioned",
+      "description": "Non-critical edge case for the 'partial' band: header, problems, examination, investigations (via the 'none outstanding' negative) and plan are documented - five of eight required, with header and plan both present - but VTE status is blank, medication has neither changes nor the 'no changes' flag, and escalation is 'not-recorded' (which does not count). Overnight events are documented; estimated discharge is not. Expect status 'partial', completenessPercent 63 (62.5 rounded up), documentedRequired 5, documentedComponents [header, problems, examination, investigations, plan, overnight-events], firedRules = those five required + R-OVERNIGHT-DOCUMENTED-01 + R-COMPLETENESS-01 ('5 of 8 required components documented - entry partial (63%)'), and two flags: F-ABNORMAL-RESULTS-001 (medium; potassium flagged but not actioned) then F-INCOMPLETE-ENTRY-001 (low). NEWS2 3 with a stable trend is below every deterioration trigger.",
+      "state": {
+        "header": {
+          "clinicianName": "Dr Callum Reid",
+          "clinicianGrade": "specialty-registrar",
+          "reviewedAt": "2026-05-02T09:15",
+          "ward": "Ward 12 (Gastroenterology)"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 318 655 0042",
+          "admissionDate": "2026-04-29",
+          "primaryDiagnosis": "Decompensated alcohol-related liver disease with ascites"
+        },
+        "overnight": {
+          "overnightEvents": "Required 2 mg IV lorazepam at 02:00 for agitation (CIWA 12); settled by 04:00.",
+          "noOvernightEvents": ""
+        },
+        "problems": {
+          "problemList": "1. Decompensated ARLD - ascites, INR 1.8. 2. Alcohol withdrawal - CIWA-guided chlordiazepoxide. 3. Hypokalaemia."
+        },
+        "examination": {
+          "examinationSummary": "Mildly jaundiced, tense ascites, no flap, no encephalopathy. Chest clear.",
+          "news2Total": 3,
+          "news2SingleParamThree": "no",
+          "observationTrend": "stable"
+        },
+        "investigations": {
+          "investigationsReviewed": "",
+          "noInvestigationsOutstanding": "yes",
+          "abnormalResultFlagged": "yes",
+          "abnormalResultActioned": "no"
+        },
+        "vte": {
+          "vteStatus": "",
+          "vteProphylaxisInPlace": ""
+        },
+        "medication": {
+          "medicationChanges": "",
+          "noMedicationChanges": ""
+        },
+        "plan": {
+          "planAndJobs": "Diagnostic and therapeutic paracentesis today with HAS cover; daily U&E; dietitian referral; alcohol liaison review."
+        },
+        "escalation": {
+          "escalationStatus": "not-recorded",
+          "seniorReviewPresent": "no",
+          "estimatedDischargeDate": "",
+          "dischargeNotEstimable": ""
+        },
+        "summary": {
+          "clinicalNote": "Consultant round this afternoon - VTE, medication reconciliation and escalation status to be completed then."
+        }
+      },
+      "expected": {
+        "status": "partial",
+        "completenessPercent": 63,
+        "componentStatuses": [
+          {
+            "component": "header",
+            "label": "Review header",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "problems",
+            "label": "Problems and progress",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "examination",
+            "label": "Examination and NEWS2",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "investigations",
+            "label": "Investigations reviewed",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "vte",
+            "label": "VTE assessment",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "medication",
+            "label": "Medication changes",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "plan",
+            "label": "Plan and jobs",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "escalation",
+            "label": "Escalation status",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "overnight-events",
+            "label": "Overnight events",
+            "required": false,
+            "present": true
+          },
+          {
+            "component": "estimated-discharge",
+            "label": "Estimated discharge",
+            "required": false,
+            "present": false
+          }
+        ],
+        "documentedComponents": [
+          "header",
+          "problems",
+          "examination",
+          "investigations",
+          "plan",
+          "overnight-events"
+        ],
+        "documentedRequired": 5,
+        "totalRequired": 8,
+        "firedRules": [
+          {
+            "id": "R-HEADER-DOCUMENTED-01",
+            "component": "header",
+            "category": "required-component",
+            "description": "Header: clinician name, grade, and date/time of review recorded"
+          },
+          {
+            "id": "R-PROBLEMS-DOCUMENTED-01",
+            "component": "problems",
+            "category": "required-component",
+            "description": "Problems: the current problem list and progress recorded"
+          },
+          {
+            "id": "R-EXAMINATION-DOCUMENTED-01",
+            "component": "examination",
+            "category": "required-component",
+            "description": "Examination: examination summary recorded with a NEWS2 total"
+          },
+          {
+            "id": "R-INVESTIGATIONS-DOCUMENTED-01",
+            "component": "investigations",
+            "category": "required-component",
+            "description": "Investigations: results reviewed, or \"none outstanding\" recorded"
+          },
+          {
+            "id": "R-PLAN-DOCUMENTED-01",
+            "component": "plan",
+            "category": "required-component",
+            "description": "Plan: at least one plan item or job for the day recorded"
+          },
+          {
+            "id": "R-OVERNIGHT-DOCUMENTED-01",
+            "component": "overnight-events",
+            "category": "recommended-component",
+            "description": "Overnight: events recorded, or \"no events overnight\" recorded"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "component": "completeness",
+            "category": "completeness",
+            "description": "5 of 8 required components documented — entry partial (63%)"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-ABNORMAL-RESULTS-001",
+            "category": "abnormal-results-not-actioned",
+            "priority": "medium",
+            "description": "An abnormal or critical investigation result is flagged but no corresponding action is recorded",
+            "suggestedAction": "Record the action taken for the abnormal result, or add it to the plan and jobs."
+          },
+          {
+            "id": "F-INCOMPLETE-ENTRY-001",
+            "category": "incomplete-entry",
+            "priority": "low",
+            "description": "One or more required components are absent — the entry is not fully documented",
+            "suggestedAction": "Complete the outstanding required components so the ward round note is whole."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete FY1 entry - deteriorating patient, no plan, VTE not done, no senior",
+      "description": "Critical-highest persona: an FY1 documents a deteriorating post-operative patient (NEWS2 8, a single parameter scoring 3, deteriorating trend) but records no plan or jobs, no escalation status, no medication entry, VTE 'not-done', an abnormal lactate flagged but not actioned, and no senior grade present. Header, problems, examination, investigations and VTE ('not-done' still counts as documented) give 5 of 8 required = 63%, but the missing plan forces status 'incomplete'. Overnight events and 'discharge not yet estimable' are both documented. Expect documentedComponents [header, problems, examination, investigations, vte, overnight-events, estimated-discharge], firedRules = those five required + both recommended + R-COMPLETENESS-01 ('5 of 8 required components documented - entry incomplete (63%)'), and six flags after the stable sort: high F-DETERIORATING-NEWS2-001, F-VTE-NOT-DONE-001, F-NO-PLAN-JOBS-001; medium F-ABNORMAL-RESULTS-001, F-NO-SENIOR-REVIEW-001 (deteriorating-patient wording, since no ceiling-of-care status is recorded); low F-INCOMPLETE-ENTRY-001.",
+      "state": {
+        "header": {
+          "clinicianName": "Dr Priya Raman",
+          "clinicianGrade": "fy1",
+          "reviewedAt": "2026-06-09T07:55",
+          "ward": "Ward 3 (Surgical)"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 902 118 3375",
+          "admissionDate": "2026-06-06",
+          "primaryDiagnosis": "Day 3 post laparoscopic anterior resection for rectal cancer"
+        },
+        "overnight": {
+          "overnightEvents": "Spiked 38.9 C at 03:30; new abdominal pain and tachycardia 118; night SHO reviewed, blood cultures and lactate sent, IV fluids started.",
+          "noOvernightEvents": ""
+        },
+        "problems": {
+          "problemList": "1. Post-op day 3 anterior resection. 2. New pyrexia, tachycardia and abdominal pain - ?anastomotic leak. 3. Rising lactate."
+        },
+        "examination": {
+          "examinationSummary": "Looks unwell, sweaty. HR 122, BP 96/58, RR 26, sats 93% on 2 L, T 38.7. Abdomen diffusely tender with guarding in the left iliac fossa.",
+          "news2Total": 8,
+          "news2SingleParamThree": "yes",
+          "observationTrend": "deteriorating"
+        },
+        "investigations": {
+          "investigationsReviewed": "Lactate 4.1 (from 1.6); WCC 19; CRP 240; blood cultures pending.",
+          "noInvestigationsOutstanding": "",
+          "abnormalResultFlagged": "yes",
+          "abnormalResultActioned": ""
+        },
+        "vte": {
+          "vteStatus": "not-done",
+          "vteProphylaxisInPlace": ""
+        },
+        "medication": {
+          "medicationChanges": "",
+          "noMedicationChanges": ""
+        },
+        "plan": {
+          "planAndJobs": ""
+        },
+        "escalation": {
+          "escalationStatus": "",
+          "seniorReviewPresent": "no",
+          "estimatedDischargeDate": "",
+          "dischargeNotEstimable": "yes"
+        },
+        "summary": {
+          "clinicalNote": "Awaiting registrar - bleeped x2."
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 63,
+        "componentStatuses": [
+          {
+            "component": "header",
+            "label": "Review header",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "problems",
+            "label": "Problems and progress",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "examination",
+            "label": "Examination and NEWS2",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "investigations",
+            "label": "Investigations reviewed",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "vte",
+            "label": "VTE assessment",
+            "required": true,
+            "present": true
+          },
+          {
+            "component": "medication",
+            "label": "Medication changes",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "plan",
+            "label": "Plan and jobs",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "escalation",
+            "label": "Escalation status",
+            "required": true,
+            "present": false
+          },
+          {
+            "component": "overnight-events",
+            "label": "Overnight events",
+            "required": false,
+            "present": true
+          },
+          {
+            "component": "estimated-discharge",
+            "label": "Estimated discharge",
+            "required": false,
+            "present": true
+          }
+        ],
+        "documentedComponents": [
+          "header",
+          "problems",
+          "examination",
+          "investigations",
+          "vte",
+          "overnight-events",
+          "estimated-discharge"
+        ],
+        "documentedRequired": 5,
+        "totalRequired": 8,
+        "firedRules": [
+          {
+            "id": "R-HEADER-DOCUMENTED-01",
+            "component": "header",
+            "category": "required-component",
+            "description": "Header: clinician name, grade, and date/time of review recorded"
+          },
+          {
+            "id": "R-PROBLEMS-DOCUMENTED-01",
+            "component": "problems",
+            "category": "required-component",
+            "description": "Problems: the current problem list and progress recorded"
+          },
+          {
+            "id": "R-EXAMINATION-DOCUMENTED-01",
+            "component": "examination",
+            "category": "required-component",
+            "description": "Examination: examination summary recorded with a NEWS2 total"
+          },
+          {
+            "id": "R-INVESTIGATIONS-DOCUMENTED-01",
+            "component": "investigations",
+            "category": "required-component",
+            "description": "Investigations: results reviewed, or \"none outstanding\" recorded"
+          },
+          {
+            "id": "R-VTE-DOCUMENTED-01",
+            "component": "vte",
+            "category": "required-component",
+            "description": "VTE: assessment status recorded (assessed, not required, or not done)"
+          },
+          {
+            "id": "R-OVERNIGHT-DOCUMENTED-01",
+            "component": "overnight-events",
+            "category": "recommended-component",
+            "description": "Overnight: events recorded, or \"no events overnight\" recorded"
+          },
+          {
+            "id": "R-DISCHARGE-DOCUMENTED-01",
+            "component": "estimated-discharge",
+            "category": "recommended-component",
+            "description": "Discharge: an estimated discharge date, or \"not yet estimable\" recorded"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "component": "completeness",
+            "category": "completeness",
+            "description": "5 of 8 required components documented — entry incomplete (63%)"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-DETERIORATING-NEWS2-001",
+            "category": "deteriorating-news2-escalation",
+            "priority": "high",
+            "description": "The patient is deteriorating (NEWS2 at or above the escalation threshold, a single parameter scoring 3, or a deteriorating trend) but no escalation action is documented",
+            "suggestedAction": "Escalate to the senior clinician on call and record the escalation plan and jobs."
+          },
+          {
+            "id": "F-VTE-NOT-DONE-001",
+            "category": "vte-not-done",
+            "priority": "high",
+            "description": "The VTE assessment is recorded as not done",
+            "suggestedAction": "Complete the VTE risk assessment and prescribe prophylaxis where indicated."
+          },
+          {
+            "id": "F-NO-PLAN-JOBS-001",
+            "category": "no-plan-jobs",
+            "priority": "high",
+            "description": "No plan or jobs for the day are documented",
+            "suggestedAction": "Record the plan and jobs so the entry can safely guide the rest of the shift."
+          },
+          {
+            "id": "F-ABNORMAL-RESULTS-001",
+            "category": "abnormal-results-not-actioned",
+            "priority": "medium",
+            "description": "An abnormal or critical investigation result is flagged but no corresponding action is recorded",
+            "suggestedAction": "Record the action taken for the abnormal result, or add it to the plan and jobs."
+          },
+          {
+            "id": "F-NO-SENIOR-REVIEW-001",
+            "category": "no-senior-review",
+            "priority": "medium",
+            "description": "The patient is deteriorating but no consultant or senior grade is named on the entry",
+            "suggestedAction": "Obtain and document a senior / consultant review of this entry."
+          },
+          {
+            "id": "F-INCOMPLETE-ENTRY-001",
+            "category": "incomplete-entry",
+            "priority": "low",
+            "description": "One or more required components are absent — the entry is not fully documented",
+            "suggestedAction": "Complete the outstanding required components so the ward round note is whole."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Three hand-authored personas for the Outpatient Outcome Composite Grade (OOCG). calculateGrade grades four domains A-E (Clinical from the clinician's outcome classification; PROM from EQ-5D-5L + GRC + PROMIS; PREM from the Friends & Family Test; Operational from the NHS attendance outcome + wait/target ratio) and takes the overall grade as the worst non-blank domain grade. firedRules are emitted in domain order Clinical, PROM, PREM, Operational (at most one rule per domain). Flags are folded into the result as flaggedIssues (stable-sorted critical > high > medium > low). Engine quirks pinned here: eq5dSummary counts the VAS alongside the five dimensions, so FLAG-PROM-001's 'N dimension(s) worsened' can read 6; the PROMIS T-scores are a linear approximation whose item-9 recode ((10 - raw) / 2 + 1) reaches 6 at pain 0, so a raw sum can exceed the nominal maximum of 20 (the personas avoid pain 0 to stay on-scale); the enriched T-scores are computed for grading but are NOT part of the returned result. The 'timestamp' key is wall-clock and stripped by bin/test-personas. Regenerate 'expected' with: bin/test-personas outpatient-outcome --update",
+  "personas": [
+    {
+      "name": "Resolved carpal tunnel - discharged within target, all PROMs improved",
+      "description": "Grade A across every domain. Clinical 'resolved' -> A (CLIN-001). EQ-5D-5L improves in all five dimensions and the VAS (improved 6, worsened 0), GRC +5, and PROMIS at the top of scale (GPH raw 20 -> T 67.7, GMH raw 30 -> T 67.6, mean 67.65 >= 50) -> three instruments improved -> A (PROM-001). FFT 'extremely_likely' -> A (PREM-001). Attended and discharged after a 21-day wait against a 42-day target (ratio 0.5) -> A (OPS-001). Expect overallGrade 'A', four fired rules in domain order, and no flagged issues.",
+      "state": {
+        "patientDetails": {
+          "givenName": "Nadia",
+          "familyName": "Ferreira",
+          "dateOfBirth": "1981-06-14",
+          "nhsNumber": "943 476 5919",
+          "sex": "female"
+        },
+        "encounterDetails": {
+          "clinicDate": "2026-03-19",
+          "specialty": "Hand surgery",
+          "clinicianName": "Miss C. Oyelaran",
+          "modality": "in_person",
+          "appointmentType": "follow_up"
+        },
+        "operationalEfficiency": {
+          "referralDate": "2026-02-26",
+          "appointmentDate": "2026-03-19",
+          "waitTimeDays": 21,
+          "serviceTargetDays": 42,
+          "nhsAttendanceOutcome": "attended_discharged"
+        },
+        "clinicalOutcome": {
+          "presentingComplaint": "Right carpal tunnel syndrome - nocturnal paraesthesia and thenar weakness",
+          "diagnosis": "Carpal tunnel syndrome, right (G56.01)",
+          "treatmentDelivered": "Open carpal tunnel decompression 2026-01-08; wound review and discharge",
+          "outcomeClassification": "resolved"
+        },
+        "promEq5d5l": {
+          "beforeMobility": 2,
+          "beforeSelfCare": 2,
+          "beforeUsualActivities": 3,
+          "beforePainDiscomfort": 3,
+          "beforeAnxietyDepression": 2,
+          "beforeVas": 55,
+          "afterMobility": 1,
+          "afterSelfCare": 1,
+          "afterUsualActivities": 1,
+          "afterPainDiscomfort": 1,
+          "afterAnxietyDepression": 1,
+          "afterVas": 85
+        },
+        "promGrc": {
+          "globalRatingOfChange": 5,
+          "selfRatedHealth": "very_good"
+        },
+        "promPromis": {
+          "item1GeneralHealth": 5,
+          "item2QualityOfLife": 5,
+          "item3PhysicalHealth": 5,
+          "item4MentalHealth": 5,
+          "item5Satisfaction": 5,
+          "item6FatigueFrequency": 1,
+          "item7EmotionalProblems": 1,
+          "item8SocialActivities": 5,
+          "item9Pain": 2,
+          "item10EverydayActivities": 5,
+          "globalPhysicalHealthTScore": null,
+          "globalMentalHealthTScore": null
+        },
+        "premFft": {
+          "fftResponse": "extremely_likely",
+          "fftComment": "Seen on time, clear explanation, hand is back to normal."
+        },
+        "followupPlan": {
+          "disposition": "discharged",
+          "nextAppointmentDate": "",
+          "onwardReferralSpecialty": "",
+          "followupNotes": "Discharged to GP. Scar massage advice given."
+        },
+        "signOff": {
+          "reportingClinicianName": "Miss C. Oyelaran",
+          "reportingClinicianRole": "Consultant hand surgeon",
+          "signedOffAt": "2026-03-19T15:40:00"
+        }
+      },
+      "expected": {
+        "overallGrade": "A",
+        "clinicalGrade": "A",
+        "promGrade": "A",
+        "premGrade": "A",
+        "operationalGrade": "A",
+        "firedRules": [
+          {
+            "id": "CLIN-001",
+            "domain": "Clinical",
+            "description": "Outcome classified as Resolved",
+            "grade": "A"
+          },
+          {
+            "id": "PROM-001",
+            "domain": "PROM",
+            "description": "All three PROM instruments improved",
+            "grade": "A"
+          },
+          {
+            "id": "PREM-001",
+            "domain": "PREM",
+            "description": "FFT response: Extremely Likely (Very Good)",
+            "grade": "A"
+          },
+          {
+            "id": "OPS-001",
+            "domain": "Operational",
+            "description": "Attended within target (21d ≤ 42d target)",
+            "grade": "A"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Unchanged knee osteoarthritis - mixed PROMs, follow-up booked late",
+      "description": "Non-critical edge case landing on overall C. Clinical 'unchanged' -> C (CLIN-003). EQ-5D-5L has one dimension better and one worse with the rest level (improved 1, worsened 1) -> 'stable'; GRC 0 -> 'stable'; PROMIS mid-scale (GPH raw 12.5 -> T 43.6, GMH raw 18 -> T 44.4, mean 44.0 in the 35-50 band) -> 'stable'; zero improved, zero worsened -> C (PROM-003). FFT 'likely' -> B (PREM-002). Attended with follow-up after a 60-day wait against a 42-day target (ratio 1.43, within 1.5x) -> B (OPS-002A). Expect overallGrade 'C' and two flags: FLAG-PROM-001 (medium, '1 dimension(s) worsened') then FLAG-OPS-004 (low, wait exceeded target).",
+      "state": {
+        "patientDetails": {
+          "givenName": "Barry",
+          "familyName": "Lindqvist",
+          "dateOfBirth": "1958-10-02",
+          "nhsNumber": "485 777 3456",
+          "sex": "male"
+        },
+        "encounterDetails": {
+          "clinicDate": "2026-05-06",
+          "specialty": "Orthopaedics",
+          "clinicianName": "Mr J. Abernethy",
+          "modality": "in_person",
+          "appointmentType": "follow_up"
+        },
+        "operationalEfficiency": {
+          "referralDate": "2026-03-07",
+          "appointmentDate": "2026-05-06",
+          "waitTimeDays": 60,
+          "serviceTargetDays": 42,
+          "nhsAttendanceOutcome": "attended_follow_up"
+        },
+        "clinicalOutcome": {
+          "presentingComplaint": "Bilateral knee pain limiting walking distance",
+          "diagnosis": "Primary osteoarthritis of both knees (M17.0)",
+          "treatmentDelivered": "Physiotherapy programme and intra-articular steroid injection (left)",
+          "outcomeClassification": "unchanged"
+        },
+        "promEq5d5l": {
+          "beforeMobility": 2,
+          "beforeSelfCare": 1,
+          "beforeUsualActivities": 2,
+          "beforePainDiscomfort": 3,
+          "beforeAnxietyDepression": 2,
+          "beforeVas": 60,
+          "afterMobility": 2,
+          "afterSelfCare": 1,
+          "afterUsualActivities": 2,
+          "afterPainDiscomfort": 2,
+          "afterAnxietyDepression": 3,
+          "afterVas": 60
+        },
+        "promGrc": {
+          "globalRatingOfChange": 0,
+          "selfRatedHealth": "fair"
+        },
+        "promPromis": {
+          "item1GeneralHealth": 3,
+          "item2QualityOfLife": 3,
+          "item3PhysicalHealth": 3,
+          "item4MentalHealth": 3,
+          "item5Satisfaction": 3,
+          "item6FatigueFrequency": 3,
+          "item7EmotionalProblems": 3,
+          "item8SocialActivities": 3,
+          "item9Pain": 5,
+          "item10EverydayActivities": 3,
+          "globalPhysicalHealthTScore": null,
+          "globalMentalHealthTScore": null
+        },
+        "premFft": {
+          "fftResponse": "likely",
+          "fftComment": "Long wait for the appointment but the consultation itself was good."
+        },
+        "followupPlan": {
+          "disposition": "follow_up",
+          "nextAppointmentDate": "2026-11-04",
+          "onwardReferralSpecialty": "",
+          "followupNotes": "Review in 6 months with weight-bearing radiographs; discuss arthroplasty if no better."
+        },
+        "signOff": {
+          "reportingClinicianName": "Mr J. Abernethy",
+          "reportingClinicianRole": "Consultant orthopaedic surgeon",
+          "signedOffAt": "2026-05-06T11:20:00"
+        }
+      },
+      "expected": {
+        "overallGrade": "C",
+        "clinicalGrade": "C",
+        "promGrade": "C",
+        "premGrade": "B",
+        "operationalGrade": "B",
+        "firedRules": [
+          {
+            "id": "CLIN-003",
+            "domain": "Clinical",
+            "description": "Outcome classified as Unchanged",
+            "grade": "C"
+          },
+          {
+            "id": "PROM-003",
+            "domain": "PROM",
+            "description": "PROM instruments stable (no significant improvement or worsening)",
+            "grade": "C"
+          },
+          {
+            "id": "PREM-002",
+            "domain": "PREM",
+            "description": "FFT response: Likely (Good)",
+            "grade": "B"
+          },
+          {
+            "id": "OPS-002A",
+            "domain": "Operational",
+            "description": "Attended within 1.5× target (60d vs 42d target)",
+            "grade": "B"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-PROM-001",
+            "category": "PROM",
+            "message": "EQ-5D-5L: 1 dimension(s) worsened since last assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OPS-004",
+            "category": "Operational",
+            "message": "Wait time (60d) exceeded service target (42d)",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Worsened heart failure - all PROMs deteriorated, very poor experience, late onward referral",
+      "description": "Critical-highest persona (overall E). Clinical 'worsened' -> D (CLIN-004) with FLAG-CLIN-001 (high). EQ-5D-5L worsens in all five dimensions and the VAS (worsened 6), GRC -4, PROMIS at the bottom of scale (GPH raw 5 -> T 19.4, GMH raw 6 -> T 21.2, mean 20.3 < 35) -> three instruments worsened -> E (PROM-005). FFT 'extremely_unlikely' -> E (PREM-005). Attended with onward referral after a 100-day wait against a 42-day target (ratio 2.38 > 1.5) -> C (OPS-002B). Expect overallGrade 'E', four fired rules, and five flags after the stable sort: high FLAG-CLIN-001; medium FLAG-PREM-002, FLAG-PROM-001 ('6 dimension(s) worsened' - the VAS is counted), FLAG-PROM-002 ('Global Rating of Change: -4 (worsened)'), FLAG-OPS-003.",
+      "state": {
+        "patientDetails": {
+          "givenName": "Constance",
+          "familyName": "Mbeki-Rowlands",
+          "dateOfBirth": "1949-01-27",
+          "nhsNumber": "612 209 8873",
+          "sex": "female"
+        },
+        "encounterDetails": {
+          "clinicDate": "2026-06-24",
+          "specialty": "Cardiology",
+          "clinicianName": "Dr S. Varga",
+          "modality": "telephone",
+          "appointmentType": "follow_up"
+        },
+        "operationalEfficiency": {
+          "referralDate": "2026-03-16",
+          "appointmentDate": "2026-06-24",
+          "waitTimeDays": 100,
+          "serviceTargetDays": 42,
+          "nhsAttendanceOutcome": "attended_onward_referral"
+        },
+        "clinicalOutcome": {
+          "presentingComplaint": "Progressive exertional breathlessness, orthopnoea and ankle swelling",
+          "diagnosis": "Heart failure with reduced ejection fraction, NYHA III -> IV (I50.2)",
+          "treatmentDelivered": "Diuretic uptitration by telephone; unable to tolerate further GDMT owing to hypotension",
+          "outcomeClassification": "worsened"
+        },
+        "promEq5d5l": {
+          "beforeMobility": 1,
+          "beforeSelfCare": 1,
+          "beforeUsualActivities": 1,
+          "beforePainDiscomfort": 2,
+          "beforeAnxietyDepression": 1,
+          "beforeVas": 80,
+          "afterMobility": 3,
+          "afterSelfCare": 2,
+          "afterUsualActivities": 3,
+          "afterPainDiscomfort": 4,
+          "afterAnxietyDepression": 3,
+          "afterVas": 40
+        },
+        "promGrc": {
+          "globalRatingOfChange": -4,
+          "selfRatedHealth": "poor"
+        },
+        "promPromis": {
+          "item1GeneralHealth": 1,
+          "item2QualityOfLife": 1,
+          "item3PhysicalHealth": 1,
+          "item4MentalHealth": 1,
+          "item5Satisfaction": 1,
+          "item6FatigueFrequency": 5,
+          "item7EmotionalProblems": 5,
+          "item8SocialActivities": 1,
+          "item9Pain": 8,
+          "item10EverydayActivities": 1,
+          "globalPhysicalHealthTScore": null,
+          "globalMentalHealthTScore": null
+        },
+        "premFft": {
+          "fftResponse": "extremely_unlikely",
+          "fftComment": "Waited more than three months, then only got a phone call while getting worse every week."
+        },
+        "followupPlan": {
+          "disposition": "onward_referral",
+          "nextAppointmentDate": "2026-07-01",
+          "onwardReferralSpecialty": "Advanced heart failure / device clinic",
+          "followupNotes": "Urgent referral for CRT-D assessment and palliative care introduction."
+        },
+        "signOff": {
+          "reportingClinicianName": "Dr S. Varga",
+          "reportingClinicianRole": "Consultant cardiologist",
+          "signedOffAt": "2026-06-24T16:05:00"
+        }
+      },
+      "expected": {
+        "overallGrade": "E",
+        "clinicalGrade": "D",
+        "promGrade": "E",
+        "premGrade": "E",
+        "operationalGrade": "C",
+        "firedRules": [
+          {
+            "id": "CLIN-004",
+            "domain": "Clinical",
+            "description": "Outcome classified as Worsened",
+            "grade": "D"
+          },
+          {
+            "id": "PROM-005",
+            "domain": "PROM",
+            "description": "Multiple PROM instruments worsened",
+            "grade": "E"
+          },
+          {
+            "id": "PREM-005",
+            "domain": "PREM",
+            "description": "FFT response: Extremely Unlikely (Very Poor)",
+            "grade": "E"
+          },
+          {
+            "id": "OPS-002B",
+            "domain": "Operational",
+            "description": "Attended but wait exceeded 1.5× target (100d vs 42d target)",
+            "grade": "C"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-CLIN-001",
+            "category": "Clinical",
+            "message": "Clinical outcome: worsened — patient condition worsened",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREM-002",
+            "category": "Experience",
+            "message": "Friends & Family Test: Very Poor — patient experience concern",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PROM-001",
+            "category": "PROM",
+            "message": "EQ-5D-5L: 6 dimension(s) worsened since last assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PROM-002",
+            "category": "PROM",
+            "message": "Global Rating of Change: -4 (worsened)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OPS-003",
+            "category": "Operational",
+            "message": "Wait time (100d) exceeded 1.5× service target (42d)",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}
