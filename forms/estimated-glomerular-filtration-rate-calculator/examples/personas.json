@@ -1,7 +1,13 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateEgfr",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.egfrRaw",
+    "result.egfrStage"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.egfrRaw\",\"result.egfrStage\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.egfrRaw, grade.egfrStage); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "g1-normal-young-adult",
@@ -56,7 +62,8 @@
             "category": "g-stage",
             "description": "eGFR ≥ 90 mL/min/1.73 m² — G1 (normal or high)"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -112,7 +119,8 @@
             "category": "g-stage",
             "description": "eGFR 60–89 mL/min/1.73 m² — G2 (mildly decreased)"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -167,6 +175,22 @@
             "band": "G3a",
             "category": "g-stage",
             "description": "eGFR 45–59 mL/min/1.73 m² — G3a (mildly to moderately decreased)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DRUG-DOSING-REVIEW-001",
+            "category": "drug-dosing-review",
+            "priority": "high",
+            "description": "eGFR 49 mL/min/1.73 m² below 60 — renally-cleared drugs and contrast need review",
+            "suggestedAction": "Review and adjust renally-cleared medicines, avoid nephrotoxins, and reassess iodinated / gadolinium contrast exposure."
+          },
+          {
+            "id": "F-REDUCED-FUNCTION-001",
+            "category": "reduced-function",
+            "priority": "medium",
+            "description": "eGFR 49 mL/min/1.73 m² (G3a) — moderately reduced renal function",
+            "suggestedAction": "Monitor renal function and manage per CKD guidance; check albuminuria (ACR) and blood pressure."
           }
         ]
       }
@@ -224,6 +248,22 @@
             "category": "g-stage",
             "description": "eGFR 30–44 mL/min/1.73 m² — G3b (moderately to severely decreased)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DRUG-DOSING-REVIEW-001",
+            "category": "drug-dosing-review",
+            "priority": "high",
+            "description": "eGFR 34 mL/min/1.73 m² below 60 — renally-cleared drugs and contrast need review",
+            "suggestedAction": "Review and adjust renally-cleared medicines, avoid nephrotoxins, and reassess iodinated / gadolinium contrast exposure."
+          },
+          {
+            "id": "F-REDUCED-FUNCTION-001",
+            "category": "reduced-function",
+            "priority": "medium",
+            "description": "eGFR 34 mL/min/1.73 m² (G3b) — moderately reduced renal function",
+            "suggestedAction": "Monitor renal function and manage per CKD guidance; check albuminuria (ACR) and blood pressure."
+          }
         ]
       }
     },
@@ -279,6 +319,22 @@
             "band": "G4",
             "category": "g-stage",
             "description": "eGFR 15–29 mL/min/1.73 m² — G4 (severely decreased)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-G4-NEPHROLOGY-REFERRAL-001",
+            "category": "g4-nephrology-referral",
+            "priority": "high",
+            "description": "eGFR 16 mL/min/1.73 m² (G4) — severely decreased renal function",
+            "suggestedAction": "Refer to nephrology per NICE NG203; assess complications of CKD (anaemia, bone-mineral, acidosis)."
+          },
+          {
+            "id": "F-DRUG-DOSING-REVIEW-001",
+            "category": "drug-dosing-review",
+            "priority": "high",
+            "description": "eGFR 16 mL/min/1.73 m² below 60 — renally-cleared drugs and contrast need review",
+            "suggestedAction": "Review and adjust renally-cleared medicines, avoid nephrotoxins, and reassess iodinated / gadolinium contrast exposure."
           }
         ]
       }
@@ -336,6 +392,22 @@
             "category": "g-stage",
             "description": "eGFR < 15 mL/min/1.73 m² — G5 (kidney failure)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-G5-NEPHROLOGY-REFERRAL-001",
+            "category": "g5-nephrology-referral",
+            "priority": "high",
+            "description": "eGFR 6 mL/min/1.73 m² (G5) — established kidney failure",
+            "suggestedAction": "Refer to nephrology urgently for renal replacement / conservative-care planning per NICE NG203."
+          },
+          {
+            "id": "F-DRUG-DOSING-REVIEW-001",
+            "category": "drug-dosing-review",
+            "priority": "high",
+            "description": "eGFR 6 mL/min/1.73 m² below 60 — renally-cleared drugs and contrast need review",
+            "suggestedAction": "Review and adjust renally-cleared medicines, avoid nephrotoxins, and reassess iodinated / gadolinium contrast exposure."
+          }
         ]
       }
     },
@@ -392,6 +464,29 @@
             "category": "g-stage",
             "description": "eGFR 30–44 mL/min/1.73 m² — G3b (moderately to severely decreased)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACUTE-DROP-AKI-001",
+            "category": "acute-drop-aki",
+            "priority": "high",
+            "description": "Renal function is not at steady state — eGFR assumes steady state and may be unreliable, and a rising creatinine may reflect acute kidney injury",
+            "suggestedAction": "Do not stage on this value; repeat the creatinine, compare with the baseline, and consider the AKI pathway."
+          },
+          {
+            "id": "F-DRUG-DOSING-REVIEW-001",
+            "category": "drug-dosing-review",
+            "priority": "high",
+            "description": "eGFR 30 mL/min/1.73 m² below 60 — renally-cleared drugs and contrast need review",
+            "suggestedAction": "Review and adjust renally-cleared medicines, avoid nephrotoxins, and reassess iodinated / gadolinium contrast exposure."
+          },
+          {
+            "id": "F-REDUCED-FUNCTION-001",
+            "category": "reduced-function",
+            "priority": "medium",
+            "description": "eGFR 30 mL/min/1.73 m² (G3b) — moderately reduced renal function",
+            "suggestedAction": "Monitor renal function and manage per CKD guidance; check albuminuria (ACR) and blood pressure."
+          }
         ]
       }
     },
@@ -433,6 +528,15 @@
             "band": "unknown",
             "category": "missing-input",
             "description": "eGFR not computed — serum creatinine, age, and/or sex is missing"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "Missing input(s): serum creatinine — no eGFR can be computed",
+            "suggestedAction": "Record the serum creatinine, age, and sex, then re-calculate."
           }
         ]
       }

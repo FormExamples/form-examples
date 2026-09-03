@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCardioGrade",
-  "note": "Realistic filled-in states in the cardiology scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the cardiology scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-stable-angina",
@@ -124,7 +128,8 @@
             "description": "CCS Class I angina - strenuous exertion only",
             "grade": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -272,7 +277,8 @@
             "description": "Hyperlipidaemia",
             "grade": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -509,6 +515,38 @@
             "system": "Social",
             "description": "Current smoker",
             "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MI-001",
+            "category": "Cardiac",
+            "message": "Recent MI (3 weeks ago) - HIGH RISK",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANGINA-001",
+            "category": "Chest Pain",
+            "message": "Unstable angina reported - URGENT EVALUATION REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AF-001",
+            "category": "Arrhythmia",
+            "message": "Atrial fibrillation (persistent) - rate/rhythm control assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HTN-001",
+            "category": "Risk Factors",
+            "message": "Uncontrolled hypertension - optimise before procedures",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FC-001",
+            "category": "Functional Capacity",
+            "message": "Poor functional capacity (estimated 3 METs)",
+            "priority": "medium"
           }
         ]
       }

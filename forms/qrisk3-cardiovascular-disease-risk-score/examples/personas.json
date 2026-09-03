@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateQrisk3Grade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.tenYearRiskPercent"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.tenYearRiskPercent\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.tenYearRiskPercent); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low",
@@ -115,7 +120,8 @@
             "value": "No CKD",
             "weight": 0
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -241,6 +247,15 @@
             "factor": "Rheumatoid arthritis",
             "value": "Yes",
             "weight": 0.22
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-STATIN-OFFER-001",
+            "category": "statin-offer",
+            "priority": "high",
+            "description": "10-year CVD risk 14.7% meets the NICE threshold (>= 10%)",
+            "suggestedAction": "Offer a lipid-lowering statin (atorvastatin 20 mg) for primary prevention after informed discussion, alongside structured lifestyle advice (smoking, diet, activity, alcohol, weight)."
           }
         ]
       }
@@ -368,6 +383,22 @@
             "factor": "Family history of CHD (< 60)",
             "value": "Yes",
             "weight": 0.44
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-STATIN-OFFER-001",
+            "category": "statin-offer",
+            "priority": "high",
+            "description": "10-year CVD risk 34.6% meets the NICE threshold (>= 10%)",
+            "suggestedAction": "Offer a lipid-lowering statin (atorvastatin 20 mg) for primary prevention after informed discussion, alongside structured lifestyle advice (smoking, diet, activity, alcohol, weight)."
+          },
+          {
+            "id": "F-HIGH-RISK-001",
+            "category": "high-risk",
+            "priority": "high",
+            "description": "10-year CVD risk 34.6% is in the high band (>= 20%)",
+            "suggestedAction": "Prioritise the statin offer and intensive lifestyle optimisation; review modifiable factors and treatment adherence."
           }
         ]
       }

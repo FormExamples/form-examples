@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateApgarGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.timepoints"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.timepoints\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.timepoints); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "reassuring",
@@ -74,7 +79,8 @@
             "category": "apgar-sign",
             "description": "Respiration — 0 absent, 1 slow/irregular/weak cry, 2 strong regular cry"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -179,6 +185,15 @@
             "points": 1,
             "category": "apgar-sign",
             "description": "Grimace (reflex irritability) — 0 no response, 1 grimace/feeble cry, 2 cry/cough/sneeze"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SUPPORT-AND-STIMULATION-001",
+            "category": "support-and-stimulation",
+            "priority": "medium",
+            "description": "Apgar total 4 of 10 at 1-minute is moderately low (4-6)",
+            "suggestedAction": "Provide support and stimulation (drying, warmth, airway positioning, tactile stimulation, oxygen as indicated) and reassess."
           }
         ]
       }
@@ -317,6 +332,29 @@
             "points": 1,
             "category": "apgar-sign",
             "description": "Respiration — 0 absent, 1 slow/irregular/weak cry, 2 strong regular cry"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-RESUSCITATION-REQUIRED-001",
+            "category": "resuscitation-required",
+            "priority": "high",
+            "description": "Apgar total 2 of 10 at 1-minute — the newborn is severely depressed (0-3, low band)",
+            "suggestedAction": "Commence active resuscitation per the newborn-life-support algorithm and obtain senior / neonatal support immediately."
+          },
+          {
+            "id": "F-CONTINUE-SCORING-001",
+            "category": "continue-scoring",
+            "priority": "high",
+            "description": "5-minute Apgar total 3 of 10 is below 7 — the newborn has not yet adapted",
+            "suggestedAction": "Repeat scoring at 10 minutes and every 5 minutes thereafter until the newborn stabilises or is transferred."
+          },
+          {
+            "id": "F-MISSING-TEN-MINUTE-SCORE-001",
+            "category": "missing-ten-minute-score",
+            "priority": "medium",
+            "description": "The 5-minute total is below 7 but no 10-minute (or later) timepoint has been scored",
+            "suggestedAction": "Add and complete the required 10-minute timepoint (and further 5-minute scores until the newborn stabilises)."
           }
         ]
       }

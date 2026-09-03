@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCorrectedCalcium",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.correctedCalciumRaw"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.correctedCalciumRaw\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.correctedCalciumRaw); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-with-normal-albumin",
@@ -51,7 +56,8 @@
             "category": "reference-range",
             "description": "Corrected calcium within 2.20–2.60 mmol/L — normal adult reference range"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -101,6 +107,15 @@
             "band": "hypocalcaemia",
             "category": "reference-range",
             "description": "Corrected calcium below 2.20 mmol/L — hypocalcaemia"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HYPOCALCAEMIA-001",
+            "category": "hypocalcaemia",
+            "priority": "medium",
+            "description": "Corrected calcium 2.15 mmol/L below the 2.20 mmol/L lower reference limit",
+            "suggestedAction": "Investigate the cause (vitamin D, magnesium, renal, parathyroid) and correlate with symptoms."
           }
         ]
       }
@@ -153,6 +168,22 @@
             "category": "reference-range",
             "description": "Corrected calcium below 2.20 mmol/L — hypocalcaemia"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEVERE-HYPOCALCAEMIA-001",
+            "category": "severe-hypocalcaemia",
+            "priority": "high",
+            "description": "Corrected calcium 1.60 mmol/L below the 1.9 mmol/L severe threshold — risk of tetany, seizures, arrhythmia",
+            "suggestedAction": "Urgent: seek immediate review, check ECG and magnesium, and consider intravenous calcium replacement per local policy."
+          },
+          {
+            "id": "F-HYPOCALCAEMIA-001",
+            "category": "hypocalcaemia",
+            "priority": "medium",
+            "description": "Corrected calcium 1.60 mmol/L below the 2.20 mmol/L lower reference limit",
+            "suggestedAction": "Investigate the cause (vitamin D, magnesium, renal, parathyroid) and correlate with symptoms."
+          }
         ]
       }
     },
@@ -203,6 +234,15 @@
             "band": "hypercalcaemia",
             "category": "reference-range",
             "description": "Corrected calcium above 2.60 mmol/L — hypercalcaemia"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HYPERCALCAEMIA-001",
+            "category": "hypercalcaemia",
+            "priority": "medium",
+            "description": "Corrected calcium 2.70 mmol/L above the 2.60 mmol/L upper reference limit",
+            "suggestedAction": "Investigate the cause (parathyroid, malignancy, drugs) and correlate with symptoms."
           }
         ]
       }
@@ -255,6 +295,29 @@
             "category": "reference-range",
             "description": "Corrected calcium above 2.60 mmol/L — hypercalcaemia"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEVERE-HYPERCALCAEMIA-001",
+            "category": "severe-hypercalcaemia",
+            "priority": "high",
+            "description": "Corrected calcium 3.20 mmol/L at or above the 3.0 mmol/L severe threshold — risk of hypercalcaemic crisis",
+            "suggestedAction": "Urgent: seek immediate senior / endocrine review, monitor ECG and fluids, and treat per local hypercalcaemia protocol."
+          },
+          {
+            "id": "F-SYMPTOMATIC-HYPERCALCAEMIA-001",
+            "category": "symptomatic-hypercalcaemia",
+            "priority": "high",
+            "description": "Corrected calcium 3.20 mmol/L above 2.60 mmol/L with reported symptoms",
+            "suggestedAction": "Escalate; correlate polyuria, confusion, and arrhythmia, and investigate the cause of hypercalcaemia."
+          },
+          {
+            "id": "F-HYPERCALCAEMIA-001",
+            "category": "hypercalcaemia",
+            "priority": "medium",
+            "description": "Corrected calcium 3.20 mmol/L above the 2.60 mmol/L upper reference limit",
+            "suggestedAction": "Investigate the cause (parathyroid, malignancy, drugs) and correlate with symptoms."
+          }
         ]
       }
     },
@@ -298,6 +361,15 @@
             "band": "unknown",
             "category": "missing-input",
             "description": "Correction not computed — total calcium and/or albumin is missing"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-DATA-001",
+            "category": "incomplete-data",
+            "priority": "low",
+            "description": "Missing input(s): serum albumin — no corrected calcium can be computed",
+            "suggestedAction": "Record the measured total calcium and serum albumin, then re-calculate."
           }
         ]
       }

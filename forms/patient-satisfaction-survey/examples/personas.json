@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateSatisfactionGrade",
-  "note": "Realistic filled-in states in the Patient Satisfaction engine's shape. Each Likert item is 1-5; per-domain normalised score = mean x 20; the composite is the mean of the seven domain scores; bands 85-100 excellent, 70-84 good, 50-69 satisfactory, 25-49 poor, 0-24 very-poor. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Patient Satisfaction engine's shape. Each Likert item is 1-5; per-domain normalised score = mean x 20; the composite is the mean of the seven domain scores; bands 85-100 excellent, 70-84 good, 50-69 satisfactory, 25-49 poor, 0-24 very-poor. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "excellent",
@@ -107,7 +111,8 @@
           "discharge": 100,
           "overall": 100
         },
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -220,6 +225,14 @@
             "domain": "Overall",
             "description": "Very low NHS rating (1-3 out of 10)",
             "severity": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NHSRATING-001",
+            "category": "Overall",
+            "message": "Very low NHS rating (3/10)",
+            "priority": "medium"
           }
         ]
       }
@@ -496,6 +509,80 @@
             "domain": "Comments",
             "description": "Formal complaint raised",
             "severity": 4
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SAFETY-001",
+            "category": "Safety",
+            "message": "Patient did not feel safe during visit (rated 1/5) - IMMEDIATE REVIEW REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COMPLAINT-001",
+            "category": "Complaint",
+            "message": "Formal complaint raised: Formal complaint submitted about pain management and communication.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PRIVACY-001",
+            "category": "Clinical Care",
+            "message": "Very poor privacy during examination (rated 1/5) - CLINICAL GOVERNANCE REVIEW",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DIGNITY-001",
+            "category": "Staff",
+            "message": "Lack of respect for dignity reported (rated 1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RECOMMEND-001",
+            "category": "Overall",
+            "message": "Patient would not recommend this service (rated 1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NHSRATING-001",
+            "category": "Overall",
+            "message": "Very low NHS rating (1/10)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-WAIT-001",
+            "category": "Access",
+            "message": "Excessive on-day waiting time (180 minutes)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAIN-001",
+            "category": "Clinical Care",
+            "message": "Poor pain management reported (rated 1/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLEAN-001",
+            "category": "Environment",
+            "message": "Poor cleanliness reported (rated 1/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CULTURAL-001",
+            "category": "Staff",
+            "message": "Cultural sensitivity concern (rated 1/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONTACT-001",
+            "category": "Discharge",
+            "message": "Patient did not know who to contact after discharge (rated 1/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LISTENED-001",
+            "category": "Communication",
+            "message": "Patient did not feel listened to (rated 1/5)",
+            "priority": "medium"
           }
         ]
       }

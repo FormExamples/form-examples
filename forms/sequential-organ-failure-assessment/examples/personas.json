@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateSofaGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low",
@@ -123,7 +128,8 @@
             "category": "mortality-band",
             "description": "Total 3 — low mortality-risk band."
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -245,6 +251,22 @@
             "points": null,
             "category": "mortality-band",
             "description": "Total 12 — high mortality-risk band."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MULTI-ORGAN-FAILURE-001",
+            "category": "multi-organ-failure",
+            "priority": "high",
+            "description": "Two or more systems severely dysfunctional (sub-score >= 3): Respiration, Coagulation.",
+            "suggestedAction": "Manage as multi-organ dysfunction: senior critical-care input, source control, and consideration of full organ support."
+          },
+          {
+            "id": "F-HIGH-MORTALITY-RISK-001",
+            "category": "high-mortality-risk",
+            "priority": "high",
+            "description": "Total SOFA 12 of 24 — high predicted ICU mortality.",
+            "suggestedAction": "Ensure ceilings of care and treatment-escalation plans are documented and discussed with the patient / family."
           }
         ]
       }
@@ -382,6 +404,43 @@
             "points": null,
             "category": "sepsis-criterion",
             "description": "Suspected infection with delta-SOFA >= 2 — meets the Sepsis-3 criterion."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEVERE-SINGLE-ORGAN-FAILURE-001",
+            "category": "severe-single-organ-failure",
+            "priority": "high",
+            "description": "Maximal (sub-score 4) dysfunction in: Respiration, Coagulation, Liver, Cardiovascular, Renal.",
+            "suggestedAction": "Provide or escalate organ support for the affected system and obtain urgent critical-care review."
+          },
+          {
+            "id": "F-MULTI-ORGAN-FAILURE-001",
+            "category": "multi-organ-failure",
+            "priority": "high",
+            "description": "Two or more systems severely dysfunctional (sub-score >= 3): Respiration, Coagulation, Liver, Cardiovascular, Central nervous system, Renal.",
+            "suggestedAction": "Manage as multi-organ dysfunction: senior critical-care input, source control, and consideration of full organ support."
+          },
+          {
+            "id": "F-RISING-SOFA-001",
+            "category": "rising-sofa",
+            "priority": "high",
+            "description": "Delta-SOFA +21 versus baseline — deteriorating organ function.",
+            "suggestedAction": "Meets the Sepsis-3 criterion: commence the sepsis six and escalate to critical care."
+          },
+          {
+            "id": "F-MARKED-DETERIORATION-001",
+            "category": "marked-deterioration",
+            "priority": "high",
+            "description": "Delta-SOFA +21 over the interval — marked deterioration.",
+            "suggestedAction": "Urgent review: a rapidly rising SOFA over the first 48 hours predicts a mortality of at least 50%."
+          },
+          {
+            "id": "F-HIGH-MORTALITY-RISK-001",
+            "category": "high-mortality-risk",
+            "priority": "high",
+            "description": "Total SOFA 23 of 24 — high predicted ICU mortality.",
+            "suggestedAction": "Ensure ceilings of care and treatment-escalation plans are documented and discussed with the patient / family."
           }
         ]
       }

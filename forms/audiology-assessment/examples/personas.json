@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateHearingGrade",
-  "note": "Realistic filled-in states in the audiology engine's shape. Graded by calculateHearingGrade (better/worse-ear pure-tone-average dB HL classification — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the audiology engine's shape. Graded by calculateHearingGrade (better/worse-ear pure-tone-average dB HL classification — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-hearing",
@@ -106,7 +110,8 @@
         "firedRules": [],
         "ptaGrade": "normal",
         "rightGrade": "normal",
-        "leftGrade": "normal"
+        "leftGrade": "normal",
+        "additionalFlags": []
       }
     },
     {
@@ -225,7 +230,15 @@
         ],
         "ptaGrade": "moderate",
         "rightGrade": "moderate",
-        "leftGrade": "moderate"
+        "leftGrade": "moderate",
+        "additionalFlags": [
+          {
+            "id": "FLAG-NOISE-001",
+            "category": "Prevention",
+            "message": "Occupational noise exposure - recommend hearing protection and monitoring",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -344,7 +357,8 @@
         ],
         "ptaGrade": "severe",
         "rightGrade": "severe",
-        "leftGrade": "severe"
+        "leftGrade": "severe",
+        "additionalFlags": []
       }
     }
   ]

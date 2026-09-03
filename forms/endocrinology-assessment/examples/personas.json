@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrades",
-  "note": "Realistic filled-in states in the endocrine axis-grading engine's shape; overall status is the most-severe axis. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the endocrine axis-grading engine's shape; overall status is the most-severe axis. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "euthyroid-normal",
@@ -172,7 +176,8 @@
             "description": "Glucose metabolism grading from HbA1c, fasting glucose, and history.",
             "status": "normal"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -347,7 +352,8 @@
             "description": "Glucose metabolism grading from HbA1c, fasting glucose, and history.",
             "status": "moderate"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -518,6 +524,20 @@
             "category": "Thyroid",
             "description": "Thyroid axis grading from TSH/FT4/FT3 and clinical features.",
             "status": "severe"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-THY-002",
+            "category": "Thyroid",
+            "message": "TSH 48 mIU/L — overt hypothyroidism; commence levothyroxine titration.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-THY-003",
+            "category": "Thyroid",
+            "message": "Positive thyroid autoantibodies — autoimmune thyroid disease likely.",
+            "priority": "medium"
           }
         ]
       }

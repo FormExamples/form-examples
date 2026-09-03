@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateBraden",
-  "note": "Realistic filled-in states in the integumentary-assessment scoring engine's shape. Graded on the Braden Scale for pressure-ulcer risk: six subscales summed (sensory/moisture/activity/mobility/nutrition 1-4, friction-shear 1-3; total 6-23), banded >=19 no-risk, 15-18 mild, 13-14 moderate, 10-12 high, <=9 very-high. The auto-discovered grader is classifyBradenScore, a per-item helper taking a bare number, so graderHint pins the state-taking calculateBraden. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the integumentary-assessment scoring engine's shape. Graded on the Braden Scale for pressure-ulcer risk: six subscales summed (sensory/moisture/activity/mobility/nutrition 1-4, friction-shear 1-3; total 6-23), banded >=19 no-risk, 15-18 mild, 13-14 moderate, 10-12 high, <=9 very-high. The auto-discovered grader is classifyBradenScore, a per-item helper taking a bare number, so graderHint pins the state-taking calculateBraden. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "no-risk",
@@ -148,7 +152,8 @@
             "score": 3,
             "maxScore": 3
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -295,6 +300,26 @@
             "description": "Friction & shear during repositioning and transfers.",
             "score": 2,
             "maxScore": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BRADEN-002",
+            "category": "Braden — Moisture",
+            "message": "Skin frequently moist — incontinence / perspiration management required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-003",
+            "category": "Braden — Activity",
+            "message": "Bedfast or chairfast — implement repositioning schedule.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-005",
+            "category": "Braden — Nutrition",
+            "message": "Probably-inadequate nutrition — dietitian referral recommended.",
+            "priority": "medium"
           }
         ]
       }
@@ -443,6 +468,62 @@
             "description": "Friction & shear during repositioning and transfers.",
             "score": 1,
             "maxScore": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BRADEN-001",
+            "category": "Braden — Sensory",
+            "message": "Severely limited sensory perception — patient may not feel pressure-related discomfort.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-002",
+            "category": "Braden — Moisture",
+            "message": "Skin frequently moist — incontinence / perspiration management required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-003",
+            "category": "Braden — Activity",
+            "message": "Bedfast or chairfast — implement repositioning schedule.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-004",
+            "category": "Braden — Mobility",
+            "message": "Very limited mobility — pressure-redistribution surface indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-006",
+            "category": "Braden — Friction & Shear",
+            "message": "Significant friction/shear problem — review transfer technique and bed surface.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NAIL-003",
+            "category": "Nails",
+            "message": "Sluggish/absent capillary refill — assess peripheral perfusion.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BRADEN-005",
+            "category": "Braden — Nutrition",
+            "message": "Probably-inadequate nutrition — dietitian referral recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SKIN-005",
+            "category": "Lesions",
+            "message": "Ulcerative lesion present — characterise and document carefully.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONCERN-002",
+            "category": "Presenting Concern",
+            "message": "Discharge from skin lesion reported — consider infection.",
+            "priority": "medium"
           }
         ]
       }

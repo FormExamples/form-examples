@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateDMFT",
-  "note": "Realistic filled-in states in the DMFT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the DMFT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "very-low-caries",
@@ -98,7 +102,8 @@
             "description": "Very low caries experience (DMFT 1-5)",
             "category": "very-low"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -208,7 +213,8 @@
             "description": "Bone loss detected",
             "category": "moderate"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -353,6 +359,44 @@
             "system": "Medical",
             "description": "Poorly controlled diabetes",
             "category": "moderate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ABSCESS-001",
+            "category": "Dental Emergency",
+            "message": "Severe dental pain reported (severity 7/10) - assess for dental abscess",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DECAY-001",
+            "category": "Caries",
+            "message": "9 actively decayed teeth - urgent treatment plan needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANXIETY-001",
+            "category": "Patient Management",
+            "message": "Severe dental anxiety - consider sedation options and anxiety management protocol",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CARDIAC-001",
+            "category": "Cardiac",
+            "message": "Cardiovascular disease: Hypertension - consider antibiotic prophylaxis",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DIABETES-001",
+            "category": "Endocrine",
+            "message": "Poorly controlled diabetes - increased risk of periodontal disease and delayed healing",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MOBILITY-001",
+            "category": "Periodontal",
+            "message": "Tooth mobility detected - advanced periodontal assessment recommended",
+            "priority": "medium"
           }
         ]
       }

@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGISeverity",
-  "note": "Realistic filled-in states in the GI Symptom Severity engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the GI Symptom Severity engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "minimal-severity",
@@ -135,7 +139,8 @@
             "description": "Nausea present",
             "points": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -281,6 +286,26 @@
             "category": "Red Flags",
             "description": "Unexplained weight loss",
             "points": 5
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BLEED-001",
+            "category": "GI Bleeding",
+            "message": "Rectal bleeding reported",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DYSPH-001",
+            "category": "Dysphagia",
+            "message": "Dysphagia reported - urgent endoscopy may be required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WTLOSS-001",
+            "category": "Weight Loss",
+            "message": "Unexplained weight loss - investigate for malignancy",
+            "priority": "high"
           }
         ]
       }
@@ -452,6 +477,44 @@
             "category": "Red Flags",
             "description": "Unexplained weight loss",
             "points": 5
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BLEED-001",
+            "category": "GI Bleeding",
+            "message": "Rectal bleeding reported",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DYSPH-001",
+            "category": "Dysphagia",
+            "message": "Dysphagia reported - urgent endoscopy may be required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WTLOSS-001",
+            "category": "Weight Loss",
+            "message": "Unexplained weight loss - investigate for malignancy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-JAUND-001",
+            "category": "Jaundice",
+            "message": "Jaundice present - urgent hepatobiliary investigation required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IBD-001",
+            "category": "IBD",
+            "message": "Known IBD - assess current disease activity",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VOMIT-001",
+            "category": "Upper GI",
+            "message": "Vomiting reported - assess for dehydration",
+            "priority": "medium"
           }
         ]
       }

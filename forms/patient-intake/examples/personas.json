@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateRiskLevel",
-  "note": "Realistic filled-in states in the Patient Intake engine's shape. `calculateRiskLevel` evaluates every intake rule and returns the worst-fired risk level: low (no rules fire), medium (a medium-risk rule), high (a high-risk rule). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Patient Intake engine's shape. `calculateRiskLevel` evaluates every intake rule and returns the worst-fired risk level: low (no rules fire), medium (a medium-risk rule), high (a high-risk rule). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -91,7 +95,21 @@
       },
       "expected": {
         "riskLevel": "low",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CONTACT-001",
+            "category": "Administrative",
+            "message": "Emergency contact information missing",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-GP-001",
+            "category": "Administrative",
+            "message": "GP name not provided",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -203,6 +221,26 @@
             "category": "Urgency",
             "description": "Urgent visit",
             "riskLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Social History",
+            "message": "Current smoker - consider cessation counselling",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONTACT-001",
+            "category": "Administrative",
+            "message": "Emergency contact information missing",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-GP-001",
+            "category": "Administrative",
+            "message": "GP name not provided",
+            "priority": "low"
           }
         ]
       }
@@ -373,6 +411,50 @@
             "category": "Urgency",
             "description": "Emergency visit",
             "riskLevel": "high"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CHRONIC-001",
+            "category": "Medical History",
+            "message": "4 chronic conditions - complex care needs",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-URGENT-001",
+            "category": "Urgency",
+            "message": "Emergency visit - prioritize assessment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MEDS-001",
+            "category": "Medications",
+            "message": "Polypharmacy: 5 medications - review for interactions",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Social History",
+            "message": "Current smoker - consider cessation counselling",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ROS-CV",
+            "category": "Review of Systems",
+            "message": "Cardiovascular symptoms reported - requires clinical review",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONTACT-001",
+            "category": "Administrative",
+            "message": "Emergency contact information missing",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-GP-001",
+            "category": "Administrative",
+            "message": "GP name not provided",
+            "priority": "low"
           }
         ]
       }

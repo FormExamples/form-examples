@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeOttawaKnee",
-  "note": "Realistic filled-in states in the Ottawa Knee Rule scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.xrayIndicated"
+  ],
+  "note": "Realistic filled-in states in the Ottawa Knee Rule scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.xrayIndicated\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.xrayIndicated); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "no-xray",
@@ -54,7 +59,8 @@
             "category": "decision",
             "description": "All five criteria absent — a knee radiograph is not indicated by the rule"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -114,6 +120,15 @@
             "fired": true,
             "category": "decision",
             "description": "One or more criteria present — a knee radiograph is indicated (ANY-of)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-XRAY-INDICATED-001",
+            "category": "xray-indicated",
+            "priority": "high",
+            "description": "One or more Ottawa Knee Rule criteria are present — a knee radiograph is indicated",
+            "suggestedAction": "Obtain a knee radiograph series per local protocol and manage findings accordingly."
           }
         ]
       }
@@ -189,6 +204,22 @@
             "fired": true,
             "category": "decision",
             "description": "One or more criteria present — a knee radiograph is indicated (ANY-of)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-XRAY-INDICATED-001",
+            "category": "xray-indicated",
+            "priority": "high",
+            "description": "One or more Ottawa Knee Rule criteria are present — a knee radiograph is indicated",
+            "suggestedAction": "Obtain a knee radiograph series per local protocol and manage findings accordingly."
+          },
+          {
+            "id": "F-UNABLE-TO-BEAR-WEIGHT-001",
+            "category": "unable-to-bear-weight",
+            "priority": "high",
+            "description": "Unable to bear weight (cannot take four steps) — consider a clinically significant injury",
+            "suggestedAction": "Provide adequate analgesia, immobilise as appropriate, and prioritise imaging and review."
           }
         ]
       }

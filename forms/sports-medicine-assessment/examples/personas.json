@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradePPE",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "cleared",
@@ -117,7 +121,8 @@
       },
       "expected": {
         "clearance": "cleared",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -241,7 +246,8 @@
             "description": "Chronic illness reported — confirm management is optimised before sport.",
             "grade": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -364,6 +370,14 @@
             "category": "Cardiovascular",
             "description": "Chest pain with exertion — cardiology evaluation before clearance.",
             "grade": 4
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CV-001",
+            "category": "Cardiovascular",
+            "message": "Chest pain with exertion — urgent cardiology evaluation before any sport.",
+            "priority": "high"
           }
         ]
       }

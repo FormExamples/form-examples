@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "computeControlStatus",
-  "note": "Realistic filled-in states in the hypertension-review scoring engine's shape. Graded on blood-pressure control against the NICE NG136 target: within target -> controlled; above target -> uncontrolled; clinic >=180/120 -> severe-uncontrolled; plus the derived hypertension stage. The auto-discovered classifyControl needs a second target argument and the full review stamps a live timestamp, so graderHint pins the deterministic state-taking computeControlStatus. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "graderHint": "review",
+  "note": "Realistic filled-in states in the hypertension-review scoring engine's shape. Graded on blood-pressure control against the NICE NG136 target: within target -> controlled; above target -> uncontrolled; clinic >=180/120 -> severe-uncontrolled; plus the derived hypertension stage. The auto-discovered classifyControl needs a second target argument and the full review stamps a live timestamp, so graderHint pins the deterministic state-taking computeControlStatus. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. graderHint re-pinned 2026-09-03 from \"computeControlStatus\" to \"review\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "controlled",
@@ -69,20 +69,88 @@
         }
       },
       "expected": {
-        "controlClass": "controlled",
-        "bpTarget": {
-          "clinic": {
-            "systolic": 140,
-            "diastolic": 90
+        "controlStatus": {
+          "controlClass": "controlled",
+          "bpTarget": {
+            "clinic": {
+              "systolic": 140,
+              "diastolic": 90
+            },
+            "home": {
+              "systolic": 135,
+              "diastolic": 85
+            },
+            "group": "Age < 80, no qualifying comorbidity"
           },
-          "home": {
-            "systolic": 135,
-            "diastolic": 85
-          },
-          "group": "Age < 80, no qualifying comorbidity"
+          "primarySource": "home",
+          "hypertensionStage": "none"
         },
-        "primarySource": "home",
-        "hypertensionStage": "none"
+        "reviewStatus": "complete",
+        "componentStatuses": [
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (clinic or home/ambulatory)",
+            "documented": true
+          },
+          {
+            "component": "medication-adherence",
+            "label": "Medication and adherence",
+            "documented": true
+          },
+          {
+            "component": "cardiovascular-risk",
+            "label": "Cardiovascular risk (QRISK)",
+            "documented": true
+          },
+          {
+            "component": "renal-bloods",
+            "label": "U&E (creatinine / eGFR / potassium)",
+            "documented": true
+          },
+          {
+            "component": "hba1c",
+            "label": "HbA1c",
+            "documented": true
+          },
+          {
+            "component": "lipids",
+            "label": "Lipids (total / HDL cholesterol)",
+            "documented": true
+          },
+          {
+            "component": "urine-acr",
+            "label": "Urine albumin:creatinine ratio (ACR)",
+            "documented": true
+          },
+          {
+            "component": "lifestyle",
+            "label": "Lifestyle (smoking / BMI / advice)",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-TARGET-01",
+            "category": "target",
+            "description": "Target group: Age < 80, no qualifying comorbidity — clinic 140/90, home 135/85 mmHg"
+          },
+          {
+            "id": "R-CONTROL-01",
+            "category": "control",
+            "description": "Control classified Controlled against the home reading"
+          },
+          {
+            "id": "R-STAGE-01",
+            "category": "stage",
+            "description": "Hypertension stage: No stage"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "category": "completeness",
+            "description": "All 8 review components documented — review complete"
+          }
+        ],
+        "flags": []
       }
     },
     {
@@ -151,20 +219,96 @@
         }
       },
       "expected": {
-        "controlClass": "uncontrolled",
-        "bpTarget": {
-          "clinic": {
-            "systolic": 140,
-            "diastolic": 90
+        "controlStatus": {
+          "controlClass": "uncontrolled",
+          "bpTarget": {
+            "clinic": {
+              "systolic": 140,
+              "diastolic": 90
+            },
+            "home": {
+              "systolic": 135,
+              "diastolic": 85
+            },
+            "group": "Age < 80, no qualifying comorbidity"
           },
-          "home": {
-            "systolic": 135,
-            "diastolic": 85
-          },
-          "group": "Age < 80, no qualifying comorbidity"
+          "primarySource": "home",
+          "hypertensionStage": "stage-1"
         },
-        "primarySource": "home",
-        "hypertensionStage": "stage-1"
+        "reviewStatus": "complete",
+        "componentStatuses": [
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (clinic or home/ambulatory)",
+            "documented": true
+          },
+          {
+            "component": "medication-adherence",
+            "label": "Medication and adherence",
+            "documented": true
+          },
+          {
+            "component": "cardiovascular-risk",
+            "label": "Cardiovascular risk (QRISK)",
+            "documented": true
+          },
+          {
+            "component": "renal-bloods",
+            "label": "U&E (creatinine / eGFR / potassium)",
+            "documented": true
+          },
+          {
+            "component": "hba1c",
+            "label": "HbA1c",
+            "documented": true
+          },
+          {
+            "component": "lipids",
+            "label": "Lipids (total / HDL cholesterol)",
+            "documented": true
+          },
+          {
+            "component": "urine-acr",
+            "label": "Urine albumin:creatinine ratio (ACR)",
+            "documented": true
+          },
+          {
+            "component": "lifestyle",
+            "label": "Lifestyle (smoking / BMI / advice)",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-TARGET-01",
+            "category": "target",
+            "description": "Target group: Age < 80, no qualifying comorbidity — clinic 140/90, home 135/85 mmHg"
+          },
+          {
+            "id": "R-CONTROL-01",
+            "category": "control",
+            "description": "Control classified Uncontrolled against the home reading"
+          },
+          {
+            "id": "R-STAGE-01",
+            "category": "stage",
+            "description": "Hypertension stage: Stage 1"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "category": "completeness",
+            "description": "All 8 review components documented — review complete"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-UNCONTROLLED-BP-001",
+            "category": "uncontrolled-bp",
+            "priority": "high",
+            "description": "Blood pressure is above the applicable NICE target",
+            "suggestedAction": "Review adherence and step up antihypertensive medication per NICE NG136; arrange follow-up."
+          }
+        ]
       }
     },
     {
@@ -233,20 +377,103 @@
         }
       },
       "expected": {
-        "controlClass": "severe-uncontrolled",
-        "bpTarget": {
-          "clinic": {
-            "systolic": 130,
-            "diastolic": 80
+        "controlStatus": {
+          "controlClass": "severe-uncontrolled",
+          "bpTarget": {
+            "clinic": {
+              "systolic": 130,
+              "diastolic": 80
+            },
+            "home": {
+              "systolic": 125,
+              "diastolic": 75
+            },
+            "group": "CKD with type 2 diabetes"
           },
-          "home": {
-            "systolic": 125,
-            "diastolic": 75
-          },
-          "group": "CKD with type 2 diabetes"
+          "primarySource": "home",
+          "hypertensionStage": "stage-3-severe"
         },
-        "primarySource": "home",
-        "hypertensionStage": "stage-3-severe"
+        "reviewStatus": "complete",
+        "componentStatuses": [
+          {
+            "component": "blood-pressure",
+            "label": "Blood pressure (clinic or home/ambulatory)",
+            "documented": true
+          },
+          {
+            "component": "medication-adherence",
+            "label": "Medication and adherence",
+            "documented": true
+          },
+          {
+            "component": "cardiovascular-risk",
+            "label": "Cardiovascular risk (QRISK)",
+            "documented": true
+          },
+          {
+            "component": "renal-bloods",
+            "label": "U&E (creatinine / eGFR / potassium)",
+            "documented": true
+          },
+          {
+            "component": "hba1c",
+            "label": "HbA1c",
+            "documented": true
+          },
+          {
+            "component": "lipids",
+            "label": "Lipids (total / HDL cholesterol)",
+            "documented": true
+          },
+          {
+            "component": "urine-acr",
+            "label": "Urine albumin:creatinine ratio (ACR)",
+            "documented": true
+          },
+          {
+            "component": "lifestyle",
+            "label": "Lifestyle (smoking / BMI / advice)",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-TARGET-01",
+            "category": "target",
+            "description": "Target group: CKD with type 2 diabetes — clinic 130/80, home 125/75 mmHg"
+          },
+          {
+            "id": "R-CONTROL-01",
+            "category": "control",
+            "description": "Control classified Severe uncontrolled against the home reading"
+          },
+          {
+            "id": "R-STAGE-01",
+            "category": "stage",
+            "description": "Hypertension stage: Stage 3 (severe)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "category": "completeness",
+            "description": "All 8 review components documented — review complete"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-SEVERE-HYPERTENSION-001",
+            "category": "severe-hypertension",
+            "priority": "high",
+            "description": "Clinic blood pressure 184/122 mmHg is >= 180/120",
+            "suggestedAction": "Arrange same-day clinical assessment; assess for accelerated hypertension and target-organ damage."
+          },
+          {
+            "id": "F-ADHERENCE-CONCERN-001",
+            "category": "adherence-concern",
+            "priority": "medium",
+            "description": "Poor self-reported medication adherence",
+            "suggestedAction": "Explore barriers to adherence and tolerability; consider simplifying the regimen or switching agents."
+          }
+        ]
       }
     }
   ]

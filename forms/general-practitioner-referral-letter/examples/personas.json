@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeReferral",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "routine-orthopaedic-complete",
@@ -137,7 +141,8 @@
             "category": "mandatory-field",
             "description": "Relevant clinical history is recorded"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -295,6 +300,22 @@
             "category": "conditional-requirement",
             "description": "A tumour-site suspected-cancer pathway is recorded (required for two-week-wait)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SUSPECTED-CANCER-PATHWAY-001",
+            "category": "suspected-cancer-pathway",
+            "priority": "high",
+            "description": "This is a suspected-cancer (two-week-wait) referral — it must be routed on the suspected-cancer pathway, not as a routine referral.",
+            "suggestedAction": "Name the NICE NG12 criterion and the tumour-site pathway, and book on the two-week-wait pathway so the patient is seen within two weeks."
+          },
+          {
+            "id": "F-EMERGENCY-FEATURES-001",
+            "category": "emergency-features",
+            "priority": "high",
+            "description": "Emergency features are present (emergency urgency selected or a red-flag symptom documented) — a routine referral letter is not appropriate.",
+            "suggestedAction": "Arrange same-day assessment or call 999 / acute admission now; do not send this as a routine letter."
+          }
         ]
       }
     },
@@ -438,6 +459,43 @@
             "satisfied": false,
             "category": "conditional-requirement",
             "description": "A reason for the urgency is recorded (required for urgent and two-week-wait)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-EMERGENCY-FEATURES-001",
+            "category": "emergency-features",
+            "priority": "high",
+            "description": "Emergency features are present (emergency urgency selected or a red-flag symptom documented) — a routine referral letter is not appropriate.",
+            "suggestedAction": "Arrange same-day assessment or call 999 / acute admission now; do not send this as a routine letter."
+          },
+          {
+            "id": "F-MANDATORY-INFORMATION-MISSING-001",
+            "category": "mandatory-information-missing",
+            "priority": "high",
+            "description": "One or more mandatory fields are missing: relevant clinical history. The receiving service may reject or bounce the referral.",
+            "suggestedAction": "Complete the missing mandatory field(s) so the referral is sendable."
+          },
+          {
+            "id": "F-URGENCY-INFORMATION-MISSING-001",
+            "category": "urgency-information-missing",
+            "priority": "medium",
+            "description": "An urgent or two-week-wait referral is selected but the urgency reason, suspected-cancer criterion, or pathway is missing.",
+            "suggestedAction": "Record the urgency reason and, for two-week-wait, the named criterion and tumour-site pathway."
+          },
+          {
+            "id": "F-CONSENT-NOT-DOCUMENTED-001",
+            "category": "consent-not-documented",
+            "priority": "medium",
+            "description": "Consent to share information with the receiving service is not documented — the referral remains sendable but consent should be recorded.",
+            "suggestedAction": "Record that the patient consented to the referral and to information-sharing, per Montgomery v Lanarkshire (2015)."
+          },
+          {
+            "id": "F-NO-SAFETY-NETTING-001",
+            "category": "no-safety-netting",
+            "priority": "low",
+            "description": "No safety-netting advice or follow-up is documented for the patient while awaiting the appointment.",
+            "suggestedAction": "Record the safety-netting advice given to the patient and when to seek further help."
           }
         ]
       }

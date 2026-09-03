@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateRockallGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low",
@@ -89,7 +94,8 @@
             "category": "risk-band",
             "description": "Full Rockall score 0 of 11 -> low risk"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -177,6 +183,15 @@
             "points": null,
             "category": "risk-band",
             "description": "Full Rockall score 3 of 11 -> intermediate risk"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SHOCK-001",
+            "category": "shock",
+            "priority": "high",
+            "description": "Tachycardia (heart rate 105 bpm, >= 100) — early shock.",
+            "suggestedAction": "Resuscitate and monitor: secure IV access, fluids / blood as indicated, and continuous observation."
           }
         ]
       }
@@ -266,6 +281,36 @@
             "points": null,
             "category": "risk-band",
             "description": "Full Rockall score 11 of 11 -> high risk"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-MORTALITY-RISK-001",
+            "category": "high-mortality-risk",
+            "priority": "high",
+            "description": "Full Rockall score 11 of 11 — high risk of rebleeding and death.",
+            "suggestedAction": "Admit and monitor closely; arrange endoscopic therapy, transfusion, and surgical / interventional-radiology input as indicated."
+          },
+          {
+            "id": "F-SHOCK-001",
+            "category": "shock",
+            "priority": "high",
+            "description": "Hypotension (systolic BP 90 mmHg, < 100) — haemodynamic instability.",
+            "suggestedAction": "Resuscitate and monitor: secure IV access, fluids / blood as indicated, and continuous observation."
+          },
+          {
+            "id": "F-HIGH-RISK-STIGMATA-001",
+            "category": "high-risk-stigmata",
+            "priority": "high",
+            "description": "High-risk stigmata of recent haemorrhage — active bleeding, non-bleeding visible vessel, or adherent clot.",
+            "suggestedAction": "Endoscopic haemostatic therapy is indicated; plan for possible rebleeding and repeat endoscopy."
+          },
+          {
+            "id": "F-UPPER-GI-MALIGNANCY-001",
+            "category": "upper-gi-malignancy",
+            "priority": "medium",
+            "description": "Endoscopic diagnosis of upper GI malignancy.",
+            "suggestedAction": "Arrange oncology / upper-GI MDT referral and staging; discuss goals of care."
           }
         ]
       }

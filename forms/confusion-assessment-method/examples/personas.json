@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCamGrade",
-  "note": "Realistic filled-in states in the CAM scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the CAM scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "delirium-present",
@@ -101,6 +106,22 @@
             "category": "algorithm-combiner",
             "description": "1 AND 2 AND (3 OR 4) satisfied — delirium present"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DELIRIUM-PRESENT-001",
+            "category": "delirium-present",
+            "priority": "high",
+            "description": "CAM positive — delirium present. Delirium is a medical emergency with a reversible cause in most cases.",
+            "suggestedAction": "Commence the PINCH ME reversible-precipitant screen (Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment) and appropriate investigations; treat the underlying cause."
+          },
+          {
+            "id": "F-DELIRIOGENIC-MEDICATION-001",
+            "category": "deliriogenic-medication",
+            "priority": "medium",
+            "description": "Recent high-risk deliriogenic medication noted (anticholinergic, benzodiazepine, or opioid): oxycodone commenced post-operatively.",
+            "suggestedAction": "Review the medication chart, deprescribe or reduce the high-risk agent where safe, and consider alternatives."
+          }
         ]
       }
     },
@@ -197,6 +218,15 @@
             "category": "algorithm-combiner",
             "description": "1 AND 2 AND (3 OR 4) not satisfied — delirium absent"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-REPEAT-SCREENING-001",
+            "category": "repeat-screening",
+            "priority": "low",
+            "description": "A single negative CAM screen does not exclude delirium — the course fluctuates and may become positive later.",
+            "suggestedAction": "Re-screen at least once per shift in at-risk patients and whenever the clinical picture changes."
+          }
         ]
       }
     },
@@ -264,6 +294,29 @@
             "positive": null,
             "category": "arousal-gate",
             "description": "CAM-ICU RASS -5 (unrousable) — cannot assess; classification unable-to-assess"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ALTERED-CONSCIOUSNESS-001",
+            "category": "altered-consciousness",
+            "priority": "high",
+            "description": "Markedly depressed level of consciousness (coma) — urgent medical concern.",
+            "suggestedAction": "Assess airway and neurology, check glucose, and obtain urgent senior medical review."
+          },
+          {
+            "id": "F-DELIRIOGENIC-MEDICATION-001",
+            "category": "deliriogenic-medication",
+            "priority": "medium",
+            "description": "Recent high-risk deliriogenic medication noted (anticholinergic, benzodiazepine, or opioid): sedation with propofol and fentanyl.",
+            "suggestedAction": "Review the medication chart, deprescribe or reduce the high-risk agent where safe, and consider alternatives."
+          },
+          {
+            "id": "F-UNABLE-TO-ASSESS-001",
+            "category": "unable-to-assess",
+            "priority": "medium",
+            "description": "Assessment could not be completed — CAM-ICU RASS -5 (unrousable).",
+            "suggestedAction": "Re-assess when arousal improves; continue supportive care and record the reason in the notes."
           }
         ]
       }

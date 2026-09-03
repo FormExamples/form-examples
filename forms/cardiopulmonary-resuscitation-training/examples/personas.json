@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeBLS",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. compressionsAtCorrectRate/Depth are left '' so the grader derives them from the numeric compressionRate/compressionDepth measurements (the AHA-range fallback path).",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. compressionsAtCorrectRate/Depth are left '' so the grader derives them from the numeric compressionRate/compressionDepth measurements (the AHA-range fallback path). Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "pass-all-criteria-met",
@@ -331,7 +336,15 @@
           }
         ],
         "answeredCount": 32,
-        "totalRules": 32
+        "totalRules": 32,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Trainee Details",
+            "message": "Prior certification expired on 2025-06-01 — recertification required.",
+            "priority": "high"
+          }
+        ]
       }
     },
     {
@@ -687,7 +700,27 @@
           }
         ],
         "answeredCount": 32,
-        "totalRules": 32
+        "totalRules": 32,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Trainee Details",
+            "message": "Prior certification expired on 2025-06-01 — recertification required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MULTI-DEF",
+            "category": "Performance",
+            "message": "3 non-critical deficiencies recorded — additional coaching recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with trainee during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -1043,7 +1076,57 @@
           }
         ],
         "answeredCount": 32,
-        "totalRules": 32
+        "totalRules": 32,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CRIT-BLS-CC-RATE",
+            "category": "Critical action — Chest Compressions",
+            "message": "Critical-action failure: Compressions delivered at AHA rate of 100-120 per minute.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CRIT-BLS-CC-DEPTH",
+            "category": "Critical action — Chest Compressions",
+            "message": "Critical-action failure: Compressions delivered to AHA depth of 5-6 cm for an adult.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CRIT-BLS-AB-CHEST-RISE",
+            "category": "Critical action — Airway & Breaths",
+            "message": "Critical-action failure: Each ventilation produces visible chest rise (effective breath).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Trainee Details",
+            "message": "Prior certification expired on 2025-06-01 — recertification required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CC-RATE-RANGE",
+            "category": "Chest Compressions",
+            "message": "Measured compression rate 140/min outside AHA target 100-120/min.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CC-DEPTH-RANGE",
+            "category": "Chest Compressions",
+            "message": "Measured compression depth 3.5 cm outside AHA target 5-6 cm.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CC-HESITATE-DEPTH",
+            "category": "Chest Compressions",
+            "message": "Hesitation observed in compression depth — coach to push harder (5-6 cm).",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with trainee during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     }
   ]

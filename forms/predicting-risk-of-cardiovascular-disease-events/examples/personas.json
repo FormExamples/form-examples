@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "estimateTenYearRisk",
-  "note": "Realistic filled-in states in the PREVENT-style risk engine's shape. `graderHint` pins the deterministic `estimateTenYearRisk` (returns the 10-year percentage) rather than `calculateRisk`, which stamps a live timestamp. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "graderHint": "calculateRisk",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the PREVENT-style risk engine's shape. `graderHint` pins the deterministic `estimateTenYearRisk` (returns the 10-year percentage) rather than `calculateRisk`, which stamps a live timestamp. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. graderHint re-pinned 2026-09-03 from \"estimateTenYearRisk\" to \"calculateRisk\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "low-risk",
@@ -87,7 +91,44 @@
           "clinicalNotes": ""
         }
       },
-      "expected": 0.9
+      "expected": {
+        "riskCategory": "low",
+        "tenYearRiskPercent": 0.9,
+        "thirtyYearRiskPercent": 2.3,
+        "firedRules": [
+          {
+            "id": "PVT-016",
+            "category": "Cholesterol",
+            "description": "HDL cholesterol >= 60 mg/dL (protective)",
+            "riskLevel": "low"
+          },
+          {
+            "id": "PVT-017",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          },
+          {
+            "id": "PVT-018",
+            "category": "Blood Pressure",
+            "description": "Normal BP (< 120/80 mmHg), no treatment",
+            "riskLevel": "low"
+          },
+          {
+            "id": "PVT-019",
+            "category": "Renal Function",
+            "description": "eGFR >= 90 mL/min (normal renal function)",
+            "riskLevel": "low"
+          },
+          {
+            "id": "PVT-020",
+            "category": "BMI",
+            "description": "BMI 18.5-24.9 (normal weight)",
+            "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": []
+      }
     },
     {
       "name": "intermediate-risk",
@@ -173,7 +214,51 @@
           "clinicalNotes": ""
         }
       },
-      "expected": 12.8
+      "expected": {
+        "riskCategory": "intermediate",
+        "tenYearRiskPercent": 12.8,
+        "thirtyYearRiskPercent": 32,
+        "firedRules": [
+          {
+            "id": "PVT-006",
+            "category": "Overall Risk",
+            "description": "10-year risk 7.5-19.9% (intermediate risk)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-010",
+            "category": "Blood Pressure",
+            "description": "Systolic BP 140-179 mmHg (hypertension)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-011",
+            "category": "Cholesterol",
+            "description": "Total cholesterol >= 240 mg/dL",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-012",
+            "category": "Cholesterol",
+            "description": "HDL cholesterol < 40 mg/dL (low)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-017",
+            "category": "Smoking",
+            "description": "Non-smoker",
+            "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medications",
+            "message": "Intermediate/high CVD risk but not on statin therapy",
+            "priority": "medium"
+          }
+        ]
+      }
     },
     {
       "name": "high-risk",
@@ -259,7 +344,57 @@
           "clinicalNotes": ""
         }
       },
-      "expected": 45
+      "expected": {
+        "riskCategory": "high",
+        "tenYearRiskPercent": 45,
+        "thirtyYearRiskPercent": 95,
+        "firedRules": [
+          {
+            "id": "PVT-001",
+            "category": "Overall Risk",
+            "description": "Estimated 10-year CVD risk >= 20%",
+            "riskLevel": "high"
+          },
+          {
+            "id": "PVT-007",
+            "category": "Smoking",
+            "description": "Current smoker",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-008",
+            "category": "Diabetes",
+            "description": "Diabetes present",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-010",
+            "category": "Blood Pressure",
+            "description": "Systolic BP 140-179 mmHg (hypertension)",
+            "riskLevel": "medium"
+          },
+          {
+            "id": "PVT-013",
+            "category": "BMI",
+            "description": "BMI >= 30 (obese)",
+            "riskLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-COMBO-001",
+            "category": "Combination Risk",
+            "message": "Smoking + diabetes + hypertension - very high-risk combination",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medications",
+            "message": "Intermediate/high CVD risk but not on statin therapy",
+            "priority": "medium"
+          }
+        ]
+      }
     }
   ]
 }

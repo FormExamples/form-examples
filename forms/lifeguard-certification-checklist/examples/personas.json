@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeLifeguard",
-  "note": "Three hand-authored personas for the RLSS UK NPLQ / ILSF Lifeguard Competency Verification grader. gradeLifeguard evaluates all 46 declarative rules and returns { outcome, criticalFailures, deficiencies, firedRules, answeredCount, totalRules }: firedRules always lists every rule (in registry order, steps 2-9) with its tri-state status; answeredCount counts only 'yes'/'no' ('na' and '' are excluded); any critical rule at 'no' -> 'fail'; otherwise 0 non-critical 'no' -> 'pass', and ANY number of non-critical 'no' -> 'needs-development' (the >2 branch is written separately but yields the same outcome); answeredCount 0 -> 'fail' (an unmarked sheet fails rather than passing vacuously). Two rules fall back to numeric measurements when their explicit tri-state is blank: LIFE-PF-50M-TIME from swim50mTimeSeconds (<= 60 s) and LIFE-CPR-COMPRESSIONS from compressionRate (100-120/min) AND compressionDepth (5.0-6.0 cm) - an explicit 'yes'/'no' always wins over the measurement. detectAdditionalFlags (flagged-issues.js) is a separate export taking the grading result and depending on Date.now() for the expired-certification flag, so flags are NOT pinned here (Phase 13 'flagsHint' tooling task); each description records the flags the persona would raise. No timestamp is returned by gradeLifeguard. Regenerate 'expected' with: bin/test-personas lifeguard-certification-checklist --update",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Three hand-authored personas for the RLSS UK NPLQ / ILSF Lifeguard Competency Verification grader. gradeLifeguard evaluates all 46 declarative rules and returns { outcome, criticalFailures, deficiencies, firedRules, answeredCount, totalRules }: firedRules always lists every rule (in registry order, steps 2-9) with its tri-state status; answeredCount counts only 'yes'/'no' ('na' and '' are excluded); any critical rule at 'no' -> 'fail'; otherwise 0 non-critical 'no' -> 'pass', and ANY number of non-critical 'no' -> 'needs-development' (the >2 branch is written separately but yields the same outcome); answeredCount 0 -> 'fail' (an unmarked sheet fails rather than passing vacuously). Two rules fall back to numeric measurements when their explicit tri-state is blank: LIFE-PF-50M-TIME from swim50mTimeSeconds (<= 60 s) and LIFE-CPR-COMPRESSIONS from compressionRate (100-120/min) AND compressionDepth (5.0-6.0 cm) - an explicit 'yes'/'no' always wins over the measurement. detectAdditionalFlags (flagged-issues.js) is a separate export taking the grading result and depending on Date.now() for the expired-certification flag, so flags are pinned here through flagsHint/flagsArgs (the Phase 13 tooling item, done 2026-09-03); each description records the flags the persona would raise. No timestamp is returned by gradeLifeguard. Regenerate 'expected' with: bin/test-personas lifeguard-certification-checklist --update Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "Clean pass - initial NPLQ candidate, every competency demonstrated",
@@ -472,7 +477,27 @@
           }
         ],
         "answeredCount": 46,
-        "totalRules": 46
+        "totalRules": 46,
+        "additionalFlags": [
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with candidate during debrief.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-DEBRIEF-CANDIDATE",
+            "category": "Debrief",
+            "message": "Candidate self-feedback captured — incorporate into improvement plan.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-DEVELOPMENT-AREAS",
+            "category": "Development",
+            "message": "Development areas noted — supply written feedback to candidate.",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -961,7 +986,33 @@
           }
         ],
         "answeredCount": 44,
-        "totalRules": 46
+        "totalRules": 46,
+        "additionalFlags": [
+          {
+            "id": "FLAG-MULTI-DEF",
+            "category": "Performance",
+            "message": "2 non-critical deficiencies recorded — additional coaching recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SWIM-50M-MARGIN",
+            "category": "Physical Fitness",
+            "message": "50 m swim 58s is within target but close to the 60s limit — recommend conditioning.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with candidate during debrief.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-DEVELOPMENT-AREAS",
+            "category": "Development",
+            "message": "Development areas noted — supply written feedback to candidate.",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -1491,7 +1542,87 @@
           }
         ],
         "answeredCount": 33,
-        "totalRules": 46
+        "totalRules": 46,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CRIT-LIFE-PF-50M-TIME",
+            "category": "Critical competency — Swim Competency",
+            "message": "Critical-competency failure: Completes 50 m timed swim in 60 seconds or less (NPLQ standard).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CRIT-LIFE-RU-TOW",
+            "category": "Critical competency — Unconscious Rescue",
+            "message": "Critical-competency failure: Effective tow of unconscious casualty to safety, airway protected.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CRIT-LIFE-CPR-COMPRESSIONS",
+            "category": "Critical competency — CPR & AED",
+            "message": "Critical-competency failure: Effective compressions to standard rate (100-120/min) and depth (5-6 cm).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Candidate Details",
+            "message": "Prior certification expired on 2026-01-31 — recertification required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-UNCONSCIOUS-RESCUE",
+            "category": "Domain weakness — Unconscious Rescue",
+            "message": "2 deficiencies clustered in Unconscious Rescue; targeted remediation recommended before recertification.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MULTI-DEF",
+            "category": "Performance",
+            "message": "4 non-critical deficiencies recorded — additional coaching recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SWIM-50M-SLOW",
+            "category": "Physical Fitness",
+            "message": "Measured 50 m swim time 66s exceeds NPLQ target of 60s.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CPR-RATE-RANGE",
+            "category": "CPR & AED",
+            "message": "Measured compression rate 90/min outside target 100-120/min.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CPR-DEPTH-RANGE",
+            "category": "CPR & AED",
+            "message": "Measured compression depth 4.2cm outside target 5-6cm.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CPR-HESITATE-DEPTH",
+            "category": "CPR & AED",
+            "message": "Hesitation in compression depth observed — coach to push harder (5-6 cm).",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-AED-SLOW",
+            "category": "CPR & AED",
+            "message": "Time to first shock 112s exceeds 90s target — practice rapid AED retrieval and pad placement.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with candidate during debrief.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-DEVELOPMENT-AREAS",
+            "category": "Development",
+            "message": "Development areas noted — supply written feedback to candidate.",
+            "priority": "low"
+          }
+        ]
       }
     }
   ]

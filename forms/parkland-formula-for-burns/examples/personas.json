@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateParkland",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "standard-adult-burn-immediate-assessment",
@@ -75,6 +80,22 @@
             "band": "resuscitation",
             "category": "urine-output",
             "description": "Titrate to a urine output of 40–80 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 20% at or above the 15% adult major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
           }
         ]
       }
@@ -152,6 +173,22 @@
             "category": "urine-output",
             "description": "Titrate to a urine output of 9–18 mL/h (0.5–1.0 mL/kg/h)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 12% at or above the 10% child major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
+          }
         ]
       }
     },
@@ -227,6 +264,22 @@
             "band": "resuscitation",
             "category": "urine-output",
             "description": "Titrate to a urine output of 35–70 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 30% at or above the 15% adult major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
           }
         ]
       }
@@ -311,6 +364,29 @@
             "category": "urine-output",
             "description": "Titrate to a urine output of 32.5–65 mL/h (0.5–1.0 mL/kg/h)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 25% at or above the 15% adult major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-RESUSCITATION-OVERDUE-001",
+            "category": "resuscitation-overdue",
+            "priority": "high",
+            "description": "10 h have elapsed since injury — the first-8-h resuscitation window has passed",
+            "suggestedAction": "Give the outstanding first-phase volume now as a priority and re-plan the remainder against the 24 h total."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
+          }
         ]
       }
     },
@@ -394,6 +470,22 @@
             "category": "urine-output",
             "description": "Titrate to a urine output of 37.5–75 mL/h (0.5–1.0 mL/kg/h)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 18% at or above the 15% adult major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
+          }
         ]
       }
     },
@@ -455,6 +547,15 @@
             "band": "resuscitation",
             "category": "time-offset",
             "description": "2 h elapsed since injury; 6 h of the first-8-h window remain"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-DATA-001",
+            "category": "incomplete-assessment",
+            "priority": "low",
+            "description": "Missing input(s): body weight, %TBSA — the plan cannot be fully derived",
+            "suggestedAction": "Record the missing value(s) and re-calculate the resuscitation plan."
           }
         ]
       }
@@ -524,6 +625,29 @@
             "band": "resuscitation",
             "category": "urine-output",
             "description": "Titrate to a urine output of 30–60 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 22% at or above the 15% adult major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
+          },
+          {
+            "id": "F-INCOMPLETE-DATA-001",
+            "category": "incomplete-assessment",
+            "priority": "low",
+            "description": "Missing input(s): time of injury — the plan cannot be fully derived",
+            "suggestedAction": "Record the missing value(s) and re-calculate the resuscitation plan."
           }
         ]
       }
@@ -600,6 +724,43 @@
             "band": "resuscitation",
             "category": "urine-output",
             "description": "Titrate to a urine output of 45–90 mL/h (0.5–1.0 mL/kg/h)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MAJOR-BURN-REFERRAL-001",
+            "category": "major-burn-referral",
+            "priority": "high",
+            "description": "%TBSA 35% at or above the 15% adult major-burn threshold — formal fluid resuscitation is indicated",
+            "suggestedAction": "Refer to a specialist burns service, commence Parkland resuscitation, and arrange transfer per National Burn Care Referral Guidance."
+          },
+          {
+            "id": "F-INHALATION-AIRWAY-001",
+            "category": "inhalation-airway",
+            "priority": "high",
+            "description": "Inhalation / airway injury suspected — airway oedema can develop rapidly",
+            "suggestedAction": "Assess the airway early; involve anaesthesia / critical care and consider intubation before oedema progresses."
+          },
+          {
+            "id": "F-ESCHAROTOMY-RISK-001",
+            "category": "escharotomy-risk",
+            "priority": "high",
+            "description": "Circumferential or deep burn present — risk of constriction and compartment syndrome",
+            "suggestedAction": "Monitor distal perfusion and compartment pressures; seek surgical review for possible escharotomy."
+          },
+          {
+            "id": "F-TITRATE-URINE-OUTPUT-001",
+            "category": "titrate-to-urine-output",
+            "priority": "medium",
+            "description": "The Parkland volume is a starting estimate only — fluids must be titrated to physiological endpoints",
+            "suggestedAction": "Titrate to a urine output of 0.5–1.0 mL/kg/h (adults); adjust the rate up or down and seek senior review if output falls."
+          },
+          {
+            "id": "F-SPECIAL-MECHANISM-001",
+            "category": "special-mechanism",
+            "priority": "medium",
+            "description": "Electrical injury — higher fluid requirement and risk of occult deep-tissue damage",
+            "suggestedAction": "Seek specialist advice; for electrical injury monitor for rhabdomyolysis and arrhythmia and maintain a higher urine-output target."
           }
         ]
       }

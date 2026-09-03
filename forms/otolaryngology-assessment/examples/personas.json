@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateSnot22",
-  "note": "Realistic filled-in states in the SNOT-22 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the SNOT-22 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "mild-minimal-impact",
@@ -271,7 +275,8 @@
             "description": "Embarrassed",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -542,7 +547,8 @@
             "description": "Embarrassed",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -812,6 +818,26 @@
             "category": "SNOT-22",
             "description": "Embarrassed",
             "score": 0
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-RHINO-POLYP-RIGHT",
+            "category": "Rhinoscopy",
+            "message": "Right large nasal polyps — likely contributing to obstruction; consider intranasal steroid trial and ENT referral.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RHINO-POLYP-LEFT",
+            "category": "Rhinoscopy",
+            "message": "Left large nasal polyps — likely contributing to obstruction; consider intranasal steroid trial and ENT referral.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SNOT-SLEEP",
+            "category": "SNOT-22",
+            "message": "High sleep-domain burden (14/20) — screen for OSA and consider sleep study.",
+            "priority": "medium"
           }
         ]
       }

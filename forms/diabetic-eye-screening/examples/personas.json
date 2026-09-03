@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the diabetic-eye-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the diabetic-eye-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk-24-month",
@@ -69,7 +74,8 @@
             "category": "routine",
             "description": "Both eyes R0/M0 and the previous screen was also R0/M0 — routine 24-monthly (extended, low-risk) screening."
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -137,6 +143,15 @@
             "stage": "recall",
             "category": "surveillance",
             "description": "Worst-eye retinopathy R2 (pre-proliferative), no maculopathy / proliferative / ungradable — 6-monthly digital surveillance."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-PRE-PROLIFERATIVE-001",
+            "category": "pre-proliferative",
+            "priority": "medium",
+            "description": "Pre-proliferative diabetic retinopathy (R2) in at least one eye.",
+            "suggestedAction": "Place on 6-monthly digital surveillance and monitor for progression."
           }
         ]
       }
@@ -206,6 +221,29 @@
             "stage": "recall",
             "category": "urgent-proliferative",
             "description": "Worst-eye retinopathy R3A (active proliferative) — urgent / fast-track referral to ophthalmology."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACTIVE-PROLIFERATIVE-001",
+            "category": "active-proliferative",
+            "priority": "high",
+            "description": "Active proliferative diabetic retinopathy (R3A) in at least one eye — sight-threatening disease.",
+            "suggestedAction": "Refer urgently / fast-track to ophthalmology (hospital eye service)."
+          },
+          {
+            "id": "F-MACULOPATHY-001",
+            "category": "maculopathy",
+            "priority": "high",
+            "description": "Diabetic maculopathy (M1) in at least one eye — referable disease.",
+            "suggestedAction": "Refer to the hospital eye service for assessment of maculopathy."
+          },
+          {
+            "id": "F-PRE-PROLIFERATIVE-001",
+            "category": "pre-proliferative",
+            "priority": "medium",
+            "description": "Pre-proliferative diabetic retinopathy (R2) in at least one eye.",
+            "suggestedAction": "Place on 6-monthly digital surveillance and monitor for progression."
           }
         ]
       }

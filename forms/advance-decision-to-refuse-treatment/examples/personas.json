@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateValidity",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "valid-general-refusal-only",
@@ -136,7 +140,15 @@
       },
       "expected": {
         "validityStatus": "valid",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "id": "FLAG-LPA-002",
+            "category": "Lasting Power of Attorney",
+            "message": "Health and Welfare LPA is registered - if LPA was granted after this ADRT, the LPA attorney may have authority to consent to the refused treatment",
+            "priority": "high"
+          }
+        ]
       }
     },
     {
@@ -296,6 +308,32 @@
             "category": "Personal Information",
             "description": "GP details should be recorded",
             "severity": "recommended"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-LPA-002",
+            "category": "Lasting Power of Attorney",
+            "message": "Health and Welfare LPA is registered - if LPA was granted after this ADRT, the LPA attorney may have authority to consent to the refused treatment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-REV-001",
+            "category": "Healthcare Professional Review",
+            "message": "No healthcare professional review date recorded",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-GP-001",
+            "category": "Personal Information",
+            "message": "GP details not recorded - recommended for clinical communication",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-NHS-001",
+            "category": "Personal Information",
+            "message": "NHS number not recorded - may affect identification",
+            "priority": "low"
           }
         ]
       }
@@ -457,6 +495,26 @@
             "category": "Life-Sustaining Treatment",
             "description": "Life-sustaining refusal requires witness signature on life-sustaining section",
             "severity": "critical"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-LS-001",
+            "category": "Life-Sustaining Treatment",
+            "message": "CRITICAL: Life-sustaining treatment refusal without witness signature - ADRT is NOT legally valid",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LS-002",
+            "category": "Life-Sustaining Treatment",
+            "message": "CRITICAL: Missing written \"even if life is at risk\" statement - ADRT is NOT legally valid for life-sustaining treatment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LPA-002",
+            "category": "Lasting Power of Attorney",
+            "message": "Health and Welfare LPA is registered - if LPA was granted after this ADRT, the LPA attorney may have authority to consent to the refused treatment",
+            "priority": "high"
           }
         ]
       }

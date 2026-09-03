@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "calculateRisk",
-  "note": "Realistic filled-in states in the risk-grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas` — it covers `calculateRisk`'s own return value (riskScore, riskLevel, firedRules) only; the independent `detectAdditionalFlags` clinician-facing flags are a separate, unchecked module (mirrored here in the persona descriptions for context, hand-verified against the rules but not part of `expected`). Risk-Family-001 (score) fires at >=2 family members with a cancer history; the analogous flag (FLAG-FAMILY-CANCER-001) requires >=3 — a real, distinct threshold, not a typo. Also notable: FLAG-URGENT-001 checks the literal referral urgency value 'emergency' specifically; 'urgent' does not trigger it.",
+  "graderHint": "gradeRisk",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the risk-grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas` — it covers `calculateRisk`'s own return value (riskScore, riskLevel, firedRules) only; the independent `detectAdditionalFlags` clinician-facing flags are a separate, unchecked module (mirrored here in the persona descriptions for context, hand-verified against the rules but not part of `expected`). Risk-Family-001 (score) fires at >=2 family members with a cancer history; the analogous flag (FLAG-FAMILY-CANCER-001) requires >=3 — a real, distinct threshold, not a typo. Also notable: FLAG-URGENT-001 checks the literal referral urgency value 'emergency' specifically; 'urgent' does not trigger it. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. graderHint re-pinned 2026-09-03 from \"calculateRisk\" to \"gradeRisk\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result). Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. graderHint re-pinned 2026-09-03 from \"gradeRisk\" to \"gradeRisk\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "low-risk-isolated-birth-defect",
@@ -134,7 +138,8 @@
             "description": "Birth defects present",
             "weight": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -273,6 +278,20 @@
             "category": "Reproductive Genetics",
             "description": "Recurrent miscarriages",
             "weight": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-PATHOGENIC-001",
+            "category": "Known Genetic Condition",
+            "message": "Known genetic condition: Confirmed carrier of a pathogenic MLH1 variant (Lynch syndrome), identified via cascade testing after a sibling's diagnosis. - cascade testing for family members recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MISCARRIAGE-001",
+            "category": "Reproductive Genetics",
+            "message": "Recurrent miscarriages reported - consider chromosomal analysis (karyotype) for both partners",
+            "priority": "medium"
           }
         ]
       }
@@ -425,6 +444,26 @@
             "category": "Cardiovascular Genetics",
             "description": "Sudden cardiac death in family",
             "weight": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-FAMILY-CANCER-001",
+            "category": "Family Cancer Cluster",
+            "message": "3 family members with cancer history - consider hereditary cancer syndrome evaluation",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-EARLY-CANCER-001",
+            "category": "Early Onset Cancer",
+            "message": "Cancer diagnosed at age 38 - early onset warrants genetic testing consideration",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SCD-001",
+            "category": "Cardiovascular Genetics",
+            "message": "Sudden cardiac death in family - urgent cardiac genetic evaluation recommended",
+            "priority": "high"
           }
         ]
       }

@@ -12,10 +12,10 @@ page lists each gate, what it proves, and how it runs in CI
 | SQL apply | `bin/test-sql-apply` | Every form's numbered `sql/` migrations apply, in order, to a fresh Postgres — no missing extension, bad ordering, duplicate CREATE, or syntax error. |
 | Example conformance | `bin/test-examples-conformance` | Each `examples/assessment.json` entity/property maps to a real SQL table/column (separator-insensitive), with light numeric/boolean type checks. |
 | Tutorial doc rot | `bin/test-tutorials` | Every `bin/...`/`forms/...` path referenced in a `docs/tutorials/*.md` ` ```sh ` block still exists. Static reference check only. |
-| Scoring engines | `bin/test-engines` | Every HTML front-end's scoring engine loads and its grader runs over the default state, headless (no browser). |
+| Scoring engines | `bin/test-engines` | Every HTML front-end's scoring engine loads and its grader (discovered by probing candidates over the default state, not by name alone) runs over the default state, headless (no browser). `--skip-summary` groups the remaining SKIPs by reason. |
 | Loco routes | `bin/test-loco-routes` | Every Loco crate's `app.rs` wires at least one domain controller beyond `auth::routes()`. |
 | Back-end AGENTS.md | `bin/back-end-with-loco/generate-loco-agents.py --list-stale` | No crate's `back-end-with-loco/AGENTS.md` still describes the obsolete single-table-JSONB design. |
-| Personas | `bin/test-personas` | Each form's hand-authored `examples/personas.json` state grades to the exact `expected` recorded against its actual scoring engine. |
+| Personas | `bin/test-personas` | Each form's hand-authored `examples/personas.json` state grades to the exact `expected` recorded against its actual scoring engine — including, for split engines, the flags from the separate detector called with its `form-app.js` contract (`flagsHint` / `flagsArgs`), under a frozen clock. The summary counts forms and personas. |
 | Tools + drift | `bin/test-tools` | Every generator and Lily contract `--check` returns clean; `lily-svelte-status` reports 0 PARTIAL / 0 TODO. |
 | Lily HTML | `bin/lily-html-refactor --check --all` | Every HTML front-end matches the Lily class contract. |
 | Lily Svelte | `bin/lily-svelte-refactor --check --all` | Every SvelteKit front-end matches the Lily class contract. |

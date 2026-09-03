@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateConcern",
-  "note": "Realistic filled-in states in the NICE CG156 fertility concern engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the NICE CG156 fertility concern engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-concern",
@@ -128,7 +132,21 @@
       "expected": {
         "concernScore": 0,
         "concernLevel": "low",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SEM-000",
+            "category": "Semen Analysis",
+            "message": "Semen analysis not yet completed — arrange WHO 2021 standardised analysis.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SUPP-001",
+            "category": "Supplements",
+            "message": "Pre-conception folic acid not confirmed — advise 400 mcg daily (5 mg if higher risk).",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -280,6 +298,32 @@
             "category": "Pelvic History",
             "description": "Polycystic ovary syndrome (PCOS)",
             "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-AGE-002",
+            "category": "Age",
+            "message": "Female partner age 38 — earlier referral threshold (NICE CG156: refer after 6 months).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SEM-000",
+            "category": "Semen Analysis",
+            "message": "Semen analysis not yet completed — arrange WHO 2021 standardised analysis.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PEL-003",
+            "category": "Pelvic History",
+            "message": "PCOS — manage weight, consider ovulation induction (clomifene/letrozole).",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SUPP-001",
+            "category": "Supplements",
+            "message": "Pre-conception folic acid not confirmed — advise 400 mcg daily (5 mg if higher risk).",
+            "priority": "low"
           }
         ]
       }
@@ -451,6 +495,32 @@
             "category": "Ovarian Reserve",
             "description": "AMH < 5.4 pmol/L — low ovarian reserve (NICE)",
             "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-AGE-001",
+            "category": "Age",
+            "message": "Female partner age 42 — significant age-related fertility decline; urgent specialist referral.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-OR-001",
+            "category": "Ovarian Reserve",
+            "message": "AMH 3 pmol/L — low ovarian reserve; consider expedited ART.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SEM-000",
+            "category": "Semen Analysis",
+            "message": "Semen analysis not yet completed — arrange WHO 2021 standardised analysis.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SUPP-001",
+            "category": "Supplements",
+            "message": "Pre-conception folic acid not confirmed — advise 400 mcg daily (5 mg if higher risk).",
+            "priority": "low"
           }
         ]
       }

@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculatePaduaGrade",
-  "note": "Realistic filled-in states in the Padua Prediction Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.paduaScore"
+  ],
+  "note": "Realistic filled-in states in the Padua Prediction Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.paduaScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.paduaScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk-no-prophylaxis",
@@ -77,7 +82,8 @@
             "category": "risk-band",
             "description": "Padua < 4 — low risk band; routine pharmacological prophylaxis not indicated on risk grounds"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -175,6 +181,15 @@
             "category": "risk-band",
             "description": "Padua >= 4 — high risk band; consider pharmacological thromboprophylaxis subject to bleeding-risk check"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-VTE-RISK-001",
+            "category": "high-vte-risk",
+            "priority": "high",
+            "description": "High-risk Padua score (6 of 20, at or above the threshold of 4) — heightened risk of venous thromboembolism",
+            "suggestedAction": "Consider pharmacological thromboprophylaxis (e.g. low-molecular-weight heparin, unfractionated heparin, or fondaparinux) after assessing bleeding risk and contraindications."
+          }
         ]
       }
     },
@@ -265,6 +280,29 @@
             "points": 0,
             "category": "risk-band",
             "description": "Padua >= 4 — high risk band; consider pharmacological thromboprophylaxis subject to bleeding-risk check"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-VTE-RISK-001",
+            "category": "high-vte-risk",
+            "priority": "high",
+            "description": "High-risk Padua score (8 of 20, at or above the threshold of 4) — heightened risk of venous thromboembolism",
+            "suggestedAction": "Consider pharmacological thromboprophylaxis (e.g. low-molecular-weight heparin, unfractionated heparin, or fondaparinux) after assessing bleeding risk and contraindications."
+          },
+          {
+            "id": "F-BLEEDING-CONTRAINDICATION-001",
+            "category": "bleeding-contraindication",
+            "priority": "high",
+            "description": "High bleeding-risk factors present — pharmacological thromboprophylaxis may be contraindicated",
+            "suggestedAction": "Consider mechanical prophylaxis (e.g. intermittent pneumatic compression) and seek senior review before starting any anticoagulant."
+          },
+          {
+            "id": "F-ACTIVE-CANCER-001",
+            "category": "active-cancer",
+            "priority": "medium",
+            "description": "Active cancer — the highest single-factor contribution (3 points) to the Padua score",
+            "suggestedAction": "Note the heightened baseline VTE risk associated with active malignancy when planning thromboprophylaxis."
           }
         ]
       }

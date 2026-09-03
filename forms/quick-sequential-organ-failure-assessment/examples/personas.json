@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateQsofaGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.qsofaScore"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.qsofaScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.qsofaScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "lower-score-0",
@@ -48,7 +53,8 @@
             "category": "risk-band",
             "description": "qSOFA < 2 — negative screen; lower risk band"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -109,6 +115,29 @@
             "points": 0,
             "category": "risk-band",
             "description": "qSOFA >= 2 — positive screen; higher risk band"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEPSIS-ESCALATION-001",
+            "category": "sepsis-escalation",
+            "priority": "high",
+            "description": "Positive qSOFA screen (score 2 of 3) — higher risk of a poor outcome",
+            "suggestedAction": "Escalate: obtain senior / critical-care review, calculate a full SOFA score, and initiate a sepsis workup (cultures, lactate, fluids, antibiotics per local policy)."
+          },
+          {
+            "id": "F-HYPOTENSION-001",
+            "category": "hypotension",
+            "priority": "high",
+            "description": "Systolic blood pressure 96 mmHg at or below the 100 mmHg threshold — risk of shock",
+            "suggestedAction": "Reassess perfusion, consider fluid resuscitation and continuous blood-pressure monitoring."
+          },
+          {
+            "id": "F-TACHYPNOEA-001",
+            "category": "tachypnoea",
+            "priority": "medium",
+            "description": "Respiratory rate 24 breaths/min at or above the 22/min threshold",
+            "suggestedAction": "Check oxygen saturation and work of breathing; consider respiratory support."
           }
         ]
       }
@@ -178,6 +207,36 @@
             "points": 0,
             "category": "risk-band",
             "description": "qSOFA >= 2 — positive screen; higher risk band"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEPSIS-ESCALATION-001",
+            "category": "sepsis-escalation",
+            "priority": "high",
+            "description": "Positive qSOFA screen (score 3 of 3) — higher risk of a poor outcome",
+            "suggestedAction": "Escalate: obtain senior / critical-care review, calculate a full SOFA score, and initiate a sepsis workup (cultures, lactate, fluids, antibiotics per local policy)."
+          },
+          {
+            "id": "F-HYPOTENSION-001",
+            "category": "hypotension",
+            "priority": "high",
+            "description": "Systolic blood pressure 88 mmHg at or below the 100 mmHg threshold — risk of shock",
+            "suggestedAction": "Reassess perfusion, consider fluid resuscitation and continuous blood-pressure monitoring."
+          },
+          {
+            "id": "F-ALTERED-MENTATION-001",
+            "category": "altered-mentation",
+            "priority": "high",
+            "description": "Glasgow Coma Scale 13 (below 15) — new confusion or reduced consciousness",
+            "suggestedAction": "Assess airway and neurology, check glucose, and consider causes of encephalopathy."
+          },
+          {
+            "id": "F-TACHYPNOEA-001",
+            "category": "tachypnoea",
+            "priority": "medium",
+            "description": "Respiratory rate 28 breaths/min at or above the 22/min threshold",
+            "suggestedAction": "Check oxygen saturation and work of breathing; consider respiratory support."
           }
         ]
       }

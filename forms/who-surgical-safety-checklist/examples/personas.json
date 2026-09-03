@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "computeFlags",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. computeFlags is the safety oracle for this form; phase status is the separate pure deriveStatus() helper.",
+  "graderHint": "deriveStatus",
+  "flagsHint": "computeFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. computeFlags is the safety oracle for this form; phase status is the separate pure deriveStatus() helper. Flags: this is a split engine, so the detector is pinned as expected.flags via flagsHint \"computeFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call computeFlags(state); the wall clock is frozen at the oracle's default while grading. graderHint re-pinned 2026-09-03 from \"computeFlags\" to \"deriveStatus\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "completed-clean-elective",
@@ -89,7 +93,10 @@
           "abandonedReason": ""
         }
       },
-      "expected": []
+      "expected": {
+        "value": "completed",
+        "flags": []
+      }
     },
     {
       "name": "risks-anticipated-and-managed",
@@ -177,26 +184,29 @@
           "abandonedReason": ""
         }
       },
-      "expected": [
-        {
-          "id": "F-DIFFICULT-AIRWAY",
-          "priority": "high",
-          "category": "airway",
-          "message": "Difficult airway or aspiration risk identified; assistance and equipment available (Sign In #6)."
-        },
-        {
-          "id": "F-HIGH-BLOOD-LOSS-RISK",
-          "priority": "high",
-          "category": "blood-loss",
-          "message": "Risk of > 500 ml (or 7 ml/kg in children) blood loss; two IVs / central access and fluids planned (Sign In #7)."
-        },
-        {
-          "id": "F-KNOWN-ALLERGY",
-          "priority": "medium",
-          "category": "allergy",
-          "message": "Patient has a known allergy — Penicillin — rash; teicoplanin substituted for prophylaxis (Sign In #5)."
-        }
-      ]
+      "expected": {
+        "value": "completed",
+        "flags": [
+          {
+            "id": "F-DIFFICULT-AIRWAY",
+            "priority": "high",
+            "category": "airway",
+            "message": "Difficult airway or aspiration risk identified; assistance and equipment available (Sign In #6)."
+          },
+          {
+            "id": "F-HIGH-BLOOD-LOSS-RISK",
+            "priority": "high",
+            "category": "blood-loss",
+            "message": "Risk of > 500 ml (or 7 ml/kg in children) blood loss; two IVs / central access and fluids planned (Sign In #7)."
+          },
+          {
+            "id": "F-KNOWN-ALLERGY",
+            "priority": "medium",
+            "category": "allergy",
+            "message": "Patient has a known allergy — Penicillin — rash; teicoplanin substituted for prophylaxis (Sign In #5)."
+          }
+        ]
+      }
     },
     {
       "name": "lapsed-timeout-and-signout",
@@ -278,50 +288,53 @@
           "abandonedReason": ""
         }
       },
-      "expected": [
-        {
-          "id": "F-SITE-NOT-MARKED",
-          "priority": "high",
-          "category": "identification",
-          "message": "Surgical site has not been marked on a lateralised procedure (Sign In #2)."
-        },
-        {
-          "id": "F-ANTIBIOTIC-PROPHYLAXIS-MISSED",
-          "priority": "high",
-          "category": "infection",
-          "message": "Antibiotic prophylaxis within 60 minutes is not confirmed and not-applicable was not selected (Time Out #3)."
-        },
-        {
-          "id": "F-STERILITY-NOT-CONFIRMED",
-          "priority": "high",
-          "category": "sterility",
-          "message": "Nursing sterility (including indicator results) has not been confirmed (Time Out #8)."
-        },
-        {
-          "id": "F-COUNT-DISCREPANCY",
-          "priority": "high",
-          "category": "counts",
-          "message": "Instrument, sponge, or needle count discrepancy reported (Sign Out #2)."
-        },
-        {
-          "id": "F-SPECIMEN-LABELLING-MISSED",
-          "priority": "high",
-          "category": "specimen",
-          "message": "Specimen labelling not confirmed read aloud (Sign Out #3)."
-        },
-        {
-          "id": "F-IMAGING-MISSING",
-          "priority": "medium",
-          "category": "imaging",
-          "message": "Essential imaging is not confirmed displayed and not-applicable was not selected (Time Out #10)."
-        },
-        {
-          "id": "F-EQUIPMENT-PROBLEM",
-          "priority": "medium",
-          "category": "equipment",
-          "message": "Equipment problem recorded — Diathermy pedal intermittently unresponsive (Sign Out #4)."
-        }
-      ]
+      "expected": {
+        "value": "not-started",
+        "flags": [
+          {
+            "id": "F-SITE-NOT-MARKED",
+            "priority": "high",
+            "category": "identification",
+            "message": "Surgical site has not been marked on a lateralised procedure (Sign In #2)."
+          },
+          {
+            "id": "F-ANTIBIOTIC-PROPHYLAXIS-MISSED",
+            "priority": "high",
+            "category": "infection",
+            "message": "Antibiotic prophylaxis within 60 minutes is not confirmed and not-applicable was not selected (Time Out #3)."
+          },
+          {
+            "id": "F-STERILITY-NOT-CONFIRMED",
+            "priority": "high",
+            "category": "sterility",
+            "message": "Nursing sterility (including indicator results) has not been confirmed (Time Out #8)."
+          },
+          {
+            "id": "F-COUNT-DISCREPANCY",
+            "priority": "high",
+            "category": "counts",
+            "message": "Instrument, sponge, or needle count discrepancy reported (Sign Out #2)."
+          },
+          {
+            "id": "F-SPECIMEN-LABELLING-MISSED",
+            "priority": "high",
+            "category": "specimen",
+            "message": "Specimen labelling not confirmed read aloud (Sign Out #3)."
+          },
+          {
+            "id": "F-IMAGING-MISSING",
+            "priority": "medium",
+            "category": "imaging",
+            "message": "Essential imaging is not confirmed displayed and not-applicable was not selected (Time Out #10)."
+          },
+          {
+            "id": "F-EQUIPMENT-PROBLEM",
+            "priority": "medium",
+            "category": "equipment",
+            "message": "Equipment problem recorded — Diathermy pedal intermittently unresponsive (Sign Out #4)."
+          }
+        ]
+      }
     }
   ]
 }

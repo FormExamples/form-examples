@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "triage",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, result); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "non-urgent-dressing-check",
@@ -74,7 +79,8 @@
         "priorityColour": "blue",
         "priorityName": "Non-urgent",
         "targetMinutes": 240,
-        "complete": true
+        "complete": true,
+        "flaggedIssues": []
       }
     },
     {
@@ -161,7 +167,23 @@
         "priorityColour": "orange",
         "priorityName": "Very urgent",
         "targetMinutes": 10,
-        "complete": true
+        "complete": true,
+        "flaggedIssues": [
+          {
+            "id": "F-CHEST-PAIN-001",
+            "category": "chest-pain",
+            "priority": "high",
+            "description": "Chest pain of possible cardiac origin — time-critical.",
+            "suggestedAction": "Obtain a 12-lead ECG within 10 minutes and place the patient on the chest-pain / ACS pathway."
+          },
+          {
+            "id": "F-SEVERE-PAIN-001",
+            "category": "severe-pain",
+            "priority": "medium",
+            "description": "Severe pain (score 8/10).",
+            "suggestedAction": "Offer prompt analgesia and Very-urgent (Level 2) clinical review; reassess pain after treatment."
+          }
+        ]
       }
     },
     {
@@ -272,7 +294,23 @@
         "priorityColour": "red",
         "priorityName": "Immediate",
         "targetMinutes": 0,
-        "complete": true
+        "complete": true,
+        "flaggedIssues": [
+          {
+            "id": "F-RESUS-IMMEDIATE-001",
+            "category": "resus-immediate",
+            "priority": "high",
+            "description": "Life-threatening finding (Shock or circulatory compromise; Major or catastrophic haemorrhage) — Category 1 / Immediate.",
+            "suggestedAction": "Move to the resuscitation room immediately; summon the resuscitation team and manage airway, breathing, and circulation."
+          },
+          {
+            "id": "F-SEPSIS-ESCALATE-001",
+            "category": "sepsis-escalate",
+            "priority": "high",
+            "description": "Deterioration / sepsis risk (NEWS2 15 (≥ 7)).",
+            "suggestedAction": "Start the sepsis screen and Sepsis Six as indicated; escalate for senior clinical review and continuous monitoring."
+          }
+        ]
       }
     }
   ]

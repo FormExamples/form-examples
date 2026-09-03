@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateMUST",
-  "note": "Realistic filled-in states in the MUST scoring engine's shape (BMI + unplanned weight loss + acute-disease effect). `expected` is computed by `bin/test-personas --update`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the MUST scoring engine's shape (BMI + unplanned weight loss + acute-disease effect). `expected` is computed by `bin/test-personas --update`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-well-nourished",
@@ -139,7 +143,8 @@
             "description": "Acutely ill and there has been or is likely to be no nutritional intake for >5 days.",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -278,7 +283,8 @@
             "description": "Acutely ill and there has been or is likely to be no nutritional intake for >5 days.",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -416,6 +422,26 @@
             "category": "Acute Disease Effect Score",
             "description": "Acutely ill and there has been or is likely to be no nutritional intake for >5 days.",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BMI-001",
+            "category": "Anthropometrics",
+            "message": "BMI 15.5 - severe underweight (<16); urgent dietetic review recommended.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-WL-001",
+            "category": "Weight Loss",
+            "message": "18% unplanned weight loss - severe loss; urgent assessment recommended.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-ACUTE-001",
+            "category": "Acute Illness",
+            "message": "Acutely ill with no nutritional intake for >5 days - immediate intervention indicated.",
+            "priority": "urgent"
           }
         ]
       }

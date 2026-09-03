@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "evaluateEligibility",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "eligible",
@@ -102,7 +106,8 @@
         "bmi": 32.9,
         "bmiCategoryLabel": "Obesity class I",
         "absoluteContraindications": [],
-        "relativeContraindications": []
+        "relativeContraindications": [],
+        "additionalFlags": []
       }
     },
     {
@@ -210,6 +215,14 @@
             "category": "Gastrointestinal",
             "description": "History of gallstones - GLP-1 RAs may increase cholelithiasis risk",
             "type": "relative"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-GI-002",
+            "category": "Gastrointestinal",
+            "message": "History of gallstones - rapid weight loss with GLP-1 RAs increases cholelithiasis risk. Monitor for biliary symptoms.",
+            "priority": "medium"
           }
         ]
       }
@@ -320,7 +333,8 @@
             "type": "absolute"
           }
         ],
-        "relativeContraindications": []
+        "relativeContraindications": [],
+        "additionalFlags": []
       }
     }
   ]

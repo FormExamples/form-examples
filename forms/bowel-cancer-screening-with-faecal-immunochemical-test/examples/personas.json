@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeFit",
-  "note": "Realistic filled-in states in the FIT classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the FIT classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "negative-routine-recall",
@@ -56,7 +61,8 @@
             "category": "threshold",
             "description": "Faecal haemoglobin below the programme threshold — negative; routine two-yearly recall"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -111,6 +117,15 @@
             "band": "positive",
             "category": "threshold",
             "description": "Faecal haemoglobin at or above the programme threshold — positive; refer for colonoscopy"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-POSITIVE-COLONOSCOPY-001",
+            "category": "positive-colonoscopy-referral",
+            "priority": "high",
+            "description": "Faecal haemoglobin 240 ug Hb/g at or above the programme threshold — positive screen",
+            "suggestedAction": "Refer for colonoscopy via the screening colonoscopy pathway and inform the participant of the positive result."
           }
         ]
       }
@@ -167,6 +182,15 @@
             "band": "spoilt",
             "category": "sample-adequacy",
             "description": "Sample not adequate (spoilt / insufficient / expired) — repeat kit required"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SPOILT-KIT-001",
+            "category": "spoilt-kit",
+            "priority": "medium",
+            "description": "Sample spoilt (leaked) — no valid faecal haemoglobin result",
+            "suggestedAction": "Reissue a FIT kit with instructions to avoid the spoilage cause and repeat the test."
           }
         ]
       }

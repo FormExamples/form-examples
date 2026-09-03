@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateLD",
-  "note": "Realistic filled-in states in the learning-disability-assessment scoring engine's shape. Graded on the mean adaptive-functioning support level across ten conceptual/social/practical domains (independent 0, some-support 1, significant-support 2, full-support 3), banded mean <1 mild, 1-1.99 moderate, 2-2.59 severe, >=2.6 profound. The auto-discovered grader is levelScore, a per-item helper taking an enum string, so graderHint pins the state-taking calculateLD. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the learning-disability-assessment scoring engine's shape. Graded on the mean adaptive-functioning support level across ten conceptual/social/practical domains (independent 0, some-support 1, significant-support 2, full-support 3), banded mean <1 mild, 1-1.99 moderate, 2-2.59 severe, >=2.6 profound. The auto-discovered grader is levelScore, a per-item helper taking an enum string, so graderHint pins the state-taking calculateLD. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "mild",
@@ -189,7 +193,8 @@
             "description": "Work or school skills",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -377,6 +382,32 @@
             "category": "Practical",
             "description": "Work or school skills",
             "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MH-001",
+            "category": "Medical Review",
+            "message": "Co-occurring mental health diagnosis — coordinate with mental-health team.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BMI-002",
+            "category": "Physical Examination",
+            "message": "BMI 31 — obesity; weight management support recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CAP-003",
+            "category": "Mental Capacity",
+            "message": "Best-interests decision flagged — document MCA assessment.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SCREEN-003",
+            "category": "Screening",
+            "message": "No recent dental check — refer to dentist.",
+            "priority": "low"
           }
         ]
       }
@@ -566,6 +597,62 @@
             "category": "Practical",
             "description": "Work or school skills",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-EPI-002",
+            "category": "Medical Review",
+            "message": "Active epilepsy — confirm seizure plan and rescue medication are in place.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DYS-001",
+            "category": "Medical Review",
+            "message": "Dysphagia present — choking and aspiration risk; SLT review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CAP-001",
+            "category": "Mental Capacity",
+            "message": "Lacks capacity to consent to health check — best-interests decision required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CAP-002",
+            "category": "Mental Capacity",
+            "message": "Lacks capacity to consent to medication — best-interests / LPA process required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BMI-001",
+            "category": "Physical Examination",
+            "message": "BMI 18 — underweight; nutritional review recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CAP-003",
+            "category": "Mental Capacity",
+            "message": "Best-interests decision flagged — document MCA assessment.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CAP-004",
+            "category": "Mental Capacity",
+            "message": "Deprivation of Liberty Safeguard in place — confirm authorisation is current.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-COMM-001",
+            "category": "Communication",
+            "message": "Non-verbal communication — confirm AAC / easy-read materials available.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-STOMP-002",
+            "category": "Medications",
+            "message": "On psychotropic medication — STOMP review recorded.",
+            "priority": "low"
           }
         ]
       }

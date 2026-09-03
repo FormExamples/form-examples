@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateChildPughGrade",
-  "note": "Realistic filled-in states in the Child-Pugh scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the Child-Pugh scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "class-a-compensated",
@@ -94,7 +99,8 @@
             "category": "class-band",
             "description": "Child-Pugh total 5 → Class A; ~1-year survival ~100%, ~2-year survival ~85%; peri-operative risk low"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -187,6 +193,15 @@
             "points": null,
             "category": "class-band",
             "description": "Child-Pugh total 8 → Class B; ~1-year survival ~80%, ~2-year survival ~60%; peri-operative risk moderate"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MODERATE-SURGICAL-RISK-001",
+            "category": "high-surgical-risk",
+            "priority": "medium",
+            "description": "Moderate peri-operative mortality (~30%) — elective surgery carries raised risk in Class B.",
+            "suggestedAction": "Optimise before elective surgery, involve anaesthetics early, and discuss risk with the patient."
           }
         ]
       }
@@ -281,6 +296,50 @@
             "points": null,
             "category": "class-band",
             "description": "Child-Pugh total 14 → Class C; ~1-year survival ~45%, ~2-year survival ~35%; peri-operative risk high"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-CLASS-C-DECOMPENSATED-001",
+            "category": "class-c-decompensated",
+            "priority": "high",
+            "description": "Child-Pugh Class C (score 14) — decompensated cirrhosis with poor prognosis (~45% one-year survival).",
+            "suggestedAction": "Review goals of care, optimise management of decompensation, and involve the hepatology team."
+          },
+          {
+            "id": "F-TRANSPLANT-CONSIDERATION-001",
+            "category": "class-c-decompensated",
+            "priority": "high",
+            "description": "Class C signals advanced liver disease — liver-transplant assessment may be appropriate.",
+            "suggestedAction": "Refer for transplant assessment where clinically appropriate, and calculate MELD / UKELD for allocation."
+          },
+          {
+            "id": "F-HIGH-SURGICAL-RISK-001",
+            "category": "high-surgical-risk",
+            "priority": "high",
+            "description": "High peri-operative mortality (~80%) — elective surgery carries prohibitive risk in Class C.",
+            "suggestedAction": "Avoid elective surgery; if surgery is unavoidable, involve senior anaesthetic and hepatology teams and counsel on risk."
+          },
+          {
+            "id": "F-ENCEPHALOPATHY-001",
+            "category": "encephalopathy",
+            "priority": "high",
+            "description": "Overt hepatic encephalopathy present (grade 1 or worse).",
+            "suggestedAction": "Identify and treat precipitants, start / optimise lactulose ± rifaximin, and assess for aspiration risk."
+          },
+          {
+            "id": "F-REFRACTORY-ASCITES-001",
+            "category": "refractory-ascites",
+            "priority": "high",
+            "description": "Moderate-to-severe (diuretic-refractory) ascites.",
+            "suggestedAction": "Review diuretic therapy, consider paracentesis, and assess for spontaneous bacterial peritonitis and TIPSS candidacy."
+          },
+          {
+            "id": "F-SEVERE-COAGULOPATHY-001",
+            "category": "other",
+            "priority": "medium",
+            "description": "Markedly prolonged INR / prothrombin time (3-point coagulation band).",
+            "suggestedAction": "Assess bleeding risk before invasive procedures; standard clotting products correct laboratory values only transiently."
           }
         ]
       }

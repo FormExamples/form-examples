@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeReferral",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Child names are placeholders by design (Child A/B/C), matching safeguarding-referral practice for worked examples.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Child names are placeholders by design (Child A/B/C), matching safeguarding-referral practice for worked examples. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "neglect-standard-with-consent",
@@ -120,6 +124,15 @@
             "satisfied": true,
             "category": "consent-and-sharing",
             "description": "A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-PREVIOUS-HISTORY-001",
+            "category": "previous-history",
+            "priority": "low",
+            "description": "Previous safeguarding involvement is recorded — this referral should be linked to the existing records.",
+            "suggestedAction": "Reference the prior involvement so the duty team can retrieve the child’s existing safeguarding record."
           }
         ]
       }
@@ -242,6 +255,36 @@
             "category": "consent-and-sharing",
             "description": "A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DISCLOSURE-OF-ABUSE-001",
+            "category": "disclosure-of-abuse",
+            "priority": "high",
+            "description": "The child has made a disclosure of abuse — the account must be preserved and prioritised.",
+            "suggestedAction": "Record the child’s own words, avoid leading questions, do not investigate, and pass the account to children’s social care and, where relevant, the police."
+          },
+          {
+            "id": "F-SEXUAL-ABUSE-CATEGORY-001",
+            "category": "sexual-abuse-category",
+            "priority": "high",
+            "description": "Sexual abuse is recorded as a category — this needs a specialist and possibly a police / medical response.",
+            "suggestedAction": "Do not examine or question the child. Contact children’s social care and the police so a joint specialist assessment can be arranged; preserve any evidence."
+          },
+          {
+            "id": "F-CHILD-UNAWARE-UNSAFE-001",
+            "category": "child-unaware-unsafe",
+            "priority": "medium",
+            "description": "The child / family are not aware of the referral because informing them would increase risk — contact must be handled carefully.",
+            "suggestedAction": "Note the reason informing would increase risk and agree with children’s social care how and when the family will be told."
+          },
+          {
+            "id": "F-PREVIOUS-HISTORY-001",
+            "category": "previous-history",
+            "priority": "low",
+            "description": "Previous safeguarding involvement is recorded — this referral should be linked to the existing records.",
+            "suggestedAction": "Reference the prior involvement so the duty team can retrieve the child’s existing safeguarding record."
+          }
         ]
       }
     },
@@ -362,6 +405,29 @@
             "satisfied": false,
             "category": "consent-and-sharing",
             "description": "A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-IMMEDIATE-DANGER-001",
+            "category": "immediate-danger",
+            "priority": "high",
+            "description": "The child is recorded as being in immediate danger — this is an emergency.",
+            "suggestedAction": "Phone the police (999) and children’s social care now. Do not wait for the written referral to be completed or submitted."
+          },
+          {
+            "id": "F-NO-CONSENT-BASIS-001",
+            "category": "no-consent-basis",
+            "priority": "high",
+            "description": "Consent to refer was not given and no lawful basis for sharing without consent is recorded — the referral cannot be justified as it stands.",
+            "suggestedAction": "Record the lawful basis for sharing (risk of serious harm, or that seeking consent would increase risk), or seek consent, per Working Together 2023 and the Information Sharing guidance."
+          },
+          {
+            "id": "F-MANDATORY-FIELD-MISSING-001",
+            "category": "mandatory-field-missing",
+            "priority": "medium",
+            "description": "The referral is incomplete — required field(s) missing: referrer contact (phone or email), child date of birth or age, consent / information-sharing basis.",
+            "suggestedAction": "Complete the missing mandatory field(s) so the referral is valid and can be acted on."
           }
         ]
       }

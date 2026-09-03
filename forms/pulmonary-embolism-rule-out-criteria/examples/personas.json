@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculatePercGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "perc-negative",
@@ -173,7 +178,8 @@
             "category": "classification",
             "description": "Pre-test probability low AND all eight criteria satisfied — PERC-negative; PE excluded without D-dimer or imaging"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -348,6 +354,15 @@
             "category": "classification",
             "description": "Pre-test probability not low, or at least one criterion failed — PERC-positive; proceed to D-dimer and/or imaging"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-REQUIRES-WORKUP-001",
+            "category": "requires-workup",
+            "priority": "high",
+            "description": "PERC did not exclude pulmonary embolism (PERC-positive). PERC-positive is not a diagnosis of PE; it means PE cannot be ruled out on clinical grounds alone.",
+            "suggestedAction": "Proceed to the next step in the diagnostic pathway: D-dimer, and imaging (CT pulmonary angiography or V/Q) as indicated by local policy and further risk stratification."
+          }
         ]
       }
     },
@@ -520,6 +535,22 @@
             "outcome": "perc-positive",
             "category": "classification",
             "description": "Pre-test probability not low, or at least one criterion failed — PERC-positive; proceed to D-dimer and/or imaging"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-REQUIRES-WORKUP-001",
+            "category": "requires-workup",
+            "priority": "high",
+            "description": "PERC did not exclude pulmonary embolism (PERC-positive). PERC-positive is not a diagnosis of PE; it means PE cannot be ruled out on clinical grounds alone.",
+            "suggestedAction": "Proceed to the next step in the diagnostic pathway: D-dimer, and imaging (CT pulmonary angiography or V/Q) as indicated by local policy and further risk stratification."
+          },
+          {
+            "id": "F-NOT-APPLICABLE-001",
+            "category": "not-applicable",
+            "priority": "high",
+            "description": "Pre-test probability is not low. PERC must not be used to rule out PE at moderate or high suspicion — the criteria do not exclude PE in this setting.",
+            "suggestedAction": "Do not rely on PERC. Proceed with D-dimer and/or imaging per local policy regardless of the eight criteria."
           }
         ]
       }

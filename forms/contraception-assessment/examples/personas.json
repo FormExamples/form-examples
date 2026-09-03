@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "evaluateUKMEC",
-  "note": "Realistic filled-in states in the UKMEC scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result.ukmecResults"
+  ],
+  "note": "Realistic filled-in states in the UKMEC scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result.ukmecResults\"], mirroring form-app.js's call detectAdditionalFlags(state, ukmecResults); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "no-restriction",
@@ -147,7 +152,8 @@
             "reasons": []
           }
         ],
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -309,6 +315,14 @@
             "domain": "diabetes",
             "description": "Diabetes - risks of CHC may outweigh advantages depending on complications",
             "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CERVICAL-OVERDUE",
+            "category": "Screening",
+            "message": "Cervical screening may be overdue (last: 2023-05-20) - advise scheduling",
+            "priority": "low"
           }
         ]
       }
@@ -502,6 +516,20 @@
             "domain": "dvtHistory",
             "description": "History of DVT/VTE - vaginal ring is contraindicated",
             "score": 4
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MIGRAINE-AURA",
+            "category": "Stroke Risk",
+            "message": "Migraine with aura - all combined hormonal contraception (COC, patch, ring) is UKMEC 4 due to increased stroke risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DVT",
+            "category": "Thromboembolism Risk",
+            "message": "History of DVT/VTE - all combined hormonal contraception is UKMEC 4",
+            "priority": "high"
           }
         ]
       }

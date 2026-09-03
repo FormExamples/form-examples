@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeFluidBalance",
-  "note": "Realistic filled-in chart states in the Fluid Balance engine's shape. `gradeFluidBalance` sums timed intake and output volumes, computes netBalanceMl = intake - output, the urine output rate (mL/kg/h), and classifies fluidStatus with precedence oliguria (urine rate < 0.5 mL/kg/h over >= 6 h), then positive (net >= +threshold), negative (net <= -threshold), else balanced. Threshold defaults to +/-1000 mL per 24 h. `gradeFluidBalance` is deterministic (the full grade appends a timestamp separately). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in chart states in the Fluid Balance engine's shape. `gradeFluidBalance` sums timed intake and output volumes, computes netBalanceMl = intake - output, the urine output rate (mL/kg/h), and classifies fluidStatus with precedence oliguria (urine rate < 0.5 mL/kg/h over >= 6 h), then positive (net >= +threshold), negative (net <= -threshold), else balanced. Threshold defaults to +/-1000 mL per 24 h. `gradeFluidBalance` is deterministic (the full grade appends a timestamp separately). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "balanced",
@@ -157,7 +162,8 @@
             "category": "output-subtotal",
             "description": "Urine output 1800 mL"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -325,6 +331,15 @@
             "category": "output-subtotal",
             "description": "Urine output 1300 mL"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-FLUID-OVERLOAD-001",
+            "category": "fluid-overload-risk",
+            "priority": "high",
+            "description": "Significant positive balance (net +2200 mL, at or above the 1000 mL threshold)",
+            "suggestedAction": "Review for pulmonary or peripheral oedema; reassess the fluid prescription and consider restriction or diuresis."
+          }
         ]
       }
     },
@@ -464,6 +479,15 @@
             "id": "R-OUTPUT-SUBTOTAL-01",
             "category": "output-subtotal",
             "description": "Urine output 2600 mL"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DEHYDRATION-001",
+            "category": "dehydration-hypovolaemia",
+            "priority": "high",
+            "description": "Significant negative balance (net -1600 mL, at or below the -1000 mL threshold)",
+            "suggestedAction": "Review perfusion and volume status; consider fluid replacement and investigate ongoing losses."
           }
         ]
       }

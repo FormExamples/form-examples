@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "classifyControl",
-  "note": "Realistic filled-in states in the epilepsy-review engine's shape. The deterministic `classifyControl` classifier is pinned (the full `gradeEpilepsyReview` stamps a live timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "graderHint": "review",
+  "note": "Realistic filled-in states in the epilepsy-review engine's shape. The deterministic `classifyControl` classifier is pinned (the full `gradeEpilepsyReview` stamps a live timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. graderHint re-pinned 2026-09-03 from \"classifyControl\" to \"review\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result). The three personas were authored around the seizure-control axis only (their states fill the seizure fields and little else), so under the composite every one also reports reviewStatus incomplete with completenessScore 2 of 8 and the corresponding review-overdue / component-missing flags; that is the engine faithfully grading a thin review, not a persona error.",
   "personas": [
     {
       "name": "seizure-free",
@@ -69,7 +69,91 @@
           "reviewContext": ""
         }
       },
-      "expected": "seizure-free"
+      "expected": {
+        "seizureControl": "seizure-free",
+        "reviewStatus": "incomplete",
+        "completenessScore": 2,
+        "componentStatuses": [
+          {
+            "component": "seizure",
+            "label": "Seizure type and frequency",
+            "documented": true,
+            "gate": true
+          },
+          {
+            "component": "medication",
+            "label": "Anti-seizure medication and adherence",
+            "documented": false,
+            "gate": true
+          },
+          {
+            "component": "triggers",
+            "label": "Triggers",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "sudep",
+            "label": "SUDEP risk discussion",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "injuries-status",
+            "label": "Injuries and status epilepticus",
+            "documented": true,
+            "gate": false
+          },
+          {
+            "component": "safety",
+            "label": "Safety (DVLA driving / bathing)",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "mental-health",
+            "label": "Mental health",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "care-plan",
+            "label": "Care plan",
+            "documented": false,
+            "gate": false
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-SEIZURE-CONTROL-01",
+            "section": "seizure-control",
+            "category": "control-classification",
+            "description": "Seizure control classified Seizure-free"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-domain",
+            "description": "A core domain (seizure or medication) is missing — review incomplete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SUDEP-NOT-DOCUMENTED-001",
+            "category": "sudep-not-documented",
+            "priority": "medium",
+            "description": "SUDEP (Sudden Unexpected Death in Epilepsy) risk discussion not documented",
+            "suggestedAction": "Discuss SUDEP and modifiable risk factors (nocturnal / uncontrolled seizures, adherence) and record it."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "Required review domains are not fully documented",
+            "suggestedAction": "Complete the outstanding review domains and set the next review interval."
+          }
+        ]
+      }
     },
     {
       "name": "controlled",
@@ -137,7 +221,91 @@
           "reviewContext": ""
         }
       },
-      "expected": "controlled"
+      "expected": {
+        "seizureControl": "controlled",
+        "reviewStatus": "incomplete",
+        "completenessScore": 2,
+        "componentStatuses": [
+          {
+            "component": "seizure",
+            "label": "Seizure type and frequency",
+            "documented": true,
+            "gate": true
+          },
+          {
+            "component": "medication",
+            "label": "Anti-seizure medication and adherence",
+            "documented": false,
+            "gate": true
+          },
+          {
+            "component": "triggers",
+            "label": "Triggers",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "sudep",
+            "label": "SUDEP risk discussion",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "injuries-status",
+            "label": "Injuries and status epilepticus",
+            "documented": true,
+            "gate": false
+          },
+          {
+            "component": "safety",
+            "label": "Safety (DVLA driving / bathing)",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "mental-health",
+            "label": "Mental health",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "care-plan",
+            "label": "Care plan",
+            "documented": false,
+            "gate": false
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-SEIZURE-CONTROL-01",
+            "section": "seizure-control",
+            "category": "control-classification",
+            "description": "Seizure control classified Controlled"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-domain",
+            "description": "A core domain (seizure or medication) is missing — review incomplete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SUDEP-NOT-DOCUMENTED-001",
+            "category": "sudep-not-documented",
+            "priority": "medium",
+            "description": "SUDEP (Sudden Unexpected Death in Epilepsy) risk discussion not documented",
+            "suggestedAction": "Discuss SUDEP and modifiable risk factors (nocturnal / uncontrolled seizures, adherence) and record it."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "Required review domains are not fully documented",
+            "suggestedAction": "Complete the outstanding review domains and set the next review interval."
+          }
+        ]
+      }
     },
     {
       "name": "uncontrolled",
@@ -205,7 +373,111 @@
           "reviewContext": ""
         }
       },
-      "expected": "uncontrolled"
+      "expected": {
+        "seizureControl": "uncontrolled",
+        "reviewStatus": "incomplete",
+        "completenessScore": 2,
+        "componentStatuses": [
+          {
+            "component": "seizure",
+            "label": "Seizure type and frequency",
+            "documented": true,
+            "gate": true
+          },
+          {
+            "component": "medication",
+            "label": "Anti-seizure medication and adherence",
+            "documented": false,
+            "gate": true
+          },
+          {
+            "component": "triggers",
+            "label": "Triggers",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "sudep",
+            "label": "SUDEP risk discussion",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "injuries-status",
+            "label": "Injuries and status epilepticus",
+            "documented": true,
+            "gate": false
+          },
+          {
+            "component": "safety",
+            "label": "Safety (DVLA driving / bathing)",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "mental-health",
+            "label": "Mental health",
+            "documented": false,
+            "gate": false
+          },
+          {
+            "component": "care-plan",
+            "label": "Care plan",
+            "documented": false,
+            "gate": false
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-SEIZURE-CONTROL-01",
+            "section": "seizure-control",
+            "category": "control-classification",
+            "description": "Seizure control classified Uncontrolled"
+          },
+          {
+            "id": "R-SEIZURE-CONTROL-STATUS-02",
+            "section": "seizure-control",
+            "category": "control-classification",
+            "description": "Status epilepticus since last review — forces uncontrolled"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "section": "completeness",
+            "category": "required-domain",
+            "description": "A core domain (seizure or medication) is missing — review incomplete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SPECIALIST-REVIEW-001",
+            "category": "specialist-review",
+            "priority": "high",
+            "description": "Seizures are increasing versus the previous review",
+            "suggestedAction": "Refer or escalate to neurology / epilepsy specialist review for medication optimisation."
+          },
+          {
+            "id": "F-STATUS-EPILEPTICUS-001",
+            "category": "status-epilepticus-history",
+            "priority": "high",
+            "description": "Status epilepticus episode recorded since the last review",
+            "suggestedAction": "Confirm an individualised emergency / rescue-medication plan and specialist review."
+          },
+          {
+            "id": "F-SUDEP-NOT-DOCUMENTED-001",
+            "category": "sudep-not-documented",
+            "priority": "medium",
+            "description": "SUDEP (Sudden Unexpected Death in Epilepsy) risk discussion not documented",
+            "suggestedAction": "Discuss SUDEP and modifiable risk factors (nocturnal / uncontrolled seizures, adherence) and record it."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "Required review domains are not fully documented",
+            "suggestedAction": "Complete the outstanding review domains and set the next review interval."
+          }
+        ]
+      }
     }
   ]
 }

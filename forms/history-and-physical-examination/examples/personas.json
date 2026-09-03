@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeCompleteness",
-  "note": "Realistic filled-in states in the engine's FLAT clerking-record shape (the wizard's flatten() output — the graders consume the flat record). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. gradeCompleteness is the completeness oracle; the separate detectFlaggedIssues engine (abnormal vitals, red-flag-no-plan) is exercised by the app, not this file.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the engine's FLAT clerking-record shape (the wizard's flatten() output — the graders consume the flat record). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. gradeCompleteness is the completeness oracle; the separate detectFlaggedIssues engine (abnormal vitals, red-flag-no-plan) is exercised by the app, not this file. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(rec); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "complete-cap-clerking",
@@ -137,7 +141,8 @@
             "description": "Status complete — 10 of 10 required components documented (100%)"
           }
         ],
-        "blocking": false
+        "blocking": false,
+        "flaggedIssues": []
       }
     },
     {
@@ -254,7 +259,25 @@
             "description": "Status partial — 7 of 10 required components documented (70%)"
           }
         ],
-        "blocking": false
+        "blocking": false,
+        "flaggedIssues": [
+          {
+            "id": "F-ABNORMAL-VITALS-001",
+            "category": "abnormal-vitals",
+            "priority": "medium",
+            "blocking": false,
+            "description": "Abnormal vital sign(s) recorded: Heart rate 96bpm (normal 51-90bpm).",
+            "suggestedAction": "Review the abnormal observation(s), calculate the early-warning score (NEWS2), and escalate per local policy."
+          },
+          {
+            "id": "F-INCOMPLETE-HISTORY-001",
+            "category": "incomplete-history",
+            "priority": "low",
+            "blocking": false,
+            "description": "Required history section(s) missing: Past medical and surgical history, Social history, Systems review.",
+            "suggestedAction": "Complete the outstanding history section(s) to finish the clerking document."
+          }
+        ]
       }
     },
     {
@@ -343,7 +366,49 @@
             "description": "Status incomplete — 3 of 10 required components documented (30%); a blocking flag forced incomplete"
           }
         ],
-        "blocking": true
+        "blocking": true,
+        "flaggedIssues": [
+          {
+            "id": "F-ALLERGIES-NOT-DOCUMENTED-001",
+            "category": "allergies-not-documented",
+            "priority": "high",
+            "blocking": true,
+            "description": "Allergy status is not documented — neither an allergy nor \"no known drug allergies\" has been recorded.",
+            "suggestedAction": "Document the allergy status explicitly (record \"no known drug allergies\" if none) before completing the clerking."
+          },
+          {
+            "id": "F-NO-IMPRESSION-OR-PLAN-001",
+            "category": "no-impression-or-plan",
+            "priority": "high",
+            "blocking": true,
+            "description": "Neither an impression / problem list nor a management plan has been recorded.",
+            "suggestedAction": "Record a working impression and a management plan; both are required for a complete clerking."
+          },
+          {
+            "id": "F-ABNORMAL-VITALS-001",
+            "category": "abnormal-vitals",
+            "priority": "medium",
+            "blocking": false,
+            "description": "Abnormal vital sign(s) recorded: Temperature 35.9°C (normal 36.1-38°C); Heart rate 102bpm (normal 51-90bpm); Respiratory rate 22/min (normal 12-20/min); Systolic blood pressure 108mmHg (normal 111-219mmHg); Oxygen saturation 94% (normal 96-100%); Consciousness level not alert (voice).",
+            "suggestedAction": "Review the abnormal observation(s), calculate the early-warning score (NEWS2), and escalate per local policy."
+          },
+          {
+            "id": "F-INCOMPLETE-SYSTEMS-EXAM-001",
+            "category": "incomplete-systems-exam",
+            "priority": "medium",
+            "blocking": false,
+            "description": "Core examination system(s) neither examined nor explicitly deferred: Abdominal, Neurological.",
+            "suggestedAction": "Examine the outstanding system(s) or record an explicit deferral with a reason."
+          },
+          {
+            "id": "F-INCOMPLETE-HISTORY-001",
+            "category": "incomplete-history",
+            "priority": "low",
+            "blocking": false,
+            "description": "Required history section(s) missing: Past medical and surgical history, Drug history, Social history, Systems review, Allergy status.",
+            "suggestedAction": "Complete the outstanding history section(s) to finish the clerking document."
+          }
+        ]
       }
     }
   ]

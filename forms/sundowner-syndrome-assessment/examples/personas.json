@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeSundowner",
-  "note": "Realistic filled-in states in the Sundowner (CMAI + NPI) scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Sundowner (CMAI + NPI) scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "mild-sundowning",
@@ -208,6 +212,14 @@
             "category": "NPI Domains",
             "description": "2 NPI domain(s) with score >= 4.",
             "detail": "Agitation / aggression (F2 x S2 = 4); Sleep / night-time behaviour (F3 x S2 = 6)"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SLEEP-002",
+            "category": "Sleep-Wake Cycle",
+            "message": "NPI sleep domain score 6 of 12 — clinically significant.",
+            "priority": "medium"
           }
         ]
       }
@@ -418,6 +430,32 @@
             "description": "5 NPI domain(s) with score >= 4.",
             "detail": "Agitation / aggression (F3 x S3 = 9); Anxiety (F3 x S2 = 6); Irritability / lability (F3 x S2 = 6); Aberrant motor disturbance (F2 x S2 = 4); Sleep / night-time behaviour (F4 x S2 = 8)"
           }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-AGGRESSION-002",
+            "category": "Aggressive Behaviour",
+            "message": "NPI agitation/aggression domain score 9 of 12 — clinically significant.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SELFHARM-001",
+            "category": "Self-Harm Risk",
+            "message": "Self-harm-related behaviour observed: #7 Hitting (including self) (rated 3). Constant supervision may be required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FALL-001",
+            "category": "Fall Risk",
+            "message": "Wandering, restlessness, or intentional falling observed. Falls-prevention review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SLEEP-002",
+            "category": "Sleep-Wake Cycle",
+            "message": "NPI sleep domain score 8 of 12 — clinically significant.",
+            "priority": "medium"
+          }
         ]
       }
     },
@@ -626,6 +664,38 @@
             "category": "NPI Domains",
             "description": "7 NPI domain(s) with score >= 4.",
             "detail": "Delusions (F3 x S2 = 6); Hallucinations (F3 x S3 = 9); Agitation / aggression (F4 x S3 = 12); Anxiety (F3 x S3 = 9); Irritability / lability (F4 x S2 = 8); Aberrant motor disturbance (F4 x S3 = 12); Sleep / night-time behaviour (F4 x S3 = 12)"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-AGGRESSION-001",
+            "category": "Aggressive Behaviour",
+            "message": "Aggressive behaviour observed at least several times a week: #4 Cursing or verbal aggression (rated 4); #7 Hitting (including self) (rated 4); #8 Kicking (rated 4); #10 Pushing (rated 4). Safety planning and de-escalation training indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AGGRESSION-002",
+            "category": "Aggressive Behaviour",
+            "message": "NPI agitation/aggression domain score 12 of 12 — clinically significant.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SELFHARM-001",
+            "category": "Self-Harm Risk",
+            "message": "Self-harm-related behaviour observed: #7 Hitting (including self) (rated 4); #17 Intentional falling (rated 3); #20 Eating or drinking inappropriate substances (rated 3); #21 Hurting self or others (rated 3). Constant supervision may be required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FALL-001",
+            "category": "Fall Risk",
+            "message": "Wandering, restlessness, or intentional falling observed. Falls-prevention review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SLEEP-002",
+            "category": "Sleep-Wake Cycle",
+            "message": "NPI sleep domain score 12 of 12 — clinically significant.",
+            "priority": "medium"
           }
         ]
       }

@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateKdigo",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk-g1a1",
@@ -162,7 +166,8 @@
             "description": "KDIGO composite risk from GFR x Albuminuria heatmap.",
             "value": "Low risk"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -323,6 +328,14 @@
             "category": "Composite Risk",
             "description": "KDIGO composite risk from GFR x Albuminuria heatmap.",
             "value": "High risk"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ACR-002",
+            "category": "Albuminuria",
+            "message": "Moderately increased albuminuria (A2) - consider RAAS blockade and risk-factor modification.",
+            "priority": "medium"
           }
         ]
       }
@@ -485,6 +498,20 @@
             "category": "Composite Risk",
             "description": "KDIGO composite risk from GFR x Albuminuria heatmap.",
             "value": "Very high risk"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-EGFR-002",
+            "category": "CKD Stage",
+            "message": "eGFR 22 mL/min/1.73 m^2 (G4) - severely decreased kidney function; nephrology referral required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ACR-001",
+            "category": "Albuminuria",
+            "message": "Severely increased albuminuria (A3) - high risk; ACEi/ARB and SGLT2 inhibitor indicated unless contraindicated.",
+            "priority": "high"
           }
         ]
       }

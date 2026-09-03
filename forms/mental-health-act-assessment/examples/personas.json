@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeMentalHealthActAssessment",
-  "note": "Realistic filled-in states in the MHA legal-completeness grader's shape (documentation classifier — no automated detention decision). `expected` is computed by `bin/test-personas --update`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the MHA legal-completeness grader's shape (documentation classifier — no automated detention decision). `expected` is computed by `bin/test-personas --update`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "community-no-detention",
@@ -70,7 +75,8 @@
         "recommendedSectionClass": "none",
         "urgencyClass": "routine",
         "requiredSignatories": [],
-        "criteriaSummary": []
+        "criteriaSummary": [],
+        "flaggedIssues": []
       }
     },
     {
@@ -180,7 +186,8 @@
             "status": "met",
             "evidencePresent": true
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -280,7 +287,8 @@
             "status": "met",
             "evidencePresent": true
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     }
   ]

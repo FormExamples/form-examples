@@ -1,7 +1,14 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculatePcl5",
-  "note": "Realistic filled-in states in the PCL-5 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result.totalScore",
+    "result.probableDsm5Diagnosis",
+    "result.answeredCount"
+  ],
+  "note": "Realistic filled-in states in the PCL-5 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result.totalScore\",\"result.probableDsm5Diagnosis\",\"result.answeredCount\"], mirroring form-app.js's call detectAdditionalFlags(state, totalScore, probableDsm5Diagnosis, answeredCount); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "minimal-below-cutoff",
@@ -57,7 +64,8 @@
           "d": 3,
           "e": 3
         },
-        "answeredCount": 20
+        "answeredCount": 20,
+        "additionalFlags": []
       }
     },
     {
@@ -114,7 +122,15 @@
           "d": 11,
           "e": 9
         },
-        "answeredCount": 20
+        "answeredCount": 20,
+        "additionalFlags": [
+          {
+            "id": "FLAG-STRUCTURED-INTERVIEW-001",
+            "category": "Structured clinical interview recommended",
+            "message": "Provisional diagnosis met — arrange a CAPS-5 or equivalent structured interview to confirm the diagnosis and inform treatment planning.",
+            "priority": "medium"
+          }
+        ]
       }
     },
     {
@@ -171,7 +187,33 @@
           "d": 15,
           "e": 13
         },
-        "answeredCount": 20
+        "answeredCount": 20,
+        "additionalFlags": [
+          {
+            "id": "FLAG-SELFHARM-001",
+            "category": "Self-harm / suicidality risk",
+            "message": "Item 16 (taking too many risks or doing things that could cause harm) rated Quite a bit or Extremely — screen for suicidal ideation and complete a safety plan before the patient leaves the consultation.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-DISSOCIATION-001",
+            "category": "Possible dissociative features",
+            "message": "Items 3 (reliving) and 8 (memory gaps) both rated ≥ 3 — consider the dissociative subtype and add the PCL-5 dissociative items if not already used.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SEVERE-001",
+            "category": "Severe symptom burden",
+            "message": "Total score ≥ 38 — trauma-focused psychotherapy (e.g. CPT, PE, EMDR) is indicated; consider pharmacotherapy review.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-STRUCTURED-INTERVIEW-001",
+            "category": "Structured clinical interview recommended",
+            "message": "Provisional diagnosis met — arrange a CAPS-5 or equivalent structured interview to confirm the diagnosis and inform treatment planning.",
+            "priority": "medium"
+          }
+        ]
       }
     }
   ]

@@ -1,6 +1,12 @@
 {
   "engine": "front-end-with-html",
-  "note": "Realistic filled-in states in the NIPE grader's shape (four key screening components rolled up to an overall outcome). `expected` is computed by `bin/test-personas --update`.",
+  "graderHint": "calculateNipeGrade",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the NIPE grader's shape (four key screening components rolled up to an overall outcome). `expected` is computed by `bin/test-personas --update`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "satisfactory-complete",
@@ -89,7 +95,8 @@
             "category": "outcome-rollup",
             "description": "All applicable key components examined and Satisfactory"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -190,6 +197,15 @@
             "component": "overall",
             "category": "outcome-rollup",
             "description": "One or more key components classed Refer — referral pathway triggered"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIP-RISK-FACTOR-001",
+            "category": "hip-ultrasound",
+            "priority": "medium",
+            "description": "Hip risk factor present (breech presentation)",
+            "suggestedAction": "Arrange hip ultrasound by 6 weeks of age."
           }
         ]
       }
@@ -292,6 +308,29 @@
             "component": "overall",
             "category": "outcome-rollup",
             "description": "One or more key components classed Refer — referral pathway triggered"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-FEMORAL-PULSES-001",
+            "category": "cardiac-referral",
+            "priority": "high",
+            "description": "Weak or absent femoral pulse(s) — possible coarctation of the aorta",
+            "suggestedAction": "Arrange urgent cardiac / neonatal review with pre- and post-ductal saturations."
+          },
+          {
+            "id": "F-CYANOSIS-LOW-SATS-001",
+            "category": "cardiac-referral",
+            "priority": "high",
+            "description": "Possible critical congenital heart disease (central cyanosis, saturation below 95%, pre-/post-ductal difference above 3%)",
+            "suggestedAction": "Arrange urgent same-day cardiac / neonatal review and pulse-oximetry screening."
+          },
+          {
+            "id": "F-HEART-MURMUR-001",
+            "category": "cardiac-referral",
+            "priority": "medium",
+            "description": "Heart murmur detected on auscultation",
+            "suggestedAction": "Arrange cardiac assessment per local pathway."
           }
         ]
       }

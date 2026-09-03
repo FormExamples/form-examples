@@ -23,6 +23,11 @@
  *   bin/test-engines                 # every form
  *   bin/test-engines <slug> ...      # only the named forms
  *   bin/test-engines --verbose       # list every form's outcome + detail
+ *   bin/test-engines --skip-summary  # group the SKIPs by reason class, with
+ *                                    # counts and slugs, so the unblock work
+ *                                    # can be planned per category
+ *   bin/test-engines --probe <slug>  # show every grader candidate's probe
+ *                                    # score for one form (discovery debug)
  *
  * Exit status is non-zero if any form FAILs. SKIPs never fail the gate but are
  * summarised so coverage is honest.
@@ -46,37 +51,39 @@ async function checkForm(slug) {
   if (eng.error) {
     return { slug, status: 'FAIL', detail: `load error — ${eng.error}` };
   }
-  const { ns, name, fns, grader, factory, loaded } = eng;
+  const { ns, name, fns, grader, factory, loaded, probe } = eng;
 
   // Discovery misses and input-shape mismatches are honestly SKIPs, not FAILs:
   // this gate only FAILs a form whose engine MODULE throws on load (a real
   // syntax/import regression, checked above). A PASS additionally proves the
   // grader runs over the default state and yields structured output.
-  if (!grader) return { slug, status: 'SKIP', detail: `grader not found (${name}, ${fns.length} fns)` };
-  if (!factory) return { slug, status: 'SKIP', detail: `default factory not found (grader=${grader})` };
+  if (!grader) return { slug, status: 'SKIP', reason: 'grader not found', detail: `grader not found (${name}, ${fns.length} fns)`, probe };
+  if (!factory) return { slug, status: 'SKIP', reason: 'default factory not found', detail: `default factory not found (grader=${grader})`, probe };
 
   let state, result;
   try {
     state = ns[factory]();
   } catch (e) {
-    return { slug, status: 'SKIP', detail: `factory ${factory}() needs args: ${String(e.message || e).split('\n')[0]}` };
+    return { slug, status: 'SKIP', reason: 'factory needs args', detail: `factory ${factory}() needs args: ${String(e.message || e).split('\n')[0]}`, probe };
   }
   try {
     result = ns[grader](state);
   } catch (e) {
-    return { slug, status: 'SKIP', detail: `grader ${grader}() needs a fuller input: ${String(e.message || e).split('\n')[0]}` };
+    return { slug, status: 'SKIP', reason: 'grader needs a fuller input', detail: `grader ${grader}() needs a fuller input: ${String(e.message || e).split('\n')[0]}`, probe };
   }
   const ok = result !== null && result !== undefined &&
     (typeof result === 'object' || typeof result === 'number' || typeof result === 'string');
   if (!ok) {
-    return { slug, status: 'SKIP', detail: `grader ${grader}() returned ${typeof result}` };
+    return { slug, status: 'SKIP', reason: `grader returned ${typeof result}`, detail: `grader ${grader}() returned ${typeof result}`, probe };
   }
-  return { slug, status: 'PASS', detail: `${grader}(${factory}()) ok (${name}, ${loaded} modules)` };
+  return { slug, status: 'PASS', detail: `${grader}(${factory}()) ok (${name}, ${loaded} modules)`, probe };
 }
 
 async function main() {
   const args = process.argv.slice(2);
   const verbose = args.includes('--verbose');
+  const skipSummary = args.includes('--skip-summary');
+  const probeMode = args.includes('--probe');
   let slugs = args.filter((a) => !a.startsWith('--'));
   if (!slugs.length) {
     slugs = execSync(path.join(REPO_ROOT, 'bin', 'forms-as-kebab-case'))
@@ -89,13 +96,27 @@ async function main() {
   for (const r of results) by[r.status].push(r);
 
   for (const r of results) {
-    if (verbose || r.status === 'FAIL') {
+    if (verbose || probeMode || r.status === 'FAIL') {
       console.log(`${r.status}  ${r.slug}  — ${r.detail}`);
+    }
+    if (probeMode && r.probe) {
+      const rows = Object.entries(r.probe).sort((a, b) =>
+        (typeof b[1] === 'number' ? b[1] : -Infinity) - (typeof a[1] === 'number' ? a[1] : -Infinity));
+      for (const [fn, score] of rows) console.log(`        ${String(score).padStart(6)}  ${fn}`);
+    }
+  }
+  if (skipSummary && by.SKIP.length) {
+    const groups = {};
+    for (const r of by.SKIP) (groups[r.reason || r.detail] ||= []).push(r.slug);
+    console.log('\nSKIP summary (reason class: count — slugs):');
+    for (const [reason, slugs] of Object.entries(groups).sort((a, b) => b[1].length - a[1].length)) {
+      console.log(`  ${reason}: ${slugs.length}`);
+      for (const s of slugs) console.log(`      ${s}`);
     }
   }
   console.log(`\ntest-engines: PASS ${by.PASS.length}  SKIP ${by.SKIP.length}  FAIL ${by.FAIL.length}  / ${results.length}`);
-  if (by.SKIP.length && !verbose) {
-    console.log('(run --verbose to see SKIP reasons — these forms compute inline or use an unrecognised entry point)');
+  if (by.SKIP.length && !verbose && !skipSummary) {
+    console.log('(run --verbose to see SKIP reasons, or --skip-summary to group them — these forms compute inline or use an unrecognised entry point)');
   }
   process.exit(by.FAIL.length ? 1 : 0);
 }

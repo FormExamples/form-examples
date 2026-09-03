@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeSatisfaction",
-  "note": "Realistic filled-in states in the Employee Satisfaction engine's shape. Each Likert item is 1-5; per-domain score = mean x 20; composite = mean of the eight graded domain scores; bands 85-100 excellent, 70-84 good, 50-69 satisfactory, 25-49 poor, 0-24 very-poor. The overall recommendScore (0-10) is classified as promoter (9-10) / passive (7-8) / detractor (0-6). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the Employee Satisfaction engine's shape. Each Likert item is 1-5; per-domain score = mean x 20; composite = mean of the eight graded domain scores; bands 85-100 excellent, 70-84 good, 50-69 satisfactory, 25-49 poor, 0-24 very-poor. The overall recommendScore (0-10) is classified as promoter (9-10) / passive (7-8) / detractor (0-6). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "excellent",
@@ -351,6 +356,14 @@
             "domain": "overall",
             "label": "I expect to still be working here in twelve months.",
             "rawValue": 5
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-TEXT-SUGGESTION",
+            "category": "Suggestion box",
+            "message": "Respondent submitted improvement suggestions — route to the relevant team for triage.",
+            "priority": "low"
           }
         ]
       }
@@ -704,6 +717,14 @@
             "label": "I expect to still be working here in twelve months.",
             "rawValue": 3
           }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-TEXT-SUGGESTION",
+            "category": "Suggestion box",
+            "message": "Respondent submitted improvement suggestions — route to the relevant team for triage.",
+            "priority": "low"
+          }
         ]
       }
     },
@@ -1055,6 +1076,80 @@
             "domain": "overall",
             "label": "I expect to still be working here in twelve months.",
             "rawValue": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-COMPOSITE-VP",
+            "category": "Overall",
+            "message": "Composite satisfaction score 20/100 is in the very-poor band. Urgent attention recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-MULTI",
+            "category": "Overall",
+            "message": "8 graded domains at very-poor (Workload & Work-Life Balance, Management & Leadership, Growth & Development, Compensation & Benefits, Culture & Inclusion, Environment & Resources, Recognition & Engagement, Overall Experience) — broad organisational issue.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-workload",
+            "category": "Workload & Work-Life Balance",
+            "message": "Workload & Work-Life Balance at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-management",
+            "category": "Management & Leadership",
+            "message": "Management & Leadership at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-growth",
+            "category": "Growth & Development",
+            "message": "Growth & Development at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-compensation",
+            "category": "Compensation & Benefits",
+            "message": "Compensation & Benefits at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-culture",
+            "category": "Culture & Inclusion",
+            "message": "Culture & Inclusion at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-environment",
+            "category": "Environment & Resources",
+            "message": "Environment & Resources at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-recognition",
+            "category": "Recognition & Engagement",
+            "message": "Recognition & Engagement at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VP-overall",
+            "category": "Overall Experience",
+            "message": "Overall Experience at very-poor (20/100). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ENPS-DETRACTOR",
+            "category": "eNPS",
+            "message": "eNPS recommend score 1/10 — respondent is a detractor.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TEXT-SUGGESTION",
+            "category": "Suggestion box",
+            "message": "Respondent submitted improvement suggestions — route to the relevant team for triage.",
+            "priority": "low"
           }
         ]
       }

@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeFallRisk",
-  "note": "Realistic filled-in states in the Morse Fall Scale engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Morse Fall Scale engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -157,7 +161,8 @@
             "description": "Oriented to own ability",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -314,7 +319,8 @@
             "description": "Oriented to own ability",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -471,7 +477,8 @@
             "description": "Oriented to own ability",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     }
   ]

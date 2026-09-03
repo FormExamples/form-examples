@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradePartogram",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Elapsed time derives from in-state timestamps (activePhaseStartAt vs observedAt), so the oracle is fully deterministic.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Elapsed time derives from in-state timestamps (activePhaseStartAt vs observedAt), so the oracle is fully deterministic. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, g); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-progress",
@@ -97,7 +102,8 @@
         "alertLineExpectedCm": 8,
         "actionLineExpectedCm": 4,
         "progressClassification": "normal",
-        "firedLines": []
+        "firedLines": [],
+        "flaggedIssues": []
       }
     },
     {
@@ -177,6 +183,22 @@
           {
             "id": "alert",
             "description": "Latest dilatation 5 cm is below the alert-line expectation of 8.0 cm at 4.0 h"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MECONIUM-001",
+            "category": "meconium",
+            "priority": "high",
+            "description": "Meconium-stained liquor recorded",
+            "suggestedAction": "Consider continuous fetal monitoring and neonatal-team awareness for delivery."
+          },
+          {
+            "id": "F-ALERT-LINE-001",
+            "category": "alert-line-crossed",
+            "priority": "medium",
+            "description": "Latest dilatation 5 cm is between the alert and action lines at 4.0 h of active labour",
+            "suggestedAction": "Slow progress: review, reassess, consider amniotomy, and transfer if in a peripheral unit."
           }
         ]
       }
@@ -283,6 +305,43 @@
           {
             "id": "action",
             "description": "Latest dilatation 4 cm is on or right of the action line (6.0 cm at 6.0 h)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACTION-LINE-001",
+            "category": "action-line-crossed",
+            "priority": "high",
+            "description": "Latest dilatation 4 cm is on or right of the action line at 6.0 h of active labour",
+            "suggestedAction": "Obstetric review required: reassess for obstructed labour and consider augmentation or operative delivery."
+          },
+          {
+            "id": "F-FHR-001",
+            "category": "fetal-heart-abnormal",
+            "priority": "high",
+            "description": "Fetal heart rate outside 110-160 bpm recorded (168 bpm)",
+            "suggestedAction": "Assess fetal wellbeing; consider continuous cardiotocography, maternal repositioning, and obstetric review."
+          },
+          {
+            "id": "F-FEVER-001",
+            "category": "maternal-fever",
+            "priority": "high",
+            "description": "Maternal temperature at or above 37.5 C recorded (38.4 C)",
+            "suggestedAction": "Assess for chorioamnionitis or sepsis; consider cultures, hydration, and antipyretics per protocol."
+          },
+          {
+            "id": "F-POOR-PROGRESS-001",
+            "category": "poor-progress",
+            "priority": "medium",
+            "description": "No increase in cervical dilatation across at least 4 h of active labour",
+            "suggestedAction": "Reassess progress, contractions, and fetal position; consider amniotomy or oxytocin augmentation per protocol."
+          },
+          {
+            "id": "F-KETONURIA-001",
+            "category": "ketonuria",
+            "priority": "low",
+            "description": "Urine ketones present",
+            "suggestedAction": "Review hydration and caloric intake in labour; consider oral or intravenous fluids."
           }
         ]
       }

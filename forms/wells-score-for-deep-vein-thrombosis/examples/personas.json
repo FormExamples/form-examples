@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateWellsGrade",
-  "note": "Realistic filled-in states in the Wells DVT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.wellsScore"
+  ],
+  "note": "Realistic filled-in states in the Wells DVT scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.wellsScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.wellsScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "unlikely-low",
@@ -70,6 +75,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "Wells <= 0 — low probability (original three-level rule)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DVT-UNLIKELY-D-DIMER-001",
+            "category": "dvt-unlikely-d-dimer",
+            "priority": "medium",
+            "description": "DVT unlikely (Wells score 0) — offer a D-dimer test with a result available within 4 hours",
+            "suggestedAction": "Offer a D-dimer test (or interim anticoagulation if the result is not available within 4 hours). A negative D-dimer effectively excludes DVT; a positive D-dimer triggers a proximal leg vein ultrasound."
           }
         ]
       }
@@ -155,6 +169,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "Wells 1-2 — moderate probability (original three-level rule)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DVT-LIKELY-ULTRASOUND-001",
+            "category": "dvt-likely-ultrasound",
+            "priority": "high",
+            "description": "DVT likely (Wells score 2) — offer a proximal leg vein ultrasound, ideally within 4 hours",
+            "suggestedAction": "Arrange a proximal leg vein ultrasound. If it cannot be done within 4 hours, offer a D-dimer test and interim anticoagulation, then scan within 24 hours."
           }
         ]
       }
@@ -261,6 +284,22 @@
             "points": 0,
             "category": "risk-band",
             "description": "Wells >= 3 — high probability (original three-level rule)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DVT-LIKELY-ULTRASOUND-001",
+            "category": "dvt-likely-ultrasound",
+            "priority": "high",
+            "description": "DVT likely (Wells score 5) — offer a proximal leg vein ultrasound, ideally within 4 hours",
+            "suggestedAction": "Arrange a proximal leg vein ultrasound. If it cannot be done within 4 hours, offer a D-dimer test and interim anticoagulation, then scan within 24 hours."
+          },
+          {
+            "id": "F-ACTIVE-CANCER-001",
+            "category": "active-cancer",
+            "priority": "high",
+            "description": "Active cancer recorded — malignancy raises venous thromboembolism risk and affects anticoagulation choice",
+            "suggestedAction": "Factor malignancy into anticoagulation selection and consider the occult-cancer context when interpreting results."
           }
         ]
       }

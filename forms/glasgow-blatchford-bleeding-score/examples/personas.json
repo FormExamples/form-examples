@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGbsGrade",
-  "note": "Realistic filled-in states in the Glasgow-Blatchford Bleeding Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the Glasgow-Blatchford Bleeding Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "very-low-risk",
@@ -78,6 +83,15 @@
             "points": null,
             "category": "band-band",
             "description": "GBS total 0 → very-low risk"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-LOW-RISK-DISCHARGE-001",
+            "category": "low-risk-discharge",
+            "priority": "info",
+            "description": "Glasgow-Blatchford score 0 — very low risk of needing intervention.",
+            "suggestedAction": "Consider outpatient management / early discharge with planned outpatient review; confirm no other admission indication."
           }
         ]
       }
@@ -165,7 +179,8 @@
             "category": "band-band",
             "description": "GBS total 5 → low-moderate risk"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -278,6 +293,36 @@
             "points": null,
             "category": "band-band",
             "description": "GBS total 23 → high risk"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-SCORE-ADMIT-001",
+            "category": "high-score-admit",
+            "priority": "high",
+            "description": "Glasgow-Blatchford score 23 (>= 6) — high likelihood of needing intervention or transfusion.",
+            "suggestedAction": "Admit and arrange urgent upper GI endoscopy; resuscitate and involve the GI-bleed team."
+          },
+          {
+            "id": "F-SHOCK-001",
+            "category": "shock",
+            "priority": "high",
+            "description": "Haemodynamic instability: systolic BP 85 mmHg (< 90) and pulse 110 beats/min (>= 100).",
+            "suggestedAction": "Resuscitate: IV access, fluids / blood as indicated, and continuous monitoring; escalate to senior review."
+          },
+          {
+            "id": "F-LOW-HB-TRANSFUSION-001",
+            "category": "low-hb-transfusion",
+            "priority": "high",
+            "description": "Haemoglobin 85 g/L (< 100) — significant anaemia.",
+            "suggestedAction": "Group and save / cross-match and consider transfusion per local threshold and haemodynamic status."
+          },
+          {
+            "id": "F-SYNCOPE-001",
+            "category": "other",
+            "priority": "medium",
+            "description": "Syncope reported — a marker of significant blood loss.",
+            "suggestedAction": "Assess volume status and lying/standing observations; treat as higher-risk pending review."
           }
         ]
       }

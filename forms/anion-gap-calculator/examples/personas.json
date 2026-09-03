@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateAnionGap",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-without-potassium",
@@ -57,7 +62,8 @@
             "category": "reference-range",
             "description": "Anion gap within the normal reference range"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -113,6 +119,15 @@
             "band": "high",
             "category": "reference-range",
             "description": "Anion gap above the normal upper bound — high anion gap metabolic acidosis"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-HAGMA-001",
+            "category": "high-hagma",
+            "priority": "high",
+            "description": "The anion gap 17.5 mmol/L is above the 16 mmol/L upper reference limit — suggests a high anion gap metabolic acidosis",
+            "suggestedAction": "Investigate the cause: work through the GOLDMARK / MUDPILES differential and correlate with the clinical picture."
           }
         ]
       }
@@ -170,6 +185,15 @@
             "band": "very-high",
             "category": "reference-range",
             "description": "Anion gap at or above 20 mmol/L — very high, urgent"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-VERY-HIGH-001",
+            "category": "very-high",
+            "priority": "urgent",
+            "description": "The anion gap 29.0 mmol/L is at or above the 20 mmol/L very-high threshold — marked elevation",
+            "suggestedAction": "Urgent: search for the cause of the metabolic acidosis without delay (GOLDMARK / MUDPILES); check lactate, ketones, renal function, and a toxicology history."
           }
         ]
       }
@@ -235,6 +259,22 @@
             "category": "reference-range",
             "description": "Anion gap above the normal upper bound — high anion gap metabolic acidosis"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-HAGMA-001",
+            "category": "high-hagma",
+            "priority": "high",
+            "description": "The albumin-corrected anion gap 16.3 mmol/L is above the 12 mmol/L upper reference limit — suggests a high anion gap metabolic acidosis",
+            "suggestedAction": "Investigate the cause: work through the GOLDMARK / MUDPILES differential and correlate with the clinical picture."
+          },
+          {
+            "id": "F-HYPOALBUMINAEMIA-MASKING-001",
+            "category": "hypoalbuminaemia-masking",
+            "priority": "high",
+            "description": "The uncorrected anion gap 10.0 mmol/L looks normal, but the albumin-corrected gap 16.3 mmol/L is raised",
+            "suggestedAction": "Do not be reassured by the raw gap: hypoalbuminaemia is masking a raised anion gap. Investigate as a high anion gap acidosis."
+          }
         ]
       }
     },
@@ -292,6 +332,15 @@
             "category": "reference-range",
             "description": "Anion gap below 8 mmol/L — low"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-LOW-001",
+            "category": "low",
+            "priority": "medium",
+            "description": "The anion gap 5.0 mmol/L is below the 8 mmol/L lower reference limit",
+            "suggestedAction": "Consider hypoalbuminaemia (if uncorrected), laboratory error, paraproteinaemia, or lithium / bromide toxicity."
+          }
         ]
       }
     },
@@ -341,6 +390,15 @@
             "band": "",
             "category": "missing-input",
             "description": "Anion gap not computed — sodium, chloride and/or bicarbonate is missing"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "Missing input(s): serum bicarbonate — the anion gap cannot be computed",
+            "suggestedAction": "Complete the serum electrolyte panel (sodium, chloride, bicarbonate), then re-calculate."
           }
         ]
       }

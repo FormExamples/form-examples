@@ -1421,15 +1421,69 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
 
 ### Tooling (`bin/test-personas`, `bin/test-engines`)
 
-- [ ] **Cover split-engine flags in the persona oracle.** For the older
-      assessment family (genetic-assessment, gynecology-assessment, …) the
-      grader (`calculateRisk`, `calculateSymptomScore`) and
-      `detectAdditionalFlags` are separate exports, so `expected` pins the
-      score but never the flags. Add an optional `flagsHint` (default:
-      auto-discover `detectAdditionalFlags` / `detectFlags`) and merge its
-      output under `expected.additionalFlags`; re-pin the affected forms.
-- [ ] **`bin/test-engines` discovery can pick a sub-axis grader — or a
-      non-grader.** Six verified mis-picks so far, each overridden with
+- [x] **Cover split-engine flags in the persona oracle.** DONE 2026-09-03.
+      `bin/test-personas` now takes `flagsHint` (default: the loader's
+      discovered detector; `false` opts out) **and `flagsArgs`** — the
+      detector's exact call contract as a list of `"state"`, `"result"`,
+      `"result.<path>"`, `"options"` entries (default `["state","result"]`).
+      The contract turned out to be the whole problem: of the 119 split
+      engines found, 62 detectors take `(state, grade)`, 53 take `(state)`,
+      but 22 take a specific grade field (`grade.auditcScore`,
+      `grade.timepoints`, `grade.bmiRaw`, `grade.egfrRaw, grade.egfrStage`,
+      PCL-5's `(state, totalScore, probableDsm5Diagnosis, answeredCount)`,
+      DASS-21's `(state, depression, anxiety, stress)`, UKMEC's
+      `(state, ukmecResults)` …) — a naive `flags(state, result)` would
+      have pinned silently wrong flags for those. Every `flagsArgs` was
+      copied from the form's `form-app.js` call site, checked against the
+      detector's arity, and written into the persona file together with
+      the call text. Flags land under `expected.flaggedIssues` /
+      `additionalFlags` / `flags` (mirroring the detector's name); a grader
+      that returns a bare string/number is wrapped as `{ value, flags }`
+      (who-surgical-safety-checklist). All 119 files re-pinned with
+      `--update`; fleet 289/289 forms, 983/983 personas PASS. Also added a
+      **frozen clock** (`clock`, default `2026-09-03T12:00:00Z`; per-file
+      or per-persona override): `new Date()` / `Date.now()` are pinned
+      during grading so review-date / certificate-expiry / age flags never
+      rot — verified that no existing expected changed under the default
+      clock. Four forms pin all-empty flag lists (consent-to-treatment,
+      fall-risk-assessment, mental-health-act-assessment,
+      ophthalmology-assessment): checked — their personas are thin on the
+      flag axis (e.g. fall-risk fills only the MFS items, not the
+      ancillary anticoagulant / sedative / environment fields), not a wrong
+      contract; enriching them is a persona-quality follow-up.
+- [x] **`bin/test-engines` discovery can pick a sub-axis grader — or a
+      non-grader.** DONE 2026-09-03 — discovery now PROBES instead of
+      matching names: `bin/lib/engine-loader.js` builds the default state
+      from the zero-arg export that yields the *largest* object (so
+      `emptyRecord` beats `emptyDrug`, `emptyLpa` beats
+      `createEmptyAddress`), calls every plausibly-named export over it,
+      and scores the result (+10 for a rules-like array, +10 for a
+      flags/issues array, +5 for a status-like key, +4 for nested
+      sub-result objects, key count; bare arrays/strings/booleans rank far
+      below any object; names only break ties, with factory names,
+      `*Label`/`*Class` helpers and per-item sub-scorers excluded or
+      penalised). Result: **PASS 279 → 340, SKIP 76 → 15**, FAIL 0, and
+      every one of the six known mis-picks now resolves to the composite.
+      `--probe <slug>` prints each candidate's score. **Audit of the PASS
+      forms' persona `graderHint`s** (script comparing each hint with the
+      grader `form-app.js` calls at submit): 212 matched; **9 were pinned
+      to a sub-axis and have been re-pinned to the composite** —
+      epilepsy-review (`classifyControl` → `review`), heart-failure-review
+      (`deriveFunctionalStatus` → `gradeReview`), hypertension-review
+      (`computeControlStatus` → `review`),
+      learning-disability-annual-health-check (`calculateGrade` →
+      `assess`), genetic-assessment (`calculateRisk` → `gradeRisk`),
+      hearing-aid-assessment (`gradeHHIES` → `calculateHHIES`),
+      mental-health-assessment (`calculatePHQ9` → `gradeAssessment`),
+      predicting-risk-of-cardiovascular-disease-events
+      (`estimateTenYearRisk` → `calculateRisk`),
+      who-surgical-safety-checklist (`computeFlags` → `deriveStatus` +
+      `flagsHint: computeFlags`); each file's note records the re-pin.
+      hormone-replacement-therapy-assessment is left on `classifyHRTRisk`
+      because its form-app calls two peer graders (`calculateMRS` and
+      `classifyHRTRisk`) with no composite. The 5 files that relied on
+      discovery now pin `graderHint` explicitly. Original finding kept
+      below for the record. Six verified mis-picks, each overridden with
       `graderHint` in the persona file: hernia-diagnostic-evaluation
       (`classifyHernia`, Axis A only, vs `calculateHerniaEvaluation`);
       hip-replacement-surgery-evaluation (`scoreOhs`, the OHS
@@ -1450,22 +1504,35 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `calculate`/`grade`/`validate`, and reject candidates whose result
       has no rule/flag array; then audit the 279 PASS forms for other
       partial or wrong picks and list them.
-- [ ] **Persona counts, not form counts.** `bin/test-personas` prints
-      `PASS 1` for a form with three personas. Report both (`forms 1/1,
-      personas 3/3`) and add `--verbose` to list per-persona pass/fail.
-- [ ] **Engine-SKIP breakdown as a first-class report.** `bin/test-engines
-      --verbose` already classifies the 76 SKIPs (`grader not found`,
-      `needs a fuller input`, `returned object/boolean`, `default factory
-      not found`, `no engine namespace published`); add `--skip-summary`
-      that groups and counts them so the unblock work can be planned per
-      category.
+- [x] **Persona counts, not form counts.** DONE 2026-09-03: the summary
+      line reads `forms 289/289 PASS (0 FAIL), personas 983/983 PASS (0
+      FAIL)`, and `--verbose` prints one PASS/FAIL line per persona.
+- [x] **Engine-SKIP breakdown as a first-class report.** DONE 2026-09-03:
+      `bin/test-engines --skip-summary` groups the SKIPs by reason class
+      with counts and slugs.
 
-### Unblocking the 76 engine-SKIP forms (prerequisite for their personas)
+### Unblocking the engine-SKIP forms (prerequisite for their personas)
 
-      Counts below are from `bin/test-engines --verbose` on 2026-09-03
-      (43 + 10 + 12 + 6 + 5 = 76), not estimates.
+      Counts below were from `bin/test-engines --verbose` on 2026-09-03
+      (43 + 10 + 12 + 6 + 5 = 76), not estimates. **Update, same day:** the
+      probe-based discovery above cleared 61 of the 76 with no engine
+      change at all — "grader not found" (43 → 3), "needs a fuller input"
+      (10 → 0: the factory mis-pick was the cause, e.g. `emptyDrug` for
+      `anaesthetic-record`), "returned object/boolean" (12 → 0). **15
+      remain**, all needing a per-form engine change: the 6 with no engine
+      namespace, 6 with no default-state factory (`agile-checklist`,
+      `agile-principles-assessment`, `issue-tracker`, `meeting`,
+      `objectives-and-key-results-tracker`,
+      `united-kingdom-nhs-england-medical-exemption-certificate`), and 3
+      whose `js/` exports only `emptyAssessment`/`emptyItems` because the
+      grading is inline in `form-app.js` (`hospital-daily-monitoring-checklist`,
+      `hospital-dashboard-metrics`, `hospital-performance-indicators`).
+      The 61 newly loadable forms have no personas yet — that is the
+      next persona backlog.
 
-- [ ] **"grader not found" — 43 forms** — e.g. `pediatric-assessment`,
+- [x] **"grader not found" — 43 forms** — RESOLVED for 40 of 43 by probe
+      discovery (see above); the 3 `hospital-*` forms remain (inline
+      grading, no engine export). Original text: e.g. `pediatric-assessment`,
       `psychiatry-assessment`, `stroke-assessment`, `urology-assessment`,
       `pulmonology-assessment`, `respirology-assessment`, the six
       `who-*-form`s, the three
@@ -1477,7 +1544,9 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       the module exports helpers but no recognisable entry point. Add a
       single composed `calculateGrade(data)` (or a `graderHint`) so
       discovery works; keep the existing per-axis functions.
-- [ ] **"needs a fuller input" — 10 forms** — `anaesthetic-record`,
+- [x] **"needs a fuller input" — 10 forms** — RESOLVED 2026-09-03 by
+      probe discovery (the factory was mis-picked; no grader was actually
+      unsafe over its own empty shape). Original text: `anaesthetic-record`,
       `bone-marrow-donation-assessment`, `code-of-conduct-notice`,
       `dietic-assessment`, `eye-prescription`, `organ-donation-assessment`,
       `research-and-planning-privacy-notice`, `structured-medication-review`,
@@ -1487,7 +1556,8 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `undefined.dateOfBirth`, `undefined.find` …). Make the graders
       null-safe over the empty shape, or make the factory return the full
       shape the grader expects.
-- [ ] **"returned object / boolean / undefined" — 12 forms** —
+- [x] **"returned object / boolean / undefined" — 12 forms** — RESOLVED
+      2026-09-03 by probe discovery. Original text:
       `cataract-diagnostic-evaluation`, `chronic-kidney-disease-review`,
       `diabetes-assessment`, `genetics-assessment`,
       `health-screening-questionnaire`, `hematology-assessment`,
@@ -1509,14 +1579,19 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       one (privacy notices and certificates may legitimately be
       acknowledgement-only) — if not, teach `bin/test-engines` an explicit
       `engine: none` marker so they stop counting as SKIP.
-- [ ] **"default factory not found" — 5 forms** — `agile-checklist`,
-      `agile-principles-assessment`, `issue-tracker`,
-      `objectives-and-key-results-tracker`,
+- [ ] **"default factory not found" — 6 forms** (`meeting` joins the list
+      now that its `validateMeeting` is recognised as the grader) —
+      `agile-checklist`, `agile-principles-assessment`, `issue-tracker`,
+      `meeting`, `objectives-and-key-results-tracker`,
       `united-kingdom-nhs-england-medical-exemption-certificate`
       (`grader=evaluateFp92a`): the grader exists but no `empty*` /
       `createDefault*` factory is exported. Export one (the wizard already
       has the blank shape internally).
-- [ ] Then: personas for each unblocked form, 3 each, same methodology.
+- [ ] **"grader not found" — 3 `hospital-*` forms** — grading is inline in
+      `form-app.js`; extract it into an exported engine module.
+- [ ] Then: personas for each unblocked form, 3 each, same methodology —
+      **61 forms are already unblocked by the discovery fix and awaiting
+      personas.**
 
 ### Spec-driven follow-through
 

@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "grade",
-  "note": "Realistic filled-in states in the audio-vestibular engine's shape. Graded by grade: WHO pure-tone-average hearing-loss classification plus Dizziness Handicap Inventory (DHI 0-100) handicap banding — both deterministic. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the audio-vestibular engine's shape. Graded by grade: WHO pure-tone-average hearing-loss classification plus Dizziness Handicap Inventory (DHI 0-100) handicap banding — both deterministic. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, result); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-no-handicap",
@@ -357,7 +362,8 @@
             "answer": "no",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -713,6 +719,14 @@
             "text": "Does bending over increase your problem?",
             "answer": "no",
             "score": 0
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-PTA-004",
+            "category": "Pure-Tone Audiometry",
+            "message": "Moderate hearing loss - hearing-aid candidacy review.",
+            "priority": "medium"
           }
         ]
       }
@@ -1070,6 +1084,26 @@
             "text": "Does bending over increase your problem?",
             "answer": "sometimes",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DHI-001",
+            "category": "DHI",
+            "message": "DHI 66/100 - severe perceived handicap; vestibular rehabilitation strongly indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FALL-001",
+            "category": "Falls",
+            "message": "3 falls in the last year - multifactorial falls assessment indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PTA-003",
+            "category": "Pure-Tone Audiometry",
+            "message": "Severe hearing loss - hearing-aid candidacy review and audiology rehabilitation.",
+            "priority": "medium"
           }
         ]
       }

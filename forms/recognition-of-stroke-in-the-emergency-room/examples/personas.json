@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateRosierGrade",
-  "note": "Realistic filled-in states in the ROSIER scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.rosierScore"
+  ],
+  "note": "Realistic filled-in states in the ROSIER scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.rosierScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.rosierScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "stroke-unlikely-mimic",
@@ -62,6 +67,15 @@
             "points": 0,
             "category": "band",
             "description": "ROSIER <= 0 — stroke unlikely but not excluded"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEIZURE-LOC-CAUTION-001",
+            "category": "seizure-loc-caution",
+            "priority": "medium",
+            "description": "Mimic present (loss of consciousness / syncope) pulling the score down — a negative total does not exclude stroke",
+            "suggestedAction": "Weigh clinical suspicion: a mimic subtracts a point, so a low total may understate stroke risk. Escalate if suspicion remains."
           }
         ]
       }
@@ -139,6 +153,15 @@
             "points": 0,
             "category": "band",
             "description": "ROSIER > 0 — positive screen; stroke likely, activate the acute stroke pathway"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACTIVATE-STROKE-PATHWAY-001",
+            "category": "activate-stroke-pathway",
+            "priority": "high",
+            "description": "Positive ROSIER screen (score +3) — stroke likely; time is brain",
+            "suggestedAction": "Activate the acute stroke pathway: urgent stroke-team referral, immediate CT / imaging, and start the thrombolysis / reperfusion clock."
           }
         ]
       }
@@ -230,6 +253,15 @@
             "points": 0,
             "category": "band",
             "description": "ROSIER > 0 — positive screen; stroke likely, activate the acute stroke pathway"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACTIVATE-STROKE-PATHWAY-001",
+            "category": "activate-stroke-pathway",
+            "priority": "high",
+            "description": "Positive ROSIER screen (score +5) — stroke likely; time is brain",
+            "suggestedAction": "Activate the acute stroke pathway: urgent stroke-team referral, immediate CT / imaging, and start the thrombolysis / reperfusion clock."
           }
         ]
       }

@@ -1,11 +1,15 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateOnboardingGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "complete-low-risk",
-      "description": "Full 6-month probation onboarding: DBS cleared, all mandatory training, IT access, induction, and sign-off complete \u2014 expect complete status and low risk, zero fired rules.",
+      "description": "Full 6-month probation onboarding: DBS cleared, all mandatory training, IT access, induction, and sign-off complete — expect complete status and low risk, zero fired rules.",
       "state": {
         "demographics": {
           "firstName": "Tom",
@@ -154,12 +158,13 @@
         "overallRisk": "low",
         "itemsCompleted": 28,
         "itemsTotal": 28,
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
       "name": "critical-dbs-not-started",
-      "description": "A new starter whose DBS check was never started (grade-4 DBS-001) and whose references remain incomplete (grade-2 REF-002) despite most other items being in hand \u2014 expect critical risk regardless of the 71% completion, since any grade-4 rule alone forces critical.",
+      "description": "A new starter whose DBS check was never started (grade-4 DBS-001) and whose references remain incomplete (grade-2 REF-002) despite most other items being in hand — expect critical risk regardless of the 71% completion, since any grade-4 rule alone forces critical.",
       "state": {
         "demographics": {
           "firstName": "Ola",
@@ -321,12 +326,20 @@
             "description": "References incomplete",
             "grade": 2
           }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DBS-001",
+            "category": "Pre-Employment",
+            "message": "DBS check not started - EMPLOYEE MUST NOT START CLINICAL DUTIES",
+            "priority": "high"
+          }
         ]
       }
     },
     {
       "name": "high-risk-references-and-dbs-pending",
-      "description": "References came back unsatisfactory (grade-3 REF-001) and DBS is only applied-for, not cleared (grade-2 DBS-002); registration not required for this non-clinical role \u2014 expect high risk via the grade-3 rule.",
+      "description": "References came back unsatisfactory (grade-3 REF-001) and DBS is only applied-for, not cleared (grade-2 DBS-002); registration not required for this non-clinical role — expect high risk via the grade-3 rule.",
       "state": {
         "demographics": {
           "firstName": "Marcus",
@@ -488,7 +501,8 @@
             "description": "References not satisfactory",
             "grade": 3
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     }
   ]

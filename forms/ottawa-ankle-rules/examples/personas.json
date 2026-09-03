@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateOttawaDecision",
-  "note": "Realistic filled-in states in the Ottawa Ankle/Foot Rules scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the Ottawa Ankle/Foot Rules scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "no-xray",
@@ -47,7 +52,8 @@
         "unableToBearWeight": false,
         "ankleXrayIndicated": false,
         "footXrayIndicated": false,
-        "firedCriteria": []
+        "firedCriteria": [],
+        "flaggedIssues": []
       }
     },
     {
@@ -100,6 +106,15 @@
             "region": "ankle",
             "criterion": "lateral-malleolus-tenderness",
             "description": "Bone tenderness at the posterior edge or tip of the lateral malleolus (distal 6 cm of the fibula)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ANKLE-XRAY-INDICATED-001",
+            "category": "ankle-xray-indicated",
+            "priority": "high",
+            "description": "Ankle X-ray indicated — malleolar-zone pain with lateral/medial malleolus tenderness or inability to bear weight",
+            "suggestedAction": "Request an ankle radiograph series."
           }
         ]
       }
@@ -154,6 +169,15 @@
             "region": "foot",
             "criterion": "fifth-metatarsal-base-tenderness",
             "description": "Bone tenderness at the base of the fifth metatarsal"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-FOOT-XRAY-INDICATED-001",
+            "category": "foot-xray-indicated",
+            "priority": "high",
+            "description": "Foot X-ray indicated — midfoot-zone pain with fifth-metatarsal-base or navicular tenderness or inability to bear weight",
+            "suggestedAction": "Request a foot radiograph series."
           }
         ]
       }

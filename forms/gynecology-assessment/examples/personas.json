@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateSymptomScore",
-  "note": "Realistic filled-in states in the Menstrual Symptom Severity Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas` — it covers `calculateSymptomScore`'s own return value (symptomScore, symptomCategoryLabel, firedRules) only; the independent `detectAdditionalFlags` clinician-facing flags are a separate, unchecked module. Symptoms 7-10 (impact on daily life, work, relationships, mood) are not independently rated — they are all derived as `min(3, round(totalPhysical/6))` from the six physical-symptom scores, so all four always carry the identical value.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Menstrual Symptom Severity Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas` — it covers `calculateSymptomScore`'s own return value (symptomScore, symptomCategoryLabel, firedRules) only; the independent `detectAdditionalFlags` clinician-facing flags are a separate, unchecked module. Symptoms 7-10 (impact on daily life, work, relationships, mood) are not independently rated — they are all derived as `min(3, round(totalPhysical/6))` from the six physical-symptom scores, so all four always carry the identical value. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "minimal-isolated-mild-period-pain",
@@ -87,7 +91,8 @@
             "description": "How severe is your menstrual pain (dysmenorrhoea)?",
             "score": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -215,6 +220,20 @@
             "domain": "Emotional wellbeing",
             "description": "How much do your symptoms affect your emotional wellbeing or mood?",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MASS-001",
+            "category": "Pelvic Mass Suspicion",
+            "message": "Combination of significant pelvic pain and very heavy flow - investigate for fibroids or ovarian pathology",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PROG-001",
+            "category": "Symptom Progression",
+            "message": "Symptoms reported as worsening - prioritise investigation",
+            "priority": "high"
           }
         ]
       }
@@ -356,6 +375,50 @@
             "domain": "Emotional wellbeing",
             "description": "How much do your symptoms affect your emotional wellbeing or mood?",
             "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BLEED-001",
+            "category": "Abnormal Bleeding",
+            "message": "Moderate to severe abnormal bleeding reported - investigate for endometrial pathology",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MASS-001",
+            "category": "Pelvic Mass Suspicion",
+            "message": "Combination of significant pelvic pain and very heavy flow - investigate for fibroids or ovarian pathology",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FAMILY-OV-001",
+            "category": "Family History",
+            "message": "Family history of ovarian cancer - consider BRCA testing and enhanced surveillance",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PROG-001",
+            "category": "Symptom Progression",
+            "message": "Symptoms reported as worsening - prioritise investigation",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SCREEN-001",
+            "category": "Overdue Screening",
+            "message": "Cervical screening overdue (>3 years since last smear) - recommend scheduling",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PREG-001",
+            "category": "Pregnancy Concerns",
+            "message": "Previous obstetric complications noted: Postpartum haemorrhage after second delivery.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HPV-001",
+            "category": "Vaccination",
+            "message": "No HPV vaccination received - discuss vaccination if age-appropriate",
+            "priority": "low"
           }
         ]
       }

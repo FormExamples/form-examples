@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeFirstAid",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "pass-all-criteria-met",
@@ -446,7 +451,15 @@
           }
         ],
         "answeredCount": 44,
-        "totalRules": 44
+        "totalRules": 44,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Trainee Details",
+            "message": "Prior certification expired on 2025-01-15 — recertification required.",
+            "priority": "high"
+          }
+        ]
       }
     },
     {
@@ -909,7 +922,27 @@
           }
         ],
         "answeredCount": 44,
-        "totalRules": 44
+        "totalRules": 44,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Trainee Details",
+            "message": "Prior certification expired on 2025-01-15 — recertification required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MULTI-DEF",
+            "category": "Performance",
+            "message": "2 non-critical deficiencies recorded — additional coaching recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with trainee during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -1372,7 +1405,33 @@
           }
         ],
         "answeredCount": 44,
-        "totalRules": 44
+        "totalRules": 44,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CRIT-FAW-BLEED-TOURNIQUET",
+            "category": "Critical skill — Bleeding",
+            "message": "Critical-skill failure: Applies a tourniquet correctly for catastrophic limb haemorrhage when indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CRIT-FAW-MED-ANAPHYLAXIS",
+            "category": "Critical skill — Medical Emergencies",
+            "message": "Critical-skill failure: Recognises anaphylaxis (airway / breathing / circulation symptoms).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CERT-EXPIRED",
+            "category": "Trainee Details",
+            "message": "Prior certification expired on 2025-01-15 — recertification required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DEBRIEF-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with trainee during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     }
   ]

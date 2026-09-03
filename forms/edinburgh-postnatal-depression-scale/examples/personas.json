@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateEpdsGrade",
-  "note": "Realistic filled-in states in the EPDS scoring engine's shape (item1..item10 are raw printed-option indices 0-3; reverse scoring is applied by the grader). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the EPDS scoring engine's shape (item1..item10 are raw printed-option indices 0-3; reverse scoring is applied by the grader). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "lower-likelihood",
@@ -97,7 +102,8 @@
             "category": "band-threshold",
             "description": "Total < 10 — lower-likelihood band"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -228,6 +234,22 @@
             "points": 5,
             "category": "anxiety-subscale",
             "description": "Anxiety subscale (items 3, 4, 5) scored 5 of 9 (EPDS-3A >= 4)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-POSSIBLE-DEPRESSION-001",
+            "category": "possible-depression",
+            "priority": "medium",
+            "description": "Total EPDS score 11 of 30 is at or above the sensitive threshold (>= 10) — possible depression",
+            "suggestedAction": "Arrange further assessment / clinical review and repeat the EPDS in 2-4 weeks, or refer per the local pathway."
+          },
+          {
+            "id": "F-ELEVATED-ANXIETY-001",
+            "category": "elevated-anxiety",
+            "priority": "low",
+            "description": "Anxiety subscale (items 3, 4, 5) scored 5 of 9 (EPDS-3A >= 4) — features of perinatal anxiety",
+            "suggestedAction": "Consider perinatal anxiety alongside the depression screen when planning assessment and support."
           }
         ]
       }
@@ -381,6 +403,29 @@
             "points": 8,
             "category": "anxiety-subscale",
             "description": "Anxiety subscale (items 3, 4, 5) scored 8 of 9 (EPDS-3A >= 4)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SELF-HARM-URGENT-001",
+            "category": "self-harm-urgent",
+            "priority": "urgent",
+            "description": "Item 10 (thoughts of self-harm) is positive (score 2 of 3) — any response other than \"Never\" is a mandatory red flag, regardless of the total score",
+            "suggestedAction": "Perform an immediate suicide / self-harm risk assessment and take appropriate safeguarding action; do not leave the person alone if acute risk is identified. Escalate per local perinatal mental-health and safeguarding pathways."
+          },
+          {
+            "id": "F-LIKELY-DEPRESSION-001",
+            "category": "likely-depression",
+            "priority": "high",
+            "description": "Total EPDS score 25 of 30 is at or above the specific threshold (>= 13) — likely depressive illness",
+            "suggestedAction": "Arrange assessment by an appropriately qualified clinician and refer per the local perinatal mental-health pathway. This is a screen, not a diagnosis."
+          },
+          {
+            "id": "F-ELEVATED-ANXIETY-001",
+            "category": "elevated-anxiety",
+            "priority": "low",
+            "description": "Anxiety subscale (items 3, 4, 5) scored 8 of 9 (EPDS-3A >= 4) — features of perinatal anxiety",
+            "suggestedAction": "Consider perinatal anxiety alongside the depression screen when planning assessment and support."
           }
         ]
       }

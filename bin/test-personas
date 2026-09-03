@@ -22,13 +22,46 @@
  * recorded expected would rot daily, so those personas set
  * `"options": { "todayIso": "2026-08-26" }`.
  *
+ * The wall clock is FROZEN while a persona is graded: `new Date()` and
+ * `Date.now()` return the file's `clock` (or a persona's own `clock`, or the
+ * tool's default DEFAULT_CLOCK) for the duration of the grader and flags
+ * calls. Engines that compare a review / expiry / certification date against
+ * "today" therefore produce the same flags on every run, so their personas
+ * never rot. Engines that inject a clock through `options` are unaffected.
+ *
+ * SPLIT ENGINES — flags pinned too. Many engines fold their flags into the
+ * grader result; others export the flag detector separately (form-app.js
+ * composes the two at render time). For those, the oracle also calls the
+ * flags function and stores its output under `expected.<flagsKey>`, so a
+ * persona pins the flags as well as the grade. The flags function is
+ * `flagsHint` if set, else the engine loader's discovered detector; set
+ * `"flagsHint": false` to opt out. It is only consulted when the grader
+ * result carries no flag-like array of its own. The storage key mirrors the
+ * function name: a detector named *Issue* stores `flaggedIssues`,
+ * *Additional* stores `additionalFlags`, else `flags`. A grader that returns
+ * a bare classification (a string or number) is wrapped as
+ * `{ value, <flagsKey> }` so the flags have somewhere to live.
+ *
+ * The detector's CALL CONTRACT must match form-app.js, or the pinned flags
+ * would silently differ from what the UI shows: detectors variously take
+ * (state), (state, grade), (state, grade.totalScore), or several grade
+ * fields. `flagsArgs` spells the arguments out — each entry is "state",
+ * "result", "result.<dot.path>" into the grader result, or "options" — and
+ * defaults to ["state", "result"]. Copy it from the form-app.js call site.
+ *
  * Persona file: forms/<slug>/examples/personas.json
  *   {
  *     "engine": "front-end-with-html",
  *     "graderHint": "calculateApgarGrade",     // optional: pin the entry fn
+ *     "flagsHint": "detectFlaggedIssues",      // optional: pin the flags fn
+ *                                              // (false = never pin flags)
+ *     "flagsArgs": ["state", "result.timepoints"], // optional: call contract,
+ *                                              // default ["state", "result"]
+ *     "clock": "2026-09-03T12:00:00Z",         // optional: frozen "now"
  *     "personas": [
  *       { "name": "reassuring", "description": "...", "state": { ... },
  *         "options": { "todayIso": "2026-08-26" },  // optional 2nd grader arg
+ *         "clock": "2027-01-01T00:00:00Z",          // optional per-persona
  *         "expected": { ... } }                 // filled by --update
  *     ]
  *   }
@@ -37,6 +70,10 @@
  *   bin/test-personas                 # verify every form's personas (default)
  *   bin/test-personas <slug> ...      # only the named forms
  *   bin/test-personas --update [...]  # (re)compute and write `expected`
+ *   bin/test-personas --verbose [...] # one line per persona (PASS/FAIL)
+ *
+ * The summary line reports BOTH forms and personas ("forms 3/3, personas
+ * 9/9"): a form counts as PASS only when every one of its personas passes.
  *
  * Exit status is non-zero if any persona's recorded expected differs from the
  * engine's output (or the grader cannot be run). Forms without a personas.json
@@ -86,57 +123,146 @@ function personaFile(slug) {
   return path.join(FORMS, slug, 'examples', 'personas.json');
 }
 
+// The frozen "now" used while grading unless a file / persona sets `clock`.
+// Fixed forever so date-relative flags (review date passed, certificate
+// expired, …) are reproducible; bump only deliberately, then --update.
+const DEFAULT_CLOCK = '2026-09-03T12:00:00Z';
+const RealDate = Date;
+
+// Run fn with the global Date frozen at `iso`: a no-arg `new Date()` and
+// `Date.now()` return that instant; every other Date use is untouched.
+function withFrozenClock(iso, fn) {
+  const fixed = new RealDate(iso).getTime();
+  if (Number.isNaN(fixed)) throw new Error(`invalid clock "${iso}"`);
+  class FrozenDate extends RealDate {
+    constructor(...args) { if (args.length === 0) super(fixed); else super(...args); }
+    static now() { return fixed; }
+  }
+  globalThis.Date = FrozenDate;
+  try { return fn(); } finally { globalThis.Date = RealDate; }
+}
+
+const FLAG_KEY = /flag|issue/i;
+function hasFlagArray(result) {
+  return Object.keys(result).some((k) => FLAG_KEY.test(k) && Array.isArray(result[k]));
+}
+function flagsKeyFor(fnName) {
+  if (/issue/i.test(fnName)) return 'flaggedIssues';
+  if (/additional/i.test(fnName)) return 'additionalFlags';
+  return 'flags';
+}
+
+function isPlainObject(v) {
+  return v !== null && typeof v === 'object' && !Array.isArray(v);
+}
+
+// Resolve one `flagsArgs` entry against the persona's state / options and
+// the grader result. "result.a.b" walks the result; a missing path yields
+// undefined (the detector then behaves as form-app.js would on that input).
+function resolveFlagArg(spec, state, result, options) {
+  if (spec === 'state') return JSON.parse(JSON.stringify(state));
+  if (spec === 'options') return options === undefined ? undefined : JSON.parse(JSON.stringify(options));
+  if (spec === 'result') return result;
+  if (typeof spec === 'string' && spec.startsWith('result.')) {
+    return spec.slice('result.'.length).split('.').reduce((v, k) => (v == null ? undefined : v[k]), result);
+  }
+  throw new Error(`flagsArgs entry "${spec}" must be "state", "options", "result" or "result.<path>"`);
+}
+
+// Returns { status: 'PASS'|'FAIL', personas: [{ name, ok, why }] }.
 async function runForm(slug, update, problems) {
   const file = personaFile(slug);
   if (!fs.existsSync(file)) return null;
   let doc;
   try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); }
-  catch (e) { problems.push(`${slug}: personas.json invalid JSON: ${e.message}`); return 'FAIL'; }
+  catch (e) { problems.push(`${slug}: personas.json invalid JSON: ${e.message}`); return { status: 'FAIL', personas: [] }; }
 
   const eng = await loadEngine(REPO_ROOT, slug);
-  if (eng.error || !eng.ns) { problems.push(`${slug}: engine not loadable (${eng.error || 'no ns'})`); return 'FAIL'; }
+  if (eng.error || !eng.ns) { problems.push(`${slug}: engine not loadable (${eng.error || 'no ns'})`); return { status: 'FAIL', personas: [] }; }
   const graderName = doc.graderHint || eng.grader;
   if (!graderName || typeof eng.ns[graderName] !== 'function') {
-    problems.push(`${slug}: grader "${graderName}" not found (set graderHint)`); return 'FAIL';
+    problems.push(`${slug}: grader "${graderName}" not found (set graderHint)`); return { status: 'FAIL', personas: [] };
   }
   const grader = eng.ns[graderName];
 
+  // Split-engine flags: an explicit flagsHint, else the discovered detector;
+  // `false` opts out. Only used when the grader result carries no flags.
+  let flagsName = null;
+  if (doc.flagsHint !== false) {
+    flagsName = doc.flagsHint || eng.flags || null;
+    if (flagsName && typeof eng.ns[flagsName] !== 'function') {
+      problems.push(`${slug}: flags "${flagsName}" not found (fix flagsHint)`); return { status: 'FAIL', personas: [] };
+    }
+    if (flagsName === graderName) flagsName = null;
+  }
+  const flagsArgs = Array.isArray(doc.flagsArgs) ? doc.flagsArgs : ['state', 'result'];
+
+  const personas = [];
   let status = 'PASS';
   for (const p of doc.personas || []) {
+    const clock = p.clock || doc.clock || DEFAULT_CLOCK;
     let result;
-    try { result = grader(JSON.parse(JSON.stringify(p.state)), p.options && JSON.parse(JSON.stringify(p.options))); }
-    catch (e) { problems.push(`${slug}/${p.name}: grader threw: ${String(e.message).split('\n')[0]}`); status = 'FAIL'; continue; }
+    try {
+      result = withFrozenClock(clock, () => {
+        const state = JSON.parse(JSON.stringify(p.state));
+        const options = p.options && JSON.parse(JSON.stringify(p.options));
+        const r = grader(state, options);
+        if (flagsName && (!isPlainObject(r) || !hasFlagArray(r))) {
+          const flags = eng.ns[flagsName](...flagsArgs.map((a) => resolveFlagArg(a, p.state, r, p.options)));
+          if (Array.isArray(flags)) {
+            // A grader that returns a bare classification (a string / number)
+            // is wrapped so the flags have somewhere to live.
+            return isPlainObject(r)
+              ? { ...r, [flagsKeyFor(flagsName)]: flags }
+              : { value: r, [flagsKeyFor(flagsName)]: flags };
+          }
+        }
+        return r;
+      });
+    } catch (e) {
+      const why = `grader threw: ${String(e.message).split('\n')[0]}`;
+      problems.push(`${slug}/${p.name}: ${why}`); personas.push({ name: p.name, ok: false, why }); status = 'FAIL'; continue;
+    }
     if (update) {
       p.expected = stripVolatile(result);
+      personas.push({ name: p.name, ok: true });
     } else if (!('expected' in p)) {
-      problems.push(`${slug}/${p.name}: no expected recorded — run --update`); status = 'FAIL';
+      const why = 'no expected recorded — run --update';
+      problems.push(`${slug}/${p.name}: ${why}`); personas.push({ name: p.name, ok: false, why }); status = 'FAIL';
     } else if (canon(result) !== canon(p.expected)) {
-      problems.push(`${slug}/${p.name}: engine output changed vs recorded expected`); status = 'FAIL';
+      const why = 'engine output changed vs recorded expected';
+      problems.push(`${slug}/${p.name}: ${why}`); personas.push({ name: p.name, ok: false, why }); status = 'FAIL';
+    } else {
+      personas.push({ name: p.name, ok: true });
     }
   }
   if (update) fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n');
-  return status;
+  return { status, personas };
 }
 
 async function main() {
   const args = process.argv.slice(2);
   const update = args.includes('--update');
+  const verbose = args.includes('--verbose');
   let slugs = args.filter((a) => !a.startsWith('--'));
   if (!slugs.length) {
     slugs = execSync(path.join(REPO_ROOT, 'bin', 'forms-as-kebab-case'))
       .toString().split('\n').map((s) => s.trim()).filter(Boolean);
   }
   const problems = [];
-  let pass = 0, fail = 0, none = 0;
+  let pass = 0, fail = 0, none = 0, pPass = 0, pFail = 0;
   for (const slug of slugs) {
     const r = await runForm(slug, update, problems);
-    if (r === null) none++;
-    else if (r === 'PASS') pass++;
-    else fail++;
+    if (r === null) { none++; continue; }
+    if (r.status === 'PASS') pass++; else fail++;
+    for (const p of r.personas) {
+      if (p.ok) pPass++; else pFail++;
+      if (verbose) console.log(`${p.ok ? 'PASS' : 'FAIL'}  ${slug} / ${p.name}${p.why ? ` — ${p.why}` : ''}`);
+    }
   }
   for (const p of problems) console.error(p);
   const verb = update ? 'updated' : 'verified';
-  console.log(`\ntest-personas: ${verb} — PASS ${pass}  FAIL ${fail}  (no personas: ${none})`);
+  console.log(`\ntest-personas: ${verb} — forms ${pass}/${pass + fail} PASS (${fail} FAIL), personas ${pPass}/${pPass + pFail} PASS (${pFail} FAIL)  (forms without personas: ${none})`);
   process.exit(fail ? 1 : 0);
 }
 

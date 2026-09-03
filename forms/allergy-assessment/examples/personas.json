@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateAllergySeverity",
-  "note": "Realistic filled-in states in the allergy scoring engine's shape. Graded by calculateAllergySeverity (rules-based; the overall severity is the highest fired rule level — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the allergy scoring engine's shape. Graded by calculateAllergySeverity (rules-based; the overall severity is the highest fired rule level — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "mild-seasonal",
@@ -113,7 +117,8 @@
             "description": "Dust mite allergy",
             "severityLevel": "mild"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -231,6 +236,14 @@
             "category": "Comorbidity",
             "description": "Asthma comorbidity with allergies",
             "severityLevel": "moderate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ASTHMA-001",
+            "category": "Comorbidity",
+            "message": "Asthma comorbidity (mild) - increased anaphylaxis risk.",
+            "priority": "medium"
           }
         ]
       }
@@ -386,6 +399,38 @@
             "category": "Comorbidity",
             "description": "Severe asthma comorbidity",
             "severityLevel": "severe"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ANAPH-001",
+            "category": "Anaphylaxis",
+            "message": "History of anaphylaxis (3 episodes).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-INSECT-001",
+            "category": "Environmental",
+            "message": "ANAPHYLAXIS history to insect sting - venom immunotherapy may be indicated.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-ASTHMA-001",
+            "category": "Comorbidity",
+            "message": "Asthma comorbidity (severe) - increased anaphylaxis risk.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MENTAL-001",
+            "category": "Quality of Life",
+            "message": "Mental health impact reported - psychological support may be needed.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-QOL-001",
+            "category": "Quality of Life",
+            "message": "Very low quality of life score (2/10).",
+            "priority": "medium"
           }
         ]
       }

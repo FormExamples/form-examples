@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeAssessment",
-  "note": "Realistic filled-in states in the anaesthetic pre-assessment engine's shape. Graded by gradeAssessment, the composite perioperative-risk grader (worst of ASA / Mallampati airway / RCRI / STOP-BANG — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the anaesthetic pre-assessment engine's shape. Graded by gradeAssessment, the composite perioperative-risk grader (worst of ASA / Mallampati airway / RCRI / STOP-BANG — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -207,7 +211,8 @@
             "description": "ASA I — Healthy",
             "riskLevel": "low"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -477,7 +482,8 @@
             "description": "Male sex.",
             "riskLevel": "medium"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -818,6 +824,20 @@
             "category": "OSA",
             "description": "Male sex.",
             "riskLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-LOW-FUNC",
+            "category": "Social History",
+            "message": "Limited functional capacity (cannot climb 2 flights) — increased perioperative risk.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SMOKER",
+            "category": "Social History",
+            "message": "Current smoker — increased respiratory complication risk.",
+            "priority": "low"
           }
         ]
       }

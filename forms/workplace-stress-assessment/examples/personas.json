@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeStress",
-  "note": "Realistic filled-in states in the HSE Management Standards engine's shape. Each item is 1-5; negatively-worded (reverse-scored) items are transformed via (6 - raw) so a higher domain mean is always more favourable. Each domain mean is classified against HSE percentile benchmarks (low = good, then moderate, high, very-high); overall risk = the worst domain category. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result.domains"
+  ],
+  "note": "Realistic filled-in states in the HSE Management Standards engine's shape. Each item is 1-5; negatively-worded (reverse-scored) items are transformed via (6 - raw) so a higher domain mean is always more favourable. Each domain mean is classified against HSE percentile benchmarks (low = good, then moderate, high, very-high); overall risk = the worst domain category. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result.domains\"], mirroring form-app.js's call detectAdditionalFlags(state, grading.domains); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -395,7 +400,8 @@
             "effectiveValue": 5,
             "reverseScored": false
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -789,6 +795,14 @@
             "rawValue": 4,
             "effectiveValue": 4,
             "reverseScored": false
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DOMAIN-MOD",
+            "category": "Overall",
+            "message": "2 domains at moderate concern — monitor and re-survey in three months.",
+            "priority": "low"
           }
         ]
       }
@@ -1184,6 +1198,68 @@
             "rawValue": 1,
             "effectiveValue": 1,
             "reverseScored": false
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DOMAIN-VH-demands",
+            "category": "Demands",
+            "message": "Demands domain at very-high concern (mean 1). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VH-control",
+            "category": "Control",
+            "message": "Control domain at very-high concern (mean 1). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VH-managerSupport",
+            "category": "Manager Support",
+            "message": "Manager Support domain at very-high concern (mean 1). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VH-peerSupport",
+            "category": "Peer Support",
+            "message": "Peer Support domain at very-high concern (mean 1.5). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VH-relationships",
+            "category": "Relationships",
+            "message": "Relationships domain at very-high concern (mean 1.5). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VH-role",
+            "category": "Role Clarity",
+            "message": "Role Clarity domain at very-high concern (mean 1.8). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-VH-change",
+            "category": "Organisational Change",
+            "message": "Organisational Change domain at very-high concern (mean 1). Immediate review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOMAIN-MULTI",
+            "category": "Overall",
+            "message": "7 domains at high or very-high concern — broad organisational stressor pattern.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-REL-HARASS",
+            "category": "Relationships",
+            "message": "Employee reports being subject to personal harassment \"often\" or \"always\". Safeguarding review recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-REL-BULLY",
+            "category": "Relationships",
+            "message": "Employee reports being subject to bullying at work \"often\" or \"always\". Safeguarding review recommended.",
+            "priority": "high"
           }
         ]
       }

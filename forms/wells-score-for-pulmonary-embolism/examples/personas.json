@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateWellsGrade",
-  "note": "Realistic filled-in states in the Wells PE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.wellsScore"
+  ],
+  "note": "Realistic filled-in states in the Wells PE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.wellsScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.wellsScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "unlikely-low",
@@ -71,6 +76,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "Wells < 2 — low probability (original three-level rule)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-PE-UNLIKELY-D-DIMER-001",
+            "category": "pe-unlikely-d-dimer",
+            "priority": "medium",
+            "description": "PE unlikely (Wells score 0) — arrange a D-dimer test",
+            "suggestedAction": "Arrange a D-dimer test. If positive, arrange CTPA; if negative, consider an alternative diagnosis and, where gestalt probability is low, apply the PERC rule to support ruling PE out without D-dimer."
           }
         ]
       }
@@ -165,6 +179,15 @@
             "category": "risk-band",
             "description": "Wells 2-6 — moderate probability (original three-level rule)"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-PE-LIKELY-CTPA-001",
+            "category": "pe-likely-ctpa",
+            "priority": "high",
+            "description": "PE likely (Wells score 6) — arrange an immediate CT pulmonary angiogram",
+            "suggestedAction": "Arrange an immediate CTPA. Give interim anticoagulation if imaging is delayed. If CTPA is negative, consider proximal-leg vein ultrasound."
+          }
         ]
       }
     },
@@ -257,6 +280,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "Wells > 6 — high probability (original three-level rule)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-PE-LIKELY-CTPA-001",
+            "category": "pe-likely-ctpa",
+            "priority": "high",
+            "description": "PE likely (Wells score 7.5) — arrange an immediate CT pulmonary angiogram",
+            "suggestedAction": "Arrange an immediate CTPA. Give interim anticoagulation if imaging is delayed. If CTPA is negative, consider proximal-leg vein ultrasound."
           }
         ]
       }

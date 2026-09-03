@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeFMS",
-  "note": "Realistic filled-in states in the kinesiology-assessment scoring engine's shape. Graded on the Functional Movement Screen (FMS): seven patterns each 0-3 (bilateral patterns take the lower of left/right; pain during movement scores 0), summed 0-21, categorised >=18 Excellent, 14-17 Good, 10-13 Fair, <10 Poor, with an injury risk band (>=15 low-risk else at-risk). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the kinesiology-assessment scoring engine's shape. Graded on the Functional Movement Screen (FMS): seven patterns each 0-3 (bilateral patterns take the lower of left/right; pain during movement scores 0), summed 0-21, categorised >=18 Excellent, 14-17 Good, 10-13 Fair, <10 Poor, with an injury risk band (>=15 low-risk else at-risk). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "excellent-low-risk",
@@ -134,7 +138,8 @@
             "description": "Assesses multi-plane trunk stability during a combined upper and lower extremity motion. Challenges the body's ability to stabilise during combined movements.",
             "score": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -267,6 +272,32 @@
             "pattern": "Rotary Stability",
             "description": "Assesses multi-plane trunk stability during a combined upper and lower extremity motion. Challenges the body's ability to stabilise during combined movements.",
             "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-INABILITY-IN-LINE-LUNGE",
+            "category": "Movement Limitation",
+            "message": "Unable to perform In-Line Lunge pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INABILITY-ROTARY-STABILITY",
+            "category": "Movement Limitation",
+            "message": "Unable to perform Rotary Stability pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ASYMMETRY-IN-LINE-LUNGE",
+            "category": "Mild Asymmetry",
+            "message": "In-Line Lunge: left-right difference of 1 point (L:2, R:1) - monitor and address with corrective exercises",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LOW-TOTAL",
+            "category": "Injury Risk",
+            "message": "FMS total score of 12 is at or below injury risk threshold (14) - modify training intensity and address movement deficiencies",
+            "priority": "medium"
           }
         ]
       }
@@ -401,6 +432,68 @@
             "pattern": "Rotary Stability",
             "description": "Assesses multi-plane trunk stability during a combined upper and lower extremity motion. Challenges the body's ability to stabilise during combined movements.",
             "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-PAIN-DEEP-SQUAT",
+            "category": "Pain During Movement",
+            "message": "Pain reported during Deep Squat - requires further clinical evaluation before exercise prescription",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-IN-LINE-LUNGE",
+            "category": "Pain During Movement",
+            "message": "Pain reported during In-Line Lunge - requires further clinical evaluation before exercise prescription",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CLEARING-TRUNK-EXT",
+            "category": "Clearing Test Failure",
+            "message": "Trunk extension clearing test produced pain - refer for spinal evaluation before extension activities",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INABILITY-HURDLE-STEP",
+            "category": "Movement Limitation",
+            "message": "Unable to perform Hurdle Step pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INABILITY-SHOULDER-MOBILITY",
+            "category": "Movement Limitation",
+            "message": "Unable to perform Shoulder Mobility pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INABILITY-ACTIVE-STRAIGHT-LEG-RAISE",
+            "category": "Movement Limitation",
+            "message": "Unable to perform Active Straight Leg Raise pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INABILITY-TRUNK-STABILITY-PUSH-UP",
+            "category": "Movement Limitation",
+            "message": "Unable to perform Trunk Stability Push-Up pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INABILITY-ROTARY-STABILITY",
+            "category": "Movement Limitation",
+            "message": "Unable to perform Rotary Stability pattern - corrective exercise programme recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ASYMMETRY-SHOULDER-MOBILITY",
+            "category": "Mild Asymmetry",
+            "message": "Shoulder Mobility: left-right difference of 1 point (L:2, R:1) - monitor and address with corrective exercises",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LOW-TOTAL",
+            "category": "Injury Risk",
+            "message": "FMS total score of 5 is at or below injury risk threshold (14) - modify training intensity and address movement deficiencies",
+            "priority": "medium"
           }
         ]
       }

@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradePlan",
-  "note": "Three hand-authored personas for the ReSPECT completeness grader. graderHint is set explicitly because bin/test-engines' discovery heuristic picks completenessPercent (a bare-number helper), not the composite. gradePlan returns { status, completenessPercent, satisfiedCount, mandatoryCount, firedRules } where firedRules always lists all eight mandatory rules with a 'satisfied' boolean (this is a documentation instrument: nothing is scored, rules are pass/fail). detectFlaggedIssues (flags.js) is a separate export that form-app.js composes at render time - and it depends on the wall clock for the review-date-passed flag - so flags are NOT pinned here (Phase 13 'flagsHint' tooling task); each description records the flags the persona would raise. completenessPercent counts populated field-slots, not passed rules: 14 slots always apply and a 15th (capacity assessment + non-person involvement) applies only when hasCapacity === 'no', so a plan for a person with capacity reaches 100% on 14/14. status is 'complete' only at 8/8 satisfied. No timestamp is returned by gradePlan. Regenerate 'expected' with: bin/test-personas recommended-summary-plan-for-emergency-care-and-treatment --update",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the ReSPECT completeness grader. graderHint is set explicitly because bin/test-engines' discovery heuristic picks completenessPercent (a bare-number helper), not the composite. gradePlan returns { status, completenessPercent, satisfiedCount, mandatoryCount, firedRules } where firedRules always lists all eight mandatory rules with a 'satisfied' boolean (this is a documentation instrument: nothing is scored, rules are pass/fail). detectFlaggedIssues (flags.js) is a separate export that form-app.js composes at render time - and it depends on the wall clock for the review-date-passed flag - so flags are pinned here through flagsHint/flagsArgs (the Phase 13 tooling item, done 2026-09-03); each description records the flags the persona would raise. completenessPercent counts populated field-slots, not passed rules: 14 slots always apply and a 15th (capacity assessment + non-person involvement) applies only when hasCapacity === 'no', so a plan for a person with capacity reaches 100% on 14/14. status is 'complete' only at 8/8 satisfied. No timestamp is returned by gradePlan. Regenerate 'expected' with: bin/test-personas recommended-summary-plan-for-emergency-care-and-treatment --update Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "Complete plan - person with capacity, DNACPR agreed and discussed",
@@ -118,7 +122,8 @@
             "category": "clinician-sign-off",
             "description": "The plan is signed by the completing clinician, with role and date"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -235,6 +240,15 @@
             "satisfied": true,
             "category": "clinician-sign-off",
             "description": "The plan is signed by the completing clinician, with role and date"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-CPR-NOT-DOCUMENTED-001",
+            "category": "cpr-not-documented",
+            "priority": "high",
+            "description": "No CPR recommendation recorded — the single most safety-critical omission; it is unclear whether CPR should be attempted.",
+            "suggestedAction": "Record an explicit CPR recommendation (attempt or do-not-attempt) with its clinical rationale."
           }
         ]
       }
@@ -353,6 +367,43 @@
             "satisfied": false,
             "category": "clinician-sign-off",
             "description": "The plan is signed by the completing clinician, with role and date"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-CPR-NOT-DOCUMENTED-001",
+            "category": "cpr-not-documented",
+            "priority": "high",
+            "description": "No CPR recommendation recorded — the single most safety-critical omission; it is unclear whether CPR should be attempted.",
+            "suggestedAction": "Record an explicit CPR recommendation (attempt or do-not-attempt) with its clinical rationale."
+          },
+          {
+            "id": "F-CAPACITY-MISSING-001",
+            "category": "capacity-missing",
+            "priority": "high",
+            "description": "The person is recorded as lacking capacity but no capacity assessment or legal-proxy / consultee involvement is documented (Mental Capacity Act 2005).",
+            "suggestedAction": "Document the capacity assessment and record the welfare attorney, court-appointed deputy, or consultees involved in the best-interests decision."
+          },
+          {
+            "id": "F-NO-SIGNATURE-001",
+            "category": "no-clinician-signature",
+            "priority": "high",
+            "description": "The plan is unsigned or undated, so it is not valid and should not be relied upon.",
+            "suggestedAction": "The completing clinician should sign and date the plan, recording their name, role, and registration."
+          },
+          {
+            "id": "F-REVIEW-DATE-PASSED-001",
+            "category": "review-date-passed",
+            "priority": "medium",
+            "description": "The planned review date is in the past — the plan may no longer reflect the person’s wishes or condition.",
+            "suggestedAction": "Review the plan with the person (or their proxy) and record a new review date."
+          },
+          {
+            "id": "F-HEALTH-SUMMARY-MISSING-001",
+            "category": "health-summary-missing",
+            "priority": "low",
+            "description": "No summary of relevant health is recorded, so the recommendations lack clinical context.",
+            "suggestedAction": "Add a brief clinical summary and the relevant diagnoses."
           }
         ]
       }

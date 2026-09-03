@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "deriveFunctionalStatus",
-  "note": "Realistic filled-in states in the heart-failure-review scoring engine's shape. Graded on NYHA functional status derived from nyhaClass: <=2 stable, 3 symptomatic, 4 advanced. The full gradeReview stamps a live timestamp, so graderHint pins the deterministic state-taking deriveFunctionalStatus. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "graderHint": "gradeReview",
+  "note": "Realistic filled-in states in the heart-failure-review scoring engine's shape. Graded on NYHA functional status derived from nyhaClass: <=2 stable, 3 symptomatic, 4 advanced. The full gradeReview stamps a live timestamp, so graderHint pins the deterministic state-taking deriveFunctionalStatus. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. graderHint re-pinned 2026-09-03 from \"deriveFunctionalStatus\" to \"gradeReview\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "stable-nyha-2",
@@ -105,7 +105,140 @@
           "reviewContext": ""
         }
       },
-      "expected": "stable"
+      "expected": {
+        "functionalStatus": "stable",
+        "medicationOptimisation": {
+          "indicatedPillars": 0,
+          "prescribedPillars": 0,
+          "missingPillars": [],
+          "status": "not-applicable",
+          "pillars": [
+            {
+              "key": "raasInhibitor",
+              "label": "RAAS inhibitor",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "betaBlocker",
+              "label": "Beta-blocker",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "mra",
+              "label": "MRA",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "sglt2Inhibitor",
+              "label": "SGLT2 inhibitor",
+              "status": "prescribed",
+              "indicated": false
+            }
+          ]
+        },
+        "reviewStatus": "complete",
+        "completenessScore": 100,
+        "domainStatuses": [
+          {
+            "domain": "functional-status",
+            "label": "Functional status",
+            "documented": true
+          },
+          {
+            "domain": "fluid-status",
+            "label": "Fluid status",
+            "documented": true
+          },
+          {
+            "domain": "monitoring-bloods",
+            "label": "Monitoring bloods",
+            "documented": true
+          },
+          {
+            "domain": "medication-review",
+            "label": "Medication review",
+            "documented": true
+          },
+          {
+            "domain": "vaccinations",
+            "label": "Vaccinations",
+            "documented": true
+          },
+          {
+            "domain": "self-management",
+            "label": "Self-management",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-DOMAIN-01-FUNCTIONAL",
+            "domain": "functional-status",
+            "category": "domain-documentation",
+            "description": "NYHA functional class recorded"
+          },
+          {
+            "id": "R-DOMAIN-02-FLUID",
+            "domain": "fluid-status",
+            "category": "domain-documentation",
+            "description": "Weight or a fluid-status sign (oedema / JVP) recorded"
+          },
+          {
+            "id": "R-DOMAIN-03-BLOODS",
+            "domain": "monitoring-bloods",
+            "category": "domain-documentation",
+            "description": "Potassium and eGFR recorded"
+          },
+          {
+            "id": "R-DOMAIN-04-MEDICATION",
+            "domain": "medication-review",
+            "category": "domain-documentation",
+            "description": "All four medication pillars have a recorded status"
+          },
+          {
+            "id": "R-DOMAIN-05-VACCINATIONS",
+            "domain": "vaccinations",
+            "category": "domain-documentation",
+            "description": "Influenza vaccination status recorded"
+          },
+          {
+            "id": "R-DOMAIN-06-SELF-MANAGEMENT",
+            "domain": "self-management",
+            "category": "domain-documentation",
+            "description": "Self-management plan status recorded"
+          },
+          {
+            "id": "R-FUNCTIONAL-STATUS-01",
+            "domain": "functional-status",
+            "category": "classification",
+            "description": "NYHA functional status derived: stable"
+          },
+          {
+            "id": "R-OPTIMISATION-01",
+            "domain": "medication-optimisation",
+            "category": "classification",
+            "description": "Medication-optimisation status: not-applicable (0 of 0 indicated pillars prescribed)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "domain": "completeness",
+            "category": "completeness",
+            "description": "Review complete: 6 of 6 domains documented (100%)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MISSING-MONITORING-001",
+            "category": "missing-monitoring",
+            "priority": "medium",
+            "description": "On a RAAS inhibitor or MRA but recent monitoring bloods (potassium / eGFR / bloods date) are not documented",
+            "suggestedAction": "Arrange U&E and eGFR monitoring bloods in line with RAAS-inhibitor / MRA safety guidance and record the date."
+          }
+        ]
+      }
     },
     {
       "name": "symptomatic-nyha-3",
@@ -209,7 +342,154 @@
           "reviewContext": ""
         }
       },
-      "expected": "symptomatic"
+      "expected": {
+        "functionalStatus": "symptomatic",
+        "medicationOptimisation": {
+          "indicatedPillars": 0,
+          "prescribedPillars": 0,
+          "missingPillars": [],
+          "status": "not-applicable",
+          "pillars": [
+            {
+              "key": "raasInhibitor",
+              "label": "RAAS inhibitor",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "betaBlocker",
+              "label": "Beta-blocker",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "mra",
+              "label": "MRA",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "sglt2Inhibitor",
+              "label": "SGLT2 inhibitor",
+              "status": "not-prescribed",
+              "indicated": false
+            }
+          ]
+        },
+        "reviewStatus": "complete",
+        "completenessScore": 100,
+        "domainStatuses": [
+          {
+            "domain": "functional-status",
+            "label": "Functional status",
+            "documented": true
+          },
+          {
+            "domain": "fluid-status",
+            "label": "Fluid status",
+            "documented": true
+          },
+          {
+            "domain": "monitoring-bloods",
+            "label": "Monitoring bloods",
+            "documented": true
+          },
+          {
+            "domain": "medication-review",
+            "label": "Medication review",
+            "documented": true
+          },
+          {
+            "domain": "vaccinations",
+            "label": "Vaccinations",
+            "documented": true
+          },
+          {
+            "domain": "self-management",
+            "label": "Self-management",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-DOMAIN-01-FUNCTIONAL",
+            "domain": "functional-status",
+            "category": "domain-documentation",
+            "description": "NYHA functional class recorded"
+          },
+          {
+            "id": "R-DOMAIN-02-FLUID",
+            "domain": "fluid-status",
+            "category": "domain-documentation",
+            "description": "Weight or a fluid-status sign (oedema / JVP) recorded"
+          },
+          {
+            "id": "R-DOMAIN-03-BLOODS",
+            "domain": "monitoring-bloods",
+            "category": "domain-documentation",
+            "description": "Potassium and eGFR recorded"
+          },
+          {
+            "id": "R-DOMAIN-04-MEDICATION",
+            "domain": "medication-review",
+            "category": "domain-documentation",
+            "description": "All four medication pillars have a recorded status"
+          },
+          {
+            "id": "R-DOMAIN-05-VACCINATIONS",
+            "domain": "vaccinations",
+            "category": "domain-documentation",
+            "description": "Influenza vaccination status recorded"
+          },
+          {
+            "id": "R-DOMAIN-06-SELF-MANAGEMENT",
+            "domain": "self-management",
+            "category": "domain-documentation",
+            "description": "Self-management plan status recorded"
+          },
+          {
+            "id": "R-FUNCTIONAL-STATUS-01",
+            "domain": "functional-status",
+            "category": "classification",
+            "description": "NYHA functional status derived: symptomatic"
+          },
+          {
+            "id": "R-OPTIMISATION-01",
+            "domain": "medication-optimisation",
+            "category": "classification",
+            "description": "Medication-optimisation status: not-applicable (0 of 0 indicated pillars prescribed)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "domain": "completeness",
+            "category": "completeness",
+            "description": "Review complete: 6 of 6 domains documented (100%)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-URGENT-REVIEW-001",
+            "category": "urgent-review",
+            "priority": "high",
+            "description": "NYHA class 3 — symptomatic or advanced heart failure: arrange prompt clinical review",
+            "suggestedAction": "Arrange urgent clinical review; consider referral to the heart-failure specialist team and check for reversible precipitants."
+          },
+          {
+            "id": "F-FLUID-OVERLOAD-001",
+            "category": "fluid-overload",
+            "priority": "high",
+            "description": "Signs of fluid overload: weight gain 2 kg, moderate peripheral oedema, raised JVP",
+            "suggestedAction": "Assess volume status; consider up-titrating the loop diuretic, reinforcing fluid / salt advice and daily weights, and arranging review."
+          },
+          {
+            "id": "F-MISSING-MONITORING-001",
+            "category": "missing-monitoring",
+            "priority": "medium",
+            "description": "On a RAAS inhibitor or MRA but recent monitoring bloods (potassium / eGFR / bloods date) are not documented",
+            "suggestedAction": "Arrange U&E and eGFR monitoring bloods in line with RAAS-inhibitor / MRA safety guidance and record the date."
+          }
+        ]
+      }
     },
     {
       "name": "advanced-nyha-4",
@@ -313,7 +593,147 @@
           "reviewContext": ""
         }
       },
-      "expected": "advanced"
+      "expected": {
+        "functionalStatus": "advanced",
+        "medicationOptimisation": {
+          "indicatedPillars": 0,
+          "prescribedPillars": 0,
+          "missingPillars": [],
+          "status": "not-applicable",
+          "pillars": [
+            {
+              "key": "raasInhibitor",
+              "label": "RAAS inhibitor",
+              "status": "not-tolerated",
+              "indicated": false
+            },
+            {
+              "key": "betaBlocker",
+              "label": "Beta-blocker",
+              "status": "prescribed",
+              "indicated": false
+            },
+            {
+              "key": "mra",
+              "label": "MRA",
+              "status": "not-tolerated",
+              "indicated": false
+            },
+            {
+              "key": "sglt2Inhibitor",
+              "label": "SGLT2 inhibitor",
+              "status": "prescribed",
+              "indicated": false
+            }
+          ]
+        },
+        "reviewStatus": "complete",
+        "completenessScore": 100,
+        "domainStatuses": [
+          {
+            "domain": "functional-status",
+            "label": "Functional status",
+            "documented": true
+          },
+          {
+            "domain": "fluid-status",
+            "label": "Fluid status",
+            "documented": true
+          },
+          {
+            "domain": "monitoring-bloods",
+            "label": "Monitoring bloods",
+            "documented": true
+          },
+          {
+            "domain": "medication-review",
+            "label": "Medication review",
+            "documented": true
+          },
+          {
+            "domain": "vaccinations",
+            "label": "Vaccinations",
+            "documented": true
+          },
+          {
+            "domain": "self-management",
+            "label": "Self-management",
+            "documented": true
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-DOMAIN-01-FUNCTIONAL",
+            "domain": "functional-status",
+            "category": "domain-documentation",
+            "description": "NYHA functional class recorded"
+          },
+          {
+            "id": "R-DOMAIN-02-FLUID",
+            "domain": "fluid-status",
+            "category": "domain-documentation",
+            "description": "Weight or a fluid-status sign (oedema / JVP) recorded"
+          },
+          {
+            "id": "R-DOMAIN-03-BLOODS",
+            "domain": "monitoring-bloods",
+            "category": "domain-documentation",
+            "description": "Potassium and eGFR recorded"
+          },
+          {
+            "id": "R-DOMAIN-04-MEDICATION",
+            "domain": "medication-review",
+            "category": "domain-documentation",
+            "description": "All four medication pillars have a recorded status"
+          },
+          {
+            "id": "R-DOMAIN-05-VACCINATIONS",
+            "domain": "vaccinations",
+            "category": "domain-documentation",
+            "description": "Influenza vaccination status recorded"
+          },
+          {
+            "id": "R-DOMAIN-06-SELF-MANAGEMENT",
+            "domain": "self-management",
+            "category": "domain-documentation",
+            "description": "Self-management plan status recorded"
+          },
+          {
+            "id": "R-FUNCTIONAL-STATUS-01",
+            "domain": "functional-status",
+            "category": "classification",
+            "description": "NYHA functional status derived: advanced"
+          },
+          {
+            "id": "R-OPTIMISATION-01",
+            "domain": "medication-optimisation",
+            "category": "classification",
+            "description": "Medication-optimisation status: not-applicable (0 of 0 indicated pillars prescribed)"
+          },
+          {
+            "id": "R-COMPLETENESS-01",
+            "domain": "completeness",
+            "category": "completeness",
+            "description": "Review complete: 6 of 6 domains documented (100%)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-URGENT-REVIEW-001",
+            "category": "urgent-review",
+            "priority": "high",
+            "description": "Documented decompensation since the last review: arrange prompt clinical review",
+            "suggestedAction": "Arrange urgent clinical review; consider referral to the heart-failure specialist team and check for reversible precipitants."
+          },
+          {
+            "id": "F-FLUID-OVERLOAD-001",
+            "category": "fluid-overload",
+            "priority": "high",
+            "description": "Signs of fluid overload: weight gain 4 kg, severe peripheral oedema, raised JVP",
+            "suggestedAction": "Assess volume status; consider up-titrating the loop diuretic, reinforcing fluid / salt advice and daily weights, and arranging review."
+          }
+        ]
+      }
     }
   ]
 }

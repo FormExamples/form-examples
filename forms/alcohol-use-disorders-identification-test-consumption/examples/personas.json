@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateAuditcGrade",
-  "note": "Realistic filled-in states in the AUDIT-C scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.auditcScore"
+  ],
+  "note": "Realistic filled-in states in the AUDIT-C scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.auditcScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.auditcScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "lower-risk",
@@ -64,7 +69,8 @@
             "category": "total-band",
             "description": "AUDIT-C 1 of 12 — below the positive-screen cut of 5 (lower risk)"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -127,6 +133,15 @@
             "points": 0,
             "category": "total-band",
             "description": "AUDIT-C 6 of 12 (>= 5) — positive screen (increasing)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-BRIEF-INTERVENTION-001",
+            "category": "brief-intervention",
+            "priority": "high",
+            "description": "Positive AUDIT-C screen (score 6 of 12, >= 5) — increasing- or higher-risk drinking",
+            "suggestedAction": "Deliver a brief structured intervention on reducing consumption and complete the full 10-item AUDIT to characterise risk."
           }
         ]
       }
@@ -191,6 +206,36 @@
             "points": 0,
             "category": "total-band",
             "description": "AUDIT-C 11 of 12 (>= 5) — positive screen (possible-dependence)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-BRIEF-INTERVENTION-001",
+            "category": "brief-intervention",
+            "priority": "high",
+            "description": "Positive AUDIT-C screen (score 11 of 12, >= 5) — increasing- or higher-risk drinking",
+            "suggestedAction": "Deliver a brief structured intervention on reducing consumption and complete the full 10-item AUDIT to characterise risk."
+          },
+          {
+            "id": "F-ESCALATE-FULL-AUDIT-001",
+            "category": "escalate-full-audit",
+            "priority": "high",
+            "description": "Higher-risk consumption (AUDIT-C 11 of 12, >= 8) — high-consumption pattern",
+            "suggestedAction": "Complete the full 10-item AUDIT now and offer an extended brief intervention; a full-AUDIT score >= 8 indicates harmful or hazardous drinking."
+          },
+          {
+            "id": "F-DEPENDENCE-INDICATORS-001",
+            "category": "dependence-indicators",
+            "priority": "high",
+            "description": "Very high AUDIT-C (score 11 of 12, >= 11) — possible alcohol dependence",
+            "suggestedAction": "Complete the full AUDIT; a full-AUDIT score >= 20 or clinical features of dependence warrant referral to specialist alcohol services."
+          },
+          {
+            "id": "F-HIGH-CONSUMPTION-001",
+            "category": "high-consumption",
+            "priority": "medium",
+            "description": "Heavy episodic (binge) drinking at least weekly (Q3 point >= 3) — single-session harm pattern",
+            "suggestedAction": "Advise specifically on the harms of heavy single-session drinking regardless of the total score."
           }
         ]
       }

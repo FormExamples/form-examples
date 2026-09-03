@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "validateIPS",
-  "note": "Realistic filled-in states in the IPS validator's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `graderHint` is set explicitly because `bin/test-engines` auto-discovers `classifyCompleteness`, which takes a *counts* object, not the assessment — it only 'passed' on the empty assessment because every property read came back undefined and `undefined < undefined` is false, yielding 'complete'; the real entry point is `validateIPS`. Grading: all 8 mandatory sections populated AND both optional sections populated -> complete; all 8 mandatory but an optional missing -> partial; any mandatory missing -> incomplete. `firedRules` always lists all ten IPS-00x sections with status ok / empty / optional. The separate `detectAdditionalFlags` module is not covered by `expected`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the IPS validator's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `graderHint` is set explicitly because `bin/test-engines` auto-discovers `classifyCompleteness`, which takes a *counts* object, not the assessment — it only 'passed' on the empty assessment because every property read came back undefined and `undefined < undefined` is false, yielding 'complete'; the real entry point is `validateIPS`. Grading: all 8 mandatory sections populated AND both optional sections populated -> complete; all 8 mandatory but an optional missing -> partial; any mandatory missing -> incomplete. `firedRules` always lists all ten IPS-00x sections with status ok / empty / optional. The separate `detectAdditionalFlags` module is not covered by `expected`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "complete-all-ten-sections-populated",
@@ -187,6 +191,14 @@
             "status": "ok",
             "mandatory": false
           }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DEVICE-001",
+            "category": "Medical Devices",
+            "message": "1 medical device(s)/implant(s) recorded — relevant for imaging and surgery.",
+            "priority": "medium"
+          }
         ]
       }
     },
@@ -350,6 +362,14 @@
             "status": "optional",
             "mandatory": false
           }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CONSENT-002",
+            "category": "Consent",
+            "message": "Cross-border sharing consent not recorded.",
+            "priority": "medium"
+          }
         ]
       }
     },
@@ -512,6 +532,44 @@
             "description": "Advance directives or cross-border consent recorded (optional).",
             "status": "ok",
             "mandatory": false
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CONSENT-001",
+            "category": "Consent",
+            "message": "Patient has NOT consented to cross-border IPS sharing — do not export.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AUTH-002",
+            "category": "Authoring",
+            "message": "Authoring status not set — IPS is unsigned.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PT-003",
+            "category": "Patient Demographics",
+            "message": "No national identifier recorded — recommended for cross-border matching.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PT-005",
+            "category": "Patient Demographics",
+            "message": "Preferred language not recorded — affects cross-border communication.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-DQ-MED-0",
+            "category": "Data Quality",
+            "message": "Medication \"Salbutamol inhaler\" missing dose information.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-DQ-PROB-0",
+            "category": "Data Quality",
+            "message": "Problem \"Asthma\" missing ICD-10 code.",
+            "priority": "low"
           }
         ]
       }

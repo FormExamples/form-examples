@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the COPD annual-review grading engine's shape. The engine derives four independent outputs (GOLD 1-4 airflow grade, ABE assessment group, symptom axis, exacerbation axis) plus a review-completeness status. All three personas are complete reviews spanning ABE group A to E. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the COPD annual-review grading engine's shape. The engine derives four independent outputs (GOLD 1-4 airflow grade, ABE assessment group, symptom axis, exacerbation axis) plus a review-completeness status. All three personas are complete reviews spanning ABE group A to E. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "well-controlled-group-a",
@@ -108,7 +113,8 @@
             "category": "review-status",
             "description": "All core and supporting review elements recorded — review is complete"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -215,6 +221,22 @@
             "section": "completeness",
             "category": "review-status",
             "description": "All core and supporting review elements recorded — review is complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SMOKING-CESSATION-001",
+            "category": "smoking-cessation",
+            "priority": "high",
+            "description": "Patient is a current smoker — the single most effective intervention in COPD is smoking cessation",
+            "suggestedAction": "Offer very-brief advice and refer to stop-smoking support with pharmacotherapy (e.g. NRT, varenicline)."
+          },
+          {
+            "id": "F-MISSING-VACCINATIONS-001",
+            "category": "missing-vaccinations",
+            "priority": "medium",
+            "description": "Vaccination(s) not up to date: COVID-19",
+            "suggestedAction": "Offer or recall the outstanding vaccination(s); record declines with the reason."
           }
         ]
       }
@@ -323,6 +345,43 @@
             "section": "completeness",
             "category": "review-status",
             "description": "All core and supporting review elements recorded — review is complete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ESCALATE-THERAPY-001",
+            "category": "escalate-therapy",
+            "priority": "high",
+            "description": "High exacerbation risk (ABE group E: 3 moderate exacerbation(s), 2 hospitalised exacerbation(s)) in the past 12 months",
+            "suggestedAction": "Review maintenance inhaled therapy and consider escalation (e.g. LABA+LAMA, or add ICS per phenotype); reinforce the self-management / rescue-pack plan."
+          },
+          {
+            "id": "F-SMOKING-CESSATION-001",
+            "category": "smoking-cessation",
+            "priority": "high",
+            "description": "Patient is a current smoker — the single most effective intervention in COPD is smoking cessation",
+            "suggestedAction": "Offer very-brief advice and refer to stop-smoking support with pharmacotherapy (e.g. NRT, varenicline)."
+          },
+          {
+            "id": "F-POOR-INHALER-TECHNIQUE-001",
+            "category": "poor-inhaler-technique",
+            "priority": "high",
+            "description": "Inhaler technique assessed as not adequate — poor technique undermines inhaled-therapy effectiveness",
+            "suggestedAction": "Re-educate on device technique, re-assess, and consider a device better suited to the patient."
+          },
+          {
+            "id": "F-MISSING-VACCINATIONS-001",
+            "category": "missing-vaccinations",
+            "priority": "medium",
+            "description": "Vaccination(s) not up to date: influenza, pneumococcal, COVID-19",
+            "suggestedAction": "Offer or recall the outstanding vaccination(s); record declines with the reason."
+          },
+          {
+            "id": "F-PULMONARY-REHAB-001",
+            "category": "pulmonary-rehab",
+            "priority": "medium",
+            "description": "MRC dyspnoea grade 4 (≥ 3) without a completed or in-progress pulmonary-rehabilitation referral",
+            "suggestedAction": "Refer for pulmonary rehabilitation — it improves exercise capacity, symptoms, and quality of life."
           }
         ]
       }

@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateHasBledGrade",
-  "note": "Realistic filled-in states in the HAS-BLED Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.totalScore"
+  ],
+  "note": "Realistic filled-in states in the HAS-BLED Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.totalScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.totalScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -65,7 +70,8 @@
             "category": "risk-band",
             "description": "HAS-BLED 0 — low estimated bleeding risk; low risk band"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -143,6 +149,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "HAS-BLED 1-2 — moderate estimated bleeding risk; moderate risk band"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MODIFIABLE-HYPERTENSION-001",
+            "category": "modifiable-hypertension",
+            "priority": "medium",
+            "description": "Uncontrolled hypertension (systolic blood pressure > 160 mmHg) — a correctable bleeding-risk factor",
+            "suggestedAction": "Optimise blood-pressure control to reduce bleeding risk and re-score."
           }
         ]
       }
@@ -271,6 +286,43 @@
             "points": 0,
             "category": "risk-band",
             "description": "HAS-BLED >= 3 — higher estimated risk of major bleeding; high risk band"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-BLEEDING-RISK-001",
+            "category": "high-bleeding-risk",
+            "priority": "high",
+            "description": "HAS-BLED score 9 of 9 (>= 3) — higher estimated risk of major bleeding",
+            "suggestedAction": "Not a contraindication to anticoagulation: exercise caution, review more frequently, correct modifiable factors, and weigh against the CHA2DS2-VASc stroke risk."
+          },
+          {
+            "id": "F-MODIFIABLE-HYPERTENSION-001",
+            "category": "modifiable-hypertension",
+            "priority": "medium",
+            "description": "Uncontrolled hypertension (systolic blood pressure > 160 mmHg) — a correctable bleeding-risk factor",
+            "suggestedAction": "Optimise blood-pressure control to reduce bleeding risk and re-score."
+          },
+          {
+            "id": "F-MODIFIABLE-LABILE-INR-001",
+            "category": "modifiable-labile-inr",
+            "priority": "medium",
+            "description": "Labile INR (unstable/high INR, or time in therapeutic range < 60%) — a correctable bleeding-risk factor",
+            "suggestedAction": "Improve INR stability, review warfarin control, or consider a DOAC where appropriate."
+          },
+          {
+            "id": "F-MODIFIABLE-DRUGS-001",
+            "category": "modifiable-drugs",
+            "priority": "medium",
+            "description": "Concomitant antiplatelet agents or NSAIDs — a correctable bleeding-risk factor",
+            "suggestedAction": "Review the need for concomitant antiplatelets or NSAIDs and stop where not essential."
+          },
+          {
+            "id": "F-MODIFIABLE-ALCOHOL-001",
+            "category": "modifiable-alcohol",
+            "priority": "medium",
+            "description": "Alcohol 12 units per week (>= 8) — a correctable bleeding-risk factor",
+            "suggestedAction": "Offer alcohol-reduction advice and support to lower bleeding risk."
           }
         ]
       }

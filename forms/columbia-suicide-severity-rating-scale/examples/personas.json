@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCssrsGrade",
-  "note": "Realistic filled-in states in the C-SSRS classification engine's shape. C-SSRS is an ordinal + categorical status classifier (Low / Moderate / High risk tier), not a summed score. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the C-SSRS classification engine's shape. C-SSRS is an ordinal + categorical status classifier (Low / Moderate / High risk tier), not a summed score. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-passive-ideation",
@@ -79,7 +84,8 @@
             "category": "risk-tier",
             "description": "Low risk tier — ideation level 1 with no suicidal behaviour"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -171,6 +177,15 @@
             "level": 0,
             "category": "risk-tier",
             "description": "Moderate risk tier — ideation level 3"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SAFETY-PLAN-NEEDED-001",
+            "category": "safety-plan-needed",
+            "priority": "medium",
+            "description": "Moderate or high risk — a collaborative safety plan should be completed.",
+            "suggestedAction": "Complete a safety plan covering warning signs, coping strategies, supports, means restriction, and crisis contacts."
           }
         ]
       }
@@ -299,6 +314,57 @@
             "level": 0,
             "category": "risk-tier",
             "description": "High risk tier — ideation level 5, recent suicidal behaviour, high-lethality attempt"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-CRISIS-RESPONSE-001",
+            "category": "immediate-safety-crisis-response",
+            "priority": "high",
+            "description": "High-risk screen — urgent psychiatric or crisis-service response indicated.",
+            "suggestedAction": "Do not leave the person alone. Ensure immediate safety, restrict access to lethal means, and arrange an emergency mental-health evaluation per local protocol."
+          },
+          {
+            "id": "F-ACTIVE-PLAN-INTENT-001",
+            "category": "active-plan-and-intent",
+            "priority": "high",
+            "description": "Active suicidal ideation with a specific plan and intent to act (ideation level 5).",
+            "suggestedAction": "Treat as an acute risk. Ensure constant observation and immediate specialist review."
+          },
+          {
+            "id": "F-RECENT-ATTEMPT-001",
+            "category": "recent-attempt",
+            "priority": "high",
+            "description": "An actual suicide attempt within the past 3 months — a strong predictor of further attempts.",
+            "suggestedAction": "Arrange urgent psychiatric assessment; review means access and precipitating factors."
+          },
+          {
+            "id": "F-HIGH-LETHALITY-001",
+            "category": "high-lethality-attempt",
+            "priority": "high",
+            "description": "High-lethality attempt — actual lethality 4 (significant medical damage).",
+            "suggestedAction": "Ensure medical stabilisation and urgent specialist psychiatric evaluation; escalate per local protocol."
+          },
+          {
+            "id": "F-ACCESS-TO-MEANS-001",
+            "category": "access-to-means",
+            "priority": "high",
+            "description": "The person has access to lethal means — a modifiable, high-impact risk factor.",
+            "suggestedAction": "Undertake means-restriction counselling; remove or secure access to lethal means with the person and their carers."
+          },
+          {
+            "id": "F-SAFETY-PLAN-NEEDED-001",
+            "category": "safety-plan-needed",
+            "priority": "medium",
+            "description": "Moderate or high risk — a collaborative safety plan should be completed.",
+            "suggestedAction": "Complete a safety plan covering warning signs, coping strategies, supports, means restriction, and crisis contacts."
+          },
+          {
+            "id": "F-PREPARATORY-ACTS-001",
+            "category": "preparatory-acts",
+            "priority": "medium",
+            "description": "Preparatory acts or behaviour recorded within the past 3 months (e.g. acquiring means or writing a note).",
+            "suggestedAction": "Explore intent and means; raise the level of monitoring and review the safety plan."
           }
         ]
       }

@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateEndoGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall severity (mild / moderate / severe / critical) is driven by the worst fired-rule grade and derived ASRM stage.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Overall severity (mild / moderate / severe / critical) is driven by the worst fired-rule grade and derived ASRM stage. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "minimal-mild",
@@ -165,7 +169,8 @@
             "description": "Cyclical bloating",
             "grade": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -348,7 +353,8 @@
             "description": "Endometrioma documented",
             "grade": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -680,6 +686,92 @@
             "category": "Quality of Life",
             "description": "Severe sleep impact",
             "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BOWEL-001",
+            "category": "Gastrointestinal",
+            "message": "Bowel obstruction symptoms reported - URGENT SURGICAL REVIEW REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-001",
+            "category": "Pain",
+            "message": "Severe pelvic pain (VAS 9/10) - pain management review recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-002",
+            "category": "Pain",
+            "message": "Constant (non-cyclical) pelvic pain - consider chronic pain management",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FERT-001",
+            "category": "Fertility",
+            "message": "Infertility (24 months) - fertility clinic referral recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FERT-002",
+            "category": "Fertility",
+            "message": "Low AMH (3.2 pmol/L) - diminished ovarian reserve",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TX-001",
+            "category": "Treatment",
+            "message": "Current opioid use for endometriosis pain - opioid review recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-QOL-001",
+            "category": "Quality of Life",
+            "message": "Patient unable to work due to endometriosis - MDT review recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BOWEL-002",
+            "category": "Gastrointestinal",
+            "message": "Cyclical rectal bleeding - bowel endometriosis suspected, consider MRI",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-URIN-002",
+            "category": "Urinary",
+            "message": "Cyclical haematuria - bladder endometriosis suspected, consider cystoscopy",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAIN-003",
+            "category": "Pain",
+            "message": "Deep dyspareunia reported - consider pouch of Douglas / uterosacral ligament involvement",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FERT-003",
+            "category": "Fertility",
+            "message": "History of ectopic pregnancy (1) - tubal assessment recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SURG-001",
+            "category": "Surgical",
+            "message": "Previous bowel surgery for endometriosis - colorectal MDT if repeat surgery planned",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SURG-002",
+            "category": "Surgical",
+            "message": "Multiple previous laparoscopies (3) - consider tertiary referral",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-QOL-002",
+            "category": "Quality of Life",
+            "message": "Severe mental health impact - psychology/counselling referral recommended",
+            "priority": "medium"
           }
         ]
       }

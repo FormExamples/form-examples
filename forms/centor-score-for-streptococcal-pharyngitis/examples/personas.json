@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCentorGrade",
-  "note": "Realistic filled-in states in the Centor / McIsaac scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.mcIsaacScore"
+  ],
+  "note": "Realistic filled-in states in the Centor / McIsaac scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.mcIsaacScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.mcIsaacScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-viral",
@@ -65,6 +70,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "McIsaac ≤ 1 — low probability of streptococcal pharyngitis"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ANTIMICROBIAL-STEWARDSHIP-001",
+            "category": "antimicrobial-stewardship",
+            "priority": "low",
+            "description": "Low modified McIsaac score (-1) — low probability of streptococcal infection",
+            "suggestedAction": "Avoid a throat swab and antibiotics; give self-care and safety-netting advice, as most sore throats are viral and self-limiting."
           }
         ]
       }
@@ -145,6 +159,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "McIsaac 2–3 — moderate probability of streptococcal pharyngitis"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-TESTING-CONSIDERATION-001",
+            "category": "testing-consideration",
+            "priority": "medium",
+            "description": "Moderate modified McIsaac score (2) — intermediate probability of streptococcal infection",
+            "suggestedAction": "Consider a rapid antigen detection test (RADT) or throat swab; treat with antibiotics only if positive or clinically indicated."
           }
         ]
       }
@@ -239,6 +262,15 @@
             "points": 0,
             "category": "risk-band",
             "description": "McIsaac 4–5 — high probability of streptococcal pharyngitis"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ANTIBIOTIC-CONSIDERATION-001",
+            "category": "antibiotic-consideration",
+            "priority": "high",
+            "description": "High modified McIsaac score (5) — high probability of streptococcal infection",
+            "suggestedAction": "Consider a rapid antigen detection test (RADT) or throat swab, or empirical antibiotics under antimicrobial-stewardship principles (e.g. phenoxymethylpenicillin per local policy), with safety-netting."
           }
         ]
       }

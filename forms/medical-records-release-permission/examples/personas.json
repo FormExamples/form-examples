@@ -1,11 +1,15 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "validateForm",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Two independent axes: completeness (required fields present) and validation (format/logic issues) \u2014 a form can be complete and still have issues, or incomplete with zero issues. Correction: firedRules mixes missing-required-field entries with format/logic error entries, so validationStatus is not purely independent of completeness \u2014 a form with missing required fields will show validation issues too.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Two independent axes: completeness (required fields present) and validation (format/logic issues) — a form can be complete and still have issues, or incomplete with zero issues. Correction: firedRules mixes missing-required-field entries with format/logic error entries, so validationStatus is not purely independent of completeness — a form with missing required fields will show validation issues too. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "complete-and-valid",
-      "description": "Every required field present with well-formed emails and a valid date range \u2014 expect Complete / Valid, zero fired rules.",
+      "description": "Every required field present with well-formed emails and a valid date range — expect Complete / Valid, zero fired rules.",
       "state": {
         "patientInformation": {
           "firstName": "Grace",
@@ -74,12 +78,38 @@
         "validationStatusLabel": "Valid",
         "firedRules": [],
         "completedFields": 16,
-        "totalFields": 16
+        "totalFields": 16,
+        "additionalFlags": [
+          {
+            "id": "FLAG-SENSITIVE-002",
+            "category": "Sensitive Records",
+            "message": "HIV-related records will be included in the release - ensure explicit patient consent under applicable law",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-003",
+            "category": "Sensitive Records",
+            "message": "STI-related records will be included in the release - ensure explicit patient consent under applicable law",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-004",
+            "category": "Sensitive Records",
+            "message": "Genetic information will be included - ensure compliance with genetic information non-discrimination regulations",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-005",
+            "category": "Sensitive Records",
+            "message": "Substance abuse treatment records will be included - additional patient consent may be required",
+            "priority": "medium"
+          }
+        ]
       }
     },
     {
       "name": "nearly-complete-minor-issues",
-      "description": "Three required fields never completed (patient signature, its date, and the data-protection acknowledgement) \u2014 expect Nearly Complete on completeness (81%). Missing required fields populate the SAME firedRules list format errors do, so validationStatus also degrades to Minor Issues here: the two labels are computed from overlapping data, not fully independent axes (corrected after the first --update showed this).",
+      "description": "Three required fields never completed (patient signature, its date, and the data-protection acknowledgement) — expect Nearly Complete on completeness (81%). Missing required fields populate the SAME firedRules list format errors do, so validationStatus also degrades to Minor Issues here: the two labels are computed from overlapping data, not fully independent axes (corrected after the first --update showed this).",
       "state": {
         "patientInformation": {
           "firstName": "Walter",
@@ -167,12 +197,50 @@
           }
         ],
         "completedFields": 13,
-        "totalFields": 16
+        "totalFields": 16,
+        "additionalFlags": [
+          {
+            "id": "FLAG-RIGHTS-002",
+            "category": "Missing Acknowledgement",
+            "message": "Patient has not acknowledged data protection rights",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SIG-001",
+            "category": "Missing Signature",
+            "message": "Patient signature has not been confirmed - form is not legally binding",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SENSITIVE-002",
+            "category": "Sensitive Records",
+            "message": "HIV-related records will be included in the release - ensure explicit patient consent under applicable law",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-003",
+            "category": "Sensitive Records",
+            "message": "STI-related records will be included in the release - ensure explicit patient consent under applicable law",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-004",
+            "category": "Sensitive Records",
+            "message": "Genetic information will be included - ensure compliance with genetic information non-discrimination regulations",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-005",
+            "category": "Sensitive Records",
+            "message": "Substance abuse treatment records will be included - additional patient consent may be required",
+            "priority": "medium"
+          }
+        ]
       }
     },
     {
       "name": "complete-but-minor-issues",
-      "description": "Every required field present, but both email addresses are malformed and the authorisation end date precedes its start date \u2014 expect Complete completeness with Minor Issues validation (3 fired format/logic rules), demonstrating the axes can diverge the other way.",
+      "description": "Every required field present, but both email addresses are malformed and the authorisation end date precedes its start date — expect Complete completeness with Minor Issues validation (3 fired format/logic rules), demonstrating the axes can diverge the other way.",
       "state": {
         "patientInformation": {
           "firstName": "Priya",
@@ -260,7 +328,39 @@
           }
         ],
         "completedFields": 16,
-        "totalFields": 16
+        "totalFields": 16,
+        "additionalFlags": [
+          {
+            "id": "FLAG-EXPIRED-001",
+            "category": "Expired Authorization",
+            "message": "Authorization end date (2026-09-01) has passed - form may no longer be valid",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SENSITIVE-002",
+            "category": "Sensitive Records",
+            "message": "HIV-related records will be included in the release - ensure explicit patient consent under applicable law",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-003",
+            "category": "Sensitive Records",
+            "message": "STI-related records will be included in the release - ensure explicit patient consent under applicable law",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-004",
+            "category": "Sensitive Records",
+            "message": "Genetic information will be included - ensure compliance with genetic information non-discrimination regulations",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SENSITIVE-005",
+            "category": "Sensitive Records",
+            "message": "Substance abuse treatment records will be included - additional patient consent may be required",
+            "priority": "medium"
+          }
+        ]
       }
     }
   ]

@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeOET",
-  "note": "Realistic filled-in states in the OET speaking grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the OET speaking grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "grade-a-excellent",
@@ -199,7 +204,8 @@
             "description": "Information-giving",
             "score": 3
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -397,6 +403,50 @@
             "category": "Clinical Communication",
             "description": "Information-giving",
             "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-GRADE-002",
+            "category": "Overall Grade",
+            "message": "Grade C (256/500) — below typical clinical registration threshold (Grade B); targeted preparation recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LING-FLU-001",
+            "category": "Fluency",
+            "message": "Fluency rated 3/6 in at least one role-play — hesitation likely to disrupt the consultation flow.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-understandingPatientPerspective-1",
+            "category": "Clinical Communication",
+            "message": "Understanding patient’s perspective rated 1/3 — only partially demonstrated; targeted coaching recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-providingStructure-1",
+            "category": "Clinical Communication",
+            "message": "Providing structure rated 1/3 — only partially demonstrated; targeted coaching recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-informationGathering-1",
+            "category": "Clinical Communication",
+            "message": "Information-gathering rated 1/3 — only partially demonstrated; targeted coaching recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-informationGiving-1",
+            "category": "Clinical Communication",
+            "message": "Information-giving rated 1/3 — only partially demonstrated; targeted coaching recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-relationshipBuilding-2",
+            "category": "Clinical Communication",
+            "message": "Relationship-building rated 2/3 — satisfactory with room to improve.",
+            "priority": "low"
           }
         ]
       }
@@ -596,6 +646,68 @@
             "category": "Clinical Communication",
             "description": "Information-giving",
             "score": 0
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-GRADE-001",
+            "category": "Overall Grade",
+            "message": "Grade E (51/500) — well below typical clinical registration threshold; remediation required before clinical practice.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LING-INT-001",
+            "category": "Intelligibility",
+            "message": "Intelligibility rated 1/6 in at least one role-play — patient comprehension at risk; intelligibility is a clinical-safety concern.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LING-FLU-001",
+            "category": "Fluency",
+            "message": "Fluency rated 1/6 in at least one role-play — hesitation likely to disrupt the consultation flow.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LING-APP-001",
+            "category": "Appropriateness of Language",
+            "message": "Appropriateness of Language rated 1/6 — register or jargon unsuitable for patient-facing communication.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LING-GRM-001",
+            "category": "Resources of Grammar & Expression",
+            "message": "Grammar & Expression rated 1/6 — limited range may compromise the precision of clinical questions.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-relationshipBuilding-0",
+            "category": "Clinical Communication",
+            "message": "Relationship-building rated 0/3 — indicator not demonstrated.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-understandingPatientPerspective-0",
+            "category": "Clinical Communication",
+            "message": "Understanding patient’s perspective rated 0/3 — indicator not demonstrated.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-providingStructure-0",
+            "category": "Clinical Communication",
+            "message": "Providing structure rated 0/3 — indicator not demonstrated.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-informationGathering-0",
+            "category": "Clinical Communication",
+            "message": "Information-gathering rated 0/3 — indicator not demonstrated.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CLIN-informationGiving-0",
+            "category": "Clinical Communication",
+            "message": "Information-giving rated 0/3 — indicator not demonstrated.",
+            "priority": "medium"
           }
         ]
       }

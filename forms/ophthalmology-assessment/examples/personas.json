@@ -1,6 +1,11 @@
 {
   "engine": "front-end-with-html",
-  "note": "Realistic filled-in states in the ophthalmology visual-acuity grader's shape (worst grade across VA, IOP, and structural findings). `expected` is computed by `bin/test-personas --update`.",
+  "graderHint": "calculateVisualAcuityGrade",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the ophthalmology visual-acuity grader's shape (worst grade across VA, IOP, and structural findings). `expected` is computed by `bin/test-personas --update`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-acuity",
@@ -123,7 +128,8 @@
       },
       "expected": {
         "vaGrade": "normal",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -254,7 +260,8 @@
             "description": "Moderate visual impairment (best corrected VA 6/18 to 6/60)",
             "grade": "moderate"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -385,7 +392,8 @@
             "description": "Blindness (best corrected VA worse than 3/60)",
             "grade": "blindness"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     }
   ]

@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCageGrade",
-  "note": "Realistic filled-in states in the CAGE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.cageScore"
+  ],
+  "note": "Realistic filled-in states in the CAGE scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.cageScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.cageScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "screen-negative",
@@ -43,7 +48,8 @@
             "category": "total-band",
             "description": "CAGE 0 of 4 — no positive items"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -99,6 +105,15 @@
             "points": 0,
             "category": "total-band",
             "description": "CAGE 2 of 4 (>= 2) — positive screen"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-POSITIVE-SCREEN-001",
+            "category": "positive-screen",
+            "priority": "high",
+            "description": "Positive CAGE screen (score 2 of 4) — clinically significant, suggesting problematic use or dependence",
+            "suggestedAction": "Undertake a fuller assessment of consumption, dependence, and harm, and consider a brief intervention or referral."
           }
         ]
       }
@@ -170,6 +185,22 @@
             "points": 0,
             "category": "total-band",
             "description": "CAGE 4 of 4 (>= 2) — positive screen"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-POSITIVE-SCREEN-001",
+            "category": "positive-screen",
+            "priority": "high",
+            "description": "Positive CAGE screen (score 4 of 4) — clinically significant, suggesting problematic use or dependence",
+            "suggestedAction": "Undertake a fuller assessment of consumption, dependence, and harm, and consider a brief intervention or referral."
+          },
+          {
+            "id": "F-EYE-OPENER-DEPENDENCE-001",
+            "category": "eye-opener-dependence-marker",
+            "priority": "high",
+            "description": "Morning drinking to steady nerves or relieve a hangover (eye-opener) — a marker of physical dependence",
+            "suggestedAction": "Attend to this even when the total is below 2: assess for withdrawal and physical dependence."
           }
         ]
       }

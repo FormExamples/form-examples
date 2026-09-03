@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "validateForm",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. validateForm is the completeness oracle only; the separate detectAdditionalFlags engine (understanding gaps, anaesthesia-risk flags, high-risk procedure, missing consent) is app-level and outside this oracle.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. validateForm is the completeness oracle only; the separate detectAdditionalFlags engine (understanding gaps, anaesthesia-risk flags, high-risk procedure, missing consent) is app-level and outside this oracle. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "complete-all-26-required",
@@ -76,7 +80,8 @@
       "expected": {
         "completeness": 100,
         "status": "Complete",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -189,7 +194,8 @@
             "description": "Scheduled date is required",
             "field": "scheduledDate"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -278,7 +284,8 @@
             "description": "Witness role is required",
             "field": "witnessRole"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     }
   ]

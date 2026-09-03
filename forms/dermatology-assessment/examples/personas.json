@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateDLQI",
-  "note": "Realistic filled-in states in the DLQI scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The graderHint pins the DLQI severity engine (the auto-picked grader is the unrelated Fitzpatrick UV-risk helper).",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the DLQI scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. The graderHint pins the DLQI severity engine (the auto-picked grader is the unrelated Fitzpatrick UV-risk helper). Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "small-effect",
@@ -141,6 +145,14 @@
             "domain": "Treatment",
             "description": "Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?",
             "score": 0
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SIZE-001",
+            "category": "Lesion Concern",
+            "message": "Lesion >6mm (20mm) - exceeds safe threshold for pigmented lesions.",
+            "priority": "medium"
           }
         ]
       }
@@ -284,6 +296,20 @@
             "description": "Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?",
             "score": 1
           }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CHANGE-001",
+            "category": "Rapidly Changing Lesion",
+            "message": "Lesion reported as worsening - monitor closely for malignant transformation.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SIZE-001",
+            "category": "Lesion Concern",
+            "message": "Lesion >6mm (50mm) - exceeds safe threshold for pigmented lesions.",
+            "priority": "medium"
+          }
         ]
       }
     },
@@ -425,6 +451,26 @@
             "domain": "Treatment",
             "description": "Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CHANGE-001",
+            "category": "Rapidly Changing Lesion",
+            "message": "Lesion reported as worsening - monitor closely for malignant transformation.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AUTOIMMUNE-001",
+            "category": "Autoimmune Disease",
+            "message": "Autoimmune disease present: Psoriatic arthritis - consider systemic involvement.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SIZE-001",
+            "category": "Lesion Concern",
+            "message": "Lesion >6mm (120mm) - exceeds safe threshold for pigmented lesions.",
+            "priority": "medium"
           }
         ]
       }

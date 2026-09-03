@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeSAD",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "no-sad",
@@ -204,7 +209,8 @@
             "description": "Thoughts that you would be better off dead, or of hurting yourself in some way",
             "score": 0
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -407,6 +413,14 @@
             "category": "PHQ-9 • Self-Harm",
             "description": "Thoughts that you would be better off dead, or of hurting yourself in some way",
             "score": 0
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CARE-001",
+            "category": "Treatment",
+            "message": "No current treatment despite moderate-or-greater severity — consider initiating evidence-based therapy.",
+            "priority": "medium"
           }
         ]
       }
@@ -611,6 +625,32 @@
             "category": "PHQ-9 • Self-Harm",
             "description": "Thoughts that you would be better off dead, or of hurting yourself in some way",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-RISK-001",
+            "category": "Risk Assessment",
+            "message": "Active suicidal ideation reported — immediate clinical review and safety planning required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PHQ9-Q9",
+            "category": "PHQ-9 Item 9",
+            "message": "PHQ-9 item 9 (self-harm thoughts) scored 2/3 — requires direct clinician follow-up.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PHQ9-SEVERE",
+            "category": "PHQ-9 Severity",
+            "message": "PHQ-9 total 22/27 — severe depression; consider urgent treatment intensification.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CARE-001",
+            "category": "Treatment",
+            "message": "No current treatment despite moderate-or-greater severity — consider initiating evidence-based therapy.",
+            "priority": "medium"
           }
         ]
       }

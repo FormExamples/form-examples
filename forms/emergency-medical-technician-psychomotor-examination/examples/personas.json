@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradePsychomotor",
-  "note": "Realistic filled-in states in the NREMT psychomotor scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the NREMT psychomotor scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectAdditionalFlags(state, grading); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "clear-pass",
@@ -458,7 +463,15 @@
           }
         ],
         "answeredCount": 38,
-        "totalRules": 38
+        "totalRules": 38,
+        "additionalFlags": [
+          {
+            "id": "FLAG-NOTE-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with candidate during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -916,7 +929,27 @@
           }
         ],
         "answeredCount": 38,
-        "totalRules": 38
+        "totalRules": 38,
+        "additionalFlags": [
+          {
+            "id": "FLAG-DOMAIN-REASSESSMENT",
+            "category": "Domain weakness — Reassessment",
+            "message": "2 deficiencies clustered in Reassessment; targeted remediation suggested.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MULTI-DEF",
+            "category": "Performance",
+            "message": "5 non-critical deficiencies recorded — overall performance below station standard.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-NOTE-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with candidate during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     },
     {
@@ -1385,7 +1418,21 @@
           }
         ],
         "answeredCount": 38,
-        "totalRules": 38
+        "totalRules": 38,
+        "additionalFlags": [
+          {
+            "id": "FLAG-CRIT-EMT-PS-OXYGEN",
+            "category": "Critical criterion — Primary Survey",
+            "message": "Critical-criterion failure: Provides appropriate oxygen therapy when indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NOTE-EXAMINER",
+            "category": "Debrief",
+            "message": "Examiner notes recorded — review with candidate during debrief.",
+            "priority": "low"
+          }
+        ]
       }
     }
   ]

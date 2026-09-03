@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGcsGrade",
-  "note": "Realistic filled-in states in the Glasgow Coma Scale scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the Glasgow Coma Scale scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "mild-e4v5m6",
@@ -99,7 +104,8 @@
             "category": "gcs-pupils",
             "description": "GCS-Pupils = total 15 − PRS 0 = 15"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -198,7 +204,8 @@
             "category": "gcs-pupils",
             "description": "GCS-Pupils = total 12 − PRS 0 = 12"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -296,6 +303,22 @@
             "points": 3,
             "category": "gcs-pupils",
             "description": "GCS-Pupils = total 4 − PRS 1 = 3"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-AIRWAY-RISK-001",
+            "category": "airway-risk",
+            "priority": "high",
+            "description": "GCS 4 (<= 8) — coma; the patient may be unable to protect the airway",
+            "suggestedAction": "Consider definitive airway management / intubation and senior escalation."
+          },
+          {
+            "id": "F-UNEQUAL-PUPILS-001",
+            "category": "unequal-pupils",
+            "priority": "high",
+            "description": "Asymmetric pupil reactivity (left unreactive, right reactive) — suggests raised intracranial pressure or herniation",
+            "suggestedAction": "Urgent CT head and neurosurgical referral."
           }
         ]
       }

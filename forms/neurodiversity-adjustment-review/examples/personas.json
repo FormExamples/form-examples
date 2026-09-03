@@ -1,5 +1,6 @@
 {
   "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
   "note": "Realistic filled-in states in the neurodiversity adjustment review grader's shape (effectiveness / wellbeing-risk / completeness / next-step). `expected` is computed by `bin/test-personas --update`.",
   "personas": [
     {

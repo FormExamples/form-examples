@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "calculateGrade",
-  "note": "This is a documentation/completeness instrument, not a severity score. `calculateGrade` counts how many of the 18 required components carry a real recorded value (sentinels like not-recorded/not-assessed/'' do not count), derives completenessPercent (0-100), and sets status 'complete' only when every component is recorded AND the Health Action Plan was produced and shared; otherwise 'incomplete'. `calculateGrade` is deterministic (the full `assess` stamps a timestamp). Personas span the completeness range. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "graderHint": "assess",
+  "note": "This is a documentation/completeness instrument, not a severity score. `calculateGrade` counts how many of the 18 required components carry a real recorded value (sentinels like not-recorded/not-assessed/'' do not count), derives completenessPercent (0-100), and sets status 'complete' only when every component is recorded AND the Health Action Plan was produced and shared; otherwise 'incomplete'. `calculateGrade` is deterministic (the full `assess` stamps a timestamp). Personas span the completeness range. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. graderHint re-pinned 2026-09-03 from \"calculateGrade\" to \"assess\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "complete",
@@ -190,7 +190,6 @@
             "completed": true
           }
         ],
-        "completedCount": 18,
         "firedRules": [
           {
             "id": "R-COMPONENT-REASONABLE-ADJUSTMENTS",
@@ -312,7 +311,8 @@
             "category": "health-action-plan",
             "description": "Health Action Plan produced and shared with the person"
           }
-        ]
+        ],
+        "flags": []
       }
     },
     {
@@ -502,7 +502,6 @@
             "completed": false
           }
         ],
-        "completedCount": 8,
         "firedRules": [
           {
             "id": "R-COMPONENT-REASONABLE-ADJUSTMENTS",
@@ -563,6 +562,22 @@
             "component": "health-action-plan",
             "category": "health-action-plan",
             "description": "Health Action Plan not produced and shared — required for a complete check"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-NO-HEALTH-ACTION-PLAN-001",
+            "category": "no-health-action-plan",
+            "priority": "high",
+            "description": "The check recorded findings but no Health Action Plan was produced",
+            "suggestedAction": "Produce a Health Action Plan collating the actions from this check and share a copy the person can keep."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "One or more required components was not completed, or no Health Action Plan was produced — the check is incomplete",
+            "suggestedAction": "Complete the outstanding components and produce the Health Action Plan so the annual health check is whole."
           }
         ]
       }
@@ -754,7 +769,6 @@
             "completed": false
           }
         ],
-        "completedCount": 2,
         "firedRules": [
           {
             "id": "R-COMPONENT-REASONABLE-ADJUSTMENTS",
@@ -779,6 +793,29 @@
             "component": "health-action-plan",
             "category": "health-action-plan",
             "description": "Health Action Plan not produced and shared — required for a complete check"
+          }
+        ],
+        "flags": [
+          {
+            "id": "F-NO-HEALTH-ACTION-PLAN-001",
+            "category": "no-health-action-plan",
+            "priority": "high",
+            "description": "The check recorded findings but no Health Action Plan was produced",
+            "suggestedAction": "Produce a Health Action Plan collating the actions from this check and share a copy the person can keep."
+          },
+          {
+            "id": "F-REASONABLE-ADJUSTMENTS-NOT-RECORDED-001",
+            "category": "reasonable-adjustments-not-recorded",
+            "priority": "medium",
+            "description": "No reasonable adjustments or communication needs captured, contrary to the Accessible Information Standard",
+            "suggestedAction": "Record the person’s communication needs and the reasonable adjustments the practice will make."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "One or more required components was not completed, or no Health Action Plan was produced — the check is incomplete",
+            "suggestedAction": "Complete the outstanding components and produce the Health Action Plan so the annual health check is whole."
           }
         ]
       }

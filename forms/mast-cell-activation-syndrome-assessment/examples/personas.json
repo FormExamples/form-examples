@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateMCASScore",
-  "note": "Realistic filled-in states in the MCAS-assessment scoring engine's shape. Graded on a symptom-burden score summing severity (0-3) across 20 symptoms in 5 organ systems, capped at 40, banded <=10 Minimal, 11-20 Mild, 21-30 Moderate, >30 Severe. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the MCAS-assessment scoring engine's shape. Graded on a symptom-burden score summing severity (0-3) across 20 symptoms in 5 organ systems, capped at 40, banded <=10 Minimal, 11-20 Mild, 21-30 Moderate, >30 Severe. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "minimal",
@@ -164,6 +168,14 @@
             "domain": "Neurological",
             "description": "Fatigue: severity 2/3, frequency daily",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MULTI-001",
+            "category": "Multi-System Involvement",
+            "message": "3 organ systems affected - meets criterion for multi-system mast cell activation",
+            "priority": "medium"
           }
         ]
       }
@@ -365,6 +377,26 @@
             "domain": "Neurological",
             "description": "Fatigue: severity 3/3, frequency daily",
             "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CV-001",
+            "category": "Cardiovascular Instability",
+            "message": "Significant tachycardia reported - monitor for cardiovascular compromise during mast cell episodes",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-GI-001",
+            "category": "Severe GI Involvement",
+            "message": "3 gastrointestinal symptoms at moderate or severe level - consider GI specialist referral",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MULTI-001",
+            "category": "Multi-System Involvement",
+            "message": "5 organ systems affected - meets criterion for multi-system mast cell activation",
+            "priority": "medium"
           }
         ]
       }
@@ -596,6 +628,50 @@
             "domain": "Neurological",
             "description": "Fatigue: severity 3/3, frequency daily",
             "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ANAPHYLAXIS-001",
+            "category": "Anaphylaxis Risk",
+            "message": "History of syncope with hypotension - assess for anaphylaxis risk and ensure emergency action plan",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TRYPTASE-001",
+            "category": "Elevated Tryptase",
+            "message": "Serum tryptase elevated at 18.5 ng/mL (normal <11.4) - consider mastocytosis workup",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CV-001",
+            "category": "Cardiovascular Instability",
+            "message": "Significant tachycardia reported - monitor for cardiovascular compromise during mast cell episodes",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CV-002",
+            "category": "Cardiovascular Instability",
+            "message": "Significant hypotension reported - ensure patient has access to emergency interventions",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RESP-002",
+            "category": "Respiratory Compromise",
+            "message": "Combined wheezing and dyspnea - evaluate for bronchospasm management plan",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-GI-001",
+            "category": "Severe GI Involvement",
+            "message": "4 gastrointestinal symptoms at moderate or severe level - consider GI specialist referral",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MULTI-001",
+            "category": "Multi-System Involvement",
+            "message": "5 organ systems affected - meets criterion for multi-system mast cell activation",
+            "priority": "medium"
           }
         ]
       }

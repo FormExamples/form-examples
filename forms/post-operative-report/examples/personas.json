@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateClavienDindo",
-  "note": "Three hand-authored personas for the Post-Operative Report Clavien-Dindo grader. graderHint is set explicitly because bin/test-engines' discovery heuristic picks gradeOrder (the grade-key -> ordinal helper), not the composite. calculateClavienDindo returns { overallGrade, complicationCount, firedRules } only; detectAdditionalFlags (flagged-issues.js) is a separate export that form-app.js composes at render time, so the vital-sign / blood-loss / ASA / disposition / plan-gap flags are NOT pinned here (Phase 13 'flagsHint' tooling task) - each description records the flags the persona would raise for cross-reference. Engine behaviour: overallGrade is the worst grade across complications whose 'grade' is a recognised key; entries with an empty grade are skipped entirely and do NOT consume a CD-n id slot's value but DO consume its index (ids are CD-<array index + 1>, so a blank entry in the middle leaves a gap in the id sequence); complicationCount counts graded entries only; when nothing is graded the result is grade-0 regardless of complicationsOccurred ('yes' with no graded entries still yields grade-0). Each fired rule's 'category' is the free-text complication description (or '(complication not described)') and its 'description' is the canonical Clavien-Dindo definition text for that grade. No timestamp is returned by this function. Regenerate 'expected' with: bin/test-personas post-operative-report --update",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the Post-Operative Report Clavien-Dindo grader. graderHint is set explicitly because bin/test-engines' discovery heuristic picks gradeOrder (the grade-key -> ordinal helper), not the composite. calculateClavienDindo returns { overallGrade, complicationCount, firedRules } only; detectAdditionalFlags (flagged-issues.js) is a separate export that form-app.js composes at render time, so the vital-sign / blood-loss / ASA / disposition / plan-gap flags are pinned here through flagsHint/flagsArgs (the Phase 13 tooling item, done 2026-09-03) - each description records the flags the persona would raise for cross-reference. Engine behaviour: overallGrade is the worst grade across complications whose 'grade' is a recognised key; entries with an empty grade are skipped entirely and do NOT consume a CD-n id slot's value but DO consume its index (ids are CD-<array index + 1>, so a blank entry in the middle leaves a gap in the id sequence); complicationCount counts graded entries only; when nothing is graded the result is grade-0 regardless of complicationsOccurred ('yes' with no graded entries still yields grade-0). Each fired rule's 'category' is the free-text complication description (or '(complication not described)') and its 'description' is the canonical Clavien-Dindo definition text for that grade. No timestamp is returned by this function. Regenerate 'expected' with: bin/test-personas post-operative-report --update Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "Uncomplicated elective laparoscopic cholecystectomy",
@@ -118,7 +122,8 @@
       "expected": {
         "overallGrade": "grade-0",
         "complicationCount": 0,
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -272,6 +277,20 @@
             "category": "Superficial surgical site infection at extraction incision",
             "description": "Requires pharmacological treatment with drugs other than those allowed for grade I. Blood transfusions and total parenteral nutrition are also included.",
             "grade": "grade-ii"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ASA-III",
+            "category": "Patient Risk",
+            "message": "ASA class III — severe systemic disease; consider enhanced post-op monitoring.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DISP-HDU",
+            "category": "Disposition",
+            "message": "Patient transferred to HDU — ensure handover with HDU team.",
+            "priority": "medium"
           }
         ]
       }
@@ -438,6 +457,86 @@
             "category": "Septic shock with multi-organ dysfunction - ventilated, vasopressors, continuous renal replacement therapy",
             "description": "Life-threatening complication (incl. CNS complications) requiring intermediate care or intensive care unit management — multi-organ dysfunction.",
             "grade": "grade-ivb"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CD-IV",
+            "category": "Complications",
+            "message": "1 life-threatening (Grade IV) complication — ensure ICU/HDU level of care and continuous monitoring.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-BLOOD-MASSIVE",
+            "category": "Blood Loss",
+            "message": "Massive blood loss (1800 mL) — review haemoglobin, coagulation, and transfusion adequacy.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VITAL-HYPOTENSION",
+            "category": "Vital Signs",
+            "message": "Hypotension (SBP 82 mmHg) on arrival in recovery — assess volume status and bleeding.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VITAL-HYPOXIA",
+            "category": "Vital Signs",
+            "message": "Oxygen desaturation (SpO2 90%) — escalate, supplement oxygen and review airway.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-CD-IIIB",
+            "category": "Complications",
+            "message": "1 complication requiring intervention under general anaesthesia (Grade IIIb).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ASA-HIGH",
+            "category": "Patient Risk",
+            "message": "ASA class IV — patient at high peri-operative risk; ensure HDU/ICU disposition and senior review.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VITAL-TACHY",
+            "category": "Vital Signs",
+            "message": "Tachycardia (HR 128 bpm) — assess for pain, hypovolaemia, or sepsis.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VITAL-TACHYPNOEA",
+            "category": "Vital Signs",
+            "message": "Tachypnoea (RR 26) — assess respiratory function and pain.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DISP-ICU",
+            "category": "Disposition",
+            "message": "Patient transferred to ICU — ensure handover with ICU team.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PROC-EMERGENCY",
+            "category": "Procedure",
+            "message": "Emergency procedure — heightened risk of post-operative deterioration; ensure close observation.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DURATION-LONG",
+            "category": "Procedure",
+            "message": "Prolonged procedure (265 minutes) — increased risk of VTE, pressure injury, and hypothermia.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VITAL-HYPOTHERMIA",
+            "category": "Vital Signs",
+            "message": "Hypothermia (35.2 °C) — initiate active warming.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PLAN-FOLLOWUP",
+            "category": "Post-op Plan",
+            "message": "Follow-up plan not documented.",
+            "priority": "low"
           }
         ]
       }

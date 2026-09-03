@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "classifyHRTRisk",
-  "note": "Realistic filled-in states in the HRT-assessment scoring engine's shape. Graded on the HRT risk classification: absolute contraindications -> Contraindicated; >=2 relative-caution factors -> Cautious; 1 -> Acceptable; 0 -> Favourable. The auto-discovered grader already resolves to classifyHRTRisk (state-taking, deterministic); graderHint pins it explicitly. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the HRT-assessment scoring engine's shape. Graded on the HRT risk classification: absolute contraindications -> Contraindicated; >=2 relative-caution factors -> Cautious; 1 -> Acceptable; 0 -> Favourable. The auto-discovered grader already resolves to classifyHRTRisk (state-taking, deterministic); graderHint pins it explicitly. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "favourable",
@@ -108,7 +112,10 @@
           "treatmentGoals": ""
         }
       },
-      "expected": "Favourable"
+      "expected": {
+        "value": "Favourable",
+        "additionalFlags": []
+      }
     },
     {
       "name": "cautious",
@@ -215,7 +222,23 @@
           "treatmentGoals": ""
         }
       },
-      "expected": "Cautious"
+      "expected": {
+        "value": "Cautious",
+        "additionalFlags": [
+          {
+            "id": "FLAG-VTE-001",
+            "category": "Thromboembolism",
+            "message": "VTE history reported: Provoked DVT post-surgery, 2018 - consider transdermal route only",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FAMHX-BREAST-001",
+            "category": "Family History",
+            "message": "Family history of breast cancer - discuss individual risk-benefit",
+            "priority": "medium"
+          }
+        ]
+      }
     },
     {
       "name": "contraindicated",
@@ -322,7 +345,17 @@
           "treatmentGoals": "Non-hormonal management of vasomotor symptoms"
         }
       },
-      "expected": "Contraindicated"
+      "expected": {
+        "value": "Contraindicated",
+        "additionalFlags": [
+          {
+            "id": "FLAG-BREAST-001",
+            "category": "Breast Cancer",
+            "message": "Breast cancer history: ER-positive invasive ductal carcinoma treated 2021, on adjuvant endocrine therapy - HRT generally CONTRAINDICATED",
+            "priority": "high"
+          }
+        ]
+      }
     }
   ]
 }

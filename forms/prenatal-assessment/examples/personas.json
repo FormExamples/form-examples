@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateRisk",
-  "note": "Realistic filled-in states in the prenatal risk engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the prenatal risk engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -97,7 +101,8 @@
             "description": "Previous cesarean section",
             "weight": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -199,6 +204,14 @@
             "category": "Medical History",
             "description": "Thyroid disorder",
             "weight": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-GDM-002",
+            "category": "Gestational Diabetes",
+            "message": "Previous gestational diabetes - early screening recommended",
+            "priority": "medium"
           }
         ]
       }
@@ -320,6 +333,26 @@
             "category": "Current Symptoms",
             "description": "Severe headache",
             "weight": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BP-001",
+            "category": "Hypertension",
+            "message": "Elevated blood pressure (150/95 mmHg) - assess for preeclampsia",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PE-001",
+            "category": "Preeclampsia Signs",
+            "message": "Headache, vision changes, and edema present - assess urgently for preeclampsia",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PE-002",
+            "category": "Preeclampsia Risk",
+            "message": "Previous preeclampsia with current hypertension - high recurrence risk",
+            "priority": "high"
           }
         ]
       }

@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateZaritGrade",
-  "note": "Realistic filled-in states in the Zarit Burden Interview (ZBI-22) scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the Zarit Burden Interview (ZBI-22) scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "little-or-no-burden",
@@ -137,7 +142,8 @@
             "category": "band-threshold",
             "description": "Burden band derived from total: little-or-none"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -386,7 +392,8 @@
             "category": "band-threshold",
             "description": "Burden band derived from total: mild-to-moderate"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -634,6 +641,29 @@
             "points": 0,
             "category": "band-threshold",
             "description": "Burden band derived from total: severe"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SEVERE-BURDEN-001",
+            "category": "severe-burden",
+            "priority": "high",
+            "description": "ZBI-22 total 77 of 88 is in the severe-burden band (>= 61)",
+            "suggestedAction": "Arrange urgent carer support and respite; screen and refer for carer mental-health support; consider the risk to the caring arrangement."
+          },
+          {
+            "id": "F-CARER-MENTAL-HEALTH-SCREEN-001",
+            "category": "carer-mental-health-screen",
+            "priority": "high",
+            "description": "The carer rates their overall burden as \"Nearly always\" (item 22 = 4) — screen for carer depression and anxiety",
+            "suggestedAction": "Screen the carer for depression and anxiety (for example PHQ-9 / GAD-7) and refer for carer mental-health support per the local pathway."
+          },
+          {
+            "id": "F-HIGH-GLOBAL-BURDEN-001",
+            "category": "high-global-burden",
+            "priority": "medium",
+            "description": "The carer rates their overall (global) burden as \"Nearly always\" (item 22 = 4 of 4)",
+            "suggestedAction": "Explore the drivers of the high global burden and offer carer information, support, and signposting to respite and peer support."
           }
         ]
       }

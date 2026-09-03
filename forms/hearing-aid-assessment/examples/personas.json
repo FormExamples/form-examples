@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
-  "graderHint": "gradeHHIES",
-  "note": "Realistic filled-in states in the hearing-aid-assessment scoring engine's shape. Graded on the Hearing Handicap Inventory for the Elderly — Screening (HHIE-S): 10 items each scored 0 (no), 2 (sometimes), or 4 (yes); total 0-40, banded No handicap (0-8), Mild to moderate handicap (10-22), Significant handicap (24-40). The auto-discovered grader is hearingLossGrade, a per-item PTA helper taking a bare number, so graderHint pins the state-taking gradeHHIES. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "graderHint": "calculateHHIES",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the hearing-aid-assessment scoring engine's shape. Graded on the Hearing Handicap Inventory for the Elderly — Screening (HHIE-S): 10 items each scored 0 (no), 2 (sometimes), or 4 (yes); total 0-40, banded No handicap (0-8), Mild to moderate handicap (10-22), Significant handicap (24-40). The auto-discovered grader is hearingLossGrade, a per-item PTA helper taking a bare number, so graderHint pins the state-taking gradeHHIES. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. graderHint re-pinned 2026-09-03 from \"gradeHHIES\" to \"calculateHHIES\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result). Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. graderHint re-pinned 2026-09-03 from \"calculateHHIES\" to \"calculateHHIES\", the composite that form-app.js actually calls at submit (the earlier hint pinned a sub-axis result).",
   "personas": [
     {
       "name": "no-handicap",
@@ -88,8 +92,8 @@
         }
       },
       "expected": {
-        "score": 4,
-        "severity": "No handicap",
+        "hhiesScore": 4,
+        "hhiesCategoryLabel": "No handicap",
         "firedRules": [
           {
             "id": "HHIES-01",
@@ -103,7 +107,8 @@
             "description": "Do you have difficulty hearing when someone speaks in a whisper?",
             "score": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -191,8 +196,8 @@
         }
       },
       "expected": {
-        "score": 16,
-        "severity": "Mild to moderate handicap",
+        "hhiesScore": 16,
+        "hhiesCategoryLabel": "Mild to moderate handicap",
         "firedRules": [
           {
             "id": "HHIES-01",
@@ -235,6 +240,14 @@
             "domain": "Social/Situational",
             "description": "Does a hearing problem cause you difficulty when listening to TV or radio?",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-TINNITUS-001",
+            "category": "Tinnitus",
+            "message": "Tinnitus reported - assess for tinnitus management and consider masking features in hearing aid selection",
+            "priority": "medium"
           }
         ]
       }
@@ -324,8 +337,8 @@
         }
       },
       "expected": {
-        "score": 34,
-        "severity": "Significant handicap",
+        "hhiesScore": 34,
+        "hhiesCategoryLabel": "Significant handicap",
         "firedRules": [
           {
             "id": "HHIES-01",
@@ -386,6 +399,14 @@
             "domain": "Emotional",
             "description": "Does a hearing problem cause you difficulty when in a restaurant with relatives or friends?",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-TINNITUS-001",
+            "category": "Tinnitus",
+            "message": "Tinnitus reported - assess for tinnitus management and consider masking features in hearing aid selection",
+            "priority": "medium"
           }
         ]
       }

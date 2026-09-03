@@ -6,6 +6,13 @@
  * modules of forms/<slug>/front-end-with-html/js/ and returns the engine
  * namespace plus its discovered grader / flags / factory function names.
  *
+ * Discovery is by PROBING, not by name alone: the default-state factory is
+ * the zero-arg export that builds the largest plain object, and the grader is
+ * the plausibly-named export whose result over that state looks most like a
+ * composite grading result (a plain object carrying rule/flag arrays and a
+ * status-like key). Names only break ties. The earlier name-only heuristic
+ * mis-picked sub-axis graders and helpers on at least six forms.
+ *
  * Two load paths, matching the front-ends' history:
  *
  *  - ES modules (the fleet-wide state since the 2026-07 conversion): the js/
@@ -94,21 +101,148 @@ function pick(fns, re, avoid) {
   return fns.find((n) => re.test(n) && !(avoid && avoid.test(n)));
 }
 
+// Run fn with console silenced (engines may console.warn on odd input while
+// we probe them) and never let it throw — return { ok, value }.
+function quietCall(fn, ...args) {
+  const saved = { log: console.log, warn: console.warn, error: console.error };
+  const noop = () => {};
+  console.log = noop; console.warn = noop; console.error = noop;
+  try {
+    return { ok: true, value: fn(...args) };
+  } catch (e) {
+    return { ok: false, error: String((e && e.message) || e).split('\n')[0] };
+  } finally {
+    console.log = saved.log; console.warn = saved.warn; console.error = saved.error;
+  }
+}
+
+function isPlainObject(v) {
+  return v !== null && typeof v === 'object' && !Array.isArray(v);
+}
+
+// Names that are helpers / labels / sub-scorers rather than an entry point.
+const HELPER_NAME = /label$|class$|band$|points$|helper|^is[A-Z]|^has[A-Z]|^format|^parse|^to[A-Z]|^round|^clamp|^num$|^present$|^nonEmpty$|^normalise$|^labelFor$|^rule$|^worse|^max[A-Z]|^min[A-Z]|^sum|^count|Label$|Class$|Order$|^collect|^weeksBetween|^ageIn|^age(Years|Band|On)|^calculateAge|^calculateBMI$|^computeBmi$|^bmiCategory$/;
+
+// A candidate entry-point name: something that grades, scores, validates,
+// classifies, evaluates, computes, assesses, summarises, or runs the form.
+const ENTRY_NAME = /grade|assess|evaluate|calculate|classify|validat|validity|compute|score|check|status|complet|risk|maturity|stratif|readiness|eligib|review|summari[sz]e|^run|gate|^derive|^aggregate|^worst|candidacy|reconcil|optimi[sz]|triage|decision|screen/i;
+
+// Sub-axis / per-item names the OLD heuristic avoided; still a tie-breaker
+// penalty (a real composite usually wins on the probe anyway).
+const PER_ITEM_NAME = /timepoint|domain|item|sign|section|criterion|question|category|row|dimension|subscale|response|answer|single|subscore|etiologic|phenotypic|capillary|heartrate|oxygen|respiratory|consciousness/i;
+
+const RULE_KEY = /rule|flag|issue|problem|error|warning|missing|blocker|deficienc|failure|violation|finding/i;
+const STATUS_KEY = /^(overall|status|outcome|grade|level|band|category|classification|risk|severity|result|verdict|recommendation|eligib|validity|stage|zone|score|total)/i;
+
+// Score how much a probe result looks like a composite grading result.
+function resultScore(res) {
+  if (!res.ok) return -1000;
+  const v = res.value;
+  if (v === undefined || v === null) return -900;
+  if (!isPlainObject(v)) {
+    // Numbers / strings are tolerated as a last resort (bin/test-engines
+    // accepts them) but any structured candidate beats them; a bare array
+    // (a flags list) ranks below a string classification.
+    if (Array.isArray(v)) return -600;
+    return typeof v === 'boolean' ? -800 : -500;
+  }
+  const keys = Object.keys(v);
+  let s = Math.min(keys.length, 6);
+  const arrayKeys = keys.filter((k) => Array.isArray(v[k]));
+  // One bonus per CLASS of audit array — rules and flags/issues — so a result
+  // carrying both (the canonical composite) beats one carrying two rule lists.
+  if (arrayKeys.some((k) => /rule|blocker|deficienc|failure|violation|finding|missing|error|warning|problem/i.test(k))) s += 10;
+  if (arrayKeys.some((k) => /flag|issue/i.test(k))) s += 10;
+  if (keys.some((k) => STATUS_KEY.test(k))) s += 5;
+  // A composite that aggregates sub-results (an object of per-instrument
+  // objects, e.g. { sf36: {...}, ndi: {...} }) beats any one sub-result.
+  if (keys.some((k) => isPlainObject(v[k]) && Object.keys(v[k]).length >= 2)) s += 4;
+  // A result that is *only* arrays of sub-rows (e.g. a per-item scorer
+  // returning its rows) is less composite than one that also classifies.
+  if (keys.length === arrayKeys.length) s -= 3;
+  return s;
+}
+
+// Default-state factories and other constructors are never the grader, even
+// though "emptyAssessment" contains "assess".
+const FACTORY_NAME = /^(create|empty|default|initial|blank|fresh|new|make|build)/i;
+
+function nameBonus(n) {
+  let b = 0;
+  if (/^(calculate|grade|assess|evaluate|validate|compute|classify)/i.test(n)) b += 3;
+  if (/(Grade|Assessment|Evaluation|Composite|Overall|Total|Status|Validity|Score|Risk)$/.test(n)) b += 2;
+  if (/All|Composite|Overall|Total|Evaluation/.test(n)) b += 3;
+  if (/^calculate.*grade$/i.test(n)) b += 2;
+  if (PER_ITEM_NAME.test(n)) b -= 4;
+  if (HELPER_NAME.test(n)) b -= 6;
+  return b;
+}
+
+// Discover the default-state factory: try every zero-arg-looking candidate
+// and keep the one that builds the LARGEST plain object (a form's root state
+// beats any per-row helper such as emptyDrug / createEmptyAddress).
+function discoverFactory(ns, fns) {
+  const cands = fns.filter((n) =>
+    /^(createDefault|createEmpty|createInitial|empty|default|initial|blank|fresh|new|make|build)/i.test(n) ||
+    /(Assessment|Checklist|State|Data|Form|Record|Plan|Note|Card|Certificate|Evaluation|Questionnaire|Reconciliation|Review|Application|Authorization|Prescription|Lpa)$/i.test(n));
+  let best = null, bestSize = -1;
+  for (const n of cands) {
+    if (ns[n].length > 0) continue; // needs args: not a default-state factory
+    const res = quietCall(ns[n]);
+    if (!res.ok || !isPlainObject(res.value)) continue;
+    let size;
+    try { size = JSON.stringify(res.value).length; } catch { continue; }
+    if (size > bestSize) { best = n; bestSize = size; }
+  }
+  return best;
+}
+
+// Discover the grader by PROBING: call every plausible entry point over the
+// default state and prefer the one whose result looks most like a composite
+// grading result (a plain object carrying rule/flag arrays and a status-like
+// key), with the name only as a tie-breaker. Replaces the old name-only
+// heuristic, which verifiably mis-picked sub-axis graders and helpers on at
+// least six forms (classifyHernia, scoreOhs, classifyCompleteness, gradeOrder,
+// completenessPercent, calculateGrade-over-assess).
+function discoverGrader(ns, fns, factory) {
+  const cands = fns.filter((n) =>
+    ENTRY_NAME.test(n) && !FACTORY_NAME.test(n) && !/flag|issue|^detect/i.test(n));
+  if (!cands.length) return { grader: undefined, probe: {} };
+  let state = null;
+  if (factory) {
+    const r = quietCall(ns[factory]);
+    if (r.ok) state = r.value;
+  }
+  const probe = {};
+  let best = null, bestScore = -Infinity;
+  for (const n of cands) {
+    let score;
+    if (state !== null) {
+      const res = quietCall(ns[n], JSON.parse(JSON.stringify(state)));
+      score = resultScore(res) + nameBonus(n);
+      probe[n] = res.ok ? score : `threw: ${res.error}`;
+    } else {
+      // No state to probe with: fall back to the name heuristics only.
+      score = nameBonus(n) + (HELPER_NAME.test(n) ? -50 : 0);
+      probe[n] = score;
+    }
+    if (score > bestScore) { best = n; bestScore = score; }
+  }
+  // If nothing probed to a usable result, still report the best-named
+  // candidate so bin/test-engines can explain the SKIP.
+  return { grader: best, probe };
+}
+
 // Discover the grader / default-state factory / flags entry points on a
 // namespace object. Shared by both load paths.
 function discover(ns) {
   const fns = Object.keys(ns).filter((k) => typeof ns[k] === 'function');
-  const perItem = /timepoint|domain|item|sign|section|criterion|question|category|row|dimension|subscale|response|answer|single|^sum/i;
-  const grader =
-    pick(fns, /^calculate.*grade$/i, perItem) ||
-    pick(fns, /^(grade|assess|evaluate|calculate)(Assessment|Form|Record|Overall|Composite|Total|Maturity)/i, perItem) ||
-    pick(fns, /grade|maturity|score|evaluate|classify|validity|validation|status|appropriate|stage|stratif|risk|complet|readiness/i,
-      new RegExp(`${perItem.source}|label|class$|band$|points$|helper|^is[A-Z]`, 'i'));
-  const factory =
-    pick(fns, /^(createDefault|createEmpty|empty|default)/i) ||
-    pick(fns, /(Assessment|Checklist|State|Data|Form)$/i);
-  const flags = pick(fns, /flag|detect/i);
-  return { fns, grader, factory, flags };
+  const factory = discoverFactory(ns, fns);
+  const { grader, probe } = discoverGrader(ns, fns, factory);
+  const flags =
+    pick(fns, /^(detect|run|apply|collect)\w*(flag|issue)/i) ||
+    pick(fns, /flag|detect/i, /^(has|is)[A-Z]/);
+  return { fns, grader, factory, flags, probe };
 }
 
 // Stub browser globals onto the real globalThis for the duration of the ESM
@@ -186,7 +320,8 @@ function loadClassic(jsDir, files) {
 }
 
 /** Load one form's engine.
- *  Returns { ns, name, fns, grader, factory, flags, esm, loaded, error }. */
+ *  Returns { ns, name, fns, grader, factory, flags, probe, esm, loaded, error }.
+ *  `probe` maps each grader candidate to its probe score (or "threw: …"). */
 async function loadEngine(repoRoot, slug) {
   const jsDir = path.join(repoRoot, 'forms', slug, 'front-end-with-html', 'js');
   let files;

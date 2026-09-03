@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGraceGrade",
-  "note": "Realistic filled-in states in the GRACE Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.riskCategory"
+  ],
+  "note": "Realistic filled-in states in the GRACE Score engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.riskCategory\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.riskCategory); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -96,7 +101,8 @@
             "category": "risk-band",
             "description": "GRACE 75 — in-hospital low, 6-month low; overall low (worse band)."
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -192,7 +198,8 @@
             "category": "risk-band",
             "description": "GRACE 117 — in-hospital intermediate, 6-month intermediate; overall intermediate (worse band)."
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -308,6 +315,50 @@
             "points": 0,
             "category": "risk-band",
             "description": "GRACE 309 — in-hospital high, 6-month high; overall high (worse band)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-RISK-CATEGORY-001",
+            "category": "high-risk-category",
+            "priority": "high",
+            "description": "High GRACE risk category — increased in-hospital and 6-month mortality",
+            "suggestedAction": "Recommend an early invasive strategy: coronary angiography within 24 hours, with senior cardiology review."
+          },
+          {
+            "id": "F-CARDIAC-ARREST-001",
+            "category": "cardiac-arrest",
+            "priority": "high",
+            "description": "Cardiac arrest at admission — arrest survivor",
+            "suggestedAction": "Urgent senior review; consider the post-cardiac-arrest care pathway and early coronary angiography."
+          },
+          {
+            "id": "F-KILLIP-CLASS-001",
+            "category": "heart-failure",
+            "priority": "high",
+            "description": "Killip class III — clinical heart failure to cardiogenic shock",
+            "suggestedAction": "Escalate: assess perfusion and oxygenation, treat heart failure, and involve critical care as needed."
+          },
+          {
+            "id": "F-HYPOTENSION-001",
+            "category": "hypotension",
+            "priority": "high",
+            "description": "Systolic blood pressure 85 mmHg (below 90) — haemodynamic compromise",
+            "suggestedAction": "Reassess perfusion, consider fluid or inotropic support, and monitor continuously."
+          },
+          {
+            "id": "F-RENAL-IMPAIRMENT-001",
+            "category": "renal-impairment",
+            "priority": "medium",
+            "description": "Serum creatinine 2.50 mg/dL (>= 2.0) — significant renal impairment",
+            "suggestedAction": "Account for contrast nephropathy risk and adjust antithrombotic and contrast dosing."
+          },
+          {
+            "id": "F-ST-DEVIATION-001",
+            "category": "st-deviation",
+            "priority": "medium",
+            "description": "ST-segment deviation on the admission ECG — dynamic ischaemia",
+            "suggestedAction": "Repeat the ECG, expedite review, and treat as high-risk ischaemia."
           }
         ]
       }

@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the breast-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the breast-screening classification engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\"], mirroring form-app.js's call detectFlaggedIssues(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-routine-recall",
@@ -61,7 +65,8 @@
             "category": "reading-outcome",
             "description": "Reading outcome is normal — return to routine 3-yearly recall"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -124,6 +129,15 @@
             "id": "R-ASSESS-CLASS-3-01",
             "category": "assessment-result",
             "description": "Assessment imaging classification 3 (indeterminate) — short-interval follow-up or biopsy"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INDETERMINATE-RESULT-001",
+            "category": "indeterminate-result",
+            "priority": "medium",
+            "description": "Imaging classification 3 — indeterminate / probably benign",
+            "suggestedAction": "Short-interval follow-up or biopsy per local protocol."
           }
         ]
       }
@@ -189,6 +203,15 @@
             "id": "R-ASSESS-CLASS-4-5-01",
             "category": "assessment-result",
             "description": "Assessment imaging classification 4–5 (suspicious/malignant) — urgent breast-clinic referral"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SUSPICIOUS-MALIGNANT-001",
+            "category": "suspicious-malignant",
+            "priority": "high",
+            "description": "Imaging classification 5 — malignant appearance",
+            "suggestedAction": "Urgent breast-clinic referral: obtain tissue diagnosis and discuss at the breast MDT."
           }
         ]
       }

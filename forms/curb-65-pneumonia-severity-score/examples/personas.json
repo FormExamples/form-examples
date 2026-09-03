@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateCurb65Grade",
-  "note": "Realistic filled-in states in the CURB-65 scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the CURB-65 scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-outpatient",
@@ -75,7 +80,8 @@
             "category": "risk-band",
             "description": "CURB-65 score 0 — low risk band"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -164,7 +170,8 @@
             "category": "risk-band",
             "description": "CURB-65 score 2 — intermediate risk band"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -273,6 +280,43 @@
             "points": 0,
             "category": "risk-band",
             "description": "CURB-65 score 5 — high risk band"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-SEVERITY-ADMIT-001",
+            "category": "high-severity-admit",
+            "priority": "high",
+            "description": "CURB-65 score 5 — high mortality risk; manage as severe community-acquired pneumonia",
+            "suggestedAction": "Hospitalise and manage as severe CAP: senior review, blood cultures, oxygen, and empirical antibiotics per local policy."
+          },
+          {
+            "id": "F-CONSIDER-ICU-001",
+            "category": "consider-icu",
+            "priority": "high",
+            "description": "CURB-65 score 5 — very high mortality risk",
+            "suggestedAction": "Assess for intensive-care / high-dependency admission and involve critical care early."
+          },
+          {
+            "id": "F-HYPOTENSION-001",
+            "category": "hypotension",
+            "priority": "high",
+            "description": "Hypotension: systolic 84 mmHg (< 90) and diastolic 54 mmHg (<= 60) — risk of shock",
+            "suggestedAction": "Reassess perfusion, consider fluid resuscitation and continuous blood-pressure monitoring."
+          },
+          {
+            "id": "F-NEW-CONFUSION-001",
+            "category": "new-confusion",
+            "priority": "high",
+            "description": "New-onset confusion recorded — possible sepsis or hypoxia",
+            "suggestedAction": "Consider urgent review; assess airway and neurology, check glucose and oxygenation."
+          },
+          {
+            "id": "F-HYPOXIA-001",
+            "category": "hypoxia",
+            "priority": "medium",
+            "description": "Oxygen saturation 89% below the 92% threshold — oxygenation concern independent of the score",
+            "suggestedAction": "Give controlled oxygen, target saturations per local policy, and consider arterial blood gas."
           }
         ]
       }

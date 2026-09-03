@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateDAS28",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "remission",
@@ -104,7 +108,8 @@
       "expected": {
         "das28Score": 1.6,
         "diseaseActivity": "remission",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -224,7 +229,8 @@
             "category": "Laboratory",
             "description": "Elevated CRP (> 10 mg/L)"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -368,6 +374,14 @@
             "id": "LAB-004",
             "category": "Laboratory",
             "description": "Highly elevated CRP (> 30 mg/L)"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DAS28-001",
+            "category": "Disease Activity",
+            "message": "High disease activity (DAS28 7.20) - consider treatment escalation",
+            "priority": "high"
           }
         ]
       }

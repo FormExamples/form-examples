@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeSafety",
-  "note": "Realistic filled-in states in the HSE Workplace Safety Audit engine's shape. Each checklist item grades to compliant (1), minor (2), major (3) or critical (4); the overall outcome is the highest severity fired. Positively-phrased controls (yes/na = compliant, no = finding); negatively-phrased items (no/na = compliant, yes = finding). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the HSE Workplace Safety Audit engine's shape. Each checklist item grades to compliant (1), minor (2), major (3) or critical (4); the overall outcome is the highest severity fired. Positively-phrased controls (yes/na = compliant, no = finding); negatively-phrased items (no/na = compliant, yes = finding). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "compliant",
@@ -528,7 +532,8 @@
             "grade": 1
           }
         ],
-        "answeredCount": 56
+        "answeredCount": 56,
+        "additionalFlags": []
       }
     },
     {
@@ -1056,7 +1061,21 @@
             "grade": 1
           }
         ],
-        "answeredCount": 56
+        "answeredCount": 56,
+        "additionalFlags": [
+          {
+            "id": "FLAG-PPE-002",
+            "category": "PPE & Hazard Controls",
+            "message": "PPE is not being correctly used — coaching and supervision required.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MH-001",
+            "category": "Ergonomics & Manual Handling",
+            "message": "Manual handling risk assessment is overdue — schedule reassessment.",
+            "priority": "medium"
+          }
+        ]
       }
     },
     {
@@ -1584,7 +1603,123 @@
             "grade": 2
           }
         ],
-        "answeredCount": 56
+        "answeredCount": 56,
+        "additionalFlags": [
+          {
+            "id": "FLAG-FIRE-001",
+            "category": "Fire Safety",
+            "message": "Fire extinguishers have no current annual service record — immediate servicing required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FIRE-002",
+            "category": "Fire Safety",
+            "message": "Emergency egress route is blocked or obstructed — clear immediately and re-inspect.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ELEC-001",
+            "category": "Electrical Safety",
+            "message": "Damaged electrical equipment observed — quarantine and remove from service.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ELEC-002",
+            "category": "Electrical Safety",
+            "message": "Fixed wiring test (EICR) is not in date — book a competent electrician.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CHEM-001",
+            "category": "Chemical & Biological",
+            "message": "Untreated chemical or biological spill observed — clean up using spill kit and PPE.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CHEM-002",
+            "category": "Chemical & Biological",
+            "message": "COSHH register is missing — required by the Control of Substances Hazardous to Health Regulations 2002.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INC-001",
+            "category": "Incident Reporting",
+            "message": "RIDDOR-reportable incidents have not been reported to HSE — legal duty under RIDDOR 2013.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PPE-001",
+            "category": "PPE & Hazard Controls",
+            "message": "Appropriate PPE is not available for the task — re-stock and retrain.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PPE-002",
+            "category": "PPE & Hazard Controls",
+            "message": "PPE is not being correctly used — coaching and supervision required.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PPE-003",
+            "category": "PPE & Hazard Controls",
+            "message": "PPE stock levels inadequate — review re-order triggers.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MH-001",
+            "category": "Ergonomics & Manual Handling",
+            "message": "Manual handling risk assessment is overdue — schedule reassessment.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-TRN-001",
+            "category": "Training & Competence",
+            "message": "Mandatory training is overdue for one or more staff — book refreshers.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-TRN-002",
+            "category": "Training & Competence",
+            "message": "Infection control training is not current — book refreshers.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INC-002",
+            "category": "Incident Reporting",
+            "message": "Near-miss reporting is under-engaged — promote a no-blame reporting culture.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INC-003",
+            "category": "Incident Reporting",
+            "message": "Near-miss count (0) is lower than incident count (9) — likely under-reporting.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SIG-001",
+            "category": "PPE & Hazard Controls",
+            "message": "Signage is faded or illegible — replace at next opportunity.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-SIG-002",
+            "category": "PPE & Hazard Controls",
+            "message": "Hazard signage is missing in places — install where required.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-HSK-001",
+            "category": "PPE & Hazard Controls",
+            "message": "Minor housekeeping issues observed — schedule a tidy-up.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-FIRE-003",
+            "category": "Fire Safety",
+            "message": "Assembly point is not clearly signposted — install signage.",
+            "priority": "low"
+          }
+        ]
       }
     }
   ]

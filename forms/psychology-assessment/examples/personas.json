@@ -1,7 +1,14 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateDass21",
-  "note": "Realistic filled-in states in the DASS-21 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result.depression",
+    "result.anxiety",
+    "result.stress"
+  ],
+  "note": "Realistic filled-in states in the DASS-21 engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\",\"result.depression\",\"result.anxiety\",\"result.stress\"], mirroring form-app.js's call detectAdditionalFlags(state, depression, anxiety, stress); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-across-subscales",
@@ -241,7 +248,8 @@
             "description": "I felt that I was rather touchy.",
             "score": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -482,7 +490,8 @@
             "description": "I felt that I was rather touchy.",
             "score": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -722,6 +731,38 @@
             "itemNumber": 18,
             "description": "I felt that I was rather touchy.",
             "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DASS-D-001",
+            "category": "Depression",
+            "message": "Depression DASS-21 score 30 - extremely severe range.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DASS-A-001",
+            "category": "Anxiety",
+            "message": "Anxiety DASS-21 score 22 - extremely severe range.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DASS-S-001",
+            "category": "Stress",
+            "message": "Stress DASS-21 score 36 - extremely severe range.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FUNC-001",
+            "category": "Functional Impact",
+            "message": "Severe functional impairment in 4 domains - prioritise intervention planning.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SUPP-003",
+            "category": "Support and History",
+            "message": "Family mental-health history with elevated current symptoms - consider psychiatric referral.",
+            "priority": "low"
           }
         ]
       }

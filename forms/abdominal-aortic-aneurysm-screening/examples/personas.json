@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "classifyAaa",
-  "note": "Realistic filled-in states in the AAA screening engine's shape. Classified by classifyAaa on maximum antero-posterior aortic diameter (deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the AAA screening engine's shape. Classified by classifyAaa on maximum antero-posterior aortic diameter (deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "normal-discharge",
@@ -53,6 +58,15 @@
             "band": "normal",
             "category": "diameter-band",
             "description": "Maximum aortic diameter below 3.0 cm — no aneurysm (normal)"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-ASSESSMENT-001",
+            "category": "incomplete-assessment",
+            "priority": "low",
+            "description": "Missing required field(s): technician name — the record cannot be finalised",
+            "suggestedAction": "Complete the missing field(s) before sign-off."
           }
         ]
       }
@@ -108,6 +122,15 @@
             "category": "diameter-band",
             "description": "Maximum aortic diameter 4.5–5.4 cm — medium aneurysm"
           }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-ASSESSMENT-001",
+            "category": "incomplete-assessment",
+            "priority": "low",
+            "description": "Missing required field(s): technician name — the record cannot be finalised",
+            "suggestedAction": "Complete the missing field(s) before sign-off."
+          }
         ]
       }
     },
@@ -161,6 +184,22 @@
             "band": "large",
             "category": "diameter-band",
             "description": "Maximum aortic diameter 5.5 cm or more — large aneurysm"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-VASCULAR-REFERRAL-001",
+            "category": "vascular-referral",
+            "priority": "high",
+            "description": "Large aneurysm (6.2 cm) at or above the 5.5 cm referral threshold",
+            "suggestedAction": "Refer to vascular surgery for assessment and consideration of elective repair."
+          },
+          {
+            "id": "F-INCOMPLETE-ASSESSMENT-001",
+            "category": "incomplete-assessment",
+            "priority": "low",
+            "description": "Missing required field(s): technician name — the record cannot be finalised",
+            "suggestedAction": "Complete the missing field(s) before sign-off."
           }
         ]
       }

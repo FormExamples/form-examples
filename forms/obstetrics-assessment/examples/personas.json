@@ -1,6 +1,11 @@
 {
   "engine": "front-end-with-html",
-  "note": "Realistic filled-in states in the NICE NG201 antenatal-risk grader's shape. `expected` is computed by `bin/test-personas --update`.",
+  "graderHint": "calculateAntenatalRisk",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the NICE NG201 antenatal-risk grader's shape. `expected` is computed by `bin/test-personas --update`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-midwifery-led",
@@ -146,7 +151,8 @@
       "expected": {
         "riskLevel": "low",
         "answeredCount": 7,
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -311,6 +317,20 @@
             "category": "Obstetric History",
             "description": "Previous gestational diabetes — moderate risk.",
             "risk": "moderate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BMI-002",
+            "category": "Body Mass Index",
+            "message": "BMI 31 - schedule GDM screening and discuss healthy weight.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OBS-005",
+            "category": "Obstetric History",
+            "message": "Previous GDM - early OGTT (16-18 wks) and again at 24-28 wks.",
+            "priority": "medium"
           }
         ]
       }
@@ -483,6 +503,32 @@
             "category": "Current Pregnancy",
             "description": "Multiple pregnancy — high risk.",
             "risk": "high"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-003",
+            "category": "Medical History",
+            "message": "Chronic hypertension - review antihypertensives, aspirin prophylaxis indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BMI-001",
+            "category": "Body Mass Index",
+            "message": "BMI 36 - obstetric anaesthetic review and VTE / GDM screening.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AGE-001",
+            "category": "Maternal Age",
+            "message": "Maternal age >=40 - increased risk of pre-eclampsia, GDM, and stillbirth.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG-001",
+            "category": "Current Pregnancy",
+            "message": "Multiple pregnancy - twin clinic and serial scans.",
+            "priority": "high"
           }
         ]
       }

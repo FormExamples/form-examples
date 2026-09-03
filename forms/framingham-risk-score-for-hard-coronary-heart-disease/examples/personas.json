@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateRisk",
-  "note": "Realistic filled-in states in the Framingham hard-CHD risk engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Framingham hard-CHD risk engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -112,7 +116,8 @@
             "description": "Physically active (moderate or vigorous exercise)",
             "riskLevel": "low"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -223,6 +228,14 @@
             "category": "Smoking",
             "description": "Non-smoker",
             "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-002",
+            "category": "Medications",
+            "message": "Hypertension detected but not on antihypertensive treatment",
+            "priority": "medium"
           }
         ]
       }
@@ -353,6 +366,26 @@
             "category": "Demographics",
             "description": "Age >= 65",
             "riskLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medications",
+            "message": "High 10-year risk but not on statin therapy — consider initiating",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Smoking",
+            "message": "Current smoker — smoking cessation counselling recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MED-002",
+            "category": "Medications",
+            "message": "Hypertension detected but not on antihypertensive treatment",
+            "priority": "medium"
           }
         ]
       }

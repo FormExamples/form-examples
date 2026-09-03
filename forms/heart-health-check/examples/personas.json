@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateRisk",
-  "note": "Realistic filled-in states in the Heart Health Check engine's shape. `calculateRisk` estimates a 10-year CVD risk percentage from a simplified QRISK3-shaped points model and classifies it: low (<10%), moderate (10-19.9%), high (>=20%); 'draft' when age or sex is missing. `calculateRisk` is deterministic (heart-age and rules take no timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the Heart Health Check engine's shape. `calculateRisk` estimates a 10-year CVD risk percentage from a simplified QRISK3-shaped points model and classifies it: low (<10%), moderate (10-19.9%), high (>=20%); 'draft' when age or sex is missing. `calculateRisk` is deterministic (heart-age and rules take no timestamp). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -109,7 +113,8 @@
             "description": "Normal BMI (18.5 to 24.9)",
             "riskLevel": "low"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -211,6 +216,14 @@
             "category": "Cholesterol",
             "description": "Optimal TC/HDL ratio (below 4)",
             "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medication",
+            "message": "10-year risk 10%+ without statin therapy - consider statin initiation per NICE",
+            "priority": "medium"
           }
         ]
       }
@@ -326,6 +339,14 @@
             "category": "Smoking",
             "description": "Non-smoker",
             "riskLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medication",
+            "message": "10-year risk 10%+ without statin therapy - consider statin initiation per NICE",
+            "priority": "medium"
           }
         ]
       }

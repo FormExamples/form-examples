@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "gradeDonor",
-  "note": "Realistic filled-in states in the donor-grader engine's shape. consentEligibility.eligibilityDecision is left '' so the engine-suggested eligibility drives the result. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the donor-grader engine's shape. consentEligibility.eligibilityDecision is left '' so the engine-suggested eligibility drives the result. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "suitable-low-ideal-match",
@@ -184,7 +188,8 @@
             "description": "ASA Grade I - healthy donor",
             "grade": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -368,7 +373,8 @@
             "description": "ASA Grade II - mild systemic disease",
             "grade": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -557,6 +563,20 @@
             "category": "Anaesthetic",
             "description": "ASA Grade I - healthy donor",
             "grade": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ID-hepatitisBSurfaceAntigen",
+            "category": "Infectious Disease",
+            "message": "Hepatitis B (HBsAg) screen positive — typically contraindicates donation.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ID-hepatitisBCoreAntibody",
+            "category": "Infectious Disease",
+            "message": "Hepatitis B (anti-HBc) screen positive — typically contraindicates donation.",
+            "priority": "high"
           }
         ]
       }

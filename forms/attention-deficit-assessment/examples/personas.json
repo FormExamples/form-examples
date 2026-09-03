@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateASRS",
-  "note": "Realistic filled-in states in the ADHD engine's shape. Graded by calculateASRS (Adult ADHD Self-Report Scale v1.1; Part A screener + 18-item total, 0-4 each — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the ADHD engine's shape. Graded by calculateASRS (Adult ADHD Self-Report Scale v1.1; Part A screener + 18-item total, 0-4 each — deterministic). `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "unlikely",
@@ -101,7 +105,8 @@
         "shadedCount": 0,
         "classification": "unlikely",
         "subtype": "unspecified",
-        "firedRules": []
+        "firedRules": [],
+        "additionalFlags": []
       }
     },
     {
@@ -227,7 +232,8 @@
             "description": "Childhood symptoms confirmed with onset before age 12",
             "classification": "likely"
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -370,6 +376,14 @@
             "domain": "Functional Impact",
             "description": "Moderate functional impairment in 2+ domains",
             "classification": "possible"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ANX-001",
+            "category": "Comorbidity",
+            "message": "Anxiety reported: details not specified - stimulants may worsen anxiety",
+            "priority": "medium"
           }
         ]
       }

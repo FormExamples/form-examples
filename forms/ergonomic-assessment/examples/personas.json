@@ -1,7 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateREBA",
-  "note": "Realistic filled-in states in the REBA engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Realistic filled-in states in the REBA engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading. Flags: this is a split engine, so the detector is pinned as expected.additionalFlags via flagsHint \"detectAdditionalFlags\" with flagsArgs [\"state\"], mirroring form-app.js's call detectAdditionalFlags(state); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -116,7 +120,8 @@
             "description": "Trunk upright (neutral)",
             "score": 1
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -238,7 +243,8 @@
             "description": "Shoulders raised or hunched",
             "score": 2
           }
-        ]
+        ],
+        "additionalFlags": []
       }
     },
     {
@@ -377,6 +383,26 @@
             "system": "Symptoms",
             "description": "Severe pain (8-10)",
             "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-POSTURE-001",
+            "category": "Posture",
+            "message": "Extreme posture detected - immediate intervention required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MANUAL-001",
+            "category": "Manual Handling",
+            "message": "Heavy lifting (>20kg) without mechanical aids - immediate risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-001",
+            "category": "Symptoms",
+            "message": "Severe pain reported (9/10) - urgent clinical review",
+            "priority": "high"
           }
         ]
       }

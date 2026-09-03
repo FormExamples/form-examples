@@ -1,7 +1,12 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateTimiGrade",
-  "note": "Realistic filled-in states in the TIMI UA/NSTEMI scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result.timiScore"
+  ],
+  "note": "Realistic filled-in states in the TIMI UA/NSTEMI scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\",\"result.timiScore\"], mirroring form-app.js's call detectFlaggedIssues(state, grade.timiScore); the wall clock is frozen at the oracle's default while grading.",
   "personas": [
     {
       "name": "low-risk",
@@ -63,7 +68,8 @@
             "category": "risk-band",
             "description": "TIMI 1 of 7 — low risk band; ~4.7% 14-day risk of death, MI, or urgent revascularisation"
           }
-        ]
+        ],
+        "flaggedIssues": []
       }
     },
     {
@@ -139,6 +145,22 @@
             "points": 0,
             "category": "risk-band",
             "description": "TIMI 3 of 7 — intermediate risk band; ~13.2% 14-day risk of death, MI, or urgent revascularisation"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-POSITIVE-CARDIAC-MARKER-001",
+            "category": "positive-cardiac-marker",
+            "priority": "high",
+            "description": "Positive cardiac marker (elevated troponin / CK-MB) — myocardial injury present",
+            "suggestedAction": "Confirm the diagnosis of NSTEMI, start guideline-directed medical therapy, and involve cardiology."
+          },
+          {
+            "id": "F-INTERMEDIATE-RISK-SCORE-001",
+            "category": "intermediate-risk-score",
+            "priority": "medium",
+            "description": "Intermediate TIMI score (3 of 7) — an early invasive strategy should be considered",
+            "suggestedAction": "Admit for observation with guideline-directed medical therapy; consider an early invasive strategy and cardiology review."
           }
         ]
       }
@@ -237,6 +259,22 @@
             "points": 0,
             "category": "risk-band",
             "description": "TIMI 6 of 7 — high risk band; ~40.9% 14-day risk of death, MI, or urgent revascularisation"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-RISK-SCORE-001",
+            "category": "high-risk-score",
+            "priority": "high",
+            "description": "High TIMI score (6 of 7) — high 14-day risk of death, MI, or urgent revascularisation",
+            "suggestedAction": "Pursue an early invasive strategy with urgent cardiology / coronary-care involvement and intensified antithrombotic therapy."
+          },
+          {
+            "id": "F-ST-DEVIATION-001",
+            "category": "st-deviation",
+            "priority": "medium",
+            "description": "ST-segment deviation >= 0.5 mm on the presenting ECG — ischaemic ECG change",
+            "suggestedAction": "Obtain serial ECGs and cardiology review; correlate with cardiac markers."
           }
         ]
       }
