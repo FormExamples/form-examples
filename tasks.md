@@ -1244,6 +1244,189 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       copies; git stores ~90 blobs — working-tree cost only); revisit only
       with a measurement.
 
+## Phase 13 — R5 engine findings surfaced by the persona oracle (added 2026-09-03)
+
+Every item here is a *verified* finding from hand-deriving personas against
+an engine and confirming with `bin/test-personas --update` — not a guess.
+The persona files record each one in their top-level `note`; this phase
+turns them into work. Per `spec.md` §10, each engine change below starts by
+updating that form's `spec/index.md`, then the engine in **all three stacks**
+(HTML `js/`, Svelte `src/lib/engine/`, Loco), then the SQL `grade_rule` /
+`grade_flag` seed rows where rule/flag IDs change, then `bin/test-personas
+--update <slug>` to re-pin the oracle, then `bin/test-personas` fleet-wide.
+
+### Engine correctness (decide: bug or spec'd behaviour; then fix or document)
+
+- [ ] **hernia-diagnostic-evaluation: doubled red-flag rule IDs.**
+      `screenRedFlags` builds IDs as `` `R-RED-FLAG-${key…toUpperCase()}` ``
+      but every key already starts with `redFlag`, so the IDs come out as
+      `R-RED-FLAG-RED-FLAG-SEVERE-PAIN`, `R-RED-FLAG-RED-FLAG-VOMITING`,
+      etc. (verified in the emergency persona's `firedRules`). Strip the
+      `redFlag` prefix from the key before templating so IDs read
+      `R-RED-FLAG-SEVERE-PAIN`. Rule IDs must stay identical across HTML /
+      Svelte / Loco and the `grade_rule` SQL rows — change all four together.
+- [ ] **hernia-diagnostic-evaluation: `examInconclusive` false positive.**
+      `flagged-issues.js` defines `examInconclusive` as `palpableMass !==
+      'yes' || coughImpulsePositive !== 'yes'`, so a *confirmed* palpable
+      mass with no elicitable cough impulse (true whenever the hernia does
+      not currently reduce) raises `F-OCCULT-HERNIA-SUSPECTED-001` — it
+      fired in both the urgent and the emergency persona despite a definite
+      clinical diagnosis. Likely intended: `&&`, or suppress when
+      `reducibilityStatus` is irreducible/incarcerated. Check
+      `doc/safety-case-notes.md` before changing; add a grader test
+      asserting the confirmed-mass case does not flag.
+- [ ] **nuclear-medicine-test-result: Axis A ignores the ejection fraction.**
+      `gradeSeverity` grades EF < 40 % as `major` (R-SEV-MAJOR-02) but
+      `classifyResult` / `hasAnyAbnormalFinding` never look at
+      `ejectionFractionPercent`, so a gated study with reduced EF and no
+      other structured finding classifies **normal** with severity
+      **major** and follow-up **urgent** — an axis-A/axis-B contradiction
+      (the persona batch avoided it by pairing EF with a perfusion defect).
+      Add reduced EF to `hasAnyAbnormalFinding`, or make classification
+      consult severity; add a persona pinning the fixed behaviour.
+- [ ] **holter-monitor-test-result: `F-UNEXPECTED-FINDING-001` predicate
+      narrower than `hasCriticalFinding`.** The unexpected-finding flag
+      checks only AF / VT / high-grade AV block, so a critical >3 s pause
+      with no originating request never raises it (verified in the
+      pause-only critical persona). Align the predicate with
+      `hasCriticalFinding` (add `hasSignificantPause`, and probably fast
+      AF).
+- [ ] **coagulation-test-result: `R-FU-RECOMMENDED-03` is dead code.**
+      The isolated-APTT follow-up branch is unreachable because
+      `gradeSeverity` routes isolated APTT prolongation through the generic
+      `moderate` band first, which `gradeFollowUp`'s `severity === 'moderate'`
+      check intercepts. Either reorder so the dedicated message is reachable
+      or delete the branch and its `grade_rule` row.
+- [ ] **tumor-marker-test-request: `redirect` recommendation is unreachable.**
+      `scoreAppropriateness` and `scoreInterpretation` are both forced by the
+      same screening-misuse condition and `deriveRecommendation` checks
+      appropriateness first, so `misuse-risk` always resolves to
+      `query-referrer`. Either give `redirect` a reachable trigger or remove
+      it from the enum, the SQL CHECK, and the report/dashboard labels.
+- [ ] **microbiology-culture-test-result: completeness penalises a
+      no-growth culture.** `R-COMP-SENSITIVITIES-01` requires
+      `antibioticSensitivities` text even when `cultureResult` is
+      `no-growth` (nothing to be sensitive to), silently capping an
+      otherwise complete report at 80 % — the persona batch worked around
+      it with a "Not applicable" string. Treat the section as present when
+      no organism was isolated, mirroring histopathology's
+      `agreedAdjustmentsDetail`-satisfied-when-declined pattern.
+- [ ] **neurodiversity-adjustment-response: no "decline acknowledged"
+      outcome.** `deriveRecommendation`'s waterfall bottoms out at
+      `implement` for a justified decline with nothing agreed and no
+      escalation (verified). Add a dedicated outcome (e.g.
+      `record-decline`) to the engine, `RECOMMENDATION_LABELS`, the SQL
+      CHECK, and the report, or document in `spec/index.md` why `implement`
+      is intended.
+- [ ] **tumor-marker-test-result: `moderate` → `urgent-review`.** Unlike
+      every sibling `*-test-result` engine (which maps `moderate` to
+      `specialist-referral` / `further-testing`), this one maps it to
+      `urgent-review`. Plausibly deliberate (markers are poor screening
+      tests) — confirm and write it into `spec/index.md`, or align.
+- [ ] **Sweep the other 34 `*-test-result` persona notes** for the same
+      class of asymmetry (a severity trigger that is not a classification
+      or unexpected-finding trigger) and file any not listed above.
+
+### Tooling (`bin/test-personas`, `bin/test-engines`)
+
+- [ ] **Cover split-engine flags in the persona oracle.** For the older
+      assessment family (genetic-assessment, gynecology-assessment, …) the
+      grader (`calculateRisk`, `calculateSymptomScore`) and
+      `detectAdditionalFlags` are separate exports, so `expected` pins the
+      score but never the flags. Add an optional `flagsHint` (default:
+      auto-discover `detectAdditionalFlags` / `detectFlags`) and merge its
+      output under `expected.additionalFlags`; re-pin the affected forms.
+- [ ] **`bin/test-engines` discovery can pick a sub-axis grader.** For
+      hernia-diagnostic-evaluation it reported `classifyHernia` (Axis A
+      only) rather than the composite `calculateHerniaEvaluation`; the
+      persona file had to override with `graderHint`. Prefer exports whose
+      result carries `firedRules` + `flags`, then names starting
+      `calculate`/`grade`; then audit the 279 PASS forms for other
+      partial picks and list them.
+- [ ] **Persona counts, not form counts.** `bin/test-personas` prints
+      `PASS 1` for a form with three personas. Report both (`forms 1/1,
+      personas 3/3`) and add `--verbose` to list per-persona pass/fail.
+- [ ] **Engine-SKIP breakdown as a first-class report.** `bin/test-engines
+      --verbose` already classifies the 76 SKIPs (`grader not found`,
+      `needs a fuller input`, `returned object/boolean`, `default factory
+      not found`, `no engine namespace published`); add `--skip-summary`
+      that groups and counts them so the unblock work can be planned per
+      category.
+
+### Unblocking the 76 engine-SKIP forms (prerequisite for their personas)
+
+      Counts below are from `bin/test-engines --verbose` on 2026-09-03
+      (43 + 10 + 12 + 6 + 5 = 76), not estimates.
+
+- [ ] **"grader not found" — 43 forms** — e.g. `pediatric-assessment`,
+      `psychiatry-assessment`, `stroke-assessment`, `urology-assessment`,
+      `pulmonology-assessment`, `respirology-assessment`, the six
+      `who-*-form`s, the three
+      `united-kingdom-driver-and-vehicle-licensing-agency-*` forms,
+      `united-kingdom-maternity-certificate-mat-b1`,
+      `united-states-hipaa-authorization-form`, `prescription-request`,
+      `provider-transfer-request`, `patient-room-readiness`,
+      `parkland-formula-for-burns`, `pre-operative-assessment-by-patient`:
+      the module exports helpers but no recognisable entry point. Add a
+      single composed `calculateGrade(data)` (or a `graderHint`) so
+      discovery works; keep the existing per-axis functions.
+- [ ] **"needs a fuller input" — 10 forms** — `anaesthetic-record`,
+      `bone-marrow-donation-assessment`, `code-of-conduct-notice`,
+      `dietic-assessment`, `eye-prescription`, `organ-donation-assessment`,
+      `research-and-planning-privacy-notice`, `structured-medication-review`,
+      `united-kingdom-lasting-power-of-attorney-for-financial-decisions`,
+      `…-for-health-and-care-decisions`: the empty factory does not satisfy
+      the grader (throws on `undefined.presentingProblems`,
+      `undefined.dateOfBirth`, `undefined.find` …). Make the graders
+      null-safe over the empty shape, or make the factory return the full
+      shape the grader expects.
+- [ ] **"returned object / boolean / undefined" — 12 forms** —
+      `cataract-diagnostic-evaluation`, `chronic-kidney-disease-review`,
+      `diabetes-assessment`, `genetics-assessment`,
+      `health-screening-questionnaire`, `hematology-assessment`,
+      `knee-replacement-surgery-evaluation`, `medication-reconciliation`,
+      `paediatric-early-warning-score` (`scoreCapillaryRefill`),
+      `perioperative-optimization` (`computeAuditCScore`),
+      `vaccinations-assessment` (`calculateCompositeScore`),
+      `who-counter-referral-form` (`hasAnyStatusFlag`): discovery latched
+      onto a helper whose return is not a grading result. Same fix as the
+      discovery-heuristic item above, plus a composed entry point.
+- [ ] **"no engine namespace published" — 6 forms** —
+      `agile-consulting-scorecard-for-hiring-help`,
+      `architecture-decision-record`,
+      `international-certificate-of-vaccination-or-prophylaxis`,
+      `legal-requirements-privacy-notice`,
+      `medical-information-form-for-air-travel`,
+      `screening-program-privacy-notice`: the HTML front-end has no
+      importable engine at all. Decide per form whether it *should* have
+      one (privacy notices and certificates may legitimately be
+      acknowledgement-only) — if not, teach `bin/test-engines` an explicit
+      `engine: none` marker so they stop counting as SKIP.
+- [ ] **"default factory not found" — 5 forms** — `agile-checklist`,
+      `agile-principles-assessment`, `issue-tracker`,
+      `objectives-and-key-results-tracker`,
+      `united-kingdom-nhs-england-medical-exemption-certificate`
+      (`grader=evaluateFp92a`): the grader exists but no `empty*` /
+      `createDefault*` factory is exported. Export one (the wizard already
+      has the blank shape internally).
+- [ ] Then: personas for each unblocked form, 3 each, same methodology.
+
+### Spec-driven follow-through
+
+- [ ] **Promote persona-note findings into `spec/index.md`.** Every quirk
+      above currently lives only in a `personas.json` `note`. Add a
+      "Verified engine behaviour" subsection to each affected form's living
+      spec so the behaviour is either spec'd or spec'd-as-a-bug, per the
+      update-specs-before-code rule.
+- [ ] **Seed dashboards from personas.** Each `front-end-with-html/js/data.js`
+      carries synthetic sample rows; generate them from
+      `examples/personas.json` (state + `expected`) so the dashboard and the
+      oracle can never disagree. `--check` tool, fleet-wide.
+- [ ] **Persona → FHIR R5 Bundle** (already listed under Phase 11 as "FHIR
+      bundles for personas"): now that 276/355 forms have personas, do it
+      as a generator with `--check`, starting from the `*-test-result`
+      family whose Bundles share one shape.
+
 ## Done (previous rounds — summary)
 
 - 286 forms built to uniform depth: specs, docs, SQL, generated XML / FHIR
