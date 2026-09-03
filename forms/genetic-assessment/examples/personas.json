@@ -1,0 +1,433 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateRisk",
+  "note": "Realistic filled-in states in the risk-grader's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas` — it covers `calculateRisk`'s own return value (riskScore, riskLevel, firedRules) only; the independent `detectAdditionalFlags` clinician-facing flags are a separate, unchecked module (mirrored here in the persona descriptions for context, hand-verified against the rules but not part of `expected`). Risk-Family-001 (score) fires at >=2 family members with a cancer history; the analogous flag (FLAG-FAMILY-CANCER-001) requires >=3 — a real, distinct threshold, not a typo. Also notable: FLAG-URGENT-001 checks the literal referral urgency value 'emergency' specifically; 'urgent' does not trigger it.",
+  "personas": [
+    {
+      "name": "low-risk-isolated-birth-defect",
+      "description": "A baby with an isolated, surgically-repaired unilateral cleft lip and no other anomalies, no cancer or family history, referred routinely before further family planning: the single birth-defects factor (weight 2) sits exactly at the Low/Moderate boundary — expect riskScore 2, riskLevel Low.",
+      "state": {
+        "demographics": {
+          "firstName": "Priya",
+          "lastName": "Anand",
+          "dateOfBirth": "1990-05-10",
+          "sex": "female"
+        },
+        "referralInformation": {
+          "referralReason": "Baby born with a cleft lip; referred for genetic assessment prior to further family planning.",
+          "referringClinician": "Dr. Femi Okafor (Paediatrics)",
+          "urgency": "routine"
+        },
+        "personalMedicalHistory": {
+          "birthDefects": "yes",
+          "birthDefectsDetails": "Unilateral cleft lip, surgically repaired at 4 months of age, isolated finding with no other anomalies.",
+          "developmentalDelay": "no",
+          "developmentalDelayDetails": "",
+          "intellectualDisability": "no",
+          "intellectualDisabilityDetails": "",
+          "multipleAnomalies": "no",
+          "multipleAnomaliesDetails": "",
+          "chromosomalCondition": "no",
+          "chromosomalConditionDetails": "",
+          "knownGeneticCondition": "no",
+          "knownGeneticConditionDetails": ""
+        },
+        "cancerHistory": {
+          "personalCancerHistory": "no",
+          "cancerType": "",
+          "ageAtDiagnosis": null,
+          "multiplePrimaryCancers": "no"
+        },
+        "familyPedigree": {
+          "maternalGrandmother": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "maternalGrandfather": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "paternalGrandmother": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "paternalGrandfather": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "mother": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "father": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "siblings": "",
+          "children": ""
+        },
+        "cardiovascularGenetics": {
+          "familialHypercholesterolemia": "no",
+          "cardiomyopathy": "no",
+          "aorticAneurysm": "no",
+          "suddenCardiacDeath": "no",
+          "earlyOnsetCVD": "no",
+          "cardiovascularDetails": ""
+        },
+        "neurogenetics": {
+          "huntington": "no",
+          "alzheimersEarly": "no",
+          "parkinson": "no",
+          "muscularDystrophy": "no",
+          "spinocerebellarAtaxia": "no",
+          "neurologicalDetails": ""
+        },
+        "reproductiveGenetics": {
+          "recurrentMiscarriages": "no",
+          "infertility": "no",
+          "previousAffectedChild": "no",
+          "previousAffectedChildDetails": "",
+          "consanguinity": "no",
+          "carrierStatus": "no",
+          "carrierStatusDetails": ""
+        },
+        "ethnicBackground": {
+          "ethnicity": "White British",
+          "ashkenaziJewish": "no",
+          "consanguinity": "no",
+          "consanguinityDetails": ""
+        },
+        "geneticTestingHistory": {
+          "previousGeneticTests": "no",
+          "previousGeneticTestsDetails": "",
+          "testResults": "",
+          "geneticCounseling": "no",
+          "variantsOfUncertainSignificance": "no",
+          "variantsOfUncertainSignificanceDetails": ""
+        }
+      },
+      "expected": {
+        "riskScore": 2,
+        "riskLevel": "Low",
+        "firedRules": [
+          {
+            "id": "RISK-BIRTH-001",
+            "category": "Personal History",
+            "description": "Birth defects present",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "moderate-risk-known-lynch-variant-and-miscarriages",
+      "description": "A known carrier of a pathogenic MLH1 variant (Lynch syndrome, confirmed via cascade testing after a sibling's colorectal cancer diagnosis at 41) with recurrent early pregnancy loss, referred for reproductive genetic counselling: known-genetic-condition (weight 3) plus recurrent-miscarriages (weight 2) sit exactly at the Moderate band's upper boundary — expect riskScore 5, riskLevel Moderate.",
+      "state": {
+        "demographics": {
+          "firstName": "Sam",
+          "lastName": "Okoro",
+          "dateOfBirth": "1985-11-02",
+          "sex": "female"
+        },
+        "referralInformation": {
+          "referralReason": "Known Lynch syndrome pathogenic variant in the family; personal history of recurrent early pregnancy loss; referred for genetic counselling regarding reproductive options.",
+          "referringClinician": "Dr. Priya Anand (Genetics)",
+          "urgency": "routine"
+        },
+        "personalMedicalHistory": {
+          "birthDefects": "no",
+          "birthDefectsDetails": "",
+          "developmentalDelay": "no",
+          "developmentalDelayDetails": "",
+          "intellectualDisability": "no",
+          "intellectualDisabilityDetails": "",
+          "multipleAnomalies": "no",
+          "multipleAnomaliesDetails": "",
+          "chromosomalCondition": "no",
+          "chromosomalConditionDetails": "",
+          "knownGeneticCondition": "yes",
+          "knownGeneticConditionDetails": "Confirmed carrier of a pathogenic MLH1 variant (Lynch syndrome), identified via cascade testing after a sibling's diagnosis."
+        },
+        "cancerHistory": {
+          "personalCancerHistory": "no",
+          "cancerType": "",
+          "ageAtDiagnosis": null,
+          "multiplePrimaryCancers": "no"
+        },
+        "familyPedigree": {
+          "maternalGrandmother": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "maternalGrandfather": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "paternalGrandmother": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "paternalGrandfather": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "mother": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "father": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "siblings": "Brother diagnosed with colorectal cancer at age 41, confirmed MLH1 carrier.",
+          "children": ""
+        },
+        "cardiovascularGenetics": {
+          "familialHypercholesterolemia": "no",
+          "cardiomyopathy": "no",
+          "aorticAneurysm": "no",
+          "suddenCardiacDeath": "no",
+          "earlyOnsetCVD": "no",
+          "cardiovascularDetails": ""
+        },
+        "neurogenetics": {
+          "huntington": "no",
+          "alzheimersEarly": "no",
+          "parkinson": "no",
+          "muscularDystrophy": "no",
+          "spinocerebellarAtaxia": "no",
+          "neurologicalDetails": ""
+        },
+        "reproductiveGenetics": {
+          "recurrentMiscarriages": "yes",
+          "infertility": "no",
+          "previousAffectedChild": "no",
+          "previousAffectedChildDetails": "",
+          "consanguinity": "no",
+          "carrierStatus": "no",
+          "carrierStatusDetails": ""
+        },
+        "ethnicBackground": {
+          "ethnicity": "Nigerian",
+          "ashkenaziJewish": "no",
+          "consanguinity": "no",
+          "consanguinityDetails": ""
+        },
+        "geneticTestingHistory": {
+          "previousGeneticTests": "yes",
+          "previousGeneticTestsDetails": "Sibling underwent cascade testing and was confirmed positive for the familial MLH1 variant; patient has not yet been tested herself.",
+          "testResults": "",
+          "geneticCounseling": "yes",
+          "variantsOfUncertainSignificance": "no",
+          "variantsOfUncertainSignificanceDetails": ""
+        }
+      },
+      "expected": {
+        "riskScore": 5,
+        "riskLevel": "Moderate",
+        "firedRules": [
+          {
+            "id": "RISK-GENETIC-001",
+            "category": "Personal History",
+            "description": "Known genetic condition",
+            "weight": 3
+          },
+          {
+            "id": "RISK-REPRO-001",
+            "category": "Reproductive Genetics",
+            "description": "Recurrent miscarriages",
+            "weight": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-early-onset-cancer-family-cluster-cardiac-death",
+      "description": "Early-onset colorectal cancer at 38, a three-generation maternal family cancer cluster (mother, maternal grandmother, and paternal grandmother all with cancer — enough to fire both the >=2 family-cancer-history score rule and the stricter >=3 family-cancer-cluster flag), and a maternal uncle's sudden cardiac death at 34: personal cancer history (2) + early-onset cancer under 50 (3) + family cancer history (2) + sudden cardiac death (3) sum well past the High threshold — expect riskScore 10, riskLevel High.",
+      "state": {
+        "demographics": {
+          "firstName": "Robert",
+          "lastName": "Kim",
+          "dateOfBirth": "1988-03-14",
+          "sex": "male"
+        },
+        "referralInformation": {
+          "referralReason": "Personal history of early-onset colorectal cancer and family history of sudden cardiac death; referred for hereditary cancer and cardiac genetics assessment.",
+          "referringClinician": "Dr. Helena Farrow (Oncology)",
+          "urgency": "urgent"
+        },
+        "personalMedicalHistory": {
+          "birthDefects": "no",
+          "birthDefectsDetails": "",
+          "developmentalDelay": "no",
+          "developmentalDelayDetails": "",
+          "intellectualDisability": "no",
+          "intellectualDisabilityDetails": "",
+          "multipleAnomalies": "no",
+          "multipleAnomaliesDetails": "",
+          "chromosomalCondition": "no",
+          "chromosomalConditionDetails": "",
+          "knownGeneticCondition": "no",
+          "knownGeneticConditionDetails": ""
+        },
+        "cancerHistory": {
+          "personalCancerHistory": "yes",
+          "cancerType": "Colorectal adenocarcinoma",
+          "ageAtDiagnosis": 38,
+          "multiplePrimaryCancers": "no"
+        },
+        "familyPedigree": {
+          "maternalGrandmother": {
+            "conditions": "",
+            "cancers": "Ovarian cancer",
+            "ageAtDiagnosis": "60",
+            "deceased": "yes",
+            "ageAtDeath": "67"
+          },
+          "maternalGrandfather": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "paternalGrandmother": {
+            "conditions": "",
+            "cancers": "Colon cancer",
+            "ageAtDiagnosis": "70",
+            "deceased": "yes",
+            "ageAtDeath": "78"
+          },
+          "paternalGrandfather": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "mother": {
+            "conditions": "",
+            "cancers": "Breast cancer",
+            "ageAtDiagnosis": "45",
+            "deceased": "yes",
+            "ageAtDeath": "52"
+          },
+          "father": {
+            "conditions": "",
+            "cancers": "",
+            "ageAtDiagnosis": "",
+            "deceased": "",
+            "ageAtDeath": ""
+          },
+          "siblings": "",
+          "children": ""
+        },
+        "cardiovascularGenetics": {
+          "familialHypercholesterolemia": "no",
+          "cardiomyopathy": "no",
+          "aorticAneurysm": "no",
+          "suddenCardiacDeath": "yes",
+          "earlyOnsetCVD": "no",
+          "cardiovascularDetails": "Maternal uncle died suddenly at age 34 during exercise; cause presumed cardiac, no autopsy performed."
+        },
+        "neurogenetics": {
+          "huntington": "no",
+          "alzheimersEarly": "no",
+          "parkinson": "no",
+          "muscularDystrophy": "no",
+          "spinocerebellarAtaxia": "no",
+          "neurologicalDetails": ""
+        },
+        "reproductiveGenetics": {
+          "recurrentMiscarriages": "no",
+          "infertility": "no",
+          "previousAffectedChild": "no",
+          "previousAffectedChildDetails": "",
+          "consanguinity": "no",
+          "carrierStatus": "no",
+          "carrierStatusDetails": ""
+        },
+        "ethnicBackground": {
+          "ethnicity": "Korean",
+          "ashkenaziJewish": "no",
+          "consanguinity": "no",
+          "consanguinityDetails": ""
+        },
+        "geneticTestingHistory": {
+          "previousGeneticTests": "no",
+          "previousGeneticTestsDetails": "",
+          "testResults": "",
+          "geneticCounseling": "no",
+          "variantsOfUncertainSignificance": "no",
+          "variantsOfUncertainSignificanceDetails": ""
+        }
+      },
+      "expected": {
+        "riskScore": 10,
+        "riskLevel": "High",
+        "firedRules": [
+          {
+            "id": "RISK-CANCER-001",
+            "category": "Cancer History",
+            "description": "Personal cancer history",
+            "weight": 2
+          },
+          {
+            "id": "RISK-CANCER-002",
+            "category": "Cancer History",
+            "description": "Early onset cancer (before age 50)",
+            "weight": 3
+          },
+          {
+            "id": "RISK-FAMILY-001",
+            "category": "Family History",
+            "description": "Multiple family members with cancer",
+            "weight": 2
+          },
+          {
+            "id": "RISK-CVD-003",
+            "category": "Cardiovascular Genetics",
+            "description": "Sudden cardiac death in family",
+            "weight": 3
+          }
+        ]
+      }
+    }
+  ]
+}

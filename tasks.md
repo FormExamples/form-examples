@@ -1159,8 +1159,40 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       zero fired flags — all three bands (draft/ready/mature) matched
       hand-derived predictions exactly on first `--update`, including a
       literal 12-flag draft persona and a 0-flag mature persona.
-      16 of these 19 forms remain: genetic-assessment,
-      gynecology-assessment, hernia-diagnostic-evaluation,
+      3 more done 2026-09-03 (genetic-assessment, gynecology-assessment,
+      hernia-diagnostic-evaluation — same methodology, three more
+      distinct older engine shapes: genetic-assessment's
+      `calculateRisk` (a `risk-grader.js`/`rules.js`/`flagged-issues.js`
+      weighted-score split, 23 individually-weighted risk rules summed
+      into a 0-2/3-5/6+ Low/Moderate/High band) and
+      gynecology-assessment's `calculateSymptomScore`
+      (`symptom-grader.js`/`symptom-rules.js`/`flagged-issues.js`, a
+      10-item 0-30 Menstrual Symptom Severity Score where items 7-10 are
+      *derived* — `min(3, round(totalPhysical/6))` applied identically
+      to all four — not independently rated) both compute their risk
+      score/severity via one exported function while `flagged-issues.js`'s
+      `detectAdditionalFlags` stays a separate, uncombined function not
+      covered by `expected` (unlike the `*-test-result` family's single
+      `calculateGrade` that already folds flags in) — noted explicitly
+      in each persona file's top-level `note` rather than assumed;
+      hernia-diagnostic-evaluation's `calculateHerniaEvaluation` is a
+      real four-axis+flags composite (classification, reducibility,
+      red-flag screen, red-flag-first urgency band) — its second and
+      third personas isolate 'urgent' (irreducible, no red flags) from
+      'emergency' (irreducible AND red-flag-positive, which fires only
+      the emergency urgency rule since red-flag-first returns before
+      the reducibility branch is ever reached), and both also verified a
+      genuine engine quirk: `examInconclusive` trips whenever a
+      cough-impulse is NOT elicited even with a confirmed palpable
+      mass — true whenever the hernia doesn't currently reduce — so the
+      occult-hernia-suspected flag fires in both the urgent and the
+      emergency persona despite a clinically confirmed diagnosis in
+      each. All three forms' personas matched hand-derived predictions
+      exactly on first `--update` (one persona's descriptive prose,
+      not its `expected` JSON, needed a same-turn arithmetic fix:
+      gynecology-assessment's severe persona was hand-computed as 26,
+      confirmed by the tool as 27, and the description corrected to
+      match). 13 of these 19 forms remain:
       hip-replacement-surgery-evaluation, care-privacy-notice,
       international-patient-summary, lifeguard-certification-checklist,
       outpatient-outcome, patient-reported-outcome-measures,
@@ -1171,7 +1203,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       united-kingdom-statement-of-fitness-for-work,
       vaccinations-checklist, ward-round-note (count re-verified
       directly against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 273/355). The remaining
+      `bin/test-personas` ground truth: PASS 276/355). The remaining
       ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
       fuller input / returns a bare object or boolean / no engine
       namespace published) need discovery-hint fixes in their engines

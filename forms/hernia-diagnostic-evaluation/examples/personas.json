@@ -1,0 +1,593 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateHerniaEvaluation",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `computeUrgency` is red-flag-first: `anyRedFlag` is checked before the reducibility branch, so an irreducible hernia with a positive red-flag screen fires only the emergency rule, never the urgent-reducibility rule, even though the reducibility status alone would independently justify 'urgent'. Also notable, verified directly: `examInconclusive` is true whenever EITHER `palpableMass` is not 'yes' OR `coughImpulsePositive` is not 'yes' — so a confirmed palpable mass with no elicitable cough impulse (as happens whenever the hernia does not currently reduce) still counts as an inconclusive exam and raises the occult-hernia-suspected flag, even alongside a confirmed clinical diagnosis.",
+  "personas": [
+    {
+      "name": "routine-reducible-indirect-inguinal-hernia",
+      "description": "A gradually-enlarging, freely reducible left indirect inguinal hernia in a warehouse worker, low pain (2/10), EHS grade 1, no red flags, confirmed by a positive cough impulse: expect computedUrgency routine, finalUrgency routine, recommendation watchful-waiting, and no safety flags.",
+      "state": {
+        "status": "submitted",
+        "clinician": {
+          "clinicianName": "Dr. Priya Anand",
+          "role": "general-practitioner",
+          "registrationBody": "GMC",
+          "registrationNumber": "7654321",
+          "assessmentDate": "2026-08-20",
+          "assessmentTime": "09:30",
+          "siteName": "Riverside Health Centre"
+        },
+        "patient": {
+          "firstName": "David",
+          "lastName": "Chen",
+          "birthDate": "1985-06-15",
+          "sex": "male",
+          "nhsNumber": "",
+          "email": "",
+          "phone": ""
+        },
+        "history": {
+          "durationOfBulge": "1-6-months",
+          "painScore0To10": 2,
+          "painOnset": "gradual",
+          "aggravatedByStraining": "yes",
+          "aggravatedByLifting": "yes",
+          "aggravatedByCoughing": "no",
+          "priorHerniaHistory": "no",
+          "priorHerniaRepair": "no",
+          "priorHerniaRepairMesh": "",
+          "priorHerniaRepairSite": "",
+          "historyNotes": "Noticed a gradually enlarging groin bulge over several months, worse with straining and lifting."
+        },
+        "riskFactors": {
+          "riskChronicCough": "no",
+          "riskConstipationOrStraining": "no",
+          "riskHeavyLiftingOccupation": "yes",
+          "riskObesity": "no",
+          "riskSmoking": "no",
+          "riskFamilyHistory": "no",
+          "riskPriorAbdominalSurgery": "no",
+          "riskPregnancy": "no",
+          "riskConnectiveTissueDisorder": "no",
+          "riskAscites": "no",
+          "riskFactorsNotes": "Works as a warehouse operative with regular heavy lifting."
+        },
+        "inspection": {
+          "inspectionLocation": "groin",
+          "inspectionLocationOther": "",
+          "bulgeVisibleAtRest": "yes",
+          "bulgeEnlargesOnStandingOrStraining": "yes",
+          "skinChanges": "none",
+          "inspectionNotes": "Visible left groin bulge, enlarges on standing and Valsalva."
+        },
+        "palpation": {
+          "palpableMass": "yes",
+          "coughImpulsePositive": "yes",
+          "tenderness": "no",
+          "massSizeAsCm": 1.5,
+          "palpationNotes": "Soft, non-tender, expansile cough impulse palpable."
+        },
+        "reducibility": {
+          "reducibilityStatus": "reducible",
+          "reducesSpontaneously": "yes",
+          "reducesWithManualPressure": "yes",
+          "doesNotReduce": "no",
+          "reducibilityNotes": "Reduces spontaneously on lying down."
+        },
+        "redFlags": {
+          "redFlagSeverePain": "no",
+          "redFlagVomiting": "no",
+          "redFlagFever": "no",
+          "redFlagAbsoluteConstipation": "no",
+          "redFlagErythemaOrDiscolouration": "no",
+          "redFlagPreviouslyReducibleNowIrreducible": "no",
+          "redFlagTachycardia": "no",
+          "redFlagNotes": ""
+        },
+        "classification": {
+          "herniaType": "inguinal",
+          "herniaTypeOther": "",
+          "inguinalSubtype": "indirect",
+          "laterality": "left",
+          "ehsSizeGrade": "1",
+          "classificationNotes": ""
+        },
+        "imaging": {
+          "ultrasoundPerformed": "no",
+          "ultrasoundFindings": "",
+          "ctPerformed": "no",
+          "ctFindings": "",
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "imagingIndication": "not-indicated",
+          "imagingNotes": ""
+        },
+        "differential": {
+          "differentialLipoma": "no",
+          "differentialLymphadenopathy": "no",
+          "differentialHydrocele": "no",
+          "differentialUndescendedTestis": "no",
+          "differentialFemoralAneurysm": "no",
+          "differentialAbscess": "no",
+          "differentialOther": "no",
+          "differentialNotes": ""
+        },
+        "functionalImpact": {
+          "painInterferesWithWorkOrActivity": "no",
+          "functionalImpactScale0To10": 1,
+          "activityLimitation": ""
+        },
+        "management": {
+          "managementPlan": "watchful-waiting",
+          "conservativeDetail": "",
+          "referralMade": "yes",
+          "referralTargetTimeframe": "within-18-weeks",
+          "managementNotes": "Referred to general surgery for elective assessment; watchful waiting discussed as an option given minimal symptoms."
+        },
+        "summary": {
+          "overrideUrgency": "",
+          "overrideReason": "",
+          "additionalNotes": "",
+          "signedByName": "Dr. Priya Anand"
+        }
+      },
+      "expected": {
+        "herniaType": "inguinal",
+        "herniaSubtype": "indirect",
+        "ehsClassification": "Inguinal, Indirect, Left, EHS grade 1 (< 2cm)",
+        "ehsSizeGrade": "1",
+        "reducibilityStatus": "reducible",
+        "anyRedFlag": false,
+        "computedUrgency": "routine",
+        "finalUrgency": "routine",
+        "overrideReason": "",
+        "recommendation": "watchful-waiting",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASSIFICATION-TYPE",
+            "instrument": "classification",
+            "component": "hernia-type",
+            "score": null,
+            "band": "",
+            "category": "clinical classification",
+            "description": "Classified as Inguinal, Indirect, Left, EHS grade 1 (< 2cm)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "urgent-irreducible-umbilical-hernia-no-red-flags",
+      "description": "A long-standing, previously-always-reducible umbilical hernia now persistently irreducible for 2 days but otherwise systemically well, with the negative red-flag screen safety-netted: irreducibility alone (with no red flags) drives urgency to 'urgent' via the reducibility branch, not 'emergency'; the absent cough impulse (because it no longer reduces) also raises the occult-hernia-suspected flag despite the mass being clinically confirmed — expect computedUrgency urgent, finalUrgency urgent, recommendation urgent-referral, and F-INCARCERATION-RISK-001 (not F-STRANGULATION-SUSPECTED-001, which needs a positive red flag too).",
+      "state": {
+        "status": "urgent",
+        "clinician": {
+          "clinicianName": "Dr. Femi Okafor",
+          "role": "surgical-registrar",
+          "registrationBody": "GMC",
+          "registrationNumber": "1122334",
+          "assessmentDate": "2026-08-25",
+          "assessmentTime": "14:15",
+          "siteName": "City General Hospital — Surgical Assessment Unit"
+        },
+        "patient": {
+          "firstName": "Margaret",
+          "lastName": "Wallis",
+          "birthDate": "1952-02-10",
+          "sex": "female",
+          "nhsNumber": "",
+          "email": "",
+          "phone": ""
+        },
+        "history": {
+          "durationOfBulge": "more-than-1-year",
+          "painScore0To10": 3,
+          "painOnset": "gradual",
+          "aggravatedByStraining": "yes",
+          "aggravatedByLifting": "yes",
+          "aggravatedByCoughing": "yes",
+          "priorHerniaHistory": "yes",
+          "priorHerniaRepair": "no",
+          "priorHerniaRepairMesh": "",
+          "priorHerniaRepairSite": "",
+          "historyNotes": "Long-standing umbilical hernia, previously always reducible, now noted to be persistently irreducible for the past 2 days but not acutely painful."
+        },
+        "riskFactors": {
+          "riskChronicCough": "no",
+          "riskConstipationOrStraining": "no",
+          "riskHeavyLiftingOccupation": "no",
+          "riskObesity": "yes",
+          "riskSmoking": "no",
+          "riskFamilyHistory": "no",
+          "riskPriorAbdominalSurgery": "no",
+          "riskPregnancy": "no",
+          "riskConnectiveTissueDisorder": "no",
+          "riskAscites": "no",
+          "riskFactorsNotes": "BMI 34."
+        },
+        "inspection": {
+          "inspectionLocation": "umbilical",
+          "inspectionLocationOther": "",
+          "bulgeVisibleAtRest": "yes",
+          "bulgeEnlargesOnStandingOrStraining": "yes",
+          "skinChanges": "none",
+          "inspectionNotes": "Firm umbilical bulge, no overlying skin changes."
+        },
+        "palpation": {
+          "palpableMass": "yes",
+          "coughImpulsePositive": "no",
+          "tenderness": "no",
+          "massSizeAsCm": 3.5,
+          "palpationNotes": "Firm, non-tender mass; no expansile cough impulse elicited as the hernia does not currently reduce."
+        },
+        "reducibility": {
+          "reducibilityStatus": "irreducible",
+          "reducesSpontaneously": "no",
+          "reducesWithManualPressure": "no",
+          "doesNotReduce": "yes",
+          "reducibilityNotes": "Attempted gentle reduction unsuccessful; hernia has been irreducible for 2 days."
+        },
+        "redFlags": {
+          "redFlagSeverePain": "no",
+          "redFlagVomiting": "no",
+          "redFlagFever": "no",
+          "redFlagAbsoluteConstipation": "no",
+          "redFlagErythemaOrDiscolouration": "no",
+          "redFlagPreviouslyReducibleNowIrreducible": "no",
+          "redFlagTachycardia": "no",
+          "redFlagNotes": "No severe pain, vomiting, fever, absolute constipation, skin changes, or tachycardia at this time; will safety-net to return immediately if any develop."
+        },
+        "classification": {
+          "herniaType": "umbilical",
+          "herniaTypeOther": "",
+          "inguinalSubtype": "",
+          "laterality": "",
+          "ehsSizeGrade": "2",
+          "classificationNotes": ""
+        },
+        "imaging": {
+          "ultrasoundPerformed": "no",
+          "ultrasoundFindings": "",
+          "ctPerformed": "no",
+          "ctFindings": "",
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "imagingIndication": "not-indicated",
+          "imagingNotes": ""
+        },
+        "differential": {
+          "differentialLipoma": "no",
+          "differentialLymphadenopathy": "no",
+          "differentialHydrocele": "no",
+          "differentialUndescendedTestis": "no",
+          "differentialFemoralAneurysm": "no",
+          "differentialAbscess": "no",
+          "differentialOther": "no",
+          "differentialNotes": ""
+        },
+        "functionalImpact": {
+          "painInterferesWithWorkOrActivity": "no",
+          "functionalImpactScale0To10": 2,
+          "activityLimitation": ""
+        },
+        "management": {
+          "managementPlan": "urgent-referral",
+          "conservativeDetail": "",
+          "referralMade": "yes",
+          "referralTargetTimeframe": "same-day",
+          "managementNotes": "Same-day surgical assessment arranged given persistent irreducibility."
+        },
+        "summary": {
+          "overrideUrgency": "",
+          "overrideReason": "",
+          "additionalNotes": "",
+          "signedByName": "Dr. Femi Okafor"
+        }
+      },
+      "expected": {
+        "herniaType": "umbilical",
+        "herniaSubtype": "not-applicable",
+        "ehsClassification": "Umbilical, EHS grade 2 (2-4cm)",
+        "ehsSizeGrade": "2",
+        "reducibilityStatus": "irreducible",
+        "anyRedFlag": false,
+        "computedUrgency": "urgent",
+        "finalUrgency": "urgent",
+        "overrideReason": "",
+        "recommendation": "urgent-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASSIFICATION-TYPE",
+            "instrument": "classification",
+            "component": "hernia-type",
+            "score": null,
+            "band": "",
+            "category": "clinical classification",
+            "description": "Classified as Umbilical, EHS grade 2 (2-4cm)."
+          },
+          {
+            "ruleId": "R-REDUCIBILITY-IRREDUCIBLE",
+            "instrument": "reducibility",
+            "component": "status",
+            "score": null,
+            "band": "urgent",
+            "category": "reducibility",
+            "description": "The hernia is irreducible."
+          },
+          {
+            "ruleId": "R-URGENCY-URGENT-REDUCIBILITY",
+            "instrument": "composite",
+            "component": "urgency",
+            "score": null,
+            "band": "urgent",
+            "category": "urgency",
+            "description": "Urgent urgency: the hernia is irreducible with no red flags."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-INCARCERATION-RISK-001",
+            "category": "incarceration-risk",
+            "priority": "high",
+            "description": "The hernia is irreducible with no red-flag symptoms currently present.",
+            "suggestedAction": "Attempt gentle reduction only per local protocol, and arrange urgent surgical review the same day; safety-net the patient to return immediately if pain, vomiting, or fever develop."
+          },
+          {
+            "flagId": "F-OCCULT-HERNIA-SUSPECTED-001",
+            "category": "occult-hernia-suspected",
+            "priority": "medium",
+            "description": "Clinical suspicion of a hernia with a negative or inconclusive examination, and imaging not yet performed.",
+            "suggestedAction": "Arrange dynamic ultrasound (or MRI/CT if ultrasound is unavailable or inconclusive) to confirm an occult hernia before discharge."
+          }
+        ]
+      }
+    },
+    {
+      "name": "emergency-strangulated-inguinal-hernia-red-flags-positive",
+      "description": "A previously-easily-reducible right inguinal hernia now irreducible with sudden severe pain, vomiting, fever, erythema, and tachycardia: six of the seven red flags are positive, forcing computedUrgency to 'emergency' ahead of (and instead of) the reducibility branch's own 'urgent' rule, since the red-flag check runs first and returns immediately; the co-occurring irreducibility plus positive red flags fires the strangulation-suspected flag (not the incarceration-risk flag, which needs a clean red-flag screen) alongside the emergency-referral flag — expect computedUrgency emergency, finalUrgency emergency, recommendation emergency-referral.",
+      "state": {
+        "status": "urgent",
+        "clinician": {
+          "clinicianName": "Dr. Wei Zhang",
+          "role": "general-surgeon",
+          "registrationBody": "GMC",
+          "registrationNumber": "9988776",
+          "assessmentDate": "2026-08-30",
+          "assessmentTime": "02:45",
+          "siteName": "City General Hospital — Emergency Department"
+        },
+        "patient": {
+          "firstName": "Thomas",
+          "lastName": "Reyes",
+          "birthDate": "1965-09-01",
+          "sex": "male",
+          "nhsNumber": "",
+          "email": "",
+          "phone": ""
+        },
+        "history": {
+          "durationOfBulge": "1-4-weeks",
+          "painScore0To10": 9,
+          "painOnset": "sudden",
+          "aggravatedByStraining": "yes",
+          "aggravatedByLifting": "yes",
+          "aggravatedByCoughing": "yes",
+          "priorHerniaHistory": "yes",
+          "priorHerniaRepair": "no",
+          "priorHerniaRepairMesh": "",
+          "priorHerniaRepairSite": "",
+          "historyNotes": "Known reducible right inguinal hernia for 3 weeks, previously reduced easily; woke this morning with sudden severe pain and the hernia now irreducible."
+        },
+        "riskFactors": {
+          "riskChronicCough": "no",
+          "riskConstipationOrStraining": "no",
+          "riskHeavyLiftingOccupation": "no",
+          "riskObesity": "no",
+          "riskSmoking": "no",
+          "riskFamilyHistory": "no",
+          "riskPriorAbdominalSurgery": "no",
+          "riskPregnancy": "no",
+          "riskConnectiveTissueDisorder": "no",
+          "riskAscites": "no",
+          "riskFactorsNotes": ""
+        },
+        "inspection": {
+          "inspectionLocation": "groin",
+          "inspectionLocationOther": "",
+          "bulgeVisibleAtRest": "yes",
+          "bulgeEnlargesOnStandingOrStraining": "yes",
+          "skinChanges": "erythema",
+          "inspectionNotes": "Tense, erythematous right groin swelling."
+        },
+        "palpation": {
+          "palpableMass": "yes",
+          "coughImpulsePositive": "no",
+          "tenderness": "yes",
+          "massSizeAsCm": 4,
+          "palpationNotes": "Tense, tender, irreducible mass; no cough impulse elicited."
+        },
+        "reducibility": {
+          "reducibilityStatus": "irreducible",
+          "reducesSpontaneously": "no",
+          "reducesWithManualPressure": "no",
+          "doesNotReduce": "yes",
+          "reducibilityNotes": "Previously always reduced easily; now will not reduce despite gentle attempts."
+        },
+        "redFlags": {
+          "redFlagSeverePain": "yes",
+          "redFlagVomiting": "yes",
+          "redFlagFever": "yes",
+          "redFlagAbsoluteConstipation": "no",
+          "redFlagErythemaOrDiscolouration": "yes",
+          "redFlagPreviouslyReducibleNowIrreducible": "yes",
+          "redFlagTachycardia": "yes",
+          "redFlagNotes": "Systemically unwell: febrile, tachycardic, vomiting, severe pain out of proportion to examination."
+        },
+        "classification": {
+          "herniaType": "inguinal",
+          "herniaTypeOther": "",
+          "inguinalSubtype": "indirect",
+          "laterality": "right",
+          "ehsSizeGrade": "2",
+          "classificationNotes": ""
+        },
+        "imaging": {
+          "ultrasoundPerformed": "no",
+          "ultrasoundFindings": "",
+          "ctPerformed": "no",
+          "ctFindings": "",
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "imagingIndication": "not-indicated",
+          "imagingNotes": "No imaging performed; clinical diagnosis of strangulation made, proceeding directly to emergency surgery."
+        },
+        "differential": {
+          "differentialLipoma": "no",
+          "differentialLymphadenopathy": "no",
+          "differentialHydrocele": "no",
+          "differentialUndescendedTestis": "no",
+          "differentialFemoralAneurysm": "no",
+          "differentialAbscess": "no",
+          "differentialOther": "no",
+          "differentialNotes": ""
+        },
+        "functionalImpact": {
+          "painInterferesWithWorkOrActivity": "yes",
+          "functionalImpactScale0To10": 10,
+          "activityLimitation": "Unable to stand or walk due to pain."
+        },
+        "management": {
+          "managementPlan": "emergency-referral",
+          "conservativeDetail": "",
+          "referralMade": "yes",
+          "referralTargetTimeframe": "immediate",
+          "managementNotes": "Emergency surgical team contacted immediately; patient kept nil by mouth, IV fluids and analgesia started, consented for emergency exploration."
+        },
+        "summary": {
+          "overrideUrgency": "",
+          "overrideReason": "",
+          "additionalNotes": "",
+          "signedByName": "Dr. Wei Zhang"
+        }
+      },
+      "expected": {
+        "herniaType": "inguinal",
+        "herniaSubtype": "indirect",
+        "ehsClassification": "Inguinal, Indirect, Right, EHS grade 2 (2-4cm)",
+        "ehsSizeGrade": "2",
+        "reducibilityStatus": "irreducible",
+        "anyRedFlag": true,
+        "computedUrgency": "emergency",
+        "finalUrgency": "emergency",
+        "overrideReason": "",
+        "recommendation": "emergency-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASSIFICATION-TYPE",
+            "instrument": "classification",
+            "component": "hernia-type",
+            "score": null,
+            "band": "",
+            "category": "clinical classification",
+            "description": "Classified as Inguinal, Indirect, Right, EHS grade 2 (2-4cm)."
+          },
+          {
+            "ruleId": "R-REDUCIBILITY-IRREDUCIBLE",
+            "instrument": "reducibility",
+            "component": "status",
+            "score": null,
+            "band": "urgent",
+            "category": "reducibility",
+            "description": "The hernia is irreducible."
+          },
+          {
+            "ruleId": "R-RED-FLAG-RED-FLAG-SEVERE-PAIN",
+            "instrument": "red-flag",
+            "component": "redFlagSeverePain",
+            "score": null,
+            "band": "emergency",
+            "category": "red-flag screen",
+            "description": "Red flag positive: severe pain out of proportion to examination."
+          },
+          {
+            "ruleId": "R-RED-FLAG-RED-FLAG-VOMITING",
+            "instrument": "red-flag",
+            "component": "redFlagVomiting",
+            "score": null,
+            "band": "emergency",
+            "category": "red-flag screen",
+            "description": "Red flag positive: vomiting."
+          },
+          {
+            "ruleId": "R-RED-FLAG-RED-FLAG-FEVER",
+            "instrument": "red-flag",
+            "component": "redFlagFever",
+            "score": null,
+            "band": "emergency",
+            "category": "red-flag screen",
+            "description": "Red flag positive: fever."
+          },
+          {
+            "ruleId": "R-RED-FLAG-RED-FLAG-ERYTHEMA-OR-DISCOLOURATION",
+            "instrument": "red-flag",
+            "component": "redFlagErythemaOrDiscolouration",
+            "score": null,
+            "band": "emergency",
+            "category": "red-flag screen",
+            "description": "Red flag positive: erythema or skin discolouration over the hernia."
+          },
+          {
+            "ruleId": "R-RED-FLAG-RED-FLAG-PREVIOUSLY-REDUCIBLE-NOW-IRREDUCIBLE",
+            "instrument": "red-flag",
+            "component": "redFlagPreviouslyReducibleNowIrreducible",
+            "score": null,
+            "band": "emergency",
+            "category": "red-flag screen",
+            "description": "Red flag positive: a previously reducible hernia now irreducible."
+          },
+          {
+            "ruleId": "R-RED-FLAG-RED-FLAG-TACHYCARDIA",
+            "instrument": "red-flag",
+            "component": "redFlagTachycardia",
+            "score": null,
+            "band": "emergency",
+            "category": "red-flag screen",
+            "description": "Red flag positive: tachycardia."
+          },
+          {
+            "ruleId": "R-URGENCY-EMERGENCY-RED-FLAG",
+            "instrument": "composite",
+            "component": "urgency",
+            "score": null,
+            "band": "emergency",
+            "category": "urgency",
+            "description": "Emergency urgency: severe pain out of proportion to examination, vomiting, fever, erythema or skin discolouration over the hernia, a previously reducible hernia now irreducible, tachycardia."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-STRANGULATION-SUSPECTED-001",
+            "category": "strangulation-suspected",
+            "priority": "high",
+            "description": "The hernia is irreducible with severe pain out of proportion to examination, vomiting, fever, erythema or skin discolouration over the hernia, a previously reducible hernia now irreducible, tachycardia.",
+            "suggestedAction": "Refer for emergency surgical assessment today; keep the patient nil by mouth and start intravenous fluids pending review."
+          },
+          {
+            "flagId": "F-EMERGENCY-SURGICAL-REFERRAL-001",
+            "category": "emergency-surgical-referral",
+            "priority": "high",
+            "description": "Red-flag symptom screen positive: severe pain out of proportion to examination, vomiting, fever, erythema or skin discolouration over the hernia, a previously reducible hernia now irreducible, tachycardia.",
+            "suggestedAction": "Refer immediately for emergency surgical assessment; do not delay for outpatient imaging."
+          },
+          {
+            "flagId": "F-OCCULT-HERNIA-SUSPECTED-001",
+            "category": "occult-hernia-suspected",
+            "priority": "medium",
+            "description": "Clinical suspicion of a hernia with a negative or inconclusive examination, and imaging not yet performed.",
+            "suggestedAction": "Arrange dynamic ultrasound (or MRI/CT if ultrasound is unavailable or inconclusive) to confirm an occult hernia before discharge."
+          }
+        ]
+      }
+    }
+  ]
+}
