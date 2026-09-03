@@ -1279,11 +1279,24 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       mis-picks** (six total, Phase 13 item updated): ReSPECT
       `completenessPercent` (a bare number) and ward-round-note
       `calculateGrade` (the intermediate tally — no status, no flags —
-      over `assess`). 1 of these 19 forms remains:
-      lifeguard-certification-checklist (count re-verified directly
-      against the fleet each update, not hand-tracked —
-      `bin/test-personas` ground truth: PASS 288/355). The remaining
-      ~66 of the 76 engine-SKIP forms (`grader not found` / needs a
+      over `assess`). Last one done 2026-09-03
+      (lifeguard-certification-checklist — all three matched on first
+      `--update`): `gradeLifeguard` is a split engine (flags take the
+      grading result and use `Date.now()` for the expired-certificate
+      flag, so unpinned) that always lists all 46 rules with a tri-state
+      status; its personas pin the numeric fallbacks (50 m time and CPR
+      rate+depth derive the rule only when the explicit tri-state is
+      blank), that 'na'/'' are excluded from `answeredCount`, that any
+      number of non-critical 'no' is 'needs-development' (the >2 branch
+      is dead — same outcome), and that an unmarked sheet is 'fail',
+      not a vacuous pass. **The 19-form engine-actionable sub-family is
+      COMPLETE (19/19)**, closing the persona backlog for every form
+      `bin/test-engines` can currently load — `bin/test-personas`
+      ground truth: PASS 289/355; verified by set intersection that all
+      66 remaining "no personas" forms lie inside the 76-form
+      engine-SKIP set (the other 10 SKIP forms already gained personas
+      earlier via an explicit `graderHint`). The remaining
+      66 of the 76 engine-SKIP forms (`grader not found` / needs a
       fuller input / returns a bare object or boolean / no engine
       namespace published) need discovery-hint fixes in their engines
       before any persona work is possible — a distinct, harder

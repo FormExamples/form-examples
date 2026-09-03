@@ -1,0 +1,1498 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeLifeguard",
+  "note": "Three hand-authored personas for the RLSS UK NPLQ / ILSF Lifeguard Competency Verification grader. gradeLifeguard evaluates all 46 declarative rules and returns { outcome, criticalFailures, deficiencies, firedRules, answeredCount, totalRules }: firedRules always lists every rule (in registry order, steps 2-9) with its tri-state status; answeredCount counts only 'yes'/'no' ('na' and '' are excluded); any critical rule at 'no' -> 'fail'; otherwise 0 non-critical 'no' -> 'pass', and ANY number of non-critical 'no' -> 'needs-development' (the >2 branch is written separately but yields the same outcome); answeredCount 0 -> 'fail' (an unmarked sheet fails rather than passing vacuously). Two rules fall back to numeric measurements when their explicit tri-state is blank: LIFE-PF-50M-TIME from swim50mTimeSeconds (<= 60 s) and LIFE-CPR-COMPRESSIONS from compressionRate (100-120/min) AND compressionDepth (5.0-6.0 cm) - an explicit 'yes'/'no' always wins over the measurement. detectAdditionalFlags (flagged-issues.js) is a separate export taking the grading result and depending on Date.now() for the expired-certification flag, so flags are NOT pinned here (Phase 13 'flagsHint' tooling task); each description records the flags the persona would raise. No timestamp is returned by gradeLifeguard. Regenerate 'expected' with: bin/test-personas lifeguard-certification-checklist --update",
+  "personas": [
+    {
+      "name": "Clean pass - initial NPLQ candidate, every competency demonstrated",
+      "description": "Nineteen-year-old initial candidate at a leisure-centre pool. Every one of the 46 rules is 'yes'; the timed swim (52 s) and CPR compressions (110/min, 5.5 cm) are left to the numeric fallback so the derived path is exercised. Expect outcome 'pass', criticalFailures [], deficiencies [], answeredCount 46, totalRules 46, and all 46 firedRules with status 'yes'. Unpinned flags: only the three low-priority debrief flags (examiner notes, candidate feedback, development areas all recorded); no prior certification so no expiry check.",
+      "state": {
+        "candidateDetails": {
+          "firstName": "Jamal",
+          "lastName": "Whitcombe",
+          "candidateId": "NPLQ-2026-0417",
+          "dateOfBirth": "2006-09-30",
+          "venueType": "leisure",
+          "venueName": "Riverside Leisure Centre",
+          "assessmentType": "initial",
+          "priorCertificationExpiry": "",
+          "sessionDate": "2026-04-18",
+          "examinerName": "Karen Ashdown",
+          "examinerLicenceNumber": "RLSS-A-118842"
+        },
+        "physicalFitnessSwim": {
+          "swim50mTimeSeconds": 52,
+          "swim50mWithinTime": "",
+          "surfaceDiveDepthMetres": 1.8,
+          "sustainedSurfaceDive": "yes",
+          "swim200mTimeSeconds": 290,
+          "swim200mMixedStrokes": "yes",
+          "treadWaterTwoMinutes": "yes",
+          "towCasualty50m": "yes"
+        },
+        "supervisionScanningZoning": {
+          "understandsZoneOfResponsibility": "yes",
+          "effectiveScanningPattern": "yes",
+          "tenTwentyScanRule": "yes",
+          "recognisesDistressedSwimmer": "yes",
+          "appropriateRotation": "yes",
+          "usesWhistleAndSignals": "yes"
+        },
+        "rescueConscious": {
+          "recognitionAndAlert": "yes",
+          "entryWithoutLossOfSight": "yes",
+          "approachWithFloatingAid": "yes",
+          "reassuresCasualty": "yes",
+          "towToSafety": "yes",
+          "extricationFromWater": "yes"
+        },
+        "rescueUnconscious": {
+          "recognitionAndAlert": "yes",
+          "safeEntryAndApproach": "yes",
+          "airwayManagementInWater": "yes",
+          "effectiveTowToSafety": "yes",
+          "safeExtrication": "yes",
+          "handoverHandsignal": "yes"
+        },
+        "spinalInjuryManagement": {
+          "recognisesMechanism": "yes",
+          "headSplintHold": "yes",
+          "maintainsInlineStabilisation": "yes",
+          "carefulRollIfNeeded": "yes",
+          "useOfSpineboard": "yes",
+          "secureCasualtyToBoard": "yes"
+        },
+        "cprAed": {
+          "compressionRate": 110,
+          "compressionDepth": 5.5,
+          "effectiveCompressions": "",
+          "effectiveVentilations": "yes",
+          "timeToFirstShockSeconds": 68,
+          "aedDeliveredPromptly": "yes",
+          "safeShockNoUnsafeContact": "yes",
+          "continuousQualityCpr": "yes"
+        },
+        "firstAidOxygen": {
+          "bleedingControl": "yes",
+          "burnsManagement": "yes",
+          "fractureImmobilisation": "yes",
+          "recoveryPositionUse": "yes",
+          "oxygenTherapyAdministration": "yes",
+          "usesPocketMaskOrBVM": "yes"
+        },
+        "legalRegulatoryIncident": {
+          "dutyOfCareUnderstood": "yes",
+          "pswpKnowledge": "yes",
+          "eapInvocation": "yes",
+          "incidentReportCompleted": "yes",
+          "riddorAwareness": "yes",
+          "safeguardingChildrenAdults": "yes"
+        },
+        "overallResultSignoff": {
+          "examinerOutcome": "pass",
+          "strengths": "Calm, decisive rescues; excellent scanning discipline; textbook spinal handling.",
+          "developmentAreas": "Keep refining AED pad placement speed.",
+          "examinerNotes": "Strong candidate; recommend as a role model for the next cohort.",
+          "candidateFeedback": "Felt well prepared; found the spinal station the hardest.",
+          "candidateAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "outcome": "pass",
+        "criticalFailures": [],
+        "deficiencies": [],
+        "firedRules": [
+          {
+            "id": "LIFE-PF-50M-TIME",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Completes 50 m timed swim in 60 seconds or less (NPLQ standard).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-DIVE",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Sustained surface dive to required depth and recovers an object.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-200M",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Sustained 200 m swim using mixed strokes (front crawl, breast, back).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-TREAD",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Treads water for 2 minutes with hands clear of the surface.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-TOW",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Tows a casualty 50 m through the water using an approved hold.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-ZONE",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Understands and articulates zone of responsibility.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-PATTERN",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Maintains an effective, systematic scanning pattern across the zone.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-1020",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Applies the 10/20 rule (10 s to recognise, 20 s to reach).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-DISTRESS",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Recognises early signs of a distressed or drowning swimmer.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-ROTATION",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Performs zone rotations safely and at appropriate intervals.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-WHISTLE",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Uses whistle and hand signals correctly to communicate with team.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-RECOG",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Recognises the incident and alerts the team without delay.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-ENTRY",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Enters the water without losing sight of the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-AID",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Approaches with a floating aid (torpedo buoy, throw bag, etc.).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-REASSURE",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Reassures and instructs the casualty during the rescue.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-TOW",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Tows the casualty safely to the side of the pool / shore.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-EXTRICATE",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Extricates the casualty from the water with appropriate technique.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-RECOG",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Recognises unconscious casualty and activates emergency response.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-ENTRY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Performs safe entry and rapid approach to the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-AIRWAY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Manages the airway in the water (head tilt, mouth clear of water).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-TOW",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Effective tow of unconscious casualty to safety, airway protected.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-EXTRICATE",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Safe extrication of unconscious casualty without injury.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-HANDOVER",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Communicates clear handover signal to colleagues / EMS.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-MECH",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Recognises mechanism of injury suggesting suspected spinal trauma.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-HEADSPLINT",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Applies head-splint hold safely in the water.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-INLINE",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Maintains in-line stabilisation throughout movement.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-ROLL",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Performs careful in-water roll if face-down (where indicated).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-BOARD",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Uses spineboard correctly to extricate suspected spinal casualty.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-SECURE",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Secures casualty to spineboard with straps and head blocks.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-COMPRESSIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Effective compressions to standard rate (100-120/min) and depth (5-6 cm).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-VENTILATIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Delivers effective ventilations producing visible chest rise.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-AED-PROMPT",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Delivers AED shock promptly without unsafe contact during shock.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-AED-SAFE",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Calls \"all clear\" and verifies no contact before pressing shock.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-QUALITY",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Maintains continuous high-quality CPR with minimal interruptions.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-BLEEDING",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Controls external bleeding (direct pressure, dressings, elevation).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-BURNS",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Manages burns appropriately (cool water, cover, do not break blisters).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-FRACTURE",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Immobilises suspected fractures and supports the limb.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-RECOVERY",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Places unresponsive breathing casualty in the recovery position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-OXYGEN",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Administers oxygen therapy correctly via mask at appropriate flow.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-MASK",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Uses pocket mask or bag-valve-mask with effective seal.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-DUTY",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates understanding of duty of care and lifeguard responsibilities.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-PSWP",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Knows venue Pool Safety Operating Procedures (PSOP / NOP / EAP).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-EAP",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Can correctly invoke the Emergency Action Plan (EAP).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-REPORT",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Completes incident report accurately and contemporaneously.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-RIDDOR",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates awareness of RIDDOR reportable events.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-SAFEGUARD",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Understands safeguarding obligations for children and adults at risk.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 46,
+        "totalRules": 46
+      }
+    },
+    {
+      "name": "Needs development - requalifying beach lifeguard with two knowledge gaps",
+      "description": "Non-critical edge case: an experienced beach lifeguard requalifying (prior certificate valid to 2027). Every critical competency is demonstrated; two non-critical rules are 'no' (burns management LIFE-FA-BURNS and RIDDOR awareness LIFE-LR-RIDDOR - different categories, so no domain-weakness flag), and two items were not assessed as 'na' (LIFE-SP-ROLL, no face-down roll indicated; LIFE-FA-OXYGEN, no oxygen kit at the beach venue). The timed swim is 58 s (within target, but inside the 5-second margin) and compressions are 118/min at exactly 5.0 cm, both via the numeric fallback. Expect outcome 'needs-development', criticalFailures [], deficiencies [LIFE-FA-BURNS, LIFE-LR-RIDDOR], answeredCount 44, totalRules 46. Unpinned flags: FLAG-MULTI-DEF (medium, exactly 2 deficiencies), FLAG-SWIM-50M-MARGIN (medium), plus low debrief flags; no expiry flag (2027 is in the future).",
+      "state": {
+        "candidateDetails": {
+          "firstName": "Siobhan",
+          "lastName": "Kerrigan",
+          "candidateId": "NPLQ-2026-0522",
+          "dateOfBirth": "1994-03-12",
+          "venueType": "beach",
+          "venueName": "Perranporth Beach (RNLI patrol unit)",
+          "assessmentType": "requalification",
+          "priorCertificationExpiry": "2027-05-31",
+          "sessionDate": "2026-05-09",
+          "examinerName": "Dafydd Prosser",
+          "examinerLicenceNumber": "RLSS-A-104471"
+        },
+        "physicalFitnessSwim": {
+          "swim50mTimeSeconds": 58,
+          "swim50mWithinTime": "",
+          "surfaceDiveDepthMetres": 2,
+          "sustainedSurfaceDive": "yes",
+          "swim200mTimeSeconds": 315,
+          "swim200mMixedStrokes": "yes",
+          "treadWaterTwoMinutes": "yes",
+          "towCasualty50m": "yes"
+        },
+        "supervisionScanningZoning": {
+          "understandsZoneOfResponsibility": "yes",
+          "effectiveScanningPattern": "yes",
+          "tenTwentyScanRule": "yes",
+          "recognisesDistressedSwimmer": "yes",
+          "appropriateRotation": "yes",
+          "usesWhistleAndSignals": "yes"
+        },
+        "rescueConscious": {
+          "recognitionAndAlert": "yes",
+          "entryWithoutLossOfSight": "yes",
+          "approachWithFloatingAid": "yes",
+          "reassuresCasualty": "yes",
+          "towToSafety": "yes",
+          "extricationFromWater": "yes"
+        },
+        "rescueUnconscious": {
+          "recognitionAndAlert": "yes",
+          "safeEntryAndApproach": "yes",
+          "airwayManagementInWater": "yes",
+          "effectiveTowToSafety": "yes",
+          "safeExtrication": "yes",
+          "handoverHandsignal": "yes"
+        },
+        "spinalInjuryManagement": {
+          "recognisesMechanism": "yes",
+          "headSplintHold": "yes",
+          "maintainsInlineStabilisation": "yes",
+          "carefulRollIfNeeded": "na",
+          "useOfSpineboard": "yes",
+          "secureCasualtyToBoard": "yes"
+        },
+        "cprAed": {
+          "compressionRate": 118,
+          "compressionDepth": 5,
+          "effectiveCompressions": "",
+          "effectiveVentilations": "yes",
+          "timeToFirstShockSeconds": 74,
+          "aedDeliveredPromptly": "yes",
+          "safeShockNoUnsafeContact": "yes",
+          "continuousQualityCpr": "yes"
+        },
+        "firstAidOxygen": {
+          "bleedingControl": "yes",
+          "burnsManagement": "no",
+          "fractureImmobilisation": "yes",
+          "recoveryPositionUse": "yes",
+          "oxygenTherapyAdministration": "na",
+          "usesPocketMaskOrBVM": "yes"
+        },
+        "legalRegulatoryIncident": {
+          "dutyOfCareUnderstood": "yes",
+          "pswpKnowledge": "yes",
+          "eapInvocation": "yes",
+          "incidentReportCompleted": "yes",
+          "riddorAwareness": "no",
+          "safeguardingChildrenAdults": "yes"
+        },
+        "overallResultSignoff": {
+          "examinerOutcome": "needs-development",
+          "strengths": "Outstanding surf rescues and casualty handling; confident team leadership.",
+          "developmentAreas": "Burns first aid (cooling duration, no ointments); RIDDOR reportable-event categories.",
+          "examinerNotes": "Two knowledge gaps only - re-present the first-aid theory and RIDDOR module within 4 weeks.",
+          "candidateFeedback": "",
+          "candidateAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "outcome": "needs-development",
+        "criticalFailures": [],
+        "deficiencies": [
+          {
+            "id": "LIFE-FA-BURNS",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Manages burns appropriately (cool water, cover, do not break blisters).",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-LR-RIDDOR",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates awareness of RIDDOR reportable events.",
+            "critical": false,
+            "status": "no"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LIFE-PF-50M-TIME",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Completes 50 m timed swim in 60 seconds or less (NPLQ standard).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-DIVE",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Sustained surface dive to required depth and recovers an object.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-200M",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Sustained 200 m swim using mixed strokes (front crawl, breast, back).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-TREAD",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Treads water for 2 minutes with hands clear of the surface.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-TOW",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Tows a casualty 50 m through the water using an approved hold.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-ZONE",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Understands and articulates zone of responsibility.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-PATTERN",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Maintains an effective, systematic scanning pattern across the zone.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-1020",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Applies the 10/20 rule (10 s to recognise, 20 s to reach).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-DISTRESS",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Recognises early signs of a distressed or drowning swimmer.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-ROTATION",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Performs zone rotations safely and at appropriate intervals.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-WHISTLE",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Uses whistle and hand signals correctly to communicate with team.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-RECOG",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Recognises the incident and alerts the team without delay.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-ENTRY",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Enters the water without losing sight of the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-AID",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Approaches with a floating aid (torpedo buoy, throw bag, etc.).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-REASSURE",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Reassures and instructs the casualty during the rescue.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-TOW",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Tows the casualty safely to the side of the pool / shore.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-EXTRICATE",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Extricates the casualty from the water with appropriate technique.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-RECOG",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Recognises unconscious casualty and activates emergency response.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-ENTRY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Performs safe entry and rapid approach to the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-AIRWAY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Manages the airway in the water (head tilt, mouth clear of water).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-TOW",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Effective tow of unconscious casualty to safety, airway protected.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-EXTRICATE",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Safe extrication of unconscious casualty without injury.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-HANDOVER",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Communicates clear handover signal to colleagues / EMS.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-MECH",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Recognises mechanism of injury suggesting suspected spinal trauma.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-HEADSPLINT",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Applies head-splint hold safely in the water.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-INLINE",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Maintains in-line stabilisation throughout movement.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-ROLL",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Performs careful in-water roll if face-down (where indicated).",
+            "critical": false,
+            "status": "na"
+          },
+          {
+            "id": "LIFE-SP-BOARD",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Uses spineboard correctly to extricate suspected spinal casualty.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-SECURE",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Secures casualty to spineboard with straps and head blocks.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-COMPRESSIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Effective compressions to standard rate (100-120/min) and depth (5-6 cm).",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-VENTILATIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Delivers effective ventilations producing visible chest rise.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-AED-PROMPT",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Delivers AED shock promptly without unsafe contact during shock.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-AED-SAFE",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Calls \"all clear\" and verifies no contact before pressing shock.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-QUALITY",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Maintains continuous high-quality CPR with minimal interruptions.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-BLEEDING",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Controls external bleeding (direct pressure, dressings, elevation).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-BURNS",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Manages burns appropriately (cool water, cover, do not break blisters).",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-FA-FRACTURE",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Immobilises suspected fractures and supports the limb.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-RECOVERY",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Places unresponsive breathing casualty in the recovery position.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-FA-OXYGEN",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Administers oxygen therapy correctly via mask at appropriate flow.",
+            "critical": false,
+            "status": "na"
+          },
+          {
+            "id": "LIFE-FA-MASK",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Uses pocket mask or bag-valve-mask with effective seal.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-DUTY",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates understanding of duty of care and lifeguard responsibilities.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-PSWP",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Knows venue Pool Safety Operating Procedures (PSOP / NOP / EAP).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-EAP",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Can correctly invoke the Emergency Action Plan (EAP).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-REPORT",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Completes incident report accurately and contemporaneously.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-LR-RIDDOR",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates awareness of RIDDOR reportable events.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-LR-SAFEGUARD",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Understands safeguarding obligations for children and adults at risk.",
+            "critical": false,
+            "status": "yes"
+          }
+        ],
+        "answeredCount": 44,
+        "totalRules": 46
+      }
+    },
+    {
+      "name": "Fail - lapsed requalifier, three critical failures, assessment halted after CPR",
+      "description": "Critical-highest persona: a requalifying pool lifeguard whose certificate expired 2026-01-31, assessed 2026-03-07. Three critical competencies fail: the timed swim measures 66 s with the tri-state left blank (numeric fallback -> 'no'), the unconscious-casualty tow (LIFE-RU-TOW) is 'no', and compressions measure 90/min at 4.2 cm with the tri-state blank (both out of range -> 'no'). Four non-critical rules are 'no' (LIFE-PF-TOW, LIFE-RU-AIRWAY, LIFE-RU-HANDOVER, LIFE-CPR-QUALITY), LIFE-SP-ROLL is 'na', and the examiner halted the session after the CPR station so all twelve first-aid and legal items are '' (unanswered). Expect outcome 'fail', criticalFailures in registry order [LIFE-PF-50M-TIME, LIFE-RU-TOW, LIFE-CPR-COMPRESSIONS], deficiencies [LIFE-PF-TOW, LIFE-RU-AIRWAY, LIFE-RU-HANDOVER, LIFE-CPR-QUALITY], answeredCount 33 (46 - 12 unanswered - 1 na), totalRules 46. Unpinned flags would be extensive: high FLAG-CRIT-LIFE-PF-50M-TIME, FLAG-CRIT-LIFE-RU-TOW, FLAG-CRIT-LIFE-CPR-COMPRESSIONS, FLAG-CERT-EXPIRED (wall-clock: true on any run after 2026-01-31), FLAG-DOMAIN-UNCONSCIOUS-RESCUE (two deficiencies in one category), FLAG-MULTI-DEF (4 > 3 -> high), FLAG-SWIM-50M-SLOW; medium FLAG-CPR-RATE-RANGE, FLAG-CPR-DEPTH-RANGE, FLAG-CPR-HESITATE-DEPTH, FLAG-AED-SLOW (112 s); low FLAG-DEBRIEF-EXAMINER, FLAG-DEVELOPMENT-AREAS.",
+      "state": {
+        "candidateDetails": {
+          "firstName": "Marcus",
+          "lastName": "Delaney-Ford",
+          "candidateId": "NPLQ-2026-0293",
+          "dateOfBirth": "1988-11-21",
+          "venueType": "pool",
+          "venueName": "Northgate Swimming Pool",
+          "assessmentType": "requalification",
+          "priorCertificationExpiry": "2026-01-31",
+          "sessionDate": "2026-03-07",
+          "examinerName": "Karen Ashdown",
+          "examinerLicenceNumber": "RLSS-A-118842"
+        },
+        "physicalFitnessSwim": {
+          "swim50mTimeSeconds": 66,
+          "swim50mWithinTime": "",
+          "surfaceDiveDepthMetres": 1.6,
+          "sustainedSurfaceDive": "yes",
+          "swim200mTimeSeconds": 355,
+          "swim200mMixedStrokes": "yes",
+          "treadWaterTwoMinutes": "yes",
+          "towCasualty50m": "no"
+        },
+        "supervisionScanningZoning": {
+          "understandsZoneOfResponsibility": "yes",
+          "effectiveScanningPattern": "yes",
+          "tenTwentyScanRule": "yes",
+          "recognisesDistressedSwimmer": "yes",
+          "appropriateRotation": "yes",
+          "usesWhistleAndSignals": "yes"
+        },
+        "rescueConscious": {
+          "recognitionAndAlert": "yes",
+          "entryWithoutLossOfSight": "yes",
+          "approachWithFloatingAid": "yes",
+          "reassuresCasualty": "yes",
+          "towToSafety": "yes",
+          "extricationFromWater": "yes"
+        },
+        "rescueUnconscious": {
+          "recognitionAndAlert": "yes",
+          "safeEntryAndApproach": "yes",
+          "airwayManagementInWater": "no",
+          "effectiveTowToSafety": "no",
+          "safeExtrication": "yes",
+          "handoverHandsignal": "no"
+        },
+        "spinalInjuryManagement": {
+          "recognisesMechanism": "yes",
+          "headSplintHold": "yes",
+          "maintainsInlineStabilisation": "yes",
+          "carefulRollIfNeeded": "na",
+          "useOfSpineboard": "yes",
+          "secureCasualtyToBoard": "yes"
+        },
+        "cprAed": {
+          "compressionRate": 90,
+          "compressionDepth": 4.2,
+          "effectiveCompressions": "",
+          "effectiveVentilations": "yes",
+          "timeToFirstShockSeconds": 112,
+          "aedDeliveredPromptly": "yes",
+          "safeShockNoUnsafeContact": "yes",
+          "continuousQualityCpr": "no"
+        },
+        "firstAidOxygen": {
+          "bleedingControl": "",
+          "burnsManagement": "",
+          "fractureImmobilisation": "",
+          "recoveryPositionUse": "",
+          "oxygenTherapyAdministration": "",
+          "usesPocketMaskOrBVM": ""
+        },
+        "legalRegulatoryIncident": {
+          "dutyOfCareUnderstood": "",
+          "pswpKnowledge": "",
+          "eapInvocation": "",
+          "incidentReportCompleted": "",
+          "riddorAwareness": "",
+          "safeguardingChildrenAdults": ""
+        },
+        "overallResultSignoff": {
+          "examinerOutcome": "fail",
+          "strengths": "Scanning and conscious-casualty rescue remain sound.",
+          "developmentAreas": "Swim fitness (50 m and tow), unconscious-casualty airway and tow technique, CPR rate and depth, AED retrieval time.",
+          "examinerNotes": "Assessment stopped after the CPR/AED station on safety grounds. Candidate has not worked poolside since certificate lapsed; advise a structured 6-week fitness and skills programme before re-presenting.",
+          "candidateFeedback": "",
+          "candidateAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "outcome": "fail",
+        "criticalFailures": [
+          {
+            "id": "LIFE-PF-50M-TIME",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Completes 50 m timed swim in 60 seconds or less (NPLQ standard).",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-RU-TOW",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Effective tow of unconscious casualty to safety, airway protected.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-CPR-COMPRESSIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Effective compressions to standard rate (100-120/min) and depth (5-6 cm).",
+            "critical": true,
+            "status": "no"
+          }
+        ],
+        "deficiencies": [
+          {
+            "id": "LIFE-PF-TOW",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Tows a casualty 50 m through the water using an approved hold.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-RU-AIRWAY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Manages the airway in the water (head tilt, mouth clear of water).",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-RU-HANDOVER",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Communicates clear handover signal to colleagues / EMS.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-CPR-QUALITY",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Maintains continuous high-quality CPR with minimal interruptions.",
+            "critical": false,
+            "status": "no"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "LIFE-PF-50M-TIME",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Completes 50 m timed swim in 60 seconds or less (NPLQ standard).",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-PF-DIVE",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Sustained surface dive to required depth and recovers an object.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-200M",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Sustained 200 m swim using mixed strokes (front crawl, breast, back).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-TREAD",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Treads water for 2 minutes with hands clear of the surface.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-PF-TOW",
+            "step": 2,
+            "category": "Swim Competency",
+            "description": "Tows a casualty 50 m through the water using an approved hold.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-SCAN-ZONE",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Understands and articulates zone of responsibility.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-PATTERN",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Maintains an effective, systematic scanning pattern across the zone.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-1020",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Applies the 10/20 rule (10 s to recognise, 20 s to reach).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-DISTRESS",
+            "step": 3,
+            "category": "Scanning",
+            "description": "Recognises early signs of a distressed or drowning swimmer.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-ROTATION",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Performs zone rotations safely and at appropriate intervals.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SCAN-WHISTLE",
+            "step": 3,
+            "category": "Supervision",
+            "description": "Uses whistle and hand signals correctly to communicate with team.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-RECOG",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Recognises the incident and alerts the team without delay.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-ENTRY",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Enters the water without losing sight of the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-AID",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Approaches with a floating aid (torpedo buoy, throw bag, etc.).",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-REASSURE",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Reassures and instructs the casualty during the rescue.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-TOW",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Tows the casualty safely to the side of the pool / shore.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RC-EXTRICATE",
+            "step": 4,
+            "category": "Conscious Rescue",
+            "description": "Extricates the casualty from the water with appropriate technique.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-RECOG",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Recognises unconscious casualty and activates emergency response.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-ENTRY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Performs safe entry and rapid approach to the casualty.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-AIRWAY",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Manages the airway in the water (head tilt, mouth clear of water).",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-RU-TOW",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Effective tow of unconscious casualty to safety, airway protected.",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-RU-EXTRICATE",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Safe extrication of unconscious casualty without injury.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-RU-HANDOVER",
+            "step": 5,
+            "category": "Unconscious Rescue",
+            "description": "Communicates clear handover signal to colleagues / EMS.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-SP-MECH",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Recognises mechanism of injury suggesting suspected spinal trauma.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-HEADSPLINT",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Applies head-splint hold safely in the water.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-INLINE",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Maintains in-line stabilisation throughout movement.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-ROLL",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Performs careful in-water roll if face-down (where indicated).",
+            "critical": false,
+            "status": "na"
+          },
+          {
+            "id": "LIFE-SP-BOARD",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Uses spineboard correctly to extricate suspected spinal casualty.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-SP-SECURE",
+            "step": 6,
+            "category": "Spinal Management",
+            "description": "Secures casualty to spineboard with straps and head blocks.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-COMPRESSIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Effective compressions to standard rate (100-120/min) and depth (5-6 cm).",
+            "critical": true,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-CPR-VENTILATIONS",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Delivers effective ventilations producing visible chest rise.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-AED-PROMPT",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Delivers AED shock promptly without unsafe contact during shock.",
+            "critical": true,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-AED-SAFE",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Calls \"all clear\" and verifies no contact before pressing shock.",
+            "critical": false,
+            "status": "yes"
+          },
+          {
+            "id": "LIFE-CPR-QUALITY",
+            "step": 7,
+            "category": "CPR & AED",
+            "description": "Maintains continuous high-quality CPR with minimal interruptions.",
+            "critical": false,
+            "status": "no"
+          },
+          {
+            "id": "LIFE-FA-BLEEDING",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Controls external bleeding (direct pressure, dressings, elevation).",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-FA-BURNS",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Manages burns appropriately (cool water, cover, do not break blisters).",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-FA-FRACTURE",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Immobilises suspected fractures and supports the limb.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-FA-RECOVERY",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Places unresponsive breathing casualty in the recovery position.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-FA-OXYGEN",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Administers oxygen therapy correctly via mask at appropriate flow.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-FA-MASK",
+            "step": 8,
+            "category": "First Aid",
+            "description": "Uses pocket mask or bag-valve-mask with effective seal.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-LR-DUTY",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates understanding of duty of care and lifeguard responsibilities.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-LR-PSWP",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Knows venue Pool Safety Operating Procedures (PSOP / NOP / EAP).",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-LR-EAP",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Can correctly invoke the Emergency Action Plan (EAP).",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-LR-REPORT",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Completes incident report accurately and contemporaneously.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-LR-RIDDOR",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Demonstrates awareness of RIDDOR reportable events.",
+            "critical": false,
+            "status": ""
+          },
+          {
+            "id": "LIFE-LR-SAFEGUARD",
+            "step": 9,
+            "category": "Legal & Regulatory",
+            "description": "Understands safeguarding obligations for children and adults at risk.",
+            "critical": false,
+            "status": ""
+          }
+        ],
+        "answeredCount": 33,
+        "totalRules": 46
+      }
+    }
+  ]
+}
