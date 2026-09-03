@@ -1096,9 +1096,33 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       with no significant desaturation grades major severity via the
       AHI band alone but never trips the critical predicate, distinct
       from the third persona's severe-OSA-plus-desaturation critical
-      path). 34 of 37 forms of this family done, 3 remain
-      (count re-verified directly against the fleet each update, not
-      hand-tracked — `bin/test-personas` ground truth: PASS 267/355). 73
+      path). Final 3 done 2026-09-03 (tumor-marker-test-result,
+      ultrasound-test-result, x-ray-test-result — same methodology;
+      tumor-marker's engine is the family's odd one out — measured
+      NUMERIC marker values, not structured-finding booleans — and its
+      `isCriticalResult` covers only a reported-critical overall status
+      or a very-high-AFP/beta-hCG germ-cell pattern, so the second
+      persona's markedly elevated but *stable* (not rising) CA125 on
+      ovarian-cancer surveillance classifies abnormal and grades
+      moderate via `hasActionSignal` without ever reaching critical;
+      also confirmed `deriveRecommendation` maps moderate severity to
+      'urgent-review' here (not 'specialist-referral' as in most
+      siblings), since tumour markers are poor screening tests and any
+      actionable elevation warrants prompt oncology correlation
+      regardless of band. ultrasound's second persona isolates a large
+      (>= 30mm) indeterminate hepatic mass, a dedicated major-severity
+      rule wholly separate from `hasCriticalFinding` (DVT present or
+      aneurysm only). x-ray's `hasCriticalFinding` requires an
+      *unstable* fracture specifically — the second persona's stable,
+      minimally displaced distal radius fracture grades only moderate
+      severity via the general actionable-finding rule and never trips
+      the critical predicate, distinct from the third persona's
+      pneumothorax critical path.
+      **All 37 of 37 `*-test-result` forms now have hand-curated
+      personas — this sub-family of Phase 11 is COMPLETE** (count
+      re-verified directly against the fleet each update, not
+      hand-tracked — `bin/test-personas` ground truth: PASS 270/355,
+      up from the family's starting baseline). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

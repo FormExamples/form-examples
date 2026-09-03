@@ -1,0 +1,260 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `isCriticalResult` covers only a reported-critical overall status or a very high AFP/beta-hCG germ-cell pattern — a markedly elevated marker with a stable (not rising) trend still classifies abnormal and grades moderate severity via `hasActionSignal`, but never reaches the critical pathway. Also notable: `deriveRecommendation` maps moderate severity to 'urgent-review' (not 'specialist-referral' as in most sibling *-test-result engines), since tumour markers are poor screening tests and any actionable elevation warrants prompt oncology correlation regardless of severity band — verified directly via `--update`, not assumed.",
+  "personas": [
+    {
+      "name": "normal-psa-screening-complete",
+      "description": "Routine PSA screening in an asymptomatic 55-year-old man with no urinary symptoms or family history of prostate cancer: PSA within the age-specific normal range, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Clinical Biochemist)",
+        "originatingRequestReference": "REQ-2026-0820-TM",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Routine PSA screening in an asymptomatic 55-year-old man with no urinary symptoms or family history of prostate cancer.",
+        "knownCancerSite": "",
+        "psa": 0.9,
+        "ca125": null,
+        "ca19_9": null,
+        "carcinoembryonicAntigenCea": null,
+        "alphaFetoproteinAfp": null,
+        "betaHcg": null,
+        "ca15_3": null,
+        "lactateDehydrogenaseLdh": null,
+        "calcitonin": null,
+        "chromograninA": null,
+        "previousValue": null,
+        "trend": "not-applicable",
+        "comparisonWithPrevious": "No previous PSA on file.",
+        "overallResultStatus": "normal",
+        "markedlyElevated": false,
+        "findingsNarrative": "PSA within the age-specific normal reference range.",
+        "impression": "Normal PSA; no evidence of prostate pathology on this test alone.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Continue routine screening per local PSA screening guidance if clinically indicated.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "per minimum retesting interval",
+        "recommendedAction": "No specific action required; manage per usual care and minimum retesting intervals.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-action-signal",
+            "description": "No markedly elevated value, no rising trend, and an interpretable result; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "normal",
+            "description": "No abnormal marker pattern; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-stable-elevated-ca125-moderate-not-critical-complete",
+      "description": "On-treatment CA125 monitoring for known stage III epithelial ovarian cancer shows a markedly elevated but stable value (420 IU/mL, essentially unchanged from 410 IU/mL 4 weeks ago): `hasActionSignal` (markedlyElevated OR a rising trend) classifies abnormal and grades moderate severity regardless of the trend, but `isCriticalResult` requires a reported-critical status or a germ-cell AFP/beta-hCG pattern — neither applies here, since the trend is stable, not rising — so this never reaches critical-alert; report complete — expect abnormal classification + moderate severity (reportingCategory markedly-elevated) + 100% completeness + urgent follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Oncologist)",
+        "originatingRequestReference": "REQ-2026-0825-TM",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Known stage III epithelial ovarian cancer on maintenance chemotherapy; routine on-treatment CA125 monitoring.",
+        "knownCancerSite": "Ovary",
+        "psa": null,
+        "ca125": 420,
+        "ca19_9": null,
+        "carcinoembryonicAntigenCea": null,
+        "alphaFetoproteinAfp": null,
+        "betaHcg": null,
+        "ca15_3": null,
+        "lactateDehydrogenaseLdh": null,
+        "calcitonin": null,
+        "chromograninA": null,
+        "previousValue": 410,
+        "trend": "stable",
+        "comparisonWithPrevious": "Comparable to the previous CA125 of 410 IU/mL measured 4 weeks ago; broadly stable, both markedly elevated above the upper reference limit (35 IU/mL).",
+        "overallResultStatus": "abnormal",
+        "markedlyElevated": true,
+        "findingsNarrative": "CA125 markedly elevated at 420 IU/mL (reference <35 IU/mL), essentially unchanged from the previous value of 410 IU/mL 4 weeks ago.",
+        "impression": "Markedly elevated but stable CA125, consistent with known ovarian cancer disease burden; no evidence of biochemical progression on this value alone.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Continue routine on-treatment CA125 monitoring per the oncology surveillance schedule; correlate with imaging.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "moderate",
+        "reportingCategory": "markedly-elevated",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 1 week",
+        "recommendedAction": "Arrange urgent oncology review and correlate with clinical context.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "action-signal",
+            "description": "A markedly elevated value or a rising trend on treatment is present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MODERATE-01",
+            "axis": "severity",
+            "category": "action-signal",
+            "description": "A markedly elevated value or a rising trend on treatment is present; severity graded moderate."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "action-signal",
+            "description": "A markedly elevated value or a rising trend on treatment is present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "A markedly elevated value or a rising trend on treatment requires timely action.",
+            "suggestedAction": "Ensure the requester is alerted and a clear action plan is documented."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-germ-cell-afp-pattern-uncommunicated-incomplete",
+      "description": "Markedly elevated AFP (3500 ng/mL, reference <10) with a modestly elevated beta-hCG (180 IU/L) and raised LDH, a pattern highly suggestive of a non-seminomatous germ-cell tumour: AFP at or above the 1000 ng/mL germ-cell critical threshold auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history and impression sections are not yet completed while urgent staging and MDT referral are arranged — expect critical classification + major severity + 60% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Clinical Biochemist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "",
+        "knownCancerSite": "",
+        "psa": null,
+        "ca125": null,
+        "ca19_9": null,
+        "carcinoembryonicAntigenCea": null,
+        "alphaFetoproteinAfp": 3500,
+        "betaHcg": 180,
+        "ca15_3": null,
+        "lactateDehydrogenaseLdh": 620,
+        "calcitonin": null,
+        "chromograninA": null,
+        "previousValue": null,
+        "trend": "not-applicable",
+        "comparisonWithPrevious": "",
+        "overallResultStatus": "critical",
+        "markedlyElevated": true,
+        "findingsNarrative": "Markedly elevated AFP (3500 ng/mL, reference <10) with a modestly elevated beta-hCG (180 IU/L) and raised LDH (620 U/L), a pattern highly suggestive of a non-seminomatous germ-cell tumour.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the on-call oncology and urology teams immediately; urgent staging CT and germ-cell tumour MDT referral being arranged.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "germ-cell-marker-pattern",
+        "reportCompletenessPercent": 60,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the requester now and document the conversation; consider germ-cell tumour pathway.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-result",
+            "description": "A very high AFP / beta-hCG (suggesting a germ-cell tumour) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-result",
+            "description": "Critical result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "A critical result (very high AFP / beta-hCG, or reported critical) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A very high AFP / beta-hCG (suggesting a germ-cell tumour) is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical result present but it has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant marker result is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}
