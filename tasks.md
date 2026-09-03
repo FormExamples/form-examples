@@ -1052,9 +1052,35 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       and the second persona isolates BI-RADS 4a (`isBiRadsUrgent`,
       urgent biopsy referral) to confirm it stays short of
       `isBiRadsCritical` (BI-RADS 4c/5 only), distinct from the third
-      persona's BI-RADS 5). 28 of 37 forms of this family done, 9 remain
-      (count re-verified directly against the fleet each update, not
-      hand-tracked — `bin/test-personas` ground truth: PASS 261/355). 73
+      persona's BI-RADS 5). 3 more done 2026-09-03
+      (microbiology-culture-test-result, mri-scan-test-result,
+      nerve-conduction-study-test-result — same methodology;
+      microbiology-culture's second persona isolates MRSA on a
+      significant wound-swab culture, which grades major severity via
+      its own dedicated resistant-organism rule (R-SEV-MAJOR-02) yet
+      classifies only abnormal (not critical) and escalates only to
+      'urgent', since `hasCriticalOrganism` requires a positive blood
+      culture, a CSF isolate, CPE, or the explicit criticalOrganism
+      flag — none of which a resistant wound-swab organism trips; also
+      caught and fixed a self-authored gap where the first ("complete")
+      persona's antibiotic-sensitivities section was left blank for a
+      no-growth culture, silently capping completeness at 80% instead
+      of the intended 100%, verified and corrected via `--update` before
+      accepting. mri-scan's second persona isolates a large (>= 30mm)
+      but non-compressive meningioma, which grades major severity via
+      its own dedicated large-lesion rule (R-SEV-MAJOR-02) entirely
+      separate from `hasCriticalFinding` (cord compression, haemorrhage,
+      infarct only), so it escalates only to 'urgent'. nerve-conduction-
+      study's `isSevereAcuteNeuropathy` critical trigger requires
+      severity 'severe' AND pattern 'demyelinating' specifically — the
+      second persona's severe *axonal* diabetic polyneuropathy grades
+      major severity via the general severe-abnormality rule but never
+      trips the critical predicate, since only the acute demyelinating
+      (GBS-like) pattern is treated as the medical emergency, distinct
+      from the third persona's motor-neurone-disease critical path).
+      31 of 37 forms of this family done, 6 remain (count re-verified
+      directly against the fleet each update, not hand-tracked —
+      `bin/test-personas` ground truth: PASS 264/355). 73
       forms (outside this family) are engine-SKIP and need
       discovery hints first (was 76 — the `form-validator.js`
       false-exclusion fix above unblocked 2). Then `example-invalid.json` +

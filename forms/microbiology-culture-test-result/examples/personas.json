@@ -1,0 +1,270 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalOrganism` requires a positive blood culture, a CSF isolate, CPE, or the explicit `criticalOrganism` flag — a resistant organism (MRSA/ESBL) on a significant culture from any other specimen type grades major severity via its own dedicated rule (R-SEV-MAJOR-02) but classifies only abnormal (not critical) and escalates only to 'urgent' follow-up, not 'critical-alert'. The second persona below isolates exactly that distinction.",
+  "personas": [
+    {
+      "name": "normal-urine-no-growth-complete",
+      "description": "A routine mid-stream urine culture for suspected UTI: no significant growth on a satisfactory specimen, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Microbiologist)",
+        "originatingRequestReference": "REQ-2026-0820-MC",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "specimenType": "urine",
+        "specimenSiteDetail": "Mid-stream urine",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Dysuria and frequency for 2 days; mid-stream urine sent to confirm suspected urinary tract infection.",
+        "gramStainResult": "No organisms or white cells seen.",
+        "cultureResult": "no-growth",
+        "organismIsolated": "",
+        "secondOrganismIsolated": "",
+        "colonyCount": "",
+        "antibioticSensitivities": "Not applicable — no organism isolated.",
+        "resistanceMrsa": false,
+        "resistanceEsbl": false,
+        "resistanceCpe": false,
+        "cDifficileToxin": "not-tested",
+        "acidFastBacilli": "not-tested",
+        "pcrResult": "",
+        "criticalOrganism": false,
+        "findingsNarrative": "No significant growth on culture after 48 hours incubation. No organisms or white cells seen on microscopy.",
+        "impression": "No evidence of urinary tract infection on culture.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Consider an alternative diagnosis if symptoms persist; no further microbiology follow-up required for this specimen.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific microbiology follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-significant-growth",
+            "description": "No significant growth and no abnormal finding on a satisfactory specimen; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-significant-growth",
+            "description": "No significant growth; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-mrsa-wound-swab-major-not-critical-complete",
+      "description": "A wound swab from a post-surgical wound infection grows Meticillin-resistant Staphylococcus aureus (MRSA) in significant numbers: `hasResistanceMarker` combined with a significant culture is its own dedicated major-severity rule (R-SEV-MAJOR-02), but `hasCriticalOrganism` requires a positive blood culture, a CSF isolate, CPE, or the explicit criticalOrganism flag — none of which apply to a wound swab — so this never reaches the classification's critical path and escalates only to 'urgent' follow-up; report complete — expect abnormal classification + major severity (reportingCategory resistant-organism) + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Microbiologist)",
+        "originatingRequestReference": "REQ-2026-0825-MC",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "specimenType": "wound-swab",
+        "specimenSiteDetail": "Post-surgical abdominal wound, lower pole",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "Discharging, erythematous post-surgical wound 6 days after laparotomy; swab sent for culture and sensitivities.",
+        "gramStainResult": "Gram-positive cocci in clusters seen on direct microscopy.",
+        "cultureResult": "significant-growth",
+        "organismIsolated": "Meticillin-resistant Staphylococcus aureus (MRSA)",
+        "secondOrganismIsolated": "",
+        "colonyCount": "Heavy growth",
+        "antibioticSensitivities": "Sensitive to vancomycin, linezolid, and doxycycline; resistant to flucloxacillin and meticillin.",
+        "resistanceMrsa": true,
+        "resistanceEsbl": false,
+        "resistanceCpe": false,
+        "cDifficileToxin": "not-tested",
+        "acidFastBacilli": "not-tested",
+        "pcrResult": "",
+        "criticalOrganism": false,
+        "findingsNarrative": "Heavy growth of Meticillin-resistant Staphylococcus aureus (MRSA) from the wound swab, consistent with a surgical site infection. No other organisms isolated.",
+        "impression": "Surgical site infection with MRSA; treat per sensitivities and isolate per local IPC policy.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Discuss with the infection prevention and control (IPC) team and the surgical team for source control and targeted antibiotics.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "resistant-organism",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical / infection review and expedite antimicrobial advice.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "significant-growth",
+            "description": "A clinically significant microbiological finding is present (significant growth, resistance marker, or positive specialised test); classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "resistant-organism",
+            "description": "A resistant alert organism (MRSA / ESBL) on a significant culture; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "A resistance marker (MRSA / ESBL / CPE) on a significant culture may warrant urgent infection referral.",
+            "suggestedAction": "Consider urgent referral to the infection / IPC team for advice."
+          }
+        ]
+      }
+    },
+    {
+      "name": "critical-e-coli-bacteraemia-uncommunicated-incomplete",
+      "description": "A blood culture grows Escherichia coli: `hasCriticalOrganism` treats any positive blood culture as a critical result regardless of the organism's own resistance profile, auto-escalating classification to critical and follow-up to critical-alert; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history and impression sections are not yet completed while empirical sepsis treatment is already underway — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Microbiologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "specimenType": "blood-culture",
+        "specimenSiteDetail": "Peripheral venous, aerobic and anaerobic bottles",
+        "specimenCondition": "satisfactory",
+        "clinicalHistory": "",
+        "gramStainResult": "Gram-negative bacilli seen on direct microscopy of the positive bottle.",
+        "cultureResult": "positive",
+        "organismIsolated": "Escherichia coli",
+        "secondOrganismIsolated": "",
+        "colonyCount": "",
+        "antibioticSensitivities": "",
+        "resistanceMrsa": false,
+        "resistanceEsbl": false,
+        "resistanceCpe": false,
+        "cDifficileToxin": "not-tested",
+        "acidFastBacilli": "not-tested",
+        "pcrResult": "",
+        "criticalOrganism": false,
+        "findingsNarrative": "Blood culture positive at 14 hours with Gram-negative bacilli, subsequently confirmed as Escherichia coli. Aerobic and anaerobic bottles both flagged positive.",
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the on-call medical and infection teams immediately; patient already commenced on empirical IV antibiotics for suspected sepsis.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Telephone the critical result to the requesting / infection team now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-organism",
+            "description": "A critical organism / result (positive blood culture, CSF isolate, CPE, or flagged critical organism) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-organism",
+            "description": "Critical organism / result present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-SENSITIVITIES-01",
+            "axis": "completeness",
+            "category": "sensitivities",
+            "description": "Mandatory report section missing: antibiotic sensitivities."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical organism / result auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical organism / result (positive blood culture, CSF isolate, CPE, or flagged critical organism) is present.",
+            "suggestedAction": "Telephone the critical result to the requesting / infection team immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical organism / result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-MISSING-MEASUREMENT-001",
+            "category": "missing-measurement",
+            "priority": "low",
+            "description": "An organism was isolated but no antibiotic sensitivities were recorded.",
+            "suggestedAction": "Record the antibiotic susceptibility results to guide therapy."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant result is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
+          }
+        ]
+      }
+    }
+  ]
+}

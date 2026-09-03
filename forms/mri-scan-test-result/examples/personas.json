@@ -1,0 +1,249 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only cord/cauda-equina compression, haemorrhage, and infarct — a large lesion (>= 30mm) is its own dedicated major-severity trigger (R-SEV-MAJOR-02), entirely separate from the critical-classification predicate, so a large but non-compressive mass escalates only to 'urgent' follow-up, not 'critical-alert'. The second persona below isolates exactly that distinction.",
+  "personas": [
+    {
+      "name": "normal-brain-mri-complete",
+      "description": "A normal brain MRI for chronic headache with no red-flag features: normal parenchyma, ventricles, and posterior fossa, no structural abnormality, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "state": {
+        "reportingClinician": "Dr Priya Anand (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0820-MRI",
+        "reportStatus": "final",
+        "performedDate": "2026-08-20",
+        "reportedDate": "2026-08-20",
+        "bodyRegion": "brain",
+        "contrastUsed": "none",
+        "sequencesPerformed": "T1, T2, FLAIR, DWI axial sequences.",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Chronic headache, no red-flag features; MRI brain to exclude structural cause.",
+        "comparisonWithPrevious": "No previous brain MRI available for comparison.",
+        "findingsNarrative": "Normal brain parenchyma, ventricular system, and posterior fossa. No mass, haemorrhage, infarct, demyelination, or infection.",
+        "massOrLesion": false,
+        "haemorrhage": false,
+        "infarct": false,
+        "demyelination": false,
+        "discHerniation": false,
+        "cordCompression": false,
+        "infectionInflammation": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": null,
+        "impression": "Normal brain MRI; no structural abnormality identified.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "No further imaging follow-up required for this indication.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "normal",
+        "abnormalitySeverity": "none",
+        "reportingCategory": "normal",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "routine",
+        "targetTimeframe": "no specific follow-up",
+        "recommendedAction": "No specific imaging follow-up required; manage per usual care.",
+        "recommendation": "no-action",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-NORMAL-01",
+            "axis": "classification",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal structured findings on an interpretable examination; classified as normal."
+          },
+          {
+            "ruleId": "R-SEV-NONE-01",
+            "axis": "severity",
+            "category": "no-abnormal-finding",
+            "description": "No abnormal finding; abnormality severity graded none."
+          },
+          {
+            "ruleId": "R-FU-ROUTINE-01",
+            "axis": "follow-up",
+            "category": "normal",
+            "description": "No escalation rule fired; routine follow-up only."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "abnormal-large-meningioma-major-not-critical-complete",
+      "description": "A contrast-enhanced brain MRI for new headache and mild weakness shows a large (34mm) right frontal convexity meningioma with a dural tail and mild vasogenic oedema, but no haemorrhage, infarct, or cord involvement: the 30mm large-lesion threshold (R-SEV-MAJOR-02) is a dedicated severity trigger entirely separate from `hasCriticalFinding` (cord compression, haemorrhage, infarct), so this grades major severity but escalates only to 'urgent' follow-up, never critical-alert; report complete — expect abnormal classification + major severity (reportingCategory large-lesion) + 100% completeness + urgent follow-up + specialist-referral.",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Radiologist)",
+        "originatingRequestReference": "REQ-2026-0825-MRI",
+        "reportStatus": "final",
+        "performedDate": "2026-08-25",
+        "reportedDate": "2026-08-25",
+        "bodyRegion": "brain",
+        "contrastUsed": "iv-gadolinium",
+        "sequencesPerformed": "T1, T1 post-contrast, T2, FLAIR axial and coronal sequences.",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "New-onset headache and mild left-sided weakness; MRI brain with contrast to investigate.",
+        "comparisonWithPrevious": "No previous brain MRI on file.",
+        "findingsNarrative": "A large, well-circumscribed, homogeneously enhancing extra-axial mass measuring 34mm is seen over the right frontal convexity, with a dural tail, in keeping with a meningioma. Mild surrounding vasogenic oedema. No haemorrhage, infarct, or cord compression.",
+        "massOrLesion": true,
+        "haemorrhage": false,
+        "infarct": false,
+        "demyelination": false,
+        "discHerniation": false,
+        "cordCompression": false,
+        "infectionInflammation": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": 34,
+        "impression": "Large right frontal convexity meningioma, 34mm.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Refer to neurosurgery for consideration of resection given the size and mass effect.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "large-lesion",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "large-lesion",
+            "description": "Largest lesion is 30 mm or larger; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "critical-cervical-cord-compression-uncommunicated-incomplete",
+      "description": "A cervical spine MRI shows a large central C5/C6 disc herniation causing severe canal stenosis with cord compression and abnormal T2 cord signal, in keeping with early myelopathy: cord compression is a critical structured finding that auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history, comparison, and impression sections are not yet completed while urgent spinal surgical assessment is arranged — expect critical classification + major severity + 40% completeness + critical-alert follow-up + urgent-review.",
+      "state": {
+        "reportingClinician": "Dr Wei Zhang (Radiologist)",
+        "originatingRequestReference": "",
+        "reportStatus": "preliminary",
+        "performedDate": "2026-08-30",
+        "reportedDate": "2026-08-30",
+        "bodyRegion": "spine-cervical",
+        "contrastUsed": "none",
+        "sequencesPerformed": "T1, T2 sagittal and axial sequences of the cervical spine.",
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "",
+        "comparisonWithPrevious": "",
+        "findingsNarrative": "A large central disc herniation at C5/C6 is causing severe spinal canal stenosis with cord compression and abnormal T2 cord signal at this level, in keeping with early myelopathy.",
+        "massOrLesion": false,
+        "haemorrhage": false,
+        "infarct": false,
+        "demyelination": false,
+        "discHerniation": true,
+        "cordCompression": true,
+        "infectionInflammation": false,
+        "incidentalFinding": false,
+        "largestLesionSizeMm": null,
+        "impression": "",
+        "reportingCategory": "",
+        "recommendedFollowUp": "",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "Phoned through to the on-call spinal surgery team immediately; patient being urgently assessed for decompressive surgery.",
+        "signed": false
+      },
+      "expected": {
+        "resultClassification": "critical",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "critical-actionable",
+        "reportCompletenessPercent": 40,
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Communicate the critical result directly to the referrer now and document the conversation.",
+        "recommendation": "urgent-review",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-CRITICAL-01",
+            "axis": "classification",
+            "category": "critical-finding",
+            "description": "A critical structured finding (cord compression, haemorrhage, or infarct) is present; classified as critical."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-01",
+            "axis": "severity",
+            "category": "critical-finding",
+            "description": "Critical finding present; abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-COMP-HISTORY-01",
+            "axis": "completeness",
+            "category": "history",
+            "description": "Mandatory report section missing: clinical history."
+          },
+          {
+            "ruleId": "R-COMP-COMPARISON-01",
+            "axis": "completeness",
+            "category": "comparison",
+            "description": "Mandatory report section missing: comparison with previous imaging."
+          },
+          {
+            "ruleId": "R-COMP-IMPRESSION-01",
+            "axis": "completeness",
+            "category": "impression",
+            "description": "Mandatory report section missing: impression."
+          },
+          {
+            "ruleId": "R-FU-CRITICAL-01",
+            "axis": "follow-up",
+            "category": "critical-result",
+            "description": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A critical finding (cord compression, haemorrhage, or infarct) is present.",
+            "suggestedAction": "Communicate the critical result to the referrer immediately and document the communication."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Critical finding present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the referrer now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-ABNORMAL-ACTION-001",
+            "category": "abnormal-requiring-action",
+            "priority": "high",
+            "description": "Spinal-cord or cauda-equina compression requires emergency action.",
+            "suggestedAction": "Alert the referrer urgently and arrange immediate spinal / neurosurgical review."
+          },
+          {
+            "flagId": "F-MISSING-IMPRESSION-001",
+            "category": "missing-impression",
+            "priority": "medium",
+            "description": "No impression / conclusion has been recorded.",
+            "suggestedAction": "Add an impression that answers the clinical question."
+          }
+        ]
+      }
+    }
+  ]
+}
