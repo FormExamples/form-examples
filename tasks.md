@@ -1651,20 +1651,39 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       / KPI dashboards with no pass/fail threshold), matching their
       `index.md`.
 - [ ] Then: personas for each unblocked form, 3 each, same methodology.
-      **61 of the newly-unblocked forms have personas as of 2026-09-04**
-      (fleet ground truth: `bin/test-personas` forms 313/313 PASS, personas
-      1055/1055 PASS, 0 FAIL; forms without personas: 42 — all inside the
+      **64 of the newly-unblocked forms have personas as of 2026-09-04**
+      (fleet ground truth: `bin/test-personas` forms 317/317 PASS, personas
+      1067/1067 PASS, 0 FAIL; forms without personas: 39 — all inside the
       current 0-SKIP/3-NONE engine set, i.e. genuinely never attempted yet,
-      not blocked). The 6 forms whose engine changed today
-      (`agile-consulting-scorecard-for-hiring-help`,
+      not blocked). 3 more done today: `agile-checklist` (flat 57-item
+      answers map, not the whole assessment — `calculateMaturity` is called
+      as `calculateMaturity(state.answers)`; the "insufficient-data despite
+      three genuinely-low sections" persona pins that the 30-item
+      answered-floor gates on total items touched fleet-wide, not on
+      whether each section already has a defined percent),
+      `agile-principles-assessment` (`clampWeight` coerces before the
+      weighted mean — a 0.3 weight silently becomes 0.5, a 2.5 becomes 2.0
+      — and the per-principle FLAG_SPECS + F-CRITICAL-Pxx checks interleave
+      by principle, not group by type), and
+      `agile-consulting-scorecard-for-hiring-help` (freshly given its own
+      `js/engine.js` this session — its `additionalFlags` use a bespoke
+      `{p,cat,text}` shape, not the `{flagId,category,priority,description}`
+      shape the rest of this engine family uses, since it's a verbatim
+      extraction of the page's original inline script). All nine personas
+      matched hand-derivation exactly against the live engine before
+      `--update` was run. `bin/test-e2e --html` on all three: 6/6 passed
+      including axe-core. 9 forms remain from the original 12-form list:
       `international-certificate-of-vaccination-or-prophylaxis`,
       `medical-information-form-for-air-travel`,
       `hospital-daily-monitoring-checklist`, `hospital-dashboard-metrics`,
-      `hospital-performance-indicators`) plus the 6 factory-only forms
-      (`agile-checklist`, `agile-principles-assessment`, `issue-tracker`,
-      `meeting`, `objectives-and-key-results-tracker`,
-      `united-kingdom-nhs-england-medical-exemption-certificate`) still
-      need their first personas — 12 forms, next up.
+      `hospital-performance-indicators`, `issue-tracker`, `meeting`,
+      `objectives-and-key-results-tracker`,
+      `united-kingdom-nhs-england-medical-exemption-certificate` — plus the
+      27 forms unblocked purely by probe discovery that were never on that
+      12-form list (see the full `/tmp/needs-personas.txt`-style sweep:
+      `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
+      '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo
+      $f; done`).
 
 ### Spec-driven follow-through
 

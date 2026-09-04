@@ -1,0 +1,490 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMaturity",
+  "note": "Three hand-authored personas for the Agile Checklist maturity engine. calculateMaturity(answers) takes the FLAT 57-item answers map directly (form-app.js calls it as calculateMaturity(state.answers), not the whole assessment) - each key t01..t25/s01..s14/p01..p18 is 'yes'|'no'|'not-applicable'|''. Per-section percent is round2(yes/(yes+no)*100) - not-applicable and unanswered items are excluded from both numerator and denominator; band is unanswered (applicableCount 0) / low (<50) / mid (<75) / high (>=75). overallPercent is the unweighted mean of the three section percents, but ONLY when all three sections have a defined percent AND answeredCount (sum of yes+no+not-applicable across all 57 items, i.e. everything except blank '') is >= 30 - otherwise it is null and maturity is 'insufficient-data' regardless of how good the individual section percents look (persona 3 demonstrates this: two sections are 20% and one is 40%, all genuinely low, but the reported maturity is 'insufficient-data', not 'ad-hoc', because only 20 of 57 items were touched). additionalFlags are folded into the result (push order, NOT sorted by priority - F-STAKEHOLDERS-TRUST/high can appear before F-SECTION-IMBALANCE/medium). Flag triggers read specific item ids directly: t08+p12 both 'no' -> F-FINISHED-WORK; s09+s10 both 'no' -> F-EXPERIMENTATION-BLOCKED; t17+t18 both 'no' -> F-LEARNING-STALLED; any of t22/s08/p14 'no' -> F-PSYCHOLOGICAL-SAFETY (a blank/unanswered item does NOT count as 'no' for these checks, only an explicit 'no' does). Regenerate 'expected' with: bin/test-personas agile-checklist --update",
+  "personas": [
+    {
+      "name": "High-maturity team - every item confirmed",
+      "description": "All 57 items answered 'yes'. Expect all three sections at 100% (band 'high'), overallPercent 100, maturity 'optimising', three fired rules (R-TEAMS-HIGH, R-STAKEHOLDERS-HIGH, R-PRACTICES-HIGH), and no flags (every flag-triggering item is 'yes', so none of the negative-signal checks fire).",
+      "state": {
+        "t01": "yes",
+        "t02": "yes",
+        "t03": "yes",
+        "t04": "yes",
+        "t05": "yes",
+        "t06": "yes",
+        "t07": "yes",
+        "t08": "yes",
+        "t09": "yes",
+        "t10": "yes",
+        "t11": "yes",
+        "t12": "yes",
+        "t13": "yes",
+        "t14": "yes",
+        "t15": "yes",
+        "t16": "yes",
+        "t17": "yes",
+        "t18": "yes",
+        "t19": "yes",
+        "t20": "yes",
+        "t21": "yes",
+        "t22": "yes",
+        "t23": "yes",
+        "t24": "yes",
+        "t25": "yes",
+        "s01": "yes",
+        "s02": "yes",
+        "s03": "yes",
+        "s04": "yes",
+        "s05": "yes",
+        "s06": "yes",
+        "s07": "yes",
+        "s08": "yes",
+        "s09": "yes",
+        "s10": "yes",
+        "s11": "yes",
+        "s12": "yes",
+        "s13": "yes",
+        "s14": "yes",
+        "p01": "yes",
+        "p02": "yes",
+        "p03": "yes",
+        "p04": "yes",
+        "p05": "yes",
+        "p06": "yes",
+        "p07": "yes",
+        "p08": "yes",
+        "p09": "yes",
+        "p10": "yes",
+        "p11": "yes",
+        "p12": "yes",
+        "p13": "yes",
+        "p14": "yes",
+        "p15": "yes",
+        "p16": "yes",
+        "p17": "yes",
+        "p18": "yes"
+      },
+      "expected": {
+        "answeredCount": 57,
+        "teams": {
+          "section": "teams",
+          "yesCount": 25,
+          "noCount": 0,
+          "notApplicableCount": 0,
+          "unansweredCount": 0,
+          "applicableCount": 25,
+          "percent": 100,
+          "band": "high"
+        },
+        "stakeholders": {
+          "section": "stakeholders",
+          "yesCount": 14,
+          "noCount": 0,
+          "notApplicableCount": 0,
+          "unansweredCount": 0,
+          "applicableCount": 14,
+          "percent": 100,
+          "band": "high"
+        },
+        "practices": {
+          "section": "practices",
+          "yesCount": 18,
+          "noCount": 0,
+          "notApplicableCount": 0,
+          "unansweredCount": 0,
+          "applicableCount": 18,
+          "percent": 100,
+          "band": "high"
+        },
+        "overallPercent": 100,
+        "maturity": "optimising",
+        "firedRules": [
+          {
+            "ruleId": "R-TEAMS-HIGH",
+            "section": "teams",
+            "band": "high",
+            "description": "Teams have strong agile habits — autonomy, learning, and finishing. Preserve psychological safety as the team grows."
+          },
+          {
+            "ruleId": "R-STAKEHOLDERS-HIGH",
+            "section": "stakeholders",
+            "band": "high",
+            "description": "Stakeholders trust and support the team. Continue investing in transparency and shared goals."
+          },
+          {
+            "ruleId": "R-PRACTICES-HIGH",
+            "section": "practices",
+            "band": "high",
+            "description": "Operating practices are healthy — quick decisions, finished-work focus, blame-free culture. Keep watching for over-engineering."
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Mixed maturity - imbalanced sections with four negative-signal flags",
+      "description": "Non-critical edge case built to exercise the flag logic precisely. Teams 13/25 yes (52%, band mid); stakeholders 6/14 yes (42.86%, band low); practices 16/18 yes (88.89%, band high) - a 46-point spread between the weakest and strongest section. t08 and p12 are both 'no' (finished-work risk); t17 and t18 are both 'no' (learning stalled); t22 is 'no' (psychological safety, alone sufficient to trigger the flag - s08 and p14 are left 'yes'). All 57 items answered (answeredCount 57). Expect overallPercent round2((52+42.857142857142854+88.88888888888889)/3) = 61.25, maturity 'developing', fired rules R-TEAMS-MID / R-STAKEHOLDERS-LOW / R-PRACTICES-HIGH, and five flags in push order: F-STAKEHOLDERS-TRUST (stakeholders <50%), F-SECTION-IMBALANCE (spread 46.03 > 30), F-FINISHED-WORK, F-LEARNING-STALLED, F-PSYCHOLOGICAL-SAFETY. F-TEAMS-AUTONOMY does NOT fire (teams is 52%, not <50%); F-EXPERIMENTATION-BLOCKED does NOT fire (s09 is 'no' but s10 is 'yes', and the rule needs BOTH no); F-INSUFFICIENT-DATA does NOT fire (57 >= 30).",
+      "state": {
+        "t01": "yes",
+        "t02": "yes",
+        "t03": "yes",
+        "t04": "yes",
+        "t05": "yes",
+        "t06": "yes",
+        "t07": "yes",
+        "t08": "no",
+        "t09": "yes",
+        "t10": "yes",
+        "t11": "yes",
+        "t12": "yes",
+        "t13": "yes",
+        "t14": "yes",
+        "t15": "no",
+        "t16": "no",
+        "t17": "no",
+        "t18": "no",
+        "t19": "no",
+        "t20": "no",
+        "t21": "no",
+        "t22": "no",
+        "t23": "no",
+        "t24": "no",
+        "t25": "no",
+        "s01": "yes",
+        "s02": "yes",
+        "s03": "yes",
+        "s04": "yes",
+        "s05": "no",
+        "s06": "no",
+        "s07": "no",
+        "s08": "yes",
+        "s09": "no",
+        "s10": "yes",
+        "s11": "no",
+        "s12": "no",
+        "s13": "no",
+        "s14": "no",
+        "p01": "no",
+        "p02": "yes",
+        "p03": "yes",
+        "p04": "yes",
+        "p05": "yes",
+        "p06": "yes",
+        "p07": "yes",
+        "p08": "yes",
+        "p09": "yes",
+        "p10": "yes",
+        "p11": "yes",
+        "p12": "no",
+        "p13": "yes",
+        "p14": "yes",
+        "p15": "yes",
+        "p16": "yes",
+        "p17": "yes",
+        "p18": "yes"
+      },
+      "expected": {
+        "answeredCount": 57,
+        "teams": {
+          "section": "teams",
+          "yesCount": 13,
+          "noCount": 12,
+          "notApplicableCount": 0,
+          "unansweredCount": 0,
+          "applicableCount": 25,
+          "percent": 52,
+          "band": "mid"
+        },
+        "stakeholders": {
+          "section": "stakeholders",
+          "yesCount": 6,
+          "noCount": 8,
+          "notApplicableCount": 0,
+          "unansweredCount": 0,
+          "applicableCount": 14,
+          "percent": 42.86,
+          "band": "low"
+        },
+        "practices": {
+          "section": "practices",
+          "yesCount": 16,
+          "noCount": 2,
+          "notApplicableCount": 0,
+          "unansweredCount": 0,
+          "applicableCount": 18,
+          "percent": 88.89,
+          "band": "high"
+        },
+        "overallPercent": 61.25,
+        "maturity": "developing",
+        "firedRules": [
+          {
+            "ruleId": "R-TEAMS-MID",
+            "section": "teams",
+            "band": "mid",
+            "description": "Team behaviours are uneven. Identify two or three weak items and turn them into named retrospective experiments."
+          },
+          {
+            "ruleId": "R-STAKEHOLDERS-LOW",
+            "section": "stakeholders",
+            "band": "low",
+            "description": "Stakeholder behaviour is the binding constraint. No team can outrun a sponsor who revokes authority and punishes experiments."
+          },
+          {
+            "ruleId": "R-PRACTICES-HIGH",
+            "section": "practices",
+            "band": "high",
+            "description": "Operating practices are healthy — quick decisions, finished-work focus, blame-free culture. Keep watching for over-engineering."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-STAKEHOLDERS-TRUST",
+            "category": "stakeholders-trust-risk",
+            "priority": "high",
+            "section": "stakeholders",
+            "triggeringItems": [],
+            "description": "Stakeholders section scored 43% — sponsorship is the binding constraint.",
+            "suggestedAction": "Brief executive sponsors on agile delegation; renegotiate explicit decision rights."
+          },
+          {
+            "flagId": "F-SECTION-IMBALANCE",
+            "category": "section-imbalance",
+            "priority": "medium",
+            "section": "",
+            "triggeringItems": [],
+            "description": "Section spread is 46 percentage points — adoption is uneven across audiences.",
+            "suggestedAction": "Align coaching across teams, stakeholders, and practices so improvements are not undone elsewhere."
+          },
+          {
+            "flagId": "F-FINISHED-WORK",
+            "category": "finished-work-risk",
+            "priority": "high",
+            "section": "",
+            "triggeringItems": [
+              "t08",
+              "p12"
+            ],
+            "description": "Teams wait on others (t08=no) and the organisation values WIP over finished work (p12=no).",
+            "suggestedAction": "Set explicit WIP limits and prioritise finishing in-flight work over starting new work."
+          },
+          {
+            "flagId": "F-LEARNING-STALLED",
+            "category": "learning-stalled",
+            "priority": "medium",
+            "section": "teams",
+            "triggeringItems": [
+              "t17",
+              "t18"
+            ],
+            "description": "Teams neither seek (t17=no) nor improve (t18=no) skills — long-term capability is decaying.",
+            "suggestedAction": "Schedule recurring learning time and pair people deliberately on unfamiliar work."
+          },
+          {
+            "flagId": "F-PSYCHOLOGICAL-SAFETY",
+            "category": "psychological-safety-risk",
+            "priority": "high",
+            "section": "",
+            "triggeringItems": [
+              "t22"
+            ],
+            "description": "Psychological safety is at risk — dissent, sustained authority, or blameless problem-solving is missing.",
+            "suggestedAction": "Address safety before adding rituals or processes; nothing else compounds without it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Barely-started checklist - insufficient data despite three genuinely low sections",
+      "description": "Critical/highest persona for THIS engine's specific failure mode: only 20 of 57 items answered (10 teams: 2 yes/8 no; 5 stakeholders: 1 yes/4 no; 5 practices: 2 yes/3 no), the rest left blank. Every touched section is genuinely poor (20%, 20%, 40%), yet overallPercent is null and maturity is 'insufficient-data' rather than 'ad-hoc' because answeredCount (20) is below the 30-item reportability floor - demonstrating that the floor gates on TOTAL items touched, not on whether every section already has a defined (if bad) percentage. t08 and p12 are both 'no'; s09 and s10 are both 'no'; t22 is 'no' (s08 and p14 are left blank, not 'no', so they do not additionally contribute to the psychological-safety trigger, but t22 alone is sufficient). Expect firedRules R-TEAMS-LOW / R-STAKEHOLDERS-LOW / R-PRACTICES-LOW (each section's own percent is genuinely <50 even though the composite can't be reported), and seven flags in push order: F-TEAMS-AUTONOMY, F-STAKEHOLDERS-TRUST, F-PRACTICES-DISCIPLINE (all three sections are <50%), F-FINISHED-WORK, F-EXPERIMENTATION-BLOCKED, F-PSYCHOLOGICAL-SAFETY, F-INSUFFICIENT-DATA. F-SECTION-IMBALANCE does NOT fire (max spread is only 20 points, under the 30-point threshold).",
+      "state": {
+        "t01": "yes",
+        "t02": "yes",
+        "t03": "no",
+        "t04": "no",
+        "t05": "no",
+        "t06": "no",
+        "t07": "no",
+        "t08": "no",
+        "t09": "no",
+        "t10": "",
+        "t11": "",
+        "t12": "",
+        "t13": "",
+        "t14": "",
+        "t15": "",
+        "t16": "",
+        "t17": "",
+        "t18": "",
+        "t19": "",
+        "t20": "",
+        "t21": "",
+        "t22": "no",
+        "t23": "",
+        "t24": "",
+        "t25": "",
+        "s01": "yes",
+        "s02": "no",
+        "s03": "no",
+        "s04": "",
+        "s05": "",
+        "s06": "",
+        "s07": "",
+        "s08": "",
+        "s09": "no",
+        "s10": "no",
+        "s11": "",
+        "s12": "",
+        "s13": "",
+        "s14": "",
+        "p01": "yes",
+        "p02": "yes",
+        "p03": "no",
+        "p04": "no",
+        "p05": "",
+        "p06": "",
+        "p07": "",
+        "p08": "",
+        "p09": "",
+        "p10": "",
+        "p11": "",
+        "p12": "no",
+        "p13": "",
+        "p14": "",
+        "p15": "",
+        "p16": "",
+        "p17": "",
+        "p18": ""
+      },
+      "expected": {
+        "answeredCount": 20,
+        "teams": {
+          "section": "teams",
+          "yesCount": 2,
+          "noCount": 8,
+          "notApplicableCount": 0,
+          "unansweredCount": 15,
+          "applicableCount": 10,
+          "percent": 20,
+          "band": "low"
+        },
+        "stakeholders": {
+          "section": "stakeholders",
+          "yesCount": 1,
+          "noCount": 4,
+          "notApplicableCount": 0,
+          "unansweredCount": 9,
+          "applicableCount": 5,
+          "percent": 20,
+          "band": "low"
+        },
+        "practices": {
+          "section": "practices",
+          "yesCount": 2,
+          "noCount": 3,
+          "notApplicableCount": 0,
+          "unansweredCount": 13,
+          "applicableCount": 5,
+          "percent": 40,
+          "band": "low"
+        },
+        "overallPercent": null,
+        "maturity": "insufficient-data",
+        "firedRules": [
+          {
+            "ruleId": "R-TEAMS-LOW",
+            "section": "teams",
+            "band": "low",
+            "description": "Teams are not yet operating with agile habits. Start with autonomy, finishing work, and dissent-safety; coaching is needed."
+          },
+          {
+            "ruleId": "R-STAKEHOLDERS-LOW",
+            "section": "stakeholders",
+            "band": "low",
+            "description": "Stakeholder behaviour is the binding constraint. No team can outrun a sponsor who revokes authority and punishes experiments."
+          },
+          {
+            "ruleId": "R-PRACTICES-LOW",
+            "section": "practices",
+            "band": "low",
+            "description": "Operating practices are working against agility. Address finished-over-WIP, quality-over-deadline, and blame culture before adding rituals."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-TEAMS-AUTONOMY",
+            "category": "teams-autonomy-risk",
+            "priority": "high",
+            "section": "teams",
+            "triggeringItems": [],
+            "description": "Teams section scored 20% — autonomy and finishing habits are weak.",
+            "suggestedAction": "Run a focused retrospective on autonomy, finishing work, and decision authority."
+          },
+          {
+            "flagId": "F-STAKEHOLDERS-TRUST",
+            "category": "stakeholders-trust-risk",
+            "priority": "high",
+            "section": "stakeholders",
+            "triggeringItems": [],
+            "description": "Stakeholders section scored 20% — sponsorship is the binding constraint.",
+            "suggestedAction": "Brief executive sponsors on agile delegation; renegotiate explicit decision rights."
+          },
+          {
+            "flagId": "F-PRACTICES-DISCIPLINE",
+            "category": "practices-discipline-risk",
+            "priority": "high",
+            "section": "practices",
+            "triggeringItems": [],
+            "description": "Practices section scored 40% — operating practices are working against agility.",
+            "suggestedAction": "Address finished-over-WIP, quality-over-deadline, and blame culture as system-level changes."
+          },
+          {
+            "flagId": "F-FINISHED-WORK",
+            "category": "finished-work-risk",
+            "priority": "high",
+            "section": "",
+            "triggeringItems": [
+              "t08",
+              "p12"
+            ],
+            "description": "Teams wait on others (t08=no) and the organisation values WIP over finished work (p12=no).",
+            "suggestedAction": "Set explicit WIP limits and prioritise finishing in-flight work over starting new work."
+          },
+          {
+            "flagId": "F-EXPERIMENTATION-BLOCKED",
+            "category": "experimentation-blocked",
+            "priority": "high",
+            "section": "stakeholders",
+            "triggeringItems": [
+              "s09",
+              "s10"
+            ],
+            "description": "Stakeholders neither support experiments (s09=no) nor tolerate failed ones (s10=no).",
+            "suggestedAction": "Negotiate a formal experiment budget with the sponsor; agree explicitly that some experiments will fail."
+          },
+          {
+            "flagId": "F-PSYCHOLOGICAL-SAFETY",
+            "category": "psychological-safety-risk",
+            "priority": "high",
+            "section": "",
+            "triggeringItems": [
+              "t22"
+            ],
+            "description": "Psychological safety is at risk — dissent, sustained authority, or blameless problem-solving is missing.",
+            "suggestedAction": "Address safety before adding rituals or processes; nothing else compounds without it."
+          },
+          {
+            "flagId": "F-INSUFFICIENT-DATA",
+            "category": "insufficient-data",
+            "priority": "medium",
+            "section": "",
+            "triggeringItems": [],
+            "description": "Only 20 of 57 items answered; the composite maturity is not reportable below 30.",
+            "suggestedAction": "Complete more items before relying on the maturity result."
+          }
+        ]
+      }
+    }
+  ]
+}

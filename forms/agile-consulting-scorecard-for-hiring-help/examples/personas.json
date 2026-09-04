@@ -1,0 +1,661 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeScorecard",
+  "note": "Three hand-authored personas for the Agile Consulting Scorecard. gradeScorecard(data) sums 1 point per item whose 'done' is exactly `true` (false, null, and '' all score 0) across 4 manifesto items and 12 principle items, bands the 0-16 total (<=4 low, ===5 borderline, <=10 medium, >=11 high), and returns firedRules for ALL 16 items unconditionally (each { id: 'R-<KEY>', key, answer, points }, even when points is 0) plus additionalFlags shaped { p: priority, cat: category, text } - NOT the {flagId,category,priority,description} shape used elsewhere in this engine family, since this module is a verbatim extraction of the page's original inline script. Six independent flag checks run in a fixed order regardless of score: m4 false -> no-senior-leadership-buyin (high); m1 false OR p1 false -> no-customer-contact (high); m2 false AND p7 false -> no-working-software (high, needs BOTH); p8 false -> no-sustainable-budget (medium); p11 false -> no-self-organization (medium); p12 false -> no-reflection-culture (medium). Regenerate 'expected' with: bin/test-personas agile-consulting-scorecard-for-hiring-help --update",
+  "personas": [
+    {
+      "name": "Ready to hire - all 16 items confirmed",
+      "description": "Every manifesto and principle item is 'done: true'. scoreTotal 16 (4 manifesto + 12 principles), band 'high', recommendation 'Likely ready'. All six flag conditions require a FALSE answer, so none fire.",
+      "state": {
+        "organization": {
+          "organizationName": "",
+          "sector": "",
+          "sizeBand": ""
+        },
+        "respondent": {
+          "respondentName": "",
+          "respondentEmail": "",
+          "role": ""
+        },
+        "assessment": {
+          "assessmentDate": "",
+          "status": "draft"
+        },
+        "manifesto": {
+          "m1": {
+            "done": true,
+            "evidence": ""
+          },
+          "m2": {
+            "done": true,
+            "evidence": ""
+          },
+          "m3": {
+            "done": true,
+            "evidence": ""
+          },
+          "m4": {
+            "done": true,
+            "evidence": ""
+          }
+        },
+        "principles": {
+          "p1": {
+            "done": true,
+            "evidence": ""
+          },
+          "p2": {
+            "done": true,
+            "evidence": ""
+          },
+          "p3": {
+            "done": true,
+            "evidence": ""
+          },
+          "p4": {
+            "done": true,
+            "evidence": ""
+          },
+          "p5": {
+            "done": true,
+            "evidence": ""
+          },
+          "p6": {
+            "done": true,
+            "evidence": ""
+          },
+          "p7": {
+            "done": true,
+            "evidence": ""
+          },
+          "p8": {
+            "done": true,
+            "evidence": ""
+          },
+          "p9": {
+            "done": true,
+            "evidence": ""
+          },
+          "p10": {
+            "done": true,
+            "evidence": ""
+          },
+          "p11": {
+            "done": true,
+            "evidence": ""
+          },
+          "p12": {
+            "done": true,
+            "evidence": ""
+          }
+        },
+        "signoff": {
+          "override": "",
+          "overrideReason": "",
+          "signedBy": ""
+        }
+      },
+      "expected": {
+        "scoreTotal": 16,
+        "scoreBand": "high",
+        "manifestoSubtotal": 4,
+        "principlesSubtotal": 12,
+        "recommendation": "Likely ready — trial an engagement and review in ~3 months.",
+        "firedRules": [
+          {
+            "id": "R-M1",
+            "key": "m1",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-M2",
+            "key": "m2",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-M3",
+            "key": "m3",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-M4",
+            "key": "m4",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P1",
+            "key": "p1",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P2",
+            "key": "p2",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P3",
+            "key": "p3",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P4",
+            "key": "p4",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P5",
+            "key": "p5",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P6",
+            "key": "p6",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P7",
+            "key": "p7",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P8",
+            "key": "p8",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P9",
+            "key": "p9",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P10",
+            "key": "p10",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P11",
+            "key": "p11",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P12",
+            "key": "p12",
+            "answer": true,
+            "points": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Borderline - score exactly 5, five gaps flagged",
+      "description": "manifesto m1=true, m3=true (m2, m4 false); principles p2, p9, p12=true (the other 9 false, including p1, p7, p8, p11). manifestoSubtotal 2 + principlesSubtotal 3 = scoreTotal 5, which lands exactly on the 'borderline' band (the single-point band between low and medium). Expect five flags in check order: no-senior-leadership-buyin (m4 false), no-customer-contact (p1 false triggers the OR even though m1 is true), no-working-software (m2 AND p7 both false), no-sustainable-budget (p8 false), no-self-organization (p11 false). no-reflection-culture does NOT fire (p12 is true).",
+      "state": {
+        "organization": {
+          "organizationName": "",
+          "sector": "",
+          "sizeBand": ""
+        },
+        "respondent": {
+          "respondentName": "",
+          "respondentEmail": "",
+          "role": ""
+        },
+        "assessment": {
+          "assessmentDate": "",
+          "status": "draft"
+        },
+        "manifesto": {
+          "m1": {
+            "done": true,
+            "evidence": ""
+          },
+          "m2": {
+            "done": false,
+            "evidence": ""
+          },
+          "m3": {
+            "done": true,
+            "evidence": ""
+          },
+          "m4": {
+            "done": false,
+            "evidence": ""
+          }
+        },
+        "principles": {
+          "p1": {
+            "done": false,
+            "evidence": ""
+          },
+          "p2": {
+            "done": true,
+            "evidence": ""
+          },
+          "p3": {
+            "done": false,
+            "evidence": ""
+          },
+          "p4": {
+            "done": false,
+            "evidence": ""
+          },
+          "p5": {
+            "done": false,
+            "evidence": ""
+          },
+          "p6": {
+            "done": false,
+            "evidence": ""
+          },
+          "p7": {
+            "done": false,
+            "evidence": ""
+          },
+          "p8": {
+            "done": false,
+            "evidence": ""
+          },
+          "p9": {
+            "done": true,
+            "evidence": ""
+          },
+          "p10": {
+            "done": false,
+            "evidence": ""
+          },
+          "p11": {
+            "done": false,
+            "evidence": ""
+          },
+          "p12": {
+            "done": true,
+            "evidence": ""
+          }
+        },
+        "signoff": {
+          "override": "",
+          "overrideReason": "",
+          "signedBy": ""
+        }
+      },
+      "expected": {
+        "scoreTotal": 5,
+        "scoreBand": "borderline",
+        "manifestoSubtotal": 2,
+        "principlesSubtotal": 3,
+        "recommendation": "Borderline — do your agile homework first; revisit in ~3 months.",
+        "firedRules": [
+          {
+            "id": "R-M1",
+            "key": "m1",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-M2",
+            "key": "m2",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-M3",
+            "key": "m3",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-M4",
+            "key": "m4",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P1",
+            "key": "p1",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P2",
+            "key": "p2",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P3",
+            "key": "p3",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P4",
+            "key": "p4",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P5",
+            "key": "p5",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P6",
+            "key": "p6",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P7",
+            "key": "p7",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P8",
+            "key": "p8",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P9",
+            "key": "p9",
+            "answer": true,
+            "points": 1
+          },
+          {
+            "id": "R-P10",
+            "key": "p10",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P11",
+            "key": "p11",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P12",
+            "key": "p12",
+            "answer": true,
+            "points": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "p": "high",
+            "cat": "no-senior-leadership-buyin",
+            "text": "No senior leader has read an agile change-management book and shared takeaways."
+          },
+          {
+            "p": "high",
+            "cat": "no-customer-contact",
+            "text": "Customer-contact gap: leaders are not in regular conversation with customers, or NPS is not measured."
+          },
+          {
+            "p": "high",
+            "cat": "no-working-software",
+            "text": "Neither \"hello world\" nor \"fizz buzz\" has been launched to production."
+          },
+          {
+            "p": "medium",
+            "cat": "no-sustainable-budget",
+            "text": "Less than 1 year of staff sustaining budget is secured."
+          },
+          {
+            "p": "medium",
+            "cat": "no-self-organization",
+            "text": "Self-organization Likert average is below \"Agree\"."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not ready - every item unconfirmed",
+      "description": "All 16 items 'done: false'. scoreTotal 0, band 'low', recommendation 'Don't hire agile help yet' - the band name is not a safety label here, just this organisation's own readiness verdict. All six flags fire, in check order: no-senior-leadership-buyin, no-customer-contact, no-working-software, no-sustainable-budget, no-self-organization, no-reflection-culture (the maximum possible flag count for this engine).",
+      "state": {
+        "organization": {
+          "organizationName": "",
+          "sector": "",
+          "sizeBand": ""
+        },
+        "respondent": {
+          "respondentName": "",
+          "respondentEmail": "",
+          "role": ""
+        },
+        "assessment": {
+          "assessmentDate": "",
+          "status": "draft"
+        },
+        "manifesto": {
+          "m1": {
+            "done": false,
+            "evidence": ""
+          },
+          "m2": {
+            "done": false,
+            "evidence": ""
+          },
+          "m3": {
+            "done": false,
+            "evidence": ""
+          },
+          "m4": {
+            "done": false,
+            "evidence": ""
+          }
+        },
+        "principles": {
+          "p1": {
+            "done": false,
+            "evidence": ""
+          },
+          "p2": {
+            "done": false,
+            "evidence": ""
+          },
+          "p3": {
+            "done": false,
+            "evidence": ""
+          },
+          "p4": {
+            "done": false,
+            "evidence": ""
+          },
+          "p5": {
+            "done": false,
+            "evidence": ""
+          },
+          "p6": {
+            "done": false,
+            "evidence": ""
+          },
+          "p7": {
+            "done": false,
+            "evidence": ""
+          },
+          "p8": {
+            "done": false,
+            "evidence": ""
+          },
+          "p9": {
+            "done": false,
+            "evidence": ""
+          },
+          "p10": {
+            "done": false,
+            "evidence": ""
+          },
+          "p11": {
+            "done": false,
+            "evidence": ""
+          },
+          "p12": {
+            "done": false,
+            "evidence": ""
+          }
+        },
+        "signoff": {
+          "override": "",
+          "overrideReason": "",
+          "signedBy": ""
+        }
+      },
+      "expected": {
+        "scoreTotal": 0,
+        "scoreBand": "low",
+        "manifestoSubtotal": 0,
+        "principlesSubtotal": 0,
+        "recommendation": "Don't hire agile help yet — focus on internal operations first.",
+        "firedRules": [
+          {
+            "id": "R-M1",
+            "key": "m1",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-M2",
+            "key": "m2",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-M3",
+            "key": "m3",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-M4",
+            "key": "m4",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P1",
+            "key": "p1",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P2",
+            "key": "p2",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P3",
+            "key": "p3",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P4",
+            "key": "p4",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P5",
+            "key": "p5",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P6",
+            "key": "p6",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P7",
+            "key": "p7",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P8",
+            "key": "p8",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P9",
+            "key": "p9",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P10",
+            "key": "p10",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P11",
+            "key": "p11",
+            "answer": false,
+            "points": 0
+          },
+          {
+            "id": "R-P12",
+            "key": "p12",
+            "answer": false,
+            "points": 0
+          }
+        ],
+        "additionalFlags": [
+          {
+            "p": "high",
+            "cat": "no-senior-leadership-buyin",
+            "text": "No senior leader has read an agile change-management book and shared takeaways."
+          },
+          {
+            "p": "high",
+            "cat": "no-customer-contact",
+            "text": "Customer-contact gap: leaders are not in regular conversation with customers, or NPS is not measured."
+          },
+          {
+            "p": "high",
+            "cat": "no-working-software",
+            "text": "Neither \"hello world\" nor \"fizz buzz\" has been launched to production."
+          },
+          {
+            "p": "medium",
+            "cat": "no-sustainable-budget",
+            "text": "Less than 1 year of staff sustaining budget is secured."
+          },
+          {
+            "p": "medium",
+            "cat": "no-self-organization",
+            "text": "Self-organization Likert average is below \"Agree\"."
+          },
+          {
+            "p": "medium",
+            "cat": "no-reflection-culture",
+            "text": "Leaders are not running or sharing retrospectives."
+          }
+        ]
+      }
+    }
+  ]
+}

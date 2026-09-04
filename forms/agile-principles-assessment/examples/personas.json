@@ -1,0 +1,767 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMaturity",
+  "note": "Three hand-authored personas for the Agile Principles Assessment maturity engine. calculateMaturity(data) takes the full assessment shape ({ respondent, responses: [12 x {score,comment,weight}], actionPlan }) - responses[i] corresponds to PRINCIPLES[i] positionally (1-indexed principle number = i+1). clampWeight coerces a missing/zero/negative/NaN weight to 1.0 and clamps the valid range to [0.5, 2.0] BEFORE it is used in the weighted mean - a weight of 0.3 in the input becomes 0.5 in weightedSum, and 2.5 becomes 2.0; weightsCustomised is true whenever any principle's clamped weight differs from 1.0 by more than 1e-6, including a clamped-but-not-exactly-1 weight. meanScore/weightedMeanScore are null (and maturity 'insufficient-data') unless at least 6 of the 12 principles have a non-null score; below that floor the weightedMeanScore band thresholds never apply no matter how good or bad the answered principles look. Per-principle flags fire independently of the band: any score <= 2 raises that principle's own FLAG_SPECS entry (flagId F-<CATEGORY>, category/priority fixed per principle), and a score of EXACTLY 1 additionally raises F-CRITICAL-P<NN> right after it - both checks run per principle in PRINCIPLES order, so the two flags for the same principle are adjacent, not grouped by type. additionalFlags are folded into the result (push order, not sorted by priority). Regenerate 'expected' with: bin/test-personas agile-principles-assessment --update",
+  "personas": [
+    {
+      "name": "Optimising organisation - every principle scored 5/5",
+      "description": "All 12 principles scored 5 with the default weight 1.0 (weightsCustomised false). Expect answeredCount 12, meanScore 5, weightedMeanScore 5, maturity 'optimising' (>=4.5), twelve R-Pxx-HIGH fired rules in principle order, and no flags at all (no score <= 2 anywhere).",
+      "state": {
+        "respondent": {
+          "isAnonymous": false,
+          "fullName": "",
+          "email": "",
+          "role": "",
+          "yearsInAgile": "",
+          "teamName": "",
+          "organisationName": "",
+          "assessmentDate": "",
+          "assessmentPeriod": ""
+        },
+        "responses": [
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          }
+        ],
+        "actionPlan": {
+          "topAction1": "",
+          "topAction2": "",
+          "topAction3": "",
+          "coachNotes": "",
+          "overallNotes": ""
+        }
+      },
+      "expected": {
+        "answeredCount": 12,
+        "meanScore": 5,
+        "weightedMeanScore": 5,
+        "weightsCustomised": false,
+        "maturity": "optimising",
+        "perPrincipleBands": [
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high",
+          "high"
+        ],
+        "firedRules": [
+          {
+            "ruleId": "R-P01-HIGH",
+            "principleNumber": 1,
+            "principleSlug": "customer-satisfaction",
+            "band": "high",
+            "description": "Customer feedback loops are tight; keep tracking outcome metrics, not output."
+          },
+          {
+            "ruleId": "R-P02-HIGH",
+            "principleNumber": 2,
+            "principleSlug": "welcome-change",
+            "band": "high",
+            "description": "Change is treated as an opportunity; preserve light-weight change-control overhead."
+          },
+          {
+            "ruleId": "R-P03-HIGH",
+            "principleNumber": 3,
+            "principleSlug": "deliver-frequently",
+            "band": "high",
+            "description": "Releases are routine and low-drama. Continue to shrink batch size where possible."
+          },
+          {
+            "ruleId": "R-P04-HIGH",
+            "principleNumber": 4,
+            "principleSlug": "collaboration",
+            "band": "high",
+            "description": "Daily collaboration is healthy; safeguard the rituals that keep stakeholders close to the work."
+          },
+          {
+            "ruleId": "R-P05-HIGH",
+            "principleNumber": 5,
+            "principleSlug": "motivated-individuals",
+            "band": "high",
+            "description": "People feel trusted and supported. Continue investing in autonomy and tools."
+          },
+          {
+            "ruleId": "R-P06-HIGH",
+            "principleNumber": 6,
+            "principleSlug": "face-to-face",
+            "band": "high",
+            "description": "Real-time conversation is the default for important decisions; document outcomes, not deliberations."
+          },
+          {
+            "ruleId": "R-P07-HIGH",
+            "principleNumber": 7,
+            "principleSlug": "working-software",
+            "band": "high",
+            "description": "Progress is measured by shipped, working capability. Continue."
+          },
+          {
+            "ruleId": "R-P08-HIGH",
+            "principleNumber": 8,
+            "principleSlug": "sustainable-development",
+            "band": "high",
+            "description": "Pace is sustainable. Watch for early signs of crunch creeping in."
+          },
+          {
+            "ruleId": "R-P09-HIGH",
+            "principleNumber": 9,
+            "principleSlug": "technical-excellence",
+            "band": "high",
+            "description": "Technical health is part of definition-of-done; keep refactoring continuous."
+          },
+          {
+            "ruleId": "R-P10-HIGH",
+            "principleNumber": 10,
+            "principleSlug": "simplicity",
+            "band": "high",
+            "description": "Scope is actively trimmed; resist gold-plating."
+          },
+          {
+            "ruleId": "R-P11-HIGH",
+            "principleNumber": 11,
+            "principleSlug": "self-organising-teams",
+            "band": "high",
+            "description": "Teams choose how to deliver. Reinforce psychological safety to keep emergence working."
+          },
+          {
+            "ruleId": "R-P12-HIGH",
+            "principleNumber": 12,
+            "principleSlug": "regular-reflection",
+            "band": "high",
+            "description": "Retrospectives drive concrete experiments. Continue closing the loop on each."
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Partially answered with custom weights - developing, three non-critical flags",
+      "description": "Non-critical edge case exercising weight clamping and the answered-floor arithmetic together. Only principles 1-8 are scored (9-12 left null); weights of 0.3 and 2.5 are supplied on P4 and P6 to demonstrate clamping to [0.5, 2.0]. Scores: P1=4(w1.5) P2=2(w1) P3=5(w1) P4=2(w0.3->0.5) P5=3(w1) P6=4(w2.5->2.0) P7=3(w1) P8=2(w1). sum=25, answeredCount=8 (>=6, reportable). meanScore = round2(25/8) = 3.13. weightedSum = 4x1.5 + 2x1 + 5x1 + 2x0.5 + 3x1 + 4x2 + 3x1 + 2x1 = 30; weightSum = 1.5+1+1+0.5+1+2+1+1 = 9; weightedMeanScore = round2(30/9) = 3.33 -> maturity 'developing' (>=3.0, <3.75). weightsCustomised true. Fired rules: R-P01-HIGH, R-P02-LOW, R-P03-HIGH, R-P04-LOW, R-P05-MID, R-P06-HIGH, R-P07-MID, R-P08-LOW, then R-P09..R-P12-UNANSWERED. Flags in principle order: F-CHANGE-RESISTANCE (P2, score 2), F-SILO-COLLABORATION (P4, score 2), F-BURNOUT-RISK (P8, score 2) - no F-CRITICAL-Pxx (no score is exactly 1), no F-INSUFFICIENT-DATA (8 >= 6).",
+      "state": {
+        "respondent": {
+          "isAnonymous": false,
+          "fullName": "",
+          "email": "",
+          "role": "",
+          "yearsInAgile": "",
+          "teamName": "",
+          "organisationName": "",
+          "assessmentDate": "",
+          "assessmentPeriod": ""
+        },
+        "responses": [
+          {
+            "score": 4,
+            "comment": "",
+            "weight": 1.5
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 5,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 0.3
+          },
+          {
+            "score": 3,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 4,
+            "comment": "",
+            "weight": 2.5
+          },
+          {
+            "score": 3,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": null,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": null,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": null,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": null,
+            "comment": "",
+            "weight": 1
+          }
+        ],
+        "actionPlan": {
+          "topAction1": "",
+          "topAction2": "",
+          "topAction3": "",
+          "coachNotes": "",
+          "overallNotes": ""
+        }
+      },
+      "expected": {
+        "answeredCount": 8,
+        "meanScore": 3.13,
+        "weightedMeanScore": 3.33,
+        "weightsCustomised": true,
+        "maturity": "developing",
+        "perPrincipleBands": [
+          "high",
+          "low",
+          "high",
+          "low",
+          "mid",
+          "high",
+          "mid",
+          "low",
+          "unanswered",
+          "unanswered",
+          "unanswered",
+          "unanswered"
+        ],
+        "firedRules": [
+          {
+            "ruleId": "R-P01-HIGH",
+            "principleNumber": 1,
+            "principleSlug": "customer-satisfaction",
+            "band": "high",
+            "description": "Customer feedback loops are tight; keep tracking outcome metrics, not output."
+          },
+          {
+            "ruleId": "R-P02-LOW",
+            "principleNumber": 2,
+            "principleSlug": "welcome-change",
+            "band": "low",
+            "description": "Change is treated as a threat. Replace heavy change-control with a lightweight backlog re-ordering ritual."
+          },
+          {
+            "ruleId": "R-P03-HIGH",
+            "principleNumber": 3,
+            "principleSlug": "deliver-frequently",
+            "band": "high",
+            "description": "Releases are routine and low-drama. Continue to shrink batch size where possible."
+          },
+          {
+            "ruleId": "R-P04-LOW",
+            "principleNumber": 4,
+            "principleSlug": "collaboration",
+            "band": "low",
+            "description": "Stakeholders and engineers are working in silos. Co-locate decisions or create a daily 15-minute joint stand-up."
+          },
+          {
+            "ruleId": "R-P05-MID",
+            "principleNumber": 5,
+            "principleSlug": "motivated-individuals",
+            "band": "mid",
+            "description": "Motivation is mixed. Run a 1:1 listening tour to surface friction."
+          },
+          {
+            "ruleId": "R-P06-HIGH",
+            "principleNumber": 6,
+            "principleSlug": "face-to-face",
+            "band": "high",
+            "description": "Real-time conversation is the default for important decisions; document outcomes, not deliberations."
+          },
+          {
+            "ruleId": "R-P07-MID",
+            "principleNumber": 7,
+            "principleSlug": "working-software",
+            "band": "mid",
+            "description": "Progress is partly tracked by output proxies. Replace velocity / hours dashboards with shipped-feature counts."
+          },
+          {
+            "ruleId": "R-P08-LOW",
+            "principleNumber": 8,
+            "principleSlug": "sustainable-development",
+            "band": "low",
+            "description": "Crunch and heroics are routine. Reset capacity and protect non-overtime delivery before scope."
+          },
+          {
+            "ruleId": "R-P09-UNANSWERED",
+            "principleNumber": 9,
+            "principleSlug": "technical-excellence",
+            "band": "unanswered",
+            "description": "Principle 9 (Technical excellence) was not answered."
+          },
+          {
+            "ruleId": "R-P10-UNANSWERED",
+            "principleNumber": 10,
+            "principleSlug": "simplicity",
+            "band": "unanswered",
+            "description": "Principle 10 (Simplicity) was not answered."
+          },
+          {
+            "ruleId": "R-P11-UNANSWERED",
+            "principleNumber": 11,
+            "principleSlug": "self-organising-teams",
+            "band": "unanswered",
+            "description": "Principle 11 (Self-organising teams) was not answered."
+          },
+          {
+            "ruleId": "R-P12-UNANSWERED",
+            "principleNumber": 12,
+            "principleSlug": "regular-reflection",
+            "band": "unanswered",
+            "description": "Principle 12 (Regular reflection) was not answered."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-CHANGE-RESISTANCE",
+            "category": "change-resistance",
+            "priority": "high",
+            "principleNumber": 2,
+            "description": "Change is treated as a threat; competitive responsiveness will suffer.",
+            "suggestedAction": "Replace heavy change-control with a lightweight backlog re-prioritisation ritual."
+          },
+          {
+            "flagId": "F-SILO-COLLABORATION",
+            "category": "silo-collaboration",
+            "priority": "high",
+            "principleNumber": 4,
+            "description": "Engineering and business are operating in silos.",
+            "suggestedAction": "Schedule a daily 15-minute product-engineering sync and rotate attendees."
+          },
+          {
+            "flagId": "F-BURNOUT-RISK",
+            "category": "burnout-risk",
+            "priority": "high",
+            "principleNumber": 8,
+            "description": "Crunch is the default; burnout and quality regressions are likely.",
+            "suggestedAction": "Reset capacity to a sustainable baseline and protect non-overtime delivery before adding scope."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - every principle scored 1 or 2, seven at the critical floor",
+      "description": "Critical/highest-severity persona. All 12 principles answered, alternating score 1 and 2 (P1,P2,P4,P6,P8,P10,P12 = 1; P3,P5,P7,P9,P11 = 2), default weight throughout (weightsCustomised false). sum = 7x1 + 5x2 = 17; meanScore = weightedMeanScore = round2(17/12) = 1.42 -> maturity 'ad-hoc' (<2.0). All twelve perPrincipleBands are 'low' (both 1 and 2 fall below the mid threshold of exactly 3), so firedRules is R-P01-LOW through R-P12-LOW. Every principle's own FLAG_SPECS flag fires (all scores <=2): F-CUSTOMER-DISCONNECT, F-CHANGE-RESISTANCE, F-SLOW-DELIVERY, F-SILO-COLLABORATION, F-MORALE-RISK, F-COMMUNICATION-GAP, F-OUTPUT-NOT-OUTCOME, F-BURNOUT-RISK, F-TECHNICAL-DEBT, F-OVER-ENGINEERING, F-COMMAND-AND-CONTROL, F-NO-RETROSPECTIVE - and the seven principles scored exactly 1 each additionally raise F-CRITICAL-P<NN> immediately after their own flag (interleaved by principle, not grouped): F-CRITICAL-P01, F-CRITICAL-P02, F-CRITICAL-P04, F-CRITICAL-P06, F-CRITICAL-P08, F-CRITICAL-P10, F-CRITICAL-P12 - 19 flags total. No F-INSUFFICIENT-DATA (12 >= 6).",
+      "state": {
+        "respondent": {
+          "isAnonymous": false,
+          "fullName": "",
+          "email": "",
+          "role": "",
+          "yearsInAgile": "",
+          "teamName": "",
+          "organisationName": "",
+          "assessmentDate": "",
+          "assessmentPeriod": ""
+        },
+        "responses": [
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 2,
+            "comment": "",
+            "weight": 1
+          },
+          {
+            "score": 1,
+            "comment": "",
+            "weight": 1
+          }
+        ],
+        "actionPlan": {
+          "topAction1": "",
+          "topAction2": "",
+          "topAction3": "",
+          "coachNotes": "",
+          "overallNotes": ""
+        }
+      },
+      "expected": {
+        "answeredCount": 12,
+        "meanScore": 1.42,
+        "weightedMeanScore": 1.42,
+        "weightsCustomised": false,
+        "maturity": "ad-hoc",
+        "perPrincipleBands": [
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low",
+          "low"
+        ],
+        "firedRules": [
+          {
+            "ruleId": "R-P01-LOW",
+            "principleNumber": 1,
+            "principleSlug": "customer-satisfaction",
+            "band": "low",
+            "description": "Customer is at arm's length. Establish a recurring feedback loop with real users this quarter."
+          },
+          {
+            "ruleId": "R-P02-LOW",
+            "principleNumber": 2,
+            "principleSlug": "welcome-change",
+            "band": "low",
+            "description": "Change is treated as a threat. Replace heavy change-control with a lightweight backlog re-ordering ritual."
+          },
+          {
+            "ruleId": "R-P03-LOW",
+            "principleNumber": 3,
+            "principleSlug": "deliver-frequently",
+            "band": "low",
+            "description": "Delivery is rare or unpredictable. Reduce batch size and remove release ceremonies that add no value."
+          },
+          {
+            "ruleId": "R-P04-LOW",
+            "principleNumber": 4,
+            "principleSlug": "collaboration",
+            "band": "low",
+            "description": "Stakeholders and engineers are working in silos. Co-locate decisions or create a daily 15-minute joint stand-up."
+          },
+          {
+            "ruleId": "R-P05-LOW",
+            "principleNumber": 5,
+            "principleSlug": "motivated-individuals",
+            "band": "low",
+            "description": "Morale is low or trust is thin. Address environment, tooling, or management style before adding more process."
+          },
+          {
+            "ruleId": "R-P06-LOW",
+            "principleNumber": 6,
+            "principleSlug": "face-to-face",
+            "band": "low",
+            "description": "Important decisions are stuck in chat or email. Establish a synchronous decision ritual."
+          },
+          {
+            "ruleId": "R-P07-LOW",
+            "principleNumber": 7,
+            "principleSlug": "working-software",
+            "band": "low",
+            "description": "Progress is reported by activity, not by working software. Make working software the headline metric."
+          },
+          {
+            "ruleId": "R-P08-LOW",
+            "principleNumber": 8,
+            "principleSlug": "sustainable-development",
+            "band": "low",
+            "description": "Crunch and heroics are routine. Reset capacity and protect non-overtime delivery before scope."
+          },
+          {
+            "ruleId": "R-P09-LOW",
+            "principleNumber": 9,
+            "principleSlug": "technical-excellence",
+            "band": "low",
+            "description": "Technical debt is accumulating faster than it is being repaid. Treat this as the top organisational risk."
+          },
+          {
+            "ruleId": "R-P10-LOW",
+            "principleNumber": 10,
+            "principleSlug": "simplicity",
+            "band": "low",
+            "description": "Over-engineering or scope creep is the norm. Make trimming a non-optional part of planning."
+          },
+          {
+            "ruleId": "R-P11-LOW",
+            "principleNumber": 11,
+            "principleSlug": "self-organising-teams",
+            "band": "low",
+            "description": "Command-and-control culture. Push architecture and design decisions back to the team and provide context, not directives."
+          },
+          {
+            "ruleId": "R-P12-LOW",
+            "principleNumber": 12,
+            "principleSlug": "regular-reflection",
+            "band": "low",
+            "description": "Retrospectives are skipped or theatrical. Reinstate them on a fixed schedule with one written follow-up."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-CUSTOMER-DISCONNECT",
+            "category": "customer-disconnect",
+            "priority": "high",
+            "principleNumber": 1,
+            "description": "The team is at risk of building features that customers do not value.",
+            "suggestedAction": "Stand up a real customer-feedback loop within the next two weeks (interviews, beta cohort, or analytics)."
+          },
+          {
+            "flagId": "F-CRITICAL-P01",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 1,
+            "description": "Principle 1 (Customer satisfaction) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          },
+          {
+            "flagId": "F-CHANGE-RESISTANCE",
+            "category": "change-resistance",
+            "priority": "high",
+            "principleNumber": 2,
+            "description": "Change is treated as a threat; competitive responsiveness will suffer.",
+            "suggestedAction": "Replace heavy change-control with a lightweight backlog re-prioritisation ritual."
+          },
+          {
+            "flagId": "F-CRITICAL-P02",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 2,
+            "description": "Principle 2 (Welcome change) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          },
+          {
+            "flagId": "F-SLOW-DELIVERY",
+            "category": "slow-delivery",
+            "priority": "medium",
+            "principleNumber": 3,
+            "description": "Long delivery cycles delay learning and increase batch risk.",
+            "suggestedAction": "Pick one initiative and ship a thin slice within two weeks; measure cycle time."
+          },
+          {
+            "flagId": "F-SILO-COLLABORATION",
+            "category": "silo-collaboration",
+            "priority": "high",
+            "principleNumber": 4,
+            "description": "Engineering and business are operating in silos.",
+            "suggestedAction": "Schedule a daily 15-minute product-engineering sync and rotate attendees."
+          },
+          {
+            "flagId": "F-CRITICAL-P04",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 4,
+            "description": "Principle 4 (Daily collaboration) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          },
+          {
+            "flagId": "F-MORALE-RISK",
+            "category": "morale-risk",
+            "priority": "high",
+            "principleNumber": 5,
+            "description": "Trust, environment, or motivation are weak. People will leave or disengage.",
+            "suggestedAction": "Run a structured 1:1 listening tour; surface and remove the top three friction points."
+          },
+          {
+            "flagId": "F-COMMUNICATION-GAP",
+            "category": "communication-gap",
+            "priority": "medium",
+            "principleNumber": 6,
+            "description": "Critical decisions are stuck in async threads.",
+            "suggestedAction": "Define which decision classes require synchronous conversation; capture outcomes (not deliberations) in writing."
+          },
+          {
+            "flagId": "F-CRITICAL-P06",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 6,
+            "description": "Principle 6 (Face-to-face conversation) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          },
+          {
+            "flagId": "F-OUTPUT-NOT-OUTCOME",
+            "category": "output-not-outcome",
+            "priority": "medium",
+            "principleNumber": 7,
+            "description": "Progress is being judged by activity rather than working software.",
+            "suggestedAction": "Replace velocity / hours dashboards with a shipped-features dashboard."
+          },
+          {
+            "flagId": "F-BURNOUT-RISK",
+            "category": "burnout-risk",
+            "priority": "high",
+            "principleNumber": 8,
+            "description": "Crunch is the default; burnout and quality regressions are likely.",
+            "suggestedAction": "Reset capacity to a sustainable baseline and protect non-overtime delivery before adding scope."
+          },
+          {
+            "flagId": "F-CRITICAL-P08",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 8,
+            "description": "Principle 8 (Sustainable development) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          },
+          {
+            "flagId": "F-TECHNICAL-DEBT",
+            "category": "technical-debt",
+            "priority": "high",
+            "principleNumber": 9,
+            "description": "Technical debt is growing faster than it is being repaid; future agility is at risk.",
+            "suggestedAction": "Allocate explicit weekly capacity to tests, refactoring, and infrastructure quality."
+          },
+          {
+            "flagId": "F-OVER-ENGINEERING",
+            "category": "over-engineering",
+            "priority": "medium",
+            "principleNumber": 10,
+            "description": "Scope creep or over-engineering is the norm; the team is doing more work than is required.",
+            "suggestedAction": "Add a written \"what we are NOT doing\" list to every initiative; review weekly."
+          },
+          {
+            "flagId": "F-CRITICAL-P10",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 10,
+            "description": "Principle 10 (Simplicity) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          },
+          {
+            "flagId": "F-COMMAND-AND-CONTROL",
+            "category": "command-and-control",
+            "priority": "high",
+            "principleNumber": 11,
+            "description": "Decision-making sits with managers, not with the team closest to the work.",
+            "suggestedAction": "Push design and architecture decisions back to the team; managers provide context, not directives."
+          },
+          {
+            "flagId": "F-NO-RETROSPECTIVE",
+            "category": "no-retrospective",
+            "priority": "high",
+            "principleNumber": 12,
+            "description": "Retrospectives are skipped or theatrical; the team cannot improve itself.",
+            "suggestedAction": "Reinstate retrospectives on a fixed cadence; track each follow-up like a top-priority story."
+          },
+          {
+            "flagId": "F-CRITICAL-P12",
+            "category": "critical-principle-gap",
+            "priority": "high",
+            "principleNumber": 12,
+            "description": "Principle 12 (Regular reflection) scored the minimum (1).",
+            "suggestedAction": "Treat this principle as a top-priority coaching focus this cycle."
+          }
+        ]
+      }
+    }
+  ]
+}
