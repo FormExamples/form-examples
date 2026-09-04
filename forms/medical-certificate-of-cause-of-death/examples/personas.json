@@ -1,0 +1,232 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateCertificate",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateCertificate(d) returns only { validityClass, underlyingCause, coronerReferralIndicated } — no rules array and no flags — so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's `detectFlaggedIssues(state)` (the grader result is not passed to the detector). Classification is first-match: coronerReferralIndicated (referredToCoroner === 'yes' OR coronerReason in the 8-entry CORONER_REASONS list) -> 'refer-to-coroner'; missingPartIa OR unacceptableSoleCause (exactly one Part I line, Part II empty, and that line normalises to a listed mode of death) -> 'incomplete'; else 'valid'. underlyingCause is the lowest completed Part I line (I(c) else I(b) else I(a)), trimmed. Quirks verified: (1) coronerReason 'other' (labelled 'Other reportable circumstance') is NOT in CORONER_REASONS, so it never triggers referral; (2) the referral predicate and the medical-examiner flag are asymmetric — referral fires on coronerReason alone, but F-MEDICAL-EXAMINER-SCRUTINY-001 is suppressed only by referredToCoroner === 'yes', so a certificate with referredToCoroner 'no' + a listed coronerReason raises BOTH the coroner flag and the ME-scrutiny flag; (3) a mode-of-death text on I(b) with I(a) empty is both the sole cause and an illogical sequence, so three separate flags fire from one line; (4) referredToCoroner '' (unanswered) behaves exactly like 'no'. Flags are stable-sorted high > medium > low, insertion order within a tier: coroner, sole-cause, missing-I(a), illogical, ME-scrutiny, missing-interval, incomplete-certifier. The 'timestamp' key is added by form-app.js, not the grader. Regenerate expected with: bin/test-personas medical-certificate-of-cause-of-death --update",
+  "personas": [
+    {
+      "name": "Valid certificate, scrutinised by medical examiner",
+      "description": "Expected hospital death of an 84-year-old woman from bronchopneumonia due to a left MCA infarct due to atrial fibrillation, Part II type 2 diabetes; all three Part I intervals recorded; consultant certifier fully identified who attended the deceased; not referred to the coroner (reason 'none'); medical examiner status 'scrutinised'. Expect validityClass 'valid', underlyingCause 'Atrial fibrillation' (the I(c) line), coronerReferralIndicated false, and an empty flaggedIssues array (the ME-scrutiny flag is suppressed by 'scrutinised').",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Fiona Macleod",
+          "certifyingDoctorGrade": "consultant",
+          "gmcReference": "6043217",
+          "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
+          "certificationDate": "2026-08-31",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-08-29"
+        },
+        "deceased": {
+          "deceasedName": "Agnes Muriel Ferguson",
+          "sex": "female",
+          "dateOfBirth": "1942-02-11",
+          "ageYears": 84,
+          "patientIdentifier": "CHI 1102423361"
+        },
+        "death": {
+          "dateOfDeath": "2026-08-30",
+          "timeOfDeath": "04:20",
+          "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
+          "seenAfterDeathBy": "certifier"
+        },
+        "partI": {
+          "causeIaCondition": "Bronchopneumonia",
+          "causeIaInterval": "5 days",
+          "causeIbCondition": "Left middle cerebral artery territory ischaemic stroke",
+          "causeIbInterval": "3 weeks",
+          "causeIcCondition": "Atrial fibrillation",
+          "causeIcInterval": "6 years"
+        },
+        "partII": {
+          "partIiConditions": "Type 2 diabetes mellitus; hypertension",
+          "partIiInterval": "15 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "none",
+          "medicalExaminerStatus": "scrutinised",
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026."
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Atrial fibrillation",
+        "coronerReferralIndicated": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Industrial disease referral asserted by reason alone",
+      "description": "Death of a 71-year-old retired shipyard lagger from malignant pleural mesothelioma. The certifier answered referredToCoroner 'no' but selected coronerReason 'industrial-disease', which is in CORONER_REASONS, so referral is indicated by the reason alone; medical examiner status 'pending'; the I(b) interval was left blank. Expect validityClass 'refer-to-coroner' (takes precedence over completeness), underlyingCause 'Occupational asbestos exposure' (I(b) is the lowest completed line since I(c) is empty), coronerReferralIndicated true, and three flags in order: F-CORONER-REFERRAL-REQUIRED-001 (high, description embeds '(Industrial disease or occupational exposure)'), F-MEDICAL-EXAMINER-SCRUTINY-001 (medium — fires because referredToCoroner !== 'yes', despite the referral being indicated), F-MISSING-INTERVAL-001 (low, 'I(b)').",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Tomasz Nowak",
+          "certifyingDoctorGrade": "registrar",
+          "gmcReference": "7358821",
+          "placeOfCertification": "St Oswald's Hospice, Newcastle upon Tyne",
+          "certificationDate": "2026-09-02",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-09-01"
+        },
+        "deceased": {
+          "deceasedName": "Raymond Arthur Hedley",
+          "sex": "male",
+          "dateOfBirth": "1955-04-19",
+          "ageYears": 71,
+          "patientIdentifier": "NHS 401 234 5677"
+        },
+        "death": {
+          "dateOfDeath": "2026-09-01",
+          "timeOfDeath": "22:45",
+          "placeOfDeath": "St Oswald's Hospice, Newcastle upon Tyne",
+          "seenAfterDeathBy": "another-practitioner"
+        },
+        "partI": {
+          "causeIaCondition": "Malignant pleural mesothelioma",
+          "causeIaInterval": "14 months",
+          "causeIbCondition": "Occupational asbestos exposure",
+          "causeIbInterval": "",
+          "causeIcCondition": "",
+          "causeIcInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Chronic obstructive pulmonary disease",
+          "partIiInterval": "10 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "industrial-disease",
+          "medicalExaminerStatus": "pending",
+          "certifierNote": "Worked at Swan Hunter 1971-1998; family aware coroner will be notified."
+        }
+      },
+      "expected": {
+        "validityClass": "refer-to-coroner",
+        "underlyingCause": "Occupational asbestos exposure",
+        "coronerReferralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-CORONER-REFERRAL-REQUIRED-001",
+            "category": "coroner-referral-required",
+            "priority": "high",
+            "description": "A coroner-referral criterion is asserted (Industrial disease or occupational exposure). The MCCD should not be issued until the coroner has considered the case.",
+            "suggestedAction": "Refer the death to the coroner and do not issue the certificate until the coroner has determined whether an investigation is required."
+          },
+          {
+            "id": "F-MEDICAL-EXAMINER-SCRUTINY-001",
+            "category": "medical-examiner-scrutiny",
+            "priority": "medium",
+            "description": "This certificate has not been referred to the coroner and has not yet been scrutinised by a medical examiner. Every non-coroner death requires medical-examiner scrutiny before registration.",
+            "suggestedAction": "Refer the certificate to the medical examiner for scrutiny before the death is registered."
+          },
+          {
+            "id": "F-MISSING-INTERVAL-001",
+            "category": "missing-interval",
+            "priority": "low",
+            "description": "A completed cause line has no onset-to-death interval: I(b). Each cause line should carry an approximate interval.",
+            "suggestedAction": "Record the approximate interval between onset and death for each completed Part I line."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Night-shift draft: mode of death only, Part I(a) missing",
+      "description": "Foundation doctor's overnight draft for a 67-year-old man: Part I(a) left blank, Part I(b) reads 'Cardiac arrest' (a listed mode of death) with no interval, I(c) and Part II empty; coroner and medical-examiner questions unanswered; certifier name given but grade, GMC reference and attendance blank. Not referred (referredToCoroner '' and coronerReason '' both fail the referral predicate). Expect validityClass 'incomplete' (missingPartIa true AND unacceptableSoleCause true — one line, Part II empty, normalises to 'cardiac arrest'), underlyingCause 'Cardiac arrest', coronerReferralIndicated false, and six flags in order: F-UNACCEPTABLE-SOLE-CAUSE-001 (high), F-MISSING-PART-I-001 (high), F-ILLOGICAL-SEQUENCE-001 (medium: I(b) completed while I(a) empty), F-MEDICAL-EXAMINER-SCRUTINY-001 (medium), F-MISSING-INTERVAL-001 (low, 'I(b)'), F-INCOMPLETE-CERTIFIER-001 (low: 'grade, GMC reference, attendance on the deceased not recorded').",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Priya Shah",
+          "certifyingDoctorGrade": "",
+          "gmcReference": "",
+          "placeOfCertification": "Acute Medical Unit, Queen's Medical Centre, Nottingham",
+          "certificationDate": "2026-09-03",
+          "attendedDeceased": "",
+          "lastSeenAliveDate": null
+        },
+        "deceased": {
+          "deceasedName": "Colin James Brotherton",
+          "sex": "male",
+          "dateOfBirth": "1959-07-08",
+          "ageYears": 67,
+          "patientIdentifier": "NHS 943 476 5919"
+        },
+        "death": {
+          "dateOfDeath": "2026-09-03",
+          "timeOfDeath": "03:10",
+          "placeOfDeath": "Acute Medical Unit, Queen's Medical Centre, Nottingham",
+          "seenAfterDeathBy": "certifier"
+        },
+        "partI": {
+          "causeIaCondition": "",
+          "causeIaInterval": "",
+          "causeIbCondition": "Cardiac arrest",
+          "causeIbInterval": "",
+          "causeIcCondition": "",
+          "causeIcInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "",
+          "partIiInterval": ""
+        },
+        "referral": {
+          "referredToCoroner": "",
+          "coronerReason": "",
+          "medicalExaminerStatus": "",
+          "certifierNote": "Draft only — to be completed by the day team with the consultant."
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "underlyingCause": "Cardiac arrest",
+        "coronerReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-UNACCEPTABLE-SOLE-CAUSE-001",
+            "category": "unacceptable-sole-cause",
+            "priority": "high",
+            "description": "The only cause given (\"Cardiac arrest\") is a recognised mode of death, not a disease or injury. A mode of death is unacceptable as the sole cause.",
+            "suggestedAction": "State the underlying disease or condition that led to the mode of death on a lower Part I line."
+          },
+          {
+            "id": "F-MISSING-PART-I-001",
+            "category": "missing-part-i",
+            "priority": "high",
+            "description": "No direct cause of death is recorded on Part I(a). Every certificate must record the disease or condition directly leading to death.",
+            "suggestedAction": "Record the disease or condition directly leading to death on Part I(a)."
+          },
+          {
+            "id": "F-ILLOGICAL-SEQUENCE-001",
+            "category": "illogical-sequence",
+            "priority": "medium",
+            "description": "The Part I lines are not in a plausible downward causal order: a completed line sits below an empty line above it. The sequence must read downward from the immediate cause I(a) to the underlying cause.",
+            "suggestedAction": "Reorder the Part I sequence so each line records a condition that gave rise to the line above it, with no gaps."
+          },
+          {
+            "id": "F-MEDICAL-EXAMINER-SCRUTINY-001",
+            "category": "medical-examiner-scrutiny",
+            "priority": "medium",
+            "description": "This certificate has not been referred to the coroner and has not yet been scrutinised by a medical examiner. Every non-coroner death requires medical-examiner scrutiny before registration.",
+            "suggestedAction": "Refer the certificate to the medical examiner for scrutiny before the death is registered."
+          },
+          {
+            "id": "F-MISSING-INTERVAL-001",
+            "category": "missing-interval",
+            "priority": "low",
+            "description": "A completed cause line has no onset-to-death interval: I(b). Each cause line should carry an approximate interval.",
+            "suggestedAction": "Record the approximate interval between onset and death for each completed Part I line."
+          },
+          {
+            "id": "F-INCOMPLETE-CERTIFIER-001",
+            "category": "incomplete-certifier",
+            "priority": "low",
+            "description": "Certifying-doctor details are incomplete: grade, GMC reference, attendance on the deceased not recorded.",
+            "suggestedAction": "Complete the certifying doctor’s identity, grade, GMC reference, and attendance on the deceased."
+          }
+        ]
+      }
+    }
+  ]
+}

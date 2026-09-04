@@ -17,6 +17,9 @@
  *   PASS   engine loaded, grader ran over the default state, structured result
  *   SKIP   grader or default factory could not be discovered (reported, not
  *          failed — some forms compute inline in form-app.js)
+ *   NONE   the form declares it has no engine BY DESIGN via a
+ *          front-end-with-html/js/.no-engine marker file (first line = why);
+ *          documentation-only forms with no derived status
  *   FAIL   an engine module threw on load/import, or the grader returned junk
  *
  * Usage:
@@ -44,6 +47,15 @@ const REPO_ROOT = execSync('git rev-parse --show-toplevel').toString().trim();
 const FORMS = path.join(REPO_ROOT, 'forms');
 
 async function checkForm(slug) {
+  // An explicit `js/.no-engine` marker (a short prose file saying why) means
+  // the form has no engine BY DESIGN — a documentation-only form with no
+  // derived status — and is reported as NONE, not SKIP, so the SKIP count
+  // stays an honest measure of unfinished discovery work.
+  const marker = path.join(FORMS, slug, 'front-end-with-html', 'js', '.no-engine');
+  if (fs.existsSync(marker)) {
+    const why = fs.readFileSync(marker, 'utf8').split('\n')[0].trim();
+    return { slug, status: 'NONE', detail: `no engine by design — ${why}` };
+  }
   const eng = await loadEngine(REPO_ROOT, slug);
   if (eng.error === 'no namespace') {
     return { slug, status: 'SKIP', detail: 'no engine namespace published' };
@@ -92,7 +104,7 @@ async function main() {
   }
   const results = [];
   for (const s of slugs) results.push(await checkForm(s));
-  const by = { PASS: [], SKIP: [], FAIL: [] };
+  const by = { PASS: [], SKIP: [], FAIL: [], NONE: [] };
   for (const r of results) by[r.status].push(r);
 
   for (const r of results) {
@@ -114,7 +126,7 @@ async function main() {
       for (const s of slugs) console.log(`      ${s}`);
     }
   }
-  console.log(`\ntest-engines: PASS ${by.PASS.length}  SKIP ${by.SKIP.length}  FAIL ${by.FAIL.length}  / ${results.length}`);
+  console.log(`\ntest-engines: PASS ${by.PASS.length}  SKIP ${by.SKIP.length}  FAIL ${by.FAIL.length}  NONE ${by.NONE.length}  / ${results.length}`);
   if (by.SKIP.length && !verbose && !skipSummary) {
     console.log('(run --verbose to see SKIP reasons, or --skip-summary to group them — these forms compute inline or use an unrecognised entry point)');
   }

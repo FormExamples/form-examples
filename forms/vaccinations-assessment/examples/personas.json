@@ -1,0 +1,559 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateVaccinationStatus",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Split engine. calculateVaccinationStatus(data) returns { level, score, firedRules }: if fewer than 5 of the 19 scored items (14 vaccines 0/1/2, 4 consent Likert 1-5, post-vaccination observation 1-5) are answered it short-circuits to level 'draft', score 0, no rules; otherwise score = round(vaccineScore*0.8 + consentScore*0.2) where vaccineScore = mean(answered vaccines)/2*100 and consentScore = (mean(answered consent)-1)/4*100 (unanswered items are simply excluded, so a sparsely answered form is not penalised), and level = 'contraindicated' if previousAnaphylaxis === 'yes', else upToDate (>=80) / partiallyComplete (>=40) / overdue. firedRules are the 20 VAX-0NN rules in catalogue order (high, then medium, then low 'positive' rules). form-app.js (window.submitForm) calls detectAdditionalFlags(data) separately and stores it as additionalFlags, mirrored by flagsHint/flagsArgs; flags are stable-sorted high > medium > low. Quirks verified: (1) the grader's 'anaphylaxis AND (pregnant OR immunocompromised)' early-return branch is dead code — it returns exactly what the plain hasAnaphylaxis path returns; (2) the 'draft' short-circuit suppresses rules but NOT flags, which the detector computes independently; (3) VAX-010 (travel rule) fires only when ALL six travel items are null, whereas FLAG-VAX-009 fires only when yellowFever === 0, so the two never fire together; (4) VAX-014 uses consentScore < 50, so an average consent rating of exactly 3 (= 50) is silent; (5) VAX-015 is suppressed when referralNeeded === 'yes' even though FLAG-VAX-010 still fires. Regenerate expected with: bin/test-personas vaccinations-assessment --update",
+  "personas": [
+    {
+      "name": "Fully immunised 34-year-old, routine flu booster given",
+      "description": "Woman with a complete Red Book childhood record and all age-appropriate adult vaccines (shingles and PPV not yet due, left unanswered), high-quality consent (5,5,4,5), no contraindications, annual flu vaccine administered with satisfactory observation (5). vaccineScore 100 (12 answered, all 2), consentScore 93.75, score = round(80 + 18.75) = 99 -> level 'upToDate'. firedRules = VAX-016, VAX-017, VAX-018, VAX-019, VAX-020 (all low 'positive' rules); no additionalFlags.",
+      "state": {
+        "patientInformation": {
+          "patientName": "Hannah Whitlock",
+          "dateOfBirth": "1992-04-18",
+          "patientSex": "female",
+          "patientAge": "34",
+          "nhsNumber": "4857773456",
+          "gpPractice": "Riverside Medical Practice, Exeter",
+          "contactPhone": "07700 900314",
+          "contactEmail": "hannah.whitlock@example.co.uk"
+        },
+        "immunizationHistory": {
+          "hasVaccinationRecord": "yes",
+          "recordSource": "gpRecords",
+          "lastReviewDate": "2025-10-02",
+          "previousAdverseReactions": "no",
+          "adverseReactionDetails": "",
+          "immunocompromised": "no",
+          "immunocompromisedDetails": ""
+        },
+        "childhoodVaccinations": {
+          "dtapIpvHibHepb": 2,
+          "pneumococcal": 2,
+          "rotavirus": 2,
+          "meningitisB": 2,
+          "mmr": 2,
+          "hibMenc": 2,
+          "preschoolBooster": 2
+        },
+        "adultVaccinations": {
+          "tdIpvBooster": 2,
+          "hpv": 2,
+          "meningitisAcwy": 2,
+          "influenzaAnnual": 2,
+          "covid19": 2,
+          "shingles": null,
+          "pneumococcalPpv": null
+        },
+        "travelVaccinations": {
+          "travelPlanned": "no",
+          "travelDestination": "",
+          "hepatitisA": null,
+          "hepatitisB": null,
+          "typhoid": null,
+          "yellowFever": null,
+          "rabies": null,
+          "japaneseEncephalitis": null
+        },
+        "occupationalVaccinations": {
+          "occupation": "Primary school teacher",
+          "healthcareWorker": "no",
+          "hepatitisBOccupational": null,
+          "influenzaOccupational": null,
+          "varicella": null,
+          "bcgTuberculosis": null
+        },
+        "contraindicationsAllergies": {
+          "eggAllergy": "no",
+          "gelatinAllergy": "no",
+          "latexAllergy": "no",
+          "neomycinAllergy": "no",
+          "pregnant": "no",
+          "pregnancyWeeks": "",
+          "severeIllness": "no",
+          "previousAnaphylaxis": "no",
+          "anaphylaxisDetails": ""
+        },
+        "consentInformation": {
+          "informationProvided": 5,
+          "risksExplained": 5,
+          "benefitsExplained": 4,
+          "questionsAnswered": 5,
+          "consentGiven": "yes",
+          "consentDate": "2026-09-01",
+          "guardianConsent": ""
+        },
+        "administrationRecord": {
+          "vaccineName": "Quadrivalent inactivated influenza vaccine 2026/27",
+          "batchNumber": "FL26-0917B",
+          "expiryDate": "2027-03-31",
+          "administrationSite": "leftDeltoid",
+          "administrationRoute": "intramuscular",
+          "doseNumber": "1",
+          "administeredBy": "Practice nurse J. Adeyemi",
+          "administrationDate": "2026-09-01"
+        },
+        "clinicalReview": {
+          "postVaccinationObservation": 5,
+          "immediateReaction": "no",
+          "reactionDetails": "",
+          "nextDoseDue": "2027-09-01",
+          "catchUpScheduleNeeded": "no",
+          "referralNeeded": "no",
+          "clinicianNotes": "15-minute observation uneventful. Up to date.",
+          "reviewingClinician": "Dr Priya Raman"
+        }
+      },
+      "expected": {
+        "level": "upToDate",
+        "score": 99,
+        "firedRules": [
+          {
+            "id": "VAX-016",
+            "category": "Childhood",
+            "description": "All childhood vaccinations complete",
+            "concernLevel": "low"
+          },
+          {
+            "id": "VAX-017",
+            "category": "Adult",
+            "description": "All adult vaccinations complete",
+            "concernLevel": "low"
+          },
+          {
+            "id": "VAX-018",
+            "category": "Consent",
+            "description": "All consent quality items rated Good or Excellent (4-5)",
+            "concernLevel": "low"
+          },
+          {
+            "id": "VAX-019",
+            "category": "History",
+            "description": "Vaccination record available and verified",
+            "concernLevel": "low"
+          },
+          {
+            "id": "VAX-020",
+            "category": "Clinical",
+            "description": "Post-vaccination observation completed satisfactorily (rated 4-5)",
+            "concernLevel": "low"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Pregnant traveller with no record and gaps - partially complete at the boundary",
+      "description": "29-year-old woman, 24 weeks pregnant, planning travel to Ghana, recalls her history without any record, egg-allergic; only five vaccine items answered (MMR partial, pre-school booster not given, Td/IPV complete, flu not given, COVID-19 partial), no travel vaccines recorded, consent quality exactly average (3,3,2,4 -> 50), catch-up needed but referral marked 'no'. vaccineScore 40, consentScore 50, score = round(32 + 10) = 42 -> 'partiallyComplete'. firedRules in order: VAX-002 (childhood 25% < 40), VAX-007 (flu 0), VAX-010 (travel planned, all travel items null), VAX-012 (pregnant), VAX-015 (catch-up without referral). VAX-014 stays silent because consentScore is exactly 50, not below. additionalFlags sorted: FLAG-VAX-005 (high, pregnant), FLAG-VAX-006 (no record), FLAG-VAX-008 (egg allergy), FLAG-VAX-010 (catch-up) — FLAG-VAX-009 does not fire because yellowFever is null, not 0.",
+      "state": {
+        "patientInformation": {
+          "patientName": "Abena Mensah-Clarke",
+          "dateOfBirth": "1997-06-30",
+          "patientSex": "female",
+          "patientAge": "29",
+          "nhsNumber": "6034512278",
+          "gpPractice": "Tottenham Hale Health Centre, London",
+          "contactPhone": "07700 900552",
+          "contactEmail": ""
+        },
+        "immunizationHistory": {
+          "hasVaccinationRecord": "no",
+          "recordSource": "patientRecall",
+          "lastReviewDate": "",
+          "previousAdverseReactions": "no",
+          "adverseReactionDetails": "",
+          "immunocompromised": "no",
+          "immunocompromisedDetails": ""
+        },
+        "childhoodVaccinations": {
+          "dtapIpvHibHepb": null,
+          "pneumococcal": null,
+          "rotavirus": null,
+          "meningitisB": null,
+          "mmr": 1,
+          "hibMenc": null,
+          "preschoolBooster": 0
+        },
+        "adultVaccinations": {
+          "tdIpvBooster": 2,
+          "hpv": null,
+          "meningitisAcwy": null,
+          "influenzaAnnual": 0,
+          "covid19": 1,
+          "shingles": null,
+          "pneumococcalPpv": null
+        },
+        "travelVaccinations": {
+          "travelPlanned": "yes",
+          "travelDestination": "Accra and Kumasi, Ghana - family visit, 3 weeks in November 2026",
+          "hepatitisA": null,
+          "hepatitisB": null,
+          "typhoid": null,
+          "yellowFever": null,
+          "rabies": null,
+          "japaneseEncephalitis": null
+        },
+        "occupationalVaccinations": {
+          "occupation": "Retail supervisor",
+          "healthcareWorker": "no",
+          "hepatitisBOccupational": null,
+          "influenzaOccupational": null,
+          "varicella": null,
+          "bcgTuberculosis": null
+        },
+        "contraindicationsAllergies": {
+          "eggAllergy": "yes",
+          "gelatinAllergy": "no",
+          "latexAllergy": "no",
+          "neomycinAllergy": "no",
+          "pregnant": "yes",
+          "pregnancyWeeks": "24",
+          "severeIllness": "no",
+          "previousAnaphylaxis": "no",
+          "anaphylaxisDetails": ""
+        },
+        "consentInformation": {
+          "informationProvided": 3,
+          "risksExplained": 3,
+          "benefitsExplained": 2,
+          "questionsAnswered": 4,
+          "consentGiven": "yes",
+          "consentDate": "2026-08-27",
+          "guardianConsent": ""
+        },
+        "administrationRecord": {
+          "vaccineName": "",
+          "batchNumber": "",
+          "expiryDate": "",
+          "administrationSite": "",
+          "administrationRoute": "",
+          "doseNumber": "",
+          "administeredBy": "",
+          "administrationDate": ""
+        },
+        "clinicalReview": {
+          "postVaccinationObservation": null,
+          "immediateReaction": "",
+          "reactionDetails": "",
+          "nextDoseDue": "",
+          "catchUpScheduleNeeded": "yes",
+          "referralNeeded": "no",
+          "clinicianNotes": "Pertussis and flu to be offered at antenatal clinic; yellow fever contraindicated in pregnancy - discuss exemption letter and travel timing. MMR deferred until postpartum.",
+          "reviewingClinician": "Midwife L. Barnes"
+        }
+      },
+      "expected": {
+        "level": "partiallyComplete",
+        "score": 42,
+        "firedRules": [
+          {
+            "id": "VAX-002",
+            "category": "Childhood",
+            "description": "Childhood vaccination completeness below 40%",
+            "concernLevel": "high"
+          },
+          {
+            "id": "VAX-007",
+            "category": "Adult",
+            "description": "Influenza vaccination not current",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-010",
+            "category": "Travel",
+            "description": "Travel planned but no travel vaccinations recorded",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-012",
+            "category": "Contraindication",
+            "description": "Patient is pregnant - live vaccine contraindication",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-015",
+            "category": "Clinical",
+            "description": "Catch-up schedule needed but no referral made",
+            "concernLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-VAX-005",
+            "category": "Contraindication",
+            "message": "Pregnant patient - live vaccines contraindicated",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VAX-006",
+            "category": "History",
+            "message": "No vaccination record available - full history review needed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-008",
+            "category": "Allergy",
+            "message": "Egg allergy reported - use egg-free vaccine formulations",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-010",
+            "category": "Clinical",
+            "message": "Catch-up vaccination schedule required - create individualised plan",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Contraindicated: immunocompromised hospital porter with prior vaccine anaphylaxis, declining consent",
+      "description": "58-year-old man on rituximab, hospital porter without occupational hepatitis B, previous anaphylaxis to a flu vaccine, currently febrile, egg-allergic, no record, MMR and most childhood/adult vaccines not given or partial, travel planned with yellow fever/hep A/typhoid all 'not given', consent quality very poor (1,2,1,2) and consent declined; catch-up and referral both marked yes; nothing administered. 14 items answered; vaccineScore 10, consentScore 12.5, score = round(8 + 2.5) = 11; level 'contraindicated' (anaphylaxis — the immunocompromised early-return branch yields the same result). firedRules in order: VAX-001, VAX-002, VAX-003, VAX-005, VAX-006, VAX-007, VAX-008, VAX-009, VAX-011, VAX-013, VAX-014 (11 rules; VAX-010 silent because travel items are answered, VAX-015 silent because referralNeeded is 'yes'). additionalFlags stable-sorted: high FLAG-VAX-001, 002, 003, 011, 013; medium FLAG-VAX-006, 007, 008, 009, 010, 012; low FLAG-VAX-014 (12 flags).",
+      "state": {
+        "patientInformation": {
+          "patientName": "Malcolm Reddington",
+          "dateOfBirth": "1968-01-09",
+          "patientSex": "male",
+          "patientAge": "58",
+          "nhsNumber": "9434765919",
+          "gpPractice": "Castle Street Surgery, Salisbury",
+          "contactPhone": "07700 900818",
+          "contactEmail": ""
+        },
+        "immunizationHistory": {
+          "hasVaccinationRecord": "no",
+          "recordSource": "patientRecall",
+          "lastReviewDate": "",
+          "previousAdverseReactions": "yes",
+          "adverseReactionDetails": "Anaphylaxis within 10 minutes of influenza vaccine, October 2024 - adrenaline given, admitted overnight",
+          "immunocompromised": "yes",
+          "immunocompromisedDetails": "Rituximab for rheumatoid arthritis, last infusion July 2026"
+        },
+        "childhoodVaccinations": {
+          "dtapIpvHibHepb": 1,
+          "pneumococcal": 0,
+          "rotavirus": null,
+          "meningitisB": null,
+          "mmr": 0,
+          "hibMenc": 0,
+          "preschoolBooster": 0
+        },
+        "adultVaccinations": {
+          "tdIpvBooster": 1,
+          "hpv": null,
+          "meningitisAcwy": null,
+          "influenzaAnnual": 0,
+          "covid19": 0,
+          "shingles": 0,
+          "pneumococcalPpv": 0
+        },
+        "travelVaccinations": {
+          "travelPlanned": "yes",
+          "travelDestination": "Lagos, Nigeria - work assignment, December 2026",
+          "hepatitisA": 0,
+          "hepatitisB": null,
+          "typhoid": 0,
+          "yellowFever": 0,
+          "rabies": null,
+          "japaneseEncephalitis": null
+        },
+        "occupationalVaccinations": {
+          "occupation": "Hospital porter",
+          "healthcareWorker": "yes",
+          "hepatitisBOccupational": 0,
+          "influenzaOccupational": 0,
+          "varicella": null,
+          "bcgTuberculosis": 2
+        },
+        "contraindicationsAllergies": {
+          "eggAllergy": "yes",
+          "gelatinAllergy": "no",
+          "latexAllergy": "no",
+          "neomycinAllergy": "no",
+          "pregnant": "no",
+          "pregnancyWeeks": "",
+          "severeIllness": "yes",
+          "previousAnaphylaxis": "yes",
+          "anaphylaxisDetails": "Influenza vaccine October 2024 - see history"
+        },
+        "consentInformation": {
+          "informationProvided": 1,
+          "risksExplained": 2,
+          "benefitsExplained": 1,
+          "questionsAnswered": 2,
+          "consentGiven": "no",
+          "consentDate": "2026-09-02",
+          "guardianConsent": ""
+        },
+        "administrationRecord": {
+          "vaccineName": "",
+          "batchNumber": "",
+          "expiryDate": "",
+          "administrationSite": "",
+          "administrationRoute": "",
+          "doseNumber": "",
+          "administeredBy": "",
+          "administrationDate": ""
+        },
+        "clinicalReview": {
+          "postVaccinationObservation": null,
+          "immediateReaction": "no",
+          "reactionDetails": "",
+          "nextDoseDue": "",
+          "catchUpScheduleNeeded": "yes",
+          "referralNeeded": "yes",
+          "clinicianNotes": "Febrile 38.4 C today - deferred. Declines all vaccines pending allergy clinic opinion. Referred to immunology/allergy and occupational health; live vaccines contraindicated on rituximab. Yellow fever exemption letter to be considered.",
+          "reviewingClinician": "Dr Owen Llewellyn"
+        }
+      },
+      "expected": {
+        "level": "contraindicated",
+        "score": 11,
+        "firedRules": [
+          {
+            "id": "VAX-001",
+            "category": "Childhood",
+            "description": "MMR vaccination not given (0) - measles risk",
+            "concernLevel": "high"
+          },
+          {
+            "id": "VAX-002",
+            "category": "Childhood",
+            "description": "Childhood vaccination completeness below 40%",
+            "concernLevel": "high"
+          },
+          {
+            "id": "VAX-003",
+            "category": "Contraindication",
+            "description": "Previous anaphylaxis to vaccine reported",
+            "concernLevel": "high"
+          },
+          {
+            "id": "VAX-005",
+            "category": "Consent",
+            "description": "Consent not given for vaccination",
+            "concernLevel": "high"
+          },
+          {
+            "id": "VAX-006",
+            "category": "Childhood",
+            "description": "DTaP/IPV/Hib/HepB vaccination incomplete (partial)",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-007",
+            "category": "Adult",
+            "description": "Influenza vaccination not current",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-008",
+            "category": "Adult",
+            "description": "COVID-19 vaccination not given",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-009",
+            "category": "Adult",
+            "description": "Adult vaccination completeness below 40%",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-011",
+            "category": "Occupational",
+            "description": "Healthcare worker without hepatitis B vaccination",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-013",
+            "category": "History",
+            "description": "Patient is immunocompromised - requires specialist review",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "VAX-014",
+            "category": "Consent",
+            "description": "Consent quality score below 50% - inadequate information provision",
+            "concernLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-VAX-001",
+            "category": "Childhood",
+            "message": "MMR vaccination not given - measles outbreak risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VAX-002",
+            "category": "Contraindication",
+            "message": "Previous anaphylaxis to vaccine - specialist allergy review required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VAX-003",
+            "category": "Clinical",
+            "message": "Immunocompromised patient - avoid live vaccines, specialist review needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VAX-011",
+            "category": "Consent",
+            "message": "Consent not given - vaccination cannot proceed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VAX-013",
+            "category": "Contraindication",
+            "message": "Patient currently has severe illness - defer vaccination",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VAX-006",
+            "category": "History",
+            "message": "No vaccination record available - full history review needed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-007",
+            "category": "Occupational",
+            "message": "Healthcare worker without hepatitis B vaccination - occupational health referral",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-008",
+            "category": "Allergy",
+            "message": "Egg allergy reported - use egg-free vaccine formulations",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-009",
+            "category": "Travel",
+            "message": "Travel planned but yellow fever vaccination not given - check destination requirements",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-010",
+            "category": "Clinical",
+            "message": "Catch-up vaccination schedule required - create individualised plan",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-012",
+            "category": "History",
+            "message": "Previous adverse reactions documented - review before administering",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VAX-014",
+            "category": "Clinical",
+            "message": "Specialist referral required - ensure referral is completed",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

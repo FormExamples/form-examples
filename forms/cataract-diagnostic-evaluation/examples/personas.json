@@ -1,0 +1,658 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCataractEvaluation",
+  "note": "Three hand-authored personas for the Cataract Diagnostic Evaluation composite engine. calculateCataractEvaluation is pure (age is derived from patient.birthDate vs clinician.assessmentDate, never the clock) and returns locsIIISeverityRight/Left ('' when no subscore is recorded, 'severe' if any of NO/NC/C/P >= 5.0, 'moderate' if any >= 3.0, else 'mild'), computedSurgicalCandidacy (max-grade over moderate LOCS / BCVA LogMAR > 0.30 -> 'consider'; severe LOCS / BCVA LogMAR >= 0.48 / severe glare impact -> 'indicated'; ANY fired flag -> 'urgent-referral'; default 'not-indicated'), finalSurgicalCandidacy (= summary.overrideSurgicalCandidacy when set, else computed), overrideReason (reported only when final differs from computed), functionalImpactScore (null only when all three sub-scores are null; otherwise a sum with nulls as 0), firedRules (LOCS right, LOCS left, then the five candidacy rules in fixed order, then R-CANDIDACY-URGENT-FLAG) and flags FOLDED into the result in detection order (competing pathology, raised IOP > 21, view obscured without dilated exam, rapid progression < 3 months with a severe eye, biometry incomplete for a surgical referral, paediatric < 16) - no priority sort. Quirks verified in source: the 6/12 test is strict (LogMAR exactly 0.30 is NOT worse than 6/12) while the 6/18 test is inclusive (0.48 IS worse than 6/18); IOP exactly 21 is not raised; the low-priority F-BIOMETRY-INCOMPLETE flag alone is enough to force computedSurgicalCandidacy to 'urgent-referral' because the override checks flags.length, not priority; a clinician override can DOWNGRADE from 'urgent-referral' and needs no reason to take effect (the reason is only echoed); acuity6_12OrBetterBothEyes is exported but never called, so 'not-indicated' does not require acuity to be recorded. Regenerate expected with: bin/test-personas cataract-diagnostic-evaluation --update",
+  "personas": [
+    {
+      "name": "Early bilateral nuclear sclerosis - monitor",
+      "description": "A 68-year-old woman with mild early nuclear sclerosis in both eyes (LOCS III NO 2.0, NC 2.0, C 1.0, P 0.5 bilaterally), best-corrected LogMAR 0.10 both eyes, mild glare impact, IOP 16/17, dilated fundus normal, no competing pathology, plan to monitor with no biometry. Functional difficulty reading 1, driving 0, daily 1. Expect locsIIISeverityRight and Left 'mild', computedSurgicalCandidacy and finalSurgicalCandidacy 'not-indicated', overrideReason '', functionalImpactScore 2, firedRules [R-LOCS-SEVERITY-RIGHT-MILD, R-LOCS-SEVERITY-LEFT-MILD] and an empty flags array.",
+      "state": {
+        "status": "draft",
+        "clinician": {
+          "clinicianName": "Rebecca Thornley",
+          "role": "optometrist",
+          "registrationBody": "GOC",
+          "registrationNumber": "01-23456",
+          "siteName": "Harrogate Eye Care",
+          "assessmentDate": "2026-08-25",
+          "assessmentTime": "10:15"
+        },
+        "patient": {
+          "firstName": "Joan",
+          "lastName": "Ackroyd",
+          "birthDate": "1958-02-11",
+          "sex": "female",
+          "nhsNumber": "624 771 0385",
+          "email": "",
+          "phone": "01423 496 0112"
+        },
+        "symptoms": {
+          "blurredVision": "yes",
+          "glareOrHalos": "no",
+          "nightDrivingDifficulty": "no",
+          "fadedColourPerception": "no",
+          "frequentPrescriptionChanges": "no",
+          "symptomDurationMonths": 18,
+          "symptomLaterality": "both-eyes",
+          "presentingComplaintNotes": "Gradual softening of distance vision, reading still comfortable with current spectacles"
+        },
+        "history": {
+          "historyDiabetes": "no",
+          "historyPriorEyeSurgery": "no",
+          "historyPriorEyeSurgeryDetail": "",
+          "historyOcularTrauma": "no",
+          "historyUveitis": "no",
+          "historySteroidUse": "none",
+          "historyFamilyCataract": "yes",
+          "historySmokingStatus": "never",
+          "historyHighUvExposure": "no",
+          "historyHighMyopia": "no",
+          "medicalHistoryNotes": "Well-controlled hypertension"
+        },
+        "acuity": {
+          "unaidedVaLogmarRight": 0.4,
+          "unaidedVaLogmarLeft": 0.4,
+          "unaidedVaSnellenRight": "6/15",
+          "unaidedVaSnellenLeft": "6/15",
+          "bestCorrectedVaLogmarRight": 0.1,
+          "bestCorrectedVaLogmarLeft": 0.1,
+          "bestCorrectedVaSnellenRight": "6/7.5",
+          "bestCorrectedVaSnellenLeft": "6/7.5",
+          "pinholeVaLogmarRight": 0.1,
+          "pinholeVaLogmarLeft": 0.1,
+          "pinholeVaSnellenRight": "6/7.5",
+          "pinholeVaSnellenLeft": "6/7.5"
+        },
+        "refraction": {
+          "refractionSphereRight": -1.25,
+          "refractionSphereLeft": -1.5,
+          "refractionCylinderRight": -0.5,
+          "refractionCylinderLeft": -0.25,
+          "refractionAxisRight": 90,
+          "refractionAxisLeft": 85,
+          "refractionStability": "stable"
+        },
+        "slitLamp": {
+          "locsIiiNoRight": 2,
+          "locsIiiNoLeft": 2,
+          "locsIiiNcRight": 2,
+          "locsIiiNcLeft": 2,
+          "locsIiiCRight": 1,
+          "locsIiiCLeft": 1,
+          "locsIiiPRight": 0.5,
+          "locsIiiPLeft": 0.5,
+          "cataractTypeRight": "nuclear",
+          "cataractTypeLeft": "nuclear",
+          "anteriorChamberDepthRight": "normal",
+          "anteriorChamberDepthLeft": "normal",
+          "cornealClarityRight": "clear",
+          "cornealClarityLeft": "clear",
+          "pupilReactionRight": "normal",
+          "pupilReactionLeft": "normal"
+        },
+        "glare": {
+          "glareAcuityResultRight": "6/9",
+          "glareAcuityResultLeft": "6/9",
+          "glareFunctionalImpact": "mild"
+        },
+        "tonometry": {
+          "intraocularPressureRightMmhg": 16,
+          "intraocularPressureLeftMmhg": 17,
+          "tonometryMethod": "non-contact"
+        },
+        "fundus": {
+          "dilatedFundusExamPerformed": "yes",
+          "opticDiscCupDiscRatioRight": 0.3,
+          "opticDiscCupDiscRatioLeft": 0.3,
+          "maculaFindingsRight": "normal",
+          "maculaFindingsLeft": "normal",
+          "retinalFindingsRight": "Normal",
+          "retinalFindingsLeft": "Normal",
+          "viewObscuredByCataractRight": "no",
+          "viewObscuredByCataractLeft": "no"
+        },
+        "differential": {
+          "glaucomaSuspected": "no",
+          "glaucomaNotes": "",
+          "amdSuspected": "no",
+          "amdNotes": "",
+          "diabeticRetinopathySuspected": "no",
+          "diabeticRetinopathyNotes": ""
+        },
+        "biometry": {
+          "biometryPerformed": "no",
+          "axialLengthRightMm": null,
+          "axialLengthLeftMm": null,
+          "keratometryK1Right": null,
+          "keratometryK1Left": null,
+          "keratometryK2Right": null,
+          "keratometryK2Left": null,
+          "octPerformed": "no",
+          "octFindings": "",
+          "calculatedIolPowerRight": null,
+          "calculatedIolPowerLeft": null
+        },
+        "functional": {
+          "functionalDifficultyReading": 1,
+          "functionalDifficultyDriving": 0,
+          "functionalDifficultyDailyActivities": 1,
+          "functionalImpactNotes": "Minimal impact; happy to continue with spectacles"
+        },
+        "management": {
+          "managementRecommendation": "monitor",
+          "eyeForSurgery": "none",
+          "risksBenefitsCounselled": "no",
+          "consentDiscussed": "no",
+          "managementNotes": "Review in 12 months or sooner if symptoms progress"
+        },
+        "summary": {
+          "overrideSurgicalCandidacy": "",
+          "overrideReason": "",
+          "clinicianNotes": "Early age-related nuclear sclerosis, not visually significant",
+          "signedByName": "Rebecca Thornley"
+        }
+      },
+      "expected": {
+        "locsIIISeverityRight": "mild",
+        "locsIIISeverityLeft": "mild",
+        "computedSurgicalCandidacy": "not-indicated",
+        "finalSurgicalCandidacy": "not-indicated",
+        "overrideReason": "",
+        "functionalImpactScore": 2,
+        "firedRules": [
+          {
+            "ruleId": "R-LOCS-SEVERITY-RIGHT-MILD",
+            "instrument": "locs-iii",
+            "component": "severity-right",
+            "score": null,
+            "band": "mild",
+            "category": "slit-lamp",
+            "description": "Right eye LOCS III severity band is mild (NO 2, NC 2, C 1, P 0.5)."
+          },
+          {
+            "ruleId": "R-LOCS-SEVERITY-LEFT-MILD",
+            "instrument": "locs-iii",
+            "component": "severity-left",
+            "score": null,
+            "band": "mild",
+            "category": "slit-lamp",
+            "description": "Left eye LOCS III severity band is mild (NO 2, NC 2, C 1, P 0.5)."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "Threshold values, pseudophakic fellow eye, low flag escalates then overridden",
+      "description": "A 74-year-old man whose left eye is pseudophakic (LOCS III not graded, severity '') and whose right eye sits on every boundary: NC exactly 3.0 (moderate), BCVA LogMAR exactly 0.30 (NOT worse than 6/12 under the strict > test), IOP exactly 21 (not raised), symptom duration 2 months with no severe eye (no rapid-progression flag). A routine surgical referral is made without biometry, so the LOW-priority F-BIOMETRY-INCOMPLETE flag fires and, because the engine escalates on flags.length rather than priority, the computed candidacy jumps to 'urgent-referral'; the optometrist overrides to 'consider' with a reason. Driving difficulty left unanswered (null counts as 0). Expect locsIIISeverityRight 'moderate', locsIIISeverityLeft '', computedSurgicalCandidacy 'urgent-referral', finalSurgicalCandidacy 'consider', overrideReason set, functionalImpactScore 3, firedRules [R-LOCS-SEVERITY-RIGHT-MODERATE, R-CANDIDACY-MODERATE-LOCS, R-CANDIDACY-URGENT-FLAG ('1 safety flag(s)')] and flags [F-BIOMETRY-INCOMPLETE-FOR-SURGICAL-PLANNING-001].",
+      "state": {
+        "status": "draft",
+        "clinician": {
+          "clinicianName": "Daniel Okafor",
+          "role": "optometrist",
+          "registrationBody": "GOC",
+          "registrationNumber": "01-98765",
+          "siteName": "Wolverhampton Community Eye Service",
+          "assessmentDate": "2026-09-01",
+          "assessmentTime": "14:30"
+        },
+        "patient": {
+          "firstName": "Gerald",
+          "lastName": "Foster",
+          "birthDate": "1952-06-30",
+          "sex": "male",
+          "nhsNumber": "417 902 6631",
+          "email": "gerald.foster@example.co.uk",
+          "phone": "07700 900233"
+        },
+        "symptoms": {
+          "blurredVision": "yes",
+          "glareOrHalos": "yes",
+          "nightDrivingDifficulty": "yes",
+          "fadedColourPerception": "no",
+          "frequentPrescriptionChanges": "yes",
+          "symptomDurationMonths": 2,
+          "symptomLaterality": "right-eye",
+          "presentingComplaintNotes": "Noticed right eye is now the poorer eye since the left was operated on"
+        },
+        "history": {
+          "historyDiabetes": "no",
+          "historyPriorEyeSurgery": "yes",
+          "historyPriorEyeSurgeryDetail": "Left phacoemulsification with monofocal IOL, March 2025",
+          "historyOcularTrauma": "no",
+          "historyUveitis": "no",
+          "historySteroidUse": "none",
+          "historyFamilyCataract": "no",
+          "historySmokingStatus": "former",
+          "historyHighUvExposure": "yes",
+          "historyHighMyopia": "no",
+          "medicalHistoryNotes": "Retired farmer; atrial fibrillation on apixaban"
+        },
+        "acuity": {
+          "unaidedVaLogmarRight": 0.6,
+          "unaidedVaLogmarLeft": 0.1,
+          "unaidedVaSnellenRight": "6/24",
+          "unaidedVaSnellenLeft": "6/7.5",
+          "bestCorrectedVaLogmarRight": 0.3,
+          "bestCorrectedVaLogmarLeft": 0,
+          "bestCorrectedVaSnellenRight": "6/12",
+          "bestCorrectedVaSnellenLeft": "6/6",
+          "pinholeVaLogmarRight": 0.3,
+          "pinholeVaLogmarLeft": 0,
+          "pinholeVaSnellenRight": "6/12",
+          "pinholeVaSnellenLeft": "6/6"
+        },
+        "refraction": {
+          "refractionSphereRight": -2.25,
+          "refractionSphereLeft": -0.25,
+          "refractionCylinderRight": -0.75,
+          "refractionCylinderLeft": -0.5,
+          "refractionAxisRight": 175,
+          "refractionAxisLeft": 10,
+          "refractionStability": "changing"
+        },
+        "slitLamp": {
+          "locsIiiNoRight": 2.8,
+          "locsIiiNoLeft": null,
+          "locsIiiNcRight": 3,
+          "locsIiiNcLeft": null,
+          "locsIiiCRight": 1.5,
+          "locsIiiCLeft": null,
+          "locsIiiPRight": 1,
+          "locsIiiPLeft": null,
+          "cataractTypeRight": "nuclear",
+          "cataractTypeLeft": "none",
+          "anteriorChamberDepthRight": "normal",
+          "anteriorChamberDepthLeft": "deep",
+          "cornealClarityRight": "clear",
+          "cornealClarityLeft": "clear",
+          "pupilReactionRight": "normal",
+          "pupilReactionLeft": "normal"
+        },
+        "glare": {
+          "glareAcuityResultRight": "6/18",
+          "glareAcuityResultLeft": "6/6",
+          "glareFunctionalImpact": "moderate"
+        },
+        "tonometry": {
+          "intraocularPressureRightMmhg": 21,
+          "intraocularPressureLeftMmhg": 18,
+          "tonometryMethod": "goldmann"
+        },
+        "fundus": {
+          "dilatedFundusExamPerformed": "yes",
+          "opticDiscCupDiscRatioRight": 0.4,
+          "opticDiscCupDiscRatioLeft": 0.4,
+          "maculaFindingsRight": "normal",
+          "maculaFindingsLeft": "normal",
+          "retinalFindingsRight": "Normal periphery",
+          "retinalFindingsLeft": "Normal periphery, IOL well centred",
+          "viewObscuredByCataractRight": "no",
+          "viewObscuredByCataractLeft": "no"
+        },
+        "differential": {
+          "glaucomaSuspected": "no",
+          "glaucomaNotes": "IOP borderline, discs healthy; repeat at next visit",
+          "amdSuspected": "no",
+          "amdNotes": "",
+          "diabeticRetinopathySuspected": "no",
+          "diabeticRetinopathyNotes": ""
+        },
+        "biometry": {
+          "biometryPerformed": "no",
+          "axialLengthRightMm": null,
+          "axialLengthLeftMm": null,
+          "keratometryK1Right": null,
+          "keratometryK1Left": null,
+          "keratometryK2Right": null,
+          "keratometryK2Left": null,
+          "octPerformed": "no",
+          "octFindings": "",
+          "calculatedIolPowerRight": null,
+          "calculatedIolPowerLeft": null
+        },
+        "functional": {
+          "functionalDifficultyReading": 2,
+          "functionalDifficultyDriving": null,
+          "functionalDifficultyDailyActivities": 1,
+          "functionalImpactNotes": "No longer drives; anisometropia is troubling him"
+        },
+        "management": {
+          "managementRecommendation": "surgical-referral-routine",
+          "eyeForSurgery": "right",
+          "risksBenefitsCounselled": "yes",
+          "consentDiscussed": "no",
+          "managementNotes": "Routine second-eye referral; biometry to be done at the hospital pre-assessment clinic"
+        },
+        "summary": {
+          "overrideSurgicalCandidacy": "consider",
+          "overrideReason": "Urgent-referral was driven only by the biometry-not-yet-performed flag; biometry is routinely done at the hospital pre-assessment visit, so a routine referral is appropriate",
+          "clinicianNotes": "Moderate right nuclear cataract with symptomatic anisometropia after left surgery",
+          "signedByName": "Daniel Okafor"
+        }
+      },
+      "expected": {
+        "locsIIISeverityRight": "moderate",
+        "locsIIISeverityLeft": "",
+        "computedSurgicalCandidacy": "urgent-referral",
+        "finalSurgicalCandidacy": "consider",
+        "overrideReason": "Urgent-referral was driven only by the biometry-not-yet-performed flag; biometry is routinely done at the hospital pre-assessment visit, so a routine referral is appropriate",
+        "functionalImpactScore": 3,
+        "firedRules": [
+          {
+            "ruleId": "R-LOCS-SEVERITY-RIGHT-MODERATE",
+            "instrument": "locs-iii",
+            "component": "severity-right",
+            "score": null,
+            "band": "moderate",
+            "category": "slit-lamp",
+            "description": "Right eye LOCS III severity band is moderate (NO 2.8, NC 3, C 1.5, P 1)."
+          },
+          {
+            "ruleId": "R-CANDIDACY-MODERATE-LOCS",
+            "instrument": "composite",
+            "component": "severity",
+            "score": null,
+            "band": "consider",
+            "category": "surgical candidacy",
+            "description": "A moderate LOCS III severity band is present in at least one eye."
+          },
+          {
+            "ruleId": "R-CANDIDACY-URGENT-FLAG",
+            "instrument": "composite",
+            "component": "safety-flag",
+            "score": null,
+            "band": "urgent-referral",
+            "category": "surgical candidacy",
+            "description": "1 safety flag(s) fired, overriding the computed surgical candidacy to urgent-referral."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-BIOMETRY-INCOMPLETE-FOR-SURGICAL-PLANNING-001",
+            "category": "biometry-incomplete-for-surgical-planning",
+            "priority": "low",
+            "description": "A surgical referral is recommended but biometry for intraocular lens planning was not performed.",
+            "suggestedAction": "Book biometry (axial length, keratometry, IOL power calculation) ahead of the surgical clinic appointment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Paediatric steroid-induced posterior subcapsular cataract - urgent, six flags",
+      "description": "A 14-year-old on long-term oral prednisolone for nephrotic syndrome with a two-month history of rapidly worsening right vision: right eye P 5.5 (severe), left eye NC 3.5 (moderate), BCVA right LogMAR 1.0 and left 0.40, severe glare impact, IOP 28/24 (steroid response), glaucoma suspected, right fundus view obscured with no dilated exam, urgent surgical referral without biometry, no override. Driving not applicable (null). Expect locsIIISeverityRight 'severe', locsIIISeverityLeft 'moderate', computed and final candidacy 'urgent-referral', overrideReason '', functionalImpactScore 8, eight firedRules in order [R-LOCS-SEVERITY-RIGHT-SEVERE, R-LOCS-SEVERITY-LEFT-MODERATE, R-CANDIDACY-MODERATE-LOCS, R-CANDIDACY-ACUITY-6-12, R-CANDIDACY-SEVERE-LOCS, R-CANDIDACY-ACUITY-6-18, R-CANDIDACY-GLARE-SEVERE, R-CANDIDACY-URGENT-FLAG ('6 safety flag(s)')] and six flags in detection order: F-COMPETING-PATHOLOGY-SUSPECTED-001 (glaucoma), F-RAISED-IOP-001 (right 28, left 24), F-VIEW-OBSCURED-FUNDUS-NOT-ASSESSED-001, F-RAPID-PROGRESSION-001 (2 months), F-BIOMETRY-INCOMPLETE-FOR-SURGICAL-PLANNING-001, F-PAEDIATRIC-001 (age 14 at 2026-09-01).",
+      "state": {
+        "status": "draft",
+        "clinician": {
+          "clinicianName": "Dr Aisha Mahmood",
+          "role": "ophthalmologist",
+          "registrationBody": "GMC",
+          "registrationNumber": "7012345",
+          "siteName": "Bristol Eye Hospital",
+          "assessmentDate": "2026-09-01",
+          "assessmentTime": "09:20"
+        },
+        "patient": {
+          "firstName": "Oliver",
+          "lastName": "Jennings",
+          "birthDate": "2012-03-15",
+          "sex": "male",
+          "nhsNumber": "559 341 8827",
+          "email": "",
+          "phone": "07700 900548"
+        },
+        "symptoms": {
+          "blurredVision": "yes",
+          "glareOrHalos": "yes",
+          "nightDrivingDifficulty": "no",
+          "fadedColourPerception": "yes",
+          "frequentPrescriptionChanges": "no",
+          "symptomDurationMonths": 2,
+          "symptomLaterality": "both-eyes",
+          "presentingComplaintNotes": "Cannot see the whiteboard; severe glare from classroom lights over the past 8 weeks"
+        },
+        "history": {
+          "historyDiabetes": "no",
+          "historyPriorEyeSurgery": "no",
+          "historyPriorEyeSurgeryDetail": "",
+          "historyOcularTrauma": "no",
+          "historyUveitis": "no",
+          "historySteroidUse": "systemic",
+          "historyFamilyCataract": "no",
+          "historySmokingStatus": "never",
+          "historyHighUvExposure": "no",
+          "historyHighMyopia": "no",
+          "medicalHistoryNotes": "Steroid-dependent nephrotic syndrome, prednisolone 30 mg daily for 14 months"
+        },
+        "acuity": {
+          "unaidedVaLogmarRight": 1.1,
+          "unaidedVaLogmarLeft": 0.5,
+          "unaidedVaSnellenRight": "6/75",
+          "unaidedVaSnellenLeft": "6/19",
+          "bestCorrectedVaLogmarRight": 1,
+          "bestCorrectedVaLogmarLeft": 0.4,
+          "bestCorrectedVaSnellenRight": "6/60",
+          "bestCorrectedVaSnellenLeft": "6/15",
+          "pinholeVaLogmarRight": 1,
+          "pinholeVaLogmarLeft": 0.4,
+          "pinholeVaSnellenRight": "6/60",
+          "pinholeVaSnellenLeft": "6/15"
+        },
+        "refraction": {
+          "refractionSphereRight": -1,
+          "refractionSphereLeft": -0.75,
+          "refractionCylinderRight": -0.5,
+          "refractionCylinderLeft": -0.5,
+          "refractionAxisRight": 180,
+          "refractionAxisLeft": 5,
+          "refractionStability": "changing"
+        },
+        "slitLamp": {
+          "locsIiiNoRight": 1.5,
+          "locsIiiNoLeft": 1.5,
+          "locsIiiNcRight": 1.5,
+          "locsIiiNcLeft": 3.5,
+          "locsIiiCRight": 1,
+          "locsIiiCLeft": 1,
+          "locsIiiPRight": 5.5,
+          "locsIiiPLeft": 2.5,
+          "cataractTypeRight": "posterior-subcapsular",
+          "cataractTypeLeft": "posterior-subcapsular",
+          "anteriorChamberDepthRight": "normal",
+          "anteriorChamberDepthLeft": "normal",
+          "cornealClarityRight": "clear",
+          "cornealClarityLeft": "clear",
+          "pupilReactionRight": "normal",
+          "pupilReactionLeft": "normal"
+        },
+        "glare": {
+          "glareAcuityResultRight": "CF",
+          "glareAcuityResultLeft": "6/36",
+          "glareFunctionalImpact": "severe"
+        },
+        "tonometry": {
+          "intraocularPressureRightMmhg": 28,
+          "intraocularPressureLeftMmhg": 24,
+          "tonometryMethod": "goldmann"
+        },
+        "fundus": {
+          "dilatedFundusExamPerformed": "no",
+          "opticDiscCupDiscRatioRight": null,
+          "opticDiscCupDiscRatioLeft": 0.5,
+          "maculaFindingsRight": "",
+          "maculaFindingsLeft": "normal",
+          "retinalFindingsRight": "No view",
+          "retinalFindingsLeft": "Hazy view, appears normal",
+          "viewObscuredByCataractRight": "yes",
+          "viewObscuredByCataractLeft": "no"
+        },
+        "differential": {
+          "glaucomaSuspected": "yes",
+          "glaucomaNotes": "Steroid-response ocular hypertension; discs difficult to assess",
+          "amdSuspected": "no",
+          "amdNotes": "",
+          "diabeticRetinopathySuspected": "no",
+          "diabeticRetinopathyNotes": ""
+        },
+        "biometry": {
+          "biometryPerformed": "no",
+          "axialLengthRightMm": null,
+          "axialLengthLeftMm": null,
+          "keratometryK1Right": null,
+          "keratometryK1Left": null,
+          "keratometryK2Right": null,
+          "keratometryK2Left": null,
+          "octPerformed": "no",
+          "octFindings": "",
+          "calculatedIolPowerRight": null,
+          "calculatedIolPowerLeft": null
+        },
+        "functional": {
+          "functionalDifficultyReading": 4,
+          "functionalDifficultyDriving": null,
+          "functionalDifficultyDailyActivities": 4,
+          "functionalImpactNotes": "Unable to read schoolwork; school has raised safeguarding of learning"
+        },
+        "management": {
+          "managementRecommendation": "surgical-referral-urgent",
+          "eyeForSurgery": "right",
+          "risksBenefitsCounselled": "yes",
+          "consentDiscussed": "yes",
+          "managementNotes": "Same-week paediatric ophthalmology and glaucoma review; liaise with paediatric nephrology re steroid-sparing therapy; B-scan right eye"
+        },
+        "summary": {
+          "overrideSurgicalCandidacy": "",
+          "overrideReason": "",
+          "clinicianNotes": "Steroid-induced PSC with ocular hypertension in a child - adult pathway not validated",
+          "signedByName": "Dr Aisha Mahmood"
+        }
+      },
+      "expected": {
+        "locsIIISeverityRight": "severe",
+        "locsIIISeverityLeft": "moderate",
+        "computedSurgicalCandidacy": "urgent-referral",
+        "finalSurgicalCandidacy": "urgent-referral",
+        "overrideReason": "",
+        "functionalImpactScore": 8,
+        "firedRules": [
+          {
+            "ruleId": "R-LOCS-SEVERITY-RIGHT-SEVERE",
+            "instrument": "locs-iii",
+            "component": "severity-right",
+            "score": null,
+            "band": "severe",
+            "category": "slit-lamp",
+            "description": "Right eye LOCS III severity band is severe (NO 1.5, NC 1.5, C 1, P 5.5)."
+          },
+          {
+            "ruleId": "R-LOCS-SEVERITY-LEFT-MODERATE",
+            "instrument": "locs-iii",
+            "component": "severity-left",
+            "score": null,
+            "band": "moderate",
+            "category": "slit-lamp",
+            "description": "Left eye LOCS III severity band is moderate (NO 1.5, NC 3.5, C 1, P 2.5)."
+          },
+          {
+            "ruleId": "R-CANDIDACY-MODERATE-LOCS",
+            "instrument": "composite",
+            "component": "severity",
+            "score": null,
+            "band": "consider",
+            "category": "surgical candidacy",
+            "description": "A moderate LOCS III severity band is present in at least one eye."
+          },
+          {
+            "ruleId": "R-CANDIDACY-ACUITY-6-12",
+            "instrument": "acuity",
+            "component": "best-corrected",
+            "score": null,
+            "band": "consider",
+            "category": "surgical candidacy",
+            "description": "Best-corrected visual acuity is worse than 6/12 in at least one eye."
+          },
+          {
+            "ruleId": "R-CANDIDACY-SEVERE-LOCS",
+            "instrument": "composite",
+            "component": "severity",
+            "score": null,
+            "band": "indicated",
+            "category": "surgical candidacy",
+            "description": "A severe LOCS III severity band is present in at least one eye."
+          },
+          {
+            "ruleId": "R-CANDIDACY-ACUITY-6-18",
+            "instrument": "acuity",
+            "component": "best-corrected",
+            "score": null,
+            "band": "indicated",
+            "category": "surgical candidacy",
+            "description": "Best-corrected visual acuity is worse than 6/18 in at least one eye."
+          },
+          {
+            "ruleId": "R-CANDIDACY-GLARE-SEVERE",
+            "instrument": "glare",
+            "component": "functional-impact",
+            "score": null,
+            "band": "indicated",
+            "category": "surgical candidacy",
+            "description": "Glare testing shows a severe functional impact, an independent indication for surgery."
+          },
+          {
+            "ruleId": "R-CANDIDACY-URGENT-FLAG",
+            "instrument": "composite",
+            "component": "safety-flag",
+            "score": null,
+            "band": "urgent-referral",
+            "category": "surgical candidacy",
+            "description": "6 safety flag(s) fired, overriding the computed surgical candidacy to urgent-referral."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-COMPETING-PATHOLOGY-SUSPECTED-001",
+            "category": "competing-pathology-suspected",
+            "priority": "high",
+            "description": "Competing posterior-segment pathology suspected: glaucoma.",
+            "suggestedAction": "Refer into the appropriate pathway (glaucoma / medical retina / diabetic eye screening) alongside or before cataract listing."
+          },
+          {
+            "flagId": "F-RAISED-IOP-001",
+            "category": "raised-iop",
+            "priority": "high",
+            "description": "Intraocular pressure above 21 mmHg: right 28 mmHg, left 24 mmHg.",
+            "suggestedAction": "Investigate for glaucoma before cataract listing; consider same-visit or urgent glaucoma referral."
+          },
+          {
+            "flagId": "F-VIEW-OBSCURED-FUNDUS-NOT-ASSESSED-001",
+            "category": "view-obscured-fundus-not-assessed",
+            "priority": "medium",
+            "description": "The cataract obscures the fundus view and a dilated fundus examination was not performed.",
+            "suggestedAction": "Arrange a dilated fundus examination, or B-scan ultrasound if the view remains obscured, before surgical listing to exclude posterior-segment pathology."
+          },
+          {
+            "flagId": "F-RAPID-PROGRESSION-001",
+            "category": "rapid-progression",
+            "priority": "medium",
+            "description": "Symptom duration of 2 month(s) with a severe LOCS III grade suggests atypically rapid progression.",
+            "suggestedAction": "Consider a non-age-related cause (steroid-induced, traumatic, diabetic, or uveitic) and investigate accordingly."
+          },
+          {
+            "flagId": "F-BIOMETRY-INCOMPLETE-FOR-SURGICAL-PLANNING-001",
+            "category": "biometry-incomplete-for-surgical-planning",
+            "priority": "low",
+            "description": "A surgical referral is recommended but biometry for intraocular lens planning was not performed.",
+            "suggestedAction": "Book biometry (axial length, keratometry, IOL power calculation) ahead of the surgical clinic appointment."
+          },
+          {
+            "flagId": "F-PAEDIATRIC-001",
+            "category": "paediatric",
+            "priority": "high",
+            "description": "The patient is 14 years old; LOCS III and this form's adult referral pathway are not validated below 16 years.",
+            "suggestedAction": "Refer to a paediatric ophthalmology pathway. Treat the LOCS III grading and surgical-candidacy recommendation on this report as invalid."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,693 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateSatisfaction",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state",
+    "result.compositeScore"
+  ],
+  "note": "Three hand-authored personas for the Encounter Satisfaction Score (ESS) grader. calculateSatisfaction(state) returns compositeScore = mean of every answered 1-5 Likert item rounded to 2 dp (0 when nothing answered), category via satisfactionCategory (>=4.5 Excellent, >=3.5 Good, >=2.5 Fair, >=1.5 Poor, else Very Poor; 'No responses' if none), domainScores (one entry per domain that has at least one answer, in question order, mean to 2 dp) and answeredCount; unanswered (null) items are skipped, not scored as zero. Flags are SPLIT: form-app.js calls detectAdditionalFlags(state, grading.compositeScore), mirrored by flagsArgs [\"state\",\"result.compositeScore\"]. Quirks verified: (1) a communication item rated 1 raises the generic FLAG-VDIS-<field> (high) not FLAG-COMM; a communication item rated exactly 2 raises FLAG-COMM-<field> (high) and is EXCLUDED from the medium FLAG-DIS list; (2) FLAG-POOR-OVERALL tests compositeScore <= 2.4 while the Poor category runs to 2.49, and FLAG-FIRST-VISIT-FAIR tests <= 3.4 while Fair runs to 3.49 - so a 2-dp composite of 2.41-2.49 or 3.41-3.49 gets the category but not the flag (the 'partial first visit' persona pins 3.47 -> Fair with no low flag); (3) flags are stable-sorted high > medium > low, so within a band insertion order (VDIS items in SECTIONS order, then COMM, then DIS, then POOR/FIRST-VISIT) is preserved. Regenerate expected with: bin/test-personas encounter-satisfaction --update",
+  "personas": [
+    {
+      "name": "Excellent - routine follow-up, all 19 answered",
+      "description": "Returning patient at a rheumatology follow-up, every item 4 or 5. Sum 92 over 19 items -> compositeScore 4.84, category 'Excellent', answeredCount 19. Domain means: Access & Scheduling 4.33 (5,4,4), Communication 5, Staff & Professionalism 5, Care Quality 5, Environment 4.67 (5,4,5), Overall Satisfaction 5. No item rated 1 or 2, composite above every flag threshold, not a first visit -> zero flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Margaret",
+          "lastName": "Ellison",
+          "dateOfBirth": "1958-04-22",
+          "sex": "female"
+        },
+        "visitInformation": {
+          "visitDate": "2026-08-27",
+          "department": "Rheumatology Outpatients",
+          "providerName": "Dr Samuel Adeyemi",
+          "visitType": "follow-up",
+          "reasonForVisit": "Six-monthly rheumatoid arthritis review and DMARD monitoring",
+          "firstVisit": "no"
+        },
+        "accessScheduling": {
+          "easeOfScheduling": 5,
+          "waitForAppointment": 4,
+          "waitInWaitingRoom": 4
+        },
+        "communication": {
+          "listening": 5,
+          "explainingCondition": 5,
+          "answeringQuestions": 5,
+          "timeSpent": 5
+        },
+        "staffProfessionalism": {
+          "receptionCourtesy": 5,
+          "nursingCourtesy": 5,
+          "respectShown": 5
+        },
+        "careQuality": {
+          "involvementInDecisions": 5,
+          "treatmentPlanExplanation": 5,
+          "confidenceInCare": 5
+        },
+        "environment": {
+          "cleanliness": 5,
+          "waitingAreaComfort": 4,
+          "privacy": 5
+        },
+        "overallSatisfaction": {
+          "overallRating": 5,
+          "likelyToRecommend": 5,
+          "likelyToReturn": 5,
+          "comments": "Dr Adeyemi always takes time to explain my blood results. Lovely nurses."
+        }
+      },
+      "expected": {
+        "compositeScore": 4.84,
+        "category": "Excellent",
+        "domainScores": [
+          {
+            "domain": "Access & Scheduling",
+            "mean": 4.33,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-01",
+                "text": "How satisfied were you with the ease of scheduling your appointment?",
+                "score": 5
+              },
+              {
+                "id": "ESS-02",
+                "text": "How satisfied were you with the time you waited to get an appointment?",
+                "score": 4
+              },
+              {
+                "id": "ESS-03",
+                "text": "How satisfied were you with the time you waited in the waiting room?",
+                "score": 4
+              }
+            ]
+          },
+          {
+            "domain": "Communication",
+            "mean": 5,
+            "count": 4,
+            "questions": [
+              {
+                "id": "ESS-04",
+                "text": "How satisfied were you with how well the provider listened to you?",
+                "score": 5
+              },
+              {
+                "id": "ESS-05",
+                "text": "How satisfied were you with how clearly your condition was explained?",
+                "score": 5
+              },
+              {
+                "id": "ESS-06",
+                "text": "How satisfied were you with how thoroughly your questions were answered?",
+                "score": 5
+              },
+              {
+                "id": "ESS-07",
+                "text": "How satisfied were you with the amount of time the provider spent with you?",
+                "score": 5
+              }
+            ]
+          },
+          {
+            "domain": "Staff & Professionalism",
+            "mean": 5,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-08",
+                "text": "How satisfied were you with the courtesy of the reception staff?",
+                "score": 5
+              },
+              {
+                "id": "ESS-09",
+                "text": "How satisfied were you with the courtesy of the nursing staff?",
+                "score": 5
+              },
+              {
+                "id": "ESS-10",
+                "text": "How satisfied were you with the respect shown to you during your visit?",
+                "score": 5
+              }
+            ]
+          },
+          {
+            "domain": "Care Quality",
+            "mean": 5,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-11",
+                "text": "How satisfied were you with your involvement in decisions about your care?",
+                "score": 5
+              },
+              {
+                "id": "ESS-12",
+                "text": "How satisfied were you with how well the treatment plan was explained?",
+                "score": 5
+              },
+              {
+                "id": "ESS-13",
+                "text": "How confident were you in the care you received?",
+                "score": 5
+              }
+            ]
+          },
+          {
+            "domain": "Environment",
+            "mean": 4.67,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-14",
+                "text": "How satisfied were you with the cleanliness of the facility?",
+                "score": 5
+              },
+              {
+                "id": "ESS-15",
+                "text": "How satisfied were you with the comfort of the waiting area?",
+                "score": 4
+              },
+              {
+                "id": "ESS-16",
+                "text": "How satisfied were you with the privacy provided during your visit?",
+                "score": 5
+              }
+            ]
+          },
+          {
+            "domain": "Overall Satisfaction",
+            "mean": 5,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-17",
+                "text": "How would you rate your overall satisfaction with this visit?",
+                "score": 5
+              },
+              {
+                "id": "ESS-18",
+                "text": "How likely are you to recommend this provider to others?",
+                "score": 5
+              },
+              {
+                "id": "ESS-19",
+                "text": "How likely are you to return to this provider for future care?",
+                "score": 5
+              }
+            ]
+          }
+        ],
+        "answeredCount": 19,
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Fair - first-visit walk-in, partially answered, 3.47 misses the Fair flag",
+      "description": "First-time urgent-care walk-in who skipped the two scheduling items (no appointment), treatment-plan explanation and privacy (not applicable), leaving 15 answers summing to 52 -> compositeScore 3.47, category 'Fair', answeredCount 15. Domain means: Access & Scheduling 2 (only the waiting-room item), Communication 3.5, Staff & Professionalism 4, Care Quality 3.5, Environment 3, Overall Satisfaction 3.67. Flags: exactly one - FLAG-DIS-waitInWaitingRoom (medium, rated 2, not a communication field). FLAG-FIRST-VISIT-FAIR does NOT fire even though firstVisit is 'yes' and the category is Fair, because 3.47 > 3.4 (the flag/category threshold gap).",
+      "state": {
+        "demographics": {
+          "firstName": "Jamal",
+          "lastName": "Hussain",
+          "dateOfBirth": "1994-11-03",
+          "sex": "male"
+        },
+        "visitInformation": {
+          "visitDate": "2026-09-01",
+          "department": "Urgent Treatment Centre",
+          "providerName": "Advanced Nurse Practitioner Kelly Marsh",
+          "visitType": "urgent-care",
+          "reasonForVisit": "Laceration to left palm from kitchen knife - wound closure",
+          "firstVisit": "yes"
+        },
+        "accessScheduling": {
+          "easeOfScheduling": null,
+          "waitForAppointment": null,
+          "waitInWaitingRoom": 2
+        },
+        "communication": {
+          "listening": 4,
+          "explainingCondition": 4,
+          "answeringQuestions": 3,
+          "timeSpent": 3
+        },
+        "staffProfessionalism": {
+          "receptionCourtesy": 4,
+          "nursingCourtesy": 4,
+          "respectShown": 4
+        },
+        "careQuality": {
+          "involvementInDecisions": 3,
+          "treatmentPlanExplanation": null,
+          "confidenceInCare": 4
+        },
+        "environment": {
+          "cleanliness": 3,
+          "waitingAreaComfort": 3,
+          "privacy": null
+        },
+        "overallSatisfaction": {
+          "overallRating": 4,
+          "likelyToRecommend": 4,
+          "likelyToReturn": 3,
+          "comments": "Waited nearly three hours but the nurse who glued my hand was great."
+        }
+      },
+      "expected": {
+        "compositeScore": 3.47,
+        "category": "Fair",
+        "domainScores": [
+          {
+            "domain": "Access & Scheduling",
+            "mean": 2,
+            "count": 1,
+            "questions": [
+              {
+                "id": "ESS-03",
+                "text": "How satisfied were you with the time you waited in the waiting room?",
+                "score": 2
+              }
+            ]
+          },
+          {
+            "domain": "Communication",
+            "mean": 3.5,
+            "count": 4,
+            "questions": [
+              {
+                "id": "ESS-04",
+                "text": "How satisfied were you with how well the provider listened to you?",
+                "score": 4
+              },
+              {
+                "id": "ESS-05",
+                "text": "How satisfied were you with how clearly your condition was explained?",
+                "score": 4
+              },
+              {
+                "id": "ESS-06",
+                "text": "How satisfied were you with how thoroughly your questions were answered?",
+                "score": 3
+              },
+              {
+                "id": "ESS-07",
+                "text": "How satisfied were you with the amount of time the provider spent with you?",
+                "score": 3
+              }
+            ]
+          },
+          {
+            "domain": "Staff & Professionalism",
+            "mean": 4,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-08",
+                "text": "How satisfied were you with the courtesy of the reception staff?",
+                "score": 4
+              },
+              {
+                "id": "ESS-09",
+                "text": "How satisfied were you with the courtesy of the nursing staff?",
+                "score": 4
+              },
+              {
+                "id": "ESS-10",
+                "text": "How satisfied were you with the respect shown to you during your visit?",
+                "score": 4
+              }
+            ]
+          },
+          {
+            "domain": "Care Quality",
+            "mean": 3.5,
+            "count": 2,
+            "questions": [
+              {
+                "id": "ESS-11",
+                "text": "How satisfied were you with your involvement in decisions about your care?",
+                "score": 3
+              },
+              {
+                "id": "ESS-13",
+                "text": "How confident were you in the care you received?",
+                "score": 4
+              }
+            ]
+          },
+          {
+            "domain": "Environment",
+            "mean": 3,
+            "count": 2,
+            "questions": [
+              {
+                "id": "ESS-14",
+                "text": "How satisfied were you with the cleanliness of the facility?",
+                "score": 3
+              },
+              {
+                "id": "ESS-15",
+                "text": "How satisfied were you with the comfort of the waiting area?",
+                "score": 3
+              }
+            ]
+          },
+          {
+            "domain": "Overall Satisfaction",
+            "mean": 3.67,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-17",
+                "text": "How would you rate your overall satisfaction with this visit?",
+                "score": 4
+              },
+              {
+                "id": "ESS-18",
+                "text": "How likely are you to recommend this provider to others?",
+                "score": 4
+              },
+              {
+                "id": "ESS-19",
+                "text": "How likely are you to return to this provider for future care?",
+                "score": 3
+              }
+            ]
+          }
+        ],
+        "answeredCount": 15,
+        "additionalFlags": [
+          {
+            "id": "FLAG-DIS-waitInWaitingRoom",
+            "category": "Dissatisfied Response",
+            "message": "Patient rated \"Wait in waiting room\" as Dissatisfied (2/5)",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Poor - failed specialist referral, complaint pending",
+      "description": "First-visit specialist referral that went badly: eight items rated 1, three communication items rated 2, five other items rated 2. Sum 33 over 19 -> compositeScore 1.74, category 'Poor', answeredCount 19. Domain means: Access 1.33, Communication 1.75, Staff 2, Care Quality 1.67, Environment 2.67, Overall 1. Flags (17): high FLAG-VDIS for easeOfScheduling, waitInWaitingRoom, explainingCondition, respectShown, treatmentPlanExplanation, overallRating, likelyToRecommend, likelyToReturn (SECTIONS order), then high FLAG-COMM for listening, answeringQuestions, timeSpent; then medium FLAG-DIS for waitForAppointment, nursingCourtesy, involvementInDecisions, confidenceInCare, privacy (communication 2s excluded), then FLAG-POOR-OVERALL ('1.7/5.0'). No low flag: firstVisit is 'yes' but the composite is far below the 2.5 Fair floor.",
+      "state": {
+        "demographics": {
+          "firstName": "Deborah",
+          "lastName": "Kowalczyk",
+          "dateOfBirth": "1971-07-15",
+          "sex": "female"
+        },
+        "visitInformation": {
+          "visitDate": "2026-08-20",
+          "department": "Gastroenterology Outpatients",
+          "providerName": "Dr R. Whitcombe",
+          "visitType": "specialist-referral",
+          "reasonForVisit": "GP referral for iron-deficiency anaemia and altered bowel habit",
+          "firstVisit": "yes"
+        },
+        "accessScheduling": {
+          "easeOfScheduling": 1,
+          "waitForAppointment": 2,
+          "waitInWaitingRoom": 1
+        },
+        "communication": {
+          "listening": 2,
+          "explainingCondition": 1,
+          "answeringQuestions": 2,
+          "timeSpent": 2
+        },
+        "staffProfessionalism": {
+          "receptionCourtesy": 3,
+          "nursingCourtesy": 2,
+          "respectShown": 1
+        },
+        "careQuality": {
+          "involvementInDecisions": 2,
+          "treatmentPlanExplanation": 1,
+          "confidenceInCare": 2
+        },
+        "environment": {
+          "cleanliness": 3,
+          "waitingAreaComfort": 3,
+          "privacy": 2
+        },
+        "overallSatisfaction": {
+          "overallRating": 1,
+          "likelyToRecommend": 1,
+          "likelyToReturn": 1,
+          "comments": "Appointment cancelled twice, then a 90-minute wait for a seven-minute consultation. The doctor talked over me and I left without understanding what happens next. I have contacted PALS."
+        }
+      },
+      "expected": {
+        "compositeScore": 1.74,
+        "category": "Poor",
+        "domainScores": [
+          {
+            "domain": "Access & Scheduling",
+            "mean": 1.33,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-01",
+                "text": "How satisfied were you with the ease of scheduling your appointment?",
+                "score": 1
+              },
+              {
+                "id": "ESS-02",
+                "text": "How satisfied were you with the time you waited to get an appointment?",
+                "score": 2
+              },
+              {
+                "id": "ESS-03",
+                "text": "How satisfied were you with the time you waited in the waiting room?",
+                "score": 1
+              }
+            ]
+          },
+          {
+            "domain": "Communication",
+            "mean": 1.75,
+            "count": 4,
+            "questions": [
+              {
+                "id": "ESS-04",
+                "text": "How satisfied were you with how well the provider listened to you?",
+                "score": 2
+              },
+              {
+                "id": "ESS-05",
+                "text": "How satisfied were you with how clearly your condition was explained?",
+                "score": 1
+              },
+              {
+                "id": "ESS-06",
+                "text": "How satisfied were you with how thoroughly your questions were answered?",
+                "score": 2
+              },
+              {
+                "id": "ESS-07",
+                "text": "How satisfied were you with the amount of time the provider spent with you?",
+                "score": 2
+              }
+            ]
+          },
+          {
+            "domain": "Staff & Professionalism",
+            "mean": 2,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-08",
+                "text": "How satisfied were you with the courtesy of the reception staff?",
+                "score": 3
+              },
+              {
+                "id": "ESS-09",
+                "text": "How satisfied were you with the courtesy of the nursing staff?",
+                "score": 2
+              },
+              {
+                "id": "ESS-10",
+                "text": "How satisfied were you with the respect shown to you during your visit?",
+                "score": 1
+              }
+            ]
+          },
+          {
+            "domain": "Care Quality",
+            "mean": 1.67,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-11",
+                "text": "How satisfied were you with your involvement in decisions about your care?",
+                "score": 2
+              },
+              {
+                "id": "ESS-12",
+                "text": "How satisfied were you with how well the treatment plan was explained?",
+                "score": 1
+              },
+              {
+                "id": "ESS-13",
+                "text": "How confident were you in the care you received?",
+                "score": 2
+              }
+            ]
+          },
+          {
+            "domain": "Environment",
+            "mean": 2.67,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-14",
+                "text": "How satisfied were you with the cleanliness of the facility?",
+                "score": 3
+              },
+              {
+                "id": "ESS-15",
+                "text": "How satisfied were you with the comfort of the waiting area?",
+                "score": 3
+              },
+              {
+                "id": "ESS-16",
+                "text": "How satisfied were you with the privacy provided during your visit?",
+                "score": 2
+              }
+            ]
+          },
+          {
+            "domain": "Overall Satisfaction",
+            "mean": 1,
+            "count": 3,
+            "questions": [
+              {
+                "id": "ESS-17",
+                "text": "How would you rate your overall satisfaction with this visit?",
+                "score": 1
+              },
+              {
+                "id": "ESS-18",
+                "text": "How likely are you to recommend this provider to others?",
+                "score": 1
+              },
+              {
+                "id": "ESS-19",
+                "text": "How likely are you to return to this provider for future care?",
+                "score": 1
+              }
+            ]
+          }
+        ],
+        "answeredCount": 19,
+        "additionalFlags": [
+          {
+            "id": "FLAG-VDIS-easeOfScheduling",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Ease of scheduling\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-waitInWaitingRoom",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Wait in waiting room\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-explainingCondition",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Explaining condition\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-respectShown",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Respect shown\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-treatmentPlanExplanation",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Treatment plan explanation\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-overallRating",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Overall rating\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-likelyToRecommend",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Likely to recommend\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VDIS-likelyToReturn",
+            "category": "Very Dissatisfied Response",
+            "message": "Patient rated \"Likely to return\" as Very Dissatisfied (1/5)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COMM-listening",
+            "category": "Communication Concern",
+            "message": "Patient rated \"Provider listening\" as Dissatisfied (2/5) - communication improvement needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COMM-answeringQuestions",
+            "category": "Communication Concern",
+            "message": "Patient rated \"Answering questions\" as Dissatisfied (2/5) - communication improvement needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COMM-timeSpent",
+            "category": "Communication Concern",
+            "message": "Patient rated \"Time spent with patient\" as Dissatisfied (2/5) - communication improvement needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DIS-waitForAppointment",
+            "category": "Dissatisfied Response",
+            "message": "Patient rated \"Wait for appointment\" as Dissatisfied (2/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DIS-nursingCourtesy",
+            "category": "Dissatisfied Response",
+            "message": "Patient rated \"Nursing staff courtesy\" as Dissatisfied (2/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DIS-involvementInDecisions",
+            "category": "Dissatisfied Response",
+            "message": "Patient rated \"Involvement in decisions\" as Dissatisfied (2/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DIS-confidenceInCare",
+            "category": "Dissatisfied Response",
+            "message": "Patient rated \"Confidence in care\" as Dissatisfied (2/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DIS-privacy",
+            "category": "Dissatisfied Response",
+            "message": "Patient rated \"Privacy\" as Dissatisfied (2/5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-POOR-OVERALL",
+            "category": "Poor Overall Satisfaction",
+            "message": "Composite satisfaction score is 1.7/5.0 (Poor) - review required",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

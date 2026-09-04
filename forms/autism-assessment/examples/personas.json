@@ -1,0 +1,523 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateAQ10",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the AQ-10 autism screening engine. calculateAQ10 sums the ten pre-scored 0/1 fields q1..q10 (null = unanswered, skipped; rawResponses is display-only and ignored by both grader and detector), returns aq10Score, aq10CategoryLabel ('Below threshold' for <= 5, else 'At or above threshold') and firedRules = one row per item scoring 1, in item order. Flags are SPLIT: form-app.js calls detectAdditionalFlags(state) with the state alone, mirrored as flagsArgs ['state']; the oracle stores them under expected.additionalFlags. The detector recomputes the total itself (nulls as 0) and fires FLAG-AQ10-HIGH-001 at >= 6. Quirks verified in source: the two sensory flags are mutually exclusive (>= 2 severe -> -001 high, exactly 1 -> -002 medium); FLAG-REPETITIVE-002 and -003 both fire when resistanceToChange is 'always' and routineAdherence is 'always'; the developmental flags are naive case-insensitive substring tests for 'delay' or 'late', so an explicit negative ('No delay') and an unrelated word containing 'late' ('related') both fire them; the domain labels in aq10-rules.js do not match the published AQ-10 item domains (item 1 'notice small sounds' is labelled 'Social skills', item 7 'characters' intentions' is labelled 'Attention to detail'); the priority sort is stable so within a priority the flags keep detection order. Regenerate expected with: bin/test-personas autism-assessment --update",
+  "personas": [
+    {
+      "name": "Adult self-referral - AQ-10 2, no concerns",
+      "description": "A 34-year-old woman self-referring after reading about autism online; only two AQ-10 items score (item 1 noticing small sounds, item 8 collecting information), all social-communication ratings 'often', sensory profile none/mild, no repetitive movements, 'sometimes' resistance to change, typical milestones with no trigger words, no family history and no previous assessment. Expect aq10Score 2, aq10CategoryLabel 'Below threshold', firedRules [AQ10-01, AQ10-08] and an empty additionalFlags array.",
+      "state": {
+        "demographics": {
+          "firstName": "Eleanor",
+          "lastName": "Whitcombe",
+          "dateOfBirth": "1992-05-14",
+          "sex": "female",
+          "ageGroup": "adult"
+        },
+        "screeningPurpose": {
+          "referralSource": "self",
+          "referralSourceOther": "",
+          "reasonForScreening": "Wondering whether long-standing social tiredness might be autism after reading an article",
+          "previousAssessments": "no",
+          "previousAssessmentDetails": ""
+        },
+        "aq10Questionnaire": {
+          "q1": 1,
+          "q2": 0,
+          "q3": 0,
+          "q4": 0,
+          "q5": 0,
+          "q6": 0,
+          "q7": 0,
+          "q8": 1,
+          "q9": 0,
+          "q10": 0,
+          "rawResponses": {
+            "q1": "slightly-agree",
+            "q2": "slightly-agree",
+            "q3": "definitely-agree",
+            "q4": "slightly-agree",
+            "q5": "definitely-agree",
+            "q6": "definitely-agree",
+            "q7": "definitely-disagree",
+            "q8": "slightly-agree",
+            "q9": "slightly-agree",
+            "q10": "slightly-disagree"
+          }
+        },
+        "socialCommunication": {
+          "eyeContact": "often",
+          "socialReciprocity": "often",
+          "conversationSkills": "always",
+          "friendshipPatterns": "Small stable group of close friends from university",
+          "socialDifficultiesDetails": "Finds large parties draining but manages them"
+        },
+        "repetitiveBehaviors": {
+          "routineAdherence": "sometimes",
+          "specialInterests": "Birdwatching at weekends",
+          "repetitiveMovements": "no",
+          "repetitiveMovementsDetails": "",
+          "resistanceToChange": "sometimes"
+        },
+        "sensoryProfile": {
+          "visualSensitivity": "none",
+          "auditorySensitivity": "mild",
+          "tactileSensitivity": "none",
+          "olfactorySensitivity": "none",
+          "gustatorySensitivity": "none",
+          "sensorySeekingBehaviors": ""
+        },
+        "developmentalHistory": {
+          "languageMilestones": "First words at 12 months, sentences by 2 years",
+          "motorMilestones": "Walked at 13 months",
+          "earlySocialBehavior": "Sociable toddler, enjoyed nursery",
+          "developmentalConcerns": "None recorded"
+        },
+        "currentSupport": {
+          "currentAccommodations": "",
+          "currentTherapies": [],
+          "educationalSupport": "",
+          "medications": []
+        },
+        "familyHistory": {
+          "autismFamily": "no",
+          "autismFamilyDetails": "",
+          "adhdFamily": "no",
+          "adhdFamilyDetails": "",
+          "learningDisabilities": "no",
+          "learningDisabilitiesDetails": "",
+          "mentalHealthFamily": "no",
+          "mentalHealthFamilyDetails": ""
+        }
+      },
+      "expected": {
+        "aq10Score": 2,
+        "aq10CategoryLabel": "Below threshold",
+        "firedRules": [
+          {
+            "id": "AQ10-01",
+            "domain": "Social skills",
+            "description": "I often notice small sounds when others do not.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-08",
+            "domain": "Social skills",
+            "description": "I like to collect information about categories of things (e.g., types of car, bird, train, plant).",
+            "score": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Adolescent at cut-off boundary - AQ-10 5, one item unanswered",
+      "description": "A 15-year-old boy referred by school; nine of ten AQ-10 items answered (item 3 skipped) scoring exactly 5, the top of 'Below threshold', so FLAG-AQ10-HIGH-001 does not fire. Exercises the engine's text quirks: languageMilestones is an explicit negative 'No delay...' which still fires FLAG-DEV-001 on the substring 'delay', and motorMilestones contains 'related' which fires FLAG-DEV-002 on the substring 'late'. Exactly one severe sensory modality (auditory) fires FLAG-SENSORY-002 (medium) rather than -001. Maternal depression gives the low-priority FLAG-FAMILY-MH-001. Expect aq10Score 5, 'Below threshold', firedRules [AQ10-01, AQ10-04, AQ10-07, AQ10-08, AQ10-10], and four flags in order: FLAG-SENSORY-002, FLAG-DEV-001, FLAG-DEV-002 (medium), FLAG-FAMILY-MH-001 (low).",
+      "state": {
+        "demographics": {
+          "firstName": "Kieran",
+          "lastName": "Oyelaran",
+          "dateOfBirth": "2011-02-27",
+          "sex": "male",
+          "ageGroup": "adolescent"
+        },
+        "screeningPurpose": {
+          "referralSource": "school",
+          "referralSourceOther": "",
+          "reasonForScreening": "SENCO concerned about difficulty with group work and sensitivity to classroom noise",
+          "previousAssessments": "no",
+          "previousAssessmentDetails": ""
+        },
+        "aq10Questionnaire": {
+          "q1": 1,
+          "q2": 0,
+          "q3": null,
+          "q4": 1,
+          "q5": 0,
+          "q6": 0,
+          "q7": 1,
+          "q8": 1,
+          "q9": 0,
+          "q10": 1,
+          "rawResponses": {
+            "q1": "definitely-agree",
+            "q2": "slightly-agree",
+            "q3": "",
+            "q4": "slightly-disagree",
+            "q5": "slightly-agree",
+            "q6": "slightly-agree",
+            "q7": "slightly-agree",
+            "q8": "definitely-agree",
+            "q9": "slightly-agree",
+            "q10": "slightly-agree"
+          }
+        },
+        "socialCommunication": {
+          "eyeContact": "sometimes",
+          "socialReciprocity": "sometimes",
+          "conversationSkills": "often",
+          "friendshipPatterns": "One close friend; prefers online gaming groups",
+          "socialDifficultiesDetails": "Struggles when the group changes topic quickly"
+        },
+        "repetitiveBehaviors": {
+          "routineAdherence": "often",
+          "specialInterests": "Railway signalling systems and timetables",
+          "repetitiveMovements": "no",
+          "repetitiveMovementsDetails": "",
+          "resistanceToChange": "often"
+        },
+        "sensoryProfile": {
+          "visualSensitivity": "mild",
+          "auditorySensitivity": "severe",
+          "tactileSensitivity": "moderate",
+          "olfactorySensitivity": "none",
+          "gustatorySensitivity": "mild",
+          "sensorySeekingBehaviors": "Wears ear defenders in the dining hall"
+        },
+        "developmentalHistory": {
+          "languageMilestones": "No delay - first words at 10 months, full sentences by 2 years",
+          "motorMilestones": "Walked at 12 months and related well to siblings physically",
+          "earlySocialBehavior": "Preferred solitary play at nursery",
+          "developmentalConcerns": "Health visitor noted limited pointing at 18 months"
+        },
+        "currentSupport": {
+          "currentAccommodations": "Seated away from the door; ear defenders permitted",
+          "currentTherapies": [],
+          "educationalSupport": "SEN support plan in place since Year 8",
+          "medications": []
+        },
+        "familyHistory": {
+          "autismFamily": "no",
+          "autismFamilyDetails": "",
+          "adhdFamily": "no",
+          "adhdFamilyDetails": "",
+          "learningDisabilities": "no",
+          "learningDisabilitiesDetails": "",
+          "mentalHealthFamily": "yes",
+          "mentalHealthFamilyDetails": "Mother treated for recurrent depression"
+        }
+      },
+      "expected": {
+        "aq10Score": 5,
+        "aq10CategoryLabel": "Below threshold",
+        "firedRules": [
+          {
+            "id": "AQ10-01",
+            "domain": "Social skills",
+            "description": "I often notice small sounds when others do not.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-04",
+            "domain": "Attention switching",
+            "description": "If there is an interruption, I can switch back to what I was doing very quickly.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-07",
+            "domain": "Attention to detail",
+            "description": "When I am reading a story, I find it difficult to work out the characters' intentions.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-08",
+            "domain": "Social skills",
+            "description": "I like to collect information about categories of things (e.g., types of car, bird, train, plant).",
+            "score": 1
+          },
+          {
+            "id": "AQ10-10",
+            "domain": "Imagination",
+            "description": "I find it difficult to work out people's intentions.",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SENSORY-002",
+            "category": "Sensory Profile",
+            "message": "Severe sensory sensitivity reported in one modality - monitor and assess further",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEV-001",
+            "category": "Developmental History",
+            "message": "Language developmental delays noted - consider speech and language assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEV-002",
+            "category": "Developmental History",
+            "message": "Motor developmental delays noted - consider occupational therapy assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FAMILY-MH-001",
+            "category": "Family History",
+            "message": "Family history of mental health conditions: Mother treated for recurrent depression",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Child with maximal AQ-10 and every flag - urgent referral",
+      "description": "A 7-year-old boy referred by his GP with parent-completed AQ-10 scoring 10/10, severe sensitivity in all five modalities, eye contact 'never', reciprocity 'rarely', conversation 'never', hand-flapping, routine adherence and resistance to change both 'always', delayed language and late walking, positive family history for autism, ADHD, learning disability and mental health, and a previous incomplete assessment. Expect aq10Score 10, 'At or above threshold', firedRules all ten AQ10-01..AQ10-10 in order, and 15 flags: high = FLAG-AQ10-HIGH-001, FLAG-SENSORY-001 (5 severe), FLAG-REPETITIVE-003, FLAG-FAMILY-ASD-001; medium = FLAG-SOCIAL-001, -002, -003, FLAG-REPETITIVE-001, -002, FLAG-DEV-001, FLAG-DEV-002, FLAG-FAMILY-ADHD-001, FLAG-PREV-001; low = FLAG-FAMILY-LD-001, FLAG-FAMILY-MH-001.",
+      "state": {
+        "demographics": {
+          "firstName": "Theo",
+          "lastName": "Brannigan",
+          "dateOfBirth": "2019-08-09",
+          "sex": "male",
+          "ageGroup": "child"
+        },
+        "screeningPurpose": {
+          "referralSource": "gp",
+          "referralSourceOther": "",
+          "reasonForScreening": "GP referral: parents and school report severe social withdrawal, distress at transitions, and no peer play",
+          "previousAssessments": "yes",
+          "previousAssessmentDetails": "Community paediatric assessment 2024 discontinued when the family moved"
+        },
+        "aq10Questionnaire": {
+          "q1": 1,
+          "q2": 1,
+          "q3": 1,
+          "q4": 1,
+          "q5": 1,
+          "q6": 1,
+          "q7": 1,
+          "q8": 1,
+          "q9": 1,
+          "q10": 1,
+          "rawResponses": {
+            "q1": "definitely-agree",
+            "q2": "definitely-disagree",
+            "q3": "definitely-disagree",
+            "q4": "definitely-disagree",
+            "q5": "definitely-disagree",
+            "q6": "definitely-disagree",
+            "q7": "definitely-agree",
+            "q8": "definitely-agree",
+            "q9": "definitely-disagree",
+            "q10": "definitely-agree"
+          }
+        },
+        "socialCommunication": {
+          "eyeContact": "never",
+          "socialReciprocity": "rarely",
+          "conversationSkills": "never",
+          "friendshipPatterns": "No friendships; plays alone at every break time",
+          "socialDifficultiesDetails": "Does not respond to name; echolalic speech"
+        },
+        "repetitiveBehaviors": {
+          "routineAdherence": "always",
+          "specialInterests": "Lines up toy trains for hours; knows every Thomas engine number",
+          "repetitiveMovements": "yes",
+          "repetitiveMovementsDetails": "Hand-flapping and toe-walking when excited or distressed",
+          "resistanceToChange": "always"
+        },
+        "sensoryProfile": {
+          "visualSensitivity": "severe",
+          "auditorySensitivity": "severe",
+          "tactileSensitivity": "severe",
+          "olfactorySensitivity": "severe",
+          "gustatorySensitivity": "severe",
+          "sensorySeekingBehaviors": "Spins in circles, seeks deep pressure under sofa cushions"
+        },
+        "developmentalHistory": {
+          "languageMilestones": "Delayed - first words at 30 months, still mostly single words",
+          "motorMilestones": "Late walker at 20 months; persistent toe-walking",
+          "earlySocialBehavior": "No social smile until 4 months, no pointing by 18 months",
+          "developmentalConcerns": "Health visitor raised concerns at 2-year check"
+        },
+        "currentSupport": {
+          "currentAccommodations": "One-to-one teaching assistant, visual timetable",
+          "currentTherapies": [
+            "speech-and-language",
+            "occupational-therapy"
+          ],
+          "educationalSupport": "EHCP application in progress",
+          "medications": [
+            {
+              "name": "Melatonin",
+              "dose": "2 mg",
+              "frequency": "Nightly"
+            }
+          ]
+        },
+        "familyHistory": {
+          "autismFamily": "yes",
+          "autismFamilyDetails": "Older brother diagnosed autistic aged 6; maternal uncle autistic",
+          "adhdFamily": "yes",
+          "adhdFamilyDetails": "Father diagnosed ADHD as an adult",
+          "learningDisabilities": "yes",
+          "learningDisabilitiesDetails": "Maternal cousin with moderate learning disability",
+          "mentalHealthFamily": "yes",
+          "mentalHealthFamilyDetails": "Mother has generalised anxiety disorder"
+        }
+      },
+      "expected": {
+        "aq10Score": 10,
+        "aq10CategoryLabel": "At or above threshold",
+        "firedRules": [
+          {
+            "id": "AQ10-01",
+            "domain": "Social skills",
+            "description": "I often notice small sounds when others do not.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-02",
+            "domain": "Attention switching",
+            "description": "I usually concentrate more on the whole picture, rather than the small details.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-03",
+            "domain": "Attention switching",
+            "description": "I find it easy to do more than one thing at once.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-04",
+            "domain": "Attention switching",
+            "description": "If there is an interruption, I can switch back to what I was doing very quickly.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-05",
+            "domain": "Communication",
+            "description": "I find it easy to \"read between the lines\" when someone is talking to me.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-06",
+            "domain": "Imagination",
+            "description": "I know how to tell if someone listening to me is getting bored.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-07",
+            "domain": "Attention to detail",
+            "description": "When I am reading a story, I find it difficult to work out the characters' intentions.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-08",
+            "domain": "Social skills",
+            "description": "I like to collect information about categories of things (e.g., types of car, bird, train, plant).",
+            "score": 1
+          },
+          {
+            "id": "AQ10-09",
+            "domain": "Communication",
+            "description": "I find it easy to work out what someone is thinking or feeling just by looking at their face.",
+            "score": 1
+          },
+          {
+            "id": "AQ10-10",
+            "domain": "Imagination",
+            "description": "I find it difficult to work out people's intentions.",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-AQ10-HIGH-001",
+            "category": "AQ-10 Score",
+            "message": "AQ-10 score 10/10 meets threshold (>=6) - refer for comprehensive autism assessment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SENSORY-001",
+            "category": "Sensory Profile",
+            "message": "5 severe sensory sensitivities reported - consider occupational therapy referral",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-REPETITIVE-003",
+            "category": "Repetitive Behaviors",
+            "message": "Strict routine adherence combined with extreme resistance to change - high likelihood of restrictive behavior pattern",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FAMILY-ASD-001",
+            "category": "Family History",
+            "message": "Family history of autism: Older brother diagnosed autistic aged 6; maternal uncle autistic - increased genetic predisposition",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SOCIAL-001",
+            "category": "Social Communication",
+            "message": "Significant eye contact difficulties reported - assess for social communication disorder",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SOCIAL-002",
+            "category": "Social Communication",
+            "message": "Significant difficulties with social reciprocity - further evaluation recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SOCIAL-003",
+            "category": "Social Communication",
+            "message": "Significant conversation difficulties reported - assess communication support needs",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-REPETITIVE-001",
+            "category": "Repetitive Behaviors",
+            "message": "Repetitive movements reported: Hand-flapping and toe-walking when excited or distressed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-REPETITIVE-002",
+            "category": "Repetitive Behaviors",
+            "message": "Extreme resistance to change reported - may indicate inflexible behavioral patterns",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEV-001",
+            "category": "Developmental History",
+            "message": "Language developmental delays noted - consider speech and language assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEV-002",
+            "category": "Developmental History",
+            "message": "Motor developmental delays noted - consider occupational therapy assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FAMILY-ADHD-001",
+            "category": "Family History",
+            "message": "Family history of ADHD: Father diagnosed ADHD as an adult - consider comorbid assessment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PREV-001",
+            "category": "Previous Assessment",
+            "message": "Previous autism assessments noted: Community paediatric assessment 2024 discontinued when the family moved - review prior findings",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FAMILY-LD-001",
+            "category": "Family History",
+            "message": "Family history of learning disabilities: Maternal cousin with moderate learning disability",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-FAMILY-MH-001",
+            "category": "Family History",
+            "message": "Family history of mental health conditions: Mother has generalised anxiety disorder",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

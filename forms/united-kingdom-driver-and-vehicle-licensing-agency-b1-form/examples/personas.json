@@ -1,0 +1,855 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateB1",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Split engine, no numeric score. validateB1(state) is a completeness validator: it walks b1Rules in array order, counts every rule whose applies(state) is true into totalRequired, and returns { complete, totalRequired, totalSatisfied, sections, missing } where missing is the list of applicable-but-unsatisfied rules (id, section, description) in rule order and sections is one bucket per section in first-appearance order (13 buckets when every section has an applicable rule). Conditional gating verified: Q1-02/03/04 apply only when the matching Q1 tick is true; Q2-02 vs Q2-03 by lastSeen; Q3-02 only on blackouts yes; Q4-02 on seizures yes; Q5-01 only on 'first-ever'; Q6a/Q6g/Q6i and the three Q6-EPI-* rules only on 'more-than-one-or-epilepsy' (Q6h additionally needs affectedConsciousness yes); Q7a-01 only when a named medication exists and noMedicationTaken is false; Q10a on double vision yes, Q10b-01 on suppressedOrControlled yes, Q10b-02 on correctionMethod 'other'; Q12a on needsAdaptations yes, Q12b on previouslyDeclared yes; AUTH-05/06 only when electronicCorrespondenceConsent is 'yes'. Flags are a SEPARATE export mirrored from form-app.js submitForm(): detectFlaggedIssues(state) with one argument, so flagsArgs is [\"state\"]; the oracle stores them as expected.flaggedIssues. Quirks verified: FLAG-SEIZ-003 tests only hadSeizures === 'yes' && multiple.twoOrMoreWithinFiveYears === 'yes' - it does NOT check diagnosis, so a stale 'yes' left over from the more-than-one branch still fires on a 'first-ever' form (FLAG-SEIZ-001/002 do check the diagnosis); FLAG-EPI-001 uses plain truthiness (!signedName) rather than hasText; the default medication.entries row { name: '', ... } is left in place when noMedicationTaken is ticked and is harmless because Q7-01/Q7a-01 use some(hasText(name)); flags are stable-sorted urgent > high > medium > low in push order. The grader result carries no timestamp (form-app.js adds one). Regenerate expected with: bin/test-personas united-kingdom-driver-and-vehicle-licensing-agency-b1-form --update",
+  "personas": [
+    {
+      "name": "Complete - single transient global amnesia, no risk answers",
+      "description": "Joanna Pritchard, 55, of Cardiff, declares one episode of transient global amnesia (Q1 'other condition') with brain surgery 'not applicable', last seen by her GP, and answers No to every risk question (blackouts, seizures, VP shunt, daily-living help, double vision, eyesight, adaptations). No medication taken (default blank entries row left in place). Authorisation accepted with e-correspondence consent 'yes' and email for both contact preferences. Hand-derived: applicable rules = PD 6 + HC 4 + Q1-01/Q1-04 + Q2-01/Q2-02 + Q3-01 + Q4-01 + Q7-01 + Q8-01 + Q9-01 + Q10-01 + Q11-01 + Q12-01 + AUTH-01..06 = 28, all satisfied, complete true, missing [], 13 section buckets, flaggedIssues [].",
+      "state": {
+        "personalDetails": {
+          "title": "Mrs",
+          "fullName": "Joanna Mair Pritchard",
+          "dateOfBirth": "1971-05-09",
+          "addressLine1": "14 Llandaff Road",
+          "addressLine2": "Canton",
+          "addressLine3": "Cardiff",
+          "postcode": "CF11 9NJ",
+          "email": "joanna.pritchard@example.com",
+          "contactNumber": "07700 900123",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "gpName": "Dr Huw Llewellyn",
+            "surgeryName": "Canton Medical Practice",
+            "addressLine1": "22 Cowbridge Road East",
+            "addressLine2": "",
+            "town": "Cardiff",
+            "postcode": "CF11 9AD",
+            "contactNumber": "029 2038 1234",
+            "email": "reception.canton@example.nhs.uk",
+            "dateLastSeen": "2026-07-14"
+          },
+          "consultant": {
+            "consultantName": "",
+            "speciality": "",
+            "department": "",
+            "hospitalName": "",
+            "addressLine1": "",
+            "addressLine2": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          }
+        },
+        "conditionHistory": {
+          "brainHaemorrhage": false,
+          "brainHaemorrhageDate": "",
+          "brainHaemorrhageDetails": "",
+          "severeHeadInjury": false,
+          "severeHeadInjuryDate": "",
+          "severeHeadInjuryDetails": "",
+          "otherCondition": true,
+          "otherConditionDate": "2026-06-30",
+          "otherConditionDetails": "Transient global amnesia - single episode lasting about four hours, fully resolved, MRI normal",
+          "brainSurgeryDate": "",
+          "brainSurgeryNotApplicable": true
+        },
+        "treatmentProvider": {
+          "lastSeen": "gp",
+          "gpLastContactDate": "2026-07-14",
+          "gpNextContactDate": "",
+          "consultantLastContactDate": "",
+          "consultantNextContactDate": ""
+        },
+        "blackouts": {
+          "hadBlackouts": "no",
+          "blackoutDate": ""
+        },
+        "seizures": {
+          "hadSeizures": "no",
+          "diagnosis": "",
+          "firstEver": {
+            "date": "",
+            "details": ""
+          },
+          "multiple": {
+            "twoOrMoreWithinFiveYears": "",
+            "firstAwakeSeizureDate": "",
+            "firstAsleepSeizureDate": "",
+            "lastTwoAwakeSeizureDate1": "",
+            "lastTwoAwakeSeizureDate2": "",
+            "lastTwoAsleepSeizureDate1": "",
+            "lastTwoAsleepSeizureDate2": "",
+            "firstSleepAttackAfterLastAwakeAttackDate": "",
+            "affectedConsciousness": "",
+            "wouldHaveAffectedDriving": "",
+            "attackDescription": "",
+            "resultOfMedicationAdvice": "",
+            "dateMedicationStartedToReduce": "",
+            "previousMedicationRestarted": "",
+            "datePreviousMedicationRestarted": "",
+            "dateOfLastSeizurePriorToWithdrawal": "",
+            "provokedSeizureDetails": ""
+          },
+          "epilepsyDeclaration": {
+            "declarationAccepted": false,
+            "signedName": "",
+            "signatureDate": ""
+          }
+        },
+        "medication": {
+          "noMedicationTaken": true,
+          "entries": [
+            {
+              "name": "",
+              "startDate": "",
+              "endDate": ""
+            }
+          ],
+          "makesDrowsyOrConfused": ""
+        },
+        "vpShunt": {
+          "hadVpShuntOrDrain": "no",
+          "procedureDate": ""
+        },
+        "dailyLiving": {
+          "needsHelp": "no",
+          "helpDetails": ""
+        },
+        "doubleVision": {
+          "hasDoubleVision": "no",
+          "suppressedOrControlled": "",
+          "correctionMethod": "",
+          "correctionMethodOther": ""
+        },
+        "eyesight": {
+          "hasEyesightProblems": "no",
+          "details": ""
+        },
+        "vehicleAdaptations": {
+          "needsAdaptations": "no",
+          "previouslyDeclared": "",
+          "additionalControlsFitted": ""
+        },
+        "authorisation": {
+          "declarationAccepted": true,
+          "name": "Joanna Mair Pritchard",
+          "signatureDate": "2026-08-28",
+          "electronicCorrespondenceConsent": "yes",
+          "dvlaContactPreference": "email",
+          "healthcareContactPreference": "email"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 28,
+        "totalSatisfied": 28,
+        "sections": [
+          {
+            "section": "personalDetails",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "healthcareProfessionals",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "conditionHistory",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "treatmentProvider",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "blackouts",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "seizures",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "medication",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "vpShunt",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "dailyLiving",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "doubleVision",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "eyesight",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "vehicleAdaptations",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "authorisation",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "First-ever post-traumatic seizure - two fields missing, stale Q6a answer",
+      "description": "Kwame Boateng, 42, of Leeds, had an in-patient severe head injury (cycling accident, Feb 2026) with a single seizure in the first 24 hours - Q4 yes, diagnosis 'first-ever', so Q5-01 applies and no epilepsy declaration is required. He first chose 'more than one' in the wizard and answered Q6a 'yes' before correcting the diagnosis, so multiple.twoOrMoreWithinFiveYears is a stale 'yes'. Last seen by consultant (neurosurgery), levetiracetam recorded with makesDrowsyOrConfused 'no', double vision controlled by 'other' but the description is blank, needs an automatic (Q12 yes, not previously declared), authorisation accepted with e-correspondence consent 'no' so AUTH-05/06 do not apply. GP dateLastSeen left blank. Hand-derived: applicable rules = PD 6 + HC 4 + Q1-01/Q1-03 + Q2-01/Q2-03 + Q3-01 + Q4-01/Q4-02/Q5-01 + Q7-01/Q7a-01 + Q8-01 + Q9-01 + Q10-01/Q10a-01/Q10b-01/Q10b-02 + Q11-01 + Q12-01/Q12a-01 + AUTH-01..04 = 33; missing HC-04 and Q10b-02 (in that order), totalSatisfied 31, complete false. flaggedIssues: FLAG-SEIZ-003 (high - fires from the stale Q6a 'yes' because the predicate ignores diagnosis) then FLAG-VEH-001 (low); no FLAG-SEIZ-001/002 because those do check the diagnosis.",
+      "state": {
+        "personalDetails": {
+          "title": "Mr",
+          "fullName": "Kwame Osei Boateng",
+          "dateOfBirth": "1984-03-27",
+          "addressLine1": "7 Hyde Park Terrace",
+          "addressLine2": "Headingley",
+          "addressLine3": "Leeds",
+          "postcode": "LS6 1BJ",
+          "email": "kwame.boateng@example.com",
+          "contactNumber": "07700 900456",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "gpName": "Dr Sarah Ogunleye",
+            "surgeryName": "Hyde Park Surgery",
+            "addressLine1": "2 Woodsley Road",
+            "addressLine2": "",
+            "town": "Leeds",
+            "postcode": "LS6 1SG",
+            "contactNumber": "0113 295 1234",
+            "email": "",
+            "dateLastSeen": ""
+          },
+          "consultant": {
+            "consultantName": "Mr Rajiv Menon",
+            "speciality": "Neurosurgery",
+            "department": "Department of Neurosurgery",
+            "hospitalName": "Leeds General Infirmary",
+            "addressLine1": "Great George Street",
+            "addressLine2": "",
+            "town": "Leeds",
+            "postcode": "LS1 3EX",
+            "contactNumber": "0113 243 2799",
+            "email": "neurosurgery.secretaries@example.nhs.uk",
+            "dateLastSeen": "2026-07-20"
+          }
+        },
+        "conditionHistory": {
+          "brainHaemorrhage": false,
+          "brainHaemorrhageDate": "",
+          "brainHaemorrhageDetails": "",
+          "severeHeadInjury": true,
+          "severeHeadInjuryDate": "2026-02-11",
+          "severeHeadInjuryDetails": "Cycling collision; frontal contusion; admitted to neurosurgical ward for six days",
+          "otherCondition": false,
+          "otherConditionDate": "",
+          "otherConditionDetails": "",
+          "brainSurgeryDate": "",
+          "brainSurgeryNotApplicable": true
+        },
+        "treatmentProvider": {
+          "lastSeen": "consultant",
+          "gpLastContactDate": "",
+          "gpNextContactDate": "",
+          "consultantLastContactDate": "2026-07-20",
+          "consultantNextContactDate": "2027-01-20"
+        },
+        "blackouts": {
+          "hadBlackouts": "no",
+          "blackoutDate": ""
+        },
+        "seizures": {
+          "hadSeizures": "yes",
+          "diagnosis": "first-ever",
+          "firstEver": {
+            "date": "2026-02-12",
+            "details": "One generalised seizure on the ward within 24 hours of the head injury; none since"
+          },
+          "multiple": {
+            "twoOrMoreWithinFiveYears": "yes",
+            "firstAwakeSeizureDate": "",
+            "firstAsleepSeizureDate": "",
+            "lastTwoAwakeSeizureDate1": "",
+            "lastTwoAwakeSeizureDate2": "",
+            "lastTwoAsleepSeizureDate1": "",
+            "lastTwoAsleepSeizureDate2": "",
+            "firstSleepAttackAfterLastAwakeAttackDate": "",
+            "affectedConsciousness": "",
+            "wouldHaveAffectedDriving": "",
+            "attackDescription": "",
+            "resultOfMedicationAdvice": "",
+            "dateMedicationStartedToReduce": "",
+            "previousMedicationRestarted": "",
+            "datePreviousMedicationRestarted": "",
+            "dateOfLastSeizurePriorToWithdrawal": "",
+            "provokedSeizureDetails": ""
+          },
+          "epilepsyDeclaration": {
+            "declarationAccepted": false,
+            "signedName": "",
+            "signatureDate": ""
+          }
+        },
+        "medication": {
+          "noMedicationTaken": false,
+          "entries": [
+            {
+              "name": "Levetiracetam 500 mg twice daily",
+              "startDate": "2026-02-13",
+              "endDate": ""
+            }
+          ],
+          "makesDrowsyOrConfused": "no"
+        },
+        "vpShunt": {
+          "hadVpShuntOrDrain": "no",
+          "procedureDate": ""
+        },
+        "dailyLiving": {
+          "needsHelp": "no",
+          "helpDetails": ""
+        },
+        "doubleVision": {
+          "hasDoubleVision": "yes",
+          "suppressedOrControlled": "yes",
+          "correctionMethod": "other",
+          "correctionMethodOther": ""
+        },
+        "eyesight": {
+          "hasEyesightProblems": "no",
+          "details": ""
+        },
+        "vehicleAdaptations": {
+          "needsAdaptations": "yes",
+          "previouslyDeclared": "no",
+          "additionalControlsFitted": ""
+        },
+        "authorisation": {
+          "declarationAccepted": true,
+          "name": "Kwame Osei Boateng",
+          "signatureDate": "2026-09-01",
+          "electronicCorrespondenceConsent": "no",
+          "dvlaContactPreference": "",
+          "healthcareContactPreference": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 33,
+        "totalSatisfied": 31,
+        "sections": [
+          {
+            "section": "personalDetails",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "healthcareProfessionals",
+            "required": 4,
+            "satisfied": 3,
+            "missing": [
+              {
+                "id": "HC-04",
+                "section": "healthcareProfessionals",
+                "description": "GP date last seen for this condition is required."
+              }
+            ]
+          },
+          {
+            "section": "conditionHistory",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "treatmentProvider",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "blackouts",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "seizures",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "medication",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "vpShunt",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "dailyLiving",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "doubleVision",
+            "required": 4,
+            "satisfied": 3,
+            "missing": [
+              {
+                "id": "Q10b-02",
+                "section": "doubleVision",
+                "description": "Q10b: please describe the correction method when \"Other\" is selected."
+              }
+            ]
+          },
+          {
+            "section": "eyesight",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "vehicleAdaptations",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "authorisation",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "HC-04",
+            "section": "healthcareProfessionals",
+            "description": "GP date last seen for this condition is required."
+          },
+          {
+            "id": "Q10b-02",
+            "section": "doubleVision",
+            "description": "Q10b: please describe the correction method when \"Other\" is selected."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-SEIZ-003",
+            "category": "Seizures",
+            "message": "Two or more seizures within a 5-year period reported.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VEH-001",
+            "category": "Vehicle Adaptations",
+            "message": "Patient requires special controls or automatic transmission.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Epilepsy after SAH with VP shunt - declaration unsigned, authorisation refused",
+      "description": "Angela Ferreira-Doyle, 63, of Glasgow: subarachnoid haemorrhage (aneurysm coiled then craniotomy, Sept 2025) complicated by hydrocephalus needing a VP shunt, now with epilepsy - two or more seizures within five years, affecting consciousness and (she reports) vehicle control, last seizure not from medication advice. Blackouts yes, sodium valproate makes her drowsy, uncontrolled double vision, field loss, needs daily-living help, hand controls previously declared with new controls fitted. She has NOT signed the epilepsy declaration and has NOT accepted the authorisation (name and date entered anyway); e-correspondence consent 'yes' with SMS preferences. Hand-derived: applicable rules = PD 6 + HC 4 + Q1-01/02/04 + Q2-01/Q2-03 + Q3-01/Q3-02 + Q4-01/Q4-02/Q6a/Q6g/Q6h/Q6i/Q6-EPI-01..03 (9) + Q7-01/Q7a-01 + Q8-01/Q8-02 + Q9-01/Q9-02 + Q10-01/Q10a-01 (Q10b gated off by suppressedOrControlled 'no') + Q11-01/Q11-02 + Q12-01/Q12a/Q12b + AUTH-01..06 = 45; missing Q6-EPI-01, Q6-EPI-02, Q6-EPI-03, AUTH-01 (rule order), totalSatisfied 41, complete false. All twelve flags fire, stable-sorted: FLAG-EPI-001, FLAG-AUTH-001 (urgent); FLAG-MED-001, FLAG-SEIZ-001, FLAG-SEIZ-002, FLAG-SEIZ-003, FLAG-DIPL-001 (high); FLAG-EYE-001, FLAG-BLK-001, FLAG-VPS-001, FLAG-DL-001 (medium); FLAG-VEH-001 (low).",
+      "state": {
+        "personalDetails": {
+          "title": "Ms",
+          "fullName": "Angela Ferreira-Doyle",
+          "dateOfBirth": "1963-08-17",
+          "addressLine1": "Flat 2/1, 48 Byres Road",
+          "addressLine2": "Hillhead",
+          "addressLine3": "Glasgow",
+          "postcode": "G11 5JY",
+          "email": "a.ferreira.doyle@example.com",
+          "contactNumber": "07700 900789",
+          "changeOfDetails": "Moved from 12 Dumbarton Road, G11 6PP, in April 2026"
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "gpName": "Dr Fiona Cameron",
+            "surgeryName": "Hillhead Health Centre",
+            "addressLine1": "1 Otago Street",
+            "addressLine2": "",
+            "town": "Glasgow",
+            "postcode": "G12 8NT",
+            "contactNumber": "0141 339 1234",
+            "email": "",
+            "dateLastSeen": "2026-08-20"
+          },
+          "consultant": {
+            "consultantName": "Dr Iain MacGregor",
+            "speciality": "Neurology",
+            "department": "Epilepsy Clinic",
+            "hospitalName": "Queen Elizabeth University Hospital",
+            "addressLine1": "1345 Govan Road",
+            "addressLine2": "",
+            "town": "Glasgow",
+            "postcode": "G51 4TF",
+            "contactNumber": "0141 201 1100",
+            "email": "epilepsy.clinic@example.nhs.uk",
+            "dateLastSeen": "2026-08-05"
+          }
+        },
+        "conditionHistory": {
+          "brainHaemorrhage": true,
+          "brainHaemorrhageDate": "2025-09-03",
+          "brainHaemorrhageDetails": "Subarachnoid haemorrhage from a ruptured anterior communicating artery aneurysm",
+          "severeHeadInjury": false,
+          "severeHeadInjuryDate": "",
+          "severeHeadInjuryDetails": "",
+          "otherCondition": true,
+          "otherConditionDate": "2025-09-20",
+          "otherConditionDetails": "Post-haemorrhagic hydrocephalus; epilepsy diagnosed January 2026",
+          "brainSurgeryDate": "2025-09-05",
+          "brainSurgeryNotApplicable": false
+        },
+        "treatmentProvider": {
+          "lastSeen": "consultant",
+          "gpLastContactDate": "2026-08-20",
+          "gpNextContactDate": "",
+          "consultantLastContactDate": "2026-08-05",
+          "consultantNextContactDate": "2026-11-04"
+        },
+        "blackouts": {
+          "hadBlackouts": "yes",
+          "blackoutDate": "2026-07-29"
+        },
+        "seizures": {
+          "hadSeizures": "yes",
+          "diagnosis": "more-than-one-or-epilepsy",
+          "firstEver": {
+            "date": "",
+            "details": ""
+          },
+          "multiple": {
+            "twoOrMoreWithinFiveYears": "yes",
+            "firstAwakeSeizureDate": "2026-01-09",
+            "firstAsleepSeizureDate": "2026-03-22",
+            "lastTwoAwakeSeizureDate1": "2026-06-15",
+            "lastTwoAwakeSeizureDate2": "2026-07-29",
+            "lastTwoAsleepSeizureDate1": "2026-03-22",
+            "lastTwoAsleepSeizureDate2": "2026-05-02",
+            "firstSleepAttackAfterLastAwakeAttackDate": "",
+            "affectedConsciousness": "yes",
+            "wouldHaveAffectedDriving": "yes",
+            "attackDescription": "Loss of awareness for one to two minutes with generalised shaking; confused for about half an hour afterwards",
+            "resultOfMedicationAdvice": "no",
+            "dateMedicationStartedToReduce": "",
+            "previousMedicationRestarted": "",
+            "datePreviousMedicationRestarted": "",
+            "dateOfLastSeizurePriorToWithdrawal": "",
+            "provokedSeizureDetails": ""
+          },
+          "epilepsyDeclaration": {
+            "declarationAccepted": false,
+            "signedName": "",
+            "signatureDate": ""
+          }
+        },
+        "medication": {
+          "noMedicationTaken": false,
+          "entries": [
+            {
+              "name": "Sodium valproate 800 mg twice daily",
+              "startDate": "2026-01-16",
+              "endDate": ""
+            },
+            {
+              "name": "Nimodipine 60 mg four-hourly",
+              "startDate": "2025-09-03",
+              "endDate": "2025-09-24"
+            }
+          ],
+          "makesDrowsyOrConfused": "yes"
+        },
+        "vpShunt": {
+          "hadVpShuntOrDrain": "yes",
+          "procedureDate": "2025-09-26"
+        },
+        "dailyLiving": {
+          "needsHelp": "yes",
+          "helpDetails": "Daughter helps with shopping, medication and bathing three days a week"
+        },
+        "doubleVision": {
+          "hasDoubleVision": "yes",
+          "suppressedOrControlled": "no",
+          "correctionMethod": "",
+          "correctionMethodOther": ""
+        },
+        "eyesight": {
+          "hasEyesightProblems": "yes",
+          "details": "Left homonymous visual field loss on formal perimetry, March 2026"
+        },
+        "vehicleAdaptations": {
+          "needsAdaptations": "yes",
+          "previouslyDeclared": "yes",
+          "additionalControlsFitted": "yes"
+        },
+        "authorisation": {
+          "declarationAccepted": false,
+          "name": "Angela Ferreira-Doyle",
+          "signatureDate": "2026-09-02",
+          "electronicCorrespondenceConsent": "yes",
+          "dvlaContactPreference": "sms",
+          "healthcareContactPreference": "sms"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 45,
+        "totalSatisfied": 41,
+        "sections": [
+          {
+            "section": "personalDetails",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "healthcareProfessionals",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "conditionHistory",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "treatmentProvider",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "blackouts",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "seizures",
+            "required": 9,
+            "satisfied": 6,
+            "missing": [
+              {
+                "id": "Q6-EPI-01",
+                "section": "seizures",
+                "description": "Epilepsy declaration must be accepted."
+              },
+              {
+                "id": "Q6-EPI-02",
+                "section": "seizures",
+                "description": "Epilepsy declaration: signed name is required."
+              },
+              {
+                "id": "Q6-EPI-03",
+                "section": "seizures",
+                "description": "Epilepsy declaration: signature date is required."
+              }
+            ]
+          },
+          {
+            "section": "medication",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "vpShunt",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "dailyLiving",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "doubleVision",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "eyesight",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "vehicleAdaptations",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "authorisation",
+            "required": 6,
+            "satisfied": 5,
+            "missing": [
+              {
+                "id": "AUTH-01",
+                "section": "authorisation",
+                "description": "Authorisation declaration must be accepted."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "Q6-EPI-01",
+            "section": "seizures",
+            "description": "Epilepsy declaration must be accepted."
+          },
+          {
+            "id": "Q6-EPI-02",
+            "section": "seizures",
+            "description": "Epilepsy declaration: signed name is required."
+          },
+          {
+            "id": "Q6-EPI-03",
+            "section": "seizures",
+            "description": "Epilepsy declaration: signature date is required."
+          },
+          {
+            "id": "AUTH-01",
+            "section": "authorisation",
+            "description": "Authorisation declaration must be accepted."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-EPI-001",
+            "category": "Epilepsy Declaration",
+            "message": "Epilepsy declaration is required (epilepsy or more than one seizure declared) but is not fully signed.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AUTH-001",
+            "category": "Authorisation",
+            "message": "Applicant has not accepted the medical disclosure authorisation - DVLA cannot process the form without it.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medication",
+            "message": "Patient reports current medication causes drowsiness or confusion when driving.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SEIZ-001",
+            "category": "Seizures",
+            "message": "Seizures have affected level of consciousness.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SEIZ-002",
+            "category": "Seizures",
+            "message": "Seizures would have caused difficulty controlling a vehicle.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SEIZ-003",
+            "category": "Seizures",
+            "message": "Two or more seizures within a 5-year period reported.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DIPL-001",
+            "category": "Double Vision",
+            "message": "Double vision (diplopia) reported and not suppressed or controlled.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-EYE-001",
+            "category": "Eyesight",
+            "message": "Eyesight problems caused by the condition reported.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BLK-001",
+            "category": "Blackouts",
+            "message": "History of blackouts or altered consciousness reported.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VPS-001",
+            "category": "VP Shunt",
+            "message": "VP shunt or external ventricular drain reported.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DL-001",
+            "category": "Daily Living",
+            "message": "Patient needs help from another person with day-to-day living.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VEH-001",
+            "category": "Vehicle Adaptations",
+            "message": "Patient requires special controls or automatic transmission.",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

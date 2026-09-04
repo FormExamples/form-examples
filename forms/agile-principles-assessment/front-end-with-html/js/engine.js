@@ -1,5 +1,36 @@
 import { PRINCIPLES } from './principles.js';
 
+  /**
+   * Build a fresh, fully-blank assessment in the shape the wizard holds and
+   * the grader consumes: respondent block, one `{ score: null, comment: '',
+   * weight: 1.0 }` response per principle, and the action plan. This is the
+   * engine's default-state factory — `calculateMaturity(emptyAssessment())`
+   * is the all-unanswered baseline (maturity 'insufficient-data').
+   */
+  function emptyAssessment() {
+    return {
+      respondent: {
+        isAnonymous: false,
+        fullName: '',
+        email: '',
+        role: '',
+        yearsInAgile: '',
+        teamName: '',
+        organisationName: '',
+        assessmentDate: '',
+        assessmentPeriod: '',
+      },
+      responses: PRINCIPLES.map(function () { return { score: null, comment: '', weight: 1.0 }; }),
+      actionPlan: {
+        topAction1: '',
+        topAction2: '',
+        topAction3: '',
+        coachNotes: '',
+        overallNotes: '',
+      },
+    };
+  }
+
   
   
 
@@ -271,4 +302,4 @@ import { PRINCIPLES } from './principles.js';
   
   
 
-export { bandFor, deriveMaturity, calculateMaturity };
+export { emptyAssessment, bandFor, deriveMaturity, calculateMaturity };

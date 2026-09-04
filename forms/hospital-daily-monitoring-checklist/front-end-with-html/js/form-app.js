@@ -1,4 +1,5 @@
 import { emptyAssessment } from './types.js';
+import { summariseChecklist } from './summary.js';
 import { CHECKLIST_ITEMS, SECTIONS } from './items.js';
 
 // Hospital Daily Monitoring Checklist — single-page wizard (vanilla JS,
@@ -547,39 +548,11 @@ function updateSectionSummaries() {
 // scored grader)
 // ----------------------------------------------------------------------
 
-function summariseChecklist() {
-  let answeredCount = 0;
-  let needsAttentionCount = 0;
-  const needsAttentionItems = [];
-  const sectionsSeen = new Set();
-
-  CHECKLIST_ITEMS.forEach(function (item) {
-    const resp = state.items[item.id];
-    if (isAnswered(resp.status)) answeredCount += 1;
-    if (resp.status === 'needs-attention') {
-      needsAttentionCount += 1;
-      sectionsSeen.add(item.section);
-      needsAttentionItems.push({
-        id: item.id,
-        sectionTitle: item.sectionTitle,
-        text: item.text,
-        remarks: resp.remarks || '',
-      });
-    }
-  });
-
-  return {
-    answeredCount: answeredCount,
-    needsAttentionCount: needsAttentionCount,
-    needsAttentionItems: needsAttentionItems,
-    sectionsWithNeedsAttention: Array.from(sectionsSeen).sort(function (a, b) { return a - b; }),
-  };
-}
 
 function updateNeedsAttentionPreview() {
   const el = document.getElementById('needs-attention-preview');
   if (!el) return;
-  const result = summariseChecklist();
+  const result = summariseChecklist(state);
   if (result.needsAttentionCount === 0) {
     el.innerHTML = '<p class="empty-message">No checkpoints marked "needs attention" yet.</p>';
     return;
@@ -717,7 +690,7 @@ function downloadCsv(filename, csv) {
 // ----------------------------------------------------------------------
 
 function renderReport() {
-  const result = summariseChecklist();
+  const result = summariseChecklist(state);
   const reportEl = document.getElementById('report');
   if (!reportEl) return;
 

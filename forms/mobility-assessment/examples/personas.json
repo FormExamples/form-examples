@@ -1,0 +1,682 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateTinetti",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateTinetti(data) returns { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules } — no flags — so this is a SPLIT engine: the oracle pins detectAdditionalFlags(state) as expected.additionalFlags with flagsArgs [\"state\"], mirroring form-app.js's `detectAdditionalFlags(state)` (form-app.js renames tinettiCategoryLabel to tinettiCategory for display; the oracle stores the grader's own key). Scoring: 9 balance items (max 16) + 8 gait items whose catalogue maxScores sum to only 10 (1+1+1+1+1+2+2+1), not the 12 the header comment and the FLAG-GAIT-001 '/12' message claim — so a perfect form scores 26/28 and totals 27-28 are unreachable (BUG: the published POMA gait scores step length and step height separately for each foot; this port has one item each); null items contribute 0; firedRules lists only items scored > 0 (a 0 or null item is simply absent), in balance-then-gait catalogue order (BAL-01..09, GAIT-01..08). Category: >= 25 'Low fall risk', >= 19 'Moderate fall risk', else 'High fall risk' — a blank form therefore scores 0 = High fall risk and fires FLAG-FALLRISK-001 + FLAG-DEVICE-001 (QUIRK). Flags verified: FLAG-FALLRISK-001 total <= 18; FLAG-RECURRENT-001 fallsLastYear >= 2; FLAG-TUG-001 timeSeconds > 14 (14.0 exactly does NOT fire); FLAG-BALANCE-001 balance <= 10 with at least one balance item answered; FLAG-GAIT-001 gait <= 8 likewise; FLAG-POLYPHARM-001 medications.length >= 5; FLAG-SEDATING-001 fires for ANY non-empty fallRiskMedications list — the sedating-class keyword test (`hasSedating || length > 0`) is a dead predicate (QUIRK); FLAG-FEAR-001 fearOfFalling === 'severe'; FLAG-INJURY-001 fires on ANY non-empty injuriesFromFalls text, so an explicit negative like 'None' fires it (QUIRK); FLAG-ROM-001 any 'severely-limited' ROM field; FLAG-DEVICE-001 total <= 18 AND currentDevices empty; FLAG-DEVICEFIT-001 deviceFitAdequate === 'no'. Flags are stable-sorted high > medium > low in insertion order. Regenerate expected with: bin/test-personas mobility-assessment --update",
+  "personas": [
+    {
+      "name": "Low fall risk - full marks after hip replacement rehab",
+      "description": "72-year-old woman six months post left total hip replacement, discharged from physiotherapy: every Tinetti item at its catalogue maximum (balance 16; gait only reaches 10 in this port because step length and step height are single 0-1 items, so the engine's ceiling is 26 not 28), TUG 8.5 s, no falls in the last year, two medications, no fall-risk medications, no fear of falling, ROM normal throughout, no assistive device. Expect tinettiTotal 26, balanceScore 16, gaitScore 10, tinettiCategoryLabel 'Low fall risk', all 17 items in firedRules (BAL-01..BAL-09 then GAIT-01..GAIT-08), and an empty additionalFlags array.",
+      "state": {
+        "demographics": {
+          "firstName": "Eleanor",
+          "lastName": "Hargreaves",
+          "dateOfBirth": "1954-06-18",
+          "sex": "female",
+          "height": "163 cm",
+          "weight": "64 kg"
+        },
+        "referralInfo": {
+          "referringProvider": "Mr D. Achebe, Orthopaedics",
+          "referralReason": "Discharge mobility assessment post THR",
+          "referralDate": "2026-08-20",
+          "primaryDiagnosis": "Left total hip replacement (March 2026)",
+          "secondaryDiagnoses": "Hypertension"
+        },
+        "fallHistory": {
+          "fallsLastYear": 0,
+          "lastFallDate": "",
+          "fallCircumstances": "",
+          "injuriesFromFalls": "",
+          "fearOfFalling": "none",
+          "fallRiskFactors": []
+        },
+        "balanceAssessment": {
+          "sittingBalance": 1,
+          "risesFromChair": 2,
+          "attemptingToRise": 2,
+          "immediateStandingBalance": 2,
+          "standingBalance": 2,
+          "nudgedBalance": 2,
+          "eyesClosed": 1,
+          "turning360": 2,
+          "sittingDown": 2
+        },
+        "gaitAssessment": {
+          "initiationOfGait": 1,
+          "stepLength": 1,
+          "stepHeight": 1,
+          "stepSymmetry": 1,
+          "stepContinuity": 1,
+          "path": 2,
+          "trunk": 2,
+          "walkingStance": 1
+        },
+        "timedUpAndGo": {
+          "timeSeconds": 8.5,
+          "usedAssistiveDevice": "no",
+          "deviceType": ""
+        },
+        "rangeOfMotion": {
+          "hipFlexion": "normal",
+          "hipExtension": "normal",
+          "kneeFlexion": "normal",
+          "kneeExtension": "normal",
+          "ankleFlexion": "normal",
+          "ankleExtension": "normal",
+          "notes": "Full functional range on the operated side."
+        },
+        "assistiveDevices": {
+          "currentDevices": [],
+          "deviceFitAdequate": "",
+          "deviceCondition": "",
+          "recommendedDevices": ""
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Amlodipine",
+              "dose": "5 mg",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Paracetamol",
+              "dose": "1 g",
+              "frequency": "as required"
+            }
+          ],
+          "fallRiskMedications": [],
+          "recentMedicationChanges": ""
+        },
+        "functionalIndependence": {
+          "transfers": "independent",
+          "ambulation": "independent",
+          "stairs": "independent",
+          "bathing": "independent",
+          "dressing": "independent",
+          "additionalNotes": "Discharged to home exercise programme."
+        }
+      },
+      "expected": {
+        "tinettiTotal": 26,
+        "balanceScore": 16,
+        "gaitScore": 10,
+        "tinettiCategoryLabel": "Low fall risk",
+        "firedRules": [
+          {
+            "id": "BAL-01",
+            "domain": "Balance",
+            "description": "Sitting balance (0 = leans or slides, 1 = steady/safe)",
+            "score": 1
+          },
+          {
+            "id": "BAL-02",
+            "domain": "Balance",
+            "description": "Rises from chair (0 = unable without help, 1 = able using arms, 2 = able without arms)",
+            "score": 2
+          },
+          {
+            "id": "BAL-03",
+            "domain": "Balance",
+            "description": "Attempting to rise (0 = unable without help, 1 = able but requires >1 attempt, 2 = able on first attempt)",
+            "score": 2
+          },
+          {
+            "id": "BAL-04",
+            "domain": "Balance",
+            "description": "Immediate standing balance (first 5 seconds) (0 = unsteady, 1 = steady with walker/cane, 2 = steady without aid)",
+            "score": 2
+          },
+          {
+            "id": "BAL-05",
+            "domain": "Balance",
+            "description": "Standing balance (0 = unsteady, 1 = steady with wide stance or uses support, 2 = narrow stance without support)",
+            "score": 2
+          },
+          {
+            "id": "BAL-06",
+            "domain": "Balance",
+            "description": "Nudged (eyes open, feet together, examiner pushes on sternum x3) (0 = begins to fall, 1 = staggers/grabs, 2 = steady)",
+            "score": 2
+          },
+          {
+            "id": "BAL-07",
+            "domain": "Balance",
+            "description": "Eyes closed (same position as above) (0 = unsteady, 1 = steady)",
+            "score": 1
+          },
+          {
+            "id": "BAL-08",
+            "domain": "Balance",
+            "description": "Turning 360 degrees (0 = discontinuous steps, 1 = continuous steps) (0 = unsteady, 1 = steady)",
+            "score": 2
+          },
+          {
+            "id": "BAL-09",
+            "domain": "Balance",
+            "description": "Sitting down (0 = unsafe, 1 = uses arms or not smooth, 2 = safe/smooth)",
+            "score": 2
+          },
+          {
+            "id": "GAIT-01",
+            "domain": "Gait",
+            "description": "Initiation of gait (0 = any hesitancy or multiple attempts, 1 = no hesitancy)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-02",
+            "domain": "Gait",
+            "description": "Step length (right foot passes left stance foot) (0 = does not pass, 1 = passes)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-03",
+            "domain": "Gait",
+            "description": "Step height (right foot clears floor) (0 = does not clear, 1 = clears)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-04",
+            "domain": "Gait",
+            "description": "Step symmetry (0 = right and left step lengths unequal, 1 = equal)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-05",
+            "domain": "Gait",
+            "description": "Step continuity (0 = stopping or discontinuity between steps, 1 = continuous)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-06",
+            "domain": "Gait",
+            "description": "Path (observed over 10 feet) (0 = marked deviation, 1 = mild/moderate deviation or uses aid, 2 = straight without aid)",
+            "score": 2
+          },
+          {
+            "id": "GAIT-07",
+            "domain": "Gait",
+            "description": "Trunk (0 = marked sway or uses aid, 1 = no sway but flexion of knees/back or arms spread, 2 = no sway, flexion, or arm spread)",
+            "score": 2
+          },
+          {
+            "id": "GAIT-08",
+            "domain": "Gait",
+            "description": "Walking stance (0 = heels apart, 1 = heels almost touching while walking)",
+            "score": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate fall risk at the 19-point boundary with explicit-negative injury text",
+      "description": "79-year-old man with Parkinson's disease: balance items sum to exactly 10 (nudged balance left unanswered, i.e. null and skipped), gait items sum to 9 (step symmetry scored 0), total 19 — the lowest 'Moderate fall risk' score. TUG exactly 14.0 s (threshold is > 14, so no TUG flag); one fall last year (< 2, no recurrent flag); injuriesFromFalls recorded as the explicit negative 'None'; four medications, no fall-risk medications; fear of falling moderate; hip extension moderately limited; uses a single-point stick with adequate fit. Expect tinettiTotal 19, balanceScore 10, gaitScore 9, 'Moderate fall risk', 15 firedRules (BAL-06 absent because null, GAIT-04 absent because 0), and two medium flags in order: FLAG-BALANCE-001 ('Balance subscore 10/16') and FLAG-INJURY-001 ('Previous injuries from falls: None' — the explicit-negative quirk). No FALLRISK, TUG, GAIT (9 > 8), POLYPHARM, SEDATING, FEAR, ROM, DEVICE or DEVICEFIT flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Norman",
+          "lastName": "Pritchard",
+          "dateOfBirth": "1947-01-30",
+          "sex": "male",
+          "height": "175 cm",
+          "weight": "71 kg"
+        },
+        "referralInfo": {
+          "referringProvider": "Dr S. Iqbal, Care of the Elderly",
+          "referralReason": "Gait review following one fall at home",
+          "referralDate": "2026-08-12",
+          "primaryDiagnosis": "Idiopathic Parkinson's disease (Hoehn and Yahr 2.5)",
+          "secondaryDiagnoses": "Benign prostatic hyperplasia"
+        },
+        "fallHistory": {
+          "fallsLastYear": 1,
+          "lastFallDate": "2026-07-04",
+          "fallCircumstances": "Turned quickly in the kitchen, lost balance, landed on carpet",
+          "injuriesFromFalls": "None",
+          "fearOfFalling": "moderate",
+          "fallRiskFactors": [
+            "neurological condition",
+            "turning difficulty"
+          ]
+        },
+        "balanceAssessment": {
+          "sittingBalance": 1,
+          "risesFromChair": 1,
+          "attemptingToRise": 1,
+          "immediateStandingBalance": 1,
+          "standingBalance": 1,
+          "nudgedBalance": null,
+          "eyesClosed": 1,
+          "turning360": 2,
+          "sittingDown": 2
+        },
+        "gaitAssessment": {
+          "initiationOfGait": 1,
+          "stepLength": 1,
+          "stepHeight": 1,
+          "stepSymmetry": 0,
+          "stepContinuity": 1,
+          "path": 2,
+          "trunk": 2,
+          "walkingStance": 1
+        },
+        "timedUpAndGo": {
+          "timeSeconds": 14,
+          "usedAssistiveDevice": "yes",
+          "deviceType": "single-point stick"
+        },
+        "rangeOfMotion": {
+          "hipFlexion": "mildly-limited",
+          "hipExtension": "moderately-limited",
+          "kneeFlexion": "normal",
+          "kneeExtension": "normal",
+          "ankleFlexion": "mildly-limited",
+          "ankleExtension": "normal",
+          "notes": "Sternal nudge test deferred - patient declined."
+        },
+        "assistiveDevices": {
+          "currentDevices": [
+            "single-point stick"
+          ],
+          "deviceFitAdequate": "yes",
+          "deviceCondition": "Good; ferrule replaced June 2026",
+          "recommendedDevices": ""
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Co-careldopa",
+              "dose": "25/100 mg",
+              "frequency": "three times daily"
+            },
+            {
+              "name": "Rasagiline",
+              "dose": "1 mg",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Tamsulosin",
+              "dose": "400 micrograms",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Atorvastatin",
+              "dose": "20 mg",
+              "frequency": "at night"
+            }
+          ],
+          "fallRiskMedications": [],
+          "recentMedicationChanges": "Co-careldopa increased from twice to three times daily in July 2026."
+        },
+        "functionalIndependence": {
+          "transfers": "modified-independent",
+          "ambulation": "modified-independent",
+          "stairs": "supervision",
+          "bathing": "supervision",
+          "dressing": "modified-independent",
+          "additionalNotes": "Cueing strategies for turning taught."
+        }
+      },
+      "expected": {
+        "tinettiTotal": 19,
+        "balanceScore": 10,
+        "gaitScore": 9,
+        "tinettiCategoryLabel": "Moderate fall risk",
+        "firedRules": [
+          {
+            "id": "BAL-01",
+            "domain": "Balance",
+            "description": "Sitting balance (0 = leans or slides, 1 = steady/safe)",
+            "score": 1
+          },
+          {
+            "id": "BAL-02",
+            "domain": "Balance",
+            "description": "Rises from chair (0 = unable without help, 1 = able using arms, 2 = able without arms)",
+            "score": 1
+          },
+          {
+            "id": "BAL-03",
+            "domain": "Balance",
+            "description": "Attempting to rise (0 = unable without help, 1 = able but requires >1 attempt, 2 = able on first attempt)",
+            "score": 1
+          },
+          {
+            "id": "BAL-04",
+            "domain": "Balance",
+            "description": "Immediate standing balance (first 5 seconds) (0 = unsteady, 1 = steady with walker/cane, 2 = steady without aid)",
+            "score": 1
+          },
+          {
+            "id": "BAL-05",
+            "domain": "Balance",
+            "description": "Standing balance (0 = unsteady, 1 = steady with wide stance or uses support, 2 = narrow stance without support)",
+            "score": 1
+          },
+          {
+            "id": "BAL-07",
+            "domain": "Balance",
+            "description": "Eyes closed (same position as above) (0 = unsteady, 1 = steady)",
+            "score": 1
+          },
+          {
+            "id": "BAL-08",
+            "domain": "Balance",
+            "description": "Turning 360 degrees (0 = discontinuous steps, 1 = continuous steps) (0 = unsteady, 1 = steady)",
+            "score": 2
+          },
+          {
+            "id": "BAL-09",
+            "domain": "Balance",
+            "description": "Sitting down (0 = unsafe, 1 = uses arms or not smooth, 2 = safe/smooth)",
+            "score": 2
+          },
+          {
+            "id": "GAIT-01",
+            "domain": "Gait",
+            "description": "Initiation of gait (0 = any hesitancy or multiple attempts, 1 = no hesitancy)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-02",
+            "domain": "Gait",
+            "description": "Step length (right foot passes left stance foot) (0 = does not pass, 1 = passes)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-03",
+            "domain": "Gait",
+            "description": "Step height (right foot clears floor) (0 = does not clear, 1 = clears)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-05",
+            "domain": "Gait",
+            "description": "Step continuity (0 = stopping or discontinuity between steps, 1 = continuous)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-06",
+            "domain": "Gait",
+            "description": "Path (observed over 10 feet) (0 = marked deviation, 1 = mild/moderate deviation or uses aid, 2 = straight without aid)",
+            "score": 2
+          },
+          {
+            "id": "GAIT-07",
+            "domain": "Gait",
+            "description": "Trunk (0 = marked sway or uses aid, 1 = no sway but flexion of knees/back or arms spread, 2 = no sway, flexion, or arm spread)",
+            "score": 2
+          },
+          {
+            "id": "GAIT-08",
+            "domain": "Gait",
+            "description": "Walking stance (0 = heels apart, 1 = heels almost touching while walking)",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BALANCE-001",
+            "category": "Balance Deficit",
+            "message": "Balance subscore 10/16 indicates significant balance impairment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INJURY-001",
+            "category": "Fall Injuries",
+            "message": "Previous injuries from falls: None",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "High fall risk with recurrent injurious falls and no device",
+      "description": "86-year-old woman with vascular dementia and osteoporosis: balance 4 (sitting, rises, attempting, standing scored 1; the rest 0), gait 3 (step length, path, trunk scored 1; the rest 0), total 7; TUG 32 s; four falls in the last year with a Colles fracture and scalp laceration; seven medications including zopiclone and codeine listed as fall-risk medications; severe fear of falling; hip flexion and ankle extension severely limited; no assistive device in use. Expect tinettiTotal 7, balanceScore 4, gaitScore 3, 'High fall risk', 7 firedRules (BAL-01, BAL-02, BAL-03, BAL-05, GAIT-02, GAIT-06, GAIT-07), and eleven flags: high tier in order FLAG-FALLRISK-001 ('7/28'), FLAG-RECURRENT-001 ('4 falls'), FLAG-TUG-001 ('32s'), FLAG-DEVICE-001; medium tier in order FLAG-BALANCE-001 ('4/16'), FLAG-GAIT-001 ('3/12'), FLAG-POLYPHARM-001 ('7 medications'), FLAG-SEDATING-001 (lists both medicines), FLAG-FEAR-001, FLAG-INJURY-001, FLAG-ROM-001 ('Hip flexion, Ankle extension'). FLAG-DEVICEFIT-001 cannot fire (no device to be ill-fitting).",
+      "state": {
+        "demographics": {
+          "firstName": "Winifred",
+          "lastName": "Doyle",
+          "dateOfBirth": "1940-03-09",
+          "sex": "female",
+          "height": "155 cm",
+          "weight": "49 kg"
+        },
+        "referralInfo": {
+          "referringProvider": "Community Falls Team, Bristol",
+          "referralReason": "Recurrent falls with fracture; care home requesting review",
+          "referralDate": "2026-08-28",
+          "primaryDiagnosis": "Vascular dementia",
+          "secondaryDiagnoses": "Osteoporosis; chronic low back pain; insomnia"
+        },
+        "fallHistory": {
+          "fallsLastYear": 4,
+          "lastFallDate": "2026-08-25",
+          "fallCircumstances": "Night-time falls on the way to the toilet; found on the floor twice",
+          "injuriesFromFalls": "Left Colles fracture (March 2026); scalp laceration requiring glue (August 2026)",
+          "fearOfFalling": "severe",
+          "fallRiskFactors": [
+            "cognitive impairment",
+            "nocturia",
+            "sedative medication",
+            "previous fracture"
+          ]
+        },
+        "balanceAssessment": {
+          "sittingBalance": 1,
+          "risesFromChair": 1,
+          "attemptingToRise": 1,
+          "immediateStandingBalance": 0,
+          "standingBalance": 1,
+          "nudgedBalance": 0,
+          "eyesClosed": 0,
+          "turning360": 0,
+          "sittingDown": 0
+        },
+        "gaitAssessment": {
+          "initiationOfGait": 0,
+          "stepLength": 1,
+          "stepHeight": 0,
+          "stepSymmetry": 0,
+          "stepContinuity": 0,
+          "path": 1,
+          "trunk": 1,
+          "walkingStance": 0
+        },
+        "timedUpAndGo": {
+          "timeSeconds": 32,
+          "usedAssistiveDevice": "no",
+          "deviceType": ""
+        },
+        "rangeOfMotion": {
+          "hipFlexion": "severely-limited",
+          "hipExtension": "moderately-limited",
+          "kneeFlexion": "moderately-limited",
+          "kneeExtension": "mildly-limited",
+          "ankleFlexion": "moderately-limited",
+          "ankleExtension": "severely-limited",
+          "notes": "Fixed kyphosis; furniture-walks in her room."
+        },
+        "assistiveDevices": {
+          "currentDevices": [],
+          "deviceFitAdequate": "",
+          "deviceCondition": "",
+          "recommendedDevices": "Wheeled Zimmer frame; bed sensor mat; commode at bedside"
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Zopiclone",
+              "dose": "7.5 mg",
+              "frequency": "at night"
+            },
+            {
+              "name": "Codeine phosphate",
+              "dose": "30 mg",
+              "frequency": "four times daily"
+            },
+            {
+              "name": "Paracetamol",
+              "dose": "1 g",
+              "frequency": "four times daily"
+            },
+            {
+              "name": "Alendronic acid",
+              "dose": "70 mg",
+              "frequency": "weekly"
+            },
+            {
+              "name": "Calcium/vitamin D",
+              "dose": "1 tablet",
+              "frequency": "twice daily"
+            },
+            {
+              "name": "Donepezil",
+              "dose": "10 mg",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Bendroflumethiazide",
+              "dose": "2.5 mg",
+              "frequency": "once daily"
+            }
+          ],
+          "fallRiskMedications": [
+            "Zopiclone (hypnotic)",
+            "Codeine (opioid)"
+          ],
+          "recentMedicationChanges": "Codeine started after the wrist fracture and never reviewed."
+        },
+        "functionalIndependence": {
+          "transfers": "minimal-assist",
+          "ambulation": "moderate-assist",
+          "stairs": "dependent",
+          "bathing": "maximal-assist",
+          "dressing": "moderate-assist",
+          "additionalNotes": "Urgent GP medication review requested; falls-prevention care plan to be updated."
+        }
+      },
+      "expected": {
+        "tinettiTotal": 7,
+        "balanceScore": 4,
+        "gaitScore": 3,
+        "tinettiCategoryLabel": "High fall risk",
+        "firedRules": [
+          {
+            "id": "BAL-01",
+            "domain": "Balance",
+            "description": "Sitting balance (0 = leans or slides, 1 = steady/safe)",
+            "score": 1
+          },
+          {
+            "id": "BAL-02",
+            "domain": "Balance",
+            "description": "Rises from chair (0 = unable without help, 1 = able using arms, 2 = able without arms)",
+            "score": 1
+          },
+          {
+            "id": "BAL-03",
+            "domain": "Balance",
+            "description": "Attempting to rise (0 = unable without help, 1 = able but requires >1 attempt, 2 = able on first attempt)",
+            "score": 1
+          },
+          {
+            "id": "BAL-05",
+            "domain": "Balance",
+            "description": "Standing balance (0 = unsteady, 1 = steady with wide stance or uses support, 2 = narrow stance without support)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-02",
+            "domain": "Gait",
+            "description": "Step length (right foot passes left stance foot) (0 = does not pass, 1 = passes)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-06",
+            "domain": "Gait",
+            "description": "Path (observed over 10 feet) (0 = marked deviation, 1 = mild/moderate deviation or uses aid, 2 = straight without aid)",
+            "score": 1
+          },
+          {
+            "id": "GAIT-07",
+            "domain": "Gait",
+            "description": "Trunk (0 = marked sway or uses aid, 1 = no sway but flexion of knees/back or arms spread, 2 = no sway, flexion, or arm spread)",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-FALLRISK-001",
+            "category": "Fall Risk",
+            "message": "Tinetti score 7/28 indicates high fall risk - implement fall prevention protocol",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RECURRENT-001",
+            "category": "Recurrent Falls",
+            "message": "4 falls in the last year - multifactorial fall risk assessment recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TUG-001",
+            "category": "TUG Abnormal",
+            "message": "TUG time 32s exceeds 14s threshold - increased fall risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DEVICE-001",
+            "category": "Assistive Device",
+            "message": "High fall risk but no assistive device in use - consider prescribing appropriate device",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BALANCE-001",
+            "category": "Balance Deficit",
+            "message": "Balance subscore 4/16 indicates significant balance impairment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-GAIT-001",
+            "category": "Gait Abnormality",
+            "message": "Gait subscore 3/12 indicates gait abnormalities",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-POLYPHARM-001",
+            "category": "Polypharmacy",
+            "message": "7 medications - polypharmacy increases fall risk, consider medication review",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SEDATING-001",
+            "category": "Sedating Medications",
+            "message": "Fall-risk medications identified: Zopiclone (hypnotic), Codeine (opioid) - review necessity and consider alternatives",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FEAR-001",
+            "category": "Fear of Falling",
+            "message": "Severe fear of falling reported - may lead to activity restriction and deconditioning",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INJURY-001",
+            "category": "Fall Injuries",
+            "message": "Previous injuries from falls: Left Colles fracture (March 2026); scalp laceration requiring glue (August 2026)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ROM-001",
+            "category": "Range of Motion",
+            "message": "Severely limited ROM: Hip flexion, Ankle extension",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { emptyAssessment } from './types.js';
+import { summariseMetrics } from './summary.js';
 import { DASHBOARD_METRICS, CATEGORIES } from './metrics.js';
 
 // Hospital Dashboard Metrics — single-page wizard (vanilla JS, Lily-classes
@@ -487,31 +488,11 @@ function updateSectionSummaries() {
 // scored grader)
 // ----------------------------------------------------------------------
 
-function summariseMetrics() {
-  let recordedCount = 0;
-  const categoryCounts = {};
-  CATEGORIES.forEach(function (c) {
-    categoryCounts[c.number] = { recorded: 0, total: 0, title: c.title };
-  });
-
-  DASHBOARD_METRICS.forEach(function (item) {
-    categoryCounts[item.category].total += 1;
-    if (isAnswered(state.items[item.id].value)) {
-      categoryCounts[item.category].recorded += 1;
-      recordedCount += 1;
-    }
-  });
-
-  return {
-    recordedCount: recordedCount,
-    categoryCounts: categoryCounts,
-  };
-}
 
 function updateRecordedPreview() {
   const el = document.getElementById('recorded-preview');
   if (!el) return;
-  const result = summariseMetrics();
+  const result = summariseMetrics(state);
   const rowsHtml = CATEGORIES.map(function (c) {
     const counts = result.categoryCounts[c.number];
     return '<li><strong>' + counts.recorded + ' / ' + counts.total + '</strong> — ' + esc(c.title) + '</li>';
@@ -634,7 +615,7 @@ function downloadCsv(filename, csv) {
 // ----------------------------------------------------------------------
 
 function renderReport() {
-  const result = summariseMetrics();
+  const result = summariseMetrics(state);
   const reportEl = document.getElementById('report');
   if (!reportEl) return;
 

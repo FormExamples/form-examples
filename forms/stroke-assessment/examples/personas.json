@@ -1,0 +1,554 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateNIHSS",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Split engine. calculateNIHSS(state) returns { nihssScore, nihssCategoryLabel, firedRules } - the 15 NIHSS items are summed in nihssItems[] order; an item left null is silently EXCLUDED from both the total and firedRules (an untested item never lowers the category), and only items scoring > 0 appear in firedRules, so the rule count is 'items with a non-zero score', not 'items answered'. Category bands: 0 none / 1-4 minor / 5-15 moderate / 16-20 moderate-to-severe / 21-42 severe (nihssCategory in types.js). Flags are a SEPARATE export, mirrored exactly from form-app.js submitForm(): detectAdditionalFlags(state) - one argument, no grade - so flagsArgs is [\"state\"]; the detector recomputes the NIHSS total itself. Quirks verified: FLAG-SEVERE-001 fires at nihssScore > 15 (so a 15 is still 'Moderate stroke' with no severe flag); FLAG-THROMBOLYSIS-001 fires at hoursElapsed <= 4.5 inclusive, measured from the frozen clock 2026-09-03T12:00:00Z via hoursFromOnset (onsetTime is given with an explicit Z so the result does not depend on the host timezone; a future onset returns null and never flags); the bilateral-motor predicate uses ?? 0 so a null limb counts as 0; FLAG-ALLERGY-ANAPH-<i> is indexed by array position (id gaps are possible when only a later allergy is anaphylaxis) and a generic FLAG-ALLERGY-001 always accompanies any allergy list; flags are stable-sorted urgent > high > medium > low, preserving push order within a band. The grader result carries no timestamp; form-app.js adds one at render time only. Regenerate expected with: bin/test-personas stroke-assessment --update",
+  "personas": [
+    {
+      "name": "Resolved TIA - no residual deficit, out of window",
+      "description": "Margaret Hollis, 68, walked in the day after a 20-minute episode of right-hand clumsiness that fully resolved. Symptoms recorded as 'improving', onset 2026-09-02T15:00Z (21 hours before the frozen clock, outside the 4.5-hour window). Every NIHSS item examined and scored 0; no vascular risk factors, no anticoagulant or antiplatelet, no allergies. Hand-derived: nihssScore 0, category 'No stroke symptoms', firedRules [], additionalFlags [].",
+      "state": {
+        "demographics": {
+          "firstName": "Margaret",
+          "lastName": "Hollis",
+          "dateOfBirth": "1958-03-14",
+          "sex": "female"
+        },
+        "symptomOnset": {
+          "onsetTime": "2026-09-02T15:00:00Z",
+          "lastKnownWell": "2026-09-02T14:40:00Z",
+          "symptomProgression": "improving",
+          "modeOfArrival": "walk-in"
+        },
+        "levelOfConsciousness": {
+          "loc": 0,
+          "locQuestions": 0,
+          "locCommands": 0
+        },
+        "bestGazeVisual": {
+          "bestGaze": 0,
+          "visual": 0
+        },
+        "facialPalsy": {
+          "facialPalsy": 0,
+          "leftArm": 0,
+          "rightArm": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "limbAtaxiaSensory": {
+          "limbAtaxia": 0,
+          "sensory": 0
+        },
+        "languageDysarthria": {
+          "bestLanguage": 0,
+          "dysarthria": 0
+        },
+        "extinctionInattention": {
+          "extinctionInattention": 0
+        },
+        "riskFactors": {
+          "hypertension": "no",
+          "diabetes": "no",
+          "atrialFibrillation": "no",
+          "previousStroke": "no",
+          "smoking": "no",
+          "hyperlipidemia": "no",
+          "familyHistory": "no"
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Levothyroxine",
+              "dose": "75 micrograms",
+              "frequency": "once daily"
+            }
+          ],
+          "allergies": [],
+          "anticoagulants": "no",
+          "anticoagulantDetails": "",
+          "antiplatelets": "no",
+          "antiplateletDetails": ""
+        }
+      },
+      "expected": {
+        "nihssScore": 0,
+        "nihssCategoryLabel": "No stroke symptoms",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate left hemiparesis - NIHSS 15, ataxia untestable, exactly 4.5 h",
+      "description": "Derek Ashworth, 74, brought by ambulance with fluctuating left-sided weakness; onset 2026-09-03T07:30Z, exactly 4.5 hours before the frozen clock (inclusive boundary of the thrombolysis window). Limb ataxia left null (untestable because of the weakness) - the grader excludes it. Items: loc 1, locQ 1, locC 0, gaze 1, visual 1, facial 2, leftArm 2, rightArm 0, leftLeg 2, rightLeg 0, ataxia null, sensory 2, language 1, dysarthria 1, extinction 1. Hand-derived: nihssScore 15 (top of the moderate band, so NO FLAG-SEVERE-001), category 'Moderate stroke', 11 firedRules in item order (NIHSS-1A, 1B, 2, 3, 4, 5A, 6A, 8, 9, 10, 11 - 1C, 5B, 6B are 0 and 7 is null). loc 1 and language 1 stay below their flag thresholds; only left-sided motor so no bilateral flag. Hypertension and hyperlipidaemia yes, aspirin 75 mg antiplatelet, one mild penicillin allergy. Flags after stable sort: FLAG-THROMBOLYSIS-001 (urgent, '4.5 hours ago'), FLAG-HTN-001, FLAG-ANTIPLATELET-001, FLAG-ALLERGY-001 (medium, in push order), FLAG-LIPIDS-001 (low) - 5 flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Derek",
+          "lastName": "Ashworth",
+          "dateOfBirth": "1952-07-02",
+          "sex": "male"
+        },
+        "symptomOnset": {
+          "onsetTime": "2026-09-03T07:30:00Z",
+          "lastKnownWell": "2026-09-03T07:15:00Z",
+          "symptomProgression": "fluctuating",
+          "modeOfArrival": "ambulance"
+        },
+        "levelOfConsciousness": {
+          "loc": 1,
+          "locQuestions": 1,
+          "locCommands": 0
+        },
+        "bestGazeVisual": {
+          "bestGaze": 1,
+          "visual": 1
+        },
+        "facialPalsy": {
+          "facialPalsy": 2,
+          "leftArm": 2,
+          "rightArm": 0,
+          "leftLeg": 2,
+          "rightLeg": 0
+        },
+        "limbAtaxiaSensory": {
+          "limbAtaxia": null,
+          "sensory": 2
+        },
+        "languageDysarthria": {
+          "bestLanguage": 1,
+          "dysarthria": 1
+        },
+        "extinctionInattention": {
+          "extinctionInattention": 1
+        },
+        "riskFactors": {
+          "hypertension": "yes",
+          "diabetes": "no",
+          "atrialFibrillation": "no",
+          "previousStroke": "no",
+          "smoking": "no",
+          "hyperlipidemia": "yes",
+          "familyHistory": "yes"
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Amlodipine",
+              "dose": "10 mg",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Atorvastatin",
+              "dose": "40 mg",
+              "frequency": "at night"
+            },
+            {
+              "name": "Aspirin",
+              "dose": "75 mg",
+              "frequency": "once daily"
+            }
+          ],
+          "allergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Rash",
+              "severity": "mild"
+            }
+          ],
+          "anticoagulants": "no",
+          "anticoagulantDetails": "",
+          "antiplatelets": "yes",
+          "antiplateletDetails": "Aspirin 75 mg once daily"
+        }
+      },
+      "expected": {
+        "nihssScore": 15,
+        "nihssCategoryLabel": "Moderate stroke",
+        "firedRules": [
+          {
+            "id": "NIHSS-1A",
+            "domain": "Level of Consciousness",
+            "description": "1a. LOC: 0=Alert, 1=Not alert but arousable, 2=Not alert requiring repeated stimulation, 3=Unresponsive",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-1B",
+            "domain": "Level of Consciousness",
+            "description": "1b. LOC Questions (month, age): 0=Both correct, 1=One correct, 2=Neither correct",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-2",
+            "domain": "Best Gaze",
+            "description": "2. Best Gaze: 0=Normal, 1=Partial gaze palsy, 2=Forced deviation or total gaze paresis",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-3",
+            "domain": "Visual",
+            "description": "3. Visual fields: 0=No visual loss, 1=Partial hemianopia, 2=Complete hemianopia, 3=Bilateral hemianopia (blind)",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-4",
+            "domain": "Facial Palsy",
+            "description": "4. Facial Palsy: 0=Normal, 1=Minor paralysis, 2=Partial paralysis, 3=Complete paralysis",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-5A",
+            "domain": "Motor Arm",
+            "description": "5a. Motor Arm Left: 0=No drift, 1=Drift before 10s, 2=Some effort against gravity, 3=No effort against gravity, 4=No movement",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-6A",
+            "domain": "Motor Leg",
+            "description": "6a. Motor Leg Left: 0=No drift, 1=Drift before 5s, 2=Some effort against gravity, 3=No effort against gravity, 4=No movement",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-8",
+            "domain": "Sensory",
+            "description": "8. Sensory: 0=Normal, 1=Mild-to-moderate sensory loss, 2=Severe or total sensory loss",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-9",
+            "domain": "Best Language",
+            "description": "9. Best Language: 0=No aphasia, 1=Mild-to-moderate aphasia, 2=Severe aphasia, 3=Mute or global aphasia",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-10",
+            "domain": "Dysarthria",
+            "description": "10. Dysarthria: 0=Normal, 1=Mild-to-moderate slurring, 2=Near unintelligible or worse",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-11",
+            "domain": "Extinction and Inattention",
+            "description": "11. Extinction/Inattention: 0=No abnormality, 1=Inattention to one modality, 2=Profound hemi-inattention or extinction to more than one modality",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-THROMBOLYSIS-001",
+            "category": "Thrombolysis Window",
+            "message": "Symptom onset 4.5 hours ago - within thrombolysis window (4.5 hours). Evaluate for IV tPA eligibility.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-HTN-001",
+            "category": "Hypertension",
+            "message": "Known hypertension - monitor blood pressure closely, target per stroke protocol.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ANTIPLATELET-001",
+            "category": "Antiplatelet Use",
+            "message": "Patient on antiplatelets: Aspirin 75 mg once daily - note for treatment decisions.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "1 allergy/allergies documented.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LIPIDS-001",
+            "category": "Hyperlipidemia",
+            "message": "Hyperlipidemia present - review lipid profile and statin therapy for secondary prevention.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Severe brainstem syndrome - NIHSS 33 on apixaban, sudden onset 1.2 h",
+      "description": "Patricia Okonkwo-Reid, 81, known AF on apixaban with a previous stroke, sudden collapse at 2026-09-03T10:48Z (72 minutes = 1.2 h before the frozen clock). Items: loc 2, locQ 2, locC 2, gaze 2, visual 2, facial 3, leftArm 3, rightArm 3, leftLeg 3, rightLeg 2, ataxia 0 (scored 0 as untestable per NIHSS convention), sensory 2, language 3, dysarthria 2, extinction 2. Hand-derived: nihssScore 33, 'Severe stroke', 14 firedRules (every item except NIHSS-7). Three allergies with the anaphylaxis one at index 1 (so the id is FLAG-ALLERGY-ANAPH-1, not -0). Flags after stable sort, 15 in total - urgent: FLAG-ONSET-001, FLAG-SEVERE-001 ('NIHSS score 33'), FLAG-BILATERAL-001, FLAG-THROMBOLYSIS-001 ('1.2 hours ago'), FLAG-ALLERGY-ANAPH-1; high: FLAG-LOC-001, FLAG-LANGUAGE-001, FLAG-AFIB-001, FLAG-ANTICOAG-001 ('Apixaban 5 mg twice daily'); medium: FLAG-PREV-STROKE-001, FLAG-HTN-001, FLAG-DIABETES-001, FLAG-SMOKE-001, FLAG-ALLERGY-001 ('3 allergy/allergies documented.'); low: FLAG-LIPIDS-001. Antiplatelets 'no' so no antiplatelet flag.",
+      "state": {
+        "demographics": {
+          "firstName": "Patricia",
+          "lastName": "Okonkwo-Reid",
+          "dateOfBirth": "1945-01-22",
+          "sex": "female"
+        },
+        "symptomOnset": {
+          "onsetTime": "2026-09-03T10:48:00Z",
+          "lastKnownWell": "2026-09-03T10:45:00Z",
+          "symptomProgression": "sudden",
+          "modeOfArrival": "ambulance"
+        },
+        "levelOfConsciousness": {
+          "loc": 2,
+          "locQuestions": 2,
+          "locCommands": 2
+        },
+        "bestGazeVisual": {
+          "bestGaze": 2,
+          "visual": 2
+        },
+        "facialPalsy": {
+          "facialPalsy": 3,
+          "leftArm": 3,
+          "rightArm": 3,
+          "leftLeg": 3,
+          "rightLeg": 2
+        },
+        "limbAtaxiaSensory": {
+          "limbAtaxia": 0,
+          "sensory": 2
+        },
+        "languageDysarthria": {
+          "bestLanguage": 3,
+          "dysarthria": 2
+        },
+        "extinctionInattention": {
+          "extinctionInattention": 2
+        },
+        "riskFactors": {
+          "hypertension": "yes",
+          "diabetes": "yes",
+          "atrialFibrillation": "yes",
+          "previousStroke": "yes",
+          "smoking": "yes",
+          "hyperlipidemia": "yes",
+          "familyHistory": "no"
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Apixaban",
+              "dose": "5 mg",
+              "frequency": "twice daily"
+            },
+            {
+              "name": "Ramipril",
+              "dose": "10 mg",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Metformin",
+              "dose": "1 g",
+              "frequency": "twice daily"
+            },
+            {
+              "name": "Atorvastatin",
+              "dose": "80 mg",
+              "frequency": "at night"
+            }
+          ],
+          "allergies": [
+            {
+              "allergen": "Iodinated contrast",
+              "reaction": "Urticaria",
+              "severity": "moderate"
+            },
+            {
+              "allergen": "Penicillin",
+              "reaction": "Anaphylaxis - airway swelling 2019",
+              "severity": "anaphylaxis"
+            },
+            {
+              "allergen": "Codeine",
+              "reaction": "Nausea and vomiting",
+              "severity": "mild"
+            }
+          ],
+          "anticoagulants": "yes",
+          "anticoagulantDetails": "Apixaban 5 mg twice daily",
+          "antiplatelets": "no",
+          "antiplateletDetails": ""
+        }
+      },
+      "expected": {
+        "nihssScore": 33,
+        "nihssCategoryLabel": "Severe stroke",
+        "firedRules": [
+          {
+            "id": "NIHSS-1A",
+            "domain": "Level of Consciousness",
+            "description": "1a. LOC: 0=Alert, 1=Not alert but arousable, 2=Not alert requiring repeated stimulation, 3=Unresponsive",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-1B",
+            "domain": "Level of Consciousness",
+            "description": "1b. LOC Questions (month, age): 0=Both correct, 1=One correct, 2=Neither correct",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-1C",
+            "domain": "Level of Consciousness",
+            "description": "1c. LOC Commands (open/close eyes, grip/release): 0=Both correct, 1=One correct, 2=Neither correct",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-2",
+            "domain": "Best Gaze",
+            "description": "2. Best Gaze: 0=Normal, 1=Partial gaze palsy, 2=Forced deviation or total gaze paresis",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-3",
+            "domain": "Visual",
+            "description": "3. Visual fields: 0=No visual loss, 1=Partial hemianopia, 2=Complete hemianopia, 3=Bilateral hemianopia (blind)",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-4",
+            "domain": "Facial Palsy",
+            "description": "4. Facial Palsy: 0=Normal, 1=Minor paralysis, 2=Partial paralysis, 3=Complete paralysis",
+            "score": 3
+          },
+          {
+            "id": "NIHSS-5A",
+            "domain": "Motor Arm",
+            "description": "5a. Motor Arm Left: 0=No drift, 1=Drift before 10s, 2=Some effort against gravity, 3=No effort against gravity, 4=No movement",
+            "score": 3
+          },
+          {
+            "id": "NIHSS-5B",
+            "domain": "Motor Arm",
+            "description": "5b. Motor Arm Right: 0=No drift, 1=Drift before 10s, 2=Some effort against gravity, 3=No effort against gravity, 4=No movement",
+            "score": 3
+          },
+          {
+            "id": "NIHSS-6A",
+            "domain": "Motor Leg",
+            "description": "6a. Motor Leg Left: 0=No drift, 1=Drift before 5s, 2=Some effort against gravity, 3=No effort against gravity, 4=No movement",
+            "score": 3
+          },
+          {
+            "id": "NIHSS-6B",
+            "domain": "Motor Leg",
+            "description": "6b. Motor Leg Right: 0=No drift, 1=Drift before 5s, 2=Some effort against gravity, 3=No effort against gravity, 4=No movement",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-8",
+            "domain": "Sensory",
+            "description": "8. Sensory: 0=Normal, 1=Mild-to-moderate sensory loss, 2=Severe or total sensory loss",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-9",
+            "domain": "Best Language",
+            "description": "9. Best Language: 0=No aphasia, 1=Mild-to-moderate aphasia, 2=Severe aphasia, 3=Mute or global aphasia",
+            "score": 3
+          },
+          {
+            "id": "NIHSS-10",
+            "domain": "Dysarthria",
+            "description": "10. Dysarthria: 0=Normal, 1=Mild-to-moderate slurring, 2=Near unintelligible or worse",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-11",
+            "domain": "Extinction and Inattention",
+            "description": "11. Extinction/Inattention: 0=No abnormality, 1=Inattention to one modality, 2=Profound hemi-inattention or extinction to more than one modality",
+            "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-ONSET-001",
+            "category": "Acute Onset",
+            "message": "Sudden symptom onset - consistent with acute stroke presentation. Activate stroke pathway.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SEVERE-001",
+            "category": "Severe Stroke",
+            "message": "NIHSS score 33 indicates moderate to severe or severe stroke - consider urgent intervention (thrombolysis / thrombectomy as eligible).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-BILATERAL-001",
+            "category": "Bilateral Motor Deficit",
+            "message": "Bilateral motor deficits detected - consider basilar artery occlusion or brainstem involvement.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-THROMBOLYSIS-001",
+            "category": "Thrombolysis Window",
+            "message": "Symptom onset 1.2 hours ago - within thrombolysis window (4.5 hours). Evaluate for IV tPA eligibility.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-ALLERGY-ANAPH-1",
+            "category": "Allergy",
+            "message": "ANAPHYLAXIS history: Penicillin.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-LOC-001",
+            "category": "LOC Impairment",
+            "message": "Significant level of consciousness impairment - patient requires close monitoring and airway assessment.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LANGUAGE-001",
+            "category": "Language Deficit",
+            "message": "Severe aphasia detected - communication support and speech therapy referral recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AFIB-001",
+            "category": "Atrial Fibrillation",
+            "message": "Known atrial fibrillation - consider cardioembolic stroke aetiology and anticoagulation status.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANTICOAG-001",
+            "category": "Anticoagulant Use",
+            "message": "Patient on anticoagulants: Apixaban 5 mg twice daily - check INR/anti-Xa levels before thrombolysis.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREV-STROKE-001",
+            "category": "Previous Stroke",
+            "message": "History of previous stroke or TIA - compare with prior deficits and imaging.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HTN-001",
+            "category": "Hypertension",
+            "message": "Known hypertension - monitor blood pressure closely, target per stroke protocol.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DIABETES-001",
+            "category": "Diabetes",
+            "message": "Known diabetes - check blood glucose, maintain normoglycaemia.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Smoking",
+            "message": "Current smoker - smoking cessation counselling for secondary prevention.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "3 allergy/allergies documented.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LIPIDS-001",
+            "category": "Hyperlipidemia",
+            "message": "Hyperlipidemia present - review lipid profile and statin therapy for secondary prevention.",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

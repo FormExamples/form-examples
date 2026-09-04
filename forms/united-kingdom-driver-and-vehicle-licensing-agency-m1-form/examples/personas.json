@@ -1,0 +1,335 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateM1",
+  "note": "Folded engine. validateM1(state) returns { complete, stoppedAtQ1, firedRules, additionalFlags, conditionCount, timestamp }; form-app.js submitForm() assigns that result directly, so the flags are already inside it (detectAdditionalFlags is called by the validator, not by the UI) and no flagsHint is needed. The wall-clock timestamp key is stripped by bin/test-personas. This is a problem-oriented validator: a rule in m1Rules FIRES when something is wrong (missing or inconsistent), firedRules is stable-sorted urgent > high > medium > low after evaluation in rule order, and complete is true only when NO rule of category 'completeness' fired - so the low-priority 'recommended' contact-number rule M1-PD-005 still makes complete false. Quirks verified: stoppedAtQ1 (Q1 === 'no') skips only rules whose id starts with M1-Q2 / M1-Q3; the Part B GP rules gate themselves on Q1 === 'yes' and the personal-details and authorisation rules always run; conditionCount counts every Q2 'yes' regardless of Q1, so a stale Q2 answer on a Q1 = No form is still counted even though every mental-health flag requires q1 === 'yes'; flag ids do not match their priorities - FLAG-MH-HIGH-003 (eating disorder) is priority 'medium' and FLAG-AUTH-LOW-001 (declaration not confirmed) is priority 'high'; bipolar + personality disorder together raise only FLAG-MH-HIGH-002 (the two 'alone' medium flags are suppressed); M1-AUTH-001 fires for any declarationConfirmed !== 'yes' (so '' and 'no' both fire) and FLAG-AUTH-LOW-001 mirrors it, even on a Q1 = No form. Regenerate expected with: bin/test-personas united-kingdom-driver-and-vehicle-licensing-agency-m1-form --update",
+  "personas": [
+    {
+      "name": "Complete - anxiety without impairment, seen by GP this year",
+      "description": "Thomas Whitfield, 34, of Norwich, declares a diagnosis (Q1 yes) of anxiety/depression WITHOUT suicidal thoughts or impairment, last seen by his GP on 2026-05-12 (Q3 yes with a doctor date), full Part A and Part B GP details, declaration confirmed and signed 2026-08-30, e-correspondence consent yes with email preferences. Hand-derived: no rule fires (all completeness/consistency/declaration predicates false), complete true, stoppedAtQ1 false, firedRules [], conditionCount 1, additionalFlags [] (the without-impairment variant raises no flag and recent contact is yes).",
+      "state": {
+        "personalDetails": {
+          "title": "Mr",
+          "fullName": "Thomas James Whitfield",
+          "dateOfBirth": "1992-01-15",
+          "address": "31 Unthank Road, Norwich",
+          "postcode": "NR2 2PB",
+          "email": "t.whitfield@example.com",
+          "contactNumber": "07700 900201",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "gpName": "Dr Alice Marchant",
+            "surgeryName": "Unthank Road Surgery",
+            "address": "62 Unthank Road",
+            "town": "Norwich",
+            "postcode": "NR2 2RW",
+            "contactNumber": "01603 621234",
+            "email": "",
+            "dateLastSeen": "2026-05-12"
+          },
+          "consultant": {
+            "consultantName": "",
+            "speciality": "",
+            "department": "",
+            "hospitalName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          }
+        },
+        "diagnosisConfirmation": {
+          "hasMentalHealthDiagnosis": "yes"
+        },
+        "mentalHealthConditions": {
+          "anxietyDepressionWithoutImpairment": "yes",
+          "anxietyDepressionWithImpairment": "no",
+          "bipolarAffectiveDisorder": "no",
+          "eatingDisorder": "no",
+          "ocdOrPtsd": "no",
+          "personalityDisorder": "no",
+          "schizophreniaOrPsychosis": "no",
+          "other": "no",
+          "otherDetails": ""
+        },
+        "recentContact": {
+          "hadRecentContact": "yes",
+          "doctorLastDate": "2026-05-12",
+          "consultantLastDate": "",
+          "communityPsychiatricNurseLastDate": ""
+        },
+        "authorisation": {
+          "declarationConfirmed": "yes",
+          "signatoryName": "Thomas James Whitfield",
+          "signatureText": "T J Whitfield",
+          "signatureDate": "2026-08-30",
+          "electronicCorrespondenceConsent": "yes",
+          "dvlaContactPreference": "email",
+          "healthcareProfessionalContactPreference": "email"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "stoppedAtQ1": false,
+        "firedRules": [],
+        "additionalFlags": [],
+        "conditionCount": 1
+      }
+    },
+    {
+      "name": "Stopped at Q1 - no diagnosis, stale Q2 tick, contact number missing",
+      "description": "Priya Nair, 47, of Reading, answers Q1 No (DVLA enquiry made in error after a bereavement-counselling referral). She initially answered Q1 Yes and ticked bipolar before correcting Q1, so mentalHealthConditions.bipolarAffectiveDisorder is a stale 'yes'; Part B is left blank and the contact number is omitted. Declaration confirmed and signed. Hand-derived: stoppedAtQ1 true (Q2/Q3 rules skipped; HCP rules do not fire because they gate on Q1 yes); the only rule that fires is M1-PD-005 (low, completeness - 'recommended' contact number), which is enough to make complete FALSE; conditionCount 1 from the stale tick; additionalFlags = just FLAG-NO-DIAGNOSIS-LOW-001 (low) - no bipolar flag because every mental-health flag requires q1 === 'yes'.",
+      "state": {
+        "personalDetails": {
+          "title": "Ms",
+          "fullName": "Priya Lakshmi Nair",
+          "dateOfBirth": "1979-06-02",
+          "address": "9 Castle Crescent, Reading",
+          "postcode": "RG1 6AE",
+          "email": "priya.nair@example.com",
+          "contactNumber": "",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "gpName": "",
+            "surgeryName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          },
+          "consultant": {
+            "consultantName": "",
+            "speciality": "",
+            "department": "",
+            "hospitalName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          }
+        },
+        "diagnosisConfirmation": {
+          "hasMentalHealthDiagnosis": "no"
+        },
+        "mentalHealthConditions": {
+          "anxietyDepressionWithoutImpairment": "",
+          "anxietyDepressionWithImpairment": "",
+          "bipolarAffectiveDisorder": "yes",
+          "eatingDisorder": "",
+          "ocdOrPtsd": "",
+          "personalityDisorder": "",
+          "schizophreniaOrPsychosis": "",
+          "other": "",
+          "otherDetails": ""
+        },
+        "recentContact": {
+          "hadRecentContact": "",
+          "doctorLastDate": "",
+          "consultantLastDate": "",
+          "communityPsychiatricNurseLastDate": ""
+        },
+        "authorisation": {
+          "declarationConfirmed": "yes",
+          "signatoryName": "Priya Lakshmi Nair",
+          "signatureText": "P L Nair",
+          "signatureDate": "2026-09-01",
+          "electronicCorrespondenceConsent": "no",
+          "dvlaContactPreference": "",
+          "healthcareProfessionalContactPreference": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "stoppedAtQ1": true,
+        "firedRules": [
+          {
+            "id": "M1-PD-005",
+            "category": "completeness",
+            "priority": "low",
+            "description": "A contact number is recommended.",
+            "message": "Contact number is missing in Part A."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NO-DIAGNOSIS-LOW-001",
+            "category": "Diagnosis",
+            "message": "Patient reports no mental health diagnosis - the rest of the form was not required.",
+            "priority": "low"
+          }
+        ],
+        "conditionCount": 1
+      }
+    },
+    {
+      "name": "Seven co-occurring conditions with suicidal ideation - declaration refused",
+      "description": "Daniel Okafor-Hughes, 29, of Manchester: Q1 yes with seven Q2 conditions ticked - anxiety/depression WITH suicidal thoughts, bipolar, eating disorder, OCD/PTSD, personality disorder, schizophrenia/psychosis and 'other' with the details box left blank. No healthcare contact in the last 12 months (Q3 no). GP name and date-last-seen blank (surgery name present). Declaration 'no', signatory name blank, signature date present. Hand-derived firedRules after the priority sort: M1-AUTH-001 (high); M1-HCP-001, M1-Q2-002, M1-AUTH-002 (medium, in rule order); M1-HCP-003 (low) - 5 rules, complete false, stoppedAtQ1 false, conditionCount 7. additionalFlags (8) after the stable sort: FLAG-MH-URGENT-001 (urgent); FLAG-MH-HIGH-001, FLAG-MH-HIGH-002, FLAG-AUTH-LOW-001 (high - note the LOW id with high priority); FLAG-MH-HIGH-003 (medium despite its HIGH id), FLAG-MH-MED-003, FLAG-CONTACT-MED-001, FLAG-MULTI-MED-001 ('7 co-occurring mental health conditions') (medium). FLAG-MH-MED-001/002 are suppressed because bipolar and personality disorder co-occur.",
+      "state": {
+        "personalDetails": {
+          "title": "Mr",
+          "fullName": "Daniel Okafor-Hughes",
+          "dateOfBirth": "1997-11-23",
+          "address": "Flat 5, 210 Wilmslow Road, Fallowfield, Manchester",
+          "postcode": "M14 6LH",
+          "email": "d.okaforhughes@example.com",
+          "contactNumber": "07700 900333",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "gpName": "",
+            "surgeryName": "Fallowfield Medical Centre",
+            "address": "75 Ladybarn Lane",
+            "town": "Manchester",
+            "postcode": "M14 6NQ",
+            "contactNumber": "0161 224 1234",
+            "email": "",
+            "dateLastSeen": ""
+          },
+          "consultant": {
+            "consultantName": "Dr Helen Vaughan",
+            "speciality": "General adult psychiatry",
+            "department": "Community Mental Health Team South",
+            "hospitalName": "Manchester Royal Infirmary",
+            "address": "Oxford Road",
+            "town": "Manchester",
+            "postcode": "M13 9WL",
+            "contactNumber": "0161 276 1234",
+            "email": "",
+            "dateLastSeen": "2025-06-18"
+          }
+        },
+        "diagnosisConfirmation": {
+          "hasMentalHealthDiagnosis": "yes"
+        },
+        "mentalHealthConditions": {
+          "anxietyDepressionWithoutImpairment": "no",
+          "anxietyDepressionWithImpairment": "yes",
+          "bipolarAffectiveDisorder": "yes",
+          "eatingDisorder": "yes",
+          "ocdOrPtsd": "yes",
+          "personalityDisorder": "yes",
+          "schizophreniaOrPsychosis": "yes",
+          "other": "yes",
+          "otherDetails": ""
+        },
+        "recentContact": {
+          "hadRecentContact": "no",
+          "doctorLastDate": "",
+          "consultantLastDate": "",
+          "communityPsychiatricNurseLastDate": ""
+        },
+        "authorisation": {
+          "declarationConfirmed": "no",
+          "signatoryName": "",
+          "signatureText": "",
+          "signatureDate": "2026-09-02",
+          "electronicCorrespondenceConsent": "yes",
+          "dvlaContactPreference": "sms",
+          "healthcareProfessionalContactPreference": "sms"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "stoppedAtQ1": false,
+        "firedRules": [
+          {
+            "id": "M1-AUTH-001",
+            "category": "declaration",
+            "priority": "high",
+            "description": "Declaration must be confirmed.",
+            "message": "Applicant's declaration was not confirmed. The form cannot be submitted without authorising medical disclosure."
+          },
+          {
+            "id": "M1-HCP-001",
+            "category": "completeness",
+            "priority": "medium",
+            "description": "GP name should be provided when a diagnosis is reported.",
+            "message": "GP name is missing in Part B (GP Details)."
+          },
+          {
+            "id": "M1-Q2-002",
+            "category": "consistency",
+            "priority": "medium",
+            "description": "Q2 \"Other\" requires free-text details.",
+            "message": "Question 2 marked \"Other\" as Yes but no details were supplied. Please describe the other condition."
+          },
+          {
+            "id": "M1-AUTH-002",
+            "category": "completeness",
+            "priority": "medium",
+            "description": "Signatory name must be provided.",
+            "message": "Signatory name is missing on the authorisation page."
+          },
+          {
+            "id": "M1-HCP-003",
+            "category": "completeness",
+            "priority": "low",
+            "description": "GP date last seen should be provided when a diagnosis is reported.",
+            "message": "GP date last seen for this condition is missing in Part B."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MH-URGENT-001",
+            "category": "Mental Health",
+            "message": "Anxiety or depression with suicidal thoughts or impairment reported - urgent professional review required before DVLA decision.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-MH-HIGH-001",
+            "category": "Mental Health",
+            "message": "Schizophrenia, psychosis, delusional disorder, or schizoaffective disorder reported - DVLA medical assessor review required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MH-HIGH-002",
+            "category": "Mental Health",
+            "message": "Co-occurring bipolar affective disorder and personality disorder reported - elevated driving-fitness review required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AUTH-LOW-001",
+            "category": "Authorisation",
+            "message": "Declaration not confirmed - submission cannot be processed without authorisation.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MH-HIGH-003",
+            "category": "Mental Health",
+            "message": "Eating disorder reported - clinician review of nutritional and cognitive status recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MH-MED-003",
+            "category": "Mental Health",
+            "message": "OCD or PTSD reported - clinician review of impact on driving concentration recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONTACT-MED-001",
+            "category": "Recent Contact",
+            "message": "Patient reports no contact with healthcare professional in the last 12 months - request a current review before licensing decision.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MULTI-MED-001",
+            "category": "Comorbidity",
+            "message": "Patient reports 7 co-occurring mental health conditions - comprehensive review required.",
+            "priority": "medium"
+          }
+        ],
+        "conditionCount": 7
+      }
+    }
+  ]
+}

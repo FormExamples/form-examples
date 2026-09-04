@@ -68,6 +68,30 @@ function computeFlags(a) {
   return flags;
 }
 
+/**
+ * Build a fresh, fully-blank assessment in the shape form-app.js's
+ * buildAssessment() produces and gradeObjective() consumes: the seven
+ * scores (null = unanswered), no key results, a context block with no
+ * parent / DRI / cycle dates, and `now` unset (the pace and staleness flags
+ * only read it once cycle dates are present; personas should pin it to a
+ * fixed ISO instant). `gradeObjective(emptyAssessment())` is the
+ * all-missing baseline (every axis amber, composite amber, 'no-dri' flag).
+ */
+export function emptyAssessment() {
+  return {
+    scores: {
+      progressPercent: null, confidenceDecile: null, stretchTier: null,
+      alignmentGrade: null, impactTier: null, smartQuality: null, paceDeviationPercent: null,
+    },
+    keyResults: [], // { krType: 'numeric' | 'milestone' | ..., ... }
+    context: {
+      level: '', parentObjectiveId: null, parentObjectiveStatus: null, driPresent: false,
+      cycleStartDate: null, cycleEndDate: null, checkedInAt: null, previousConfidenceDecile: null,
+    },
+    now: null,
+  };
+}
+
 export function gradeObjective(a) {
   const axes = [gradeProgress(a.scores), gradeConfidence(a.scores.confidenceDecile),
     gradeStretch(a.scores.stretchTier), gradeAlignment(a.scores.alignmentGrade),

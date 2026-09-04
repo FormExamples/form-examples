@@ -1,0 +1,587 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateKneeEvaluation",
+  "note": "calculateKneeEvaluation(data) returns oksItemScores, oksTotal, computedOksCategory, finalOksCategory, maxKellgrenLawrenceGrade, computedCandidacy, finalCandidacy, overrideReason, firedRules and the safety flags FOLDED IN as `flags` (form-app.js calls only calculateKneeEvaluation(state); no separate detector). OKS sums the 12 items treating an unanswered item as 0, so a blank form scores 0 = 'severe' (QUIRK); R-OKS-TOTAL always fires, R-OKS-INCOMPLETE is added when fewer than 12 items are answered, and R-CANDIDACY records the first-match candidacy in the order strong-candidate (OKS<=19, max KL>=3, exhausted) > candidate (OKS<=29, exhausted, KL>=2) > continue-conservative (not exhausted) > not-indicated (OKS>=40 OR no KL recorded OR KL<=1; the description for a null KL wrongly says 'grade is 1 or below in every recorded compartment' — QUIRK) > mdt-review. A summary.overrideCandidacy in the known list replaces finalCandidacy and exposes overrideReason only when it differs from the computed one. Flags: F-CONSERVATIVE-TREATMENT-NOT-EXHAUSTED-001 and F-PRE-OP-BLOODS-INCOMPLETE-001 need a surgical plan recommendation and use `!== 'yes'` so '' counts as not done; F-HIGH-BMI-SURGICAL-RISK-001 at BMI>=40 (round1); F-FIXED-FLEXION-DEFORMITY-001 needs present==='yes' AND degrees > 15 (15 exactly does not fire); F-BILATERAL-SYMPTOMATIC-001 low; F-PAEDIATRIC-001 needs both birthDate and clinician.assessmentDate (age is null otherwise). The detectFlags `context.candidacy` argument is passed but never read (dead context — QUIRK). Flags are stable-sorted high > medium > low. The 'timestamp' key added by form-app.js is not part of the grader result. Regenerate expected with: bin/test-personas knee-replacement-surgery-evaluation --update",
+  "personas": [
+    {
+      "name": "Satisfactory OKS, surgery not indicated",
+      "description": "65-year-old woman with mild left-knee OA: all 12 OKS items answered totalling 44 (satisfactory), KL grades 1/0/1 (max 1), conservative measures recorded as exhausted, BMI 24.9, no deformity, unilateral. Expect computedCandidacy = finalCandidacy = 'not-indicated' via the 'OKS 44 is 40 or above' branch, firedRules = [R-OKS-TOTAL (44, satisfactory), R-CANDIDACY (not-indicated)], overrideReason '', and no flags.",
+      "state": {
+        "status": "draft",
+        "clinician": {
+          "clinicianName": "Mr Rajesh Patel",
+          "role": "consultant-orthopaedic-surgeon",
+          "registrationBody": "GMC",
+          "registrationNumber": "4512876",
+          "siteName": "Royal Devon and Exeter Hospital",
+          "assessmentDate": "2026-08-20",
+          "assessmentTime": "10:15"
+        },
+        "patient": {
+          "name": "Margaret Ellison",
+          "birthDate": "1961-03-14",
+          "sex": "female",
+          "nhsNumber": "485 777 3456",
+          "email": "m.ellison@example.org",
+          "phone": "01392 496000",
+          "heightAsCm": 170,
+          "weightAsKg": 72,
+          "preferredLanguage": "English"
+        },
+        "history": {
+          "kneeSide": "left",
+          "symptomDurationMonths": 9,
+          "painAtRest0To10": 1,
+          "painOnActivity0To10": 3,
+          "nightPain": "no",
+          "priorKneeSurgery": "no",
+          "priorKneeSurgeryType": "",
+          "priorKneeSurgeryDate": "",
+          "priorInjury": "no",
+          "priorInjuryDetail": ""
+        },
+        "oks": {
+          "oksPainSeverity": 4,
+          "oksWashingAndDrying": 4,
+          "oksTransport": 4,
+          "oksWalkingDistance": 3,
+          "oksPainSittingOrLying": 4,
+          "oksLimping": 4,
+          "oksKneeling": 3,
+          "oksNightPainFrequency": 4,
+          "oksPainInterferingWithWork": 4,
+          "oksGivingWay": 3,
+          "oksShopping": 4,
+          "oksStairs": 3
+        },
+        "functional": {
+          "walkingDistanceBeforePain": "more-than-1-mile",
+          "stairClimbingAbility": "normal",
+          "standFromChairUnaided": "yes",
+          "walkingAid": "none"
+        },
+        "rangeOfMotion": {
+          "flexionDegrees": 130,
+          "extensionDeficitDegrees": 0,
+          "fixedFlexionDeformityPresent": "no",
+          "fixedFlexionDeformityDegrees": null
+        },
+        "stability": {
+          "coronalDeformityType": "none",
+          "coronalDeformitySeverity": "",
+          "ligamentAcl": "intact",
+          "ligamentPcl": "intact",
+          "ligamentMcl": "intact",
+          "ligamentLcl": "intact",
+          "patellarTracking": "normal"
+        },
+        "strength": {
+          "quadricepsStrengthMrc": 5,
+          "effusionPresent": "no",
+          "crepitusPresent": "yes"
+        },
+        "imaging": {
+          "weightBearingXrayPerformed": "yes",
+          "kellgrenLawrenceGradeMedial": 1,
+          "kellgrenLawrenceGradeLateral": 0,
+          "kellgrenLawrenceGradePatellofemoral": 1,
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "ctPerformed": "no",
+          "ctIndication": ""
+        },
+        "conservative": {
+          "physiotherapyTried": "yes",
+          "physiotherapyDurationWeeks": 12,
+          "weightManagementAdviceGiven": "yes",
+          "injectionGiven": "no",
+          "injectionType": "",
+          "injectionCount": null,
+          "injectionResponse": "",
+          "nsaidAnalgesicTrial": "yes",
+          "nsaidAnalgesicResponse": "good",
+          "walkingAidTrial": "no",
+          "conservativeMeasuresExhausted": "yes"
+        },
+        "generalHealth": {
+          "diabetesControlled": "not-applicable",
+          "cardiacDisease": "no",
+          "bleedingDisorderOrAnticoagulant": "no",
+          "smokingStatus": "never",
+          "generalFitnessNote": "Walks daily; no comorbidity of note."
+        },
+        "preOpBloods": {
+          "fbcDone": "",
+          "renalFunctionDone": "",
+          "clottingDone": "",
+          "ecgDone": "",
+          "mrsaScreenDone": "",
+          "urinalysisDone": ""
+        },
+        "sharedDecision": {
+          "risksBenefitsDiscussed": "yes",
+          "realisticExpectationsDiscussed": "yes",
+          "patientDecisionAidGiven": "yes",
+          "interpreterRequired": "no"
+        },
+        "plan": {
+          "planRecommendation": "continue-conservative-management",
+          "targetListDate": "",
+          "responsibleSurgeon": "Mr Rajesh Patel"
+        },
+        "summary": {
+          "overrideCandidacy": "",
+          "overrideReason": "",
+          "clinicianNotes": "Reassured; continue physiotherapy home programme and review in 6 months if symptoms progress.",
+          "signedByName": "Mr Rajesh Patel"
+        }
+      },
+      "expected": {
+        "oksItemScores": {
+          "oksPainSeverity": 4,
+          "oksWashingAndDrying": 4,
+          "oksTransport": 4,
+          "oksWalkingDistance": 3,
+          "oksPainSittingOrLying": 4,
+          "oksLimping": 4,
+          "oksKneeling": 3,
+          "oksNightPainFrequency": 4,
+          "oksPainInterferingWithWork": 4,
+          "oksGivingWay": 3,
+          "oksShopping": 4,
+          "oksStairs": 3
+        },
+        "oksTotal": 44,
+        "computedOksCategory": "satisfactory",
+        "finalOksCategory": "satisfactory",
+        "maxKellgrenLawrenceGrade": 1,
+        "computedCandidacy": "not-indicated",
+        "finalCandidacy": "not-indicated",
+        "overrideReason": "",
+        "firedRules": [
+          {
+            "ruleId": "R-OKS-TOTAL",
+            "instrument": "oks",
+            "component": "total",
+            "score": 44,
+            "band": "satisfactory",
+            "category": "oxford-knee-score",
+            "description": "Oxford Knee Score total 44 of 48 falls in the satisfactory band."
+          },
+          {
+            "ruleId": "R-CANDIDACY",
+            "instrument": "candidacy",
+            "component": "recommendation",
+            "score": null,
+            "band": "not-indicated",
+            "category": "surgical-candidacy",
+            "description": "Oxford Knee Score 44 is 40 or above, a satisfactory outcome."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "Partial OKS, borderline MDT review overridden to candidate",
+      "description": "67-year-old man with bilateral symptoms, 10 of 12 OKS items answered (kneeling and shopping left blank) totalling 30 (mild-to-moderate), KL 2/2/1 (max 2), conservative measures exhausted, BMI 165 cm / 108.6 kg = 39.9 (just under the 40 flag), fixed flexion deformity present at exactly 15 degrees (not > 15, so no flag), plan is MDT review. Expect computedCandidacy 'mdt-review' (OKS 30 is not <= 29, is not >= 40, KL 2 is not <= 1), finalCandidacy 'candidate' from the clinician override with overrideReason surfaced, firedRules = [R-OKS-TOTAL (30, mild-to-moderate), R-OKS-INCOMPLETE (score 10), R-CANDIDACY (mdt-review)], and exactly one flag: F-BILATERAL-SYMPTOMATIC-001 (low).",
+      "state": {
+        "status": "draft",
+        "clinician": {
+          "clinicianName": "Ms Helen Cartwright",
+          "role": "advanced-practice-physiotherapist",
+          "registrationBody": "HCPC",
+          "registrationNumber": "PH67231",
+          "siteName": "Leeds General Infirmary",
+          "assessmentDate": "2026-08-27",
+          "assessmentTime": "14:30"
+        },
+        "patient": {
+          "name": "Derek Okafor",
+          "birthDate": "1958-11-02",
+          "sex": "male",
+          "nhsNumber": "943 476 5919",
+          "email": "",
+          "phone": "0113 243 2799",
+          "heightAsCm": 165,
+          "weightAsKg": 108.6,
+          "preferredLanguage": "English"
+        },
+        "history": {
+          "kneeSide": "bilateral",
+          "symptomDurationMonths": 30,
+          "painAtRest0To10": 3,
+          "painOnActivity0To10": 6,
+          "nightPain": "yes",
+          "priorKneeSurgery": "yes",
+          "priorKneeSurgeryType": "arthroscopy",
+          "priorKneeSurgeryDate": "2019-06-11",
+          "priorInjury": "no",
+          "priorInjuryDetail": ""
+        },
+        "oks": {
+          "oksPainSeverity": 3,
+          "oksWashingAndDrying": 3,
+          "oksTransport": 3,
+          "oksWalkingDistance": 3,
+          "oksPainSittingOrLying": 3,
+          "oksLimping": 3,
+          "oksKneeling": null,
+          "oksNightPainFrequency": 3,
+          "oksPainInterferingWithWork": 3,
+          "oksGivingWay": 3,
+          "oksShopping": null,
+          "oksStairs": 3
+        },
+        "functional": {
+          "walkingDistanceBeforePain": "quarter-to-half-mile",
+          "stairClimbingAbility": "with-rail",
+          "standFromChairUnaided": "with-difficulty",
+          "walkingAid": "single-stick"
+        },
+        "rangeOfMotion": {
+          "flexionDegrees": 110,
+          "extensionDeficitDegrees": 15,
+          "fixedFlexionDeformityPresent": "yes",
+          "fixedFlexionDeformityDegrees": 15
+        },
+        "stability": {
+          "coronalDeformityType": "varus",
+          "coronalDeformitySeverity": "mild",
+          "ligamentAcl": "intact",
+          "ligamentPcl": "intact",
+          "ligamentMcl": "intact",
+          "ligamentLcl": "intact",
+          "patellarTracking": "normal"
+        },
+        "strength": {
+          "quadricepsStrengthMrc": 4,
+          "effusionPresent": "yes",
+          "crepitusPresent": "yes"
+        },
+        "imaging": {
+          "weightBearingXrayPerformed": "yes",
+          "kellgrenLawrenceGradeMedial": 2,
+          "kellgrenLawrenceGradeLateral": 2,
+          "kellgrenLawrenceGradePatellofemoral": 1,
+          "mriPerformed": "yes",
+          "mriFindings": "Degenerate medial meniscal tear, moderate chondral loss medial compartment.",
+          "ctPerformed": "no",
+          "ctIndication": ""
+        },
+        "conservative": {
+          "physiotherapyTried": "yes",
+          "physiotherapyDurationWeeks": 24,
+          "weightManagementAdviceGiven": "yes",
+          "injectionGiven": "yes",
+          "injectionType": "corticosteroid",
+          "injectionCount": 2,
+          "injectionResponse": "partial",
+          "nsaidAnalgesicTrial": "yes",
+          "nsaidAnalgesicResponse": "partial",
+          "walkingAidTrial": "yes",
+          "conservativeMeasuresExhausted": "yes"
+        },
+        "generalHealth": {
+          "diabetesControlled": "yes",
+          "cardiacDisease": "no",
+          "bleedingDisorderOrAnticoagulant": "no",
+          "smokingStatus": "former",
+          "generalFitnessNote": "Type 2 diabetes, HbA1c 52; weight-management programme in progress."
+        },
+        "preOpBloods": {
+          "fbcDone": "yes",
+          "renalFunctionDone": "yes",
+          "clottingDone": "",
+          "ecgDone": "",
+          "mrsaScreenDone": "",
+          "urinalysisDone": ""
+        },
+        "sharedDecision": {
+          "risksBenefitsDiscussed": "yes",
+          "realisticExpectationsDiscussed": "yes",
+          "patientDecisionAidGiven": "yes",
+          "interpreterRequired": "no"
+        },
+        "plan": {
+          "planRecommendation": "mdt-review",
+          "targetListDate": "",
+          "responsibleSurgeon": "Mr Anthony Barrow"
+        },
+        "summary": {
+          "overrideCandidacy": "candidate",
+          "overrideReason": "Night pain and MRI chondral loss under-represented by the partial OKS; agreed at clinic that he meets the candidate threshold pending weight loss.",
+          "clinicianNotes": "Discuss staging of bilateral disease at MDT.",
+          "signedByName": "Ms Helen Cartwright"
+        }
+      },
+      "expected": {
+        "oksItemScores": {
+          "oksPainSeverity": 3,
+          "oksWashingAndDrying": 3,
+          "oksTransport": 3,
+          "oksWalkingDistance": 3,
+          "oksPainSittingOrLying": 3,
+          "oksLimping": 3,
+          "oksKneeling": null,
+          "oksNightPainFrequency": 3,
+          "oksPainInterferingWithWork": 3,
+          "oksGivingWay": 3,
+          "oksShopping": null,
+          "oksStairs": 3
+        },
+        "oksTotal": 30,
+        "computedOksCategory": "mild-to-moderate",
+        "finalOksCategory": "mild-to-moderate",
+        "maxKellgrenLawrenceGrade": 2,
+        "computedCandidacy": "mdt-review",
+        "finalCandidacy": "candidate",
+        "overrideReason": "Night pain and MRI chondral loss under-represented by the partial OKS; agreed at clinic that he meets the candidate threshold pending weight loss.",
+        "firedRules": [
+          {
+            "ruleId": "R-OKS-TOTAL",
+            "instrument": "oks",
+            "component": "total",
+            "score": 30,
+            "band": "mild-to-moderate",
+            "category": "oxford-knee-score",
+            "description": "Oxford Knee Score total 30 of 48 falls in the mild to moderate band."
+          },
+          {
+            "ruleId": "R-OKS-INCOMPLETE",
+            "instrument": "oks",
+            "component": "total",
+            "score": 10,
+            "band": "",
+            "category": "oxford-knee-score",
+            "description": "Only 10 of the 12 Oxford Knee Score items have been answered; the total is a partial score."
+          },
+          {
+            "ruleId": "R-CANDIDACY",
+            "instrument": "candidacy",
+            "component": "recommendation",
+            "score": null,
+            "band": "mdt-review",
+            "category": "surgical-candidacy",
+            "description": "The findings are mixed or borderline and do not clearly satisfy the strong-candidate, candidate, continue-conservative, or not-indicated criteria."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-BILATERAL-SYMPTOMATIC-001",
+            "category": "bilateral-symptomatic",
+            "priority": "low",
+            "description": "Both knees are recorded as significantly symptomatic.",
+            "suggestedAction": "Discuss staging: simultaneous bilateral replacement versus sequential single-knee procedures."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Severe bilateral OA, strong candidate with four pre-listing flags",
+      "description": "64-year-old woman with end-stage bilateral knee OA: all 12 OKS items answered totalling 9 (severe), KL 4/3/3 (max 4), conservative measures exhausted, plan total knee replacement. BMI 160 cm / 105 kg = 41.0; pre-op checklist has clotting 'no', ECG '', MRSA 'no', urinalysis '' (four items not 'yes'); fixed flexion deformity present at 20 degrees; bilateral. Expect computedCandidacy = finalCandidacy = 'strong-candidate' (no override), overrideReason '', firedRules = [R-OKS-TOTAL (9, severe), R-CANDIDACY (strong-candidate)], and four flags in stable priority order: F-HIGH-BMI-SURGICAL-RISK-001 (medium, 'Body mass index 41 kg/m²...'), F-PRE-OP-BLOODS-INCOMPLETE-001 (medium, listing clotting, electrocardiogram, MRSA screen, urinalysis), F-FIXED-FLEXION-DEFORMITY-001 (medium, 20 degrees), F-BILATERAL-SYMPTOMATIC-001 (low). The conservative-not-exhausted flag cannot co-fire with strong-candidate.",
+      "state": {
+        "status": "draft",
+        "clinician": {
+          "clinicianName": "Mr Anthony Barrow",
+          "role": "consultant-orthopaedic-surgeon",
+          "registrationBody": "GMC",
+          "registrationNumber": "3987654",
+          "siteName": "Leeds General Infirmary",
+          "assessmentDate": "2026-09-01",
+          "assessmentTime": "09:00"
+        },
+        "patient": {
+          "name": "Patricia Whitcombe",
+          "birthDate": "1962-05-30",
+          "sex": "female",
+          "nhsNumber": "612 398 4471",
+          "email": "pat.whitcombe@example.org",
+          "phone": "07700 900123",
+          "heightAsCm": 160,
+          "weightAsKg": 105,
+          "preferredLanguage": "English"
+        },
+        "history": {
+          "kneeSide": "bilateral",
+          "symptomDurationMonths": 60,
+          "painAtRest0To10": 6,
+          "painOnActivity0To10": 9,
+          "nightPain": "yes",
+          "priorKneeSurgery": "no",
+          "priorKneeSurgeryType": "",
+          "priorKneeSurgeryDate": "",
+          "priorInjury": "yes",
+          "priorInjuryDetail": "Right tibial plateau fracture 1994, treated conservatively."
+        },
+        "oks": {
+          "oksPainSeverity": 1,
+          "oksWashingAndDrying": 1,
+          "oksTransport": 1,
+          "oksWalkingDistance": 0,
+          "oksPainSittingOrLying": 1,
+          "oksLimping": 1,
+          "oksKneeling": 0,
+          "oksNightPainFrequency": 1,
+          "oksPainInterferingWithWork": 1,
+          "oksGivingWay": 1,
+          "oksShopping": 1,
+          "oksStairs": 0
+        },
+        "functional": {
+          "walkingDistanceBeforePain": "indoors-only",
+          "stairClimbingAbility": "unable",
+          "standFromChairUnaided": "no",
+          "walkingAid": "frame"
+        },
+        "rangeOfMotion": {
+          "flexionDegrees": 85,
+          "extensionDeficitDegrees": 20,
+          "fixedFlexionDeformityPresent": "yes",
+          "fixedFlexionDeformityDegrees": 20
+        },
+        "stability": {
+          "coronalDeformityType": "varus",
+          "coronalDeformitySeverity": "severe",
+          "ligamentAcl": "deficient",
+          "ligamentPcl": "intact",
+          "ligamentMcl": "lax",
+          "ligamentLcl": "intact",
+          "patellarTracking": "maltracking"
+        },
+        "strength": {
+          "quadricepsStrengthMrc": 3,
+          "effusionPresent": "yes",
+          "crepitusPresent": "yes"
+        },
+        "imaging": {
+          "weightBearingXrayPerformed": "yes",
+          "kellgrenLawrenceGradeMedial": 4,
+          "kellgrenLawrenceGradeLateral": 3,
+          "kellgrenLawrenceGradePatellofemoral": 3,
+          "mriPerformed": "no",
+          "mriFindings": "",
+          "ctPerformed": "yes",
+          "ctIndication": "Assess bone stock and tibial plateau malunion for implant planning."
+        },
+        "conservative": {
+          "physiotherapyTried": "yes",
+          "physiotherapyDurationWeeks": 36,
+          "weightManagementAdviceGiven": "yes",
+          "injectionGiven": "yes",
+          "injectionType": "corticosteroid",
+          "injectionCount": 3,
+          "injectionResponse": "none",
+          "nsaidAnalgesicTrial": "yes",
+          "nsaidAnalgesicResponse": "none",
+          "walkingAidTrial": "yes",
+          "conservativeMeasuresExhausted": "yes"
+        },
+        "generalHealth": {
+          "diabetesControlled": "yes",
+          "cardiacDisease": "yes",
+          "bleedingDisorderOrAnticoagulant": "yes",
+          "smokingStatus": "current",
+          "generalFitnessNote": "Hypertension, AF on apixaban, type 2 diabetes; anaesthetic pre-assessment requested."
+        },
+        "preOpBloods": {
+          "fbcDone": "yes",
+          "renalFunctionDone": "yes",
+          "clottingDone": "no",
+          "ecgDone": "",
+          "mrsaScreenDone": "no",
+          "urinalysisDone": ""
+        },
+        "sharedDecision": {
+          "risksBenefitsDiscussed": "yes",
+          "realisticExpectationsDiscussed": "yes",
+          "patientDecisionAidGiven": "yes",
+          "interpreterRequired": "no"
+        },
+        "plan": {
+          "planRecommendation": "total-knee-replacement",
+          "targetListDate": "2026-11-15",
+          "responsibleSurgeon": "Mr Anthony Barrow"
+        },
+        "summary": {
+          "overrideCandidacy": "",
+          "overrideReason": "",
+          "clinicianNotes": "List right TKR first; anticoagulation bridging plan via haematology; complete outstanding pre-op checks.",
+          "signedByName": "Mr Anthony Barrow"
+        }
+      },
+      "expected": {
+        "oksItemScores": {
+          "oksPainSeverity": 1,
+          "oksWashingAndDrying": 1,
+          "oksTransport": 1,
+          "oksWalkingDistance": 0,
+          "oksPainSittingOrLying": 1,
+          "oksLimping": 1,
+          "oksKneeling": 0,
+          "oksNightPainFrequency": 1,
+          "oksPainInterferingWithWork": 1,
+          "oksGivingWay": 1,
+          "oksShopping": 1,
+          "oksStairs": 0
+        },
+        "oksTotal": 9,
+        "computedOksCategory": "severe",
+        "finalOksCategory": "severe",
+        "maxKellgrenLawrenceGrade": 4,
+        "computedCandidacy": "strong-candidate",
+        "finalCandidacy": "strong-candidate",
+        "overrideReason": "",
+        "firedRules": [
+          {
+            "ruleId": "R-OKS-TOTAL",
+            "instrument": "oks",
+            "component": "total",
+            "score": 9,
+            "band": "severe",
+            "category": "oxford-knee-score",
+            "description": "Oxford Knee Score total 9 of 48 falls in the severe band."
+          },
+          {
+            "ruleId": "R-CANDIDACY",
+            "instrument": "candidacy",
+            "component": "recommendation",
+            "score": null,
+            "band": "strong-candidate",
+            "category": "surgical-candidacy",
+            "description": "Oxford Knee Score 9 is 19 or below, Kellgren-Lawrence grade 4 is 3 or above, and conservative measures are exhausted."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-BMI-SURGICAL-RISK-001",
+            "category": "high-bmi-surgical-risk",
+            "priority": "medium",
+            "description": "Body mass index 41 kg/m² is 40 or above.",
+            "suggestedAction": "Discuss weight-management options and surgical risk with the patient; consider a bariatric or weight-management referral before listing."
+          },
+          {
+            "flagId": "F-PRE-OP-BLOODS-INCOMPLETE-001",
+            "category": "pre-op-bloods-incomplete",
+            "priority": "medium",
+            "description": "A surgical recommendation has been made but the following pre-operative checks are not done: clotting, electrocardiogram, MRSA screen, urinalysis.",
+            "suggestedAction": "Complete the outstanding pre-operative checklist items before adding the patient to the surgical waiting list."
+          },
+          {
+            "flagId": "F-FIXED-FLEXION-DEFORMITY-001",
+            "category": "fixed-flexion-deformity",
+            "priority": "medium",
+            "description": "Fixed flexion deformity of 20 degrees exceeds 15 degrees.",
+            "suggestedAction": "Flag for surgical planning: a fixed flexion deformity above 15 degrees affects the surgical approach and soft-tissue balancing."
+          },
+          {
+            "flagId": "F-BILATERAL-SYMPTOMATIC-001",
+            "category": "bilateral-symptomatic",
+            "priority": "low",
+            "description": "Both knees are recorded as significantly symptomatic.",
+            "suggestedAction": "Discuss staging: simultaneous bilateral replacement versus sequential single-knee procedures."
+          }
+        ]
+      }
+    }
+  ]
+}

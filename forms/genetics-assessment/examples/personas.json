@@ -1,0 +1,1168 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeGenetics",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the Genetics Assessment grader. gradeGenetics(state) builds a context (Manchester score from the per-band counts, Bethesda criteria met, external PREMM5 percent or null, external Tyrer-Cuzick lifetime or 0, affected first-degree relatives = parents/siblings/children with affectedWithCancer 'yes' AND a non-empty cancers list, early-onset count using age <= 50 inclusive across relatives AND proband, paediatric < 18, tumour-spectrum booleans), runs 23 rules in catalogue order and returns riskLevel = max severity of the fired rules ('low' when nothing fires), plus manchesterScore/bethesdaMet/premm5Score/tyrerCuzickLifetime and firedRules. Flags are SPLIT: form-app.js calls detectAdditionalFlags(state) with the state only (it re-runs gradeGenetics internally), mirrored by flagsArgs [\"state\"]; flags are stable-sorted high > medium > low. Quirks verified: the Manchester rules are mutually exclusive bands (15-19 / 20-29 / >= 30) while GEN-BET-001 and GEN-BET-002 are cumulative; GEN-FAM-002 uses === 2 so 3+ affected FDRs fire only GEN-FAM-001; hasMaleBreast tests type.includes('male breast'), and 'female breast'.includes('male breast') is TRUE, so any relative cancer typed 'Female breast ...' spuriously fires GEN-TUM-001 (BUG, pinned by the moderate persona); a proband's own male breast cancer is never detected (proband loop only checks ovarian/pancreatic/bilateral); FLAG-COUN-001 fires on priorGeneticCounselling '' as well as 'no'; FLAG-LINE-001/002 need the OTHER side to list <= 1 aunts/uncles + cousins in total, affected or not; the Tyrer-Cuzick >= 17 boundary is inclusive. The 'timestamp' key is added by form-app.js, not the grader. Regenerate expected with: bin/test-personas genetics-assessment --update",
+  "personas": [
+    {
+      "name": "Low - reassurance referral, single late-onset relative",
+      "description": "34-year-old woman referred after her maternal grandmother's breast cancer at 72. No Manchester points (no cancers under the age bands), Bethesda 0/5, no PREMM5 supplied (null), external Tyrer-Cuzick lifetime 11% (< 17), zero affected first-degree relatives, no early-onset or paediatric cancers, no ancestry modifiers, no syndrome suspected, prior counselling 'yes', consent 'yes', no reproductive concerns. Two unaffected paternal uncles are listed so the paternal line is not 'under-represented'. Expect riskLevel 'low' with NO fired rules, manchesterScore 0, bethesdaMet 0, premm5Score null, tyrerCuzickLifetime 11, and zero flags.",
+      "state": {
+        "probandDemographics": {
+          "firstName": "Charlotte",
+          "lastName": "Nairn",
+          "dateOfBirth": "1992-06-18",
+          "sex": "female",
+          "mrn": "RGT-0451229",
+          "preferredContact": "Mobile 07700 900255"
+        },
+        "presentingConcern": {
+          "chiefConcern": "Worried about breast cancer risk after grandmother's diagnosis",
+          "referralReason": "Patient request for family-history risk assessment",
+          "referringClinician": "Dr Imogen Clarke (GP, Meanwood Group Practice)",
+          "urgency": "routine",
+          "suspectedSyndrome": ""
+        },
+        "personalMedicalHistory": {
+          "personalCancerHistory": "no",
+          "cancers": [],
+          "multiplePrimaryCancers": "no",
+          "congenitalAnomalies": "no",
+          "congenitalAnomaliesDetails": "",
+          "developmentalDelay": "no",
+          "priorRadiation": "no",
+          "otherSignificantHistory": "Fit and well; no breast symptoms."
+        },
+        "familyPedigree": {
+          "maternalGrandmother": {
+            "id": "maternal-grandmother",
+            "relation": "Maternal grandmother",
+            "side": "maternal",
+            "generation": 1,
+            "sex": "female",
+            "name": "Edith",
+            "affectedWithCancer": "yes",
+            "cancers": [
+              {
+                "type": "Breast",
+                "ageAtDiagnosis": 72
+              }
+            ],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": "Treated with lumpectomy and radiotherapy 2024; well."
+          },
+          "maternalGrandfather": {
+            "id": "maternal-grandfather",
+            "relation": "Maternal grandfather",
+            "side": "maternal",
+            "generation": 1,
+            "sex": "male",
+            "name": "Frank",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "yes",
+            "ageAtDeath": 81,
+            "causeOfDeath": "Stroke",
+            "notes": ""
+          },
+          "paternalGrandmother": {
+            "id": "paternal-grandmother",
+            "relation": "Paternal grandmother",
+            "side": "paternal",
+            "generation": 1,
+            "sex": "female",
+            "name": "Jean",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": ""
+          },
+          "paternalGrandfather": {
+            "id": "paternal-grandfather",
+            "relation": "Paternal grandfather",
+            "side": "paternal",
+            "generation": 1,
+            "sex": "male",
+            "name": "Alan",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "yes",
+            "ageAtDeath": 77,
+            "causeOfDeath": "Myocardial infarction",
+            "notes": ""
+          },
+          "mother": {
+            "id": "mother",
+            "relation": "Mother",
+            "side": "maternal",
+            "generation": 2,
+            "sex": "female",
+            "name": "Susan",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": "Age 61, routine NHS screening normal."
+          },
+          "father": {
+            "id": "father",
+            "relation": "Father",
+            "side": "paternal",
+            "generation": 2,
+            "sex": "male",
+            "name": "David",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": ""
+          },
+          "maternalAuntsUncles": [],
+          "paternalAuntsUncles": [
+            {
+              "id": "paternal-aunt-uncle-1",
+              "relation": "Paternal uncle",
+              "side": "paternal",
+              "generation": 2,
+              "sex": "male",
+              "name": "Peter",
+              "affectedWithCancer": "no",
+              "cancers": [],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": ""
+            },
+            {
+              "id": "paternal-aunt-uncle-2",
+              "relation": "Paternal uncle",
+              "side": "paternal",
+              "generation": 2,
+              "sex": "male",
+              "name": "Michael",
+              "affectedWithCancer": "no",
+              "cancers": [],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": ""
+            }
+          ],
+          "siblings": [
+            {
+              "id": "sibling-1",
+              "relation": "Sibling",
+              "side": "self",
+              "generation": 3,
+              "sex": "male",
+              "name": "James",
+              "affectedWithCancer": "no",
+              "cancers": [],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": ""
+            }
+          ],
+          "children": [],
+          "maternalCousins": [],
+          "paternalCousins": []
+        },
+        "consanguinityAncestry": {
+          "consanguinity": "no",
+          "consanguinityDetails": "",
+          "maternalAncestry": "White British (Yorkshire)",
+          "paternalAncestry": "White British (Northumberland)",
+          "ashkenaziJewish": "no",
+          "sephardicJewish": "no",
+          "foundingPopulation": "no",
+          "foundingPopulationDetails": ""
+        },
+        "targetedRiskScoring": {
+          "manchester": {
+            "probandFemaleBreastUnder30": null,
+            "probandFemaleBreast30to39": null,
+            "probandFemaleBreast40to49": null,
+            "probandOvarianUnder60": null,
+            "probandMaleBreast": null,
+            "relativeFemaleBreastUnder30": null,
+            "relativeFemaleBreast30to39": null,
+            "relativeFemaleBreast40to49": null,
+            "relativeOvarianUnder60": null,
+            "relativeMaleBreast": null,
+            "relativePancreaticUnder60": null,
+            "relativeProstateUnder60": null
+          },
+          "bethesda": {
+            "crcUnder50": "no",
+            "synchronousMetachronous": "no",
+            "msiHistology": "no",
+            "firstDegreeLynchTumour": "no",
+            "multipleRelativesLynch": "no"
+          },
+          "tyrerCuzick": {
+            "ageYears": 34,
+            "ageAtMenarche": 13,
+            "parous": "yes",
+            "ageAtFirstLiveBirth": 29,
+            "menopausal": "no",
+            "ageAtMenopause": null,
+            "heightCm": 166,
+            "weightKg": 62,
+            "hrtCurrent": "no",
+            "priorBenignBreastDisease": "no",
+            "atypicalHyperplasia": "no",
+            "lcis": "no",
+            "dense": "no",
+            "externalTenYearRisk": 1.2,
+            "externalLifetimeRisk": 11
+          },
+          "premm5": {
+            "probandColorectal": "no",
+            "probandEndometrial": "no",
+            "probandOtherLynchTumour": "no",
+            "youngestProbandAgeAtLynchTumour": null,
+            "firstDegreeWithCRC": 0,
+            "firstDegreeWithEndometrial": 0,
+            "firstDegreeWithOtherLynch": 0,
+            "secondDegreeWithLynch": 0,
+            "youngestRelativeAgeAtLynchTumour": null,
+            "externalPREMM5Percent": null
+          }
+        },
+        "priorGeneticTesting": {
+          "priorTesting": "no",
+          "priorTests": [],
+          "variantsOfUncertainSignificance": "no",
+          "variantsOfUncertainSignificanceDetails": "",
+          "familialVariantKnown": "no",
+          "familialVariantDetails": "",
+          "priorGeneticCounselling": "yes",
+          "priorCounsellingNotes": "Telephone triage with genetic counsellor 2026-08-12."
+        },
+        "patientUnderstandingConcerns": {
+          "understandingOfReferral": "Wants to know whether she needs earlier mammograms.",
+          "primaryConcerns": "Breast cancer risk",
+          "expectations": "Reassurance or a screening plan",
+          "insuranceConcerns": "no",
+          "confidentialityConcerns": "no",
+          "reproductiveImplications": "no",
+          "supportSystem": "Partner and mother",
+          "consentToTesting": "yes"
+        },
+        "recommendationReferralPlan": {
+          "clinicianAssignedRisk": "low",
+          "recommendBRCATesting": "no",
+          "recommendLynchTesting": "no",
+          "recommendPanelTesting": "no",
+          "recommendMMRIHC": "no",
+          "recommendedPanel": "",
+          "referClinicalGenetics": "no",
+          "referBreastSurveillance": "no",
+          "referColonoscopy": "no",
+          "referPsychologicalSupport": "no",
+          "referralUrgency": "routine",
+          "clinicianSummary": "Population-level risk; standard NHS breast screening from 50. Discharged with written information.",
+          "clinicianName": "Dr Imogen Clarke",
+          "clinicianRole": "GP",
+          "signatureDate": "2026-08-28"
+        }
+      },
+      "expected": {
+        "riskLevel": "low",
+        "manchesterScore": 0,
+        "bethesdaMet": 0,
+        "premm5Score": null,
+        "tyrerCuzickLifetime": 11,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate - Tyrer-Cuzick exactly 17%, maternal-only line, 'Female breast' substring bug",
+      "description": "45-year-old woman: mother breast cancer at 52 (typed 'Female breast cancer'), maternal aunt ovarian at 58, no paternal relatives listed beyond the father and grandparents, dense breasts, external Tyrer-Cuzick lifetime exactly 17%, no PREMM5, no prior counselling recorded (''). Manchester 8 (aunt ovarian < 60 only; mother at 52 is outside every band) -> no MAN rule; Bethesda 0; affectedFirstDegree 1 -> no FAM rule; earlyOnset 0. Expect riskLevel 'moderate' with firedRules GEN-TC-001 (17 is inclusive), GEN-TUM-001 (spurious - 'female breast cancer'.includes('male breast') is true) and GEN-TUM-002 (ovarian), in that order. Flags: FLAG-TC-002 (medium), FLAG-LINE-001 (medium: maternal affected 2, paternal 0, 0 paternal aunts/uncles/cousins listed), FLAG-TC-MOD-002 (medium, dense), FLAG-COUN-001 (low, counselling ''). No FLAG-PAT-001 (paternal affected 0).",
+      "state": {
+        "probandDemographics": {
+          "firstName": "Rebecca",
+          "lastName": "Osei-Mensah",
+          "dateOfBirth": "1981-01-27",
+          "sex": "female",
+          "mrn": "RGT-0388014",
+          "preferredContact": "Email rebecca.om@example.com"
+        },
+        "presentingConcern": {
+          "chiefConcern": "Mother and aunt with cancer; wants risk assessment",
+          "referralReason": "Family history of breast and ovarian cancer",
+          "referringClinician": "Dr Tom Fletcher (Breast Unit)",
+          "urgency": "routine",
+          "suspectedSyndrome": ""
+        },
+        "personalMedicalHistory": {
+          "personalCancerHistory": "no",
+          "cancers": [],
+          "multiplePrimaryCancers": "no",
+          "congenitalAnomalies": "no",
+          "congenitalAnomaliesDetails": "",
+          "developmentalDelay": "no",
+          "priorRadiation": "no",
+          "otherSignificantHistory": "Fibroadenoma left breast 2019, excised, benign."
+        },
+        "familyPedigree": {
+          "maternalGrandmother": {
+            "id": "maternal-grandmother",
+            "relation": "Maternal grandmother",
+            "side": "maternal",
+            "generation": 1,
+            "sex": "female",
+            "name": "Grace",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "yes",
+            "ageAtDeath": 84,
+            "causeOfDeath": "Heart failure",
+            "notes": ""
+          },
+          "maternalGrandfather": {
+            "id": "maternal-grandfather",
+            "relation": "Maternal grandfather",
+            "side": "maternal",
+            "generation": 1,
+            "sex": "male",
+            "name": "Kwame",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "yes",
+            "ageAtDeath": 79,
+            "causeOfDeath": "Pneumonia",
+            "notes": ""
+          },
+          "paternalGrandmother": {
+            "id": "paternal-grandmother",
+            "relation": "Paternal grandmother",
+            "side": "paternal",
+            "generation": 1,
+            "sex": "female",
+            "name": "Unknown",
+            "affectedWithCancer": "unknown",
+            "cancers": [],
+            "deceased": "unknown",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": "Father estranged from his family; no information."
+          },
+          "paternalGrandfather": {
+            "id": "paternal-grandfather",
+            "relation": "Paternal grandfather",
+            "side": "paternal",
+            "generation": 1,
+            "sex": "male",
+            "name": "Unknown",
+            "affectedWithCancer": "unknown",
+            "cancers": [],
+            "deceased": "unknown",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": ""
+          },
+          "mother": {
+            "id": "mother",
+            "relation": "Mother",
+            "side": "maternal",
+            "generation": 2,
+            "sex": "female",
+            "name": "Abena",
+            "affectedWithCancer": "yes",
+            "cancers": [
+              {
+                "type": "Female breast cancer",
+                "ageAtDiagnosis": 52
+              }
+            ],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": "ER-positive, treated 2019, on letrozole."
+          },
+          "father": {
+            "id": "father",
+            "relation": "Father",
+            "side": "paternal",
+            "generation": 2,
+            "sex": "male",
+            "name": "Joseph",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": ""
+          },
+          "maternalAuntsUncles": [
+            {
+              "id": "maternal-aunt-uncle-1",
+              "relation": "Maternal aunt",
+              "side": "maternal",
+              "generation": 2,
+              "sex": "female",
+              "name": "Comfort",
+              "affectedWithCancer": "yes",
+              "cancers": [
+                {
+                  "type": "Ovarian",
+                  "ageAtDiagnosis": 58
+                }
+              ],
+              "deceased": "yes",
+              "ageAtDeath": 61,
+              "causeOfDeath": "Ovarian cancer",
+              "notes": "High-grade serous."
+            }
+          ],
+          "paternalAuntsUncles": [],
+          "siblings": [],
+          "children": [
+            {
+              "id": "child-1",
+              "relation": "Child",
+              "side": "self",
+              "generation": 3,
+              "sex": "female",
+              "name": "Ama",
+              "affectedWithCancer": "no",
+              "cancers": [],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": "Age 14."
+            }
+          ],
+          "maternalCousins": [],
+          "paternalCousins": []
+        },
+        "consanguinityAncestry": {
+          "consanguinity": "no",
+          "consanguinityDetails": "",
+          "maternalAncestry": "Ghanaian (Akan)",
+          "paternalAncestry": "Ghanaian",
+          "ashkenaziJewish": "no",
+          "sephardicJewish": "no",
+          "foundingPopulation": "no",
+          "foundingPopulationDetails": ""
+        },
+        "targetedRiskScoring": {
+          "manchester": {
+            "probandFemaleBreastUnder30": null,
+            "probandFemaleBreast30to39": null,
+            "probandFemaleBreast40to49": null,
+            "probandOvarianUnder60": null,
+            "probandMaleBreast": null,
+            "relativeFemaleBreastUnder30": null,
+            "relativeFemaleBreast30to39": null,
+            "relativeFemaleBreast40to49": null,
+            "relativeOvarianUnder60": 1,
+            "relativeMaleBreast": null,
+            "relativePancreaticUnder60": null,
+            "relativeProstateUnder60": null
+          },
+          "bethesda": {
+            "crcUnder50": "no",
+            "synchronousMetachronous": "no",
+            "msiHistology": "no",
+            "firstDegreeLynchTumour": "no",
+            "multipleRelativesLynch": "no"
+          },
+          "tyrerCuzick": {
+            "ageYears": 45,
+            "ageAtMenarche": 12,
+            "parous": "yes",
+            "ageAtFirstLiveBirth": 31,
+            "menopausal": "no",
+            "ageAtMenopause": null,
+            "heightCm": 162,
+            "weightKg": 74,
+            "hrtCurrent": "no",
+            "priorBenignBreastDisease": "yes",
+            "atypicalHyperplasia": "no",
+            "lcis": "no",
+            "dense": "yes",
+            "externalTenYearRisk": 3.1,
+            "externalLifetimeRisk": 17
+          },
+          "premm5": {
+            "probandColorectal": "no",
+            "probandEndometrial": "no",
+            "probandOtherLynchTumour": "no",
+            "youngestProbandAgeAtLynchTumour": null,
+            "firstDegreeWithCRC": 0,
+            "firstDegreeWithEndometrial": 0,
+            "firstDegreeWithOtherLynch": 0,
+            "secondDegreeWithLynch": 0,
+            "youngestRelativeAgeAtLynchTumour": null,
+            "externalPREMM5Percent": null
+          }
+        },
+        "priorGeneticTesting": {
+          "priorTesting": "no",
+          "priorTests": [],
+          "variantsOfUncertainSignificance": "no",
+          "variantsOfUncertainSignificanceDetails": "",
+          "familialVariantKnown": "no",
+          "familialVariantDetails": "",
+          "priorGeneticCounselling": "",
+          "priorCounsellingNotes": ""
+        },
+        "patientUnderstandingConcerns": {
+          "understandingOfReferral": "Understands this is about whether she needs extra screening or a gene test.",
+          "primaryConcerns": "Risk to daughter",
+          "expectations": "A clear plan",
+          "insuranceConcerns": "no",
+          "confidentialityConcerns": "no",
+          "reproductiveImplications": "no",
+          "supportSystem": "Husband, church community",
+          "consentToTesting": "yes"
+        },
+        "recommendationReferralPlan": {
+          "clinicianAssignedRisk": "moderate",
+          "recommendBRCATesting": "no",
+          "recommendLynchTesting": "no",
+          "recommendPanelTesting": "no",
+          "recommendMMRIHC": "no",
+          "recommendedPanel": "",
+          "referClinicalGenetics": "yes",
+          "referBreastSurveillance": "yes",
+          "referColonoscopy": "no",
+          "referPsychologicalSupport": "no",
+          "referralUrgency": "routine",
+          "clinicianSummary": "Moderate-risk breast surveillance (annual mammography 40-49). Aunt's tumour block to be requested for BRCA tumour testing; discuss testing the mother first.",
+          "clinicianName": "Dr Tom Fletcher",
+          "clinicianRole": "Consultant Breast Surgeon",
+          "signatureDate": "2026-08-30"
+        }
+      },
+      "expected": {
+        "riskLevel": "moderate",
+        "manchesterScore": 8,
+        "bethesdaMet": 0,
+        "premm5Score": null,
+        "tyrerCuzickLifetime": 17,
+        "firedRules": [
+          {
+            "id": "GEN-TC-001",
+            "category": "Tyrer-Cuzick",
+            "description": "Tyrer-Cuzick lifetime risk >= 17% — moderate-risk breast surveillance per NICE FH.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-TUM-001",
+            "category": "Tumour Spectrum",
+            "description": "Male breast cancer in family — consider BRCA2 testing.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-TUM-002",
+            "category": "Tumour Spectrum",
+            "description": "Ovarian cancer (any age) in family — BRCA1/2 testing indicated per NICE/NCCN.",
+            "severity": "moderate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-TC-002",
+            "category": "Breast Surveillance",
+            "message": "Tyrer-Cuzick lifetime risk 17% — moderate-risk breast surveillance pathway per NICE FH.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LINE-001",
+            "category": "Pedigree Limitation",
+            "message": "Cancer history concentrated on the maternal line; paternal line under-represented — request additional paternal pedigree where possible.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-TC-MOD-002",
+            "category": "Breast Risk Modifier",
+            "message": "Dense mammographic breast tissue — modest independent risk modifier and reduces mammographic sensitivity.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-COUN-001",
+            "category": "General Counselling",
+            "message": "No prior formal genetic counselling recorded — pre-test counselling appointment recommended.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "High - bilateral breast + endometrial proband, Lynch and BRCA signals, Ashkenazi, paediatric Wilms",
+      "description": "41-year-old Ashkenazi Jewish woman with bilateral breast cancer at 38 and endometrial cancer at 41 (multiple primaries), dense breasts, previous VUS on a 2023 panel, insurance and reproductive concerns, no prior counselling, syndrome suspected by referrer. Pedigree: mother breast 44, sister ovarian 47, brother colorectal 45 (3 affected FDRs), maternal grandmother breast 49, maternal aunt ovarian 51, paternal uncle pancreatic 57, paternal grandfather prostate 59, paternal cousin Wilms tumour at 3. Manchester: proband 30-39 x2 (bilateral) = 8, relatives 40-49 x2 = 6, ovarian < 60 x2 = 16, pancreatic 1, prostate 1 -> 32 -> GEN-MAN-003. Bethesda 2 (FDR Lynch tumour, multiple relatives) -> GEN-BET-001 + GEN-BET-002. PREMM5 12.4 -> GEN-PREMM5-001. Tyrer-Cuzick 38 -> GEN-TC-002. affectedFirstDegree 3 -> GEN-FAM-001 (not FAM-002). earlyOnset <= 50: mother, sister, brother, grandmother, cousin + proband x2 = 7 -> GEN-FAM-003; paediatric 1 -> GEN-FAM-004. Ovarian -> GEN-TUM-002, pancreatic -> GEN-TUM-003, bilateral -> GEN-TUM-004, multiple primaries -> GEN-TUM-005, Ashkenazi + proband breast -> GEN-ANC-001, suspected syndrome -> GEN-SYN-001, reproductive -> GEN-COUN-001. 15 rules, riskLevel 'high'. Flags (15): high FLAG-BRCA-001, FLAG-LYNCH-001 ('2 Revised Bethesda criteria'), FLAG-LYNCH-002, FLAG-TC-001, FLAG-EARLY-001 ('7 cancers'), FLAG-PAEDS-001, FLAG-MPRIM-001; medium FLAG-PAT-001, FLAG-ANC-001, FLAG-TC-MOD-002, FLAG-SYN-001, FLAG-VUS-001, FLAG-PSYCH-001; low FLAG-REPRO-001, FLAG-COUN-001. No LINE flag (both sides affected), no consent flag.",
+      "state": {
+        "probandDemographics": {
+          "firstName": "Miriam",
+          "lastName": "Goldberg",
+          "dateOfBirth": "1985-03-09",
+          "sex": "female",
+          "mrn": "RGT-0219876",
+          "preferredContact": "Mobile 07700 900901"
+        },
+        "presentingConcern": {
+          "chiefConcern": "Second primary cancer at 41 with strong family history",
+          "referralReason": "Bilateral breast cancer age 38, endometrial cancer age 41, multiple affected first-degree relatives",
+          "referringClinician": "Dr Priya Raman (Consultant Oncologist)",
+          "urgency": "urgent",
+          "suspectedSyndrome": "Lynch syndrome vs hereditary breast-ovarian cancer (BRCA1/2)"
+        },
+        "personalMedicalHistory": {
+          "personalCancerHistory": "yes",
+          "cancers": [
+            {
+              "type": "Breast",
+              "ageAtDiagnosis": 38,
+              "bilateral": "yes",
+              "treatment": "Bilateral mastectomy, chemotherapy (triple-negative right, ER+ left)"
+            },
+            {
+              "type": "Endometrial",
+              "ageAtDiagnosis": 41,
+              "bilateral": "no",
+              "treatment": "Total hysterectomy and BSO 2026-06; MMR IHC pending"
+            }
+          ],
+          "multiplePrimaryCancers": "yes",
+          "congenitalAnomalies": "no",
+          "congenitalAnomaliesDetails": "",
+          "developmentalDelay": "no",
+          "priorRadiation": "no",
+          "otherSignificantHistory": ""
+        },
+        "familyPedigree": {
+          "maternalGrandmother": {
+            "id": "maternal-grandmother",
+            "relation": "Maternal grandmother",
+            "side": "maternal",
+            "generation": 1,
+            "sex": "female",
+            "name": "Ruth",
+            "affectedWithCancer": "yes",
+            "cancers": [
+              {
+                "type": "Breast",
+                "ageAtDiagnosis": 49
+              }
+            ],
+            "deceased": "yes",
+            "ageAtDeath": 55,
+            "causeOfDeath": "Metastatic breast cancer",
+            "notes": ""
+          },
+          "maternalGrandfather": {
+            "id": "maternal-grandfather",
+            "relation": "Maternal grandfather",
+            "side": "maternal",
+            "generation": 1,
+            "sex": "male",
+            "name": "Samuel",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "yes",
+            "ageAtDeath": 88,
+            "causeOfDeath": "Old age",
+            "notes": ""
+          },
+          "paternalGrandmother": {
+            "id": "paternal-grandmother",
+            "relation": "Paternal grandmother",
+            "side": "paternal",
+            "generation": 1,
+            "sex": "female",
+            "name": "Leah",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": "Age 91."
+          },
+          "paternalGrandfather": {
+            "id": "paternal-grandfather",
+            "relation": "Paternal grandfather",
+            "side": "paternal",
+            "generation": 1,
+            "sex": "male",
+            "name": "Isaac",
+            "affectedWithCancer": "yes",
+            "cancers": [
+              {
+                "type": "Prostate",
+                "ageAtDiagnosis": 59
+              }
+            ],
+            "deceased": "yes",
+            "ageAtDeath": 74,
+            "causeOfDeath": "Prostate cancer",
+            "notes": "Gleason 9."
+          },
+          "mother": {
+            "id": "mother",
+            "relation": "Mother",
+            "side": "maternal",
+            "generation": 2,
+            "sex": "female",
+            "name": "Hannah",
+            "affectedWithCancer": "yes",
+            "cancers": [
+              {
+                "type": "Breast",
+                "ageAtDiagnosis": 44
+              }
+            ],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": "Never tested; willing to be tested."
+          },
+          "father": {
+            "id": "father",
+            "relation": "Father",
+            "side": "paternal",
+            "generation": 2,
+            "sex": "male",
+            "name": "Daniel",
+            "affectedWithCancer": "no",
+            "cancers": [],
+            "deceased": "no",
+            "ageAtDeath": null,
+            "causeOfDeath": "",
+            "notes": ""
+          },
+          "maternalAuntsUncles": [
+            {
+              "id": "maternal-aunt-uncle-1",
+              "relation": "Maternal aunt",
+              "side": "maternal",
+              "generation": 2,
+              "sex": "female",
+              "name": "Esther",
+              "affectedWithCancer": "yes",
+              "cancers": [
+                {
+                  "type": "Ovarian",
+                  "ageAtDiagnosis": 51
+                }
+              ],
+              "deceased": "yes",
+              "ageAtDeath": 54,
+              "causeOfDeath": "Ovarian cancer",
+              "notes": ""
+            }
+          ],
+          "paternalAuntsUncles": [
+            {
+              "id": "paternal-aunt-uncle-1",
+              "relation": "Paternal uncle",
+              "side": "paternal",
+              "generation": 2,
+              "sex": "male",
+              "name": "Benjamin",
+              "affectedWithCancer": "yes",
+              "cancers": [
+                {
+                  "type": "Pancreatic",
+                  "ageAtDiagnosis": 57
+                }
+              ],
+              "deceased": "yes",
+              "ageAtDeath": 58,
+              "causeOfDeath": "Pancreatic cancer",
+              "notes": ""
+            }
+          ],
+          "siblings": [
+            {
+              "id": "sibling-1",
+              "relation": "Sibling",
+              "side": "self",
+              "generation": 3,
+              "sex": "female",
+              "name": "Naomi",
+              "affectedWithCancer": "yes",
+              "cancers": [
+                {
+                  "type": "Ovarian",
+                  "ageAtDiagnosis": 47
+                }
+              ],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": "On maintenance olaparib."
+            },
+            {
+              "id": "sibling-2",
+              "relation": "Sibling",
+              "side": "self",
+              "generation": 3,
+              "sex": "male",
+              "name": "Ari",
+              "affectedWithCancer": "yes",
+              "cancers": [
+                {
+                  "type": "Colorectal",
+                  "ageAtDiagnosis": 45
+                }
+              ],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": "Right-sided; MSI status not known."
+            }
+          ],
+          "children": [
+            {
+              "id": "child-1",
+              "relation": "Child",
+              "side": "self",
+              "generation": 3,
+              "sex": "male",
+              "name": "Eli",
+              "affectedWithCancer": "no",
+              "cancers": [],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": "Age 9."
+            }
+          ],
+          "maternalCousins": [],
+          "paternalCousins": [
+            {
+              "id": "paternal-cousin-1",
+              "relation": "Paternal cousin",
+              "side": "paternal",
+              "generation": 3,
+              "sex": "female",
+              "name": "Talia",
+              "affectedWithCancer": "yes",
+              "cancers": [
+                {
+                  "type": "Wilms tumour (kidney)",
+                  "ageAtDiagnosis": 3
+                }
+              ],
+              "deceased": "no",
+              "ageAtDeath": null,
+              "causeOfDeath": "",
+              "notes": "Treated in childhood; now 22 and well."
+            }
+          ]
+        },
+        "consanguinityAncestry": {
+          "consanguinity": "no",
+          "consanguinityDetails": "",
+          "maternalAncestry": "Ashkenazi Jewish (Lithuanian)",
+          "paternalAncestry": "Ashkenazi Jewish (Polish)",
+          "ashkenaziJewish": "yes",
+          "sephardicJewish": "no",
+          "foundingPopulation": "no",
+          "foundingPopulationDetails": ""
+        },
+        "targetedRiskScoring": {
+          "manchester": {
+            "probandFemaleBreastUnder30": null,
+            "probandFemaleBreast30to39": 2,
+            "probandFemaleBreast40to49": null,
+            "probandOvarianUnder60": null,
+            "probandMaleBreast": null,
+            "relativeFemaleBreastUnder30": null,
+            "relativeFemaleBreast30to39": null,
+            "relativeFemaleBreast40to49": 2,
+            "relativeOvarianUnder60": 2,
+            "relativeMaleBreast": null,
+            "relativePancreaticUnder60": 1,
+            "relativeProstateUnder60": 1
+          },
+          "bethesda": {
+            "crcUnder50": "no",
+            "synchronousMetachronous": "no",
+            "msiHistology": "no",
+            "firstDegreeLynchTumour": "yes",
+            "multipleRelativesLynch": "yes"
+          },
+          "tyrerCuzick": {
+            "ageYears": 41,
+            "ageAtMenarche": 11,
+            "parous": "yes",
+            "ageAtFirstLiveBirth": 32,
+            "menopausal": "yes",
+            "ageAtMenopause": 41,
+            "heightCm": 160,
+            "weightKg": 58,
+            "hrtCurrent": "no",
+            "priorBenignBreastDisease": "no",
+            "atypicalHyperplasia": "no",
+            "lcis": "no",
+            "dense": "yes",
+            "externalTenYearRisk": 9.8,
+            "externalLifetimeRisk": 38
+          },
+          "premm5": {
+            "probandColorectal": "no",
+            "probandEndometrial": "yes",
+            "probandOtherLynchTumour": "no",
+            "youngestProbandAgeAtLynchTumour": 41,
+            "firstDegreeWithCRC": 1,
+            "firstDegreeWithEndometrial": 0,
+            "firstDegreeWithOtherLynch": 1,
+            "secondDegreeWithLynch": 1,
+            "youngestRelativeAgeAtLynchTumour": 45,
+            "externalPREMM5Percent": 12.4
+          }
+        },
+        "priorGeneticTesting": {
+          "priorTesting": "yes",
+          "priorTests": [
+            {
+              "testName": "R208 inherited breast/ovarian cancer panel",
+              "laboratory": "North East and Yorkshire GLH",
+              "testDate": "2023-05-16",
+              "resultSummary": "No pathogenic variant; ATM c.1234A>G VUS"
+            }
+          ],
+          "variantsOfUncertainSignificance": "yes",
+          "variantsOfUncertainSignificanceDetails": "ATM VUS 2023 - not reclassified",
+          "familialVariantKnown": "no",
+          "familialVariantDetails": "",
+          "priorGeneticCounselling": "no",
+          "priorCounsellingNotes": "Panel was ordered by oncology without a formal counselling appointment."
+        },
+        "patientUnderstandingConcerns": {
+          "understandingOfReferral": "Understands she may carry a hereditary cancer gene and that this affects her siblings and son.",
+          "primaryConcerns": "Risk to son; further cancers; whether sister and brother should be tested",
+          "expectations": "Full panel testing and a surveillance plan",
+          "insuranceConcerns": "yes",
+          "confidentialityConcerns": "no",
+          "reproductiveImplications": "yes",
+          "supportSystem": "Husband, synagogue community, Macmillan nurse",
+          "consentToTesting": "yes"
+        },
+        "recommendationReferralPlan": {
+          "clinicianAssignedRisk": "high",
+          "recommendBRCATesting": "yes",
+          "recommendLynchTesting": "yes",
+          "recommendPanelTesting": "yes",
+          "recommendMMRIHC": "yes",
+          "recommendedPanel": "R208 + R210 (Lynch) with Ashkenazi founder variants; reflex to R207 if negative",
+          "referClinicalGenetics": "yes",
+          "referBreastSurveillance": "no",
+          "referColonoscopy": "yes",
+          "referPsychologicalSupport": "yes",
+          "referralUrgency": "urgent",
+          "clinicianSummary": "Very high pre-test probability. Urgent germline panel; MMR IHC on endometrial tumour; colonoscopy now; cascade testing for siblings once a variant is found.",
+          "clinicianName": "Dr Priya Raman",
+          "clinicianRole": "Consultant Oncologist",
+          "signatureDate": "2026-09-01"
+        }
+      },
+      "expected": {
+        "riskLevel": "high",
+        "manchesterScore": 32,
+        "bethesdaMet": 2,
+        "premm5Score": 12.4,
+        "tyrerCuzickLifetime": 38,
+        "firedRules": [
+          {
+            "id": "GEN-MAN-003",
+            "category": "Manchester Score",
+            "description": "Manchester score >= 30 — high probability of BRCA1/2 mutation; testing strongly indicated.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-BET-001",
+            "category": "Bethesda",
+            "description": "At least one Revised Bethesda criterion met — MMR IHC / MSI testing indicated.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-BET-002",
+            "category": "Bethesda",
+            "description": "Two or more Revised Bethesda criteria met — strong indication for Lynch syndrome workup.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-PREMM5-001",
+            "category": "PREMM5",
+            "description": "PREMM5 score >= 5% — Lynch syndrome germline testing indicated.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-TC-002",
+            "category": "Tyrer-Cuzick",
+            "description": "Tyrer-Cuzick lifetime risk >= 30% — high-risk breast surveillance per NICE FH.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-FAM-001",
+            "category": "Family History",
+            "description": ">= 3 affected first-degree relatives — significant familial cancer burden.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-FAM-003",
+            "category": "Family History",
+            "description": "Multiple early-onset cancers (<=50) in the family — strongly suggestive of hereditary syndrome.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-FAM-004",
+            "category": "Family History",
+            "description": "Paediatric cancer cluster — at least one paediatric (<18) cancer in close relatives.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-TUM-002",
+            "category": "Tumour Spectrum",
+            "description": "Ovarian cancer (any age) in family — BRCA1/2 testing indicated per NICE/NCCN.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-TUM-003",
+            "category": "Tumour Spectrum",
+            "description": "Pancreatic cancer in family — consider hereditary pancreatic cancer syndromes.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-TUM-004",
+            "category": "Tumour Spectrum",
+            "description": "Bilateral breast cancer — strong indication for BRCA1/2 testing.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-TUM-005",
+            "category": "Proband History",
+            "description": "Multiple primary cancers in proband — pathogenic-variant pre-test probability elevated.",
+            "severity": "high"
+          },
+          {
+            "id": "GEN-ANC-001",
+            "category": "Ancestry",
+            "description": "Ashkenazi Jewish ancestry plus breast / ovarian / pancreatic cancer in proband or family — BRCA founder mutation testing recommended.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-SYN-001",
+            "category": "Suspected Syndrome",
+            "description": "Referring clinician has named a suspected syndrome — formal genetics review indicated.",
+            "severity": "moderate"
+          },
+          {
+            "id": "GEN-COUN-001",
+            "category": "General Counselling",
+            "description": "Patient has reproductive concerns — preconception / prenatal genetic counselling relevant.",
+            "severity": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-BRCA-001",
+            "category": "BRCA Testing",
+            "message": "Manchester score 32 (>=15) — BRCA1/2 germline testing indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LYNCH-001",
+            "category": "Lynch Testing",
+            "message": "2 Revised Bethesda criteria met — MMR IHC / MSI testing on tumour indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LYNCH-002",
+            "category": "Lynch Testing",
+            "message": "PREMM5 score 12.4% (>=5%) — Lynch syndrome germline panel indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TC-001",
+            "category": "Breast Surveillance",
+            "message": "Tyrer-Cuzick lifetime risk 38% — high-risk breast surveillance pathway per NICE FH.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-EARLY-001",
+            "category": "Cancer Spectrum",
+            "message": "7 cancers diagnosed at age 50 or younger across proband and family.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAEDS-001",
+            "category": "Cancer Spectrum",
+            "message": "Paediatric cancer (<18) reported — consider Li-Fraumeni and other paediatric tumour syndromes.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MPRIM-001",
+            "category": "Proband History",
+            "message": "Proband has multiple primary cancers — pre-test probability of pathogenic variant elevated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAT-001",
+            "category": "Paternal Line",
+            "message": "Affected paternal-line relatives — remember that BRCA1/2 transmits paternally; consider full paternal pedigree.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ANC-001",
+            "category": "Ancestry",
+            "message": "Ashkenazi Jewish ancestry — three BRCA1/2 founder variants account for the majority of mutations in this population.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-TC-MOD-002",
+            "category": "Breast Risk Modifier",
+            "message": "Dense mammographic breast tissue — modest independent risk modifier and reduces mammographic sensitivity.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SYN-001",
+            "category": "Suspected Syndrome",
+            "message": "Referrer suspects: Lynch syndrome vs hereditary breast-ovarian cancer (BRCA1/2)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VUS-001",
+            "category": "Prior Testing",
+            "message": "Variant(s) of uncertain significance previously reported — review variant interpretation databases for reclassification.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PSYCH-001",
+            "category": "Counselling",
+            "message": "Patient has insurance concerns — discuss GINA / local protections before testing.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-REPRO-001",
+            "category": "Reproductive Counselling",
+            "message": "Patient asking about reproductive implications — offer preconception / prenatal genetic counselling.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-COUN-001",
+            "category": "General Counselling",
+            "message": "No prior formal genetic counselling recorded — pre-test counselling appointment recommended.",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

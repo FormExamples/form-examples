@@ -1,0 +1,628 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateNIHSS",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateNIHSS(data) returns { nihssScore, nihssSeverity, firedRules } — no flags — so this is a SPLIT engine: the oracle pins detectAdditionalFlags(state) as expected.additionalFlags with flagsArgs [\"state\"], mirroring form-app.js's `detectAdditionalFlags(state)`. The 15 NIHSS items are summed with `?? 0`, so an unanswered item scores 0 and a blank form scores 0 = 'No stroke symptoms'; firedRules lists only items > 0 in catalogue order NIHSS-1A,1B,1C,2,3,4,5A,5B,6A,6B,7,8,9,10,11. Severity: 0 'No stroke symptoms', 1-4 'Minor stroke', 5-15 'Moderate stroke', 16-20 'Moderate to severe stroke', 21-42 'Severe stroke' — the label is always stroke-worded even for a non-stroke referral such as an epilepsy review (QUIRK). Flags verified: FLAG-STROKE-001 needs consciousness >= 2, any motor limb >= 3, or language >= 2; FLAG-STROKE-002 onsetType 'sudden'; FLAG-SEIZURE-001 statusEpilepticus 'yes'; FLAG-ICP-001 consciousness >= 2 AND redFlagWorstEver 'yes'; FLAG-ICP-002 mriCtFinding 'mass' or 'haemorrhage'; FLAG-IMAGING-001 mriCtFinding 'haemorrhage' — so a haemorrhage fires BOTH ICP-002 and IMAGING-001 (double-flag QUIRK); FLAG-HEADACHE-001/-002/-003 read the red-flag yes/no fields without checking headachePresent (QUIRK); HEADACHE-002 needs fever AND neck stiffness both 'yes'; FLAG-ANTICOAG-001 medium; FLAG-COGNITIVE-001 orientation 'disoriented'; FLAG-COGNITIVE-002 mmseScore < 24 (24 exactly does not fire); FLAG-MOBILITY-001 gait 'ataxic' or 'unable'; FLAG-EEG-001 eegFinding 'epileptiform'; FLAG-DISABILITY-001 mrsScore >= 4; FLAG-DRIVING-001 drivingStatus 'not-driving-medical' (low). Flags are stable-sorted high > medium > low; FLAG-ANTICOAG-001 is pushed before the headache flags but sorts after them. Regenerate expected with: bin/test-personas neurology-assessment --update",
+  "personas": [
+    {
+      "name": "Migraine follow-up, normal neurological examination",
+      "description": "34-year-old woman reviewed for migraine with aura, symptoms gradual in onset and improving on propranolol prophylaxis: all 15 NIHSS items scored 0, every headache red flag 'no', no seizure history, normal motor/sensory exam and gait, fully oriented with MMSE 30, no anticoagulants, MRI normal, mRS 0, currently driving. Expect nihssScore 0, nihssSeverity 'No stroke symptoms', firedRules empty, additionalFlags empty.",
+      "state": {
+        "demographics": {
+          "firstName": "Chloe",
+          "lastName": "Sandford",
+          "dateOfBirth": "1992-04-22",
+          "sex": "female",
+          "weight": 61,
+          "height": 167
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Recurrent unilateral throbbing headache with visual aura",
+          "onsetDate": "2024-11-01",
+          "onsetType": "gradual",
+          "duration": "Episodes of 6-12 hours, 2-3 per month",
+          "progression": "improving",
+          "associatedSymptoms": "Photophobia, nausea",
+          "precipitatingEvent": "Sleep deprivation, missed meals"
+        },
+        "nihssAssessment": {
+          "consciousness": 0,
+          "consciousnessQuestions": 0,
+          "consciousnessCommands": 0,
+          "gaze": 0,
+          "visual": 0,
+          "facialPalsy": 0,
+          "motorLeftArm": 0,
+          "motorRightArm": 0,
+          "motorLeftLeg": 0,
+          "motorRightLeg": 0,
+          "limbAtaxia": 0,
+          "sensory": 0,
+          "language": 0,
+          "dysarthria": 0,
+          "extinctionInattention": 0
+        },
+        "headacheAssessment": {
+          "headachePresent": "yes",
+          "headacheType": "migraine",
+          "frequency": "2-3 per month",
+          "severity": 6,
+          "aura": "yes",
+          "auraDescription": "Scintillating scotoma lasting 20 minutes before headache",
+          "triggers": "Sleep deprivation, red wine",
+          "redFlagSuddenOnset": "no",
+          "redFlagWorstEver": "no",
+          "redFlagFever": "no",
+          "redFlagNeckStiffness": "no",
+          "redFlagNeurologicalDeficit": "no"
+        },
+        "seizureHistory": {
+          "seizureHistory": "no",
+          "seizureType": "",
+          "frequency": "",
+          "lastSeizureDate": "",
+          "triggers": "",
+          "aura": "",
+          "auraDescription": "",
+          "postIctalState": "",
+          "statusEpilepticus": "no"
+        },
+        "motorSensoryExam": {
+          "strengthUpperLeft": "5/5",
+          "strengthUpperRight": "5/5",
+          "strengthLowerLeft": "5/5",
+          "strengthLowerRight": "5/5",
+          "tone": "normal",
+          "reflexes": "normal",
+          "plantarResponseLeft": "flexor",
+          "plantarResponseRight": "flexor",
+          "sensation": "normal",
+          "sensationDetails": "",
+          "coordination": "yes",
+          "coordinationDetails": "",
+          "gait": "normal"
+        },
+        "cognitiveAssessment": {
+          "orientation": "fully-oriented",
+          "attentionNormal": "yes",
+          "memoryShortTerm": "yes",
+          "memoryLongTerm": "yes",
+          "languageNormal": "yes",
+          "languageDetails": "",
+          "visuospatialNormal": "yes",
+          "executiveFunctionNormal": "yes",
+          "mmseScore": 30
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Propranolol",
+              "dose": "40 mg",
+              "frequency": "twice daily"
+            },
+            {
+              "name": "Sumatriptan",
+              "dose": "50 mg",
+              "frequency": "as required"
+            }
+          ],
+          "anticonvulsants": "no",
+          "anticonvulsantDetails": "",
+          "migraineProphylaxis": "yes",
+          "migraineProphylaxisDetails": "Propranolol 40 mg BD since March 2026",
+          "neuropathicPainMeds": "no",
+          "neuropathicPainDetails": "",
+          "anticoagulants": "no",
+          "anticoagulantDetails": ""
+        },
+        "diagnosticResults": {
+          "mriCtPerformed": "yes",
+          "mriCtFinding": "normal",
+          "mriCtDetails": "MRI brain May 2026: normal",
+          "eegPerformed": "no",
+          "eegFinding": "",
+          "eegDetails": "",
+          "emgNcsPerformed": "no",
+          "emgNcsDetails": "",
+          "lumbarPuncturePerformed": "no",
+          "lumbarPunctureDetails": ""
+        },
+        "functionalSocial": {
+          "mrsScore": 0,
+          "drivingStatus": "driving",
+          "drivingRestrictionDetails": "",
+          "employmentStatus": "employed",
+          "employmentImpact": "Occasional day off during attacks",
+          "supportNeeds": "",
+          "livingSituation": "Lives with partner",
+          "carePlanRequired": "no"
+        }
+      },
+      "expected": {
+        "nihssScore": 0,
+        "nihssSeverity": "No stroke symptoms",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Epilepsy review with residual minor deficits at the 4-point boundary",
+      "description": "58-year-old man with focal epilepsy after a 2024 left MCA infarct, reviewed for breakthrough seizures: NIHSS facial palsy 1, limb ataxia 1, sensory 1, dysarthria 1 (total 4, the top of 'Minor stroke'), all other items 0; onset gradual; headache present but fever 'yes' with neck stiffness 'no' (HEADACHE-002 needs both); no status epilepticus; MMSE exactly 24 (threshold is < 24, no flag); mRS 3 (threshold >= 4, no flag); gait 'hemiparetic' (not ataxic/unable); on levetiracetam; EEG shows epileptiform discharges; not driving for medical reasons. Expect nihssScore 4, nihssSeverity 'Minor stroke' (stroke-worded label on an epilepsy review), firedRules NIHSS-4, NIHSS-7, NIHSS-8, NIHSS-10, and two flags: FLAG-EEG-001 (medium) then FLAG-DRIVING-001 (low).",
+      "state": {
+        "demographics": {
+          "firstName": "Kwame",
+          "lastName": "Boateng",
+          "dateOfBirth": "1968-09-15",
+          "sex": "male",
+          "weight": 88,
+          "height": 178
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Two focal seizures with impaired awareness in the last month",
+          "onsetDate": "2026-08-02",
+          "onsetType": "gradual",
+          "duration": "Each 2-3 minutes",
+          "progression": "stable",
+          "associatedSymptoms": "Post-ictal confusion for 20 minutes",
+          "precipitatingEvent": "Missed evening doses during a chest infection"
+        },
+        "nihssAssessment": {
+          "consciousness": 0,
+          "consciousnessQuestions": 0,
+          "consciousnessCommands": 0,
+          "gaze": 0,
+          "visual": 0,
+          "facialPalsy": 1,
+          "motorLeftArm": 0,
+          "motorRightArm": 0,
+          "motorLeftLeg": 0,
+          "motorRightLeg": 0,
+          "limbAtaxia": 1,
+          "sensory": 1,
+          "language": 0,
+          "dysarthria": 1,
+          "extinctionInattention": 0
+        },
+        "headacheAssessment": {
+          "headachePresent": "yes",
+          "headacheType": "post-ictal",
+          "frequency": "After each seizure",
+          "severity": 4,
+          "aura": "no",
+          "auraDescription": "",
+          "triggers": "",
+          "redFlagSuddenOnset": "no",
+          "redFlagWorstEver": "no",
+          "redFlagFever": "yes",
+          "redFlagNeckStiffness": "no",
+          "redFlagNeurologicalDeficit": "no"
+        },
+        "seizureHistory": {
+          "seizureHistory": "yes",
+          "seizureType": "Focal impaired-awareness seizures",
+          "frequency": "2 in the last month; previously seizure-free 14 months",
+          "lastSeizureDate": "2026-08-24",
+          "triggers": "Missed doses, intercurrent infection",
+          "aura": "yes",
+          "auraDescription": "Rising epigastric sensation",
+          "postIctalState": "Confused, dysphasic for 20 minutes",
+          "statusEpilepticus": "no"
+        },
+        "motorSensoryExam": {
+          "strengthUpperLeft": "5/5",
+          "strengthUpperRight": "4/5",
+          "strengthLowerLeft": "5/5",
+          "strengthLowerRight": "4+/5",
+          "tone": "mildly increased right",
+          "reflexes": "brisk right",
+          "plantarResponseLeft": "flexor",
+          "plantarResponseRight": "extensor",
+          "sensation": "reduced",
+          "sensationDetails": "Mild reduction to light touch right hand",
+          "coordination": "no",
+          "coordinationDetails": "Mild right finger-nose dysmetria",
+          "gait": "hemiparetic"
+        },
+        "cognitiveAssessment": {
+          "orientation": "fully-oriented",
+          "attentionNormal": "yes",
+          "memoryShortTerm": "no",
+          "memoryLongTerm": "yes",
+          "languageNormal": "yes",
+          "languageDetails": "",
+          "visuospatialNormal": "yes",
+          "executiveFunctionNormal": "no",
+          "mmseScore": 24
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Levetiracetam",
+              "dose": "1 g",
+              "frequency": "twice daily"
+            },
+            {
+              "name": "Atorvastatin",
+              "dose": "80 mg",
+              "frequency": "at night"
+            },
+            {
+              "name": "Clopidogrel",
+              "dose": "75 mg",
+              "frequency": "once daily"
+            }
+          ],
+          "anticonvulsants": "yes",
+          "anticonvulsantDetails": "Levetiracetam 1 g BD",
+          "migraineProphylaxis": "no",
+          "migraineProphylaxisDetails": "",
+          "neuropathicPainMeds": "no",
+          "neuropathicPainDetails": "",
+          "anticoagulants": "no",
+          "anticoagulantDetails": ""
+        },
+        "diagnosticResults": {
+          "mriCtPerformed": "yes",
+          "mriCtFinding": "infarct",
+          "mriCtDetails": "Established left MCA territory infarct, no new change",
+          "eegPerformed": "yes",
+          "eegFinding": "epileptiform",
+          "eegDetails": "Left temporal sharp waves",
+          "emgNcsPerformed": "no",
+          "emgNcsDetails": "",
+          "lumbarPuncturePerformed": "no",
+          "lumbarPunctureDetails": ""
+        },
+        "functionalSocial": {
+          "mrsScore": 3,
+          "drivingStatus": "not-driving-medical",
+          "drivingRestrictionDetails": "DVLA notified; licence revoked pending 12 months seizure-free",
+          "employmentStatus": "retired",
+          "employmentImpact": "Medically retired after stroke",
+          "supportNeeds": "Wife supervises medication",
+          "livingSituation": "Lives with wife",
+          "carePlanRequired": "no"
+        }
+      },
+      "expected": {
+        "nihssScore": 4,
+        "nihssSeverity": "Minor stroke",
+        "firedRules": [
+          {
+            "id": "NIHSS-4",
+            "category": "Cranial Nerves",
+            "description": "Facial palsy",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-7",
+            "category": "Coordination",
+            "description": "Limb ataxia",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-8",
+            "category": "Sensory",
+            "description": "Sensory",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-10",
+            "category": "Language",
+            "description": "Dysarthria",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-EEG-001",
+            "category": "Diagnostics",
+            "message": "Epileptiform activity on EEG - seizure management review needed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DRIVING-001",
+            "category": "Functional",
+            "message": "Patient not driving due to medical reasons - DVLA notification may be required",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Acute intracerebral haemorrhage on apixaban",
+      "description": "77-year-old woman on apixaban for AF with sudden thunderclap 'worst ever' headache and collapse: NIHSS consciousness 2, questions 2, commands 1, gaze 2, visual 2, facial palsy 3, left arm 4, left leg 4, right limbs 0, ataxia 0 (untestable, scored 0), sensory 2, language 2, dysarthria 2, extinction 2 (total 28, 'Severe stroke', 12 fired rules); onset sudden; CT shows haemorrhage; disoriented, MMSE untestable (null); gait unable; mRS 5; not driving for medical reasons; no seizures. Expect twelve flags: high tier in order FLAG-STROKE-001 (deficit), FLAG-STROKE-002 (sudden onset), FLAG-ICP-001 (consciousness 2 + worst-ever headache), FLAG-ICP-002 ('Imaging finding: haemorrhage'), FLAG-HEADACHE-001 (thunderclap), FLAG-HEADACHE-003 (focal deficit; HEADACHE-002 absent because fever/neck stiffness are 'no'), FLAG-IMAGING-001 (the haemorrhage double-flag); medium tier FLAG-ANTICOAG-001 ('Apixaban 5 mg BD'), FLAG-COGNITIVE-001, FLAG-MOBILITY-001 ('unable'), FLAG-DISABILITY-001 (mRS 5); low tier FLAG-DRIVING-001. No FLAG-COGNITIVE-002 (MMSE null), no FLAG-SEIZURE-001, no FLAG-EEG-001.",
+      "state": {
+        "demographics": {
+          "firstName": "Brenda",
+          "lastName": "Ashworth",
+          "dateOfBirth": "1949-01-27",
+          "sex": "female",
+          "weight": 70,
+          "height": 160
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Sudden severe headache, collapse, left-sided weakness",
+          "onsetDate": "2026-09-03",
+          "onsetType": "sudden",
+          "duration": "3 hours",
+          "progression": "worsening",
+          "associatedSymptoms": "Vomiting, drowsiness, slurred speech",
+          "precipitatingEvent": "None identified; on apixaban"
+        },
+        "nihssAssessment": {
+          "consciousness": 2,
+          "consciousnessQuestions": 2,
+          "consciousnessCommands": 1,
+          "gaze": 2,
+          "visual": 2,
+          "facialPalsy": 3,
+          "motorLeftArm": 4,
+          "motorRightArm": 0,
+          "motorLeftLeg": 4,
+          "motorRightLeg": 0,
+          "limbAtaxia": 0,
+          "sensory": 2,
+          "language": 2,
+          "dysarthria": 2,
+          "extinctionInattention": 2
+        },
+        "headacheAssessment": {
+          "headachePresent": "yes",
+          "headacheType": "thunderclap",
+          "frequency": "Single episode",
+          "severity": 10,
+          "aura": "no",
+          "auraDescription": "",
+          "triggers": "",
+          "redFlagSuddenOnset": "yes",
+          "redFlagWorstEver": "yes",
+          "redFlagFever": "no",
+          "redFlagNeckStiffness": "no",
+          "redFlagNeurologicalDeficit": "yes"
+        },
+        "seizureHistory": {
+          "seizureHistory": "no",
+          "seizureType": "",
+          "frequency": "",
+          "lastSeizureDate": "",
+          "triggers": "",
+          "aura": "",
+          "auraDescription": "",
+          "postIctalState": "",
+          "statusEpilepticus": "no"
+        },
+        "motorSensoryExam": {
+          "strengthUpperLeft": "0/5",
+          "strengthUpperRight": "5/5",
+          "strengthLowerLeft": "0/5",
+          "strengthLowerRight": "5/5",
+          "tone": "flaccid left",
+          "reflexes": "reduced left",
+          "plantarResponseLeft": "extensor",
+          "plantarResponseRight": "flexor",
+          "sensation": "reduced",
+          "sensationDetails": "Dense left hemisensory loss",
+          "coordination": "no",
+          "coordinationDetails": "Untestable on the left",
+          "gait": "unable"
+        },
+        "cognitiveAssessment": {
+          "orientation": "disoriented",
+          "attentionNormal": "no",
+          "memoryShortTerm": "no",
+          "memoryLongTerm": "",
+          "languageNormal": "no",
+          "languageDetails": "Moderate expressive dysphasia",
+          "visuospatialNormal": "no",
+          "executiveFunctionNormal": "",
+          "mmseScore": null
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Apixaban",
+              "dose": "5 mg",
+              "frequency": "twice daily"
+            },
+            {
+              "name": "Bisoprolol",
+              "dose": "2.5 mg",
+              "frequency": "once daily"
+            },
+            {
+              "name": "Ramipril",
+              "dose": "10 mg",
+              "frequency": "once daily"
+            }
+          ],
+          "anticonvulsants": "no",
+          "anticonvulsantDetails": "",
+          "migraineProphylaxis": "no",
+          "migraineProphylaxisDetails": "",
+          "neuropathicPainMeds": "no",
+          "neuropathicPainDetails": "",
+          "anticoagulants": "yes",
+          "anticoagulantDetails": "Apixaban 5 mg BD"
+        },
+        "diagnosticResults": {
+          "mriCtPerformed": "yes",
+          "mriCtFinding": "haemorrhage",
+          "mriCtDetails": "CT head: 45 ml right basal ganglia haemorrhage with intraventricular extension, 6 mm midline shift",
+          "eegPerformed": "no",
+          "eegFinding": "",
+          "eegDetails": "",
+          "emgNcsPerformed": "no",
+          "emgNcsDetails": "",
+          "lumbarPuncturePerformed": "no",
+          "lumbarPunctureDetails": ""
+        },
+        "functionalSocial": {
+          "mrsScore": 5,
+          "drivingStatus": "not-driving-medical",
+          "drivingRestrictionDetails": "Not fit to drive",
+          "employmentStatus": "retired",
+          "employmentImpact": "",
+          "supportNeeds": "Full nursing care; neurosurgical referral made",
+          "livingSituation": "Lived alone before admission",
+          "carePlanRequired": "yes"
+        }
+      },
+      "expected": {
+        "nihssScore": 28,
+        "nihssSeverity": "Severe stroke",
+        "firedRules": [
+          {
+            "id": "NIHSS-1A",
+            "category": "Consciousness",
+            "description": "Level of consciousness",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-1B",
+            "category": "Consciousness",
+            "description": "LOC questions (month, age)",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-1C",
+            "category": "Consciousness",
+            "description": "LOC commands (open/close eyes, grip/release)",
+            "score": 1
+          },
+          {
+            "id": "NIHSS-2",
+            "category": "Cranial Nerves",
+            "description": "Best gaze (horizontal eye movement)",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-3",
+            "category": "Cranial Nerves",
+            "description": "Visual fields",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-4",
+            "category": "Cranial Nerves",
+            "description": "Facial palsy",
+            "score": 3
+          },
+          {
+            "id": "NIHSS-5A",
+            "category": "Motor",
+            "description": "Motor arm - left",
+            "score": 4
+          },
+          {
+            "id": "NIHSS-6A",
+            "category": "Motor",
+            "description": "Motor leg - left",
+            "score": 4
+          },
+          {
+            "id": "NIHSS-8",
+            "category": "Sensory",
+            "description": "Sensory",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-9",
+            "category": "Language",
+            "description": "Best language (aphasia)",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-10",
+            "category": "Language",
+            "description": "Dysarthria",
+            "score": 2
+          },
+          {
+            "id": "NIHSS-11",
+            "category": "Neglect",
+            "description": "Extinction and inattention",
+            "score": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-STROKE-001",
+            "category": "Acute Stroke",
+            "message": "Significant neurological deficit detected - consider acute stroke pathway",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-STROKE-002",
+            "category": "Acute Stroke",
+            "message": "Sudden onset of symptoms - urgent evaluation required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ICP-001",
+            "category": "Raised ICP",
+            "message": "Possible raised intracranial pressure - reduced consciousness with worst headache",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ICP-002",
+            "category": "Raised ICP",
+            "message": "Imaging finding: haemorrhage - assess for raised ICP",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HEADACHE-001",
+            "category": "Headache",
+            "message": "Thunderclap/sudden-onset headache - rule out subarachnoid haemorrhage",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HEADACHE-003",
+            "category": "Headache",
+            "message": "Headache with focal neurological deficit - urgent imaging required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IMAGING-001",
+            "category": "Imaging",
+            "message": "Intracranial haemorrhage identified on imaging",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANTICOAG-001",
+            "category": "Medication",
+            "message": "On anticoagulants: Apixaban 5 mg BD - bleeding risk with neurological procedures",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-COGNITIVE-001",
+            "category": "Cognitive",
+            "message": "Patient disoriented - assess capacity and safety",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MOBILITY-001",
+            "category": "Mobility",
+            "message": "Gait abnormality: unable - fall risk assessment needed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DISABILITY-001",
+            "category": "Functional",
+            "message": "Modified Rankin Scale 5 - significant disability, care support needed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DRIVING-001",
+            "category": "Functional",
+            "message": "Patient not driving due to medical reasons - DVLA notification may be required",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

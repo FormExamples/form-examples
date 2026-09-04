@@ -1,0 +1,667 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateReferral",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Split engine. validateReferral(state) is a completeness validator, not a score: it walks the 30 referralRules in catalogue order, counts only those whose applies() gate is open (REC-02 only when precautions.other is ticked; the three RFR receipt rules only once another receipt-side field has text), and returns { complete, totalRequired, totalSatisfied, sections (one bucket per section that had at least one applicable rule, in first-seen order), missing (fired rules in catalogue order) }. form-app.js calls detectFlaggedIssues(state) separately and stores it as flags, mirrored by flagsHint/flagsArgs; the oracle keeps it under expected.flaggedIssues. Flags are stable-sorted urgent > high > medium > low, so within a priority they keep detection order (infectious, SpO2, RR, GCS, SBP, HR, temp, aspiration, spinal, pregnancy, worsening, fall, weight-bearing, other, caution, mode). Quirks verified: (1) the receipt gates are asymmetric — arrival time alone opens RFR-01 and RFR-02 but RFR-03 opens only from provider name or signature, so an arrival-time-only receipt yields exactly two missing RFR rules; (2) REC-02 fires when 'Other' is ticked without details, yet FLAG-PRC-OTHER requires non-blank details, so the two never coincide; (3) vital-sign thresholds are asymmetric at the boundary: SpO2 90, RR 30, HR 130, SBP 90 and GCS 9 are all silent, but temperature >= 39 fires; (4) an ABCDE row is satisfied only when BOTH a finding (or Normal) AND an intervention (or None) are present. Regenerate expected with: bin/test-personas who-acute-referral-form --update",
+  "personas": [
+    {
+      "name": "Complete referral - stable closed femur fracture by ground ambulance",
+      "description": "Health-centre nurse refers a 31-year-old man with a closed mid-shaft femur fracture after a motorbike crash to the district hospital for orthopaedic fixation. Every required field filled, all ABCDE rows recorded (Normal/None or finding + intervention), no precautions ticked, pregnancy 'no', normal vital signs, ground transfer, receipt section untouched. Expect complete true, totalRequired 27 (REC-02 and all RFR rules gated off), totalSatisfied 27, seven section buckets (no receipt bucket), empty missing, and zero flaggedIssues.",
+      "state": {
+        "patientIdentification": {
+          "patientLastName": "Mwangi",
+          "patientFirstName": "Daniel",
+          "dateOfBirth": "1995-04-12",
+          "sex": "male",
+          "patientContactInformation": "+254 700 112 334",
+          "emergencyContact": {
+            "name": "Grace Mwangi (wife)",
+            "contactInformation": "+254 700 556 778"
+          }
+        },
+        "facilityAndTransport": {
+          "initiatingFacility": {
+            "name": "Kithimani Health Centre",
+            "focalPoint": "Nurse Peter Njoroge",
+            "phoneNumber": "+254 720 101 202"
+          },
+          "reasonForReferral": "Closed mid-shaft femur fracture requiring orthopaedic reduction and fixation - no theatre capacity at this facility",
+          "referralFacilityContacted": true,
+          "referralFacility": {
+            "name": "Machakos Level 5 Hospital",
+            "focalPoint": "Dr Aisha Omondi, casualty",
+            "phoneNumber": "+254 44 212 3456"
+          },
+          "ambulance": {
+            "name": "County ambulance KCA 442",
+            "focalPoint": "EMT Samuel Kioko",
+            "phoneNumber": "+254 733 909 111"
+          },
+          "transferDecisionDateTime": "2026-08-14T09:40",
+          "departureDateTime": "2026-08-14T10:15",
+          "modeOfTransfer": "ground"
+        },
+        "situation": {
+          "chiefComplaint": "Right thigh pain and deformity after motorbike collision",
+          "primaryDiagnosis": "Closed right mid-shaft femur fracture",
+          "pregnant": "no",
+          "otherAcuteDiagnoses": "Superficial abrasions right forearm",
+          "treatmentsInitiated": "Traction splint applied, IV access, morphine 5 mg IV, tetanus toxoid"
+        },
+        "background": {
+          "historyOfPresentIllness": "Motorbike vs car at ~40 km/h 08:50 today, helmet worn, no loss of consciousness, isolated right thigh injury",
+          "pastMedicalAndSurgicalHistory": "No known chronic illness, no previous surgery, no allergies",
+          "airway": {
+            "findingNormal": true,
+            "findingDetails": "",
+            "interventionNone": true,
+            "interventionDetails": ""
+          },
+          "breathing": {
+            "findingNormal": true,
+            "findingDetails": "",
+            "interventionNone": true,
+            "interventionDetails": ""
+          },
+          "circulation": {
+            "findingNormal": false,
+            "findingDetails": "Warm peripheries, cap refill 2 s, distal pulses present in right foot",
+            "interventionNone": false,
+            "interventionDetails": "IV access 18G left hand, 500 mL Ringer's lactate"
+          },
+          "disability": {
+            "findingNormal": true,
+            "findingDetails": "",
+            "interventionNone": true,
+            "interventionDetails": ""
+          },
+          "exposure": {
+            "findingNormal": false,
+            "findingDetails": "Swollen deformed right thigh, skin intact",
+            "interventionNone": false,
+            "interventionDetails": "Traction splint, abrasions cleaned and dressed"
+          },
+          "otherSignificantTreatments": ""
+        },
+        "assessment": {
+          "clinicalAssessment": "Haemodynamically stable young man with isolated closed femur fracture; needs surgical fixation not available here",
+          "vitalSigns": {
+            "heartRate": 88,
+            "respiratoryRate": 18,
+            "systolicBloodPressure": 124,
+            "diastolicBloodPressure": 78,
+            "temperatureCelsius": 37.2,
+            "oxygenSaturation": 97,
+            "glasgowComaScale": 15
+          }
+        },
+        "recommendations": {
+          "treatmentPlanDuringTransport": "Maintain traction splint, IV fluids at 100 mL/h, reassess distal pulses every 30 min, analgesia as needed",
+          "potentialWorseningOfCondition": "",
+          "cautionsRegardingPriorTherapies": "",
+          "precautions": {
+            "highlyInfectiousDisease": false,
+            "spinalPrecautions": false,
+            "weightBearingRestrictions": false,
+            "fallRisk": false,
+            "aspirationRisk": false,
+            "other": false,
+            "otherDetails": ""
+          }
+        },
+        "initiatingProviderSignoff": {
+          "providerName": "Peter Njoroge, RN",
+          "signature": "P. Njoroge",
+          "signatureDate": "2026-08-14"
+        },
+        "referralFacilityReceipt": {
+          "patientArrivalDateTime": "",
+          "receivingProviderName": "",
+          "receivingProviderSignature": "",
+          "feedbackProvidedToInitiatingFacility": false
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 27,
+        "totalSatisfied": 27,
+        "sections": [
+          {
+            "section": "patientIdentification",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "facilityAndTransport",
+            "required": 9,
+            "satisfied": 9,
+            "missing": []
+          },
+          {
+            "section": "situation",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "background",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "assessment",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "recommendations",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "initiatingProviderSignoff",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Pregnant febrile patient by air with boundary vitals and half-filled receipt",
+      "description": "Island dispensary refers a 24-year-old woman at 34 weeks with suspected severe malaria by air; every vital sign sits exactly on a silent boundary (HR 130, RR 30, SBP 90, SpO2 90, GCS 9) except temperature 39.0, which fires at >= 39. 'Other' precaution ticked with no details; receiving facility has entered only the arrival time. Expect complete false, totalRequired 30 (27 + REC-02 + RFR-01 + RFR-02; RFR-03 stays gated off because provider name and signature are blank), totalSatisfied 27, missing in order REC-02, RFR-01, RFR-02, an eighth 'referralFacilityReceipt' bucket with required 2 / satisfied 0. flaggedIssues sorted: FLAG-VIT-TEMP (high), FLAG-PREG (high), FLAG-MODE (low, 'AIR'); no FLAG-PRC-OTHER because otherDetails is blank.",
+      "state": {
+        "patientIdentification": {
+          "patientLastName": "Juma",
+          "patientFirstName": "Halima",
+          "dateOfBirth": "2002-09-05",
+          "sex": "female",
+          "patientContactInformation": "None - no phone",
+          "emergencyContact": {
+            "name": "Fatuma Juma (mother)",
+            "contactInformation": "+255 715 300 411"
+          }
+        },
+        "facilityAndTransport": {
+          "initiatingFacility": {
+            "name": "Kojani Island Dispensary",
+            "focalPoint": "Clinical Officer Hamis Ali",
+            "phoneNumber": "+255 777 654 321"
+          },
+          "reasonForReferral": "Severe malaria in third-trimester pregnancy with reduced consciousness; needs IV artesunate monitoring, obstetric review and possible ICU",
+          "referralFacilityContacted": true,
+          "referralFacility": {
+            "name": "Mnazi Mmoja Referral Hospital",
+            "focalPoint": "Dr Salma Khamis, obstetrics on call",
+            "phoneNumber": "+255 24 223 1071"
+          },
+          "ambulance": {
+            "name": "Flying Medical Service Cessna 5H-FMS",
+            "focalPoint": "Pilot J. Mwita / Nurse R. Bakari",
+            "phoneNumber": "+255 754 000 909"
+          },
+          "transferDecisionDateTime": "2026-08-22T06:10",
+          "departureDateTime": "2026-08-22T07:35",
+          "modeOfTransfer": "air"
+        },
+        "situation": {
+          "chiefComplaint": "High fever, rigors and confusion for 2 days",
+          "primaryDiagnosis": "Severe Plasmodium falciparum malaria (RDT positive) in pregnancy",
+          "pregnant": "yes",
+          "otherAcuteDiagnoses": "Possible early sepsis; dehydration",
+          "treatmentsInitiated": "IV artesunate 2.4 mg/kg first dose 05:30, IV fluids, paracetamol, glucose checked 3.9 mmol/L"
+        },
+        "background": {
+          "historyOfPresentIllness": "G2P1 at 34 weeks by dates, fever 2 days, vomiting, became drowsy overnight, one convulsion witnessed by family at 04:00",
+          "pastMedicalAndSurgicalHistory": "Previous normal delivery 2023; no chronic illness; no drug allergies",
+          "airway": {
+            "findingNormal": false,
+            "findingDetails": "Patent, drowsy but protecting airway",
+            "interventionNone": false,
+            "interventionDetails": "Left lateral positioning, suction available"
+          },
+          "breathing": {
+            "findingNormal": false,
+            "findingDetails": "Tachypnoeic, clear chest",
+            "interventionNone": false,
+            "interventionDetails": "Oxygen 4 L/min via nasal cannula"
+          },
+          "circulation": {
+            "findingNormal": false,
+            "findingDetails": "Tachycardic, warm, cap refill 3 s",
+            "interventionNone": false,
+            "interventionDetails": "IV access x2, 1 L normal saline given"
+          },
+          "disability": {
+            "findingNormal": false,
+            "findingDetails": "GCS 9 (E2 V3 M4), post-ictal, pupils equal and reactive",
+            "interventionNone": false,
+            "interventionDetails": "Diazepam 10 mg PR after seizure; glucose monitored"
+          },
+          "exposure": {
+            "findingNormal": false,
+            "findingDetails": "Gravid uterus 34 cm, fetal heart 158, no bleeding",
+            "interventionNone": true,
+            "interventionDetails": ""
+          },
+          "otherSignificantTreatments": "Quinine not given - artesunate available"
+        },
+        "assessment": {
+          "clinicalAssessment": "Cerebral malaria in late pregnancy - needs continuous monitoring, second artesunate dose at 17:30, and obstetric assessment on arrival",
+          "vitalSigns": {
+            "heartRate": 130,
+            "respiratoryRate": 30,
+            "systolicBloodPressure": 90,
+            "diastolicBloodPressure": 58,
+            "temperatureCelsius": 39,
+            "oxygenSaturation": 90,
+            "glasgowComaScale": 9
+          }
+        },
+        "recommendations": {
+          "treatmentPlanDuringTransport": "Left lateral, oxygen, IV fluids 125 mL/h, hourly glucose, diazepam if further seizure, fetal heart every 30 min",
+          "potentialWorseningOfCondition": "",
+          "cautionsRegardingPriorTherapies": "",
+          "precautions": {
+            "highlyInfectiousDisease": false,
+            "spinalPrecautions": false,
+            "weightBearingRestrictions": false,
+            "fallRisk": false,
+            "aspirationRisk": false,
+            "other": true,
+            "otherDetails": ""
+          }
+        },
+        "initiatingProviderSignoff": {
+          "providerName": "Hamis Ali, Clinical Officer",
+          "signature": "H. Ali",
+          "signatureDate": "2026-08-22"
+        },
+        "referralFacilityReceipt": {
+          "patientArrivalDateTime": "2026-08-22T08:20",
+          "receivingProviderName": "",
+          "receivingProviderSignature": "",
+          "feedbackProvidedToInitiatingFacility": false
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 30,
+        "totalSatisfied": 27,
+        "sections": [
+          {
+            "section": "patientIdentification",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "facilityAndTransport",
+            "required": 9,
+            "satisfied": 9,
+            "missing": []
+          },
+          {
+            "section": "situation",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "background",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "assessment",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "recommendations",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "REC-02",
+                "section": "recommendations",
+                "description": "Description of how the \"Other\" precaution applies is required when ticked."
+              }
+            ]
+          },
+          {
+            "section": "initiatingProviderSignoff",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "referralFacilityReceipt",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "RFR-01",
+                "section": "referralFacilityReceipt",
+                "description": "Receiving provider name is required once arrival time is recorded."
+              },
+              {
+                "id": "RFR-02",
+                "section": "referralFacilityReceipt",
+                "description": "Receiving provider signature is required once arrival time is recorded."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "REC-02",
+            "section": "recommendations",
+            "description": "Description of how the \"Other\" precaution applies is required when ticked."
+          },
+          {
+            "id": "RFR-01",
+            "section": "referralFacilityReceipt",
+            "description": "Receiving provider name is required once arrival time is recorded."
+          },
+          {
+            "id": "RFR-02",
+            "section": "referralFacilityReceipt",
+            "description": "Receiving provider signature is required once arrival time is recorded."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-VIT-TEMP",
+            "category": "Vital signs",
+            "message": "Temperature 39 C is outside the safe range (hypothermia < 35 C, hyperpyrexia >= 39 C).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant - receiving facility should involve obstetric team on arrival.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MODE",
+            "category": "Transport",
+            "message": "Mode of transfer is AIR - confirm equipment is rated for the environment.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Suspected viral haemorrhagic fever in pregnancy with shock - urgent isolation transfer",
+      "description": "Rural health post refers a 27-year-old woman at 30 weeks with suspected Lassa fever, in shock with depressed consciousness, by ground ambulance; highly infectious, aspiration and fall precautions ticked plus an 'Other' precaution with details, anticipated deterioration and therapy cautions documented. Departure time was not recorded in the rush. Expect complete false, totalRequired 28 (27 + REC-02, receipt untouched), totalSatisfied 27, missing = FT-08 only. flaggedIssues (13) stable-sorted: urgent FLAG-INF-001, FLAG-VIT-SPO2 (86), FLAG-VIT-RR (36), FLAG-VIT-GCS (7); high FLAG-VIT-SBP-LOW (74), FLAG-VIT-HR (142), FLAG-VIT-TEMP (40.1), FLAG-PRC-ASP, FLAG-PREG, FLAG-WORSEN; medium FLAG-PRC-FALL, FLAG-PRC-OTHER, FLAG-CAUTION.",
+      "state": {
+        "patientIdentification": {
+          "patientLastName": "Okoro",
+          "patientFirstName": "Ngozi",
+          "dateOfBirth": "1999-01-20",
+          "sex": "female",
+          "patientContactInformation": "+234 803 445 6677 (husband's phone)",
+          "emergencyContact": {
+            "name": "Emeka Okoro (husband)",
+            "contactInformation": "+234 803 445 6677"
+          }
+        },
+        "facilityAndTransport": {
+          "initiatingFacility": {
+            "name": "Umuahia North Primary Health Post",
+            "focalPoint": "CHEW Blessing Nwachukwu",
+            "phoneNumber": "+234 806 221 9090"
+          },
+          "reasonForReferral": "Suspected Lassa fever with shock and altered consciousness in pregnancy - needs isolation unit, ribavirin, ICU and obstetric care",
+          "referralFacilityContacted": true,
+          "referralFacility": {
+            "name": "Federal Medical Centre Owerri - Isolation Unit",
+            "focalPoint": "Dr Chidi Eze, infectious diseases",
+            "phoneNumber": "+234 83 230 4455"
+          },
+          "ambulance": {
+            "name": "State EMS ambulance ABIA-07",
+            "focalPoint": "Paramedic Uche Obi",
+            "phoneNumber": "+234 805 118 2200"
+          },
+          "transferDecisionDateTime": "2026-08-30T14:05",
+          "departureDateTime": "",
+          "modeOfTransfer": "ground"
+        },
+        "situation": {
+          "chiefComplaint": "Fever 6 days, bleeding gums, vomiting, now drowsy and cold",
+          "primaryDiagnosis": "Suspected Lassa fever with hypovolaemic/septic shock",
+          "pregnant": "yes",
+          "otherAcuteDiagnoses": "Encephalopathy; possible DIC; dehydration",
+          "treatmentsInitiated": "Isolation with full PPE, IV Ringer's lactate 2 L, IV ceftriaxone 2 g, IV artesunate (RDT negative x2, given empirically), oxygen"
+        },
+        "background": {
+          "historyOfPresentIllness": "Fever, headache and sore throat from 24 Aug; rodent exposure at home; vomiting from day 3; gum bleeding day 5; progressive drowsiness today; no urine output for 8 h",
+          "pastMedicalAndSurgicalHistory": "G3P2, previous uncomplicated deliveries; no chronic illness; no known allergies",
+          "airway": {
+            "findingNormal": false,
+            "findingDetails": "Patent but at risk - vomiting, GCS 7, blood in oropharynx",
+            "interventionNone": false,
+            "interventionDetails": "Left lateral recovery position, oropharyngeal suction, no airway adjunct tolerated"
+          },
+          "breathing": {
+            "findingNormal": false,
+            "findingDetails": "RR 36, shallow, bibasal crackles, SpO2 86% on air",
+            "interventionNone": false,
+            "interventionDetails": "Oxygen 10 L/min non-rebreather mask, SpO2 91% after"
+          },
+          "circulation": {
+            "findingNormal": false,
+            "findingDetails": "Cold peripheries, cap refill 5 s, thready pulse 142, SBP 74",
+            "interventionNone": false,
+            "interventionDetails": "Two IV lines, 2 L Ringer's lactate bolus, urinary catheter"
+          },
+          "disability": {
+            "findingNormal": false,
+            "findingDetails": "GCS 7 (E1 V2 M4), pupils equal sluggish, glucose 3.1 mmol/L",
+            "interventionNone": false,
+            "interventionDetails": "50 mL 50% dextrose IV, glucose rechecked 6.2"
+          },
+          "exposure": {
+            "findingNormal": false,
+            "findingDetails": "Temp 40.1, petechiae trunk, gum bleeding, gravid uterus 30 cm, fetal heart 170",
+            "interventionNone": false,
+            "interventionDetails": "Tepid sponging, paracetamol IV, kept covered during transfer"
+          },
+          "otherSignificantTreatments": "No IM injections given (bleeding risk); blood sample taken for Lassa PCR and sent with patient"
+        },
+        "assessment": {
+          "clinicalAssessment": "Critically ill pregnant woman with probable VHF and shock; high risk of death in transit; requires isolation-capable receiving team, ribavirin, blood products and obstetric decision on delivery",
+          "vitalSigns": {
+            "heartRate": 142,
+            "respiratoryRate": 36,
+            "systolicBloodPressure": 74,
+            "diastolicBloodPressure": 40,
+            "temperatureCelsius": 40.1,
+            "oxygenSaturation": 86,
+            "glasgowComaScale": 7
+          }
+        },
+        "recommendations": {
+          "treatmentPlanDuringTransport": "Full PPE crew, oxygen 10-15 L/min, continue Ringer's lactate 500 mL boluses to SBP > 90, suction as needed, glucose hourly, keep warm, fetal heart every 30 min, pre-alert isolation unit 30 min before arrival",
+          "potentialWorseningOfCondition": "Airway loss and aspiration as GCS falls; refractory shock; major haemorrhage; seizures; fetal distress or spontaneous labour",
+          "cautionsRegardingPriorTherapies": "No IM injections or NSAIDs (bleeding); avoid fluid overload - crackles already present; ceftriaxone and artesunate already given at 13:30; no aspirin",
+          "precautions": {
+            "highlyInfectiousDisease": true,
+            "spinalPrecautions": false,
+            "weightBearingRestrictions": false,
+            "fallRisk": true,
+            "aspirationRisk": true,
+            "other": true,
+            "otherDetails": "Bleeding precautions - handle sharps as VHF-contaminated, no IM injections, double-glove"
+          }
+        },
+        "initiatingProviderSignoff": {
+          "providerName": "Blessing Nwachukwu, CHEW",
+          "signature": "B. Nwachukwu",
+          "signatureDate": "2026-08-30"
+        },
+        "referralFacilityReceipt": {
+          "patientArrivalDateTime": "",
+          "receivingProviderName": "",
+          "receivingProviderSignature": "",
+          "feedbackProvidedToInitiatingFacility": false
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 28,
+        "totalSatisfied": 27,
+        "sections": [
+          {
+            "section": "patientIdentification",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "facilityAndTransport",
+            "required": 9,
+            "satisfied": 8,
+            "missing": [
+              {
+                "id": "FT-08",
+                "section": "facilityAndTransport",
+                "description": "Date and time of departure is required."
+              }
+            ]
+          },
+          {
+            "section": "situation",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "background",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "assessment",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "recommendations",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "initiatingProviderSignoff",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "FT-08",
+            "section": "facilityAndTransport",
+            "description": "Date and time of departure is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-INF-001",
+            "category": "Infection control",
+            "message": "Highly infectious disease precaution flagged - receiving facility must prepare isolation and PPE.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-SPO2",
+            "category": "Vital signs",
+            "message": "Oxygen saturation 86% is critically low (< 90%).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-RR",
+            "category": "Vital signs",
+            "message": "Respiratory rate 36/min is outside the safe range (8-30).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-GCS",
+            "category": "Vital signs",
+            "message": "Glasgow Coma Scale 7 indicates severely depressed consciousness (<= 8).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-SBP-LOW",
+            "category": "Vital signs",
+            "message": "Systolic blood pressure 74 mmHg suggests hypotension/shock (< 90).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VIT-HR",
+            "category": "Vital signs",
+            "message": "Heart rate 142/min is outside the safe range (50-130).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VIT-TEMP",
+            "category": "Vital signs",
+            "message": "Temperature 40.1 C is outside the safe range (hypothermia < 35 C, hyperpyrexia >= 39 C).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PRC-ASP",
+            "category": "Precaution",
+            "message": "Aspiration risk flagged - keep airway protected and head-up positioning during transport.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant - receiving facility should involve obstetric team on arrival.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WORSEN",
+            "category": "Trajectory",
+            "message": "Initiating provider has documented anticipated deterioration during transport - see recommendations.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PRC-FALL",
+            "category": "Precaution",
+            "message": "Fall risk flagged - ensure stretcher straps and bed-rails on arrival.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PRC-OTHER",
+            "category": "Precaution",
+            "message": "Other precaution flagged: Bleeding precautions - handle sharps as VHF-contaminated, no IM injections, double-glove",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CAUTION",
+            "category": "Therapy caution",
+            "message": "Cautions regarding prior therapies or interventions documented - review before continuing care.",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

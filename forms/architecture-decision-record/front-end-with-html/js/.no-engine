@@ -1,0 +1,7 @@
+The Architecture Decision Record has no scoring, grading, or validation
+engine by design: it is a documentation form (Tyree & Akerman ADR template)
+whose only derived logic is the DOM-level required-field check in
+form-app.js's validateForm(). The workflow status (pending / proposed /
+accepted / superseded ...) is entered, not computed.
+
+bin/test-engines reports this form as NONE rather than SKIP.

@@ -1,0 +1,457 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateIPSS",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Split engine. calculateIPSS(state) returns { ipssScore, ipssCategoryLabel, firedRules } — the sum of the seven IPSS items (null items are skipped entirely, with no completeness penalty), the label Mild (0-7) / Moderate (8-19) / Severe (20-35), and one fired rule IPSS-0N per item whose answer is > 0 (a 0 answer counts toward the total but fires nothing), in question order. form-app.js then calls detectAdditionalFlags(state) separately and stores it as additionalFlags, so flagsHint/flagsArgs mirror that single-argument call; the oracle stores its output under expected.additionalFlags. Quirks verified: the detector recomputes its own IPSS total treating null as 0 (same result as the grader); PSA fires only when > 4.0 (4.0 exactly is silent) and eGFR only when < 60 (60 exactly is silent); retention needs straining 'yes' AND stream exactly 'weak' ('intermittent' does not count); FLAG-NEURO-001 embeds 'details not specified' when neurologicConditionDetails is blank; flags are stable-sorted high > medium > low so within a priority they keep detection order. ipssCategoryKey/qolScore/timestamp are assembled by form-app.js, not the grader, so they are not part of expected. Regenerate expected with: bin/test-personas urology-assessment --update",
+  "personas": [
+    {
+      "name": "Mild LUTS - routine GP review, normal PSA and renal function",
+      "description": "62-year-old man with occasional nocturia and mild frequency, no red-flag symptoms, PSA 1.2, eGFR 88, no relevant family history or medications. IPSS items 0,1,0,0,1,0,1 = total 3 -> 'Mild'; firedRules = IPSS-02, IPSS-05, IPSS-07 (score 1 each); no additionalFlags.",
+      "state": {
+        "demographics": {
+          "firstName": "Graham",
+          "lastName": "Ellis",
+          "dateOfBirth": "1964-02-11",
+          "sex": "male"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Getting up once at night to pass urine; otherwise well",
+          "duration": "About 6 months",
+          "urgency": "routine"
+        },
+        "ipssQuestionnaire": {
+          "q1": 0,
+          "q2": 1,
+          "q3": 0,
+          "q4": 0,
+          "q5": 1,
+          "q6": 0,
+          "q7": 1
+        },
+        "qualityOfLife": {
+          "qolScore": 1,
+          "qolImpact": "Barely notices it; sleeps well"
+        },
+        "urinarySymptoms": {
+          "frequency": "no",
+          "urgency": "no",
+          "nocturia": "yes",
+          "hesitancy": "no",
+          "stream": "normal",
+          "straining": "no",
+          "hematuria": "no",
+          "dysuria": "no",
+          "incontinence": "none"
+        },
+        "renalFunction": {
+          "creatinine": 84,
+          "eGFR": 88,
+          "urinalysis": "Dipstick negative for blood, protein, leucocytes and nitrites",
+          "psa": 1.2,
+          "psaDate": "2026-08-12"
+        },
+        "sexualHealth": {
+          "erectileDysfunction": "no",
+          "libidoChanges": "no",
+          "ejaculatoryProblems": "no"
+        },
+        "medicalHistory": {
+          "previousUrologicConditions": "",
+          "surgicalHistory": "Appendicectomy 1985",
+          "diabetes": "no",
+          "hypertension": "yes",
+          "neurologicConditions": "no",
+          "neurologicConditionDetails": ""
+        },
+        "currentMedications": {
+          "alphaBlockers": [],
+          "fiveAlphaReductaseInhibitors": [],
+          "anticholinergics": [],
+          "otherMedications": [
+            {
+              "name": "Amlodipine",
+              "dose": "5 mg",
+              "frequency": "once daily"
+            }
+          ]
+        },
+        "familyHistory": {
+          "prostateCancer": "no",
+          "bladderCancer": "no",
+          "kidneyDisease": "no",
+          "otherDetails": ""
+        }
+      },
+      "expected": {
+        "ipssScore": 3,
+        "ipssCategoryLabel": "Mild",
+        "firedRules": [
+          {
+            "id": "IPSS-02",
+            "domain": "Frequency",
+            "description": "Over the past month, how often have you had to urinate again less than two hours after you finished urinating?",
+            "score": 1
+          },
+          {
+            "id": "IPSS-05",
+            "domain": "Weak stream",
+            "description": "Over the past month, how often have you had a weak urinary stream?",
+            "score": 1
+          },
+          {
+            "id": "IPSS-07",
+            "domain": "Nocturia",
+            "description": "Over the past month, how many times did you most typically get up to urinate from the time you went to bed at night until the time you got up in the morning?",
+            "score": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate boundary with two IPSS items unanswered, PSA 4.0 and eGFR 60 exactly",
+      "description": "58-year-old man with Parkinson's-type symptoms under investigation (neurological condition marked yes but details left blank) who skipped IPSS Q2 and Q6. Answered items 2,1,2,0,3 = total 8 -> 'Moderate' at the lower boundary; firedRules = IPSS-01 (2), IPSS-03 (1), IPSS-04 (2), IPSS-07 (3). PSA is exactly 4.0 and eGFR exactly 60, so neither threshold flag fires; straining 'yes' with an 'intermittent' stream does not meet the retention rule. Expect exactly 2 additionalFlags in priority order: FLAG-NEURO-001 (medium, message ending 'details not specified') then FLAG-ED-001 (low, ED with total >= 8).",
+      "state": {
+        "demographics": {
+          "firstName": "Terence",
+          "lastName": "Oyelaran",
+          "dateOfBirth": "1968-07-30",
+          "sex": "male"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Difficulty postponing urination and interrupted stream",
+          "duration": "4 months",
+          "urgency": "routine"
+        },
+        "ipssQuestionnaire": {
+          "q1": 2,
+          "q2": null,
+          "q3": 1,
+          "q4": 2,
+          "q5": 0,
+          "q6": null,
+          "q7": 3
+        },
+        "qualityOfLife": {
+          "qolScore": 3,
+          "qolImpact": "Mixed - manageable but annoying at night"
+        },
+        "urinarySymptoms": {
+          "frequency": "yes",
+          "urgency": "yes",
+          "nocturia": "yes",
+          "hesitancy": "yes",
+          "stream": "intermittent",
+          "straining": "yes",
+          "hematuria": "no",
+          "dysuria": "no",
+          "incontinence": "urge"
+        },
+        "renalFunction": {
+          "creatinine": 118,
+          "eGFR": 60,
+          "urinalysis": "Dipstick negative",
+          "psa": 4,
+          "psaDate": "2026-08-25"
+        },
+        "sexualHealth": {
+          "erectileDysfunction": "yes",
+          "libidoChanges": "no",
+          "ejaculatoryProblems": "no"
+        },
+        "medicalHistory": {
+          "previousUrologicConditions": "",
+          "surgicalHistory": "",
+          "diabetes": "no",
+          "hypertension": "no",
+          "neurologicConditions": "yes",
+          "neurologicConditionDetails": ""
+        },
+        "currentMedications": {
+          "alphaBlockers": [],
+          "fiveAlphaReductaseInhibitors": [],
+          "anticholinergics": [],
+          "otherMedications": []
+        },
+        "familyHistory": {
+          "prostateCancer": "no",
+          "bladderCancer": "no",
+          "kidneyDisease": "no",
+          "otherDetails": ""
+        }
+      },
+      "expected": {
+        "ipssScore": 8,
+        "ipssCategoryLabel": "Moderate",
+        "firedRules": [
+          {
+            "id": "IPSS-01",
+            "domain": "Incomplete emptying",
+            "description": "Over the past month, how often have you had a sensation of not emptying your bladder completely after you finished urinating?",
+            "score": 2
+          },
+          {
+            "id": "IPSS-03",
+            "domain": "Intermittency",
+            "description": "Over the past month, how often have you found you stopped and started again several times when you urinated?",
+            "score": 1
+          },
+          {
+            "id": "IPSS-04",
+            "domain": "Urgency",
+            "description": "Over the past month, how often have you found it difficult to postpone urination?",
+            "score": 2
+          },
+          {
+            "id": "IPSS-07",
+            "domain": "Nocturia",
+            "description": "Over the past month, how many times did you most typically get up to urinate from the time you went to bed at night until the time you got up in the morning?",
+            "score": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NEURO-001",
+            "category": "Neurogenic Bladder",
+            "message": "Neurological condition present: details not specified - consider neurogenic bladder evaluation",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ED-001",
+            "category": "Sexual Health",
+            "message": "Erectile dysfunction with moderate-to-severe LUTS - consider shared pathophysiology assessment",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Severe LUTS with haematuria, PSA 12.6, CKD 3b, MS and triple therapy",
+      "description": "71-year-old man with multiple sclerosis on tamsulosin + finasteride + oxybutynin, visible haematuria, dysuria with frequency, straining with weak stream, PSA 12.6, eGFR 41, erectile dysfunction, and a family history of prostate cancer, bladder cancer and kidney disease. All seven IPSS items 5 = total 35 -> 'Severe'; firedRules = IPSS-01..IPSS-07 (score 5 each). Expect 13 additionalFlags stable-sorted by priority: high FLAG-SEVERE-001, FLAG-HEMATURIA-001, FLAG-PSA-001, FLAG-RENAL-001, FLAG-FAMILY-PC-001, FLAG-MED-002; medium FLAG-RETENTION-001, FLAG-UTI-001, FLAG-FAMILY-BC-001, FLAG-FAMILY-KD-001, FLAG-MED-001, FLAG-NEURO-001 (message names 'Multiple sclerosis'); low FLAG-ED-001.",
+      "state": {
+        "demographics": {
+          "firstName": "Dennis",
+          "lastName": "Ashworth",
+          "dateOfBirth": "1955-01-19",
+          "sex": "male"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Blood in urine for two weeks, near-constant urge, cannot empty bladder",
+          "duration": "Progressive over 18 months, haematuria 2 weeks",
+          "urgency": "urgent"
+        },
+        "ipssQuestionnaire": {
+          "q1": 5,
+          "q2": 5,
+          "q3": 5,
+          "q4": 5,
+          "q5": 5,
+          "q6": 5,
+          "q7": 5
+        },
+        "qualityOfLife": {
+          "qolScore": 6,
+          "qolImpact": "Terrible - housebound, up 5-6 times a night"
+        },
+        "urinarySymptoms": {
+          "frequency": "yes",
+          "urgency": "yes",
+          "nocturia": "yes",
+          "hesitancy": "yes",
+          "stream": "weak",
+          "straining": "yes",
+          "hematuria": "yes",
+          "dysuria": "yes",
+          "incontinence": "overflow"
+        },
+        "renalFunction": {
+          "creatinine": 156,
+          "eGFR": 41,
+          "urinalysis": "Dipstick blood 3+, leucocytes 2+, nitrites positive",
+          "psa": 12.6,
+          "psaDate": "2026-08-28"
+        },
+        "sexualHealth": {
+          "erectileDysfunction": "yes",
+          "libidoChanges": "yes",
+          "ejaculatoryProblems": "yes"
+        },
+        "medicalHistory": {
+          "previousUrologicConditions": "BPH diagnosed 2021; one episode of acute retention 2025 requiring catheterisation",
+          "surgicalHistory": "None",
+          "diabetes": "yes",
+          "hypertension": "yes",
+          "neurologicConditions": "yes",
+          "neurologicConditionDetails": "Multiple sclerosis"
+        },
+        "currentMedications": {
+          "alphaBlockers": [
+            {
+              "name": "Tamsulosin",
+              "dose": "400 micrograms",
+              "frequency": "once daily"
+            }
+          ],
+          "fiveAlphaReductaseInhibitors": [
+            {
+              "name": "Finasteride",
+              "dose": "5 mg",
+              "frequency": "once daily"
+            }
+          ],
+          "anticholinergics": [
+            {
+              "name": "Oxybutynin",
+              "dose": "5 mg",
+              "frequency": "twice daily"
+            }
+          ],
+          "otherMedications": [
+            {
+              "name": "Metformin",
+              "dose": "1 g",
+              "frequency": "twice daily"
+            }
+          ]
+        },
+        "familyHistory": {
+          "prostateCancer": "yes",
+          "bladderCancer": "yes",
+          "kidneyDisease": "yes",
+          "otherDetails": "Father prostate cancer at 68; brother bladder cancer; mother polycystic kidney disease"
+        }
+      },
+      "expected": {
+        "ipssScore": 35,
+        "ipssCategoryLabel": "Severe",
+        "firedRules": [
+          {
+            "id": "IPSS-01",
+            "domain": "Incomplete emptying",
+            "description": "Over the past month, how often have you had a sensation of not emptying your bladder completely after you finished urinating?",
+            "score": 5
+          },
+          {
+            "id": "IPSS-02",
+            "domain": "Frequency",
+            "description": "Over the past month, how often have you had to urinate again less than two hours after you finished urinating?",
+            "score": 5
+          },
+          {
+            "id": "IPSS-03",
+            "domain": "Intermittency",
+            "description": "Over the past month, how often have you found you stopped and started again several times when you urinated?",
+            "score": 5
+          },
+          {
+            "id": "IPSS-04",
+            "domain": "Urgency",
+            "description": "Over the past month, how often have you found it difficult to postpone urination?",
+            "score": 5
+          },
+          {
+            "id": "IPSS-05",
+            "domain": "Weak stream",
+            "description": "Over the past month, how often have you had a weak urinary stream?",
+            "score": 5
+          },
+          {
+            "id": "IPSS-06",
+            "domain": "Straining",
+            "description": "Over the past month, how often have you had to push or strain to begin urination?",
+            "score": 5
+          },
+          {
+            "id": "IPSS-07",
+            "domain": "Nocturia",
+            "description": "Over the past month, how many times did you most typically get up to urinate from the time you went to bed at night until the time you got up in the morning?",
+            "score": 5
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SEVERE-001",
+            "category": "Severe Symptoms",
+            "message": "IPSS score 35/35 indicates severe lower urinary tract symptoms - urgent urological referral recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HEMATURIA-001",
+            "category": "Hematuria",
+            "message": "Patient reports hematuria - urgent investigation required to rule out malignancy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PSA-001",
+            "category": "Elevated PSA",
+            "message": "PSA level 12.6 ng/mL exceeds normal range (>4.0) - consider prostate biopsy referral",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RENAL-001",
+            "category": "Renal Impairment",
+            "message": "eGFR 41 mL/min indicates renal impairment - assess for obstructive uropathy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FAMILY-PC-001",
+            "category": "Family History",
+            "message": "Family history of prostate cancer - increased personal risk, recommend regular PSA monitoring",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MED-002",
+            "category": "Medication Interaction",
+            "message": "Anticholinergic use with severe LUTS - risk of urinary retention, monitor closely",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RETENTION-001",
+            "category": "Urinary Retention",
+            "message": "Straining with weak stream suggests possible urinary retention - post-void residual measurement recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-UTI-001",
+            "category": "Recurrent UTI",
+            "message": "Dysuria with frequency may indicate recurrent urinary tract infection - urine culture recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FAMILY-BC-001",
+            "category": "Family History",
+            "message": "Family history of bladder cancer - monitor for hematuria and other warning signs",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FAMILY-KD-001",
+            "category": "Family History",
+            "message": "Family history of kidney disease - regular renal function monitoring recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medication Interaction",
+            "message": "Patient on combination alpha-blocker and 5-alpha-reductase inhibitor therapy - monitor for hypotension and sexual side effects",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-NEURO-001",
+            "category": "Neurogenic Bladder",
+            "message": "Neurological condition present: Multiple sclerosis - consider neurogenic bladder evaluation",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ED-001",
+            "category": "Sexual Health",
+            "message": "Erectile dysfunction with moderate-to-severe LUTS - consider shared pathophysiology assessment",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

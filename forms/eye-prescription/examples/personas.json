@@ -1,0 +1,616 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "classify",
+  "note": "Three hand-authored personas for the Eye Prescription classification engine. classify(state) returns per-eye sphere/cylinder classes ('' when the dioptre value is null), presbyopiaClass (null adds coerce to 0 via ||, so 'none' - never ''), anisometropia (|R-L| sphere, null if either is null), prismPresent, complexity (worst-of: any high band / prism / aniso > 2.00 -> 'complex'; any presbyopia or moderate band -> 'moderate'; else 'simple' - so an all-null prescription is 'simple'), firedRules (audit trail in fixed order: R sphere, L sphere, R cyl, L cyl, add, R-ANISO-01 when aniso > 0.50, R-PRISM-01) and additionalFlags FOLDED in. Flags are NOT priority-sorted: insertion order, with flagId F-<CATEGORY>-<NNN> numbered by a single running counter across all categories (so F-PRESBYOPIA-005 is legal). Quirks verified: R-ANISO-01 fires above 0.50 D but the anisometropia flag only above 2.00 D; significant-change uses a strict > 1.00 D so an exact 1.00 D shift is silent; prescription-expired compares new Date(expiryDate) (midnight UTC) against the frozen clock 2026-09-03T12:00Z, so an expiry dated today already counts as expired; grade.overrideComplexity is applied only by form-app.js at render time and never changes result.complexity; classifySphere has a latent gap for off-grid spheres strictly between -0.75 and -0.50 (they fall to 'low-hyperopia'), unreachable through the UI's 0.25 D snapping. No wall-clock keys in the result. Regenerate expected with: bin/test-personas eye-prescription --update",
+  "personas": [
+    {
+      "name": "Simple - low myopia, stable, 2-year expiry",
+      "description": "31-year-old office worker, routine test, R -1.25/-0.50x180, L -1.00 DS (cyl -0.25 classifies 'none' so no left cyl rule), no add, no prism, prior R -1.00 / L -0.75 (0.25 D shifts), expiry 2028. Expect complexity 'simple', anisometropia 0.25 (no R-ANISO-01), presbyopiaClass 'none', firedRules R-SPH-LOW-MYOPIA (right), R-SPH-LOW-MYOPIA (left), R-CYL-MILD-ASTIGMATISM (right) and zero flags.",
+      "state": {
+        "prescriber": {
+          "name": "Ms Helen Fairbrother",
+          "gocRegistrationNumber": "01-23456",
+          "role": "optometrist",
+          "practiceName": "Fairbrother Opticians",
+          "practiceAddress": "22 High Street, Ilkley",
+          "postcode": "LS29 8AB",
+          "countryAsIso31661Alpha2": "GB",
+          "email": "helen@fairbrother-opticians.example",
+          "phone": "01943 600123"
+        },
+        "patient": {
+          "name": "Oliver Bennett",
+          "birthDate": "1995-05-14",
+          "sex": "male",
+          "email": "oliver.bennett@example.com",
+          "phone": "07700 900412",
+          "postalAddressAsFullText": "8 Riverside Walk, Ilkley",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "LS29 9EZ",
+          "unitedKingdomNhsNumber": "943 476 5919"
+        },
+        "examination": {
+          "examinationDate": "2026-08-20",
+          "examinationTime": "10:15",
+          "issueDate": "2026-08-20",
+          "expiryDate": "2028-08-20",
+          "reasonForSightTest": "routine",
+          "priorPrescriptionDate": "2024-08-05",
+          "priorSphereRight": -1,
+          "priorSphereLeft": -0.75,
+          "notes": "Two-yearly recall. Asymptomatic; VDU use 7 h/day."
+        },
+        "visualAcuity": {
+          "distanceRightUnaided": "6/12",
+          "distanceLeftUnaided": "6/9",
+          "distanceBinocularUnaided": "6/9",
+          "distanceRightCorrected": "6/5",
+          "distanceLeftCorrected": "6/5",
+          "distanceBinocularCorrected": "6/5",
+          "nearRightUnaided": "N5",
+          "nearLeftUnaided": "N5",
+          "nearBinocularUnaided": "N5",
+          "nearRightCorrected": "N5",
+          "nearLeftCorrected": "N5",
+          "nearBinocularCorrected": "N5",
+          "pinholeRight": "",
+          "pinholeLeft": "",
+          "dominantEye": "right"
+        },
+        "rightEye": {
+          "sphereDiopters": -1.25,
+          "cylinderDiopters": -0.5,
+          "axisDegrees": 180,
+          "additionDiopters": null,
+          "intermediateAdditionDiopters": null,
+          "prismHorizontalDiopters": 0,
+          "baseHorizontal": "",
+          "prismVerticalDiopters": 0,
+          "baseVertical": ""
+        },
+        "leftEye": {
+          "sphereDiopters": -1,
+          "cylinderDiopters": -0.25,
+          "axisDegrees": 175,
+          "additionDiopters": null,
+          "intermediateAdditionDiopters": null,
+          "prismHorizontalDiopters": 0,
+          "baseHorizontal": "",
+          "prismVerticalDiopters": 0,
+          "baseVertical": ""
+        },
+        "pupillaryDistance": {
+          "distanceTotalMm": 64,
+          "distanceRightMm": 32,
+          "distanceLeftMm": 32,
+          "nearTotalMm": null,
+          "nearRightMm": null,
+          "nearLeftMm": null,
+          "segmentHeightRightMm": null,
+          "segmentHeightLeftMm": null
+        },
+        "lensRecommendation": {
+          "lensType": "single-vision-distance",
+          "material": "cr-39",
+          "refractiveIndex": 1.5,
+          "aspheric": false,
+          "coatingAntiReflective": true,
+          "coatingScratchResistant": true,
+          "coatingHydrophobic": false,
+          "coatingBlueLight": false,
+          "coatingPhotochromic": false,
+          "coatingPolarised": false,
+          "coatingUv400": true,
+          "tintDescription": "",
+          "tintPercent": null,
+          "dispenserNotes": ""
+        },
+        "ocularHealth": {
+          "slitLampRight": "Clear cornea, quiet AC, clear lens",
+          "slitLampLeft": "Clear cornea, quiet AC, clear lens",
+          "fundusRight": "Healthy disc, C:D 0.3, macula normal",
+          "fundusLeft": "Healthy disc, C:D 0.3, macula normal",
+          "intraocularPressureRightMmhg": 14,
+          "intraocularPressureLeftMmhg": 15,
+          "cupToDiscRatioRight": 0.3,
+          "cupToDiscRatioLeft": 0.3,
+          "octPerformed": false,
+          "octFindings": "",
+          "fieldsPerformed": false,
+          "fieldsFindings": "",
+          "pathologyFlag": false,
+          "referOphthalmology": false,
+          "referralReason": ""
+        },
+        "grade": {
+          "overrideComplexity": "",
+          "overrideReason": "",
+          "followUpIntervalMonths": 24,
+          "prescriberNotes": "",
+          "signedAt": true
+        }
+      },
+      "expected": {
+        "rightEyeSphereClass": "low-myopia",
+        "leftEyeSphereClass": "low-myopia",
+        "rightEyeCylinderClass": "mild-astigmatism",
+        "leftEyeCylinderClass": "none",
+        "presbyopiaClass": "none",
+        "anisometropia": 0.25,
+        "prismPresent": false,
+        "complexity": "simple",
+        "firedRules": [
+          {
+            "ruleId": "R-SPH-LOW-MYOPIA",
+            "instrument": "sphere",
+            "eye": "right",
+            "class": "low-myopia",
+            "category": "refraction",
+            "description": "Right sphere -1.25 D → low-myopia"
+          },
+          {
+            "ruleId": "R-SPH-LOW-MYOPIA",
+            "instrument": "sphere",
+            "eye": "left",
+            "class": "low-myopia",
+            "category": "refraction",
+            "description": "Left sphere -1 D → low-myopia"
+          },
+          {
+            "ruleId": "R-CYL-MILD-ASTIGMATISM",
+            "instrument": "cylinder",
+            "eye": "right",
+            "class": "mild-astigmatism",
+            "category": "refraction",
+            "description": "Right cylinder -0.5 D → mild-astigmatism"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate - emmetropic early presbyope, expiry dated today, exact 1.00 D shift, override ignored",
+      "description": "54-year-old re-presenting for dispensing on a prescription issued 2024-09-03 that expires 2026-09-03 (the oracle's frozen 'today'). Spheres +0.25 both (emmetropia), cylinders null (class '' -> no cyl rules), add +1.50 both -> 'early-presbyopia' (upper bound inclusive). Prior right sphere -0.75 gives an exact +1.00 D change (NOT > 1.00, so no change flag). Prescriber override to 'simple' is recorded but the engine ignores it. Expect complexity 'moderate', anisometropia 0, firedRules R-SPH-EMMETROPIA (right), R-SPH-EMMETROPIA (left), R-ADD-EARLY-PRESBYOPIA; flags F-PRESBYOPIA-001 (low) then F-PRESCRIPTION-EXPIRED-002 (high) - expired because new Date('2026-09-03') is midnight UTC, before 12:00Z.",
+      "state": {
+        "prescriber": {
+          "name": "Mr Rajan Patel",
+          "gocRegistrationNumber": "01-98765",
+          "role": "optometrist",
+          "practiceName": "Headingley Eyecare",
+          "practiceAddress": "104 Otley Road, Leeds",
+          "postcode": "LS6 3PX",
+          "countryAsIso31661Alpha2": "GB",
+          "email": "rpatel@headingley-eyecare.example",
+          "phone": "0113 278 0000"
+        },
+        "patient": {
+          "name": "Susan Whitaker",
+          "birthDate": "1972-02-09",
+          "sex": "female",
+          "email": "",
+          "phone": "0113 275 4321",
+          "postalAddressAsFullText": "3 Grosvenor Terrace, Leeds",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "LS6 2DY",
+          "unitedKingdomNhsNumber": "485 777 3456"
+        },
+        "examination": {
+          "examinationDate": "2024-09-03",
+          "examinationTime": "14:30",
+          "issueDate": "2024-09-03",
+          "expiryDate": "2026-09-03",
+          "reasonForSightTest": "symptoms",
+          "priorPrescriptionDate": "2021-06-11",
+          "priorSphereRight": -0.75,
+          "priorSphereLeft": 0.25,
+          "notes": "Presented with near blur reading small print. Distance unaided 6/5 both."
+        },
+        "visualAcuity": {
+          "distanceRightUnaided": "6/5",
+          "distanceLeftUnaided": "6/5",
+          "distanceBinocularUnaided": "6/5",
+          "distanceRightCorrected": "6/5",
+          "distanceLeftCorrected": "6/5",
+          "distanceBinocularCorrected": "6/5",
+          "nearRightUnaided": "N8",
+          "nearLeftUnaided": "N8",
+          "nearBinocularUnaided": "N8",
+          "nearRightCorrected": "N5",
+          "nearLeftCorrected": "N5",
+          "nearBinocularCorrected": "N5",
+          "pinholeRight": "",
+          "pinholeLeft": "",
+          "dominantEye": "left"
+        },
+        "rightEye": {
+          "sphereDiopters": 0.25,
+          "cylinderDiopters": null,
+          "axisDegrees": null,
+          "additionDiopters": 1.5,
+          "intermediateAdditionDiopters": null,
+          "prismHorizontalDiopters": 0,
+          "baseHorizontal": "",
+          "prismVerticalDiopters": 0,
+          "baseVertical": ""
+        },
+        "leftEye": {
+          "sphereDiopters": 0.25,
+          "cylinderDiopters": null,
+          "axisDegrees": null,
+          "additionDiopters": 1.5,
+          "intermediateAdditionDiopters": null,
+          "prismHorizontalDiopters": 0,
+          "baseHorizontal": "",
+          "prismVerticalDiopters": 0,
+          "baseVertical": ""
+        },
+        "pupillaryDistance": {
+          "distanceTotalMm": 62,
+          "distanceRightMm": 31,
+          "distanceLeftMm": 31,
+          "nearTotalMm": 59,
+          "nearRightMm": 29.5,
+          "nearLeftMm": 29.5,
+          "segmentHeightRightMm": null,
+          "segmentHeightLeftMm": null
+        },
+        "lensRecommendation": {
+          "lensType": "single-vision-near",
+          "material": "cr-39",
+          "refractiveIndex": 1.5,
+          "aspheric": false,
+          "coatingAntiReflective": true,
+          "coatingScratchResistant": true,
+          "coatingHydrophobic": false,
+          "coatingBlueLight": false,
+          "coatingPhotochromic": false,
+          "coatingPolarised": false,
+          "coatingUv400": false,
+          "tintDescription": "",
+          "tintPercent": null,
+          "dispenserNotes": "Readers only; patient declined varifocals."
+        },
+        "ocularHealth": {
+          "slitLampRight": "Early nuclear sclerosis, not visually significant",
+          "slitLampLeft": "Early nuclear sclerosis, not visually significant",
+          "fundusRight": "Normal",
+          "fundusLeft": "Normal",
+          "intraocularPressureRightMmhg": 16,
+          "intraocularPressureLeftMmhg": 17,
+          "cupToDiscRatioRight": 0.4,
+          "cupToDiscRatioLeft": 0.4,
+          "octPerformed": false,
+          "octFindings": "",
+          "fieldsPerformed": true,
+          "fieldsFindings": "Full to confrontation; screening fields normal",
+          "pathologyFlag": false,
+          "referOphthalmology": false,
+          "referralReason": ""
+        },
+        "grade": {
+          "overrideComplexity": "simple",
+          "overrideReason": "Plano readers only - dispensing complexity is trivial",
+          "followUpIntervalMonths": 24,
+          "prescriberNotes": "Re-test due; do not dispense on this Rx.",
+          "signedAt": true
+        }
+      },
+      "expected": {
+        "rightEyeSphereClass": "emmetropia",
+        "leftEyeSphereClass": "emmetropia",
+        "rightEyeCylinderClass": "",
+        "leftEyeCylinderClass": "",
+        "presbyopiaClass": "early-presbyopia",
+        "anisometropia": 0,
+        "prismPresent": false,
+        "complexity": "moderate",
+        "firedRules": [
+          {
+            "ruleId": "R-SPH-EMMETROPIA",
+            "instrument": "sphere",
+            "eye": "right",
+            "class": "emmetropia",
+            "category": "refraction",
+            "description": "Right sphere 0.25 D → emmetropia"
+          },
+          {
+            "ruleId": "R-SPH-EMMETROPIA",
+            "instrument": "sphere",
+            "eye": "left",
+            "class": "emmetropia",
+            "category": "refraction",
+            "description": "Left sphere 0.25 D → emmetropia"
+          },
+          {
+            "ruleId": "R-ADD-EARLY-PRESBYOPIA",
+            "instrument": "addition",
+            "eye": "both",
+            "class": "early-presbyopia",
+            "category": "accommodation",
+            "description": "Addition → early-presbyopia"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-PRESBYOPIA-001",
+            "category": "presbyopia",
+            "eye": "both",
+            "priority": "low",
+            "description": "Addition prescribed (early-presbyopia)",
+            "suggestedAction": "Counsel patient on accommodation expectations"
+          },
+          {
+            "flagId": "F-PRESCRIPTION-EXPIRED-002",
+            "category": "prescription-expired",
+            "eye": "both",
+            "priority": "high",
+            "description": "Expiry date 2026-09-03 is in the past",
+            "suggestedAction": "Schedule a new sight test before dispensing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complex - high myope with lattice degeneration, prism, referral",
+      "description": "58-year-old: R -7.50/-3.00x10 with 1 prism dioptre base-up, L -4.25/-1.25x170, add +2.25 both, prior R -6.00 (shift -1.50 D), prior L -4.00 (-0.25). Pathology flagged (lattice degeneration with atrophic holes) and ophthalmology referral requested. Expiry 2027 (not expired). Expect right sphere 'high-myopia', left 'moderate-myopia', right cyl 'high-astigmatism', left cyl 'moderate-astigmatism', presbyopiaClass 'established-presbyopia', anisometropia 3.25, prismPresent true, complexity 'complex'. firedRules (7): R-SPH-HIGH-MYOPIA, R-SPH-MODERATE-MYOPIA, R-CYL-HIGH-ASTIGMATISM, R-CYL-MODERATE-ASTIGMATISM, R-ADD-ESTABLISHED-PRESBYOPIA, R-ANISO-01, R-PRISM-01. Flags (8, insertion order, running counter): F-HIGH-MYOPIA-001 (right, medium), F-HIGH-ASTIGMATISM-002 (right, medium), F-ANISOMETROPIA-003 (medium), F-PRISM-PRESENT-004 (medium), F-PRESBYOPIA-005 (low), F-SIGNIFICANT-CHANGE-FROM-PRIOR-006 (right, low, '-1.50 D'), F-OCULAR-PATHOLOGY-007 (high), F-REFER-OPHTHALMOLOGY-008 (high, suggestedAction = referral reason). No paediatric, no expired, no left-eye flags.",
+      "state": {
+        "prescriber": {
+          "name": "Dr Amina Yusuf",
+          "gocRegistrationNumber": "01-55501",
+          "role": "optometrist",
+          "practiceName": "Chapel Allerton Eye Clinic",
+          "practiceAddress": "17 Harrogate Road, Leeds",
+          "postcode": "LS7 3NB",
+          "countryAsIso31661Alpha2": "GB",
+          "email": "a.yusuf@chapelallerton-eye.example",
+          "phone": "0113 262 9999"
+        },
+        "patient": {
+          "name": "Graham Thornton",
+          "birthDate": "1968-03-30",
+          "sex": "male",
+          "email": "g.thornton@example.com",
+          "phone": "07700 900771",
+          "postalAddressAsFullText": "45 Allerton Grange Way, Leeds",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "LS17 6LP",
+          "unitedKingdomNhsNumber": "612 998 0022"
+        },
+        "examination": {
+          "examinationDate": "2026-08-31",
+          "examinationTime": "09:00",
+          "issueDate": "2026-08-31",
+          "expiryDate": "2027-08-31",
+          "reasonForSightTest": "symptoms",
+          "priorPrescriptionDate": "2025-02-14",
+          "priorSphereRight": -6,
+          "priorSphereLeft": -4,
+          "notes": "New floaters and photopsia right eye for 10 days. Right myopic shift -1.50 D in 18 months. Vertical diplopia at distance corrected with 1 BU right."
+        },
+        "visualAcuity": {
+          "distanceRightUnaided": "CF 1m",
+          "distanceLeftUnaided": "6/60",
+          "distanceBinocularUnaided": "6/60",
+          "distanceRightCorrected": "6/9",
+          "distanceLeftCorrected": "6/6",
+          "distanceBinocularCorrected": "6/6",
+          "nearRightUnaided": "N36",
+          "nearLeftUnaided": "N18",
+          "nearBinocularUnaided": "N18",
+          "nearRightCorrected": "N6",
+          "nearLeftCorrected": "N5",
+          "nearBinocularCorrected": "N5",
+          "pinholeRight": "6/9",
+          "pinholeLeft": "6/6",
+          "dominantEye": "left"
+        },
+        "rightEye": {
+          "sphereDiopters": -7.5,
+          "cylinderDiopters": -3,
+          "axisDegrees": 10,
+          "additionDiopters": 2.25,
+          "intermediateAdditionDiopters": 1.25,
+          "prismHorizontalDiopters": 0,
+          "baseHorizontal": "",
+          "prismVerticalDiopters": 1,
+          "baseVertical": "up"
+        },
+        "leftEye": {
+          "sphereDiopters": -4.25,
+          "cylinderDiopters": -1.25,
+          "axisDegrees": 170,
+          "additionDiopters": 2.25,
+          "intermediateAdditionDiopters": 1.25,
+          "prismHorizontalDiopters": 0,
+          "baseHorizontal": "",
+          "prismVerticalDiopters": 0,
+          "baseVertical": ""
+        },
+        "pupillaryDistance": {
+          "distanceTotalMm": 66,
+          "distanceRightMm": 33.5,
+          "distanceLeftMm": 32.5,
+          "nearTotalMm": 62,
+          "nearRightMm": 31.5,
+          "nearLeftMm": 30.5,
+          "segmentHeightRightMm": 22,
+          "segmentHeightLeftMm": 22
+        },
+        "lensRecommendation": {
+          "lensType": "varifocal",
+          "material": "high-index-1.74",
+          "refractiveIndex": 1.74,
+          "aspheric": true,
+          "coatingAntiReflective": true,
+          "coatingScratchResistant": true,
+          "coatingHydrophobic": true,
+          "coatingBlueLight": false,
+          "coatingPhotochromic": true,
+          "coatingPolarised": false,
+          "coatingUv400": true,
+          "tintDescription": "",
+          "tintPercent": null,
+          "dispenserNotes": "Do not dispense until ophthalmology has reviewed the right retina; Rx may change after any laser."
+        },
+        "ocularHealth": {
+          "slitLampRight": "Posterior vitreous detachment with Weiss ring; pigment in anterior vitreous (Shafer sign +)",
+          "slitLampLeft": "Quiet; early nuclear sclerosis",
+          "fundusRight": "Lattice degeneration supero-temporal with two atrophic holes; no retinal detachment seen; myopic crescent",
+          "fundusLeft": "Tilted disc, myopic crescent, no lattice",
+          "intraocularPressureRightMmhg": 18,
+          "intraocularPressureLeftMmhg": 17,
+          "cupToDiscRatioRight": 0.5,
+          "cupToDiscRatioLeft": 0.45,
+          "octPerformed": true,
+          "octFindings": "Right macula flat; no macular hole. Left normal.",
+          "fieldsPerformed": true,
+          "fieldsFindings": "Full both eyes",
+          "pathologyFlag": true,
+          "referOphthalmology": true,
+          "referralReason": "Acute PVD with Shafer sign and lattice with atrophic holes RE - urgent retinal review within 24 h"
+        },
+        "grade": {
+          "overrideComplexity": "",
+          "overrideReason": "",
+          "followUpIntervalMonths": 6,
+          "prescriberNotes": "Referred by telephone to eye casualty same day.",
+          "signedAt": true
+        }
+      },
+      "expected": {
+        "rightEyeSphereClass": "high-myopia",
+        "leftEyeSphereClass": "moderate-myopia",
+        "rightEyeCylinderClass": "high-astigmatism",
+        "leftEyeCylinderClass": "moderate-astigmatism",
+        "presbyopiaClass": "established-presbyopia",
+        "anisometropia": 3.25,
+        "prismPresent": true,
+        "complexity": "complex",
+        "firedRules": [
+          {
+            "ruleId": "R-SPH-HIGH-MYOPIA",
+            "instrument": "sphere",
+            "eye": "right",
+            "class": "high-myopia",
+            "category": "refraction",
+            "description": "Right sphere -7.5 D → high-myopia"
+          },
+          {
+            "ruleId": "R-SPH-MODERATE-MYOPIA",
+            "instrument": "sphere",
+            "eye": "left",
+            "class": "moderate-myopia",
+            "category": "refraction",
+            "description": "Left sphere -4.25 D → moderate-myopia"
+          },
+          {
+            "ruleId": "R-CYL-HIGH-ASTIGMATISM",
+            "instrument": "cylinder",
+            "eye": "right",
+            "class": "high-astigmatism",
+            "category": "refraction",
+            "description": "Right cylinder -3 D → high-astigmatism"
+          },
+          {
+            "ruleId": "R-CYL-MODERATE-ASTIGMATISM",
+            "instrument": "cylinder",
+            "eye": "left",
+            "class": "moderate-astigmatism",
+            "category": "refraction",
+            "description": "Left cylinder -1.25 D → moderate-astigmatism"
+          },
+          {
+            "ruleId": "R-ADD-ESTABLISHED-PRESBYOPIA",
+            "instrument": "addition",
+            "eye": "both",
+            "class": "established-presbyopia",
+            "category": "accommodation",
+            "description": "Addition → established-presbyopia"
+          },
+          {
+            "ruleId": "R-ANISO-01",
+            "instrument": "anisometropia",
+            "eye": "both",
+            "class": "",
+            "category": "alignment",
+            "description": "Anisometropia 3.25 D"
+          },
+          {
+            "ruleId": "R-PRISM-01",
+            "instrument": "prism",
+            "eye": "both",
+            "class": "",
+            "category": "alignment",
+            "description": "Prism prescribed"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-HIGH-MYOPIA-001",
+            "category": "high-myopia",
+            "eye": "right",
+            "priority": "medium",
+            "description": "Right sphere -7.5 D below -6.00 D",
+            "suggestedAction": "Consider retinal screening every 12 months"
+          },
+          {
+            "flagId": "F-HIGH-ASTIGMATISM-002",
+            "category": "high-astigmatism",
+            "eye": "right",
+            "priority": "medium",
+            "description": "Right cylinder -3 D magnitude > 2.50 D",
+            "suggestedAction": "Consider corneal topography; rule out keratoconus"
+          },
+          {
+            "flagId": "F-ANISOMETROPIA-003",
+            "category": "anisometropia",
+            "eye": "both",
+            "priority": "medium",
+            "description": "Anisometropia 3.25 D > 2.00 D",
+            "suggestedAction": "Adaptation period expected; consider contact-lens correction"
+          },
+          {
+            "flagId": "F-PRISM-PRESENT-004",
+            "category": "prism-present",
+            "eye": "both",
+            "priority": "medium",
+            "description": "Prism prescribed in one or both eyes",
+            "suggestedAction": "Document indication; review binocular vision"
+          },
+          {
+            "flagId": "F-PRESBYOPIA-005",
+            "category": "presbyopia",
+            "eye": "both",
+            "priority": "low",
+            "description": "Addition prescribed (established-presbyopia)",
+            "suggestedAction": "Counsel patient on accommodation expectations"
+          },
+          {
+            "flagId": "F-SIGNIFICANT-CHANGE-FROM-PRIOR-006",
+            "category": "significant-change-from-prior",
+            "eye": "right",
+            "priority": "low",
+            "description": "Right sphere changed by -1.50 D since prior",
+            "suggestedAction": "Counsel patient on adaptation period"
+          },
+          {
+            "flagId": "F-OCULAR-PATHOLOGY-007",
+            "category": "ocular-pathology",
+            "eye": "both",
+            "priority": "high",
+            "description": "Ocular pathology recorded on step 10",
+            "suggestedAction": "Consider ophthalmology referral as documented"
+          },
+          {
+            "flagId": "F-REFER-OPHTHALMOLOGY-008",
+            "category": "refer-ophthalmology",
+            "eye": "both",
+            "priority": "high",
+            "description": "Prescriber requests ophthalmology referral",
+            "suggestedAction": "Acute PVD with Shafer sign and lattice with atrophic holes RE - urgent retinal review within 24 h"
+          }
+        ]
+      }
+    }
+  ]
+}

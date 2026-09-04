@@ -1,0 +1,440 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateAuthorization",
+  "note": "validateAuthorization(state) is the composite grader form-app.js calls at submit; flags are FOLDED (it returns additionalFlags alongside firedRules), so no flagsHint. validityStatus is 'valid' only when zero rules fire AND no high-priority flag — a single medium rule (e.g. missing mental-health initials) invalidates. firedRules order is fixed: the 9 core-element rules, then the 3 required-statement rules, then the 6 sensitive-category rules, each in catalogue order. completenessScore counts 10 fields as filled whenever they are non-empty/non-null — an explicit 'no' answer to acknowledgedRightToRevoke or individualSignatureConfirmed COUNTS as filled, so a form can be 100% 'complete' yet 'invalid'. Quirks verified: (1) expiration-stated treats a non-empty expirationEvent as satisfying the presence check, so 'none' passes it and is caught only by the separate expiration-not-none rule; (2) expiration-over-12-months divides by 30.44-day months, so a one-calendar-year expiry (365 days = 11.99 months) does NOT fire; (3) signed-by-minor only checks signer.relationship === 'self', so a minor with a parent signer never raises it; (4) validatedAt is not a stripped volatile key but is deterministic under the oracle's frozen clock (2026-09-03T12:00:00.000Z). Regenerate expected with: bin/test-personas united-states-hipaa-authorization-form --update",
+  "personas": [
+    {
+      "name": "Valid self-signed authorization for continuing treatment",
+      "description": "47-year-old adult signs for herself, releasing medical/health records (initialled) from a named primary-care practice to a named cardiology group for continuing treatment, expiring on a specific date six months after signature, with every required statement acknowledged. Expect validityStatus 'valid', completenessScore 100, completenessStatus 'complete', zero firedRules, zero additionalFlags.",
+      "state": {
+        "patient": {
+          "name": "Maria L. Delgado",
+          "birthDate": "1979-03-14",
+          "socialSecurityNumber": "",
+          "streetAddress": "1420 Oakridge Drive",
+          "city": "Nashville",
+          "state": "TN",
+          "zipCode": "37211",
+          "phone": "615-555-0142",
+          "email": "maria.delgado@example.com"
+        },
+        "signer": {
+          "relationship": "self",
+          "representativeName": "",
+          "representativeAuthorityDescription": "",
+          "representativeAuthorityProofAttached": ""
+        },
+        "disclosingSource": {
+          "identificationMode": "specific",
+          "specificPersonsOrOrganizations": "Harpeth Family Medicine, 2200 Church Street, Nashville, TN 37203",
+          "classDescription": "",
+          "isVaFacility": "no",
+          "isPart2Program": "no"
+        },
+        "authorizedRecipient": {
+          "recipientName": "Dr Samuel Okafor",
+          "recipientOrganization": "Cumberland Cardiology Associates",
+          "recipientRole": "Consulting cardiologist",
+          "recipientAddress": "3401 West End Avenue, Suite 400, Nashville, TN 37203",
+          "recipientPhone": "615-555-0199",
+          "recipientEmail": "",
+          "recipientRelationshipToPatient": "health-care-provider"
+        },
+        "recordsToDisclose": {
+          "includeMedicalHealth": "yes",
+          "medicalHealthInitials": "MLD",
+          "includeMentalHealth": "no",
+          "mentalHealthInitials": "",
+          "includeSubstanceUse": "no",
+          "substanceUseInitials": "",
+          "part2RedisclosureNoticeIncluded": "",
+          "includeHivAids": "no",
+          "hivAidsInitials": "",
+          "hivAidsStateConsentIncluded": "",
+          "includePsychotherapyNotes": "no",
+          "includeGeneticInformation": "no",
+          "includeReproductiveHealth": "no",
+          "section7332NoticeIncluded": "",
+          "dateRangeSpecified": "yes",
+          "dateFrom": "2024-01-01",
+          "dateTo": "2026-08-15",
+          "otherDescription": "Clinic notes, ECG tracings, echocardiogram reports and lipid panel results relating to hypertension and chest-pain work-up"
+        },
+        "purposeOfDisclosure": {
+          "purposes": [
+            "continuing-treatment"
+          ],
+          "primaryPurpose": "continuing-treatment",
+          "otherDetails": ""
+        },
+        "expiration": {
+          "kind": "date",
+          "expirationDate": "2027-02-20",
+          "expirationEvent": "",
+          "durationMonths": null,
+          "durationLabel": ""
+        },
+        "patientRightsAcknowledgement": {
+          "acknowledgedRightToRevoke": "yes",
+          "acknowledgedRevocationProcedure": "yes",
+          "acknowledgedNoConditioning": "yes",
+          "acknowledgedRedisclosureWarning": "yes",
+          "acknowledgedRightToCopy": "yes",
+          "acknowledgedRightToInspectDisclosed": "yes"
+        },
+        "signatureWitness": {
+          "individualSignatureConfirmed": "yes",
+          "individualSignatureImageUri": "",
+          "signatureDate": "2026-08-20",
+          "signedAtLocation": "Nashville, TN",
+          "parentGuardianCoSignatureRequired": "no",
+          "parentGuardianName": "",
+          "parentGuardianSignatureConfirmed": "",
+          "parentGuardianSignatureDate": null,
+          "witnessName": "",
+          "witnessSignatureConfirmed": "",
+          "witnessDate": null,
+          "witnessRole": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "valid",
+        "completenessScore": 100,
+        "completenessStatus": "complete",
+        "firedRules": [],
+        "additionalFlags": [],
+        "validatedAt": "2026-09-03T12:00:00.000Z",
+        "validatorVersion": "0.1.0"
+      }
+    },
+    {
+      "name": "Parent signs for 16-year-old, mental-health records not initialled, one-year eligibility expiry",
+      "description": "Mother signs as parent-of-minor (authority described) for her 16-year-old son so a state Medicaid agency can make an eligibility determination; medical and mental-health records are released but the mental-health box is not separately initialled; expiration is exactly one calendar year after signature. Expect completenessScore 100 / 'complete' yet validityStatus 'invalid' because the single medium rule mental-health-separate-initial fires (firedRules = 1). No flags: signed-by-minor is skipped because the signer is not 'self', and expiration-over-12-months does not fire because 365 days / 30.44 = 11.99 months is not > 12.",
+      "state": {
+        "patient": {
+          "name": "Jayden T. Brooks",
+          "birthDate": "2010-05-02",
+          "socialSecurityNumber": "",
+          "streetAddress": "88 Pine Hollow Road",
+          "city": "Knoxville",
+          "state": "TN",
+          "zipCode": "37920",
+          "phone": "865-555-0177",
+          "email": ""
+        },
+        "signer": {
+          "relationship": "parent-of-minor",
+          "representativeName": "Danielle R. Brooks",
+          "representativeAuthorityDescription": "Biological mother and custodial parent of the minor patient",
+          "representativeAuthorityProofAttached": "yes"
+        },
+        "disclosingSource": {
+          "identificationMode": "class",
+          "specificPersonsOrOrganizations": "",
+          "classDescription": "Any physician, psychologist, hospital, clinic or school health service that has treated the patient since 2022",
+          "isVaFacility": "no",
+          "isPart2Program": "no"
+        },
+        "authorizedRecipient": {
+          "recipientName": "",
+          "recipientOrganization": "TennCare Eligibility Unit, Tennessee Department of Human Services",
+          "recipientRole": "Eligibility case worker",
+          "recipientAddress": "PO Box 305240, Nashville, TN 37230",
+          "recipientPhone": "855-259-0701",
+          "recipientEmail": "",
+          "recipientRelationshipToPatient": "state-agency"
+        },
+        "recordsToDisclose": {
+          "includeMedicalHealth": "yes",
+          "medicalHealthInitials": "DRB",
+          "includeMentalHealth": "yes",
+          "mentalHealthInitials": "",
+          "includeSubstanceUse": "no",
+          "substanceUseInitials": "",
+          "part2RedisclosureNoticeIncluded": "",
+          "includeHivAids": "no",
+          "hivAidsInitials": "",
+          "hivAidsStateConsentIncluded": "",
+          "includePsychotherapyNotes": "no",
+          "includeGeneticInformation": "no",
+          "includeReproductiveHealth": "no",
+          "section7332NoticeIncluded": "",
+          "dateRangeSpecified": "yes",
+          "dateFrom": "2022-01-01",
+          "dateTo": "2026-08-01",
+          "otherDescription": "Asthma treatment records, ADHD evaluation and counselling summaries needed to document disability-related eligibility"
+        },
+        "purposeOfDisclosure": {
+          "purposes": [
+            "eligibility-determination"
+          ],
+          "primaryPurpose": "eligibility-determination",
+          "otherDetails": ""
+        },
+        "expiration": {
+          "kind": "date",
+          "expirationDate": "2027-08-18",
+          "expirationEvent": "",
+          "durationMonths": null,
+          "durationLabel": ""
+        },
+        "patientRightsAcknowledgement": {
+          "acknowledgedRightToRevoke": "yes",
+          "acknowledgedRevocationProcedure": "yes",
+          "acknowledgedNoConditioning": "yes",
+          "acknowledgedRedisclosureWarning": "yes",
+          "acknowledgedRightToCopy": "yes",
+          "acknowledgedRightToInspectDisclosed": "no"
+        },
+        "signatureWitness": {
+          "individualSignatureConfirmed": "yes",
+          "individualSignatureImageUri": "",
+          "signatureDate": "2026-08-18",
+          "signedAtLocation": "Knoxville, TN",
+          "parentGuardianCoSignatureRequired": "yes",
+          "parentGuardianName": "Danielle R. Brooks",
+          "parentGuardianSignatureConfirmed": "yes",
+          "parentGuardianSignatureDate": "2026-08-18",
+          "witnessName": "",
+          "witnessSignatureConfirmed": "",
+          "witnessDate": null,
+          "witnessRole": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "invalid",
+        "completenessScore": 100,
+        "completenessStatus": "complete",
+        "firedRules": [
+          {
+            "ruleId": "mental-health-separate-initial",
+            "citation": "state-specific",
+            "domain": "sensitive-category",
+            "priority": "medium",
+            "description": "Mental-health disclosure should be separately initialled."
+          }
+        ],
+        "additionalFlags": [],
+        "validatedAt": "2026-09-03T12:00:00.000Z",
+        "validatorVersion": "0.1.0"
+      }
+    },
+    {
+      "name": "Defective VA sensitive-records release for an investigation",
+      "description": "A power-of-attorney holder (no authority described) tries to release a veteran's substance-use, HIV, mental-health, psychotherapy-note and reproductive-health records from a VA medical center (class mode with the class left blank, 'All my records' as the description) to a private investigator for an 'investigation' purpose, with expiration event 'none', signature not confirmed, no signature date, and the right-to-revoke / no-conditioning / redisclosure statements not acknowledged. Expect validityStatus 'invalid', completenessScore 90 / 'partial' (only signatureDate is empty — the 'no' answers still count as filled), 14 firedRules in order: phi-description-not-vague, disclosing-source-identified, expiration-not-none, signature-and-date, representative-authority, right-to-revoke-statement, no-conditioning-statement, redisclosure-warning, substance-use-part-2-consent, substance-use-initials, hiv-aids-state-consent, hiv-aids-initials, mental-health-separate-initial, psychotherapy-separate-auth; and 2 additionalFlags in order: reproductive-health-investigation (high), va-records-7332-notice (high). Note expiration-stated does NOT fire because the non-empty event 'none' satisfies its presence check.",
+      "state": {
+        "patient": {
+          "name": "Curtis A. Whitfield",
+          "birthDate": "1968-11-23",
+          "socialSecurityNumber": "",
+          "streetAddress": "506 Veterans Way",
+          "city": "Murfreesboro",
+          "state": "TN",
+          "zipCode": "37129",
+          "phone": "",
+          "email": ""
+        },
+        "signer": {
+          "relationship": "power-of-attorney",
+          "representativeName": "Gregory Whitfield",
+          "representativeAuthorityDescription": "",
+          "representativeAuthorityProofAttached": "no"
+        },
+        "disclosingSource": {
+          "identificationMode": "class",
+          "specificPersonsOrOrganizations": "",
+          "classDescription": "",
+          "isVaFacility": "yes",
+          "isPart2Program": "yes"
+        },
+        "authorizedRecipient": {
+          "recipientName": "R. Kane",
+          "recipientOrganization": "Kane Investigative Services LLC",
+          "recipientRole": "Licensed private investigator",
+          "recipientAddress": "",
+          "recipientPhone": "",
+          "recipientEmail": "",
+          "recipientRelationshipToPatient": "other"
+        },
+        "recordsToDisclose": {
+          "includeMedicalHealth": "yes",
+          "medicalHealthInitials": "",
+          "includeMentalHealth": "yes",
+          "mentalHealthInitials": "",
+          "includeSubstanceUse": "yes",
+          "substanceUseInitials": "",
+          "part2RedisclosureNoticeIncluded": "no",
+          "includeHivAids": "yes",
+          "hivAidsInitials": "",
+          "hivAidsStateConsentIncluded": "no",
+          "includePsychotherapyNotes": "yes",
+          "includeGeneticInformation": "no",
+          "includeReproductiveHealth": "yes",
+          "section7332NoticeIncluded": "no",
+          "dateRangeSpecified": "no",
+          "dateFrom": null,
+          "dateTo": null,
+          "otherDescription": "All my records"
+        },
+        "purposeOfDisclosure": {
+          "purposes": [
+            "other",
+            "legal-proceeding"
+          ],
+          "primaryPurpose": "other",
+          "otherDetails": "Investigation into the patient's reproductive-health and treatment history for a contested guardianship petition"
+        },
+        "expiration": {
+          "kind": "event",
+          "expirationDate": null,
+          "expirationEvent": "none",
+          "durationMonths": null,
+          "durationLabel": ""
+        },
+        "patientRightsAcknowledgement": {
+          "acknowledgedRightToRevoke": "no",
+          "acknowledgedRevocationProcedure": "",
+          "acknowledgedNoConditioning": "",
+          "acknowledgedRedisclosureWarning": "no",
+          "acknowledgedRightToCopy": "",
+          "acknowledgedRightToInspectDisclosed": ""
+        },
+        "signatureWitness": {
+          "individualSignatureConfirmed": "no",
+          "individualSignatureImageUri": "",
+          "signatureDate": null,
+          "signedAtLocation": "",
+          "parentGuardianCoSignatureRequired": "",
+          "parentGuardianName": "",
+          "parentGuardianSignatureConfirmed": "",
+          "parentGuardianSignatureDate": null,
+          "witnessName": "",
+          "witnessSignatureConfirmed": "",
+          "witnessDate": null,
+          "witnessRole": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "invalid",
+        "completenessScore": 90,
+        "completenessStatus": "partial",
+        "firedRules": [
+          {
+            "ruleId": "phi-description-not-vague",
+            "citation": "45 CFR § 164.508(c)(1)(i)",
+            "domain": "core-element",
+            "priority": "medium",
+            "description": "Vague phrases such as \"all my records\" do not satisfy the specificity requirement."
+          },
+          {
+            "ruleId": "disclosing-source-identified",
+            "citation": "45 CFR § 164.508(c)(1)(ii)",
+            "domain": "core-element",
+            "priority": "high",
+            "description": "The persons authorised to disclose must be identified."
+          },
+          {
+            "ruleId": "expiration-not-none",
+            "citation": "45 CFR § 164.508(c)(1)(v)",
+            "domain": "expiration",
+            "priority": "high",
+            "description": "The string \"none\" is not permitted as an expiration event."
+          },
+          {
+            "ruleId": "signature-and-date",
+            "citation": "45 CFR § 164.508(c)(1)(vi)",
+            "domain": "core-element",
+            "priority": "high",
+            "description": "Signature and date are required."
+          },
+          {
+            "ruleId": "representative-authority",
+            "citation": "45 CFR § 164.508(c)(1)(vi)(B)",
+            "domain": "representative",
+            "priority": "high",
+            "description": "When signed by a representative, a description of authority is required."
+          },
+          {
+            "ruleId": "right-to-revoke-statement",
+            "citation": "45 CFR § 164.508(c)(2)(i)",
+            "domain": "required-statement",
+            "priority": "medium",
+            "description": "Right-to-revoke statement must be acknowledged."
+          },
+          {
+            "ruleId": "no-conditioning-statement",
+            "citation": "45 CFR § 164.508(c)(2)(ii)",
+            "domain": "required-statement",
+            "priority": "medium",
+            "description": "No-conditioning statement must be acknowledged."
+          },
+          {
+            "ruleId": "redisclosure-warning",
+            "citation": "45 CFR § 164.508(c)(2)(iii)",
+            "domain": "required-statement",
+            "priority": "medium",
+            "description": "Re-disclosure warning must be acknowledged."
+          },
+          {
+            "ruleId": "substance-use-part-2-consent",
+            "citation": "42 CFR Part 2",
+            "domain": "sensitive-category",
+            "priority": "high",
+            "description": "Substance-use records require the 42 CFR Part 2 prohibition-on-redisclosure notice."
+          },
+          {
+            "ruleId": "substance-use-initials",
+            "citation": "42 CFR § 2.31",
+            "domain": "sensitive-category",
+            "priority": "high",
+            "description": "Substance-use disclosure requires patient initials."
+          },
+          {
+            "ruleId": "hiv-aids-state-consent",
+            "citation": "state-specific",
+            "domain": "sensitive-category",
+            "priority": "high",
+            "description": "HIV/AIDS disclosure requires state-specific consent language."
+          },
+          {
+            "ruleId": "hiv-aids-initials",
+            "citation": "state-specific",
+            "domain": "sensitive-category",
+            "priority": "high",
+            "description": "HIV/AIDS disclosure requires patient initials."
+          },
+          {
+            "ruleId": "mental-health-separate-initial",
+            "citation": "state-specific",
+            "domain": "sensitive-category",
+            "priority": "medium",
+            "description": "Mental-health disclosure should be separately initialled."
+          },
+          {
+            "ruleId": "psychotherapy-separate-auth",
+            "citation": "45 CFR § 164.508(a)(2)",
+            "domain": "compound",
+            "priority": "high",
+            "description": "Psychotherapy notes require a separate authorization."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "reproductive-health-investigation",
+            "category": "reproductive-health",
+            "priority": "high",
+            "message": "Purpose appears to be an investigation of reproductive-health care (HHS 2024 rule)."
+          },
+          {
+            "flagId": "va-records-7332-notice",
+            "category": "state-law",
+            "priority": "high",
+            "message": "VA records require the 38 U.S.C. § 7332 notice."
+          }
+        ],
+        "validatedAt": "2026-09-03T12:00:00.000Z",
+        "validatorVersion": "0.1.0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,766 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Three hand-authored personas for the Anaesthetic Record completeness engine. calculateGrade returns status ('incomplete' if any of the 8 critical mandatory rules is unsatisfied, else 'partial' if any of the 4 non-critical rules is, else 'complete'), completenessPercent = round(100 x satisfied / 12), firedRules (all 12 rules in catalogue order, each with satisfied true/false - so the array is always 12 long), criticalMissing and noncriticalMissing. Flags are SPLIT: form-app.js calls detectFlaggedIssues(state, grade) with the whole grader result, mirrored here as flagsArgs ['state','result']; the oracle stores them under expected.flaggedIssues. Quirks verified in source: M-WHO-CHECKLIST is satisfied by ANY non-empty whoSignIn/whoTimeOut (so 'no' counts as recorded) while F-WHO-CHECKLIST-001 fires whenever either is not exactly 'yes'; consentConfirmed '' or 'no' both raise F-UNLOGGED-CONSENT-001; the allergy conflict is a case-insensitive substring match of each >=3-char allergy term (split on , ; / newline and the word 'and') INSIDE the drug name, so a class allergy ('penicillin') is missed for a drug whose name does not contain the term (co-amoxiclav) but caught for benzylpenicillin; derangement uses strict < 92 / < 90 (exactly 92 and 90 are normal) and counts observation ROWS not breaches; the priority sort is stable so within a priority the flags keep detection order (WHO, allergy, airway, anaphylaxis, consent). Regenerate expected with: bin/test-personas anaesthetic-record --update",
+  "personas": [
+    {
+      "name": "Complete elective GA - laparoscopic cholecystectomy",
+      "description": "Fully documented elective ASA II general anaesthetic with every mandatory item present: identifier, anaesthetist, ASA, technique, airway, WHO Sign In + Time Out both 'yes', two observation rows, signature, weight, five monitoring modalities, fluids and recovery destination. Consent 'yes', no allergies, Cormack-Lehane 1 with one attempt, observations within limits, no events. Expect status 'complete', completenessPercent 100, criticalMissing 0, noncriticalMissing 0, all 12 firedRules satisfied, and an empty flaggedIssues array.",
+      "state": {
+        "identification": {
+          "patientIdentifier": "NHS 943 476 5871",
+          "patientName": "Margaret Ellison",
+          "dateOfBirth": "1971-03-18",
+          "sex": "female",
+          "weightKg": 68,
+          "heightCm": 164,
+          "theatre": "Theatre 4, Day Surgery Unit",
+          "operationDate": "2026-08-27",
+          "anaesthetistName": "Dr Priya Raman",
+          "assistantName": "ODP James Whitfield",
+          "surgeonName": "Mr Tomasz Kowalczyk",
+          "plannedProcedure": "Laparoscopic cholecystectomy",
+          "urgency": "elective",
+          "anaestheticTechnique": "general"
+        },
+        "preInduction": {
+          "machineChecked": "yes",
+          "whoSignIn": "yes",
+          "whoTimeOut": "yes",
+          "consentConfirmed": "yes",
+          "fastingConfirmed": "yes",
+          "ivAccess": "20G left dorsum of hand",
+          "allergyBandChecked": "yes",
+          "documentedAllergies": ""
+        },
+        "asaAirway": {
+          "asaStatus": "II",
+          "asaEmergencyModifier": "no",
+          "mallampatiClass": 2,
+          "mouthOpeningCm": 4.5,
+          "thyromentalDistanceCm": 7,
+          "dentition": "Own teeth, one upper crown",
+          "anticipatedDifficultAirway": "no",
+          "priorDifficultIntubation": "no"
+        },
+        "drugs": [
+          {
+            "drugName": "Propofol",
+            "dose": 180,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "induction",
+            "administeredAt": "2026-08-27T09:05"
+          },
+          {
+            "drugName": "Fentanyl",
+            "dose": 100,
+            "doseUnit": "mcg",
+            "route": "iv",
+            "category": "analgesia",
+            "administeredAt": "2026-08-27T09:04"
+          },
+          {
+            "drugName": "Rocuronium",
+            "dose": 50,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "neuromuscular-blocker",
+            "administeredAt": "2026-08-27T09:06"
+          },
+          {
+            "drugName": "Ondansetron",
+            "dose": 4,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "antiemetic",
+            "administeredAt": "2026-08-27T09:30"
+          }
+        ],
+        "airway": {
+          "airwayTechnique": "tracheal-tube",
+          "deviceSize": "7.0 mm",
+          "tubeDepthCm": 21,
+          "cuffed": "yes",
+          "cormackLehaneGrade": 1,
+          "intubationAttempts": 1,
+          "capnographyConfirmed": "yes"
+        },
+        "monitoring": {
+          "monitoringModalities": [
+            "ecg",
+            "nibp",
+            "spo2",
+            "capnography",
+            "temperature"
+          ]
+        },
+        "observations": [
+          {
+            "observedAt": "2026-08-27T09:10",
+            "systolicBloodPressure": 118,
+            "diastolicBloodPressure": 72,
+            "heartRate": 68,
+            "spo2": 99,
+            "endTidalCo2": 4.8,
+            "temperature": 36.6,
+            "agentPercent": 1.2,
+            "freshGasFlowL": 1
+          },
+          {
+            "observedAt": "2026-08-27T09:40",
+            "systolicBloodPressure": 110,
+            "diastolicBloodPressure": 68,
+            "heartRate": 64,
+            "spo2": 98,
+            "endTidalCo2": 4.9,
+            "temperature": 36.4,
+            "agentPercent": 1.1,
+            "freshGasFlowL": 1
+          }
+        ],
+        "fluids": {
+          "crystalloidMl": 1000,
+          "colloidMl": null,
+          "bloodProductsMl": null,
+          "estimatedBloodLossMl": 30,
+          "urineOutputMl": null,
+          "cellSalvageMl": null
+        },
+        "regional": {
+          "regionalTechnique": "none",
+          "regionalLevel": "",
+          "regionalDrug": "",
+          "regionalDoseMg": null,
+          "blockHeight": "",
+          "regionalComplications": ""
+        },
+        "events": [],
+        "handover": {
+          "recoveryDestination": "recovery",
+          "handoverAirwayStatus": "Extubated awake, self-ventilating on 2 L nasal O2",
+          "analgesiaPlan": "Regular paracetamol and ibuprofen; oramorph 10 mg PRN",
+          "antiemeticPlan": "Cyclizine 50 mg IV PRN",
+          "oxygenPlan": "2 L nasal cannulae, wean to air when SpO2 > 95%",
+          "outstandingTasks": "None",
+          "handoverAt": "2026-08-27T10:20",
+          "receivingPractitioner": "RN Hannah Cole"
+        },
+        "signoff": {
+          "anaesthetistSignature": "Dr Priya Raman",
+          "signedAt": "2026-08-27T10:25"
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "completenessPercent": 100,
+        "firedRules": [
+          {
+            "id": "M-PATIENT-IDENTIFIER",
+            "category": "critical",
+            "label": "Patient identification recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ANAESTHETIST",
+            "category": "critical",
+            "label": "Responsible anaesthetist recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ASA-STATUS",
+            "category": "critical",
+            "label": "ASA physical status recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ANAESTHETIC-TECHNIQUE",
+            "category": "critical",
+            "label": "Anaesthetic technique recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-AIRWAY-TECHNIQUE",
+            "category": "critical",
+            "label": "Airway-management technique recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-WHO-CHECKLIST",
+            "category": "critical",
+            "label": "WHO checklist status recorded (Sign In and Time Out)",
+            "satisfied": true
+          },
+          {
+            "id": "M-TIMED-OBSERVATION",
+            "category": "critical",
+            "label": "At least one set of timed observations recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-SIGNATURE",
+            "category": "critical",
+            "label": "Anaesthetist signature recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-WEIGHT",
+            "category": "noncritical",
+            "label": "Patient weight recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-MONITORING",
+            "category": "noncritical",
+            "label": "Monitoring modalities recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-FLUIDS",
+            "category": "noncritical",
+            "label": "Fluids / blood-loss summary recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-RECOVERY-DESTINATION",
+            "category": "noncritical",
+            "label": "Recovery-handover destination recorded",
+            "satisfied": true
+          }
+        ],
+        "criticalMissing": 0,
+        "noncriticalMissing": 0,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Partial - boundary observations, penicillin allergy missed by co-amoxiclav",
+      "description": "Urgent appendicectomy where every critical item is present but the fluids summary was never entered (all six volumes null). Exercises three boundaries: a documented 'Penicillin' allergy with co-amoxiclav administered - the substring matcher does NOT flag it because 'co-amoxiclav' does not contain 'penicillin'; an observation at exactly SpO2 92 and systolic 90, both non-breaching under strict <; Cormack-Lehane 2 with 2 attempts, both below the >= 3 triggers. WHO 'yes'/'yes', consent 'yes'. Expect status 'partial', completenessPercent round(100 x 11/12) = 92, criticalMissing 0, noncriticalMissing 1 (M-FLUIDS unsatisfied), and exactly one flag: F-INCOMPLETE-001 (low).",
+      "state": {
+        "identification": {
+          "patientIdentifier": "NHS 612 883 4409",
+          "patientName": "Callum Docherty",
+          "dateOfBirth": "2004-11-02",
+          "sex": "male",
+          "weightKg": 74,
+          "heightCm": 180,
+          "theatre": "Emergency Theatre 2",
+          "operationDate": "2026-09-01",
+          "anaesthetistName": "Dr Olusegun Adeyemi",
+          "assistantName": "ODP Lisa Barnes",
+          "surgeonName": "Ms Farah Qureshi",
+          "plannedProcedure": "Laparoscopic appendicectomy",
+          "urgency": "urgent",
+          "anaestheticTechnique": "general"
+        },
+        "preInduction": {
+          "machineChecked": "yes",
+          "whoSignIn": "yes",
+          "whoTimeOut": "yes",
+          "consentConfirmed": "yes",
+          "fastingConfirmed": "no",
+          "ivAccess": "18G right antecubital fossa",
+          "allergyBandChecked": "yes",
+          "documentedAllergies": "Penicillin"
+        },
+        "asaAirway": {
+          "asaStatus": "II",
+          "asaEmergencyModifier": "yes",
+          "mallampatiClass": 2,
+          "mouthOpeningCm": 4,
+          "thyromentalDistanceCm": 6.5,
+          "dentition": "Own teeth, intact",
+          "anticipatedDifficultAirway": "no",
+          "priorDifficultIntubation": "no"
+        },
+        "drugs": [
+          {
+            "drugName": "Propofol",
+            "dose": 200,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "induction",
+            "administeredAt": "2026-09-01T22:15"
+          },
+          {
+            "drugName": "Rocuronium",
+            "dose": 90,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "neuromuscular-blocker",
+            "administeredAt": "2026-09-01T22:15"
+          },
+          {
+            "drugName": "Co-amoxiclav",
+            "dose": 1.2,
+            "doseUnit": "g",
+            "route": "iv",
+            "category": "antibiotic",
+            "administeredAt": "2026-09-01T22:20"
+          }
+        ],
+        "airway": {
+          "airwayTechnique": "tracheal-tube",
+          "deviceSize": "8.0 mm",
+          "tubeDepthCm": 23,
+          "cuffed": "yes",
+          "cormackLehaneGrade": 2,
+          "intubationAttempts": 2,
+          "capnographyConfirmed": "yes"
+        },
+        "monitoring": {
+          "monitoringModalities": [
+            "ecg",
+            "nibp",
+            "spo2",
+            "capnography"
+          ]
+        },
+        "observations": [
+          {
+            "observedAt": "2026-09-01T22:25",
+            "systolicBloodPressure": 90,
+            "diastolicBloodPressure": 52,
+            "heartRate": 104,
+            "spo2": 92,
+            "endTidalCo2": 5.1,
+            "temperature": 37.9,
+            "agentPercent": 1,
+            "freshGasFlowL": 2
+          }
+        ],
+        "fluids": {
+          "crystalloidMl": null,
+          "colloidMl": null,
+          "bloodProductsMl": null,
+          "estimatedBloodLossMl": null,
+          "urineOutputMl": null,
+          "cellSalvageMl": null
+        },
+        "regional": {
+          "regionalTechnique": "none",
+          "regionalLevel": "",
+          "regionalDrug": "",
+          "regionalDoseMg": null,
+          "blockHeight": "",
+          "regionalComplications": ""
+        },
+        "events": [],
+        "handover": {
+          "recoveryDestination": "recovery",
+          "handoverAirwayStatus": "Extubated, self-ventilating",
+          "analgesiaPlan": "PCA morphine, regular paracetamol",
+          "antiemeticPlan": "Ondansetron 4 mg IV PRN",
+          "oxygenPlan": "Hudson mask 4 L",
+          "outstandingTasks": "Fluid balance to be written up",
+          "handoverAt": "2026-09-01T23:40",
+          "receivingPractitioner": "RN Dev Patel"
+        },
+        "signoff": {
+          "anaesthetistSignature": "Dr Olusegun Adeyemi",
+          "signedAt": "2026-09-01T23:45"
+        }
+      },
+      "expected": {
+        "status": "partial",
+        "completenessPercent": 92,
+        "firedRules": [
+          {
+            "id": "M-PATIENT-IDENTIFIER",
+            "category": "critical",
+            "label": "Patient identification recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ANAESTHETIST",
+            "category": "critical",
+            "label": "Responsible anaesthetist recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ASA-STATUS",
+            "category": "critical",
+            "label": "ASA physical status recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ANAESTHETIC-TECHNIQUE",
+            "category": "critical",
+            "label": "Anaesthetic technique recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-AIRWAY-TECHNIQUE",
+            "category": "critical",
+            "label": "Airway-management technique recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-WHO-CHECKLIST",
+            "category": "critical",
+            "label": "WHO checklist status recorded (Sign In and Time Out)",
+            "satisfied": true
+          },
+          {
+            "id": "M-TIMED-OBSERVATION",
+            "category": "critical",
+            "label": "At least one set of timed observations recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-SIGNATURE",
+            "category": "critical",
+            "label": "Anaesthetist signature recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-WEIGHT",
+            "category": "noncritical",
+            "label": "Patient weight recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-MONITORING",
+            "category": "noncritical",
+            "label": "Monitoring modalities recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-FLUIDS",
+            "category": "noncritical",
+            "label": "Fluids / blood-loss summary recorded",
+            "satisfied": false
+          },
+          {
+            "id": "M-RECOVERY-DESTINATION",
+            "category": "noncritical",
+            "label": "Recovery-handover destination recorded",
+            "satisfied": true
+          }
+        ],
+        "criticalMissing": 0,
+        "noncriticalMissing": 1,
+        "flaggedIssues": [
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "One or more non-critical mandatory items are missing.",
+            "suggestedAction": "Complete the weight, monitoring, fluids, and recovery-destination items."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete - emergency laparotomy with anaphylaxis, unsigned",
+      "description": "Immediate-priority emergency laparotomy for a ruptured AAA in an unconscious ASA V patient: consent could not be confirmed (''), Time Out recorded as 'no' (non-empty, so M-WHO-CHECKLIST is still satisfied), documented allergy 'Penicillin, latex' with benzylpenicillin given, anticipated difficult airway 'yes' with Cormack-Lehane 3 and 3 attempts, an anaphylaxis event, one observation breaching both limits (SpO2 86, systolic 62) plus one non-breaching, weight never recorded, and the record not yet signed. Expect status 'incomplete', completenessPercent round(100 x 10/12) = 83, criticalMissing 1 (M-SIGNATURE), noncriticalMissing 1 (M-WEIGHT), and seven flags in this order: F-WHO-CHECKLIST-001, F-ALLERGY-CONFLICT-001 ('Benzylpenicillin'), F-DIFFICULT-AIRWAY-001 (all three reasons), F-ANAPHYLAXIS-001 (1 event), F-UNLOGGED-CONSENT-001 (all high), F-PHYSIOLOGICAL-DERANGEMENT-001 (medium, 1 observation), F-INCOMPLETE-001 (low).",
+      "state": {
+        "identification": {
+          "patientIdentifier": "NHS 358 020 7716",
+          "patientName": "Ronald Hegarty",
+          "dateOfBirth": "1949-06-30",
+          "sex": "male",
+          "weightKg": null,
+          "heightCm": null,
+          "theatre": "Emergency Theatre 1",
+          "operationDate": "2026-09-02",
+          "anaesthetistName": "Dr Siobhan McAllister",
+          "assistantName": "ODP Marcus Reid",
+          "surgeonName": "Mr Anil Bhatt",
+          "plannedProcedure": "Emergency open repair of ruptured abdominal aortic aneurysm",
+          "urgency": "immediate",
+          "anaestheticTechnique": "general"
+        },
+        "preInduction": {
+          "machineChecked": "yes",
+          "whoSignIn": "yes",
+          "whoTimeOut": "no",
+          "consentConfirmed": "",
+          "fastingConfirmed": "no",
+          "ivAccess": "14G right antecubital fossa; right IJ central line",
+          "allergyBandChecked": "yes",
+          "documentedAllergies": "Penicillin, latex"
+        },
+        "asaAirway": {
+          "asaStatus": "V",
+          "asaEmergencyModifier": "yes",
+          "mallampatiClass": 4,
+          "mouthOpeningCm": 2.5,
+          "thyromentalDistanceCm": 5,
+          "dentition": "Upper denture removed, loose lower incisors",
+          "anticipatedDifficultAirway": "yes",
+          "priorDifficultIntubation": "yes"
+        },
+        "drugs": [
+          {
+            "drugName": "Ketamine",
+            "dose": 100,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "induction",
+            "administeredAt": "2026-09-02T03:12"
+          },
+          {
+            "drugName": "Rocuronium",
+            "dose": 100,
+            "doseUnit": "mg",
+            "route": "iv",
+            "category": "neuromuscular-blocker",
+            "administeredAt": "2026-09-02T03:12"
+          },
+          {
+            "drugName": "Benzylpenicillin",
+            "dose": 1.2,
+            "doseUnit": "g",
+            "route": "iv",
+            "category": "antibiotic",
+            "administeredAt": "2026-09-02T03:20"
+          },
+          {
+            "drugName": "Adrenaline",
+            "dose": 50,
+            "doseUnit": "mcg",
+            "route": "iv",
+            "category": "vasoactive",
+            "administeredAt": "2026-09-02T03:24"
+          },
+          {
+            "drugName": "Noradrenaline",
+            "dose": 0.3,
+            "doseUnit": "other",
+            "route": "infusion",
+            "category": "vasoactive",
+            "administeredAt": "2026-09-02T03:30"
+          }
+        ],
+        "airway": {
+          "airwayTechnique": "tracheal-tube",
+          "deviceSize": "8.0 mm",
+          "tubeDepthCm": 22,
+          "cuffed": "yes",
+          "cormackLehaneGrade": 3,
+          "intubationAttempts": 3,
+          "capnographyConfirmed": "yes"
+        },
+        "monitoring": {
+          "monitoringModalities": [
+            "ecg",
+            "arterial-line",
+            "spo2",
+            "capnography",
+            "temperature",
+            "cvp",
+            "urine-output"
+          ]
+        },
+        "observations": [
+          {
+            "observedAt": "2026-09-02T03:25",
+            "systolicBloodPressure": 62,
+            "diastolicBloodPressure": 34,
+            "heartRate": 138,
+            "spo2": 86,
+            "endTidalCo2": 3.1,
+            "temperature": 35.2,
+            "agentPercent": 0.4,
+            "freshGasFlowL": 6
+          },
+          {
+            "observedAt": "2026-09-02T04:10",
+            "systolicBloodPressure": 96,
+            "diastolicBloodPressure": 55,
+            "heartRate": 112,
+            "spo2": 95,
+            "endTidalCo2": 4.4,
+            "temperature": 35.6,
+            "agentPercent": 0.6,
+            "freshGasFlowL": 2
+          }
+        ],
+        "fluids": {
+          "crystalloidMl": 3000,
+          "colloidMl": null,
+          "bloodProductsMl": 2400,
+          "estimatedBloodLossMl": 3500,
+          "urineOutputMl": 40,
+          "cellSalvageMl": 900
+        },
+        "regional": {
+          "regionalTechnique": "none",
+          "regionalLevel": "",
+          "regionalDrug": "",
+          "regionalDoseMg": null,
+          "blockHeight": "",
+          "regionalComplications": ""
+        },
+        "events": [
+          {
+            "eventType": "difficult-airway",
+            "occurredAt": "2026-09-02T03:14",
+            "management": "Grade 3 view; bougie-assisted intubation on third attempt per DAS plan A"
+          },
+          {
+            "eventType": "anaphylaxis",
+            "occurredAt": "2026-09-02T03:23",
+            "management": "Bronchospasm and profound hypotension after benzylpenicillin; adrenaline 50 mcg IV boluses, fluid bolus, hydrocortisone 200 mg, chlorphenamine 10 mg; mast cell tryptase sent"
+          },
+          {
+            "eventType": "hypotension",
+            "occurredAt": "2026-09-02T03:28",
+            "management": "Noradrenaline infusion started, massive transfusion protocol activated"
+          }
+        ],
+        "handover": {
+          "recoveryDestination": "icu",
+          "handoverAirwayStatus": "Remains intubated and ventilated",
+          "analgesiaPlan": "Fentanyl infusion on ICU",
+          "antiemeticPlan": "",
+          "oxygenPlan": "Ventilated, FiO2 0.6",
+          "outstandingTasks": "Allergy referral; second tryptase at 2 h; weight to be estimated on ICU",
+          "handoverAt": "2026-09-02T06:05",
+          "receivingPractitioner": "Dr Emeka Obi (ICU registrar)"
+        },
+        "signoff": {
+          "anaesthetistSignature": "",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "completenessPercent": 83,
+        "firedRules": [
+          {
+            "id": "M-PATIENT-IDENTIFIER",
+            "category": "critical",
+            "label": "Patient identification recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ANAESTHETIST",
+            "category": "critical",
+            "label": "Responsible anaesthetist recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ASA-STATUS",
+            "category": "critical",
+            "label": "ASA physical status recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-ANAESTHETIC-TECHNIQUE",
+            "category": "critical",
+            "label": "Anaesthetic technique recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-AIRWAY-TECHNIQUE",
+            "category": "critical",
+            "label": "Airway-management technique recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-WHO-CHECKLIST",
+            "category": "critical",
+            "label": "WHO checklist status recorded (Sign In and Time Out)",
+            "satisfied": true
+          },
+          {
+            "id": "M-TIMED-OBSERVATION",
+            "category": "critical",
+            "label": "At least one set of timed observations recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-SIGNATURE",
+            "category": "critical",
+            "label": "Anaesthetist signature recorded",
+            "satisfied": false
+          },
+          {
+            "id": "M-WEIGHT",
+            "category": "noncritical",
+            "label": "Patient weight recorded",
+            "satisfied": false
+          },
+          {
+            "id": "M-MONITORING",
+            "category": "noncritical",
+            "label": "Monitoring modalities recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-FLUIDS",
+            "category": "noncritical",
+            "label": "Fluids / blood-loss summary recorded",
+            "satisfied": true
+          },
+          {
+            "id": "M-RECOVERY-DESTINATION",
+            "category": "noncritical",
+            "label": "Recovery-handover destination recorded",
+            "satisfied": true
+          }
+        ],
+        "criticalMissing": 1,
+        "noncriticalMissing": 1,
+        "flaggedIssues": [
+          {
+            "id": "F-WHO-CHECKLIST-001",
+            "category": "who-checklist-not-done",
+            "priority": "high",
+            "description": "WHO Safer Surgery Checklist Sign In / Time Out not recorded as performed.",
+            "suggestedAction": "Complete and record the WHO Sign In and Time Out before proceeding."
+          },
+          {
+            "id": "F-ALLERGY-CONFLICT-001",
+            "category": "allergy-conflict",
+            "priority": "high",
+            "description": "Administered drug(s) match a documented allergy: Benzylpenicillin.",
+            "suggestedAction": "Confirm the allergy history and review the administered drug(s) urgently."
+          },
+          {
+            "id": "F-DIFFICULT-AIRWAY-001",
+            "category": "difficult-airway",
+            "priority": "high",
+            "description": "Difficult airway indicated (anticipated difficult airway; Cormack-Lehane grade 3; 3 intubation attempts).",
+            "suggestedAction": "Document a difficult-airway alert and ensure the plan follows DAS guidance."
+          },
+          {
+            "id": "F-ANAPHYLAXIS-001",
+            "category": "drug-anaphylaxis",
+            "priority": "high",
+            "description": "1 anaphylaxis / drug-reaction event(s) logged.",
+            "suggestedAction": "Ensure acute management is documented and refer for allergy investigation."
+          },
+          {
+            "id": "F-UNLOGGED-CONSENT-001",
+            "category": "unlogged-consent",
+            "priority": "high",
+            "description": "Consent not confirmed in the pre-induction checks.",
+            "suggestedAction": "Confirm and record valid consent before the anaesthetic proceeds."
+          },
+          {
+            "id": "F-PHYSIOLOGICAL-DERANGEMENT-001",
+            "category": "physiological-derangement",
+            "priority": "medium",
+            "description": "1 timed observation(s) breach a configured limit (SpO₂ < 92 % or systolic BP < 90 mmHg).",
+            "suggestedAction": "Review the deranged observations and confirm the management is documented."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "One or more non-critical mandatory items are missing.",
+            "suggestedAction": "Complete the weight, monitoring, fluids, and recovery-destination items."
+          }
+        ]
+      }
+    }
+  ]
+}

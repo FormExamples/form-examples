@@ -1,0 +1,1007 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateNEWS2",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Three hand-authored personas for the Casualty Card NEWS2 engine. calculateNEWS2 returns totalScore, seven parameterScores in fixed order (Respiratory Rate, SpO2 (Scale 1), Systolic BP, Pulse, Consciousness, Temperature, Supplemental O2), hasAnySingleScore3 and clinicalResponse ('high' >= 7, 'medium' >= 5, 'low-medium' when any single parameter scores 3, else 'low'). Flags are SPLIT: form-app.js calls detectFlaggedIssues(state, news2), mirrored as flagsArgs ['state','result']; the oracle stores them under expected.flaggedIssues. HARNESS CAVEAT: form-app.js calls calculateNEWS2(state.vitalSigns) - a SUB-OBJECT - but bin/test-personas has no graderArgs and always passes the whole persona state, under which every vital would read as undefined and score 0. So each persona's state carries the full emptyCasualtyCard() shape (which the detector reads: safeguardingConsent, medicalHistory, primarySurvey, vitalSigns.pupil*, investigations) PLUS the seven scored vital keys (respiratoryRate, oxygenSaturation, systolicBP, heartRate, consciousnessLevel, temperature, supplementalOxygen) mirrored at the top level, kept identical to vitalSigns, so the grader scores the same numbers the UI would. Quirks verified in source: any unmeasured parameter (null) scores 0 with value 'N/A' rather than being flagged; SpO2 is always Scale 1 (no hypercapnic Scale 2); consciousnessLevel '' scores 0 like 'alert' while any other string scores 3; boundaries are inclusive on the upper edge of each band (temp 35.0 -> 3, HR 50 -> 1, SpO2 91 -> 3, SBP 90 -> 3); the 'haemorrhage' flag fires for ANY non-empty text other than exactly 'none' (case-insensitive), so an explicit negative like 'None visible' fires it; the 'mha-section' flag fires for ANY non-empty mentalHealthActStatus including 'Informal'; the anticoagulant check is a substring match over a fixed seven-drug list; gcsTotal is read from state (recomputeDerived() is a form-app.js step the oracle does not run) so personas set it consistently with the components; news2-critical and news2-medium are mutually exclusive and both priority 'high'; the priority sort is stable so flags keep detection order within a priority. Regenerate expected with: bin/test-personas casualty-card-form --update",
+  "personas": [
+    {
+      "name": "Minor injury walk-in - inversion ankle sprain, NEWS2 0",
+      "description": "A 24-year-old woman walks in with a twisted ankle after netball; all seven NEWS2 parameters in the zero band (RR 16, SpO2 98, SBP 122, HR 74, alert, 36.8 C, no oxygen), GCS 15, reactive pupils, haemorrhage recorded as exactly 'none', airway patent, no anticoagulant, penicillin allergy graded mild, pregnancy test negative, no safeguarding concern, MHA status blank. Discharged with RICE advice. Expect totalScore 0, clinicalResponse 'low', hasAnySingleScore3 false, all seven parameterScores 0, and an empty flaggedIssues array.",
+      "state": {
+        "respiratoryRate": 16,
+        "oxygenSaturation": 98,
+        "systolicBP": 122,
+        "heartRate": 74,
+        "consciousnessLevel": "alert",
+        "temperature": 36.8,
+        "supplementalOxygen": "no",
+        "demographics": {
+          "firstName": "Amelia",
+          "lastName": "Rutherford",
+          "dateOfBirth": "2002-04-19",
+          "sex": "female",
+          "nhsNumber": "485 227 9013",
+          "address": "14 Larkspur Close, Leeds",
+          "postcode": "LS6 3QP",
+          "phone": "07700 900412",
+          "email": "amelia.rutherford@example.co.uk",
+          "ethnicity": "White British",
+          "preferredLanguage": "English",
+          "interpreterRequired": "no"
+        },
+        "nextOfKinGP": {
+          "nextOfKin": {
+            "name": "Jonathan Rutherford",
+            "relationship": "Father",
+            "phone": "07700 900318",
+            "notified": "no"
+          },
+          "gp": {
+            "name": "Dr Helen Marsh",
+            "practiceName": "Headingley Medical Practice",
+            "practiceAddress": "22 Otley Road, Leeds LS6 2AA",
+            "practicePhone": "0113 496 0123"
+          }
+        },
+        "arrivalTriage": {
+          "attendanceDate": "2026-08-30",
+          "arrivalTime": "19:42",
+          "attendanceCategory": "first",
+          "arrivalMode": "walk-in",
+          "referralSource": "self",
+          "ambulanceIncidentNumber": "",
+          "triageTime": "19:55",
+          "triageNurse": "SN Priya Chauhan",
+          "mtsFlowchart": "Limb problems",
+          "mtsCategory": "4-standard",
+          "mtsDiscriminator": "Recent mild pain"
+        },
+        "presentingComplaint": {
+          "chiefComplaint": "Right ankle pain after inversion injury",
+          "historyOfPresentingComplaint": "Landed awkwardly during netball 2 hours ago, immediate lateral ankle pain, able to weight-bear four steps",
+          "onset": "Sudden",
+          "duration": "2 hours",
+          "character": "Aching",
+          "severity": "Moderate",
+          "location": "Lateral right ankle",
+          "radiation": "None",
+          "aggravatingFactors": "Weight-bearing",
+          "relievingFactors": "Elevation, ice",
+          "associatedSymptoms": "Mild swelling",
+          "previousEpisodes": "None",
+          "treatmentPriorToArrival": "Ice pack"
+        },
+        "painAssessment": {
+          "painPresent": "yes",
+          "painScore": 4,
+          "painLocation": "Right lateral malleolus",
+          "painCharacter": "Aching",
+          "painOnset": "Sudden",
+          "painSeverityCategory": "moderate"
+        },
+        "medicalHistory": {
+          "pastMedicalHistory": "Nil significant",
+          "pastSurgicalHistory": "None",
+          "medications": [],
+          "allergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Rash as a child",
+              "severity": "mild"
+            }
+          ],
+          "tetanusStatus": "up-to-date",
+          "smokingStatus": "never",
+          "alcoholConsumption": "Occasional",
+          "recreationalDrugUse": "none",
+          "lastOralIntake": "18:00"
+        },
+        "vitalSigns": {
+          "heartRate": 74,
+          "systolicBP": 122,
+          "diastolicBP": 76,
+          "respiratoryRate": 16,
+          "oxygenSaturation": 98,
+          "supplementalOxygen": "no",
+          "oxygenFlowRate": null,
+          "temperature": 36.8,
+          "bloodGlucose": null,
+          "consciousnessLevel": "alert",
+          "pupilLeftSize": 3,
+          "pupilLeftReactive": "yes",
+          "pupilRightSize": 3,
+          "pupilRightReactive": "yes",
+          "capillaryRefillTime": 2,
+          "weight": 61
+        },
+        "primarySurvey": {
+          "airway": {
+            "status": "patent",
+            "adjuncts": "",
+            "cSpineImmobilised": "no"
+          },
+          "breathing": {
+            "effort": "normal",
+            "chestMovement": "Equal",
+            "breathSounds": "Vesicular bilaterally",
+            "tracheaPosition": "Central"
+          },
+          "circulation": {
+            "pulseCharacter": "Regular, good volume",
+            "skinColour": "Pink",
+            "skinTemperature": "Warm",
+            "capillaryRefill": "< 2 s",
+            "haemorrhage": "none",
+            "ivAccess": ""
+          },
+          "disability": {
+            "gcsEye": 4,
+            "gcsVerbal": 5,
+            "gcsMotor": 6,
+            "gcsTotal": 15,
+            "pupils": "PEARL 3 mm",
+            "bloodGlucose": "",
+            "limbMovements": "Moving all four limbs"
+          },
+          "exposure": {
+            "skinExamination": "Mild lateral ankle swelling, no bruising",
+            "injuriesIdentified": "Right lateral ankle soft-tissue injury",
+            "logRollFindings": ""
+          }
+        },
+        "clinicalExamination": {
+          "generalAppearance": "Well, comfortable at rest",
+          "headAndFace": "",
+          "neck": "",
+          "chestCardiovascular": "",
+          "chestRespiratory": "",
+          "abdomen": "",
+          "pelvis": "",
+          "musculoskeletalLimbs": "Tender ATFL, no bony tenderness at malleoli or base of 5th metatarsal, Ottawa negative",
+          "neurological": "Intact distal sensation and pulses",
+          "skin": "",
+          "mentalState": "",
+          "bodyDiagramNotes": "Right lateral ankle marked"
+        },
+        "investigations": {
+          "bloodTests": [],
+          "urinalysis": "",
+          "pregnancyTest": "negative",
+          "imaging": [],
+          "ecgPerformed": "no",
+          "ecgFindings": "",
+          "otherInvestigations": ""
+        },
+        "treatment": {
+          "medicationsAdministered": [
+            {
+              "drug": "Ibuprofen",
+              "dose": "400 mg",
+              "route": "oral",
+              "time": "20:10",
+              "givenBy": "SN Priya Chauhan"
+            }
+          ],
+          "fluidTherapy": [],
+          "procedures": [
+            {
+              "description": "Tubigrip applied, crutches issued",
+              "time": "20:25"
+            }
+          ],
+          "oxygenTherapyDevice": "",
+          "oxygenTherapyFlowRate": "",
+          "tetanusProphylaxis": "not-indicated"
+        },
+        "assessmentPlan": {
+          "workingDiagnosis": "Grade 1 lateral ankle sprain",
+          "differentialDiagnoses": "Fracture excluded clinically (Ottawa negative)",
+          "clinicalImpression": "Minor soft-tissue injury",
+          "riskStratification": "Low"
+        },
+        "disposition": {
+          "disposition": "discharged",
+          "admittingSpecialty": "",
+          "admittingConsultant": "",
+          "ward": "",
+          "levelOfCare": "",
+          "dischargeDiagnosis": "Lateral ankle sprain",
+          "dischargeMedications": "Ibuprofen 400 mg TDS with food for 5 days",
+          "dischargeInstructions": "RICE, weight-bear as tolerated",
+          "followUp": "GP if not improving in 2 weeks",
+          "returnPrecautions": "Return if unable to weight-bear or numbness develops",
+          "receivingHospital": "",
+          "reasonForTransfer": "",
+          "modeOfTransfer": "",
+          "dischargeTime": "20:40",
+          "totalTimeInDepartment": "58 minutes"
+        },
+        "safeguardingConsent": {
+          "safeguardingConcern": "no",
+          "safeguardingType": "",
+          "referralMade": "",
+          "mentalCapacityAssessment": "Has capacity",
+          "mentalHealthActStatus": "",
+          "consentForTreatment": "verbal",
+          "completedByName": "Dr Samuel Okonkwo",
+          "completedByRole": "ENP",
+          "completedByGmcNumber": "",
+          "seniorReviewingClinician": ""
+        }
+      },
+      "expected": {
+        "totalScore": 0,
+        "parameterScores": [
+          {
+            "parameter": "Respiratory Rate",
+            "value": "16 /min",
+            "score": 0
+          },
+          {
+            "parameter": "SpO2 (Scale 1)",
+            "value": "98%",
+            "score": 0
+          },
+          {
+            "parameter": "Systolic BP",
+            "value": "122 mmHg",
+            "score": 0
+          },
+          {
+            "parameter": "Pulse",
+            "value": "74 bpm",
+            "score": 0
+          },
+          {
+            "parameter": "Consciousness",
+            "value": "alert",
+            "score": 0
+          },
+          {
+            "parameter": "Temperature",
+            "value": "36.8 °C",
+            "score": 0
+          },
+          {
+            "parameter": "Supplemental O2",
+            "value": "No",
+            "score": 0
+          }
+        ],
+        "clinicalResponse": "low",
+        "hasAnySingleScore3": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Elderly hypothermia - boundary values, low-medium via single 3",
+      "description": "An 84-year-old man found on his kitchen floor overnight; tympanic temperature exactly 35.0 C (upper edge of the score-3 band), HR exactly 50 (upper edge of the score-1 band), SpO2 unmeasurable through cold peripheries (null, scores 0 as N/A), RR 12, SBP 111 and 'alert' all at the bottom of their zero bands. Total 4 is below the medium threshold but the single 3 gives 'low-medium'. Also exercises two text-quirks: haemorrhage 'None visible, skin tear dressed' (an explicit negative that still fires the haemorrhage flag because it is not exactly 'none') and mentalHealthActStatus 'Informal' (any non-empty value fires mha-section). Penicillin allergy graded moderate (no anaphylaxis flag), aspirin only (no anticoagulant flag), GCS 14. Expect totalScore 4, clinicalResponse 'low-medium', hasAnySingleScore3 true, parameterScores [0, 0 (N/A), 0, 1, 0, 3, 0], and three flags: news2-single-3 ('Temperature'), haemorrhage (high), mha-section (medium).",
+      "state": {
+        "respiratoryRate": 12,
+        "oxygenSaturation": null,
+        "systolicBP": 111,
+        "heartRate": 50,
+        "consciousnessLevel": "alert",
+        "temperature": 35,
+        "supplementalOxygen": "no",
+        "demographics": {
+          "firstName": "Walter",
+          "lastName": "Pemberton",
+          "dateOfBirth": "1942-01-07",
+          "sex": "male",
+          "nhsNumber": "731 604 2258",
+          "address": "Flat 3, Beechwood Court, Sheffield",
+          "postcode": "S10 5DL",
+          "phone": "0114 496 0871",
+          "email": "",
+          "ethnicity": "White British",
+          "preferredLanguage": "English",
+          "interpreterRequired": "no"
+        },
+        "nextOfKinGP": {
+          "nextOfKin": {
+            "name": "Susan Pemberton",
+            "relationship": "Daughter",
+            "phone": "07700 900655",
+            "notified": "yes"
+          },
+          "gp": {
+            "name": "Dr Anita Desai",
+            "practiceName": "Broomhill Surgery",
+            "practiceAddress": "8 Glossop Road, Sheffield S10 2HS",
+            "practicePhone": "0114 496 0456"
+          }
+        },
+        "arrivalTriage": {
+          "attendanceDate": "2026-09-02",
+          "arrivalTime": "07:18",
+          "arrivalMode": "ambulance",
+          "attendanceCategory": "first",
+          "referralSource": "999",
+          "ambulanceIncidentNumber": "YAS-2026-0902-01147",
+          "triageTime": "07:24",
+          "triageNurse": "CN Mark Ellison",
+          "mtsFlowchart": "Falls",
+          "mtsCategory": "3-urgent",
+          "mtsDiscriminator": "Cold"
+        },
+        "presentingComplaint": {
+          "chiefComplaint": "Long lie after fall, hypothermia",
+          "historyOfPresentingComplaint": "Found by carer at 06:40 on kitchen floor, last seen well 21:00 previous evening; slipped, unable to get up",
+          "onset": "Overnight",
+          "duration": "Approx 10 hours",
+          "character": "",
+          "severity": "",
+          "location": "Right hip and shoulder",
+          "radiation": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "associatedSymptoms": "Shivering, confusion resolving with warming",
+          "previousEpisodes": "One fall in 2025, no injury",
+          "treatmentPriorToArrival": "Blankets, warmed by crew"
+        },
+        "painAssessment": {
+          "painPresent": "yes",
+          "painScore": 5,
+          "painLocation": "Right hip",
+          "painCharacter": "Aching",
+          "painOnset": "After fall",
+          "painSeverityCategory": "moderate"
+        },
+        "medicalHistory": {
+          "pastMedicalHistory": "Hypertension, osteoarthritis, mild vascular dementia",
+          "pastSurgicalHistory": "Right inguinal hernia repair 2009",
+          "medications": [
+            {
+              "name": "Amlodipine",
+              "dose": "5 mg",
+              "frequency": "OD"
+            },
+            {
+              "name": "Aspirin",
+              "dose": "75 mg",
+              "frequency": "OD"
+            },
+            {
+              "name": "Paracetamol",
+              "dose": "1 g",
+              "frequency": "QDS PRN"
+            }
+          ],
+          "allergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Widespread urticaria",
+              "severity": "moderate"
+            }
+          ],
+          "tetanusStatus": "unknown",
+          "smokingStatus": "ex-smoker",
+          "alcoholConsumption": "None",
+          "recreationalDrugUse": "none",
+          "lastOralIntake": "20:30 previous evening"
+        },
+        "vitalSigns": {
+          "heartRate": 50,
+          "systolicBP": 111,
+          "diastolicBP": 64,
+          "respiratoryRate": 12,
+          "oxygenSaturation": null,
+          "supplementalOxygen": "no",
+          "oxygenFlowRate": null,
+          "temperature": 35,
+          "bloodGlucose": 5.9,
+          "consciousnessLevel": "alert",
+          "pupilLeftSize": 3,
+          "pupilLeftReactive": "yes",
+          "pupilRightSize": 3,
+          "pupilRightReactive": "yes",
+          "capillaryRefillTime": 4,
+          "weight": 66
+        },
+        "primarySurvey": {
+          "airway": {
+            "status": "patent",
+            "adjuncts": "",
+            "cSpineImmobilised": "no"
+          },
+          "breathing": {
+            "effort": "normal",
+            "chestMovement": "Equal",
+            "breathSounds": "Vesicular, few basal crackles",
+            "tracheaPosition": "Central"
+          },
+          "circulation": {
+            "pulseCharacter": "Regular, slow",
+            "skinColour": "Pale",
+            "skinTemperature": "Cold peripheries",
+            "capillaryRefill": "4 s",
+            "haemorrhage": "None visible, skin tear right forearm dressed",
+            "ivAccess": "20G left ACF"
+          },
+          "disability": {
+            "gcsEye": 4,
+            "gcsVerbal": 4,
+            "gcsMotor": 6,
+            "gcsTotal": 14,
+            "pupils": "PEARL 3 mm",
+            "bloodGlucose": "5.9",
+            "limbMovements": "Moving all limbs; reluctant to move right hip"
+          },
+          "exposure": {
+            "skinExamination": "Pressure-area redness sacrum; skin tear right forearm",
+            "injuriesIdentified": "Right hip pain, right shoulder bruising, forearm skin tear",
+            "logRollFindings": "No spinal tenderness"
+          }
+        },
+        "clinicalExamination": {
+          "generalAppearance": "Frail, shivering, oriented after warming",
+          "headAndFace": "No head injury",
+          "neck": "No midline tenderness",
+          "chestCardiovascular": "HS I+II, no murmurs",
+          "chestRespiratory": "Basal crackles bilaterally",
+          "abdomen": "Soft, non-tender",
+          "pelvis": "Stable",
+          "musculoskeletalLimbs": "Right hip painful on rotation, no shortening",
+          "neurological": "AMTS 8/10 (baseline 8)",
+          "skin": "Sacral erythema, forearm skin tear",
+          "mentalState": "Settled, oriented",
+          "bodyDiagramNotes": "Right hip, right shoulder, right forearm marked"
+        },
+        "investigations": {
+          "bloodTests": [
+            "FBC",
+            "U&E",
+            "CRP",
+            "Blood gases",
+            "Lactate"
+          ],
+          "urinalysis": "Trace protein, no nitrites",
+          "pregnancyTest": "",
+          "imaging": [
+            {
+              "type": "X-ray",
+              "site": "Right hip and pelvis",
+              "findings": "No fracture"
+            },
+            {
+              "type": "X-ray",
+              "site": "Chest",
+              "findings": "No consolidation"
+            }
+          ],
+          "ecgPerformed": "yes",
+          "ecgFindings": "Sinus bradycardia 50, no J waves",
+          "otherInvestigations": "CK 890 (long lie)"
+        },
+        "treatment": {
+          "medicationsAdministered": [
+            {
+              "drug": "Paracetamol",
+              "dose": "1 g",
+              "route": "oral",
+              "time": "07:50",
+              "givenBy": "CN Mark Ellison"
+            }
+          ],
+          "fluidTherapy": [
+            {
+              "type": "Warmed Hartmann's",
+              "volume": "500 mL",
+              "rate": "Over 2 hours",
+              "timeStarted": "07:45"
+            }
+          ],
+          "procedures": [
+            {
+              "description": "Forced-air warming blanket applied",
+              "time": "07:30"
+            }
+          ],
+          "oxygenTherapyDevice": "",
+          "oxygenTherapyFlowRate": "",
+          "tetanusProphylaxis": "given"
+        },
+        "assessmentPlan": {
+          "workingDiagnosis": "Mild hypothermia after long lie; mechanical fall",
+          "differentialDiagnoses": "Occult hip fracture; rhabdomyolysis; sepsis",
+          "clinicalImpression": "Frail elderly, needs admission for warming, fluids and falls assessment",
+          "riskStratification": "Moderate"
+        },
+        "disposition": {
+          "disposition": "admitted",
+          "admittingSpecialty": "Care of the Elderly",
+          "admittingConsultant": "Dr Fiona Grant",
+          "ward": "Brearley 5",
+          "levelOfCare": "Ward",
+          "dischargeDiagnosis": "",
+          "dischargeMedications": "",
+          "dischargeInstructions": "",
+          "followUp": "",
+          "returnPrecautions": "",
+          "receivingHospital": "",
+          "reasonForTransfer": "",
+          "modeOfTransfer": "",
+          "dischargeTime": "11:05",
+          "totalTimeInDepartment": "3 h 47 min"
+        },
+        "safeguardingConsent": {
+          "safeguardingConcern": "no",
+          "safeguardingType": "",
+          "referralMade": "",
+          "mentalCapacityAssessment": "Has capacity for admission decision once warmed",
+          "mentalHealthActStatus": "Informal",
+          "consentForTreatment": "verbal",
+          "completedByName": "Dr Rachel Adebayo",
+          "completedByRole": "ST4 Emergency Medicine",
+          "completedByGmcNumber": "7654321",
+          "seniorReviewingClinician": "Dr Imran Sheikh (Consultant)"
+        }
+      },
+      "expected": {
+        "totalScore": 4,
+        "parameterScores": [
+          {
+            "parameter": "Respiratory Rate",
+            "value": "12 /min",
+            "score": 0
+          },
+          {
+            "parameter": "SpO2 (Scale 1)",
+            "value": "N/A",
+            "score": 0
+          },
+          {
+            "parameter": "Systolic BP",
+            "value": "111 mmHg",
+            "score": 0
+          },
+          {
+            "parameter": "Pulse",
+            "value": "50 bpm",
+            "score": 1
+          },
+          {
+            "parameter": "Consciousness",
+            "value": "alert",
+            "score": 0
+          },
+          {
+            "parameter": "Temperature",
+            "value": "35 °C",
+            "score": 3
+          },
+          {
+            "parameter": "Supplemental O2",
+            "value": "No",
+            "score": 0
+          }
+        ],
+        "clinicalResponse": "low-medium",
+        "hasAnySingleScore3": true,
+        "flaggedIssues": [
+          {
+            "id": "news2-single-3",
+            "category": "NEWS2",
+            "message": "Single parameter score of 3 in: Temperature — urgent ward review",
+            "priority": "high"
+          },
+          {
+            "id": "haemorrhage",
+            "category": "Circulation",
+            "message": "Active haemorrhage: None visible, skin tear right forearm dressed",
+            "priority": "high"
+          },
+          {
+            "id": "mha-section",
+            "category": "Mental Health",
+            "message": "Mental Health Act status: Informal",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pedestrian vs car - major trauma, NEWS2 18, every flag",
+      "description": "A 32-year-old pregnant woman on rivaroxaban for a prior DVT, struck by a car driven by her partner; paramedics disclose a domestic-abuse concern. RR 28 (3), SpO2 89 (3), SBP 78 (3), HR 134 (3), responds to pain only (3), 35.4 C (1), on 15 L oxygen (2) = 18. GCS 6 (E1 V2 M3), left pupil unreactive, airway compromised, active haemorrhage from an open femoral fracture, anaphylaxis to penicillin, pregnancy test positive. Expect totalScore 18, clinicalResponse 'high', hasAnySingleScore3 true, and ten flags in order: news2-critical, news2-single-3 (Respiratory Rate, SpO2 (Scale 1), Systolic BP, Pulse, Consciousness), safeguarding, anaphylaxis-history (Penicillin), anticoagulant, gcs-low (6), pupil-unreactive, haemorrhage, airway-compromised (all high), then pregnancy (medium). No mha-section flag because the status is blank.",
+      "state": {
+        "respiratoryRate": 28,
+        "oxygenSaturation": 89,
+        "systolicBP": 78,
+        "heartRate": 134,
+        "consciousnessLevel": "pain",
+        "temperature": 35.4,
+        "supplementalOxygen": "yes",
+        "demographics": {
+          "firstName": "Chloe",
+          "lastName": "Marchetti",
+          "dateOfBirth": "1994-07-23",
+          "sex": "female",
+          "nhsNumber": "902 118 3364",
+          "address": "57 Kingsway Road, Manchester",
+          "postcode": "M19 2LE",
+          "phone": "07700 900927",
+          "email": "",
+          "ethnicity": "White Other",
+          "preferredLanguage": "English",
+          "interpreterRequired": "no"
+        },
+        "nextOfKinGP": {
+          "nextOfKin": {
+            "name": "Giulia Marchetti",
+            "relationship": "Mother",
+            "phone": "07700 900114",
+            "notified": "yes"
+          },
+          "gp": {
+            "name": "Dr Owen Llewellyn",
+            "practiceName": "Levenshulme Health Centre",
+            "practiceAddress": "Dunstable Street, Manchester M19 3BX",
+            "practicePhone": "0161 496 0789"
+          }
+        },
+        "arrivalTriage": {
+          "attendanceDate": "2026-09-03",
+          "arrivalTime": "23:51",
+          "attendanceCategory": "first",
+          "arrivalMode": "ambulance",
+          "referralSource": "999",
+          "ambulanceIncidentNumber": "NWAS-2026-0903-08821",
+          "triageTime": "23:52",
+          "triageNurse": "CN Beatrice Nkemelu",
+          "mtsFlowchart": "Major trauma",
+          "mtsCategory": "1-immediate",
+          "mtsDiscriminator": "Airway compromise"
+        },
+        "presentingComplaint": {
+          "chiefComplaint": "Pedestrian struck by car at approx 30 mph",
+          "historyOfPresentingComplaint": "Thrown onto bonnet then road; head strike, left thigh deformity with external bleeding; GCS 6 on scene, pre-alerted as major trauma",
+          "onset": "23:20",
+          "duration": "30 minutes",
+          "character": "",
+          "severity": "",
+          "location": "Head, left thigh, chest",
+          "radiation": "",
+          "aggravatingFactors": "",
+          "relievingFactors": "",
+          "associatedSymptoms": "",
+          "previousEpisodes": "",
+          "treatmentPriorToArrival": "Pelvic binder, CAT tourniquet left thigh, 15 L O2 via NRB, 500 mL saline, c-spine blocks"
+        },
+        "painAssessment": {
+          "painPresent": "",
+          "painScore": null,
+          "painLocation": "",
+          "painCharacter": "",
+          "painOnset": "",
+          "painSeverityCategory": ""
+        },
+        "medicalHistory": {
+          "pastMedicalHistory": "Left leg DVT 2025, on rivaroxaban; ~9 weeks pregnant per partner",
+          "pastSurgicalHistory": "None",
+          "medications": [
+            {
+              "name": "Rivaroxaban",
+              "dose": "20 mg",
+              "frequency": "OD"
+            },
+            {
+              "name": "Folic acid",
+              "dose": "400 mcg",
+              "frequency": "OD"
+            }
+          ],
+          "allergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Anaphylaxis aged 12, carries adrenaline pen",
+              "severity": "anaphylaxis"
+            }
+          ],
+          "tetanusStatus": "unknown",
+          "smokingStatus": "never",
+          "alcoholConsumption": "Unknown",
+          "recreationalDrugUse": "unknown",
+          "lastOralIntake": "Unknown"
+        },
+        "vitalSigns": {
+          "heartRate": 134,
+          "systolicBP": 78,
+          "diastolicBP": 44,
+          "respiratoryRate": 28,
+          "oxygenSaturation": 89,
+          "supplementalOxygen": "yes",
+          "oxygenFlowRate": 15,
+          "temperature": 35.4,
+          "bloodGlucose": 7.8,
+          "consciousnessLevel": "pain",
+          "pupilLeftSize": 6,
+          "pupilLeftReactive": "no",
+          "pupilRightSize": 3,
+          "pupilRightReactive": "yes",
+          "capillaryRefillTime": 5,
+          "weight": 62
+        },
+        "primarySurvey": {
+          "airway": {
+            "status": "compromised",
+            "adjuncts": "OPA, suction, preparing for RSI",
+            "cSpineImmobilised": "yes"
+          },
+          "breathing": {
+            "effort": "laboured",
+            "chestMovement": "Reduced left",
+            "breathSounds": "Reduced left base",
+            "tracheaPosition": "Central"
+          },
+          "circulation": {
+            "pulseCharacter": "Thready, tachycardic",
+            "skinColour": "Pale, mottled",
+            "skinTemperature": "Cool",
+            "capillaryRefill": "5 s",
+            "haemorrhage": "Active bleeding from open left femoral fracture, tourniquet in situ",
+            "ivAccess": "16G right ACF, IO left humerus"
+          },
+          "disability": {
+            "gcsEye": 1,
+            "gcsVerbal": 2,
+            "gcsMotor": 3,
+            "gcsTotal": 6,
+            "pupils": "Left 6 mm fixed, right 3 mm reactive",
+            "bloodGlucose": "7.8",
+            "limbMovements": "Abnormal flexion to pain"
+          },
+          "exposure": {
+            "skinExamination": "Extensive left flank and thigh abrasions",
+            "injuriesIdentified": "Head injury, left open femoral fracture, suspected left haemothorax, pelvic injury",
+            "logRollFindings": "Deferred - pelvic binder in situ"
+          }
+        },
+        "clinicalExamination": {
+          "generalAppearance": "Critically unwell, obtunded",
+          "headAndFace": "Right parietal boggy haematoma, blood in left ear",
+          "neck": "Collar in situ",
+          "chestCardiovascular": "Tachycardic, weak pulses",
+          "chestRespiratory": "Reduced air entry left base, seatbelt-type abrasion absent",
+          "abdomen": "Distended, FAST positive LUQ",
+          "pelvis": "Binder applied, not sprung",
+          "musculoskeletalLimbs": "Open left mid-shaft femur fracture, distal pulses present",
+          "neurological": "GCS 6, left pupil fixed and dilated",
+          "skin": "Mottled",
+          "mentalState": "Not assessable",
+          "bodyDiagramNotes": "Head, left chest, left thigh, pelvis marked"
+        },
+        "investigations": {
+          "bloodTests": [
+            "FBC",
+            "U&E",
+            "Coagulation",
+            "Cross-match",
+            "Blood gases",
+            "Lactate",
+            "Blood glucose"
+          ],
+          "urinalysis": "",
+          "pregnancyTest": "positive",
+          "imaging": [
+            {
+              "type": "CT",
+              "site": "Trauma series head to pelvis",
+              "findings": "Pending - to CT after RSI"
+            },
+            {
+              "type": "X-ray",
+              "site": "Chest and pelvis",
+              "findings": "Left haemothorax, open-book pelvic fracture"
+            }
+          ],
+          "ecgPerformed": "yes",
+          "ecgFindings": "Sinus tachycardia 134",
+          "otherInvestigations": "eFAST positive, VBG lactate 6.8"
+        },
+        "treatment": {
+          "medicationsAdministered": [
+            {
+              "drug": "Tranexamic acid",
+              "dose": "1 g",
+              "route": "IV",
+              "time": "23:55",
+              "givenBy": "Dr Kwame Asante"
+            },
+            {
+              "drug": "Ketamine",
+              "dose": "60 mg",
+              "route": "IV",
+              "time": "00:04",
+              "givenBy": "Dr Kwame Asante"
+            },
+            {
+              "drug": "Rocuronium",
+              "dose": "80 mg",
+              "route": "IV",
+              "time": "00:04",
+              "givenBy": "Dr Kwame Asante"
+            },
+            {
+              "drug": "Prothrombin complex concentrate",
+              "dose": "1500 IU",
+              "route": "IV",
+              "time": "00:12",
+              "givenBy": "Dr Kwame Asante"
+            }
+          ],
+          "fluidTherapy": [
+            {
+              "type": "O negative packed red cells",
+              "volume": "4 units",
+              "rate": "Rapid infuser",
+              "timeStarted": "23:56"
+            },
+            {
+              "type": "FFP",
+              "volume": "4 units",
+              "rate": "Rapid infuser",
+              "timeStarted": "00:05"
+            }
+          ],
+          "procedures": [
+            {
+              "description": "RSI and intubation, size 7.5 ETT",
+              "time": "00:06"
+            },
+            {
+              "description": "Left intercostal chest drain",
+              "time": "00:15"
+            }
+          ],
+          "oxygenTherapyDevice": "Ventilator",
+          "oxygenTherapyFlowRate": "FiO2 1.0",
+          "tetanusProphylaxis": "given"
+        },
+        "assessmentPlan": {
+          "workingDiagnosis": "Polytrauma: severe TBI, left haemothorax, open-book pelvis, open femoral fracture, haemorrhagic shock",
+          "differentialDiagnoses": "Intra-abdominal haemorrhage; anticoagulant-related bleeding",
+          "clinicalImpression": "Life-threatening major trauma in an anticoagulated pregnant patient",
+          "riskStratification": "Critical"
+        },
+        "disposition": {
+          "disposition": "admitted",
+          "admittingSpecialty": "Major Trauma / Neurosurgery",
+          "admittingConsultant": "Mr Daniel Fraser",
+          "ward": "Theatre then Critical Care",
+          "levelOfCare": "Level 3",
+          "dischargeDiagnosis": "",
+          "dischargeMedications": "",
+          "dischargeInstructions": "",
+          "followUp": "",
+          "returnPrecautions": "",
+          "receivingHospital": "",
+          "reasonForTransfer": "",
+          "modeOfTransfer": "",
+          "dischargeTime": "00:40",
+          "totalTimeInDepartment": "49 minutes"
+        },
+        "safeguardingConsent": {
+          "safeguardingConcern": "yes",
+          "safeguardingType": "Domestic abuse - partner was the driver, crew report prior police call-outs",
+          "referralMade": "yes",
+          "mentalCapacityAssessment": "Lacks capacity - unconscious; treated in best interests",
+          "mentalHealthActStatus": "",
+          "consentForTreatment": "lacks-capacity",
+          "completedByName": "Dr Kwame Asante",
+          "completedByRole": "Consultant Emergency Medicine",
+          "completedByGmcNumber": "6123456",
+          "seniorReviewingClinician": "Dr Kwame Asante"
+        }
+      },
+      "expected": {
+        "totalScore": 18,
+        "parameterScores": [
+          {
+            "parameter": "Respiratory Rate",
+            "value": "28 /min",
+            "score": 3
+          },
+          {
+            "parameter": "SpO2 (Scale 1)",
+            "value": "89%",
+            "score": 3
+          },
+          {
+            "parameter": "Systolic BP",
+            "value": "78 mmHg",
+            "score": 3
+          },
+          {
+            "parameter": "Pulse",
+            "value": "134 bpm",
+            "score": 3
+          },
+          {
+            "parameter": "Consciousness",
+            "value": "pain",
+            "score": 3
+          },
+          {
+            "parameter": "Temperature",
+            "value": "35.4 °C",
+            "score": 1
+          },
+          {
+            "parameter": "Supplemental O2",
+            "value": "Yes",
+            "score": 2
+          }
+        ],
+        "clinicalResponse": "high",
+        "hasAnySingleScore3": true,
+        "flaggedIssues": [
+          {
+            "id": "news2-critical",
+            "category": "NEWS2",
+            "message": "NEWS2 score 18 — emergency assessment by critical care team required",
+            "priority": "high"
+          },
+          {
+            "id": "news2-single-3",
+            "category": "NEWS2",
+            "message": "Single parameter score of 3 in: Respiratory Rate, SpO2 (Scale 1), Systolic BP, Pulse, Consciousness — urgent ward review",
+            "priority": "high"
+          },
+          {
+            "id": "safeguarding",
+            "category": "Safeguarding",
+            "message": "Safeguarding concern identified: Domestic abuse - partner was the driver, crew report prior police call-outs",
+            "priority": "high"
+          },
+          {
+            "id": "anaphylaxis-history",
+            "category": "Allergies",
+            "message": "Anaphylaxis history: Penicillin",
+            "priority": "high"
+          },
+          {
+            "id": "anticoagulant",
+            "category": "Medications",
+            "message": "Patient on anticoagulant therapy — bleeding risk",
+            "priority": "high"
+          },
+          {
+            "id": "gcs-low",
+            "category": "Neurological",
+            "message": "GCS 6 — unconscious patient, consider airway management",
+            "priority": "high"
+          },
+          {
+            "id": "pupil-unreactive",
+            "category": "Neurological",
+            "message": "Non-reactive pupil(s) identified",
+            "priority": "high"
+          },
+          {
+            "id": "haemorrhage",
+            "category": "Circulation",
+            "message": "Active haemorrhage: Active bleeding from open left femoral fracture, tourniquet in situ",
+            "priority": "high"
+          },
+          {
+            "id": "airway-compromised",
+            "category": "Airway",
+            "message": "Airway compromised — immediate intervention required",
+            "priority": "high"
+          },
+          {
+            "id": "pregnancy",
+            "category": "Pregnancy",
+            "message": "Pregnancy test positive — consider implications for investigations and treatment",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

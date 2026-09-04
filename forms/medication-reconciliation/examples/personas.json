@@ -1,0 +1,511 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateReconciliation",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "calculateReconciliation(data) returns status plus ten counts (sourceCount, verifiedSourceCount, allergyCount, lineItemCount, bpmhCount, inpatientCount, discrepancyCount, intentionalCount, unintentionalCount, highRiskUnintentionalCount) and a fixed four-row firedRules audit trail (R-SOURCES-01, R-LINE-ITEMS-01, R-DISCREPANCIES-01, R-STATUS-01 — always all four, descriptions embed the counts); it carries no flags, so this is a SPLIT engine and the oracle pins detectFlaggedIssues(state, grade) as expected.flaggedIssues with flagsArgs [\"state\",\"result\"], mirroring form-app.js's `detectFlaggedIssues(state, grade)`. Status is first-match: sourceCount < 2 -> incomplete; allergyStatus not 'documented'/'no-known-drug-allergies' -> incomplete; any line item with a blank drugName -> incomplete; unintentionalCount > 0 -> discrepancies-outstanding; any discrepancy missing intendedAction or rationale -> discrepancies-outstanding; else complete. Quirks verified: (1) isIntentional needs intentional==='yes' AND action AND rationale, but isUnintentional is simply intentional !== 'yes', so a discrepancy marked 'yes' with a blank rationale is counted in NEITHER bucket (intentionalCount + unintentionalCount < discrepancyCount) and raises no F-UNINTENTIONAL-OUTSTANDING-001 even though status is discrepancies-outstanding; (2) the therapeutic-duplication scan keys on normalised drugName across ALL line items regardless of listSource, so the ordinary case of the same medicine appearing once on the BPMH list and once on the inpatient list fires F-THERAPEUTIC-DUPLICATION-001 (BUG-like); (3) F-UNINTENTIONAL-OUTSTANDING-001 is suppressed whenever highRiskUnintentionalCount > 0, so an unintentional non-high-risk discrepancy alongside a high-risk one gets no flag of its own; (4) high-risk matching is a substring test of each high-risk line item's drugName inside the concatenated bpmhItemRef/inpatientItemRef text; (5) interaction detection is substring-based on drug names and the single F-INTERACTION-001 flag takes priority 'high' if any matched pair is high. Flags are stable-sorted high > medium > low. Regenerate expected with: bin/test-personas medication-reconciliation --update",
+  "personas": [
+    {
+      "name": "Complete admission reconciliation by pharmacist",
+      "description": "Adult admitted to the acute medical unit; pharmacist builds the BPMH from three sources (patient interview and GP record verified, community pharmacy not verified), records no known drug allergies, three home medicines (amlodipine, metformin, levothyroxine) and one new inpatient medicine (enoxaparin, anticoagulant class) with a single fully documented intentional commission discrepancy (start, VTE prophylaxis rationale). Expect status 'complete', sourceCount 3, verifiedSourceCount 2, allergyCount 0, lineItemCount 4 (3 BPMH, 1 inpatient), discrepancyCount 1, intentionalCount 1, unintentionalCount 0, highRiskUnintentionalCount 0, the four audit rules, and no flags (enoxaparin appears once so no duplication; no interaction pairs; allergy status documented).",
+      "state": {
+        "encounter": {
+          "reconciliationType": "admission",
+          "careSetting": "acute-medical-unit",
+          "reconciledAt": "2026-09-01T11:20",
+          "clinicianName": "Sunita Rao",
+          "clinicianRole": "pharmacist"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 485 777 3456",
+          "ageBand": "adult",
+          "sex": "female",
+          "weightKg": 68
+        },
+        "allergyReview": {
+          "allergyStatus": "no-known-drug-allergies"
+        },
+        "informationSources": [
+          {
+            "sourceType": "patient-interview",
+            "verified": "yes"
+          },
+          {
+            "sourceType": "gp-record",
+            "verified": "yes"
+          },
+          {
+            "sourceType": "community-pharmacy",
+            "verified": "no"
+          }
+        ],
+        "allergies": [],
+        "lineItems": [
+          {
+            "listSource": "bpmh",
+            "drugName": "Amlodipine",
+            "form": "tablet",
+            "dose": "5 mg",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Hypertension",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "gp-record",
+            "status": ""
+          },
+          {
+            "listSource": "bpmh",
+            "drugName": "Metformin",
+            "form": "tablet",
+            "dose": "500 mg",
+            "route": "oral",
+            "frequency": "twice daily",
+            "indication": "Type 2 diabetes",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "gp-record",
+            "status": ""
+          },
+          {
+            "listSource": "bpmh",
+            "drugName": "Levothyroxine",
+            "form": "tablet",
+            "dose": "100 micrograms",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Hypothyroidism",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "patient-interview",
+            "status": ""
+          },
+          {
+            "listSource": "inpatient",
+            "drugName": "Enoxaparin",
+            "form": "pre-filled syringe",
+            "dose": "40 mg",
+            "route": "subcutaneous",
+            "frequency": "once daily",
+            "indication": "VTE prophylaxis",
+            "highRiskClass": "anticoagulant",
+            "adherence": "",
+            "sourceType": "",
+            "status": "active"
+          }
+        ],
+        "discrepancies": [
+          {
+            "discrepancyType": "commission",
+            "bpmhItemRef": "",
+            "inpatientItemRef": "Enoxaparin 40 mg SC OD",
+            "intendedAction": "start",
+            "rationale": "VTE prophylaxis per admission risk assessment; no contraindication.",
+            "intentional": "yes"
+          }
+        ],
+        "note": {
+          "clinicalNote": "Home medicines continued unchanged; patient counselled on enoxaparin."
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "sourceCount": 3,
+        "verifiedSourceCount": 2,
+        "allergyCount": 0,
+        "lineItemCount": 4,
+        "bpmhCount": 3,
+        "inpatientCount": 1,
+        "discrepancyCount": 1,
+        "intentionalCount": 1,
+        "unintentionalCount": 0,
+        "highRiskUnintentionalCount": 0,
+        "firedRules": [
+          {
+            "id": "R-SOURCES-01",
+            "category": "information-sources",
+            "description": "3 information source(s) (2 verified); minimum of 2 required"
+          },
+          {
+            "id": "R-LINE-ITEMS-01",
+            "category": "line-items",
+            "description": "4 line item(s): 3 BPMH, 1 inpatient"
+          },
+          {
+            "id": "R-DISCREPANCIES-01",
+            "category": "discrepancies",
+            "description": "1 discrepancy(ies): 1 intentional, 0 unintentional (0 on a high-risk medicine)"
+          },
+          {
+            "id": "R-STATUS-01",
+            "category": "status",
+            "description": "Reconciliation status: Complete"
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Transfer reconciliation with a half-documented hold",
+      "description": "Ward transfer for an adult with a documented severe penicillin allergy; two verified sources; atorvastatin recorded once on the BPMH list and once on the inpatient list (same drug name), ramipril on the BPMH list and held on the inpatient list. The single dose discrepancy for ramipril is marked intentional 'yes' with intendedAction 'hold' but an empty rationale. Expect status 'discrepancies-outstanding' (reached only via anyMissingActionOrRationale — unintentionalCount is 0 because intentional === 'yes'), sourceCount 2, verifiedSourceCount 2, allergyCount 1, lineItemCount 4 (2 BPMH, 2 inpatient), discrepancyCount 1 but intentionalCount 0 AND unintentionalCount 0 (the neither-bucket quirk), highRiskUnintentionalCount 0, and exactly one flag: F-THERAPEUTIC-DUPLICATION-001 (medium, '\"Atorvastatin\" appears more than once') — fired by the BPMH/inpatient repeat, not by a duplication-type discrepancy. No F-UNINTENTIONAL-OUTSTANDING-001, no allergy conflict (penicillin matches no drug name), no interaction pair.",
+      "state": {
+        "encounter": {
+          "reconciliationType": "transfer",
+          "careSetting": "ward",
+          "reconciledAt": "2026-09-02T16:05",
+          "clinicianName": "Gareth Llewellyn",
+          "clinicianRole": "pharmacy-technician"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 943 476 5919",
+          "ageBand": "adult",
+          "sex": "male",
+          "weightKg": 82.5
+        },
+        "allergyReview": {
+          "allergyStatus": "documented"
+        },
+        "informationSources": [
+          {
+            "sourceType": "previous-discharge-summary",
+            "verified": "yes"
+          },
+          {
+            "sourceType": "dispensing-history",
+            "verified": "yes"
+          }
+        ],
+        "allergies": [
+          {
+            "substance": "Penicillin",
+            "reactionType": "allergy",
+            "severity": "severe"
+          }
+        ],
+        "lineItems": [
+          {
+            "listSource": "bpmh",
+            "drugName": "Atorvastatin",
+            "form": "tablet",
+            "dose": "20 mg",
+            "route": "oral",
+            "frequency": "at night",
+            "indication": "Secondary prevention",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "dispensing-history",
+            "status": ""
+          },
+          {
+            "listSource": "bpmh",
+            "drugName": "Ramipril",
+            "form": "capsule",
+            "dose": "5 mg",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Hypertension",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "dispensing-history",
+            "status": ""
+          },
+          {
+            "listSource": "inpatient",
+            "drugName": "Atorvastatin",
+            "form": "tablet",
+            "dose": "20 mg",
+            "route": "oral",
+            "frequency": "at night",
+            "indication": "Secondary prevention",
+            "highRiskClass": "none",
+            "adherence": "",
+            "sourceType": "",
+            "status": "active"
+          },
+          {
+            "listSource": "inpatient",
+            "drugName": "Ramipril",
+            "form": "capsule",
+            "dose": "5 mg",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Hypertension",
+            "highRiskClass": "none",
+            "adherence": "",
+            "sourceType": "",
+            "status": "held"
+          }
+        ],
+        "discrepancies": [
+          {
+            "discrepancyType": "dose",
+            "bpmhItemRef": "Ramipril 5 mg OD",
+            "inpatientItemRef": "Ramipril held",
+            "intendedAction": "hold",
+            "rationale": "",
+            "intentional": "yes"
+          }
+        ],
+        "note": {
+          "clinicalNote": "Ramipril held on ward round; rationale to be confirmed with the registrar."
+        }
+      },
+      "expected": {
+        "status": "discrepancies-outstanding",
+        "sourceCount": 2,
+        "verifiedSourceCount": 2,
+        "allergyCount": 1,
+        "lineItemCount": 4,
+        "bpmhCount": 2,
+        "inpatientCount": 2,
+        "discrepancyCount": 1,
+        "intentionalCount": 0,
+        "unintentionalCount": 0,
+        "highRiskUnintentionalCount": 0,
+        "firedRules": [
+          {
+            "id": "R-SOURCES-01",
+            "category": "information-sources",
+            "description": "2 information source(s) (2 verified); minimum of 2 required"
+          },
+          {
+            "id": "R-LINE-ITEMS-01",
+            "category": "line-items",
+            "description": "4 line item(s): 2 BPMH, 2 inpatient"
+          },
+          {
+            "id": "R-DISCREPANCIES-01",
+            "category": "discrepancies",
+            "description": "1 discrepancy(ies): 0 intentional, 0 unintentional (0 on a high-risk medicine)"
+          },
+          {
+            "id": "R-STATUS-01",
+            "category": "status",
+            "description": "Reconciliation status: Discrepancies outstanding"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-THERAPEUTIC-DUPLICATION-001",
+            "category": "therapeutic-duplication",
+            "priority": "medium",
+            "description": "Possible therapeutic duplication — \"Ramipril\" appears more than once",
+            "suggestedAction": "Confirm whether the same drug or therapeutic class is prescribed twice and rationalise the regimen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "ED admission: single source, warfarin dose error, aspirin intolerance",
+      "description": "Emergency-department admission reconciled by a nurse from the patient interview alone (unverified); allergy status left unanswered although an aspirin intolerance row was entered; BPMH lists warfarin 3 mg (anticoagulant, intermittent adherence), aspirin 75 mg, a recent clarithromycin course and an unreviewed placeholder row with no drug name; the inpatient chart has warfarin 5 mg. Two discrepancies: a warfarin dose discrepancy with no action, no rationale and intentional '' (unintentional, high-risk because 'warfarin' appears in the refs), and an aspirin omission marked intentional 'no' with action 'stop' and a rationale (still unintentional). Expect status 'incomplete' (first match: sourceCount 1 < 2), sourceCount 1, verifiedSourceCount 0, allergyCount 1, lineItemCount 5 (4 BPMH including the placeholder, 1 inpatient), discrepancyCount 2, intentionalCount 0, unintentionalCount 2, highRiskUnintentionalCount 1, and seven flags in order: F-HIGH-RISK-UNINTENTIONAL-001 (high, 1), F-INSUFFICIENT-SOURCES-001 (high, 'from 1 source(s)'), F-ALLERGY-CONFLICT-001 (high, 'Aspirin vs allergy \"Aspirin\"'), F-INTERACTION-001 (high: 'warfarin + aspirin (increased bleeding risk); warfarin + clarithromycin (raised INR)'), F-THERAPEUTIC-DUPLICATION-001 (medium, '\"Warfarin\" appears more than once'), F-ALLERGY-STATUS-001 (low), F-INCOMPLETE-001 (low). F-UNINTENTIONAL-OUTSTANDING-001 is suppressed by the high-risk flag.",
+      "state": {
+        "encounter": {
+          "reconciliationType": "admission",
+          "careSetting": "emergency-department",
+          "reconciledAt": "2026-09-03T02:40",
+          "clinicianName": "Aisha Bello",
+          "clinicianRole": "nurse"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 612 398 4471",
+          "ageBand": "adult",
+          "sex": "male",
+          "weightKg": null
+        },
+        "allergyReview": {
+          "allergyStatus": ""
+        },
+        "informationSources": [
+          {
+            "sourceType": "patient-interview",
+            "verified": ""
+          }
+        ],
+        "allergies": [
+          {
+            "substance": "Aspirin",
+            "reactionType": "intolerance",
+            "severity": "moderate"
+          }
+        ],
+        "lineItems": [
+          {
+            "listSource": "bpmh",
+            "drugName": "Warfarin",
+            "form": "tablet",
+            "dose": "3 mg",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Atrial fibrillation",
+            "highRiskClass": "anticoagulant",
+            "adherence": "intermittent",
+            "sourceType": "patient-interview",
+            "status": ""
+          },
+          {
+            "listSource": "bpmh",
+            "drugName": "Aspirin",
+            "form": "dispersible tablet",
+            "dose": "75 mg",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Unclear — patient thinks 'for the heart'",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "patient-interview",
+            "status": ""
+          },
+          {
+            "listSource": "bpmh",
+            "drugName": "Clarithromycin",
+            "form": "tablet",
+            "dose": "500 mg",
+            "route": "oral",
+            "frequency": "twice daily",
+            "indication": "Chest infection (day 4 of 7)",
+            "highRiskClass": "none",
+            "adherence": "taking",
+            "sourceType": "patient-interview",
+            "status": ""
+          },
+          {
+            "listSource": "bpmh",
+            "drugName": "",
+            "form": "",
+            "dose": "",
+            "route": "",
+            "frequency": "",
+            "indication": "Patient mentions a 'water tablet' — name unknown",
+            "highRiskClass": "",
+            "adherence": "unknown",
+            "sourceType": "patient-interview",
+            "status": ""
+          },
+          {
+            "listSource": "inpatient",
+            "drugName": "Warfarin",
+            "form": "tablet",
+            "dose": "5 mg",
+            "route": "oral",
+            "frequency": "once daily",
+            "indication": "Atrial fibrillation",
+            "highRiskClass": "anticoagulant",
+            "adherence": "",
+            "sourceType": "",
+            "status": "active"
+          }
+        ],
+        "discrepancies": [
+          {
+            "discrepancyType": "dose",
+            "bpmhItemRef": "Warfarin 3 mg OD",
+            "inpatientItemRef": "Warfarin 5 mg OD",
+            "intendedAction": "",
+            "rationale": "",
+            "intentional": ""
+          },
+          {
+            "discrepancyType": "omission",
+            "bpmhItemRef": "Aspirin 75 mg OD",
+            "inpatientItemRef": "",
+            "intendedAction": "stop",
+            "rationale": "Aspirin intolerance recorded; prescriber to confirm.",
+            "intentional": "no"
+          }
+        ],
+        "note": {
+          "clinicalNote": "INR requested; pharmacist to complete BPMH with GP record in the morning."
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "sourceCount": 1,
+        "verifiedSourceCount": 0,
+        "allergyCount": 1,
+        "lineItemCount": 5,
+        "bpmhCount": 4,
+        "inpatientCount": 1,
+        "discrepancyCount": 2,
+        "intentionalCount": 0,
+        "unintentionalCount": 2,
+        "highRiskUnintentionalCount": 1,
+        "firedRules": [
+          {
+            "id": "R-SOURCES-01",
+            "category": "information-sources",
+            "description": "1 information source(s) (0 verified); minimum of 2 required"
+          },
+          {
+            "id": "R-LINE-ITEMS-01",
+            "category": "line-items",
+            "description": "5 line item(s): 4 BPMH, 1 inpatient"
+          },
+          {
+            "id": "R-DISCREPANCIES-01",
+            "category": "discrepancies",
+            "description": "2 discrepancy(ies): 0 intentional, 2 unintentional (1 on a high-risk medicine)"
+          },
+          {
+            "id": "R-STATUS-01",
+            "category": "status",
+            "description": "Reconciliation status: Incomplete"
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-HIGH-RISK-UNINTENTIONAL-001",
+            "category": "high-risk-unintentional-discrepancy",
+            "priority": "high",
+            "description": "1 unresolved (unintentional) discrepancy(ies) on an anticoagulant, insulin, or opioid",
+            "suggestedAction": "Escalate to the prescriber immediately: resolve the high-risk discrepancy and document the intended action and rationale before sign-off."
+          },
+          {
+            "id": "F-INSUFFICIENT-SOURCES-001",
+            "category": "insufficient-sources",
+            "priority": "high",
+            "description": "Best-possible medication history built from 1 source(s) — fewer than the two independent sources required",
+            "suggestedAction": "Obtain at least one further independent source (e.g. GP record, dispensing history, patient interview) and verify the medicines list."
+          },
+          {
+            "id": "F-ALLERGY-CONFLICT-001",
+            "category": "allergy-conflict",
+            "priority": "high",
+            "description": "Reconciled medicine matches a documented allergy: Aspirin vs allergy \"Aspirin\"",
+            "suggestedAction": "Do not administer the conflicting medicine; confirm the allergy with the patient and select a safe alternative."
+          },
+          {
+            "id": "F-INTERACTION-001",
+            "category": "interaction",
+            "priority": "high",
+            "description": "Potential clinically significant interaction(s): warfarin + aspirin (increased bleeding risk); warfarin + clarithromycin (raised INR)",
+            "suggestedAction": "Refer for pharmacist review of the interacting medicines; adjust, monitor, or select an alternative as appropriate."
+          },
+          {
+            "id": "F-THERAPEUTIC-DUPLICATION-001",
+            "category": "therapeutic-duplication",
+            "priority": "medium",
+            "description": "Possible therapeutic duplication — \"Warfarin\" appears more than once",
+            "suggestedAction": "Confirm whether the same drug or therapeutic class is prescribed twice and rationalise the regimen."
+          },
+          {
+            "id": "F-ALLERGY-STATUS-001",
+            "category": "allergy-status-not-documented",
+            "priority": "low",
+            "description": "Neither drug allergies nor \"no known drug allergies\" have been recorded",
+            "suggestedAction": "Ask the patient about drug allergies and record the allergy status before completing the reconciliation."
+          },
+          {
+            "id": "F-INCOMPLETE-001",
+            "category": "incomplete",
+            "priority": "low",
+            "description": "The reconciliation cannot yet be judged — sources, allergy status, or line-item review are outstanding",
+            "suggestedAction": "Complete the information sources, allergy status, and line-item review, then reconcile every discrepancy."
+          }
+        ]
+      }
+    }
+  ]
+}

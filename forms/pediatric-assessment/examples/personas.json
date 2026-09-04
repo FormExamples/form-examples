@@ -1,0 +1,597 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateDevelopmentalScreen",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the Pediatric Assessment developmental-screen engine. calculateDevelopmentalScreen(state) returns overallResult ('developmental-delay' if any fired rule has result 'fail', else 'developmental-concern' if any has 'concern', else 'normal'), domainResults for the five core domains, and firedRules in catalogue order (GM, FM, LG, SE, CG, GR, BH, FH, IM, SB, MH). Split engine: form-app.js calls detectAdditionalFlags(state) separately, so flags are pinned as expected.additionalFlags with flagsArgs [\"state\"]; the detector pushes in source order then stable-sorts high > medium > low. Quirks verified: an unanswered ('') developmental domain is reported as 'pass' in domainResults (grader default) and fires no rule; every threshold is strict (<37 weeks, <32 weeks, <7 Apgar, <3rd percentile, >4 h screen time), so 37 / 7 / 3 / 4 are all silent; overallResult ignores the flags entirely, so a form can be 'normal' while carrying medium-priority flags; anaphylaxis flags are indexed by allergy array position (FLAG-ALLERGY-ANAPH-<i>) and are followed by an unconditional FLAG-ALLERGY-001 count flag whenever any allergy exists; nicuDuration 0 is falsy so the NICU message omits the day count. Regenerate expected with: bin/test-personas pediatric-assessment --update",
+  "personas": [
+    {
+      "name": "Healthy 3-year-old - routine development review, nothing fires",
+      "description": "Baseline / best case: a term (40-week) child with Apgar 9/9, no NICU, growth on the 50th centiles, every developmental domain 'pass', immunisations up to date, no medical, family, or social concerns, no allergies, screen time 1 h/day. Expect overallResult 'normal', domainResults all 'pass', firedRules [] and additionalFlags [].",
+      "state": {
+        "demographics": {
+          "childFirstName": "Isla",
+          "childLastName": "Morrison",
+          "dateOfBirth": "2023-05-12",
+          "sex": "female",
+          "weight": 14.6,
+          "height": 96,
+          "headCircumference": 49.5,
+          "parentGuardianName": "Fiona Morrison",
+          "parentGuardianRelationship": "Mother",
+          "parentGuardianPhone": "07700 900123",
+          "parentGuardianEmail": "fiona.morrison@example.co.uk"
+        },
+        "birthHistory": {
+          "gestationalAge": 40,
+          "birthWeight": 3.45,
+          "deliveryType": "vaginal",
+          "apgarOneMinute": 9,
+          "apgarFiveMinutes": 9,
+          "nicuStay": "no",
+          "nicuDuration": null,
+          "birthComplications": "no",
+          "birthComplicationDetails": ""
+        },
+        "growthNutrition": {
+          "weightPercentile": 50,
+          "heightPercentile": 55,
+          "headCircumferencePercentile": 50,
+          "feedingType": "solid",
+          "dietaryConcerns": "no",
+          "dietaryConcernDetails": "",
+          "failureToThrive": "no"
+        },
+        "developmentalMilestones": {
+          "grossMotor": "pass",
+          "grossMotorNotes": "Runs, climbs stairs alternating feet, pedals tricycle.",
+          "fineMotor": "pass",
+          "fineMotorNotes": "Copies a circle, builds tower of 8 blocks.",
+          "language": "pass",
+          "languageNotes": "Three-word sentences, speech mostly intelligible to strangers.",
+          "socialEmotional": "pass",
+          "socialEmotionalNotes": "Plays alongside peers, separates from parent at nursery.",
+          "cognitive": "pass",
+          "cognitiveNotes": "Sorts by colour, follows two-step instructions."
+        },
+        "immunizationStatus": {
+          "upToDate": "yes",
+          "missingVaccinations": "",
+          "adverseReactions": "no",
+          "adverseReactionDetails": "",
+          "exemptions": "no",
+          "exemptionDetails": ""
+        },
+        "medicalHistory": {
+          "chronicConditions": "no",
+          "chronicConditionDetails": "",
+          "previousHospitalizations": "no",
+          "hospitalizationDetails": "",
+          "previousSurgeries": "no",
+          "surgeryDetails": "",
+          "recurringInfections": "no",
+          "infectionDetails": ""
+        },
+        "currentMedications": {
+          "prescriptions": [],
+          "otcMedications": [],
+          "supplements": [
+            {
+              "name": "Vitamin D drops",
+              "dose": "10 micrograms",
+              "frequency": "once daily"
+            }
+          ],
+          "allergies": []
+        },
+        "familyHistory": {
+          "geneticConditions": "no",
+          "geneticConditionDetails": "",
+          "chronicDiseases": "no",
+          "chronicDiseaseDetails": "",
+          "developmentalDisorders": "no",
+          "developmentalDisorderDetails": "",
+          "consanguinity": "no"
+        },
+        "socialEnvironmental": {
+          "homeEnvironment": "Lives with both parents and older brother; attends nursery three mornings a week.",
+          "schoolPerformance": "not-applicable",
+          "behaviouralConcerns": "no",
+          "behaviouralConcernDetails": "",
+          "safeguardingConcerns": "no",
+          "safeguardingDetails": "",
+          "screenTimeHoursPerDay": 1
+        }
+      },
+      "expected": {
+        "overallResult": "normal",
+        "domainResults": {
+          "Gross Motor": "pass",
+          "Fine Motor": "pass",
+          "Language": "pass",
+          "Social-Emotional": "pass",
+          "Cognitive": "pass"
+        },
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Boundary values everywhere - 37 weeks, Apgar 7, 3rd centile, 4 h screen, milestones unassessed",
+      "description": "Non-critical edge case: every numeric sits exactly ON a strict threshold so nothing fires - gestational age 37 (rule is <37), 5-minute Apgar 7 (<7), weight and head-circumference percentiles 3 (<3), screen time 4 (>4). The five developmental domains are left unanswered ('') because the 8-month-old was asleep, so the grader defaults each to 'pass' in domainResults without firing any rule. Immunisations are up to date but a previous vaccine adverse reaction (fever/irritability after 8-week DTaP) is recorded, and one mild egg allergy is documented. Expect overallResult 'normal', firedRules [], domainResults all 'pass', and two medium flags in push order: FLAG-IMMUN-002 then FLAG-ALLERGY-001 ('1 allergy/allergies documented'). No anaphylaxis flag because severity is 'mild'.",
+      "state": {
+        "demographics": {
+          "childFirstName": "Kwame",
+          "childLastName": "Boateng",
+          "dateOfBirth": "2025-12-28",
+          "sex": "male",
+          "weight": 7.1,
+          "height": 67,
+          "headCircumference": 42.5,
+          "parentGuardianName": "Abena Boateng",
+          "parentGuardianRelationship": "Mother",
+          "parentGuardianPhone": "07700 900456",
+          "parentGuardianEmail": "abena.boateng@example.co.uk"
+        },
+        "birthHistory": {
+          "gestationalAge": 37,
+          "birthWeight": 2.7,
+          "deliveryType": "caesarean-elective",
+          "apgarOneMinute": 6,
+          "apgarFiveMinutes": 7,
+          "nicuStay": "no",
+          "nicuDuration": null,
+          "birthComplications": "no",
+          "birthComplicationDetails": ""
+        },
+        "growthNutrition": {
+          "weightPercentile": 3,
+          "heightPercentile": 9,
+          "headCircumferencePercentile": 3,
+          "feedingType": "mixed",
+          "dietaryConcerns": "no",
+          "dietaryConcernDetails": "",
+          "failureToThrive": "no"
+        },
+        "developmentalMilestones": {
+          "grossMotor": "",
+          "grossMotorNotes": "Asleep throughout - to reassess at 12-month review.",
+          "fineMotor": "",
+          "fineMotorNotes": "",
+          "language": "",
+          "languageNotes": "",
+          "socialEmotional": "",
+          "socialEmotionalNotes": "",
+          "cognitive": "",
+          "cognitiveNotes": ""
+        },
+        "immunizationStatus": {
+          "upToDate": "yes",
+          "missingVaccinations": "",
+          "adverseReactions": "yes",
+          "adverseReactionDetails": "Fever 38.5 C and irritability for 24 h after 8-week 6-in-1",
+          "exemptions": "no",
+          "exemptionDetails": ""
+        },
+        "medicalHistory": {
+          "chronicConditions": "no",
+          "chronicConditionDetails": "",
+          "previousHospitalizations": "no",
+          "hospitalizationDetails": "",
+          "previousSurgeries": "no",
+          "surgeryDetails": "",
+          "recurringInfections": "no",
+          "infectionDetails": ""
+        },
+        "currentMedications": {
+          "prescriptions": [],
+          "otcMedications": [],
+          "supplements": [],
+          "allergies": [
+            {
+              "allergen": "Egg",
+              "reaction": "Perioral urticaria",
+              "severity": "mild"
+            }
+          ]
+        },
+        "familyHistory": {
+          "geneticConditions": "no",
+          "geneticConditionDetails": "",
+          "chronicDiseases": "yes",
+          "chronicDiseaseDetails": "Maternal grandmother type 2 diabetes",
+          "developmentalDisorders": "no",
+          "developmentalDisorderDetails": "",
+          "consanguinity": "no"
+        },
+        "socialEnvironmental": {
+          "homeEnvironment": "Lives with mother and father in a two-bedroom flat.",
+          "schoolPerformance": "not-applicable",
+          "behaviouralConcerns": "no",
+          "behaviouralConcernDetails": "",
+          "safeguardingConcerns": "no",
+          "safeguardingDetails": "",
+          "screenTimeHoursPerDay": 4
+        }
+      },
+      "expected": {
+        "overallResult": "normal",
+        "domainResults": {
+          "Gross Motor": "pass",
+          "Fine Motor": "pass",
+          "Language": "pass",
+          "Social-Emotional": "pass",
+          "Cognitive": "pass"
+        },
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "id": "FLAG-IMMUN-002",
+            "category": "Immunization",
+            "message": "Previous vaccine adverse reaction: Fever 38.5 C and irritability for 24 h after 8-week 6-in-1",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "1 allergy/allergies documented",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ex-30-week preterm toddler - failure to thrive, global delay, safeguarding, anaphylaxis",
+      "description": "Critical / highest-severity persona: born at 30 weeks (fires BOTH BH-002 preterm and BH-003 very-preterm), 45-day NICU stay, 5-minute Apgar 5, birth complications, weight on the 1st and head circumference on the 2nd centile with failure to thrive, gross motor and language 'fail', fine motor and social-emotional 'concern', cognitive 'pass', immunisations behind, chronic BPD, recurring chest infections, penicillin anaphylaxis (index 0) plus mild egg allergy, family genetic condition, family developmental disorder, consanguinity, behavioural concerns, an open safeguarding concern and 6 h/day screen time. Expect overallResult 'developmental-delay'; domainResults GM fail / FM concern / LG fail / SE concern / CG pass; 18 fired rules in catalogue order GM-002, FM-001, LG-002, SE-001, GR-001, GR-002, GR-003, BH-001, BH-002, BH-003, BH-004, FH-001, FH-002, IM-001, SB-001, SB-003, MH-001, MH-002 (SB-002 silent because schoolPerformance is 'not-applicable'); and 19 flags after the stable sort - high: FLAG-FTT-001, FLAG-GROWTH-001, FLAG-GROWTH-002, FLAG-DEV-001, FLAG-SAFEGUARD-001, FLAG-PRETERM-001 (high because <32), FLAG-ALLERGY-ANAPH-0; medium: FLAG-IMMUN-001, FLAG-DEV-002, FLAG-NICU-001 ('(45 days)'), FLAG-APGAR-001, FLAG-BIRTH-001, FLAG-ALLERGY-001, FLAG-CHRONIC-001, FLAG-INFECTION-001, FLAG-GENETIC-001, FLAG-CONSANG-001, FLAG-BEHAV-001; low: FLAG-SCREEN-001.",
+      "state": {
+        "demographics": {
+          "childFirstName": "Aisha",
+          "childLastName": "Rahman",
+          "dateOfBirth": "2024-06-15",
+          "sex": "female",
+          "weight": 8.9,
+          "height": 79,
+          "headCircumference": 44.2,
+          "parentGuardianName": "Nadia Rahman",
+          "parentGuardianRelationship": "Mother",
+          "parentGuardianPhone": "07700 900789",
+          "parentGuardianEmail": "nadia.rahman@example.co.uk"
+        },
+        "birthHistory": {
+          "gestationalAge": 30,
+          "birthWeight": 1.25,
+          "deliveryType": "caesarean-emergency",
+          "apgarOneMinute": 3,
+          "apgarFiveMinutes": 5,
+          "nicuStay": "yes",
+          "nicuDuration": 45,
+          "birthComplications": "yes",
+          "birthComplicationDetails": "Placental abruption; intubated at birth, surfactant given; grade II IVH"
+        },
+        "growthNutrition": {
+          "weightPercentile": 1,
+          "heightPercentile": 4,
+          "headCircumferencePercentile": 2,
+          "feedingType": "mixed",
+          "dietaryConcerns": "yes",
+          "dietaryConcernDetails": "Refuses most solids; vomiting after feeds",
+          "failureToThrive": "yes"
+        },
+        "developmentalMilestones": {
+          "grossMotor": "fail",
+          "grossMotorNotes": "Not yet walking independently at 26 months corrected 24; increased tone in lower limbs.",
+          "fineMotor": "concern",
+          "fineMotorNotes": "Immature pincer grasp; does not stack two blocks.",
+          "language": "fail",
+          "languageNotes": "No single words; limited babble; does not respond to name consistently.",
+          "socialEmotional": "concern",
+          "socialEmotionalNotes": "Limited eye contact; little interest in other children.",
+          "cognitive": "pass",
+          "cognitiveNotes": "Object permanence present; explores cause and effect toys."
+        },
+        "immunizationStatus": {
+          "upToDate": "no",
+          "missingVaccinations": "12-month MMR, Hib/MenC and PCV booster outstanding",
+          "adverseReactions": "no",
+          "adverseReactionDetails": "",
+          "exemptions": "no",
+          "exemptionDetails": ""
+        },
+        "medicalHistory": {
+          "chronicConditions": "yes",
+          "chronicConditionDetails": "Bronchopulmonary dysplasia; home oxygen weaned at 9 months",
+          "previousHospitalizations": "yes",
+          "hospitalizationDetails": "Three admissions for bronchiolitis / LRTI in the last 12 months",
+          "previousSurgeries": "yes",
+          "surgeryDetails": "PDA ligation at 4 weeks of age",
+          "recurringInfections": "yes",
+          "infectionDetails": "Recurrent lower respiratory tract infections requiring antibiotics"
+        },
+        "currentMedications": {
+          "prescriptions": [
+            {
+              "name": "Salbutamol inhaler via spacer",
+              "dose": "200 micrograms",
+              "frequency": "as required"
+            },
+            {
+              "name": "Abidec multivitamin drops",
+              "dose": "0.6 mL",
+              "frequency": "once daily"
+            }
+          ],
+          "otcMedications": [],
+          "supplements": [],
+          "allergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Facial swelling, stridor - required adrenaline",
+              "severity": "anaphylaxis"
+            },
+            {
+              "allergen": "Egg",
+              "reaction": "Urticaria",
+              "severity": "mild"
+            }
+          ]
+        },
+        "familyHistory": {
+          "geneticConditions": "yes",
+          "geneticConditionDetails": "Paternal cousin with Duchenne muscular dystrophy",
+          "chronicDiseases": "no",
+          "chronicDiseaseDetails": "",
+          "developmentalDisorders": "yes",
+          "developmentalDisorderDetails": "Older brother diagnosed with autism spectrum disorder",
+          "consanguinity": "yes"
+        },
+        "socialEnvironmental": {
+          "homeEnvironment": "Temporary accommodation with mother and two siblings; father not in household.",
+          "schoolPerformance": "not-applicable",
+          "behaviouralConcerns": "yes",
+          "behaviouralConcernDetails": "Frequent head-banging and prolonged tantrums",
+          "safeguardingConcerns": "yes",
+          "safeguardingDetails": "Unexplained bruising to upper arms noted at examination; social care referral made",
+          "screenTimeHoursPerDay": 6
+        }
+      },
+      "expected": {
+        "overallResult": "developmental-delay",
+        "domainResults": {
+          "Gross Motor": "fail",
+          "Fine Motor": "concern",
+          "Language": "fail",
+          "Social-Emotional": "concern",
+          "Cognitive": "pass"
+        },
+        "firedRules": [
+          {
+            "id": "GM-002",
+            "domain": "Gross Motor",
+            "description": "Gross motor fail reported",
+            "result": "fail"
+          },
+          {
+            "id": "FM-001",
+            "domain": "Fine Motor",
+            "description": "Fine motor concern reported",
+            "result": "concern"
+          },
+          {
+            "id": "LG-002",
+            "domain": "Language",
+            "description": "Language fail reported",
+            "result": "fail"
+          },
+          {
+            "id": "SE-001",
+            "domain": "Social-Emotional",
+            "description": "Social-emotional concern reported",
+            "result": "concern"
+          },
+          {
+            "id": "GR-001",
+            "domain": "Growth",
+            "description": "Failure to thrive",
+            "result": "fail"
+          },
+          {
+            "id": "GR-002",
+            "domain": "Growth",
+            "description": "Weight below 3rd percentile",
+            "result": "concern"
+          },
+          {
+            "id": "GR-003",
+            "domain": "Growth",
+            "description": "Head circumference below 3rd percentile",
+            "result": "concern"
+          },
+          {
+            "id": "BH-001",
+            "domain": "Birth History",
+            "description": "NICU stay",
+            "result": "concern"
+          },
+          {
+            "id": "BH-002",
+            "domain": "Birth History",
+            "description": "Preterm birth (<37 weeks)",
+            "result": "concern"
+          },
+          {
+            "id": "BH-003",
+            "domain": "Birth History",
+            "description": "Very preterm birth (<32 weeks)",
+            "result": "fail"
+          },
+          {
+            "id": "BH-004",
+            "domain": "Birth History",
+            "description": "Low APGAR score at 5 minutes (<7)",
+            "result": "concern"
+          },
+          {
+            "id": "FH-001",
+            "domain": "Family History",
+            "description": "Family history of developmental disorders",
+            "result": "concern"
+          },
+          {
+            "id": "FH-002",
+            "domain": "Family History",
+            "description": "Consanguinity",
+            "result": "concern"
+          },
+          {
+            "id": "IM-001",
+            "domain": "Immunization",
+            "description": "Immunizations not up to date",
+            "result": "concern"
+          },
+          {
+            "id": "SB-001",
+            "domain": "Social-Behavioural",
+            "description": "Behavioural concerns",
+            "result": "concern"
+          },
+          {
+            "id": "SB-003",
+            "domain": "Social-Behavioural",
+            "description": "Excessive screen time (>4 hours/day)",
+            "result": "concern"
+          },
+          {
+            "id": "MH-001",
+            "domain": "Medical History",
+            "description": "Chronic conditions present",
+            "result": "concern"
+          },
+          {
+            "id": "MH-002",
+            "domain": "Medical History",
+            "description": "Recurring infections",
+            "result": "concern"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-FTT-001",
+            "category": "Growth",
+            "message": "Failure to thrive - urgent nutritional and medical assessment required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-GROWTH-001",
+            "category": "Growth",
+            "message": "Weight below 3rd percentile (1th percentile)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-GROWTH-002",
+            "category": "Growth",
+            "message": "Head circumference below 3rd percentile - consider neurological evaluation",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DEV-001",
+            "category": "Developmental Delay",
+            "message": "Developmental delay identified in: Gross Motor, Language",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SAFEGUARD-001",
+            "category": "Safeguarding",
+            "message": "Safeguarding concern: Unexplained bruising to upper arms noted at examination; social care referral made - IMMEDIATE ACTION REQUIRED",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PRETERM-001",
+            "category": "Birth History",
+            "message": "Preterm birth at 30 weeks gestation",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ALLERGY-ANAPH-0",
+            "category": "Allergy",
+            "message": "ANAPHYLAXIS history: Penicillin",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IMMUN-001",
+            "category": "Immunization",
+            "message": "Immunizations not up to date: 12-month MMR, Hib/MenC and PCV booster outstanding",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEV-002",
+            "category": "Developmental Concern",
+            "message": "Developmental concern noted in: Fine Motor, Social-Emotional",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-NICU-001",
+            "category": "Birth History",
+            "message": "NICU stay (45 days) - monitor developmental milestones closely",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-APGAR-001",
+            "category": "Birth History",
+            "message": "Low 5-minute APGAR score (5)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BIRTH-001",
+            "category": "Birth History",
+            "message": "Birth complications: Placental abruption; intubated at birth, surfactant given; grade II IVH",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "2 allergy/allergies documented",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CHRONIC-001",
+            "category": "Medical History",
+            "message": "Chronic conditions: Bronchopulmonary dysplasia; home oxygen weaned at 9 months",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INFECTION-001",
+            "category": "Medical History",
+            "message": "Recurring infections: Recurrent lower respiratory tract infections requiring antibiotics",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-GENETIC-001",
+            "category": "Family History",
+            "message": "Family genetic conditions: Paternal cousin with Duchenne muscular dystrophy",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONSANG-001",
+            "category": "Family History",
+            "message": "Consanguinity reported - consider genetic counselling",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BEHAV-001",
+            "category": "Behavioural",
+            "message": "Behavioural concerns: Frequent head-banging and prolonged tantrums",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SCREEN-001",
+            "category": "Social Environment",
+            "message": "Excessive screen time (6 hours/day)",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1568,30 +1568,55 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `who-counter-referral-form` (`hasAnyStatusFlag`): discovery latched
       onto a helper whose return is not a grading result. Same fix as the
       discovery-heuristic item above, plus a composed entry point.
-- [ ] **"no engine namespace published" — 6 forms** —
-      `agile-consulting-scorecard-for-hiring-help`,
-      `architecture-decision-record`,
-      `international-certificate-of-vaccination-or-prophylaxis`,
-      `legal-requirements-privacy-notice`,
-      `medical-information-form-for-air-travel`,
-      `screening-program-privacy-notice`: the HTML front-end has no
-      importable engine at all. Decide per form whether it *should* have
-      one (privacy notices and certificates may legitimately be
-      acknowledgement-only) — if not, teach `bin/test-engines` an explicit
-      `engine: none` marker so they stop counting as SKIP.
-- [ ] **"default factory not found" — 6 forms** (`meeting` joins the list
-      now that its `validateMeeting` is recognised as the grader) —
-      `agile-checklist`, `agile-principles-assessment`, `issue-tracker`,
-      `meeting`, `objectives-and-key-results-tracker`,
+- [x] **"no engine namespace published" — 6 forms** — DONE 2026-09-04, one
+      of each kind. Four had real inline logic pulled out to an importable
+      module and rewired via `import`: `agile-consulting-scorecard-for-hiring-help`
+      (`js/engine.js` — `gradeScorecard`, extracted from index.html's inline
+      `<script>`), `international-certificate-of-vaccination-or-prophylaxis`
+      (`js/validator.js` — `validateCertificate`),
+      `medical-information-form-for-air-travel` (`js/engine.js` —
+      `evaluateFitness`, a 12KB extraction from `form-app.js`). The other
+      three are genuinely acknowledgement-only by design (a checkbox +
+      name + date, no grading) and now carry a
+      `front-end-with-html/js/.no-engine` marker (first line = why):
+      `architecture-decision-record`, `legal-requirements-privacy-notice`,
+      `screening-program-privacy-notice`. `bin/test-engines` gained a NONE
+      outcome (distinct from SKIP) for the marker, so these three no longer
+      count as unfinished discovery work. Fleet: `bin/test-engines` **PASS
+      352, SKIP 0, FAIL 0, NONE 3 / 355** — the SKIP count implied by the
+      original 76-form sweep is now fully zero.
+- [x] **"default factory not found" — 6 forms** — DONE 2026-09-04. Each
+      exported the wizard's existing blank-state literal as `empty*()` /
+      `createDefault*()`: `agile-checklist` (`emptyAnswers`, from
+      `form-app.js`'s local helper), `agile-principles-assessment`
+      (`emptyAssessment`), `issue-tracker` (`emptyIssue`, assembled from the
+      9 SOAP-style sections + reporter + 7 scores), `meeting`
+      (`emptyMeeting`, all 6 child collections default to `[]`),
+      `objectives-and-key-results-tracker` (`emptyAssessment`, `now: null`),
       `united-kingdom-nhs-england-medical-exemption-certificate`
-      (`grader=evaluateFp92a`): the grader exists but no `empty*` /
-      `createDefault*` factory is exported. Export one (the wizard already
-      has the blank shape internally).
-- [ ] **"grader not found" — 3 `hospital-*` forms** — grading is inline in
-      `form-app.js`; extract it into an exported engine module.
-- [ ] Then: personas for each unblocked form, 3 each, same methodology —
-      **61 forms are already unblocked by the discovery fix and awaiting
-      personas.**
+      (`emptyApplication`). All six now discover cleanly.
+- [x] **"grader not found" — 3 `hospital-*` forms** — DONE 2026-09-04.
+      Extracted each form's inline tally (`summariseChecklist` /
+      `summariseMetrics` / `summariseIndicators`) from `form-app.js` into a
+      new `js/summary.js` module and rewired the import; these are
+      completeness tallies, not scored graders, by design (facility audits
+      / KPI dashboards with no pass/fail threshold), matching their
+      `index.md`.
+- [ ] Then: personas for each unblocked form, 3 each, same methodology.
+      **61 of the newly-unblocked forms have personas as of 2026-09-04**
+      (fleet ground truth: `bin/test-personas` forms 313/313 PASS, personas
+      1055/1055 PASS, 0 FAIL; forms without personas: 42 — all inside the
+      current 0-SKIP/3-NONE engine set, i.e. genuinely never attempted yet,
+      not blocked). The 6 forms whose engine changed today
+      (`agile-consulting-scorecard-for-hiring-help`,
+      `international-certificate-of-vaccination-or-prophylaxis`,
+      `medical-information-form-for-air-travel`,
+      `hospital-daily-monitoring-checklist`, `hospital-dashboard-metrics`,
+      `hospital-performance-indicators`) plus the 6 factory-only forms
+      (`agile-checklist`, `agile-principles-assessment`, `issue-tracker`,
+      `meeting`, `objectives-and-key-results-tracker`,
+      `united-kingdom-nhs-england-medical-exemption-certificate`) still
+      need their first personas — 12 forms, next up.
 
 ### Spec-driven follow-through
 

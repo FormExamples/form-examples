@@ -1,0 +1,747 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateChecklist",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the Employee Offboarding Checklist validator. validateChecklist(state) walks 38 declarative rules (27 mandatory, 11 optional) in catalogue order; a rule 'fires' when the item is OUTSTANDING. Outcome: 'incomplete' if any mandatory+blocker rule fired, else 'partial' if any rule at all fired, else 'complete'. completionPercent = round1(mandatorySatisfied / 27 x 100), so a checklist can be 100% and still 'partial' (only optional items outstanding). Quirks verified: yes/no/na equipment items count 'na' as satisfied (notYesOrNa) but yes/no items treat '' and 'no' identically (notYes); REF-001 fires only on '' (an explicit 'no' consent is NOT outstanding); EXI-003 is gated on interviewCompleted === 'yes', so a declined interview never fires it. Flags are SPLIT: form-app.js calls detectAdditionalFlags(state) with the state only (no grader result), mirrored by flagsArgs [\"state\"]; flags are stable-sorted high > medium > low and FLAG-AC-003 keys off dataDownloadAuditPerformed !== 'yes' independently of the rules. The 'timestamp' key is added by form-app.js, not the grader. Regenerate expected with: bin/test-personas employee-offboarding-checklist --update",
+  "personas": [
+    {
+      "name": "Complete - planned resignation, every item signed off",
+      "description": "Staff nurse resigning with full notice: every checklist item answered 'yes', mobile phone / uniform / parking pass 'na', data-download audit performed with nothing detected, reference consent given, forwarding address confirmed, HR + line manager + IT signed off and employee acknowledged. Expect outcome 'complete', completionPercent 100, mandatoryTotal 27, mandatorySatisfied 27, no blockers, no fired rules, and zero additional flags.",
+      "state": {
+        "employeeDetails": {
+          "firstName": "Priya",
+          "lastName": "Chandrasekaran",
+          "employeeId": "EMP-204817",
+          "email": "priya.chandrasekaran@nhs.example",
+          "jobTitle": "Staff Nurse (Band 5)",
+          "department": "Acute Medical Unit",
+          "lineManager": "Sister Hannah Doyle",
+          "startDate": "2021-03-08",
+          "lastWorkingDay": "2026-08-28",
+          "reasonForLeaving": "resignation",
+          "reasonForLeavingOther": "",
+          "employeeDetailsNotes": "Moving to a community nursing post in Leeds; four weeks' notice given."
+        },
+        "exitInterview": {
+          "interviewOffered": "yes",
+          "interviewCompleted": "yes",
+          "interviewDate": "2026-08-24",
+          "interviewerName": "Marcus Okafor (HR Business Partner)",
+          "feedbackProvided": "yes",
+          "feedbackDocumented": "yes",
+          "concernsRaised": "no",
+          "concernsDetails": "",
+          "exitInterviewNotes": "Positive feedback about team; would consider bank shifts."
+        },
+        "knowledgeTransfer": {
+          "successorIdentified": "yes",
+          "successorName": "Tomasz Wisniewski",
+          "handoverDocumentCreated": "yes",
+          "handoverMeetingsHeld": "yes",
+          "workInProgressDocumented": "yes",
+          "keyContactsShared": "yes",
+          "sopFilesTransferred": "yes",
+          "clinicalCaseloadReassigned": "yes",
+          "knowledgeTransferNotes": "Link-nurse duties for tissue viability handed to Tomasz."
+        },
+        "equipmentReturn": {
+          "laptopReturned": "yes",
+          "laptopAssetTag": "LT-AMU-0442",
+          "mobilePhoneReturned": "na",
+          "idBadgeReturned": "yes",
+          "keysReturned": "yes",
+          "uniformReturned": "na",
+          "parkingPassReturned": "na",
+          "otherEquipmentReturned": "na",
+          "otherEquipmentDescription": "",
+          "equipmentReturnNotes": "Uniforms retained per infection-control policy; no phone or parking pass issued."
+        },
+        "accessRevocation": {
+          "emailRevoked": "yes",
+          "ehrEprRevoked": "yes",
+          "vpnRevoked": "yes",
+          "activeDirectoryDisabled": "yes",
+          "buildingAccessRevoked": "yes",
+          "cloudAppsRevoked": "yes",
+          "smartcardDeactivated": "yes",
+          "dataDownloadAuditPerformed": "yes",
+          "unauthorisedDownloadDetected": "no",
+          "accessRevocationNotes": "All access removed 28 Aug 2026 17:30 by IT service desk ticket INC0098211."
+        },
+        "finalPayrollBenefits": {
+          "finalSalaryCalculated": "yes",
+          "accruedHolidayPaid": "yes",
+          "expensesReimbursed": "yes",
+          "pensionInformationProvided": "yes",
+          "p45Issued": "yes",
+          "benefitsTerminated": "yes",
+          "payrollDetailsConfirmed": "yes",
+          "finalPaymentDate": "2026-09-25",
+          "finalPayrollNotes": "NHS Pension deferred-membership letter sent."
+        },
+        "referencesRecommendations": {
+          "referenceConsentGiven": "yes",
+          "referenceContactDetailsRecorded": "yes",
+          "recommendationLetterRequested": "no",
+          "recommendationLetterProvided": "no",
+          "referencePolicyExplained": "yes",
+          "referencesNotes": ""
+        },
+        "nonDisclosurePostEmployment": {
+          "confidentialityReaffirmed": "yes",
+          "ndaSigned": "yes",
+          "restrictiveCovenantsExplained": "yes",
+          "restrictiveCovenantsAcknowledged": "yes",
+          "intellectualPropertyAssigned": "yes",
+          "dataReturnedOrDestroyed": "yes",
+          "postEmploymentObligationsExplained": "yes",
+          "ndaNotes": ""
+        },
+        "forwardingDetails": {
+          "forwardingAddressLine1": "14 Meanwood Grove",
+          "forwardingAddressLine2": "",
+          "forwardingCity": "Leeds",
+          "forwardingPostcode": "LS6 4QP",
+          "forwardingCountry": "United Kingdom",
+          "personalEmail": "priya.c@example.com",
+          "personalPhone": "07700 900318",
+          "forwardingDetailsConfirmed": "yes",
+          "forwardingNotes": ""
+        },
+        "signoff": {
+          "hrSignedOff": "yes",
+          "hrSignOffName": "Marcus Okafor",
+          "hrSignOffDate": "2026-08-28",
+          "lineManagerSignedOff": "yes",
+          "lineManagerSignOffName": "Hannah Doyle",
+          "lineManagerSignOffDate": "2026-08-28",
+          "itSignedOff": "yes",
+          "itSignOffName": "Dev Patel",
+          "itSignOffDate": "2026-08-28",
+          "employeeAcknowledged": "yes",
+          "employeeSignOffDate": "2026-08-28",
+          "signoffNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "complete",
+        "completionPercent": 100,
+        "blockers": [],
+        "firedRules": [],
+        "mandatoryTotal": 27,
+        "mandatorySatisfied": 27,
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Partial - retirement, interview declined, P45 pending",
+      "description": "Retiring consultant who was offered but declined an exit interview, explicitly declined reference consent ('no'), whose P45 is still with payroll, and who has not yet confirmed forwarding details or acknowledged the checklist. Every blocker item is satisfied. Expect outcome 'partial' with fired rules EXI-002 (optional), PAY-003 (mandatory, non-blocker), FWD-002, SO-004 in that catalogue order; EXI-003 does NOT fire (gated on interviewCompleted === 'yes') and REF-001 does NOT fire because 'no' is an explicit answer. mandatorySatisfied 26/27 -> completionPercent 96.3, no blockers. Flags: FLAG-EXI-001 then FLAG-PAY-001 ('Payroll items outstanding (1)'), both medium, insertion order preserved by the stable sort.",
+      "state": {
+        "employeeDetails": {
+          "firstName": "Geoffrey",
+          "lastName": "Ashworth",
+          "employeeId": "EMP-100392",
+          "email": "geoffrey.ashworth@nhs.example",
+          "jobTitle": "Consultant Geriatrician",
+          "department": "Medicine for Older People",
+          "lineManager": "Dr Fiona McLeod (Clinical Director)",
+          "startDate": "1998-09-01",
+          "lastWorkingDay": "2026-08-31",
+          "reasonForLeaving": "retirement",
+          "reasonForLeavingOther": "",
+          "employeeDetailsNotes": "Retiring after 28 years' service."
+        },
+        "exitInterview": {
+          "interviewOffered": "yes",
+          "interviewCompleted": "no",
+          "interviewDate": "",
+          "interviewerName": "",
+          "feedbackProvided": "no",
+          "feedbackDocumented": "",
+          "concernsRaised": "",
+          "concernsDetails": "",
+          "exitInterviewNotes": "Declined interview; happy to provide written feedback if requested."
+        },
+        "knowledgeTransfer": {
+          "successorIdentified": "yes",
+          "successorName": "Dr Aisha Rahman",
+          "handoverDocumentCreated": "yes",
+          "handoverMeetingsHeld": "yes",
+          "workInProgressDocumented": "yes",
+          "keyContactsShared": "yes",
+          "sopFilesTransferred": "yes",
+          "clinicalCaseloadReassigned": "yes",
+          "knowledgeTransferNotes": "Outpatient clinic lists re-templated to Dr Rahman from 1 Sep 2026."
+        },
+        "equipmentReturn": {
+          "laptopReturned": "yes",
+          "laptopAssetTag": "LT-MOP-0117",
+          "mobilePhoneReturned": "yes",
+          "idBadgeReturned": "yes",
+          "keysReturned": "yes",
+          "uniformReturned": "na",
+          "parkingPassReturned": "yes",
+          "otherEquipmentReturned": "na",
+          "otherEquipmentDescription": "",
+          "equipmentReturnNotes": ""
+        },
+        "accessRevocation": {
+          "emailRevoked": "yes",
+          "ehrEprRevoked": "yes",
+          "vpnRevoked": "yes",
+          "activeDirectoryDisabled": "yes",
+          "buildingAccessRevoked": "yes",
+          "cloudAppsRevoked": "yes",
+          "smartcardDeactivated": "yes",
+          "dataDownloadAuditPerformed": "yes",
+          "unauthorisedDownloadDetected": "no",
+          "accessRevocationNotes": ""
+        },
+        "finalPayrollBenefits": {
+          "finalSalaryCalculated": "yes",
+          "accruedHolidayPaid": "yes",
+          "expensesReimbursed": "yes",
+          "pensionInformationProvided": "yes",
+          "p45Issued": "no",
+          "benefitsTerminated": "yes",
+          "payrollDetailsConfirmed": "yes",
+          "finalPaymentDate": "2026-09-25",
+          "finalPayrollNotes": "P45 to be issued with the September payroll run."
+        },
+        "referencesRecommendations": {
+          "referenceConsentGiven": "no",
+          "referenceContactDetailsRecorded": "no",
+          "recommendationLetterRequested": "no",
+          "recommendationLetterProvided": "no",
+          "referencePolicyExplained": "yes",
+          "referencesNotes": "Does not require references - retiring fully."
+        },
+        "nonDisclosurePostEmployment": {
+          "confidentialityReaffirmed": "yes",
+          "ndaSigned": "yes",
+          "restrictiveCovenantsExplained": "yes",
+          "restrictiveCovenantsAcknowledged": "yes",
+          "intellectualPropertyAssigned": "yes",
+          "dataReturnedOrDestroyed": "yes",
+          "postEmploymentObligationsExplained": "yes",
+          "ndaNotes": ""
+        },
+        "forwardingDetails": {
+          "forwardingAddressLine1": "The Old Rectory, Church Lane",
+          "forwardingAddressLine2": "",
+          "forwardingCity": "Ilkley",
+          "forwardingPostcode": "LS29 9DS",
+          "forwardingCountry": "United Kingdom",
+          "personalEmail": "",
+          "personalPhone": "",
+          "forwardingDetailsConfirmed": "no",
+          "forwardingNotes": "Address taken from ESR; awaiting confirmation of personal email."
+        },
+        "signoff": {
+          "hrSignedOff": "yes",
+          "hrSignOffName": "Marcus Okafor",
+          "hrSignOffDate": "2026-08-31",
+          "lineManagerSignedOff": "yes",
+          "lineManagerSignOffName": "Fiona McLeod",
+          "lineManagerSignOffDate": "2026-08-31",
+          "itSignedOff": "yes",
+          "itSignOffName": "Dev Patel",
+          "itSignOffDate": "2026-08-31",
+          "employeeAcknowledged": "",
+          "employeeSignOffDate": "",
+          "signoffNotes": ""
+        }
+      },
+      "expected": {
+        "outcome": "partial",
+        "completionPercent": 96.3,
+        "blockers": [],
+        "firedRules": [
+          {
+            "id": "EXI-002",
+            "category": "Exit Interview",
+            "description": "Exit interview not completed",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "PAY-003",
+            "category": "Final Payroll & Benefits",
+            "description": "P45 / final tax document not issued",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "FWD-002",
+            "category": "Forwarding Details",
+            "description": "Personal contact details not confirmed",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "SO-004",
+            "category": "Sign-off",
+            "description": "Employee has not acknowledged offboarding",
+            "mandatory": false,
+            "blocker": false
+          }
+        ],
+        "mandatoryTotal": 27,
+        "mandatorySatisfied": 26,
+        "additionalFlags": [
+          {
+            "id": "FLAG-EXI-001",
+            "category": "Exit Interview",
+            "message": "Exit interview not completed - feedback opportunity missed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAY-001",
+            "category": "Final Payroll & Benefits",
+            "message": "Payroll items outstanding (1) - final salary, holiday pay, or P45 not yet issued",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete - summary dismissal, access live, data exfiltration detected",
+      "description": "Pharmacy technician summarily dismissed for gross misconduct; the audit found unauthorised downloads. Laptop and ID badge unreturned, VPN / building / cloud access still live, no exit interview, no successor or handover, payroll untouched, NDA not reaffirmed, data not returned, no sign-offs, forwarding address blank. Expect outcome 'incomplete', 27 fired rules (EXI-001, EXI-002, KT-001, KT-002, KT-003, EQ-001, EQ-003, EQ-005, AC-003, AC-005, AC-006, PAY-001..004, REF-001, REF-002, NDA-001..004, FWD-001, FWD-002, SO-001..004), 11 blockers (EQ-001, EQ-003, AC-003, AC-005, AC-006, PAY-001, NDA-001, NDA-004, SO-001, SO-002, SO-003), mandatorySatisfied 9/27 -> completionPercent 33.3. Flags (10, sorted high > medium > low): FLAG-AC-001, FLAG-AC-002 ('3 access channel(s)... VPN, Building access, Cloud apps'), FLAG-EQ-001 ('2 item(s)... Laptop, ID badge'), FLAG-NDA-001, FLAG-NDA-002, then FLAG-KT-001 (3 outstanding), FLAG-EXI-001, FLAG-PAY-001 (3), then FLAG-FWD-001, FLAG-REF-001. FLAG-AC-003 does not fire because the audit WAS performed.",
+      "state": {
+        "employeeDetails": {
+          "firstName": "Callum",
+          "lastName": "Reid",
+          "employeeId": "EMP-318804",
+          "email": "callum.reid@nhs.example",
+          "jobTitle": "Pharmacy Technician",
+          "department": "Pharmacy",
+          "lineManager": "Sunita Bhatt (Chief Pharmacy Technician)",
+          "startDate": "2023-11-13",
+          "lastWorkingDay": "2026-09-01",
+          "reasonForLeaving": "dismissal",
+          "reasonForLeavingOther": "",
+          "employeeDetailsNotes": "Summary dismissal following disciplinary hearing 1 Sep 2026 (gross misconduct - controlled-drug discrepancy). Escorted from site."
+        },
+        "exitInterview": {
+          "interviewOffered": "no",
+          "interviewCompleted": "no",
+          "interviewDate": "",
+          "interviewerName": "",
+          "feedbackProvided": "no",
+          "feedbackDocumented": "",
+          "concernsRaised": "",
+          "concernsDetails": "",
+          "exitInterviewNotes": "Not offered - dismissal."
+        },
+        "knowledgeTransfer": {
+          "successorIdentified": "no",
+          "successorName": "",
+          "handoverDocumentCreated": "no",
+          "handoverMeetingsHeld": "no",
+          "workInProgressDocumented": "no",
+          "keyContactsShared": "no",
+          "sopFilesTransferred": "no",
+          "clinicalCaseloadReassigned": "yes",
+          "knowledgeTransferNotes": "Dispensary rota covered by bank staff; no handover possible."
+        },
+        "equipmentReturn": {
+          "laptopReturned": "no",
+          "laptopAssetTag": "LT-PHA-0219",
+          "mobilePhoneReturned": "na",
+          "idBadgeReturned": "no",
+          "keysReturned": "yes",
+          "uniformReturned": "no",
+          "parkingPassReturned": "na",
+          "otherEquipmentReturned": "",
+          "otherEquipmentDescription": "",
+          "equipmentReturnNotes": "Laptop and ID badge believed to be at home address; recovery letter sent."
+        },
+        "accessRevocation": {
+          "emailRevoked": "yes",
+          "ehrEprRevoked": "yes",
+          "vpnRevoked": "no",
+          "activeDirectoryDisabled": "yes",
+          "buildingAccessRevoked": "no",
+          "cloudAppsRevoked": "no",
+          "smartcardDeactivated": "yes",
+          "dataDownloadAuditPerformed": "yes",
+          "unauthorisedDownloadDetected": "yes",
+          "accessRevocationNotes": "Audit shows 340 patient records exported to USB on 29 Aug 2026. Referred to DPO and Caldicott Guardian."
+        },
+        "finalPayrollBenefits": {
+          "finalSalaryCalculated": "no",
+          "accruedHolidayPaid": "no",
+          "expensesReimbursed": "no",
+          "pensionInformationProvided": "no",
+          "p45Issued": "no",
+          "benefitsTerminated": "no",
+          "payrollDetailsConfirmed": "no",
+          "finalPaymentDate": "",
+          "finalPayrollNotes": ""
+        },
+        "referencesRecommendations": {
+          "referenceConsentGiven": "",
+          "referenceContactDetailsRecorded": "no",
+          "recommendationLetterRequested": "no",
+          "recommendationLetterProvided": "no",
+          "referencePolicyExplained": "no",
+          "referencesNotes": ""
+        },
+        "nonDisclosurePostEmployment": {
+          "confidentialityReaffirmed": "no",
+          "ndaSigned": "no",
+          "restrictiveCovenantsExplained": "no",
+          "restrictiveCovenantsAcknowledged": "no",
+          "intellectualPropertyAssigned": "no",
+          "dataReturnedOrDestroyed": "no",
+          "postEmploymentObligationsExplained": "no",
+          "ndaNotes": "Employee refused to sign anything at the hearing."
+        },
+        "forwardingDetails": {
+          "forwardingAddressLine1": "",
+          "forwardingAddressLine2": "",
+          "forwardingCity": "",
+          "forwardingPostcode": "",
+          "forwardingCountry": "",
+          "personalEmail": "",
+          "personalPhone": "",
+          "forwardingDetailsConfirmed": "",
+          "forwardingNotes": ""
+        },
+        "signoff": {
+          "hrSignedOff": "no",
+          "hrSignOffName": "",
+          "hrSignOffDate": "",
+          "lineManagerSignedOff": "no",
+          "lineManagerSignOffName": "",
+          "lineManagerSignOffDate": "",
+          "itSignedOff": "no",
+          "itSignOffName": "",
+          "itSignOffDate": "",
+          "employeeAcknowledged": "no",
+          "employeeSignOffDate": "",
+          "signoffNotes": "Cannot sign off until equipment recovered and access fully revoked."
+        }
+      },
+      "expected": {
+        "outcome": "incomplete",
+        "completionPercent": 33.3,
+        "blockers": [
+          {
+            "id": "EQ-001",
+            "category": "Equipment Return",
+            "description": "Laptop not returned"
+          },
+          {
+            "id": "EQ-003",
+            "category": "Equipment Return",
+            "description": "ID badge not returned"
+          },
+          {
+            "id": "AC-003",
+            "category": "Access Revocation",
+            "description": "VPN access not revoked"
+          },
+          {
+            "id": "AC-005",
+            "category": "Access Revocation",
+            "description": "Building access not revoked"
+          },
+          {
+            "id": "AC-006",
+            "category": "Access Revocation",
+            "description": "Cloud applications access not revoked"
+          },
+          {
+            "id": "PAY-001",
+            "category": "Final Payroll & Benefits",
+            "description": "Final salary not calculated"
+          },
+          {
+            "id": "NDA-001",
+            "category": "Non-Disclosure & Post-Employment",
+            "description": "Confidentiality not reaffirmed"
+          },
+          {
+            "id": "NDA-004",
+            "category": "Non-Disclosure & Post-Employment",
+            "description": "Organisational data not returned or destroyed"
+          },
+          {
+            "id": "SO-001",
+            "category": "Sign-off",
+            "description": "HR has not signed off"
+          },
+          {
+            "id": "SO-002",
+            "category": "Sign-off",
+            "description": "Line manager has not signed off"
+          },
+          {
+            "id": "SO-003",
+            "category": "Sign-off",
+            "description": "IT has not signed off"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "EXI-001",
+            "category": "Exit Interview",
+            "description": "Exit interview not offered",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "EXI-002",
+            "category": "Exit Interview",
+            "description": "Exit interview not completed",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "KT-001",
+            "category": "Knowledge Transfer",
+            "description": "Successor / handover recipient not identified",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "KT-002",
+            "category": "Knowledge Transfer",
+            "description": "Handover document not created",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "KT-003",
+            "category": "Knowledge Transfer",
+            "description": "Work-in-progress not documented",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "EQ-001",
+            "category": "Equipment Return",
+            "description": "Laptop not returned",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "EQ-003",
+            "category": "Equipment Return",
+            "description": "ID badge not returned",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "EQ-005",
+            "category": "Equipment Return",
+            "description": "Uniform not returned",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "AC-003",
+            "category": "Access Revocation",
+            "description": "VPN access not revoked",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "AC-005",
+            "category": "Access Revocation",
+            "description": "Building access not revoked",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "AC-006",
+            "category": "Access Revocation",
+            "description": "Cloud applications access not revoked",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "PAY-001",
+            "category": "Final Payroll & Benefits",
+            "description": "Final salary not calculated",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "PAY-002",
+            "category": "Final Payroll & Benefits",
+            "description": "Accrued holiday pay not settled",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "PAY-003",
+            "category": "Final Payroll & Benefits",
+            "description": "P45 / final tax document not issued",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "PAY-004",
+            "category": "Final Payroll & Benefits",
+            "description": "Payroll details not confirmed with employee",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "REF-001",
+            "category": "References & Recommendations",
+            "description": "Reference consent not obtained or declined",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "REF-002",
+            "category": "References & Recommendations",
+            "description": "Reference policy not explained",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "NDA-001",
+            "category": "Non-Disclosure & Post-Employment",
+            "description": "Confidentiality not reaffirmed",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "NDA-002",
+            "category": "Non-Disclosure & Post-Employment",
+            "description": "Restrictive covenants not explained",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "NDA-003",
+            "category": "Non-Disclosure & Post-Employment",
+            "description": "Intellectual property not assigned to employer",
+            "mandatory": true,
+            "blocker": false
+          },
+          {
+            "id": "NDA-004",
+            "category": "Non-Disclosure & Post-Employment",
+            "description": "Organisational data not returned or destroyed",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "FWD-001",
+            "category": "Forwarding Details",
+            "description": "Forwarding address not recorded",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "FWD-002",
+            "category": "Forwarding Details",
+            "description": "Personal contact details not confirmed",
+            "mandatory": false,
+            "blocker": false
+          },
+          {
+            "id": "SO-001",
+            "category": "Sign-off",
+            "description": "HR has not signed off",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "SO-002",
+            "category": "Sign-off",
+            "description": "Line manager has not signed off",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "SO-003",
+            "category": "Sign-off",
+            "description": "IT has not signed off",
+            "mandatory": true,
+            "blocker": true
+          },
+          {
+            "id": "SO-004",
+            "category": "Sign-off",
+            "description": "Employee has not acknowledged offboarding",
+            "mandatory": false,
+            "blocker": false
+          }
+        ],
+        "mandatoryTotal": 27,
+        "mandatorySatisfied": 9,
+        "additionalFlags": [
+          {
+            "id": "FLAG-AC-001",
+            "category": "Access Revocation",
+            "message": "Unauthorised data download detected during offboarding audit - escalate to data protection officer",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AC-002",
+            "category": "Access Revocation",
+            "message": "3 access channel(s) not yet revoked: VPN, Building access, Cloud apps - SECURITY RISK",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-EQ-001",
+            "category": "Equipment Return",
+            "message": "2 item(s) of equipment not returned: Laptop, ID badge",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NDA-001",
+            "category": "Non-Disclosure & Post-Employment",
+            "message": "Confidentiality / NDA not reaffirmed - patient data and trade secrets at risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NDA-002",
+            "category": "Non-Disclosure & Post-Employment",
+            "message": "Organisational data not yet returned or destroyed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-KT-001",
+            "category": "Knowledge Transfer",
+            "message": "Knowledge transfer incomplete (3 item(s) outstanding) - service continuity at risk",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-EXI-001",
+            "category": "Exit Interview",
+            "message": "Exit interview not completed - feedback opportunity missed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAY-001",
+            "category": "Final Payroll & Benefits",
+            "message": "Payroll items outstanding (3) - final salary, holiday pay, or P45 not yet issued",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FWD-001",
+            "category": "Forwarding Details",
+            "message": "Forwarding address not recorded - P60 / future correspondence may not reach employee",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-REF-001",
+            "category": "References & Recommendations",
+            "message": "Employee position on references not declared (consent neither given nor declined)",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,43 @@
 // Pure validation engine for the meeting form. Mirrors the
 // validateMeeting() rules described in ../AGENTS.md.
 
+/**
+ * Build a fresh, fully-blank meeting record in the shape form-app.js's
+ * readData() produces and validateMeeting() consumes. Text / enum fields
+ * default to '' except the wizard's own defaults (`status: 'draft'`,
+ * `recurringFrequency: 'none'`, `recurringIntervalCount: '1'`); the six
+ * child collections default to []. `validateMeeting(emptyMeeting())` is the
+ * planned / no-participants baseline.
+ */
+function emptyMeeting() {
+	return {
+		organizerName: '', organizerEmail: '', organizerRole: '',
+		organizerOrganisation: '', organizerTeam: '', organizerTimezone: '',
+
+		status: 'draft', title: '', purpose: '', longDescription: '',
+		category: '', visibility: '',
+
+		scheduledStartAt: '', scheduledEndAt: '', timezone: '', location: '',
+		videoUrl: '', phoneNumber: '', dialInCode: '', joiningInstructions: '',
+		calendarUid: '',
+
+		recurringFrequency: 'none', recurringIntervalCount: '1',
+		recurringByDayOfWeek: '', recurringByDayOfMonth: '',
+		recurringBySetPosition: '', recurringByMonthOfYear: '',
+		recurringSeriesCount: '', recurringSeriesUntil: '',
+
+		summary: '', actualStartAt: '', actualEndAt: '', overallResult: '',
+		additionalNotes: '', signedByName: '', signedAt: '',
+
+		agenda: [],        // { position, title, durationMinutes, presenter, notes, status }
+		participants: [],  // { position, name, email, role, responseStatus, attendanceStatus }
+		resources: [],     // { position, resourceType, name, quantity, costAmount, status }
+		actionItems: [],   // { position, title, ownerName, dueDate, priority, status }
+		outputs: [],       // { position, title, kind, url, ownerName }
+		outcomes: [],      // { position, title, category, impact, description }
+	};
+}
+
 function parseDate(value) {
 	if (!value) return null;
 	const t = new Date(value);
@@ -217,4 +254,4 @@ function validateMeeting(data) {
 	};
 }
 
-export { validateMeeting };
+export { emptyMeeting, validateMeeting };

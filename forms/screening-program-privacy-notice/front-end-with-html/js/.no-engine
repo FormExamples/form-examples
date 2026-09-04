@@ -1,0 +1,9 @@
+The Screening Program Privacy Notice has no scoring, grading, or validation
+engine by design: it is a plain acknowledgement form (read the notice, check
+a box, sign and date). Its only derived logic is the inline
+checkFormValidity() DOM check in index.html that enables the submit button
+once the checkbox, name, and date are all filled — a UI concern, not a
+grading engine. Compare care-privacy-notice, which DOES have a grader.js
+because it asks three separate consent questions; this form asks one.
+
+bin/test-engines reports this form as NONE rather than SKIP.

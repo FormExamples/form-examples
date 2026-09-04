@@ -1,4 +1,5 @@
 import { emptyAssessment } from './types.js';
+import { summariseIndicators } from './summary.js';
 import { PERFORMANCE_INDICATORS, CATEGORIES } from './indicators.js';
 
 // Hospital Performance Indicators — single-page wizard (vanilla JS,
@@ -487,31 +488,11 @@ function updateSectionSummaries() {
 // scored grader)
 // ----------------------------------------------------------------------
 
-function summariseIndicators() {
-  let recordedCount = 0;
-  const categoryCounts = {};
-  CATEGORIES.forEach(function (c) {
-    categoryCounts[c.number] = { recorded: 0, total: 0, title: c.title };
-  });
-
-  PERFORMANCE_INDICATORS.forEach(function (item) {
-    categoryCounts[item.category].total += 1;
-    if (isAnswered(state.items[item.id].value)) {
-      categoryCounts[item.category].recorded += 1;
-      recordedCount += 1;
-    }
-  });
-
-  return {
-    recordedCount: recordedCount,
-    categoryCounts: categoryCounts,
-  };
-}
 
 function updateRecordedPreview() {
   const el = document.getElementById('recorded-preview');
   if (!el) return;
-  const result = summariseIndicators();
+  const result = summariseIndicators(state);
   const rowsHtml = CATEGORIES.map(function (c) {
     const counts = result.categoryCounts[c.number];
     return '<li><strong>' + counts.recorded + ' / ' + counts.total + '</strong> — ' + esc(c.title) + '</li>';
@@ -634,7 +615,7 @@ function downloadCsv(filename, csv) {
 // ----------------------------------------------------------------------
 
 function renderReport() {
-  const result = summariseIndicators();
+  const result = summariseIndicators(state);
   const reportEl = document.getElementById('report');
   if (!reportEl) return;
 

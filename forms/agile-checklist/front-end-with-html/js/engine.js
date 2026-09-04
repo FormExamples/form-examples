@@ -1,4 +1,16 @@
-import { PRACTICES_ITEMS, STAKEHOLDERS_ITEMS, TEAMS_ITEMS } from './items.js';
+import { ALL_ITEMS, PRACTICES_ITEMS, STAKEHOLDERS_ITEMS, TEAMS_ITEMS } from './items.js';
+
+  /**
+   * Build the blank answers map the grader consumes: one '' entry per
+   * checklist item id (t01…t25, s01…s14, p01…p18). This is the engine's
+   * default-state factory — `calculateMaturity(emptyAnswers())` is the
+   * all-unanswered baseline (maturity 'insufficient-data').
+   */
+  function emptyAnswers() {
+    const a = {};
+    ALL_ITEMS.forEach(function (i) { a[i.id] = ''; });
+    return a;
+  }
 
   
   
@@ -256,4 +268,4 @@ import { PRACTICES_ITEMS, STAKEHOLDERS_ITEMS, TEAMS_ITEMS } from './items.js';
   
   
 
-export { bandFor, deriveMaturity, calculateMaturity };
+export { emptyAnswers, bandFor, deriveMaturity, calculateMaturity };

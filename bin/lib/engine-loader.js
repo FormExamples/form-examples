@@ -205,8 +205,13 @@ function discoverFactory(ns, fns) {
 // least six forms (classifyHernia, scoreOhs, classifyCompleteness, gradeOrder,
 // completenessPercent, calculateGrade-over-assess).
 function discoverGrader(ns, fns, factory) {
+  // Flag detectors are never the grader — but only names SHAPED like a
+  // detector are excluded (detectFlaggedIssues, computeFlags, runFlaggers),
+  // not every name containing "issue" (gradeIssue is the issue-tracker's
+  // composite grader).
   const cands = fns.filter((n) =>
-    ENTRY_NAME.test(n) && !FACTORY_NAME.test(n) && !/flag|issue|^detect/i.test(n));
+    ENTRY_NAME.test(n) && !FACTORY_NAME.test(n) &&
+    !/^(detect|run|apply|collect|compute|build|get|list)\w*(flag|issue)s?$/i.test(n) && !/^detect/i.test(n));
   if (!cands.length) return { grader: undefined, probe: {} };
   let state = null;
   if (factory) {

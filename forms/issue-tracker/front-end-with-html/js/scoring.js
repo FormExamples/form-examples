@@ -5,6 +5,59 @@
 //
 // ES module: exports the scoring engine's public API.
 
+/**
+ * Build a fresh, fully-blank issue in the shape form-app.js's readFormData()
+ * produces and gradeIssue() consumes: the reporter block, the nine SOAP-style
+ * sections (cc / pt / sx / fx / hx / ix / dx / txpx), and the seven scores.
+ * Text fields default to '', numeric scores to null, the failure condition
+ * (an enum) to ''. `gradeIssue(emptyIssue())` is the all-low baseline.
+ */
+function emptyIssue() {
+  return {
+    reporter: {
+      reporterName: '', reporterEmail: '', reporterRole: '', reportedAt: '',
+      discoveredAt: '', issueCategory: '', environment: '', systemName: '',
+      component: '', customerOrProjectTag: '', externalReference: '',
+    },
+    cc: { ccSummary: '', ccLongDescription: '', ccReportedByName: '', ccReportedVia: '' },
+    pt: {
+      ptDiscovererName: '', ptAffectedUsersCount: null, ptAffectedUserGroups: '',
+      ptAssignees: '', ptStakeholdersToInform: '', ptObservers: '',
+    },
+    sx: {
+      sxExternalSignals: '', sxAlertIds: '', sxErrorMessages: '',
+      sxScreenshotsUrl: '', sxLogsUrl: '', sxFirstObservedAt: '',
+    },
+    fx: {
+      fxBrokenComponents: '', fxFailedServices: '', fxStuckProcesses: '',
+      fxHardwareFaults: '', fxDataCorruption: '',
+    },
+    hx: {
+      hxRelatedIssues: '', hxPriorOccurrences: null, hxRecentChangeUrl: '',
+      hxReferences: '', hxTimeline: '',
+    },
+    ix: {
+      ixHypotheses: '', ixReproSteps: '', ixDiagnosticQueries: '',
+      ixTestsRun: '', ixBlockingUnknowns: '',
+    },
+    dx: { dxRootCause: '', dxContributingCauses: '', dxScope: '', dxConfirmed: '' },
+    txpx: {
+      txMitigationSteps: '', txFixPlan: '', txWorkaround: '', txRollbackPlan: '',
+      txCommunicationPlan: '', pxExpectedResolutionAt: '', pxResidualRisk: '',
+      pxMonitoringPlan: '', pxRecurrenceLikelihood: '', pxLessonsLearned: '',
+    },
+    scores: {
+      scoreByPriorityRank: null,
+      scoreBySeverityOfImpact: null,
+      scoreByMagnitudeOfDamage: null,
+      scoreByHarmGrade: null,
+      scoreByFailureCondition: '',
+      scoreByMoscowRequirement: null,
+      scoreByFrequencyPercent: null,
+    },
+  };
+}
+
 
 const BAND_RANK = { low: 0, moderate: 1, high: 2, critical: 3 };
 const BAND_BY_RANK = ['low', 'moderate', 'high', 'critical'];
@@ -257,4 +310,4 @@ function gradeIssue(data) {
   };
 }
 
-export { gradeIssue, maxBand };
+export { emptyIssue, gradeIssue, maxBand };

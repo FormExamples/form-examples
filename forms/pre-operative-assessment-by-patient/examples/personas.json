@@ -1,0 +1,921 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateASA",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the patient self-report ASA engine. calculateASA(state) evaluates the 42 declarative rules in catalogue order (CV, RS, RN, HP, EN, NR, HM, OB, FC, AG, SH) and returns { asaGrade = max grade of fired rules (1 when none), firedRules }. Split engine: form-app.js first runs recomputeDerived() (demographics.bmi = round1(weight/height^2), functionalCapacity.estimatedMETs from exerciseTolerance - the persona states carry those derived values pre-filled and consistent), then calls detectAdditionalFlags(state) separately, so flags are pinned as expected.additionalFlags with flagsArgs [\"state\"]; the detector pushes in source order then stable-sorts high > medium > low. Quirks verified: AG-001 (age > 80) derives age from the frozen wall clock (2026-09-03), so a patient born exactly 80 years earlier is silent; CV-003 (stable IHD) is suppressed whenever recentMI is 'yes' while CV-004 needs recentMIWeeks < 12, so IHD with an MI 12+ weeks ago fires NO cardiovascular rule even though FLAG-CARDIAC-002 still fires on recentMI alone; HP-001 is likewise suppressed by cirrhosis 'yes' and COPD / diabetes / cirrhosis with a blank severity / control / Child-Pugh field fire nothing; OB-001 needs bmi >= 30 (29.8 is silent) and FC-001 needs METs < 4 ('climb-stairs' = 4 is silent); anaphylaxis flags are indexed by allergy array position and every non-empty allergy list adds FLAG-ALLERGY-001. Regenerate expected with: bin/test-personas pre-operative-assessment-by-patient --update",
+  "personas": [
+    {
+      "name": "Healthy 34-year-old for elective day-case arthroscopy - ASA I",
+      "description": "Baseline / best case: a never-smoker with no comorbidity, BMI 23.4 (70 kg / 173 cm), vigorous exercise (10 METs), occasional alcohol, no allergies, one uneventful previous anaesthetic, no airway predictors, not pregnant. Expect asaGrade 1, firedRules [] and additionalFlags [].",
+      "state": {
+        "demographics": {
+          "firstName": "Sophie",
+          "lastName": "Hartley",
+          "dateOfBirth": "1992-03-18",
+          "sex": "female",
+          "weight": 70,
+          "height": 173,
+          "bmi": 23.4,
+          "plannedProcedure": "Left knee arthroscopy and partial medial meniscectomy",
+          "procedureUrgency": "elective",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": "",
+          "mrsaHistory": "no",
+          "recentHospitalOrCareHomeAdmission": "no"
+        },
+        "cardiovascular": {
+          "hypertension": "no",
+          "hypertensionControlled": "",
+          "ischemicHeartDisease": "no",
+          "ihdDetails": "",
+          "heartFailure": "no",
+          "heartFailureNYHA": "",
+          "valvularDisease": "no",
+          "valvularDetails": "",
+          "arrhythmia": "no",
+          "arrhythmiaType": "",
+          "pacemaker": "no",
+          "recentMI": "no",
+          "recentMIWeeks": null,
+          "palpitationsOrBlackouts": "no",
+          "heartOrArterySurgery": "no",
+          "swollenAnkles": "no"
+        },
+        "respiratory": {
+          "asthma": "no",
+          "asthmaFrequency": "",
+          "copd": "no",
+          "copdSeverity": "",
+          "osa": "no",
+          "osaCPAP": "",
+          "smoking": "never",
+          "smokingPackYears": null,
+          "recentURTI": "no",
+          "snoring": "no",
+          "snoringLoud": "",
+          "collarSizeInches": 14,
+          "daytimeSleepiness": "no",
+          "observedApnoeaEpisodes": "no"
+        },
+        "renal": {
+          "ckd": "no",
+          "ckdStage": "",
+          "dialysis": "no",
+          "dialysisType": "",
+          "urinarySymptoms": "no",
+          "urinaryCatheterHistory": "no",
+          "prostateProblems": "no"
+        },
+        "hepatic": {
+          "liverDisease": "no",
+          "cirrhosis": "no",
+          "childPughScore": "",
+          "hepatitis": "no",
+          "hepatitisType": ""
+        },
+        "endocrine": {
+          "diabetes": "none",
+          "diabetesControl": "",
+          "diabetesOnInsulin": "",
+          "thyroidDisease": "no",
+          "thyroidType": "",
+          "adrenalInsufficiency": "no"
+        },
+        "neurological": {
+          "strokeOrTIA": "no",
+          "strokeDetails": "",
+          "epilepsy": "no",
+          "epilepsyControlled": "",
+          "neuromuscularDisease": "no",
+          "neuromuscularDetails": "",
+          "raisedICP": "no"
+        },
+        "haematological": {
+          "bleedingDisorder": "no",
+          "bleedingDetails": "",
+          "onAnticoagulants": "no",
+          "anticoagulantType": "",
+          "sickleCellDisease": "no",
+          "sickleCellTrait": "no",
+          "anaemia": "no",
+          "personalVteHistory": "no",
+          "familyVteHistory": "no",
+          "bloodTransfusionHistory": "no"
+        },
+        "musculoskeletalAirway": {
+          "rheumatoidArthritis": "no",
+          "cervicalSpineIssues": "no",
+          "limitedNeckMovement": "no",
+          "limitedMouthOpening": "no",
+          "dentalIssues": "no",
+          "dentalDetails": "",
+          "previousDifficultAirway": "no",
+          "mallampatiScore": "1",
+          "jointOrArthritisProblems": "no",
+          "backOrNeckProblems": "no",
+          "skinConditions": "no",
+          "pressureSoreRisk": "no"
+        },
+        "gastrointestinal": {
+          "gord": "no",
+          "hiatusHernia": "no",
+          "nausea": "no",
+          "bowelProblems": "no",
+          "foodIntolerances": "no",
+          "foodIntolerancesDetails": ""
+        },
+        "medications": [
+          {
+            "name": "Combined oral contraceptive (Rigevidon)",
+            "dose": "1 tablet",
+            "frequency": "once daily"
+          }
+        ],
+        "allergies": [],
+        "previousAnaesthesia": {
+          "previousAnaesthesia": "yes",
+          "anaesthesiaProblems": "no",
+          "anaesthesiaProblemDetails": "",
+          "familyMHHistory": "no",
+          "familyMHDetails": "",
+          "ponv": "no"
+        },
+        "socialHistory": {
+          "alcohol": "occasional",
+          "alcoholUnitsPerWeek": 4,
+          "recreationalDrugs": "no",
+          "drugDetails": "",
+          "bloodDonor": "yes",
+          "bodyPiercings": "yes"
+        },
+        "functionalCapacity": {
+          "exerciseTolerance": "vigorous-exercise",
+          "estimatedMETs": 10,
+          "mobilityAids": "no",
+          "recentDecline": "no",
+          "hearingProblems": "no",
+          "visionProblems": "no",
+          "balanceIssues": "no"
+        },
+        "pregnancy": {
+          "possiblyPregnant": "no",
+          "pregnancyConfirmed": "",
+          "gestationWeeks": null,
+          "contraceptiveOrHrtUse": "yes",
+          "lastMenstrualPeriod": "2026-08-20"
+        },
+        "cognitiveMentalHealth": {
+          "headInjuryRequiringHospitalisation": "no",
+          "memoryConcerns": "no",
+          "dementiaDiagnosis": "no",
+          "depressionOrAnxietyHistory": "no",
+          "depressionAnxietyImpactsDailyLife": "",
+          "depressionAnxietySeenDoctor": "",
+          "learningDifficulties": "no"
+        }
+      },
+      "expected": {
+        "asaGrade": 1,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "80-year-old on his birthday with IHD and an MI 20 weeks ago - rule gap, ASA II",
+      "description": "Non-critical edge case. Born 1946-09-03, so on the frozen clock (2026-09-03) he is exactly 80 and AG-001 (> 80) is silent. Ischaemic heart disease with recentMI 'yes' at 20 weeks suppresses CV-003 (stable IHD) while CV-004 needs < 12 weeks, so NO cardiovascular rule fires for the IHD - yet FLAG-CARDIAC-002 'Recent MI (20 weeks ago)' still fires (high). Controlled hypertension fires CV-001; COPD 'yes' with copdSeverity '' fires nothing; type 2 diabetes with diabetesControl '' fires nothing; BMI 29.8 (86 kg / 170 cm) is just under OB-001; 'climb-stairs' = 4 METs is just outside FC-001; OSA on CPAP fires RS-006 and FLAG-OSA-001 '(on CPAP)'; a single mild penicillin rash gives FLAG-ALLERGY-001 only; loose crown gives FLAG-DENTAL-001. Expect asaGrade 2; firedRules CV-001 then RS-006; additionalFlags after the stable sort: FLAG-CARDIAC-002 (high), FLAG-ALLERGY-001 (medium, pushed before the cardiac flag but sorted after it), FLAG-OSA-001 (medium), FLAG-DENTAL-001 (low).",
+      "state": {
+        "demographics": {
+          "firstName": "Arthur",
+          "lastName": "Pemberton",
+          "dateOfBirth": "1946-09-03",
+          "sex": "male",
+          "weight": 86,
+          "height": 170,
+          "bmi": 29.8,
+          "plannedProcedure": "Right cataract extraction with intraocular lens under local anaesthetic with sedation",
+          "procedureUrgency": "elective",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": "",
+          "mrsaHistory": "no",
+          "recentHospitalOrCareHomeAdmission": "yes"
+        },
+        "cardiovascular": {
+          "hypertension": "yes",
+          "hypertensionControlled": "yes",
+          "ischemicHeartDisease": "yes",
+          "ihdDetails": "NSTEMI April 2026, single stent to right coronary artery",
+          "heartFailure": "no",
+          "heartFailureNYHA": "",
+          "valvularDisease": "no",
+          "valvularDetails": "",
+          "arrhythmia": "no",
+          "arrhythmiaType": "",
+          "pacemaker": "no",
+          "recentMI": "yes",
+          "recentMIWeeks": 20,
+          "palpitationsOrBlackouts": "no",
+          "heartOrArterySurgery": "yes",
+          "swollenAnkles": "no"
+        },
+        "respiratory": {
+          "asthma": "no",
+          "asthmaFrequency": "",
+          "copd": "yes",
+          "copdSeverity": "",
+          "osa": "yes",
+          "osaCPAP": "yes",
+          "smoking": "ex",
+          "smokingPackYears": 30,
+          "recentURTI": "no",
+          "snoring": "yes",
+          "snoringLoud": "yes",
+          "collarSizeInches": 17,
+          "daytimeSleepiness": "no",
+          "observedApnoeaEpisodes": "yes"
+        },
+        "renal": {
+          "ckd": "no",
+          "ckdStage": "",
+          "dialysis": "no",
+          "dialysisType": "",
+          "urinarySymptoms": "yes",
+          "urinaryCatheterHistory": "no",
+          "prostateProblems": "yes"
+        },
+        "hepatic": {
+          "liverDisease": "no",
+          "cirrhosis": "no",
+          "childPughScore": "",
+          "hepatitis": "no",
+          "hepatitisType": ""
+        },
+        "endocrine": {
+          "diabetes": "type2",
+          "diabetesControl": "",
+          "diabetesOnInsulin": "no",
+          "thyroidDisease": "no",
+          "thyroidType": "",
+          "adrenalInsufficiency": "no"
+        },
+        "neurological": {
+          "strokeOrTIA": "no",
+          "strokeDetails": "",
+          "epilepsy": "no",
+          "epilepsyControlled": "",
+          "neuromuscularDisease": "no",
+          "neuromuscularDetails": "",
+          "raisedICP": "no"
+        },
+        "haematological": {
+          "bleedingDisorder": "no",
+          "bleedingDetails": "",
+          "onAnticoagulants": "no",
+          "anticoagulantType": "",
+          "sickleCellDisease": "no",
+          "sickleCellTrait": "no",
+          "anaemia": "no",
+          "personalVteHistory": "no",
+          "familyVteHistory": "no",
+          "bloodTransfusionHistory": "no"
+        },
+        "musculoskeletalAirway": {
+          "rheumatoidArthritis": "no",
+          "cervicalSpineIssues": "no",
+          "limitedNeckMovement": "no",
+          "limitedMouthOpening": "no",
+          "dentalIssues": "yes",
+          "dentalDetails": "Loose crown upper left incisor",
+          "previousDifficultAirway": "no",
+          "mallampatiScore": "2",
+          "jointOrArthritisProblems": "yes",
+          "backOrNeckProblems": "no",
+          "skinConditions": "no",
+          "pressureSoreRisk": "no"
+        },
+        "gastrointestinal": {
+          "gord": "no",
+          "hiatusHernia": "no",
+          "nausea": "no",
+          "bowelProblems": "no",
+          "foodIntolerances": "no",
+          "foodIntolerancesDetails": ""
+        },
+        "medications": [
+          {
+            "name": "Aspirin",
+            "dose": "75 mg",
+            "frequency": "once daily"
+          },
+          {
+            "name": "Ticagrelor",
+            "dose": "90 mg",
+            "frequency": "twice daily"
+          },
+          {
+            "name": "Atorvastatin",
+            "dose": "80 mg",
+            "frequency": "at night"
+          },
+          {
+            "name": "Bisoprolol",
+            "dose": "2.5 mg",
+            "frequency": "once daily"
+          },
+          {
+            "name": "Ramipril",
+            "dose": "5 mg",
+            "frequency": "once daily"
+          },
+          {
+            "name": "Metformin",
+            "dose": "500 mg",
+            "frequency": "twice daily"
+          },
+          {
+            "name": "Tiotropium inhaler",
+            "dose": "18 micrograms",
+            "frequency": "once daily"
+          }
+        ],
+        "allergies": [
+          {
+            "allergen": "Penicillin",
+            "reaction": "Rash as a child",
+            "severity": "mild"
+          }
+        ],
+        "previousAnaesthesia": {
+          "previousAnaesthesia": "yes",
+          "anaesthesiaProblems": "no",
+          "anaesthesiaProblemDetails": "",
+          "familyMHHistory": "no",
+          "familyMHDetails": "",
+          "ponv": "no"
+        },
+        "socialHistory": {
+          "alcohol": "moderate",
+          "alcoholUnitsPerWeek": 10,
+          "recreationalDrugs": "no",
+          "drugDetails": "",
+          "bloodDonor": "no",
+          "bodyPiercings": "no"
+        },
+        "functionalCapacity": {
+          "exerciseTolerance": "climb-stairs",
+          "estimatedMETs": 4,
+          "mobilityAids": "no",
+          "recentDecline": "no",
+          "hearingProblems": "yes",
+          "visionProblems": "yes",
+          "balanceIssues": "no"
+        },
+        "pregnancy": {
+          "possiblyPregnant": "",
+          "pregnancyConfirmed": "",
+          "gestationWeeks": null,
+          "contraceptiveOrHrtUse": "",
+          "lastMenstrualPeriod": ""
+        },
+        "cognitiveMentalHealth": {
+          "headInjuryRequiringHospitalisation": "no",
+          "memoryConcerns": "no",
+          "dementiaDiagnosis": "no",
+          "depressionOrAnxietyHistory": "no",
+          "depressionAnxietyImpactsDailyLife": "",
+          "depressionAnxietySeenDoctor": "",
+          "learningDifficulties": "no"
+        }
+      },
+      "expected": {
+        "asaGrade": 2,
+        "firedRules": [
+          {
+            "id": "CV-001",
+            "system": "Cardiovascular",
+            "description": "Controlled hypertension",
+            "grade": 2
+          },
+          {
+            "id": "RS-006",
+            "system": "Respiratory",
+            "description": "Obstructive sleep apnoea",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CARDIAC-002",
+            "category": "Cardiac",
+            "message": "Recent MI (20 weeks ago)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "1 allergy/allergies documented",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OSA-001",
+            "category": "Respiratory",
+            "message": "OSA (on CPAP) - post-op monitoring",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DENTAL-001",
+            "category": "Airway",
+            "message": "Dental issues: Loose crown upper left incisor",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Emergency laparotomy in a 68-year-old with multi-system disease, difficult airway and anaphylaxis - ASA IV",
+      "description": "Critical / highest-severity persona: uncontrolled hypertension (CV-002), MI 6 weeks ago (CV-004 grade 4; CV-003 suppressed), NYHA IV heart failure (CV-007 grade 4), valvular disease (CV-008), AF (CV-009), pacemaker (CV-010), severe-persistent asthma (RS-002), severe COPD (RS-005), OSA without CPAP (RS-006), current smoker (RS-007), CKD stage 5 on haemodialysis (RN-002, RN-003), Child-Pugh C cirrhosis (HP-003 grade 4; HP-001 suppressed), poorly controlled insulin-treated T2DM (EN-002), hypothyroidism (EN-003), adrenal insufficiency (EN-004), previous stroke (NR-001), uncontrolled epilepsy (NR-003), von Willebrand disease (HM-001), warfarin (HM-002), anaemia (HM-004), BMI 42.5 (OB-002; 120 kg / 168 cm), unable to exercise = 1 MET (FC-001), heavy alcohol (SH-001); age 68 so AG-001 silent. Expect asaGrade 4 and 24 fired rules in that catalogue order. Airway: previous difficult airway, limited mouth opening, limited neck movement, Mallampati 4, cervical spine disease and rheumatoid arthritis; allergies penicillin (anaphylaxis, index 0) and latex (mild); family MH history; previous anaesthetic problem; GORD; recent URTI; loose teeth; emergency urgency. Expect 21 flags after the stable sort - 13 high in push order: FLAG-AIRWAY-001, -002, -003, -004 ('Mallampati Class 4'), FLAG-ALLERGY-ANAPH-0, FLAG-ANTICOAG-001 ('Warfarin'), FLAG-HAEM-001, FLAG-MH-001, FLAG-ANAES-001, FLAG-CARDIAC-001, FLAG-CARDIAC-002 ('6 weeks ago'), FLAG-ADRENAL-001, FLAG-EMERG-001; then 7 medium: FLAG-AIRWAY-005, FLAG-AIRWAY-006, FLAG-ALLERGY-001 ('2 allergy/allergies documented'), FLAG-GI-001, FLAG-OSA-001 ('(no CPAP)'), FLAG-URTI-001, FLAG-INSULIN-001; then low FLAG-DENTAL-001.",
+      "state": {
+        "demographics": {
+          "firstName": "Raymond",
+          "lastName": "Kaminski",
+          "dateOfBirth": "1958-01-27",
+          "sex": "male",
+          "weight": 120,
+          "height": 168,
+          "bmi": 42.5,
+          "plannedProcedure": "Emergency laparotomy for perforated sigmoid diverticulum",
+          "procedureUrgency": "emergency",
+          "cancerHistory": "no",
+          "cancerHistoryDetails": "",
+          "mrsaHistory": "yes",
+          "recentHospitalOrCareHomeAdmission": "yes"
+        },
+        "cardiovascular": {
+          "hypertension": "yes",
+          "hypertensionControlled": "no",
+          "ischemicHeartDisease": "yes",
+          "ihdDetails": "Three-vessel disease; STEMI July 2026 treated with PCI",
+          "heartFailure": "yes",
+          "heartFailureNYHA": "4",
+          "valvularDisease": "yes",
+          "valvularDetails": "Severe aortic stenosis awaiting TAVI",
+          "arrhythmia": "yes",
+          "arrhythmiaType": "Permanent atrial fibrillation",
+          "pacemaker": "yes",
+          "recentMI": "yes",
+          "recentMIWeeks": 6,
+          "palpitationsOrBlackouts": "yes",
+          "heartOrArterySurgery": "yes",
+          "swollenAnkles": "yes"
+        },
+        "respiratory": {
+          "asthma": "yes",
+          "asthmaFrequency": "severe-persistent",
+          "copd": "yes",
+          "copdSeverity": "severe",
+          "osa": "yes",
+          "osaCPAP": "no",
+          "smoking": "current",
+          "smokingPackYears": 60,
+          "recentURTI": "yes",
+          "snoring": "yes",
+          "snoringLoud": "yes",
+          "collarSizeInches": 19,
+          "daytimeSleepiness": "yes",
+          "observedApnoeaEpisodes": "yes"
+        },
+        "renal": {
+          "ckd": "yes",
+          "ckdStage": "5",
+          "dialysis": "yes",
+          "dialysisType": "haemodialysis",
+          "urinarySymptoms": "no",
+          "urinaryCatheterHistory": "yes",
+          "prostateProblems": "yes"
+        },
+        "hepatic": {
+          "liverDisease": "yes",
+          "cirrhosis": "yes",
+          "childPughScore": "C",
+          "hepatitis": "yes",
+          "hepatitisType": "Hepatitis C, treated 2019"
+        },
+        "endocrine": {
+          "diabetes": "type2",
+          "diabetesControl": "poorly-controlled",
+          "diabetesOnInsulin": "yes",
+          "thyroidDisease": "yes",
+          "thyroidType": "hypothyroid",
+          "adrenalInsufficiency": "yes"
+        },
+        "neurological": {
+          "strokeOrTIA": "yes",
+          "strokeDetails": "Left MCA infarct 2022 with residual right-arm weakness",
+          "epilepsy": "yes",
+          "epilepsyControlled": "no",
+          "neuromuscularDisease": "no",
+          "neuromuscularDetails": "",
+          "raisedICP": "no"
+        },
+        "haematological": {
+          "bleedingDisorder": "yes",
+          "bleedingDetails": "Type 1 von Willebrand disease",
+          "onAnticoagulants": "yes",
+          "anticoagulantType": "Warfarin",
+          "sickleCellDisease": "no",
+          "sickleCellTrait": "no",
+          "anaemia": "yes",
+          "personalVteHistory": "yes",
+          "familyVteHistory": "no",
+          "bloodTransfusionHistory": "yes"
+        },
+        "musculoskeletalAirway": {
+          "rheumatoidArthritis": "yes",
+          "cervicalSpineIssues": "yes",
+          "limitedNeckMovement": "yes",
+          "limitedMouthOpening": "yes",
+          "dentalIssues": "yes",
+          "dentalDetails": "Several loose lower teeth; upper denture",
+          "previousDifficultAirway": "yes",
+          "mallampatiScore": "4",
+          "jointOrArthritisProblems": "yes",
+          "backOrNeckProblems": "yes",
+          "skinConditions": "no",
+          "pressureSoreRisk": "yes"
+        },
+        "gastrointestinal": {
+          "gord": "yes",
+          "hiatusHernia": "yes",
+          "nausea": "yes",
+          "bowelProblems": "yes",
+          "foodIntolerances": "no",
+          "foodIntolerancesDetails": ""
+        },
+        "medications": [
+          {
+            "name": "Warfarin",
+            "dose": "per INR",
+            "frequency": "once daily"
+          },
+          {
+            "name": "Insulin glargine",
+            "dose": "32 units",
+            "frequency": "at night"
+          },
+          {
+            "name": "Hydrocortisone",
+            "dose": "10 mg / 5 mg / 5 mg",
+            "frequency": "three times daily"
+          },
+          {
+            "name": "Levothyroxine",
+            "dose": "125 micrograms",
+            "frequency": "once daily"
+          },
+          {
+            "name": "Levetiracetam",
+            "dose": "1 g",
+            "frequency": "twice daily"
+          },
+          {
+            "name": "Furosemide",
+            "dose": "80 mg",
+            "frequency": "once daily"
+          }
+        ],
+        "allergies": [
+          {
+            "allergen": "Penicillin",
+            "reaction": "Anaphylaxis 2015 - ICU admission",
+            "severity": "anaphylaxis"
+          },
+          {
+            "allergen": "Latex",
+            "reaction": "Contact urticaria",
+            "severity": "mild"
+          }
+        ],
+        "previousAnaesthesia": {
+          "previousAnaesthesia": "yes",
+          "anaesthesiaProblems": "yes",
+          "anaesthesiaProblemDetails": "Failed intubation 2019, awake fibreoptic required",
+          "familyMHHistory": "yes",
+          "familyMHDetails": "Brother had a malignant hyperthermia crisis during appendicectomy",
+          "ponv": "yes"
+        },
+        "socialHistory": {
+          "alcohol": "heavy",
+          "alcoholUnitsPerWeek": 50,
+          "recreationalDrugs": "no",
+          "drugDetails": "",
+          "bloodDonor": "no",
+          "bodyPiercings": "no"
+        },
+        "functionalCapacity": {
+          "exerciseTolerance": "unable",
+          "estimatedMETs": 1,
+          "mobilityAids": "yes",
+          "recentDecline": "yes",
+          "hearingProblems": "yes",
+          "visionProblems": "yes",
+          "balanceIssues": "yes"
+        },
+        "pregnancy": {
+          "possiblyPregnant": "",
+          "pregnancyConfirmed": "",
+          "gestationWeeks": null,
+          "contraceptiveOrHrtUse": "",
+          "lastMenstrualPeriod": ""
+        },
+        "cognitiveMentalHealth": {
+          "headInjuryRequiringHospitalisation": "no",
+          "memoryConcerns": "yes",
+          "dementiaDiagnosis": "no",
+          "depressionOrAnxietyHistory": "yes",
+          "depressionAnxietyImpactsDailyLife": "yes",
+          "depressionAnxietySeenDoctor": "yes",
+          "learningDifficulties": "no"
+        }
+      },
+      "expected": {
+        "asaGrade": 4,
+        "firedRules": [
+          {
+            "id": "CV-002",
+            "system": "Cardiovascular",
+            "description": "Uncontrolled hypertension",
+            "grade": 3
+          },
+          {
+            "id": "CV-004",
+            "system": "Cardiovascular",
+            "description": "Recent myocardial infarction (<3 months)",
+            "grade": 4
+          },
+          {
+            "id": "CV-007",
+            "system": "Cardiovascular",
+            "description": "Heart failure NYHA IV",
+            "grade": 4
+          },
+          {
+            "id": "CV-008",
+            "system": "Cardiovascular",
+            "description": "Valvular heart disease",
+            "grade": 3
+          },
+          {
+            "id": "CV-009",
+            "system": "Cardiovascular",
+            "description": "Arrhythmia",
+            "grade": 2
+          },
+          {
+            "id": "CV-010",
+            "system": "Cardiovascular",
+            "description": "Pacemaker/ICD in situ",
+            "grade": 2
+          },
+          {
+            "id": "RS-002",
+            "system": "Respiratory",
+            "description": "Moderate-severe persistent asthma",
+            "grade": 3
+          },
+          {
+            "id": "RS-005",
+            "system": "Respiratory",
+            "description": "Severe COPD",
+            "grade": 3
+          },
+          {
+            "id": "RS-006",
+            "system": "Respiratory",
+            "description": "Obstructive sleep apnoea",
+            "grade": 2
+          },
+          {
+            "id": "RS-007",
+            "system": "Respiratory",
+            "description": "Current smoker",
+            "grade": 2
+          },
+          {
+            "id": "RN-002",
+            "system": "Renal",
+            "description": "CKD Stage 4-5",
+            "grade": 3
+          },
+          {
+            "id": "RN-003",
+            "system": "Renal",
+            "description": "On dialysis",
+            "grade": 3
+          },
+          {
+            "id": "HP-003",
+            "system": "Hepatic",
+            "description": "Cirrhosis Child-Pugh B/C",
+            "grade": 4
+          },
+          {
+            "id": "EN-002",
+            "system": "Endocrine",
+            "description": "Poorly controlled diabetes",
+            "grade": 3
+          },
+          {
+            "id": "EN-003",
+            "system": "Endocrine",
+            "description": "Thyroid disease",
+            "grade": 2
+          },
+          {
+            "id": "EN-004",
+            "system": "Endocrine",
+            "description": "Adrenal insufficiency",
+            "grade": 3
+          },
+          {
+            "id": "NR-001",
+            "system": "Neurological",
+            "description": "Previous stroke/TIA",
+            "grade": 3
+          },
+          {
+            "id": "NR-003",
+            "system": "Neurological",
+            "description": "Uncontrolled epilepsy",
+            "grade": 3
+          },
+          {
+            "id": "HM-001",
+            "system": "Haematological",
+            "description": "Bleeding disorder",
+            "grade": 3
+          },
+          {
+            "id": "HM-002",
+            "system": "Haematological",
+            "description": "On anticoagulants",
+            "grade": 2
+          },
+          {
+            "id": "HM-004",
+            "system": "Haematological",
+            "description": "Anaemia",
+            "grade": 2
+          },
+          {
+            "id": "OB-002",
+            "system": "Obesity",
+            "description": "BMI ≥40 (Morbid obesity)",
+            "grade": 3
+          },
+          {
+            "id": "FC-001",
+            "system": "Functional Capacity",
+            "description": "Poor functional capacity (<4 METs)",
+            "grade": 3
+          },
+          {
+            "id": "SH-001",
+            "system": "Social",
+            "description": "Heavy alcohol use",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-AIRWAY-001",
+            "category": "Airway",
+            "message": "Previous difficult airway reported",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AIRWAY-002",
+            "category": "Airway",
+            "message": "Limited mouth opening",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AIRWAY-003",
+            "category": "Airway",
+            "message": "Limited neck movement",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AIRWAY-004",
+            "category": "Airway",
+            "message": "Mallampati Class 4",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ALLERGY-ANAPH-0",
+            "category": "Allergy",
+            "message": "ANAPHYLAXIS history: Penicillin",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANTICOAG-001",
+            "category": "Anticoagulation",
+            "message": "On anticoagulants: Warfarin",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HAEM-001",
+            "category": "Haematological",
+            "message": "Bleeding disorder reported",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MH-001",
+            "category": "Malignant Hyperthermia",
+            "message": "Family history of malignant hyperthermia - AVOID TRIGGERS",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANAES-001",
+            "category": "Previous Anaesthesia",
+            "message": "Previous anaesthesia problems: Failed intubation 2019, awake fibreoptic required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CARDIAC-001",
+            "category": "Cardiac",
+            "message": "Pacemaker/ICD in situ - check device, magnet availability",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CARDIAC-002",
+            "category": "Cardiac",
+            "message": "Recent MI (6 weeks ago)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ADRENAL-001",
+            "category": "Endocrine",
+            "message": "Adrenal insufficiency - stress-dose steroids may be required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-EMERG-001",
+            "category": "Procedure",
+            "message": "Emergency procedure - limited time for optimisation",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-AIRWAY-005",
+            "category": "Airway",
+            "message": "Cervical spine issues - consider C-spine precautions",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-AIRWAY-006",
+            "category": "Airway",
+            "message": "Rheumatoid arthritis - assess atlanto-axial stability",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "2 allergy/allergies documented",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-GI-001",
+            "category": "Aspiration Risk",
+            "message": "GORD/hiatus hernia - aspiration risk, consider RSI",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OSA-001",
+            "category": "Respiratory",
+            "message": "OSA (no CPAP) - post-op monitoring",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-URTI-001",
+            "category": "Respiratory",
+            "message": "Recent URTI - consider postponing elective surgery",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INSULIN-001",
+            "category": "Endocrine",
+            "message": "On insulin - perioperative glucose management plan needed",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DENTAL-001",
+            "category": "Airway",
+            "message": "Dental issues: Several loose lower teeth; upper denture",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

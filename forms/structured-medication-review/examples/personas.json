@@ -1,0 +1,619 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateSmrGrade",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Split engine. calculateSmrGrade(state) returns { medicineCount, regularMedicineCount, anticholinergicBurdenScore, polypharmacyBand, anticholinergicBand, burdenBand, reviewStatus, stopFlags, startFlags, firedRules } - no timestamp. Bands: regular >= 10 hyperpolypharmacy / >= 5 polypharmacy / else none; ACB >= 3 significant; burdenBand is the worse of the two (high if either hyperpolypharmacy or ACB >= 3, moderate if polypharmacy, else low). firedRules ALWAYS carries the four summary rows R-POLYPHARMACY-01, R-ANTICHOLINERGIC-BURDEN-01, R-BURDEN-BAND-01, R-REVIEW-STATUS-01 (even for an empty review), followed by one R-STOPP-01 per medicine with a stoppCriterion and then one R-START-01 per startCriterion - the STOPP/START ids repeat, so rule count = 4 + stopFlags + startFlags. Flags are a SEPARATE export mirrored from form-app.js submitForm(): detectFlaggedIssues(state, grade), so flagsArgs is [\"state\", \"result\"]. Quirks verified: a null anticholinergicBurdenPoints contributes 0; only isRegular === 'yes' counts toward polypharmacy (medicineCount still counts PRN rows); reviewStatus is 'complete' only when problems, whatMatters, monitoringDue, sharedDecisions are filled, reviewCompleted === 'yes', AND every medicine has an indication and an adherence that is neither '' nor 'unknown' - so a single 'unknown' adherence forces 'incomplete' even when the clinician marked the review done, while 'unknown' does NOT raise F-ADHERENCE-CONCERN-001 (that needs partial/poor); a monitoringUpToDate of 'na' or '' is not a gap (only 'no'); F-HIGH-RISK-NO-INDICATION-001 fires for isHighRisk 'yes' when indicationRecorded === 'no' OR the indication text is blank (either is enough, so a documented indication with indicationRecorded 'no' still flags); F-MISSING-MONITORING-001 joins the per-medicine gap count and overdueMonitoringCount with '; '; the adherence / high-risk name lists fall back to 'Medicine N' where N is the index in the FILTERED list, not the medicine list. Flags are stable-sorted high > medium > low in push order (ACB, STOPP, MONITORING, HIGH-RISK, then START, ADHERENCE, then INCOMPLETE). ORACLE LIMITATION: bin/test-personas only calls the split detector when the grader result has no key matching /flag|issue/i that is an array - and this grader's own stopFlags / startFlags match that heuristic - so expected carries NO flaggedIssues key for this form even though flagsHint/flagsArgs are set (they still document the real form-app.js contract). The flaggedIssues listed in each persona description were verified by calling detectFlaggedIssues(state, grade) directly in node against the pinned state. Regenerate expected with: bin/test-personas structured-medication-review --update",
+  "personas": [
+    {
+      "name": "Complete review - three regular medicines, no burden",
+      "description": "Hannah Whitlock, 40-64, fit, seen face to face at the GP practice by the PCN clinical pharmacist. Three regular medicines (levothyroxine, sertraline, colecalciferol), all ACB 0, indications recorded, adherence good, TFT monitoring up to date, no STOPP/START criteria, overdueMonitoringCount 0, every required section filled and reviewCompleted 'yes'. Hand-derived: medicineCount 3, regularMedicineCount 3, ACB 0, polypharmacyBand 'none', anticholinergicBand 'low', burdenBand 'low', reviewStatus 'complete', stopFlags [], startFlags [], exactly the 4 summary firedRules, flaggedIssues [].",
+      "state": {
+        "context": {
+          "clinicianName": "Priya Raman",
+          "clinicianRole": "clinical-pharmacist",
+          "reviewedAt": "2026-08-27T10:30",
+          "careSetting": "gp-practice",
+          "consultationMode": "face-to-face"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 943 476 5919",
+          "ageBand": "40-64",
+          "sex": "female",
+          "frailtyStatus": "fit",
+          "livesInCareHome": "no",
+          "longTermConditions": "Hypothyroidism; recurrent depression (in remission)"
+        },
+        "problems": {
+          "presentingProblems": "Routine annual SMR. No new symptoms. TSH 2.1 mU/L in July 2026.",
+          "patientReportedIssues": "None. Occasional forgotten evening dose of sertraline when travelling.",
+          "whatMattersToPatient": "Staying well enough to keep running the family bakery and to avoid more tablets."
+        },
+        "medicines": [
+          {
+            "drugName": "Levothyroxine",
+            "formStrength": "100 microgram tablets",
+            "doseRegimen": "One tablet every morning before food",
+            "indication": "Primary hypothyroidism",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Sertraline",
+            "formStrength": "50 mg tablets",
+            "doseRegimen": "One tablet once daily",
+            "indication": "Recurrent depressive disorder - maintenance",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Colecalciferol",
+            "formStrength": "800 unit capsules",
+            "doseRegimen": "One capsule once daily",
+            "indication": "Vitamin D insufficiency (25-OH vitamin D 38 nmol/L, 2025)",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          }
+        ],
+        "monitoring": {
+          "monitoringDue": "TSH annually - next due July 2027. No other monitoring required.",
+          "overdueMonitoringCount": 0
+        },
+        "goals": {
+          "sharedDecisions": "Continue all three medicines unchanged. Patient to use a phone reminder for sertraline when away."
+        },
+        "plan": {
+          "followUpPlan": "Routine SMR in 12 months. Earlier review if mood changes.",
+          "followUpDate": "2027-08-27",
+          "reviewCompleted": "yes"
+        },
+        "note": {
+          "clinicalNote": "Straightforward review. No changes made."
+        }
+      },
+      "expected": {
+        "medicineCount": 3,
+        "regularMedicineCount": 3,
+        "anticholinergicBurdenScore": 0,
+        "polypharmacyBand": "none",
+        "anticholinergicBand": "low",
+        "burdenBand": "low",
+        "reviewStatus": "complete",
+        "stopFlags": [],
+        "startFlags": [],
+        "firedRules": [
+          {
+            "id": "R-POLYPHARMACY-01",
+            "category": "polypharmacy",
+            "description": "3 regular medicine(s) — No polypharmacy (< 5 regular)"
+          },
+          {
+            "id": "R-ANTICHOLINERGIC-BURDEN-01",
+            "category": "anticholinergic-burden",
+            "description": "Anticholinergic burden score 0 — Low (ACB 0-2)"
+          },
+          {
+            "id": "R-BURDEN-BAND-01",
+            "category": "burden-band",
+            "description": "Composite Low burden (worse of polypharmacy and anticholinergic bands)"
+          },
+          {
+            "id": "R-REVIEW-STATUS-01",
+            "category": "review-status",
+            "description": "Review status: Complete"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Threshold polypharmacy - 5 regular, ACB 2, one adherence 'unknown'",
+      "description": "Ravi Chandrasekaran, 75-84, mild frailty, telephone review. Six medicines but only five regular (salbutamol is PRN), so regularMedicineCount 5 sits exactly on the polypharmacy threshold; ACB totals exactly 2 (carbamazepine 2, apixaban left null which contributes 0) so anticholinergicBand stays 'low' and burdenBand is 'moderate'. Amlodipine adherence is 'unknown' (patient unsure over the phone) - the clinician marked reviewCompleted 'yes' and every section is filled, but the engine still returns 'incomplete' because 'unknown' fails the every-medicine check, while NOT raising an adherence-concern flag. Apixaban is high-risk with its indication recorded, so no high-risk flag. One START criterion on the salbutamol row (inhaled corticosteroid), no STOPP, monitoring all up to date, overdueMonitoringCount 0. Hand-derived: medicineCount 6, regular 5, ACB 2, 'polypharmacy' / 'low' / 'moderate', reviewStatus 'incomplete', stopFlags [], startFlags [Salbutamol], firedRules = 4 summary + R-START-01 (5 rows), flaggedIssues = F-START-OMISSION-001 (medium, '1 START criterion / criteria identified (Salbutamol)') then F-INCOMPLETE-001 (low) - 2 flags.",
+      "state": {
+        "context": {
+          "clinicianName": "Tom Ellery",
+          "clinicianRole": "clinical-pharmacist",
+          "reviewedAt": "2026-09-01T14:15",
+          "careSetting": "pcn",
+          "consultationMode": "telephone"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 401 233 8876",
+          "ageBand": "75-84",
+          "sex": "male",
+          "frailtyStatus": "mild",
+          "livesInCareHome": "no",
+          "longTermConditions": "Type 2 diabetes; hypertension; atrial fibrillation; trigeminal neuralgia; asthma"
+        },
+        "problems": {
+          "presentingProblems": "Annual SMR. Reports two asthma flare-ups over the summer needing extra salbutamol. HbA1c 52 mmol/mol.",
+          "patientReportedIssues": "Uses the blue inhaler most days. Not sure whether he takes the amlodipine every day - his daughter fills the dosette box.",
+          "whatMattersToPatient": "Being able to walk to the temple and look after his grandchildren without getting breathless."
+        },
+        "medicines": [
+          {
+            "drugName": "Metformin",
+            "formStrength": "500 mg tablets",
+            "doseRegimen": "One tablet twice daily with meals",
+            "indication": "Type 2 diabetes mellitus",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Gliclazide",
+            "formStrength": "80 mg tablets",
+            "doseRegimen": "One tablet with breakfast",
+            "indication": "Type 2 diabetes mellitus",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Amlodipine",
+            "formStrength": "5 mg tablets",
+            "doseRegimen": "One tablet once daily",
+            "indication": "Hypertension",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "unknown",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Carbamazepine",
+            "formStrength": "200 mg modified-release tablets",
+            "doseRegimen": "One tablet twice daily",
+            "indication": "Trigeminal neuralgia",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 2,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Apixaban",
+            "formStrength": "5 mg tablets",
+            "doseRegimen": "One tablet twice daily",
+            "indication": "Stroke prevention in non-valvular atrial fibrillation (CHA2DS2-VASc 4)",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "yes",
+            "highRiskClass": "anticoagulant",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": null,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Salbutamol",
+            "formStrength": "100 microgram/dose inhaler",
+            "doseRegimen": "Two puffs when required, up to four times daily",
+            "indication": "Asthma - reliever",
+            "indicationRecorded": "yes",
+            "isRegular": "no",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": "START E: regular inhaled corticosteroid - using reliever most days with two exacerbations this summer"
+          }
+        ],
+        "monitoring": {
+          "monitoringDue": "HbA1c, U&E, FBC and carbamazepine level all done August 2026 - next due February 2027. Renal function for apixaban dosing in date.",
+          "overdueMonitoringCount": 0
+        },
+        "goals": {
+          "sharedDecisions": "Agreed to refer to the practice asthma nurse to start a maintenance inhaler. Daughter to confirm amlodipine adherence and call back."
+        },
+        "plan": {
+          "followUpPlan": "Asthma nurse appointment within two weeks; pharmacist to phone daughter re dosette box; SMR in 12 months.",
+          "followUpDate": "2026-09-15",
+          "reviewCompleted": "yes"
+        },
+        "note": {
+          "clinicalNote": "Telephone review; adherence for amlodipine could not be confirmed and is recorded as unknown pending the daughter's call."
+        }
+      },
+      "expected": {
+        "medicineCount": 6,
+        "regularMedicineCount": 5,
+        "anticholinergicBurdenScore": 2,
+        "polypharmacyBand": "polypharmacy",
+        "anticholinergicBand": "low",
+        "burdenBand": "moderate",
+        "reviewStatus": "incomplete",
+        "stopFlags": [],
+        "startFlags": [
+          {
+            "drugName": "Salbutamol",
+            "criterion": "START E: regular inhaled corticosteroid - using reliever most days with two exacerbations this summer"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-POLYPHARMACY-01",
+            "category": "polypharmacy",
+            "description": "5 regular medicine(s) — Polypharmacy (5-9 regular)"
+          },
+          {
+            "id": "R-ANTICHOLINERGIC-BURDEN-01",
+            "category": "anticholinergic-burden",
+            "description": "Anticholinergic burden score 2 — Low (ACB 0-2)"
+          },
+          {
+            "id": "R-BURDEN-BAND-01",
+            "category": "burden-band",
+            "description": "Composite Moderate burden (worse of polypharmacy and anticholinergic bands)"
+          },
+          {
+            "id": "R-REVIEW-STATUS-01",
+            "category": "review-status",
+            "description": "Review status: Incomplete"
+          },
+          {
+            "id": "R-START-01",
+            "category": "start",
+            "description": "START — Salbutamol: START E: regular inhaled corticosteroid - using reliever most days with two exacerbations this summer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Care-home hyperpolypharmacy - ACB 7, lithium and warfarin unmonitored",
+      "description": "Eileen Prendergast, 85 and over, severe frailty, care-home resident reviewed on a home visit. Eleven medicines, ten regular (paracetamol PRN, ACB null contributes 0). ACB = amitriptyline 3 + oxybutynin 3 + furosemide 1 = 7. STOPP criteria on amitriptyline and oxybutynin; START (folic acid) on the methotrexate row. Monitoring gaps: lithium and warfarin both monitoringRequired 'yes' / upToDate 'no', plus overdueMonitoringCount 2. Adherence partial (lithium) and poor (warfarin). High-risk without indication: warfarin (indication blank) and methotrexate (indication text present but indicationRecorded 'no' - the OR quirk); oxybutynin also has indicationRecorded 'no' but is not high-risk so it is not listed. reviewCompleted 'no'. Hand-derived: medicineCount 11, regular 10, ACB 7, 'hyperpolypharmacy' / 'significant' / 'high', reviewStatus 'incomplete', stopFlags [Amitriptyline, Oxybutynin], startFlags [Methotrexate], firedRules = 4 summary + 2 x R-STOPP-01 + 1 x R-START-01 (7 rows). flaggedIssues, all seven detectors, stable-sorted: F-HIGH-ACB-001 ('score 7'), F-STOPP-TRIGGER-001 ('2 ... (Amitriptyline, Oxybutynin)'), F-MISSING-MONITORING-001 ('2 medicine(s) with monitoring not up to date; 2 overdue monitoring item(s)'), F-HIGH-RISK-NO-INDICATION-001 ('2 ... (Warfarin, Methotrexate)') [high]; F-START-OMISSION-001 ('(Methotrexate)'), F-ADHERENCE-CONCERN-001 ('2 ... (Lithium carbonate, Warfarin)') [medium]; F-INCOMPLETE-001 [low].",
+      "state": {
+        "context": {
+          "clinicianName": "Dr Fiona McAllister",
+          "clinicianRole": "gp",
+          "reviewedAt": "2026-09-02T11:00",
+          "careSetting": "care-home",
+          "consultationMode": "home-visit"
+        },
+        "identification": {
+          "patientIdentifier": "NHS 612 908 3341",
+          "ageBand": "85-plus",
+          "sex": "female",
+          "frailtyStatus": "severe",
+          "livesInCareHome": "yes",
+          "longTermConditions": "Bipolar affective disorder; atrial fibrillation; rheumatoid arthritis; heart failure; hypertension; overactive bladder; chronic low back pain; mixed dementia"
+        },
+        "problems": {
+          "presentingProblems": "Two falls in the last month, increasing confusion and daytime drowsiness reported by care staff. INR not checked for 11 weeks; last lithium level March 2026.",
+          "patientReportedIssues": "Feels dizzy on standing and 'muddled'. Dislikes the number of tablets. Spits out the warfarin some evenings.",
+          "whatMattersToPatient": "Wants to feel clear-headed enough to enjoy her daughter's visits and to stop falling."
+        },
+        "medicines": [
+          {
+            "drugName": "Amitriptyline",
+            "formStrength": "25 mg tablets",
+            "doseRegimen": "One tablet at night",
+            "indication": "Chronic low back pain",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 3,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "yes",
+            "stoppCriterion": "STOPP D8: tricyclic antidepressant in a patient with dementia and recurrent falls",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Oxybutynin",
+            "formStrength": "5 mg tablets",
+            "doseRegimen": "One tablet twice daily",
+            "indication": "",
+            "indicationRecorded": "no",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 3,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "yes",
+            "stoppCriterion": "STOPP D11: strongly anticholinergic antimuscarinic in a patient with dementia",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Lithium carbonate",
+            "formStrength": "400 mg modified-release tablets",
+            "doseRegimen": "One tablet at night",
+            "indication": "Bipolar affective disorder - prophylaxis",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "yes",
+            "highRiskClass": "lithium",
+            "adherence": "partial",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "no",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Warfarin",
+            "formStrength": "3 mg tablets",
+            "doseRegimen": "As per anticoagulant clinic (currently 3 mg daily)",
+            "indication": "",
+            "indicationRecorded": "",
+            "isRegular": "yes",
+            "isHighRisk": "yes",
+            "highRiskClass": "anticoagulant",
+            "adherence": "poor",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "no",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Methotrexate",
+            "formStrength": "2.5 mg tablets",
+            "doseRegimen": "Six tablets (15 mg) once WEEKLY on Mondays",
+            "indication": "Rheumatoid arthritis",
+            "indicationRecorded": "no",
+            "isRegular": "yes",
+            "isHighRisk": "yes",
+            "highRiskClass": "methotrexate",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": "START: folic acid 5 mg weekly with methotrexate - not currently prescribed"
+          },
+          {
+            "drugName": "Ramipril",
+            "formStrength": "5 mg capsules",
+            "doseRegimen": "One capsule once daily",
+            "indication": "Hypertension and heart failure",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Atorvastatin",
+            "formStrength": "20 mg tablets",
+            "doseRegimen": "One tablet at night",
+            "indication": "Primary prevention of cardiovascular disease",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "yes",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Bisoprolol",
+            "formStrength": "2.5 mg tablets",
+            "doseRegimen": "One tablet once daily",
+            "indication": "Rate control in atrial fibrillation",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Omeprazole",
+            "formStrength": "20 mg capsules",
+            "doseRegimen": "One capsule once daily",
+            "indication": "Gastro-oesophageal reflux disease",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 0,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "yes",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Furosemide",
+            "formStrength": "40 mg tablets",
+            "doseRegimen": "One tablet every morning",
+            "indication": "Heart failure - fluid overload",
+            "indicationRecorded": "yes",
+            "isRegular": "yes",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": 1,
+            "monitoringRequired": "yes",
+            "monitoringUpToDate": "yes",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          },
+          {
+            "drugName": "Paracetamol",
+            "formStrength": "500 mg tablets",
+            "doseRegimen": "Two tablets up to four times daily when required",
+            "indication": "Pain",
+            "indicationRecorded": "yes",
+            "isRegular": "no",
+            "isHighRisk": "no",
+            "highRiskClass": "",
+            "adherence": "good",
+            "anticholinergicBurdenPoints": null,
+            "monitoringRequired": "no",
+            "monitoringUpToDate": "na",
+            "deprescribingCandidate": "no",
+            "stoppCriterion": "",
+            "startCriterion": ""
+          }
+        ],
+        "monitoring": {
+          "monitoringDue": "INR overdue (last 2026-06-16); lithium level, U&E and TFT overdue (last 2026-03-04). Methotrexate FBC/LFT/U&E in date (2026-08-20).",
+          "overdueMonitoringCount": 2
+        },
+        "goals": {
+          "sharedDecisions": "Patient and daughter agree to stop amitriptyline and oxybutynin. INR and lithium level to be taken this week. Warfarin to be discussed with the anticoagulant clinic for a switch to a DOAC."
+        },
+        "plan": {
+          "followUpPlan": "Bloods this week; GP to review results and complete the medication changes at a second visit in 7 days.",
+          "followUpDate": "2026-09-09",
+          "reviewCompleted": "no"
+        },
+        "note": {
+          "clinicalNote": "Review paused pending bloods; second visit booked to finalise deprescribing. Falls and delirium risk discussed with the home manager."
+        }
+      },
+      "expected": {
+        "medicineCount": 11,
+        "regularMedicineCount": 10,
+        "anticholinergicBurdenScore": 7,
+        "polypharmacyBand": "hyperpolypharmacy",
+        "anticholinergicBand": "significant",
+        "burdenBand": "high",
+        "reviewStatus": "incomplete",
+        "stopFlags": [
+          {
+            "drugName": "Amitriptyline",
+            "criterion": "STOPP D8: tricyclic antidepressant in a patient with dementia and recurrent falls"
+          },
+          {
+            "drugName": "Oxybutynin",
+            "criterion": "STOPP D11: strongly anticholinergic antimuscarinic in a patient with dementia"
+          }
+        ],
+        "startFlags": [
+          {
+            "drugName": "Methotrexate",
+            "criterion": "START: folic acid 5 mg weekly with methotrexate - not currently prescribed"
+          }
+        ],
+        "firedRules": [
+          {
+            "id": "R-POLYPHARMACY-01",
+            "category": "polypharmacy",
+            "description": "10 regular medicine(s) — Hyperpolypharmacy (>= 10 regular)"
+          },
+          {
+            "id": "R-ANTICHOLINERGIC-BURDEN-01",
+            "category": "anticholinergic-burden",
+            "description": "Anticholinergic burden score 7 — Significant (ACB >= 3)"
+          },
+          {
+            "id": "R-BURDEN-BAND-01",
+            "category": "burden-band",
+            "description": "Composite High burden (worse of polypharmacy and anticholinergic bands)"
+          },
+          {
+            "id": "R-REVIEW-STATUS-01",
+            "category": "review-status",
+            "description": "Review status: Incomplete"
+          },
+          {
+            "id": "R-STOPP-01",
+            "category": "stopp",
+            "description": "STOPP — Amitriptyline: STOPP D8: tricyclic antidepressant in a patient with dementia and recurrent falls"
+          },
+          {
+            "id": "R-STOPP-01",
+            "category": "stopp",
+            "description": "STOPP — Oxybutynin: STOPP D11: strongly anticholinergic antimuscarinic in a patient with dementia"
+          },
+          {
+            "id": "R-START-01",
+            "category": "start",
+            "description": "START — Methotrexate: START: folic acid 5 mg weekly with methotrexate - not currently prescribed"
+          }
+        ]
+      }
+    }
+  ]
+}
