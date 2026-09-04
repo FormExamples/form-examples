@@ -1,0 +1,541 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateControl",
+  "flagsHint": "detectAdditionalFlags",
+  "note": "Three hand-authored personas for the NICE-aligned diabetes review grader. calculateControl short-circuits to controlLevel 'draft' (score 0, no rules) whenever fewer than 2 of the 8 scored Likert/percentage items are answered AND no HbA1c is entered; otherwise controlScore is a weighted-average composite (HbA1c band 0/20/40/60/80/100 seeded as the base with weight 4, then medication adherence, diet adherence, and time-in-range each folded in at weight 1, then a complication penalty of min(5 x count, 30) subtracted) and controlLevel bands on that score (<=20 veryPoor, <=40 poor, <65 suboptimal, else wellControlled). detectAdditionalFlags is a split engine (mirrors form-app.js's own call: detectAdditionalFlags(state)) so its output is pinned here via flagsHint. VERIFIED ENGINE GAP (documented, not silently patched — fixing it would need a matching change to the SvelteKit reference engine this file is a port of, per its own header comment, and a clinical severity decision this session isn't positioned to make): retinopathyStatus has five options (none, background, preProliferative, proliferative, maculopathy) but only 'background' (DM-008, medium) and 'proliferative' (DM-004, high; FLAG-EYE-001, urgent) have a dedicated rule or flag. 'preProliferative' and 'maculopathy' correctly count toward countComplications() (so they still depress the composite score and correctly suppress DM-017's 'no complications' rule) but raise no eye-specific rule or flag at all — a clinician reading only the fired-rules/flags list would see no signal that a sight-threatening finding was recorded. The persona 'edge' below is built specifically to demonstrate this gap. Regenerate 'expected' with: bin/test-personas diabetes-assessment --update",
+  "personas": [
+    {
+      "name": "Well-controlled type 2, engaged and physically active",
+      "description": "HbA1c 48 mmol/mol (exactly at the <=48 band, hba1cScore 100), no complications, good medication and diet adherence (5/5 each), 85% time-in-range, regular physical activity, low distress and good coping. Composite: base 100 (weight 4) folded with adherence 100 (weight 1) -> (100*4+100)/5=100, diet 100 (weight 1) -> (100*5+100)/6=100, TIR 85 (weight 1) -> (100*6+85)/7=97.857142... -> round 98; no complications so no penalty. Expect controlLevel 'wellControlled', controlScore 98, and low-concern rules DM-016 (HbA1c at target), DM-017 (no complications), DM-018 (good diet), DM-019 (active), DM-020 (good psych) in registry order; no medium/high rules. Flags: none (no threshold in flagged-issues.js is crossed; hba1cTarget 53 >= hba1cValue 48 so FLAG-HBA1C-002 does not fire).",
+      "state": {
+        "patientInformation": {
+          "fullName": "Rosalind Aitken",
+          "dateOfBirth": "1968-03-14",
+          "nhsNumber": "429 876 5011",
+          "address": "12 Birchfield Road, Leeds, LS6 3QP",
+          "telephone": "0113 496 0021",
+          "email": "r.aitken@example.co.uk",
+          "gpName": "Dr Femi Balogun",
+          "gpPractice": "Hyde Park Surgery"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 54,
+          "yearsDuration": 4,
+          "diagnosisMethod": "routineBloodTest",
+          "familyHistory": "yes",
+          "autoantibodiesTested": "no"
+        },
+        "glycaemicControl": {
+          "hba1cValue": 48,
+          "hba1cUnit": "mmol",
+          "hba1cTarget": 53,
+          "fastingGlucose": 5.8,
+          "postprandialGlucose": 7.2,
+          "glucoseMonitoringType": "flashGlucoseMonitor",
+          "hypoglycaemiaFrequency": "never",
+          "severeHypoglycaemia": "no",
+          "timeInRange": 85
+        },
+        "medications": {
+          "metformin": "yes",
+          "sulfonylurea": "",
+          "sglt2Inhibitor": "dapagliflozin",
+          "glp1Agonist": "",
+          "dpp4Inhibitor": "",
+          "insulin": "no",
+          "insulinRegimen": "",
+          "insulinDailyDose": null,
+          "medicationAdherence": 5,
+          "otherMedications": ""
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "none",
+          "lastEyeScreening": "2026-04-02",
+          "nephropathyStatus": "none",
+          "egfr": 92,
+          "urineAcr": 1.2,
+          "neuropathySymptoms": "no",
+          "autonomicNeuropathy": "no",
+          "erectileDysfunction": "notApplicable",
+          "footPulses": "",
+          "monofilamentTest": "",
+          "vibrationSense": ""
+        },
+        "cardiovascularRisk": {
+          "systolicBp": 122,
+          "diastolicBp": 76,
+          "onAntihypertensive": "no",
+          "totalCholesterol": 4.1,
+          "ldlCholesterol": 2,
+          "onStatin": "yes",
+          "smokingStatus": "never",
+          "previousCvdEvent": "no",
+          "qriskScore": 8.2
+        },
+        "selfCareLifestyle": {
+          "dietAdherence": 5,
+          "carbCounting": "yes",
+          "physicalActivity": "regular",
+          "bmi": 26.4,
+          "weightChange": "stable",
+          "alcoholConsumption": "withinLimits",
+          "smokingCessation": "notApplicable"
+        },
+        "psychologicalWellbeing": {
+          "diabetesDistress": 1,
+          "depressionScreening": 2,
+          "anxietyScreening": 2,
+          "eatingDisorder": "no",
+          "fearOfHypoglycaemia": 1,
+          "copingAbility": 5,
+          "needsSupport": "no"
+        },
+        "footAssessment": {
+          "footPulses": "present",
+          "monofilamentTest": "normal",
+          "vibrationSense": "normal",
+          "footDeformity": "no",
+          "callusPresent": "no",
+          "ulcerPresent": "no",
+          "previousAmputation": "no",
+          "footRiskCategory": "low"
+        },
+        "reviewCarePlan": {
+          "clinicianName": "Dr Femi Balogun",
+          "reviewDate": "2026-08-20",
+          "hba1cTargetAgreed": 53,
+          "carePlanUpdated": "yes",
+          "clinicalNotes": "Excellent control on metformin + dapagliflozin. Continue current regimen.",
+          "referrals": "",
+          "nextReviewDate": "2027-02-20"
+        }
+      },
+      "expected": {
+        "controlLevel": "wellControlled",
+        "controlScore": 98,
+        "firedRules": [
+          {
+            "id": "DM-016",
+            "category": "Glycaemic Control",
+            "description": "HbA1c at target (<= 53 mmol/mol / <= 7%)",
+            "concernLevel": "low"
+          },
+          {
+            "id": "DM-017",
+            "category": "Complications",
+            "description": "No complications detected across all screening domains",
+            "concernLevel": "low"
+          },
+          {
+            "id": "DM-018",
+            "category": "Self-Care",
+            "description": "Good self-care adherence (diet >= 4/5)",
+            "concernLevel": "low"
+          },
+          {
+            "id": "DM-019",
+            "category": "Self-Care",
+            "description": "Physically active (regular or very active)",
+            "concernLevel": "low"
+          },
+          {
+            "id": "DM-020",
+            "category": "Psychological",
+            "description": "Good psychological wellbeing (low distress, good coping)",
+            "concernLevel": "low"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Pre-proliferative retinopathy - the invisible-eye-finding edge case",
+      "description": "Non-critical-severity edge case built to demonstrate the documented rule-coverage gap: retinopathyStatus 'preProliferative' (R2) is a real, sight-threatening finding but matches neither DM-004 (checks only 'proliferative') nor DM-008 (checks only 'background'), and flagged-issues.js only checks 'proliferative' for FLAG-EYE-001 - so this persona fires NO eye-category rule or flag despite the finding. It DOES still count toward countComplications() (so it silently depresses the score) and correctly blocks DM-017 ('no complications', which only tests for '' or 'none'). HbA1c 64 mmol/mol (hba1cScore 60, weight 4) folded with adherence 3/5->50 (weight 1) -> (60*4+50)/5=58, diet 3/5->50 (weight 1) -> (58*5+50)/6=56.333, TIR 55 (weight 1) -> (56.333*6+55)/7 -> 56.142857... -> round 56; one complication (the retinopathy) -> penalty 5 -> score 51. Expect controlLevel 'suboptimal' (score < 65), controlScore 51, fired rules DM-006 (HbA1c 64-85 suboptimal) only - no DM-004/DM-008/DM-017/DM-011 etc. Flags: exactly one, FLAG-HBA1C-002 (medium) - hba1cValue 64 > hba1cTarget 53 with a non-blank unit fires 'HbA1c above agreed target without treatment intensification' even though no OTHER threshold is crossed (eGFR normal, no hypertension, no CVD, moderate distress below the >=4 threshold, footRiskCategory 'moderate' not 'high').",
+      "state": {
+        "patientInformation": {
+          "fullName": "Devon McArthur",
+          "dateOfBirth": "1975-11-02",
+          "nhsNumber": "551 209 4487",
+          "address": "8 Craigmillar Court, Edinburgh, EH8 9RT",
+          "telephone": "0131 662 0184",
+          "email": "d.mcarthur@example.co.uk",
+          "gpName": "Dr Aisha Rahman",
+          "gpPractice": "Craigmillar Medical Practice"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 42,
+          "yearsDuration": 16,
+          "diagnosisMethod": "symptomaticPresentation",
+          "familyHistory": "yes",
+          "autoantibodiesTested": "no"
+        },
+        "glycaemicControl": {
+          "hba1cValue": 64,
+          "hba1cUnit": "mmol",
+          "hba1cTarget": 53,
+          "fastingGlucose": 8.9,
+          "postprandialGlucose": 11.4,
+          "glucoseMonitoringType": "fingerPrick",
+          "hypoglycaemiaFrequency": "rarely",
+          "severeHypoglycaemia": "no",
+          "timeInRange": 55
+        },
+        "medications": {
+          "metformin": "yes",
+          "sulfonylurea": "gliclazide",
+          "sglt2Inhibitor": "",
+          "glp1Agonist": "",
+          "dpp4Inhibitor": "",
+          "insulin": "no",
+          "insulinRegimen": "",
+          "insulinDailyDose": null,
+          "medicationAdherence": 3,
+          "otherMedications": ""
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "preProliferative",
+          "lastEyeScreening": "2026-06-11",
+          "nephropathyStatus": "none",
+          "egfr": 78,
+          "urineAcr": 1.8,
+          "neuropathySymptoms": "no",
+          "autonomicNeuropathy": "no",
+          "erectileDysfunction": "no",
+          "footPulses": "",
+          "monofilamentTest": "",
+          "vibrationSense": ""
+        },
+        "cardiovascularRisk": {
+          "systolicBp": 132,
+          "diastolicBp": 82,
+          "onAntihypertensive": "no",
+          "totalCholesterol": 4.8,
+          "ldlCholesterol": 2.6,
+          "onStatin": "yes",
+          "smokingStatus": "exSmoker",
+          "previousCvdEvent": "no",
+          "qriskScore": 14.5
+        },
+        "selfCareLifestyle": {
+          "dietAdherence": 3,
+          "carbCounting": "no",
+          "physicalActivity": "moderate",
+          "bmi": 31.2,
+          "weightChange": "stable",
+          "alcoholConsumption": "withinLimits",
+          "smokingCessation": "notApplicable"
+        },
+        "psychologicalWellbeing": {
+          "diabetesDistress": 3,
+          "depressionScreening": 4,
+          "anxietyScreening": 3,
+          "eatingDisorder": "no",
+          "fearOfHypoglycaemia": 2,
+          "copingAbility": 3,
+          "needsSupport": "no"
+        },
+        "footAssessment": {
+          "footPulses": "present",
+          "monofilamentTest": "normal",
+          "vibrationSense": "normal",
+          "footDeformity": "no",
+          "callusPresent": "no",
+          "ulcerPresent": "no",
+          "previousAmputation": "no",
+          "footRiskCategory": "moderate"
+        },
+        "reviewCarePlan": {
+          "clinicianName": "Dr Aisha Rahman",
+          "reviewDate": "2026-08-25",
+          "hba1cTargetAgreed": 53,
+          "carePlanUpdated": "yes",
+          "clinicalNotes": "Pre-proliferative retinopathy on screening photographs 2026-06-11 - urgent ophthalmology referral made outside this tool's flag system (see referrals). HbA1c above target; discussed GLP-1 add-on.",
+          "referrals": "Urgent ophthalmology referral for R2 retinopathy (referred 2026-08-25, outside the engine's own flag logic)",
+          "nextReviewDate": "2027-02-25"
+        }
+      },
+      "expected": {
+        "controlLevel": "suboptimal",
+        "controlScore": 51,
+        "firedRules": [
+          {
+            "id": "DM-006",
+            "category": "Glycaemic Control",
+            "description": "HbA1c 64-85 mmol/mol (8-9.9%) - suboptimal glycaemic control",
+            "concernLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-HBA1C-002",
+            "category": "Glycaemic Control",
+            "message": "HbA1c above agreed target without treatment intensification",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - very poor control with active foot ulcer and unrecognised severe hypoglycaemia",
+      "description": "Critical-highest persona. HbA1c 97 mmol/mol (>=97 crosses both DM-001's >=86 threshold and FLAG-HBA1C-001's own >=97 threshold; hba1cScore 0, weight 4) folded with adherence 1/5->0 (weight 1) -> 0, diet 1/5->0 (weight 1) -> 0, TIR 8 (weight 1) -> (0*6+8)/7 = 1.142857 -> round 1; five complications counted (retinopathy proliferative, neuropathy symptoms, eGFR<60, ulcer present, previous CVD event) -> penalty min(25,30)=25 -> score max(1-25,0)=0. Expect controlLevel 'veryPoor', controlScore 0. Fired rules in registry order: DM-001 (HbA1c>=86), DM-002 (severe hypo), DM-003 (foot ulcer), DM-004 (proliferative retinopathy), DM-005 (eGFR<30), DM-007 (recurrent hypo, daily), DM-009 is skipped (eGFR 28 fails the 30-59 band, DM-005 already covers <30), DM-010 (microalbuminuria, ACR 22 > 3), DM-011 (neuropathy symptoms), DM-012 (poor adherence 1/5), DM-013 is skipped (BMI 33.8 < 35), DM-014 (poor diet 1/5), DM-015 (high distress 5/5) - 11 rules total. Flags after the stable priority sort: urgent FLAG-HBA1C-001, FLAG-HYPO-002 (daily frequency + severe hypo -> unawareness), FLAG-FOOT-001, FLAG-EYE-001; high FLAG-HYPO-001, FLAG-RENAL-001, FLAG-CVD-001 (previous CVD, on statin but NOT on antihypertensive), FLAG-PSYCH-001 (distress = 5), FLAG-CVD-002 (current smoker); medium FLAG-HBA1C-002 (97 > target 58), FLAG-FOOT-002 (footRiskCategory 'high'), FLAG-SELF-001 (poor diet + sedentary + poor adherence = 3 of 3 poor domains), FLAG-CVD-003 (systolic 168 >= 140) - 13 flags total. FLAG-MED-001 does NOT fire (on insulin, but hypoglycaemiaFrequency is 'daily' not '', so the 'without documented hypoglycaemia assessment' condition is false). FLAG-RENAL-002 does not fire (ACR 22 is between 3 and 30, i.e. microalbuminuria not macroalbuminuria - only DM-010, a fired rule, not FLAG-RENAL-002).",
+      "state": {
+        "patientInformation": {
+          "fullName": "Marek Wozniak",
+          "dateOfBirth": "1959-06-30",
+          "nhsNumber": "603 118 2274",
+          "address": "45 Cotton Mill Lane, Bolton, BL3 5AF",
+          "telephone": "01204 552 3390",
+          "email": "",
+          "gpName": "Dr Priya Anand",
+          "gpPractice": "Cotton Mill Health Centre"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 38,
+          "yearsDuration": 28,
+          "diagnosisMethod": "symptomaticPresentation",
+          "familyHistory": "yes",
+          "autoantibodiesTested": "no"
+        },
+        "glycaemicControl": {
+          "hba1cValue": 97,
+          "hba1cUnit": "mmol",
+          "hba1cTarget": 58,
+          "fastingGlucose": 15.8,
+          "postprandialGlucose": 19.2,
+          "glucoseMonitoringType": "fingerPrick",
+          "hypoglycaemiaFrequency": "daily",
+          "severeHypoglycaemia": "yes",
+          "timeInRange": 8
+        },
+        "medications": {
+          "metformin": "yes",
+          "sulfonylurea": "",
+          "sglt2Inhibitor": "",
+          "glp1Agonist": "",
+          "dpp4Inhibitor": "",
+          "insulin": "yes",
+          "insulinRegimen": "basalBolus",
+          "insulinDailyDose": 96,
+          "medicationAdherence": 1,
+          "otherMedications": "Gabapentin for neuropathic pain"
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "proliferative",
+          "lastEyeScreening": "2026-05-04",
+          "nephropathyStatus": "moderate",
+          "egfr": 28,
+          "urineAcr": 22,
+          "neuropathySymptoms": "yes",
+          "autonomicNeuropathy": "yes",
+          "erectileDysfunction": "yes",
+          "footPulses": "",
+          "monofilamentTest": "",
+          "vibrationSense": ""
+        },
+        "cardiovascularRisk": {
+          "systolicBp": 168,
+          "diastolicBp": 96,
+          "onAntihypertensive": "no",
+          "totalCholesterol": 6.4,
+          "ldlCholesterol": 4.1,
+          "onStatin": "yes",
+          "smokingStatus": "currentSmoker",
+          "previousCvdEvent": "yes",
+          "qriskScore": 42.6
+        },
+        "selfCareLifestyle": {
+          "dietAdherence": 1,
+          "carbCounting": "no",
+          "physicalActivity": "sedentary",
+          "bmi": 33.8,
+          "weightChange": "loss",
+          "alcoholConsumption": "aboveLimits",
+          "smokingCessation": "declined"
+        },
+        "psychologicalWellbeing": {
+          "diabetesDistress": 5,
+          "depressionScreening": 14,
+          "anxietyScreening": 12,
+          "eatingDisorder": "no",
+          "fearOfHypoglycaemia": 5,
+          "copingAbility": 1,
+          "needsSupport": "yes"
+        },
+        "footAssessment": {
+          "footPulses": "absent",
+          "monofilamentTest": "reducedSensation",
+          "vibrationSense": "absent",
+          "footDeformity": "yes",
+          "callusPresent": "yes",
+          "ulcerPresent": "yes",
+          "previousAmputation": "no",
+          "footRiskCategory": "high"
+        },
+        "reviewCarePlan": {
+          "clinicianName": "Dr Priya Anand",
+          "reviewDate": "2026-08-28",
+          "hba1cTargetAgreed": 58,
+          "carePlanUpdated": "yes",
+          "clinicalNotes": "Same-day referral to diabetic foot MDT for active ulcer; urgent ophthalmology for proliferative retinopathy; nephrology referral for eGFR 28; admission considered for glycaemic crisis but patient declined, safety-netted with district nursing daily review.",
+          "referrals": "Diabetic foot MDT (urgent), ophthalmology (urgent), nephrology, psychology",
+          "nextReviewDate": "2026-09-04"
+        }
+      },
+      "expected": {
+        "controlLevel": "veryPoor",
+        "controlScore": 0,
+        "firedRules": [
+          {
+            "id": "DM-001",
+            "category": "Glycaemic Control",
+            "description": "HbA1c >= 86 mmol/mol (>= 10%) - very poor glycaemic control",
+            "concernLevel": "high"
+          },
+          {
+            "id": "DM-002",
+            "category": "Hypoglycaemia",
+            "description": "Severe hypoglycaemia reported",
+            "concernLevel": "high"
+          },
+          {
+            "id": "DM-003",
+            "category": "Foot",
+            "description": "Active foot ulcer present",
+            "concernLevel": "high"
+          },
+          {
+            "id": "DM-004",
+            "category": "Eye",
+            "description": "Proliferative retinopathy detected",
+            "concernLevel": "high"
+          },
+          {
+            "id": "DM-005",
+            "category": "Renal",
+            "description": "eGFR < 30 - severe renal impairment",
+            "concernLevel": "high"
+          },
+          {
+            "id": "DM-007",
+            "category": "Hypoglycaemia",
+            "description": "Recurrent hypoglycaemia reported",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "DM-010",
+            "category": "Renal",
+            "description": "Microalbuminuria detected (elevated urine ACR)",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "DM-011",
+            "category": "Neuropathy",
+            "description": "Neuropathy symptoms reported",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "DM-012",
+            "category": "Medication",
+            "description": "Poor medication adherence (1-2 out of 5)",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "DM-014",
+            "category": "Self-Care",
+            "description": "Poor diet adherence (1-2 out of 5)",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "DM-015",
+            "category": "Psychological",
+            "description": "High diabetes distress (4-5 out of 5)",
+            "concernLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-HBA1C-001",
+            "category": "Glycaemic Control",
+            "message": "HbA1c critically elevated (>= 97 mmol/mol / >= 11%) - urgent review required",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-HYPO-002",
+            "category": "Hypoglycaemia",
+            "message": "Possible hypoglycaemia unawareness - consider specialist referral",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-FOOT-001",
+            "category": "Foot",
+            "message": "Active foot ulcer - urgent podiatry referral required",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-EYE-001",
+            "category": "Eye",
+            "message": "Proliferative retinopathy - urgent ophthalmology referral",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-HYPO-001",
+            "category": "Hypoglycaemia",
+            "message": "Severe hypoglycaemia reported - review insulin/sulfonylurea dosing",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RENAL-001",
+            "category": "Renal",
+            "message": "eGFR < 30 - consider nephrology referral and medication review",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CVD-001",
+            "category": "Cardiovascular",
+            "message": "Previous CVD event without optimal secondary prevention (statin/antihypertensive)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PSYCH-001",
+            "category": "Psychological",
+            "message": "Severe diabetes distress or depression - consider psychological support referral",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CVD-002",
+            "category": "Cardiovascular",
+            "message": "Current smoker - smoking cessation critical for cardiovascular risk reduction",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HBA1C-002",
+            "category": "Glycaemic Control",
+            "message": "HbA1c above agreed target without treatment intensification",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FOOT-002",
+            "category": "Foot",
+            "message": "High-risk foot category - ensure annual specialist foot screening",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SELF-001",
+            "category": "Self-Care",
+            "message": "Poor self-care across multiple domains - consider structured education programme",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CVD-003",
+            "category": "Cardiovascular",
+            "message": "Systolic BP 168 mmHg - above NICE target for diabetes",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1349,6 +1349,54 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
 
 ### Engine correctness (decide: bug or spec'd behaviour; then fix or document)
 
+- [ ] **pre-operative-assessment-by-clinician: a recent stroke/TIA with no
+      day count grades ASA I (silent, most severe finding of the three
+      below).** `historyStrokeTia: 'yes'`, `recentStrokeTia: 'yes'`,
+      `daysSinceStrokeTia: null` (clinician affirms it was recent but
+      hasn't entered the day count yet): R-ASA-III-04's own comparison has
+      no `?? ` fallback (`null > 90` is `false`) and R-ASA-IV-02's
+      `(daysSinceStrokeTia ?? 999) <= 90` also evaluates `false` — neither
+      fires. Verified directly: `calculateASA` over that input (all else
+      blank) returns `computedAsaGrade: 'I'` with only `R-RCRI-04` fired (a
+      cardiac-risk component, not an ASA rule). A clinician-affirmed recent
+      stroke silently passes as the *lowest possible* ASA grade instead of
+      the fail-safe worst case. Fix: default the missing day count to
+      "recent" (<=90) in both rules when `recentStrokeTia === 'yes'`, in
+      HTML `js/asa-rules.js` + `js/composite-grader.js`, the SvelteKit
+      `src/lib/engine/asa-rules.ts` + `composite-grader.ts`, and the Loco
+      mirror — all three stacks together, per this form's own AGENTS.md
+      parity requirement. Documented in `examples/personas.json`'s `note`,
+      not yet fixed.
+- [ ] **perioperative-optimization: an entirely blank assessment reports
+      'ready' with zero flags.** Five of the eight domain evaluators
+      (anaemia, alcohol, nutrition, physical-fitness, cardiorespiratory)
+      hard-code `applicable: true` regardless of whether any field in the
+      domain was ever answered — only glycaemic-control, smoking, and
+      medication compute it from real data. Verified directly:
+      `calculateOptimization` over an assessment with nothing entered
+      except the two dates reports those five domains all `'optimized'`,
+      `computedReadiness: 'ready'`, 0 flags — indistinguishable from a
+      genuinely-assessed, all-clear patient. Fix: derive `applicable` per
+      domain from whether any of its own fields are answered, mirroring
+      the three domains that already do this correctly; same three-stack
+      requirement (HTML `js/domain-rules.js`, Svelte
+      `src/lib/engine/domain-rules.ts`, Loco). Documented in
+      `examples/personas.json`'s `note`, not yet fixed.
+- [ ] **diabetes-assessment: pre-proliferative retinopathy and maculopathy
+      raise no eye rule or flag.** `retinopathyStatus` has five options
+      (none, background, preProliferative, proliferative, maculopathy) but
+      DM-004/DM-008 and FLAG-EYE-001/002 only recognise `'proliferative'`
+      and `'background'` by exact string match. `preProliferative` and
+      `maculopathy` correctly count toward `countComplications()` (so the
+      composite score still drops and DM-017 'no complications' is still
+      correctly suppressed) but raise nothing eye-specific in the fired
+      rules or flags a clinician actually reads. Verified via the
+      dedicated "invisible-eye-finding" persona in
+      `examples/personas.json`. Fix: add rules/flags for both statuses (a
+      clinical severity decision — is preProliferative closer to III or
+      IV urgency? — that this session isn't positioned to make
+      unilaterally); same three-stack requirement (HTML, the SvelteKit
+      reference this engine is explicitly a port of, Loco).
 - [ ] **hernia-diagnostic-evaluation: doubled red-flag rule IDs.**
       `screenRedFlags` builds IDs as `` `R-RED-FLAG-${key…toUpperCase()}` ``
       but every key already starts with `redFlag`, so the IDs come out as
