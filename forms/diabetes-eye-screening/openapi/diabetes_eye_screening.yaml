@@ -1,0 +1,295 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetes_eye_screening
+openapi: 3.1.0
+info:
+  title: Diabetes Eye Screening — DiabetesEyeScreening
+  version: 1.0.0
+  description: "Main diabetes-eye-screening record for one DESP retinal screening episode: grading context, patient identification, and the right-eye and left-eye grading blocks (R grade, M grade, P marker, U marker, visual acuity). The worst-eye classification and recall / referral outcome, fired rules, and flags live in child tables."
+paths:
+  /diabetes-eye-screenings:
+    get:
+      summary: List DiabetesEyeScreening records
+      operationId: listDiabetesEyeScreening
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesEyeScreening records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesEyeScreening"
+    post:
+      summary: Create a new DiabetesEyeScreening
+      operationId: createDiabetesEyeScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesEyeScreening"
+      responses:
+        "201":
+          description: The newly created DiabetesEyeScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreening"
+        "400":
+          description: Validation error
+  /diabetes-eye-screenings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesEyeScreening by id
+      operationId: getDiabetesEyeScreening
+      responses:
+        "200":
+          description: The requested DiabetesEyeScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreening"
+        "404":
+          description: DiabetesEyeScreening not found
+    patch:
+      summary: Update an existing DiabetesEyeScreening
+      operationId: updateDiabetesEyeScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesEyeScreening"
+      responses:
+        "200":
+          description: The updated DiabetesEyeScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreening"
+        "404":
+          description: DiabetesEyeScreening not found
+    delete:
+      summary: Soft-delete a DiabetesEyeScreening
+      operationId: deleteDiabetesEyeScreening
+      responses:
+        "204":
+          description: DiabetesEyeScreening deleted
+        "404":
+          description: DiabetesEyeScreening not found
+components:
+  schemas:
+    DiabetesEyeScreening:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this screening documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the screener / grader clinician (restrict delete); optional.
+        grader_name:
+          type: string
+          description: Name of the screener / grader who assigned the grade.
+        grader_role:
+          type: string
+          enum:
+            - screener
+            - primary-grader
+            - secondary-grader
+            - ophthalmologist
+            - other
+            - ""
+          description: "Grader role: screener, primary-grader, secondary-grader, ophthalmologist, or other."
+        graded_at:
+          type: string
+          format: date
+          description: Date the grade was assigned; drives the patient-overdue comparison.
+        image_captured_at:
+          type: string
+          format: date
+          description: Date the retinal images were captured.
+        imaging_media:
+          type: string
+          enum:
+            - digital-fundus
+            - mydriatic
+            - non-mydriatic
+            - oct
+            - other
+            - ""
+          description: "Imaging modality: digital-fundus, mydriatic, non-mydriatic, oct, or other."
+        patient_identifier:
+          type: string
+          maxLength: 100
+          description: Local or NHS patient identifier as recorded on the record.
+        age_band:
+          type: string
+          enum:
+            - under-12
+            - 12-17
+            - 18-64
+            - 65-plus
+            - ""
+          description: Screening-eligible age band (>= 12); under-12 is outside programme eligibility.
+        diabetes_type:
+          type: string
+          enum:
+            - type-1
+            - type-2
+            - other
+            - unknown
+            - ""
+          description: "Diabetes type: type-1, type-2, other, or unknown."
+        years_since_diagnosis:
+          type: number
+          format: double
+          description: Years since diabetes diagnosis.
+        previous_screen_date:
+          type: string
+          format: date
+          description: Date of the most recent previous screen; drives overdue and low-risk eligibility.
+        previous_screen_result:
+          type: string
+          enum:
+            - r0m0
+            - background
+            - referable
+            - none
+            - unknown
+            - ""
+          description: "Result of the previous screen: r0m0, background, referable, none, or unknown; r0m0 is required for low-risk 24-month recall."
+        right_retinopathy_grade:
+          type: string
+          enum:
+            - R0
+            - R1
+            - R2
+            - R3A
+            - R3S
+            - ""
+          description: "Right-eye retinopathy (R) grade: R0, R1, R2, R3A, or R3S."
+        right_maculopathy_grade:
+          type: string
+          enum:
+            - M0
+            - M1
+            - ""
+          description: "Right-eye maculopathy (M) grade: M0 or M1."
+        right_photocoagulation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Right-eye photocoagulation (P) marker: yes or no; contextual, does not change the pathway."
+        right_ungradable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Right-eye ungradable (U) marker: yes or no; yes routes to slit-lamp unless referable disease routes to HES."
+        right_visual_acuity:
+          type: string
+          description: Right-eye visual acuity as recorded (e.g. logMAR or Snellen); optional.
+        left_retinopathy_grade:
+          type: string
+          enum:
+            - R0
+            - R1
+            - R2
+            - R3A
+            - R3S
+            - ""
+          description: "Left-eye retinopathy (R) grade: R0, R1, R2, R3A, or R3S."
+        left_maculopathy_grade:
+          type: string
+          enum:
+            - M0
+            - M1
+            - ""
+          description: "Left-eye maculopathy (M) grade: M0 or M1."
+        left_photocoagulation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Left-eye photocoagulation (P) marker: yes or no; contextual, does not change the pathway."
+        left_ungradable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Left-eye ungradable (U) marker: yes or no; yes routes to slit-lamp unless referable disease routes to HES."
+        left_visual_acuity:
+          type: string
+          description: Left-eye visual acuity as recorded (e.g. logMAR or Snellen); optional.
+        clinical_context:
+          type: string
+          description: Optional free-text clinical context shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - grader_name
+        - grader_role
+        - imaging_media
+        - patient_identifier
+        - age_band
+        - diabetes_type
+        - previous_screen_result
+        - right_retinopathy_grade
+        - right_maculopathy_grade
+        - right_photocoagulation
+        - right_ungradable
+        - right_visual_acuity
+        - left_retinopathy_grade
+        - left_maculopathy_grade
+        - left_photocoagulation
+        - left_ungradable
+        - left_visual_acuity
+        - clinical_context
+      description: "Main diabetes-eye-screening record for one DESP retinal screening episode: grading context, patient identification, and the right-eye and left-eye grading blocks (R grade, M grade, P marker, U marker, visual acuity). The worst-eye classification and recall / referral outcome, fired rules, and flags live in child tables."

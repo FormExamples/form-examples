@@ -1,0 +1,122 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=diabetes-eye-screening
+form_snake_case=diabetes_eye_screening
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold patient \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    hospital_mrn:string \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    allergies_summary:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:string! \
+    registration_body:string! \
+    registration_number:text! \
+    --api
+
+cargo loco generate scaffold diabetes_eye_screening \
+    deleted_at:tstz \
+    patient:references \
+    clinician:references \
+    grader_name:text! \
+    grader_role:string! \
+    graded_at:date \
+    image_captured_at:date \
+    imaging_media:string! \
+    patient_identifier:string! \
+    age_band:string! \
+    diabetes_type:string! \
+    years_since_diagnosis:double \
+    previous_screen_date:date \
+    previous_screen_result:string! \
+    right_retinopathy_grade:string! \
+    right_maculopathy_grade:string! \
+    right_photocoagulation:string! \
+    right_ungradable:string! \
+    right_visual_acuity:text! \
+    left_retinopathy_grade:string! \
+    left_maculopathy_grade:string! \
+    left_photocoagulation:string! \
+    left_ungradable:string! \
+    left_visual_acuity:text! \
+    clinical_context:text! \
+    --api
+
+cargo loco generate scaffold diabetes_eye_screening_grade \
+    deleted_at:tstz \
+    diabetes_eye_screening:references \
+    worst_retinopathy:string! \
+    worst_maculopathy:string! \
+    any_ungradable:string! \
+    outcome:string! \
+    referral:string! \
+    recall_interval_months:int \
+    status:string! \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold diabetes_eye_screening_grade_rule \
+    deleted_at:tstz \
+    diabetes_eye_screening_grade:references \
+    rule_id:string! \
+    stage:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold diabetes_eye_screening_grade_flag \
+    deleted_at:tstz \
+    diabetes_eye_screening_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Add #![forbid(unsafe_code)] to each crate root the scaffold created:
+# the library, the -cli binary, the migration library, and the tests.
+"$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"
+
+# Fix two loco-new scaffold defaults that fail clippy -D warnings:
+# App::seed()'s unused base param, and the test auth_header() helper's
+# redundant &token.
+"$(git rev-parse --show-toplevel)/bin/loco-seed-base-rename" "${form_kebab_case}"
+"$(git rev-parse --show-toplevel)/bin/loco-test-auth-header-fix" "${form_kebab_case}"

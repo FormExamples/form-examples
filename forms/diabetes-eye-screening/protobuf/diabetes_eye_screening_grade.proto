@@ -1,0 +1,67 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: diabetes_eye_screening_grade
+
+syntax = "proto3";
+
+package form_examples.diabetes_eye_screening;
+
+enum DiabetesEyeScreeningGradeWorstRetinopathyEnum {
+  WORSTRETINOPATHY_UNSPECIFIED = 0;
+  WORSTRETINOPATHY_R0 = 1;  // R0
+  WORSTRETINOPATHY_R1 = 2;  // R1
+  WORSTRETINOPATHY_R2 = 3;  // R2
+  WORSTRETINOPATHY_R3A = 4;  // R3A
+  WORSTRETINOPATHY_R3S = 5;  // R3S
+}
+
+enum DiabetesEyeScreeningGradeWorstMaculopathyEnum {
+  WORSTMACULOPATHY_UNSPECIFIED = 0;
+  WORSTMACULOPATHY_M0 = 1;  // M0
+  WORSTMACULOPATHY_M1 = 2;  // M1
+}
+
+enum DiabetesEyeScreeningGradeAnyUngradableEnum {
+  ANYUNGRADABLE_UNSPECIFIED = 0;
+  ANYUNGRADABLE_YES = 1;  // yes
+  ANYUNGRADABLE_NO = 2;  // no
+}
+
+enum DiabetesEyeScreeningGradeOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_REFER_HES_URGENT = 1;  // refer-hes-urgent
+  OUTCOME_REFER_HES = 2;  // refer-hes
+  OUTCOME_REFER_SLIT_LAMP = 3;  // refer-slit-lamp
+  OUTCOME_SURVEILLANCE_6_MONTH = 4;  // surveillance-6-month
+  OUTCOME_ROUTINE_12_MONTH = 5;  // routine-12-month
+  OUTCOME_ROUTINE_24_MONTH = 6;  // routine-24-month
+}
+
+enum DiabetesEyeScreeningGradeReferralEnum {
+  REFERRAL_UNSPECIFIED = 0;
+  REFERRAL_NONE = 1;  // none
+  REFERRAL_HES_ROUTINE = 2;  // hes-routine
+  REFERRAL_HES_URGENT = 3;  // hes-urgent
+  REFERRAL_SLIT_LAMP = 4;  // slit-lamp
+}
+
+enum DiabetesEyeScreeningGradeStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COMPLETE = 1;  // complete
+  STATUS_INCOMPLETE = 2;  // incomplete
+}
+
+message DiabetesEyeScreeningGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string diabetes_eye_screening_id = 5;  // UUID — uuid
+  DiabetesEyeScreeningGradeWorstRetinopathyEnum worst_retinopathy = 6;  // VARCHAR(5)
+  DiabetesEyeScreeningGradeWorstMaculopathyEnum worst_maculopathy = 7;  // VARCHAR(5)
+  DiabetesEyeScreeningGradeAnyUngradableEnum any_ungradable = 8;  // VARCHAR(5)
+  DiabetesEyeScreeningGradeOutcomeEnum outcome = 9;  // VARCHAR(25)
+  DiabetesEyeScreeningGradeReferralEnum referral = 10;  // VARCHAR(15)
+  int32 recall_interval_months = 11;  // INTEGER
+  DiabetesEyeScreeningGradeStatusEnum status = 12;  // VARCHAR(15)
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

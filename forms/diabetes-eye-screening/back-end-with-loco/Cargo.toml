@@ -1,0 +1,66 @@
+[workspace]
+
+[workspace.package]
+rust-version = "1.96"
+
+[package]
+name = "diabetes_eye_screening"
+version = "0.1.0"
+edition = "2021"
+rust-version.workspace = true
+publish = false
+default-run = "diabetes_eye_screening-cli"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace.dependencies]
+loco-rs = { version = "1.1.0", default-features = false, features = [
+  "auth",
+  "cache_inmem",
+  "cli",
+  "with-db",
+  "worker",
+] }
+
+[dependencies]
+loco-rs = { workspace = true  }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+tokio = { version = "1.53", default-features = false, features = [
+  "rt-multi-thread",
+] }
+async-trait = { version = "0.1" }
+axum = { version = "0.8" }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+regex = { version = "1.13" }
+migration = { path = "migration" }
+sea-orm = { version = "2.0", features = [
+  "sqlx-sqlite",
+  "sqlx-postgres",
+  "runtime-tokio-rustls",
+  "macros",
+] }
+chrono = { version = "0.4" }
+validator = { version = "0.20" }
+uuid = { version = "1.25", features = ["v4"] }
+include_dir = { version = "0.7" }
+opentelemetry = "0.27"
+opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry = "0.28"
+axum-prometheus = "0.7"
+
+[[bin]]
+name = "diabetes_eye_screening-cli"
+path = "src/diabetes_eye_screening/bin/main.rs"
+required-features = []
+
+[dev-dependencies]
+loco-rs = { workspace = true, features = ["testing"] }
+serial_test = { version = "3.5.0" }
+rstest = { version = "0.25" }
+insta = { version = "1.48", features = ["redactions", "yaml", "filters"] }
+
+[lib]
+path = "src/diabetes_eye_screening/lib.rs"

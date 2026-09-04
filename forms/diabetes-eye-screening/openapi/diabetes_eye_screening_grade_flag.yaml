@@ -1,0 +1,170 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetes_eye_screening_grade_flag
+openapi: 3.1.0
+info:
+  title: Diabetes Eye Screening — DiabetesEyeScreeningGradeFlag
+  version: 1.0.0
+  description: Flagged issues that fire independently of the recall / referral pathway, with priority and a suggested action for the grader or screening service.
+paths:
+  /diabetes-eye-screening-grade-flags:
+    get:
+      summary: List DiabetesEyeScreeningGradeFlag records
+      operationId: listDiabetesEyeScreeningGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesEyeScreeningGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesEyeScreeningGradeFlag"
+    post:
+      summary: Create a new DiabetesEyeScreeningGradeFlag
+      operationId: createDiabetesEyeScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesEyeScreeningGradeFlag"
+      responses:
+        "201":
+          description: The newly created DiabetesEyeScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreeningGradeFlag"
+        "400":
+          description: Validation error
+  /diabetes-eye-screening-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesEyeScreeningGradeFlag by id
+      operationId: getDiabetesEyeScreeningGradeFlag
+      responses:
+        "200":
+          description: The requested DiabetesEyeScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreeningGradeFlag"
+        "404":
+          description: DiabetesEyeScreeningGradeFlag not found
+    patch:
+      summary: Update an existing DiabetesEyeScreeningGradeFlag
+      operationId: updateDiabetesEyeScreeningGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesEyeScreeningGradeFlag"
+      responses:
+        "200":
+          description: The updated DiabetesEyeScreeningGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreeningGradeFlag"
+        "404":
+          description: DiabetesEyeScreeningGradeFlag not found
+    delete:
+      summary: Soft-delete a DiabetesEyeScreeningGradeFlag
+      operationId: deleteDiabetesEyeScreeningGradeFlag
+      responses:
+        "204":
+          description: DiabetesEyeScreeningGradeFlag deleted
+        "404":
+          description: DiabetesEyeScreeningGradeFlag not found
+components:
+  schemas:
+    DiabetesEyeScreeningGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        diabetes_eye_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-ACTIVE-PROLIFERATIVE-001).
+        category:
+          type: string
+          enum:
+            - active-proliferative
+            - maculopathy
+            - stable-proliferative
+            - pre-proliferative
+            - ungradable
+            - patient-overdue
+            - incomplete
+            - eligibility
+            - other
+            - ""
+          description: "Flag category: active-proliferative, maculopathy, stable-proliferative, pre-proliferative, ungradable, patient-overdue, incomplete, eligibility, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or service action (e.g. \"fast-track referral to ophthalmology\", \"re-screen or refer for slit-lamp biomicroscopy\")."
+      required:
+        - created_at
+        - updated_at
+        - diabetes_eye_screening_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Flagged issues that fire independently of the recall / referral pathway, with priority and a suggested action for the grader or screening service.

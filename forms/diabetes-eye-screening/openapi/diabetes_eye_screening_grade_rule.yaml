@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetes_eye_screening_grade_rule
+openapi: 3.1.0
+info:
+  title: Diabetes Eye Screening — DiabetesEyeScreeningGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+paths:
+  /diabetes-eye-screening-grade-rules:
+    get:
+      summary: List DiabetesEyeScreeningGradeRule records
+      operationId: listDiabetesEyeScreeningGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesEyeScreeningGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesEyeScreeningGradeRule"
+    post:
+      summary: Create a new DiabetesEyeScreeningGradeRule
+      operationId: createDiabetesEyeScreeningGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesEyeScreeningGradeRule"
+      responses:
+        "201":
+          description: The newly created DiabetesEyeScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreeningGradeRule"
+        "400":
+          description: Validation error
+  /diabetes-eye-screening-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesEyeScreeningGradeRule by id
+      operationId: getDiabetesEyeScreeningGradeRule
+      responses:
+        "200":
+          description: The requested DiabetesEyeScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreeningGradeRule"
+        "404":
+          description: DiabetesEyeScreeningGradeRule not found
+    patch:
+      summary: Update an existing DiabetesEyeScreeningGradeRule
+      operationId: updateDiabetesEyeScreeningGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesEyeScreeningGradeRule"
+      responses:
+        "200":
+          description: The updated DiabetesEyeScreeningGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesEyeScreeningGradeRule"
+        "404":
+          description: DiabetesEyeScreeningGradeRule not found
+    delete:
+      summary: Soft-delete a DiabetesEyeScreeningGradeRule
+      operationId: deleteDiabetesEyeScreeningGradeRule
+      responses:
+        "204":
+          description: DiabetesEyeScreeningGradeRule deleted
+        "404":
+          description: DiabetesEyeScreeningGradeRule not found
+components:
+  schemas:
+    DiabetesEyeScreeningGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        diabetes_eye_screening_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-RECALL-R3A-01).
+        stage:
+          type: string
+          enum:
+            - eligibility
+            - retinopathy
+            - maculopathy
+            - ungradable
+            - recall
+            - completeness
+            - ""
+          description: "Pathway stage the rule concerns: eligibility, retinopathy, maculopathy, ungradable, recall, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. gate, classification, conditional-requirement).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - diabetes_eye_screening_grade_id
+        - rule_id
+        - stage
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
