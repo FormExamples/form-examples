@@ -1,0 +1,224 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateCertificate",
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "Three hand-authored personas for the ICVP (WHO 'yellow card') validator. validateCertificate(data) runs VAL001-VAL011 in a fixed order (VAL012, language, is not enforced in the static form) and returns { overallValid, firedRules }; overallValid is true only when no fired rule has severity 'error' (VAL004/008/009/010/011 are 'warning', the rest are 'error'). VAL001 ('vaccination date in the future') reads the real wall clock, so the oracle's frozen clock (2026-09-03T12:00:00Z, pinned explicitly here via the top-level 'clock' key) makes every date in these personas evaluated against that fixed 'today'. VAL003/VAL004/VAL008/VAL009 are gated on entryDisease === 'yellow-fever' and never fire for any other disease (persona 2 uses cholera specifically to isolate VAL002 and VAL010 from the yellow-fever-only checks). VAL002 (validity start before vaccination date) and VAL003 (yellow-fever validity start must be exactly vaccination date + 10 days) are independent checks - a state can fail one, both, or neither. addDays operates in UTC calendar days. Regenerate 'expected' with: bin/test-personas international-certificate-of-vaccination-or-prophylaxis --update",
+  "personas": [
+    {
+      "name": "Correctly completed yellow fever certificate",
+      "description": "Yellow fever vaccination 2026-06-01, validity starts exactly 10 days later (2026-06-11, matching VAL003's formula) with entryValidityIsLifetime 'yes' (so VAL004's missing-end-date check does not fire), manufacturer/batch/clinician-status/centre-stamp all recorded, patient aged 36 at vaccination (within the 9-month-to-60-year yellow-fever window), no pregnancy/breastfeeding/immunosuppression declared. Expect firedRules [] and overallValid true.",
+      "state": {
+        "centreName": "Riverside Travel Health Clinic",
+        "centreCountryAlpha3": "GBR",
+        "whoDesignationReference": "WHO-YF-GBR-0442",
+        "uniformStamp": "yes",
+        "clinicianName": "Dr Farah Iqbal",
+        "clinicianProfessionalStatus": "Registered Nurse (Travel Health)",
+        "clinicianRegistrationBody": "NMC",
+        "clinicianRegistrationNumber": "19X4482E",
+        "patientGivenNames": "Owen",
+        "patientSurname": "Bracewell",
+        "patientBirthDate": "1990-06-01",
+        "patientSex": "male",
+        "patientNationalityAlpha3": "GBR",
+        "patientTravelDocumentKind": "passport",
+        "patientTravelDocumentNumber": "552019284",
+        "patientSignature": "signed",
+        "consentedToDataSharing": "yes",
+        "declaredPregnancy": "no",
+        "declaredBreastfeeding": "no",
+        "declaredImmunosuppression": "no",
+        "destinationCountriesAlpha3": "GHA",
+        "plannedArrivalDate": "2026-07-20",
+        "purposeOfTravel": "tourism",
+        "entryDisease": "yellow-fever",
+        "entryVaccineName": "Stamaril",
+        "entryManufacturer": "Sanofi Pasteur",
+        "entryBatchNumber": "YF20260512A",
+        "entryVaccinationDate": "2026-06-01",
+        "entryVaccinationTime": "10:15",
+        "entryRoute": "subcutaneous",
+        "entryAnatomicalSite": "left upper arm",
+        "entryDoseAmountValue": "0.5",
+        "entryDoseAmountUnit": "mL",
+        "entryClinicianSignature": "signed",
+        "entryClinicianProfessionalStatus": "Registered Nurse (Travel Health)",
+        "entryValidityStartsOn": "2026-06-11",
+        "entryValidityEndsOn": "",
+        "entryValidityIsLifetime": "yes",
+        "entryCentreStampApplied": "yes",
+        "entryCentreStampImage": "stamp.png",
+        "medicalWaiver": "no",
+        "medicalWaiverReason": "",
+        "electronicSignature": "F. Iqbal RN"
+      },
+      "expected": {
+        "overallValid": true,
+        "firedRules": []
+      }
+    },
+    {
+      "name": "Cholera certificate with an inconsistent validity date and a pregnancy declaration",
+      "description": "Non-critical edge case built to isolate the disease-agnostic checks from the yellow-fever-only ones. entryDisease 'cholera' (not yellow-fever), so VAL003/VAL004/VAL008/VAL009 cannot fire regardless of the dates. entryValidityStartsOn (2026-06-25) is set BEFORE entryVaccinationDate (2026-07-01), firing VAL002 (error). declaredPregnancy 'yes' fires VAL010 (warning) independently of the disease. Manufacturer, batch, clinician status, and centre stamp are all present, so VAL005-VAL007 do not fire. Expect firedRules [VAL002 (error), VAL010 (warning)] in that order, overallValid false (VAL002 is an error).",
+      "state": {
+        "centreName": "Riverside Travel Health Clinic",
+        "centreCountryAlpha3": "GBR",
+        "whoDesignationReference": "WHO-YF-GBR-0442",
+        "uniformStamp": "yes",
+        "clinicianName": "Dr Farah Iqbal",
+        "clinicianProfessionalStatus": "Registered Nurse (Travel Health)",
+        "clinicianRegistrationBody": "NMC",
+        "clinicianRegistrationNumber": "19X4482E",
+        "patientGivenNames": "Marisol",
+        "patientSurname": "Dominguez",
+        "patientBirthDate": "1985-03-14",
+        "patientSex": "male",
+        "patientNationalityAlpha3": "GBR",
+        "patientTravelDocumentKind": "passport",
+        "patientTravelDocumentNumber": "552019284",
+        "patientSignature": "signed",
+        "consentedToDataSharing": "yes",
+        "declaredPregnancy": "yes",
+        "declaredBreastfeeding": "no",
+        "declaredImmunosuppression": "no",
+        "destinationCountriesAlpha3": "GHA",
+        "plannedArrivalDate": "2026-07-20",
+        "purposeOfTravel": "tourism",
+        "entryDisease": "cholera",
+        "entryVaccineName": "Dukoral",
+        "entryManufacturer": "Sanofi Pasteur",
+        "entryBatchNumber": "YF20260512A",
+        "entryVaccinationDate": "2026-07-01",
+        "entryVaccinationTime": "10:15",
+        "entryRoute": "subcutaneous",
+        "entryAnatomicalSite": "left upper arm",
+        "entryDoseAmountValue": "0.5",
+        "entryDoseAmountUnit": "mL",
+        "entryClinicianSignature": "signed",
+        "entryClinicianProfessionalStatus": "Registered Nurse (Travel Health)",
+        "entryValidityStartsOn": "2026-06-25",
+        "entryValidityEndsOn": "2028-07-01",
+        "entryValidityIsLifetime": "no",
+        "entryCentreStampApplied": "yes",
+        "entryCentreStampImage": "stamp.png",
+        "medicalWaiver": "no",
+        "medicalWaiverReason": "",
+        "electronicSignature": "F. Iqbal RN"
+      },
+      "expected": {
+        "overallValid": false,
+        "firedRules": [
+          {
+            "code": "VAL002",
+            "severity": "error",
+            "message": "Validity start is before vaccination date."
+          },
+          {
+            "code": "VAL010",
+            "severity": "warning",
+            "message": "Vaccinee declared pregnancy/breastfeeding; yellow-fever vaccination is contraindicated."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - future-dated yellow fever entry with six missing/inconsistent fields",
+      "description": "Critical/highest-severity persona: nine of the eleven enforced rules fire simultaneously. entryVaccinationDate 2026-09-10 is after the frozen 'today' of 2026-09-03 (VAL001, error). entryValidityStartsOn 2026-09-05 is both before the vaccination date (VAL002, error) AND does not equal vaccinationDate+10 days = 2026-09-20 (VAL003, error). entryValidityEndsOn is blank and entryValidityIsLifetime is not 'yes' (VAL004, warning). entryManufacturer and entryBatchNumber are blank (VAL005, error). entryClinicianProfessionalStatus (the per-entry field, distinct from the top-level clinicianProfessionalStatus which stays filled) is blank (VAL006, error). entryCentreStampApplied is 'no' (VAL007, error). The patient is 66 years old at vaccination (VAL009, warning - the mutually-exclusive 'too young' VAL008 cannot also fire at this age). declaredImmunosuppression is 'yes' (VAL011, warning); pregnancy/breastfeeding are left 'no' so VAL010 does not also fire on top of an implausible combination for a 66-year-old. Expect firedRules in code order VAL001, VAL002, VAL003, VAL004, VAL005, VAL006, VAL007, VAL009, VAL011 (9 rules: 6 errors, 3 warnings), overallValid false.",
+      "state": {
+        "centreName": "Riverside Travel Health Clinic",
+        "centreCountryAlpha3": "GBR",
+        "whoDesignationReference": "WHO-YF-GBR-0442",
+        "uniformStamp": "yes",
+        "clinicianName": "Dr Farah Iqbal",
+        "clinicianProfessionalStatus": "Registered Nurse (Travel Health)",
+        "clinicianRegistrationBody": "NMC",
+        "clinicianRegistrationNumber": "19X4482E",
+        "patientGivenNames": "Harold",
+        "patientSurname": "Winstanley",
+        "patientBirthDate": "1960-01-01",
+        "patientSex": "male",
+        "patientNationalityAlpha3": "GBR",
+        "patientTravelDocumentKind": "passport",
+        "patientTravelDocumentNumber": "552019284",
+        "patientSignature": "signed",
+        "consentedToDataSharing": "yes",
+        "declaredPregnancy": "no",
+        "declaredBreastfeeding": "no",
+        "declaredImmunosuppression": "yes",
+        "destinationCountriesAlpha3": "GHA",
+        "plannedArrivalDate": "2026-07-20",
+        "purposeOfTravel": "tourism",
+        "entryDisease": "yellow-fever",
+        "entryVaccineName": "Stamaril",
+        "entryManufacturer": "",
+        "entryBatchNumber": "",
+        "entryVaccinationDate": "2026-09-10",
+        "entryVaccinationTime": "10:15",
+        "entryRoute": "subcutaneous",
+        "entryAnatomicalSite": "left upper arm",
+        "entryDoseAmountValue": "0.5",
+        "entryDoseAmountUnit": "mL",
+        "entryClinicianSignature": "signed",
+        "entryClinicianProfessionalStatus": "",
+        "entryValidityStartsOn": "2026-09-05",
+        "entryValidityEndsOn": "",
+        "entryValidityIsLifetime": "",
+        "entryCentreStampApplied": "no",
+        "entryCentreStampImage": "stamp.png",
+        "medicalWaiver": "no",
+        "medicalWaiverReason": "",
+        "electronicSignature": "F. Iqbal RN"
+      },
+      "expected": {
+        "overallValid": false,
+        "firedRules": [
+          {
+            "code": "VAL001",
+            "severity": "error",
+            "message": "Vaccination date is in the future."
+          },
+          {
+            "code": "VAL002",
+            "severity": "error",
+            "message": "Validity start is before vaccination date."
+          },
+          {
+            "code": "VAL003",
+            "severity": "error",
+            "message": "Yellow-fever validity start must be vaccination date + 10 days."
+          },
+          {
+            "code": "VAL004",
+            "severity": "warning",
+            "message": "Yellow-fever validity end overridden to lifetime per 2016 IHR amendment."
+          },
+          {
+            "code": "VAL005",
+            "severity": "error",
+            "message": "Manufacturer and batch number are required."
+          },
+          {
+            "code": "VAL006",
+            "severity": "error",
+            "message": "Supervising clinician signature/professional status is required."
+          },
+          {
+            "code": "VAL007",
+            "severity": "error",
+            "message": "Official centre stamp is required."
+          },
+          {
+            "code": "VAL009",
+            "severity": "warning",
+            "message": "Vaccinee is older than 60 years; yellow-fever vaccination needs clinician review."
+          },
+          {
+            "code": "VAL011",
+            "severity": "warning",
+            "message": "Vaccinee declared immunosuppression; yellow-fever vaccination is contraindicated."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "evaluateFp92a",
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "Three hand-authored personas for the FP92A eligibility validator. evaluateFp92a(data) evaluates 18 declarative RULES (10 eligible-condition, 2 disqualifying, 2 redirect, 2 completeness, 1 renewal, 1 clarification) in registry order with NO re-sort of firedRules or additionalFlags (unlike MEDIF/ICVP, both stay in registry order); FLAGS are a SEPARATE 6-entry list evaluated independently against the same data plus the fired-rule-id list, so completeness/renewal/redirect conditions are typically covered by BOTH a rule (affecting eligibility) and a flag (practitioner-facing, cosmetic) - e.g. an invalid NHS number fires both fp92a.rule.completeness.missing-nhs-number AND fp92a.flag.missing-nhs-number. outcome precedence: cancerPending (a cancer condition declared with cancerTreatmentPhase blank) always wins as 'requires-clarification' REGARDLESS of any disqualifier or redirect also present; otherwise hasDisqualifier (ANY disqualifying rule, even alongside an otherwise-valid eligible condition) or zero eligible conditions makes it 'ineligible'; otherwise hasRedirect makes it 'ineligible' too (redirectTo is still populated); only with a non-empty eligibleConditions, no disqualifier, and no redirect is it 'eligible'. validFrom falls back to the real wall clock only when completedDate is blank (not exercised here - all three personas set completedDate explicitly, so validFrom is deterministic regardless of the oracle's frozen clock, pinned via the top-level 'clock' key only for consistency with the rest of this batch). validUntil is completedDate + 5 years, but ONLY when outcome is exactly 'eligible' - it is '' for every other outcome, even redirectTo cases. Regenerate 'expected' with: bin/test-personas united-kingdom-nhs-england-medical-exemption-certificate --update",
+  "personas": [
+    {
+      "name": "Eligible - epilepsy on continuous anticonvulsant, complete application",
+      "description": "A single qualifying condition (epilepsy-on-anticonvulsant), signed, with a valid 10-digit NHS number, no pregnancy, no disqualifier, no age-exemption band, and no prior certificate on file. Expect outcome 'eligible', redirectTo '', eligibleConditions ['epilepsy-on-anticonvulsant'], a single fired rule (the condition rule), no flags, validFrom '2026-08-15' (the completedDate), validUntil '2031-08-15' (completedDate + 5 years).",
+      "state": {
+        "practitionerName": "Dr Wilhelmina Osei",
+        "practitionerRole": "GP",
+        "registrationBody": "GMC",
+        "registrationNumber": "6154471",
+        "practiceName": "Fenwick Road Surgery",
+        "practiceCode": "Y02345",
+        "practiceAddress": "22 Fenwick Road, Sheffield",
+        "practicePostcode": "S11 8BZ",
+        "practicePhone": "0114 496 0033",
+        "completedDate": "2026-08-15",
+        "patientTitle": "Mr",
+        "patientSurname": "Ashworth",
+        "patientForenames": "Callum",
+        "patientBirthDate": "1986-02-11",
+        "patientSex": "male",
+        "patientNhsNumber": "485 777 3456",
+        "patientAddress": "9 Orchard Close, Sheffield",
+        "patientPostcode": "S8 0RW",
+        "patientPhone": "",
+        "patientEmail": "",
+        "applicationKind": "new",
+        "previousCertificateNumber": "",
+        "previousCertificateExpiry": "",
+        "fullTimeEducation": "",
+        "pregnancyStatus": "",
+        "conditions": [
+          "epilepsy-on-anticonvulsant"
+        ],
+        "diagnosisDate": "2018-03-01",
+        "snomedCode": "",
+        "icd10Code": "",
+        "treatmentDetail": "Lamotrigine 200mg BD",
+        "diabetesTreatmentMode": "",
+        "cancerSite": "",
+        "cancerTreatmentPhase": "",
+        "fistulaSite": "",
+        "applianceType": "",
+        "cannotLeaveHomeUnaided": "",
+        "disabilityPermanent": "",
+        "carerDetail": "",
+        "practitionerDeclaration": "yes",
+        "signaturePresent": "yes",
+        "signedDate": "2026-08-15"
+      },
+      "expected": {
+        "outcome": "eligible",
+        "eligibleConditions": [
+          "epilepsy-on-anticonvulsant"
+        ],
+        "firedRules": [
+          {
+            "ruleId": "fp92a.rule.condition.epilepsy-on-anticonvulsant",
+            "category": "eligible-condition",
+            "severity": "info",
+            "description": "Epilepsy on continuous anticonvulsant therapy declared."
+          }
+        ],
+        "additionalFlags": [],
+        "validFrom": "2026-08-15",
+        "validUntil": "2031-08-15",
+        "redirectTo": ""
+      }
+    },
+    {
+      "name": "Cancer condition with histology pending and a missing NHS number",
+      "description": "Non-critical edge case for the outcome-precedence rule: cancer-or-effects is declared with cancerTreatmentPhase left blank, so the clarification.cancer-histology rule fires and cancerPending forces outcome 'requires-clarification' - this wins EVEN THOUGH eligibleConditions is non-empty (cancer-or-effects itself still fires as a valid condition rule) and there is no disqualifier or redirect, which would otherwise have produced 'eligible'. The blank patientNhsNumber independently fires BOTH the completeness.missing-nhs-number RULE (part of firedRules, though it does not itself change the outcome here since cancerPending is checked first) and the matching FLAG. Expect outcome 'requires-clarification', redirectTo '', eligibleConditions ['cancer-or-effects'], three fired rules in registry order (condition.cancer-or-effects, completeness.missing-nhs-number, clarification.cancer-histology), one flag (missing-nhs-number), validFrom '2026-07-01', validUntil '' (not eligible).",
+      "state": {
+        "practitionerName": "Dr Wilhelmina Osei",
+        "practitionerRole": "GP",
+        "registrationBody": "GMC",
+        "registrationNumber": "6154471",
+        "practiceName": "Fenwick Road Surgery",
+        "practiceCode": "Y02345",
+        "practiceAddress": "22 Fenwick Road, Sheffield",
+        "practicePostcode": "S11 8BZ",
+        "practicePhone": "0114 496 0033",
+        "completedDate": "2026-07-01",
+        "patientTitle": "Mr",
+        "patientSurname": "Delacroix-Whitfield",
+        "patientForenames": "Margot",
+        "patientBirthDate": "1991-09-19",
+        "patientSex": "female",
+        "patientNhsNumber": "",
+        "patientAddress": "9 Orchard Close, Sheffield",
+        "patientPostcode": "S8 0RW",
+        "patientPhone": "",
+        "patientEmail": "",
+        "applicationKind": "new",
+        "previousCertificateNumber": "",
+        "previousCertificateExpiry": "",
+        "fullTimeEducation": "",
+        "pregnancyStatus": "",
+        "conditions": [
+          "cancer-or-effects"
+        ],
+        "diagnosisDate": "2018-03-01",
+        "snomedCode": "",
+        "icd10Code": "",
+        "treatmentDetail": "Lamotrigine 200mg BD",
+        "diabetesTreatmentMode": "",
+        "cancerSite": "Breast",
+        "cancerTreatmentPhase": "",
+        "fistulaSite": "",
+        "applianceType": "",
+        "cannotLeaveHomeUnaided": "",
+        "disabilityPermanent": "",
+        "carerDetail": "",
+        "practitionerDeclaration": "yes",
+        "signaturePresent": "yes",
+        "signedDate": "2026-08-15"
+      },
+      "expected": {
+        "outcome": "requires-clarification",
+        "eligibleConditions": [
+          "cancer-or-effects"
+        ],
+        "firedRules": [
+          {
+            "ruleId": "fp92a.rule.condition.cancer-or-effects",
+            "category": "eligible-condition",
+            "severity": "info",
+            "description": "Cancer-related qualifying condition declared."
+          },
+          {
+            "ruleId": "fp92a.rule.completeness.missing-nhs-number",
+            "category": "completeness",
+            "severity": "medium",
+            "description": "NHS number missing — NHSBSA cannot match the application."
+          },
+          {
+            "ruleId": "fp92a.rule.clarification.cancer-histology",
+            "category": "completeness",
+            "severity": "medium",
+            "description": "Cancer declared but histology not confirmed — clarification required."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "fp92a.flag.missing-nhs-number",
+            "category": "completeness",
+            "priority": "high",
+            "description": "An NHS number is needed for NHSBSA to match the application."
+          }
+        ],
+        "validFrom": "2026-07-01",
+        "validUntil": "",
+        "redirectTo": ""
+      }
+    },
+    {
+      "name": "Critical - diet-only-diabetes disqualifier overrides a genuinely valid fistula condition, plus a pregnancy redirect and two completeness gaps",
+      "description": "Critical/highest-severity persona layering a disqualifier, a redirect, and two completeness failures simultaneously. conditions declares both diabetes-mellitus-not-diet-only (with diabetesTreatmentMode 'diet-only', so the condition rule itself does NOT fire but the disqualifying.diet-only-diabetes rule DOES) and permanent-fistula (a genuinely valid, independently-firing condition). pregnancyStatus 'pregnant' fires redirect.fw8-pregnancy. signaturePresent is blank (missing-signature) and patientNhsNumber is '123', an invalid 10-digit number (missing-nhs-number). previousCertificateExpiry is a future date with applicationKind still 'new', firing renewal.active-certificate. Verified engine behaviour: hasDisqualifier alone is sufficient to force outcome 'ineligible' EVEN THOUGH eligibleConditions is non-empty (permanent-fistula genuinely fired) - a single disqualifying condition entry blocks the whole application, not just that condition. redirectTo is still populated ('FW8') despite the outcome already being 'ineligible' via the disqualifier branch, since redirectTo is computed before the outcome branch is chosen. Expect outcome 'ineligible', redirectTo 'FW8', eligibleConditions ['permanent-fistula'], six fired rules in registry order (condition.permanent-fistula, disqualifying.diet-only-diabetes, redirect.fw8-pregnancy, completeness.missing-signature, completeness.missing-nhs-number, renewal.active-certificate), five flags in FLAGS-array order (missing-signature, missing-nhs-number, pregnancy-redirect, diet-only-diabetes, active-certificate-exists - age-exemption does not fire, the patient is 32), validFrom '2026-08-20', validUntil '' (not eligible).",
+      "state": {
+        "practitionerName": "Dr Wilhelmina Osei",
+        "practitionerRole": "GP",
+        "registrationBody": "GMC",
+        "registrationNumber": "6154471",
+        "practiceName": "Fenwick Road Surgery",
+        "practiceCode": "Y02345",
+        "practiceAddress": "22 Fenwick Road, Sheffield",
+        "practicePostcode": "S11 8BZ",
+        "practicePhone": "0114 496 0033",
+        "completedDate": "2026-08-20",
+        "patientTitle": "Mr",
+        "patientSurname": "Ibragimova",
+        "patientForenames": "Zarina",
+        "patientBirthDate": "1994-05-01",
+        "patientSex": "female",
+        "patientNhsNumber": "123",
+        "patientAddress": "9 Orchard Close, Sheffield",
+        "patientPostcode": "S8 0RW",
+        "patientPhone": "",
+        "patientEmail": "",
+        "applicationKind": "new",
+        "previousCertificateNumber": "FP92A-2023-88213",
+        "previousCertificateExpiry": "2027-01-01",
+        "fullTimeEducation": "",
+        "pregnancyStatus": "pregnant",
+        "conditions": [
+          "diabetes-mellitus-not-diet-only",
+          "permanent-fistula"
+        ],
+        "diagnosisDate": "2018-03-01",
+        "snomedCode": "",
+        "icd10Code": "",
+        "treatmentDetail": "Lamotrigine 200mg BD",
+        "diabetesTreatmentMode": "diet-only",
+        "cancerSite": "",
+        "cancerTreatmentPhase": "",
+        "fistulaSite": "Ileostomy",
+        "applianceType": "",
+        "cannotLeaveHomeUnaided": "",
+        "disabilityPermanent": "",
+        "carerDetail": "",
+        "practitionerDeclaration": "yes",
+        "signaturePresent": "",
+        "signedDate": ""
+      },
+      "expected": {
+        "outcome": "ineligible",
+        "eligibleConditions": [
+          "permanent-fistula"
+        ],
+        "firedRules": [
+          {
+            "ruleId": "fp92a.rule.condition.permanent-fistula",
+            "category": "eligible-condition",
+            "severity": "info",
+            "description": "Permanent fistula declared."
+          },
+          {
+            "ruleId": "fp92a.rule.disqualifying.diet-only-diabetes",
+            "category": "disqualifying",
+            "severity": "high",
+            "description": "Diabetes treated by diet alone — not eligible for FP92A."
+          },
+          {
+            "ruleId": "fp92a.rule.redirect.fw8-pregnancy",
+            "category": "redirect",
+            "severity": "medium",
+            "description": "Pregnant or recently post-partum — redirect to FW8 maternity exemption."
+          },
+          {
+            "ruleId": "fp92a.rule.completeness.missing-signature",
+            "category": "completeness",
+            "severity": "high",
+            "description": "Practitioner signature missing — application incomplete."
+          },
+          {
+            "ruleId": "fp92a.rule.completeness.missing-nhs-number",
+            "category": "completeness",
+            "severity": "medium",
+            "description": "NHS number missing — NHSBSA cannot match the application."
+          },
+          {
+            "ruleId": "fp92a.rule.renewal.active-certificate",
+            "category": "renewal",
+            "severity": "low",
+            "description": "An active certificate is already on file — this should be marked as a renewal."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "fp92a.flag.missing-signature",
+            "category": "completeness",
+            "priority": "high",
+            "description": "Practitioner signature is required before the FP92A can be posted."
+          },
+          {
+            "flagId": "fp92a.flag.missing-nhs-number",
+            "category": "completeness",
+            "priority": "high",
+            "description": "An NHS number is needed for NHSBSA to match the application."
+          },
+          {
+            "flagId": "fp92a.flag.pregnancy-redirect",
+            "category": "pregnancy",
+            "priority": "medium",
+            "description": "Direct the applicant to FW8 (maternity exemption)."
+          },
+          {
+            "flagId": "fp92a.flag.diet-only-diabetes",
+            "category": "education",
+            "priority": "low",
+            "description": "Diet-only diabetes is not eligible for FP92A; advise lifestyle support."
+          },
+          {
+            "flagId": "fp92a.flag.active-certificate-exists",
+            "category": "workflow",
+            "priority": "low",
+            "description": "An active certificate is already on file — mark as renewal."
+          }
+        ],
+        "validFrom": "2026-08-20",
+        "validUntil": "",
+        "redirectTo": "FW8"
+      }
+    }
+  ]
+}

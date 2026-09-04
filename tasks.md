@@ -1672,18 +1672,39 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       extraction of the page's original inline script). All nine personas
       matched hand-derivation exactly against the live engine before
       `--update` was run. `bin/test-e2e --html` on all three: 6/6 passed
-      including axe-core. 9 forms remain from the original 12-form list:
-      `international-certificate-of-vaccination-or-prophylaxis`,
-      `medical-information-form-for-air-travel`,
+      including axe-core. 3 more done the same day:
+      `international-certificate-of-vaccination-or-prophylaxis`
+      (`validateCertificate`; VAL003/004/008/009 are gated on
+      `entryDisease === 'yellow-fever'` and never fire for any other
+      disease — the edge persona uses cholera specifically to isolate
+      VAL002/VAL010 from the yellow-fever-only checks; VAL001 reads the
+      real wall clock, pinned via the persona-file `clock` key),
+      `medical-information-form-for-air-travel` (`evaluateFitness`; BOTH
+      firedRules and safetyFlags are independently re-sorted before
+      return — rules descending by band severity, flags by priority —
+      and `validUntil` is always today+10 regardless of the computed
+      band), `united-kingdom-nhs-england-medical-exemption-certificate`
+      (`evaluateFp92a`; verified that a single disqualifying rule
+      — diet-only-diabetes — forces `outcome: 'ineligible'` even when a
+      genuinely separate, independently-valid eligible condition also
+      fired in the same submission; `redirectTo` is still populated
+      even when the outcome is already `'ineligible'` via the
+      disqualifier branch, since it's computed before the outcome
+      branch is chosen; unlike MEDIF/ICVP this engine does NOT re-sort
+      firedRules or additionalFlags — both stay in registry order). All
+      nine matched hand-derivation exactly; one self-caught omission
+      during design (forgot `completeness.missing-nhs-number` is a RULE
+      as well as a FLAG) was corrected before writing prose, not after
+      seeing a FAIL. Fleet: `bin/test-personas` forms 320/320 PASS,
+      personas 1076/1076 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
+      6 forms remain from the original 12-form list:
       `hospital-daily-monitoring-checklist`, `hospital-dashboard-metrics`,
       `hospital-performance-indicators`, `issue-tracker`, `meeting`,
-      `objectives-and-key-results-tracker`,
-      `united-kingdom-nhs-england-medical-exemption-certificate` — plus the
-      27 forms unblocked purely by probe discovery that were never on that
-      12-form list (see the full `/tmp/needs-personas.txt`-style sweep:
-      `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
-      '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo
-      $f; done`).
+      `objectives-and-key-results-tracker` — plus the 27 forms unblocked
+      purely by probe discovery that were never on that 12-form list (see
+      the full sweep: `for f in $(bin/test-engines --verbose | grep
+      '^PASS' | awk '{print $2}'); do [ -f forms/$f/examples/personas.json
+      ] || echo $f; done`).
 
 ### Spec-driven follow-through
 
