@@ -1,0 +1,555 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeIssue",
+  "note": "Three hand-authored personas for the Issue Tracker's seven-scale composite grader. gradeIssue(data) grades each of priority/severity/magnitude/harm/failure-condition/MoSCoW/frequency independently and takes compositePriority as the worst (max) band across all seven; a NULL score bands as 'low' for that instrument but pushes NO rule at all (not even a low one) - only a non-null score produces a R-<INSTRUMENT>-<value> rule - so firedRules.length varies with how many of the 7 scores are answered, plus one trailing R-COMPOSITE-<BAND> rule that is always present. additionalFlags are independent threshold checks on the raw scores (not the bands) and fire regardless of the composite: harm===4 (not merely >=4, since 4 is the harm scale's maximum), failure==='A', severity===5, magnitude===10, frequency>=95, moscow===1, and (issueCategory in the regulatory set) AND harm>=2 together. Regenerate 'expected' with: bin/test-personas issue-tracker --update",
+  "personas": [
+    {
+      "name": "Cosmetic UI bug - every scale at its mildest",
+      "description": "A rarely-seen date-picker glitch: priority rank 4 (low), severity 1, magnitude 1, harm 0 (no harm), failure condition E (no effect), MoSCoW 4 (won't have), frequency 2%. Every instrument bands 'low', so compositePriority is 'low'. Expect eight fired rules (one per instrument plus the composite) and no flags at all.",
+      "state": {
+        "reporter": {
+          "reporterName": "Jamie Ostrowski",
+          "reporterEmail": "j.ostrowski@example.com",
+          "reporterRole": "support-engineer",
+          "reportedAt": "2026-09-04T09:15",
+          "discoveredAt": "2026-09-04T09:10",
+          "issueCategory": "usability",
+          "environment": "production",
+          "systemName": "Patient Portal",
+          "component": "appointment-booking",
+          "customerOrProjectTag": "",
+          "externalReference": ""
+        },
+        "cc": {
+          "ccSummary": "Date picker occasionally shows the wrong month on first load.",
+          "ccLongDescription": "",
+          "ccReportedByName": "Jamie Ostrowski",
+          "ccReportedVia": "internal-qa"
+        },
+        "pt": {
+          "ptDiscovererName": "",
+          "ptAffectedUsersCount": null,
+          "ptAffectedUserGroups": "",
+          "ptAssignees": "",
+          "ptStakeholdersToInform": "",
+          "ptObservers": ""
+        },
+        "sx": {
+          "sxExternalSignals": "",
+          "sxAlertIds": "",
+          "sxErrorMessages": "",
+          "sxScreenshotsUrl": "",
+          "sxLogsUrl": "",
+          "sxFirstObservedAt": ""
+        },
+        "fx": {
+          "fxBrokenComponents": "",
+          "fxFailedServices": "",
+          "fxStuckProcesses": "",
+          "fxHardwareFaults": "",
+          "fxDataCorruption": ""
+        },
+        "hx": {
+          "hxRelatedIssues": "",
+          "hxPriorOccurrences": null,
+          "hxRecentChangeUrl": "",
+          "hxReferences": "",
+          "hxTimeline": ""
+        },
+        "ix": {
+          "ixHypotheses": "",
+          "ixReproSteps": "",
+          "ixDiagnosticQueries": "",
+          "ixTestsRun": "",
+          "ixBlockingUnknowns": ""
+        },
+        "dx": {
+          "dxRootCause": "",
+          "dxContributingCauses": "",
+          "dxScope": "",
+          "dxConfirmed": ""
+        },
+        "txpx": {
+          "txMitigationSteps": "",
+          "txFixPlan": "",
+          "txWorkaround": "",
+          "txRollbackPlan": "",
+          "txCommunicationPlan": "",
+          "pxExpectedResolutionAt": "",
+          "pxResidualRisk": "",
+          "pxMonitoringPlan": "",
+          "pxRecurrenceLikelihood": "",
+          "pxLessonsLearned": ""
+        },
+        "scores": {
+          "scoreByPriorityRank": 4,
+          "scoreBySeverityOfImpact": 1,
+          "scoreByMagnitudeOfDamage": 1,
+          "scoreByHarmGrade": 0,
+          "scoreByFailureCondition": "E",
+          "scoreByMoscowRequirement": 4,
+          "scoreByFrequencyPercent": 2
+        }
+      },
+      "expected": {
+        "scoreByPriorityRank": 4,
+        "scoreBySeverityOfImpact": 1,
+        "scoreByMagnitudeOfDamage": 1,
+        "scoreByHarmGrade": 0,
+        "scoreByFailureCondition": "E",
+        "scoreByMoscowRequirement": 4,
+        "scoreByFrequencyPercent": 2,
+        "compositePriority": "low",
+        "firedRules": [
+          {
+            "ruleId": "R-PRIORITY-4",
+            "instrument": "priority",
+            "grade": "4",
+            "category": "workflow",
+            "description": "Priority rank 4.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-SEVERITY-1",
+            "instrument": "severity",
+            "grade": "1",
+            "category": "impact",
+            "description": "Severity of impact 1 — minimal impact.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-MAGNITUDE-1",
+            "instrument": "magnitude",
+            "grade": "1",
+            "category": "damage",
+            "description": "Magnitude of damage 1 on a 1-10 Richter-style scale.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-HARM-0",
+            "instrument": "harm",
+            "grade": "0",
+            "category": "patient-safety",
+            "description": "NHS LFPSE harm grade 0 — no harm.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-FAILURE-E",
+            "instrument": "failure",
+            "grade": "E",
+            "category": "system-safety",
+            "description": "Failure condition E — no effect.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-MOSCOW-4",
+            "instrument": "moscow",
+            "grade": "4",
+            "category": "requirement",
+            "description": "MoSCoW classification 4 — won't have.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-FREQUENCY-2",
+            "instrument": "frequency",
+            "grade": "2%",
+            "category": "reach",
+            "description": "Frequency of occurrence 2% of usage affected.",
+            "band": "low"
+          },
+          {
+            "ruleId": "R-COMPOSITE-LOW",
+            "instrument": "composite",
+            "grade": "low",
+            "category": "composite",
+            "description": "Composite priority is low — the worst band across all seven instruments.",
+            "band": "low"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Data-protection near-miss with one unanswered scale",
+      "description": "Non-critical edge case: a bulk-export filter bug sent records to the wrong clinic. Priority rank 2 (high), severity 3 (moderate), magnitude left UNANSWERED (null - bands low but pushes no rule), harm 1 (moderate - below the >=2 regulatory threshold despite issueCategory 'data-protection' being in the regulatory set), failure condition C (moderate), MoSCoW 1 (must have - high band AND the only flag trigger), frequency 30% (high). compositePriority 'high' (from priority/MoSCoW/frequency). Expect seven fired rules (magnitude contributes none) plus the composite rule, and exactly one flag: F-MOSCOW-MUST-001. The regulatory flag does NOT fire (harm 1 is below the >=2 floor even though the category qualifies).",
+      "state": {
+        "reporter": {
+          "reporterName": "Adaeze Nwankwo",
+          "reporterEmail": "a.nwankwo@example.com",
+          "reporterRole": "data-protection-officer",
+          "reportedAt": "2026-09-04T11:00",
+          "discoveredAt": "2026-09-03T22:40",
+          "issueCategory": "data-protection",
+          "environment": "production",
+          "systemName": "Referral Management System",
+          "component": "export-service",
+          "customerOrProjectTag": "",
+          "externalReference": ""
+        },
+        "cc": {
+          "ccSummary": "Bulk export endpoint returned 40 patient records to the wrong clinic on a filter bug.",
+          "ccLongDescription": "",
+          "ccReportedByName": "Adaeze Nwankwo",
+          "ccReportedVia": "incident-hotline"
+        },
+        "pt": {
+          "ptDiscovererName": "",
+          "ptAffectedUsersCount": null,
+          "ptAffectedUserGroups": "",
+          "ptAssignees": "",
+          "ptStakeholdersToInform": "",
+          "ptObservers": ""
+        },
+        "sx": {
+          "sxExternalSignals": "",
+          "sxAlertIds": "",
+          "sxErrorMessages": "",
+          "sxScreenshotsUrl": "",
+          "sxLogsUrl": "",
+          "sxFirstObservedAt": ""
+        },
+        "fx": {
+          "fxBrokenComponents": "",
+          "fxFailedServices": "",
+          "fxStuckProcesses": "",
+          "fxHardwareFaults": "",
+          "fxDataCorruption": ""
+        },
+        "hx": {
+          "hxRelatedIssues": "",
+          "hxPriorOccurrences": null,
+          "hxRecentChangeUrl": "",
+          "hxReferences": "",
+          "hxTimeline": ""
+        },
+        "ix": {
+          "ixHypotheses": "",
+          "ixReproSteps": "",
+          "ixDiagnosticQueries": "",
+          "ixTestsRun": "",
+          "ixBlockingUnknowns": ""
+        },
+        "dx": {
+          "dxRootCause": "",
+          "dxContributingCauses": "",
+          "dxScope": "",
+          "dxConfirmed": ""
+        },
+        "txpx": {
+          "txMitigationSteps": "",
+          "txFixPlan": "",
+          "txWorkaround": "",
+          "txRollbackPlan": "",
+          "txCommunicationPlan": "",
+          "pxExpectedResolutionAt": "",
+          "pxResidualRisk": "",
+          "pxMonitoringPlan": "",
+          "pxRecurrenceLikelihood": "",
+          "pxLessonsLearned": ""
+        },
+        "scores": {
+          "scoreByPriorityRank": 2,
+          "scoreBySeverityOfImpact": 3,
+          "scoreByMagnitudeOfDamage": null,
+          "scoreByHarmGrade": 1,
+          "scoreByFailureCondition": "C",
+          "scoreByMoscowRequirement": 1,
+          "scoreByFrequencyPercent": 30
+        }
+      },
+      "expected": {
+        "scoreByPriorityRank": 2,
+        "scoreBySeverityOfImpact": 3,
+        "scoreByMagnitudeOfDamage": null,
+        "scoreByHarmGrade": 1,
+        "scoreByFailureCondition": "C",
+        "scoreByMoscowRequirement": 1,
+        "scoreByFrequencyPercent": 30,
+        "compositePriority": "high",
+        "firedRules": [
+          {
+            "ruleId": "R-PRIORITY-2",
+            "instrument": "priority",
+            "grade": "2",
+            "category": "workflow",
+            "description": "Priority rank 2.",
+            "band": "high"
+          },
+          {
+            "ruleId": "R-SEVERITY-3",
+            "instrument": "severity",
+            "grade": "3",
+            "category": "impact",
+            "description": "Severity of impact 3 — moderate impact.",
+            "band": "moderate"
+          },
+          {
+            "ruleId": "R-HARM-1",
+            "instrument": "harm",
+            "grade": "1",
+            "category": "patient-safety",
+            "description": "NHS LFPSE harm grade 1 — low harm.",
+            "band": "moderate"
+          },
+          {
+            "ruleId": "R-FAILURE-C",
+            "instrument": "failure",
+            "grade": "C",
+            "category": "system-safety",
+            "description": "Failure condition C — major — significant reduction in safety margin or workload increase.",
+            "band": "moderate"
+          },
+          {
+            "ruleId": "R-MOSCOW-1",
+            "instrument": "moscow",
+            "grade": "1",
+            "category": "requirement",
+            "description": "MoSCoW classification 1 — must have.",
+            "band": "high"
+          },
+          {
+            "ruleId": "R-FREQUENCY-30",
+            "instrument": "frequency",
+            "grade": "30%",
+            "category": "reach",
+            "description": "Frequency of occurrence 30% of usage affected.",
+            "band": "high"
+          },
+          {
+            "ruleId": "R-COMPOSITE-HIGH",
+            "instrument": "composite",
+            "grade": "high",
+            "category": "composite",
+            "description": "Composite priority is high — the worst band across all seven instruments.",
+            "band": "high"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-MOSCOW-MUST-001",
+            "category": "requirement-mandatory",
+            "priority": "medium",
+            "description": "MoSCoW classification \"must have\".",
+            "suggestedAction": "Hold release until resolved; do not defer."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - paediatric dosing-calculator error, every scale at its most severe",
+      "description": "Critical/highest-severity persona: an infusion-pump dose-rounding error affecting every calculation since deployment. Priority rank 1 (critical), severity 5 (critical - the scale's maximum), magnitude 10 (critical - total destruction), harm 4 (critical - fatal, the scale's maximum), failure condition A (critical - catastrophic), MoSCoW 1 (must have), frequency 100% (critical, >=95). issueCategory 'clinical-safety' is in the regulatory set and harm 4 >= 2, so the regulatory flag also fires. Expect compositePriority 'critical', eight fired rules (all seven instruments plus the composite), and seven flags in check order: F-HARM-FATAL-001, F-FAILURE-A-001, F-SEVERITY-5-001, F-MAGNITUDE-10-001, F-FREQUENCY-95-001, F-MOSCOW-MUST-001, F-REGULATORY-001.",
+      "state": {
+        "reporter": {
+          "reporterName": "Malachi Osei-Bonsu",
+          "reporterEmail": "m.osei-bonsu@example.com",
+          "reporterRole": "clinical-safety-officer",
+          "reportedAt": "2026-09-04T02:05",
+          "discoveredAt": "2026-09-04T01:50",
+          "issueCategory": "clinical-safety",
+          "environment": "production",
+          "systemName": "Infusion Pump Dosing Calculator",
+          "component": "dose-rounding",
+          "customerOrProjectTag": "",
+          "externalReference": ""
+        },
+        "cc": {
+          "ccSummary": "Dosing calculator rounded a paediatric infusion rate up by a factor of ten, affecting every calculation since deployment.",
+          "ccLongDescription": "",
+          "ccReportedByName": "Malachi Osei-Bonsu",
+          "ccReportedVia": "incident-hotline"
+        },
+        "pt": {
+          "ptDiscovererName": "",
+          "ptAffectedUsersCount": null,
+          "ptAffectedUserGroups": "",
+          "ptAssignees": "",
+          "ptStakeholdersToInform": "",
+          "ptObservers": ""
+        },
+        "sx": {
+          "sxExternalSignals": "",
+          "sxAlertIds": "",
+          "sxErrorMessages": "",
+          "sxScreenshotsUrl": "",
+          "sxLogsUrl": "",
+          "sxFirstObservedAt": ""
+        },
+        "fx": {
+          "fxBrokenComponents": "",
+          "fxFailedServices": "",
+          "fxStuckProcesses": "",
+          "fxHardwareFaults": "",
+          "fxDataCorruption": ""
+        },
+        "hx": {
+          "hxRelatedIssues": "",
+          "hxPriorOccurrences": null,
+          "hxRecentChangeUrl": "",
+          "hxReferences": "",
+          "hxTimeline": ""
+        },
+        "ix": {
+          "ixHypotheses": "",
+          "ixReproSteps": "",
+          "ixDiagnosticQueries": "",
+          "ixTestsRun": "",
+          "ixBlockingUnknowns": ""
+        },
+        "dx": {
+          "dxRootCause": "",
+          "dxContributingCauses": "",
+          "dxScope": "",
+          "dxConfirmed": ""
+        },
+        "txpx": {
+          "txMitigationSteps": "",
+          "txFixPlan": "",
+          "txWorkaround": "",
+          "txRollbackPlan": "",
+          "txCommunicationPlan": "",
+          "pxExpectedResolutionAt": "",
+          "pxResidualRisk": "",
+          "pxMonitoringPlan": "",
+          "pxRecurrenceLikelihood": "",
+          "pxLessonsLearned": ""
+        },
+        "scores": {
+          "scoreByPriorityRank": 1,
+          "scoreBySeverityOfImpact": 5,
+          "scoreByMagnitudeOfDamage": 10,
+          "scoreByHarmGrade": 4,
+          "scoreByFailureCondition": "A",
+          "scoreByMoscowRequirement": 1,
+          "scoreByFrequencyPercent": 100
+        }
+      },
+      "expected": {
+        "scoreByPriorityRank": 1,
+        "scoreBySeverityOfImpact": 5,
+        "scoreByMagnitudeOfDamage": 10,
+        "scoreByHarmGrade": 4,
+        "scoreByFailureCondition": "A",
+        "scoreByMoscowRequirement": 1,
+        "scoreByFrequencyPercent": 100,
+        "compositePriority": "critical",
+        "firedRules": [
+          {
+            "ruleId": "R-PRIORITY-1",
+            "instrument": "priority",
+            "grade": "1",
+            "category": "workflow",
+            "description": "Priority rank 1.",
+            "band": "critical"
+          },
+          {
+            "ruleId": "R-SEVERITY-5",
+            "instrument": "severity",
+            "grade": "5",
+            "category": "impact",
+            "description": "Severity of impact 5 — catastrophic impact.",
+            "band": "critical"
+          },
+          {
+            "ruleId": "R-MAGNITUDE-10",
+            "instrument": "magnitude",
+            "grade": "10",
+            "category": "damage",
+            "description": "Magnitude of damage 10 on a 1-10 Richter-style scale.",
+            "band": "critical"
+          },
+          {
+            "ruleId": "R-HARM-4",
+            "instrument": "harm",
+            "grade": "4",
+            "category": "patient-safety",
+            "description": "NHS LFPSE harm grade 4 — fatal.",
+            "band": "critical"
+          },
+          {
+            "ruleId": "R-FAILURE-A",
+            "instrument": "failure",
+            "grade": "A",
+            "category": "system-safety",
+            "description": "Failure condition A — catastrophic — multiple fatalities, loss of system.",
+            "band": "critical"
+          },
+          {
+            "ruleId": "R-MOSCOW-1",
+            "instrument": "moscow",
+            "grade": "1",
+            "category": "requirement",
+            "description": "MoSCoW classification 1 — must have.",
+            "band": "high"
+          },
+          {
+            "ruleId": "R-FREQUENCY-100",
+            "instrument": "frequency",
+            "grade": "100%",
+            "category": "reach",
+            "description": "Frequency of occurrence 100% of usage affected.",
+            "band": "critical"
+          },
+          {
+            "ruleId": "R-COMPOSITE-CRITICAL",
+            "instrument": "composite",
+            "grade": "critical",
+            "category": "composite",
+            "description": "Composite priority is critical — the worst band across all seven instruments.",
+            "band": "critical"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-HARM-FATAL-001",
+            "category": "harm-fatal",
+            "priority": "high",
+            "description": "NHS LFPSE harm grade 4 (fatal).",
+            "suggestedAction": "Escalate to LFPSE; notify the trust patient-safety lead immediately."
+          },
+          {
+            "flagId": "F-FAILURE-A-001",
+            "category": "failure-catastrophic",
+            "priority": "high",
+            "description": "FAA / EASA failure condition Level A (catastrophic).",
+            "suggestedAction": "Trigger incident bridge; notify safety officer; consider system shutdown."
+          },
+          {
+            "flagId": "F-SEVERITY-5-001",
+            "category": "severity-catastrophic",
+            "priority": "high",
+            "description": "Severity of impact 5 (catastrophic).",
+            "suggestedAction": "Escalate to executive on-call; prepare customer communication."
+          },
+          {
+            "flagId": "F-MAGNITUDE-10-001",
+            "category": "magnitude-total-destruction",
+            "priority": "high",
+            "description": "Magnitude of damage 10 (total destruction).",
+            "suggestedAction": "Initiate disaster-recovery plan; preserve evidence for forensics."
+          },
+          {
+            "flagId": "F-FREQUENCY-95-001",
+            "category": "frequency-universal",
+            "priority": "high",
+            "description": "Frequency 100% — effectively universal impact.",
+            "suggestedAction": "Treat as full outage; activate status page and on-call rotation."
+          },
+          {
+            "flagId": "F-MOSCOW-MUST-001",
+            "category": "requirement-mandatory",
+            "priority": "medium",
+            "description": "MoSCoW classification \"must have\".",
+            "suggestedAction": "Hold release until resolved; do not defer."
+          },
+          {
+            "flagId": "F-REGULATORY-001",
+            "category": "regulatory",
+            "priority": "high",
+            "description": "Issue category \"clinical-safety\" with harm ≥ 2 — regulatory reporting may apply.",
+            "suggestedAction": "Notify compliance / legal; prepare LFPSE / ICO / RIDDOR / MHRA report as appropriate."
+          }
+        ]
+      }
+    }
+  ]
+}

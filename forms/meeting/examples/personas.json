@@ -1,0 +1,439 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateMeeting",
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "Three hand-authored personas for the Meeting validation engine. validateMeeting(data) is a rules-based completeness/consistency checker (not a clinical grader) - firedRules and flags share the same trigger set but firedRules record every deviation (even non-completed-meeting ones like start-after-end) while several checks (no-participants, no-agenda, no-outcomes, no-summary) only raise a FLAG when status===completed, even though their firedRule can appear regardless of status for the two that are unconditional either way. durationMinutes prefers actualStartAt/actualEndAt over the scheduled times, and returns null (not a negative number) whenever the computed end precedes the start - this happens even when both actual times are genuinely recorded, if the end time was mistakenly entered as earlier in the day than the start (persona 3). The overdue-action-item check reads the real wall clock, pinned here via the top-level clock key. overallHealth is red whenever ANY fired flag is high priority, amber when there is at least one flag but none high, else green. Regenerate expected with: bin/test-personas meeting --update",
+  "personas": [
+    {
+      "name": "Well-formed sprint-planning meeting, still in draft",
+      "description": "A draft (not yet held) sprint-planning meeting with an organiser, a two-item agenda, and three participants who have all accepted. status is draft, so none of the completed-meeting-only checks (no-outcomes, no-summary) apply, and there is nothing else to flag. Expect completionStatus 'planned', overallHealth 'green', no fired rules, no flags, durationMinutes 60 (from the scheduled 09:00-10:00 window, since no actual times are recorded), participantCount 3, acceptedCount 3.",
+      "state": {
+        "organizerName": "Priya Ramanathan",
+        "organizerEmail": "p.ramanathan@example.com",
+        "organizerRole": "programme-manager",
+        "organizerOrganisation": "Northgate NHS Trust",
+        "organizerTeam": "Digital Health",
+        "organizerTimezone": "",
+        "status": "draft",
+        "title": "Sprint planning - September",
+        "purpose": "Plan the September delivery sprint.",
+        "longDescription": "",
+        "category": "planning",
+        "visibility": "team",
+        "scheduledStartAt": "2026-09-10T09:00",
+        "scheduledEndAt": "2026-09-10T10:00",
+        "timezone": "Europe/London",
+        "location": "",
+        "videoUrl": "",
+        "phoneNumber": "",
+        "dialInCode": "",
+        "joiningInstructions": "",
+        "calendarUid": "",
+        "recurringFrequency": "none",
+        "recurringIntervalCount": "1",
+        "recurringByDayOfWeek": "",
+        "recurringByDayOfMonth": "",
+        "recurringBySetPosition": "",
+        "recurringByMonthOfYear": "",
+        "recurringSeriesCount": "",
+        "recurringSeriesUntil": "",
+        "summary": "",
+        "actualStartAt": "",
+        "actualEndAt": "",
+        "overallResult": "",
+        "additionalNotes": "",
+        "signedByName": "",
+        "signedAt": "",
+        "agenda": [
+          {
+            "position": 0,
+            "title": "Review backlog",
+            "durationMinutes": 20,
+            "presenter": "Priya Ramanathan",
+            "notes": "",
+            "status": "planned"
+          },
+          {
+            "position": 1,
+            "title": "Assign sprint tasks",
+            "durationMinutes": 30,
+            "presenter": "Priya Ramanathan",
+            "notes": "",
+            "status": "planned"
+          }
+        ],
+        "participants": [
+          {
+            "position": 0,
+            "name": "Priya Ramanathan",
+            "email": "p.ramanathan@example.com",
+            "role": "organizer",
+            "responseStatus": "accepted",
+            "attendanceStatus": ""
+          },
+          {
+            "position": 1,
+            "name": "Devon Clarke",
+            "email": "d.clarke@example.com",
+            "role": "developer",
+            "responseStatus": "accepted",
+            "attendanceStatus": ""
+          },
+          {
+            "position": 2,
+            "name": "Sofia Alaoui",
+            "email": "s.alaoui@example.com",
+            "role": "developer",
+            "responseStatus": "accepted",
+            "attendanceStatus": ""
+          }
+        ],
+        "resources": [],
+        "actionItems": [],
+        "outputs": [],
+        "outcomes": []
+      },
+      "expected": {
+        "durationMinutes": 60,
+        "participantCount": 3,
+        "acceptedCount": 3,
+        "attendedCount": 0,
+        "agendaItemCount": 2,
+        "actionItemCount": 0,
+        "outputCount": 0,
+        "outcomeCount": 0,
+        "completionStatus": "planned",
+        "overallHealth": "green",
+        "firedRules": [],
+        "flags": []
+      }
+    },
+    {
+      "name": "Completed meeting with no recorded outcomes and low acceptance",
+      "description": "Non-critical edge case: the same meeting marked completed, with a weekly recurrence that has neither a series count nor an until date (recurring-without-until), zero recorded outcomes despite being completed (no-outcomes), and a fourth participant added so only 1 of 4 accepted (25%, below the 50% acceptance floor). The summary itself is present and under the 250-character limit, so summary-over-limit and no-summary do not fire. Expect completionStatus 'incomplete' (completed with zero outcomes, even though a summary is present - both conditions are required for 'complete'), overallHealth 'amber' (all three flags are medium/low, none high), three fired rules and three flags in the same order: R-NO-OUTCOMES / F-NO-OUTCOMES, R-RECURRING-WITHOUT-UNTIL / F-RECURRING-WITHOUT-UNTIL, R-LOW-ACCEPTANCE-RATE / F-LOW-ACCEPTANCE-RATE.",
+      "state": {
+        "organizerName": "Priya Ramanathan",
+        "organizerEmail": "p.ramanathan@example.com",
+        "organizerRole": "programme-manager",
+        "organizerOrganisation": "Northgate NHS Trust",
+        "organizerTeam": "Digital Health",
+        "organizerTimezone": "",
+        "status": "completed",
+        "title": "Sprint planning - September",
+        "purpose": "Plan the September delivery sprint.",
+        "longDescription": "",
+        "category": "planning",
+        "visibility": "team",
+        "scheduledStartAt": "2026-09-10T09:00",
+        "scheduledEndAt": "2026-09-10T10:00",
+        "timezone": "Europe/London",
+        "location": "",
+        "videoUrl": "",
+        "phoneNumber": "",
+        "dialInCode": "",
+        "joiningInstructions": "",
+        "calendarUid": "",
+        "recurringFrequency": "weekly",
+        "recurringIntervalCount": "1",
+        "recurringByDayOfWeek": "",
+        "recurringByDayOfMonth": "",
+        "recurringBySetPosition": "",
+        "recurringByMonthOfYear": "",
+        "recurringSeriesCount": "",
+        "recurringSeriesUntil": "",
+        "summary": "Sprint planning completed; backlog reviewed and tasks assigned to the team.",
+        "actualStartAt": "2026-08-20T09:00",
+        "actualEndAt": "2026-08-20T10:05",
+        "overallResult": "success",
+        "additionalNotes": "",
+        "signedByName": "Priya Ramanathan",
+        "signedAt": "2026-08-20T10:10",
+        "agenda": [
+          {
+            "position": 0,
+            "title": "Review backlog",
+            "durationMinutes": 20,
+            "presenter": "Priya Ramanathan",
+            "notes": "",
+            "status": "planned"
+          },
+          {
+            "position": 1,
+            "title": "Assign sprint tasks",
+            "durationMinutes": 30,
+            "presenter": "Priya Ramanathan",
+            "notes": "",
+            "status": "planned"
+          }
+        ],
+        "participants": [
+          {
+            "position": 0,
+            "name": "Priya Ramanathan",
+            "email": "p.ramanathan@example.com",
+            "role": "organizer",
+            "responseStatus": "accepted",
+            "attendanceStatus": "present"
+          },
+          {
+            "position": 1,
+            "name": "Devon Clarke",
+            "email": "d.clarke@example.com",
+            "role": "developer",
+            "responseStatus": "declined",
+            "attendanceStatus": ""
+          },
+          {
+            "position": 2,
+            "name": "Sofia Alaoui",
+            "email": "s.alaoui@example.com",
+            "role": "developer",
+            "responseStatus": "declined",
+            "attendanceStatus": ""
+          },
+          {
+            "position": 3,
+            "name": "Marek Nowak",
+            "email": "m.nowak@example.com",
+            "role": "developer",
+            "responseStatus": "tentative",
+            "attendanceStatus": ""
+          }
+        ],
+        "resources": [],
+        "actionItems": [],
+        "outputs": [],
+        "outcomes": []
+      },
+      "expected": {
+        "durationMinutes": 65,
+        "participantCount": 4,
+        "acceptedCount": 1,
+        "attendedCount": 1,
+        "agendaItemCount": 2,
+        "actionItemCount": 0,
+        "outputCount": 0,
+        "outcomeCount": 0,
+        "completionStatus": "incomplete",
+        "overallHealth": "amber",
+        "firedRules": [
+          {
+            "ruleId": "R-NO-OUTCOMES",
+            "instrument": "outcomes",
+            "grade": "amber",
+            "category": "completeness",
+            "description": "Completed meeting recorded no outcomes."
+          },
+          {
+            "ruleId": "R-RECURRING-WITHOUT-UNTIL",
+            "instrument": "recurrence",
+            "grade": "amber",
+            "category": "scheduling",
+            "description": "Recurring rule has neither a count nor an until."
+          },
+          {
+            "ruleId": "R-LOW-ACCEPTANCE-RATE",
+            "instrument": "participants",
+            "grade": "amber",
+            "category": "engagement",
+            "description": "Fewer than half of participants accepted."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-NO-OUTCOMES",
+            "category": "no-outcomes",
+            "priority": "medium",
+            "description": "No outcomes recorded for a completed meeting.",
+            "suggestedAction": "Add at least one outcome on step 9."
+          },
+          {
+            "flagId": "F-RECURRING-WITHOUT-UNTIL",
+            "category": "recurring-without-until",
+            "priority": "medium",
+            "description": "Open-ended recurring meeting.",
+            "suggestedAction": "Add a series count or series until on step 7."
+          },
+          {
+            "flagId": "F-LOW-ACCEPTANCE-RATE",
+            "category": "low-acceptance-rate",
+            "priority": "low",
+            "description": "Acceptance rate is below 50 % (1/4).",
+            "suggestedAction": "Confirm with required participants before the meeting."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - a mishandled incident-review meeting with seven independent failures",
+      "description": "Critical/highest-severity persona: a completed incident-review meeting with no organiser name, a 260-character summary (over the 250-character limit), zero participants, zero agenda items, zero outcomes, a scheduled end time (13:00) before its scheduled start (14:00) on the same day, and one open action item overdue by more than a week against the frozen 'today' of 2026-09-03. Verified quirk: durationMinutes is null even though BOTH actualStartAt and actualEndAt are recorded (14:05 and 13:00), because the actual end precedes the actual start on the same calendar day - the engine treats a negative computed duration as unknown rather than reporting it. no-summary does not fire (a summary IS present, just over-limit) and low-acceptance-rate cannot fire (participantCount is 0). Expect completionStatus 'incomplete', overallHealth 'red' (multiple high-priority flags), seven fired rules and seven flags in the same order: R-SUMMARY-OVER-LIMIT/F-SUMMARY-OVER-LIMIT (high), R-NO-ORGANIZER/F-NO-ORGANIZER (medium), R-NO-PARTICIPANTS/F-NO-PARTICIPANTS (high), R-NO-AGENDA/F-NO-AGENDA (medium), R-NO-OUTCOMES/F-NO-OUTCOMES (medium), R-START-AFTER-END/F-START-AFTER-END (high), R-ACTION-ITEM-OVERDUE/F-ACTION-ITEM-OVERDUE (high).",
+      "state": {
+        "organizerName": "",
+        "organizerEmail": "",
+        "organizerRole": "",
+        "organizerOrganisation": "",
+        "organizerTeam": "",
+        "organizerTimezone": "",
+        "status": "completed",
+        "title": "Incident review - patient record mix-up",
+        "purpose": "Review the root cause of a patient-record mix-up incident.",
+        "longDescription": "",
+        "category": "incident-review",
+        "visibility": "restricted",
+        "scheduledStartAt": "2026-08-15T14:00",
+        "scheduledEndAt": "2026-08-15T13:00",
+        "timezone": "",
+        "location": "",
+        "videoUrl": "",
+        "phoneNumber": "",
+        "dialInCode": "",
+        "joiningInstructions": "",
+        "calendarUid": "",
+        "recurringFrequency": "none",
+        "recurringIntervalCount": "1",
+        "recurringByDayOfWeek": "",
+        "recurringByDayOfMonth": "",
+        "recurringBySetPosition": "",
+        "recurringByMonthOfYear": "",
+        "recurringSeriesCount": "",
+        "recurringSeriesUntil": "",
+        "summary": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "actualStartAt": "2026-08-15T14:05",
+        "actualEndAt": "2026-08-15T13:00",
+        "overallResult": "unresolved",
+        "additionalNotes": "",
+        "signedByName": "",
+        "signedAt": "",
+        "agenda": [],
+        "participants": [],
+        "resources": [],
+        "actionItems": [
+          {
+            "position": 0,
+            "title": "Contact affected patients",
+            "ownerName": "Priya Ramanathan",
+            "dueDate": "2026-08-25",
+            "priority": "high",
+            "status": "open"
+          }
+        ],
+        "outputs": [],
+        "outcomes": []
+      },
+      "expected": {
+        "durationMinutes": null,
+        "participantCount": 0,
+        "acceptedCount": 0,
+        "attendedCount": 0,
+        "agendaItemCount": 0,
+        "actionItemCount": 1,
+        "outputCount": 0,
+        "outcomeCount": 0,
+        "completionStatus": "incomplete",
+        "overallHealth": "red",
+        "firedRules": [
+          {
+            "ruleId": "R-SUMMARY-OVER-LIMIT",
+            "instrument": "summary",
+            "grade": "red",
+            "category": "data-quality",
+            "description": "Summary exceeds the 250-character ceiling (260)."
+          },
+          {
+            "ruleId": "R-NO-ORGANIZER",
+            "instrument": "invitation",
+            "grade": "amber",
+            "category": "completeness",
+            "description": "No organiser identified."
+          },
+          {
+            "ruleId": "R-NO-PARTICIPANTS",
+            "instrument": "participants",
+            "grade": "red",
+            "category": "completeness",
+            "description": "No participants recorded."
+          },
+          {
+            "ruleId": "R-NO-AGENDA",
+            "instrument": "agenda",
+            "grade": "red",
+            "category": "completeness",
+            "description": "No agenda items."
+          },
+          {
+            "ruleId": "R-NO-OUTCOMES",
+            "instrument": "outcomes",
+            "grade": "amber",
+            "category": "completeness",
+            "description": "Completed meeting recorded no outcomes."
+          },
+          {
+            "ruleId": "R-START-AFTER-END",
+            "instrument": "invitation",
+            "grade": "red",
+            "category": "scheduling",
+            "description": "Scheduled end precedes scheduled start."
+          },
+          {
+            "ruleId": "R-ACTION-ITEM-OVERDUE",
+            "instrument": "action-items",
+            "grade": "red",
+            "category": "follow-up",
+            "description": "1 overdue action item(s)."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SUMMARY-OVER-LIMIT",
+            "category": "summary-over-limit",
+            "priority": "high",
+            "description": "Summary is 260 characters; the spec caps it at 250.",
+            "suggestedAction": "Shorten summary to 250 characters."
+          },
+          {
+            "flagId": "F-NO-ORGANIZER",
+            "category": "no-organizer",
+            "priority": "medium",
+            "description": "No organiser name supplied.",
+            "suggestedAction": "Add an organiser on step 1."
+          },
+          {
+            "flagId": "F-NO-PARTICIPANTS",
+            "category": "no-participants",
+            "priority": "high",
+            "description": "Completed meeting has no participants.",
+            "suggestedAction": "Add at least one participant on step 5."
+          },
+          {
+            "flagId": "F-NO-AGENDA",
+            "category": "no-agenda",
+            "priority": "medium",
+            "description": "Completed meeting has no agenda items.",
+            "suggestedAction": "Document what was discussed on step 4."
+          },
+          {
+            "flagId": "F-NO-OUTCOMES",
+            "category": "no-outcomes",
+            "priority": "medium",
+            "description": "No outcomes recorded for a completed meeting.",
+            "suggestedAction": "Add at least one outcome on step 9."
+          },
+          {
+            "flagId": "F-START-AFTER-END",
+            "category": "start-after-end",
+            "priority": "high",
+            "description": "Scheduled end is earlier than scheduled start.",
+            "suggestedAction": "Correct the start / end times on step 3."
+          },
+          {
+            "flagId": "F-ACTION-ITEM-OVERDUE",
+            "category": "action-item-overdue",
+            "priority": "high",
+            "description": "1 action item(s) past due.",
+            "suggestedAction": "Chase the owner or reset the due date on step 9."
+          }
+        ]
+      }
+    }
+  ]
+}

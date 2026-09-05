@@ -1710,13 +1710,31 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       caught by re-checking the tool's actual counts against the hand
       prediction before writing prose. Fleet: `bin/test-personas` forms
       323/323 PASS, personas 1085/1085 PASS, 0 FAIL; `bin/test-e2e
-      --html` 6/6 passed. 3 forms remain from the original 12-form list:
-      `issue-tracker`, `meeting`, `objectives-and-key-results-tracker` —
-      plus the 27 forms unblocked purely by probe discovery that were
-      never on that 12-form list (see
-      the full sweep: `for f in $(bin/test-engines --verbose | grep
-      '^PASS' | awk '{print $2}'); do [ -f forms/$f/examples/personas.json
-      ] || echo $f; done`).
+      --html` 6/6 passed. **The original 12-form "engine changed this
+      session" list is now COMPLETE**: the last 3 — `issue-tracker`
+      (`gradeIssue`; a null score bands 'low' for that instrument but
+      pushes NO rule at all, unlike the OKR tracker's null-defaults-to-
+      amber-with-a-rule below — two engines in the same backlog batch
+      handle "unanswered" oppositely, both verified, neither a bug),
+      `meeting` (`validateMeeting`; caught that durationMinutes can be
+      null even when BOTH actual start and end times are recorded, if
+      the end was mistakenly entered earlier in the day than the start —
+      the engine treats a negative computed duration as unknown rather
+      than reporting it; the overdue-action-item check reads the real
+      wall clock, pinned via the persona `clock` key), and
+      `objectives-and-key-results-tracker` (`gradeObjective`; this
+      engine is deliberately pure — all date maths use `a.now`, a field
+      ON the assessment, never the wall clock, unlike `meeting`'s
+      identical-looking overdue check; the critical persona fires 11 of
+      12 possible flags, missing only moonshot-progress which needs a
+      different stretch tier) — are done. All nine matched hand
+      derivation exactly. Fleet: `bin/test-personas` forms 326/326 PASS,
+      personas 1094/1094 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
+      30 forms remain without personas, all unblocked purely by probe
+      discovery and never on the original 12-form list (see the full
+      sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
+      '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo
+      $f; done`).
 
 ### Spec-driven follow-through
 

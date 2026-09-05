@@ -1,0 +1,479 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeObjective",
+  "note": "Three hand-authored personas for the OKR tracker's seven-axis composite grader. gradeObjective(a) is deliberately pure: all date maths (committed-at-risk, stale-check-in) use a.now, a field ON THE ASSESSMENT ITSELF, never the wall clock - these personas set it explicitly rather than relying on the oracle's frozen clock. Progress and confidence/alignment/smart/pace all default a null score to 'amber' (a documented-as-unknown state) WITH a rule (unlike issue-tracker, which pushes no rule for a null score); stretch and impact are purely informational and always band 'green' regardless of value. Progress thresholds depend on stretchTier: tier 1 (committed) needs >=70% for green and is red below 50%; tier 2 (aspirational) is green at >=30%, red below 10%; tier 3 (moonshot) is green at >=25% with no red floor. Twelve independent flag checks run regardless of the composite band; several require BOTH a condition and populated cycle dates (committed-at-risk, stale-check-in) or a populated keyResults list (unmeasurable, over-scoped). Regenerate expected with: bin/test-personas objectives-and-key-results-tracker --update",
+  "personas": [
+    {
+      "name": "On-track company objective - all seven axes green",
+      "description": "A committed-tier (stretchTier 1) company objective at 80% progress (>=70% floor for tier 1), confidence 8, alignment 5, SMART quality 5, pace 0%, a DRI assigned, and one measurable (numeric) key result. No cycle dates are set, so the date-dependent flags cannot evaluate. Expect computedCompositeRag 'green', eight fired rules (one per axis plus the composite), and no flags.",
+      "state": {
+        "scores": {
+          "progressPercent": 80,
+          "confidenceDecile": 8,
+          "stretchTier": 1,
+          "alignmentGrade": 5,
+          "impactTier": 3,
+          "smartQuality": 5,
+          "paceDeviationPercent": 0
+        },
+        "keyResults": [
+          {
+            "krType": "numeric",
+            "title": "MAU +25%",
+            "target": 25,
+            "current": 22
+          }
+        ],
+        "context": {
+          "level": "company",
+          "parentObjectiveId": null,
+          "parentObjectiveStatus": null,
+          "driPresent": true,
+          "cycleStartDate": null,
+          "cycleEndDate": null,
+          "checkedInAt": null,
+          "previousConfidenceDecile": null
+        },
+        "now": "2026-08-15T00:00:00Z",
+        "reporter": {
+          "name": "Farida Osei",
+          "email": "f.osei@example.com",
+          "role": "vp-product"
+        },
+        "cycle": {
+          "level": "company",
+          "cycle": "Q3",
+          "cycleStartDate": "",
+          "cycleEndDate": ""
+        },
+        "objective": {
+          "obj_title": "Grow monthly active clinicians on the platform",
+          "obj_long_description": "Increase engagement among registered clinicians.",
+          "strategic_theme": "growth",
+          "parent_objective_id": ""
+        },
+        "participants": {
+          "dri": "Farida Osei",
+          "contributors": "Growth pod",
+          "reviewers": "Exec team",
+          "stakeholders": "Board"
+        }
+      },
+      "expected": {
+        "computedCompositeRag": "green",
+        "rulesFired": [
+          {
+            "ruleId": "R-PROGRESS-GREEN-T1",
+            "instrument": "progress",
+            "grade": "green",
+            "category": "progress",
+            "description": "Progress 80% tier 1 → green."
+          },
+          {
+            "ruleId": "R-CONFIDENCE-GREEN",
+            "instrument": "confidence",
+            "grade": "green",
+            "category": "confidence",
+            "description": "Confidence 8/10 → green."
+          },
+          {
+            "ruleId": "R-STRETCH-COMMITTED",
+            "instrument": "stretch",
+            "grade": "green",
+            "category": "stretch",
+            "description": "Stretch committed (informational)."
+          },
+          {
+            "ruleId": "R-ALIGNMENT-GREEN",
+            "instrument": "alignment",
+            "grade": "green",
+            "category": "alignment",
+            "description": "Alignment 5/5 → green."
+          },
+          {
+            "ruleId": "R-IMPACT-T3",
+            "instrument": "impact",
+            "grade": "green",
+            "category": "impact",
+            "description": "Impact tier 3/5 (informational)."
+          },
+          {
+            "ruleId": "R-SMART-GREEN",
+            "instrument": "smart",
+            "grade": "green",
+            "category": "smart",
+            "description": "SMART 5/5 → green."
+          },
+          {
+            "ruleId": "R-PACE-GREEN",
+            "instrument": "pace",
+            "grade": "green",
+            "category": "pace",
+            "description": "Pace 0% → green."
+          },
+          {
+            "ruleId": "R-COMPOSITE-GREEN",
+            "instrument": "composite",
+            "grade": "green",
+            "category": "composite",
+            "description": "Composite green."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "Team objective behind plan with a stale check-in and no DRI",
+      "description": "Non-critical edge case: a team-level objective with no parent (orphaned), no DRI assigned, progress 40% against a committed-tier (stretchTier 1) 50% red floor - firing the red progress band - with a 92-day cycle (2026-06-01 to 2026-09-01) that is 75 of 92 days (81.5%) elapsed as of a.now 2026-08-15, past the 50% committed-at-risk threshold. The last check-in was 2026-07-01, 45 days before a.now against a stale-check-in threshold of max(14, round(92x0.25))=23 days. Confidence 5, alignment 3, and SMART quality 3 all band amber (between their red and green floors); pace -20% also bands amber (between -10 and -50). One of the two key results is numeric, so unmeasurable does not fire. Expect computedCompositeRag 'red' (from the progress axis), eight fired rules, and four flags in check order: orphaned, no-dri, committed-at-risk, stale-check-in.",
+      "state": {
+        "scores": {
+          "progressPercent": 40,
+          "confidenceDecile": 5,
+          "stretchTier": 1,
+          "alignmentGrade": 3,
+          "impactTier": 2,
+          "smartQuality": 3,
+          "paceDeviationPercent": -20
+        },
+        "keyResults": [
+          {
+            "krType": "numeric",
+            "title": "Onboarding days -30%",
+            "target": 30,
+            "current": 8
+          },
+          {
+            "krType": "qualitative",
+            "title": "Partner satisfaction improves",
+            "target": null,
+            "current": null
+          }
+        ],
+        "context": {
+          "level": "team",
+          "parentObjectiveId": null,
+          "parentObjectiveStatus": null,
+          "driPresent": false,
+          "cycleStartDate": "2026-06-01",
+          "cycleEndDate": "2026-09-01",
+          "checkedInAt": "2026-07-01T00:00:00Z",
+          "previousConfidenceDecile": null
+        },
+        "now": "2026-08-15T00:00:00Z",
+        "reporter": {
+          "name": "Farida Osei",
+          "email": "f.osei@example.com",
+          "role": "vp-product"
+        },
+        "cycle": {
+          "level": "team",
+          "cycle": "Q3",
+          "cycleStartDate": "2026-06-01",
+          "cycleEndDate": "2026-09-01"
+        },
+        "objective": {
+          "obj_title": "Reduce onboarding time for new clinics",
+          "obj_long_description": "",
+          "strategic_theme": "efficiency",
+          "parent_objective_id": ""
+        },
+        "participants": {
+          "dri": "",
+          "contributors": "Onboarding pod",
+          "reviewers": "",
+          "stakeholders": ""
+        },
+        "checkIn": {
+          "narrative": "Behind plan; blocked on a data-migration dependency.",
+          "since_last_changes": "",
+          "blockers": "Data migration",
+          "asks": "",
+          "confidenceDecileAtCheckIn": null
+        }
+      },
+      "expected": {
+        "computedCompositeRag": "red",
+        "rulesFired": [
+          {
+            "ruleId": "R-PROGRESS-RED-T1",
+            "instrument": "progress",
+            "grade": "red",
+            "category": "progress",
+            "description": "Progress 40% tier 1 → red."
+          },
+          {
+            "ruleId": "R-CONFIDENCE-AMBER",
+            "instrument": "confidence",
+            "grade": "amber",
+            "category": "confidence",
+            "description": "Confidence 5/10 → amber."
+          },
+          {
+            "ruleId": "R-STRETCH-COMMITTED",
+            "instrument": "stretch",
+            "grade": "green",
+            "category": "stretch",
+            "description": "Stretch committed (informational)."
+          },
+          {
+            "ruleId": "R-ALIGNMENT-AMBER",
+            "instrument": "alignment",
+            "grade": "amber",
+            "category": "alignment",
+            "description": "Alignment 3/5 → amber."
+          },
+          {
+            "ruleId": "R-IMPACT-T2",
+            "instrument": "impact",
+            "grade": "green",
+            "category": "impact",
+            "description": "Impact tier 2/5 (informational)."
+          },
+          {
+            "ruleId": "R-SMART-AMBER",
+            "instrument": "smart",
+            "grade": "amber",
+            "category": "smart",
+            "description": "SMART 3/5 → amber."
+          },
+          {
+            "ruleId": "R-PACE-AMBER",
+            "instrument": "pace",
+            "grade": "amber",
+            "category": "pace",
+            "description": "Pace -20% → amber."
+          },
+          {
+            "ruleId": "R-COMPOSITE-RED",
+            "instrument": "composite",
+            "grade": "red",
+            "category": "composite",
+            "description": "Composite red."
+          }
+        ],
+        "flags": [
+          {
+            "flagCode": "orphaned",
+            "priority": "high",
+            "description": "Level team no parent."
+          },
+          {
+            "flagCode": "no-dri",
+            "priority": "high",
+            "description": "No DRI."
+          },
+          {
+            "flagCode": "committed-at-risk",
+            "priority": "high",
+            "description": "Committed behind ≥50% elapsed."
+          },
+          {
+            "flagCode": "stale-check-in",
+            "priority": "medium",
+            "description": "45 days since check-in."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - an individual objective failing on every axis and eleven of twelve flags",
+      "description": "Critical/highest-severity persona: progress 5% (red), confidence 1 (red), alignment 1 (red - also fires mis-aligned), SMART quality 0 (red - also fires non-smart), pace -60% (red - also fires pace-collapse, since <=-50). Six key results, none numeric or milestone (all qualitative), firing BOTH unmeasurable (no measurable KR) and over-scoped (more than 5 key results). No DRI (no-dri). The 92-day cycle is 75 days (81.5%) elapsed as of a.now 2026-08-15, past the committed-at-risk threshold given progress is also below 50%. The check-in on 2026-06-15 is 61 days before a.now, well past the 23-day stale-check-in threshold. previousConfidenceDecile 8 versus the current confidence 1 is a drop of 7 (>=3), firing confidence-collapse. parentObjectiveStatus 'cancelled' fires cascading-broken. Only moonshot-progress does not fire (it requires stretchTier 3; this objective is stretchTier 1). Expect computedCompositeRag 'red', eight fired rules (all seven axes plus the composite, every scored axis red), and eleven flags in check order: mis-aligned, orphaned, non-smart, unmeasurable, no-dri, committed-at-risk, pace-collapse, confidence-collapse, stale-check-in, cascading-broken, over-scoped.",
+      "state": {
+        "scores": {
+          "progressPercent": 5,
+          "confidenceDecile": 1,
+          "stretchTier": 1,
+          "alignmentGrade": 1,
+          "impactTier": 1,
+          "smartQuality": 0,
+          "paceDeviationPercent": -60
+        },
+        "keyResults": [
+          {
+            "krType": "qualitative",
+            "title": "Shadow 3 clinical teams"
+          },
+          {
+            "krType": "qualitative",
+            "title": "Write a safety-case primer"
+          },
+          {
+            "krType": "qualitative",
+            "title": "Present findings to the safety board"
+          },
+          {
+            "krType": "qualitative",
+            "title": "Draft a follow-up proposal"
+          },
+          {
+            "krType": "qualitative",
+            "title": "Run a lessons-learned session"
+          },
+          {
+            "krType": "qualitative",
+            "title": "Mentor a junior colleague on the topic"
+          }
+        ],
+        "context": {
+          "level": "individual",
+          "parentObjectiveId": null,
+          "parentObjectiveStatus": "cancelled",
+          "driPresent": false,
+          "cycleStartDate": "2026-06-01",
+          "cycleEndDate": "2026-09-01",
+          "checkedInAt": "2026-06-15T00:00:00Z",
+          "previousConfidenceDecile": 8
+        },
+        "now": "2026-08-15T00:00:00Z",
+        "reporter": {
+          "name": "Farida Osei",
+          "email": "f.osei@example.com",
+          "role": "vp-product"
+        },
+        "cycle": {
+          "level": "individual",
+          "cycle": "Q3",
+          "cycleStartDate": "2026-06-01",
+          "cycleEndDate": "2026-09-01"
+        },
+        "objective": {
+          "obj_title": "Personal OKR - deep-dive into clinical safety domain",
+          "obj_long_description": "",
+          "strategic_theme": "capability",
+          "parent_objective_id": ""
+        },
+        "participants": {
+          "dri": "",
+          "contributors": "",
+          "reviewers": "",
+          "stakeholders": ""
+        },
+        "checkIn": {
+          "narrative": "Very little progress this quarter.",
+          "since_last_changes": "",
+          "blockers": "Competing priorities",
+          "asks": "",
+          "confidenceDecileAtCheckIn": null
+        }
+      },
+      "expected": {
+        "computedCompositeRag": "red",
+        "rulesFired": [
+          {
+            "ruleId": "R-PROGRESS-RED-T1",
+            "instrument": "progress",
+            "grade": "red",
+            "category": "progress",
+            "description": "Progress 5% tier 1 → red."
+          },
+          {
+            "ruleId": "R-CONFIDENCE-RED",
+            "instrument": "confidence",
+            "grade": "red",
+            "category": "confidence",
+            "description": "Confidence 1/10 → red."
+          },
+          {
+            "ruleId": "R-STRETCH-COMMITTED",
+            "instrument": "stretch",
+            "grade": "green",
+            "category": "stretch",
+            "description": "Stretch committed (informational)."
+          },
+          {
+            "ruleId": "R-ALIGNMENT-RED",
+            "instrument": "alignment",
+            "grade": "red",
+            "category": "alignment",
+            "description": "Alignment 1/5 → red."
+          },
+          {
+            "ruleId": "R-IMPACT-T1",
+            "instrument": "impact",
+            "grade": "green",
+            "category": "impact",
+            "description": "Impact tier 1/5 (informational)."
+          },
+          {
+            "ruleId": "R-SMART-RED",
+            "instrument": "smart",
+            "grade": "red",
+            "category": "smart",
+            "description": "SMART 0/5 → red."
+          },
+          {
+            "ruleId": "R-PACE-RED",
+            "instrument": "pace",
+            "grade": "red",
+            "category": "pace",
+            "description": "Pace -60% → red."
+          },
+          {
+            "ruleId": "R-COMPOSITE-RED",
+            "instrument": "composite",
+            "grade": "red",
+            "category": "composite",
+            "description": "Composite red."
+          }
+        ],
+        "flags": [
+          {
+            "flagCode": "mis-aligned",
+            "priority": "high",
+            "description": "Alignment 1/5."
+          },
+          {
+            "flagCode": "orphaned",
+            "priority": "high",
+            "description": "Level individual no parent."
+          },
+          {
+            "flagCode": "non-smart",
+            "priority": "high",
+            "description": "SMART 0/5."
+          },
+          {
+            "flagCode": "unmeasurable",
+            "priority": "high",
+            "description": "No numeric/milestone KR."
+          },
+          {
+            "flagCode": "no-dri",
+            "priority": "high",
+            "description": "No DRI."
+          },
+          {
+            "flagCode": "committed-at-risk",
+            "priority": "high",
+            "description": "Committed behind ≥50% elapsed."
+          },
+          {
+            "flagCode": "pace-collapse",
+            "priority": "high",
+            "description": "Pace -60%."
+          },
+          {
+            "flagCode": "confidence-collapse",
+            "priority": "medium",
+            "description": "Confidence dropped ≥3."
+          },
+          {
+            "flagCode": "stale-check-in",
+            "priority": "medium",
+            "description": "61 days since check-in."
+          },
+          {
+            "flagCode": "cascading-broken",
+            "priority": "medium",
+            "description": "Parent cancelled."
+          },
+          {
+            "flagCode": "over-scoped",
+            "priority": "low",
+            "description": "6 KRs."
+          }
+        ]
+      }
+    }
+  ]
+}
