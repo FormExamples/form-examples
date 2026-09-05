@@ -1,0 +1,381 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateAbnormality",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateAbnormality() returns abnormalityLevel 'draft' with an empty firedRules array when fewer than 3 of the 18 scored numeric lab values are answered; all three personas below answer 18/18 so this never triggers. The composite abnormalityScore is the average of each answered value's normalised deviation from its reference range (0 in range, capped at 1.0 at or beyond the severe threshold), rounded to a 0-100 percentage: 0 normal, 1-20 mild, 21-50 moderate, 51-75 severe, 76-100 critical.",
+  "personas": [
+    {
+      "name": "Normal complete blood count and coagulation panel",
+      "description": "All 18 scored values (blood count, coagulation, iron studies) fall within their reference ranges, so every deviation is 0 and the composite abnormalityScore is 0 - Normal. Three low-concern audit rules fire to record that each panel (blood count, coagulation, iron studies) was checked and found normal (HEM-016, HEM-017, HEM-018); no flags fire.",
+      "state": {
+        "patientInformation": {
+          "patientName": "Elena Vasquez",
+          "dateOfBirth": "1990-06-12",
+          "medicalRecordNumber": "MRN-88214",
+          "referringPhysician": "Dr. Adeyemi",
+          "clinicalIndication": "Routine annual blood count",
+          "specimenDate": "2026-08-20",
+          "specimenType": "venous-blood"
+        },
+        "bloodCountAnalysis": {
+          "hemoglobin": 14.5,
+          "hematocrit": 44,
+          "redBloodCellCount": 5,
+          "whiteBloodCellCount": 6.5,
+          "plateletCount": 250,
+          "meanCorpuscularVolume": 90,
+          "meanCorpuscularHemoglobin": 30,
+          "redCellDistributionWidth": 13
+        },
+        "coagulationStudies": {
+          "prothrombinTime": 12,
+          "inr": 1,
+          "activatedPartialThromboplastinTime": 30,
+          "fibrinogen": 300,
+          "dDimer": 0.2,
+          "bleedingTime": null
+        },
+        "ironStudies": {
+          "serumIron": 100,
+          "totalIronBindingCapacity": 300,
+          "transferrinSaturation": 30,
+          "serumFerritin": 100,
+          "reticulocyteCount": 1
+        },
+        "peripheralBloodFilm": {
+          "abnormalCellMorphology": "none"
+        },
+        "hemoglobinopathyScreening": {
+          "sickleCellScreen": "negative",
+          "thalassemiaScreen": "negative"
+        },
+        "transfusionHistory": {
+          "transfusionReactions": "none"
+        },
+        "clinicalReview": {
+          "urgencyLevel": 1,
+          "clinicalSummary": "No abnormal findings; routine follow-up in 12 months."
+        }
+      },
+      "expected": {
+        "abnormalityLevel": "normal",
+        "abnormalityScore": 0,
+        "answeredCount": 18,
+        "firedRules": [
+          {
+            "id": "HEM-016",
+            "category": "Blood Count",
+            "description": "All blood count values within normal range",
+            "concernLevel": "low"
+          },
+          {
+            "id": "HEM-017",
+            "category": "Coagulation",
+            "description": "All coagulation studies within normal range",
+            "concernLevel": "low"
+          },
+          {
+            "id": "HEM-018",
+            "category": "Iron Studies",
+            "description": "Iron studies within normal range",
+            "concernLevel": "low"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Iron-deficiency anaemia, moderate abnormality",
+      "description": "Moderate anaemia (haemoglobin 8.0 g/dL) with microcytosis (MCV 65 fL) and severely depleted ferritin (8 ng/mL) with low transferrin saturation (10%) - a classic iron-deficiency picture. White cells and platelets are normal, and the full coagulation panel is normal. The composite abnormalityScore lands at 25 (Moderate Abnormality). Five rules fire: three medium (moderate anaemia, microcytosis, depleted ferritin) and two low (coagulation panel normal, elevated RDW/anisocytosis). One medium flag fires for the iron-deficiency pattern (low ferritin with low transferrin saturation).",
+      "state": {
+        "patientInformation": {
+          "patientName": "Marcus Ionescu",
+          "dateOfBirth": "1975-11-03",
+          "medicalRecordNumber": "MRN-71053",
+          "referringPhysician": "Dr. Sathish",
+          "clinicalIndication": "Fatigue and pallor, GP referral",
+          "specimenDate": "2026-08-20",
+          "specimenType": "venous-blood"
+        },
+        "bloodCountAnalysis": {
+          "hemoglobin": 8,
+          "hematocrit": 26,
+          "redBloodCellCount": 4.5,
+          "whiteBloodCellCount": 7,
+          "plateletCount": 300,
+          "meanCorpuscularVolume": 65,
+          "meanCorpuscularHemoglobin": 22,
+          "redCellDistributionWidth": 16
+        },
+        "coagulationStudies": {
+          "prothrombinTime": 12,
+          "inr": 1,
+          "activatedPartialThromboplastinTime": 30,
+          "fibrinogen": 300,
+          "dDimer": 0.3,
+          "bleedingTime": null
+        },
+        "ironStudies": {
+          "serumIron": 35,
+          "totalIronBindingCapacity": 420,
+          "transferrinSaturation": 10,
+          "serumFerritin": 8,
+          "reticulocyteCount": 0.8
+        },
+        "peripheralBloodFilm": {
+          "redCellMorphology": "microcytic, hypochromic",
+          "abnormalCellMorphology": "none"
+        },
+        "hemoglobinopathyScreening": {
+          "sickleCellScreen": "negative",
+          "thalassemiaScreen": "negative"
+        },
+        "transfusionHistory": {
+          "transfusionReactions": "none"
+        },
+        "clinicalReview": {
+          "urgencyLevel": 2,
+          "diagnosis": "Iron-deficiency anaemia",
+          "followUpPlan": "Start oral iron replacement, recheck FBC and ferritin in 6 weeks."
+        }
+      },
+      "expected": {
+        "abnormalityLevel": "moderateAbnormality",
+        "abnormalityScore": 25,
+        "answeredCount": 18,
+        "firedRules": [
+          {
+            "id": "HEM-006",
+            "category": "Blood Count",
+            "description": "Moderate anemia (hemoglobin 7-10 g/dL)",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-009",
+            "category": "Blood Count",
+            "description": "Microcytosis (MCV <80 fL) - possible iron deficiency",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-013",
+            "category": "Iron Studies",
+            "description": "Severely depleted ferritin (<10 ng/mL) - iron deficiency",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-017",
+            "category": "Coagulation",
+            "description": "All coagulation studies within normal range",
+            "concernLevel": "low"
+          },
+          {
+            "id": "HEM-020",
+            "category": "Blood Count",
+            "description": "Elevated RDW (>14.5%) - anisocytosis",
+            "concernLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-IRON-001",
+            "category": "Iron Studies",
+            "message": "Iron deficiency pattern - low ferritin with low transferrin saturation.",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pancytopenia with suspected DIC and blast cells, critical",
+      "description": "Severe anaemia (haemoglobin 5.5 g/dL), severe thrombocytopenia (platelets 15) and leukopenia (WBC 2.0) together meet the pancytopenia pattern; a critically elevated INR (4.5) with severely low fibrinogen (80 mg/dL) and a severely elevated D-dimer (6.0 mg/L) indicates suspected DIC, compounded by a markedly prolonged aPTT (70s); ferritin is markedly elevated (1200 ng/mL); the blood film shows blasts suspicious for acute leukaemia; both the sickle cell and thalassaemia screens are positive; a prior transfusion reaction is documented; and the clinician has flagged urgency level 5. The composite abnormalityScore is 77 - Critical. Ten rules fire (four high, five medium, one low) and ten flags fire (six high, four medium).",
+      "state": {
+        "patientInformation": {
+          "patientName": "Grace Okonkwo",
+          "dateOfBirth": "1962-09-28",
+          "medicalRecordNumber": "MRN-40287",
+          "referringPhysician": "Dr. Petrov",
+          "clinicalIndication": "Bruising, fatigue, and fever - urgent haematology referral",
+          "specimenDate": "2026-08-21",
+          "specimenType": "venous-blood"
+        },
+        "bloodCountAnalysis": {
+          "hemoglobin": 5.5,
+          "hematocrit": 18,
+          "redBloodCellCount": 2,
+          "whiteBloodCellCount": 2,
+          "plateletCount": 15,
+          "meanCorpuscularVolume": 110,
+          "meanCorpuscularHemoglobin": 36,
+          "redCellDistributionWidth": 20
+        },
+        "coagulationStudies": {
+          "prothrombinTime": 25,
+          "inr": 4.5,
+          "activatedPartialThromboplastinTime": 70,
+          "fibrinogen": 80,
+          "dDimer": 6,
+          "bleedingTime": null
+        },
+        "peripheralBloodFilm": {
+          "redCellMorphology": "anisopoikilocytosis",
+          "whiteBloodCellDifferential": "increased blast forms",
+          "plateletMorphology": "reduced",
+          "abnormalCellMorphology": "blasts present, suspicious for acute leukemia",
+          "filmComments": "Urgent haematology review recommended."
+        },
+        "ironStudies": {
+          "serumIron": 350,
+          "totalIronBindingCapacity": 300,
+          "transferrinSaturation": 95,
+          "serumFerritin": 1200,
+          "reticulocyteCount": 12
+        },
+        "hemoglobinopathyScreening": {
+          "sickleCellScreen": "positive",
+          "thalassemiaScreen": "positive"
+        },
+        "transfusionHistory": {
+          "previousTransfusions": "yes",
+          "transfusionReactions": "yes, febrile non-hemolytic reaction"
+        },
+        "clinicalReview": {
+          "urgencyLevel": 5,
+          "clinicalSummary": "Pancytopenia with blast cells on film, suspected acute leukaemia with DIC.",
+          "followUpPlan": "Emergency haematology admission, coagulation support, bone marrow biopsy."
+        }
+      },
+      "expected": {
+        "abnormalityLevel": "critical",
+        "abnormalityScore": 77,
+        "answeredCount": 18,
+        "firedRules": [
+          {
+            "id": "HEM-001",
+            "category": "Blood Count",
+            "description": "Critical hemoglobin level (<7 g/dL) - severe anemia",
+            "concernLevel": "high"
+          },
+          {
+            "id": "HEM-002",
+            "category": "Blood Count",
+            "description": "Severe thrombocytopenia (platelets <20 x10^9/L) - bleeding risk",
+            "concernLevel": "high"
+          },
+          {
+            "id": "HEM-004",
+            "category": "Coagulation",
+            "description": "Critically elevated INR (>4.0) - major hemorrhage risk",
+            "concernLevel": "high"
+          },
+          {
+            "id": "HEM-005",
+            "category": "Coagulation",
+            "description": "Severely low fibrinogen (<100 mg/dL) - DIC risk",
+            "concernLevel": "high"
+          },
+          {
+            "id": "HEM-008",
+            "category": "Blood Count",
+            "description": "Leukopenia (WBC <4.0 x10^9/L) - infection risk",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-010",
+            "category": "Blood Count",
+            "description": "Macrocytosis (MCV >100 fL) - possible B12/folate deficiency",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-012",
+            "category": "Coagulation",
+            "description": "Elevated D-dimer (>2.0 mg/L) - thrombotic concern",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-014",
+            "category": "Iron Studies",
+            "description": "Iron overload (ferritin >500 ng/mL) - hemochromatosis risk",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-015",
+            "category": "Blood Count",
+            "description": "Blood count dimension score above 60% - multiple abnormalities",
+            "concernLevel": "medium"
+          },
+          {
+            "id": "HEM-020",
+            "category": "Blood Count",
+            "description": "Elevated RDW (>14.5%) - anisocytosis",
+            "concernLevel": "low"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CBC-001",
+            "category": "Blood Count",
+            "message": "Pancytopenia detected - all three cell lines depressed, urgent hematology review.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COAG-001",
+            "category": "Coagulation",
+            "message": "Low fibrinogen with elevated D-dimer - DIC workup recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COAG-002",
+            "category": "Coagulation",
+            "message": "Markedly prolonged aPTT (>60s) - evaluate for factor deficiency or lupus anticoagulant.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COAG-003",
+            "category": "Coagulation",
+            "message": "Severely elevated D-dimer (>5.0 mg/L) - consider PE/DVT workup.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IRON-002",
+            "category": "Iron Studies",
+            "message": "Markedly elevated ferritin (>1000 ng/mL) - evaluate for hemochromatosis or secondary overload.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CLIN-001",
+            "category": "Clinical",
+            "message": "High urgency level indicated - expedited specialist review required.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FILM-001",
+            "category": "Blood Film",
+            "message": "Abnormal cell morphology reported on peripheral blood film - review recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HGB-001",
+            "category": "Hemoglobinopathy",
+            "message": "Positive sickle cell screen - confirmatory testing recommended.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HGB-002",
+            "category": "Hemoglobinopathy",
+            "message": "Positive thalassemia screen - genetic counseling may be indicated.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-TRANS-001",
+            "category": "Transfusion",
+            "message": "Previous transfusion reactions reported - special precautions needed.",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

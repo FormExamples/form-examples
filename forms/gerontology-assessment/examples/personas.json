@@ -1,0 +1,556 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCFS",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "calculateCFS evaluates cfs-rules.js and takes the MAX score among fired rules (CFS 1 default when none fire). detectAdditionalFlags is independent of the CFS score. calculateAge() uses new Date() for 'today', so dates of birth are chosen relative to the frozen clock (2026-09-03) to keep age-gated rules (CFS-002 >=75, FLAG-AGE-001 >=90) stable.",
+  "personas": [
+    {
+      "name": "Very fit older adult, fully independent",
+      "description": "68-year-old living independently, all ADLs and IADLs independent, normal cognition, normal gait/balance with Timed Up and Go 8s, no falls, MNA 26 (well-nourished), 2 medications, no comorbidities, no depression or isolation. No CFS rule fires (all thresholds are for impairment, not normal function), so the score defaults to CFS 1 - Very Fit with an empty fired-rules audit trail. No flags fire either.",
+      "state": {
+        "demographics": {
+          "firstName": "Alice",
+          "lastName": "Nguyen",
+          "dateOfBirth": "1958-03-15",
+          "sex": "female",
+          "weight": 64,
+          "height": 162,
+          "livingSituation": "independent"
+        },
+        "functionalAssessment": {
+          "bathingADL": "independent",
+          "dressingADL": "independent",
+          "toiletingADL": "independent",
+          "transferringADL": "independent",
+          "feedingADL": "independent",
+          "cookingIADL": "independent",
+          "cleaningIADL": "independent",
+          "shoppingIADL": "independent",
+          "financesIADL": "independent",
+          "medicationManagementIADL": "independent"
+        },
+        "cognitiveScreen": {
+          "mmseScore": 29,
+          "mocaScore": null,
+          "orientationIntact": "yes",
+          "memoryImpairment": "no",
+          "executiveFunctionImpairment": "no",
+          "deliriumRisk": "no",
+          "cognitiveStatus": "normal"
+        },
+        "mobilityFalls": {
+          "gaitAssessment": "normal",
+          "balanceAssessment": "normal",
+          "fallHistory": "no",
+          "fallsLastYear": 0,
+          "fearOfFalling": "no",
+          "mobilityAids": "no",
+          "mobilityAidType": "",
+          "timedUpAndGo": 8
+        },
+        "nutrition": {
+          "weightChangeLastSixMonths": "no",
+          "weightChangeKg": null,
+          "weightChangeDirection": "",
+          "appetite": "normal",
+          "swallowingDifficulties": "no",
+          "dentalStatus": "good",
+          "mnaScore": 26
+        },
+        "polypharmacyReview": {
+          "numberOfMedications": 2,
+          "highRiskMedications": "no",
+          "highRiskMedicationDetails": "",
+          "beersCriteriaFlags": "no",
+          "beersCriteriaDetails": "",
+          "medicationAdherence": "good"
+        },
+        "medications": [],
+        "comorbidities": {
+          "cardiovascularDisease": "no",
+          "cardiovascularDetails": "",
+          "diabetes": "no",
+          "diabetesControl": "",
+          "renalDisease": "no",
+          "renalDetails": "",
+          "respiratoryDisease": "no",
+          "respiratoryDetails": "",
+          "musculoskeletalDisease": "no",
+          "musculoskeletalDetails": "",
+          "visualDeficit": "no",
+          "hearingDeficit": "no"
+        },
+        "psychosocial": {
+          "depressionScreen": "normal",
+          "gds15Score": null,
+          "socialIsolation": "none",
+          "hasCaregiver": "no",
+          "caregiverDetails": "",
+          "advanceDirectives": "no",
+          "advanceDirectiveDetails": ""
+        },
+        "continenceSkin": {
+          "urinaryIncontinence": "no",
+          "urinaryIncontinenceFrequency": "",
+          "faecalIncontinence": "no",
+          "faecalIncontinenceFrequency": "",
+          "bradenScale": 20,
+          "pressureInjuryPresent": "no",
+          "pressureInjuryStage": "",
+          "skinIntegrity": "intact"
+        }
+      },
+      "expected": {
+        "cfsScore": 1,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Vulnerable older adult, early frailty markers",
+      "description": "78-year-old living with family: one ADL (bathing) needs assistance and two IADLs (cooking, cleaning) need assistance, unsteady gait with no fall history, mild cognitive impairment, well-nourished (MNA 25), 7 medications with good adherence, controlled hypertension. Three rules fire at score 4 (CFS-006 1-2 ADLs needing assistance, CFS-007 unsteady gait without falls, CFS-008 mild cognitive impairment), giving CFS 4 - Vulnerable. Exactly one medium flag fires for the 7-medication polypharmacy count.",
+      "state": {
+        "demographics": {
+          "firstName": "Robert",
+          "lastName": "Kaye",
+          "dateOfBirth": "1948-06-01",
+          "sex": "male",
+          "weight": 78,
+          "height": 172,
+          "livingSituation": "with-family"
+        },
+        "functionalAssessment": {
+          "bathingADL": "needs-assistance",
+          "dressingADL": "independent",
+          "toiletingADL": "independent",
+          "transferringADL": "independent",
+          "feedingADL": "independent",
+          "cookingIADL": "needs-assistance",
+          "cleaningIADL": "needs-assistance",
+          "shoppingIADL": "independent",
+          "financesIADL": "independent",
+          "medicationManagementIADL": "independent"
+        },
+        "cognitiveScreen": {
+          "mmseScore": 24,
+          "mocaScore": null,
+          "orientationIntact": "yes",
+          "memoryImpairment": "yes",
+          "executiveFunctionImpairment": "no",
+          "deliriumRisk": "no",
+          "cognitiveStatus": "mild-impairment"
+        },
+        "mobilityFalls": {
+          "gaitAssessment": "unsteady",
+          "balanceAssessment": "impaired",
+          "fallHistory": "no",
+          "fallsLastYear": null,
+          "fearOfFalling": "no",
+          "mobilityAids": "no",
+          "mobilityAidType": "",
+          "timedUpAndGo": 10
+        },
+        "nutrition": {
+          "weightChangeLastSixMonths": "no",
+          "weightChangeKg": null,
+          "weightChangeDirection": "",
+          "appetite": "normal",
+          "swallowingDifficulties": "no",
+          "dentalStatus": "fair",
+          "mnaScore": 25
+        },
+        "polypharmacyReview": {
+          "numberOfMedications": 7,
+          "highRiskMedications": "no",
+          "highRiskMedicationDetails": "",
+          "beersCriteriaFlags": "no",
+          "beersCriteriaDetails": "",
+          "medicationAdherence": "good"
+        },
+        "medications": [],
+        "comorbidities": {
+          "cardiovascularDisease": "yes",
+          "cardiovascularDetails": "hypertension",
+          "diabetes": "no",
+          "diabetesControl": "",
+          "renalDisease": "no",
+          "renalDetails": "",
+          "respiratoryDisease": "no",
+          "respiratoryDetails": "",
+          "musculoskeletalDisease": "no",
+          "musculoskeletalDetails": "",
+          "visualDeficit": "no",
+          "hearingDeficit": "no"
+        },
+        "psychosocial": {
+          "depressionScreen": "normal",
+          "gds15Score": null,
+          "socialIsolation": "none",
+          "hasCaregiver": "yes",
+          "caregiverDetails": "spouse",
+          "advanceDirectives": "no",
+          "advanceDirectiveDetails": ""
+        },
+        "continenceSkin": {
+          "urinaryIncontinence": "no",
+          "urinaryIncontinenceFrequency": "",
+          "faecalIncontinence": "no",
+          "faecalIncontinenceFrequency": "",
+          "bradenScale": 18,
+          "pressureInjuryPresent": "no",
+          "pressureInjuryStage": "",
+          "skinIntegrity": "intact"
+        }
+      },
+      "expected": {
+        "cfsScore": 4,
+        "firedRules": [
+          {
+            "id": "CFS-006",
+            "domain": "Functional",
+            "description": "1-2 ADLs need assistance",
+            "score": 4
+          },
+          {
+            "id": "CFS-007",
+            "domain": "Mobility",
+            "description": "Unsteady gait without recent falls",
+            "score": 4
+          },
+          {
+            "id": "CFS-008",
+            "domain": "Cognition",
+            "description": "Mild cognitive impairment",
+            "score": 4
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-POLY-001",
+            "category": "Polypharmacy",
+            "message": "7 medications - polypharmacy review recommended",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Terminally ill, nursing-home resident",
+      "description": "92-year-old nursing-home resident: all 5 ADLs and IADLs dependent, severe cognitive impairment (MMSE 5) with delirium risk, unable to walk with severely impaired balance, 5 falls in the past year, poor appetite with swallowing difficulties and 12kg weight loss (MNA 10), 14 medications with poor adherence and both Beers-criteria and high-risk-medication flags, poorly-controlled diabetes with heart failure and renal disease, severe depression and severe social isolation with advance directives (DNACPR) in place, continuous urinary and faecal incontinence, Braden 8 with a Stage 4 pressure injury. Sixteen rules fire; the highest is CFS-027 (severe malnutrition with inability to eat, all ADLs dependent) at score 9, so CFS 9 - Terminally Ill. Nineteen flags fire: ten high, eight medium, one low (advance directives).",
+      "state": {
+        "demographics": {
+          "firstName": "Margaret",
+          "lastName": "O'Sullivan",
+          "dateOfBirth": "1934-01-10",
+          "sex": "female",
+          "weight": 41,
+          "height": 155,
+          "livingSituation": "nursing-home"
+        },
+        "functionalAssessment": {
+          "bathingADL": "dependent",
+          "dressingADL": "dependent",
+          "toiletingADL": "dependent",
+          "transferringADL": "dependent",
+          "feedingADL": "dependent",
+          "cookingIADL": "dependent",
+          "cleaningIADL": "dependent",
+          "shoppingIADL": "dependent",
+          "financesIADL": "dependent",
+          "medicationManagementIADL": "dependent"
+        },
+        "cognitiveScreen": {
+          "mmseScore": 5,
+          "mocaScore": null,
+          "orientationIntact": "no",
+          "memoryImpairment": "yes",
+          "executiveFunctionImpairment": "yes",
+          "deliriumRisk": "yes",
+          "cognitiveStatus": "severe-impairment"
+        },
+        "mobilityFalls": {
+          "gaitAssessment": "unable",
+          "balanceAssessment": "severely-impaired",
+          "fallHistory": "yes",
+          "fallsLastYear": 5,
+          "fearOfFalling": "yes",
+          "mobilityAids": "yes",
+          "mobilityAidType": "wheelchair",
+          "timedUpAndGo": null
+        },
+        "nutrition": {
+          "weightChangeLastSixMonths": "yes",
+          "weightChangeKg": 12,
+          "weightChangeDirection": "loss",
+          "appetite": "poor",
+          "swallowingDifficulties": "yes",
+          "dentalStatus": "edentulous",
+          "mnaScore": 10
+        },
+        "polypharmacyReview": {
+          "numberOfMedications": 14,
+          "highRiskMedications": "yes",
+          "highRiskMedicationDetails": "warfarin, opioids",
+          "beersCriteriaFlags": "yes",
+          "beersCriteriaDetails": "benzodiazepine use",
+          "medicationAdherence": "poor"
+        },
+        "medications": [],
+        "comorbidities": {
+          "cardiovascularDisease": "yes",
+          "cardiovascularDetails": "heart failure",
+          "diabetes": "yes",
+          "diabetesControl": "poorly-controlled",
+          "renalDisease": "yes",
+          "renalDetails": "CKD stage 4",
+          "respiratoryDisease": "no",
+          "respiratoryDetails": "",
+          "musculoskeletalDisease": "no",
+          "musculoskeletalDetails": "",
+          "visualDeficit": "yes",
+          "hearingDeficit": "yes"
+        },
+        "psychosocial": {
+          "depressionScreen": "severe",
+          "gds15Score": 13,
+          "socialIsolation": "severe",
+          "hasCaregiver": "yes",
+          "caregiverDetails": "nursing home staff",
+          "advanceDirectives": "yes",
+          "advanceDirectiveDetails": "DNACPR in place"
+        },
+        "continenceSkin": {
+          "urinaryIncontinence": "yes",
+          "urinaryIncontinenceFrequency": "continuous",
+          "faecalIncontinence": "yes",
+          "faecalIncontinenceFrequency": "continuous",
+          "bradenScale": 8,
+          "pressureInjuryPresent": "yes",
+          "pressureInjuryStage": "4",
+          "skinIntegrity": "wound-present"
+        }
+      },
+      "expected": {
+        "cfsScore": 9,
+        "firedRules": [
+          {
+            "id": "CFS-014",
+            "domain": "Polypharmacy",
+            "description": "Taking ≥10 medications (polypharmacy)",
+            "score": 5
+          },
+          {
+            "id": "CFS-015",
+            "domain": "Nutrition",
+            "description": "Poor appetite or MNA score indicating malnutrition risk",
+            "score": 5
+          },
+          {
+            "id": "CFS-017",
+            "domain": "Mobility",
+            "description": "Unable to walk independently with severe balance impairment",
+            "score": 6
+          },
+          {
+            "id": "CFS-018",
+            "domain": "Mobility",
+            "description": "Multiple falls (≥3) in the past year",
+            "score": 6
+          },
+          {
+            "id": "CFS-019",
+            "domain": "Comorbidities",
+            "description": "Poorly controlled diabetes with comorbidities",
+            "score": 6
+          },
+          {
+            "id": "CFS-020",
+            "domain": "Psychosocial",
+            "description": "Moderate to severe depression",
+            "score": 6
+          },
+          {
+            "id": "CFS-021",
+            "domain": "Functional",
+            "description": "All 5 ADLs dependent",
+            "score": 7
+          },
+          {
+            "id": "CFS-022",
+            "domain": "Cognition",
+            "description": "Severe cognitive impairment",
+            "score": 7
+          },
+          {
+            "id": "CFS-023",
+            "domain": "Cognition",
+            "description": "MMSE score <10 indicating severe dementia",
+            "score": 7
+          },
+          {
+            "id": "CFS-024",
+            "domain": "Continence",
+            "description": "Continuous urinary and faecal incontinence",
+            "score": 7
+          },
+          {
+            "id": "CFS-025",
+            "domain": "Functional",
+            "description": "Completely dependent with severe cognitive impairment and bedbound",
+            "score": 8
+          },
+          {
+            "id": "CFS-026",
+            "domain": "Skin",
+            "description": "Advanced pressure injuries (Stage 3-4)",
+            "score": 8
+          },
+          {
+            "id": "CFS-027",
+            "domain": "Nutrition",
+            "description": "Severe malnutrition with weight loss and inability to eat",
+            "score": 9
+          },
+          {
+            "id": "CFS-028",
+            "domain": "Polypharmacy",
+            "description": "Beers criteria flags with high-risk medications",
+            "score": 5
+          },
+          {
+            "id": "CFS-029",
+            "domain": "Cognition",
+            "description": "Delirium risk with cognitive impairment",
+            "score": 6
+          },
+          {
+            "id": "CFS-030",
+            "domain": "Skin",
+            "description": "Braden scale score ≤12 (high pressure injury risk)",
+            "score": 6
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-FALLS-001",
+            "category": "Falls Risk",
+            "message": "Fall history reported (5 falls in past year)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DELIRIUM-001",
+            "category": "Delirium",
+            "message": "Delirium risk identified - implement prevention protocol",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-POLY-001",
+            "category": "Polypharmacy",
+            "message": "14 medications - polypharmacy review recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-POLY-003",
+            "category": "Polypharmacy",
+            "message": "High-risk medications: warfarin, opioids",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NUTR-001",
+            "category": "Nutrition",
+            "message": "MNA score 10 - malnutrition (score <17)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NUTR-003",
+            "category": "Nutrition",
+            "message": "Significant weight loss: 12kg in 6 months",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NUTR-004",
+            "category": "Nutrition",
+            "message": "Swallowing difficulties - assess aspiration risk, refer to SALT",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FRAILTY-001",
+            "category": "Frailty",
+            "message": "Severe cognitive impairment - consider capacity assessment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FRAILTY-002",
+            "category": "Frailty",
+            "message": "Unable to walk - assess for pressure injury risk and VTE prophylaxis",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SKIN-002",
+            "category": "Skin Integrity",
+            "message": "Pressure injury present (Stage 4)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FALLS-002",
+            "category": "Falls Risk",
+            "message": "Fear of falling reported - may limit mobility and increase fall risk",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-POLY-002",
+            "category": "Polypharmacy",
+            "message": "Beers criteria flag: benzodiazepine use",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SKIN-001",
+            "category": "Skin Integrity",
+            "message": "Braden scale 8 - high pressure injury risk",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PSYCH-001",
+            "category": "Psychosocial",
+            "message": "Depression screen: severe - further assessment recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PSYCH-002",
+            "category": "Psychosocial",
+            "message": "Severe social isolation - consider social services referral",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONT-001",
+            "category": "Continence",
+            "message": "Continuous urinary incontinence - assess underlying cause",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-AGE-001",
+            "category": "Demographics",
+            "message": "Age 92 years - heightened vulnerability, frailty assessment essential",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-POLY-004",
+            "category": "Polypharmacy",
+            "message": "Poor medication adherence - review regimen complexity",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PSYCH-003",
+            "category": "Psychosocial",
+            "message": "Advance directives in place: DNACPR in place",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

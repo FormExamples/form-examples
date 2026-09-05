@@ -1755,7 +1755,34 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       would independently qualify). All nine matched hand derivation
       exactly. Fleet: `bin/test-personas` forms 329/329 PASS, personas
       1103/1103 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
-      27 forms remain without personas, all unblocked purely by probe
+      3 more done: `gerontology-assessment` (`calculateCFS` + split
+      `detectAdditionalFlags`; the CFS score is the MAX across every
+      fired rule, defaulting to CFS 1 when none fire; `calculateAge()`
+      is the one wall-clock read in this engine, pinned via the persona
+      `clock` key so the age-gated rules — CFS-002 age ≥75, FLAG-
+      AGE-001 age ≥90 — stay stable), `health-screening-
+      questionnaire` (`calculateHealthScreening`, which folds PAR-Q+,
+      AUDIT-C, the composite max-grade risk band, and flags into one
+      call; its own age computation, `ageInYears()`, derives from the
+      recorded `birthDate`/`assessmentDate` fields rather than the wall
+      clock, so no `clock` override was needed — unlike
+      `gerontology-assessment`\'s `calculateAge()` right above it), and
+      `hematology-assessment` (`calculateAbnormality` + split
+      `detectAdditionalFlags`; the composite abnormality score is the
+      mean of each answered lab value\'s normalised deviation from its
+      reference range, and returns \'draft\' with an empty firedRules
+      array below 3 answered values — not reached by any of the
+      three personas here, all of which answer 18/18). All nine matched
+      hand derivation exactly, after one iteration to add the health-
+      screening-questionnaire personas\' missing `summary` and
+      `occupational` sub-objects, which their `state` blocks had
+      omitted and which the ungated grader/flag code reads
+      unconditionally (`test-personas` uses each persona\'s `state`
+      verbatim, with no default-shape merge, unlike this session\'s own
+      scratch verification scripts which merge onto the engine\'s empty-
+      state export). Fleet: `bin/test-personas` forms 332/332 PASS,
+      personas 1112/1112 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
+      20 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo

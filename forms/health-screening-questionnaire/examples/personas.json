@@ -1,0 +1,521 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateHealthScreening",
+  "note": "calculateHealthScreening folds PAR-Q+, AUDIT-C, and the composite risk band (max-grade) plus flags into one call; no separate flagsHint is needed. ageInYears() derives age from the recorded birthDate and assessmentDate fields (never new Date()), so no clock override is needed either.",
+  "personas": [
+    {
+      "name": "Baseline adult, gym pre-participation screen",
+      "description": "30-year-old, never smoked, AUDIT-C all-zero (score 0, low band), all 7 PAR-Q+ items no (cleared), no chronic conditions, no red-flag symptoms, no family history, vaccinations up to date. No composite rule raises the band above low, so R-COMPOSITE-LOW fires as the fallback alongside the PAR-Q+ and AUDIT-C audit entries (3 fired rules total). Clear to proceed, no flags.",
+      "state": {
+        "context": {
+          "screeningPurpose": "gp-health-check",
+          "siteName": "Riverside Health Centre",
+          "assessmentDate": "2026-08-15",
+          "assessmentMode": "in-person"
+        },
+        "assessor": {
+          "name": "Priya Anand",
+          "role": "practice-nurse",
+          "employer": "Riverside Health Centre"
+        },
+        "patient": {
+          "name": "Sam Okafor",
+          "birthDate": "1996-04-10",
+          "sex": "male"
+        },
+        "activityDiet": {
+          "usualActivityLevel": "moderately-active",
+          "moderateExerciseDaysPerWeek": 4,
+          "fruitAndVegetablePortionsPerDay": 5
+        },
+        "smokingAlcohol": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "auditCFrequency": 0,
+          "auditCTypicalQuantity": 0,
+          "auditCBingeFrequency": 0
+        },
+        "medicalHistory": {
+          "conditionDiabetes": "no",
+          "conditionHypertension": "no",
+          "conditionAsthma": "no",
+          "conditionCopd": "no",
+          "conditionHeartDisease": "no",
+          "conditionKidneyDisease": "no",
+          "conditionThyroid": "no",
+          "conditionOther": ""
+        },
+        "familyHistory": {
+          "familyHistoryPrematureCardiacEvent": "no",
+          "familyHistoryOther": ""
+        },
+        "symptoms": {
+          "symptomUnexplainedChestPain": "no",
+          "symptomDizzySpellsOrFainting": "no",
+          "symptomPersistentCoughOver3Weeks": "no",
+          "symptomUnexplainedWeightLoss": "no",
+          "symptomJointPainRestrictingMovement": "no",
+          "symptomShortnessOfBreathOnExertion": "no",
+          "symptomPalpitations": "no"
+        },
+        "parq": {
+          "parqDiagnosedHeartCondition": "no",
+          "parqChestPainAtRest": "no",
+          "parqChestPainDuringActivity": "no",
+          "parqDizzinessOrLossOfConsciousness": "no",
+          "parqOtherChronicMedicalCondition": "no",
+          "parqPrescribedMedicationForChronicCondition": "no",
+          "parqBoneOrJointProblem": "no"
+        },
+        "vitals": {
+          "heightAsCm": 178,
+          "weightAsKg": 74,
+          "restingBloodPressureSystolic": 118,
+          "restingBloodPressureDiastolic": 76,
+          "restingHeartRate": 62
+        },
+        "occupational": {
+          "jobRole": "",
+          "physicalDemandsOfRole": "",
+          "exposureNoise": "",
+          "exposureChemicals": "",
+          "exposureManualHandling": "",
+          "exposureOther": "",
+          "exposureOtherDetail": ""
+        },
+        "vaccination": {
+          "vaccinationUpToDate": "yes"
+        },
+        "consent": {
+          "consentToScreening": "yes",
+          "informationAccurateConfirmed": "yes",
+          "interpreterRequired": "no"
+        },
+        "summary": {
+          "overrideRiskBand": "",
+          "overrideReason": "",
+          "notes": "",
+          "signedByName": ""
+        }
+      },
+      "expected": {
+        "parqPlusClearance": "cleared",
+        "bodyMassIndex": 23.4,
+        "auditCScore": 0,
+        "auditCBand": "low",
+        "computedRiskBand": "low",
+        "finalRiskBand": "low",
+        "computedRecommendation": "clear-to-proceed",
+        "finalRecommendation": "clear-to-proceed",
+        "overrideReason": "",
+        "isPaediatric": false,
+        "firedRules": [
+          {
+            "ruleId": "R-PARQ-CLEARANCE",
+            "instrument": "parq-plus",
+            "component": "PAR-Q+ general health screen",
+            "score": null,
+            "band": "cleared",
+            "category": "parq-plus-clearance",
+            "description": "All 7 PAR-Q+ general health items are no: cleared for general physical activity."
+          },
+          {
+            "ruleId": "R-AUDITC-SCORE",
+            "instrument": "audit-c",
+            "component": "AUDIT-C total",
+            "score": 0,
+            "band": "low",
+            "category": "audit-c-band",
+            "description": "AUDIT-C score 0 of 12 is banded low."
+          },
+          {
+            "ruleId": "R-COMPOSITE-LOW",
+            "instrument": "composite",
+            "component": "overall",
+            "score": null,
+            "band": "low",
+            "category": "low",
+            "description": "No risk-raising finding identified."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "Occupational pre-placement, single condition with a positive PAR-Q+ item",
+      "description": "44-year-old warehouse-operative candidate: PAR-Q+ bone-or-joint item is yes (further assessment required), well-controlled asthma is the sole chronic condition with no red-flag symptom, AUDIT-C 2 (low band), and a sedentary activity level against a heavy physical role. Two moderate composite rules fire (PAR-Q+ and the single-condition rule), landing on Moderate / routine review. Flags: the PAR-Q+ medical-clearance-needed flag (medium) and the occupational-restriction-indicated flag (low, heavy role against sedentary activity, screening purpose occupational-pre-placement).",
+      "state": {
+        "context": {
+          "screeningPurpose": "occupational-pre-placement",
+          "siteName": "Northgate Logistics Occupational Health",
+          "assessmentDate": "2026-08-15",
+          "assessmentMode": "in-person"
+        },
+        "assessor": {
+          "name": "Mo Fenwick",
+          "role": "occupational-health-nurse",
+          "employer": "Northgate Logistics"
+        },
+        "patient": {
+          "name": "Dana Whitfield",
+          "birthDate": "1981-02-20",
+          "sex": "female"
+        },
+        "activityDiet": {
+          "usualActivityLevel": "sedentary",
+          "moderateExerciseDaysPerWeek": 0,
+          "fruitAndVegetablePortionsPerDay": 3
+        },
+        "smokingAlcohol": {
+          "smokingStatus": "never",
+          "cigarettesPerDay": null,
+          "auditCFrequency": 1,
+          "auditCTypicalQuantity": 1,
+          "auditCBingeFrequency": 0
+        },
+        "medicalHistory": {
+          "conditionDiabetes": "no",
+          "conditionHypertension": "no",
+          "conditionAsthma": "yes",
+          "conditionCopd": "no",
+          "conditionHeartDisease": "no",
+          "conditionKidneyDisease": "no",
+          "conditionThyroid": "no",
+          "conditionOther": ""
+        },
+        "familyHistory": {
+          "familyHistoryPrematureCardiacEvent": "no",
+          "familyHistoryOther": ""
+        },
+        "symptoms": {
+          "symptomUnexplainedChestPain": "no",
+          "symptomDizzySpellsOrFainting": "no",
+          "symptomPersistentCoughOver3Weeks": "no",
+          "symptomUnexplainedWeightLoss": "no",
+          "symptomJointPainRestrictingMovement": "no",
+          "symptomShortnessOfBreathOnExertion": "no",
+          "symptomPalpitations": "no"
+        },
+        "parq": {
+          "parqDiagnosedHeartCondition": "no",
+          "parqChestPainAtRest": "no",
+          "parqChestPainDuringActivity": "no",
+          "parqDizzinessOrLossOfConsciousness": "no",
+          "parqOtherChronicMedicalCondition": "no",
+          "parqPrescribedMedicationForChronicCondition": "no",
+          "parqBoneOrJointProblem": "yes"
+        },
+        "vitals": {
+          "heightAsCm": 165,
+          "weightAsKg": 70,
+          "restingBloodPressureSystolic": 122,
+          "restingBloodPressureDiastolic": 80,
+          "restingHeartRate": 74
+        },
+        "occupational": {
+          "jobRole": "warehouse operative",
+          "physicalDemandsOfRole": "heavy",
+          "exposureManualHandling": "yes"
+        },
+        "vaccination": {
+          "vaccinationUpToDate": "yes"
+        },
+        "consent": {
+          "consentToScreening": "yes",
+          "informationAccurateConfirmed": "yes",
+          "interpreterRequired": "no"
+        },
+        "summary": {
+          "overrideRiskBand": "",
+          "overrideReason": "",
+          "notes": "",
+          "signedByName": ""
+        }
+      },
+      "expected": {
+        "parqPlusClearance": "further-assessment-required",
+        "bodyMassIndex": 25.7,
+        "auditCScore": 2,
+        "auditCBand": "low",
+        "computedRiskBand": "moderate",
+        "finalRiskBand": "moderate",
+        "computedRecommendation": "routine-review",
+        "finalRecommendation": "routine-review",
+        "overrideReason": "",
+        "isPaediatric": false,
+        "firedRules": [
+          {
+            "ruleId": "R-PARQ-CLEARANCE",
+            "instrument": "parq-plus",
+            "component": "PAR-Q+ general health screen",
+            "score": null,
+            "band": "further-assessment-required",
+            "category": "parq-plus-clearance",
+            "description": "At least one PAR-Q+ general health item is yes: further assessment required before starting."
+          },
+          {
+            "ruleId": "R-AUDITC-SCORE",
+            "instrument": "audit-c",
+            "component": "AUDIT-C total",
+            "score": 2,
+            "band": "low",
+            "category": "audit-c-band",
+            "description": "AUDIT-C score 2 of 12 is banded low."
+          },
+          {
+            "ruleId": "R-COMPOSITE-MODERATE-PARQ",
+            "instrument": "composite",
+            "component": "PAR-Q+",
+            "score": null,
+            "band": "moderate",
+            "category": "moderate",
+            "description": "PAR-Q+ requires further assessment."
+          },
+          {
+            "ruleId": "R-COMPOSITE-MODERATE-CONDITION",
+            "instrument": "composite",
+            "component": "medical history",
+            "score": 1,
+            "band": "moderate",
+            "category": "moderate",
+            "description": "A single chronic condition is present without a red-flag symptom."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PARQ-POSITIVE-MEDICAL-CLEARANCE-NEEDED-001",
+            "category": "parq-positive-medical-clearance-needed",
+            "priority": "medium",
+            "description": "At least one PAR-Q+ general health item is yes.",
+            "suggestedAction": "Seek clearance from a qualified exercise professional or a GP before starting an exercise programme. This form does not reproduce the full PAR-Q+ condition-specific supplementary questionnaires — see spec/index.md."
+          },
+          {
+            "flagId": "F-OCCUPATIONAL-RESTRICTION-INDICATED-001",
+            "category": "occupational-restriction-indicated",
+            "priority": "low",
+            "description": "The physical demands of the role (heavy) exceed what the current activity level or joint findings suggest is safe.",
+            "suggestedAction": "Consider an occupational-health functional assessment or a phased return before full role placement."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Refer urgently, unexplained chest pain with fainting",
+      "description": "55-year-old reporting unexplained chest pain and dizzy spells/fainting (immediate refer-urgently trigger), plus a persistent cough and unexplained weight loss (a second, independent high-severity symptom rule), AUDIT-C 12 of 12 (higher-risk band), known heart disease with a family history of a premature cardiac event, a positive PAR-Q+ heart-condition item, and vaccinations not up to date. Five composite rules fire (urgent, high-symptom, high-AUDIT-C, high-family-history, moderate-PAR-Q+); the worst is refer-urgently regardless of the lower-ranked ones. Six flags fire: two high (urgent cardiac symptom, alcohol higher-risk), three medium (PAR-Q+ clearance needed, family history, unexplained weight loss), one low (vaccination gap).",
+      "state": {
+        "context": {
+          "screeningPurpose": "gp-health-check",
+          "siteName": "Riverside Health Centre",
+          "assessmentDate": "2026-08-15",
+          "assessmentMode": "in-person"
+        },
+        "assessor": {
+          "name": "Priya Anand",
+          "role": "gp",
+          "employer": "Riverside Health Centre"
+        },
+        "patient": {
+          "name": "Harriet Vance",
+          "birthDate": "1971-05-02",
+          "sex": "female"
+        },
+        "activityDiet": {
+          "usualActivityLevel": "sedentary",
+          "moderateExerciseDaysPerWeek": 0,
+          "fruitAndVegetablePortionsPerDay": 2
+        },
+        "smokingAlcohol": {
+          "smokingStatus": "current",
+          "cigarettesPerDay": 15,
+          "auditCFrequency": 4,
+          "auditCTypicalQuantity": 4,
+          "auditCBingeFrequency": 4
+        },
+        "medicalHistory": {
+          "conditionDiabetes": "no",
+          "conditionHypertension": "no",
+          "conditionAsthma": "no",
+          "conditionCopd": "no",
+          "conditionHeartDisease": "yes",
+          "conditionKidneyDisease": "no",
+          "conditionThyroid": "no",
+          "conditionOther": ""
+        },
+        "familyHistory": {
+          "familyHistoryPrematureCardiacEvent": "yes",
+          "familyHistoryOther": "father, myocardial infarction age 52"
+        },
+        "symptoms": {
+          "symptomUnexplainedChestPain": "yes",
+          "symptomDizzySpellsOrFainting": "yes",
+          "symptomPersistentCoughOver3Weeks": "yes",
+          "symptomUnexplainedWeightLoss": "yes",
+          "symptomJointPainRestrictingMovement": "no",
+          "symptomShortnessOfBreathOnExertion": "no",
+          "symptomPalpitations": "no"
+        },
+        "parq": {
+          "parqDiagnosedHeartCondition": "yes",
+          "parqChestPainAtRest": "no",
+          "parqChestPainDuringActivity": "no",
+          "parqDizzinessOrLossOfConsciousness": "no",
+          "parqOtherChronicMedicalCondition": "no",
+          "parqPrescribedMedicationForChronicCondition": "no",
+          "parqBoneOrJointProblem": "no"
+        },
+        "vitals": {
+          "heightAsCm": 170,
+          "weightAsKg": 90,
+          "restingBloodPressureSystolic": 152,
+          "restingBloodPressureDiastolic": 96,
+          "restingHeartRate": 98
+        },
+        "occupational": {
+          "jobRole": "",
+          "physicalDemandsOfRole": "",
+          "exposureNoise": "",
+          "exposureChemicals": "",
+          "exposureManualHandling": "",
+          "exposureOther": "",
+          "exposureOtherDetail": ""
+        },
+        "vaccination": {
+          "vaccinationUpToDate": "no",
+          "vaccinationGapsNote": "Influenza and pneumococcal vaccination overdue"
+        },
+        "consent": {
+          "consentToScreening": "yes",
+          "informationAccurateConfirmed": "yes",
+          "interpreterRequired": "no"
+        },
+        "summary": {
+          "overrideRiskBand": "",
+          "overrideReason": "",
+          "notes": "",
+          "signedByName": ""
+        }
+      },
+      "expected": {
+        "parqPlusClearance": "further-assessment-required",
+        "bodyMassIndex": 31.1,
+        "auditCScore": 12,
+        "auditCBand": "higher-risk",
+        "computedRiskBand": "refer-urgently",
+        "finalRiskBand": "refer-urgently",
+        "computedRecommendation": "refer-urgently",
+        "finalRecommendation": "refer-urgently",
+        "overrideReason": "",
+        "isPaediatric": false,
+        "firedRules": [
+          {
+            "ruleId": "R-PARQ-CLEARANCE",
+            "instrument": "parq-plus",
+            "component": "PAR-Q+ general health screen",
+            "score": null,
+            "band": "further-assessment-required",
+            "category": "parq-plus-clearance",
+            "description": "At least one PAR-Q+ general health item is yes: further assessment required before starting."
+          },
+          {
+            "ruleId": "R-AUDITC-SCORE",
+            "instrument": "audit-c",
+            "component": "AUDIT-C total",
+            "score": 12,
+            "band": "higher-risk",
+            "category": "audit-c-band",
+            "description": "AUDIT-C score 12 of 12 is banded higher-risk."
+          },
+          {
+            "ruleId": "R-COMPOSITE-URGENT",
+            "instrument": "composite",
+            "component": "symptom review",
+            "score": null,
+            "band": "refer-urgently",
+            "category": "refer-urgently",
+            "description": "Unexplained chest pain or fainting/loss-of-consciousness reported — same-day medical attention needed."
+          },
+          {
+            "ruleId": "R-COMPOSITE-HIGH-SYMPTOM",
+            "instrument": "composite",
+            "component": "symptom review",
+            "score": null,
+            "band": "high",
+            "category": "high",
+            "description": "A red-flag symptom from the step 7 review is present."
+          },
+          {
+            "ruleId": "R-COMPOSITE-HIGH-AUDITC",
+            "instrument": "composite",
+            "component": "AUDIT-C",
+            "score": null,
+            "band": "high",
+            "category": "high",
+            "description": "AUDIT-C is higher-risk."
+          },
+          {
+            "ruleId": "R-COMPOSITE-HIGH-FAMILY",
+            "instrument": "composite",
+            "component": "family history",
+            "score": null,
+            "band": "high",
+            "category": "high",
+            "description": "Family history of a premature cardiac event combined with a current chronic condition."
+          },
+          {
+            "ruleId": "R-COMPOSITE-MODERATE-PARQ",
+            "instrument": "composite",
+            "component": "PAR-Q+",
+            "score": null,
+            "band": "moderate",
+            "category": "moderate",
+            "description": "PAR-Q+ requires further assessment."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-CARDIAC-SYMPTOM-001",
+            "category": "urgent-cardiac-symptom",
+            "priority": "high",
+            "description": "Unexplained chest pain and dizzy spells or fainting reported — this needs same-day medical attention, not a routine screening pathway.",
+            "suggestedAction": "Do not proceed with the activity or role. Seek same-day medical review (GP, urgent care, or emergency department as appropriate)."
+          },
+          {
+            "flagId": "F-ALCOHOL-HIGHER-RISK-001",
+            "category": "alcohol-higher-risk",
+            "priority": "high",
+            "description": "AUDIT-C score 12 of 12 indicates higher-risk drinking.",
+            "suggestedAction": "Offer a brief intervention and refer to alcohol services."
+          },
+          {
+            "flagId": "F-PARQ-POSITIVE-MEDICAL-CLEARANCE-NEEDED-001",
+            "category": "parq-positive-medical-clearance-needed",
+            "priority": "medium",
+            "description": "At least one PAR-Q+ general health item is yes.",
+            "suggestedAction": "Seek clearance from a qualified exercise professional or a GP before starting an exercise programme. This form does not reproduce the full PAR-Q+ condition-specific supplementary questionnaires — see spec/index.md."
+          },
+          {
+            "flagId": "F-FAMILY-HISTORY-PREMATURE-CARDIAC-EVENT-001",
+            "category": "family-history-premature-cardiac-event",
+            "priority": "medium",
+            "description": "A first-degree relative had a premature (before age 60) heart attack or stroke.",
+            "suggestedAction": "Consider cardiovascular risk assessment (for example QRISK3) alongside this screen."
+          },
+          {
+            "flagId": "F-UNEXPLAINED-WEIGHT-LOSS-001",
+            "category": "unexplained-weight-loss",
+            "priority": "medium",
+            "description": "Unexplained weight loss is reported.",
+            "suggestedAction": "This alone warrants GP review regardless of other findings — refer for further assessment."
+          },
+          {
+            "flagId": "F-VACCINATION-GAP-001",
+            "category": "vaccination-gap",
+            "priority": "low",
+            "description": "Influenza and pneumococcal vaccination overdue",
+            "suggestedAction": "Signpost to the GP practice or occupational-health service to review and complete the vaccination schedule."
+          }
+        ]
+      }
+    }
+  ]
+}
