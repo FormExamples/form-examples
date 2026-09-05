@@ -1,0 +1,185 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateForm",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the Code of Conduct Notice completeness validator. validateForm(data) checks 6 required fields (3 recipient-details, 3 acknowledgement-signature) and treats the boolean 'agreed' field's value false as empty for completeness purposes - so an explicitly UNCHECKED box fires REQ-AK-001 exactly like a never-touched one, even when the recipient typed their name and date (this is the same state the separate acknowledgementStatus() helper in types.js would label 'declined', but that helper is not part of validateForm's own output). completeness = round((total-fired)/total*100); status is 'Complete' only at exactly 100%. detectAdditionalFlags(state) is a split engine (form-app.js calls it as detectAdditionalFlags(state), a single argument) whose FLAG-NAME-001 check is independent of validateForm entirely - it fires whenever a typed name is 1-2 characters, regardless of whether the other required fields are met. Regenerate expected with: bin/test-personas code-of-conduct-notice --update",
+  "personas": [
+    {
+      "name": "Fully acknowledged - all six fields complete",
+      "description": "Every required field filled and the checkbox agreed. Expect completeness 100, status 'Complete', no fired rules, no flags.",
+      "state": {
+        "recipientDetails": {
+          "organisationName": "Northgate District Hospital",
+          "recipientName": "Priya Chandran",
+          "recipientRole": "Staff Nurse",
+          "recipientEmployeeId": "NDH-4471"
+        },
+        "acknowledgementSignature": {
+          "agreed": true,
+          "recipientTypedFullName": "Priya Chandran",
+          "recipientTypedDate": "2026-09-04"
+        }
+      },
+      "expected": {
+        "completeness": 100,
+        "status": "Complete",
+        "firedRules": [],
+        "validationErrors": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Declined - typed name and date present but the checkbox is unchecked",
+      "description": "Non-critical edge case demonstrating the false-counts-as-empty behaviour: recipient details are complete and the recipient typed their full name and today's date, but explicitly left the acknowledgement checkbox unchecked (agreed: false). Expect completeness 83 (5 of 6 required fields count as filled; REQ-AK-001 alone fires), status 'Incomplete', and exactly one flag: FLAG-NOACK-001 (high).",
+      "state": {
+        "recipientDetails": {
+          "organisationName": "Northgate District Hospital",
+          "recipientName": "Priya Chandran",
+          "recipientRole": "Staff Nurse",
+          "recipientEmployeeId": "NDH-4471"
+        },
+        "acknowledgementSignature": {
+          "agreed": false,
+          "recipientTypedFullName": "Priya Chandran",
+          "recipientTypedDate": "2026-09-04"
+        }
+      },
+      "expected": {
+        "completeness": 83,
+        "status": "Incomplete",
+        "firedRules": [
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          }
+        ],
+        "validationErrors": [
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NOACK-001",
+            "category": "Acknowledgement Not Given",
+            "message": "Recipient has not acknowledged the code of conduct",
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - blank recipient details with an implausibly short typed name",
+      "description": "Critical/highest-severity persona for this completeness form: recipient details are entirely blank, the checkbox is unchecked, the typed date is blank, and the typed name is 'Al' (2 characters - non-blank, so it does NOT fire REQ-AK-002, but IS short enough to fire the independent FLAG-NAME-001 check). Expect completeness 17 (1 of 6 fields counts as filled - the non-blank typed name), status 'Incomplete', five fired rules (REQ-RD-001, REQ-RD-002, REQ-RD-003, REQ-AK-001, REQ-AK-003 - REQ-AK-002 does not fire), and three flags in priority order: FLAG-NOACK-001 (high), FLAG-CONFIG-001 (high, listing all three missing recipient-detail fields), FLAG-NAME-001 (medium).",
+      "state": {
+        "recipientDetails": {
+          "organisationName": "",
+          "recipientName": "",
+          "recipientRole": "",
+          "recipientEmployeeId": ""
+        },
+        "acknowledgementSignature": {
+          "agreed": false,
+          "recipientTypedFullName": "Al",
+          "recipientTypedDate": ""
+        }
+      },
+      "expected": {
+        "completeness": 17,
+        "status": "Incomplete",
+        "firedRules": [
+          {
+            "id": "REQ-RD-001",
+            "section": "recipientDetails",
+            "description": "Organisation name is required",
+            "field": "organisationName"
+          },
+          {
+            "id": "REQ-RD-002",
+            "section": "recipientDetails",
+            "description": "Recipient name is required",
+            "field": "recipientName"
+          },
+          {
+            "id": "REQ-RD-003",
+            "section": "recipientDetails",
+            "description": "Recipient role is required",
+            "field": "recipientRole"
+          },
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          },
+          {
+            "id": "REQ-AK-003",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must enter today's date",
+            "field": "recipientTypedDate"
+          }
+        ],
+        "validationErrors": [
+          {
+            "id": "REQ-RD-001",
+            "section": "recipientDetails",
+            "description": "Organisation name is required",
+            "field": "organisationName"
+          },
+          {
+            "id": "REQ-RD-002",
+            "section": "recipientDetails",
+            "description": "Recipient name is required",
+            "field": "recipientName"
+          },
+          {
+            "id": "REQ-RD-003",
+            "section": "recipientDetails",
+            "description": "Recipient role is required",
+            "field": "recipientRole"
+          },
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          },
+          {
+            "id": "REQ-AK-003",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must enter today's date",
+            "field": "recipientTypedDate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NOACK-001",
+            "category": "Acknowledgement Not Given",
+            "message": "Recipient has not acknowledged the code of conduct",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CONFIG-001",
+            "category": "Incomplete Recipient Details",
+            "message": "Recipient details are missing: organisation name, recipient name, recipient role",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NAME-001",
+            "category": "Incomplete Name",
+            "message": "Recipient typed name appears incomplete — please verify",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

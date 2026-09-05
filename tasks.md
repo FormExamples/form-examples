@@ -1730,7 +1730,32 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       different stretch tier) — are done. All nine matched hand
       derivation exactly. Fleet: `bin/test-personas` forms 326/326 PASS,
       personas 1094/1094 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
-      30 forms remain without personas, all unblocked purely by probe
+      3 more done from the probe-discovery-only backlog: `code-of-
+      conduct-notice` (`validateForm`; verified that the boolean `agreed`
+      field\'s value `false` counts as empty for completeness purposes,
+      identically to a never-touched checkbox, even when the recipient
+      typed both name and date — the same state the separate, unrelated
+      `acknowledgementStatus()` helper would label \'declined\'),
+      `cognitive-assessment` (`calculateMMSE`; found that the type
+      carries both `languageScores.naming1/naming2` AND
+      `repetitionCommands.naming1/naming2`, and the grader reads ONLY
+      the latter for every language item — `languageScores` is a UI-only
+      field bridged by `form-app.js` before grading; also verified that
+      a 0 (actively answered, incorrect) and a null (unanswered) both
+      contribute 0 points and are both absent from `firedRules`, so an
+      all-zero, fully-answered submission grades 0/30 with an EMPTY
+      audit trail, while every domain-specific flag still fires since
+      the flags\' own "answered" checks only require non-null), and
+      `dietic-assessment` (`calculateNutritionRisk`; verified the MUST
+      sub-scorers push a fired rule for every branch including a
+      genuine score of 0 — no null/zero-silence convention here, unlike
+      several siblings; and that `scoreRefeedingRisk` returns as soon as
+      it finds \'highest\' risk, so a bmi<14 patient never accumulates
+      the separate major/minor refeeding rule rows even when several
+      would independently qualify). All nine matched hand derivation
+      exactly. Fleet: `bin/test-personas` forms 329/329 PASS, personas
+      1103/1103 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
+      27 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo

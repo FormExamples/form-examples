@@ -1,0 +1,696 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMMSE",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "Three hand-authored personas for the MMSE (Mini-Mental State Examination) grader. VERIFIED QUIRK: the AssessmentData type carries BOTH a languageScores.naming1/naming2 pair AND a repetitionCommands object with its own naming1/naming2 - the grader (calculateMMSE) and domainBreakdown read ONLY repetitionCommands for every language item, including naming; languageScores.naming1/naming2 are a UI-only field that form-app.js bridges into repetitionCommands before grading, so a persona's state must set repetitionCommands directly (languageScores is populated too here, for realism, but is never read by the grader). Only items scored exactly 1 (correct) appear in firedRules; a 0 (incorrect, actively answered) and null (unanswered) both contribute 0 points and are both absent from firedRules - so an all-zero submission grades 0/30 with an EMPTY firedRules array, even though every item was actually answered. detectAdditionalFlags(state) is a split engine (form-app.js calls it as detectAdditionalFlags(state)) whose domain-answered checks (recallAnswered, regAnswered, langAnswered, attAnswered) DO distinguish 0 from null - a domain scored all-0 still counts as 'answered' and can fire its flag, but a domain left entirely null cannot. Regenerate expected with: bin/test-personas cognitive-assessment --update",
+  "personas": [
+    {
+      "name": "Normal cognition - all 30 items correct",
+      "description": "Every one of the 30 MMSE items scored 1. Expect mmseScore 30, category 'Normal cognition', all 30 fired rules (one per item, in domain order), and no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Harold",
+          "lastName": "Pembridge",
+          "dateOfBirth": "1950-04-12",
+          "sex": "male",
+          "educationLevel": "secondary",
+          "primaryLanguage": "English",
+          "handedness": "right"
+        },
+        "referralInformation": {
+          "referralSource": "gp",
+          "referralReason": "screening",
+          "referringClinician": "Dr Amara Osei",
+          "referralDate": "2026-09-01",
+          "urgency": "routine",
+          "previousCognitiveAssessment": "no",
+          "previousAssessmentDetails": ""
+        },
+        "orientationScores": {
+          "year": 1,
+          "season": 1,
+          "date": 1,
+          "day": 1,
+          "month": 1,
+          "country": 1,
+          "county": 1,
+          "town": 1,
+          "hospital": 1,
+          "floor": 1
+        },
+        "registrationScores": {
+          "object1": 1,
+          "object2": 1,
+          "object3": 1
+        },
+        "attentionScores": {
+          "serial1": 1,
+          "serial2": 1,
+          "serial3": 1,
+          "serial4": 1,
+          "serial5": 1
+        },
+        "recallScores": {
+          "object1": 1,
+          "object2": 1,
+          "object3": 1
+        },
+        "languageScores": {
+          "naming1": 1,
+          "naming2": 1,
+          "repetition": null,
+          "command1": null,
+          "command2": null,
+          "command3": null,
+          "reading": null,
+          "writing": null
+        },
+        "repetitionCommands": {
+          "naming1": 1,
+          "naming2": 1,
+          "repetition": 1,
+          "command1": 1,
+          "command2": 1,
+          "command3": 1,
+          "reading": 1,
+          "writing": 1
+        },
+        "visuospatialScores": {
+          "copying": 1
+        },
+        "functionalHistory": {
+          "livingArrangement": "with-spouse",
+          "adlBathing": "independent",
+          "adlDressing": "independent",
+          "adlMeals": "independent",
+          "adlMedications": "independent",
+          "adlFinances": "independent",
+          "adlTransport": "independent",
+          "recentChanges": "",
+          "safetyConerns": "",
+          "carersAvailable": "yes",
+          "carerDetails": ""
+        }
+      },
+      "expected": {
+        "mmseScore": 30,
+        "mmseCategoryLabel": "Normal cognition",
+        "firedRules": [
+          {
+            "id": "MMSE-OT-01",
+            "domain": "Orientation (Time)",
+            "description": "What year is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-02",
+            "domain": "Orientation (Time)",
+            "description": "What season is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-03",
+            "domain": "Orientation (Time)",
+            "description": "What date is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-04",
+            "domain": "Orientation (Time)",
+            "description": "What day of the week is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-05",
+            "domain": "Orientation (Time)",
+            "description": "What month is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-01",
+            "domain": "Orientation (Place)",
+            "description": "What country are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-02",
+            "domain": "Orientation (Place)",
+            "description": "What county/region are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-03",
+            "domain": "Orientation (Place)",
+            "description": "What town/city are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-04",
+            "domain": "Orientation (Place)",
+            "description": "What building are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-05",
+            "domain": "Orientation (Place)",
+            "description": "What floor are we on?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REG-01",
+            "domain": "Registration",
+            "description": "Repeat object 1 (e.g., apple)",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REG-02",
+            "domain": "Registration",
+            "description": "Repeat object 2 (e.g., table)",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REG-03",
+            "domain": "Registration",
+            "description": "Repeat object 3 (e.g., penny)",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-01",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 100 - 7 = 93",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-02",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 93 - 7 = 86",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-03",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 86 - 7 = 79",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-04",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 79 - 7 = 72",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-05",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 72 - 7 = 65",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REC-01",
+            "domain": "Recall",
+            "description": "Recall object 1",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REC-02",
+            "domain": "Recall",
+            "description": "Recall object 2",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REC-03",
+            "domain": "Recall",
+            "description": "Recall object 3",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-01",
+            "domain": "Language (Naming)",
+            "description": "Name a pencil",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-02",
+            "domain": "Language (Naming)",
+            "description": "Name a watch",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-03",
+            "domain": "Language (Repetition)",
+            "description": "Repeat: \"No ifs, ands, or buts\"",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-04",
+            "domain": "Language (Command)",
+            "description": "Take paper in right hand",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-05",
+            "domain": "Language (Command)",
+            "description": "Fold paper in half",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-06",
+            "domain": "Language (Command)",
+            "description": "Put paper on floor",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-07",
+            "domain": "Language (Reading)",
+            "description": "Read and obey: \"Close your eyes\"",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-08",
+            "domain": "Language (Writing)",
+            "description": "Write a sentence",
+            "score": 1
+          },
+          {
+            "id": "MMSE-VIS-01",
+            "domain": "Visuospatial",
+            "description": "Copy intersecting pentagons",
+            "score": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Mild impairment with isolated registration and naming deficits",
+      "description": "Non-critical edge case: scattered misses across several domains (orientation 4/5 time + 4/5 place, registration 1/3, attention 3/5, recall 2/3) combine with a language score of 5/8 that still clears the language-impairment floor of 3, EXCEPT that both naming items (repetitionCommands.naming1/naming2) are explicitly 0. Expect mmseScore 20 ('Mild cognitive impairment', the 18-23 band), 20 fired rules (one per item scored exactly 1), and exactly two flags in check order: FLAG-MEMORY-002 (registration 1/3, medium) and FLAG-LANGUAGE-002 (both naming items failed, medium) - FLAG-LANGUAGE-001 does NOT fire because the total language score (5) is above its <=3 floor.",
+      "state": {
+        "demographics": {
+          "firstName": "Eleanor",
+          "lastName": "Vasquez",
+          "dateOfBirth": "1954-11-03",
+          "sex": "female",
+          "educationLevel": "primary",
+          "primaryLanguage": "English",
+          "handedness": "right"
+        },
+        "referralInformation": {
+          "referralSource": "gp",
+          "referralReason": "memory-concern",
+          "referringClinician": "Dr Amara Osei",
+          "referralDate": "2026-09-01",
+          "urgency": "routine",
+          "previousCognitiveAssessment": "no",
+          "previousAssessmentDetails": ""
+        },
+        "orientationScores": {
+          "year": 1,
+          "season": 1,
+          "date": 0,
+          "day": 1,
+          "month": 1,
+          "country": 1,
+          "county": 1,
+          "town": 1,
+          "hospital": 1,
+          "floor": 0
+        },
+        "registrationScores": {
+          "object1": 1,
+          "object2": 0,
+          "object3": 0
+        },
+        "attentionScores": {
+          "serial1": 1,
+          "serial2": 1,
+          "serial3": 1,
+          "serial4": 0,
+          "serial5": 0
+        },
+        "recallScores": {
+          "object1": 1,
+          "object2": 1,
+          "object3": 0
+        },
+        "languageScores": {
+          "naming1": 0,
+          "naming2": 0,
+          "repetition": null,
+          "command1": null,
+          "command2": null,
+          "command3": null,
+          "reading": null,
+          "writing": null
+        },
+        "repetitionCommands": {
+          "naming1": 0,
+          "naming2": 0,
+          "repetition": 1,
+          "command1": 1,
+          "command2": 1,
+          "command3": 1,
+          "reading": 1,
+          "writing": 0
+        },
+        "visuospatialScores": {
+          "copying": 1
+        },
+        "functionalHistory": {
+          "livingArrangement": "with-family",
+          "adlBathing": "needs-significant-help",
+          "adlDressing": "needs-significant-help",
+          "adlMeals": "independent",
+          "adlMedications": "needs-some-help",
+          "adlFinances": "needs-some-help",
+          "adlTransport": "independent",
+          "recentChanges": "",
+          "safetyConerns": "",
+          "carersAvailable": "yes",
+          "carerDetails": ""
+        }
+      },
+      "expected": {
+        "mmseScore": 20,
+        "mmseCategoryLabel": "Mild cognitive impairment",
+        "firedRules": [
+          {
+            "id": "MMSE-OT-01",
+            "domain": "Orientation (Time)",
+            "description": "What year is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-02",
+            "domain": "Orientation (Time)",
+            "description": "What season is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-04",
+            "domain": "Orientation (Time)",
+            "description": "What day of the week is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OT-05",
+            "domain": "Orientation (Time)",
+            "description": "What month is it?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-01",
+            "domain": "Orientation (Place)",
+            "description": "What country are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-02",
+            "domain": "Orientation (Place)",
+            "description": "What county/region are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-03",
+            "domain": "Orientation (Place)",
+            "description": "What town/city are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-OP-04",
+            "domain": "Orientation (Place)",
+            "description": "What building are we in?",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REG-01",
+            "domain": "Registration",
+            "description": "Repeat object 1 (e.g., apple)",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-01",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 100 - 7 = 93",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-02",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 93 - 7 = 86",
+            "score": 1
+          },
+          {
+            "id": "MMSE-ATT-03",
+            "domain": "Attention & Calculation",
+            "description": "Serial 7s: 86 - 7 = 79",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REC-01",
+            "domain": "Recall",
+            "description": "Recall object 1",
+            "score": 1
+          },
+          {
+            "id": "MMSE-REC-02",
+            "domain": "Recall",
+            "description": "Recall object 2",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-03",
+            "domain": "Language (Repetition)",
+            "description": "Repeat: \"No ifs, ands, or buts\"",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-04",
+            "domain": "Language (Command)",
+            "description": "Take paper in right hand",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-05",
+            "domain": "Language (Command)",
+            "description": "Fold paper in half",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-06",
+            "domain": "Language (Command)",
+            "description": "Put paper on floor",
+            "score": 1
+          },
+          {
+            "id": "MMSE-LNG-07",
+            "domain": "Language (Reading)",
+            "description": "Read and obey: \"Close your eyes\"",
+            "score": 1
+          },
+          {
+            "id": "MMSE-VIS-01",
+            "domain": "Visuospatial",
+            "description": "Copy intersecting pentagons",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MEMORY-002",
+            "category": "Memory Deficit",
+            "message": "Poor registration (1/3) - possible attention or encoding deficit",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LANGUAGE-002",
+            "category": "Language Difficulty",
+            "message": "Unable to name common objects - possible anomic aphasia",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical - every item scored 0, nine high-priority safety flags",
+      "description": "Critical/highest-severity persona: all 30 items explicitly scored 0 (not left unanswered) across every domain, a documented safety concern (stove left unattended), four ADLs fully dependent, living alone, no carers available, and a date of birth giving an age of 58 (under 65). Verified quirk: mmseScore is 0 and firedRules is an EMPTY array - not one item scored 1, so nothing qualifies for the audit trail, even though every domain was genuinely answered (as 0, not null) and every domain-specific flag still fires because each domain's 'answered' check only requires a non-null response. Expect mmseScore 0, category 'Severe cognitive impairment', firedRules [], and fourteen flags in priority order: nine high (FLAG-SEVERE-001, FLAG-ORIENT-TIME-001, FLAG-ORIENT-PLACE-001, FLAG-MEMORY-001, FLAG-ATTENTION-001, FLAG-SAFETY-001, FLAG-FUNCTIONAL-001, FLAG-LIVING-001, FLAG-YOUNG-001) then five medium (FLAG-MEMORY-002, FLAG-LANGUAGE-001, FLAG-LANGUAGE-002, FLAG-CARER-001, FLAG-VISUOSPATIAL-001).",
+      "state": {
+        "demographics": {
+          "firstName": "Cassius",
+          "lastName": "Ekwueme",
+          "dateOfBirth": "1968-02-20",
+          "sex": "male",
+          "educationLevel": "primary",
+          "primaryLanguage": "English",
+          "handedness": "right"
+        },
+        "referralInformation": {
+          "referralSource": "family",
+          "referralReason": "confusion",
+          "referringClinician": "Dr Amara Osei",
+          "referralDate": "2026-09-01",
+          "urgency": "urgent",
+          "previousCognitiveAssessment": "no",
+          "previousAssessmentDetails": ""
+        },
+        "orientationScores": {
+          "year": 0,
+          "season": 0,
+          "date": 0,
+          "day": 0,
+          "month": 0,
+          "country": 0,
+          "county": 0,
+          "town": 0,
+          "hospital": 0,
+          "floor": 0
+        },
+        "registrationScores": {
+          "object1": 0,
+          "object2": 0,
+          "object3": 0
+        },
+        "attentionScores": {
+          "serial1": 0,
+          "serial2": 0,
+          "serial3": 0,
+          "serial4": 0,
+          "serial5": 0
+        },
+        "recallScores": {
+          "object1": 0,
+          "object2": 0,
+          "object3": 0
+        },
+        "languageScores": {
+          "naming1": 0,
+          "naming2": 0,
+          "repetition": null,
+          "command1": null,
+          "command2": null,
+          "command3": null,
+          "reading": null,
+          "writing": null
+        },
+        "repetitionCommands": {
+          "naming1": 0,
+          "naming2": 0,
+          "repetition": 0,
+          "command1": 0,
+          "command2": 0,
+          "command3": 0,
+          "reading": 0,
+          "writing": 0
+        },
+        "visuospatialScores": {
+          "copying": 0
+        },
+        "functionalHistory": {
+          "livingArrangement": "alone",
+          "adlBathing": "fully-dependent",
+          "adlDressing": "fully-dependent",
+          "adlMeals": "fully-dependent",
+          "adlMedications": "fully-dependent",
+          "adlFinances": "needs-some-help",
+          "adlTransport": "needs-some-help",
+          "recentChanges": "",
+          "safetyConerns": "Left the stove on unattended twice this month.",
+          "carersAvailable": "no",
+          "carerDetails": ""
+        }
+      },
+      "expected": {
+        "mmseScore": 0,
+        "mmseCategoryLabel": "Severe cognitive impairment",
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SEVERE-001",
+            "category": "Severe Impairment",
+            "message": "MMSE score 0/30 indicates severe cognitive impairment - urgent specialist review recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ORIENT-TIME-001",
+            "category": "Orientation Loss",
+            "message": "Significant temporal disorientation (time orientation score: 0/5) - assess for delirium or progressive dementia",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ORIENT-PLACE-001",
+            "category": "Orientation Loss",
+            "message": "Significant spatial disorientation (place orientation score: 0/5) - assess for delirium or advanced dementia",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MEMORY-001",
+            "category": "Memory Deficit",
+            "message": "Complete recall failure (0/3 objects recalled) - significant short-term memory impairment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ATTENTION-001",
+            "category": "Attention Deficit",
+            "message": "Complete attention/calculation failure (0/5) - assess for delirium, depression, or significant cognitive decline",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SAFETY-001",
+            "category": "Safety Concern",
+            "message": "Safety concerns reported: Left the stove on unattended twice this month.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FUNCTIONAL-001",
+            "category": "Functional Decline",
+            "message": "Significant functional dependency (4/6 ADLs impaired) with cognitive impairment - consider safeguarding and care package review",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LIVING-001",
+            "category": "Living Situation",
+            "message": "Patient lives alone with moderate-to-severe cognitive impairment - assess safety and consider supported living",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-YOUNG-001",
+            "category": "Young Onset",
+            "message": "Patient age 58 with cognitive impairment - consider early-onset dementia differential and specialist referral",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MEMORY-002",
+            "category": "Memory Deficit",
+            "message": "Poor registration (0/3) - possible attention or encoding deficit",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LANGUAGE-001",
+            "category": "Language Difficulty",
+            "message": "Significant language impairment (0/8) - assess for aphasia or frontotemporal involvement",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LANGUAGE-002",
+            "category": "Language Difficulty",
+            "message": "Unable to name common objects - possible anomic aphasia",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CARER-001",
+            "category": "Support Network",
+            "message": "No carers available for patient with cognitive impairment - refer to social services",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VISUOSPATIAL-001",
+            "category": "Visuospatial Deficit",
+            "message": "Unable to copy intersecting pentagons - possible parietal lobe involvement",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}
