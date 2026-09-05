@@ -1,0 +1,642 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateECOG",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateECOG evaluates ecog-rules.js and takes the MAX grade among fired rules (ECOG 0 default when none fire). detectAdditionalFlags is fully independent of the ECOG grade. No wall-clock reads in either function - all dates/values come from the recorded assessment data.",
+  "personas": [
+    {
+      "name": "Fully active, complete response",
+      "description": "Self-reported ECOG 0, Stage I disease with no distant metastases, complete response on current treatment, no pain/fatigue/nausea, normal labs, Karnofsky 100, well-nourished, and no psychosocial distress. No rule fires (self-reported ECOG '0' has no matching rule, so the score comes entirely from the default), giving ECOG 0 with an empty audit trail and no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Elise",
+          "lastName": "Toussaint",
+          "dateOfBirth": "1978-03-22",
+          "sex": "female",
+          "weight": 68,
+          "height": 170,
+          "ecogPerformanceStatus": "0"
+        },
+        "cancerDiagnosis": {
+          "cancerType": "breast",
+          "cancerTypeOther": "",
+          "primarySite": "Left breast",
+          "histology": "invasive-ductal-carcinoma",
+          "histologyOther": "",
+          "stageT": "1",
+          "stageN": "0",
+          "stageM": "0",
+          "overallStage": "I",
+          "grade": "1",
+          "dateOfDiagnosis": "2026-05-10"
+        },
+        "treatmentHistory": {
+          "previousSurgery": "yes",
+          "surgeryDetails": "Lumpectomy with sentinel node biopsy",
+          "previousChemotherapy": "no",
+          "chemotherapyRegimens": "",
+          "previousRadiation": "no",
+          "radiationDetails": "",
+          "previousImmunotherapy": "no",
+          "immunotherapyDetails": "",
+          "previousTargetedTherapy": "no",
+          "targetedTherapyDetails": "",
+          "clinicalTrialParticipation": "no",
+          "clinicalTrialDetails": ""
+        },
+        "currentTreatment": {
+          "activeRegimen": "Adjuvant tamoxifen",
+          "cycleNumber": 1,
+          "lastTreatmentDate": "2026-08-15",
+          "responseAssessment": "complete-response"
+        },
+        "symptomAssessment": {
+          "painNRS": 0,
+          "fatigue": "none",
+          "nausea": "none",
+          "appetite": "normal",
+          "weightChange": "stable",
+          "esasScore": 10
+        },
+        "sideEffects": {
+          "neuropathy": "0",
+          "neuropathyDetails": "",
+          "mucositis": "0",
+          "skinReactions": "0",
+          "skinReactionDetails": "",
+          "myelosuppression": "no",
+          "neutropenia": "no",
+          "thrombocytopenia": "no",
+          "anaemia": "no",
+          "organToxicityGrade": "0",
+          "organToxicityDetails": ""
+        },
+        "laboratoryResults": {
+          "wbc": 6,
+          "haemoglobin": 140,
+          "platelets": 250,
+          "neutrophils": 3.5,
+          "creatinine": 70,
+          "alt": 20,
+          "ast": 20,
+          "bilirubin": 10,
+          "albumin": 42,
+          "calcium": 2.3,
+          "ldh": 200,
+          "tumourMarker": "",
+          "tumourMarkerValue": "",
+          "inr": 1
+        },
+        "functionalNutritional": {
+          "ecogDetailed": "0",
+          "karnofskyScore": 100,
+          "nutritionalStatus": "well-nourished",
+          "weightTrajectory": "stable",
+          "dietaryIntake": "normal",
+          "nutritionalSupportRequired": "no"
+        },
+        "psychosocial": {
+          "distressThermometer": 1,
+          "anxiety": "none",
+          "depression": "none",
+          "copingAbility": "coping-well",
+          "supportSystem": "strong",
+          "advanceCarePlanning": "no",
+          "advanceCareDetails": ""
+        }
+      },
+      "expected": {
+        "ecogGrade": 0,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Ambulatory with progressive disease and moderate anaemia",
+      "description": "Self-reported ECOG 2 (ambulatory, capable of self-care), Stage III colorectal cancer, progressive disease on the current regimen, moderate pain (NRS 5) and moderate fatigue, moderate anaemia (Hb 95), Karnofsky 70, and a distress score of 8. Six rules fire, the highest being the ECOG-2 self-report and the Stage III and moderate-anaemia rules all tied at grade 2, giving ECOG 2. Two medium flags fire: high distress score and progressive disease on current regimen.",
+      "state": {
+        "demographics": {
+          "firstName": "Werner",
+          "lastName": "Sandoval",
+          "dateOfBirth": "1965-11-08",
+          "sex": "male",
+          "weight": 62,
+          "height": 165,
+          "ecogPerformanceStatus": "2"
+        },
+        "cancerDiagnosis": {
+          "cancerType": "colorectal",
+          "cancerTypeOther": "",
+          "primarySite": "Sigmoid colon",
+          "histology": "adenocarcinoma",
+          "histologyOther": "",
+          "stageT": "3",
+          "stageN": "1",
+          "stageM": "0",
+          "overallStage": "III",
+          "grade": "2",
+          "dateOfDiagnosis": "2026-01-15"
+        },
+        "treatmentHistory": {
+          "previousSurgery": "yes",
+          "surgeryDetails": "Anterior resection",
+          "previousChemotherapy": "yes",
+          "chemotherapyRegimens": "FOLFOX",
+          "previousRadiation": "no",
+          "radiationDetails": "",
+          "previousImmunotherapy": "no",
+          "immunotherapyDetails": "",
+          "previousTargetedTherapy": "no",
+          "targetedTherapyDetails": "",
+          "clinicalTrialParticipation": "no",
+          "clinicalTrialDetails": ""
+        },
+        "currentTreatment": {
+          "activeRegimen": "FOLFIRI",
+          "cycleNumber": 4,
+          "lastTreatmentDate": "2026-08-20",
+          "responseAssessment": "progressive-disease"
+        },
+        "symptomAssessment": {
+          "painNRS": 5,
+          "fatigue": "moderate",
+          "nausea": "none",
+          "appetite": "decreased",
+          "weightChange": "losing-less-5",
+          "esasScore": 45
+        },
+        "sideEffects": {
+          "neuropathy": "0",
+          "neuropathyDetails": "",
+          "mucositis": "0",
+          "skinReactions": "0",
+          "skinReactionDetails": "",
+          "myelosuppression": "no",
+          "neutropenia": "no",
+          "thrombocytopenia": "no",
+          "anaemia": "no",
+          "organToxicityGrade": "0",
+          "organToxicityDetails": ""
+        },
+        "laboratoryResults": {
+          "wbc": 4.5,
+          "haemoglobin": 95,
+          "platelets": 180,
+          "neutrophils": 1.5,
+          "creatinine": 80,
+          "alt": 25,
+          "ast": 25,
+          "bilirubin": 12,
+          "albumin": 36,
+          "calcium": 2.5,
+          "ldh": 250,
+          "tumourMarker": "CEA",
+          "tumourMarkerValue": "18",
+          "inr": 1
+        },
+        "functionalNutritional": {
+          "ecogDetailed": "2",
+          "karnofskyScore": 70,
+          "nutritionalStatus": "at-risk",
+          "weightTrajectory": "decreasing-slowly",
+          "dietaryIntake": "reduced-mildly",
+          "nutritionalSupportRequired": "no"
+        },
+        "psychosocial": {
+          "distressThermometer": 8,
+          "anxiety": "mild",
+          "depression": "mild",
+          "copingAbility": "some-difficulty",
+          "supportSystem": "moderate",
+          "advanceCarePlanning": "no",
+          "advanceCareDetails": ""
+        }
+      },
+      "expected": {
+        "ecogGrade": 2,
+        "firedRules": [
+          {
+            "id": "PS-002",
+            "system": "Performance Status",
+            "description": "Self-reported ECOG 2 - ambulatory, capable of self-care",
+            "grade": 2
+          },
+          {
+            "id": "STG-001",
+            "system": "Cancer Stage",
+            "description": "Stage III cancer",
+            "grade": 2
+          },
+          {
+            "id": "TX-001",
+            "system": "Treatment",
+            "description": "Progressive disease on current treatment",
+            "grade": 2
+          },
+          {
+            "id": "SX-001",
+            "system": "Symptoms",
+            "description": "Moderate pain (NRS 4-6)",
+            "grade": 1
+          },
+          {
+            "id": "SX-004",
+            "system": "Symptoms",
+            "description": "Moderate fatigue",
+            "grade": 1
+          },
+          {
+            "id": "LAB-004",
+            "system": "Laboratory",
+            "description": "Moderate anaemia (Hb 80-100)",
+            "grade": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DISTRESS-001",
+            "category": "Psychosocial",
+            "message": "High distress score (8/10) - psycho-oncology referral recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PD-001",
+            "category": "Treatment",
+            "message": "Progressive disease on current regimen - consider treatment change or MDT discussion",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Completely disabled, metastatic disease with cord compression risk",
+      "description": "Self-reported ECOG 4, Stage IV breast cancer with spinal metastases (M1), progressive disease, severe pain/fatigue/nausea/appetite loss and >10% weight loss, Grade 4 neuropathy/mucositis/hepatotoxicity, neutropenia/thrombocytopenia/anaemia present, severe neutropenia and anaemia and thrombocytopenia on labs, hypercalcaemia, elevated LDH, hypoalbuminaemia, renal and hepatic impairment, elevated INR, Karnofsky 20, malnourished with rapidly decreasing weight, severe anxiety and depression, a distress score of 9, and advance care planning documented. Twenty-nine rules fire; the highest are the self-reported ECOG-4 rule and the Karnofsky-<30 rule, both grade 4, giving ECOG 4. Fourteen flags fire: eight high (neutropenic fever risk, severe pain, poor performance status, active bleeding risk, cord compression risk, hypercalcaemia, severe organ toxicity, severe anaemia), five medium (high distress, progressive disease, severe weight loss, malnourished, elevated INR), one low (advance care planning documented).",
+      "state": {
+        "demographics": {
+          "firstName": "Yusuf",
+          "lastName": "Karimov",
+          "dateOfBirth": "1959-06-30",
+          "sex": "male",
+          "weight": 48,
+          "height": 160,
+          "ecogPerformanceStatus": "4"
+        },
+        "cancerDiagnosis": {
+          "cancerType": "breast",
+          "cancerTypeOther": "",
+          "primarySite": "Left breast, with spinal metastases",
+          "histology": "invasive-ductal-carcinoma",
+          "histologyOther": "",
+          "stageT": "4",
+          "stageN": "3",
+          "stageM": "1",
+          "overallStage": "IV",
+          "grade": "3",
+          "dateOfDiagnosis": "2025-09-12"
+        },
+        "treatmentHistory": {
+          "previousSurgery": "yes",
+          "surgeryDetails": "Mastectomy",
+          "previousChemotherapy": "yes",
+          "chemotherapyRegimens": "AC-T, then capecitabine",
+          "previousRadiation": "yes",
+          "radiationDetails": "Palliative spinal radiotherapy",
+          "previousImmunotherapy": "no",
+          "immunotherapyDetails": "",
+          "previousTargetedTherapy": "yes",
+          "targetedTherapyDetails": "Trastuzumab",
+          "clinicalTrialParticipation": "no",
+          "clinicalTrialDetails": ""
+        },
+        "currentTreatment": {
+          "activeRegimen": "Capecitabine",
+          "cycleNumber": 6,
+          "lastTreatmentDate": "2026-08-22",
+          "responseAssessment": "progressive-disease"
+        },
+        "symptomAssessment": {
+          "painNRS": 9,
+          "fatigue": "severe",
+          "nausea": "severe",
+          "appetite": "severely-decreased",
+          "weightChange": "losing-more-10",
+          "esasScore": 75
+        },
+        "sideEffects": {
+          "neuropathy": "4",
+          "neuropathyDetails": "Severe bilateral hand-foot syndrome",
+          "mucositis": "4",
+          "skinReactions": "3",
+          "skinReactionDetails": "Grade 3 palmar-plantar erythrodysesthesia",
+          "myelosuppression": "yes",
+          "neutropenia": "yes",
+          "thrombocytopenia": "yes",
+          "anaemia": "yes",
+          "organToxicityGrade": "4",
+          "organToxicityDetails": "Grade 4 hepatotoxicity"
+        },
+        "laboratoryResults": {
+          "wbc": 1.2,
+          "haemoglobin": 65,
+          "platelets": 15,
+          "neutrophils": 0.3,
+          "creatinine": 250,
+          "alt": 180,
+          "ast": 190,
+          "bilirubin": 60,
+          "albumin": 20,
+          "calcium": 3.1,
+          "ldh": 600,
+          "tumourMarker": "CA 15-3",
+          "tumourMarkerValue": "320",
+          "inr": 2
+        },
+        "functionalNutritional": {
+          "ecogDetailed": "4",
+          "karnofskyScore": 20,
+          "nutritionalStatus": "malnourished",
+          "weightTrajectory": "decreasing-rapidly",
+          "dietaryIntake": "minimal",
+          "nutritionalSupportRequired": "yes"
+        },
+        "psychosocial": {
+          "distressThermometer": 9,
+          "anxiety": "severe",
+          "depression": "severe",
+          "copingAbility": "significant-difficulty",
+          "supportSystem": "limited",
+          "advanceCarePlanning": "yes",
+          "advanceCareDetails": "DNACPR discussed and documented; preferred place of care is home"
+        }
+      },
+      "expected": {
+        "ecogGrade": 4,
+        "firedRules": [
+          {
+            "id": "PS-004",
+            "system": "Performance Status",
+            "description": "Self-reported ECOG 4 - completely disabled",
+            "grade": 4
+          },
+          {
+            "id": "STG-002",
+            "system": "Cancer Stage",
+            "description": "Stage IV (metastatic) cancer",
+            "grade": 3
+          },
+          {
+            "id": "STG-003",
+            "system": "Cancer Stage",
+            "description": "Distant metastases present (M1)",
+            "grade": 3
+          },
+          {
+            "id": "TX-001",
+            "system": "Treatment",
+            "description": "Progressive disease on current treatment",
+            "grade": 2
+          },
+          {
+            "id": "SX-002",
+            "system": "Symptoms",
+            "description": "Severe pain (NRS 7-10)",
+            "grade": 2
+          },
+          {
+            "id": "SX-003",
+            "system": "Symptoms",
+            "description": "Severe fatigue",
+            "grade": 2
+          },
+          {
+            "id": "SX-005",
+            "system": "Symptoms",
+            "description": "Severe nausea",
+            "grade": 2
+          },
+          {
+            "id": "SX-006",
+            "system": "Symptoms",
+            "description": "Severely decreased appetite",
+            "grade": 2
+          },
+          {
+            "id": "SX-007",
+            "system": "Symptoms",
+            "description": "Significant weight loss (>10%)",
+            "grade": 3
+          },
+          {
+            "id": "SX-009",
+            "system": "Symptoms",
+            "description": "High ESAS score (>60)",
+            "grade": 2
+          },
+          {
+            "id": "SE-002",
+            "system": "Side Effects",
+            "description": "CTCAE Grade 4 neuropathy",
+            "grade": 3
+          },
+          {
+            "id": "SE-004",
+            "system": "Side Effects",
+            "description": "CTCAE Grade 4 mucositis",
+            "grade": 3
+          },
+          {
+            "id": "SE-005",
+            "system": "Side Effects",
+            "description": "CTCAE Grade 3-4 organ toxicity",
+            "grade": 3
+          },
+          {
+            "id": "SE-006",
+            "system": "Side Effects",
+            "description": "Neutropenia present",
+            "grade": 2
+          },
+          {
+            "id": "SE-007",
+            "system": "Side Effects",
+            "description": "Thrombocytopenia present",
+            "grade": 2
+          },
+          {
+            "id": "SE-008",
+            "system": "Side Effects",
+            "description": "Anaemia present",
+            "grade": 1
+          },
+          {
+            "id": "LAB-001",
+            "system": "Laboratory",
+            "description": "Severe neutropenia (ANC <0.5)",
+            "grade": 3
+          },
+          {
+            "id": "LAB-003",
+            "system": "Laboratory",
+            "description": "Severe anaemia (Hb <80)",
+            "grade": 3
+          },
+          {
+            "id": "LAB-005",
+            "system": "Laboratory",
+            "description": "Severe thrombocytopenia (platelets <50)",
+            "grade": 3
+          },
+          {
+            "id": "LAB-006",
+            "system": "Laboratory",
+            "description": "Hypercalcaemia (calcium >2.8)",
+            "grade": 2
+          },
+          {
+            "id": "LAB-007",
+            "system": "Laboratory",
+            "description": "Elevated LDH (>480 U/L)",
+            "grade": 1
+          },
+          {
+            "id": "LAB-008",
+            "system": "Laboratory",
+            "description": "Hypoalbuminaemia (albumin <25)",
+            "grade": 3
+          },
+          {
+            "id": "LAB-009",
+            "system": "Laboratory",
+            "description": "Renal impairment (creatinine >200)",
+            "grade": 2
+          },
+          {
+            "id": "LAB-010",
+            "system": "Laboratory",
+            "description": "Hepatic dysfunction (bilirubin >50)",
+            "grade": 2
+          },
+          {
+            "id": "FN-003",
+            "system": "Functional",
+            "description": "Karnofsky score <30",
+            "grade": 4
+          },
+          {
+            "id": "FN-004",
+            "system": "Nutritional",
+            "description": "Malnourished",
+            "grade": 2
+          },
+          {
+            "id": "FN-005",
+            "system": "Nutritional",
+            "description": "Rapidly decreasing weight",
+            "grade": 2
+          },
+          {
+            "id": "PSY-001",
+            "system": "Psychosocial",
+            "description": "Severe anxiety",
+            "grade": 1
+          },
+          {
+            "id": "PSY-002",
+            "system": "Psychosocial",
+            "description": "Severe depression",
+            "grade": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NEUTRO-001",
+            "category": "Haematological",
+            "message": "Neutropenic fever risk - monitor temperature, consider prophylactic antibiotics",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-001",
+            "category": "Symptoms",
+            "message": "Severe pain (NRS 9/10) - urgent pain management review",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ECOG-001",
+            "category": "Performance Status",
+            "message": "ECOG 4 - poor performance status, review treatment goals",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-BLEED-001",
+            "category": "Haematological",
+            "message": "Active bleeding risk - platelets critically low (15)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CORD-001",
+            "category": "Oncological Emergency",
+            "message": "Potential cord compression - urgent MRI and neurosurgical review",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CALCIUM-001",
+            "category": "Metabolic",
+            "message": "Hypercalcaemia (3.1 mmol/L) - hydration and bisphosphonate therapy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TOXICITY-001",
+            "category": "Side Effects",
+            "message": "CTCAE Grade 4 organ toxicity: Grade 4 hepatotoxicity",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANAEMIA-001",
+            "category": "Haematological",
+            "message": "Severe anaemia (Hb 65 g/L) - consider transfusion",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DISTRESS-001",
+            "category": "Psychosocial",
+            "message": "High distress score (9/10) - psycho-oncology referral recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PD-001",
+            "category": "Treatment",
+            "message": "Progressive disease on current regimen - consider treatment change or MDT discussion",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-WEIGHT-001",
+            "category": "Nutritional",
+            "message": "Significant weight loss >10% - nutritional support and dietitian referral",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-NUTR-001",
+            "category": "Nutritional",
+            "message": "Malnourished - consider enteral/parenteral nutrition support",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-COAG-001",
+            "category": "Haematological",
+            "message": "Elevated INR (2) - bleeding risk, review anticoagulation",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ACP-001",
+            "category": "Psychosocial",
+            "message": "Advance care planning documented - review preferences",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

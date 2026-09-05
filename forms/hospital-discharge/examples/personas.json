@@ -1,0 +1,1200 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateDischarge",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateDischarge() checks 25 mandatory + 8 optional NICE NG27 completeness rules; completenessLevel is 'incomplete' if any mandatory rule fails, otherwise 'partial' if any optional rule fails, otherwise 'complete'. detectAdditionalFlags() is a fully independent safety-flag layer over the same data. Length-of-stay and date-order checks read the recorded admissionDate/dischargeDate fields directly, never the wall clock, so no persona clock override is needed.",
+  "personas": [
+    {
+      "name": "Complete discharge summary, uncomplicated appendicectomy",
+      "description": "All 25 mandatory and all 8 optional NICE NG27 fields are satisfied: full patient/GP/next-of-kin details, a coded primary diagnosis, an explicit no-procedures-performed note superseded by the laparoscopic appendicectomy narrative, fully-specified discharge medication with reconciliation and allergies reviewed, a scheduled GP follow-up appointment, home discharge to family care, safety-netting and written information given, full clinician sign-off with the consultant informed, and full patient acknowledgement including a written summary. completenessLevel is Complete (25/25 mandatory, 8/8 optional) with no flags.",
+      "state": {
+        "patientDetails": {
+          "firstName": "Nadia",
+          "lastName": "Farouk",
+          "dateOfBirth": "1962-05-20",
+          "sex": "female",
+          "nhsNumber": "123 456 7890",
+          "hospitalNumber": "H-99201",
+          "address": "14 Willow Court",
+          "postcode": "BS1 4AB",
+          "phone": "0117 555 0142",
+          "gpName": "Dr. Osei",
+          "gpPractice": "Willow Green Surgery",
+          "nextOfKinName": "Amir Farouk",
+          "nextOfKinPhone": "07700 900123"
+        },
+        "admissionSummary": {
+          "admissionDate": "2026-08-01",
+          "dischargeDate": "2026-08-05",
+          "ward": "Ward 12",
+          "consultant": "Mr. Blackwood",
+          "specialty": "General Surgery",
+          "reasonForAdmission": "Acute appendicitis",
+          "presentingComplaint": "Right iliac fossa pain",
+          "clinicalNarrative": "Admitted with acute appendicitis, underwent laparoscopic appendicectomy, uneventful recovery."
+        },
+        "diagnoses": {
+          "diagnoses": [
+            {
+              "description": "Acute appendicitis",
+              "icd10": "K35.80",
+              "type": "primary"
+            }
+          ]
+        },
+        "proceduresPerformed": {
+          "procedures": [
+            {
+              "description": "Laparoscopic appendicectomy",
+              "opcs4": "H01.1",
+              "date": "2026-08-01",
+              "performedBy": "Mr. Blackwood"
+            }
+          ],
+          "noProceduresPerformed": ""
+        },
+        "dischargeMedications": {
+          "medications": [
+            {
+              "name": "Paracetamol",
+              "dose": "1g",
+              "route": "oral",
+              "frequency": "four times daily",
+              "duration": "5 days",
+              "status": "new",
+              "indication": "Pain relief"
+            }
+          ],
+          "reconciliationCompleted": "yes",
+          "reconciliationNotes": "No changes to regular medications.",
+          "allergiesReviewed": "yes",
+          "allergyNotes": "No known allergies."
+        },
+        "followupArrangements": {
+          "appointments": [
+            {
+              "provider": "General Surgery outpatients",
+              "date": "2026-08-19",
+              "location": "Willow Green Surgery",
+              "purpose": "Wound check"
+            }
+          ],
+          "gpFollowupRequired": "yes",
+          "gpFollowupTimeframe": "1 week",
+          "outpatientFollowupRequired": "no",
+          "investigationsPending": "no",
+          "pendingInvestigationDetails": "",
+          "resultsToBeChasedByGp": ""
+        },
+        "communityCareInstructions": {
+          "dischargeDestination": "home",
+          "otherDestinationDetails": "",
+          "careResponsibility": "family",
+          "transportMode": "walking",
+          "districtNurseReferral": "no",
+          "socialServicesReferral": "no",
+          "physiotherapyReferral": "no",
+          "occupationalTherapyReferral": "no",
+          "packageOfCareInPlace": "no",
+          "mobilityStatus": "Independent",
+          "dietaryRequirements": "Normal diet",
+          "woundCareInstructions": "Keep dressing dry for 48 hours",
+          "equipmentProvided": "None"
+        },
+        "warningSigns": {
+          "redFlagSymptoms": [
+            "Fever",
+            "Increasing wound pain",
+            "Wound discharge"
+          ],
+          "whenToSeekHelp": "Seek urgent care if fever, spreading redness, or wound discharge develops.",
+          "emergencyContactNumber": "111",
+          "safetyNetingProvided": "yes",
+          "writtenInfoGiven": "yes"
+        },
+        "clinicianSignoff": {
+          "clinicianName": "Dr. Priya Kaur",
+          "clinicianRole": "Surgical SHO",
+          "gmcNumber": "7654321",
+          "signoffDate": "2026-08-05",
+          "bleepOrContact": "Bleep 4021",
+          "responsibleConsultantInformed": "yes",
+          "additionalNotes": ""
+        },
+        "patientAcknowledgement": {
+          "patientUnderstandsPlan": "yes",
+          "carerInformed": "yes",
+          "carerName": "Amir Farouk",
+          "medicationsExplained": "yes",
+          "writtenSummaryProvided": "yes",
+          "questionsAnswered": "yes",
+          "acknowledgementDate": "2026-08-05",
+          "signedBy": "Nadia Farouk"
+        }
+      },
+      "expected": {
+        "completenessLevel": "complete",
+        "mandatorySatisfied": 25,
+        "mandatoryTotal": 25,
+        "optionalSatisfied": 8,
+        "optionalTotal": 8,
+        "firedRules": [
+          {
+            "id": "NG27-M-001",
+            "category": "Patient Details",
+            "description": "Patient first name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-002",
+            "category": "Patient Details",
+            "description": "Patient last name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-003",
+            "category": "Patient Details",
+            "description": "Patient date of birth recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-004",
+            "category": "Patient Details",
+            "description": "NHS number recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-005",
+            "category": "Patient Details",
+            "description": "GP name and practice recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-006",
+            "category": "Admission Summary",
+            "description": "Admission date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-007",
+            "category": "Admission Summary",
+            "description": "Discharge date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-008",
+            "category": "Admission Summary",
+            "description": "Responsible consultant recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-009",
+            "category": "Admission Summary",
+            "description": "Reason for admission recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-010",
+            "category": "Diagnoses",
+            "description": "At least one primary diagnosis recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-011",
+            "category": "Procedures",
+            "description": "Procedures performed listed, or explicitly noted as none.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-012",
+            "category": "Discharge Medications",
+            "description": "Discharge medications listed (with dose, route, frequency).",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-013",
+            "category": "Discharge Medications",
+            "description": "Medication reconciliation completed.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-014",
+            "category": "Discharge Medications",
+            "description": "Allergies reviewed and documented.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-015",
+            "category": "Follow-up",
+            "description": "GP follow-up requirement decided.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-016",
+            "category": "Follow-up",
+            "description": "Outpatient follow-up requirement decided.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-017",
+            "category": "Community Care",
+            "description": "Discharge destination recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-018",
+            "category": "Community Care",
+            "description": "Care responsibility recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-019",
+            "category": "Warning Signs",
+            "description": "When-to-seek-help advice recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-020",
+            "category": "Warning Signs",
+            "description": "Safety-netting provided.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-021",
+            "category": "Clinician Sign-off",
+            "description": "Signing clinician name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-022",
+            "category": "Clinician Sign-off",
+            "description": "Signing clinician role recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-023",
+            "category": "Clinician Sign-off",
+            "description": "Sign-off date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-024",
+            "category": "Patient Acknowledgement",
+            "description": "Patient confirms understanding of plan.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-025",
+            "category": "Patient Acknowledgement",
+            "description": "Medications explained to patient/carer.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-001",
+            "category": "Patient Details",
+            "description": "Patient address and postcode recorded.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-002",
+            "category": "Patient Details",
+            "description": "Next of kin name and phone recorded.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-003",
+            "category": "Admission Summary",
+            "description": "Clinical narrative / discharge summary text recorded.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-004",
+            "category": "Diagnoses",
+            "description": "Primary diagnosis coded with ICD-10.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-005",
+            "category": "Follow-up",
+            "description": "At least one follow-up appointment scheduled.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-006",
+            "category": "Warning Signs",
+            "description": "Written information given to patient.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-007",
+            "category": "Patient Acknowledgement",
+            "description": "Written discharge summary provided to patient.",
+            "mandatory": false,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-008",
+            "category": "Patient Acknowledgement",
+            "description": "Patient questions answered.",
+            "mandatory": false,
+            "satisfied": true
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Partial summary, care-home transfer without carer informed",
+      "description": "All 25 mandatory fields are satisfied (fractured-neck-of-femur discharge to a care home), but every optional field is missing: no address/next-of-kin, no clinical narrative, neither diagnosis is ICD-10 coded (two diagnoses are both marked primary), no follow-up appointment scheduled alongside both GP and outpatient follow-up explicitly declined, no written information, no written summary, and patient questions not marked answered. completenessLevel is Partial (25/25 mandatory, 0/8 optional). Seven flags fire: one high (care-home discharge with carerInformed not yes), four medium (no follow-up arranged; two primary diagnoses recorded; questions not answered; no written summary), two low (no ICD-10 codes on either diagnosis; no written warning-signs information).",
+      "state": {
+        "patientDetails": {
+          "firstName": "Colin",
+          "lastName": "Vance",
+          "dateOfBirth": "1940-11-02",
+          "sex": "male",
+          "nhsNumber": "987 654 3210",
+          "hospitalNumber": "H-40218",
+          "address": "",
+          "postcode": "",
+          "phone": "",
+          "gpName": "Dr. Ibrahim",
+          "gpPractice": "Elm Road Surgery",
+          "nextOfKinName": "",
+          "nextOfKinPhone": ""
+        },
+        "admissionSummary": {
+          "admissionDate": "2026-07-20",
+          "dischargeDate": "2026-07-26",
+          "ward": "Ward 8",
+          "consultant": "Ms. Delacroix",
+          "specialty": "Care of the Elderly",
+          "reasonForAdmission": "Fall with hip fracture",
+          "presentingComplaint": "Fall at home, unable to weight-bear",
+          "clinicalNarrative": ""
+        },
+        "diagnoses": {
+          "diagnoses": [
+            {
+              "description": "Fractured neck of femur",
+              "icd10": "",
+              "type": "primary"
+            },
+            {
+              "description": "Hypertension",
+              "icd10": "",
+              "type": "primary"
+            }
+          ]
+        },
+        "proceduresPerformed": {
+          "procedures": [],
+          "noProceduresPerformed": "yes"
+        },
+        "dischargeMedications": {
+          "medications": [
+            {
+              "name": "Co-codamol",
+              "dose": "30/500mg",
+              "route": "oral",
+              "frequency": "four times daily",
+              "duration": "2 weeks",
+              "status": "new",
+              "indication": "Pain relief"
+            }
+          ],
+          "reconciliationCompleted": "yes",
+          "reconciliationNotes": "",
+          "allergiesReviewed": "yes",
+          "allergyNotes": ""
+        },
+        "followupArrangements": {
+          "appointments": [],
+          "gpFollowupRequired": "no",
+          "gpFollowupTimeframe": "",
+          "outpatientFollowupRequired": "no",
+          "investigationsPending": "no",
+          "pendingInvestigationDetails": "",
+          "resultsToBeChasedByGp": ""
+        },
+        "communityCareInstructions": {
+          "dischargeDestination": "care-home",
+          "otherDestinationDetails": "",
+          "careResponsibility": "care-home-staff",
+          "transportMode": "ambulance",
+          "districtNurseReferral": "no",
+          "socialServicesReferral": "yes",
+          "physiotherapyReferral": "no",
+          "occupationalTherapyReferral": "no",
+          "packageOfCareInPlace": "yes",
+          "mobilityStatus": "Requires hoist",
+          "dietaryRequirements": "",
+          "woundCareInstructions": "",
+          "equipmentProvided": "Hoist, pressure-relieving mattress"
+        },
+        "warningSigns": {
+          "redFlagSymptoms": [],
+          "whenToSeekHelp": "Seek urgent review if increasing hip pain, unable to weight-bear, or new confusion.",
+          "emergencyContactNumber": "",
+          "safetyNetingProvided": "yes",
+          "writtenInfoGiven": "no"
+        },
+        "clinicianSignoff": {
+          "clinicianName": "Dr. Femi Adeyemi",
+          "clinicianRole": "Care of the Elderly SHO",
+          "gmcNumber": "",
+          "signoffDate": "2026-07-26",
+          "bleepOrContact": "",
+          "responsibleConsultantInformed": "yes",
+          "additionalNotes": ""
+        },
+        "patientAcknowledgement": {
+          "patientUnderstandsPlan": "yes",
+          "carerInformed": "no",
+          "carerName": "",
+          "medicationsExplained": "yes",
+          "writtenSummaryProvided": "no",
+          "questionsAnswered": "no",
+          "acknowledgementDate": "2026-07-26",
+          "signedBy": ""
+        }
+      },
+      "expected": {
+        "completenessLevel": "partial",
+        "mandatorySatisfied": 25,
+        "mandatoryTotal": 25,
+        "optionalSatisfied": 0,
+        "optionalTotal": 8,
+        "firedRules": [
+          {
+            "id": "NG27-M-001",
+            "category": "Patient Details",
+            "description": "Patient first name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-002",
+            "category": "Patient Details",
+            "description": "Patient last name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-003",
+            "category": "Patient Details",
+            "description": "Patient date of birth recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-004",
+            "category": "Patient Details",
+            "description": "NHS number recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-005",
+            "category": "Patient Details",
+            "description": "GP name and practice recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-006",
+            "category": "Admission Summary",
+            "description": "Admission date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-007",
+            "category": "Admission Summary",
+            "description": "Discharge date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-008",
+            "category": "Admission Summary",
+            "description": "Responsible consultant recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-009",
+            "category": "Admission Summary",
+            "description": "Reason for admission recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-010",
+            "category": "Diagnoses",
+            "description": "At least one primary diagnosis recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-011",
+            "category": "Procedures",
+            "description": "Procedures performed listed, or explicitly noted as none.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-012",
+            "category": "Discharge Medications",
+            "description": "Discharge medications listed (with dose, route, frequency).",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-013",
+            "category": "Discharge Medications",
+            "description": "Medication reconciliation completed.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-014",
+            "category": "Discharge Medications",
+            "description": "Allergies reviewed and documented.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-015",
+            "category": "Follow-up",
+            "description": "GP follow-up requirement decided.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-016",
+            "category": "Follow-up",
+            "description": "Outpatient follow-up requirement decided.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-017",
+            "category": "Community Care",
+            "description": "Discharge destination recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-018",
+            "category": "Community Care",
+            "description": "Care responsibility recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-019",
+            "category": "Warning Signs",
+            "description": "When-to-seek-help advice recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-020",
+            "category": "Warning Signs",
+            "description": "Safety-netting provided.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-021",
+            "category": "Clinician Sign-off",
+            "description": "Signing clinician name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-022",
+            "category": "Clinician Sign-off",
+            "description": "Signing clinician role recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-023",
+            "category": "Clinician Sign-off",
+            "description": "Sign-off date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-024",
+            "category": "Patient Acknowledgement",
+            "description": "Patient confirms understanding of plan.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-025",
+            "category": "Patient Acknowledgement",
+            "description": "Medications explained to patient/carer.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-O-001",
+            "category": "Patient Details",
+            "description": "Patient address and postcode recorded.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-002",
+            "category": "Patient Details",
+            "description": "Next of kin name and phone recorded.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-003",
+            "category": "Admission Summary",
+            "description": "Clinical narrative / discharge summary text recorded.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-004",
+            "category": "Diagnoses",
+            "description": "Primary diagnosis coded with ICD-10.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-005",
+            "category": "Follow-up",
+            "description": "At least one follow-up appointment scheduled.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-006",
+            "category": "Warning Signs",
+            "description": "Written information given to patient.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-007",
+            "category": "Patient Acknowledgement",
+            "description": "Written discharge summary provided to patient.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-008",
+            "category": "Patient Acknowledgement",
+            "description": "Patient questions answered.",
+            "mandatory": false,
+            "satisfied": false
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-DEST-001",
+            "category": "Community Care",
+            "message": "Discharge to care/nursing home but carer or care-home staff not informed.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FU-002",
+            "category": "Follow-up",
+            "message": "No follow-up arranged - confirm this is appropriate for the diagnosis.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DX-002",
+            "category": "Diagnoses",
+            "message": "2 primary diagnoses recorded - typically only one is expected.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ACK-002",
+            "category": "Patient Acknowledgement",
+            "message": "Patient questions not yet fully answered.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ACK-003",
+            "category": "Patient Acknowledgement",
+            "message": "No written discharge summary provided to patient.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DX-003",
+            "category": "Diagnoses",
+            "message": "No ICD-10 codes assigned to any diagnosis - coding required for tariff and audit.",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-SAFE-002",
+            "category": "Warning Signs",
+            "message": "No written information given on warning signs.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete summary, unsafe discharge with reversed dates",
+      "description": "Eighteen of the 25 mandatory NICE NG27 fields are missing: no NHS number, no consultant, no diagnosis recorded at all, no procedures list and no explicit none, an incompletely-specified antibiotic (missing frequency), reconciliation and allergies both explicitly not done, follow-up decisions left blank, pending investigations with no chase plan, no discharge destination or care responsibility, no safety-netting advice text, no clinician sign-off identity, and the patient explicitly does not understand the plan. The discharge date is also recorded before the admission date (a data-entry reversal the validator's nonEmpty-only mandatory checks cannot catch, but the independent flag layer does). completenessLevel is Incomplete (7/25 mandatory, 0/8 optional). Twelve flags fire: four urgent (reconciliation not done, allergies not reviewed, discharge before admission, patient does not understand the plan), five high (incomplete medication, pending investigations with no chase plan, no primary diagnosis, consultant not informed, no safety-netting), two medium (questions not answered, no written summary), one low (no written warning-signs information).",
+      "state": {
+        "patientDetails": {
+          "firstName": "Thomas",
+          "lastName": "Reyes",
+          "dateOfBirth": "1955-02-14",
+          "sex": "male",
+          "nhsNumber": "",
+          "hospitalNumber": "H-11029",
+          "address": "",
+          "postcode": "",
+          "phone": "",
+          "gpName": "Dr. Whitmore",
+          "gpPractice": "Elm Road Surgery",
+          "nextOfKinName": "",
+          "nextOfKinPhone": ""
+        },
+        "admissionSummary": {
+          "admissionDate": "2026-08-01",
+          "dischargeDate": "2026-07-28",
+          "ward": "Ward 5",
+          "consultant": "",
+          "specialty": "Respiratory Medicine",
+          "reasonForAdmission": "Community-acquired pneumonia",
+          "presentingComplaint": "Fever, cough, breathlessness",
+          "clinicalNarrative": ""
+        },
+        "diagnoses": {
+          "diagnoses": []
+        },
+        "proceduresPerformed": {
+          "procedures": [],
+          "noProceduresPerformed": ""
+        },
+        "dischargeMedications": {
+          "medications": [
+            {
+              "name": "Amoxicillin",
+              "dose": "500mg",
+              "route": "oral",
+              "frequency": "",
+              "duration": "",
+              "status": "new",
+              "indication": ""
+            }
+          ],
+          "reconciliationCompleted": "no",
+          "reconciliationNotes": "",
+          "allergiesReviewed": "no",
+          "allergyNotes": ""
+        },
+        "followupArrangements": {
+          "appointments": [],
+          "gpFollowupRequired": "",
+          "gpFollowupTimeframe": "",
+          "outpatientFollowupRequired": "",
+          "investigationsPending": "yes",
+          "pendingInvestigationDetails": "Sputum culture",
+          "resultsToBeChasedByGp": "no"
+        },
+        "communityCareInstructions": {
+          "dischargeDestination": "",
+          "otherDestinationDetails": "",
+          "careResponsibility": "",
+          "transportMode": "unknown",
+          "districtNurseReferral": "",
+          "socialServicesReferral": "",
+          "physiotherapyReferral": "",
+          "occupationalTherapyReferral": "",
+          "packageOfCareInPlace": "",
+          "mobilityStatus": "",
+          "dietaryRequirements": "",
+          "woundCareInstructions": "",
+          "equipmentProvided": ""
+        },
+        "warningSigns": {
+          "redFlagSymptoms": [],
+          "whenToSeekHelp": "",
+          "emergencyContactNumber": "",
+          "safetyNetingProvided": "no",
+          "writtenInfoGiven": "no"
+        },
+        "clinicianSignoff": {
+          "clinicianName": "",
+          "clinicianRole": "",
+          "gmcNumber": "",
+          "signoffDate": "",
+          "bleepOrContact": "",
+          "responsibleConsultantInformed": "no",
+          "additionalNotes": ""
+        },
+        "patientAcknowledgement": {
+          "patientUnderstandsPlan": "no",
+          "carerInformed": "no",
+          "carerName": "",
+          "medicationsExplained": "no",
+          "writtenSummaryProvided": "no",
+          "questionsAnswered": "no",
+          "acknowledgementDate": "",
+          "signedBy": ""
+        }
+      },
+      "expected": {
+        "completenessLevel": "incomplete",
+        "mandatorySatisfied": 7,
+        "mandatoryTotal": 25,
+        "optionalSatisfied": 0,
+        "optionalTotal": 8,
+        "firedRules": [
+          {
+            "id": "NG27-M-001",
+            "category": "Patient Details",
+            "description": "Patient first name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-002",
+            "category": "Patient Details",
+            "description": "Patient last name recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-003",
+            "category": "Patient Details",
+            "description": "Patient date of birth recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-004",
+            "category": "Patient Details",
+            "description": "NHS number recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-005",
+            "category": "Patient Details",
+            "description": "GP name and practice recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-006",
+            "category": "Admission Summary",
+            "description": "Admission date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-007",
+            "category": "Admission Summary",
+            "description": "Discharge date recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-008",
+            "category": "Admission Summary",
+            "description": "Responsible consultant recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-009",
+            "category": "Admission Summary",
+            "description": "Reason for admission recorded.",
+            "mandatory": true,
+            "satisfied": true
+          },
+          {
+            "id": "NG27-M-010",
+            "category": "Diagnoses",
+            "description": "At least one primary diagnosis recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-011",
+            "category": "Procedures",
+            "description": "Procedures performed listed, or explicitly noted as none.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-012",
+            "category": "Discharge Medications",
+            "description": "Discharge medications listed (with dose, route, frequency).",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-013",
+            "category": "Discharge Medications",
+            "description": "Medication reconciliation completed.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-014",
+            "category": "Discharge Medications",
+            "description": "Allergies reviewed and documented.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-015",
+            "category": "Follow-up",
+            "description": "GP follow-up requirement decided.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-016",
+            "category": "Follow-up",
+            "description": "Outpatient follow-up requirement decided.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-017",
+            "category": "Community Care",
+            "description": "Discharge destination recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-018",
+            "category": "Community Care",
+            "description": "Care responsibility recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-019",
+            "category": "Warning Signs",
+            "description": "When-to-seek-help advice recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-020",
+            "category": "Warning Signs",
+            "description": "Safety-netting provided.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-021",
+            "category": "Clinician Sign-off",
+            "description": "Signing clinician name recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-022",
+            "category": "Clinician Sign-off",
+            "description": "Signing clinician role recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-023",
+            "category": "Clinician Sign-off",
+            "description": "Sign-off date recorded.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-024",
+            "category": "Patient Acknowledgement",
+            "description": "Patient confirms understanding of plan.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-M-025",
+            "category": "Patient Acknowledgement",
+            "description": "Medications explained to patient/carer.",
+            "mandatory": true,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-001",
+            "category": "Patient Details",
+            "description": "Patient address and postcode recorded.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-002",
+            "category": "Patient Details",
+            "description": "Next of kin name and phone recorded.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-003",
+            "category": "Admission Summary",
+            "description": "Clinical narrative / discharge summary text recorded.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-004",
+            "category": "Diagnoses",
+            "description": "Primary diagnosis coded with ICD-10.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-005",
+            "category": "Follow-up",
+            "description": "At least one follow-up appointment scheduled.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-006",
+            "category": "Warning Signs",
+            "description": "Written information given to patient.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-007",
+            "category": "Patient Acknowledgement",
+            "description": "Written discharge summary provided to patient.",
+            "mandatory": false,
+            "satisfied": false
+          },
+          {
+            "id": "NG27-O-008",
+            "category": "Patient Acknowledgement",
+            "description": "Patient questions answered.",
+            "mandatory": false,
+            "satisfied": false
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MEDS-001",
+            "category": "Discharge Medications",
+            "message": "Medication reconciliation NOT completed - high risk of medication error on discharge.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-MEDS-002",
+            "category": "Discharge Medications",
+            "message": "Allergies NOT reviewed - serious safety concern.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-DATE-001",
+            "category": "Admission Summary",
+            "message": "Discharge date is before admission date.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-ACK-001",
+            "category": "Patient Acknowledgement",
+            "message": "Patient does NOT confirm understanding of discharge plan.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-MEDS-003",
+            "category": "Discharge Medications",
+            "message": "One or more medications missing dose, route, or frequency.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FU-001",
+            "category": "Follow-up",
+            "message": "Investigations pending but no clear plan for chasing results.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DX-001",
+            "category": "Diagnoses",
+            "message": "No primary diagnosis recorded.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SIGN-001",
+            "category": "Clinician Sign-off",
+            "message": "Responsible consultant NOT informed of discharge.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SAFE-001",
+            "category": "Warning Signs",
+            "message": "Safety-netting advice NOT provided - required by NICE NG27.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ACK-002",
+            "category": "Patient Acknowledgement",
+            "message": "Patient questions not yet fully answered.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ACK-003",
+            "category": "Patient Acknowledgement",
+            "message": "No written discharge summary provided to patient.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SAFE-002",
+            "category": "Warning Signs",
+            "message": "No written information given on warning signs.",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,712 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateCOPM",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateCOPM() averages up to 5 answered performance scores and 5 answered satisfaction scores (1-10 each) independently, defaulting each average to 0 when nothing is answered. Both category labels are computed by the SAME copmPerformanceCategory() helper, so satisfactionCategoryLabel reads 'Good performance' rather than 'Good satisfaction' even for a satisfaction score - a naming quirk in the shared label function, not a bug in the score itself. detectAdditionalFlags() does independent free-text substring matching (case-insensitive) on several narrative fields (cognition, homeEnvironment, socialSupport, pain, lowerExtremity, coordination, vision, fatigue), so persona narrative text was chosen deliberately to trigger, or deliberately avoid, those substrings.",
+  "personas": [
+    {
+      "name": "Independent, well-supported retiree",
+      "description": "All 5 performance activities score 7-9 (average 8.2, Good performance) and all 5 satisfaction ratings score 7-9 (average 8.0, also labelled 'Good performance' by the shared category helper). No difficulty is worse than 'some', the home is safe and uncluttered, cognition and coordination are intact, and social support is strong. Ten fired rules (5 performance + 5 satisfaction), no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Marion",
+          "lastName": "Whitfield",
+          "dateOfBirth": "1952-04-11",
+          "sex": "female"
+        },
+        "referralInfo": {
+          "referralSource": "GP",
+          "referralReason": "Post-hip-replacement functional review",
+          "referringClinician": "Dr. Ellery",
+          "referralDate": "2026-08-10",
+          "primaryDiagnosis": "Osteoarthritis, right hip (post-arthroplasty)"
+        },
+        "selfCareActivities": {
+          "personalCare": {
+            "difficulty": "none",
+            "details": ""
+          },
+          "functionalMobility": {
+            "difficulty": "none",
+            "details": ""
+          },
+          "communityManagement": {
+            "difficulty": "none",
+            "details": ""
+          }
+        },
+        "productivityActivities": {
+          "paidWork": {
+            "difficulty": "none",
+            "details": ""
+          },
+          "householdManagement": {
+            "difficulty": "none",
+            "details": ""
+          },
+          "education": {
+            "difficulty": "",
+            "details": ""
+          }
+        },
+        "leisureActivities": {
+          "quietRecreation": {
+            "difficulty": "none",
+            "details": ""
+          },
+          "activeRecreation": {
+            "difficulty": "some",
+            "details": "Occasional stiffness after golf"
+          },
+          "socialParticipation": {
+            "difficulty": "none",
+            "details": ""
+          }
+        },
+        "performanceRatings": {
+          "activity1": {
+            "name": "Getting dressed independently",
+            "importance": 8,
+            "performanceScore": 8
+          },
+          "activity2": {
+            "name": "Preparing meals",
+            "importance": 7,
+            "performanceScore": 9
+          },
+          "activity3": {
+            "name": "Driving to appointments",
+            "importance": 9,
+            "performanceScore": 8
+          },
+          "activity4": {
+            "name": "Gardening",
+            "importance": 6,
+            "performanceScore": 7
+          },
+          "activity5": {
+            "name": "Playing golf",
+            "importance": 8,
+            "performanceScore": 9
+          }
+        },
+        "satisfactionRatings": {
+          "activity1": {
+            "name": "Getting dressed independently",
+            "satisfactionScore": 8
+          },
+          "activity2": {
+            "name": "Preparing meals",
+            "satisfactionScore": 8
+          },
+          "activity3": {
+            "name": "Driving to appointments",
+            "satisfactionScore": 9
+          },
+          "activity4": {
+            "name": "Gardening",
+            "satisfactionScore": 7
+          },
+          "activity5": {
+            "name": "Playing golf",
+            "satisfactionScore": 8
+          }
+        },
+        "environmentalFactors": {
+          "homeEnvironment": "Safe, single-level home with no clutter",
+          "workEnvironment": "Retired",
+          "communityAccess": "Drives independently",
+          "assistiveDevices": "None needed",
+          "socialSupport": "Strong support from spouse and adult children"
+        },
+        "physicalCognitiveStatus": {
+          "upperExtremity": "Normal",
+          "lowerExtremity": "Normal strength and stability",
+          "coordination": "Normal",
+          "cognition": "Intact, no concerns",
+          "vision": "Normal",
+          "fatigue": "No fatigue reported",
+          "pain": "Mild occasional pain"
+        },
+        "goalsPriorities": {
+          "shortTermGoals": "Return to full golf activity",
+          "longTermGoals": "Maintain independence",
+          "priorityAreas": "Leisure participation",
+          "dischargeGoals": "Discharge once golf tolerance restored"
+        }
+      },
+      "expected": {
+        "performanceScore": 8.2,
+        "satisfactionScore": 8,
+        "performanceCategoryLabel": "Good performance",
+        "satisfactionCategoryLabel": "Good performance",
+        "firedRules": [
+          {
+            "id": "COPM-PERF-01",
+            "domain": "Performance",
+            "description": "Getting dressed independently",
+            "score": 8
+          },
+          {
+            "id": "COPM-PERF-02",
+            "domain": "Performance",
+            "description": "Preparing meals",
+            "score": 9
+          },
+          {
+            "id": "COPM-PERF-03",
+            "domain": "Performance",
+            "description": "Driving to appointments",
+            "score": 8
+          },
+          {
+            "id": "COPM-PERF-04",
+            "domain": "Performance",
+            "description": "Gardening",
+            "score": 7
+          },
+          {
+            "id": "COPM-PERF-05",
+            "domain": "Performance",
+            "description": "Playing golf",
+            "score": 9
+          },
+          {
+            "id": "COPM-SAT-01",
+            "domain": "Satisfaction",
+            "description": "Getting dressed independently",
+            "score": 8
+          },
+          {
+            "id": "COPM-SAT-02",
+            "domain": "Satisfaction",
+            "description": "Preparing meals",
+            "score": 8
+          },
+          {
+            "id": "COPM-SAT-03",
+            "domain": "Satisfaction",
+            "description": "Driving to appointments",
+            "score": 9
+          },
+          {
+            "id": "COPM-SAT-04",
+            "domain": "Satisfaction",
+            "description": "Gardening",
+            "score": 7
+          },
+          {
+            "id": "COPM-SAT-05",
+            "domain": "Satisfaction",
+            "description": "Playing golf",
+            "score": 8
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate mobility and pain limitations after a fall",
+      "description": "Performance averages 5.2 (Moderate concerns) and satisfaction averages 4.2 (Significant issues) across stair-climbing, meal preparation, shopping, housework, and community-group attendance. Functional mobility is significantly difficult (uses a stick on stairs), coordination is mildly impaired by a tremor, and pain is moderate in both knees - each independently below the 'unable'/'severe' threshold that would raise a high-priority flag. Ten fired rules, three medium flags (mobility, pain, falls/coordination).",
+      "state": {
+        "demographics": {
+          "firstName": "Denis",
+          "lastName": "Okoro",
+          "dateOfBirth": "1958-09-23",
+          "sex": "male"
+        },
+        "referralInfo": {
+          "referralSource": "Community rehabilitation team",
+          "referralReason": "Functional decline following a fall at home",
+          "referringClinician": "Dr. Nakamura",
+          "referralDate": "2026-07-30",
+          "primaryDiagnosis": "Mechanical fall, bilateral knee osteoarthritis"
+        },
+        "selfCareActivities": {
+          "personalCare": {
+            "difficulty": "some",
+            "details": "Slower than before"
+          },
+          "functionalMobility": {
+            "difficulty": "significant",
+            "details": "Uses a stick on stairs"
+          },
+          "communityManagement": {
+            "difficulty": "some",
+            "details": ""
+          }
+        },
+        "productivityActivities": {
+          "paidWork": {
+            "difficulty": "some",
+            "details": ""
+          },
+          "householdManagement": {
+            "difficulty": "significant",
+            "details": ""
+          },
+          "education": {
+            "difficulty": "",
+            "details": ""
+          }
+        },
+        "leisureActivities": {
+          "quietRecreation": {
+            "difficulty": "some",
+            "details": ""
+          },
+          "activeRecreation": {
+            "difficulty": "significant",
+            "details": ""
+          },
+          "socialParticipation": {
+            "difficulty": "some",
+            "details": ""
+          }
+        },
+        "performanceRatings": {
+          "activity1": {
+            "name": "Climbing stairs",
+            "importance": 8,
+            "performanceScore": 4
+          },
+          "activity2": {
+            "name": "Meal preparation",
+            "importance": 7,
+            "performanceScore": 5
+          },
+          "activity3": {
+            "name": "Shopping",
+            "importance": 6,
+            "performanceScore": 6
+          },
+          "activity4": {
+            "name": "Housework",
+            "importance": 5,
+            "performanceScore": 5
+          },
+          "activity5": {
+            "name": "Attending community group",
+            "importance": 6,
+            "performanceScore": 6
+          }
+        },
+        "satisfactionRatings": {
+          "activity1": {
+            "name": "Climbing stairs",
+            "satisfactionScore": 3
+          },
+          "activity2": {
+            "name": "Meal preparation",
+            "satisfactionScore": 4
+          },
+          "activity3": {
+            "name": "Shopping",
+            "satisfactionScore": 5
+          },
+          "activity4": {
+            "name": "Housework",
+            "satisfactionScore": 4
+          },
+          "activity5": {
+            "name": "Attending community group",
+            "satisfactionScore": 5
+          }
+        },
+        "environmentalFactors": {
+          "homeEnvironment": "Cluttered but manageable, two-storey",
+          "workEnvironment": "Not applicable, retired",
+          "communityAccess": "Uses community transport",
+          "assistiveDevices": "Walking stick",
+          "socialSupport": "Support available from family"
+        },
+        "physicalCognitiveStatus": {
+          "upperExtremity": "Mild reduced grip strength",
+          "lowerExtremity": "Normal strength and stability",
+          "coordination": "Mildly impaired due to tremor",
+          "cognition": "No cognitive concerns noted",
+          "vision": "Normal",
+          "fatigue": "Mild fatigue by end of day",
+          "pain": "Moderate pain in both knees"
+        },
+        "goalsPriorities": {
+          "shortTermGoals": "Safe stair use with stick",
+          "longTermGoals": "Reduce fall risk, resume housework",
+          "priorityAreas": "Mobility, pain management",
+          "dischargeGoals": "Independent stair mobility"
+        }
+      },
+      "expected": {
+        "performanceScore": 5.2,
+        "satisfactionScore": 4.2,
+        "performanceCategoryLabel": "Moderate concerns",
+        "satisfactionCategoryLabel": "Significant issues",
+        "firedRules": [
+          {
+            "id": "COPM-PERF-01",
+            "domain": "Performance",
+            "description": "Climbing stairs",
+            "score": 4
+          },
+          {
+            "id": "COPM-PERF-02",
+            "domain": "Performance",
+            "description": "Meal preparation",
+            "score": 5
+          },
+          {
+            "id": "COPM-PERF-03",
+            "domain": "Performance",
+            "description": "Shopping",
+            "score": 6
+          },
+          {
+            "id": "COPM-PERF-04",
+            "domain": "Performance",
+            "description": "Housework",
+            "score": 5
+          },
+          {
+            "id": "COPM-PERF-05",
+            "domain": "Performance",
+            "description": "Attending community group",
+            "score": 6
+          },
+          {
+            "id": "COPM-SAT-01",
+            "domain": "Satisfaction",
+            "description": "Climbing stairs",
+            "score": 3
+          },
+          {
+            "id": "COPM-SAT-02",
+            "domain": "Satisfaction",
+            "description": "Meal preparation",
+            "score": 4
+          },
+          {
+            "id": "COPM-SAT-03",
+            "domain": "Satisfaction",
+            "description": "Shopping",
+            "score": 5
+          },
+          {
+            "id": "COPM-SAT-04",
+            "domain": "Satisfaction",
+            "description": "Housework",
+            "score": 4
+          },
+          {
+            "id": "COPM-SAT-05",
+            "domain": "Satisfaction",
+            "description": "Attending community group",
+            "score": 5
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MOBILITY-002",
+            "category": "Mobility Concern",
+            "message": "Significant functional mobility difficulties reported - assistive device evaluation recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAIN-002",
+            "category": "Pain Management",
+            "message": "Moderate pain reported - monitor impact on occupational performance",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FALLS-002",
+            "category": "Falls Risk",
+            "message": "Coordination impairment noted - falls risk may be elevated",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Housebound, unable to perform self-care after stroke",
+      "description": "Performance averages 1.4 and satisfaction averages 1.2 (both Significant issues) across personal hygiene, toileting mobility, food preparation, leaving the house, and seeing friends - the patient is unable to perform self-care, functional mobility, community management, paid work, household management, active recreation, or social participation. Severe cognitive impairment, multiple home hazards, severe/chronic pain, severe lower-extremity weakness and instability, severely impaired coordination, severe vision loss, extreme fatigue, and no social support are all documented. Ten fired rules and thirteen flags: seven high (self-care, mobility, cognition, home safety, social isolation, pain, falls) and six medium (limited social support, coordination/falls, vision, fatigue, community access, unable to work).",
+      "state": {
+        "demographics": {
+          "firstName": "Harold",
+          "lastName": "Bekker",
+          "dateOfBirth": "1946-01-30",
+          "sex": "male"
+        },
+        "referralInfo": {
+          "referralSource": "Stroke rehabilitation unit",
+          "referralReason": "Severe functional decline post-stroke",
+          "referringClinician": "Dr. Ashworth",
+          "referralDate": "2026-08-05",
+          "primaryDiagnosis": "Left middle cerebral artery ischaemic stroke"
+        },
+        "selfCareActivities": {
+          "personalCare": {
+            "difficulty": "unable",
+            "details": "Requires full assistance"
+          },
+          "functionalMobility": {
+            "difficulty": "unable",
+            "details": "Bedbound"
+          },
+          "communityManagement": {
+            "difficulty": "unable",
+            "details": ""
+          }
+        },
+        "productivityActivities": {
+          "paidWork": {
+            "difficulty": "unable",
+            "details": ""
+          },
+          "householdManagement": {
+            "difficulty": "unable",
+            "details": ""
+          },
+          "education": {
+            "difficulty": "",
+            "details": ""
+          }
+        },
+        "leisureActivities": {
+          "quietRecreation": {
+            "difficulty": "significant",
+            "details": ""
+          },
+          "activeRecreation": {
+            "difficulty": "unable",
+            "details": ""
+          },
+          "socialParticipation": {
+            "difficulty": "unable",
+            "details": ""
+          }
+        },
+        "performanceRatings": {
+          "activity1": {
+            "name": "Personal hygiene",
+            "importance": 9,
+            "performanceScore": 1
+          },
+          "activity2": {
+            "name": "Getting to the bathroom",
+            "importance": 9,
+            "performanceScore": 2
+          },
+          "activity3": {
+            "name": "Preparing any food",
+            "importance": 8,
+            "performanceScore": 1
+          },
+          "activity4": {
+            "name": "Leaving the house",
+            "importance": 8,
+            "performanceScore": 2
+          },
+          "activity5": {
+            "name": "Seeing friends",
+            "importance": 6,
+            "performanceScore": 1
+          }
+        },
+        "satisfactionRatings": {
+          "activity1": {
+            "name": "Personal hygiene",
+            "satisfactionScore": 1
+          },
+          "activity2": {
+            "name": "Getting to the bathroom",
+            "satisfactionScore": 1
+          },
+          "activity3": {
+            "name": "Preparing any food",
+            "satisfactionScore": 2
+          },
+          "activity4": {
+            "name": "Leaving the house",
+            "satisfactionScore": 1
+          },
+          "activity5": {
+            "name": "Seeing friends",
+            "satisfactionScore": 1
+          }
+        },
+        "environmentalFactors": {
+          "homeEnvironment": "Multiple hazards including loose rugs and poor lighting; barriers throughout",
+          "workEnvironment": "Unable to work",
+          "communityAccess": "None, housebound",
+          "assistiveDevices": "Hospital bed, hoist",
+          "socialSupport": "None available, patient lives isolated"
+        },
+        "physicalCognitiveStatus": {
+          "upperExtremity": "Severe weakness",
+          "lowerExtremity": "Significant weakness and instability",
+          "coordination": "Severely impaired coordination",
+          "cognition": "Severe cognitive impairment with memory deficits",
+          "vision": "Severe vision loss",
+          "fatigue": "Extreme, debilitating fatigue",
+          "pain": "Severe, chronic, debilitating pain"
+        },
+        "goalsPriorities": {
+          "shortTermGoals": "Establish safe hoist transfers",
+          "longTermGoals": "Maximise functional independence where possible",
+          "priorityAreas": "Safety, self-care, cognitive support",
+          "dischargeGoals": "24-hour care package in place before discharge"
+        }
+      },
+      "expected": {
+        "performanceScore": 1.4,
+        "satisfactionScore": 1.2,
+        "performanceCategoryLabel": "Significant issues",
+        "satisfactionCategoryLabel": "Significant issues",
+        "firedRules": [
+          {
+            "id": "COPM-PERF-01",
+            "domain": "Performance",
+            "description": "Personal hygiene",
+            "score": 1
+          },
+          {
+            "id": "COPM-PERF-02",
+            "domain": "Performance",
+            "description": "Getting to the bathroom",
+            "score": 2
+          },
+          {
+            "id": "COPM-PERF-03",
+            "domain": "Performance",
+            "description": "Preparing any food",
+            "score": 1
+          },
+          {
+            "id": "COPM-PERF-04",
+            "domain": "Performance",
+            "description": "Leaving the house",
+            "score": 2
+          },
+          {
+            "id": "COPM-PERF-05",
+            "domain": "Performance",
+            "description": "Seeing friends",
+            "score": 1
+          },
+          {
+            "id": "COPM-SAT-01",
+            "domain": "Satisfaction",
+            "description": "Personal hygiene",
+            "score": 1
+          },
+          {
+            "id": "COPM-SAT-02",
+            "domain": "Satisfaction",
+            "description": "Getting to the bathroom",
+            "score": 1
+          },
+          {
+            "id": "COPM-SAT-03",
+            "domain": "Satisfaction",
+            "description": "Preparing any food",
+            "score": 2
+          },
+          {
+            "id": "COPM-SAT-04",
+            "domain": "Satisfaction",
+            "description": "Leaving the house",
+            "score": 1
+          },
+          {
+            "id": "COPM-SAT-05",
+            "domain": "Satisfaction",
+            "description": "Seeing friends",
+            "score": 1
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SELFCARE-001",
+            "category": "Self-Care Deficit",
+            "message": "Patient reports inability to perform personal care activities - immediate intervention required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MOBILITY-001",
+            "category": "Mobility Concern",
+            "message": "Patient reports inability to perform functional mobility - falls risk assessment recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-COGNITION-001",
+            "category": "Cognitive Deficit",
+            "message": "Cognitive impairment noted - cognitive screening and safety assessment recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HOME-001",
+            "category": "Home Safety",
+            "message": "Home environment safety concerns identified - home assessment recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SOCIAL-001",
+            "category": "Social Isolation",
+            "message": "Patient unable to participate socially - risk of isolation and depression, psychosocial support recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-001",
+            "category": "Pain Management",
+            "message": "Significant pain reported - pain management consultation and adaptive strategies recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FALLS-001",
+            "category": "Falls Risk",
+            "message": "Lower extremity impairment detected - falls prevention assessment recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SOCIAL-003",
+            "category": "Social Isolation",
+            "message": "Limited social support identified - consider referral to social services",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FALLS-002",
+            "category": "Falls Risk",
+            "message": "Coordination impairment noted - falls risk may be elevated",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VISION-001",
+            "category": "Vision Concern",
+            "message": "Vision impairment reported - environmental adaptation and safety assessment recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FATIGUE-001",
+            "category": "Fatigue",
+            "message": "Severe fatigue reported - energy conservation strategies and activity pacing recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-COMMUNITY-001",
+            "category": "Community Access",
+            "message": "Patient unable to manage community activities - community OT support recommended",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-WORK-001",
+            "category": "Productivity",
+            "message": "Patient unable to perform paid work - vocational rehabilitation referral recommended",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

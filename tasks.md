@@ -1782,7 +1782,32 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       scratch verification scripts which merge onto the engine\'s empty-
       state export). Fleet: `bin/test-personas` forms 332/332 PASS,
       personas 1112/1112 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
-      20 forms remain without personas, all unblocked purely by probe
+      3 more done: `hospital-discharge` (`validateDischarge` + split
+      `detectAdditionalFlags`; the NG27 completeness rules only check
+      `nonEmpty()`/exact-match on the recorded fields, so a discharge
+      date recorded BEFORE the admission date still satisfies both
+      date-recorded mandatory rules — the illogical ordering is only
+      ever caught by the independent flag layer\'s explicit `d < a`
+      check, `FLAG-DATE-001`), `occupational-therapy-assessment`
+      (`calculateCOPM` + split `detectAdditionalFlags`; performance and
+      satisfaction are each averaged independently over up to 5
+      answered activities, and BOTH category labels are produced by the
+      same `copmPerformanceCategory()` helper, so a satisfaction score
+      is labelled "Good performance" rather than "Good satisfaction" —
+      a naming quirk in the shared label function, not a scoring bug;
+      the flag layer does case-insensitive free-text substring matching
+      on several narrative fields, so persona wording was chosen to
+      deliberately trigger, or avoid, those substrings), and
+      `oncology-assessment` (`calculateECOG` + split
+      `detectAdditionalFlags`; MAX-grade over `ecog-rules.js`, ECOG 0
+      default; the critical persona fires 29 of the engine\'s 42 rules
+      and all 14 of its possible flags simultaneously, confirming the
+      two independent audit trails compose cleanly under near-maximal
+      load with no ordering surprises).
+      All nine matched hand derivation exactly. Fleet: `bin/test-
+      personas` forms 335/335 PASS, personas 1121/1121 PASS, 0 FAIL;
+      `bin/test-e2e --html` 6/6 passed.
+      17 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo
