@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-81 tools.
+82 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -16,6 +16,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/forms-as-tsv`](#forms-as-tsv)
 - [`bin/forms-shard`](#forms-shard)
 - [`bin/generate-changelog-and-examples.py`](#generate-changelog-and-examplespy)
+- [`bin/generate-form-skills.py`](#generate-form-skillspy)
 - [`bin/generate-forms-tsv.py`](#generate-forms-tsvpy)
 - [`bin/generate-llms-txt.py`](#generate-llms-txtpy)
 - [`bin/generate-loco-deny-config.py`](#generate-loco-deny-configpy)
@@ -225,6 +226,34 @@ Usage:
   bin/generate-changelog-and-examples.py                 # all forms
   bin/generate-changelog-and-examples.py <slug> [...]    # only named forms
   bin/generate-changelog-and-examples.py --check         # exit nonzero on drift
+```
+
+<h2 id="generate-form-skillspy"><code>bin/generate-form-skills.py</code></h2>
+
+```text
+bin/generate-form-skills.py — Generate forms/<slug>/skills/ per form.
+
+Writes two Claude Code Skills per form, mirroring the repo-root pair
+(`form-examples-skill` / `form-examples-maintainer-skill`) but scoped to
+one form:
+
+- forms/<slug>/skills/<slug>-skill/SKILL.md
+  End-user-facing: what the form measures, its scoring instrument and
+  categories, and where to find its worked examples/personas.
+- forms/<slug>/skills/<slug>-maintainer-skill/SKILL.md
+  Implementation-facing: this form's directory layout, engine
+  reference, and its own verify-gate commands.
+
+Content is derived from each form's own index.md and AGENTS.md (title,
+first paragraph, "Scoring system"/"Scoring engine" section, "Verify"
+fenced command block) plus which artefact directories actually exist on
+disk. Generated artefact: do not hand-edit. Idempotent — re-running with
+no upstream change is a no-op (same bytes).
+
+Usage:
+  bin/generate-form-skills.py            # generate for every form
+  bin/generate-form-skills.py <slug> ... # generate only the named forms
+  bin/generate-form-skills.py --check    # exit non-zero if any skill would change
 ```
 
 <h2 id="generate-forms-tsvpy"><code>bin/generate-forms-tsv.py</code></h2>
