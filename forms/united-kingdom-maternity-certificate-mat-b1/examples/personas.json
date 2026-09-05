@@ -1,0 +1,251 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateMatB1",
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "validateMatB1() folds detectAdditionalFlags() into its own return, so no separate flagsHint is needed. complete is true only when zero fired rules carry category 'completeness' - a fired timing/consistency/declaration rule can coexist with complete===true. The 'issue date in the future' flag reads the wall clock via new Date(), so the clock key freezes 'today' at 2026-09-03 for deterministic grading.",
+  "personas": [
+    {
+      "name": "Complete Part A, doctor-issued",
+      "description": "Pre-confinement certificate issued by a doctor 17 weeks before the expected date of confinement (within the 20-week DWP window), with every field filled, the stamp confirmed applied, and completion in ink confirmed. No rule fires (complete), no flags.",
+      "state": {
+        "patientIdentification": {
+          "patientName": "Amelia Foster",
+          "dateOfBirth": "1994-04-10",
+          "nhsNumber": "123 456 7890"
+        },
+        "certificateType": "pre",
+        "preConfinement": {
+          "expectedDateOfConfinement": "2026-12-01",
+          "examinationDate": "2026-08-01"
+        },
+        "postConfinement": {
+          "actualDateOfBirth": "",
+          "expectedDateOfConfinement": ""
+        },
+        "issuer": {
+          "issuerType": "doctor",
+          "doctor": {
+            "doctorName": "Dr. Nadia Hussain",
+            "practiceName": "Willowbrook Surgery",
+            "practiceAddress": "12 Willowbrook Road, Bristol BS1 2AA",
+            "stampApplied": "yes"
+          },
+          "midwife": {
+            "midwifeName": "",
+            "nmcPin": "",
+            "nmcExpiryDate": ""
+          },
+          "certificateNumber": "MB-100234",
+          "issueDate": "2026-08-01",
+          "isDuplicate": "no",
+          "duplicateMarkerApplied": "",
+          "completedInInk": "yes"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "certificateType": "pre",
+        "issuerType": "doctor",
+        "firedRules": [],
+        "additionalFlags": [],
+        "weeksBeforeEwc": 17
+      }
+    },
+    {
+      "name": "Partial Part A with an inconsistent examination date",
+      "description": "Pre-confinement certificate where the examination date (15 August) falls AFTER the recorded expected date of confinement (1 August) - a consistency problem suggesting Part B should have been used instead - and the doctor's practice address is left blank. Two rules fire (the examination-after-EWC consistency check, and the missing practice-address completeness check), so complete is false. One medium flag fires for the examination-after-EWC inconsistency.",
+      "state": {
+        "patientIdentification": {
+          "patientName": "Rosa Delacroix",
+          "dateOfBirth": "1990-11-02",
+          "nhsNumber": "987 654 3210"
+        },
+        "certificateType": "pre",
+        "preConfinement": {
+          "expectedDateOfConfinement": "2026-08-01",
+          "examinationDate": "2026-08-15"
+        },
+        "postConfinement": {
+          "actualDateOfBirth": "",
+          "expectedDateOfConfinement": ""
+        },
+        "issuer": {
+          "issuerType": "doctor",
+          "doctor": {
+            "doctorName": "Dr. Kwame Boateng",
+            "practiceName": "Elmfield Practice",
+            "practiceAddress": "",
+            "stampApplied": "yes"
+          },
+          "midwife": {
+            "midwifeName": "",
+            "nmcPin": "",
+            "nmcExpiryDate": ""
+          },
+          "certificateNumber": "MB-100987",
+          "issueDate": "2026-08-15",
+          "isDuplicate": "no",
+          "duplicateMarkerApplied": "",
+          "completedInInk": "yes"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "certificateType": "pre",
+        "issuerType": "doctor",
+        "firedRules": [
+          {
+            "id": "MATB1-A-004",
+            "category": "consistency",
+            "priority": "medium",
+            "description": "Part A: examination date should not be after the EWC.",
+            "message": "Part A: examination date is after the expected date of confinement. Use Part B (post-confinement) once the baby has been born."
+          },
+          {
+            "id": "MATB1-DR-003",
+            "category": "completeness",
+            "priority": "medium",
+            "description": "Doctor: practice address must be provided.",
+            "message": "Doctor: practice address is missing."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-PART-A-AFTER-EWC-MED-001",
+            "category": "Timing",
+            "message": "Part A examination date is after the expected date of confinement. If the baby has been born, switch to Part B (post-confinement).",
+            "priority": "medium"
+          }
+        ],
+        "weeksBeforeEwc": -2
+      }
+    },
+    {
+      "name": "Critical, midwife-issued with lapsed registration and no certificate number",
+      "description": "Patient name is missing; the examination is 29 weeks before the expected date of confinement (9 weeks past the DWP's 20-week limit); leftover Part B data (an actual date of birth) coexists with the active Part A selection; the certificate is issued by a midwife whose NMC registration expired before the issue date; no certificate number is recorded; the certificate is a duplicate not marked as such; completion-in-ink is not confirmed; and the issue date is in the future relative to the frozen clock. Six rules fire (one urgent - missing certificate number - plus three high and two medium), so complete is false. Six flags fire: one urgent (missing certificate number), two high (the 20-week window breach; the lapsed NMC registration), two medium (the unmarked duplicate; both parts populated), one low (a future issue date).",
+      "state": {
+        "patientIdentification": {
+          "patientName": "",
+          "dateOfBirth": "1988-02-14",
+          "nhsNumber": ""
+        },
+        "certificateType": "pre",
+        "preConfinement": {
+          "expectedDateOfConfinement": "2026-12-25",
+          "examinationDate": "2026-06-01"
+        },
+        "postConfinement": {
+          "actualDateOfBirth": "2026-01-01",
+          "expectedDateOfConfinement": ""
+        },
+        "issuer": {
+          "issuerType": "midwife",
+          "doctor": {
+            "doctorName": "",
+            "practiceName": "",
+            "practiceAddress": "",
+            "stampApplied": ""
+          },
+          "midwife": {
+            "midwifeName": "Fiona Clarke",
+            "nmcPin": "12A3456B",
+            "nmcExpiryDate": "2026-01-01"
+          },
+          "certificateNumber": "",
+          "issueDate": "2026-09-10",
+          "isDuplicate": "yes",
+          "duplicateMarkerApplied": "no",
+          "completedInInk": "no"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "certificateType": "pre",
+        "issuerType": "midwife",
+        "firedRules": [
+          {
+            "id": "MATB1-DOC-001",
+            "category": "completeness",
+            "priority": "urgent",
+            "description": "Unique certificate number must be recorded.",
+            "message": "Unique certificate number is missing. Every MAT B1 must use an officially supplied form bearing a unique certificate number."
+          },
+          {
+            "id": "MATB1-PT-001",
+            "category": "completeness",
+            "priority": "high",
+            "description": "Patient name must be provided on the front page.",
+            "message": "Patient's name is missing on the front page (above Part A)."
+          },
+          {
+            "id": "MATB1-A-003",
+            "category": "timing",
+            "priority": "high",
+            "description": "Part A: certificate must not be issued more than 20 weeks before the EWC.",
+            "message": "Part A: examination date is more than 20 weeks before the expected date of confinement. DWP guidance prohibits issuing a MAT B1 this early."
+          },
+          {
+            "id": "MATB1-MW-004",
+            "category": "declaration",
+            "priority": "high",
+            "description": "Midwife: NMC registration must not have expired on the issue date.",
+            "message": "Midwife: NMC registration expired before the issue date. A MAT B1 cannot be signed by a midwife with lapsed NMC registration."
+          },
+          {
+            "id": "MATB1-DOC-003",
+            "category": "declaration",
+            "priority": "medium",
+            "description": "Certificate must be confirmed completed in ink.",
+            "message": "Confirmation that the certificate has been completed in ink is missing. DWP guidance requires ink (not pencil)."
+          },
+          {
+            "id": "MATB1-DUP-001",
+            "category": "consistency",
+            "priority": "medium",
+            "description": "Duplicate marker must be applied when the certificate is a duplicate.",
+            "message": "Duplicate certificate is not marked \"DUPLICATE\". Replacements for lost or incomplete originals must carry the DUPLICATE marker."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CERT-NUMBER-URGENT-001",
+            "category": "Certificate",
+            "message": "Unique certificate number is missing - the DWP cannot accept a MAT B1 without an official pre-printed certificate number.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-EWC-WINDOW-HIGH-001",
+            "category": "Timing",
+            "message": "Certificate is being issued 29 weeks before the expected date of confinement. DWP guidance prohibits issuing a MAT B1 more than 20 weeks before the EWC.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NMC-EXPIRY-HIGH-001",
+            "category": "Issuer",
+            "message": "Midwife's NMC registration has expired before the certificate issue date. A midwife cannot issue a MAT B1 with lapsed NMC registration.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DUPLICATE-MED-001",
+            "category": "Duplicate",
+            "message": "Replacement (duplicate) certificate is not marked \"DUPLICATE\". DWP guidance requires the marker on all replacement certificates.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PARTS-CONFLICT-MED-001",
+            "category": "Consistency",
+            "message": "Both Part A and Part B contain data. The MAT B1 form is mutually exclusive - select only one certificate type.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FUTURE-ISSUE-LOW-001",
+            "category": "Data quality",
+            "message": "Issue date is in the future. The MAT B1 should be dated the day it is signed.",
+            "priority": "low"
+          }
+        ],
+        "weeksBeforeEwc": 29
+      }
+    }
+  ]
+}

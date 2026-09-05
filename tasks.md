@@ -1883,7 +1883,34 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       including 2 urgent). All nine matched hand derivation exactly.
       Fleet: `bin/test-personas` forms 344/344 PASS, personas
       1148/1148 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
-      8 forms remain without personas, all unblocked purely by probe
+      2 more done: `united-kingdom-lasting-power-of-attorney-for-
+      financial-decisions` (`validateLpa`, also exported as
+      `calculateGrade`, folding statutory blockers, non-blocking
+      flags, and the validity-band derivation into one call —
+      compositeRisk is max-grade where ANY fired statutory blocker
+      forces `critical` outright, otherwise the worst flag wins;
+      `computeValidityBand` checks `lpa.status` for registered/
+      rejected/submitted BEFORE ever consulting signatures, so an
+      explicit status short-circuits the whole signature-based
+      derivation; every persona sets `signedDate` explicitly since
+      age-on-signing and the blocker/band engine\'s own \'today\'
+      both route through `lpa.signedDate || todayIso()` — the one
+      wall-clock read in this engine; the critical persona is a minor
+      donor with zero attorneys firing 10 of the engine\'s 21
+      statutory blockers at once, including a donor who witnesses
+      their own signature), and
+      `united-kingdom-maternity-certificate-mat-b1` (`validateMatB1`,
+      which folds `detectAdditionalFlags` into its own return;
+      `complete` is scoped to only the `completeness`-category fired
+      rules, so a fired timing/consistency/declaration rule can
+      coexist with `complete === true`; the one wall-clock read here
+      is the \'issue date in the future\' flag, pinned via the
+      persona `clock` key; the critical persona\'s midwife has a
+      lapsed NMC registration and the examination is 9 weeks past the
+      20-week DWP window). All nine matched hand derivation exactly.
+      Fleet: `bin/test-personas` forms 346/346 PASS, personas
+      1154/1154 PASS, 0 FAIL; `bin/test-e2e --html` 4/4 passed.
+      5 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo

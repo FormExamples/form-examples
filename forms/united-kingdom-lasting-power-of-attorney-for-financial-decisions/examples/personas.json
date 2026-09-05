@@ -1,0 +1,879 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateLpa",
+  "note": "validateLpa() (also exported as calculateGrade) folds statutory blocker rules, non-blocking flags, and the validity-band derivation into one call - no separate flagsHint is needed. compositeRisk is max-grade: ANY fired blocker forces 'critical' regardless of flags; otherwise the worst flag priority wins (high > moderate > low), defaulting to low. Age-on-signing and 'today' both route through referenceDate(lpa) = lpa.signedDate || todayIso() - every persona here sets signedDate explicitly so grading never depends on the wall clock. computeValidityBand() checks lpa.status for 'registered'/'rejected'/'submitted' FIRST, before ever looking at signatures, so an explicit status short-circuits the signature-based derivation entirely.",
+  "personas": [
+    {
+      "name": "Clean LP1F, submitted for registration",
+      "description": "A single attorney with one replacement attorney, an independent certificate provider, one person to notify, non-empty preferences, an attorney email on file, a registration contact preference set, and the full donor -> certificate-provider -> attorney signing order all correctly followed and witnessed by an independent witness. status is 'submitted', which computeValidityBand reads directly. No statutory blocker and no flag fires: compositeRisk is low.",
+      "state": {
+        "donor": {
+          "id": "donor-1",
+          "title": "Mrs",
+          "firstNames": "Eleanor",
+          "lastName": "Whitfield",
+          "otherNames": "",
+          "dateOfBirth": "1955-03-14",
+          "email": "eleanor.whitfield@example.com",
+          "phone": "0117 555 0100",
+          "address": {
+            "addressLine1": "14 Willow Court",
+            "addressLine2": "",
+            "addressLine3": "",
+            "postcode": "BS1 4AB",
+            "countryAsIso3166_1Alpha2": "GB"
+          },
+          "isTrustCorporation": false,
+          "trustCorporationNumber": "",
+          "isBankrupt": false,
+          "hasDebtReliefOrder": false
+        },
+        "attorneys": [
+          {
+            "person": {
+              "id": "att-1",
+              "title": "Mr",
+              "firstNames": "Marcus",
+              "lastName": "Whitfield",
+              "otherNames": "",
+              "dateOfBirth": "1985-05-01",
+              "email": "marcus.whitfield@example.com",
+              "phone": "07700 900111",
+              "address": {
+                "addressLine1": "8 Elm Row",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS2 5CD",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 1
+          }
+        ],
+        "replacementAttorneys": [
+          {
+            "person": {
+              "id": "repl-1",
+              "title": "Ms",
+              "firstNames": "Sophie",
+              "lastName": "Whitfield",
+              "otherNames": "",
+              "dateOfBirth": "1988-03-01",
+              "email": "sophie.whitfield@example.com",
+              "phone": "07700 900222",
+              "address": {
+                "addressLine1": "3 Ash Grove",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS3 6EF",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 1,
+            "replacementStepInCondition": "If the first attorney is unable or unwilling to act"
+          }
+        ],
+        "decisionMode": "single_attorney",
+        "decisionModeMixedText": "",
+        "whenAttorneysCanAct": "as_soon_as_registered",
+        "certificateProvider": {
+          "person": {
+            "id": "cp-1",
+            "title": "Mr",
+            "firstNames": "Rowan",
+            "lastName": "Okafor",
+            "otherNames": "",
+            "dateOfBirth": "1970-01-01",
+            "email": "rowan.okafor@example.com",
+            "phone": "0117 555 0200",
+            "address": {
+              "addressLine1": "22 Cedar Lane",
+              "addressLine2": "",
+              "addressLine3": "",
+              "postcode": "BS4 7GH",
+              "countryAsIso3166_1Alpha2": "GB"
+            },
+            "isTrustCorporation": false,
+            "trustCorporationNumber": "",
+            "isBankrupt": false,
+            "hasDebtReliefOrder": false
+          },
+          "knowsDonorAs": "friend",
+          "isOverEighteen": true,
+          "readLpa": true,
+          "noRestrictionsOnActing": true,
+          "isRelatedToDonorOrAttorney": false,
+          "isCareHomeOwnerOrEmployee": false,
+          "eligibilityConfirmationAt": "2026-08-01T10:00:00Z"
+        },
+        "peopleToNotify": [
+          {
+            "person": {
+              "id": "ptn-1",
+              "title": "Ms",
+              "firstNames": "Grace",
+              "lastName": "Whitfield",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "grace.whitfield@example.com",
+              "phone": "",
+              "address": {
+                "addressLine1": "5 Birch Street",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS5 8IJ",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 1
+          }
+        ],
+        "preferencesText": "Please consult my daughter before selling the family home.",
+        "instructionsText": "",
+        "preferencesAndInstructionsOverflow": {
+          "preferencesOverflowText": "",
+          "instructionsOverflowText": "",
+          "decisionsJointlyOverflowText": "",
+          "replacementStepInOverflowText": ""
+        },
+        "legalRightsAcknowledged": true,
+        "signatures": [
+          {
+            "id": "sig-1",
+            "signatoryPersonId": "donor-1",
+            "role": "donor",
+            "lp1fSection": 9,
+            "signatureBlobPath": "",
+            "signedOn": "2026-08-01",
+            "signedOnBehalfFullName": "",
+            "isWitnessed": true,
+            "witness": {
+              "person": {
+                "id": "witness-1",
+                "title": "Mr",
+                "firstNames": "Ian",
+                "lastName": "Marsh",
+                "otherNames": "",
+                "dateOfBirth": "1975-01-01",
+                "email": "",
+                "phone": "",
+                "address": {
+                  "addressLine1": "1 Test St",
+                  "addressLine2": "",
+                  "addressLine3": "",
+                  "postcode": "BS1 1AA",
+                  "countryAsIso3166_1Alpha2": "GB"
+                },
+                "isTrustCorporation": false,
+                "trustCorporationNumber": "",
+                "isBankrupt": false,
+                "hasDebtReliefOrder": false
+              },
+              "witnessSignatureBlobPath": "",
+              "witnessedOn": "2026-08-01"
+            }
+          },
+          {
+            "id": "sig-2",
+            "signatoryPersonId": "cp-1",
+            "role": "certificate_provider",
+            "lp1fSection": 10,
+            "signatureBlobPath": "",
+            "signedOn": "2026-08-02",
+            "signedOnBehalfFullName": "",
+            "isWitnessed": false,
+            "witness": null
+          },
+          {
+            "id": "sig-3",
+            "signatoryPersonId": "att-1",
+            "role": "attorney",
+            "lp1fSection": 11,
+            "signatureBlobPath": "",
+            "signedOn": "2026-08-03",
+            "signedOnBehalfFullName": "",
+            "isWitnessed": true,
+            "witness": {
+              "person": {
+                "id": "witness-1",
+                "title": "Mr",
+                "firstNames": "Ian",
+                "lastName": "Marsh",
+                "otherNames": "",
+                "dateOfBirth": "1975-01-01",
+                "email": "",
+                "phone": "",
+                "address": {
+                  "addressLine1": "1 Test St",
+                  "addressLine2": "",
+                  "addressLine3": "",
+                  "postcode": "BS1 1AA",
+                  "countryAsIso3166_1Alpha2": "GB"
+                },
+                "isTrustCorporation": false,
+                "trustCorporationNumber": "",
+                "isBankrupt": false,
+                "hasDebtReliefOrder": false
+              },
+              "witnessSignatureBlobPath": "",
+              "witnessedOn": "2026-08-03"
+            }
+          },
+          {
+            "id": "sig-4",
+            "signatoryPersonId": "donor-1",
+            "role": "applicant",
+            "lp1fSection": 15,
+            "signatureBlobPath": "",
+            "signedOn": "2026-08-04",
+            "signedOnBehalfFullName": "",
+            "isWitnessed": false,
+            "witness": null
+          }
+        ],
+        "continuationSheets": [],
+        "registrationApplication": {
+          "applicantKind": "donor",
+          "paymentMethod": "card",
+          "cardPaymentPhone": "",
+          "reducedFeeRequested": false,
+          "hasLpa120aEvidence": false,
+          "isRepeatApplication": false,
+          "repeatCaseNumber": "",
+          "paymentReference": "REF123",
+          "paymentDate": "2026-08-04",
+          "paymentAmount": 82
+        },
+        "registrationRecipient": {
+          "recipientKind": "donor",
+          "recipientPersonId": "donor-1",
+          "companyName": "",
+          "prefersPost": false,
+          "prefersPhone": false,
+          "prefersEmail": true,
+          "prefersWelsh": false,
+          "contactPhone": "",
+          "contactEmail": "eleanor.whitfield@example.com",
+          "otherFirstNames": "",
+          "otherLastName": "",
+          "otherAddressLine1": "",
+          "otherAddressLine2": "",
+          "otherAddressLine3": "",
+          "otherPostcode": ""
+        },
+        "opgReferenceNumber": "",
+        "opgRegistrationDate": "",
+        "status": "submitted",
+        "signedDate": "2026-08-04"
+      },
+      "expected": {
+        "validityBand": "submitted",
+        "compositeRisk": "low",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Unsigned draft, single attorney with restrictive timing",
+      "description": "A single attorney with no replacement, timing restricted to 'only when the donor lacks capacity', no people to notify, no preferences or instructions, a missing attorney email, and no registration contact preference set. Still fully unsigned (a draft). No statutory blocker fires (donor and attorney are both adults, no signatures to check order or witnessing on), so compositeRisk comes entirely from flags: two moderate (single attorney with no replacement; restrictive timing) and four low (no people to notify, no preferences/instructions, missing attorney email, no contact preference), giving compositeRisk moderate. validityBand is ready_for_signing (every required field for signing is present).",
+      "state": {
+        "donor": {
+          "id": "donor-2",
+          "title": "Mr",
+          "firstNames": "Harold",
+          "lastName": "Fenwick",
+          "otherNames": "",
+          "dateOfBirth": "1948-06-20",
+          "email": "harold.fenwick@example.com",
+          "phone": "0117 555 0300",
+          "address": {
+            "addressLine1": "40 Maple Drive",
+            "addressLine2": "",
+            "addressLine3": "",
+            "postcode": "BS6 9KL",
+            "countryAsIso3166_1Alpha2": "GB"
+          },
+          "isTrustCorporation": false,
+          "trustCorporationNumber": "",
+          "isBankrupt": false,
+          "hasDebtReliefOrder": false
+        },
+        "attorneys": [
+          {
+            "person": {
+              "id": "att-2",
+              "title": "Mrs",
+              "firstNames": "Diane",
+              "lastName": "Fenwick",
+              "otherNames": "",
+              "dateOfBirth": "1975-02-15",
+              "email": "",
+              "phone": "07700 900333",
+              "address": {
+                "addressLine1": "40 Maple Drive",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS6 9KL",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 1
+          }
+        ],
+        "replacementAttorneys": [],
+        "decisionMode": "single_attorney",
+        "decisionModeMixedText": "",
+        "whenAttorneysCanAct": "only_when_no_capacity",
+        "certificateProvider": {
+          "person": {
+            "id": "cp-2",
+            "title": "Ms",
+            "firstNames": "Bella",
+            "lastName": "Novak",
+            "otherNames": "",
+            "dateOfBirth": "1980-01-01",
+            "email": "bella.novak@example.com",
+            "phone": "0117 555 0400",
+            "address": {
+              "addressLine1": "1 Oak Terrace",
+              "addressLine2": "",
+              "addressLine3": "",
+              "postcode": "BS7 1MN",
+              "countryAsIso3166_1Alpha2": "GB"
+            },
+            "isTrustCorporation": false,
+            "trustCorporationNumber": "",
+            "isBankrupt": false,
+            "hasDebtReliefOrder": false
+          },
+          "knowsDonorAs": "professional",
+          "isOverEighteen": true,
+          "readLpa": true,
+          "noRestrictionsOnActing": true,
+          "isRelatedToDonorOrAttorney": false,
+          "isCareHomeOwnerOrEmployee": false,
+          "eligibilityConfirmationAt": "2026-08-01T10:00:00Z"
+        },
+        "peopleToNotify": [],
+        "preferencesText": "",
+        "instructionsText": "",
+        "preferencesAndInstructionsOverflow": {
+          "preferencesOverflowText": "",
+          "instructionsOverflowText": "",
+          "decisionsJointlyOverflowText": "",
+          "replacementStepInOverflowText": ""
+        },
+        "legalRightsAcknowledged": true,
+        "signatures": [],
+        "continuationSheets": [],
+        "registrationApplication": {
+          "applicantKind": "",
+          "paymentMethod": "",
+          "cardPaymentPhone": "",
+          "reducedFeeRequested": false,
+          "hasLpa120aEvidence": false,
+          "isRepeatApplication": false,
+          "repeatCaseNumber": "",
+          "paymentReference": "",
+          "paymentDate": "",
+          "paymentAmount": null
+        },
+        "registrationRecipient": {
+          "recipientKind": "",
+          "recipientPersonId": "",
+          "companyName": "",
+          "prefersPost": false,
+          "prefersPhone": false,
+          "prefersEmail": false,
+          "prefersWelsh": false,
+          "contactPhone": "",
+          "contactEmail": "",
+          "otherFirstNames": "",
+          "otherLastName": "",
+          "otherAddressLine1": "",
+          "otherAddressLine2": "",
+          "otherAddressLine3": "",
+          "otherPostcode": ""
+        },
+        "opgReferenceNumber": "",
+        "opgRegistrationDate": "",
+        "status": "",
+        "signedDate": "2026-08-04"
+      },
+      "expected": {
+        "validityBand": "ready_for_signing",
+        "compositeRisk": "moderate",
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "ruleId": "SingleAttorneyNoReplacement",
+            "priority": "moderate",
+            "citation": "LP12 Guide part A4",
+            "fieldPath": "replacementAttorneys",
+            "message": "Only one attorney is appointed and no replacement attorney is listed.",
+            "remediation": "The LPA will become useless if the single attorney loses capacity or is unable to act. Strongly recommended: add a replacement attorney in section 4."
+          },
+          {
+            "ruleId": "OnlyWhenNoCapacitySelected",
+            "priority": "moderate",
+            "citation": "LP12 Guide part A5",
+            "fieldPath": "whenAttorneysCanAct",
+            "message": "Attorneys can act only when the donor has no capacity.",
+            "remediation": "This option restricts the LPA to incapacity only and means attorneys cannot help with finances while you still have capacity. Banks and other organisations may also require evidence of incapacity each time. Consider \"as soon as the LPA is registered\"."
+          },
+          {
+            "ruleId": "NoPeopleToNotify",
+            "priority": "low",
+            "citation": "LP12 Guide part A8",
+            "fieldPath": "peopleToNotify",
+            "message": "No people-to-notify are listed.",
+            "remediation": "People-to-notify give an external safeguarding check. Strongly recommended: list at least one trusted person who is not an attorney."
+          },
+          {
+            "ruleId": "PreferencesEmpty",
+            "priority": "low",
+            "citation": "LP12 Guide part A9",
+            "fieldPath": "preferencesText",
+            "message": "Both preferences and instructions are empty.",
+            "remediation": "Optional. The donor may want to leave non-binding preferences (e.g. \"consult my children before selling the family home\")."
+          },
+          {
+            "ruleId": "AttorneyEmailMissing",
+            "priority": "low",
+            "citation": "LP1F section 2",
+            "fieldPath": "attorneys[*].person.email",
+            "message": "One or more attorneys have no email address.",
+            "remediation": "Optional. OPG can deal with attorneys by post; email speeds up later correspondence."
+          },
+          {
+            "ruleId": "EmergencyContactMissing",
+            "priority": "low",
+            "citation": "LP1F section 13",
+            "fieldPath": "registrationRecipient",
+            "message": "No preferred contact method selected.",
+            "remediation": "Optional. Set a contact preference so OPG knows how to reach the donor or applicant."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical, minor donor with zero attorneys and multiple statutory violations",
+      "description": "The donor is a minor (age on signing under 18), no attorney is appointed at all, decision mode is 'jointly' with no replacement attorney, the certificate provider is also a minor, is related to the donor, and is connected with a care home, the donor's own signature is witnessed by the donor themselves, the certificate-provider signature is dated before the donor's (signing-order violation), six people to notify are listed (over the limit of five), and the registration applicant kind is neither donor nor attorneys. Ten statutory blockers fire, forcing compositeRisk to critical regardless of the two low flags that also fire (empty preferences/instructions; no contact preference). validityBand is partially_signed (the donor has signed, but with zero attorneys the all-attorneys-signed condition can never be satisfied).",
+      "state": {
+        "donor": {
+          "id": "donor-3",
+          "title": "",
+          "firstNames": "Tilly",
+          "lastName": "Brandt",
+          "otherNames": "",
+          "dateOfBirth": "2010-01-01",
+          "email": "",
+          "phone": "",
+          "address": {
+            "addressLine1": "1 Test St",
+            "addressLine2": "",
+            "addressLine3": "",
+            "postcode": "BS1 1AA",
+            "countryAsIso3166_1Alpha2": "GB"
+          },
+          "isTrustCorporation": false,
+          "trustCorporationNumber": "",
+          "isBankrupt": false,
+          "hasDebtReliefOrder": false
+        },
+        "attorneys": [],
+        "replacementAttorneys": [],
+        "decisionMode": "jointly",
+        "decisionModeMixedText": "",
+        "whenAttorneysCanAct": "as_soon_as_registered",
+        "certificateProvider": {
+          "person": {
+            "id": "cp-3",
+            "title": "",
+            "firstNames": "Owen",
+            "lastName": "Brandt",
+            "otherNames": "",
+            "dateOfBirth": "2011-06-01",
+            "email": "",
+            "phone": "",
+            "address": {
+              "addressLine1": "1 Test St",
+              "addressLine2": "",
+              "addressLine3": "",
+              "postcode": "BS1 1AA",
+              "countryAsIso3166_1Alpha2": "GB"
+            },
+            "isTrustCorporation": false,
+            "trustCorporationNumber": "",
+            "isBankrupt": false,
+            "hasDebtReliefOrder": false
+          },
+          "knowsDonorAs": "friend",
+          "isOverEighteen": false,
+          "readLpa": true,
+          "noRestrictionsOnActing": true,
+          "isRelatedToDonorOrAttorney": true,
+          "isCareHomeOwnerOrEmployee": true,
+          "eligibilityConfirmationAt": ""
+        },
+        "peopleToNotify": [
+          {
+            "person": {
+              "id": "ptn3-1",
+              "title": "",
+              "firstNames": "P1",
+              "lastName": "L1",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "",
+              "phone": "",
+              "address": {
+                "addressLine1": "1 Test St",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS1 1AA",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 1
+          },
+          {
+            "person": {
+              "id": "ptn3-2",
+              "title": "",
+              "firstNames": "P2",
+              "lastName": "L2",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "",
+              "phone": "",
+              "address": {
+                "addressLine1": "1 Test St",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS1 1AA",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 2
+          },
+          {
+            "person": {
+              "id": "ptn3-3",
+              "title": "",
+              "firstNames": "P3",
+              "lastName": "L3",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "",
+              "phone": "",
+              "address": {
+                "addressLine1": "1 Test St",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS1 1AA",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 3
+          },
+          {
+            "person": {
+              "id": "ptn3-4",
+              "title": "",
+              "firstNames": "P4",
+              "lastName": "L4",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "",
+              "phone": "",
+              "address": {
+                "addressLine1": "1 Test St",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS1 1AA",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 4
+          },
+          {
+            "person": {
+              "id": "ptn3-5",
+              "title": "",
+              "firstNames": "P5",
+              "lastName": "L5",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "",
+              "phone": "",
+              "address": {
+                "addressLine1": "1 Test St",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS1 1AA",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 5
+          },
+          {
+            "person": {
+              "id": "ptn3-6",
+              "title": "",
+              "firstNames": "P6",
+              "lastName": "L6",
+              "otherNames": "",
+              "dateOfBirth": "1990-01-01",
+              "email": "",
+              "phone": "",
+              "address": {
+                "addressLine1": "1 Test St",
+                "addressLine2": "",
+                "addressLine3": "",
+                "postcode": "BS1 1AA",
+                "countryAsIso3166_1Alpha2": "GB"
+              },
+              "isTrustCorporation": false,
+              "trustCorporationNumber": "",
+              "isBankrupt": false,
+              "hasDebtReliefOrder": false
+            },
+            "ordinal": 6
+          }
+        ],
+        "preferencesText": "",
+        "instructionsText": "",
+        "preferencesAndInstructionsOverflow": {
+          "preferencesOverflowText": "",
+          "instructionsOverflowText": "",
+          "decisionsJointlyOverflowText": "",
+          "replacementStepInOverflowText": ""
+        },
+        "legalRightsAcknowledged": false,
+        "signatures": [
+          {
+            "id": "sig3-1",
+            "signatoryPersonId": "donor-3",
+            "role": "donor",
+            "lp1fSection": 9,
+            "signatureBlobPath": "",
+            "signedOn": "2026-08-05",
+            "signedOnBehalfFullName": "",
+            "isWitnessed": true,
+            "witness": {
+              "person": {
+                "id": "donor-3",
+                "title": "",
+                "firstNames": "Tilly",
+                "lastName": "Brandt",
+                "otherNames": "",
+                "dateOfBirth": "2010-01-01",
+                "email": "",
+                "phone": "",
+                "address": {
+                  "addressLine1": "1 Test St",
+                  "addressLine2": "",
+                  "addressLine3": "",
+                  "postcode": "BS1 1AA",
+                  "countryAsIso3166_1Alpha2": "GB"
+                },
+                "isTrustCorporation": false,
+                "trustCorporationNumber": "",
+                "isBankrupt": false,
+                "hasDebtReliefOrder": false
+              },
+              "witnessSignatureBlobPath": "",
+              "witnessedOn": "2026-08-05"
+            }
+          },
+          {
+            "id": "sig3-2",
+            "signatoryPersonId": "cp-3",
+            "role": "certificate_provider",
+            "lp1fSection": 10,
+            "signatureBlobPath": "",
+            "signedOn": "2026-08-01",
+            "signedOnBehalfFullName": "",
+            "isWitnessed": false,
+            "witness": null
+          }
+        ],
+        "continuationSheets": [],
+        "registrationApplication": {
+          "applicantKind": "someone-else",
+          "paymentMethod": "",
+          "cardPaymentPhone": "",
+          "reducedFeeRequested": false,
+          "hasLpa120aEvidence": false,
+          "isRepeatApplication": false,
+          "repeatCaseNumber": "",
+          "paymentReference": "",
+          "paymentDate": "",
+          "paymentAmount": null
+        },
+        "registrationRecipient": {
+          "recipientKind": "",
+          "recipientPersonId": "",
+          "companyName": "",
+          "prefersPost": false,
+          "prefersPhone": false,
+          "prefersEmail": false,
+          "prefersWelsh": false,
+          "contactPhone": "",
+          "contactEmail": "",
+          "otherFirstNames": "",
+          "otherLastName": "",
+          "otherAddressLine1": "",
+          "otherAddressLine2": "",
+          "otherAddressLine3": "",
+          "otherPostcode": ""
+        },
+        "opgReferenceNumber": "",
+        "opgRegistrationDate": "",
+        "status": "",
+        "signedDate": "2026-08-05"
+      },
+      "expected": {
+        "validityBand": "partially_signed",
+        "compositeRisk": "critical",
+        "firedRules": [
+          {
+            "ruleId": "DonorUnderEighteen",
+            "priority": "critical",
+            "citation": "MCA 2005 s. 9(2)(a)",
+            "fieldPath": "donor.dateOfBirth",
+            "message": "Donor is under 18 at the date of signing.",
+            "remediation": "The donor must be 18 or older to make an LPA. Check the date of birth in section 1, or wait until the donor is 18."
+          },
+          {
+            "ruleId": "NoAttorneyAppointed",
+            "priority": "critical",
+            "citation": "MCA 2005 s. 9(1)",
+            "fieldPath": "attorneys",
+            "message": "Section 2 contains zero attorneys.",
+            "remediation": "An LPA must appoint at least one attorney. Add an attorney in section 2."
+          },
+          {
+            "ruleId": "JointlyButNoReplacement",
+            "priority": "critical",
+            "citation": "MCA 2005 s. 10(4)(a); LP12 Guide part A6",
+            "fieldPath": "replacementAttorneys",
+            "message": "Attorneys are appointed \"jointly\" but no replacement attorney is listed.",
+            "remediation": "When attorneys must act jointly, the LPA fails entirely if any one of them can no longer act. Strongly recommended: appoint at least one replacement attorney in section 4."
+          },
+          {
+            "ruleId": "CertificateProviderUnderEighteen",
+            "priority": "critical",
+            "citation": "LPA Regs 2007 reg. 8(1) (approximate)",
+            "fieldPath": "certificateProvider.person.dateOfBirth",
+            "message": "Certificate provider is under 18.",
+            "remediation": "The certificate provider must be an adult. Choose a different person for section 10."
+          },
+          {
+            "ruleId": "CertificateProviderRelatedToAttorney",
+            "priority": "critical",
+            "citation": "LPA Regs 2007 reg. 8(1)(d)",
+            "fieldPath": "certificateProvider.isRelatedToDonorOrAttorney",
+            "message": "Certificate provider is a family member of the donor or an attorney.",
+            "remediation": "The certificate provider cannot be a family member of the donor or any of the attorneys. Choose an independent person — a friend who has known the donor 2+ years, or a professional (GP, solicitor)."
+          },
+          {
+            "ruleId": "CertificateProviderIsCareHomeOwner",
+            "priority": "critical",
+            "citation": "LPA Regs 2007 reg. 8(2)",
+            "fieldPath": "certificateProvider.isCareHomeOwnerOrEmployee",
+            "message": "Certificate provider is connected with the donor’s care home.",
+            "remediation": "If the donor lives in a care home, no one connected with that care home can be the certificate provider. Choose an independent person."
+          },
+          {
+            "ruleId": "WitnessIsDonor",
+            "priority": "critical",
+            "citation": "LPA Regs 2007 reg. 9(2)",
+            "fieldPath": "signatures[role=donor].witness",
+            "message": "Donor’s signature witness is the donor.",
+            "remediation": "A witness must be someone other than the person signing. Choose a different witness for the donor’s signature."
+          },
+          {
+            "ruleId": "PeopleToNotifyExceedsFive",
+            "priority": "critical",
+            "citation": "LP1F section 6; LP12 Guide part A8",
+            "fieldPath": "peopleToNotify",
+            "message": "More than 5 people to notify listed.",
+            "remediation": "You can name up to 5 people to notify. Remove anyone above the fifth, or move them off the form."
+          },
+          {
+            "ruleId": "SigningOrderViolation",
+            "priority": "critical",
+            "citation": "LPA Regs 2007 reg. 9(6)",
+            "fieldPath": "signatures[*].signedOn",
+            "message": "Signatures are not in the order donor (s.9) → certificate provider (s.10) → attorneys (s.11).",
+            "remediation": "The signing order is fixed: donor first (section 9), then certificate provider (section 10), then attorneys (section 11). Re-sign in the correct order; do not change dates."
+          },
+          {
+            "ruleId": "RegistrationApplicantInvalid",
+            "priority": "critical",
+            "citation": "LPA Regs 2007 reg. 11",
+            "fieldPath": "registrationApplication.applicantKind",
+            "message": "Applicant kind is neither donor nor attorneys.",
+            "remediation": "Only the donor or one or more of the attorneys may apply to register."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "ruleId": "PreferencesEmpty",
+            "priority": "low",
+            "citation": "LP12 Guide part A9",
+            "fieldPath": "preferencesText",
+            "message": "Both preferences and instructions are empty.",
+            "remediation": "Optional. The donor may want to leave non-binding preferences (e.g. \"consult my children before selling the family home\")."
+          },
+          {
+            "ruleId": "EmergencyContactMissing",
+            "priority": "low",
+            "citation": "LP1F section 13",
+            "fieldPath": "registrationRecipient",
+            "message": "No preferred contact method selected.",
+            "remediation": "Optional. Set a contact preference so OPG knows how to reach the donor or applicant."
+          }
+        ]
+      }
+    }
+  ]
+}
