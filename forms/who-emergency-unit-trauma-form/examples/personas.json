@@ -1,0 +1,1017 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateEuTrauma",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateEuTrauma() checks each rule's applies() before counting it - spine stabilization (A-02) and GCS (D-02) only apply for RED triage; time of death only applies when dead-on-arrival; admit ward/transfer destination/cause of death are conditional on the disposition value. detectFlaggedIssues() is a fully independent ABCDE+F safety-flag layer; note FLAG-PREG is 'high' priority here (unlike the sibling General form's 'medium'), and several conditions fire independently rather than as mutually exclusive tiers (e.g. SpO2 < 90 fires the urgent 'critical' flag AND, if also < 92 with no breathing intervention, the separate high 'no intervention' flag).",
+  "personas": [
+    {
+      "name": "Complete, minor fall with no red-flag findings",
+      "description": "A walk-in GREEN-triage patient with an unknown injury location explicitly ticked, entirely normal airway/breathing/circulation, AVPU alert, normal vital signs, a complete injury history and past history, and a discharge with the plan discussed. All 35 applicable rules satisfied (complete; RED-only rules A-02/D-02 do not apply at GREEN triage), no flags.",
+      "state": {
+        "patientRegistration": {
+          "hospitalRegistrationNumber": "",
+          "surname": "Adeyemi",
+          "firstName": "Femi",
+          "dateOfBirth": "1980-04-01",
+          "age": null,
+          "ageCategory": "",
+          "sex": "male",
+          "occupation": "",
+          "dateOfArrival": "2026-08-20",
+          "timeOfArrival": "09:00",
+          "arrivalMode": "walk-in",
+          "injuryLocation": "",
+          "injuryLocationUnknown": true,
+          "pregnant": "no",
+          "ivDrugUse": false
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Fall from standing height",
+          "allergies": "",
+          "allergiesUnknown": true,
+          "initialVitals": {
+            "time": "09:05",
+            "tempC": 36.8,
+            "bpSystolic": 118,
+            "bpDiastolic": 76,
+            "pulse": 72,
+            "respiratoryRate": 16,
+            "spo2": 98,
+            "spo2OnOxygen": "no",
+            "painScore": 2
+          },
+          "deadOnArrival": false,
+          "timeOfDeath": ""
+        },
+        "highRiskSigns": {},
+        "triage": {
+          "category": "green",
+          "triagedFor": "",
+          "providerAssessmentDate": "2026-08-20",
+          "providerAssessmentTime": "09:15"
+        },
+        "airway": {
+          "normal": true,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": true,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": true,
+          "unstablePelvis": "",
+          "notes": ""
+        },
+        "disability": {
+          "normal": true,
+          "avpu": "A",
+          "gcsTotal": null,
+          "gcsQualified": false,
+          "notes": ""
+        },
+        "exposureAndFast": {
+          "fastNotIndicated": true
+        },
+        "injuryHistory": {
+          "dateOfInjury": "2026-08-20",
+          "timeOfInjury": "08:50",
+          "intent": "unintentional",
+          "prehospitalCareProvider": "none",
+          "mechUnknown": true,
+          "lossOfConsciousnessDuration": ""
+        },
+        "pastHistories": {
+          "pmhNone": true,
+          "medicationsNone": true
+        },
+        "assessmentAndPlan": {
+          "narrative": "Simple fall, minor bruising, no fracture"
+        },
+        "disposition": {
+          "checklistCompleted": "yes",
+          "edDepartureDate": "2026-08-20",
+          "edDepartureTime": "10:00",
+          "diagnosesImpressions": "Soft tissue contusion",
+          "disposition": "discharge",
+          "admitWard": "",
+          "dischargePlanDiscussed": "yes",
+          "transferTo": "",
+          "leftWithoutBeingSeen": false,
+          "diedCause": "",
+          "emergencyUnitProvider": "Dr. Osei",
+          "signature": "Dr. Osei",
+          "signatureDate": "2026-08-20"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 35,
+        "totalSatisfied": 35,
+        "sections": [
+          {
+            "section": "patientRegistration",
+            "required": 8,
+            "satisfied": 8,
+            "missing": []
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          },
+          {
+            "section": "triage",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "injuryHistory",
+            "required": 5,
+            "satisfied": 5,
+            "missing": []
+          },
+          {
+            "section": "pastHistories",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disposition",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Moderate, pregnant patient with a brief loss of consciousness",
+      "description": "The injury location is left blank with 'Unknown' left unticked (the one missing field), severely elevated blood pressure, a reported pregnancy, and a brief loss of consciousness (5-29 minutes), discharged without the discharge plan being discussed. 34 of 35 applicable rules satisfied (not complete). Four flags fire: two high (severely elevated systolic blood pressure; pregnancy - high priority in this trauma form, unlike the sibling General form's medium), one medium (brief loss of consciousness), one low (no discharge plan discussed).",
+      "state": {
+        "patientRegistration": {
+          "hospitalRegistrationNumber": "",
+          "surname": "Marsh",
+          "firstName": "Ian",
+          "dateOfBirth": "1965-07-20",
+          "age": null,
+          "ageCategory": "",
+          "sex": "male",
+          "occupation": "",
+          "dateOfArrival": "2026-08-21",
+          "timeOfArrival": "11:00",
+          "arrivalMode": "ambulance",
+          "injuryLocation": "",
+          "injuryLocationUnknown": false,
+          "pregnant": "yes",
+          "ivDrugUse": false
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Fall down stairs",
+          "allergies": "",
+          "allergiesUnknown": true,
+          "initialVitals": {
+            "time": "11:05",
+            "tempC": 36.9,
+            "bpSystolic": 185,
+            "bpDiastolic": 105,
+            "pulse": 72,
+            "respiratoryRate": 16,
+            "spo2": 97,
+            "spo2OnOxygen": "no",
+            "painScore": 5
+          },
+          "deadOnArrival": false,
+          "timeOfDeath": ""
+        },
+        "highRiskSigns": {},
+        "triage": {
+          "category": "yellow",
+          "triagedFor": "",
+          "providerAssessmentDate": "2026-08-21",
+          "providerAssessmentTime": "11:15"
+        },
+        "airway": {
+          "normal": true,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": true,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": true,
+          "unstablePelvis": "",
+          "notes": ""
+        },
+        "disability": {
+          "normal": true,
+          "avpu": "A",
+          "gcsTotal": null,
+          "gcsQualified": false,
+          "notes": ""
+        },
+        "exposureAndFast": {
+          "fastNotIndicated": true
+        },
+        "injuryHistory": {
+          "dateOfInjury": "2026-08-21",
+          "timeOfInjury": "10:50",
+          "intent": "unintentional",
+          "prehospitalCareProvider": "layperson",
+          "mechUnknown": true,
+          "lossOfConsciousnessDuration": "5-29min"
+        },
+        "pastHistories": {
+          "pmhNone": true,
+          "medicationsNone": true
+        },
+        "assessmentAndPlan": {
+          "narrative": "Fall down stairs, brief LOC, observed and discharged"
+        },
+        "disposition": {
+          "checklistCompleted": "yes",
+          "edDepartureDate": "2026-08-21",
+          "edDepartureTime": "13:00",
+          "diagnosesImpressions": "Minor head injury",
+          "disposition": "discharge",
+          "admitWard": "",
+          "dischargePlanDiscussed": "no",
+          "transferTo": "",
+          "leftWithoutBeingSeen": false,
+          "diedCause": "",
+          "emergencyUnitProvider": "Dr. Lindqvist",
+          "signature": "Dr. Lindqvist",
+          "signatureDate": "2026-08-21"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 35,
+        "totalSatisfied": 34,
+        "sections": [
+          {
+            "section": "patientRegistration",
+            "required": 8,
+            "satisfied": 7,
+            "missing": [
+              {
+                "id": "PR-08",
+                "section": "patientRegistration",
+                "description": "Injury location (or \"Unknown\") is required."
+              }
+            ]
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          },
+          {
+            "section": "triage",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "injuryHistory",
+            "required": 5,
+            "satisfied": 5,
+            "missing": []
+          },
+          {
+            "section": "pastHistories",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disposition",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "PR-08",
+            "section": "patientRegistration",
+            "description": "Injury location (or \"Unknown\") is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-VIT-SBP-HIGH",
+            "category": "Vital signs",
+            "message": "Systolic blood pressure 185 mmHg is severely elevated (> 180).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant — involve obstetric team, assess fetal status and consider relevant differentials.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LOC-MED",
+            "category": "Neurological",
+            "message": "Loss of consciousness 5–29 min — consider head CT and neurological observation.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DISP-NOPLAN",
+            "category": "Disposition",
+            "message": "Patient discharged but discharge plan was not discussed — confirm follow-up before release.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical, RED-triage polytrauma who dies with an almost blank record",
+      "description": "A pregnant, IV-drug-using patient from a high-speed crash: AVPU is U with no airway intervention and airway not marked Normal (RED triage), no breathing intervention with critically low SpO2 (82%), heavy bleeding with no circulation intervention but an unstable pelvis, GCS 5, hypoglycaemia (40 mg/dL), FAST-positive for both free peritoneal fluid and a pneumothorax, polytrauma, crush injury, anticoagulation, and a 30-minute-to-24-hour loss of consciousness - and the patient dies with no cause of death recorded. Only 15 of 38 applicable rules are satisfied (23 missing, spanning registration, vitals timing, airway/breathing assessment, injury history, past history, and almost the entire disposition section). Twenty-two flags fire: thirteen urgent (RED-triage airway and breathing with no intervention, AVPU-abnormal with no airway intervention, unresponsive AVPU, GCS <=8, critical SpO2, heavy bleeding with no intervention, abnormal respiratory rate, hypoglycaemia, unstable pelvis, both FAST findings, patient died), eight high (SpO2 low with no breathing intervention, abnormal heart rate, polytrauma, crush injury, anticoagulation, pregnancy, high-energy mechanism, prolonged loss of consciousness), one medium (IV drug use).",
+      "state": {
+        "patientRegistration": {
+          "hospitalRegistrationNumber": "",
+          "surname": "Okafor",
+          "firstName": "",
+          "dateOfBirth": "1990-02-10",
+          "age": null,
+          "ageCategory": "",
+          "sex": "",
+          "occupation": "",
+          "dateOfArrival": "2026-08-22",
+          "timeOfArrival": "",
+          "arrivalMode": "ambulance",
+          "injuryLocation": "",
+          "injuryLocationUnknown": false,
+          "pregnant": "yes",
+          "ivDrugUse": true
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "High-speed motor vehicle collision",
+          "allergies": "",
+          "allergiesUnknown": false,
+          "initialVitals": {
+            "time": "",
+            "tempC": null,
+            "bpSystolic": null,
+            "bpDiastolic": null,
+            "pulse": 160,
+            "respiratoryRate": 4,
+            "spo2": 82,
+            "spo2OnOxygen": "",
+            "painScore": null
+          },
+          "deadOnArrival": false,
+          "timeOfDeath": ""
+        },
+        "highRiskSigns": {
+          "redHeavyBleeding": true,
+          "traumaPolytrauma": true,
+          "traumaCrushInjury": true,
+          "traumaBleedingDisorderOrAnticoag": true,
+          "rtHighSpeedCrash": true
+        },
+        "triage": {
+          "category": "red",
+          "triagedFor": "",
+          "providerAssessmentDate": "",
+          "providerAssessmentTime": ""
+        },
+        "airway": {
+          "normal": false,
+          "swelling": false,
+          "stridor": false,
+          "voiceChanges": false,
+          "burns": false,
+          "obstructedByTongue": false,
+          "obstructedByBlood": false,
+          "obstructedBySecretion": false,
+          "obstructedByVomit": false,
+          "obstructedByForeignBody": false,
+          "interventionRepositioning": false,
+          "interventionSuction": false,
+          "interventionOpa": false,
+          "interventionNpa": false,
+          "interventionLma": false,
+          "interventionBvm": false,
+          "interventionEtt": false,
+          "spineStabilized": "",
+          "notes": ""
+        },
+        "breathing": {
+          "normal": false,
+          "spontaneousRespiratoryRate": null,
+          "chestRiseShallow": false,
+          "chestRiseRetractions": false,
+          "chestRiseParadoxical": false,
+          "cyanosis": false,
+          "oxygenNasalCannula": false,
+          "oxygenMask": false,
+          "oxygenNonRebreather": false,
+          "oxygenBvm": false,
+          "oxygenCpapBipap": false,
+          "oxygenVentilator": false,
+          "chestTubeLeftSize": "",
+          "chestTubeRightSize": "",
+          "notes": ""
+        },
+        "circulation": {
+          "normal": false,
+          "skinWarm": false,
+          "skinDry": false,
+          "skinCool": false,
+          "skinMoist": false,
+          "skinPale": false,
+          "capillaryRefillUnder3": false,
+          "capillaryRefillSeconds": null,
+          "pulsesWeak": false,
+          "pulsesAsymmetric": false,
+          "jvd": "",
+          "unstablePelvis": "yes",
+          "bleedingControlDirectPressure": false,
+          "bleedingControlBandage": false,
+          "bleedingControlTourniquet": false,
+          "accessIvLocation": "",
+          "accessCentralLocation": "",
+          "accessIoLocation": "",
+          "accessLine2Location": "",
+          "ivfMls": null,
+          "bloodOrdered": false,
+          "bloodGiven": false,
+          "notes": ""
+        },
+        "disability": {
+          "normal": false,
+          "avpu": "U",
+          "gcsTotal": 5,
+          "gcsQualified": false,
+          "bloodGlucose": 40,
+          "interventionGlucose": false,
+          "interventionAntidote": false,
+          "interventionAntiepileptic": false,
+          "interventionRaiseHeadOfBed": false,
+          "notes": ""
+        },
+        "exposureAndFast": {
+          "exposedCompletely": true,
+          "fastNormal": false,
+          "fastNotIndicated": false,
+          "fastNotAvailable": false,
+          "fastPeritoneum": "free-fluid",
+          "fastChest": "pneumothorax",
+          "fastNotes": ""
+        },
+        "injuryHistory": {
+          "dateOfInjury": "2026-08-22",
+          "timeOfInjury": "",
+          "intent": "",
+          "prehospitalCareProvider": "",
+          "mechRoadTrafficIncident": true,
+          "lossOfConsciousnessDuration": "30min-24hr"
+        },
+        "pastHistories": {
+          "pmhNone": false,
+          "pmhUnknown": false,
+          "medicationsNone": false,
+          "medicationsUnknown": false
+        },
+        "assessmentAndPlan": {
+          "narrative": ""
+        },
+        "disposition": {
+          "checklistCompleted": "",
+          "edDepartureDate": "",
+          "edDepartureTime": "",
+          "diagnosesImpressions": "",
+          "disposition": "died",
+          "admitWard": "",
+          "dischargePlanDiscussed": "",
+          "transferTo": "",
+          "leftWithoutBeingSeen": false,
+          "diedCause": "",
+          "emergencyUnitProvider": "",
+          "signature": "",
+          "signatureDate": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 38,
+        "totalSatisfied": 15,
+        "sections": [
+          {
+            "section": "patientRegistration",
+            "required": 8,
+            "satisfied": 4,
+            "missing": [
+              {
+                "id": "PR-02",
+                "section": "patientRegistration",
+                "description": "Patient first name (given name) is required."
+              },
+              {
+                "id": "PR-03",
+                "section": "patientRegistration",
+                "description": "Patient sex (Male / Female / Other) is required."
+              },
+              {
+                "id": "PR-06",
+                "section": "patientRegistration",
+                "description": "Time of arrival (24h) is required."
+              },
+              {
+                "id": "PR-08",
+                "section": "patientRegistration",
+                "description": "Injury location (or \"Unknown\") is required."
+              }
+            ]
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 7,
+            "satisfied": 4,
+            "missing": [
+              {
+                "id": "CV-02",
+                "section": "chiefComplaintAndVitals",
+                "description": "Allergies: enter a list or tick \"Unknown\"."
+              },
+              {
+                "id": "CV-03",
+                "section": "chiefComplaintAndVitals",
+                "description": "Initial vital signs time is required."
+              },
+              {
+                "id": "CV-07",
+                "section": "chiefComplaintAndVitals",
+                "description": "Initial systolic blood pressure is required."
+              }
+            ]
+          },
+          {
+            "section": "triage",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "A-01",
+                "section": "airway",
+                "description": "Airway: tick \"Normal\" or describe an abnormal finding."
+              },
+              {
+                "id": "A-02",
+                "section": "airway",
+                "description": "Spine stabilization status is required for RED triage."
+              }
+            ]
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "B-01",
+                "section": "breathing",
+                "description": "Breathing: tick \"Normal\" or record a respiratory rate / abnormal finding."
+              }
+            ]
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "injuryHistory",
+            "required": 5,
+            "satisfied": 2,
+            "missing": [
+              {
+                "id": "IH-02",
+                "section": "injuryHistory",
+                "description": "Time of injury (24h) is required."
+              },
+              {
+                "id": "IH-03",
+                "section": "injuryHistory",
+                "description": "Intent of injury is required."
+              },
+              {
+                "id": "IH-04",
+                "section": "injuryHistory",
+                "description": "Prehospital care provider (None / Layperson / Healthcare professional) is required."
+              }
+            ]
+          },
+          {
+            "section": "pastHistories",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "PH-01",
+                "section": "pastHistories",
+                "description": "Past medical: tick None / Unknown or record a condition."
+              },
+              {
+                "id": "PH-02",
+                "section": "pastHistories",
+                "description": "Medications: list or tick None / Unknown."
+              }
+            ]
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "AP-01",
+                "section": "assessmentAndPlan",
+                "description": "Assessment & Plan narrative is required."
+              }
+            ]
+          },
+          {
+            "section": "disposition",
+            "required": 8,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "DISP-01",
+                "section": "disposition",
+                "description": "ED departure date is required."
+              },
+              {
+                "id": "DISP-02",
+                "section": "disposition",
+                "description": "ED departure time (24h) is required."
+              },
+              {
+                "id": "DISP-04",
+                "section": "disposition",
+                "description": "Diagnoses / Impressions are required."
+              },
+              {
+                "id": "DISP-07",
+                "section": "disposition",
+                "description": "Cause of death is required when disposition is \"Died\" (NOT cardiopulmonary arrest)."
+              },
+              {
+                "id": "DISP-08",
+                "section": "disposition",
+                "description": "Emergency unit provider name / title is required."
+              },
+              {
+                "id": "DISP-09",
+                "section": "disposition",
+                "description": "Provider signature is required."
+              },
+              {
+                "id": "DISP-10",
+                "section": "disposition",
+                "description": "Provider signature date is required."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "PR-02",
+            "section": "patientRegistration",
+            "description": "Patient first name (given name) is required."
+          },
+          {
+            "id": "PR-03",
+            "section": "patientRegistration",
+            "description": "Patient sex (Male / Female / Other) is required."
+          },
+          {
+            "id": "PR-06",
+            "section": "patientRegistration",
+            "description": "Time of arrival (24h) is required."
+          },
+          {
+            "id": "PR-08",
+            "section": "patientRegistration",
+            "description": "Injury location (or \"Unknown\") is required."
+          },
+          {
+            "id": "CV-02",
+            "section": "chiefComplaintAndVitals",
+            "description": "Allergies: enter a list or tick \"Unknown\"."
+          },
+          {
+            "id": "CV-03",
+            "section": "chiefComplaintAndVitals",
+            "description": "Initial vital signs time is required."
+          },
+          {
+            "id": "CV-07",
+            "section": "chiefComplaintAndVitals",
+            "description": "Initial systolic blood pressure is required."
+          },
+          {
+            "id": "A-01",
+            "section": "airway",
+            "description": "Airway: tick \"Normal\" or describe an abnormal finding."
+          },
+          {
+            "id": "A-02",
+            "section": "airway",
+            "description": "Spine stabilization status is required for RED triage."
+          },
+          {
+            "id": "B-01",
+            "section": "breathing",
+            "description": "Breathing: tick \"Normal\" or record a respiratory rate / abnormal finding."
+          },
+          {
+            "id": "IH-02",
+            "section": "injuryHistory",
+            "description": "Time of injury (24h) is required."
+          },
+          {
+            "id": "IH-03",
+            "section": "injuryHistory",
+            "description": "Intent of injury is required."
+          },
+          {
+            "id": "IH-04",
+            "section": "injuryHistory",
+            "description": "Prehospital care provider (None / Layperson / Healthcare professional) is required."
+          },
+          {
+            "id": "PH-01",
+            "section": "pastHistories",
+            "description": "Past medical: tick None / Unknown or record a condition."
+          },
+          {
+            "id": "PH-02",
+            "section": "pastHistories",
+            "description": "Medications: list or tick None / Unknown."
+          },
+          {
+            "id": "AP-01",
+            "section": "assessmentAndPlan",
+            "description": "Assessment & Plan narrative is required."
+          },
+          {
+            "id": "DISP-01",
+            "section": "disposition",
+            "description": "ED departure date is required."
+          },
+          {
+            "id": "DISP-02",
+            "section": "disposition",
+            "description": "ED departure time (24h) is required."
+          },
+          {
+            "id": "DISP-04",
+            "section": "disposition",
+            "description": "Diagnoses / Impressions are required."
+          },
+          {
+            "id": "DISP-07",
+            "section": "disposition",
+            "description": "Cause of death is required when disposition is \"Died\" (NOT cardiopulmonary arrest)."
+          },
+          {
+            "id": "DISP-08",
+            "section": "disposition",
+            "description": "Emergency unit provider name / title is required."
+          },
+          {
+            "id": "DISP-09",
+            "section": "disposition",
+            "description": "Provider signature is required."
+          },
+          {
+            "id": "DISP-10",
+            "section": "disposition",
+            "description": "Provider signature date is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-RED-AIRWAY",
+            "category": "Triage",
+            "message": "RED triage patient has no airway intervention and airway is not marked Normal — reassess airway management urgently.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-RED-BREATHING",
+            "category": "Triage",
+            "message": "RED triage patient has no breathing / oxygen intervention and breathing is not marked Normal — escalate ventilatory support.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AVPU-AIRWAY",
+            "category": "Airway",
+            "message": "AVPU = U (abnormal) without any airway intervention recorded — reassess airway management.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AVPU-U",
+            "category": "Neurological",
+            "message": "Patient is unresponsive (AVPU = U) — manage airway, perform full neuro work-up.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-GCS-LOW",
+            "category": "Neurological",
+            "message": "GCS 5 — severe head injury / depressed consciousness, definitive airway likely required.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SPO2-CRIT",
+            "category": "Breathing",
+            "message": "SpO2 82% is critically low (< 90%).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-HEAVY-BLEED",
+            "category": "Circulation",
+            "message": "Heavy bleeding flagged with no circulation intervention recorded — apply pressure / tourniquet, secure IV access, give fluids.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-RR",
+            "category": "Vital signs",
+            "message": "Respiratory rate 4/min is outside the safe range (8–30).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-GLUC-LOW",
+            "category": "Metabolic",
+            "message": "Blood glucose 40 mg/dL indicates hypoglycaemia (< 65).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-UNSTABLE-PELVIS",
+            "category": "Circulation",
+            "message": "Unstable pelvis — apply pelvic binder, anticipate massive transfusion and surgical consult.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-FAST-PERIT",
+            "category": "FAST",
+            "message": "FAST positive: free fluid in peritoneum — surgical consultation indicated.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-FAST-CHEST",
+            "category": "FAST",
+            "message": "FAST chest finding (pneumothorax) — emergent intervention required.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-DISPO-DIED",
+            "category": "Mortality",
+            "message": "Patient died — record cause of death (NOT cardiopulmonary arrest).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SPO2-NOINTV",
+            "category": "Breathing",
+            "message": "SpO2 82% is below 92% with no oxygen / ventilation intervention recorded — initiate supplemental oxygen.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VIT-HR",
+            "category": "Vital signs",
+            "message": "Heart rate 160 bpm is outside the safe range (50–150).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-POLYTRAUMA",
+            "category": "Trauma indicators",
+            "message": "Polytrauma flagged — multi-system injury, mobilise trauma team.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CRUSH",
+            "category": "Trauma indicators",
+            "message": "Crush injury flagged — monitor for rhabdomyolysis, compartment syndrome, hyperkalaemia.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANTICOAG",
+            "category": "Trauma indicators",
+            "message": "Patient on anticoagulation / has bleeding disorder — reverse if needed and lower threshold for imaging.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant — involve obstetric team, assess fetal status and consider relevant differentials.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HIGH-ENERGY",
+            "category": "Mechanism",
+            "message": "High-energy mechanism (high-speed crash / trapped or thrown / fatality in same vehicle) — full trauma evaluation.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LOC-LONG",
+            "category": "Neurological",
+            "message": "Loss of consciousness 30 min – 24 hr — head CT and neurological observation indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IVDU",
+            "category": "Past medical history",
+            "message": "IV drug use — consider infectious differentials and adapt analgesia plan.",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,919 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateEuGeneral",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateEuGeneral() checks each rule's applies() before counting it - ambulance level (PR-08), the deficit description (D-02), admit ward/transfer destination/cause of death (DISP-05/06/07) are all conditional on an earlier answer. detectFlaggedIssues() is a fully independent CABCD safety-flag layer; several conditions are checked independently rather than as mutually exclusive tiers (e.g. SpO2 < 90 fires the 'critical' urgent flag AND, if also < 92 with no breathing intervention, the separate high 'no intervention' flag).",
+  "personas": [
+    {
+      "name": "Complete, minor ankle sprain discharged home",
+      "description": "A walk-in green-triage patient with entirely normal airway/breathing/circulation, AVPU alert, normal vital signs, a complete history and past medical history, and a discharge with the plan discussed. All 30 applicable rules satisfied (complete), no flags.",
+      "state": {
+        "patientRegistration": {
+          "hospitalRegistrationNumber": "",
+          "surname": "Adeyemi",
+          "firstName": "Femi",
+          "sex": "male",
+          "dateOfBirth": "1980-04-01",
+          "age": null,
+          "ageCategory": "",
+          "weightKg": null,
+          "dateOfArrival": "2026-08-20",
+          "timeOfArrival": "09:00",
+          "arrivalMode": "walk-in",
+          "ambulanceLevel": ""
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Mild ankle sprain",
+          "triageCategory": "green",
+          "initialVitals": {
+            "time": "09:05",
+            "tempC": 36.8,
+            "bpSystolic": 118,
+            "bpDiastolic": 76,
+            "pulse": 72,
+            "respiratoryRate": 16,
+            "spo2": 98,
+            "spo2OnOxygen": "no",
+            "painScore": 3
+          },
+          "providerAssessmentDate": "2026-08-20",
+          "providerAssessmentTime": "09:15",
+          "deadOnArrival": false
+        },
+        "highRiskSigns": {
+          "abnormalAvpu": false,
+          "abnormalHeartRate": false,
+          "stridorOrVoiceChange": false,
+          "poorPerfusion": false,
+          "abnormalTemperature": false,
+          "lowSpo2": false,
+          "respiratoryDistress": false,
+          "vomitsEverythingOrCannotFeed": false
+        },
+        "airway": {
+          "normal": true,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": true,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": true,
+          "notes": ""
+        },
+        "disability": {
+          "normal": true,
+          "avpu": "A",
+          "deficit": false,
+          "deficitDescription": "",
+          "notes": ""
+        },
+        "historyOfPresentIllness": {
+          "narrative": "Twisted ankle playing football, no other injury"
+        },
+        "pastMedicalHistory": {
+          "historyObtainedFrom": "Patient",
+          "medications": "",
+          "medicationsUnknown": true,
+          "allergies": "",
+          "allergiesUnknown": true,
+          "pregnant": "no",
+          "tobaccoUse": false,
+          "alcoholUse": false,
+          "drugUse": false,
+          "ivDrugUse": false,
+          "safeAtHome": "yes"
+        },
+        "assessmentAndPlan": {
+          "narrative": "Ankle sprain, discharge with RICE advice and analgesia"
+        },
+        "disposition": {
+          "checklistCompleted": "yes",
+          "edDepartureDate": "2026-08-20",
+          "edDepartureTime": "10:00",
+          "diagnosesImpressions": "Ankle sprain",
+          "disposition": "discharge",
+          "admitWard": "",
+          "dischargePlanDiscussed": "yes",
+          "transferTo": "",
+          "leftWithoutBeingSeen": false,
+          "diedCause": "",
+          "emergencyUnitProvider": "Dr. Osei",
+          "signature": "Dr. Osei",
+          "signatureDate": "2026-08-20"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 30,
+        "totalSatisfied": 30,
+        "sections": [
+          {
+            "section": "patientRegistration",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "historyOfPresentIllness",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "pastMedicalHistory",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disposition",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Moderate, hypertensive headache in a pregnant patient",
+      "description": "Arrived by ambulance with the ambulance level left blank (the one missing field), severely elevated blood pressure (185 mmHg systolic), reported pregnancy, and discharged without the discharge plan being discussed. 30 of 31 applicable rules satisfied (not complete). Three flags fire: high (severely elevated systolic blood pressure), medium (pregnancy), low (no discharge plan discussed).",
+      "state": {
+        "patientRegistration": {
+          "hospitalRegistrationNumber": "",
+          "surname": "Marsh",
+          "firstName": "Ian",
+          "sex": "male",
+          "dateOfBirth": "1965-07-20",
+          "age": null,
+          "ageCategory": "",
+          "weightKg": null,
+          "dateOfArrival": "2026-08-21",
+          "timeOfArrival": "11:00",
+          "arrivalMode": "ambulance",
+          "ambulanceLevel": ""
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Headache and dizziness",
+          "triageCategory": "yellow",
+          "initialVitals": {
+            "time": "11:05",
+            "tempC": 36.9,
+            "bpSystolic": 185,
+            "bpDiastolic": 105,
+            "pulse": 72,
+            "respiratoryRate": 16,
+            "spo2": 97,
+            "spo2OnOxygen": "no",
+            "painScore": 6
+          },
+          "providerAssessmentDate": "2026-08-21",
+          "providerAssessmentTime": "11:15",
+          "deadOnArrival": false
+        },
+        "highRiskSigns": {
+          "abnormalAvpu": false,
+          "abnormalHeartRate": false,
+          "stridorOrVoiceChange": false,
+          "poorPerfusion": false,
+          "abnormalTemperature": false,
+          "lowSpo2": false,
+          "respiratoryDistress": false,
+          "vomitsEverythingOrCannotFeed": false
+        },
+        "airway": {
+          "normal": true,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": true,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": true,
+          "notes": ""
+        },
+        "disability": {
+          "normal": true,
+          "avpu": "A",
+          "deficit": false,
+          "deficitDescription": "",
+          "notes": ""
+        },
+        "historyOfPresentIllness": {
+          "narrative": "Sudden headache 2 hours ago, known hypertension"
+        },
+        "pastMedicalHistory": {
+          "historyObtainedFrom": "Patient",
+          "medications": "Amlodipine",
+          "medicationsUnknown": false,
+          "allergies": "",
+          "allergiesUnknown": true,
+          "pregnant": "yes",
+          "tobaccoUse": false,
+          "alcoholUse": false,
+          "drugUse": false,
+          "ivDrugUse": false,
+          "safeAtHome": "yes"
+        },
+        "assessmentAndPlan": {
+          "narrative": "Hypertensive headache, monitor and treat BP"
+        },
+        "disposition": {
+          "checklistCompleted": "yes",
+          "edDepartureDate": "2026-08-21",
+          "edDepartureTime": "13:00",
+          "diagnosesImpressions": "Hypertensive headache",
+          "disposition": "discharge",
+          "admitWard": "",
+          "dischargePlanDiscussed": "no",
+          "transferTo": "",
+          "leftWithoutBeingSeen": false,
+          "diedCause": "",
+          "emergencyUnitProvider": "Dr. Lindqvist",
+          "signature": "Dr. Lindqvist",
+          "signatureDate": "2026-08-21"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 31,
+        "totalSatisfied": 30,
+        "sections": [
+          {
+            "section": "patientRegistration",
+            "required": 8,
+            "satisfied": 7,
+            "missing": [
+              {
+                "id": "PR-08",
+                "section": "patientRegistration",
+                "description": "Ambulance level (Basic / Advanced) is required when arrival mode is ambulance."
+              }
+            ]
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "historyOfPresentIllness",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "pastMedicalHistory",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disposition",
+            "required": 7,
+            "satisfied": 7,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "PR-08",
+            "section": "patientRegistration",
+            "description": "Ambulance level (Basic / Advanced) is required when arrival mode is ambulance."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-VIT-SBP-HIGH",
+            "category": "Vital signs",
+            "message": "Systolic blood pressure 185 mmHg is severely elevated (> 180).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant — involve obstetric team and consider relevant differentials.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DISP-NOPLAN",
+            "category": "Disposition",
+            "message": "Patient discharged but discharge plan was not discussed — confirm follow-up before release.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical, unresponsive patient who dies with an almost blank record",
+      "description": "Found unresponsive at home: AVPU is U with no airway intervention documented, critically low SpO2 (82%) with no breathing intervention, a respiratory rate of 4, poor perfusion with no circulation intervention, stridor, respiratory distress, severe vomiting, hypoglycaemia (2.1 mmol/L), a documented deficit with no description, IV drug use, and the patient dies with no cause of death recorded. Only 11 of 33 applicable rules are satisfied (22 missing, spanning registration, vitals timing, all three primary-survey categories, history, and almost the entire disposition section). Thirteen flags fire: seven urgent (airway with no intervention, unresponsive AVPU, critical SpO2, stridor, abnormal respiratory rate, hypoglycaemia, patient died), five high (SpO2 low with no breathing intervention, respiratory distress, poor perfusion with no circulation intervention, abnormal heart rate, severe vomiting/dehydration), one medium (IV drug use).",
+      "state": {
+        "patientRegistration": {
+          "hospitalRegistrationNumber": "",
+          "surname": "Okafor",
+          "firstName": "",
+          "sex": "",
+          "dateOfBirth": "1990-02-10",
+          "age": null,
+          "ageCategory": "",
+          "weightKg": null,
+          "dateOfArrival": "2026-08-22",
+          "timeOfArrival": "",
+          "arrivalMode": "ambulance",
+          "ambulanceLevel": ""
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Found unresponsive at home",
+          "triageCategory": "red",
+          "initialVitals": {
+            "time": "",
+            "tempC": null,
+            "bpSystolic": null,
+            "bpDiastolic": null,
+            "pulse": 140,
+            "respiratoryRate": 4,
+            "spo2": 82,
+            "spo2OnOxygen": "",
+            "painScore": null
+          },
+          "providerAssessmentDate": "",
+          "providerAssessmentTime": "",
+          "deadOnArrival": false
+        },
+        "highRiskSigns": {
+          "abnormalAvpu": true,
+          "abnormalHeartRate": true,
+          "stridorOrVoiceChange": true,
+          "poorPerfusion": true,
+          "abnormalTemperature": false,
+          "lowSpo2": true,
+          "respiratoryDistress": true,
+          "vomitsEverythingOrCannotFeed": true
+        },
+        "airway": {
+          "normal": false,
+          "angioedema": false,
+          "stridor": false,
+          "voiceChanges": false,
+          "oralAirwayBurns": false,
+          "obstructedByTongue": false,
+          "obstructedByBlood": false,
+          "obstructedBySecretions": false,
+          "obstructedByVomit": false,
+          "obstructedByForeignBody": false,
+          "interventionRepositioning": false,
+          "interventionSuction": false,
+          "interventionOpa": false,
+          "interventionNpa": false,
+          "interventionLma": false,
+          "interventionBvm": false,
+          "interventionEtt": false,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": false,
+          "spontaneousRespiratoryRate": null,
+          "chestRiseShallow": false,
+          "chestRiseRetractions": false,
+          "chestRiseParadoxical": false,
+          "tracheaMidline": false,
+          "tracheaDeviatedLeft": false,
+          "tracheaDeviatedRight": false,
+          "breathSoundsLeft": "",
+          "breathSoundsRight": "",
+          "oxygenLitres": null,
+          "oxygenNasalCannula": false,
+          "oxygenMask": false,
+          "oxygenNonRebreather": false,
+          "oxygenBvm": false,
+          "oxygenCpapBipap": false,
+          "oxygenVentilator": false,
+          "bronchodilator": false,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": false,
+          "skinWarm": false,
+          "skinDry": false,
+          "skinPale": false,
+          "skinCyanotic": false,
+          "skinMoist": false,
+          "skinCool": false,
+          "capillaryRefillUnder3": false,
+          "capillaryRefillSeconds": null,
+          "pulsesWeak": false,
+          "pulsesAsymmetric": false,
+          "jvd": "",
+          "accessIvLocation": "",
+          "accessCvlLocation": "",
+          "accessIoLocation": "",
+          "ivfMls": null,
+          "bloodOrdered": false,
+          "epinephrineGiven": false,
+          "notes": ""
+        },
+        "disability": {
+          "normal": false,
+          "avpu": "U",
+          "movesAllExtremities": false,
+          "deficit": true,
+          "deficitDescription": "",
+          "pupilSizeLeft": null,
+          "pupilSizeRight": null,
+          "bloodGlucoseMmol": 2.1,
+          "interventionGlucose": false,
+          "interventionAntiepileptic": false,
+          "interventionNaloxone": false,
+          "notes": ""
+        },
+        "historyOfPresentIllness": {
+          "narrative": ""
+        },
+        "pastMedicalHistory": {
+          "historyObtainedFrom": "",
+          "medications": "",
+          "medicationsUnknown": false,
+          "allergies": "",
+          "allergiesUnknown": false,
+          "pregnant": "",
+          "tobaccoUse": false,
+          "alcoholUse": false,
+          "drugUse": true,
+          "ivDrugUse": true,
+          "safeAtHome": ""
+        },
+        "assessmentAndPlan": {
+          "narrative": ""
+        },
+        "disposition": {
+          "checklistCompleted": "",
+          "edDepartureDate": "",
+          "edDepartureTime": "",
+          "diagnosesImpressions": "",
+          "disposition": "died",
+          "admitWard": "",
+          "dischargePlanDiscussed": "",
+          "transferTo": "",
+          "leftWithoutBeingSeen": false,
+          "diedCause": "",
+          "emergencyUnitProvider": "",
+          "signature": "",
+          "signatureDate": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 33,
+        "totalSatisfied": 11,
+        "sections": [
+          {
+            "section": "patientRegistration",
+            "required": 8,
+            "satisfied": 4,
+            "missing": [
+              {
+                "id": "PR-02",
+                "section": "patientRegistration",
+                "description": "Patient first name (given name) is required."
+              },
+              {
+                "id": "PR-03",
+                "section": "patientRegistration",
+                "description": "Patient sex (Male / Female / Other) is required."
+              },
+              {
+                "id": "PR-06",
+                "section": "patientRegistration",
+                "description": "Time of arrival (24h) is required."
+              },
+              {
+                "id": "PR-08",
+                "section": "patientRegistration",
+                "description": "Ambulance level (Basic / Advanced) is required when arrival mode is ambulance."
+              }
+            ]
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 7,
+            "satisfied": 5,
+            "missing": [
+              {
+                "id": "CV-03",
+                "section": "chiefComplaintAndVitals",
+                "description": "Initial vital signs time is required."
+              },
+              {
+                "id": "CV-07",
+                "section": "chiefComplaintAndVitals",
+                "description": "Initial systolic blood pressure is required."
+              }
+            ]
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "A-01",
+                "section": "airway",
+                "description": "Airway: tick \"Normal\" or describe an abnormal finding."
+              }
+            ]
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "B-01",
+                "section": "breathing",
+                "description": "Breathing: tick \"Normal\" or record a respiratory rate / abnormal finding."
+              }
+            ]
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "C-01",
+                "section": "circulation",
+                "description": "Circulation: tick \"Normal\" or record a skin / capillary-refill / pulse finding."
+              }
+            ]
+          },
+          {
+            "section": "disability",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "D-02",
+                "section": "disability",
+                "description": "Disability: deficit description is required when \"Deficit\" is checked."
+              }
+            ]
+          },
+          {
+            "section": "historyOfPresentIllness",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "HPI-01",
+                "section": "historyOfPresentIllness",
+                "description": "History of present illness narrative is required."
+              }
+            ]
+          },
+          {
+            "section": "pastMedicalHistory",
+            "required": 3,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "PMH-01",
+                "section": "pastMedicalHistory",
+                "description": "History obtained from (source of history) is required."
+              },
+              {
+                "id": "PMH-02",
+                "section": "pastMedicalHistory",
+                "description": "Medications: enter a list or tick \"Unknown\"."
+              },
+              {
+                "id": "PMH-03",
+                "section": "pastMedicalHistory",
+                "description": "Allergies: enter a list or tick \"Unknown\"."
+              }
+            ]
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "AP-01",
+                "section": "assessmentAndPlan",
+                "description": "Assessment & Plan narrative is required."
+              }
+            ]
+          },
+          {
+            "section": "disposition",
+            "required": 8,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "DISP-01",
+                "section": "disposition",
+                "description": "ED departure date is required."
+              },
+              {
+                "id": "DISP-02",
+                "section": "disposition",
+                "description": "ED departure time (24h) is required."
+              },
+              {
+                "id": "DISP-04",
+                "section": "disposition",
+                "description": "Diagnoses / Impressions are required."
+              },
+              {
+                "id": "DISP-07",
+                "section": "disposition",
+                "description": "Cause of death is required when disposition is \"Died\" (NOT cardiopulmonary arrest)."
+              },
+              {
+                "id": "DISP-08",
+                "section": "disposition",
+                "description": "Emergency unit provider name / title is required."
+              },
+              {
+                "id": "DISP-09",
+                "section": "disposition",
+                "description": "Provider signature is required."
+              },
+              {
+                "id": "DISP-10",
+                "section": "disposition",
+                "description": "Provider signature date is required."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "PR-02",
+            "section": "patientRegistration",
+            "description": "Patient first name (given name) is required."
+          },
+          {
+            "id": "PR-03",
+            "section": "patientRegistration",
+            "description": "Patient sex (Male / Female / Other) is required."
+          },
+          {
+            "id": "PR-06",
+            "section": "patientRegistration",
+            "description": "Time of arrival (24h) is required."
+          },
+          {
+            "id": "PR-08",
+            "section": "patientRegistration",
+            "description": "Ambulance level (Basic / Advanced) is required when arrival mode is ambulance."
+          },
+          {
+            "id": "CV-03",
+            "section": "chiefComplaintAndVitals",
+            "description": "Initial vital signs time is required."
+          },
+          {
+            "id": "CV-07",
+            "section": "chiefComplaintAndVitals",
+            "description": "Initial systolic blood pressure is required."
+          },
+          {
+            "id": "A-01",
+            "section": "airway",
+            "description": "Airway: tick \"Normal\" or describe an abnormal finding."
+          },
+          {
+            "id": "B-01",
+            "section": "breathing",
+            "description": "Breathing: tick \"Normal\" or record a respiratory rate / abnormal finding."
+          },
+          {
+            "id": "C-01",
+            "section": "circulation",
+            "description": "Circulation: tick \"Normal\" or record a skin / capillary-refill / pulse finding."
+          },
+          {
+            "id": "D-02",
+            "section": "disability",
+            "description": "Disability: deficit description is required when \"Deficit\" is checked."
+          },
+          {
+            "id": "HPI-01",
+            "section": "historyOfPresentIllness",
+            "description": "History of present illness narrative is required."
+          },
+          {
+            "id": "PMH-01",
+            "section": "pastMedicalHistory",
+            "description": "History obtained from (source of history) is required."
+          },
+          {
+            "id": "PMH-02",
+            "section": "pastMedicalHistory",
+            "description": "Medications: enter a list or tick \"Unknown\"."
+          },
+          {
+            "id": "PMH-03",
+            "section": "pastMedicalHistory",
+            "description": "Allergies: enter a list or tick \"Unknown\"."
+          },
+          {
+            "id": "AP-01",
+            "section": "assessmentAndPlan",
+            "description": "Assessment & Plan narrative is required."
+          },
+          {
+            "id": "DISP-01",
+            "section": "disposition",
+            "description": "ED departure date is required."
+          },
+          {
+            "id": "DISP-02",
+            "section": "disposition",
+            "description": "ED departure time (24h) is required."
+          },
+          {
+            "id": "DISP-04",
+            "section": "disposition",
+            "description": "Diagnoses / Impressions are required."
+          },
+          {
+            "id": "DISP-07",
+            "section": "disposition",
+            "description": "Cause of death is required when disposition is \"Died\" (NOT cardiopulmonary arrest)."
+          },
+          {
+            "id": "DISP-08",
+            "section": "disposition",
+            "description": "Emergency unit provider name / title is required."
+          },
+          {
+            "id": "DISP-09",
+            "section": "disposition",
+            "description": "Provider signature is required."
+          },
+          {
+            "id": "DISP-10",
+            "section": "disposition",
+            "description": "Provider signature date is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-AVPU-AIRWAY",
+            "category": "Airway",
+            "message": "AVPU = U (abnormal) without any airway intervention recorded — reassess airway management.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AVPU-U",
+            "category": "Neurological",
+            "message": "Patient is unresponsive (AVPU = U) — manage airway, perform full neuro work-up.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SPO2-CRIT",
+            "category": "Breathing",
+            "message": "SpO2 82% is critically low (< 90%).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-STRIDOR",
+            "category": "Airway",
+            "message": "Stridor, voice change, or inability to swallow — impending airway obstruction, prepare definitive airway.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-RR",
+            "category": "Vital signs",
+            "message": "Respiratory rate 4/min is outside the safe range (8–30).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-GLUC-LOW",
+            "category": "Metabolic",
+            "message": "Blood glucose 2.1 mmol/L indicates hypoglycaemia (< 3.5).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-DISPO-DIED",
+            "category": "Mortality",
+            "message": "Patient died — record cause of death (NOT cardiopulmonary arrest).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SPO2-NOINTV",
+            "category": "Breathing",
+            "message": "SpO2 82% is below 92% with no oxygen / ventilation intervention recorded — initiate supplemental oxygen.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RESP-DISTRESS",
+            "category": "Breathing",
+            "message": "Respiratory distress flagged (grunting / retractions / cyanosis) — ensure airway support and supplemental oxygen.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-POOR-PERFUSION",
+            "category": "Circulation",
+            "message": "Poor perfusion / weak pulse / capillary refill > 3s with no circulation intervention recorded — initiate fluid resuscitation.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VIT-HR",
+            "category": "Vital signs",
+            "message": "Heart rate 140 bpm is outside the safe range (50–130).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DEHYDRATION",
+            "category": "Hydration",
+            "message": "Patient vomits everything or cannot drink / feed — assess for dehydration, secure IV access.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-IVDU",
+            "category": "Past medical history",
+            "message": "IV drug use — consider infectious differentials (endocarditis, abscess) and adapt analgesia plan.",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

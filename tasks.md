@@ -1910,11 +1910,34 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       20-week DWP window). All nine matched hand derivation exactly.
       Fleet: `bin/test-personas` forms 346/346 PASS, personas
       1154/1154 PASS, 0 FAIL; `bin/test-e2e --html` 4/4 passed.
-      5 forms remain without personas, all unblocked purely by probe
-      discovery and never on the original 12-form list (see the full
-      sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
-      '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo
-      $f; done`).
+      5 more done, closing out every WHO form in the backlog:
+      `who-counter-referral-form` and `who-emergency-first-aid-form`
+      (`validateCounterReferral`/`validateCfar` + split
+      `detectFlaggedIssues`; both SBAR/CABCDE completeness validators
+      with conditional `applies()` rules gating the explanation-of-
+      informed and tourniquet-time follow-ups), `who-emergency-unit-
+      general-form` and `who-emergency-unit-trauma-form`
+      (`validateEuGeneral`/`validateEuTrauma` + split
+      `detectFlaggedIssues`; the Trauma sibling ratchets several rules
+      — spine stabilisation and GCS — to RED-triage-only via
+      `applies()`, and its pregnancy flag is `high` priority where the
+      General form\'s equivalent is only `medium`; several vital-sign
+      and SpO2 conditions fire independently rather than as mutually
+      exclusive tiers, confirmed by a critical persona that fires 22
+      of the Trauma engine\'s flags simultaneously), and
+      `who-prehospital-form` (`validatePrehospital` + split
+      `detectFlaggedIssues`; RED-triage gates airway intervention, IV/
+      IO access, and GCS-components rules the same way, and the flag
+      layer parses the free-text blood-pressure field for its leading
+      systolic integer rather than reading a structured numeric
+      field). All fifteen personas across the five forms matched hand
+      derivation exactly. Fleet: `bin/test-personas` forms 351/351
+      PASS, personas 1169/1169 PASS, 0 FAIL; `bin/test-e2e --html`
+      2/2, 4/4, and 4/4 passed across the three batches.
+      1 form remains without personas
+      (`united-kingdom-lasting-power-of-attorney-for-health-and-care-
+      decisions`), the last one unblocked purely by probe discovery
+      and never on the original 12-form list.
 
 ### Spec-driven follow-through
 

@@ -1,0 +1,975 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validatePrehospital",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validatePrehospital() checks each rule's applies() before counting it - injury intent/mechanism (INJ-01/02) only apply when the 'Injury' checkbox is ticked; the RED-triage-only rules (A-02 airway intervention, C-03 IV/IO access, D-02 GCS components) and the bleeding-control rule (C-02) are each conditional. detectFlaggedIssues() is a fully independent ABCDE safety-flag layer that parses the free-text blood-pressure field for its systolic component (a leading integer before the first non-digit) rather than reading a structured numeric field.",
+  "personas": [
+    {
+      "name": "Complete, resolved vasovagal episode",
+      "description": "A GREEN-triage scene call with entirely normal airway/breathing/circulation, AVPU alert, normal vital signs, a complete SAMPLE history via the 'Unknown' tickboxes, and a full handover with the plan discussed. All 31 applicable rules satisfied (complete; the injury-only and RED-only rules do not apply here), no flags.",
+      "state": {
+        "callerAndScene": {
+          "massCasualty": false,
+          "callerName": "",
+          "callerPhone": "",
+          "patientName": "Nakamura, Yuki",
+          "dateOfBirthOrAge": "1985-03-01",
+          "sex": "male",
+          "patientAddress": "",
+          "occupation": "",
+          "date": "2026-08-20",
+          "sceneCallType": "scene-call",
+          "runNumber": "",
+          "sceneLocationType": "home",
+          "sceneLocationOther": "",
+          "timeCallReceived": "08:00",
+          "timeEnRouteToScene": "08:03",
+          "timeArrivedAtScene": "08:12",
+          "timeTransporting": "",
+          "timeAtFacility": "",
+          "timeInService": ""
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Mild dizziness",
+          "injury": false,
+          "initialVitals": {
+            "time": "08:15",
+            "hr": 72,
+            "rr": 16,
+            "bp": "120/80",
+            "tempC": 36.8,
+            "rbs": 5.2,
+            "spo2": 98,
+            "spo2OnOxygen": "no"
+          },
+          "careInProgressOnArrival": "",
+          "pregnant": "no",
+          "painScore": 2
+        },
+        "highRiskSigns": {},
+        "triage": {
+          "category": "green",
+          "triagedFor": ""
+        },
+        "airway": {
+          "normal": true,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": true,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": true,
+          "notes": ""
+        },
+        "disability": {
+          "normal": true,
+          "avpu": "A",
+          "notes": ""
+        },
+        "exposure": {
+          "normal": true
+        },
+        "sampleHistory": {
+          "signsSymptoms": "Brief lightheadedness after standing",
+          "allergies": "",
+          "allergiesUnknown": true,
+          "medications": "",
+          "medicationsUnknown": true,
+          "pastMedical": "",
+          "pastMedicalUnknown": true,
+          "events": "",
+          "eventsUnknown": true
+        },
+        "injuryDetails": {},
+        "assessmentAndPlan": {
+          "summary": "Vasovagal episode, resolved",
+          "differential": "",
+          "presumptiveDiagnoses": "Vasovagal syncope"
+        },
+        "reassessments": [],
+        "disposition": {
+          "disposition": "transported",
+          "handoverTime": "08:40",
+          "handoverToName": "Dr. Osei",
+          "handoverToCadre": "",
+          "handoverToSignature": "",
+          "planDiscussedWithPatient": "yes",
+          "providerName": "Paramedic Chukwu",
+          "providerSignature": "Chukwu",
+          "providerSignatureDate": "2026-08-20"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 31,
+        "totalSatisfied": 31,
+        "sections": [
+          {
+            "section": "callerAndScene",
+            "required": 8,
+            "satisfied": 8,
+            "missing": []
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "triage",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "sampleHistory",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "disposition",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Moderate, pregnant fall with severe pain",
+      "description": "Time arrived at scene is missing, and the injury checkbox is ticked with neither intent nor mechanism recorded (3 of 33 applicable rules unsatisfied, not complete). Severely elevated blood pressure, a reported pregnancy, and severe pain (8/10). Four flags fire: high (severely elevated systolic blood pressure, parsed from the free-text '185/100'), two medium (pregnancy; severe pain), one low (plan not discussed with the patient at handover).",
+      "state": {
+        "callerAndScene": {
+          "massCasualty": false,
+          "callerName": "",
+          "callerPhone": "",
+          "patientName": "Fenwick, Grant",
+          "dateOfBirthOrAge": "1975-11-02",
+          "sex": "male",
+          "patientAddress": "",
+          "occupation": "",
+          "date": "2026-08-21",
+          "sceneCallType": "scene-call",
+          "runNumber": "",
+          "sceneLocationType": "workplace",
+          "sceneLocationOther": "",
+          "timeCallReceived": "10:00",
+          "timeEnRouteToScene": "10:03",
+          "timeArrivedAtScene": "",
+          "timeTransporting": "",
+          "timeAtFacility": "",
+          "timeInService": ""
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Fall from ladder, back pain",
+          "injury": true,
+          "initialVitals": {
+            "time": "10:15",
+            "hr": 88,
+            "rr": 18,
+            "bp": "185/100",
+            "tempC": 37,
+            "rbs": 5.5,
+            "spo2": 96,
+            "spo2OnOxygen": "no"
+          },
+          "careInProgressOnArrival": "",
+          "pregnant": "yes",
+          "painScore": 8
+        },
+        "highRiskSigns": {},
+        "triage": {
+          "category": "yellow",
+          "triagedFor": ""
+        },
+        "airway": {
+          "normal": true,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": true,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": true,
+          "notes": ""
+        },
+        "disability": {
+          "normal": true,
+          "avpu": "A",
+          "notes": ""
+        },
+        "exposure": {
+          "normal": true
+        },
+        "sampleHistory": {
+          "signsSymptoms": "Back pain after fall",
+          "allergies": "",
+          "allergiesUnknown": true,
+          "medications": "",
+          "medicationsUnknown": true,
+          "pastMedical": "",
+          "pastMedicalUnknown": true,
+          "events": "",
+          "eventsUnknown": true
+        },
+        "injuryDetails": {
+          "intent": "",
+          "mechanismFall": false
+        },
+        "assessmentAndPlan": {
+          "summary": "Fall from height, back pain, immobilised",
+          "differential": "",
+          "presumptiveDiagnoses": "Suspected vertebral fracture"
+        },
+        "reassessments": [],
+        "disposition": {
+          "disposition": "transported",
+          "handoverTime": "10:45",
+          "handoverToName": "Dr. Lindqvist",
+          "handoverToCadre": "",
+          "handoverToSignature": "",
+          "planDiscussedWithPatient": "no",
+          "providerName": "Paramedic Diallo",
+          "providerSignature": "Diallo",
+          "providerSignatureDate": "2026-08-21"
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 33,
+        "totalSatisfied": 30,
+        "sections": [
+          {
+            "section": "callerAndScene",
+            "required": 8,
+            "satisfied": 7,
+            "missing": [
+              {
+                "id": "CS-08",
+                "section": "callerAndScene",
+                "description": "Time arrived at scene is required."
+              }
+            ]
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "triage",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "sampleHistory",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "injuryDetails",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "INJ-01",
+                "section": "injuryDetails",
+                "description": "Injury intent (Intentional / Unintentional / Self-inflicted) is required when \"Injury\" is checked."
+              },
+              {
+                "id": "INJ-02",
+                "section": "injuryDetails",
+                "description": "Injury mechanism is required when \"Injury\" is checked."
+              }
+            ]
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "disposition",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "CS-08",
+            "section": "callerAndScene",
+            "description": "Time arrived at scene is required."
+          },
+          {
+            "id": "INJ-01",
+            "section": "injuryDetails",
+            "description": "Injury intent (Intentional / Unintentional / Self-inflicted) is required when \"Injury\" is checked."
+          },
+          {
+            "id": "INJ-02",
+            "section": "injuryDetails",
+            "description": "Injury mechanism is required when \"Injury\" is checked."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-VIT-SBP-HIGH",
+            "category": "Vital signs",
+            "message": "Systolic blood pressure 185 mmHg is severely elevated (> 180).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant — alert receiving obstetric / emergency team.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAIN-SEVERE",
+            "category": "Pain",
+            "message": "Severe pain reported (8/10) — administer analgesia per protocol.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PLAN-NOT-DISCUSSED",
+            "category": "Disposition",
+            "message": "Plan was not discussed with patient — document reason at handover.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical, mass casualty gunshot with heavy uncontrolled bleeding",
+      "description": "A mass-casualty gunshot incident: an unresponsive (AVPU U) patient at RED triage with airway and breathing both abnormal and undocumented (no interventions), a documented active bleeding site with no haemorrhage control, no IV/IO access, no GCS components recorded, hypoglycaemia (2.0 mmol/L), a pregnancy with high-risk findings, and a violent/aggressive flag - all against an almost entirely blank record (patient sex/DOB, scene location, most vital signs, SAMPLE history, assessment and plan, and the entire disposition/handover section are missing). Only 12 of 37 applicable rules are satisfied (25 missing). Twelve flags fire: seven urgent (mass casualty, unresponsive AVPU, critical SpO2, abnormal respiratory rate, hypoglycaemia, uncontrolled bleeding, pregnancy with high-risk findings), two high (abnormal heart rate, high-risk trauma), three medium (pregnancy, severe pain, violent/aggressive patient).",
+      "state": {
+        "callerAndScene": {
+          "massCasualty": true,
+          "callerName": "",
+          "callerPhone": "",
+          "patientName": "Doe, Unknown",
+          "dateOfBirthOrAge": "",
+          "sex": "",
+          "patientAddress": "",
+          "occupation": "",
+          "date": "2026-08-22",
+          "sceneCallType": "scene-call",
+          "runNumber": "",
+          "sceneLocationType": "",
+          "sceneLocationOther": "",
+          "timeCallReceived": "18:00",
+          "timeEnRouteToScene": "",
+          "timeArrivedAtScene": "",
+          "timeTransporting": "",
+          "timeAtFacility": "",
+          "timeInService": ""
+        },
+        "chiefComplaintAndVitals": {
+          "chiefComplaint": "Gunshot wound, multiple casualties",
+          "injury": true,
+          "initialVitals": {
+            "time": "",
+            "hr": 160,
+            "rr": 4,
+            "bp": "",
+            "tempC": null,
+            "rbs": null,
+            "spo2": 82,
+            "spo2OnOxygen": ""
+          },
+          "careInProgressOnArrival": "",
+          "pregnant": "yes",
+          "painScore": 9
+        },
+        "highRiskSigns": {
+          "heavyBleeding": true,
+          "pregnantWithHighRiskFindings": true,
+          "violentOrAggressive": true,
+          "highRiskTrauma": true
+        },
+        "triage": {
+          "category": "red",
+          "triagedFor": ""
+        },
+        "airway": {
+          "normal": false,
+          "voiceChanges": false,
+          "stridor": false,
+          "oralAirwayBurns": false,
+          "angioedema": false,
+          "obstructedByTongue": false,
+          "obstructedByBlood": false,
+          "obstructedBySecretions": false,
+          "obstructedByVomit": false,
+          "obstructedByForeignBody": false,
+          "interventionRepositioning": false,
+          "interventionSuction": false,
+          "interventionOpa": false,
+          "interventionNpa": false,
+          "interventionLma": false,
+          "interventionBvm": false,
+          "interventionEtt": false,
+          "notes": ""
+        },
+        "breathing": {
+          "normal": false,
+          "chestRiseShallow": false,
+          "chestRiseRetractions": false,
+          "chestRiseParadoxical": false,
+          "breathSoundsNormal": false,
+          "breathSoundsNotes": "",
+          "oxygenNasalCannula": false,
+          "oxygenFaceMask": false,
+          "oxygenNonRebreather": false,
+          "oxygenBvm": false,
+          "oxygenBipapCpap": false,
+          "notes": ""
+        },
+        "circulation": {
+          "normal": false,
+          "skinWarm": false,
+          "skinDry": false,
+          "skinPale": false,
+          "skinCyanotic": false,
+          "skinMoist": false,
+          "skinCool": false,
+          "capillaryRefillUnder3": false,
+          "capillaryRefill3OrMore": false,
+          "pulsesWeak": false,
+          "pulsesAsymmetric": false,
+          "jvd": "",
+          "activeBleedingSite": "Left thigh laceration",
+          "bleedingControlledBandage": false,
+          "bleedingControlledTourniquet": false,
+          "bleedingControlledDirectPressure": false,
+          "accessIvSite": "",
+          "accessIoSite": "",
+          "ivfMls": null,
+          "notes": ""
+        },
+        "disability": {
+          "normal": false,
+          "avpu": "U",
+          "gcsEye": null,
+          "gcsVerbal": null,
+          "gcsMotor": null,
+          "bloodGlucose": 2,
+          "notes": ""
+        },
+        "exposure": {
+          "normal": false
+        },
+        "sampleHistory": {
+          "signsSymptoms": "",
+          "allergies": "",
+          "allergiesUnknown": false,
+          "medications": "",
+          "medicationsUnknown": false,
+          "pastMedical": "",
+          "pastMedicalUnknown": false,
+          "events": "",
+          "eventsUnknown": false
+        },
+        "injuryDetails": {
+          "intent": "",
+          "mechanismGunshot": true
+        },
+        "assessmentAndPlan": {
+          "summary": "",
+          "differential": "",
+          "presumptiveDiagnoses": ""
+        },
+        "reassessments": [],
+        "disposition": {
+          "disposition": "",
+          "handoverTime": "",
+          "handoverToName": "",
+          "handoverToCadre": "",
+          "handoverToSignature": "",
+          "planDiscussedWithPatient": "",
+          "providerName": "",
+          "providerSignature": "",
+          "providerSignatureDate": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 37,
+        "totalSatisfied": 12,
+        "sections": [
+          {
+            "section": "callerAndScene",
+            "required": 8,
+            "satisfied": 4,
+            "missing": [
+              {
+                "id": "CS-02",
+                "section": "callerAndScene",
+                "description": "Patient sex (Male / Female) is required."
+              },
+              {
+                "id": "CS-03",
+                "section": "callerAndScene",
+                "description": "Date of birth or age is required."
+              },
+              {
+                "id": "CS-06",
+                "section": "callerAndScene",
+                "description": "Scene location & type is required."
+              },
+              {
+                "id": "CS-08",
+                "section": "callerAndScene",
+                "description": "Time arrived at scene is required."
+              }
+            ]
+          },
+          {
+            "section": "chiefComplaintAndVitals",
+            "required": 6,
+            "satisfied": 4,
+            "missing": [
+              {
+                "id": "CV-02",
+                "section": "chiefComplaintAndVitals",
+                "description": "Initial vital signs time is required."
+              },
+              {
+                "id": "CV-05",
+                "section": "chiefComplaintAndVitals",
+                "description": "Initial blood pressure (BP) is required."
+              }
+            ]
+          },
+          {
+            "section": "triage",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "A-01",
+                "section": "airway",
+                "description": "Airway: tick \"Normal\" or describe an abnormal finding."
+              },
+              {
+                "id": "A-02",
+                "section": "airway",
+                "description": "Airway: an airway intervention is required when triage is RED and Airway is not Normal."
+              }
+            ]
+          },
+          {
+            "section": "breathing",
+            "required": 1,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "B-01",
+                "section": "breathing",
+                "description": "Breathing: tick \"Normal\" or record spontaneous respiration / abnormal finding."
+              }
+            ]
+          },
+          {
+            "section": "circulation",
+            "required": 3,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "C-02",
+                "section": "circulation",
+                "description": "Circulation: bleeding control method is required when an active bleeding site is recorded."
+              },
+              {
+                "id": "C-03",
+                "section": "circulation",
+                "description": "Circulation: IV / IO access or IV fluids are required when triage is RED."
+              }
+            ]
+          },
+          {
+            "section": "disability",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "D-02",
+                "section": "disability",
+                "description": "Disability: GCS components (Eye / Verbal / Motor) are required when triage is RED."
+              }
+            ]
+          },
+          {
+            "section": "sampleHistory",
+            "required": 4,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "SH-01",
+                "section": "sampleHistory",
+                "description": "SAMPLE: Allergies — enter a value or tick \"Unknown\"."
+              },
+              {
+                "id": "SH-02",
+                "section": "sampleHistory",
+                "description": "SAMPLE: Medications — enter a value or tick \"Unknown\"."
+              },
+              {
+                "id": "SH-03",
+                "section": "sampleHistory",
+                "description": "SAMPLE: Past medical — enter a value or tick \"Unknown\"."
+              },
+              {
+                "id": "SH-04",
+                "section": "sampleHistory",
+                "description": "SAMPLE: Events — enter a value or tick \"Unknown\"."
+              }
+            ]
+          },
+          {
+            "section": "injuryDetails",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "INJ-01",
+                "section": "injuryDetails",
+                "description": "Injury intent (Intentional / Unintentional / Self-inflicted) is required when \"Injury\" is checked."
+              }
+            ]
+          },
+          {
+            "section": "assessmentAndPlan",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "AP-01",
+                "section": "assessmentAndPlan",
+                "description": "Assessment & Plan summary is required."
+              },
+              {
+                "id": "AP-02",
+                "section": "assessmentAndPlan",
+                "description": "Presumptive diagnoses are required."
+              }
+            ]
+          },
+          {
+            "section": "disposition",
+            "required": 6,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "DISP-01",
+                "section": "disposition",
+                "description": "Disposition is required."
+              },
+              {
+                "id": "DISP-02",
+                "section": "disposition",
+                "description": "Handover time is required."
+              },
+              {
+                "id": "DISP-03",
+                "section": "disposition",
+                "description": "Handover recipient name is required."
+              },
+              {
+                "id": "DISP-04",
+                "section": "disposition",
+                "description": "Provider name is required."
+              },
+              {
+                "id": "DISP-05",
+                "section": "disposition",
+                "description": "Provider signature is required."
+              },
+              {
+                "id": "DISP-06",
+                "section": "disposition",
+                "description": "Provider signature date is required."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "CS-02",
+            "section": "callerAndScene",
+            "description": "Patient sex (Male / Female) is required."
+          },
+          {
+            "id": "CS-03",
+            "section": "callerAndScene",
+            "description": "Date of birth or age is required."
+          },
+          {
+            "id": "CS-06",
+            "section": "callerAndScene",
+            "description": "Scene location & type is required."
+          },
+          {
+            "id": "CS-08",
+            "section": "callerAndScene",
+            "description": "Time arrived at scene is required."
+          },
+          {
+            "id": "CV-02",
+            "section": "chiefComplaintAndVitals",
+            "description": "Initial vital signs time is required."
+          },
+          {
+            "id": "CV-05",
+            "section": "chiefComplaintAndVitals",
+            "description": "Initial blood pressure (BP) is required."
+          },
+          {
+            "id": "A-01",
+            "section": "airway",
+            "description": "Airway: tick \"Normal\" or describe an abnormal finding."
+          },
+          {
+            "id": "A-02",
+            "section": "airway",
+            "description": "Airway: an airway intervention is required when triage is RED and Airway is not Normal."
+          },
+          {
+            "id": "B-01",
+            "section": "breathing",
+            "description": "Breathing: tick \"Normal\" or record spontaneous respiration / abnormal finding."
+          },
+          {
+            "id": "C-02",
+            "section": "circulation",
+            "description": "Circulation: bleeding control method is required when an active bleeding site is recorded."
+          },
+          {
+            "id": "C-03",
+            "section": "circulation",
+            "description": "Circulation: IV / IO access or IV fluids are required when triage is RED."
+          },
+          {
+            "id": "D-02",
+            "section": "disability",
+            "description": "Disability: GCS components (Eye / Verbal / Motor) are required when triage is RED."
+          },
+          {
+            "id": "SH-01",
+            "section": "sampleHistory",
+            "description": "SAMPLE: Allergies — enter a value or tick \"Unknown\"."
+          },
+          {
+            "id": "SH-02",
+            "section": "sampleHistory",
+            "description": "SAMPLE: Medications — enter a value or tick \"Unknown\"."
+          },
+          {
+            "id": "SH-03",
+            "section": "sampleHistory",
+            "description": "SAMPLE: Past medical — enter a value or tick \"Unknown\"."
+          },
+          {
+            "id": "SH-04",
+            "section": "sampleHistory",
+            "description": "SAMPLE: Events — enter a value or tick \"Unknown\"."
+          },
+          {
+            "id": "INJ-01",
+            "section": "injuryDetails",
+            "description": "Injury intent (Intentional / Unintentional / Self-inflicted) is required when \"Injury\" is checked."
+          },
+          {
+            "id": "AP-01",
+            "section": "assessmentAndPlan",
+            "description": "Assessment & Plan summary is required."
+          },
+          {
+            "id": "AP-02",
+            "section": "assessmentAndPlan",
+            "description": "Presumptive diagnoses are required."
+          },
+          {
+            "id": "DISP-01",
+            "section": "disposition",
+            "description": "Disposition is required."
+          },
+          {
+            "id": "DISP-02",
+            "section": "disposition",
+            "description": "Handover time is required."
+          },
+          {
+            "id": "DISP-03",
+            "section": "disposition",
+            "description": "Handover recipient name is required."
+          },
+          {
+            "id": "DISP-04",
+            "section": "disposition",
+            "description": "Provider name is required."
+          },
+          {
+            "id": "DISP-05",
+            "section": "disposition",
+            "description": "Provider signature is required."
+          },
+          {
+            "id": "DISP-06",
+            "section": "disposition",
+            "description": "Provider signature date is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-MASS-CASUALTY",
+            "category": "Scene",
+            "message": "Mass casualty incident — alert receiving facility and incident command.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AVPU-U",
+            "category": "Neurological",
+            "message": "Patient is unresponsive (AVPU = U) — secure airway, escalate care.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SPO2-CRIT",
+            "category": "Breathing",
+            "message": "SpO2 82% is critically low (< 90%).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-RR",
+            "category": "Vital signs",
+            "message": "Respiratory rate 4/min is outside the safe range (8–30).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-GLUC-LOW",
+            "category": "Metabolic",
+            "message": "Blood glucose 2 mmol/L indicates hypoglycaemia (< 3.5).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-BLEEDING-NOCTL",
+            "category": "Circulation",
+            "message": "Heavy / active bleeding with no haemorrhage control recorded — apply pressure / tourniquet immediately.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-PREG-HIGH-RISK",
+            "category": "Obstetric",
+            "message": "Pregnant with high-risk findings — alert obstetric and emergency teams immediately.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-HR",
+            "category": "Vital signs",
+            "message": "Heart rate 160 bpm is outside the safe range (50–150).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HIGH-RISK-TRAUMA",
+            "category": "Trauma",
+            "message": "High-risk trauma — alert receiving trauma team early.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PREG",
+            "category": "Obstetric",
+            "message": "Patient is pregnant — alert receiving obstetric / emergency team.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAIN-SEVERE",
+            "category": "Pain",
+            "message": "Severe pain reported (9/10) — administer analgesia per protocol.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-VIOLENT",
+            "category": "Safety",
+            "message": "Patient flagged as violent or aggressive — request scene safety / police support.",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}
