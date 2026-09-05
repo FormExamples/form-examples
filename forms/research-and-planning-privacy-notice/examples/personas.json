@@ -1,0 +1,209 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateForm",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateForm() checks 7 rules (REQ-RD-001/002 recipient details, REQ-AK-001..005 acknowledgement/opt-outs/signature); the boolean agreed===false counts as empty identically to unanswered. detectAdditionalFlags() is a fully independent layer, including a length-based check on the typed name (1-2 characters is flagged as incomplete even though it satisfies the bare non-empty requirement).",
+  "personas": [
+    {
+      "name": "Fully acknowledged, both opt-outs opted in",
+      "description": "Organisation and recipient name recorded, the acknowledgement checkbox is checked, both Type 1 and National Data Opt-Out preferences are 'opt-in', and the typed name/date are both present. completeness 100%, status Complete, no fired rules, no flags.",
+      "state": {
+        "recipientDetails": {
+          "organisationName": "Riverside Integrated Care Board",
+          "recipientName": "Dr. Amara Osei",
+          "recipientNhsNumber": "",
+          "recipientDob": ""
+        },
+        "acknowledgementSignature": {
+          "agreed": true,
+          "type1OptOut": "opt-in",
+          "nationalDataOptOut": "opt-in",
+          "recipientTypedFullName": "Amara Osei",
+          "recipientTypedDate": "2026-08-26"
+        }
+      },
+      "expected": {
+        "completeness": 100,
+        "status": "Complete",
+        "firedRules": [],
+        "validationErrors": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Declined acknowledgement with a Type 1 opt-out",
+      "description": "Recipient details are complete and the recipient typed both their full name and today's date, but explicitly left the acknowledgement checkbox unchecked and elected a Type 1 opt-out (National Data Opt-Out left opted in). Only REQ-AK-001 fires (agreed===false counts as empty), giving completeness 86% and status Incomplete. Two high flags fire: acknowledgement not given, and the Type 1 opt-out election.",
+      "state": {
+        "recipientDetails": {
+          "organisationName": "Northgate Research Consortium",
+          "recipientName": "Dr. Femi Adeyemi",
+          "recipientNhsNumber": "",
+          "recipientDob": ""
+        },
+        "acknowledgementSignature": {
+          "agreed": false,
+          "type1OptOut": "opt-out",
+          "nationalDataOptOut": "opt-in",
+          "recipientTypedFullName": "Femi Adeyemi",
+          "recipientTypedDate": "2026-08-26"
+        }
+      },
+      "expected": {
+        "completeness": 86,
+        "status": "Incomplete",
+        "firedRules": [
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          }
+        ],
+        "validationErrors": [
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NOACK-001",
+            "category": "Acknowledgement Not Given",
+            "message": "Recipient has not acknowledged the research and planning privacy notice",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TYPE1-OPTOUT-001",
+            "category": "Type 1 Opt-Out",
+            "message": "Recipient has elected Type 1 opt-out — confidential patient information must not be shared from this practice for purposes beyond direct care",
+            "priority": "high"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Blank notice with an implausibly short typed name",
+      "description": "Recipient details, both opt-out preferences, and the typed date are all blank; the acknowledgement checkbox is unchecked; the only text entered is an implausibly short typed name ('Al', 2 characters) - which satisfies the bare non-empty REQ-AK-004 rule but is independently flagged as incomplete. Six of seven rules fire (everything except REQ-AK-004), giving completeness 14% and status Incomplete. Three flags fire: two high (acknowledgement not given; recipient details missing organisation and recipient name), one medium (the implausibly short typed name).",
+      "state": {
+        "recipientDetails": {
+          "organisationName": "",
+          "recipientName": "",
+          "recipientNhsNumber": "",
+          "recipientDob": ""
+        },
+        "acknowledgementSignature": {
+          "agreed": false,
+          "type1OptOut": "",
+          "nationalDataOptOut": "",
+          "recipientTypedFullName": "Al",
+          "recipientTypedDate": ""
+        }
+      },
+      "expected": {
+        "completeness": 14,
+        "status": "Incomplete",
+        "firedRules": [
+          {
+            "id": "REQ-RD-001",
+            "section": "recipientDetails",
+            "description": "Organisation name is required",
+            "field": "organisationName"
+          },
+          {
+            "id": "REQ-RD-002",
+            "section": "recipientDetails",
+            "description": "Recipient name is required",
+            "field": "recipientName"
+          },
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          },
+          {
+            "id": "REQ-AK-002",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must select a Type 1 opt-out preference",
+            "field": "type1OptOut"
+          },
+          {
+            "id": "REQ-AK-003",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must select a National Data Opt-Out preference",
+            "field": "nationalDataOptOut"
+          },
+          {
+            "id": "REQ-AK-005",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must enter today's date",
+            "field": "recipientTypedDate"
+          }
+        ],
+        "validationErrors": [
+          {
+            "id": "REQ-RD-001",
+            "section": "recipientDetails",
+            "description": "Organisation name is required",
+            "field": "organisationName"
+          },
+          {
+            "id": "REQ-RD-002",
+            "section": "recipientDetails",
+            "description": "Recipient name is required",
+            "field": "recipientName"
+          },
+          {
+            "id": "REQ-AK-001",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must check the acknowledgement checkbox",
+            "field": "agreed"
+          },
+          {
+            "id": "REQ-AK-002",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must select a Type 1 opt-out preference",
+            "field": "type1OptOut"
+          },
+          {
+            "id": "REQ-AK-003",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must select a National Data Opt-Out preference",
+            "field": "nationalDataOptOut"
+          },
+          {
+            "id": "REQ-AK-005",
+            "section": "acknowledgementSignature",
+            "description": "Recipient must enter today's date",
+            "field": "recipientTypedDate"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-NOACK-001",
+            "category": "Acknowledgement Not Given",
+            "message": "Recipient has not acknowledged the research and planning privacy notice",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CONFIG-001",
+            "category": "Incomplete Recipient Details",
+            "message": "Recipient details are missing: organisation name, recipient name",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NAME-001",
+            "category": "Incomplete Name",
+            "message": "Recipient typed name appears incomplete — please verify",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,953 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateV1",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateV1() checks all 43 rules unconditionally, but a rule guarding a dormant conditional branch (e.g. monocular-vision detail fields when hasVisionInBothEyes is 'yes') is written as `!branchActive(d) || <the real check>`, so it trivially passes when its branch is inactive - only fields on an ACTIVE branch can appear in `missing`. detectFlaggedIssues() is fully independent and reads the same conditional structure directly rather than via the branch-active helpers.",
+  "personas": [
+    {
+      "name": "Complete, binocular vision, meets standard",
+      "description": "Full personal/GP details, meets the eyesight standard without correction, normal vision in both eyes (monocular branch inactive), no visual-field problem, no glaucoma/retinitis pigmentosa/laser treatment/blepharospasm/night blindness/double vision/other conditions, recent optician contact recorded, and a fully completed authorisation. All 43 rules satisfied (complete), no flags.",
+      "state": {
+        "personalDetails": {
+          "title": "Mrs",
+          "fullName": "Helena Kowalski",
+          "dateOfBirth": "1975-04-12",
+          "address": "22 Sycamore Close, Bristol",
+          "postcode": "BS4 2XY",
+          "email": "helena.k@example.com",
+          "contactNumber": "07700 900100",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "name": "Dr. Wei Zhang",
+            "surgeryName": "Sycamore Close Surgery",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          },
+          "consultant": {
+            "name": "",
+            "speciality": "",
+            "department": "",
+            "hospitalName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          }
+        },
+        "eyesightStandards": {
+          "meetsStandard": "yes-without-correction"
+        },
+        "visionInBothEyes": {
+          "hasVisionInBothEyes": "yes",
+          "whichEye": "",
+          "duration": "",
+          "adaptation": "",
+          "monocularDeclarationConfirmed": false
+        },
+        "fieldOfVision": {
+          "hasProblem": "no",
+          "causedSolelyByEyeCondition": "",
+          "cause": "",
+          "causeOtherDetails": ""
+        },
+        "glaucoma": {
+          "hasCondition": "no",
+          "whichEyes": ""
+        },
+        "retinitisPigmentosa": {
+          "hasCondition": "no",
+          "whichEyes": ""
+        },
+        "laserTreatment": {
+          "hasHadTreatment": "no",
+          "leftEyeFirstDate": "",
+          "rightEyeFirstDate": "",
+          "leftEyeLastDate": "",
+          "rightEyeLastDate": ""
+        },
+        "blepharospasm": {
+          "hasCondition": "no",
+          "whichEyes": "",
+          "hasHadTreatment": "",
+          "adequatelyControlled": ""
+        },
+        "nightBlindness": {
+          "hasCondition": "no",
+          "whichEyes": ""
+        },
+        "doubleVision": {
+          "hasCondition": "no",
+          "controlled": "",
+          "sameForSixMonthsOrMore": "",
+          "doubleVisionDeclarationConfirmed": false,
+          "declarationSignatureName": "",
+          "declarationDate": ""
+        },
+        "otherVisionConditions": {
+          "hasOther": "no",
+          "details": ""
+        },
+        "recentContact": {
+          "hadContact": "yes",
+          "dateOfContact": "2026-06-15"
+        },
+        "authorisation": {
+          "declarationConfirmed": true,
+          "name": "Helena Kowalski",
+          "signature": "Helena Kowalski",
+          "date": "2026-08-26",
+          "authoriseElectronicCorrespondence": "yes",
+          "contactPreferenceFromHealthcareProfessional": "email",
+          "contactPreferenceFromDvla": "email"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 43,
+        "totalSatisfied": 43,
+        "sections": [
+          {
+            "section": "personalDetails",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "healthcareProfessionals",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "eyesightStandards",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "visionInBothEyes",
+            "required": 5,
+            "satisfied": 5,
+            "missing": []
+          },
+          {
+            "section": "fieldOfVision",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "glaucoma",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "retinitisPigmentosa",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "laserTreatment",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "blepharospasm",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "nightBlindness",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "doubleVision",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "otherVisionConditions",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "recentContact",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "authorisation",
+            "required": 5,
+            "satisfied": 5,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Partial, self-managed monocular vision",
+      "description": "GP surgery name is left blank (the one missing field), monocular vision in the left eye since birth with adaptation managed alone rather than reviewed by a healthcare professional, no other conditions, and no recent healthcare-professional contact. 42 of 43 rules satisfied (only V1-HCP-002 missing), so not complete. Two flags fire: a medium flag for the unreviewed self-managed monocular adaptation, and a low flag for the lack of recent contact.",
+      "state": {
+        "personalDetails": {
+          "title": "Mr",
+          "fullName": "Grant Sowerby",
+          "dateOfBirth": "1962-11-03",
+          "address": "9 Foxglove Way, Leeds",
+          "postcode": "LS6 3RT",
+          "email": "",
+          "contactNumber": "0113 555 0110",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "name": "Dr. Ines Farrar",
+            "surgeryName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          },
+          "consultant": {
+            "name": "",
+            "speciality": "",
+            "department": "",
+            "hospitalName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          }
+        },
+        "eyesightStandards": {
+          "meetsStandard": "yes-with-correction"
+        },
+        "visionInBothEyes": {
+          "hasVisionInBothEyes": "no",
+          "whichEye": "left",
+          "duration": "since-birth-or-childhood",
+          "adaptation": "adapted-self",
+          "monocularDeclarationConfirmed": true
+        },
+        "fieldOfVision": {
+          "hasProblem": "no",
+          "causedSolelyByEyeCondition": "",
+          "cause": "",
+          "causeOtherDetails": ""
+        },
+        "glaucoma": {
+          "hasCondition": "no",
+          "whichEyes": ""
+        },
+        "retinitisPigmentosa": {
+          "hasCondition": "no",
+          "whichEyes": ""
+        },
+        "laserTreatment": {
+          "hasHadTreatment": "no",
+          "leftEyeFirstDate": "",
+          "rightEyeFirstDate": "",
+          "leftEyeLastDate": "",
+          "rightEyeLastDate": ""
+        },
+        "blepharospasm": {
+          "hasCondition": "no",
+          "whichEyes": "",
+          "hasHadTreatment": "",
+          "adequatelyControlled": ""
+        },
+        "nightBlindness": {
+          "hasCondition": "no",
+          "whichEyes": ""
+        },
+        "doubleVision": {
+          "hasCondition": "no",
+          "controlled": "",
+          "sameForSixMonthsOrMore": "",
+          "doubleVisionDeclarationConfirmed": false,
+          "declarationSignatureName": "",
+          "declarationDate": ""
+        },
+        "otherVisionConditions": {
+          "hasOther": "no",
+          "details": ""
+        },
+        "recentContact": {
+          "hadContact": "no",
+          "dateOfContact": ""
+        },
+        "authorisation": {
+          "declarationConfirmed": true,
+          "name": "Grant Sowerby",
+          "signature": "Grant Sowerby",
+          "date": "2026-08-26",
+          "authoriseElectronicCorrespondence": "no",
+          "contactPreferenceFromHealthcareProfessional": "",
+          "contactPreferenceFromDvla": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 43,
+        "totalSatisfied": 42,
+        "sections": [
+          {
+            "section": "personalDetails",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "healthcareProfessionals",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "V1-HCP-002",
+                "section": "healthcareProfessionals",
+                "description": "GP surgery name required.",
+                "message": "GP surgery name is required."
+              }
+            ]
+          },
+          {
+            "section": "eyesightStandards",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "visionInBothEyes",
+            "required": 5,
+            "satisfied": 5,
+            "missing": []
+          },
+          {
+            "section": "fieldOfVision",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "glaucoma",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "retinitisPigmentosa",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "laserTreatment",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "blepharospasm",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "nightBlindness",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "doubleVision",
+            "required": 6,
+            "satisfied": 6,
+            "missing": []
+          },
+          {
+            "section": "otherVisionConditions",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "recentContact",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "authorisation",
+            "required": 5,
+            "satisfied": 5,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "V1-HCP-002",
+            "section": "healthcareProfessionals",
+            "description": "GP surgery name required.",
+            "message": "GP surgery name is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "V1-FLAG-MONO-002",
+            "category": "Monocular Vision",
+            "message": "Monocular vision adaptation has not been reviewed by a healthcare professional.",
+            "priority": "medium"
+          },
+          {
+            "id": "V1-FLAG-CONTACT-001",
+            "category": "Recent Contact",
+            "message": "No healthcare-professional contact in the last 12 months — DVLA may need to seek up-to-date medical evidence.",
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical, multiple active branches with urgent findings and 21 missing fields",
+      "description": "Almost every conditional branch is active and under-completed at once: the patient declares they do NOT meet the eyesight standard; unadapted monocular vision with the eye/duration left blank; a visual-field defect not solely of ocular origin (stroke); bilateral glaucoma; retinitis pigmentosa; laser treatment claimed with no date supplied; bilateral blepharospasm with no treatment and controlled-status left blank; night blindness with the affected eye(s) left blank; uncontrolled double vision not yet stable for 6 months, with the declaration unconfirmed and unsigned; another vision condition claimed with no details; recent contact claimed with no date; and the authorisation itself entirely unconfirmed and unsigned. Only 22 of 43 rules are satisfied (21 missing, spanning personal details, healthcare-professional details, the monocular/laser/blepharospasm/night-blindness/double-vision/other/recent-contact branches, and the entire authorisation section). Nine flags fire: two urgent (does not meet eyesight standard; uncontrolled diplopia not yet 6 months stable), four high (unadapted monocular vision, non-ocular visual-field defect, bilateral glaucoma, retinitis pigmentosa), three medium (blepharospasm with no treatment, night blindness, another vision condition).",
+      "state": {
+        "personalDetails": {
+          "title": "",
+          "fullName": "Marjorie Coates",
+          "dateOfBirth": "",
+          "address": "",
+          "postcode": "",
+          "email": "",
+          "contactNumber": "",
+          "changeOfDetails": ""
+        },
+        "healthcareProfessionals": {
+          "gp": {
+            "name": "",
+            "surgeryName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          },
+          "consultant": {
+            "name": "",
+            "speciality": "",
+            "department": "",
+            "hospitalName": "",
+            "address": "",
+            "town": "",
+            "postcode": "",
+            "contactNumber": "",
+            "email": "",
+            "dateLastSeen": ""
+          }
+        },
+        "eyesightStandards": {
+          "meetsStandard": "no"
+        },
+        "visionInBothEyes": {
+          "hasVisionInBothEyes": "no",
+          "whichEye": "",
+          "duration": "",
+          "adaptation": "not-adapted",
+          "monocularDeclarationConfirmed": false
+        },
+        "fieldOfVision": {
+          "hasProblem": "yes",
+          "causedSolelyByEyeCondition": "no",
+          "cause": "stroke",
+          "causeOtherDetails": ""
+        },
+        "glaucoma": {
+          "hasCondition": "yes",
+          "whichEyes": "both"
+        },
+        "retinitisPigmentosa": {
+          "hasCondition": "yes",
+          "whichEyes": "left"
+        },
+        "laserTreatment": {
+          "hasHadTreatment": "yes",
+          "leftEyeFirstDate": "",
+          "rightEyeFirstDate": "",
+          "leftEyeLastDate": "",
+          "rightEyeLastDate": ""
+        },
+        "blepharospasm": {
+          "hasCondition": "yes",
+          "whichEyes": "both",
+          "hasHadTreatment": "no",
+          "adequatelyControlled": ""
+        },
+        "nightBlindness": {
+          "hasCondition": "yes",
+          "whichEyes": ""
+        },
+        "doubleVision": {
+          "hasCondition": "yes",
+          "controlled": "no",
+          "sameForSixMonthsOrMore": "no",
+          "doubleVisionDeclarationConfirmed": false,
+          "declarationSignatureName": "",
+          "declarationDate": ""
+        },
+        "otherVisionConditions": {
+          "hasOther": "yes",
+          "details": ""
+        },
+        "recentContact": {
+          "hadContact": "yes",
+          "dateOfContact": ""
+        },
+        "authorisation": {
+          "declarationConfirmed": false,
+          "name": "",
+          "signature": "",
+          "date": "",
+          "authoriseElectronicCorrespondence": "",
+          "contactPreferenceFromHealthcareProfessional": "",
+          "contactPreferenceFromDvla": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 43,
+        "totalSatisfied": 22,
+        "sections": [
+          {
+            "section": "personalDetails",
+            "required": 4,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "V1-PD-002",
+                "section": "personalDetails",
+                "description": "Date of birth required.",
+                "message": "Date of birth is required."
+              },
+              {
+                "id": "V1-PD-003",
+                "section": "personalDetails",
+                "description": "Address required.",
+                "message": "Address is required."
+              },
+              {
+                "id": "V1-PD-004",
+                "section": "personalDetails",
+                "description": "Postcode required.",
+                "message": "Postcode is required."
+              }
+            ]
+          },
+          {
+            "section": "healthcareProfessionals",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "V1-HCP-001",
+                "section": "healthcareProfessionals",
+                "description": "GP name required.",
+                "message": "GP name is required."
+              },
+              {
+                "id": "V1-HCP-002",
+                "section": "healthcareProfessionals",
+                "description": "GP surgery name required.",
+                "message": "GP surgery name is required."
+              }
+            ]
+          },
+          {
+            "section": "eyesightStandards",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "visionInBothEyes",
+            "required": 5,
+            "satisfied": 2,
+            "missing": [
+              {
+                "id": "V1-Q2-002",
+                "section": "visionInBothEyes",
+                "description": "Monocular: which eye required.",
+                "message": "Please indicate which eye you can see with."
+              },
+              {
+                "id": "V1-Q2-003",
+                "section": "visionInBothEyes",
+                "description": "Monocular: duration required.",
+                "message": "Please indicate how long you have had vision in only one eye."
+              },
+              {
+                "id": "V1-Q2-005",
+                "section": "visionInBothEyes",
+                "description": "Monocular declaration confirmation required.",
+                "message": "Please confirm the monocular vision declaration."
+              }
+            ]
+          },
+          {
+            "section": "fieldOfVision",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "glaucoma",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "retinitisPigmentosa",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "laserTreatment",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "V1-Q6-002",
+                "section": "laserTreatment",
+                "description": "Laser treatment: at least one date required.",
+                "message": "Please supply at least one laser-treatment date."
+              }
+            ]
+          },
+          {
+            "section": "blepharospasm",
+            "required": 4,
+            "satisfied": 3,
+            "missing": [
+              {
+                "id": "V1-Q7-004",
+                "section": "blepharospasm",
+                "description": "Blepharospasm: controlled Yes/No required.",
+                "message": "Please answer whether your healthcare professional is satisfied that blepharospasm is adequately controlled."
+              }
+            ]
+          },
+          {
+            "section": "nightBlindness",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "V1-Q8-002",
+                "section": "nightBlindness",
+                "description": "Night blindness: which eye(s) required.",
+                "message": "Please indicate which eye(s) are affected by night blindness."
+              }
+            ]
+          },
+          {
+            "section": "doubleVision",
+            "required": 6,
+            "satisfied": 3,
+            "missing": [
+              {
+                "id": "V1-Q9-004",
+                "section": "doubleVision",
+                "description": "Double vision declaration confirmation required.",
+                "message": "Please confirm the double-vision adaptation declaration."
+              },
+              {
+                "id": "V1-Q9-005",
+                "section": "doubleVision",
+                "description": "Double vision: declaration signature required.",
+                "message": "Please sign the double-vision declaration."
+              },
+              {
+                "id": "V1-Q9-006",
+                "section": "doubleVision",
+                "description": "Double vision: declaration date required.",
+                "message": "Please supply the double-vision declaration date."
+              }
+            ]
+          },
+          {
+            "section": "otherVisionConditions",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "V1-Q10-002",
+                "section": "otherVisionConditions",
+                "description": "Other vision conditions: details required.",
+                "message": "Please describe the other vision condition(s) and which eye(s) are affected."
+              }
+            ]
+          },
+          {
+            "section": "recentContact",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "V1-Q11-002",
+                "section": "recentContact",
+                "description": "Recent contact: date required.",
+                "message": "Please supply the date of your most recent contact."
+              }
+            ]
+          },
+          {
+            "section": "authorisation",
+            "required": 5,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "V1-AUTH-001",
+                "section": "authorisation",
+                "description": "Declaration confirmation required.",
+                "message": "Please confirm the applicant authorisation declaration."
+              },
+              {
+                "id": "V1-AUTH-002",
+                "section": "authorisation",
+                "description": "Authorisation: name required.",
+                "message": "Please supply your full name on the authorisation."
+              },
+              {
+                "id": "V1-AUTH-003",
+                "section": "authorisation",
+                "description": "Authorisation: signature required.",
+                "message": "Please sign the authorisation."
+              },
+              {
+                "id": "V1-AUTH-004",
+                "section": "authorisation",
+                "description": "Authorisation: date required.",
+                "message": "Please supply the authorisation date."
+              },
+              {
+                "id": "V1-AUTH-005",
+                "section": "authorisation",
+                "description": "Authorisation: electronic-correspondence consent required.",
+                "message": "Please indicate whether you authorise electronic correspondence."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "V1-PD-002",
+            "section": "personalDetails",
+            "description": "Date of birth required.",
+            "message": "Date of birth is required."
+          },
+          {
+            "id": "V1-PD-003",
+            "section": "personalDetails",
+            "description": "Address required.",
+            "message": "Address is required."
+          },
+          {
+            "id": "V1-PD-004",
+            "section": "personalDetails",
+            "description": "Postcode required.",
+            "message": "Postcode is required."
+          },
+          {
+            "id": "V1-HCP-001",
+            "section": "healthcareProfessionals",
+            "description": "GP name required.",
+            "message": "GP name is required."
+          },
+          {
+            "id": "V1-HCP-002",
+            "section": "healthcareProfessionals",
+            "description": "GP surgery name required.",
+            "message": "GP surgery name is required."
+          },
+          {
+            "id": "V1-Q2-002",
+            "section": "visionInBothEyes",
+            "description": "Monocular: which eye required.",
+            "message": "Please indicate which eye you can see with."
+          },
+          {
+            "id": "V1-Q2-003",
+            "section": "visionInBothEyes",
+            "description": "Monocular: duration required.",
+            "message": "Please indicate how long you have had vision in only one eye."
+          },
+          {
+            "id": "V1-Q2-005",
+            "section": "visionInBothEyes",
+            "description": "Monocular declaration confirmation required.",
+            "message": "Please confirm the monocular vision declaration."
+          },
+          {
+            "id": "V1-Q6-002",
+            "section": "laserTreatment",
+            "description": "Laser treatment: at least one date required.",
+            "message": "Please supply at least one laser-treatment date."
+          },
+          {
+            "id": "V1-Q7-004",
+            "section": "blepharospasm",
+            "description": "Blepharospasm: controlled Yes/No required.",
+            "message": "Please answer whether your healthcare professional is satisfied that blepharospasm is adequately controlled."
+          },
+          {
+            "id": "V1-Q8-002",
+            "section": "nightBlindness",
+            "description": "Night blindness: which eye(s) required.",
+            "message": "Please indicate which eye(s) are affected by night blindness."
+          },
+          {
+            "id": "V1-Q9-004",
+            "section": "doubleVision",
+            "description": "Double vision declaration confirmation required.",
+            "message": "Please confirm the double-vision adaptation declaration."
+          },
+          {
+            "id": "V1-Q9-005",
+            "section": "doubleVision",
+            "description": "Double vision: declaration signature required.",
+            "message": "Please sign the double-vision declaration."
+          },
+          {
+            "id": "V1-Q9-006",
+            "section": "doubleVision",
+            "description": "Double vision: declaration date required.",
+            "message": "Please supply the double-vision declaration date."
+          },
+          {
+            "id": "V1-Q10-002",
+            "section": "otherVisionConditions",
+            "description": "Other vision conditions: details required.",
+            "message": "Please describe the other vision condition(s) and which eye(s) are affected."
+          },
+          {
+            "id": "V1-Q11-002",
+            "section": "recentContact",
+            "description": "Recent contact: date required.",
+            "message": "Please supply the date of your most recent contact."
+          },
+          {
+            "id": "V1-AUTH-001",
+            "section": "authorisation",
+            "description": "Declaration confirmation required.",
+            "message": "Please confirm the applicant authorisation declaration."
+          },
+          {
+            "id": "V1-AUTH-002",
+            "section": "authorisation",
+            "description": "Authorisation: name required.",
+            "message": "Please supply your full name on the authorisation."
+          },
+          {
+            "id": "V1-AUTH-003",
+            "section": "authorisation",
+            "description": "Authorisation: signature required.",
+            "message": "Please sign the authorisation."
+          },
+          {
+            "id": "V1-AUTH-004",
+            "section": "authorisation",
+            "description": "Authorisation: date required.",
+            "message": "Please supply the authorisation date."
+          },
+          {
+            "id": "V1-AUTH-005",
+            "section": "authorisation",
+            "description": "Authorisation: electronic-correspondence consent required.",
+            "message": "Please indicate whether you authorise electronic correspondence."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "V1-FLAG-EYE-001",
+            "category": "Eyesight Standard",
+            "message": "Patient declares they do not meet the Snellen 6/12 eyesight standard for driving.",
+            "priority": "urgent"
+          },
+          {
+            "id": "V1-FLAG-DV-002",
+            "category": "Double Vision",
+            "message": "Uncontrolled diplopia not yet stable for 6 months — patient must not drive until controlled or stable adaptation achieved.",
+            "priority": "urgent"
+          },
+          {
+            "id": "V1-FLAG-MONO-001",
+            "category": "Monocular Vision",
+            "message": "Monocular vision without adaptation period — patient must not drive until adapted (typically 3+ months).",
+            "priority": "high"
+          },
+          {
+            "id": "V1-FLAG-VF-001",
+            "category": "Visual Field",
+            "message": "Visual-field defect with non-ocular cause (stroke) — DVLA visual-field testing recommended.",
+            "priority": "high"
+          },
+          {
+            "id": "V1-FLAG-GLA-001",
+            "category": "Glaucoma",
+            "message": "Glaucoma reported (both) — visual-field assessment indicated.",
+            "priority": "high"
+          },
+          {
+            "id": "V1-FLAG-RP-001",
+            "category": "Retinitis Pigmentosa",
+            "message": "Retinitis pigmentosa reported (left) — progressive condition; ongoing visual-field review required.",
+            "priority": "high"
+          },
+          {
+            "id": "V1-FLAG-BLEPH-002",
+            "category": "Blepharospasm",
+            "message": "Blepharospasm reported with no treatment history — review required.",
+            "priority": "medium"
+          },
+          {
+            "id": "V1-FLAG-NB-001",
+            "category": "Night Blindness",
+            "message": "Night blindness reported (unspecified) — patient should not drive in low light.",
+            "priority": "medium"
+          },
+          {
+            "id": "V1-FLAG-OTH-001",
+            "category": "Other Vision Conditions",
+            "message": "Additional vision condition reported — manual clinical review required.",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

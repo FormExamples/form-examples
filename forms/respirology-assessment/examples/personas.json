@@ -1,0 +1,560 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateMRC",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateMRC takes the MAX grade among fired mrc-rules.js rules (MRC 1 default when none fire). detectAdditionalFlags is fully independent. Verified engine quirk: PF-004 ('Reduced FEV1/FVC ratio') compares fev1FvcRatio < 70, not < 0.7, even though the ratio is stored as a 0-1 fraction elsewhere in this same form (pulmonaryFunction.fev1FvcRatio) - so PF-004 fires whenever the field is answered with any realistic fraction (e.g. 0.68), regardless of whether the patient's airflow is actually obstructed. This is a genuine, verified divergence from the sibling forms' spirometry rules (e.g. pulmonology-assessment's own GOLD rules correctly compare the same kind of ratio against 0.7), left as-is per the mirrored-engine convention rather than silently patched here. The baseline persona below leaves fev1FvcRatio unanswered specifically to avoid this quirk firing in a case meant to have zero fired rules.",
+  "personas": [
+    {
+      "name": "MRC 1, no respiratory disease",
+      "description": "Self-reported MRC grade 1 (breathless only on strenuous exercise), no respiratory history, no pulmonary function results recorded (fev1FvcRatio deliberately left unanswered - see the engine-quirk note above), normal oximetry, never smoked, independent functional status. No rule fires, giving the MRC 1 default with an empty audit trail and no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Nora",
+          "lastName": "Hargreaves",
+          "dateOfBirth": "1980-05-19",
+          "sex": "female",
+          "weight": 70,
+          "height": 174,
+          "bmi": 23.1
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Routine respiratory review",
+          "onsetDate": "",
+          "duration": "",
+          "severityRating": null
+        },
+        "dyspnoeaAssessment": {
+          "mrcGrade": "1",
+          "triggers": "",
+          "exerciseToleranceMetres": null,
+          "orthopnoea": "no",
+          "orthopnoeaPillows": null,
+          "pnd": "no"
+        },
+        "coughAssessment": {
+          "duration": "",
+          "character": "",
+          "sputumVolume": "none",
+          "sputumColour": "",
+          "haemoptysis": "no",
+          "haemoptysisDetails": ""
+        },
+        "respiratoryHistory": {
+          "asthma": "no",
+          "copd": "no",
+          "copdSeverity": "",
+          "bronchiectasis": "no",
+          "interstitialLungDisease": "no",
+          "ildType": "",
+          "tuberculosis": "no",
+          "tbTreatmentComplete": "",
+          "pneumonia": "no",
+          "pneumoniaRecurrent": "no",
+          "pulmonaryEmbolism": "no",
+          "peDate": ""
+        },
+        "pulmonaryFunction": {
+          "fev1": null,
+          "fvc": null,
+          "fev1FvcRatio": null,
+          "dlco": null,
+          "tlc": null,
+          "oxygenSaturation": 98
+        },
+        "currentMedications": {
+          "inhalers": [],
+          "nebulizers": [],
+          "oxygenTherapy": "no",
+          "oxygenDelivery": "",
+          "oxygenFlowRate": null,
+          "oralSteroids": "no",
+          "oralSteroidDetails": "",
+          "antibiotics": "no",
+          "antibioticDetails": ""
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "environmentalAllergens": []
+        },
+        "smokingExposures": {
+          "smokingStatus": "never",
+          "packYears": null,
+          "vaping": "no",
+          "occupationalExposure": "no",
+          "asbestosExposure": "no",
+          "pets": "no"
+        },
+        "sleepFunctional": {
+          "sleepQuality": "good",
+          "osaScreenSnoring": "no",
+          "stopBangScore": 1,
+          "daytimeSomnolence": "no",
+          "epworthScore": null,
+          "functionalStatus": "independent"
+        }
+      },
+      "expected": {
+        "mrcGrade": 1,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "MRC 3, moderate obstruction on oral steroids",
+      "description": "Self-reported MRC grade 3 (walks slower than peers), FEV1 65% predicted (moderate obstruction), an obstructive-range FEV1/FVC ratio of 0.68 (which also fires PF-004 under the quirk above), a short course of oral corticosteroids, an ex-smoker with 20 pack-years, and an intermediate STOP-BANG score of 4. Four rules fire (MRC-002, moderate FEV1, the ratio quirk, oral corticosteroids), the highest tied at grade 3. Two medium flags fire: intermediate OSA risk and oral corticosteroid use.",
+      "state": {
+        "demographics": {
+          "firstName": "Desmond",
+          "lastName": "Achebe",
+          "dateOfBirth": "1965-09-02",
+          "sex": "male",
+          "weight": 80,
+          "height": 170,
+          "bmi": 27.7
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Increasing breathlessness on exertion",
+          "onsetDate": "2026-05-01",
+          "duration": "4 months",
+          "severityRating": 6
+        },
+        "dyspnoeaAssessment": {
+          "mrcGrade": "3",
+          "triggers": "Walking uphill or carrying shopping",
+          "exerciseToleranceMetres": 300,
+          "orthopnoea": "no",
+          "orthopnoeaPillows": null,
+          "pnd": "no"
+        },
+        "coughAssessment": {
+          "duration": "6 months",
+          "character": "productive",
+          "sputumVolume": "small",
+          "sputumColour": "white",
+          "haemoptysis": "no",
+          "haemoptysisDetails": ""
+        },
+        "respiratoryHistory": {
+          "asthma": "no",
+          "copd": "no",
+          "copdSeverity": "",
+          "bronchiectasis": "no",
+          "interstitialLungDisease": "no",
+          "ildType": "",
+          "tuberculosis": "no",
+          "tbTreatmentComplete": "",
+          "pneumonia": "no",
+          "pneumoniaRecurrent": "no",
+          "pulmonaryEmbolism": "no",
+          "peDate": ""
+        },
+        "pulmonaryFunction": {
+          "fev1": 65,
+          "fvc": 90,
+          "fev1FvcRatio": 0.68,
+          "dlco": 70,
+          "tlc": null,
+          "oxygenSaturation": 95
+        },
+        "currentMedications": {
+          "inhalers": [
+            {
+              "name": "Salbutamol",
+              "dose": "100mcg",
+              "frequency": "as needed"
+            }
+          ],
+          "nebulizers": [],
+          "oxygenTherapy": "no",
+          "oxygenDelivery": "",
+          "oxygenFlowRate": null,
+          "oralSteroids": "yes",
+          "oralSteroidDetails": "Prednisolone 10mg tapering",
+          "antibiotics": "no",
+          "antibioticDetails": ""
+        },
+        "allergies": {
+          "drugAllergies": [],
+          "environmentalAllergens": []
+        },
+        "smokingExposures": {
+          "smokingStatus": "ex",
+          "packYears": 20,
+          "vaping": "no",
+          "occupationalExposure": "no",
+          "asbestosExposure": "no",
+          "pets": "no"
+        },
+        "sleepFunctional": {
+          "sleepQuality": "fair",
+          "osaScreenSnoring": "yes",
+          "stopBangScore": 4,
+          "daytimeSomnolence": "no",
+          "epworthScore": null,
+          "functionalStatus": "independent"
+        }
+      },
+      "expected": {
+        "mrcGrade": 3,
+        "firedRules": [
+          {
+            "id": "MRC-002",
+            "system": "Dyspnoea",
+            "description": "Patient self-reported MRC Grade 3",
+            "grade": 3
+          },
+          {
+            "id": "PF-001",
+            "system": "Pulmonary Function",
+            "description": "FEV1 50-79% predicted (moderate obstruction)",
+            "grade": 3
+          },
+          {
+            "id": "PF-004",
+            "system": "Pulmonary Function",
+            "description": "Reduced FEV1/FVC ratio (<0.70, obstructive pattern)",
+            "grade": 2
+          },
+          {
+            "id": "OX-002",
+            "system": "Current Treatment",
+            "description": "On oral corticosteroids",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-OSA-002",
+            "category": "Obstructive Sleep Apnoea",
+            "message": "STOP-BANG score 4/7 - intermediate risk of OSA",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-STEROIDS-001",
+            "category": "Medication",
+            "message": "On oral corticosteroids: Prednisolone 10mg tapering - consider side effects",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MRC 5, very severe multi-morbid respiratory failure",
+      "description": "Self-reported MRC grade 5 (too breathless to leave the house) with orthopnoea and PND, haemoptysis, very severe airflow obstruction (FEV1 25%) with critically low oxygen saturation (82%) and reduced DLCO, severe COPD with bronchiectasis and idiopathic pulmonary fibrosis, untreated previous TB, recurrent pneumonia, a previous pulmonary embolism, long-term home oxygen and oral corticosteroids, current smoking with 45 pack-years and both quarry-dust and asbestos exposure, a documented penicillin anaphylaxis, morbid obesity (BMI 41.9), a high STOP-BANG score of 6 with daytime somnolence, and dependent functional status. Nineteen rules fire; the highest tie at grade 5 (self-reported MRC-004, very severe FEV1). Fourteen flags fire: six high (haemoptysis, both respiratory-failure flags, previous PE, unclear TB treatment status, the anaphylaxis history), six medium (oxygen dependence, intermediate/high OSA risk, ILD, asbestos exposure, oral corticosteroids, the drug-allergy count), two low (daytime somnolence, occupational exposure).",
+      "state": {
+        "demographics": {
+          "firstName": "Rita",
+          "lastName": "Vasilenko",
+          "dateOfBirth": "1948-01-22",
+          "sex": "female",
+          "weight": 110,
+          "height": 162,
+          "bmi": 41.9
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Severe breathlessness, unable to leave the house",
+          "onsetDate": "2025-01-01",
+          "duration": "18 months, progressively worsening",
+          "severityRating": 10
+        },
+        "dyspnoeaAssessment": {
+          "mrcGrade": "5",
+          "triggers": "Any exertion, including dressing",
+          "exerciseToleranceMetres": 10,
+          "orthopnoea": "yes",
+          "orthopnoeaPillows": 3,
+          "pnd": "yes"
+        },
+        "coughAssessment": {
+          "duration": "Years, worsening",
+          "character": "productive",
+          "sputumVolume": "moderate",
+          "sputumColour": "blood-streaked",
+          "haemoptysis": "yes",
+          "haemoptysisDetails": "Streaky blood in sputum for 3 days"
+        },
+        "respiratoryHistory": {
+          "asthma": "no",
+          "copd": "yes",
+          "copdSeverity": "severe",
+          "bronchiectasis": "yes",
+          "interstitialLungDisease": "yes",
+          "ildType": "Idiopathic pulmonary fibrosis",
+          "tuberculosis": "yes",
+          "tbTreatmentComplete": "no",
+          "pneumonia": "yes",
+          "pneumoniaRecurrent": "yes",
+          "pulmonaryEmbolism": "yes",
+          "peDate": "2024-03-10"
+        },
+        "pulmonaryFunction": {
+          "fev1": 25,
+          "fvc": 60,
+          "fev1FvcRatio": 0.4,
+          "dlco": 35,
+          "tlc": null,
+          "oxygenSaturation": 82
+        },
+        "currentMedications": {
+          "inhalers": [
+            {
+              "name": "Tiotropium",
+              "dose": "18mcg",
+              "frequency": "once daily"
+            }
+          ],
+          "nebulizers": [
+            {
+              "name": "Salbutamol",
+              "dose": "5mg",
+              "frequency": "four times daily"
+            }
+          ],
+          "oxygenTherapy": "yes",
+          "oxygenDelivery": "nasal-cannula",
+          "oxygenFlowRate": 4,
+          "oralSteroids": "yes",
+          "oralSteroidDetails": "Prednisolone 20mg",
+          "antibiotics": "no",
+          "antibioticDetails": ""
+        },
+        "allergies": {
+          "drugAllergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Anaphylaxis",
+              "severity": "anaphylaxis"
+            }
+          ],
+          "environmentalAllergens": []
+        },
+        "smokingExposures": {
+          "smokingStatus": "current",
+          "packYears": 45,
+          "vaping": "no",
+          "occupationalExposure": "yes",
+          "occupationalDetails": "Quarry dust, 20 years",
+          "asbestosExposure": "yes",
+          "asbestosDetails": "Shipyard work, 1985-1995",
+          "pets": "no"
+        },
+        "sleepFunctional": {
+          "sleepQuality": "poor",
+          "osaScreenSnoring": "yes",
+          "stopBangScore": 6,
+          "daytimeSomnolence": "yes",
+          "epworthScore": 18,
+          "functionalStatus": "dependent"
+        }
+      },
+      "expected": {
+        "mrcGrade": 5,
+        "firedRules": [
+          {
+            "id": "MRC-004",
+            "system": "Dyspnoea",
+            "description": "Patient self-reported MRC Grade 5",
+            "grade": 5
+          },
+          {
+            "id": "PF-003",
+            "system": "Pulmonary Function",
+            "description": "FEV1 <30% predicted (very severe obstruction)",
+            "grade": 5
+          },
+          {
+            "id": "PF-004",
+            "system": "Pulmonary Function",
+            "description": "Reduced FEV1/FVC ratio (<0.70, obstructive pattern)",
+            "grade": 2
+          },
+          {
+            "id": "PF-006",
+            "system": "Pulmonary Function",
+            "description": "Very low oxygen saturation (SpO2 <88%)",
+            "grade": 4
+          },
+          {
+            "id": "PF-007",
+            "system": "Pulmonary Function",
+            "description": "Reduced DLCO (<60% predicted)",
+            "grade": 3
+          },
+          {
+            "id": "RH-004",
+            "system": "Respiratory History",
+            "description": "Severe COPD",
+            "grade": 4
+          },
+          {
+            "id": "RH-005",
+            "system": "Respiratory History",
+            "description": "Bronchiectasis",
+            "grade": 3
+          },
+          {
+            "id": "RH-006",
+            "system": "Respiratory History",
+            "description": "Interstitial lung disease",
+            "grade": 3
+          },
+          {
+            "id": "RH-007",
+            "system": "Respiratory History",
+            "description": "Previous pulmonary embolism",
+            "grade": 3
+          },
+          {
+            "id": "RH-008",
+            "system": "Respiratory History",
+            "description": "Recurrent pneumonia",
+            "grade": 3
+          },
+          {
+            "id": "OX-001",
+            "system": "Current Treatment",
+            "description": "On long-term oxygen therapy",
+            "grade": 4
+          },
+          {
+            "id": "OX-002",
+            "system": "Current Treatment",
+            "description": "On oral corticosteroids",
+            "grade": 3
+          },
+          {
+            "id": "FS-002",
+            "system": "Functional",
+            "description": "Dependent functional status",
+            "grade": 4
+          },
+          {
+            "id": "DY-001",
+            "system": "Dyspnoea",
+            "description": "Orthopnoea present",
+            "grade": 3
+          },
+          {
+            "id": "DY-002",
+            "system": "Dyspnoea",
+            "description": "Paroxysmal nocturnal dyspnoea (PND)",
+            "grade": 3
+          },
+          {
+            "id": "SM-001",
+            "system": "Smoking",
+            "description": "Current smoker",
+            "grade": 2
+          },
+          {
+            "id": "SM-002",
+            "system": "Smoking",
+            "description": "Heavy smoking history (>30 pack-years)",
+            "grade": 3
+          },
+          {
+            "id": "SL-001",
+            "system": "Sleep",
+            "description": "High STOP-BANG score (>=5)",
+            "grade": 3
+          },
+          {
+            "id": "OB-002",
+            "system": "Obesity",
+            "description": "BMI >=40 (Morbid obesity)",
+            "grade": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-HAEM-001",
+            "category": "Haemoptysis",
+            "message": "Haemoptysis reported: Streaky blood in sputum for 3 days - urgent investigation required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RESP-FAIL-001",
+            "category": "Respiratory Failure",
+            "message": "SpO2 82% - risk of acute respiratory failure",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RESP-FAIL-002",
+            "category": "Respiratory Failure",
+            "message": "FEV1 25% predicted - very severe obstruction",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PE-001",
+            "category": "Pulmonary Embolism",
+            "message": "Previous PE (2024-03-10) - assess anticoagulation and recurrence risk",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-TB-001",
+            "category": "Tuberculosis",
+            "message": "Previous TB - treatment status unclear, assess infectivity",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ALLERGY-ANAPH-0",
+            "category": "Allergy",
+            "message": "ANAPHYLAXIS history: Penicillin",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-O2-001",
+            "category": "Oxygen Therapy",
+            "message": "Oxygen dependent (nasal-cannula, 4 L/min)",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OSA-001",
+            "category": "Obstructive Sleep Apnoea",
+            "message": "STOP-BANG score 6/7 - high risk of OSA",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ILD-001",
+            "category": "Interstitial Lung Disease",
+            "message": "ILD (Idiopathic pulmonary fibrosis) - monitor progression",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ASBESTOS-001",
+            "category": "Occupational Exposure",
+            "message": "Asbestos exposure: Shipyard work, 1985-1995 - mesothelioma screening",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-STEROIDS-001",
+            "category": "Medication",
+            "message": "On oral corticosteroids: Prednisolone 20mg - consider side effects",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "1 drug allergy/allergies documented",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SOMN-001",
+            "category": "Sleep",
+            "message": "Daytime somnolence reported (Epworth score: 18)",
+            "priority": "low"
+          },
+          {
+            "id": "FLAG-OCCUP-001",
+            "category": "Occupational Exposure",
+            "message": "Occupational respiratory exposure: Quarry dust, 20 years",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

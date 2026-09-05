@@ -1854,7 +1854,36 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       matched hand derivation exactly. Fleet: `bin/test-personas` forms
       341/341 PASS, personas 1139/1139 PASS, 0 FAIL; `bin/test-e2e
       --html` 6/6 passed.
-      11 forms remain without personas, all unblocked purely by probe
+      3 more done: `research-and-planning-privacy-notice`
+      (`validateForm` + split `detectAdditionalFlags`; same
+      agreed-false-counts-as-empty pattern as `code-of-conduct-notice`
+      earlier in this backlog, plus a length-based "implausibly short
+      typed name" flag independent of the bare non-empty completeness
+      rule), `respirology-assessment` (`calculateMRC` + split
+      `detectAdditionalFlags`; MAX-grade over `mrc-rules.js`; a real,
+      verified unit-mismatch bug found and left as-is per the
+      mirrored-engine convention — rule PF-004 compares
+      `fev1FvcRatio < 70`, not `< 0.7`, even though the same field
+      stores a 0-1 fraction everywhere else in this form and the
+      sibling `pulmonology-assessment` form\'s own spirometry rule
+      correctly divides by 0.7, so PF-004 fires whenever the field is
+      answered with any realistic fraction regardless of whether the
+      patient is actually obstructed — the baseline persona
+      deliberately leaves the field unanswered to get a genuine
+      zero-fired-rules case), and
+      `united-kingdom-driver-and-vehicle-licensing-agency-v1-form`
+      (`validateV1` + split `detectFlaggedIssues`; 43 rules, several
+      branch-conditional via `!branchActive(d) || <check>` so a
+      dormant branch\'s fields trivially pass; the critical persona
+      activates nearly every conditional branch at once — monocular
+      vision, non-ocular visual-field defect, bilateral glaucoma,
+      retinitis pigmentosa, laser treatment, blepharospasm, night
+      blindness, uncontrolled double vision, another condition, and
+      recent contact — landing on 21 of 43 rules missing and 9 flags
+      including 2 urgent). All nine matched hand derivation exactly.
+      Fleet: `bin/test-personas` forms 344/344 PASS, personas
+      1148/1148 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
+      8 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo
