@@ -1,0 +1,920 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateCfar",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateCfar() checks each rule's applies() before counting it - the tourniquet-time rule (MB-03) and the 'Other' precaution detail rule (RC-02) only apply when their triggering checkbox is ticked. detectFlaggedIssues() is a fully independent CABCDE safety-flag layer over the same data.",
+  "personas": [
+    {
+      "name": "Complete CABCDE assessment, syncope resolved",
+      "description": "Every CABCDE category is assessed as Normal with 'None' ticked for interventions, patient/referral/background/responder details are all filled, no precautions are flagged, and the transport plan documents discharge home. All 28 applicable rules satisfied (complete), no flags.",
+      "state": {
+        "patientIdentification": {
+          "patientName": "Nguyen, Linh",
+          "dateOfBirth": "1992-05-10",
+          "age": null,
+          "sex": "female",
+          "patientContactInformation": "07700 900111",
+          "contactPerson": {
+            "name": "Tran Nguyen",
+            "contactInformation": "07700 900222"
+          }
+        },
+        "referralTransport": {
+          "referralFacility": {
+            "name": "Riverside General Hospital",
+            "focalPoint": "Triage desk",
+            "phoneNumber": "0117 555 0100"
+          },
+          "ambulance": {
+            "name": "City Ambulance Service",
+            "focalPoint": "",
+            "phoneNumber": ""
+          },
+          "eventDateTime": "2026-08-20T14:00",
+          "departureDateTime": "2026-08-20T14:20"
+        },
+        "situation": {
+          "medical": true,
+          "trauma": false,
+          "pregnant": "no",
+          "whatHappened": "Fainted at a bus stop, regained consciousness quickly"
+        },
+        "background": {
+          "pastMedicalAndSurgicalHistory": "None",
+          "currentMedicationsOrAllergies": "None"
+        },
+        "majorBleeding": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "directPressure": false,
+            "deepWoundPacking": false,
+            "tourniquet": false,
+            "tourniquetApplicationTime": "",
+            "uterineMassage": false,
+            "none": true
+          }
+        },
+        "airway": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "neckImmobilization": false,
+            "headTiltChinLift": false,
+            "jawThrust": false,
+            "chokingCare": false,
+            "none": true
+          }
+        },
+        "breathing": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "maintainedPositionOfComfort": false,
+            "none": true
+          }
+        },
+        "circulation": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "pelvicBinder": false,
+            "controlMinorBleeding": false,
+            "fractureCare": false,
+            "oralHydration": false,
+            "leftLateralPosition": false,
+            "none": true
+          }
+        },
+        "disability": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "spinalImmobilisation": false,
+            "glucoseGiven": false,
+            "seizureCare": false,
+            "highTemperatureCare": false,
+            "lowTemperatureCare": false,
+            "none": true
+          }
+        },
+        "exposure": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "recoveryPosition": false,
+            "burnCare": false,
+            "woundCare": false,
+            "drowningCare": false,
+            "snakebiteCare": false,
+            "none": true
+          },
+          "medicationTakenNone": true,
+          "medicationTakenDetails": ""
+        },
+        "recommendations": {
+          "transportPlan": "Discharged home with advice, no transport required",
+          "problemsAnticipated": "",
+          "otherConcerns": "",
+          "precautions": {
+            "highlyInfectiousDisease": false,
+            "spinalImmobilization": false,
+            "possibleFracture": false,
+            "fallRisk": false,
+            "alteredMentalStatus": false,
+            "other": false,
+            "otherDetails": ""
+          }
+        },
+        "responderDetails": {
+          "name": "Kofi Mensah",
+          "signature": "Kofi Mensah",
+          "contactInformation": "07700 900333",
+          "cfarOrganization": "Community First Aid Volunteers"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 28,
+        "totalSatisfied": 28,
+        "sections": [
+          {
+            "section": "patientIdentification",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "referralTransport",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "situation",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "background",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "majorBleeding",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "exposure",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "recommendations",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "responderDetails",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Complete but flagged, confused diabetic patient",
+      "description": "All 28 applicable rules are satisfied (complete), but breathing and disability are both abnormal with documented findings and only monitoring interventions ticked, and possible-fracture and fall-risk precautions are both flagged. Four medium flags fire: possible fracture, fall risk, abnormal breathing findings, and abnormal disability (neurological) findings.",
+      "state": {
+        "patientIdentification": {
+          "patientName": "Sato, Kenji",
+          "dateOfBirth": "1970-01-15",
+          "age": null,
+          "sex": "male",
+          "patientContactInformation": "07700 900444",
+          "contactPerson": {
+            "name": "Yuki Sato",
+            "contactInformation": "07700 900555"
+          }
+        },
+        "referralTransport": {
+          "referralFacility": {
+            "name": "Northgate Clinic",
+            "focalPoint": "Duty nurse",
+            "phoneNumber": "0117 555 0200"
+          },
+          "ambulance": {
+            "name": "",
+            "focalPoint": "",
+            "phoneNumber": ""
+          },
+          "eventDateTime": "2026-08-21T09:00",
+          "departureDateTime": "2026-08-21T09:30"
+        },
+        "situation": {
+          "medical": true,
+          "trauma": false,
+          "pregnant": "unknown",
+          "whatHappened": "Found confused and short of breath at home"
+        },
+        "background": {
+          "pastMedicalAndSurgicalHistory": "Type 2 diabetes",
+          "currentMedicationsOrAllergies": "Metformin"
+        },
+        "majorBleeding": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "directPressure": false,
+            "deepWoundPacking": false,
+            "tourniquet": false,
+            "tourniquetApplicationTime": "",
+            "uterineMassage": false,
+            "none": true
+          }
+        },
+        "airway": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "neckImmobilization": false,
+            "headTiltChinLift": false,
+            "jawThrust": false,
+            "chokingCare": false,
+            "none": true
+          }
+        },
+        "breathing": {
+          "assessmentNormal": false,
+          "assessmentFindings": "Mild tachypnoea, RR 24",
+          "interventions": {
+            "maintainedPositionOfComfort": true,
+            "none": false
+          }
+        },
+        "circulation": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "pelvicBinder": false,
+            "controlMinorBleeding": false,
+            "fractureCare": false,
+            "oralHydration": false,
+            "leftLateralPosition": false,
+            "none": true
+          }
+        },
+        "disability": {
+          "assessmentNormal": false,
+          "assessmentFindings": "Mild confusion, GCS 14",
+          "interventions": {
+            "spinalImmobilisation": false,
+            "glucoseGiven": false,
+            "seizureCare": false,
+            "highTemperatureCare": false,
+            "lowTemperatureCare": false,
+            "none": true
+          }
+        },
+        "exposure": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "recoveryPosition": false,
+            "burnCare": false,
+            "woundCare": false,
+            "drowningCare": false,
+            "snakebiteCare": false,
+            "none": true
+          },
+          "medicationTakenNone": true,
+          "medicationTakenDetails": ""
+        },
+        "recommendations": {
+          "transportPlan": "Transport to Northgate Clinic for glucose check",
+          "problemsAnticipated": "",
+          "otherConcerns": "",
+          "precautions": {
+            "highlyInfectiousDisease": false,
+            "spinalImmobilization": false,
+            "possibleFracture": true,
+            "fallRisk": true,
+            "alteredMentalStatus": false,
+            "other": false,
+            "otherDetails": ""
+          }
+        },
+        "responderDetails": {
+          "name": "Amara Diallo",
+          "signature": "Amara Diallo",
+          "contactInformation": "07700 900666",
+          "cfarOrganization": "Community First Aid Volunteers"
+        }
+      },
+      "expected": {
+        "complete": true,
+        "totalRequired": 28,
+        "totalSatisfied": 28,
+        "sections": [
+          {
+            "section": "patientIdentification",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "referralTransport",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "situation",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "background",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "majorBleeding",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "airway",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "breathing",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "circulation",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "disability",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "exposure",
+            "required": 3,
+            "satisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "recommendations",
+            "required": 1,
+            "satisfied": 1,
+            "missing": []
+          },
+          {
+            "section": "responderDetails",
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-PC-003",
+            "category": "Precautions",
+            "message": "Possible fracture flagged — splint and minimise movement.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PC-005",
+            "category": "Precautions",
+            "message": "Fall risk flagged — ensure assisted transfers.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BR-001",
+            "category": "Breathing",
+            "message": "Abnormal breathing findings recorded — clinician review on handover.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DS-001",
+            "category": "Disability",
+            "message": "Abnormal neurological findings recorded — clinician review on handover.",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Critical, uncontrolled bleeding and airway obstruction after a fall",
+      "description": "Only the patient's name, the trauma problem type, the event time, and a narrative are recorded. Major bleeding findings (severe arterial bleeding) and airway findings (partial obstruction) are both documented with NO intervention ticked for either. Circulation and exposure are marked abnormal with no findings text and no intervention. Glucose was given for reduced GCS and drowning care was administered, but the medication-taken question is left blank, no transport plan is recorded, an 'Other' precaution is ticked with no detail, and every responder-identification field is blank. Only 10 of 29 applicable rules are satisfied (19 missing). Eight flags fire: two urgent (major bleeding with no intervention; abnormal airway with no intervention), three high (highly infectious disease, spinal immobilization, and altered mental status precautions), two medium (abnormal disability findings; drowning care administered), one low (glucose given).",
+      "state": {
+        "patientIdentification": {
+          "patientName": "Okoye, Chidi",
+          "dateOfBirth": "",
+          "age": null,
+          "sex": "",
+          "patientContactInformation": "",
+          "contactPerson": {
+            "name": "",
+            "contactInformation": ""
+          }
+        },
+        "referralTransport": {
+          "referralFacility": {
+            "name": "",
+            "focalPoint": "",
+            "phoneNumber": ""
+          },
+          "ambulance": {
+            "name": "",
+            "focalPoint": "",
+            "phoneNumber": ""
+          },
+          "eventDateTime": "2026-08-22T18:00",
+          "departureDateTime": ""
+        },
+        "situation": {
+          "medical": false,
+          "trauma": true,
+          "pregnant": "",
+          "whatHappened": "Fall from height at construction site"
+        },
+        "background": {
+          "pastMedicalAndSurgicalHistory": "",
+          "currentMedicationsOrAllergies": ""
+        },
+        "majorBleeding": {
+          "assessmentNormal": false,
+          "assessmentFindings": "Severe arterial bleeding from left thigh",
+          "interventions": {
+            "directPressure": false,
+            "deepWoundPacking": false,
+            "tourniquet": false,
+            "tourniquetApplicationTime": "",
+            "uterineMassage": false,
+            "none": false
+          }
+        },
+        "airway": {
+          "assessmentNormal": false,
+          "assessmentFindings": "Snoring respirations, partial obstruction",
+          "interventions": {
+            "neckImmobilization": false,
+            "headTiltChinLift": false,
+            "jawThrust": false,
+            "chokingCare": false,
+            "none": false
+          }
+        },
+        "breathing": {
+          "assessmentNormal": true,
+          "assessmentFindings": "",
+          "interventions": {
+            "maintainedPositionOfComfort": false,
+            "none": false
+          }
+        },
+        "circulation": {
+          "assessmentNormal": false,
+          "assessmentFindings": "",
+          "interventions": {
+            "pelvicBinder": false,
+            "controlMinorBleeding": false,
+            "fractureCare": false,
+            "oralHydration": false,
+            "leftLateralPosition": false,
+            "none": false
+          }
+        },
+        "disability": {
+          "assessmentNormal": false,
+          "assessmentFindings": "Reduced GCS, confused",
+          "interventions": {
+            "spinalImmobilisation": false,
+            "glucoseGiven": true,
+            "seizureCare": false,
+            "highTemperatureCare": false,
+            "lowTemperatureCare": false,
+            "none": false
+          }
+        },
+        "exposure": {
+          "assessmentNormal": false,
+          "assessmentFindings": "",
+          "interventions": {
+            "recoveryPosition": false,
+            "burnCare": false,
+            "woundCare": false,
+            "drowningCare": true,
+            "snakebiteCare": false,
+            "none": false
+          },
+          "medicationTakenNone": false,
+          "medicationTakenDetails": ""
+        },
+        "recommendations": {
+          "transportPlan": "",
+          "problemsAnticipated": "",
+          "otherConcerns": "",
+          "precautions": {
+            "highlyInfectiousDisease": true,
+            "spinalImmobilization": true,
+            "possibleFracture": false,
+            "fallRisk": false,
+            "alteredMentalStatus": true,
+            "other": true,
+            "otherDetails": ""
+          }
+        },
+        "responderDetails": {
+          "name": "",
+          "signature": "",
+          "contactInformation": "",
+          "cfarOrganization": ""
+        }
+      },
+      "expected": {
+        "complete": false,
+        "totalRequired": 29,
+        "totalSatisfied": 10,
+        "sections": [
+          {
+            "section": "patientIdentification",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "PI-02",
+                "section": "patientIdentification",
+                "description": "Patient sex (Male / Female / Unknown) is required."
+              }
+            ]
+          },
+          {
+            "section": "referralTransport",
+            "required": 3,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "RT-01",
+                "section": "referralTransport",
+                "description": "Referral facility name is required."
+              },
+              {
+                "id": "RT-03",
+                "section": "referralTransport",
+                "description": "Date and time of departure from scene is required."
+              }
+            ]
+          },
+          {
+            "section": "situation",
+            "required": 3,
+            "satisfied": 2,
+            "missing": [
+              {
+                "id": "ST-02",
+                "section": "situation",
+                "description": "Pregnancy status (Yes / No / Unknown) is required."
+              }
+            ]
+          },
+          {
+            "section": "background",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "BG-01",
+                "section": "background",
+                "description": "Past medical and surgical history is required (write \"None\" if there is no relevant history)."
+              },
+              {
+                "id": "BG-02",
+                "section": "background",
+                "description": "Current medications or allergies are required (write \"None\" if there are none)."
+              }
+            ]
+          },
+          {
+            "section": "majorBleeding",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "MB-02",
+                "section": "majorBleeding",
+                "description": "Major bleeding intervention: tick at least one intervention or \"None\"."
+              }
+            ]
+          },
+          {
+            "section": "airway",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "AW-02",
+                "section": "airway",
+                "description": "Airway intervention: tick at least one intervention or \"None\"."
+              }
+            ]
+          },
+          {
+            "section": "breathing",
+            "required": 2,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "BR-02",
+                "section": "breathing",
+                "description": "Breathing intervention: tick at least one intervention or \"None\"."
+              }
+            ]
+          },
+          {
+            "section": "circulation",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "CR-01",
+                "section": "circulation",
+                "description": "Circulation assessment: tick \"Normal\" or describe findings."
+              },
+              {
+                "id": "CR-02",
+                "section": "circulation",
+                "description": "Circulation intervention: tick at least one intervention or \"None\"."
+              }
+            ]
+          },
+          {
+            "section": "disability",
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "exposure",
+            "required": 3,
+            "satisfied": 1,
+            "missing": [
+              {
+                "id": "EX-01",
+                "section": "exposure",
+                "description": "Exposure assessment: tick \"Normal\" or describe findings."
+              },
+              {
+                "id": "EX-03",
+                "section": "exposure",
+                "description": "Any medication taken: tick \"None\" or describe medications taken."
+              }
+            ]
+          },
+          {
+            "section": "recommendations",
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "RC-01",
+                "section": "recommendations",
+                "description": "Next steps in the transport plan are required."
+              },
+              {
+                "id": "RC-02",
+                "section": "recommendations",
+                "description": "Details of \"Other\" precaution are required when \"Other\" is ticked."
+              }
+            ]
+          },
+          {
+            "section": "responderDetails",
+            "required": 4,
+            "satisfied": 0,
+            "missing": [
+              {
+                "id": "RD-01",
+                "section": "responderDetails",
+                "description": "CFAR responder name is required."
+              },
+              {
+                "id": "RD-02",
+                "section": "responderDetails",
+                "description": "CFAR responder signature is required."
+              },
+              {
+                "id": "RD-03",
+                "section": "responderDetails",
+                "description": "CFAR responder contact information is required."
+              },
+              {
+                "id": "RD-04",
+                "section": "responderDetails",
+                "description": "CFAR organization is required."
+              }
+            ]
+          }
+        ],
+        "missing": [
+          {
+            "id": "PI-02",
+            "section": "patientIdentification",
+            "description": "Patient sex (Male / Female / Unknown) is required."
+          },
+          {
+            "id": "RT-01",
+            "section": "referralTransport",
+            "description": "Referral facility name is required."
+          },
+          {
+            "id": "RT-03",
+            "section": "referralTransport",
+            "description": "Date and time of departure from scene is required."
+          },
+          {
+            "id": "ST-02",
+            "section": "situation",
+            "description": "Pregnancy status (Yes / No / Unknown) is required."
+          },
+          {
+            "id": "BG-01",
+            "section": "background",
+            "description": "Past medical and surgical history is required (write \"None\" if there is no relevant history)."
+          },
+          {
+            "id": "BG-02",
+            "section": "background",
+            "description": "Current medications or allergies are required (write \"None\" if there are none)."
+          },
+          {
+            "id": "MB-02",
+            "section": "majorBleeding",
+            "description": "Major bleeding intervention: tick at least one intervention or \"None\"."
+          },
+          {
+            "id": "AW-02",
+            "section": "airway",
+            "description": "Airway intervention: tick at least one intervention or \"None\"."
+          },
+          {
+            "id": "BR-02",
+            "section": "breathing",
+            "description": "Breathing intervention: tick at least one intervention or \"None\"."
+          },
+          {
+            "id": "CR-01",
+            "section": "circulation",
+            "description": "Circulation assessment: tick \"Normal\" or describe findings."
+          },
+          {
+            "id": "CR-02",
+            "section": "circulation",
+            "description": "Circulation intervention: tick at least one intervention or \"None\"."
+          },
+          {
+            "id": "EX-01",
+            "section": "exposure",
+            "description": "Exposure assessment: tick \"Normal\" or describe findings."
+          },
+          {
+            "id": "EX-03",
+            "section": "exposure",
+            "description": "Any medication taken: tick \"None\" or describe medications taken."
+          },
+          {
+            "id": "RC-01",
+            "section": "recommendations",
+            "description": "Next steps in the transport plan are required."
+          },
+          {
+            "id": "RC-02",
+            "section": "recommendations",
+            "description": "Details of \"Other\" precaution are required when \"Other\" is ticked."
+          },
+          {
+            "id": "RD-01",
+            "section": "responderDetails",
+            "description": "CFAR responder name is required."
+          },
+          {
+            "id": "RD-02",
+            "section": "responderDetails",
+            "description": "CFAR responder signature is required."
+          },
+          {
+            "id": "RD-03",
+            "section": "responderDetails",
+            "description": "CFAR responder contact information is required."
+          },
+          {
+            "id": "RD-04",
+            "section": "responderDetails",
+            "description": "CFAR organization is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-MB-001",
+            "category": "Major Bleeding",
+            "message": "Major bleeding findings recorded with no intervention applied — escalate immediately.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-AW-001",
+            "category": "Airway",
+            "message": "Abnormal airway findings recorded with no intervention applied — escalate immediately.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-PC-001",
+            "category": "Precautions",
+            "message": "Highly infectious disease precaution flagged — apply isolation procedures and warn receiving team.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PC-002",
+            "category": "Precautions",
+            "message": "Spinal immobilization required — maintain alignment throughout transport.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PC-004",
+            "category": "Precautions",
+            "message": "Altered mental status flagged — monitor airway and neurological status closely.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DS-001",
+            "category": "Disability",
+            "message": "Abnormal neurological findings recorded — clinician review on handover.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-EX-001",
+            "category": "Exposure",
+            "message": "Drowning care administered — risk of secondary drowning, monitor for respiratory deterioration.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DS-002",
+            "category": "Disability",
+            "message": "Glucose administered — record blood glucose and monitor for response.",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}
