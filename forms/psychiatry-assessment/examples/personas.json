@@ -1,0 +1,664 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGAF",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateGAF starts at 100 and SUBTRACTS the scoreImpact of every fired rule (not a max-grade composite), clamped to 1-100. Several rule pairs are independent, not else-if branches, so both can fire and stack: an AUDIT score of 20+ fires BOTH SU-001 (>=16, high-risk) and SU-002 (>=20, dependent), deducting both. detectAdditionalFlags is fully independent of the score, and its housing flag (FLAG-HOUSING-001) only covers 'homeless', not the 'temporary' housing status that the score rule SOC-001 treats identically.",
+  "personas": [
+    {
+      "name": "Superior functioning, no risk factors",
+      "description": "Routine follow-up: no presenting-complaint severity recorded, no psychiatric history, a fully normal mental status exam, no risk-assessment items positive, minimal PHQ-9/GAD-7 scores, minimal alcohol use, full medication compliance, stable housing, and full decision-making capacity on a voluntary basis. No rule fires, so gafScore stays at the 100 default with an empty audit trail and no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Priya",
+          "lastName": "Bhatt",
+          "dateOfBirth": "1990-06-18",
+          "sex": "female",
+          "emergencyContactName": "Raj Bhatt",
+          "emergencyContactPhone": "07700 900321",
+          "legalStatus": "voluntary"
+        },
+        "presentingComplaint": {
+          "chiefComplaint": "Routine follow-up, no acute concerns",
+          "onsetDate": "",
+          "duration": "",
+          "severity": "",
+          "precipitatingFactors": ""
+        },
+        "psychiatricHistory": {
+          "previousDiagnoses": "",
+          "previousHospitalizations": "no",
+          "hospitalizationDetails": "",
+          "previousSuicideAttempts": "no",
+          "suicideAttemptDetails": "",
+          "selfHarmHistory": "no",
+          "selfHarmDetails": ""
+        },
+        "mentalStatusExam": {
+          "appearance": "Well-groomed, appropriate",
+          "behaviour": "Calm, cooperative",
+          "speech": "Normal rate and rhythm",
+          "mood": "euthymic",
+          "affect": "congruent",
+          "thoughtProcess": "linear",
+          "thoughtContent": "No abnormal preoccupations",
+          "perceptualDisturbances": "no",
+          "perceptualDetails": "",
+          "cognitionIntact": "yes",
+          "cognitionDetails": "",
+          "insight": "full",
+          "judgement": "intact"
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "no",
+          "suicidalPlan": "no",
+          "suicidalIntent": "no",
+          "suicidalMeans": "no",
+          "protectiveFactors": "Supportive family, stable employment",
+          "selfHarmCurrent": "no",
+          "violenceRisk": "none",
+          "safeguardingConcerns": "no",
+          "safeguardingDetails": ""
+        },
+        "moodAndAnxiety": {
+          "phq9Score": 2,
+          "gad7Score": 2,
+          "maniaScreen": "no",
+          "maniaDetails": "",
+          "psychoticSymptoms": "no",
+          "psychoticDetails": ""
+        },
+        "substanceUse": {
+          "alcoholAuditScore": 1,
+          "alcoholFrequency": "occasional",
+          "drugUse": "no",
+          "drugDetails": "",
+          "tobaccoUse": "no",
+          "tobaccoDetails": "",
+          "gamblingProblem": "no",
+          "withdrawalRisk": "no",
+          "withdrawalDetails": ""
+        },
+        "currentMedications": {
+          "medications": [],
+          "sideEffects": "",
+          "compliance": "yes",
+          "complianceDetails": ""
+        },
+        "medicalHistory": {
+          "neurologicalConditions": "no",
+          "endocrineConditions": "no",
+          "chronicPain": "no",
+          "pregnancy": "no"
+        },
+        "socialHistory": {
+          "housing": "stable",
+          "housingDetails": "Owns own home",
+          "employment": "employed",
+          "employmentDetails": "Full-time accountant",
+          "relationships": "Married, two children",
+          "legalIssues": "no",
+          "financialDifficulties": "no",
+          "supportNetwork": "Spouse, extended family"
+        },
+        "capacityAndConsent": {
+          "decisionMakingCapacity": "has-capacity",
+          "capacityDetails": "",
+          "advanceDirectives": "no",
+          "powerOfAttorney": "no",
+          "treatmentPreferences": ""
+        }
+      },
+      "expected": {
+        "gafScore": 100,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate depression with recent medication non-compliance",
+      "description": "Mild-severity low mood for three weeks with a depressed mood on exam, but an otherwise normal mental status exam and no risk-assessment items positive. The patient stopped their sertraline two weeks ago due to nausea. Three rules fire (mild presenting complaint, depressed mood, medication non-compliance), each deducting 15 points for gafScore 55 (Moderate symptoms). One medium flag fires for the medication non-compliance.",
+      "state": {
+        "demographics": {
+          "firstName": "Callum",
+          "lastName": "Wren",
+          "dateOfBirth": "1988-11-02",
+          "sex": "male",
+          "emergencyContactName": "Sian Wren",
+          "emergencyContactPhone": "07700 900654",
+          "legalStatus": "voluntary"
+        },
+        "presentingComplaint": {
+          "chiefComplaint": "Low mood for 3 weeks",
+          "onsetDate": "2026-08-05",
+          "duration": "3 weeks",
+          "severity": "mild",
+          "precipitatingFactors": "Recent job loss"
+        },
+        "psychiatricHistory": {
+          "previousDiagnoses": "Depressive episode, 2022",
+          "previousHospitalizations": "no",
+          "hospitalizationDetails": "",
+          "previousSuicideAttempts": "no",
+          "suicideAttemptDetails": "",
+          "selfHarmHistory": "no",
+          "selfHarmDetails": ""
+        },
+        "mentalStatusExam": {
+          "appearance": "Tired-looking, adequate hygiene",
+          "behaviour": "Cooperative, slowed",
+          "speech": "Slightly slowed, normal volume",
+          "mood": "depressed",
+          "affect": "congruent",
+          "thoughtProcess": "linear",
+          "thoughtContent": "Preoccupied with job loss, no suicidal thoughts",
+          "perceptualDisturbances": "no",
+          "perceptualDetails": "",
+          "cognitionIntact": "yes",
+          "cognitionDetails": "",
+          "insight": "full",
+          "judgement": "intact"
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "no",
+          "suicidalPlan": "no",
+          "suicidalIntent": "no",
+          "suicidalMeans": "no",
+          "protectiveFactors": "Supportive partner",
+          "selfHarmCurrent": "no",
+          "violenceRisk": "none",
+          "safeguardingConcerns": "no",
+          "safeguardingDetails": ""
+        },
+        "moodAndAnxiety": {
+          "phq9Score": 8,
+          "gad7Score": 6,
+          "maniaScreen": "no",
+          "maniaDetails": "",
+          "psychoticSymptoms": "no",
+          "psychoticDetails": ""
+        },
+        "substanceUse": {
+          "alcoholAuditScore": 3,
+          "alcoholFrequency": "occasional",
+          "drugUse": "no",
+          "drugDetails": "",
+          "tobaccoUse": "no",
+          "tobaccoDetails": "",
+          "gamblingProblem": "no",
+          "withdrawalRisk": "no",
+          "withdrawalDetails": ""
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Sertraline",
+              "dose": "50mg",
+              "frequency": "once daily"
+            }
+          ],
+          "sideEffects": "Nausea",
+          "compliance": "no",
+          "complianceDetails": "Stopped sertraline 2 weeks ago due to nausea"
+        },
+        "medicalHistory": {
+          "neurologicalConditions": "no",
+          "endocrineConditions": "no",
+          "chronicPain": "no",
+          "pregnancy": "no"
+        },
+        "socialHistory": {
+          "housing": "stable",
+          "housingDetails": "Rents flat with partner",
+          "employment": "unemployed",
+          "employmentDetails": "Recently made redundant",
+          "relationships": "Stable relationship",
+          "legalIssues": "no",
+          "financialDifficulties": "no",
+          "supportNetwork": "Partner"
+        },
+        "capacityAndConsent": {
+          "decisionMakingCapacity": "has-capacity",
+          "capacityDetails": "",
+          "advanceDirectives": "no",
+          "powerOfAttorney": "no",
+          "treatmentPreferences": "Prefers to try a different antidepressant"
+        }
+      },
+      "expected": {
+        "gafScore": 55,
+        "firedRules": [
+          {
+            "id": "PC-001",
+            "domain": "Presenting Complaint",
+            "description": "Mild severity presenting complaint",
+            "scoreImpact": 15
+          },
+          {
+            "id": "MSE-001",
+            "domain": "Mental Status Exam",
+            "description": "Depressed mood",
+            "scoreImpact": 15
+          },
+          {
+            "id": "MED-001",
+            "domain": "Medications",
+            "description": "Medication non-compliance",
+            "scoreImpact": 15
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medication",
+            "message": "Medication non-compliance: Stopped sertraline 2 weeks ago due to nausea",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Involuntary admission, acute psychotic decompensation with imminent risk",
+      "description": "Severe presenting complaint with three prior hospitalisations, two previous suicide attempts, and ongoing self-harm; flat affect, thought-blocking, command auditory hallucinations, impaired cognition, no insight, poor judgement; active suicidal ideation, plan, intent, and access to means, current self-harm, imminent violence risk, and safeguarding concerns (vulnerable adult with an abusive partner); PHQ-9 25, GAD-7 18, a positive mania screen alongside psychotic symptoms; an AUDIT score of 22 (firing BOTH the >=16 high-risk rule and the >=20 dependent rule simultaneously), daily cannabis and cocaine use, and alcohol withdrawal-seizure risk; three weeks off antipsychotic medication; homeless with a pending assault charge and financial difficulties; lacks decision-making capacity; admitted involuntarily. Thirty-one rules fire, deducting far more than 99 points, so gafScore clamps to the floor of 1. Sixteen flags fire: four urgent (suicidal ideation, plan, intent, imminent violence), eight high (access to means, both psychosis flags, involuntary status, withdrawal risk, current self-harm, safeguarding, capacity, previous suicide attempts), and three medium (medication non-compliance, mania screen positive, homelessness) — note the housing flag fires for 'homeless' specifically even though the score-side rule SOC-001 treats 'homeless' and 'temporary' identically.",
+      "state": {
+        "demographics": {
+          "firstName": "Marek",
+          "lastName": "Dabrowski",
+          "dateOfBirth": "1979-04-27",
+          "sex": "male",
+          "emergencyContactName": "",
+          "emergencyContactPhone": "",
+          "legalStatus": "involuntary"
+        },
+        "presentingComplaint": {
+          "chiefComplaint": "Acute psychotic decompensation with suicidal ideation",
+          "onsetDate": "2026-08-20",
+          "duration": "1 week",
+          "severity": "severe",
+          "precipitatingFactors": "Antipsychotic discontinuation, alcohol relapse"
+        },
+        "psychiatricHistory": {
+          "previousDiagnoses": "Schizoaffective disorder",
+          "previousHospitalizations": "yes",
+          "hospitalizationDetails": "Three prior admissions, most recent 2024",
+          "previousSuicideAttempts": "yes",
+          "suicideAttemptDetails": "Overdose 2024, hanging attempt 2025",
+          "selfHarmHistory": "yes",
+          "selfHarmDetails": "Cutting, ongoing"
+        },
+        "mentalStatusExam": {
+          "appearance": "Dishevelled, malodorous",
+          "behaviour": "Guarded, responding to internal stimuli",
+          "speech": "Disorganised, tangential",
+          "mood": "depressed",
+          "affect": "flat",
+          "thoughtProcess": "thought-blocking",
+          "thoughtContent": "Paranoid delusions, persecutory themes",
+          "perceptualDisturbances": "yes",
+          "perceptualDetails": "Auditory hallucinations, command type",
+          "cognitionIntact": "no",
+          "cognitionDetails": "Impaired attention and short-term memory",
+          "insight": "none",
+          "judgement": "poor"
+        },
+        "riskAssessment": {
+          "suicidalIdeation": "yes",
+          "suicidalPlan": "yes",
+          "suicidalIntent": "yes",
+          "suicidalMeans": "yes",
+          "protectiveFactors": "",
+          "selfHarmCurrent": "yes",
+          "violenceRisk": "imminent",
+          "safeguardingConcerns": "yes",
+          "safeguardingDetails": "Vulnerable adult, lives with abusive partner"
+        },
+        "moodAndAnxiety": {
+          "phq9Score": 25,
+          "gad7Score": 18,
+          "maniaScreen": "yes",
+          "maniaDetails": "Elevated mood alternating with despair",
+          "psychoticSymptoms": "yes",
+          "psychoticDetails": "Command auditory hallucinations, paranoid delusions"
+        },
+        "substanceUse": {
+          "alcoholAuditScore": 22,
+          "alcoholFrequency": "dependent",
+          "drugUse": "yes",
+          "drugDetails": "Daily cannabis, occasional cocaine",
+          "tobaccoUse": "yes",
+          "tobaccoDetails": "20 cigarettes/day",
+          "gamblingProblem": "no",
+          "withdrawalRisk": "yes",
+          "withdrawalDetails": "Alcohol withdrawal seizure risk"
+        },
+        "currentMedications": {
+          "medications": [
+            {
+              "name": "Olanzapine",
+              "dose": "10mg",
+              "frequency": "once daily"
+            }
+          ],
+          "sideEffects": "",
+          "compliance": "no",
+          "complianceDetails": "Not taking antipsychotic for 3 weeks"
+        },
+        "medicalHistory": {
+          "neurologicalConditions": "no",
+          "endocrineConditions": "no",
+          "chronicPain": "no",
+          "pregnancy": "no"
+        },
+        "socialHistory": {
+          "housing": "homeless",
+          "housingDetails": "Sleeping rough for 2 weeks",
+          "employment": "unemployed",
+          "employmentDetails": "",
+          "relationships": "Estranged from family",
+          "legalIssues": "yes",
+          "legalDetails": "Pending assault charge",
+          "financialDifficulties": "yes",
+          "supportNetwork": "None identified"
+        },
+        "capacityAndConsent": {
+          "decisionMakingCapacity": "lacks-capacity",
+          "capacityDetails": "Lacks capacity to consent to treatment due to acute psychosis",
+          "advanceDirectives": "no",
+          "powerOfAttorney": "no",
+          "treatmentPreferences": ""
+        }
+      },
+      "expected": {
+        "gafScore": 1,
+        "firedRules": [
+          {
+            "id": "PC-003",
+            "domain": "Presenting Complaint",
+            "description": "Severe presenting complaint",
+            "scoreImpact": 50
+          },
+          {
+            "id": "PH-001",
+            "domain": "Psychiatric History",
+            "description": "Previous psychiatric hospitalizations",
+            "scoreImpact": 15
+          },
+          {
+            "id": "PH-002",
+            "domain": "Psychiatric History",
+            "description": "Previous suicide attempts",
+            "scoreImpact": 25
+          },
+          {
+            "id": "PH-003",
+            "domain": "Psychiatric History",
+            "description": "History of self-harm",
+            "scoreImpact": 15
+          },
+          {
+            "id": "MSE-001",
+            "domain": "Mental Status Exam",
+            "description": "Depressed mood",
+            "scoreImpact": 15
+          },
+          {
+            "id": "MSE-002",
+            "domain": "Mental Status Exam",
+            "description": "Flat affect",
+            "scoreImpact": 20
+          },
+          {
+            "id": "MSE-005",
+            "domain": "Mental Status Exam",
+            "description": "Disordered thought process (loosening/flight-of-ideas/thought-blocking)",
+            "scoreImpact": 25
+          },
+          {
+            "id": "MSE-006",
+            "domain": "Mental Status Exam",
+            "description": "Perceptual disturbances present",
+            "scoreImpact": 30
+          },
+          {
+            "id": "MSE-007",
+            "domain": "Mental Status Exam",
+            "description": "Cognitive impairment",
+            "scoreImpact": 15
+          },
+          {
+            "id": "MSE-008",
+            "domain": "Mental Status Exam",
+            "description": "No insight",
+            "scoreImpact": 20
+          },
+          {
+            "id": "MSE-010",
+            "domain": "Mental Status Exam",
+            "description": "Poor judgement",
+            "scoreImpact": 15
+          },
+          {
+            "id": "RA-001",
+            "domain": "Risk Assessment",
+            "description": "Active suicidal ideation",
+            "scoreImpact": 30
+          },
+          {
+            "id": "RA-002",
+            "domain": "Risk Assessment",
+            "description": "Suicidal plan present",
+            "scoreImpact": 40
+          },
+          {
+            "id": "RA-003",
+            "domain": "Risk Assessment",
+            "description": "Suicidal intent present",
+            "scoreImpact": 45
+          },
+          {
+            "id": "RA-004",
+            "domain": "Risk Assessment",
+            "description": "Access to means of self-harm",
+            "scoreImpact": 20
+          },
+          {
+            "id": "RA-005",
+            "domain": "Risk Assessment",
+            "description": "Current self-harm",
+            "scoreImpact": 25
+          },
+          {
+            "id": "RA-006",
+            "domain": "Risk Assessment",
+            "description": "High violence risk",
+            "scoreImpact": 35
+          },
+          {
+            "id": "MA-003",
+            "domain": "Mood & Anxiety",
+            "description": "PHQ-9 score 20-27 (severe depression)",
+            "scoreImpact": 35
+          },
+          {
+            "id": "MA-005",
+            "domain": "Mood & Anxiety",
+            "description": "GAD-7 score 15-21 (severe anxiety)",
+            "scoreImpact": 20
+          },
+          {
+            "id": "MA-006",
+            "domain": "Mood & Anxiety",
+            "description": "Mania screen positive",
+            "scoreImpact": 25
+          },
+          {
+            "id": "MA-007",
+            "domain": "Mood & Anxiety",
+            "description": "Psychotic symptoms present",
+            "scoreImpact": 35
+          },
+          {
+            "id": "SU-001",
+            "domain": "Substance Use",
+            "description": "High-risk alcohol use (AUDIT >= 16)",
+            "scoreImpact": 15
+          },
+          {
+            "id": "SU-002",
+            "domain": "Substance Use",
+            "description": "Dependent alcohol use (AUDIT >= 20)",
+            "scoreImpact": 25
+          },
+          {
+            "id": "SU-003",
+            "domain": "Substance Use",
+            "description": "Active drug use",
+            "scoreImpact": 15
+          },
+          {
+            "id": "SU-004",
+            "domain": "Substance Use",
+            "description": "Withdrawal risk present",
+            "scoreImpact": 20
+          },
+          {
+            "id": "MED-001",
+            "domain": "Medications",
+            "description": "Medication non-compliance",
+            "scoreImpact": 15
+          },
+          {
+            "id": "SOC-001",
+            "domain": "Social History",
+            "description": "Homeless or temporary housing",
+            "scoreImpact": 15
+          },
+          {
+            "id": "SOC-002",
+            "domain": "Social History",
+            "description": "Active legal issues",
+            "scoreImpact": 10
+          },
+          {
+            "id": "SOC-003",
+            "domain": "Social History",
+            "description": "Financial difficulties",
+            "scoreImpact": 5
+          },
+          {
+            "id": "CC-001",
+            "domain": "Capacity & Consent",
+            "description": "Lacks decision-making capacity",
+            "scoreImpact": 25
+          },
+          {
+            "id": "LS-001",
+            "domain": "Legal Status",
+            "description": "Involuntary admission",
+            "scoreImpact": 20
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SUICIDE-001",
+            "category": "Suicide Risk",
+            "message": "Active suicidal ideation reported",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SUICIDE-002",
+            "category": "Suicide Risk",
+            "message": "Suicidal plan identified - immediate safety planning required",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SUICIDE-003",
+            "category": "Suicide Risk",
+            "message": "Suicidal intent expressed - consider urgent admission",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIOLENCE-001",
+            "category": "Violence Risk",
+            "message": "Imminent violence risk - safety precautions required",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-SUICIDE-004",
+            "category": "Suicide Risk",
+            "message": "Access to means of self-harm - means restriction counselling needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PSYCHOSIS-001",
+            "category": "Psychosis",
+            "message": "Psychotic symptoms present: Command auditory hallucinations, paranoid delusions",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PSYCHOSIS-002",
+            "category": "Psychosis",
+            "message": "Perceptual disturbances: Auditory hallucinations, command type",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LEGAL-001",
+            "category": "Legal Status",
+            "message": "Patient admitted involuntarily - ensure legal requirements met",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WITHDRAWAL-001",
+            "category": "Substance Withdrawal",
+            "message": "Withdrawal risk identified: Alcohol withdrawal seizure risk - monitor vital signs",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SELFHARM-001",
+            "category": "Self-Harm",
+            "message": "Current self-harm behaviour reported",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SAFEGUARD-001",
+            "category": "Safeguarding",
+            "message": "Safeguarding concerns identified: Vulnerable adult, lives with abusive partner",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CAPACITY-001",
+            "category": "Capacity",
+            "message": "Patient lacks decision-making capacity - best interests assessment required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HISTORY-001",
+            "category": "Psychiatric History",
+            "message": "Previous suicide attempts documented: Overdose 2024, hanging attempt 2025",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MED-001",
+            "category": "Medication",
+            "message": "Medication non-compliance: Not taking antipsychotic for 3 weeks",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-MANIA-001",
+            "category": "Mania",
+            "message": "Mania screen positive: Elevated mood alternating with despair - consider bipolar disorder",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-HOUSING-001",
+            "category": "Social",
+            "message": "Patient is homeless - consider housing support and follow-up arrangements",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

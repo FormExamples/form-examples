@@ -1,0 +1,556 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGold",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateGold evaluates gold-rules.js and takes the MAX stage among fired rules (GOLD I default when none fire); the ABCD group is computed separately by determineAbcdGroup(). Several rule pairs are independent, not else-if branches, so both fire and both count toward the max when both thresholds are crossed (e.g. CAT >=10 and CAT >=20 both fire for a CAT score of 28). detectAdditionalFlags is fully independent of the stage/group. demographics.bmi is NOT auto-derived inside the grader from weight/height - the caller (form-app.js) computes it via calculateBMI() and stores it separately, so a persona state must set demographics.bmi explicitly or the BMI-gated rule/flag silently never fires even with weight and height both present.",
+  "personas": [
+    {
+      "name": "GOLD I, Group A - mild, low symptom burden",
+      "description": "FEV1 85% predicted with an obstructive ratio (0.65) gives GOLD I. CAT score 5 and mMRC grade 1 with no exacerbations in the past year keep symptom burden low and exacerbation history absent, so the ABCD group is A. No other rule or flag condition is met (ex-smoker, 10 pack-years, normal BMI, normal oximetry, no comorbidities). One fired rule (GOLD-001), no flags.",
+      "state": {
+        "demographics": {
+          "firstName": "Denise",
+          "lastName": "Carrow",
+          "dateOfBirth": "1962-08-14",
+          "sex": "female",
+          "weight": 68,
+          "height": 170,
+          "bmi": 23.5
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Occasional breathlessness on exertion",
+          "symptomDuration": "6 months",
+          "dyspnoeaGradeMRC": "1"
+        },
+        "spirometry": {
+          "fev1": 2.4,
+          "fvc": 3.6,
+          "fev1FvcRatio": 0.65,
+          "fev1PercentPredicted": 85,
+          "bronchodilatorResponse": "no"
+        },
+        "symptomAssessment": {
+          "catScore": 5,
+          "mmrcDyspnoea": "1",
+          "coughFrequency": "occasional",
+          "sputumProduction": "none"
+        },
+        "exacerbationHistory": {
+          "exacerbationsPerYear": 0,
+          "hospitalizationsPerYear": 0,
+          "icuAdmissions": 0,
+          "intubationHistory": "no"
+        },
+        "currentMedications": {
+          "saba": "yes",
+          "laba": "no",
+          "lama": "no",
+          "ics": "no",
+          "oralCorticosteroids": "no",
+          "oxygenTherapy": "no",
+          "oxygenLitresPerMinute": null,
+          "nebulizers": "no",
+          "otherMedications": []
+        },
+        "allergies": [],
+        "comorbidities": {
+          "cardiovascularDisease": "no",
+          "cardiovascularDetails": "",
+          "diabetes": "no",
+          "osteoporosis": "no",
+          "depression": "no",
+          "lungCancer": "no",
+          "lungCancerDetails": "",
+          "otherComorbidities": ""
+        },
+        "smokingExposures": {
+          "smokingStatus": "ex",
+          "packYears": 10,
+          "occupationalExposures": "no",
+          "occupationalDetails": "",
+          "biomassFuelExposure": "no"
+        },
+        "functionalStatus": {
+          "exerciseTolerance": "vigorous-exercise",
+          "sixMinuteWalkDistance": 500,
+          "oxygenSaturationRest": 97,
+          "oxygenSaturationExertion": 95,
+          "adlLimitations": "no",
+          "adlDetails": ""
+        }
+      },
+      "expected": {
+        "goldStage": 1,
+        "abcdGroup": "A",
+        "firedRules": [
+          {
+            "id": "GOLD-001",
+            "system": "Spirometry",
+            "description": "GOLD I - FEV1 >= 80% predicted (Mild)",
+            "stage": 1
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "GOLD II, Group B - moderate with cardiovascular comorbidity",
+      "description": "FEV1 65% predicted with an obstructive ratio gives GOLD II; a CAT score of 15 (high symptom burden, but only one exacerbation last year and no hospitalisation) keeps exacerbation history low, so the ABCD group is B rather than E. Ischaemic heart disease is documented, and a 20-year foundry exposure is recorded. Three rules fire (GOLD-002, high symptom burden, cardiovascular comorbidity), all tied at stage 2. Two medium flags fire: occupational exposure and cardiovascular disease.",
+      "state": {
+        "demographics": {
+          "firstName": "Walter",
+          "lastName": "Pryce",
+          "dateOfBirth": "1958-02-27",
+          "sex": "male",
+          "weight": 75,
+          "height": 172,
+          "bmi": 25.4
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Breathlessness and daily cough",
+          "symptomDuration": "3 years",
+          "dyspnoeaGradeMRC": "2"
+        },
+        "spirometry": {
+          "fev1": 1.8,
+          "fvc": 3,
+          "fev1FvcRatio": 0.6,
+          "fev1PercentPredicted": 65,
+          "bronchodilatorResponse": "no"
+        },
+        "symptomAssessment": {
+          "catScore": 15,
+          "mmrcDyspnoea": "2",
+          "coughFrequency": "daily",
+          "sputumProduction": "daily"
+        },
+        "exacerbationHistory": {
+          "exacerbationsPerYear": 1,
+          "hospitalizationsPerYear": 0,
+          "icuAdmissions": 0,
+          "intubationHistory": "no"
+        },
+        "currentMedications": {
+          "saba": "yes",
+          "laba": "yes",
+          "lama": "yes",
+          "ics": "no",
+          "oralCorticosteroids": "no",
+          "oxygenTherapy": "no",
+          "oxygenLitresPerMinute": null,
+          "nebulizers": "no",
+          "otherMedications": []
+        },
+        "allergies": [],
+        "comorbidities": {
+          "cardiovascularDisease": "yes",
+          "cardiovascularDetails": "Hypertension, ischaemic heart disease",
+          "diabetes": "no",
+          "osteoporosis": "no",
+          "depression": "no",
+          "lungCancer": "no",
+          "lungCancerDetails": "",
+          "otherComorbidities": ""
+        },
+        "smokingExposures": {
+          "smokingStatus": "ex",
+          "packYears": 25,
+          "occupationalExposures": "yes",
+          "occupationalDetails": "20 years in a foundry",
+          "biomassFuelExposure": "no"
+        },
+        "functionalStatus": {
+          "exerciseTolerance": "moderate-exercise",
+          "sixMinuteWalkDistance": 400,
+          "oxygenSaturationRest": 94,
+          "oxygenSaturationExertion": 90,
+          "adlLimitations": "no",
+          "adlDetails": ""
+        }
+      },
+      "expected": {
+        "goldStage": 2,
+        "abcdGroup": "B",
+        "firedRules": [
+          {
+            "id": "GOLD-002",
+            "system": "Spirometry",
+            "description": "GOLD II - 50% <= FEV1 < 80% predicted (Moderate)",
+            "stage": 2
+          },
+          {
+            "id": "SYM-001",
+            "system": "Symptoms",
+            "description": "High symptom burden (CAT >= 10)",
+            "stage": 2
+          },
+          {
+            "id": "CM-001",
+            "system": "Comorbidities",
+            "description": "Cardiovascular comorbidity",
+            "stage": 2
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-OCCUP-001",
+            "category": "Exposures",
+            "message": "Occupational exposure: 20 years in a foundry",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CVD-001",
+            "category": "Comorbidities",
+            "message": "Cardiovascular disease: Hypertension, ischaemic heart disease",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GOLD IV, Group E - very severe with lung cancer and anaphylaxis history",
+      "description": "FEV1 22% predicted with an obstructive ratio gives GOLD IV directly; CAT 28 fires BOTH the >=10 and >=20 symptom-burden rules simultaneously (they are independent conditions, not mutually exclusive tiers), and mMRC grade 4, copious sputum, 4 exacerbations with 2 hospitalisations and an ICU admission requiring intubation, long-term home oxygen, oral corticosteroids, a current 55-pack-year smoking history with ongoing coal-mining and biomass exposure, cardiovascular disease, diabetes, depression, Stage IIIA lung cancer, osteoporosis, a positive bronchodilator response, cachexia (BMI 15.6), a documented penicillin anaphylaxis, resting and exertional desaturation, and ADL dependence for bathing and dressing all independently reach GOLD IV or below. Twenty-two rules fire; the highest tie at stage 4 (spirometry, ICU admission, intubation, long-term oxygen, lung cancer, resting desaturation). Exacerbation history alone (4/year, 2 hospitalisations) puts the ABCD group at E. Twenty flags fire: ten high, nine medium, one low.",
+      "state": {
+        "demographics": {
+          "firstName": "Sylvia",
+          "lastName": "Okafor",
+          "dateOfBirth": "1951-10-05",
+          "sex": "female",
+          "weight": 45,
+          "height": 170,
+          "bmi": 15.6
+        },
+        "chiefComplaint": {
+          "primarySymptom": "Severe breathlessness at rest, productive cough",
+          "symptomDuration": "8 years, worsening",
+          "dyspnoeaGradeMRC": "4"
+        },
+        "spirometry": {
+          "fev1": 0.5,
+          "fvc": 0.9,
+          "fev1FvcRatio": 0.55,
+          "fev1PercentPredicted": 22,
+          "bronchodilatorResponse": "yes"
+        },
+        "symptomAssessment": {
+          "catScore": 28,
+          "mmrcDyspnoea": "4",
+          "coughFrequency": "persistent",
+          "sputumProduction": "copious"
+        },
+        "exacerbationHistory": {
+          "exacerbationsPerYear": 4,
+          "hospitalizationsPerYear": 2,
+          "icuAdmissions": 1,
+          "intubationHistory": "yes"
+        },
+        "currentMedications": {
+          "saba": "yes",
+          "laba": "yes",
+          "lama": "yes",
+          "ics": "yes",
+          "oralCorticosteroids": "yes",
+          "oxygenTherapy": "yes",
+          "oxygenLitresPerMinute": 2,
+          "nebulizers": "yes",
+          "otherMedications": []
+        },
+        "allergies": [
+          {
+            "allergen": "Penicillin",
+            "reaction": "Anaphylaxis",
+            "severity": "anaphylaxis"
+          }
+        ],
+        "comorbidities": {
+          "cardiovascularDisease": "yes",
+          "cardiovascularDetails": "Heart failure",
+          "diabetes": "yes",
+          "osteoporosis": "yes",
+          "depression": "yes",
+          "lungCancer": "yes",
+          "lungCancerDetails": "Stage IIIA NSCLC, undergoing treatment",
+          "otherComorbidities": ""
+        },
+        "smokingExposures": {
+          "smokingStatus": "current",
+          "packYears": 55,
+          "occupationalExposures": "yes",
+          "occupationalDetails": "Coal mining, 15 years",
+          "biomassFuelExposure": "yes"
+        },
+        "functionalStatus": {
+          "exerciseTolerance": "unable",
+          "sixMinuteWalkDistance": 150,
+          "oxygenSaturationRest": 88,
+          "oxygenSaturationExertion": 80,
+          "adlLimitations": "yes",
+          "adlDetails": "Requires assistance with bathing and dressing"
+        }
+      },
+      "expected": {
+        "goldStage": 4,
+        "abcdGroup": "E",
+        "firedRules": [
+          {
+            "id": "GOLD-004",
+            "system": "Spirometry",
+            "description": "GOLD IV - FEV1 < 30% predicted (Very Severe)",
+            "stage": 4
+          },
+          {
+            "id": "SYM-001",
+            "system": "Symptoms",
+            "description": "High symptom burden (CAT >= 10)",
+            "stage": 2
+          },
+          {
+            "id": "SYM-002",
+            "system": "Symptoms",
+            "description": "Very high symptom burden (CAT >= 20)",
+            "stage": 3
+          },
+          {
+            "id": "SYM-003",
+            "system": "Symptoms",
+            "description": "Severe dyspnoea (mMRC >= 3)",
+            "stage": 3
+          },
+          {
+            "id": "SYM-004",
+            "system": "Symptoms",
+            "description": "Copious sputum production",
+            "stage": 2
+          },
+          {
+            "id": "EX-001",
+            "system": "Exacerbations",
+            "description": "Frequent exacerbations (>= 2 per year)",
+            "stage": 3
+          },
+          {
+            "id": "EX-002",
+            "system": "Exacerbations",
+            "description": "Hospitalisation for exacerbation",
+            "stage": 3
+          },
+          {
+            "id": "EX-003",
+            "system": "Exacerbations",
+            "description": "ICU admission for exacerbation",
+            "stage": 4
+          },
+          {
+            "id": "EX-004",
+            "system": "Exacerbations",
+            "description": "History of intubation",
+            "stage": 4
+          },
+          {
+            "id": "OX-001",
+            "system": "Medications",
+            "description": "On long-term oxygen therapy",
+            "stage": 4
+          },
+          {
+            "id": "OX-002",
+            "system": "Medications",
+            "description": "On oral corticosteroids",
+            "stage": 3
+          },
+          {
+            "id": "SM-001",
+            "system": "Smoking",
+            "description": "Current smoker",
+            "stage": 2
+          },
+          {
+            "id": "SM-002",
+            "system": "Smoking",
+            "description": "Heavy smoking history (>= 40 pack-years)",
+            "stage": 3
+          },
+          {
+            "id": "FS-001",
+            "system": "Functional Status",
+            "description": "Poor exercise tolerance (unable or light housework only)",
+            "stage": 3
+          },
+          {
+            "id": "FS-002",
+            "system": "Functional Status",
+            "description": "Low 6MWT distance (< 250m)",
+            "stage": 3
+          },
+          {
+            "id": "FS-003",
+            "system": "Functional Status",
+            "description": "Resting oxygen desaturation (SpO2 < 92%)",
+            "stage": 4
+          },
+          {
+            "id": "FS-004",
+            "system": "Functional Status",
+            "description": "Exercise-induced desaturation (SpO2 < 88%)",
+            "stage": 3
+          },
+          {
+            "id": "CM-001",
+            "system": "Comorbidities",
+            "description": "Cardiovascular comorbidity",
+            "stage": 2
+          },
+          {
+            "id": "CM-002",
+            "system": "Comorbidities",
+            "description": "Lung cancer",
+            "stage": 4
+          },
+          {
+            "id": "CM-003",
+            "system": "Comorbidities",
+            "description": "Diabetes",
+            "stage": 2
+          },
+          {
+            "id": "CM-004",
+            "system": "Comorbidities",
+            "description": "Depression",
+            "stage": 2
+          },
+          {
+            "id": "BMI-001",
+            "system": "Demographics",
+            "description": "BMI < 21 (underweight/cachexia)",
+            "stage": 3
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-SPIRO-001",
+            "category": "Spirometry",
+            "message": "Very severe airflow limitation: FEV1 22% predicted",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-O2-001",
+            "category": "Oxygenation",
+            "message": "Resting SpO2 88% - consider supplemental oxygen assessment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-O2-002",
+            "category": "Oxygenation",
+            "message": "Exertional SpO2 80% - ambulatory oxygen assessment needed",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INTUB-001",
+            "category": "Exacerbations",
+            "message": "History of intubation for respiratory failure",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ICU-001",
+            "category": "Exacerbations",
+            "message": "1 ICU admission(s) for exacerbation",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-EXAC-001",
+            "category": "Exacerbations",
+            "message": "4 exacerbations per year - frequent exacerbator phenotype",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SMOKE-001",
+            "category": "Smoking",
+            "message": "Active smoker - smoking cessation intervention essential",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CANCER-001",
+            "category": "Comorbidities",
+            "message": "Lung cancer: Stage IIIA NSCLC, undergoing treatment",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LTOT-001",
+            "category": "Medications",
+            "message": "On long-term oxygen therapy (2 L/min)",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ALLERGY-ANAPH-0",
+            "category": "Allergy",
+            "message": "ANAPHYLAXIS history: Penicillin",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-OCCUP-001",
+            "category": "Exposures",
+            "message": "Occupational exposure: Coal mining, 15 years",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BIOMASS-001",
+            "category": "Exposures",
+            "message": "Biomass fuel exposure history",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CVD-001",
+            "category": "Comorbidities",
+            "message": "Cardiovascular disease: Heart failure",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OCS-001",
+            "category": "Medications",
+            "message": "On oral corticosteroids - monitor for steroid side effects",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "1 allergy/allergies documented",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BMI-001",
+            "category": "Nutrition",
+            "message": "Low BMI (15.6) - assess for cachexia and nutritional support",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-DEPR-001",
+            "category": "Comorbidities",
+            "message": "Depression - assess impact on adherence and quality of life",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BDR-001",
+            "category": "Spirometry",
+            "message": "Positive bronchodilator response - consider asthma-COPD overlap",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ADL-001",
+            "category": "Functional Status",
+            "message": "ADL limitations: Requires assistance with bathing and dressing",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-OSTEO-001",
+            "category": "Comorbidities",
+            "message": "Osteoporosis - review steroid use and fall risk",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

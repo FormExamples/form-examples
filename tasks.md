@@ -1826,7 +1826,35 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       derivation exactly. Fleet: `bin/test-personas` forms 338/338
       PASS, personas 1130/1130 PASS, 0 FAIL; `bin/test-e2e --html` 6/6
       passed.
-      14 forms remain without personas, all unblocked purely by probe
+      3 more done: `provider-transfer-request` (`validateTransfer` +
+      split `detectFlaggedIssues`; SBAR-aligned completeness with
+      conditional `applies()` rules — the receiving-provider
+      acknowledgement fields only apply once ANY acknowledgement field
+      has been touched, so a request with zero acknowledgement activity
+      never even reaches "incomplete" on those particular fields; the
+      critical persona\'s emergent, unresponsive, unstable patient with
+      reversed vitals across every axis fires all six urgent-tier flags
+      the engine defines), `psychiatry-assessment` (`calculateGAF` +
+      split `detectAdditionalFlags`; GAF SUBTRACTS each fired rule\'s
+      impact from a 100 default rather than taking a max, and two rule
+      pairs are independent, not tiered, so an AUDIT score of 20+ fires
+      BOTH the >=16 and >=20 alcohol rules and deducts both; the flag
+      layer\'s housing flag covers only \'homeless\', not the
+      \'temporary\' status its score-side sibling rule treats
+      identically — a real, verified score/flag divergence), and
+      `pulmonology-assessment` (`calculateGold` + split
+      `detectAdditionalFlags`; MAX-stage over `gold-rules.js`; a CAT
+      score of 28 fires both the >=10 and >=20 symptom-burden rules at
+      once for the same reason; `demographics.bmi` is NOT auto-derived
+      from weight/height inside the grader — the caller pre-computes it
+      via `calculateBMI()`, so a persona missing that field silently
+      never triggers the BMI-gated rule/flag even with weight and
+      height both present, caught here before `--update` by comparing
+      the tool\'s actual output against the hand derivation). All nine
+      matched hand derivation exactly. Fleet: `bin/test-personas` forms
+      341/341 PASS, personas 1139/1139 PASS, 0 FAIL; `bin/test-e2e
+      --html` 6/6 passed.
+      11 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo

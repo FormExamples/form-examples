@@ -1,0 +1,994 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateTransfer",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateTransfer() checks SBAR-aligned mandatory and optional rules; a rule's applies() can be conditional (escort/infectious-precaution detail fields only apply when their checkbox is ticked; the receiving-provider acknowledgement fields only apply once ANY acknowledgement field has been touched). completeness is 'incomplete' if any applicable mandatory rule fails, otherwise 'partial' if any applicable optional rule fails, otherwise 'complete'. detectFlaggedIssues() is a fully independent safety-flag layer over the same data.",
+  "personas": [
+    {
+      "name": "Complete handover, routine cardiology transfer",
+      "description": "All mandatory and optional SBAR fields are filled, vital signs are all within normal range, the patient is stable and awake, urgency is routine, no escort/oxygen/cardiac-monitoring/infectious-precaution/falls/capacity flags are ticked, and the receiving-provider acknowledgement is fully completed and ticked. completenessLevel is Complete (35/35 mandatory, 46/46 total) with no flags.",
+      "state": {
+        "requestingProvider": {
+          "clinicianName": "Dr. Adaeze Okonjo",
+          "clinicianRole": "ST5 Registrar",
+          "organisation": "Riverside General Hospital",
+          "ward": "AMU",
+          "phone": "0117 555 0110",
+          "email": "adaeze.okonjo@example-nhs.org",
+          "registrationBody": "GMC",
+          "registrationNumber": "7712345"
+        },
+        "receivingProvider": {
+          "clinicianName": "Dr. Marcus Lindqvist",
+          "clinicianRole": "Consultant Cardiologist",
+          "organisation": "St. Aldric Cardiac Centre",
+          "ward": "Cardiology Ward 3",
+          "phone": "0117 555 0220",
+          "email": "marcus.lindqvist@example-nhs.org",
+          "registrationBody": "GMC",
+          "registrationNumber": "6601234"
+        },
+        "patientDemographics": {
+          "firstName": "Rosa",
+          "lastName": "Fernandez",
+          "dateOfBirth": "1968-03-11",
+          "sex": "female",
+          "nhsNumber": "123 456 7890",
+          "hospitalNumber": "H-88213",
+          "addressLine": "14 Elm Grove",
+          "postcode": "BS3 4RT",
+          "nextOfKinName": "Luis Fernandez",
+          "nextOfKinPhone": "07700 900555"
+        },
+        "situation": {
+          "reasonForTransfer": "Requires specialist cardiac catheterisation",
+          "primaryDiagnosis": "NSTEMI",
+          "urgency": "routine",
+          "transferType": "inter-hospital",
+          "requestedDateTime": "2026-08-26T09:00"
+        },
+        "background": {
+          "presentingComplaint": "Central chest pain, radiating to left arm",
+          "relevantHistory": "Troponin rise on serial testing",
+          "pastMedicalHistory": "Hypertension, type 2 diabetes",
+          "currentMedications": "Aspirin 75mg, Atorvastatin 80mg",
+          "allergies": "NKDA",
+          "recentInvestigations": "ECG showing ST depression, troponin 450",
+          "infectionStatus": "No known infection risk"
+        },
+        "assessment": {
+          "currentClinicalStatus": "Haemodynamically stable, pain-free at rest",
+          "consciousLevel": "awake",
+          "vitalSigns": {
+            "heartRate": 78,
+            "respiratoryRate": 16,
+            "systolicBloodPressure": 128,
+            "diastolicBloodPressure": 76,
+            "temperatureCelsius": 36.8,
+            "oxygenSaturation": 97,
+            "newsScore": 1
+          },
+          "clinicallyStable": "yes",
+          "stabilityNotes": ""
+        },
+        "recommendation": {
+          "requestedAction": "Accept for urgent cardiac catheterisation",
+          "expectedOutcomes": "Coronary angiography within 24 hours",
+          "ongoingCarePlan": "Continue dual antiplatelet therapy, cardiac monitoring",
+          "pendingResults": "Repeat troponin at 6 hours"
+        },
+        "transferLogistics": {
+          "transportMode": "ambulance",
+          "departureDateTime": "2026-08-26T10:00",
+          "estimatedArrivalDateTime": "2026-08-26T10:45",
+          "escortRequired": false,
+          "escortDetails": "",
+          "oxygenRequired": false,
+          "cardiacMonitoringRequired": false,
+          "infectiousPrecautions": false,
+          "infectiousPrecautionsDetails": "",
+          "fallsRisk": false,
+          "mentalCapacityConcerns": false,
+          "equipmentRequired": ""
+        },
+        "signoffAcknowledgement": {
+          "requestingProviderSignature": "Dr. Adaeze Okonjo",
+          "requestingProviderSignatureDate": "2026-08-26",
+          "receivingProviderName": "Dr. Marcus Lindqvist",
+          "receivingProviderSignature": "Dr. Marcus Lindqvist",
+          "receivingProviderSignatureDate": "2026-08-26",
+          "acknowledgementReceived": true,
+          "acknowledgementNotes": "Bed confirmed on Cardiology Ward 3"
+        }
+      },
+      "expected": {
+        "completeness": "complete",
+        "totalRequired": 46,
+        "totalSatisfied": 46,
+        "mandatoryRequired": 35,
+        "mandatorySatisfied": 35,
+        "sections": [
+          {
+            "section": "requestingProvider",
+            "required": 6,
+            "satisfied": 6,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "receivingProvider",
+            "required": 5,
+            "satisfied": 5,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "patientDemographics",
+            "required": 6,
+            "satisfied": 6,
+            "mandatoryRequired": 5,
+            "mandatorySatisfied": 5,
+            "missing": []
+          },
+          {
+            "section": "situation",
+            "required": 5,
+            "satisfied": 5,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 4,
+            "missing": []
+          },
+          {
+            "section": "background",
+            "required": 7,
+            "satisfied": 7,
+            "mandatoryRequired": 5,
+            "mandatorySatisfied": 5,
+            "missing": []
+          },
+          {
+            "section": "assessment",
+            "required": 4,
+            "satisfied": 4,
+            "mandatoryRequired": 3,
+            "mandatorySatisfied": 3,
+            "missing": []
+          },
+          {
+            "section": "recommendation",
+            "required": 4,
+            "satisfied": 4,
+            "mandatoryRequired": 2,
+            "mandatorySatisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "transferLogistics",
+            "required": 3,
+            "satisfied": 3,
+            "mandatoryRequired": 2,
+            "mandatorySatisfied": 2,
+            "missing": []
+          },
+          {
+            "section": "signoffAcknowledgement",
+            "required": 6,
+            "satisfied": 6,
+            "mandatoryRequired": 6,
+            "mandatorySatisfied": 6,
+            "missing": []
+          }
+        ],
+        "missing": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Partial handover, urgent orthopaedic transfer with an escort",
+      "description": "All mandatory fields are satisfied (open tibial fracture transfer, urgent), but several optional fields are missing (ward, email, hospital number, next-of-kin, requested date/time, past medical history, recent investigations, vital signs, expected outcomes, pending results, estimated arrival) - completenessLevel is Partial (36/36 mandatory, 36/47 total). An escort is required with details recorded, satisfying the conditional LOG-04 rule. Two flags fire: urgent transfer urgency (high) and the clinical-escort requirement (medium); no vital-sign flags fire since none were recorded.",
+      "state": {
+        "requestingProvider": {
+          "clinicianName": "Dr. Femi Adeyemi",
+          "clinicianRole": "FY2",
+          "organisation": "Riverside General Hospital",
+          "ward": "",
+          "phone": "0117 555 0130",
+          "email": "",
+          "registrationBody": "GMC",
+          "registrationNumber": "7801111"
+        },
+        "receivingProvider": {
+          "clinicianName": "Dr. Priya Sharma",
+          "clinicianRole": "Consultant Orthopaedic Surgeon",
+          "organisation": "Northgate Trauma Unit",
+          "ward": "",
+          "phone": "0117 555 0240",
+          "email": "priya.sharma@example-nhs.org",
+          "registrationBody": "GMC",
+          "registrationNumber": "6602222"
+        },
+        "patientDemographics": {
+          "firstName": "Baxter",
+          "lastName": "Nguyen",
+          "dateOfBirth": "1985-07-22",
+          "sex": "male",
+          "nhsNumber": "987 654 3210",
+          "hospitalNumber": "",
+          "addressLine": "8 Marsh Lane",
+          "postcode": "BS5 2CD",
+          "nextOfKinName": "",
+          "nextOfKinPhone": ""
+        },
+        "situation": {
+          "reasonForTransfer": "Open tibial fracture requiring specialist fixation",
+          "primaryDiagnosis": "Open tibial shaft fracture",
+          "urgency": "urgent",
+          "transferType": "inter-hospital",
+          "requestedDateTime": ""
+        },
+        "background": {
+          "presentingComplaint": "Road traffic collision, isolated leg injury",
+          "relevantHistory": "Wound debrided in ED, IV antibiotics given",
+          "pastMedicalHistory": "",
+          "currentMedications": "IV co-amoxiclav",
+          "allergies": "NKDA",
+          "recentInvestigations": "",
+          "infectionStatus": "Open wound, IV antibiotics commenced"
+        },
+        "assessment": {
+          "currentClinicalStatus": "Stable, pain controlled",
+          "consciousLevel": "awake",
+          "vitalSigns": {
+            "heartRate": null,
+            "respiratoryRate": null,
+            "systolicBloodPressure": null,
+            "diastolicBloodPressure": null,
+            "temperatureCelsius": null,
+            "oxygenSaturation": null,
+            "newsScore": null
+          },
+          "clinicallyStable": "yes",
+          "stabilityNotes": ""
+        },
+        "recommendation": {
+          "requestedAction": "Accept for orthopaedic fixation",
+          "expectedOutcomes": "",
+          "ongoingCarePlan": "Continue IV antibiotics, elevate limb",
+          "pendingResults": ""
+        },
+        "transferLogistics": {
+          "transportMode": "ambulance",
+          "departureDateTime": "2026-08-26T14:00",
+          "estimatedArrivalDateTime": "",
+          "escortRequired": true,
+          "escortDetails": "FY2 to accompany",
+          "oxygenRequired": false,
+          "cardiacMonitoringRequired": false,
+          "infectiousPrecautions": false,
+          "infectiousPrecautionsDetails": "",
+          "fallsRisk": false,
+          "mentalCapacityConcerns": false,
+          "equipmentRequired": ""
+        },
+        "signoffAcknowledgement": {
+          "requestingProviderSignature": "Dr. Femi Adeyemi",
+          "requestingProviderSignatureDate": "2026-08-26",
+          "receivingProviderName": "Dr. Priya Sharma",
+          "receivingProviderSignature": "Dr. Priya Sharma",
+          "receivingProviderSignatureDate": "2026-08-26",
+          "acknowledgementReceived": true,
+          "acknowledgementNotes": ""
+        }
+      },
+      "expected": {
+        "completeness": "partial",
+        "totalRequired": 47,
+        "totalSatisfied": 36,
+        "mandatoryRequired": 36,
+        "mandatorySatisfied": 36,
+        "sections": [
+          {
+            "section": "requestingProvider",
+            "required": 6,
+            "satisfied": 4,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 4,
+            "missing": [
+              {
+                "id": "REQ-05",
+                "section": "requestingProvider",
+                "description": "Requesting clinician ward/unit (recommended).",
+                "mandatory": false
+              },
+              {
+                "id": "REQ-06",
+                "section": "requestingProvider",
+                "description": "Requesting clinician email (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "receivingProvider",
+            "required": 5,
+            "satisfied": 4,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 4,
+            "missing": [
+              {
+                "id": "RCV-05",
+                "section": "receivingProvider",
+                "description": "Receiving clinician ward/unit (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "patientDemographics",
+            "required": 6,
+            "satisfied": 5,
+            "mandatoryRequired": 5,
+            "mandatorySatisfied": 5,
+            "missing": [
+              {
+                "id": "PAT-06",
+                "section": "patientDemographics",
+                "description": "Next of kin contact (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "situation",
+            "required": 5,
+            "satisfied": 4,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 4,
+            "missing": [
+              {
+                "id": "SIT-05",
+                "section": "situation",
+                "description": "Requested transfer date/time (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "background",
+            "required": 7,
+            "satisfied": 5,
+            "mandatoryRequired": 5,
+            "mandatorySatisfied": 5,
+            "missing": [
+              {
+                "id": "BG-03",
+                "section": "background",
+                "description": "Past medical history (recommended).",
+                "mandatory": false
+              },
+              {
+                "id": "BG-06",
+                "section": "background",
+                "description": "Recent investigations / results (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "assessment",
+            "required": 4,
+            "satisfied": 3,
+            "mandatoryRequired": 3,
+            "mandatorySatisfied": 3,
+            "missing": [
+              {
+                "id": "ASS-05",
+                "section": "assessment",
+                "description": "Latest set of vital signs (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "recommendation",
+            "required": 4,
+            "satisfied": 2,
+            "mandatoryRequired": 2,
+            "mandatorySatisfied": 2,
+            "missing": [
+              {
+                "id": "REC-02",
+                "section": "recommendation",
+                "description": "Expected outcomes / goals of transfer (recommended).",
+                "mandatory": false
+              },
+              {
+                "id": "REC-04",
+                "section": "recommendation",
+                "description": "Pending results / follow-up (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "transferLogistics",
+            "required": 4,
+            "satisfied": 3,
+            "mandatoryRequired": 3,
+            "mandatorySatisfied": 3,
+            "missing": [
+              {
+                "id": "LOG-03",
+                "section": "transferLogistics",
+                "description": "Estimated arrival date/time (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "signoffAcknowledgement",
+            "required": 6,
+            "satisfied": 6,
+            "mandatoryRequired": 6,
+            "mandatorySatisfied": 6,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "REQ-05",
+            "section": "requestingProvider",
+            "description": "Requesting clinician ward/unit (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "REQ-06",
+            "section": "requestingProvider",
+            "description": "Requesting clinician email (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "RCV-05",
+            "section": "receivingProvider",
+            "description": "Receiving clinician ward/unit (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "PAT-06",
+            "section": "patientDemographics",
+            "description": "Next of kin contact (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "SIT-05",
+            "section": "situation",
+            "description": "Requested transfer date/time (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "BG-03",
+            "section": "background",
+            "description": "Past medical history (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "BG-06",
+            "section": "background",
+            "description": "Recent investigations / results (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "ASS-05",
+            "section": "assessment",
+            "description": "Latest set of vital signs (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "REC-02",
+            "section": "recommendation",
+            "description": "Expected outcomes / goals of transfer (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "REC-04",
+            "section": "recommendation",
+            "description": "Pending results / follow-up (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "LOG-03",
+            "section": "transferLogistics",
+            "description": "Estimated arrival date/time (recommended).",
+            "mandatory": false
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-URG-URGENT",
+            "category": "Urgency",
+            "message": "Urgent transfer - receiving team should be expecting the patient promptly.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LOG-ESCORT",
+            "category": "Transport requirement",
+            "message": "Clinical escort required: FY2 to accompany.",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete handover, emergent deteriorating patient with no acknowledgement",
+      "description": "Emergent transfer for a rapidly deteriorating, unresponsive, unstable patient on anticoagulation with a suspected intracranial haemorrhage: multiple mandatory fields are missing (requesting-provider phone, receiving-provider role, patient NHS/hospital number, transfer type, infection status, stability notes despite clinicallyStable being 'no', ongoing care plan, transport mode, departure time), the receiving provider has not started any acknowledgement field at all (so the two-party acknowledgement rules never apply, and completeness never reaches even 'checking' them), and vital signs are critically abnormal across the board. completenessLevel is Incomplete (23/34 mandatory, 30/45 total). Sixteen flags fire: six urgent (emergent urgency, not clinically stable, unresponsive, critically low oxygen saturation, abnormal respiratory rate, high NEWS2), six high (hypotension, tachycardia, hyperpyrexia, infectious precautions, cardiac monitoring required, Mental Capacity Act concerns), three medium (oxygen required, escort required, falls risk), one low (acknowledgement not yet received despite the requesting provider having signed).",
+      "state": {
+        "requestingProvider": {
+          "clinicianName": "Dr. Owen Blackwood",
+          "clinicianRole": "SHO",
+          "organisation": "Riverside General Hospital",
+          "ward": "ED",
+          "phone": "",
+          "email": "",
+          "registrationBody": "",
+          "registrationNumber": ""
+        },
+        "receivingProvider": {
+          "clinicianName": "Dr. Ingrid Halvorsen",
+          "clinicianRole": "",
+          "organisation": "Regional Neurosciences Centre",
+          "ward": "ICU",
+          "phone": "0117 555 0330",
+          "email": "",
+          "registrationBody": "",
+          "registrationNumber": ""
+        },
+        "patientDemographics": {
+          "firstName": "Harold",
+          "lastName": "Pemberton",
+          "dateOfBirth": "1949-12-02",
+          "sex": "male",
+          "nhsNumber": "",
+          "hospitalNumber": "",
+          "addressLine": "",
+          "postcode": "",
+          "nextOfKinName": "",
+          "nextOfKinPhone": ""
+        },
+        "situation": {
+          "reasonForTransfer": "Deteriorating GCS, suspected intracranial haemorrhage",
+          "primaryDiagnosis": "Suspected intracranial haemorrhage",
+          "urgency": "emergent",
+          "transferType": "",
+          "requestedDateTime": ""
+        },
+        "background": {
+          "presentingComplaint": "Sudden collapse with reduced consciousness",
+          "relevantHistory": "Anticoagulated for atrial fibrillation",
+          "pastMedicalHistory": "Atrial fibrillation",
+          "currentMedications": "Apixaban 5mg BD",
+          "allergies": "NKDA",
+          "recentInvestigations": "CT head pending",
+          "infectionStatus": ""
+        },
+        "assessment": {
+          "currentClinicalStatus": "Rapidly deteriorating, GCS 6",
+          "consciousLevel": "unresponsive",
+          "vitalSigns": {
+            "heartRate": 140,
+            "respiratoryRate": 35,
+            "systolicBloodPressure": 80,
+            "diastolicBloodPressure": 50,
+            "temperatureCelsius": 39.5,
+            "oxygenSaturation": 85,
+            "newsScore": 8
+          },
+          "clinicallyStable": "no",
+          "stabilityNotes": ""
+        },
+        "recommendation": {
+          "requestedAction": "Accept for emergency neurosurgical assessment",
+          "expectedOutcomes": "Urgent CT and neurosurgical review",
+          "ongoingCarePlan": "",
+          "pendingResults": "CT head, coagulation screen"
+        },
+        "transferLogistics": {
+          "transportMode": "",
+          "departureDateTime": "",
+          "estimatedArrivalDateTime": "",
+          "escortRequired": true,
+          "escortDetails": "",
+          "oxygenRequired": true,
+          "cardiacMonitoringRequired": true,
+          "infectiousPrecautions": true,
+          "infectiousPrecautionsDetails": "",
+          "fallsRisk": true,
+          "mentalCapacityConcerns": true,
+          "equipmentRequired": ""
+        },
+        "signoffAcknowledgement": {
+          "requestingProviderSignature": "Dr. Owen Blackwood",
+          "requestingProviderSignatureDate": "2026-08-26",
+          "receivingProviderName": "",
+          "receivingProviderSignature": "",
+          "receivingProviderSignatureDate": "",
+          "acknowledgementReceived": false,
+          "acknowledgementNotes": ""
+        }
+      },
+      "expected": {
+        "completeness": "incomplete",
+        "totalRequired": 45,
+        "totalSatisfied": 30,
+        "mandatoryRequired": 34,
+        "mandatorySatisfied": 23,
+        "sections": [
+          {
+            "section": "requestingProvider",
+            "required": 6,
+            "satisfied": 4,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 3,
+            "missing": [
+              {
+                "id": "REQ-04",
+                "section": "requestingProvider",
+                "description": "Requesting clinician contact phone is required.",
+                "mandatory": true
+              },
+              {
+                "id": "REQ-06",
+                "section": "requestingProvider",
+                "description": "Requesting clinician email (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "receivingProvider",
+            "required": 5,
+            "satisfied": 4,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 3,
+            "missing": [
+              {
+                "id": "RCV-02",
+                "section": "receivingProvider",
+                "description": "Receiving clinician role is required.",
+                "mandatory": true
+              }
+            ]
+          },
+          {
+            "section": "patientDemographics",
+            "required": 6,
+            "satisfied": 4,
+            "mandatoryRequired": 5,
+            "mandatorySatisfied": 4,
+            "missing": [
+              {
+                "id": "PAT-05",
+                "section": "patientDemographics",
+                "description": "NHS number or hospital number is required.",
+                "mandatory": true
+              },
+              {
+                "id": "PAT-06",
+                "section": "patientDemographics",
+                "description": "Next of kin contact (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "situation",
+            "required": 5,
+            "satisfied": 3,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 3,
+            "missing": [
+              {
+                "id": "SIT-04",
+                "section": "situation",
+                "description": "Transfer type is required.",
+                "mandatory": true
+              },
+              {
+                "id": "SIT-05",
+                "section": "situation",
+                "description": "Requested transfer date/time (recommended).",
+                "mandatory": false
+              }
+            ]
+          },
+          {
+            "section": "background",
+            "required": 7,
+            "satisfied": 6,
+            "mandatoryRequired": 5,
+            "mandatorySatisfied": 4,
+            "missing": [
+              {
+                "id": "BG-07",
+                "section": "background",
+                "description": "Infection / colonisation status is required.",
+                "mandatory": true
+              }
+            ]
+          },
+          {
+            "section": "assessment",
+            "required": 5,
+            "satisfied": 4,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 3,
+            "missing": [
+              {
+                "id": "ASS-04",
+                "section": "assessment",
+                "description": "Stability notes are required when patient is not clinically stable.",
+                "mandatory": true
+              }
+            ]
+          },
+          {
+            "section": "recommendation",
+            "required": 4,
+            "satisfied": 3,
+            "mandatoryRequired": 2,
+            "mandatorySatisfied": 1,
+            "missing": [
+              {
+                "id": "REC-03",
+                "section": "recommendation",
+                "description": "Ongoing care plan is required.",
+                "mandatory": true
+              }
+            ]
+          },
+          {
+            "section": "transferLogistics",
+            "required": 5,
+            "satisfied": 0,
+            "mandatoryRequired": 4,
+            "mandatorySatisfied": 0,
+            "missing": [
+              {
+                "id": "LOG-01",
+                "section": "transferLogistics",
+                "description": "Transport mode is required.",
+                "mandatory": true
+              },
+              {
+                "id": "LOG-02",
+                "section": "transferLogistics",
+                "description": "Planned departure date/time is required.",
+                "mandatory": true
+              },
+              {
+                "id": "LOG-03",
+                "section": "transferLogistics",
+                "description": "Estimated arrival date/time (recommended).",
+                "mandatory": false
+              },
+              {
+                "id": "LOG-04",
+                "section": "transferLogistics",
+                "description": "Escort details are required when an escort is requested.",
+                "mandatory": true
+              },
+              {
+                "id": "LOG-05",
+                "section": "transferLogistics",
+                "description": "Infectious-precaution details are required when infectious precautions are flagged.",
+                "mandatory": true
+              }
+            ]
+          },
+          {
+            "section": "signoffAcknowledgement",
+            "required": 2,
+            "satisfied": 2,
+            "mandatoryRequired": 2,
+            "mandatorySatisfied": 2,
+            "missing": []
+          }
+        ],
+        "missing": [
+          {
+            "id": "REQ-04",
+            "section": "requestingProvider",
+            "description": "Requesting clinician contact phone is required.",
+            "mandatory": true
+          },
+          {
+            "id": "REQ-06",
+            "section": "requestingProvider",
+            "description": "Requesting clinician email (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "RCV-02",
+            "section": "receivingProvider",
+            "description": "Receiving clinician role is required.",
+            "mandatory": true
+          },
+          {
+            "id": "PAT-05",
+            "section": "patientDemographics",
+            "description": "NHS number or hospital number is required.",
+            "mandatory": true
+          },
+          {
+            "id": "PAT-06",
+            "section": "patientDemographics",
+            "description": "Next of kin contact (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "SIT-04",
+            "section": "situation",
+            "description": "Transfer type is required.",
+            "mandatory": true
+          },
+          {
+            "id": "SIT-05",
+            "section": "situation",
+            "description": "Requested transfer date/time (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "BG-07",
+            "section": "background",
+            "description": "Infection / colonisation status is required.",
+            "mandatory": true
+          },
+          {
+            "id": "ASS-04",
+            "section": "assessment",
+            "description": "Stability notes are required when patient is not clinically stable.",
+            "mandatory": true
+          },
+          {
+            "id": "REC-03",
+            "section": "recommendation",
+            "description": "Ongoing care plan is required.",
+            "mandatory": true
+          },
+          {
+            "id": "LOG-01",
+            "section": "transferLogistics",
+            "description": "Transport mode is required.",
+            "mandatory": true
+          },
+          {
+            "id": "LOG-02",
+            "section": "transferLogistics",
+            "description": "Planned departure date/time is required.",
+            "mandatory": true
+          },
+          {
+            "id": "LOG-03",
+            "section": "transferLogistics",
+            "description": "Estimated arrival date/time (recommended).",
+            "mandatory": false
+          },
+          {
+            "id": "LOG-04",
+            "section": "transferLogistics",
+            "description": "Escort details are required when an escort is requested.",
+            "mandatory": true
+          },
+          {
+            "id": "LOG-05",
+            "section": "transferLogistics",
+            "description": "Infectious-precaution details are required when infectious precautions are flagged.",
+            "mandatory": true
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "FLAG-URG-EMERG",
+            "category": "Urgency",
+            "message": "Emergent transfer urgency - receiving team must accept and prepare immediately.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-STAB-NO",
+            "category": "Clinical stability",
+            "message": "Patient flagged as not clinically stable for transfer - escalate before departure.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-LOC-UNRESP",
+            "category": "Conscious level",
+            "message": "Patient unresponsive - airway protection and critical-care escort likely required.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-SPO2",
+            "category": "Vital signs",
+            "message": "Oxygen saturation 85% is critically low (< 90%).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-RR",
+            "category": "Vital signs",
+            "message": "Respiratory rate 35/min is outside the safe range (8-30).",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-NEWS-HIGH",
+            "category": "Vital signs",
+            "message": "NEWS2 8 indicates high clinical risk - urgent review required.",
+            "priority": "urgent"
+          },
+          {
+            "id": "FLAG-VIT-SBP-LOW",
+            "category": "Vital signs",
+            "message": "Systolic blood pressure 80 mmHg suggests hypotension/shock (< 90).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VIT-HR",
+            "category": "Vital signs",
+            "message": "Heart rate 140/min is outside the safe range (50-130).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-VIT-TEMP",
+            "category": "Vital signs",
+            "message": "Temperature 39.5 C is outside the safe range (hypothermia < 35 C, hyperpyrexia >= 39 C).",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INF-PRC",
+            "category": "Infection control",
+            "message": "Infectious precautions flagged: details not specified. Receiving area must prepare isolation and PPE.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LOG-CARDIAC",
+            "category": "Transport requirement",
+            "message": "Cardiac monitoring required during transfer - confirm telemetry-capable transport.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MCA",
+            "category": "Safeguarding",
+            "message": "Mental Capacity Act concerns flagged - ensure best-interests/DoLS documentation accompanies transfer.",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-LOG-O2",
+            "category": "Transport requirement",
+            "message": "Supplemental oxygen required during transfer - confirm cylinder volume covers journey.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LOG-ESCORT",
+            "category": "Transport requirement",
+            "message": "Clinical escort required: details not specified.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-LOG-FALLS",
+            "category": "Transport requirement",
+            "message": "Falls risk flagged - ensure stretcher straps and bed-rails on arrival.",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ACK-PENDING",
+            "category": "Acknowledgement",
+            "message": "Receiving-provider acknowledgement not yet recorded - chase confirmation before departure.",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}
