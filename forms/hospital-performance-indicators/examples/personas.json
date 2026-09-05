@@ -1,0 +1,736 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "summariseIndicators",
+  "note": "Three hand-authored personas for the Hospital Performance Indicators tally. No clinical grading engine by design (see AGENTS.md) - summariseIndicators(data) is a pure completeness count over 50 balanced-scorecard indicators across 4 perspectives (Finance 9, Process 28, Learning and Growth 8, Customer 5): an indicator is 'recorded' when its value is non-null and non-blank; categoryCounts always lists all 4 perspectives (recorded/total/title), even one with 0 recorded. Regenerate 'expected' with: bin/test-personas hospital-performance-indicators --update",
+  "personas": [
+    {
+      "name": "Complete quarterly submission - all 50 indicators recorded",
+      "description": "Every one of the 50 indicators across all 4 perspectives has a numeric value. Expect recordedCount 50, and every categoryCounts entry has recorded === total (Finance 9/9, Learning and Growth 8/8, Customer 5/5).",
+      "state": {
+        "reportingPeriod": {
+          "hospitalName": "Northgate District Hospital",
+          "periodMonth": 8,
+          "periodYear": 2026,
+          "preparedByName": "Priya Chandran"
+        },
+        "items": {
+          "1.1": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.2": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.3": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.4": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.5": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.6": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.7": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.8": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "1.9": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.1": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.2": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.3": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.4": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.5": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.6": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.7": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.8": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.9": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.10": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.11": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.12": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.13": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.14": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.15": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.16": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.17": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.18": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.19": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.20": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.21": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.22": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.23": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.24": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.25": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.26": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.27": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "2.28": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.1": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.2": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.3": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.4": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.5": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.6": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.7": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "3.8": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "4.1": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "4.2": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "4.3": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "4.4": {
+            "value": 2.5,
+            "notes": ""
+          },
+          "4.5": {
+            "value": 2.5,
+            "notes": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "Q3 2026 balanced-scorecard submission.",
+          "signedAt": "2026-09-04T16:15"
+        }
+      },
+      "expected": {
+        "recordedCount": 50,
+        "categoryCounts": {
+          "1": {
+            "recorded": 9,
+            "total": 9,
+            "title": "Finance Indicators"
+          },
+          "2": {
+            "recorded": 28,
+            "total": 28,
+            "title": "Process Indicators"
+          },
+          "3": {
+            "recorded": 8,
+            "total": 8,
+            "title": "Learning and Growth Indicators"
+          },
+          "4": {
+            "recorded": 5,
+            "total": 5,
+            "title": "Customer Indicators"
+          }
+        }
+      }
+    },
+    {
+      "name": "Partial submission - only Learning/Growth and Customer perspectives recorded",
+      "description": "Non-critical edge case: only the Learning and Growth and Customer perspectives (categories 3 and 4) have values; Finance and Process (categories 1-2) are entirely blank. Expect recordedCount 13 (8 + 5), Finance (category 1) reported as 0/9, Learning and Growth (category 3) and Customer (category 4) both fully recorded (8/8, 5/5).",
+      "state": {
+        "reportingPeriod": {
+          "hospitalName": "Northgate District Hospital",
+          "periodMonth": 8,
+          "periodYear": 2026,
+          "preparedByName": "Priya Chandran"
+        },
+        "items": {
+          "1.1": {
+            "value": null,
+            "notes": ""
+          },
+          "1.2": {
+            "value": null,
+            "notes": ""
+          },
+          "1.3": {
+            "value": null,
+            "notes": ""
+          },
+          "1.4": {
+            "value": null,
+            "notes": ""
+          },
+          "1.5": {
+            "value": null,
+            "notes": ""
+          },
+          "1.6": {
+            "value": null,
+            "notes": ""
+          },
+          "1.7": {
+            "value": null,
+            "notes": ""
+          },
+          "1.8": {
+            "value": null,
+            "notes": ""
+          },
+          "1.9": {
+            "value": null,
+            "notes": ""
+          },
+          "2.1": {
+            "value": null,
+            "notes": ""
+          },
+          "2.2": {
+            "value": null,
+            "notes": ""
+          },
+          "2.3": {
+            "value": null,
+            "notes": ""
+          },
+          "2.4": {
+            "value": null,
+            "notes": ""
+          },
+          "2.5": {
+            "value": null,
+            "notes": ""
+          },
+          "2.6": {
+            "value": null,
+            "notes": ""
+          },
+          "2.7": {
+            "value": null,
+            "notes": ""
+          },
+          "2.8": {
+            "value": null,
+            "notes": ""
+          },
+          "2.9": {
+            "value": null,
+            "notes": ""
+          },
+          "2.10": {
+            "value": null,
+            "notes": ""
+          },
+          "2.11": {
+            "value": null,
+            "notes": ""
+          },
+          "2.12": {
+            "value": null,
+            "notes": ""
+          },
+          "2.13": {
+            "value": null,
+            "notes": ""
+          },
+          "2.14": {
+            "value": null,
+            "notes": ""
+          },
+          "2.15": {
+            "value": null,
+            "notes": ""
+          },
+          "2.16": {
+            "value": null,
+            "notes": ""
+          },
+          "2.17": {
+            "value": null,
+            "notes": ""
+          },
+          "2.18": {
+            "value": null,
+            "notes": ""
+          },
+          "2.19": {
+            "value": null,
+            "notes": ""
+          },
+          "2.20": {
+            "value": null,
+            "notes": ""
+          },
+          "2.21": {
+            "value": null,
+            "notes": ""
+          },
+          "2.22": {
+            "value": null,
+            "notes": ""
+          },
+          "2.23": {
+            "value": null,
+            "notes": ""
+          },
+          "2.24": {
+            "value": null,
+            "notes": ""
+          },
+          "2.25": {
+            "value": null,
+            "notes": ""
+          },
+          "2.26": {
+            "value": null,
+            "notes": ""
+          },
+          "2.27": {
+            "value": null,
+            "notes": ""
+          },
+          "2.28": {
+            "value": null,
+            "notes": ""
+          },
+          "3.1": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.2": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.3": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.4": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.5": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.6": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.7": {
+            "value": 3,
+            "notes": ""
+          },
+          "3.8": {
+            "value": 3,
+            "notes": ""
+          },
+          "4.1": {
+            "value": 3,
+            "notes": ""
+          },
+          "4.2": {
+            "value": 3,
+            "notes": ""
+          },
+          "4.3": {
+            "value": 3,
+            "notes": ""
+          },
+          "4.4": {
+            "value": 3,
+            "notes": ""
+          },
+          "4.5": {
+            "value": 3,
+            "notes": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "Q3 2026 balanced-scorecard submission.",
+          "signedAt": "2026-09-04T16:15"
+        }
+      },
+      "expected": {
+        "recordedCount": 13,
+        "categoryCounts": {
+          "1": {
+            "recorded": 0,
+            "total": 9,
+            "title": "Finance Indicators"
+          },
+          "2": {
+            "recorded": 0,
+            "total": 28,
+            "title": "Process Indicators"
+          },
+          "3": {
+            "recorded": 8,
+            "total": 8,
+            "title": "Learning and Growth Indicators"
+          },
+          "4": {
+            "recorded": 5,
+            "total": 5,
+            "title": "Customer Indicators"
+          }
+        }
+      }
+    },
+    {
+      "name": "Nothing recorded - blank submission",
+      "description": "Critical/highest case for this completeness tally: no indicator anywhere has a value. Expect recordedCount 0, and every one of the 4 categoryCounts entries reports 0 recorded against its full total (Finance 0/9, Process 0/28, Learning and Growth 0/8, Customer 0/5).",
+      "state": {
+        "reportingPeriod": {
+          "hospitalName": "Northgate District Hospital",
+          "periodMonth": 8,
+          "periodYear": 2026,
+          "preparedByName": "Priya Chandran"
+        },
+        "items": {
+          "1.1": {
+            "value": null,
+            "notes": ""
+          },
+          "1.2": {
+            "value": null,
+            "notes": ""
+          },
+          "1.3": {
+            "value": null,
+            "notes": ""
+          },
+          "1.4": {
+            "value": null,
+            "notes": ""
+          },
+          "1.5": {
+            "value": null,
+            "notes": ""
+          },
+          "1.6": {
+            "value": null,
+            "notes": ""
+          },
+          "1.7": {
+            "value": null,
+            "notes": ""
+          },
+          "1.8": {
+            "value": null,
+            "notes": ""
+          },
+          "1.9": {
+            "value": null,
+            "notes": ""
+          },
+          "2.1": {
+            "value": null,
+            "notes": ""
+          },
+          "2.2": {
+            "value": null,
+            "notes": ""
+          },
+          "2.3": {
+            "value": null,
+            "notes": ""
+          },
+          "2.4": {
+            "value": null,
+            "notes": ""
+          },
+          "2.5": {
+            "value": null,
+            "notes": ""
+          },
+          "2.6": {
+            "value": null,
+            "notes": ""
+          },
+          "2.7": {
+            "value": null,
+            "notes": ""
+          },
+          "2.8": {
+            "value": null,
+            "notes": ""
+          },
+          "2.9": {
+            "value": null,
+            "notes": ""
+          },
+          "2.10": {
+            "value": null,
+            "notes": ""
+          },
+          "2.11": {
+            "value": null,
+            "notes": ""
+          },
+          "2.12": {
+            "value": null,
+            "notes": ""
+          },
+          "2.13": {
+            "value": null,
+            "notes": ""
+          },
+          "2.14": {
+            "value": null,
+            "notes": ""
+          },
+          "2.15": {
+            "value": null,
+            "notes": ""
+          },
+          "2.16": {
+            "value": null,
+            "notes": ""
+          },
+          "2.17": {
+            "value": null,
+            "notes": ""
+          },
+          "2.18": {
+            "value": null,
+            "notes": ""
+          },
+          "2.19": {
+            "value": null,
+            "notes": ""
+          },
+          "2.20": {
+            "value": null,
+            "notes": ""
+          },
+          "2.21": {
+            "value": null,
+            "notes": ""
+          },
+          "2.22": {
+            "value": null,
+            "notes": ""
+          },
+          "2.23": {
+            "value": null,
+            "notes": ""
+          },
+          "2.24": {
+            "value": null,
+            "notes": ""
+          },
+          "2.25": {
+            "value": null,
+            "notes": ""
+          },
+          "2.26": {
+            "value": null,
+            "notes": ""
+          },
+          "2.27": {
+            "value": null,
+            "notes": ""
+          },
+          "2.28": {
+            "value": null,
+            "notes": ""
+          },
+          "3.1": {
+            "value": null,
+            "notes": ""
+          },
+          "3.2": {
+            "value": null,
+            "notes": ""
+          },
+          "3.3": {
+            "value": null,
+            "notes": ""
+          },
+          "3.4": {
+            "value": null,
+            "notes": ""
+          },
+          "3.5": {
+            "value": null,
+            "notes": ""
+          },
+          "3.6": {
+            "value": null,
+            "notes": ""
+          },
+          "3.7": {
+            "value": null,
+            "notes": ""
+          },
+          "3.8": {
+            "value": null,
+            "notes": ""
+          },
+          "4.1": {
+            "value": null,
+            "notes": ""
+          },
+          "4.2": {
+            "value": null,
+            "notes": ""
+          },
+          "4.3": {
+            "value": null,
+            "notes": ""
+          },
+          "4.4": {
+            "value": null,
+            "notes": ""
+          },
+          "4.5": {
+            "value": null,
+            "notes": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "Q3 2026 balanced-scorecard submission.",
+          "signedAt": "2026-09-04T16:15"
+        }
+      },
+      "expected": {
+        "recordedCount": 0,
+        "categoryCounts": {
+          "1": {
+            "recorded": 0,
+            "total": 9,
+            "title": "Finance Indicators"
+          },
+          "2": {
+            "recorded": 0,
+            "total": 28,
+            "title": "Process Indicators"
+          },
+          "3": {
+            "recorded": 0,
+            "total": 8,
+            "title": "Learning and Growth Indicators"
+          },
+          "4": {
+            "recorded": 0,
+            "total": 5,
+            "title": "Customer Indicators"
+          }
+        }
+      }
+    }
+  ]
+}

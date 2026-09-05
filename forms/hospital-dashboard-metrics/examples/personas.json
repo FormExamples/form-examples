@@ -1,0 +1,1090 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "summariseMetrics",
+  "note": "Three hand-authored personas for the Hospital Dashboard Metrics tally. No clinical grading engine by design (see AGENTS.md) - summariseMetrics(data) is a pure completeness count over 67 KPI metrics across 14 categories: a metric is 'recorded' when its value is non-null and non-blank (0 counts as recorded; null does not); categoryCounts always lists all 14 categories (recorded/total/title), even a category with 0 recorded. Regenerate 'expected' with: bin/test-personas hospital-dashboard-metrics --update",
+  "personas": [
+    {
+      "name": "Complete monthly submission - all 67 metrics recorded",
+      "description": "Every one of the 67 metrics across all 14 categories has a numeric value. Expect recordedCount 67, and every categoryCounts entry has recorded === total (category 1, Antibiotics/Narcotics/Culture, is 3/3; category 14, Facilities & Biomedical Engineering, is 6/6).",
+      "state": {
+        "reportingPeriod": {
+          "hospitalName": "Northgate District Hospital",
+          "periodMonth": 8,
+          "periodYear": 2026,
+          "preparedByName": "Priya Chandran"
+        },
+        "items": {
+          "1.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "1.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "1.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.6": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.7": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.8": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.9": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.10": {
+            "value": 1,
+            "notes": ""
+          },
+          "2.11": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.6": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.7": {
+            "value": 1,
+            "notes": ""
+          },
+          "3.8": {
+            "value": 1,
+            "notes": ""
+          },
+          "4.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "4.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "4.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "4.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "4.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "5.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "5.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "5.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.6": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.7": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.8": {
+            "value": 1,
+            "notes": ""
+          },
+          "6.9": {
+            "value": 1,
+            "notes": ""
+          },
+          "7.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "7.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "7.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "7.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "7.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "7.6": {
+            "value": 1,
+            "notes": ""
+          },
+          "8.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "8.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "8.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "8.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "8.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "9.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "10.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "10.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "11.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "11.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "11.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "12.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "12.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "13.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "13.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "13.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "14.1": {
+            "value": 1,
+            "notes": ""
+          },
+          "14.2": {
+            "value": 1,
+            "notes": ""
+          },
+          "14.3": {
+            "value": 1,
+            "notes": ""
+          },
+          "14.4": {
+            "value": 1,
+            "notes": ""
+          },
+          "14.5": {
+            "value": 1,
+            "notes": ""
+          },
+          "14.6": {
+            "value": 1,
+            "notes": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "August 2026 KPI submission.",
+          "signedAt": "2026-09-04T16:00"
+        }
+      },
+      "expected": {
+        "recordedCount": 67,
+        "categoryCounts": {
+          "1": {
+            "recorded": 3,
+            "total": 3,
+            "title": "Antibiotics, Narcotics & Culture Monitoring"
+          },
+          "2": {
+            "recorded": 11,
+            "total": 11,
+            "title": "Inpatient / Ward Metrics"
+          },
+          "3": {
+            "recorded": 8,
+            "total": 8,
+            "title": "Emergency Department Metrics"
+          },
+          "4": {
+            "recorded": 5,
+            "total": 5,
+            "title": "Infection Control Metrics"
+          },
+          "5": {
+            "recorded": 3,
+            "total": 3,
+            "title": "Blood Bank Metrics"
+          },
+          "6": {
+            "recorded": 9,
+            "total": 9,
+            "title": "Outpatient Department (OPD) Metrics"
+          },
+          "7": {
+            "recorded": 6,
+            "total": 6,
+            "title": "Surgery / Operating Room Metrics"
+          },
+          "8": {
+            "recorded": 5,
+            "total": 5,
+            "title": "Pharmacy Metrics"
+          },
+          "9": {
+            "recorded": 1,
+            "total": 1,
+            "title": "Radiology Metrics"
+          },
+          "10": {
+            "recorded": 2,
+            "total": 2,
+            "title": "Patient Flow / Waiting Times"
+          },
+          "11": {
+            "recorded": 3,
+            "total": 3,
+            "title": "Human Resources Metrics"
+          },
+          "12": {
+            "recorded": 2,
+            "total": 2,
+            "title": "Patient Experience Metrics"
+          },
+          "13": {
+            "recorded": 3,
+            "total": 3,
+            "title": "Occurrence Variance Report (OVR) Metrics"
+          },
+          "14": {
+            "recorded": 6,
+            "total": 6,
+            "title": "Facilities & Biomedical Engineering Metrics"
+          }
+        }
+      }
+    },
+    {
+      "name": "Partial submission - only the first two categories recorded",
+      "description": "Non-critical edge case: only categories 1-2 (Antibiotics/Narcotics/Culture Monitoring, and Inpatient/Ward Metrics) have values; categories 3-14 are entirely blank. Expect recordedCount 14 (the combined size of categories 1-2), category 1 reported as 3/3 (fully recorded), category 14 (Facilities & Biomedical Engineering) reported as 0/6.",
+      "state": {
+        "reportingPeriod": {
+          "hospitalName": "Northgate District Hospital",
+          "periodMonth": 8,
+          "periodYear": 2026,
+          "preparedByName": "Priya Chandran"
+        },
+        "items": {
+          "1.1": {
+            "value": 5,
+            "notes": ""
+          },
+          "1.2": {
+            "value": 5,
+            "notes": ""
+          },
+          "1.3": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.1": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.2": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.3": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.4": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.5": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.6": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.7": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.8": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.9": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.10": {
+            "value": 5,
+            "notes": ""
+          },
+          "2.11": {
+            "value": 5,
+            "notes": ""
+          },
+          "3.1": {
+            "value": null,
+            "notes": ""
+          },
+          "3.2": {
+            "value": null,
+            "notes": ""
+          },
+          "3.3": {
+            "value": null,
+            "notes": ""
+          },
+          "3.4": {
+            "value": null,
+            "notes": ""
+          },
+          "3.5": {
+            "value": null,
+            "notes": ""
+          },
+          "3.6": {
+            "value": null,
+            "notes": ""
+          },
+          "3.7": {
+            "value": null,
+            "notes": ""
+          },
+          "3.8": {
+            "value": null,
+            "notes": ""
+          },
+          "4.1": {
+            "value": null,
+            "notes": ""
+          },
+          "4.2": {
+            "value": null,
+            "notes": ""
+          },
+          "4.3": {
+            "value": null,
+            "notes": ""
+          },
+          "4.4": {
+            "value": null,
+            "notes": ""
+          },
+          "4.5": {
+            "value": null,
+            "notes": ""
+          },
+          "5.1": {
+            "value": null,
+            "notes": ""
+          },
+          "5.2": {
+            "value": null,
+            "notes": ""
+          },
+          "5.3": {
+            "value": null,
+            "notes": ""
+          },
+          "6.1": {
+            "value": null,
+            "notes": ""
+          },
+          "6.2": {
+            "value": null,
+            "notes": ""
+          },
+          "6.3": {
+            "value": null,
+            "notes": ""
+          },
+          "6.4": {
+            "value": null,
+            "notes": ""
+          },
+          "6.5": {
+            "value": null,
+            "notes": ""
+          },
+          "6.6": {
+            "value": null,
+            "notes": ""
+          },
+          "6.7": {
+            "value": null,
+            "notes": ""
+          },
+          "6.8": {
+            "value": null,
+            "notes": ""
+          },
+          "6.9": {
+            "value": null,
+            "notes": ""
+          },
+          "7.1": {
+            "value": null,
+            "notes": ""
+          },
+          "7.2": {
+            "value": null,
+            "notes": ""
+          },
+          "7.3": {
+            "value": null,
+            "notes": ""
+          },
+          "7.4": {
+            "value": null,
+            "notes": ""
+          },
+          "7.5": {
+            "value": null,
+            "notes": ""
+          },
+          "7.6": {
+            "value": null,
+            "notes": ""
+          },
+          "8.1": {
+            "value": null,
+            "notes": ""
+          },
+          "8.2": {
+            "value": null,
+            "notes": ""
+          },
+          "8.3": {
+            "value": null,
+            "notes": ""
+          },
+          "8.4": {
+            "value": null,
+            "notes": ""
+          },
+          "8.5": {
+            "value": null,
+            "notes": ""
+          },
+          "9.1": {
+            "value": null,
+            "notes": ""
+          },
+          "10.1": {
+            "value": null,
+            "notes": ""
+          },
+          "10.2": {
+            "value": null,
+            "notes": ""
+          },
+          "11.1": {
+            "value": null,
+            "notes": ""
+          },
+          "11.2": {
+            "value": null,
+            "notes": ""
+          },
+          "11.3": {
+            "value": null,
+            "notes": ""
+          },
+          "12.1": {
+            "value": null,
+            "notes": ""
+          },
+          "12.2": {
+            "value": null,
+            "notes": ""
+          },
+          "13.1": {
+            "value": null,
+            "notes": ""
+          },
+          "13.2": {
+            "value": null,
+            "notes": ""
+          },
+          "13.3": {
+            "value": null,
+            "notes": ""
+          },
+          "14.1": {
+            "value": null,
+            "notes": ""
+          },
+          "14.2": {
+            "value": null,
+            "notes": ""
+          },
+          "14.3": {
+            "value": null,
+            "notes": ""
+          },
+          "14.4": {
+            "value": null,
+            "notes": ""
+          },
+          "14.5": {
+            "value": null,
+            "notes": ""
+          },
+          "14.6": {
+            "value": null,
+            "notes": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "August 2026 KPI submission.",
+          "signedAt": "2026-09-04T16:00"
+        }
+      },
+      "expected": {
+        "recordedCount": 14,
+        "categoryCounts": {
+          "1": {
+            "recorded": 3,
+            "total": 3,
+            "title": "Antibiotics, Narcotics & Culture Monitoring"
+          },
+          "2": {
+            "recorded": 11,
+            "total": 11,
+            "title": "Inpatient / Ward Metrics"
+          },
+          "3": {
+            "recorded": 0,
+            "total": 8,
+            "title": "Emergency Department Metrics"
+          },
+          "4": {
+            "recorded": 0,
+            "total": 5,
+            "title": "Infection Control Metrics"
+          },
+          "5": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Blood Bank Metrics"
+          },
+          "6": {
+            "recorded": 0,
+            "total": 9,
+            "title": "Outpatient Department (OPD) Metrics"
+          },
+          "7": {
+            "recorded": 0,
+            "total": 6,
+            "title": "Surgery / Operating Room Metrics"
+          },
+          "8": {
+            "recorded": 0,
+            "total": 5,
+            "title": "Pharmacy Metrics"
+          },
+          "9": {
+            "recorded": 0,
+            "total": 1,
+            "title": "Radiology Metrics"
+          },
+          "10": {
+            "recorded": 0,
+            "total": 2,
+            "title": "Patient Flow / Waiting Times"
+          },
+          "11": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Human Resources Metrics"
+          },
+          "12": {
+            "recorded": 0,
+            "total": 2,
+            "title": "Patient Experience Metrics"
+          },
+          "13": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Occurrence Variance Report (OVR) Metrics"
+          },
+          "14": {
+            "recorded": 0,
+            "total": 6,
+            "title": "Facilities & Biomedical Engineering Metrics"
+          }
+        }
+      }
+    },
+    {
+      "name": "Nothing recorded - blank submission",
+      "description": "Critical/highest case for this completeness tally: no metric anywhere has a value. Expect recordedCount 0, and every one of the 14 categoryCounts entries reports 0 recorded against its full total (category 1 0/3, category 14 0/6).",
+      "state": {
+        "reportingPeriod": {
+          "hospitalName": "Northgate District Hospital",
+          "periodMonth": 8,
+          "periodYear": 2026,
+          "preparedByName": "Priya Chandran"
+        },
+        "items": {
+          "1.1": {
+            "value": null,
+            "notes": ""
+          },
+          "1.2": {
+            "value": null,
+            "notes": ""
+          },
+          "1.3": {
+            "value": null,
+            "notes": ""
+          },
+          "2.1": {
+            "value": null,
+            "notes": ""
+          },
+          "2.2": {
+            "value": null,
+            "notes": ""
+          },
+          "2.3": {
+            "value": null,
+            "notes": ""
+          },
+          "2.4": {
+            "value": null,
+            "notes": ""
+          },
+          "2.5": {
+            "value": null,
+            "notes": ""
+          },
+          "2.6": {
+            "value": null,
+            "notes": ""
+          },
+          "2.7": {
+            "value": null,
+            "notes": ""
+          },
+          "2.8": {
+            "value": null,
+            "notes": ""
+          },
+          "2.9": {
+            "value": null,
+            "notes": ""
+          },
+          "2.10": {
+            "value": null,
+            "notes": ""
+          },
+          "2.11": {
+            "value": null,
+            "notes": ""
+          },
+          "3.1": {
+            "value": null,
+            "notes": ""
+          },
+          "3.2": {
+            "value": null,
+            "notes": ""
+          },
+          "3.3": {
+            "value": null,
+            "notes": ""
+          },
+          "3.4": {
+            "value": null,
+            "notes": ""
+          },
+          "3.5": {
+            "value": null,
+            "notes": ""
+          },
+          "3.6": {
+            "value": null,
+            "notes": ""
+          },
+          "3.7": {
+            "value": null,
+            "notes": ""
+          },
+          "3.8": {
+            "value": null,
+            "notes": ""
+          },
+          "4.1": {
+            "value": null,
+            "notes": ""
+          },
+          "4.2": {
+            "value": null,
+            "notes": ""
+          },
+          "4.3": {
+            "value": null,
+            "notes": ""
+          },
+          "4.4": {
+            "value": null,
+            "notes": ""
+          },
+          "4.5": {
+            "value": null,
+            "notes": ""
+          },
+          "5.1": {
+            "value": null,
+            "notes": ""
+          },
+          "5.2": {
+            "value": null,
+            "notes": ""
+          },
+          "5.3": {
+            "value": null,
+            "notes": ""
+          },
+          "6.1": {
+            "value": null,
+            "notes": ""
+          },
+          "6.2": {
+            "value": null,
+            "notes": ""
+          },
+          "6.3": {
+            "value": null,
+            "notes": ""
+          },
+          "6.4": {
+            "value": null,
+            "notes": ""
+          },
+          "6.5": {
+            "value": null,
+            "notes": ""
+          },
+          "6.6": {
+            "value": null,
+            "notes": ""
+          },
+          "6.7": {
+            "value": null,
+            "notes": ""
+          },
+          "6.8": {
+            "value": null,
+            "notes": ""
+          },
+          "6.9": {
+            "value": null,
+            "notes": ""
+          },
+          "7.1": {
+            "value": null,
+            "notes": ""
+          },
+          "7.2": {
+            "value": null,
+            "notes": ""
+          },
+          "7.3": {
+            "value": null,
+            "notes": ""
+          },
+          "7.4": {
+            "value": null,
+            "notes": ""
+          },
+          "7.5": {
+            "value": null,
+            "notes": ""
+          },
+          "7.6": {
+            "value": null,
+            "notes": ""
+          },
+          "8.1": {
+            "value": null,
+            "notes": ""
+          },
+          "8.2": {
+            "value": null,
+            "notes": ""
+          },
+          "8.3": {
+            "value": null,
+            "notes": ""
+          },
+          "8.4": {
+            "value": null,
+            "notes": ""
+          },
+          "8.5": {
+            "value": null,
+            "notes": ""
+          },
+          "9.1": {
+            "value": null,
+            "notes": ""
+          },
+          "10.1": {
+            "value": null,
+            "notes": ""
+          },
+          "10.2": {
+            "value": null,
+            "notes": ""
+          },
+          "11.1": {
+            "value": null,
+            "notes": ""
+          },
+          "11.2": {
+            "value": null,
+            "notes": ""
+          },
+          "11.3": {
+            "value": null,
+            "notes": ""
+          },
+          "12.1": {
+            "value": null,
+            "notes": ""
+          },
+          "12.2": {
+            "value": null,
+            "notes": ""
+          },
+          "13.1": {
+            "value": null,
+            "notes": ""
+          },
+          "13.2": {
+            "value": null,
+            "notes": ""
+          },
+          "13.3": {
+            "value": null,
+            "notes": ""
+          },
+          "14.1": {
+            "value": null,
+            "notes": ""
+          },
+          "14.2": {
+            "value": null,
+            "notes": ""
+          },
+          "14.3": {
+            "value": null,
+            "notes": ""
+          },
+          "14.4": {
+            "value": null,
+            "notes": ""
+          },
+          "14.5": {
+            "value": null,
+            "notes": ""
+          },
+          "14.6": {
+            "value": null,
+            "notes": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "August 2026 KPI submission.",
+          "signedAt": "2026-09-04T16:00"
+        }
+      },
+      "expected": {
+        "recordedCount": 0,
+        "categoryCounts": {
+          "1": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Antibiotics, Narcotics & Culture Monitoring"
+          },
+          "2": {
+            "recorded": 0,
+            "total": 11,
+            "title": "Inpatient / Ward Metrics"
+          },
+          "3": {
+            "recorded": 0,
+            "total": 8,
+            "title": "Emergency Department Metrics"
+          },
+          "4": {
+            "recorded": 0,
+            "total": 5,
+            "title": "Infection Control Metrics"
+          },
+          "5": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Blood Bank Metrics"
+          },
+          "6": {
+            "recorded": 0,
+            "total": 9,
+            "title": "Outpatient Department (OPD) Metrics"
+          },
+          "7": {
+            "recorded": 0,
+            "total": 6,
+            "title": "Surgery / Operating Room Metrics"
+          },
+          "8": {
+            "recorded": 0,
+            "total": 5,
+            "title": "Pharmacy Metrics"
+          },
+          "9": {
+            "recorded": 0,
+            "total": 1,
+            "title": "Radiology Metrics"
+          },
+          "10": {
+            "recorded": 0,
+            "total": 2,
+            "title": "Patient Flow / Waiting Times"
+          },
+          "11": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Human Resources Metrics"
+          },
+          "12": {
+            "recorded": 0,
+            "total": 2,
+            "title": "Patient Experience Metrics"
+          },
+          "13": {
+            "recorded": 0,
+            "total": 3,
+            "title": "Occurrence Variance Report (OVR) Metrics"
+          },
+          "14": {
+            "recorded": 0,
+            "total": 6,
+            "title": "Facilities & Biomedical Engineering Metrics"
+          }
+        }
+      }
+    }
+  ]
+}

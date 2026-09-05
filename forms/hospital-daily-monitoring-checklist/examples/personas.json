@@ -1,0 +1,1382 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "summariseChecklist",
+  "note": "Three hand-authored personas for the Hospital Daily Monitoring Checklist tally. There is no clinical grading engine here by design (see AGENTS.md) - summariseChecklist(data) is a completeness/attention tally over the 97 checkpoints across 22 areas: answeredCount counts any item whose status is non-blank (satisfactory, needs-attention, OR not-applicable all count as answered - only '' does not); needsAttentionCount and needsAttentionItems only include items explicitly marked 'needs-attention'; sectionsWithNeedsAttention is the sorted, de-duplicated list of section NUMBERS (not titles) that have at least one needs-attention item. Item ids follow the source proforma's own numbering, which is NOT uniformly dotted - most items are '<section>.<n>' (e.g. '1.4') but sections with exactly one checkpoint use the bare section number as the id (e.g. '16' for Fire Fighting Equipment, '18' for Mortuary). Regenerate 'expected' with: bin/test-personas hospital-daily-monitoring-checklist --update",
+  "personas": [
+    {
+      "name": "Thorough inspection - 97/97 checkpoints touched, two isolated gaps",
+      "description": "Every one of the 97 checkpoints is answered: 94 satisfactory, 2 not-applicable (mortuary, section 18 - no mortuary on this site), and exactly 2 needs-attention items in two different, non-adjacent sections (1.4 Complaint Box; 16 Fire Fighting Equipment). Expect answeredCount 97, needsAttentionCount 2, needsAttentionItems for 1.4 and 16 in that order (catalogue order), sectionsWithNeedsAttention [1, 16].",
+      "state": {
+        "inspectionDetails": {
+          "hospitalName": "Northgate District Hospital",
+          "departmentOrSite": "Main site",
+          "inspectionDate": "2026-09-04",
+          "inspectingOfficerName": "Priya Chandran",
+          "inspectingOfficerDesignation": "Deputy Medical Superintendent"
+        },
+        "items": {
+          "15": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "16": {
+            "status": "needs-attention",
+            "remarks": "Fire extinguisher pressure gauge in red zone, needs immediate refill."
+          },
+          "17": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "18": {
+            "status": "not-applicable",
+            "remarks": "No mortuary on this site - referred cases only."
+          },
+          "19": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.4": {
+            "status": "needs-attention",
+            "remarks": "Complaint box locked, no key available on site."
+          },
+          "1.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.7": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.8": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.9": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.10": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.11": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "4.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "4.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.7": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.8": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "13.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "13.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "13.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.7": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.8": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.9": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.10": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "21.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "21.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "21.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "21.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "21.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "22.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "22.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "Routine monthly inspection round.",
+          "actionPlan": "",
+          "signedAt": "2026-09-04T15:30"
+        }
+      },
+      "expected": {
+        "answeredCount": 97,
+        "needsAttentionCount": 2,
+        "needsAttentionItems": [
+          {
+            "id": "1.4",
+            "sectionTitle": "OPD",
+            "text": "Complaint Box.",
+            "remarks": "Complaint box locked, no key available on site."
+          },
+          {
+            "id": "16",
+            "sectionTitle": "Fire Fighting Equipment",
+            "text": "Fire fighting equipment.",
+            "remarks": "Fire extinguisher pressure gauge in red zone, needs immediate refill."
+          }
+        ],
+        "sectionsWithNeedsAttention": [
+          1,
+          16
+        ]
+      }
+    },
+    {
+      "name": "Half-finished round - only sections 1-10 assessed",
+      "description": "Non-critical edge case: only the 52 checkpoints in sections 1 through 10 are touched (satisfactory by default), sections 11-22 left entirely blank. Two needs-attention items are recorded within the assessed range: the Dispensary (section 3) stock register and the Labour Room (section 9) resuscitation trolley. Expect answeredCount 52 (not 97 - the 45 blank checkpoints in sections 11-22 do not count), needsAttentionCount 2, sectionsWithNeedsAttention [3, 9].",
+      "state": {
+        "inspectionDetails": {
+          "hospitalName": "Northgate District Hospital",
+          "departmentOrSite": "Main site",
+          "inspectionDate": "2026-09-04",
+          "inspectingOfficerName": "Priya Chandran",
+          "inspectingOfficerDesignation": "Deputy Medical Superintendent"
+        },
+        "items": {
+          "15": {
+            "status": "",
+            "remarks": ""
+          },
+          "16": {
+            "status": "",
+            "remarks": ""
+          },
+          "17": {
+            "status": "",
+            "remarks": ""
+          },
+          "18": {
+            "status": "",
+            "remarks": ""
+          },
+          "19": {
+            "status": "",
+            "remarks": ""
+          },
+          "1.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.7": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.8": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.9": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.10": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.11": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.1": {
+            "status": "needs-attention",
+            "remarks": "Dispensary stock register not updated for 3 days."
+          },
+          "3.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "4.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "4.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.1": {
+            "status": "needs-attention",
+            "remarks": "Labour room resuscitation trolley incomplete."
+          },
+          "9.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.2": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.3": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.4": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.5": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.6": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.7": {
+            "status": "",
+            "remarks": ""
+          },
+          "11.8": {
+            "status": "",
+            "remarks": ""
+          },
+          "12.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "12.2": {
+            "status": "",
+            "remarks": ""
+          },
+          "12.3": {
+            "status": "",
+            "remarks": ""
+          },
+          "12.4": {
+            "status": "",
+            "remarks": ""
+          },
+          "12.5": {
+            "status": "",
+            "remarks": ""
+          },
+          "12.6": {
+            "status": "",
+            "remarks": ""
+          },
+          "13.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "13.2": {
+            "status": "",
+            "remarks": ""
+          },
+          "13.3": {
+            "status": "",
+            "remarks": ""
+          },
+          "14.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "14.2": {
+            "status": "",
+            "remarks": ""
+          },
+          "14.3": {
+            "status": "",
+            "remarks": ""
+          },
+          "14.4": {
+            "status": "",
+            "remarks": ""
+          },
+          "14.5": {
+            "status": "",
+            "remarks": ""
+          },
+          "14.6": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.2": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.3": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.4": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.5": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.6": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.7": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.8": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.9": {
+            "status": "",
+            "remarks": ""
+          },
+          "20.10": {
+            "status": "",
+            "remarks": ""
+          },
+          "21.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "21.2": {
+            "status": "",
+            "remarks": ""
+          },
+          "21.3": {
+            "status": "",
+            "remarks": ""
+          },
+          "21.4": {
+            "status": "",
+            "remarks": ""
+          },
+          "21.5": {
+            "status": "",
+            "remarks": ""
+          },
+          "22.1": {
+            "status": "",
+            "remarks": ""
+          },
+          "22.2": {
+            "status": "",
+            "remarks": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "Routine monthly inspection round.",
+          "actionPlan": "",
+          "signedAt": "2026-09-04T15:30"
+        }
+      },
+      "expected": {
+        "answeredCount": 52,
+        "needsAttentionCount": 2,
+        "needsAttentionItems": [
+          {
+            "id": "3.1",
+            "sectionTitle": "Dispensary",
+            "text": "Availability of sufficient drug stock.",
+            "remarks": "Dispensary stock register not updated for 3 days."
+          },
+          {
+            "id": "9.1",
+            "sectionTitle": "Labour Room",
+            "text": "Availability of staff, drugs, five trays.",
+            "remarks": "Labour room resuscitation trolley incomplete."
+          }
+        ],
+        "sectionsWithNeedsAttention": [
+          3,
+          9
+        ]
+      }
+    },
+    {
+      "name": "Widespread safety gaps - fire, waste, and infection-control all flagged",
+      "description": "Critical/highest-severity persona for this facility-audit form: all 97 checkpoints answered, but every checkpoint in three safety-critical areas is marked needs-attention - Fire Fighting Equipment (1 checkpoint, id '16'), Hospital Waste Management (section 20, 10 checkpoints), and Observance & Practice of Infection Control Protocols (section 21, 5 checkpoints). Expect answeredCount 97, needsAttentionCount 16 (1 + 10 + 5), sectionsWithNeedsAttention [16, 20, 21].",
+      "state": {
+        "inspectionDetails": {
+          "hospitalName": "Northgate District Hospital",
+          "departmentOrSite": "Main site",
+          "inspectionDate": "2026-09-04",
+          "inspectingOfficerName": "Priya Chandran",
+          "inspectingOfficerDesignation": "Deputy Medical Superintendent"
+        },
+        "items": {
+          "15": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "16": {
+            "status": "needs-attention",
+            "remarks": "Annual fire-safety audit overdue."
+          },
+          "17": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "18": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "19": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.7": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.8": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.9": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.10": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "1.11": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "2.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "3.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "4.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "4.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "5.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.1.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "6.2.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "7.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "8.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "9.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "10.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.7": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "11.8": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "12.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "13.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "13.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "13.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.3": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.4": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.5": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "14.6": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "20.1": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.2": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.3": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.4": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.5": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.6": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.7": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.8": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.9": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "20.10": {
+            "status": "needs-attention",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          "21.1": {
+            "status": "needs-attention",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          "21.2": {
+            "status": "needs-attention",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          "21.3": {
+            "status": "needs-attention",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          "21.4": {
+            "status": "needs-attention",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          "21.5": {
+            "status": "needs-attention",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          "22.1": {
+            "status": "satisfactory",
+            "remarks": ""
+          },
+          "22.2": {
+            "status": "satisfactory",
+            "remarks": ""
+          }
+        },
+        "summary": {
+          "overallNotes": "Routine monthly inspection round.",
+          "actionPlan": "",
+          "signedAt": "2026-09-04T15:30"
+        }
+      },
+      "expected": {
+        "answeredCount": 97,
+        "needsAttentionCount": 16,
+        "needsAttentionItems": [
+          {
+            "id": "16",
+            "sectionTitle": "Fire Fighting Equipment",
+            "text": "Fire fighting equipment.",
+            "remarks": "Annual fire-safety audit overdue."
+          },
+          {
+            "id": "20.1",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Collection.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.2",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Segregation.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.3",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Maintenance of record.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.4",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Transportation.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.5",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Disposal if in-house, whether protocol is followed.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.6",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Destruction & disposal of sharps.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.7",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Destruction & disinfection of rubber, glass & plastics.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.8",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Colour-coded bins are in place in OPD, in wards.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.9",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Regular changing of polythenes.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "20.10",
+            "sectionTitle": "Hospital Waste Management",
+            "text": "Use of protective gear, boots, apron etc by staff.",
+            "remarks": "Colour-coded bins not segregated correctly."
+          },
+          {
+            "id": "21.1",
+            "sectionTitle": "Observance & Practice of Infection Control Protocols",
+            "text": "In O.T.",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          {
+            "id": "21.2",
+            "sectionTitle": "Observance & Practice of Infection Control Protocols",
+            "text": "In ICU.",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          {
+            "id": "21.3",
+            "sectionTitle": "Observance & Practice of Infection Control Protocols",
+            "text": "In L.R.",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          {
+            "id": "21.4",
+            "sectionTitle": "Observance & Practice of Infection Control Protocols",
+            "text": "Hand wash practice.",
+            "remarks": "PPE stock critically low on the ward."
+          },
+          {
+            "id": "21.5",
+            "sectionTitle": "Observance & Practice of Infection Control Protocols",
+            "text": "Protective gloves, apron etc.",
+            "remarks": "PPE stock critically low on the ward."
+          }
+        ],
+        "sectionsWithNeedsAttention": [
+          16,
+          20,
+          21
+        ]
+      }
+    }
+  ]
+}

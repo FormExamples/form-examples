@@ -1697,11 +1697,23 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       as well as a FLAG) was corrected before writing prose, not after
       seeing a FAIL. Fleet: `bin/test-personas` forms 320/320 PASS,
       personas 1076/1076 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
-      6 forms remain from the original 12-form list:
-      `hospital-daily-monitoring-checklist`, `hospital-dashboard-metrics`,
-      `hospital-performance-indicators`, `issue-tracker`, `meeting`,
-      `objectives-and-key-results-tracker` — plus the 27 forms unblocked
-      purely by probe discovery that were never on that 12-form list (see
+      3 more done the same week: the `hospital-*` tally forms
+      (`hospital-daily-monitoring-checklist`,
+      `hospital-dashboard-metrics`, `hospital-performance-indicators`) —
+      no scoring engine by design, so personas verify pure completeness
+      counts over the freshly-extracted `js/summary.js` modules. Caught
+      along the way: `hospital-daily-monitoring-checklist`'s 97
+      checkpoint ids are NOT uniformly `<section>.<n>` — a section with
+      exactly one checkpoint (16 Fire Fighting Equipment, 18 Mortuary)
+      uses the bare section number as its id; a first attempt using
+      `"16.2"` (nonexistent) silently no-opped rather than erroring,
+      caught by re-checking the tool's actual counts against the hand
+      prediction before writing prose. Fleet: `bin/test-personas` forms
+      323/323 PASS, personas 1085/1085 PASS, 0 FAIL; `bin/test-e2e
+      --html` 6/6 passed. 3 forms remain from the original 12-form list:
+      `issue-tracker`, `meeting`, `objectives-and-key-results-tracker` —
+      plus the 27 forms unblocked purely by probe discovery that were
+      never on that 12-form list (see
       the full sweep: `for f in $(bin/test-engines --verbose | grep
       '^PASS' | awk '{print $2}'); do [ -f forms/$f/examples/personas.json
       ] || echo $f; done`).
