@@ -1,0 +1,267 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculatePriorityLevel",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculatePriorityLevel takes the MAX priority among fired prescription-rules.js rules (routine < urgent < emergency, routine default). detectAdditionalFlags is fully independent of the priority level.",
+  "personas": [
+    {
+      "name": "Routine statin refill",
+      "description": "A refill (not new) request with full patient and clinician contact details, medication/dosage/instructions all recorded, and every substitution option allowed. No rule fires, so priorityLevel defaults to routine with an empty audit trail and no flags.",
+      "state": {
+        "patientInformation": {
+          "firstName": "Alan",
+          "lastName": "Bright",
+          "phone": "07700 900111",
+          "email": "alan.bright@example.com",
+          "nhsNumber": "123 456 7890"
+        },
+        "clinicianInformation": {
+          "firstName": "Dr. Farah",
+          "lastName": "Nasser",
+          "phone": "0117 555 0110",
+          "email": "farah.nasser@example-gp.org",
+          "nhsEmployeeNumber": "EMP-4021"
+        },
+        "prescriptionDetails": {
+          "requestDate": "2026-08-25",
+          "medicationName": "Atorvastatin",
+          "dosage": "20mg",
+          "frequency": "once daily",
+          "routeOfAdministration": "oral",
+          "treatmentInstructions": "Take at night"
+        },
+        "substitutionOptions": {
+          "allowBrandSubstitution": "yes",
+          "allowGenericSubstitution": "yes",
+          "allowDosageAdjustment": "yes",
+          "substitutionNotes": ""
+        },
+        "requestType": {
+          "isNewPrescription": "no",
+          "isEmergency": "no",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "priorityLevel": "routine",
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Urgent, brand-only levothyroxine with missing IDs",
+      "description": "A new (not refill) prescription request for a medication the patient has a documented poor response to generics, so brand substitution is disallowed - urgent. Both the patient NHS number and the clinician's NHS employee number are left blank. Two rules fire (no-brand-substitution at urgent, new-prescription at routine), giving urgent overall. Two medium administrative flags fire for the two missing identifiers; nothing rises to high since contact phone/email, medication, and dosage are all present.",
+      "state": {
+        "patientInformation": {
+          "firstName": "Meera",
+          "lastName": "Chandran",
+          "phone": "07700 900222",
+          "email": "meera.chandran@example.com",
+          "nhsNumber": ""
+        },
+        "clinicianInformation": {
+          "firstName": "Dr. Owusu",
+          "lastName": "Boateng",
+          "phone": "0117 555 0121",
+          "email": "owusu.boateng@example-gp.org",
+          "nhsEmployeeNumber": ""
+        },
+        "prescriptionDetails": {
+          "requestDate": "2026-08-25",
+          "medicationName": "Levothyroxine",
+          "dosage": "100mcg",
+          "frequency": "once daily",
+          "routeOfAdministration": "oral",
+          "treatmentInstructions": "Take on an empty stomach"
+        },
+        "substitutionOptions": {
+          "allowBrandSubstitution": "no",
+          "allowGenericSubstitution": "yes",
+          "allowDosageAdjustment": "yes",
+          "substitutionNotes": "Patient reports different response to generic brands"
+        },
+        "requestType": {
+          "isNewPrescription": "yes",
+          "isEmergency": "no",
+          "additionalNotes": ""
+        }
+      },
+      "expected": {
+        "priorityLevel": "urgent",
+        "firedRules": [
+          {
+            "id": "RX-SUB-001",
+            "category": "Substitution",
+            "description": "No brand substitution allowed",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-NEW-001",
+            "category": "Request Type",
+            "description": "New prescription (not a refill)",
+            "priorityLevel": "routine"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-CLIN-001",
+            "category": "Administrative",
+            "message": "Clinician NHS employee number not provided",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAT-001",
+            "category": "Administrative",
+            "message": "Patient NHS number not provided",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Emergency request with no details completed",
+      "description": "An emergency request called in by an ambulance crew with almost nothing else filled in: no patient contact details or NHS number, no clinician contact details or employee number, no medication name, dosage, or treatment instructions, no request date, and every substitution option disallowed. Eight rules fire (emergency plus all three substitution-restriction and all four completeness-gap rules at urgent), giving emergency overall - the emergency rule alone would have been enough, but the completeness gaps are recorded too. Eight flags fire: four high (emergency request with incomplete contact details, no substitutions permitted, missing medication name, missing dosage), three medium (missing clinician ID, missing patient ID, a refill-shaped request with no request date - here because isNewPrescription is 'no' despite the emergency additional-notes describing a fresh ambulance call), one low (no treatment instructions).",
+      "state": {
+        "patientInformation": {
+          "firstName": "",
+          "lastName": "",
+          "phone": "",
+          "email": "",
+          "nhsNumber": ""
+        },
+        "clinicianInformation": {
+          "firstName": "Dr. Singh",
+          "lastName": "",
+          "phone": "",
+          "email": "",
+          "nhsEmployeeNumber": ""
+        },
+        "prescriptionDetails": {
+          "requestDate": "",
+          "medicationName": "",
+          "dosage": "",
+          "frequency": "",
+          "routeOfAdministration": "",
+          "treatmentInstructions": ""
+        },
+        "substitutionOptions": {
+          "allowBrandSubstitution": "no",
+          "allowGenericSubstitution": "no",
+          "allowDosageAdjustment": "no",
+          "substitutionNotes": ""
+        },
+        "requestType": {
+          "isNewPrescription": "no",
+          "isEmergency": "yes",
+          "additionalNotes": "Called in by ambulance crew"
+        }
+      },
+      "expected": {
+        "priorityLevel": "emergency",
+        "firedRules": [
+          {
+            "id": "RX-EM-001",
+            "category": "Emergency",
+            "description": "Emergency prescription request",
+            "priorityLevel": "emergency"
+          },
+          {
+            "id": "RX-SUB-001",
+            "category": "Substitution",
+            "description": "No brand substitution allowed",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-SUB-002",
+            "category": "Substitution",
+            "description": "No generic substitution allowed",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-SUB-003",
+            "category": "Substitution",
+            "description": "No dosage adjustment allowed",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-CMP-001",
+            "category": "Completeness",
+            "description": "Clinician contact information missing",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-CMP-002",
+            "category": "Completeness",
+            "description": "Patient contact information missing",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-CMP-003",
+            "category": "Completeness",
+            "description": "Medication name not provided",
+            "priorityLevel": "urgent"
+          },
+          {
+            "id": "RX-CMP-004",
+            "category": "Completeness",
+            "description": "Dosage not specified",
+            "priorityLevel": "urgent"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-EMERG-INCOMPLETE",
+            "category": "Emergency",
+            "message": "Emergency request with incomplete contact details - verify urgently",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NOSUB-001",
+            "category": "Substitution",
+            "message": "No substitutions permitted - exact medication required",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-MED-001",
+            "category": "Completeness",
+            "message": "Medication name not provided",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-DOSE-001",
+            "category": "Completeness",
+            "message": "Dosage not specified",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-CLIN-001",
+            "category": "Administrative",
+            "message": "Clinician NHS employee number not provided",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-PAT-001",
+            "category": "Administrative",
+            "message": "Patient NHS number not provided",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-REFILL-001",
+            "category": "Completeness",
+            "message": "Refill request without a request date",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-INSTR-001",
+            "category": "Completeness",
+            "message": "Treatment instructions not provided",
+            "priority": "low"
+          }
+        ]
+      }
+    }
+  ]
+}

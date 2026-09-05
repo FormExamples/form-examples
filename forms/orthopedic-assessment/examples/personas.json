@@ -1,0 +1,894 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateDASH",
+  "flagsHint": "detectAdditionalFlags",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "calculateDASH averages all answered 1-5 item scores (minimum 27 of 30 required, else dashScore is null with dashCategoryLabel 'Insufficient responses') and applies DASH = ((mean - 1) * 25). firedRules lists every ANSWERED item scored above 1 (not just above the mean); an unanswered item is silently excluded from both the mean and the audit trail. detectAdditionalFlags is fully independent of the DASH score and reads a handful of specific DASH items (q26 tingling, q27 weakness, q29 sleep) directly rather than the aggregate score.",
+  "personas": [
+    {
+      "name": "No disability, right-hand dominant",
+      "description": "All 30 DASH items answered '1 - No difficulty'. DASH = ((1-1)*25) = 0, 'No disability'. No item scores above 1, so firedRules is empty. No pain, no red-flag history, no allergies or prior surgery, so no flags fire.",
+      "state": {
+        "demographics": {
+          "firstName": "Rosalind",
+          "lastName": "Kaczmarek",
+          "dateOfBirth": "1985-02-14",
+          "sex": "female",
+          "occupation": "Administrator",
+          "dominantHand": "right"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Mild wrist stiffness in the morning",
+          "affectedJoint": "wrist",
+          "side": "right",
+          "duration": "2 weeks",
+          "onsetType": "gradual",
+          "aggravatingFactors": []
+        },
+        "painAssessment": {
+          "currentPainLevel": 1,
+          "worstPain": 2,
+          "bestPain": 0,
+          "painCharacter": "aching",
+          "painFrequency": "morning-stiffness",
+          "nightPain": "no",
+          "painWithWeightBearing": "no"
+        },
+        "dashQuestionnaire": {
+          "q1": 1,
+          "q2": 1,
+          "q3": 1,
+          "q4": 1,
+          "q5": 1,
+          "q6": 1,
+          "q7": 1,
+          "q8": 1,
+          "q9": 1,
+          "q10": 1,
+          "q11": 1,
+          "q12": 1,
+          "q13": 1,
+          "q14": 1,
+          "q15": 1,
+          "q16": 1,
+          "q17": 1,
+          "q18": 1,
+          "q19": 1,
+          "q20": 1,
+          "q21": 1,
+          "q22": 1,
+          "q23": 1,
+          "q24": 1,
+          "q25": 1,
+          "q26": 1,
+          "q27": 1,
+          "q28": 1,
+          "q29": 1,
+          "q30": 1
+        },
+        "rangeOfMotion": {
+          "joint": "wrist",
+          "flexion": 80,
+          "extension": 70,
+          "notes": "Full, pain-free range"
+        },
+        "strengthTesting": {
+          "gripStrengthLeft": 30,
+          "gripStrengthRight": 32,
+          "manualMuscleGrade": "5/5",
+          "specificWeaknesses": ""
+        },
+        "functionalLimitations": {
+          "difficultyWithADLs": [],
+          "mobilityAids": [],
+          "workRestrictions": "",
+          "sportRestrictions": ""
+        },
+        "imagingHistory": {
+          "xRay": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "mri": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "ctScan": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "ultrasound": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          }
+        },
+        "currentTreatment": {
+          "medications": [],
+          "physicalTherapy": "no",
+          "physicalTherapyDetails": "",
+          "injections": "no",
+          "injectionDetails": "",
+          "braceOrSplint": "no",
+          "braceDetails": "",
+          "otherTreatments": "",
+          "allergies": []
+        },
+        "surgicalHistory": {
+          "previousOrthopedicSurgery": "no",
+          "surgeries": [],
+          "anesthesiaComplications": "no",
+          "anesthesiaDetails": "",
+          "willingToConsiderSurgery": ""
+        }
+      },
+      "expected": {
+        "dashScore": 0,
+        "dashCategoryLabel": "No disability",
+        "firedRules": [],
+        "answeredCount": 30,
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "Moderate bilateral disability with sleep disturbance",
+      "description": "28 of 30 DASH items answered '3 - Moderate difficulty', with tingling ('2 - Mild') held below the neurological-flag threshold and sleep disturbance ('4 - Severe') above it. DASH = ((3.0-1)*25) = 50, 'Moderate disability'. All 30 items fire (every answered score is above 1). Two medium flags: severe sleep disturbance (DASH item 29) and bilateral joint involvement.",
+      "state": {
+        "demographics": {
+          "firstName": "Otis",
+          "lastName": "Vandermeer",
+          "dateOfBirth": "1971-07-09",
+          "sex": "male",
+          "occupation": "Warehouse operative",
+          "dominantHand": "right"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Ongoing shoulder pain affecting both arms",
+          "affectedJoint": "shoulder",
+          "side": "bilateral",
+          "duration": "4 months",
+          "onsetType": "gradual",
+          "aggravatingFactors": []
+        },
+        "painAssessment": {
+          "currentPainLevel": 5,
+          "worstPain": 7,
+          "bestPain": 3,
+          "painCharacter": "aching",
+          "painFrequency": "activity-related",
+          "nightPain": "no",
+          "painWithWeightBearing": "no"
+        },
+        "dashQuestionnaire": {
+          "q1": 3,
+          "q2": 3,
+          "q3": 3,
+          "q4": 3,
+          "q5": 3,
+          "q6": 3,
+          "q7": 3,
+          "q8": 3,
+          "q9": 3,
+          "q10": 3,
+          "q11": 3,
+          "q12": 3,
+          "q13": 3,
+          "q14": 3,
+          "q15": 3,
+          "q16": 3,
+          "q17": 3,
+          "q18": 3,
+          "q19": 3,
+          "q20": 3,
+          "q21": 3,
+          "q22": 3,
+          "q23": 3,
+          "q24": 3,
+          "q25": 3,
+          "q26": 2,
+          "q27": 3,
+          "q28": 3,
+          "q29": 4,
+          "q30": 3
+        },
+        "rangeOfMotion": {
+          "joint": "shoulder",
+          "flexion": 130,
+          "abduction": 110,
+          "internalRotation": 40,
+          "externalRotation": 50,
+          "notes": "Reduced abduction bilaterally"
+        },
+        "strengthTesting": {
+          "gripStrengthLeft": 22,
+          "gripStrengthRight": 24,
+          "manualMuscleGrade": "4/5",
+          "specificWeaknesses": "Mild deltoid weakness"
+        },
+        "functionalLimitations": {
+          "difficultyWithADLs": [
+            "dressing",
+            "cooking"
+          ],
+          "mobilityAids": [],
+          "workRestrictions": "No overhead lifting",
+          "sportRestrictions": "No swimming"
+        },
+        "imagingHistory": {
+          "xRay": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "mri": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "ctScan": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "ultrasound": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          }
+        },
+        "currentTreatment": {
+          "medications": [
+            {
+              "name": "Naproxen",
+              "dose": "500mg",
+              "frequency": "twice daily"
+            }
+          ],
+          "physicalTherapy": "yes",
+          "physicalTherapyDetails": "6 sessions, ongoing",
+          "injections": "no",
+          "injectionDetails": "",
+          "braceOrSplint": "no",
+          "braceDetails": "",
+          "otherTreatments": "",
+          "allergies": []
+        },
+        "surgicalHistory": {
+          "previousOrthopedicSurgery": "no",
+          "surgeries": [],
+          "anesthesiaComplications": "no",
+          "anesthesiaDetails": "",
+          "willingToConsiderSurgery": "undecided"
+        }
+      },
+      "expected": {
+        "dashScore": 50,
+        "dashCategoryLabel": "Moderate disability",
+        "firedRules": [
+          {
+            "id": "DASH-01",
+            "domain": "Daily activities",
+            "description": "Open a tight or new jar",
+            "score": 3
+          },
+          {
+            "id": "DASH-02",
+            "domain": "Daily activities",
+            "description": "Write",
+            "score": 3
+          },
+          {
+            "id": "DASH-03",
+            "domain": "Daily activities",
+            "description": "Turn a key",
+            "score": 3
+          },
+          {
+            "id": "DASH-04",
+            "domain": "Daily activities",
+            "description": "Prepare a meal",
+            "score": 3
+          },
+          {
+            "id": "DASH-05",
+            "domain": "Daily activities",
+            "description": "Push open a heavy door",
+            "score": 3
+          },
+          {
+            "id": "DASH-06",
+            "domain": "Daily activities",
+            "description": "Place an object on a shelf above your head",
+            "score": 3
+          },
+          {
+            "id": "DASH-07",
+            "domain": "Daily activities",
+            "description": "Do heavy household chores (e.g., wash walls, floors)",
+            "score": 3
+          },
+          {
+            "id": "DASH-08",
+            "domain": "Daily activities",
+            "description": "Garden or do yard work",
+            "score": 3
+          },
+          {
+            "id": "DASH-09",
+            "domain": "Self-care",
+            "description": "Make a bed",
+            "score": 3
+          },
+          {
+            "id": "DASH-10",
+            "domain": "Self-care",
+            "description": "Carry a shopping bag or briefcase",
+            "score": 3
+          },
+          {
+            "id": "DASH-11",
+            "domain": "Self-care",
+            "description": "Carry a heavy object (over 10 lbs)",
+            "score": 3
+          },
+          {
+            "id": "DASH-12",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Change a lightbulb overhead",
+            "score": 3
+          },
+          {
+            "id": "DASH-13",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Wash or blow dry your hair",
+            "score": 3
+          },
+          {
+            "id": "DASH-14",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Wash your back",
+            "score": 3
+          },
+          {
+            "id": "DASH-15",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Put on a pullover sweater",
+            "score": 3
+          },
+          {
+            "id": "DASH-16",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Use a knife to cut food",
+            "score": 3
+          },
+          {
+            "id": "DASH-17",
+            "domain": "Social/recreational",
+            "description": "Recreational activities requiring little effort (e.g., card playing, knitting)",
+            "score": 3
+          },
+          {
+            "id": "DASH-18",
+            "domain": "Social/recreational",
+            "description": "Recreational activities requiring force or impact (e.g., golf, hammering, tennis)",
+            "score": 3
+          },
+          {
+            "id": "DASH-19",
+            "domain": "Social/recreational",
+            "description": "Recreational activities in which you move your arm freely (e.g., throwing, badminton)",
+            "score": 3
+          },
+          {
+            "id": "DASH-20",
+            "domain": "Social/recreational",
+            "description": "Manage transportation needs (getting from one place to another)",
+            "score": 3
+          },
+          {
+            "id": "DASH-21",
+            "domain": "Social/recreational",
+            "description": "Sexual activities",
+            "score": 3
+          },
+          {
+            "id": "DASH-22",
+            "domain": "Work/daily life",
+            "description": "During the past week, to what extent has your arm, shoulder or hand problem interfered with your normal social activities with family, friends, neighbours or groups?",
+            "score": 3
+          },
+          {
+            "id": "DASH-23",
+            "domain": "Work/daily life",
+            "description": "During the past week, were you limited in your work or other regular daily activities as a result of your arm, shoulder or hand problem?",
+            "score": 3
+          },
+          {
+            "id": "DASH-24",
+            "domain": "Pain",
+            "description": "Arm, shoulder or hand pain",
+            "score": 3
+          },
+          {
+            "id": "DASH-25",
+            "domain": "Pain",
+            "description": "Arm, shoulder or hand pain when you performed any specific activity",
+            "score": 3
+          },
+          {
+            "id": "DASH-26",
+            "domain": "Pain",
+            "description": "Tingling (pins and needles) in your arm, shoulder or hand",
+            "score": 2
+          },
+          {
+            "id": "DASH-27",
+            "domain": "Other symptoms",
+            "description": "Weakness in your arm, shoulder or hand",
+            "score": 3
+          },
+          {
+            "id": "DASH-28",
+            "domain": "Other symptoms",
+            "description": "Stiffness in your arm, shoulder or hand",
+            "score": 3
+          },
+          {
+            "id": "DASH-29",
+            "domain": "Other symptoms",
+            "description": "During the past week, how much difficulty have you had sleeping because of the pain in your arm, shoulder or hand?",
+            "score": 4
+          },
+          {
+            "id": "DASH-30",
+            "domain": "Other symptoms",
+            "description": "I feel less capable, less confident, or less useful because of my arm, shoulder or hand problem",
+            "score": 3
+          }
+        ],
+        "answeredCount": 30,
+        "additionalFlags": [
+          {
+            "id": "FLAG-SLEEP-001",
+            "category": "Sleep Disturbance",
+            "message": "Severe sleep disturbance due to pain - consider pain management review",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BILATERAL-001",
+            "category": "Bilateral Involvement",
+            "message": "Bilateral joint involvement - consider systemic or inflammatory cause",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Very severe disability, traumatic bilateral injury with anaphylaxis history",
+      "description": "27 of 30 DASH items answered '5 - Unable' (the three social/recreational items 17-19 are left unanswered, meeting the minimum 27-of-30 requirement exactly). DASH = ((5.0-1)*25) = 100, 'Very severe disability'. Traumatic bilateral onset with severe pain, night pain, swelling and redness, no X-ray taken, a documented penicillin anaphylaxis, two prior orthopedic surgeries with an anaesthesia complication, five ADLs affected, and all three conservative treatments (PT, injections, medication) already tried. Twenty-seven rules fire. Sixteen flags fire: ten high (severe current/worst pain, night pain red flag, tingling, weakness, joint instability, possible infection, fracture suspicion without imaging, anaesthesia risk, anaphylaxis history) and six medium (prior surgery, drug allergy count, sleep disturbance, bilateral involvement, functional limitation, failed conservative treatment).",
+      "state": {
+        "demographics": {
+          "firstName": "Callum",
+          "lastName": "Ferreira",
+          "dateOfBirth": "1968-12-01",
+          "sex": "male",
+          "occupation": "Roofer",
+          "dominantHand": "right"
+        },
+        "chiefComplaint": {
+          "primaryConcern": "Severe bilateral shoulder pain after a fall from height",
+          "affectedJoint": "shoulder",
+          "side": "bilateral",
+          "duration": "3 days",
+          "onsetType": "traumatic",
+          "aggravatingFactors": [
+            "swelling",
+            "redness"
+          ]
+        },
+        "painAssessment": {
+          "currentPainLevel": 9,
+          "worstPain": 10,
+          "bestPain": 6,
+          "painCharacter": "throbbing",
+          "painFrequency": "constant",
+          "nightPain": "yes",
+          "painWithWeightBearing": "yes"
+        },
+        "dashQuestionnaire": {
+          "q1": 5,
+          "q2": 5,
+          "q3": 5,
+          "q4": 5,
+          "q5": 5,
+          "q6": 5,
+          "q7": 5,
+          "q8": 5,
+          "q9": 5,
+          "q10": 5,
+          "q11": 5,
+          "q12": 5,
+          "q13": 5,
+          "q14": 5,
+          "q15": 5,
+          "q16": 5,
+          "q17": null,
+          "q18": null,
+          "q19": null,
+          "q20": 5,
+          "q21": 5,
+          "q22": 5,
+          "q23": 5,
+          "q24": 5,
+          "q25": 5,
+          "q26": 5,
+          "q27": 5,
+          "q28": 5,
+          "q29": 5,
+          "q30": 5
+        },
+        "rangeOfMotion": {
+          "joint": "shoulder",
+          "flexion": 30,
+          "abduction": 20,
+          "notes": "Severely restricted, guarding both sides"
+        },
+        "strengthTesting": {
+          "gripStrengthLeft": 8,
+          "gripStrengthRight": 9,
+          "manualMuscleGrade": "2/5",
+          "specificWeaknesses": "Marked bilateral deltoid and rotator cuff weakness"
+        },
+        "functionalLimitations": {
+          "difficultyWithADLs": [
+            "dressing",
+            "cooking",
+            "bathing",
+            "driving",
+            "lifting"
+          ],
+          "mobilityAids": [
+            "arm sling"
+          ],
+          "workRestrictions": "Unfit for any manual work",
+          "sportRestrictions": "None currently possible"
+        },
+        "imagingHistory": {
+          "xRay": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "mri": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "ctScan": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          },
+          "ultrasound": {
+            "performed": "no",
+            "date": "",
+            "findings": ""
+          }
+        },
+        "currentTreatment": {
+          "medications": [
+            {
+              "name": "Ibuprofen",
+              "dose": "400mg",
+              "frequency": "three times daily"
+            }
+          ],
+          "physicalTherapy": "yes",
+          "physicalTherapyDetails": "Trialled before the fall, for a prior rotator cuff issue",
+          "injections": "yes",
+          "injectionDetails": "Subacromial corticosteroid injection, right shoulder, 2025",
+          "braceOrSplint": "yes",
+          "braceDetails": "Bilateral arm slings",
+          "otherTreatments": "",
+          "allergies": [
+            {
+              "allergen": "Penicillin",
+              "reaction": "Anaphylaxis",
+              "severity": "anaphylaxis"
+            }
+          ]
+        },
+        "surgicalHistory": {
+          "previousOrthopedicSurgery": "yes",
+          "surgeries": [
+            {
+              "procedure": "Rotator cuff repair",
+              "date": "2019-05-01",
+              "outcome": "Partial improvement"
+            },
+            {
+              "procedure": "Carpal tunnel release",
+              "date": "2021-11-12",
+              "outcome": "Good"
+            }
+          ],
+          "anesthesiaComplications": "yes",
+          "anesthesiaDetails": "Malignant hyperthermia during 2019 general anaesthetic",
+          "willingToConsiderSurgery": "yes"
+        }
+      },
+      "expected": {
+        "dashScore": 100,
+        "dashCategoryLabel": "Very severe disability",
+        "firedRules": [
+          {
+            "id": "DASH-01",
+            "domain": "Daily activities",
+            "description": "Open a tight or new jar",
+            "score": 5
+          },
+          {
+            "id": "DASH-02",
+            "domain": "Daily activities",
+            "description": "Write",
+            "score": 5
+          },
+          {
+            "id": "DASH-03",
+            "domain": "Daily activities",
+            "description": "Turn a key",
+            "score": 5
+          },
+          {
+            "id": "DASH-04",
+            "domain": "Daily activities",
+            "description": "Prepare a meal",
+            "score": 5
+          },
+          {
+            "id": "DASH-05",
+            "domain": "Daily activities",
+            "description": "Push open a heavy door",
+            "score": 5
+          },
+          {
+            "id": "DASH-06",
+            "domain": "Daily activities",
+            "description": "Place an object on a shelf above your head",
+            "score": 5
+          },
+          {
+            "id": "DASH-07",
+            "domain": "Daily activities",
+            "description": "Do heavy household chores (e.g., wash walls, floors)",
+            "score": 5
+          },
+          {
+            "id": "DASH-08",
+            "domain": "Daily activities",
+            "description": "Garden or do yard work",
+            "score": 5
+          },
+          {
+            "id": "DASH-09",
+            "domain": "Self-care",
+            "description": "Make a bed",
+            "score": 5
+          },
+          {
+            "id": "DASH-10",
+            "domain": "Self-care",
+            "description": "Carry a shopping bag or briefcase",
+            "score": 5
+          },
+          {
+            "id": "DASH-11",
+            "domain": "Self-care",
+            "description": "Carry a heavy object (over 10 lbs)",
+            "score": 5
+          },
+          {
+            "id": "DASH-12",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Change a lightbulb overhead",
+            "score": 5
+          },
+          {
+            "id": "DASH-13",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Wash or blow dry your hair",
+            "score": 5
+          },
+          {
+            "id": "DASH-14",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Wash your back",
+            "score": 5
+          },
+          {
+            "id": "DASH-15",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Put on a pullover sweater",
+            "score": 5
+          },
+          {
+            "id": "DASH-16",
+            "domain": "Arm/shoulder/hand function",
+            "description": "Use a knife to cut food",
+            "score": 5
+          },
+          {
+            "id": "DASH-20",
+            "domain": "Social/recreational",
+            "description": "Manage transportation needs (getting from one place to another)",
+            "score": 5
+          },
+          {
+            "id": "DASH-21",
+            "domain": "Social/recreational",
+            "description": "Sexual activities",
+            "score": 5
+          },
+          {
+            "id": "DASH-22",
+            "domain": "Work/daily life",
+            "description": "During the past week, to what extent has your arm, shoulder or hand problem interfered with your normal social activities with family, friends, neighbours or groups?",
+            "score": 5
+          },
+          {
+            "id": "DASH-23",
+            "domain": "Work/daily life",
+            "description": "During the past week, were you limited in your work or other regular daily activities as a result of your arm, shoulder or hand problem?",
+            "score": 5
+          },
+          {
+            "id": "DASH-24",
+            "domain": "Pain",
+            "description": "Arm, shoulder or hand pain",
+            "score": 5
+          },
+          {
+            "id": "DASH-25",
+            "domain": "Pain",
+            "description": "Arm, shoulder or hand pain when you performed any specific activity",
+            "score": 5
+          },
+          {
+            "id": "DASH-26",
+            "domain": "Pain",
+            "description": "Tingling (pins and needles) in your arm, shoulder or hand",
+            "score": 5
+          },
+          {
+            "id": "DASH-27",
+            "domain": "Other symptoms",
+            "description": "Weakness in your arm, shoulder or hand",
+            "score": 5
+          },
+          {
+            "id": "DASH-28",
+            "domain": "Other symptoms",
+            "description": "Stiffness in your arm, shoulder or hand",
+            "score": 5
+          },
+          {
+            "id": "DASH-29",
+            "domain": "Other symptoms",
+            "description": "During the past week, how much difficulty have you had sleeping because of the pain in your arm, shoulder or hand?",
+            "score": 5
+          },
+          {
+            "id": "DASH-30",
+            "domain": "Other symptoms",
+            "description": "I feel less capable, less confident, or less useful because of my arm, shoulder or hand problem",
+            "score": 5
+          }
+        ],
+        "answeredCount": 27,
+        "additionalFlags": [
+          {
+            "id": "FLAG-PAIN-001",
+            "category": "Severe Pain",
+            "message": "Current pain level 9/10 - urgent pain management review recommended",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-PAIN-002",
+            "category": "Severe Pain",
+            "message": "Worst pain level 10/10 reported - assess for acute pathology",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-RED-001",
+            "category": "Red Flag",
+            "message": "Night pain reported - rule out infection, malignancy, or inflammatory arthropathy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-NEURO-001",
+            "category": "Neurological Symptoms",
+            "message": "Significant tingling/pins and needles reported - assess for nerve compression or neuropathy",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-WEAKNESS-001",
+            "category": "Significant Weakness",
+            "message": "Severe weakness reported in arm/shoulder/hand - assess for tendon rupture or neurological cause",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INSTABILITY-001",
+            "category": "Joint Instability",
+            "message": "Traumatic onset with weight-bearing pain - assess for fracture, dislocation, or ligament injury",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-INFECTION-001",
+            "category": "Possible Infection",
+            "message": "Swelling, redness, and night pain present - rule out septic arthritis or osteomyelitis",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-FRACTURE-001",
+            "category": "Fracture Suspicion",
+            "message": "Traumatic onset without X-ray - imaging recommended to rule out fracture",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ANESTH-001",
+            "category": "Anesthesia Risk",
+            "message": "Previous anesthesia complications: Malignant hyperthermia during 2019 general anaesthetic - anesthetic review required if surgery planned",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-ALLERGY-ANAPH-0",
+            "category": "Allergy",
+            "message": "ANAPHYLAXIS history: Penicillin",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-SURGERY-001",
+            "category": "Surgical History",
+            "message": "2 previous orthopedic surgery/surgeries documented - review for relevance to current complaint",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-ALLERGY-001",
+            "category": "Allergy",
+            "message": "1 drug allergy/allergies documented",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-SLEEP-001",
+            "category": "Sleep Disturbance",
+            "message": "Severe sleep disturbance due to pain - consider pain management review",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-BILATERAL-001",
+            "category": "Bilateral Involvement",
+            "message": "Bilateral joint involvement - consider systemic or inflammatory cause",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-FUNCTION-001",
+            "category": "Functional Limitation",
+            "message": "Patient reports difficulty with 5 activities of daily living - significant functional impairment",
+            "priority": "medium"
+          },
+          {
+            "id": "FLAG-CONSERV-001",
+            "category": "Treatment Failure",
+            "message": "Multiple conservative treatments tried (PT, injections, medications) - surgical consultation may be warranted",
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  ]
+}

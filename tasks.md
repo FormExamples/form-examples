@@ -1807,7 +1807,26 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       All nine matched hand derivation exactly. Fleet: `bin/test-
       personas` forms 335/335 PASS, personas 1121/1121 PASS, 0 FAIL;
       `bin/test-e2e --html` 6/6 passed.
-      17 forms remain without personas, all unblocked purely by probe
+      3 more done: `orthopedic-assessment` (`calculateDASH` + split
+      `detectAdditionalFlags`; DASH = ((mean of answered 1-5 items - 1)
+      * 25), minimum 27 of 30 items; the critical persona answers
+      exactly 27 by leaving 3 unrelated items null, and firedRules
+      lists every ANSWERED item scored above 1 — an unanswered item is
+      silently excluded from both the mean and the audit trail, never
+      counted as a de-facto 1), `patient-room-readiness`
+      (`summariseReadiness`, a plain tally with no scoring/flags — 25
+      fixed boolean checkpoints, checkedCount plus the labels of every
+      unchecked one in catalogue order), and `prescription-request`
+      (`calculatePriorityLevel` + split `detectAdditionalFlags`;
+      MAX-priority over 8 declarative rules, routine default; the
+      critical persona is an emergency request with every field blank,
+      firing the emergency rule alongside all three substitution and
+      all four completeness-gap rules even though the emergency rule
+      alone already decides the outcome). All nine matched hand
+      derivation exactly. Fleet: `bin/test-personas` forms 338/338
+      PASS, personas 1130/1130 PASS, 0 FAIL; `bin/test-e2e --html` 6/6
+      passed.
+      14 forms remain without personas, all unblocked purely by probe
       discovery and never on the original 12-form list (see the full
       sweep: `for f in $(bin/test-engines --verbose | grep '^PASS' | awk
       '{print $2}'); do [ -f forms/$f/examples/personas.json ] || echo

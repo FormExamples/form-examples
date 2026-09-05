@@ -1,0 +1,191 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "summariseReadiness",
+  "note": "summariseReadiness() is a plain tally, not a clinical grader: it counts checked checkpoints and lists the labels of unchecked ones, in CHECKLIST_ITEMS order. No flags, no wall-clock reads.",
+  "personas": [
+    {
+      "name": "Fully ready room, all 25 checkpoints confirmed",
+      "description": "Every one of the 25 fixed checkpoints is checked. checkedCount is 25 of 25, uncheckedFields is empty.",
+      "state": {
+        "location": {
+          "buildingNameOrNumber": "Ward Block C",
+          "roomNameOrNumber": "Room 214"
+        },
+        "checklist": {
+          "patientCotMattressSideRailings": true,
+          "attendantCotMattress": true,
+          "callBell": true,
+          "cardiacTableIvStand": true,
+          "hotKettleGlasses": true,
+          "linenPatientDress": true,
+          "landlineNumbers": true,
+          "refrigeratorFan": true,
+          "televisionRemote": true,
+          "dustbin": true,
+          "bathTowelHandtowels": true,
+          "wcDustbins": true,
+          "washbasinAndFittings": true,
+          "bucketAndMug": true,
+          "geyser": true,
+          "soapDispenser": true,
+          "toiletKit": true,
+          "windowGlassGrooves": true,
+          "sidewalls": true,
+          "curtainBlind": true,
+          "chairSofa": true,
+          "wallSeepageWaterLeakage": true,
+          "electricityPointsLights": true,
+          "ceilingTiles": true,
+          "doorKnobsStopper": true
+        },
+        "inspector": {
+          "name": "Priya Ramachandran",
+          "email": "priya.ramachandran@example-hospital.org"
+        },
+        "inspection": {
+          "date": "2026-08-25",
+          "time": "09:15"
+        }
+      },
+      "expected": {
+        "checkedCount": 25,
+        "totalCount": 25,
+        "uncheckedFields": []
+      }
+    },
+    {
+      "name": "Mostly ready, seven bathroom and fabric items outstanding",
+      "description": "18 of 25 checkpoints are checked; the seven unchecked span the bathroom fittings (geyser, soap dispenser, toilet kit) and the room fabric (window glass/groves, wall seepage/water leakage, ceiling/tiles, door/knobs/stopper) - a plausible partial-turnaround state, not a safety-critical one (call bell, cot/mattress, and IV stand are all confirmed).",
+      "state": {
+        "location": {
+          "buildingNameOrNumber": "Ward Block C",
+          "roomNameOrNumber": "Room 219"
+        },
+        "checklist": {
+          "patientCotMattressSideRailings": true,
+          "attendantCotMattress": true,
+          "callBell": true,
+          "cardiacTableIvStand": true,
+          "hotKettleGlasses": true,
+          "linenPatientDress": true,
+          "landlineNumbers": true,
+          "refrigeratorFan": true,
+          "televisionRemote": true,
+          "dustbin": true,
+          "bathTowelHandtowels": true,
+          "wcDustbins": true,
+          "washbasinAndFittings": true,
+          "bucketAndMug": true,
+          "geyser": false,
+          "soapDispenser": false,
+          "toiletKit": false,
+          "windowGlassGrooves": false,
+          "sidewalls": true,
+          "curtainBlind": true,
+          "chairSofa": true,
+          "wallSeepageWaterLeakage": false,
+          "electricityPointsLights": true,
+          "ceilingTiles": false,
+          "doorKnobsStopper": false
+        },
+        "inspector": {
+          "name": "Devan Okafor",
+          "email": "devan.okafor@example-hospital.org"
+        },
+        "inspection": {
+          "date": "2026-08-25",
+          "time": "11:40"
+        }
+      },
+      "expected": {
+        "checkedCount": 18,
+        "totalCount": 25,
+        "uncheckedFields": [
+          "Geyser",
+          "Soap Dispenser",
+          "Toilet Kit",
+          "Window Glass / Groves",
+          "Wall Seepage / Water Leakage",
+          "Ceiling / Tiles",
+          "Door / Knobs / Stopper"
+        ]
+      }
+    },
+    {
+      "name": "Room not started, all 25 checkpoints outstanding",
+      "description": "None of the 25 checkpoints are checked - a room housekeeping has not yet turned around. checkedCount is 0 of 25, uncheckedFields lists all 25 labels in checklist order.",
+      "state": {
+        "location": {
+          "buildingNameOrNumber": "Ward Block D",
+          "roomNameOrNumber": "Room 301"
+        },
+        "checklist": {
+          "patientCotMattressSideRailings": false,
+          "attendantCotMattress": false,
+          "callBell": false,
+          "cardiacTableIvStand": false,
+          "hotKettleGlasses": false,
+          "linenPatientDress": false,
+          "landlineNumbers": false,
+          "refrigeratorFan": false,
+          "televisionRemote": false,
+          "dustbin": false,
+          "bathTowelHandtowels": false,
+          "wcDustbins": false,
+          "washbasinAndFittings": false,
+          "bucketAndMug": false,
+          "geyser": false,
+          "soapDispenser": false,
+          "toiletKit": false,
+          "windowGlassGrooves": false,
+          "sidewalls": false,
+          "curtainBlind": false,
+          "chairSofa": false,
+          "wallSeepageWaterLeakage": false,
+          "electricityPointsLights": false,
+          "ceilingTiles": false,
+          "doorKnobsStopper": false
+        },
+        "inspector": {
+          "name": "",
+          "email": ""
+        },
+        "inspection": {
+          "date": "",
+          "time": ""
+        }
+      },
+      "expected": {
+        "checkedCount": 0,
+        "totalCount": 25,
+        "uncheckedFields": [
+          "Patient Cot / Mattress / side railings",
+          "Attendant Cot / Mattress",
+          "Call Bell",
+          "Cardiac Table / IV Stand",
+          "Hot Kettle / Glasses",
+          "Linen / Patient Dress",
+          "Landline / Numbers",
+          "Refrigerator / Fan",
+          "Television / Remote",
+          "Dustbin",
+          "Bath Towel / Handtowels",
+          "Wc / Dust bins",
+          "Washbasin & Fittings",
+          "Bucket & Mug",
+          "Geyser",
+          "Soap Dispenser",
+          "Toilet Kit",
+          "Window Glass / Groves",
+          "Sidewalls",
+          "Curtain / Blind",
+          "Chair / Sofa",
+          "Wall Seepage / Water Leakage",
+          "Electricity Points / Lights",
+          "Ceiling / Tiles",
+          "Door / Knobs / Stopper"
+        ]
+      }
+    }
+  ]
+}
