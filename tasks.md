@@ -1934,10 +1934,34 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       derivation exactly. Fleet: `bin/test-personas` forms 351/351
       PASS, personas 1169/1169 PASS, 0 FAIL; `bin/test-e2e --html`
       2/2, 4/4, and 4/4 passed across the three batches.
-      1 form remains without personas
-      (`united-kingdom-lasting-power-of-attorney-for-health-and-care-
-      decisions`), the last one unblocked purely by probe discovery
-      and never on the original 12-form list.
+      Final form done, closing the backlog:
+      `united-kingdom-lasting-power-of-attorney-for-health-and-care-
+      decisions` (`calculateLpaValidity`, folding `detectAdditionalFlags`
+      into its own return; a statutory-fatal cascade across seven rule
+      modules -- donor, attorney, certificate-provider, signature-order,
+      instruction, registration, plus the flag layer -- where any fatal
+      fired rule forces `invalid` and any high forces `needs-
+      correction`; a genuine, verified inconsistency between two rule
+      modules left unpatched: donor age is checked against the donor's
+      own signature date (falling back to `capacityDeclaredAt`), while
+      attorney and replacement-attorney age is checked only against
+      `donor.capacityDeclaredAt` -- attorney-rules.js never reads the
+      donor signature date at all; the critical persona is an underage,
+      incapacitated donor with zero attorneys, no certificate provider,
+      no signatures, an unset life-sustaining-treatment choice, and an
+      instruction proposing assisted suicide that also contradicts a
+      known ADRT, firing 18 of the engine's rules -- 13 fatal -- plus
+      all three of its non-statutory flags at once). All three matched
+      hand derivation exactly. Fleet: `bin/test-personas` forms
+      352/352 PASS, personas 1172/1172 PASS, 0 FAIL; `bin/test-e2e
+      --html` 2/2 passed. The persona backlog is complete: every form
+      with a probe-discoverable engine now has `examples/personas.json`.
+      The only forms left without one are the three engine-less-by-
+      design forms (`architecture-decision-record`,
+      `legal-requirements-privacy-notice`,
+      `screening-program-privacy-notice`) and one foundation-depth-only
+      form with no built front-end yet (`diabetes-podiatry-assessment`)
+      -- none of these were ever in scope for this backlog.
 
 ### Spec-driven follow-through
 

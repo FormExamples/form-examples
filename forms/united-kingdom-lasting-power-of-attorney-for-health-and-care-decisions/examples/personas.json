@@ -1,0 +1,614 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateLpaValidity",
+  "note": "calculateLpaValidity folds detectAdditionalFlags into its own output (no separate flagsHint). The reference date for age checks is read from recorded fields, not the wall clock: donor age uses the donor's own signature date (falling back to donor.capacityDeclaredAt), while attorney/replacement-attorney age uses only donor.capacityDeclaredAt (attorney-rules.js never reads the donor signature date, unlike donor-rules.js) -- a real, verified inconsistency between the two rule modules, not a bug introduced here. Every persona sets donor.capacityDeclaredAt explicitly so both age computations are deterministic without a clock key.",
+  "personas": [
+    {
+      "name": "baseline-ready-to-register",
+      "description": "Single attorney, knowledge-based certificate provider, clean statutory signing order (donor then certificate provider then attorney), Option B life-sustaining-treatment choice initialled, registration fee paid in full with no remission claimed. No fired rules, no flags, ready to register.",
+      "state": {
+        "formVersion": "2024.1",
+        "jurisdiction": "england",
+        "donor": {
+          "title": "Mx",
+          "givenNames": "Jordan",
+          "familyName": "Ashworth",
+          "otherNamesUsed": "",
+          "birthDate": "1950-03-15",
+          "email": "jordan.ashworth@example.co.uk",
+          "phone": "+44 7700 900111",
+          "postalAddressAsFullText": "12 Larch Grove, Bristol, BS1 4AA",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "BS1 4AA",
+          "unitedKingdomNhsNumber": "485 777 3456",
+          "jurisdiction": "england",
+          "preferredLanguage": "en",
+          "capacityDeclared": "yes",
+          "capacityDeclaredAt": "2026-08-01T09:00:00Z"
+        },
+        "attorneys": [
+          {
+            "title": "Ms",
+            "givenNames": "Priya",
+            "familyName": "Chandra",
+            "birthDate": "1975-06-20",
+            "email": "priya.chandra@example.co.uk",
+            "phone": "+44 7700 900222",
+            "postalAddressAsFullText": "4 Birch Close, Bristol, BS2 0AB",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "BS2 0AB",
+            "relationshipToDonor": "daughter",
+            "isBankrupt": "no",
+            "capacityDeclared": "yes"
+          }
+        ],
+        "replacementAttorneys": [],
+        "certificateProvider": {
+          "title": "Dr",
+          "givenNames": "Morgan",
+          "familyName": "Field",
+          "email": "morgan.field@example.co.uk",
+          "phone": "+44 7700 900333",
+          "postalAddressAsFullText": "9 Cedar Row, Bristol, BS3 1AC",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "BS3 1AC",
+          "route": "knowledge-based",
+          "profession": "",
+          "professionRegistrationNumber": "",
+          "yearsKnownDonor": 10,
+          "relationshipToDonor": "neighbour",
+          "declaredNotFamily": "yes",
+          "declaredNotEmployee": "yes",
+          "declaredNotAttorney": "yes"
+        },
+        "peopleToNotify": [
+          {
+            "title": "Mr",
+            "givenNames": "Sam",
+            "familyName": "Ashworth",
+            "email": "sam.ashworth@example.co.uk",
+            "phone": "+44 7700 900444",
+            "postalAddressAsFullText": "1 Oak Street, Bristol, BS4 2AE",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "BS4 2AE",
+            "relationshipToDonor": "son"
+          }
+        ],
+        "decisionRule": "jointly-and-severally",
+        "jointDecisionSet": "",
+        "lstChoice": "option-b",
+        "lstDonorInitialled": "yes",
+        "preferences": [
+          {
+            "category": "religious-belief",
+            "statement": "Donor wishes for a Church of England chaplain to be called if practical."
+          }
+        ],
+        "instructions": [],
+        "signatures": [
+          {
+            "signerRole": "donor",
+            "signerIndex": 0,
+            "signedAt": "2026-08-01T09:15:00Z",
+            "signatureMethod": "wet-ink",
+            "witnessName": "Alex Carpenter",
+            "witnessAddress": "3 Willow Way, Bristol, BS1 5AD",
+            "witnessSignedAt": "2026-08-01T09:15:00Z",
+            "witnessIsAttorney": "no"
+          },
+          {
+            "signerRole": "certificate-provider",
+            "signerIndex": 0,
+            "signedAt": "2026-08-01T09:30:00Z",
+            "signatureMethod": "wet-ink",
+            "witnessName": "",
+            "witnessAddress": "",
+            "witnessSignedAt": "",
+            "witnessIsAttorney": ""
+          },
+          {
+            "signerRole": "attorney",
+            "signerIndex": 1,
+            "signedAt": "2026-08-01T09:45:00Z",
+            "signatureMethod": "wet-ink",
+            "witnessName": "",
+            "witnessAddress": "",
+            "witnessSignedAt": "",
+            "witnessIsAttorney": ""
+          }
+        ],
+        "registration": {
+          "applicantRole": "donor",
+          "applicantSignedAt": "2026-08-05T10:00:00Z",
+          "feeAmountPounds": 82,
+          "feeRemission": "none",
+          "feeRemissionReason": "",
+          "submittedAt": "2026-08-06T10:00:00Z",
+          "submissionChannel": "post"
+        }
+      },
+      "expected": {
+        "validityStatus": "ready-to-register",
+        "completenessScore": 94,
+        "effectiveDate": "2026-08-01",
+        "firedRules": [],
+        "additionalFlags": [],
+        "engineVersion": "0.1.0"
+      }
+    },
+    {
+      "name": "needs-correction-skill-based-cp-and-unlawfulness-unassessed-instruction",
+      "description": "Skill-based certificate provider missing a professional registration number, one instruction not yet assessed for lawfulness that also contradicts a known ADRT, and a fee-remission claim with no stated reason. All high-severity, no fatal rules, so the application still needs correction rather than being outright invalid.",
+      "state": {
+        "formVersion": "2024.1",
+        "jurisdiction": "england",
+        "donor": {
+          "title": "Mx",
+          "givenNames": "Jordan",
+          "familyName": "Ashworth",
+          "otherNamesUsed": "",
+          "birthDate": "1950-03-15",
+          "email": "jordan.ashworth@example.co.uk",
+          "phone": "+44 7700 900111",
+          "postalAddressAsFullText": "12 Larch Grove, Bristol, BS1 4AA",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "BS1 4AA",
+          "unitedKingdomNhsNumber": "485 777 3456",
+          "jurisdiction": "england",
+          "preferredLanguage": "en",
+          "capacityDeclared": "yes",
+          "capacityDeclaredAt": "2026-08-01T09:00:00Z"
+        },
+        "attorneys": [
+          {
+            "title": "Ms",
+            "givenNames": "Priya",
+            "familyName": "Chandra",
+            "birthDate": "1975-06-20",
+            "email": "priya.chandra@example.co.uk",
+            "phone": "+44 7700 900222",
+            "postalAddressAsFullText": "4 Birch Close, Bristol, BS2 0AB",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "BS2 0AB",
+            "relationshipToDonor": "daughter",
+            "isBankrupt": "no",
+            "capacityDeclared": "yes"
+          }
+        ],
+        "replacementAttorneys": [],
+        "certificateProvider": {
+          "title": "Dr",
+          "givenNames": "Morgan",
+          "familyName": "Field",
+          "email": "morgan.field@example.co.uk",
+          "phone": "+44 7700 900333",
+          "postalAddressAsFullText": "9 Cedar Row, Bristol, BS3 1AC",
+          "countryAsIso31661Alpha2": "GB",
+          "postcode": "BS3 1AC",
+          "route": "skill-based",
+          "profession": "solicitor",
+          "professionRegistrationNumber": "",
+          "yearsKnownDonor": null,
+          "relationshipToDonor": "neighbour",
+          "declaredNotFamily": "yes",
+          "declaredNotEmployee": "yes",
+          "declaredNotAttorney": "yes"
+        },
+        "peopleToNotify": [],
+        "decisionRule": "jointly-and-severally",
+        "jointDecisionSet": "",
+        "lstChoice": "option-b",
+        "lstDonorInitialled": "yes",
+        "preferences": [],
+        "instructions": [
+          {
+            "category": "medical-treatment-general",
+            "statement": "Do not resuscitate if there is no realistic chance of recovery.",
+            "lawfulnessAssessed": "no",
+            "contradictsAdrt": "yes"
+          }
+        ],
+        "signatures": [
+          {
+            "signerRole": "donor",
+            "signerIndex": 0,
+            "signedAt": "2026-08-01T09:15:00Z",
+            "signatureMethod": "wet-ink",
+            "witnessName": "Alex Carpenter",
+            "witnessAddress": "3 Willow Way, Bristol, BS1 5AD",
+            "witnessSignedAt": "2026-08-01T09:15:00Z",
+            "witnessIsAttorney": "no"
+          },
+          {
+            "signerRole": "certificate-provider",
+            "signerIndex": 0,
+            "signedAt": "2026-08-01T09:30:00Z",
+            "signatureMethod": "wet-ink",
+            "witnessName": "",
+            "witnessAddress": "",
+            "witnessSignedAt": "",
+            "witnessIsAttorney": ""
+          },
+          {
+            "signerRole": "attorney",
+            "signerIndex": 1,
+            "signedAt": "2026-08-01T09:45:00Z",
+            "signatureMethod": "wet-ink",
+            "witnessName": "",
+            "witnessAddress": "",
+            "witnessSignedAt": "",
+            "witnessIsAttorney": ""
+          }
+        ],
+        "registration": {
+          "applicantRole": "donor",
+          "applicantSignedAt": "2026-08-05T10:00:00Z",
+          "feeAmountPounds": 41,
+          "feeRemission": "half",
+          "feeRemissionReason": "",
+          "submittedAt": "2026-08-06T10:00:00Z",
+          "submissionChannel": "post"
+        }
+      },
+      "expected": {
+        "validityStatus": "needs-correction",
+        "completenessScore": 94,
+        "effectiveDate": null,
+        "firedRules": [
+          {
+            "ruleId": "R-MCA-CP-REGISTRATION",
+            "severity": "high",
+            "ruleFamily": "certificate-provider",
+            "sourceCitation": "OPG guidance",
+            "description": "Skill-based certificate provider should record a professional registration number.",
+            "suggestedCorrection": "Enter the SRA, GMC, NMC, HCPC, or equivalent registration number."
+          },
+          {
+            "ruleId": "R-MCA-INSTR-LAW#1",
+            "severity": "high",
+            "ruleFamily": "instruction",
+            "sourceCitation": "MCA 2005 s.9(4)",
+            "description": "Instruction #1 has not been assessed as lawful.",
+            "suggestedCorrection": "A solicitor or certificate provider should confirm the instruction is lawful and possible."
+          },
+          {
+            "ruleId": "R-MCA-INSTR-ADRT#1",
+            "severity": "high",
+            "ruleFamily": "instruction",
+            "sourceCitation": "MCA 2005 s.25",
+            "description": "Instruction #1 contradicts a known Advance Decision to Refuse Treatment.",
+            "suggestedCorrection": "Reconcile the LPA instruction with the existing ADRT."
+          },
+          {
+            "ruleId": "R-MCA-FEE-REASON",
+            "severity": "high",
+            "ruleFamily": "registration",
+            "sourceCitation": "LPA Regs 2007 reg.6",
+            "description": "Fee remission claimed without a stated reason.",
+            "suggestedCorrection": "Select the statutory basis for the remission or exemption claim."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-ADRT-CONFLICT-001",
+            "category": "adrt-conflict",
+            "priority": "high",
+            "description": "At least one instruction contradicts a known Advance Decision to Refuse Treatment.",
+            "suggestedAction": "Reconcile the LPA instructions with the donor’s ADRT before submission."
+          }
+        ],
+        "engineVersion": "0.1.0"
+      }
+    },
+    {
+      "name": "critical-underage-donor-no-attorneys-no-signatures",
+      "description": "Underage donor without capacity, no attorneys named, no certificate provider linked, no signatures at all, life-sustaining-treatment choice unset, a prohibited-act instruction (assisted suicide) that also contradicts a known ADRT, an underage replacement attorney, six people to notify, and an incomplete registration with no fee paid. Maximal fatal-rule coverage across every rule family; the application is invalid.",
+      "state": {
+        "formVersion": "2024.1",
+        "jurisdiction": "",
+        "donor": {
+          "title": "Mx",
+          "givenNames": "Alex",
+          "familyName": "Minor",
+          "otherNamesUsed": "",
+          "birthDate": "2010-01-01",
+          "email": "",
+          "phone": "",
+          "postalAddressAsFullText": "12 Larch Grove, Bristol, BS1 4AA",
+          "countryAsIso31661Alpha2": "FR",
+          "postcode": "",
+          "unitedKingdomNhsNumber": "",
+          "jurisdiction": "",
+          "preferredLanguage": "cy",
+          "capacityDeclared": "no",
+          "capacityDeclaredAt": "2026-08-01T09:00:00Z"
+        },
+        "attorneys": [],
+        "replacementAttorneys": [
+          {
+            "title": "",
+            "givenNames": "Sam",
+            "familyName": "Minor",
+            "birthDate": "2015-01-01",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": "",
+            "isBankrupt": "",
+            "capacityDeclared": "",
+            "replacementTrigger": ""
+          }
+        ],
+        "certificateProvider": null,
+        "peopleToNotify": [
+          {
+            "title": "",
+            "givenNames": "Person1",
+            "familyName": "Notify",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": ""
+          },
+          {
+            "title": "",
+            "givenNames": "Person2",
+            "familyName": "Notify",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": ""
+          },
+          {
+            "title": "",
+            "givenNames": "Person3",
+            "familyName": "Notify",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": ""
+          },
+          {
+            "title": "",
+            "givenNames": "Person4",
+            "familyName": "Notify",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": ""
+          },
+          {
+            "title": "",
+            "givenNames": "Person5",
+            "familyName": "Notify",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": ""
+          },
+          {
+            "title": "",
+            "givenNames": "Person6",
+            "familyName": "Notify",
+            "email": "",
+            "phone": "",
+            "postalAddressAsFullText": "",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "",
+            "relationshipToDonor": ""
+          }
+        ],
+        "decisionRule": "",
+        "jointDecisionSet": "",
+        "lstChoice": "",
+        "lstDonorInitialled": "",
+        "preferences": [],
+        "instructions": [
+          {
+            "category": "end-of-life",
+            "statement": "Please arrange assisted suicide if I am terminal and unresponsive.",
+            "lawfulnessAssessed": "no",
+            "contradictsAdrt": "yes"
+          }
+        ],
+        "signatures": [],
+        "registration": {
+          "applicantRole": "",
+          "applicantSignedAt": null,
+          "feeAmountPounds": 0,
+          "feeRemission": "",
+          "feeRemissionReason": "",
+          "submittedAt": null,
+          "submissionChannel": ""
+        }
+      },
+      "expected": {
+        "validityStatus": "invalid",
+        "completenessScore": 22,
+        "effectiveDate": null,
+        "firedRules": [
+          {
+            "ruleId": "R-MCA-S9-AGE",
+            "severity": "fatal",
+            "ruleFamily": "donor",
+            "sourceCitation": "MCA 2005 s.9(2)(c)",
+            "description": "Donor age at signing is 16; must be 18 or older.",
+            "suggestedCorrection": "The donor must be at least 18 years old at the date of signing the LPA."
+          },
+          {
+            "ruleId": "R-MCA-S10-CAP",
+            "severity": "fatal",
+            "ruleFamily": "donor",
+            "sourceCitation": "MCA 2005 s.9(2)(b)",
+            "description": "Donor has not declared mental capacity at signing.",
+            "suggestedCorrection": "The donor must confirm they understand the LPA and have capacity at the time of signing."
+          },
+          {
+            "ruleId": "R-MCA-DONOR-JURISDICTION",
+            "severity": "fatal",
+            "ruleFamily": "donor",
+            "sourceCitation": "MCA 2005 (extent — England and Wales only)",
+            "description": "LP1H applies only to England and Wales; donor jurisdiction must be set.",
+            "suggestedCorrection": "Select England or Wales as the donor jurisdiction."
+          },
+          {
+            "ruleId": "R-MCA-ATT-COUNT-MIN",
+            "severity": "fatal",
+            "ruleFamily": "attorney",
+            "sourceCitation": "MCA 2005 s.10(1)",
+            "description": "At least one attorney must be named.",
+            "suggestedCorrection": "Name 1 to 4 attorneys on LP1H s.2."
+          },
+          {
+            "ruleId": "R-MCA-REPL-AGE#1",
+            "severity": "fatal",
+            "ruleFamily": "attorney",
+            "sourceCitation": "MCA 2005 s.10(1)(a)",
+            "description": "Replacement attorney #1 is 11 years old; must be 18 or older.",
+            "suggestedCorrection": "All replacement attorneys must be at least 18 years old."
+          },
+          {
+            "ruleId": "R-MCA-JOINT-CHOICE",
+            "severity": "high",
+            "ruleFamily": "attorney",
+            "sourceCitation": "LP1H s.3",
+            "description": "The donor must choose how the attorneys decide together.",
+            "suggestedCorrection": "Select jointly, jointly-and-severally, or mixed on LP1H s.3."
+          },
+          {
+            "ruleId": "R-MCA-CP-PRESENT",
+            "severity": "fatal",
+            "ruleFamily": "certificate-provider",
+            "sourceCitation": "LPA Regs 2007 Sch.1 Pt.2",
+            "description": "No certificate provider has been linked to this LPA.",
+            "suggestedCorrection": "Nominate an eligible certificate provider on LP1H s.10."
+          },
+          {
+            "ruleId": "R-MCA-SIG-DONOR",
+            "severity": "fatal",
+            "ruleFamily": "signature-order",
+            "sourceCitation": "LP1H s.9",
+            "description": "Donor has not signed the LPA.",
+            "suggestedCorrection": "Capture the donor’s signature and dated witness statement on LP1H s.9."
+          },
+          {
+            "ruleId": "R-MCA-SIG-CP",
+            "severity": "fatal",
+            "ruleFamily": "signature-order",
+            "sourceCitation": "LP1H s.10",
+            "description": "Certificate provider has not signed the LPA.",
+            "suggestedCorrection": "The certificate provider must sign LP1H s.10 before the attorneys."
+          },
+          {
+            "ruleId": "R-MCA-SIG-ATT-ALL",
+            "severity": "fatal",
+            "ruleFamily": "signature-order",
+            "sourceCitation": "LP1H s.11",
+            "description": "Not every named attorney has signed and dated the LPA.",
+            "suggestedCorrection": "Every attorney must sign LP1H s.11 after the donor and certificate provider."
+          },
+          {
+            "ruleId": "R-MCA-LST-CHOICE",
+            "severity": "fatal",
+            "ruleFamily": "instruction",
+            "sourceCitation": "MCA 2005 s.11(7)",
+            "description": "The donor must select Option A or Option B on life-sustaining treatment.",
+            "suggestedCorrection": "Choose Option A or Option B on LP1H s.5."
+          },
+          {
+            "ruleId": "R-MCA-INSTR-LAW#1",
+            "severity": "high",
+            "ruleFamily": "instruction",
+            "sourceCitation": "MCA 2005 s.9(4)",
+            "description": "Instruction #1 has not been assessed as lawful.",
+            "suggestedCorrection": "A solicitor or certificate provider should confirm the instruction is lawful and possible."
+          },
+          {
+            "ruleId": "R-MCA-INSTR-ADRT#1",
+            "severity": "high",
+            "ruleFamily": "instruction",
+            "sourceCitation": "MCA 2005 s.25",
+            "description": "Instruction #1 contradicts a known Advance Decision to Refuse Treatment.",
+            "suggestedCorrection": "Reconcile the LPA instruction with the existing ADRT."
+          },
+          {
+            "ruleId": "R-MCA-COP-PROHIBITED#1",
+            "severity": "fatal",
+            "ruleFamily": "instruction",
+            "sourceCitation": "Suicide Act 1961 s.2; MCA 2005 s.6",
+            "description": "Instruction #1 appears to authorise an unlawful act.",
+            "suggestedCorrection": "Remove or rewrite the instruction. An LPA cannot authorise unlawful acts."
+          },
+          {
+            "ruleId": "R-MCA-NOTIFY-MAX",
+            "severity": "fatal",
+            "ruleFamily": "registration",
+            "sourceCitation": "LPA Regs 2007",
+            "description": "Too many persons to notify: 6; maximum is 5.",
+            "suggestedCorrection": "List no more than five persons to notify on LP1H s.6."
+          },
+          {
+            "ruleId": "R-MCA-REG-APPLICANT",
+            "severity": "fatal",
+            "ruleFamily": "registration",
+            "sourceCitation": "LPA Regs 2007 reg.6",
+            "description": "The applicant for registration has not been identified.",
+            "suggestedCorrection": "Select whether the donor, one attorney, or all attorneys jointly are applying."
+          },
+          {
+            "ruleId": "R-MCA-REG-SIGNED",
+            "severity": "fatal",
+            "ruleFamily": "registration",
+            "sourceCitation": "LPA Regs 2007 reg.6",
+            "description": "The applicant has not signed Part C of LP1H.",
+            "suggestedCorrection": "The applicant must sign and date Part C before submission to the OPG."
+          },
+          {
+            "ruleId": "R-MCA-FEE",
+            "severity": "fatal",
+            "ruleFamily": "registration",
+            "sourceCitation": "LPA Regs 2007 reg.6",
+            "description": "No registration fee recorded and no remission or exemption indicated.",
+            "suggestedCorrection": "Record the registration fee (currently £82) or indicate the remission basis."
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-BILINGUAL-001",
+            "category": "bilingual-donor",
+            "priority": "low",
+            "description": "Donor preferred language is Welsh; offer the Cymraeg LP1H form path.",
+            "suggestedAction": "Use the Welsh-language LP1H template."
+          },
+          {
+            "flagId": "F-FOREIGN-DOMICILE-001",
+            "category": "foreign-domicile",
+            "priority": "medium",
+            "description": "Donor habitual residence appears to be outside the United Kingdom.",
+            "suggestedAction": "Refer to a solicitor for jurisdictional advice."
+          },
+          {
+            "flagId": "F-ADRT-CONFLICT-001",
+            "category": "adrt-conflict",
+            "priority": "high",
+            "description": "At least one instruction contradicts a known Advance Decision to Refuse Treatment.",
+            "suggestedAction": "Reconcile the LPA instructions with the donor’s ADRT before submission."
+          }
+        ],
+        "engineVersion": "0.1.0"
+      }
+    }
+  ]
+}
