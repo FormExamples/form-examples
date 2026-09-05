@@ -12,7 +12,7 @@ static site.
   driven through the UI
 
 See [the parent form's index.md](../index.md) and
-[the design spec](../../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md).
+[the design spec](../spec/index.md).
 
 ## Verify
 

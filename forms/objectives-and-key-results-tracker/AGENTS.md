@@ -2,8 +2,7 @@
 
 The OKR tracker form. See [`index.md`](index.md) for scope, scoring scales,
 RAG thresholds, and risk flags. See the design spec at
-[`docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md`](../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
-for the full data model.
+[`spec/index.md`](spec/index.md) for the full data model.
 
 ## Patterns
 

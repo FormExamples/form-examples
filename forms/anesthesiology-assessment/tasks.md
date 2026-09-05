@@ -2,7 +2,7 @@
 
 ## Completed
 
-- [x] Design spec authored (`docs/superpowers/specs/2026-04-16-anesthesiology-assessment-design.md`)
+- [x] Design spec authored (see `spec/index.md` and `doc/`)
 - [x] Create project documentation (index.md, AGENTS.md, plan.md, tasks.md)
 
 ## Pending

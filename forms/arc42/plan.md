@@ -2,9 +2,9 @@
 
 ## Current status
 
-Scaffolded 2026-05-08. Design based on the approved spec
-`docs/superpowers/specs/2026-05-08-arc42-form-design.md`. Build scope this
-session: foundation + Svelte form (option B from the spec).
+Scaffolded 2026-05-08. Design based on an approved planning spec (since
+removed). Build scope that session: foundation + Svelte form (option B
+from the spec).
 
 ## Why this form exists
 

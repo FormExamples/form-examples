@@ -1,6 +1,6 @@
 # Plan — Svelte form (SvelteKit)
 
-Implemented per [`docs/superpowers/plans/2026-05-10-okr-tracker-plan-3-svelte-form.md`](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-3-svelte-form.md).
+Implemented per [`../spec/index.md`](../spec/index.md).
 
 ## Status
 

@@ -1,6 +1,6 @@
 # Tasks — Svelte form (SvelteKit)
 
-See [`docs/superpowers/plans/2026-05-10-okr-tracker-plan-3-svelte-form.md`](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-3-svelte-form.md).
+See [`../spec/index.md`](../spec/index.md) for the domain spec.
 
 - [x] Task 1: Upgrade `package.json` and install SvelteKit toolchain
 - [x] Task 2: SvelteKit config files (Vite, Tailwind, app shell)

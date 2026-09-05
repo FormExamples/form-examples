@@ -26,5 +26,4 @@ scrollable page; state is a Svelte-5 runes store.
 ## Parent docs
 
 - [`../AGENTS.md`](../AGENTS.md)
-- [Design spec](../../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
-- [Svelte-form plan](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-3-svelte-form.md)
+- [Design spec](../spec/index.md)

@@ -1,6 +1,6 @@
 # Tasks — Full stack with Loco JSON API.js
 
-See [`docs/superpowers/plans/2026-05-10-okr-tracker-plan-6-full-stack-rust.md`](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-6-full-stack-rust.md).
+See [`../spec/index.md`](../spec/index.md) for the domain spec.
 
 - [x] Task 1: Upgrade `Cargo.toml` to a full Loco app (workspace + Loco deps)
 - [x] Task 2: `migration/` subcrate with 9 SeaORM migrations

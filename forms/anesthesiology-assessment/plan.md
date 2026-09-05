@@ -2,7 +2,7 @@
 
 ## Current status
 
-Design spec complete (see `doc/` and `docs/superpowers/specs/2026-04-16-anesthesiology-assessment-design.md`). Implementation pending.
+Design spec complete (see `doc/` and `spec/index.md`). Implementation pending.
 
 ## Scoring engine
 

@@ -2,7 +2,7 @@
 
 UK NHS-aligned pre-operative anesthesiology assessment combining four validated scoring systems — ASA Physical Status Classification, Mallampati / Airway Score, Revised Cardiac Risk Index (RCRI / Lee Index), and STOP-BANG (OSA screening) — into a composite perioperative risk level, with flagged safety-critical issues and an anaesthetic plan.
 
-See `doc/` and `docs/superpowers/specs/2026-04-16-anesthesiology-assessment-design.md` for the full design spec.
+See `doc/` and `spec/index.md` for the full design spec.
 
 ## Scoring system
 

@@ -218,8 +218,8 @@ teachable: documentation, tutorials, richer examples.
    escaped `forms/<slug>/front-end-with-svelte/src/routes/`.
 4. **Two Lily-Svelte TODO forms** (named above) never got the canonical UI.
 5. **`arc42/` is empty** and there is no `CONTRIBUTING.md`; `docs/` holds
-   only `rust/` and `superpowers/` — no architecture, authoring, or usage
-   documentation despite `spec.md` §1 promising a teachable shared design.
+   only `rust/` — no architecture, authoring, or usage documentation
+   despite `spec.md` §1 promising a teachable shared design.
 
 ### Workstreams
 

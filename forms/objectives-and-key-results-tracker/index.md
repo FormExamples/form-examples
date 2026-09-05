@@ -51,8 +51,8 @@ Composite RAG uses the worst-band-finding algorithm (modulated by
 stretch_tier for the progress threshold). Twelve risk flags are
 computed independently.
 
-See [the design spec](../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
-for the full data model, RAG thresholds, and flag triggers.
+See [the design spec](spec/index.md) for the full data model, RAG
+thresholds, and flag triggers.
 
 ## Verify
 
