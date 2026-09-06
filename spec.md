@@ -93,6 +93,20 @@ These sentinels exist so that the front-end can submit an in-progress
 draft without violating `NOT NULL` constraints or triggering grader
 divergence.
 
+### 3.4 Clinical triage convention
+
+Clinical settings across this monorepo use the standard **5-level Emergency
+Severity Index (ESI)** triage model as the reference framework for acuity /
+urgency banding, from ESI Level 1 (most urgent — immediate, life-threatening)
+to ESI Level 5 (least urgent — non-urgent). A form's own urgency, severity, or
+triage taxonomy (e.g. ASA Physical Status, `routine`/`urgent`/`critical-alert`
+follow-up bands, RED/YELLOW/GREEN triage categories) is not required to be
+renamed to ESI's five levels — each stays in the vocabulary its own clinical
+instrument or guideline uses — but when a form needs a generic emergency-care
+triage model, or when comparing acuity across forms, ESI is the fleet's
+canonical reference point. Per-form `spec/index.md` records how that form's
+own bands map onto ESI where the mapping is not self-evident.
+
 ## 4. Per-form artefacts (the contract a slug satisfies)
 
 | Path                                            | Owner               | Generated? |
