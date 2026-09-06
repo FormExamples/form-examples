@@ -1,11 +1,11 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalOrganism` requires a positive blood culture, a CSF isolate, CPE, or the explicit `criticalOrganism` flag — a resistant organism (MRSA/ESBL) on a significant culture from any other specimen type grades major severity via its own dedicated rule (R-SEV-MAJOR-02) but classifies only abnormal (not critical) and escalates only to 'urgent' follow-up, not 'critical-alert'. The second persona below isolates exactly that distinction.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalOrganism` requires a positive blood culture, a CSF isolate, CPE, or the explicit `criticalOrganism` flag — a resistant organism (MRSA/ESBL) on a significant culture from any other specimen type grades major severity via its own dedicated rule (R-SEV-MAJOR-02) but classifies only abnormal (not critical) and escalates only to 'urgent' follow-up, not 'critical-alert'. The second persona below isolates exactly that distinction. FIXED 2026-09-06: R-COMP-SENSITIVITIES-01 used to require non-empty `antibioticSensitivities` text even when `cultureResult === 'no-growth'` (nothing to be sensitive to), silently capping an otherwise-complete no-growth report at 80%. Fixed by treating the section as present whenever `cultureResult === 'no-growth'`, in both `js/rules.js` and `src/lib/engine/completeness-rules.ts`. The first persona below no longer needs its former 'Not applicable' placeholder workaround and now has the field genuinely blank.",
   "personas": [
     {
       "name": "normal-urine-no-growth-complete",
-      "description": "A routine mid-stream urine culture for suspected UTI: no significant growth on a satisfactory specimen, every mandatory report section present — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
+      "description": "A routine mid-stream urine culture for suspected UTI: no significant growth on a satisfactory specimen, `antibioticSensitivities` deliberately left blank (there is no isolated organism to test for sensitivity against). FIXED 2026-09-06: R-COMP-SENSITIVITIES-01 used to require non-empty sensitivities text even for a no-growth result, silently capping this otherwise-complete report at 80% — this persona used to work around that by filling the field with a placeholder 'Not applicable' string; it now demonstrates the actual fixed behaviour with the field genuinely blank — expect normal classification + none severity + 100% completeness + routine follow-up + no-action.",
       "state": {
         "reportingClinician": "Dr Priya Anand (Microbiologist)",
         "originatingRequestReference": "REQ-2026-0820-MC",
@@ -21,7 +21,7 @@
         "organismIsolated": "",
         "secondOrganismIsolated": "",
         "colonyCount": "",
-        "antibioticSensitivities": "Not applicable — no organism isolated.",
+        "antibioticSensitivities": "",
         "resistanceMrsa": false,
         "resistanceEsbl": false,
         "resistanceCpe": false,

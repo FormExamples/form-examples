@@ -1573,14 +1573,41 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       unreachable. Left alone here — deciding when a tumour-marker request
       should be outright rejected (vs. queried or redirected) is a product/
       clinical judgement call, not a mechanical reorder like the fix above.
-- [ ] **microbiology-culture-test-result: completeness penalises a
-      no-growth culture.** `R-COMP-SENSITIVITIES-01` requires
-      `antibioticSensitivities` text even when `cultureResult` is
+- [x] **microbiology-culture-test-result: completeness penalises a
+      no-growth culture.** FIXED 2026-09-06. `R-COMP-SENSITIVITIES-01`
+      required `antibioticSensitivities` text even when `cultureResult` was
       `no-growth` (nothing to be sensitive to), silently capping an
-      otherwise complete report at 80 % — the persona batch worked around
-      it with a "Not applicable" string. Treat the section as present when
-      no organism was isolated, mirroring histopathology's
-      `agreedAdjustmentsDetail`-satisfied-when-declined pattern.
+      otherwise complete report at 80% — the persona batch worked around it
+      with a "Not applicable" placeholder string. (This item's cross-
+      reference to "histopathology's `agreedAdjustmentsDetail`-satisfied-
+      when-declined pattern" was itself a slip — that field name belongs to
+      `neurodiversity-adjustment-response`, the next item below, not
+      `histopathology-test-result`; the fix here didn't need that
+      precedent to be correct, just the clear technical requirement.)
+      Fixed by treating the section as present whenever
+      `cultureResult === 'no-growth'`, in both `js/rules.js` and
+      `src/lib/engine/completeness-rules.ts`; confirmed no Loco-side
+      scoring logic exists for this form. Removed the now-unnecessary
+      "Not applicable" placeholder from both the
+      `normal-urine-no-growth-complete` persona and the Vitest fixture's
+      default `createNormalResult()`, leaving the field genuinely blank to
+      actually exercise the fix rather than mask the old bug. Added two
+      dedicated tests to `grader.test.ts`: a no-growth culture with blank
+      sensitivities still completes 100% (R-COMP-SENSITIVITIES-01 does not
+      fire), and a significant-growth culture with blank sensitivities
+      still drops to 80% (the rule still fires) — 16/16 passed, up from
+      14; also had to redirect the existing "computes partial
+      completeness" test to blank `specimenType` instead of
+      `antibioticSensitivities` as its second missing section, since that
+      combination no longer produces the same completeness percentage
+      once the fix landed. Re-ran `bin/test-personas --update
+      microbiology-culture-test-result` (3/3 PASS) and updated the persona
+      file's top-level `note` and the first persona's description.
+      `bin/test-e2e --html microbiology-culture-test-result` 2/2 passed
+      (no dashboard sample data references `cultureResult` or
+      `completenessPercent`, so no stale display existed). Fleet:
+      `bin/test-personas` forms 352/352 PASS, personas 1174/1174 PASS,
+      0 FAIL.
 - [ ] **neurodiversity-adjustment-response: no "decline acknowledged"
       outcome.** `deriveRecommendation`'s waterfall bottoms out at
       `implement` for a justified decline with nothing agreed and no

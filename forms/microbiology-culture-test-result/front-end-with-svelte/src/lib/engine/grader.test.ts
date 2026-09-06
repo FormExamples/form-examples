@@ -20,7 +20,10 @@ function createNormalResult(): MicrobiologyCultureResult {
 		organismIsolated: '',
 		secondOrganismIsolated: '',
 		colonyCount: '<10,000 CFU/mL',
-		antibioticSensitivities: 'Not applicable — no growth.',
+		// Genuinely blank, not a placeholder: a no-growth culture has no
+		// isolated organism to test sensitivity against, and this must still
+		// count as a complete report (R-COMP-SENSITIVITIES-01).
+		antibioticSensitivities: '',
 		resistanceMrsa: false,
 		resistanceEsbl: false,
 		resistanceCpe: false,
@@ -142,11 +145,34 @@ describe('Microbiology culture four-axis grading engine', () => {
 	it('computes partial completeness when sections are missing', () => {
 		const r = createNormalResult();
 		r.clinicalHistory = '';
-		r.antibioticSensitivities = '';
+		r.specimenType = '';
 		const g = calculateGrade(r);
 		// 3 of 5 sections present.
 		expect(g.reportCompletenessPercent).toBe(60);
 		expect(g.firedRules.some((rule) => rule.ruleId === 'R-COMP-HISTORY-01')).toBe(true);
+	});
+
+	it('does not penalise a no-growth culture for having no antibiotic sensitivities', () => {
+		// A no-growth culture has no isolated organism to test for sensitivity
+		// against; R-COMP-SENSITIVITIES-01 (which fires when a section is
+		// MISSING) must not fire here, and completeness must not be capped
+		// below 100% just because that field is blank.
+		const r = createNormalResult();
+		expect(r.cultureResult).toBe('no-growth');
+		expect(r.antibioticSensitivities).toBe('');
+		const g = calculateGrade(r);
+		expect(g.reportCompletenessPercent).toBe(100);
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-COMP-SENSITIVITIES-01')).toBe(false);
+	});
+
+	it('still penalises missing antibiotic sensitivities for a significant-growth culture', () => {
+		const r = createAbnormalResult();
+		r.antibioticSensitivities = '';
+		const g = calculateGrade(r);
+		// 4 of 5 sections present; R-COMP-SENSITIVITIES-01 fires because this
+		// is a significant-growth culture, not a no-growth one.
+		expect(g.reportCompletenessPercent).toBe(80);
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-COMP-SENSITIVITIES-01')).toBe(true);
 	});
 
 	it('grades a positive C. difficile toxin as moderate with recommended follow-up', () => {

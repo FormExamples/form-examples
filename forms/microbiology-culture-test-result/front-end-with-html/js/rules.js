@@ -281,7 +281,11 @@ const completenessSections = [
     ruleId: 'R-COMP-SENSITIVITIES-01',
     category: 'sensitivities',
     label: 'antibiotic sensitivities',
-    present: (r) => r.antibioticSensitivities.trim() !== ''
+    // A no-growth culture has no isolated organism to test for sensitivity
+    // against, so the section counts as present without free text — an
+    // otherwise complete no-growth report must not be capped below 100%
+    // just because there is nothing to report here.
+    present: (r) => r.cultureResult === 'no-growth' || r.antibioticSensitivities.trim() !== ''
   },
   {
     ruleId: 'R-COMP-IMPRESSION-01',
