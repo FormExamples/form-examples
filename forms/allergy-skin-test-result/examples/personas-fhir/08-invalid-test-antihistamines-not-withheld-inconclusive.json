@@ -1,0 +1,769 @@
+{
+  "resourceType": "Bundle",
+  "id": "74339bbd-ef85-47be-ac56-22aa9549ee0f",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Allergy Skin Test Result \u2014 invalid-test-antihistamines-not-withheld-inconclusive persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "41a61f34-d2cc-47da-a180-913d963bea71",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8fe4f93e-fe8d-4d47-abc2-5baa31ff78bd",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "8fe4f93e-fe8d-4d47-abc2-5baa31ff78bd",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result:role",
+                  "code": "allergist-immunologist",
+                  "display": "Allergist-Immunologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:df21cba1-11fa-4f77-ad1a-17a9fc9f976d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "df21cba1-11fa-4f77-ad1a-17a9fc9f976d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result",
+              "code": "allergy_skin_test_result",
+              "display": "Allergy Skin Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "AST-REQ-30063"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "test_type",
+                  "display": "Test Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "skin-prick-test",
+                  "display": "Skin-Prick-Test"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-08"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-08"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Suspected pollen allergy; patient takes daily cetirizine for chronic urticaria and was not advised to stop before the appointment."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "antihistamines_withheld",
+                  "display": "Antihistamines Withheld"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "positive_control_valid",
+                  "display": "Positive Control Valid"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "allergens_tested",
+                  "display": "Allergens Tested"
+                }
+              ]
+            },
+            "valueString": "Timothy grass, silver birch"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "wheal_sizes",
+                  "display": "Wheal Sizes"
+                }
+              ]
+            },
+            "valueString": "Timothy grass 0mm, silver birch 0mm; positive control 0mm (no weal on histamine control), negative control 0mm"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "positive_reactions",
+                  "display": "Positive Reactions"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "sensitisation_confirmed",
+                  "display": "Sensitisation Confirmed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "anaphylaxis_during_test",
+                  "display": "Anaphylaxis During Test"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "all_negative",
+                  "display": "All Negative"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "test_invalid",
+                  "display": "Test Invalid"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "interpretation",
+                  "display": "Interpretation"
+                }
+              ]
+            },
+            "valueString": "Positive histamine control failed to raise a weal, confirming antihistamine suppression; the panel is non-interpretable."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Invalid skin-prick test due to unwashed antihistamines."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "indeterminate"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Repeat skin-prick testing after a confirmed 5-7 day antihistamine washout, or proceed to specific-IgE blood testing instead."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:55f7d93f-d56e-4ec4-aacf-9747882ec011",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "55f7d93f-d56e-4ec4-aacf-9747882ec011",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Allergy Skin Test Result grading result \u2014 invalid-test-antihistamines-not-withheld-inconclusive",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: none; Reporting Category: indeterminate; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: within 2 weeks; Recommended Action: Recommend repeat testing after an adequate antihistamine washout, or alternative specific-IgE testing.; Recommendation: further-testing"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:58de6eee-06e7-4243-ac81-908204563b4a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "58de6eee-06e7-4243-ac81-908204563b4a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "invalid-test"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Test was invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism); classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:caf252d6-563e-4f99-a6f0-478d6679cd40",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "caf252d6-563e-4f99-a6f0-478d6679cd40",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-SEV-NONE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; abnormality severity not established."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5b3caf38-7454-404c-a14f-f398d2fb2e67",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "5b3caf38-7454-404c-a14f-f398d2fb2e67",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "validity-controls"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-COMP-VALIDITY-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: validity controls (antihistamine washout / positive control)."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:73345937-f55a-4a81-a946-9c029eaa8f4f",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "73345937-f55a-4a81-a946-9c029eaa8f4f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Invalid / inconclusive test; repeat or alternative testing recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:979f1e8d-3433-4129-a874-8e71528988f7",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "979f1e8d-3433-4129-a874-8e71528988f7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-additional-flag",
+                "display": "invalid-test"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:flags",
+              "code": "F-INVALID-TEST-001",
+              "display": "invalid-test"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Test is invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism).",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Repeat testing after an adequate washout, or arrange specific-IgE blood testing."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,734 @@
+{
+  "resourceType": "Bundle",
+  "id": "b35f2015-f2d4-4c6d-ae30-0c9af518967d",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Ct Scan Test Result \u2014 normal-ct-chest-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "5a26c2d2-4ff7-4c1b-a975-89a13b785456",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fe28ee47-d159-444c-aaa9-9d6787fc204d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "fe28ee47-d159-444c-aaa9-9d6787fc204d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ct-scan-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result:role",
+                  "code": "radiologist",
+                  "display": "Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:45c9d2fa-d37d-4b8a-ac69-e4b66cece6a8",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "45c9d2fa-d37d-4b8a-ac69-e4b66cece6a8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ct-scan-test-result",
+              "code": "ct_scan_test_result",
+              "display": "Ct Scan Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0820-CT"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "body_region",
+                  "display": "Body Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "chest",
+                  "display": "Chest"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "contrast_used",
+                  "display": "Contrast Used"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "iv-iodinated",
+                  "display": "Iv-Iodinated"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "technique",
+                  "display": "Technique"
+                }
+              ]
+            },
+            "valueString": "Contrast-enhanced CT chest, 1mm axial reconstructions with coronal and sagittal reformats."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Chronic cough and weight loss; CT chest to investigate for underlying lung pathology."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "No previous chest imaging available for comparison."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Lungs clear with no nodule, mass, consolidation, or pleural effusion. Mediastinal and hilar structures normal. No acute finding."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "acute_finding",
+                  "display": "Acute Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "mass_or_lesion",
+                  "display": "Mass Or Lesion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "haemorrhage",
+                  "display": "Haemorrhage"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "infarct",
+                  "display": "Infarct"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "fracture",
+                  "display": "Fracture"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "infection_inflammation",
+                  "display": "Infection Inflammation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "obstruction",
+                  "display": "Obstruction"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "radiation_dose_dlp",
+                  "display": "Radiation Dose Dlp"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 350.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Normal CT chest; no underlying structural lung pathology identified."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "No further CT imaging follow-up required for this indication."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ct-scan-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:13ac02b2-b9e1-46e1-a51b-966158108119",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "13ac02b2-b9e1-46e1-a51b-966158108119",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Ct Scan Test Result grading result \u2014 normal-ct-chest-complete",
+        "summary": "Result Classification: normal; Abnormality Severity: none; Reporting Category: normal; Report Completeness Percent: 100; Follow Up Urgency: routine; Target Timeframe: no specific follow-up; Recommended Action: No specific imaging follow-up required; manage per usual care.; Recommendation: no-action"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ef1ef582-d474-4ab0-a24f-5f9b9d045f7a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ef1ef582-d474-4ab0-a24f-5f9b9d045f7a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ct-scan-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ct-scan-test-result:rules",
+              "code": "R-CLASS-NORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal structured findings on an interpretable examination; classified as normal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:021d428c-4dc3-4493-a722-2c94c16759af",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "021d428c-4dc3-4493-a722-2c94c16759af",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ct-scan-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ct-scan-test-result:rules",
+              "code": "R-SEV-NONE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal finding; abnormality severity graded none."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c5de737b-d5ae-4195-abff-ac5f40333bf5",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "c5de737b-d5ae-4195-abff-ac5f40333bf5",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ct-scan-test-result",
+                "code": "grading-fired-rule",
+                "display": "normal"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ct-scan-test-result:rules",
+              "code": "R-FU-ROUTINE-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:5a26c2d2-4ff7-4c1b-a975-89a13b785456"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No escalation rule fired; routine follow-up only."
+      }
+    }
+  ]
+}

@@ -1,0 +1,760 @@
+{
+  "resourceType": "Bundle",
+  "id": "b91a398d-19f3-4e09-a73d-6e895425be0f",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Toxicology Test Result \u2014 carboxyhaemoglobin-toxic-now-correctly-critical persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "24561ffe-2109-433c-ae30-a2ddb72770c4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c863e82-8834-4456-aedb-b0400c0c1478",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4c863e82-8834-4456-aedb-b0400c0c1478",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result:role",
+                  "code": "clinical-biochemist",
+                  "display": "Clinical-Biochemist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6b107113-3e60-4880-a31f-792d4250e931",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "6b107113-3e60-4880-a31f-792d4250e931",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result",
+              "code": "toxicology_test_result",
+              "display": "Toxicology Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "TOX-REQ-100602"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "specimen_condition",
+                  "display": "Specimen Condition"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "satisfactory",
+                  "display": "Satisfactory"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Found in a car with a faulty exhaust, headache and confusion"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "suspected_agent",
+                  "display": "Suspected Agent"
+                }
+              ]
+            },
+            "valueString": "Carbon monoxide"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "carboxyhaemoglobin_percent",
+                  "display": "Carboxyhaemoglobin Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 18.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "paracetamol_nomogram",
+                  "display": "Paracetamol Nomogram"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "not-applicable",
+                  "display": "Not-Applicable"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "toxic_level_present",
+                  "display": "Toxic Level Present"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Carboxyhaemoglobin of 18%, well above the 10% toxic threshold, consistent with significant carbon monoxide poisoning."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Toxic carboxyhaemoglobin level consistent with carbon monoxide poisoning."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "High-flow oxygen; consider hyperbaric oxygen referral per local protocol"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:614fa774-e6ac-432f-a85e-28be099bd8e5",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "614fa774-e6ac-432f-a85e-28be099bd8e5",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Toxicology Test Result grading result \u2014 carboxyhaemoglobin-toxic-now-correctly-critical",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: toxic-range; Report Completeness Percent: 100; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Start the appropriate antidote / urgent treatment now, communicate the critical result directly to the requester, and document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3e9c0d3d-5f1a-450e-aa07-02ec33a7c9ae",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3e9c0d3d-5f1a-450e-aa07-02ec33a7c9ae",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "toxic-level"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7789a756-dc5f-45e3-a4f3-ae57ee97f808",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7789a756-dc5f-45e3-a4f3-ae57ee97f808",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "over-toxic-threshold"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-SEV-MAJOR-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:92641f67-e41b-4dee-a033-22aaadfb3eaa",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "92641f67-e41b-4dee-a033-22aaadfb3eaa",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3aa44222-a339-468b-adfd-0d8f410d6616",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3aa44222-a339-468b-adfd-0d8f410d6616",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A toxic level requiring action is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the requester immediately and start the appropriate antidote / urgent treatment."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aae71849-d476-4fba-a344-b25e1b98ac46",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "aae71849-d476-4fba-a344-b25e1b98ac46",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Toxic result present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the requester now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7997108b-c228-4fb7-ab4b-0983abe9453a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7997108b-c228-4fb7-ab4b-0983abe9453a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24561ffe-2109-433c-ae30-a2ddb72770c4"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider urgent referral to the appropriate specialist / toxicology team."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

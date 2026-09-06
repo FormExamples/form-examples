@@ -1,0 +1,856 @@
+{
+  "resourceType": "Bundle",
+  "id": "07940317-a304-413d-a6f1-b0a75d1d31a2",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Electroencephalogram Test Result \u2014 seizure-recorded-critical-communicated persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "ec9349f3-0678-4f3b-a04c-79ccf6b4a677",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0470f4ce-be08-4f38-ae28-bddbf2ae0f47",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "0470f4ce-be08-4f38-ae28-bddbf2ae0f47",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result:role",
+                  "code": "neurologist",
+                  "display": "Neurologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bf430c5c-1cb4-43ed-a63a-faf9ef8b3ca1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bf430c5c-1cb4-43ed-a63a-faf9ef8b3ca1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result",
+              "code": "electroencephalogram_test_result",
+              "display": "Electroencephalogram Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "EEG-REQ-100913"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "eeg_type",
+                  "display": "Eeg Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "ambulatory-24h",
+                  "display": "Ambulatory-24H"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "recording_duration_minutes",
+                  "display": "Recording Duration Minutes"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 1440.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "recording_quality",
+                  "display": "Recording Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "good",
+                  "display": "Good"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Admitted with breakthrough seizures despite therapeutic antiepileptic levels"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "background_rhythm",
+                  "display": "Background Rhythm"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "epileptiform_discharges",
+                  "display": "Epileptiform Discharges"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "focal_slowing",
+                  "display": "Focal Slowing"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "generalised_slowing",
+                  "display": "Generalised Slowing"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "seizure_recorded",
+                  "display": "Seizure Recorded"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "status_epilepticus",
+                  "display": "Status Epilepticus"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "photoparoxysmal_response",
+                  "display": "Photoparoxysmal Response"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "normal_eeg",
+                  "display": "Normal Eeg"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "A single electrographic seizure of 45 seconds' duration was captured, arising from the left temporal region, with a corresponding brief clinical arrest of activity noted by the ward nurse."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "clinical_correlation",
+                  "display": "Clinical Correlation"
+                }
+              ]
+            },
+            "valueString": "Correlates temporally with the nurse-witnessed event logged on the seizure diary."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "One electrographic seizure captured, left temporal onset."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Immediate antiepileptic medication review by the neurology team"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "reported_to",
+                  "display": "Reported To"
+                }
+              ]
+            },
+            "valueString": "Dr Marcus Webb, on-call neurology registrar, by phone at the time of the event"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b8c9bc28-ee00-4d5f-ac7d-e5649048e9eb",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "b8c9bc28-ee00-4d5f-ac7d-e5649048e9eb",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Electroencephalogram Test Result grading result \u2014 seizure-recorded-critical-communicated",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: critical-epileptiform; Report Completeness Percent: 80; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result directly to the referrer now and document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4daec5a0-aac5-45c1-ab6d-b61d2191a309",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4daec5a0-aac5-45c1-ab6d-b61d2191a309",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical structured finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:720326ca-aa3b-4c83-acec-dd416e5c5992",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "720326ca-aa3b-4c83-acec-dd416e5c5992",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bce59f73-5e0c-4ede-acec-d7f485b6aa12",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "bce59f73-5e0c-4ede-acec-d7f485b6aa12",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous EEG."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cdea08d8-a8f7-4fb6-a15c-7de0df4e6280",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "cdea08d8-a8f7-4fb6-a15c-7de0df4e6280",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2511be7f-a292-4260-a508-332a8b13d929",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "2511be7f-a292-4260-a508-332a8b13d929",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ea58458c-5384-469e-ad09-26f980c18f0c",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ea58458c-5384-469e-ad09-26f980c18f0c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ec9349f3-0678-4f3b-a04c-79ccf6b4a677"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A recorded seizure or photoparoxysmal response is present and may warrant urgent neurology referral.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider urgent referral to the neurology / epilepsy team."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

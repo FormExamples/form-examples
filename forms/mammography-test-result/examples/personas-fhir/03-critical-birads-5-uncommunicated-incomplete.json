@@ -1,0 +1,1231 @@
+{
+  "resourceType": "Bundle",
+  "id": "68326f7b-441a-4152-a837-57ec9b12e60f",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Mammography Test Result \u2014 critical-birads-5-uncommunicated-incomplete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "32bdd04f-4f00-4dce-ab0d-5a535e402598",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1521cdc0-afe3-408f-a896-16091d4531f8",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1521cdc0-afe3-408f-a896-16091d4531f8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result:role",
+                  "code": "radiologist",
+                  "display": "Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:476cf4c1-7501-49fa-ad0c-b458e28ef9ee",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "476cf4c1-7501-49fa-ad0c-b458e28ef9ee",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result",
+              "code": "mammography_test_result",
+              "display": "Mammography Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "exam_type",
+                  "display": "Exam Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "symptomatic",
+                  "display": "Symptomatic"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "laterality",
+                  "display": "Laterality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "right",
+                  "display": "Right"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "breast_density",
+                  "display": "Breast Density"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "d",
+                  "display": "D"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "A large, irregular, highly spiculated mass measuring 34mm is seen in the right breast at the 10 o'clock position, with associated pleomorphic calcifications and skin thickening. Right axillary lymphadenopathy is also noted."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "mass",
+                  "display": "Mass"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "calcifications",
+                  "display": "Calcifications"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "architectural_distortion",
+                  "display": "Architectural Distortion"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "asymmetry",
+                  "display": "Asymmetry"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "skin_or_nipple_change",
+                  "display": "Skin Or Nipple Change"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "lymphadenopathy",
+                  "display": "Lymphadenopathy"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "largest_lesion_size_mm",
+                  "display": "Largest Lesion Size Mm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 34.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "bi_rads_category",
+                  "display": "Bi Rads Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "5",
+                  "display": "5"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:mammography-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:db098fa2-9f8c-421e-a9ce-e20e1bb50eff",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "db098fa2-9f8c-421e-a9ce-e20e1bb50eff",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Mammography Test Result grading result \u2014 critical-birads-5-uncommunicated-incomplete",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: BI-RADS 5; Report Completeness Percent: 40; Follow Up Urgency: critical-alert; Target Timeframe: two-week-wait biopsy; Recommended Action: Refer for image-guided biopsy and communicate to the breast MDT now; document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3747a0f7-0f10-4c6a-a516-7eb4b4cd444d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3747a0f7-0f10-4c6a-a516-7eb4b4cd444d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-fired-rule",
+                "display": "birads-high"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "BI-RADS 5 (\u2265 50 % likelihood of malignancy); classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8bee01c3-8cf5-4daf-ae17-0792caed0094",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "8bee01c3-8cf5-4daf-ae17-0792caed0094",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-fired-rule",
+                "display": "birads-high"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "BI-RADS 5; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f4bc9e44-7be3-43f4-aa0d-dd9bec7efd99",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f4bc9e44-7be3-43f4-aa0d-dd9bec7efd99",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-fired-rule",
+                "display": "history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:rules",
+              "code": "R-COMP-HISTORY-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: clinical history."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d6110cba-d60c-49dc-ac9d-f771ed3fd39e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "d6110cba-d60c-49dc-ac9d-f771ed3fd39e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous imaging."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e0695c27-de44-40c2-aa37-d67785d5bacc",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e0695c27-de44-40c2-aa37-d67785d5bacc",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:794ba49f-9875-469e-ab70-ac085fdcf3a3",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "794ba49f-9875-469e-ab70-ac085fdcf3a3",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-fired-rule",
+                "display": "birads-critical"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "BI-RADS 4c or 5 (highly suspicious) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:42701371-69d5-4431-a176-dbb6460cf70c",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "42701371-69d5-4431-a176-dbb6460cf70c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "BI-RADS 5 (\u2265 50 % likelihood of malignancy) is a critical result.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e5502fa1-40f6-46f9-a8a0-a2fde4a9b721",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e5502fa1-40f6-46f9-a8a0-a2fde4a9b721",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical BI-RADS result but it has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e91e16aa-5fb9-4b9c-ad0e-4c97721e4010",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e91e16aa-5fb9-4b9c-ad0e-4c97721e4010",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "abnormal-requiring-action"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-ABNORMAL-ACTION-001",
+              "display": "abnormal-requiring-action"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "BI-RADS 5 final assessment requires tissue diagnosis / action.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Ensure the referrer is alerted and an image-guided biopsy is arranged."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a1c16210-67af-407d-a8be-028dd58c4b1e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "a1c16210-67af-407d-a8be-028dd58c4b1e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Suspected cancer \u2014 refer on a two-week-wait (2WW) breast pathway.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Refer for image-guided biopsy and communicate to the breast MDT."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2647def9-fb75-496e-ae6c-a96fa80da9a9",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "2647def9-fb75-496e-ae6c-a96fa80da9a9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "abnormal-requiring-action"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-BREAST-LUMP-001",
+              "display": "abnormal-requiring-action"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A mass is reported on a symptomatic / diagnostic study (palpable breast lump).",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Correlate clinically and ensure triple assessment is completed."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7faa8ca2-8629-4af8-ae60-bc43533aa3c0",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7faa8ca2-8629-4af8-ae60-bc43533aa3c0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "abnormal-requiring-action"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-NIPPLE-CHANGE-001",
+              "display": "abnormal-requiring-action"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A skin or nipple change (e.g. retraction, bloody nipple discharge) is documented.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Correlate with clinical examination; consider further imaging / referral."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1a92004e-a78e-4d62-a77a-e8313be38040",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "1a92004e-a78e-4d62-a77a-e8313be38040",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-URGENT-REFERRAL-002",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Axillary or intramammary lymphadenopathy is present and may warrant urgent referral.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider urgent referral and nodal assessment as clinically indicated."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:15c3443b-66fe-4706-a26b-a26b96ee4524",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "15c3443b-66fe-4706-a26b-a26b96ee4524",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c26ca581-f65a-452a-a934-36f497a23c16",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "c26ca581-f65a-452a-a934-36f497a23c16",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:mammography-test-result",
+                "code": "grading-additional-flag",
+                "display": "unexpected-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:mammography-test-result:flags",
+              "code": "F-UNEXPECTED-FINDING-001",
+              "display": "unexpected-finding"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:32bdd04f-4f00-4dce-ab0d-5a535e402598"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A significant finding is present but no originating request reference is recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Link the report to the originating request to support discrepancy review."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

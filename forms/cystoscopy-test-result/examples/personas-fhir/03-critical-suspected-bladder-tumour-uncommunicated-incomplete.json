@@ -1,0 +1,989 @@
+{
+  "resourceType": "Bundle",
+  "id": "5577f764-6950-46c9-aeb5-bf900f4f61ef",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Cystoscopy Test Result \u2014 critical-suspected-bladder-tumour-uncommunicated-incomplete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "4d66849e-dbec-45be-a6c4-9982ddaf5106",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:474358eb-048e-4cb9-a1a0-221d7b9b7efe",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "474358eb-048e-4cb9-a1a0-221d7b9b7efe",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result:role",
+                  "code": "urologist",
+                  "display": "Urologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a5acda7b-2f0f-4aeb-a6dd-506944972d32",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a5acda7b-2f0f-4aeb-a6dd-506944972d32",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result",
+              "code": "cystoscopy_test_result",
+              "display": "Cystoscopy Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "flexible-cystoscopy",
+                  "display": "Flexible-Cystoscopy"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "anaesthesia",
+                  "display": "Anaesthesia"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "local",
+                  "display": "Local"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "bladder_tumour",
+                  "display": "Bladder Tumour"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "inflammation_cystitis",
+                  "display": "Inflammation Cystitis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "bladder_stones",
+                  "display": "Bladder Stones"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "urethral_stricture",
+                  "display": "Urethral Stricture"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "trabeculation",
+                  "display": "Trabeculation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "prostatic_enlargement",
+                  "display": "Prostatic Enlargement"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "normal_examination",
+                  "display": "Normal Examination"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "tumour_size_mm",
+                  "display": "Tumour Size Mm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 15.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "tumour_appearance",
+                  "display": "Tumour Appearance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "papillary",
+                  "display": "Papillary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "biopsy_taken",
+                  "display": "Biopsy Taken"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "complication",
+                  "display": "Complication"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "A 15mm papillary lesion is seen on the right lateral bladder wall, suspicious for a bladder tumour."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c6e380e9-9bde-4540-a8c6-1530a1b200e0",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "c6e380e9-9bde-4540-a8c6-1530a1b200e0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Cystoscopy Test Result grading result \u2014 critical-suspected-bladder-tumour-uncommunicated-incomplete",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: suspected-tumour; Report Completeness Percent: 40; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result to the referrer now, book urgent TURBT, and refer to the MDT.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0cfe3ae1-84bc-4ca3-a50c-1ee49c19d63f",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "0cfe3ae1-84bc-4ca3-a50c-1ee49c19d63f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A bladder tumour or suspicious lesion is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7a743915-4048-4be4-a02d-2e356531c128",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7a743915-4048-4be4-a02d-2e356531c128",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Bladder tumour or suspicious lesion present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a9e0a83-1418-459c-a79a-6f6bff6e7388",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "5a9e0a83-1418-459c-a79a-6f6bff6e7388",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-COMP-HISTORY-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: clinical history."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:01ba31c1-d691-4cc5-a240-f7dab36b7d73",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "01ba31c1-d691-4cc5-a240-f7dab36b7d73",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0aa4610f-f8f3-42fe-a51a-2584895c7e05",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "0aa4610f-f8f3-42fe-a51a-2584895c7e05",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "follow-up"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-COMP-FOLLOW-UP-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: recommended follow-up."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d3cc4a3c-7c6c-4f49-a4af-50baa17611dc",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "d3cc4a3c-7c6c-4f49-a4af-50baa17611dc",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Bladder tumour / suspicious lesion auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1dff216a-f780-4587-a5ed-63e7bb02f04e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "1dff216a-f780-4587-a5ed-63e7bb02f04e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A bladder tumour or suspicious lesion is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and book urgent TURBT / MDT referral."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:18f011da-4d37-4ab2-aaa0-6f828d983732",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "18f011da-4d37-4ab2-aaa0-6f828d983732",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:65411ae8-015d-474b-a801-9ce9d9810ed1",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "65411ae8-015d-474b-a801-9ce9d9810ed1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9d63cdfe-b801-4696-a49c-815fab88c725",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9d63cdfe-b801-4696-a49c-815fab88c725",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-additional-flag",
+                "display": "unexpected-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:flags",
+              "code": "F-UNEXPECTED-FINDING-001",
+              "display": "unexpected-finding"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A significant finding is present but no originating request reference is recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Link the report to the originating request to support discrepancy review."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

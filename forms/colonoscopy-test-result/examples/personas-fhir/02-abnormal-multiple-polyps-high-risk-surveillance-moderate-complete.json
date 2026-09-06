@@ -1,0 +1,765 @@
+{
+  "resourceType": "Bundle",
+  "id": "c9a33e77-0ebd-4dc5-af6f-c412689ce46c",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Colonoscopy Test Result \u2014 abnormal-multiple-polyps-high-risk-surveillance-moderate-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "94825dfc-1613-4253-af44-3a96ae827452",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7a45a0ad-f175-4c18-a3d2-5440c8397e04",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "7a45a0ad-f175-4c18-a3d2-5440c8397e04",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:colonoscopy-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result:role",
+                  "code": "gastroenterologist",
+                  "display": "Gastroenterologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:602795df-8701-4768-a27e-f48e36ee034e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "602795df-8701-4768-a27e-f48e36ee034e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:colonoscopy-test-result",
+              "code": "colonoscopy_test_result",
+              "display": "Colonoscopy Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0825-COLO"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "colonoscopy",
+                  "display": "Colonoscopy"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "extent_reached",
+                  "display": "Extent Reached"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "caecum",
+                  "display": "Caecum"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "bowel_preparation_quality",
+                  "display": "Bowel Preparation Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "good",
+                  "display": "Good"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "sedation_used",
+                  "display": "Sedation Used"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Positive FIT test, National Bowel Cancer Screening Programme referral."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "polyps_found",
+                  "display": "Polyps Found"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "mass_lesion",
+                  "display": "Mass Lesion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "diverticulosis",
+                  "display": "Diverticulosis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "inflammation_ibd",
+                  "display": "Inflammation Ibd"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "angiodysplasia",
+                  "display": "Angiodysplasia"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "bleeding_source_identified",
+                  "display": "Bleeding Source Identified"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "normal_examination",
+                  "display": "Normal Examination"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "polyp_count",
+                  "display": "Polyp Count"
+                }
+              ]
+            },
+            "valueInteger": 4
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "largest_polyp_mm",
+                  "display": "Largest Polyp Mm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 12.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "biopsy_taken",
+                  "display": "Biopsy Taken"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "polypectomy_performed",
+                  "display": "Polypectomy Performed"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "complication",
+                  "display": "Complication"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Four adenomatous polyps identified throughout the colon, the largest 12mm in the sigmoid colon; all removed by snare polypectomy."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Four adenomatous polyps removed; high-risk surveillance group per BSG / ACPGBI / PHE guidance."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Surveillance colonoscopy at 3 years per high-risk surveillance guidance."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:colonoscopy-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cf93618a-aaa3-4a69-a421-38f34079a5ba",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "cf93618a-aaa3-4a69-a421-38f34079a5ba",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Colonoscopy Test Result grading result \u2014 abnormal-multiple-polyps-high-risk-surveillance-moderate-complete",
+        "summary": "Result Classification: abnormal; Abnormality Severity: moderate; Reporting Category: high-risk-surveillance; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: per surveillance guidance; Recommended Action: Recommend a surveillance interval or specialist referral per BSG / ACPGBI / PHE polyp-surveillance guidance.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:625922e5-9cac-4d9b-a3fd-5cf34303f9fb",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "625922e5-9cac-4d9b-a3fd-5cf34303f9fb",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:colonoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:colonoscopy-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured findings are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c1cf063-b790-43ec-a9e8-e29bd62293a8",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4c1cf063-b790-43ec-a9e8-e29bd62293a8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:colonoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "actionable-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:colonoscopy-test-result:rules",
+              "code": "R-SEV-MODERATE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An actionable abnormal finding (polyps, IBD inflammation, angiodysplasia, or an identified bleeding source) is present; severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9972b515-c9eb-467b-a457-d10fa360c9f8",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9972b515-c9eb-467b-a457-d10fa360c9f8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:colonoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "moderate-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:colonoscopy-test-result:rules",
+              "code": "R-FU-RECOMMENDED-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:94825dfc-1613-4253-af44-3a96ae827452"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Moderate abnormality present; follow-up recommended."
+      }
+    }
+  ]
+}

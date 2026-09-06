@@ -1,0 +1,994 @@
+{
+  "resourceType": "Bundle",
+  "id": "5ddaa8ad-aec9-41d7-a528-17fb81fb5cd3",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Urinalysis Test Result \u2014 mixed-growth-contaminant-no-impression persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "82abba92-04a9-40fd-a36f-d95a89a86edc",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0f570a5d-eff1-443c-acfa-f8dac60cdf7c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "0f570a5d-eff1-443c-acfa-f8dac60cdf7c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result:role",
+                  "code": "biomedical-scientist",
+                  "display": "Biomedical-Scientist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0f7cf8ac-0e87-4637-a2ce-00b2d266a76d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "0f7cf8ac-0e87-4637-a2ce-00b2d266a76d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result",
+              "code": "urinalysis_test_result",
+              "display": "Urinalysis Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "UA-REQ-101115"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-07-02"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "specimen_type",
+                  "display": "Specimen Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "midstream",
+                  "display": "Midstream"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "specimen_condition",
+                  "display": "Specimen Condition"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "contaminated",
+                  "display": "Contaminated"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "leucocytes",
+                  "display": "Leucocytes"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "trace",
+                  "display": "Trace"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "nitrites",
+                  "display": "Nitrites"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "protein",
+                  "display": "Protein"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "blood",
+                  "display": "Blood"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "glucose",
+                  "display": "Glucose"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "ketones",
+                  "display": "Ketones"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "bilirubin",
+                  "display": "Bilirubin"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "ph",
+                  "display": "Ph"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 6.5
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "specific_gravity",
+                  "display": "Specific Gravity"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 1.018
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "red_cell_count",
+                  "display": "Red Cell Count"
+                }
+              ]
+            },
+            "valueString": "0-2/hpf"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "white_cell_count",
+                  "display": "White Cell Count"
+                }
+              ]
+            },
+            "valueString": "5-10/hpf"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "epithelial_cells",
+                  "display": "Epithelial Cells"
+                }
+              ]
+            },
+            "valueString": "many"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "organisms_seen",
+                  "display": "Organisms Seen"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "culture_result",
+                  "display": "Culture Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "mixed-growth-likely-contaminant",
+                  "display": "Mixed-Growth-Likely-Contaminant"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Mixed growth of multiple organism types with heavy epithelial cell contamination, consistent with poor collection technique."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Repeat clean-catch specimen with collection advice"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:urinalysis-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8f587427-e0d9-42bc-a33c-d64fe212e72a",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "8f587427-e0d9-42bc-a33c-d64fe212e72a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Urinalysis Test Result grading result \u2014 mixed-growth-contaminant-no-impression",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: moderate; Reporting Category: suspected urinary tract infection; Report Completeness Percent: 60; Follow Up Urgency: recommended; Target Timeframe: within 1 week; Recommended Action: Treat per antimicrobial guidance / sensitivities or recommend repeat testing as clinically indicated.; Recommendation: further-testing"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa513193-cf6f-4e48-a409-4dd0eb4b6b81",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "aa513193-cf6f-4e48-a409-4dd0eb4b6b81",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-fired-rule",
+                "display": "mixed-growth-no-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-02",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mixed growth (likely contaminant) and no impression was recorded; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5ea24794-69f5-4de2-a7dc-053cd6e78e97",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "5ea24794-69f5-4de2-a7dc-053cd6e78e97",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-fired-rule",
+                "display": "uti-features"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:rules",
+              "code": "R-SEV-MODERATE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "UTI features (pyuria, nitrites, organisms seen) or dipstick haematuria / proteinuria present; severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7d72c90a-6f10-46ec-a58b-9569c8ab936a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7d72c90a-6f10-46ec-a58b-9569c8ab936a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-fired-rule",
+                "display": "history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:rules",
+              "code": "R-COMP-HISTORY-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: clinical history."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cbf70535-779f-4ade-a2ba-598205674f76",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "cbf70535-779f-4ade-a2ba-598205674f76",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8ee60a12-9529-4df7-a8a9-d16a8ed42437",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "8ee60a12-9529-4df7-a8a9-d16a8ed42437",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-fired-rule",
+                "display": "moderate-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:rules",
+              "code": "R-FU-RECOMMENDED-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Moderate abnormality present; follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:30a9c1af-54ca-431d-a6a7-167797a53ac7",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "30a9c1af-54ca-431d-a6a7-167797a53ac7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Specimen condition is contaminated; diagnostic confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeating with a fresh, correctly-collected midstream specimen."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:055097af-953e-47d6-a1b5-05963baed058",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "055097af-953e-47d6-a1b5-05963baed058",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3a4af22e-2d9a-4777-a9f0-6b3935f40a80",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3a4af22e-2d9a-4777-a9f0-6b3935f40a80",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:urinalysis-test-result",
+                "code": "grading-additional-flag",
+                "display": "unexpected-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:urinalysis-test-result:flags",
+              "code": "F-UNEXPECTED-FINDING-001",
+              "display": "unexpected-finding"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:82abba92-04a9-40fd-a36f-d95a89a86edc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mixed growth, likely contaminant; significance uncertain.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Recommend a repeat specimen if clinically indicated to confirm significance."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

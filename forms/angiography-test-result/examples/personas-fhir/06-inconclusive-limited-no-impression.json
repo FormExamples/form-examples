@@ -1,0 +1,865 @@
+{
+  "resourceType": "Bundle",
+  "id": "e3b100d9-872b-4960-a229-a34ae2f4c638",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Angiography Test Result \u2014 inconclusive-limited-no-impression persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "ad15e135-2c51-45d2-a25d-ef5f37427a74",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:efad4f13-ddca-465b-a9de-25d350e7668e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "efad4f13-ddca-465b-a9de-25d350e7668e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result:role",
+                  "code": "interventional-radiologist",
+                  "display": "Interventional-Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8e702822-330d-41a0-a071-6b7a18a7c0b3",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "8e702822-330d-41a0-a071-6b7a18a7c0b3",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result",
+              "code": "angiography_test_result",
+              "display": "Angiography Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ANGIO-REQ-40160"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "angiography_type",
+                  "display": "Angiography Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "catheter-dsa",
+                  "display": "Catheter-Dsa"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "body_region",
+                  "display": "Body Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "mesenteric",
+                  "display": "Mesenteric"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "contrast_used",
+                  "display": "Contrast Used"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "iodinated",
+                  "display": "Iodinated"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "limited",
+                  "display": "Limited"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Post-prandial abdominal pain, weight loss, query chronic mesenteric ischaemia"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Selective catheterisation of the superior mesenteric artery was incomplete due to severe aorto-iliac tortuosity; coeliac axis appears patent."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "significant_stenosis",
+                  "display": "Significant Stenosis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "occlusion",
+                  "display": "Occlusion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "aneurysm",
+                  "display": "Aneurysm"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "dissection",
+                  "display": "Dissection"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "active_extravasation",
+                  "display": "Active Extravasation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "thrombus",
+                  "display": "Thrombus"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "normal_vessels",
+                  "display": "Normal Vessels"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "intervention_performed",
+                  "display": "Intervention Performed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:35824378-6939-41ab-adba-0731084897f6",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "35824378-6939-41ab-adba-0731084897f6",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Angiography Test Result grading result \u2014 inconclusive-limited-no-impression",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: none; Reporting Category: indeterminate; Report Completeness Percent: 60; Follow Up Urgency: recommended; Target Timeframe: within 2 weeks; Recommended Action: Recommend repeat or alternative imaging to resolve the inconclusive study.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b9e9cb0d-7604-43ae-a456-1a9fab1d68ab",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b9e9cb0d-7604-43ae-a456-1a9fab1d68ab",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "limited-no-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-02",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Examination was limited and no impression was recorded; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5c3490a8-fd09-49e9-af7c-27fde2a6b3e4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "5c3490a8-fd09-49e9-af7c-27fde2a6b3e4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-SEV-NONE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; abnormality severity not established."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:48a61c9d-2372-45a0-a730-ae04c1b7569a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "48a61c9d-2372-45a0-a730-ae04c1b7569a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous imaging."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:711c1495-32de-453e-a9bc-a6b6b0344d13",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "711c1495-32de-453e-a9bc-a6b6b0344d13",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9b8d2f40-177e-4e99-a7e5-e9a23353d919",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9b8d2f40-177e-4e99-a7e5-e9a23353d919",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; repeat or alternative imaging recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ef3a51da-e361-41b9-a676-0ba73eee250d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ef3a51da-e361-41b9-a676-0ba73eee250d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Examination adequacy is limited; diagnostic confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeating or supplementing the examination to reach diagnostic quality."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b045c020-c8a1-40a0-a2ce-e8c6caa8cf50",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b045c020-c8a1-40a0-a2ce-e8c6caa8cf50",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ad15e135-2c51-45d2-a25d-ef5f37427a74"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

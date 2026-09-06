@@ -1,0 +1,720 @@
+{
+  "resourceType": "Bundle",
+  "id": "76ca873d-0da0-4913-aa2c-b2332ccb36d6",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Toxicology Test Result \u2014 insufficient-specimen-inconclusive persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "c44d88bc-5e57-40f3-a8f4-98ab65530e53",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ec268c76-0b73-46ac-a542-08276dd74fa9",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ec268c76-0b73-46ac-a542-08276dd74fa9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result:role",
+                  "code": "clinical-biochemist",
+                  "display": "Clinical-Biochemist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7696c83c-a6d2-4c86-a167-8c60a97368e3",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "7696c83c-a6d2-4c86-a167-8c60a97368e3",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result",
+              "code": "toxicology_test_result",
+              "display": "Toxicology Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "TOX-REQ-100822"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "specimen_condition",
+                  "display": "Specimen Condition"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "insufficient",
+                  "display": "Insufficient"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Query overdose, difficult venous access, minimal sample obtained"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "suspected_agent",
+                  "display": "Suspected Agent"
+                }
+              ]
+            },
+            "valueString": "Unknown"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "toxic_level_present",
+                  "display": "Toxic Level Present"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Insufficient sample volume obtained; unable to run the requested panel."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Insufficient specimen; unable to complete the requested toxicology panel."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Repeat venepuncture and resend at the earliest opportunity"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:toxicology-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a9384936-ab44-4359-ad8d-217f3ed13b3d",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "a9384936-ab44-4359-ad8d-217f3ed13b3d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Toxicology Test Result grading result \u2014 insufficient-specimen-inconclusive",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: none; Reporting Category: indeterminate; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: within 2 weeks; Recommended Action: Recommend a repeat or alternative assay to resolve the inconclusive study.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2796d51c-a5b3-444d-afb1-b909c4fe6767",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "2796d51c-a5b3-444d-afb1-b909c4fe6767",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "insufficient-specimen"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Specimen was insufficient; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9531b36c-f087-4aff-a7e5-861885facb7a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9531b36c-f087-4aff-a7e5-861885facb7a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-SEV-NONE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; abnormality severity not established."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b45c199e-7981-4642-a765-1b2385905020",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b45c199e-7981-4642-a765-1b2385905020",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "result-values"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-COMP-RESULTS-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: result values."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e743db18-82cd-4ca2-a05c-40dd62572f43",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e743db18-82cd-4ca2-a05c-40dd62572f43",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; repeat or alternative assay recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:63c903e6-2b40-4c32-a183-09371b494324",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "63c903e6-2b40-4c32-a183-09371b494324",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Specimen condition is insufficient; interpretive confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeating the assay on a satisfactory, correctly-timed specimen."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:be34a600-4d1a-413b-a76d-fc8e2566aa7b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "be34a600-4d1a-413b-a76d-fc8e2566aa7b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:toxicology-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-measurement"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:toxicology-test-result:flags",
+              "code": "F-MISSING-MEASUREMENT-001",
+              "display": "missing-measurement"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:c44d88bc-5e57-40f3-a8f4-98ab65530e53"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No assay result value has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Record at least one assay level or screen result for the report."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

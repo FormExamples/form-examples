@@ -1,0 +1,723 @@
+{
+  "resourceType": "Bundle",
+  "id": "fc6f7d3d-f279-4dd2-a782-f346610ab411",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Biopsy Test Result \u2014 inadequate-specimen-inconclusive persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "2e4eabfb-049f-4030-a5d4-7582596e5b10",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:276fc097-a73e-4b0e-ad47-664cbd5613ff",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "276fc097-a73e-4b0e-ad47-664cbd5613ff",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result:role",
+                  "code": "consultant-histopathologist",
+                  "display": "Consultant-Histopathologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c28b219-3897-4ee6-a92c-23cc9df50ef8",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "7c28b219-3897-4ee6-a92c-23cc9df50ef8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result",
+              "code": "biopsy_test_result",
+              "display": "Biopsy Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "BIO-REQ-101115"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-07-01"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-07-01"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "biopsy_site",
+                  "display": "Biopsy Site"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "liver",
+                  "display": "Liver"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "biopsy_method",
+                  "display": "Biopsy Method"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "core-needle",
+                  "display": "Core-Needle"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "specimen_adequacy",
+                  "display": "Specimen Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "inadequate",
+                  "display": "Inadequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Abnormal liver function tests, query underlying liver disease"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "macroscopic_description",
+                  "display": "Macroscopic Description"
+                }
+              ]
+            },
+            "valueString": "A single core of tissue, 4mm in length, fragmented on processing."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "microscopic_description",
+                  "display": "Microscopic Description"
+                }
+              ]
+            },
+            "valueString": "Insufficient tissue for meaningful histological assessment; portal tracts could not be reliably evaluated."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "malignancy_present",
+                  "display": "Malignancy Present"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "lymphovascular_invasion",
+                  "display": "Lymphovascular Invasion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Inadequate specimen for diagnosis; insufficient tissue obtained."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Repeat liver biopsy with a larger-gauge needle if clinically indicated"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:biopsy-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:12519a16-4a03-4f8f-a842-36e3d28a08b1",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "12519a16-4a03-4f8f-a842-36e3d28a08b1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Biopsy Test Result grading result \u2014 inadequate-specimen-inconclusive",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: none; Reporting Category: benign; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: within 2 weeks; Recommended Action: Recommend repeat biopsy or ancillary testing to resolve the inconclusive specimen.; Recommendation: further-testing"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0166483b-adde-4b98-a040-44d495b3ba57",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "0166483b-adde-4b98-a040-44d495b3ba57",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:biopsy-test-result",
+                "code": "grading-fired-rule",
+                "display": "inadequate-specimen"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Specimen was inadequate for diagnosis; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6a0bbc03-f33c-45a7-af12-e8eabc4b4a48",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "6a0bbc03-f33c-45a7-af12-e8eabc4b4a48",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:biopsy-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result:rules",
+              "code": "R-SEV-NONE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive specimen; abnormality severity not established."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:376ef005-831b-4bb0-af8f-0a25b5fd419e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "376ef005-831b-4bb0-af8f-0a25b5fd419e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:biopsy-test-result",
+                "code": "grading-fired-rule",
+                "display": "diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result:rules",
+              "code": "R-COMP-DIAGNOSIS-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: diagnosis."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d59df535-6fdf-4f36-a289-926b81222c18",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "d59df535-6fdf-4f36-a289-926b81222c18",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:biopsy-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive specimen; repeat sampling or further testing recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d28f5792-8d61-4f57-a126-f417cd6ea892",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "d28f5792-8d61-4f57-a126-f417cd6ea892",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:biopsy-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:biopsy-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:2e4eabfb-049f-4030-a5d4-7582596e5b10"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Specimen adequacy is inadequate; diagnostic confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeat sampling or ancillary testing to reach a diagnostic standard."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,708 @@
+{
+  "resourceType": "Bundle",
+  "id": "9d676e8b-d468-4d72-aac8-f59f0818308a",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Bronchoscopy Test Result \u2014 normal-diagnostic-bronchoscopy-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "9f736083-c01c-4da4-ab22-f3bc08115d14",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d80cdf04-30c7-4ef5-aa4f-a64f68d4329c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "d80cdf04-30c7-4ef5-aa4f-a64f68d4329c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:bronchoscopy-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result:role",
+                  "code": "respiratory-physician",
+                  "display": "Respiratory-Physician"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9f5f66a1-1042-4a05-a04f-f40453386afa",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9f5f66a1-1042-4a05-a04f-f40453386afa",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:bronchoscopy-test-result",
+              "code": "bronchoscopy_test_result",
+              "display": "Bronchoscopy Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0820-BR"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "flexible-bronchoscopy",
+                  "display": "Flexible-Bronchoscopy"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "sedation_used",
+                  "display": "Sedation Used"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "conscious",
+                  "display": "Conscious"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "extent_examined",
+                  "display": "Extent Examined"
+                }
+              ]
+            },
+            "valueString": "Main carina, both main bronchi, and segmental bronchi to subsegmental level bilaterally."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Persistent cough for 8 weeks, normal chest x-ray \u2014 diagnostic bronchoscopy to exclude endobronchial pathology."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "endobronchial_lesion",
+                  "display": "Endobronchial Lesion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "mucosal_abnormality",
+                  "display": "Mucosal Abnormality"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "extrinsic_compression",
+                  "display": "Extrinsic Compression"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "bleeding",
+                  "display": "Bleeding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "foreign_body",
+                  "display": "Foreign Body"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "secretions_purulent",
+                  "display": "Secretions Purulent"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "normal_examination",
+                  "display": "Normal Examination"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "samples_taken",
+                  "display": "Samples Taken"
+                }
+              ]
+            },
+            "valueString": "Bronchial washings sent for routine microbiology and cytology."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "complication",
+                  "display": "Complication"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Airways patent throughout with normal mucosa; no endobronchial lesion, compression, bleeding, foreign body, or purulent secretions."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Normal bronchoscopic examination; no endobronchial pathology identified."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "No further respiratory follow-up required for this indication."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:bronchoscopy-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:edb01668-1176-436d-a1b3-49cc04f3963f",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "edb01668-1176-436d-a1b3-49cc04f3963f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Bronchoscopy Test Result grading result \u2014 normal-diagnostic-bronchoscopy-complete",
+        "summary": "Result Classification: normal; Abnormality Severity: none; Reporting Category: normal; Report Completeness Percent: 100; Follow Up Urgency: routine; Target Timeframe: no specific follow-up; Recommended Action: No specific follow-up required; manage per usual care.; Recommendation: no-action"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:41c44f38-02fe-4381-a403-16693efd4041",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "41c44f38-02fe-4381-a403-16693efd4041",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:bronchoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:bronchoscopy-test-result:rules",
+              "code": "R-CLASS-NORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal structured findings on an interpretable examination; classified as normal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:287b8e92-31f5-48ca-a3c9-828db3e16843",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "287b8e92-31f5-48ca-a3c9-828db3e16843",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:bronchoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:bronchoscopy-test-result:rules",
+              "code": "R-SEV-NONE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal finding; abnormality severity graded none."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:063fdf51-57ea-4aaf-a9d1-6115d2b59756",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "063fdf51-57ea-4aaf-a9d1-6115d2b59756",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:bronchoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "normal"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:bronchoscopy-test-result:rules",
+              "code": "R-FU-ROUTINE-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:9f736083-c01c-4da4-ab22-f3bc08115d14"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No escalation rule fired; routine follow-up only."
+      }
+    }
+  ]
+}

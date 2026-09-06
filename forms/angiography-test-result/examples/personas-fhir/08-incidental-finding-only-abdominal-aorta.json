@@ -1,0 +1,798 @@
+{
+  "resourceType": "Bundle",
+  "id": "27c32620-4ab9-4aa1-a703-1a5d8c6675e2",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Angiography Test Result \u2014 incidental-finding-only-abdominal-aorta persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "49dbf04d-0eb3-47c3-a942-c2cc7cff39b9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b273719b-0159-4593-a925-84573d8100d9",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b273719b-0159-4593-a925-84573d8100d9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result:role",
+                  "code": "interventional-radiologist",
+                  "display": "Interventional-Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f4e6155e-7985-4216-a24d-3a3109514a22",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f4e6155e-7985-4216-a24d-3a3109514a22",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result",
+              "code": "angiography_test_result",
+              "display": "Angiography Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ANGIO-REQ-40188"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-18"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-18"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "angiography_type",
+                  "display": "Angiography Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "ct-angiography",
+                  "display": "Ct-Angiography"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "body_region",
+                  "display": "Body Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "peripheral-lower-limb",
+                  "display": "Peripheral-Lower-Limb"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "contrast_used",
+                  "display": "Contrast Used"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "iodinated",
+                  "display": "Iodinated"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Intermittent claudication, runoff assessment prior to angioplasty planning"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "None available"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Bilateral lower-limb runoff vessels are patent with mild atherosclerotic wall irregularity but no flow-limiting stenosis. Incidental note is made of a 3.6 cm infrarenal abdominal aortic aneurysm, below the surgical threshold."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "significant_stenosis",
+                  "display": "Significant Stenosis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "occlusion",
+                  "display": "Occlusion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "aneurysm",
+                  "display": "Aneurysm"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "dissection",
+                  "display": "Dissection"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "active_extravasation",
+                  "display": "Active Extravasation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "thrombus",
+                  "display": "Thrombus"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "normal_vessels",
+                  "display": "Normal Vessels"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "intervention_performed",
+                  "display": "Intervention Performed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "No flow-limiting lower-limb arterial disease. Incidental 3.6 cm infrarenal AAA, below surgical threshold."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "incidental"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Enrol in aneurysm surveillance ultrasound programme per local AAA pathway"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e2c2f7b9-ea04-4588-a89d-9cb9f5b3fc09",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "e2c2f7b9-ea04-4588-a89d-9cb9f5b3fc09",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Angiography Test Result grading result \u2014 incidental-finding-only-abdominal-aorta",
+        "summary": "Result Classification: abnormal; Abnormality Severity: minor; Reporting Category: incidental; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: per incidental-findings guidance; Recommended Action: Manage the incidental finding per the relevant structured incidental-findings pathway.; Recommendation: routine-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f0e1e7ce-bd59-448e-ad4a-c56433232853",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f0e1e7ce-bd59-448e-ad4a-c56433232853",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "incidental-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-02",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Only incidental finding(s) present; classified as abnormal (not a normal study)."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4bb89f4f-afa6-468c-a910-b4d2da786cd4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4bb89f4f-afa6-468c-a910-b4d2da786cd4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "incidental-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-SEV-MINOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Incidental finding(s) only; abnormality severity graded minor."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:873edae7-a0c9-4b64-ae92-f3439d44836c",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "873edae7-a0c9-4b64-ae92-f3439d44836c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "incidental-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-FU-RECOMMENDED-03",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Incidental finding; structured follow-up per incidental-findings guidance recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:29829a3d-6b1b-4b67-a50b-97fa178f888a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "29829a3d-6b1b-4b67-a50b-97fa178f888a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-additional-flag",
+                "display": "incidental-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:flags",
+              "code": "F-INCIDENTAL-FINDING-001",
+              "display": "incidental-finding"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:49dbf04d-0eb3-47c3-a942-c2cc7cff39b9"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more incidental findings are documented.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Manage the incidental finding per the relevant structured pathway."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

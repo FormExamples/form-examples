@@ -1,0 +1,861 @@
+{
+  "resourceType": "Bundle",
+  "id": "424382aa-8538-4473-ac17-311c2aa8a52e",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Angiography Test Result \u2014 critical-active-extravasation-uncommunicated persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "d5067a12-dd83-424c-a294-2b81ee9dbeea",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c5be003-d062-42f2-af39-f8f244362ee3",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4c5be003-d062-42f2-af39-f8f244362ee3",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result:role",
+                  "code": "interventional-radiologist",
+                  "display": "Interventional-Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2fd68937-696a-416a-ab6a-52238b22ffad",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "2fd68937-696a-416a-ab6a-52238b22ffad",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result",
+              "code": "angiography_test_result",
+              "display": "Angiography Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ANGIO-REQ-40099"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-29"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-29"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "angiography_type",
+                  "display": "Angiography Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "ct-angiography",
+                  "display": "Ct-Angiography"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "body_region",
+                  "display": "Body Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "aorta",
+                  "display": "Aorta"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "contrast_used",
+                  "display": "Contrast Used"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "iodinated",
+                  "display": "Iodinated"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "High-speed road traffic collision, left upper quadrant tenderness, haemodynamically borderline"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Grade IV splenic laceration with a focus of active contrast extravasation from a distal splenic artery branch. No other solid-organ injury."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "significant_stenosis",
+                  "display": "Significant Stenosis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "occlusion",
+                  "display": "Occlusion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "aneurysm",
+                  "display": "Aneurysm"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "dissection",
+                  "display": "Dissection"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "active_extravasation",
+                  "display": "Active Extravasation"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "thrombus",
+                  "display": "Thrombus"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "normal_vessels",
+                  "display": "Normal Vessels"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "intervention_performed",
+                  "display": "Intervention Performed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Active splenic arterial extravasation; requires immediate interventional radiology or surgical referral."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Immediate interventional radiology embolisation or surgical review"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:angiography-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1b48961a-7291-46e1-ac5b-c55e9b36aca1",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "1b48961a-7291-46e1-ac5b-c55e9b36aca1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Angiography Test Result grading result \u2014 critical-active-extravasation-uncommunicated",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: critical-actionable; Report Completeness Percent: 80; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result directly to the referrer now and document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:11c0fd46-575a-4636-ad4c-2acaa8a32aa8",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "11c0fd46-575a-4636-ad4c-2acaa8a32aa8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical structured finding (active extravasation, dissection, occlusion, or critical stenosis) is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:45206359-5494-4e9d-a6f0-6629697c9620",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "45206359-5494-4e9d-a6f0-6629697c9620",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:491662ef-dfe9-44f3-a5fa-c37a182738ad",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "491662ef-dfe9-44f3-a5fa-c37a182738ad",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous imaging."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4dd31dc7-c3c8-4c27-a0b1-9550a0fc9361",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4dd31dc7-c3c8-4c27-a0b1-9550a0fc9361",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:11b25262-4028-4ebf-a396-eb768fdc6a20",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "11b25262-4028-4ebf-a396-eb768fdc6a20",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical finding (active extravasation, dissection, occlusion, or critical stenosis) is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bbd119a5-88ae-4d86-a300-ae29f7c4534b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "bbd119a5-88ae-4d86-a300-ae29f7c4534b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:angiography-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:angiography-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:d5067a12-dd83-424c-a294-2b81ee9dbeea"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

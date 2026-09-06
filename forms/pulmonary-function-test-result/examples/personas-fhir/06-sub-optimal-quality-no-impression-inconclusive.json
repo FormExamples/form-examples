@@ -1,0 +1,906 @@
+{
+  "resourceType": "Bundle",
+  "id": "5832d1bf-431c-4f40-aacf-6bf8a99870ce",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Pulmonary Function Test Result \u2014 sub-optimal-quality-no-impression-inconclusive persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "ea731859-d2cc-43a9-a480-2493a4a00232",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4b94b44b-64ab-4b95-a116-5fd65dc99999",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4b94b44b-64ab-4b95-a116-5fd65dc99999",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result:role",
+                  "code": "respiratory-physician",
+                  "display": "Respiratory-Physician"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fbc3196e-e633-462a-aaa3-e7818d74f36f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "fbc3196e-e633-462a-aaa3-e7818d74f36f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result",
+              "code": "pulmonary_function_test_result",
+              "display": "Pulmonary Function Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "PFT-REQ-100822"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "test_type",
+                  "display": "Test Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "spirometry",
+                  "display": "Spirometry"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "test_quality",
+                  "display": "Test Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "sub-optimal",
+                  "display": "Sub-Optimal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Elderly patient, difficulty coordinating the forced exhalation manoeuvre"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "fev1_litres",
+                  "display": "Fev1 Litres"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 1.9
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "fev1_percent_predicted",
+                  "display": "Fev1 Percent Predicted"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 72.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "fvc_litres",
+                  "display": "Fvc Litres"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 2.6
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "fvc_percent_predicted",
+                  "display": "Fvc Percent Predicted"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 75.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "fev1_fvc_ratio",
+                  "display": "Fev1 Fvc Ratio"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.73
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "peak_expiratory_flow",
+                  "display": "Peak Expiratory Flow"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 280.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "bronchodilator_reversibility",
+                  "display": "Bronchodilator Reversibility"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "not-tested",
+                  "display": "Not-Tested"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "airflow_obstruction",
+                  "display": "Airflow Obstruction"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "restriction",
+                  "display": "Restriction"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "reduced_gas_transfer",
+                  "display": "Reduced Gas Transfer"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "significant_reversibility",
+                  "display": "Significant Reversibility"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "normal_spirometry",
+                  "display": "Normal Spirometry"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Only two of three manoeuvres met ATS/ERS repeatability criteria; results should be interpreted with caution."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Repeat spirometry with additional coaching"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:pulmonary-function-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8742aa8f-109e-40d9-ab6e-c4150714710a",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "8742aa8f-109e-40d9-ab6e-c4150714710a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Pulmonary Function Test Result grading result \u2014 sub-optimal-quality-no-impression-inconclusive",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: none; Reporting Category: indeterminate; Report Completeness Percent: 60; Follow Up Urgency: recommended; Target Timeframe: within 4 weeks; Recommended Action: Recommend repeat lung-function testing to acceptable quality to resolve the inconclusive study.; Recommendation: further-testing"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3eb3872e-5073-4026-ac1d-73caed7d0368",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3eb3872e-5073-4026-ac1d-73caed7d0368",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-fired-rule",
+                "display": "sub-optimal-no-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-02",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Test quality was sub-optimal and no impression was recorded; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:20b3d55b-b922-4de1-a7a5-5cb61b292005",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "20b3d55b-b922-4de1-a7a5-5cb61b292005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:rules",
+              "code": "R-SEV-NONE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; abnormality severity not established."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e06a5a66-b192-43a6-afb1-b4c7e55380c4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e06a5a66-b192-43a6-afb1-b4c7e55380c4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-fired-rule",
+                "display": "interpretation"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:rules",
+              "code": "R-COMP-INTERPRETATION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: ventilatory interpretation."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9882e1aa-6f57-4ce3-abe1-d8fa1bdcbe43",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9882e1aa-6f57-4ce3-abe1-d8fa1bdcbe43",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:617587bd-17ff-4f98-ab44-66a4cc1ce86a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "617587bd-17ff-4f98-ab44-66a4cc1ce86a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; repeat testing recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:26c70908-2f19-4329-ad61-9b36ebc572cd",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "26c70908-2f19-4329-ad61-9b36ebc572cd",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Test quality is sub-optimal; diagnostic confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeating the test to ATS/ERS acceptability and repeatability standards."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:950a221c-57da-48a5-a151-d391ce5962c7",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "950a221c-57da-48a5-a151-d391ce5962c7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:pulmonary-function-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:pulmonary-function-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ea731859-d2cc-43a9-a480-2493a4a00232"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

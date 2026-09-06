@@ -1,0 +1,827 @@
+{
+  "resourceType": "Bundle",
+  "id": "2bbd489c-9548-4823-a2ef-ba07daaa804e",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Sleep Study Test Result \u2014 abnormal-severe-osa-no-desaturation-major-not-critical-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "dc9bb141-e3ed-4ffc-ace5-089158870e13",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dbf4ed58-7cf2-4bc9-a832-57b3a22ccc2c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "dbf4ed58-7cf2-4bc9-a832-57b3a22ccc2c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:sleep-study-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result:role",
+                  "code": "respiratory-physician",
+                  "display": "Respiratory-Physician"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b4c4ca7e-b2ed-4883-a53b-05bf8a312782",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b4c4ca7e-b2ed-4883-a53b-05bf8a312782",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:sleep-study-test-result",
+              "code": "sleep_study_test_result",
+              "display": "Sleep Study Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0825-SLEEP"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "study_type",
+                  "display": "Study Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "polysomnography",
+                  "display": "Polysomnography"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "study_adequacy",
+                  "display": "Study Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Loud snoring, witnessed apnoeas, and excessive daytime sleepiness (Epworth 16/24); attended polysomnography to confirm suspected severe OSA."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "No previous sleep study on file."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "total_recording_time_hours",
+                  "display": "Total Recording Time Hours"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 8.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "total_sleep_time_hours",
+                  "display": "Total Sleep Time Hours"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 6.5
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "apnoea_hypopnoea_index",
+                  "display": "Apnoea Hypopnoea Index"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 42.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "oxygen_desaturation_index",
+                  "display": "Oxygen Desaturation Index"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 38.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "minimum_spo2_percent",
+                  "display": "Minimum Spo2 Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 88.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "time_below_90_percent_spo2",
+                  "display": "Time Below 90 Percent Spo2"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 12.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "mean_heart_rate_bpm",
+                  "display": "Mean Heart Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 70
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "osa_severity",
+                  "display": "Osa Severity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "severe",
+                  "display": "Severe"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "obstructive_sleep_apnoea",
+                  "display": "Obstructive Sleep Apnoea"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "central_sleep_apnoea",
+                  "display": "Central Sleep Apnoea"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "periodic_limb_movements",
+                  "display": "Periodic Limb Movements"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "nocturnal_hypoventilation",
+                  "display": "Nocturnal Hypoventilation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "significant_desaturation",
+                  "display": "Significant Desaturation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "normal_study",
+                  "display": "Normal Study"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Frequent obstructive apnoeas and hypopnoeas throughout the recording, AHI 42 (severe), predominantly supine and REM-related. Oxygen desaturation index 38; minimum SpO2 88%, without sustained or significant desaturation."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Severe obstructive sleep apnoea (AHI 42)."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Refer to the sleep clinic for CPAP titration; advise on DVLA driving implications pending treatment."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:sleep-study-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c277f15d-1204-4913-a2c5-5b3b845a1598",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "c277f15d-1204-4913-a2c5-5b3b845a1598",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Sleep Study Test Result grading result \u2014 abnormal-severe-osa-no-desaturation-major-not-critical-complete",
+        "summary": "Result Classification: abnormal; Abnormality Severity: major; Reporting Category: Severe OSA (AHI >=30); Report Completeness Percent: 100; Follow Up Urgency: urgent; Target Timeframe: within 2 weeks; Recommended Action: Arrange urgent sleep-clinic review for CPAP titration and advise on DVLA driving implications.; Recommendation: specialist-referral"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9d3973f9-2a33-4e57-a89b-9b584e1e03db",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9d3973f9-2a33-4e57-a89b-9b584e1e03db",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:sleep-study-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:sleep-study-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured findings are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:06f9c360-04c2-40b4-aba4-49f858ab7c57",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "06f9c360-04c2-40b4-aba4-49f858ab7c57",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:sleep-study-test-result",
+                "code": "grading-fired-rule",
+                "display": "severe-osa"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:sleep-study-test-result:rules",
+              "code": "R-SEV-MAJOR-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Severe OSA (AHI >= 30); abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:447c3ec8-c536-445e-ac80-3def9379b52a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "447c3ec8-c536-445e-ac80-3def9379b52a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:sleep-study-test-result",
+                "code": "grading-fired-rule",
+                "display": "major-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:sleep-study-test-result:rules",
+              "code": "R-FU-URGENT-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Major abnormality (severe OSA) present; follow-up urgency graded urgent."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ef9c6aa1-2081-4811-a0c9-971889986329",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ef9c6aa1-2081-4811-a0c9-971889986329",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:sleep-study-test-result",
+                "code": "grading-additional-flag",
+                "display": "abnormal-requiring-action"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:sleep-study-test-result:flags",
+              "code": "F-ABNORMAL-ACTION-001",
+              "display": "abnormal-requiring-action"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:dc9bb141-e3ed-4ffc-ace5-089158870e13"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Severe OSA (AHI >= 30) is present and requires timely action.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Ensure the referrer is alerted and arrange a sleep-clinic review for CPAP titration."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

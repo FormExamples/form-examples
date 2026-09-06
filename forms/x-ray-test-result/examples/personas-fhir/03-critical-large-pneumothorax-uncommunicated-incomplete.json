@@ -1,0 +1,980 @@
+{
+  "resourceType": "Bundle",
+  "id": "1dd41f54-7e6e-4b93-ac8e-95c83e287455",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "X Ray Test Result \u2014 critical-large-pneumothorax-uncommunicated-incomplete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "be5b645d-ccbf-41a4-a989-6f7f19a3ccdc",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ba673a08-2fcb-49a6-af2d-94f40ec58556",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ba673a08-2fcb-49a6-af2d-94f40ec58556",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result:role",
+                  "code": "radiologist",
+                  "display": "Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ad740556-f03e-4d36-a891-849d93c734b1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ad740556-f03e-4d36-a891-849d93c734b1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result",
+              "code": "x_ray_test_result",
+              "display": "X Ray Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "body_region",
+                  "display": "Body Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "chest",
+                  "display": "Chest"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "laterality",
+                  "display": "Laterality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "not-applicable",
+                  "display": "Not-Applicable"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "projections",
+                  "display": "Projections"
+                }
+              ]
+            },
+            "valueString": "AP erect chest radiograph."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "A large right-sided pneumothorax is seen with approximately 40% lung collapse and mediastinal structures central; no evidence of tension physiology on this static view, but close observation is advised."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "fracture",
+                  "display": "Fracture"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "dislocation",
+                  "display": "Dislocation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "consolidation",
+                  "display": "Consolidation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "pneumothorax",
+                  "display": "Pneumothorax"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "pleural_effusion",
+                  "display": "Pleural Effusion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "foreign_body",
+                  "display": "Foreign Body"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "free_air",
+                  "display": "Free Air"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "bony_lesion",
+                  "display": "Bony Lesion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:x-ray-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:930bd9f0-a09f-4913-aaa8-7cc096a1611f",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "930bd9f0-a09f-4913-aaa8-7cc096a1611f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "X Ray Test Result grading result \u2014 critical-large-pneumothorax-uncommunicated-incomplete",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: critical-actionable; Report Completeness Percent: 40; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result directly to the referrer now and document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4b96a775-4a15-44ac-a111-f5fe37b3e536",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4b96a775-4a15-44ac-a111-f5fe37b3e536",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical structured finding (pneumothorax, free intraperitoneal air, or unstable fracture) is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e10d0f3e-a23a-4622-a109-73b92b5bca05",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e10d0f3e-a23a-4622-a109-73b92b5bca05",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c3670d91-4583-4487-af44-061c3f14e9da",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "c3670d91-4583-4487-af44-061c3f14e9da",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-fired-rule",
+                "display": "history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:rules",
+              "code": "R-COMP-HISTORY-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: clinical history."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e1ca1224-6e41-4d0a-ad78-fe23c698a806",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e1ca1224-6e41-4d0a-ad78-fe23c698a806",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous imaging."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ad9c74bc-0a55-452d-ab3a-ffd5548911d0",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ad9c74bc-0a55-452d-ab3a-ffd5548911d0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:03c89ac7-d3c9-4432-ab38-e7ad6c1428d7",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "03c89ac7-d3c9-4432-ab38-e7ad6c1428d7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a3325129-bafc-4c10-a677-60b9d288a59b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "a3325129-bafc-4c10-a677-60b9d288a59b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical finding (pneumothorax, free intraperitoneal air, or unstable fracture) is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:65e1cdab-5ea0-4f55-af04-eb79dd011ce1",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "65e1cdab-5ea0-4f55-af04-eb79dd011ce1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f07a5a25-35d5-4807-aa7c-328f814a1c09",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f07a5a25-35d5-4807-aa7c-328f814a1c09",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fcbe9159-6a25-45d3-aff4-4df81f2662ba",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "fcbe9159-6a25-45d3-aff4-4df81f2662ba",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:x-ray-test-result",
+                "code": "grading-additional-flag",
+                "display": "unexpected-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:x-ray-test-result:flags",
+              "code": "F-UNEXPECTED-FINDING-001",
+              "display": "unexpected-finding"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:be5b645d-ccbf-41a4-a989-6f7f19a3ccdc"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A significant finding is present but no originating request reference is recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Link the report to the originating request to support discrepancy review."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

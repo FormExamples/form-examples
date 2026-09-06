@@ -1,0 +1,705 @@
+{
+  "resourceType": "Bundle",
+  "id": "27107b46-573e-492f-a641-4262c787c24d",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Nuclear Medicine Test Result \u2014 abnormal-reduced-ejection-fraction-alone-no-other-finding persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "383eddfe-6527-4518-a807-18ac17e6a119",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:45ac671b-06d9-455c-a123-ac28cf0567db",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "45ac671b-06d9-455c-a123-ac28cf0567db",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nuclear-medicine-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result:role",
+                  "code": "nuclear-medicine-physician",
+                  "display": "Nuclear-Medicine-Physician"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:12c589de-ab0d-4920-a97b-3b78ff955820",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "12c589de-ab0d-4920-a97b-3b78ff955820",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nuclear-medicine-test-result",
+              "code": "nuclear_medicine_test_result",
+              "display": "Nuclear Medicine Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0826-NM"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "scan_type",
+                  "display": "Scan Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "myocardial-perfusion",
+                  "display": "Myocardial-Perfusion"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "radiopharmaceutical",
+                  "display": "Radiopharmaceutical"
+                }
+              ]
+            },
+            "valueString": "Tc-99m tetrofosmin, rest gated SPECT only, 350 MBq."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "injected_activity_mbq",
+                  "display": "Injected Activity Mbq"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 350.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Known ischaemic cardiomyopathy; gated rest SPECT to reassess left-ventricular function, no stress component performed given recent decompensation."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "Prior scan 12 months ago showed EF 45%."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "No regional perfusion defect, photopenic area, or abnormal uptake on rest imaging. Gated analysis shows globally reduced left-ventricular systolic function."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "abnormal_uptake",
+                  "display": "Abnormal Uptake"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "metastatic_pattern",
+                  "display": "Metastatic Pattern"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "perfusion_defect",
+                  "display": "Perfusion Defect"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "photopenic_area",
+                  "display": "Photopenic Area"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "no_significant_abnormality",
+                  "display": "No Significant Abnormality"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "incidental_finding",
+                  "display": "Incidental Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "ejection_fraction_percent",
+                  "display": "Ejection Fraction Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 28.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "No regional perfusion defect. Reduced left-ventricular ejection fraction (28%), consistent with worsening cardiomyopathy."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Refer to cardiology heart-failure service for reassessment of ejection fraction and management optimisation."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:nuclear-medicine-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8cfca8c3-996f-4a51-ab5a-8fa91a5595df",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "8cfca8c3-996f-4a51-ab5a-8fa91a5595df",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Nuclear Medicine Test Result grading result \u2014 abnormal-reduced-ejection-fraction-alone-no-other-finding",
+        "summary": "Result Classification: abnormal; Abnormality Severity: major; Reporting Category: reduced-ejection-fraction; Report Completeness Percent: 100; Follow Up Urgency: urgent; Target Timeframe: within 24 hours; Recommended Action: Arrange urgent clinical review and expedite onward referral.; Recommendation: specialist-referral"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4efd8c06-9927-49c3-aa7a-dcd20e89a056",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4efd8c06-9927-49c3-aa7a-dcd20e89a056",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:nuclear-medicine-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nuclear-medicine-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured findings are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b7a232cf-015c-424f-a9b3-e65c0a6d3f10",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b7a232cf-015c-424f-a9b3-e65c0a6d3f10",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:nuclear-medicine-test-result",
+                "code": "grading-fired-rule",
+                "display": "reduced-ejection-fraction"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nuclear-medicine-test-result:rules",
+              "code": "R-SEV-MAJOR-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Left-ventricular ejection fraction is markedly reduced (< 40 %); abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:616aaa96-b490-4588-ac97-78ec192f3406",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "616aaa96-b490-4588-ac97-78ec192f3406",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:nuclear-medicine-test-result",
+                "code": "grading-fired-rule",
+                "display": "major-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:nuclear-medicine-test-result:rules",
+              "code": "R-FU-URGENT-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:383eddfe-6527-4518-a807-18ac17e6a119"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Major abnormality present; follow-up urgency graded urgent."
+      }
+    }
+  ]
+}

@@ -2324,10 +2324,42 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       carries synthetic sample rows; generate them from
       `examples/personas.json` (state + `expected`) so the dashboard and the
       oracle can never disagree. `--check` tool, fleet-wide.
-- [ ] **Persona → FHIR R5 Bundle** (already listed under Phase 11 as "FHIR
-      bundles for personas"): now that 276/355 forms have personas, do it
-      as a generator with `--check`, starting from the `*-test-result`
-      family whose Bundles share one shape.
+- [x] **Persona → FHIR R5 Bundle** (already listed under Phase 11 as "FHIR
+      bundles for personas") — DONE 2026-09-06.
+      `bin/generate-persona-fhir-bundles.py [--check] [--all|<slug>…]`
+      generates one FHIR R5 `Bundle` per `examples/personas.json` entry into
+      a new `examples/personas-fhir/` directory, built from that persona's
+      actual filled `state` and computed `expected` grade — richer than
+      `generate-changelog-and-examples.py`'s generic, type-defaulted
+      `examples/fhir-bundle.json`, which carries the same placeholder
+      values for every reader regardless of which persona they have in
+      mind. Scoped to the `*-test-result` family (37/37 forms, confirmed
+      fleet-wide to share one `sql/` shape: `patient` + `clinician` + a
+      single main `<slug>_result` table + a `_grade`/`_grade_rule`/
+      `_grade_flag` triad) — defaults to that whole family with no
+      arguments. Reuses `bin/fhir-r5/generate-fhir-r5-representations.py`'s
+      column parser and value-typing helpers (loaded via `importlib`, since
+      the filename has hyphens), substituting persona values for its
+      generic `guess_fhir_value()` placeholders. Mapping deliberately
+      differs from that generator's own per-entity `classify_table()`: the
+      main result table becomes an `Observation` (one component per
+      *answered* — non-`''`/non-`null` — column) rather than the thin
+      `Encounter` (status-only, no clinical fields) that generator's schema
+      -level classifier produces for it; `patient`/`clinician` are copied
+      unchanged from `fhir/r5/*.json` (personas don't vary those fields in
+      this family), with the copy's now-dangling `encounter` reference
+      stripped since this bundle carries no Encounter resource; the grade
+      table becomes a `ClinicalImpression` summary; each fired rule and
+      flag in `expected.firedRules`/`expected.flags` becomes its own
+      `DetectedIssue`. Resource/bundle ids are deterministic
+      (sha256-of-seed-text), not random, so reruns are byte-identical.
+      189 persona bundles generated across the 37-form family; `--check`
+      verified idempotent; all 189 files valid JSON; no dangling
+      `Encounter/` references; `git status` scoped to exactly the new
+      `bin/` script + 37 new `examples/personas-fhir/` directories.
+      Wired into `AGENTS.md`'s Generators catalogue and Verify section;
+      `docs/tools.md` regenerated. Broader-than-`*-test-result` support
+      (forms whose `sql/` doesn't share this exact shape) is future work.
 
 ## Done (previous rounds — summary)
 

@@ -1,0 +1,955 @@
+{
+  "resourceType": "Bundle",
+  "id": "13f6d0e9-8e0c-4a97-a1f5-2b7a6f088e17",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Echocardiogram Test Result \u2014 severe-aortic-stenosis-critical persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "d9601516-0d0e-4a10-ac8c-d8fced948db8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0b0d85ed-e45e-42cc-ae49-3bb8d9f58c9a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "0b0d85ed-e45e-42cc-ae49-3bb8d9f58c9a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result:role",
+                  "code": "cardiologist",
+                  "display": "Cardiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bebdf16b-6a98-4fa7-a4cd-243d3ed59ffe",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bebdf16b-6a98-4fa7-a4cd-243d3ed59ffe",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result",
+              "code": "echocardiogram_test_result",
+              "display": "Echocardiogram Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ECHO-REQ-100602"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "echo_type",
+                  "display": "Echo Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "transthoracic-tte",
+                  "display": "Transthoracic-Tte"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "study_quality",
+                  "display": "Study Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "good",
+                  "display": "Good"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Progressive exertional dyspnoea and one episode of exertional syncope"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "lv_ejection_fraction_percent",
+                  "display": "Lv Ejection Fraction Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 55.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "lv_function",
+                  "display": "Lv Function"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "lv_internal_diameter_diastole_mm",
+                  "display": "Lv Internal Diameter Diastole Mm"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 47.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "aortic_stenosis",
+                  "display": "Aortic Stenosis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "severe",
+                  "display": "Severe"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "aortic_regurgitation",
+                  "display": "Aortic Regurgitation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "mild",
+                  "display": "Mild"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "mitral_stenosis",
+                  "display": "Mitral Stenosis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "mitral_regurgitation",
+                  "display": "Mitral Regurgitation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "pulmonary_artery_systolic_pressure_mmhg",
+                  "display": "Pulmonary Artery Systolic Pressure Mmhg"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 34.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "lv_hypertrophy",
+                  "display": "Lv Hypertrophy"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "regional_wall_motion_abnormality",
+                  "display": "Regional Wall Motion Abnormality"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "pericardial_effusion",
+                  "display": "Pericardial Effusion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "vegetation",
+                  "display": "Vegetation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "intracardiac_thrombus",
+                  "display": "Intracardiac Thrombus"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "normal_study",
+                  "display": "Normal Study"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Severely calcified aortic valve with a high mean gradient and reduced valve area, consistent with severe aortic stenosis. Compensatory LV hypertrophy."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "Prior study 2025-06 showed moderate stenosis; interval progression to severe"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Severe aortic stenosis with interval progression; symptomatic."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Urgent heart-team / valve-clinic referral for consideration of intervention"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:echocardiogram-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0a9448d5-e13b-4a55-a3c6-30bcf42c9960",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "0a9448d5-e13b-4a55-a3c6-30bcf42c9960",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Echocardiogram Test Result grading result \u2014 severe-aortic-stenosis-critical",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: severe-valve-disease; Report Completeness Percent: 100; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result directly to the referrer now and document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c49ca4ac-5a1c-446e-afa6-5f99f0404684",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "c49ca4ac-5a1c-446e-afa6-5f99f0404684",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:echocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical structured finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:17d76501-9a0a-4b1f-acb2-9f14ba09ac13",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "17d76501-9a0a-4b1f-acb2-9f14ba09ac13",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:echocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4d899c5d-799b-4d90-a804-1298aaa96e35",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4d899c5d-799b-4d90-a804-1298aaa96e35",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:echocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9f1250d2-e89c-4f8e-af24-393eba8c7956",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9f1250d2-e89c-4f8e-af24-393eba8c7956",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:echocardiogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d83868ff-5ec6-4f3f-acff-726d0a7c3f5d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "d83868ff-5ec6-4f3f-acff-726d0a7c3f5d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:echocardiogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0fd4c5b5-4257-40fe-a427-22aab9ec468a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "0fd4c5b5-4257-40fe-a427-22aab9ec468a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:echocardiogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "severe-valve-disease"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:echocardiogram-test-result:flags",
+              "code": "F-SEVERE-VALVE-001",
+              "display": "severe-valve-disease"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:d9601516-0d0e-4a10-ac8c-d8fced948db8"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Severe valvular stenosis or regurgitation is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Refer to the valve / heart-team for assessment of intervention."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

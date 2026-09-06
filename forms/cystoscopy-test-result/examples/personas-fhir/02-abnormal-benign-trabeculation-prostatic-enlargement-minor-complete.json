@@ -1,0 +1,743 @@
+{
+  "resourceType": "Bundle",
+  "id": "a82e1092-4ac0-4a62-a5e7-fe14143eed63",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Cystoscopy Test Result \u2014 abnormal-benign-trabeculation-prostatic-enlargement-minor-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "cbc879cc-9b9a-4891-a9a8-7d6d99e78d33",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9649f10c-f421-4c92-a007-c7174e2f06fb",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9649f10c-f421-4c92-a007-c7174e2f06fb",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result:role",
+                  "code": "urologist",
+                  "display": "Urologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1237726c-ac68-4d53-a591-c8f549fdd32b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1237726c-ac68-4d53-a591-c8f549fdd32b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result",
+              "code": "cystoscopy_test_result",
+              "display": "Cystoscopy Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0825-CYSTO"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "flexible-cystoscopy",
+                  "display": "Flexible-Cystoscopy"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "anaesthesia",
+                  "display": "Anaesthesia"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "local",
+                  "display": "Local"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Lower urinary tract symptoms in an elderly male; flexible cystoscopy for further assessment."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "bladder_tumour",
+                  "display": "Bladder Tumour"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "inflammation_cystitis",
+                  "display": "Inflammation Cystitis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "bladder_stones",
+                  "display": "Bladder Stones"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "urethral_stricture",
+                  "display": "Urethral Stricture"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "trabeculation",
+                  "display": "Trabeculation"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "prostatic_enlargement",
+                  "display": "Prostatic Enlargement"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "normal_examination",
+                  "display": "Normal Examination"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "biopsy_taken",
+                  "display": "Biopsy Taken"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "complication",
+                  "display": "Complication"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "none",
+                  "display": "None"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Mild bladder wall trabeculation consistent with longstanding bladder outflow obstruction, and mild prostatic enlargement narrowing the prostatic urethra. No tumour, inflammation, stones, or stricture."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Benign bladder trabeculation and prostatic enlargement consistent with bladder outflow obstruction; no tumour or other significant pathology."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Refer to urology for consideration of BPH management; no further cystoscopic surveillance required for this finding alone."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cystoscopy-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c4771697-7fbd-45ea-a4c2-14804e930e34",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "c4771697-7fbd-45ea-a4c2-14804e930e34",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Cystoscopy Test Result grading result \u2014 abnormal-benign-trabeculation-prostatic-enlargement-minor-complete",
+        "summary": "Result Classification: abnormal; Abnormality Severity: minor; Reporting Category: benign-structural; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: per local surveillance guidance; Recommended Action: Manage the benign structural finding per the relevant follow-up pathway.; Recommendation: routine-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:99e8e09b-144f-4638-ab13-9229481ff753",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "99e8e09b-144f-4638-ab13-9229481ff753",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured findings are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ab718f9a-9c3c-41b0-ae4c-14271fde5414",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ab718f9a-9c3c-41b0-ae4c-14271fde5414",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "benign-structural-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-SEV-MINOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Benign structural finding(s) only (trabeculation / prostatic enlargement); abnormality severity graded minor."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3cb0c702-1f1f-4de4-a16e-06567a41dbda",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3cb0c702-1f1f-4de4-a16e-06567a41dbda",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-fired-rule",
+                "display": "benign-structural-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:rules",
+              "code": "R-FU-RECOMMENDED-03",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Benign structural finding; structured follow-up per local surveillance guidance recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3f55a141-8dee-43b7-a546-8a78d2cf235e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3f55a141-8dee-43b7-a546-8a78d2cf235e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cystoscopy-test-result",
+                "code": "grading-additional-flag",
+                "display": "incidental-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cystoscopy-test-result:flags",
+              "code": "F-INCIDENTAL-FINDING-001",
+              "display": "incidental-finding"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:cbc879cc-9b9a-4891-a9a8-7d6d99e78d33"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more incidental benign structural findings are documented.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Manage the incidental finding per the relevant structured pathway."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,750 @@
+{
+  "resourceType": "Bundle",
+  "id": "3318404d-7400-4653-a0fa-e4847bc59910",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Electroencephalogram Test Result \u2014 moderate-abnormal-background-rhythm persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "ba207807-bded-4c73-a13c-58545898d006",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:294df271-dc73-4b49-a792-cca0a9b69c86",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "294df271-dc73-4b49-a792-cca0a9b69c86",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result:role",
+                  "code": "neurologist",
+                  "display": "Neurologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5428074a-f2df-4995-afc5-d9d41c141c31",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "5428074a-f2df-4995-afc5-d9d41c141c31",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result",
+              "code": "electroencephalogram_test_result",
+              "display": "Electroencephalogram Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "EEG-REQ-100714"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-27"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-27"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "eeg_type",
+                  "display": "Eeg Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "sleep-deprived",
+                  "display": "Sleep-Deprived"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "recording_duration_minutes",
+                  "display": "Recording Duration Minutes"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 35.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "recording_quality",
+                  "display": "Recording Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Encephalopathy of uncertain cause, mild confusion"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "background_rhythm",
+                  "display": "Background Rhythm"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "abnormal",
+                  "display": "Abnormal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "epileptiform_discharges",
+                  "display": "Epileptiform Discharges"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "focal_slowing",
+                  "display": "Focal Slowing"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "generalised_slowing",
+                  "display": "Generalised Slowing"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "seizure_recorded",
+                  "display": "Seizure Recorded"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "status_epilepticus",
+                  "display": "Status Epilepticus"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "photoparoxysmal_response",
+                  "display": "Photoparoxysmal Response"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "normal_eeg",
+                  "display": "Normal Eeg"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Disorganised background with poor state changes and reduced reactivity, without focal or epileptiform features."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "clinical_correlation",
+                  "display": "Clinical Correlation"
+                }
+              ]
+            },
+            "valueString": "Consistent with a mild diffuse encephalopathy; correlate with metabolic and infective screen."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Disorganised background consistent with mild encephalopathy."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Neurology review; correlate with metabolic and infective work-up"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electroencephalogram-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:db2550cf-5ff1-4e90-afc1-dd31d96df68f",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "db2550cf-5ff1-4e90-afc1-dd31d96df68f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Electroencephalogram Test Result grading result \u2014 moderate-abnormal-background-rhythm",
+        "summary": "Result Classification: abnormal; Abnormality Severity: moderate; Reporting Category: abnormal-background; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: within 2 weeks; Recommended Action: Recommend neurology review or a follow-up recording as clinically indicated.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:137be289-aa4c-4122-a3bc-d06cee810f17",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "137be289-aa4c-4122-a3bc-d06cee810f17",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured or background findings are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ee91b5d2-bd18-4cfe-a983-0647e467d489",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ee91b5d2-bd18-4cfe-a983-0647e467d489",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "actionable-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-SEV-MODERATE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An actionable abnormal finding (focal slowing, generalised slowing, photoparoxysmal response, or abnormal background) is present; severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:58eac335-b229-495f-a290-db661ec686c1",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "58eac335-b229-495f-a290-db661ec686c1",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous EEG."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4e24d2a4-419d-4f31-aff9-aa90d6d9ebfa",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4e24d2a4-419d-4f31-aff9-aa90d6d9ebfa",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electroencephalogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "moderate-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electroencephalogram-test-result:rules",
+              "code": "R-FU-RECOMMENDED-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:ba207807-bded-4c73-a13c-58545898d006"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Moderate abnormality present; follow-up recommended."
+      }
+    }
+  ]
+}

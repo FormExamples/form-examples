@@ -1,0 +1,794 @@
+{
+  "resourceType": "Bundle",
+  "id": "560eced1-2404-47ee-aa77-338fb546df47",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Dexa Bone Density Test Result \u2014 unexpected-vertebral-fracture-without-osteoporosis persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "1ec59c0f-b51f-481f-a95e-6a4b0ad88084",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3f022b03-ef38-4283-a392-b2c8821b238d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "3f022b03-ef38-4283-a392-b2c8821b238d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result:role",
+                  "code": "radiologist",
+                  "display": "Radiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2f0c88d6-ed96-4510-ac57-d631d79b0631",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "2f0c88d6-ed96-4510-ac57-d631d79b0631",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result",
+              "code": "dexa_bone_density_test_result",
+              "display": "Dexa Bone Density Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "DEXA-REQ-100714"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-29"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "scan_region",
+                  "display": "Scan Region"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "lumbar-spine-and-hip",
+                  "display": "Lumbar-Spine-And-Hip"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "examination_adequacy",
+                  "display": "Examination Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Incidental vertebral wedge deformity noted on lateral spine image during routine DEXA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "lumbar_spine_t_score",
+                  "display": "Lumbar Spine T Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": -1.6
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "lumbar_spine_z_score",
+                  "display": "Lumbar Spine Z Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": -0.8
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "femoral_neck_t_score",
+                  "display": "Femoral Neck T Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": -1.2
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "femoral_neck_z_score",
+                  "display": "Femoral Neck Z Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": -0.5
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "total_hip_t_score",
+                  "display": "Total Hip T Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": -1.3
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "lowest_t_score",
+                  "display": "Lowest T Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": -1.6
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "bone_mineral_density_g_cm2",
+                  "display": "Bone Mineral Density G Cm2"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.9
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "frax_major_fracture_percent",
+                  "display": "Frax Major Fracture Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 15.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "frax_hip_fracture_percent",
+                  "display": "Frax Hip Fracture Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 2.8
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "vertebral_fracture_identified",
+                  "display": "Vertebral Fracture Identified"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Osteopenia with an unexpected vertebral wedge fracture on lateral imaging."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Fracture-risk review despite T-score in the osteopenia range; consider vertebral fracture assessment"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:dexa-bone-density-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ae308d67-5d6f-4579-acea-75da5e96822f",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "ae308d67-5d6f-4579-acea-75da5e96822f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Dexa Bone Density Test Result grading result \u2014 unexpected-vertebral-fracture-without-osteoporosis",
+        "summary": "Result Classification: abnormal; Abnormality Severity: moderate; Reporting Category: osteopenia; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: within 3 months; Recommended Action: Assess fracture risk (FRAX), advise lifestyle / bone-health measures, and arrange interval monitoring.; Recommendation: routine-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:06003430-60aa-43dd-a9da-89178b9e5776",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "06003430-60aa-43dd-a9da-89178b9e5776",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:dexa-bone-density-test-result",
+                "code": "grading-fired-rule",
+                "display": "reduced-bone-density"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Reduced bone density (osteopenia or osteoporosis) on the WHO densitometric classification; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b874fda0-a188-4cc7-a6bb-8f11789d7b4b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b874fda0-a188-4cc7-a6bb-8f11789d7b4b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:dexa-bone-density-test-result",
+                "code": "grading-fired-rule",
+                "display": "osteopenia"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result:rules",
+              "code": "R-SEV-MODERATE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Osteopenia (low bone mass); abnormality severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1149aca1-31d2-4f6b-aa5e-8aa3f18815a4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "1149aca1-31d2-4f6b-aa5e-8aa3f18815a4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:dexa-bone-density-test-result",
+                "code": "grading-fired-rule",
+                "display": "comparison"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result:rules",
+              "code": "R-COMP-COMPARISON-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: comparison with previous imaging."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:414c57bf-d9de-4dd5-a6ed-e5b02ff76ced",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "414c57bf-d9de-4dd5-a6ed-e5b02ff76ced",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:dexa-bone-density-test-result",
+                "code": "grading-fired-rule",
+                "display": "osteopenia"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result:rules",
+              "code": "R-FU-RECOMMENDED-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Osteopenia (low bone mass); follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:318c7fe0-9edd-404b-afb3-674727c3bb69",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "318c7fe0-9edd-404b-afb3-674727c3bb69",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:dexa-bone-density-test-result",
+                "code": "grading-additional-flag",
+                "display": "unexpected-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:dexa-bone-density-test-result:flags",
+              "code": "F-UNEXPECTED-FINDING-001",
+              "display": "unexpected-finding"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:1ec59c0f-b51f-481f-a95e-6a4b0ad88084"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A vertebral fracture was identified without a T-score in the osteoporotic range.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Review fracture risk; a fragility fracture may itself indicate treatment irrespective of BMD."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

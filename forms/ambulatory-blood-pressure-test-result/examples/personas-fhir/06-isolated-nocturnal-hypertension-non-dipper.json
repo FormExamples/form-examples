@@ -1,0 +1,836 @@
+{
+  "resourceType": "Bundle",
+  "id": "18bfd140-9b76-4900-a382-375158912e06",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Ambulatory Blood Pressure Test Result \u2014 isolated-nocturnal-hypertension-non-dipper persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "86eb27fa-fee3-498e-a4cf-ddf927abc680",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c057d80a-190c-4cb7-a6da-af35a5dbde12",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "c057d80a-190c-4cb7-a6da-af35a5dbde12",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result:role",
+                  "code": "gp",
+                  "display": "Gp"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1c8d4397-98ec-43a6-a220-4a4d937ee334",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1c8d4397-98ec-43a6-a220-4a4d937ee334",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+              "code": "ambulatory_blood_pressure_test_result",
+              "display": "Ambulatory Blood Pressure Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ABPM-REQ-100822"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "monitoring_type",
+                  "display": "Monitoring Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "24-hour-abpm",
+                  "display": "24-Hour-Abpm"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-27"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "valid_readings_percent",
+                  "display": "Valid Readings Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 87.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "recording_adequate",
+                  "display": "Recording Adequate"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Known type 2 diabetes, screening for non-dipping pattern"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "daytime_average_systolic",
+                  "display": "Daytime Average Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 128.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "daytime_average_diastolic",
+                  "display": "Daytime Average Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 80.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "nighttime_average_systolic",
+                  "display": "Nighttime Average Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 122.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "nighttime_average_diastolic",
+                  "display": "Nighttime Average Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 72.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "twenty_four_hour_average_systolic",
+                  "display": "Twenty Four Hour Average Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 126.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "twenty_four_hour_average_diastolic",
+                  "display": "Twenty Four Hour Average Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 78.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "nocturnal_dip_percent",
+                  "display": "Nocturnal Dip Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 2.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "dipper_status",
+                  "display": "Dipper Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "non-dipper",
+                  "display": "Non-Dipper"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "hypertension_confirmed",
+                  "display": "Hypertension Confirmed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "white_coat_effect",
+                  "display": "White Coat Effect"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "masked_hypertension",
+                  "display": "Masked Hypertension"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "severe_hypertension",
+                  "display": "Severe Hypertension"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "nocturnal_hypertension",
+                  "display": "Nocturnal Hypertension"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "normal_study",
+                  "display": "Normal Study"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Isolated nocturnal hypertension with a non-dipping pattern; daytime readings normal."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Isolated nocturnal hypertension, non-dipper."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Review medication timing (consider evening dosing); cardiovascular risk assessment"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:48558a3d-d216-49fc-a873-6140280c7d68",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "48558a3d-d216-49fc-a873-6140280c7d68",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Ambulatory Blood Pressure Test Result grading result \u2014 isolated-nocturnal-hypertension-non-dipper",
+        "summary": "Result Classification: abnormal; Abnormality Severity: minor; Reporting Category: nocturnal-hypertension; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: within 3 months; Recommended Action: Recommend lifestyle advice and follow-up monitoring per NICE NG136; consider treatment by cardiovascular risk.; Recommendation: routine-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e964fa53-f7ab-4758-aa2a-30c513fecdb7",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "e964fa53-f7ab-4758-aa2a-30c513fecdb7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5ca2a97c-41f2-408d-a41d-e1d7899c641c",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "5ca2a97c-41f2-408d-a41d-e1d7899c641c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "nocturnal-hypertension"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-SEV-MINOR-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Isolated nocturnal hypertension present; severity graded minor."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:26fe01f6-b284-4cc3-a593-afd5fb17ccd9",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "26fe01f6-b284-4cc3-a593-afd5fb17ccd9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "minor-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-FU-RECOMMENDED-03",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Minor abnormality (stage 1, nocturnal, or white-coat); structured follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:145cd43e-af55-4809-a5ef-649512667693",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "145cd43e-af55-4809-a5ef-649512667693",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:86eb27fa-fee3-498e-a4cf-ddf927abc680"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Masked or nocturnal hypertension is present and carries elevated cardiovascular risk.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider referral to a hypertension specialist for further assessment."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

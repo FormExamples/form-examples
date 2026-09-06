@@ -1,0 +1,909 @@
+{
+  "resourceType": "Bundle",
+  "id": "c9e44864-2232-489f-a604-7bf7cce6dc8a",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Electrocardiogram Test Result \u2014 atrial-fibrillation-abnormal-rhythm-moderate persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "dfd9e2b1-e555-4de9-a159-b29eb1f8814e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4380ab78-0bf0-4219-a2ce-4a7ad1705196",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4380ab78-0bf0-4219-a2ce-4a7ad1705196",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result:role",
+                  "code": "cardiologist",
+                  "display": "Cardiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:93c1e7f0-58db-492f-a40d-3eb3163d769f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "93c1e7f0-58db-492f-a40d-3eb3163d769f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result",
+              "code": "electrocardiogram_test_result",
+              "display": "Electrocardiogram Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ECG-REQ-100602"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "ecg_type",
+                  "display": "Ecg Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "resting-12-lead",
+                  "display": "Resting-12-Lead"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "recording_quality",
+                  "display": "Recording Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "good",
+                  "display": "Good"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "New palpitations and irregular pulse noted on routine observations"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "ventricular_rate_bpm",
+                  "display": "Ventricular Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 118
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "rhythm",
+                  "display": "Rhythm"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "atrial-fibrillation",
+                  "display": "Atrial-Fibrillation"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "qrs_duration_ms",
+                  "display": "Qrs Duration Ms"
+                }
+              ]
+            },
+            "valueInteger": 92
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "qt_interval_ms",
+                  "display": "Qt Interval Ms"
+                }
+              ]
+            },
+            "valueInteger": 360
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "qtc_ms",
+                  "display": "Qtc Ms"
+                }
+              ]
+            },
+            "valueInteger": 410
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "cardiac_axis",
+                  "display": "Cardiac Axis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "st_elevation",
+                  "display": "St Elevation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "st_depression",
+                  "display": "St Depression"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "t_wave_inversion",
+                  "display": "T Wave Inversion"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "pathological_q_waves",
+                  "display": "Pathological Q Waves"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "left_ventricular_hypertrophy",
+                  "display": "Left Ventricular Hypertrophy"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "bundle_branch_block",
+                  "display": "Bundle Branch Block"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "ischaemia",
+                  "display": "Ischaemia"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "normal_ecg",
+                  "display": "Normal Ecg"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "interpretation",
+                  "display": "Interpretation"
+                }
+              ]
+            },
+            "valueString": "Atrial fibrillation with a rapid ventricular response, new compared with the prior sinus-rhythm ECG."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "Prior ECG 2025-01 showed sinus rhythm"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "New atrial fibrillation with rapid ventricular response."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Urgent cardiology referral for rate/rhythm control and anticoagulation assessment"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:37afbfec-f9bd-4f44-a421-d9bb9ab31d5e",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "37afbfec-f9bd-4f44-a421-d9bb9ab31d5e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Electrocardiogram Test Result grading result \u2014 atrial-fibrillation-abnormal-rhythm-moderate",
+        "summary": "Result Classification: abnormal; Abnormality Severity: moderate; Reporting Category: actionable-finding; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: within 2 weeks; Recommended Action: Recommend cardiology review or further investigation as clinically indicated.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a364823e-8c2b-49fe-a5a8-b3a10a5f45fe",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "a364823e-8c2b-49fe-a5a8-b3a10a5f45fe",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured findings or an abnormal rhythm are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8dc0bb6f-7323-431a-a034-6f0ed0edf444",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "8dc0bb6f-7323-431a-a034-6f0ed0edf444",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "actionable-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-SEV-MODERATE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An actionable abnormal finding (ST depression, pathological Q waves, bundle branch block, or abnormal rhythm) is present; severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2083ef5d-f488-416f-a798-84ac76451b9b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "2083ef5d-f488-416f-a798-84ac76451b9b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "intervals"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-COMP-INTERVALS-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: PR / QRS / QT / QTc intervals."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b3b84914-960b-4a12-af4e-3d8472f024f5",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b3b84914-960b-4a12-af4e-3d8472f024f5",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "moderate-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-FU-RECOMMENDED-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Moderate abnormality present; follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7ddaaca5-134a-4732-ae6a-2653fa8b2ed9",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7ddaaca5-134a-4732-ae6a-2653fa8b2ed9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An abnormal rhythm is present and may warrant urgent cardiology referral.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider urgent referral to the cardiology team."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:90e2780b-26c7-4d60-afc4-1e82abddd968",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "90e2780b-26c7-4d60-afc4-1e82abddd968",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-measurement"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:flags",
+              "code": "F-MISSING-MEASUREMENT-001",
+              "display": "missing-measurement"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:dfd9e2b1-e555-4de9-a159-b29eb1f8814e"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more key measurements (rate, PR, QRS, QT, or QTc) were not recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Record the ventricular rate and the PR / QRS / QT / QTc intervals for completeness."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1018 @@
+{
+  "resourceType": "Bundle",
+  "id": "f0ab45cf-ac00-4054-af3d-53770d45d065",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Cardiac Stress Test Result \u2014 exertional-hypotension-critical persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "2cb4544c-17be-443e-a01a-d9c2475c5710",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b0aa96cf-dfac-48e0-aaf7-1014dd7e5b7f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b0aa96cf-dfac-48e0-aaf7-1014dd7e5b7f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result:role",
+                  "code": "cardiologist",
+                  "display": "Cardiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:af4b5745-34e2-4829-a9b1-e40f5b71bb8d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "af4b5745-34e2-4829-a9b1-e40f5b71bb8d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result",
+              "code": "cardiac_stress_test_result",
+              "display": "Cardiac Stress Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "CST-REQ-100602"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-26"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "test_type",
+                  "display": "Test Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "exercise-treadmill-ecg",
+                  "display": "Exercise-Treadmill-Ecg"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "protocol",
+                  "display": "Protocol"
+                }
+              ]
+            },
+            "valueString": "Modified Bruce protocol"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Exertional presyncope, known left ventricular impairment"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "maximum_heart_rate_bpm",
+                  "display": "Maximum Heart Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 128
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "percent_predicted_heart_rate",
+                  "display": "Percent Predicted Heart Rate"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 76.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "exercise_duration_minutes",
+                  "display": "Exercise Duration Minutes"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "mets_achieved",
+                  "display": "Mets Achieved"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "peak_blood_pressure",
+                  "display": "Peak Blood Pressure"
+                }
+              ]
+            },
+            "valueString": "98/64"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "blood_pressure_response",
+                  "display": "Blood Pressure Response"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "hypotensive",
+                  "display": "Hypotensive"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "ischaemic_st_changes",
+                  "display": "Ischaemic St Changes"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "chest_pain_induced",
+                  "display": "Chest Pain Induced"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "arrhythmia_induced",
+                  "display": "Arrhythmia Induced"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "terminated_early",
+                  "display": "Terminated Early"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "test_positive",
+                  "display": "Test Positive"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "test_negative",
+                  "display": "Test Negative"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "test_inconclusive",
+                  "display": "Test Inconclusive"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "reason_for_termination",
+                  "display": "Reason For Termination"
+                }
+              ]
+            },
+            "valueString": "Test stopped due to a falling systolic blood pressure with exercise"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Test terminated early due to a hypotensive blood pressure response to exercise, an exertional hypotension warning sign of possible severe underlying disease."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Urgent cardiology referral to investigate the hypotensive response"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:cardiac-stress-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:160b053c-9956-4d8c-acaa-600dc75aac1b",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "160b053c-9956-4d8c-acaa-600dc75aac1b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Cardiac Stress Test Result grading result \u2014 exertional-hypotension-critical",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: critical-actionable; Report Completeness Percent: 80; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result directly to the referrer now and make an urgent cardiology referral; document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9b95a69f-88c5-48a1-a8c9-6089fb31ba7f",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9b95a69f-88c5-48a1-a8c9-6089fb31ba7f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6125c0fb-f2c5-4d8a-a492-507d11de083b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "6125c0fb-f2c5-4d8a-a492-507d11de083b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical result present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4ca45110-1400-424d-a214-bfe634ba0aac",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4ca45110-1400-424d-a214-bfe634ba0aac",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-fired-rule",
+                "display": "findings"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:rules",
+              "code": "R-COMP-FINDINGS-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: structured findings."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:58497e51-19e5-484d-af44-a44ef0255553",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "58497e51-19e5-484d-af44-a44ef0255553",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical result auto-escalates follow-up urgency to critical-alert with an urgent cardiology referral, regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0a171e35-f8a2-48c5-ab82-3d81040c7b06",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "0a171e35-f8a2-48c5-ab82-3d81040c7b06",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately, make an urgent cardiology referral, and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8490c80c-1148-469a-a69d-4f762fcb283d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "8490c80c-1148-469a-a69d-4f762fcb283d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical result present but it has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4fcec0ee-f3b4-4f2c-a95e-4132c7ca4591",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "4fcec0ee-f3b4-4f2c-a95e-4132c7ca4591",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An induced arrhythmia or exertional hypotension is present and may warrant urgent referral.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider urgent referral to the appropriate cardiology team."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dd3218bf-e4c1-432c-aa3d-7c8e753a6109",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "dd3218bf-e4c1-432c-aa3d-7c8e753a6109",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:14309bb1-e5c0-48f8-a495-1627c78154b9",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "14309bb1-e5c0-48f8-a495-1627c78154b9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:cardiac-stress-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-measurement"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:cardiac-stress-test-result:flags",
+              "code": "F-MISSING-MEASUREMENT-001",
+              "display": "missing-measurement"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:2cb4544c-17be-443e-a01a-d9c2475c5710"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An exercise treadmill ECG with an abnormal finding has no Duke treadmill score recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Record the Duke treadmill score for prognostic risk stratification."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

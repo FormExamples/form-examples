@@ -1,0 +1,783 @@
+{
+  "resourceType": "Bundle",
+  "id": "a317ecb9-0bf3-4753-ae71-dafcc333033c",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Holter Monitor Test Result \u2014 normal-24-hour-holter-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "18fbd50e-08aa-4dd9-aaf2-521cf4f7656b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0530344a-3399-4f3f-a635-4d2f1e27465d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "0530344a-3399-4f3f-a635-4d2f1e27465d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:holter-monitor-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result:role",
+                  "code": "cardiologist",
+                  "display": "Cardiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:adad39e3-855e-4e74-a463-e9a14bb78468",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "adad39e3-855e-4e74-a463-e9a14bb78468",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:holter-monitor-test-result",
+              "code": "holter_monitor_test_result",
+              "display": "Holter Monitor Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0820-HOLTER"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "monitor_type",
+                  "display": "Monitor Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "24-hour",
+                  "display": "24-Hour"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "recording_duration_hours",
+                  "display": "Recording Duration Hours"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 24.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "analysed_percent",
+                  "display": "Analysed Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 98.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Palpitations, no syncope; 24-hour ambulatory ECG to assess for arrhythmia."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "predominant_rhythm",
+                  "display": "Predominant Rhythm"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "sinus",
+                  "display": "Sinus"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "mean_heart_rate_bpm",
+                  "display": "Mean Heart Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 72
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "minimum_heart_rate_bpm",
+                  "display": "Minimum Heart Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 52
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "maximum_heart_rate_bpm",
+                  "display": "Maximum Heart Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 118
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "longest_pause_seconds",
+                  "display": "Longest Pause Seconds"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 1.2
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "ventricular_ectopic_percent",
+                  "display": "Ventricular Ectopic Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.1
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "supraventricular_ectopic_percent",
+                  "display": "Supraventricular Ectopic Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.2
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "atrial_fibrillation_detected",
+                  "display": "Atrial Fibrillation Detected"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "significant_pauses",
+                  "display": "Significant Pauses"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "ventricular_tachycardia",
+                  "display": "Ventricular Tachycardia"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "supraventricular_tachycardia",
+                  "display": "Supraventricular Tachycardia"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "high_grade_av_block",
+                  "display": "High Grade Av Block"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "symptom_rhythm_correlation",
+                  "display": "Symptom Rhythm Correlation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "normal_study",
+                  "display": "Normal Study"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Predominant sinus rhythm throughout the recording with normal diurnal heart-rate variation. No significant pauses, ectopy, or tachyarrhythmia."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "comparison_with_previous",
+                  "display": "Comparison With Previous"
+                }
+              ]
+            },
+            "valueString": "No previous ambulatory ECG on file."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Normal 24-hour ambulatory ECG; no arrhythmia identified."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "No further ambulatory monitoring required for this indication."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:holter-monitor-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4b19a0b9-edf3-45a8-ae55-79c2f843d3f8",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "4b19a0b9-edf3-45a8-ae55-79c2f843d3f8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Holter Monitor Test Result grading result \u2014 normal-24-hour-holter-complete",
+        "summary": "Result Classification: normal; Abnormality Severity: none; Reporting Category: normal; Report Completeness Percent: 100; Follow Up Urgency: routine; Target Timeframe: no specific follow-up; Recommended Action: No specific monitoring follow-up required; manage per usual care.; Recommendation: no-action"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a9ce5fa0-5f87-47c6-a95f-65278aa7ff0e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "a9ce5fa0-5f87-47c6-a95f-65278aa7ff0e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:holter-monitor-test-result",
+                "code": "grading-fired-rule",
+                "display": "normal-study"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:holter-monitor-test-result:rules",
+              "code": "R-CLASS-NORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Study recorded as normal with no abnormal findings; classified as normal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:abc8b4a5-7b0f-4778-aca8-5dbc8141c80f",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "abc8b4a5-7b0f-4778-aca8-5dbc8141c80f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:holter-monitor-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:holter-monitor-test-result:rules",
+              "code": "R-SEV-NONE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal finding; abnormality severity graded none."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0040dfc7-3111-4d3c-adb2-8c5df0e080f0",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "0040dfc7-3111-4d3c-adb2-8c5df0e080f0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:holter-monitor-test-result",
+                "code": "grading-fired-rule",
+                "display": "normal"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:holter-monitor-test-result:rules",
+              "code": "R-FU-ROUTINE-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:18fbd50e-08aa-4dd9-aaf2-521cf4f7656b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No escalation rule fired; routine follow-up only."
+      }
+    }
+  ]
+}

@@ -1,0 +1,762 @@
+{
+  "resourceType": "Bundle",
+  "id": "76472c62-d289-47c3-aa06-717ca452583c",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Genetic Test Result \u2014 vus-inconclusive-minor-severity persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "24abe5b2-c025-4447-aaab-dc76d0fd6f96",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d7e60d08-172e-4215-a3e9-82b444930765",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "d7e60d08-172e-4215-a3e9-82b444930765",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result:role",
+                  "code": "clinical-geneticist",
+                  "display": "Clinical-Geneticist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:18f3835f-df4b-4637-a297-d871a0508438",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "18f3835f-df4b-4637-a297-d871a0508438",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result",
+              "code": "genetic_test_result",
+              "display": "Genetic Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "GEN-REQ-100822"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-28"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "test_type",
+                  "display": "Test Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "gene-panel",
+                  "display": "Gene-Panel"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "genes_tested",
+                  "display": "Genes Tested"
+                }
+              ]
+            },
+            "valueString": "BRCA1, BRCA2, PALB2, ATM, CHEK2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "sample_type",
+                  "display": "Sample Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "blood",
+                  "display": "Blood"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Personal history of breast cancer age 45, moderate family history"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "variants_detected",
+                  "display": "Variants Detected"
+                }
+              ]
+            },
+            "valueString": "ATM c.7271T>G (p.Val2424Gly)"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "variant_classification",
+                  "display": "Variant Classification"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "variant-uncertain-significance",
+                  "display": "Variant-Uncertain-Significance"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "zygosity",
+                  "display": "Zygosity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "heterozygous",
+                  "display": "Heterozygous"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "pathogenic_variant_found",
+                  "display": "Pathogenic Variant Found"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "vus_found",
+                  "display": "Vus Found"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "carrier_status_positive",
+                  "display": "Carrier Status Positive"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "secondary_finding",
+                  "display": "Secondary Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "no_clinically_significant_variant",
+                  "display": "No Clinically Significant Variant"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "interpretation",
+                  "display": "Interpretation"
+                }
+              ]
+            },
+            "valueString": "A missense variant in ATM of uncertain clinical significance per current ACMG/AMP criteria; insufficient evidence to classify as pathogenic or benign at this time."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Variant of uncertain significance in ATM; not currently actionable."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "recommended_cascade_testing",
+                  "display": "Recommended Cascade Testing"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "No cascade testing at this time; re-contact if the variant is reclassified"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b6daa89-4dd7-48e4-a88e-673728171f62",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "3b6daa89-4dd7-48e4-a88e-673728171f62",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Genetic Test Result grading result \u2014 vus-inconclusive-minor-severity",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: minor; Reporting Category: Class 3 \u2014 uncertain significance; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: periodic reclassification review; Recommended Action: Recommend periodic variant reclassification review and re-contact if the classification changes.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ec6678de-7aa6-4d66-abf9-9330805374c7",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ec6678de-7aa6-4d66-abf9-9330805374c7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-fired-rule",
+                "display": "variant-uncertain-significance"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A variant of uncertain significance (VUS) is present; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:75c89dba-b24f-4fd3-ac4f-1678675f783d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "75c89dba-b24f-4fd3-ac4f-1678675f783d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-fired-rule",
+                "display": "variant-uncertain-significance"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:rules",
+              "code": "R-SEV-MINOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Variant of uncertain significance (ACMG Class 3); abnormality severity graded minor."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6a297d97-25e5-48c7-acd7-f72a2462eca9",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "6a297d97-25e5-48c7-acd7-f72a2462eca9",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-fired-rule",
+                "display": "variant-uncertain-significance"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Variant of uncertain significance; re-contact / reclassification follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bf773f97-3276-4170-ad87-324faabc6e7d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "bf773f97-3276-4170-ad87-324faabc6e7d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-additional-flag",
+                "display": "variant-uncertain-significance"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:flags",
+              "code": "F-VUS-001",
+              "display": "variant-uncertain-significance"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:24abe5b2-c025-4447-aaab-dc76d0fd6f96"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A variant of uncertain significance (VUS) is reported.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Do not act clinically on the VUS alone; recommend periodic reclassification review and re-contact."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

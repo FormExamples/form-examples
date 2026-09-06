@@ -1,0 +1,783 @@
+{
+  "resourceType": "Bundle",
+  "id": "99a78589-b135-40c7-acd0-ff0033e7aae9",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Blood Cross Match Test Result \u2014 abnormal-insufficient-units-moderate-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "392d7fe6-16b8-4585-a811-032204623204",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:75e4f2ab-d94e-442c-ab21-650a8c3ba220",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "75e4f2ab-d94e-442c-ab21-650a8c3ba220",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:blood-cross-match-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result:role",
+                  "code": "biomedical-scientist",
+                  "display": "Biomedical-Scientist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cb44ad0e-93bb-4d54-afeb-1946d92101c0",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "cb44ad0e-93bb-4d54-afeb-1946d92101c0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:blood-cross-match-test-result",
+              "code": "blood_cross_match_test_result",
+              "display": "Blood Cross Match Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0825-XM"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "request_type",
+                  "display": "Request Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "crossmatch",
+                  "display": "Crossmatch"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Major gastrointestinal bleed; 4 units red cells crossmatched for a planned transfusion."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "abo_group",
+                  "display": "Abo Group"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "a",
+                  "display": "A"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "rhd_group",
+                  "display": "Rhd Group"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "positive",
+                  "display": "Positive"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "antibody_screen_result",
+                  "display": "Antibody Screen Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "crossmatch_result",
+                  "display": "Crossmatch Result"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "compatible",
+                  "display": "Compatible"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "component",
+                  "display": "Component"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "red-cells",
+                  "display": "Red-Cells"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "units_crossmatched",
+                  "display": "Units Crossmatched"
+                }
+              ]
+            },
+            "valueInteger": 4
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "units_available",
+                  "display": "Units Available"
+                }
+              ]
+            },
+            "valueInteger": 2
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "two_sample_rule_met",
+                  "display": "Two Sample Rule Met"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "historical_group_concordant",
+                  "display": "Historical Group Concordant"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "overall_result_status",
+                  "display": "Overall Result Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "abnormal",
+                  "display": "Abnormal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Group and screen concordant with historical record; crossmatch compatible, but only 2 of the 4 requested units are currently held in stock."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Compatible for the 2 units available; 2 further units on order from the regional blood centre."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Order the 2 outstanding units urgently from the regional blood centre."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:blood-cross-match-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a8907715-1719-45ae-a06a-98dd0a92e25e",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "a8907715-1719-45ae-a06a-98dd0a92e25e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Blood Cross Match Test Result grading result \u2014 abnormal-insufficient-units-moderate-complete",
+        "summary": "Result Classification: abnormal; Abnormality Severity: moderate; Reporting Category: insufficient-units; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: before issue; Recommended Action: Select antigen-negative units and/or order additional compatible units as clinically indicated.; Recommendation: further-testing"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fffea0ae-eb2e-4492-a774-aa3ed144d51a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "fffea0ae-eb2e-4492-a774-aa3ed144d51a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:blood-cross-match-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:blood-cross-match-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-02",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An abnormal structured finding (e.g. insufficient compatible units) is present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:357c62ea-832f-45af-a85a-57190f2fa66d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "357c62ea-832f-45af-a85a-57190f2fa66d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:blood-cross-match-test-result",
+                "code": "grading-fired-rule",
+                "display": "insufficient-units"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:blood-cross-match-test-result:rules",
+              "code": "R-SEV-MODERATE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Fewer compatible units are available than were crossmatched; severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8be85a37-7ede-4e53-ae57-3bf73758a364",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "8be85a37-7ede-4e53-ae57-3bf73758a364",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:blood-cross-match-test-result",
+                "code": "grading-fired-rule",
+                "display": "moderate-abnormality"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:blood-cross-match-test-result:rules",
+              "code": "R-FU-RECOMMENDED-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Moderate abnormality present; follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:be988c84-60d3-4d68-aeb0-a680ae327d68",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "be988c84-60d3-4d68-aeb0-a680ae327d68",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:blood-cross-match-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-measurement"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:blood-cross-match-test-result:flags",
+              "code": "F-MISSING-MEASUREMENT-001",
+              "display": "missing-measurement"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Fewer compatible units are available than were crossmatched.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Order additional compatible units to meet the requested quantity."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

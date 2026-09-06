@@ -1,0 +1,1156 @@
+{
+  "resourceType": "Bundle",
+  "id": "d66ac2cf-1a28-4729-a20f-c60b3820a284",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Histopathology Test Result \u2014 critical-unexpected-appendiceal-adenocarcinoma-uncommunicated-incomplete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "a2a519ea-8357-40a8-a739-330c2d7a7c23",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:43fa74a5-34f3-4498-a33d-225acf3ba9cb",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "43fa74a5-34f3-4498-a33d-225acf3ba9cb",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result:role",
+                  "code": "consultant-histopathologist",
+                  "display": "Consultant-Histopathologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d2f8894b-4399-4097-afed-bb49189c8e7b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "d2f8894b-4399-4097-afed-bb49189c8e7b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result",
+              "code": "histopathology_test_result",
+              "display": "Histopathology Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-30"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "specimen_type",
+                  "display": "Specimen Type"
+                }
+              ]
+            },
+            "valueString": "appendix"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "specimen_site",
+                  "display": "Specimen Site"
+                }
+              ]
+            },
+            "valueString": "right iliac fossa"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "specimen_adequacy",
+                  "display": "Specimen Adequacy"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "adequate",
+                  "display": "Adequate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "macroscopic_description",
+                  "display": "Macroscopic Description"
+                }
+              ]
+            },
+            "valueString": "Appendix, 60mm in length, with a firm white tumour mass at the tip measuring 18mm."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "microscopic_description",
+                  "display": "Microscopic Description"
+                }
+              ]
+            },
+            "valueString": "Sections show an infiltrating adenocarcinoma arising in the appendix, poorly differentiated, with invasion through the muscularis propria into the mesoappendix. Regional lymph nodes show metastatic involvement in 2 of 9 nodes examined. Lymphovascular invasion identified."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "malignancy_present",
+                  "display": "Malignancy Present"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "tumour_type",
+                  "display": "Tumour Type"
+                }
+              ]
+            },
+            "valueString": "adenocarcinoma"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "histological_grade",
+                  "display": "Histological Grade"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "poorly-differentiated",
+                  "display": "Poorly-Differentiated"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "tnm_pt",
+                  "display": "Tnm Pt"
+                }
+              ]
+            },
+            "valueString": "pT3"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "tnm_pn",
+                  "display": "Tnm Pn"
+                }
+              ]
+            },
+            "valueString": "pN1"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "tnm_pm",
+                  "display": "Tnm Pm"
+                }
+              ]
+            },
+            "valueString": "pMx"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "resection_margins",
+                  "display": "Resection Margins"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "clear",
+                  "display": "Clear"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "lymphovascular_invasion",
+                  "display": "Lymphovascular Invasion"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:histopathology-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3f867cbd-60e0-4891-a6a7-9aefc0fa8e11",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "3f867cbd-60e0-4891-a6a7-9aefc0fa8e11",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Histopathology Test Result grading result \u2014 critical-unexpected-appendiceal-adenocarcinoma-uncommunicated-incomplete",
+        "summary": "Result Classification: critical; Abnormality Severity: major; Reporting Category: pT3 pN1 pMx, poorly-differentiated; Report Completeness Percent: 40; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the critical result directly to the requester now, refer to the urgent cancer MDT, and document the conversation.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:669fac8d-9ad5-456b-a8eb-6007700ec72f",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "669fac8d-9ad5-456b-a8eb-6007700ec72f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical finding (an unexpected malignancy or an involved resection margin) is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:714a6fd3-40e8-411e-a07b-3ff645d30768",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "714a6fd3-40e8-411e-a07b-3ff645d30768",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:rules",
+              "code": "R-SEV-MAJOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present; abnormality severity graded major."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:350aa703-73dd-4c82-a903-9447ecb398ae",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "350aa703-73dd-4c82-a903-9447ecb398ae",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-fired-rule",
+                "display": "history"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:rules",
+              "code": "R-COMP-HISTORY-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: clinical history."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7bf7d4b8-151c-437e-ac8a-5f3273216730",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7bf7d4b8-151c-437e-ac8a-5f3273216730",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-fired-rule",
+                "display": "diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:rules",
+              "code": "R-COMP-DIAGNOSIS-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: diagnosis."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f89d2431-d126-44a5-a7e0-e27e0efc45ca",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f89d2431-d126-44a5-a7e0-e27e0efc45ca",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a69e0a79-9557-4991-a32f-a5dce687a15e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "a69e0a79-9557-4991-a32f-a5dce687a15e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-fired-rule",
+                "display": "critical-result"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding (unexpected malignancy or involved margin) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:80494d10-a1a4-4270-a7ad-d6e9bd542e4a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "80494d10-a1a4-4270-a7ad-d6e9bd542e4a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A critical finding (an unexpected malignancy or an involved resection margin) is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the requester immediately and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:503eb5ed-f2fd-4ae2-a96e-09dbc3c22190",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "503eb5ed-f2fd-4ae2-a96e-09dbc3c22190",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Critical finding present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the requester now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bf71d79a-c34b-4948-a86f-e6088d69e1ae",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "bf71d79a-c34b-4948-a86f-e6088d69e1ae",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "unexpected-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-UNEXPECTED-FINDING-001",
+              "display": "unexpected-finding"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Malignancy is present but no originating request reference is recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Treat as an unexpected significant finding; alert the requester and link the report to the originating request."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:29a31ef0-d11a-4e73-aa3d-fe17ea6fa5d6",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "29a31ef0-d11a-4e73-aa3d-fe17ea6fa5d6",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "abnormal-requiring-action"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-ABNORMAL-ACTION-001",
+              "display": "abnormal-requiring-action"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Confirmed malignancy requiring timely action is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Ensure the requester is alerted and a clear MDT action plan is documented."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:155b5828-5c45-4a63-a813-f7b298efaa41",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "155b5828-5c45-4a63-a813-f7b298efaa41",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-URGENT-REFERRAL-001",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Malignancy present; urgent cancer MDT referral is warranted.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Refer to the cancer MDT and manage per the 2-week-wait suspected-cancer pathway."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1f559584-a73c-490c-a19a-ac6f9bb2538a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "1f559584-a73c-490c-a19a-ac6f9bb2538a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "urgent-referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-URGENT-REFERRAL-002",
+              "display": "urgent-referral"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Lymphovascular invasion is identified and may warrant urgent referral.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider urgent referral and MDT discussion of adjuvant management."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b5195920-f04c-4878-ab82-3f27f6f8733a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b5195920-f04c-4878-ab82-3f27f6f8733a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:557e9a96-c8b1-4613-aed4-e2becfcb2fe0",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "557e9a96-c8b1-4613-aed4-e2becfcb2fe0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:histopathology-test-result",
+                "code": "grading-additional-flag",
+                "display": "discrepancy-with-request"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:histopathology-test-result:flags",
+              "code": "F-DISCREPANCY-001",
+              "display": "discrepancy-with-request"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:a2a519ea-8357-40a8-a739-330c2d7a7c23"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Malignancy is present but no SNOMED CT code was recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add the SNOMED CT topography / morphology code mandated by the dataset."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

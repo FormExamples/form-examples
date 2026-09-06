@@ -1,0 +1,915 @@
+{
+  "resourceType": "Bundle",
+  "id": "ee881118-457e-4f66-a56b-8d17888e1ec7",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Genetic Test Result \u2014 likely-pathogenic-critical-but-moderate-severity persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "a25e893c-ad1d-433b-ad38-d9cd547927b0",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c518df21-ceaa-4011-a224-d5f734e0deef",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "c518df21-ceaa-4011-a224-d5f734e0deef",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result:role",
+                  "code": "clinical-geneticist",
+                  "display": "Clinical-Geneticist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9b30a627-b174-4e7a-abe4-e9e8176dd412",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9b30a627-b174-4e7a-abe4-e9e8176dd412",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result",
+              "code": "genetic_test_result",
+              "display": "Genetic Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "GEN-REQ-100355"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "test_type",
+                  "display": "Test Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "gene-panel",
+                  "display": "Gene-Panel"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "genes_tested",
+                  "display": "Genes Tested"
+                }
+              ]
+            },
+            "valueString": "MLH1, MSH2, MSH6, PMS2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "sample_type",
+                  "display": "Sample Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "blood",
+                  "display": "Blood"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Colorectal cancer diagnosed age 38, family history suggestive of Lynch syndrome"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "inheritance_pattern",
+                  "display": "Inheritance Pattern"
+                }
+              ]
+            },
+            "valueString": "Autosomal dominant"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "variants_detected",
+                  "display": "Variants Detected"
+                }
+              ]
+            },
+            "valueString": "MSH2 c.1786_1788del (p.Lys596del)"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "variant_classification",
+                  "display": "Variant Classification"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "likely-pathogenic",
+                  "display": "Likely-Pathogenic"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "zygosity",
+                  "display": "Zygosity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "heterozygous",
+                  "display": "Heterozygous"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "pathogenic_variant_found",
+                  "display": "Pathogenic Variant Found"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "vus_found",
+                  "display": "Vus Found"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "carrier_status_positive",
+                  "display": "Carrier Status Positive"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "secondary_finding",
+                  "display": "Secondary Finding"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "no_clinically_significant_variant",
+                  "display": "No Clinically Significant Variant"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "interpretation",
+                  "display": "Interpretation"
+                }
+              ]
+            },
+            "valueString": "An in-frame deletion in MSH2 classified likely-pathogenic per ACMG/AMP criteria, consistent with Lynch syndrome."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Likely-pathogenic MSH2 variant identified, consistent with Lynch syndrome."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "recommended_cascade_testing",
+                  "display": "Recommended Cascade Testing"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Genetics MDT review; offer cascade testing to at-risk relatives"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:genetic-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ee4f3ddc-4dcc-44f1-a0fb-9dc2de17e739",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "ee4f3ddc-4dcc-44f1-a0fb-9dc2de17e739",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Genetic Test Result grading result \u2014 likely-pathogenic-critical-but-moderate-severity",
+        "summary": "Result Classification: critical; Abnormality Severity: moderate; Reporting Category: Class 4 \u2014 likely pathogenic; Report Completeness Percent: 100; Follow Up Urgency: critical-alert; Target Timeframe: immediate; Recommended Action: Communicate the actionable result to the referrer now, arrange urgent genetics MDT / counselling, and offer cascade testing of at-risk relatives.; Recommendation: urgent-review"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ad30db2e-d636-4254-a7e0-6b0f6904ac5a",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ad30db2e-d636-4254-a7e0-6b0f6904ac5a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-fired-rule",
+                "display": "pathogenic-variant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:rules",
+              "code": "R-CLASS-CRITICAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A pathogenic or likely-pathogenic actionable variant is present; classified as critical."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ff087970-59d2-46a7-a803-90194605a1fc",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "ff087970-59d2-46a7-a803-90194605a1fc",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-fired-rule",
+                "display": "likely-pathogenic"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:rules",
+              "code": "R-SEV-MODERATE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Likely-pathogenic actionable variant (ACMG Class 4); abnormality severity graded moderate."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c4d17e3d-091a-4225-a0f1-fb7a0b2ccdbf",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "c4d17e3d-091a-4225-a0f1-fb7a0b2ccdbf",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-fired-rule",
+                "display": "pathogenic-variant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:rules",
+              "code": "R-FU-CRITICAL-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Pathogenic / likely-pathogenic actionable variant auto-escalates follow-up urgency to critical-alert regardless of the other axes."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a88d5dba-fc79-4159-acae-cb9d3012e12e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "a88d5dba-fc79-4159-acae-cb9d3012e12e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-additional-flag",
+                "display": "pathogenic-variant-found"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:flags",
+              "code": "F-PATHOGENIC-VARIANT-001",
+              "display": "pathogenic-variant-found"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A pathogenic or likely-pathogenic actionable variant is present.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the actionable result to the referrer, arrange urgent genetics MDT / counselling, and document the communication."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:29c37727-ea6d-4ce2-a529-a2e425b302c4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "29c37727-ea6d-4ce2-a529-a2e425b302c4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:flags",
+              "code": "F-CRITICAL-RESULT-001",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Actionable genomic result requiring direct communication to the referrer.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Communicate the critical result to the referrer immediately and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2ec87166-74ee-41b5-a8a4-67a300be3ab4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "2ec87166-74ee-41b5-a8a4-67a300be3ab4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-additional-flag",
+                "display": "critical-result-alert"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:flags",
+              "code": "F-CRITICAL-RESULT-002",
+              "display": "critical-result-alert"
+            }
+          ]
+        },
+        "severity": "high",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Actionable variant present but the result has not been recorded as communicated.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Contact the referrer now and record who was informed, with date and time."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:57186858-3450-4e6e-a7f3-d5dcbd7dbdb4",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "57186858-3450-4e6e-a7f3-d5dcbd7dbdb4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:genetic-test-result",
+                "code": "grading-additional-flag",
+                "display": "cascade-testing-recommended"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:genetic-test-result:flags",
+              "code": "F-CASCADE-TESTING-001",
+              "display": "cascade-testing-recommended"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Cascade (predictive) testing of at-risk relatives is recommended.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Offer cascade testing and genetic counselling to at-risk relatives."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

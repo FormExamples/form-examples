@@ -1,0 +1,921 @@
+{
+  "resourceType": "Bundle",
+  "id": "f78c342d-c90e-42cd-a01a-865cef53cac9",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Ambulatory Blood Pressure Test Result \u2014 inconclusive-inadequate-recording persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "e75c523e-7d5e-4aa7-acfd-080dd98da739",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9c5d30ba-3d48-47a8-aaee-ea485a79a8cd",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9c5d30ba-3d48-47a8-aaee-ea485a79a8cd",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result:role",
+                  "code": "gp",
+                  "display": "Gp"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a7cade53-03b2-488b-a3c7-fc6737d03ae6",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a7cade53-03b2-488b-a3c7-fc6737d03ae6",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+              "code": "ambulatory_blood_pressure_test_result",
+              "display": "Ambulatory Blood Pressure Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ABPM-REQ-101004"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "monitoring_type",
+                  "display": "Monitoring Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "24-hour-abpm",
+                  "display": "24-Hour-Abpm"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-27"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-29"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "valid_readings_percent",
+                  "display": "Valid Readings Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 45.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "recording_adequate",
+                  "display": "Recording Adequate"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Device removed early by patient due to discomfort"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "hypertension_confirmed",
+                  "display": "Hypertension Confirmed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "white_coat_effect",
+                  "display": "White Coat Effect"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "masked_hypertension",
+                  "display": "Masked Hypertension"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "severe_hypertension",
+                  "display": "Severe Hypertension"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "nocturnal_hypertension",
+                  "display": "Nocturnal Hypertension"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "normal_study",
+                  "display": "Normal Study"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Insufficient valid readings to interpret reliably."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "reporting_category",
+                  "display": "Reporting Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Repeat ABPM with reinforced patient instructions"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6bd43aac-8258-4f81-aa4b-9a7457013bd5",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "6bd43aac-8258-4f81-aa4b-9a7457013bd5",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Ambulatory Blood Pressure Test Result grading result \u2014 inconclusive-inadequate-recording",
+        "summary": "Result Classification: inconclusive; Abnormality Severity: none; Reporting Category: indeterminate; Report Completeness Percent: 40; Follow Up Urgency: recommended; Target Timeframe: within 4 weeks; Recommended Action: Recommend repeat ambulatory or home monitoring to obtain an adequate study.; Recommendation: further-imaging"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:edc41e5f-d6d8-4d65-a49b-3b7885c4c22d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "edc41e5f-d6d8-4d65-a49b-3b7885c4c22d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "inadequate-recording"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-CLASS-INCONCLUSIVE-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Recording was inadequate (< 70% valid readings) and no impression was recorded; classified as inconclusive."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:90730fea-0501-43c7-ae0e-4f648744c33e",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "90730fea-0501-43c7-ae0e-4f648744c33e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "inconclusive"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-SEV-NONE-02",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive study; abnormality severity not established."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f57b433c-8914-4f10-a417-8e748d4548a3",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f57b433c-8914-4f10-a417-8e748d4548a3",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "averages"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-COMP-AVERAGES-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: averaged blood-pressure measurements."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:166f6c13-22ca-49a8-ab79-e84e9f5a7d95",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "166f6c13-22ca-49a8-ab79-e84e9f5a7d95",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "dipping"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-COMP-DIPPING-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: nocturnal dipping."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7a8b66c2-6539-420b-a6f9-2c8e5af608a6",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "7a8b66c2-6539-420b-a6f9-2c8e5af608a6",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fe02649b-64ff-4a7f-ad09-9e8543696a41",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "fe02649b-64ff-4a7f-ad09-9e8543696a41",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-fired-rule",
+                "display": "inadequate-recording"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:rules",
+              "code": "R-FU-RECOMMENDED-02",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Inconclusive or inadequate recording; repeat monitoring recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dedfdbae-6542-445a-aa14-228e3b822a0f",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "dedfdbae-6542-445a-aa14-228e3b822a0f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-additional-flag",
+                "display": "inadequate-technique"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:flags",
+              "code": "F-INADEQUATE-TECHNIQUE-001",
+              "display": "inadequate-technique"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Recording adequacy is below the 70% valid-readings threshold; diagnostic confidence may be reduced.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Consider repeating the monitoring period to obtain an adequate study."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cecdb918-047e-45ac-a2e1-7931597a3b57",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "cecdb918-047e-45ac-a2e1-7931597a3b57",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9f36aa29-caab-421e-a7d5-49447ebc1856",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9f36aa29-caab-421e-a7d5-49447ebc1856",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:ambulatory-blood-pressure-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-measurement"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:ambulatory-blood-pressure-test-result:flags",
+              "code": "F-MISSING-MEASUREMENT-001",
+              "display": "missing-measurement"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No daytime or 24-hour average blood pressure was recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Record the averaged blood-pressure measurements for interpretation."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

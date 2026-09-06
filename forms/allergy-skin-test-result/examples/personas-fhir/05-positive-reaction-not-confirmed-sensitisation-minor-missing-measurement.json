@@ -1,0 +1,827 @@
+{
+  "resourceType": "Bundle",
+  "id": "ca409db2-461c-4c75-af58-a18f10118aa0",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Allergy Skin Test Result \u2014 positive-reaction-not-confirmed-sensitisation-minor-missing-measurement persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "8902dbbb-913b-4c64-aacf-1ad139063432",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0c077aa-937a-4aa4-a2f3-f1927b3e3861",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "c0c077aa-937a-4aa4-a2f3-f1927b3e3861",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result:role",
+                  "code": "allergist-immunologist",
+                  "display": "Allergist-Immunologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a380537b-a1fd-45d2-a796-1bbb136bc419",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a380537b-a1fd-45d2-a796-1bbb136bc419",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result",
+              "code": "allergy_skin_test_result",
+              "display": "Allergy Skin Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "AST-REQ-30052"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "test_type",
+                  "display": "Test Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "skin-prick-test",
+                  "display": "Skin-Prick-Test"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "preliminary",
+                  "display": "Preliminary"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-05"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Chronic nasal congestion, referred for aeroallergen panel."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "antihistamines_withheld",
+                  "display": "Antihistamines Withheld"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "positive_control_valid",
+                  "display": "Positive Control Valid"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "allergens_tested",
+                  "display": "Allergens Tested"
+                }
+              ]
+            },
+            "valueString": "House dust mite, cat dander, dog dander"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "sensitised_allergens",
+                  "display": "Sensitised Allergens"
+                }
+              ]
+            },
+            "valueString": "House dust mite"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "positive_reactions",
+                  "display": "Positive Reactions"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "sensitisation_confirmed",
+                  "display": "Sensitisation Confirmed"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "anaphylaxis_during_test",
+                  "display": "Anaphylaxis During Test"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "all_negative",
+                  "display": "All Negative"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "test_invalid",
+                  "display": "Test Invalid"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "interpretation",
+                  "display": "Interpretation"
+                }
+              ]
+            },
+            "valueString": "Positive house dust mite weal noted; clinical correlation pending."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Correlate with symptom pattern before advising on environmental control measures."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:allergy-skin-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a9ae09f9-7dbc-4aa2-ad4f-8e10ee1ea923",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "a9ae09f9-7dbc-4aa2-ad4f-8e10ee1ea923",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Allergy Skin Test Result grading result \u2014 positive-reaction-not-confirmed-sensitisation-minor-missing-measurement",
+        "summary": "Result Classification: abnormal; Abnormality Severity: minor; Reporting Category: sensitisation; Report Completeness Percent: 80; Follow Up Urgency: recommended; Target Timeframe: per allergy pathway; Recommended Action: Interpret the sensitisation against the clinical history; consider an oral challenge to confirm or exclude clinical allergy.; Recommendation: routine-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f1ef385d-30ea-45b2-affe-7a65497ab895",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f1ef385d-30ea-45b2-affe-7a65497ab895",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "positive-reaction"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-02",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more positive reactions are present (sensitisation, not necessarily clinical allergy); classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f1ca1376-68cb-4114-a8ff-c0d9a743eaab",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f1ca1376-68cb-4114-a8ff-c0d9a743eaab",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "sensitisation"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-SEV-MINOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Positive reaction(s) present without confirmed clinical relevance (sensitisation only); abnormality severity graded minor."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:23e0f3e0-c9c8-428e-a78f-e712115054dd",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "23e0f3e0-c9c8-428e-a78f-e712115054dd",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-COMP-IMPRESSION-01",
+              "display": "completeness"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Mandatory report section missing: impression."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5078e1ae-983c-414a-ac27-9bc6c6b534c5",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "5078e1ae-983c-414a-ac27-9bc6c6b534c5",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-fired-rule",
+                "display": "sensitisation"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:rules",
+              "code": "R-FU-RECOMMENDED-03",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Positive reaction (sensitisation only); correlate with clinical history and consider further evaluation."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:22cc68aa-032a-4b0a-a89d-28fa2d6019c8",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "22cc68aa-032a-4b0a-a89d-28fa2d6019c8",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-additional-flag",
+                "display": "abnormal-requiring-action"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:flags",
+              "code": "F-ABNORMAL-ACTION-001",
+              "display": "abnormal-requiring-action"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Positive reaction(s) present; sensitisation versus clinical allergy needs review.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Correlate the positive result with the clinical history before advising the patient."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:df883026-63f9-4dde-a284-f9e386f9d10d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "df883026-63f9-4dde-a284-f9e386f9d10d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-impression"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:flags",
+              "code": "F-MISSING-IMPRESSION-001",
+              "display": "missing-impression"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No impression / conclusion has been recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Add an impression that answers the clinical question."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b1cba73a-c7eb-46d9-ae5d-d568ee15cc73",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "b1cba73a-c7eb-46d9-ae5d-d568ee15cc73",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:allergy-skin-test-result",
+                "code": "grading-additional-flag",
+                "display": "missing-measurement"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:allergy-skin-test-result:flags",
+              "code": "F-MISSING-MEASUREMENT-001",
+              "display": "missing-measurement"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "A positive reaction is reported but no weal sizes or specific-IgE results were recorded.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Record the measured weal sizes (mm) or specific-IgE results (kUA/L) per allergen."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

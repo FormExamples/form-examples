@@ -1,0 +1,818 @@
+{
+  "resourceType": "Bundle",
+  "id": "35c5f662-d362-4860-ae84-a7133976b468",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Lumbar Puncture Test Result \u2014 normal-clear-csf-complete persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:07a560e6-a59c-4621-aed1-830fe5231d21",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "07a560e6-a59c-4621-aed1-830fe5231d21",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:lumbar-puncture-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result:role",
+                  "code": "neurologist",
+                  "display": "Neurologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa428ff5-a61c-4984-ab34-cbdc0e35be26",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa428ff5-a61c-4984-ab34-cbdc0e35be26",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:lumbar-puncture-test-result",
+              "code": "lumbar_puncture_test_result",
+              "display": "Lumbar Puncture Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "REQ-2026-0820-LP"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-08-20"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Progressive headache with no focal neurology; lumbar puncture to exclude raised intracranial pressure and infection."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "opening_pressure_cmh2o",
+                  "display": "Opening Pressure Cmh2O"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 16.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_appearance",
+                  "display": "Csf Appearance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "clear",
+                  "display": "Clear"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_white_cell_count",
+                  "display": "Csf White Cell Count"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 2.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_red_cell_count",
+                  "display": "Csf Red Cell Count"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_protein_g_l",
+                  "display": "Csf Protein G L"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.35
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_glucose_mmol_l",
+                  "display": "Csf Glucose Mmol L"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 3.2
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_serum_glucose_ratio",
+                  "display": "Csf Serum Glucose Ratio"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.62
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "csf_lactate_mmol_l",
+                  "display": "Csf Lactate Mmol L"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 1.5
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "gram_stain_result",
+                  "display": "Gram Stain Result"
+                }
+              ]
+            },
+            "valueString": "No organisms seen."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "culture_result",
+                  "display": "Culture Result"
+                }
+              ]
+            },
+            "valueString": "No growth after 48 hours incubation."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "pcr_result",
+                  "display": "Pcr Result"
+                }
+              ]
+            },
+            "valueString": "Negative for herpes simplex virus and enterovirus."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "oligoclonal_bands",
+                  "display": "Oligoclonal Bands"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "xanthochromia",
+                  "display": "Xanthochromia"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "negative",
+                  "display": "Negative"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "raised_protein",
+                  "display": "Raised Protein"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "pleocytosis",
+                  "display": "Pleocytosis"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "low_glucose",
+                  "display": "Low Glucose"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "bacterial_meningitis_pattern",
+                  "display": "Bacterial Meningitis Pattern"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "viral_pattern",
+                  "display": "Viral Pattern"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "subarachnoid_haemorrhage_suggested",
+                  "display": "Subarachnoid Haemorrhage Suggested"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "normal_csf",
+                  "display": "Normal Csf"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "findings_narrative",
+                  "display": "Findings Narrative"
+                }
+              ]
+            },
+            "valueString": "Clear CSF with a normal opening pressure. Normal cell counts, protein, and glucose ratio. No organisms seen on Gram stain; no growth on culture."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Normal CSF analysis; no evidence of infection or raised intracranial pressure."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "No further CSF follow-up required for this indication."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:lumbar-puncture-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:23cca10c-7cfe-4910-acd7-c5bedcc23dac",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "23cca10c-7cfe-4910-acd7-c5bedcc23dac",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Lumbar Puncture Test Result grading result \u2014 normal-clear-csf-complete",
+        "summary": "Result Classification: normal; Abnormality Severity: none; Reporting Category: normal; Report Completeness Percent: 100; Follow Up Urgency: routine; Target Timeframe: no specific follow-up; Recommended Action: No specific CSF follow-up required; manage per usual care.; Recommendation: no-action"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3e3a0187-f7c8-4e35-a1ac-a6d817f80567",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "3e3a0187-f7c8-4e35-a1ac-a6d817f80567",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:lumbar-puncture-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:lumbar-puncture-test-result:rules",
+              "code": "R-CLASS-NORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal structured CSF findings on an interpretable analysis; classified as normal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9dfd6e07-4ed3-40c7-a34b-e199f6da1a43",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9dfd6e07-4ed3-40c7-a34b-e199f6da1a43",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:lumbar-puncture-test-result",
+                "code": "grading-fired-rule",
+                "display": "no-abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:lumbar-puncture-test-result:rules",
+              "code": "R-SEV-NONE-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No abnormal CSF finding; abnormality severity graded none."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9a7170a2-99c8-4c40-a17b-b523823b063d",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "9a7170a2-99c8-4c40-a17b-b523823b063d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:lumbar-puncture-test-result",
+                "code": "grading-fired-rule",
+                "display": "normal"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:lumbar-puncture-test-result:rules",
+              "code": "R-FU-ROUTINE-01",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:c8e3ac83-4cca-422f-a3f1-617c8ea1a2e5"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "No escalation rule fired; routine follow-up only."
+      }
+    }
+  ]
+}

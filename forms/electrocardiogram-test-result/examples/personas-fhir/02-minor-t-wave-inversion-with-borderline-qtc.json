@@ -1,0 +1,822 @@
+{
+  "resourceType": "Bundle",
+  "id": "07edb6f6-0bf2-43b1-a574-7d27d722fd3e",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Electrocardiogram Test Result \u2014 minor-t-wave-inversion-with-borderline-qtc persona bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "357db89c-50a8-430a-aedf-a038d73ade3b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c4bc4549-3cbd-420e-a70f-7d63ce66c7fb",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "c4bc4549-3cbd-420e-a70f-7d63ce66c7fb",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result:role",
+                  "code": "cardiologist",
+                  "display": "Cardiologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b444a18a-7fbe-4e79-a2c5-07db33143fc7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b444a18a-7fbe-4e79-a2c5-07db33143fc7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result",
+              "code": "electrocardiogram_test_result",
+              "display": "Electrocardiogram Test Result Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "originating_request_reference",
+                  "display": "Originating Request Reference"
+                }
+              ]
+            },
+            "valueString": "ECG-REQ-100355"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "report_status",
+                  "display": "Report Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "final",
+                  "display": "Final"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "ecg_type",
+                  "display": "Ecg Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "resting-12-lead",
+                  "display": "Resting-12-Lead"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "performed_date",
+                  "display": "Performed Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "reported_date",
+                  "display": "Reported Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-06-25"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "recording_quality",
+                  "display": "Recording Quality"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "good",
+                  "display": "Good"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "clinical_history",
+                  "display": "Clinical History"
+                }
+              ]
+            },
+            "valueString": "Palpitations, no chest pain; on citalopram for depression"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "ventricular_rate_bpm",
+                  "display": "Ventricular Rate Bpm"
+                }
+              ]
+            },
+            "valueInteger": 72
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "rhythm",
+                  "display": "Rhythm"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "sinus",
+                  "display": "Sinus"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "pr_interval_ms",
+                  "display": "Pr Interval Ms"
+                }
+              ]
+            },
+            "valueInteger": 155
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "qrs_duration_ms",
+                  "display": "Qrs Duration Ms"
+                }
+              ]
+            },
+            "valueInteger": 88
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "qt_interval_ms",
+                  "display": "Qt Interval Ms"
+                }
+              ]
+            },
+            "valueInteger": 420
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "qtc_ms",
+                  "display": "Qtc Ms"
+                }
+              ]
+            },
+            "valueInteger": 485
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "cardiac_axis",
+                  "display": "Cardiac Axis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "st_elevation",
+                  "display": "St Elevation"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "st_depression",
+                  "display": "St Depression"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "t_wave_inversion",
+                  "display": "T Wave Inversion"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "pathological_q_waves",
+                  "display": "Pathological Q Waves"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "left_ventricular_hypertrophy",
+                  "display": "Left Ventricular Hypertrophy"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "bundle_branch_block",
+                  "display": "Bundle Branch Block"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "ischaemia",
+                  "display": "Ischaemia"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "normal_ecg",
+                  "display": "Normal Ecg"
+                }
+              ]
+            },
+            "valueBoolean": false
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "interpretation",
+                  "display": "Interpretation"
+                }
+              ]
+            },
+            "valueString": "Isolated T-wave inversion in the inferolateral leads; QTc borderline prolonged, likely medication-related."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "impression",
+                  "display": "Impression"
+                }
+              ]
+            },
+            "valueString": "Non-specific T-wave inversion with borderline QTc prolongation, correlate with medications."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "recommended_follow_up",
+                  "display": "Recommended Follow Up"
+                }
+              ]
+            },
+            "valueString": "Review QT-prolonging medications; routine cardiology follow-up"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:electrocardiogram-test-result",
+                  "code": "critical_result_communicated",
+                  "display": "Critical Result Communicated"
+                }
+              ]
+            },
+            "valueBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3ac246f3-558d-4b58-a561-eb9a2d98ec47",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "3ac246f3-558d-4b58-a561-eb9a2d98ec47",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Electrocardiogram Test Result grading result \u2014 minor-t-wave-inversion-with-borderline-qtc",
+        "summary": "Result Classification: abnormal; Abnormality Severity: minor; Reporting Category: minor-finding; Report Completeness Percent: 100; Follow Up Urgency: recommended; Target Timeframe: routine clinic; Recommended Action: Correlate the minor finding clinically and follow up at routine review.; Recommendation: routine-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f1639ca8-d1c4-4609-ad46-2ca45bfaca1b",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f1639ca8-d1c4-4609-ad46-2ca45bfaca1b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "abnormal-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-CLASS-ABNORMAL-01",
+              "display": "classification"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "One or more abnormal structured findings or an abnormal rhythm are present; classified as abnormal."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6ea58592-990a-41ba-a17e-3a6aa5588078",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "6ea58592-990a-41ba-a17e-3a6aa5588078",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "minor-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-SEV-MINOR-01",
+              "display": "severity"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "An isolated minor finding (T-wave inversion or left ventricular hypertrophy) is present; severity graded minor."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:20a567b3-a695-4d98-a8e2-7c32bc1d0651",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "20a567b3-a695-4d98-a8e2-7c32bc1d0651",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-fired-rule",
+                "display": "minor-finding"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:rules",
+              "code": "R-FU-RECOMMENDED-03",
+              "display": "follow-up"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Minor finding present; structured follow-up recommended."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:85cdd00e-a909-43eb-a1b4-9f6720f76458",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "85cdd00e-a909-43eb-a1b4-9f6720f76458",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:electrocardiogram-test-result",
+                "code": "grading-additional-flag",
+                "display": "other"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:electrocardiogram-test-result:flags",
+              "code": "F-OTHER-001",
+              "display": "other"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "QTc is borderline prolonged (485 ms) but below the critical threshold.",
+        "detectedIssueManagement": [
+          {
+            "concept": {
+              "text": "Review medications and electrolytes; consider repeat ECG for QTc surveillance."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
