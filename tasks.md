@@ -1411,14 +1411,25 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       IV urgency? — that this session isn't positioned to make
       unilaterally); same three-stack requirement (HTML, the SvelteKit
       reference this engine is explicitly a port of, Loco).
-- [ ] **hernia-diagnostic-evaluation: doubled red-flag rule IDs.**
-      `screenRedFlags` builds IDs as `` `R-RED-FLAG-${key…toUpperCase()}` ``
-      but every key already starts with `redFlag`, so the IDs come out as
-      `R-RED-FLAG-RED-FLAG-SEVERE-PAIN`, `R-RED-FLAG-RED-FLAG-VOMITING`,
-      etc. (verified in the emergency persona's `firedRules`). Strip the
-      `redFlag` prefix from the key before templating so IDs read
-      `R-RED-FLAG-SEVERE-PAIN`. Rule IDs must stay identical across HTML /
-      Svelte / Loco and the `grade_rule` SQL rows — change all four together.
+- [x] **hernia-diagnostic-evaluation: doubled red-flag rule IDs.** FIXED
+      2026-09-06. `screenRedFlags` built IDs as
+      `` `R-RED-FLAG-${key…toUpperCase()}` `` but every key already started
+      with `redFlag`, so the IDs came out as `R-RED-FLAG-RED-FLAG-SEVERE-
+      PAIN`, `R-RED-FLAG-RED-FLAG-VOMITING`, etc. (verified in the emergency
+      persona's `firedRules`). Fixed by stripping the `redFlag` prefix from
+      the key before templating, in both HTML `js/classification-rules.js`
+      and the SvelteKit `src/lib/engine/classification-rules.ts` (byte-for-
+      byte-equivalent logic in both); confirmed via a fleet-wide search that
+      this form has no `grade_rule` SQL table and no Loco-side scoring
+      logic, so no third stack or seed rows needed updating. Added a
+      dedicated `it.each` boundary test in `grader.test.ts` asserting the
+      correct, non-doubled rule ID for all seven red flags (42/42 passed,
+      up from 35). Updated the persona file's top-level `note` and re-ran
+      `bin/test-personas --update hernia-diagnostic-evaluation` (3/3 PASS,
+      the emergency persona's `firedRules` now carry the corrected IDs);
+      `bin/test-e2e --html hernia-diagnostic-evaluation` 2/2 passed. Fleet:
+      `bin/test-personas` forms 352/352 PASS, personas 1173/1173 PASS,
+      0 FAIL.
 - [ ] **hernia-diagnostic-evaluation: `examInconclusive` false positive.**
       `flagged-issues.js` defines `examInconclusive` as `palpableMass !==
       'yes' || coughImpulsePositive !== 'yes'`, so a *confirmed* palpable

@@ -58,6 +58,22 @@ describe('red-flag screen forces emergency', () => {
 		a.redFlags.redFlagTachycardia = 'yes';
 		expect(calculateHerniaEvaluation(a).computedUrgency).toBe('emergency');
 	});
+
+	it.each([
+		['redFlagSeverePain', 'R-RED-FLAG-SEVERE-PAIN'],
+		['redFlagVomiting', 'R-RED-FLAG-VOMITING'],
+		['redFlagFever', 'R-RED-FLAG-FEVER'],
+		['redFlagAbsoluteConstipation', 'R-RED-FLAG-ABSOLUTE-CONSTIPATION'],
+		['redFlagErythemaOrDiscolouration', 'R-RED-FLAG-ERYTHEMA-OR-DISCOLOURATION'],
+		['redFlagPreviouslyReducibleNowIrreducible', 'R-RED-FLAG-PREVIOUSLY-REDUCIBLE-NOW-IRREDUCIBLE'],
+		['redFlagTachycardia', 'R-RED-FLAG-TACHYCARDIA']
+	] as const)('%s fires rule id %s, not a doubled RED-FLAG-RED-FLAG- id', (flagKey, expectedRuleId) => {
+		const a = blank();
+		(a.redFlags as unknown as Record<string, string>)[flagKey] = 'yes';
+		const ruleIds = calculateHerniaEvaluation(a).firedRules.map((r) => r.ruleId);
+		expect(ruleIds).toContain(expectedRuleId);
+		expect(ruleIds.some((id) => id.includes('RED-FLAG-RED-FLAG'))).toBe(false);
+	});
 });
 
 describe('reducibility drives urgency when no red flag fires', () => {

@@ -130,9 +130,16 @@ function screenRedFlags(data) {
     const value = data.redFlags[key];
     if (value === 'yes') {
       positiveFlags.push(label);
+      // `key` is always `redFlag<Name>`; strip that prefix before
+      // templating so the ID reads `R-RED-FLAG-<NAME>`, not the doubled
+      // `R-RED-FLAG-RED-FLAG-<NAME>`.
+      const suffix = key
+        .slice('redFlag'.length)
+        .replace(/([A-Z])/g, (m, _letter, offset) => (offset === 0 ? m : `-${m}`))
+        .toUpperCase();
       firedRules.push(
         rule(
-          `R-RED-FLAG-${key.replace(/([A-Z])/g, '-$1').toUpperCase()}`,
+          `R-RED-FLAG-${suffix}`,
           'red-flag',
           key,
           null,

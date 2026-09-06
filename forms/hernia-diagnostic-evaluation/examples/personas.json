@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateHerniaEvaluation",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `computeUrgency` is red-flag-first: `anyRedFlag` is checked before the reducibility branch, so an irreducible hernia with a positive red-flag screen fires only the emergency rule, never the urgent-reducibility rule, even though the reducibility status alone would independently justify 'urgent'. Also notable, verified directly: `examInconclusive` is true whenever EITHER `palpableMass` is not 'yes' OR `coughImpulsePositive` is not 'yes' — so a confirmed palpable mass with no elicitable cough impulse (as happens whenever the hernia does not currently reduce) still counts as an inconclusive exam and raises the occult-hernia-suspected flag, even alongside a confirmed clinical diagnosis.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `computeUrgency` is red-flag-first: `anyRedFlag` is checked before the reducibility branch, so an irreducible hernia with a positive red-flag screen fires only the emergency rule, never the urgent-reducibility rule, even though the reducibility status alone would independently justify 'urgent'. Also notable, verified directly: `examInconclusive` is true whenever EITHER `palpableMass` is not 'yes' OR `coughImpulsePositive` is not 'yes' — so a confirmed palpable mass with no elicitable cough impulse (as happens whenever the hernia does not currently reduce) still counts as an inconclusive exam and raises the occult-hernia-suspected flag, even alongside a confirmed clinical diagnosis (this one is still open — see tasks.md Phase 13; likely intended `&&`, or suppress when `reducibilityStatus` is irreducible/incarcerated, but needs a check of `doc/safety-case-notes.md` before changing). FIXED 2026-09-06: `screenRedFlags` used to template red-flag rule IDs as `` `R-RED-FLAG-${key…toUpperCase()}` `` without stripping the `redFlag` prefix every key already carries, so IDs came out doubled (`R-RED-FLAG-RED-FLAG-SEVERE-PAIN` etc, visible in the emergency persona's `firedRules` below before this fix). Fixed in both `js/classification-rules.js` and `src/lib/engine/classification-rules.ts` by stripping the `redFlag` prefix before templating; added a dedicated `it.each` boundary test in `grader.test.ts` asserting the non-doubled id for all seven flags.",
   "personas": [
     {
       "name": "routine-reducible-indirect-inguinal-hernia",
@@ -501,7 +501,7 @@
             "description": "The hernia is irreducible."
           },
           {
-            "ruleId": "R-RED-FLAG-RED-FLAG-SEVERE-PAIN",
+            "ruleId": "R-RED-FLAG-SEVERE-PAIN",
             "instrument": "red-flag",
             "component": "redFlagSeverePain",
             "score": null,
@@ -510,7 +510,7 @@
             "description": "Red flag positive: severe pain out of proportion to examination."
           },
           {
-            "ruleId": "R-RED-FLAG-RED-FLAG-VOMITING",
+            "ruleId": "R-RED-FLAG-VOMITING",
             "instrument": "red-flag",
             "component": "redFlagVomiting",
             "score": null,
@@ -519,7 +519,7 @@
             "description": "Red flag positive: vomiting."
           },
           {
-            "ruleId": "R-RED-FLAG-RED-FLAG-FEVER",
+            "ruleId": "R-RED-FLAG-FEVER",
             "instrument": "red-flag",
             "component": "redFlagFever",
             "score": null,
@@ -528,7 +528,7 @@
             "description": "Red flag positive: fever."
           },
           {
-            "ruleId": "R-RED-FLAG-RED-FLAG-ERYTHEMA-OR-DISCOLOURATION",
+            "ruleId": "R-RED-FLAG-ERYTHEMA-OR-DISCOLOURATION",
             "instrument": "red-flag",
             "component": "redFlagErythemaOrDiscolouration",
             "score": null,
@@ -537,7 +537,7 @@
             "description": "Red flag positive: erythema or skin discolouration over the hernia."
           },
           {
-            "ruleId": "R-RED-FLAG-RED-FLAG-PREVIOUSLY-REDUCIBLE-NOW-IRREDUCIBLE",
+            "ruleId": "R-RED-FLAG-PREVIOUSLY-REDUCIBLE-NOW-IRREDUCIBLE",
             "instrument": "red-flag",
             "component": "redFlagPreviouslyReducibleNowIrreducible",
             "score": null,
@@ -546,7 +546,7 @@
             "description": "Red flag positive: a previously reducible hernia now irreducible."
           },
           {
-            "ruleId": "R-RED-FLAG-RED-FLAG-TACHYCARDIA",
+            "ruleId": "R-RED-FLAG-TACHYCARDIA",
             "instrument": "red-flag",
             "component": "redFlagTachycardia",
             "score": null,
