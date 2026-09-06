@@ -75,6 +75,20 @@ function createDeclinedNoRationaleResponse(): NeurodiversityAdjustmentResponse {
 	};
 }
 
+/**
+ * A declined-but-justified response fixture: a rationale is recorded and the
+ * decline-reason category is a real one (not 'not-reasonable'), nothing is
+ * agreed, and nothing is escalated.
+ */
+function createDeclinedJustifiedResponse(): NeurodiversityAdjustmentResponse {
+	return {
+		...createDeclinedNoRationaleResponse(),
+		decisionRationale:
+			'The requested adjustable-height desk is not compatible with the shared workstation layout and no suitable alternative desk model is available within budget this quarter.',
+		declineReasonCategory: 'disproportionate-cost'
+	};
+}
+
 describe('Neurodiversity adjustment response — four-axis grading engine', () => {
 	it('grades a fully-agreed, complete response as low-risk', () => {
 		const g = calculateGrade(createFullyAgreedResponse());
@@ -99,6 +113,19 @@ describe('Neurodiversity adjustment response — four-axis grading engine', () =
 		expect(g.firedRules.some((r) => r.ruleId === 'R-LEGAL-DECLINE-NO-ALTERNATIVE')).toBe(true);
 		expect(g.flags.some((f) => f.flagId === 'F-DISCRIMINATION-RISK-001')).toBe(true);
 		expect(g.flags.some((f) => f.flagId === 'F-MISSING-RATIONALE-001')).toBe(true);
+	});
+
+	it('recommends record-decline for a justified decline with nothing agreed and no escalation', () => {
+		// deriveRecommendation's waterfall used to fall all the way through to
+		// 'implement' here -- misleading, since a decline has nothing to
+		// implement. Not escalated, not high-risk (a rationale + real category
+		// makes it 'caution' via R-LEGAL-DECLINE-JUSTIFIED, not 'high-risk'),
+		// and nothing agreed, so none of the earlier branches fire either.
+		const g = calculateGrade(createDeclinedJustifiedResponse());
+		expect(g.outcomeClassification).toBe('declined');
+		expect(g.legalRiskBand).toBe('caution');
+		expect(g.firedRules.some((r) => r.ruleId === 'R-LEGAL-DECLINE-JUSTIFIED')).toBe(true);
+		expect(g.recommendation).toBe('record-decline');
 	});
 
 	it('raises the no-review-scheduled flag when adjustments are agreed without a review', () => {

@@ -55,6 +55,21 @@ reasonableness factor: `not-reasonable`, `disproportionate-cost`,
 `insufficient-information`. A decline with no rationale, or no alternative where
 one is feasible, is the principal driver of the legal-risk axis.
 
+### Overall recommendation
+
+`deriveRecommendation` picks the single most urgent outcome across the axes,
+in order: `escalate-to-hr` (escalated) → `reconsider-decision` (high legal
+risk) → `schedule-review` (something agreed, no review booked) →
+`seek-occupational-health` (deferred, no OH referral) → `record-decline`
+(declined, with nothing more urgent already true) → `implement` (the
+default, once every adjustment offered has actually been agreed). A decline
+with nothing agreed and no escalation is never `implement` — there is
+nothing agreed to implement — it is `record-decline`: the decision and its
+justification (or its absence) are on record, and no further engine-driven
+action is implied beyond what Axis B/D already flagged. Fixed 2026-09-06;
+previously verified and documented (not silently patched) in
+`examples/personas.json`.
+
 ## 4. Inputs and outputs
 
 **Inputs.** A typed response object whose shape mirrors the SQL schema in `sql/`

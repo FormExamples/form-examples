@@ -123,6 +123,8 @@ export function recommendationLabel(value: Recommendation | string): string {
 			return 'Reconsider the decision';
 		case 'escalate-to-hr':
 			return 'Escalate to HR';
+		case 'record-decline':
+			return 'Record the decline and retain the justification';
 		default:
 			return 'No recommendation';
 	}

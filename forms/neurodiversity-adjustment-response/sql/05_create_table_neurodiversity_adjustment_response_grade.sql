@@ -27,7 +27,7 @@ CREATE TABLE neurodiversity_adjustment_response_grade (
     target_timeframe VARCHAR(50) NOT NULL DEFAULT '',
 
     recommendation VARCHAR(25) NOT NULL DEFAULT ''
-        CHECK (recommendation IN ('implement', 'schedule-review', 'seek-occupational-health', 'reconsider-decision', 'escalate-to-hr', '')),
+        CHECK (recommendation IN ('implement', 'schedule-review', 'seek-occupational-health', 'reconsider-decision', 'escalate-to-hr', 'record-decline', '')),
     manager_notes TEXT NOT NULL DEFAULT '',
     signed_at TIMESTAMPTZ,
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -61,7 +61,7 @@ COMMENT ON COLUMN neurodiversity_adjustment_response_grade.follow_up_urgency IS
 COMMENT ON COLUMN neurodiversity_adjustment_response_grade.target_timeframe IS
     'Target timeframe for the next review or action, implied by the follow-up urgency.';
 COMMENT ON COLUMN neurodiversity_adjustment_response_grade.recommendation IS
-    'Overall recommendation: implement, schedule-review, seek-occupational-health, reconsider-decision, escalate-to-hr.';
+    'Overall recommendation: implement, schedule-review, seek-occupational-health, reconsider-decision, escalate-to-hr, record-decline.';
 COMMENT ON COLUMN neurodiversity_adjustment_response_grade.manager_notes IS
     'Free-text sign-off notes from the manager or HR contact.';
 COMMENT ON COLUMN neurodiversity_adjustment_response_grade.signed_at IS

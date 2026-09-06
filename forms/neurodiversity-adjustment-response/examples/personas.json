@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `gradeLegalRisk` distinguishes a *justified* decline (rationale recorded, a real decline-reason category other than 'not-reasonable') — capped at 'caution' via R-LEGAL-DECLINE-JUSTIFIED — from a decline with no rationale and no alternative, which independently trips two separate high-risk rules. The second persona below isolates the justified-decline caution path; the third isolates the unjustified, escalated high-risk path. Also notable, verified directly: `deriveRecommendation`'s waterfall bottoms out at 'implement' for a declined response with nothing agreed and no escalation — there is no dedicated 'decline acknowledged' outcome, a genuine engine quirk, not an authoring choice.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `gradeLegalRisk` distinguishes a *justified* decline (rationale recorded, a real decline-reason category other than 'not-reasonable') — capped at 'caution' via R-LEGAL-DECLINE-JUSTIFIED — from a decline with no rationale and no alternative, which independently trips two separate high-risk rules. The second persona below isolates the justified-decline caution path; the third isolates the unjustified, escalated high-risk path. FIXED 2026-09-06: `deriveRecommendation`'s waterfall used to bottom out at the misleading 'implement' for a declined response with nothing agreed and no escalation — there was no dedicated outcome for 'we declined and are done deciding'. Added a new `record-decline` recommendation, returned whenever `overallDecision === 'declined'` and none of the earlier, more urgent branches (escalate-to-hr / reconsider-decision / schedule-review / seek-occupational-health) fire first — see the second persona below, whose `expected.recommendation` changed from `implement` to `record-decline`.",
   "personas": [
     {
       "name": "fully-agreed-ok-risk-review-scheduled-complete",
@@ -100,7 +100,7 @@
     },
     {
       "name": "declined-justified-caution-not-high-risk-complete",
-      "description": "A manager declines a customer service advisor's request for a dedicated buddy/mentor role, recording a clear rationale (disproportionate cost — no such post exists in the team structure) and a real decline-reason category: `declineJustified` requires a recorded rationale AND a decline-reason category other than 'not-reasonable', which caps this at R-LEGAL-DECLINE-JUSTIFIED (caution) rather than either of the two high-risk decline rules (no-rationale, no-alternative) — expect declined outcome + caution legal risk + 75% completeness + none follow-up + implement (the engine's waterfall fallback for a declined response with nothing agreed and no escalation).",
+      "description": "A manager declines a customer service advisor's request for a dedicated buddy/mentor role, recording a clear rationale (disproportionate cost — no such post exists in the team structure) and a real decline-reason category: `declineJustified` requires a recorded rationale AND a decline-reason category other than 'not-reasonable', which caps this at R-LEGAL-DECLINE-JUSTIFIED (caution) rather than either of the two high-risk decline rules (no-rationale, no-alternative) — expect declined outcome + caution legal risk + 75% completeness + none follow-up + record-decline. FIXED 2026-09-06 (was a VERIFIED ENGINE GAP, documented rather than silently patched at the time): `deriveRecommendation`'s waterfall used to bottom out at the misleading `implement` for exactly this case — a declined response with nothing agreed and no escalation has nothing to implement. Fixed by adding a dedicated `record-decline` outcome, returned whenever `overallDecision === 'declined'` and none of the earlier, more urgent branches (escalate-to-hr, reconsider-decision, schedule-review, seek-occupational-health) fire first.",
       "state": {
         "manager": {
           "name": "Diane Foster",
@@ -168,8 +168,8 @@
         "completenessPercent": 75,
         "followUpUrgency": "none",
         "targetTimeframe": "No follow-up scheduled",
-        "recommendation": "implement",
-        "recommendationLabel": "Implement the agreed adjustments",
+        "recommendation": "record-decline",
+        "recommendationLabel": "Record the decline and retain the justification",
         "firedRules": [
           {
             "ruleId": "R-OUTCOME-DECLINED",

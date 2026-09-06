@@ -89,6 +89,7 @@ export type Recommendation =
 	| 'seek-occupational-health'
 	| 'reconsider-decision'
 	| 'escalate-to-hr'
+	| 'record-decline'
 	| '';
 
 // ─── The response record (sql/04) ───

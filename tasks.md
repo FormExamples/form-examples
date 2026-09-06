@@ -1661,13 +1661,36 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `completenessPercent`, so no stale display existed). Fleet:
       `bin/test-personas` forms 352/352 PASS, personas 1174/1174 PASS,
       0 FAIL.
-- [ ] **neurodiversity-adjustment-response: no "decline acknowledged"
-      outcome.** `deriveRecommendation`'s waterfall bottoms out at
-      `implement` for a justified decline with nothing agreed and no
-      escalation (verified). Add a dedicated outcome (e.g.
-      `record-decline`) to the engine, `RECOMMENDATION_LABELS`, the SQL
-      CHECK, and the report, or document in `spec/index.md` why `implement`
-      is intended.
+- [x] **neurodiversity-adjustment-response: no "decline acknowledged"
+      outcome.** FIXED 2026-09-06, per the user's explicit decision to add
+      the dedicated outcome. `deriveRecommendation`'s waterfall used to
+      bottom out at `implement` for a justified decline with nothing
+      agreed and no escalation (verified — and already caught, unnoticed,
+      by the existing `declined-justified-caution-not-high-risk-complete`
+      persona's own then-recorded `expected.recommendation: 'implement'`).
+      Added the suggested `record-decline` outcome: to the engine
+      (`js/grader.js` + `src/lib/engine/grader.ts`), the label switch
+      (`js/types.js` `recommendationLabel` + `src/lib/engine/utils.ts`),
+      the `Recommendation` TypeScript union, and the SQL CHECK constraint
+      + column comment (`sql/05_create_table_neurodiversity_adjustment_
+      response_grade.sql`) — confirmed no Loco-side scoring logic exists,
+      and no separate report template hardcodes the recommendation enum
+      (it calls `recommendationLabel` dynamically), so no fourth artefact
+      needed touching. Verified the full migration set applies cleanly on
+      a fresh scratch Postgres 18.4 and the regenerated CHECK constraint
+      accepts `'record-decline'`. Added a dedicated fixture + boundary
+      test to `grader.test.ts` (12/12 passed, up from 11 — no prior test
+      exercised a *justified* decline with nothing agreed and no
+      escalation, only the no-rationale/high-risk and escalated/high-risk
+      routes). `bin/test-personas --update
+      neurodiversity-adjustment-response` 3/3 PASS — the existing
+      justified-decline persona's `expected.recommendation` changed from
+      `implement` to `record-decline`; updated its description and the
+      file's top-level `note`. Documented the full recommendation
+      waterfall in `spec/index.md` §3. `bin/test-e2e --html
+      neurodiversity-adjustment-response` 2/2 passed; `bin/test-form
+      neurodiversity-adjustment-response` PASS. Fleet: `bin/test-personas`
+      forms 352/352 PASS, personas 1176/1176 PASS, 0 FAIL.
 - [ ] **tumor-marker-test-result: `moderate` → `urgent-review`.** Unlike
       every sibling `*-test-result` engine (which maps `moderate` to
       `specialist-referral` / `further-testing`), this one maps it to

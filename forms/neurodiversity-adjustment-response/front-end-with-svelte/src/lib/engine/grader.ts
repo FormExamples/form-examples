@@ -90,5 +90,13 @@ function deriveRecommendation(
 	if (r.overallDecision === deferred && r.occupationalHealthReferred === false) {
 		return 'seek-occupational-health';
 	}
+	// A decline with nothing agreed, not escalated, and not high-risk (i.e. a
+	// justified decline, or an unjustified one that hasn't yet been escalated)
+	// has nothing to "implement" — record the decline rather than falling
+	// through to that misleading default.
+	const declined: OverallDecision = 'declined';
+	if (r.overallDecision === declined) {
+		return 'record-decline';
+	}
 	return 'implement';
 }

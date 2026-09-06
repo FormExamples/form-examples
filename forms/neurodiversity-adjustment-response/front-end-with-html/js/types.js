@@ -271,6 +271,7 @@ function recommendationLabel(value) {
     case 'seek-occupational-health': return 'Seek an occupational-health assessment';
     case 'reconsider-decision': return 'Reconsider the decision';
     case 'escalate-to-hr': return 'Escalate to HR';
+    case 'record-decline': return 'Record the decline and retain the justification';
     default: return 'Not graded';
   }
 }
