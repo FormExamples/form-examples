@@ -1349,24 +1349,38 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
 
 ### Engine correctness (decide: bug or spec'd behaviour; then fix or document)
 
-- [ ] **pre-operative-assessment-by-clinician: a recent stroke/TIA with no
+- [x] **pre-operative-assessment-by-clinician: a recent stroke/TIA with no
       day count grades ASA I (silent, most severe finding of the three
-      below).** `historyStrokeTia: 'yes'`, `recentStrokeTia: 'yes'`,
-      `daysSinceStrokeTia: null` (clinician affirms it was recent but
-      hasn't entered the day count yet): R-ASA-III-04's own comparison has
-      no `?? ` fallback (`null > 90` is `false`) and R-ASA-IV-02's
-      `(daysSinceStrokeTia ?? 999) <= 90` also evaluates `false` — neither
-      fires. Verified directly: `calculateASA` over that input (all else
-      blank) returns `computedAsaGrade: 'I'` with only `R-RCRI-04` fired (a
-      cardiac-risk component, not an ASA rule). A clinician-affirmed recent
-      stroke silently passes as the *lowest possible* ASA grade instead of
-      the fail-safe worst case. Fix: default the missing day count to
-      "recent" (<=90) in both rules when `recentStrokeTia === 'yes'`, in
-      HTML `js/asa-rules.js` + `js/composite-grader.js`, the SvelteKit
-      `src/lib/engine/asa-rules.ts` + `composite-grader.ts`, and the Loco
-      mirror — all three stacks together, per this form's own AGENTS.md
-      parity requirement. Documented in `examples/personas.json`'s `note`,
-      not yet fixed.
+      below).** FIXED 2026-09-06. `historyStrokeTia: 'yes'`,
+      `recentStrokeTia: 'yes'`, `daysSinceStrokeTia: null` (clinician
+      affirms it was recent but hasn't entered the day count yet):
+      R-ASA-IV-02's `(daysSinceStrokeTia ?? 999) <= 90` evaluated `false`
+      for a null day count, and R-ASA-III-04's own guard
+      (`recentStrokeTia !== 'yes'`) was also false — neither fired, so
+      `calculateASA` over that input (all else blank) returned
+      `computedAsaGrade: 'I'` with only `R-RCRI-04` fired (a cardiac-risk
+      component, not an ASA rule): a clinician-affirmed recent stroke
+      silently passed as the *lowest possible* ASA grade instead of the
+      fail-safe worst case. Fixed by changing R-ASA-IV-02's fallback from
+      `?? 999` to `?? 0` in HTML `js/asa-rules.js` and the SvelteKit
+      `src/lib/engine/asa-rules.ts`; R-ASA-III-04 needed no change (its own
+      `?? 0` already correctly stays suppressed once `recentStrokeTia`
+      reads `'yes'`). The current `back-end-with-loco` is a JSON-only API
+      with no scoring logic of its own — `back-end-with-loco/todo/` is a
+      superseded, unwired Tera/HTMX prototype, not one of this form's live
+      stacks, so it was correctly left untouched. Documented the decision
+      in `spec/index.md` §3, added a 4th persona
+      (`asa-recent-stroke-tia-day-count-unrecorded`) pinning the fixed
+      behaviour (now grades ASA IV, `compositeRisk: 'high'`), and updated
+      the personas file's top-level `note`. Verified: the existing 3
+      personas for this form were unaffected (none exercised this exact
+      combination); `npx vitest run` on this form's
+      `composite-grader.test.ts` still 29/29 passed (no prior test
+      asserted the old, buggy behaviour); `bin/test-personas
+      pre-operative-assessment-by-clinician` 4/4 PASS; `bin/test-e2e --html
+      pre-operative-assessment-by-clinician` 2/2 passed. Fleet:
+      `bin/test-personas` forms 352/352 PASS, personas 1173/1173 PASS,
+      0 FAIL.
 - [ ] **perioperative-optimization: an entirely blank assessment reports
       'ready' with zero flags.** Five of the eight domain evaluators
       (anaemia, alcohol, nutrition, physical-fitness, cardiorespiratory)
@@ -1650,7 +1664,11 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       completeness tallies, not scored graders, by design (facility audits
       / KPI dashboards with no pass/fail threshold), matching their
       `index.md`.
-- [ ] Then: personas for each unblocked form, 3 each, same methodology.
+- [x] Then: personas for each unblocked form, 3 each, same methodology.
+      DONE 2026-09-05 — see the final entry under this item's own log below
+      ("The persona backlog is complete"); fleet ground truth as of that
+      commit: `bin/test-personas` forms 352/352 PASS, personas 1172/1172
+      PASS, 0 FAIL.
       **64 of the newly-unblocked forms have personas as of 2026-09-04**
       (fleet ground truth: `bin/test-personas` forms 317/317 PASS, personas
       1067/1067 PASS, 0 FAIL; forms without personas: 39 — all inside the

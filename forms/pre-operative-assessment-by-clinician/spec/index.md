@@ -35,6 +35,14 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
   (1–9), Duke Activity Status Index (DASI), ECOG performance status.
 - **Composite perioperative risk:** Low / Moderate / High / Critical, driven by
   the worst-band finding across instruments (max-grade algorithm).
+- **Fail-safe default for an affirmed-recent stroke/TIA with no day count:**
+  when a clinician answers `recentStrokeTia: 'yes'` but has not yet entered
+  `daysSinceStrokeTia`, the engine treats the missing count as recent (`<= 90`
+  days), firing R-ASA-IV-02 rather than silently defaulting to ASA I. An
+  affirmed-recent event with no day count on record must never grade lower
+  than one with a known recent day count. Fixed 2026-09-06; previously
+  verified and documented (not silently patched) in
+  `examples/personas.json`.
 
 | Category | Drivers                                                                                                                                            |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |

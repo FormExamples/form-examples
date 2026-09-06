@@ -179,7 +179,13 @@ export const ASA_RULES: AsaRule[] = [
     description: "Recent stroke or TIA within 3 months",
     fires: (d) =>
       d.neurological.recentStrokeTia === "yes" &&
-      (d.neurological.daysSinceStrokeTia ?? 999) <= 90,
+      // Default an unrecorded day count to "recent" (0), not "not recent"
+      // (999): a clinician who has affirmed recentStrokeTia but not yet
+      // entered the exact day count must fail safe to the worse ASA IV
+      // grade, not silently fall through to ASA I. See ../../../doc/asa-
+      // grading-rules.md and examples/personas.json's note for the
+      // verified gap this closes.
+      (d.neurological.daysSinceStrokeTia ?? 0) <= 90,
   },
   {
     id: "R-ASA-IV-03",
