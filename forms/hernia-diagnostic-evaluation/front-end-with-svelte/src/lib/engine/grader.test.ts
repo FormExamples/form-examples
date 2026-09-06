@@ -236,6 +236,38 @@ describe('safety flags', () => {
 		expect(r.flags.some((f) => f.category === 'occult-hernia-suspected')).toBe(true);
 	});
 
+	it('occult-hernia-suspected does NOT fire for a confirmed palpable mass that is simply irreducible', () => {
+		// An irreducible or incarcerated hernia has no elicitable cough
+		// impulse by definition (it does not currently reduce), even though
+		// the mass itself is definitely palpable and the diagnosis is
+		// already confirmed. That must not be misread as an inconclusive
+		// exam suggesting an occult (not-yet-found) hernia.
+		const a = blank();
+		a.history.painScore0To10 = 6;
+		a.palpation.palpableMass = 'yes';
+		a.palpation.coughImpulsePositive = 'no';
+		a.reducibility.reducibilityStatus = 'irreducible';
+		const r = calculateHerniaEvaluation(a);
+		expect(r.flags.some((f) => f.category === 'occult-hernia-suspected')).toBe(false);
+
+		const b = blank();
+		b.history.painScore0To10 = 6;
+		b.palpation.palpableMass = 'yes';
+		b.palpation.coughImpulsePositive = 'no';
+		b.reducibility.reducibilityStatus = 'incarcerated';
+		expect(calculateHerniaEvaluation(b).flags.some((f) => f.category === 'occult-hernia-suspected')).toBe(false);
+	});
+
+	it('occult-hernia-suspected still fires for the same negative exam when reducibility is not irreducible/incarcerated', () => {
+		const a = blank();
+		a.history.painScore0To10 = 6;
+		a.palpation.palpableMass = 'no';
+		a.palpation.coughImpulsePositive = 'no';
+		a.reducibility.reducibilityStatus = 'reducible';
+		const r = calculateHerniaEvaluation(a);
+		expect(r.flags.some((f) => f.category === 'occult-hernia-suspected')).toBe(true);
+	});
+
 	it('atypical-presentation fires when imaging remains inconclusive', () => {
 		const a = blank();
 		a.palpation.palpableMass = 'no';

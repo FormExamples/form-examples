@@ -82,6 +82,13 @@ clinician override (same pattern as
 | `capacity-concern` | medium | A documented capacity concern |
 | `other` | variable | Free-text clinician-raised concern |
 
+`occult-hernia-suspected`'s "negative exam" excludes an irreducible or
+incarcerated hernia even when its cough impulse is not elicitable: that
+absence is expected once a hernia stops reducing and does not indicate an
+inconclusive exam when the mass itself is definitively palpable and the
+diagnosis is already confirmed. Fixed 2026-09-06; previously verified and
+documented (not silently patched) in `examples/personas.json`.
+
 ## 4. Inputs and outputs
 
 **Inputs.** A typed evaluation object whose shape mirrors the SQL schema in

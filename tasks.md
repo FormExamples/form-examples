@@ -1430,16 +1430,39 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `bin/test-e2e --html hernia-diagnostic-evaluation` 2/2 passed. Fleet:
       `bin/test-personas` forms 352/352 PASS, personas 1173/1173 PASS,
       0 FAIL.
-- [ ] **hernia-diagnostic-evaluation: `examInconclusive` false positive.**
-      `flagged-issues.js` defines `examInconclusive` as `palpableMass !==
-      'yes' || coughImpulsePositive !== 'yes'`, so a *confirmed* palpable
-      mass with no elicitable cough impulse (true whenever the hernia does
-      not currently reduce) raises `F-OCCULT-HERNIA-SUSPECTED-001` — it
-      fired in both the urgent and the emergency persona despite a definite
-      clinical diagnosis. Likely intended: `&&`, or suppress when
-      `reducibilityStatus` is irreducible/incarcerated. Check
-      `doc/safety-case-notes.md` before changing; add a grader test
-      asserting the confirmed-mass case does not flag.
+- [x] **hernia-diagnostic-evaluation: `examInconclusive` false positive.**
+      FIXED 2026-09-06. `flagged-issues.js` defined `examInconclusive` as
+      `palpableMass !== 'yes' || coughImpulsePositive !== 'yes'`, so a
+      *confirmed* palpable mass with no elicitable cough impulse (true
+      whenever the hernia does not currently reduce) raised
+      `F-OCCULT-HERNIA-SUSPECTED-001` — it fired in both the urgent and the
+      emergency persona despite a definite clinical diagnosis. Checked
+      `doc/safety-case-notes.md` first: no hazard entry covers this flag
+      specifically, but `spec/index.md`'s flag table already described
+      `occult-hernia-suspected` as a *negative* exam, and this form's own
+      `AGENTS.md` documents the cough-impulse rule as "its absence **with a
+      strong history** supports the flag" — neither says a *confirmed*
+      palpable mass should count. Picked the second of the two options this
+      item raised (suppress when `reducibilityStatus` is irreducible/
+      incarcerated) over a flat `&&`, since `&&` would also have suppressed
+      the flag for the ordinary "negative palpation, reducibility unknown"
+      case that this form's own existing `grader.test.ts` coverage and
+      `AGENTS.md` text treat as a legitimate trigger — the targeted
+      suppression fixes exactly the reported false positive without
+      narrowing the flag's general intent. Fixed in both
+      `js/flagged-issues.js` and `src/lib/engine/flagged-issues.ts`.
+      Documented the decision in `spec/index.md` §3's flag table. Added two
+      boundary tests to `grader.test.ts`: the false positive no longer
+      fires for `irreducible`/`incarcerated` with a confirmed mass, and the
+      flag still fires for the same negative palpation when reducibility is
+      `reducible` (44/44 tests passed, up from 35). Re-ran
+      `bin/test-personas --update hernia-diagnostic-evaluation` (3/3 PASS —
+      the urgent persona's `flags` array dropped
+      `F-OCCULT-HERNIA-SUSPECTED-001`, keeping only
+      `F-INCARCERATION-RISK-001`) and updated both that persona's
+      description and the file's top-level `note`. `bin/test-e2e --html
+      hernia-diagnostic-evaluation` 2/2 passed. Fleet: `bin/test-personas`
+      forms 352/352 PASS, personas 1173/1173 PASS, 0 FAIL.
 - [ ] **nuclear-medicine-test-result: Axis A ignores the ejection fraction.**
       `gradeSeverity` grades EF < 40 % as `major` (R-SEV-MAJOR-02) but
       `classifyResult` / `hasAnyAbnormalFinding` never look at

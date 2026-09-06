@@ -55,8 +55,14 @@ function detectFlags(data, context) {
   }
 
   // --- Atypical presentation / occult hernia ----------------------------------
+  // An irreducible or incarcerated hernia legitimately has no elicitable
+  // cough impulse (it does not currently reduce), even when the mass is
+  // definitively palpable and the diagnosis is already confirmed — that is
+  // not an inconclusive exam, so it must not be treated as one here.
   const examInconclusive =
-    data.palpation.palpableMass !== 'yes' || data.palpation.coughImpulsePositive !== 'yes';
+    data.reducibility.reducibilityStatus !== 'irreducible' &&
+    data.reducibility.reducibilityStatus !== 'incarcerated' &&
+    (data.palpation.palpableMass !== 'yes' || data.palpation.coughImpulsePositive !== 'yes');
   const imagingRequested =
     data.imaging.ultrasoundPerformed === 'yes' ||
     data.imaging.ctPerformed === 'yes' ||
