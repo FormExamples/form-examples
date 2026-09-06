@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-83 tools.
+84 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -20,6 +20,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/generate-forms-tsv.py`](#generate-forms-tsvpy)
 - [`bin/generate-llms-txt.py`](#generate-llms-txtpy)
 - [`bin/generate-loco-deny-config.py`](#generate-loco-deny-configpy)
+- [`bin/generate-persona-dashboard-samples.py`](#generate-persona-dashboard-samplespy)
 - [`bin/generate-persona-fhir-bundles.py`](#generate-persona-fhir-bundlespy)
 - [`bin/generate-spec.py`](#generate-specpy)
 - [`bin/generate-tools-doc.py`](#generate-tools-docpy)
@@ -321,6 +322,51 @@ Usage:
   bin/generate-loco-deny-config.py            # generate for every form
   bin/generate-loco-deny-config.py <slug> ... # generate only the named forms
   bin/generate-loco-deny-config.py --check    # exit non-zero if any deny.toml would change
+```
+
+<h2 id="generate-persona-dashboard-samplespy"><code>bin/generate-persona-dashboard-samples.py</code></h2>
+
+```text
+Generate dashboard sample-report rows from examples/personas.json.
+
+Each *-test-result form's clinician dashboard shows synthetic sample rows
+(front-end-with-html/js/data.js and the parallel
+front-end-with-svelte/src/lib/data/sample-reports.ts) so it has something
+to display when the back end is offline. Those rows were previously
+hand-authored independently of examples/personas.json, so they could (and
+occasionally did) disagree with what the actual scoring engine would grade
+for a similarly-described case. This generator derives one dashboard row
+per persona directly from that persona's `state` and computed `expected`
+grade, so the dashboard and the persona oracle can never disagree.
+
+Scope: the *-test-result form family (see generate-persona-fhir-bundles.py
+for the fleet-wide shape verification this reuses). Both stacks' ReportRow
+shape is read from front-end-with-svelte/.../engine/types.ts (the
+authoritative source; front-end-with-html/js/dashboard-types.js's JSDoc
+`@typedef` is a hand-kept mirror of the same interface) — field order is
+preserved exactly as declared there, since a few forms interleave a
+domain-specific field (e.g. dexa-bone-density-test-result's `lowestTScore`,
+`whoClassification`) between the generic ones rather than appending it.
+
+Field mapping:
+  id                          synthetic <PREFIX>-2026-NNNN, PREFIX read from
+                               the form's own existing data.js (no fleet-wide
+                               naming rule; every form picked its own)
+  patientName                 cycled from a shared synthetic name pool
+  reportStatus / reportedDate persona.state (present in every form in this
+                               family)
+  resultClassification / abnormalitySeverity / followUpUrgency /
+  reportCompletenessPercent   persona.expected (the four-axis grade)
+  flagCount                   len(persona.expected.flags)
+  any other field             persona.state[<same camelCase name>] — every
+                               form in the family was confirmed to carry a
+                               same-named key in its persona state
+
+Usage:
+    bin/generate-persona-dashboard-samples.py [--check] [--all|<slug>...]
+
+With no slugs and no --all, defaults to every *-test-result form under
+forms/. --check reports drift without writing (CI drift detector).
 ```
 
 <h2 id="generate-persona-fhir-bundlespy"><code>bin/generate-persona-fhir-bundles.py</code></h2>

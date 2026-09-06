@@ -76,6 +76,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/back-end-with-loco/generate-loco-agents.py [--stale|--list-stale] <slug>…` — regenerate a form's `back-end-with-loco/AGENTS.md` to describe the crate as it actually is (relational per-table Loco JSON API, RESTful scaffold controller per domain table); replaces docs still describing the obsolete single-`assessments`-table-with-JSONB design. `--list-stale` is the CI drift detector
 - `bin/generate-changelog-and-examples.py [--check] [<slug>…]` — scaffold per-form `CHANGELOG.md` and `examples/` (filled-form JSON fixture + FHIR R5 Bundle); `--check` is the CI drift detector
 - `bin/generate-persona-fhir-bundles.py [--check] [--all|<slug>…]` — generate one FHIR R5 `Bundle` per `examples/personas.json` entry into `examples/personas-fhir/`, built from that persona's actual filled `state` and computed `expected` grade (richer than `generate-changelog-and-examples.py`'s generic, type-defaulted `examples/fhir-bundle.json`, which carries the same placeholder values for every reader). Scoped to the `*-test-result` family, whose `sql/` all share one shape (`patient` + `clinician` + a single main `<slug>_result` table + a `_grade`/`_grade_rule`/`_grade_flag` triad); defaults to that whole family with no arguments. `--check` is the CI drift detector
+- `bin/generate-persona-dashboard-samples.py [--check] [--all|<slug>…]` — regenerate each `*-test-result` form's clinician-dashboard sample rows (`front-end-with-html/js/data.js` + the parallel `front-end-with-svelte/src/lib/data/sample-reports.ts`) from `examples/personas.json`, one row per persona, so the dashboard's offline sample data and the persona oracle can never disagree. Field order is read from each form's own `ReportRow` TypeScript interface (a few forms interleave a domain-specific field, e.g. `dexa-bone-density-test-result`'s `lowestTScore`/`whoClassification`, rather than appending it); the synthetic `id` reuses each form's own existing prefix (no fleet-wide naming rule). `--check` is the CI drift detector
 
 ### Lily Design System (HTML front-ends)
 
@@ -244,6 +245,7 @@ bin/generate-form-skills.py --check   # Per-form skills/ (end-user + maintainer 
 bin/node-current-version-set --check  # spec/node-current-version/ drift detector (engines.node, engine-strict, engineStrict, CI node-version)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/generate-persona-fhir-bundles.py --check   # per-persona FHIR R5 Bundle drift detector (*-test-result family)
+bin/generate-persona-dashboard-samples.py --check # per-persona dashboard sample-row drift detector (*-test-result family)
 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
 bin/back-end-with-loco/generate-loco-agents.py --list-stale # Back-end AGENTS.md staleness check (empty output = clean)
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector

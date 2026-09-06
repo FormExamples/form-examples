@@ -2320,10 +2320,44 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       "Verified engine behaviour" subsection to each affected form's living
       spec so the behaviour is either spec'd or spec'd-as-a-bug, per the
       update-specs-before-code rule.
-- [ ] **Seed dashboards from personas.** Each `front-end-with-html/js/data.js`
-      carries synthetic sample rows; generate them from
-      `examples/personas.json` (state + `expected`) so the dashboard and the
-      oracle can never disagree. `--check` tool, fleet-wide.
+- [x] **Seed dashboards from personas.** — DONE 2026-09-06.
+      `bin/generate-persona-dashboard-samples.py [--check] [--all|<slug>…]`
+      regenerates each `*-test-result` form's clinician-dashboard sample
+      rows — `front-end-with-html/js/data.js` **and** the parallel
+      `front-end-with-svelte/src/lib/data/sample-reports.ts` (both stacks
+      together, to keep the two in sync rather than let this generator
+      itself introduce a new HTML/Svelte drift) — from
+      `examples/personas.json`, one row per persona, so the dashboard's
+      offline sample data and the persona oracle can never disagree.
+      Scoped to the `*-test-result` family (the same 37-form shape
+      confirmed for the FHIR-bundle generator above). Field order is read
+      from each form's own `ReportRow` interface in
+      `front-end-with-svelte/.../engine/types.ts` (the authoritative
+      source; `front-end-with-html/js/dashboard-types.js`'s JSDoc
+      `@typedef` is a hand-kept mirror) rather than assumed, since a few
+      forms interleave a domain-specific field between the generic ones —
+      `dexa-bone-density-test-result`'s `ReportRow` has `lowestTScore` /
+      `whoClassification` sitting between `reportedDate` and
+      `resultClassification`, not appended at the end. Mapping: `id`
+      synthesizes `<PREFIX>-2026-NNNN` reusing each form's own existing
+      prefix (extracted from its current `data.js`; no fleet-wide naming
+      rule — every form picked its own, e.g. `NM`, `BLD`, `TOX`, `DXA`);
+      `patientName` cycles a shared synthetic name pool (extended by two
+      names, `Ingrid Larsen` / `Jamal Osei`, for the two forms with more
+      than 8 personas); `reportStatus`/`reportedDate` from `persona.state`;
+      `resultClassification`/`abnormalitySeverity`/`followUpUrgency`/
+      `reportCompletenessPercent` from `persona.expected`; `flagCount` from
+      `len(expected.flags)`; every other field read straight from
+      `persona.state[<same camelCase name>]` — confirmed present in all 37
+      forms' persona state before writing the generator, zero missing.
+      189 dashboard rows generated across the 37-form family (matching the
+      189 personas); `--check` verified idempotent; every generated
+      `data.js` passed `node --check`, every `sample-reports.ts` parsed as
+      valid JS after stripping its one `import type` line; `bin/test-e2e
+      --html` (including the dashboard CSV/TSV export test, which directly
+      exercises the new sample rows) still green on a sample of 3 forms.
+      Wired into `AGENTS.md`'s Generators catalogue and Verify section;
+      `docs/tools.md` regenerated.
 - [x] **Persona → FHIR R5 Bundle** (already listed under Phase 11 as "FHIR
       bundles for personas") — DONE 2026-09-06.
       `bin/generate-persona-fhir-bundles.py [--check] [--all|<slug>…]`
