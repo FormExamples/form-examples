@@ -51,7 +51,20 @@ function hasToxicResult(r) {
  * @returns {boolean}
  */
 function isCriticalResult(r) {
-  return hasToxicResult(r) || r.overallResultStatus === 'critical';
+  return (
+    hasToxicResult(r) ||
+    r.overallResultStatus === 'critical' ||
+    // gradeSeverity independently grades lithium, carboxyhaemoglobin, or
+    // salicylate above their toxic thresholds as major (R-SEV-MAJOR-02) —
+    // Axis A must classify these critical too, or the study reports normal
+    // despite a major severity grade. Deliberately not folded into
+    // hasToxicResult itself: that would make R-SEV-MAJOR-02 unreachable dead
+    // code, since gradeSeverity checks hasToxicResult first.
+    (r.lithiumLevelMmolL !== null && r.lithiumLevelMmolL >= LITHIUM_TOXIC_MMOL_L) ||
+    (r.carboxyhaemoglobinPercent !== null &&
+      r.carboxyhaemoglobinPercent >= CARBOXYHAEMOGLOBIN_TOXIC_PERCENT) ||
+    (r.salicylateLevelMgL !== null && r.salicylateLevelMgL >= SALICYLATE_TOXIC_MG_L)
+  );
 }
 
 /**
@@ -98,13 +111,13 @@ function classifyResult(r) {
   /** @type {FiredRule[]} */
   const firedRules = [];
 
-  if (hasToxicResult(r) || r.overallResultStatus === 'critical') {
+  if (isCriticalResult(r)) {
     firedRules.push({
       ruleId: 'R-CLASS-CRITICAL-01',
       axis: 'classification',
       category: 'toxic-level',
       description:
-        'A toxic level is present (paracetamol above the treatment line, toxic level flag, or overall critical status); classified as critical.'
+        'A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical.'
     });
     return { resultClassification: 'critical', firedRules };
   }

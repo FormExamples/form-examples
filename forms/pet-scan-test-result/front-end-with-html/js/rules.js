@@ -39,7 +39,15 @@ function hasCriticalFinding(r) {
  * @returns {boolean}
  */
 function hasAnyAbnormalFinding(r) {
-  return r.hypermetabolicLesion || r.nodalUptake || r.distantMetastasis;
+  return (
+    r.hypermetabolicLesion ||
+    r.nodalUptake ||
+    r.distantMetastasis ||
+    // gradeSeverity independently grades an SUVmax >= 10 as major from the
+    // raw measurement, even when the hypermetabolicLesion checkbox itself is
+    // unset — Axis A must agree.
+    (r.suvMax !== null && r.suvMax >= 10)
+  );
 }
 
 /**

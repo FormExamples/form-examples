@@ -1,4 +1,9 @@
-import { hasCriticalFinding, hasSignificantGrowth, hasUtiFeatures, isDipstickPositive } from './rules.js';
+import {
+  hasCriticalFinding,
+  hasSignificantGrowth,
+  hasAnyAbnormalFinding,
+  isDipstickPositive
+} from './rules.js';
 
 // Safety-critical flag detection for the Urinalysis Test Result.
 //
@@ -127,8 +132,13 @@ function detectFlags(r) {
     });
   }
 
-  // ─── discrepancy-with-request (UTI features but no originating request) ───
-  if (hasUtiFeatures(r) && r.originatingRequestReference.trim() === '') {
+  // ─── discrepancy-with-request (abnormal but no originating request) ───
+  // Aligned with hasAnyAbnormalFinding, per this flag's own description
+  // ("Abnormal findings are present") — UTI features alone was a strict
+  // subset (significant growth, dipstick blood/protein/glucose, visible
+  // haematuria, suspected urosepsis, a critical organism, or an abnormal/
+  // critical overall status all went unflagged when unlinked).
+  if (hasAnyAbnormalFinding(r) && r.originatingRequestReference.trim() === '') {
     flags.push({
       flagId: 'F-DISCREPANCY-001',
       category: 'discrepancy-with-request',

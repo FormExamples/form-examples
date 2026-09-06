@@ -2,7 +2,8 @@ import type { AmbulatoryBloodPressureResult, Flag, FlagPriority } from './types'
 import {
 	hasCriticalFinding,
 	recordingIsInadequate,
-	nighttimeHypertensive
+	nighttimeHypertensive,
+	severeByAverages
 } from './utils';
 
 /**
@@ -112,8 +113,12 @@ export function detectFlags(r: AmbulatoryBloodPressureResult): Flag[] {
 	}
 
 	// ─── unexpected-finding (abnormal but no originating request linked) ───
+	// Aligned with hasCriticalFinding: severe hypertension by the averaged
+	// measurements alone (severeByAverages) is just as much an unexpected
+	// significant finding as an explicitly confirmed severeHypertension flag,
+	// and must not go unflagged just because no request reference is on file.
 	if (
-		(r.hypertensionConfirmed || r.severeHypertension) &&
+		(r.hypertensionConfirmed || r.severeHypertension || severeByAverages(r)) &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

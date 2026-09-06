@@ -109,7 +109,11 @@ export function detectFlags(r: ElectroencephalogramResult): Flag[] {
 
 	// ─── unexpected-finding (abnormal but no originating request linked) ───
 	if (
-		(r.seizureRecorded || r.epileptiformDischarges) &&
+		// Aligned with hasCriticalFinding: status epilepticus is just as much
+		// an unexpected significant finding as a recorded seizure or
+		// epileptiform discharges, and must not go unflagged just because no
+		// request reference is on file.
+		(r.statusEpilepticus || r.seizureRecorded || r.epileptiformDischarges) &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

@@ -1716,9 +1716,102 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `spec/index.md` §3. `bin/test-e2e --html tumor-marker-test-result`
       2/2 passed. Fleet: `bin/test-personas` forms 352/352 PASS, personas
       1176/1176 PASS, 0 FAIL.
-- [ ] **Sweep the other 34 `*-test-result` persona notes** for the same
+- [x] **Sweep the other 34 `*-test-result` persona notes** for the same
       class of asymmetry (a severity trigger that is not a classification
-      or unexpected-finding trigger) and file any not listed above.
+      or unexpected-finding trigger) and file any not listed above. DONE
+      2026-09-06. Audited all 32 remaining `*-test-result` forms (of the
+      37 that actually exist in the fleet under this glob — 5 already
+      fixed earlier this session, not 34) via 4 parallel read-only audit
+      agents checking `hasCriticalFinding`/`hasAnyAbnormalFinding` vs
+      `gradeSeverity`'s dedicated triggers and vs the unexpected-finding-
+      style flag's own condition, in both HTML and Svelte. 16 of the 32
+      had the bug (2 forms — bronchoscopy-test-result,
+      cardiac-stress-test-result — have the identical-looking gap but it
+      is provably inert: `hasCriticalFinding`/`hasCriticalResult` is
+      checked first in every consuming function, so the missing OR term
+      is never reachable; left alone, noted here rather than "fixed" for
+      nothing). Fixed all 16, each in both HTML and the SvelteKit
+      reference:
+      - **Axis-A/Axis-B classification contradiction** (a `gradeSeverity`
+        trigger not reflected in the classification predicate, the
+        nuclear-medicine-test-result pattern): ambulatory-blood-pressure-
+        test-result (`nighttimeHypertensive`), angiography-test-result
+        (stenosis >= 50%), blood-cross-match-test-result
+        (`specialRequirements` + not-yet-compatible), blood-test-result
+        (a deviating eGFR/HbA1c structured band — required a dedicated
+        `hasAnyClassifiableAbnormality` predicate kept separate from
+        `hasAbnormalResult`, since `gradeSeverity` itself calls
+        `hasAbnormalResult` first for its own 'moderate' tier; folding the
+        structured-band check into `hasAbnormalResult` directly would
+        have made its dedicated 'minor' branch unreachable dead code —
+        caught by a real Vitest regression, not by inspection, and fixed
+        the same way as the toxicology fix below), eye-vision-test-result
+        (3 instances: `hasReferableRetinopathy`, `hasElevatedIop`,
+        `visualFieldResult === 'bilateral-defect'` — safe to fold
+        directly into `hasAnyAbnormalFinding` here, since `gradeSeverity`
+        already checks each of these three as independent, higher-
+        priority branches before ever reaching its own
+        `hasAnyAbnormalFinding`-gated minor tier), hearing-test-result
+        (worst pure-tone average >= 21 dB HL), mri-scan-test-result
+        (lesion >= 30mm), pet-scan-test-result (SUVmax >= 10, safe for
+        the same reason as eye-vision — `gradeSeverity` checks it as its
+        own independent major-tier branch first), pulmonary-function-
+        test-result (a bare `severity` field value of mild/moderate/
+        severe/very-severe, independent of the structured booleans —
+        also safe, each tier is its own independent branch checked before
+        the `hasAnyAbnormalFinding`-gated fallback), sleep-study-test-
+        result (an AHI severity band from the raw
+        apnoeaHypopnoeaIndex measurement), toxicology-test-result (the
+        worst instance: lithium/carboxyhaemoglobin/salicylate over their
+        toxic thresholds — required the same dedicated-predicate pattern
+        as blood-test-result, here a new `isCriticalResult`, since
+        `gradeSeverity` checks the narrower `hasToxicResult` first for
+        its own R-SEV-MAJOR-01 tier; also fixed `classifyResult`,
+        `F-CRITICAL-RESULT-001`, `F-ABNORMAL-ACTION-001`'s exclusion, and
+        `F-UNEXPECTED-FINDING-001` to all call the new predicate instead
+        of duplicating the old, narrower condition inline — caught a
+        second, real Vitest regression the same way), ultrasound-test-
+        result (lesion >= 30mm).
+      - **Unexpected-finding/discrepancy flag mirrors a strict subset**
+        (the holter-monitor-test-result pattern): echocardiogram-test-
+        result (`F-UNEXPECTED-FINDING-001` missing pericardial effusion +
+        severe LV impairment), electroencephalogram-test-result (missing
+        status epilepticus), pet-scan-test-result (missing nodal uptake +
+        a progressive treatment response — the latter is itself one of
+        `hasCriticalFinding`'s two conditions), pulmonary-function-test-
+        result (missing the structured ventilatory-pattern values),
+        sleep-study-test-result (missing central sleep apnoea +
+        significant desaturation), toxicology-test-result
+        (`F-URGENT-REFERRAL-001` missing salicylate — the
+        `SALICYLATE_TOXIC_MG_L` constant it needed had to move from
+        Svelte's `severity-rules.ts` into `utils.ts` to avoid a circular
+        import, the same relocation blood-test-result's
+        `structuredReportingCategory` needed), ultrasound-test-result
+        (missing cyst/gallstones/hydronephrosis/free fluid/DVT/organ
+        enlargement), urinalysis-test-result (`F-DISCREPANCY-001` was
+        UTI-features-only — widened to the full `hasAnyAbnormalFinding`,
+        matching the flag's own description text), x-ray-test-result
+        (`F-UNEXPECTED-FINDING-001` missing dislocation/consolidation/
+        pneumothorax/pleural effusion/free air/unstable fracture —
+        including the exact three conditions driving
+        `hasCriticalFinding` itself).
+      Verified every fix with a scratch script against the real engine
+      before writing any persona, per the session's established method.
+      Ran `bin/test-personas --update` across all 16 forms in one pass:
+      forms 16/16 PASS, personas 90/90 PASS, 0 FAIL — no persona needed
+      hand-authoring a new scenario; every fixed condition was already
+      exercised by an existing persona (several — the three
+      `*-now-correctly-critical` toxicology personas especially — had
+      already documented the exact gap by name during the original
+      persona-authoring pass, before this sweep formalised the fix).
+      Ran `npx vitest run` and `npx svelte-check` across all 16 Svelte
+      engines: all green after fixing the two real regressions the first
+      Vitest pass caught (blood-test-result, toxicology-test-result) —
+      both were exactly the "widening a predicate `gradeSeverity` itself
+      also gates on" self-inflicted dead-code mistake, caught by the
+      tests before being committed, not assumed safe. Ran `bin/test-e2e
+      --html` across all 16 forms: 32/32 passed. Fleet: `bin/test-
+      personas` forms 352/352 PASS, personas 1176/1176 PASS, 0 FAIL.
 
 ### Tooling (`bin/test-personas`, `bin/test-engines`)
 

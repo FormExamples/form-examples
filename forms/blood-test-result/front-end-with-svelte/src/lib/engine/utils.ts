@@ -22,9 +22,48 @@ export function hasCriticalValue(r: BloodTestResult): boolean {
 	return r.criticalValuePresent || r.overallResultStatus === 'critical';
 }
 
+/**
+ * Structured-reporting category derived from analyte values: an eGFR CKD stage
+ * or a glycaemic (HbA1c) band, grounded in NICE CKD staging and the WHO/IFCC
+ * HbA1c diagnostic thresholds. Returns '' when no structured band applies.
+ */
+export function structuredReportingCategory(r: BloodTestResult): string {
+	if (r.egfr !== null) {
+		if (r.egfr >= 90) return 'eGFR CKD G1 (>=90)';
+		if (r.egfr >= 60) return 'eGFR CKD G2 (60-89)';
+		if (r.egfr >= 45) return 'eGFR CKD G3a (45-59)';
+		if (r.egfr >= 30) return 'eGFR CKD G3b (30-44)';
+		if (r.egfr >= 15) return 'eGFR CKD G4 (15-29)';
+		return 'eGFR CKD G5 (<15)';
+	}
+	if (r.hba1cMmolMol !== null) {
+		if (r.hba1cMmolMol >= 48) return 'HbA1c diabetes range (>=48)';
+		if (r.hba1cMmolMol >= 42) return 'HbA1c prediabetes (42-47)';
+		return 'HbA1c normal (<42)';
+	}
+	return '';
+}
+
 /** Whether any analyte result is flagged abnormal (but not critical). */
 export function hasAbnormalResult(r: BloodTestResult): boolean {
 	return r.abnormalResultsPresent || r.overallResultStatus === 'abnormal';
+}
+
+/**
+ * Whether the report has any classification-worthy abnormality: an abnormal
+ * result, or a deviating structured band (eGFR CKD stage or HbA1c band).
+ *
+ * Deliberately separate from `hasAbnormalResult`: `gradeSeverity` checks
+ * `hasAbnormalResult` first (for its 'moderate' tier) and only reaches its
+ * own dedicated structured-band check afterwards (for 'minor') — folding the
+ * structured-band condition into `hasAbnormalResult` itself would make that
+ * 'minor' branch unreachable dead code. `classifyResult` uses this wider
+ * predicate instead, so Axis A agrees whenever Axis B grades minor or above.
+ */
+export function hasAnyClassifiableAbnormality(r: BloodTestResult): boolean {
+	if (hasAbnormalResult(r)) return true;
+	const structured = structuredReportingCategory(r);
+	return structured !== '' && !structured.includes('G1') && !structured.includes('normal');
 }
 
 /** The full set of analyte result values, in panel order, with display metadata. */

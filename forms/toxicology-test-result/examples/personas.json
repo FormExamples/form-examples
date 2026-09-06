@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Several personas below (lithium-, carboxyhaemoglobin-, and salicylate-toxic-level-not-critical) document a real, verified gap: hasToxicResult() and hasCriticalFinding-equivalent logic only recognise paracetamol-above-the-line or the toxicLevelPresent/overallResultStatus='critical' booleans — a numerically toxic lithium, carboxyhaemoglobin, or salicylate level on its own does NOT auto-escalate Axis A/D or raise F-CRITICAL-RESULT-001, even though it does drive severity to 'major' via the separate over-toxic-threshold rule. This looks like a genuine safety-relevant discordance in the engine worth a follow-up fix, not merely a documentation nuance; captured faithfully here rather than worked around.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. FIXED 2026-09-06 (was a VERIFIED ENGINE GAP): the three personas below with names ending '-now-correctly-critical' used to document a genuine safety-relevant discordance — hasToxicResult() and classifyResult()/gradeFollowUp()'s critical-escalation checks only recognised paracetamol-above-the-line or the toxicLevelPresent/overallResultStatus='critical' booleans, so a numerically toxic lithium, carboxyhaemoglobin, or salicylate level on its own did NOT auto-escalate Axis A/D or raise F-CRITICAL-RESULT-001, even though it did drive severity to 'major' via the separate over-toxic-threshold rule (R-SEV-MAJOR-02); the salicylate case was the worst of the three, since F-URGENT-REFERRAL-001's own condition additionally omitted salicylate, leaving it completely unflagged. Fixed by adding the same three over-threshold conditions to a new `isCriticalResult()` predicate (deliberately not folded into hasToxicResult() itself, which gradeSeverity checks first — that would have made its own dedicated R-SEV-MAJOR-02 branch unreachable dead code) and to F-URGENT-REFERRAL-001's condition; classifyResult(), F-CRITICAL-RESULT-001, F-ABNORMAL-ACTION-001's exclusion, and F-UNEXPECTED-FINDING-001 all now call isCriticalResult() instead of duplicating the old, narrower condition inline.",
   "personas": [
     {
       "name": "paracetamol-above-treatment-line-critical",
@@ -50,7 +50,7 @@
             "ruleId": "R-CLASS-CRITICAL-01",
             "axis": "classification",
             "category": "toxic-level",
-            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, or overall critical status); classified as critical."
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
           },
           {
             "ruleId": "R-SEV-MAJOR-01",
@@ -130,7 +130,7 @@
             "ruleId": "R-CLASS-CRITICAL-01",
             "axis": "classification",
             "category": "toxic-level",
-            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, or overall critical status); classified as critical."
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
           },
           {
             "ruleId": "R-SEV-MAJOR-01",
@@ -164,8 +164,8 @@
       }
     },
     {
-      "name": "lithium-severely-toxic-not-critical-classification-gap",
-      "description": "A severely toxic lithium level (3.2 mmol/L, more than double the 1.5 mmol/L threshold) with neither toxicLevelPresent nor overallResultStatus ticked — a real, verified engine gap: classifyResult() and gradeFollowUp() only check hasToxicResult() (paracetamol-above-line or the toxicLevelPresent/overallResultStatus='critical' booleans), NOT the separate over-toxic-threshold check used by gradeSeverity(). The result is a genuinely dangerous discordance: resultClassification stays 'normal' and followUpUrgency is only 'urgent' (not 'critical-alert'), even though abnormalitySeverity correctly grades 'major' via R-SEV-MAJOR-02. The only safety net is the medium-priority F-URGENT-REFERRAL-001 flag — F-CRITICAL-RESULT-001 does not fire at all for this level of lithium toxicity.",
+      "name": "lithium-severely-toxic-now-correctly-critical",
+      "description": "FIXED 2026-09-06 (was 'lithium-severely-toxic-not-critical-classification-gap', a real, verified engine gap): a severely toxic lithium level (3.2 mmol/L, more than double the 1.5 mmol/L threshold) with neither toxicLevelPresent nor overallResultStatus ticked used to leave resultClassification 'normal' and followUpUrgency only 'urgent' (not 'critical-alert'), even though abnormalitySeverity correctly graded 'major' via R-SEV-MAJOR-02 — classifyResult() and gradeFollowUp() only checked hasToxicResult(), not the separate over-toxic-threshold check gradeSeverity() already used. Fixed by adding the same three over-threshold conditions to isCriticalResult() (deliberately not folded into hasToxicResult() itself, which would have made R-SEV-MAJOR-02 unreachable dead code). Now correctly resultClassification 'critical', followUpUrgency 'critical-alert', with F-CRITICAL-RESULT-001/002 firing alongside F-URGENT-REFERRAL-001.",
       "state": {
         "reportingClinician": "Dr Priya Nair",
         "originatingRequestReference": "TOX-REQ-100489",
@@ -197,20 +197,20 @@
         "signed": true
       },
       "expected": {
-        "resultClassification": "normal",
+        "resultClassification": "critical",
         "abnormalitySeverity": "major",
         "reportingCategory": "toxic-range",
         "reportCompletenessPercent": 100,
-        "followUpUrgency": "urgent",
-        "targetTimeframe": "within 24 hours",
-        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
-        "recommendation": "specialist-referral",
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Start the appropriate antidote / urgent treatment now, communicate the critical result directly to the requester, and document the conversation.",
+        "recommendation": "urgent-review",
         "firedRules": [
           {
-            "ruleId": "R-CLASS-NORMAL-01",
+            "ruleId": "R-CLASS-CRITICAL-01",
             "axis": "classification",
-            "category": "no-abnormal-result",
-            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+            "category": "toxic-level",
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
           },
           {
             "ruleId": "R-SEV-MAJOR-02",
@@ -219,26 +219,40 @@
             "description": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
           },
           {
-            "ruleId": "R-FU-URGENT-01",
+            "ruleId": "R-FU-CRITICAL-01",
             "axis": "follow-up",
-            "category": "major-abnormality",
-            "description": "Major abnormality present; follow-up urgency graded urgent."
+            "category": "critical-result",
+            "description": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
           }
         ],
         "flags": [
           {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A toxic level requiring action is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and start the appropriate antidote / urgent treatment."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Toxic result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
             "flagId": "F-URGENT-REFERRAL-001",
             "category": "urgent-referral",
             "priority": "medium",
-            "description": "A lithium or carboxyhaemoglobin level is in a range that may warrant urgent referral.",
+            "description": "A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.",
             "suggestedAction": "Consider urgent referral to the appropriate specialist / toxicology team."
           }
         ]
       }
     },
     {
-      "name": "carboxyhaemoglobin-toxic-not-critical-classification-gap",
-      "description": "A toxic carboxyhaemoglobin level (18%, well above the 10% threshold, consistent with significant carbon monoxide poisoning) with neither toxicLevelPresent nor overallResultStatus ticked — a second, independent confirmation of the same verified engine gap via a different analyte: classification stays 'normal', follow-up only 'urgent', with only the medium-priority F-URGENT-REFERRAL-001 flag raised and no critical-result-alert flag at all.",
+      "name": "carboxyhaemoglobin-toxic-now-correctly-critical",
+      "description": "FIXED 2026-09-06 (was 'carboxyhaemoglobin-toxic-not-critical-classification-gap', a real, verified engine gap, the same class as the lithium persona above): a toxic carboxyhaemoglobin level (>=10%) with neither toxicLevelPresent nor overallResultStatus ticked used to leave resultClassification 'normal' and followUpUrgency only 'urgent', despite abnormalitySeverity correctly grading 'major' via R-SEV-MAJOR-02. Fixed the same way: isCriticalResult() now independently checks the over-threshold condition. Now correctly resultClassification 'critical', followUpUrgency 'critical-alert', with F-CRITICAL-RESULT-001/002 firing alongside F-URGENT-REFERRAL-001.",
       "state": {
         "reportingClinician": "Dr Owen Fitzgerald",
         "originatingRequestReference": "TOX-REQ-100602",
@@ -270,20 +284,20 @@
         "signed": true
       },
       "expected": {
-        "resultClassification": "normal",
+        "resultClassification": "critical",
         "abnormalitySeverity": "major",
         "reportingCategory": "toxic-range",
         "reportCompletenessPercent": 100,
-        "followUpUrgency": "urgent",
-        "targetTimeframe": "within 24 hours",
-        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
-        "recommendation": "specialist-referral",
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Start the appropriate antidote / urgent treatment now, communicate the critical result directly to the requester, and document the conversation.",
+        "recommendation": "urgent-review",
         "firedRules": [
           {
-            "ruleId": "R-CLASS-NORMAL-01",
+            "ruleId": "R-CLASS-CRITICAL-01",
             "axis": "classification",
-            "category": "no-abnormal-result",
-            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+            "category": "toxic-level",
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
           },
           {
             "ruleId": "R-SEV-MAJOR-02",
@@ -292,26 +306,40 @@
             "description": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
           },
           {
-            "ruleId": "R-FU-URGENT-01",
+            "ruleId": "R-FU-CRITICAL-01",
             "axis": "follow-up",
-            "category": "major-abnormality",
-            "description": "Major abnormality present; follow-up urgency graded urgent."
+            "category": "critical-result",
+            "description": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
           }
         ],
         "flags": [
           {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A toxic level requiring action is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and start the appropriate antidote / urgent treatment."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Toxic result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
             "flagId": "F-URGENT-REFERRAL-001",
             "category": "urgent-referral",
             "priority": "medium",
-            "description": "A lithium or carboxyhaemoglobin level is in a range that may warrant urgent referral.",
+            "description": "A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.",
             "suggestedAction": "Consider urgent referral to the appropriate specialist / toxicology team."
           }
         ]
       }
     },
     {
-      "name": "salicylate-toxic-completely-unflagged-classification-gap",
-      "description": "A frankly toxic salicylate level (350 mg/L, above the 300 mg/L threshold) with neither toxicLevelPresent nor overallResultStatus ticked — the most striking of the three over-threshold gap personas: unlike lithium and carboxyhaemoglobin, F-URGENT-REFERRAL-001's condition in flags.js checks ONLY lithium and carboxyhaemoglobin, omitting salicylate entirely, so this toxic salicylate level raises NO flags whatsoever (flags: []) despite abnormalitySeverity correctly grading 'major'. Classification 'normal', follow-up only 'urgent', and zero flags — verified directly against both rules.js and flags.js source, not assumed.",
+      "name": "salicylate-toxic-now-correctly-critical",
+      "description": "FIXED 2026-09-06 (was 'salicylate-toxic-completely-unflagged-classification-gap', the most severe instance of this engine gap: unlike the lithium/carboxyhaemoglobin personas, F-URGENT-REFERRAL-001's own hand-rolled condition previously omitted salicylate entirely, so a toxic salicylate level had no safety net of any kind): a toxic salicylate level (>=300 mg/L) with neither toxicLevelPresent nor overallResultStatus ticked used to leave resultClassification 'normal', followUpUrgency only 'urgent', AND raised no flag at all — completely invisible to a clinician scanning fired rules and flags, despite abnormalitySeverity correctly grading 'major' via R-SEV-MAJOR-02. Fixed by adding the over-threshold check to isCriticalResult() and adding salicylate to F-URGENT-REFERRAL-001's own condition (it already imported the SALICYLATE_TOXIC_MG_L constant for gradeSeverity's use). Now correctly resultClassification 'critical', followUpUrgency 'critical-alert', with F-CRITICAL-RESULT-001/002 firing alongside F-URGENT-REFERRAL-001.",
       "state": {
         "reportingClinician": "Dr Miriam Solheim",
         "originatingRequestReference": "TOX-REQ-100714",
@@ -343,20 +371,20 @@
         "signed": true
       },
       "expected": {
-        "resultClassification": "normal",
+        "resultClassification": "critical",
         "abnormalitySeverity": "major",
         "reportingCategory": "toxic-range",
         "reportCompletenessPercent": 100,
-        "followUpUrgency": "urgent",
-        "targetTimeframe": "within 24 hours",
-        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
-        "recommendation": "specialist-referral",
+        "followUpUrgency": "critical-alert",
+        "targetTimeframe": "immediate",
+        "recommendedAction": "Start the appropriate antidote / urgent treatment now, communicate the critical result directly to the requester, and document the conversation.",
+        "recommendation": "urgent-review",
         "firedRules": [
           {
-            "ruleId": "R-CLASS-NORMAL-01",
+            "ruleId": "R-CLASS-CRITICAL-01",
             "axis": "classification",
-            "category": "no-abnormal-result",
-            "description": "No toxic or abnormal result on an interpretable assay; classified as normal."
+            "category": "toxic-level",
+            "description": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
           },
           {
             "ruleId": "R-SEV-MAJOR-02",
@@ -365,13 +393,35 @@
             "description": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
           },
           {
-            "ruleId": "R-FU-URGENT-01",
+            "ruleId": "R-FU-CRITICAL-01",
             "axis": "follow-up",
-            "category": "major-abnormality",
-            "description": "Major abnormality present; follow-up urgency graded urgent."
+            "category": "critical-result",
+            "description": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
           }
         ],
-        "flags": []
+        "flags": [
+          {
+            "flagId": "F-CRITICAL-RESULT-001",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "A toxic level requiring action is present.",
+            "suggestedAction": "Communicate the critical result to the requester immediately and start the appropriate antidote / urgent treatment."
+          },
+          {
+            "flagId": "F-CRITICAL-RESULT-002",
+            "category": "critical-result-alert",
+            "priority": "high",
+            "description": "Toxic result present but the result has not been recorded as communicated.",
+            "suggestedAction": "Contact the requester now and record who was informed, with date and time."
+          },
+          {
+            "flagId": "F-URGENT-REFERRAL-001",
+            "category": "urgent-referral",
+            "priority": "medium",
+            "description": "A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.",
+            "suggestedAction": "Consider urgent referral to the appropriate specialist / toxicology team."
+          }
+        ]
       }
     },
     {

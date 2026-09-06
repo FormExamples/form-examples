@@ -4,14 +4,12 @@ import type {
 	AbnormalitySeverity,
 	FiredRule
 } from './types';
-import { hasToxicResult } from './utils';
-
-// Therapeutic / toxic thresholds (grounded in TOXBASE / NPIS and the MHRA
-// paracetamol nomogram). Modest elevation of a narrow-range drug (lithium) or
-// a clear poisoning threshold (carboxyhaemoglobin) raises severity.
-const LITHIUM_TOXIC_MMOL_L = 1.5;
-const CARBOXYHAEMOGLOBIN_TOXIC_PERCENT = 10;
-const SALICYLATE_TOXIC_MG_L = 300;
+import {
+	hasToxicResult,
+	LITHIUM_TOXIC_MMOL_L,
+	CARBOXYHAEMOGLOBIN_TOXIC_PERCENT,
+	SALICYLATE_TOXIC_MG_L
+} from './utils';
 
 /**
  * Axis B — abnormality severity & structured-reporting category.

@@ -23,11 +23,16 @@ export function hasCriticalFinding(r: HearingResult): boolean {
 
 /** Whether any structured abnormal finding is present. */
 export function hasAnyAbnormalFinding(r: HearingResult): boolean {
+	const pta = worstPureToneAverage(r);
 	return (
 		r.hearingLossPresent ||
 		r.asymmetricLoss ||
 		r.suddenSensorineuralLoss ||
-		r.conductiveComponent
+		r.conductiveComponent ||
+		// gradeSeverity independently grades any worst pure-tone average >= 21
+		// dB HL (mild loss or worse) from the raw measurement, even when the
+		// hearingLossPresent checkbox itself is unset — Axis A must agree.
+		(pta !== null && pta >= 21)
 	);
 }
 

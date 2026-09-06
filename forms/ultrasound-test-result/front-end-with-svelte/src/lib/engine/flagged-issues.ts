@@ -103,7 +103,18 @@ export function detectFlags(r: UltrasoundResult): Flag[] {
 
 	// ─── unexpected-finding (abnormal but no originating request linked) ───
 	if (
-		(r.massOrLesion || r.aneurysm) &&
+		// Aligned with hasAnyAbnormalFinding: a cyst, gallstones, hydronephrosis,
+		// free fluid, DVT, or organ enlargement are just as much an unexpected
+		// significant finding as a mass/lesion or aneurysm, and must not go
+		// unflagged just because no request reference is on file.
+		(r.massOrLesion ||
+			r.aneurysm ||
+			r.cyst ||
+			r.gallstones ||
+			r.hydronephrosis ||
+			r.freeFluid ||
+			r.dvtPresent ||
+			r.organEnlargement) &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

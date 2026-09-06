@@ -152,8 +152,16 @@ export function detectFlags(r: EchocardiogramResult): Flag[] {
 	}
 
 	// ─── unexpected-finding (abnormal but no originating request linked) ───
+	// Aligned with hasCriticalFinding: a pericardial effusion or severe LV
+	// impairment is just as much an unexpected significant finding as severe
+	// valve disease, vegetation, or an intracardiac thrombus, and must not go
+	// unflagged just because no request reference is on file.
 	if (
-		(hasSevereValveDisease(r) || r.vegetation || r.intracardiacThrombus) &&
+		(hasSevereValveDisease(r) ||
+			r.vegetation ||
+			r.pericardialEffusion ||
+			hasSevereLvImpairment(r) ||
+			r.intracardiacThrombus) &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

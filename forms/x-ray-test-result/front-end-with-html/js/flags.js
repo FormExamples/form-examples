@@ -1,4 +1,4 @@
-import { hasCriticalFinding } from './rules.js';
+import { hasCriticalFinding, hasAnyAbnormalFinding } from './rules.js';
 
 // Safety-critical flag detection for the X-Ray Test Result.
 //
@@ -115,7 +115,13 @@ function detectFlags(r) {
   }
 
   // ─── unexpected-finding (abnormal but no originating request linked) ───
-  if ((r.fracture || r.bonyLesion || r.foreignBody) && r.originatingRequestReference.trim() === '') {
+  // Aligned with hasAnyAbnormalFinding: dislocation, consolidation,
+  // pneumothorax, pleural effusion, free air, and an unstable fracture are
+  // just as much an unexpected significant finding as a fracture, bony
+  // lesion, or foreign body — including the exact three conditions that
+  // drive hasCriticalFinding — and must not go unflagged just because no
+  // request reference is on file.
+  if (hasAnyAbnormalFinding(r) && r.originatingRequestReference.trim() === '') {
     flags.push({
       flagId: 'F-UNEXPECTED-FINDING-001',
       category: 'unexpected-finding',

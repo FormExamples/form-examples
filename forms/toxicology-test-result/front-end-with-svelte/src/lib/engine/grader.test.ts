@@ -130,14 +130,23 @@ describe('Toxicology four-axis grading engine', () => {
 		expect(g.flags.some((f) => f.category === 'critical-result-alert')).toBe(true);
 	});
 
-	it('escalates a level over a toxic threshold to major severity and urgent follow-up', () => {
+	it('escalates a level over a toxic threshold to critical classification, major severity, and critical-alert follow-up', () => {
+		// isCriticalResult() independently checks the same over-threshold
+		// condition gradeSeverity uses for R-SEV-MAJOR-02, so Axis A and Axis D
+		// agree with Axis B here — this is deliberately NOT folded into
+		// hasToxicResult() itself, which would make R-SEV-MAJOR-02 unreachable.
 		const r = createAbnormalResult();
 		r.lithiumLevelMmolL = 2.5;
 		const g = calculateGrade(r);
+		expect(g.resultClassification).toBe('critical');
 		expect(g.abnormalitySeverity).toBe('major');
-		expect(g.followUpUrgency).toBe('urgent');
-		expect(g.recommendation).toBe('specialist-referral');
+		expect(g.followUpUrgency).toBe('critical-alert');
+		expect(g.recommendation).toBe('urgent-review');
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-CLASS-CRITICAL-01')).toBe(true);
+		// The dedicated over-threshold severity rule still fires (not
+		// R-SEV-MAJOR-01, which would mean it had become dead code).
 		expect(g.firedRules.some((rule) => rule.ruleId === 'R-SEV-MAJOR-02')).toBe(true);
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-SEV-MAJOR-01')).toBe(false);
 	});
 
 	it('classifies an insufficient specimen as inconclusive', () => {

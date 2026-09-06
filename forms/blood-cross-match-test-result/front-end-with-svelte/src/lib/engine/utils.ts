@@ -45,7 +45,10 @@ export function hasAnyAbnormalFinding(r: BloodCrossMatchResult): boolean {
 		r.antibodyScreenResult === 'positive' ||
 		isAboDiscrepancy(r) ||
 		isTwoSampleRuleUnmet(r) ||
-		insufficientUnits(r)
+		insufficientUnits(r) ||
+		// gradeSeverity independently grades special component requirements on
+		// a not-yet-compatible crossmatch as minor — Axis A must agree.
+		(r.specialRequirements.trim() !== '' && r.crossmatchResult !== 'compatible')
 	);
 }
 

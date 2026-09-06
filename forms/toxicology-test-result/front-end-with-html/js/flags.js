@@ -1,4 +1,8 @@
-import { hasAnyResultValue, hasToxicResult } from './rules.js';
+import {
+  hasAnyResultValue,
+  isCriticalResult,
+  SALICYLATE_TOXIC_MG_L
+} from './rules.js';
 
 // Safety-critical flag detection for the Toxicology Test Result.
 //
@@ -14,7 +18,7 @@ import { hasAnyResultValue, hasToxicResult } from './rules.js';
  * @typedef {import('./types.js').FlagPriority} FlagPriority
  */
 
-// Depends on rules.js (hasToxicResult, hasAnyResultValue), so it must load
+// Depends on rules.js (isCriticalResult, hasAnyResultValue), so it must load
 // after it.
 
 /**
@@ -27,7 +31,7 @@ function detectFlags(r) {
   const flags = [];
 
   // ─── critical-result-alert (auto-raised with a toxic level) ───
-  if (hasToxicResult(r) || r.overallResultStatus === 'critical') {
+  if (isCriticalResult(r)) {
     const paracetamol = r.paracetamolNomogram === 'above-treatment-line';
     flags.push({
       flagId: 'F-CRITICAL-RESULT-001',
@@ -54,7 +58,7 @@ function detectFlags(r) {
   }
 
   // ─── abnormal-requiring-action ───
-  if (r.overallResultStatus === 'abnormal' && !hasToxicResult(r)) {
+  if (r.overallResultStatus === 'abnormal' && !isCriticalResult(r)) {
     flags.push({
       flagId: 'F-ABNORMAL-ACTION-001',
       category: 'abnormal-requiring-action',
@@ -65,16 +69,20 @@ function detectFlags(r) {
   }
 
   // ─── urgent-referral ───
+  // Includes salicylate alongside lithium and carboxyhaemoglobin — the same
+  // severity class of over-threshold level (R-SEV-MAJOR-02 in rules.js), and
+  // the SALICYLATE_TOXIC_MG_L constant it already reuses.
   if (
     (r.lithiumLevelMmolL !== null && r.lithiumLevelMmolL >= 1.5) ||
-    (r.carboxyhaemoglobinPercent !== null && r.carboxyhaemoglobinPercent >= 10)
+    (r.carboxyhaemoglobinPercent !== null && r.carboxyhaemoglobinPercent >= 10) ||
+    (r.salicylateLevelMgL !== null && r.salicylateLevelMgL >= SALICYLATE_TOXIC_MG_L)
   ) {
     flags.push({
       flagId: 'F-URGENT-REFERRAL-001',
       category: 'urgent-referral',
       priority: 'medium',
       description:
-        'A lithium or carboxyhaemoglobin level is in a range that may warrant urgent referral.',
+        'A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.',
       suggestedAction: 'Consider urgent referral to the appropriate specialist / toxicology team.'
     });
   }
@@ -132,7 +140,7 @@ function detectFlags(r) {
 
   // ─── unexpected-finding (abnormal but no originating request linked) ───
   if (
-    (hasToxicResult(r) || r.overallResultStatus === 'abnormal') &&
+    (isCriticalResult(r) || r.overallResultStatus === 'abnormal') &&
     r.originatingRequestReference.trim() === ''
   ) {
     flags.push({

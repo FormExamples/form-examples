@@ -1,5 +1,9 @@
 import type { ToxicologyResult, Flag, FlagPriority } from './types';
-import { hasToxicResult, hasAnyResultValue } from './utils';
+import {
+	isCriticalResult,
+	hasAnyResultValue,
+	SALICYLATE_TOXIC_MG_L
+} from './utils';
 
 /**
  * Detects safety-critical flags independently of the four axes. Flag
@@ -10,7 +14,7 @@ export function detectFlags(r: ToxicologyResult): Flag[] {
 	const flags: Flag[] = [];
 
 	// ─── critical-result-alert (auto-raised with a toxic level) ───
-	if (hasToxicResult(r) || r.overallResultStatus === 'critical') {
+	if (isCriticalResult(r)) {
 		const paracetamol = r.paracetamolNomogram === 'above-treatment-line';
 		flags.push({
 			flagId: 'F-CRITICAL-RESULT-001',
@@ -37,7 +41,7 @@ export function detectFlags(r: ToxicologyResult): Flag[] {
 	}
 
 	// ─── abnormal-requiring-action ───
-	if (r.overallResultStatus === 'abnormal' && !hasToxicResult(r)) {
+	if (r.overallResultStatus === 'abnormal' && !isCriticalResult(r)) {
 		flags.push({
 			flagId: 'F-ABNORMAL-ACTION-001',
 			category: 'abnormal-requiring-action',
@@ -48,16 +52,21 @@ export function detectFlags(r: ToxicologyResult): Flag[] {
 	}
 
 	// ─── urgent-referral ───
+	// Includes salicylate alongside lithium and carboxyhaemoglobin — the same
+	// severity class of over-threshold level (R-SEV-MAJOR-02 in
+	// severity-rules.ts), and the SALICYLATE_TOXIC_MG_L constant it already
+	// reuses.
 	if (
 		(r.lithiumLevelMmolL !== null && r.lithiumLevelMmolL >= 1.5) ||
-		(r.carboxyhaemoglobinPercent !== null && r.carboxyhaemoglobinPercent >= 10)
+		(r.carboxyhaemoglobinPercent !== null && r.carboxyhaemoglobinPercent >= 10) ||
+		(r.salicylateLevelMgL !== null && r.salicylateLevelMgL >= SALICYLATE_TOXIC_MG_L)
 	) {
 		flags.push({
 			flagId: 'F-URGENT-REFERRAL-001',
 			category: 'urgent-referral',
 			priority: 'medium',
 			description:
-				'A lithium or carboxyhaemoglobin level is in a range that may warrant urgent referral.',
+				'A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.',
 			suggestedAction: 'Consider urgent referral to the appropriate specialist / toxicology team.'
 		});
 	}
@@ -114,7 +123,7 @@ export function detectFlags(r: ToxicologyResult): Flag[] {
 
 	// ─── unexpected-finding (abnormal but no originating request linked) ───
 	if (
-		(hasToxicResult(r) || r.overallResultStatus === 'abnormal') &&
+		(isCriticalResult(r) || r.overallResultStatus === 'abnormal') &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

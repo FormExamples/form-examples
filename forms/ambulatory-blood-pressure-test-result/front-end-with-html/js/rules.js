@@ -125,6 +125,7 @@ function hasAnyAbnormalFinding(r) {
     r.severeHypertension ||
     r.nocturnalHypertension ||
     daytimeHypertensive(r) ||
+    nighttimeHypertensive(r) ||
     twentyFourHourHypertensive(r)
   );
 }

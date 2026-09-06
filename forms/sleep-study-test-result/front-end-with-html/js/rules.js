@@ -52,11 +52,16 @@ function hasCriticalFinding(r) {
  * @returns {boolean}
  */
 function hasAnyAbnormalFinding(r) {
+  const band = ahiSeverityBand(r.apnoeaHypopnoeaIndex);
   return (
     r.obstructiveSleepApnoea ||
     r.centralSleepApnoea ||
     r.nocturnalHypoventilation ||
-    r.significantDesaturation
+    r.significantDesaturation ||
+    // gradeSeverity independently grades a mild/moderate/severe AHI band
+    // from the raw apnoeaHypopnoeaIndex measurement, even when none of the
+    // structured booleans above are set — Axis A must agree.
+    (band !== '' && band !== 'none')
   );
 }
 

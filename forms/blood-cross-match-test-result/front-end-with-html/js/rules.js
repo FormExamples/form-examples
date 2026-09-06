@@ -67,7 +67,10 @@ function hasAnyAbnormalFinding(r) {
     r.antibodyScreenResult === 'positive' ||
     isAboDiscrepancy(r) ||
     isTwoSampleRuleUnmet(r) ||
-    insufficientUnits(r)
+    insufficientUnits(r) ||
+    // gradeSeverity independently grades special component requirements on
+    // a not-yet-compatible crossmatch as minor — Axis A must agree.
+    (r.specialRequirements.trim() !== '' && r.crossmatchResult !== 'compatible')
   );
 }
 

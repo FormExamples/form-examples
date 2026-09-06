@@ -1,4 +1,4 @@
-import { hasCriticalFinding, nighttimeHypertensive, recordingIsInadequate } from './rules.js';
+import { hasCriticalFinding, nighttimeHypertensive, severeByAverages, recordingIsInadequate } from './rules.js';
 
 // Flagged-issue detection (safety flags). Faithful vanilla-JavaScript port of
 // the SvelteKit engine `src/lib/engine/flagged-issues.ts`.
@@ -126,8 +126,12 @@ function detectFlags(r) {
   }
 
   // ─── unexpected-finding (abnormal but no originating request linked) ───
+  // Aligned with hasCriticalFinding: severe hypertension by the averaged
+  // measurements alone (severeByAverages) is just as much an unexpected
+  // significant finding as an explicitly confirmed severeHypertension flag,
+  // and must not go unflagged just because no request reference is on file.
   if (
-    (r.hypertensionConfirmed || r.severeHypertension) &&
+    (r.hypertensionConfirmed || r.severeHypertension || severeByAverages(r)) &&
     r.originatingRequestReference.trim() === ''
   ) {
     flags.push({

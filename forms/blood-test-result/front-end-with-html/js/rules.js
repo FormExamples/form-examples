@@ -43,6 +43,25 @@ function hasAbnormalResult(r) {
 }
 
 /**
+ * Whether the report has any classification-worthy abnormality: an abnormal
+ * result, or a deviating structured band (eGFR CKD stage or HbA1c band).
+ *
+ * Deliberately separate from `hasAbnormalResult`: `gradeSeverity` checks
+ * `hasAbnormalResult` first (for its 'moderate' tier) and only reaches its
+ * own dedicated structured-band check afterwards (for 'minor') — folding the
+ * structured-band condition into `hasAbnormalResult` itself would make that
+ * 'minor' branch unreachable dead code. `classifyResult` uses this wider
+ * predicate instead, so Axis A agrees whenever Axis B grades minor or above.
+ * @param {BloodTestResult} r
+ * @returns {boolean}
+ */
+function hasAnyClassifiableAbnormality(r) {
+  if (hasAbnormalResult(r)) return true;
+  const structured = structuredReportingCategory(r);
+  return structured !== '' && !structured.includes('G1') && !structured.includes('normal');
+}
+
+/**
  * The full set of analyte result values, in panel order, with display
  * metadata. Mirrors `analyteValues` in `utils.ts`.
  * @param {BloodTestResult} r
@@ -139,12 +158,13 @@ function classifyResult(r) {
     return { resultClassification: 'inconclusive', firedRules };
   }
 
-  if (hasAbnormalResult(r)) {
+  if (hasAnyClassifiableAbnormality(r)) {
     firedRules.push({
       ruleId: 'R-CLASS-ABNORMAL-01',
       axis: 'classification',
       category: 'abnormal-result',
-      description: 'One or more abnormal results are present; classified as abnormal.'
+      description:
+        'One or more abnormal results are present, or a structured band (eGFR CKD stage or HbA1c band) deviates from normal; classified as abnormal.'
     });
     return { resultClassification: 'abnormal', firedRules };
   }

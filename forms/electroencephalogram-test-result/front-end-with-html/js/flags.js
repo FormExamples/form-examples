@@ -122,8 +122,12 @@ function detectFlags(r) {
   }
 
   // ─── unexpected-finding (abnormal but no originating request linked) ───
+  // Aligned with hasCriticalFinding: status epilepticus is just as much an
+  // unexpected significant finding as a recorded seizure or epileptiform
+  // discharges, and must not go unflagged just because no request reference
+  // is on file.
   if (
-    (r.seizureRecorded || r.epileptiformDischarges) &&
+    (r.statusEpilepticus || r.seizureRecorded || r.epileptiformDischarges) &&
     r.originatingRequestReference.trim() === ''
   ) {
     flags.push({

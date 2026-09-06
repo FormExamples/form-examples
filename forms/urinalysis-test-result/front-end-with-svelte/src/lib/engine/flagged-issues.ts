@@ -1,5 +1,10 @@
 import type { UrinalysisResult, Flag, FlagPriority } from './types';
-import { hasCriticalFinding, hasSignificantGrowth, hasUtiFeatures, isDipstickPositive } from './utils';
+import {
+	hasCriticalFinding,
+	hasSignificantGrowth,
+	hasAnyAbnormalFinding,
+	isDipstickPositive
+} from './utils';
 
 /**
  * Detects safety-critical flags independently of the four axes. Flag
@@ -110,8 +115,13 @@ export function detectFlags(r: UrinalysisResult): Flag[] {
 		});
 	}
 
-	// ─── discrepancy-with-request (UTI features but no originating request) ───
-	if (hasUtiFeatures(r) && r.originatingRequestReference.trim() === '') {
+	// ─── discrepancy-with-request (abnormal but no originating request) ───
+	// Aligned with hasAnyAbnormalFinding, per this flag's own description
+	// ("Abnormal findings are present") — UTI features alone was a strict
+	// subset (significant growth, dipstick blood/protein/glucose, visible
+	// haematuria, suspected urosepsis, a critical organism, or an abnormal/
+	// critical overall status all went unflagged when unlinked).
+	if (hasAnyAbnormalFinding(r) && r.originatingRequestReference.trim() === '') {
 		flags.push({
 			flagId: 'F-DISCREPANCY-001',
 			category: 'discrepancy-with-request',

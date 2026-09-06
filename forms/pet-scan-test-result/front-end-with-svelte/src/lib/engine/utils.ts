@@ -23,7 +23,15 @@ export function hasCriticalFinding(r: PetScanResult): boolean {
 
 /** Whether any structured abnormal finding is present. */
 export function hasAnyAbnormalFinding(r: PetScanResult): boolean {
-	return r.hypermetabolicLesion || r.nodalUptake || r.distantMetastasis;
+	return (
+		r.hypermetabolicLesion ||
+		r.nodalUptake ||
+		r.distantMetastasis ||
+		// gradeSeverity independently grades an SUVmax >= 10 as major from the
+		// raw measurement, even when the hypermetabolicLesion checkbox itself is
+		// unset — Axis A must agree.
+		(r.suvMax !== null && r.suvMax >= 10)
+	);
 }
 
 /** Whether the report describes only incidental findings (no abnormal ones). */

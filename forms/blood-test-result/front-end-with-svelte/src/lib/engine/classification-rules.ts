@@ -1,5 +1,5 @@
 import type { BloodTestResult, ResultClassification, FiredRule } from './types';
-import { hasCriticalValue, hasAbnormalResult, hasAnyResultValue } from './utils';
+import { hasCriticalValue, hasAnyClassifiableAbnormality, hasAnyResultValue } from './utils';
 
 /**
  * Axis A — result classification.
@@ -54,12 +54,13 @@ export function classifyResult(r: BloodTestResult): {
 		return { resultClassification: 'inconclusive', firedRules };
 	}
 
-	if (hasAbnormalResult(r)) {
+	if (hasAnyClassifiableAbnormality(r)) {
 		firedRules.push({
 			ruleId: 'R-CLASS-ABNORMAL-01',
 			axis: 'classification',
 			category: 'abnormal-result',
-			description: 'One or more abnormal results are present; classified as abnormal.'
+			description:
+				'One or more abnormal results are present, or a structured band (eGFR CKD stage or HbA1c band) deviates from normal; classified as abnormal.'
 		});
 		return { resultClassification: 'abnormal', firedRules };
 	}

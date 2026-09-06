@@ -245,6 +245,13 @@
             "priority": "medium",
             "description": "No impression / conclusion has been recorded.",
             "suggestedAction": "Add an impression that answers the clinical question."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
           }
         ]
       }

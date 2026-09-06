@@ -112,7 +112,17 @@ export function detectFlags(r: PulmonaryFunctionResult): Flag[] {
 
 	// ─── unexpected-finding (abnormal but no originating request linked) ───
 	if (
-		(r.airflowObstruction || r.restriction || r.reducedGasTransfer) &&
+		// Aligned with hasAnyAbnormalFinding: a structured obstructive /
+		// restrictive / mixed ventilatory pattern is just as much an unexpected
+		// significant finding as the airflowObstruction/restriction/
+		// reducedGasTransfer checkboxes, and must not go unflagged just because
+		// no request reference is on file.
+		(r.airflowObstruction ||
+			r.restriction ||
+			r.reducedGasTransfer ||
+			r.ventilatoryPattern === 'obstructive' ||
+			r.ventilatoryPattern === 'restrictive' ||
+			r.ventilatoryPattern === 'mixed') &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

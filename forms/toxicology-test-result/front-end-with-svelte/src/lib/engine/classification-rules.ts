@@ -1,5 +1,5 @@
 import type { ToxicologyResult, ResultClassification, FiredRule } from './types';
-import { hasToxicResult, hasAnyResultValue } from './utils';
+import { isCriticalResult, hasAnyResultValue } from './utils';
 
 /**
  * Axis A — result classification.
@@ -22,13 +22,13 @@ export function classifyResult(r: ToxicologyResult): {
 } {
 	const firedRules: FiredRule[] = [];
 
-	if (hasToxicResult(r) || r.overallResultStatus === 'critical') {
+	if (isCriticalResult(r)) {
 		firedRules.push({
 			ruleId: 'R-CLASS-CRITICAL-01',
 			axis: 'classification',
 			category: 'toxic-level',
 			description:
-				'A toxic level is present (paracetamol above the treatment line, toxic level flag, or overall critical status); classified as critical.'
+				'A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical.'
 		});
 		return { resultClassification: 'critical', firedRules };
 	}

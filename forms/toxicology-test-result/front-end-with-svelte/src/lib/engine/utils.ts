@@ -13,6 +13,13 @@ import type {
 // Toxicology predicates
 // ──────────────────────────────────────────────
 
+// Therapeutic / toxic thresholds (grounded in TOXBASE / NPIS and the MHRA
+// paracetamol nomogram). Modest elevation of a narrow-range drug (lithium) or
+// a clear poisoning threshold (carboxyhaemoglobin) raises severity.
+export const LITHIUM_TOXIC_MMOL_L = 1.5;
+export const CARBOXYHAEMOGLOBIN_TOXIC_PERCENT = 10;
+export const SALICYLATE_TOXIC_MG_L = 300;
+
 /**
  * A toxic result (paracetamol above the treatment line, or any
  * `toxicLevelPresent`) auto-escalates Axis D to critical-alert. Mirrors the
@@ -22,9 +29,25 @@ export function hasToxicResult(r: ToxicologyResult): boolean {
 	return r.toxicLevelPresent || r.paracetamolNomogram === 'above-treatment-line';
 }
 
-/** Whether the report describes a critical conclusion or toxic level. */
+/**
+ * Whether the report describes a critical conclusion or toxic level.
+ *
+ * Deliberately not folded into hasToxicResult itself: gradeSeverity checks
+ * hasToxicResult first, so widening it here would make its own dedicated
+ * over-threshold branch (R-SEV-MAJOR-02) unreachable dead code. gradeSeverity
+ * independently grades lithium, carboxyhaemoglobin, or salicylate above their
+ * toxic thresholds as major — Axis A must classify these critical too, or the
+ * study reports normal despite a major severity grade.
+ */
 export function isCriticalResult(r: ToxicologyResult): boolean {
-	return hasToxicResult(r) || r.overallResultStatus === 'critical';
+	return (
+		hasToxicResult(r) ||
+		r.overallResultStatus === 'critical' ||
+		(r.lithiumLevelMmolL !== null && r.lithiumLevelMmolL >= LITHIUM_TOXIC_MMOL_L) ||
+		(r.carboxyhaemoglobinPercent !== null &&
+			r.carboxyhaemoglobinPercent >= CARBOXYHAEMOGLOBIN_TOXIC_PERCENT) ||
+		(r.salicylateLevelMgL !== null && r.salicylateLevelMgL >= SALICYLATE_TOXIC_MG_L)
+	);
 }
 
 /** Whether any assay result value has been recorded. */

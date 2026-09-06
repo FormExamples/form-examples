@@ -37,7 +37,11 @@ export function hasAnyAbnormalFinding(r: AngiographyResult): boolean {
 		r.aneurysm ||
 		r.dissection ||
 		r.activeExtravasation ||
-		r.thrombus
+		r.thrombus ||
+		// gradeSeverity independently grades any stenosis >= 50% moderate (or
+		// >= 70% major) from the raw maxStenosisPercent measurement, even when
+		// the significantStenosis checkbox itself is unset — Axis A must agree.
+		(r.maxStenosisPercent !== null && r.maxStenosisPercent >= 50)
 	);
 }
 

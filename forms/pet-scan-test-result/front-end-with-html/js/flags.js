@@ -127,8 +127,15 @@ function detectFlags(r) {
   }
 
   // --- unexpected-finding (abnormal but no originating request linked) ---
+  // Aligned with hasAnyAbnormalFinding / hasCriticalFinding: nodal uptake and
+  // a progressive treatment response are just as much an unexpected
+  // significant finding as a hypermetabolic lesion or distant metastasis, and
+  // must not go unflagged just because no request reference is on file.
   if (
-    (r.hypermetabolicLesion || r.distantMetastasis) &&
+    (r.hypermetabolicLesion ||
+      r.nodalUptake ||
+      r.distantMetastasis ||
+      r.treatmentResponse === 'progressive') &&
     r.originatingRequestReference.trim() === ''
   ) {
     flags.push({

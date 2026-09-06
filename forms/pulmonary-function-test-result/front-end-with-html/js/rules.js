@@ -47,7 +47,15 @@ function hasAnyAbnormalFinding(r) {
     r.reducedGasTransfer ||
     r.ventilatoryPattern === 'obstructive' ||
     r.ventilatoryPattern === 'restrictive' ||
-    r.ventilatoryPattern === 'mixed'
+    r.ventilatoryPattern === 'mixed' ||
+    // gradeSeverity independently grades any recorded severity (mild,
+    // moderate, severe, or very-severe) as minor/moderate/major from this
+    // field alone, even when none of the structured booleans above are set —
+    // Axis A must agree.
+    r.severity === 'mild' ||
+    r.severity === 'moderate' ||
+    r.severity === 'severe' ||
+    r.severity === 'very-severe'
   );
 }
 

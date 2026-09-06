@@ -102,7 +102,14 @@ export function detectFlags(r: SleepStudyResult): Flag[] {
 
 	// ─── unexpected-finding (significant finding but no originating request linked) ───
 	if (
-		(r.obstructiveSleepApnoea || r.nocturnalHypoventilation) &&
+		// Aligned with hasAnyAbnormalFinding: central sleep apnoea and
+		// significant desaturation are just as much an unexpected significant
+		// finding as obstructive sleep apnoea or nocturnal hypoventilation, and
+		// must not go unflagged just because no request reference is on file.
+		(r.obstructiveSleepApnoea ||
+			r.centralSleepApnoea ||
+			r.nocturnalHypoventilation ||
+			r.significantDesaturation) &&
 		r.originatingRequestReference.trim() === ''
 	) {
 		flags.push({

@@ -139,7 +139,7 @@
             "ruleId": "R-CLASS-ABNORMAL-01",
             "axis": "classification",
             "category": "abnormal-result",
-            "description": "One or more abnormal results are present; classified as abnormal."
+            "description": "One or more abnormal results are present, or a structured band (eGFR CKD stage or HbA1c band) deviates from normal; classified as abnormal."
           },
           {
             "ruleId": "R-SEV-MODERATE-01",

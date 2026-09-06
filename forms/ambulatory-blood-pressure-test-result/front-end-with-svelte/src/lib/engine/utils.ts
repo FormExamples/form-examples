@@ -103,6 +103,7 @@ export function hasAnyAbnormalFinding(r: AmbulatoryBloodPressureResult): boolean
 		r.severeHypertension ||
 		r.nocturnalHypertension ||
 		daytimeHypertensive(r) ||
+		nighttimeHypertensive(r) ||
 		twentyFourHourHypertensive(r)
 	);
 }

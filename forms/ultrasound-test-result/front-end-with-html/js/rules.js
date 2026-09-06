@@ -49,7 +49,11 @@ function hasAnyAbnormalFinding(r) {
     r.freeFluid ||
     r.dvtPresent ||
     r.aneurysm ||
-    r.organEnlargement
+    r.organEnlargement ||
+    // gradeSeverity independently grades a lesion >= 30mm as major from the
+    // raw measurement, even when the massOrLesion checkbox itself is unset —
+    // Axis A must agree.
+    (r.largestLesionSizeMm !== null && r.largestLesionSizeMm >= 30)
   );
 }
 

@@ -95,7 +95,15 @@ function hasAnyAbnormalFinding(r) {
     r.raisedIntraocularPressure ||
     r.diabeticRetinopathy ||
     r.opticDiscAbnormality ||
-    r.macularAbnormality
+    r.macularAbnormality ||
+    // gradeSeverity independently grades a referable retinopathy grade, an
+    // elevated raw IOP measurement, or a bilateral visual-field defect result
+    // from their own dedicated fields — each independent of the boolean
+    // checkboxes above — so Axis A must agree even when those checkboxes are
+    // unset.
+    hasReferableRetinopathy(r) ||
+    hasElevatedIop(r) ||
+    r.visualFieldResult === 'bilateral-defect'
   );
 }
 
