@@ -37,6 +37,16 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 See [`index.md`](../index.md) for the scoring instrument, ranges, and categories applicable to this form.
 
+`deriveRecommendation` maps `moderate` abnormality severity to `repeat-marker`
+— the same recommendation `inconclusive` classification maps to — aligned
+with every sibling `*-test-result` engine's pattern (each maps `moderate` and
+`inconclusive` together onto its own domain-specific "repeat/re-test"
+recommendation: `further-testing`, `further-imaging`, `further-monitoring`,
+or here `repeat-marker`). `moderate` must never be more alarming than
+`major` (`specialist-referral`). Fixed 2026-09-06; previously verified and
+documented (not silently patched, pending confirmation this wasn't a
+deliberate divergence) in `examples/personas.json`.
+
 ## 4. Inputs and outputs
 
 **Inputs.** A typed assessment object whose shape mirrors the SQL schema in `sql/` (8 migration files). Unanswered text and enum fields default to `''`; unanswered numeric, date, and time fields default to `null`.

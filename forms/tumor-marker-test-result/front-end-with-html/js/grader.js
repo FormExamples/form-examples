@@ -87,8 +87,13 @@ function calculateGrade(result) {
 function deriveRecommendation(classification, severity, urgency) {
   if (urgency === 'critical-alert') return 'urgent-review';
   if (severity === 'major') return 'specialist-referral';
-  if (severity === 'moderate') return 'urgent-review';
+  // 'moderate' shares 'repeat-marker' with 'inconclusive', aligned with
+  // every sibling *-test-result engine's pattern (moderate and inconclusive
+  // both map to that engine's own "repeat/re-test" recommendation, placed
+  // between the major and minor tiers) — 'moderate' must not be MORE
+  // alarming than 'major'.
   if (classification === 'inconclusive') return 'repeat-marker';
+  if (severity === 'moderate') return 'repeat-marker';
   if (severity === 'minor') return 'routine-follow-up';
   if (classification === 'normal') return 'no-action';
   return 'routine-follow-up';

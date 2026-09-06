@@ -97,7 +97,12 @@ describe('Tumour-marker four-axis grading engine', () => {
 		expect(g.resultClassification).toBe('abnormal');
 		expect(g.abnormalitySeverity).toBe('moderate');
 		expect(g.followUpUrgency).toBe('urgent');
-		expect(g.recommendation).toBe('urgent-review');
+		// 'moderate' shares 'repeat-marker' with 'inconclusive', aligned with
+		// every sibling *-test-result engine — deriveRecommendation reads
+		// severity, not followUpUrgency, for this tier, so a 'moderate'
+		// severity result maps here even though Axis D is independently
+		// 'urgent' via the action-signal rule below.
+		expect(g.recommendation).toBe('repeat-marker');
 		expect(g.firedRules.some((r) => r.ruleId === 'R-CLASS-ABNORMAL-01')).toBe(true);
 		expect(g.firedRules.some((r) => r.ruleId === 'R-FU-URGENT-01')).toBe(true);
 	});

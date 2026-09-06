@@ -1691,11 +1691,31 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       neurodiversity-adjustment-response` 2/2 passed; `bin/test-form
       neurodiversity-adjustment-response` PASS. Fleet: `bin/test-personas`
       forms 352/352 PASS, personas 1176/1176 PASS, 0 FAIL.
-- [ ] **tumor-marker-test-result: `moderate` → `urgent-review`.** Unlike
-      every sibling `*-test-result` engine (which maps `moderate` to
-      `specialist-referral` / `further-testing`), this one maps it to
-      `urgent-review`. Plausibly deliberate (markers are poor screening
-      tests) — confirm and write it into `spec/index.md`, or align.
+- [x] **tumor-marker-test-result: `moderate` → `urgent-review`.** FIXED
+      2026-09-06, per the user's explicit decision to align rather than
+      keep the divergence. `deriveRecommendation` mapped `moderate`
+      severity to `urgent-review` — MORE alarming than `major`'s
+      `specialist-referral` — unlike every sibling `*-test-result` engine,
+      which maps `moderate` (alongside `inconclusive`) to that engine's
+      own "repeat/re-test" recommendation (`further-testing`/
+      `further-imaging`/`further-monitoring`). Aligned `moderate` to this
+      engine's own equivalent term, `repeat-marker` (already used for the
+      `inconclusive` case), in both `js/grader.js` and
+      `src/lib/engine/grader.ts`; confirmed no Loco-side scoring logic
+      exists. Updated the existing `grader.test.ts` boundary test (which
+      asserted the old `urgent-review` value directly) to expect
+      `repeat-marker`, noting that this severity-only mapping is unchanged
+      even though `followUpUrgency` is independently `urgent` via the
+      action-signal rule for that same persona/fixture — a structural
+      trait this engine shares with every sibling, not a new
+      inconsistency (13/13 tests passed). Re-ran `bin/test-personas
+      --update tumor-marker-test-result` (3/3 PASS — the moderate-severity
+      persona's `expected.recommendation` changed from `urgent-review` to
+      `repeat-marker`) and updated that persona's description and the
+      file's top-level `note`. Documented the aligned mapping in
+      `spec/index.md` §3. `bin/test-e2e --html tumor-marker-test-result`
+      2/2 passed. Fleet: `bin/test-personas` forms 352/352 PASS, personas
+      1176/1176 PASS, 0 FAIL.
 - [ ] **Sweep the other 34 `*-test-result` persona notes** for the same
       class of asymmetry (a severity trigger that is not a classification
       or unexpected-finding trigger) and file any not listed above.
