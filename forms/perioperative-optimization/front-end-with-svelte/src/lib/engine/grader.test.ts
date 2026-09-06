@@ -69,6 +69,16 @@ describe("Blank assessment", () => {
   it("blank all optimized/na", () => {
     expect(blank.counts.optimized).toEqual(8);
   });
+  it("blank domains are all not-applicable, not falsely optimized", () => {
+    // The counts.optimized check above passes either way, since it counts
+    // 'optimized' and 'not-applicable' together — this is the test that
+    // actually distinguishes them. Every domain must report
+    // 'not-applicable' here: none of the eight has had any of its own
+    // fields answered, so none can be genuinely "optimized".
+    for (const d of blank.domains) {
+      expect(d.status).toEqual("not-applicable");
+    }
+  });
 });
 
 describe("Anaemia domain, and the 4 vs 8 week lead time", () => {

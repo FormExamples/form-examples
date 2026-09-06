@@ -1381,21 +1381,42 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       pre-operative-assessment-by-clinician` 2/2 passed. Fleet:
       `bin/test-personas` forms 352/352 PASS, personas 1173/1173 PASS,
       0 FAIL.
-- [ ] **perioperative-optimization: an entirely blank assessment reports
-      'ready' with zero flags.** Five of the eight domain evaluators
-      (anaemia, alcohol, nutrition, physical-fitness, cardiorespiratory)
-      hard-code `applicable: true` regardless of whether any field in the
-      domain was ever answered — only glycaemic-control, smoking, and
-      medication compute it from real data. Verified directly:
-      `calculateOptimization` over an assessment with nothing entered
-      except the two dates reports those five domains all `'optimized'`,
-      `computedReadiness: 'ready'`, 0 flags — indistinguishable from a
-      genuinely-assessed, all-clear patient. Fix: derive `applicable` per
-      domain from whether any of its own fields are answered, mirroring
-      the three domains that already do this correctly; same three-stack
-      requirement (HTML `js/domain-rules.js`, Svelte
-      `src/lib/engine/domain-rules.ts`, Loco). Documented in
-      `examples/personas.json`'s `note`, not yet fixed.
+- [x] **perioperative-optimization: an entirely blank assessment reports
+      'ready' with zero flags.** FIXED 2026-09-06. Five of the eight
+      domain evaluators (anaemia, alcohol, nutrition, physical-fitness,
+      cardiorespiratory) hard-coded `applicable: true` regardless of
+      whether any field in the domain was ever answered — only
+      glycaemic-control, smoking, and medication computed it from real
+      data. `calculateOptimization` over an assessment with nothing
+      entered except the two dates used to report those five domains all
+      `'optimized'` — indistinguishable, per domain, from a genuinely-
+      assessed, all-clear patient. Fixed by deriving `applicable` per
+      domain from whether any of that domain's own measures are non-null/
+      non-blank (anaemia: hb/ferritin/tsat; alcohol: units/auditC;
+      nutrition: must/pct; physical-fitness: mets/dasi/walk/at;
+      cardiorespiratory: sbp/dbp/ef/stopBang/spo2/asthmaControl/
+      copdControl), mirroring the three domains that already did this
+      correctly, in both `js/domain-rules.js` and
+      `src/lib/engine/domain-rules.ts`. Checked for the Loco/`todo/`
+      third stack this item's own text assumed exists: confirmed the
+      current `back-end-with-loco` has no scoring logic of its own
+      (JSON-API-only) and no `todo/` prototype exists for this form, so
+      only two stacks actually needed the change. `computedReadiness` is
+      unaffected either way for a wholly blank assessment (both
+      `optimized` and `not-applicable` map to the same `ready` band, and
+      `counts.optimized` counts both together) — the fix's real, visible
+      effect is per-domain transparency in the report/dashboard, not the
+      composite verdict; documented this explicitly in `spec/index.md`
+      §4. Added a dedicated Vitest boundary test asserting every domain
+      is `not-applicable` (not `optimized`) for a blank assessment — the
+      existing `counts.optimized === 8` test passed either way and could
+      not have caught this (111/111 passed, up from 110). All 3 existing
+      personas were unaffected (real answered data in every domain);
+      added a 4th persona pinning the fixed all-`not-applicable` blank
+      case and updated the file's top-level `note`. `bin/test-personas
+      --update perioperative-optimization` 4/4 PASS; `bin/test-e2e --html
+      perioperative-optimization` 2/2 passed. Fleet: `bin/test-personas`
+      forms 352/352 PASS, personas 1175/1175 PASS, 0 FAIL.
 - [ ] **diabetes-assessment: pre-proliferative retinopathy and maculopathy
       raise no eye rule or flag.** `retinopathyStatus` has five options
       (none, background, preProliferative, proliferative, maculopathy) but

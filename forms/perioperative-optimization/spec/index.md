@@ -72,6 +72,15 @@ weeksToSurgery = floor((plannedSurgeryDate - assessmentDate) / 7)   // null if e
 
 `weeksShortfall = leadTime - weeksToSurgery` when positive, else `null`.
 
+Every domain must derive "the domain applies" from whether at least one of
+its own measures has actually been recorded (mirroring, e.g., glycaemic
+control's `hasDiabetes || hba1c !== null`) — never a hard-coded `true`. An
+entirely unassessed domain reports `not-applicable`, not `optimized`: an
+"optimized" status must mean the domain was genuinely checked and found
+clear, not merely that nothing was ever entered. Fixed fleet-wide across
+all eight domains 2026-09-06; previously verified and documented (not
+silently patched) in `examples/personas.json`.
+
 ## 5. Surgical readiness (max-grade)
 
 | Band | Requirement |

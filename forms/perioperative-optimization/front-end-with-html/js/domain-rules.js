@@ -153,6 +153,10 @@ function evaluateAnaemia(data) {
   // Intravenous iron works in 4 weeks; oral needs 8.
   const leadTimeWeeks = data.anaemia.anaemiaTreatmentRoute === 'intravenous' ? 4 : 8;
   const started = data.anaemia.anaemiaTreatmentStarted === 'yes';
+  // The domain applies only once at least one of its own lab values has
+  // actually been recorded — an entirely blank domain has nothing to say
+  // "optimized" about and must report 'not-applicable' instead.
+  const applicable = hb !== null || ferritin !== null || tsat !== null;
 
   if (hb !== null && hb < 80) {
     return {
@@ -194,7 +198,7 @@ function evaluateAnaemia(data) {
       intervention: 'Start iron replacement; consider the intravenous route where absorption is impaired.'
     };
   }
-  return { triggered: false, applicable: true, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
+  return { triggered: false, applicable, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
 }
 
 function evaluateGlycaemicControl(data) {
@@ -247,6 +251,10 @@ function evaluateAlcohol(data) {
   const sex = data.patient.sex;
   const leadTimeWeeks = 4;
   const started = data.alcohol.alcoholReductionPlanAgreed === 'yes';
+  // The domain applies only once at least one of its own measures has
+  // actually been recorded — an entirely blank domain must report
+  // 'not-applicable', not a falsely-reassuring 'optimized'.
+  const applicable = units !== null || auditC !== null;
 
   if (auditC !== null && auditC >= 8) {
     return {
@@ -280,7 +288,7 @@ function evaluateAlcohol(data) {
       intervention: 'Brief intervention and a reduction plan.'
     };
   }
-  return { triggered: false, applicable: true, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
+  return { triggered: false, applicable, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
 }
 
 function evaluateNutrition(data) {
@@ -290,6 +298,10 @@ function evaluateNutrition(data) {
   const started =
     data.nutrition.oralNutritionalSupplements === 'yes' ||
     data.nutrition.dietitianReferral === 'yes';
+  // The domain applies only once at least one of its own measures has
+  // actually been recorded — an entirely blank domain must report
+  // 'not-applicable', not a falsely-reassuring 'optimized'.
+  const applicable = must !== null || pct !== null;
 
   if (must !== null && must >= 2) {
     return {
@@ -307,7 +319,7 @@ function evaluateNutrition(data) {
       intervention: 'Dietitian referral and nutritional support; investigate the cause of the weight loss.'
     };
   }
-  return { triggered: false, applicable: true, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
+  return { triggered: false, applicable, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
 }
 
 function evaluatePhysicalFitness(data) {
@@ -317,6 +329,10 @@ function evaluatePhysicalFitness(data) {
   const at = num(data.fitness.cpetAnaerobicThreshold);
   const leadTimeWeeks = 6;
   const started = data.fitness.prehabilitationEnrolled === 'yes';
+  // The domain applies only once at least one of its own measures has
+  // actually been recorded — an entirely blank domain must report
+  // 'not-applicable', not a falsely-reassuring 'optimized'.
+  const applicable = mets !== null || dasi !== null || walk !== null || at !== null;
 
   const intervention =
     'A tailored prehabilitation programme combining aerobic and resistance exercise, ideally multimodal alongside the nutrition and psychological domains.';
@@ -353,7 +369,7 @@ function evaluatePhysicalFitness(data) {
       intervention
     };
   }
-  return { triggered: false, applicable: true, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
+  return { triggered: false, applicable, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
 }
 
 /** The medicine classes that need a perioperative hold-and-restart plan. */
@@ -396,6 +412,17 @@ function evaluateCardiorespiratory(data) {
   const started =
     data.cardioresp.inhalerTechniqueChecked === 'yes' ||
     data.plan.referralCardiorespiratory === 'yes';
+  // The domain applies only once at least one of its own measures has
+  // actually been recorded — an entirely blank domain must report
+  // 'not-applicable', not a falsely-reassuring 'optimized'.
+  const applicable =
+    sbp !== null ||
+    dbp !== null ||
+    ef !== null ||
+    stopBang !== null ||
+    spo2 !== null ||
+    data.cardioresp.asthmaControl !== '' ||
+    data.cardioresp.copdControl !== '';
 
   if (ef !== null && ef < 40) {
     return {
@@ -438,7 +465,7 @@ function evaluateCardiorespiratory(data) {
       intervention: 'Refer for a sleep study; plan for postoperative monitoring and opioid caution.'
     };
   }
-  return { triggered: false, applicable: true, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
+  return { triggered: false, applicable, leadTimeWeeks, started, ruleId: '', finding: '', intervention: '' };
 }
 
 /** The evaluator for each domain, keyed by domain. */
