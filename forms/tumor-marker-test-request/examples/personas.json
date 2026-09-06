@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Verified finding: this engine's `redirect` recommendation (interpretationBand === 'misuse-risk') is unreachable in practice — `scoreAppropriateness` forces `usually-not-appropriate` in the exact same screening-misuse case that `scoreInterpretation` forces `misuse-risk`, and `deriveRecommendation` checks the appropriateness band first, so screening misuse always resolves to query-referrer, never redirect. The third persona below demonstrates this directly rather than an unreachable redirect scenario.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. FIXED 2026-09-06: `deriveRecommendation`'s `redirect` recommendation (interpretationBand === 'misuse-risk') used to be unreachable in practice — `scoreAppropriateness` forces `usually-not-appropriate` in the exact same screening-misuse case that `scoreInterpretation` forces `misuse-risk`, and `deriveRecommendation` checked the appropriateness band first, so screening misuse always resolved to query-referrer, never redirect. Fixed by checking `misuse-risk` first in both `js/grader.js` and `src/lib/engine/grader.ts`; the other route to `usually-not-appropriate` (every selected marker mismatched, no screening misuse involved) is unaffected and still resolves to query-referrer. The third persona below (renamed from its old `query-referrer-...` name) now correctly recommends `redirect`. Separately noted, NOT fixed here (out of this specific finding's scope, and needs a product decision this session isn't positioned to make unilaterally): the `reject` recommendation in `RECOMMENDATION_LABELS` has no trigger anywhere in `deriveRecommendation` either, so it is equally unreachable — see tasks.md Phase 13.",
   "personas": [
     {
       "name": "routine-cancer-monitoring-ca15-3-with-baseline-complete",
@@ -176,8 +176,8 @@
       }
     },
     {
-      "name": "query-referrer-screening-high-risk-psa-misuse-incomplete",
-      "description": "A 'well man' PSA check requested as broad screening rather than for a specific clinical indication: PSA nominally matches the screening-high-risk indication in the marker-to-indication map, but this engine forces broad screening itself to usually-not-appropriate regardless of that per-marker match — and query-referrer wins on the appropriateness check before the misuse-risk interpretation band (which would otherwise map to `redirect`) is even consulted, since both are forced by the exact same screening-misuse condition. This makes `redirect` effectively unreachable in this engine — a real, verified finding, not an authoring gap. Several administrative fields are not yet captured — expect usually-not-appropriate + misuse-risk interpretation + routine + query-referrer, completeness below 100.",
+      "name": "redirect-screening-high-risk-psa-misuse-incomplete",
+      "description": "A 'well man' PSA check requested as broad screening rather than for a specific clinical indication: PSA nominally matches the screening-high-risk indication in the marker-to-indication map, but this engine forces broad screening itself to usually-not-appropriate regardless of that per-marker match. FIXED 2026-09-06: `deriveRecommendation` used to check the generic `usually-not-appropriate` appropriateness band before the `misuse-risk` interpretation band, so `redirect` was unreachable — every screening-misuse case (which always forces both bands together, since interpretationBand's misuse-risk is driven by the exact same screeningMisuse flag as appropriatenessBand) always resolved to the generic `query-referrer` first. Reordered so `misuse-risk` is checked first; this persona now correctly recommends `redirect` rather than `query-referrer`. Several administrative fields are not yet captured — expect usually-not-appropriate + misuse-risk interpretation + routine + redirect, completeness below 100.",
       "state": {
         "clinician": {
           "clinicianName": "Dr Wei Zhang",
@@ -229,8 +229,8 @@
         "completenessPercent": 67,
         "triageTier": "routine",
         "targetTimeframe": "Within 4-6 weeks",
-        "recommendation": "query-referrer",
-        "recommendationLabel": "Query the referrer",
+        "recommendation": "redirect",
+        "recommendationLabel": "Redirect / reconsider request",
         "firedRules": [
           {
             "ruleId": "R-APPROP-PSA-MATCH",

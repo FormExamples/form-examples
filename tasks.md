@@ -1540,12 +1540,39 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       --html coagulation-test-result` 2/2 passed. Fleet:
       `bin/test-personas` forms 352/352 PASS, personas 1174/1174 PASS,
       0 FAIL.
-- [ ] **tumor-marker-test-request: `redirect` recommendation is unreachable.**
-      `scoreAppropriateness` and `scoreInterpretation` are both forced by the
-      same screening-misuse condition and `deriveRecommendation` checks
-      appropriateness first, so `misuse-risk` always resolves to
-      `query-referrer`. Either give `redirect` a reachable trigger or remove
-      it from the enum, the SQL CHECK, and the report/dashboard labels.
+- [x] **tumor-marker-test-request: `redirect` recommendation is unreachable.**
+      FIXED 2026-09-06. `scoreAppropriateness` and `scoreInterpretation` are
+      both forced by the same screening-misuse condition and
+      `deriveRecommendation` checked appropriateness first, so `misuse-risk`
+      always resolved to `query-referrer`, never `redirect`. Picked
+      "give `redirect` a reachable trigger" over removing it: reordered
+      `deriveRecommendation` to check `interpretationBand === 'misuse-risk'`
+      before the generic `appropriatenessBand === 'usually-not-appropriate'`
+      check, in both `js/grader.js` and `src/lib/engine/grader.ts`. The
+      other route to `usually-not-appropriate` (every selected marker
+      mismatched, no screening misuse involved) is unaffected and still
+      resolves to `query-referrer` — verified with a new dedicated test.
+      Confirmed no Loco-side scoring logic exists, and the SQL `CHECK`
+      already permits `'redirect'`, so no third stack or schema change was
+      needed. Updated the existing `grader.test.ts` boundary test (which
+      had asserted the old, buggy `query-referrer` recommendation directly)
+      to expect `redirect`, and added a new test proving the non-screening
+      `usually-not-appropriate` route is untouched (12/12 passed, up from
+      10). Re-ran `bin/test-personas --update tumor-marker-test-request`
+      (3/3 PASS) and renamed the third persona from
+      `query-referrer-screening-high-risk-psa-misuse-incomplete` to
+      `redirect-screening-high-risk-psa-misuse-incomplete`, updating its
+      description and the file's top-level `note`. `bin/test-e2e --html
+      tumor-marker-test-request` 2/2 passed (the dashboard does not display
+      `recommendation` at all, so no stale display existed). Fleet:
+      `bin/test-personas` forms 352/352 PASS, personas 1174/1174 PASS,
+      0 FAIL.
+      **New finding surfaced while fixing this, not yet actioned:** the
+      `reject` recommendation in `RECOMMENDATION_LABELS` has no trigger
+      anywhere in `deriveRecommendation` either, so it is equally
+      unreachable. Left alone here — deciding when a tumour-marker request
+      should be outright rejected (vs. queried or redirected) is a product/
+      clinical judgement call, not a mechanical reorder like the fix above.
 - [ ] **microbiology-culture-test-result: completeness penalises a
       no-growth culture.** `R-COMP-SENSITIVITIES-01` requires
       `antibioticSensitivities` text even when `cultureResult` is

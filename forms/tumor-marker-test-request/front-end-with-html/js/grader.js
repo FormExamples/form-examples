@@ -13,8 +13,16 @@ import { scoreAppropriateness, scoreCompleteness, scoreInterpretation, scoreTria
  * four axes. Least-alarming wins only when nothing escalates.
  */
 function deriveRecommendation(appropriatenessBand, interpretationBand, completenessPercent) {
-  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  // `misuse-risk` is set if and only if scoreAppropriateness's own
+  // screeningMisuse flag was true, and that same flag unconditionally forces
+  // appropriatenessBand to 'usually-not-appropriate' too — so this check
+  // must run BEFORE the generic appropriateness check below, or `redirect`
+  // can never be reached: every misuse-risk case would already have
+  // returned the generic 'query-referrer' first. The generic check still
+  // catches the other route to 'usually-not-appropriate' (every selected
+  // marker mismatched, with no screening misuse involved).
   if (interpretationBand === 'misuse-risk') return 'redirect';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
   if (completenessPercent < 50) return 'query-referrer';
   return 'accept';
 }

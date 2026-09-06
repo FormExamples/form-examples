@@ -58,15 +58,33 @@ describe('Tumor marker request four-axis vetting engine', () => {
 		expect(g.flags.some((f) => f.category === 'suspected-cancer-2ww')).toBe(true);
 	});
 
-	it('forces misuse-risk + usually-not-appropriate for broad screening', () => {
+	it('forces misuse-risk + usually-not-appropriate for broad screening, recommending redirect', () => {
 		const r = createMonitoringRequest();
 		r.context.primaryIndication = 'screening-high-risk';
 		const g = calculateGrade(r);
 		expect(g.appropriatenessBand).toBe('usually-not-appropriate');
 		expect(g.interpretationBand).toBe('misuse-risk');
-		expect(g.recommendation).toBe('query-referrer');
+		// misuse-risk must be checked before the generic usually-not-appropriate
+		// branch in deriveRecommendation, or redirect can never be reached:
+		// screeningMisuse forces both bands together, so the generic branch
+		// would otherwise always intercept first.
+		expect(g.recommendation).toBe('redirect');
 		expect(g.flags.some((f) => f.category === 'inappropriate-screening-use')).toBe(true);
 		expect(g.firedRules.some((r) => r.ruleId === 'R-APPROP-SCREENING-MISUSE')).toBe(true);
+	});
+
+	it('still recommends query-referrer for usually-not-appropriate without screening misuse', () => {
+		// The only selected marker (CEA) does not match this indication in
+		// MARKER_INDICATION_MAP, so every selected marker mismatches:
+		// usually-not-appropriate via the "all mismatched" branch, not via
+		// screening misuse, so interpretationBand stays 'ok' and the generic
+		// query-referrer branch must still be reachable.
+		const r = createMonitoringRequest();
+		r.context.primaryIndication = 'suspected-malignancy';
+		const g = calculateGrade(r);
+		expect(g.appropriatenessBand).toBe('usually-not-appropriate');
+		expect(g.interpretationBand).not.toBe('misuse-risk');
+		expect(g.recommendation).toBe('query-referrer');
 	});
 
 	it('drops to may-be-appropriate when a marker mismatches the indication', () => {
