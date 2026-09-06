@@ -118,8 +118,16 @@ function detectFlags(r) {
   }
 
   // ─── unexpected-finding (abnormal but no originating request linked) ───
+  // Aligned with hasCriticalFinding: a significant pause is just as much an
+  // unexpected significant finding as AF / VT / high-grade AV block, and
+  // must not go unflagged just because no request reference is on file.
+  // (Fast AF needs no separate mention — it is a strict subset of
+  // atrialFibrillationDetected, already covered below.)
   if (
-    (r.atrialFibrillationDetected || r.ventricularTachycardia || r.highGradeAvBlock) &&
+    (r.atrialFibrillationDetected ||
+      r.ventricularTachycardia ||
+      r.highGradeAvBlock ||
+      hasSignificantPause(r)) &&
     r.originatingRequestReference.trim() === ''
   ) {
     flags.push({

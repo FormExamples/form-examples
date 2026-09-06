@@ -1491,13 +1491,26 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `bin/test-e2e --html nuclear-medicine-test-result` 2/2 passed.
       Fleet: `bin/test-personas` forms 352/352 PASS, personas 1174/1174
       PASS, 0 FAIL.
-- [ ] **holter-monitor-test-result: `F-UNEXPECTED-FINDING-001` predicate
-      narrower than `hasCriticalFinding`.** The unexpected-finding flag
-      checks only AF / VT / high-grade AV block, so a critical >3 s pause
-      with no originating request never raises it (verified in the
-      pause-only critical persona). Align the predicate with
-      `hasCriticalFinding` (add `hasSignificantPause`, and probably fast
-      AF).
+- [x] **holter-monitor-test-result: `F-UNEXPECTED-FINDING-001` predicate
+      narrower than `hasCriticalFinding`.** FIXED 2026-09-06. The
+      unexpected-finding flag checked only AF / VT / high-grade AV block,
+      so a critical >3 s pause with no originating request never raised
+      it (verified in the pause-only critical persona) despite
+      `hasSignificantPause` being one of `hasCriticalFinding`'s own four
+      triggers. Fixed by adding `hasSignificantPause(r)` to the predicate
+      in both `js/flags.js` and `src/lib/engine/flagged-issues.ts`; fast
+      AF needed no separate addition, since it is a strict subset of the
+      plain `atrialFibrillationDetected` check already present there
+      (broader, so already dominant). Added two boundary tests to
+      `grader.test.ts` (18/18 passed, up from 16): the flag now fires for
+      a pause with no request reference, and still does not fire when a
+      reference is on file. Re-ran `bin/test-personas --update
+      holter-monitor-test-result` (3/3 PASS — the pause-only critical
+      persona's `flags` now correctly include `F-UNEXPECTED-FINDING-001`)
+      and updated the persona file's top-level `note` and that persona's
+      description. `bin/test-e2e --html holter-monitor-test-result` 2/2
+      passed. Fleet: `bin/test-personas` forms 352/352 PASS, personas
+      1174/1174 PASS, 0 FAIL.
 - [ ] **coagulation-test-result: `R-FU-RECOMMENDED-03` is dead code.**
       The isolated-APTT follow-up branch is unreachable because
       `gradeSeverity` routes isolated APTT prolongation through the generic

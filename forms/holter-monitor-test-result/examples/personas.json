@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasFastAtrialFibrillation` requires maximumHeartRateBpm >= 150 — AF with a controlled ventricular rate below that threshold grades only moderate severity, not critical. Also notable: `F-UNEXPECTED-FINDING-001` checks only atrialFibrillationDetected/ventricularTachycardia/highGradeAvBlock, not a significant pause — so the critical persona below (whose only critical trigger is a >3s pause) never raises that flag even with no originating request linked.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasFastAtrialFibrillation` requires maximumHeartRateBpm >= 150 — AF with a controlled ventricular rate below that threshold grades only moderate severity, not critical. FIXED 2026-09-06: `F-UNEXPECTED-FINDING-001` used to check only atrialFibrillationDetected/ventricularTachycardia/highGradeAvBlock, not a significant pause — so the critical persona below (whose only critical trigger is a >3s pause) never raised that flag even with no originating request linked, despite `hasSignificantPause` being one of `hasCriticalFinding`'s own four triggers. Fixed by adding `hasSignificantPause(r)` to the flag's predicate in both `js/flags.js` and `src/lib/engine/flagged-issues.ts` (fast AF needed no separate addition — it is a strict subset of the plain `atrialFibrillationDetected` check already present, which is broader). Added two boundary tests to `grader.test.ts`: the flag now fires for a pause with no request reference, and still does not fire when a reference is on file.",
   "personas": [
     {
       "name": "normal-24-hour-holter-complete",
@@ -158,7 +158,7 @@
     },
     {
       "name": "critical-significant-pause-uncommunicated-incomplete",
-      "description": "A single sinus pause of 4.6 seconds recorded overnight, associated with a brief pre-syncopal episode: a pause exceeding the 3-second `SIGNIFICANT_PAUSE_SECONDS` threshold is a critical rhythm finding that auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history and impression sections are not yet completed while urgent pacing assessment is arranged — expect critical classification + major severity + 60% completeness + critical-alert follow-up + urgent-review.",
+      "description": "A single sinus pause of 4.6 seconds recorded overnight, associated with a brief pre-syncopal episode: a pause exceeding the 3-second `SIGNIFICANT_PAUSE_SECONDS` threshold is a critical rhythm finding that auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked (now correctly raising F-UNEXPECTED-FINDING-001 too, since the 2026-09-06 fix), and the clinical history and impression sections are not yet completed while urgent pacing assessment is arranged — expect critical classification + major severity + 60% completeness + critical-alert follow-up + urgent-review.",
       "state": {
         "reportingClinician": "Dr Wei Zhang (Cardiologist)",
         "originatingRequestReference": "",
@@ -262,6 +262,13 @@
             "priority": "low",
             "description": "A symptom-rhythm correlation is documented.",
             "suggestedAction": "Manage the correlated rhythm per the relevant ambulatory ECG pathway."
+          },
+          {
+            "flagId": "F-UNEXPECTED-FINDING-001",
+            "category": "unexpected-finding",
+            "priority": "low",
+            "description": "A significant finding is present but no originating request reference is recorded.",
+            "suggestedAction": "Link the report to the originating request to support discrepancy review."
           }
         ]
       }

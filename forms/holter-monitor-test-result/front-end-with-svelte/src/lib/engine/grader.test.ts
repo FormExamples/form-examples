@@ -214,4 +214,22 @@ describe('Holter monitor flag detection', () => {
 		const flags = detectFlags(createNormalResult());
 		expect(flags).toHaveLength(0);
 	});
+
+	it('flags unexpected-finding for a significant pause with no originating request, matching hasCriticalFinding', () => {
+		// F-UNEXPECTED-FINDING-001 used to check only AF / VT / high-grade AV
+		// block, so a critical pause finding with no request reference never
+		// raised it, unlike every other route into hasCriticalFinding.
+		const r = createNormalResult();
+		r.originatingRequestReference = '';
+		r.significantPauses = true;
+		const flags = detectFlags(r);
+		expect(flags.some((f) => f.flagId === 'F-UNEXPECTED-FINDING-001')).toBe(true);
+	});
+
+	it('does not flag unexpected-finding for a significant pause when a request reference is on file', () => {
+		const r = createNormalResult();
+		r.significantPauses = true;
+		const flags = detectFlags(r);
+		expect(flags.some((f) => f.flagId === 'F-UNEXPECTED-FINDING-001')).toBe(false);
+	});
 });
