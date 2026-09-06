@@ -434,21 +434,14 @@ function gradeFollowUp(r, classification, severity) {
   }
 
   // ─── recommended ───
-  if (severity === 'moderate') {
-    firedRules.push({
-      ruleId: 'R-FU-RECOMMENDED-01',
-      axis: 'follow-up',
-      category: 'moderate-abnormality',
-      description: 'Moderate abnormality present; follow-up recommended.'
-    });
-    return {
-      followUpUrgency: 'recommended',
-      targetTimeframe: 'within 2 weeks',
-      recommendedAction: 'Recommend repeat testing or specialist referral as clinically indicated.',
-      firedRules
-    };
-  }
-
+  // The isolated-APTT-prolongation check must run before the generic
+  // `severity === 'moderate'` branch below: gradeSeverity's own R-SEV-
+  // MODERATE-02 already grades every isolated-APTT case 'moderate' (mirroring
+  // the same specific-before-generic precedence gradeSeverity uses for its
+  // R-SEV-MODERATE-02 vs R-SEV-MODERATE-01), so the generic branch would
+  // otherwise always intercept first and this dedicated, more actionable
+  // recommendation (mixing studies / factor or inhibitor work-up) would
+  // never be reachable.
   if (hasIsolatedApttProlongation(r)) {
     firedRules.push({
       ruleId: 'R-FU-RECOMMENDED-03',
@@ -462,6 +455,21 @@ function gradeFollowUp(r, classification, severity) {
       targetTimeframe: 'within 2 weeks',
       recommendedAction:
         'Recommend mixing studies and factor / inhibitor work-up to characterise the isolated APTT prolongation.',
+      firedRules
+    };
+  }
+
+  if (severity === 'moderate') {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-01',
+      axis: 'follow-up',
+      category: 'moderate-abnormality',
+      description: 'Moderate abnormality present; follow-up recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'within 2 weeks',
+      recommendedAction: 'Recommend repeat testing or specialist referral as clinically indicated.',
       firedRules
     };
   }

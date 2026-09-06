@@ -1511,12 +1511,35 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       description. `bin/test-e2e --html holter-monitor-test-result` 2/2
       passed. Fleet: `bin/test-personas` forms 352/352 PASS, personas
       1174/1174 PASS, 0 FAIL.
-- [ ] **coagulation-test-result: `R-FU-RECOMMENDED-03` is dead code.**
-      The isolated-APTT follow-up branch is unreachable because
-      `gradeSeverity` routes isolated APTT prolongation through the generic
-      `moderate` band first, which `gradeFollowUp`'s `severity === 'moderate'`
-      check intercepts. Either reorder so the dedicated message is reachable
-      or delete the branch and its `grade_rule` row.
+- [x] **coagulation-test-result: `R-FU-RECOMMENDED-03` is dead code.** FIXED
+      2026-09-06. The isolated-APTT follow-up branch was unreachable because
+      `gradeSeverity` already routes an isolated APTT prolongation through
+      its own dedicated moderate-severity rule (R-SEV-MODERATE-02), so
+      `gradeFollowUp`'s generic `severity === 'moderate'` check
+      (R-FU-RECOMMENDED-01) always ran first and intercepted every case
+      before the dedicated isolated-APTT branch could fire. Picked reorder
+      over delete: `gradeSeverity` itself already checks the specific
+      isolated-APTT rule (R-SEV-MODERATE-02) before its own generic
+      moderate rule (R-SEV-MODERATE-01) for exactly this reason, so
+      reordering `gradeFollowUp` to match that existing specific-before-
+      generic precedence — rather than deleting the more clinically
+      actionable dedicated message (mixing studies / factor or inhibitor
+      work-up) in favour of the generic one — is the more consistent fix.
+      Reordered in both `js/rules.js` and
+      `src/lib/engine/follow-up-rules.ts`; confirmed no Loco-side scoring
+      logic or `grade_rule` seed rows exist for this form, so no third
+      stack needed changing. Extended the existing isolated-APTT test in
+      `grader.test.ts` (which set up the exact scenario but had never
+      asserted which follow-up rule fired) with `firedRules`/
+      `recommendedAction` assertions proving R-FU-RECOMMENDED-03 now fires
+      and R-FU-RECOMMENDED-01 does not (15/15 passed). Re-ran
+      `bin/test-personas --update coagulation-test-result` (3/3 PASS — the
+      isolated-APTT persona's `firedRules` and `recommendedAction` now
+      carry the dedicated message) and updated the persona file's
+      top-level `note` and that persona's description. `bin/test-e2e
+      --html coagulation-test-result` 2/2 passed. Fleet:
+      `bin/test-personas` forms 352/352 PASS, personas 1174/1174 PASS,
+      0 FAIL.
 - [ ] **tumor-marker-test-request: `redirect` recommendation is unreachable.**
       `scoreAppropriateness` and `scoreInterpretation` are both forced by the
       same screening-misuse condition and `deriveRecommendation` checks

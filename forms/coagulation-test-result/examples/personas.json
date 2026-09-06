@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. FIXED 2026-09-06: `gradeFollowUp`'s isolated-APTT-prolongation branch (R-FU-RECOMMENDED-03, the more specific mixing-studies/factor-work-up recommendation) was dead code — `gradeSeverity` always grades an isolated APTT prolongation 'moderate' via its own R-SEV-MODERATE-02, so the generic `severity === 'moderate'` branch (R-FU-RECOMMENDED-01) was checked first in `gradeFollowUp` and always intercepted before the dedicated branch could ever run. Fixed by reordering the isolated-APTT check ahead of the generic moderate-severity check in both `js/rules.js` and `src/lib/engine/follow-up-rules.ts`, mirroring the same specific-before-generic precedence `gradeSeverity` already uses between R-SEV-MODERATE-02 and R-SEV-MODERATE-01. The `abnormal-isolated-aptt-prolongation-moderate-complete` persona below now correctly fires R-FU-RECOMMENDED-03 (not R-FU-RECOMMENDED-01) and carries the mixing-studies recommendedAction.",
   "personas": [
     {
       "name": "normal-pre-operative-screen-complete",
@@ -71,7 +71,7 @@
     },
     {
       "name": "abnormal-isolated-aptt-prolongation-moderate-complete",
-      "description": "Pre-operative screening reveals an isolated APTT prolongation (55 seconds, ratio 1.5) with a normal PT/INR and no bleeding history: this grades moderate severity via the dedicated isolated-APTT rule, not a critical value, so follow-up stays at 'recommended' rather than escalating — report complete — expect abnormal classification + moderate severity + 100% completeness + recommended follow-up + further-testing.",
+      "description": "Pre-operative screening reveals an isolated APTT prolongation (55 seconds, ratio 1.5) with a normal PT/INR and no bleeding history: this grades moderate severity via the dedicated isolated-APTT rule, not a critical value, so follow-up stays at 'recommended' rather than escalating — and, since the 2026-09-06 fix, follow-up now correctly fires the dedicated R-FU-RECOMMENDED-03 mixing-studies recommendation rather than the generic moderate-abnormality message — report complete — expect abnormal classification + moderate severity + 100% completeness + recommended follow-up + further-testing.",
       "state": {
         "reportingClinician": "Dr Femi Okafor (Haematologist)",
         "originatingRequestReference": "REQ-2026-0825-COAG",
@@ -110,7 +110,7 @@
         "reportCompletenessPercent": 100,
         "followUpUrgency": "recommended",
         "targetTimeframe": "within 2 weeks",
-        "recommendedAction": "Recommend repeat testing or specialist referral as clinically indicated.",
+        "recommendedAction": "Recommend mixing studies and factor / inhibitor work-up to characterise the isolated APTT prolongation.",
         "recommendation": "further-testing",
         "firedRules": [
           {
@@ -126,10 +126,10 @@
             "description": "An isolated APTT prolongation (with a normal PT/INR) is present; severity graded moderate."
           },
           {
-            "ruleId": "R-FU-RECOMMENDED-01",
+            "ruleId": "R-FU-RECOMMENDED-03",
             "axis": "follow-up",
-            "category": "moderate-abnormality",
-            "description": "Moderate abnormality present; follow-up recommended."
+            "category": "isolated-aptt-prolongation",
+            "description": "Isolated APTT prolongation; mixing studies / factor or inhibitor work-up recommended."
           }
         ],
         "flags": [

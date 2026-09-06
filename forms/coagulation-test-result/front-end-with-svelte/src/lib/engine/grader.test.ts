@@ -144,6 +144,16 @@ describe('Coagulation four-axis grading engine', () => {
 		expect(g.reportingCategory).toBe('isolated-APTT-prolongation');
 		expect(g.followUpUrgency).toBe('recommended');
 		expect(g.firedRules.some((rule) => rule.ruleId === 'R-SEV-MODERATE-02')).toBe(true);
+		// R-FU-RECOMMENDED-03's dedicated mixing-studies action must be
+		// reachable: gradeSeverity always grades an isolated APTT prolongation
+		// 'moderate' (via R-SEV-MODERATE-02), so the generic
+		// severity === 'moderate' branch (R-FU-RECOMMENDED-01) must not
+		// intercept this case before the specific isolated-APTT branch runs.
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-FU-RECOMMENDED-03')).toBe(true);
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-FU-RECOMMENDED-01')).toBe(false);
+		expect(g.recommendedAction).toBe(
+			'Recommend mixing studies and factor / inhibitor work-up to characterise the isolated APTT prolongation.'
+		);
 	});
 
 	it('classifies a spoiled specimen with no impression as inconclusive', () => {
