@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { createDefaultAssessment } from '#lib/stores/assessment.svelte.js';
 import { calculateControl } from './diabetes-grader.js';
 import { calculateCompositeScore, hba1cMmolMol } from './utils.js';
+import { detectAdditionalFlags } from './flagged-issues.js';
 import type { AssessmentData } from './types.js';
 
 /** A blank assessment with an HbA1c filled in (unit is mmol/mol unless 'percent'). */
@@ -85,5 +86,42 @@ describe('calculateControl', () => {
     const good = calculateControl(withHba1c(45));
     const bad = calculateControl(withHba1c(95));
     expect(bad.controlScore).toBeLessThan(good.controlScore);
+  });
+});
+
+describe('Retinopathy rules and flags', () => {
+  // Pre-proliferative retinopathy and maculopathy used to raise no
+  // eye-specific rule or flag at all, unlike 'background' (DM-008) and
+  // 'proliferative' (DM-004/FLAG-EYE-001) -- a real, verified gap. Both are
+  // graded 'high' concern, matching DM-004/proliferative: per the National
+  // Diabetic Eye Screening Programme's R1/R2/R3 grading and NICE NG28, both
+  // warrant the same urgent ophthalmology referral pathway as proliferative
+  // retinopathy, not the routine annual re-screening 'background' warrants.
+  it('fires DM-021 (high concern) for pre-proliferative retinopathy', () => {
+    const data = withHba1c(45);
+    data.complicationsScreening.retinopathyStatus = 'preProliferative';
+    const r = calculateControl(data);
+    expect(r.firedRules.some((f) => f.id === 'DM-021' && f.concernLevel === 'high')).toBe(true);
+  });
+
+  it('fires DM-022 (high concern) for diabetic maculopathy', () => {
+    const data = withHba1c(45);
+    data.complicationsScreening.retinopathyStatus = 'maculopathy';
+    const r = calculateControl(data);
+    expect(r.firedRules.some((f) => f.id === 'DM-022' && f.concernLevel === 'high')).toBe(true);
+  });
+
+  it('raises FLAG-EYE-003 for pre-proliferative retinopathy', () => {
+    const data = createDefaultAssessment();
+    data.complicationsScreening.retinopathyStatus = 'preProliferative';
+    const flags = detectAdditionalFlags(data);
+    expect(flags.some((f) => f.id === 'FLAG-EYE-003' && f.priority === 'high')).toBe(true);
+  });
+
+  it('raises FLAG-EYE-004 for diabetic maculopathy', () => {
+    const data = createDefaultAssessment();
+    data.complicationsScreening.retinopathyStatus = 'maculopathy';
+    const flags = detectAdditionalFlags(data);
+    expect(flags.some((f) => f.id === 'FLAG-EYE-004' && f.priority === 'high')).toBe(true);
   });
 });

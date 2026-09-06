@@ -101,6 +101,31 @@ function detectAdditionalFlags(data) {
     });
   }
 
+  // ─── Pre-proliferative retinopathy ────────────────────
+  // priority is 'high', not 'urgent': the schema's grade_flag.priority
+  // CHECK constraint (and the SvelteKit reference's FlagPriority type)
+  // only allow high/medium/low. FLAG-EYE-001 above uses the out-of-schema
+  // 'urgent' — a separate, pre-existing divergence from the Svelte
+  // reference (which uses 'high' there), not repeated here.
+  if (data.complicationsScreening.retinopathyStatus === 'preProliferative') {
+    flags.push({
+      id: 'FLAG-EYE-003',
+      category: 'Eye',
+      message: 'Pre-proliferative retinopathy - urgent ophthalmology referral',
+      priority: 'high'
+    });
+  }
+
+  // ─── Diabetic maculopathy ──────────────────────────────
+  if (data.complicationsScreening.retinopathyStatus === 'maculopathy') {
+    flags.push({
+      id: 'FLAG-EYE-004',
+      category: 'Eye',
+      message: 'Diabetic maculopathy - urgent ophthalmology referral',
+      priority: 'high'
+    });
+  }
+
   // ─── Overdue eye screening ────────────────────────────
   if (data.complicationsScreening.lastEyeScreening === '') {
     flags.push({

@@ -2,7 +2,7 @@
   "engine": "front-end-with-html",
   "graderHint": "calculateControl",
   "flagsHint": "detectAdditionalFlags",
-  "note": "Three hand-authored personas for the NICE-aligned diabetes review grader. calculateControl short-circuits to controlLevel 'draft' (score 0, no rules) whenever fewer than 2 of the 8 scored Likert/percentage items are answered AND no HbA1c is entered; otherwise controlScore is a weighted-average composite (HbA1c band 0/20/40/60/80/100 seeded as the base with weight 4, then medication adherence, diet adherence, and time-in-range each folded in at weight 1, then a complication penalty of min(5 x count, 30) subtracted) and controlLevel bands on that score (<=20 veryPoor, <=40 poor, <65 suboptimal, else wellControlled). detectAdditionalFlags is a split engine (mirrors form-app.js's own call: detectAdditionalFlags(state)) so its output is pinned here via flagsHint. VERIFIED ENGINE GAP (documented, not silently patched — fixing it would need a matching change to the SvelteKit reference engine this file is a port of, per its own header comment, and a clinical severity decision this session isn't positioned to make): retinopathyStatus has five options (none, background, preProliferative, proliferative, maculopathy) but only 'background' (DM-008, medium) and 'proliferative' (DM-004, high; FLAG-EYE-001, urgent) have a dedicated rule or flag. 'preProliferative' and 'maculopathy' correctly count toward countComplications() (so they still depress the composite score and correctly suppress DM-017's 'no complications' rule) but raise no eye-specific rule or flag at all — a clinician reading only the fired-rules/flags list would see no signal that a sight-threatening finding was recorded. The persona 'edge' below is built specifically to demonstrate this gap. Regenerate 'expected' with: bin/test-personas diabetes-assessment --update",
+  "note": "Four hand-authored personas for the NICE-aligned diabetes review grader. calculateControl short-circuits to controlLevel 'draft' (score 0, no rules) whenever fewer than 2 of the 8 scored Likert/percentage items are answered AND no HbA1c is entered; otherwise controlScore is a weighted-average composite (HbA1c band 0/20/40/60/80/100 seeded as the base with weight 4, then medication adherence, diet adherence, and time-in-range each folded in at weight 1, then a complication penalty of min(5 x count, 30) subtracted) and controlLevel bands on that score (<=20 veryPoor, <=40 poor, <65 suboptimal, else wellControlled). detectAdditionalFlags is a split engine (mirrors form-app.js's own call: detectAdditionalFlags(state)) so its output is pinned here via flagsHint. FIXED 2026-09-06 (was a VERIFIED ENGINE GAP, documented rather than silently patched at the time): retinopathyStatus has five options (none, background, preProliferative, proliferative, maculopathy) but only 'background' (DM-008, medium) and 'proliferative' (DM-004, high; FLAG-EYE-001) used to have a dedicated rule or flag — 'preProliferative' and 'maculopathy' correctly counted toward countComplications() (so they still depressed the composite score and correctly suppressed DM-017's 'no complications' rule) but raised no eye-specific rule or flag at all, so a clinician reading only the fired-rules/flags list saw no signal that a sight-threatening finding was recorded. Fixed by adding DM-021 (pre-proliferative, high concern) and DM-022 (maculopathy, high concern) to the rule catalogue (`sql/09_insert_diabetes_rule_dm021_dm022.sql` seeds the reference table), and FLAG-EYE-003 / FLAG-EYE-004 (both 'high' priority) to the flag detector — both graded 'high', matching DM-004/proliferative's urgency, per the National Diabetic Eye Screening Programme's R1/R2/R3 grading and NICE NG28 (both pre-proliferative and maculopathy warrant the same urgent ophthalmology referral pathway as proliferative retinopathy, not routine annual re-screening). Separately noted, NOT fixed here (a distinct, pre-existing bug found while implementing this): FLAG-EYE-001 and five other flags in the HTML engine use `priority: 'urgent'`, a value the SQL `grade_flag.priority` CHECK constraint and the SvelteKit reference's `FlagPriority` type both reject (only high/medium/low are valid) — the two new flags added here correctly use 'high', not 'urgent', so they do not repeat it. The second and third personas below (renamed from 'the invisible-eye-finding edge case') now demonstrate the fixed behaviour for preProliferative and maculopathy respectively. Regenerate 'expected' with: bin/test-personas diabetes-assessment --update",
   "personas": [
     {
       "name": "Well-controlled type 2, engaged and physically active",
@@ -150,8 +150,8 @@
       }
     },
     {
-      "name": "Pre-proliferative retinopathy - the invisible-eye-finding edge case",
-      "description": "Non-critical-severity edge case built to demonstrate the documented rule-coverage gap: retinopathyStatus 'preProliferative' (R2) is a real, sight-threatening finding but matches neither DM-004 (checks only 'proliferative') nor DM-008 (checks only 'background'), and flagged-issues.js only checks 'proliferative' for FLAG-EYE-001 - so this persona fires NO eye-category rule or flag despite the finding. It DOES still count toward countComplications() (so it silently depresses the score) and correctly blocks DM-017 ('no complications', which only tests for '' or 'none'). HbA1c 64 mmol/mol (hba1cScore 60, weight 4) folded with adherence 3/5->50 (weight 1) -> (60*4+50)/5=58, diet 3/5->50 (weight 1) -> (58*5+50)/6=56.333, TIR 55 (weight 1) -> (56.333*6+55)/7 -> 56.142857... -> round 56; one complication (the retinopathy) -> penalty 5 -> score 51. Expect controlLevel 'suboptimal' (score < 65), controlScore 51, fired rules DM-006 (HbA1c 64-85 suboptimal) only - no DM-004/DM-008/DM-017/DM-011 etc. Flags: exactly one, FLAG-HBA1C-002 (medium) - hba1cValue 64 > hba1cTarget 53 with a non-blank unit fires 'HbA1c above agreed target without treatment intensification' even though no OTHER threshold is crossed (eGFR normal, no hypertension, no CVD, moderate distress below the >=4 threshold, footRiskCategory 'moderate' not 'high').",
+      "name": "Pre-proliferative retinopathy - now correctly flagged for urgent eye referral",
+      "description": "FIXED 2026-09-06 (was 'the invisible-eye-finding edge case', built to demonstrate a real, verified rule-coverage gap): retinopathyStatus 'preProliferative' (R2) matched neither DM-004 ('proliferative' only) nor DM-008 ('background' only), and flagged-issues.js checked only 'proliferative' for FLAG-EYE-001 - so this persona used to fire NO eye-category rule or flag despite a real, sight-threatening finding. Fixed by adding DM-021 (high concern, matching DM-004/proliferative's urgency per the National Diabetic Eye Screening Programme's R1/R2/R3 grading and NICE NG28) and FLAG-EYE-003 (high priority). It still counts toward countComplications() (so it still depresses the score) and correctly blocks DM-017 ('no complications', which only tests for '' or 'none'). HbA1c 64 mmol/mol (hba1cScore 60, weight 4) folded with adherence 3/5->50 (weight 1) -> (60*4+50)/5=58, diet 3/5->50 (weight 1) -> (58*5+50)/6=56.333, TIR 55 (weight 1) -> (56.333*6+55)/7 -> 56.142857... -> round 56; one complication (the retinopathy) -> penalty 5 -> score 51. Expect controlLevel 'suboptimal' (score < 65), controlScore 51, fired rules DM-006 (HbA1c 64-85 suboptimal) AND DM-021 (pre-proliferative retinopathy, high) - previously DM-006 only. Flags: FLAG-HBA1C-002 (medium, hba1cValue 64 > hba1cTarget 53 with a non-blank unit) AND FLAG-EYE-003 (high) - previously FLAG-HBA1C-002 only.",
       "state": {
         "patientInformation": {
           "fullName": "Devon McArthur",
@@ -251,8 +251,8 @@
           "reviewDate": "2026-08-25",
           "hba1cTargetAgreed": 53,
           "carePlanUpdated": "yes",
-          "clinicalNotes": "Pre-proliferative retinopathy on screening photographs 2026-06-11 - urgent ophthalmology referral made outside this tool's flag system (see referrals). HbA1c above target; discussed GLP-1 add-on.",
-          "referrals": "Urgent ophthalmology referral for R2 retinopathy (referred 2026-08-25, outside the engine's own flag logic)",
+          "clinicalNotes": "Pre-proliferative retinopathy on screening photographs 2026-06-11 - urgent ophthalmology referral made (flagged by this tool as FLAG-EYE-003). HbA1c above target; discussed GLP-1 add-on.",
+          "referrals": "Urgent ophthalmology referral for R2 retinopathy (referred 2026-08-25)",
           "nextReviewDate": "2027-02-25"
         }
       },
@@ -261,6 +261,12 @@
         "controlScore": 51,
         "firedRules": [
           {
+            "id": "DM-021",
+            "category": "Eye",
+            "description": "Pre-proliferative retinopathy detected",
+            "concernLevel": "high"
+          },
+          {
             "id": "DM-006",
             "category": "Glycaemic Control",
             "description": "HbA1c 64-85 mmol/mol (8-9.9%) - suboptimal glycaemic control",
@@ -268,6 +274,152 @@
           }
         ],
         "additionalFlags": [
+          {
+            "id": "FLAG-EYE-003",
+            "category": "Eye",
+            "message": "Pre-proliferative retinopathy - urgent ophthalmology referral",
+            "priority": "high"
+          },
+          {
+            "id": "FLAG-HBA1C-002",
+            "category": "Glycaemic Control",
+            "message": "HbA1c above agreed target without treatment intensification",
+            "priority": "medium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Diabetic maculopathy - correctly flagged for urgent eye referral",
+      "description": "Companion persona to the pre-proliferative one above, isolating the other newly-covered retinopathyStatus value: 'maculopathy' (central-vision-threatening, distinct from the peripheral R1/R2/R3 staging). Same HbA1c/adherence/diet/TIR inputs, so the same composite arithmetic applies: score 51, controlLevel 'suboptimal'. Expect fired rules DM-006 (HbA1c 64-85 suboptimal) AND DM-022 (diabetic maculopathy, high) rather than DM-021. Flags: FLAG-HBA1C-002 (medium) AND FLAG-EYE-004 (high) rather than FLAG-EYE-003.",
+      "state": {
+        "patientInformation": {
+          "fullName": "Devon McArthur",
+          "dateOfBirth": "1975-11-02",
+          "nhsNumber": "551 209 4487",
+          "address": "8 Craigmillar Court, Edinburgh, EH8 9RT",
+          "telephone": "0131 662 0184",
+          "email": "d.mcarthur@example.co.uk",
+          "gpName": "Dr Aisha Rahman",
+          "gpPractice": "Craigmillar Medical Practice"
+        },
+        "diabetesHistory": {
+          "diabetesType": "type2",
+          "ageAtDiagnosis": 42,
+          "yearsDuration": 16,
+          "diagnosisMethod": "symptomaticPresentation",
+          "familyHistory": "yes",
+          "autoantibodiesTested": "no"
+        },
+        "glycaemicControl": {
+          "hba1cValue": 64,
+          "hba1cUnit": "mmol",
+          "hba1cTarget": 53,
+          "fastingGlucose": 8.9,
+          "postprandialGlucose": 11.4,
+          "glucoseMonitoringType": "fingerPrick",
+          "hypoglycaemiaFrequency": "rarely",
+          "severeHypoglycaemia": "no",
+          "timeInRange": 55
+        },
+        "medications": {
+          "metformin": "yes",
+          "sulfonylurea": "gliclazide",
+          "sglt2Inhibitor": "",
+          "glp1Agonist": "",
+          "dpp4Inhibitor": "",
+          "insulin": "no",
+          "insulinRegimen": "",
+          "insulinDailyDose": null,
+          "medicationAdherence": 3,
+          "otherMedications": ""
+        },
+        "complicationsScreening": {
+          "retinopathyStatus": "maculopathy",
+          "lastEyeScreening": "2026-06-11",
+          "nephropathyStatus": "none",
+          "egfr": 78,
+          "urineAcr": 1.8,
+          "neuropathySymptoms": "no",
+          "autonomicNeuropathy": "no",
+          "erectileDysfunction": "no",
+          "footPulses": "",
+          "monofilamentTest": "",
+          "vibrationSense": ""
+        },
+        "cardiovascularRisk": {
+          "systolicBp": 132,
+          "diastolicBp": 82,
+          "onAntihypertensive": "no",
+          "totalCholesterol": 4.8,
+          "ldlCholesterol": 2.6,
+          "onStatin": "yes",
+          "smokingStatus": "exSmoker",
+          "previousCvdEvent": "no",
+          "qriskScore": 14.5
+        },
+        "selfCareLifestyle": {
+          "dietAdherence": 3,
+          "carbCounting": "no",
+          "physicalActivity": "moderate",
+          "bmi": 31.2,
+          "weightChange": "stable",
+          "alcoholConsumption": "withinLimits",
+          "smokingCessation": "notApplicable"
+        },
+        "psychologicalWellbeing": {
+          "diabetesDistress": 3,
+          "depressionScreening": 4,
+          "anxietyScreening": 3,
+          "eatingDisorder": "no",
+          "fearOfHypoglycaemia": 2,
+          "copingAbility": 3,
+          "needsSupport": "no"
+        },
+        "footAssessment": {
+          "footPulses": "present",
+          "monofilamentTest": "normal",
+          "vibrationSense": "normal",
+          "footDeformity": "no",
+          "callusPresent": "no",
+          "ulcerPresent": "no",
+          "previousAmputation": "no",
+          "footRiskCategory": "moderate"
+        },
+        "reviewCarePlan": {
+          "clinicianName": "Dr Aisha Rahman",
+          "reviewDate": "2026-08-25",
+          "hba1cTargetAgreed": 53,
+          "carePlanUpdated": "yes",
+          "clinicalNotes": "Diabetic maculopathy on screening photographs 2026-06-11 - urgent ophthalmology referral made (flagged by this tool as FLAG-EYE-004). HbA1c above target; discussed GLP-1 add-on.",
+          "referrals": "Urgent ophthalmology referral for maculopathy (referred 2026-08-25)",
+          "nextReviewDate": "2027-02-25"
+        }
+      },
+      "expected": {
+        "controlLevel": "suboptimal",
+        "controlScore": 51,
+        "firedRules": [
+          {
+            "id": "DM-022",
+            "category": "Eye",
+            "description": "Diabetic maculopathy detected",
+            "concernLevel": "high"
+          },
+          {
+            "id": "DM-006",
+            "category": "Glycaemic Control",
+            "description": "HbA1c 64-85 mmol/mol (8-9.9%) - suboptimal glycaemic control",
+            "concernLevel": "medium"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "id": "FLAG-EYE-004",
+            "category": "Eye",
+            "message": "Diabetic maculopathy - urgent ophthalmology referral",
+            "priority": "high"
+          },
           {
             "id": "FLAG-HBA1C-002",
             "category": "Glycaemic Control",

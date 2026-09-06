@@ -91,6 +91,26 @@ export function detectAdditionalFlags(data: AssessmentData): AdditionalFlag[] {
 		});
 	}
 
+	// ─── FLAG-EYE-003: Pre-proliferative retinopathy ─────────
+	if (data.complicationsScreening.retinopathyStatus === 'preProliferative') {
+		flags.push({
+			id: 'FLAG-EYE-003',
+			category: 'Eye',
+			message: 'Pre-proliferative retinopathy - urgent ophthalmology referral',
+			priority: 'high'
+		});
+	}
+
+	// ─── FLAG-EYE-004: Diabetic maculopathy ──────────────────
+	if (data.complicationsScreening.retinopathyStatus === 'maculopathy') {
+		flags.push({
+			id: 'FLAG-EYE-004',
+			category: 'Eye',
+			message: 'Diabetic maculopathy - urgent ophthalmology referral',
+			priority: 'high'
+		});
+	}
+
 	// ─── FLAG-EYE-002: Overdue eye screening ─────────────────
 	if (data.complicationsScreening.lastEyeScreening === '') {
 		flags.push({

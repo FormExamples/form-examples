@@ -1417,21 +1417,53 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       --update perioperative-optimization` 4/4 PASS; `bin/test-e2e --html
       perioperative-optimization` 2/2 passed. Fleet: `bin/test-personas`
       forms 352/352 PASS, personas 1175/1175 PASS, 0 FAIL.
-- [ ] **diabetes-assessment: pre-proliferative retinopathy and maculopathy
-      raise no eye rule or flag.** `retinopathyStatus` has five options
-      (none, background, preProliferative, proliferative, maculopathy) but
-      DM-004/DM-008 and FLAG-EYE-001/002 only recognise `'proliferative'`
-      and `'background'` by exact string match. `preProliferative` and
-      `maculopathy` correctly count toward `countComplications()` (so the
-      composite score still drops and DM-017 'no complications' is still
-      correctly suppressed) but raise nothing eye-specific in the fired
-      rules or flags a clinician actually reads. Verified via the
-      dedicated "invisible-eye-finding" persona in
-      `examples/personas.json`. Fix: add rules/flags for both statuses (a
-      clinical severity decision — is preProliferative closer to III or
-      IV urgency? — that this session isn't positioned to make
-      unilaterally); same three-stack requirement (HTML, the SvelteKit
-      reference this engine is explicitly a port of, Loco).
+- [x] **diabetes-assessment: pre-proliferative retinopathy and maculopathy
+      raise no eye rule or flag.** FIXED 2026-09-06. `retinopathyStatus`
+      has five options (none, background, preProliferative, proliferative,
+      maculopathy) but DM-004/DM-008 and FLAG-EYE-001 only recognised
+      `'proliferative'` and `'background'` by exact string match (FLAG-
+      EYE-002 was never about retinopathy status at all — a slip in this
+      item's own earlier text, it checks a missing screening date).
+      `preProliferative` and `maculopathy` correctly counted toward
+      `countComplications()` but raised nothing eye-specific in the fired
+      rules or flags a clinician actually reads. Clinical-severity
+      decision resolved by the user: pre-proliferative graded 'high'
+      concern — the same tier as proliferative (III on a rough I-IV
+      severity reading), not medium/background — per the National
+      Diabetic Eye Screening Programme's R1/R2/R3 grading and NICE NG28,
+      under which pre-proliferative (R2) and proliferative (R3) share the
+      same urgent-referral pathway. Maculopathy graded 'high' too by the
+      same clinical reasoning, extended by this session (not itself an
+      explicit user decision — flagged as such when reported). Added
+      DM-021 (pre-proliferative) and DM-022 (maculopathy), both 'high', in
+      `js/diabetes-rules.js` and `src/lib/engine/diabetes-rules.ts`; added
+      FLAG-EYE-003 / FLAG-EYE-004 (both 'high' priority) in
+      `js/flagged-issues.js` and `src/lib/engine/flagged-issues.ts`.
+      Confirmed no Loco-side scoring logic exists, but this form's
+      `diabetes_rule` table (`sql/05_create_table_diabetes_rule.sql`) is a
+      genuine seeded reference catalogue, unlike every other form fixed
+      in this backlog — added `sql/09_insert_diabetes_rule_dm021_dm022.sql`
+      seeding the two new rows, regenerated `sql/schema.sql`, and verified
+      the full migration set applies cleanly on a fresh scratch Postgres
+      18.4 (rows confirmed present with `concern_level = 'high'`).
+      **Separate, pre-existing bug found and documented while implementing
+      (not fixed — out of this item's scope):** the HTML engine's
+      `flagged-issues.js` uses `priority: 'urgent'` for 6 of its 18 flags
+      (including the existing FLAG-EYE-001), a value the SQL
+      `grade_flag.priority` CHECK constraint and the SvelteKit reference's
+      `FlagPriority` type both reject (only high/medium/low valid) — the
+      two new flags added here correctly use 'high' throughout, not
+      'urgent', so they do not repeat it. Added 4 boundary tests to
+      `diabetes-grader.test.ts` (16/16 passed, up from 12). Renamed the
+      persona that demonstrated the original gap (was "...the invisible-
+      eye-finding edge case") to reflect the fix, and added a companion
+      maculopathy persona; `bin/test-personas --update diabetes-assessment`
+      4/4 PASS (up from 3); confirmed the existing critical persona's
+      `proliferative` case (DM-004/FLAG-EYE-001) is unaffected. Documented
+      the decision in `spec/index.md` §3. `bin/test-e2e --html
+      diabetes-assessment` 2/2 passed; `bin/test-form diabetes-assessment`
+      PASS. Fleet: `bin/test-personas` forms 352/352 PASS, personas
+      1176/1176 PASS, 0 FAIL.
 - [x] **hernia-diagnostic-evaluation: doubled red-flag rule IDs.** FIXED
       2026-09-06. `screenRedFlags` built IDs as
       `` `R-RED-FLAG-${key…toUpperCase()}` `` but every key already started

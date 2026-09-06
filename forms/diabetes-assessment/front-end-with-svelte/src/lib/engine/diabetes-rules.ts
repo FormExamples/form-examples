@@ -45,6 +45,29 @@ export const allRules: DiabetesRule[] = [
 		evaluate: (d) => d.complicationsScreening.retinopathyStatus === 'proliferative'
 	},
 	{
+		id: 'DM-021',
+		category: 'Eye',
+		description: 'Pre-proliferative retinopathy detected',
+		// Pre-proliferative (moderate-to-severe non-proliferative) retinopathy
+		// sits between background and proliferative disease, but — per the
+		// National Diabetic Eye Screening Programme's R1/R2/R3 grading and
+		// NICE NG28 — warrants the same urgent ophthalmology referral pathway
+		// as proliferative retinopathy, so it shares DM-004's 'high' concern
+		// level rather than DM-008's 'medium'.
+		concernLevel: 'high',
+		evaluate: (d) => d.complicationsScreening.retinopathyStatus === 'preProliferative'
+	},
+	{
+		id: 'DM-022',
+		category: 'Eye',
+		description: 'Diabetic maculopathy detected',
+		// Maculopathy threatens central vision and, like pre-proliferative and
+		// proliferative retinopathy, warrants urgent ophthalmology referral
+		// rather than routine annual screening.
+		concernLevel: 'high',
+		evaluate: (d) => d.complicationsScreening.retinopathyStatus === 'maculopathy'
+	},
+	{
 		id: 'DM-005',
 		category: 'Renal',
 		description: 'eGFR < 30 - severe renal impairment',

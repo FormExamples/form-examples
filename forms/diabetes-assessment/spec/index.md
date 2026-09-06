@@ -22,6 +22,16 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
   - Controlled: HbA1c at individualized target, no new complications, good self-care
   - Suboptimal: HbA1c above target or modifiable risk factors present
   - Poorly Controlled: HbA1c significantly above target or active complications identified
+- **Retinopathy severity**: `retinopathyStatus` grades to `concernLevel` as
+  `none`/`background` → routine annual re-screening (`background` is
+  `medium`); `preProliferative` and `maculopathy` → the same `high` concern
+  and urgent ophthalmology referral pathway as `proliferative` (DM-004,
+  DM-021, DM-022 respectively), per the National Diabetic Eye Screening
+  Programme's R1/R2/R3 grading and NICE NG28 — pre-proliferative and
+  maculopathy are graded one tier below `proliferative` in eye-screening
+  severity but share its referral urgency, not `background`'s routine one.
+  Fixed 2026-09-06; previously verified and documented (not silently
+  patched) in `examples/personas.json`.
 
 ## 4. Inputs and outputs
 
